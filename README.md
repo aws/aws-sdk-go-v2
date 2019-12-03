@@ -11,6 +11,9 @@ We'll be expanding out the [Issues] and [Projects] sections with additional chan
 ## Project Status
 The SDK is in preview state as we work to design and implement potentially breaking changes to the SDK as we update the SDK's layout and usage patterns based on your feedback. You can also expect periodic service API model updates as well.
 
+We are actively seeking community feedback for several changes to the SDK. Please review our [design] page on issues
+that are currently pending community feedback.
+
 Users should expect significant changes that could affect the following (non-exhaustive) areas:
 * Package Locations
   * Includes Location of Service API Types
@@ -104,3 +107,4 @@ see LICENSE.txt and NOTICE.txt for more information.
 [CHANGE_LOG]: https://github.com/aws/aws-sdk-go-v2/blob/master/CHANGELOG.md
 [Amazon DynamoDB]: https://aws.amazon.com/dynamodb/
 [Gitter channel]: https://gitter.im/aws/aws-sdk-go-v2
+[design]: https://github.com/aws/aws-sdk-go-v2/blob/master/DESIGN.md
