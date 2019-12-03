@@ -1,14 +1,10 @@
 package sdkio
 
-import (
-	"io"
-)
+import "io"
 
-// RingBuffer struct satisfies io.ReadWrite
-// interface.
+// RingBuffer struct satisfies io.ReadWrite interface.
 //
-// ReadBuffer is a revolving buffer data structure
-// which can be used to store snapshots of data in a
+// ReadBuffer is a revolving buffer data structure, which can be used to store snapshots of data in a
 // revolving window.
 type RingBuffer struct {
 	slice []byte
@@ -17,8 +13,7 @@ type RingBuffer struct {
 	size  int
 }
 
-// NewRingBuffer method takes in the capacity as an int
-// and returns a RingBuffer.
+// NewRingBuffer method takes in a byte slice as an input and returns a RingBuffer.
 func NewRingBuffer(slice []byte) *RingBuffer {
 	ringBuf := RingBuffer{
 		slice: slice,
@@ -26,28 +21,18 @@ func NewRingBuffer(slice []byte) *RingBuffer {
 	return &ringBuf
 }
 
-// Write method inserts the elements in a byte slice,
-// Returns the number of bytes written and an error
-//
-// This satisfies io.Writer interface.
+// Write method inserts the elements in a byte slice, and returns the number of bytes written along with an error.
 func (r *RingBuffer) Write(p []byte) (int, error) {
-
 	for _, b := range p {
-
-		// check if end points to invalid index
-		// we need to circle back
+		// check if end points to invalid index, we need to circle back
 		if r.end == len(r.slice) {
 			r.end = 0
 		}
-
-		// check if start points to invalid index
-		// we need to circle back
+		// check if start points to invalid index, we need to circle back
 		if r.start == len(r.slice) {
 			r.start = 0
 		}
-
-		// if ring buffer is filled,
-		// increment the start index
+		// if ring buffer is filled, increment the start index
 		if r.size == len(r.slice) {
 			r.size--
 			r.start++
@@ -60,43 +45,28 @@ func (r *RingBuffer) Write(p []byte) (int, error) {
 	return r.size, nil
 }
 
-// Read method on RingBuffer returns the read count
-// along with Error encountered while reading.
-//
-// Read copies the data on the ring buffer into
-// the byte slice provided to the method.
+// Read copies the data on the ring buffer into the byte slice provided to the method.
+// Returns the read count along with Error encountered while reading
 func (r *RingBuffer) Read(p []byte) (int, error) {
-
-	// if ring buffer is empty
-	// return EOF error.
-	if r.size == 0 {
-		return 0, io.EOF
-	}
-
-	// readCount keeps track of the number of
-	// bytes read.
-	readCount := 0
-
-	s := r.start
+	// readCount keeps track of the number of bytes read
+	var readCount int
 	for j := 0; j < len(p); j++ {
-		p[j] = r.slice[s]
-		s++
+		// if ring buffer is empty or completely read
+		// return EOF error.
+		if r.size == 0 {
+			return readCount, io.EOF
+		}
+
+		p[j] = r.slice[r.start]
 		readCount++
+		// increment the start pointer for ring buffer
 		r.start++
+		// decrement the size of ring buffer
 		r.size--
 
 		if r.start == len(r.slice) {
 			r.start = 0
 		}
-
-		if s == r.end {
-			break
-		}
-
-		if s == len(r.slice) {
-			s = 0
-		}
 	}
-
-	return readCount, io.EOF
+	return readCount, nil
 }
