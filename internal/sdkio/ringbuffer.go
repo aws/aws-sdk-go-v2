@@ -17,22 +17,17 @@ type RingBuffer struct {
 	size  int
 }
 
-// New method takes in the capacity as an int
+// NewRingBuffer method takes in the capacity as an int
 // and returns a RingBuffer.
-func New(capacity int) *RingBuffer {
-	slice := make([]byte, capacity, capacity)
+func NewRingBuffer(slice []byte) *RingBuffer {
 	ringBuf := RingBuffer{
 		slice: slice,
-		start: 0,
-		end:   0,
-		size:  0,
 	}
 	return &ringBuf
 }
 
-// Write method inserts the elements
-// in the byte slice, and return
-// the number of bytes written and an error
+// Write method inserts the elements in a byte slice,
+// Returns the number of bytes written and an error
 //
 // This satisfies io.Writer interface.
 func (r *RingBuffer) Write(p []byte) (int, error) {
@@ -87,10 +82,17 @@ func (r *RingBuffer) Read(p []byte) (int, error) {
 		p[j] = r.slice[s]
 		s++
 		readCount++
+		r.start++
+		r.size--
+
+		if r.start == len(r.slice) {
+			r.start = 0
+		}
 
 		if s == r.end {
 			break
 		}
+
 		if s == len(r.slice) {
 			s = 0
 		}
