@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
 )
 
 var svc = cognitoidentity.New(unit.Config())
@@ -22,7 +23,7 @@ func TestUnsignedRequests(t *testing.T) {
 	}{
 		"GetId": {
 			ReqFn: func() reqSigner {
-				req := svc.GetIdRequest(&cognitoidentity.GetIdInput{
+				req := svc.GetIdRequest(&types.GetIdInput{
 					IdentityPoolId: aws.String("IdentityPoolId"),
 				})
 				return req
@@ -30,7 +31,7 @@ func TestUnsignedRequests(t *testing.T) {
 		},
 		"GetOpenIdToken": {
 			ReqFn: func() reqSigner {
-				req := svc.GetOpenIdTokenRequest(&cognitoidentity.GetOpenIdTokenInput{
+				req := svc.GetOpenIdTokenRequest(&types.GetOpenIdTokenInput{
 					IdentityId: aws.String("IdentityId"),
 				})
 				return req
@@ -38,7 +39,7 @@ func TestUnsignedRequests(t *testing.T) {
 		},
 		"UnlinkIdentity": {
 			ReqFn: func() reqSigner {
-				req := svc.UnlinkIdentityRequest(&cognitoidentity.UnlinkIdentityInput{
+				req := svc.UnlinkIdentityRequest(&types.UnlinkIdentityInput{
 					IdentityId:     aws.String("IdentityId"),
 					Logins:         map[string]string{},
 					LoginsToRemove: []string{},
@@ -48,7 +49,7 @@ func TestUnsignedRequests(t *testing.T) {
 		},
 		"GetCredentialsForIdentity": {
 			ReqFn: func() reqSigner {
-				req := svc.GetCredentialsForIdentityRequest(&cognitoidentity.GetCredentialsForIdentityInput{
+				req := svc.GetCredentialsForIdentityRequest(&types.GetCredentialsForIdentityInput{
 					IdentityId: aws.String("IdentityId"),
 				})
 				return req

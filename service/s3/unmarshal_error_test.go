@@ -14,6 +14,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/enums"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 type testErrorCase struct {
@@ -153,8 +155,8 @@ func TestUnmarshalError(t *testing.T) {
 					http.StatusText(r.HTTPResponse.StatusCode))
 			}
 		})
-		req := s.PutBucketAclRequest(&s3.PutBucketAclInput{
-			Bucket: aws.String("bucket"), ACL: s3.BucketCannedACLPublicRead,
+		req := s.PutBucketAclRequest(&types.PutBucketAclInput{
+			Bucket: aws.String("bucket"), ACL: enums.BucketCannedACLPublicRead,
 		})
 		_, err := req.Send(context.Background())
 
@@ -199,10 +201,10 @@ func Test200NoErrorUnmarshalError(t *testing.T) {
 		}
 		r.HTTPResponse.Status = http.StatusText(r.HTTPResponse.StatusCode)
 	})
-	req := s.CompleteMultipartUploadRequest(&s3.CompleteMultipartUploadInput{
+	req := s.CompleteMultipartUploadRequest(&types.CompleteMultipartUploadInput{
 		Bucket: aws.String("bucket"), Key: aws.String("key"),
 		UploadId: aws.String("id"),
-		MultipartUpload: &s3.CompletedMultipartUpload{Parts: []s3.CompletedPart{
+		MultipartUpload: &types.CompletedMultipartUpload{Parts: []types.CompletedPart{
 			{ETag: aws.String("etag"), PartNumber: aws.Int64(1)},
 		}},
 	})
@@ -230,10 +232,10 @@ func Test200WithErrorUnmarshalError(t *testing.T) {
 		}
 		r.HTTPResponse.Status = http.StatusText(r.HTTPResponse.StatusCode)
 	})
-	req := s.CompleteMultipartUploadRequest(&s3.CompleteMultipartUploadInput{
+	req := s.CompleteMultipartUploadRequest(&types.CompleteMultipartUploadInput{
 		Bucket: aws.String("bucket"), Key: aws.String("key"),
 		UploadId: aws.String("id"),
-		MultipartUpload: &s3.CompletedMultipartUpload{Parts: []s3.CompletedPart{
+		MultipartUpload: &types.CompletedMultipartUpload{Parts: []types.CompletedPart{
 			{ETag: aws.String("etag"), PartNumber: aws.Int64(1)},
 		}},
 	})

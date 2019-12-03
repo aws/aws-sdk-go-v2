@@ -12,11 +12,11 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 func TestInteg_WriteToObject(t *testing.T) {
-	_, err := svc.PutObjectRequest(&s3.PutObjectInput{
+	_, err := svc.PutObjectRequest(&types.PutObjectInput{
 		Bucket: bucketName,
 		Key:    aws.String("key name"),
 		Body:   bytes.NewReader([]byte("hello world")),
@@ -25,7 +25,7 @@ func TestInteg_WriteToObject(t *testing.T) {
 		t.Errorf("expect no error, got %v", err)
 	}
 
-	getResp, err := svc.GetObjectRequest(&s3.GetObjectInput{
+	getResp, err := svc.GetObjectRequest(&types.GetObjectInput{
 		Bucket: bucketName,
 		Key:    aws.String("key name"),
 	}).Send(context.Background())
@@ -40,7 +40,7 @@ func TestInteg_WriteToObject(t *testing.T) {
 }
 
 func TestInteg_PresignedGetPut(t *testing.T) {
-	putReq := svc.PutObjectRequest(&s3.PutObjectInput{
+	putReq := svc.PutObjectRequest(&types.PutObjectInput{
 		Bucket: bucketName,
 		Key:    aws.String("presigned-key"),
 	})
@@ -71,7 +71,7 @@ func TestInteg_PresignedGetPut(t *testing.T) {
 	}
 
 	// Presign a GET on the same URL
-	getReq := svc.GetObjectRequest(&s3.GetObjectInput{
+	getReq := svc.GetObjectRequest(&types.GetObjectInput{
 		Bucket: bucketName,
 		Key:    aws.String("presigned-key"),
 	})

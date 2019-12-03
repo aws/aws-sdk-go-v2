@@ -21,7 +21,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/enums"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 var emptyList []string
@@ -54,8 +56,8 @@ func contains(src []string, s string) bool {
 func loggingSvc(ignoreOps []string) (*s3.Client, *[]string, *[]interface{}) {
 	var m sync.Mutex
 	partNum := 0
-	names := []string{}
-	params := []interface{}{}
+	var names []string
+	var params []interface{}
 	svc := s3.New(unit.Config())
 	svc.Handlers.Unmarshal.Clear()
 	svc.Handlers.UnmarshalMeta.Clear()
@@ -76,15 +78,15 @@ func loggingSvc(ignoreOps []string) (*s3.Client, *[]string, *[]interface{}) {
 		}
 
 		switch data := r.Data.(type) {
-		case *s3.CreateMultipartUploadOutput:
+		case *types.CreateMultipartUploadOutput:
 			data.UploadId = aws.String("UPLOAD-ID")
-		case *s3.UploadPartOutput:
+		case *types.UploadPartOutput:
 			partNum++
 			data.ETag = aws.String(fmt.Sprintf("ETAG%d", partNum))
-		case *s3.CompleteMultipartUploadOutput:
+		case *types.CompleteMultipartUploadOutput:
 			data.Location = aws.String("https://location")
 			data.VersionId = aws.String("VERSION-ID")
-		case *s3.PutObjectOutput:
+		case *types.PutObjectOutput:
 			data.VersionId = aws.String("VERSION-ID")
 		}
 	})
@@ -106,7 +108,7 @@ func TestUploadOrderMulti(t *testing.T) {
 		Bucket:               aws.String("Bucket"),
 		Key:                  aws.String("Key - value"),
 		Body:                 bytes.NewReader(buf12MB),
-		ServerSideEncryption: s3.ServerSideEncryptionAwsKms,
+		ServerSideEncryption: enums.ServerSideEncryptionAwsKms,
 		SSEKMSKeyId:          aws.String("KmsId"),
 		ContentType:          aws.String("content/type"),
 	})
@@ -169,7 +171,7 @@ func TestUploadOrderMulti(t *testing.T) {
 
 	// Custom headers
 	e := val((*args)[0], "ServerSideEncryption")
-	if e.(s3.ServerSideEncryption) != s3.ServerSideEncryptionAwsKms {
+	if e.(enums.ServerSideEncryption) != enums.ServerSideEncryptionAwsKms {
 		t.Errorf("Expected %q, but received %q", "aws:kms", e)
 	}
 
@@ -313,7 +315,7 @@ func TestUploadOrderSingle(t *testing.T) {
 		Bucket:               aws.String("Bucket"),
 		Key:                  aws.String("Key - value"),
 		Body:                 bytes.NewReader(buf2MB),
-		ServerSideEncryption: s3.ServerSideEncryptionAwsKms,
+		ServerSideEncryption: enums.ServerSideEncryptionAwsKms,
 		SSEKMSKeyId:          aws.String("KmsId"),
 		ContentType:          aws.String("content/type"),
 	})
@@ -338,7 +340,7 @@ func TestUploadOrderSingle(t *testing.T) {
 		t.Errorf("Expected empty string, but received %q", resp.UploadID)
 	}
 
-	if e, a := s3.ServerSideEncryptionAwsKms, val((*args)[0], "ServerSideEncryption").(s3.ServerSideEncryption); e != a {
+	if e, a := enums.ServerSideEncryptionAwsKms, val((*args)[0], "ServerSideEncryption").(enums.ServerSideEncryption); e != a {
 		t.Errorf("Expected %q, but received %q", e, a)
 	}
 
@@ -410,7 +412,7 @@ func TestUploadOrderMultiFailure(t *testing.T) {
 	s, ops, _ := loggingSvc(emptyList)
 	s.Handlers.Send.PushBack(func(r *aws.Request) {
 		switch t := r.Data.(type) {
-		case *s3.UploadPartOutput:
+		case *types.UploadPartOutput:
 			if *t.ETag == "ETAG2" {
 				r.HTTPResponse.StatusCode = 400
 			}
@@ -439,7 +441,7 @@ func TestUploadOrderMultiFailureOnComplete(t *testing.T) {
 	s, ops, _ := loggingSvc(emptyList)
 	s.Handlers.Send.PushBack(func(r *aws.Request) {
 		switch r.Data.(type) {
-		case *s3.CompleteMultipartUploadOutput:
+		case *types.CompleteMultipartUploadOutput:
 			r.HTTPResponse.StatusCode = 400
 		}
 	})
@@ -467,7 +469,7 @@ func TestUploadOrderMultiFailureOnCreate(t *testing.T) {
 	s, ops, _ := loggingSvc(emptyList)
 	s.Handlers.Send.PushBack(func(r *aws.Request) {
 		switch r.Data.(type) {
-		case *s3.CreateMultipartUploadOutput:
+		case *types.CreateMultipartUploadOutput:
 			r.HTTPResponse.StatusCode = 400
 		}
 	})
@@ -492,7 +494,7 @@ func TestUploadOrderMultiFailureLeaveParts(t *testing.T) {
 	s, ops, _ := loggingSvc(emptyList)
 	s.Handlers.Send.PushBack(func(r *aws.Request) {
 		switch data := r.Data.(type) {
-		case *s3.UploadPartOutput:
+		case *types.UploadPartOutput:
 			if *data.ETag == "ETAG2" {
 				r.HTTPResponse.StatusCode = 400
 			}
@@ -533,6 +535,7 @@ func (f *failreader) Read(b []byte) (int, error) {
 
 func TestUploadOrderReadFail1(t *testing.T) {
 	s, ops, _ := loggingSvc(emptyList)
+
 	mgr := s3manager.NewUploaderWithClient(s)
 	_, err := mgr.Upload(&s3manager.UploadInput{
 		Bucket: aws.String("Bucket"),
@@ -548,7 +551,7 @@ func TestUploadOrderReadFail1(t *testing.T) {
 		t.Errorf("Expected %q, but received %q", e, a)
 	}
 
-	if e, a := []string{}, *ops; !reflect.DeepEqual(e, a) {
+	if e, a := []string(nil), *ops; !reflect.DeepEqual(e, a) {
 		t.Errorf("Expected %v, but received %v", e, a)
 	}
 }
@@ -794,10 +797,10 @@ func TestUploadZeroLenObject(t *testing.T) {
 }
 
 func TestUploadInputS3PutObjectInputPairity(t *testing.T) {
-	matchings := compareStructType(reflect.TypeOf(s3.PutObjectInput{}),
+	matchings := compareStructType(reflect.TypeOf(types.PutObjectInput{}),
 		reflect.TypeOf(s3manager.UploadInput{}))
-	aOnly := []string{}
-	bOnly := []string{}
+	var aOnly []string
+	var bOnly []string
 
 	for k, c := range matchings {
 		if strings.HasPrefix(k, "Body-") || strings.HasPrefix(k, "ContentLength-") {
@@ -971,10 +974,10 @@ func TestSSE(t *testing.T) {
 			Body:       ioutil.NopCloser(bytes.NewReader([]byte{})),
 		}
 		switch data := r.Data.(type) {
-		case *s3.CreateMultipartUploadOutput:
+		case *types.CreateMultipartUploadOutput:
 			data.UploadId = aws.String("UPLOAD-ID")
-		case *s3.UploadPartOutput:
-			input := r.Params.(*s3.UploadPartInput)
+		case *types.UploadPartOutput:
+			input := r.Params.(*types.UploadPartInput)
 			if input.SSECustomerAlgorithm == nil {
 				t.Fatal("SSECustomerAlgoritm should not be nil")
 			}
@@ -983,10 +986,10 @@ func TestSSE(t *testing.T) {
 			}
 			partNum++
 			data.ETag = aws.String(fmt.Sprintf("ETAG%d", partNum))
-		case *s3.CompleteMultipartUploadOutput:
+		case *types.CompleteMultipartUploadOutput:
 			data.Location = aws.String("https://location")
 			data.VersionId = aws.String("VERSION-ID")
-		case *s3.PutObjectOutput:
+		case *types.PutObjectOutput:
 			data.VersionId = aws.String("VERSION-ID")
 		}
 
@@ -1118,14 +1121,14 @@ func TestUploadBufferStrategy(t *testing.T) {
 				}
 
 				switch data := r.Data.(type) {
-				case *s3.CreateMultipartUploadOutput:
+				case *types.CreateMultipartUploadOutput:
 					data.UploadId = aws.String("UPLOAD-ID")
-				case *s3.UploadPartOutput:
+				case *types.UploadPartOutput:
 					data.ETag = aws.String(fmt.Sprintf("ETAG%d", atomic.AddInt64(&etag, 1)))
-				case *s3.CompleteMultipartUploadOutput:
+				case *types.CompleteMultipartUploadOutput:
 					data.Location = aws.String("https://location")
 					data.VersionId = aws.String("VERSION-ID")
-				case *s3.PutObjectOutput:
+				case *types.PutObjectOutput:
 					data.VersionId = aws.String("VERSION-ID")
 				}
 			})

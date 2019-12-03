@@ -17,6 +17,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/kms"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3crypto"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 func TestDefaultConfigValues(t *testing.T) {
@@ -58,7 +59,7 @@ func TestPutObject(t *testing.T) {
 	}
 
 	c.S3Client.(*s3.Client).ForcePathStyle = true
-	input := &s3.PutObjectInput{
+	input := &types.PutObjectInput{
 		Key:    aws.String("test"),
 		Bucket: aws.String("test"),
 		Body:   bytes.NewReader(data),
@@ -94,7 +95,7 @@ func TestPutObjectWithContext(t *testing.T) {
 	ctx.Error = fmt.Errorf("context canceled")
 	close(ctx.DoneCh)
 
-	input := s3.PutObjectInput{
+	input := types.PutObjectInput{
 		Bucket: aws.String("test"),
 		Key:    aws.String("test"),
 		Body:   bytes.NewReader([]byte{}),

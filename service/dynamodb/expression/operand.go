@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/dynamodbattribute"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 // ValueBuilder represents an item attribute value operand and implements the
@@ -527,7 +527,7 @@ func (vb ValueBuilder) BuildOperand() (Operand, error) {
 	// Create a string with special characters that can be substituted later: $v
 	operand := Operand{
 		exprNode: exprNode{
-			values:  []dynamodb.AttributeValue{*expr},
+			values:  []types.AttributeValue{*expr},
 			fmtExpr: "$v",
 		},
 	}

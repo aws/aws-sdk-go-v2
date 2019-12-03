@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 // An UnixTime provides aliasing of time.Time into a type that when marshaled
@@ -26,7 +26,7 @@ type UnixTime time.Time
 // MarshalDynamoDBAttributeValue implements the Marshaler interface so that
 // the UnixTime can be marshaled from to a DynamoDB AttributeValue number
 // value encoded in the number of seconds since January 1, 1970 UTC.
-func (e UnixTime) MarshalDynamoDBAttributeValue(av *dynamodb.AttributeValue) error {
+func (e UnixTime) MarshalDynamoDBAttributeValue(av *types.AttributeValue) error {
 	t := time.Time(e)
 	s := strconv.FormatInt(t.Unix(), 10)
 	av.N = &s
@@ -40,7 +40,7 @@ func (e UnixTime) MarshalDynamoDBAttributeValue(av *dynamodb.AttributeValue) err
 //
 // If an error parsing the AttributeValue number occurs UnmarshalError will be
 // returned.
-func (e *UnixTime) UnmarshalDynamoDBAttributeValue(av *dynamodb.AttributeValue) error {
+func (e *UnixTime) UnmarshalDynamoDBAttributeValue(av *types.AttributeValue) error {
 	t, err := decodeUnixTime(aws.StringValue(av.N))
 	if err != nil {
 		return err
@@ -64,7 +64,7 @@ func (e *UnixTime) UnmarshalDynamoDBAttributeValue(av *dynamodb.AttributeValue) 
 //		}
 //
 type Marshaler interface {
-	MarshalDynamoDBAttributeValue(*dynamodb.AttributeValue) error
+	MarshalDynamoDBAttributeValue(*types.AttributeValue) error
 }
 
 // Marshal will serialize the passed in Go value type into a DynamoDB AttributeValue
@@ -152,7 +152,7 @@ type Marshaler interface {
 //
 // Marshal cannot represent cyclic data structures and will not handle them.
 // Passing cyclic structures to Marshal will result in an infinite recursion.
-func Marshal(in interface{}) (*dynamodb.AttributeValue, error) {
+func Marshal(in interface{}) (*types.AttributeValue, error) {
 	return NewEncoder().Encode(in)
 }
 
@@ -160,10 +160,10 @@ func Marshal(in interface{}) (*dynamodb.AttributeValue, error) {
 // type to a map of AttributeValues.
 //
 // This is useful for DynamoDB APIs such as PutItem.
-func MarshalMap(in interface{}) (map[string]dynamodb.AttributeValue, error) {
+func MarshalMap(in interface{}) (map[string]types.AttributeValue, error) {
 	av, err := NewEncoder().Encode(in)
 	if err != nil || av == nil || av.M == nil {
-		return map[string]dynamodb.AttributeValue{}, err
+		return map[string]types.AttributeValue{}, err
 	}
 
 	return av.M, nil
@@ -171,10 +171,10 @@ func MarshalMap(in interface{}) (map[string]dynamodb.AttributeValue, error) {
 
 // MarshalList is an alias for Marshal func which marshals Go value
 // type to a slice of AttributeValues.
-func MarshalList(in interface{}) ([]dynamodb.AttributeValue, error) {
+func MarshalList(in interface{}) ([]types.AttributeValue, error) {
 	av, err := NewEncoder().Encode(in)
 	if err != nil || av == nil || av.L == nil {
-		return []dynamodb.AttributeValue{}, err
+		return []types.AttributeValue{}, err
 	}
 
 	return av.L, nil
@@ -227,8 +227,8 @@ func NewEncoder(opts ...func(*Encoder)) *Encoder {
 
 // Encode will marshal a Go value type to an AttributeValue. Returning
 // the AttributeValue constructed or error.
-func (e *Encoder) Encode(in interface{}) (*dynamodb.AttributeValue, error) {
-	av := &dynamodb.AttributeValue{}
+func (e *Encoder) Encode(in interface{}) (*types.AttributeValue, error) {
+	av := &types.AttributeValue{}
 	if err := e.encode(av, reflect.ValueOf(in), tag{}); err != nil {
 		return nil, err
 	}
@@ -253,7 +253,7 @@ func fieldByIndex(v reflect.Value, index []int,
 	return fv
 }
 
-func (e *Encoder) encode(av *dynamodb.AttributeValue, v reflect.Value, fieldTag tag) error {
+func (e *Encoder) encode(av *types.AttributeValue, v reflect.Value, fieldTag tag) error {
 	// We should check for omitted values first before dereferencing.
 	if fieldTag.OmitEmpty && emptyValue(v) {
 		encodeNull(av)
@@ -287,7 +287,7 @@ func (e *Encoder) encode(av *dynamodb.AttributeValue, v reflect.Value, fieldTag 
 	return nil
 }
 
-func (e *Encoder) encodeStruct(av *dynamodb.AttributeValue, v reflect.Value, fieldTag tag) error {
+func (e *Encoder) encodeStruct(av *types.AttributeValue, v reflect.Value, fieldTag tag) error {
 	// To maintain backwards compatibility with ConvertTo family of methods which
 	// converted time.Time structs to strings
 	if v.Type().ConvertibleTo(timeType) {
@@ -301,7 +301,7 @@ func (e *Encoder) encodeStruct(av *dynamodb.AttributeValue, v reflect.Value, fie
 		return nil
 	}
 
-	av.M = map[string]dynamodb.AttributeValue{}
+	av.M = map[string]types.AttributeValue{}
 	fields := unionStructFields(v.Type(), e.MarshalOptions)
 	for _, f := range fields {
 		if f.Name == "" {
@@ -316,7 +316,7 @@ func (e *Encoder) encodeStruct(av *dynamodb.AttributeValue, v reflect.Value, fie
 		if !found {
 			continue
 		}
-		elem := dynamodb.AttributeValue{}
+		elem := types.AttributeValue{}
 		err := e.encode(&elem, fv, f.tag)
 		if err != nil {
 			return err
@@ -334,8 +334,8 @@ func (e *Encoder) encodeStruct(av *dynamodb.AttributeValue, v reflect.Value, fie
 	return nil
 }
 
-func (e *Encoder) encodeMap(av *dynamodb.AttributeValue, v reflect.Value, fieldTag tag) error {
-	av.M = map[string]dynamodb.AttributeValue{}
+func (e *Encoder) encodeMap(av *types.AttributeValue, v reflect.Value, fieldTag tag) error {
+	av.M = map[string]types.AttributeValue{}
 	for _, key := range v.MapKeys() {
 		keyName := fmt.Sprint(key.Interface())
 		if keyName == "" {
@@ -343,7 +343,7 @@ func (e *Encoder) encodeMap(av *dynamodb.AttributeValue, v reflect.Value, fieldT
 		}
 
 		elemVal := v.MapIndex(key)
-		elem := dynamodb.AttributeValue{}
+		elem := types.AttributeValue{}
 		err := e.encode(&elem, elemVal, tag{})
 		skip, err := keepOrOmitEmpty(fieldTag.OmitEmptyElem, elem, err)
 		if err != nil {
@@ -362,7 +362,7 @@ func (e *Encoder) encodeMap(av *dynamodb.AttributeValue, v reflect.Value, fieldT
 	return nil
 }
 
-func (e *Encoder) encodeSlice(av *dynamodb.AttributeValue, v reflect.Value, fieldTag tag) error {
+func (e *Encoder) encodeSlice(av *types.AttributeValue, v reflect.Value, fieldTag tag) error {
 	if v.Kind() == reflect.Array && v.Len() == 0 && fieldTag.OmitEmpty {
 		encodeNull(av)
 		return nil
@@ -382,11 +382,11 @@ func (e *Encoder) encodeSlice(av *dynamodb.AttributeValue, v reflect.Value, fiel
 
 		av.B = append([]byte{}, b...)
 	default:
-		var elemFn func(dynamodb.AttributeValue) error
+		var elemFn func(types.AttributeValue) error
 
 		if fieldTag.AsBinSet || v.Type() == byteSliceSlicetype { // Binary Set
 			av.BS = make([][]byte, 0, v.Len())
-			elemFn = func(elem dynamodb.AttributeValue) error {
+			elemFn = func(elem types.AttributeValue) error {
 				if elem.B == nil {
 					return &InvalidMarshalError{msg: "binary set must only contain non-nil byte slices"}
 				}
@@ -395,7 +395,7 @@ func (e *Encoder) encodeSlice(av *dynamodb.AttributeValue, v reflect.Value, fiel
 			}
 		} else if fieldTag.AsNumSet { // Number Set
 			av.NS = make([]string, 0, v.Len())
-			elemFn = func(elem dynamodb.AttributeValue) error {
+			elemFn = func(elem types.AttributeValue) error {
 				if elem.N == nil {
 					return &InvalidMarshalError{msg: "number set must only contain non-nil string numbers"}
 				}
@@ -404,7 +404,7 @@ func (e *Encoder) encodeSlice(av *dynamodb.AttributeValue, v reflect.Value, fiel
 			}
 		} else if fieldTag.AsStrSet { // String Set
 			av.SS = make([]string, 0, v.Len())
-			elemFn = func(elem dynamodb.AttributeValue) error {
+			elemFn = func(elem types.AttributeValue) error {
 				if elem.S == nil {
 					return &InvalidMarshalError{msg: "string set must only contain non-nil strings"}
 				}
@@ -412,8 +412,8 @@ func (e *Encoder) encodeSlice(av *dynamodb.AttributeValue, v reflect.Value, fiel
 				return nil
 			}
 		} else { // List
-			av.L = make([]dynamodb.AttributeValue, 0, v.Len())
-			elemFn = func(elem dynamodb.AttributeValue) error {
+			av.L = make([]types.AttributeValue, 0, v.Len())
+			elemFn = func(elem types.AttributeValue) error {
 				av.L = append(av.L, elem)
 				return nil
 			}
@@ -429,10 +429,10 @@ func (e *Encoder) encodeSlice(av *dynamodb.AttributeValue, v reflect.Value, fiel
 	return nil
 }
 
-func (e *Encoder) encodeList(v reflect.Value, fieldTag tag, elemFn func(dynamodb.AttributeValue) error) (int, error) {
+func (e *Encoder) encodeList(v reflect.Value, fieldTag tag, elemFn func(types.AttributeValue) error) (int, error) {
 	count := 0
 	for i := 0; i < v.Len(); i++ {
-		elem := dynamodb.AttributeValue{}
+		elem := types.AttributeValue{}
 		err := e.encode(&elem, v.Index(i), tag{OmitEmpty: fieldTag.OmitEmptyElem})
 		skip, err := keepOrOmitEmpty(fieldTag.OmitEmptyElem, elem, err)
 		if err != nil {
@@ -450,7 +450,7 @@ func (e *Encoder) encodeList(v reflect.Value, fieldTag tag, elemFn func(dynamodb
 	return count, nil
 }
 
-func (e *Encoder) encodeScalar(av *dynamodb.AttributeValue, v reflect.Value, fieldTag tag) error {
+func (e *Encoder) encodeScalar(av *types.AttributeValue, v reflect.Value, fieldTag tag) error {
 	if v.Type() == numberType {
 		s := v.String()
 		if fieldTag.AsString {
@@ -483,7 +483,7 @@ func (e *Encoder) encodeScalar(av *dynamodb.AttributeValue, v reflect.Value, fie
 	return nil
 }
 
-func (e *Encoder) encodeNumber(av *dynamodb.AttributeValue, v reflect.Value) error {
+func (e *Encoder) encodeNumber(av *types.AttributeValue, v reflect.Value) error {
 	if used, err := tryMarshaler(av, v); used {
 		return err
 	}
@@ -507,7 +507,7 @@ func (e *Encoder) encodeNumber(av *dynamodb.AttributeValue, v reflect.Value) err
 	return nil
 }
 
-func (e *Encoder) encodeString(av *dynamodb.AttributeValue, v reflect.Value) error {
+func (e *Encoder) encodeString(av *types.AttributeValue, v reflect.Value) error {
 	if used, err := tryMarshaler(av, v); used {
 		return err
 	}
@@ -536,9 +536,9 @@ func encodeUint(u uint64) string {
 func encodeFloat(f float64, bitSize int) string {
 	return strconv.FormatFloat(f, 'f', -1, bitSize)
 }
-func encodeNull(av *dynamodb.AttributeValue) {
+func encodeNull(av *types.AttributeValue) {
 	t := true
-	*av = dynamodb.AttributeValue{NULL: &t}
+	*av = types.AttributeValue{NULL: &t}
 }
 
 func valueElem(v reflect.Value) reflect.Value {
@@ -574,7 +574,7 @@ func emptyValue(v reflect.Value) bool {
 	return false
 }
 
-func tryMarshaler(av *dynamodb.AttributeValue, v reflect.Value) (bool, error) {
+func tryMarshaler(av *types.AttributeValue, v reflect.Value) (bool, error) {
 	if v.Kind() != reflect.Ptr && v.Type().Name() != "" && v.CanAddr() {
 		v = v.Addr()
 	}
@@ -590,7 +590,7 @@ func tryMarshaler(av *dynamodb.AttributeValue, v reflect.Value) (bool, error) {
 	return false, nil
 }
 
-func keepOrOmitEmpty(omitEmpty bool, av dynamodb.AttributeValue, err error) (bool, error) {
+func keepOrOmitEmpty(omitEmpty bool, av types.AttributeValue, err error) (bool, error) {
 	if err != nil {
 		if _, ok := err.(*unsupportedMarshalTypeError); ok {
 			return true, nil

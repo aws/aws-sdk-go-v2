@@ -5,7 +5,7 @@ import (
 	"sort"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 // expressionType specifies the type of Expression. Declaring this type is used
@@ -48,7 +48,7 @@ func (l typeList) Swap(i, j int) {
 //     builder := expression.NewBuilder().WithKeyCondition(keyCond).WithProjection(proj)
 //     expression := builder.Build()
 //
-//     queryInput := dynamodb.QueryInput{
+//     queryInput := types.QueryInput{
 //       KeyConditionExpression:    expression.KeyCondition(),
 //       ProjectionExpression:      expression.Projection(),
 //       ExpressionAttributeNames:  expression.Names(),
@@ -91,7 +91,7 @@ func NewBuilder() Builder {
 //     builder := expression.NewBuilder().WithKeyCondition(keyCond).WithProjection(proj)
 //     expression := builder.Build()
 //
-//     queryInput := dynamodb.QueryInput{
+//     queryInput := types.QueryInput{
 //       KeyConditionExpression:    expression.KeyCondition(),
 //       ProjectionExpression:      expression.Projection(),
 //       ExpressionAttributeNames:  expression.Names(),
@@ -121,7 +121,7 @@ func (b Builder) Build() (Expression, error) {
 	}
 
 	if len(aliasList.valuesList) != 0 {
-		valuesMap := map[string]dynamodb.AttributeValue{}
+		valuesMap := map[string]types.AttributeValue{}
 		for i := 0; i < len(aliasList.valuesList); i++ {
 			valuesMap[fmt.Sprintf(":%v", i)] = aliasList.valuesList[i]
 		}
@@ -298,7 +298,7 @@ func (b Builder) WithUpdate(updateBuilder UpdateBuilder) Builder {
 //     builder := expression.NewBuilder().WithKeyCondition(keyCond).WithProjection(proj)
 //     expression := builder.Build()
 //
-//     queryInput := dynamodb.QueryInput{
+//     queryInput := types.QueryInput{
 //       KeyConditionExpression:    expression.KeyCondition(),
 //       ProjectionExpression:      expression.Projection(),
 //       ExpressionAttributeNames:  expression.Names(),
@@ -308,7 +308,7 @@ func (b Builder) WithUpdate(updateBuilder UpdateBuilder) Builder {
 type Expression struct {
 	expressionMap map[expressionType]string
 	namesMap      map[string]string
-	valuesMap     map[string]dynamodb.AttributeValue
+	valuesMap     map[string]types.AttributeValue
 }
 
 // treeBuilder interface is fulfilled by builder structs that represent
@@ -330,12 +330,12 @@ type treeBuilder interface {
 //
 //     // let expression be an instance of Expression{}
 //
-//     deleteInput := dynamodb.DeleteItemInput{
+//     deleteInput := types.DeleteItemInput{
 //       ConditionExpression:       expression.Condition(),
 //       ExpressionAttributeNames:  expression.Names(),
 //       ExpressionAttributeValues: expression.Values(),
-//       Key: map[string]dynamodb.AttributeValue{
-//         "PartitionKey": &dynamodb.AttributeValue{
+//       Key: map[string]types.AttributeValue{
+//         "PartitionKey": &types.AttributeValue{
 //           S: aws.String("SomeKey"),
 //         },
 //       },
@@ -354,7 +354,7 @@ func (e Expression) Condition() *string {
 //
 //     // let expression be an instance of Expression{}
 //
-//     queryInput := dynamodb.QueryInput{
+//     queryInput := types.QueryInput{
 //       KeyConditionExpression:    expression.KeyCondition(),
 //       FilterExpression:          expression.Filter(),
 //       ExpressionAttributeNames:  expression.Names(),
@@ -374,7 +374,7 @@ func (e Expression) Filter() *string {
 //
 //     // let expression be an instance of Expression{}
 //
-//     queryInput := dynamodb.QueryInput{
+//     queryInput := types.QueryInput{
 //       KeyConditionExpression:    expression.KeyCondition(),
 //       ProjectionExpression:      expression.Projection(),
 //       ExpressionAttributeNames:  expression.Names(),
@@ -394,7 +394,7 @@ func (e Expression) Projection() *string {
 //
 //     // let expression be an instance of Expression{}
 //
-//     queryInput := dynamodb.QueryInput{
+//     queryInput := types.QueryInput{
 //       KeyConditionExpression:    expression.KeyCondition(),
 //       ProjectionExpression:      expression.Projection(),
 //       ExpressionAttributeNames:  expression.Names(),
@@ -414,8 +414,8 @@ func (e Expression) KeyCondition() *string {
 //
 //     // let expression be an instance of Expression{}
 //
-//     updateInput := dynamodb.UpdateInput{
-//       Key: map[string]dynamodb.AttributeValue{
+//     updateInput := types.UpdateInput{
+//       Key: map[string]types.AttributeValue{
 //         "PartitionKey": {
 //           S: aws.String("someKey"),
 //         },
@@ -444,7 +444,7 @@ func (e Expression) Update() *string {
 //
 //     // let expression be an instance of Expression{}
 //
-//     queryInput := dynamodb.QueryInput{
+//     queryInput := types.QueryInput{
 //       KeyConditionExpression:    expression.KeyCondition(),
 //       ProjectionExpression:      expression.Projection(),
 //       ExpressionAttributeNames:  expression.Names(),
@@ -470,14 +470,14 @@ func (e Expression) Names() map[string]string {
 //
 //     // let expression be an instance of Expression{}
 //
-//     queryInput := dynamodb.QueryInput{
+//     queryInput := types.QueryInput{
 //       KeyConditionExpression:    expression.KeyCondition(),
 //       ProjectionExpression:      expression.Projection(),
 //       ExpressionAttributeNames:  expression.Names(),
 //       ExpressionAttributeValues: expression.Values(),
 //       TableName: aws.String("SomeTable"),
 //     }
-func (e Expression) Values() map[string]dynamodb.AttributeValue {
+func (e Expression) Values() map[string]types.AttributeValue {
 	return e.valuesMap
 }
 
@@ -506,7 +506,7 @@ func (e Expression) returnExpression(expressionType expressionType) *string {
 //         The corresponding child node is in the []children slice.
 type exprNode struct {
 	names    []string
-	values   []dynamodb.AttributeValue
+	values   []types.AttributeValue
 	children []exprNode
 	fmtExpr  string
 }
@@ -517,7 +517,7 @@ type exprNode struct {
 // order to deduplicate all names within the tree strcuture of the exprNodes.
 type aliasList struct {
 	namesList  []string
-	valuesList []dynamodb.AttributeValue
+	valuesList []types.AttributeValue
 }
 
 // buildExpressionString returns a string with aliasing for names/values
@@ -616,7 +616,7 @@ func substituteChild(index int, node exprNode, aliasList *aliasList) (string, er
 // aliasValue returns the corresponding alias to the dav value argument. Since
 // values are not deduplicated as of now, all values are just appended to the
 // aliasList and given the index as the alias.
-func (al *aliasList) aliasValue(dav dynamodb.AttributeValue) (string, error) {
+func (al *aliasList) aliasValue(dav types.AttributeValue) (string, error) {
 	al.valuesList = append(al.valuesList, dav)
 	return fmt.Sprintf(":%d", len(al.valuesList)-1), nil
 }

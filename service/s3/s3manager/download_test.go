@@ -22,12 +22,13 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/sdkio"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 func dlLoggingSvc(data []byte) (*s3.Client, *[]string, *[]string) {
 	var m sync.Mutex
-	names := []string{}
-	ranges := []string{}
+	var names []string
+	var ranges []string
 
 	svc := s3.New(unit.Config())
 	svc.Handlers.Send.Clear()
@@ -36,7 +37,7 @@ func dlLoggingSvc(data []byte) (*s3.Client, *[]string, *[]string) {
 		defer m.Unlock()
 
 		names = append(names, r.Operation.Name)
-		ranges = append(ranges, *r.Params.(*s3.GetObjectInput).Range)
+		ranges = append(ranges, *r.Params.(*types.GetObjectInput).Range)
 
 		rerng := regexp.MustCompile(`bytes=(\d+)-(\d+)`)
 		rng := rerng.FindStringSubmatch(r.HTTPRequest.Header.Get("Range"))
@@ -64,7 +65,7 @@ func dlLoggingSvc(data []byte) (*s3.Client, *[]string, *[]string) {
 
 func dlLoggingSvcNoChunk(data []byte) (*s3.Client, *[]string) {
 	var m sync.Mutex
-	names := []string{}
+	var names []string
 
 	svc := s3.New(unit.Config())
 	svc.Handlers.Send.Clear()
@@ -122,7 +123,7 @@ func dlLoggingSvcContentRangeTotalAny(data []byte, states []int) (*s3.Client, *[
 		defer m.Unlock()
 
 		names = append(names, r.Operation.Name)
-		ranges = append(ranges, *r.Params.(*s3.GetObjectInput).Range)
+		ranges = append(ranges, *r.Params.(*types.GetObjectInput).Range)
 
 		rerng := regexp.MustCompile(`bytes=(\d+)-(\d+)`)
 		rng := rerng.FindStringSubmatch(r.HTTPRequest.Header.Get("Range"))
@@ -203,7 +204,7 @@ func TestDownloadOrder(t *testing.T) {
 		d.Concurrency = 1
 	})
 	w := &aws.WriteAtBuffer{}
-	n, err := d.Download(w, &s3.GetObjectInput{
+	n, err := d.Download(w, &types.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
 	})
@@ -239,7 +240,7 @@ func TestDownloadZero(t *testing.T) {
 
 	d := s3manager.NewDownloaderWithClient(s)
 	w := &aws.WriteAtBuffer{}
-	n, err := d.Download(w, &s3.GetObjectInput{
+	n, err := d.Download(w, &types.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
 	})
@@ -269,7 +270,7 @@ func TestDownloadSetPartSize(t *testing.T) {
 		d.PartSize = 1
 	})
 	w := &aws.WriteAtBuffer{}
-	n, err := d.Download(w, &s3.GetObjectInput{
+	n, err := d.Download(w, &types.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
 	})
@@ -311,7 +312,7 @@ func TestDownloadError(t *testing.T) {
 		d.PartSize = 1
 	})
 	w := &aws.WriteAtBuffer{}
-	n, err := d.Download(w, &s3.GetObjectInput{
+	n, err := d.Download(w, &types.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
 	})
@@ -343,7 +344,7 @@ func TestDownloadNonChunk(t *testing.T) {
 		d.Concurrency = 1
 	})
 	w := &aws.WriteAtBuffer{}
-	n, err := d.Download(w, &s3.GetObjectInput{
+	n, err := d.Download(w, &types.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
 	})
@@ -375,7 +376,7 @@ func TestDownloadNoContentRangeLength(t *testing.T) {
 		d.Concurrency = 1
 	})
 	w := &aws.WriteAtBuffer{}
-	n, err := d.Download(w, &s3.GetObjectInput{
+	n, err := d.Download(w, &types.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
 	})
@@ -407,7 +408,7 @@ func TestDownloadContentRangeTotalAny(t *testing.T) {
 		d.Concurrency = 1
 	})
 	w := &aws.WriteAtBuffer{}
-	n, err := d.Download(w, &s3.GetObjectInput{
+	n, err := d.Download(w, &types.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
 	})
@@ -443,7 +444,7 @@ func TestDownloadPartBodyRetry_SuccessRetry(t *testing.T) {
 	})
 
 	w := &aws.WriteAtBuffer{}
-	n, err := d.Download(w, &s3.GetObjectInput{
+	n, err := d.Download(w, &types.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
 	})
@@ -473,7 +474,7 @@ func TestDownloadPartBodyRetry_SuccessNoRetry(t *testing.T) {
 	})
 
 	w := &aws.WriteAtBuffer{}
-	n, err := d.Download(w, &s3.GetObjectInput{
+	n, err := d.Download(w, &types.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
 	})
@@ -503,7 +504,7 @@ func TestDownloadPartBodyRetry_FailRetry(t *testing.T) {
 	})
 
 	w := &aws.WriteAtBuffer{}
-	n, err := d.Download(w, &s3.GetObjectInput{
+	n, err := d.Download(w, &types.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
 	})
@@ -529,7 +530,7 @@ func TestDownloadPartBodyRetry_FailRetry(t *testing.T) {
 func TestDownloadWithContextCanceled(t *testing.T) {
 	d := s3manager.NewDownloader(unit.Config())
 
-	params := s3.GetObjectInput{
+	params := types.GetObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
 	}
@@ -562,7 +563,7 @@ func TestDownload_WithRange(t *testing.T) {
 	})
 
 	w := &aws.WriteAtBuffer{}
-	n, err := d.Download(w, &s3.GetObjectInput{
+	n, err := d.Download(w, &types.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
 		Range:  aws.String("bytes=2-6"),
@@ -627,7 +628,7 @@ func TestDownload_WithFailure(t *testing.T) {
 	})
 
 	w := &aws.WriteAtBuffer{}
-	params := s3.GetObjectInput{
+	params := types.GetObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
 	}
@@ -687,7 +688,7 @@ func TestDownloadBufferStrategy(t *testing.T) {
 
 		buffer := aws.NewWriteAtBuffer(make([]byte, len(expected)))
 
-		n, err := d.Download(buffer, &s3.GetObjectInput{
+		n, err := d.Download(buffer, &types.GetObjectInput{
 			Bucket: aws.String("bucket"),
 			Key:    aws.String("key"),
 		})
@@ -756,7 +757,7 @@ func TestDownloadBufferStrategy_Errors(t *testing.T) {
 			return true
 		}
 
-		input := r.Params.(*s3.GetObjectInput)
+		input := r.Params.(*types.GetObjectInput)
 
 		fingerPrint := fmt.Sprintf("%s/%s/%s/%s", r.Operation.Name, *input.Bucket, *input.Key, *input.Range)
 		if _, ok := seenOps[fingerPrint]; ok {
@@ -781,7 +782,7 @@ func TestDownloadBufferStrategy_Errors(t *testing.T) {
 
 	buffer := aws.NewWriteAtBuffer(make([]byte, len(expected)))
 
-	n, err := d.Download(buffer, &s3.GetObjectInput{
+	n, err := d.Download(buffer, &types.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
 	})

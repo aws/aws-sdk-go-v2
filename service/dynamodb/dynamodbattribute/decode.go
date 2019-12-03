@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 // An Unmarshaler is an interface to provide custom unmarshaling of
@@ -30,7 +30,7 @@ import (
 // 			return nil
 // 		}
 type Unmarshaler interface {
-	UnmarshalDynamoDBAttributeValue(*dynamodb.AttributeValue) error
+	UnmarshalDynamoDBAttributeValue(value *types.AttributeValue) error
 }
 
 // Unmarshal will unmarshal DynamoDB AttributeValues to Go value types.
@@ -74,7 +74,7 @@ type Unmarshaler interface {
 // and return the error.
 //
 // The output value provided must be a non-nil pointer
-func Unmarshal(av *dynamodb.AttributeValue, out interface{}) error {
+func Unmarshal(av *types.AttributeValue, out interface{}) error {
 	return NewDecoder().Decode(av, out)
 }
 
@@ -82,16 +82,16 @@ func Unmarshal(av *dynamodb.AttributeValue, out interface{}) error {
 // a map of AttributeValues.
 //
 // The output value provided must be a non-nil pointer
-func UnmarshalMap(m map[string]dynamodb.AttributeValue, out interface{}) error {
-	return NewDecoder().Decode(&dynamodb.AttributeValue{M: m}, out)
+func UnmarshalMap(m map[string]types.AttributeValue, out interface{}) error {
+	return NewDecoder().Decode(&types.AttributeValue{M: m}, out)
 }
 
 // UnmarshalList is an alias for Unmarshal func which unmarshals
 // a slice of AttributeValues.
 //
 // The output value provided must be a non-nil pointer
-func UnmarshalList(l []dynamodb.AttributeValue, out interface{}) error {
-	return NewDecoder().Decode(&dynamodb.AttributeValue{L: l}, out)
+func UnmarshalList(l []types.AttributeValue, out interface{}) error {
+	return NewDecoder().Decode(&types.AttributeValue{L: l}, out)
 }
 
 // UnmarshalListOfMaps is an alias for Unmarshal func which unmarshals a
@@ -101,10 +101,10 @@ func UnmarshalList(l []dynamodb.AttributeValue, out interface{}) error {
 // Query API call.
 //
 // The output value provided must be a non-nil pointer
-func UnmarshalListOfMaps(l []map[string]dynamodb.AttributeValue, out interface{}) error {
-	items := make([]dynamodb.AttributeValue, len(l))
+func UnmarshalListOfMaps(l []map[string]types.AttributeValue, out interface{}) error {
+	items := make([]types.AttributeValue, len(l))
 	for i, m := range l {
-		items[i] = dynamodb.AttributeValue{M: m}
+		items[i] = types.AttributeValue{M: m}
 	}
 
 	return UnmarshalList(items, out)
@@ -140,7 +140,7 @@ func NewDecoder(opts ...func(*Decoder)) *Decoder {
 // to the provide Go value type.
 //
 // The output value provided must be a non-nil pointer
-func (d *Decoder) Decode(av *dynamodb.AttributeValue, out interface{}, opts ...func(*Decoder)) error {
+func (d *Decoder) Decode(av *types.AttributeValue, out interface{}, opts ...func(*Decoder)) error {
 	v := reflect.ValueOf(out)
 	if v.Kind() != reflect.Ptr || v.IsNil() || !v.IsValid() {
 		return &InvalidUnmarshalError{Type: reflect.TypeOf(out)}
@@ -155,7 +155,7 @@ var byteSliceSlicetype = reflect.TypeOf([][]byte(nil))
 var numberType = reflect.TypeOf(Number(""))
 var timeType = reflect.TypeOf(time.Time{})
 
-func (d *Decoder) decode(av *dynamodb.AttributeValue, v reflect.Value, fieldTag tag) error {
+func (d *Decoder) decode(av *types.AttributeValue, v reflect.Value, fieldTag tag) error {
 	var u Unmarshaler
 	if av == nil || av.NULL != nil {
 		u, v = indirect(v, true)
@@ -277,7 +277,7 @@ func (d *Decoder) decodeBinarySet(bs [][]byte, v reflect.Value) error {
 		v.SetLen(i + 1)
 		u, elem := indirect(v.Index(i), false)
 		if u != nil {
-			return u.UnmarshalDynamoDBAttributeValue(&dynamodb.AttributeValue{BS: bs})
+			return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValue{BS: bs})
 		}
 		if err := d.decodeBinary(bs[i], elem); err != nil {
 			return err
@@ -399,7 +399,7 @@ func (d *Decoder) decodeNumberSet(ns []string, v reflect.Value) error {
 		v.SetLen(i + 1)
 		u, elem := indirect(v.Index(i), false)
 		if u != nil {
-			return u.UnmarshalDynamoDBAttributeValue(&dynamodb.AttributeValue{NS: ns})
+			return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValue{NS: ns})
 		}
 		if err := d.decodeNumber(&ns[i], elem, tag{}); err != nil {
 			return err
@@ -409,7 +409,7 @@ func (d *Decoder) decodeNumberSet(ns []string, v reflect.Value) error {
 	return nil
 }
 
-func (d *Decoder) decodeList(avList []dynamodb.AttributeValue, v reflect.Value) error {
+func (d *Decoder) decodeList(avList []types.AttributeValue, v reflect.Value) error {
 	switch v.Kind() {
 	case reflect.Slice:
 		// Make room for the slice elements if needed
@@ -443,7 +443,7 @@ func (d *Decoder) decodeList(avList []dynamodb.AttributeValue, v reflect.Value) 
 	return nil
 }
 
-func (d *Decoder) decodeMap(avMap map[string]dynamodb.AttributeValue, v reflect.Value) error {
+func (d *Decoder) decodeMap(avMap map[string]types.AttributeValue, v reflect.Value) error {
 	switch v.Kind() {
 	case reflect.Map:
 		t := v.Type()
@@ -551,7 +551,7 @@ func (d *Decoder) decodeStringSet(ss []string, v reflect.Value) error {
 		v.SetLen(i + 1)
 		u, elem := indirect(v.Index(i), false)
 		if u != nil {
-			return u.UnmarshalDynamoDBAttributeValue(&dynamodb.AttributeValue{SS: ss})
+			return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValue{SS: ss})
 		}
 		if err := d.decodeString(&ss[i], elem, tag{}); err != nil {
 			return err

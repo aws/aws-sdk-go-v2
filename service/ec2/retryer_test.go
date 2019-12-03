@@ -6,6 +6,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
 
 func TestCustomRetryRules(t *testing.T) {
@@ -13,7 +14,7 @@ func TestCustomRetryRules(t *testing.T) {
 	cfg := unit.Config()
 	svc := New(cfg)
 
-	req := svc.ModifyNetworkInterfaceAttributeRequest(&ModifyNetworkInterfaceAttributeInput{
+	req := svc.ModifyNetworkInterfaceAttributeRequest(&types.ModifyNetworkInterfaceAttributeInput{
 		NetworkInterfaceId: aws.String("foo"),
 	})
 
@@ -48,7 +49,7 @@ func TestCustomRetryer_WhenRetrierSpecified(t *testing.T) {
 		t.Error("expected default retryer, but received otherwise")
 	}
 
-	req := svc.AssignPrivateIpAddressesRequest(&AssignPrivateIpAddressesInput{
+	req := svc.AssignPrivateIpAddressesRequest(&types.AssignPrivateIpAddressesInput{
 		NetworkInterfaceId: aws.String("foo"),
 	})
 
@@ -80,7 +81,7 @@ func TestCustomRetryer(t *testing.T) {
 	cfg := unit.Config()
 	svc := New(cfg)
 
-	req := svc.AssignPrivateIpAddressesRequest(&AssignPrivateIpAddressesInput{
+	req := svc.AssignPrivateIpAddressesRequest(&types.AssignPrivateIpAddressesInput{
 		NetworkInterfaceId: aws.String("foo"),
 	})
 

@@ -16,14 +16,14 @@ func validateSSERequiresSSL(r *request.Request) {
 	}
 
 	if iface, ok := r.Params.(sseCustomerKeyGetter); ok {
-		if len(iface.getSSECustomerKey()) > 0 {
+		if len(iface.GetSSECustomerKey()) > 0 {
 			r.Error = errSSERequiresSSL
 			return
 		}
 	}
 
 	if iface, ok := r.Params.(copySourceSSECustomerKeyGetter); ok {
-		if len(iface.getCopySourceSSECustomerKey()) > 0 {
+		if len(iface.GetCopySourceSSECustomerKey()) > 0 {
 			r.Error = errSSERequiresSSL
 			return
 		}

@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/enums"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 var s3LocationTests = []struct {
@@ -31,7 +33,7 @@ func TestGetBucketLocation(t *testing.T) {
 			r.HTTPResponse = &http.Response{StatusCode: 200, Body: reader}
 		})
 
-		req := s.GetBucketLocationRequest(&s3.GetBucketLocationInput{Bucket: aws.String("bucket")})
+		req := s.GetBucketLocationRequest(&types.GetBucketLocationInput{Bucket: aws.String("bucket")})
 		resp, err := req.Send(context.Background())
 		if err != nil {
 			t.Errorf("expected no error, but received %v", err)
@@ -60,7 +62,7 @@ func TestNormalizeBucketLocation(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		actual := s3.NormalizeBucketLocation(s3.BucketLocationConstraint(c.In))
+		actual := s3.NormalizeBucketLocation(enums.BucketLocationConstraint(c.In))
 		if e, a := c.Out, string(actual); e != a {
 			t.Errorf("%d, expect %s bucket location, got %s", i, e, a)
 		}
@@ -81,12 +83,12 @@ func TestWithNormalizeBucketLocation(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		req.Data = &s3.GetBucketLocationOutput{
-			LocationConstraint: s3.BucketLocationConstraint(c.In),
+		req.Data = &types.GetBucketLocationOutput{
+			LocationConstraint: enums.BucketLocationConstraint(c.In),
 		}
 		req.Handlers.Unmarshal.Run(req)
 
-		v := req.Data.(*s3.GetBucketLocationOutput).LocationConstraint
+		v := req.Data.(*types.GetBucketLocationOutput).LocationConstraint
 		if e, a := c.Out, string(v); e != a {
 			t.Errorf("%d, expect %s bucket location, got %s", i, e, a)
 		}
@@ -95,7 +97,7 @@ func TestWithNormalizeBucketLocation(t *testing.T) {
 
 func TestPopulateLocationConstraint(t *testing.T) {
 	s := s3.New(unit.Config())
-	in := &s3.CreateBucketInput{
+	in := &types.CreateBucketInput{
 		Bucket: aws.String("bucket"),
 	}
 	req := s.CreateBucketRequest(in)
@@ -104,7 +106,7 @@ func TestPopulateLocationConstraint(t *testing.T) {
 	}
 
 	v, _ := awsutil.ValuesAtPath(req.Params, "CreateBucketConfiguration.LocationConstraint")
-	if e, a := "mock-region", string(v[0].(s3.BucketLocationConstraint)); e != a {
+	if e, a := "mock-region", string(v[0].(enums.BucketLocationConstraint)); e != a {
 		t.Errorf("expect %s location constraint, got %s", e, a)
 	}
 	if v := in.CreateBucketConfiguration; v != nil {
@@ -115,9 +117,9 @@ func TestPopulateLocationConstraint(t *testing.T) {
 
 func TestNoPopulateLocationConstraintIfProvided(t *testing.T) {
 	s := s3.New(unit.Config())
-	req := s.CreateBucketRequest(&s3.CreateBucketInput{
+	req := s.CreateBucketRequest(&types.CreateBucketInput{
 		Bucket:                    aws.String("bucket"),
-		CreateBucketConfiguration: &s3.CreateBucketConfiguration{},
+		CreateBucketConfiguration: &types.CreateBucketConfiguration{},
 	})
 	if err := req.Build(); err != nil {
 		t.Fatalf("expect no error, got %v", err)
@@ -126,7 +128,7 @@ func TestNoPopulateLocationConstraintIfProvided(t *testing.T) {
 	if l := len(v); l != 1 {
 		t.Errorf("expect empty string only, got %d elements", l)
 	}
-	if v[0].(s3.BucketLocationConstraint) != s3.BucketLocationConstraint("") {
+	if v[0].(enums.BucketLocationConstraint) != enums.BucketLocationConstraint("") {
 		t.Errorf("expected empty string, but received %v", v[0])
 	}
 }
@@ -136,7 +138,7 @@ func TestNoPopulateLocationConstraintIfClassic(t *testing.T) {
 	cfg.Region = "us-east-1"
 
 	s := s3.New(cfg)
-	req := s.CreateBucketRequest(&s3.CreateBucketInput{
+	req := s.CreateBucketRequest(&types.CreateBucketInput{
 		Bucket: aws.String("bucket"),
 	})
 	if err := req.Build(); err != nil {

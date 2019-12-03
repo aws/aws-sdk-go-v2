@@ -13,8 +13,8 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 var integBuf12MB = make([]byte, 1024*1024*12)
@@ -80,7 +80,7 @@ func TestInteg_UploadFailCleanup(t *testing.T) {
 		t.Errorf("expect upload ID to not be empty, but was")
 	}
 
-	_, err = svc.ListPartsRequest(&s3.ListPartsInput{
+	_, err = svc.ListPartsRequest(&types.ListPartsInput{
 		Bucket: bucketName, Key: &key, UploadId: &uploadID,
 	}).Send(context.Background())
 	if err == nil {

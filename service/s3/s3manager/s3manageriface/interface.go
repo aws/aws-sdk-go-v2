@@ -5,14 +5,14 @@ import (
 	"context"
 	"io"
 
-	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 // DownloaderAPI is the interface type for s3manager.Downloader.
 type DownloaderAPI interface {
-	Download(io.WriterAt, *s3.GetObjectInput, ...func(*s3manager.Downloader)) (int64, error)
-	DownloadWithContext(context.Context, io.WriterAt, *s3.GetObjectInput, ...func(*s3manager.Downloader)) (int64, error)
+	Download(io.WriterAt, *types.GetObjectInput, ...func(*s3manager.Downloader)) (int64, error)
+	DownloadWithContext(context.Context, io.WriterAt, *types.GetObjectInput, ...func(*s3manager.Downloader)) (int64, error)
 	DownloadWithIterator(context.Context, s3manager.BatchDownloadIterator, ...func(*s3manager.Downloader)) error
 }
 

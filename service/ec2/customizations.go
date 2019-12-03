@@ -5,6 +5,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
 
 const (
@@ -43,7 +44,7 @@ func fillPresignedURL(r *aws.Request) {
 		return
 	}
 
-	origParams := r.Params.(*CopySnapshotInput)
+	origParams := r.Params.(*types.CopySnapshotInput)
 
 	// Stop if PresignedURL/DestinationRegion is set
 	if origParams.PresignedUrl != nil || origParams.DestinationRegion != nil {
@@ -51,7 +52,7 @@ func fillPresignedURL(r *aws.Request) {
 	}
 
 	origParams.DestinationRegion = aws.String(r.Config.Region)
-	newParams := awsutil.CopyOf(r.Params).(*CopySnapshotInput)
+	newParams := awsutil.CopyOf(r.Params).(*types.CopySnapshotInput)
 
 	// Create a new request based on the existing request. We will use this to
 	// presign the CopySnapshot request against the source region.

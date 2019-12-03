@@ -16,6 +16,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/s3control"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
+	"github.com/aws/aws-sdk-go-v2/service/sts/types"
 )
 
 var (
@@ -73,7 +74,7 @@ func setup() {
 		}
 
 		stsSvc := sts.New(stsCfg)
-		identity, err := stsSvc.GetCallerIdentityRequest(&sts.GetCallerIdentityInput{}).Send(context.Background())
+		identity, err := stsSvc.GetCallerIdentityRequest(&types.GetCallerIdentityInput{}).Send(context.Background())
 		if err != nil {
 			panic(fmt.Sprintf("failed to get accountID, %v", err))
 		}

@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"errors"
+	"github.com/aws/aws-sdk-go-v2/service/s3/enums"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -15,105 +16,106 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 func TestHasParity(t *testing.T) {
 	cases := []struct {
-		o1       *s3.DeleteObjectsInput
+		o1       *types.DeleteObjectsInput
 		o2       BatchDeleteObject
 		expected bool
 	}{
 		{
-			&s3.DeleteObjectsInput{},
+			&types.DeleteObjectsInput{},
 			BatchDeleteObject{
-				Object: &s3.DeleteObjectInput{},
+				Object: &types.DeleteObjectInput{},
 			},
 			true,
 		},
 		{
-			&s3.DeleteObjectsInput{
+			&types.DeleteObjectsInput{
 				Bucket: aws.String("foo"),
 			},
 			BatchDeleteObject{
-				Object: &s3.DeleteObjectInput{
+				Object: &types.DeleteObjectInput{
 					Bucket: aws.String("bar"),
 				},
 			},
 			false,
 		},
 		{
-			&s3.DeleteObjectsInput{},
+			&types.DeleteObjectsInput{},
 			BatchDeleteObject{
-				Object: &s3.DeleteObjectInput{
+				Object: &types.DeleteObjectInput{
 					Bucket: aws.String("foo"),
 				},
 			},
 			false,
 		},
 		{
-			&s3.DeleteObjectsInput{
+			&types.DeleteObjectsInput{
 				Bucket: aws.String("foo"),
 			},
 			BatchDeleteObject{
-				Object: &s3.DeleteObjectInput{},
+				Object: &types.DeleteObjectInput{},
 			},
 			false,
 		},
 		{
-			&s3.DeleteObjectsInput{
+			&types.DeleteObjectsInput{
 				MFA: aws.String("foo"),
 			},
 			BatchDeleteObject{
-				Object: &s3.DeleteObjectInput{
+				Object: &types.DeleteObjectInput{
 					MFA: aws.String("bar"),
 				},
 			},
 			false,
 		},
 		{
-			&s3.DeleteObjectsInput{},
+			&types.DeleteObjectsInput{},
 			BatchDeleteObject{
-				Object: &s3.DeleteObjectInput{
+				Object: &types.DeleteObjectInput{
 					MFA: aws.String("foo"),
 				},
 			},
 			false,
 		},
 		{
-			&s3.DeleteObjectsInput{
+			&types.DeleteObjectsInput{
 				MFA: aws.String("foo"),
 			},
 			BatchDeleteObject{
-				Object: &s3.DeleteObjectInput{},
+				Object: &types.DeleteObjectInput{},
 			},
 			false,
 		},
 		{
-			&s3.DeleteObjectsInput{
-				RequestPayer: s3.RequestPayer("foo"),
+			&types.DeleteObjectsInput{
+				RequestPayer: enums.RequestPayer("foo"),
 			},
 			BatchDeleteObject{
-				Object: &s3.DeleteObjectInput{
-					RequestPayer: s3.RequestPayerRequester,
+				Object: &types.DeleteObjectInput{
+					RequestPayer: enums.RequestPayerRequester,
 				},
 			},
 			false,
 		},
 		{
-			&s3.DeleteObjectsInput{},
+			&types.DeleteObjectsInput{},
 			BatchDeleteObject{
-				Object: &s3.DeleteObjectInput{
-					RequestPayer: s3.RequestPayerRequester,
+				Object: &types.DeleteObjectInput{
+					RequestPayer: enums.RequestPayerRequester,
 				},
 			},
 			false,
 		},
 		{
-			&s3.DeleteObjectsInput{
-				RequestPayer: s3.RequestPayerRequester,
+			&types.DeleteObjectsInput{
+				RequestPayer: enums.RequestPayerRequester,
 			},
 			BatchDeleteObject{
-				Object: &s3.DeleteObjectInput{},
+				Object: &types.DeleteObjectInput{},
 			},
 			false,
 		},
@@ -135,25 +137,25 @@ func TestBatchDelete(t *testing.T) {
 		{ // 0
 			[]BatchDeleteObject{
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("1"),
 						Bucket: aws.String("bucket1"),
 					},
 				},
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("2"),
 						Bucket: aws.String("bucket2"),
 					},
 				},
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("3"),
 						Bucket: aws.String("bucket3"),
 					},
 				},
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("4"),
 						Bucket: aws.String("bucket4"),
 					},
@@ -165,25 +167,25 @@ func TestBatchDelete(t *testing.T) {
 		{ // 1
 			[]BatchDeleteObject{
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("1"),
 						Bucket: aws.String("bucket1"),
 					},
 				},
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("2"),
 						Bucket: aws.String("bucket1"),
 					},
 				},
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("3"),
 						Bucket: aws.String("bucket3"),
 					},
 				},
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("4"),
 						Bucket: aws.String("bucket3"),
 					},
@@ -195,25 +197,25 @@ func TestBatchDelete(t *testing.T) {
 		{ // 2
 			[]BatchDeleteObject{
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("1"),
 						Bucket: aws.String("bucket1"),
 					},
 				},
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("2"),
 						Bucket: aws.String("bucket1"),
 					},
 				},
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("3"),
 						Bucket: aws.String("bucket3"),
 					},
 				},
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("4"),
 						Bucket: aws.String("bucket3"),
 					},
@@ -225,25 +227,25 @@ func TestBatchDelete(t *testing.T) {
 		{ // 3
 			[]BatchDeleteObject{
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("1"),
 						Bucket: aws.String("bucket1"),
 					},
 				},
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("2"),
 						Bucket: aws.String("bucket1"),
 					},
 				},
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("3"),
 						Bucket: aws.String("bucket3"),
 					},
 				},
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("4"),
 						Bucket: aws.String("bucket3"),
 					},
@@ -255,25 +257,25 @@ func TestBatchDelete(t *testing.T) {
 		{ // 4
 			[]BatchDeleteObject{
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("1"),
 						Bucket: aws.String("bucket1"),
 					},
 				},
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("2"),
 						Bucket: aws.String("bucket1"),
 					},
 				},
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("3"),
 						Bucket: aws.String("bucket1"),
 					},
 				},
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("4"),
 						Bucket: aws.String("bucket3"),
 					},
@@ -312,12 +314,12 @@ func TestBatchDelete(t *testing.T) {
 type mockS3Client struct {
 	*s3.Client
 	index   int
-	objects []s3.ListObjectsOutput
+	objects []types.ListObjectsOutput
 }
 
-func (client *mockS3Client) ListObjectsRequest(input *s3.ListObjectsInput) s3.ListObjectsRequest {
+func (client *mockS3Client) ListObjectsRequest(input *types.ListObjectsInput) s3.ListObjectsRequest {
 	req := client.Client.ListObjectsRequest(input)
-	req.Copy = func(v *s3.ListObjectsInput) s3.ListObjectsRequest {
+	req.Copy = func(v *types.ListObjectsInput) s3.ListObjectsRequest {
 		r := client.Client.ListObjectsRequest(v)
 		r.Handlers.Send.PushBack(func(r *aws.Request) {
 			object := client.objects[client.index]
@@ -338,9 +340,9 @@ func TestBatchDeleteList(t *testing.T) {
 		count++
 	}))
 
-	objects := []s3.ListObjectsOutput{
+	objects := []types.ListObjectsOutput{
 		{
-			Contents: []s3.Object{
+			Contents: []types.Object{
 				{
 					Key: aws.String("1"),
 				},
@@ -349,7 +351,7 @@ func TestBatchDeleteList(t *testing.T) {
 			IsTruncated: aws.Bool(true),
 		},
 		{
-			Contents: []s3.Object{
+			Contents: []types.Object{
 				{
 					Key: aws.String("2"),
 				},
@@ -358,7 +360,7 @@ func TestBatchDeleteList(t *testing.T) {
 			IsTruncated: aws.Bool(true),
 		},
 		{
-			Contents: []s3.Object{
+			Contents: []types.Object{
 				{
 					Key: aws.String("3"),
 				},
@@ -374,7 +376,7 @@ func TestBatchDeleteList(t *testing.T) {
 		BatchSize: 1,
 	}
 
-	input := &s3.ListObjectsInput{
+	input := &types.ListObjectsInput{
 		Bucket: aws.String("bucket"),
 	}
 
@@ -414,16 +416,16 @@ func TestBatchDeleteList_EmptyListObjects(t *testing.T) {
 
 	svc := &mockS3Client{
 		Client: buildS3SvcClient(server.URL),
-		objects: []s3.ListObjectsOutput{
+		objects: []types.ListObjectsOutput{
 			// Simulate empty listing
-			{Contents: []s3.Object{}},
+			{Contents: []types.Object{}},
 		},
 	}
 	batcher := BatchDelete{
 		Client: svc,
 	}
 
-	input := &s3.ListObjectsInput{
+	input := &types.ListObjectsInput{
 		Bucket: aws.String("bucket"),
 	}
 
@@ -470,9 +472,9 @@ func TestBatchDownload(t *testing.T) {
 		},
 	}
 
-	received := []struct {
+	var received []struct {
 		bucket, key string
-	}{}
+	}
 
 	payload := []string{
 		"1",
@@ -492,28 +494,28 @@ func TestBatchDownload(t *testing.T) {
 
 	objects := []BatchDownloadObject{
 		{
-			Object: &s3.GetObjectInput{
+			Object: &types.GetObjectInput{
 				Key:    aws.String("1"),
 				Bucket: aws.String("bucket1"),
 			},
 			Writer: aws.NewWriteAtBuffer(make([]byte, 128)),
 		},
 		{
-			Object: &s3.GetObjectInput{
+			Object: &types.GetObjectInput{
 				Key:    aws.String("2"),
 				Bucket: aws.String("bucket2"),
 			},
 			Writer: aws.NewWriteAtBuffer(make([]byte, 128)),
 		},
 		{
-			Object: &s3.GetObjectInput{
+			Object: &types.GetObjectInput{
 				Key:    aws.String("3"),
 				Bucket: aws.String("bucket3"),
 			},
 			Writer: aws.NewWriteAtBuffer(make([]byte, 128)),
 		},
 		{
-			Object: &s3.GetObjectInput{
+			Object: &types.GetObjectInput{
 				Key:    aws.String("4"),
 				Bucket: aws.String("bucket4"),
 			},
@@ -582,9 +584,9 @@ func TestBatchUpload(t *testing.T) {
 		},
 	}
 
-	received := []struct {
+	var received []struct {
 		bucket, key, reqBody string
-	}{}
+	}
 
 	payload := []string{
 		"a",
@@ -670,10 +672,10 @@ func TestBatchUpload(t *testing.T) {
 
 type mockClient struct {
 	s3iface.ClientAPI
-	Put       func() (*s3.PutObjectOutput, error)
-	Get       func() (*s3.GetObjectOutput, error)
-	List      func() (*s3.ListObjectsOutput, error)
-	Deletes   func() (*s3.DeleteObjectsOutput, error)
+	Put       func() (*types.PutObjectOutput, error)
+	Get       func() (*types.GetObjectOutput, error)
+	List      func() (*types.ListObjectsOutput, error)
+	Deletes   func() (*types.DeleteObjectsOutput, error)
 	responses []response
 }
 
@@ -682,7 +684,7 @@ type response struct {
 	err error
 }
 
-func (client *mockClient) DeleteObjectsRequest(input *s3.DeleteObjectsInput) s3.DeleteObjectsRequest {
+func (client *mockClient) DeleteObjectsRequest(input *types.DeleteObjectsInput) s3.DeleteObjectsRequest {
 	if client.Deletes == nil {
 		return client.ClientAPI.DeleteObjectsRequest(input)
 	}
@@ -693,14 +695,14 @@ func (client *mockClient) DeleteObjectsRequest(input *s3.DeleteObjectsInput) s3.
 	return req
 }
 
-func (client *mockClient) PutObjectRequest(input *s3.PutObjectInput) s3.PutObjectRequest {
+func (client *mockClient) PutObjectRequest(input *types.PutObjectInput) s3.PutObjectRequest {
 	req := client.ClientAPI.PutObjectRequest(input)
 	req.Handlers.Clear()
 	req.Data, req.Error = client.Put()
 	return req
 }
 
-func (client *mockClient) ListObjectsRequest(input *s3.ListObjectsInput) s3.ListObjectsRequest {
+func (client *mockClient) ListObjectsRequest(input *types.ListObjectsInput) s3.ListObjectsRequest {
 	req := client.ClientAPI.ListObjectsRequest(input)
 	req.Handlers.Clear()
 	req.Data, req.Error = client.List()
@@ -714,34 +716,34 @@ func TestBatchError(t *testing.T) {
 	index := 0
 	responses := []response{
 		{
-			&s3.PutObjectOutput{},
+			&types.PutObjectOutput{},
 			errors.New("Foo"),
 		},
 		{
-			&s3.PutObjectOutput{},
+			&types.PutObjectOutput{},
 			nil,
 		},
 		{
-			&s3.PutObjectOutput{},
+			&types.PutObjectOutput{},
 			nil,
 		},
 		{
-			&s3.PutObjectOutput{},
+			&types.PutObjectOutput{},
 			errors.New("Bar"),
 		},
 	}
 
 	svc := &mockClient{
 		ClientAPI: buildS3SvcClient(server.URL),
-		Put: func() (*s3.PutObjectOutput, error) {
+		Put: func() (*types.PutObjectOutput, error) {
 			resp := responses[index]
 			index++
-			return resp.out.(*s3.PutObjectOutput), resp.err
+			return resp.out.(*types.PutObjectOutput), resp.err
 		},
-		List: func() (*s3.ListObjectsOutput, error) {
+		List: func() (*types.ListObjectsOutput, error) {
 			resp := responses[index]
 			index++
-			return resp.out.(*s3.ListObjectsOutput), resp.err
+			return resp.out.(*types.ListObjectsOutput), resp.err
 		},
 	}
 	uploader := NewUploaderWithClient(svc)
@@ -837,7 +839,7 @@ func (iter *testAfterDeleteIter) Err() error {
 
 func (iter *testAfterDeleteIter) DeleteObject() BatchDeleteObject {
 	return BatchDeleteObject{
-		Object: &s3.DeleteObjectInput{
+		Object: &types.DeleteObjectInput{
 			Bucket: aws.String("foo"),
 			Key:    aws.String("foo"),
 		},
@@ -866,7 +868,7 @@ func (iter *testAfterDownloadIter) Err() error {
 
 func (iter *testAfterDownloadIter) DownloadObject() BatchDownloadObject {
 	return BatchDownloadObject{
-		Object: &s3.GetObjectInput{
+		Object: &types.GetObjectInput{
 			Bucket: aws.String("foo"),
 			Key:    aws.String("foo"),
 		},
@@ -914,35 +916,35 @@ func TestAfter(t *testing.T) {
 	index := 0
 	responses := []response{
 		{
-			&s3.PutObjectOutput{},
+			&types.PutObjectOutput{},
 			nil,
 		},
 		{
-			&s3.GetObjectOutput{},
+			&types.GetObjectOutput{},
 			nil,
 		},
 		{
-			&s3.DeleteObjectOutput{},
+			&types.DeleteObjectOutput{},
 			nil,
 		},
 	}
 
 	svc := &mockClient{
 		ClientAPI: buildS3SvcClient(server.URL),
-		Put: func() (*s3.PutObjectOutput, error) {
+		Put: func() (*types.PutObjectOutput, error) {
 			resp := responses[index]
 			index++
-			return resp.out.(*s3.PutObjectOutput), resp.err
+			return resp.out.(*types.PutObjectOutput), resp.err
 		},
-		Get: func() (*s3.GetObjectOutput, error) {
+		Get: func() (*types.GetObjectOutput, error) {
 			resp := responses[index]
 			index++
-			return resp.out.(*s3.GetObjectOutput), resp.err
+			return resp.out.(*types.GetObjectOutput), resp.err
 		},
-		List: func() (*s3.ListObjectsOutput, error) {
+		List: func() (*types.ListObjectsOutput, error) {
 			resp := responses[index]
 			index++
-			return resp.out.(*s3.ListObjectsOutput), resp.err
+			return resp.out.(*types.ListObjectsOutput), resp.err
 		},
 	}
 	uploader := NewUploaderWithClient(svc)
@@ -981,7 +983,7 @@ func TestAfter(t *testing.T) {
 func TestBatchDeleteError(t *testing.T) {
 	cases := []struct {
 		objects            []BatchDeleteObject
-		output             s3.DeleteObjectsOutput
+		output             types.DeleteObjectsOutput
 		size               int
 		expectedErrCode    string
 		expectedErrMessage string
@@ -989,14 +991,14 @@ func TestBatchDeleteError(t *testing.T) {
 		{
 			[]BatchDeleteObject{
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("1"),
 						Bucket: aws.String("bucket1"),
 					},
 				},
 			},
-			s3.DeleteObjectsOutput{
-				Errors: []s3.Error{
+			types.DeleteObjectsOutput{
+				Errors: []types.Error{
 					{
 						Code:    aws.String("foo code"),
 						Message: aws.String("foo error"),
@@ -1010,14 +1012,14 @@ func TestBatchDeleteError(t *testing.T) {
 		{
 			[]BatchDeleteObject{
 				{
-					Object: &s3.DeleteObjectInput{
+					Object: &types.DeleteObjectInput{
 						Key:    aws.String("1"),
 						Bucket: aws.String("bucket1"),
 					},
 				},
 			},
-			s3.DeleteObjectsOutput{
-				Errors: []s3.Error{
+			types.DeleteObjectsOutput{
+				Errors: []types.Error{
 					{},
 				},
 			},
@@ -1034,7 +1036,7 @@ func TestBatchDeleteError(t *testing.T) {
 	index := 0
 	svc := &mockClient{
 		ClientAPI: buildS3SvcClient(server.URL),
-		Deletes: func() (*s3.DeleteObjectsOutput, error) {
+		Deletes: func() (*types.DeleteObjectsOutput, error) {
 			resp := cases[index].output
 			index++
 			return &resp, nil

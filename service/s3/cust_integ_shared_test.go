@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration/s3integ"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 const integBucketPrefix = "aws-sdk-go-v2-integration"
@@ -57,7 +58,7 @@ func putTestFile(ctx context.Context, t *testing.T, filename, key string) {
 
 func putTestContent(ctx context.Context, t *testing.T, reader io.ReadSeeker, key string) {
 	fmt.Println(bucketName, key, svc)
-	req := svc.PutObjectRequest(&s3.PutObjectInput{
+	req := svc.PutObjectRequest(&types.PutObjectInput{
 		Bucket: bucketName,
 		Key:    aws.String(key),
 		Body:   reader,

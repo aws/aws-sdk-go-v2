@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 type testBinarySetStruct struct {
@@ -65,22 +65,22 @@ type testNamedPointer *int
 var testDate, _ = time.Parse(time.RFC3339, "2016-05-03T17:06:26.209072Z")
 
 var sharedTestCases = []struct {
-	in               *dynamodb.AttributeValue
+	in               *types.AttributeValue
 	actual, expected interface{}
 	err              error
 }{
 	{ // Binary slice
-		in:       &dynamodb.AttributeValue{B: []byte{48, 49}},
+		in:       &types.AttributeValue{B: []byte{48, 49}},
 		actual:   &[]byte{},
 		expected: []byte{48, 49},
 	},
 	{ // Binary slice
-		in:       &dynamodb.AttributeValue{B: []byte{48, 49}},
+		in:       &types.AttributeValue{B: []byte{48, 49}},
 		actual:   &[]byte{},
 		expected: []byte{48, 49},
 	},
 	{ // Binary slice oversized
-		in: &dynamodb.AttributeValue{B: []byte{48, 49}},
+		in: &types.AttributeValue{B: []byte{48, 49}},
 		actual: func() *[]byte {
 			v := make([]byte, 0, 10)
 			return &v
@@ -88,7 +88,7 @@ var sharedTestCases = []struct {
 		expected: []byte{48, 49},
 	},
 	{ // Binary slice pointer
-		in: &dynamodb.AttributeValue{B: []byte{48, 49}},
+		in: &types.AttributeValue{B: []byte{48, 49}},
 		actual: func() **[]byte {
 			v := make([]byte, 0, 10)
 			v2 := &v
@@ -97,33 +97,33 @@ var sharedTestCases = []struct {
 		expected: []byte{48, 49},
 	},
 	{ // Bool
-		in:       &dynamodb.AttributeValue{BOOL: aws.Bool(true)},
+		in:       &types.AttributeValue{BOOL: aws.Bool(true)},
 		actual:   new(bool),
 		expected: true,
 	},
 	{ // List
-		in: &dynamodb.AttributeValue{L: []dynamodb.AttributeValue{
+		in: &types.AttributeValue{L: []types.AttributeValue{
 			{N: aws.String("123")},
 		}},
 		actual:   &[]int{},
 		expected: []int{123},
 	},
 	{ // Map, interface
-		in: &dynamodb.AttributeValue{M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{M: map[string]types.AttributeValue{
 			"abc": {N: aws.String("123")},
 		}},
 		actual:   &map[string]int{},
 		expected: map[string]int{"abc": 123},
 	},
 	{ // Map, struct
-		in: &dynamodb.AttributeValue{M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{M: map[string]types.AttributeValue{
 			"Abc": {N: aws.String("123")},
 		}},
 		actual:   &struct{ Abc int }{},
 		expected: struct{ Abc int }{Abc: 123},
 	},
 	{ // Map, struct
-		in: &dynamodb.AttributeValue{M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{M: map[string]types.AttributeValue{
 			"abc": {N: aws.String("123")},
 		}},
 		actual: &struct {
@@ -134,33 +134,33 @@ var sharedTestCases = []struct {
 		}{Abc: 123},
 	},
 	{ // Number, int
-		in:       &dynamodb.AttributeValue{N: aws.String("123")},
+		in:       &types.AttributeValue{N: aws.String("123")},
 		actual:   new(int),
 		expected: 123,
 	},
 	{ // Number, Float
-		in:       &dynamodb.AttributeValue{N: aws.String("123.1")},
+		in:       &types.AttributeValue{N: aws.String("123.1")},
 		actual:   new(float64),
 		expected: float64(123.1),
 	},
 	{ // Null
-		in:       &dynamodb.AttributeValue{NULL: aws.Bool(true)},
+		in:       &types.AttributeValue{NULL: aws.Bool(true)},
 		actual:   new(string),
 		expected: "",
 	},
 	{ // Null ptr
-		in:       &dynamodb.AttributeValue{NULL: aws.Bool(true)},
+		in:       &types.AttributeValue{NULL: aws.Bool(true)},
 		actual:   new(*string),
 		expected: nil,
 	},
 	{ // String
-		in:       &dynamodb.AttributeValue{S: aws.String("abc")},
+		in:       &types.AttributeValue{S: aws.String("abc")},
 		actual:   new(string),
 		expected: "abc",
 	},
 	{ // Binary Set
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"Binarys": {BS: [][]byte{{48, 49}, {50, 51}}},
 			},
 		},
@@ -168,8 +168,8 @@ var sharedTestCases = []struct {
 		expected: testBinarySetStruct{Binarys: [][]byte{{48, 49}, {50, 51}}},
 	},
 	{ // Number Set
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"Numbers": {NS: []string{"123", "321"}},
 			},
 		},
@@ -177,8 +177,8 @@ var sharedTestCases = []struct {
 		expected: testNumberSetStruct{Numbers: []int{123, 321}},
 	},
 	{ // String Set
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"Strings": {SS: []string{"abc", "efg"}},
 			},
 		},
@@ -186,8 +186,8 @@ var sharedTestCases = []struct {
 		expected: testStringSetStruct{Strings: []string{"abc", "efg"}},
 	},
 	{ // Int value as string
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"Value": {S: aws.String("123")},
 			},
 		},
@@ -195,8 +195,8 @@ var sharedTestCases = []struct {
 		expected: testIntAsStringStruct{Value: 123},
 	},
 	{ // Omitempty
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"Value3": {N: aws.String("0")},
 			},
 		},
@@ -204,25 +204,25 @@ var sharedTestCases = []struct {
 		expected: testOmitEmptyStruct{Value: "", Value2: nil, Value3: 0},
 	},
 	{ // aliased type
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"Value":  {S: aws.String("123")},
 				"Value2": {N: aws.String("123")},
-				"Value3": {M: map[string]dynamodb.AttributeValue{
+				"Value3": {M: map[string]types.AttributeValue{
 					"Key": {N: aws.String("321")},
 				}},
-				"Value4": {L: []dynamodb.AttributeValue{
+				"Value4": {L: []types.AttributeValue{
 					{S: aws.String("1")},
 					{S: aws.String("2")},
 					{S: aws.String("3")},
 				}},
 				"Value5": {B: []byte{0, 1, 2}},
-				"Value6": {L: []dynamodb.AttributeValue{
+				"Value6": {L: []types.AttributeValue{
 					{N: aws.String("1")},
 					{N: aws.String("2")},
 					{N: aws.String("3")},
 				}},
-				"Value7": {L: []dynamodb.AttributeValue{
+				"Value7": {L: []types.AttributeValue{
 					{S: aws.String("1")},
 					{S: aws.String("2")},
 					{S: aws.String("3")},
@@ -240,18 +240,18 @@ var sharedTestCases = []struct {
 					"2",
 					"3",
 				}},
-				"Value11": {L: []dynamodb.AttributeValue{
+				"Value11": {L: []types.AttributeValue{
 					{N: aws.String("1")},
 					{N: aws.String("2")},
 					{N: aws.String("3")},
 				}},
-				"Value12": {L: []dynamodb.AttributeValue{
+				"Value12": {L: []types.AttributeValue{
 					{S: aws.String("1")},
 					{S: aws.String("2")},
 					{S: aws.String("3")},
 				}},
 				"Value13": {BOOL: aws.Bool(true)},
-				"Value14": {L: []dynamodb.AttributeValue{
+				"Value14": {L: []types.AttributeValue{
 					{BOOL: aws.Bool(true)},
 					{BOOL: aws.Bool(false)},
 					{BOOL: aws.Bool(true)},
@@ -281,17 +281,17 @@ var sharedTestCases = []struct {
 		},
 	},
 	{
-		in:       &dynamodb.AttributeValue{N: aws.String("123")},
+		in:       &types.AttributeValue{N: aws.String("123")},
 		actual:   new(testNamedPointer),
 		expected: testNamedPointer(aws.Int(123)),
 	},
 	{ // time.Time
-		in:       &dynamodb.AttributeValue{S: aws.String("2016-05-03T17:06:26.209072Z")},
+		in:       &types.AttributeValue{S: aws.String("2016-05-03T17:06:26.209072Z")},
 		actual:   new(time.Time),
 		expected: testDate,
 	},
 	{ // time.Time List
-		in: &dynamodb.AttributeValue{L: []dynamodb.AttributeValue{
+		in: &types.AttributeValue{L: []types.AttributeValue{
 			{S: aws.String("2016-05-03T17:06:26.209072Z")},
 			{S: aws.String("2016-05-04T17:06:26.209072Z")},
 		}},
@@ -299,7 +299,7 @@ var sharedTestCases = []struct {
 		expected: []time.Time{testDate, testDate.Add(24 * time.Hour)},
 	},
 	{ // time.Time struct
-		in: &dynamodb.AttributeValue{M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{M: map[string]types.AttributeValue{
 			"abc": {S: aws.String("2016-05-03T17:06:26.209072Z")},
 		}},
 		actual: &struct {
@@ -310,7 +310,7 @@ var sharedTestCases = []struct {
 		}{Abc: testDate},
 	},
 	{ // time.Time ptr struct
-		in: &dynamodb.AttributeValue{M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{M: map[string]types.AttributeValue{
 			"abc": {S: aws.String("2016-05-03T17:06:26.209072Z")},
 		}},
 		actual: &struct {
@@ -323,12 +323,12 @@ var sharedTestCases = []struct {
 }
 
 var sharedListTestCases = []struct {
-	in               []dynamodb.AttributeValue
+	in               []types.AttributeValue
 	actual, expected interface{}
 	err              error
 }{
 	{
-		in: []dynamodb.AttributeValue{
+		in: []types.AttributeValue{
 			{B: []byte{48, 49}},
 			{BOOL: aws.Bool(true)},
 			{N: aws.String("123")},
@@ -341,7 +341,7 @@ var sharedListTestCases = []struct {
 		expected: []interface{}{[]byte{48, 49}, true, 123., "123"},
 	},
 	{
-		in: []dynamodb.AttributeValue{
+		in: []types.AttributeValue{
 			{N: aws.String("1")},
 			{N: aws.String("2")},
 			{N: aws.String("3")},
@@ -352,12 +352,12 @@ var sharedListTestCases = []struct {
 }
 
 var sharedMapTestCases = []struct {
-	in               map[string]dynamodb.AttributeValue
+	in               map[string]types.AttributeValue
 	actual, expected interface{}
 	err              error
 }{
 	{
-		in: map[string]dynamodb.AttributeValue{
+		in: map[string]types.AttributeValue{
 			"B":    {B: []byte{48, 49}},
 			"BOOL": {BOOL: aws.Bool(true)},
 			"N":    {N: aws.String("123")},

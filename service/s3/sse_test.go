@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 func TestSSECustomerKeyOverHTTPError(t *testing.T) {
@@ -19,7 +20,7 @@ func TestSSECustomerKeyOverHTTPError(t *testing.T) {
 	cfg.EndpointResolver = resolver
 
 	s := s3.New(cfg)
-	req := s.CopyObjectRequest(&s3.CopyObjectInput{
+	req := s.CopyObjectRequest(&types.CopyObjectInput{
 		Bucket:         aws.String("bucket"),
 		CopySource:     aws.String("bucket/source"),
 		Key:            aws.String("dest"),
@@ -28,10 +29,10 @@ func TestSSECustomerKeyOverHTTPError(t *testing.T) {
 	err := req.Build()
 
 	if err == nil {
-		t.Error("expected an error")
+		t.Fatal("expected an error")
 	}
 	if e, a := "ConfigError", err.(awserr.Error).Code(); e != a {
-		t.Errorf("expected %s, but received %s", e, a)
+		t.Fatalf("expected %s, but received %s", e, a)
 	}
 	if !strings.Contains(err.(awserr.Error).Message(), "cannot send SSE keys over HTTP") {
 		t.Errorf("expected error to contain 'cannot send SSE keys over HTTP', but received %s", err.(awserr.Error).Message())
@@ -46,7 +47,7 @@ func TestCopySourceSSECustomerKeyOverHTTPError(t *testing.T) {
 	cfg.EndpointResolver = resolver
 
 	s := s3.New(cfg)
-	req := s.CopyObjectRequest(&s3.CopyObjectInput{
+	req := s.CopyObjectRequest(&types.CopyObjectInput{
 		Bucket:                   aws.String("bucket"),
 		CopySource:               aws.String("bucket/source"),
 		Key:                      aws.String("dest"),
@@ -67,7 +68,7 @@ func TestCopySourceSSECustomerKeyOverHTTPError(t *testing.T) {
 
 func TestComputeSSEKeys(t *testing.T) {
 	s := s3.New(unit.Config())
-	req := s.CopyObjectRequest(&s3.CopyObjectInput{
+	req := s.CopyObjectRequest(&types.CopyObjectInput{
 		Bucket:                   aws.String("bucket"),
 		CopySource:               aws.String("bucket/source"),
 		Key:                      aws.String("dest"),
@@ -95,7 +96,7 @@ func TestComputeSSEKeys(t *testing.T) {
 
 func TestComputeSSEKeysShortcircuit(t *testing.T) {
 	s := s3.New(unit.Config())
-	req := s.CopyObjectRequest(&s3.CopyObjectInput{
+	req := s.CopyObjectRequest(&types.CopyObjectInput{
 		Bucket:                      aws.String("bucket"),
 		CopySource:                  aws.String("bucket/source"),
 		Key:                         aws.String("dest"),

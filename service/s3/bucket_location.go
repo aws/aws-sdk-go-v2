@@ -7,6 +7,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/s3/enums"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 var reBucketLocation = regexp.MustCompile(`>([^<>]+)<\/Location`)
@@ -19,7 +21,7 @@ var reBucketLocation = regexp.MustCompile(`>([^<>]+)<\/Location`)
 //
 // See http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlocation.html
 // for more information on the values that can be returned.
-func NormalizeBucketLocation(loc BucketLocationConstraint) BucketLocationConstraint {
+func NormalizeBucketLocation(loc enums.BucketLocationConstraint) enums.BucketLocationConstraint {
 	switch loc {
 	case "":
 		loc = "us-east-1"
@@ -50,7 +52,7 @@ var NormalizeBucketLocationHandler = aws.NamedHandler{
 			return
 		}
 
-		out := req.Data.(*GetBucketLocationOutput)
+		out := req.Data.(*types.GetBucketLocationOutput)
 		loc := NormalizeBucketLocation(out.LocationConstraint)
 		out.LocationConstraint = loc
 	},
@@ -65,7 +67,7 @@ var NormalizeBucketLocationHandler = aws.NamedHandler{
 // for more information on the values that can be returned.
 //
 //     result, err := svc.GetBucketLocationWithContext(ctx,
-//         &s3.GetBucketLocationInput{
+//         &types.GetBucketLocationInput{
 //             Bucket: aws.String(bucket),
 //         },
 //         s3.WithNormalizeBucketLocation,
@@ -75,7 +77,7 @@ func WithNormalizeBucketLocation(r *aws.Request) {
 }
 
 func buildGetBucketLocation(r *aws.Request) {
-	out := r.Data.(*GetBucketLocationOutput)
+	out := r.Data.(*types.GetBucketLocationOutput)
 	b, err := ioutil.ReadAll(r.HTTPResponse.Body)
 	if err != nil {
 		r.Error = awserr.New("SerializationError", "failed reading response body", err)
@@ -84,19 +86,19 @@ func buildGetBucketLocation(r *aws.Request) {
 
 	match := reBucketLocation.FindSubmatch(b)
 	if len(match) > 1 {
-		loc := BucketLocationConstraint(match[1])
+		loc := enums.BucketLocationConstraint(match[1])
 		out.LocationConstraint = loc
 	}
 }
 
 func populateLocationConstraint(r *aws.Request) {
 	if r.ParamsFilled() && r.Config.Region != "us-east-1" {
-		in := r.Params.(*CreateBucketInput)
+		in := r.Params.(*types.CreateBucketInput)
 		if in.CreateBucketConfiguration == nil {
 			r.Params = awsutil.CopyOf(r.Params)
-			in = r.Params.(*CreateBucketInput)
-			in.CreateBucketConfiguration = &CreateBucketConfiguration{
-				LocationConstraint: BucketLocationConstraint(r.Config.Region),
+			in = r.Params.(*types.CreateBucketInput)
+			in.CreateBucketConfiguration = &types.CreateBucketConfiguration{
+				LocationConstraint: enums.BucketLocationConstraint(r.Config.Region),
 			}
 		}
 	}

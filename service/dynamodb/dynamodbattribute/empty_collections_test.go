@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 type testEmptyCollectionsNumericalScalars struct {
@@ -105,13 +105,13 @@ type testEmptyCollectionStructOmitted struct {
 }
 
 var sharedEmptyCollectionsTestCases = map[string]struct {
-	in               *dynamodb.AttributeValue
+	in               *types.AttributeValue
 	actual, expected interface{}
 	err              error
 }{
 	"scalars with zero value": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"String":  {NULL: aws.Bool(true)},
 				"Uint8":   {N: aws.String("0")},
 				"Uint16":  {N: aws.String("0")},
@@ -129,8 +129,8 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		expected: testEmptyCollectionsNumericalScalars{},
 	},
 	"scalars with non-zero values": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"String":  {S: aws.String("test string")},
 				"Uint8":   {N: aws.String("1")},
 				"Uint16":  {N: aws.String("2")},
@@ -160,13 +160,13 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"omittable scalars with zero value": {
-		in:       &dynamodb.AttributeValue{M: map[string]dynamodb.AttributeValue{}},
+		in:       &types.AttributeValue{M: map[string]types.AttributeValue{}},
 		actual:   &testEmptyCollectionsOmittedNumericalScalars{},
 		expected: testEmptyCollectionsOmittedNumericalScalars{},
 	},
 	"omittable scalars with non-zero value": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"String":  {S: aws.String("test string")},
 				"Uint8":   {N: aws.String("1")},
 				"Uint16":  {N: aws.String("2")},
@@ -196,8 +196,8 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"nil pointer scalars": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"PtrString":  {NULL: aws.Bool(true)},
 				"PtrUint8":   {NULL: aws.Bool(true)},
 				"PtrUint16":  {NULL: aws.Bool(true)},
@@ -215,8 +215,8 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		expected: testEmptyCollectionsPtrScalars{},
 	},
 	"non-nil pointer to scalars with zero value": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"PtrString":  {NULL: aws.Bool(true)},
 				"PtrUint8":   {N: aws.String("0")},
 				"PtrUint16":  {N: aws.String("0")},
@@ -245,8 +245,8 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"pointer scalars non-nil non-zero": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"PtrString":  {S: aws.String("test string")},
 				"PtrUint8":   {N: aws.String("1")},
 				"PtrUint16":  {N: aws.String("2")},
@@ -276,15 +276,15 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"omittable nil pointer scalars": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{},
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{},
 		},
 		actual:   &testEmptyCollectionsOmittedPtrNumericalScalars{},
 		expected: testEmptyCollectionsOmittedPtrNumericalScalars{},
 	},
 	"omittable non-nil pointer to scalars with zero value": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"PtrUint8":   {N: aws.String("0")},
 				"PtrUint16":  {N: aws.String("0")},
 				"PtrUint32":  {N: aws.String("0")},
@@ -312,8 +312,8 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"omittable non-nil pointer to non-zero scalar": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"PtrUint8":   {N: aws.String("1")},
 				"PtrUint16":  {N: aws.String("2")},
 				"PtrUint32":  {N: aws.String("3")},
@@ -341,8 +341,8 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"maps slices nil values": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"Map":       {NULL: aws.Bool(true)},
 				"Slice":     {NULL: aws.Bool(true)},
 				"ByteSlice": {NULL: aws.Bool(true)},
@@ -357,10 +357,10 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		expected: testEmptyCollectionTypes{},
 	},
 	"maps slices zero values": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
-				"Map":       {M: map[string]dynamodb.AttributeValue{}},
-				"Slice":     {L: []dynamodb.AttributeValue{}},
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
+				"Map":       {M: map[string]types.AttributeValue{}},
+				"Slice":     {L: []types.AttributeValue{}},
 				"ByteSlice": {B: []byte{}},
 				"ByteArray": {B: make([]byte, 4)},
 				"ZeroArray": {B: make([]byte, 0)},
@@ -382,14 +382,14 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"maps slices non-zero values": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"Map": {
-					M: map[string]dynamodb.AttributeValue{
+					M: map[string]types.AttributeValue{
 						"key": {S: aws.String("value")},
 					},
 				},
-				"Slice":     {L: []dynamodb.AttributeValue{{S: aws.String("test")}, {S: aws.String("slice")}}},
+				"Slice":     {L: []types.AttributeValue{{S: aws.String("test")}, {S: aws.String("slice")}}},
 				"ByteSlice": {B: []byte{0, 1}},
 				"ByteArray": {B: []byte{0, 1, 2, 3}},
 				"ZeroArray": {B: make([]byte, 0)},
@@ -411,8 +411,8 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"omittable maps slices nil values": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"ByteArray": {B: make([]byte, 4)},
 			},
 		},
@@ -420,10 +420,10 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		expected: testEmptyCollectionTypesOmitted{},
 	},
 	"omittable maps slices zero values": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
-				"Map":       {M: map[string]dynamodb.AttributeValue{}},
-				"Slice":     {L: []dynamodb.AttributeValue{}},
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
+				"Map":       {M: map[string]types.AttributeValue{}},
+				"Slice":     {L: []types.AttributeValue{}},
 				"ByteSlice": {B: []byte{}},
 				"ByteArray": {B: make([]byte, 4)},
 				"BinarySet": {BS: [][]byte{}},
@@ -443,14 +443,14 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"omittable maps slices non-zero values": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"Map": {
-					M: map[string]dynamodb.AttributeValue{
+					M: map[string]types.AttributeValue{
 						"key": {S: aws.String("value")},
 					},
 				},
-				"Slice":     {L: []dynamodb.AttributeValue{{S: aws.String("test")}, {S: aws.String("slice")}}},
+				"Slice":     {L: []types.AttributeValue{{S: aws.String("test")}, {S: aws.String("slice")}}},
 				"ByteSlice": {B: []byte{0, 1}},
 				"ByteArray": {B: []byte{0, 1, 2, 3}},
 				"BinarySet": {BS: [][]byte{{0, 1}, {2, 3}}},
@@ -471,10 +471,10 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"structs with members zero": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"Struct": {
-					M: map[string]dynamodb.AttributeValue{
+					M: map[string]types.AttributeValue{
 						"Int": {N: aws.String("0")},
 					},
 				},
@@ -491,15 +491,15 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		}{},
 	},
 	"structs with members non-zero value": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"Struct": {
-					M: map[string]dynamodb.AttributeValue{
+					M: map[string]types.AttributeValue{
 						"Int": {N: aws.String("1")},
 					},
 				},
 				"PtrStruct": {
-					M: map[string]dynamodb.AttributeValue{
+					M: map[string]types.AttributeValue{
 						"Int": {N: aws.String("1")},
 					},
 				},
@@ -518,9 +518,9 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"struct with omittable members zero value": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
-				"Struct":    {M: map[string]dynamodb.AttributeValue{}},
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
+				"Struct":    {M: map[string]types.AttributeValue{}},
 				"PtrStruct": {NULL: aws.Bool(true)},
 			},
 		},
@@ -534,9 +534,9 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		}{},
 	},
 	"omittable struct with omittable members zero value": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
-				"Struct": {M: map[string]dynamodb.AttributeValue{}},
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
+				"Struct": {M: map[string]types.AttributeValue{}},
 			},
 		},
 		actual: &struct {
@@ -549,16 +549,16 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		}{},
 	},
 	"omittable struct with omittable members non-zero value": {
-		in: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		in: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"Struct": {
-					M: map[string]dynamodb.AttributeValue{
-						"Slice": {L: []dynamodb.AttributeValue{{S: aws.String("test")}}},
+					M: map[string]types.AttributeValue{
+						"Slice": {L: []types.AttributeValue{{S: aws.String("test")}}},
 					},
 				},
 				"InitPtrStruct": {
-					M: map[string]dynamodb.AttributeValue{
-						"Slice": {L: []dynamodb.AttributeValue{{S: aws.String("test")}}},
+					M: map[string]types.AttributeValue{
+						"Slice": {L: []types.AttributeValue{{S: aws.String("test")}}},
 					},
 				},
 			},
@@ -594,8 +594,8 @@ func TestEmptyCollectionsSpecialCases(t *testing.T) {
 		OmittedPtrString *string `dynamodbav:",omitempty"`
 	}
 
-	expectedEncode := &dynamodb.AttributeValue{
-		M: map[string]dynamodb.AttributeValue{
+	expectedEncode := &types.AttributeValue{
+		M: map[string]types.AttributeValue{
 			"PtrString": {NULL: aws.Bool(true)},
 		},
 	}
@@ -613,7 +613,7 @@ func TestEmptyCollectionsSpecialCases(t *testing.T) {
 	}
 
 	var actualDecode SpecialCases
-	err = Unmarshal(&dynamodb.AttributeValue{}, &actualDecode)
+	err = Unmarshal(&types.AttributeValue{}, &actualDecode)
 	if err != nil {
 		t.Fatalf("expected no err got %v", err)
 	}

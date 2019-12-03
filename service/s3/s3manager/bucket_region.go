@@ -5,7 +5,9 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/enums"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 // GetBucketRegion will attempt to get the region for a bucket using the
@@ -49,7 +51,7 @@ const bucketRegionHeader = "X-Amz-Bucket-Region"
 //
 // See GetBucketRegion for more information.
 func GetBucketRegionWithClient(ctx context.Context, svc s3iface.ClientAPI, bucket string, opts ...aws.Option) (string, error) {
-	req := svc.HeadBucketRequest(&s3.HeadBucketInput{
+	req := svc.HeadBucketRequest(&types.HeadBucketInput{
 		Bucket: aws.String(bucket),
 	})
 
@@ -70,7 +72,7 @@ func GetBucketRegionWithClient(ctx context.Context, svc s3iface.ClientAPI, bucke
 		return "", err
 	}
 
-	bucketRegion = string(s3.NormalizeBucketLocation(s3.BucketLocationConstraint(bucketRegion)))
+	bucketRegion = string(s3.NormalizeBucketLocation(enums.BucketLocationConstraint(bucketRegion)))
 
 	return bucketRegion, nil
 }

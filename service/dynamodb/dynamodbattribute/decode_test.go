@@ -1,5 +1,7 @@
 package dynamodbattribute
 
+// code generation? No
+
 import (
 	"fmt"
 	"reflect"
@@ -9,7 +11,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 func TestUnmarshalErrorTypes(t *testing.T) {
@@ -28,7 +30,7 @@ func TestUnmarshalShared(t *testing.T) {
 
 func TestUnmarshal(t *testing.T) {
 	cases := []struct {
-		in               *dynamodb.AttributeValue
+		in               *types.AttributeValue
 		actual, expected interface{}
 		err              error
 	}{
@@ -36,35 +38,35 @@ func TestUnmarshal(t *testing.T) {
 		// Sets
 		//------------
 		{
-			in: &dynamodb.AttributeValue{BS: [][]byte{
+			in: &types.AttributeValue{BS: [][]byte{
 				{48, 49}, {50, 51},
 			}},
 			actual:   &[][]byte{},
 			expected: [][]byte{{48, 49}, {50, 51}},
 		},
 		{
-			in: &dynamodb.AttributeValue{NS: []string{
+			in: &types.AttributeValue{NS: []string{
 				"123", "321",
 			}},
 			actual:   &[]int{},
 			expected: []int{123, 321},
 		},
 		{
-			in: &dynamodb.AttributeValue{NS: []string{
+			in: &types.AttributeValue{NS: []string{
 				"123", "321",
 			}},
 			actual:   &[]interface{}{},
 			expected: []interface{}{123., 321.},
 		},
 		{
-			in: &dynamodb.AttributeValue{SS: []string{
+			in: &types.AttributeValue{SS: []string{
 				"abc", "123",
 			}},
 			actual:   &[]string{},
 			expected: &[]string{"abc", "123"},
 		},
 		{
-			in: &dynamodb.AttributeValue{SS: []string{
+			in: &types.AttributeValue{SS: []string{
 				"abc", "123",
 			}},
 			actual:   &[]*string{},
@@ -74,7 +76,7 @@ func TestUnmarshal(t *testing.T) {
 		// Interfaces
 		//------------
 		{
-			in: &dynamodb.AttributeValue{B: []byte{48, 49}},
+			in: &types.AttributeValue{B: []byte{48, 49}},
 			actual: func() interface{} {
 				var v interface{}
 				return &v
@@ -82,7 +84,7 @@ func TestUnmarshal(t *testing.T) {
 			expected: []byte{48, 49},
 		},
 		{
-			in: &dynamodb.AttributeValue{BS: [][]byte{
+			in: &types.AttributeValue{BS: [][]byte{
 				{48, 49}, {50, 51},
 			}},
 			actual: func() interface{} {
@@ -92,7 +94,7 @@ func TestUnmarshal(t *testing.T) {
 			expected: [][]byte{{48, 49}, {50, 51}},
 		},
 		{
-			in: &dynamodb.AttributeValue{BOOL: aws.Bool(true)},
+			in: &types.AttributeValue{BOOL: aws.Bool(true)},
 			actual: func() interface{} {
 				var v interface{}
 				return &v
@@ -100,7 +102,7 @@ func TestUnmarshal(t *testing.T) {
 			expected: bool(true),
 		},
 		{
-			in: &dynamodb.AttributeValue{L: []dynamodb.AttributeValue{
+			in: &types.AttributeValue{L: []types.AttributeValue{
 				{S: aws.String("abc")}, {S: aws.String("123")},
 			}},
 			actual: func() interface{} {
@@ -110,7 +112,7 @@ func TestUnmarshal(t *testing.T) {
 			expected: []interface{}{"abc", "123"},
 		},
 		{
-			in: &dynamodb.AttributeValue{M: map[string]dynamodb.AttributeValue{
+			in: &types.AttributeValue{M: map[string]types.AttributeValue{
 				"123": {S: aws.String("abc")},
 				"abc": {S: aws.String("123")},
 			}},
@@ -121,7 +123,7 @@ func TestUnmarshal(t *testing.T) {
 			expected: map[string]interface{}{"123": "abc", "abc": "123"},
 		},
 		{
-			in: &dynamodb.AttributeValue{N: aws.String("123")},
+			in: &types.AttributeValue{N: aws.String("123")},
 			actual: func() interface{} {
 				var v interface{}
 				return &v
@@ -129,7 +131,7 @@ func TestUnmarshal(t *testing.T) {
 			expected: float64(123),
 		},
 		{
-			in: &dynamodb.AttributeValue{NS: []string{
+			in: &types.AttributeValue{NS: []string{
 				"123", "321",
 			}},
 			actual: func() interface{} {
@@ -139,7 +141,7 @@ func TestUnmarshal(t *testing.T) {
 			expected: []float64{123., 321.},
 		},
 		{
-			in: &dynamodb.AttributeValue{S: aws.String("123")},
+			in: &types.AttributeValue{S: aws.String("123")},
 			actual: func() interface{} {
 				var v interface{}
 				return &v
@@ -147,7 +149,7 @@ func TestUnmarshal(t *testing.T) {
 			expected: "123",
 		},
 		{
-			in: &dynamodb.AttributeValue{SS: []string{
+			in: &types.AttributeValue{SS: []string{
 				"123", "321",
 			}},
 			actual: func() interface{} {
@@ -157,7 +159,7 @@ func TestUnmarshal(t *testing.T) {
 			expected: []string{"123", "321"},
 		},
 		{
-			in: &dynamodb.AttributeValue{M: map[string]dynamodb.AttributeValue{
+			in: &types.AttributeValue{M: map[string]types.AttributeValue{
 				"abc": {S: aws.String("123")},
 				"Cba": {S: aws.String("321")},
 			}},
@@ -165,7 +167,7 @@ func TestUnmarshal(t *testing.T) {
 			expected: struct{ Abc, Cba string }{Abc: "123", Cba: "321"},
 		},
 		{
-			in:     &dynamodb.AttributeValue{N: aws.String("512")},
+			in:     &types.AttributeValue{N: aws.String("512")},
 			actual: new(uint8),
 			err: &UnmarshalTypeError{
 				Value: fmt.Sprintf("number overflow, 512"),
@@ -185,7 +187,7 @@ func TestUnmarshal(t *testing.T) {
 func TestInterfaceInput(t *testing.T) {
 	var v interface{}
 	expected := []interface{}{"abc", "123"}
-	err := Unmarshal(&dynamodb.AttributeValue{L: []dynamodb.AttributeValue{
+	err := Unmarshal(&types.AttributeValue{L: []types.AttributeValue{
 		{S: aws.String("abc")}, {S: aws.String("123")},
 	}}, &v)
 	assertConvertTest(t, v, expected, err, nil)
@@ -193,12 +195,12 @@ func TestInterfaceInput(t *testing.T) {
 
 func TestUnmarshalError(t *testing.T) {
 	cases := []struct {
-		in               *dynamodb.AttributeValue
+		in               *types.AttributeValue
 		actual, expected interface{}
 		err              error
 	}{
 		{
-			in:       &dynamodb.AttributeValue{},
+			in:       &types.AttributeValue{},
 			actual:   int(0),
 			expected: nil,
 			err:      &InvalidUnmarshalError{Type: reflect.TypeOf(int(0))},
@@ -224,12 +226,12 @@ func TestUnmarshalListShared(t *testing.T) {
 
 func TestUnmarshalListError(t *testing.T) {
 	cases := []struct {
-		in               []dynamodb.AttributeValue
+		in               []types.AttributeValue
 		actual, expected interface{}
 		err              error
 	}{
 		{
-			in:       []dynamodb.AttributeValue{},
+			in:       []types.AttributeValue{},
 			actual:   []interface{}{},
 			expected: nil,
 			err:      &InvalidUnmarshalError{Type: reflect.TypeOf([]interface{}{})},
@@ -255,18 +257,18 @@ func TestUnmarshalMapShared(t *testing.T) {
 
 func TestUnmarshalMapError(t *testing.T) {
 	cases := []struct {
-		in               map[string]dynamodb.AttributeValue
+		in               map[string]types.AttributeValue
 		actual, expected interface{}
 		err              error
 	}{
 		{
-			in:       map[string]dynamodb.AttributeValue{},
+			in:       map[string]types.AttributeValue{},
 			actual:   map[string]interface{}{},
 			expected: nil,
 			err:      &InvalidUnmarshalError{Type: reflect.TypeOf(map[string]interface{}{})},
 		},
 		{
-			in: map[string]dynamodb.AttributeValue{
+			in: map[string]types.AttributeValue{
 				"BOOL": {BOOL: aws.Bool(true)},
 			},
 			actual:   &map[int]interface{}{},
@@ -290,14 +292,14 @@ func TestUnmarshalListOfMaps(t *testing.T) {
 	}
 
 	cases := []struct {
-		in               []map[string]dynamodb.AttributeValue
+		in               []map[string]types.AttributeValue
 		actual, expected interface{}
 		err              error
 	}{
 		{ // Simple map conversion.
-			in: []map[string]dynamodb.AttributeValue{
+			in: []map[string]types.AttributeValue{
 				{
-					"Value": dynamodb.AttributeValue{
+					"Value": types.AttributeValue{
 						BOOL: aws.Bool(true),
 					},
 				},
@@ -310,12 +312,12 @@ func TestUnmarshalListOfMaps(t *testing.T) {
 			},
 		},
 		{ // attribute to struct.
-			in: []map[string]dynamodb.AttributeValue{
+			in: []map[string]types.AttributeValue{
 				{
-					"Value": dynamodb.AttributeValue{
+					"Value": types.AttributeValue{
 						S: aws.String("abc"),
 					},
-					"Value2": dynamodb.AttributeValue{
+					"Value2": types.AttributeValue{
 						N: aws.String("123"),
 					},
 				},
@@ -345,7 +347,7 @@ type unmarshalUnmarshaler struct {
 	Value4 time.Time
 }
 
-func (u *unmarshalUnmarshaler) UnmarshalDynamoDBAttributeValue(av *dynamodb.AttributeValue) error {
+func (u *unmarshalUnmarshaler) UnmarshalDynamoDBAttributeValue(av *types.AttributeValue) error {
 	if av.M == nil {
 		return fmt.Errorf("expected AttributeValue to be map")
 	}
@@ -395,8 +397,8 @@ func (u *unmarshalUnmarshaler) UnmarshalDynamoDBAttributeValue(av *dynamodb.Attr
 
 func TestUnmarshalUnmashaler(t *testing.T) {
 	u := &unmarshalUnmarshaler{}
-	av := &dynamodb.AttributeValue{
-		M: map[string]dynamodb.AttributeValue{
+	av := &types.AttributeValue{
+		M: map[string]types.AttributeValue{
 			"abc": {S: aws.String("value")},
 			"def": {N: aws.String("123")},
 			"ghi": {BOOL: aws.Bool(true)},
@@ -425,8 +427,8 @@ func TestUnmarshalUnmashaler(t *testing.T) {
 
 func TestDecodeUseNumber(t *testing.T) {
 	u := map[string]interface{}{}
-	av := &dynamodb.AttributeValue{
-		M: map[string]dynamodb.AttributeValue{
+	av := &types.AttributeValue{
+		M: map[string]types.AttributeValue{
 			"abc": {S: aws.String("value")},
 			"def": {N: aws.String("123")},
 			"ghi": {BOOL: aws.Bool(true)},
@@ -455,8 +457,8 @@ func TestDecodeUseNumber(t *testing.T) {
 
 func TestDecodeUseNumberNumberSet(t *testing.T) {
 	u := map[string]interface{}{}
-	av := &dynamodb.AttributeValue{
-		M: map[string]dynamodb.AttributeValue{
+	av := &types.AttributeValue{
+		M: map[string]types.AttributeValue{
 			"ns": {
 				NS: []string{
 					"123", "321",
@@ -495,8 +497,8 @@ func TestDecodeEmbeddedPointerStruct(t *testing.T) {
 		*B
 		*C
 	}
-	av := &dynamodb.AttributeValue{
-		M: map[string]dynamodb.AttributeValue{
+	av := &types.AttributeValue{
+		M: map[string]types.AttributeValue{
 			"Aint": {
 				N: aws.String("321"),
 			},
@@ -527,7 +529,7 @@ func TestDecodeEmbeddedPointerStruct(t *testing.T) {
 func TestDecodeBooleanOverlay(t *testing.T) {
 	type BooleanOverlay bool
 
-	av := &dynamodb.AttributeValue{
+	av := &types.AttributeValue{
 		BOOL: aws.Bool(true),
 	}
 
@@ -557,8 +559,8 @@ func TestDecodeUnixTime(t *testing.T) {
 		Typed:  UnixTime(time.Unix(789, 0)),
 	}
 
-	input := &dynamodb.AttributeValue{
-		M: map[string]dynamodb.AttributeValue{
+	input := &types.AttributeValue{
+		M: map[string]types.AttributeValue{
 			"Normal": {
 				S: aws.String("1970-01-01T00:02:03Z"),
 			},
@@ -592,8 +594,8 @@ func TestDecodeAliasedUnixTime(t *testing.T) {
 		Tagged: AliasedTime(time.Unix(456, 0)),
 	}
 
-	input := &dynamodb.AttributeValue{
-		M: map[string]dynamodb.AttributeValue{
+	input := &types.AttributeValue{
+		M: map[string]types.AttributeValue{
 			"Normal": {
 				S: aws.String("1970-01-01T00:02:03Z"),
 			},

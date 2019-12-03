@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/simpledb"
+	"github.com/aws/aws-sdk-go-v2/service/simpledb/types"
 )
 
 var statusCodeErrorTests = []struct {
@@ -40,7 +41,7 @@ func TestStatusCodeError(t *testing.T) {
 				Body:          body,
 			}
 		})
-		req := s.CreateDomainRequest(&simpledb.CreateDomainInput{
+		req := s.CreateDomainRequest(&types.CreateDomainInput{
 			DomainName: aws.String("test-domain"),
 		})
 		_, err := req.Send(context.Background())
@@ -113,7 +114,7 @@ func TestResponseError(t *testing.T) {
 				Body:          body,
 			}
 		})
-		req := s.CreateDomainRequest(&simpledb.CreateDomainInput{
+		req := s.CreateDomainRequest(&types.CreateDomainInput{
 			DomainName: aws.String("test-domain"),
 		})
 		_, err := req.Send(context.Background())

@@ -48,17 +48,17 @@ func defaultInitRequestFn(c *Client, r *aws.Request) {
 // bucketGetter is an accessor interface to grab the "Bucket" field from
 // an S3 type.
 type bucketGetter interface {
-	getBucket() string
+	GetBucket() string
 }
 
 // sseCustomerKeyGetter is an accessor interface to grab the "SSECustomerKey"
 // field from an S3 type.
 type sseCustomerKeyGetter interface {
-	getSSECustomerKey() string
+	GetSSECustomerKey() string
 }
 
 // copySourceSSECustomerKeyGetter is an accessor interface to grab the
 // "CopySourceSSECustomerKey" field from an S3 type.
 type copySourceSSECustomerKeyGetter interface {
-	getCopySourceSSECustomerKey() string
+	GetCopySourceSSECustomerKey() string
 }

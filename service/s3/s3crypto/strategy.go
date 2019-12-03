@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 // SaveStrategy is how the data's metadata wants to be saved
@@ -26,13 +27,13 @@ type S3SaveStrategy struct {
 
 // Save will save the envelope contents to s3.
 func (strat S3SaveStrategy) Save(env Envelope, req *aws.Request) error {
-	input := req.Params.(*s3.PutObjectInput)
+	input := req.Params.(*types.PutObjectInput)
 	b, err := json.Marshal(env)
 	if err != nil {
 		return err
 	}
 
-	instInput := s3.PutObjectInput{
+	instInput := types.PutObjectInput{
 		Bucket: input.Bucket,
 		Body:   bytes.NewReader(b),
 	}
@@ -53,7 +54,7 @@ type HeaderV2SaveStrategy struct{}
 
 // Save will save the envelope to the request's header.
 func (strat HeaderV2SaveStrategy) Save(env Envelope, req *aws.Request) error {
-	input := req.Params.(*s3.PutObjectInput)
+	input := req.Params.(*types.PutObjectInput)
 	if input.Metadata == nil {
 		input.Metadata = map[string]string{}
 	}
@@ -90,8 +91,8 @@ func (load S3LoadStrategy) Load(req *aws.Request) (Envelope, error) {
 		load.InstructionFileSuffix = DefaultInstructionKeySuffix
 	}
 
-	input := req.Params.(*s3.GetObjectInput)
-	out, err := load.Client.GetObjectRequest(&s3.GetObjectInput{
+	input := req.Params.(*types.GetObjectInput)
+	out, err := load.Client.GetObjectRequest(&types.GetObjectInput{
 		Key:    aws.String(strings.Join([]string{*input.Key, load.InstructionFileSuffix}, "")),
 		Bucket: input.Bucket,
 	}).Send(context.Background())

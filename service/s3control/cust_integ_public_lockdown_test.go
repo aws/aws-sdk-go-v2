@@ -9,10 +9,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/service/s3control"
+	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 )
 
 func TestInteg_PublicAccessBlock(t *testing.T) {
-	_, err := svc.GetPublicAccessBlockRequest(&s3control.GetPublicAccessBlockInput{
+	_, err := svc.GetPublicAccessBlockRequest(&types.GetPublicAccessBlockInput{
 		AccountId: aws.String(accountID),
 	}).Send(context.Background())
 	if err != nil {
@@ -26,9 +27,9 @@ func TestInteg_PublicAccessBlock(t *testing.T) {
 		}
 	}
 
-	_, err = svc.PutPublicAccessBlockRequest(&s3control.PutPublicAccessBlockInput{
+	_, err = svc.PutPublicAccessBlockRequest(&types.PutPublicAccessBlockInput{
 		AccountId: aws.String(accountID),
-		PublicAccessBlockConfiguration: &s3control.PublicAccessBlockConfiguration{
+		PublicAccessBlockConfiguration: &types.PublicAccessBlockConfiguration{
 			IgnorePublicAcls: aws.Bool(true),
 		},
 	}).Send(context.Background())
@@ -36,7 +37,7 @@ func TestInteg_PublicAccessBlock(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	_, err = svc.DeletePublicAccessBlockRequest(&s3control.DeletePublicAccessBlockInput{
+	_, err = svc.DeletePublicAccessBlockRequest(&types.DeletePublicAccessBlockInput{
 		AccountId: aws.String(accountID),
 	}).Send(context.Background())
 	if err != nil {

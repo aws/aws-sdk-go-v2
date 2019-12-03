@@ -14,6 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
 
 type testReader struct {
@@ -41,7 +42,7 @@ func TestKinesisGetRecordsCustomization(t *testing.T) {
 	})
 
 	svc := New(cfg)
-	req := svc.GetRecordsRequest(&GetRecordsInput{
+	req := svc.GetRecordsRequest(&types.GetRecordsInput{
 		ShardIterator: aws.String("foo"),
 	})
 	req.Handlers.Send.Clear()
@@ -74,7 +75,7 @@ func TestKinesisGetRecordsCustomization(t *testing.T) {
 func TestKinesisGetRecordsNoTimeout(t *testing.T) {
 	readDuration = time.Second
 	svc := New(unit.Config())
-	req := svc.GetRecordsRequest(&GetRecordsInput{
+	req := svc.GetRecordsRequest(&types.GetRecordsInput{
 		ShardIterator: aws.String("foo"),
 	})
 	req.Handlers.Send.Clear()
@@ -124,7 +125,7 @@ func TestKinesisCustomRetryErrorCodes(t *testing.T) {
 		},
 	}
 
-	req := svc.GetRecordsRequest(&GetRecordsInput{})
+	req := svc.GetRecordsRequest(&types.GetRecordsInput{})
 	req.Handlers.Send.Swap(defaults.SendHandler.Name, aws.NamedHandler{
 		Name: "custom send handler",
 		Fn: func(r *aws.Request) {

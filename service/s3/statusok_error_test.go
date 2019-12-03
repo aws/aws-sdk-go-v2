@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 const errMsg = `<Error><Code>ErrorCode</Code><Message>message body</Message><RequestId>requestID</RequestId><HostId>hostID=</HostId></Error>`
@@ -23,7 +24,7 @@ func TestCopyObjectNoError(t *testing.T) {
 <?xml version="1.0" encoding="UTF-8"?>
 <CopyObjectResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><LastModified>2009-11-23T0:00:00Z</LastModified><ETag>&quot;1da64c7f13d1e8dbeaea40b905fd586c&quot;</ETag></CopyObjectResult>`
 
-	req := newCopyTestSvc(successMsg).CopyObjectRequest(&s3.CopyObjectInput{
+	req := newCopyTestSvc(successMsg).CopyObjectRequest(&types.CopyObjectInput{
 		Bucket:     aws.String("bucketname"),
 		CopySource: aws.String("bucketname/exists.txt"),
 		Key:        aws.String("destination.txt"),
@@ -42,7 +43,7 @@ func TestCopyObjectNoError(t *testing.T) {
 }
 
 func TestCopyObjectError(t *testing.T) {
-	req := newCopyTestSvc(errMsg).CopyObjectRequest(&s3.CopyObjectInput{
+	req := newCopyTestSvc(errMsg).CopyObjectRequest(&types.CopyObjectInput{
 		Bucket:     aws.String("bucketname"),
 		CopySource: aws.String("bucketname/doesnotexist.txt"),
 		Key:        aws.String("destination.txt"),
@@ -67,7 +68,7 @@ func TestUploadPartCopySuccess(t *testing.T) {
 <?xml version="1.0" encoding="UTF-8"?>
 <UploadPartCopyResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><LastModified>2009-11-23T0:00:00Z</LastModified><ETag>&quot;1da64c7f13d1e8dbeaea40b905fd586c&quot;</ETag></UploadPartCopyResult>`
 
-	req := newCopyTestSvc(successMsg).UploadPartCopyRequest(&s3.UploadPartCopyInput{
+	req := newCopyTestSvc(successMsg).UploadPartCopyRequest(&types.UploadPartCopyInput{
 		Bucket:     aws.String("bucketname"),
 		CopySource: aws.String("bucketname/doesnotexist.txt"),
 		Key:        aws.String("destination.txt"),
@@ -89,7 +90,7 @@ func TestUploadPartCopySuccess(t *testing.T) {
 }
 
 func TestUploadPartCopyError(t *testing.T) {
-	req := newCopyTestSvc(errMsg).UploadPartCopyRequest(&s3.UploadPartCopyInput{
+	req := newCopyTestSvc(errMsg).UploadPartCopyRequest(&types.UploadPartCopyInput{
 		Bucket:     aws.String("bucketname"),
 		CopySource: aws.String("bucketname/doesnotexist.txt"),
 		Key:        aws.String("destination.txt"),
@@ -115,7 +116,7 @@ func TestCompleteMultipartUploadSuccess(t *testing.T) {
 	const successMsg = `
 <?xml version="1.0" encoding="UTF-8"?>
 <CompleteMultipartUploadResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Location>locationName</Location><Bucket>bucketName</Bucket><Key>keyName</Key><ETag>"etagVal"</ETag></CompleteMultipartUploadResult>`
-	req := newCopyTestSvc(successMsg).CompleteMultipartUploadRequest(&s3.CompleteMultipartUploadInput{
+	req := newCopyTestSvc(successMsg).CompleteMultipartUploadRequest(&types.CompleteMultipartUploadInput{
 		Bucket:   aws.String("bucketname"),
 		Key:      aws.String("key"),
 		UploadId: aws.String("uploadID"),
@@ -141,7 +142,7 @@ func TestCompleteMultipartUploadSuccess(t *testing.T) {
 }
 
 func TestCompleteMultipartUploadError(t *testing.T) {
-	req := newCopyTestSvc(errMsg).CompleteMultipartUploadRequest(&s3.CompleteMultipartUploadInput{
+	req := newCopyTestSvc(errMsg).CompleteMultipartUploadRequest(&types.CompleteMultipartUploadInput{
 		Bucket:   aws.String("bucketname"),
 		Key:      aws.String("key"),
 		UploadId: aws.String("uploadID"),

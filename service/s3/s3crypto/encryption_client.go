@@ -9,6 +9,7 @@ import (
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 // DefaultMinFileSize is used to check whether we want to write to a temp file
@@ -68,7 +69,7 @@ func NewEncryptionClient(cfg aws.Config, builder ContentCipherBuilder, options .
 //	  Body: strings.NewReader("test data"),
 //	})
 //	err := req.Send(context.Background())
-func (c *EncryptionClient) PutObjectRequest(input *s3.PutObjectInput) s3.PutObjectRequest {
+func (c *EncryptionClient) PutObjectRequest(input *types.PutObjectInput) s3.PutObjectRequest {
 	req := c.S3Client.PutObjectRequest(input)
 
 	// Get Size of file
@@ -126,7 +127,7 @@ func (c *EncryptionClient) PutObjectRequest(input *s3.PutObjectInput) s3.PutObje
 }
 
 // PutObject is a wrapper for PutObjectRequest
-func (c *EncryptionClient) PutObject(input *s3.PutObjectInput) (*s3.PutObjectOutput, error) {
+func (c *EncryptionClient) PutObject(input *types.PutObjectInput) (*types.PutObjectOutput, error) {
 	req := c.PutObjectRequest(input)
 	resp, err := req.Send(context.Background())
 	if err != nil {
@@ -142,7 +143,7 @@ func (c *EncryptionClient) PutObject(input *s3.PutObjectInput) (*s3.PutObjectOut
 // Context input parameters. The Context must not be nil. A nil Context will
 // cause a panic. Use the Context to add deadlining, timeouts, ect. In the future
 // this may create sub-contexts for individual underlying requests.
-func (c *EncryptionClient) PutObjectWithContext(ctx context.Context, input *s3.PutObjectInput, opts ...request.Option) (*s3.PutObjectOutput, error) {
+func (c *EncryptionClient) PutObjectWithContext(ctx context.Context, input *types.PutObjectInput, opts ...request.Option) (*types.PutObjectOutput, error) {
 	req := c.PutObjectRequest(input)
 	req.ApplyOptions(opts...)
 	resp, err := req.Send(ctx)

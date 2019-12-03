@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 var db *dynamodb.Client
@@ -119,7 +120,7 @@ func TestValidateCRC32IsValid(t *testing.T) {
 	}
 
 	// CRC check does not affect output parsing
-	out := req.Data.(*dynamodb.ListTablesOutput)
+	out := req.Data.(*types.ListTablesOutput)
 	if e, a := "A", out.TableNames[0]; e != a {
 		t.Errorf("expect %q table name, got %q", e, a)
 	}
@@ -160,7 +161,7 @@ func TestValidateCRC32DoesNotMatchNoComputeChecksum(t *testing.T) {
 	}
 
 	// CRC check disabled. Does not affect output parsing
-	out := req.Data.(*dynamodb.ListTablesOutput)
+	out := req.Data.(*types.ListTablesOutput)
 	if e, a := "A", out.TableNames[0]; e != a {
 		t.Errorf("expect %q table name, got %q", e, a)
 	}

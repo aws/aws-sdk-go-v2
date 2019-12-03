@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 // keyCondErrorMode will help with error cases and checking error types
@@ -44,7 +44,7 @@ func TestKeyCompare(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -65,7 +65,7 @@ func TestKeyCompare(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -86,7 +86,7 @@ func TestKeyCompare(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -107,7 +107,7 @@ func TestKeyCompare(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -128,7 +128,7 @@ func TestKeyCompare(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -186,7 +186,7 @@ func TestKeyBetween(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -194,7 +194,7 @@ func TestKeyBetween(t *testing.T) {
 						fmtExpr: "$v",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("10"),
 							},
@@ -247,7 +247,7 @@ func TestKeyBeginsWith(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("bar"),
 							},
@@ -302,7 +302,7 @@ func TestKeyAnd(t *testing.T) {
 								fmtExpr: "$n",
 							},
 							{
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										N: aws.String("5"),
 									},
@@ -319,7 +319,7 @@ func TestKeyAnd(t *testing.T) {
 								fmtExpr: "$n",
 							},
 							{
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										S: aws.String("baz"),
 									},
@@ -391,7 +391,7 @@ func TestKeyConditionBuildChildNodes(t *testing.T) {
 							fmtExpr: "$n",
 						},
 						{
-							values: []dynamodb.AttributeValue{
+							values: []types.AttributeValue{
 								{
 									S: aws.String("bar"),
 								},
@@ -408,7 +408,7 @@ func TestKeyConditionBuildChildNodes(t *testing.T) {
 							fmtExpr: "$n",
 						},
 						{
-							values: []dynamodb.AttributeValue{
+							values: []types.AttributeValue{
 								{
 									N: aws.String("10"),
 								},

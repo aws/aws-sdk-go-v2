@@ -114,7 +114,7 @@ func updateEndpointForAccelerate(r *aws.Request) {
 // If no bucket is found, or the field is empty "", false will be returned.
 func bucketNameFromReqParams(params interface{}) (string, bool) {
 	if iface, ok := params.(bucketGetter); ok {
-		b := iface.getBucket()
+		b := iface.GetBucket()
 		return b, len(b) > 0
 	}
 

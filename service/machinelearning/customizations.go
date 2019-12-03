@@ -4,6 +4,7 @@ import (
 	"net/url"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
 
 func init() {
@@ -22,7 +23,7 @@ func updatePredictEndpoint(r *aws.Request) {
 		return
 	}
 
-	r.Metadata.Endpoint = *r.Params.(*PredictInput).PredictEndpoint
+	r.Metadata.Endpoint = *r.Params.(*types.PredictInput).PredictEndpoint
 
 	uri, err := url.Parse(r.Metadata.Endpoint)
 	if err != nil {
