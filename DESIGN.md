@@ -3,10 +3,10 @@ Open Discussions
 The following issues are currently open for community feedback.
 All discourse must adhere to the [Code of Conduct] policy.
 
-* [SDK Modularization](https://github.com/aws/aws-sdk-go-v2/issues/444)
-* [Refactoring API client Paginators](https://github.com/aws/aws-sdk-go-v2/issues/439)
+* [Refactoring API Client Paginators](https://github.com/aws/aws-sdk-go-v2/issues/439)
 * [Refactoring API Client Waiters](https://github.com/aws/aws-sdk-go-v2/issues/442)
-* [Refactoring API client Enums and Types to Discrete Packages](https://github.com/aws/aws-sdk-go-v2/issues/445)
+* [Refactoring API Client Enums and Types to Discrete Packages](https://github.com/aws/aws-sdk-go-v2/issues/445)
+* [SDK Modularization](https://github.com/aws/aws-sdk-go-v2/issues/444)
 
 Past Discussions
 ---
