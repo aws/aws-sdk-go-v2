@@ -6,67 +6,11 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/internal/aws_restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Deletes an existing VpcLink of a specified identifier.
-type DeleteVpcLinkInput struct {
-	_ struct{} `type:"structure"`
-
-	// [Required] The identifier of the VpcLink. It is used in an Integration to
-	// reference this VpcLink.
-	//
-	// VpcLinkId is a required field
-	VpcLinkId *string `location:"uri" locationName:"vpclink_id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVpcLinkInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVpcLinkInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpcLinkInput"}
-
-	if s.VpcLinkId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcLinkId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteVpcLinkInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.VpcLinkId != nil {
-		v := *s.VpcLinkId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vpclink_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteVpcLinkOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVpcLinkOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteVpcLinkOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteVpcLink = "DeleteVpcLink"
 
@@ -81,7 +25,7 @@ const opDeleteVpcLink = "DeleteVpcLink"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteVpcLinkRequest(input *DeleteVpcLinkInput) DeleteVpcLinkRequest {
+func (c *Client) DeleteVpcLinkRequest(input *types.DeleteVpcLinkInput) DeleteVpcLinkRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVpcLink,
 		HTTPMethod: "DELETE",
@@ -89,10 +33,14 @@ func (c *Client) DeleteVpcLinkRequest(input *DeleteVpcLinkInput) DeleteVpcLinkRe
 	}
 
 	if input == nil {
-		input = &DeleteVpcLinkInput{}
+		input = &types.DeleteVpcLinkInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpcLinkOutput{})
+	req := c.newRequest(op, input, &types.DeleteVpcLinkOutput{})
+
+	// swap existing build handler on svc, with a new named build handler
+	req.Handlers.Build.Swap(restjson.BuildHandler.Name, aws_restjson.DeleteVpcLinkMarshaler{Input: input}.GetNamedBuildHandler())
+
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteVpcLinkRequest{Request: req, Input: input, Copy: c.DeleteVpcLinkRequest}
@@ -102,8 +50,8 @@ func (c *Client) DeleteVpcLinkRequest(input *DeleteVpcLinkInput) DeleteVpcLinkRe
 // DeleteVpcLink API operation.
 type DeleteVpcLinkRequest struct {
 	*aws.Request
-	Input *DeleteVpcLinkInput
-	Copy  func(*DeleteVpcLinkInput) DeleteVpcLinkRequest
+	Input *types.DeleteVpcLinkInput
+	Copy  func(*types.DeleteVpcLinkInput) DeleteVpcLinkRequest
 }
 
 // Send marshals and sends the DeleteVpcLink API request.
@@ -115,7 +63,7 @@ func (r DeleteVpcLinkRequest) Send(ctx context.Context) (*DeleteVpcLinkResponse,
 	}
 
 	resp := &DeleteVpcLinkResponse{
-		DeleteVpcLinkOutput: r.Request.Data.(*DeleteVpcLinkOutput),
+		DeleteVpcLinkOutput: r.Request.Data.(*types.DeleteVpcLinkOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +73,7 @@ func (r DeleteVpcLinkRequest) Send(ctx context.Context) (*DeleteVpcLinkResponse,
 // DeleteVpcLinkResponse is the response type for the
 // DeleteVpcLink API operation.
 type DeleteVpcLinkResponse struct {
-	*DeleteVpcLinkOutput
+	*types.DeleteVpcLinkOutput
 
 	response *aws.Response
 }

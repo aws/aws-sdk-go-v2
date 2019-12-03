@@ -11,9 +11,9 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
 
 var _ aws.Config
@@ -25,10 +25,10 @@ func TestInteg_00_GetDomainNames(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := apigateway.New(cfg)
-	params := &apigateway.GetDomainNamesInput{}
+	params := &types.GetDomainNamesInput{}
 
 	req := svc.GetDomainNamesRequest(params)
-	req.Handlers.Validate.Remove(defaults.ValidateParametersHandler)
+
 	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
@@ -40,14 +40,14 @@ func TestInteg_01_CreateUsagePlanKey(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := apigateway.New(cfg)
-	params := &apigateway.CreateUsagePlanKeyInput{
+	params := &types.CreateUsagePlanKeyInput{
 		KeyId:       aws.String("bar"),
 		KeyType:     aws.String("fixx"),
 		UsagePlanId: aws.String("foo"),
 	}
 
 	req := svc.CreateUsagePlanKeyRequest(params)
-	req.Handlers.Validate.Remove(defaults.ValidateParametersHandler)
+
 	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
