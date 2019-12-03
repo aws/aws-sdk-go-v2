@@ -1,7 +1,7 @@
 Open Discussions
 ---
 The following issues are currently open for community feedback.
-All discourse is must adhere to the [Code of Conduct] policy.
+All discourse must adhere to the [Code of Conduct] policy.
 
 * [SDK Modularization](https://github.com/aws/aws-sdk-go-v2/issues/444)
 * [Refactoring API client Paginators](https://github.com/aws/aws-sdk-go-v2/issues/439)
