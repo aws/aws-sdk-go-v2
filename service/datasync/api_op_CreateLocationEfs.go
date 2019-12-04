@@ -45,6 +45,8 @@ type CreateLocationEfsInput struct {
 	// A subdirectory in the location’s path. This subdirectory in the EFS file
 	// system is used to read data from the EFS source location or write data to
 	// the EFS destination. By default, AWS DataSync uses the root directory.
+	//
+	// Subdirectory must be specified with forward slashes. For example /path/to/folder.
 	Subdirectory *string `type:"string"`
 
 	// The key-value pair that represents a tag that you want to add to the resource.

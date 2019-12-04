@@ -28,9 +28,17 @@ type Action struct {
 	// a custom HTTP response. Specify only when Type is fixed-response.
 	FixedResponseConfig *FixedResponseActionConfig `type:"structure"`
 
+	// Information for creating an action that distributes requests among one or
+	// more target groups. For Network Load Balancers, you can specify a single
+	// target group. Specify only when Type is forward. If you specify both ForwardConfig
+	// and TargetGroupArn, you can specify only one target group using ForwardConfig
+	// and it must be the same target group specified in TargetGroupArn.
+	ForwardConfig *ForwardActionConfig `type:"structure"`
+
 	// The order for the action. This value is required for rules with multiple
 	// actions. The action with the lowest value for order is performed first. The
-	// final action to be performed must be a forward or a fixed-response action.
+	// last action to be performed must be one of the following types of actions:
+	// a forward, fixed-response, or redirect.
 	Order *int64 `min:"1" type:"integer"`
 
 	// [Application Load Balancer] Information for creating a redirect action. Specify
@@ -38,11 +46,11 @@ type Action struct {
 	RedirectConfig *RedirectActionConfig `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the target group. Specify only when Type
-	// is forward.
+	// is forward and you want to route to a single target group. To route to one
+	// or more target groups, use ForwardConfig instead.
 	TargetGroupArn *string `type:"string"`
 
-	// The type of action. Each rule must include exactly one of the following types
-	// of actions: forward, fixed-response, or redirect.
+	// The type of action.
 	//
 	// Type is a required field
 	Type ActionTypeEnum `type:"string" required:"true" enum:"true"`
@@ -369,6 +377,23 @@ func (s *FixedResponseActionConfig) Validate() error {
 	return nil
 }
 
+// Information about a forward action.
+type ForwardActionConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The target group stickiness for the rule.
+	TargetGroupStickinessConfig *TargetGroupStickinessConfig `type:"structure"`
+
+	// One or more target groups. For Network Load Balancers, you can specify a
+	// single target group.
+	TargetGroups []TargetGroupTuple `type:"list"`
+}
+
+// String returns the string representation
+func (s ForwardActionConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Information about a host header condition.
 type HostHeaderConditionConfig struct {
 	_ struct{} `type:"structure"`
@@ -467,6 +492,12 @@ type Limit struct {
 	//
 	//    * target-groups
 	//
+	//    * target-groups-per-action-on-application-load-balancer
+	//
+	//    * target-groups-per-action-on-network-load-balancer
+	//
+	//    * target-groups-per-application-load-balancer
+	//
 	//    * targets-per-application-load-balancer
 	//
 	//    * targets-per-availability-zone-per-network-load-balancer
@@ -546,8 +577,8 @@ type LoadBalancer struct {
 	//
 	// The nodes of an internal load balancer have only private IP addresses. The
 	// DNS name of an internal load balancer is publicly resolvable to the private
-	// IP addresses of the nodes. Therefore, internal load balancers can only route
-	// requests from clients with access to the VPC for the load balancer.
+	// IP addresses of the nodes. Therefore, internal load balancers can route requests
+	// only from clients with access to the VPC for the load balancer.
 	Scheme LoadBalancerSchemeEnum `type:"string" enum:"true"`
 
 	// The IDs of the security groups for the load balancer.
@@ -611,6 +642,10 @@ type LoadBalancerAttribute struct {
 	//
 	//    * idle_timeout.timeout_seconds - The idle timeout value, in seconds. The
 	//    valid range is 1-4000 seconds. The default is 60 seconds.
+	//
+	//    * routing.http.drop_invalid_header_fields.enabled - Indicates whether
+	//    HTTP headers with invalid header fields are removed by the load balancer
+	//    (true) or routed to targets (false). The default is false.
 	//
 	//    * routing.http2.enabled - Indicates whether HTTP/2 is enabled. The value
 	//    is true or false. The default is true.
@@ -1093,7 +1128,8 @@ type TargetDescription struct {
 	// Id is a required field
 	Id *string `type:"string" required:"true"`
 
-	// The port on which the target is listening.
+	// The port on which the target is listening. Not used if the target is a Lambda
+	// function.
 	Port *int64 `min:"1" type:"integer"`
 }
 
@@ -1154,7 +1190,8 @@ type TargetGroup struct {
 	// The HTTP codes to use when checking for a successful response from a target.
 	Matcher *Matcher `type:"structure"`
 
-	// The port on which the targets are listening.
+	// The port on which the targets are listening. Not used if the target is a
+	// Lambda function.
 	Port *int64 `min:"1" type:"integer"`
 
 	// The protocol to use for routing traffic to the targets.
@@ -1244,6 +1281,40 @@ func (s TargetGroupAttribute) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Information about the target group stickiness for a rule.
+type TargetGroupStickinessConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The time period, in seconds, during which requests from a client should be
+	// routed to the same target group. The range is 1-604800 seconds (7 days).
+	DurationSeconds *int64 `type:"integer"`
+
+	// Indicates whether target group stickiness is enabled.
+	Enabled *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s TargetGroupStickinessConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about how traffic will be distributed between multiple target
+// groups in a forward rule.
+type TargetGroupTuple struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the target group.
+	TargetGroupArn *string `type:"string"`
+
+	// The weight. The range is 0 to 999.
+	Weight *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s TargetGroupTuple) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Information about the current health of a target.
 type TargetHealth struct {
 	_ struct{} `type:"structure"`
@@ -1269,14 +1340,16 @@ type TargetHealth struct {
 	// values:
 	//
 	//    * Target.ResponseCodeMismatch - The health checks did not return an expected
-	//    HTTP code.
+	//    HTTP code. Applies only to Application Load Balancers.
 	//
-	//    * Target.Timeout - The health check requests timed out.
+	//    * Target.Timeout - The health check requests timed out. Applies only to
+	//    Application Load Balancers.
 	//
 	//    * Target.FailedHealthChecks - The load balancer received an error while
 	//    establishing a connection to the target or the target response was malformed.
 	//
 	//    * Elb.InternalError - The health checks failed due to an internal error.
+	//    Applies only to Application Load Balancers.
 	//
 	// If the target state is unused, the reason code can be one of the following
 	// values:
@@ -1288,10 +1361,10 @@ type TargetHealth struct {
 	//    or the target is in an Availability Zone that is not enabled for its load
 	//    balancer.
 	//
+	//    * Target.InvalidState - The target is in the stopped or terminated state.
+	//
 	//    * Target.IpUnusable - The target IP address is reserved for use by a load
 	//    balancer.
-	//
-	//    * Target.InvalidState - The target is in the stopped or terminated state.
 	//
 	// If the target state is draining, the reason code can be the following value:
 	//
@@ -1302,7 +1375,10 @@ type TargetHealth struct {
 	// value:
 	//
 	//    * Target.HealthCheckDisabled - Health checks are disabled for the target
-	//    group.
+	//    group. Applies only to Application Load Balancers.
+	//
+	//    * Elb.InternalError - Target health is unavailable due to an internal
+	//    error. Applies only to Network Load Balancers.
 	Reason TargetHealthReasonEnum `type:"string" enum:"true"`
 
 	// The state of the target.

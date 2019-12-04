@@ -326,8 +326,8 @@ type CloudWatchAlarmDefinition struct {
 	// A CloudWatch metric dimension.
 	Dimensions []MetricDimension `type:"list"`
 
-	// The number of periods, expressed in seconds using Period, during which the
-	// alarm condition must exist before the alarm triggers automatic scaling activity.
+	// The number of periods, in five-minute increments, during which the alarm
+	// condition must exist before the alarm triggers automatic scaling activity.
 	// The default value is 1.
 	EvaluationPeriods *int64 `type:"integer"`
 
@@ -405,6 +405,9 @@ type Cluster struct {
 
 	// Specifies whether the cluster should terminate after completing all steps.
 	AutoTerminate *bool `type:"boolean"`
+
+	// The Amazon Resource Name of the cluster.
+	ClusterArn *string `min:"20" type:"string"`
 
 	// Applies only to Amazon EMR releases 4.x and later. The list of Configurations
 	// supplied to the EMR cluster.
@@ -511,14 +514,14 @@ type Cluster struct {
 	// of a cluster error.
 	TerminationProtected *bool `type:"boolean"`
 
-	// This member will be deprecated.
-	//
 	// Indicates whether the cluster is visible to all IAM users of the AWS account
-	// associated with the cluster. If this value is set to true, all IAM users
-	// of that AWS account can view and manage the cluster if they have the proper
-	// policy permissions set. If this value is false, only the IAM user that created
-	// the cluster can view and manage it. This value can be changed using the SetVisibleToAllUsers
-	// action.
+	// associated with the cluster. The default value, true, indicates that all
+	// IAM users in the AWS account can perform cluster actions if they have the
+	// proper IAM policy permissions. If this value is false, only the IAM user
+	// that created the cluster can perform actions. This value can be changed on
+	// a running cluster by using the SetVisibleToAllUsers action. You can override
+	// the default value of true when you create a cluster by using the VisibleToAllUsers
+	// parameter of the RunJobFlow action.
 	VisibleToAllUsers *bool `type:"boolean"`
 }
 
@@ -566,6 +569,9 @@ func (s ClusterStatus) String() string {
 // The summary description of the cluster.
 type ClusterSummary struct {
 	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name of the cluster.
+	ClusterArn *string `min:"20" type:"string"`
 
 	// The unique identifier for the cluster.
 	Id *string `type:"string"`
@@ -1319,12 +1325,9 @@ type InstanceGroup struct {
 	// of a CloudWatch metric. See PutAutoScalingPolicy.
 	AutoScalingPolicy *AutoScalingPolicyDescription `type:"structure"`
 
-	// The maximum Spot price your are willing to pay for EC2 instances.
-	//
-	// An optional, nullable field that applies if the MarketType for the instance
-	// group is specified as SPOT. Specify the maximum spot price in USD. If the
-	// value is NULL and SPOT is specified, the maximum Spot price is set equal
-	// to the On-Demand price.
+	// The bid price for each EC2 Spot instance type as defined by InstanceType.
+	// Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice
+	// is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
 	BidPrice *string `type:"string"`
 
 	//
@@ -1399,12 +1402,9 @@ type InstanceGroupConfig struct {
 	// of a CloudWatch metric. See PutAutoScalingPolicy.
 	AutoScalingPolicy *AutoScalingPolicy `type:"structure"`
 
-	// The maximum Spot price your are willing to pay for EC2 instances.
-	//
-	// An optional, nullable field that applies if the MarketType for the instance
-	// group is specified as SPOT. Specify the maximum spot price in USD. If the
-	// value is NULL and SPOT is specified, the maximum Spot price is set equal
-	// to the On-Demand price.
+	// The bid price for each EC2 Spot instance type as defined by InstanceType.
+	// Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice
+	// is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
 	BidPrice *string `type:"string"`
 
 	//
@@ -1484,11 +1484,9 @@ func (s *InstanceGroupConfig) Validate() error {
 type InstanceGroupDetail struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum Spot price your are willing to pay for EC2 instances.
-	//
-	// An optional, nullable field that applies if the MarketType for the instance
-	// group is specified as SPOT. Specified in USD. If the value is NULL and SPOT
-	// is specified, the maximum Spot price is set equal to the On-Demand price.
+	// The bid price for each EC2 Spot instance type as defined by InstanceType.
+	// Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice
+	// is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
 	BidPrice *string `type:"string"`
 
 	// The date/time the instance group was created.
@@ -1904,14 +1902,14 @@ type JobFlowDetail struct {
 	// is empty.
 	SupportedProducts []string `type:"list"`
 
-	// This member will be deprecated.
-	//
-	// Specifies whether the cluster is visible to all IAM users of the AWS account
-	// associated with the cluster. If this value is set to true, all IAM users
-	// of that AWS account can view and (if they have the proper policy permissions
-	// set) manage the cluster. If it is set to false, only the IAM user that created
-	// the cluster can view and manage it. This value can be changed using the SetVisibleToAllUsers
-	// action.
+	// Indicates whether the cluster is visible to all IAM users of the AWS account
+	// associated with the cluster. The default value, true, indicates that all
+	// IAM users in the AWS account can perform cluster actions if they have the
+	// proper IAM policy permissions. If this value is false, only the IAM user
+	// that created the cluster can perform actions. This value can be changed on
+	// a running cluster by using the SetVisibleToAllUsers action. You can override
+	// the default value of true when you create a cluster by using the VisibleToAllUsers
+	// parameter of the RunJobFlow action.
 	VisibleToAllUsers *bool `type:"boolean"`
 }
 

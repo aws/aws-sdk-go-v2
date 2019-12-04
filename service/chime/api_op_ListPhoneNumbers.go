@@ -137,7 +137,7 @@ const opListPhoneNumbers = "ListPhoneNumbers"
 // Amazon Chime.
 //
 // Lists the phone numbers for the specified Amazon Chime account, Amazon Chime
-// user, or Amazon Chime Voice Connector.
+// user, Amazon Chime Voice Connector, or Amazon Chime Voice Connector group.
 //
 //    // Example sending a request using ListPhoneNumbersRequest.
 //    req := client.ListPhoneNumbersRequest(params)

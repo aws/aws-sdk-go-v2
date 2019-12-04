@@ -177,17 +177,23 @@ type Event string
 
 // Enum values for Event
 const (
-	EventS3ReducedRedundancyLostObject          Event = "s3:ReducedRedundancyLostObject"
-	EventS3ObjectCreated                        Event = "s3:ObjectCreated:*"
-	EventS3ObjectCreatedPut                     Event = "s3:ObjectCreated:Put"
-	EventS3ObjectCreatedPost                    Event = "s3:ObjectCreated:Post"
-	EventS3ObjectCreatedCopy                    Event = "s3:ObjectCreated:Copy"
-	EventS3ObjectCreatedCompleteMultipartUpload Event = "s3:ObjectCreated:CompleteMultipartUpload"
-	EventS3ObjectRemoved                        Event = "s3:ObjectRemoved:*"
-	EventS3ObjectRemovedDelete                  Event = "s3:ObjectRemoved:Delete"
-	EventS3ObjectRemovedDeleteMarkerCreated     Event = "s3:ObjectRemoved:DeleteMarkerCreated"
-	EventS3ObjectRestorePost                    Event = "s3:ObjectRestore:Post"
-	EventS3ObjectRestoreCompleted               Event = "s3:ObjectRestore:Completed"
+	EventS3ReducedRedundancyLostObject                  Event = "s3:ReducedRedundancyLostObject"
+	EventS3ObjectCreated                                Event = "s3:ObjectCreated:*"
+	EventS3ObjectCreatedPut                             Event = "s3:ObjectCreated:Put"
+	EventS3ObjectCreatedPost                            Event = "s3:ObjectCreated:Post"
+	EventS3ObjectCreatedCopy                            Event = "s3:ObjectCreated:Copy"
+	EventS3ObjectCreatedCompleteMultipartUpload         Event = "s3:ObjectCreated:CompleteMultipartUpload"
+	EventS3ObjectRemoved                                Event = "s3:ObjectRemoved:*"
+	EventS3ObjectRemovedDelete                          Event = "s3:ObjectRemoved:Delete"
+	EventS3ObjectRemovedDeleteMarkerCreated             Event = "s3:ObjectRemoved:DeleteMarkerCreated"
+	EventS3ObjectRestore                                Event = "s3:ObjectRestore:*"
+	EventS3ObjectRestorePost                            Event = "s3:ObjectRestore:Post"
+	EventS3ObjectRestoreCompleted                       Event = "s3:ObjectRestore:Completed"
+	EventS3Replication                                  Event = "s3:Replication:*"
+	EventS3ReplicationOperationFailedReplication        Event = "s3:Replication:OperationFailedReplication"
+	EventS3ReplicationOperationNotTracked               Event = "s3:Replication:OperationNotTracked"
+	EventS3ReplicationOperationMissedThreshold          Event = "s3:Replication:OperationMissedThreshold"
+	EventS3ReplicationOperationReplicatedAfterThreshold Event = "s3:Replication:OperationReplicatedAfterThreshold"
 )
 
 func (enum Event) MarshalValue() (string, error) {
@@ -195,6 +201,23 @@ func (enum Event) MarshalValue() (string, error) {
 }
 
 func (enum Event) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ExistingObjectReplicationStatus string
+
+// Enum values for ExistingObjectReplicationStatus
+const (
+	ExistingObjectReplicationStatusEnabled  ExistingObjectReplicationStatus = "Enabled"
+	ExistingObjectReplicationStatusDisabled ExistingObjectReplicationStatus = "Disabled"
+)
+
+func (enum ExistingObjectReplicationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExistingObjectReplicationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -323,16 +346,17 @@ type InventoryOptionalField string
 
 // Enum values for InventoryOptionalField
 const (
-	InventoryOptionalFieldSize                      InventoryOptionalField = "Size"
-	InventoryOptionalFieldLastModifiedDate          InventoryOptionalField = "LastModifiedDate"
-	InventoryOptionalFieldStorageClass              InventoryOptionalField = "StorageClass"
-	InventoryOptionalFieldEtag                      InventoryOptionalField = "ETag"
-	InventoryOptionalFieldIsMultipartUploaded       InventoryOptionalField = "IsMultipartUploaded"
-	InventoryOptionalFieldReplicationStatus         InventoryOptionalField = "ReplicationStatus"
-	InventoryOptionalFieldEncryptionStatus          InventoryOptionalField = "EncryptionStatus"
-	InventoryOptionalFieldObjectLockRetainUntilDate InventoryOptionalField = "ObjectLockRetainUntilDate"
-	InventoryOptionalFieldObjectLockMode            InventoryOptionalField = "ObjectLockMode"
-	InventoryOptionalFieldObjectLockLegalHoldStatus InventoryOptionalField = "ObjectLockLegalHoldStatus"
+	InventoryOptionalFieldSize                         InventoryOptionalField = "Size"
+	InventoryOptionalFieldLastModifiedDate             InventoryOptionalField = "LastModifiedDate"
+	InventoryOptionalFieldStorageClass                 InventoryOptionalField = "StorageClass"
+	InventoryOptionalFieldEtag                         InventoryOptionalField = "ETag"
+	InventoryOptionalFieldIsMultipartUploaded          InventoryOptionalField = "IsMultipartUploaded"
+	InventoryOptionalFieldReplicationStatus            InventoryOptionalField = "ReplicationStatus"
+	InventoryOptionalFieldEncryptionStatus             InventoryOptionalField = "EncryptionStatus"
+	InventoryOptionalFieldObjectLockRetainUntilDate    InventoryOptionalField = "ObjectLockRetainUntilDate"
+	InventoryOptionalFieldObjectLockMode               InventoryOptionalField = "ObjectLockMode"
+	InventoryOptionalFieldObjectLockLegalHoldStatus    InventoryOptionalField = "ObjectLockLegalHoldStatus"
+	InventoryOptionalFieldIntelligentTieringAccessTier InventoryOptionalField = "IntelligentTieringAccessTier"
 )
 
 func (enum InventoryOptionalField) MarshalValue() (string, error) {
@@ -408,6 +432,23 @@ func (enum MetadataDirective) MarshalValue() (string, error) {
 }
 
 func (enum MetadataDirective) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type MetricsStatus string
+
+// Enum values for MetricsStatus
+const (
+	MetricsStatusEnabled  MetricsStatus = "Enabled"
+	MetricsStatusDisabled MetricsStatus = "Disabled"
+)
+
+func (enum MetricsStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MetricsStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -658,6 +699,23 @@ func (enum ReplicationStatus) MarshalValue() (string, error) {
 }
 
 func (enum ReplicationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ReplicationTimeStatus string
+
+// Enum values for ReplicationTimeStatus
+const (
+	ReplicationTimeStatusEnabled  ReplicationTimeStatus = "Enabled"
+	ReplicationTimeStatusDisabled ReplicationTimeStatus = "Disabled"
+)
+
+func (enum ReplicationTimeStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReplicationTimeStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

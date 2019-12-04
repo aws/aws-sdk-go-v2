@@ -24,7 +24,7 @@ type ListUsersInput struct {
 	// server that has users assigned to it.
 	//
 	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
+	ServerId *string `min:"19" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -45,6 +45,9 @@ func (s *ListUsersInput) Validate() error {
 	if s.ServerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
 	}
+	if s.ServerId != nil && len(*s.ServerId) < 19 {
+		invalidParams.Add(aws.NewErrParamMinLen("ServerId", 19))
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -64,7 +67,7 @@ type ListUsersOutput struct {
 	// assigned to.
 	//
 	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
+	ServerId *string `min:"19" type:"string" required:"true"`
 
 	// Returns the user accounts and their properties for the ServerId value that
 	// you specify.

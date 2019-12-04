@@ -1,11 +1,12 @@
-FROM ubuntu:12.04
-FROM golang:1.11
+FROM golang:1.13
 
-ADD . /go/src/github.com/aws/aws-sdk-go
+ENV GOPROXY=direct
+
+ADD . /go/src/github.com/aws/aws-sdk-go-v2
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		vim \
 	&& rm -rf /var/list/apt/lists/*
 
-WORKDIR /go/src/github.com/aws/aws-sdk-go
+WORKDIR /go/src/github.com/aws/aws-sdk-go-v2
 CMD ["make", "unit"]

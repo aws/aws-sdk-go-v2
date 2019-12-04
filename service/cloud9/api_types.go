@@ -62,11 +62,15 @@ type EnvironmentLifecycle struct {
 
 	// The current creation or deletion lifecycle state of the environment.
 	//
+	//    * CREATING: The environment is in the process of being created.
+	//
 	//    * CREATED: The environment was successfully created.
 	//
-	//    * DELETE_FAILED: The environment failed to delete.
+	//    * CREATE_FAILED: The environment failed to be created.
 	//
 	//    * DELETING: The environment is in the process of being deleted.
+	//
+	//    * DELETE_FAILED: The environment failed to delete.
 	Status EnvironmentLifecycleStatus `locationName:"status" type:"string" enum:"true"`
 }
 

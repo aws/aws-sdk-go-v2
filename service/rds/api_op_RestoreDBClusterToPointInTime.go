@@ -101,10 +101,10 @@ type RestoreDBClusterToPointInTimeInput struct {
 	//    * If the DB cluster is encrypted, then the restored DB cluster is encrypted
 	//    using the KMS key that was used to encrypt the source DB cluster.
 	//
-	//    * If the DB cluster is not encrypted, then the restored DB cluster is
-	//    not encrypted.
+	//    * If the DB cluster isn't encrypted, then the restored DB cluster isn't
+	//    encrypted.
 	//
-	// If DBClusterIdentifier refers to a DB cluster that is not encrypted, then
+	// If DBClusterIdentifier refers to a DB cluster that isn't encrypted, then
 	// the restore request is rejected.
 	KmsKeyId *string `type:"string"`
 
@@ -126,7 +126,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 	//
 	//    * Must be before the latest restorable time for the DB instance
 	//
-	//    * Must be specified if UseLatestRestorableTime parameter is not provided
+	//    * Must be specified if UseLatestRestorableTime parameter isn't provided
 	//
 	//    * Can't be specified if the UseLatestRestorableTime parameter is enabled
 	//
@@ -165,7 +165,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// A value that indicates whether to restore the DB cluster to the latest restorable
-	// backup time. By default, the DB cluster is not restored to the latest restorable
+	// backup time. By default, the DB cluster isn't restored to the latest restorable
 	// backup time.
 	//
 	// Constraints: Can't be specified if RestoreToTime parameter is provided.

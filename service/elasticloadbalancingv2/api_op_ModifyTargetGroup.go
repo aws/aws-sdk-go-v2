@@ -19,7 +19,7 @@ type ModifyTargetGroupInput struct {
 	// target. For Application Load Balancers, the range is 5 to 300 seconds. For
 	// Network Load Balancers, the supported values are 10 or 30 seconds.
 	//
-	// If the protocol of the target group is TCP, you can't modify this setting.
+	// With Network Load Balancers, you can't modify this setting.
 	HealthCheckIntervalSeconds *int64 `min:"5" type:"integer"`
 
 	// [HTTP/HTTPS health checks] The ping path that is the destination for the
@@ -34,13 +34,13 @@ type ModifyTargetGroupInput struct {
 	// target group is TCP, TLS, UDP, or TCP_UDP. The TLS, UDP, and TCP_UDP protocols
 	// are not supported for health checks.
 	//
-	// If the protocol of the target group is TCP, you can't modify this setting.
+	// With Network Load Balancers, you can't modify this setting.
 	HealthCheckProtocol ProtocolEnum `type:"string" enum:"true"`
 
 	// [HTTP/HTTPS health checks] The amount of time, in seconds, during which no
 	// response means a failed health check.
 	//
-	// If the protocol of the target group is TCP, you can't modify this setting.
+	// With Network Load Balancers, you can't modify this setting.
 	HealthCheckTimeoutSeconds *int64 `min:"2" type:"integer"`
 
 	// The number of consecutive health checks successes required before considering
@@ -50,7 +50,7 @@ type ModifyTargetGroupInput struct {
 	// [HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful
 	// response from a target.
 	//
-	// If the protocol of the target group is TCP, you can't modify this setting.
+	// With Network Load Balancers, you can't modify this setting.
 	Matcher *Matcher `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the target group.

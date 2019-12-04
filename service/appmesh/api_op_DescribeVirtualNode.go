@@ -71,7 +71,7 @@ func (s DescribeVirtualNodeInput) MarshalFields(e protocol.FieldEncoder) error {
 type DescribeVirtualNodeOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualNode"`
 
-	// An object representing a virtual node returned by a describe operation.
+	// An object that represents a virtual node returned by a describe operation.
 	//
 	// VirtualNode is a required field
 	VirtualNode *VirtualNodeData `locationName:"virtualNode" type:"structure" required:"true"`

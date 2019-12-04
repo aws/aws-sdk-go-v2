@@ -14,6 +14,11 @@ import (
 type CreateIdentityPoolInput struct {
 	_ struct{} `type:"structure"`
 
+	// Enables or disables the Basic (Classic) authentication flow. For more information,
+	// see Identity Pools (Federated Identities) Authentication Flow (https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html)
+	// in the Amazon Cognito Developer Guide.
+	AllowClassicFlow *bool `type:"boolean"`
+
 	// TRUE if the identity pool supports unauthenticated logins.
 	//
 	// AllowUnauthenticatedIdentities is a required field
@@ -92,6 +97,11 @@ func (s *CreateIdentityPoolInput) Validate() error {
 type CreateIdentityPoolOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Enables or disables the Basic (Classic) authentication flow. For more information,
+	// see Identity Pools (Federated Identities) Authentication Flow (https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html)
+	// in the Amazon Cognito Developer Guide.
+	AllowClassicFlow *bool `type:"boolean"`
+
 	// TRUE if the identity pool supports unauthenticated logins.
 	//
 	// AllowUnauthenticatedIdentities is a required field
@@ -140,8 +150,8 @@ const opCreateIdentityPool = "CreateIdentityPool"
 // Amazon Cognito Identity.
 //
 // Creates a new identity pool. The identity pool is a store of user identity
-// information that is specific to your AWS account. The limit on identity pools
-// is 60 per account. The keys for SupportedLoginProviders are as follows:
+// information that is specific to your AWS account. The keys for SupportedLoginProviders
+// are as follows:
 //
 //    * Facebook: graph.facebook.com
 //

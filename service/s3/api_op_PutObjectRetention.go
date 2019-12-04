@@ -19,7 +19,7 @@ type PutObjectRetentionInput struct {
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
-	// Indicates whether this operation should bypass Governance-mode restrictions.j
+	// Indicates whether this operation should bypass Governance-mode restrictions.
 	BypassGovernanceRetention *bool `location:"header" locationName:"x-amz-bypass-governance-retention" type:"boolean"`
 
 	// The key name for the object that you want to apply this Object Retention
@@ -147,6 +147,10 @@ const opPutObjectRetention = "PutObjectRetention"
 // Amazon Simple Storage Service.
 //
 // Places an Object Retention configuration on an object.
+//
+// Related Resources
+//
+//    * Locking Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html)
 //
 //    // Example sending a request using PutObjectRetentionRequest.
 //    req := client.PutObjectRetentionRequest(params)

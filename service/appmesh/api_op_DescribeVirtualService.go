@@ -68,7 +68,7 @@ func (s DescribeVirtualServiceInput) MarshalFields(e protocol.FieldEncoder) erro
 type DescribeVirtualServiceOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualService"`
 
-	// An object representing a virtual service returned by a describe operation.
+	// An object that represents a virtual service returned by a describe operation.
 	//
 	// VirtualService is a required field
 	VirtualService *VirtualServiceData `locationName:"virtualService" type:"structure" required:"true"`

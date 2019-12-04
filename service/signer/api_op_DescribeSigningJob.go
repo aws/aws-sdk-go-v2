@@ -76,7 +76,7 @@ type DescribeSigningJobOutput struct {
 	// The IAM principal that requested the signing job.
 	RequestedBy *string `locationName:"requestedBy" type:"string"`
 
-	// Name of the S3 bucket where the signed code image is saved by AWS Signer.
+	// Name of the S3 bucket where the signed code image is saved by code signing.
 	SignedObject *SignedObject `locationName:"signedObject" type:"structure"`
 
 	// Amazon Resource Name (ARN) of your code signing certificate.

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Contains the parameters for CreateVolume.
 type CreateVolumeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -128,6 +127,9 @@ type CreateVolumeOutput struct {
 
 	// Indicates whether the volume is encrypted.
 	Encrypted *bool `locationName:"encrypted" type:"boolean"`
+
+	// Indicates whether the volume was created using fast snapshot restore.
+	FastRestored *bool `locationName:"fastRestored" type:"boolean"`
 
 	// The number of I/O operations per second (IOPS) that the volume supports.
 	// For Provisioned IOPS SSD volumes, this represents the number of IOPS that

@@ -86,7 +86,22 @@ const opGetBucketPolicyStatus = "GetBucketPolicyStatus"
 // Amazon Simple Storage Service.
 //
 // Retrieves the policy status for an Amazon S3 bucket, indicating whether the
-// bucket is public.
+// bucket is public. In order to use this operation, you must have the s3:GetBucketPolicyStatus
+// permission. For more information about Amazon S3 permissions, see Specifying
+// Permissions in a Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html).
+//
+// For more information about when Amazon S3 considers a bucket public, see
+// The Meaning of "Public" (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status).
+//
+// The following operations are related to GetBucketPolicyStatus:
+//
+//    * Using Amazon S3 Block Public Access (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
+//
+//    * GetPublicAccessBlock
+//
+//    * PutPublicAccessBlock
+//
+//    * DeletePublicAccessBlock
 //
 //    // Example sending a request using GetBucketPolicyStatusRequest.
 //    req := client.GetBucketPolicyStatusRequest(params)

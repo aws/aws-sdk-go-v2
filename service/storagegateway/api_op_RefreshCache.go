@@ -95,6 +95,17 @@ const opRefreshCache = "RefreshCache"
 // for new files on the gateway file share. You can subscribe to be notified
 // through an CloudWatch event when your RefreshCache operation completes.
 //
+// Throttle limit: This API is asynchronous so the gateway will accept no more
+// than two refreshes at any time. We recommend using the refresh-complete CloudWatch
+// event notification before issuing additional requests. For more information,
+// see Getting Notified About File Operations (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification).
+//
+// If you invoke the RefreshCache API when two requests are already being processed,
+// any new request will cause an InvalidGatewayRequestException error because
+// too many requests were sent to the server.
+//
+// For more information, see "https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification".
+//
 //    // Example sending a request using RefreshCacheRequest.
 //    req := client.RefreshCacheRequest(params)
 //    resp, err := req.Send(context.TODO())

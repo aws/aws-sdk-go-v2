@@ -4,6 +4,7 @@ package cloudtrail
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -40,7 +41,9 @@ type CreateTrailInput struct {
 	IncludeGlobalServiceEvents *bool `type:"boolean"`
 
 	// Specifies whether the trail is created in the current region or in all regions.
-	// The default is false.
+	// The default is false, which creates a trail only in the region where you
+	// are signed in. As a best practice, consider creating trails that log events
+	// in all regions.
 	IsMultiRegionTrail *bool `type:"boolean"`
 
 	// Specifies whether the trail is created for all accounts in an organization
@@ -82,20 +85,23 @@ type CreateTrailInput struct {
 	Name *string `type:"string" required:"true"`
 
 	// Specifies the name of the Amazon S3 bucket designated for publishing log
-	// files. See Amazon S3 Bucket Naming Requirements (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html).
+	// files. See Amazon S3 Bucket Naming Requirements (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html).
 	//
 	// S3BucketName is a required field
 	S3BucketName *string `type:"string" required:"true"`
 
 	// Specifies the Amazon S3 key prefix that comes after the name of the bucket
 	// you have designated for log file delivery. For more information, see Finding
-	// Your CloudTrail Log Files (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html).
+	// Your CloudTrail Log Files (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html).
 	// The maximum length is 200 characters.
 	S3KeyPrefix *string `type:"string"`
 
 	// Specifies the name of the Amazon SNS topic defined for notification of log
 	// file delivery. The maximum length is 256 characters.
 	SnsTopicName *string `type:"string"`
+
+	// A list of tags.
+	TagsList []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -113,6 +119,13 @@ func (s *CreateTrailInput) Validate() error {
 
 	if s.S3BucketName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3BucketName"))
+	}
+	if s.TagsList != nil {
+		for i, v := range s.TagsList {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagsList", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -162,7 +175,7 @@ type CreateTrailOutput struct {
 
 	// Specifies the Amazon S3 key prefix that comes after the name of the bucket
 	// you have designated for log file delivery. For more information, see Finding
-	// Your CloudTrail Log Files (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html).
+	// Your CloudTrail Log Files (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html).
 	S3KeyPrefix *string `type:"string"`
 
 	// Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications
@@ -171,7 +184,7 @@ type CreateTrailOutput struct {
 	// arn:aws:sns:us-east-2:123456789012:MyTopic
 	SnsTopicARN *string `type:"string"`
 
-	// This field is deprecated. Use SnsTopicARN.
+	// This field is no longer in use. Use SnsTopicARN.
 	SnsTopicName *string `deprecated:"true" type:"string"`
 
 	// Specifies the ARN of the trail that was created. The format of a trail ARN
@@ -192,8 +205,7 @@ const opCreateTrail = "CreateTrail"
 // AWS CloudTrail.
 //
 // Creates a trail that specifies the settings for delivery of log data to an
-// Amazon S3 bucket. A maximum of five trails can exist in a region, irrespective
-// of the region in which they were created.
+// Amazon S3 bucket.
 //
 //    // Example sending a request using CreateTrailRequest.
 //    req := client.CreateTrailRequest(params)

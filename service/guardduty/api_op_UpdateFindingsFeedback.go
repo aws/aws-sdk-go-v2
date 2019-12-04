@@ -16,13 +16,12 @@ type UpdateFindingsFeedbackInput struct {
 	// Additional feedback about the GuardDuty findings.
 	Comments *string `locationName:"comments" type:"string"`
 
-	// The ID of the detector that specifies the GuardDuty service whose findings
-	// you want to mark as useful or not useful.
+	// The ID of the detector associated with the findings to update feedback for.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// Valid values: USEFUL | NOT_USEFUL
+	// The feedback for the finding.
 	//
 	// Feedback is a required field
 	Feedback Feedback `locationName:"feedback" type:"string" required:"true" enum:"true"`
@@ -118,7 +117,7 @@ const opUpdateFindingsFeedback = "UpdateFindingsFeedback"
 // UpdateFindingsFeedbackRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Marks specified Amazon GuardDuty findings as useful or not useful.
+// Marks the specified GuardDuty findings as useful or not useful.
 //
 //    // Example sending a request using UpdateFindingsFeedbackRequest.
 //    req := client.UpdateFindingsFeedbackRequest(params)

@@ -13,7 +13,7 @@ import (
 type GetBucketNotificationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Name of the bucket to get the notification configuration for.
+	// Name of the bucket for which to get the notification configuration
 	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
@@ -60,10 +60,17 @@ func (s GetBucketNotificationInput) MarshalFields(e protocol.FieldEncoder) error
 type GetBucketNotificationOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Container for specifying the AWS Lambda notification configuration.
 	CloudFunctionConfiguration *CloudFunctionConfiguration `type:"structure"`
 
+	// This data type is deprecated. This data type specifies the configuration
+	// for publishing messages to an Amazon Simple Queue Service (Amazon SQS) queue
+	// when Amazon S3 detects specified events.
 	QueueConfiguration *QueueConfigurationDeprecated `type:"structure"`
 
+	// This data type is deperecated. A container for specifying the configuration
+	// for publication of messages to an Amazon Simple Notification Service (Amazon
+	// SNS) topic when Amazon S3 detects specified events.
 	TopicConfiguration *TopicConfigurationDeprecated `type:"structure"`
 }
 
@@ -100,7 +107,7 @@ const opGetBucketNotification = "GetBucketNotification"
 // GetBucketNotificationRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// No longer used, see the GetBucketNotificationConfiguration operation.
+// No longer used, see GetBucketNotificationConfiguration.
 //
 //    // Example sending a request using GetBucketNotificationRequest.
 //    req := client.GetBucketNotificationRequest(params)

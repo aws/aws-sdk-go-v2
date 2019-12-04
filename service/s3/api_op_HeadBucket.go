@@ -14,6 +14,8 @@ import (
 type HeadBucketInput struct {
 	_ struct{} `type:"structure"`
 
+	// The bucket name.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -76,7 +78,15 @@ const opHeadBucket = "HeadBucket"
 // Amazon Simple Storage Service.
 //
 // This operation is useful to determine if a bucket exists and you have permission
-// to access it.
+// to access it. The operation returns a 200 OK if the bucket exists and you
+// have permission to access it. Otherwise, the operation might return responses
+// such as 404 Not Found and 403 Forbidden.
+//
+// To use this operation, you must have permissions to perform the s3:ListBucket
+// action. The bucket owner has this permission by default and can grant this
+// permission to others. For more information about permissions, see Permissions
+// Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
 //
 //    // Example sending a request using HeadBucketRequest.
 //    req := client.HeadBucketRequest(params)

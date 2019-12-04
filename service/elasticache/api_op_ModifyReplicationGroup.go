@@ -26,6 +26,29 @@ type ModifyReplicationGroupInput struct {
 	// Default: false
 	ApplyImmediately *bool `type:"boolean"`
 
+	// Reserved parameter. The password used to access a password protected server.
+	// This parameter must be specified with the auth-token-update-strategy parameter.
+	// Password constraints:
+	//
+	//    * Must be only printable ASCII characters
+	//
+	//    * Must be at least 16 characters and no more than 128 characters in length
+	//
+	//    * Cannot contain any of the following characters: '/', '"', or '@', '%'
+	//
+	// For more information, see AUTH password at AUTH (http://redis.io/commands/AUTH).
+	AuthToken *string `type:"string"`
+
+	// Specifies the strategy to use to update the AUTH token. This parameter must
+	// be specified with the auth-token parameter. Possible values:
+	//
+	//    * Rotate
+	//
+	//    * Set
+	//
+	// For more information, see Authenticating Users with Redis AUTH (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html)
+	AuthTokenUpdateStrategy AuthTokenUpdateStrategyType `type:"string" enum:"true"`
+
 	// This parameter is currently disabled.
 	AutoMinorVersionUpgrade *bool `type:"boolean"`
 

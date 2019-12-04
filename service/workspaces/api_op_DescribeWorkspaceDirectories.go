@@ -16,6 +16,9 @@ type DescribeWorkspaceDirectoriesInput struct {
 	// are retrieved.
 	DirectoryIds []string `min:"1" type:"list"`
 
+	// The maximum number of directories to return.
+	Limit *int64 `min:"1" type:"integer"`
+
 	// If you received a NextToken from a previous call that was paginated, provide
 	// this token to receive the next set of results.
 	NextToken *string `min:"1" type:"string"`
@@ -31,6 +34,9 @@ func (s *DescribeWorkspaceDirectoriesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkspaceDirectoriesInput"}
 	if s.DirectoryIds != nil && len(s.DirectoryIds) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DirectoryIds", 1))
+	}
+	if s.Limit != nil && *s.Limit < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
@@ -63,8 +69,7 @@ const opDescribeWorkspaceDirectories = "DescribeWorkspaceDirectories"
 // DescribeWorkspaceDirectoriesRequest returns a request value for making API operation for
 // Amazon WorkSpaces.
 //
-// Describes the available AWS Directory Service directories that are registered
-// with Amazon WorkSpaces.
+// Describes the available directories that are registered with Amazon WorkSpaces.
 //
 //    // Example sending a request using DescribeWorkspaceDirectoriesRequest.
 //    req := client.DescribeWorkspaceDirectoriesRequest(params)

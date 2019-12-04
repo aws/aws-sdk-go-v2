@@ -138,9 +138,10 @@ type ComputeType string
 
 // Enum values for ComputeType
 const (
-	ComputeTypeBuildGeneral1Small  ComputeType = "BUILD_GENERAL1_SMALL"
-	ComputeTypeBuildGeneral1Medium ComputeType = "BUILD_GENERAL1_MEDIUM"
-	ComputeTypeBuildGeneral1Large  ComputeType = "BUILD_GENERAL1_LARGE"
+	ComputeTypeBuildGeneral1Small   ComputeType = "BUILD_GENERAL1_SMALL"
+	ComputeTypeBuildGeneral1Medium  ComputeType = "BUILD_GENERAL1_MEDIUM"
+	ComputeTypeBuildGeneral1Large   ComputeType = "BUILD_GENERAL1_LARGE"
+	ComputeTypeBuildGeneral12xlarge ComputeType = "BUILD_GENERAL1_2XLARGE"
 )
 
 func (enum ComputeType) MarshalValue() (string, error) {
@@ -172,8 +173,10 @@ type EnvironmentType string
 
 // Enum values for EnvironmentType
 const (
-	EnvironmentTypeWindowsContainer EnvironmentType = "WINDOWS_CONTAINER"
-	EnvironmentTypeLinuxContainer   EnvironmentType = "LINUX_CONTAINER"
+	EnvironmentTypeWindowsContainer  EnvironmentType = "WINDOWS_CONTAINER"
+	EnvironmentTypeLinuxContainer    EnvironmentType = "LINUX_CONTAINER"
+	EnvironmentTypeLinuxGpuContainer EnvironmentType = "LINUX_GPU_CONTAINER"
+	EnvironmentTypeArmContainer      EnvironmentType = "ARM_CONTAINER"
 )
 
 func (enum EnvironmentType) MarshalValue() (string, error) {
@@ -191,6 +194,7 @@ type EnvironmentVariableType string
 const (
 	EnvironmentVariableTypePlaintext      EnvironmentVariableType = "PLAINTEXT"
 	EnvironmentVariableTypeParameterStore EnvironmentVariableType = "PARAMETER_STORE"
+	EnvironmentVariableTypeSecretsManager EnvironmentVariableType = "SECRETS_MANAGER"
 )
 
 func (enum EnvironmentVariableType) MarshalValue() (string, error) {

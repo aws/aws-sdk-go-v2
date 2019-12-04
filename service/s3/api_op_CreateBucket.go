@@ -16,9 +16,12 @@ type CreateBucketInput struct {
 	// The canned ACL to apply to the bucket.
 	ACL BucketCannedACL `location:"header" locationName:"x-amz-acl" type:"string" enum:"true"`
 
+	// The name of the bucket to create.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
+	// The configuration information for the bucket.
 	CreateBucketConfiguration *CreateBucketConfiguration `locationName:"CreateBucketConfiguration" type:"structure" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 
 	// Allows grantee the read, write, read ACP, and write ACP permissions on the
@@ -37,8 +40,7 @@ type CreateBucketInput struct {
 	// Allows grantee to write the ACL for the applicable bucket.
 	GrantWriteACP *string `location:"header" locationName:"x-amz-grant-write-acp" type:"string"`
 
-	// Specifies whether you want Amazon S3 object lock to be enabled for the new
-	// bucket.
+	// Specifies whether you want S3 Object Lock to be enabled for the new bucket.
 	ObjectLockEnabledForBucket *bool `location:"header" locationName:"x-amz-bucket-object-lock-enabled" type:"boolean"`
 }
 
@@ -131,6 +133,9 @@ func (s CreateBucketInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateBucketOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies the region where the bucket will be created. If you are creating
+	// a bucket on the US East (N. Virginia) region (us-east-1), you do not need
+	// to specify the location.
 	Location *string `location:"header" locationName:"Location" type:"string"`
 }
 
@@ -155,7 +160,60 @@ const opCreateBucket = "CreateBucket"
 // CreateBucketRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Creates a new bucket.
+// Creates a new bucket. To create a bucket, you must register with Amazon S3
+// and have a valid AWS Access Key ID to authenticate requests. Anonymous requests
+// are never allowed to create buckets. By creating the bucket, you become the
+// bucket owner.
+//
+// Not every string is an acceptable bucket name. For information on bucket
+// naming restrictions, see Working with Amazon S3 Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html).
+//
+// By default, the bucket is created in the US East (N. Virginia) region. You
+// can optionally specify a region in the request body. You might choose a region
+// to optimize latency, minimize costs, or address regulatory requirements.
+// For example, if you reside in Europe, you will probably find it advantageous
+// to create buckets in the EU (Ireland) region. For more information, see How
+// to Select a Region for Your Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro).
+//
+// If you send your create bucket request to the s3.amazonaws.com endpoint,
+// the request go to the us-east-1 region. Accordingly, the signature calculations
+// in Signature Version 4 must use us-east-1 as region, even if the location
+// constraint in the request specifies another region where the bucket is to
+// be created. If you create a bucket in a region other than US East (N. Virginia)
+// region, your application must be able to handle 307 redirect. For more information,
+// see Virtual Hosting of Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html).
+//
+// When creating a bucket using this operation, you can optionally specify the
+// accounts or groups that should be granted specific permissions on the bucket.
+// There are two ways to grant the appropriate permissions using the request
+// headers.
+//
+//    * Specify a canned ACL using the x-amz-acl request header. Amazon S3 supports
+//    a set of predefined ACLs, known as canned ACLs. Each canned ACL has a
+//    predefined set of grantees and permissions. For more information, see
+//    Canned ACL (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
+//
+//    * Specify access permissions explicitly using the x-amz-grant-read, x-amz-grant-write,
+//    x-amz-grant-read-acp, x-amz-grant-write-acp, x-amz-grant-full-control
+//    headers. These headers map to the set of permissions Amazon S3 supports
+//    in an ACL. For more information, see Access Control List (ACL) Overview
+//    (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html). You
+//    specify each grantee as a type=value pair, where the type is one of the
+//    following: emailAddress – if the value specified is the email address
+//    of an AWS account id – if the value specified is the canonical user
+//    ID of an AWS account uri – if you are granting permissions to a predefined
+//    group For example, the following x-amz-grant-read header grants the AWS
+//    accounts identified by email addresses permissions to read object data
+//    and its metadata: x-amz-grant-read: emailAddress="xyz@amazon.com", emailAddress="abc@amazon.com"
+//
+// You can use either a canned ACL or specify access permissions explicitly.
+// You cannot do both.
+//
+// The following operations are related to CreateBucket:
+//
+//    * PutObject
+//
+//    * DeleteBucket
 //
 //    // Example sending a request using CreateBucketRequest.
 //    req := client.CreateBucketRequest(params)

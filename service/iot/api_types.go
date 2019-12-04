@@ -184,6 +184,9 @@ type Action struct {
 	// Write to an Amazon Kinesis Firehose stream.
 	Firehose *FirehoseAction `locationName:"firehose" type:"structure"`
 
+	// Send data to an HTTPS endpoint.
+	Http *HttpAction `locationName:"http" type:"structure"`
+
 	// Sends message data to an AWS IoT Analytics channel.
 	IotAnalytics *IotAnalyticsAction `locationName:"iotAnalytics" type:"structure"`
 
@@ -251,6 +254,11 @@ func (s *Action) Validate() error {
 	if s.Firehose != nil {
 		if err := s.Firehose.Validate(); err != nil {
 			invalidParams.AddNested("Firehose", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Http != nil {
+		if err := s.Http.Validate(); err != nil {
+			invalidParams.AddNested("Http", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.IotEvents != nil {
@@ -342,6 +350,12 @@ func (s Action) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "firehose", v, metadata)
+	}
+	if s.Http != nil {
+		v := s.Http
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "http", v, metadata)
 	}
 	if s.IotAnalytics != nil {
 		v := s.IotAnalytics
@@ -3131,6 +3145,39 @@ func (s ExponentialRolloutRate) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The field to aggregate.
+type Field struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the field.
+	Name *string `locationName:"name" type:"string"`
+
+	// The data type of the field.
+	Type FieldType `locationName:"type" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s Field) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Field) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // The location of the OTA update.
 type FileLocation struct {
 	_ struct{} `type:"structure"`
@@ -3279,6 +3326,286 @@ func (s GroupNameAndArn) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "groupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Send data to an HTTPS endpoint.
+type HttpAction struct {
+	_ struct{} `type:"structure"`
+
+	// The authentication method to use when sending data to an HTTPS endpoint.
+	Auth *HttpAuthorization `locationName:"auth" type:"structure"`
+
+	// The URL to which AWS IoT sends a confirmation message. The value of the confirmation
+	// URL must be a prefix of the endpoint URL. If you do not specify a confirmation
+	// URL AWS IoT uses the endpoint URL as the confirmation URL. If you use substitution
+	// templates in the confirmationUrl, you must create and enable topic rule destinations
+	// that match each possible value of the substituion template before traffic
+	// is allowed to your endpoint URL.
+	ConfirmationUrl *string `locationName:"confirmationUrl" type:"string"`
+
+	// The HTTP headers to send with the message data.
+	Headers []HttpActionHeader `locationName:"headers" type:"list"`
+
+	// The endpoint URL. If substitution templates are used in the URL, you must
+	// also specify a confirmationUrl. If this is a new destination, a new TopicRuleDestination
+	// is created if possible.
+	//
+	// Url is a required field
+	Url *string `locationName:"url" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s HttpAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpAction) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HttpAction"}
+
+	if s.Url == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Url"))
+	}
+	if s.Auth != nil {
+		if err := s.Auth.Validate(); err != nil {
+			invalidParams.AddNested("Auth", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Headers != nil {
+		for i, v := range s.Headers {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Headers", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HttpAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Auth != nil {
+		v := s.Auth
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "auth", v, metadata)
+	}
+	if s.ConfirmationUrl != nil {
+		v := *s.ConfirmationUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "confirmationUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Headers != nil {
+		v := s.Headers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "headers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Url != nil {
+		v := *s.Url
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The HTTP action header.
+type HttpActionHeader struct {
+	_ struct{} `type:"structure"`
+
+	// The HTTP header key.
+	//
+	// Key is a required field
+	Key *string `locationName:"key" min:"1" type:"string" required:"true"`
+
+	// The HTTP header value. Substitution templates are supported.
+	//
+	// Value is a required field
+	Value *string `locationName:"value" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s HttpActionHeader) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpActionHeader) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HttpActionHeader"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HttpActionHeader) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "key", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The authorization method used to send messages.
+type HttpAuthorization struct {
+	_ struct{} `type:"structure"`
+
+	// Use Sig V4 authorization. For more information, see Signature Version 4 Signing
+	// Process (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+	Sigv4 *SigV4Authorization `locationName:"sigv4" type:"structure"`
+}
+
+// String returns the string representation
+func (s HttpAuthorization) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpAuthorization) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HttpAuthorization"}
+	if s.Sigv4 != nil {
+		if err := s.Sigv4.Validate(); err != nil {
+			invalidParams.AddNested("Sigv4", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HttpAuthorization) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Sigv4 != nil {
+		v := s.Sigv4
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "sigv4", v, metadata)
+	}
+	return nil
+}
+
+// HTTP URL destination configuration used by the topic rule's HTTP action.
+type HttpUrlDestinationConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The URL AWS IoT uses to confirm ownership of or access to the topic rule
+	// destination URL.
+	//
+	// ConfirmationUrl is a required field
+	ConfirmationUrl *string `locationName:"confirmationUrl" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s HttpUrlDestinationConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpUrlDestinationConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HttpUrlDestinationConfiguration"}
+
+	if s.ConfirmationUrl == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ConfirmationUrl"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HttpUrlDestinationConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConfirmationUrl != nil {
+		v := *s.ConfirmationUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "confirmationUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// HTTP URL destination properties.
+type HttpUrlDestinationProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The URL used to confirm the HTTP topic rule destination URL.
+	ConfirmationUrl *string `locationName:"confirmationUrl" type:"string"`
+}
+
+// String returns the string representation
+func (s HttpUrlDestinationProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HttpUrlDestinationProperties) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConfirmationUrl != nil {
+		v := *s.ConfirmationUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "confirmationUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Information about an HTTP URL destination.
+type HttpUrlDestinationSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The URL used to confirm ownership of or access to the HTTP topic rule destination
+	// URL.
+	ConfirmationUrl *string `locationName:"confirmationUrl" type:"string"`
+}
+
+// String returns the string representation
+func (s HttpUrlDestinationSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HttpUrlDestinationSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConfirmationUrl != nil {
+		v := *s.ConfirmationUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "confirmationUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5109,6 +5436,39 @@ func (s OutgoingCertificate) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Describes the percentile and percentile value.
+type PercentPair struct {
+	_ struct{} `type:"structure"`
+
+	// The percentile.
+	Percent *float64 `locationName:"percent" type:"double"`
+
+	// The value of the percentile.
+	Value *float64 `locationName:"value" type:"double"`
+}
+
+// String returns the string representation
+func (s PercentPair) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PercentPair) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Percent != nil {
+		v := *s.Percent
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "percent", protocol.Float64Value(v), metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "value", protocol.Float64Value(v), metadata)
+	}
+	return nil
+}
+
 // Describes an AWS IoT policy.
 type Policy struct {
 	_ struct{} `type:"structure"`
@@ -5557,7 +5917,8 @@ func (s ReplaceDefaultPolicyVersionParams) MarshalFields(e protocol.FieldEncoder
 type RepublishAction struct {
 	_ struct{} `type:"structure"`
 
-	// The Quality of Service (QoS) level to use when republishing messages.
+	// The Quality of Service (QoS) level to use when republishing messages. The
+	// default value is 0.
 	Qos *int64 `locationName:"qos" type:"integer"`
 
 	// The ARN of the IAM role that grants access.
@@ -6194,6 +6555,76 @@ func (s SecurityProfileTargetMapping) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
+// Use Sig V4 authorization.
+type SigV4Authorization struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the signing role.
+	//
+	// RoleArn is a required field
+	RoleArn *string `locationName:"roleArn" type:"string" required:"true"`
+
+	// The service name to use while signing with Sig V4.
+	//
+	// ServiceName is a required field
+	ServiceName *string `locationName:"serviceName" type:"string" required:"true"`
+
+	// The signing region.
+	//
+	// SigningRegion is a required field
+	SigningRegion *string `locationName:"signingRegion" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s SigV4Authorization) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SigV4Authorization) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SigV4Authorization"}
+
+	if s.RoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
+
+	if s.ServiceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ServiceName"))
+	}
+
+	if s.SigningRegion == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SigningRegion"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SigV4Authorization) MarshalFields(e protocol.FieldEncoder) error {
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ServiceName != nil {
+		v := *s.ServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "serviceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SigningRegion != nil {
+		v := *s.SigningRegion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "signingRegion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Describes the code-signing profile.
 type SigningProfileParameter struct {
 	_ struct{} `type:"structure"`
@@ -6463,8 +6894,33 @@ func (s StatisticalThreshold) MarshalFields(e protocol.FieldEncoder) error {
 type Statistics struct {
 	_ struct{} `type:"structure"`
 
+	// The average of the aggregated fields. If the field data type is String this
+	// value is indeterminate.
+	Average *float64 `locationName:"average" type:"double"`
+
 	// The count of things that match the query.
 	Count *int64 `locationName:"count" type:"integer"`
+
+	// The maximum value of the aggregated fields. If the field data type is String
+	// this value is indeterminate.
+	Maximum *float64 `locationName:"maximum" type:"double"`
+
+	// The minimum value of the aggregated fields. If the field data type is String
+	// this value is indeterminate.
+	Minimum *float64 `locationName:"minimum" type:"double"`
+
+	// The standard deviation of the aggregated field values.
+	StdDeviation *float64 `locationName:"stdDeviation" type:"double"`
+
+	// The sum of the aggregated fields. If the field data type is String this value
+	// is indeterminate.
+	Sum *float64 `locationName:"sum" type:"double"`
+
+	// The sum of the squares of the aggregated field values.
+	SumOfSquares *float64 `locationName:"sumOfSquares" type:"double"`
+
+	// The variance of the aggregated field values.
+	Variance *float64 `locationName:"variance" type:"double"`
 }
 
 // String returns the string representation
@@ -6474,11 +6930,53 @@ func (s Statistics) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Statistics) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Average != nil {
+		v := *s.Average
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "average", protocol.Float64Value(v), metadata)
+	}
 	if s.Count != nil {
 		v := *s.Count
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "count", protocol.Int64Value(v), metadata)
+	}
+	if s.Maximum != nil {
+		v := *s.Maximum
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maximum", protocol.Float64Value(v), metadata)
+	}
+	if s.Minimum != nil {
+		v := *s.Minimum
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "minimum", protocol.Float64Value(v), metadata)
+	}
+	if s.StdDeviation != nil {
+		v := *s.StdDeviation
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stdDeviation", protocol.Float64Value(v), metadata)
+	}
+	if s.Sum != nil {
+		v := *s.Sum
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sum", protocol.Float64Value(v), metadata)
+	}
+	if s.SumOfSquares != nil {
+		v := *s.SumOfSquares
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sumOfSquares", protocol.Float64Value(v), metadata)
+	}
+	if s.Variance != nil {
+		v := *s.Variance
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "variance", protocol.Float64Value(v), metadata)
 	}
 	return nil
 }
@@ -7234,6 +7732,13 @@ func (s ThingGroupDocument) MarshalFields(e protocol.FieldEncoder) error {
 type ThingGroupIndexingConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// A list of thing group fields to index. This list cannot contain any managed
+	// fields. Use the GetIndexingConfiguration API to get a list of managed fields.
+	CustomFields []Field `locationName:"customFields" type:"list"`
+
+	// A list of automatically indexed thing group fields.
+	ManagedFields []Field `locationName:"managedFields" type:"list"`
+
 	// Thing group indexing mode.
 	//
 	// ThingGroupIndexingMode is a required field
@@ -7260,6 +7765,30 @@ func (s *ThingGroupIndexingConfiguration) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ThingGroupIndexingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CustomFields != nil {
+		v := s.CustomFields
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "customFields", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.ManagedFields != nil {
+		v := s.ManagedFields
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "managedFields", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if len(s.ThingGroupIndexingMode) > 0 {
 		v := s.ThingGroupIndexingMode
 
@@ -7356,6 +7885,13 @@ func (s ThingGroupProperties) MarshalFields(e protocol.FieldEncoder) error {
 type ThingIndexingConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// A list of thing fields to index. This list cannot contain any managed fields.
+	// Use the GetIndexingConfiguration API to get a list of managed fields.
+	CustomFields []Field `locationName:"customFields" type:"list"`
+
+	// A list of automatically indexed thing fields.
+	ManagedFields []Field `locationName:"managedFields" type:"list"`
+
 	// Thing connectivity indexing mode. Valid values are:
 	//
 	//    * STATUS – Your thing index contains connectivity status. To enable
@@ -7397,6 +7933,30 @@ func (s *ThingIndexingConfiguration) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ThingIndexingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CustomFields != nil {
+		v := s.CustomFields
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "customFields", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.ManagedFields != nil {
+		v := s.ManagedFields
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "managedFields", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if len(s.ThingConnectivityIndexingMode) > 0 {
 		v := s.ThingConnectivityIndexingMode
 
@@ -7675,6 +8235,198 @@ func (s TopicRule) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "sql", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A topic rule destination.
+type TopicRuleDestination struct {
+	_ struct{} `type:"structure"`
+
+	// The topic rule destination URL.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// Properties of the HTTP URL.
+	HttpUrlProperties *HttpUrlDestinationProperties `locationName:"httpUrlProperties" type:"structure"`
+
+	// The status of the topic rule destination. Valid values are:
+	//
+	// IN_PROGRESS
+	//
+	// A topic rule destination was created but has not been confirmed. You can
+	// set status to IN_PROGRESS by calling UpdateTopicRuleDestination. Calling
+	// UpdateTopicRuleDestination causes a new confirmation challenge to be sent
+	// to your confirmation endpoint.
+	//
+	// ENABLED
+	//
+	// Confirmation was completed, and traffic to this destination is allowed. You
+	// can set status to DISABLED by calling UpdateTopicRuleDestination.
+	//
+	// DISABLED
+	//
+	// Confirmation was completed, and traffic to this destination is not allowed.
+	// You can set status to ENABLED by calling UpdateTopicRuleDestination.
+	//
+	// ERROR
+	//
+	// Confirmation could not be completed, for example if the confirmation timed
+	// out. You can call GetTopicRuleDestination for details about the error. You
+	// can set status to IN_PROGRESS by calling UpdateTopicRuleDestination. Calling
+	// UpdateTopicRuleDestination causes a new confirmation challenge to be sent
+	// to your confirmation endpoint.
+	Status TopicRuleDestinationStatus `locationName:"status" type:"string" enum:"true"`
+
+	// Additional details or reason why the topic rule destination is in the current
+	// status.
+	StatusReason *string `locationName:"statusReason" type:"string"`
+}
+
+// String returns the string representation
+func (s TopicRuleDestination) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TopicRuleDestination) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HttpUrlProperties != nil {
+		v := s.HttpUrlProperties
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "httpUrlProperties", v, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.StatusReason != nil {
+		v := *s.StatusReason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "statusReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Configuration of the topic rule destination.
+type TopicRuleDestinationConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Configuration of the HTTP URL.
+	HttpUrlConfiguration *HttpUrlDestinationConfiguration `locationName:"httpUrlConfiguration" type:"structure"`
+}
+
+// String returns the string representation
+func (s TopicRuleDestinationConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TopicRuleDestinationConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TopicRuleDestinationConfiguration"}
+	if s.HttpUrlConfiguration != nil {
+		if err := s.HttpUrlConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("HttpUrlConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TopicRuleDestinationConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HttpUrlConfiguration != nil {
+		v := s.HttpUrlConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "httpUrlConfiguration", v, metadata)
+	}
+	return nil
+}
+
+// Information about the topic rule destination.
+type TopicRuleDestinationSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The topic rule destination ARN.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// Information about the HTTP URL.
+	HttpUrlSummary *HttpUrlDestinationSummary `locationName:"httpUrlSummary" type:"structure"`
+
+	// The status of the topic rule destination. Valid values are:
+	//
+	// IN_PROGRESS
+	//
+	// A topic rule destination was created but has not been confirmed. You can
+	// set status to IN_PROGRESS by calling UpdateTopicRuleDestination. Calling
+	// UpdateTopicRuleDestination causes a new confirmation challenge to be sent
+	// to your confirmation endpoint.
+	//
+	// ENABLED
+	//
+	// Confirmation was completed, and traffic to this destination is allowed. You
+	// can set status to DISABLED by calling UpdateTopicRuleDestination.
+	//
+	// DISABLED
+	//
+	// Confirmation was completed, and traffic to this destination is not allowed.
+	// You can set status to ENABLED by calling UpdateTopicRuleDestination.
+	//
+	// ERROR
+	//
+	// Confirmation could not be completed, for example if the confirmation timed
+	// out. You can call GetTopicRuleDestination for details about the error. You
+	// can set status to IN_PROGRESS by calling UpdateTopicRuleDestination. Calling
+	// UpdateTopicRuleDestination causes a new confirmation challenge to be sent
+	// to your confirmation endpoint.
+	Status TopicRuleDestinationStatus `locationName:"status" type:"string" enum:"true"`
+
+	// The reason the topic rule destination is in the current status.
+	StatusReason *string `locationName:"statusReason" type:"string"`
+}
+
+// String returns the string representation
+func (s TopicRuleDestinationSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TopicRuleDestinationSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HttpUrlSummary != nil {
+		v := s.HttpUrlSummary
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "httpUrlSummary", v, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.StatusReason != nil {
+		v := *s.StatusReason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "statusReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

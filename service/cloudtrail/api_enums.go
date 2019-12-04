@@ -2,6 +2,38 @@
 
 package cloudtrail
 
+type EventCategory string
+
+// Enum values for EventCategory
+const (
+	EventCategoryInsight EventCategory = "insight"
+)
+
+func (enum EventCategory) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventCategory) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type InsightType string
+
+// Enum values for InsightType
+const (
+	InsightTypeApiCallRateInsight InsightType = "ApiCallRateInsight"
+)
+
+func (enum InsightType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InsightType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LookupAttributeKey string
 
 // Enum values for LookupAttributeKey

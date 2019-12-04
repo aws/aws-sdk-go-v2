@@ -13,28 +13,28 @@ import (
 type CreatePullRequestInput struct {
 	_ struct{} `type:"structure"`
 
-	// A unique, client-generated idempotency token that when provided in a request,
+	// A unique, client-generated idempotency token that, when provided in a request,
 	// ensures the request cannot be repeated with a changed parameter. If a request
 	// is received with the same parameters and a token is included, the request
-	// will return information about the initial request that used that token.
+	// returns information about the initial request that used that token.
 	//
-	// The AWS SDKs prepopulate client request tokens. If using an AWS SDK, you
-	// do not have to generate an idempotency token, as this will be done for you.
+	// The AWS SDKs prepopulate client request tokens. If you are using an AWS SDK,
+	// an idempotency token is created for you.
 	ClientRequestToken *string `locationName:"clientRequestToken" type:"string" idempotencyToken:"true"`
 
 	// A description of the pull request.
 	Description *string `locationName:"description" type:"string"`
 
 	// The targets for the pull request, including the source of the code to be
-	// reviewed (the source branch), and the destination where the creator of the
+	// reviewed (the source branch) and the destination where the creator of the
 	// pull request intends the code to be merged after the pull request is closed
 	// (the destination branch).
 	//
 	// Targets is a required field
 	Targets []Target `locationName:"targets" type:"list" required:"true"`
 
-	// The title of the pull request. This title will be used to identify the pull
-	// request to other users in the repository.
+	// The title of the pull request. This title is used to identify the pull request
+	// to other users in the repository.
 	//
 	// Title is a required field
 	Title *string `locationName:"title" type:"string" required:"true"`

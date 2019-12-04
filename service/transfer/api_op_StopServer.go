@@ -17,7 +17,7 @@ type StopServerInput struct {
 	// A system-assigned unique identifier for an SFTP server that you stopped.
 	//
 	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
+	ServerId *string `min:"19" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -31,6 +31,9 @@ func (s *StopServerInput) Validate() error {
 
 	if s.ServerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
+	}
+	if s.ServerId != nil && len(*s.ServerId) < 19 {
+		invalidParams.Add(aws.NewErrParamMinLen("ServerId", 19))
 	}
 
 	if invalidParams.Len() > 0 {

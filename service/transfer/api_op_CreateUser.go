@@ -14,8 +14,32 @@ type CreateUserInput struct {
 	_ struct{} `type:"structure"`
 
 	// The landing directory (folder) for a user when they log in to the server
-	// using their SFTP client. An example is /home/username .
+	// using their SFTP client.
+	//
+	// An example is <your-Amazon-S3-bucket-name>/home/username.
 	HomeDirectory *string `type:"string"`
+
+	// Logical directory mappings that specify what S3 paths and keys should be
+	// visible to your user and how you want to make them visible. You will need
+	// to specify the "Entry" and "Target" pair, where Entry shows how the path
+	// is made visible and Target is the actual S3 path. If you only specify a target,
+	// it will be displayed as is. You will need to also make sure that your AWS
+	// IAM Role provides access to paths in Target. The following is an example.
+	//
+	// '[ "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target":
+	// "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]'
+	//
+	// In most cases, you can use this value instead of the scope down policy to
+	// lock your user down to the designated home directory ("chroot"). To do this,
+	// you can set Entry to '/' and set Target to the HomeDirectory parameter value.
+	HomeDirectoryMappings []HomeDirectoryMapEntry `min:"1" type:"list"`
+
+	// The type of landing directory (folder) you want your users' home directory
+	// to be when they log into the SFTP server. If you set it to PATH, the user
+	// will see the absolute Amazon S3 bucket paths as is in their SFTP clients.
+	// If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings
+	// for how you want to make S3 paths visible to your user.
+	HomeDirectoryType HomeDirectoryType `type:"string" enum:"true"`
 
 	// A scope-down policy for your user so you can use the same IAM role across
 	// multiple users. This policy scopes down user access to portions of their
@@ -41,13 +65,13 @@ type CreateUserInput struct {
 	// SFTP user's transfer requests.
 	//
 	// Role is a required field
-	Role *string `type:"string" required:"true"`
+	Role *string `min:"20" type:"string" required:"true"`
 
 	// A system-assigned unique identifier for an SFTP server instance. This is
 	// the specific SFTP server that you added your user to.
 	//
 	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
+	ServerId *string `min:"19" type:"string" required:"true"`
 
 	// The public portion of the Secure Shell (SSH) key used to authenticate the
 	// user to the SFTP server.
@@ -63,7 +87,7 @@ type CreateUserInput struct {
 	// underscore, and hyphen. The user name can't start with a hyphen.
 	//
 	// UserName is a required field
-	UserName *string `type:"string" required:"true"`
+	UserName *string `min:"3" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -74,13 +98,22 @@ func (s CreateUserInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUserInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateUserInput"}
+	if s.HomeDirectoryMappings != nil && len(s.HomeDirectoryMappings) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("HomeDirectoryMappings", 1))
+	}
 
 	if s.Role == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
+	if s.Role != nil && len(*s.Role) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("Role", 20))
+	}
 
 	if s.ServerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
+	}
+	if s.ServerId != nil && len(*s.ServerId) < 19 {
+		invalidParams.Add(aws.NewErrParamMinLen("ServerId", 19))
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
@@ -88,6 +121,16 @@ func (s *CreateUserInput) Validate() error {
 
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
+	}
+	if s.UserName != nil && len(*s.UserName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 3))
+	}
+	if s.HomeDirectoryMappings != nil {
+		for i, v := range s.HomeDirectoryMappings {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "HomeDirectoryMappings", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -109,12 +152,12 @@ type CreateUserOutput struct {
 	// The ID of the SFTP server that the user is attached to.
 	//
 	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
+	ServerId *string `min:"19" type:"string" required:"true"`
 
 	// A unique string that identifies a user account associated with an SFTP server.
 	//
 	// UserName is a required field
-	UserName *string `type:"string" required:"true"`
+	UserName *string `min:"3" type:"string" required:"true"`
 }
 
 // String returns the string representation

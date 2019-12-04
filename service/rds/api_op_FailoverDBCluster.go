@@ -12,7 +12,7 @@ import (
 type FailoverDBClusterInput struct {
 	_ struct{} `type:"structure"`
 
-	// A DB cluster identifier to force a failover for. This parameter is not case-sensitive.
+	// A DB cluster identifier to force a failover for. This parameter isn't case-sensitive.
 	//
 	// Constraints:
 	//

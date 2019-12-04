@@ -13,14 +13,13 @@ import (
 type StartMonitoringMembersInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account IDs of the GuardDuty member accounts whose findings you
-	// want the master account to monitor.
+	// A list of account IDs of the GuardDuty member accounts to start monitoring.
 	//
 	// AccountIds is a required field
 	AccountIds []string `locationName:"accountIds" min:"1" type:"list" required:"true"`
 
-	// The unique ID of the detector of the GuardDuty account whom you want to re-enable
-	// to monitor members' findings.
+	// The unique ID of the detector of the GuardDuty master account associated
+	// with the member accounts to monitor.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
@@ -117,9 +116,9 @@ const opStartMonitoringMembers = "StartMonitoringMembers"
 // StartMonitoringMembersRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Re-enables GuardDuty to monitor findings of the member accounts specified
-// by the account IDs. A master GuardDuty account can run this command after
-// disabling GuardDuty from monitoring these members' findings by running StopMonitoringMembers.
+// Turns on GuardDuty monitoring of the specified member accounts. Use this
+// operation to restart monitoring of accounts that you stopped monitoring with
+// the StopMonitoringMembers operation.
 //
 //    // Example sending a request using StartMonitoringMembersRequest.
 //    req := client.StartMonitoringMembersRequest(params)

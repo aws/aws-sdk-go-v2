@@ -46,8 +46,8 @@ type DeleteDBInstanceInput struct {
 
 	// A value that indicates whether to skip the creation of a final DB snapshot
 	// before the DB instance is deleted. If skip is specified, no DB snapshot is
-	// created. If skip is not specified, a DB snapshot is created before the DB
-	// instance is deleted. By default, skip is not specified, and the DB snapshot
+	// created. If skip isn't specified, a DB snapshot is created before the DB
+	// instance is deleted. By default, skip isn't specified, and the DB snapshot
 	// is created.
 	//
 	// Note that when a DB instance is in a failure state and has a status of 'failed',
@@ -56,8 +56,7 @@ type DeleteDBInstanceInput struct {
 	//
 	// Specify skip when deleting a Read Replica.
 	//
-	// The FinalDBSnapshotIdentifier parameter must be specified if skip is not
-	// specified.
+	// The FinalDBSnapshotIdentifier parameter must be specified if skip isn't specified.
 	SkipFinalSnapshot *bool `type:"boolean"`
 }
 

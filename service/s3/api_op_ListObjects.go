@@ -13,6 +13,8 @@ import (
 type ListObjectsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the bucket containing the objects.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
@@ -120,10 +122,31 @@ func (s ListObjectsInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListObjectsOutput struct {
 	_ struct{} `type:"structure"`
 
+	// All of the keys rolled up in a common prefix count as a single return when
+	// calculating the number of returns.
+	//
+	// A response can contain CommonPrefixes only if you specify a delimiter.
+	//
+	// CommonPrefixes contains all (if there are any) keys between Prefix and the
+	// next occurrence of the string specified by the delimiter.
+	//
+	// CommonPrefixes lists keys that act like subdirectories in the directory specified
+	// by Prefix.
+	//
+	// For example, if the prefix is notes/ and the delimiter is a slash (/) as
+	// in notes/summer/july, the common prefix is notes/summer/. All of the keys
+	// that roll up into a common prefix count as a single return when calculating
+	// the number of returns.
 	CommonPrefixes []CommonPrefix `type:"list" flattened:"true"`
 
+	// Metadata about each object returned.
 	Contents []Object `type:"list" flattened:"true"`
 
+	// Causes keys that contain the same string between the prefix and the first
+	// occurrence of the delimiter to be rolled up into a single result element
+	// in the CommonPrefixes collection. These rolled-up keys are not returned elsewhere
+	// in the response. Each rolled-up result counts as only one return against
+	// the MaxKeys value.
 	Delimiter *string `type:"string"`
 
 	// Encoding type used by Amazon S3 to encode object keys in the response.
@@ -133,10 +156,14 @@ type ListObjectsOutput struct {
 	// that satisfied the search criteria.
 	IsTruncated *bool `type:"boolean"`
 
+	// Indicates where in the bucket listing begins. Marker is included in the response
+	// if it was sent with the request.
 	Marker *string `type:"string"`
 
+	// The maximum number of keys returned in the response body.
 	MaxKeys *int64 `type:"integer"`
 
+	// Name of the bucket.
 	Name *string `type:"string"`
 
 	// When response is truncated (the IsTruncated element value in the response
@@ -148,6 +175,7 @@ type ListObjectsOutput struct {
 	// subsequent request to get the next set of object keys.
 	NextMarker *string `type:"string"`
 
+	// Keys that begin with the indicated prefix.
 	Prefix *string `type:"string"`
 }
 
@@ -240,7 +268,25 @@ const opListObjects = "ListObjects"
 //
 // Returns some or all (up to 1000) of the objects in a bucket. You can use
 // the request parameters as selection criteria to return a subset of the objects
-// in a bucket.
+// in a bucket. A 200 OK response can contain valid or invalid XML. Be sure
+// to design your application to parse the contents of the response and handle
+// it appropriately.
+//
+// This API has been revised. We recommend that you use the newer version, ListObjectsV2,
+// when developing applications. For backward compatibility, Amazon S3 continues
+// to support ListObjects.
+//
+// The following operations are related to ListObjects:
+//
+//    * ListObjectsV2
+//
+//    * GetObject
+//
+//    * PutObject
+//
+//    * CreateBucket
+//
+//    * ListBuckets
 //
 //    // Example sending a request using ListObjectsRequest.
 //    req := client.ListObjectsRequest(params)

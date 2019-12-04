@@ -14,7 +14,8 @@ import (
 type BatchUpdatePhoneNumberInput struct {
 	_ struct{} `type:"structure"`
 
-	// The request containing the phone number IDs and product types to update.
+	// The request containing the phone number IDs and product types or calling
+	// names to update.
 	//
 	// UpdatePhoneNumberRequestItems is a required field
 	UpdatePhoneNumberRequestItems []UpdatePhoneNumberRequestItem `type:"list" required:"true"`
@@ -101,9 +102,17 @@ const opBatchUpdatePhoneNumber = "BatchUpdatePhoneNumber"
 // BatchUpdatePhoneNumberRequest returns a request value for making API operation for
 // Amazon Chime.
 //
-// Updates phone number product types. Choose from Amazon Chime Business Calling
-// and Amazon Chime Voice Connector product types. For toll-free numbers, you
-// can use only the Amazon Chime Voice Connector product type.
+// Updates phone number product types or calling names. You can update one attribute
+// at a time for each UpdatePhoneNumberRequestItem. For example, you can update
+// either the product type or the calling name.
+//
+// For product types, choose from Amazon Chime Business Calling and Amazon Chime
+// Voice Connector. For toll-free numbers, you must use the Amazon Chime Voice
+// Connector product type.
+//
+// Updates to outbound calling names can take up to 72 hours to complete. Pending
+// updates to outbound calling names must be complete before you can request
+// another update.
 //
 //    // Example sending a request using BatchUpdatePhoneNumberRequest.
 //    req := client.BatchUpdatePhoneNumberRequest(params)

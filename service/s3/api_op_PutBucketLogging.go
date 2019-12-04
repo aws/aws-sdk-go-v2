@@ -14,9 +14,13 @@ import (
 type PutBucketLoggingInput struct {
 	_ struct{} `type:"structure" payload:"BucketLoggingStatus"`
 
+	// The name of the bucket for which to set the logging parameters.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
+	// Container for logging status information.
+	//
 	// BucketLoggingStatus is a required field
 	BucketLoggingStatus *BucketLoggingStatus `locationName:"BucketLoggingStatus" type:"structure" required:"true" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 }
@@ -94,8 +98,51 @@ const opPutBucketLogging = "PutBucketLogging"
 // Amazon Simple Storage Service.
 //
 // Set the logging parameters for a bucket and to specify permissions for who
-// can view and modify the logging parameters. To set the logging status of
+// can view and modify the logging parameters. All logs are saved to buckets
+// in the same AWS Region as the source bucket. To set the logging status of
 // a bucket, you must be the bucket owner.
+//
+// The bucket owner is automatically granted FULL_CONTROL to all logs. You use
+// the Grantee request element to grant access to other people. The Permissions
+// request element specifies the kind of access the grantee has to the logs.
+//
+// Grantee Values
+//
+// You can specify the person (grantee) to whom you're assigning access rights
+// (using request elements) in the following ways:
+//
+//    * By the person's ID: <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+//    xsi:type="CanonicalUser"><ID><>ID<></ID><DisplayName><>GranteesEmail<></DisplayName>
+//    </Grantee> DisplayName is optional and ignored in the request.
+//
+//    * By Email address: <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+//    xsi:type="AmazonCustomerByEmail"><EmailAddress><>Grantees@email.com<></EmailAddress></Grantee>
+//    The grantee is resolved to the CanonicalUser and, in a response to a GET
+//    Object acl request, appears as the CanonicalUser.
+//
+//    * By URI: <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+//    xsi:type="Group"><URI><>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<></URI></Grantee>
+//
+// To enable logging, you use LoggingEnabled and its children request elements.
+// To disable logging, you use an empty BucketLoggingStatus request element:
+//
+// <BucketLoggingStatus xmlns="http://doc.s3.amazonaws.com/2006-03-01" />
+//
+// For more information about server access logging, see Server Access Logging
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html).
+//
+// For more information about creating a bucket, see CreateBucket. For more
+// information about returning the logging status of a bucket, see GetBucketLogging.
+//
+// The following operations are related to PutBucketLogging:
+//
+//    * PutObject
+//
+//    * DeleteBucket
+//
+//    * CreateBucket
+//
+//    * GetBucketLogging
 //
 //    // Example sending a request using PutBucketLoggingRequest.
 //    req := client.PutBucketLoggingRequest(params)

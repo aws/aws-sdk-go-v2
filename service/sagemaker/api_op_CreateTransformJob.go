@@ -17,8 +17,8 @@ type CreateTransformJobInput struct {
 	// request. A record is a single unit of input data that inference can be made
 	// on. For example, a single line in a CSV file is a record.
 	//
-	// To enable the batch strategy, you must set SplitType to Line, RecordIO, or
-	// TFRecord.
+	// To enable the batch strategy, you must set the SplitType property of the
+	// DataProcessing object to Line, RecordIO, or TFRecord.
 	//
 	// To use only one record when making an HTTP invocation request to a container,
 	// set BatchStrategy to SingleRecord and SplitType to Line.
@@ -200,8 +200,8 @@ const opCreateTransformJob = "CreateTransformJob"
 //    * TransformResources - Identifies the ML compute instances for the transform
 //    job.
 //
-// For more information about how batch transformation works Amazon SageMaker,
-// see How It Works (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html).
+// For more information about how batch transformation works, see Batch Transform
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html).
 //
 //    // Example sending a request using CreateTransformJobRequest.
 //    req := client.CreateTransformJobRequest(params)

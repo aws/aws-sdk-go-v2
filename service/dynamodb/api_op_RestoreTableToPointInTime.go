@@ -4,6 +4,7 @@ package dynamodb
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,6 +13,22 @@ import (
 
 type RestoreTableToPointInTimeInput struct {
 	_ struct{} `type:"structure"`
+
+	// The billing mode of the restored table.
+	BillingModeOverride BillingMode `type:"string" enum:"true"`
+
+	// List of global secondary indexes for the restored table. The indexes provided
+	// should match existing secondary indexes. You can choose to exclude some or
+	// all of the indexes at the time of restore.
+	GlobalSecondaryIndexOverride []GlobalSecondaryIndex `type:"list"`
+
+	// List of local secondary indexes for the restored table. The indexes provided
+	// should match existing secondary indexes. You can choose to exclude some or
+	// all of the indexes at the time of restore.
+	LocalSecondaryIndexOverride []LocalSecondaryIndex `type:"list"`
+
+	// Provisioned throughput settings for the restored table.
+	ProvisionedThroughputOverride *ProvisionedThroughput `type:"structure"`
 
 	// Time in the past to restore the table to.
 	RestoreDateTime *time.Time `type:"timestamp"`
@@ -52,6 +69,25 @@ func (s *RestoreTableToPointInTimeInput) Validate() error {
 	}
 	if s.TargetTableName != nil && len(*s.TargetTableName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("TargetTableName", 3))
+	}
+	if s.GlobalSecondaryIndexOverride != nil {
+		for i, v := range s.GlobalSecondaryIndexOverride {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GlobalSecondaryIndexOverride", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.LocalSecondaryIndexOverride != nil {
+		for i, v := range s.LocalSecondaryIndexOverride {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LocalSecondaryIndexOverride", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.ProvisionedThroughputOverride != nil {
+		if err := s.ProvisionedThroughputOverride.Validate(); err != nil {
+			invalidParams.AddNested("ProvisionedThroughputOverride", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {

@@ -13,9 +13,13 @@ import (
 type GetObjectAclInput struct {
 	_ struct{} `type:"structure"`
 
+	// The bucket name of the object for which to get the ACL information.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
+	// The key of the object for which to get the ACL information.
+	//
 	// Key is a required field
 	Key *string `location:"uri" locationName:"Key" min:"1" type:"string" required:"true"`
 
@@ -98,6 +102,7 @@ type GetObjectAclOutput struct {
 	// A list of grants.
 	Grants []Grant `locationName:"AccessControlList" locationNameList:"Grant" type:"list"`
 
+	// Container for the bucket owner's display name and ID.
 	Owner *Owner `type:"structure"`
 
 	// If present, indicates that the requester was successfully charged for the
@@ -144,7 +149,21 @@ const opGetObjectAcl = "GetObjectAcl"
 // GetObjectAclRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns the access control list (ACL) of an object.
+// Returns the access control list (ACL) of an object. To use this operation,
+// you must have READ_ACP access to the object.
+//
+// Versioning
+//
+// By default, GET returns ACL information about the current version of an object.
+// To return ACL information about a different version, use the versionId subresource.
+//
+// The following operations are related to GetObjectAcl:
+//
+//    * GetObject
+//
+//    * DeleteObject
+//
+//    * PutObject
 //
 //    // Example sending a request using GetObjectAclRequest.
 //    req := client.GetObjectAclRequest(params)

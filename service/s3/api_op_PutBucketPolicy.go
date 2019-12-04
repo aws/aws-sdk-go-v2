@@ -14,6 +14,8 @@ import (
 type PutBucketPolicyInput struct {
 	_ struct{} `type:"structure" payload:"Policy"`
 
+	// The name of the bucket.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
@@ -100,7 +102,28 @@ const opPutBucketPolicy = "PutBucketPolicy"
 // PutBucketPolicyRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Applies an Amazon S3 bucket policy to an Amazon S3 bucket.
+// Applies an Amazon S3 bucket policy to an Amazon S3 bucket. If you are using
+// an identity other than the root user of the AWS account that owns the bucket,
+// the calling identity must have the PutBucketPolicy permissions on the specified
+// bucket and belong to the bucket owner's account in order to use this operation.
+//
+// If you don't have PutBucketPolicy permissions, Amazon S3 returns a 403 Access
+// Denied error. If you have the correct permissions, but you're not using an
+// identity that belongs to the bucket owner's account, Amazon S3 returns a
+// 405 Method Not Allowed error.
+//
+// As a security precaution, the root user of the AWS account that owns a bucket
+// can always use this operation, even if the policy explicitly denies the root
+// user the ability to perform this action.
+//
+// For more information about bucket policies, see Using Bucket Policies and
+// User Policies (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html).
+//
+// The following operations are related to PutBucketPolicy:
+//
+//    * CreateBucket
+//
+//    * DeleteBucket
 //
 //    // Example sending a request using PutBucketPolicyRequest.
 //    req := client.PutBucketPolicyRequest(params)

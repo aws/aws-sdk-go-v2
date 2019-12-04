@@ -13,6 +13,8 @@ import (
 type GetBucketRequestPaymentInput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the bucket for which to get the payment request configuration
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -83,7 +85,13 @@ const opGetBucketRequestPayment = "GetBucketRequestPayment"
 // GetBucketRequestPaymentRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns the request payment configuration of a bucket.
+// Returns the request payment configuration of a bucket. To use this version
+// of the operation, you must be the bucket owner. For more information, see
+// Requester Pays Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html).
+//
+// The following operations are related to GetBucketRequestPayment:
+//
+//    * ListObjects
 //
 //    // Example sending a request using GetBucketRequestPaymentRequest.
 //    req := client.GetBucketRequestPaymentRequest(params)

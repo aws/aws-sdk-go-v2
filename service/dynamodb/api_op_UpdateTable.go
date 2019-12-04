@@ -25,11 +25,11 @@ type UpdateTableInput struct {
 	// values are estimated based on the consumed read and write capacity of your
 	// table and global secondary indexes over the past 30 minutes.
 	//
-	//    * PROVISIONED - Sets the billing mode to PROVISIONED. We recommend using
-	//    PROVISIONED for predictable workloads.
+	//    * PROVISIONED - We recommend using PROVISIONED for predictable workloads.
+	//    PROVISIONED sets the billing mode to Provisioned Mode (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual).
 	//
-	//    * PAY_PER_REQUEST - Sets the billing mode to PAY_PER_REQUEST. We recommend
-	//    using PAY_PER_REQUEST for unpredictable workloads.
+	//    * PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable
+	//    workloads. PAY_PER_REQUEST sets the billing mode to On-Demand Mode (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand).
 	BillingMode BillingMode `type:"string" enum:"true"`
 
 	// An array of one or more global secondary indexes for the table. For each
@@ -41,6 +41,9 @@ type UpdateTableInput struct {
 	//    secondary index.
 	//
 	//    * Delete - remove a global secondary index from the table.
+	//
+	// You can create or delete only one global secondary index per UpdateTable
+	// operation.
 	//
 	// For more information, see Managing Global Secondary Indexes (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html)
 	// in the Amazon DynamoDB Developer Guide.

@@ -21,7 +21,8 @@ type AssociateDiscoveredResourceInput struct {
 	// to test if the caller has permission to make the call.
 	DryRun *bool `type:"boolean"`
 
-	// The identifier given to the MigrationTask.
+	// The identifier given to the MigrationTask. Do not store personal data in
+	// this field.
 	//
 	// MigrationTaskName is a required field
 	MigrationTaskName *string `min:"1" type:"string" required:"true"`
@@ -84,8 +85,8 @@ const opAssociateDiscoveredResource = "AssociateDiscoveredResource"
 // AssociateDiscoveredResourceRequest returns a request value for making API operation for
 // AWS Migration Hub.
 //
-// Associates a discovered resource ID from Application Discovery Service (ADS)
-// with a migration task.
+// Associates a discovered resource ID from Application Discovery Service with
+// a migration task.
 //
 //    // Example sending a request using AssociateDiscoveredResourceRequest.
 //    req := client.AssociateDiscoveredResourceRequest(params)

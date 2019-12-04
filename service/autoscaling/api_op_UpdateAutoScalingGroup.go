@@ -55,11 +55,6 @@ type UpdateAutoScalingGroupInput struct {
 
 	// The name of the launch configuration. If you specify LaunchConfigurationName
 	// in your update request, you can't specify LaunchTemplate or MixedInstancesPolicy.
-	//
-	// To update an Auto Scaling group with a launch configuration with InstanceMonitoring
-	// set to false, you must first disable the collection of group metrics. Otherwise,
-	// you get an error. If you have previously enabled the collection of group
-	// metrics, you can disable it using DisableMetricsCollection.
 	LaunchConfigurationName *string `min:"1" type:"string"`
 
 	// The launch template and version to use to specify the updates. If you specify
@@ -69,6 +64,11 @@ type UpdateAutoScalingGroupInput struct {
 	// For more information, see LaunchTemplateSpecification (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html)
 	// in the Amazon EC2 Auto Scaling API Reference.
 	LaunchTemplate *LaunchTemplateSpecification `type:"structure"`
+
+	// The maximum amount of time, in seconds, that an instance can be in service.
+	//
+	// Valid Range: Minimum value of 604800.
+	MaxInstanceLifetime *int64 `type:"integer"`
 
 	// The maximum size of the Auto Scaling group.
 	MaxSize *int64 `type:"integer"`
@@ -193,8 +193,7 @@ const opUpdateAutoScalingGroup = "UpdateAutoScalingGroup"
 // To update an Auto Scaling group, specify the name of the group and the parameter
 // that you want to change. Any parameters that you don't specify are not changed
 // by this update request. The new settings take effect on any scaling activities
-// after this call returns. Scaling activities that are currently in progress
-// aren't affected.
+// after this call returns.
 //
 // If you associate a new launch configuration or template with an Auto Scaling
 // group, all new instances will get the updated configuration. Existing instances

@@ -137,6 +137,10 @@ const opPutObjectLegalHold = "PutObjectLegalHold"
 //
 // Applies a Legal Hold configuration to the specified object.
 //
+// Related Resources
+//
+//    * Locking Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html)
+//
 //    // Example sending a request using PutObjectLegalHoldRequest.
 //    req := client.PutObjectLegalHoldRequest(params)
 //    resp, err := req.Send(context.TODO())

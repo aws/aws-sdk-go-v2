@@ -266,7 +266,7 @@ type DBCluster struct {
 
 	// For all database engines except Amazon Aurora, AllocatedStorage specifies
 	// the allocated storage size in gibibytes (GiB). For Aurora, AllocatedStorage
-	// always returns 1, because Aurora DB cluster storage size is not fixed, but
+	// always returns 1, because Aurora DB cluster storage size isn't fixed, but
 	// instead automatically adjusts as needed.
 	AllocatedStorage *int64 `type:"integer"`
 
@@ -822,7 +822,7 @@ type DBEngineVersion struct {
 	DBParameterGroupFamily *string `type:"string"`
 
 	// The default character set for new instances of this engine version, if the
-	// CharacterSetName parameter of the CreateDBInstance API is not specified.
+	// CharacterSetName parameter of the CreateDBInstance API isn't specified.
 	DefaultCharacterSet *CharacterSet `type:"structure"`
 
 	// The name of the database engine.
@@ -1110,7 +1110,7 @@ type DBInstance struct {
 	// instance with multi-AZ support.
 	SecondaryAvailabilityZone *string `type:"string"`
 
-	// The status of a Read Replica. If the instance is not a Read Replica, this
+	// The status of a Read Replica. If the instance isn't a Read Replica, this
 	// is blank.
 	StatusInfos []DBInstanceStatusInfo `locationNameList:"DBInstanceStatusInfo" type:"list"`
 
@@ -1279,7 +1279,7 @@ type DBInstanceStatusInfo struct {
 	_ struct{} `type:"structure"`
 
 	// Details of the error if there is an error for the instance. If the instance
-	// is not in an error state, this value is blank.
+	// isn't in an error state, this value is blank.
 	Message *string `type:"string"`
 
 	// Boolean value that is true if the instance is operating normally, or false
@@ -1980,8 +1980,8 @@ func (s IPRange) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Contains the installation media for on-premises, bring your own media (BYOM)
-// DB engines, such as Microsoft SQL Server.
+// Contains the installation media for a DB engine that requires an on-premises
+// customer provided license, such as Microsoft SQL Server.
 type InstallationMedia struct {
 	_ struct{} `type:"structure"`
 
@@ -1991,7 +1991,7 @@ type InstallationMedia struct {
 	// The DB engine.
 	Engine *string `type:"string"`
 
-	// The path to the installation media for the DB engine.
+	// The path to the installation medium for the DB engine.
 	EngineInstallationMediaPath *string `type:"string"`
 
 	// The engine version of the DB engine.
@@ -2000,14 +2000,14 @@ type InstallationMedia struct {
 	// If an installation media failure occurred, the cause of the failure.
 	FailureCause *InstallationMediaFailureCause `type:"structure"`
 
-	// The installation media ID.
+	// The installation medium ID.
 	InstallationMediaId *string `type:"string"`
 
-	// The path to the installation media for the operating system associated with
+	// The path to the installation medium for the operating system associated with
 	// the DB engine.
 	OSInstallationMediaPath *string `type:"string"`
 
-	// The status of the installation media.
+	// The status of the installation medium.
 	Status *string `type:"string"`
 }
 
@@ -2017,8 +2017,8 @@ func (s InstallationMedia) String() string {
 }
 
 // Contains the cause of an installation media failure. Installation media is
-// used for on-premises, bring your own media (BYOM) DB engines, such as Microsoft
-// SQL Server.
+// used for a DB engine that requires an on-premises customer provided license,
+// such as Microsoft SQL Server.
 type InstallationMediaFailureCause struct {
 	_ struct{} `type:"structure"`
 
@@ -2852,14 +2852,22 @@ type ScalingConfiguration struct {
 
 	// The maximum capacity for an Aurora DB cluster in serverless DB engine mode.
 	//
-	// Valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.
+	// For Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128,
+	// and 256.
+	//
+	// For Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192,
+	// and 384.
 	//
 	// The maximum capacity must be greater than or equal to the minimum capacity.
 	MaxCapacity *int64 `type:"integer"`
 
 	// The minimum capacity for an Aurora DB cluster in serverless DB engine mode.
 	//
-	// Valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.
+	// For Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128,
+	// and 256.
+	//
+	// For Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192,
+	// and 384.
 	//
 	// The minimum capacity must be less than or equal to the maximum capacity.
 	MinCapacity *int64 `type:"integer"`
@@ -2874,7 +2882,7 @@ type ScalingConfiguration struct {
 	// as possible.
 	//
 	// RollbackCapacityChange, the default, ignores the capacity change if a scaling
-	// point is not found in the timeout period.
+	// point isn't found in the timeout period.
 	//
 	// If you specify ForceApplyCapacityChange, connections that prevent Aurora
 	// Serverless from finding a scaling point might be dropped.

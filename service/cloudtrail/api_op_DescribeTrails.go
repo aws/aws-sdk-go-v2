@@ -53,7 +53,11 @@ func (s DescribeTrailsInput) String() string {
 type DescribeTrailsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The list of trail objects.
+	// The list of trail objects. Trail objects with string values are only returned
+	// if values for the objects exist in a trail's configuration. For example,
+	// SNSTopicName and SNSTopicARN are only returned in results if a trail is configured
+	// to send SNS notifications. Similarly, KMSKeyId only appears in results if
+	// a trail's log files are encrypted with AWS KMS-managed keys.
 	TrailList []Trail `locationName:"trailList" type:"list"`
 }
 
@@ -67,8 +71,8 @@ const opDescribeTrails = "DescribeTrails"
 // DescribeTrailsRequest returns a request value for making API operation for
 // AWS CloudTrail.
 //
-// Retrieves settings for the trail associated with the current region for your
-// account.
+// Retrieves settings for one or more trails associated with the current region
+// for your account.
 //
 //    // Example sending a request using DescribeTrailsRequest.
 //    req := client.DescribeTrailsRequest(params)

@@ -73,7 +73,8 @@ type ListBucketAnalyticsConfigurationsOutput struct {
 	// The list of analytics configurations for a bucket.
 	AnalyticsConfigurationList []AnalyticsConfiguration `locationName:"AnalyticsConfiguration" type:"list" flattened:"true"`
 
-	// The ContinuationToken that represents where this request began.
+	// The marker that is used as a starting point for this analytics configuration
+	// list response. This value is present if it was sent in the request.
 	ContinuationToken *string `type:"string"`
 
 	// Indicates whether the returned list of analytics configurations is complete.
@@ -132,7 +133,33 @@ const opListBucketAnalyticsConfigurations = "ListBucketAnalyticsConfigurations"
 // ListBucketAnalyticsConfigurationsRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Lists the analytics configurations for the bucket.
+// Lists the analytics configurations for the bucket. You can have up to 1,000
+// analytics configurations per bucket.
+//
+// This operation supports list pagination and does not return more than 100
+// configurations at a time. You should always check the IsTruncated element
+// in the response. If there are no more configurations to list, IsTruncated
+// is set to false. If there are more configurations to list, IsTruncated is
+// set to true, and there will be a value in NextContinuationToken. You use
+// the NextContinuationToken value to continue the pagination of the list by
+// passing the value in continuation-token in the request to GET the next page.
+//
+// To use this operation, you must have permissions to perform the s3:GetAnalyticsConfiguration
+// action. The bucket owner has this permission by default. The bucket owner
+// can grant this permission to others. For more information about permissions,
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+//
+// For information about Amazon S3 analytics feature, see Amazon S3 Analytics
+// – Storage Class Analysis (https://docs.aws.amazon.com/AmazonS3/latest/dev/analytics-storage-class.html).
+//
+// The following operations are related to ListBucketAnalyticsConfigurations:
+//
+//    * GetBucketAnalyticsConfiguration
+//
+//    * DeleteBucketAnalyticsConfiguration
+//
+//    * PutBucketAnalyticsConfiguration
 //
 //    // Example sending a request using ListBucketAnalyticsConfigurationsRequest.
 //    req := client.ListBucketAnalyticsConfigurationsRequest(params)

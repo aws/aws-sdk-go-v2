@@ -306,6 +306,42 @@ func (s *DocumentSuggesterOptions) Validate() error {
 	return nil
 }
 
+// The domain's endpoint options.
+type DomainEndpointOptions struct {
+	_ struct{} `type:"structure"`
+
+	// Whether the domain is HTTPS only enabled.
+	EnforceHTTPS *bool `type:"boolean"`
+
+	// The minimum required TLS version
+	TLSSecurityPolicy TLSSecurityPolicy `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s DomainEndpointOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The configuration and status of the domain's endpoint options.
+type DomainEndpointOptionsStatus struct {
+	_ struct{} `type:"structure"`
+
+	// The domain endpoint options configured for the domain.
+	//
+	// Options is a required field
+	Options *DomainEndpointOptions `type:"structure" required:"true"`
+
+	// The status of the configured domain endpoint options.
+	//
+	// Status is a required field
+	Status *OptionStatus `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s DomainEndpointOptionsStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The current status of the search domain.
 type DomainStatus struct {
 	_ struct{} `type:"structure"`

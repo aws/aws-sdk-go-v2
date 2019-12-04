@@ -1,3 +1,21 @@
+Release v0.17.0 (2019-11-20)
+===
+
+Services
+---
+* Synced the V2 SDK with latest AWS service API definitions.
+
+SDK Enhancements
+---
+* SDK minimum version requirement has been updated to Go 1.12 ([#432](https://github.com/aws/aws-sdk-go-v2/pull/432))
+
+Release v0.16.0 (2019-11-12)
+===
+
+Services
+---
+* Synced the V2 SDK with latest AWS service API definitions.
+
 Release v0.15.0 (2019-10-18)
 ===
 

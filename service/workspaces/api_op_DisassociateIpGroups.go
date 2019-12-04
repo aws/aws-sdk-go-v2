@@ -15,7 +15,7 @@ type DisassociateIpGroupsInput struct {
 	// The identifier of the directory.
 	//
 	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
+	DirectoryId *string `min:"10" type:"string" required:"true"`
 
 	// The identifiers of one or more IP access control groups.
 	//
@@ -34,6 +34,9 @@ func (s *DisassociateIpGroupsInput) Validate() error {
 
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
+	}
+	if s.DirectoryId != nil && len(*s.DirectoryId) < 10 {
+		invalidParams.Add(aws.NewErrParamMinLen("DirectoryId", 10))
 	}
 
 	if s.GroupIds == nil {

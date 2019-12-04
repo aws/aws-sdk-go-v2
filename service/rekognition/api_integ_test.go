@@ -11,6 +11,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition"
 )
@@ -27,7 +28,7 @@ func TestInteg_00_ListCollections(t *testing.T) {
 	params := &rekognition.ListCollectionsInput{}
 
 	req := svc.ListCollectionsRequest(params)
-
+	req.Handlers.Validate.Remove(defaults.ValidateParametersHandler)
 	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)

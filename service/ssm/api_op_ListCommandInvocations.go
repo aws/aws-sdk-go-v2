@@ -21,7 +21,7 @@ type ListCommandInvocationsInput struct {
 	Details *bool `type:"boolean"`
 
 	// (Optional) One or more filters. Use a filter to return a more specific list
-	// of results.
+	// of results. Note that the DocumentName filter is not supported for ListCommandInvocations.
 	Filters []CommandFilter `min:"1" type:"list"`
 
 	// (Optional) The command execution details for a specific instance ID.

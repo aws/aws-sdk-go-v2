@@ -43,7 +43,8 @@ type UpdateTrailInput struct {
 	// and this value is set to true, shadow trails (replications of the trail)
 	// will be created in the other regions. If the trail exists in all regions
 	// and this value is set to false, the trail will remain in the region where
-	// it was created, and its shadow trails in other regions will be deleted.
+	// it was created, and its shadow trails in other regions will be deleted. As
+	// a best practice, consider using trails that log events in all regions.
 	IsMultiRegionTrail *bool `type:"boolean"`
 
 	// Specifies whether the trail is applied to all accounts in an organization
@@ -95,12 +96,12 @@ type UpdateTrailInput struct {
 	Name *string `type:"string" required:"true"`
 
 	// Specifies the name of the Amazon S3 bucket designated for publishing log
-	// files. See Amazon S3 Bucket Naming Requirements (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html).
+	// files. See Amazon S3 Bucket Naming Requirements (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html).
 	S3BucketName *string `type:"string"`
 
 	// Specifies the Amazon S3 key prefix that comes after the name of the bucket
 	// you have designated for log file delivery. For more information, see Finding
-	// Your CloudTrail Log Files (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html).
+	// Your CloudTrail Log Files (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html).
 	// The maximum length is 200 characters.
 	S3KeyPrefix *string `type:"string"`
 
@@ -169,7 +170,7 @@ type UpdateTrailOutput struct {
 
 	// Specifies the Amazon S3 key prefix that comes after the name of the bucket
 	// you have designated for log file delivery. For more information, see Finding
-	// Your CloudTrail Log Files (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html).
+	// Your CloudTrail Log Files (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html).
 	S3KeyPrefix *string `type:"string"`
 
 	// Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications
@@ -178,7 +179,7 @@ type UpdateTrailOutput struct {
 	// arn:aws:sns:us-east-2:123456789012:MyTopic
 	SnsTopicARN *string `type:"string"`
 
-	// This field is deprecated. Use SnsTopicARN.
+	// This field is no longer in use. Use SnsTopicARN.
 	SnsTopicName *string `deprecated:"true" type:"string"`
 
 	// Specifies the ARN of the trail that was updated. The format of a trail ARN

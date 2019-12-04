@@ -23,14 +23,14 @@ var _ = awsutil.Prettify
 type Budget struct {
 	_ struct{} `type:"structure"`
 
-	// The total amount of cost, usage, RI utilization, or RI coverage that you
-	// want to track with your budget.
+	// The total amount of cost, usage, RI utilization, RI coverage, Savings Plans
+	// utilization, or Savings Plans coverage that you want to track with your budget.
 	//
-	// BudgetLimit is required for cost or usage budgets, but optional for RI utilization
-	// or coverage budgets. RI utilization or coverage budgets default to 100, which
-	// is the only valid value for RI utilization or coverage budgets. You can't
-	// use BudgetLimit with PlannedBudgetLimits for CreateBudget and UpdateBudget
-	// actions.
+	// BudgetLimit is required for cost or usage budgets, but optional for RI or
+	// Savings Plans utilization or coverage budgets. RI and Savings Plans utilization
+	// or coverage budgets default to 100, which is the only valid value for RI
+	// or Savings Plans utilization or coverage budgets. You can't use BudgetLimit
+	// with PlannedBudgetLimits for CreateBudget and UpdateBudget actions.
 	BudgetLimit *Spend `type:"structure"`
 
 	// The name of a budget. The name must be unique within an account. The : and
@@ -39,7 +39,8 @@ type Budget struct {
 	// BudgetName is a required field
 	BudgetName *string `min:"1" type:"string" required:"true"`
 
-	// Whether this budget tracks costs, usage, RI utilization, or RI coverage.
+	// Whether this budget tracks costs, usage, RI utilization, RI coverage, Savings
+	// Plans utilization, or Savings Plans coverage.
 	//
 	// BudgetType is a required field
 	BudgetType BudgetType `type:"string" required:"true" enum:"true"`
@@ -64,7 +65,8 @@ type Budget struct {
 
 	// The types of costs that are included in this COST budget.
 	//
-	// USAGE, RI_UTILIZATION, and RI_COVERAGE budgets do not have CostTypes.
+	// USAGE, RI_UTILIZATION, RI_COVERAGE, Savings_Plans_Utilization, and Savings_Plans_Coverage
+	// budgets do not have CostTypes.
 	CostTypes *CostTypes `type:"structure"`
 
 	// The last time that you updated this budget.
@@ -122,7 +124,8 @@ type Budget struct {
 	TimePeriod *TimePeriod `type:"structure"`
 
 	// The length of time until a budget resets the actual and forecasted spend.
-	// DAILY is available only for RI_UTILIZATION and RI_COVERAGE budgets.
+	// DAILY is available only for RI_UTILIZATION, RI_COVERAGE, Savings_Plans_Utilization,
+	// and Savings_Plans_Coverage budgets.
 	//
 	// TimeUnit is a required field
 	TimeUnit TimeUnit `type:"string" required:"true" enum:"true"`
@@ -535,7 +538,7 @@ type Subscriber struct {
 	// The address that AWS sends budget notifications to, either an SNS topic or
 	// an email.
 	//
-	// AWS validates the address for a CreateSubscriber request with the .* regex.
+	// When you create a subscriber, the value of Address can't contain line breaks.
 	//
 	// Address is a required field
 	Address *string `min:"1" type:"string" required:"true" sensitive:"true"`

@@ -43,7 +43,7 @@ const opModifyAccount = "ModifyAccount"
 // ModifyAccountRequest returns a request value for making API operation for
 // Amazon WorkSpaces.
 //
-// Modifies the configuration of bring your own license (BYOL) for the specified
+// Modifies the configuration of Bring Your Own License (BYOL) for the specified
 // account.
 //
 //    // Example sending a request using ModifyAccountRequest.

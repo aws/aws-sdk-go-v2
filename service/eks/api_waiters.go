@@ -106,3 +106,91 @@ func (c *Client) WaitUntilClusterDeleted(ctx context.Context, input *DescribeClu
 
 	return w.Wait(ctx)
 }
+
+// WaitUntilNodegroupActive uses the Amazon EKS API operation
+// DescribeNodegroup to wait for a condition to be met before returning.
+// If the condition is not met within the max attempt window, an error will
+// be returned.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Client) WaitUntilNodegroupActive(ctx context.Context, input *DescribeNodegroupInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
+		Name:        "WaitUntilNodegroupActive",
+		MaxAttempts: 80,
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
+			{
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "nodegroup.status",
+				Expected: "CREATE_FAILED",
+			},
+			{
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "nodegroup.status",
+				Expected: "ACTIVE",
+			},
+		},
+		Logger: c.Config.Logger,
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
+			var inCpy *DescribeNodegroupInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req := c.DescribeNodegroupRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req.Request, nil
+		},
+	}
+	w.ApplyOptions(opts...)
+
+	return w.Wait(ctx)
+}
+
+// WaitUntilNodegroupDeleted uses the Amazon EKS API operation
+// DescribeNodegroup to wait for a condition to be met before returning.
+// If the condition is not met within the max attempt window, an error will
+// be returned.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Client) WaitUntilNodegroupDeleted(ctx context.Context, input *DescribeNodegroupInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
+		Name:        "WaitUntilNodegroupDeleted",
+		MaxAttempts: 40,
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
+			{
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "nodegroup.status",
+				Expected: "DELETE_FAILED",
+			},
+			{
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
+				Expected: "ResourceNotFoundException",
+			},
+		},
+		Logger: c.Config.Logger,
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
+			var inCpy *DescribeNodegroupInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req := c.DescribeNodegroupRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req.Request, nil
+		},
+	}
+	w.ApplyOptions(opts...)
+
+	return w.Wait(ctx)
+}

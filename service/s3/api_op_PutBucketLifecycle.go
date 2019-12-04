@@ -17,6 +17,7 @@ type PutBucketLifecycleInput struct {
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
+	// Container for lifecycle rules. You can add as many as 1000 rules.
 	LifecycleConfiguration *LifecycleConfiguration `locationName:"LifecycleConfiguration" type:"structure" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 }
 
@@ -88,7 +89,55 @@ const opPutBucketLifecycle = "PutBucketLifecycle"
 // PutBucketLifecycleRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// No longer used, see the PutBucketLifecycleConfiguration operation.
+//
+// For an updated version of this API, see PutBucketLifecycleConfiguration.
+// This version has been deprecated. Existing lifecycle configurations will
+// work. For new lifecycle configurations, use the updated API.
+//
+// Creates a new lifecycle configuration for the bucket or replaces an existing
+// lifecycle configuration. For information about lifecycle configuration, see
+// Object Lifecycle Management (https://docs.aws.amazon.com/AmazonS3/latest/dev//object-lifecycle-mgmt.html)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+// By default, all Amazon S3 resources, including buckets, objects, and related
+// subresources (for example, lifecycle configuration and website configuration)
+// are private. Only the resource owner, the AWS account that created the resource,
+// can access it. The resource owner can optionally grant access permissions
+// to others by writing an access policy. For this operation, users must get
+// the s3:PutLifecycleConfiguration permission.
+//
+// You can also explicitly deny permissions. Explicit denial also supersedes
+// any other permissions. If you want to prevent users or accounts from removing
+// or deleting objects from your bucket, you must deny them permissions for
+// the following actions:
+//
+//    * s3:DeleteObject
+//
+//    * s3:DeleteObjectVersion
+//
+//    * s3:PutLifecycleConfiguration
+//
+// For more information about permissions, see Managing Access Permissions to
+// your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev//s3-access-control.html)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+// For more examples of transitioning objects to storage classes such as STANDARD_IA
+// or ONEZONE_IA, see Examples of Lifecycle Configuration (https://docs.aws.amazon.com/AmazonS3/latest/dev//intro-lifecycle-rules.html#lifecycle-configuration-examples).
+//
+// Related Resources
+//
+//    * GetBucketLifecycle(Deprecated)
+//
+//    * GetBucketLifecycleConfiguration
+//
+//    *
+//
+//    * By default, a resource owner—in this case, a bucket owner, which is
+//    the AWS account that created the bucket—can perform any of the operations.
+//    A resource owner can also grant others permission to perform the operation.
+//    For more information, see the following topics in the Amazon Simple Storage
+//    Service Developer Guide: Specifying Permissions in a Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev//using-with-s3-actions.html)
+//    Managing Access Permissions to your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev//s3-access-control.html)
 //
 //    // Example sending a request using PutBucketLifecycleRequest.
 //    req := client.PutBucketLifecycleRequest(params)

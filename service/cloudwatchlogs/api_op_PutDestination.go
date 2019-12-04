@@ -82,11 +82,12 @@ const opPutDestination = "PutDestination"
 // PutDestinationRequest returns a request value for making API operation for
 // Amazon CloudWatch Logs.
 //
-// Creates or updates a destination. A destination encapsulates a physical resource
-// (such as an Amazon Kinesis stream) and enables you to subscribe to a real-time
-// stream of log events for a different account, ingested using PutLogEvents.
-// A destination can be an Amazon Kinesis stream, Amazon Kinesis Data Firehose
-// strea, or an AWS Lambda function.
+// Creates or updates a destination. This operation is used only to create destinations
+// for cross-account subscriptions.
+//
+// A destination encapsulates a physical resource (such as an Amazon Kinesis
+// stream) and enables you to subscribe to a real-time stream of log events
+// for a different account, ingested using PutLogEvents.
 //
 // Through an access policy, a destination controls what is written to it. By
 // default, PutDestination does not set any access policy with the destination,

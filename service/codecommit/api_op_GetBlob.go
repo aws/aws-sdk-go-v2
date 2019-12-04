@@ -72,7 +72,7 @@ const opGetBlob = "GetBlob"
 // GetBlobRequest returns a request value for making API operation for
 // AWS CodeCommit.
 //
-// Returns the base-64 encoded content of an individual blob within a repository.
+// Returns the base-64 encoded content of an individual blob in a repository.
 //
 //    // Example sending a request using GetBlobRequest.
 //    req := client.GetBlobRequest(params)

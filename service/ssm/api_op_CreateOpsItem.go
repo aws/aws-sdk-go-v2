@@ -13,6 +13,9 @@ import (
 type CreateOpsItemInput struct {
 	_ struct{} `type:"structure"`
 
+	// Specify a category to assign to an OpsItem.
+	Category *string `min:"1" type:"string"`
+
 	// Information about the OpsItem.
 	//
 	// Description is a required field
@@ -53,6 +56,9 @@ type CreateOpsItemInput struct {
 	// impacted resources, or statuses for the impacted resource.
 	RelatedOpsItems []RelatedOpsItem `type:"list"`
 
+	// Specify a severity to assign to an OpsItem.
+	Severity *string `min:"1" type:"string"`
+
 	// The origin of the OpsItem, such as Amazon EC2 or AWS Systems Manager.
 	//
 	// Source is a required field
@@ -85,6 +91,9 @@ func (s CreateOpsItemInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateOpsItemInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateOpsItemInput"}
+	if s.Category != nil && len(*s.Category) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Category", 1))
+	}
 
 	if s.Description == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Description"))
@@ -94,6 +103,9 @@ func (s *CreateOpsItemInput) Validate() error {
 	}
 	if s.Priority != nil && *s.Priority < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Priority", 1))
+	}
+	if s.Severity != nil && len(*s.Severity) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Severity", 1))
 	}
 
 	if s.Source == nil {

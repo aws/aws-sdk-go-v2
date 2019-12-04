@@ -16,7 +16,7 @@ type DescribeDBSecurityGroupsInput struct {
 	// The name of the DB security group to return details for.
 	DBSecurityGroupName *string `type:"string"`
 
-	// This parameter is not currently supported.
+	// This parameter isn't currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBSecurityGroups

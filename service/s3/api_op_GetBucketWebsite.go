@@ -13,6 +13,8 @@ import (
 type GetBucketWebsiteInput struct {
 	_ struct{} `type:"structure"`
 
+	// The bucket name for which to get the website configuration.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -58,14 +60,17 @@ func (s GetBucketWebsiteInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetBucketWebsiteOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the error document for the website.
 	ErrorDocument *ErrorDocument `type:"structure"`
 
+	// The name of the index document for the website.
 	IndexDocument *IndexDocument `type:"structure"`
 
 	// Specifies the redirect behavior of all requests to a website endpoint of
 	// an Amazon S3 bucket.
 	RedirectAllRequestsTo *RedirectAllRequestsTo `type:"structure"`
 
+	// Rules that define when a redirect is applied and the redirect behavior.
 	RoutingRules []RoutingRule `locationNameList:"RoutingRule" type:"list"`
 }
 
@@ -114,7 +119,21 @@ const opGetBucketWebsite = "GetBucketWebsite"
 // GetBucketWebsiteRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns the website configuration for a bucket.
+// Returns the website configuration for a bucket. To host website on Amazon
+// S3, you can configure a bucket as website by adding a website configuration.
+// For more information about hosting websites, see Hosting Websites on Amazon
+// S3 (https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html).
+//
+// This GET operation requires the S3:GetBucketWebsite permission. By default,
+// only the bucket owner can read the bucket website configuration. However,
+// bucket owners can allow other users to read the website configuration by
+// writing a bucket policy granting them the S3:GetBucketWebsite permission.
+//
+// The following operations are related to DeleteBucketWebsite
+//
+//    * DeleteBucketWebsite
+//
+//    * PutBucketWebsite
 //
 //    // Example sending a request using GetBucketWebsiteRequest.
 //    req := client.GetBucketWebsiteRequest(params)

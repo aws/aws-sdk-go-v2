@@ -145,14 +145,14 @@ const opStartSigningJob = "StartSigningJob"
 //
 //    * Your S3 source bucket must be version enabled.
 //
-//    * You must create an S3 destination bucket. AWS Signer uses your S3 destination
-//    bucket to write your signed code.
+//    * You must create an S3 destination bucket. Code signing uses your S3
+//    destination bucket to write your signed code.
 //
 //    * You specify the name of the source and destination buckets when calling
 //    the StartSigningJob operation.
 //
 //    * You must also specify a request token that identifies your request to
-//    AWS Signer.
+//    code signing.
 //
 // You can call the DescribeSigningJob and the ListSigningJobs actions after
 // you call StartSigningJob.

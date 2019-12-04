@@ -15,9 +15,9 @@ type PutBucketEncryptionInput struct {
 	_ struct{} `type:"structure" payload:"ServerSideEncryptionConfiguration"`
 
 	// Specifies default encryption for a bucket using server-side encryption with
-	// Amazon S3-managed keys (SSE-S3) or AWS KMS-managed keys (SSE-KMS). For information
-	// about the Amazon S3 default encryption feature, see Amazon S3 Default Bucket
-	// Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html)
+	// Amazon S3-managed keys (SSE-S3) or customer master keys stored in AWS KMS
+	// (SSE-KMS). For information about the Amazon S3 default encryption feature,
+	// see Amazon S3 Default Bucket Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html)
 	// in the Amazon Simple Storage Service Developer Guide.
 	//
 	// Bucket is a required field
@@ -101,8 +101,32 @@ const opPutBucketEncryption = "PutBucketEncryption"
 // PutBucketEncryptionRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Creates a new server-side encryption configuration (or replaces an existing
-// one, if present).
+// This implementation of the PUT operation uses the encryption subresource
+// to set the default encryption state of an existing bucket.
+//
+// This implementation of the PUT operation sets default encryption for a buckets
+// using server-side encryption with Amazon S3-managed keys SSE-S3 or AWS KMS
+// customer master keys (CMKs) (SSE-KMS) bucket. For information about the Amazon
+// S3 default encryption feature, see As a security precaution, the root user
+// of the AWS account that owns a bucket can always use this operation, even
+// if the policy explicitly denies the root user the ability to perform this
+// action. in the Amazon Simple Storage Service Developer Guide.
+//
+// This operation requires AWS Signature Version 4. For more information, see
+// Authenticating Requests (AWS Signature Version 4) (sig-v4-authenticating-requests.html).
+//
+// To use this operation, you must have permissions to perform the s3:PutEncryptionConfiguration
+// action. The bucket owner has this permission by default. The bucket owner
+// can grant this permission to others. For more information about permissions,
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+// Related Resources
+//
+//    * GetBucketEncryption
+//
+//    * DeleteBucketEncryption
 //
 //    // Example sending a request using PutBucketEncryptionRequest.
 //    req := client.PutBucketEncryptionRequest(params)

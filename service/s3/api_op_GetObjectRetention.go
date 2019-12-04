@@ -124,7 +124,8 @@ const opGetObjectRetention = "GetObjectRetention"
 // GetObjectRetentionRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Retrieves an object's retention settings.
+// Retrieves an object's retention settings. For more information, see Locking
+// Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
 //
 //    // Example sending a request using GetObjectRetentionRequest.
 //    req := client.GetObjectRetentionRequest(params)

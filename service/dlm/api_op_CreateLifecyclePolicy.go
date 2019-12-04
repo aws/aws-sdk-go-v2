@@ -27,8 +27,6 @@ type CreateLifecyclePolicyInput struct {
 
 	// The configuration details of the lifecycle policy.
 	//
-	// Target tags cannot be re-used across lifecycle policies.
-	//
 	// PolicyDetails is a required field
 	PolicyDetails *PolicyDetails `type:"structure" required:"true"`
 
@@ -36,6 +34,9 @@ type CreateLifecyclePolicyInput struct {
 	//
 	// State is a required field
 	State SettablePolicyStateValues `type:"string" required:"true" enum:"true"`
+
+	// The tags to apply to the lifecycle policy during creation.
+	Tags map[string]string `min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -60,6 +61,9 @@ func (s *CreateLifecyclePolicyInput) Validate() error {
 	}
 	if len(s.State) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("State"))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 	if s.PolicyDetails != nil {
 		if err := s.PolicyDetails.Validate(); err != nil {
@@ -100,6 +104,18 @@ func (s CreateLifecyclePolicyInput) MarshalFields(e protocol.FieldEncoder) error
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }

@@ -25,7 +25,7 @@ type UpdateDomainAssociationInput struct {
 	// DomainName is a required field
 	DomainName *string `location:"uri" locationName:"domainName" type:"string" required:"true"`
 
-	// Enables automated creation of Subdomains for branches.
+	// Enables automated creation of Subdomains for branches. (Currently not supported)
 	EnableAutoSubDomain *bool `locationName:"enableAutoSubDomain" type:"boolean"`
 
 	// Setting structure for the Subdomain.

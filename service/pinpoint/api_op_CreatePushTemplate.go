@@ -68,7 +68,7 @@ func (s CreatePushTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreatePushTemplateOutput struct {
 	_ struct{} `type:"structure" payload:"CreateTemplateMessageBody"`
 
-	// Provides information about an API request or response.
+	// Provides information about a request to create a message template.
 	//
 	// CreateTemplateMessageBody is a required field
 	CreateTemplateMessageBody *CreateTemplateMessageBody `type:"structure" required:"true"`

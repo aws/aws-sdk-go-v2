@@ -78,7 +78,23 @@ const opDeleteBucketEncryption = "DeleteBucketEncryption"
 // DeleteBucketEncryptionRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Deletes the server-side encryption configuration from the bucket.
+// This implementation of the DELETE operation removes default encryption from
+// the bucket. For information about the Amazon S3 default encryption feature,
+// see Amazon S3 Default Bucket Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev//bucket-encryption.html)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+// To use this operation, you must have permissions to perform the s3:PutEncryptionConfiguration
+// action. The bucket owner has this permission by default. The bucket owner
+// can grant this permission to others. For more information about permissions,
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev//using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev//s3-access-control.html)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+// Related Resources
+//
+//    * PutBucketEncryption
+//
+//    * GetBucketEncryption
 //
 //    // Example sending a request using DeleteBucketEncryptionRequest.
 //    req := client.DeleteBucketEncryptionRequest(params)

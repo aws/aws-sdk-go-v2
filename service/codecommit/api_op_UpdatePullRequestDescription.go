@@ -13,7 +13,7 @@ type UpdatePullRequestDescriptionInput struct {
 	_ struct{} `type:"structure"`
 
 	// The updated content of the description for the pull request. This content
-	// will replace the existing description.
+	// replaces the existing description.
 	//
 	// Description is a required field
 	Description *string `locationName:"description" type:"string" required:"true"`

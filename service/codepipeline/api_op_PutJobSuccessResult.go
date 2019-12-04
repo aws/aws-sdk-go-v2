@@ -35,6 +35,11 @@ type PutJobSuccessResultInput struct {
 	//
 	// JobId is a required field
 	JobId *string `locationName:"jobId" type:"string" required:"true"`
+
+	// Key-value pairs produced as output by a job worker that can be made available
+	// to a downstream action configuration. outputVariables can be included only
+	// when there is no continuation token on the request.
+	OutputVariables map[string]string `locationName:"outputVariables" type:"map"`
 }
 
 // String returns the string representation

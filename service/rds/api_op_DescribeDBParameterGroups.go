@@ -20,7 +20,7 @@ type DescribeDBParameterGroupsInput struct {
 	//    * If supplied, must match the name of an existing DBClusterParameterGroup.
 	DBParameterGroupName *string `type:"string"`
 
-	// This parameter is not currently supported.
+	// This parameter isn't currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBParameterGroups

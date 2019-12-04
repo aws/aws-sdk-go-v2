@@ -146,6 +146,13 @@ const opCreateReplicationInstance = "CreateReplicationInstance"
 //
 // Creates the replication instance using the specified parameters.
 //
+// AWS DMS requires that your account have certain roles with appropriate permissions
+// before you can create a replication instance. For information on the required
+// roles, see Creating the IAM Roles to Use With the AWS CLI and AWS DMS API
+// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.APIRole.html).
+// For information on the required permissions, see IAM Permissions Needed to
+// Use AWS DMS (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.IAMPermissions.html).
+//
 //    // Example sending a request using CreateReplicationInstanceRequest.
 //    req := client.CreateReplicationInstanceRequest(params)
 //    resp, err := req.Send(context.TODO())

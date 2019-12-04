@@ -19,6 +19,23 @@ func (enum EndpointType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type HomeDirectoryType string
+
+// Enum values for HomeDirectoryType
+const (
+	HomeDirectoryTypePath    HomeDirectoryType = "PATH"
+	HomeDirectoryTypeLogical HomeDirectoryType = "LOGICAL"
+)
+
+func (enum HomeDirectoryType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HomeDirectoryType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Returns information related to the type of user authentication that is in
 // use for a server's users. For SERVICE_MANAGED authentication, the Secure
 // Shell (SSH) public keys are stored with a user on an SFTP server instance.

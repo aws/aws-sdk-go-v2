@@ -26,6 +26,11 @@ type UpdateDetectorModelInput struct {
 	// DetectorModelName is a required field
 	DetectorModelName *string `location:"uri" locationName:"detectorModelName" min:"1" type:"string" required:"true"`
 
+	// When set to SERIAL, variables are updated and event conditions evaluated
+	// in the order that the events are defined. When set to BATCH, variables are
+	// updated and events performed only after all event conditions are evaluated.
+	EvaluationMethod EvaluationMethod `locationName:"evaluationMethod" type:"string" enum:"true"`
+
 	// The ARN of the role that grants permission to AWS IoT Events to perform its
 	// operations.
 	//
@@ -86,6 +91,12 @@ func (s UpdateDetectorModelInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "detectorModelDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.EvaluationMethod) > 0 {
+		v := s.EvaluationMethod
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "evaluationMethod", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.RoleArn != nil {
 		v := *s.RoleArn

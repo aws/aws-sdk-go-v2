@@ -155,6 +155,11 @@ type AutoScalingGroup struct {
 	// One or more load balancers associated with the group.
 	LoadBalancerNames []string `type:"list"`
 
+	// The maximum amount of time, in seconds, that an instance can be in service.
+	//
+	// Valid Range: Minimum value of 604800.
+	MaxInstanceLifetime *int64 `type:"integer"`
+
 	// The maximum size of the group.
 	//
 	// MaxSize is a required field
@@ -230,6 +235,9 @@ type AutoScalingInstanceDetails struct {
 	// InstanceId is a required field
 	InstanceId *string `min:"1" type:"string" required:"true"`
 
+	// The instance type of the EC2 instance.
+	InstanceType *string `min:"1" type:"string"`
+
 	// The launch configuration used to launch the instance. This value is not available
 	// if you attached the instance to the Auto Scaling group.
 	LaunchConfigurationName *string `min:"1" type:"string"`
@@ -247,6 +255,12 @@ type AutoScalingInstanceDetails struct {
 	//
 	// ProtectedFromScaleIn is a required field
 	ProtectedFromScaleIn *bool `type:"boolean" required:"true"`
+
+	// The number of capacity units contributed by the instance based on its instance
+	// type.
+	//
+	// Valid Range: Minimum value of 1. Maximum value of 999.
+	WeightedCapacity *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -453,7 +467,7 @@ type Ebs struct {
 	// or sc1 for Cold HDD. For more information, see Amazon EBS Volume Types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
 	// in the Amazon EC2 User Guide for Linux Instances.
 	//
-	// Valid values: standard | io1 | gp2 | st1 | sc1
+	// Valid Values: standard | io1 | gp2 | st1 | sc1
 	VolumeType *string `min:"1" type:"string"`
 }
 
@@ -576,6 +590,9 @@ type Instance struct {
 	// InstanceId is a required field
 	InstanceId *string `min:"1" type:"string" required:"true"`
 
+	// The instance type of the EC2 instance.
+	InstanceType *string `min:"1" type:"string"`
+
 	// The launch configuration associated with the instance.
 	LaunchConfigurationName *string `min:"1" type:"string"`
 
@@ -593,6 +610,12 @@ type Instance struct {
 	//
 	// ProtectedFromScaleIn is a required field
 	ProtectedFromScaleIn *bool `type:"boolean" required:"true"`
+
+	// The number of capacity units contributed by the instance based on its instance
+	// type.
+	//
+	// Valid Range: Minimum value of 1. Maximum value of 999.
+	WeightedCapacity *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -619,6 +642,14 @@ func (s InstanceMonitoring) String() string {
 // and Spot Instances, the maximum price to pay for Spot Instances, and how
 // the Auto Scaling group allocates instance types to fulfill On-Demand and
 // Spot capacity.
+//
+// When you update SpotAllocationStrategy, SpotInstancePools, or SpotMaxPrice,
+// this update action does not deploy any changes across the running Amazon
+// EC2 instances in the group. Your existing Spot Instances continue to run
+// as long as the maximum price for those instances is higher than the current
+// Spot price. When scale out occurs, Amazon EC2 Auto Scaling launches instances
+// based on the new settings. When scale in occurs, Amazon EC2 Auto Scaling
+// terminates instances according to the group's termination policies.
 type InstancesDistribution struct {
 	_ struct{} `type:"structure"`
 
@@ -637,16 +668,28 @@ type InstancesDistribution struct {
 	// by On-Demand Instances. This base portion is provisioned first as your group
 	// scales.
 	//
-	// The default value is 0. If you leave this parameter set to 0, On-Demand Instances
-	// are launched as a percentage of the Auto Scaling group's desired capacity,
-	// per the OnDemandPercentageAboveBaseCapacity setting.
+	// Default if not set is 0. If you leave it set to 0, On-Demand Instances are
+	// launched as a percentage of the Auto Scaling group's desired capacity, per
+	// the OnDemandPercentageAboveBaseCapacity setting.
+	//
+	// An update to this setting means a gradual replacement of instances to maintain
+	// the specified number of On-Demand Instances for your base capacity. When
+	// replacing instances, Amazon EC2 Auto Scaling launches new instances before
+	// terminating the old ones.
 	OnDemandBaseCapacity *int64 `type:"integer"`
 
 	// Controls the percentages of On-Demand Instances and Spot Instances for your
-	// additional capacity beyond OnDemandBaseCapacity. The range is 0–100.
+	// additional capacity beyond OnDemandBaseCapacity.
 	//
-	// The default value is 100. If you leave this parameter set to 100, the percentages
-	// are 100% for On-Demand Instances and 0% for Spot Instances.
+	// Default if not set is 100. If you leave it set to 100, the percentages are
+	// 100% for On-Demand Instances and 0% for Spot Instances.
+	//
+	// An update to this setting means a gradual replacement of instances to maintain
+	// the percentage of On-Demand Instances for your additional capacity above
+	// the base capacity. When replacing instances, Amazon EC2 Auto Scaling launches
+	// new instances before terminating the old ones.
+	//
+	// Valid Range: Minimum value of 0. Maximum value of 100.
 	OnDemandPercentageAboveBaseCapacity *int64 `type:"integer"`
 
 	// Indicates how to allocate instances across Spot Instance pools.
@@ -666,9 +709,11 @@ type InstancesDistribution struct {
 
 	// The number of Spot Instance pools across which to allocate your Spot Instances.
 	// The Spot pools are determined from the different instance types in the Overrides
-	// array of LaunchTemplate. The range is 1–20. The default value is 2.
+	// array of LaunchTemplate. Default if not set is 2.
 	//
-	// Valid only when the Spot allocation strategy is lowest-price.
+	// Used only when the Spot allocation strategy is lowest-price.
+	//
+	// Valid Range: Minimum value of 1. Maximum value of 20.
 	SpotInstancePools *int64 `type:"integer"`
 
 	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
@@ -801,7 +846,7 @@ type LaunchConfiguration struct {
 
 	// The maximum hourly price to be paid for any Spot Instance launched to fulfill
 	// the request. Spot Instances are launched when the price you specify exceeds
-	// the current Spot market price.
+	// the current Spot price.
 	//
 	// For more information, see Launching Spot Instances in Your Auto Scaling Group
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-spot-instances.html)
@@ -825,6 +870,11 @@ func (s LaunchConfiguration) String() string {
 // The overrides are used to override the instance type specified by the launch
 // template with multiple instance types that can be used to launch On-Demand
 // Instances and Spot Instances.
+//
+// When you update the launch template or overrides, existing Amazon EC2 instances
+// continue to run. When scale out occurs, Amazon EC2 Auto Scaling launches
+// instances to match the new settings. When scale in occurs, Amazon EC2 Auto
+// Scaling terminates instances according to the group's termination policies.
 type LaunchTemplate struct {
 	_ struct{} `type:"structure"`
 
@@ -832,9 +882,9 @@ type LaunchTemplate struct {
 	// or launch template name in the request.
 	LaunchTemplateSpecification *LaunchTemplateSpecification `type:"structure"`
 
-	// Any parameters that you specify override the same parameters in the launch
-	// template. Currently, the only supported override is instance type. You must
-	// specify between 2 and 20 overrides.
+	// An optional setting. Any parameters that you specify override the same parameters
+	// in the launch template. Currently, the only supported override is instance
+	// type. You can specify between 1 and 20 instance types.
 	Overrides []LaunchTemplateOverrides `type:"list"`
 }
 
@@ -875,6 +925,15 @@ type LaunchTemplateOverrides struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	InstanceType *string `min:"1" type:"string"`
+
+	// The number of capacity units, which gives the instance type a proportional
+	// weight to other instance types. For example, larger instance types are generally
+	// weighted more than smaller instance types. These are the same units that
+	// you chose to set the desired capacity in terms of instances, or a performance
+	// attribute such as vCPUs, memory, or I/O.
+	//
+	// Valid Range: Minimum value of 1. Maximum value of 999.
+	WeightedCapacity *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -887,6 +946,9 @@ func (s *LaunchTemplateOverrides) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LaunchTemplateOverrides"}
 	if s.InstanceType != nil && len(*s.InstanceType) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InstanceType", 1))
+	}
+	if s.WeightedCapacity != nil && len(*s.WeightedCapacity) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("WeightedCapacity", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1285,8 +1347,8 @@ type MixedInstancesPolicy struct {
 
 	// The instances distribution to use.
 	//
-	// If you leave this parameter unspecified when creating a mixed instances policy,
-	// the default values are used.
+	// If you leave this parameter unspecified, the value for each parameter in
+	// InstancesDistribution uses a default value.
 	InstancesDistribution *InstancesDistribution `type:"structure"`
 
 	// The launch template and instance types (overrides).
@@ -1350,13 +1412,7 @@ func (s NotificationConfiguration) String() string {
 type PredefinedMetricSpecification struct {
 	_ struct{} `type:"structure"`
 
-	// The metric type.
-	//
-	// PredefinedMetricType is a required field
-	PredefinedMetricType MetricType `type:"string" required:"true" enum:"true"`
-
-	// Identifies the resource associated with the metric type. The following predefined
-	// metrics are available:
+	// The metric type. The following predefined metrics are available:
 	//
 	//    * ASGAverageCPUUtilization - Average CPU utilization of the Auto Scaling
 	//    group.
@@ -1370,15 +1426,21 @@ type PredefinedMetricSpecification struct {
 	//    * ALBRequestCountPerTarget - Number of requests completed per target in
 	//    an Application Load Balancer target group.
 	//
-	// For predefined metric types ASGAverageCPUUtilization, ASGAverageNetworkIn,
-	// and ASGAverageNetworkOut, the parameter must not be specified as the resource
-	// associated with the metric type is the Auto Scaling group. For predefined
-	// metric type ALBRequestCountPerTarget, the parameter must be specified in
-	// the format: app/load-balancer-name/load-balancer-id/targetgroup/target-group-name/target-group-id
-	// , where app/load-balancer-name/load-balancer-id is the final portion of the
-	// load balancer ARN, and targetgroup/target-group-name/target-group-id is the
-	// final portion of the target group ARN. The target group must be attached
-	// to the Auto Scaling group.
+	// PredefinedMetricType is a required field
+	PredefinedMetricType MetricType `type:"string" required:"true" enum:"true"`
+
+	// Identifies the resource associated with the metric type. You can't specify
+	// a resource label unless the metric type is ALBRequestCountPerTarget and there
+	// is a target group attached to the Auto Scaling group.
+	//
+	// The format is app/load-balancer-name/load-balancer-id/targetgroup/target-group-name/target-group-id
+	// , where
+	//
+	//    * app/load-balancer-name/load-balancer-id is the final portion of the
+	//    load balancer ARN, and
+	//
+	//    * targetgroup/target-group-name/target-group-id is the final portion of
+	//    the target group ARN.
 	ResourceLabel *string `min:"1" type:"string"`
 }
 

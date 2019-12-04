@@ -45,6 +45,7 @@ const (
 	ChangeActionAdd    ChangeAction = "Add"
 	ChangeActionModify ChangeAction = "Modify"
 	ChangeActionRemove ChangeAction = "Remove"
+	ChangeActionImport ChangeAction = "Import"
 )
 
 func (enum ChangeAction) MarshalValue() (string, error) {
@@ -82,6 +83,7 @@ type ChangeSetType string
 const (
 	ChangeSetTypeCreate ChangeSetType = "CREATE"
 	ChangeSetTypeUpdate ChangeSetType = "UPDATE"
+	ChangeSetTypeImport ChangeSetType = "IMPORT"
 )
 
 func (enum ChangeSetType) MarshalValue() (string, error) {
@@ -125,6 +127,23 @@ func (enum ChangeType) MarshalValue() (string, error) {
 }
 
 func (enum ChangeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DeprecatedStatus string
+
+// Enum values for DeprecatedStatus
+const (
+	DeprecatedStatusLive       DeprecatedStatus = "LIVE"
+	DeprecatedStatusDeprecated DeprecatedStatus = "DEPRECATED"
+)
+
+func (enum DeprecatedStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeprecatedStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -185,6 +204,35 @@ func (enum ExecutionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type HandlerErrorCode string
+
+// Enum values for HandlerErrorCode
+const (
+	HandlerErrorCodeNotUpdatable            HandlerErrorCode = "NotUpdatable"
+	HandlerErrorCodeInvalidRequest          HandlerErrorCode = "InvalidRequest"
+	HandlerErrorCodeAccessDenied            HandlerErrorCode = "AccessDenied"
+	HandlerErrorCodeInvalidCredentials      HandlerErrorCode = "InvalidCredentials"
+	HandlerErrorCodeAlreadyExists           HandlerErrorCode = "AlreadyExists"
+	HandlerErrorCodeNotFound                HandlerErrorCode = "NotFound"
+	HandlerErrorCodeResourceConflict        HandlerErrorCode = "ResourceConflict"
+	HandlerErrorCodeThrottling              HandlerErrorCode = "Throttling"
+	HandlerErrorCodeServiceLimitExceeded    HandlerErrorCode = "ServiceLimitExceeded"
+	HandlerErrorCodeNotStabilized           HandlerErrorCode = "NotStabilized"
+	HandlerErrorCodeGeneralServiceException HandlerErrorCode = "GeneralServiceException"
+	HandlerErrorCodeServiceInternalError    HandlerErrorCode = "ServiceInternalError"
+	HandlerErrorCodeNetworkFailure          HandlerErrorCode = "NetworkFailure"
+	HandlerErrorCodeInternalFailure         HandlerErrorCode = "InternalFailure"
+)
+
+func (enum HandlerErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HandlerErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OnFailure string
 
 // Enum values for OnFailure
@@ -199,6 +247,77 @@ func (enum OnFailure) MarshalValue() (string, error) {
 }
 
 func (enum OnFailure) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OperationStatus string
+
+// Enum values for OperationStatus
+const (
+	OperationStatusPending    OperationStatus = "PENDING"
+	OperationStatusInProgress OperationStatus = "IN_PROGRESS"
+	OperationStatusSuccess    OperationStatus = "SUCCESS"
+	OperationStatusFailed     OperationStatus = "FAILED"
+)
+
+func (enum OperationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OperationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ProvisioningType string
+
+// Enum values for ProvisioningType
+const (
+	ProvisioningTypeNonProvisionable ProvisioningType = "NON_PROVISIONABLE"
+	ProvisioningTypeImmutable        ProvisioningType = "IMMUTABLE"
+	ProvisioningTypeFullyMutable     ProvisioningType = "FULLY_MUTABLE"
+)
+
+func (enum ProvisioningType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProvisioningType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RegistrationStatus string
+
+// Enum values for RegistrationStatus
+const (
+	RegistrationStatusComplete   RegistrationStatus = "COMPLETE"
+	RegistrationStatusInProgress RegistrationStatus = "IN_PROGRESS"
+	RegistrationStatusFailed     RegistrationStatus = "FAILED"
+)
+
+func (enum RegistrationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RegistrationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RegistryType string
+
+// Enum values for RegistryType
+const (
+	RegistryTypeResource RegistryType = "RESOURCE"
+)
+
+func (enum RegistryType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RegistryType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -281,16 +400,22 @@ type ResourceStatus string
 
 // Enum values for ResourceStatus
 const (
-	ResourceStatusCreateInProgress ResourceStatus = "CREATE_IN_PROGRESS"
-	ResourceStatusCreateFailed     ResourceStatus = "CREATE_FAILED"
-	ResourceStatusCreateComplete   ResourceStatus = "CREATE_COMPLETE"
-	ResourceStatusDeleteInProgress ResourceStatus = "DELETE_IN_PROGRESS"
-	ResourceStatusDeleteFailed     ResourceStatus = "DELETE_FAILED"
-	ResourceStatusDeleteComplete   ResourceStatus = "DELETE_COMPLETE"
-	ResourceStatusDeleteSkipped    ResourceStatus = "DELETE_SKIPPED"
-	ResourceStatusUpdateInProgress ResourceStatus = "UPDATE_IN_PROGRESS"
-	ResourceStatusUpdateFailed     ResourceStatus = "UPDATE_FAILED"
-	ResourceStatusUpdateComplete   ResourceStatus = "UPDATE_COMPLETE"
+	ResourceStatusCreateInProgress         ResourceStatus = "CREATE_IN_PROGRESS"
+	ResourceStatusCreateFailed             ResourceStatus = "CREATE_FAILED"
+	ResourceStatusCreateComplete           ResourceStatus = "CREATE_COMPLETE"
+	ResourceStatusDeleteInProgress         ResourceStatus = "DELETE_IN_PROGRESS"
+	ResourceStatusDeleteFailed             ResourceStatus = "DELETE_FAILED"
+	ResourceStatusDeleteComplete           ResourceStatus = "DELETE_COMPLETE"
+	ResourceStatusDeleteSkipped            ResourceStatus = "DELETE_SKIPPED"
+	ResourceStatusUpdateInProgress         ResourceStatus = "UPDATE_IN_PROGRESS"
+	ResourceStatusUpdateFailed             ResourceStatus = "UPDATE_FAILED"
+	ResourceStatusUpdateComplete           ResourceStatus = "UPDATE_COMPLETE"
+	ResourceStatusImportFailed             ResourceStatus = "IMPORT_FAILED"
+	ResourceStatusImportComplete           ResourceStatus = "IMPORT_COMPLETE"
+	ResourceStatusImportInProgress         ResourceStatus = "IMPORT_IN_PROGRESS"
+	ResourceStatusImportRollbackInProgress ResourceStatus = "IMPORT_ROLLBACK_IN_PROGRESS"
+	ResourceStatusImportRollbackFailed     ResourceStatus = "IMPORT_ROLLBACK_FAILED"
+	ResourceStatusImportRollbackComplete   ResourceStatus = "IMPORT_ROLLBACK_COMPLETE"
 )
 
 func (enum ResourceStatus) MarshalValue() (string, error) {
@@ -376,13 +501,52 @@ func (enum StackResourceDriftStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type StackSetDriftDetectionStatus string
+
+// Enum values for StackSetDriftDetectionStatus
+const (
+	StackSetDriftDetectionStatusCompleted      StackSetDriftDetectionStatus = "COMPLETED"
+	StackSetDriftDetectionStatusFailed         StackSetDriftDetectionStatus = "FAILED"
+	StackSetDriftDetectionStatusPartialSuccess StackSetDriftDetectionStatus = "PARTIAL_SUCCESS"
+	StackSetDriftDetectionStatusInProgress     StackSetDriftDetectionStatus = "IN_PROGRESS"
+	StackSetDriftDetectionStatusStopped        StackSetDriftDetectionStatus = "STOPPED"
+)
+
+func (enum StackSetDriftDetectionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackSetDriftDetectionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type StackSetDriftStatus string
+
+// Enum values for StackSetDriftStatus
+const (
+	StackSetDriftStatusDrifted    StackSetDriftStatus = "DRIFTED"
+	StackSetDriftStatusInSync     StackSetDriftStatus = "IN_SYNC"
+	StackSetDriftStatusNotChecked StackSetDriftStatus = "NOT_CHECKED"
+)
+
+func (enum StackSetDriftStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackSetDriftStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StackSetOperationAction string
 
 // Enum values for StackSetOperationAction
 const (
-	StackSetOperationActionCreate StackSetOperationAction = "CREATE"
-	StackSetOperationActionUpdate StackSetOperationAction = "UPDATE"
-	StackSetOperationActionDelete StackSetOperationAction = "DELETE"
+	StackSetOperationActionCreate      StackSetOperationAction = "CREATE"
+	StackSetOperationActionUpdate      StackSetOperationAction = "UPDATE"
+	StackSetOperationActionDelete      StackSetOperationAction = "DELETE"
+	StackSetOperationActionDetectDrift StackSetOperationAction = "DETECT_DRIFT"
 )
 
 func (enum StackSetOperationAction) MarshalValue() (string, error) {
@@ -472,6 +636,11 @@ const (
 	StackStatusUpdateRollbackCompleteCleanupInProgress StackStatus = "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS"
 	StackStatusUpdateRollbackComplete                  StackStatus = "UPDATE_ROLLBACK_COMPLETE"
 	StackStatusReviewInProgress                        StackStatus = "REVIEW_IN_PROGRESS"
+	StackStatusImportInProgress                        StackStatus = "IMPORT_IN_PROGRESS"
+	StackStatusImportComplete                          StackStatus = "IMPORT_COMPLETE"
+	StackStatusImportRollbackInProgress                StackStatus = "IMPORT_ROLLBACK_IN_PROGRESS"
+	StackStatusImportRollbackFailed                    StackStatus = "IMPORT_ROLLBACK_FAILED"
+	StackStatusImportRollbackComplete                  StackStatus = "IMPORT_ROLLBACK_COMPLETE"
 )
 
 func (enum StackStatus) MarshalValue() (string, error) {
@@ -496,6 +665,23 @@ func (enum TemplateStage) MarshalValue() (string, error) {
 }
 
 func (enum TemplateStage) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Visibility string
+
+// Enum values for Visibility
+const (
+	VisibilityPublic  Visibility = "PUBLIC"
+	VisibilityPrivate Visibility = "PRIVATE"
+)
+
+func (enum Visibility) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Visibility) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

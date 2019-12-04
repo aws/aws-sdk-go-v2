@@ -52,11 +52,11 @@ type DescribedServer struct {
 	// This property is an AWS Identity and Access Management (IAM) entity that
 	// allows the server to turn on Amazon CloudWatch logging for Amazon S3 events.
 	// When set, user activity can be viewed in your CloudWatch logs.
-	LoggingRole *string `type:"string"`
+	LoggingRole *string `min:"20" type:"string"`
 
 	// This property is a unique system-assigned identifier for the SFTP server
 	// that you instantiate.
-	ServerId *string `type:"string"`
+	ServerId *string `min:"19" type:"string"`
 
 	// The condition of the SFTP server for the server that was described. A value
 	// of ONLINE indicates that the server can accept jobs and transfer files. A
@@ -94,8 +94,31 @@ type DescribedUser struct {
 
 	// This property specifies the landing directory (or folder), which is the location
 	// that files are written to or read from in an Amazon S3 bucket for the described
-	// user. An example is /bucket_name/home/username .
+	// user. An example is /your s3 bucket name/home/username .
 	HomeDirectory *string `type:"string"`
+
+	// Logical directory mappings that you specified for what S3 paths and keys
+	// should be visible to your user and how you want to make them visible. You
+	// will need to specify the "Entry" and "Target" pair, where Entry shows how
+	// the path is made visible and Target is the actual S3 path. If you only specify
+	// a target, it will be displayed as is. You will need to also make sure that
+	// your AWS IAM Role provides access to paths in Target.
+	//
+	// In most cases, you can use this value instead of the scope down policy to
+	// lock your user down to the designated home directory ("chroot"). To do this,
+	// you can set Entry to '/' and set Target to the HomeDirectory parameter value.
+	//
+	// In most cases, you can use this value instead of the scope down policy to
+	// lock your user down to the designated home directory ("chroot"). To do this,
+	// you can set Entry to '/' and set Target to the HomeDirectory parameter value.
+	HomeDirectoryMappings []HomeDirectoryMapEntry `min:"1" type:"list"`
+
+	// The type of landing directory (folder) you mapped for your users' to see
+	// when they log into the SFTP server. If you set it to PATH, the user will
+	// see the absolute Amazon S3 bucket paths as is in their SFTP clients. If you
+	// set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings
+	// for how you want to make S3 paths visible to your user.
+	HomeDirectoryType HomeDirectoryType `type:"string" enum:"true"`
 
 	// Specifies the name of the policy in use for the described user.
 	Policy *string `type:"string"`
@@ -106,7 +129,7 @@ type DescribedUser struct {
 	// into and out of your Amazon S3 bucket or buckets. The IAM role should also
 	// contain a trust relationship that allows the SFTP server to access your resources
 	// when servicing your SFTP user's transfer requests.
-	Role *string `type:"string"`
+	Role *string `min:"20" type:"string"`
 
 	// This property contains the public key portion of the Secure Shell (SSH) keys
 	// stored for the described user.
@@ -119,7 +142,7 @@ type DescribedUser struct {
 	// This property is the name of the user that was requested to be described.
 	// User names are used for authentication purposes. This is the string that
 	// will be used by your user when they log in to your SFTP server.
-	UserName *string `type:"string"`
+	UserName *string `min:"3" type:"string"`
 }
 
 // String returns the string representation
@@ -133,12 +156,63 @@ type EndpointDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the VPC endpoint.
-	VpcEndpointId *string `type:"string"`
+	VpcEndpointId *string `min:"22" type:"string"`
 }
 
 // String returns the string representation
 func (s EndpointDetails) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EndpointDetails) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "EndpointDetails"}
+	if s.VpcEndpointId != nil && len(*s.VpcEndpointId) < 22 {
+		invalidParams.Add(aws.NewErrParamMinLen("VpcEndpointId", 22))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Represents an object that contains entries and a targets for HomeDirectoryMappings.
+type HomeDirectoryMapEntry struct {
+	_ struct{} `type:"structure"`
+
+	// Represents an entry and a target for HomeDirectoryMappings.
+	//
+	// Entry is a required field
+	Entry *string `type:"string" required:"true"`
+
+	// Represents the map target that is used in a HomeDirectorymapEntry.
+	//
+	// Target is a required field
+	Target *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s HomeDirectoryMapEntry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HomeDirectoryMapEntry) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HomeDirectoryMapEntry"}
+
+	if s.Entry == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Entry"))
+	}
+
+	if s.Target == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Target"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Returns information related to the type of user authentication that is in
@@ -148,7 +222,7 @@ type IdentityProviderDetails struct {
 
 	// The InvocationRole parameter provides the type of InvocationRole used to
 	// authenticate the user account.
-	InvocationRole *string `type:"string"`
+	InvocationRole *string `min:"20" type:"string"`
 
 	// The Url parameter provides contains the location of the service endpoint
 	// used to authenticate users.
@@ -158,6 +232,19 @@ type IdentityProviderDetails struct {
 // String returns the string representation
 func (s IdentityProviderDetails) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *IdentityProviderDetails) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "IdentityProviderDetails"}
+	if s.InvocationRole != nil && len(*s.InvocationRole) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("InvocationRole", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Returns properties of the server that was specified.
@@ -182,11 +269,11 @@ type ListedServer struct {
 
 	// The AWS Identity and Access Management entity that allows the server to turn
 	// on Amazon CloudWatch logging.
-	LoggingRole *string `type:"string"`
+	LoggingRole *string `min:"20" type:"string"`
 
 	// This value is the unique system assigned identifier for the SFTP servers
 	// that were listed.
-	ServerId *string `type:"string"`
+	ServerId *string `min:"19" type:"string"`
 
 	// This property describes the condition of the SFTP server for the server that
 	// was described. A value of ONLINE> indicates that the server can accept jobs
@@ -222,18 +309,25 @@ type ListedUser struct {
 	// an Amazon S3 bucket for the user you specify by their ARN.
 	HomeDirectory *string `type:"string"`
 
+	// The type of landing directory (folder) you mapped for your users' home directory.
+	// If you set it to PATH, the user will see the absolute Amazon S3 bucket paths
+	// as is in their SFTP clients. If you set it LOGICAL, you will need to provide
+	// mappings in the HomeDirectoryMappings for how you want to make S3 paths visible
+	// to your user.
+	HomeDirectoryType HomeDirectoryType `type:"string" enum:"true"`
+
 	// The role in use by this user. A role is an AWS Identity and Access Management
 	// (IAM) entity that, in this case, allows the SFTP server to act on a user's
 	// behalf. It allows the server to inherit the trust relationship that enables
 	// that user to perform file operations to their Amazon S3 bucket.
-	Role *string `type:"string"`
+	Role *string `min:"20" type:"string"`
 
 	// This value is the number of SSH public keys stored for the user you specified.
 	SshPublicKeyCount *int64 `type:"integer"`
 
 	// The name of the user whose ARN was specified. User names are used for authentication
 	// purposes.
-	UserName *string `type:"string"`
+	UserName *string `min:"3" type:"string"`
 }
 
 // String returns the string representation
@@ -262,7 +356,7 @@ type SshPublicKey struct {
 	// The SshPublicKeyId parameter contains the identifier of the public key.
 	//
 	// SshPublicKeyId is a required field
-	SshPublicKeyId *string `type:"string" required:"true"`
+	SshPublicKeyId *string `min:"21" type:"string" required:"true"`
 }
 
 // String returns the string representation

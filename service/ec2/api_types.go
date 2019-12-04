@@ -1154,6 +1154,9 @@ type CustomerGateway struct {
 	// The ID of the customer gateway.
 	CustomerGatewayId *string `locationName:"customerGatewayId" type:"string"`
 
+	// The name of customer gateway device.
+	DeviceName *string `locationName:"deviceName" type:"string"`
+
 	// The Internet-routable IP address of the customer gateway's outside interface.
 	IpAddress *string `locationName:"ipAddress" type:"string"`
 
@@ -1304,6 +1307,55 @@ func (s DeleteQueuedReservedInstancesError) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Describes fast snapshot restores for a snapshot.
+type DescribeFastSnapshotRestoreSuccessItem struct {
+	_ struct{} `type:"structure"`
+
+	// The Availability Zone.
+	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
+
+	// The time at which fast snapshot restores entered the disabled state.
+	DisabledTime *time.Time `locationName:"disabledTime" type:"timestamp"`
+
+	// The time at which fast snapshot restores entered the disabling state.
+	DisablingTime *time.Time `locationName:"disablingTime" type:"timestamp"`
+
+	// The time at which fast snapshot restores entered the enabled state.
+	EnabledTime *time.Time `locationName:"enabledTime" type:"timestamp"`
+
+	// The time at which fast snapshot restores entered the enabling state.
+	EnablingTime *time.Time `locationName:"enablingTime" type:"timestamp"`
+
+	// The time at which fast snapshot restores entered the optimizing state.
+	OptimizingTime *time.Time `locationName:"optimizingTime" type:"timestamp"`
+
+	// The alias of the snapshot owner.
+	OwnerAlias *string `locationName:"ownerAlias" type:"string"`
+
+	// The ID of the AWS account that owns the snapshot.
+	OwnerId *string `locationName:"ownerId" type:"string"`
+
+	// The ID of the snapshot.
+	SnapshotId *string `locationName:"snapshotId" type:"string"`
+
+	// The state of fast snapshot restores.
+	State FastSnapshotRestoreStateCode `locationName:"state" type:"string" enum:"true"`
+
+	// The reason for the state transition. The possible values are as follows:
+	//
+	//    * Client.UserInitiated - The state successfully transitioned to enabling
+	//    or disabling.
+	//
+	//    * Client.UserInitiated - Lifecycle state transition - The state successfully
+	//    transitioned to optimizing, enabled, or disabled.
+	StateTransitionReason *string `locationName:"stateTransitionReason" type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeFastSnapshotRestoreSuccessItem) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes the instances that could not be launched by the fleet.
 type DescribeFleetError struct {
 	_ struct{} `type:"structure"`
@@ -1420,6 +1472,105 @@ type DirectoryServiceAuthenticationRequest struct {
 
 // String returns the string representation
 func (s DirectoryServiceAuthenticationRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Contains information about the errors that occurred when disabling fast snapshot
+// restores.
+type DisableFastSnapshotRestoreErrorItem struct {
+	_ struct{} `type:"structure"`
+
+	// The errors.
+	FastSnapshotRestoreStateErrors []DisableFastSnapshotRestoreStateErrorItem `locationName:"fastSnapshotRestoreStateErrorSet" locationNameList:"item" type:"list"`
+
+	// The ID of the snapshot.
+	SnapshotId *string `locationName:"snapshotId" type:"string"`
+}
+
+// String returns the string representation
+func (s DisableFastSnapshotRestoreErrorItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes an error that occurred when disabling fast snapshot restores.
+type DisableFastSnapshotRestoreStateError struct {
+	_ struct{} `type:"structure"`
+
+	// The error code.
+	Code *string `locationName:"code" type:"string"`
+
+	// The error message.
+	Message *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation
+func (s DisableFastSnapshotRestoreStateError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Contains information about an error that occurred when disabling fast snapshot
+// restores.
+type DisableFastSnapshotRestoreStateErrorItem struct {
+	_ struct{} `type:"structure"`
+
+	// The Availability Zone.
+	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
+
+	// The error.
+	Error *DisableFastSnapshotRestoreStateError `locationName:"error" type:"structure"`
+}
+
+// String returns the string representation
+func (s DisableFastSnapshotRestoreStateErrorItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes fast snapshot restores that were successfully disabled.
+type DisableFastSnapshotRestoreSuccessItem struct {
+	_ struct{} `type:"structure"`
+
+	// The Availability Zone.
+	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
+
+	// The time at which fast snapshot restores entered the disabled state.
+	DisabledTime *time.Time `locationName:"disabledTime" type:"timestamp"`
+
+	// The time at which fast snapshot restores entered the disabling state.
+	DisablingTime *time.Time `locationName:"disablingTime" type:"timestamp"`
+
+	// The time at which fast snapshot restores entered the enabled state.
+	EnabledTime *time.Time `locationName:"enabledTime" type:"timestamp"`
+
+	// The time at which fast snapshot restores entered the enabling state.
+	EnablingTime *time.Time `locationName:"enablingTime" type:"timestamp"`
+
+	// The time at which fast snapshot restores entered the optimizing state.
+	OptimizingTime *time.Time `locationName:"optimizingTime" type:"timestamp"`
+
+	// The alias of the snapshot owner.
+	OwnerAlias *string `locationName:"ownerAlias" type:"string"`
+
+	// The ID of the AWS account that owns the snapshot.
+	OwnerId *string `locationName:"ownerId" type:"string"`
+
+	// The ID of the snapshot.
+	SnapshotId *string `locationName:"snapshotId" type:"string"`
+
+	// The state of fast snapshot restores for the snapshot.
+	State FastSnapshotRestoreStateCode `locationName:"state" type:"string" enum:"true"`
+
+	// The reason for the state transition. The possible values are as follows:
+	//
+	//    * Client.UserInitiated - The state successfully transitioned to enabling
+	//    or disabling.
+	//
+	//    * Client.UserInitiated - Lifecycle state transition - The state successfully
+	//    transitioned to optimizing, enabled, or disabled.
+	StateTransitionReason *string `locationName:"stateTransitionReason" type:"string"`
+}
+
+// String returns the string representation
+func (s DisableFastSnapshotRestoreSuccessItem) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -1883,6 +2034,105 @@ type ElasticInferenceAcceleratorAssociation struct {
 
 // String returns the string representation
 func (s ElasticInferenceAcceleratorAssociation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Contains information about the errors that occurred when enabling fast snapshot
+// restores.
+type EnableFastSnapshotRestoreErrorItem struct {
+	_ struct{} `type:"structure"`
+
+	// The errors.
+	FastSnapshotRestoreStateErrors []EnableFastSnapshotRestoreStateErrorItem `locationName:"fastSnapshotRestoreStateErrorSet" locationNameList:"item" type:"list"`
+
+	// The ID of the snapshot.
+	SnapshotId *string `locationName:"snapshotId" type:"string"`
+}
+
+// String returns the string representation
+func (s EnableFastSnapshotRestoreErrorItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes an error that occurred when enabling fast snapshot restores.
+type EnableFastSnapshotRestoreStateError struct {
+	_ struct{} `type:"structure"`
+
+	// The error code.
+	Code *string `locationName:"code" type:"string"`
+
+	// The error message.
+	Message *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation
+func (s EnableFastSnapshotRestoreStateError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Contains information about an error that occurred when enabling fast snapshot
+// restores.
+type EnableFastSnapshotRestoreStateErrorItem struct {
+	_ struct{} `type:"structure"`
+
+	// The Availability Zone.
+	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
+
+	// The error.
+	Error *EnableFastSnapshotRestoreStateError `locationName:"error" type:"structure"`
+}
+
+// String returns the string representation
+func (s EnableFastSnapshotRestoreStateErrorItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes fast snapshot restores that were successfully enabled.
+type EnableFastSnapshotRestoreSuccessItem struct {
+	_ struct{} `type:"structure"`
+
+	// The Availability Zone.
+	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
+
+	// The time at which fast snapshot restores entered the disabled state.
+	DisabledTime *time.Time `locationName:"disabledTime" type:"timestamp"`
+
+	// The time at which fast snapshot restores entered the disabling state.
+	DisablingTime *time.Time `locationName:"disablingTime" type:"timestamp"`
+
+	// The time at which fast snapshot restores entered the enabled state.
+	EnabledTime *time.Time `locationName:"enabledTime" type:"timestamp"`
+
+	// The time at which fast snapshot restores entered the enabling state.
+	EnablingTime *time.Time `locationName:"enablingTime" type:"timestamp"`
+
+	// The time at which fast snapshot restores entered the optimizing state.
+	OptimizingTime *time.Time `locationName:"optimizingTime" type:"timestamp"`
+
+	// The alias of the snapshot owner.
+	OwnerAlias *string `locationName:"ownerAlias" type:"string"`
+
+	// The ID of the AWS account that owns the snapshot.
+	OwnerId *string `locationName:"ownerId" type:"string"`
+
+	// The ID of the snapshot.
+	SnapshotId *string `locationName:"snapshotId" type:"string"`
+
+	// The state of fast snapshot restores.
+	State FastSnapshotRestoreStateCode `locationName:"state" type:"string" enum:"true"`
+
+	// The reason for the state transition. The possible values are as follows:
+	//
+	//    * Client.UserInitiated - The state successfully transitioned to enabling
+	//    or disabling.
+	//
+	//    * Client.UserInitiated - Lifecycle state transition - The state successfully
+	//    transitioned to optimizing, enabled, or disabled.
+	StateTransitionReason *string `locationName:"stateTransitionReason" type:"string"`
+}
+
+// String returns the string representation
+func (s EnableFastSnapshotRestoreSuccessItem) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -2648,8 +2898,7 @@ func (s GroupIdentifier) String() string {
 
 // Indicates whether your instance is configured for hibernation. This parameter
 // is valid only if the instance meets the hibernation prerequisites (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites).
-// Hibernation is currently supported only for Amazon Linux. For more information,
-// see Hibernate Your Instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
+// For more information, see Hibernate Your Instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 type HibernationOptions struct {
 	_ struct{} `type:"structure"`
@@ -2666,8 +2915,7 @@ func (s HibernationOptions) String() string {
 
 // Indicates whether your instance is configured for hibernation. This parameter
 // is valid only if the instance meets the hibernation prerequisites (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites).
-// Hibernation is currently supported only for Amazon Linux. For more information,
-// see Hibernate Your Instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
+// For more information, see Hibernate Your Instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 type HibernationOptionsRequest struct {
 	_ struct{} `type:"structure"`
@@ -3241,7 +3489,7 @@ type ImportInstanceLaunchSpecification struct {
 	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	// The Base64-encoded user data to make available to the instance.
-	UserData *UserData `locationName:"userData" type:"structure"`
+	UserData *UserData `locationName:"userData" type:"structure" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -3421,6 +3669,9 @@ type Instance struct {
 
 	// The license configurations.
 	Licenses []LicenseConfiguration `locationName:"licenseSet" locationNameList:"item" type:"list"`
+
+	// The metadata options for the instance.
+	MetadataOptions *InstanceMetadataOptionsResponse `locationName:"metadataOptions" type:"structure"`
 
 	// The monitoring for the instance.
 	Monitoring *Monitoring `locationName:"monitoring" type:"structure"`
@@ -3677,6 +3928,94 @@ type InstanceMarketOptionsRequest struct {
 
 // String returns the string representation
 func (s InstanceMarketOptionsRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The metadata options for the instance.
+type InstanceMetadataOptionsRequest struct {
+	_ struct{} `type:"structure"`
+
+	// This parameter enables or disables the HTTP metadata endpoint on your instances.
+	// If the parameter is not specified, the default state is enabled.
+	//
+	// If you specify a value of disabled, you will not be able to access your instance
+	// metadata.
+	HttpEndpoint InstanceMetadataEndpointState `type:"string" enum:"true"`
+
+	// The desired HTTP PUT response hop limit for instance metadata requests. The
+	// larger the number, the further instance metadata requests can travel.
+	//
+	// Default: 1
+	//
+	// Possible values: Integers from 1 to 64
+	HttpPutResponseHopLimit *int64 `type:"integer"`
+
+	// The state of token usage for your instance metadata requests. If the parameter
+	// is not specified in the request, the default state is optional.
+	//
+	// If the state is optional, you can choose to retrieve instance metadata with
+	// or without a signed token header on your request. If you retrieve the IAM
+	// role credentials without a token, the version 1.0 role credentials are returned.
+	// If you retrieve the IAM role credentials using a valid signed token, the
+	// version 2.0 role credentials are returned.
+	//
+	// If the state is required, you must send a signed token header with any instance
+	// metadata retrieval requests. In this state, retrieving the IAM role credentials
+	// always returns the version 2.0 credentials; the version 1.0 credentials are
+	// not available.
+	HttpTokens HttpTokensState `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s InstanceMetadataOptionsRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The metadata options for the instance.
+type InstanceMetadataOptionsResponse struct {
+	_ struct{} `type:"structure"`
+
+	// This parameter enables or disables the HTTP metadata endpoint on your instances.
+	// If the parameter is not specified, the default state is enabled.
+	//
+	// If you specify a value of disabled, you will not be able to access your instance
+	// metadata.
+	HttpEndpoint InstanceMetadataEndpointState `locationName:"httpEndpoint" type:"string" enum:"true"`
+
+	// The desired HTTP PUT response hop limit for instance metadata requests. The
+	// larger the number, the further instance metadata requests can travel.
+	//
+	// Default: 1
+	//
+	// Possible values: Integers from 1 to 64
+	HttpPutResponseHopLimit *int64 `locationName:"httpPutResponseHopLimit" type:"integer"`
+
+	// The state of token usage for your instance metadata requests. If the parameter
+	// is not specified in the request, the default state is optional.
+	//
+	// If the state is optional, you can choose to retrieve instance metadata with
+	// or without a signed token header on your request. If you retrieve the IAM
+	// role credentials without a token, the version 1.0 role credentials are returned.
+	// If you retrieve the IAM role credentials using a valid signed token, the
+	// version 2.0 role credentials are returned.
+	//
+	// If the state is required, you must send a signed token header with any instance
+	// metadata retrieval requests. In this state, retrieving the IAM role credential
+	// always returns the version 2.0 credentials; the version 1.0 credentials are
+	// not available.
+	HttpTokens HttpTokensState `locationName:"httpTokens" type:"string" enum:"true"`
+
+	// The state of the metadata option changes.
+	//
+	// pending - The metadata options are being updated and the instance is not
+	// ready to process metadata traffic with the new selection.
+	//
+	// applied - The metadata options have been successfully applied on the instance.
+	State InstanceMetadataOptionsState `locationName:"state" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s InstanceMetadataOptionsResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -4710,7 +5049,6 @@ func (s LaunchTemplateHibernationOptions) String() string {
 
 // Indicates whether the instance is configured for hibernation. This parameter
 // is valid only if the instance meets the hibernation prerequisites (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites).
-// Hibernation is currently supported only for Amazon Linux.
 type LaunchTemplateHibernationOptionsRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -6706,8 +7044,7 @@ type RequestLaunchTemplateData struct {
 
 	// Indicates whether an instance is enabled for hibernation. This parameter
 	// is valid only if the instance meets the hibernation prerequisites (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites).
-	// Hibernation is currently supported only for Amazon Linux. For more information,
-	// see Hibernate Your Instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
+	// For more information, see Hibernate Your Instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	HibernationOptions *LaunchTemplateHibernationOptionsRequest `type:"structure"`
 
@@ -8966,14 +9303,14 @@ type SpotOptions struct {
 	// Indicates how to allocate the target Spot Instance capacity across the Spot
 	// Instance pools specified by the EC2 Fleet.
 	//
-	// If the allocation strategy is lowestPrice, EC2 Fleet launches instances from
-	// the Spot Instance pools with the lowest price. This is the default allocation
+	// If the allocation strategy is lowest-price, EC2 Fleet launches instances
+	// from the Spot Instance pools with the lowest price. This is the default allocation
 	// strategy.
 	//
 	// If the allocation strategy is diversified, EC2 Fleet launches instances from
 	// all the Spot Instance pools that you specify.
 	//
-	// If the allocation strategy is capacityOptimized, EC2 Fleet launches instances
+	// If the allocation strategy is capacity-optimized, EC2 Fleet launches instances
 	// from Spot Instance pools with optimal capacity for the number of instances
 	// that are launching.
 	AllocationStrategy SpotAllocationStrategy `locationName:"allocationStrategy" type:"string" enum:"true"`
@@ -8982,7 +9319,7 @@ type SpotOptions struct {
 	InstanceInterruptionBehavior SpotInstanceInterruptionBehavior `locationName:"instanceInterruptionBehavior" type:"string" enum:"true"`
 
 	// The number of Spot pools across which to allocate your target Spot capacity.
-	// Valid only when AllocationStrategy is set to lowestPrice. EC2 Fleet selects
+	// Valid only when AllocationStrategy is set to lowest-price. EC2 Fleet selects
 	// the cheapest Spot pools and evenly allocates your target Spot capacity across
 	// the number of Spot pools that you specify.
 	InstancePoolsToUseCount *int64 `locationName:"instancePoolsToUseCount" type:"integer"`
@@ -9015,14 +9352,14 @@ type SpotOptionsRequest struct {
 	// Indicates how to allocate the target Spot Instance capacity across the Spot
 	// Instance pools specified by the EC2 Fleet.
 	//
-	// If the allocation strategy is lowestPrice, EC2 Fleet launches instances from
-	// the Spot Instance pools with the lowest price. This is the default allocation
+	// If the allocation strategy is lowest-price, EC2 Fleet launches instances
+	// from the Spot Instance pools with the lowest price. This is the default allocation
 	// strategy.
 	//
 	// If the allocation strategy is diversified, EC2 Fleet launches instances from
 	// all the Spot Instance pools that you specify.
 	//
-	// If the allocation strategy is capacityOptimized, EC2 Fleet launches instances
+	// If the allocation strategy is capacity-optimized, EC2 Fleet launches instances
 	// from Spot Instance pools with optimal capacity for the number of instances
 	// that are launching.
 	AllocationStrategy SpotAllocationStrategy `type:"string" enum:"true"`
@@ -9418,10 +9755,11 @@ type TagSpecification struct {
 
 	// The type of resource to tag. Currently, the resource types that support tagging
 	// on creation are: capacity-reservation | client-vpn-endpoint | dedicated-host
-	// | fleet | instance | launch-template | snapshot | transit-gateway | transit-gateway-attachment
+	// | fleet | fpga-image | instance | launch-template | snapshot | traffic-mirror-filter
+	// | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment
 	// | transit-gateway-route-table | volume.
 	//
-	// To tag a resource after it has been created, see CreateTags.
+	// To tag a resource after it has been created, see CreateTags (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
 	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// The tags to apply to the resource.
@@ -10429,7 +10767,7 @@ func (s UserBucketDetails) String() string {
 
 // Describes the user data for an instance.
 type UserData struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// The user data. If you are using an AWS SDK or command line tool, Base64-encoding
 	// is performed for you, and you can load the text from a file. Otherwise, you
@@ -10533,6 +10871,9 @@ type Volume struct {
 
 	// Indicates whether the volume is encrypted.
 	Encrypted *bool `locationName:"encrypted" type:"boolean"`
+
+	// Indicates whether the volume was created using fast snapshot restore.
+	FastRestored *bool `locationName:"fastRestored" type:"boolean"`
 
 	// The number of I/O operations per second (IOPS) that the volume supports.
 	// For Provisioned IOPS SSD volumes, this represents the number of IOPS that

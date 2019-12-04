@@ -12,6 +12,18 @@ import (
 type DeleteDeliveryStreamInput struct {
 	_ struct{} `type:"structure"`
 
+	// Set this to true if you want to delete the delivery stream even if Kinesis
+	// Data Firehose is unable to retire the grant for the CMK. Kinesis Data Firehose
+	// might be unable to retire the grant due to a customer error, such as when
+	// the CMK or the grant are in an invalid state. If you force deletion, you
+	// can then use the RevokeGrant (https://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html)
+	// operation to revoke the grant you gave to Kinesis Data Firehose. If a failure
+	// to retire the grant happens due to an AWS KMS issue, Kinesis Data Firehose
+	// keeps retrying the delete operation.
+	//
+	// The default value is false.
+	AllowForceDelete *bool `type:"boolean"`
+
 	// The name of the delivery stream.
 	//
 	// DeliveryStreamName is a required field
@@ -56,16 +68,16 @@ const opDeleteDeliveryStream = "DeleteDeliveryStream"
 //
 // Deletes a delivery stream and its data.
 //
-// You can delete a delivery stream only if it is in ACTIVE or DELETING state,
-// and not in the CREATING state. While the deletion request is in process,
-// the delivery stream is in the DELETING state.
+// To check the state of a delivery stream, use DescribeDeliveryStream. You
+// can delete a delivery stream only if it is in one of the following states:
+// ACTIVE, DELETING, CREATING_FAILED, or DELETING_FAILED. You can't delete a
+// delivery stream that is in the CREATING state. While the deletion request
+// is in process, the delivery stream is in the DELETING state.
 //
-// To check the state of a delivery stream, use DescribeDeliveryStream.
-//
-// While the delivery stream is DELETING state, the service might continue to
-// accept the records, but it doesn't make any guarantees with respect to delivering
-// the data. Therefore, as a best practice, you should first stop any applications
-// that are sending records before deleting a delivery stream.
+// While the delivery stream is in the DELETING state, the service might continue
+// to accept records, but it doesn't make any guarantees with respect to delivering
+// the data. Therefore, as a best practice, first stop any applications that
+// are sending records before you delete a delivery stream.
 //
 //    // Example sending a request using DeleteDeliveryStreamRequest.
 //    req := client.DeleteDeliveryStreamRequest(params)

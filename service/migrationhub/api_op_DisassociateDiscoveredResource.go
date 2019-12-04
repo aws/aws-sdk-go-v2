@@ -12,7 +12,7 @@ import (
 type DisassociateDiscoveredResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// ConfigurationId of the ADS resource to be disassociated.
+	// ConfigurationId of the Application Discovery Service resource to be disassociated.
 	//
 	// ConfigurationId is a required field
 	ConfigurationId *string `min:"1" type:"string" required:"true"`
@@ -21,7 +21,8 @@ type DisassociateDiscoveredResourceInput struct {
 	// to test if the caller has permission to make the call.
 	DryRun *bool `type:"boolean"`
 
-	// The identifier given to the MigrationTask.
+	// The identifier given to the MigrationTask. Do not store personal data in
+	// this field.
 	//
 	// MigrationTaskName is a required field
 	MigrationTaskName *string `min:"1" type:"string" required:"true"`
@@ -82,8 +83,8 @@ const opDisassociateDiscoveredResource = "DisassociateDiscoveredResource"
 // DisassociateDiscoveredResourceRequest returns a request value for making API operation for
 // AWS Migration Hub.
 //
-// Disassociate an Application Discovery Service (ADS) discovered resource from
-// a migration task.
+// Disassociate an Application Discovery Service discovered resource from a
+// migration task.
 //
 //    // Example sending a request using DisassociateDiscoveredResourceRequest.
 //    req := client.DisassociateDiscoveredResourceRequest(params)

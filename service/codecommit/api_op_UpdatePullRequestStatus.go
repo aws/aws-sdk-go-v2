@@ -18,7 +18,7 @@ type UpdatePullRequestStatusInput struct {
 	PullRequestId *string `locationName:"pullRequestId" type:"string" required:"true"`
 
 	// The status of the pull request. The only valid operations are to update the
-	// status from OPEN to OPEN, OPEN to CLOSED or from from CLOSED to CLOSED.
+	// status from OPEN to OPEN, OPEN to CLOSED or from CLOSED to CLOSED.
 	//
 	// PullRequestStatus is a required field
 	PullRequestStatus PullRequestStatusEnum `locationName:"pullRequestStatus" type:"string" required:"true" enum:"true"`

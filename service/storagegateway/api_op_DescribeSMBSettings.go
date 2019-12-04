@@ -44,6 +44,28 @@ func (s *DescribeSMBSettingsInput) Validate() error {
 type DescribeSMBSettingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Indicates the status of a gateway that is a member of the Active Directory
+	// domain.
+	//
+	//    * ACCESS_DENIED: Indicates that the JoinDomain operation failed due to
+	//    an authentication error.
+	//
+	//    * DETACHED: Indicates that gateway is not joined to a domain.
+	//
+	//    * JOINED: Indicates that the gateway has successfully joined a domain.
+	//
+	//    * JOINING: Indicates that a JoinDomain operation is in progress.
+	//
+	//    * NETWORK_ERROR: Indicates that JoinDomain operation failed due to a network
+	//    or connectivity error.
+	//
+	//    * TIMEOUT: Indicates that the JoinDomain operation failed because the
+	//    operation didn't complete within the allotted time.
+	//
+	//    * UNKNOWN_ERROR: Indicates that the JoinDomain operation failed due to
+	//    another type of error.
+	ActiveDirectoryStatus ActiveDirectoryStatus `type:"string" enum:"true"`
+
 	// The name of the domain that the gateway is joined to.
 	DomainName *string `min:"1" type:"string"`
 

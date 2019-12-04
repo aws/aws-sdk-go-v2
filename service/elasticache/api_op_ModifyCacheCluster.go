@@ -24,10 +24,7 @@ type ModifyCacheClusterInput struct {
 	// in different Availability Zones. If cross-az is specified, existing Memcached
 	// nodes remain in their current Availability Zone.
 	//
-	// Only newly created nodes are located in different Availability Zones. For
-	// instructions on how to move existing Memcached nodes to different Availability
-	// Zones, see the Availability Zone Considerations section of Cache Node Considerations
-	// for Memcached (https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html).
+	// Only newly created nodes are located in different Availability Zones.
 	AZMode AZMode `type:"string" enum:"true"`
 
 	// If true, this parameter causes the modifications in this request and any
@@ -44,6 +41,29 @@ type ModifyCacheClusterInput struct {
 	//
 	// Default: false
 	ApplyImmediately *bool `type:"boolean"`
+
+	// Reserved parameter. The password used to access a password protected server.
+	// This parameter must be specified with the auth-token-update parameter. Password
+	// constraints:
+	//
+	//    * Must be only printable ASCII characters
+	//
+	//    * Must be at least 16 characters and no more than 128 characters in length
+	//
+	//    * Cannot contain any of the following characters: '/', '"', or '@', '%'
+	//
+	// For more information, see AUTH password at AUTH (http://redis.io/commands/AUTH).
+	AuthToken *string `type:"string"`
+
+	// Specifies the strategy to use to update the AUTH token. This parameter must
+	// be specified with the auth-token parameter. Possible values:
+	//
+	//    * Rotate
+	//
+	//    * Set
+	//
+	// For more information, see Authenticating Users with Redis AUTH (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html)
+	AuthTokenUpdateStrategy AuthTokenUpdateStrategyType `type:"string" enum:"true"`
 
 	// This parameter is currently disabled.
 	AutoMinorVersionUpgrade *bool `type:"boolean"`

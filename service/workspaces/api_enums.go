@@ -2,6 +2,23 @@
 
 package workspaces
 
+type AccessPropertyValue string
+
+// Enum values for AccessPropertyValue
+const (
+	AccessPropertyValueAllow AccessPropertyValue = "ALLOW"
+	AccessPropertyValueDeny  AccessPropertyValue = "DENY"
+)
+
+func (enum AccessPropertyValue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AccessPropertyValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Compute string
 
 // Enum values for Compute
@@ -192,6 +209,23 @@ func (enum TargetWorkspaceState) MarshalValue() (string, error) {
 }
 
 func (enum TargetWorkspaceState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Tenancy string
+
+// Enum values for Tenancy
+const (
+	TenancyDedicated Tenancy = "DEDICATED"
+	TenancyShared    Tenancy = "SHARED"
+)
+
+func (enum Tenancy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Tenancy) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

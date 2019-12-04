@@ -13,6 +13,10 @@ import (
 type CreateDeliveryStreamInput struct {
 	_ struct{} `type:"structure"`
 
+	// Used to specify the type and Amazon Resource Name (ARN) of the KMS key needed
+	// for Server-Side Encryption (SSE).
+	DeliveryStreamEncryptionConfigurationInput *DeliveryStreamEncryptionConfigurationInput `type:"structure"`
+
 	// The name of the delivery stream. This name must be unique per AWS account
 	// in the same AWS Region. If the delivery streams are in different accounts
 	// or different Regions, you can have multiple delivery streams with the same
@@ -77,6 +81,11 @@ func (s *CreateDeliveryStreamInput) Validate() error {
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
+	if s.DeliveryStreamEncryptionConfigurationInput != nil {
+		if err := s.DeliveryStreamEncryptionConfigurationInput.Validate(); err != nil {
+			invalidParams.AddNested("DeliveryStreamEncryptionConfigurationInput", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.ElasticsearchDestinationConfiguration != nil {
 		if err := s.ElasticsearchDestinationConfiguration.Validate(); err != nil {
@@ -145,9 +154,14 @@ const opCreateDeliveryStream = "CreateDeliveryStream"
 //
 // This is an asynchronous operation that immediately returns. The initial status
 // of the delivery stream is CREATING. After the delivery stream is created,
-// its status is ACTIVE and it now accepts data. Attempts to send data to a
-// delivery stream that is not in the ACTIVE state cause an exception. To check
-// the state of a delivery stream, use DescribeDeliveryStream.
+// its status is ACTIVE and it now accepts data. If the delivery stream creation
+// fails, the status transitions to CREATING_FAILED. Attempts to send data to
+// a delivery stream that is not in the ACTIVE state cause an exception. To
+// check the state of a delivery stream, use DescribeDeliveryStream.
+//
+// If the status of a delivery stream is CREATING_FAILED, this status doesn't
+// change, and you can't invoke CreateDeliveryStream again on it. However, you
+// can invoke the DeleteDeliveryStream operation to delete it.
 //
 // A Kinesis Data Firehose delivery stream can be configured to receive records
 // directly from providers using PutRecord or PutRecordBatch, or it can be configured
@@ -155,6 +169,11 @@ const opCreateDeliveryStream = "CreateDeliveryStream"
 // stream as input, set the DeliveryStreamType parameter to KinesisStreamAsSource,
 // and provide the Kinesis stream Amazon Resource Name (ARN) and role ARN in
 // the KinesisStreamSourceConfiguration parameter.
+//
+// To create a delivery stream with server-side encryption (SSE) enabled, include
+// DeliveryStreamEncryptionConfigurationInput in your request. This is optional.
+// You can also invoke StartDeliveryStreamEncryption to turn on SSE for an existing
+// delivery stream that doesn't have SSE enabled.
 //
 // A delivery stream is configured with a single destination: Amazon S3, Amazon
 // ES, Amazon Redshift, or Splunk. You must specify only one of the following

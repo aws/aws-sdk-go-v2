@@ -26,6 +26,11 @@ type Build struct {
 	// Whether the build is complete. True if complete; otherwise, false.
 	BuildComplete *bool `locationName:"buildComplete" type:"boolean"`
 
+	// The number of the build. For each project, the buildNumber of its first build
+	// is 1. The buildNumber of each subsequent build is incremented by 1. If a
+	// build is deleted, the buildNumber of other builds does not change.
+	BuildNumber *int64 `locationName:"buildNumber" type:"long"`
+
 	// The current status of the build. Valid values include:
 	//
 	//    * FAILED: The build failed.
@@ -62,6 +67,9 @@ type Build struct {
 
 	// Information about the build environment for this build.
 	Environment *ProjectEnvironment `locationName:"environment" type:"structure"`
+
+	// A list of exported environment variables for this build.
+	ExportedEnvironmentVariables []ExportedEnvironmentVariable `locationName:"exportedEnvironmentVariables" type:"list"`
 
 	// The unique ID for the build.
 	Id *string `locationName:"id" min:"1" type:"string"`
@@ -401,6 +409,8 @@ type EnvironmentVariable struct {
 	//    Manager Parameter Store.
 	//
 	//    * PLAINTEXT: An environment variable in plaintext format.
+	//
+	//    * SECRETS_MANAGER: An environment variable stored in AWS Secrets Manager.
 	Type EnvironmentVariableType `locationName:"type" type:"string" enum:"true"`
 
 	// The value of the environment variable.
@@ -438,6 +448,27 @@ func (s *EnvironmentVariable) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Information about an exported environment variable.
+type ExportedEnvironmentVariable struct {
+	_ struct{} `type:"structure"`
+
+	// The name of this exported environment variable.
+	Name *string `locationName:"name" min:"1" type:"string"`
+
+	// The value assigned to this exported environment variable.
+	//
+	// During a build, the value of a variable is available starting with the install
+	// phase. It can be updated between the start of the install phase and the end
+	// of the post_build phase. After the post_build phase ends, the value of exported
+	// variables cannot change.
+	Value *string `locationName:"value" type:"string"`
+}
+
+// String returns the string representation
+func (s ExportedEnvironmentVariable) String() string {
+	return awsutil.Prettify(s)
 }
 
 // Information about the Git submodules configuration for an AWS CodeBuild build
@@ -801,7 +832,7 @@ type ProjectArtifacts struct {
 	// The type of build output artifact. Valid values include:
 	//
 	//    * CODEPIPELINE: The build project has build output generated through AWS
-	//    CodePipeline.
+	//    CodePipeline. The CODEPIPELINE type is not supported for secondaryArtifacts.
 	//
 	//    * NO_ARTIFACTS: The build project does not produce any build output.
 	//
@@ -935,7 +966,26 @@ type ProjectEnvironment struct {
 	//
 	//    * BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds.
 	//
-	//    * BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for builds.
+	//    * BUILD_GENERAL1_LARGE: Use up to 16 GB memory and 8 vCPUs for builds,
+	//    depending on your environment type.
+	//
+	//    * BUILD_GENERAL1_2XLARGE: Use up to 145 GB memory, 72 vCPUs, and 824 GB
+	//    of SSD storage for builds. This compute type supports Docker images up
+	//    to 100 GB uncompressed.
+	//
+	// If you use BUILD_GENERAL1_LARGE:
+	//
+	//    * For environment type LINUX_CONTAINER, you can use up to 15 GB memory
+	//    and 8 vCPUs for builds.
+	//
+	//    * For environment type LINUX_GPU_CONTAINER, you can use up to 255 GB memory,
+	//    32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+	//
+	//    * For environment type ARM_CONTAINER, you can use up to 16 GB memory and
+	//    8 vCPUs on ARM-based processors for builds.
+	//
+	// For more information, see Build Environment Compute Types (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html)
+	// in the AWS CodeBuild User Guide.
 	//
 	// ComputeType is a required field
 	ComputeType ComputeType `locationName:"computeType" type:"string" required:"true" enum:"true"`
@@ -974,7 +1024,8 @@ type ProjectEnvironment struct {
 
 	// Enables running the Docker daemon inside a Docker container. Set to true
 	// only if the build project is used to build Docker images. Otherwise, a build
-	// that attempts to interact with the Docker daemon fails.
+	// that attempts to interact with the Docker daemon fails. The default setting
+	// is false.
 	//
 	// You can initialize the Docker daemon during the install phase of your build
 	// by adding one of the following sets of commands to the install phase of your
@@ -1000,6 +1051,22 @@ type ProjectEnvironment struct {
 	RegistryCredential *RegistryCredential `locationName:"registryCredential" type:"structure"`
 
 	// The type of build environment to use for related builds.
+	//
+	//    * The environment type ARM_CONTAINER is available only in regions US East
+	//    (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), Asia Pacific
+	//    (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and EU (Frankfurt).
+	//
+	//    * The environment type LINUX_CONTAINER with compute type build.general1.2xlarge
+	//    is available only in regions US East (N. Virginia), US East (N. Virginia),
+	//    US West (Oregon), Canada (Central), EU (Ireland), EU (London), EU (Frankfurt),
+	//    Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore),
+	//    Asia Pacific (Sydney), China (Beijing), and China (Ningxia).
+	//
+	//    * The environment type LINUX_GPU_CONTAINER is available only in regions
+	//    US East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada
+	//    (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo),
+	//    Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney)
+	//    , China (Beijing), and China (Ningxia).
 	//
 	// Type is a required field
 	Type EnvironmentType `locationName:"type" type:"string" required:"true" enum:"true"`
@@ -1118,6 +1185,9 @@ type ProjectSource struct {
 	// provider. This option is valid only when your source provider is GitHub,
 	// GitHub Enterprise, or Bitbucket. If this is set and you use a different source
 	// provider, an invalidInputException is thrown.
+	//
+	// The status of a build triggered by a webhook is always reported to your source
+	// provider.
 	ReportBuildStatus *bool `locationName:"reportBuildStatus" type:"boolean"`
 
 	// An identifier for this project source.
@@ -1134,6 +1204,8 @@ type ProjectSource struct {
 	//    of a pipeline in AWS CodePipeline.
 	//
 	//    * GITHUB: The source code is in a GitHub repository.
+	//
+	//    * GITHUB_ENTERPRISE: The source code is in a GitHub Enterprise repository.
 	//
 	//    * NO_SOURCE: The project does not have input source code.
 	//

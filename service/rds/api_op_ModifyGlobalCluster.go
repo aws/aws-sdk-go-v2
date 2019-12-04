@@ -18,7 +18,7 @@ type ModifyGlobalClusterInput struct {
 	DeletionProtection *bool `type:"boolean"`
 
 	// The DB cluster identifier for the global cluster being modified. This parameter
-	// is not case-sensitive.
+	// isn't case-sensitive.
 	//
 	// Constraints:
 	//

@@ -19,11 +19,15 @@ type ModifyCurrentDBClusterCapacityInput struct {
 	//
 	// Constraints:
 	//
-	//    * Value must be 1, 2, 4, 8, 16, 32, 64, 128, or 256.
+	//    * For Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64,
+	//    128, and 256.
+	//
+	//    * For Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64,
+	//    192, and 384.
 	Capacity *int64 `type:"integer"`
 
 	// The DB cluster identifier for the cluster being modified. This parameter
-	// is not case-sensitive.
+	// isn't case-sensitive.
 	//
 	// Constraints:
 	//
@@ -45,8 +49,8 @@ type ModifyCurrentDBClusterCapacityInput struct {
 	// ForceApplyCapacityChange, the default, sets the capacity to the specified
 	// value as soon as possible.
 	//
-	// RollbackCapacityChange ignores the capacity change if a scaling point is
-	// not found in the timeout period.
+	// RollbackCapacityChange ignores the capacity change if a scaling point isn't
+	// found in the timeout period.
 	TimeoutAction *string `type:"string"`
 }
 

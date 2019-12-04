@@ -28,8 +28,10 @@ func (s ListBucketsInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListBucketsOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The list of buckets owned by the requestor.
 	Buckets []Bucket `locationNameList:"Bucket" type:"list"`
 
+	// The owner of the buckets listed.
 	Owner *Owner `type:"structure"`
 }
 

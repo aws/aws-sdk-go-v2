@@ -137,6 +137,8 @@ func ExampleClient_CreateListenerRequest_shared00() {
 				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyActionsException, aerr.Error())
 			case elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException:
 				fmt.Println(elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException, aerr.Error())
+			case elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException:
+				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -219,6 +221,8 @@ func ExampleClient_CreateListenerRequest_shared01() {
 				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyActionsException, aerr.Error())
 			case elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException:
 				fmt.Println(elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException, aerr.Error())
+			case elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException:
+				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -423,6 +427,8 @@ func ExampleClient_CreateRuleRequest_shared00() {
 				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyActionsException, aerr.Error())
 			case elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException:
 				fmt.Println(elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException, aerr.Error())
+			case elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException:
+				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1117,6 +1123,8 @@ func ExampleClient_ModifyListenerRequest_shared00() {
 				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyActionsException, aerr.Error())
 			case elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException:
 				fmt.Println(elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException, aerr.Error())
+			case elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException:
+				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1185,6 +1193,8 @@ func ExampleClient_ModifyListenerRequest_shared01() {
 				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyActionsException, aerr.Error())
 			case elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException:
 				fmt.Println(elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException, aerr.Error())
+			case elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException:
+				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1385,6 +1395,8 @@ func ExampleClient_ModifyRuleRequest_shared00() {
 				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyActionsException, aerr.Error())
 			case elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException:
 				fmt.Println(elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException, aerr.Error())
+			case elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException:
+				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

@@ -42,6 +42,9 @@ type GetOpenIdTokenForDeveloperIdentityInput struct {
 	// take care in setting the expiration time for a token, as there are significant
 	// security implications: an attacker could use a leaked token to access your
 	// AWS resources for the token's duration.
+	//
+	// Please provide for a small grace period, usually no more than 5 minutes,
+	// to account for clock skew.
 	TokenDuration *int64 `min:"1" type:"long"`
 }
 

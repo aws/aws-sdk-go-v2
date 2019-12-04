@@ -73,9 +73,12 @@ func (s AttachmentDetails) String() string {
 //    the service code defined in the call to DescribeServices.
 //
 //    * severityCode. The severity code assigned to the case. Contains one of
-//    the values returned by the call to DescribeSeverityLevels.
+//    the values returned by the call to DescribeSeverityLevels. The possible
+//    values are: low, normal, high, urgent, and critical.
 //
-//    * status. The status of the case in the AWS Support Center.
+//    * status. The status of the case in the AWS Support Center. The possible
+//    values are: resolved, pending-customer-action, opened, unassigned, and
+//    work-in-progress.
 //
 //    * subject. The subject line of the case.
 //
@@ -109,13 +112,15 @@ type CaseDetails struct {
 	// that you can use to retrieve earlier communications.
 	RecentCommunications *RecentCaseCommunications `locationName:"recentCommunications" type:"structure"`
 
-	// The code for the AWS service returned by the call to DescribeServices.
+	// The code for the AWS service. You can get a list of codes and the corresponding
+	// service names by calling DescribeServices.
 	ServiceCode *string `locationName:"serviceCode" type:"string"`
 
 	// The code for the severity level returned by the call to DescribeSeverityLevels.
 	SeverityCode *string `locationName:"severityCode" type:"string"`
 
-	// The status of the case.
+	// The status of the case. Valid values: resolved | pending-customer-action
+	// | opened | unassigned | work-in-progress.
 	Status *string `locationName:"status" type:"string"`
 
 	// The subject line for the case in the AWS Support Center.
@@ -152,8 +157,8 @@ func (s Category) String() string {
 }
 
 // A communication associated with an AWS Support case. The communication consists
-// of the case ID, the message body, attachment information, the account email
-// address, and the date and time of the communication.
+// of the case ID, the message body, attachment information, the submitter of
+// the communication, and the date and time of the communication.
 type Communication struct {
 	_ struct{} `type:"structure"`
 
@@ -167,7 +172,11 @@ type Communication struct {
 	// an alphanumeric string formatted as shown in this example: case-12345678910-2013-c4c1d2bf33c5cf47
 	CaseId *string `locationName:"caseId" type:"string"`
 
-	// The email address of the account that submitted the AWS Support case.
+	// The identity of the account that submitted, or responded to, the support
+	// case. Customer entries include the role or IAM user as well as the email
+	// address. For example, "AdminRole (Role) <someone@example.com>. Entries from
+	// the AWS Support team display "Amazon Web Services," and do not show an email
+	// address.
 	SubmittedBy *string `locationName:"submittedBy" type:"string"`
 
 	// The time the communication was created.
@@ -218,16 +227,35 @@ func (s Service) String() string {
 	return awsutil.Prettify(s)
 }
 
-// A code and name pair that represent a severity level that can be applied
-// to a support case.
+// A code and name pair that represents the severity level of a support case.
+// The available values depend on the support plan for the account. For more
+// information, see Choosing a Severity (https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity).
 type SeverityLevel struct {
 	_ struct{} `type:"structure"`
 
-	// One of four values: "low," "medium," "high," and "urgent". These values correspond
-	// to response times returned to the caller in severityLevel.name.
+	// The code for case severity level.
+	//
+	// Valid values: low | normal | high | urgent | critical
 	Code *string `locationName:"code" type:"string"`
 
 	// The name of the severity level that corresponds to the severity level code.
+	//
+	// The values returned by the API differ from the values that are displayed
+	// in the AWS Support Center. For example, for the code "low", the API name
+	// is "Low", but the name in the Support Center is "General guidance". These
+	// are the Support Center code/name mappings:
+	//
+	//    * low: General guidance
+	//
+	//    * normal: System impaired
+	//
+	//    * high: Production system impaired
+	//
+	//    * urgent: Production system down
+	//
+	//    * critical: Business-critical system down
+	//
+	// For more information, see Choosing a Severity (https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity)
 	Name *string `locationName:"name" type:"string"`
 }
 
@@ -307,7 +335,18 @@ type TrustedAdvisorCheckRefreshStatus struct {
 	MillisUntilNextRefreshable *int64 `locationName:"millisUntilNextRefreshable" type:"long" required:"true"`
 
 	// The status of the Trusted Advisor check for which a refresh has been requested:
-	// "none", "enqueued", "processing", "success", or "abandoned".
+	//
+	//    * none: The check is not refreshed or the non-success status exceeds the
+	//    timeout
+	//
+	//    * enqueued: The check refresh requests has entered the refresh queue
+	//
+	//    * processing: The check refresh request is picked up by the rule processing
+	//    engine
+	//
+	//    * success: The check is successfully refreshed
+	//
+	//    * abandoned: The check refresh has failed
 	//
 	// Status is a required field
 	Status *string `locationName:"status" type:"string" required:"true"`

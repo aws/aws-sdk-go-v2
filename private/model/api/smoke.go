@@ -65,6 +65,9 @@ func (a *API) APISmokeTestsGoCode() string {
 	a.AddSDKImport("internal/awstesting/integration")
 	a.AddImport(a.ImportPath())
 	a.AddSDKImport("service", a.PackageName(), ServiceTypesPkgName)
+	if len(a.SmokeTests.TestCases) != 0 {
+		a.AddSDKImport("aws/defaults")
+	}
 
 	smokeTests := struct {
 		API *API
@@ -98,7 +101,7 @@ var smokeTestTmpl = template.Must(template.New(`smokeTestTmpl`).Parse(`
 		params := {{ $testCase.BuildInputShape $op.InputRef }}
 
 		req := svc.{{ $op.ExportedName }}Request(params)
-
+		req.Handlers.Validate.Remove(defaults.ValidateParametersHandler)
 		_, err := req.Send(ctx)
 		{{- if $testCase.ExpectErr }}
 			if err == nil {

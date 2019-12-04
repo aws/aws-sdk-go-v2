@@ -15,7 +15,7 @@ type DescribeDBSnapshotsInput struct {
 
 	// The ID of the DB instance to retrieve the list of DB snapshots for. This
 	// parameter can't be used in conjunction with DBSnapshotIdentifier. This parameter
-	// is not case-sensitive.
+	// isn't case-sensitive.
 	//
 	// Constraints:
 	//

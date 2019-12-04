@@ -103,29 +103,29 @@ cleanup-integ-buckets:
 ###################
 # Sandbox Testing #
 ###################
-sandbox-tests: sandbox-test-go1.11 sandbox-test-go1.12 sandbox-test-gotip
+sandbox-tests: sandbox-test-go1.12 sandbox-test-go1.13 sandbox-test-gotip
 
-sandbox-build-go1.11:
-	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.11 -t "aws-sdk-go-1.11" .
-sandbox-go1.11: sandbox-build-go1.11
-	docker run -i -t aws-sdk-go-1.11 bash
-sandbox-test-go1.11: sandbox-build-go1.11
-	docker run -t aws-sdk-go-1.11
+sandbox-build-go1.13:
+	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.13 -t "aws-sdk-go-v2-1.13" .
+sandbox-go1.13: sandbox-build-go1.13
+	docker run -i -t aws-sdk-go-v2-1.13 bash
+sandbox-test-go1.13: sandbox-build-go1.13
+	docker run -t aws-sdk-go-v2-1.13
 
 sandbox-build-go1.12:
-	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.12 -t "aws-sdk-go-1.12" .
+	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.12 -t "aws-sdk-go-v2-1.12" .
 sandbox-go1.12: sandbox-build-go1.12
-	docker run -i -t aws-sdk-go-1.12 bash
+	docker run -i -t aws-sdk-go-v2-1.12 bash
 sandbox-test-go1.12: sandbox-build-go1.12
-	docker run -t aws-sdk-go-1.12
+	docker run -t aws-sdk-go-v2-1.12
 
 sandbox-build-gotip:
 	@echo "Run make update-aws-golang-tip, if this test fails because missing aws-golang:tip container"
-	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.gotip -t "aws-sdk-go-tip" .
+	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.gotip -t "aws-sdk-go-v2-tip" .
 sandbox-gotip: sandbox-build-gotip
-	docker run -i -t aws-sdk-go-tip bash
+	docker run -i -t aws-sdk-go-v2-tip bash
 sandbox-test-gotip: sandbox-build-gotip
-	docker run -t aws-sdk-go-tip
+	docker run -t aws-sdk-go-v2-tip
 
 update-aws-golang-tip:
 	docker build --no-cache=true -f ./internal/awstesting/sandbox/Dockerfile.golang-tip -t "aws-golang:tip" .

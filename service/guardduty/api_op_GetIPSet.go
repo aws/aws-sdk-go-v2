@@ -18,7 +18,7 @@ type GetIPSetInput struct {
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// The unique ID of the ipSet you want to get.
+	// The unique ID of the IPSet to retrieve.
 	//
 	// IpSetId is a required field
 	IpSetId *string `location:"uri" locationName:"ipSetId" type:"string" required:"true"`
@@ -82,9 +82,7 @@ type GetIPSetOutput struct {
 	// Location is a required field
 	Location *string `locationName:"location" min:"1" type:"string" required:"true"`
 
-	// The user friendly name to identify the IPSet. This name is displayed in all
-	// findings that are triggered by activity that involves IP addresses included
-	// in this IPSet.
+	// The user friendly name for the IPSet.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
@@ -149,7 +147,7 @@ const opGetIPSet = "GetIPSet"
 // GetIPSetRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Retrieves the IPSet specified by the IPSet ID.
+// Retrieves the IPSet specified by the ipSetId.
 //
 //    // Example sending a request using GetIPSetRequest.
 //    req := client.GetIPSetRequest(params)

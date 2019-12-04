@@ -69,6 +69,12 @@ type ClientAPI interface {
 
 	GetLifecyclePolicyRequest(*dlm.GetLifecyclePolicyInput) dlm.GetLifecyclePolicyRequest
 
+	ListTagsForResourceRequest(*dlm.ListTagsForResourceInput) dlm.ListTagsForResourceRequest
+
+	TagResourceRequest(*dlm.TagResourceInput) dlm.TagResourceRequest
+
+	UntagResourceRequest(*dlm.UntagResourceInput) dlm.UntagResourceRequest
+
 	UpdateLifecyclePolicyRequest(*dlm.UpdateLifecyclePolicyInput) dlm.UpdateLifecyclePolicyRequest
 }
 

@@ -137,6 +137,7 @@ type AttachmentsSourceKey string
 // Enum values for AttachmentsSourceKey
 const (
 	AttachmentsSourceKeySourceUrl AttachmentsSourceKey = "SourceUrl"
+	AttachmentsSourceKeyS3fileUrl AttachmentsSourceKey = "S3FileUrl"
 )
 
 func (enum AttachmentsSourceKey) MarshalValue() (string, error) {
@@ -858,6 +859,8 @@ const (
 	OpsItemFilterKeyOperationalDataValue OpsItemFilterKey = "OperationalDataValue"
 	OpsItemFilterKeyResourceId           OpsItemFilterKey = "ResourceId"
 	OpsItemFilterKeyAutomationId         OpsItemFilterKey = "AutomationId"
+	OpsItemFilterKeyCategory             OpsItemFilterKey = "Category"
+	OpsItemFilterKeySeverity             OpsItemFilterKey = "Severity"
 )
 
 func (enum OpsItemFilterKey) MarshalValue() (string, error) {

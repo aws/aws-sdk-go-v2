@@ -32,7 +32,7 @@ type DescribeDBEngineVersionsInput struct {
 	// Example: 5.1.49
 	EngineVersion *string `type:"string"`
 
-	// This parameter is not currently supported.
+	// This parameter isn't currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// A value that indicates whether to include engine versions that aren't available
@@ -62,7 +62,7 @@ type DescribeDBEngineVersionsInput struct {
 
 	// The maximum number of records to include in the response. If more than the
 	// MaxRecords value is available, a pagination token called a marker is included
-	// in the response so that you can retrieve the remaining results.
+	// in the response so you can retrieve the remaining results.
 	//
 	// Default: 100
 	//

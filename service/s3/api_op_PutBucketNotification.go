@@ -14,9 +14,13 @@ import (
 type PutBucketNotificationInput struct {
 	_ struct{} `type:"structure" payload:"NotificationConfiguration"`
 
+	// The name of the bucket.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
+	// The container for the configuration.
+	//
 	// NotificationConfiguration is a required field
 	NotificationConfiguration *NotificationConfigurationDeprecated `locationName:"NotificationConfiguration" type:"structure" required:"true" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 }

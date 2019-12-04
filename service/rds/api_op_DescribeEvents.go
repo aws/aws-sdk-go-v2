@@ -30,7 +30,7 @@ type DescribeEventsInput struct {
 	// subscription.
 	EventCategories []string `locationNameList:"EventCategory" type:"list"`
 
-	// This parameter is not currently supported.
+	// This parameter isn't currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeEvents request.

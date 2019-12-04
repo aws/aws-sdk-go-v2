@@ -65,6 +65,12 @@ type ClientAPI interface {
 
 	AssociatePhoneNumbersWithVoiceConnectorRequest(*chime.AssociatePhoneNumbersWithVoiceConnectorInput) chime.AssociatePhoneNumbersWithVoiceConnectorRequest
 
+	AssociatePhoneNumbersWithVoiceConnectorGroupRequest(*chime.AssociatePhoneNumbersWithVoiceConnectorGroupInput) chime.AssociatePhoneNumbersWithVoiceConnectorGroupRequest
+
+	BatchCreateAttendeeRequest(*chime.BatchCreateAttendeeInput) chime.BatchCreateAttendeeRequest
+
+	BatchCreateRoomMembershipRequest(*chime.BatchCreateRoomMembershipInput) chime.BatchCreateRoomMembershipRequest
+
 	BatchDeletePhoneNumberRequest(*chime.BatchDeletePhoneNumberInput) chime.BatchDeletePhoneNumberRequest
 
 	BatchSuspendUserRequest(*chime.BatchSuspendUserInput) chime.BatchSuspendUserRequest
@@ -77,21 +83,43 @@ type ClientAPI interface {
 
 	CreateAccountRequest(*chime.CreateAccountInput) chime.CreateAccountRequest
 
+	CreateAttendeeRequest(*chime.CreateAttendeeInput) chime.CreateAttendeeRequest
+
 	CreateBotRequest(*chime.CreateBotInput) chime.CreateBotRequest
+
+	CreateMeetingRequest(*chime.CreateMeetingInput) chime.CreateMeetingRequest
 
 	CreatePhoneNumberOrderRequest(*chime.CreatePhoneNumberOrderInput) chime.CreatePhoneNumberOrderRequest
 
+	CreateRoomRequest(*chime.CreateRoomInput) chime.CreateRoomRequest
+
+	CreateRoomMembershipRequest(*chime.CreateRoomMembershipInput) chime.CreateRoomMembershipRequest
+
 	CreateVoiceConnectorRequest(*chime.CreateVoiceConnectorInput) chime.CreateVoiceConnectorRequest
+
+	CreateVoiceConnectorGroupRequest(*chime.CreateVoiceConnectorGroupInput) chime.CreateVoiceConnectorGroupRequest
 
 	DeleteAccountRequest(*chime.DeleteAccountInput) chime.DeleteAccountRequest
 
+	DeleteAttendeeRequest(*chime.DeleteAttendeeInput) chime.DeleteAttendeeRequest
+
 	DeleteEventsConfigurationRequest(*chime.DeleteEventsConfigurationInput) chime.DeleteEventsConfigurationRequest
+
+	DeleteMeetingRequest(*chime.DeleteMeetingInput) chime.DeleteMeetingRequest
 
 	DeletePhoneNumberRequest(*chime.DeletePhoneNumberInput) chime.DeletePhoneNumberRequest
 
+	DeleteRoomRequest(*chime.DeleteRoomInput) chime.DeleteRoomRequest
+
+	DeleteRoomMembershipRequest(*chime.DeleteRoomMembershipInput) chime.DeleteRoomMembershipRequest
+
 	DeleteVoiceConnectorRequest(*chime.DeleteVoiceConnectorInput) chime.DeleteVoiceConnectorRequest
 
+	DeleteVoiceConnectorGroupRequest(*chime.DeleteVoiceConnectorGroupInput) chime.DeleteVoiceConnectorGroupRequest
+
 	DeleteVoiceConnectorOriginationRequest(*chime.DeleteVoiceConnectorOriginationInput) chime.DeleteVoiceConnectorOriginationRequest
+
+	DeleteVoiceConnectorStreamingConfigurationRequest(*chime.DeleteVoiceConnectorStreamingConfigurationInput) chime.DeleteVoiceConnectorStreamingConfigurationRequest
 
 	DeleteVoiceConnectorTerminationRequest(*chime.DeleteVoiceConnectorTerminationInput) chime.DeleteVoiceConnectorTerminationRequest
 
@@ -101,9 +129,13 @@ type ClientAPI interface {
 
 	DisassociatePhoneNumbersFromVoiceConnectorRequest(*chime.DisassociatePhoneNumbersFromVoiceConnectorInput) chime.DisassociatePhoneNumbersFromVoiceConnectorRequest
 
+	DisassociatePhoneNumbersFromVoiceConnectorGroupRequest(*chime.DisassociatePhoneNumbersFromVoiceConnectorGroupInput) chime.DisassociatePhoneNumbersFromVoiceConnectorGroupRequest
+
 	GetAccountRequest(*chime.GetAccountInput) chime.GetAccountRequest
 
 	GetAccountSettingsRequest(*chime.GetAccountSettingsInput) chime.GetAccountSettingsRequest
+
+	GetAttendeeRequest(*chime.GetAttendeeInput) chime.GetAttendeeRequest
 
 	GetBotRequest(*chime.GetBotInput) chime.GetBotRequest
 
@@ -111,9 +143,15 @@ type ClientAPI interface {
 
 	GetGlobalSettingsRequest(*chime.GetGlobalSettingsInput) chime.GetGlobalSettingsRequest
 
+	GetMeetingRequest(*chime.GetMeetingInput) chime.GetMeetingRequest
+
 	GetPhoneNumberRequest(*chime.GetPhoneNumberInput) chime.GetPhoneNumberRequest
 
 	GetPhoneNumberOrderRequest(*chime.GetPhoneNumberOrderInput) chime.GetPhoneNumberOrderRequest
+
+	GetPhoneNumberSettingsRequest(*chime.GetPhoneNumberSettingsInput) chime.GetPhoneNumberSettingsRequest
+
+	GetRoomRequest(*chime.GetRoomInput) chime.GetRoomRequest
 
 	GetUserRequest(*chime.GetUserInput) chime.GetUserRequest
 
@@ -121,7 +159,13 @@ type ClientAPI interface {
 
 	GetVoiceConnectorRequest(*chime.GetVoiceConnectorInput) chime.GetVoiceConnectorRequest
 
+	GetVoiceConnectorGroupRequest(*chime.GetVoiceConnectorGroupInput) chime.GetVoiceConnectorGroupRequest
+
+	GetVoiceConnectorLoggingConfigurationRequest(*chime.GetVoiceConnectorLoggingConfigurationInput) chime.GetVoiceConnectorLoggingConfigurationRequest
+
 	GetVoiceConnectorOriginationRequest(*chime.GetVoiceConnectorOriginationInput) chime.GetVoiceConnectorOriginationRequest
+
+	GetVoiceConnectorStreamingConfigurationRequest(*chime.GetVoiceConnectorStreamingConfigurationInput) chime.GetVoiceConnectorStreamingConfigurationRequest
 
 	GetVoiceConnectorTerminationRequest(*chime.GetVoiceConnectorTerminationInput) chime.GetVoiceConnectorTerminationRequest
 
@@ -131,13 +175,23 @@ type ClientAPI interface {
 
 	ListAccountsRequest(*chime.ListAccountsInput) chime.ListAccountsRequest
 
+	ListAttendeesRequest(*chime.ListAttendeesInput) chime.ListAttendeesRequest
+
 	ListBotsRequest(*chime.ListBotsInput) chime.ListBotsRequest
+
+	ListMeetingsRequest(*chime.ListMeetingsInput) chime.ListMeetingsRequest
 
 	ListPhoneNumberOrdersRequest(*chime.ListPhoneNumberOrdersInput) chime.ListPhoneNumberOrdersRequest
 
 	ListPhoneNumbersRequest(*chime.ListPhoneNumbersInput) chime.ListPhoneNumbersRequest
 
+	ListRoomMembershipsRequest(*chime.ListRoomMembershipsInput) chime.ListRoomMembershipsRequest
+
+	ListRoomsRequest(*chime.ListRoomsInput) chime.ListRoomsRequest
+
 	ListUsersRequest(*chime.ListUsersInput) chime.ListUsersRequest
+
+	ListVoiceConnectorGroupsRequest(*chime.ListVoiceConnectorGroupsInput) chime.ListVoiceConnectorGroupsRequest
 
 	ListVoiceConnectorTerminationCredentialsRequest(*chime.ListVoiceConnectorTerminationCredentialsInput) chime.ListVoiceConnectorTerminationCredentialsRequest
 
@@ -147,7 +201,11 @@ type ClientAPI interface {
 
 	PutEventsConfigurationRequest(*chime.PutEventsConfigurationInput) chime.PutEventsConfigurationRequest
 
+	PutVoiceConnectorLoggingConfigurationRequest(*chime.PutVoiceConnectorLoggingConfigurationInput) chime.PutVoiceConnectorLoggingConfigurationRequest
+
 	PutVoiceConnectorOriginationRequest(*chime.PutVoiceConnectorOriginationInput) chime.PutVoiceConnectorOriginationRequest
+
+	PutVoiceConnectorStreamingConfigurationRequest(*chime.PutVoiceConnectorStreamingConfigurationInput) chime.PutVoiceConnectorStreamingConfigurationRequest
 
 	PutVoiceConnectorTerminationRequest(*chime.PutVoiceConnectorTerminationInput) chime.PutVoiceConnectorTerminationRequest
 
@@ -171,11 +229,19 @@ type ClientAPI interface {
 
 	UpdatePhoneNumberRequest(*chime.UpdatePhoneNumberInput) chime.UpdatePhoneNumberRequest
 
+	UpdatePhoneNumberSettingsRequest(*chime.UpdatePhoneNumberSettingsInput) chime.UpdatePhoneNumberSettingsRequest
+
+	UpdateRoomRequest(*chime.UpdateRoomInput) chime.UpdateRoomRequest
+
+	UpdateRoomMembershipRequest(*chime.UpdateRoomMembershipInput) chime.UpdateRoomMembershipRequest
+
 	UpdateUserRequest(*chime.UpdateUserInput) chime.UpdateUserRequest
 
 	UpdateUserSettingsRequest(*chime.UpdateUserSettingsInput) chime.UpdateUserSettingsRequest
 
 	UpdateVoiceConnectorRequest(*chime.UpdateVoiceConnectorInput) chime.UpdateVoiceConnectorRequest
+
+	UpdateVoiceConnectorGroupRequest(*chime.UpdateVoiceConnectorGroupInput) chime.UpdateVoiceConnectorGroupRequest
 }
 
 var _ ClientAPI = (*chime.Client)(nil)

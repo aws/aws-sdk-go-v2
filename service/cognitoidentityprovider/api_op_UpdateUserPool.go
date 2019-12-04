@@ -162,9 +162,11 @@ const opUpdateUserPool = "UpdateUserPool"
 // UpdateUserPoolRequest returns a request value for making API operation for
 // Amazon Cognito Identity Provider.
 //
-// Updates the specified user pool with the specified attributes. If you don't
-// provide a value for an attribute, it will be set to the default value. You
-// can get a list of the current user pool settings with .
+// Updates the specified user pool with the specified attributes. You can get
+// a list of the current user pool settings with .
+//
+// If you don't provide a value for an attribute, it will be set to the default
+// value.
 //
 //    // Example sending a request using UpdateUserPoolRequest.
 //    req := client.UpdateUserPoolRequest(params)

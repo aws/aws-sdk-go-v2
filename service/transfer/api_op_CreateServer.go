@@ -30,7 +30,7 @@ type CreateServerInput struct {
 	// to a new AWS SFTP server, don't update the host key. Accidentally changing
 	// a server's host key can be disruptive.
 	//
-	// For more information, see "https://docs.aws.amazon.com/transfer/latest/userguide/change-host-key"
+	// For more information, see "https://alpha-docs-aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key"
 	// in the AWS SFTP User Guide.
 	HostKey *string `type:"string" sensitive:"true"`
 
@@ -50,7 +50,7 @@ type CreateServerInput struct {
 
 	// A value that allows the service to write your SFTP users' activity to your
 	// Amazon CloudWatch logs for monitoring and auditing purposes.
-	LoggingRole *string `type:"string"`
+	LoggingRole *string `min:"20" type:"string"`
 
 	// Key-value pairs that can be used to group and search for servers.
 	Tags []Tag `min:"1" type:"list"`
@@ -64,8 +64,21 @@ func (s CreateServerInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateServerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateServerInput"}
+	if s.LoggingRole != nil && len(*s.LoggingRole) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("LoggingRole", 20))
+	}
 	if s.Tags != nil && len(s.Tags) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
+	if s.EndpointDetails != nil {
+		if err := s.EndpointDetails.Validate(); err != nil {
+			invalidParams.AddNested("EndpointDetails", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.IdentityProviderDetails != nil {
+		if err := s.IdentityProviderDetails.Validate(); err != nil {
+			invalidParams.AddNested("IdentityProviderDetails", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -87,7 +100,7 @@ type CreateServerOutput struct {
 	// The service-assigned ID of the SFTP server that is created.
 	//
 	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
+	ServerId *string `min:"19" type:"string" required:"true"`
 }
 
 // String returns the string representation

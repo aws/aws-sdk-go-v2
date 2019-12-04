@@ -30,7 +30,7 @@ type CreateLocationSmbInput struct {
 	// access files and folders in the SMB share.
 	//
 	// Password is a required field
-	Password *string `type:"string" required:"true"`
+	Password *string `type:"string" required:"true" sensitive:"true"`
 
 	// The name of the SMB server. This value is the IP address or Domain Name Service
 	// (DNS) name of the SMB server. An agent that is installed on-premises uses
@@ -47,6 +47,8 @@ type CreateLocationSmbInput struct {
 	// be a path that's exported by the SMB server, or a subdirectory of that path.
 	// The path should be such that it can be mounted by other SMB clients in your
 	// network.
+	//
+	// Subdirectory must be specified with forward slashes. For example /path/to/folder.
 	//
 	// To transfer all the data in the folder you specified, DataSync needs to have
 	// permissions to mount the SMB share, as well as to access all the data in
@@ -136,7 +138,7 @@ const opCreateLocationSmb = "CreateLocationSmb"
 // AWS DataSync.
 //
 // Defines a file system on an Server Message Block (SMB) server that can be
-// read from or written to
+// read from or written to.
 //
 //    // Example sending a request using CreateLocationSmbRequest.
 //    req := client.CreateLocationSmbRequest(params)

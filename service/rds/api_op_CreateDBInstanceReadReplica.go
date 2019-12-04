@@ -53,6 +53,9 @@ type CreateDBInstanceReadReplicaInput struct {
 	// or the default DBParameterGroup for the specified DB engine for a cross region
 	// Read Replica.
 	//
+	// Currently, specifying a parameter group for this operation is only supported
+	// for Oracle DB instances.
+	//
 	// Constraints:
 	//
 	//    * Must be 1 to 255 letters, numbers, or hyphens.
@@ -64,7 +67,7 @@ type CreateDBInstanceReadReplicaInput struct {
 
 	// Specifies a DB subnet group for the DB instance. The new DB instance is created
 	// in the VPC associated with the DB subnet group. If no DB subnet group is
-	// specified, then the new DB instance is not created in a VPC.
+	// specified, then the new DB instance isn't created in a VPC.
 	//
 	// Constraints:
 	//
@@ -204,9 +207,8 @@ type CreateDBInstanceReadReplicaInput struct {
 	// API action in the source AWS Region that contains the source DB instance.
 	//
 	// You must specify this parameter when you create an encrypted Read Replica
-	// from another AWS Region by using the Amazon RDS API. You can specify the
-	// --source-region option instead of this parameter when you create an encrypted
-	// Read Replica from another AWS Region by using the AWS CLI.
+	// from another AWS Region by using the Amazon RDS API. Don't specify PreSignedUrl
+	// when you are creating an encrypted Read Replica in the same AWS Region.
 	//
 	// The presigned URL must be a valid request for the CreateDBInstanceReadReplica
 	// API action that can be executed in the source AWS Region that contains the
@@ -238,6 +240,11 @@ type CreateDBInstanceReadReplicaInput struct {
 	// To learn how to generate a Signature Version 4 signed request, see Authenticating
 	// Requests: Using Query Parameters (AWS Signature Version 4) (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
 	// and Signature Version 4 Signing Process (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+	//
+	// If you are using an AWS SDK tool or the AWS CLI, you can specify SourceRegion
+	// (or --source-region for the AWS CLI) instead of specifying PreSignedUrl manually.
+	// Specifying SourceRegion autogenerates a pre-signed URL that is a valid request
+	// for the operation that can be executed in the source AWS Region.
 	PreSignedUrl *string `type:"string"`
 
 	// The number of CPU cores and the number of threads per core for the DB instance
@@ -247,7 +254,7 @@ type CreateDBInstanceReadReplicaInput struct {
 	// A value that indicates whether the DB instance is publicly accessible. When
 	// the DB instance is publicly accessible, it is an Internet-facing instance
 	// with a publicly resolvable DNS name, which resolves to a public IP address.
-	// When the DB instance is not publicly accessible, it is an internal instance
+	// When the DB instance isn't publicly accessible, it is an internal instance
 	// with a DNS name that resolves to a private IP address. For more information,
 	// see CreateDBInstance.
 	PubliclyAccessible *bool `type:"boolean"`

@@ -15,7 +15,7 @@ type ImportSshPublicKeyInput struct {
 	// A system-assigned unique identifier for an SFTP server.
 	//
 	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
+	ServerId *string `min:"19" type:"string" required:"true"`
 
 	// The public key portion of an SSH key pair.
 	//
@@ -25,7 +25,7 @@ type ImportSshPublicKeyInput struct {
 	// The name of the user account that is assigned to one or more servers.
 	//
 	// UserName is a required field
-	UserName *string `type:"string" required:"true"`
+	UserName *string `min:"3" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -40,6 +40,9 @@ func (s *ImportSshPublicKeyInput) Validate() error {
 	if s.ServerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
 	}
+	if s.ServerId != nil && len(*s.ServerId) < 19 {
+		invalidParams.Add(aws.NewErrParamMinLen("ServerId", 19))
+	}
 
 	if s.SshPublicKeyBody == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SshPublicKeyBody"))
@@ -47,6 +50,9 @@ func (s *ImportSshPublicKeyInput) Validate() error {
 
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
+	}
+	if s.UserName != nil && len(*s.UserName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -64,18 +70,18 @@ type ImportSshPublicKeyOutput struct {
 	// A system-assigned unique identifier for an SFTP server.
 	//
 	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
+	ServerId *string `min:"19" type:"string" required:"true"`
 
 	// This identifier is the name given to a public key by the system that was
 	// imported.
 	//
 	// SshPublicKeyId is a required field
-	SshPublicKeyId *string `type:"string" required:"true"`
+	SshPublicKeyId *string `min:"21" type:"string" required:"true"`
 
 	// A user name assigned to the ServerID value that you specified.
 	//
 	// UserName is a required field
-	UserName *string `type:"string" required:"true"`
+	UserName *string `min:"3" type:"string" required:"true"`
 }
 
 // String returns the string representation
