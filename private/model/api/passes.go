@@ -161,37 +161,33 @@ func (a *API) fixStutterNames() {
 }
 
 func (a *API) validateShapeNames() {
-	var renameServiceShapes = map[string][]string{
-		"mediapackage": {
-			"__AdTriggersElement",
-			"__PeriodTriggersElement",
-		},
-	}
-
-	// Remove non alphabetical characters from the start of the shape name
 	for _, s := range a.Shapes {
-		if renameServiceShapes[a.PackageName()] != nil {
-			for _, name := range renameServiceShapes[a.PackageName()] {
-				// name should start with an alphabet, that is ascii character 65 to 90, and 97 to 122;
-				// else skip that character
-				if name == s.ShapeName {
-					for len(name) > 1 {
-						if !unicode.IsLetter(rune(name[0])) {
-							name = name[1:]
-						} else {
-							break
-						}
-					}
-
-					fmt.Printf("Renamed shape %v to %v for package %v \n", s.ShapeName, name, a.PackageName())
-					s.Rename(name)
+		// name should start with an alphabet, that is ascii character 65 to 90, and 97 to 122;
+		// else skip that character
+		name := s.ShapeName
+		for len(name) > 1 {
+			if (s.Type == "structure" || s.IsEnum()) && !unicode.IsLetter(rune(name[0])) {
+				// Remove the leading underscores from the name of the shape, if shape is enum or structure
+				if name[0] == '_' {
+					name = name[1:]
+				} else {
+					// Throw an error if shape name starts with non alphabetic character and
+					// above condition is unsatisfied.
+					log.Fatalf("Shape starting with non alphabetical character found: %v", s.ShapeName)
 				}
+			} else {
+				break
 			}
 		}
 
-		// Throw an error if shape is struct or enum and is still starting with non alphabetical characters
-		if (s.Type == "structure" || s.IsEnum()) && !unicode.IsLetter(rune(s.ShapeName[0])) {
-			log.Fatalf("Shape starting with non alphabetical character found: %v", s.ShapeName)
+		if s.ShapeName != name {
+			debugLogger.Logf("Renamed shape %v to %v for package %v \n", s.ShapeName, name, a.PackageName())
+			if a.Shapes[name] != nil {
+				// throw an error if shape with a new shape name already exists
+				log.Fatalf("Tried to rename shape %v to %v, but the new name results in shape name collision",
+					s.ShapeName, name)
+			}
+			s.Rename(name)
 		}
 	}
 }

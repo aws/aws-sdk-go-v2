@@ -290,7 +290,7 @@ func (s *Shape) GoStructType(name string, ref *ShapeRef) string {
 	// check if enum needs to be imported
 	if ref.Shape.IsEnum() || (ref.Shape.MemberRef.Shape != nil && ref.Shape.MemberRef.Shape.IsEnum()) ||
 		(ref.Shape.ValueRef.Shape != nil && ref.Shape.ValueRef.Shape.IsEnum()) {
-		s.API.AddSDKImport("service", s.API.PackageName(), EnumsPkgName)
+		s.API.AddSDKImport("service", s.API.PackageName(), ServiceEnumsPkgName)
 		return ref.GoTypeWithPkgName()
 	}
 	return ref.GoType()
@@ -338,9 +338,9 @@ func getPkgName(s *Shape) string {
 	} else if s.IsError {
 		pkg = s.API.PackageName()
 	} else if s.IsEnum() {
-		pkg = EnumsPkgName
+		pkg = ServiceEnumsPkgName
 	} else {
-		pkg = TypesPkgName
+		pkg = ServiceTypesPkgName
 	}
 
 	return pkg
@@ -357,35 +357,36 @@ func goType(s *Shape, withPkgName, pointer bool) string {
 	var pkgName string
 	pkgName = getPkgName(s)
 
-	switch {
-	case s.IsEnum():
-		s.API.AddSDKImport("service", s.API.PackageName(), EnumsPkgName)
-		if withPkgName {
-			return fmt.Sprintf("%s.%s", pkgName, s.EnumType())
-		}
-		return s.EnumType()
-	case s.Type == "structure":
+	switch s.Type {
+	case "structure":
 		if withPkgName || s.resolvePkg != "" {
 			return fmt.Sprintf("%s%s.%s", prefix, pkgName, s.ShapeName)
 		}
 		return prefix + s.ShapeName
-	case s.Type == "map":
+	case "map":
 		return "map[string]" + goType(s.ValueRef.Shape, withPkgName, false)
-	case s.Type == "jsonvalue":
+	case "jsonvalue":
 		return "aws.JSONValue"
-	case s.Type == "list":
+	case "list":
 		return "[]" + goType(s.MemberRef.Shape, withPkgName, false)
-	case s.Type == "boolean":
+	case "boolean":
 		return prefix + "bool"
-	case s.Type == "string" || s.Type == "character":
+	case "string", "character":
+		if s.IsEnum() {
+			s.API.AddSDKImport("service", s.API.PackageName(), ServiceEnumsPkgName)
+			if withPkgName {
+				return fmt.Sprintf("%s.%s", pkgName, s.EnumType())
+			}
+			return s.EnumType()
+		}
 		return prefix + "string"
-	case s.Type == "blob":
+	case "blob":
 		return "[]byte"
-	case s.Type == "integer" || s.Type == "long":
+	case "integer", "long":
 		return prefix + "int64"
-	case s.Type == "float" || s.Type == "double":
+	case "float", "double":
 		return prefix + "float64"
-	case s.Type == "timestamp":
+	case "timestamp":
 		s.API.imports["time"] = true
 		return prefix + "time.Time"
 	default:

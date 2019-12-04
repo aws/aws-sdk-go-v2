@@ -114,8 +114,8 @@ func main() {
 		// Create the output path for the model.
 		pkgDir := filepath.Join(svcPath, a.PackageName())
 		os.MkdirAll(filepath.Join(pkgDir, a.InterfacePackageName()), 0775)
-		os.MkdirAll(filepath.Join(pkgDir, api.TypesPkgName), 0775)
-		os.Mkdir(filepath.Join(pkgDir, api.EnumsPkgName), 0775)
+		os.MkdirAll(filepath.Join(pkgDir, api.ServiceTypesPkgName), 0775)
+		os.Mkdir(filepath.Join(pkgDir, api.ServiceEnumsPkgName), 0775)
 
 		if _, ok := servicePaths[pkgDir]; ok {
 			fmt.Fprintf(os.Stderr,
@@ -281,29 +281,29 @@ func writeAPIFile(g *generateInfo) error {
 
 		// add in input and output to api_op_types.go
 		if err := writeGoFile(
-			filepath.Join(g.PackageDir, api.TypesPkgName, "api_op_"+op.ExportedName+".go"),
+			filepath.Join(g.PackageDir, api.ServiceTypesPkgName, "api_op_"+op.ExportedName+".go"),
 			codeLayout,
 			"",
-			api.TypesPkgName,
+			api.ServiceTypesPkgName,
 			g.API.APIOperationTypeGoCode(op),
 		); err != nil {
 			return fmt.Errorf("failed to write %s operation types file, %v", opName, err)
 		}
 	}
 
-	if err := writeGoFile(filepath.Join(g.PackageDir, api.TypesPkgName, "api_types.go"),
+	if err := writeGoFile(filepath.Join(g.PackageDir, api.ServiceTypesPkgName, "api_types.go"),
 		codeLayout,
 		"",
-		api.TypesPkgName,
+		api.ServiceTypesPkgName,
 		g.API.APIParamShapesGoCode(),
 	); err != nil {
 		return err
 	}
 
-	if err := writeGoFile(filepath.Join(g.PackageDir, api.EnumsPkgName, "api_enums.go"),
+	if err := writeGoFile(filepath.Join(g.PackageDir, api.ServiceEnumsPkgName, "api_enums.go"),
 		codeLayout,
 		"",
-		api.EnumsPkgName,
+		api.ServiceEnumsPkgName,
 		g.API.APIEnumsGoCode(),
 	); err != nil {
 		return err

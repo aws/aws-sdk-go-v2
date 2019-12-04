@@ -14,11 +14,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront"
-	"github.com/aws/aws-sdk-go-v2/service/cloudfront/enums"
-	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
+	cfEnums "github.com/aws/aws-sdk-go-v2/service/cloudfront/enums"
+	cfTypes "github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	s3_enums "github.com/aws/aws-sdk-go-v2/service/s3/enums"
-	s3_types "github.com/aws/aws-sdk-go-v2/service/s3/types"
+	s3Enums "github.com/aws/aws-sdk-go-v2/service/s3/enums"
+	s3Types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 var (
@@ -145,16 +145,16 @@ func benchRESTXMLRequest(b *testing.B, reqFn func() *aws.Request) {
 	}
 }
 
-func cloudfrontCreateDistributionInput() *types.CreateDistributionInput {
-	return &types.CreateDistributionInput{
-		DistributionConfig: &types.DistributionConfig{ // Required
+func cloudfrontCreateDistributionInput() *cfTypes.CreateDistributionInput {
+	return &cfTypes.CreateDistributionInput{
+		DistributionConfig: &cfTypes.DistributionConfig{ // Required
 			CallerReference: aws.String("string"), // Required
 			Comment:         aws.String("string"), // Required
-			DefaultCacheBehavior: &types.DefaultCacheBehavior{ // Required
-				ForwardedValues: &types.ForwardedValues{ // Required
-					Cookies: &types.CookiePreference{ // Required
-						Forward: enums.ItemSelection("ItemSelection"), // Required
-						WhitelistedNames: &types.CookieNames{
+			DefaultCacheBehavior: &cfTypes.DefaultCacheBehavior{ // Required
+				ForwardedValues: &cfTypes.ForwardedValues{ // Required
+					Cookies: &cfTypes.CookiePreference{ // Required
+						Forward: cfEnums.ItemSelection("ItemSelection"), // Required
+						WhitelistedNames: &cfTypes.CookieNames{
 							Quantity: aws.Int64(1), // Required
 							Items: []string{
 								"string", // Required
@@ -163,7 +163,7 @@ func cloudfrontCreateDistributionInput() *types.CreateDistributionInput {
 						},
 					},
 					QueryString: aws.Bool(true), // Required
-					Headers: &types.Headers{
+					Headers: &cfTypes.Headers{
 						Quantity: aws.Int64(1), // Required
 						Items: []string{
 							"string", // Required
@@ -173,7 +173,7 @@ func cloudfrontCreateDistributionInput() *types.CreateDistributionInput {
 				},
 				MinTTL:         aws.Int64(1),         // Required
 				TargetOriginId: aws.String("string"), // Required
-				TrustedSigners: &types.TrustedSigners{ // Required
+				TrustedSigners: &cfTypes.TrustedSigners{ // Required
 					Enabled:  aws.Bool(true), // Required
 					Quantity: aws.Int64(1),   // Required
 					Items: []string{
@@ -181,16 +181,16 @@ func cloudfrontCreateDistributionInput() *types.CreateDistributionInput {
 						// More values...
 					},
 				},
-				ViewerProtocolPolicy: enums.ViewerProtocolPolicy("ViewerProtocolPolicy"), // Required
-				AllowedMethods: &types.AllowedMethods{
-					Items: []enums.Method{ // Required
-						enums.Method("string"), // Required
+				ViewerProtocolPolicy: cfEnums.ViewerProtocolPolicy("ViewerProtocolPolicy"), // Required
+				AllowedMethods: &cfTypes.AllowedMethods{
+					Items: []cfEnums.Method{ // Required
+						cfEnums.Method("string"), // Required
 						// More values...
 					},
 					Quantity: aws.Int64(1), // Required
-					CachedMethods: &types.CachedMethods{
-						Items: []enums.Method{ // Required
-							enums.Method("string"), // Required
+					CachedMethods: &cfTypes.CachedMethods{
+						Items: []cfEnums.Method{ // Required
+							cfEnums.Method("string"), // Required
 							// More values...
 						},
 						Quantity: aws.Int64(1), // Required
@@ -201,40 +201,40 @@ func cloudfrontCreateDistributionInput() *types.CreateDistributionInput {
 				SmoothStreaming: aws.Bool(true),
 			},
 			Enabled: aws.Bool(true), // Required
-			Origins: &types.Origins{ // Required
+			Origins: &cfTypes.Origins{ // Required
 				Quantity: aws.Int64(1), // Required
-				Items: []types.Origin{
+				Items: []cfTypes.Origin{
 					{ // Required
 						DomainName: aws.String("string"), // Required
 						Id:         aws.String("string"), // Required
-						CustomOriginConfig: &types.CustomOriginConfig{
-							HTTPPort:             aws.Int64(1),                                       // Required
-							HTTPSPort:            aws.Int64(1),                                       // Required
-							OriginProtocolPolicy: enums.OriginProtocolPolicy("OriginProtocolPolicy"), // Required
+						CustomOriginConfig: &cfTypes.CustomOriginConfig{
+							HTTPPort:             aws.Int64(1),                                         // Required
+							HTTPSPort:            aws.Int64(1),                                         // Required
+							OriginProtocolPolicy: cfEnums.OriginProtocolPolicy("OriginProtocolPolicy"), // Required
 						},
 						OriginPath: aws.String("string"),
-						S3OriginConfig: &types.S3OriginConfig{
+						S3OriginConfig: &cfTypes.S3OriginConfig{
 							OriginAccessIdentity: aws.String("string"), // Required
 						},
 					},
 					// More values...
 				},
 			},
-			Aliases: &types.Aliases{
+			Aliases: &cfTypes.Aliases{
 				Quantity: aws.Int64(1), // Required
 				Items: []string{
 					"string", // Required
 					// More values...
 				},
 			},
-			CacheBehaviors: &types.CacheBehaviors{
+			CacheBehaviors: &cfTypes.CacheBehaviors{
 				Quantity: aws.Int64(1), // Required
-				Items: []types.CacheBehavior{
+				Items: []cfTypes.CacheBehavior{
 					{ // Required
-						ForwardedValues: &types.ForwardedValues{ // Required
-							Cookies: &types.CookiePreference{ // Required
-								Forward: enums.ItemSelection("ItemSelection"), // Required
-								WhitelistedNames: &types.CookieNames{
+						ForwardedValues: &cfTypes.ForwardedValues{ // Required
+							Cookies: &cfTypes.CookiePreference{ // Required
+								Forward: cfEnums.ItemSelection("ItemSelection"), // Required
+								WhitelistedNames: &cfTypes.CookieNames{
 									Quantity: aws.Int64(1), // Required
 									Items: []string{
 										"string", // Required
@@ -243,7 +243,7 @@ func cloudfrontCreateDistributionInput() *types.CreateDistributionInput {
 								},
 							},
 							QueryString: aws.Bool(true), // Required
-							Headers: &types.Headers{
+							Headers: &cfTypes.Headers{
 								Quantity: aws.Int64(1), // Required
 								Items: []string{
 									"string", // Required
@@ -254,7 +254,7 @@ func cloudfrontCreateDistributionInput() *types.CreateDistributionInput {
 						MinTTL:         aws.Int64(1),         // Required
 						PathPattern:    aws.String("string"), // Required
 						TargetOriginId: aws.String("string"), // Required
-						TrustedSigners: &types.TrustedSigners{ // Required
+						TrustedSigners: &cfTypes.TrustedSigners{ // Required
 							Enabled:  aws.Bool(true), // Required
 							Quantity: aws.Int64(1),   // Required
 							Items: []string{
@@ -262,16 +262,16 @@ func cloudfrontCreateDistributionInput() *types.CreateDistributionInput {
 								// More values...
 							},
 						},
-						ViewerProtocolPolicy: enums.ViewerProtocolPolicy("ViewerProtocolPolicy"), // Required
-						AllowedMethods: &types.AllowedMethods{
-							Items: []enums.Method{ // Required
-								enums.Method("string"), // Required
+						ViewerProtocolPolicy: cfEnums.ViewerProtocolPolicy("ViewerProtocolPolicy"), // Required
+						AllowedMethods: &cfTypes.AllowedMethods{
+							Items: []cfEnums.Method{ // Required
+								cfEnums.Method("string"), // Required
 								// More values...
 							},
 							Quantity: aws.Int64(1), // Required
-							CachedMethods: &types.CachedMethods{
-								Items: []enums.Method{ // Required
-									enums.Method("string"), // Required
+							CachedMethods: &cfTypes.CachedMethods{
+								Items: []cfEnums.Method{ // Required
+									cfEnums.Method("string"), // Required
 									// More values...
 								},
 								Quantity: aws.Int64(1), // Required
@@ -284,9 +284,9 @@ func cloudfrontCreateDistributionInput() *types.CreateDistributionInput {
 					// More values...
 				},
 			},
-			CustomErrorResponses: &types.CustomErrorResponses{
+			CustomErrorResponses: &cfTypes.CustomErrorResponses{
 				Quantity: aws.Int64(1), // Required
-				Items: []types.CustomErrorResponse{
+				Items: []cfTypes.CustomErrorResponse{
 					{ // Required
 						ErrorCode:          aws.Int64(1), // Required
 						ErrorCachingMinTTL: aws.Int64(1),
@@ -297,42 +297,42 @@ func cloudfrontCreateDistributionInput() *types.CreateDistributionInput {
 				},
 			},
 			DefaultRootObject: aws.String("string"),
-			Logging: &types.LoggingConfig{
+			Logging: &cfTypes.LoggingConfig{
 				Bucket:         aws.String("string"), // Required
 				Enabled:        aws.Bool(true),       // Required
 				IncludeCookies: aws.Bool(true),       // Required
 				Prefix:         aws.String("string"), // Required
 			},
-			PriceClass: enums.PriceClass("PriceClass"),
-			Restrictions: &types.Restrictions{
-				GeoRestriction: &types.GeoRestriction{ // Required
-					Quantity:        aws.Int64(1),                                   // Required
-					RestrictionType: enums.GeoRestrictionType("GeoRestrictionType"), // Required
+			PriceClass: cfEnums.PriceClass("PriceClass"),
+			Restrictions: &cfTypes.Restrictions{
+				GeoRestriction: &cfTypes.GeoRestriction{ // Required
+					Quantity:        aws.Int64(1),                                     // Required
+					RestrictionType: cfEnums.GeoRestrictionType("GeoRestrictionType"), // Required
 					Items: []string{
 						"string", // Required
 						// More values...
 					},
 				},
 			},
-			ViewerCertificate: &types.ViewerCertificate{
+			ViewerCertificate: &cfTypes.ViewerCertificate{
 				CloudFrontDefaultCertificate: aws.Bool(true),
 				IAMCertificateId:             aws.String("string"),
-				MinimumProtocolVersion:       enums.MinimumProtocolVersion("MinimumProtocolVersion"),
-				SSLSupportMethod:             enums.SSLSupportMethod("SSLSupportMethod"),
+				MinimumProtocolVersion:       cfEnums.MinimumProtocolVersion("MinimumProtocolVersion"),
+				SSLSupportMethod:             cfEnums.SSLSupportMethod("SSLSupportMethod"),
 			},
 		},
 	}
 }
 
-func cloudfrontDeleteDistributionInput() *types.DeleteDistributionInput {
-	return &types.DeleteDistributionInput{
+func cloudfrontDeleteDistributionInput() *cfTypes.DeleteDistributionInput {
+	return &cfTypes.DeleteDistributionInput{
 		Id:      aws.String("string"), // Required
 		IfMatch: aws.String("string"),
 	}
 }
 
-func s3HeadObjectInput() *s3_types.HeadObjectInput {
-	return &s3_types.HeadObjectInput{
+func s3HeadObjectInput() *s3Types.HeadObjectInput {
+	return &s3Types.HeadObjectInput{
 		Bucket:    aws.String("somebucketname"),
 		Key:       aws.String("keyname"),
 		VersionId: aws.String("someVersion"),
@@ -340,24 +340,24 @@ func s3HeadObjectInput() *s3_types.HeadObjectInput {
 	}
 }
 
-func s3PutObjectAclInput() *s3_types.PutObjectAclInput {
-	return &s3_types.PutObjectAclInput{
+func s3PutObjectAclInput() *s3Types.PutObjectAclInput {
+	return &s3Types.PutObjectAclInput{
 		Bucket: aws.String("somebucketname"),
 		Key:    aws.String("keyname"),
-		AccessControlPolicy: &s3_types.AccessControlPolicy{
-			Grants: []s3_types.Grant{
+		AccessControlPolicy: &s3Types.AccessControlPolicy{
+			Grants: []s3Types.Grant{
 				{
-					Grantee: &s3_types.Grantee{
+					Grantee: &s3Types.Grantee{
 						DisplayName:  aws.String("someName"),
 						EmailAddress: aws.String("someAddr"),
 						ID:           aws.String("someID"),
-						Type:         s3_enums.TypeCanonicalUser,
+						Type:         s3Enums.TypeCanonicalUser,
 						URI:          aws.String("someURI"),
 					},
-					Permission: s3_enums.PermissionWrite,
+					Permission: s3Enums.PermissionWrite,
 				},
 			},
-			Owner: &s3_types.Owner{
+			Owner: &s3Types.Owner{
 				DisplayName: aws.String("howdy"),
 				ID:          aws.String("someID"),
 			},

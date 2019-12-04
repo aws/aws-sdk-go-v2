@@ -17,8 +17,8 @@ import (
 
 // SDKImportRoot is the root import path of the SDK.
 const SDKImportRoot = "github.com/aws/aws-sdk-go-v2"
-const TypesPkgName = "types"
-const EnumsPkgName = "enums"
+const ServiceTypesPkgName = "types"
+const ServiceEnumsPkgName = "enums"
 
 // An API defines a service API's definition. and logic to serialize the definition.
 type API struct {
@@ -324,7 +324,7 @@ func (a *API) APIOperationGoCode(op *Operation) string {
 	a.resetImports()
 	a.AddImport("context")
 	a.AddSDKImport("aws")
-	a.AddSDKImport("service", a.PackageName(), TypesPkgName)
+	a.AddSDKImport("service", a.PackageName(), ServiceTypesPkgName)
 
 	if op.OutputRef.Shape.Placeholder {
 		a.AddSDKImport("private/protocol", a.ProtocolPackage())
@@ -516,7 +516,7 @@ func (a *API) ProtocolCanonicalPackageName() string {
 	case "json":
 		return "aws_jsonrpc"
 	default:
-		log.Fatalf("unknown protocol name in API Metadata : %v", a.Metadata.Protocol)
+		log.Fatalf("unknown protocol name %v, in package %v", a.Metadata.Protocol, a.PackageName())
 	}
 	return ""
 }
@@ -743,7 +743,6 @@ func (a *API) ExampleGoCode() string {
 	}
 
 	a.AddImport("fmt")
-	a.AddSDKImport()
 	a.AddSDKImport("aws")
 
 	return a.importsGoCode()
@@ -820,7 +819,7 @@ func (a *API) InterfaceGoCode() string {
 		a.AddSDKImport("aws")
 	}
 	a.AddImport(a.ImportPath())
-	a.AddSDKImport("service", a.PackageName(), TypesPkgName)
+	a.AddSDKImport("service", a.PackageName(), ServiceTypesPkgName)
 
 	var buf bytes.Buffer
 	err := tplInterface.Execute(&buf, a)

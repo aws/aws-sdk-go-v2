@@ -63,8 +63,8 @@ func (a *API) APISmokeTestsGoCode() string {
 	a.AddSDKImport("aws")
 	a.AddSDKImport("aws/awserr")
 	a.AddSDKImport("internal/awstesting/integration")
-	a.AddSDKImport("service", a.PackageName())
-	a.AddSDKImport("service", a.PackageName(), TypesPkgName)
+	a.AddImport(a.ImportPath())
+	a.AddSDKImport("service", a.PackageName(), ServiceTypesPkgName)
 
 	smokeTests := struct {
 		API *API

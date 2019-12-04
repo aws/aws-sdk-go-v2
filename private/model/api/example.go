@@ -227,17 +227,8 @@ func (a *API) AttachExamples(filename string) {
 	p.setup()
 }
 
-var examplesBuilderCustomizations = map[string]examplesBuilder{
-	"wafregional": wafregionalExamplesBuilder{},
-}
-
 func (p *ExamplesDefinition) setup() {
-	var builder examplesBuilder
-	ok := false
-	if builder, ok = examplesBuilderCustomizations[p.API.PackageName()]; !ok {
-		builder = defaultExamplesBuilder{}
-	}
-
+	builder := defaultExamplesBuilder{}
 	keys := p.Examples.Names()
 	for _, n := range keys {
 		examples := p.Examples[n]
@@ -284,11 +275,7 @@ type exHeader struct {
 // examples.json file.
 func (a *API) ExamplesGoCode() string {
 	var buf bytes.Buffer
-	var builder examplesBuilder
-	ok := false
-	if builder, ok = examplesBuilderCustomizations[a.PackageName()]; !ok {
-		builder = defaultExamplesBuilder{}
-	}
+	builder := defaultExamplesBuilder{}
 
 	a.resetImports()
 	a.AddImport("fmt")
