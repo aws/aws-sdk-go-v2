@@ -2,7 +2,6 @@ package apigateway_test
 
 import (
 	"context"
-	"fmt"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -23,14 +22,13 @@ func TestProtoGetApiKeyRequest_Diff(t *testing.T) {
 	request := svc.GetApiKeyRequest(&input)
 	_, err := request.Send(context.TODO())
 	if err != nil {
-		fmt.Println(err)
+		t.Error(err)
 	}
 
-	prototypeRequest := svc.ProtoGetApiKeyRequest(&input)
+	prototypeRequest := svc.ProtoGetAPIKeyRequest(&input)
 	_, err = prototypeRequest.Send(context.TODO())
-
 	if err != nil {
-		fmt.Println(err)
+		t.Error(err)
 	}
 
 	if diff := cmp.Diff(request.HTTPRequest.Header, prototypeRequest.HTTPRequest.Header); diff != "" {
