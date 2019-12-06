@@ -1,38 +1,47 @@
 package awsrestjson
 
 import (
+	"log"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/rest"
+	v2 "github.com/aws/aws-sdk-go-v2/private/protocol/rest/v2"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
 
-// ProtoCreateApiKeyMarshaler defines marshaler for ProtoCreateApiKey operation
-type ProtoCreateApiKeyMarshaler struct {
-	Input *types.CreateApiKeyInput
+// ProtoGetApiKeyMarshaler defines marshaler for ProtoGetApiKey operation
+type ProtoGetApiKeyMarshaler struct {
+	Input *types.GetApiKeyInput
 }
 
-func (m ProtoCreateApiKeyMarshaler) MarshalOperation(r *aws.Request) {
+func (m ProtoGetApiKeyMarshaler) MarshalOperation(r *aws.Request) {
 	var err error
+	encoder := v2.NewEncoder(r.HTTPRequest)
+	// adds content-type header
+	encoder.AddHeader("Content-Type").String("application/json")
 
-	err = MarshalCreateApiKeyInputShapeAWSREST(m.Input, r)
+	err = MarshalGetApiKeyInputShapeAWSREST(m.Input, encoder)
 	if err != nil {
 		r.Error = err
 	}
 
-	err = MarshalCreateApiKeyInputShapeAWSJSON(m.Input, r)
+	err = MarshalGetApiKeyInputShapeAWSJSON(m.Input, r)
 	if err != nil {
 		r.Error = err
 	}
-
 }
 
-func MarshalCreateApiKeyInputShapeAWSREST(v *types.CreateApiKeyInput, r *aws.Request) error {
-	// delegate to reflection based marshaling
-	rest.Build(r)
+func MarshalGetApiKeyInputShapeAWSREST(input *types.GetApiKeyInput, encoder *v2.Encoder) error {
+	// encode using rest encoder utility
+	if err := encoder.SetURI("api_Key").String(*input.ApiKey); err != nil {
+		log.Fatalf("Failed to marshal API KEY to URI using REST encoder:\n \t %v", err.Error())
+	}
+	encoder.AddQuery("includeValue").Boolean(*input.IncludeValue)
+	encoder.Encode()
 	return nil
 }
-func MarshalCreateApiKeyInputShapeAWSJSON(v *types.CreateApiKeyInput, r *aws.Request) error {
+func MarshalGetApiKeyInputShapeAWSJSON(v *types.GetApiKeyInput, r *aws.Request) error {
 	// delegate to reflection based marshaling
 	if t := rest.PayloadType(r.Params); t == "structure" || t == "" {
 		jsonrpc.Build(r)
@@ -41,8 +50,8 @@ func MarshalCreateApiKeyInputShapeAWSJSON(v *types.CreateApiKeyInput, r *aws.Req
 }
 
 // GetNamedBuildHandler returns a Named Build Handler for an operation marshal function
-func (m ProtoCreateApiKeyMarshaler) GetNamedBuildHandler() aws.NamedHandler {
-	const BuildHandler = "CreateApiKey.BuildHandler"
+func (m ProtoGetApiKeyMarshaler) GetNamedBuildHandler() aws.NamedHandler {
+	const BuildHandler = "ProtoGetApiKey.BuildHandler"
 	return aws.NamedHandler{
 		Name: BuildHandler,
 		Fn:   m.MarshalOperation,

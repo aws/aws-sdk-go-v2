@@ -62,7 +62,7 @@ func (e *Encoder) Headers(prefix string) *Headers {
 	}
 }
 
-func (e *Encoder) AddURI(key string) *URIValue {
+func (e *Encoder) SetURI(key string) *URIValue {
 	return newURIValue(&e.path, &e.rawPath, &e.pathBuffer, key)
 }
 
