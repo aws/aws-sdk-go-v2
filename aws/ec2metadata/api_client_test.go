@@ -1,14 +1,15 @@
 package ec2metadata_test
 
 import (
+	"os"
+	"strings"
+	"testing"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/ec2metadata"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
-	"os"
-	"strings"
-	"testing"
 )
 
 func TestClientDisableIMDS(t *testing.T) {

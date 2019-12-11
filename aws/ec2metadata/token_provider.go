@@ -1,12 +1,12 @@
 package ec2metadata
 
 import (
-	request "github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go/aws/credentials"
 	"net/http"
 	"sync/atomic"
 	"time"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 )
 
 // A tokenProvider struct provides access to EC2Metadata client
@@ -24,7 +24,7 @@ type tokenProvider struct {
 // A ec2Token struct helps use of token in EC2 Metadata service ops
 type ec2Token struct {
 	token string
-	credentials.Expiry
+	aws.Credentials
 }
 
 // newTokenProvider provides a pointer to a tokenProvider instance
@@ -33,24 +33,21 @@ func newTokenProvider(c *Client, duration time.Duration) *tokenProvider {
 }
 
 // fetchTokenHandler fetches token for EC2Metadata service client by default.
-func (t *tokenProvider) fetchTokenHandler(r *request.Request) {
+func (t *tokenProvider) fetchTokenHandler(r *aws.Request) {
 
 	// short-circuits to insecure data flow if tokenProvider is disabled.
 	if v := atomic.LoadUint32(&t.disabled); v == 1 {
 		return
 	}
 
-	if ec2Token, ok := t.token.Load().(ec2Token); ok && !ec2Token.IsExpired() {
+	if ec2Token, ok := t.token.Load().(ec2Token); ok && !ec2Token.Expired() {
 		r.HTTPRequest.Header.Set(tokenHeader, ec2Token.token)
 		return
 	}
 
 	output, err := t.client.getToken(t.configuredTTL)
-
 	if err != nil {
-
-		// change the disabled flag on token provider to true,
-		// when error is request timeout error.
+		// change the disabled flag on token provider to true, when error is request timeout error.
 		if requestFailureError, ok := err.(awserr.RequestFailure); ok {
 			switch requestFailureError.StatusCode() {
 			case http.StatusForbidden, http.StatusNotFound, http.StatusMethodNotAllowed:
@@ -72,17 +69,17 @@ func (t *tokenProvider) fetchTokenHandler(r *request.Request) {
 	newToken := ec2Token{
 		token: output.Token,
 	}
-	newToken.SetExpiration(time.Now().Add(output.TTL), ttlExpirationWindow)
+	newToken.CanExpire = true
+	newToken.Expires = time.Now().Add(output.TTL).Add(-ttlExpirationWindow)
 	t.token.Store(newToken)
-
-	// Inject token header to the request.
 	if ec2Token, ok := t.token.Load().(ec2Token); ok {
+		// Inject token header to the request.
 		r.HTTPRequest.Header.Set(tokenHeader, ec2Token.token)
 	}
 }
 
 // enableTokenProviderHandler enables the token provider
-func (t *tokenProvider) enableTokenProviderHandler(r *request.Request) {
+func (t *tokenProvider) enableTokenProviderHandler(r *aws.Request) {
 	// If the error code status is 401, we enable the token provider
 	if e, ok := r.Error.(awserr.RequestFailure); ok && e != nil &&
 		e.StatusCode() == http.StatusUnauthorized {
