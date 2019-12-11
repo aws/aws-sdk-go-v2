@@ -1,11 +1,11 @@
 package awsrestxml
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
-	v2 "github.com/aws/aws-sdk-go-v2/private/protocol/rest/v2"
+	restV2 "github.com/aws/aws-sdk-go-v2/private/protocol/rest/v2"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
@@ -18,22 +18,26 @@ type ProtoPutObjectMarshaler struct {
 // This method calls appropriate marshal shape functions as per the input shape and protocol used by the service.
 func (m ProtoPutObjectMarshaler) MarshalOperation(r *aws.Request) {
 	var err error
-	encoder := v2.NewEncoder(r.HTTPRequest)
+	encoder := restV2.NewEncoder(r.HTTPRequest)
 
 	err = MarshalPutObjectInputShapeAWSREST(m.Input, encoder)
 	if err != nil {
 		r.Error = err
+		return
 	}
+	encoder.Encode()
 
-	// since body payloadtype here is blob
-	if err = MarshalPutObjectInputShapeAWSXML(r, m.Input); err != nil {
+	// Todo Instead of passing aws.Request directly to MarshalPutObjectInputShapeAWSXML;
+	//  we should pass the payload as an argument
+	if err = MarshalPutObjectInputShapeAWSXML(m.Input, r); err != nil {
 		r.Error = err
+		return
 	}
 }
 
 // MarshalPutObjectInputShapeAWSREST is a stand alone function used to marshal the HTTP bindings a input shape.
 // This method uses the rest encoder utility
-func MarshalPutObjectInputShapeAWSREST(input *types.PutObjectInput, encoder *v2.Encoder) error {
+func MarshalPutObjectInputShapeAWSREST(input *types.PutObjectInput, encoder *restV2.Encoder) error {
 	// Encoding shapes with location `headers`
 	marshalShapeMapForHeaders(encoder, "x-amz-meta-", input.Metadata)
 	//  Encoding shapes with location `header`
@@ -60,35 +64,33 @@ func MarshalPutObjectInputShapeAWSREST(input *types.PutObjectInput, encoder *v2.
 	encoder.AddHeader("x-amz-storage-class").String(string(input.StorageClass))
 	encoder.AddHeader("x-amz-server-side-encryption").String(string(input.ServerSideEncryption))
 	if err := encoder.AddHeader("Expires").Time(*input.Expires, protocol.RFC822TimeFormatName); err != nil {
-		log.Fatalf("Failed to encode header for shape Expires: \n \t %v", err)
+		return fmt.Errorf("failed to encode header for shape Expires: \n \t %v", err)
 	}
 	if err := encoder.AddHeader("x-amz-object-lock-retain-until-date").Time(*input.ObjectLockRetainUntilDate, protocol.ISO8601TimeFormatName); err != nil {
-		log.Fatalf("Failed to encode header for shape Expires: \n \t %v", err)
+		return fmt.Errorf("failed to encode header for shape Expires: \n \t %v", err)
 	}
 	//  Encoding shapes with location `uri`
 	if err := encoder.SetURI("Bucket").String(*input.Bucket); err != nil {
-		log.Fatalf("Failed to encode URI, \n\t %v\n", err)
+		return fmt.Errorf("failed to encode URI, \n\t %v", err)
 	}
 	if err := encoder.SetURI("Key").String(*input.Key); err != nil {
-		log.Fatalf("Failed to encode URI, \n\t %v\n", err)
+		return fmt.Errorf("failed to encode URI, \n\t %v", err)
 	}
-	// encode using rest encoder utility
-	encoder.Encode()
 	return nil
 }
 
 // MarshalPutObjectInputShapeAWSXML is a stand alone function used to marshal the xml payload
 // This should be generated according to the payload type for rest-xml protocol
-func MarshalPutObjectInputShapeAWSXML(r *aws.Request, input *types.PutObjectInput) error {
+func MarshalPutObjectInputShapeAWSXML(input *types.PutObjectInput, r *aws.Request) error {
 	if input.Body != nil {
 		r.SetReaderBody(input.Body)
 	}
-	return nil
+	return r.Error
 }
 
 // marshalShapeMapForHeaders is marshal function that takes in a map[string]string as an input along with an encoder
 // and location Name which should be used to marshal the shape with location headers.
-func marshalShapeMapForHeaders(encoder *v2.Encoder, locationName string, input map[string]string) {
+func marshalShapeMapForHeaders(encoder *restV2.Encoder, locationName string, input map[string]string) {
 	headerObject := encoder.Headers(locationName)
 	for k, v := range input {
 		headerObject.AddHeader(k).String(v)

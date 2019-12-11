@@ -1,12 +1,12 @@
 package awsrestjson
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/rest"
-	v2 "github.com/aws/aws-sdk-go-v2/private/protocol/rest/v2"
+	restlegacy "github.com/aws/aws-sdk-go-v2/private/protocol/rest"
+	restV2 "github.com/aws/aws-sdk-go-v2/private/protocol/rest/v2"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
 
@@ -19,40 +19,44 @@ type ProtoGetAPIKeyMarshaler struct {
 // This method calls appropriate marshal shape functions as per the input shape and protocol used by the service.
 func (m ProtoGetAPIKeyMarshaler) MarshalOperation(r *aws.Request) {
 	var err error
-	encoder := v2.NewEncoder(r.HTTPRequest)
+	encoder := restV2.NewEncoder(r.HTTPRequest)
 	// adds content-type header
 	encoder.AddHeader("Content-Type").String("application/json")
 
 	err = MarshalGetAPIKeyInputShapeAWSREST(m.Input, encoder)
 	if err != nil {
 		r.Error = err
+		return
 	}
+	encoder.Encode()
 
+	// Todo Instead of passing aws.Request directly to MarshalGetAPIKeyInputShapeAWSJSON;
+	//  we should pass the payload as an argument
 	err = MarshalGetAPIKeyInputShapeAWSJSON(m.Input, r)
 	if err != nil {
 		r.Error = err
+		return
 	}
 }
 
 // MarshalGetAPIKeyInputShapeAWSREST is a stand alone function used to marshal the HTTP bindings a input shape.
 // This method uses the rest encoder utility
-func MarshalGetAPIKeyInputShapeAWSREST(input *types.GetApiKeyInput, encoder *v2.Encoder) error {
+func MarshalGetAPIKeyInputShapeAWSREST(input *types.GetApiKeyInput, encoder *restV2.Encoder) error {
 	// encode using rest encoder utility
 	if err := encoder.SetURI("api_Key").String(*input.ApiKey); err != nil {
-		log.Fatalf("Failed to marshal API KEY to URI using REST encoder:\n \t %v", err.Error())
+		return fmt.Errorf("failed to marshal API KEY to URI using REST encoder:\n \t %v", err.Error())
 	}
 	encoder.AddQuery("includeValue").Boolean(*input.IncludeValue)
-	encoder.Encode()
 	return nil
 }
 
 // MarshalGetAPIKeyInputShapeAWSJSON is a stand alone function used to marshal the json body
 func MarshalGetAPIKeyInputShapeAWSJSON(v *types.GetApiKeyInput, r *aws.Request) error {
 	// delegate to reflection based marshaling
-	if t := rest.PayloadType(r.Params); t == "structure" || t == "" {
+	if t := restlegacy.PayloadType(r.Params); t == "structure" || t == "" {
 		jsonrpc.Build(r)
 	}
-	return nil
+	return r.Error
 }
 
 // GetNamedBuildHandler returns a Named Build Handler for an operation marshal function
