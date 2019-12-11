@@ -63,8 +63,8 @@ func (a *API) APISmokeTestsGoCode() string {
 	a.AddSDKImport("aws")
 	a.AddSDKImport("aws/awserr")
 	a.AddSDKImport("internal/awstesting/integration")
-	a.AddImport(a.ImportPath())
-	a.AddSDKImport("service", a.PackageName(), ServiceTypesPkgName)
+	a.AddSDKServiceImport()
+	a.AddSDKServiceTypesImport()
 	if len(a.SmokeTests.TestCases) != 0 {
 		a.AddSDKImport("aws/defaults")
 	}

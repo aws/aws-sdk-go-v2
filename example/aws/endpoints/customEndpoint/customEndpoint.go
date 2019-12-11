@@ -9,11 +9,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
-	dynamodb_types "github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	dynamodbTypes "github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	s3_types "github.com/aws/aws-sdk-go-v2/service/s3/types"
+	s3Types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
-	sqs_types "github.com/aws/aws-sdk-go-v2/service/sqs/types"
+	sqsTypes "github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
 
 func main() {
@@ -41,7 +41,7 @@ func main() {
 	// endpoint resolver wrapping the default endpoint resolver.
 	s3Svc := s3.New(cfg)
 	// Operation calls will be made to the custom endpoint.
-	getReq := s3Svc.GetObjectRequest(&s3_types.GetObjectInput{
+	getReq := s3Svc.GetObjectRequest(&s3Types.GetObjectInput{
 		Bucket: aws.String("myBucket"),
 		Key:    aws.String("myObjectKey"),
 	})
@@ -53,7 +53,7 @@ func main() {
 	sqsSvc := sqs.New(cfg)
 	// Operation calls will be made to the default endpoint for SQS for the
 	// region configured.
-	msgReq := sqsSvc.ReceiveMessageRequest(&sqs_types.ReceiveMessageInput{
+	msgReq := sqsSvc.ReceiveMessageRequest(&sqsTypes.ReceiveMessageInput{
 		QueueUrl: aws.String("my-queue-url"),
 	})
 	msgReq.Send(context.Background())
@@ -75,7 +75,7 @@ func main() {
 	ddbSvc := dynamodb.New(cfgCp)
 	// Operation calls will be made to the custom endpoint set in the
 	// ddCustResolverFn.
-	listReq := ddbSvc.ListTablesRequest(&dynamodb_types.ListTablesInput{})
+	listReq := ddbSvc.ListTablesRequest(&dynamodbTypes.ListTablesInput{})
 	listReq.Send(context.Background())
 
 	// Setting Config's Endpoint will override the EndpointResolver. Forcing
@@ -85,6 +85,6 @@ func main() {
 	cfgCp.EndpointResolver = aws.ResolveWithEndpointURL("http://localhost:8088")
 
 	ddbSvcLocal := dynamodb.New(cfgCp)
-	listReq = ddbSvcLocal.ListTablesRequest(&dynamodb_types.ListTablesInput{})
+	listReq = ddbSvcLocal.ListTablesRequest(&dynamodbTypes.ListTablesInput{})
 	listReq.Send(context.Background())
 }

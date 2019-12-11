@@ -265,7 +265,7 @@ func (b ShapeValueBuilder) GoTypeWithPkgName(ref *ShapeRef, elem bool) string {
 }
 
 func getEnumName(ref *ShapeRef, t, name string) string {
-	ref.API.AddSDKImport("service", ref.API.PackageName(), ServiceEnumsPkgName)
+	ref.API.AddSDKServiceEnumsImport()
 	for i, enum := range ref.Shape.Enum {
 		if name == enum {
 			return fmt.Sprintf("%s.%s", ServiceEnumsPkgName, ref.Shape.EnumConsts[i])

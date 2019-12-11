@@ -290,7 +290,7 @@ func (s *Shape) GoStructType(name string, ref *ShapeRef) string {
 	// check if enum needs to be imported
 	if ref.Shape.IsEnum() || (ref.Shape.MemberRef.Shape != nil && ref.Shape.MemberRef.Shape.IsEnum()) ||
 		(ref.Shape.ValueRef.Shape != nil && ref.Shape.ValueRef.Shape.IsEnum()) {
-		s.API.AddSDKImport("service", s.API.PackageName(), ServiceEnumsPkgName)
+		s.API.AddSDKServiceEnumsImport()
 		return ref.GoTypeWithPkgName()
 	}
 	return ref.GoType()
@@ -354,8 +354,7 @@ func goType(s *Shape, withPkgName, pointer bool) string {
 		prefix = "*"
 	}
 
-	var pkgName string
-	pkgName = getPkgName(s)
+	pkgName := getPkgName(s)
 
 	switch s.Type {
 	case "structure":
@@ -373,7 +372,7 @@ func goType(s *Shape, withPkgName, pointer bool) string {
 		return prefix + "bool"
 	case "string", "character":
 		if s.IsEnum() {
-			s.API.AddSDKImport("service", s.API.PackageName(), ServiceEnumsPkgName)
+			s.API.AddSDKServiceEnumsImport()
 			if withPkgName {
 				return fmt.Sprintf("%s.%s", pkgName, s.EnumType())
 			}

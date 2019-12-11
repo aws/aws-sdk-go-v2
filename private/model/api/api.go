@@ -293,6 +293,27 @@ func (a *API) AddSDKImport(v ...string) error {
 	return nil
 }
 
+// AddSDKServiceImport adds a SDK service package import to the generated file's import.
+func (a *API) AddSDKServiceImport(v ...string) error {
+	var e []string
+	e = append(e, a.BaseImportPath)
+	e = append(e, a.PackageName())
+	e = append(e, v...)
+
+	a.imports[path.Join(e...)] = true
+	return nil
+}
+
+// AddSDKServiceTypesImport adds a SDK service types package import to the generated file's import.
+func (a *API) AddSDKServiceTypesImport() error {
+	return a.AddSDKServiceImport(ServiceTypesPkgName)
+}
+
+// AddSDKServiceEnumsImport adds a SDK service enums package import to the generated file's import.
+func (a *API) AddSDKServiceEnumsImport() error {
+	return a.AddSDKServiceImport(ServiceEnumsPkgName)
+}
+
 // APIGoCode renders the API in Go code. Returning it as a string
 func (a *API) APIGoCode() string {
 	a.resetImports()
@@ -305,7 +326,7 @@ func (a *API) APIGoCode() string {
 		a.AddSDKImport("private/protocol")
 	}
 	if !a.NoGenMarshalers || !a.NoGenUnmarshalers {
-		a.imports[path.Join(SDKImportRoot, "private/protocol")] = true
+		a.AddSDKImport("private/protocol")
 	}
 
 	var buf bytes.Buffer
@@ -324,7 +345,7 @@ func (a *API) APIOperationGoCode(op *Operation) string {
 	a.resetImports()
 	a.AddImport("context")
 	a.AddSDKImport("aws")
-	a.AddSDKImport("service", a.PackageName(), ServiceTypesPkgName)
+	a.AddSDKServiceTypesImport()
 
 	if op.OutputRef.Shape.Placeholder {
 		a.AddSDKImport("private/protocol", a.ProtocolPackage())
@@ -511,8 +532,6 @@ func (a *API) ProtocolCanonicalPackageName() string {
 		return "aws_ec2query"
 	case "query":
 		return "aws_query"
-	case "xml":
-		return "aws_xml"
 	case "json":
 		return "aws_jsonrpc"
 	default:
@@ -818,8 +837,9 @@ func (a *API) InterfaceGoCode() string {
 	if len(a.Waiters) != 0 {
 		a.AddSDKImport("aws")
 	}
-	a.AddImport(a.ImportPath())
-	a.AddSDKImport("service", a.PackageName(), ServiceTypesPkgName)
+
+	a.AddSDKServiceImport()
+	a.AddSDKServiceTypesImport()
 
 	var buf bytes.Buffer
 	err := tplInterface.Execute(&buf, a)

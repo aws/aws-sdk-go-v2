@@ -286,8 +286,9 @@ func (a *API) ExamplesGoCode() string {
 	a.AddSDKImport("aws")
 	a.AddSDKImport("aws/awserr")
 	a.AddSDKImport("aws/external")
-	a.AddSDKImport("service", a.PackageName())
-	a.AddSDKImport("service", a.PackageName(), "types")
+
+	a.AddSDKServiceImport()
+	a.AddSDKServiceTypesImport()
 
 	if err := exampleHeader.ExecuteTemplate(&buf, "exampleHeader", &exHeader{builder, a}); err != nil {
 		panic(err)

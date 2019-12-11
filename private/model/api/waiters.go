@@ -47,10 +47,10 @@ func (a *API) WaitersGoCode() string {
 	var buf bytes.Buffer
 
 	a.resetImports()
-	a.AddSDKImport("service", a.PackageName(), "types")
-	a.AddSDKImport("aws")
 	a.AddImport("time")
 	a.AddImport("context")
+	a.AddSDKImport("aws")
+	a.AddSDKServiceTypesImport()
 
 	for _, w := range a.Waiters {
 		buf.WriteString(w.GoCode())

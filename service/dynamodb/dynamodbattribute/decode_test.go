@@ -1,7 +1,5 @@
 package dynamodbattribute
 
-// code generation? No
-
 import (
 	"fmt"
 	"reflect"
