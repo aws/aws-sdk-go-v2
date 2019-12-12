@@ -74,13 +74,13 @@ func (p partition) canResolveEndpoint(service, region string, strictMatch bool) 
 	return p.RegionRegex.MatchString(region)
 }
 
-func allowLegacyEmptyRegion(service string) bool {
-	legacy := map[string]struct{}{
-		"ec2metadata": {},
-	}
+var allowEmptyRegion = map[string]struct{}{
+	"ec2metadata": {},
+}
 
-	_, allowed := legacy[service]
-	return allowed
+func serviceRequiresRegion(service string) bool {
+	_, allowed := allowEmptyRegion[service]
+	return !allowed
 }
 
 func (p partition) EndpointFor(service, region string, opts ResolveOptions) (resolved aws.Endpoint, err error) {
@@ -91,7 +91,7 @@ func (p partition) EndpointFor(service, region string, opts ResolveOptions) (res
 		return resolved, NewUnknownServiceError(p.ID, service, serviceList(p.Services))
 	}
 
-	if len(region) == 0 && allowLegacyEmptyRegion(service) && len(s.PartitionEndpoint) != 0 {
+	if len(region) == 0 && !serviceRequiresRegion(service) && len(s.PartitionEndpoint) != 0 {
 		region = s.PartitionEndpoint
 	}
 
