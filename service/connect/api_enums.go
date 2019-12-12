@@ -7,6 +7,7 @@ type Channel string
 // Enum values for Channel
 const (
 	ChannelVoice Channel = "VOICE"
+	ChannelChat  Channel = "CHAT"
 )
 
 func (enum Channel) MarshalValue() (string, error) {
@@ -73,6 +74,9 @@ const (
 	CurrentMetricNameContactsInQueue        CurrentMetricName = "CONTACTS_IN_QUEUE"
 	CurrentMetricNameOldestContactAge       CurrentMetricName = "OLDEST_CONTACT_AGE"
 	CurrentMetricNameContactsScheduled      CurrentMetricName = "CONTACTS_SCHEDULED"
+	CurrentMetricNameAgentsOnContact        CurrentMetricName = "AGENTS_ON_CONTACT"
+	CurrentMetricNameSlotsActive            CurrentMetricName = "SLOTS_ACTIVE"
+	CurrentMetricNameSlotsAvailable         CurrentMetricName = "SLOTS_AVAILABLE"
 )
 
 func (enum CurrentMetricName) MarshalValue() (string, error) {

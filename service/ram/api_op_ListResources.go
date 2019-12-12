@@ -36,8 +36,9 @@ type ListResourcesInput struct {
 
 	// The resource type.
 	//
-	// Valid values: route53resolver:ResolverRule | ec2:TransitGateway | ec2:Subnet
-	// | license-manager:LicenseConfiguration
+	// Valid values: ec2:CapacityReservation | ec2:Subnet | ec2:TrafficMirrorTarget
+	// | ec2:TransitGateway | license-manager:LicenseConfiguration | rds:Cluster
+	// | route53resolver:ResolverRule | resource-groups:Group
 	ResourceType *string `locationName:"resourceType" type:"string"`
 }
 

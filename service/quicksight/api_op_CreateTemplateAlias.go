@@ -13,14 +13,15 @@ import (
 type CreateTemplateAliasInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name you want to give the template's alias. Alias names can't begin with
-	// a $, which is reserved by QuickSight. Alias names that start with ‘$’
-	// sign are QuickSight reserved naming and can't be deleted.
+	// The name that you want to give to the template alias that you're creating.
+	// Don't start the alias name with the $ character. Alias names that start with
+	// $ are reserved by QuickSight.
 	//
 	// AliasName is a required field
 	AliasName *string `location:"uri" locationName:"AliasName" min:"1" type:"string" required:"true"`
 
-	// AWS account ID that contains the template you are aliasing.
+	// The ID of the AWS account that contains the template that you creating an
+	// alias for.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -116,10 +117,10 @@ type CreateTemplateAliasOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
-	// Information on the template alias.
+	// Information about the template alias.
 	TemplateAlias *TemplateAlias `type:"structure"`
 }
 
@@ -152,11 +153,6 @@ const opCreateTemplateAlias = "CreateTemplateAlias"
 // Amazon QuickSight.
 //
 // Creates a template alias for a template.
-//
-// CLI syntax:
-//
-// aws quicksight create-template-alias --aws-account-id 111122223333 --template-id
-// 'reports_test_template' --alias-name PROD —version-number 1
 //
 //    // Example sending a request using CreateTemplateAliasRequest.
 //    req := client.CreateTemplateAliasRequest(params)

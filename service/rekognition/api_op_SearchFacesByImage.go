@@ -36,6 +36,20 @@ type SearchFacesByImageInput struct {
 	// Maximum number of faces to return. The operation returns the maximum number
 	// of faces with the highest confidence in the match.
 	MaxFaces *int64 `min:"1" type:"integer"`
+
+	// A filter that specifies a quality bar for how much filtering is done to identify
+	// faces. Filtered faces aren't searched for in the collection. If you specify
+	// AUTO, Amazon Rekognition chooses the quality bar. If you specify LOW, MEDIUM,
+	// or HIGH, filtering removes all faces that don’t meet the chosen quality
+	// bar. The quality bar is based on a variety of common use cases. Low-quality
+	// detections can occur for a number of reasons. Some examples are an object
+	// that's misidentified as a face, a face that's too blurry, or a face with
+	// a pose that's too extreme to use. If you specify NONE, no filtering is performed.
+	// The default value is NONE.
+	//
+	// To use quality filtering, the collection you are using must be associated
+	// with version 3 of the face model or higher.
+	QualityFilter QualityFilter `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -128,6 +142,16 @@ const opSearchFacesByImage = "SearchFacesByImage"
 //
 // For an example, Searching for a Face Using an Image in the Amazon Rekognition
 // Developer Guide.
+//
+// The QualityFilter input parameter allows you to filter out detected faces
+// that don’t meet a required quality bar. The quality bar is based on a variety
+// of common use cases. Use QualityFilter to set the quality bar for filtering
+// by specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected
+// faces, specify NONE. The default value is NONE.
+//
+// To use quality filtering, you need a collection associated with version 3
+// of the face model or higher. To get the version of the face model associated
+// with a collection, call DescribeCollection.
 //
 // This operation requires permissions to perform the rekognition:SearchFacesByImage
 // action.

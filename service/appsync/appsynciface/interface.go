@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AWSAppSync.
 //    func myFunc(svc appsynciface.ClientAPI) bool {
-//        // Make svc.CreateApiKey request
+//        // Make svc.CreateApiCache request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        appsynciface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateApiKey(input *appsync.CreateApiKeyInput) (*appsync.CreateApiKeyOutput, error) {
+//    func (m *mockClientClient) CreateApiCache(input *appsync.CreateApiCacheInput) (*appsync.CreateApiCacheOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,6 +61,8 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	CreateApiCacheRequest(*appsync.CreateApiCacheInput) appsync.CreateApiCacheRequest
+
 	CreateApiKeyRequest(*appsync.CreateApiKeyInput) appsync.CreateApiKeyRequest
 
 	CreateDataSourceRequest(*appsync.CreateDataSourceInput) appsync.CreateDataSourceRequest
@@ -73,6 +75,8 @@ type ClientAPI interface {
 
 	CreateTypeRequest(*appsync.CreateTypeInput) appsync.CreateTypeRequest
 
+	DeleteApiCacheRequest(*appsync.DeleteApiCacheInput) appsync.DeleteApiCacheRequest
+
 	DeleteApiKeyRequest(*appsync.DeleteApiKeyInput) appsync.DeleteApiKeyRequest
 
 	DeleteDataSourceRequest(*appsync.DeleteDataSourceInput) appsync.DeleteDataSourceRequest
@@ -84,6 +88,10 @@ type ClientAPI interface {
 	DeleteResolverRequest(*appsync.DeleteResolverInput) appsync.DeleteResolverRequest
 
 	DeleteTypeRequest(*appsync.DeleteTypeInput) appsync.DeleteTypeRequest
+
+	FlushApiCacheRequest(*appsync.FlushApiCacheInput) appsync.FlushApiCacheRequest
+
+	GetApiCacheRequest(*appsync.GetApiCacheInput) appsync.GetApiCacheRequest
 
 	GetDataSourceRequest(*appsync.GetDataSourceInput) appsync.GetDataSourceRequest
 
@@ -120,6 +128,8 @@ type ClientAPI interface {
 	TagResourceRequest(*appsync.TagResourceInput) appsync.TagResourceRequest
 
 	UntagResourceRequest(*appsync.UntagResourceInput) appsync.UntagResourceRequest
+
+	UpdateApiCacheRequest(*appsync.UpdateApiCacheInput) appsync.UpdateApiCacheRequest
 
 	UpdateApiKeyRequest(*appsync.UpdateApiKeyInput) appsync.UpdateApiKeyRequest
 

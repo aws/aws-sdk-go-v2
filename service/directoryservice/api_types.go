@@ -41,6 +41,53 @@ func (s *Attribute) Validate() error {
 	return nil
 }
 
+// Information about the certificate.
+type Certificate struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the certificate.
+	CertificateId *string `type:"string"`
+
+	// The common name for the certificate.
+	CommonName *string `type:"string"`
+
+	// The date and time when the certificate will expire.
+	ExpiryDateTime *time.Time `type:"timestamp"`
+
+	// The date and time that the certificate was registered.
+	RegisteredDateTime *time.Time `type:"timestamp"`
+
+	// The state of the certificate.
+	State CertificateState `type:"string" enum:"true"`
+
+	// Describes a state change for the certificate.
+	StateReason *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Certificate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Contains general information about a certificate.
+type CertificateInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the certificate.
+	CertificateId *string `type:"string"`
+
+	// The common name for the certificate.
+	CommonName *string `type:"string"`
+
+	// The state of the certificate.
+	State CertificateState `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s CertificateInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Contains information about a computer account in a directory.
 type Computer struct {
 	_ struct{} `type:"structure"`
@@ -171,7 +218,7 @@ type DirectoryConnectSettingsDescription struct {
 	// The security group identifier for the AD Connector directory.
 	SecurityGroupId *string `type:"string"`
 
-	// A list of subnet identifiers in the VPC that the AD connector is in.
+	// A list of subnet identifiers in the VPC that the AD Connector is in.
 	SubnetIds []string `type:"list"`
 
 	// The identifier of the VPC that the AD Connector is in.
@@ -201,7 +248,7 @@ type DirectoryDescription struct {
 	// is an AD Connector directory.
 	ConnectSettings *DirectoryConnectSettingsDescription `type:"structure"`
 
-	// The textual description for the directory.
+	// The description for the directory.
 	Description *string `type:"string"`
 
 	// The desired number of domain controllers in the directory if the directory
@@ -283,14 +330,14 @@ func (s DirectoryDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Contains directory limit information for a region.
+// Contains directory limit information for a Region.
 type DirectoryLimits struct {
 	_ struct{} `type:"structure"`
 
-	// The current number of cloud directories in the region.
+	// The current number of cloud directories in the Region.
 	CloudOnlyDirectoriesCurrentCount *int64 `type:"integer"`
 
-	// The maximum number of cloud directories allowed in the region.
+	// The maximum number of cloud directories allowed in the Region.
 	CloudOnlyDirectoriesLimit *int64 `type:"integer"`
 
 	// Indicates if the cloud directory limit has been reached.
@@ -306,10 +353,10 @@ type DirectoryLimits struct {
 	// Indicates if the AWS Managed Microsoft AD directory limit has been reached.
 	CloudOnlyMicrosoftADLimitReached *bool `type:"boolean"`
 
-	// The current number of connected directories in the region.
+	// The current number of connected directories in the Region.
 	ConnectedDirectoriesCurrentCount *int64 `type:"integer"`
 
-	// The maximum number of connected directories allowed in the region.
+	// The maximum number of connected directories allowed in the Region.
 	ConnectedDirectoriesLimit *int64 `type:"integer"`
 
 	// Indicates if the connected directory limit has been reached.
@@ -493,6 +540,25 @@ type IpRouteInfo struct {
 
 // String returns the string representation
 func (s IpRouteInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Contains general information about the LDAPS settings.
+type LDAPSSettingInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The state of the LDAPS settings.
+	LDAPSStatus LDAPSStatus `type:"string" enum:"true"`
+
+	// Describes a state change for LDAPS.
+	LDAPSStatusReason *string `type:"string"`
+
+	// The date and time when the LDAPS settings were last updated.
+	LastUpdatedDateTime *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation
+func (s LDAPSSettingInfo) String() string {
 	return awsutil.Prettify(s)
 }
 

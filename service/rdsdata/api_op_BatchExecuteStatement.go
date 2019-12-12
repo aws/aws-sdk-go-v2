@@ -19,6 +19,8 @@ type BatchExecuteStatementInput struct {
 	Database *string `locationName:"database" type:"string"`
 
 	// The parameter set for the batch operation.
+	//
+	// The maximum number of parameters in a parameter set is 1,000.
 	ParameterSets [][]SqlParameter `locationName:"parameterSets" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.

@@ -12,16 +12,25 @@ import (
 type ListUsageForLicenseConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
-	// List of filters to apply.
+	// Filters to scope the results. The following filters and logical operators
+	// are supported:
+	//
+	//    * resourceArn - The ARN of the license configuration resource. Logical
+	//    operators are EQUALS | NOT_EQUALS.
+	//
+	//    * resourceType - The resource type (EC2_INSTANCE | EC2_HOST | EC2_AMI
+	//    | SYSTEMS_MANAGER_MANAGED_INSTANCE). Logical operators are EQUALS | NOT_EQUALS.
+	//
+	//    * resourceAccount - The ID of the account that owns the resource. Logical
+	//    operators are EQUALS | NOT_EQUALS.
 	Filters []Filter `type:"list"`
 
-	// ARN of the targeted LicenseConfiguration object.
+	// Amazon Resource Name (ARN) of the license configuration.
 	//
 	// LicenseConfigurationArn is a required field
 	LicenseConfigurationArn *string `type:"string" required:"true"`
 
-	// Maximum number of results to return in a single call. To retrieve the remaining
-	// results, make another call with the returned NextToken value.
+	// Maximum number of results to return in a single call.
 	MaxResults *int64 `type:"integer"`
 
 	// Token for the next set of results.
@@ -50,7 +59,7 @@ func (s *ListUsageForLicenseConfigurationInput) Validate() error {
 type ListUsageForLicenseConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An array of LicenseConfigurationUsage objects.
+	// Information about the license configurations.
 	LicenseConfigurationUsageList []LicenseConfigurationUsage `type:"list"`
 
 	// Token for the next set of results.

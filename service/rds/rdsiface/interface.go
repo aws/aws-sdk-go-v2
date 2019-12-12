@@ -104,6 +104,8 @@ type ClientAPI interface {
 
 	CreateDBParameterGroupRequest(*rds.CreateDBParameterGroupInput) rds.CreateDBParameterGroupRequest
 
+	CreateDBProxyRequest(*rds.CreateDBProxyInput) rds.CreateDBProxyRequest
+
 	CreateDBSecurityGroupRequest(*rds.CreateDBSecurityGroupInput) rds.CreateDBSecurityGroupRequest
 
 	CreateDBSnapshotRequest(*rds.CreateDBSnapshotInput) rds.CreateDBSnapshotRequest
@@ -132,6 +134,8 @@ type ClientAPI interface {
 
 	DeleteDBParameterGroupRequest(*rds.DeleteDBParameterGroupInput) rds.DeleteDBParameterGroupRequest
 
+	DeleteDBProxyRequest(*rds.DeleteDBProxyInput) rds.DeleteDBProxyRequest
+
 	DeleteDBSecurityGroupRequest(*rds.DeleteDBSecurityGroupInput) rds.DeleteDBSecurityGroupRequest
 
 	DeleteDBSnapshotRequest(*rds.DeleteDBSnapshotInput) rds.DeleteDBSnapshotRequest
@@ -145,6 +149,8 @@ type ClientAPI interface {
 	DeleteInstallationMediaRequest(*rds.DeleteInstallationMediaInput) rds.DeleteInstallationMediaRequest
 
 	DeleteOptionGroupRequest(*rds.DeleteOptionGroupInput) rds.DeleteOptionGroupRequest
+
+	DeregisterDBProxyTargetsRequest(*rds.DeregisterDBProxyTargetsInput) rds.DeregisterDBProxyTargetsRequest
 
 	DescribeAccountAttributesRequest(*rds.DescribeAccountAttributesInput) rds.DescribeAccountAttributesRequest
 
@@ -177,6 +183,12 @@ type ClientAPI interface {
 	DescribeDBParameterGroupsRequest(*rds.DescribeDBParameterGroupsInput) rds.DescribeDBParameterGroupsRequest
 
 	DescribeDBParametersRequest(*rds.DescribeDBParametersInput) rds.DescribeDBParametersRequest
+
+	DescribeDBProxiesRequest(*rds.DescribeDBProxiesInput) rds.DescribeDBProxiesRequest
+
+	DescribeDBProxyTargetGroupsRequest(*rds.DescribeDBProxyTargetGroupsInput) rds.DescribeDBProxyTargetGroupsRequest
+
+	DescribeDBProxyTargetsRequest(*rds.DescribeDBProxyTargetsInput) rds.DescribeDBProxyTargetsRequest
 
 	DescribeDBSecurityGroupsRequest(*rds.DescribeDBSecurityGroupsInput) rds.DescribeDBSecurityGroupsRequest
 
@@ -238,6 +250,10 @@ type ClientAPI interface {
 
 	ModifyDBParameterGroupRequest(*rds.ModifyDBParameterGroupInput) rds.ModifyDBParameterGroupRequest
 
+	ModifyDBProxyRequest(*rds.ModifyDBProxyInput) rds.ModifyDBProxyRequest
+
+	ModifyDBProxyTargetGroupRequest(*rds.ModifyDBProxyTargetGroupInput) rds.ModifyDBProxyTargetGroupRequest
+
 	ModifyDBSnapshotRequest(*rds.ModifyDBSnapshotInput) rds.ModifyDBSnapshotRequest
 
 	ModifyDBSnapshotAttributeRequest(*rds.ModifyDBSnapshotAttributeInput) rds.ModifyDBSnapshotAttributeRequest
@@ -257,6 +273,8 @@ type ClientAPI interface {
 	PurchaseReservedDBInstancesOfferingRequest(*rds.PurchaseReservedDBInstancesOfferingInput) rds.PurchaseReservedDBInstancesOfferingRequest
 
 	RebootDBInstanceRequest(*rds.RebootDBInstanceInput) rds.RebootDBInstanceRequest
+
+	RegisterDBProxyTargetsRequest(*rds.RegisterDBProxyTargetsInput) rds.RegisterDBProxyTargetsRequest
 
 	RemoveFromGlobalClusterRequest(*rds.RemoveFromGlobalClusterInput) rds.RemoveFromGlobalClusterRequest
 

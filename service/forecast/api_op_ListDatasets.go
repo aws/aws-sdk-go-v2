@@ -65,8 +65,8 @@ const opListDatasets = "ListDatasets"
 //
 // Returns a list of datasets created using the CreateDataset operation. For
 // each dataset, a summary of its properties, including its Amazon Resource
-// Name (ARN), is returned. You can retrieve the complete set of properties
-// by using the ARN with the DescribeDataset operation.
+// Name (ARN), is returned. To retrieve the complete set of properties, use
+// the ARN with the DescribeDataset operation.
 //
 //    // Example sending a request using ListDatasetsRequest.
 //    req := client.ListDatasetsRequest(params)

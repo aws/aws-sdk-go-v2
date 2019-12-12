@@ -3,6 +3,7 @@
 package cognitoidentityprovider
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -11,6 +12,39 @@ import (
 
 var _ aws.Config
 var _ = awsutil.Prettify
+
+// The data type for AccountRecoverySetting.
+type AccountRecoverySettingType struct {
+	_ struct{} `type:"structure"`
+
+	// The list of RecoveryOptionTypes.
+	RecoveryMechanisms []RecoveryOptionType `min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s AccountRecoverySettingType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AccountRecoverySettingType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AccountRecoverySettingType"}
+	if s.RecoveryMechanisms != nil && len(s.RecoveryMechanisms) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RecoveryMechanisms", 1))
+	}
+	if s.RecoveryMechanisms != nil {
+		for i, v := range s.RecoveryMechanisms {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RecoveryMechanisms", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
 
 // Account takeover action type.
 type AccountTakeoverActionType struct {
@@ -1318,6 +1352,47 @@ func (s *ProviderUserIdentifierType) Validate() error {
 	return nil
 }
 
+// A map containing a priority as a key, and recovery method name as a value.
+type RecoveryOptionType struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the recovery method for a user.
+	//
+	// Name is a required field
+	Name RecoveryOptionNameType `type:"string" required:"true" enum:"true"`
+
+	// A positive integer specifying priority of a method with 1 being the highest
+	// priority.
+	//
+	// Priority is a required field
+	Priority *int64 `min:"1" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s RecoveryOptionType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RecoveryOptionType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RecoveryOptionType"}
+	if len(s.Name) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if s.Priority == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Priority"))
+	}
+	if s.Priority != nil && *s.Priority < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Priority", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // A resource server scope.
 type ResourceServerScopeType struct {
 	_ struct{} `type:"structure"`
@@ -2021,6 +2096,15 @@ func (s *UserPoolPolicyType) Validate() error {
 // A container for information about the user pool.
 type UserPoolType struct {
 	_ struct{} `type:"structure"`
+
+	// Use this setting to define which verified available method a user can use
+	// to recover their password when they call ForgotPassword. It allows you to
+	// define a preferred method when a user has more than one method available.
+	// With this setting, SMS does not qualify for a valid password recovery mechanism
+	// if the user also has SMS MFA enabled. In the absence of this setting, Cognito
+	// uses the legacy behavior to determine the recovery method where SMS is preferred
+	// over email.
+	AccountRecoverySetting *AccountRecoverySettingType `type:"structure"`
 
 	// The configuration for AdminCreateUser requests.
 	AdminCreateUserConfig *AdminCreateUserConfigType `type:"structure"`

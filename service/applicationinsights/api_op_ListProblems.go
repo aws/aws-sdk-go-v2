@@ -25,7 +25,7 @@ type ListProblemsInput struct {
 	NextToken *string `type:"string"`
 
 	// The name of the resource group.
-	ResourceGroupName *string `type:"string"`
+	ResourceGroupName *string `min:"1" type:"string"`
 
 	// The time when the problem was detected, in epoch seconds. If you don't specify
 	// a time frame for the request, problems within the past seven days are returned.
@@ -42,6 +42,9 @@ func (s *ListProblemsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListProblemsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.ResourceGroupName != nil && len(*s.ResourceGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceGroupName", 1))
 	}
 
 	if invalidParams.Len() > 0 {

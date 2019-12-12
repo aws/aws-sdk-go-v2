@@ -53,9 +53,12 @@ const opDescribeOrganizationConformancePacks = "DescribeOrganizationConformanceP
 // Returns a list of organization conformance packs.
 //
 // When you specify the limit and the next token, you receive a paginated response.
+//
 // Limit and next token are not applicable if you specify organization conformance
 // packs names. They are only applicable, when you request all the organization
-// conformance packs. Only a master account can call this API.
+// conformance packs.
+//
+// Only a master account can call this API.
 //
 //    // Example sending a request using DescribeOrganizationConformancePacksRequest.
 //    req := client.DescribeOrganizationConformancePacksRequest(params)

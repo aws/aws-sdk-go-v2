@@ -79,6 +79,8 @@ type ClientAPI interface {
 
 	DeleteEmailIdentityRequest(*sesv2.DeleteEmailIdentityInput) sesv2.DeleteEmailIdentityRequest
 
+	DeleteSuppressedDestinationRequest(*sesv2.DeleteSuppressedDestinationInput) sesv2.DeleteSuppressedDestinationRequest
+
 	GetAccountRequest(*sesv2.GetAccountInput) sesv2.GetAccountRequest
 
 	GetBlacklistReportsRequest(*sesv2.GetBlacklistReportsInput) sesv2.GetBlacklistReportsRequest
@@ -101,6 +103,8 @@ type ClientAPI interface {
 
 	GetEmailIdentityRequest(*sesv2.GetEmailIdentityInput) sesv2.GetEmailIdentityRequest
 
+	GetSuppressedDestinationRequest(*sesv2.GetSuppressedDestinationInput) sesv2.GetSuppressedDestinationRequest
+
 	ListConfigurationSetsRequest(*sesv2.ListConfigurationSetsInput) sesv2.ListConfigurationSetsRequest
 
 	ListDedicatedIpPoolsRequest(*sesv2.ListDedicatedIpPoolsInput) sesv2.ListDedicatedIpPoolsRequest
@@ -111,17 +115,23 @@ type ClientAPI interface {
 
 	ListEmailIdentitiesRequest(*sesv2.ListEmailIdentitiesInput) sesv2.ListEmailIdentitiesRequest
 
+	ListSuppressedDestinationsRequest(*sesv2.ListSuppressedDestinationsInput) sesv2.ListSuppressedDestinationsRequest
+
 	ListTagsForResourceRequest(*sesv2.ListTagsForResourceInput) sesv2.ListTagsForResourceRequest
 
 	PutAccountDedicatedIpWarmupAttributesRequest(*sesv2.PutAccountDedicatedIpWarmupAttributesInput) sesv2.PutAccountDedicatedIpWarmupAttributesRequest
 
 	PutAccountSendingAttributesRequest(*sesv2.PutAccountSendingAttributesInput) sesv2.PutAccountSendingAttributesRequest
 
+	PutAccountSuppressionAttributesRequest(*sesv2.PutAccountSuppressionAttributesInput) sesv2.PutAccountSuppressionAttributesRequest
+
 	PutConfigurationSetDeliveryOptionsRequest(*sesv2.PutConfigurationSetDeliveryOptionsInput) sesv2.PutConfigurationSetDeliveryOptionsRequest
 
 	PutConfigurationSetReputationOptionsRequest(*sesv2.PutConfigurationSetReputationOptionsInput) sesv2.PutConfigurationSetReputationOptionsRequest
 
 	PutConfigurationSetSendingOptionsRequest(*sesv2.PutConfigurationSetSendingOptionsInput) sesv2.PutConfigurationSetSendingOptionsRequest
+
+	PutConfigurationSetSuppressionOptionsRequest(*sesv2.PutConfigurationSetSuppressionOptionsInput) sesv2.PutConfigurationSetSuppressionOptionsRequest
 
 	PutConfigurationSetTrackingOptionsRequest(*sesv2.PutConfigurationSetTrackingOptionsInput) sesv2.PutConfigurationSetTrackingOptionsRequest
 
@@ -136,6 +146,8 @@ type ClientAPI interface {
 	PutEmailIdentityFeedbackAttributesRequest(*sesv2.PutEmailIdentityFeedbackAttributesInput) sesv2.PutEmailIdentityFeedbackAttributesRequest
 
 	PutEmailIdentityMailFromAttributesRequest(*sesv2.PutEmailIdentityMailFromAttributesInput) sesv2.PutEmailIdentityMailFromAttributesRequest
+
+	PutSuppressedDestinationRequest(*sesv2.PutSuppressedDestinationInput) sesv2.PutSuppressedDestinationRequest
 
 	SendEmailRequest(*sesv2.SendEmailInput) sesv2.SendEmailRequest
 

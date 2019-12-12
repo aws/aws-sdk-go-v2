@@ -94,7 +94,7 @@ type DeleteUserOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -123,11 +123,6 @@ const opDeleteUser = "DeleteUser"
 // Deletes the Amazon QuickSight user that is associated with the identity of
 // the AWS Identity and Access Management (IAM) user or role that's making the
 // call. The IAM user isn't deleted as a result of this call.
-//
-// CLI Sample:
-//
-// aws quicksight delete-user --aws-account-id=111122223333 --namespace=default
-// --user-name=Pat
 //
 //    // Example sending a request using DeleteUserRequest.
 //    req := client.DeleteUserRequest(params)

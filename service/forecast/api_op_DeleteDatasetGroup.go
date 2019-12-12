@@ -53,11 +53,11 @@ const opDeleteDatasetGroup = "DeleteDatasetGroup"
 // DeleteDatasetGroupRequest returns a request value for making API operation for
 // Amazon Forecast Service.
 //
-// Deletes a dataset group created using the CreateDatasetGroup operation. To
-// be deleted, the dataset group must have a status of ACTIVE, CREATE_FAILED,
-// or UPDATE_FAILED. Use the DescribeDatasetGroup operation to get the status.
+// Deletes a dataset group created using the CreateDatasetGroup operation. You
+// can only delete dataset groups that have a status of ACTIVE, CREATE_FAILED,
+// or UPDATE_FAILED. To get the status, use the DescribeDatasetGroup operation.
 //
-// The operation deletes only the dataset group, not the datasets in the group.
+// This operation deletes only the dataset group, not the datasets in the group.
 //
 //    // Example sending a request using DeleteDatasetGroupRequest.
 //    req := client.DeleteDatasetGroupRequest(params)

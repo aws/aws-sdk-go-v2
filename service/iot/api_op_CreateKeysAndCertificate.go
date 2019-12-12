@@ -94,7 +94,8 @@ const opCreateKeysAndCertificate = "CreateKeysAndCertificate"
 // AWS IoT.
 //
 // Creates a 2048-bit RSA key pair and issues an X.509 certificate using the
-// issued public key.
+// issued public key. You can also call CreateKeysAndCertificate over MQTT from
+// a device, for more information, see Provisioning MQTT API (https://docs.aws.amazon.com/iot/latest/developerguide/provision-wo-cert.html#provision-mqtt-api).
 //
 // Note This is the only time AWS IoT issues the private key for this certificate,
 // so it is important to keep it in a secure location.

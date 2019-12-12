@@ -54,8 +54,8 @@ const opDeleteForecastExportJob = "DeleteForecastExportJob"
 // Amazon Forecast Service.
 //
 // Deletes a forecast export job created using the CreateForecastExportJob operation.
-// To be deleted, the export job must have a status of ACTIVE or CREATE_FAILED.
-// Use the DescribeForecastExportJob operation to get the status.
+// You can delete only export jobs that have a status of ACTIVE or CREATE_FAILED.
+// To get the status, use the DescribeForecastExportJob operation.
 //
 //    // Example sending a request using DeleteForecastExportJobRequest.
 //    req := client.DeleteForecastExportJobRequest(params)

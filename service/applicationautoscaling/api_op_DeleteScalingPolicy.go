@@ -33,21 +33,29 @@ type DeleteScalingPolicyInput struct {
 	//    is the fleet name. Example: fleet/sample-fleet.
 	//
 	//    * DynamoDB table - The resource type is table and the unique identifier
-	//    is the resource ID. Example: table/my-table.
+	//    is the table name. Example: table/my-table.
 	//
 	//    * DynamoDB global secondary index - The resource type is index and the
-	//    unique identifier is the resource ID. Example: table/my-table/index/my-table-index.
+	//    unique identifier is the index name. Example: table/my-table/index/my-table-index.
 	//
 	//    * Aurora DB cluster - The resource type is cluster and the unique identifier
 	//    is the cluster name. Example: cluster:my-db-cluster.
 	//
-	//    * Amazon SageMaker endpoint variants - The resource type is variant and
+	//    * Amazon SageMaker endpoint variant - The resource type is variant and
 	//    the unique identifier is the resource ID. Example: endpoint/my-end-point/variant/KMeansClustering.
 	//
 	//    * Custom resources are not supported with a resource type. This parameter
 	//    must specify the OutputValue from the CloudFormation template stack used
 	//    to access the resources. The unique identifier is defined by the service
 	//    provider. More information is available in our GitHub repository (https://github.com/aws/aws-auto-scaling-custom-resource).
+	//
+	//    * Amazon Comprehend document classification endpoint - The resource type
+	//    and unique identifier are specified using the endpoint ARN. Example: arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE.
+	//
+	//    * Lambda provisioned concurrency - The resource type is function and the
+	//    unique identifier is the function name with a function version or alias
+	//    name suffix that is not $LATEST. Example: function:my-function:prod or
+	//    function:my-function:1.
 	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
@@ -87,6 +95,13 @@ type DeleteScalingPolicyInput struct {
 	//
 	//    * custom-resource:ResourceType:Property - The scalable dimension for a
 	//    custom resource provided by your own application or service.
+	//
+	//    * comprehend:document-classifier-endpoint:DesiredInferenceUnits - The
+	//    number of inference units for an Amazon Comprehend document classification
+	//    endpoint.
+	//
+	//    * lambda:function:ProvisionedConcurrency - The provisioned concurrency
+	//    for a Lambda function.
 	//
 	// ScalableDimension is a required field
 	ScalableDimension ScalableDimension `type:"string" required:"true" enum:"true"`

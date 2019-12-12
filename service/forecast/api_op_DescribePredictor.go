@@ -51,7 +51,7 @@ type DescribePredictorOutput struct {
 	// When the model training task was created.
 	CreationTime *time.Time `type:"timestamp"`
 
-	// An array of ARNs of the dataset import jobs used to import training data
+	// An array of the ARNs of the dataset import jobs used to import training data
 	// for the predictor.
 	DatasetImportJobArns []string `type:"list"`
 
@@ -78,9 +78,10 @@ type DescribePredictorOutput struct {
 	// Describes the dataset group that contains the data to use to train the predictor.
 	InputDataConfig *InputDataConfig `type:"structure"`
 
-	// Initially, the same as CreationTime (status is CREATE_PENDING). Updated when
-	// training starts (status changed to CREATE_IN_PROGRESS), and when training
-	// is complete (status changed to ACTIVE) or fails (status changed to CREATE_FAILED).
+	// Initially, the same as CreationTime (when the status is CREATE_PENDING).
+	// This value is updated when training starts (when the status changes to CREATE_IN_PROGRESS),
+	// and when training has completed (when the status changes to ACTIVE) or fails
+	// (when the status changes to CREATE_FAILED).
 	LastModificationTime *time.Time `type:"timestamp"`
 
 	// If an error occurred, an informational message about the error.
@@ -89,11 +90,16 @@ type DescribePredictorOutput struct {
 	// Whether the predictor is set to perform AutoML.
 	PerformAutoML *bool `type:"boolean"`
 
-	// Whether the predictor is set to perform HPO.
+	// Whether the predictor is set to perform hyperparameter optimization (HPO).
 	PerformHPO *bool `type:"boolean"`
 
 	// The ARN of the predictor.
 	PredictorArn *string `min:"1" type:"string"`
+
+	// Details on the the status and results of the backtests performed to evaluate
+	// the accuracy of the predictor. You specify the number of backtests to perform
+	// when you call the operation.
+	PredictorExecutionDetails *PredictorExecutionDetails `type:"structure"`
 
 	// The name of the predictor.
 	PredictorName *string `min:"1" type:"string"`
@@ -108,12 +114,14 @@ type DescribePredictorOutput struct {
 	//
 	//    * UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED
 	//
-	// The Status of the predictor must be ACTIVE before using the predictor to
-	// create a forecast.
+	// The Status of the predictor must be ACTIVE before you can use the predictor
+	// to create a forecast.
 	Status *string `type:"string"`
 
-	// The training parameters to override for model training. The parameters that
-	// you can override are listed in the individual algorithms in aws-forecast-choosing-recipes.
+	// The default training parameters or overrides selected during model training.
+	// If using the AutoML algorithm or if HPO is turned on while using the DeepAR+
+	// algorithms, the optimized values for the chosen hyperparameters are returned.
+	// For more information, see aws-forecast-choosing-recipes.
 	TrainingParameters map[string]string `type:"map"`
 }
 
@@ -129,13 +137,14 @@ const opDescribePredictor = "DescribePredictor"
 //
 // Describes a predictor created using the CreatePredictor operation.
 //
-// In addition to listing the properties provided by the user in the CreatePredictor
-// request, this operation includes the following properties:
+// In addition to listing the properties provided in the CreatePredictor request,
+// this operation lists the following properties:
 //
 //    * DatasetImportJobArns - The dataset import jobs used to import training
 //    data.
 //
-//    * AutoMLAlgorithmArns - If AutoML is performed, the algorithms evaluated.
+//    * AutoMLAlgorithmArns - If AutoML is performed, the algorithms that were
+//    evaluated.
 //
 //    * CreationTime
 //

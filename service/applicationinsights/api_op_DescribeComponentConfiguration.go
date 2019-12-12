@@ -20,7 +20,7 @@ type DescribeComponentConfigurationInput struct {
 	// The name of the resource group.
 	//
 	// ResourceGroupName is a required field
-	ResourceGroupName *string `type:"string" required:"true"`
+	ResourceGroupName *string `min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -39,6 +39,9 @@ func (s *DescribeComponentConfigurationInput) Validate() error {
 	if s.ResourceGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupName"))
 	}
+	if s.ResourceGroupName != nil && len(*s.ResourceGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceGroupName", 1))
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -51,14 +54,14 @@ type DescribeComponentConfigurationOutput struct {
 
 	// The configuration settings of the component. The value is the escaped JSON
 	// of the configuration.
-	ComponentConfiguration *string `type:"string"`
+	ComponentConfiguration *string `min:"1" type:"string"`
 
 	// Indicates whether the application component is monitored.
 	Monitor *bool `type:"boolean"`
 
-	// The tier of the application component. Supported tiers include DOT_NET_WORKER,
-	// DOT_NET_WEB, SQL_SERVER, and DEFAULT
-	Tier *string `type:"string"`
+	// The tier of the application component. Supported tiers include DOT_NET_CORE,
+	// DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER, and DEFAULT
+	Tier Tier `min:"1" type:"string" enum:"true"`
 }
 
 // String returns the string representation

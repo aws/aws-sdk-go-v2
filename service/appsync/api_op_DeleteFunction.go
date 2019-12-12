@@ -21,7 +21,7 @@ type DeleteFunctionInput struct {
 	// The Function ID.
 	//
 	// FunctionId is a required field
-	FunctionId *string `location:"uri" locationName:"functionId" type:"string" required:"true"`
+	FunctionId *string `location:"uri" locationName:"functionId" min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -39,6 +39,9 @@ func (s *DeleteFunctionInput) Validate() error {
 
 	if s.FunctionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionId"))
+	}
+	if s.FunctionId != nil && len(*s.FunctionId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {

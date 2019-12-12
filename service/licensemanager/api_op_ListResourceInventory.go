@@ -13,11 +13,27 @@ import (
 type ListResourceInventoryInput struct {
 	_ struct{} `type:"structure"`
 
-	// One or more filters.
+	// Filters to scope the results. The following filters and logical operators
+	// are supported:
+	//
+	//    * account_id - The ID of the AWS account that owns the resource. Logical
+	//    operators are EQUALS | NOT_EQUALS.
+	//
+	//    * application_name - The name of the application. Logical operators are
+	//    EQUALS | BEGINS_WITH.
+	//
+	//    * license_included - The type of license included. Logical operators are
+	//    EQUALS | NOT_EQUALS. Possible values are sql-server-enterprise | sql-server-standard
+	//    | sql-server-web | windows-server-datacenter.
+	//
+	//    * platform - The platform of the resource. Logical operators are EQUALS
+	//    | BEGINS_WITH.
+	//
+	//    * resource_id - The ID of the resource. Logical operators are EQUALS |
+	//    NOT_EQUALS.
 	Filters []InventoryFilter `type:"list"`
 
-	// Maximum number of results to return in a single call. To retrieve the remaining
-	// results, make another call with the returned NextToken value.
+	// Maximum number of results to return in a single call.
 	MaxResults *int64 `type:"integer"`
 
 	// Token for the next set of results.
@@ -52,7 +68,7 @@ type ListResourceInventoryOutput struct {
 	// Token for the next set of results.
 	NextToken *string `type:"string"`
 
-	// The detailed list of resources.
+	// Information about the resources.
 	ResourceInventoryList []ResourceInventory `type:"list"`
 }
 
@@ -66,7 +82,7 @@ const opListResourceInventory = "ListResourceInventory"
 // ListResourceInventoryRequest returns a request value for making API operation for
 // AWS License Manager.
 //
-// Returns a detailed list of resources.
+// Lists resources managed using Systems Manager inventory.
 //
 //    // Example sending a request using ListResourceInventoryRequest.
 //    req := client.ListResourceInventoryRequest(params)

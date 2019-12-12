@@ -2,6 +2,26 @@
 
 package comprehend
 
+type EndpointStatus string
+
+// Enum values for EndpointStatus
+const (
+	EndpointStatusCreating  EndpointStatus = "CREATING"
+	EndpointStatusDeleting  EndpointStatus = "DELETING"
+	EndpointStatusFailed    EndpointStatus = "FAILED"
+	EndpointStatusInService EndpointStatus = "IN_SERVICE"
+	EndpointStatusUpdating  EndpointStatus = "UPDATING"
+)
+
+func (enum EndpointStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EndpointStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EntityType string
 
 // Enum values for EntityType

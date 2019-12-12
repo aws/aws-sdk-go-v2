@@ -54,8 +54,8 @@ const opDeleteDatasetImportJob = "DeleteDatasetImportJob"
 // Amazon Forecast Service.
 //
 // Deletes a dataset import job created using the CreateDatasetImportJob operation.
-// To be deleted, the import job must have a status of ACTIVE or CREATE_FAILED.
-// Use the DescribeDatasetImportJob operation to get the status.
+// You can delete only dataset import jobs that have a status of ACTIVE or CREATE_FAILED.
+// To get the status, use the DescribeDatasetImportJob operation.
 //
 //    // Example sending a request using DeleteDatasetImportJobRequest.
 //    req := client.DeleteDatasetImportJobRequest(params)

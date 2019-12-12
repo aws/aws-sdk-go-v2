@@ -3,6 +3,7 @@
 package licensemanager
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,14 +13,27 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Describes automated discovery.
+type AutomatedDiscoveryInformation struct {
+	_ struct{} `type:"structure"`
+
+	// Time that automated discovery last ran.
+	LastRunTime *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation
+func (s AutomatedDiscoveryInformation) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Details about license consumption.
 type ConsumedLicenseSummary struct {
 	_ struct{} `type:"structure"`
 
-	// Number of licenses consumed by a resource.
+	// Number of licenses consumed by the resource.
 	ConsumedLicenses *int64 `type:"long"`
 
-	// Resource type of the resource consuming a license (instance, host, or AMI).
+	// Resource type of the resource consuming a license.
 	ResourceType ResourceType `type:"string" enum:"true"`
 }
 
@@ -28,18 +42,16 @@ func (s ConsumedLicenseSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// A filter name and value pair that is used to return a more specific list
-// of results from a describe operation. Filters can be used to match a set
-// of resources by specific criteria, such as tags, attributes, or IDs. The
-// filters supported by a Describe operation are documented with the Describe
-// operation.
+// A filter name and value pair that is used to return more specific results
+// from a describe operation. Filters can be used to match a set of resources
+// by specific criteria, such as tags, attributes, or IDs.
 type Filter struct {
 	_ struct{} `type:"structure"`
 
 	// Name of the filter. Filter names are case-sensitive.
 	Name *string `type:"string"`
 
-	// One or more filter values. Filter values are case-sensitive.
+	// Filter values. Filter values are case-sensitive.
 	Values []string `type:"list"`
 }
 
@@ -48,16 +60,16 @@ func (s Filter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// An inventory filter object.
+// An inventory filter.
 type InventoryFilter struct {
 	_ struct{} `type:"structure"`
 
-	// The condition of the filter.
+	// Condition of the filter.
 	//
 	// Condition is a required field
 	Condition InventoryFilterCondition `type:"string" required:"true" enum:"true"`
 
-	// The name of the filter.
+	// Name of the filter.
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
@@ -91,13 +103,16 @@ func (s *InventoryFilter) Validate() error {
 // A license configuration is an abstraction of a customer license agreement
 // that can be consumed and enforced by License Manager. Components include
 // specifications for the license type (licensing by instance, socket, CPU,
-// or VCPU), tenancy (shared tenancy, Amazon EC2 Dedicated Instance, Amazon
-// EC2 Dedicated Host, or any of these), host affinity (how long a VM must be
-// associated with a host), the number of licenses purchased and used.
+// or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated
+// Host, or all of these), host affinity (how long a VM must be associated with
+// a host), and the number of licenses purchased and used.
 type LicenseConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// List of summaries for licenses consumed by various resources.
+	// Automated discovery information.
+	AutomatedDiscoveryInformation *AutomatedDiscoveryInformation `type:"structure"`
+
+	// Summaries for licenses consumed by various resources.
 	ConsumedLicenseSummaryList []ConsumedLicenseSummary `type:"list"`
 
 	// Number of licenses consumed.
@@ -106,25 +121,25 @@ type LicenseConfiguration struct {
 	// Description of the license configuration.
 	Description *string `type:"string"`
 
-	// ARN of the LicenseConfiguration object.
+	// Amazon Resource Name (ARN) of the license configuration.
 	LicenseConfigurationArn *string `type:"string"`
 
-	// Unique ID of the LicenseConfiguration object.
+	// Unique ID of the license configuration.
 	LicenseConfigurationId *string `type:"string"`
 
 	// Number of licenses managed by the license configuration.
 	LicenseCount *int64 `type:"long"`
 
-	// Sets the number of available licenses as a hard limit.
+	// Number of available licenses as a hard limit.
 	LicenseCountHardLimit *bool `type:"boolean"`
 
-	// Dimension to use to track license inventory.
+	// Dimension to use to track the license inventory.
 	LicenseCountingType LicenseCountingType `type:"string" enum:"true"`
 
-	// Array of configured License Manager rules.
+	// License rules.
 	LicenseRules []string `type:"list"`
 
-	// List of summaries for managed resources.
+	// Summaries for managed resources.
 	ManagedResourceSummaryList []ManagedResourceSummary `type:"list"`
 
 	// Name of the license configuration.
@@ -132,6 +147,9 @@ type LicenseConfiguration struct {
 
 	// Account ID of the license configuration's owner.
 	OwnerAccountId *string `type:"string"`
+
+	// Product information.
+	ProductInformationList []ProductInformation `type:"list"`
 
 	// Status of the license configuration.
 	Status *string `type:"string"`
@@ -142,14 +160,14 @@ func (s LicenseConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes a server resource that is associated with a license configuration.
+// Describes an association with a license configuration.
 type LicenseConfigurationAssociation struct {
 	_ struct{} `type:"structure"`
 
 	// Time when the license configuration was associated with the resource.
 	AssociationTime *time.Time `type:"timestamp"`
 
-	// ARN of the resource associated with the license configuration.
+	// Amazon Resource Name (ARN) of the resource.
 	ResourceArn *string `type:"string"`
 
 	// ID of the AWS account that owns the resource consuming licenses.
@@ -164,27 +182,26 @@ func (s LicenseConfigurationAssociation) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Contains details of the usage of each resource from the license pool.
+// Details about the usage of a resource associated with a license configuration.
 type LicenseConfigurationUsage struct {
 	_ struct{} `type:"structure"`
 
-	// Time when the license configuration was initially associated with a resource.
+	// Time when the license configuration was initially associated with the resource.
 	AssociationTime *time.Time `type:"timestamp"`
 
-	// Number of licenses consumed out of the total provisioned in the license configuration.
+	// Number of licenses consumed by the resource.
 	ConsumedLicenses *int64 `type:"long"`
 
-	// ARN of the resource associated with a license configuration.
+	// Amazon Resource Name (ARN) of the resource.
 	ResourceArn *string `type:"string"`
 
-	// ID of the account that owns a resource that is associated with the license
-	// configuration.
+	// ID of the account that owns the resource.
 	ResourceOwnerId *string `type:"string"`
 
-	// Status of a resource associated with the license configuration.
+	// Status of the resource.
 	ResourceStatus *string `type:"string"`
 
-	// Type of resource associated with athe license configuration.
+	// Type of resource.
 	ResourceType ResourceType `type:"string" enum:"true"`
 }
 
@@ -193,11 +210,45 @@ func (s LicenseConfigurationUsage) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Object used for associating a license configuration with a resource.
+// Describes the failure of a license operation.
+type LicenseOperationFailure struct {
+	_ struct{} `type:"structure"`
+
+	// Error message.
+	ErrorMessage *string `type:"string"`
+
+	// Failure time.
+	FailureTime *time.Time `type:"timestamp"`
+
+	// Reserved.
+	MetadataList []Metadata `type:"list"`
+
+	// Name of the operation.
+	OperationName *string `type:"string"`
+
+	// The requester is "License Manager Automated Discovery".
+	OperationRequestedBy *string `type:"string"`
+
+	// Amazon Resource Name (ARN) of the resource.
+	ResourceArn *string `type:"string"`
+
+	// ID of the AWS account that owns the resource.
+	ResourceOwnerId *string `type:"string"`
+
+	// Resource type.
+	ResourceType ResourceType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s LicenseOperationFailure) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Details for associating a license configuration with a resource.
 type LicenseSpecification struct {
 	_ struct{} `type:"structure"`
 
-	// ARN of the LicenseConfiguration object.
+	// Amazon Resource Name (ARN) of the license configuration.
 	//
 	// LicenseConfigurationArn is a required field
 	LicenseConfigurationArn *string `type:"string" required:"true"`
@@ -222,14 +273,14 @@ func (s *LicenseSpecification) Validate() error {
 	return nil
 }
 
-// Summary for a resource.
+// Summary information about a managed resource.
 type ManagedResourceSummary struct {
 	_ struct{} `type:"structure"`
 
 	// Number of resources associated with licenses.
 	AssociationCount *int64 `type:"long"`
 
-	// Type of resource associated with a license (instance, host, or AMI).
+	// Type of resource associated with a license.
 	ResourceType ResourceType `type:"string" enum:"true"`
 }
 
@@ -238,11 +289,27 @@ func (s ManagedResourceSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Object containing configuration information for AWS Organizations.
+// Reserved.
+type Metadata struct {
+	_ struct{} `type:"structure"`
+
+	// Reserved.
+	Name *string `type:"string"`
+
+	// Reserved.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Metadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Configuration information for AWS Organizations.
 type OrganizationConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// Flag to activate AWS Organization integration.
+	// Enables AWS Organization integration.
 	//
 	// EnableIntegration is a required field
 	EnableIntegration *bool `type:"boolean" required:"true"`
@@ -267,26 +334,136 @@ func (s *OrganizationConfiguration) Validate() error {
 	return nil
 }
 
-// A set of attributes that describe a resource.
+// Describes product information for a license configuration.
+type ProductInformation struct {
+	_ struct{} `type:"structure"`
+
+	// Product information filters. The following filters and logical operators
+	// are supported:
+	//
+	//    * Application Name - The name of the application. Logical operator is
+	//    EQUALS.
+	//
+	//    * Application Publisher - The publisher of the application. Logical operator
+	//    is EQUALS.
+	//
+	//    * Application Version - The version of the application. Logical operator
+	//    is EQUALS.
+	//
+	//    * Platform Name - The name of the platform. Logical operator is EQUALS.
+	//
+	//    * Platform Type - The platform type. Logical operator is EQUALS.
+	//
+	//    * License Included - The type of license included. Logical operators are
+	//    EQUALS and NOT_EQUALS. Possible values are sql-server-enterprise | sql-server-standard
+	//    | sql-server-web | windows-server-datacenter.
+	//
+	// ProductInformationFilterList is a required field
+	ProductInformationFilterList []ProductInformationFilter `type:"list" required:"true"`
+
+	// Resource type. The value is SSM_MANAGED.
+	//
+	// ResourceType is a required field
+	ResourceType *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ProductInformation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ProductInformation) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ProductInformation"}
+
+	if s.ProductInformationFilterList == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ProductInformationFilterList"))
+	}
+
+	if s.ResourceType == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
+	}
+	if s.ProductInformationFilterList != nil {
+		for i, v := range s.ProductInformationFilterList {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ProductInformationFilterList", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Describes product information filters.
+type ProductInformationFilter struct {
+	_ struct{} `type:"structure"`
+
+	// Logical operator.
+	//
+	// ProductInformationFilterComparator is a required field
+	ProductInformationFilterComparator *string `type:"string" required:"true"`
+
+	// Filter name.
+	//
+	// ProductInformationFilterName is a required field
+	ProductInformationFilterName *string `type:"string" required:"true"`
+
+	// Filter value.
+	//
+	// ProductInformationFilterValue is a required field
+	ProductInformationFilterValue []string `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s ProductInformationFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ProductInformationFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ProductInformationFilter"}
+
+	if s.ProductInformationFilterComparator == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ProductInformationFilterComparator"))
+	}
+
+	if s.ProductInformationFilterName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ProductInformationFilterName"))
+	}
+
+	if s.ProductInformationFilterValue == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ProductInformationFilterValue"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Details about a resource.
 type ResourceInventory struct {
 	_ struct{} `type:"structure"`
 
-	// The platform of the resource.
+	// Platform of the resource.
 	Platform *string `type:"string"`
 
 	// Platform version of the resource in the inventory.
 	PlatformVersion *string `type:"string"`
 
-	// The ARN of the resource.
+	// Amazon Resource Name (ARN) of the resource.
 	ResourceArn *string `type:"string"`
 
-	// Unique ID of the resource.
+	// ID of the resource.
 	ResourceId *string `type:"string"`
 
-	// Unique ID of the account that owns the resource.
+	// ID of the account that owns the resource.
 	ResourceOwningAccountId *string `type:"string"`
 
-	// The type of resource.
+	// Type of resource.
 	ResourceType ResourceType `type:"string" enum:"true"`
 }
 
@@ -295,14 +472,14 @@ func (s ResourceInventory) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Tag for a resource in a key-value format.
+// Details about a tag for a license configuration.
 type Tag struct {
 	_ struct{} `type:"structure"`
 
-	// Key for the resource tag.
+	// Tag key.
 	Key *string `type:"string"`
 
-	// Value for the resource tag.
+	// Tag value.
 	Value *string `type:"string"`
 }
 

@@ -13,7 +13,7 @@ import (
 type DeleteTemplateInput struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID that contains the template you are deleting.
+	// The ID of the AWS account that contains the template that you're deleting.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -23,7 +23,8 @@ type DeleteTemplateInput struct {
 	// TemplateId is a required field
 	TemplateId *string `location:"uri" locationName:"TemplateId" min:"1" type:"string" required:"true"`
 
-	// The version number
+	// Specifies the version of the template that you want to delete. If you don't
+	// provide a version number, DeleteTemplate deletes all versions of the template.
 	VersionNumber *int64 `location:"querystring" locationName:"version-number" min:"1" type:"long"`
 }
 
@@ -87,13 +88,13 @@ func (s DeleteTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteTemplateOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the resource.
+	// The Amazon Resource Name (ARN) of the resource.
 	Arn *string `type:"string"`
 
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
 	// An ID for the template.
@@ -135,28 +136,6 @@ const opDeleteTemplate = "DeleteTemplate"
 // Amazon QuickSight.
 //
 // Deletes a template.
-//
-// CLI syntax:
-//
-//    * aws quicksight delete-template --aws-account-id 111122223333 —-template-id
-//    reports_test_template --version-number 2
-//
-//    * aws quicksight delete-template —aws-account-id 111122223333 —template-id
-//    reports_test_template —alias-name STAGING
-//
-//    * aws quicksight delete-template —aws-account-id 111122223333 —template-id
-//    reports_test_template —alias-name ‘\$LATEST’
-//
-//    * aws quicksight delete-template --aws-account-id 111122223333 —-template-id
-//    reports_test_template
-//
-// If version number which is an optional field is not passed the template (including
-// all the versions) is deleted by the API, if version number is provided, the
-// specific template version is deleted by the API.
-//
-// Users can explicitly describe the latest version of the template by passing
-// $LATEST to the alias-name parameter. $LATEST is an internally supported alias,
-// which points to the latest version of the template.
 //
 //    // Example sending a request using DeleteTemplateRequest.
 //    req := client.DeleteTemplateRequest(params)

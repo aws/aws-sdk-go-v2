@@ -13,12 +13,15 @@ import (
 type UpdateTemplateAliasInput struct {
 	_ struct{} `type:"structure"`
 
-	// The alias name.
+	// The alias of the template that you want to update. If you name a specific
+	// alias, you update the version that the alias points to. You can specify the
+	// latest version of the template by providing the keyword $LATEST in the AliasName
+	// parameter. The keyword $PUBLISHED doesn't apply to templates.
 	//
 	// AliasName is a required field
 	AliasName *string `location:"uri" locationName:"AliasName" min:"1" type:"string" required:"true"`
 
-	// AWS account ID that contains the template aliases you are updating.
+	// The ID of the AWS account that contains the template alias that you're updating.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -114,7 +117,7 @@ type UpdateTemplateAliasOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
 	// The template alias.
@@ -150,11 +153,6 @@ const opUpdateTemplateAlias = "UpdateTemplateAlias"
 // Amazon QuickSight.
 //
 // Updates the template alias of a template.
-//
-// CLI syntax:
-//
-// aws quicksight update-template-alias --aws-account-id 111122223333 --template-id
-// 'reports_test_template' --alias-name STAGING —template-version-number 2
 //
 //    // Example sending a request using UpdateTemplateAliasRequest.
 //    req := client.UpdateTemplateAliasRequest(params)

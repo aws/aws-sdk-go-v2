@@ -53,9 +53,9 @@ const opDeleteDataset = "DeleteDataset"
 // DeleteDatasetRequest returns a request value for making API operation for
 // Amazon Forecast Service.
 //
-// Deletes an Amazon Forecast dataset created using the CreateDataset operation.
-// To be deleted, the dataset must have a status of ACTIVE or CREATE_FAILED.
-// Use the DescribeDataset operation to get the status.
+// Deletes an Amazon Forecast dataset that was created using the CreateDataset
+// operation. You can only delete datasets that have a status of ACTIVE or CREATE_FAILED.
+// To get the status use the DescribeDataset operation.
 //
 //    // Example sending a request using DeleteDatasetRequest.
 //    req := client.DeleteDatasetRequest(params)

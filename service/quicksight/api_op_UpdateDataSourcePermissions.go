@@ -19,7 +19,8 @@ type UpdateDataSourcePermissionsInput struct {
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
-	// The ID of the data source. This is unique per AWS Region per AWS account.
+	// The ID of the data source. This ID is unique per AWS Region for each AWS
+	// account.
 	//
 	// DataSourceId is a required field
 	DataSourceId *string `location:"uri" locationName:"DataSourceId" type:"string" required:"true"`
@@ -123,16 +124,17 @@ func (s UpdateDataSourcePermissionsInput) MarshalFields(e protocol.FieldEncoder)
 type UpdateDataSourcePermissionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the data source.
+	// The Amazon Resource Name (ARN) of the data source.
 	DataSourceArn *string `type:"string"`
 
-	// The ID of the data source. This is unique per AWS Region per AWS account.
+	// The ID of the data source. This ID is unique per AWS Region for each AWS
+	// account.
 	DataSourceId *string `type:"string"`
 
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -171,23 +173,6 @@ const opUpdateDataSourcePermissions = "UpdateDataSourcePermissions"
 // Amazon QuickSight.
 //
 // Updates the permissions to a data source.
-//
-// The permissions resource is arn:aws:quicksight:region:aws-account-id:datasource/data-source-id
-//
-// CLI syntax:
-//
-// aws quicksight update-data-source-permissions \
-//
-// --aws-account-id=111122223333 \
-//
-// --data-source-id=unique-data-source-id \
-//
-// --name='My Data Source' \
-//
-// --grant-permissions='[{"Principal":"arn:aws:quicksight:us-east-1:111122223333:user/default/user1","Actions":["quicksight:DescribeDataSource","quicksight:DescribeDataSourcePermissions","quicksight:PassDataSource"]}]'
-// \
-//
-// --revoke-permissions='[{"Principal":"arn:aws:quicksight:us-east-1:111122223333:user/default/user2","Actions":["quicksight:UpdateDataSource","quicksight:DeleteDataSource","quicksight:UpdateDataSourcePermissions"]}]'
 //
 //    // Example sending a request using UpdateDataSourcePermissionsRequest.
 //    req := client.UpdateDataSourcePermissionsRequest(params)

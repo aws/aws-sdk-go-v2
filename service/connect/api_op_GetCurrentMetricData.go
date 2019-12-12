@@ -37,6 +37,10 @@ type GetCurrentMetricDataInput struct {
 	//
 	// Unit: COUNT
 	//
+	// AGENTS_ON_CONTACT
+	//
+	// Unit: COUNT
+	//
 	// AGENTS_ONLINE
 	//
 	// Unit: COUNT
@@ -56,6 +60,14 @@ type GetCurrentMetricDataInput struct {
 	// OLDEST_CONTACT_AGE
 	//
 	// Unit: SECONDS
+	//
+	// SLOTS_ACTIVE
+	//
+	// Unit: COUNT
+	//
+	// SLOTS_AVAILABLE
+	//
+	// Unit: COUNT
 	//
 	// CurrentMetrics is a required field
 	CurrentMetrics []CurrentMetric `type:"list" required:"true"`

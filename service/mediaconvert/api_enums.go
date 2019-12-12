@@ -331,6 +331,28 @@ func (enum AfdSignaling) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Ignore this setting unless this input is a QuickTime animation. Specify which
+// part of this input MediaConvert uses for your outputs. Leave this setting
+// set to DISCARD in order to delete the alpha channel and preserve the video.
+// Use REMAP_TO_LUMA for this setting to delete the video and map the alpha
+// channel to the luma channel of your outputs.
+type AlphaBehavior string
+
+// Enum values for AlphaBehavior
+const (
+	AlphaBehaviorDiscard     AlphaBehavior = "DISCARD"
+	AlphaBehaviorRemapToLuma AlphaBehavior = "REMAP_TO_LUMA"
+)
+
+func (enum AlphaBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AlphaBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Specify whether this set of input captions appears in your outputs in both
 // 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes
 // the captions data in two ways: it passes the 608 data through using the 608
@@ -1593,6 +1615,26 @@ func (enum DvbSubtitleTeletextSpacing) MarshalValue() (string, error) {
 }
 
 func (enum DvbSubtitleTeletextSpacing) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Specify whether your DVB subtitles are standard or for hearing impaired.
+// Choose hearing impaired if your subtitles include audio descriptions and
+// dialogue. Choose standard if your subtitles include only dialogue.
+type DvbSubtitlingType string
+
+// Enum values for DvbSubtitlingType
+const (
+	DvbSubtitlingTypeHearingImpaired DvbSubtitlingType = "HEARING_IMPAIRED"
+	DvbSubtitlingTypeStandard        DvbSubtitlingType = "STANDARD"
+)
+
+func (enum DvbSubtitlingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DvbSubtitlingType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

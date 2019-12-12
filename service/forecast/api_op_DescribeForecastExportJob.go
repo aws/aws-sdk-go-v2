@@ -44,7 +44,8 @@ type DescribeForecastExportJobOutput struct {
 	// When the forecast export job was created.
 	CreationTime *time.Time `type:"timestamp"`
 
-	// The path to the AWS S3 bucket where the forecast is exported.
+	// The path to the Amazon Simple Storage Service (Amazon S3) bucket where the
+	// forecast is exported.
 	Destination *DataDestination `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the exported forecast.
@@ -62,7 +63,7 @@ type DescribeForecastExportJobOutput struct {
 	// If an error occurred, an informational message about the error.
 	Message *string `type:"string"`
 
-	// The status of the forecast export job. One of the following states:
+	// The status of the forecast export job. States include:
 	//
 	//    * ACTIVE
 	//
@@ -71,7 +72,7 @@ type DescribeForecastExportJobOutput struct {
 	//    * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	//
 	// The Status of the forecast export job must be ACTIVE before you can access
-	// the forecast in your Amazon S3 bucket.
+	// the forecast in your S3 bucket.
 	Status *string `type:"string"`
 }
 
@@ -89,7 +90,7 @@ const opDescribeForecastExportJob = "DescribeForecastExportJob"
 // operation.
 //
 // In addition to listing the properties provided by the user in the CreateForecastExportJob
-// request, this operation includes the following properties:
+// request, this operation lists the following properties:
 //
 //    * CreationTime
 //

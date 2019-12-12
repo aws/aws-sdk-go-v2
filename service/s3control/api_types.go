@@ -14,6 +14,68 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// An access point used to access a bucket.
+type AccessPoint struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the bucket associated with this access point.
+	//
+	// Bucket is a required field
+	Bucket *string `min:"3" type:"string" required:"true"`
+
+	// The name of this access point.
+	//
+	// Name is a required field
+	Name *string `min:"3" type:"string" required:"true"`
+
+	// Indicates whether this access point allows access from the public Internet.
+	// If VpcConfiguration is specified for this access point, then NetworkOrigin
+	// is VPC, and the access point doesn't allow access from the public Internet.
+	// Otherwise, NetworkOrigin is Internet, and the access point allows access
+	// from the public Internet, subject to the access point and bucket access policies.
+	//
+	// NetworkOrigin is a required field
+	NetworkOrigin NetworkOrigin `type:"string" required:"true" enum:"true"`
+
+	// The Virtual Private Cloud (VPC) configuration for this access point, if one
+	// exists.
+	VpcConfiguration *VpcConfiguration `type:"structure"`
+}
+
+// String returns the string representation
+func (s AccessPoint) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AccessPoint) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Bucket != nil {
+		v := *s.Bucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Bucket", protocol.StringValue(v), metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), metadata)
+	}
+	if len(s.NetworkOrigin) > 0 {
+		v := s.NetworkOrigin
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NetworkOrigin", v, metadata)
+	}
+	if s.VpcConfiguration != nil {
+		v := s.VpcConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "VpcConfiguration", v, metadata)
+	}
+	return nil
+}
+
 // A container element for the job configuration and status information returned
 // by a Describe Job request.
 type JobDescriptor struct {
@@ -667,7 +729,8 @@ func (s JobProgressSummary) MarshalFields(e protocol.FieldEncoder) error {
 type JobReport struct {
 	_ struct{} `type:"structure"`
 
-	// The bucket where specified job-completion report will be stored.
+	// The Amazon Resource Name (ARN) for the bucket where specified job-completion
+	// report will be stored.
 	Bucket *string `min:"1" type:"string"`
 
 	// Indicates whether the specified job will generate a job-completion report.
@@ -786,15 +849,77 @@ func (s LambdaInvokeOperation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Indicates whether this access point policy is public. For more information
+// about how Amazon S3 evaluates policies to determine whether they are public,
+// see The Meaning of "Public" (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
+// in the Amazon Simple Storage Service Developer Guide.
+type PolicyStatus struct {
+	_ struct{} `type:"structure"`
+
+	IsPublic *bool `locationName:"IsPublic" type:"boolean"`
+}
+
+// String returns the string representation
+func (s PolicyStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PolicyStatus) MarshalFields(e protocol.FieldEncoder) error {
+	if s.IsPublic != nil {
+		v := *s.IsPublic
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IsPublic", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// The PublicAccessBlock configuration that you want to apply to this Amazon
+// S3 bucket. You can enable the configuration options in any combination. For
+// more information about when Amazon S3 considers a bucket or object public,
+// see The Meaning of "Public" (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
+// in the Amazon Simple Storage Service Developer Guide.
 type PublicAccessBlockConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies whether Amazon S3 should block public access control lists (ACLs)
+	// for buckets in this account. Setting this element to TRUE causes the following
+	// behavior:
+	//
+	//    * PUT Bucket acl and PUT Object acl calls fail if the specified ACL is
+	//    public.
+	//
+	//    * PUT Object calls fail if the request includes a public ACL.
+	//
+	//    * PUT Bucket calls fail if the request includes a public ACL.
+	//
+	// Enabling this setting doesn't affect existing policies or ACLs.
 	BlockPublicAcls *bool `locationName:"BlockPublicAcls" type:"boolean"`
 
+	// Specifies whether Amazon S3 should block public bucket policies for buckets
+	// in this account. Setting this element to TRUE causes Amazon S3 to reject
+	// calls to PUT Bucket policy if the specified bucket policy allows public access.
+	//
+	// Enabling this setting doesn't affect existing bucket policies.
 	BlockPublicPolicy *bool `locationName:"BlockPublicPolicy" type:"boolean"`
 
+	// Specifies whether Amazon S3 should ignore public ACLs for buckets in this
+	// account. Setting this element to TRUE causes Amazon S3 to ignore all public
+	// ACLs on buckets in this account and any objects that they contain.
+	//
+	// Enabling this setting doesn't affect the persistence of any existing ACLs
+	// and doesn't prevent new public ACLs from being set.
 	IgnorePublicAcls *bool `locationName:"IgnorePublicAcls" type:"boolean"`
 
+	// Specifies whether Amazon S3 should restrict public bucket policies for buckets
+	// in this account. Setting this element to TRUE restricts access to buckets
+	// with public policies to only AWS services and authorized users within this
+	// account.
+	//
+	// Enabling this setting doesn't affect previously stored bucket policies, except
+	// that public and cross-account access within any public bucket policy, including
+	// non-public delegation to specific accounts, is blocked.
 	RestrictPublicBuckets *bool `locationName:"RestrictPublicBuckets" type:"boolean"`
 }
 
@@ -1597,6 +1722,50 @@ func (s S3Tag) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// The Virtual Private Cloud (VPC) configuration for an access point.
+type VpcConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// If this field is specified, this access point will only allow connections
+	// from the specified VPC ID.
+	//
+	// VpcId is a required field
+	VpcId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VpcConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VpcConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VpcConfiguration"}
+
+	if s.VpcId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
+	}
+	if s.VpcId != nil && len(*s.VpcId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("VpcId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VpcConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VpcId != nil {
+		v := *s.VpcId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VpcId", protocol.StringValue(v), metadata)
 	}
 	return nil
 }

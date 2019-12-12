@@ -91,7 +91,7 @@ type DeleteUserByPrincipalIdOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -118,11 +118,6 @@ const opDeleteUserByPrincipalId = "DeleteUserByPrincipalId"
 // Amazon QuickSight.
 //
 // Deletes a user identified by its principal ID.
-//
-// CLI Sample:
-//
-// aws quicksight delete-user-by-principal-id --aws-account-id=111122223333
-// --namespace=default --principal-id=ABCDEFJA26JLI7EUUOEHS
 //
 //    // Example sending a request using DeleteUserByPrincipalIdRequest.
 //    req := client.DeleteUserByPrincipalIdRequest(params)

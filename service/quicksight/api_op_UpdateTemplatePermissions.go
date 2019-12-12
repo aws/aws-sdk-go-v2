@@ -14,19 +14,15 @@ import (
 type UpdateTemplatePermissionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID that contains the template.
+	// The ID of the AWS account that contains the template.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
-	// A list of resource permissions to be granted on the template. The following
-	// example shows the shorthand syntax:
-	//
-	// Shorthand Syntax: Principal=string,Actions=string,string ...
+	// A list of resource permissions to be granted on the template.
 	GrantPermissions []ResourcePermission `min:"1" type:"list"`
 
-	// A list of resource permissions to be revoked from the template. Shorthand
-	// syntax: Shorthand Syntax: Principal=string,Actions=string,string ...
+	// A list of resource permissions to be revoked from the template.
 	RevokePermissions []ResourcePermission `min:"1" type:"list"`
 
 	// The ID for the template.
@@ -136,10 +132,10 @@ type UpdateTemplatePermissionsOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
-	// The ARN of the template.
+	// The Amazon Resource Name (ARN) of the template.
 	TemplateArn *string `type:"string"`
 
 	// The ID for the template.
@@ -192,30 +188,7 @@ const opUpdateTemplatePermissions = "UpdateTemplatePermissions"
 // UpdateTemplatePermissionsRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Updates the permissions on a template.
-//
-// CLI syntax:
-//
-//    * aws quicksight describe-template-permissions —aws-account-id 111122223333
-//    —template-id reports_test_template
-//
-//    * aws quicksight update-template-permissions —cli-input-json file://update-permission.json
-//
-//    * The structure of update-permissions.json to add permissions: { "AwsAccountId":
-//    "111122223333", "DashboardId": "reports_test_template", "GrantPermissions":
-//    [ { "Principal": "arn:aws:quicksight:us-east-1:196359894473:user/default/user3",
-//    "Actions": [ "quicksight:DescribeTemplate", "quicksight:ListTemplateVersions"
-//    ] } ] } The structure of update-permissions.json to add permissions: {
-//    "AwsAccountId": "111122223333", "DashboardId": "reports_test_template",
-//    "RevokePermissions": [ { "Principal": "arn:aws:quicksight:us-east-1:196359894473:user/default/user3",
-//    "Actions": [ "quicksight:DescribeTemplate", "quicksight:ListTemplateVersions"
-//    ] } ] } To obtain the principal name of a QuickSight group or user, use
-//    user describe-group or describe-user. For example: aws quicksight describe-user
-//    --aws-account-id 111122223333 --namespace default --user-name user2 --region
-//    us-east-1 { "User": { "Arn": "arn:aws:quicksight:us-east-1:111122223333:user/default/user2",
-//    "Active": true, "Email": "user2@example.com", "Role": "ADMIN", "UserName":
-//    "user2", "PrincipalId": "federated/iam/abcd2abcdabcdeabc5ab5" }, "RequestId":
-//    "8f74bb31-6291-448a-a71c-a765a44bae31", "Status": 200 }
+// Updates the resource permissions for a template.
 //
 //    // Example sending a request using UpdateTemplatePermissionsRequest.
 //    req := client.UpdateTemplatePermissionsRequest(params)

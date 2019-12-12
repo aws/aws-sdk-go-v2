@@ -12,14 +12,23 @@ import (
 type ListLicenseConfigurationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// One or more filters.
+	// Filters to scope the results. The following filters and logical operators
+	// are supported:
+	//
+	//    * licenseCountingType - The dimension on which licenses are counted (vCPU).
+	//    Logical operators are EQUALS | NOT_EQUALS.
+	//
+	//    * enforceLicenseCount - A Boolean value that indicates whether hard license
+	//    enforcement is used. Logical operators are EQUALS | NOT_EQUALS.
+	//
+	//    * usagelimitExceeded - A Boolean value that indicates whether the available
+	//    licenses have been exceeded. Logical operators are EQUALS | NOT_EQUALS.
 	Filters []Filter `type:"list"`
 
-	// An array of ARNs for the calling account’s license configurations.
+	// Amazon Resource Names (ARN) of the license configurations.
 	LicenseConfigurationArns []string `type:"list"`
 
-	// Maximum number of results to return in a single call. To retrieve the remaining
-	// results, make another call with the returned NextToken value.
+	// Maximum number of results to return in a single call.
 	MaxResults *int64 `type:"integer"`
 
 	// Token for the next set of results.
@@ -34,7 +43,7 @@ func (s ListLicenseConfigurationsInput) String() string {
 type ListLicenseConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Array of license configuration objects.
+	// Information about the license configurations.
 	LicenseConfigurations []LicenseConfiguration `type:"list"`
 
 	// Token for the next set of results.
@@ -51,9 +60,7 @@ const opListLicenseConfigurations = "ListLicenseConfigurations"
 // ListLicenseConfigurationsRequest returns a request value for making API operation for
 // AWS License Manager.
 //
-// Lists license configuration objects for an account, each containing the name,
-// description, license type, and other license terms modeled from a license
-// agreement.
+// Lists the license configurations for your account.
 //
 //    // Example sending a request using ListLicenseConfigurationsRequest.
 //    req := client.ListLicenseConfigurationsRequest(params)

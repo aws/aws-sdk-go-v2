@@ -79,9 +79,7 @@ type ContinuousParameterRange struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The scale that hyperparameter tuning uses to search the hyperparameter range.
-	// For information about choosing a hyperparameter scale, see Hyperparameter
-	// Scaling (http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
-	// One of the following values:
+	// Valid values:
 	//
 	// Auto
 	//
@@ -97,16 +95,19 @@ type ContinuousParameterRange struct {
 	// Hyperparameter tuning searches the values in the hyperparameter range by
 	// using a logarithmic scale.
 	//
-	// Logarithmic scaling works only for ranges that have only values greater than
-	// 0.
+	// Logarithmic scaling works only for ranges that have values greater than 0.
 	//
 	// ReverseLogarithmic
 	//
-	// Hyperparemeter tuning searches the values in the hyperparameter range by
+	// hyperparameter tuning searches the values in the hyperparameter range by
 	// using a reverse logarithmic scale.
 	//
 	// Reverse logarithmic scaling works only for ranges that are entirely within
 	// the range 0 <= x < 1.0.
+	//
+	// For information about choosing a hyperparameter scale, see Hyperparameter
+	// Scaling (http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
+	// One of the following values:
 	ScalingType ScalingType `type:"string" enum:"true"`
 }
 
@@ -140,8 +141,10 @@ func (s *ContinuousParameterRange) Validate() error {
 	return nil
 }
 
-// The destination of an exported forecast and credentials to access the location.
-// This object is submitted in the CreateForecastExportJob request.
+// The destination for an exported forecast, an AWS Identity and Access Management
+// (IAM) role that allows Amazon Forecast to access the location and, optionally,
+// an AWS Key Management Service (KMS) key. This object is submitted in the
+// CreateForecastExportJob request.
 type DataDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -176,8 +179,10 @@ func (s *DataDestination) Validate() error {
 	return nil
 }
 
-// The source of your training data and credentials to access the data. This
-// object is submitted in the CreateDatasetImportJob request.
+// The source of your training data, an AWS Identity and Access Management (IAM)
+// role that allows Amazon Forecast to access the data and, optionally, an AWS
+// Key Management Service (KMS) key. This object is submitted in the CreateDatasetImportJob
+// request.
 type DataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -214,11 +219,11 @@ func (s *DataSource) Validate() error {
 
 // Provides a summary of the dataset group properties used in the ListDatasetGroups
 // operation. To get the complete set of properties, call the DescribeDatasetGroup
-// operation, and provide the listed DatasetGroupArn.
+// operation, and provide the DatasetGroupArn.
 type DatasetGroupSummary struct {
 	_ struct{} `type:"structure"`
 
-	// When the datase group was created.
+	// When the dataset group was created.
 	CreationTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the dataset group.
@@ -229,7 +234,7 @@ type DatasetGroupSummary struct {
 
 	// When the dataset group was created or last updated from a call to the UpdateDatasetGroup
 	// operation. While the dataset group is being updated, LastModificationTime
-	// is the current query time.
+	// is the current time of the ListDatasetGroups call.
 	LastModificationTime *time.Time `type:"timestamp"`
 }
 
@@ -240,14 +245,19 @@ func (s DatasetGroupSummary) String() string {
 
 // Provides a summary of the dataset import job properties used in the ListDatasetImportJobs
 // operation. To get the complete set of properties, call the DescribeDatasetImportJob
-// operation, and provide the listed DatasetImportJobArn.
+// operation, and provide the DatasetImportJobArn.
 type DatasetImportJobSummary struct {
 	_ struct{} `type:"structure"`
 
 	// When the dataset import job was created.
 	CreationTime *time.Time `type:"timestamp"`
 
-	// The location of the Amazon S3 bucket that contains the training data.
+	// The location of the training data to import and an AWS Identity and Access
+	// Management (IAM) role that Amazon Forecast can assume to access the data.
+	// The training data must be stored in an Amazon S3 bucket.
+	//
+	// If encryption is used, DataSource includes an AWS Key Management Service
+	// (KMS) key.
 	DataSource *DataSource `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the dataset import job.
@@ -256,13 +266,14 @@ type DatasetImportJobSummary struct {
 	// The name of the dataset import job.
 	DatasetImportJobName *string `min:"1" type:"string"`
 
-	// Dependent on the status as follows:
+	// The last time that the dataset was modified. The time depends on the status
+	// of the job, as follows:
 	//
-	//    * CREATE_PENDING - same as CreationTime
+	//    * CREATE_PENDING - The same time as CreationTime.
 	//
-	//    * CREATE_IN_PROGRESS - the current timestamp
+	//    * CREATE_IN_PROGRESS - The current timestamp.
 	//
-	//    * ACTIVE or CREATE_FAILED - when the job finished or failed
+	//    * ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time `type:"timestamp"`
 
 	// If an error occurred, an informational message about the error.
@@ -287,7 +298,7 @@ func (s DatasetImportJobSummary) String() string {
 
 // Provides a summary of the dataset properties used in the ListDatasets operation.
 // To get the complete set of properties, call the DescribeDataset operation,
-// and provide the listed DatasetArn.
+// and provide the DatasetArn.
 type DatasetSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -306,10 +317,10 @@ type DatasetSummary struct {
 	// The domain associated with the dataset.
 	Domain Domain `type:"string" enum:"true"`
 
-	// When the dataset is created, LastModificationTime is the same as CreationTime.
-	// After a CreateDatasetImportJob operation is called, LastModificationTime
-	// is when the import job finished or failed. While data is being imported to
-	// the dataset, LastModificationTime is the current query time.
+	// When you create a dataset, LastModificationTime is the same as CreationTime.
+	// While data is being imported to the dataset, LastModificationTime is the
+	// current time of the ListDatasets call. After a CreateDatasetImportJob operation
+	// has finished, LastModificationTime is when the import job completed or failed.
 	LastModificationTime *time.Time `type:"timestamp"`
 }
 
@@ -319,21 +330,21 @@ func (s DatasetSummary) String() string {
 }
 
 // An AWS Key Management Service (KMS) key and an AWS Identity and Access Management
-// (IAM) role that Amazon Forecast can assume to access the key. This object
-// is optionally submitted in the CreateDataset and CreatePredictor requests.
+// (IAM) role that Amazon Forecast can assume to access the key. You can specify
+// this optional object in the CreateDataset and CreatePredictor requests.
 type EncryptionConfig struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key.
+	// The Amazon Resource Name (ARN) of the KMS key.
 	//
 	// KMSKeyArn is a required field
 	KMSKeyArn *string `type:"string" required:"true"`
 
-	// The ARN of the AWS Identity and Access Management (IAM) role that Amazon
-	// Forecast can assume to access the AWS KMS key.
+	// The ARN of the IAM role that Amazon Forecast can assume to access the AWS
+	// KMS key.
 	//
-	// Cross-account pass role is not allowed. If you pass a role that doesn't belong
-	// to your account, an InvalidInputException is thrown.
+	// Passing a role across AWS accounts is not allowed. If you pass a role that
+	// isn't in your account, you get an InvalidInputException error.
 	//
 	// RoleArn is a required field
 	RoleArn *string `type:"string" required:"true"`
@@ -364,27 +375,24 @@ func (s *EncryptionConfig) Validate() error {
 
 // Parameters that define how to split a dataset into training data and testing
 // data, and the number of iterations to perform. These parameters are specified
-// in the predefined algorithms and can be overridden in the CreatePredictor
+// in the predefined algorithms but you can override them in the CreatePredictor
 // request.
-//
-// For example, suppose that you have a dataset with data collection frequency
-// set to every day and you have 200 days worth of data (that is, 200 data points).
-// Now suppose that you set the NumberOfBacktestWindows to 2 and the BackTestWindowOffset
-// parameter to 20. The algorithm splits the data twice. The first time, the
-// algorithm trains the model using the first 180 data points and uses the last
-// 20 data points for evaluation. The second time, the algorithm trains the
-// model using the first 160 data points and uses the last 40 data points for
-// evaluation.
 type EvaluationParameters struct {
 	_ struct{} `type:"structure"`
 
 	// The point from the end of the dataset where you want to split the data for
-	// model training and evaluation. The value is specified as the number of data
-	// points.
+	// model training and testing (evaluation). Specify the value as the number
+	// of data points. The default is the value of the forecast horizon. BackTestWindowOffset
+	// can be used to mimic a past virtual forecast start date. This value must
+	// be greater than or equal to the forecast horizon and less than half of the
+	// TARGET_TIME_SERIES dataset length.
+	//
+	// ForecastHorizon <= BackTestWindowOffset < 1/2 * TARGET_TIME_SERIES dataset
+	// length
 	BackTestWindowOffset *int64 `type:"integer"`
 
-	// The number of times to split the input data. The default is 1. The range
-	// is 1 through 5.
+	// The number of times to split the input data. The default is 1. Valid values
+	// are 1 through 5.
 	NumberOfBacktestWindows *int64 `type:"integer"`
 }
 
@@ -433,16 +441,16 @@ func (s EvaluationResult) String() string {
 type Featurization struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the schema attribute specifying the data field to be featurized.
-	// In this release, only the target field of the TARGET_TIME_SERIES dataset
-	// type is supported. For example, for the RETAIL domain, the target is demand,
-	// and for the CUSTOM domain, the target is target_value.
+	// The name of the schema attribute that specifies the data field to be featurized.
+	// Only the target field of the TARGET_TIME_SERIES dataset type is supported.
+	// For example, for the RETAIL domain, the target is demand, and for the CUSTOM
+	// domain, the target is target_value.
 	//
 	// AttributeName is a required field
 	AttributeName *string `min:"1" type:"string" required:"true"`
 
-	// An array FeaturizationMethod objects that specifies the feature transformation
-	// methods. For this release, the number of methods is limited to one.
+	// An array of one FeaturizationMethod object that specifies the feature transformation
+	// method.
 	FeaturizationPipeline []FeaturizationMethod `min:"1" type:"list"`
 }
 
@@ -485,7 +493,7 @@ func (s *Featurization) Validate() error {
 //
 // You define featurization using the FeaturizationConfig object. You specify
 // an array of transformations, one for each field that you want to featurize.
-// You then include the FeaturizationConfig in your CreatePredictor request.
+// You then include the FeaturizationConfig object in your CreatePredictor request.
 // Amazon Forecast applies the featurization to the TARGET_TIME_SERIES dataset
 // before model training.
 //
@@ -496,7 +504,7 @@ type FeaturizationConfig struct {
 	_ struct{} `type:"structure"`
 
 	// An array of featurization (transformation) information for the fields of
-	// a dataset. In this release, only a single featurization is supported.
+	// a dataset. Only a single featurization is supported.
 	Featurizations []Featurization `min:"1" type:"list"`
 
 	// An array of dimension (field) names that specify how to group the generated
@@ -506,6 +514,11 @@ type FeaturizationConfig struct {
 	// all of your stores, and your dataset contains a store_id field. If you want
 	// the sales forecast for each item by store, you would specify store_id as
 	// the dimension.
+	//
+	// All forecast dimensions specified in the TARGET_TIME_SERIES dataset don't
+	// need to be specified in the CreatePredictor request. All forecast dimensions
+	// specified in the RELATED_TIME_SERIES dataset must be specified in the CreatePredictor
+	// request.
 	ForecastDimensions []string `min:"1" type:"list"`
 
 	// The frequency of predictions in a forecast.
@@ -514,6 +527,12 @@ type FeaturizationConfig struct {
 	// (30 minutes), 15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and
 	// 1min (1 minute). For example, "Y" indicates every year and "5min" indicates
 	// every five minutes.
+	//
+	// The frequency must be greater than or equal to the TARGET_TIME_SERIES dataset
+	// frequency.
+	//
+	// When a RELATED_TIME_SERIES dataset is provided, the frequency must be equal
+	// to the RELATED_TIME_SERIES dataset frequency.
 	//
 	// ForecastFrequency is a required field
 	ForecastFrequency *string `type:"string" required:"true"`
@@ -551,12 +570,12 @@ func (s *FeaturizationConfig) Validate() error {
 	return nil
 }
 
-// Provides information about a method that featurizes (transforms) a dataset
+// Provides information about the method that featurizes (transforms) a dataset
 // field. The method is part of the FeaturizationPipeline of the Featurization
-// object. If FeaturizationMethodParameters isn't specified, Amazon Forecast
+// object. If you don't specify FeaturizationMethodParameters, Amazon Forecast
 // uses default parameters.
 //
-// For example:
+// The following is an example of how you specify a FeaturizationMethod object.
 //
 // {
 //
@@ -568,15 +587,14 @@ func (s *FeaturizationConfig) Validate() error {
 type FeaturizationMethod struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the method. In this release, "filling" is the only supported
-	// method.
+	// The name of the method. The "filling" method is the only supported method.
 	//
 	// FeaturizationMethodName is a required field
 	FeaturizationMethodName FeaturizationMethodName `type:"string" required:"true" enum:"true"`
 
-	// The method parameters (key-value pairs). Specify these to override the default
-	// values. The following list shows the parameters and their valid values. Bold
-	// signifies the default value.
+	// The method parameters (key-value pairs). Specify these parameters to override
+	// the default values. The following list shows the parameters and their valid
+	// values. Bold signifies the default value.
 	//
 	//    * aggregation: sum, avg, first, min, max
 	//
@@ -611,12 +629,13 @@ func (s *FeaturizationMethod) Validate() error {
 
 // Describes a filter for choosing a subset of objects. Each filter consists
 // of a condition and a match statement. The condition is either IS or IS_NOT,
-// which specifies whether to include or exclude, respectively, the objects
-// that match the statement. The match statement consists of a key and a value.
+// which specifies whether to include or exclude the objects that match the
+// statement, respectively. The match statement consists of a key and a value.
 type Filter struct {
 	_ struct{} `type:"structure"`
 
-	// The condition to apply.
+	// The condition to apply. To include the objects that match the statement,
+	// specify IS. To exclude matching objects, specify IS_NOT.
 	//
 	// Condition is a required field
 	Condition FilterConditionString `type:"string" required:"true" enum:"true"`
@@ -626,7 +645,7 @@ type Filter struct {
 	// Key is a required field
 	Key *string `type:"string" required:"true"`
 
-	// A valid value for Key.
+	// The value to match.
 	//
 	// Value is a required field
 	Value *string `type:"string" required:"true"`
@@ -667,7 +686,8 @@ type ForecastExportJobSummary struct {
 	// When the forecast export job was created.
 	CreationTime *time.Time `type:"timestamp"`
 
-	// The path to the S3 bucket where the forecast is stored.
+	// The path to the Amazon Simple Storage Service (Amazon S3) bucket where the
+	// forecast is exported.
 	Destination *DataDestination `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the forecast export job.
@@ -682,7 +702,7 @@ type ForecastExportJobSummary struct {
 	// If an error occurred, an informational message about the error.
 	Message *string `type:"string"`
 
-	// The status of the forecast export job. One of the following states:
+	// The status of the forecast export job. States include:
 	//
 	//    * ACTIVE
 	//
@@ -691,7 +711,7 @@ type ForecastExportJobSummary struct {
 	//    * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	//
 	// The Status of the forecast export job must be ACTIVE before you can access
-	// the forecast in your Amazon S3 bucket.
+	// the forecast in your S3 bucket.
 	Status *string `type:"string"`
 }
 
@@ -702,7 +722,7 @@ func (s ForecastExportJobSummary) String() string {
 
 // Provides a summary of the forecast properties used in the ListForecasts operation.
 // To get the complete set of properties, call the DescribeForecast operation,
-// and provide the listed ForecastArn.
+// and provide the ForecastArn that is listed in the summary.
 type ForecastSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -749,19 +769,19 @@ func (s ForecastSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Configuration information for a hyperparameter tuning job. This object is
-// specified in the CreatePredictor request.
+// Configuration information for a hyperparameter tuning job. You specify this
+// object in the CreatePredictor request.
 //
-// A hyperparameter is a parameter that governs the model training process and
-// is set before training starts. This is as opposed to a model parameter that
-// is determined during training. The values of the hyperparameters have an
-// effect on the chosen model parameters.
+// A hyperparameter is a parameter that governs the model training process.
+// You set hyperparameters before training starts, unlike model parameters,
+// which are determined during training. The values of the hyperparameters effect
+// which values are chosen for the model parameters.
 //
-// A hyperparameter tuning job is the process of choosing the optimum set of
-// hyperparameter values that optimize a specified metric. This is accomplished
-// by running many training jobs over a range of hyperparameter values. The
-// optimum set of values is dependent on the algorithm, the training data, and
-// the given metric objective.
+// In a hyperparameter tuning job, Amazon Forecast chooses the set of hyperparameter
+// values that optimize a specified metric. Forecast accomplishes this by running
+// many training jobs over a range of hyperparameter values. The optimum set
+// of values depends on the algorithm, the training data, and the specified
+// metric objective.
 type HyperParameterTuningJobConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -790,7 +810,7 @@ func (s *HyperParameterTuningJobConfig) Validate() error {
 }
 
 // The data used to train a predictor. The data includes a dataset group and
-// any supplementary features. This object is specified in the CreatePredictor
+// any supplementary features. You specify this object in the CreatePredictor
 // request.
 type InputDataConfig struct {
 	_ struct{} `type:"structure"`
@@ -800,8 +820,8 @@ type InputDataConfig struct {
 	// DatasetGroupArn is a required field
 	DatasetGroupArn *string `type:"string" required:"true"`
 
-	// An array of supplementary features. For this release, the only supported
-	// feature is a holiday calendar.
+	// An array of supplementary features. The only supported feature is a holiday
+	// calendar.
 	SupplementaryFeatures []SupplementaryFeature `min:"1" type:"list"`
 }
 
@@ -855,9 +875,7 @@ type IntegerParameterRange struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The scale that hyperparameter tuning uses to search the hyperparameter range.
-	// For information about choosing a hyperparameter scale, see Hyperparameter
-	// Scaling (http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
-	// One of the following values:
+	// Valid values:
 	//
 	// Auto
 	//
@@ -873,8 +891,7 @@ type IntegerParameterRange struct {
 	// Hyperparameter tuning searches the values in the hyperparameter range by
 	// using a logarithmic scale.
 	//
-	// Logarithmic scaling works only for ranges that have only values greater than
-	// 0.
+	// Logarithmic scaling works only for ranges that have values greater than 0.
 	//
 	// ReverseLogarithmic
 	//
@@ -882,6 +899,10 @@ type IntegerParameterRange struct {
 	//
 	// Reverse logarithmic scaling works only for ranges that are entirely within
 	// the range 0 <= x < 1.0.
+	//
+	// For information about choosing a hyperparameter scale, see Hyperparameter
+	// Scaling (http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
+	// One of the following values:
 	ScalingType ScalingType `type:"string" enum:"true"`
 }
 
@@ -915,8 +936,8 @@ func (s *IntegerParameterRange) Validate() error {
 	return nil
 }
 
-// Provides metrics used to evaluate the performance of a predictor. This object
-// is part of the WindowSummary object.
+// Provides metrics that are used to evaluate the performance of a predictor.
+// This object is part of the WindowSummary object.
 type Metrics struct {
 	_ struct{} `type:"structure"`
 
@@ -996,7 +1017,42 @@ func (s *ParameterRanges) Validate() error {
 	return nil
 }
 
-// Provides a summary of the predictor properties used in the ListPredictors
+// The algorithm used to perform a backtest and the status of those tests.
+type PredictorExecution struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the algorithm used to test the predictor.
+	AlgorithmArn *string `type:"string"`
+
+	// An array of test windows used to evaluate the algorithm. The NumberOfBacktestWindows
+	// from the object determines the number of windows in the array.
+	TestWindows []TestWindowSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s PredictorExecution) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Contains details on the backtests performed to evaluate the accuracy of the
+// predictor. The tests are returned in descending order of accuracy, with the
+// most accurate backtest appearing first. You specify the number of backtests
+// to perform when you call the operation.
+type PredictorExecutionDetails struct {
+	_ struct{} `type:"structure"`
+
+	// An array of the backtests performed to evaluate the accuracy of the predictor
+	// against a particular algorithm. The NumberOfBacktestWindows from the object
+	// determines the number of windows in the array.
+	PredictorExecutions []PredictorExecution `min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s PredictorExecutionDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Provides a summary of the predictor properties that are used in the ListPredictors
 // operation. To get the complete set of properties, call the DescribePredictor
 // operation, and provide the listed PredictorArn.
 type PredictorSummary struct {
@@ -1033,8 +1089,8 @@ type PredictorSummary struct {
 	//
 	//    * UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED
 	//
-	// The Status of the predictor must be ACTIVE before using the predictor to
-	// create a forecast.
+	// The Status of the predictor must be ACTIVE before you can use the predictor
+	// to create a forecast.
 	Status *string `type:"string"`
 }
 
@@ -1046,8 +1102,9 @@ func (s PredictorSummary) String() string {
 // The path to the file(s) in an Amazon Simple Storage Service (Amazon S3) bucket,
 // and an AWS Identity and Access Management (IAM) role that Amazon Forecast
 // can assume to access the file(s). Optionally, includes an AWS Key Management
-// Service (KMS) key. This object is submitted in the CreateDatasetImportJob
-// and CreateForecastExportJob requests.
+// Service (KMS) key. This object is part of the DataSource object that is submitted
+// in the CreateDatasetImportJob request, and part of the DataDestination object
+// that is submitted in the CreateForecastExportJob request.
 type S3Config struct {
 	_ struct{} `type:"structure"`
 
@@ -1061,10 +1118,11 @@ type S3Config struct {
 	Path *string `type:"string" required:"true"`
 
 	// The ARN of the AWS Identity and Access Management (IAM) role that Amazon
-	// Forecast can assume to access the Amazon S3 bucket or file(s).
+	// Forecast can assume to access the Amazon S3 bucket or files. If you provide
+	// a value for the KMSKeyArn key, the role must allow access to the key.
 	//
-	// Cross-account pass role is not allowed. If you pass a role that doesn't belong
-	// to your account, an InvalidInputException is thrown.
+	// Passing a role across AWS accounts is not allowed. If you pass a role that
+	// isn't in your account, you get an InvalidInputException error.
 	//
 	// RoleArn is a required field
 	RoleArn *string `type:"string" required:"true"`
@@ -1093,7 +1151,7 @@ func (s *S3Config) Validate() error {
 	return nil
 }
 
-// Defines the fields of a dataset. This object is specified in the CreateDataset
+// Defines the fields of a dataset. You specify this object in the CreateDataset
 // request.
 type Schema struct {
 	_ struct{} `type:"structure"`
@@ -1124,7 +1182,7 @@ func (s *Schema) Validate() error {
 	return nil
 }
 
-// An attribute of a schema, which defines a field of a dataset. A schema attribute
+// An attribute of a schema, which defines a dataset field. A schema attribute
 // is required for every field in a dataset. The Schema object contains an array
 // of SchemaAttribute objects.
 type SchemaAttribute struct {
@@ -1155,8 +1213,8 @@ func (s *SchemaAttribute) Validate() error {
 	return nil
 }
 
-// Provides statistics for each data field imported to an Amazon Forecast dataset
-// with the CreateDatasetImportJob operation.
+// Provides statistics for each data field imported into to an Amazon Forecast
+// dataset with the CreateDatasetImportJob operation.
 type Statistics struct {
 	_ struct{} `type:"structure"`
 
@@ -1193,9 +1251,10 @@ func (s Statistics) String() string {
 // Describes a supplementary feature of a dataset group. This object is part
 // of the InputDataConfig object.
 //
-// For this release, the only supported feature is a holiday calendar. If the
-// calendar is used, all data should belong to the same country as the calendar.
-// For the calendar data, see http://jollyday.sourceforge.net/data.html (http://jollyday.sourceforge.net/data.html).
+// The only supported feature is a holiday calendar. If you use the calendar,
+// all data in the datasets should belong to the same country as the calendar.
+// For the holiday calendar data, see the Jollyday (http://jollyday.sourceforge.net/data.html)
+// web site.
 type SupplementaryFeature struct {
 	_ struct{} `type:"structure"`
 
@@ -1246,13 +1305,42 @@ func (s *SupplementaryFeature) Validate() error {
 	return nil
 }
 
+// The status, start time, and end time of a backtest, as well as a failure
+// reason if applicable.
+type TestWindowSummary struct {
+	_ struct{} `type:"structure"`
+
+	// If the test failed, the reason why it failed.
+	Message *string `type:"string"`
+
+	// The status of the test. Possible status values are:
+	//
+	//    * ACTIVE
+	//
+	//    * CREATE_IN_PROGRESS
+	//
+	//    * CREATE_FAILED
+	Status *string `type:"string"`
+
+	// The time at which the test ended.
+	TestWindowEnd *time.Time `type:"timestamp"`
+
+	// The time at which the test began.
+	TestWindowStart *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation
+func (s TestWindowSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The weighted loss value for a quantile. This object is part of the Metrics
 // object.
 type WeightedQuantileLoss struct {
 	_ struct{} `type:"structure"`
 
-	// The difference between the predicted value and actual value over the quantile,
-	// weighted (normalized) by dividing by the sum over all quantiles.
+	// The difference between the predicted value and the actual value over the
+	// quantile, weighted (normalized) by dividing by the sum over all quantiles.
 	LossValue *float64 `type:"double"`
 
 	// The quantile. Quantiles divide a probability distribution into regions of
@@ -1284,8 +1372,7 @@ type WindowSummary struct {
 	// The number of data points within the window.
 	ItemCount *int64 `type:"integer"`
 
-	// Provides metrics used to evaluate the performance of a predictor. This object
-	// is part of the WindowSummary object.
+	// Provides metrics used to evaluate the performance of a predictor.
 	Metrics *Metrics `type:"structure"`
 
 	// The timestamp that defines the end of the window.

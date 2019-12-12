@@ -22,7 +22,8 @@ type UpdateIntegrationInput struct {
 	// Represents a connection type.
 	ConnectionType ConnectionType `locationName:"connectionType" type:"string" enum:"true"`
 
-	// Specifies how to handle response payload content type conversions.
+	// Specifies how to handle response payload content type conversions. Supported
+	// only for WebSocket APIs.
 	ContentHandlingStrategy ContentHandlingStrategy `locationName:"contentHandlingStrategy" type:"string" enum:"true"`
 
 	// Represents an Amazon Resource Name (ARN).
@@ -43,8 +44,12 @@ type UpdateIntegrationInput struct {
 	// A string representation of a URI with a length between [1-2048].
 	IntegrationUri *string `locationName:"integrationUri" type:"string"`
 
-	// Represents passthrough behavior for an integration response.
+	// Represents passthrough behavior for an integration response. Supported only
+	// for WebSocket APIs.
 	PassthroughBehavior PassthroughBehavior `locationName:"passthroughBehavior" type:"string" enum:"true"`
+
+	// A string with a length between [1-64].
+	PayloadFormatVersion *string `locationName:"payloadFormatVersion" type:"string"`
 
 	// A key-value map specifying response parameters that are passed to the method
 	// response from the backend. The key is a method response header parameter
@@ -156,6 +161,12 @@ func (s UpdateIntegrationInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "passthroughBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.PayloadFormatVersion != nil {
+		v := *s.PayloadFormatVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "payloadFormatVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.RequestParameters != nil {
 		v := s.RequestParameters
 
@@ -210,13 +221,16 @@ func (s UpdateIntegrationInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateIntegrationOutput struct {
 	_ struct{} `type:"structure"`
 
+	ApiGatewayManaged *bool `locationName:"apiGatewayManaged" type:"boolean"`
+
 	// A string with a length between [1-1024].
 	ConnectionId *string `locationName:"connectionId" type:"string"`
 
 	// Represents a connection type.
 	ConnectionType ConnectionType `locationName:"connectionType" type:"string" enum:"true"`
 
-	// Specifies how to handle response payload content type conversions.
+	// Specifies how to handle response payload content type conversions. Supported
+	// only for WebSocket APIs.
 	ContentHandlingStrategy ContentHandlingStrategy `locationName:"contentHandlingStrategy" type:"string" enum:"true"`
 
 	// Represents an Amazon Resource Name (ARN).
@@ -242,8 +256,12 @@ type UpdateIntegrationOutput struct {
 	// A string representation of a URI with a length between [1-2048].
 	IntegrationUri *string `locationName:"integrationUri" type:"string"`
 
-	// Represents passthrough behavior for an integration response.
+	// Represents passthrough behavior for an integration response. Supported only
+	// for WebSocket APIs.
 	PassthroughBehavior PassthroughBehavior `locationName:"passthroughBehavior" type:"string" enum:"true"`
+
+	// A string with a length between [1-64].
+	PayloadFormatVersion *string `locationName:"payloadFormatVersion" type:"string"`
 
 	// A key-value map specifying response parameters that are passed to the method
 	// response from the backend. The key is a method response header parameter
@@ -278,6 +296,12 @@ func (s UpdateIntegrationOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateIntegrationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApiGatewayManaged != nil {
+		v := *s.ApiGatewayManaged
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "apiGatewayManaged", protocol.BoolValue(v), metadata)
+	}
 	if s.ConnectionId != nil {
 		v := *s.ConnectionId
 
@@ -343,6 +367,12 @@ func (s UpdateIntegrationOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "passthroughBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.PayloadFormatVersion != nil {
+		v := *s.PayloadFormatVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "payloadFormatVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.RequestParameters != nil {
 		v := s.RequestParameters

@@ -57,6 +57,9 @@ type DescribePatchGroupStateOutput struct {
 	// The number of instances with installed patches.
 	InstancesWithInstalledPatches *int64 `type:"integer"`
 
+	// Reserved for future use.
+	InstancesWithInstalledPendingRebootPatches *int64 `type:"integer"`
+
 	// The number of instances with patches installed that are specified in a RejectedPatches
 	// list. Patches with a status of INSTALLED_REJECTED were typically installed
 	// before they were added to a RejectedPatches list.

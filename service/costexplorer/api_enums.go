@@ -37,6 +37,23 @@ func (enum Context) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// The rule schema version in this particular Cost Category.
+type CostCategoryRuleVersion string
+
+// Enum values for CostCategoryRuleVersion
+const (
+	CostCategoryRuleVersionCostCategoryExpressionV1 CostCategoryRuleVersion = "CostCategoryExpression.v1"
+)
+
+func (enum CostCategoryRuleVersion) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CostCategoryRuleVersion) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Dimension string
 
 // Enum values for Dimension
@@ -101,8 +118,9 @@ type GroupDefinitionType string
 
 // Enum values for GroupDefinitionType
 const (
-	GroupDefinitionTypeDimension GroupDefinitionType = "DIMENSION"
-	GroupDefinitionTypeTag       GroupDefinitionType = "TAG"
+	GroupDefinitionTypeDimension    GroupDefinitionType = "DIMENSION"
+	GroupDefinitionTypeTag          GroupDefinitionType = "TAG"
+	GroupDefinitionTypeCostCategory GroupDefinitionType = "COST_CATEGORY"
 )
 
 func (enum GroupDefinitionType) MarshalValue() (string, error) {

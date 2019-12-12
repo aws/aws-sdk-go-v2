@@ -15,13 +15,15 @@ type UpdateServiceSettingsInput struct {
 	// Activates cross-account discovery.
 	EnableCrossAccountsDiscovery *bool `type:"boolean"`
 
-	// Integrates AWS Organizations with License Manager for cross-account discovery.
+	// Enables integration with AWS Organizations for cross-account discovery.
 	OrganizationConfiguration *OrganizationConfiguration `type:"structure"`
 
-	// ARN of the Amazon S3 bucket where License Manager information is stored.
+	// Amazon Resource Name (ARN) of the Amazon S3 bucket where the License Manager
+	// information is stored.
 	S3BucketArn *string `type:"string"`
 
-	// ARN of the Amazon SNS topic used for License Manager alerts.
+	// Amazon Resource Name (ARN) of the Amazon SNS topic used for License Manager
+	// alerts.
 	SnsTopicArn *string `type:"string"`
 }
 
@@ -59,7 +61,7 @@ const opUpdateServiceSettings = "UpdateServiceSettings"
 // UpdateServiceSettingsRequest returns a request value for making API operation for
 // AWS License Manager.
 //
-// Updates License Manager service settings.
+// Updates License Manager settings for the current Region.
 //
 //    // Example sending a request using UpdateServiceSettingsRequest.
 //    req := client.UpdateServiceSettingsRequest(params)

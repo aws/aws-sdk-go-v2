@@ -13,7 +13,7 @@ import (
 type ListDashboardsInput struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID that contains the dashboards you are listing.
+	// The ID of the AWS account that contains the dashboards that you're listing.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -78,8 +78,8 @@ func (s ListDashboardsInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListDashboardsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A structure that contains all of the dashboards shared with the user. Provides
-	// basic information about the dashboards.
+	// A structure that contains all of the dashboards shared with the user. This
+	// structure provides basic information about the dashboards.
 	DashboardSummaryList []DashboardSummary `type:"list"`
 
 	// The token for the next set of results, or null if there are no more results.
@@ -88,7 +88,7 @@ type ListDashboardsOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -132,12 +132,7 @@ const opListDashboards = "ListDashboards"
 // ListDashboardsRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Lists dashboards in the AWS account.
-//
-// CLI syntax:
-//
-// aws quicksight list-dashboards --aws-account-id 111122223333 --max-results
-// 5 —next-token 'next-10'
+// Lists dashboards in an AWS account.
 //
 //    // Example sending a request using ListDashboardsRequest.
 //    req := client.ListDashboardsRequest(params)

@@ -18,7 +18,7 @@ type DescribeIAMPolicyAssignmentInput struct {
 	// AssignmentName is a required field
 	AssignmentName *string `location:"uri" locationName:"AssignmentName" min:"1" type:"string" required:"true"`
 
-	// The AWS account ID that contains the assignment you want to describe.
+	// The ID of the AWS account that contains the assignment that you want to describe.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -96,7 +96,7 @@ type DescribeIAMPolicyAssignmentOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -128,12 +128,8 @@ const opDescribeIAMPolicyAssignment = "DescribeIAMPolicyAssignment"
 // DescribeIAMPolicyAssignmentRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Describes an existing IAMPolicy Assignment by specified assignment name.
-//
-// CLI syntax:
-//
-// aws quicksight describe-iam-policy-assignment --aws-account-id=111122223333
-// --assignment-name=testtest --namespace=default --region=us-east-1
+// Describes an existing IAM policy assignment, as specified by the assignment
+// name.
 //
 //    // Example sending a request using DescribeIAMPolicyAssignmentRequest.
 //    req := client.DescribeIAMPolicyAssignmentRequest(params)

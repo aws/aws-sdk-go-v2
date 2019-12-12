@@ -18,6 +18,9 @@ type AssetShallow struct {
 	// The ARN of the Asset.
 	Arn *string `locationName:"arn" type:"string"`
 
+	// The time the Asset was initially submitted for Ingest.
+	CreatedAt *string `locationName:"createdAt" type:"string"`
+
 	// The unique identifier for the Asset.
 	Id *string `locationName:"id" type:"string"`
 
@@ -46,6 +49,12 @@ func (s AssetShallow) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Id != nil {
 		v := *s.Id
@@ -855,6 +864,9 @@ type PackagingGroup struct {
 	// The ARN of the PackagingGroup.
 	Arn *string `locationName:"arn" type:"string"`
 
+	// The fully qualified domain name for Assets in the PackagingGroup.
+	DomainName *string `locationName:"domainName" type:"string"`
+
 	// The ID of the PackagingGroup.
 	Id *string `locationName:"id" type:"string"`
 }
@@ -871,6 +883,12 @@ func (s PackagingGroup) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "domainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Id != nil {
 		v := *s.Id

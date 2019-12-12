@@ -13,10 +13,10 @@ import (
 type ListIAMPolicyAssignmentsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The status of the assignment.
+	// The status of the assignments.
 	AssignmentStatus AssignmentStatus `type:"string" enum:"true"`
 
-	// The AWS account ID that contains this IAM policy assignment.
+	// The ID of the AWS account that contains these IAM policy assignments.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -24,7 +24,7 @@ type ListIAMPolicyAssignmentsInput struct {
 	// The maximum number of results to be returned per request.
 	MaxResults *int64 `location:"querystring" locationName:"max-results" min:"1" type:"integer"`
 
-	// The namespace for this assignment.
+	// The namespace for the assignments.
 	//
 	// Namespace is a required field
 	Namespace *string `location:"uri" locationName:"Namespace" type:"string" required:"true"`
@@ -111,7 +111,7 @@ type ListIAMPolicyAssignmentsOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -155,13 +155,7 @@ const opListIAMPolicyAssignments = "ListIAMPolicyAssignments"
 // ListIAMPolicyAssignmentsRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Lists assignments in current QuickSight account.
-//
-// CLI syntax:
-//
-// aws quicksight list-iam-policy-assignments --aws-account-id=111122223333
-// --max-result=5 --assignment-status=ENABLED --namespace=default --region=us-east-1
-// --next-token=3
+// Lists IAM policy assignments in the current Amazon QuickSight account.
 //
 //    // Example sending a request using ListIAMPolicyAssignmentsRequest.
 //    req := client.ListIAMPolicyAssignmentsRequest(params)

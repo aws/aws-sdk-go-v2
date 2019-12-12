@@ -84,6 +84,8 @@ type ClientAPI interface {
 
 	DescribeContinuousBackupsRequest(*dynamodb.DescribeContinuousBackupsInput) dynamodb.DescribeContinuousBackupsRequest
 
+	DescribeContributorInsightsRequest(*dynamodb.DescribeContributorInsightsInput) dynamodb.DescribeContributorInsightsRequest
+
 	DescribeEndpointsRequest(*dynamodb.DescribeEndpointsInput) dynamodb.DescribeEndpointsRequest
 
 	DescribeGlobalTableRequest(*dynamodb.DescribeGlobalTableInput) dynamodb.DescribeGlobalTableRequest
@@ -94,11 +96,15 @@ type ClientAPI interface {
 
 	DescribeTableRequest(*dynamodb.DescribeTableInput) dynamodb.DescribeTableRequest
 
+	DescribeTableReplicaAutoScalingRequest(*dynamodb.DescribeTableReplicaAutoScalingInput) dynamodb.DescribeTableReplicaAutoScalingRequest
+
 	DescribeTimeToLiveRequest(*dynamodb.DescribeTimeToLiveInput) dynamodb.DescribeTimeToLiveRequest
 
 	GetItemRequest(*dynamodb.GetItemInput) dynamodb.GetItemRequest
 
 	ListBackupsRequest(*dynamodb.ListBackupsInput) dynamodb.ListBackupsRequest
+
+	ListContributorInsightsRequest(*dynamodb.ListContributorInsightsInput) dynamodb.ListContributorInsightsRequest
 
 	ListGlobalTablesRequest(*dynamodb.ListGlobalTablesInput) dynamodb.ListGlobalTablesRequest
 
@@ -126,6 +132,8 @@ type ClientAPI interface {
 
 	UpdateContinuousBackupsRequest(*dynamodb.UpdateContinuousBackupsInput) dynamodb.UpdateContinuousBackupsRequest
 
+	UpdateContributorInsightsRequest(*dynamodb.UpdateContributorInsightsInput) dynamodb.UpdateContributorInsightsRequest
+
 	UpdateGlobalTableRequest(*dynamodb.UpdateGlobalTableInput) dynamodb.UpdateGlobalTableRequest
 
 	UpdateGlobalTableSettingsRequest(*dynamodb.UpdateGlobalTableSettingsInput) dynamodb.UpdateGlobalTableSettingsRequest
@@ -133,6 +141,8 @@ type ClientAPI interface {
 	UpdateItemRequest(*dynamodb.UpdateItemInput) dynamodb.UpdateItemRequest
 
 	UpdateTableRequest(*dynamodb.UpdateTableInput) dynamodb.UpdateTableRequest
+
+	UpdateTableReplicaAutoScalingRequest(*dynamodb.UpdateTableReplicaAutoScalingInput) dynamodb.UpdateTableReplicaAutoScalingRequest
 
 	UpdateTimeToLiveRequest(*dynamodb.UpdateTimeToLiveInput) dynamodb.UpdateTimeToLiveRequest
 

@@ -72,7 +72,7 @@ const opCreatePresignedNotebookInstanceUrl = "CreatePresignedNotebookInstanceUrl
 // to a list of IP addresses that you specify. Use the NotIpAddress condition
 // operator and the aws:SourceIP condition context key to specify the list of
 // IP addresses that you want to have access to the notebook instance. For more
-// information, see Limit Access to a Notebook Instance by IP Address (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-ip-filter.html).
+// information, see Limit Access to a Notebook Instance by IP Address (https://docs.aws.amazon.com/sagemaker/latest/dg/security_iam_id-based-policy-examples.html#nbi-ip-filter).
 //
 // The URL that you get from a call to is valid only for 5 minutes. If you try
 // to use the URL after the 5-minute limit expires, you are directed to the

@@ -12,8 +12,8 @@ import (
 type CreateLogSubscriptionInput struct {
 	_ struct{} `type:"structure"`
 
-	// Identifier (ID) of the directory to which you want to subscribe and receive
-	// real-time logs to your specified CloudWatch log group.
+	// Identifier of the directory to which you want to subscribe and receive real-time
+	// logs to your specified CloudWatch log group.
 	//
 	// DirectoryId is a required field
 	DirectoryId *string `type:"string" required:"true"`
@@ -65,8 +65,8 @@ const opCreateLogSubscription = "CreateLogSubscription"
 // CreateLogSubscriptionRequest returns a request value for making API operation for
 // AWS Directory Service.
 //
-// Creates a subscription to forward real time Directory Service domain controller
-// security logs to the specified CloudWatch log group in your AWS account.
+// Creates a subscription to forward real-time Directory Service domain controller
+// security logs to the specified Amazon CloudWatch log group in your AWS account.
 //
 //    // Example sending a request using CreateLogSubscriptionRequest.
 //    req := client.CreateLogSubscriptionRequest(params)

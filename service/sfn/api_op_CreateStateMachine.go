@@ -20,6 +20,9 @@ type CreateStateMachineInput struct {
 	// Definition is a required field
 	Definition *string `locationName:"definition" min:"1" type:"string" required:"true" sensitive:"true"`
 
+	// Defines what execution history events are logged and where they are logged.
+	LoggingConfiguration *LoggingConfiguration `locationName:"loggingConfiguration" type:"structure"`
+
 	// The name of the state machine.
 	//
 	// A name must not contain:
@@ -52,6 +55,10 @@ type CreateStateMachineInput struct {
 	// Tags may only contain Unicode letters, digits, white space, or these symbols:
 	// _ . : / = + - @.
 	Tags []Tag `locationName:"tags" type:"list"`
+
+	// Determines whether a Standard or Express state machine is created. If not
+	// set, Standard is created.
+	Type StateMachineType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -82,6 +89,11 @@ func (s *CreateStateMachineInput) Validate() error {
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
+	}
+	if s.LoggingConfiguration != nil {
+		if err := s.LoggingConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("LoggingConfiguration", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {

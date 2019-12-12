@@ -66,19 +66,27 @@ import (
 type ClientAPI interface {
 	CreateClusterRequest(*eks.CreateClusterInput) eks.CreateClusterRequest
 
+	CreateFargateProfileRequest(*eks.CreateFargateProfileInput) eks.CreateFargateProfileRequest
+
 	CreateNodegroupRequest(*eks.CreateNodegroupInput) eks.CreateNodegroupRequest
 
 	DeleteClusterRequest(*eks.DeleteClusterInput) eks.DeleteClusterRequest
 
+	DeleteFargateProfileRequest(*eks.DeleteFargateProfileInput) eks.DeleteFargateProfileRequest
+
 	DeleteNodegroupRequest(*eks.DeleteNodegroupInput) eks.DeleteNodegroupRequest
 
 	DescribeClusterRequest(*eks.DescribeClusterInput) eks.DescribeClusterRequest
+
+	DescribeFargateProfileRequest(*eks.DescribeFargateProfileInput) eks.DescribeFargateProfileRequest
 
 	DescribeNodegroupRequest(*eks.DescribeNodegroupInput) eks.DescribeNodegroupRequest
 
 	DescribeUpdateRequest(*eks.DescribeUpdateInput) eks.DescribeUpdateRequest
 
 	ListClustersRequest(*eks.ListClustersInput) eks.ListClustersRequest
+
+	ListFargateProfilesRequest(*eks.ListFargateProfilesInput) eks.ListFargateProfilesRequest
 
 	ListNodegroupsRequest(*eks.ListNodegroupsInput) eks.ListNodegroupsRequest
 

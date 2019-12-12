@@ -71,11 +71,17 @@ type ClientAPI interface {
 
 	BatchDetectSyntaxRequest(*comprehend.BatchDetectSyntaxInput) comprehend.BatchDetectSyntaxRequest
 
+	ClassifyDocumentRequest(*comprehend.ClassifyDocumentInput) comprehend.ClassifyDocumentRequest
+
 	CreateDocumentClassifierRequest(*comprehend.CreateDocumentClassifierInput) comprehend.CreateDocumentClassifierRequest
+
+	CreateEndpointRequest(*comprehend.CreateEndpointInput) comprehend.CreateEndpointRequest
 
 	CreateEntityRecognizerRequest(*comprehend.CreateEntityRecognizerInput) comprehend.CreateEntityRecognizerRequest
 
 	DeleteDocumentClassifierRequest(*comprehend.DeleteDocumentClassifierInput) comprehend.DeleteDocumentClassifierRequest
+
+	DeleteEndpointRequest(*comprehend.DeleteEndpointInput) comprehend.DeleteEndpointRequest
 
 	DeleteEntityRecognizerRequest(*comprehend.DeleteEntityRecognizerInput) comprehend.DeleteEntityRecognizerRequest
 
@@ -84,6 +90,8 @@ type ClientAPI interface {
 	DescribeDocumentClassifierRequest(*comprehend.DescribeDocumentClassifierInput) comprehend.DescribeDocumentClassifierRequest
 
 	DescribeDominantLanguageDetectionJobRequest(*comprehend.DescribeDominantLanguageDetectionJobInput) comprehend.DescribeDominantLanguageDetectionJobRequest
+
+	DescribeEndpointRequest(*comprehend.DescribeEndpointInput) comprehend.DescribeEndpointRequest
 
 	DescribeEntitiesDetectionJobRequest(*comprehend.DescribeEntitiesDetectionJobInput) comprehend.DescribeEntitiesDetectionJobRequest
 
@@ -110,6 +118,8 @@ type ClientAPI interface {
 	ListDocumentClassifiersRequest(*comprehend.ListDocumentClassifiersInput) comprehend.ListDocumentClassifiersRequest
 
 	ListDominantLanguageDetectionJobsRequest(*comprehend.ListDominantLanguageDetectionJobsInput) comprehend.ListDominantLanguageDetectionJobsRequest
+
+	ListEndpointsRequest(*comprehend.ListEndpointsInput) comprehend.ListEndpointsRequest
 
 	ListEntitiesDetectionJobsRequest(*comprehend.ListEntitiesDetectionJobsInput) comprehend.ListEntitiesDetectionJobsRequest
 
@@ -150,6 +160,8 @@ type ClientAPI interface {
 	TagResourceRequest(*comprehend.TagResourceInput) comprehend.TagResourceRequest
 
 	UntagResourceRequest(*comprehend.UntagResourceInput) comprehend.UntagResourceRequest
+
+	UpdateEndpointRequest(*comprehend.UpdateEndpointInput) comprehend.UpdateEndpointRequest
 }
 
 var _ ClientAPI = (*comprehend.Client)(nil)

@@ -22,16 +22,15 @@ type CreateAuthorizerInput struct {
 	// An integer with a value between [0-3600].
 	AuthorizerResultTtlInSeconds *int64 `locationName:"authorizerResultTtlInSeconds" type:"integer"`
 
-	// The authorizer type. Currently the only valid value is REQUEST, for a Lambda
-	// function using incoming request parameters.
+	// The authorizer type. For WebSocket APIs, specify REQUEST for a Lambda function
+	// using incoming request parameters. For HTTP APIs, specify JWT to use JSON
+	// Web Tokens.
 	//
 	// AuthorizerType is a required field
 	AuthorizerType AuthorizerType `locationName:"authorizerType" type:"string" required:"true" enum:"true"`
 
 	// A string representation of a URI with a length between [1-2048].
-	//
-	// AuthorizerUri is a required field
-	AuthorizerUri *string `locationName:"authorizerUri" type:"string" required:"true"`
+	AuthorizerUri *string `locationName:"authorizerUri" type:"string"`
 
 	// The identity source for which authorization is requested. For the REQUEST
 	// authorizer, this is required when authorization caching is enabled. The value
@@ -53,13 +52,14 @@ type CreateAuthorizerInput struct {
 	// A string with a length between [0-1024].
 	IdentityValidationExpression *string `locationName:"identityValidationExpression" type:"string"`
 
+	// Represents the configuration of a JWT authorizer. Required for the JWT authorizer
+	// type. Supported only for HTTP APIs.
+	JwtConfiguration *JWTConfiguration `locationName:"jwtConfiguration" type:"structure"`
+
 	// A string with a length between [1-128].
 	//
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
-
-	// For REQUEST authorizer, this is not defined.
-	ProviderArns []string `locationName:"providerArns" type:"list"`
 }
 
 // String returns the string representation
@@ -76,10 +76,6 @@ func (s *CreateAuthorizerInput) Validate() error {
 	}
 	if len(s.AuthorizerType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("AuthorizerType"))
-	}
-
-	if s.AuthorizerUri == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AuthorizerUri"))
 	}
 
 	if s.IdentitySource == nil {
@@ -142,23 +138,17 @@ func (s CreateAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "identityValidationExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.JwtConfiguration != nil {
+		v := s.JwtConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "jwtConfiguration", v, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ProviderArns != nil {
-		v := s.ProviderArns
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "providerArns", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
 	}
 	if s.ApiId != nil {
 		v := *s.ApiId
@@ -181,8 +171,9 @@ type CreateAuthorizerOutput struct {
 	// An integer with a value between [0-3600].
 	AuthorizerResultTtlInSeconds *int64 `locationName:"authorizerResultTtlInSeconds" type:"integer"`
 
-	// The authorizer type. Currently the only valid value is REQUEST, for a Lambda
-	// function using incoming request parameters.
+	// The authorizer type. For WebSocket APIs, specify REQUEST for a Lambda function
+	// using incoming request parameters. For HTTP APIs, specify JWT to use JSON
+	// Web Tokens.
 	AuthorizerType AuthorizerType `locationName:"authorizerType" type:"string" enum:"true"`
 
 	// A string representation of a URI with a length between [1-2048].
@@ -206,11 +197,12 @@ type CreateAuthorizerOutput struct {
 	// A string with a length between [0-1024].
 	IdentityValidationExpression *string `locationName:"identityValidationExpression" type:"string"`
 
+	// Represents the configuration of a JWT authorizer. Required for the JWT authorizer
+	// type. Supported only for HTTP APIs.
+	JwtConfiguration *JWTConfiguration `locationName:"jwtConfiguration" type:"structure"`
+
 	// A string with a length between [1-128].
 	Name *string `locationName:"name" type:"string"`
-
-	// For REQUEST authorizer, this is not defined.
-	ProviderArns []string `locationName:"providerArns" type:"list"`
 }
 
 // String returns the string representation
@@ -268,23 +260,17 @@ func (s CreateAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "identityValidationExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.JwtConfiguration != nil {
+		v := s.JwtConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "jwtConfiguration", v, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ProviderArns != nil {
-		v := s.ProviderArns
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "providerArns", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
 	}
 	return nil
 }

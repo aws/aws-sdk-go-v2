@@ -13,7 +13,7 @@ import (
 type ListTemplateVersionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID that contains the templates you are listing.
+	// The ID of the AWS account that contains the templates that you're listing.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -102,7 +102,7 @@ type ListTemplateVersionsOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
 	// A structure containing a list of all the versions of the specified template.
@@ -149,12 +149,8 @@ const opListTemplateVersions = "ListTemplateVersions"
 // ListTemplateVersionsRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Lists all the versions of the templates in the Quicksight account.
-//
-// CLI syntax:
-//
-// aws quicksight list-template-versions --aws-account-id 111122223333 --aws-account-id
-// 196359894473 --template-id reports-test-template
+// Lists all the versions of the templates in the current Amazon QuickSight
+// account.
 //
 //    // Example sending a request using ListTemplateVersionsRequest.
 //    req := client.ListTemplateVersionsRequest(params)

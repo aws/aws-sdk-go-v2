@@ -38,10 +38,9 @@ type StartEntitiesDetectionJobInput struct {
 	JobName *string `min:"1" type:"string"`
 
 	// The language of the input documents. All documents must be in the same language.
-	// You can specify any of the languages supported by Amazon Comprehend: English
-	// ("en"), Spanish ("es"), French ("fr"), German ("de"), Italian ("it"), or
-	// Portuguese ("pt"). If custom entities recognition is used, this parameter
-	// is ignored and the language used for training the model is used instead.
+	// You can specify any of the languages supported by Amazon Comprehend. If custom
+	// entities recognition is used, this parameter is ignored and the language
+	// used for training the model is used instead.
 	//
 	// LanguageCode is a required field
 	LanguageCode LanguageCode `type:"string" required:"true" enum:"true"`

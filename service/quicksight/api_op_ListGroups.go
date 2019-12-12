@@ -103,7 +103,7 @@ type ListGroupsOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -148,14 +148,6 @@ const opListGroups = "ListGroups"
 // Amazon QuickSight.
 //
 // Lists all user groups in Amazon QuickSight.
-//
-// The permissions resource is arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/*.
-//
-// The response is a list of group objects.
-//
-// CLI Sample:
-//
-// aws quicksight list-groups -\-aws-account-id=111122223333 -\-namespace=default
 //
 //    // Example sending a request using ListGroupsRequest.
 //    req := client.ListGroupsRequest(params)

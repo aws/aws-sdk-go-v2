@@ -53,7 +53,9 @@ const opGlobalSignOut = "GlobalSignOut"
 // GlobalSignOutRequest returns a request value for making API operation for
 // Amazon Cognito Identity Provider.
 //
-// Signs out users from all devices.
+// Signs out users from all devices. It also invalidates all refresh tokens
+// issued to a user. The user's current access and Id tokens remain valid until
+// their expiry. Access and Id tokens expire one hour after they are issued.
 //
 //    // Example sending a request using GlobalSignOutRequest.
 //    req := client.GlobalSignOutRequest(params)

@@ -16,7 +16,9 @@ type GetResourceShareAssociationsInput struct {
 	// The association status.
 	AssociationStatus ResourceShareAssociationStatus `locationName:"associationStatus" type:"string" enum:"true"`
 
-	// The association type.
+	// The association type. Specify PRINCIPAL to list the principals that are associated
+	// with the specified resource share. Specify RESOURCE to list the resources
+	// that are associated with the specified resource share.
 	//
 	// AssociationType is a required field
 	AssociationType ResourceShareAssociationType `locationName:"associationType" type:"string" required:"true" enum:"true"`

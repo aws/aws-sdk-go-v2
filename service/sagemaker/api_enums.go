@@ -39,6 +39,107 @@ func (enum AlgorithmStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type AppInstanceType string
+
+// Enum values for AppInstanceType
+const (
+	AppInstanceTypeSystem         AppInstanceType = "system"
+	AppInstanceTypeMlT3Micro      AppInstanceType = "ml.t3.micro"
+	AppInstanceTypeMlT3Small      AppInstanceType = "ml.t3.small"
+	AppInstanceTypeMlT3Medium     AppInstanceType = "ml.t3.medium"
+	AppInstanceTypeMlT3Large      AppInstanceType = "ml.t3.large"
+	AppInstanceTypeMlT3Xlarge     AppInstanceType = "ml.t3.xlarge"
+	AppInstanceTypeMlT32xlarge    AppInstanceType = "ml.t3.2xlarge"
+	AppInstanceTypeMlM5Large      AppInstanceType = "ml.m5.large"
+	AppInstanceTypeMlM5Xlarge     AppInstanceType = "ml.m5.xlarge"
+	AppInstanceTypeMlM52xlarge    AppInstanceType = "ml.m5.2xlarge"
+	AppInstanceTypeMlM54xlarge    AppInstanceType = "ml.m5.4xlarge"
+	AppInstanceTypeMlM58xlarge    AppInstanceType = "ml.m5.8xlarge"
+	AppInstanceTypeMlM512xlarge   AppInstanceType = "ml.m5.12xlarge"
+	AppInstanceTypeMlM516xlarge   AppInstanceType = "ml.m5.16xlarge"
+	AppInstanceTypeMlM524xlarge   AppInstanceType = "ml.m5.24xlarge"
+	AppInstanceTypeMlC5Large      AppInstanceType = "ml.c5.large"
+	AppInstanceTypeMlC5Xlarge     AppInstanceType = "ml.c5.xlarge"
+	AppInstanceTypeMlC52xlarge    AppInstanceType = "ml.c5.2xlarge"
+	AppInstanceTypeMlC54xlarge    AppInstanceType = "ml.c5.4xlarge"
+	AppInstanceTypeMlC59xlarge    AppInstanceType = "ml.c5.9xlarge"
+	AppInstanceTypeMlC512xlarge   AppInstanceType = "ml.c5.12xlarge"
+	AppInstanceTypeMlC518xlarge   AppInstanceType = "ml.c5.18xlarge"
+	AppInstanceTypeMlC524xlarge   AppInstanceType = "ml.c5.24xlarge"
+	AppInstanceTypeMlP32xlarge    AppInstanceType = "ml.p3.2xlarge"
+	AppInstanceTypeMlP38xlarge    AppInstanceType = "ml.p3.8xlarge"
+	AppInstanceTypeMlP316xlarge   AppInstanceType = "ml.p3.16xlarge"
+	AppInstanceTypeMlG4dnXlarge   AppInstanceType = "ml.g4dn.xlarge"
+	AppInstanceTypeMlG4dn2xlarge  AppInstanceType = "ml.g4dn.2xlarge"
+	AppInstanceTypeMlG4dn4xlarge  AppInstanceType = "ml.g4dn.4xlarge"
+	AppInstanceTypeMlG4dn8xlarge  AppInstanceType = "ml.g4dn.8xlarge"
+	AppInstanceTypeMlG4dn12xlarge AppInstanceType = "ml.g4dn.12xlarge"
+	AppInstanceTypeMlG4dn16xlarge AppInstanceType = "ml.g4dn.16xlarge"
+)
+
+func (enum AppInstanceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AppInstanceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AppSortKey string
+
+// Enum values for AppSortKey
+const (
+	AppSortKeyCreationTime AppSortKey = "CreationTime"
+)
+
+func (enum AppSortKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AppSortKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AppStatus string
+
+// Enum values for AppStatus
+const (
+	AppStatusDeleted   AppStatus = "Deleted"
+	AppStatusDeleting  AppStatus = "Deleting"
+	AppStatusFailed    AppStatus = "Failed"
+	AppStatusInService AppStatus = "InService"
+	AppStatusPending   AppStatus = "Pending"
+)
+
+func (enum AppStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AppStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AppType string
+
+// Enum values for AppType
+const (
+	AppTypeJupyterServer AppType = "JupyterServer"
+	AppTypeKernelGateway AppType = "KernelGateway"
+	AppTypeTensorBoard   AppType = "TensorBoard"
+)
+
+func (enum AppType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AppType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AssemblyType string
 
 // Enum values for AssemblyType
@@ -52,6 +153,173 @@ func (enum AssemblyType) MarshalValue() (string, error) {
 }
 
 func (enum AssemblyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AuthMode string
+
+// Enum values for AuthMode
+const (
+	AuthModeSso AuthMode = "SSO"
+	AuthModeIam AuthMode = "IAM"
+)
+
+func (enum AuthMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AuthMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AutoMLJobObjectiveType string
+
+// Enum values for AutoMLJobObjectiveType
+const (
+	AutoMLJobObjectiveTypeMaximize AutoMLJobObjectiveType = "Maximize"
+	AutoMLJobObjectiveTypeMinimize AutoMLJobObjectiveType = "Minimize"
+)
+
+func (enum AutoMLJobObjectiveType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutoMLJobObjectiveType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AutoMLJobSecondaryStatus string
+
+// Enum values for AutoMLJobSecondaryStatus
+const (
+	AutoMLJobSecondaryStatusStarting                      AutoMLJobSecondaryStatus = "Starting"
+	AutoMLJobSecondaryStatusAnalyzingData                 AutoMLJobSecondaryStatus = "AnalyzingData"
+	AutoMLJobSecondaryStatusFeatureEngineering            AutoMLJobSecondaryStatus = "FeatureEngineering"
+	AutoMLJobSecondaryStatusModelTuning                   AutoMLJobSecondaryStatus = "ModelTuning"
+	AutoMLJobSecondaryStatusMaxCandidatesReached          AutoMLJobSecondaryStatus = "MaxCandidatesReached"
+	AutoMLJobSecondaryStatusFailed                        AutoMLJobSecondaryStatus = "Failed"
+	AutoMLJobSecondaryStatusStopped                       AutoMLJobSecondaryStatus = "Stopped"
+	AutoMLJobSecondaryStatusMaxAutoMljobRuntimeReached    AutoMLJobSecondaryStatus = "MaxAutoMLJobRuntimeReached"
+	AutoMLJobSecondaryStatusStopping                      AutoMLJobSecondaryStatus = "Stopping"
+	AutoMLJobSecondaryStatusCandidateDefinitionsGenerated AutoMLJobSecondaryStatus = "CandidateDefinitionsGenerated"
+)
+
+func (enum AutoMLJobSecondaryStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutoMLJobSecondaryStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AutoMLJobStatus string
+
+// Enum values for AutoMLJobStatus
+const (
+	AutoMLJobStatusCompleted  AutoMLJobStatus = "Completed"
+	AutoMLJobStatusInProgress AutoMLJobStatus = "InProgress"
+	AutoMLJobStatusFailed     AutoMLJobStatus = "Failed"
+	AutoMLJobStatusStopped    AutoMLJobStatus = "Stopped"
+	AutoMLJobStatusStopping   AutoMLJobStatus = "Stopping"
+)
+
+func (enum AutoMLJobStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutoMLJobStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AutoMLMetricEnum string
+
+// Enum values for AutoMLMetricEnum
+const (
+	AutoMLMetricEnumAccuracy AutoMLMetricEnum = "Accuracy"
+	AutoMLMetricEnumMse      AutoMLMetricEnum = "MSE"
+	AutoMLMetricEnumF1       AutoMLMetricEnum = "F1"
+	AutoMLMetricEnumF1macro  AutoMLMetricEnum = "F1macro"
+)
+
+func (enum AutoMLMetricEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutoMLMetricEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AutoMLS3DataType string
+
+// Enum values for AutoMLS3DataType
+const (
+	AutoMLS3DataTypeManifestFile AutoMLS3DataType = "ManifestFile"
+	AutoMLS3DataTypeS3prefix     AutoMLS3DataType = "S3Prefix"
+)
+
+func (enum AutoMLS3DataType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutoMLS3DataType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AutoMLSortBy string
+
+// Enum values for AutoMLSortBy
+const (
+	AutoMLSortByName         AutoMLSortBy = "Name"
+	AutoMLSortByCreationTime AutoMLSortBy = "CreationTime"
+	AutoMLSortByStatus       AutoMLSortBy = "Status"
+)
+
+func (enum AutoMLSortBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutoMLSortBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AutoMLSortOrder string
+
+// Enum values for AutoMLSortOrder
+const (
+	AutoMLSortOrderAscending  AutoMLSortOrder = "Ascending"
+	AutoMLSortOrderDescending AutoMLSortOrder = "Descending"
+)
+
+func (enum AutoMLSortOrder) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutoMLSortOrder) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AwsManagedHumanLoopRequestSource string
+
+// Enum values for AwsManagedHumanLoopRequestSource
+const (
+	AwsManagedHumanLoopRequestSourceAwsRekognitionDetectModerationLabelsImageV3 AwsManagedHumanLoopRequestSource = "AWS/Rekognition/DetectModerationLabels/Image/V3"
+	AwsManagedHumanLoopRequestSourceAwsTextractAnalyzeDocumentFormsV1           AwsManagedHumanLoopRequestSource = "AWS/Textract/AnalyzeDocument/Forms/V1"
+)
+
+func (enum AwsManagedHumanLoopRequestSource) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AwsManagedHumanLoopRequestSource) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -86,6 +354,96 @@ func (enum BooleanOperator) MarshalValue() (string, error) {
 }
 
 func (enum BooleanOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type CandidateSortBy string
+
+// Enum values for CandidateSortBy
+const (
+	CandidateSortByCreationTime              CandidateSortBy = "CreationTime"
+	CandidateSortByStatus                    CandidateSortBy = "Status"
+	CandidateSortByFinalObjectiveMetricValue CandidateSortBy = "FinalObjectiveMetricValue"
+)
+
+func (enum CandidateSortBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CandidateSortBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type CandidateStatus string
+
+// Enum values for CandidateStatus
+const (
+	CandidateStatusCompleted  CandidateStatus = "Completed"
+	CandidateStatusInProgress CandidateStatus = "InProgress"
+	CandidateStatusFailed     CandidateStatus = "Failed"
+	CandidateStatusStopped    CandidateStatus = "Stopped"
+	CandidateStatusStopping   CandidateStatus = "Stopping"
+)
+
+func (enum CandidateStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CandidateStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type CandidateStepType string
+
+// Enum values for CandidateStepType
+const (
+	CandidateStepTypeAwsSageMakerTrainingJob   CandidateStepType = "AWS::SageMaker::TrainingJob"
+	CandidateStepTypeAwsSageMakerTransformJob  CandidateStepType = "AWS::SageMaker::TransformJob"
+	CandidateStepTypeAwsSageMakerProcessingJob CandidateStepType = "AWS::SageMaker::ProcessingJob"
+)
+
+func (enum CandidateStepType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CandidateStepType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type CaptureMode string
+
+// Enum values for CaptureMode
+const (
+	CaptureModeInput  CaptureMode = "Input"
+	CaptureModeOutput CaptureMode = "Output"
+)
+
+func (enum CaptureMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CaptureMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type CaptureStatus string
+
+// Enum values for CaptureStatus
+const (
+	CaptureStatusStarted CaptureStatus = "Started"
+	CaptureStatusStopped CaptureStatus = "Stopped"
+)
+
+func (enum CaptureStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CaptureStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -252,6 +610,25 @@ func (enum DirectInternetAccess) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type DomainStatus string
+
+// Enum values for DomainStatus
+const (
+	DomainStatusDeleting  DomainStatus = "Deleting"
+	DomainStatusFailed    DomainStatus = "Failed"
+	DomainStatusInService DomainStatus = "InService"
+	DomainStatusPending   DomainStatus = "Pending"
+)
+
+func (enum DomainStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DomainStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EndpointConfigSortKey string
 
 // Enum values for EndpointConfigSortKey
@@ -310,6 +687,28 @@ func (enum EndpointStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ExecutionStatus string
+
+// Enum values for ExecutionStatus
+const (
+	ExecutionStatusPending                 ExecutionStatus = "Pending"
+	ExecutionStatusCompleted               ExecutionStatus = "Completed"
+	ExecutionStatusCompletedWithViolations ExecutionStatus = "CompletedWithViolations"
+	ExecutionStatusInProgress              ExecutionStatus = "InProgress"
+	ExecutionStatusFailed                  ExecutionStatus = "Failed"
+	ExecutionStatusStopping                ExecutionStatus = "Stopping"
+	ExecutionStatusStopped                 ExecutionStatus = "Stopped"
+)
+
+func (enum ExecutionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExecutionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FileSystemAccessMode string
 
 // Enum values for FileSystemAccessMode
@@ -340,6 +739,26 @@ func (enum FileSystemType) MarshalValue() (string, error) {
 }
 
 func (enum FileSystemType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type FlowDefinitionStatus string
+
+// Enum values for FlowDefinitionStatus
+const (
+	FlowDefinitionStatusInitializing FlowDefinitionStatus = "Initializing"
+	FlowDefinitionStatusActive       FlowDefinitionStatus = "Active"
+	FlowDefinitionStatusFailed       FlowDefinitionStatus = "Failed"
+	FlowDefinitionStatusDeleting     FlowDefinitionStatus = "Deleting"
+	FlowDefinitionStatusDeleted      FlowDefinitionStatus = "Deleted"
+)
+
+func (enum FlowDefinitionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FlowDefinitionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -669,6 +1088,42 @@ func (enum ModelSortKey) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type MonitoringExecutionSortKey string
+
+// Enum values for MonitoringExecutionSortKey
+const (
+	MonitoringExecutionSortKeyCreationTime  MonitoringExecutionSortKey = "CreationTime"
+	MonitoringExecutionSortKeyScheduledTime MonitoringExecutionSortKey = "ScheduledTime"
+	MonitoringExecutionSortKeyStatus        MonitoringExecutionSortKey = "Status"
+)
+
+func (enum MonitoringExecutionSortKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MonitoringExecutionSortKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type MonitoringScheduleSortKey string
+
+// Enum values for MonitoringScheduleSortKey
+const (
+	MonitoringScheduleSortKeyName         MonitoringScheduleSortKey = "Name"
+	MonitoringScheduleSortKeyCreationTime MonitoringScheduleSortKey = "CreationTime"
+	MonitoringScheduleSortKeyStatus       MonitoringScheduleSortKey = "Status"
+)
+
+func (enum MonitoringScheduleSortKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MonitoringScheduleSortKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NotebookInstanceAcceleratorType string
 
 // Enum values for NotebookInstanceAcceleratorType
@@ -782,6 +1237,23 @@ func (enum NotebookInstanceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type NotebookOutputOption string
+
+// Enum values for NotebookOutputOption
+const (
+	NotebookOutputOptionAllowed  NotebookOutputOption = "Allowed"
+	NotebookOutputOptionDisabled NotebookOutputOption = "Disabled"
+)
+
+func (enum NotebookOutputOption) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NotebookOutputOption) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ObjectiveStatus string
 
 // Enum values for ObjectiveStatus
@@ -811,6 +1283,8 @@ const (
 	OperatorLessThan             Operator = "LessThan"
 	OperatorLessThanOrEqualTo    Operator = "LessThanOrEqualTo"
 	OperatorContains             Operator = "Contains"
+	OperatorExists               Operator = "Exists"
+	OperatorNotExists            Operator = "NotExists"
 )
 
 func (enum Operator) MarshalValue() (string, error) {
@@ -854,6 +1328,182 @@ func (enum ParameterType) MarshalValue() (string, error) {
 }
 
 func (enum ParameterType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ProblemType string
+
+// Enum values for ProblemType
+const (
+	ProblemTypeBinaryClassification     ProblemType = "BinaryClassification"
+	ProblemTypeMulticlassClassification ProblemType = "MulticlassClassification"
+	ProblemTypeRegression               ProblemType = "Regression"
+)
+
+func (enum ProblemType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProblemType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ProcessingInstanceType string
+
+// Enum values for ProcessingInstanceType
+const (
+	ProcessingInstanceTypeMlT3Medium   ProcessingInstanceType = "ml.t3.medium"
+	ProcessingInstanceTypeMlT3Large    ProcessingInstanceType = "ml.t3.large"
+	ProcessingInstanceTypeMlT3Xlarge   ProcessingInstanceType = "ml.t3.xlarge"
+	ProcessingInstanceTypeMlT32xlarge  ProcessingInstanceType = "ml.t3.2xlarge"
+	ProcessingInstanceTypeMlM4Xlarge   ProcessingInstanceType = "ml.m4.xlarge"
+	ProcessingInstanceTypeMlM42xlarge  ProcessingInstanceType = "ml.m4.2xlarge"
+	ProcessingInstanceTypeMlM44xlarge  ProcessingInstanceType = "ml.m4.4xlarge"
+	ProcessingInstanceTypeMlM410xlarge ProcessingInstanceType = "ml.m4.10xlarge"
+	ProcessingInstanceTypeMlM416xlarge ProcessingInstanceType = "ml.m4.16xlarge"
+	ProcessingInstanceTypeMlC4Xlarge   ProcessingInstanceType = "ml.c4.xlarge"
+	ProcessingInstanceTypeMlC42xlarge  ProcessingInstanceType = "ml.c4.2xlarge"
+	ProcessingInstanceTypeMlC44xlarge  ProcessingInstanceType = "ml.c4.4xlarge"
+	ProcessingInstanceTypeMlC48xlarge  ProcessingInstanceType = "ml.c4.8xlarge"
+	ProcessingInstanceTypeMlP2Xlarge   ProcessingInstanceType = "ml.p2.xlarge"
+	ProcessingInstanceTypeMlP28xlarge  ProcessingInstanceType = "ml.p2.8xlarge"
+	ProcessingInstanceTypeMlP216xlarge ProcessingInstanceType = "ml.p2.16xlarge"
+	ProcessingInstanceTypeMlP32xlarge  ProcessingInstanceType = "ml.p3.2xlarge"
+	ProcessingInstanceTypeMlP38xlarge  ProcessingInstanceType = "ml.p3.8xlarge"
+	ProcessingInstanceTypeMlP316xlarge ProcessingInstanceType = "ml.p3.16xlarge"
+	ProcessingInstanceTypeMlC5Xlarge   ProcessingInstanceType = "ml.c5.xlarge"
+	ProcessingInstanceTypeMlC52xlarge  ProcessingInstanceType = "ml.c5.2xlarge"
+	ProcessingInstanceTypeMlC54xlarge  ProcessingInstanceType = "ml.c5.4xlarge"
+	ProcessingInstanceTypeMlC59xlarge  ProcessingInstanceType = "ml.c5.9xlarge"
+	ProcessingInstanceTypeMlC518xlarge ProcessingInstanceType = "ml.c5.18xlarge"
+	ProcessingInstanceTypeMlM5Large    ProcessingInstanceType = "ml.m5.large"
+	ProcessingInstanceTypeMlM5Xlarge   ProcessingInstanceType = "ml.m5.xlarge"
+	ProcessingInstanceTypeMlM52xlarge  ProcessingInstanceType = "ml.m5.2xlarge"
+	ProcessingInstanceTypeMlM54xlarge  ProcessingInstanceType = "ml.m5.4xlarge"
+	ProcessingInstanceTypeMlM512xlarge ProcessingInstanceType = "ml.m5.12xlarge"
+	ProcessingInstanceTypeMlM524xlarge ProcessingInstanceType = "ml.m5.24xlarge"
+	ProcessingInstanceTypeMlR5Large    ProcessingInstanceType = "ml.r5.large"
+	ProcessingInstanceTypeMlR5Xlarge   ProcessingInstanceType = "ml.r5.xlarge"
+	ProcessingInstanceTypeMlR52xlarge  ProcessingInstanceType = "ml.r5.2xlarge"
+	ProcessingInstanceTypeMlR54xlarge  ProcessingInstanceType = "ml.r5.4xlarge"
+	ProcessingInstanceTypeMlR58xlarge  ProcessingInstanceType = "ml.r5.8xlarge"
+	ProcessingInstanceTypeMlR512xlarge ProcessingInstanceType = "ml.r5.12xlarge"
+	ProcessingInstanceTypeMlR516xlarge ProcessingInstanceType = "ml.r5.16xlarge"
+	ProcessingInstanceTypeMlR524xlarge ProcessingInstanceType = "ml.r5.24xlarge"
+)
+
+func (enum ProcessingInstanceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProcessingInstanceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ProcessingJobStatus string
+
+// Enum values for ProcessingJobStatus
+const (
+	ProcessingJobStatusInProgress ProcessingJobStatus = "InProgress"
+	ProcessingJobStatusCompleted  ProcessingJobStatus = "Completed"
+	ProcessingJobStatusFailed     ProcessingJobStatus = "Failed"
+	ProcessingJobStatusStopping   ProcessingJobStatus = "Stopping"
+	ProcessingJobStatusStopped    ProcessingJobStatus = "Stopped"
+)
+
+func (enum ProcessingJobStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProcessingJobStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ProcessingS3CompressionType string
+
+// Enum values for ProcessingS3CompressionType
+const (
+	ProcessingS3CompressionTypeNone ProcessingS3CompressionType = "None"
+	ProcessingS3CompressionTypeGzip ProcessingS3CompressionType = "Gzip"
+)
+
+func (enum ProcessingS3CompressionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProcessingS3CompressionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ProcessingS3DataDistributionType string
+
+// Enum values for ProcessingS3DataDistributionType
+const (
+	ProcessingS3DataDistributionTypeFullyReplicated ProcessingS3DataDistributionType = "FullyReplicated"
+	ProcessingS3DataDistributionTypeShardedByS3key  ProcessingS3DataDistributionType = "ShardedByS3Key"
+)
+
+func (enum ProcessingS3DataDistributionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProcessingS3DataDistributionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ProcessingS3DataType string
+
+// Enum values for ProcessingS3DataType
+const (
+	ProcessingS3DataTypeManifestFile ProcessingS3DataType = "ManifestFile"
+	ProcessingS3DataTypeS3prefix     ProcessingS3DataType = "S3Prefix"
+)
+
+func (enum ProcessingS3DataType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProcessingS3DataType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ProcessingS3InputMode string
+
+// Enum values for ProcessingS3InputMode
+const (
+	ProcessingS3InputModePipe ProcessingS3InputMode = "Pipe"
+	ProcessingS3InputModeFile ProcessingS3InputMode = "File"
+)
+
+func (enum ProcessingS3InputMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProcessingS3InputMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ProcessingS3UploadMode string
+
+// Enum values for ProcessingS3UploadMode
+const (
+	ProcessingS3UploadModeContinuous ProcessingS3UploadMode = "Continuous"
+	ProcessingS3UploadModeEndOfJob   ProcessingS3UploadMode = "EndOfJob"
+)
+
+func (enum ProcessingS3UploadMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProcessingS3UploadMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -945,6 +1595,10 @@ const (
 	ProductionVariantInstanceTypeMlR5d4xlarge   ProductionVariantInstanceType = "ml.r5d.4xlarge"
 	ProductionVariantInstanceTypeMlR5d12xlarge  ProductionVariantInstanceType = "ml.r5d.12xlarge"
 	ProductionVariantInstanceTypeMlR5d24xlarge  ProductionVariantInstanceType = "ml.r5d.24xlarge"
+	ProductionVariantInstanceTypeMlInf1Xlarge   ProductionVariantInstanceType = "ml.inf1.xlarge"
+	ProductionVariantInstanceTypeMlInf12xlarge  ProductionVariantInstanceType = "ml.inf1.2xlarge"
+	ProductionVariantInstanceTypeMlInf16xlarge  ProductionVariantInstanceType = "ml.inf1.6xlarge"
+	ProductionVariantInstanceTypeMlInf124xlarge ProductionVariantInstanceType = "ml.inf1.24xlarge"
 )
 
 func (enum ProductionVariantInstanceType) MarshalValue() (string, error) {
@@ -977,7 +1631,10 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeTrainingJob ResourceType = "TrainingJob"
+	ResourceTypeTrainingJob              ResourceType = "TrainingJob"
+	ResourceTypeExperiment               ResourceType = "Experiment"
+	ResourceTypeExperimentTrial          ResourceType = "ExperimentTrial"
+	ResourceTypeExperimentTrialComponent ResourceType = "ExperimentTrialComponent"
 )
 
 func (enum ResourceType) MarshalValue() (string, error) {
@@ -985,6 +1642,23 @@ func (enum ResourceType) MarshalValue() (string, error) {
 }
 
 func (enum ResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RetentionType string
+
+// Enum values for RetentionType
+const (
+	RetentionTypeRetain RetentionType = "Retain"
+	RetentionTypeDelete RetentionType = "Delete"
+)
+
+func (enum RetentionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RetentionType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -1002,6 +1676,27 @@ func (enum RootAccess) MarshalValue() (string, error) {
 }
 
 func (enum RootAccess) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RuleEvaluationStatus string
+
+// Enum values for RuleEvaluationStatus
+const (
+	RuleEvaluationStatusInProgress    RuleEvaluationStatus = "InProgress"
+	RuleEvaluationStatusNoIssuesFound RuleEvaluationStatus = "NoIssuesFound"
+	RuleEvaluationStatusIssuesFound   RuleEvaluationStatus = "IssuesFound"
+	RuleEvaluationStatusError         RuleEvaluationStatus = "Error"
+	RuleEvaluationStatusStopping      RuleEvaluationStatus = "Stopping"
+	RuleEvaluationStatusStopped       RuleEvaluationStatus = "Stopped"
+)
+
+func (enum RuleEvaluationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RuleEvaluationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -1037,6 +1732,25 @@ func (enum S3DataType) MarshalValue() (string, error) {
 }
 
 func (enum S3DataType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ScheduleStatus string
+
+// Enum values for ScheduleStatus
+const (
+	ScheduleStatusPending   ScheduleStatus = "Pending"
+	ScheduleStatusFailed    ScheduleStatus = "Failed"
+	ScheduleStatusScheduled ScheduleStatus = "Scheduled"
+	ScheduleStatusStopped   ScheduleStatus = "Stopped"
+)
+
+func (enum ScheduleStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScheduleStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -1105,6 +1819,23 @@ func (enum SortBy) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type SortExperimentsBy string
+
+// Enum values for SortExperimentsBy
+const (
+	SortExperimentsByName         SortExperimentsBy = "Name"
+	SortExperimentsByCreationTime SortExperimentsBy = "CreationTime"
+)
+
+func (enum SortExperimentsBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SortExperimentsBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SortOrder string
 
 // Enum values for SortOrder
@@ -1118,6 +1849,40 @@ func (enum SortOrder) MarshalValue() (string, error) {
 }
 
 func (enum SortOrder) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SortTrialComponentsBy string
+
+// Enum values for SortTrialComponentsBy
+const (
+	SortTrialComponentsByName         SortTrialComponentsBy = "Name"
+	SortTrialComponentsByCreationTime SortTrialComponentsBy = "CreationTime"
+)
+
+func (enum SortTrialComponentsBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SortTrialComponentsBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SortTrialsBy string
+
+// Enum values for SortTrialsBy
+const (
+	SortTrialsByName         SortTrialsBy = "Name"
+	SortTrialsByCreationTime SortTrialsBy = "CreationTime"
+)
+
+func (enum SortTrialsBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SortTrialsBy) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -1152,6 +1917,7 @@ const (
 	TargetDeviceMlC5       TargetDevice = "ml_c5"
 	TargetDeviceMlP2       TargetDevice = "ml_p2"
 	TargetDeviceMlP3       TargetDevice = "ml_p3"
+	TargetDeviceMlInf1     TargetDevice = "ml_inf1"
 	TargetDeviceJetsonTx1  TargetDevice = "jetson_tx1"
 	TargetDeviceJetsonTx2  TargetDevice = "jetson_tx2"
 	TargetDeviceJetsonNano TargetDevice = "jetson_nano"
@@ -1346,6 +2112,60 @@ func (enum TransformJobStatus) MarshalValue() (string, error) {
 }
 
 func (enum TransformJobStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TrialComponentPrimaryStatus string
+
+// Enum values for TrialComponentPrimaryStatus
+const (
+	TrialComponentPrimaryStatusInProgress TrialComponentPrimaryStatus = "InProgress"
+	TrialComponentPrimaryStatusCompleted  TrialComponentPrimaryStatus = "Completed"
+	TrialComponentPrimaryStatusFailed     TrialComponentPrimaryStatus = "Failed"
+)
+
+func (enum TrialComponentPrimaryStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrialComponentPrimaryStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type UserProfileSortKey string
+
+// Enum values for UserProfileSortKey
+const (
+	UserProfileSortKeyCreationTime     UserProfileSortKey = "CreationTime"
+	UserProfileSortKeyLastModifiedTime UserProfileSortKey = "LastModifiedTime"
+)
+
+func (enum UserProfileSortKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UserProfileSortKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type UserProfileStatus string
+
+// Enum values for UserProfileStatus
+const (
+	UserProfileStatusDeleting  UserProfileStatus = "Deleting"
+	UserProfileStatusFailed    UserProfileStatus = "Failed"
+	UserProfileStatusInService UserProfileStatus = "InService"
+	UserProfileStatusPending   UserProfileStatus = "Pending"
+)
+
+func (enum UserProfileStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UserProfileStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

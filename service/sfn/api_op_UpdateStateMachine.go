@@ -17,6 +17,8 @@ type UpdateStateMachineInput struct {
 	// Language (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
 	Definition *string `locationName:"definition" min:"1" type:"string" sensitive:"true"`
 
+	LoggingConfiguration *LoggingConfiguration `locationName:"loggingConfiguration" type:"structure"`
+
 	// The Amazon Resource Name (ARN) of the IAM role of the state machine.
 	RoleArn *string `locationName:"roleArn" min:"1" type:"string"`
 
@@ -46,6 +48,11 @@ func (s *UpdateStateMachineInput) Validate() error {
 	}
 	if s.StateMachineArn != nil && len(*s.StateMachineArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("StateMachineArn", 1))
+	}
+	if s.LoggingConfiguration != nil {
+		if err := s.LoggingConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("LoggingConfiguration", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {

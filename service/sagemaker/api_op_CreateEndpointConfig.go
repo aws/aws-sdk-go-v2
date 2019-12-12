@@ -13,6 +13,8 @@ import (
 type CreateEndpointConfigInput struct {
 	_ struct{} `type:"structure"`
 
+	DataCaptureConfig *DataCaptureConfig `type:"structure"`
+
 	// The name of the endpoint configuration. You specify this name in a CreateEndpoint
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html)
 	// request.
@@ -70,6 +72,11 @@ func (s *CreateEndpointConfigInput) Validate() error {
 	}
 	if s.ProductionVariants != nil && len(s.ProductionVariants) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProductionVariants", 1))
+	}
+	if s.DataCaptureConfig != nil {
+		if err := s.DataCaptureConfig.Validate(); err != nil {
+			invalidParams.AddNested("DataCaptureConfig", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.ProductionVariants != nil {
 		for i, v := range s.ProductionVariants {

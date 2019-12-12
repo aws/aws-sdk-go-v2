@@ -21,12 +21,12 @@ type DeleteResolverInput struct {
 	// The resolver field name.
 	//
 	// FieldName is a required field
-	FieldName *string `location:"uri" locationName:"fieldName" type:"string" required:"true"`
+	FieldName *string `location:"uri" locationName:"fieldName" min:"1" type:"string" required:"true"`
 
 	// The name of the resolver type.
 	//
 	// TypeName is a required field
-	TypeName *string `location:"uri" locationName:"typeName" type:"string" required:"true"`
+	TypeName *string `location:"uri" locationName:"typeName" min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -45,9 +45,15 @@ func (s *DeleteResolverInput) Validate() error {
 	if s.FieldName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FieldName"))
 	}
+	if s.FieldName != nil && len(*s.FieldName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("FieldName", 1))
+	}
 
 	if s.TypeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
+	}
+	if s.TypeName != nil && len(*s.TypeName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TypeName", 1))
 	}
 
 	if invalidParams.Len() > 0 {

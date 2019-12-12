@@ -13,17 +13,20 @@ import (
 type DescribeTemplateAliasInput struct {
 	_ struct{} `type:"structure"`
 
-	// The alias name. $PUBLISHED is not supported for template.
+	// The name of the template alias that you want to describe. If you name a specific
+	// alias, you describe the version that the alias points to. You can specify
+	// the latest version of the template by providing the keyword $LATEST in the
+	// AliasName parameter. The keyword $PUBLISHED doesn't apply to templates.
 	//
 	// AliasName is a required field
 	AliasName *string `location:"uri" locationName:"AliasName" min:"1" type:"string" required:"true"`
 
-	// AWS account ID that contains the template alias you are describing.
+	// The ID of the AWS account that contains the template alias that you're describing.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
-	// An ID for the template.
+	// The ID for the template.
 	//
 	// TemplateId is a required field
 	TemplateId *string `location:"uri" locationName:"TemplateId" min:"1" type:"string" required:"true"`
@@ -96,7 +99,7 @@ type DescribeTemplateAliasOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
 	// Information about the template alias.
@@ -131,12 +134,7 @@ const opDescribeTemplateAlias = "DescribeTemplateAlias"
 // DescribeTemplateAliasRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Describes the template aliases of a template.
-//
-// CLI syntax:
-//
-// aws quicksight describe-template-alias --aws-account-id 111122223333 --template-id
-// 'reports_test_template' --alias-name 'STAGING'
+// Describes the template alias for a template.
 //
 //    // Example sending a request using DescribeTemplateAliasRequest.
 //    req := client.DescribeTemplateAliasRequest(params)

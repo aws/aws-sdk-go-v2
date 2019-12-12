@@ -13,6 +13,9 @@ import (
 type GetPublicAccessBlockInput struct {
 	_ struct{} `type:"structure"`
 
+	// The account ID for the Amazon Web Services account whose PublicAccessBlock
+	// configuration you want to retrieve.
+	//
 	// AccountId is a required field
 	AccountId *string `location:"header" locationName:"x-amz-account-id" type:"string" required:"true"`
 }
@@ -51,6 +54,8 @@ func (s GetPublicAccessBlockInput) MarshalFields(e protocol.FieldEncoder) error 
 type GetPublicAccessBlockOutput struct {
 	_ struct{} `type:"structure" payload:"PublicAccessBlockConfiguration"`
 
+	// The PublicAccessBlock configuration currently in effect for this Amazon Web
+	// Services account.
 	PublicAccessBlockConfiguration *PublicAccessBlockConfiguration `type:"structure"`
 }
 
@@ -74,6 +79,9 @@ const opGetPublicAccessBlock = "GetPublicAccessBlock"
 
 // GetPublicAccessBlockRequest returns a request value for making API operation for
 // AWS S3 Control.
+//
+// Retrieves the PublicAccessBlock configuration for an Amazon Web Services
+// account.
 //
 //    // Example sending a request using GetPublicAccessBlockRequest.
 //    req := client.GetPublicAccessBlockRequest(params)

@@ -13,7 +13,7 @@ import (
 type DeleteDashboardInput struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID that contains the dashboard you are deleting.
+	// The ID of the AWS account that contains the dashboard that you're deleting.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -23,7 +23,7 @@ type DeleteDashboardInput struct {
 	// DashboardId is a required field
 	DashboardId *string `location:"uri" locationName:"DashboardId" min:"1" type:"string" required:"true"`
 
-	// The version number of the dashboard. If version number property is provided,
+	// The version number of the dashboard. If the version number property is provided,
 	// only the specified version of the dashboard is deleted.
 	VersionNumber *int64 `location:"querystring" locationName:"version-number" min:"1" type:"long"`
 }
@@ -88,7 +88,7 @@ func (s DeleteDashboardInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteDashboardOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the resource.
+	// The Secure Socket Layer (SSL) properties that apply for the resource.
 	Arn *string `type:"string"`
 
 	// The ID of the dashboard.
@@ -97,7 +97,7 @@ type DeleteDashboardOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -136,14 +136,6 @@ const opDeleteDashboard = "DeleteDashboard"
 // Amazon QuickSight.
 //
 // Deletes a dashboard.
-//
-// CLI syntax:
-//
-// aws quicksight delete-dashboard --aws-account-id 111122223333 —dashboard-id
-// 123123123
-//
-// aws quicksight delete-dashboard --aws-account-id 111122223333 —dashboard-id
-// 123123123 —version-number 3
 //
 //    // Example sending a request using DeleteDashboardRequest.
 //    req := client.DeleteDashboardRequest(params)

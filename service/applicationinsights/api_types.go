@@ -28,7 +28,7 @@ type ApplicationComponent struct {
 	ResourceType *string `type:"string"`
 
 	// The stack tier of the application component.
-	Tier *string `type:"string"`
+	Tier Tier `min:"1" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -49,18 +49,45 @@ type ApplicationInfo struct {
 
 	// The SNS topic provided to Application Insights that is associated to the
 	// created opsItems to receive SNS notifications for opsItem updates.
-	OpsItemSNSTopicArn *string `type:"string"`
+	OpsItemSNSTopicArn *string `min:"20" type:"string"`
 
 	// The issues on the user side that block Application Insights from successfully
 	// monitoring an application.
 	Remarks *string `type:"string"`
 
 	// The name of the resource group used for the application.
-	ResourceGroupName *string `type:"string"`
+	ResourceGroupName *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
 func (s ApplicationInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// An object that defines the log patterns that belongs to a LogPatternSet.
+type LogPattern struct {
+	_ struct{} `type:"structure"`
+
+	// A regular expression that defines the log pattern. A log pattern can contains
+	// at many as 50 characters, and it cannot be empty.
+	Pattern *string `min:"1" type:"string"`
+
+	// The name of the log pattern. A log pattern name can contains at many as 50
+	// characters, and it cannot be empty. The characters can be Unicode letters,
+	// digits or one of the following symbols: period, dash, underscore.
+	PatternName *string `min:"1" type:"string"`
+
+	// The name of the log pattern. A log pattern name can contains at many as 30
+	// characters, and it cannot be empty. The characters can be Unicode letters,
+	// digits or one of the following symbols: period, dash, underscore.
+	PatternSetName *string `min:"1" type:"string"`
+
+	// Rank of the log pattern.
+	Rank *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s LogPattern) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -72,7 +99,7 @@ type Observation struct {
 	EndTime *time.Time `type:"timestamp"`
 
 	// The ID of the observation type.
-	Id *string `type:"string"`
+	Id *string `min:"38" type:"string"`
 
 	// The timestamp in the CloudWatch Logs that specifies when the matched line
 	// occurred.
@@ -128,13 +155,13 @@ type Problem struct {
 	Feedback map[string]FeedbackValue `type:"map"`
 
 	// The ID of the problem.
-	Id *string `type:"string"`
+	Id *string `min:"38" type:"string"`
 
 	// A detailed analysis of the problem using machine learning.
 	Insights *string `type:"string"`
 
 	// The name of the resource group affected by the problem.
-	ResourceGroupName *string `type:"string"`
+	ResourceGroupName *string `min:"1" type:"string"`
 
 	// A measure of the level of impact of the problem.
 	SeverityLevel SeverityLevel `type:"string" enum:"true"`
@@ -165,4 +192,69 @@ type RelatedObservations struct {
 // String returns the string representation
 func (s RelatedObservations) String() string {
 	return awsutil.Prettify(s)
+}
+
+// An object that defines the tags associated with an application. A tag is
+// a label that you optionally define and associate with an application. Tags
+// can help you categorize and manage resources in different ways, such as by
+// purpose, owner, environment, or other criteria.
+//
+// Each tag consists of a required tag key and an associated tag value, both
+// of which you define. A tag key is a general label that acts as a category
+// for a more specific tag value. A tag value acts as a descriptor within a
+// tag key. A tag key can contain as many as 128 characters. A tag value can
+// contain as many as 256 characters. The characters can be Unicode letters,
+// digits, white space, or one of the following symbols: _ . : / = + -. The
+// following additional restrictions apply to tags:
+//
+//    * Tag keys and values are case sensitive.
+//
+//    * For each associated resource, each tag key must be unique and it can
+//    have only one value.
+//
+//    * The aws: prefix is reserved for use by AWS; you can’t use it in any
+//    tag keys or values that you define. In addition, you can't edit or remove
+//    tag keys or values that use this prefix.
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// One part of a key-value pair that defines a tag. The maximum length of a
+	// tag key is 128 characters. The minimum length is 1 character.
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
+
+	// The optional part of a key-value pair that defines a tag. The maximum length
+	// of a tag value is 256 characters. The minimum length is 0 characters. If
+	// you don't want an application to have a specific tag value, don't specify
+	// a value for this parameter.
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }

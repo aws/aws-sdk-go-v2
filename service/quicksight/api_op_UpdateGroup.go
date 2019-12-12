@@ -109,7 +109,7 @@ type UpdateGroupOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -142,15 +142,6 @@ const opUpdateGroup = "UpdateGroup"
 // Amazon QuickSight.
 //
 // Changes a group description.
-//
-// The permissions resource is arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name> .
-//
-// The response is a group object.
-//
-// CLI Sample:
-//
-// aws quicksight update-group --aws-account-id=111122223333 --namespace=default
-// --group-name=Sales --description="Sales BI Dashboards"
 //
 //    // Example sending a request using UpdateGroupRequest.
 //    req := client.UpdateGroupRequest(params)

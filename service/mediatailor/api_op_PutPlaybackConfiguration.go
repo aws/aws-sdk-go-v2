@@ -27,6 +27,9 @@ type PutPlaybackConfigurationInput struct {
 	// The configuration for DASH content.
 	DashConfiguration *DashConfigurationForPut `type:"structure"`
 
+	// The configuration for pre-roll ad insertion.
+	LivePreRollConfiguration *LivePreRollConfiguration `type:"structure"`
+
 	// The identifier for the playback configuration.
 	Name *string `type:"string"`
 
@@ -78,6 +81,12 @@ func (s PutPlaybackConfigurationInput) MarshalFields(e protocol.FieldEncoder) er
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "DashConfiguration", v, metadata)
+	}
+	if s.LivePreRollConfiguration != nil {
+		v := s.LivePreRollConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LivePreRollConfiguration", v, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -133,6 +142,9 @@ type PutPlaybackConfigurationOutput struct {
 	// The configuration for HLS content.
 	HlsConfiguration *HlsConfiguration `type:"structure"`
 
+	// The configuration for pre-roll ad insertion.
+	LivePreRollConfiguration *LivePreRollConfiguration `type:"structure"`
+
 	Name *string `type:"string"`
 
 	PlaybackConfigurationArn *string `type:"string"`
@@ -180,6 +192,12 @@ func (s PutPlaybackConfigurationOutput) MarshalFields(e protocol.FieldEncoder) e
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "HlsConfiguration", v, metadata)
+	}
+	if s.LivePreRollConfiguration != nil {
+		v := s.LivePreRollConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LivePreRollConfiguration", v, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name

@@ -20,7 +20,7 @@ type ConnectDirectoryInput struct {
 	// ConnectSettings is a required field
 	ConnectSettings *DirectoryConnectSettings `type:"structure" required:"true"`
 
-	// A textual description for the directory.
+	// A description for the directory.
 	Description *string `type:"string"`
 
 	// The fully qualified name of the on-premises directory, such as corp.example.com.

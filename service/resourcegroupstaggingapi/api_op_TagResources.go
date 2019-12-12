@@ -77,21 +77,19 @@ const opTagResources = "TagResources"
 //
 // Applies one or more tags to the specified resources. Note the following:
 //
-//    * Not all resources can have tags. For a list of resources that support
-//    tagging, see Supported Resources (http://docs.aws.amazon.com/ARG/latest/userguide/supported-resources.html)
-//    in the AWS Resource Groups User Guide.
+//    * Not all resources can have tags. For a list of services that support
+//    tagging, see this list (http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html).
 //
-//    * Each resource can have up to 50 tags. For other limits, see Tag Restrictions
-//    (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-restrictions)
-//    in the Amazon EC2 User Guide for Linux Instances.
+//    * Each resource can have up to 50 tags. For other limits, see Tag Naming
+//    and Usage Conventions (http://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions)
+//    in the AWS General Reference.
 //
-//    * You can only tag resources that are located in the specified region
+//    * You can only tag resources that are located in the specified Region
 //    for the AWS account.
 //
 //    * To add tags to a resource, you need the necessary permissions for the
 //    service that the resource belongs to as well as permissions for adding
-//    tags. For more information, see Obtaining Permissions for Tagging (http://docs.aws.amazon.com/ARG/latest/userguide/obtaining-permissions-for-tagging.html)
-//    in the AWS Resource Groups User Guide.
+//    tags. For more information, see this list (http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html).
 //
 //    // Example sending a request using TagResourcesRequest.
 //    req := client.TagResourcesRequest(params)

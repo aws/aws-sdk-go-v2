@@ -24,6 +24,23 @@ func (enum BlockType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ContentClassifier string
+
+// Enum values for ContentClassifier
+const (
+	ContentClassifierFreeOfPersonallyIdentifiableInformation ContentClassifier = "FreeOfPersonallyIdentifiableInformation"
+	ContentClassifierFreeOfAdultContent                      ContentClassifier = "FreeOfAdultContent"
+)
+
+func (enum ContentClassifier) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ContentClassifier) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EntityType string
 
 // Enum values for EntityType

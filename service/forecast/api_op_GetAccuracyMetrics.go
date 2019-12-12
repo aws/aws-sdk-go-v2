@@ -56,17 +56,23 @@ const opGetAccuracyMetrics = "GetAccuracyMetrics"
 //
 // Provides metrics on the accuracy of the models that were trained by the CreatePredictor
 // operation. Use metrics to see how well the model performed and to decide
-// whether to use the predictor to generate a forecast.
+// whether to use the predictor to generate a forecast. For more information,
+// see metrics.
 //
-// Metrics are generated for each backtest window evaluated. For more information,
-// see EvaluationParameters.
+// This operation generates metrics for each backtest window that was evaluated.
+// The number of backtest windows (NumberOfBacktestWindows) is specified using
+// the EvaluationParameters object, which is optionally included in the CreatePredictor
+// request. If NumberOfBacktestWindows isn't specified, the number defaults
+// to one.
 //
 // The parameters of the filling method determine which items contribute to
-// the metrics. If zero is specified, all items contribute. If nan is specified,
-// only those items that have complete data in the range being evaluated contribute.
-// For more information, see FeaturizationMethod.
+// the metrics. If you want all items to contribute, specify zero. If you want
+// only those items that have complete data in the range being evaluated to
+// contribute, specify nan. For more information, see FeaturizationMethod.
 //
-// For an example of how to train a model and review metrics, see getting-started.
+// Before you can get accuracy metrics, the Status of the predictor must be
+// ACTIVE, signifying that training has completed. To get the status, use the
+// DescribePredictor operation.
 //
 //    // Example sending a request using GetAccuracyMetricsRequest.
 //    req := client.GetAccuracyMetricsRequest(params)

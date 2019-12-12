@@ -75,6 +75,9 @@ type GetAccountOutput struct {
 	// Indicates whether or not email sending is enabled for your Amazon SES account
 	// in the current AWS Region.
 	SendingEnabled *bool `type:"boolean"`
+
+	// An object that contains information about your account's suppression preferences.
+	SuppressionAttributes *SuppressionAttributes `type:"structure"`
 }
 
 // String returns the string representation
@@ -113,6 +116,12 @@ func (s GetAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SendingEnabled", protocol.BoolValue(v), metadata)
+	}
+	if s.SuppressionAttributes != nil {
+		v := s.SuppressionAttributes
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SuppressionAttributes", v, metadata)
 	}
 	return nil
 }

@@ -74,7 +74,11 @@ type DescribeLabelingJobOutput struct {
 	LabelAttributeName *string `min:"1" type:"string"`
 
 	// The S3 location of the JSON file that defines the categories used to label
-	// data objects.
+	// data objects. Please note the following label-category limits:
+	//
+	//    * Semantic segmentation labeling jobs using automated labeling: 20 labels
+	//
+	//    * Box bounding labeling jobs (all): 10 lables
 	//
 	// The file is a JSON structure in the following format:
 	//

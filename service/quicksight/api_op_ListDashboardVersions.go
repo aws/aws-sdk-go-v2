@@ -13,7 +13,8 @@ import (
 type ListDashboardVersionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID that contains the dashboard you are listing.
+	// The ID of the AWS account that contains the dashboard that you're listing
+	// versions for.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -105,7 +106,7 @@ type ListDashboardVersionsOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -149,12 +150,7 @@ const opListDashboardVersions = "ListDashboardVersions"
 // ListDashboardVersionsRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Lists all the versions of the dashboards in the Quicksight subscription.
-//
-// CLI syntax:
-//
-// aws quicksight list-template-versions —aws-account-id 111122223333 —template-id
-// reports-test-template
+// Lists all the versions of the dashboards in the QuickSight subscription.
 //
 //    // Example sending a request using ListDashboardVersionsRequest.
 //    req := client.ListDashboardVersionsRequest(params)
