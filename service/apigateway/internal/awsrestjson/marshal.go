@@ -1,7 +1,7 @@
 package awsrestjson
 
 import (
-	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
@@ -43,10 +43,16 @@ func (m ProtoGetAPIKeyMarshaler) MarshalOperation(r *aws.Request) {
 // This method uses the rest encoder utility
 func MarshalGetAPIKeyInputShapeAWSREST(input *types.GetApiKeyInput, encoder *restV2.Encoder) error {
 	// encode using rest encoder utility
-	if err := encoder.SetURI("api_Key").String(*input.ApiKey); err != nil {
-		return fmt.Errorf("failed to marshal API KEY to URI using REST encoder:\n \t %v", err.Error())
+	if input.ApiKey != nil {
+		if err := encoder.SetURI("api_Key").String(*input.ApiKey); err != nil {
+			return awserr.New(aws.ErrCodeSerialization, "failed to marshal API KEY to URI using REST encoder:\n \t %v", err)
+		}
 	}
-	encoder.AddQuery("includeValue").Boolean(*input.IncludeValue)
+
+	if input.IncludeValue != nil {
+		encoder.AddQuery("includeValue").Boolean(*input.IncludeValue)
+	}
+
 	return nil
 }
 
