@@ -98,6 +98,8 @@ type ClientAPI interface {
 	UpdateBrokerStorageRequest(*kafka.UpdateBrokerStorageInput) kafka.UpdateBrokerStorageRequest
 
 	UpdateClusterConfigurationRequest(*kafka.UpdateClusterConfigurationInput) kafka.UpdateClusterConfigurationRequest
+
+	UpdateMonitoringRequest(*kafka.UpdateMonitoringInput) kafka.UpdateMonitoringRequest
 }
 
 var _ ClientAPI = (*kafka.Client)(nil)

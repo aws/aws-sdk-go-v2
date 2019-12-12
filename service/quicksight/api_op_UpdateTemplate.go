@@ -13,7 +13,7 @@ import (
 type UpdateTemplateInput struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID that contains the template you are updating.
+	// The ID of the AWS account that contains the template that you're updating.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -21,8 +21,8 @@ type UpdateTemplateInput struct {
 	// The name for the template.
 	Name *string `min:"1" type:"string"`
 
-	// The source QuickSight entity from which this template is being created. Templates
-	// can be currently created from an Analysis or another template.
+	// The source QuickSight entity from which this template is being updated. You
+	// can currently update templates from an Analysis or another template.
 	//
 	// SourceEntity is a required field
 	SourceEntity *TemplateSourceEntity `type:"structure" required:"true"`
@@ -32,10 +32,10 @@ type UpdateTemplateInput struct {
 	// TemplateId is a required field
 	TemplateId *string `location:"uri" locationName:"TemplateId" min:"1" type:"string" required:"true"`
 
-	// A description of the current template version being created. This API created
-	// the first version of the template. Every time UpdateTemplate is called a
-	// new version is created. Each version of the template maintains a description
-	// of the version in the VersionDescription field.
+	// A description of the current template version that is being updated. Every
+	// time you call UpdateTemplate, you create a new version of the template. Each
+	// version of the template maintains a description of the version in the VersionDescription
+	// field.
 	VersionDescription *string `min:"1" type:"string"`
 }
 
@@ -132,14 +132,14 @@ type UpdateTemplateOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
 	// The ID for the template.
 	TemplateId *string `min:"1" type:"string"`
 
-	// The Amazon Resource Name (ARN) for the template, including the version information
-	// of the first version.
+	// The ARN for the template, including the version information of the first
+	// version.
 	VersionArn *string `type:"string"`
 }
 
@@ -189,17 +189,8 @@ const opUpdateTemplate = "UpdateTemplate"
 // UpdateTemplateRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Updates a template from an existing QuickSight analysis.
-//
-// CLI syntax:
-//
-// aws quicksight update-template --aws-account-id 111122223333 --template-id
-// reports_test_template --data-set-references DataSetPlaceholder=reports,DataSetArn=arn:aws:quicksight:us-west-2:111122223333:dataset/c684a204-d134-4c53-a63c-451f72c60c28
-// DataSetPlaceholder=Elblogs,DataSetArn=arn:aws:quicksight:us-west-2:111122223333:dataset/15840b7d-b542-4491-937b-602416b367b3
-// —source-entity SourceAnalysis=’{Arn=arn:aws:quicksight:us-west-2:111122223333:analysis/c5731fe9-4708-4598-8f6d-cf2a70875b6d}
-//
-// You can also pass in a json file: aws quicksight update-template —cli-input-json
-// file://create-template.json
+// Updates a template from an existing Amazon QuickSight analysis or another
+// template.
 //
 //    // Example sending a request using UpdateTemplateRequest.
 //    req := client.UpdateTemplateRequest(params)

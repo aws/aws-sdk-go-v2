@@ -19,16 +19,17 @@ type CreateDataSourceInput struct {
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
-	// The credentials QuickSight uses to connect to your underlying source. Currently
-	// only username/password based credentials are supported.
+	// The credentials QuickSight that uses to connect to your underlying source.
+	// Currently, only credentials based on user name and password are supported.
 	Credentials *DataSourceCredentials `type:"structure" sensitive:"true"`
 
-	// An ID for the data source. This is unique per AWS Region per AWS account.
+	// An ID for the data source. This ID is unique per AWS Region for each AWS
+	// account.
 	//
 	// DataSourceId is a required field
 	DataSourceId *string `type:"string" required:"true"`
 
-	// The parameters QuickSight uses to connect to your underlying source.
+	// The parameters that QuickSight uses to connect to your underlying source.
 	DataSourceParameters *DataSourceParameters `type:"structure"`
 
 	// A display name for the data source.
@@ -39,14 +40,15 @@ type CreateDataSourceInput struct {
 	// A list of resource permissions on the data source.
 	Permissions []ResourcePermission `min:"1" type:"list"`
 
-	// SSL properties that apply when QuickSight connects to your underlying source.
+	// Secure Socket Layer (SSL) properties that apply when QuickSight connects
+	// to your underlying source.
 	SslProperties *SslProperties `type:"structure"`
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned
 	// to the data source.
 	Tags []Tag `min:"1" type:"list"`
 
-	// The type of the data source. Currently the supported types for this operation
+	// The type of the data source. Currently, the supported types for this operation
 	// are: ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO,
 	// REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA. Use ListDataSources
 	// to return a list of all data sources.
@@ -54,8 +56,8 @@ type CreateDataSourceInput struct {
 	// Type is a required field
 	Type DataSourceType `type:"string" required:"true" enum:"true"`
 
-	// You need to use this parameter only when you want QuickSight to use a VPC
-	// connection when connecting to your underlying source.
+	// Use this parameter only when you want QuickSight to use a VPC connection
+	// when connecting to your underlying source.
 	VpcConnectionProperties *VpcConnectionProperties `type:"structure"`
 }
 
@@ -212,19 +214,20 @@ func (s CreateDataSourceInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateDataSourceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the data source.
+	// The Amazon Resource Name (ARN) of the data source.
 	Arn *string `type:"string"`
 
 	// The status of creating the data source.
 	CreationStatus ResourceStatus `type:"string" enum:"true"`
 
-	// The ID of the data source. This is unique per AWS Region per AWS account.
+	// The ID of the data source. This ID is unique per AWS Region for each AWS
+	// account.
 	DataSourceId *string `type:"string"`
 
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -269,34 +272,6 @@ const opCreateDataSource = "CreateDataSource"
 // Amazon QuickSight.
 //
 // Creates a data source.
-//
-// The permissions resource is arn:aws:quicksight:region:aws-account-id:datasource/data-source-id
-//
-// CLI syntax:
-//
-// aws quicksight create-data-source \
-//
-// --aws-account-id=111122223333 \
-//
-// --data-source-id=unique-data-source-id \
-//
-// --name='My Data Source' \
-//
-// --type=POSTGRESQL \
-//
-// --data-source-parameters='{ "PostgreSqlParameters": {
-//
-// "Host": "my-db-host.example.com",
-//
-// "Port": 1234,
-//
-// "Database": "my-db" } }' \
-//
-// --credentials='{ "CredentialPair": {
-//
-// "Username": "username",
-//
-// "Password": "password" } }'
 //
 //    // Example sending a request using CreateDataSourceRequest.
 //    req := client.CreateDataSourceRequest(params)

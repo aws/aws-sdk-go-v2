@@ -66,15 +66,29 @@ import (
 type ClientAPI interface {
 	AddTagsRequest(*sagemaker.AddTagsInput) sagemaker.AddTagsRequest
 
+	AssociateTrialComponentRequest(*sagemaker.AssociateTrialComponentInput) sagemaker.AssociateTrialComponentRequest
+
 	CreateAlgorithmRequest(*sagemaker.CreateAlgorithmInput) sagemaker.CreateAlgorithmRequest
+
+	CreateAppRequest(*sagemaker.CreateAppInput) sagemaker.CreateAppRequest
+
+	CreateAutoMLJobRequest(*sagemaker.CreateAutoMLJobInput) sagemaker.CreateAutoMLJobRequest
 
 	CreateCodeRepositoryRequest(*sagemaker.CreateCodeRepositoryInput) sagemaker.CreateCodeRepositoryRequest
 
 	CreateCompilationJobRequest(*sagemaker.CreateCompilationJobInput) sagemaker.CreateCompilationJobRequest
 
+	CreateDomainRequest(*sagemaker.CreateDomainInput) sagemaker.CreateDomainRequest
+
 	CreateEndpointRequest(*sagemaker.CreateEndpointInput) sagemaker.CreateEndpointRequest
 
 	CreateEndpointConfigRequest(*sagemaker.CreateEndpointConfigInput) sagemaker.CreateEndpointConfigRequest
+
+	CreateExperimentRequest(*sagemaker.CreateExperimentInput) sagemaker.CreateExperimentRequest
+
+	CreateFlowDefinitionRequest(*sagemaker.CreateFlowDefinitionInput) sagemaker.CreateFlowDefinitionRequest
+
+	CreateHumanTaskUiRequest(*sagemaker.CreateHumanTaskUiInput) sagemaker.CreateHumanTaskUiRequest
 
 	CreateHyperParameterTuningJobRequest(*sagemaker.CreateHyperParameterTuningJobInput) sagemaker.CreateHyperParameterTuningJobRequest
 
@@ -84,29 +98,51 @@ type ClientAPI interface {
 
 	CreateModelPackageRequest(*sagemaker.CreateModelPackageInput) sagemaker.CreateModelPackageRequest
 
+	CreateMonitoringScheduleRequest(*sagemaker.CreateMonitoringScheduleInput) sagemaker.CreateMonitoringScheduleRequest
+
 	CreateNotebookInstanceRequest(*sagemaker.CreateNotebookInstanceInput) sagemaker.CreateNotebookInstanceRequest
 
 	CreateNotebookInstanceLifecycleConfigRequest(*sagemaker.CreateNotebookInstanceLifecycleConfigInput) sagemaker.CreateNotebookInstanceLifecycleConfigRequest
 
+	CreatePresignedDomainUrlRequest(*sagemaker.CreatePresignedDomainUrlInput) sagemaker.CreatePresignedDomainUrlRequest
+
 	CreatePresignedNotebookInstanceUrlRequest(*sagemaker.CreatePresignedNotebookInstanceUrlInput) sagemaker.CreatePresignedNotebookInstanceUrlRequest
+
+	CreateProcessingJobRequest(*sagemaker.CreateProcessingJobInput) sagemaker.CreateProcessingJobRequest
 
 	CreateTrainingJobRequest(*sagemaker.CreateTrainingJobInput) sagemaker.CreateTrainingJobRequest
 
 	CreateTransformJobRequest(*sagemaker.CreateTransformJobInput) sagemaker.CreateTransformJobRequest
 
+	CreateTrialRequest(*sagemaker.CreateTrialInput) sagemaker.CreateTrialRequest
+
+	CreateTrialComponentRequest(*sagemaker.CreateTrialComponentInput) sagemaker.CreateTrialComponentRequest
+
+	CreateUserProfileRequest(*sagemaker.CreateUserProfileInput) sagemaker.CreateUserProfileRequest
+
 	CreateWorkteamRequest(*sagemaker.CreateWorkteamInput) sagemaker.CreateWorkteamRequest
 
 	DeleteAlgorithmRequest(*sagemaker.DeleteAlgorithmInput) sagemaker.DeleteAlgorithmRequest
 
+	DeleteAppRequest(*sagemaker.DeleteAppInput) sagemaker.DeleteAppRequest
+
 	DeleteCodeRepositoryRequest(*sagemaker.DeleteCodeRepositoryInput) sagemaker.DeleteCodeRepositoryRequest
+
+	DeleteDomainRequest(*sagemaker.DeleteDomainInput) sagemaker.DeleteDomainRequest
 
 	DeleteEndpointRequest(*sagemaker.DeleteEndpointInput) sagemaker.DeleteEndpointRequest
 
 	DeleteEndpointConfigRequest(*sagemaker.DeleteEndpointConfigInput) sagemaker.DeleteEndpointConfigRequest
 
+	DeleteExperimentRequest(*sagemaker.DeleteExperimentInput) sagemaker.DeleteExperimentRequest
+
+	DeleteFlowDefinitionRequest(*sagemaker.DeleteFlowDefinitionInput) sagemaker.DeleteFlowDefinitionRequest
+
 	DeleteModelRequest(*sagemaker.DeleteModelInput) sagemaker.DeleteModelRequest
 
 	DeleteModelPackageRequest(*sagemaker.DeleteModelPackageInput) sagemaker.DeleteModelPackageRequest
+
+	DeleteMonitoringScheduleRequest(*sagemaker.DeleteMonitoringScheduleInput) sagemaker.DeleteMonitoringScheduleRequest
 
 	DeleteNotebookInstanceRequest(*sagemaker.DeleteNotebookInstanceInput) sagemaker.DeleteNotebookInstanceRequest
 
@@ -114,17 +150,35 @@ type ClientAPI interface {
 
 	DeleteTagsRequest(*sagemaker.DeleteTagsInput) sagemaker.DeleteTagsRequest
 
+	DeleteTrialRequest(*sagemaker.DeleteTrialInput) sagemaker.DeleteTrialRequest
+
+	DeleteTrialComponentRequest(*sagemaker.DeleteTrialComponentInput) sagemaker.DeleteTrialComponentRequest
+
+	DeleteUserProfileRequest(*sagemaker.DeleteUserProfileInput) sagemaker.DeleteUserProfileRequest
+
 	DeleteWorkteamRequest(*sagemaker.DeleteWorkteamInput) sagemaker.DeleteWorkteamRequest
 
 	DescribeAlgorithmRequest(*sagemaker.DescribeAlgorithmInput) sagemaker.DescribeAlgorithmRequest
+
+	DescribeAppRequest(*sagemaker.DescribeAppInput) sagemaker.DescribeAppRequest
+
+	DescribeAutoMLJobRequest(*sagemaker.DescribeAutoMLJobInput) sagemaker.DescribeAutoMLJobRequest
 
 	DescribeCodeRepositoryRequest(*sagemaker.DescribeCodeRepositoryInput) sagemaker.DescribeCodeRepositoryRequest
 
 	DescribeCompilationJobRequest(*sagemaker.DescribeCompilationJobInput) sagemaker.DescribeCompilationJobRequest
 
+	DescribeDomainRequest(*sagemaker.DescribeDomainInput) sagemaker.DescribeDomainRequest
+
 	DescribeEndpointRequest(*sagemaker.DescribeEndpointInput) sagemaker.DescribeEndpointRequest
 
 	DescribeEndpointConfigRequest(*sagemaker.DescribeEndpointConfigInput) sagemaker.DescribeEndpointConfigRequest
+
+	DescribeExperimentRequest(*sagemaker.DescribeExperimentInput) sagemaker.DescribeExperimentRequest
+
+	DescribeFlowDefinitionRequest(*sagemaker.DescribeFlowDefinitionInput) sagemaker.DescribeFlowDefinitionRequest
+
+	DescribeHumanTaskUiRequest(*sagemaker.DescribeHumanTaskUiInput) sagemaker.DescribeHumanTaskUiRequest
 
 	DescribeHyperParameterTuningJobRequest(*sagemaker.DescribeHyperParameterTuningJobInput) sagemaker.DescribeHyperParameterTuningJobRequest
 
@@ -134,9 +188,13 @@ type ClientAPI interface {
 
 	DescribeModelPackageRequest(*sagemaker.DescribeModelPackageInput) sagemaker.DescribeModelPackageRequest
 
+	DescribeMonitoringScheduleRequest(*sagemaker.DescribeMonitoringScheduleInput) sagemaker.DescribeMonitoringScheduleRequest
+
 	DescribeNotebookInstanceRequest(*sagemaker.DescribeNotebookInstanceInput) sagemaker.DescribeNotebookInstanceRequest
 
 	DescribeNotebookInstanceLifecycleConfigRequest(*sagemaker.DescribeNotebookInstanceLifecycleConfigInput) sagemaker.DescribeNotebookInstanceLifecycleConfigRequest
+
+	DescribeProcessingJobRequest(*sagemaker.DescribeProcessingJobInput) sagemaker.DescribeProcessingJobRequest
 
 	DescribeSubscribedWorkteamRequest(*sagemaker.DescribeSubscribedWorkteamInput) sagemaker.DescribeSubscribedWorkteamRequest
 
@@ -144,19 +202,41 @@ type ClientAPI interface {
 
 	DescribeTransformJobRequest(*sagemaker.DescribeTransformJobInput) sagemaker.DescribeTransformJobRequest
 
+	DescribeTrialRequest(*sagemaker.DescribeTrialInput) sagemaker.DescribeTrialRequest
+
+	DescribeTrialComponentRequest(*sagemaker.DescribeTrialComponentInput) sagemaker.DescribeTrialComponentRequest
+
+	DescribeUserProfileRequest(*sagemaker.DescribeUserProfileInput) sagemaker.DescribeUserProfileRequest
+
 	DescribeWorkteamRequest(*sagemaker.DescribeWorkteamInput) sagemaker.DescribeWorkteamRequest
+
+	DisassociateTrialComponentRequest(*sagemaker.DisassociateTrialComponentInput) sagemaker.DisassociateTrialComponentRequest
 
 	GetSearchSuggestionsRequest(*sagemaker.GetSearchSuggestionsInput) sagemaker.GetSearchSuggestionsRequest
 
 	ListAlgorithmsRequest(*sagemaker.ListAlgorithmsInput) sagemaker.ListAlgorithmsRequest
 
+	ListAppsRequest(*sagemaker.ListAppsInput) sagemaker.ListAppsRequest
+
+	ListAutoMLJobsRequest(*sagemaker.ListAutoMLJobsInput) sagemaker.ListAutoMLJobsRequest
+
+	ListCandidatesForAutoMLJobRequest(*sagemaker.ListCandidatesForAutoMLJobInput) sagemaker.ListCandidatesForAutoMLJobRequest
+
 	ListCodeRepositoriesRequest(*sagemaker.ListCodeRepositoriesInput) sagemaker.ListCodeRepositoriesRequest
 
 	ListCompilationJobsRequest(*sagemaker.ListCompilationJobsInput) sagemaker.ListCompilationJobsRequest
 
+	ListDomainsRequest(*sagemaker.ListDomainsInput) sagemaker.ListDomainsRequest
+
 	ListEndpointConfigsRequest(*sagemaker.ListEndpointConfigsInput) sagemaker.ListEndpointConfigsRequest
 
 	ListEndpointsRequest(*sagemaker.ListEndpointsInput) sagemaker.ListEndpointsRequest
+
+	ListExperimentsRequest(*sagemaker.ListExperimentsInput) sagemaker.ListExperimentsRequest
+
+	ListFlowDefinitionsRequest(*sagemaker.ListFlowDefinitionsInput) sagemaker.ListFlowDefinitionsRequest
+
+	ListHumanTaskUisRequest(*sagemaker.ListHumanTaskUisInput) sagemaker.ListHumanTaskUisRequest
 
 	ListHyperParameterTuningJobsRequest(*sagemaker.ListHyperParameterTuningJobsInput) sagemaker.ListHyperParameterTuningJobsRequest
 
@@ -168,9 +248,15 @@ type ClientAPI interface {
 
 	ListModelsRequest(*sagemaker.ListModelsInput) sagemaker.ListModelsRequest
 
+	ListMonitoringExecutionsRequest(*sagemaker.ListMonitoringExecutionsInput) sagemaker.ListMonitoringExecutionsRequest
+
+	ListMonitoringSchedulesRequest(*sagemaker.ListMonitoringSchedulesInput) sagemaker.ListMonitoringSchedulesRequest
+
 	ListNotebookInstanceLifecycleConfigsRequest(*sagemaker.ListNotebookInstanceLifecycleConfigsInput) sagemaker.ListNotebookInstanceLifecycleConfigsRequest
 
 	ListNotebookInstancesRequest(*sagemaker.ListNotebookInstancesInput) sagemaker.ListNotebookInstancesRequest
+
+	ListProcessingJobsRequest(*sagemaker.ListProcessingJobsInput) sagemaker.ListProcessingJobsRequest
 
 	ListSubscribedWorkteamsRequest(*sagemaker.ListSubscribedWorkteamsInput) sagemaker.ListSubscribedWorkteamsRequest
 
@@ -182,13 +268,23 @@ type ClientAPI interface {
 
 	ListTransformJobsRequest(*sagemaker.ListTransformJobsInput) sagemaker.ListTransformJobsRequest
 
+	ListTrialComponentsRequest(*sagemaker.ListTrialComponentsInput) sagemaker.ListTrialComponentsRequest
+
+	ListTrialsRequest(*sagemaker.ListTrialsInput) sagemaker.ListTrialsRequest
+
+	ListUserProfilesRequest(*sagemaker.ListUserProfilesInput) sagemaker.ListUserProfilesRequest
+
 	ListWorkteamsRequest(*sagemaker.ListWorkteamsInput) sagemaker.ListWorkteamsRequest
 
 	RenderUiTemplateRequest(*sagemaker.RenderUiTemplateInput) sagemaker.RenderUiTemplateRequest
 
 	SearchRequest(*sagemaker.SearchInput) sagemaker.SearchRequest
 
+	StartMonitoringScheduleRequest(*sagemaker.StartMonitoringScheduleInput) sagemaker.StartMonitoringScheduleRequest
+
 	StartNotebookInstanceRequest(*sagemaker.StartNotebookInstanceInput) sagemaker.StartNotebookInstanceRequest
+
+	StopAutoMLJobRequest(*sagemaker.StopAutoMLJobInput) sagemaker.StopAutoMLJobRequest
 
 	StopCompilationJobRequest(*sagemaker.StopCompilationJobInput) sagemaker.StopCompilationJobRequest
 
@@ -196,7 +292,11 @@ type ClientAPI interface {
 
 	StopLabelingJobRequest(*sagemaker.StopLabelingJobInput) sagemaker.StopLabelingJobRequest
 
+	StopMonitoringScheduleRequest(*sagemaker.StopMonitoringScheduleInput) sagemaker.StopMonitoringScheduleRequest
+
 	StopNotebookInstanceRequest(*sagemaker.StopNotebookInstanceInput) sagemaker.StopNotebookInstanceRequest
+
+	StopProcessingJobRequest(*sagemaker.StopProcessingJobInput) sagemaker.StopProcessingJobRequest
 
 	StopTrainingJobRequest(*sagemaker.StopTrainingJobInput) sagemaker.StopTrainingJobRequest
 
@@ -204,13 +304,25 @@ type ClientAPI interface {
 
 	UpdateCodeRepositoryRequest(*sagemaker.UpdateCodeRepositoryInput) sagemaker.UpdateCodeRepositoryRequest
 
+	UpdateDomainRequest(*sagemaker.UpdateDomainInput) sagemaker.UpdateDomainRequest
+
 	UpdateEndpointRequest(*sagemaker.UpdateEndpointInput) sagemaker.UpdateEndpointRequest
 
 	UpdateEndpointWeightsAndCapacitiesRequest(*sagemaker.UpdateEndpointWeightsAndCapacitiesInput) sagemaker.UpdateEndpointWeightsAndCapacitiesRequest
 
+	UpdateExperimentRequest(*sagemaker.UpdateExperimentInput) sagemaker.UpdateExperimentRequest
+
+	UpdateMonitoringScheduleRequest(*sagemaker.UpdateMonitoringScheduleInput) sagemaker.UpdateMonitoringScheduleRequest
+
 	UpdateNotebookInstanceRequest(*sagemaker.UpdateNotebookInstanceInput) sagemaker.UpdateNotebookInstanceRequest
 
 	UpdateNotebookInstanceLifecycleConfigRequest(*sagemaker.UpdateNotebookInstanceLifecycleConfigInput) sagemaker.UpdateNotebookInstanceLifecycleConfigRequest
+
+	UpdateTrialRequest(*sagemaker.UpdateTrialInput) sagemaker.UpdateTrialRequest
+
+	UpdateTrialComponentRequest(*sagemaker.UpdateTrialComponentInput) sagemaker.UpdateTrialComponentRequest
+
+	UpdateUserProfileRequest(*sagemaker.UpdateUserProfileInput) sagemaker.UpdateUserProfileRequest
 
 	UpdateWorkteamRequest(*sagemaker.UpdateWorkteamInput) sagemaker.UpdateWorkteamRequest
 
@@ -223,6 +335,8 @@ type ClientAPI interface {
 	WaitUntilNotebookInstanceInService(context.Context, *sagemaker.DescribeNotebookInstanceInput, ...aws.WaiterOption) error
 
 	WaitUntilNotebookInstanceStopped(context.Context, *sagemaker.DescribeNotebookInstanceInput, ...aws.WaiterOption) error
+
+	WaitUntilProcessingJobCompletedOrStopped(context.Context, *sagemaker.DescribeProcessingJobInput, ...aws.WaiterOption) error
 
 	WaitUntilTrainingJobCompletedOrStopped(context.Context, *sagemaker.DescribeTrainingJobInput, ...aws.WaiterOption) error
 

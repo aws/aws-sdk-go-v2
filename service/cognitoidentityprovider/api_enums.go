@@ -363,6 +363,7 @@ const (
 	IdentityProviderTypeTypeFacebook        IdentityProviderTypeType = "Facebook"
 	IdentityProviderTypeTypeGoogle          IdentityProviderTypeType = "Google"
 	IdentityProviderTypeTypeLoginWithAmazon IdentityProviderTypeType = "LoginWithAmazon"
+	IdentityProviderTypeTypeSignInWithApple IdentityProviderTypeType = "SignInWithApple"
 	IdentityProviderTypeTypeOidc            IdentityProviderTypeType = "OIDC"
 )
 
@@ -423,6 +424,24 @@ func (enum PreventUserExistenceErrorTypes) MarshalValue() (string, error) {
 }
 
 func (enum PreventUserExistenceErrorTypes) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RecoveryOptionNameType string
+
+// Enum values for RecoveryOptionNameType
+const (
+	RecoveryOptionNameTypeVerifiedEmail       RecoveryOptionNameType = "verified_email"
+	RecoveryOptionNameTypeVerifiedPhoneNumber RecoveryOptionNameType = "verified_phone_number"
+	RecoveryOptionNameTypeAdminOnly           RecoveryOptionNameType = "admin_only"
+)
+
+func (enum RecoveryOptionNameType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RecoveryOptionNameType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

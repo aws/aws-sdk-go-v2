@@ -1757,6 +1757,11 @@ func (s *Resource) Validate() error {
 	if s.ResourceDataContainer == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceDataContainer"))
 	}
+	if s.ResourceDataContainer != nil {
+		if err := s.ResourceDataContainer.Validate(); err != nil {
+			invalidParams.AddNested("ResourceDataContainer", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1867,6 +1872,26 @@ func (s ResourceDataContainer) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResourceDataContainer) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceDataContainer"}
+	if s.S3MachineLearningModelResourceData != nil {
+		if err := s.S3MachineLearningModelResourceData.Validate(); err != nil {
+			invalidParams.AddNested("S3MachineLearningModelResourceData", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.SageMakerMachineLearningModelResourceData != nil {
+		if err := s.SageMakerMachineLearningModelResourceData.Validate(); err != nil {
+			invalidParams.AddNested("SageMakerMachineLearningModelResourceData", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ResourceDataContainer) MarshalFields(e protocol.FieldEncoder) error {
 	if s.LocalDeviceResourceData != nil {
@@ -1949,12 +1974,72 @@ func (s ResourceDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
+// The owner setting for downloaded machine learning resources.
+type ResourceDownloadOwnerSetting struct {
+	_ struct{} `type:"structure"`
+
+	// The group owner of the resource. This is the name of an existing Linux OS
+	// group on the system or a GID. The group's permissions are added to the Lambda
+	// process.
+	//
+	// GroupOwner is a required field
+	GroupOwner *string `type:"string" required:"true"`
+
+	// The permissions that the group owner has to the resource. Valid values are
+	// ''rw'' (read/write) or ''ro'' (read-only).
+	//
+	// GroupPermission is a required field
+	GroupPermission Permission `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s ResourceDownloadOwnerSetting) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResourceDownloadOwnerSetting) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceDownloadOwnerSetting"}
+
+	if s.GroupOwner == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GroupOwner"))
+	}
+	if len(s.GroupPermission) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("GroupPermission"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResourceDownloadOwnerSetting) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GroupOwner != nil {
+		v := *s.GroupOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.GroupPermission) > 0 {
+		v := s.GroupPermission
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupPermission", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Attributes that define an Amazon S3 machine learning resource.
 type S3MachineLearningModelResourceData struct {
 	_ struct{} `type:"structure"`
 
 	// The absolute local path of the resource inside the Lambda environment.
 	DestinationPath *string `type:"string"`
+
+	// The owner setting for downloaded machine learning resources.
+	OwnerSetting *ResourceDownloadOwnerSetting `type:"structure"`
 
 	// The URI of the source model in an S3 bucket. The model package must be in
 	// tar.gz or .zip format.
@@ -1966,6 +2051,21 @@ func (s S3MachineLearningModelResourceData) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3MachineLearningModelResourceData) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "S3MachineLearningModelResourceData"}
+	if s.OwnerSetting != nil {
+		if err := s.OwnerSetting.Validate(); err != nil {
+			invalidParams.AddNested("OwnerSetting", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s S3MachineLearningModelResourceData) MarshalFields(e protocol.FieldEncoder) error {
 	if s.DestinationPath != nil {
@@ -1973,6 +2073,12 @@ func (s S3MachineLearningModelResourceData) MarshalFields(e protocol.FieldEncode
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DestinationPath", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OwnerSetting != nil {
+		v := s.OwnerSetting
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "OwnerSetting", v, metadata)
 	}
 	if s.S3Uri != nil {
 		v := *s.S3Uri
@@ -1990,6 +2096,9 @@ type SageMakerMachineLearningModelResourceData struct {
 	// The absolute local path of the resource inside the Lambda environment.
 	DestinationPath *string `type:"string"`
 
+	// The owner setting for downloaded machine learning resources.
+	OwnerSetting *ResourceDownloadOwnerSetting `type:"structure"`
+
 	// The ARN of the Amazon SageMaker training job that represents the source model.
 	SageMakerJobArn *string `type:"string"`
 }
@@ -1999,6 +2108,21 @@ func (s SageMakerMachineLearningModelResourceData) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SageMakerMachineLearningModelResourceData) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SageMakerMachineLearningModelResourceData"}
+	if s.OwnerSetting != nil {
+		if err := s.OwnerSetting.Validate(); err != nil {
+			invalidParams.AddNested("OwnerSetting", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SageMakerMachineLearningModelResourceData) MarshalFields(e protocol.FieldEncoder) error {
 	if s.DestinationPath != nil {
@@ -2006,6 +2130,12 @@ func (s SageMakerMachineLearningModelResourceData) MarshalFields(e protocol.Fiel
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DestinationPath", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OwnerSetting != nil {
+		v := s.OwnerSetting
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "OwnerSetting", v, metadata)
 	}
 	if s.SageMakerJobArn != nil {
 		v := *s.SageMakerJobArn

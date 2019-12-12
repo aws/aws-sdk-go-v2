@@ -18,13 +18,16 @@ type CreateResolverInput struct {
 	// ApiId is a required field
 	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
 
+	// The caching configuration for the resolver.
+	CachingConfig *CachingConfig `locationName:"cachingConfig" type:"structure"`
+
 	// The name of the data source for which the resolver is being created.
-	DataSourceName *string `locationName:"dataSourceName" type:"string"`
+	DataSourceName *string `locationName:"dataSourceName" min:"1" type:"string"`
 
 	// The name of the field to attach the resolver to.
 	//
 	// FieldName is a required field
-	FieldName *string `locationName:"fieldName" type:"string" required:"true"`
+	FieldName *string `locationName:"fieldName" min:"1" type:"string" required:"true"`
 
 	// The resolver type.
 	//
@@ -52,10 +55,13 @@ type CreateResolverInput struct {
 	// The mapping template to be used for responses from the data source.
 	ResponseMappingTemplate *string `locationName:"responseMappingTemplate" min:"1" type:"string"`
 
+	// The SyncConfig for a resolver attached to a versioned datasource.
+	SyncConfig *SyncConfig `locationName:"syncConfig" type:"structure"`
+
 	// The name of the Type.
 	//
 	// TypeName is a required field
-	TypeName *string `location:"uri" locationName:"typeName" type:"string" required:"true"`
+	TypeName *string `location:"uri" locationName:"typeName" min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -70,9 +76,15 @@ func (s *CreateResolverInput) Validate() error {
 	if s.ApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
 	}
+	if s.DataSourceName != nil && len(*s.DataSourceName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DataSourceName", 1))
+	}
 
 	if s.FieldName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FieldName"))
+	}
+	if s.FieldName != nil && len(*s.FieldName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("FieldName", 1))
 	}
 
 	if s.RequestMappingTemplate == nil {
@@ -88,6 +100,9 @@ func (s *CreateResolverInput) Validate() error {
 	if s.TypeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
 	}
+	if s.TypeName != nil && len(*s.TypeName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TypeName", 1))
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -99,6 +114,12 @@ func (s *CreateResolverInput) Validate() error {
 func (s CreateResolverInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if s.CachingConfig != nil {
+		v := s.CachingConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "cachingConfig", v, metadata)
+	}
 	if s.DataSourceName != nil {
 		v := *s.DataSourceName
 
@@ -134,6 +155,12 @@ func (s CreateResolverInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "responseMappingTemplate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SyncConfig != nil {
+		v := s.SyncConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "syncConfig", v, metadata)
 	}
 	if s.ApiId != nil {
 		v := *s.ApiId

@@ -65,13 +65,19 @@ type ClientAPI interface {
 
 	AssociateResourceShareRequest(*ram.AssociateResourceShareInput) ram.AssociateResourceShareRequest
 
+	AssociateResourceSharePermissionRequest(*ram.AssociateResourceSharePermissionInput) ram.AssociateResourceSharePermissionRequest
+
 	CreateResourceShareRequest(*ram.CreateResourceShareInput) ram.CreateResourceShareRequest
 
 	DeleteResourceShareRequest(*ram.DeleteResourceShareInput) ram.DeleteResourceShareRequest
 
 	DisassociateResourceShareRequest(*ram.DisassociateResourceShareInput) ram.DisassociateResourceShareRequest
 
+	DisassociateResourceSharePermissionRequest(*ram.DisassociateResourceSharePermissionInput) ram.DisassociateResourceSharePermissionRequest
+
 	EnableSharingWithAwsOrganizationRequest(*ram.EnableSharingWithAwsOrganizationInput) ram.EnableSharingWithAwsOrganizationRequest
+
+	GetPermissionRequest(*ram.GetPermissionInput) ram.GetPermissionRequest
 
 	GetResourcePoliciesRequest(*ram.GetResourcePoliciesInput) ram.GetResourcePoliciesRequest
 
@@ -83,9 +89,15 @@ type ClientAPI interface {
 
 	ListPendingInvitationResourcesRequest(*ram.ListPendingInvitationResourcesInput) ram.ListPendingInvitationResourcesRequest
 
+	ListPermissionsRequest(*ram.ListPermissionsInput) ram.ListPermissionsRequest
+
 	ListPrincipalsRequest(*ram.ListPrincipalsInput) ram.ListPrincipalsRequest
 
+	ListResourceSharePermissionsRequest(*ram.ListResourceSharePermissionsInput) ram.ListResourceSharePermissionsRequest
+
 	ListResourcesRequest(*ram.ListResourcesInput) ram.ListResourcesRequest
+
+	PromoteResourceShareCreatedFromPolicyRequest(*ram.PromoteResourceShareCreatedFromPolicyInput) ram.PromoteResourceShareCreatedFromPolicyRequest
 
 	RejectResourceShareInvitationRequest(*ram.RejectResourceShareInvitationInput) ram.RejectResourceShareInvitationRequest
 

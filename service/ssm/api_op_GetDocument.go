@@ -71,6 +71,10 @@ type GetDocumentOutput struct {
 	// The name of the Systems Manager document.
 	Name *string `type:"string"`
 
+	// A list of SSM documents required by a document. For example, an ApplicationConfiguration
+	// document requires an ApplicationConfigurationSchema document.
+	Requires []DocumentRequires `min:"1" type:"list"`
+
 	// The status of the Systems Manager document, such as Creating, Active, Updating,
 	// Failed, and Deleting.
 	Status DocumentStatus `type:"string" enum:"true"`

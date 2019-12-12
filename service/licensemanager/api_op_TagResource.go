@@ -12,12 +12,12 @@ import (
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// Resource of the ARN to be tagged.
+	// Amazon Resource Name (ARN) of the license configuration.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `type:"string" required:"true"`
 
-	// Names of the tags to attach to the resource.
+	// One or more tags.
 	//
 	// Tags is a required field
 	Tags []Tag `type:"list" required:"true"`
@@ -60,7 +60,7 @@ const opTagResource = "TagResource"
 // TagResourceRequest returns a request value for making API operation for
 // AWS License Manager.
 //
-// Attach one of more tags to any resource.
+// Adds the specified tags to the specified license configuration.
 //
 //    // Example sending a request using TagResourceRequest.
 //    req := client.TagResourceRequest(params)

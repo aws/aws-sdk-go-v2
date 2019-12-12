@@ -63,6 +63,11 @@ type GetApiOutput struct {
 	// for more information.
 	ApiKeySelectionExpression *string `locationName:"apiKeySelectionExpression" type:"string"`
 
+	// Represents a CORS configuration. Supported only for HTTP APIs. See Configuring
+	// CORS (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html)
+	// for more information.
+	CorsConfiguration *Cors `locationName:"corsConfiguration" type:"structure"`
+
 	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"iso8601"`
 
 	// A string with a length between [0-1024].
@@ -70,9 +75,12 @@ type GetApiOutput struct {
 
 	DisableSchemaValidation *bool `locationName:"disableSchemaValidation" type:"boolean"`
 
+	ImportInfo []string `locationName:"importInfo" type:"list"`
+
 	// A string with a length between [1-128].
 	Name *string `locationName:"name" type:"string"`
 
+	// Represents a protocol type.
 	ProtocolType ProtocolType `locationName:"protocolType" type:"string" enum:"true"`
 
 	// An expression used to extract information at runtime. See Selection Expressions
@@ -80,8 +88,7 @@ type GetApiOutput struct {
 	// for more information.
 	RouteSelectionExpression *string `locationName:"routeSelectionExpression" type:"string"`
 
-	// A key value pair of string with key length between[1-128] and value length
-	// between[1-256]
+	// Represents a collection of tags associated with the resource.
 	Tags map[string]string `locationName:"tags" type:"map"`
 
 	// A string with a length between [1-64].
@@ -115,6 +122,12 @@ func (s GetApiOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "apiKeySelectionExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.CorsConfiguration != nil {
+		v := s.CorsConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "corsConfiguration", v, metadata)
+	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate
 
@@ -133,6 +146,18 @@ func (s GetApiOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "disableSchemaValidation", protocol.BoolValue(v), metadata)
+	}
+	if s.ImportInfo != nil {
+		v := s.ImportInfo
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "importInfo", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	if s.Name != nil {
 		v := *s.Name

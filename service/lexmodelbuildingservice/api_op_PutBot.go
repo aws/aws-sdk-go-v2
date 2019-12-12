@@ -29,6 +29,10 @@ type PutBotInput struct {
 	// For example, in a pizza ordering application, OrderPizza might be one of
 	// the intents. This intent might require the CrustType slot. You specify the
 	// valueElicitationPrompt field when you create the CrustType slot.
+	//
+	// If you have defined a fallback intent the abort statement will not be sent
+	// to the user, the fallback intent is used instead. For more information, see
+	// AMAZON.FallbackIntent (https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-fallback.html).
 	AbortStatement *Statement `locationName:"abortStatement" type:"structure"`
 
 	// Identifies a specific revision of the $LATEST version.
@@ -70,7 +74,7 @@ type PutBotInput struct {
 	ChildDirected *bool `locationName:"childDirected" type:"boolean" required:"true"`
 
 	// When Amazon Lex doesn't understand the user's intent, it uses this message
-	// to get clarification. To specify how many times Amazon Lex should repeate
+	// to get clarification. To specify how many times Amazon Lex should repeat
 	// the clarification prompt, use the maxAttempts field. If Amazon Lex still
 	// doesn't understand, it sends the message in the abortStatement field.
 	//
@@ -78,12 +82,40 @@ type PutBotInput struct {
 	// response from the user. for example, for a bot that orders pizza and drinks,
 	// you might create this clarification prompt: "What would you like to do? You
 	// can say 'Order a pizza' or 'Order a drink.'"
+	//
+	// If you have defined a fallback intent, it will be invoked if the clarification
+	// prompt is repeated the number of times defined in the maxAttempts field.
+	// For more information, see AMAZON.FallbackIntent (https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-fallback.html).
+	//
+	// If you don't define a clarification prompt, at runtime Amazon Lex will return
+	// a 400 Bad Request exception in three cases:
+	//
+	//    * Follow-up prompt - When the user responds to a follow-up prompt but
+	//    does not provide an intent. For example, in response to a follow-up prompt
+	//    that says "Would you like anything else today?" the user says "Yes." Amazon
+	//    Lex will return a 400 Bad Request exception because it does not have a
+	//    clarification prompt to send to the user to get an intent.
+	//
+	//    * Lambda function - When using a Lambda function, you return an ElicitIntent
+	//    dialog type. Since Amazon Lex does not have a clarification prompt to
+	//    get an intent from the user, it returns a 400 Bad Request exception.
+	//
+	//    * PutSession operation - When using the PutSession operation, you send
+	//    an ElicitIntent dialog type. Since Amazon Lex does not have a clarification
+	//    prompt to get an intent from the user, it returns a 400 Bad Request exception.
 	ClarificationPrompt *Prompt `locationName:"clarificationPrompt" type:"structure"`
 
+	// When set to true a new numbered version of the bot is created. This is the
+	// same as calling the CreateBotVersion operation. If you don't specify createVersion,
+	// the default is false.
 	CreateVersion *bool `locationName:"createVersion" type:"boolean"`
 
 	// A description of the bot.
 	Description *string `locationName:"description" type:"string"`
+
+	// When set to true user utterances are sent to Amazon Comprehend for sentiment
+	// analysis. If you don't specify detectSentiment, the default is false.
+	DetectSentiment *bool `locationName:"detectSentiment" type:"boolean"`
 
 	// The maximum time in seconds that Amazon Lex retains the data gathered in
 	// a conversation.
@@ -131,7 +163,7 @@ type PutBotInput struct {
 
 	// The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions
 	// with the user. The locale configured for the voice must match the locale
-	// of the bot. For more information, see Available Voices (http://docs.aws.amazon.com/polly/latest/dg/voicelist.html)
+	// of the bot. For more information, see Voices in Amazon Polly (https://docs.aws.amazon.com/polly/latest/dg/voicelist.html)
 	// in the Amazon Polly Developer Guide.
 	VoiceId *string `locationName:"voiceId" type:"string"`
 }
@@ -225,6 +257,12 @@ func (s PutBotInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.DetectSentiment != nil {
+		v := *s.DetectSentiment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "detectSentiment", protocol.BoolValue(v), metadata)
+	}
 	if s.IdleSessionTTLInSeconds != nil {
 		v := *s.IdleSessionTTLInSeconds
 
@@ -309,6 +347,9 @@ type PutBotOutput struct {
 	// For more information, see PutBot.
 	ClarificationPrompt *Prompt `locationName:"clarificationPrompt" type:"structure"`
 
+	// True if a new version of the bot was created. If the createVersion field
+	// was not specified in the request, the createVersion field is set to false
+	// in the response.
 	CreateVersion *bool `locationName:"createVersion" type:"boolean"`
 
 	// The date that the bot was created.
@@ -316,6 +357,11 @@ type PutBotOutput struct {
 
 	// A description of the bot.
 	Description *string `locationName:"description" type:"string"`
+
+	// true if the bot is configured to send user utterances to Amazon Comprehend
+	// for sentiment analysis. If the detectSentiment field was not specified in
+	// the request, the detectSentiment field is false in the response.
+	DetectSentiment *bool `locationName:"detectSentiment" type:"boolean"`
 
 	// If status is FAILED, Amazon Lex provides the reason that it failed to build
 	// the bot.
@@ -339,13 +385,19 @@ type PutBotOutput struct {
 	Name *string `locationName:"name" min:"2" type:"string"`
 
 	// When you send a request to create a bot with processBehavior set to BUILD,
-	// Amazon Lex sets the status response element to BUILDING. After Amazon Lex
-	// builds the bot, it sets status to READY. If Amazon Lex can't build the bot,
-	// Amazon Lex sets status to FAILED. Amazon Lex returns the reason for the failure
-	// in the failureReason response element.
+	// Amazon Lex sets the status response element to BUILDING.
 	//
-	// When you set processBehaviorto SAVE, Amazon Lex sets the status code to NOT
-	// BUILT.
+	// In the READY_BASIC_TESTING state you can test the bot with user inputs that
+	// exactly match the utterances configured for the bot's intents and values
+	// in the slot types.
+	//
+	// If Amazon Lex can't build the bot, Amazon Lex sets status to FAILED. Amazon
+	// Lex returns the reason for the failure in the failureReason response element.
+	//
+	// When you set processBehavior to SAVE, Amazon Lex sets the status code to
+	// NOT BUILT.
+	//
+	// When the bot is in the READY state you can test and publish the bot.
 	Status Status `locationName:"status" type:"string" enum:"true"`
 
 	// The version of the bot. For a new bot, the version is always $LATEST.
@@ -405,6 +457,12 @@ func (s PutBotOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DetectSentiment != nil {
+		v := *s.DetectSentiment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "detectSentiment", protocol.BoolValue(v), metadata)
 	}
 	if s.FailureReason != nil {
 		v := *s.FailureReason
@@ -492,7 +550,7 @@ const opPutBot = "PutBot"
 // an exception.
 //
 // This operation requires permissions for the lex:PutBot action. For more information,
-// see auth-and-access-control.
+// see security-iam.
 //
 //    // Example sending a request using PutBotRequest.
 //    req := client.PutBotRequest(params)

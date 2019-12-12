@@ -14,6 +14,19 @@ import (
 type CreateUserPoolInput struct {
 	_ struct{} `type:"structure"`
 
+	// Use this setting to define which verified available method a user can use
+	// to recover their password when they call ForgotPassword. It allows you to
+	// define a preferred method when a user has more than one method available.
+	// With this setting, SMS does not qualify for a valid password recovery mechanism
+	// if the user also has SMS MFA enabled. In the absence of this setting, Cognito
+	// uses the legacy behavior to determine the recovery method where SMS is preferred
+	// over email.
+	//
+	// Starting February 1, 2020, the value of AccountRecoverySetting will default
+	// to verified_email first and verified_phone_number as the second option for
+	// newly created user pools if no value is provided.
+	AccountRecoverySetting *AccountRecoverySettingType `type:"structure"`
+
 	// The configuration for AdminCreateUser requests.
 	AdminCreateUserConfig *AdminCreateUserConfigType `type:"structure"`
 
@@ -119,6 +132,11 @@ func (s *CreateUserPoolInput) Validate() error {
 	}
 	if s.SmsVerificationMessage != nil && len(*s.SmsVerificationMessage) < 6 {
 		invalidParams.Add(aws.NewErrParamMinLen("SmsVerificationMessage", 6))
+	}
+	if s.AccountRecoverySetting != nil {
+		if err := s.AccountRecoverySetting.Validate(); err != nil {
+			invalidParams.AddNested("AccountRecoverySetting", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.AdminCreateUserConfig != nil {
 		if err := s.AdminCreateUserConfig.Validate(); err != nil {

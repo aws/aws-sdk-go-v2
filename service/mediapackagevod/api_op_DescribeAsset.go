@@ -54,6 +54,8 @@ type DescribeAssetOutput struct {
 
 	Arn *string `locationName:"arn" type:"string"`
 
+	CreatedAt *string `locationName:"createdAt" type:"string"`
+
 	EgressEndpoints []EgressEndpoint `locationName:"egressEndpoints" type:"list"`
 
 	Id *string `locationName:"id" type:"string"`
@@ -79,6 +81,12 @@ func (s DescribeAssetOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.EgressEndpoints != nil {
 		v := s.EgressEndpoints

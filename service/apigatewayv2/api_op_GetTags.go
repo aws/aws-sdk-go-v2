@@ -52,7 +52,10 @@ func (s GetTagsInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetTagsOutput struct {
 	_ struct{} `type:"structure"`
 
-	Tags map[string]string `locationName:"tags" type:"map"`
+	// Represents a collection of tags associated with the resource.
+	//
+	// Tags is a required field
+	Tags map[string]string `locationName:"tags" type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -82,7 +85,7 @@ const opGetTags = "GetTags"
 // GetTagsRequest returns a request value for making API operation for
 // AmazonApiGatewayV2.
 //
-// Gets the Tags for a resource.
+// Gets a collection of Tag resources.
 //
 //    // Example sending a request using GetTagsRequest.
 //    req := client.GetTagsRequest(params)

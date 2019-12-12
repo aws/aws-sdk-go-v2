@@ -210,6 +210,30 @@ func (enum MailFromDomainStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// A string representing the cause for suppression for an email destination.
+// It can be one of the following:
+//
+//    * COMPLAINT – Amazon SES will suppress an email address that receive
+//    a complaint.
+//
+//    * BOUNCE – Amazon SES will suppress an email address that hard bounces.
+type SuppressionListReason string
+
+// Enum values for SuppressionListReason
+const (
+	SuppressionListReasonBounce    SuppressionListReason = "BOUNCE"
+	SuppressionListReasonComplaint SuppressionListReason = "COMPLAINT"
+)
+
+func (enum SuppressionListReason) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SuppressionListReason) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Specifies whether messages that use the configuration set are required to
 // use Transport Layer Security (TLS). If the value is Require, messages are
 // only delivered if a TLS connection can be established. If the value is Optional,

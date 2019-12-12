@@ -24,7 +24,7 @@ type GetDirectoryLimitsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A DirectoryLimits object that contains the directory limits for the current
-	// region.
+	// rRegion.
 	DirectoryLimits *DirectoryLimits `type:"structure"`
 }
 
@@ -38,7 +38,7 @@ const opGetDirectoryLimits = "GetDirectoryLimits"
 // GetDirectoryLimitsRequest returns a request value for making API operation for
 // AWS Directory Service.
 //
-// Obtains directory limit information for the current region.
+// Obtains directory limit information for the current Region.
 //
 //    // Example sending a request using GetDirectoryLimitsRequest.
 //    req := client.GetDirectoryLimitsRequest(params)

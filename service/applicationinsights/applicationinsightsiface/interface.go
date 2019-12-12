@@ -65,9 +65,13 @@ type ClientAPI interface {
 
 	CreateComponentRequest(*applicationinsights.CreateComponentInput) applicationinsights.CreateComponentRequest
 
+	CreateLogPatternRequest(*applicationinsights.CreateLogPatternInput) applicationinsights.CreateLogPatternRequest
+
 	DeleteApplicationRequest(*applicationinsights.DeleteApplicationInput) applicationinsights.DeleteApplicationRequest
 
 	DeleteComponentRequest(*applicationinsights.DeleteComponentInput) applicationinsights.DeleteComponentRequest
+
+	DeleteLogPatternRequest(*applicationinsights.DeleteLogPatternInput) applicationinsights.DeleteLogPatternRequest
 
 	DescribeApplicationRequest(*applicationinsights.DescribeApplicationInput) applicationinsights.DescribeApplicationRequest
 
@@ -76,6 +80,8 @@ type ClientAPI interface {
 	DescribeComponentConfigurationRequest(*applicationinsights.DescribeComponentConfigurationInput) applicationinsights.DescribeComponentConfigurationRequest
 
 	DescribeComponentConfigurationRecommendationRequest(*applicationinsights.DescribeComponentConfigurationRecommendationInput) applicationinsights.DescribeComponentConfigurationRecommendationRequest
+
+	DescribeLogPatternRequest(*applicationinsights.DescribeLogPatternInput) applicationinsights.DescribeLogPatternRequest
 
 	DescribeObservationRequest(*applicationinsights.DescribeObservationInput) applicationinsights.DescribeObservationRequest
 
@@ -87,13 +93,25 @@ type ClientAPI interface {
 
 	ListComponentsRequest(*applicationinsights.ListComponentsInput) applicationinsights.ListComponentsRequest
 
+	ListLogPatternSetsRequest(*applicationinsights.ListLogPatternSetsInput) applicationinsights.ListLogPatternSetsRequest
+
+	ListLogPatternsRequest(*applicationinsights.ListLogPatternsInput) applicationinsights.ListLogPatternsRequest
+
 	ListProblemsRequest(*applicationinsights.ListProblemsInput) applicationinsights.ListProblemsRequest
+
+	ListTagsForResourceRequest(*applicationinsights.ListTagsForResourceInput) applicationinsights.ListTagsForResourceRequest
+
+	TagResourceRequest(*applicationinsights.TagResourceInput) applicationinsights.TagResourceRequest
+
+	UntagResourceRequest(*applicationinsights.UntagResourceInput) applicationinsights.UntagResourceRequest
 
 	UpdateApplicationRequest(*applicationinsights.UpdateApplicationInput) applicationinsights.UpdateApplicationRequest
 
 	UpdateComponentRequest(*applicationinsights.UpdateComponentInput) applicationinsights.UpdateComponentRequest
 
 	UpdateComponentConfigurationRequest(*applicationinsights.UpdateComponentConfigurationInput) applicationinsights.UpdateComponentConfigurationRequest
+
+	UpdateLogPatternRequest(*applicationinsights.UpdateLogPatternInput) applicationinsights.UpdateLogPatternRequest
 }
 
 var _ ClientAPI = (*applicationinsights.Client)(nil)

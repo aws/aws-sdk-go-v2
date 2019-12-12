@@ -19,17 +19,18 @@ type UpdateRouteInput struct {
 	ApiKeyRequired *bool `locationName:"apiKeyRequired" type:"boolean"`
 
 	// A list of authorization scopes configured on a route. The scopes are used
-	// with a COGNITO_USER_POOLS authorizer to authorize the method invocation.
-	// The authorization works by matching the route scopes against the scopes parsed
-	// from the access token in the incoming request. The method invocation is authorized
-	// if any route scope matches a claimed scope in the access token. Otherwise,
-	// the invocation is not authorized. When the route scope is configured, the
-	// client must provide an access token instead of an identity token for authorization
-	// purposes.
+	// with a JWT authorizer to authorize the method invocation. The authorization
+	// works by matching the route scopes against the scopes parsed from the access
+	// token in the incoming request. The method invocation is authorized if any
+	// route scope matches a claimed scope in the access token. Otherwise, the invocation
+	// is not authorized. When the route scope is configured, the client must provide
+	// an access token instead of an identity token for authorization purposes.
 	AuthorizationScopes []string `locationName:"authorizationScopes" type:"list"`
 
-	// The authorization type. Valid values are NONE for open access, AWS_IAM for
-	// using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
+	// The authorization type. For WebSocket APIs, valid values are NONE for open
+	// access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda
+	// authorizer. For HTTP APIs, valid values are NONE for open access, or JWT
+	// for using JSON Web Tokens.
 	AuthorizationType AuthorizationType `locationName:"authorizationType" type:"string" enum:"true"`
 
 	// The identifier.
@@ -52,7 +53,7 @@ type UpdateRouteInput struct {
 	// RouteId is a required field
 	RouteId *string `location:"uri" locationName:"routeId" type:"string" required:"true"`
 
-	// After evaulating a selection expression, the result is compared against one
+	// After evaluating a selection expression, the result is compared against one
 	// or more selection keys to find a matching key. See Selection Expressions
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
 	// for a list of expressions and each expression's associated selection key
@@ -197,20 +198,23 @@ func (s UpdateRouteInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateRouteOutput struct {
 	_ struct{} `type:"structure"`
 
+	ApiGatewayManaged *bool `locationName:"apiGatewayManaged" type:"boolean"`
+
 	ApiKeyRequired *bool `locationName:"apiKeyRequired" type:"boolean"`
 
 	// A list of authorization scopes configured on a route. The scopes are used
-	// with a COGNITO_USER_POOLS authorizer to authorize the method invocation.
-	// The authorization works by matching the route scopes against the scopes parsed
-	// from the access token in the incoming request. The method invocation is authorized
-	// if any route scope matches a claimed scope in the access token. Otherwise,
-	// the invocation is not authorized. When the route scope is configured, the
-	// client must provide an access token instead of an identity token for authorization
-	// purposes.
+	// with a JWT authorizer to authorize the method invocation. The authorization
+	// works by matching the route scopes against the scopes parsed from the access
+	// token in the incoming request. The method invocation is authorized if any
+	// route scope matches a claimed scope in the access token. Otherwise, the invocation
+	// is not authorized. When the route scope is configured, the client must provide
+	// an access token instead of an identity token for authorization purposes.
 	AuthorizationScopes []string `locationName:"authorizationScopes" type:"list"`
 
-	// The authorization type. Valid values are NONE for open access, AWS_IAM for
-	// using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
+	// The authorization type. For WebSocket APIs, valid values are NONE for open
+	// access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda
+	// authorizer. For HTTP APIs, valid values are NONE for open access, or JWT
+	// for using JSON Web Tokens.
 	AuthorizationType AuthorizationType `locationName:"authorizationType" type:"string" enum:"true"`
 
 	// The identifier.
@@ -233,7 +237,7 @@ type UpdateRouteOutput struct {
 	// The identifier.
 	RouteId *string `locationName:"routeId" type:"string"`
 
-	// After evaulating a selection expression, the result is compared against one
+	// After evaluating a selection expression, the result is compared against one
 	// or more selection keys to find a matching key. See Selection Expressions
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
 	// for a list of expressions and each expression's associated selection key
@@ -256,6 +260,12 @@ func (s UpdateRouteOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateRouteOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApiGatewayManaged != nil {
+		v := *s.ApiGatewayManaged
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "apiGatewayManaged", protocol.BoolValue(v), metadata)
+	}
 	if s.ApiKeyRequired != nil {
 		v := *s.ApiKeyRequired
 

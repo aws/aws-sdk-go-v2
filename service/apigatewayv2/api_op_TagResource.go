@@ -16,8 +16,7 @@ type TagResourceInput struct {
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resource-arn" type:"string" required:"true"`
 
-	// A key value pair of string with key length between[1-128] and value length
-	// between[1-256]
+	// Represents a collection of tags associated with the resource.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
@@ -83,6 +82,8 @@ const opTagResource = "TagResource"
 
 // TagResourceRequest returns a request value for making API operation for
 // AmazonApiGatewayV2.
+//
+// Creates a new Tag resource to represent a tag.
 //
 //    // Example sending a request using TagResourceRequest.
 //    req := client.TagResourceRequest(params)

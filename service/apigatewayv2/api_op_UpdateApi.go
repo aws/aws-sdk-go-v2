@@ -22,6 +22,14 @@ type UpdateApiInput struct {
 	// for more information.
 	ApiKeySelectionExpression *string `locationName:"apiKeySelectionExpression" type:"string"`
 
+	// Represents a CORS configuration. Supported only for HTTP APIs. See Configuring
+	// CORS (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html)
+	// for more information.
+	CorsConfiguration *Cors `locationName:"corsConfiguration" type:"structure"`
+
+	// Represents an Amazon Resource Name (ARN).
+	CredentialsArn *string `locationName:"credentialsArn" type:"string"`
+
 	// A string with a length between [0-1024].
 	Description *string `locationName:"description" type:"string"`
 
@@ -30,10 +38,20 @@ type UpdateApiInput struct {
 	// A string with a length between [1-128].
 	Name *string `locationName:"name" type:"string"`
 
+	// After evaluating a selection expression, the result is compared against one
+	// or more selection keys to find a matching key. See Selection Expressions
+	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
+	// for a list of expressions and each expression's associated selection key
+	// type.
+	RouteKey *string `locationName:"routeKey" type:"string"`
+
 	// An expression used to extract information at runtime. See Selection Expressions
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
 	// for more information.
 	RouteSelectionExpression *string `locationName:"routeSelectionExpression" type:"string"`
+
+	// A string representation of a URI with a length between [1-2048].
+	Target *string `locationName:"target" type:"string"`
 
 	// A string with a length between [1-64].
 	Version *string `locationName:"version" type:"string"`
@@ -51,6 +69,11 @@ func (s *UpdateApiInput) Validate() error {
 	if s.ApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
 	}
+	if s.CorsConfiguration != nil {
+		if err := s.CorsConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("CorsConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -67,6 +90,18 @@ func (s UpdateApiInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "apiKeySelectionExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CorsConfiguration != nil {
+		v := s.CorsConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "corsConfiguration", v, metadata)
+	}
+	if s.CredentialsArn != nil {
+		v := *s.CredentialsArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "credentialsArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -86,11 +121,23 @@ func (s UpdateApiInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.RouteKey != nil {
+		v := *s.RouteKey
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "routeKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.RouteSelectionExpression != nil {
 		v := *s.RouteSelectionExpression
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "routeSelectionExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Target != nil {
+		v := *s.Target
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "target", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
@@ -120,6 +167,11 @@ type UpdateApiOutput struct {
 	// for more information.
 	ApiKeySelectionExpression *string `locationName:"apiKeySelectionExpression" type:"string"`
 
+	// Represents a CORS configuration. Supported only for HTTP APIs. See Configuring
+	// CORS (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html)
+	// for more information.
+	CorsConfiguration *Cors `locationName:"corsConfiguration" type:"structure"`
+
 	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"iso8601"`
 
 	// A string with a length between [0-1024].
@@ -127,9 +179,12 @@ type UpdateApiOutput struct {
 
 	DisableSchemaValidation *bool `locationName:"disableSchemaValidation" type:"boolean"`
 
+	ImportInfo []string `locationName:"importInfo" type:"list"`
+
 	// A string with a length between [1-128].
 	Name *string `locationName:"name" type:"string"`
 
+	// Represents a protocol type.
 	ProtocolType ProtocolType `locationName:"protocolType" type:"string" enum:"true"`
 
 	// An expression used to extract information at runtime. See Selection Expressions
@@ -137,8 +192,7 @@ type UpdateApiOutput struct {
 	// for more information.
 	RouteSelectionExpression *string `locationName:"routeSelectionExpression" type:"string"`
 
-	// A key value pair of string with key length between[1-128] and value length
-	// between[1-256]
+	// Represents a collection of tags associated with the resource.
 	Tags map[string]string `locationName:"tags" type:"map"`
 
 	// A string with a length between [1-64].
@@ -172,6 +226,12 @@ func (s UpdateApiOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "apiKeySelectionExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.CorsConfiguration != nil {
+		v := s.CorsConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "corsConfiguration", v, metadata)
+	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate
 
@@ -190,6 +250,18 @@ func (s UpdateApiOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "disableSchemaValidation", protocol.BoolValue(v), metadata)
+	}
+	if s.ImportInfo != nil {
+		v := s.ImportInfo
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "importInfo", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	if s.Name != nil {
 		v := *s.Name

@@ -30,6 +30,13 @@ const (
 	LanguageCodeEnAb LanguageCode = "en-AB"
 	LanguageCodeEnWl LanguageCode = "en-WL"
 	LanguageCodePtPt LanguageCode = "pt-PT"
+	LanguageCodeTeIn LanguageCode = "te-IN"
+	LanguageCodeTrTr LanguageCode = "tr-TR"
+	LanguageCodeDeCh LanguageCode = "de-CH"
+	LanguageCodeHeIl LanguageCode = "he-IL"
+	LanguageCodeMsMy LanguageCode = "ms-MY"
+	LanguageCodeJaJp LanguageCode = "ja-JP"
+	LanguageCodeArAe LanguageCode = "ar-AE"
 )
 
 func (enum LanguageCode) MarshalValue() (string, error) {

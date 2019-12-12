@@ -102,6 +102,9 @@ type Build struct {
 	// The number of minutes a build is allowed to be queued before it times out.
 	QueuedTimeoutInMinutes *int64 `locationName:"queuedTimeoutInMinutes" type:"integer"`
 
+	// An array of the ARNs associated with this build's reports.
+	ReportArns []string `locationName:"reportArns" type:"list"`
+
 	// An identifier for the version of this build's source code.
 	//
 	//    * For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit
@@ -118,7 +121,7 @@ type Build struct {
 	// An array of ProjectSourceVersion objects. Each ProjectSourceVersion must
 	// be one of:
 	//
-	//    * For AWS CodeCommit: the commit ID to use.
+	//    * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
 	//
 	//    * For GitHub: the commit ID, pull request ID, branch name, or tag name
 	//    that corresponds to the version of the source code you want to build.
@@ -408,7 +411,7 @@ type EnvironmentVariable struct {
 	//    * PARAMETER_STORE: An environment variable stored in Amazon EC2 Systems
 	//    Manager Parameter Store.
 	//
-	//    * PLAINTEXT: An environment variable in plaintext format.
+	//    * PLAINTEXT: An environment variable in plain text format.
 	//
 	//    * SECRETS_MANAGER: An environment variable stored in AWS Secrets Manager.
 	Type EnvironmentVariableType `locationName:"type" type:"string" enum:"true"`
@@ -547,6 +550,10 @@ type LogsLocation struct {
 	// Information about Amazon CloudWatch Logs for a build project.
 	CloudWatchLogs *CloudWatchLogsConfig `locationName:"cloudWatchLogs" type:"structure"`
 
+	// The ARN of Amazon CloudWatch Logs for a build project. Its format is arn:${Partition}:logs:${Region}:${Account}:log-group:${LogGroupName}:log-stream:${LogStreamName}.
+	// For more information, see Resources Defined by Amazon CloudWatch Logs (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatchlogs.html#amazoncloudwatchlogs-resources-for-iam-policies).
+	CloudWatchLogsArn *string `locationName:"cloudWatchLogsArn" type:"string"`
+
 	// The URL to an individual build log in Amazon CloudWatch Logs.
 	DeepLink *string `locationName:"deepLink" type:"string"`
 
@@ -558,6 +565,10 @@ type LogsLocation struct {
 
 	// Information about S3 logs for a build project.
 	S3Logs *S3LogsConfig `locationName:"s3Logs" type:"structure"`
+
+	// The ARN of S3 logs for a build project. Its format is arn:${Partition}:s3:::${BucketName}/${ObjectName}.
+	// For more information, see Resources Defined by Amazon S3 (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html#amazons3-resources-for-iam-policies).
+	S3LogsArn *string `locationName:"s3LogsArn" type:"string"`
 
 	// The name of the Amazon CloudWatch Logs stream for the build logs.
 	StreamName *string `locationName:"streamName" type:"string"`
@@ -673,7 +684,7 @@ type Project struct {
 	// A version of the build input to be built for this project. If not specified,
 	// the latest version is used. If specified, it must be one of:
 	//
-	//    * For AWS CodeCommit: the commit ID to use.
+	//    * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
 	//
 	//    * For GitHub: the commit ID, pull request ID, branch name, or tag name
 	//    that corresponds to the version of the source code you want to build.
@@ -917,7 +928,7 @@ type ProjectCache struct {
 	//    Only directories can be specified for caching. You cannot specify individual
 	//    files. Symlinks are used to reference cached directories. Cached directories
 	//    are linked to your build before it downloads its project sources. Cached
-	//    items are overriden if a source item has the same name. Directories are
+	//    items are overridden if a source item has the same name. Directories are
 	//    specified using cache paths in the buildspec file.
 	Modes []CacheMode `locationName:"modes" type:"list"`
 
@@ -1256,7 +1267,7 @@ type ProjectSourceVersion struct {
 	// The source version for the corresponding source identifier. If specified,
 	// must be one of:
 	//
-	//    * For AWS CodeCommit: the commit ID to use.
+	//    * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
 	//
 	//    * For GitHub: the commit ID, pull request ID, branch name, or tag name
 	//    that corresponds to the version of the source code you want to build.
@@ -1356,6 +1367,137 @@ func (s *RegistryCredential) Validate() error {
 	return nil
 }
 
+// Information about the results from running a series of test cases during
+// the run of a build project. The test cases are specified in the buildspec
+// for the build project using one or more paths to the test case files. You
+// can specify any type of tests you want, such as unit tests, integration tests,
+// and functional tests.
+type Report struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the report run.
+	Arn *string `locationName:"arn" min:"1" type:"string"`
+
+	// The date and time this report run occurred.
+	Created *time.Time `locationName:"created" type:"timestamp"`
+
+	// The ARN of the build run that generated this report.
+	ExecutionId *string `locationName:"executionId" type:"string"`
+
+	// The date and time a report expires. A report expires 30 days after it is
+	// created. An expired report is not available to view in CodeBuild.
+	Expired *time.Time `locationName:"expired" type:"timestamp"`
+
+	// Information about where the raw data used to generate this report was exported.
+	ExportConfig *ReportExportConfig `locationName:"exportConfig" type:"structure"`
+
+	// The name of the report that was run.
+	Name *string `locationName:"name" type:"string"`
+
+	// The ARN of the report group associated with this report.
+	ReportGroupArn *string `locationName:"reportGroupArn" min:"1" type:"string"`
+
+	// The status of this report.
+	Status ReportStatusType `locationName:"status" type:"string" enum:"true"`
+
+	// A TestReportSummary object that contains information about this test report.
+	TestSummary *TestReportSummary `locationName:"testSummary" type:"structure"`
+
+	// A boolean that specifies if this report run is truncated. The list of test
+	// cases is truncated after the maximum number of test cases is reached.
+	Truncated *bool `locationName:"truncated" type:"boolean"`
+
+	// The type of the report that was run.
+	Type ReportType `locationName:"type" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s Report) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about the location where the run of a report is exported.
+type ReportExportConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The export configuration type. Valid values are:
+	//
+	//    * S3: The report results are exported to an S3 bucket.
+	//
+	//    * NO_EXPORT: The report results are not exported.
+	ExportConfigType ReportExportConfigType `locationName:"exportConfigType" type:"string" enum:"true"`
+
+	// A S3ReportExportConfig object that contains information about the S3 bucket
+	// where the run of a report is exported.
+	S3Destination *S3ReportExportConfig `locationName:"s3Destination" type:"structure"`
+}
+
+// String returns the string representation
+func (s ReportExportConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ReportExportConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ReportExportConfig"}
+	if s.S3Destination != nil {
+		if err := s.S3Destination.Validate(); err != nil {
+			invalidParams.AddNested("S3Destination", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// A filter used to return reports with the status specified by the input status
+// parameter.
+type ReportFilter struct {
+	_ struct{} `type:"structure"`
+
+	// The status used to filter reports. You can filter using one status only.
+	Status ReportStatusType `locationName:"status" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ReportFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A series of reports. Each report contains information about the results from
+// running a series of test cases. You specify the test cases for a report group
+// in the buildspec for a build project using one or more paths to the test
+// case files.
+type ReportGroup struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of a ReportGroup.
+	Arn *string `locationName:"arn" min:"1" type:"string"`
+
+	// The date and time this ReportGroup was created.
+	Created *time.Time `locationName:"created" type:"timestamp"`
+
+	// Information about the destination where the raw data of this ReportGroup
+	// is exported.
+	ExportConfig *ReportExportConfig `locationName:"exportConfig" type:"structure"`
+
+	// The date and time this ReportGroup was last modified.
+	LastModified *time.Time `locationName:"lastModified" type:"timestamp"`
+
+	// The name of a ReportGroup.
+	Name *string `locationName:"name" min:"2" type:"string"`
+
+	// The type of the ReportGroup. The one valid value is TEST.
+	Type ReportType `locationName:"type" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ReportGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Information about S3 logs for a build project.
 type S3LogsConfig struct {
 	_ struct{} `type:"structure"`
@@ -1389,6 +1531,53 @@ func (s *S3LogsConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "S3LogsConfig"}
 	if len(s.Status) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Information about the S3 bucket where the raw data of a report are exported.
+type S3ReportExportConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the S3 bucket where the raw data of a report are exported.
+	Bucket *string `locationName:"bucket" min:"1" type:"string"`
+
+	// A boolean value that specifies if the results of a report are encrypted.
+	EncryptionDisabled *bool `locationName:"encryptionDisabled" type:"boolean"`
+
+	// The encryption key for the report's encrypted raw data.
+	EncryptionKey *string `locationName:"encryptionKey" min:"1" type:"string"`
+
+	// The type of build output artifact to create. Valid values include:
+	//
+	//    * NONE: AWS CodeBuild creates the raw data in the output bucket. This
+	//    is the default if packaging is not specified.
+	//
+	//    * ZIP: AWS CodeBuild creates a ZIP file with the raw data in the output
+	//    bucket.
+	Packaging ReportPackagingType `locationName:"packaging" type:"string" enum:"true"`
+
+	// The path to the exported report's raw data results.
+	Path *string `locationName:"path" type:"string"`
+}
+
+// String returns the string representation
+func (s S3ReportExportConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3ReportExportConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "S3ReportExportConfig"}
+	if s.Bucket != nil && len(*s.Bucket) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Bucket", 1))
+	}
+	if s.EncryptionKey != nil && len(*s.EncryptionKey) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EncryptionKey", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1490,6 +1679,86 @@ func (s *Tag) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Information about a test case created using a framework such as NUnit or
+// Cucumber. A test case might be a unit test or a configuration test.
+type TestCase struct {
+	_ struct{} `type:"structure"`
+
+	// The number of nanoseconds it took to run this test case.
+	DurationInNanoSeconds *int64 `locationName:"durationInNanoSeconds" type:"long"`
+
+	// The date and time a test case expires. A test case expires 30 days after
+	// it is created. An expired test case is not available to view in CodeBuild.
+	Expired *time.Time `locationName:"expired" type:"timestamp"`
+
+	// A message associated with a test case. For example, an error message or stack
+	// trace.
+	Message *string `locationName:"message" type:"string"`
+
+	// The name of the test case.
+	Name *string `locationName:"name" type:"string"`
+
+	// A string that is applied to a series of related test cases. CodeBuild generates
+	// the prefix. The prefix depends on the framework used to generate the tests.
+	Prefix *string `locationName:"prefix" type:"string"`
+
+	// The ARN of the report to which the test case belongs.
+	ReportArn *string `locationName:"reportArn" min:"1" type:"string"`
+
+	// The status returned by the test case after it was run. Valid statuses are
+	// SUCCEEDED, FAILED, ERROR, SKIPPED, and UNKNOWN.
+	Status *string `locationName:"status" type:"string"`
+
+	// The path to the raw data file that contains the test result.
+	TestRawDataPath *string `locationName:"testRawDataPath" type:"string"`
+}
+
+// String returns the string representation
+func (s TestCase) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A filter used to return specific types of test cases.
+type TestCaseFilter struct {
+	_ struct{} `type:"structure"`
+
+	// The status used to filter test cases. Valid statuses are SUCCEEDED, FAILED,
+	// ERROR, SKIPPED, and UNKNOWN. A TestCaseFilter can have one status.
+	Status *string `locationName:"status" type:"string"`
+}
+
+// String returns the string representation
+func (s TestCaseFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about a test report.
+type TestReportSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The number of nanoseconds it took to run all of the test cases in this report.
+	//
+	// DurationInNanoSeconds is a required field
+	DurationInNanoSeconds *int64 `locationName:"durationInNanoSeconds" type:"long" required:"true"`
+
+	// A map that contains the number of each type of status returned by the test
+	// results in this TestReportSummary.
+	//
+	// StatusCounts is a required field
+	StatusCounts map[string]int64 `locationName:"statusCounts" type:"map" required:"true"`
+
+	// The number of test cases in this TestReportSummary. The total includes truncated
+	// test cases.
+	//
+	// Total is a required field
+	Total *int64 `locationName:"total" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s TestReportSummary) String() string {
+	return awsutil.Prettify(s)
 }
 
 // Information about the VPC configuration that AWS CodeBuild accesses.

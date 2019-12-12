@@ -122,6 +122,9 @@ type ApplicationConfiguration struct {
 	// The creation and update parameters for an SQL-based Kinesis Data Analytics
 	// application.
 	SqlApplicationConfiguration *SqlApplicationConfiguration `type:"structure"`
+
+	// The array of descriptions of VPC configurations available to the application.
+	VpcConfigurations []VpcConfiguration `type:"list"`
 }
 
 // String returns the string representation
@@ -161,6 +164,13 @@ func (s *ApplicationConfiguration) Validate() error {
 			invalidParams.AddNested("SqlApplicationConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.VpcConfigurations != nil {
+		for i, v := range s.VpcConfigurations {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "VpcConfigurations", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -193,6 +203,9 @@ type ApplicationConfigurationDescription struct {
 	// The details about inputs, outputs, and reference data sources for an SQL-based
 	// Kinesis Data Analytics application.
 	SqlApplicationConfigurationDescription *SqlApplicationConfigurationDescription `type:"structure"`
+
+	// The array of descriptions of VPC configurations available to the application.
+	VpcConfigurationDescriptions []VpcConfigurationDescription `type:"list"`
 }
 
 // String returns the string representation
@@ -221,6 +234,10 @@ type ApplicationConfigurationUpdate struct {
 
 	// Describes updates to an SQL-based Kinesis Data Analytics application's configuration.
 	SqlApplicationConfigurationUpdate *SqlApplicationConfigurationUpdate `type:"structure"`
+
+	// Updates to the array of descriptions of VPC configurations available to the
+	// application.
+	VpcConfigurationUpdates []VpcConfigurationUpdate `type:"list"`
 }
 
 // String returns the string representation
@@ -254,6 +271,13 @@ func (s *ApplicationConfigurationUpdate) Validate() error {
 	if s.SqlApplicationConfigurationUpdate != nil {
 		if err := s.SqlApplicationConfigurationUpdate.Validate(); err != nil {
 			invalidParams.AddNested("SqlApplicationConfigurationUpdate", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.VpcConfigurationUpdates != nil {
+		for i, v := range s.VpcConfigurationUpdates {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "VpcConfigurationUpdates", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -531,14 +555,33 @@ type CheckpointConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Describes the interval in milliseconds between checkpoint operations.
-	CheckpointInterval *int64 `type:"long"`
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a CheckpointInterval vaue of 60000, even if this value is set to
+	// another value using this API or in application code.
+	CheckpointInterval *int64 `min:"1" type:"long"`
 
 	// Describes whether checkpointing is enabled for a Java-based Kinesis Data
 	// Analytics application.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a CheckpointingEnabled value of true, even if this value is set
+	// to another value using this API or in application code.
 	CheckpointingEnabled *bool `type:"boolean"`
 
 	// Describes whether the application uses Amazon Kinesis Data Analytics' default
-	// checkpointing behavior.
+	// checkpointing behavior. You must set this property to CUSTOM in order to
+	// set the CheckpointingEnabled, CheckpointInterval, or MinPauseBetweenCheckpoints
+	// parameters.
+	//
+	// If this value is set to DEFAULT, the application will use the following values,
+	// even if they are set to other values using APIs or application code:
+	//
+	//    * CheckpointingEnabled: true
+	//
+	//    * CheckpointInterval: 60000
+	//
+	//    * MinPauseBetweenCheckpoints: 5000
 	//
 	// ConfigurationType is a required field
 	ConfigurationType ConfigurationType `type:"string" required:"true" enum:"true"`
@@ -548,6 +591,10 @@ type CheckpointConfiguration struct {
 	// longer than the CheckpointInterval, the application otherwise performs continual
 	// checkpoint operations. For more information, see Tuning Checkpointing (https://ci.apache.org/projects/flink/flink-docs-stable/ops/state/large_state_tuning.html#tuning-checkpointing)
 	// in the Apache Flink Documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.6/).
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a MinPauseBetweenCheckpoints value of 5000, even if this value is
+	// set using this API or in application code.
 	MinPauseBetweenCheckpoints *int64 `type:"long"`
 }
 
@@ -559,6 +606,9 @@ func (s CheckpointConfiguration) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CheckpointConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CheckpointConfiguration"}
+	if s.CheckpointInterval != nil && *s.CheckpointInterval < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("CheckpointInterval", 1))
+	}
 	if len(s.ConfigurationType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationType"))
 	}
@@ -575,18 +625,39 @@ type CheckpointConfigurationDescription struct {
 	_ struct{} `type:"structure"`
 
 	// Describes the interval in milliseconds between checkpoint operations.
-	CheckpointInterval *int64 `type:"long"`
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a CheckpointInterval vaue of 60000, even if this value is set to
+	// another value using this API or in application code.
+	CheckpointInterval *int64 `min:"1" type:"long"`
 
 	// Describes whether checkpointing is enabled for a Java-based Kinesis Data
 	// Analytics application.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a CheckpointingEnabled value of true, even if this value is set
+	// to another value using this API or in application code.
 	CheckpointingEnabled *bool `type:"boolean"`
 
 	// Describes whether the application uses the default checkpointing behavior
 	// in Kinesis Data Analytics.
+	//
+	// If this value is set to DEFAULT, the application will use the following values,
+	// even if they are set to other values using APIs or application code:
+	//
+	//    * CheckpointingEnabled: true
+	//
+	//    * CheckpointInterval: 60000
+	//
+	//    * MinPauseBetweenCheckpoints: 5000
 	ConfigurationType ConfigurationType `type:"string" enum:"true"`
 
 	// Describes the minimum time in milliseconds after a checkpoint operation completes
 	// that a new checkpoint operation can start.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a MinPauseBetweenCheckpoints value of 5000, even if this value is
+	// set using this API or in application code.
 	MinPauseBetweenCheckpoints *int64 `type:"long"`
 }
 
@@ -601,23 +672,59 @@ type CheckpointConfigurationUpdate struct {
 	_ struct{} `type:"structure"`
 
 	// Describes updates to the interval in milliseconds between checkpoint operations.
-	CheckpointIntervalUpdate *int64 `type:"long"`
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a CheckpointInterval vaue of 60000, even if this value is set to
+	// another value using this API or in application code.
+	CheckpointIntervalUpdate *int64 `min:"1" type:"long"`
 
 	// Describes updates to whether checkpointing is enabled for an application.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a CheckpointingEnabled value of true, even if this value is set
+	// to another value using this API or in application code.
 	CheckpointingEnabledUpdate *bool `type:"boolean"`
 
 	// Describes updates to whether the application uses the default checkpointing
-	// behavior of Kinesis Data Analytics.
+	// behavior of Kinesis Data Analytics. You must set this property to CUSTOM
+	// in order to set the CheckpointingEnabled, CheckpointInterval, or MinPauseBetweenCheckpoints
+	// parameters.
+	//
+	// If this value is set to DEFAULT, the application will use the following values,
+	// even if they are set to other values using APIs or application code:
+	//
+	//    * CheckpointingEnabled: true
+	//
+	//    * CheckpointInterval: 60000
+	//
+	//    * MinPauseBetweenCheckpoints: 5000
 	ConfigurationTypeUpdate ConfigurationType `type:"string" enum:"true"`
 
 	// Describes updates to the minimum time in milliseconds after a checkpoint
 	// operation completes that a new checkpoint operation can start.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a MinPauseBetweenCheckpoints value of 5000, even if this value is
+	// set using this API or in application code.
 	MinPauseBetweenCheckpointsUpdate *int64 `type:"long"`
 }
 
 // String returns the string representation
 func (s CheckpointConfigurationUpdate) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CheckpointConfigurationUpdate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CheckpointConfigurationUpdate"}
+	if s.CheckpointIntervalUpdate != nil && *s.CheckpointIntervalUpdate < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("CheckpointIntervalUpdate", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Provides a description of Amazon CloudWatch logging options, including the
@@ -1034,6 +1141,11 @@ func (s FlinkApplicationConfigurationUpdate) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FlinkApplicationConfigurationUpdate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "FlinkApplicationConfigurationUpdate"}
+	if s.CheckpointConfigurationUpdate != nil {
+		if err := s.CheckpointConfigurationUpdate.Validate(); err != nil {
+			invalidParams.AddNested("CheckpointConfigurationUpdate", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.ParallelismConfigurationUpdate != nil {
 		if err := s.ParallelismConfigurationUpdate.Validate(); err != nil {
 			invalidParams.AddNested("ParallelismConfigurationUpdate", err.(aws.ErrInvalidParams))
@@ -1044,6 +1156,25 @@ func (s *FlinkApplicationConfigurationUpdate) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Describes the starting parameters for an Apache Flink-based Kinesis Data
+// Analytics application.
+type FlinkRunConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// When restoring from a savepoint, specifies whether the runtime is allowed
+	// to skip a state that cannot be mapped to the new program. This will happen
+	// if the program is updated between savepoints to remove stateful parameters,
+	// and state data in the savepoint no longer corresponds to valid application
+	// data. For more information, see Allowing Non-Restored State (https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/state/savepoints.html#allowing-non-restored-state)
+	// in the Apache Flink documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.8/).
+	AllowNonRestoredState *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s FlinkRunConfiguration) String() string {
+	return awsutil.Prettify(s)
 }
 
 // When you configure the application input for an SQL-based Amazon Kinesis
@@ -2148,7 +2279,8 @@ type MonitoringConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Describes whether to use the default CloudWatch logging configuration for
-	// an application.
+	// an application. You must set this property to CUSTOM in order to set the
+	// LogLevel or MetricsLevel parameters.
 	//
 	// ConfigurationType is a required field
 	ConfigurationType ConfigurationType `type:"string" required:"true" enum:"true"`
@@ -2205,7 +2337,8 @@ type MonitoringConfigurationUpdate struct {
 	_ struct{} `type:"structure"`
 
 	// Describes updates to whether to use the default CloudWatch logging configuration
-	// for an application.
+	// for an application. You must set this property to CUSTOM in order to set
+	// the LogLevel or MetricsLevel parameters.
 	ConfigurationTypeUpdate ConfigurationType `type:"string" enum:"true"`
 
 	// Describes updates to the verbosity of the CloudWatch Logs for an application.
@@ -2412,15 +2545,22 @@ type ParallelismConfiguration struct {
 	AutoScalingEnabled *bool `type:"boolean"`
 
 	// Describes whether the application uses the default parallelism for the Kinesis
-	// Data Analytics service.
+	// Data Analytics service. You must set this property to CUSTOM in order to
+	// change your application's AutoScalingEnabled, Parallelism, or ParallelismPerKPU
+	// properties.
 	//
 	// ConfigurationType is a required field
 	ConfigurationType ConfigurationType `type:"string" required:"true" enum:"true"`
 
 	// Describes the initial number of parallel tasks that a Java-based Kinesis
-	// Data Analytics application can perform. The Kinesis Data Analytics service
-	// can increase this number automatically if ParallelismConfiguration$AutoScalingEnabled
-	// is set to true.
+	// Data Analytics application can perform. If AutoScalingEnabled is set to True,
+	// Kinesis Data Analytics increases the CurrentParallelism value in response
+	// to application load. The service can increase the CurrentParallelism value
+	// up to the maximum parallelism, which is ParalellismPerKPU times the maximum
+	// KPUs for the application. The maximum KPUs for an application is 32 by default,
+	// and can be increased by requesting a limit increase. If application load
+	// is reduced, the service can reduce the CurrentParallelism value down to the
+	// Parallelism setting.
 	Parallelism *int64 `min:"1" type:"integer"`
 
 	// Describes the number of parallel tasks that a Java-based Kinesis Data Analytics
@@ -2468,11 +2608,24 @@ type ParallelismConfigurationDescription struct {
 	ConfigurationType ConfigurationType `type:"string" enum:"true"`
 
 	// Describes the current number of parallel tasks that a Java-based Kinesis
-	// Data Analytics application can perform.
+	// Data Analytics application can perform. If AutoScalingEnabled is set to True,
+	// Kinesis Data Analytics can increase this value in response to application
+	// load. The service can increase this value up to the maximum parallelism,
+	// which is ParalellismPerKPU times the maximum KPUs for the application. The
+	// maximum KPUs for an application is 32 by default, and can be increased by
+	// requesting a limit increase. If application load is reduced, the service
+	// can reduce the CurrentParallelism value down to the Parallelism setting.
 	CurrentParallelism *int64 `min:"1" type:"integer"`
 
 	// Describes the initial number of parallel tasks that a Java-based Kinesis
-	// Data Analytics application can perform.
+	// Data Analytics application can perform. If AutoScalingEnabled is set to True,
+	// then Kinesis Data Analytics can increase the CurrentParallelism value in
+	// response to application load. The service can increase CurrentParallelism
+	// up to the maximum parallelism, which is ParalellismPerKPU times the maximum
+	// KPUs for the application. The maximum KPUs for an application is 32 by default,
+	// and can be increased by requesting a limit increase. If application load
+	// is reduced, the service can reduce the CurrentParallelism value down to the
+	// Parallelism setting.
 	Parallelism *int64 `min:"1" type:"integer"`
 
 	// Describes the number of parallel tasks that a Java-based Kinesis Data Analytics
@@ -2496,6 +2649,8 @@ type ParallelismConfigurationUpdate struct {
 
 	// Describes updates to whether the application uses the default parallelism
 	// for the Kinesis Data Analytics service, or if a custom parallelism is used.
+	// You must set this property to CUSTOM in order to change your application's
+	// AutoScalingEnabled, Parallelism, or ParallelismPerKPU properties.
 	ConfigurationTypeUpdate ConfigurationType `type:"string" enum:"true"`
 
 	// Describes updates to the number of parallel tasks an application can perform
@@ -2503,7 +2658,13 @@ type ParallelismConfigurationUpdate struct {
 	ParallelismPerKPUUpdate *int64 `min:"1" type:"integer"`
 
 	// Describes updates to the initial number of parallel tasks an application
-	// can perform.
+	// can perform. If AutoScalingEnabled is set to True, then Kinesis Data Analytics
+	// can increase the CurrentParallelism value in response to application load.
+	// The service can increase CurrentParallelism up to the maximum parallelism,
+	// which is ParalellismPerKPU times the maximum KPUs for the application. The
+	// maximum KPUs for an application is 32 by default, and can be increased by
+	// requesting a limit increase. If application load is reduced, the service
+	// will reduce CurrentParallelism down to the Parallelism setting.
 	ParallelismUpdate *int64 `min:"1" type:"integer"`
 }
 
@@ -2831,6 +2992,10 @@ type RunConfiguration struct {
 	// Describes the restore behavior of a restarting application.
 	ApplicationRestoreConfiguration *ApplicationRestoreConfiguration `type:"structure"`
 
+	// Describes the starting parameters for an Apache Flink-based Kinesis Data
+	// Analytics application.
+	FlinkRunConfiguration *FlinkRunConfiguration `type:"structure"`
+
 	// Describes the starting parameters for an SQL-based Kinesis Data Analytics
 	// application.
 	SqlRunConfigurations []SqlRunConfiguration `type:"list"`
@@ -2883,6 +3048,10 @@ type RunConfigurationUpdate struct {
 
 	// Describes updates to the restore behavior of a restarting application.
 	ApplicationRestoreConfiguration *ApplicationRestoreConfiguration `type:"structure"`
+
+	// Describes the starting parameters for an Apache Flink-based Kinesis Data
+	// Analytics application.
+	FlinkRunConfiguration *FlinkRunConfiguration `type:"structure"`
 }
 
 // String returns the string representation
@@ -3430,9 +3599,7 @@ func (s *SqlRunConfiguration) Validate() error {
 // AWS resources. If you specify a tag that already exists, the tag value is
 // replaced with the value that you specify in the request. Note that the maximum
 // number of application tags includes system tags. The maximum number of user-defined
-// application tags is 50. For more information, see Using Cost Allocation Tags
-// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-// in the AWS Billing and Cost Management Guide.
+// application tags is 50. For more information, see Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html).
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -3459,6 +3626,130 @@ func (s *Tag) Validate() error {
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Describes the parameters of a VPC used by the application.
+type VpcConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The array of SecurityGroup (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html)
+	// IDs used by the VPC configuration.
+	//
+	// SecurityGroupIds is a required field
+	SecurityGroupIds []string `min:"1" type:"list" required:"true"`
+
+	// The array of Subnet (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html)
+	// IDs used by the VPC configuration.
+	//
+	// SubnetIds is a required field
+	SubnetIds []string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s VpcConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VpcConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VpcConfiguration"}
+
+	if s.SecurityGroupIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if s.SecurityGroupIds != nil && len(s.SecurityGroupIds) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SecurityGroupIds", 1))
+	}
+
+	if s.SubnetIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
+	}
+	if s.SubnetIds != nil && len(s.SubnetIds) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SubnetIds", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Describes the parameters of a VPC used by the application.
+type VpcConfigurationDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The array of SecurityGroup (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html)
+	// IDs used by the VPC configuration.
+	//
+	// SecurityGroupIds is a required field
+	SecurityGroupIds []string `min:"1" type:"list" required:"true"`
+
+	// The array of Subnet (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html)
+	// IDs used by the VPC configuration.
+	//
+	// SubnetIds is a required field
+	SubnetIds []string `min:"1" type:"list" required:"true"`
+
+	// The ID of the VPC configuration.
+	//
+	// VpcConfigurationId is a required field
+	VpcConfigurationId *string `min:"1" type:"string" required:"true"`
+
+	// The ID of the associated VPC.
+	//
+	// VpcId is a required field
+	VpcId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VpcConfigurationDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes updates to the VPC configuration used by the application.
+type VpcConfigurationUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// Describes updates to the array of SecurityGroup (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html)
+	// IDs used by the VPC configuration.
+	SecurityGroupIdUpdates []string `min:"1" type:"list"`
+
+	// Describes updates to the array of Subnet (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html)
+	// IDs used by the VPC configuration.
+	SubnetIdUpdates []string `min:"1" type:"list"`
+
+	// Describes an update to the ID of the VPC configuration.
+	//
+	// VpcConfigurationId is a required field
+	VpcConfigurationId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VpcConfigurationUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VpcConfigurationUpdate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VpcConfigurationUpdate"}
+	if s.SecurityGroupIdUpdates != nil && len(s.SecurityGroupIdUpdates) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SecurityGroupIdUpdates", 1))
+	}
+	if s.SubnetIdUpdates != nil && len(s.SubnetIdUpdates) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SubnetIdUpdates", 1))
+	}
+
+	if s.VpcConfigurationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VpcConfigurationId"))
+	}
+	if s.VpcConfigurationId != nil && len(*s.VpcConfigurationId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("VpcConfigurationId", 1))
 	}
 
 	if invalidParams.Len() > 0 {

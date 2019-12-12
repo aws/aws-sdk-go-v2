@@ -16,7 +16,7 @@ type DescribeDashboardInput struct {
 	// The alias name.
 	AliasName *string `location:"querystring" locationName:"alias-name" min:"1" type:"string"`
 
-	// AWS account ID that contains the dashboard you are describing.
+	// The ID of the AWS account that contains the dashboard that you're describing.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -26,7 +26,7 @@ type DescribeDashboardInput struct {
 	// DashboardId is a required field
 	DashboardId *string `location:"uri" locationName:"DashboardId" min:"1" type:"string" required:"true"`
 
-	// The version number for the dashboard. If version number isn’t passed the
+	// The version number for the dashboard. If a version number isn't passed, the
 	// latest published dashboard version is described.
 	VersionNumber *int64 `location:"querystring" locationName:"version-number" min:"1" type:"long"`
 }
@@ -106,7 +106,7 @@ type DescribeDashboardOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of this request.
+	// The HTTP status of this request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -139,14 +139,6 @@ const opDescribeDashboard = "DescribeDashboard"
 // Amazon QuickSight.
 //
 // Provides a summary for a dashboard.
-//
-// CLI syntax:
-//
-//    * aws quicksight describe-dashboard --aws-account-id 111122223333 —dashboard-id
-//    reports_test_report -version-number 2
-//
-//    * aws quicksight describe-dashboard --aws-account-id 111122223333 —dashboard-id
-//    reports_test_report -alias-name ‘$PUBLISHED’
 //
 //    // Example sending a request using DescribeDashboardRequest.
 //    req := client.DescribeDashboardRequest(params)

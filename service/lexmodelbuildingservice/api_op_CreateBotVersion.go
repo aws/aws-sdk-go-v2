@@ -114,6 +114,10 @@ type CreateBotVersionOutput struct {
 	// A description of the bot.
 	Description *string `locationName:"description" type:"string"`
 
+	// Indicates whether utterances entered by the user should be sent to Amazon
+	// Comprehend for sentiment analysis.
+	DetectSentiment *bool `locationName:"detectSentiment" type:"boolean"`
+
 	// If status is FAILED, Amazon Lex provides the reason that it failed to build
 	// the bot.
 	FailureReason *string `locationName:"failureReason" type:"string"`
@@ -191,6 +195,12 @@ func (s CreateBotVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DetectSentiment != nil {
+		v := *s.DetectSentiment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "detectSentiment", protocol.BoolValue(v), metadata)
 	}
 	if s.FailureReason != nil {
 		v := *s.FailureReason

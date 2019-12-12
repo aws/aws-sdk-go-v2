@@ -23,6 +23,56 @@ func (enum APIName) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ChannelProtocol string
+
+// Enum values for ChannelProtocol
+const (
+	ChannelProtocolWss   ChannelProtocol = "WSS"
+	ChannelProtocolHttps ChannelProtocol = "HTTPS"
+)
+
+func (enum ChannelProtocol) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChannelProtocol) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ChannelRole string
+
+// Enum values for ChannelRole
+const (
+	ChannelRoleMaster ChannelRole = "MASTER"
+	ChannelRoleViewer ChannelRole = "VIEWER"
+)
+
+func (enum ChannelRole) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChannelRole) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ChannelType string
+
+// Enum values for ChannelType
+const (
+	ChannelTypeSingleMaster ChannelType = "SINGLE_MASTER"
+)
+
+func (enum ChannelType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChannelType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator

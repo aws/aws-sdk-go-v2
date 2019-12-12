@@ -23,19 +23,19 @@ type CreateAuthorizerInput struct {
 	// AuthorizerName is a required field
 	AuthorizerName *string `location:"uri" locationName:"authorizerName" min:"1" type:"string" required:"true"`
 
+	// Specifies whether AWS IoT validates the token signature in an authorization
+	// request.
+	SigningDisabled *bool `locationName:"signingDisabled" type:"boolean"`
+
 	// The status of the create authorizer request.
 	Status AuthorizerStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The name of the token key used to extract the token from the HTTP headers.
-	//
-	// TokenKeyName is a required field
-	TokenKeyName *string `locationName:"tokenKeyName" min:"1" type:"string" required:"true"`
+	TokenKeyName *string `locationName:"tokenKeyName" min:"1" type:"string"`
 
 	// The public keys used to verify the digital signature returned by your custom
 	// authentication service.
-	//
-	// TokenSigningPublicKeys is a required field
-	TokenSigningPublicKeys map[string]string `locationName:"tokenSigningPublicKeys" type:"map" required:"true"`
+	TokenSigningPublicKeys map[string]string `locationName:"tokenSigningPublicKeys" type:"map"`
 }
 
 // String returns the string representation
@@ -57,16 +57,8 @@ func (s *CreateAuthorizerInput) Validate() error {
 	if s.AuthorizerName != nil && len(*s.AuthorizerName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthorizerName", 1))
 	}
-
-	if s.TokenKeyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TokenKeyName"))
-	}
 	if s.TokenKeyName != nil && len(*s.TokenKeyName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TokenKeyName", 1))
-	}
-
-	if s.TokenSigningPublicKeys == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TokenSigningPublicKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -84,6 +76,12 @@ func (s CreateAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "authorizerFunctionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SigningDisabled != nil {
+		v := *s.SigningDisabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "signingDisabled", protocol.BoolValue(v), metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status

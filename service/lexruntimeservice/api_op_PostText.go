@@ -242,8 +242,17 @@ type PostTextOutput struct {
 	// choose the settings button next to a slot) or from a code hook (Lambda function).
 	ResponseCard *ResponseCard `locationName:"responseCard" type:"structure"`
 
+	// The sentiment expressed in and utterance.
+	//
+	// When the bot is configured to send utterances to Amazon Comprehend for sentiment
+	// analysis, this field contains the result of the analysis.
+	SentimentResponse *SentimentResponse `locationName:"sentimentResponse" type:"structure"`
+
 	// A map of key-value pairs representing the session-specific context information.
 	SessionAttributes map[string]string `locationName:"sessionAttributes" type:"map" sensitive:"true"`
+
+	// A unique identifier for the session.
+	SessionId *string `locationName:"sessionId" type:"string"`
 
 	// If the dialogState value is ElicitSlot, returns the name of the slot for
 	// which Amazon Lex is eliciting a value.
@@ -299,6 +308,12 @@ func (s PostTextOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "responseCard", v, metadata)
 	}
+	if s.SentimentResponse != nil {
+		v := s.SentimentResponse
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "sentimentResponse", v, metadata)
+	}
 	if s.SessionAttributes != nil {
 		v := s.SessionAttributes
 
@@ -310,6 +325,12 @@ func (s PostTextOutput) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	if s.SessionId != nil {
+		v := *s.SessionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sessionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SlotToElicit != nil {
 		v := *s.SlotToElicit

@@ -14,29 +14,32 @@ import (
 type CreateMicrosoftADInput struct {
 	_ struct{} `type:"structure"`
 
-	// A textual description for the directory. This label will appear on the AWS
-	// console Directory Details page after the directory is created.
+	// A description for the directory. This label will appear on the AWS console
+	// Directory Details page after the directory is created.
 	Description *string `type:"string"`
 
 	// AWS Managed Microsoft AD is available in two editions: Standard and Enterprise.
 	// Enterprise is the default.
 	Edition DirectoryEdition `type:"string" enum:"true"`
 
-	// The fully qualified domain name for the directory, such as corp.example.com.
-	// This name will resolve inside your VPC only. It does not need to be publicly
-	// resolvable.
+	// The fully qualified domain name for the AWS Managed Microsoft AD directory,
+	// such as corp.example.com. This name will resolve inside your VPC only. It
+	// does not need to be publicly resolvable.
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
 	// The password for the default administrative user named Admin.
 	//
+	// If you need to change the password for the administrator account, you can
+	// use the ResetUserPassword API call.
+	//
 	// Password is a required field
 	Password *string `type:"string" required:"true" sensitive:"true"`
 
-	// The NetBIOS name for your domain. A short identifier for your domain, such
-	// as CORP. If you don't specify a NetBIOS name, it will default to the first
-	// part of your directory DNS. For example, CORP for the directory DNS corp.example.com.
+	// The NetBIOS name for your domain, such as CORP. If you don't specify a NetBIOS
+	// name, it will default to the first part of your directory DNS. For example,
+	// CORP for the directory DNS corp.example.com.
 	ShortName *string `type:"string"`
 
 	// The tags to be assigned to the AWS Managed Microsoft AD directory.
@@ -105,7 +108,9 @@ const opCreateMicrosoftAD = "CreateMicrosoftAD"
 // CreateMicrosoftADRequest returns a request value for making API operation for
 // AWS Directory Service.
 //
-// Creates an AWS Managed Microsoft AD directory.
+// Creates a Microsoft AD directory in the AWS Cloud. For more information,
+// see AWS Managed Microsoft AD (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html)
+// in the AWS Directory Service Admin Guide.
 //
 // Before you call CreateMicrosoftAD, ensure that all of the required permissions
 // have been explicitly granted through a policy. For details about what permissions

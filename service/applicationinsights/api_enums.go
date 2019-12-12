@@ -58,9 +58,9 @@ type SeverityLevel string
 
 // Enum values for SeverityLevel
 const (
-	SeverityLevelLow    SeverityLevel = "LOW"
-	SeverityLevelMedium SeverityLevel = "MEDIUM"
-	SeverityLevelHigh   SeverityLevel = "HIGH"
+	SeverityLevelLow    SeverityLevel = "Low"
+	SeverityLevelMedium SeverityLevel = "Medium"
+	SeverityLevelHigh   SeverityLevel = "High"
 )
 
 func (enum SeverityLevel) MarshalValue() (string, error) {
@@ -86,6 +86,26 @@ func (enum Status) MarshalValue() (string, error) {
 }
 
 func (enum Status) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Tier string
+
+// Enum values for Tier
+const (
+	TierDefault      Tier = "DEFAULT"
+	TierDotNetCore   Tier = "DOT_NET_CORE"
+	TierDotNetWorker Tier = "DOT_NET_WORKER"
+	TierDotNetWeb    Tier = "DOT_NET_WEB"
+	TierSqlServer    Tier = "SQL_SERVER"
+)
+
+func (enum Tier) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Tier) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

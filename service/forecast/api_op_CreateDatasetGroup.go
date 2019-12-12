@@ -21,12 +21,15 @@ type CreateDatasetGroupInput struct {
 	// DatasetGroupName is a required field
 	DatasetGroupName *string `min:"1" type:"string" required:"true"`
 
-	// The domain associated with the dataset group. The Domain and DatasetType
-	// that you choose determine the fields that must be present in the training
-	// data that you import to the dataset. For example, if you choose the RETAIL
-	// domain and TARGET_TIME_SERIES as the DatasetType, Amazon Forecast requires
-	// item_id, timestamp, and demand fields to be present in your data. For more
-	// information, see howitworks-datasets-groups.
+	// The domain associated with the dataset group. When you add a dataset to a
+	// dataset group, this value and the value specified for the Domain parameter
+	// of the CreateDataset operation must match.
+	//
+	// The Domain and DatasetType that you choose determine the fields that must
+	// be present in training data that you import to a dataset. For example, if
+	// you choose the RETAIL domain and TARGET_TIME_SERIES as the DatasetType, Amazon
+	// Forecast requires that item_id, timestamp, and demand fields are present
+	// in your data. For more information, see howitworks-datasets-groups.
 	//
 	// Domain is a required field
 	Domain Domain `type:"string" required:"true" enum:"true"`
@@ -74,18 +77,18 @@ const opCreateDatasetGroup = "CreateDatasetGroup"
 // CreateDatasetGroupRequest returns a request value for making API operation for
 // Amazon Forecast Service.
 //
-// Creates an Amazon Forecast dataset group, which holds a collection of related
-// datasets. You can add datasets to the dataset group when you create the dataset
-// group, or you can add datasets later with the UpdateDatasetGroup operation.
+// Creates a dataset group, which holds a collection of related datasets. You
+// can add datasets to the dataset group when you create the dataset group,
+// or later by using the UpdateDatasetGroup operation.
 //
 // After creating a dataset group and adding datasets, you use the dataset group
 // when you create a predictor. For more information, see howitworks-datasets-groups.
 //
 // To get a list of all your datasets groups, use the ListDatasetGroups operation.
 //
-// The Status of a dataset group must be ACTIVE before you can create a predictor
-// using the dataset group. Use the DescribeDatasetGroup operation to get the
-// status.
+// The Status of a dataset group must be ACTIVE before you can create use the
+// dataset group to create a predictor. To get the status, use the DescribeDatasetGroup
+// operation.
 //
 //    // Example sending a request using CreateDatasetGroupRequest.
 //    req := client.CreateDatasetGroupRequest(params)

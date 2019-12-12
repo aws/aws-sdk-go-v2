@@ -302,6 +302,94 @@ func (enum ProjectSortByType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ReportExportConfigType string
+
+// Enum values for ReportExportConfigType
+const (
+	ReportExportConfigTypeS3       ReportExportConfigType = "S3"
+	ReportExportConfigTypeNoExport ReportExportConfigType = "NO_EXPORT"
+)
+
+func (enum ReportExportConfigType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportExportConfigType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ReportGroupSortByType string
+
+// Enum values for ReportGroupSortByType
+const (
+	ReportGroupSortByTypeName             ReportGroupSortByType = "NAME"
+	ReportGroupSortByTypeCreatedTime      ReportGroupSortByType = "CREATED_TIME"
+	ReportGroupSortByTypeLastModifiedTime ReportGroupSortByType = "LAST_MODIFIED_TIME"
+)
+
+func (enum ReportGroupSortByType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportGroupSortByType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ReportPackagingType string
+
+// Enum values for ReportPackagingType
+const (
+	ReportPackagingTypeZip  ReportPackagingType = "ZIP"
+	ReportPackagingTypeNone ReportPackagingType = "NONE"
+)
+
+func (enum ReportPackagingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportPackagingType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ReportStatusType string
+
+// Enum values for ReportStatusType
+const (
+	ReportStatusTypeGenerating ReportStatusType = "GENERATING"
+	ReportStatusTypeSucceeded  ReportStatusType = "SUCCEEDED"
+	ReportStatusTypeFailed     ReportStatusType = "FAILED"
+	ReportStatusTypeIncomplete ReportStatusType = "INCOMPLETE"
+	ReportStatusTypeDeleting   ReportStatusType = "DELETING"
+)
+
+func (enum ReportStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ReportType string
+
+// Enum values for ReportType
+const (
+	ReportTypeTest ReportType = "TEST"
+)
+
+func (enum ReportType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ServerType string
 
 // Enum values for ServerType

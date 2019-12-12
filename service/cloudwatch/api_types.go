@@ -39,7 +39,7 @@ func (s AlarmHistoryItem) String() string {
 }
 
 // An anomaly detection model associated with a particular CloudWatch metric
-// athresnd statistic. You can use the model to display a band of expected normal
+// and statistic. You can use the model to display a band of expected normal
 // values when the metric is graphed.
 type AnomalyDetector struct {
 	_ struct{} `type:"structure"`
@@ -267,6 +267,162 @@ func (s *DimensionFilter) Validate() error {
 	return nil
 }
 
+// This structure contains the definition for a Contributor Insights rule.
+type InsightRule struct {
+	_ struct{} `type:"structure"`
+
+	// The definition of the rule, as a JSON object. The definition contains the
+	// keywords used to define contributors, the value to aggregate on if this rule
+	// returns a sum instead of a count, and the filters. For details on the valid
+	// syntax, see Contributor Insights Rule Syntax (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html).
+	//
+	// Definition is a required field
+	Definition *string `min:"1" type:"string" required:"true"`
+
+	// The name of the rule.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// For rules that you create, this is always {"Name": "CloudWatchLogRule", "Version":
+	// 1}. For built-in rules, this is {"Name": "ServiceLogRule", "Version": 1}
+	//
+	// Schema is a required field
+	Schema *string `type:"string" required:"true"`
+
+	// Indicates whether the rule is enabled or disabled.
+	//
+	// State is a required field
+	State *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s InsightRule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// One of the unique contributors found by a Contributor Insights rule. If the
+// rule contains multiple keys, then a unique contributor is a unique combination
+// of values from all the keys in the rule.
+//
+// If the rule contains a single key, then each unique contributor is each unique
+// value for this key.
+//
+// For more information, see GetInsightRuleReport.
+type InsightRuleContributor struct {
+	_ struct{} `type:"structure"`
+
+	// An approximation of the aggregate value that comes from this contributor.
+	//
+	// ApproximateAggregateValue is a required field
+	ApproximateAggregateValue *float64 `type:"double" required:"true"`
+
+	// An array of the data points where this contributor is present. Only the data
+	// points when this contributor appeared are included in the array.
+	//
+	// Datapoints is a required field
+	Datapoints []InsightRuleContributorDatapoint `type:"list" required:"true"`
+
+	// One of the log entry field keywords that is used to define contributors for
+	// this rule.
+	//
+	// Keys is a required field
+	Keys []string `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s InsightRuleContributor) String() string {
+	return awsutil.Prettify(s)
+}
+
+// One data point related to one contributor.
+//
+// For more information, see GetInsightRuleReport and InsightRuleContributor.
+type InsightRuleContributorDatapoint struct {
+	_ struct{} `type:"structure"`
+
+	// The approximate value that this contributor added during this timestamp.
+	//
+	// ApproximateValue is a required field
+	ApproximateValue *float64 `type:"double" required:"true"`
+
+	// The timestamp of the data point.
+	//
+	// Timestamp is a required field
+	Timestamp *time.Time `type:"timestamp" required:"true"`
+}
+
+// String returns the string representation
+func (s InsightRuleContributorDatapoint) String() string {
+	return awsutil.Prettify(s)
+}
+
+// One data point from the metric time series returned in a Contributor Insights
+// rule report.
+//
+// For more information, see GetInsightRuleReport.
+type InsightRuleMetricDatapoint struct {
+	_ struct{} `type:"structure"`
+
+	// The average value from all contributors during the time period represented
+	// by that data point.
+	//
+	// This statistic is returned only if you included it in the Metrics array in
+	// your request.
+	Average *float64 `type:"double"`
+
+	// The maximum value provided by one contributor during this timestamp. Each
+	// timestamp is evaluated separately, so the identity of the max contributor
+	// could be different for each timestamp.
+	//
+	// This statistic is returned only if you included it in the Metrics array in
+	// your request.
+	MaxContributorValue *float64 `type:"double"`
+
+	// The maximum value from a single occurence from a single contributor during
+	// the time period represented by that data point.
+	//
+	// This statistic is returned only if you included it in the Metrics array in
+	// your request.
+	Maximum *float64 `type:"double"`
+
+	// The minimum value from a single contributor during the time period represented
+	// by that data point.
+	//
+	// This statistic is returned only if you included it in the Metrics array in
+	// your request.
+	Minimum *float64 `type:"double"`
+
+	// The number of occurrences that matched the rule during this data point.
+	//
+	// This statistic is returned only if you included it in the Metrics array in
+	// your request.
+	SampleCount *float64 `type:"double"`
+
+	// The sum of the values from all contributors during the time period represented
+	// by that data point.
+	//
+	// This statistic is returned only if you included it in the Metrics array in
+	// your request.
+	Sum *float64 `type:"double"`
+
+	// The timestamp of the data point.
+	//
+	// Timestamp is a required field
+	Timestamp *time.Time `type:"timestamp" required:"true"`
+
+	// The number of unique contributors who published data during this timestamp.
+	//
+	// This statistic is returned only if you included it in the Metrics array in
+	// your request.
+	UniqueContributors *float64 `type:"double"`
+}
+
+// String returns the string representation
+func (s InsightRuleMetricDatapoint) String() string {
+	return awsutil.Prettify(s)
+}
+
 // A message returned by the GetMetricDataAPI, including a code and a description.
 type MessageData struct {
 	_ struct{} `type:"structure"`
@@ -353,7 +509,7 @@ type MetricAlarm struct {
 	// threshold. The specified statistic value is used as the first operand.
 	ComparisonOperator ComparisonOperator `type:"string" enum:"true"`
 
-	// The number of datapoints that must be breaching to trigger the alarm.
+	// The number of data points that must be breaching to trigger the alarm.
 	DatapointsToAlarm *int64 `min:"1" type:"integer"`
 
 	// The dimensions for the metric associated with the alarm.
@@ -504,10 +660,9 @@ type MetricDataQuery struct {
 	// or any multiple of 60. High-resolution metrics are those metrics stored by
 	// a PutMetricData operation that includes a StorageResolution of 1 second.
 	//
-	// Use this field only when you are performing a GetMetricData operation, and
-	// only when you are specifying the Expression field. Do not use this field
-	// with a PutMetricAlarm operation or when you are specifying a MetricStat in
-	// a GetMetricData operation.
+	// If you are performing a GetMetricData operation, use this field only if you
+	// are specifying an Expression. Do not use this field when you are specifying
+	// a MetricStat in a GetMetricData operation.
 	Period *int64 `min:"1" type:"integer"`
 
 	// When used in GetMetricData, this option indicates whether to return the timestamps
@@ -643,9 +798,8 @@ type MetricDatum struct {
 	//
 	// Although the parameter accepts numbers of type Double, CloudWatch rejects
 	// values that are either too small or too large. Values must be in the range
-	// of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
-	// In addition, special values (for example, NaN, +Infinity, -Infinity) are
-	// not supported.
+	// of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity,
+	// -Infinity) are not supported.
 	Value *float64 `type:"double"`
 
 	// Array of numbers representing the values for the metric during the period.
@@ -656,9 +810,8 @@ type MetricDatum struct {
 	//
 	// Although the Values array accepts numbers of type Double, CloudWatch rejects
 	// values that are either too small or too large. Values must be in the range
-	// of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
-	// In addition, special values (for example, NaN, +Infinity, -Infinity) are
-	// not supported.
+	// of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity,
+	// -Infinity) are not supported.
 	Values []float64 `type:"list"`
 }
 
@@ -783,6 +936,30 @@ func (s *MetricStat) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// This array is empty if the API operation was successful for all the rules
+// specified in the request. If the operation could not process one of the rules,
+// the following data is returned for each of those rules.
+type PartialFailure struct {
+	_ struct{} `type:"structure"`
+
+	// The type of error.
+	ExceptionType *string `type:"string"`
+
+	// The code of the error.
+	FailureCode *string `type:"string"`
+
+	// A description of the error.
+	FailureDescription *string `type:"string"`
+
+	// The specified rule that could not be deleted.
+	FailureResource *string `type:"string"`
+}
+
+// String returns the string representation
+func (s PartialFailure) String() string {
+	return awsutil.Prettify(s)
 }
 
 // Specifies one range of days or times to exclude from use for training an

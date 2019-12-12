@@ -1656,8 +1656,7 @@ func (s BurnInDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Output groups for this Live Event. Output groups contain information about
-// where streams should be distributed.
+// Caption Description
 type CaptionDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -3320,6 +3319,9 @@ type EncoderSettings struct {
 	// Configuration settings that apply to the event as a whole.
 	GlobalConfiguration *GlobalConfiguration `locationName:"globalConfiguration" type:"structure"`
 
+	// Nielsen configuration settings.
+	NielsenConfiguration *NielsenConfiguration `locationName:"nielsenConfiguration" type:"structure"`
+
 	// OutputGroups is a required field
 	OutputGroups []OutputGroup `locationName:"outputGroups" type:"list" required:"true"`
 
@@ -3465,6 +3467,12 @@ func (s EncoderSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "globalConfiguration", v, metadata)
+	}
+	if s.NielsenConfiguration != nil {
+		v := s.NielsenConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "nielsenConfiguration", v, metadata)
 	}
 	if s.OutputGroups != nil {
 		v := s.OutputGroups
@@ -3738,8 +3746,8 @@ func (s FrameCaptureOutputSettings) MarshalFields(e protocol.FieldEncoder) error
 type FrameCaptureSettings struct {
 	_ struct{} `type:"structure"`
 
-	// The frequency, in seconds, for capturing frames for inclusion in the output.
-	// For example, "10" means capture a frame every 10 seconds.
+	// The frequency at which to capture frames for inclusion in the output. May
+	// be specified in either seconds or milliseconds, as specified by captureIntervalUnits.
 	//
 	// CaptureInterval is a required field
 	CaptureInterval *int64 `locationName:"captureInterval" min:"1" type:"integer" required:"true"`
@@ -3989,8 +3997,10 @@ type H264Settings struct {
 	// Number of B-frames between reference frames.
 	GopNumBFrames *int64 `locationName:"gopNumBFrames" type:"integer"`
 
-	// GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits.
-	// Must be greater than zero.
+	// GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits.If
+	// gopSizeUnits is frames, gopSize must be an integer and must be greater than
+	// or equal to 1.If gopSizeUnits is seconds, gopSize must be greater than 0,
+	// but need not be an integer.
 	GopSize *float64 `locationName:"gopSize" type:"double"`
 
 	// Indicates if the gopSize is specified in frames or seconds. If seconds the
@@ -4008,13 +4018,13 @@ type H264Settings struct {
 	// in order to accommodate expected spikes in the complexity of the video.
 	MaxBitrate *int64 `locationName:"maxBitrate" min:"1000" type:"integer"`
 
-	// Only meaningful if sceneChangeDetect is set to enabled. Enforces separation
-	// between repeated (cadence) I-frames and I-frames inserted by Scene Change
-	// Detection. If a scene change I-frame is within I-interval frames of a cadence
-	// I-frame, the GOP is shrunk and/or stretched to the scene change I-frame.
-	// GOP stretch requires enabling lookahead as well as setting I-interval. The
-	// normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP
-	// size + Min-I-interval - 1
+	// Only meaningful if sceneChangeDetect is set to enabled. Defaults to 5 if
+	// multiplex rate control is used. Enforces separation between repeated (cadence)
+	// I-frames and I-frames inserted by Scene Change Detection. If a scene change
+	// I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk
+	// and/or stretched to the scene change I-frame. GOP stretch requires enabling
+	// lookahead as well as setting I-interval. The normal cadence resumes for the
+	// next GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1
 	MinIInterval *int64 `locationName:"minIInterval" type:"integer"`
 
 	// Number of reference frames to use. The encoder may use more than requested
@@ -4473,8 +4483,10 @@ type H265Settings struct {
 	// as quickly as possible. Setting this value to 0 will break output segmenting.
 	GopClosedCadence *int64 `locationName:"gopClosedCadence" type:"integer"`
 
-	// GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits.
-	// Must be greater than zero.
+	// GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits.If
+	// gopSizeUnits is frames, gopSize must be an integer and must be greater than
+	// or equal to 1.If gopSizeUnits is seconds, gopSize must be greater than 0,
+	// but need not be an integer.
 	GopSize *float64 `locationName:"gopSize" type:"double"`
 
 	// Indicates if the gopSize is specified in frames or seconds. If seconds the
@@ -4491,13 +4503,13 @@ type H265Settings struct {
 	// For QVBR: See the tooltip for Quality level
 	MaxBitrate *int64 `locationName:"maxBitrate" min:"100000" type:"integer"`
 
-	// Only meaningful if sceneChangeDetect is set to enabled. Enforces separation
-	// between repeated (cadence) I-frames and I-frames inserted by Scene Change
-	// Detection. If a scene change I-frame is within I-interval frames of a cadence
-	// I-frame, the GOP is shrunk and/or stretched to the scene change I-frame.
-	// GOP stretch requires enabling lookahead as well as setting I-interval. The
-	// normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP
-	// size + Min-I-interval - 1
+	// Only meaningful if sceneChangeDetect is set to enabled. Defaults to 5 if
+	// multiplex rate control is used. Enforces separation between repeated (cadence)
+	// I-frames and I-frames inserted by Scene Change Detection. If a scene change
+	// I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk
+	// and/or stretched to the scene change I-frame. GOP stretch requires enabling
+	// lookahead as well as setting I-interval. The normal cadence resumes for the
+	// next GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1
 	MinIInterval *int64 `locationName:"minIInterval" type:"integer"`
 
 	// Pixel Aspect Ratio denominator.
@@ -7156,6 +7168,11 @@ type M2tsSettings struct {
 	// be in the range of 32 (or 0x20)..8182 (or 0x1ff6).
 	KlvDataPids *string `locationName:"klvDataPids" type:"string"`
 
+	// If set to passthrough, Nielsen inaudible tones for media tracking will be
+	// detected in the input audio and an equivalent ID3 tag will be inserted in
+	// the output.
+	NielsenId3Behavior M2tsNielsenId3Behavior `locationName:"nielsenId3Behavior" type:"string" enum:"true"`
+
 	// Value in bits per second of extra null packets to insert into the transport
 	// stream. This can be used if a downstream encryption system requires periodic
 	// null packets.
@@ -7448,6 +7465,12 @@ func (s M2tsSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "klvDataPids", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if len(s.NielsenId3Behavior) > 0 {
+		v := s.NielsenId3Behavior
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nielsenId3Behavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.NullPacketBitrate != nil {
 		v := *s.NullPacketBitrate
 
@@ -7580,6 +7603,11 @@ type M3u8Settings struct {
 	// This parameter is unused and deprecated.
 	EcmPid *string `locationName:"ecmPid" type:"string"`
 
+	// If set to passthrough, Nielsen inaudible tones for media tracking will be
+	// detected in the input audio and an equivalent ID3 tag will be inserted in
+	// the output.
+	NielsenId3Behavior M3u8NielsenId3Behavior `locationName:"nielsenId3Behavior" type:"string" enum:"true"`
+
 	// The number of milliseconds between instances of this table in the output
 	// transport stream. A value of \"0\" writes out the PMT once per segment file.
 	PatInterval *int64 `locationName:"patInterval" type:"integer"`
@@ -7657,6 +7685,12 @@ func (s M3u8Settings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ecmPid", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.NielsenId3Behavior) > 0 {
+		v := s.NielsenId3Behavior
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nielsenId3Behavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.PatInterval != nil {
 		v := *s.PatInterval
@@ -8188,6 +8222,979 @@ func (s MsSmoothOutputSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The multiplex object.
+type Multiplex struct {
+	_ struct{} `type:"structure"`
+
+	// The unique arn of the multiplex.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// A list of availability zones for the multiplex.
+	AvailabilityZones []string `locationName:"availabilityZones" type:"list"`
+
+	// A list of the multiplex output destinations.
+	Destinations []MultiplexOutputDestination `locationName:"destinations" type:"list"`
+
+	// The unique id of the multiplex.
+	Id *string `locationName:"id" type:"string"`
+
+	// Configuration for a multiplex event.
+	MultiplexSettings *MultiplexSettings `locationName:"multiplexSettings" type:"structure"`
+
+	// The name of the multiplex.
+	Name *string `locationName:"name" type:"string"`
+
+	// The number of currently healthy pipelines.
+	PipelinesRunningCount *int64 `locationName:"pipelinesRunningCount" type:"integer"`
+
+	// The number of programs in the multiplex.
+	ProgramCount *int64 `locationName:"programCount" type:"integer"`
+
+	// The current state of the multiplex.
+	State MultiplexState `locationName:"state" type:"string" enum:"true"`
+
+	// A collection of key-value pairs.
+	Tags map[string]string `locationName:"tags" type:"map"`
+}
+
+// String returns the string representation
+func (s Multiplex) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Multiplex) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AvailabilityZones != nil {
+		v := s.AvailabilityZones
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "availabilityZones", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Destinations != nil {
+		v := s.Destinations
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "destinations", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MultiplexSettings != nil {
+		v := s.MultiplexSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "multiplexSettings", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PipelinesRunningCount != nil {
+		v := *s.PipelinesRunningCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pipelinesRunningCount", protocol.Int64Value(v), metadata)
+	}
+	if s.ProgramCount != nil {
+		v := *s.ProgramCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "programCount", protocol.Int64Value(v), metadata)
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
+// Multiplex Group Settings
+type MultiplexGroupSettings struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s MultiplexGroupSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiplexGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Multiplex MediaConnect output destination settings.
+type MultiplexMediaConnectOutputDestinationSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The MediaConnect entitlement ARN available as a Flow source.
+	EntitlementArn *string `locationName:"entitlementArn" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s MultiplexMediaConnectOutputDestinationSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiplexMediaConnectOutputDestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EntitlementArn != nil {
+		v := *s.EntitlementArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "entitlementArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Multiplex output destination settings
+type MultiplexOutputDestination struct {
+	_ struct{} `type:"structure"`
+
+	// Multiplex MediaConnect output destination settings.
+	MediaConnectSettings *MultiplexMediaConnectOutputDestinationSettings `locationName:"mediaConnectSettings" type:"structure"`
+}
+
+// String returns the string representation
+func (s MultiplexOutputDestination) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiplexOutputDestination) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MediaConnectSettings != nil {
+		v := s.MediaConnectSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "mediaConnectSettings", v, metadata)
+	}
+	return nil
+}
+
+// Multiplex Output Settings
+type MultiplexOutputSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Destination is a Multiplex.
+	//
+	// Destination is a required field
+	Destination *OutputLocationRef `locationName:"destination" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s MultiplexOutputSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MultiplexOutputSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MultiplexOutputSettings"}
+
+	if s.Destination == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Destination"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiplexOutputSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Destination != nil {
+		v := s.Destination
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "destination", v, metadata)
+	}
+	return nil
+}
+
+// The multiplex program object.
+type MultiplexProgram struct {
+	_ struct{} `type:"structure"`
+
+	// The MediaLive channel associated with the program.
+	ChannelId *string `locationName:"channelId" type:"string"`
+
+	// The settings for this multiplex program.
+	MultiplexProgramSettings *MultiplexProgramSettings `locationName:"multiplexProgramSettings" type:"structure"`
+
+	// The packet identifier map for this multiplex program.
+	PacketIdentifiersMap *MultiplexProgramPacketIdentifiersMap `locationName:"packetIdentifiersMap" type:"structure"`
+
+	// The name of the multiplex program.
+	ProgramName *string `locationName:"programName" type:"string"`
+}
+
+// String returns the string representation
+func (s MultiplexProgram) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiplexProgram) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ChannelId != nil {
+		v := *s.ChannelId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "channelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MultiplexProgramSettings != nil {
+		v := s.MultiplexProgramSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "multiplexProgramSettings", v, metadata)
+	}
+	if s.PacketIdentifiersMap != nil {
+		v := s.PacketIdentifiersMap
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "packetIdentifiersMap", v, metadata)
+	}
+	if s.ProgramName != nil {
+		v := *s.ProgramName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "programName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Multiplex Program Input Destination Settings for outputting a Channel to
+// a Multiplex
+type MultiplexProgramChannelDestinationSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the Multiplex that the encoder is providing output to. You do not
+	// need to specify the individual inputs to the Multiplex; MediaLive will handle
+	// the connection of the two MediaLive pipelines to the two Multiplex instances.The
+	// Multiplex must be in the same region as the Channel.
+	MultiplexId *string `locationName:"multiplexId" min:"1" type:"string"`
+
+	// The program name of the Multiplex program that the encoder is providing output
+	// to.
+	ProgramName *string `locationName:"programName" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s MultiplexProgramChannelDestinationSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MultiplexProgramChannelDestinationSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MultiplexProgramChannelDestinationSettings"}
+	if s.MultiplexId != nil && len(*s.MultiplexId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MultiplexId", 1))
+	}
+	if s.ProgramName != nil && len(*s.ProgramName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ProgramName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiplexProgramChannelDestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MultiplexId != nil {
+		v := *s.MultiplexId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "multiplexId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ProgramName != nil {
+		v := *s.ProgramName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "programName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Packet identifiers map for a given Multiplex program.
+type MultiplexProgramPacketIdentifiersMap struct {
+	_ struct{} `type:"structure"`
+
+	AudioPids []int64 `locationName:"audioPids" type:"list"`
+
+	DvbSubPids []int64 `locationName:"dvbSubPids" type:"list"`
+
+	DvbTeletextPid *int64 `locationName:"dvbTeletextPid" type:"integer"`
+
+	EtvPlatformPid *int64 `locationName:"etvPlatformPid" type:"integer"`
+
+	EtvSignalPid *int64 `locationName:"etvSignalPid" type:"integer"`
+
+	KlvDataPids []int64 `locationName:"klvDataPids" type:"list"`
+
+	PcrPid *int64 `locationName:"pcrPid" type:"integer"`
+
+	PmtPid *int64 `locationName:"pmtPid" type:"integer"`
+
+	PrivateMetadataPid *int64 `locationName:"privateMetadataPid" type:"integer"`
+
+	Scte27Pids []int64 `locationName:"scte27Pids" type:"list"`
+
+	Scte35Pid *int64 `locationName:"scte35Pid" type:"integer"`
+
+	TimedMetadataPid *int64 `locationName:"timedMetadataPid" type:"integer"`
+
+	VideoPid *int64 `locationName:"videoPid" type:"integer"`
+}
+
+// String returns the string representation
+func (s MultiplexProgramPacketIdentifiersMap) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiplexProgramPacketIdentifiersMap) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AudioPids != nil {
+		v := s.AudioPids
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "audioPids", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.Int64Value(v1))
+		}
+		ls0.End()
+
+	}
+	if s.DvbSubPids != nil {
+		v := s.DvbSubPids
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "dvbSubPids", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.Int64Value(v1))
+		}
+		ls0.End()
+
+	}
+	if s.DvbTeletextPid != nil {
+		v := *s.DvbTeletextPid
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "dvbTeletextPid", protocol.Int64Value(v), metadata)
+	}
+	if s.EtvPlatformPid != nil {
+		v := *s.EtvPlatformPid
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "etvPlatformPid", protocol.Int64Value(v), metadata)
+	}
+	if s.EtvSignalPid != nil {
+		v := *s.EtvSignalPid
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "etvSignalPid", protocol.Int64Value(v), metadata)
+	}
+	if s.KlvDataPids != nil {
+		v := s.KlvDataPids
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "klvDataPids", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.Int64Value(v1))
+		}
+		ls0.End()
+
+	}
+	if s.PcrPid != nil {
+		v := *s.PcrPid
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pcrPid", protocol.Int64Value(v), metadata)
+	}
+	if s.PmtPid != nil {
+		v := *s.PmtPid
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pmtPid", protocol.Int64Value(v), metadata)
+	}
+	if s.PrivateMetadataPid != nil {
+		v := *s.PrivateMetadataPid
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "privateMetadataPid", protocol.Int64Value(v), metadata)
+	}
+	if s.Scte27Pids != nil {
+		v := s.Scte27Pids
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "scte27Pids", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.Int64Value(v1))
+		}
+		ls0.End()
+
+	}
+	if s.Scte35Pid != nil {
+		v := *s.Scte35Pid
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "scte35Pid", protocol.Int64Value(v), metadata)
+	}
+	if s.TimedMetadataPid != nil {
+		v := *s.TimedMetadataPid
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timedMetadataPid", protocol.Int64Value(v), metadata)
+	}
+	if s.VideoPid != nil {
+		v := *s.VideoPid
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "videoPid", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Transport stream service descriptor configuration for the Multiplex program.
+type MultiplexProgramServiceDescriptor struct {
+	_ struct{} `type:"structure"`
+
+	// Name of the provider.
+	//
+	// ProviderName is a required field
+	ProviderName *string `locationName:"providerName" type:"string" required:"true"`
+
+	// Name of the service.
+	//
+	// ServiceName is a required field
+	ServiceName *string `locationName:"serviceName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s MultiplexProgramServiceDescriptor) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MultiplexProgramServiceDescriptor) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MultiplexProgramServiceDescriptor"}
+
+	if s.ProviderName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ProviderName"))
+	}
+
+	if s.ServiceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ServiceName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiplexProgramServiceDescriptor) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ProviderName != nil {
+		v := *s.ProviderName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "providerName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ServiceName != nil {
+		v := *s.ServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "serviceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Multiplex Program settings configuration.
+type MultiplexProgramSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Unique program number.
+	//
+	// ProgramNumber is a required field
+	ProgramNumber *int64 `locationName:"programNumber" type:"integer" required:"true"`
+
+	// Transport stream service descriptor configuration for the Multiplex program.
+	ServiceDescriptor *MultiplexProgramServiceDescriptor `locationName:"serviceDescriptor" type:"structure"`
+
+	// Program video settings configuration.
+	VideoSettings *MultiplexVideoSettings `locationName:"videoSettings" type:"structure"`
+}
+
+// String returns the string representation
+func (s MultiplexProgramSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MultiplexProgramSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MultiplexProgramSettings"}
+
+	if s.ProgramNumber == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ProgramNumber"))
+	}
+	if s.ServiceDescriptor != nil {
+		if err := s.ServiceDescriptor.Validate(); err != nil {
+			invalidParams.AddNested("ServiceDescriptor", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.VideoSettings != nil {
+		if err := s.VideoSettings.Validate(); err != nil {
+			invalidParams.AddNested("VideoSettings", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiplexProgramSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ProgramNumber != nil {
+		v := *s.ProgramNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "programNumber", protocol.Int64Value(v), metadata)
+	}
+	if s.ServiceDescriptor != nil {
+		v := s.ServiceDescriptor
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "serviceDescriptor", v, metadata)
+	}
+	if s.VideoSettings != nil {
+		v := s.VideoSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "videoSettings", v, metadata)
+	}
+	return nil
+}
+
+type MultiplexProgramSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The MediaLive Channel associated with the program.
+	ChannelId *string `locationName:"channelId" type:"string"`
+
+	// The name of the multiplex program.
+	ProgramName *string `locationName:"programName" type:"string"`
+}
+
+// String returns the string representation
+func (s MultiplexProgramSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiplexProgramSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ChannelId != nil {
+		v := *s.ChannelId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "channelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ProgramName != nil {
+		v := *s.ProgramName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "programName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Contains configuration for a Multiplex event
+type MultiplexSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Maximum video buffer delay in milliseconds.
+	MaximumVideoBufferDelayMilliseconds *int64 `locationName:"maximumVideoBufferDelayMilliseconds" min:"1000" type:"integer"`
+
+	// Transport stream bit rate.
+	//
+	// TransportStreamBitrate is a required field
+	TransportStreamBitrate *int64 `locationName:"transportStreamBitrate" min:"1e+06" type:"integer" required:"true"`
+
+	// Transport stream ID.
+	//
+	// TransportStreamId is a required field
+	TransportStreamId *int64 `locationName:"transportStreamId" type:"integer" required:"true"`
+
+	// Transport stream reserved bit rate.
+	TransportStreamReservedBitrate *int64 `locationName:"transportStreamReservedBitrate" type:"integer"`
+}
+
+// String returns the string representation
+func (s MultiplexSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MultiplexSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MultiplexSettings"}
+	if s.MaximumVideoBufferDelayMilliseconds != nil && *s.MaximumVideoBufferDelayMilliseconds < 1000 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaximumVideoBufferDelayMilliseconds", 1000))
+	}
+
+	if s.TransportStreamBitrate == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TransportStreamBitrate"))
+	}
+	if s.TransportStreamBitrate != nil && *s.TransportStreamBitrate < 1e+06 {
+		invalidParams.Add(aws.NewErrParamMinValue("TransportStreamBitrate", 1e+06))
+	}
+
+	if s.TransportStreamId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TransportStreamId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiplexSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MaximumVideoBufferDelayMilliseconds != nil {
+		v := *s.MaximumVideoBufferDelayMilliseconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maximumVideoBufferDelayMilliseconds", protocol.Int64Value(v), metadata)
+	}
+	if s.TransportStreamBitrate != nil {
+		v := *s.TransportStreamBitrate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "transportStreamBitrate", protocol.Int64Value(v), metadata)
+	}
+	if s.TransportStreamId != nil {
+		v := *s.TransportStreamId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "transportStreamId", protocol.Int64Value(v), metadata)
+	}
+	if s.TransportStreamReservedBitrate != nil {
+		v := *s.TransportStreamReservedBitrate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "transportStreamReservedBitrate", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Contains summary configuration for a Multiplex event.
+type MultiplexSettingsSummary struct {
+	_ struct{} `type:"structure"`
+
+	// Transport stream bit rate.
+	TransportStreamBitrate *int64 `locationName:"transportStreamBitrate" min:"1e+06" type:"integer"`
+}
+
+// String returns the string representation
+func (s MultiplexSettingsSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiplexSettingsSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.TransportStreamBitrate != nil {
+		v := *s.TransportStreamBitrate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "transportStreamBitrate", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Statmux rate control settings
+type MultiplexStatmuxVideoSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Maximum statmux bitrate.
+	MaximumBitrate *int64 `locationName:"maximumBitrate" min:"100000" type:"integer"`
+
+	// Minimum statmux bitrate.
+	MinimumBitrate *int64 `locationName:"minimumBitrate" min:"100000" type:"integer"`
+}
+
+// String returns the string representation
+func (s MultiplexStatmuxVideoSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MultiplexStatmuxVideoSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MultiplexStatmuxVideoSettings"}
+	if s.MaximumBitrate != nil && *s.MaximumBitrate < 100000 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaximumBitrate", 100000))
+	}
+	if s.MinimumBitrate != nil && *s.MinimumBitrate < 100000 {
+		invalidParams.Add(aws.NewErrParamMinValue("MinimumBitrate", 100000))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiplexStatmuxVideoSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MaximumBitrate != nil {
+		v := *s.MaximumBitrate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maximumBitrate", protocol.Int64Value(v), metadata)
+	}
+	if s.MinimumBitrate != nil {
+		v := *s.MinimumBitrate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "minimumBitrate", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+type MultiplexSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The unique arn of the multiplex.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// A list of availability zones for the multiplex.
+	AvailabilityZones []string `locationName:"availabilityZones" type:"list"`
+
+	// The unique id of the multiplex.
+	Id *string `locationName:"id" type:"string"`
+
+	// Configuration for a multiplex event.
+	MultiplexSettings *MultiplexSettingsSummary `locationName:"multiplexSettings" type:"structure"`
+
+	// The name of the multiplex.
+	Name *string `locationName:"name" type:"string"`
+
+	// The number of currently healthy pipelines.
+	PipelinesRunningCount *int64 `locationName:"pipelinesRunningCount" type:"integer"`
+
+	// The number of programs in the multiplex.
+	ProgramCount *int64 `locationName:"programCount" type:"integer"`
+
+	// The current state of the multiplex.
+	State MultiplexState `locationName:"state" type:"string" enum:"true"`
+
+	// A collection of key-value pairs.
+	Tags map[string]string `locationName:"tags" type:"map"`
+}
+
+// String returns the string representation
+func (s MultiplexSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiplexSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AvailabilityZones != nil {
+		v := s.AvailabilityZones
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "availabilityZones", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MultiplexSettings != nil {
+		v := s.MultiplexSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "multiplexSettings", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PipelinesRunningCount != nil {
+		v := *s.PipelinesRunningCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pipelinesRunningCount", protocol.Int64Value(v), metadata)
+	}
+	if s.ProgramCount != nil {
+		v := *s.ProgramCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "programCount", protocol.Int64Value(v), metadata)
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
+type MultiplexValidationError struct {
+	_ struct{} `type:"structure"`
+
+	// Path to the source of the error.
+	ElementPath *string `locationName:"elementPath" type:"string"`
+
+	// The error message.
+	ErrorMessage *string `locationName:"errorMessage" type:"string"`
+}
+
+// String returns the string representation
+func (s MultiplexValidationError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiplexValidationError) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ElementPath != nil {
+		v := *s.ElementPath
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "elementPath", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ErrorMessage != nil {
+		v := *s.ErrorMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "errorMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The video configuration for each program in a multiplex.
+type MultiplexVideoSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The constant bitrate configuration for the video encode.When this field is
+	// defined, StatmuxSettings must be undefined.
+	ConstantBitrate *int64 `locationName:"constantBitrate" min:"100000" type:"integer"`
+
+	// Statmux rate control settings.When this field is defined, ConstantBitrate
+	// must be undefined.
+	StatmuxSettings *MultiplexStatmuxVideoSettings `locationName:"statmuxSettings" type:"structure"`
+}
+
+// String returns the string representation
+func (s MultiplexVideoSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MultiplexVideoSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MultiplexVideoSettings"}
+	if s.ConstantBitrate != nil && *s.ConstantBitrate < 100000 {
+		invalidParams.Add(aws.NewErrParamMinValue("ConstantBitrate", 100000))
+	}
+	if s.StatmuxSettings != nil {
+		if err := s.StatmuxSettings.Validate(); err != nil {
+			invalidParams.AddNested("StatmuxSettings", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiplexVideoSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConstantBitrate != nil {
+		v := *s.ConstantBitrate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "constantBitrate", protocol.Int64Value(v), metadata)
+	}
+	if s.StatmuxSettings != nil {
+		v := s.StatmuxSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "statmuxSettings", v, metadata)
+	}
+	return nil
+}
+
 // Network source to transcode. Must be accessible to the Elemental Live node
 // that is running the live event through a network connection.
 type NetworkInputSettings struct {
@@ -8223,6 +9230,39 @@ func (s NetworkInputSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "serverValidation", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Nielsen Configuration
+type NielsenConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Enter the Distributor ID assigned to your organization by Nielsen.
+	DistributorId *string `locationName:"distributorId" type:"string"`
+
+	// Enables Nielsen PCM to ID3 tagging
+	NielsenPcmToId3Tagging NielsenPcmToId3TaggingState `locationName:"nielsenPcmToId3Tagging" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s NielsenConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NielsenConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DistributorId != nil {
+		v := *s.DistributorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "distributorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.NielsenPcmToId3Tagging) > 0 {
+		v := s.NielsenPcmToId3Tagging
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nielsenPcmToId3Tagging", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -8448,6 +9488,9 @@ type OutputDestination struct {
 	// encoders.
 	MediaPackageSettings []MediaPackageOutputDestinationSettings `locationName:"mediaPackageSettings" type:"list"`
 
+	// Destination settings for a Multiplex output; one destination for both encoders.
+	MultiplexSettings *MultiplexProgramChannelDestinationSettings `locationName:"multiplexSettings" type:"structure"`
+
 	// Destination settings for a standard output; one destination for each redundant
 	// encoder.
 	Settings []OutputDestinationSettings `locationName:"settings" type:"list"`
@@ -8466,6 +9509,11 @@ func (s *OutputDestination) Validate() error {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MediaPackageSettings", i), err.(aws.ErrInvalidParams))
 			}
+		}
+	}
+	if s.MultiplexSettings != nil {
+		if err := s.MultiplexSettings.Validate(); err != nil {
+			invalidParams.AddNested("MultiplexSettings", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8494,6 +9542,12 @@ func (s OutputDestination) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	if s.MultiplexSettings != nil {
+		v := s.MultiplexSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "multiplexSettings", v, metadata)
 	}
 	if s.Settings != nil {
 		v := s.Settings
@@ -8661,6 +9715,9 @@ type OutputGroupSettings struct {
 	// Ms Smooth Group Settings
 	MsSmoothGroupSettings *MsSmoothGroupSettings `locationName:"msSmoothGroupSettings" type:"structure"`
 
+	// Multiplex Group Settings
+	MultiplexGroupSettings *MultiplexGroupSettings `locationName:"multiplexGroupSettings" type:"structure"`
+
 	// Rtmp Group Settings
 	RtmpGroupSettings *RtmpGroupSettings `locationName:"rtmpGroupSettings" type:"structure"`
 
@@ -8745,6 +9802,12 @@ func (s OutputGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "msSmoothGroupSettings", v, metadata)
 	}
+	if s.MultiplexGroupSettings != nil {
+		v := s.MultiplexGroupSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "multiplexGroupSettings", v, metadata)
+	}
 	if s.RtmpGroupSettings != nil {
 		v := s.RtmpGroupSettings
 
@@ -8802,6 +9865,9 @@ type OutputSettings struct {
 	// Ms Smooth Output Settings
 	MsSmoothOutputSettings *MsSmoothOutputSettings `locationName:"msSmoothOutputSettings" type:"structure"`
 
+	// Multiplex Output Settings
+	MultiplexOutputSettings *MultiplexOutputSettings `locationName:"multiplexOutputSettings" type:"structure"`
+
 	// Rtmp Output Settings
 	RtmpOutputSettings *RtmpOutputSettings `locationName:"rtmpOutputSettings" type:"structure"`
 
@@ -8825,6 +9891,11 @@ func (s *OutputSettings) Validate() error {
 	if s.HlsOutputSettings != nil {
 		if err := s.HlsOutputSettings.Validate(); err != nil {
 			invalidParams.AddNested("HlsOutputSettings", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.MultiplexOutputSettings != nil {
+		if err := s.MultiplexOutputSettings.Validate(); err != nil {
+			invalidParams.AddNested("MultiplexOutputSettings", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.RtmpOutputSettings != nil {
@@ -8875,6 +9946,12 @@ func (s OutputSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "msSmoothOutputSettings", v, metadata)
+	}
+	if s.MultiplexOutputSettings != nil {
+		v := s.MultiplexOutputSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "multiplexOutputSettings", v, metadata)
 	}
 	if s.RtmpOutputSettings != nil {
 		v := s.RtmpOutputSettings
@@ -9346,7 +10423,7 @@ type ReservationResourceSpecification struct {
 	// Resolution, e.g. 'HD'
 	Resolution ReservationResolution `locationName:"resolution" type:"string" enum:"true"`
 
-	// Resource type, 'INPUT', 'OUTPUT', or 'CHANNEL'
+	// Resource type, 'INPUT', 'OUTPUT', 'MULTIPLEX', or 'CHANNEL'
 	ResourceType ReservationResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// Special feature, e.g. 'AUDIO_NORMALIZATION' (Channels only)
@@ -11264,36 +12341,6 @@ func (s UdpOutputSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "fecOutputSettings", v, metadata)
-	}
-	return nil
-}
-
-type ValidationError struct {
-	_ struct{} `type:"structure"`
-
-	ElementPath *string `locationName:"elementPath" type:"string"`
-
-	ErrorMessage *string `locationName:"errorMessage" type:"string"`
-}
-
-// String returns the string representation
-func (s ValidationError) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ValidationError) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ElementPath != nil {
-		v := *s.ElementPath
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "elementPath", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ErrorMessage != nil {
-		v := *s.ErrorMessage
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "errorMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

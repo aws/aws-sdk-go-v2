@@ -12,11 +12,16 @@ import (
 type DescribeNodeConfigurationOptionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The action type to evaluate for possible node configurations. Currently,
-	// it must be "restore-cluster".
+	// The action type to evaluate for possible node configurations. Specify "restore-cluster"
+	// to get configuration combinations based on an existing snapshot. Specify
+	// "recommend-node-config" to get configuration recommendations based on an
+	// existing cluster or snapshot.
 	//
 	// ActionType is a required field
 	ActionType ActionType `type:"string" required:"true" enum:"true"`
+
+	// The identifier of the cluster to evaluate for possible node configurations.
+	ClusterIdentifier *string `type:"string"`
 
 	// A set of name, operator, and value items to filter the results.
 	Filters []NodeConfigurationOptionsFilter `locationName:"Filter" locationNameList:"NodeConfigurationOptionsFilter" type:"list"`

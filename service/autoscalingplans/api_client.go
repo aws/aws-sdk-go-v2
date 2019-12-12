@@ -27,7 +27,7 @@ var initRequest func(*Client, *aws.Request)
 const (
 	ServiceName = "AWS Auto Scaling Plans" // Service's name
 	ServiceID   = "AutoScalingPlans"       // Service's identifier
-	EndpointsID = "autoscaling"            // Service's Endpoint identifier
+	EndpointsID = "autoscaling-plans"      // Service's Endpoint identifier
 )
 
 // New creates a new instance of the client from the provided Config.

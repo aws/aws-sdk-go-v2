@@ -67,15 +67,27 @@ type ClientAPI interface {
 
 	BatchGetProjectsRequest(*codebuild.BatchGetProjectsInput) codebuild.BatchGetProjectsRequest
 
+	BatchGetReportGroupsRequest(*codebuild.BatchGetReportGroupsInput) codebuild.BatchGetReportGroupsRequest
+
+	BatchGetReportsRequest(*codebuild.BatchGetReportsInput) codebuild.BatchGetReportsRequest
+
 	CreateProjectRequest(*codebuild.CreateProjectInput) codebuild.CreateProjectRequest
+
+	CreateReportGroupRequest(*codebuild.CreateReportGroupInput) codebuild.CreateReportGroupRequest
 
 	CreateWebhookRequest(*codebuild.CreateWebhookInput) codebuild.CreateWebhookRequest
 
 	DeleteProjectRequest(*codebuild.DeleteProjectInput) codebuild.DeleteProjectRequest
 
+	DeleteReportRequest(*codebuild.DeleteReportInput) codebuild.DeleteReportRequest
+
+	DeleteReportGroupRequest(*codebuild.DeleteReportGroupInput) codebuild.DeleteReportGroupRequest
+
 	DeleteSourceCredentialsRequest(*codebuild.DeleteSourceCredentialsInput) codebuild.DeleteSourceCredentialsRequest
 
 	DeleteWebhookRequest(*codebuild.DeleteWebhookInput) codebuild.DeleteWebhookRequest
+
+	DescribeTestCasesRequest(*codebuild.DescribeTestCasesInput) codebuild.DescribeTestCasesRequest
 
 	ImportSourceCredentialsRequest(*codebuild.ImportSourceCredentialsInput) codebuild.ImportSourceCredentialsRequest
 
@@ -89,6 +101,12 @@ type ClientAPI interface {
 
 	ListProjectsRequest(*codebuild.ListProjectsInput) codebuild.ListProjectsRequest
 
+	ListReportGroupsRequest(*codebuild.ListReportGroupsInput) codebuild.ListReportGroupsRequest
+
+	ListReportsRequest(*codebuild.ListReportsInput) codebuild.ListReportsRequest
+
+	ListReportsForReportGroupRequest(*codebuild.ListReportsForReportGroupInput) codebuild.ListReportsForReportGroupRequest
+
 	ListSourceCredentialsRequest(*codebuild.ListSourceCredentialsInput) codebuild.ListSourceCredentialsRequest
 
 	StartBuildRequest(*codebuild.StartBuildInput) codebuild.StartBuildRequest
@@ -96,6 +114,8 @@ type ClientAPI interface {
 	StopBuildRequest(*codebuild.StopBuildInput) codebuild.StopBuildRequest
 
 	UpdateProjectRequest(*codebuild.UpdateProjectInput) codebuild.UpdateProjectRequest
+
+	UpdateReportGroupRequest(*codebuild.UpdateReportGroupInput) codebuild.UpdateReportGroupRequest
 
 	UpdateWebhookRequest(*codebuild.UpdateWebhookInput) codebuild.UpdateWebhookRequest
 }

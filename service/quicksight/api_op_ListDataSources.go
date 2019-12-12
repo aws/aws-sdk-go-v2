@@ -87,7 +87,7 @@ type ListDataSourcesOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -131,11 +131,7 @@ const opListDataSources = "ListDataSources"
 // ListDataSourcesRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Lists data sources in current AWS region that belong to this AWS account.
-//
-// The permissions resource is: arn:aws:quicksight:region:aws-account-id:datasource/*
-//
-// CLI syntax: aws quicksight list-data-sources --aws-account-id=111122223333
+// Lists data sources in current AWS Region that belong to this AWS account.
 //
 //    // Example sending a request using ListDataSourcesRequest.
 //    req := client.ListDataSourcesRequest(params)

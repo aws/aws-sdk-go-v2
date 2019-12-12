@@ -15,7 +15,8 @@ type StartDocumentTextDetectionInput struct {
 	// The idempotent token that's used to identify the start request. If you use
 	// the same token with multiple StartDocumentTextDetection requests, the same
 	// JobId is returned. Use ClientRequestToken to prevent the same job from being
-	// accidentally started more than once.
+	// accidentally started more than once. For more information, see Calling Amazon
+	// Textract Asynchronous Operations (https://docs.aws.amazon.com/textract/latest/dg/api-async.html).
 	ClientRequestToken *string `min:"1" type:"string"`
 
 	// The location of the document to be processed.
@@ -23,10 +24,10 @@ type StartDocumentTextDetectionInput struct {
 	// DocumentLocation is a required field
 	DocumentLocation *DocumentLocation `type:"structure" required:"true"`
 
-	// An identifier you specify that's included in the completion notification
-	// that's published to the Amazon SNS topic. For example, you can use JobTag
-	// to identify the type of document, such as a tax form or a receipt, that the
-	// completion notification corresponds to.
+	// An identifier that you specify that's included in the completion notification
+	// published to the Amazon SNS topic. For example, you can use JobTag to identify
+	// the type of document that the completion notification corresponds to (such
+	// as a tax form or a receipt).
 	JobTag *string `min:"1" type:"string"`
 
 	// The Amazon SNS topic ARN that you want Amazon Textract to publish the completion
@@ -72,8 +73,9 @@ func (s *StartDocumentTextDetectionInput) Validate() error {
 type StartDocumentTextDetectionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier for the document text-detection job. Use JobId to identify
-	// the job in a subsequent call to GetDocumentTextDetection.
+	// The identifier of the text detection job for the document. Use JobId to identify
+	// the job in a subsequent call to GetDocumentTextDetection. A JobId value is
+	// only valid for 7 days.
 	JobId *string `min:"1" type:"string"`
 }
 
@@ -90,7 +92,7 @@ const opStartDocumentTextDetection = "StartDocumentTextDetection"
 // Starts the asynchronous detection of text in a document. Amazon Textract
 // can detect lines of text and the words that make up a line of text.
 //
-// StartDocumentTextDetection can analyze text in documents that are in JPG,
+// StartDocumentTextDetection can analyze text in documents that are in JPEG,
 // PNG, and PDF format. The documents are stored in an Amazon S3 bucket. Use
 // DocumentLocation to specify the bucket name and file name of the document.
 //

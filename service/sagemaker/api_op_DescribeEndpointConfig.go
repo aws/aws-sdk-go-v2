@@ -46,6 +46,8 @@ type DescribeEndpointConfigOutput struct {
 	// CreationTime is a required field
 	CreationTime *time.Time `type:"timestamp" required:"true"`
 
+	DataCaptureConfig *DataCaptureConfig `type:"structure"`
+
 	// The Amazon Resource Name (ARN) of the endpoint configuration.
 	//
 	// EndpointConfigArn is a required field

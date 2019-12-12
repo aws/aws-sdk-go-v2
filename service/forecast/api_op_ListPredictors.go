@@ -15,20 +15,23 @@ type ListPredictorsInput struct {
 
 	// An array of filters. For each filter, you provide a condition and a match
 	// statement. The condition is either IS or IS_NOT, which specifies whether
-	// to include or exclude, respectively, from the list, the predictors that match
-	// the statement. The match statement consists of a key and a value. In this
-	// release, Name is the only valid key, which filters on the PredictorName property.
+	// to include or exclude the predictors that match the statement from the list,
+	// respectively. The match statement consists of a key and a value.
 	//
-	//    * Condition - IS or IS_NOT
+	// Filter properties
 	//
-	//    * Key - Name
+	//    * Condition - The condition to apply. Valid values are IS and IS_NOT.
+	//    To include the predictors that match the statement, specify IS. To exclude
+	//    matching predictors, specify IS_NOT.
 	//
-	//    * Value - the value to match
+	//    * Key - The name of the parameter to filter on. Valid values are DatasetGroupArn
+	//    and Status.
 	//
-	// For example, to list all predictors named my_predictor, you would specify:
+	//    * Value - The value to match.
 	//
-	// "Filters": [ { "Condition": "IS", "Key": "Name", "Value": "my_predictor"
-	// } ]
+	// For example, to list all predictors whose status is ACTIVE, you would specify:
+	//
+	// "Filters": [ { "Condition": "IS", "Key": "Status", "Value": "ACTIVE" } ]
 	Filters []Filter `type:"list"`
 
 	// The number of items to return in the response.
@@ -90,10 +93,10 @@ const opListPredictors = "ListPredictors"
 // Amazon Forecast Service.
 //
 // Returns a list of predictors created using the CreatePredictor operation.
-// For each predictor, a summary of its properties, including its Amazon Resource
-// Name (ARN), is returned. You can retrieve the complete set of properties
-// by using the ARN with the DescribePredictor operation. The list can be filtered
-// using an array of Filter objects.
+// For each predictor, this operation returns a summary of its properties, including
+// its Amazon Resource Name (ARN). You can retrieve the complete set of properties
+// by using the ARN with the DescribePredictor operation. You can filter the
+// list using an array of Filter objects.
 //
 //    // Example sending a request using ListPredictorsRequest.
 //    req := client.ListPredictorsRequest(params)

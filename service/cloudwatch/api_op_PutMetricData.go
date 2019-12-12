@@ -95,9 +95,8 @@ const opPutMetricData = "PutMetricData"
 //
 // Although the Value parameter accepts numbers of type Double, CloudWatch rejects
 // values that are either too small or too large. Values must be in the range
-// of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
-// In addition, special values (for example, NaN, +Infinity, -Infinity) are
-// not supported.
+// of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity,
+// -Infinity) are not supported.
 //
 // You can use up to 10 dimensions per metric to further clarify what data the
 // metric collects. Each dimension consists of a Name and Value pair. For more

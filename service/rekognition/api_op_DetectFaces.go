@@ -97,7 +97,7 @@ const opDetectFaces = "DetectFaces"
 // the operation returns face details. These details include a bounding box
 // of the face, a confidence value (that the bounding box contains a face),
 // and a fixed set of attributes such as facial landmarks (for example, coordinates
-// of eye and mouth), gender, presence of beard, sunglasses, and so on.
+// of eye and mouth), presence of beard, sunglasses, and so on.
 //
 // The face-detection algorithm is most effective on frontal faces. For non-frontal
 // or obscured faces, the algorithm might not detect the faces or might detect

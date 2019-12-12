@@ -13,7 +13,7 @@ import (
 type ListTemplatesInput struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID that contains the templates you are listing.
+	// The ID of the AWS account that contains the templates that you're listing.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -84,7 +84,7 @@ type ListTemplatesOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
 	// A structure containing information about the templates in the list.
@@ -131,12 +131,7 @@ const opListTemplates = "ListTemplates"
 // ListTemplatesRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Lists all the templates in the QuickSight account.
-//
-// CLI syntax:
-//
-// aws quicksight list-templates --aws-account-id 111122223333 --max-results
-// 1 —next-token AYADeJuxwOypAndSoOn
+// Lists all the templates in the current Amazon QuickSight account.
 //
 //    // Example sending a request using ListTemplatesRequest.
 //    req := client.ListTemplatesRequest(params)

@@ -14,34 +14,30 @@ import (
 type CreateDashboardInput struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID where you want to create the dashboard.
+	// The ID of the AWS account where you want to create the dashboard.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
-	// The ID for the dashboard, also added to IAM policy.
+	// The ID for the dashboard, also added to the IAM policy.
 	//
 	// DashboardId is a required field
 	DashboardId *string `location:"uri" locationName:"DashboardId" min:"1" type:"string" required:"true"`
 
-	// Publishing options when creating dashboard.
+	// Options for publishing the dashboard when you create it:
 	//
-	//    * AvailabilityStatus for AdHocFilteringOption - This can be either ENABLED
-	//    or DISABLED. When This is set to set to DISABLED, QuickSight disables
+	//    * AvailabilityStatus for AdHocFilteringOption - This status can be either
+	//    ENABLED or DISABLED. When this is set to DISABLED, QuickSight disables
 	//    the left filter pane on the published dashboard, which can be used for
-	//    AdHoc filtering. Enabled by default.
+	//    ad hoc (one-time) filtering. This option is ENABLED by default.
 	//
-	//    * AvailabilityStatus for ExportToCSVOption - This can be either ENABLED
-	//    or DISABLED. The visual option to export data to CSV is disabled when
-	//    this is set to DISABLED. Enabled by default.
+	//    * AvailabilityStatus for ExportToCSVOption - This status can be either
+	//    ENABLED or DISABLED. The visual option to export data to .csv format isn't
+	//    enabled when this is set to DISABLED. This option is ENABLED by default.
 	//
-	//    * VisibilityState for SheetControlsOption - This can be either COLLAPSED
-	//    or EXPANDED. The sheet controls pane is collapsed by default when set
-	//    to true. Collapsed by default.
-	//
-	// Shorthand Syntax:
-	//
-	// AdHocFilteringDisabled=boolean,ExportToCSVDisabled=boolean,SheetControlsCollapsed=boolean
+	//    * VisibilityState for SheetControlsOption - This visibility state can
+	//    be either COLLAPSED or EXPANDED. The sheet controls pane is collapsed
+	//    by default when set to true. This option is COLLAPSED by default.
 	DashboardPublishOptions *DashboardPublishOptions `type:"structure"`
 
 	// The display name of the dashboard.
@@ -50,20 +46,21 @@ type CreateDashboardInput struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// A structure that contains the parameters of the dashboard. These are parameter
-	// overrides for a dashboard. A dashboard can have any type of parameters and
-	// some parameters might accept multiple values. You could use the following
-	// structure to override two string parameters that accept multiple values:
+	// overrides for a dashboard. A dashboard can have any type of parameters, and
+	// some parameters might accept multiple values. You can use the dashboard permissions
+	// structure described following to override two string parameters that accept
+	// multiple values.
 	Parameters *Parameters `type:"structure"`
 
 	// A structure that contains the permissions of the dashboard. You can use this
-	// for granting permissions with principal and action information.
+	// structure for granting permissions with principal and action information.
 	Permissions []ResourcePermission `min:"1" type:"list"`
 
-	// Source entity from which the dashboard is created. The souce entity accepts
-	// the ARN of the source template or analysis and also references the replacement
-	// datasets for the placeholders set when creating the template. The replacement
-	// datasets need to follow the same schema as the datasets for which placeholders
-	// were created when creating the template.
+	// The source entity from which the dashboard is created. The source entity
+	// accepts the Amazon Resource Name (ARN) of the source template or analysis
+	// and also references the replacement datasets for the placeholders set when
+	// creating the template. The replacement datasets need to follow the same schema
+	// as the datasets for which placeholders were created when creating the template.
 	//
 	// If you are creating a dashboard from a source entity in a different AWS account,
 	// use the ARN of the source template.
@@ -228,10 +225,10 @@ func (s CreateDashboardInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateDashboardOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the dashboard.
+	// The Amazon Resource Name (ARN) of the dashboard.
 	Arn *string `type:"string"`
 
-	// The creation status of the dashboard create request.
+	// The status of the dashboard creation request.
 	CreationStatus ResourceStatus `type:"string" enum:"true"`
 
 	// The ID for the dashboard.
@@ -240,7 +237,7 @@ type CreateDashboardOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
 	// The ARN of the dashboard, including the version number of the first version
@@ -295,18 +292,14 @@ const opCreateDashboard = "CreateDashboard"
 // Amazon QuickSight.
 //
 // Creates a dashboard from a template. To first create a template, see the
-// CreateTemplate API.
+// CreateTemplate API operation.
 //
-// A dashboard is an entity in QuickSight which identifies Quicksight reports,
-// created from analyses. QuickSight dashboards are sharable. With the right
+// A dashboard is an entity in QuickSight that identifies QuickSight reports,
+// created from analyses. You can share QuickSight dashboards. With the right
 // permissions, you can create scheduled email reports from them. The CreateDashboard,
-// DescribeDashboard and ListDashboardsByUser APIs act on the dashboard entity.
-// If you have the correct permissions, you can create a dashboard from a template
-// that exists in a different AWS account.
-//
-// CLI syntax:
-//
-// aws quicksight create-dashboard --cli-input-json file://create-dashboard.json
+// DescribeDashboard, and ListDashboardsByUser API operations act on the dashboard
+// entity. If you have the correct permissions, you can create a dashboard from
+// a template that exists in a different AWS account.
 //
 //    // Example sending a request using CreateDashboardRequest.
 //    req := client.CreateDashboardRequest(params)

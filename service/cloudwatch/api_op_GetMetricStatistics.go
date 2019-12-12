@@ -28,7 +28,8 @@ type GetMetricStatisticsInput struct {
 	// The time stamp that determines the last data point to return.
 	//
 	// The value specified is exclusive; results include data points up to the specified
-	// time stamp. The time stamp must be in ISO 8601 UTC format (for example, 2016-10-10T23:00:00Z).
+	// time stamp. In a raw HTTP query, the time stamp must be in ISO 8601 UTC format
+	// (for example, 2016-10-10T23:00:00Z).
 	//
 	// EndTime is a required field
 	EndTime *time.Time `type:"timestamp" required:"true"`
@@ -76,7 +77,8 @@ type GetMetricStatisticsInput struct {
 	// are evaluated relative to the time that CloudWatch receives the request.
 	//
 	// The value specified is inclusive; results include data points with the specified
-	// time stamp. The time stamp must be in ISO 8601 UTC format (for example, 2016-10-03T23:00:00Z).
+	// time stamp. In a raw HTTP query, the time stamp must be in ISO 8601 UTC format
+	// (for example, 2016-10-03T23:00:00Z).
 	//
 	// CloudWatch rounds the specified time stamp as follows:
 	//

@@ -131,7 +131,7 @@ type UpdateUserOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
 	// The Amazon QuickSight user.
@@ -167,15 +167,6 @@ const opUpdateUser = "UpdateUser"
 // Amazon QuickSight.
 //
 // Updates an Amazon QuickSight user.
-//
-// The response is a user object that contains the user's Amazon QuickSight
-// user name, email address, active or inactive status in Amazon QuickSight,
-// Amazon QuickSight role, and Amazon Resource Name (ARN).
-//
-// CLI Sample:
-//
-// aws quicksight update-user --user-name=Pat --role=ADMIN --email=new_address@example.com
-// --aws-account-id=111122223333 --namespace=default --region=us-east-1
 //
 //    // Example sending a request using UpdateUserRequest.
 //    req := client.UpdateUserRequest(params)

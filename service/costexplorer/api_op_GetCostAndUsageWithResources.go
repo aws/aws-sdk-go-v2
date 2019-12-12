@@ -76,6 +76,11 @@ func (s *GetCostAndUsageWithResourcesInput) Validate() error {
 	if s.TimePeriod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TimePeriod"))
 	}
+	if s.Filter != nil {
+		if err := s.Filter.Validate(); err != nil {
+			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.TimePeriod != nil {
 		if err := s.TimePeriod.Validate(); err != nil {
 			invalidParams.AddNested("TimePeriod", err.(aws.ErrInvalidParams))

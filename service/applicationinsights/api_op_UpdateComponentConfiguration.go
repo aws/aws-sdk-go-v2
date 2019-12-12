@@ -16,8 +16,9 @@ type UpdateComponentConfigurationInput struct {
 	// of the configuration. For more information about the JSON format, see Working
 	// with JSON (https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html).
 	// You can send a request to DescribeComponentConfigurationRecommendation to
-	// see the recommended configuration for a component.
-	ComponentConfiguration *string `type:"string"`
+	// see the recommended configuration for a component. For the complete format
+	// of the component configuration file, see Component Configuration (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/component-config.html).
+	ComponentConfiguration *string `min:"1" type:"string"`
 
 	// The name of the component.
 	//
@@ -30,11 +31,11 @@ type UpdateComponentConfigurationInput struct {
 	// The name of the resource group.
 	//
 	// ResourceGroupName is a required field
-	ResourceGroupName *string `type:"string" required:"true"`
+	ResourceGroupName *string `min:"1" type:"string" required:"true"`
 
 	// The tier of the application component. Supported tiers include DOT_NET_WORKER,
-	// DOT_NET_WEB, SQL_SERVER, and DEFAULT.
-	Tier *string `type:"string"`
+	// DOT_NET_WEB, DOT_NET_CORE, SQL_SERVER, and DEFAULT.
+	Tier Tier `min:"1" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -45,6 +46,9 @@ func (s UpdateComponentConfigurationInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateComponentConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateComponentConfigurationInput"}
+	if s.ComponentConfiguration != nil && len(*s.ComponentConfiguration) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ComponentConfiguration", 1))
+	}
 
 	if s.ComponentName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ComponentName"))
@@ -52,6 +56,9 @@ func (s *UpdateComponentConfigurationInput) Validate() error {
 
 	if s.ResourceGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupName"))
+	}
+	if s.ResourceGroupName != nil && len(*s.ResourceGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceGroupName", 1))
 	}
 
 	if invalidParams.Len() > 0 {

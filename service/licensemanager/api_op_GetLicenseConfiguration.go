@@ -12,7 +12,7 @@ import (
 type GetLicenseConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
-	// ARN of the license configuration being requested.
+	// Amazon Resource Name (ARN) of the license configuration.
 	//
 	// LicenseConfigurationArn is a required field
 	LicenseConfigurationArn *string `type:"string" required:"true"`
@@ -40,7 +40,10 @@ func (s *GetLicenseConfigurationInput) Validate() error {
 type GetLicenseConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// List of summaries for consumed licenses used by various resources.
+	// Automated discovery information.
+	AutomatedDiscoveryInformation *AutomatedDiscoveryInformation `type:"structure"`
+
+	// Summaries of the licenses consumed by resources.
 	ConsumedLicenseSummaryList []ConsumedLicenseSummary `type:"list"`
 
 	// Number of licenses assigned to resources.
@@ -49,7 +52,7 @@ type GetLicenseConfigurationOutput struct {
 	// Description of the license configuration.
 	Description *string `type:"string"`
 
-	// ARN of the license configuration requested.
+	// Amazon Resource Name (ARN) of the license configuration.
 	LicenseConfigurationArn *string `type:"string"`
 
 	// Unique ID for the license configuration.
@@ -61,26 +64,28 @@ type GetLicenseConfigurationOutput struct {
 	// Sets the number of available licenses as a hard limit.
 	LicenseCountHardLimit *bool `type:"boolean"`
 
-	// Dimension on which the licenses are counted (for example, instances, cores,
-	// sockets, or VCPUs).
+	// Dimension on which the licenses are counted.
 	LicenseCountingType LicenseCountingType `type:"string" enum:"true"`
 
-	// List of flexible text strings designating license rules.
+	// License rules.
 	LicenseRules []string `type:"list"`
 
-	// List of summaries of managed resources.
+	// Summaries of the managed resources.
 	ManagedResourceSummaryList []ManagedResourceSummary `type:"list"`
 
 	// Name of the license configuration.
 	Name *string `type:"string"`
 
-	// Owner account ID for the license configuration.
+	// Account ID of the owner of the license configuration.
 	OwnerAccountId *string `type:"string"`
 
-	// License configuration status (active, etc.).
+	// Product information.
+	ProductInformationList []ProductInformation `type:"list"`
+
+	// License configuration status.
 	Status *string `type:"string"`
 
-	// List of tags attached to the license configuration.
+	// Tags for the license configuration.
 	Tags []Tag `type:"list"`
 }
 
@@ -94,7 +99,7 @@ const opGetLicenseConfiguration = "GetLicenseConfiguration"
 // GetLicenseConfigurationRequest returns a request value for making API operation for
 // AWS License Manager.
 //
-// Returns a detailed description of a license configuration.
+// Gets detailed information about the specified license configuration.
 //
 //    // Example sending a request using GetLicenseConfigurationRequest.
 //    req := client.GetLicenseConfigurationRequest(params)

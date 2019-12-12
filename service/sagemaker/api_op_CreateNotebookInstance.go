@@ -21,7 +21,7 @@ type CreateNotebookInstanceInput struct {
 
 	// An array of up to three Git repositories to associate with the notebook instance.
 	// These can be either the names of Git repositories stored as resources in
-	// your account, or the URL of Git repositories in AWS CodeCommit (codecommit/latest/userguide/welcome.html)
+	// your account, or the URL of Git repositories in AWS CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
 	// or in any other Git repository. These repositories are cloned at the same
 	// level as the default repository of your notebook instance. For more information,
 	// see Associating Git Repositories with Amazon SageMaker Notebook Instances
@@ -74,7 +74,7 @@ type CreateNotebookInstanceInput struct {
 	// SageMaker assumes this role to perform tasks on your behalf. You must grant
 	// this role necessary permissions so Amazon SageMaker can perform these tasks.
 	// The policy must allow the Amazon SageMaker service principal (sagemaker.amazonaws.com)
-	// permissionsto to assume this role. For more information, see Amazon SageMaker
+	// permissions to assume this role. For more information, see Amazon SageMaker
 	// Roles (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html).
 	//
 	// To be able to pass this role to Amazon SageMaker, the caller of this API

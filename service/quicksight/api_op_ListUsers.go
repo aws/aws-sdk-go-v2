@@ -100,7 +100,7 @@ type ListUsersOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
 	// The list of users.
@@ -148,13 +148,6 @@ const opListUsers = "ListUsers"
 // Amazon QuickSight.
 //
 // Returns a list of all of the Amazon QuickSight users belonging to this account.
-//
-// The response is a list of user objects, containing each user's Amazon Resource
-// Name (ARN), AWS Identity and Access Management (IAM) role, and email address.
-//
-// CLI Sample:
-//
-// aws quicksight list-users --aws-account-id=111122223333 --namespace=default
 //
 //    // Example sending a request using ListUsersRequest.
 //    req := client.ListUsersRequest(params)

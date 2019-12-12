@@ -2032,6 +2032,217 @@ func (s SnsDestination) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object containing information about the suppressed email destination.
+type SuppressedDestination struct {
+	_ struct{} `type:"structure"`
+
+	// Optional value with information about the sources of the suppression.
+	Attributes *SuppressedDestinationAttributes `type:"structure"`
+
+	// The suppressed email destination.
+	//
+	// EmailAddress is a required field
+	EmailAddress *string `type:"string" required:"true"`
+
+	// The last time the suppressed destination was updated.
+	//
+	// LastUpdateTime is a required field
+	LastUpdateTime *time.Time `type:"timestamp" required:"true"`
+
+	// The reason for which the email destination is suppressed.
+	//
+	// Reason is a required field
+	Reason SuppressionListReason `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s SuppressedDestination) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SuppressedDestination) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Attributes != nil {
+		v := s.Attributes
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Attributes", v, metadata)
+	}
+	if s.EmailAddress != nil {
+		v := *s.EmailAddress
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EmailAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdateTime != nil {
+		v := *s.LastUpdateTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdateTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if len(s.Reason) > 0 {
+		v := s.Reason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Reason", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// An object containing additional attributes related to a suppressed destination.
+type SuppressedDestinationAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// A unique identifier of the suppression cause.
+	FeedbackId *string `type:"string"`
+
+	// A unique identifier of the message that caused the suppression of the email
+	// destination.
+	MessageId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SuppressedDestinationAttributes) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SuppressedDestinationAttributes) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FeedbackId != nil {
+		v := *s.FeedbackId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FeedbackId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MessageId != nil {
+		v := *s.MessageId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MessageId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A summary for the suppressed email destination.
+type SuppressedDestinationSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The suppressed email destination.
+	//
+	// EmailAddress is a required field
+	EmailAddress *string `type:"string" required:"true"`
+
+	// The last time the suppressed destination was updated.
+	//
+	// LastUpdateTime is a required field
+	LastUpdateTime *time.Time `type:"timestamp" required:"true"`
+
+	// The reason for which the email destination is suppressed.
+	//
+	// Reason is a required field
+	Reason SuppressionListReason `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s SuppressedDestinationSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SuppressedDestinationSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EmailAddress != nil {
+		v := *s.EmailAddress
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EmailAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdateTime != nil {
+		v := *s.LastUpdateTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdateTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if len(s.Reason) > 0 {
+		v := s.Reason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Reason", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// An object that contains information about your account's suppression preferences.
+type SuppressionAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// A list of reasons to suppress email addresses. The only valid reasons are:
+	//
+	//    * COMPLAINT – Amazon SES will suppress an email address that receives
+	//    a complaint.
+	//
+	//    * BOUNCE – Amazon SES will suppress an email address that hard bounces.
+	SuppressedReasons []SuppressionListReason `type:"list"`
+}
+
+// String returns the string representation
+func (s SuppressionAttributes) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SuppressionAttributes) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SuppressedReasons != nil {
+		v := s.SuppressedReasons
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SuppressedReasons", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// An object that contains information about your account's suppression preferences.
+type SuppressionOptions struct {
+	_ struct{} `type:"structure"`
+
+	// A list of reasons to suppress email addresses. The only valid reasons are:
+	//
+	//    * COMPLAINT – Amazon SES will suppress an email address that receives
+	//    a complaint.
+	//
+	//    * BOUNCE – Amazon SES will suppress an email address that hard bounces.
+	SuppressedReasons []SuppressionListReason `type:"list"`
+}
+
+// String returns the string representation
+func (s SuppressionOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SuppressionOptions) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SuppressedReasons != nil {
+		v := s.SuppressedReasons
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SuppressedReasons", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // An object that defines the tags that are associated with a resource. A tag
 // is a label that you optionally define and associate with a resource. Tags
 // can help you categorize and manage resources in different ways, such as by

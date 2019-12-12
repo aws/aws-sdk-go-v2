@@ -61,18 +61,17 @@ type IndexFacesInput struct {
 	// face model.
 	MaxFaces *int64 `min:"1" type:"integer"`
 
-	// A filter that specifies how much filtering is done to identify faces that
-	// are detected with low quality. Filtered faces aren't indexed. If you specify
-	// AUTO, filtering prioritizes the identification of faces that don’t meet
-	// the required quality bar chosen by Amazon Rekognition. The quality bar is
-	// based on a variety of common use cases. Low-quality detections can occur
-	// for a number of reasons. Some examples are an object that's misidentified
-	// as a face, a face that's too blurry, or a face with a pose that's too extreme
-	// to use. If you specify NONE, no filtering is performed. The default value
-	// is AUTO.
+	// A filter that specifies a quality bar for how much filtering is done to identify
+	// faces. Filtered faces aren't indexed. If you specify AUTO, Amazon Rekognition
+	// chooses the quality bar. If you specify LOW, MEDIUM, or HIGH, filtering removes
+	// all faces that don’t meet the chosen quality bar. The default value is
+	// AUTO. The quality bar is based on a variety of common use cases. Low-quality
+	// detections can occur for a number of reasons. Some examples are an object
+	// that's misidentified as a face, a face that's too blurry, or a face with
+	// a pose that's too extreme to use. If you specify NONE, no filtering is performed.
 	//
 	// To use quality filtering, the collection you are using must be associated
-	// with version 3 of the face model.
+	// with version 3 of the face model or higher.
 	QualityFilter QualityFilter `type:"string" enum:"true"`
 }
 
@@ -207,15 +206,15 @@ const opIndexFaces = "IndexFaces"
 // standing in the background.
 //
 // The QualityFilter input parameter allows you to filter out detected faces
-// that don’t meet the required quality bar chosen by Amazon Rekognition.
-// The quality bar is based on a variety of common use cases. By default, IndexFaces
-// filters detected faces. You can also explicitly filter detected faces by
-// specifying AUTO for the value of QualityFilter. If you do not want to filter
-// detected faces, specify NONE.
+// that don’t meet a required quality bar. The quality bar is based on a variety
+// of common use cases. By default, IndexFaces chooses the quality bar that's
+// used to filter faces. You can also explicitly choose the quality bar. Use
+// QualityFilter, to set the quality bar by specifying LOW, MEDIUM, or HIGH.
+// If you do not want to filter detected faces, specify NONE.
 //
 // To use quality filtering, you need a collection associated with version 3
-// of the face model. To get the version of the face model associated with a
-// collection, call DescribeCollection.
+// of the face model or higher. To get the version of the face model associated
+// with a collection, call DescribeCollection.
 //
 // Information about faces detected in an image, but not indexed, is returned
 // in an array of UnindexedFace objects, UnindexedFaces. Faces aren't indexed
@@ -232,6 +231,8 @@ const opIndexFaces = "IndexFaces"
 //
 //    * The face has an extreme pose.
 //
+//    * The face doesn’t have enough detail to be suitable for face search.
+//
 // In response, the IndexFaces operation returns an array of metadata for all
 // detected faces, FaceRecords. This includes:
 //
@@ -247,10 +248,10 @@ const opIndexFaces = "IndexFaces"
 //
 // If you request all facial attributes (by using the detectionAttributes parameter),
 // Amazon Rekognition returns detailed facial attributes, such as facial landmarks
-// (for example, location of eye and mouth) and other facial attributes like
-// gender. If you provide the same image, specify the same collection, and use
-// the same external ID in the IndexFaces operation, Amazon Rekognition doesn't
-// save duplicate face metadata.
+// (for example, location of eye and mouth) and other facial attributes. If
+// you provide the same image, specify the same collection, and use the same
+// external ID in the IndexFaces operation, Amazon Rekognition doesn't save
+// duplicate face metadata.
 //
 // The input image is passed either as base64-encoded image bytes, or as a reference
 // to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon

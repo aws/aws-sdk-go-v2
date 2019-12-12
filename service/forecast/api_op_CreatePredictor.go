@@ -15,12 +15,12 @@ type CreatePredictorInput struct {
 	// The Amazon Resource Name (ARN) of the algorithm to use for model training.
 	// Required if PerformAutoML is not set to true.
 	//
-	// Supported algorithms
+	// Supported algorithms:
 	//
 	//    * arn:aws:forecast:::algorithm/ARIMA
 	//
-	//    * arn:aws:forecast:::algorithm/Deep_AR_Plus - supports hyperparameter
-	//    optimization (HPO)
+	//    * arn:aws:forecast:::algorithm/Deep_AR_Plus Supports hyperparameter optimization
+	//    (HPO)
 	//
 	//    * arn:aws:forecast:::algorithm/ETS
 	//
@@ -51,6 +51,9 @@ type CreatePredictorInput struct {
 	// the DataFrequency parameter of the CreateDataset operation) and set the forecast
 	// horizon to 10, the model returns predictions for 10 days.
 	//
+	// The maximum forecast horizon is the lesser of 500 time-steps or 1/3 of the
+	// TARGET_TIME_SERIES dataset length.
+	//
 	// ForecastHorizon is a required field
 	ForecastHorizon *int64 `type:"integer" required:"true"`
 
@@ -58,6 +61,8 @@ type CreatePredictorInput struct {
 	// this parameter, Amazon Forecast uses default values. The individual algorithms
 	// specify which hyperparameters support hyperparameter optimization (HPO).
 	// For more information, see aws-forecast-choosing-recipes.
+	//
+	// If you included the HPOConfig object, you must set PerformHPO to true.
 	HPOConfig *HyperParameterTuningJobConfig `type:"structure"`
 
 	// Describes the dataset group that contains the data to use to train the predictor.
@@ -65,27 +70,32 @@ type CreatePredictorInput struct {
 	// InputDataConfig is a required field
 	InputDataConfig *InputDataConfig `type:"structure" required:"true"`
 
-	// Whether to perform AutoML. The default value is false. In this case, you
-	// are required to specify an algorithm.
+	// Whether to perform AutoML. When Amazon Forecast performs AutoML, it evaluates
+	// the algorithms it provides and chooses the best algorithm and configuration
+	// for your training dataset.
 	//
-	// If you want Amazon Forecast to evaluate the algorithms it provides and choose
-	// the best algorithm and configuration for your training dataset, set PerformAutoML
-	// to true. This is a good option if you aren't sure which algorithm is suitable
-	// for your application.
+	// The default value is false. In this case, you are required to specify an
+	// algorithm.
+	//
+	// Set PerformAutoML to true to have Amazon Forecast perform AutoML. This is
+	// a good option if you aren't sure which algorithm is suitable for your training
+	// data. In this case, PerformHPO must be false.
 	PerformAutoML *bool `type:"boolean"`
 
 	// Whether to perform hyperparameter optimization (HPO). HPO finds optimal hyperparameter
 	// values for your training data. The process of performing HPO is known as
-	// a hyperparameter tuning job.
+	// running a hyperparameter tuning job.
 	//
 	// The default value is false. In this case, Amazon Forecast uses default hyperparameter
 	// values from the chosen algorithm.
 	//
-	// To override the default values, set PerformHPO to true and supply the HyperParameterTuningJobConfig
-	// object. The tuning job specifies an objective metric, the hyperparameters
-	// to optimize, and the valid range for each hyperparameter.
+	// To override the default values, set PerformHPO to true and, optionally, supply
+	// the HyperParameterTuningJobConfig object. The tuning job specifies a metric
+	// to optimize, which hyperparameters participate in tuning, and the valid range
+	// for each tunable hyperparameter. In this case, you are required to specify
+	// an algorithm and PerformAutoML must be false.
 	//
-	// The following algorithms support HPO:
+	// The following algorithm supports HPO:
 	//
 	//    * DeepAR+
 	PerformHPO *bool `type:"boolean"`
@@ -95,8 +105,9 @@ type CreatePredictorInput struct {
 	// PredictorName is a required field
 	PredictorName *string `min:"1" type:"string" required:"true"`
 
-	// The training parameters to override for model training. The parameters that
-	// you can override are listed in the individual algorithms in aws-forecast-choosing-recipes.
+	// The hyperparameters to override for model training. The hyperparameters that
+	// you can override are listed in the individual algorithms. For the list of
+	// supported algorithms, see aws-forecast-choosing-recipes.
 	TrainingParameters map[string]string `type:"map"`
 }
 
@@ -186,14 +197,19 @@ const opCreatePredictor = "CreatePredictor"
 // review the evaluation metrics before deciding to use the predictor to generate
 // a forecast.
 //
-// Optionally, you can specify a featurization configuration to fill and aggragate
+// Optionally, you can specify a featurization configuration to fill and aggregate
 // the data fields in the TARGET_TIME_SERIES dataset to improve model training.
 // For more information, see FeaturizationConfig.
 //
+// For RELATED_TIME_SERIES datasets, CreatePredictor verifies that the DataFrequency
+// specified when the dataset was created matches the ForecastFrequency. TARGET_TIME_SERIES
+// datasets don't have this restriction. Amazon Forecast also verifies the delimiter
+// and timestamp format. For more information, see howitworks-datasets-groups.
+//
 // AutoML
 //
-// If you set PerformAutoML to true, Amazon Forecast evaluates each algorithm
-// and chooses the one that minimizes the objective function. The objective
+// If you want Amazon Forecast to evaluate each algorithm and choose the one
+// that minimizes the objective function, set PerformAutoML to true. The objective
 // function is defined as the mean of the weighted p10, p50, and p90 quantile
 // losses. For more information, see EvaluationResult.
 //
@@ -207,11 +223,11 @@ const opCreatePredictor = "CreatePredictor"
 //
 //    * TrainingParameters
 //
-// To get a list of all your predictors, use the ListPredictors operation.
+// To get a list of all of your predictors, use the ListPredictors operation.
 //
-// The Status of the predictor must be ACTIVE, signifying that training has
-// completed, before you can use the predictor to create a forecast. Use the
-// DescribePredictor operation to get the status.
+// Before you can use the predictor to create a forecast, the Status of the
+// predictor must be ACTIVE, signifying that training has completed. To get
+// the status, use the DescribePredictor operation.
 //
 //    // Example sending a request using CreatePredictorRequest.
 //    req := client.CreatePredictorRequest(params)

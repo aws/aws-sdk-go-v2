@@ -95,8 +95,8 @@ const opMeterUsage = "MeterUsage"
 // API to emit metering records. For identical requests, the API is idempotent.
 // It simply returns the metering record ID.
 //
-// MeterUsage is authenticated on the buyer's AWS account, generally when running
-// from an EC2 instance on the AWS Marketplace.
+// MeterUsage is authenticated on the buyer's AWS account using credentials
+// from the EC2 instance, ECS task, or EKS pod.
 //
 //    // Example sending a request using MeterUsageRequest.
 //    req := client.MeterUsageRequest(params)

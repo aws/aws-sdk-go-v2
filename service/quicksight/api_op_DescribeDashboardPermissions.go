@@ -13,13 +13,13 @@ import (
 type DescribeDashboardPermissionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID that contains the dashboard you are describing permissions
-	// of.
+	// The ID of the AWS account that contains the dashboard that you're describing
+	// permissions for.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
-	// The ID for the dashboard, also added to IAM policy.
+	// The ID for the dashboard, also added to the IAM policy.
 	//
 	// DashboardId is a required field
 	DashboardId *string `location:"uri" locationName:"DashboardId" min:"1" type:"string" required:"true"`
@@ -76,19 +76,19 @@ func (s DescribeDashboardPermissionsInput) MarshalFields(e protocol.FieldEncoder
 type DescribeDashboardPermissionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the dashboard.
+	// The Amazon Resource Name (ARN) of the dashboard.
 	DashboardArn *string `type:"string"`
 
 	// The ID for the dashboard.
 	DashboardId *string `min:"1" type:"string"`
 
-	// A structure that contains the permissions of the dashboard.
+	// A structure that contains the permissions for the dashboard.
 	Permissions []ResourcePermission `min:"1" type:"list"`
 
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -138,12 +138,7 @@ const opDescribeDashboardPermissions = "DescribeDashboardPermissions"
 // DescribeDashboardPermissionsRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Describes read and write permissions on a dashboard.
-//
-// CLI syntax:
-//
-// aws quicksight describe-dashboard-permissions --aws-account-id 735340738645
-// —dashboard-id reports_test_bob_report
+// Describes read and write permissions for a dashboard.
 //
 //    // Example sending a request using DescribeDashboardPermissionsRequest.
 //    req := client.DescribeDashboardPermissionsRequest(params)

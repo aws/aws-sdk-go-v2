@@ -51,6 +51,10 @@ type DescribeDocumentPermissionOutput struct {
 	// The account IDs that have permission to use this document. The ID can be
 	// either an AWS account or All.
 	AccountIds []string `type:"list"`
+
+	// A list of of AWS accounts where the current document is shared and the version
+	// shared with each account.
+	AccountSharingInfoList []AccountSharingInfo `type:"list"`
 }
 
 // String returns the string representation

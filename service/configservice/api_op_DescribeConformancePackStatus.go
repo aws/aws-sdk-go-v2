@@ -15,7 +15,7 @@ type DescribeConformancePackStatusInput struct {
 	// Comma-separated list of conformance pack names.
 	ConformancePackNames []string `type:"list"`
 
-	// The maximum number of conformance packs returned on each page.
+	// The maximum number of conformance packs status returned on each page.
 	Limit *int64 `type:"integer"`
 
 	// The nextToken string returned in a previous request that you use to request
@@ -50,6 +50,8 @@ const opDescribeConformancePackStatus = "DescribeConformancePackStatus"
 // AWS Config.
 //
 // Provides one or more conformance packs deployment status.
+//
+// If there are no conformance packs then you will see an empty result.
 //
 //    // Example sending a request using DescribeConformancePackStatusRequest.
 //    req := client.DescribeConformancePackStatusRequest(params)

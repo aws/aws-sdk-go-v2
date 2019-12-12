@@ -97,7 +97,7 @@ type DescribeGroupOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -131,15 +131,6 @@ const opDescribeGroup = "DescribeGroup"
 //
 // Returns an Amazon QuickSight group's description and Amazon Resource Name
 // (ARN).
-//
-// The permissions resource is arn:aws:quicksight:us-east-1:<relevant-aws-account-id>:group/default/<group-name> .
-//
-// The response is the group object.
-//
-// CLI Sample:
-//
-// aws quicksight describe-group -\-aws-account-id=11112222333 -\-namespace=default
-// -\-group-name=Sales
 //
 //    // Example sending a request using DescribeGroupRequest.
 //    req := client.DescribeGroupRequest(params)

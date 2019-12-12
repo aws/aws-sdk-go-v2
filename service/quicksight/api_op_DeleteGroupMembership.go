@@ -112,7 +112,7 @@ type DeleteGroupMembershipOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -140,17 +140,6 @@ const opDeleteGroupMembership = "DeleteGroupMembership"
 //
 // Removes a user from a group so that the user is no longer a member of the
 // group.
-//
-// The permissions resource is arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name> .
-//
-// The condition resource is the user name.
-//
-// The condition key is quicksight:UserName.
-//
-// CLI Sample:
-//
-// aws quicksight delete-group-membership --aws-account-id=111122223333 --namespace=default
-// --group-name=Sales-Management --member-name=Charlie
 //
 //    // Example sending a request using DeleteGroupMembershipRequest.
 //    req := client.DeleteGroupMembershipRequest(params)

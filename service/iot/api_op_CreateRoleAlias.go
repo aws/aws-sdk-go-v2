@@ -92,7 +92,7 @@ type CreateRoleAliasOutput struct {
 	RoleAlias *string `locationName:"roleAlias" min:"1" type:"string"`
 
 	// The role alias ARN.
-	RoleAliasArn *string `locationName:"roleAliasArn" type:"string"`
+	RoleAliasArn *string `locationName:"roleAliasArn" min:"1" type:"string"`
 }
 
 // String returns the string representation

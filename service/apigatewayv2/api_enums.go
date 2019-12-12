@@ -2,8 +2,10 @@
 
 package apigatewayv2
 
-// The authorization type. Valid values are NONE for open access, AWS_IAM for
-// using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
+// The authorization type. For WebSocket APIs, valid values are NONE for open
+// access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda
+// authorizer. For HTTP APIs, valid values are NONE for open access, or JWT
+// for using JSON Web Tokens.
 type AuthorizationType string
 
 // Enum values for AuthorizationType
@@ -11,6 +13,7 @@ const (
 	AuthorizationTypeNone   AuthorizationType = "NONE"
 	AuthorizationTypeAwsIam AuthorizationType = "AWS_IAM"
 	AuthorizationTypeCustom AuthorizationType = "CUSTOM"
+	AuthorizationTypeJwt    AuthorizationType = "JWT"
 )
 
 func (enum AuthorizationType) MarshalValue() (string, error) {
@@ -22,13 +25,15 @@ func (enum AuthorizationType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The authorizer type. Currently the only valid value is REQUEST, for a Lambda
-// function using incoming request parameters.
+// The authorizer type. For WebSocket APIs, specify REQUEST for a Lambda function
+// using incoming request parameters. For HTTP APIs, specify JWT to use JSON
+// Web Tokens.
 type AuthorizerType string
 
 // Enum values for AuthorizerType
 const (
 	AuthorizerTypeRequest AuthorizerType = "REQUEST"
+	AuthorizerTypeJwt     AuthorizerType = "JWT"
 )
 
 func (enum AuthorizerType) MarshalValue() (string, error) {
@@ -58,7 +63,8 @@ func (enum ConnectionType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Specifies how to handle response payload content type conversions.
+// Specifies how to handle response payload content type conversions. Supported
+// only for WebSocket APIs.
 type ContentHandlingStrategy string
 
 // Enum values for ContentHandlingStrategy
@@ -95,6 +101,10 @@ func (enum DeploymentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// The status of the domain name migration. The valid values are AVAILABLE and
+// UPDATING. If the status is UPDATING, the domain cannot be modified further
+// until the existing operation is complete. If it is AVAILABLE, the domain
+// can be updated.
 type DomainNameStatus string
 
 // Enum values for DomainNameStatus
@@ -170,7 +180,8 @@ func (enum LoggingLevel) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Represents passthrough behavior for an integration response.
+// Represents passthrough behavior for an integration response. Supported only
+// for WebSocket APIs.
 type PassthroughBehavior string
 
 // Enum values for PassthroughBehavior
@@ -189,11 +200,13 @@ func (enum PassthroughBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Represents a protocol type.
 type ProtocolType string
 
 // Enum values for ProtocolType
 const (
 	ProtocolTypeWebsocket ProtocolType = "WEBSOCKET"
+	ProtocolTypeHttp      ProtocolType = "HTTP"
 )
 
 func (enum ProtocolType) MarshalValue() (string, error) {
@@ -205,6 +218,8 @@ func (enum ProtocolType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// The Transport Layer Security (TLS) version of the security policy for this
+// domain name. The valid values are TLS_1_0 and TLS_1_2.
 type SecurityPolicy string
 
 // Enum values for SecurityPolicy

@@ -13,7 +13,7 @@ import (
 type ListDataSetsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS Account ID.
+	// The AWS account ID.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -87,7 +87,7 @@ type ListDataSetsOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -131,11 +131,10 @@ const opListDataSets = "ListDataSets"
 // ListDataSetsRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Lists all of the datasets belonging to this account in an AWS region.
+// Lists all of the datasets belonging to the current AWS account in an AWS
+// Region.
 //
-// The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/*
-//
-// CLI syntax: aws quicksight list-data-sets --aws-account-id=111111111111
+// The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/*.
 //
 //    // Example sending a request using ListDataSetsRequest.
 //    req := client.ListDataSetsRequest(params)

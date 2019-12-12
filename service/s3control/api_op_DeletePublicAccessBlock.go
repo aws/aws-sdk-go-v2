@@ -14,8 +14,8 @@ import (
 type DeletePublicAccessBlockInput struct {
 	_ struct{} `type:"structure"`
 
-	// The account ID for the AWS account whose block public access configuration
-	// you want to delete.
+	// The account ID for the Amazon Web Services account whose PublicAccessBlock
+	// configuration you want to remove.
 	//
 	// AccountId is a required field
 	AccountId *string `location:"header" locationName:"x-amz-account-id" type:"string" required:"true"`
@@ -71,7 +71,7 @@ const opDeletePublicAccessBlock = "DeletePublicAccessBlock"
 // DeletePublicAccessBlockRequest returns a request value for making API operation for
 // AWS S3 Control.
 //
-// Deletes the block public access configuration for the specified account.
+// Removes the PublicAccessBlock configuration for an Amazon Web Services account.
 //
 //    // Example sending a request using DeletePublicAccessBlockRequest.
 //    req := client.DeletePublicAccessBlockRequest(params)

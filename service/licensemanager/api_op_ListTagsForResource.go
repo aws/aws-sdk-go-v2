@@ -12,7 +12,7 @@ import (
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// ARN for the resource.
+	// Amazon Resource Name (ARN) of the license configuration.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `type:"string" required:"true"`
@@ -40,7 +40,7 @@ func (s *ListTagsForResourceInput) Validate() error {
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// List of tags attached to the resource.
+	// Information about the tags.
 	Tags []Tag `type:"list"`
 }
 
@@ -54,7 +54,7 @@ const opListTagsForResource = "ListTagsForResource"
 // ListTagsForResourceRequest returns a request value for making API operation for
 // AWS License Manager.
 //
-// Lists tags attached to a resource.
+// Lists the tags for the specified license configuration.
 //
 //    // Example sending a request using ListTagsForResourceRequest.
 //    req := client.ListTagsForResourceRequest(params)

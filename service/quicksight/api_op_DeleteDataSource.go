@@ -18,7 +18,8 @@ type DeleteDataSourceInput struct {
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
-	// The ID of the data source. This is unique per AWS Region per AWS account.
+	// The ID of the data source. This ID is unique per AWS Region for each AWS
+	// account.
 	//
 	// DataSourceId is a required field
 	DataSourceId *string `location:"uri" locationName:"DataSourceId" type:"string" required:"true"`
@@ -72,16 +73,17 @@ func (s DeleteDataSourceInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteDataSourceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the data source you deleted.
+	// The Amazon Resource Name (ARN) of the data source that you deleted.
 	Arn *string `type:"string"`
 
-	// The ID of the data source. This is unique per AWS Region per AWS account.
+	// The ID of the data source. This ID is unique per AWS Region for each AWS
+	// account.
 	DataSourceId *string `type:"string"`
 
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -121,14 +123,6 @@ const opDeleteDataSource = "DeleteDataSource"
 //
 // Deletes the data source permanently. This action breaks all the datasets
 // that reference the deleted data source.
-//
-// CLI syntax:
-//
-// aws quicksight delete-data-source \
-//
-// --aws-account-id=111122223333 \
-//
-// --data-source-id=unique-data-source-id
 //
 //    // Example sending a request using DeleteDataSourceRequest.
 //    req := client.DeleteDataSourceRequest(params)

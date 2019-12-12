@@ -13,7 +13,8 @@ import (
 type ListTemplateAliasesInput struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID that contains the template aliases you are listing.
+	// The ID of the AWS account that contains the template aliases that you're
+	// listing.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -102,10 +103,10 @@ type ListTemplateAliasesOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
-	// A structure containing the list of template aliases.
+	// A structure containing the list of the template's aliases.
 	TemplateAliasList []TemplateAlias `type:"list"`
 }
 
@@ -150,11 +151,6 @@ const opListTemplateAliases = "ListTemplateAliases"
 // Amazon QuickSight.
 //
 // Lists all the aliases of a template.
-//
-// CLI syntax:
-//
-// aws quicksight list-template-aliases --aws-account-id 111122223333 —template-id
-// 'reports_test_template'
 //
 //    // Example sending a request using ListTemplateAliasesRequest.
 //    req := client.ListTemplateAliasesRequest(params)

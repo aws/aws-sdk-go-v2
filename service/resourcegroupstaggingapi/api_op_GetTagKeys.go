@@ -45,7 +45,7 @@ const opGetTagKeys = "GetTagKeys"
 // GetTagKeysRequest returns a request value for making API operation for
 // AWS Resource Groups Tagging API.
 //
-// Returns all tag keys in the specified region for the AWS account.
+// Returns all tag keys in the specified Region for the AWS account.
 //
 //    // Example sending a request using GetTagKeysRequest.
 //    req := client.GetTagKeysRequest(params)

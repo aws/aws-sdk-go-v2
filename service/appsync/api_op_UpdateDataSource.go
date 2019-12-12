@@ -36,7 +36,7 @@ type UpdateDataSourceInput struct {
 	// The new name for the data source.
 	//
 	// Name is a required field
-	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
+	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
 
 	// The new relational database configuration.
 	RelationalDatabaseConfig *RelationalDatabaseDataSourceConfig `locationName:"relationalDatabaseConfig" type:"structure"`
@@ -65,6 +65,9 @@ func (s *UpdateDataSourceInput) Validate() error {
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))

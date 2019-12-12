@@ -82,7 +82,11 @@ type ClientAPI interface {
 
 	DeleteFunctionConcurrencyRequest(*lambda.DeleteFunctionConcurrencyInput) lambda.DeleteFunctionConcurrencyRequest
 
+	DeleteFunctionEventInvokeConfigRequest(*lambda.DeleteFunctionEventInvokeConfigInput) lambda.DeleteFunctionEventInvokeConfigRequest
+
 	DeleteLayerVersionRequest(*lambda.DeleteLayerVersionInput) lambda.DeleteLayerVersionRequest
+
+	DeleteProvisionedConcurrencyConfigRequest(*lambda.DeleteProvisionedConcurrencyConfigInput) lambda.DeleteProvisionedConcurrencyConfigRequest
 
 	GetAccountSettingsRequest(*lambda.GetAccountSettingsInput) lambda.GetAccountSettingsRequest
 
@@ -92,7 +96,11 @@ type ClientAPI interface {
 
 	GetFunctionRequest(*lambda.GetFunctionInput) lambda.GetFunctionRequest
 
+	GetFunctionConcurrencyRequest(*lambda.GetFunctionConcurrencyInput) lambda.GetFunctionConcurrencyRequest
+
 	GetFunctionConfigurationRequest(*lambda.GetFunctionConfigurationInput) lambda.GetFunctionConfigurationRequest
+
+	GetFunctionEventInvokeConfigRequest(*lambda.GetFunctionEventInvokeConfigInput) lambda.GetFunctionEventInvokeConfigRequest
 
 	GetLayerVersionRequest(*lambda.GetLayerVersionInput) lambda.GetLayerVersionRequest
 
@@ -102,6 +110,8 @@ type ClientAPI interface {
 
 	GetPolicyRequest(*lambda.GetPolicyInput) lambda.GetPolicyRequest
 
+	GetProvisionedConcurrencyConfigRequest(*lambda.GetProvisionedConcurrencyConfigInput) lambda.GetProvisionedConcurrencyConfigRequest
+
 	InvokeRequest(*lambda.InvokeInput) lambda.InvokeRequest
 
 	InvokeAsyncRequest(*lambda.InvokeAsyncInput) lambda.InvokeAsyncRequest
@@ -110,11 +120,15 @@ type ClientAPI interface {
 
 	ListEventSourceMappingsRequest(*lambda.ListEventSourceMappingsInput) lambda.ListEventSourceMappingsRequest
 
+	ListFunctionEventInvokeConfigsRequest(*lambda.ListFunctionEventInvokeConfigsInput) lambda.ListFunctionEventInvokeConfigsRequest
+
 	ListFunctionsRequest(*lambda.ListFunctionsInput) lambda.ListFunctionsRequest
 
 	ListLayerVersionsRequest(*lambda.ListLayerVersionsInput) lambda.ListLayerVersionsRequest
 
 	ListLayersRequest(*lambda.ListLayersInput) lambda.ListLayersRequest
+
+	ListProvisionedConcurrencyConfigsRequest(*lambda.ListProvisionedConcurrencyConfigsInput) lambda.ListProvisionedConcurrencyConfigsRequest
 
 	ListTagsRequest(*lambda.ListTagsInput) lambda.ListTagsRequest
 
@@ -125,6 +139,10 @@ type ClientAPI interface {
 	PublishVersionRequest(*lambda.PublishVersionInput) lambda.PublishVersionRequest
 
 	PutFunctionConcurrencyRequest(*lambda.PutFunctionConcurrencyInput) lambda.PutFunctionConcurrencyRequest
+
+	PutFunctionEventInvokeConfigRequest(*lambda.PutFunctionEventInvokeConfigInput) lambda.PutFunctionEventInvokeConfigRequest
+
+	PutProvisionedConcurrencyConfigRequest(*lambda.PutProvisionedConcurrencyConfigInput) lambda.PutProvisionedConcurrencyConfigRequest
 
 	RemoveLayerVersionPermissionRequest(*lambda.RemoveLayerVersionPermissionInput) lambda.RemoveLayerVersionPermissionRequest
 
@@ -142,7 +160,13 @@ type ClientAPI interface {
 
 	UpdateFunctionConfigurationRequest(*lambda.UpdateFunctionConfigurationInput) lambda.UpdateFunctionConfigurationRequest
 
+	UpdateFunctionEventInvokeConfigRequest(*lambda.UpdateFunctionEventInvokeConfigInput) lambda.UpdateFunctionEventInvokeConfigRequest
+
+	WaitUntilFunctionActive(context.Context, *lambda.GetFunctionConfigurationInput, ...aws.WaiterOption) error
+
 	WaitUntilFunctionExists(context.Context, *lambda.GetFunctionInput, ...aws.WaiterOption) error
+
+	WaitUntilFunctionUpdated(context.Context, *lambda.GetFunctionConfigurationInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*lambda.Client)(nil)

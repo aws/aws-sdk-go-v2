@@ -69,6 +69,9 @@ type GetPlaybackConfigurationOutput struct {
 	// The configuration for HLS content.
 	HlsConfiguration *HlsConfiguration `type:"structure"`
 
+	// The configuration for pre-roll ad insertion.
+	LivePreRollConfiguration *LivePreRollConfiguration `type:"structure"`
+
 	// The identifier for the playback configuration.
 	Name *string `type:"string"`
 
@@ -135,6 +138,12 @@ func (s GetPlaybackConfigurationOutput) MarshalFields(e protocol.FieldEncoder) e
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "HlsConfiguration", v, metadata)
+	}
+	if s.LivePreRollConfiguration != nil {
+		v := s.LivePreRollConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LivePreRollConfiguration", v, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name

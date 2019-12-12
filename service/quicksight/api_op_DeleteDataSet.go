@@ -13,13 +13,13 @@ import (
 type DeleteDataSetInput struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS Account ID.
+	// The AWS account ID.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
-	// The ID for the dataset you want to create. This is unique per region per
-	// AWS account.
+	// The ID for the dataset that you want to create. This ID is unique per AWS
+	// Region for each AWS account.
 	//
 	// DataSetId is a required field
 	DataSetId *string `location:"uri" locationName:"DataSetId" type:"string" required:"true"`
@@ -73,17 +73,17 @@ func (s DeleteDataSetInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteDataSetOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the dataset.
+	// The Amazon Resource Name (ARN) of the dataset.
 	Arn *string `type:"string"`
 
-	// The ID for the dataset you want to create. This is unique per region per
-	// AWS account.
+	// The ID for the dataset that you want to create. This ID is unique per AWS
+	// Region for each AWS account.
 	DataSetId *string `type:"string"`
 
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -122,14 +122,6 @@ const opDeleteDataSet = "DeleteDataSet"
 // Amazon QuickSight.
 //
 // Deletes a dataset.
-//
-// CLI syntax:
-//
-// aws quicksight delete-data-set \
-//
-// --aws-account-id=111111111111 \
-//
-// --data-set-id=unique-data-set-id
 //
 //    // Example sending a request using DeleteDataSetRequest.
 //    req := client.DeleteDataSetRequest(params)

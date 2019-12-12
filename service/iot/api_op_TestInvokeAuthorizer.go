@@ -18,16 +18,21 @@ type TestInvokeAuthorizerInput struct {
 	// AuthorizerName is a required field
 	AuthorizerName *string `location:"uri" locationName:"authorizerName" min:"1" type:"string" required:"true"`
 
+	// Specifies a test HTTP authorization request.
+	HttpContext *HttpContext `locationName:"httpContext" type:"structure"`
+
+	// Specifies a test MQTT authorization request.>
+	MqttContext *MqttContext `locationName:"mqttContext" type:"structure"`
+
+	// Specifies a test TLS authorization request.
+	TlsContext *TlsContext `locationName:"tlsContext" type:"structure"`
+
 	// The token returned by your custom authentication service.
-	//
-	// Token is a required field
-	Token *string `locationName:"token" min:"1" type:"string" required:"true"`
+	Token *string `locationName:"token" min:"1" type:"string"`
 
 	// The signature made with the token and your custom authentication service's
 	// private key.
-	//
-	// TokenSignature is a required field
-	TokenSignature *string `locationName:"tokenSignature" min:"1" type:"string" required:"true"`
+	TokenSignature *string `locationName:"tokenSignature" min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -45,19 +50,26 @@ func (s *TestInvokeAuthorizerInput) Validate() error {
 	if s.AuthorizerName != nil && len(*s.AuthorizerName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthorizerName", 1))
 	}
-
-	if s.Token == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Token"))
-	}
 	if s.Token != nil && len(*s.Token) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Token", 1))
 	}
-
-	if s.TokenSignature == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TokenSignature"))
-	}
 	if s.TokenSignature != nil && len(*s.TokenSignature) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TokenSignature", 1))
+	}
+	if s.HttpContext != nil {
+		if err := s.HttpContext.Validate(); err != nil {
+			invalidParams.AddNested("HttpContext", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.MqttContext != nil {
+		if err := s.MqttContext.Validate(); err != nil {
+			invalidParams.AddNested("MqttContext", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.TlsContext != nil {
+		if err := s.TlsContext.Validate(); err != nil {
+			invalidParams.AddNested("TlsContext", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -70,6 +82,24 @@ func (s *TestInvokeAuthorizerInput) Validate() error {
 func (s TestInvokeAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if s.HttpContext != nil {
+		v := s.HttpContext
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "httpContext", v, metadata)
+	}
+	if s.MqttContext != nil {
+		v := s.MqttContext
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "mqttContext", v, metadata)
+	}
+	if s.TlsContext != nil {
+		v := s.TlsContext
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "tlsContext", v, metadata)
+	}
 	if s.Token != nil {
 		v := *s.Token
 

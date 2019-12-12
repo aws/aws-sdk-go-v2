@@ -19,6 +19,8 @@ type ListOfferingsInput struct {
 
 	Codec *string `location:"querystring" locationName:"codec" type:"string"`
 
+	Duration *string `location:"querystring" locationName:"duration" type:"string"`
+
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
 	MaximumBitrate *string `location:"querystring" locationName:"maximumBitrate" type:"string"`
@@ -75,6 +77,12 @@ func (s ListOfferingsInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "codec", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Duration != nil {
+		v := *s.Duration
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "duration", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults

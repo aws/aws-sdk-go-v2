@@ -89,6 +89,8 @@ type ClientAPI interface {
 
 	DescribeCreateAccountStatusRequest(*organizations.DescribeCreateAccountStatusInput) organizations.DescribeCreateAccountStatusRequest
 
+	DescribeEffectivePolicyRequest(*organizations.DescribeEffectivePolicyInput) organizations.DescribeEffectivePolicyRequest
+
 	DescribeHandshakeRequest(*organizations.DescribeHandshakeInput) organizations.DescribeHandshakeRequest
 
 	DescribeOrganizationRequest(*organizations.DescribeOrganizationInput) organizations.DescribeOrganizationRequest

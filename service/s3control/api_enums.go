@@ -99,6 +99,23 @@ func (enum JobStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type NetworkOrigin string
+
+// Enum values for NetworkOrigin
+const (
+	NetworkOriginInternet NetworkOrigin = "Internet"
+	NetworkOriginVpc      NetworkOrigin = "VPC"
+)
+
+func (enum NetworkOrigin) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NetworkOrigin) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OperationName string
 
 // Enum values for OperationName

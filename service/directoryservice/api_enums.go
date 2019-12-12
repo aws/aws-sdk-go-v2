@@ -2,6 +2,27 @@
 
 package directoryservice
 
+type CertificateState string
+
+// Enum values for CertificateState
+const (
+	CertificateStateRegistering      CertificateState = "Registering"
+	CertificateStateRegistered       CertificateState = "Registered"
+	CertificateStateRegisterFailed   CertificateState = "RegisterFailed"
+	CertificateStateDeregistering    CertificateState = "Deregistering"
+	CertificateStateDeregistered     CertificateState = "Deregistered"
+	CertificateStateDeregisterFailed CertificateState = "DeregisterFailed"
+)
+
+func (enum CertificateState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CertificateState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DirectoryEdition string
 
 // Enum values for DirectoryEdition
@@ -120,6 +141,41 @@ func (enum IpRouteStatusMsg) MarshalValue() (string, error) {
 }
 
 func (enum IpRouteStatusMsg) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type LDAPSStatus string
+
+// Enum values for LDAPSStatus
+const (
+	LDAPSStatusEnabling     LDAPSStatus = "Enabling"
+	LDAPSStatusEnabled      LDAPSStatus = "Enabled"
+	LDAPSStatusEnableFailed LDAPSStatus = "EnableFailed"
+	LDAPSStatusDisabled     LDAPSStatus = "Disabled"
+)
+
+func (enum LDAPSStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LDAPSStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type LDAPSType string
+
+// Enum values for LDAPSType
+const (
+	LDAPSTypeClient LDAPSType = "Client"
+)
+
+func (enum LDAPSType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LDAPSType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

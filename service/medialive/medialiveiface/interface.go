@@ -72,6 +72,10 @@ type ClientAPI interface {
 
 	CreateInputSecurityGroupRequest(*medialive.CreateInputSecurityGroupInput) medialive.CreateInputSecurityGroupRequest
 
+	CreateMultiplexRequest(*medialive.CreateMultiplexInput) medialive.CreateMultiplexRequest
+
+	CreateMultiplexProgramRequest(*medialive.CreateMultiplexProgramInput) medialive.CreateMultiplexProgramRequest
+
 	CreateTagsRequest(*medialive.CreateTagsInput) medialive.CreateTagsRequest
 
 	DeleteChannelRequest(*medialive.DeleteChannelInput) medialive.DeleteChannelRequest
@@ -79,6 +83,10 @@ type ClientAPI interface {
 	DeleteInputRequest(*medialive.DeleteInputInput) medialive.DeleteInputRequest
 
 	DeleteInputSecurityGroupRequest(*medialive.DeleteInputSecurityGroupInput) medialive.DeleteInputSecurityGroupRequest
+
+	DeleteMultiplexRequest(*medialive.DeleteMultiplexInput) medialive.DeleteMultiplexRequest
+
+	DeleteMultiplexProgramRequest(*medialive.DeleteMultiplexProgramInput) medialive.DeleteMultiplexProgramRequest
 
 	DeleteReservationRequest(*medialive.DeleteReservationInput) medialive.DeleteReservationRequest
 
@@ -92,6 +100,10 @@ type ClientAPI interface {
 
 	DescribeInputSecurityGroupRequest(*medialive.DescribeInputSecurityGroupInput) medialive.DescribeInputSecurityGroupRequest
 
+	DescribeMultiplexRequest(*medialive.DescribeMultiplexInput) medialive.DescribeMultiplexRequest
+
+	DescribeMultiplexProgramRequest(*medialive.DescribeMultiplexProgramInput) medialive.DescribeMultiplexProgramRequest
+
 	DescribeOfferingRequest(*medialive.DescribeOfferingInput) medialive.DescribeOfferingRequest
 
 	DescribeReservationRequest(*medialive.DescribeReservationInput) medialive.DescribeReservationRequest
@@ -104,6 +116,10 @@ type ClientAPI interface {
 
 	ListInputsRequest(*medialive.ListInputsInput) medialive.ListInputsRequest
 
+	ListMultiplexProgramsRequest(*medialive.ListMultiplexProgramsInput) medialive.ListMultiplexProgramsRequest
+
+	ListMultiplexesRequest(*medialive.ListMultiplexesInput) medialive.ListMultiplexesRequest
+
 	ListOfferingsRequest(*medialive.ListOfferingsInput) medialive.ListOfferingsRequest
 
 	ListReservationsRequest(*medialive.ListReservationsInput) medialive.ListReservationsRequest
@@ -114,7 +130,11 @@ type ClientAPI interface {
 
 	StartChannelRequest(*medialive.StartChannelInput) medialive.StartChannelRequest
 
+	StartMultiplexRequest(*medialive.StartMultiplexInput) medialive.StartMultiplexRequest
+
 	StopChannelRequest(*medialive.StopChannelInput) medialive.StopChannelRequest
+
+	StopMultiplexRequest(*medialive.StopMultiplexInput) medialive.StopMultiplexRequest
 
 	UpdateChannelRequest(*medialive.UpdateChannelInput) medialive.UpdateChannelRequest
 
@@ -123,6 +143,10 @@ type ClientAPI interface {
 	UpdateInputRequest(*medialive.UpdateInputInput) medialive.UpdateInputRequest
 
 	UpdateInputSecurityGroupRequest(*medialive.UpdateInputSecurityGroupInput) medialive.UpdateInputSecurityGroupRequest
+
+	UpdateMultiplexRequest(*medialive.UpdateMultiplexInput) medialive.UpdateMultiplexRequest
+
+	UpdateMultiplexProgramRequest(*medialive.UpdateMultiplexProgramInput) medialive.UpdateMultiplexProgramRequest
 
 	UpdateReservationRequest(*medialive.UpdateReservationInput) medialive.UpdateReservationRequest
 
@@ -133,6 +157,14 @@ type ClientAPI interface {
 	WaitUntilChannelRunning(context.Context, *medialive.DescribeChannelInput, ...aws.WaiterOption) error
 
 	WaitUntilChannelStopped(context.Context, *medialive.DescribeChannelInput, ...aws.WaiterOption) error
+
+	WaitUntilMultiplexCreated(context.Context, *medialive.DescribeMultiplexInput, ...aws.WaiterOption) error
+
+	WaitUntilMultiplexDeleted(context.Context, *medialive.DescribeMultiplexInput, ...aws.WaiterOption) error
+
+	WaitUntilMultiplexRunning(context.Context, *medialive.DescribeMultiplexInput, ...aws.WaiterOption) error
+
+	WaitUntilMultiplexStopped(context.Context, *medialive.DescribeMultiplexInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*medialive.Client)(nil)

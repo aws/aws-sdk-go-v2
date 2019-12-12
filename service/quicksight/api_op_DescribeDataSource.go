@@ -18,7 +18,8 @@ type DescribeDataSourceInput struct {
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
-	// The ID of the data source. This is unique per AWS Region per AWS account.
+	// The ID of the data source. This ID is unique per AWS Region for each AWS
+	// account.
 	//
 	// DataSourceId is a required field
 	DataSourceId *string `location:"uri" locationName:"DataSourceId" type:"string" required:"true"`
@@ -78,7 +79,7 @@ type DescribeDataSourceOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -111,8 +112,6 @@ const opDescribeDataSource = "DescribeDataSource"
 // Amazon QuickSight.
 //
 // Describes a data source.
-//
-// The permissions resource is arn:aws:quicksight:region:aws-account-id:datasource/data-source-id
 //
 //    // Example sending a request using DescribeDataSourceRequest.
 //    req := client.DescribeDataSourceRequest(params)

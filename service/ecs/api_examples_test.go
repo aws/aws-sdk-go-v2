@@ -294,6 +294,8 @@ func ExampleClient_DeleteClusterRequest_shared00() {
 				fmt.Println(ecs.ErrCodeClusterContainsServicesException, aerr.Error())
 			case ecs.ErrCodeClusterContainsTasksException:
 				fmt.Println(ecs.ErrCodeClusterContainsTasksException, aerr.Error())
+			case ecs.ErrCodeUpdateInProgressException:
+				fmt.Println(ecs.ErrCodeUpdateInProgressException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

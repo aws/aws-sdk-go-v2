@@ -97,6 +97,8 @@ type ClientAPI interface {
 
 	ListUsersRequest(*connect.ListUsersInput) connect.ListUsersRequest
 
+	StartChatContactRequest(*connect.StartChatContactInput) connect.StartChatContactRequest
+
 	StartOutboundVoiceContactRequest(*connect.StartOutboundVoiceContactInput) connect.StartOutboundVoiceContactRequest
 
 	StopContactRequest(*connect.StopContactInput) connect.StopContactRequest

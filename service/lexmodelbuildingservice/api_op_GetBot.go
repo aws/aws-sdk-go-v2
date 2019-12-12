@@ -116,6 +116,10 @@ type GetBotOutput struct {
 	// A description of the bot.
 	Description *string `locationName:"description" type:"string"`
 
+	// Indicates whether user utterances should be sent to Amazon Comprehend for
+	// sentiment analysis.
+	DetectSentiment *bool `locationName:"detectSentiment" type:"boolean"`
+
 	// If status is FAILED, Amazon Lex explains why it failed to build the bot.
 	FailureReason *string `locationName:"failureReason" type:"string"`
 
@@ -136,10 +140,19 @@ type GetBotOutput struct {
 	// The name of the bot.
 	Name *string `locationName:"name" min:"2" type:"string"`
 
-	// The status of the bot. If the bot is ready to run, the status is READY. If
-	// there was a problem with building the bot, the status is FAILED and the failureReason
-	// explains why the bot did not build. If the bot was saved but not built, the
-	// status is NOT BUILT.
+	// The status of the bot.
+	//
+	// When the status is BUILDING Amazon Lex is building the bot for testing and
+	// use.
+	//
+	// If the status of the bot is READY_BASIC_TESTING, you can test the bot using
+	// the exact utterances specified in the bot's intents. When the bot is ready
+	// for full testing or to run, the status is READY.
+	//
+	// If there was a problem with building the bot, the status is FAILED and the
+	// failureReason field explains why the bot did not build.
+	//
+	// If the bot was saved but not built, the status is NOT_BUILT.
 	Status Status `locationName:"status" type:"string" enum:"true"`
 
 	// The version of the bot. For a new bot, the version is always $LATEST.
@@ -193,6 +206,12 @@ func (s GetBotOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DetectSentiment != nil {
+		v := *s.DetectSentiment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "detectSentiment", protocol.BoolValue(v), metadata)
 	}
 	if s.FailureReason != nil {
 		v := *s.FailureReason

@@ -32,7 +32,7 @@ type CreateHyperParameterTuningJobInput struct {
 
 	// An array of key-value pairs. You can use tags to categorize your AWS resources
 	// in different ways, for example, by purpose, owner, or environment. For more
-	// information, see AWS Tagging Strategies (https://docs.aws.amazon.com/https:/aws.amazon.com/answers/account-management/aws-tagging-strategies/).
+	// information, see AWS Tagging Strategies (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/).
 	//
 	// Tags that you specify for the tuning job are also added to all training jobs
 	// that the tuning job launches.
@@ -43,6 +43,8 @@ type CreateHyperParameterTuningJobInput struct {
 	// data configuration, output data configuration, resource configuration, and
 	// stopping condition.
 	TrainingJobDefinition *HyperParameterTrainingJobDefinition `type:"structure"`
+
+	TrainingJobDefinitions []HyperParameterTrainingJobDefinition `min:"1" type:"list"`
 
 	// Specifies the configuration for starting the hyperparameter tuning job using
 	// one or more previous tuning jobs as a starting point. The results of previous
@@ -82,6 +84,9 @@ func (s *CreateHyperParameterTuningJobInput) Validate() error {
 	if s.HyperParameterTuningJobName != nil && len(*s.HyperParameterTuningJobName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("HyperParameterTuningJobName", 1))
 	}
+	if s.TrainingJobDefinitions != nil && len(s.TrainingJobDefinitions) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TrainingJobDefinitions", 1))
+	}
 	if s.HyperParameterTuningJobConfig != nil {
 		if err := s.HyperParameterTuningJobConfig.Validate(); err != nil {
 			invalidParams.AddNested("HyperParameterTuningJobConfig", err.(aws.ErrInvalidParams))
@@ -97,6 +102,13 @@ func (s *CreateHyperParameterTuningJobInput) Validate() error {
 	if s.TrainingJobDefinition != nil {
 		if err := s.TrainingJobDefinition.Validate(); err != nil {
 			invalidParams.AddNested("TrainingJobDefinition", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.TrainingJobDefinitions != nil {
+		for i, v := range s.TrainingJobDefinitions {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TrainingJobDefinitions", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 	if s.WarmStartConfig != nil {

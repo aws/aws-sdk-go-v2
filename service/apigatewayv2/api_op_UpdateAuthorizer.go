@@ -25,8 +25,9 @@ type UpdateAuthorizerInput struct {
 	// An integer with a value between [0-3600].
 	AuthorizerResultTtlInSeconds *int64 `locationName:"authorizerResultTtlInSeconds" type:"integer"`
 
-	// The authorizer type. Currently the only valid value is REQUEST, for a Lambda
-	// function using incoming request parameters.
+	// The authorizer type. For WebSocket APIs, specify REQUEST for a Lambda function
+	// using incoming request parameters. For HTTP APIs, specify JWT to use JSON
+	// Web Tokens.
 	AuthorizerType AuthorizerType `locationName:"authorizerType" type:"string" enum:"true"`
 
 	// A string representation of a URI with a length between [1-2048].
@@ -50,11 +51,12 @@ type UpdateAuthorizerInput struct {
 	// A string with a length between [0-1024].
 	IdentityValidationExpression *string `locationName:"identityValidationExpression" type:"string"`
 
+	// Represents the configuration of a JWT authorizer. Required for the JWT authorizer
+	// type. Supported only for HTTP APIs.
+	JwtConfiguration *JWTConfiguration `locationName:"jwtConfiguration" type:"structure"`
+
 	// A string with a length between [1-128].
 	Name *string `locationName:"name" type:"string"`
-
-	// For REQUEST authorizer, this is not defined.
-	ProviderArns []string `locationName:"providerArns" type:"list"`
 }
 
 // String returns the string representation
@@ -126,23 +128,17 @@ func (s UpdateAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "identityValidationExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.JwtConfiguration != nil {
+		v := s.JwtConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "jwtConfiguration", v, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ProviderArns != nil {
-		v := s.ProviderArns
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "providerArns", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
 	}
 	if s.ApiId != nil {
 		v := *s.ApiId
@@ -171,8 +167,9 @@ type UpdateAuthorizerOutput struct {
 	// An integer with a value between [0-3600].
 	AuthorizerResultTtlInSeconds *int64 `locationName:"authorizerResultTtlInSeconds" type:"integer"`
 
-	// The authorizer type. Currently the only valid value is REQUEST, for a Lambda
-	// function using incoming request parameters.
+	// The authorizer type. For WebSocket APIs, specify REQUEST for a Lambda function
+	// using incoming request parameters. For HTTP APIs, specify JWT to use JSON
+	// Web Tokens.
 	AuthorizerType AuthorizerType `locationName:"authorizerType" type:"string" enum:"true"`
 
 	// A string representation of a URI with a length between [1-2048].
@@ -196,11 +193,12 @@ type UpdateAuthorizerOutput struct {
 	// A string with a length between [0-1024].
 	IdentityValidationExpression *string `locationName:"identityValidationExpression" type:"string"`
 
+	// Represents the configuration of a JWT authorizer. Required for the JWT authorizer
+	// type. Supported only for HTTP APIs.
+	JwtConfiguration *JWTConfiguration `locationName:"jwtConfiguration" type:"structure"`
+
 	// A string with a length between [1-128].
 	Name *string `locationName:"name" type:"string"`
-
-	// For REQUEST authorizer, this is not defined.
-	ProviderArns []string `locationName:"providerArns" type:"list"`
 }
 
 // String returns the string representation
@@ -258,23 +256,17 @@ func (s UpdateAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "identityValidationExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.JwtConfiguration != nil {
+		v := s.JwtConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "jwtConfiguration", v, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ProviderArns != nil {
-		v := s.ProviderArns
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "providerArns", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
 	}
 	return nil
 }

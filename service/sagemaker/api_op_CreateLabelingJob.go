@@ -13,8 +13,8 @@ import (
 type CreateLabelingJobInput struct {
 	_ struct{} `type:"structure"`
 
-	// Configures the information required for human workers to complete a labeling
-	// task.
+	// Configures the labeling task and how it is presented to workers; including,
+	// but not limited to price, keywords, and batch size (task count).
 	//
 	// HumanTaskConfig is a required field
 	HumanTaskConfig *HumanTaskConfig `type:"structure" required:"true"`
