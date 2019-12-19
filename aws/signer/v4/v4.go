@@ -563,6 +563,7 @@ func buildQuery(r rule, header http.Header) (url.Values, http.Header) {
 
 	return query, unsignedHeaders
 }
+
 func (ctx *signingCtx) buildCanonicalHeaders(r rule, header http.Header) {
 	var headers []string
 	headers = append(headers, "host")

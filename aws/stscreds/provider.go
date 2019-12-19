@@ -248,6 +248,9 @@ func (p *AssumeRoleProvider) retrieveFn(ctx context.Context) (aws.Credentials, e
 	}
 
 	req := p.Client.AssumeRoleRequest(input)
+	if ctx == nil {
+		ctx = context.Background()
+	}
 	resp, err := req.Send(ctx)
 	if err != nil {
 		return aws.Credentials{Source: ProviderName}, err

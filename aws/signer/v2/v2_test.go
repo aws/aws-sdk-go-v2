@@ -63,7 +63,6 @@ func TestSignRequestWithAndWithoutSession(t *testing.T) {
 	}
 
 	// create request without a SecurityToken (session) in the credentials
-
 	query := newQuery()
 	timestamp := time.Date(2015, 7, 16, 7, 56, 16, 0, time.UTC)
 	builder := signerBuilder{
