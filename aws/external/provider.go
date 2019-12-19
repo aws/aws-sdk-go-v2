@@ -1,6 +1,7 @@
 package external
 
 import (
+	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/ec2metadata"
 )
@@ -320,6 +321,6 @@ type WithEC2MetadataRegion struct {
 }
 
 // GetRegion attempts to retreive the region from EC2 Metadata service.
-func (p WithEC2MetadataRegion) GetRegion() (string, error) {
-	return p.Client.Region()
+func (p WithEC2MetadataRegion) GetRegion(ctx context.Context) (string, error) {
+	return p.Client.Region(ctx)
 }

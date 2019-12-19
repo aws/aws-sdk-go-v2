@@ -13,7 +13,7 @@ func TestStaticCredentialsProviderGet(t *testing.T) {
 		},
 	}
 
-	creds, err := s.Retrieve()
+	creds, err := s.Retrieve(nil)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}

@@ -60,7 +60,7 @@ func TestProvider(t *testing.T) {
 
 	p := ec2rolecreds.NewProvider(ec2metadata.New(cfg))
 
-	creds, err := p.Retrieve()
+	creds, err := p.Retrieve(nil)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -92,7 +92,7 @@ func TestProvider_FailAssume(t *testing.T) {
 
 	p := ec2rolecreds.NewProvider(ec2metadata.New(cfg))
 
-	creds, err := p.Retrieve()
+	creds, err := p.Retrieve(nil)
 	if err == nil {
 		t.Fatalf("expect error, got none")
 	}
@@ -136,7 +136,7 @@ func TestProvider_IsExpired(t *testing.T) {
 		return time.Date(2014, 12, 16, 0, 55, 37, 0, time.UTC)
 	}
 
-	creds, err := p.Retrieve()
+	creds, err := p.Retrieve(nil)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -170,7 +170,7 @@ func TestProvider_ExpiryWindowIsExpired(t *testing.T) {
 		return time.Date(2014, 12, 16, 0, 40, 37, 0, time.UTC)
 	}
 
-	creds, err := p.Retrieve()
+	creds, err := p.Retrieve(nil)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -196,13 +196,13 @@ func BenchmarkProvider(b *testing.B) {
 
 	p := ec2rolecreds.NewProvider(ec2metadata.New(cfg))
 
-	if _, err := p.Retrieve(); err != nil {
+	if _, err := p.Retrieve(nil); err != nil {
 		b.Fatal(err)
 	}
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := p.Retrieve(); err != nil {
+		if _, err := p.Retrieve(nil); err != nil {
 			b.Fatal(err)
 		}
 	}

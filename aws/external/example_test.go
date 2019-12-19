@@ -48,7 +48,7 @@ func ExampleWithCredentialsValue() {
 
 	// Credentials retrieve will be called automatically internally to the SDK
 	// service clients created with the cfg value.
-	creds, err := cfg.Credentials.Retrieve()
+	creds, err := cfg.Credentials.Retrieve(nil)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "failed to get credentials, %v", err)
 		os.Exit(1)
@@ -76,5 +76,5 @@ func ExampleWithMFATokenFunc() {
 	// If assume role credentials with MFA enabled are specified in the shared
 	// 	configuration the MFA token provider function will be called to retrieve
 	// the MFA token for the assume role API call.
-	fmt.Println(cfg.Credentials.Retrieve())
+	fmt.Println(cfg.Credentials.Retrieve(nil))
 }

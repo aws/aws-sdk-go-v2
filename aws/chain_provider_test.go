@@ -30,7 +30,7 @@ func TestChainProvider_WithNames(t *testing.T) {
 		},
 	)
 
-	creds, err := p.Retrieve()
+	creds, err := p.Retrieve(nil)
 	if err != nil {
 		t.Fatalf("expect no error")
 	}
@@ -65,7 +65,7 @@ func TestChainProvider_Retrieve(t *testing.T) {
 		},
 	)
 
-	creds, err := p.Retrieve()
+	creds, err := p.Retrieve(nil)
 	if err != nil {
 		t.Fatalf("expect no error")
 	}
@@ -87,7 +87,7 @@ func TestChainProvider_IsExpired(t *testing.T) {
 		},
 	)
 
-	creds, err := p.Retrieve()
+	creds, err := p.Retrieve(nil)
 	if err != nil {
 		t.Fatalf("expect no error")
 	}
@@ -99,7 +99,7 @@ func TestChainProvider_IsExpired(t *testing.T) {
 func TestChainProvider_WithNoProvider(t *testing.T) {
 	p := NewChainProvider([]CredentialsProvider{})
 
-	_, err := p.Retrieve()
+	_, err := p.Retrieve(nil)
 	if e, a := "no valid providers", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %q error in %q", e, a)
 	}
@@ -117,7 +117,7 @@ func TestChainProvider_WithNoValidProvider(t *testing.T) {
 		},
 	)
 
-	_, err := p.Retrieve()
+	_, err := p.Retrieve(nil)
 	if e, a := "no valid providers", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %q error in %q", e, a)
 	}

@@ -284,7 +284,7 @@ func TestRequest_RecoverExpiredCreds(t *testing.T) {
 	credsProvider := func() aws.CredentialsProvider {
 		creds := expectCreds[0]
 		return awstesting.MockCredentialsProvider{
-			RetrieveFn: func() (aws.Credentials, error) {
+			RetrieveFn: func(ctx context.Context) (aws.Credentials, error) {
 				return creds, nil
 			},
 			InvalidateFn: func() {
@@ -301,7 +301,7 @@ func TestRequest_RecoverExpiredCreds(t *testing.T) {
 	s.Handlers.Unmarshal.PushBack(unmarshal)
 	s.Handlers.UnmarshalError.PushBack(unmarshalError)
 	s.Handlers.Build.PushFront(func(r *aws.Request) {
-		creds, err := r.Config.Credentials.Retrieve()
+		creds, err := r.Config.Credentials.Retrieve(nil)
 		if err != nil {
 			t.Fatalf("expect no error, got %v", err)
 		}
@@ -321,7 +321,7 @@ func TestRequest_RecoverExpiredCreds(t *testing.T) {
 
 	s.Handlers.Sign.Clear()
 	s.Handlers.Sign.PushBack(func(r *aws.Request) {
-		creds, err := r.Config.Credentials.Retrieve()
+		creds, err := r.Config.Credentials.Retrieve(nil)
 		if err != nil {
 			t.Errorf("expect no error, got %v", err)
 		}
@@ -345,7 +345,7 @@ func TestRequest_RecoverExpiredCreds(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	creds, err := r.Config.Credentials.Retrieve()
+	creds, err := r.Config.Credentials.Retrieve(nil)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}

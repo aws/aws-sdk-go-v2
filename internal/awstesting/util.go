@@ -1,6 +1,7 @@
 package awstesting
 
 import (
+	"context"
 	"io"
 	"os"
 	"strings"
@@ -124,13 +125,13 @@ func PopEnv(env []string) {
 // MockCredentialsProvider is a type that can be used to mock out credentials
 // providers
 type MockCredentialsProvider struct {
-	RetrieveFn   func() (aws.Credentials, error)
+	RetrieveFn   func(ctx context.Context) (aws.Credentials, error)
 	InvalidateFn func()
 }
 
 // Retrieve calls the RetrieveFn
-func (p MockCredentialsProvider) Retrieve() (aws.Credentials, error) {
-	return p.RetrieveFn()
+func (p MockCredentialsProvider) Retrieve(ctx context.Context) (aws.Credentials, error) {
+	return p.RetrieveFn(ctx)
 }
 
 // Invalidate calls the InvalidateFn

@@ -140,7 +140,7 @@ func TestResolveCredentialsValue(t *testing.T) {
 		t.Errorf("expect %v provider name, got %v", e, a)
 	}
 
-	creds, err := cfg.Credentials.Retrieve()
+	creds, err := cfg.Credentials.Retrieve(nil)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
