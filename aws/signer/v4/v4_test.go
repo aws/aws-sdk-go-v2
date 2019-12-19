@@ -2,6 +2,7 @@ package v4
 
 import (
 	"bytes"
+	"context"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -426,7 +427,7 @@ func TestResignRequestExpiredCreds(t *testing.T) {
 			SecretAccessKey: "expiredSecret",
 		}
 		return awstesting.MockCredentialsProvider{
-			RetrieveFn: func() (aws.Credentials, error) {
+			RetrieveFn: func(ctx context.Context) (aws.Credentials, error) {
 				return creds, nil
 			},
 			InvalidateFn: func() {
@@ -507,7 +508,7 @@ func TestPreResignRequestExpiredCreds(t *testing.T) {
 			SecretAccessKey: "expiredSecret",
 		}
 		return awstesting.MockCredentialsProvider{
-			RetrieveFn: func() (aws.Credentials, error) {
+			RetrieveFn: func(ctx context.Context) (aws.Credentials, error) {
 				return creds, nil
 			},
 			InvalidateFn: func() {

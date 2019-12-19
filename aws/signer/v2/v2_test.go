@@ -75,7 +75,7 @@ func TestSignRequestWithAndWithoutSession(t *testing.T) {
 
 	signer := builder.BuildSigner()
 
-	err := signer.Sign()
+	err := signer.Sign(nil)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -122,7 +122,7 @@ func TestSignRequestWithAndWithoutSession(t *testing.T) {
 	builder.SessionToken = "SESSION"
 	signer = builder.BuildSigner()
 
-	err = signer.Sign()
+	err = signer.Sign(nil)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -165,7 +165,7 @@ func TestMoreComplexSignRequest(t *testing.T) {
 
 	signer := builder.BuildSigner()
 
-	err := signer.Sign()
+	err := signer.Sign(nil)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}

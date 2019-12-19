@@ -30,6 +30,7 @@
 package endpointcreds
 
 import (
+	"context"
 	"encoding/json"
 	"time"
 
@@ -85,7 +86,7 @@ func New(cfg aws.Config) *Provider {
 
 // Retrieve will attempt to request the credentials from the endpoint the Provider
 // was configured for. And error will be returned if the retrieval fails.
-func (p *Provider) retrieveFn() (aws.Credentials, error) {
+func (p *Provider) retrieveFn(ctx context.Context) (aws.Credentials, error) {
 	resp, err := p.getCredentials()
 	if err != nil {
 		return aws.Credentials{},
