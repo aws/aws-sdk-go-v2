@@ -12,6 +12,10 @@ Breaking Change
 Services
 ---
 
+SDK Breaking Changes
+---
+  * `aws`: Context has been added to EC2Metadata operations and credential provider operations that use EC2Metadata.([#461](https://github.com/aws/aws-sdk-go-v2/pull/461)) 
+
 SDK Features
 ---
 
