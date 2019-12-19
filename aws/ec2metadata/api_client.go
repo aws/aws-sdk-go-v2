@@ -33,10 +33,16 @@ const (
 	tokenHeader = "x-aws-ec2-metadata-token"
 
 	// Named Handler constants
+	contextWithTimeoutHandlerName  = "ContextWithTimeOutHandler"
+	cancelContextHandlerName       = "CancelContextHandler"
 	fetchTokenHandlerName          = "FetchTokenHandler"
 	unmarshalMetadataHandlerName   = "unmarshalMetadataHandler"
 	unmarshalTokenHandlerName      = "unmarshalTokenHandler"
 	enableTokenProviderHandlerName = "enableTokenProviderHandler"
+
+	// client constants
+	defaultClientTimeOut = 5 * time.Second
+	defaultDialerTimeOut = 250 * time.Millisecond
 
 	// TTL constants
 	defaultTTL          = 21600 * time.Second
@@ -64,7 +70,7 @@ func New(config aws.Config) *Client {
 		// environment with the service present. The client should fail fast in
 		// this case.
 		config.HTTPClient = c.WithDialerOptions(func(d *net.Dialer) {
-			d.Timeout = 5 * time.Second
+			d.Timeout = defaultDialerTimeOut
 		})
 	}
 
@@ -87,6 +93,7 @@ func New(config aws.Config) *Client {
 		Name: fetchTokenHandlerName,
 		Fn:   tp.fetchTokenHandler,
 	})
+
 	// NamedHandler for enabling token provider
 	svc.Handlers.Complete.PushBackNamed(aws.NamedHandler{
 		Name: enableTokenProviderHandlerName,

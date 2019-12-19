@@ -23,7 +23,7 @@ func TestClientDisableIMDS(t *testing.T) {
 	cfg.Logger = t
 
 	svc := ec2metadata.New(cfg)
-	resp, err := svc.GetUserData()
+	resp, err := svc.GetUserData(nil)
 	if err == nil {
 		t.Fatalf("expect error, got none")
 	}
