@@ -16,7 +16,7 @@ import (
 
 // getToken uses the duration to return a token for EC2 metadata service,
 // or an error if the request failed.
-func (c *Client) getToken(duration time.Duration, ctx context.Context) (tokenOutput, error) {
+func (c *Client) getToken(ctx context.Context, duration time.Duration) (tokenOutput, error) {
 	op := &aws.Operation{
 		Name:       "GetToken",
 		HTTPMethod: "PUT",
@@ -25,7 +25,7 @@ func (c *Client) getToken(duration time.Duration, ctx context.Context) (tokenOut
 
 	var output tokenOutput
 	req := c.NewRequest(op, nil, &output)
-	if err := addRequestHandlersForContext(req, ctx); err != nil {
+	if err := addRequestHandlersForContext(ctx, req); err != nil {
 		return output, err
 	}
 
@@ -53,7 +53,7 @@ func (c *Client) getToken(duration time.Duration, ctx context.Context) (tokenOut
 // GetMetadata uses the path provided to request information from the EC2
 // instance metadata service. The content will be returned as a string, or
 // error if the request failed.
-func (c *Client) GetMetadata(p string, ctx context.Context) (string, error) {
+func (c *Client) GetMetadata(ctx context.Context, p string) (string, error) {
 	op := &aws.Operation{
 		Name:       "GetMetadata",
 		HTTPMethod: "GET",
@@ -62,7 +62,7 @@ func (c *Client) GetMetadata(p string, ctx context.Context) (string, error) {
 
 	output := &metadataOutput{}
 	req := c.NewRequest(op, nil, output)
-	if err := addRequestHandlersForContext(req, ctx); err != nil {
+	if err := addRequestHandlersForContext(ctx, req); err != nil {
 		return "", err
 	}
 	return output.Content, req.Send()
@@ -80,7 +80,7 @@ func (c *Client) GetUserData(ctx context.Context) (string, error) {
 
 	output := &metadataOutput{}
 	req := c.NewRequest(op, nil, output)
-	if err := addRequestHandlersForContext(req, ctx); err != nil {
+	if err := addRequestHandlersForContext(ctx, req); err != nil {
 		return "", err
 	}
 	return output.Content, req.Send()
@@ -89,7 +89,7 @@ func (c *Client) GetUserData(ctx context.Context) (string, error) {
 // GetDynamicData uses the path provided to request information from the EC2
 // instance metadata service for dynamic data. The content will be returned
 // as a string, or error if the request failed.
-func (c *Client) GetDynamicData(p string, ctx context.Context) (string, error) {
+func (c *Client) GetDynamicData(ctx context.Context, p string) (string, error) {
 	op := &aws.Operation{
 		Name:       "GetDynamicData",
 		HTTPMethod: "GET",
@@ -98,7 +98,7 @@ func (c *Client) GetDynamicData(p string, ctx context.Context) (string, error) {
 
 	output := &metadataOutput{}
 	req := c.NewRequest(op, nil, output)
-	if err := addRequestHandlersForContext(req, ctx); err != nil {
+	if err := addRequestHandlersForContext(ctx, req); err != nil {
 		return "", err
 	}
 	return output.Content, req.Send()
@@ -108,7 +108,7 @@ func (c *Client) GetDynamicData(p string, ctx context.Context) (string, error) {
 // instance. Error is returned if the request fails or is unable to parse
 // the response.
 func (c *Client) GetInstanceIdentityDocument(ctx context.Context) (EC2InstanceIdentityDocument, error) {
-	resp, err := c.GetDynamicData("instance-identity/document", ctx)
+	resp, err := c.GetDynamicData(ctx, "instance-identity/document")
 	if err != nil {
 		return EC2InstanceIdentityDocument{},
 			awserr.New("EC2MetadataRequestError",
@@ -127,7 +127,7 @@ func (c *Client) GetInstanceIdentityDocument(ctx context.Context) (EC2InstanceId
 
 // IAMInfo retrieves IAM info from the metadata API
 func (c *Client) IAMInfo(ctx context.Context) (EC2IAMInfo, error) {
-	resp, err := c.GetMetadata("iam/info", ctx)
+	resp, err := c.GetMetadata(ctx, "iam/info")
 	if err != nil {
 		return EC2IAMInfo{},
 			awserr.New("EC2MetadataRequestError",
@@ -169,7 +169,7 @@ func (c *Client) Region(ctx context.Context) (string, error) {
 // service.  Can be used to determine if application is running within an EC2
 // Instance and the metadata service is available.
 func (c *Client) Available(ctx context.Context) bool {
-	if _, err := c.GetMetadata("instance-id", ctx); err != nil {
+	if _, err := c.GetMetadata(ctx, "instance-id"); err != nil {
 		return false
 	}
 
@@ -214,7 +214,7 @@ func suffixPath(base, add string) string {
 }
 
 // addRequestHandlerForContext adds request handlers for contextWithTimeout and cancelContext
-func addRequestHandlersForContext(r *aws.Request, ctx context.Context) error {
+func addRequestHandlersForContext(ctx context.Context, r *aws.Request) error {
 	if ctx == nil {
 		ctx = context.Background()
 	}
