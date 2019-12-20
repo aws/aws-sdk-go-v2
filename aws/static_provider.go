@@ -34,6 +34,12 @@ func NewStaticCredentialsProvider(key, secret, session string) StaticCredentials
 
 // Retrieve returns the credentials or error if the credentials are invalid.
 func (s StaticCredentialsProvider) Retrieve(ctx context.Context) (Credentials, error) {
+	select {
+	case <-ctx.Done():
+		return Credentials{}, awserr.New(ErrCodeRequestCanceled, "context canceled", ctx.Err())
+	default: // do nothing
+	}
+
 	v := s.Value
 	if v.AccessKeyID == "" || v.SecretAccessKey == "" {
 		return Credentials{Source: StaticCredentialsProviderName}, ErrStaticCredentialsEmpty
