@@ -8,7 +8,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type UpdateWebACLInput struct {
@@ -22,7 +21,7 @@ type UpdateWebACLInput struct {
 	// A default action for the web ACL, either ALLOW or BLOCK. AWS WAF performs
 	// the default action if a request doesn't match the criteria in any of the
 	// rules in a web ACL.
-	DefaultAction *waf.WafAction `type:"structure"`
+	DefaultAction *WafAction `type:"structure"`
 
 	// An array of updates to make to the WebACL.
 	//
@@ -38,7 +37,7 @@ type UpdateWebACLInput struct {
 	//    ActivatedRule|OverrideAction.
 	//
 	//    * WafAction: Contains Type
-	Updates []waf.WebACLUpdate `type:"list"`
+	Updates []WebACLUpdate `type:"list"`
 
 	// The WebACLId of the WebACL that you want to update. WebACLId is returned
 	// by CreateWebACL and by ListWebACLs.

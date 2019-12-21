@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type GetRegexMatchSetInput struct {
@@ -47,7 +46,7 @@ type GetRegexMatchSetOutput struct {
 
 	// Information about the RegexMatchSet that you specified in the GetRegexMatchSet
 	// request. For more information, see RegexMatchTuple.
-	RegexMatchSet *waf.RegexMatchSet `type:"structure"`
+	RegexMatchSet *RegexMatchSet `type:"structure"`
 }
 
 // String returns the string representation

@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type ListRateBasedRulesInput struct {
@@ -54,7 +53,7 @@ type ListRateBasedRulesOutput struct {
 	NextMarker *string `min:"1" type:"string"`
 
 	// An array of RuleSummary objects.
-	Rules []waf.RuleSummary `type:"list"`
+	Rules []RuleSummary `type:"list"`
 }
 
 // String returns the string representation

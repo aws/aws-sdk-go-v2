@@ -8,7 +8,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 // A request to update an XssMatchSet.
@@ -30,7 +29,7 @@ type UpdateXssMatchSetInput struct {
 	//    * FieldToMatch: Contains Data and Type
 	//
 	// Updates is a required field
-	Updates []waf.XssMatchSetUpdate `min:"1" type:"list" required:"true"`
+	Updates []XssMatchSetUpdate `min:"1" type:"list" required:"true"`
 
 	// The XssMatchSetId of the XssMatchSet that you want to update. XssMatchSetId
 	// is returned by CreateXssMatchSet and by ListXssMatchSets.

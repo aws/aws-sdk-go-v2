@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type PutLoggingConfigurationInput struct {
@@ -21,7 +20,7 @@ type PutLoggingConfigurationInput struct {
 	// values: URI, QUERY_STRING, HEADER, or METHOD.
 	//
 	// LoggingConfiguration is a required field
-	LoggingConfiguration *waf.LoggingConfiguration `type:"structure" required:"true"`
+	LoggingConfiguration *LoggingConfiguration `type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -52,7 +51,7 @@ type PutLoggingConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The LoggingConfiguration that you submitted in the request.
-	LoggingConfiguration *waf.LoggingConfiguration `type:"structure"`
+	LoggingConfiguration *LoggingConfiguration `type:"structure"`
 }
 
 // String returns the string representation

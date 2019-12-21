@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type ListSubscribedRuleGroupsInput struct {
@@ -56,7 +55,7 @@ type ListSubscribedRuleGroupsOutput struct {
 	NextMarker *string `min:"1" type:"string"`
 
 	// An array of RuleGroup objects.
-	RuleGroups []waf.SubscribedRuleGroupSummary `type:"list"`
+	RuleGroups []SubscribedRuleGroupSummary `type:"list"`
 }
 
 // String returns the string representation

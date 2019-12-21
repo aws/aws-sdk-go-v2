@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 // A request to create an XssMatchSet.
@@ -65,7 +64,7 @@ type CreateXssMatchSetOutput struct {
 	ChangeToken *string `min:"1" type:"string"`
 
 	// An XssMatchSet.
-	XssMatchSet *waf.XssMatchSet `type:"structure"`
+	XssMatchSet *XssMatchSet `type:"structure"`
 }
 
 // String returns the string representation

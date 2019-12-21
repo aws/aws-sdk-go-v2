@@ -8,7 +8,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type UpdateIPSetInput struct {
@@ -35,7 +34,7 @@ type UpdateIPSetInput struct {
 	// You can insert a maximum of 1000 addresses in a single request.
 	//
 	// Updates is a required field
-	Updates []waf.IPSetUpdate `min:"1" type:"list" required:"true"`
+	Updates []IPSetUpdate `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation

@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type GetWebACLForResourceInput struct {
@@ -53,7 +52,7 @@ type GetWebACLForResourceOutput struct {
 
 	// Information about the web ACL that you specified in the GetWebACLForResource
 	// request. If there is no associated resource, a null WebACLSummary is returned.
-	WebACLSummary *waf.WebACLSummary `type:"structure"`
+	WebACLSummary *WebACLSummary `type:"structure"`
 }
 
 // String returns the string representation
