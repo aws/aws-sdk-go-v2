@@ -15,7 +15,7 @@ type DescribeProblemInput struct {
 	// The ID of the problem.
 	//
 	// ProblemId is a required field
-	ProblemId *string `type:"string" required:"true"`
+	ProblemId *string `min:"38" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -29,6 +29,9 @@ func (s *DescribeProblemInput) Validate() error {
 
 	if s.ProblemId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProblemId"))
+	}
+	if s.ProblemId != nil && len(*s.ProblemId) < 38 {
+		invalidParams.Add(aws.NewErrParamMinLen("ProblemId", 38))
 	}
 
 	if invalidParams.Len() > 0 {

@@ -22,11 +22,15 @@ type UpdateProfileInput struct {
 	// done to the default status.
 	IsDefault *bool `type:"boolean"`
 
-	// The updated locale for the room profile.
+	// The updated locale for the room profile. (This is currently only available
+	// to a limited preview audience.)
 	Locale *string `min:"1" type:"string"`
 
 	// The updated maximum volume limit for the room profile.
 	MaxVolumeLimit *int64 `type:"integer"`
+
+	// The updated meeting room settings of a room profile.
+	MeetingRoomConfiguration *UpdateMeetingRoomConfiguration `type:"structure"`
 
 	// Whether the PSTN setting of the room profile is enabled.
 	PSTNEnabled *bool `type:"boolean"`
@@ -69,6 +73,11 @@ func (s *UpdateProfileInput) Validate() error {
 	}
 	if s.Timezone != nil && len(*s.Timezone) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Timezone", 1))
+	}
+	if s.MeetingRoomConfiguration != nil {
+		if err := s.MeetingRoomConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("MeetingRoomConfiguration", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {

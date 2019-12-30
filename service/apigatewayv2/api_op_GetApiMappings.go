@@ -108,7 +108,7 @@ const opGetApiMappings = "GetApiMappings"
 // GetApiMappingsRequest returns a request value for making API operation for
 // AmazonApiGatewayV2.
 //
-// The API mappings.
+// Gets API mappings.
 //
 //    // Example sending a request using GetApiMappingsRequest.
 //    req := client.GetApiMappingsRequest(params)

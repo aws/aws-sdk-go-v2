@@ -72,6 +72,9 @@ type GetConfigurationSetOutput struct {
 	// send using the configuration set.
 	SendingOptions *SendingOptions `type:"structure"`
 
+	// An object that contains information about your account's suppression preferences.
+	SuppressionOptions *SuppressionOptions `type:"structure"`
+
 	// An array of objects that define the tags (keys and values) that are associated
 	// with the configuration set.
 	Tags []Tag `type:"list"`
@@ -111,6 +114,12 @@ func (s GetConfigurationSetOutput) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "SendingOptions", v, metadata)
+	}
+	if s.SuppressionOptions != nil {
+		v := s.SuppressionOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SuppressionOptions", v, metadata)
 	}
 	if s.Tags != nil {
 		v := s.Tags

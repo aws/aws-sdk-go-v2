@@ -21,7 +21,6 @@ type PutConformancePackInput struct {
 	// ConformancePackName is a required field
 	ConformancePackName *string `min:"1" type:"string" required:"true"`
 
-	// Location of an Amazon S3 bucket where AWS Config can deliver evaluation results.
 	// AWS Config stores intermediate files while processing conformance pack template.
 	//
 	// DeliveryS3Bucket is a required field
@@ -35,12 +34,12 @@ type PutConformancePackInput struct {
 	// 51,200 bytes.
 	//
 	// You can only use a YAML template with one resource type, that is, config
-	// rule.
+	// rule and a remediation action.
 	TemplateBody *string `min:"1" type:"string"`
 
-	// Location of file containing the template body. The uri must point to the
-	// conformance pack template (max size: 300,000 bytes) that is located in an
-	// Amazon S3 bucket in the same region as the conformance pack.
+	// Location of file containing the template body (s3://bucketname/prefix). The
+	// uri must point to the conformance pack template (max size: 300 KB) that is
+	// located in an Amazon S3 bucket in the same region as the conformance pack.
 	//
 	// You must have access to read Amazon S3 bucket.
 	TemplateS3Uri *string `min:"1" type:"string"`
@@ -109,7 +108,8 @@ const opPutConformancePack = "PutConformancePack"
 // AWS Config.
 //
 // Creates or updates a conformance pack. A conformance pack is a collection
-// of AWS Config rules that can be easily deployed in an account and a region.
+// of AWS Config rules that can be easily deployed in an account and a region
+// and across AWS Organization.
 //
 // This API creates a service linked role AWSServiceRoleForConfigConforms in
 // your account. The service linked role is created only when the role does

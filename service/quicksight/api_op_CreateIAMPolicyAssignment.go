@@ -18,26 +18,27 @@ type CreateIAMPolicyAssignmentInput struct {
 	// AssignmentName is a required field
 	AssignmentName *string `min:"1" type:"string" required:"true"`
 
-	// The status of an assignment:
+	// The status of the assignment. Possible values are as follows:
 	//
-	//    * ENABLED - Anything specified in this assignment is used while creating
+	//    * ENABLED - Anything specified in this assignment is used when creating
 	//    the data source.
 	//
-	//    * DISABLED - This assignment isn't used while creating the data source.
+	//    * DISABLED - This assignment isn't used when creating the data source.
 	//
-	//    * DRAFT - Assignment is an unfinished draft and isn't used while creating
+	//    * DRAFT - This assignment is an unfinished draft and isn't used when creating
 	//    the data source.
 	//
 	// AssignmentStatus is a required field
 	AssignmentStatus AssignmentStatus `type:"string" required:"true" enum:"true"`
 
-	// The AWS Account ID where you want to assign QuickSight users or groups to
-	// an IAM policy.
+	// The ID of the AWS account where you want to assign an IAM policy to QuickSight
+	// users or groups.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
-	// QuickSight users and/or groups that you want to assign the policy to.
+	// The QuickSight users, groups, or both that you want to assign the policy
+	// to.
 	Identities map[string][]string `type:"map"`
 
 	// The namespace that contains the assignment.
@@ -45,8 +46,8 @@ type CreateIAMPolicyAssignmentInput struct {
 	// Namespace is a required field
 	Namespace *string `location:"uri" locationName:"Namespace" type:"string" required:"true"`
 
-	// An IAM policy ARN that you want to apply to the QuickSight users and groups
-	// specified in this assignment.
+	// The ARN for the IAM policy to apply to the QuickSight users and groups specified
+	// in this assignment.
 	PolicyArn *string `type:"string"`
 }
 
@@ -143,34 +144,34 @@ func (s CreateIAMPolicyAssignmentInput) MarshalFields(e protocol.FieldEncoder) e
 type CreateIAMPolicyAssignmentOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An ID for the assignment.
+	// The ID for the assignment.
 	AssignmentId *string `type:"string"`
 
-	// The name of the assignment. Must be unique within an AWS account.
+	// The name of the assignment. This name must be unique within the AWS account.
 	AssignmentName *string `min:"1" type:"string"`
 
-	// The status of an assignment:
+	// The status of the assignment. Possible values are as follows:
 	//
-	//    * ENABLED - Anything specified in this assignment is used while creating
+	//    * ENABLED - Anything specified in this assignment is used when creating
 	//    the data source.
 	//
-	//    * DISABLED - This assignment isn't used while creating the data source.
+	//    * DISABLED - This assignment isn't used when creating the data source.
 	//
-	//    * DRAFT - Assignment is an unfinished draft and isn't used while creating
+	//    * DRAFT - This assignment is an unfinished draft and isn't used when creating
 	//    the data source.
 	AssignmentStatus AssignmentStatus `type:"string" enum:"true"`
 
-	// QuickSight users and/or groups that are assigned to the IAM policy.
+	// The QuickSight users, groups, or both that the IAM policy is assigned to.
 	Identities map[string][]string `type:"map"`
 
-	// An IAM policy ARN that is applied to the QuickSight users and groups specified
-	// in this assignment.
+	// The ARN for the IAM policy that is applied to the QuickSight users and groups
+	// specified in this assignment.
 	PolicyArn *string `type:"string"`
 
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -237,16 +238,9 @@ const opCreateIAMPolicyAssignment = "CreateIAMPolicyAssignment"
 // CreateIAMPolicyAssignmentRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Creates an assignment with one specified IAM policy ARN and will assigned
-// to specified groups or users of QuickSight. Users and groups need to be in
-// the same namespace.
-//
-// CLI syntax:
-//
-// aws quicksight create-iam-policy-assignment --aws-account-id=111122223333
-// --assignment-name=helpAssignment --policy-arn=arn:aws:iam::aws:policy/AdministratorAccess
-// --identities="user=user5,engineer123,group=QS-Admin" --namespace=default
-// --region=us-west-2
+// Creates an assignment with one specified IAM policy, identified by its Amazon
+// Resource Name (ARN). This policy will be assigned to specified groups or
+// users of Amazon QuickSight. The users and groups need to be in the same namespace.
 //
 //    // Example sending a request using CreateIAMPolicyAssignmentRequest.
 //    req := client.CreateIAMPolicyAssignmentRequest(params)

@@ -208,7 +208,6 @@ const (
 	UpdateTargetsArchitectureArmv7l  UpdateTargetsArchitecture = "armv7l"
 	UpdateTargetsArchitectureX8664   UpdateTargetsArchitecture = "x86_64"
 	UpdateTargetsArchitectureAarch64 UpdateTargetsArchitecture = "aarch64"
-	UpdateTargetsArchitectureOpenwrt UpdateTargetsArchitecture = "openwrt"
 )
 
 func (enum UpdateTargetsArchitecture) MarshalValue() (string, error) {
@@ -228,6 +227,7 @@ const (
 	UpdateTargetsOperatingSystemUbuntu      UpdateTargetsOperatingSystem = "ubuntu"
 	UpdateTargetsOperatingSystemRaspbian    UpdateTargetsOperatingSystem = "raspbian"
 	UpdateTargetsOperatingSystemAmazonLinux UpdateTargetsOperatingSystem = "amazon_linux"
+	UpdateTargetsOperatingSystemOpenwrt     UpdateTargetsOperatingSystem = "openwrt"
 )
 
 func (enum UpdateTargetsOperatingSystem) MarshalValue() (string, error) {

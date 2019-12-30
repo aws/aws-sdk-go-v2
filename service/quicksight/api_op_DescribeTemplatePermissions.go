@@ -13,7 +13,7 @@ import (
 type DescribeTemplatePermissionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID that contains the template you are describing.
+	// The ID of the AWS account that contains the template that you're describing.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -81,10 +81,10 @@ type DescribeTemplatePermissionsOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
-	// The ARN of the template.
+	// The Amazon Resource Name (ARN) of the template.
 	TemplateArn *string `type:"string"`
 
 	// The ID for the template.
@@ -138,11 +138,6 @@ const opDescribeTemplatePermissions = "DescribeTemplatePermissions"
 // Amazon QuickSight.
 //
 // Describes read and write permissions on a template.
-//
-// CLI syntax:
-//
-// aws quicksight describe-template-permissions —aws-account-id 735340738645
-// —template-id reports_test_template
 //
 //    // Example sending a request using DescribeTemplatePermissionsRequest.
 //    req := client.DescribeTemplatePermissionsRequest(params)

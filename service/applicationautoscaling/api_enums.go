@@ -73,6 +73,9 @@ const (
 	MetricTypeSageMakerVariantInvocationsPerInstance   MetricType = "SageMakerVariantInvocationsPerInstance"
 	MetricTypeEcsserviceAverageCpuutilization          MetricType = "ECSServiceAverageCPUUtilization"
 	MetricTypeEcsserviceAverageMemoryUtilization       MetricType = "ECSServiceAverageMemoryUtilization"
+	MetricTypeAppStreamAverageCapacityUtilization      MetricType = "AppStreamAverageCapacityUtilization"
+	MetricTypeComprehendInferenceUtilization           MetricType = "ComprehendInferenceUtilization"
+	MetricTypeLambdaProvisionedConcurrencyUtilization  MetricType = "LambdaProvisionedConcurrencyUtilization"
 )
 
 func (enum MetricType) MarshalValue() (string, error) {
@@ -105,17 +108,19 @@ type ScalableDimension string
 
 // Enum values for ScalableDimension
 const (
-	ScalableDimensionEcsServiceDesiredCount                     ScalableDimension = "ecs:service:DesiredCount"
-	ScalableDimensionEc2SpotFleetRequestTargetCapacity          ScalableDimension = "ec2:spot-fleet-request:TargetCapacity"
-	ScalableDimensionElasticmapreduceInstancegroupInstanceCount ScalableDimension = "elasticmapreduce:instancegroup:InstanceCount"
-	ScalableDimensionAppstreamFleetDesiredCapacity              ScalableDimension = "appstream:fleet:DesiredCapacity"
-	ScalableDimensionDynamodbTableReadCapacityUnits             ScalableDimension = "dynamodb:table:ReadCapacityUnits"
-	ScalableDimensionDynamodbTableWriteCapacityUnits            ScalableDimension = "dynamodb:table:WriteCapacityUnits"
-	ScalableDimensionDynamodbIndexReadCapacityUnits             ScalableDimension = "dynamodb:index:ReadCapacityUnits"
-	ScalableDimensionDynamodbIndexWriteCapacityUnits            ScalableDimension = "dynamodb:index:WriteCapacityUnits"
-	ScalableDimensionRdsClusterReadReplicaCount                 ScalableDimension = "rds:cluster:ReadReplicaCount"
-	ScalableDimensionSagemakerVariantDesiredInstanceCount       ScalableDimension = "sagemaker:variant:DesiredInstanceCount"
-	ScalableDimensionCustomResourceResourceTypeProperty         ScalableDimension = "custom-resource:ResourceType:Property"
+	ScalableDimensionEcsServiceDesiredCount                                    ScalableDimension = "ecs:service:DesiredCount"
+	ScalableDimensionEc2SpotFleetRequestTargetCapacity                         ScalableDimension = "ec2:spot-fleet-request:TargetCapacity"
+	ScalableDimensionElasticmapreduceInstancegroupInstanceCount                ScalableDimension = "elasticmapreduce:instancegroup:InstanceCount"
+	ScalableDimensionAppstreamFleetDesiredCapacity                             ScalableDimension = "appstream:fleet:DesiredCapacity"
+	ScalableDimensionDynamodbTableReadCapacityUnits                            ScalableDimension = "dynamodb:table:ReadCapacityUnits"
+	ScalableDimensionDynamodbTableWriteCapacityUnits                           ScalableDimension = "dynamodb:table:WriteCapacityUnits"
+	ScalableDimensionDynamodbIndexReadCapacityUnits                            ScalableDimension = "dynamodb:index:ReadCapacityUnits"
+	ScalableDimensionDynamodbIndexWriteCapacityUnits                           ScalableDimension = "dynamodb:index:WriteCapacityUnits"
+	ScalableDimensionRdsClusterReadReplicaCount                                ScalableDimension = "rds:cluster:ReadReplicaCount"
+	ScalableDimensionSagemakerVariantDesiredInstanceCount                      ScalableDimension = "sagemaker:variant:DesiredInstanceCount"
+	ScalableDimensionCustomResourceResourceTypeProperty                        ScalableDimension = "custom-resource:ResourceType:Property"
+	ScalableDimensionComprehendDocumentClassifierEndpointDesiredInferenceUnits ScalableDimension = "comprehend:document-classifier-endpoint:DesiredInferenceUnits"
+	ScalableDimensionLambdaFunctionProvisionedConcurrency                      ScalableDimension = "lambda:function:ProvisionedConcurrency"
 )
 
 func (enum ScalableDimension) MarshalValue() (string, error) {
@@ -160,6 +165,8 @@ const (
 	ServiceNamespaceRds              ServiceNamespace = "rds"
 	ServiceNamespaceSagemaker        ServiceNamespace = "sagemaker"
 	ServiceNamespaceCustomResource   ServiceNamespace = "custom-resource"
+	ServiceNamespaceComprehend       ServiceNamespace = "comprehend"
+	ServiceNamespaceLambda           ServiceNamespace = "lambda"
 )
 
 func (enum ServiceNamespace) MarshalValue() (string, error) {

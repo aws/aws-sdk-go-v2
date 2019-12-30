@@ -14,13 +14,13 @@ import (
 type UpdateDataSetPermissionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS Account ID.
+	// The AWS account ID.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
-	// The ID for the dataset you want to create. This is unique per region per
-	// AWS account.
+	// The ID for the dataset whose permissions you want to update. This ID is unique
+	// per AWS Region for each AWS account.
 	//
 	// DataSetId is a required field
 	DataSetId *string `location:"uri" locationName:"DataSetId" type:"string" required:"true"`
@@ -124,17 +124,17 @@ func (s UpdateDataSetPermissionsInput) MarshalFields(e protocol.FieldEncoder) er
 type UpdateDataSetPermissionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the dataset.
+	// The Amazon Resource Name (ARN) of the dataset.
 	DataSetArn *string `type:"string"`
 
-	// The ID for the dataset you want to create. This is unique per region per
-	// AWS account.
+	// The ID for the dataset whose permissions you want to update. This ID is unique
+	// per AWS Region for each AWS account.
 	DataSetId *string `type:"string"`
 
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -174,20 +174,7 @@ const opUpdateDataSetPermissions = "UpdateDataSetPermissions"
 //
 // Updates the permissions on a dataset.
 //
-// The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/data-set-id
-//
-// CLI syntax:
-//
-// aws quicksight update-data-set-permissions \
-//
-// --aws-account-id=111122223333 \
-//
-// --data-set-id=unique-data-set-id \
-//
-// --grant-permissions='[{"Principal":"arn:aws:quicksight:us-east-1:111122223333:user/default/user1","Actions":["quicksight:DescribeDataSet","quicksight:DescribeDataSetPermissions","quicksight:PassDataSet","quicksight:ListIngestions","quicksight:DescribeIngestion"]}]'
-// \
-//
-// --revoke-permissions='[{"Principal":"arn:aws:quicksight:us-east-1:111122223333:user/default/user2","Actions":["quicksight:UpdateDataSet","quicksight:DeleteDataSet","quicksight:UpdateDataSetPermissions","quicksight:CreateIngestion","quicksight:CancelIngestion"]}]'
+// The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/data-set-id.
 //
 //    // Example sending a request using UpdateDataSetPermissionsRequest.
 //    req := client.UpdateDataSetPermissionsRequest(params)

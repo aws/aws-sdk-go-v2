@@ -24,12 +24,16 @@ type GetServiceSettingsOutput struct {
 	// Indicates whether cross-account discovery has been enabled.
 	EnableCrossAccountsDiscovery *bool `type:"boolean"`
 
+	// Amazon Resource Name (ARN) of the AWS resource share. The License Manager
+	// master account will provide member accounts with access to this share.
+	LicenseManagerResourceShareArn *string `type:"string"`
+
 	// Indicates whether AWS Organizations has been integrated with License Manager
 	// for cross-account discovery.
 	OrganizationConfiguration *OrganizationConfiguration `type:"structure"`
 
 	// Regional S3 bucket path for storing reports, license trail event data, discovery
-	// data, etc.
+	// data, and so on.
 	S3BucketArn *string `type:"string"`
 
 	// SNS topic configured to receive notifications from License Manager.
@@ -46,8 +50,7 @@ const opGetServiceSettings = "GetServiceSettings"
 // GetServiceSettingsRequest returns a request value for making API operation for
 // AWS License Manager.
 //
-// Gets License Manager settings for a region. Exposes the configured S3 bucket,
-// SNS topic, etc., for inspection.
+// Gets the License Manager settings for the current Region.
 //
 //    // Example sending a request using GetServiceSettingsRequest.
 //    req := client.GetServiceSettingsRequest(params)

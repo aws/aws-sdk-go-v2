@@ -36,7 +36,7 @@ type CreateDataSourceInput struct {
 	// A user-supplied name for the DataSource.
 	//
 	// Name is a required field
-	Name *string `locationName:"name" type:"string" required:"true"`
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
 	// Relational database settings.
 	RelationalDatabaseConfig *RelationalDatabaseDataSourceConfig `locationName:"relationalDatabaseConfig" type:"structure"`
@@ -66,6 +66,9 @@ func (s *CreateDataSourceInput) Validate() error {
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))

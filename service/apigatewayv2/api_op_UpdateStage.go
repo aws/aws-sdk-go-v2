@@ -20,6 +20,8 @@ type UpdateStageInput struct {
 	// ApiId is a required field
 	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
 
+	AutoDeploy *bool `locationName:"autoDeploy" type:"boolean"`
+
 	// The identifier.
 	ClientCertificateId *string `locationName:"clientCertificateId" type:"string"`
 
@@ -74,6 +76,12 @@ func (s UpdateStageInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "accessLogSettings", v, metadata)
+	}
+	if s.AutoDeploy != nil {
+		v := *s.AutoDeploy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "autoDeploy", protocol.BoolValue(v), metadata)
 	}
 	if s.ClientCertificateId != nil {
 		v := *s.ClientCertificateId
@@ -144,6 +152,10 @@ type UpdateStageOutput struct {
 	// Settings for logging access in a stage.
 	AccessLogSettings *AccessLogSettings `locationName:"accessLogSettings" type:"structure"`
 
+	ApiGatewayManaged *bool `locationName:"apiGatewayManaged" type:"boolean"`
+
+	AutoDeploy *bool `locationName:"autoDeploy" type:"boolean"`
+
 	// The identifier.
 	ClientCertificateId *string `locationName:"clientCertificateId" type:"string"`
 
@@ -158,6 +170,8 @@ type UpdateStageOutput struct {
 	// A string with a length between [0-1024].
 	Description *string `locationName:"description" type:"string"`
 
+	LastDeploymentStatusMessage *string `locationName:"lastDeploymentStatusMessage" type:"string"`
+
 	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The route settings map.
@@ -169,8 +183,7 @@ type UpdateStageOutput struct {
 	// The stage variable map.
 	StageVariables map[string]string `locationName:"stageVariables" type:"map"`
 
-	// A key value pair of string with key length between[1-128] and value length
-	// between[1-256]
+	// Represents a collection of tags associated with the resource.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
@@ -186,6 +199,18 @@ func (s UpdateStageOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "accessLogSettings", v, metadata)
+	}
+	if s.ApiGatewayManaged != nil {
+		v := *s.ApiGatewayManaged
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "apiGatewayManaged", protocol.BoolValue(v), metadata)
+	}
+	if s.AutoDeploy != nil {
+		v := *s.AutoDeploy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "autoDeploy", protocol.BoolValue(v), metadata)
 	}
 	if s.ClientCertificateId != nil {
 		v := *s.ClientCertificateId
@@ -217,6 +242,12 @@ func (s UpdateStageOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastDeploymentStatusMessage != nil {
+		v := *s.LastDeploymentStatusMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastDeploymentStatusMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastUpdatedDate != nil {
 		v := *s.LastUpdatedDate

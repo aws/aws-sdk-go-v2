@@ -18,7 +18,8 @@ type DescribeDataSourcePermissionsInput struct {
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
-	// The ID of the data source. This is unique per AWS Region per AWS account.
+	// The ID of the data source. This ID is unique per AWS Region for each AWS
+	// account.
 	//
 	// DataSourceId is a required field
 	DataSourceId *string `location:"uri" locationName:"DataSourceId" type:"string" required:"true"`
@@ -72,10 +73,11 @@ func (s DescribeDataSourcePermissionsInput) MarshalFields(e protocol.FieldEncode
 type DescribeDataSourcePermissionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the data source.
+	// The Amazon Resource Name (ARN) of the data source.
 	DataSourceArn *string `type:"string"`
 
-	// The ID of the data source. This is unique per AWS Region per AWS account.
+	// The ID of the data source. This ID is unique per AWS Region for each AWS
+	// account.
 	DataSourceId *string `type:"string"`
 
 	// A list of resource permissions on the data source.
@@ -84,7 +86,7 @@ type DescribeDataSourcePermissionsOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -135,8 +137,6 @@ const opDescribeDataSourcePermissions = "DescribeDataSourcePermissions"
 // Amazon QuickSight.
 //
 // Describes the resource permissions for a data source.
-//
-// The permissions resource is aws:quicksight:region:aws-account-id:datasource/data-source-id
 //
 //    // Example sending a request using DescribeDataSourcePermissionsRequest.
 //    req := client.DescribeDataSourcePermissionsRequest(params)

@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Resource Groups Tagging API.
 //    func myFunc(svc resourcegroupstaggingapiiface.ClientAPI) bool {
-//        // Make svc.GetResources request
+//        // Make svc.DescribeReportCreation request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        resourcegroupstaggingapiiface.ClientPI
 //    }
-//    func (m *mockClientClient) GetResources(input *resourcegroupstaggingapi.GetResourcesInput) (*resourcegroupstaggingapi.GetResourcesOutput, error) {
+//    func (m *mockClientClient) DescribeReportCreation(input *resourcegroupstaggingapi.DescribeReportCreationInput) (*resourcegroupstaggingapi.DescribeReportCreationOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,11 +61,17 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	DescribeReportCreationRequest(*resourcegroupstaggingapi.DescribeReportCreationInput) resourcegroupstaggingapi.DescribeReportCreationRequest
+
+	GetComplianceSummaryRequest(*resourcegroupstaggingapi.GetComplianceSummaryInput) resourcegroupstaggingapi.GetComplianceSummaryRequest
+
 	GetResourcesRequest(*resourcegroupstaggingapi.GetResourcesInput) resourcegroupstaggingapi.GetResourcesRequest
 
 	GetTagKeysRequest(*resourcegroupstaggingapi.GetTagKeysInput) resourcegroupstaggingapi.GetTagKeysRequest
 
 	GetTagValuesRequest(*resourcegroupstaggingapi.GetTagValuesInput) resourcegroupstaggingapi.GetTagValuesRequest
+
+	StartReportCreationRequest(*resourcegroupstaggingapi.StartReportCreationInput) resourcegroupstaggingapi.StartReportCreationRequest
 
 	TagResourcesRequest(*resourcegroupstaggingapi.TagResourcesInput) resourcegroupstaggingapi.TagResourcesRequest
 

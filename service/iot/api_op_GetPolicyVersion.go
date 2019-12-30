@@ -75,7 +75,7 @@ func (s GetPolicyVersionInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetPolicyVersionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The date the policy version was created.
+	// The date the policy was created.
 	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 
 	// The generation ID of the policy version.
@@ -84,7 +84,7 @@ type GetPolicyVersionOutput struct {
 	// Specifies whether the policy version is the default.
 	IsDefaultVersion *bool `locationName:"isDefaultVersion" type:"boolean"`
 
-	// The date the policy version was last modified.
+	// The date the policy was last modified.
 	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp"`
 
 	// The policy ARN.

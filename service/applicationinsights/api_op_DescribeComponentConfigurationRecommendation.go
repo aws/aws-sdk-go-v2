@@ -20,13 +20,13 @@ type DescribeComponentConfigurationRecommendationInput struct {
 	// The name of the resource group.
 	//
 	// ResourceGroupName is a required field
-	ResourceGroupName *string `type:"string" required:"true"`
+	ResourceGroupName *string `min:"1" type:"string" required:"true"`
 
-	// The tier of the application component. Supported tiers include DOT_NET_WORKER,
-	// DOT_NET_WEB, SQL_SERVER, and DEFAULT.
+	// The tier of the application component. Supported tiers include DOT_NET_CORE,
+	// DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER, and DEFAULT.
 	//
 	// Tier is a required field
-	Tier *string `type:"string" required:"true"`
+	Tier Tier `min:"1" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -45,8 +45,10 @@ func (s *DescribeComponentConfigurationRecommendationInput) Validate() error {
 	if s.ResourceGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupName"))
 	}
-
-	if s.Tier == nil {
+	if s.ResourceGroupName != nil && len(*s.ResourceGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceGroupName", 1))
+	}
+	if len(s.Tier) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Tier"))
 	}
 
@@ -61,7 +63,7 @@ type DescribeComponentConfigurationRecommendationOutput struct {
 
 	// The recommended configuration settings of the component. The value is the
 	// escaped JSON of the configuration.
-	ComponentConfiguration *string `type:"string"`
+	ComponentConfiguration *string `min:"1" type:"string"`
 }
 
 // String returns the string representation

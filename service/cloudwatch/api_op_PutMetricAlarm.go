@@ -49,7 +49,7 @@ type PutMetricAlarmInput struct {
 	// ComparisonOperator is a required field
 	ComparisonOperator ComparisonOperator `type:"string" required:"true" enum:"true"`
 
-	// The number of datapoints that must be breaching to trigger the alarm. This
+	// The number of data points that must be breaching to trigger the alarm. This
 	// is used only if you are setting an "M out of N" alarm. In that case, this
 	// value is the M. For more information, see Evaluating an Alarm (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation)
 	// in the Amazon CloudWatch User Guide.

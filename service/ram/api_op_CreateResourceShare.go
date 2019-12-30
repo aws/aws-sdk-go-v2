@@ -26,6 +26,11 @@ type CreateResourceShareInput struct {
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
 
+	// The ARNs of the permissions to associate with the resource share. If you
+	// do not specify an ARN for the permission, AWS RAM automatically attaches
+	// the default version of the permission for each resource type.
+	PermissionArns []string `locationName:"permissionArns" type:"list"`
+
 	// The principals to associate with the resource share. The possible values
 	// are IDs of AWS accounts, the ARN of an OU or organization from AWS Organizations.
 	Principals []string `locationName:"principals" type:"list"`
@@ -78,6 +83,18 @@ func (s CreateResourceShareInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PermissionArns != nil {
+		v := s.PermissionArns
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "permissionArns", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	if s.Principals != nil {
 		v := s.Principals

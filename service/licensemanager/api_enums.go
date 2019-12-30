@@ -61,9 +61,11 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeEc2Instance ResourceType = "EC2_INSTANCE"
-	ResourceTypeEc2Host     ResourceType = "EC2_HOST"
-	ResourceTypeEc2Ami      ResourceType = "EC2_AMI"
+	ResourceTypeEc2Instance                   ResourceType = "EC2_INSTANCE"
+	ResourceTypeEc2Host                       ResourceType = "EC2_HOST"
+	ResourceTypeEc2Ami                        ResourceType = "EC2_AMI"
+	ResourceTypeRds                           ResourceType = "RDS"
+	ResourceTypeSystemsManagerManagedInstance ResourceType = "SYSTEMS_MANAGER_MANAGED_INSTANCE"
 )
 
 func (enum ResourceType) MarshalValue() (string, error) {

@@ -13,6 +13,270 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// A structure that encapsulates a signaling channel's metadata and properties.
+type ChannelInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the signaling channel.
+	ChannelARN *string `min:"1" type:"string"`
+
+	// The name of the signaling channel.
+	ChannelName *string `min:"1" type:"string"`
+
+	// Current status of the signaling channel.
+	ChannelStatus Status `type:"string" enum:"true"`
+
+	// The type of the signaling channel.
+	ChannelType ChannelType `type:"string" enum:"true"`
+
+	// The time at which the signaling channel was created.
+	CreationTime *time.Time `type:"timestamp"`
+
+	// A structure that contains the configuration for the SINGLE_MASTER channel
+	// type.
+	SingleMasterConfiguration *SingleMasterConfiguration `type:"structure"`
+
+	// The current version of the signaling channel.
+	Version *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ChannelInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ChannelInfo) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ChannelARN != nil {
+		v := *s.ChannelARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ChannelARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ChannelName != nil {
+		v := *s.ChannelName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ChannelName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ChannelStatus) > 0 {
+		v := s.ChannelStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ChannelStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.ChannelType) > 0 {
+		v := s.ChannelType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ChannelType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.SingleMasterConfiguration != nil {
+		v := s.SingleMasterConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SingleMasterConfiguration", v, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An optional input parameter for the ListSignalingChannels API. When this
+// parameter is specified while invoking ListSignalingChannels, the API returns
+// only the channels that satisfy a condition specified in ChannelNameCondition.
+type ChannelNameCondition struct {
+	_ struct{} `type:"structure"`
+
+	// A comparison operator. Currently, you can only specify the BEGINS_WITH operator,
+	// which finds signaling channels whose names begin with a given prefix.
+	ComparisonOperator ComparisonOperator `type:"string" enum:"true"`
+
+	// A value to compare.
+	ComparisonValue *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ChannelNameCondition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ChannelNameCondition) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ChannelNameCondition"}
+	if s.ComparisonValue != nil && len(*s.ComparisonValue) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ComparisonValue", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ChannelNameCondition) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ComparisonOperator) > 0 {
+		v := s.ComparisonOperator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ComparisonOperator", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ComparisonValue != nil {
+		v := *s.ComparisonValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ComparisonValue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that describes the endpoint of the signaling channel returned by
+// the GetSignalingChannelEndpoint API.
+type ResourceEndpointListItem struct {
+	_ struct{} `type:"structure"`
+
+	// The protocol of the signaling channel returned by the GetSignalingChannelEndpoint
+	// API.
+	Protocol ChannelProtocol `type:"string" enum:"true"`
+
+	// The endpoint of the signaling channel returned by the GetSignalingChannelEndpoint
+	// API.
+	ResourceEndpoint *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ResourceEndpointListItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResourceEndpointListItem) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Protocol) > 0 {
+		v := s.Protocol
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Protocol", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ResourceEndpoint != nil {
+		v := *s.ResourceEndpoint
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ResourceEndpoint", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that contains the endpoint configuration for the SINGLE_MASTER
+// channel type.
+type SingleMasterChannelEndpointConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// This property is used to determine the nature of communication over this
+	// SINGLE_MASTER signaling channel. If WSS is specified, this API returns a
+	// websocket endpoint. If HTTPS is specified, this API returns an HTTPS endpoint.
+	Protocols []ChannelProtocol `min:"1" type:"list"`
+
+	// This property is used to determine messaging permissions in this SINGLE_MASTER
+	// signaling channel. If MASTER is specified, this API returns an endpoint that
+	// a client can use to receive offers from and send answers to any of the viewers
+	// on this signaling channel. If VIEWER is specified, this API returns an endpoint
+	// that a client can use only to send offers to another MASTER client on this
+	// signaling channel.
+	Role ChannelRole `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s SingleMasterChannelEndpointConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SingleMasterChannelEndpointConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SingleMasterChannelEndpointConfiguration"}
+	if s.Protocols != nil && len(s.Protocols) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Protocols", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SingleMasterChannelEndpointConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Protocols != nil {
+		v := s.Protocols
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Protocols", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.Role) > 0 {
+		v := s.Role
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Role", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// A structure that contains the configuration for the SINGLE_MASTER channel
+// type.
+type SingleMasterConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The period of time a signaling channel retains underlivered messages before
+	// they are discarded.
+	MessageTtlSeconds *int64 `min:"5" type:"integer"`
+}
+
+// String returns the string representation
+func (s SingleMasterConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SingleMasterConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SingleMasterConfiguration"}
+	if s.MessageTtlSeconds != nil && *s.MessageTtlSeconds < 5 {
+		invalidParams.Add(aws.NewErrParamMinValue("MessageTtlSeconds", 5))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SingleMasterConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MessageTtlSeconds != nil {
+		v := *s.MessageTtlSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MessageTtlSeconds", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // An object describing a Kinesis video stream.
 type StreamInfo struct {
 	_ struct{} `type:"structure"`
@@ -157,6 +421,64 @@ func (s StreamNameCondition) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ComparisonValue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A key and value pair that is associated with the specified signaling channel.
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// The key of the tag that is associated with the specified signaling channel.
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
+
+	// The value of the tag that is associated with the specified signaling channel.
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

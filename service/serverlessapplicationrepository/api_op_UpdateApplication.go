@@ -116,6 +116,8 @@ type UpdateApplicationOutput struct {
 
 	HomePageUrl *string `locationName:"homePageUrl" type:"string"`
 
+	IsVerifiedAuthor *bool `locationName:"isVerifiedAuthor" type:"boolean"`
+
 	Labels []string `locationName:"labels" type:"list"`
 
 	LicenseUrl *string `locationName:"licenseUrl" type:"string"`
@@ -125,6 +127,8 @@ type UpdateApplicationOutput struct {
 	ReadmeUrl *string `locationName:"readmeUrl" type:"string"`
 
 	SpdxLicenseId *string `locationName:"spdxLicenseId" type:"string"`
+
+	VerifiedAuthorUrl *string `locationName:"verifiedAuthorUrl" type:"string"`
 
 	// Application version details.
 	Version *Version `locationName:"version" type:"structure"`
@@ -167,6 +171,12 @@ func (s UpdateApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "homePageUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.IsVerifiedAuthor != nil {
+		v := *s.IsVerifiedAuthor
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "isVerifiedAuthor", protocol.BoolValue(v), metadata)
+	}
 	if s.Labels != nil {
 		v := s.Labels
 
@@ -202,6 +212,12 @@ func (s UpdateApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "spdxLicenseId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VerifiedAuthorUrl != nil {
+		v := *s.VerifiedAuthorUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "verifiedAuthorUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Version != nil {
 		v := s.Version

@@ -69,6 +69,11 @@ func (s *GetRightsizingRecommendationInput) Validate() error {
 	if s.Service == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Service"))
 	}
+	if s.Filter != nil {
+		if err := s.Filter.Validate(); err != nil {
+			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams

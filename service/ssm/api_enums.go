@@ -212,6 +212,23 @@ func (enum AutomationType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type CalendarState string
+
+// Enum values for CalendarState
+const (
+	CalendarStateOpen   CalendarState = "OPEN"
+	CalendarStateClosed CalendarState = "CLOSED"
+)
+
+func (enum CalendarState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CalendarState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CommandFilterKey string
 
 // Enum values for CommandFilterKey
@@ -416,6 +433,7 @@ type DocumentFormat string
 const (
 	DocumentFormatYaml DocumentFormat = "YAML"
 	DocumentFormatJson DocumentFormat = "JSON"
+	DocumentFormatText DocumentFormat = "TEXT"
 )
 
 func (enum DocumentFormat) MarshalValue() (string, error) {
@@ -502,11 +520,15 @@ type DocumentType string
 
 // Enum values for DocumentType
 const (
-	DocumentTypeCommand    DocumentType = "Command"
-	DocumentTypePolicy     DocumentType = "Policy"
-	DocumentTypeAutomation DocumentType = "Automation"
-	DocumentTypeSession    DocumentType = "Session"
-	DocumentTypePackage    DocumentType = "Package"
+	DocumentTypeCommand                        DocumentType = "Command"
+	DocumentTypePolicy                         DocumentType = "Policy"
+	DocumentTypeAutomation                     DocumentType = "Automation"
+	DocumentTypeSession                        DocumentType = "Session"
+	DocumentTypePackage                        DocumentType = "Package"
+	DocumentTypeApplicationConfiguration       DocumentType = "ApplicationConfiguration"
+	DocumentTypeApplicationConfigurationSchema DocumentType = "ApplicationConfigurationSchema"
+	DocumentTypeDeploymentStrategy             DocumentType = "DeploymentStrategy"
+	DocumentTypeChangeCalendar                 DocumentType = "ChangeCalendar"
 )
 
 func (enum DocumentType) MarshalValue() (string, error) {
@@ -984,12 +1006,13 @@ type PatchComplianceDataState string
 
 // Enum values for PatchComplianceDataState
 const (
-	PatchComplianceDataStateInstalled         PatchComplianceDataState = "INSTALLED"
-	PatchComplianceDataStateInstalledOther    PatchComplianceDataState = "INSTALLED_OTHER"
-	PatchComplianceDataStateInstalledRejected PatchComplianceDataState = "INSTALLED_REJECTED"
-	PatchComplianceDataStateMissing           PatchComplianceDataState = "MISSING"
-	PatchComplianceDataStateNotApplicable     PatchComplianceDataState = "NOT_APPLICABLE"
-	PatchComplianceDataStateFailed            PatchComplianceDataState = "FAILED"
+	PatchComplianceDataStateInstalled              PatchComplianceDataState = "INSTALLED"
+	PatchComplianceDataStateInstalledOther         PatchComplianceDataState = "INSTALLED_OTHER"
+	PatchComplianceDataStateInstalledPendingReboot PatchComplianceDataState = "INSTALLED_PENDING_REBOOT"
+	PatchComplianceDataStateInstalledRejected      PatchComplianceDataState = "INSTALLED_REJECTED"
+	PatchComplianceDataStateMissing                PatchComplianceDataState = "MISSING"
+	PatchComplianceDataStateNotApplicable          PatchComplianceDataState = "NOT_APPLICABLE"
+	PatchComplianceDataStateFailed                 PatchComplianceDataState = "FAILED"
 )
 
 func (enum PatchComplianceDataState) MarshalValue() (string, error) {
@@ -1151,6 +1174,23 @@ func (enum PlatformType) MarshalValue() (string, error) {
 }
 
 func (enum PlatformType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RebootOption string
+
+// Enum values for RebootOption
+const (
+	RebootOptionRebootIfNeeded RebootOption = "RebootIfNeeded"
+	RebootOptionNoReboot       RebootOption = "NoReboot"
+)
+
+func (enum RebootOption) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RebootOption) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

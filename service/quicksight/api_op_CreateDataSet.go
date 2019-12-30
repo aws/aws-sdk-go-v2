@@ -14,22 +14,22 @@ import (
 type CreateDataSetInput struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS Account ID.
+	// The AWS account ID.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
-	// Groupings of columns that work together in certain QuickSight features. Currently
+	// Groupings of columns that work together in certain QuickSight features. Currently,
 	// only geospatial hierarchy is supported.
 	ColumnGroups []ColumnGroup `min:"1" type:"list"`
 
-	// An ID for the dataset you want to create. This is unique per region per AWS
-	// account.
+	// An ID for the dataset that you want to create. This ID is unique per AWS
+	// Region for each AWS account.
 	//
 	// DataSetId is a required field
 	DataSetId *string `type:"string" required:"true"`
 
-	// Indicates whether or not you want to import the data into SPICE.
+	// Indicates whether you want to import the data into SPICE.
 	//
 	// ImportMode is a required field
 	ImportMode DataSetImportMode `type:"string" required:"true" enum:"true"`
@@ -51,7 +51,7 @@ type CreateDataSetInput struct {
 	// PhysicalTableMap is a required field
 	PhysicalTableMap map[string]PhysicalTable `min:"1" type:"map" required:"true"`
 
-	// Row-level security configuration on the data you want to create.
+	// The row-level security configuration for the data that you want to create.
 	RowLevelPermissionDataSet *RowLevelPermissionDataSet `type:"structure"`
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned
@@ -254,25 +254,25 @@ func (s CreateDataSetInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateDataSetOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the dataset.
+	// The Amazon Resource Name (ARN) of the dataset.
 	Arn *string `type:"string"`
 
-	// The ID for the dataset you want to create. This is unique per region per
-	// AWS account.
+	// The ID for the dataset that you want to create. This ID is unique per AWS
+	// Region for each AWS account.
 	DataSetId *string `type:"string"`
 
-	// The Amazon Resource Name (ARN) for the ingestion, which is triggered as a
-	// result of dataset creation if the import mode is SPICE
+	// The ARN for the ingestion, which is triggered as a result of dataset creation
+	// if the import mode is SPICE.
 	IngestionArn *string `type:"string"`
 
 	// The ID of the ingestion, which is triggered as a result of dataset creation
-	// if the import mode is SPICE
+	// if the import mode is SPICE.
 	IngestionId *string `type:"string"`
 
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -323,44 +323,6 @@ const opCreateDataSet = "CreateDataSet"
 // Amazon QuickSight.
 //
 // Creates a dataset.
-//
-// CLI syntax:
-//
-// aws quicksight create-data-set \
-//
-// --aws-account-id=111122223333 \
-//
-// --data-set-id=unique-data-set-id \
-//
-// --name='My dataset' \
-//
-// --import-mode=SPICE \
-//
-// --physical-table-map='{
-//
-// "physical-table-id": {
-//
-// "RelationalTable": {
-//
-// "DataSourceArn": "arn:aws:quicksight:us-west-2:111111111111:datasource/data-source-id",
-//
-// "Name": "table1",
-//
-// "InputColumns": [
-//
-// {
-//
-// "Name": "column1",
-//
-// "Type": "STRING"
-//
-// }
-//
-// ]
-//
-// }
-//
-// }'
 //
 //    // Example sending a request using CreateDataSetRequest.
 //    req := client.CreateDataSetRequest(params)

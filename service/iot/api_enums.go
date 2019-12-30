@@ -395,6 +395,41 @@ func (enum DeviceCertificateUpdateAction) MarshalValueBuf(b []byte) ([]byte, err
 	return append(b, enum...), nil
 }
 
+type DomainConfigurationStatus string
+
+// Enum values for DomainConfigurationStatus
+const (
+	DomainConfigurationStatusEnabled  DomainConfigurationStatus = "ENABLED"
+	DomainConfigurationStatusDisabled DomainConfigurationStatus = "DISABLED"
+)
+
+func (enum DomainConfigurationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DomainConfigurationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DomainType string
+
+// Enum values for DomainType
+const (
+	DomainTypeEndpoint        DomainType = "ENDPOINT"
+	DomainTypeAwsManaged      DomainType = "AWS_MANAGED"
+	DomainTypeCustomerManaged DomainType = "CUSTOMER_MANAGED"
+)
+
+func (enum DomainType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DomainType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DynamicGroupStatus string
 
 // Enum values for DynamicGroupStatus
@@ -690,6 +725,8 @@ const (
 	ResourceTypeCognitoIdentityPool ResourceType = "COGNITO_IDENTITY_POOL"
 	ResourceTypeClientId            ResourceType = "CLIENT_ID"
 	ResourceTypeAccountSettings     ResourceType = "ACCOUNT_SETTINGS"
+	ResourceTypeRoleAlias           ResourceType = "ROLE_ALIAS"
+	ResourceTypeIamRole             ResourceType = "IAM_ROLE"
 )
 
 func (enum ResourceType) MarshalValue() (string, error) {
@@ -697,6 +734,41 @@ func (enum ResourceType) MarshalValue() (string, error) {
 }
 
 func (enum ResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ServerCertificateStatus string
+
+// Enum values for ServerCertificateStatus
+const (
+	ServerCertificateStatusInvalid ServerCertificateStatus = "INVALID"
+	ServerCertificateStatusValid   ServerCertificateStatus = "VALID"
+)
+
+func (enum ServerCertificateStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ServerCertificateStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ServiceType string
+
+// Enum values for ServiceType
+const (
+	ServiceTypeData               ServiceType = "DATA"
+	ServiceTypeCredentialProvider ServiceType = "CREDENTIAL_PROVIDER"
+	ServiceTypeJobs               ServiceType = "JOBS"
+)
+
+func (enum ServiceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ServiceType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

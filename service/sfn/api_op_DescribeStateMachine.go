@@ -55,6 +55,8 @@ type DescribeStateMachineOutput struct {
 	// Definition is a required field
 	Definition *string `locationName:"definition" min:"1" type:"string" required:"true" sensitive:"true"`
 
+	LoggingConfiguration *LoggingConfiguration `locationName:"loggingConfiguration" type:"structure"`
+
 	// The name of the state machine.
 	//
 	// A name must not contain:
@@ -86,6 +88,9 @@ type DescribeStateMachineOutput struct {
 
 	// The current status of the state machine.
 	Status StateMachineStatus `locationName:"status" type:"string" enum:"true"`
+
+	// Type is a required field
+	Type StateMachineType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation

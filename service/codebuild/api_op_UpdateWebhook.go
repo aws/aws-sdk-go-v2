@@ -21,7 +21,7 @@ type UpdateWebhookInput struct {
 	BranchFilter *string `locationName:"branchFilter" type:"string"`
 
 	// An array of arrays of WebhookFilter objects used to determine if a webhook
-	// event can trigger a build. A filter group must pcontain at least one EVENT
+	// event can trigger a build. A filter group must contain at least one EVENT
 	// WebhookFilter.
 	FilterGroups [][]WebhookFilter `locationName:"filterGroups" type:"list"`
 

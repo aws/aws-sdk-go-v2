@@ -59,6 +59,7 @@
     "DescribePatchProperties": "<p>Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for actions such as <a>CreatePatchBaseline</a>, <a>UpdatePatchBaseline</a>, <a>DescribeAvailablePatches</a>, and <a>DescribePatchBaselines</a>.</p> <p>The following section lists the properties that can be used in filters for each major operating system type:</p> <dl> <dt>WINDOWS</dt> <dd> <p>Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY</p> </dd> <dt>AMAZON_LINUX</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>AMAZON_LINUX_2</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>UBUNTU </dt> <dd> <p>Valid properties: PRODUCT, PRIORITY</p> </dd> <dt>REDHAT_ENTERPRISE_LINUX</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>SUSE</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>CENTOS</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> </dl>",
     "DescribeSessions": "<p>Retrieves a list of all active sessions (both connected and disconnected) or terminated sessions from the past 30 days.</p>",
     "GetAutomationExecution": "<p>Get detailed information about a particular Automation execution.</p>",
+    "GetCalendarState": "<p>Gets the state of the AWS Systems Manager Change Calendar at an optional, specified time. If you specify a time, <code>GetCalendarState</code> returns the state of the calendar at a specific time, and returns the next time that the Change Calendar state will transition. If you do not specify a time, <code>GetCalendarState</code> assumes the current time. Change Calendar entries have two possible states: <code>OPEN</code> or <code>CLOSED</code>. For more information about Systems Manager Change Calendar, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar.html\">AWS Systems Manager Change Calendar</a> in the <i>AWS Systems Manager User Guide</i>.</p>",
     "GetCommandInvocation": "<p>Returns detailed information about command execution for an invocation or plugin. </p>",
     "GetConnectionStatus": "<p>Retrieves the Session Manager connection status for an instance to determine whether it is connected and ready to receive Session Manager connections.</p>",
     "GetDefaultPatchBaseline": "<p>Retrieves the default patch baseline. Note that Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system.</p> <p>If you do not specify an operating system value, the default patch baseline for Windows is returned.</p>",
@@ -121,6 +122,7 @@
     "UpdateManagedInstanceRole": "<p>Assigns or changes an Amazon Identity and Access Management (IAM) role for the managed instance.</p>",
     "UpdateOpsItem": "<p>Edit or change an OpsItem. You must have permission in AWS Identity and Access Management (IAM) to update an OpsItem. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html\">Getting Started with OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">AWS Systems Manager OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>. </p>",
     "UpdatePatchBaseline": "<p>Modifies an existing patch baseline. Fields not specified in the request are left unchanged.</p> <note> <p>For information about valid key and value pairs in <code>PatchFilters</code> for each supported operating system type, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html\">PatchFilter</a>.</p> </note>",
+    "UpdateResourceDataSync": "<p>Update a resource data sync. After you create a resource data sync for a Region, you can't change the account options for that sync. For example, if you create a sync in the us-east-2 (Ohio) Region and you choose the Include only the current account option, you can't edit that sync later and choose the Include all accounts from my AWS Organizations configuration option. Instead, you must delete the first resource data sync, and create a new one.</p>",
     "UpdateServiceSetting": "<p> <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an AWS service charges money to the account based on feature or service usage, then the AWS service team might create a default setting of \"false\". This means the user can't use this feature unless they change the setting to \"true\" and intentionally opt in for a paid feature.</p> <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>, but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code> permission for the setting. Use the <a>GetServiceSetting</a> API action to view the current value. Or, use the <a>ResetServiceSetting</a> to change the value back to the original value defined by the AWS service team.</p> <p>Update the service setting for the account. </p>"
   },
   "shapes": {
@@ -133,7 +135,8 @@
     "AccountId": {
       "base": null,
       "refs": {
-        "AccountIdList$member": null
+        "AccountIdList$member": null,
+        "AccountSharingInfo$AccountId": "<p>The AWS account ID where the current document is shared.</p>"
       }
     },
     "AccountIdList": {
@@ -142,6 +145,18 @@
         "DescribeDocumentPermissionResponse$AccountIds": "<p>The account IDs that have permission to use this document. The ID can be either an AWS account or <i>All</i>.</p>",
         "ModifyDocumentPermissionRequest$AccountIdsToAdd": "<p>The AWS user accounts that should have access to the document. The account IDs can either be a group of account IDs or <i>All</i>.</p>",
         "ModifyDocumentPermissionRequest$AccountIdsToRemove": "<p>The AWS user accounts that should no longer have access to the document. The AWS user account can either be a group of account IDs or <i>All</i>. This action has a higher priority than <i>AccountIdsToAdd</i>. If you specify an account ID to add and the same ID to remove, the system removes access to the document.</p>"
+      }
+    },
+    "AccountSharingInfo": {
+      "base": "<p>Information includes the AWS account ID where the current document is shared and the version shared with that account.</p>",
+      "refs": {
+        "AccountSharingInfoList$member": null
+      }
+    },
+    "AccountSharingInfoList": {
+      "base": "<p>A list of of AWS accounts where the current document is shared and the version shared with each account.</p>",
+      "refs": {
+        "DescribeDocumentPermissionResponse$AccountSharingInfoList": "<p>A list of of AWS accounts where the current document is shared and the version shared with each account.</p>"
       }
     },
     "Accounts": {
@@ -816,6 +831,7 @@
         "Activation$Expired": "<p>Whether or not the activation is expired.</p>",
         "AutomationExecution$StepExecutionsTruncated": "<p>A boolean value that indicates if the response contains the full list of the Automation step executions. If true, use the DescribeAutomationStepExecutions API action to get the full list of step executions.</p>",
         "CreatePatchBaselineRequest$ApprovedPatchesEnableNonSecurity": "<p>Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.</p>",
+        "DeleteDocumentRequest$Force": "<p>Some SSM document types require that you specify a <code>Force</code> flag before you can delete the document. For example, you must specify a <code>Force</code> flag to delete a document of type <code>ApplicationConfigurationSchema</code>. You can restrict access to the <code>Force</code> flag in an AWS Identity and Access Management (IAM) policy.</p>",
         "DeregisterTargetFromMaintenanceWindowRequest$Safe": "<p>The system checks if the target is being referenced by a task. If the target is being referenced, the system returns an error and does not deregister the target from the maintenance window.</p>",
         "DescribeAutomationStepExecutionsRequest$ReverseOrder": "<p>A boolean that indicates whether to list step executions in reverse order by start time. The default value is false.</p>",
         "DocumentVersionInfo$IsDefaultVersion": "<p>An identifier for the default version of the document.</p>",
@@ -838,6 +854,24 @@
         "UpdatePatchBaselineRequest$ApprovedPatchesEnableNonSecurity": "<p>Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.</p>",
         "UpdatePatchBaselineRequest$Replace": "<p>If True, then all fields that are required by the CreatePatchBaseline action are also required for this API request. Optional fields that are not specified are set to null.</p>",
         "UpdatePatchBaselineResult$ApprovedPatchesEnableNonSecurity": "<p>Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.</p>"
+      }
+    },
+    "CalendarNameOrARN": {
+      "base": null,
+      "refs": {
+        "CalendarNameOrARNList$member": null
+      }
+    },
+    "CalendarNameOrARNList": {
+      "base": null,
+      "refs": {
+        "GetCalendarStateRequest$CalendarNames": "<p>The names or Amazon Resource Names (ARNs) of the Systems Manager documents that represent the calendar entries for which you want to get the state.</p>"
+      }
+    },
+    "CalendarState": {
+      "base": null,
+      "refs": {
+        "GetCalendarStateResponse$State": "<p>The state of the calendar. An <code>OPEN</code> calendar indicates that actions are allowed to proceed, and a <code>CLOSED</code> calendar indicates that actions are not allowed to proceed.</p>"
       }
     },
     "CancelCommandRequest": {
@@ -1386,6 +1420,7 @@
         "InstanceInformation$LastSuccessfulAssociationExecutionDate": "<p>The last date the association was successfully run.</p>",
         "InstancePatchState$OperationStartTime": "<p>The time the most recent patching operation was started on the instance.</p>",
         "InstancePatchState$OperationEndTime": "<p>The time the most recent patching operation completed on the instance.</p>",
+        "InstancePatchState$LastNoRebootInstallOperationTime": "<p>Reserved for future use. </p>",
         "MaintenanceWindowExecution$StartTime": "<p>The time the execution started.</p>",
         "MaintenanceWindowExecution$EndTime": "<p>The time the execution finished.</p>",
         "MaintenanceWindowExecutionTaskIdentity$StartTime": "<p>The time the task execution started.</p>",
@@ -1917,9 +1952,11 @@
         "DescribeDocumentRequest$Name": "<p>The name of the Systems Manager document.</p>",
         "DocumentDescription$Name": "<p>The name of the Systems Manager document.</p>",
         "DocumentIdentifier$Name": "<p>The name of the Systems Manager document.</p>",
+        "DocumentRequires$Name": "<p>The name of the required SSM document. The name can be an Amazon Resource Name (ARN).</p>",
         "GetDocumentRequest$Name": "<p>The name of the Systems Manager document.</p>",
         "GetDocumentResult$Name": "<p>The name of the Systems Manager document.</p>",
         "InstanceAssociationStatusInfo$Name": "<p>The name of the association.</p>",
+        "ListDocumentVersionsRequest$Name": "<p>The name of the document. You can specify an Amazon Resource Name (ARN).</p>",
         "SendCommandRequest$DocumentName": "<p>Required. The name of the Systems Manager document to run. This can be a public document or a custom document.</p>",
         "StartAutomationExecutionRequest$DocumentName": "<p>The name of the Automation document to use for this execution.</p>",
         "StartSessionRequest$DocumentName": "<p>The name of the SSM document to define the parameters and plugin settings for the session. For example, <code>SSM-SessionManagerRunShell</code>. If no document name is provided, a shell to the instance is launched by default.</p>",
@@ -2067,7 +2104,6 @@
         "DocumentDefaultVersionDescription$Name": "<p>The name of the document.</p>",
         "DocumentVersionInfo$Name": "<p>The document name.</p>",
         "GetCommandInvocationResult$DocumentName": "<p>The name of the document that was run. For example, AWS-RunShellScript.</p>",
-        "ListDocumentVersionsRequest$Name": "<p>The name of the document about which you want version information.</p>",
         "ModifyDocumentPermissionRequest$Name": "<p>The name of the document that you want to share.</p>",
         "Session$DocumentName": "<p>The name of the Session Manager SSM document used to define the parameters and plugin settings for the session. For example, <code>SSM-SessionManagerRunShell</code>.</p>",
         "UpdateDocumentDefaultVersionRequest$Name": "<p>The name of a custom document that you want to set as the default version.</p>",
@@ -2129,6 +2165,21 @@
         "ModifyDocumentPermissionRequest$PermissionType": "<p>The permission type for the document. The permission type can be <i>Share</i>.</p>"
       }
     },
+    "DocumentRequires": {
+      "base": "<p>An SSM document required by the current document.</p>",
+      "refs": {
+        "DocumentRequiresList$member": null
+      }
+    },
+    "DocumentRequiresList": {
+      "base": null,
+      "refs": {
+        "CreateDocumentRequest$Requires": "<p>A list of SSM documents required by a document. For example, an <code>ApplicationConfiguration</code> document requires an <code>ApplicationConfigurationSchema</code> document.</p>",
+        "DocumentDescription$Requires": "<p>A list of SSM documents required by a document. For example, an <code>ApplicationConfiguration</code> document requires an <code>ApplicationConfigurationSchema</code> document.</p>",
+        "DocumentIdentifier$Requires": "<p>A list of SSM documents required by a document. For example, an <code>ApplicationConfiguration</code> document requires an <code>ApplicationConfigurationSchema</code> document.</p>",
+        "GetDocumentResult$Requires": "<p>A list of SSM documents required by a document. For example, an <code>ApplicationConfiguration</code> document requires an <code>ApplicationConfigurationSchema</code> document.</p>"
+      }
+    },
     "DocumentSchemaVersion": {
       "base": null,
       "refs": {
@@ -2186,6 +2237,7 @@
         "DocumentDescription$LatestVersion": "<p>The latest version of the document.</p>",
         "DocumentDescription$DefaultVersion": "<p>The default version.</p>",
         "DocumentIdentifier$DocumentVersion": "<p>The document version.</p>",
+        "DocumentRequires$Version": "<p>The document version required by the current document.</p>",
         "DocumentVersionInfo$DocumentVersion": "<p>The document version.</p>",
         "GetCommandInvocationResult$DocumentVersion": "<p>The SSM document version used in the request.</p>",
         "GetDocumentRequest$DocumentVersion": "<p>The document version for which you want information.</p>",
@@ -2342,6 +2394,16 @@
       }
     },
     "GetAutomationExecutionResult": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetCalendarStateRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetCalendarStateResponse": {
       "base": null,
       "refs": {
       }
@@ -2582,6 +2644,14 @@
       "base": null,
       "refs": {
         "InstanceInformation$IPAddress": "<p>The IP address of the managed instance.</p>"
+      }
+    },
+    "ISO8601String": {
+      "base": null,
+      "refs": {
+        "GetCalendarStateRequest$AtTime": "<p>(Optional) The specific time for which you want to get calendar state information, in <a href=\"https://en.wikipedia.org/wiki/ISO_8601\">ISO 8601</a> format. If you do not add <code>AtTime</code>, the current time is assumed.</p>",
+        "GetCalendarStateResponse$AtTime": "<p>The time, as an <a href=\"https://en.wikipedia.org/wiki/ISO_8601\">ISO 8601</a> string, that you specified in your command. If you did not specify a time, <code>GetCalendarState</code> uses the current time.</p>",
+        "GetCalendarStateResponse$NextTransitionTime": "<p>The time, as an <a href=\"https://en.wikipedia.org/wiki/ISO_8601\">ISO 8601</a> string, that the calendar state will change. If the current calendar state is <code>OPEN</code>, <code>NextTransitionTime</code> indicates when the calendar state changes to <code>CLOSED</code>, and vice-versa.</p>"
       }
     },
     "IamRole": {
@@ -2844,6 +2914,7 @@
     "InstancesCount": {
       "base": null,
       "refs": {
+        "DescribePatchGroupStateResult$InstancesWithInstalledPendingRebootPatches": "<p>Reserved for future use. </p>",
         "DescribePatchGroupStateResult$InstancesWithInstalledRejectedPatches": "<p>The number of instances with patches installed that are specified in a RejectedPatches list. Patches with a status of <i>INSTALLED_REJECTED</i> were typically installed before they were added to a RejectedPatches list.</p> <note> <p>If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstancesWithInstalledRejectedPatches will always be 0 (zero).</p> </note>"
       }
     },
@@ -2948,6 +3019,11 @@
     },
     "InvalidDocumentSchemaVersion": {
       "base": "<p>The version of the document schema is not supported.</p>",
+      "refs": {
+      }
+    },
+    "InvalidDocumentType": {
+      "base": "<p>The document type is not valid. Valid document types are described in the <code>DocumentType</code> property.</p>",
       "refs": {
       }
     },
@@ -4807,7 +4883,7 @@
         "ParameterHistory$Name": "<p>The name of the parameter.</p>",
         "ParameterMetadata$Name": "<p>The parameter name.</p>",
         "ParameterNameList$member": null,
-        "PutParameterRequest$Name": "<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <p>Naming Constraints:</p> <ul> <li> <p>Parameter names are case sensitive.</p> </li> <li> <p>A parameter name must be unique within an AWS Region</p> </li> <li> <p>A parameter name can't be prefixed with \"aws\" or \"ssm\" (case-insensitive).</p> </li> <li> <p>Parameter names can include only the following symbols and letters: <code>a-zA-Z0-9_.-/</code> </p> </li> <li> <p>A parameter name can't include spaces.</p> </li> <li> <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p> </li> </ul> <p>For additional information about valid values for parameter names, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html\">Requirements and Constraints for Parameter Names</a> in the <i>AWS Systems Manager User Guide</i>.</p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters. </p> </note>"
+        "PutParameterRequest$Name": "<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <p>Naming Constraints:</p> <ul> <li> <p>Parameter names are case sensitive.</p> </li> <li> <p>A parameter name must be unique within an AWS Region</p> </li> <li> <p>A parameter name can't be prefixed with \"aws\" or \"ssm\" (case-insensitive).</p> </li> <li> <p>Parameter names can include only the following symbols and letters: <code>a-zA-Z0-9_.-/</code> </p> </li> <li> <p>A parameter name can't include spaces.</p> </li> <li> <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p> </li> </ul> <p>For additional information about valid values for parameter names, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html\">Requirements and Constraints for Parameter Names</a> in the <i>AWS Systems Manager User Guide</i>.</p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters, including the full length of the parameter ARN. For example, the following fully qualified parameter name is 65 characters, not 20 characters:</p> <p> <code>arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName</code> </p> </note>"
       }
     },
     "PSParameterSelector": {
@@ -5296,6 +5372,12 @@
         "InstancePatchState$InstalledOtherCount": "<p>The number of patches not specified in the patch baseline that are installed on the instance.</p>"
       }
     },
+    "PatchInstalledPendingRebootCount": {
+      "base": null,
+      "refs": {
+        "InstancePatchState$InstalledPendingRebootCount": "<p>Reserved for future use.</p>"
+      }
+    },
     "PatchInstalledRejectedCount": {
       "base": null,
       "refs": {
@@ -5585,6 +5667,12 @@
       "refs": {
       }
     },
+    "RebootOption": {
+      "base": null,
+      "refs": {
+        "InstancePatchState$RebootOption": "<p>Reserved for future use. </p>"
+      }
+    },
     "Region": {
       "base": null,
       "refs": {
@@ -5740,6 +5828,11 @@
         "ResourceDataSyncSourceWithState$AwsOrganizationsSource": "<p>The field name in <code>SyncSource</code> for the <code>ResourceDataSyncAwsOrganizationsSource</code> type.</p>"
       }
     },
+    "ResourceDataSyncConflictException": {
+      "base": "<p>Another <code>UpdateResourceDataSync</code> request is being processed. Wait a few minutes and try again.</p>",
+      "refs": {
+      }
+    },
     "ResourceDataSyncCountExceededException": {
       "base": "<p>You have exceeded the allowed maximum sync configurations.</p>",
       "refs": {
@@ -5789,7 +5882,8 @@
         "GetOpsSummaryRequest$SyncName": "<p>Specify the name of a resource data sync to get.</p>",
         "ResourceDataSyncAlreadyExistsException$SyncName": null,
         "ResourceDataSyncItem$SyncName": "<p>The name of the Resource Data Sync.</p>",
-        "ResourceDataSyncNotFoundException$SyncName": null
+        "ResourceDataSyncNotFoundException$SyncName": null,
+        "UpdateResourceDataSyncRequest$SyncName": "<p>The name of the resource data sync you want to update.</p>"
       }
     },
     "ResourceDataSyncNotFoundException": {
@@ -5855,7 +5949,8 @@
     "ResourceDataSyncSource": {
       "base": "<p>Information about the source of the data included in the resource data sync.</p>",
       "refs": {
-        "CreateResourceDataSyncRequest$SyncSource": "<p>Specify information about the data sources to synchronize.</p>"
+        "CreateResourceDataSyncRequest$SyncSource": "<p>Specify information about the data sources to synchronize.</p>",
+        "UpdateResourceDataSyncRequest$SyncSource": "<p>Specify information about the data sources to synchronize.</p>"
       }
     },
     "ResourceDataSyncSourceRegion": {
@@ -5897,7 +5992,8 @@
         "DeleteResourceDataSyncRequest$SyncType": "<p>Specify the type of resource data sync to delete.</p>",
         "ListResourceDataSyncRequest$SyncType": "<p>View a list of resource data syncs according to the sync type. Specify <code>SyncToDestination</code> to view resource data syncs that synchronize data to an Amazon S3 buckets. Specify <code>SyncFromSource</code> to view resource data syncs from AWS Organizations or from multiple AWS Regions. </p>",
         "ResourceDataSyncItem$SyncType": "<p>The type of resource data sync. If <code>SyncType</code> is <code>SyncToDestination</code>, then the resource data sync synchronizes data to an Amazon S3 bucket. If the <code>SyncType</code> is <code>SyncFromSource</code> then the resource data sync synchronizes data from AWS Organizations or from multiple AWS Regions.</p>",
-        "ResourceDataSyncNotFoundException$SyncType": null
+        "ResourceDataSyncNotFoundException$SyncType": null,
+        "UpdateResourceDataSyncRequest$SyncType": "<p>The type of resource data sync. If <code>SyncType</code> is <code>SyncToDestination</code>, then the resource data sync synchronizes data to an Amazon S3 bucket. If the <code>SyncType</code> is <code>SyncFromSource</code> then the resource data sync synchronizes data from AWS Organizations or from multiple AWS Regions.</p>"
       }
     },
     "ResourceId": {
@@ -6226,6 +6322,13 @@
         "NonCompliantSummary$SeveritySummary": "<p>A summary of the non-compliance severity by compliance type</p>"
       }
     },
+    "SharedDocumentVersion": {
+      "base": "<p>The document version shared with other accounts. You can share <code>Latest</code>, <code>Default</code> or <code>All versions</code>.</p>",
+      "refs": {
+        "AccountSharingInfo$SharedDocumentVersion": "<p>The version of the current document shared with the account.</p>",
+        "ModifyDocumentPermissionRequest$SharedDocumentVersion": "<p>(Optional) The version of the document to share. If it's not specified, the system choose the <code>Default</code> version to share.</p>"
+      }
+    },
     "SignalType": {
       "base": null,
       "refs": {
@@ -6458,6 +6561,7 @@
         "InvalidDocumentContent$Message": "<p>A description of the validation error.</p>",
         "InvalidDocumentOperation$Message": null,
         "InvalidDocumentSchemaVersion$Message": null,
+        "InvalidDocumentType$Message": null,
         "InvalidDocumentVersion$Message": null,
         "InvalidFilter$Message": null,
         "InvalidFilterOption$message": "<p>The specified filter option is not valid. Valid options are Equals and BeginsWith. For Path filter, valid options are Recursive and OneLevel.</p>",
@@ -6517,6 +6621,7 @@
         "ParameterVersionNotFound$message": null,
         "PoliciesLimitExceededException$message": null,
         "RelatedOpsItem$OpsItemId": "<p>The ID of an OpsItem related to the current OpsItem.</p>",
+        "ResourceDataSyncConflictException$Message": null,
         "ResourceDataSyncCountExceededException$Message": null,
         "ResourceDataSyncInvalidConfigurationException$Message": null,
         "ResourceDataSyncNotFoundException$Message": null,
@@ -6539,6 +6644,7 @@
         "TargetNotConnected$Message": null,
         "TooManyUpdates$Message": null,
         "TotalSizeLimitExceededException$Message": null,
+        "UnsupportedCalendarException$Message": null,
         "UnsupportedFeatureRequiredException$Message": null,
         "UnsupportedInventoryItemContextException$Message": null,
         "UnsupportedInventorySchemaVersionException$Message": null,
@@ -6775,6 +6881,11 @@
       "refs": {
       }
     },
+    "UnsupportedCalendarException": {
+      "base": "<p>The calendar entry contained in the specified Systems Manager document is not supported.</p>",
+      "refs": {
+      }
+    },
     "UnsupportedFeatureRequiredException": {
       "base": "<p>Microsoft application patching is only available on EC2 instances and Advanced Instances. To patch Microsoft applications on on-premises servers and VMs, you must enable Advanced Instances. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances-advanced.html\">Using the Advanced-Instances Tier</a> in the <i>AWS Systems Manager User Guide</i>.</p>",
       "refs": {
@@ -6901,6 +7012,16 @@
       }
     },
     "UpdatePatchBaselineResult": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateResourceDataSyncRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateResourceDataSyncResult": {
       "base": null,
       "refs": {
       }

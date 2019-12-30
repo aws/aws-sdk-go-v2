@@ -13,7 +13,7 @@ import (
 type UpdateDashboardInput struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID that contains the dashboard you are updating.
+	// The ID of the AWS account that contains the dashboard that you're updating.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -23,20 +23,20 @@ type UpdateDashboardInput struct {
 	// DashboardId is a required field
 	DashboardId *string `location:"uri" locationName:"DashboardId" min:"1" type:"string" required:"true"`
 
-	// Publishing options when creating a dashboard.
+	// Options for publishing the dashboard when you create it:
 	//
-	//    * AvailabilityStatus for AdHocFilteringOption - This can be either ENABLED
-	//    or DISABLED. When This is set to set to DISABLED, QuickSight disables
+	//    * AvailabilityStatus for AdHocFilteringOption - This status can be either
+	//    ENABLED or DISABLED. When this is set to DISABLED, QuickSight disables
 	//    the left filter pane on the published dashboard, which can be used for
-	//    AdHoc filtering. Enabled by default.
+	//    ad hoc (one-time) filtering. This option is ENABLED by default.
 	//
-	//    * AvailabilityStatus for ExportToCSVOption - This can be either ENABLED
-	//    or DISABLED. The visual option to export data to CSV is disabled when
-	//    this is set to DISABLED. Enabled by default.
+	//    * AvailabilityStatus for ExportToCSVOption - This status can be either
+	//    ENABLED or DISABLED. The visual option to export data to .csv format isn't
+	//    enabled when this is set to DISABLED. This option is ENABLED by default.
 	//
-	//    * VisibilityState for SheetControlsOption - This can be either COLLAPSED
-	//    or EXPANDED. The sheet controls pane is collapsed by default when set
-	//    to true. Collapsed by default.
+	//    * VisibilityState for SheetControlsOption - This visibility state can
+	//    be either COLLAPSED or EXPANDED. The sheet controls pane is collapsed
+	//    by default when set to true. This option is COLLAPSED by default.
 	DashboardPublishOptions *DashboardPublishOptions `type:"structure"`
 
 	// The display name of the dashboard.
@@ -48,10 +48,10 @@ type UpdateDashboardInput struct {
 	Parameters *Parameters `type:"structure"`
 
 	// The template or analysis from which the dashboard is created. The SouceTemplate
-	// entity accepts the Arn of the template and also references to replacement
-	// datasets for the placeholders set when creating the template. The replacement
-	// datasets need to follow the same schema as the datasets for which placeholders
-	// were created when creating the template.
+	// entity accepts the Amazon Resource Name (ARN) of the template and also references
+	// to replacement datasets for the placeholders set when creating the template.
+	// The replacement datasets need to follow the same schema as the datasets for
+	// which placeholders were created when creating the template.
 	//
 	// SourceEntity is a required field
 	SourceEntity *DashboardSourceEntity `type:"structure" required:"true"`
@@ -165,7 +165,7 @@ func (s UpdateDashboardInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateDashboardOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the resource.
+	// The Amazon Resource Name (ARN) of the resource.
 	Arn *string `type:"string"`
 
 	// The creation status of the request.
@@ -177,7 +177,7 @@ type UpdateDashboardOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `type:"integer"`
 
 	// The ARN of the dashboard, including the version number.
@@ -235,15 +235,7 @@ const opUpdateDashboard = "UpdateDashboard"
 // UpdateDashboardRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Updates a dashboard in the AWS account.
-//
-// CLI syntax:
-//
-// aws quicksight update-dashboard --aws-account-id 111122223333 --dashboard-id
-// 123123123 --dashboard-name "test-update102" --source-entity SourceTemplate={Arn=arn:aws:quicksight:us-west-2:111122223333:template/sales-report-template2}
-// --data-set-references DataSetPlaceholder=SalesDataSet,DataSetArn=arn:aws:quicksight:us-west-2:111122223333:dataset/0e251aef-9ebf-46e1-b852-eb4fa33c1d3a
-//
-// aws quicksight update-dashboard --cli-input-json file://update-dashboard.json
+// Updates a dashboard in an AWS account.
 //
 //    // Example sending a request using UpdateDashboardRequest.
 //    req := client.UpdateDashboardRequest(params)

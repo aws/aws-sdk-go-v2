@@ -17,7 +17,7 @@ type UpdateApplicationInput struct {
 
 	// The SNS topic provided to Application Insights that is associated to the
 	// created opsItem. Allows you to receive notifications for updates to the opsItem.
-	OpsItemSNSTopicArn *string `type:"string"`
+	OpsItemSNSTopicArn *string `min:"20" type:"string"`
 
 	// Disassociates the SNS topic from the opsItem created for detected problems.
 	RemoveSNSTopic *bool `type:"boolean"`
@@ -25,7 +25,7 @@ type UpdateApplicationInput struct {
 	// The name of the resource group.
 	//
 	// ResourceGroupName is a required field
-	ResourceGroupName *string `type:"string" required:"true"`
+	ResourceGroupName *string `min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -36,9 +36,15 @@ func (s UpdateApplicationInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateApplicationInput"}
+	if s.OpsItemSNSTopicArn != nil && len(*s.OpsItemSNSTopicArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("OpsItemSNSTopicArn", 20))
+	}
 
 	if s.ResourceGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupName"))
+	}
+	if s.ResourceGroupName != nil && len(*s.ResourceGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceGroupName", 1))
 	}
 
 	if invalidParams.Len() > 0 {

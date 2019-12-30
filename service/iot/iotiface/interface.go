@@ -97,6 +97,8 @@ type ClientAPI interface {
 
 	CreateCertificateFromCsrRequest(*iot.CreateCertificateFromCsrInput) iot.CreateCertificateFromCsrRequest
 
+	CreateDomainConfigurationRequest(*iot.CreateDomainConfigurationInput) iot.CreateDomainConfigurationRequest
+
 	CreateDynamicThingGroupRequest(*iot.CreateDynamicThingGroupInput) iot.CreateDynamicThingGroupRequest
 
 	CreateJobRequest(*iot.CreateJobInput) iot.CreateJobRequest
@@ -110,6 +112,12 @@ type ClientAPI interface {
 	CreatePolicyRequest(*iot.CreatePolicyInput) iot.CreatePolicyRequest
 
 	CreatePolicyVersionRequest(*iot.CreatePolicyVersionInput) iot.CreatePolicyVersionRequest
+
+	CreateProvisioningClaimRequest(*iot.CreateProvisioningClaimInput) iot.CreateProvisioningClaimRequest
+
+	CreateProvisioningTemplateRequest(*iot.CreateProvisioningTemplateInput) iot.CreateProvisioningTemplateRequest
+
+	CreateProvisioningTemplateVersionRequest(*iot.CreateProvisioningTemplateVersionInput) iot.CreateProvisioningTemplateVersionRequest
 
 	CreateRoleAliasRequest(*iot.CreateRoleAliasInput) iot.CreateRoleAliasRequest
 
@@ -139,6 +147,8 @@ type ClientAPI interface {
 
 	DeleteCertificateRequest(*iot.DeleteCertificateInput) iot.DeleteCertificateRequest
 
+	DeleteDomainConfigurationRequest(*iot.DeleteDomainConfigurationInput) iot.DeleteDomainConfigurationRequest
+
 	DeleteDynamicThingGroupRequest(*iot.DeleteDynamicThingGroupInput) iot.DeleteDynamicThingGroupRequest
 
 	DeleteJobRequest(*iot.DeleteJobInput) iot.DeleteJobRequest
@@ -152,6 +162,10 @@ type ClientAPI interface {
 	DeletePolicyRequest(*iot.DeletePolicyInput) iot.DeletePolicyRequest
 
 	DeletePolicyVersionRequest(*iot.DeletePolicyVersionInput) iot.DeletePolicyVersionRequest
+
+	DeleteProvisioningTemplateRequest(*iot.DeleteProvisioningTemplateInput) iot.DeleteProvisioningTemplateRequest
+
+	DeleteProvisioningTemplateVersionRequest(*iot.DeleteProvisioningTemplateVersionInput) iot.DeleteProvisioningTemplateVersionRequest
 
 	DeleteRegistrationCodeRequest(*iot.DeleteRegistrationCodeInput) iot.DeleteRegistrationCodeRequest
 
@@ -195,6 +209,8 @@ type ClientAPI interface {
 
 	DescribeDefaultAuthorizerRequest(*iot.DescribeDefaultAuthorizerInput) iot.DescribeDefaultAuthorizerRequest
 
+	DescribeDomainConfigurationRequest(*iot.DescribeDomainConfigurationInput) iot.DescribeDomainConfigurationRequest
+
 	DescribeEndpointRequest(*iot.DescribeEndpointInput) iot.DescribeEndpointRequest
 
 	DescribeEventConfigurationsRequest(*iot.DescribeEventConfigurationsInput) iot.DescribeEventConfigurationsRequest
@@ -206,6 +222,10 @@ type ClientAPI interface {
 	DescribeJobExecutionRequest(*iot.DescribeJobExecutionInput) iot.DescribeJobExecutionRequest
 
 	DescribeMitigationActionRequest(*iot.DescribeMitigationActionInput) iot.DescribeMitigationActionRequest
+
+	DescribeProvisioningTemplateRequest(*iot.DescribeProvisioningTemplateInput) iot.DescribeProvisioningTemplateRequest
+
+	DescribeProvisioningTemplateVersionRequest(*iot.DescribeProvisioningTemplateVersionInput) iot.DescribeProvisioningTemplateVersionRequest
 
 	DescribeRoleAliasRequest(*iot.DescribeRoleAliasInput) iot.DescribeRoleAliasRequest
 
@@ -285,6 +305,8 @@ type ClientAPI interface {
 
 	ListCertificatesByCARequest(*iot.ListCertificatesByCAInput) iot.ListCertificatesByCARequest
 
+	ListDomainConfigurationsRequest(*iot.ListDomainConfigurationsInput) iot.ListDomainConfigurationsRequest
+
 	ListIndicesRequest(*iot.ListIndicesInput) iot.ListIndicesRequest
 
 	ListJobExecutionsForJobRequest(*iot.ListJobExecutionsForJobInput) iot.ListJobExecutionsForJobRequest
@@ -308,6 +330,10 @@ type ClientAPI interface {
 	ListPrincipalPoliciesRequest(*iot.ListPrincipalPoliciesInput) iot.ListPrincipalPoliciesRequest
 
 	ListPrincipalThingsRequest(*iot.ListPrincipalThingsInput) iot.ListPrincipalThingsRequest
+
+	ListProvisioningTemplateVersionsRequest(*iot.ListProvisioningTemplateVersionsInput) iot.ListProvisioningTemplateVersionsRequest
+
+	ListProvisioningTemplatesRequest(*iot.ListProvisioningTemplatesInput) iot.ListProvisioningTemplatesRequest
 
 	ListRoleAliasesRequest(*iot.ListRoleAliasesInput) iot.ListRoleAliasesRequest
 
@@ -405,6 +431,8 @@ type ClientAPI interface {
 
 	UpdateCertificateRequest(*iot.UpdateCertificateInput) iot.UpdateCertificateRequest
 
+	UpdateDomainConfigurationRequest(*iot.UpdateDomainConfigurationInput) iot.UpdateDomainConfigurationRequest
+
 	UpdateDynamicThingGroupRequest(*iot.UpdateDynamicThingGroupInput) iot.UpdateDynamicThingGroupRequest
 
 	UpdateEventConfigurationsRequest(*iot.UpdateEventConfigurationsInput) iot.UpdateEventConfigurationsRequest
@@ -414,6 +442,8 @@ type ClientAPI interface {
 	UpdateJobRequest(*iot.UpdateJobInput) iot.UpdateJobRequest
 
 	UpdateMitigationActionRequest(*iot.UpdateMitigationActionInput) iot.UpdateMitigationActionRequest
+
+	UpdateProvisioningTemplateRequest(*iot.UpdateProvisioningTemplateInput) iot.UpdateProvisioningTemplateRequest
 
 	UpdateRoleAliasRequest(*iot.UpdateRoleAliasInput) iot.UpdateRoleAliasRequest
 

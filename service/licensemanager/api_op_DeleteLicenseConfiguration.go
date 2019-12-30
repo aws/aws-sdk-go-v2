@@ -12,7 +12,7 @@ import (
 type DeleteLicenseConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique ID of the configuration object to delete.
+	// ID of the license configuration.
 	//
 	// LicenseConfigurationArn is a required field
 	LicenseConfigurationArn *string `type:"string" required:"true"`
@@ -51,8 +51,9 @@ const opDeleteLicenseConfiguration = "DeleteLicenseConfiguration"
 // DeleteLicenseConfigurationRequest returns a request value for making API operation for
 // AWS License Manager.
 //
-// Deletes an existing license configuration. This action fails if the configuration
-// is in use.
+// Deletes the specified license configuration.
+//
+// You cannot delete a license configuration that is in use.
 //
 //    // Example sending a request using DeleteLicenseConfigurationRequest.
 //    req := client.DeleteLicenseConfigurationRequest(params)

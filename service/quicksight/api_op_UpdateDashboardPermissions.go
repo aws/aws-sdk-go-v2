@@ -14,7 +14,8 @@ import (
 type UpdateDashboardPermissionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID that contains the dashboard you are updating.
+	// The ID of the AWS account that contains the dashboard whose permissions you're
+	// updating.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -126,7 +127,7 @@ func (s UpdateDashboardPermissionsInput) MarshalFields(e protocol.FieldEncoder) 
 type UpdateDashboardPermissionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the dashboard.
+	// The Amazon Resource Name (ARN) of the dashboard.
 	DashboardArn *string `type:"string"`
 
 	// The ID for the dashboard.
@@ -138,7 +139,7 @@ type UpdateDashboardPermissionsOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -189,55 +190,6 @@ const opUpdateDashboardPermissions = "UpdateDashboardPermissions"
 // Amazon QuickSight.
 //
 // Updates read and write permissions on a dashboard.
-//
-// CLI syntax:
-//
-// aws quicksight update-dashboard-permissions —cli-input-json file://update-permission.json
-//
-// A sample update-permissions.json for granting read only permissions:
-//
-// { "AwsAccountId": "111122223333", "DashboardId": "reports_test_report", "GrantPermissions":
-// [ { "Principal": "arn:aws:quicksight:us-east-1:111122223333:user/default/user2",
-// "Actions": [ "quicksight:DescribeDashboard", "quicksight:ListDashboardVersions",
-// "quicksight:DescribeDashboardVersion", "quicksight:QueryDashboard" ] } ]
-// }
-//
-// A sample update-permissions.json for granting read and write permissions:
-//
-// { "AwsAccountId": "111122223333", "DashboardId": "reports_test_report", "GrantPermissions":
-// [ { "Principal": "arn:aws:quicksight:us-east-1:111122223333:user/default/user2",
-// "Actions": [ "quicksight:DescribeDashboard", "quicksight:ListDashboardVersions",
-// "quicksight:DescribeDashboardVersion", "quicksight:QueryDashboard", "quicksight:DescribeDashboardPermissions",
-// "quicksight:UpdateDashboardPermissions", "quicksight:DeleteDashboardVersion",
-// "quicksight:DeleteDashboard", "quicksight:UpdateDashboard", "quicksight:UpdateDashboardPublishedVersion",
-// ] } ] }
-//
-// A sample update-permissions.json for revoking write permissions:
-//
-// { "AwsAccountId": "111122223333", "DashboardId": "reports_test_report", "RevokePermissions":
-// [ { "Principal": "arn:aws:quicksight:us-east-1:111122223333:user/default/user2",
-// "Actions": [ "quicksight:DescribeDashboardPermissions", "quicksight:UpdateDashboardPermissions",
-// "quicksight:DeleteDashboardVersion", "quicksight:DeleteDashboard", "quicksight:UpdateDashboard",
-// "quicksight:UpdateDashboardPublishedVersion", ] } ] }
-//
-// A sample update-permissions.json for revoking read and write permissions:
-//
-// { "AwsAccountId": "111122223333", "DashboardId": "reports_test_report", "RevokePermissions":
-// [ { "Principal": "arn:aws:quicksight:us-east-1:111122223333:user/default/user2",
-// "Actions": [ "quicksight:DescribeDashboard", "quicksight:ListDashboardVersions",
-// "quicksight:DescribeDashboardVersion", "quicksight:QueryDashboard", "quicksight:DescribeDashboardPermissions",
-// "quicksight:UpdateDashboardPermissions", "quicksight:DeleteDashboardVersion",
-// "quicksight:DeleteDashboard", "quicksight:UpdateDashboard", "quicksight:UpdateDashboardPublishedVersion",
-// ] } ] }
-//
-// To obtain the principal name of a QuickSight user or group, you can use describe-group
-// or describe-user. For example:
-//
-// aws quicksight describe-user --aws-account-id 111122223333 --namespace default
-// --user-name user2 --region us-east-1 { "User": { "Arn": "arn:aws:quicksight:us-east-1:111122223333:user/default/user2",
-// "Active": true, "Email": "user2@example.com", "Role": "ADMIN", "UserName":
-// "user2", "PrincipalId": "federated/iam/abcd2abcdabcdeabc5ab5" }, "RequestId":
-// "8f74bb31-6291-448a-a71c-a765a44bae31", "Status": 200 }
 //
 //    // Example sending a request using UpdateDashboardPermissionsRequest.
 //    req := client.UpdateDashboardPermissionsRequest(params)

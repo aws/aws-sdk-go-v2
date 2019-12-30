@@ -12,13 +12,12 @@ import (
 type ListAssociationsForLicenseConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
-	// ARN of a LicenseConfiguration object.
+	// Amazon Resource Name (ARN) of a license configuration.
 	//
 	// LicenseConfigurationArn is a required field
 	LicenseConfigurationArn *string `type:"string" required:"true"`
 
-	// Maximum number of results to return in a single call. To retrieve the remaining
-	// results, make another call with the returned NextToken value.
+	// Maximum number of results to return in a single call.
 	MaxResults *int64 `type:"integer"`
 
 	// Token for the next set of results.
@@ -47,9 +46,7 @@ func (s *ListAssociationsForLicenseConfigurationInput) Validate() error {
 type ListAssociationsForLicenseConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Lists association objects for the license configuration, each containing
-	// the association time, number of consumed licenses, resource ARN, resource
-	// ID, account ID that owns the resource, resource size, and resource type.
+	// Information about the associations for the license configuration.
 	LicenseConfigurationAssociations []LicenseConfigurationAssociation `type:"list"`
 
 	// Token for the next set of results.
@@ -66,11 +63,11 @@ const opListAssociationsForLicenseConfiguration = "ListAssociationsForLicenseCon
 // ListAssociationsForLicenseConfigurationRequest returns a request value for making API operation for
 // AWS License Manager.
 //
-// Lists the resource associations for a license configuration. Resource associations
-// need not consume licenses from a license configuration. For example, an AMI
-// or a stopped instance may not consume a license (depending on the license
-// rules). Use this operation to find all resources associated with a license
-// configuration.
+// Lists the resource associations for the specified license configuration.
+//
+// Resource associations need not consume licenses from a license configuration.
+// For example, an AMI or a stopped instance might not consume a license (depending
+// on the license rules).
 //
 //    // Example sending a request using ListAssociationsForLicenseConfigurationRequest.
 //    req := client.ListAssociationsForLicenseConfigurationRequest(params)

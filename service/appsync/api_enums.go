@@ -2,6 +2,65 @@
 
 package appsync
 
+type ApiCacheStatus string
+
+// Enum values for ApiCacheStatus
+const (
+	ApiCacheStatusAvailable ApiCacheStatus = "AVAILABLE"
+	ApiCacheStatusCreating  ApiCacheStatus = "CREATING"
+	ApiCacheStatusDeleting  ApiCacheStatus = "DELETING"
+	ApiCacheStatusModifying ApiCacheStatus = "MODIFYING"
+	ApiCacheStatusFailed    ApiCacheStatus = "FAILED"
+)
+
+func (enum ApiCacheStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ApiCacheStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ApiCacheType string
+
+// Enum values for ApiCacheType
+const (
+	ApiCacheTypeT2Small   ApiCacheType = "T2_SMALL"
+	ApiCacheTypeT2Medium  ApiCacheType = "T2_MEDIUM"
+	ApiCacheTypeR4Large   ApiCacheType = "R4_LARGE"
+	ApiCacheTypeR4Xlarge  ApiCacheType = "R4_XLARGE"
+	ApiCacheTypeR42xlarge ApiCacheType = "R4_2XLARGE"
+	ApiCacheTypeR44xlarge ApiCacheType = "R4_4XLARGE"
+	ApiCacheTypeR48xlarge ApiCacheType = "R4_8XLARGE"
+)
+
+func (enum ApiCacheType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ApiCacheType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ApiCachingBehavior string
+
+// Enum values for ApiCachingBehavior
+const (
+	ApiCachingBehaviorFullRequestCaching ApiCachingBehavior = "FULL_REQUEST_CACHING"
+	ApiCachingBehaviorPerResolverCaching ApiCachingBehavior = "PER_RESOLVER_CACHING"
+)
+
+func (enum ApiCachingBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ApiCachingBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AuthenticationType string
 
 // Enum values for AuthenticationType
@@ -33,6 +92,42 @@ func (enum AuthorizationType) MarshalValue() (string, error) {
 }
 
 func (enum AuthorizationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ConflictDetectionType string
+
+// Enum values for ConflictDetectionType
+const (
+	ConflictDetectionTypeVersion ConflictDetectionType = "VERSION"
+	ConflictDetectionTypeNone    ConflictDetectionType = "NONE"
+)
+
+func (enum ConflictDetectionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConflictDetectionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ConflictHandlerType string
+
+// Enum values for ConflictHandlerType
+const (
+	ConflictHandlerTypeOptimisticConcurrency ConflictHandlerType = "OPTIMISTIC_CONCURRENCY"
+	ConflictHandlerTypeLambda                ConflictHandlerType = "LAMBDA"
+	ConflictHandlerTypeAutomerge             ConflictHandlerType = "AUTOMERGE"
+	ConflictHandlerTypeNone                  ConflictHandlerType = "NONE"
+)
+
+func (enum ConflictHandlerType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConflictHandlerType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

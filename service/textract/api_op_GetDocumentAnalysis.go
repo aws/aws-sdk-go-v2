@@ -13,7 +13,7 @@ type GetDocumentAnalysisInput struct {
 	_ struct{} `type:"structure"`
 
 	// A unique identifier for the text-detection job. The JobId is returned from
-	// StartDocumentAnalysis.
+	// StartDocumentAnalysis. A JobId value is only valid for 7 days.
 	//
 	// JobId is a required field
 	JobId *string `min:"1" type:"string" required:"true"`
@@ -60,7 +60,9 @@ func (s *GetDocumentAnalysisInput) Validate() error {
 type GetDocumentAnalysisOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The results of the text analysis operation.
+	AnalyzeDocumentModelVersion *string `type:"string"`
+
+	// The results of the text-analysis operation.
 	Blocks []Block `type:"list"`
 
 	// Information about a document that Amazon Textract processed. DocumentMetadata
@@ -76,10 +78,10 @@ type GetDocumentAnalysisOutput struct {
 	// detection results.
 	NextToken *string `min:"1" type:"string"`
 
-	// The current status of an asynchronous document analysis operation.
+	// The current status of an asynchronous document-analysis operation.
 	StatusMessage *string `type:"string"`
 
-	// A list of warnings that occurred during the document analysis operation.
+	// A list of warnings that occurred during the document-analysis operation.
 	Warnings []Warning `type:"list"`
 }
 
@@ -108,28 +110,30 @@ const opGetDocumentAnalysis = "GetDocumentAnalysis"
 // GetDocumentAnalysis returns an array of Block objects. The following types
 // of information are returned:
 //
-//    * Words and lines that are related to nearby lines and words. The related
-//    information is returned in two Block objects each of type KEY_VALUE_SET:
-//    a KEY Block object and a VALUE Block object. For example, Name: Ana Silva
-//    Carolina contains a key and value. Name: is the key. Ana Silva Carolina
-//    is the value.
+//    * Form data (key-value pairs). The related information is returned in
+//    two Block objects, each of type KEY_VALUE_SET: a KEY Block object and
+//    a VALUE Block object. For example, Name: Ana Silva Carolina contains a
+//    key and value. Name: is the key. Ana Silva Carolina is the value.
 //
 //    * Table and table cell data. A TABLE Block object contains information
 //    about a detected table. A CELL Block object is returned for each cell
 //    in a table.
 //
-//    * Selectable elements such as checkboxes and radio buttons. A SELECTION_ELEMENT
-//    Block object contains information about a selectable element.
-//
 //    * Lines and words of text. A LINE Block object contains one or more WORD
-//    Block objects.
+//    Block objects. All lines and words that are detected in the document are
+//    returned (including text that doesn't have a relationship with the value
+//    of the StartDocumentAnalysis FeatureTypes input parameter).
 //
-// Use the MaxResults parameter to limit the number of blocks returned. If there
-// are more results than specified in MaxResults, the value of NextToken in
-// the operation response contains a pagination token for getting the next set
-// of results. To get the next page of results, call GetDocumentAnalysis, and
-// populate the NextToken request parameter with the token value that's returned
-// from the previous call to GetDocumentAnalysis.
+// Selection elements such as check boxes and option buttons (radio buttons)
+// can be detected in form data and in tables. A SELECTION_ELEMENT Block object
+// contains information about a selection element, including the selection status.
+//
+// Use the MaxResults parameter to limit the number of blocks that are returned.
+// If there are more results than specified in MaxResults, the value of NextToken
+// in the operation response contains a pagination token for getting the next
+// set of results. To get the next page of results, call GetDocumentAnalysis,
+// and populate the NextToken request parameter with the token value that's
+// returned from the previous call to GetDocumentAnalysis.
 //
 // For more information, see Document Text Analysis (https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html).
 //

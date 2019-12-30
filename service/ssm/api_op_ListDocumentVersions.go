@@ -17,7 +17,7 @@ type ListDocumentVersionsInput struct {
 	// results.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// The name of the document about which you want version information.
+	// The name of the document. You can specify an Amazon Resource Name (ARN).
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`

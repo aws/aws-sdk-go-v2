@@ -60,7 +60,10 @@ const opListBusinessReportSchedules = "ListBusinessReportSchedules"
 // ListBusinessReportSchedulesRequest returns a request value for making API operation for
 // Alexa For Business.
 //
-// Lists the details of the schedules that a user configured.
+// Lists the details of the schedules that a user configured. A download URL
+// of the report associated with each schedule is returned every time this action
+// is called. A new download URL is returned each time, and is valid for 24
+// hours.
 //
 //    // Example sending a request using ListBusinessReportSchedulesRequest.
 //    req := client.ListBusinessReportSchedulesRequest(params)

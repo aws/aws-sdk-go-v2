@@ -13,19 +13,19 @@ import (
 type DeleteTemplateAliasInput struct {
 	_ struct{} `type:"structure"`
 
-	// The alias of the template. If alias-name is provided, the version that the
-	// alias-name points to is deleted. Alias names that start with $ are reserved
-	// by QuickSight and can't be deleted.”
+	// The name for the template alias. If you name a specific alias, you delete
+	// the version that the alias points to. You can specify the latest version
+	// of the template by providing the keyword $LATEST in the AliasName parameter.
 	//
 	// AliasName is a required field
 	AliasName *string `location:"uri" locationName:"AliasName" min:"1" type:"string" required:"true"`
 
-	// AWS account ID that contains the template alias you are deleting.
+	// The ID of the AWS account that contains the item to delete.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
-	// An ID for the template.
+	// The ID for the template that the specified alias is for.
 	//
 	// TemplateId is a required field
 	TemplateId *string `location:"uri" locationName:"TemplateId" min:"1" type:"string" required:"true"`
@@ -95,19 +95,19 @@ func (s DeleteTemplateAliasInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteTemplateAliasOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the alias.
+	// The name for the template alias.
 	AliasName *string `min:"1" type:"string"`
 
-	// The ARN of the resource.
+	// The Amazon Resource Name (ARN) of the resource.
 	Arn *string `type:"string"`
 
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
-	// An ID for the template.
+	// An ID for the template associated with the deletion.
 	TemplateId *string `min:"1" type:"string"`
 }
 
@@ -151,12 +151,9 @@ const opDeleteTemplateAlias = "DeleteTemplateAlias"
 // DeleteTemplateAliasRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Update template alias of given template.
-//
-// CLI syntax:
-//
-// aws quicksight delete-template-alias --aws-account-id 111122223333 --template-id
-// 'reports_test_template' --alias-name 'STAGING'
+// Deletes the item that the specified template alias points to. If you provide
+// a specific alias, you delete the version of the template that the alias points
+// to.
 //
 //    // Example sending a request using DeleteTemplateAliasRequest.
 //    req := client.DeleteTemplateAliasRequest(params)

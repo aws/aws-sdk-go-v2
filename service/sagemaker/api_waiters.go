@@ -234,6 +234,60 @@ func (c *Client) WaitUntilNotebookInstanceStopped(ctx context.Context, input *De
 	return w.Wait(ctx)
 }
 
+// WaitUntilProcessingJobCompletedOrStopped uses the SageMaker API operation
+// DescribeProcessingJob to wait for a condition to be met before returning.
+// If the condition is not met within the max attempt window, an error will
+// be returned.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Client) WaitUntilProcessingJobCompletedOrStopped(ctx context.Context, input *DescribeProcessingJobInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
+		Name:        "WaitUntilProcessingJobCompletedOrStopped",
+		MaxAttempts: 60,
+		Delay:       aws.ConstantWaiterDelay(60 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
+			{
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "ProcessingJobStatus",
+				Expected: "Completed",
+			},
+			{
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "ProcessingJobStatus",
+				Expected: "Stopped",
+			},
+			{
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "ProcessingJobStatus",
+				Expected: "Failed",
+			},
+			{
+				State:    aws.FailureWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
+				Expected: "ValidationException",
+			},
+		},
+		Logger: c.Config.Logger,
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
+			var inCpy *DescribeProcessingJobInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req := c.DescribeProcessingJobRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req.Request, nil
+		},
+	}
+	w.ApplyOptions(opts...)
+
+	return w.Wait(ctx)
+}
+
 // WaitUntilTrainingJobCompletedOrStopped uses the SageMaker API operation
 // DescribeTrainingJob to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will

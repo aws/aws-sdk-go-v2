@@ -4,6 +4,7 @@ package applicationinsights
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -17,12 +18,17 @@ type CreateApplicationInput struct {
 
 	// The SNS topic provided to Application Insights that is associated to the
 	// created opsItem. Allows you to receive notifications for updates to the opsItem.
-	OpsItemSNSTopicArn *string `type:"string"`
+	OpsItemSNSTopicArn *string `min:"20" type:"string"`
 
 	// The name of the resource group.
 	//
 	// ResourceGroupName is a required field
-	ResourceGroupName *string `type:"string" required:"true"`
+	ResourceGroupName *string `min:"1" type:"string" required:"true"`
+
+	// List of tags to add to the application. tag key (Key) and an associated tag
+	// value (Value). The maximum length of a tag key is 128 characters. The maximum
+	// length of a tag value is 256 characters.
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -33,9 +39,22 @@ func (s CreateApplicationInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationInput"}
+	if s.OpsItemSNSTopicArn != nil && len(*s.OpsItemSNSTopicArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("OpsItemSNSTopicArn", 20))
+	}
 
 	if s.ResourceGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupName"))
+	}
+	if s.ResourceGroupName != nil && len(*s.ResourceGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceGroupName", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

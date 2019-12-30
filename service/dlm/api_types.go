@@ -89,7 +89,8 @@ func (s CreateRule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies when to enable fast snapshot restore.
+// Specifies a rule for enabling fast snapshot restore. You can enable fast
+// snapshot restore based on either a count or a time interval.
 type FastRestoreRule struct {
 	_ struct{} `type:"structure"`
 
@@ -99,9 +100,14 @@ type FastRestoreRule struct {
 	AvailabilityZones []string `min:"1" type:"list" required:"true"`
 
 	// The number of snapshots to be enabled with fast snapshot restore.
-	//
-	// Count is a required field
-	Count *int64 `min:"1" type:"integer" required:"true"`
+	Count *int64 `min:"1" type:"integer"`
+
+	// The amount of time to enable fast snapshot restore. The maximum is 100 years.
+	// This is equivalent to 1200 months, 5200 weeks, or 36500 days.
+	Interval *int64 `min:"1" type:"integer"`
+
+	// The unit of time for enabling fast snapshot restore.
+	IntervalUnit RetentionIntervalUnitValues `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -119,12 +125,11 @@ func (s *FastRestoreRule) Validate() error {
 	if s.AvailabilityZones != nil && len(s.AvailabilityZones) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AvailabilityZones", 1))
 	}
-
-	if s.Count == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Count"))
-	}
 	if s.Count != nil && *s.Count < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Count", 1))
+	}
+	if s.Interval != nil && *s.Interval < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Interval", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -152,6 +157,18 @@ func (s FastRestoreRule) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Count", protocol.Int64Value(v), metadata)
+	}
+	if s.Interval != nil {
+		v := *s.Interval
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Interval", protocol.Int64Value(v), metadata)
+	}
+	if len(s.IntervalUnit) > 0 {
+		v := s.IntervalUnit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IntervalUnit", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -466,14 +483,20 @@ func (s PolicyDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies the number of snapshots to keep for each EBS volume.
+// Specifies the retention rule for a lifecycle policy. You can retain snapshots
+// based on either a count or a time interval.
 type RetainRule struct {
 	_ struct{} `type:"structure"`
 
-	// The number of snapshots to keep for each volume, up to a maximum of 1000.
-	//
-	// Count is a required field
-	Count *int64 `min:"1" type:"integer" required:"true"`
+	// The number of snapshots to retain for each volume, up to a maximum of 1000.
+	Count *int64 `min:"1" type:"integer"`
+
+	// The amount of time to retain each snapshot. The maximum is 100 years. This
+	// is equivalent to 1200 months, 5200 weeks, or 36500 days.
+	Interval *int64 `min:"1" type:"integer"`
+
+	// The unit of time for time-based retention.
+	IntervalUnit RetentionIntervalUnitValues `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -484,12 +507,11 @@ func (s RetainRule) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RetainRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RetainRule"}
-
-	if s.Count == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Count"))
-	}
 	if s.Count != nil && *s.Count < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Count", 1))
+	}
+	if s.Interval != nil && *s.Interval < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Interval", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -505,6 +527,18 @@ func (s RetainRule) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Count", protocol.Int64Value(v), metadata)
+	}
+	if s.Interval != nil {
+		v := *s.Interval
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Interval", protocol.Int64Value(v), metadata)
+	}
+	if len(s.IntervalUnit) > 0 {
+		v := s.IntervalUnit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IntervalUnit", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -526,7 +560,7 @@ type Schedule struct {
 	// The name of the schedule.
 	Name *string `type:"string"`
 
-	// The retain rule.
+	// The retention rule.
 	RetainRule *RetainRule `type:"structure"`
 
 	// The tags to apply to policy-created resources. These user-defined tags are

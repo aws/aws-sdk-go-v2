@@ -94,6 +94,8 @@ type ClientAPI interface {
 
 	CreateHsmConfigurationRequest(*redshift.CreateHsmConfigurationInput) redshift.CreateHsmConfigurationRequest
 
+	CreateScheduledActionRequest(*redshift.CreateScheduledActionInput) redshift.CreateScheduledActionRequest
+
 	CreateSnapshotCopyGrantRequest(*redshift.CreateSnapshotCopyGrantInput) redshift.CreateSnapshotCopyGrantRequest
 
 	CreateSnapshotScheduleRequest(*redshift.CreateSnapshotScheduleInput) redshift.CreateSnapshotScheduleRequest
@@ -115,6 +117,8 @@ type ClientAPI interface {
 	DeleteHsmClientCertificateRequest(*redshift.DeleteHsmClientCertificateInput) redshift.DeleteHsmClientCertificateRequest
 
 	DeleteHsmConfigurationRequest(*redshift.DeleteHsmConfigurationInput) redshift.DeleteHsmConfigurationRequest
+
+	DeleteScheduledActionRequest(*redshift.DeleteScheduledActionInput) redshift.DeleteScheduledActionRequest
 
 	DeleteSnapshotCopyGrantRequest(*redshift.DeleteSnapshotCopyGrantInput) redshift.DeleteSnapshotCopyGrantRequest
 
@@ -166,6 +170,8 @@ type ClientAPI interface {
 
 	DescribeResizeRequest(*redshift.DescribeResizeInput) redshift.DescribeResizeRequest
 
+	DescribeScheduledActionsRequest(*redshift.DescribeScheduledActionsInput) redshift.DescribeScheduledActionsRequest
+
 	DescribeSnapshotCopyGrantsRequest(*redshift.DescribeSnapshotCopyGrantsInput) redshift.DescribeSnapshotCopyGrantsRequest
 
 	DescribeSnapshotSchedulesRequest(*redshift.DescribeSnapshotSchedulesInput) redshift.DescribeSnapshotSchedulesRequest
@@ -205,6 +211,8 @@ type ClientAPI interface {
 	ModifyClusterSubnetGroupRequest(*redshift.ModifyClusterSubnetGroupInput) redshift.ModifyClusterSubnetGroupRequest
 
 	ModifyEventSubscriptionRequest(*redshift.ModifyEventSubscriptionInput) redshift.ModifyEventSubscriptionRequest
+
+	ModifyScheduledActionRequest(*redshift.ModifyScheduledActionInput) redshift.ModifyScheduledActionRequest
 
 	ModifySnapshotCopyRetentionPeriodRequest(*redshift.ModifySnapshotCopyRetentionPeriodInput) redshift.ModifySnapshotCopyRetentionPeriodRequest
 

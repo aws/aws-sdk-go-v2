@@ -13,7 +13,7 @@ import (
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the resource you to untag.
+	// The Amazon Resource Name (ARN) of the resource that you want to untag.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"ResourceArn" type:"string" required:"true"`
@@ -82,7 +82,7 @@ type UntagResourceOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -109,11 +109,6 @@ const opUntagResource = "UntagResource"
 // Amazon QuickSight.
 //
 // Removes a tag or tags from a resource.
-//
-// CLI syntax:
-//
-//    * aws quicksight untag-resource --resource-arn arn:aws:quicksight:us-east-1:111111111111:dataset/dataset1
-//    --tag-keys K1 K2 --region us-east-1
 //
 //    // Example sending a request using UntagResourceRequest.
 //    req := client.UntagResourceRequest(params)

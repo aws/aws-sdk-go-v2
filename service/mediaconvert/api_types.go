@@ -3152,6 +3152,11 @@ type DvbSubDestinationSettings struct {
 	// burn-in and DVB-Sub font settings must match.
 	ShadowYOffset *int64 `locationName:"shadowYOffset" type:"integer"`
 
+	// Specify whether your DVB subtitles are standard or for hearing impaired.
+	// Choose hearing impaired if your subtitles include audio descriptions and
+	// dialogue. Choose standard if your subtitles include only dialogue.
+	SubtitlingType DvbSubtitlingType `locationName:"subtitlingType" type:"string" enum:"true"`
+
 	// Only applies to jobs with input captions in Teletext or STL formats. Specify
 	// whether the spacing between letters in your captions is set by the captions
 	// grid or varies depending on letter width. Choose fixed grid to conform to
@@ -3287,6 +3292,12 @@ func (s DvbSubDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "shadowYOffset", protocol.Int64Value(v), metadata)
+	}
+	if len(s.SubtitlingType) > 0 {
+		v := s.SubtitlingType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "subtitlingType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.TeletextSpacing) > 0 {
 		v := s.TeletextSpacing
@@ -12614,6 +12625,13 @@ func (s VideoPreprocessor) MarshalFields(e protocol.FieldEncoder) error {
 type VideoSelector struct {
 	_ struct{} `type:"structure"`
 
+	// Ignore this setting unless this input is a QuickTime animation. Specify which
+	// part of this input MediaConvert uses for your outputs. Leave this setting
+	// set to DISCARD in order to delete the alpha channel and preserve the video.
+	// Use REMAP_TO_LUMA for this setting to delete the video and map the alpha
+	// channel to the luma channel of your outputs.
+	AlphaBehavior AlphaBehavior `locationName:"alphaBehavior" type:"string" enum:"true"`
+
 	// If your input video has accurate color space metadata, or if you don't know
 	// about color space, leave this set to the default value Follow (FOLLOW). The
 	// service will automatically detect your input color space. If your input video
@@ -12694,6 +12712,12 @@ func (s *VideoSelector) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s VideoSelector) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AlphaBehavior) > 0 {
+		v := s.AlphaBehavior
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "alphaBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if len(s.ColorSpace) > 0 {
 		v := s.ColorSpace
 

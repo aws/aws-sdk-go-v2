@@ -73,6 +73,105 @@ func (s AdditionalAuthenticationProvider) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
+type ApiCache struct {
+	_ struct{} `type:"structure"`
+
+	// Caching behavior.
+	//
+	//    * FULL_REQUEST_CACHING: All requests are fully cached.
+	//
+	//    * PER_RESOLVER_CACHING: Individual resovlers that you specify are cached.
+	ApiCachingBehavior ApiCachingBehavior `locationName:"apiCachingBehavior" type:"string" enum:"true"`
+
+	// At rest encryption flag for cache. This setting cannot be updated after creation.
+	AtRestEncryptionEnabled *bool `locationName:"atRestEncryptionEnabled" type:"boolean"`
+
+	// The cache instance status.
+	//
+	//    * AVAILABLE: The instance is available for use.
+	//
+	//    * CREATING: The instance is currently creating.
+	//
+	//    * DELETING: The instance is currently deleting.
+	//
+	//    * MODIFYING: The instance is currently modifying.
+	//
+	//    * FAILED: The instance has failed creation.
+	Status ApiCacheStatus `locationName:"status" type:"string" enum:"true"`
+
+	// Transit encryption flag when connecting to cache. This setting cannot be
+	// updated after creation.
+	TransitEncryptionEnabled *bool `locationName:"transitEncryptionEnabled" type:"boolean"`
+
+	// TTL in seconds for cache entries.
+	//
+	// Valid values are between 1 and 3600 seconds.
+	Ttl *int64 `locationName:"ttl" type:"long"`
+
+	// The cache instance type.
+	//
+	//    * T2_SMALL: A t2.small instance type.
+	//
+	//    * T2_MEDIUM: A t2.medium instance type.
+	//
+	//    * R4_LARGE: A r4.large instance type.
+	//
+	//    * R4_XLARGE: A r4.xlarge instance type.
+	//
+	//    * R4_2XLARGE: A r4.2xlarge instance type.
+	//
+	//    * R4_4XLARGE: A r4.4xlarge instance type.
+	//
+	//    * R4_8XLARGE: A r4.8xlarge instance type.
+	Type ApiCacheType `locationName:"type" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ApiCache) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ApiCache) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ApiCachingBehavior) > 0 {
+		v := s.ApiCachingBehavior
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "apiCachingBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.AtRestEncryptionEnabled != nil {
+		v := *s.AtRestEncryptionEnabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "atRestEncryptionEnabled", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.TransitEncryptionEnabled != nil {
+		v := *s.TransitEncryptionEnabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "transitEncryptionEnabled", protocol.BoolValue(v), metadata)
+	}
+	if s.Ttl != nil {
+		v := *s.Ttl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ttl", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Describes an API key.
 //
 // Customers invoke AWS AppSync GraphQL API operations with API keys as an identity
@@ -236,6 +335,50 @@ func (s AwsIamConfig) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The caching configuration for a resolver that has caching enabled.
+type CachingConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The caching keys for a resolver that has caching enabled.
+	//
+	// Valid values are entries from the $context.identity and $context.arguments
+	// maps.
+	CachingKeys []string `locationName:"cachingKeys" type:"list"`
+
+	// The TTL in seconds for a resolver that has caching enabled.
+	//
+	// Valid values are between 1 and 3600 seconds.
+	Ttl *int64 `locationName:"ttl" type:"long"`
+}
+
+// String returns the string representation
+func (s CachingConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CachingConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CachingKeys != nil {
+		v := s.CachingKeys
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "cachingKeys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Ttl != nil {
+		v := *s.Ttl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ttl", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Describes an Amazon Cognito user pool configuration.
 type CognitoUserPoolConfig struct {
 	_ struct{} `type:"structure"`
@@ -324,7 +467,7 @@ type DataSource struct {
 	LambdaConfig *LambdaDataSourceConfig `locationName:"lambdaConfig" type:"structure"`
 
 	// The name of the data source.
-	Name *string `locationName:"name" type:"string"`
+	Name *string `locationName:"name" min:"1" type:"string"`
 
 	// Relational database settings.
 	RelationalDatabaseConfig *RelationalDatabaseDataSourceConfig `locationName:"relationalDatabaseConfig" type:"structure"`
@@ -423,6 +566,49 @@ func (s DataSource) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Describes a Delta Sync configuration.
+type DeltaSyncConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The number of minutes an Item is stored in the datasource.
+	BaseTableTTL *int64 `locationName:"baseTableTTL" type:"long"`
+
+	// The Delta Sync table name.
+	DeltaSyncTableName *string `locationName:"deltaSyncTableName" type:"string"`
+
+	// The number of minutes a Delta Sync log entry is stored in the Delta Sync
+	// table.
+	DeltaSyncTableTTL *int64 `locationName:"deltaSyncTableTTL" type:"long"`
+}
+
+// String returns the string representation
+func (s DeltaSyncConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeltaSyncConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BaseTableTTL != nil {
+		v := *s.BaseTableTTL
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "baseTableTTL", protocol.Int64Value(v), metadata)
+	}
+	if s.DeltaSyncTableName != nil {
+		v := *s.DeltaSyncTableName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "deltaSyncTableName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DeltaSyncTableTTL != nil {
+		v := *s.DeltaSyncTableTTL
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "deltaSyncTableTTL", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Describes an Amazon DynamoDB data source configuration.
 type DynamodbDataSourceConfig struct {
 	_ struct{} `type:"structure"`
@@ -432,6 +618,9 @@ type DynamodbDataSourceConfig struct {
 	// AwsRegion is a required field
 	AwsRegion *string `locationName:"awsRegion" type:"string" required:"true"`
 
+	// The DeltaSyncConfig for a versioned datasource.
+	DeltaSyncConfig *DeltaSyncConfig `locationName:"deltaSyncConfig" type:"structure"`
+
 	// The table name.
 	//
 	// TableName is a required field
@@ -439,6 +628,9 @@ type DynamodbDataSourceConfig struct {
 
 	// Set to TRUE to use Amazon Cognito credentials with this data source.
 	UseCallerCredentials *bool `locationName:"useCallerCredentials" type:"boolean"`
+
+	// Set to TRUE to use Conflict Detection and Resolution with this data source.
+	Versioned *bool `locationName:"versioned" type:"boolean"`
 }
 
 // String returns the string representation
@@ -472,6 +664,12 @@ func (s DynamodbDataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "awsRegion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.DeltaSyncConfig != nil {
+		v := s.DeltaSyncConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "deltaSyncConfig", v, metadata)
+	}
 	if s.TableName != nil {
 		v := *s.TableName
 
@@ -483,6 +681,12 @@ func (s DynamodbDataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "useCallerCredentials", protocol.BoolValue(v), metadata)
+	}
+	if s.Versioned != nil {
+		v := *s.Versioned
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "versioned", protocol.BoolValue(v), metadata)
 	}
 	return nil
 }
@@ -548,7 +752,7 @@ type FunctionConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the DataSource.
-	DataSourceName *string `locationName:"dataSourceName" type:"string"`
+	DataSourceName *string `locationName:"dataSourceName" min:"1" type:"string"`
 
 	// The Function description.
 	Description *string `locationName:"description" type:"string"`
@@ -564,7 +768,7 @@ type FunctionConfiguration struct {
 	FunctionVersion *string `locationName:"functionVersion" type:"string"`
 
 	// The name of the Function object.
-	Name *string `locationName:"name" type:"string"`
+	Name *string `locationName:"name" min:"1" type:"string"`
 
 	// The Function request mapping template. Functions support only the 2018-05-29
 	// version of the request mapping template.
@@ -652,7 +856,7 @@ type GraphqlApi struct {
 	LogConfig *LogConfig `locationName:"logConfig" type:"structure"`
 
 	// The API name.
-	Name *string `locationName:"name" type:"string"`
+	Name *string `locationName:"name" min:"1" type:"string"`
 
 	// The OpenID Connect configuration.
 	OpenIDConnectConfig *OpenIDConnectConfig `locationName:"openIDConnectConfig" type:"structure"`
@@ -802,6 +1006,29 @@ func (s HttpDataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "endpoint", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type LambdaConflictHandlerConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The Arn for the Lambda function to use as the Conflict Handler.
+	LambdaConflictHandlerArn *string `locationName:"lambdaConflictHandlerArn" type:"string"`
+}
+
+// String returns the string representation
+func (s LambdaConflictHandlerConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LambdaConflictHandlerConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.LambdaConflictHandlerArn != nil {
+		v := *s.LambdaConflictHandlerArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lambdaConflictHandlerArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1122,11 +1349,14 @@ func (s RelationalDatabaseDataSourceConfig) MarshalFields(e protocol.FieldEncode
 type Resolver struct {
 	_ struct{} `type:"structure"`
 
+	// The caching configuration for the resolver.
+	CachingConfig *CachingConfig `locationName:"cachingConfig" type:"structure"`
+
 	// The resolver data source name.
-	DataSourceName *string `locationName:"dataSourceName" type:"string"`
+	DataSourceName *string `locationName:"dataSourceName" min:"1" type:"string"`
 
 	// The resolver field name.
-	FieldName *string `locationName:"fieldName" type:"string"`
+	FieldName *string `locationName:"fieldName" min:"1" type:"string"`
 
 	// The resolver type.
 	//
@@ -1151,8 +1381,11 @@ type Resolver struct {
 	// The response mapping template.
 	ResponseMappingTemplate *string `locationName:"responseMappingTemplate" min:"1" type:"string"`
 
+	// The SyncConfig for a resolver attached to a versioned datasource.
+	SyncConfig *SyncConfig `locationName:"syncConfig" type:"structure"`
+
 	// The resolver type name.
-	TypeName *string `locationName:"typeName" type:"string"`
+	TypeName *string `locationName:"typeName" min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -1162,6 +1395,12 @@ func (s Resolver) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Resolver) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CachingConfig != nil {
+		v := s.CachingConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "cachingConfig", v, metadata)
+	}
 	if s.DataSourceName != nil {
 		v := *s.DataSourceName
 
@@ -1204,11 +1443,74 @@ func (s Resolver) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "responseMappingTemplate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.SyncConfig != nil {
+		v := s.SyncConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "syncConfig", v, metadata)
+	}
 	if s.TypeName != nil {
 		v := *s.TypeName
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "typeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Describes a Sync configuration for a resolver.
+//
+// Contains information on which Conflict Detection as well as Resolution strategy
+// should be performed when the resolver is invoked.
+type SyncConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The Conflict Detection strategy to use.
+	//
+	//    * VERSION: Detect conflicts based on object versions for this resolver.
+	//
+	//    * NONE: Do not detect conflicts when executing this resolver.
+	ConflictDetection ConflictDetectionType `locationName:"conflictDetection" type:"string" enum:"true"`
+
+	// The Conflict Resolution strategy to perform in the event of a conflict.
+	//
+	//    * OPTIMISTIC_CONCURRENCY: Resolve conflicts by rejecting mutations when
+	//    versions do not match the latest version at the server.
+	//
+	//    * AUTOMERGE: Resolve conflicts with the Automerge conflict resolution
+	//    strategy.
+	//
+	//    * LAMBDA: Resolve conflicts with a Lambda function supplied in the LambdaConflictHandlerConfig.
+	ConflictHandler ConflictHandlerType `locationName:"conflictHandler" type:"string" enum:"true"`
+
+	// The LambdaConflictHandlerConfig when configuring LAMBDA as the Conflict Handler.
+	LambdaConflictHandlerConfig *LambdaConflictHandlerConfig `locationName:"lambdaConflictHandlerConfig" type:"structure"`
+}
+
+// String returns the string representation
+func (s SyncConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SyncConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ConflictDetection) > 0 {
+		v := s.ConflictDetection
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "conflictDetection", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.ConflictHandler) > 0 {
+		v := s.ConflictHandler
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "conflictHandler", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.LambdaConflictHandlerConfig != nil {
+		v := s.LambdaConflictHandlerConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "lambdaConflictHandlerConfig", v, metadata)
 	}
 	return nil
 }
@@ -1230,7 +1532,7 @@ type Type struct {
 	Format TypeDefinitionFormat `locationName:"format" type:"string" enum:"true"`
 
 	// The type name.
-	Name *string `locationName:"name" type:"string"`
+	Name *string `locationName:"name" min:"1" type:"string"`
 }
 
 // String returns the string representation

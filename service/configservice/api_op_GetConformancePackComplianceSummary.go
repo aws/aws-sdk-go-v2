@@ -12,11 +12,16 @@ import (
 type GetConformancePackComplianceSummaryInput struct {
 	_ struct{} `type:"structure"`
 
+	// Names of conformance packs.
+	//
 	// ConformancePackNames is a required field
 	ConformancePackNames []string `min:"1" type:"list" required:"true"`
 
+	// The maximum number of conformance packs returned on each page.
 	Limit *int64 `type:"integer"`
 
+	// The nextToken string returned on a previous page that you use to get the
+	// next page of results in a paginated response.
 	NextToken *string `type:"string"`
 }
 
@@ -45,8 +50,11 @@ func (s *GetConformancePackComplianceSummaryInput) Validate() error {
 type GetConformancePackComplianceSummaryOutput struct {
 	_ struct{} `type:"structure"`
 
+	// A list of ConformancePackComplianceSummary objects.
 	ConformancePackComplianceSummaryList []ConformancePackComplianceSummary `min:"1" type:"list"`
 
+	// The nextToken string returned on a previous page that you use to get the
+	// next page of results in a paginated response.
 	NextToken *string `type:"string"`
 }
 
@@ -59,6 +67,9 @@ const opGetConformancePackComplianceSummary = "GetConformancePackComplianceSumma
 
 // GetConformancePackComplianceSummaryRequest returns a request value for making API operation for
 // AWS Config.
+//
+// Returns compliance details for the conformance pack based on the cumulative
+// compliance results of all the rules in that conformance pack.
 //
 //    // Example sending a request using GetConformancePackComplianceSummaryRequest.
 //    req := client.GetConformancePackComplianceSummaryRequest(params)

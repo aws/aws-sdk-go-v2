@@ -12,7 +12,8 @@ import (
 type CreateDatasetInput struct {
 	_ struct{} `type:"structure"`
 
-	// The frequency of data collection.
+	// The frequency of data collection. This parameter is required for RELATED_TIME_SERIES
+	// datasets.
 	//
 	// Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min
 	// (30 minutes), 15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and
@@ -30,12 +31,15 @@ type CreateDatasetInput struct {
 	// DatasetType is a required field
 	DatasetType DatasetType `type:"string" required:"true" enum:"true"`
 
-	// The domain associated with the dataset. The Domain and DatasetType that you
-	// choose determine the fields that must be present in the training data that
-	// you import to the dataset. For example, if you choose the RETAIL domain and
-	// TARGET_TIME_SERIES as the DatasetType, Amazon Forecast requires item_id,
-	// timestamp, and demand fields to be present in your data. For more information,
-	// see howitworks-datasets-groups.
+	// The domain associated with the dataset. When you add a dataset to a dataset
+	// group, this value and the value specified for the Domain parameter of the
+	// CreateDatasetGroup operation must match.
+	//
+	// The Domain and DatasetType that you choose determine the fields that must
+	// be present in the training data that you import to the dataset. For example,
+	// if you choose the RETAIL domain and TARGET_TIME_SERIES as the DatasetType,
+	// Amazon Forecast requires item_id, timestamp, and demand fields to be present
+	// in your data. For more information, see howitworks-datasets-groups.
 	//
 	// Domain is a required field
 	Domain Domain `type:"string" required:"true" enum:"true"`
@@ -117,8 +121,6 @@ const opCreateDataset = "CreateDataset"
 // This includes the following:
 //
 //    * DataFrequency - How frequently your historical time-series data is collected.
-//    Amazon Forecast uses this information when training the model and generating
-//    a forecast.
 //
 //    * Domain and DatasetType - Each dataset has an associated dataset domain
 //    and a type within the domain. Amazon Forecast provides a list of predefined
@@ -126,14 +128,17 @@ const opCreateDataset = "CreateDataset"
 //    type within the domain, Amazon Forecast requires your data to include
 //    a minimum set of predefined fields.
 //
-//    * Schema - A schema specifies the fields of the dataset, including the
+//    * Schema - A schema specifies the fields in the dataset, including the
 //    field name and data type.
 //
-// After creating a dataset, you import your training data into the dataset
-// and add the dataset to a dataset group. You then use the dataset group to
-// create a predictor. For more information, see howitworks-datasets-groups.
+// After creating a dataset, you import your training data into it and add the
+// dataset to a dataset group. You use the dataset group to create a predictor.
+// For more information, see howitworks-datasets-groups.
 //
 // To get a list of all your datasets, use the ListDatasets operation.
+//
+// For example Forecast datasets, see the Amazon Forecast Sample GitHub repository
+// (https://github.com/aws-samples/amazon-forecast-samples/tree/master/data).
 //
 // The Status of a dataset must be ACTIVE before you can import training data.
 // Use the DescribeDataset operation to get the status.

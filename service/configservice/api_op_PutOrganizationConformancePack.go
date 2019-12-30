@@ -19,6 +19,10 @@ type PutOrganizationConformancePackInput struct {
 	// Location of an Amazon S3 bucket where AWS Config can deliver evaluation results.
 	// AWS Config stores intermediate files while processing conformance pack template.
 	//
+	// The delivery bucket name should start with awsconfigconforms. For example:
+	// "Resource": "arn:aws:s3:::your_bucket_name/*". For more information, see
+	// Permissions for cross account bucket access (https://docs.aws.amazon.com/config/latest/developerguide/conformance-pack-organization-apis.html).
+	//
 	// DeliveryS3Bucket is a required field
 	DeliveryS3Bucket *string `min:"3" type:"string" required:"true"`
 
@@ -40,7 +44,7 @@ type PutOrganizationConformancePackInput struct {
 	TemplateBody *string `min:"1" type:"string"`
 
 	// Location of file containing the template body. The uri must point to the
-	// conformance pack template (max size: 300,000 bytes).
+	// conformance pack template (max size: 300 KB).
 	//
 	// You must have access to read Amazon S3 bucket.
 	TemplateS3Uri *string `min:"1" type:"string"`
@@ -110,17 +114,21 @@ const opPutOrganizationConformancePack = "PutOrganizationConformancePack"
 //
 // Deploys conformance packs across member accounts in an AWS Organization.
 //
-// This API enables organization service access through the EnableAWSServiceAccess
-// action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup
-// in the master account of your organization. The service linked role is created
-// only when the role does not exist in the master account. AWS Config verifies
-// the existence of role with GetRole action.
-//
-// The SPN is config-multiaccountsetup.amazonaws.com.
+// This API enables organization service access for config-multiaccountsetup.amazonaws.com
+// through the EnableAWSServiceAccess action and creates a service linked role
+// AWSServiceRoleForConfigMultiAccountSetup in the master account of your organization.
+// The service linked role is created only when the role does not exist in the
+// master account. AWS Config verifies the existence of role with GetRole action.
 //
 // You must specify either the TemplateS3Uri or the TemplateBody parameter,
 // but not both. If you provide both AWS Config uses the TemplateS3Uri parameter
 // and ignores the TemplateBody parameter.
+//
+// AWS Config sets the state of a conformance pack to CREATE_IN_PROGRESS and
+// UPDATE_IN_PROGRESS until the confomance pack is created or updated. You cannot
+// update a conformance pack while it is in this state.
+//
+// You can create 6 conformance packs with 25 AWS Config rules in each pack.
 //
 //    // Example sending a request using PutOrganizationConformancePackRequest.
 //    req := client.PutOrganizationConformancePackRequest(params)

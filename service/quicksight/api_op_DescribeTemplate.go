@@ -13,24 +13,24 @@ import (
 type DescribeTemplateInput struct {
 	_ struct{} `type:"structure"`
 
-	// This is an optional field, when an alias name is provided, the version referenced
-	// by the alias is described. Refer to CreateTemplateAlias to create a template
-	// alias. $PUBLISHED is not supported for template.
+	// The alias of the template that you want to describe. If you name a specific
+	// alias, you describe the version that the alias points to. You can specify
+	// the latest version of the template by providing the keyword $LATEST in the
+	// AliasName parameter. The keyword $PUBLISHED doesn't apply to templates.
 	AliasName *string `location:"querystring" locationName:"alias-name" min:"1" type:"string"`
 
-	// AWS account ID that contains the template you are describing.
+	// The ID of the AWS account that contains the template that you're describing.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
-	// An ID for the template.
+	// The ID for the template.
 	//
 	// TemplateId is a required field
 	TemplateId *string `location:"uri" locationName:"TemplateId" min:"1" type:"string" required:"true"`
 
-	// This is an optional field, when a version number is provided the corresponding
-	// version is describe, if it's not provided the latest version of the template
-	// is described.
+	// (Optional) The number for the version to describe. If a VersionNumber parameter
+	// value isn't provided, the latest version of the template is described.
 	VersionNumber *int64 `location:"querystring" locationName:"version-number" min:"1" type:"long"`
 }
 
@@ -103,10 +103,10 @@ func (s DescribeTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 type DescribeTemplateOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
-	// The template structure of the object you want to describe.
+	// The template structure for the object you want to describe.
 	Template *Template `type:"structure"`
 }
 
@@ -133,21 +133,6 @@ const opDescribeTemplate = "DescribeTemplate"
 // Amazon QuickSight.
 //
 // Describes a template's metadata.
-//
-// CLI syntax:
-//
-// aws quicksight describe-template --aws-account-id 111122223333 --template-id
-// reports_test_template
-//
-// aws quicksight describe-template --aws-account-id 111122223333 --template-id
-// reports_test_template --version-number-2
-//
-// aws quicksight describe-template --aws-account-id 111122223333 --template-id
-// reports_test_template --alias-name '\$LATEST'
-//
-// Users can explicitly describe the latest version of the dashboard by passing
-// $LATEST to the alias-name parameter. $LATEST is an internally supported alias,
-// which points to the latest version of the dashboard.
 //
 //    // Example sending a request using DescribeTemplateRequest.
 //    req := client.DescribeTemplateRequest(params)

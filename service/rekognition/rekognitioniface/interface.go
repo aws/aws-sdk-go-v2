@@ -9,6 +9,9 @@
 package rekognitioniface
 
 import (
+	"context"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition"
 )
 
@@ -65,6 +68,10 @@ type ClientAPI interface {
 
 	CreateCollectionRequest(*rekognition.CreateCollectionInput) rekognition.CreateCollectionRequest
 
+	CreateProjectRequest(*rekognition.CreateProjectInput) rekognition.CreateProjectRequest
+
+	CreateProjectVersionRequest(*rekognition.CreateProjectVersionInput) rekognition.CreateProjectVersionRequest
+
 	CreateStreamProcessorRequest(*rekognition.CreateStreamProcessorInput) rekognition.CreateStreamProcessorRequest
 
 	DeleteCollectionRequest(*rekognition.DeleteCollectionInput) rekognition.DeleteCollectionRequest
@@ -75,7 +82,13 @@ type ClientAPI interface {
 
 	DescribeCollectionRequest(*rekognition.DescribeCollectionInput) rekognition.DescribeCollectionRequest
 
+	DescribeProjectVersionsRequest(*rekognition.DescribeProjectVersionsInput) rekognition.DescribeProjectVersionsRequest
+
+	DescribeProjectsRequest(*rekognition.DescribeProjectsInput) rekognition.DescribeProjectsRequest
+
 	DescribeStreamProcessorRequest(*rekognition.DescribeStreamProcessorInput) rekognition.DescribeStreamProcessorRequest
+
+	DetectCustomLabelsRequest(*rekognition.DetectCustomLabelsInput) rekognition.DetectCustomLabelsRequest
 
 	DetectFacesRequest(*rekognition.DetectFacesInput) rekognition.DetectFacesRequest
 
@@ -125,9 +138,17 @@ type ClientAPI interface {
 
 	StartPersonTrackingRequest(*rekognition.StartPersonTrackingInput) rekognition.StartPersonTrackingRequest
 
+	StartProjectVersionRequest(*rekognition.StartProjectVersionInput) rekognition.StartProjectVersionRequest
+
 	StartStreamProcessorRequest(*rekognition.StartStreamProcessorInput) rekognition.StartStreamProcessorRequest
 
+	StopProjectVersionRequest(*rekognition.StopProjectVersionInput) rekognition.StopProjectVersionRequest
+
 	StopStreamProcessorRequest(*rekognition.StopStreamProcessorInput) rekognition.StopStreamProcessorRequest
+
+	WaitUntilProjectVersionRunning(context.Context, *rekognition.DescribeProjectVersionsInput, ...aws.WaiterOption) error
+
+	WaitUntilProjectVersionTrainingCompleted(context.Context, *rekognition.DescribeProjectVersionsInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*rekognition.Client)(nil)

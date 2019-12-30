@@ -29,6 +29,18 @@ type AlgorithmSpecification struct {
 	// TrainingImage.
 	AlgorithmName *string `min:"1" type:"string"`
 
+	// To generate and save time-series metrics during training, set to true. The
+	// default is false and time-series metrics aren't generated except in the following
+	// cases:
+	//
+	//    * You use one of the Amazon SageMaker built-in algorithms
+	//
+	//    * You use one of the following prebuilt Amazon SageMaker Docker images:
+	//    Tensorflow MXNet PyTorch
+	//
+	//    * You specify at least one MetricDefinition
+	EnableSageMakerMetricsTimeSeries *bool `type:"boolean"`
+
 	// A list of metric definition objects. Each object specifies the metric name
 	// and regular expressions used to parse algorithm logs. Amazon SageMaker publishes
 	// each metric to Amazon CloudWatch.
@@ -338,7 +350,7 @@ type AnnotationConsolidationConfig struct {
 	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClass arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClass
 	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClass
 	//
-	//    * Named entity eecognition - Groups similar selections and calculates
+	//    * Named entity recognition - Groups similar selections and calculates
 	//    aggregate boundaries, resolving to most-assigned label. arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition
 	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognition
 	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-NamedEntityRecognition
@@ -351,6 +363,66 @@ type AnnotationConsolidationConfig struct {
 	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-NamedEntityRecognition
 	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-NamedEntityRecognition
 	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition
+	//
+	//    * Bounding box verification - Uses a variant of the Expectation Maximization
+	//    approach to estimate the true class of verification judgement for bounding
+	//    box labels based on annotations from individual workers. arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationBoundingBox
+	//
+	//    * Semantic segmentation verification - Uses a variant of the Expectation
+	//    Maximization approach to estimate the true class of verification judgement
+	//    for semantic segmentation labels based on annotations from individual
+	//    workers. arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationSemanticSegmentation
+	//
+	//    * Bounding box adjustment - Finds the most similar boxes from different
+	//    workers based on the Jaccard index of the adjusted annotations. arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentBoundingBox
+	//
+	//    * Semantic segmentation adjustment - Treats each pixel in an image as
+	//    a multi-class classification and treats pixel adjusted annotations from
+	//    workers as "votes" for the correct label. arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentSemanticSegmentation
+	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentSemanticSegmentation
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentSemanticSegmentation
+	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentSemanticSegmentation
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentSemanticSegmentation
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentSemanticSegmentation
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentSemanticSegmentation
+	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentSemanticSegmentation
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentSemanticSegmentation
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentSemanticSegmentation
+	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentSemanticSegmentation
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentSemanticSegmentation
 	//
 	// For more information, see Annotation Consolidation (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html).
 	//
@@ -369,6 +441,588 @@ func (s *AnnotationConsolidationConfig) Validate() error {
 
 	if s.AnnotationConsolidationLambdaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AnnotationConsolidationLambdaArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The app's details.
+type AppDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the app.
+	AppName *string `type:"string"`
+
+	// The type of app.
+	AppType AppType `type:"string" enum:"true"`
+
+	// The creation time.
+	CreationTime *time.Time `type:"timestamp"`
+
+	// The domain ID.
+	DomainId *string `type:"string"`
+
+	// The status.
+	Status AppStatus `type:"string" enum:"true"`
+
+	// The user profile name.
+	UserProfileName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AppDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Configuration to run a processing job in a specified container image.
+type AppSpecification struct {
+	_ struct{} `type:"structure"`
+
+	// The arguments for a container used to run a processing job.
+	ContainerArguments []string `min:"1" type:"list"`
+
+	// The entrypoint for a container used to run a processing job.
+	ContainerEntrypoint []string `min:"1" type:"list"`
+
+	// The container image to be run by the processing job.
+	//
+	// ImageUri is a required field
+	ImageUri *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AppSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AppSpecification) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AppSpecification"}
+	if s.ContainerArguments != nil && len(s.ContainerArguments) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContainerArguments", 1))
+	}
+	if s.ContainerEntrypoint != nil && len(s.ContainerEntrypoint) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContainerEntrypoint", 1))
+	}
+
+	if s.ImageUri == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ImageUri"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// An AutoPilot job will return recommendations, or candidates. Each candidate
+// has futher details about the steps involed, and the status.
+type AutoMLCandidate struct {
+	_ struct{} `type:"structure"`
+
+	// The candidate name.
+	//
+	// CandidateName is a required field
+	CandidateName *string `min:"1" type:"string" required:"true"`
+
+	// The candidate's status.
+	//
+	// CandidateStatus is a required field
+	CandidateStatus CandidateStatus `type:"string" required:"true" enum:"true"`
+
+	// The candidate's steps.
+	//
+	// CandidateSteps is a required field
+	CandidateSteps []AutoMLCandidateStep `type:"list" required:"true"`
+
+	// The creation time.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" required:"true"`
+
+	// The end time.
+	EndTime *time.Time `type:"timestamp"`
+
+	// The failure reason.
+	FailureReason *string `type:"string"`
+
+	// The candidate result from a job.
+	FinalAutoMLJobObjectiveMetric *FinalAutoMLJobObjectiveMetric `type:"structure"`
+
+	// The inference containers.
+	InferenceContainers []AutoMLContainerDefinition `type:"list"`
+
+	// The last modified time.
+	//
+	// LastModifiedTime is a required field
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
+
+	// The objective status.
+	//
+	// ObjectiveStatus is a required field
+	ObjectiveStatus ObjectiveStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s AutoMLCandidate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about the steps for a Candidate, and what step it is working
+// on.
+type AutoMLCandidateStep struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN for the Candidate's step.
+	//
+	// CandidateStepArn is a required field
+	CandidateStepArn *string `min:"1" type:"string" required:"true"`
+
+	// The name for the Candidate's step.
+	//
+	// CandidateStepName is a required field
+	CandidateStepName *string `min:"1" type:"string" required:"true"`
+
+	// Whether the Candidate is at the transform, training, or processing step.
+	//
+	// CandidateStepType is a required field
+	CandidateStepType CandidateStepType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s AutoMLCandidateStep) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Similar to Channel. A channel is a named input source that training algorithms
+// can consume. Refer to Channel for detailed descriptions.
+type AutoMLChannel struct {
+	_ struct{} `type:"structure"`
+
+	// You can use Gzip or None. The default value is None.
+	CompressionType CompressionType `type:"string" enum:"true"`
+
+	// The data source.
+	//
+	// DataSource is a required field
+	DataSource *AutoMLDataSource `type:"structure" required:"true"`
+
+	// The name of the target variable in supervised learning, a.k.a. ‘y’.
+	//
+	// TargetAttributeName is a required field
+	TargetAttributeName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AutoMLChannel) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AutoMLChannel) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AutoMLChannel"}
+
+	if s.DataSource == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DataSource"))
+	}
+
+	if s.TargetAttributeName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetAttributeName"))
+	}
+	if s.TargetAttributeName != nil && len(*s.TargetAttributeName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TargetAttributeName", 1))
+	}
+	if s.DataSource != nil {
+		if err := s.DataSource.Validate(); err != nil {
+			invalidParams.AddNested("DataSource", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// A list of container definitions that describe the different containers that
+// make up one AutoML candidate. Refer to ContainerDefinition for more details.
+type AutoMLContainerDefinition struct {
+	_ struct{} `type:"structure"`
+
+	// Environment variables to set in the container. Refer to ContainerDefinition
+	// for more details.
+	Environment map[string]string `type:"map"`
+
+	// The ECR path of the container. Refer to ContainerDefinition for more details.
+	//
+	// Image is a required field
+	Image *string `type:"string" required:"true"`
+
+	// The location of the model artifacts. Refer to ContainerDefinition for more
+	// details.
+	//
+	// ModelDataUrl is a required field
+	ModelDataUrl *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AutoMLContainerDefinition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The data source for the AutoPilot job.
+type AutoMLDataSource struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon S3 location of the data.
+	//
+	// S3DataSource is a required field
+	S3DataSource *AutoMLS3DataSource `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s AutoMLDataSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AutoMLDataSource) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AutoMLDataSource"}
+
+	if s.S3DataSource == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3DataSource"))
+	}
+	if s.S3DataSource != nil {
+		if err := s.S3DataSource.Validate(); err != nil {
+			invalidParams.AddNested("S3DataSource", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Artifacts that are generation during a job.
+type AutoMLJobArtifacts struct {
+	_ struct{} `type:"structure"`
+
+	// The URL to the notebook location.
+	CandidateDefinitionNotebookLocation *string `min:"1" type:"string"`
+
+	// The URL to the notebook location.
+	DataExplorationNotebookLocation *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s AutoMLJobArtifacts) String() string {
+	return awsutil.Prettify(s)
+}
+
+// How long a job is allowed to run, or how many candidates a job is allowed
+// to generate.
+type AutoMLJobCompletionCriteria struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum time, in seconds, an AutoML job is allowed to wait for a trial
+	// to complete. It must be equal to or greater than MaxRuntimePerTrainingJobInSeconds.
+	MaxAutoMLJobRuntimeInSeconds *int64 `min:"1" type:"integer"`
+
+	// The maximum number of times a training job is allowed to run.
+	MaxCandidates *int64 `min:"1" type:"integer"`
+
+	// The maximum time, in seconds, a job is allowed to run.
+	MaxRuntimePerTrainingJobInSeconds *int64 `min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s AutoMLJobCompletionCriteria) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AutoMLJobCompletionCriteria) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AutoMLJobCompletionCriteria"}
+	if s.MaxAutoMLJobRuntimeInSeconds != nil && *s.MaxAutoMLJobRuntimeInSeconds < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxAutoMLJobRuntimeInSeconds", 1))
+	}
+	if s.MaxCandidates != nil && *s.MaxCandidates < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxCandidates", 1))
+	}
+	if s.MaxRuntimePerTrainingJobInSeconds != nil && *s.MaxRuntimePerTrainingJobInSeconds < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxRuntimePerTrainingJobInSeconds", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// A collection of settings used for a job.
+type AutoMLJobConfig struct {
+	_ struct{} `type:"structure"`
+
+	// How long a job is allowed to run, or how many candidates a job is allowed
+	// to generate.
+	CompletionCriteria *AutoMLJobCompletionCriteria `type:"structure"`
+
+	// Security configuration for traffic encryption or Amazon VPC settings.
+	SecurityConfig *AutoMLSecurityConfig `type:"structure"`
+}
+
+// String returns the string representation
+func (s AutoMLJobConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AutoMLJobConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AutoMLJobConfig"}
+	if s.CompletionCriteria != nil {
+		if err := s.CompletionCriteria.Validate(); err != nil {
+			invalidParams.AddNested("CompletionCriteria", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.SecurityConfig != nil {
+		if err := s.SecurityConfig.Validate(); err != nil {
+			invalidParams.AddNested("SecurityConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Applies a metric to minimize or maximize for the job's objective.
+type AutoMLJobObjective struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the metric.
+	//
+	// MetricName is a required field
+	MetricName AutoMLMetricEnum `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s AutoMLJobObjective) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AutoMLJobObjective) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AutoMLJobObjective"}
+	if len(s.MetricName) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Provides a summary about a job.
+type AutoMLJobSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the job.
+	//
+	// AutoMLJobArn is a required field
+	AutoMLJobArn *string `min:"1" type:"string" required:"true"`
+
+	// The name of the object you are requesting.
+	//
+	// AutoMLJobName is a required field
+	AutoMLJobName *string `min:"1" type:"string" required:"true"`
+
+	// The job's secondary status.
+	//
+	// AutoMLJobSecondaryStatus is a required field
+	AutoMLJobSecondaryStatus AutoMLJobSecondaryStatus `type:"string" required:"true" enum:"true"`
+
+	// The job's status.
+	//
+	// AutoMLJobStatus is a required field
+	AutoMLJobStatus AutoMLJobStatus `type:"string" required:"true" enum:"true"`
+
+	// When the job was created.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" required:"true"`
+
+	// The end time.
+	EndTime *time.Time `type:"timestamp"`
+
+	// The failure reason.
+	FailureReason *string `type:"string"`
+
+	// When the job was last modified.
+	//
+	// LastModifiedTime is a required field
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
+}
+
+// String returns the string representation
+func (s AutoMLJobSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The output data configuration.
+type AutoMLOutputDataConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The AWS KMS encryption key ID.
+	KmsKeyId *string `type:"string"`
+
+	// The Amazon S3 output path. Must be 128 characters or less.
+	//
+	// S3OutputPath is a required field
+	S3OutputPath *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AutoMLOutputDataConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AutoMLOutputDataConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AutoMLOutputDataConfig"}
+
+	if s.S3OutputPath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3OutputPath"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The Amazon S3 data source.
+type AutoMLS3DataSource struct {
+	_ struct{} `type:"structure"`
+
+	// The data type.
+	//
+	// S3DataType is a required field
+	S3DataType AutoMLS3DataType `type:"string" required:"true" enum:"true"`
+
+	// The URL to the Amazon S3 data source.
+	//
+	// S3Uri is a required field
+	S3Uri *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AutoMLS3DataSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AutoMLS3DataSource) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AutoMLS3DataSource"}
+	if len(s.S3DataType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("S3DataType"))
+	}
+
+	if s.S3Uri == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3Uri"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Security options.
+type AutoMLSecurityConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Whether to use traffic encryption between the container layers.
+	EnableInterContainerTrafficEncryption *bool `type:"boolean"`
+
+	// The key used to encrypt stored data.
+	VolumeKmsKeyId *string `type:"string"`
+
+	// VPC configuration.
+	VpcConfig *VpcConfig `type:"structure"`
+}
+
+// String returns the string representation
+func (s AutoMLSecurityConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AutoMLSecurityConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AutoMLSecurityConfig"}
+	if s.VpcConfig != nil {
+		if err := s.VpcConfig.Validate(); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+type CaptureContentTypeHeader struct {
+	_ struct{} `type:"structure"`
+
+	CsvContentTypes []string `min:"1" type:"list"`
+
+	JsonContentTypes []string `min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s CaptureContentTypeHeader) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CaptureContentTypeHeader) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CaptureContentTypeHeader"}
+	if s.CsvContentTypes != nil && len(s.CsvContentTypes) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CsvContentTypes", 1))
+	}
+	if s.JsonContentTypes != nil && len(s.JsonContentTypes) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("JsonContentTypes", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+type CaptureOption struct {
+	_ struct{} `type:"structure"`
+
+	// CaptureMode is a required field
+	CaptureMode CaptureMode `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s CaptureOption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CaptureOption) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CaptureOption"}
+	if len(s.CaptureMode) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("CaptureMode"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -489,7 +1143,7 @@ type Channel struct {
 	// algorithm requires the RecordIO format. In this case, Amazon SageMaker wraps
 	// each individual S3 object in a RecordIO record. If the input data is already
 	// in RecordIO format, you don't need to set this attribute. For more information,
-	// see Create a Dataset Using RecordIO (https://mxnet.incubator.apache.org/architecture/note_data_loading.html#data-format).
+	// see Create a Dataset Using RecordIO (https://mxnet.apache.org/api/architecture/note_data_loading#data-format).
 	//
 	// In File mode, leave this field unset or set it to None.
 	RecordWrapperType RecordWrapper `type:"string" enum:"true"`
@@ -745,6 +1399,36 @@ func (s *CognitoMemberDefinition) Validate() error {
 	return nil
 }
 
+// Configuration information for tensor collections.
+type CollectionConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the tensor collection.
+	CollectionName *string `min:"1" type:"string"`
+
+	// Parameter values for the tensor collection. The allowed parameters are "name",
+	// "include_regex", "reduction_config", "save_config", "tensor_names", and "save_histogram".
+	CollectionParameters map[string]string `type:"map"`
+}
+
+// String returns the string representation
+func (s CollectionConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CollectionConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CollectionConfiguration"}
+	if s.CollectionName != nil && len(*s.CollectionName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CollectionName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // A summary of a model compilation job.
 type CompilationJobSummary struct {
 	_ struct{} `type:"structure"`
@@ -796,7 +1480,7 @@ type ContainerDefinition struct {
 	// This parameter is ignored for models that contain only a PrimaryContainer.
 	//
 	// When a ContainerDefinition is part of an inference pipeline, the value of
-	// ths parameter uniquely identifies the container for the purposes of logging
+	// the parameter uniquely identifies the container for the purposes of logging
 	// and metrics. For information, see Use Logs and Metrics to Monitor an Inference
 	// Pipeline (https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html).
 	// If you don't specify a value for this parameter for a ContainerDefinition
@@ -820,7 +1504,7 @@ type ContainerDefinition struct {
 	// Using Your Own Algorithms with Amazon SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html)
 	Image *string `type:"string"`
 
-	// Specifies whether the container hosts a single model or multiple models.
+	// Whether the container hosts a single model or multiple models.
 	Mode ContainerMode `type:"string" enum:"true"`
 
 	// The S3 path where the model artifacts, which result from model training,
@@ -982,6 +1666,91 @@ func (s *ContinuousParameterRangeSpecification) Validate() error {
 	return nil
 }
 
+type DataCaptureConfig struct {
+	_ struct{} `type:"structure"`
+
+	CaptureContentTypeHeader *CaptureContentTypeHeader `type:"structure"`
+
+	// CaptureOptions is a required field
+	CaptureOptions []CaptureOption `min:"1" type:"list" required:"true"`
+
+	// DestinationS3Uri is a required field
+	DestinationS3Uri *string `type:"string" required:"true"`
+
+	EnableCapture *bool `type:"boolean"`
+
+	// InitialSamplingPercentage is a required field
+	InitialSamplingPercentage *int64 `type:"integer" required:"true"`
+
+	KmsKeyId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DataCaptureConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DataCaptureConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DataCaptureConfig"}
+
+	if s.CaptureOptions == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CaptureOptions"))
+	}
+	if s.CaptureOptions != nil && len(s.CaptureOptions) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CaptureOptions", 1))
+	}
+
+	if s.DestinationS3Uri == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DestinationS3Uri"))
+	}
+
+	if s.InitialSamplingPercentage == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InitialSamplingPercentage"))
+	}
+	if s.CaptureContentTypeHeader != nil {
+		if err := s.CaptureContentTypeHeader.Validate(); err != nil {
+			invalidParams.AddNested("CaptureContentTypeHeader", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.CaptureOptions != nil {
+		for i, v := range s.CaptureOptions {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CaptureOptions", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+type DataCaptureConfigSummary struct {
+	_ struct{} `type:"structure"`
+
+	// CaptureStatus is a required field
+	CaptureStatus CaptureStatus `type:"string" required:"true" enum:"true"`
+
+	// CurrentSamplingPercentage is a required field
+	CurrentSamplingPercentage *int64 `type:"integer" required:"true"`
+
+	// DestinationS3Uri is a required field
+	DestinationS3Uri *string `type:"string" required:"true"`
+
+	// EnableCapture is a required field
+	EnableCapture *bool `type:"boolean" required:"true"`
+
+	// KmsKeyId is a required field
+	KmsKeyId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DataCaptureConfigSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The data structure used to specify the data to be used for inference in a
 // batch transform job and to associate the data that is relevant to the prediction
 // results in the output. The input filter provided allows you to exclude input
@@ -1072,6 +1841,134 @@ func (s *DataSource) Validate() error {
 	return nil
 }
 
+// Configuration information for the debug hook parameters, collection configuration,
+// and storage paths.
+type DebugHookConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Configuration information for tensor collections.
+	CollectionConfigurations []CollectionConfiguration `type:"list"`
+
+	// Configuration information for the debug hook parameters.
+	HookParameters map[string]string `type:"map"`
+
+	// Path to local storage location for tensors. Defaults to /opt/ml/output/tensors/.
+	LocalPath *string `type:"string"`
+
+	// Path to Amazon S3 storage location for tensors.
+	//
+	// S3OutputPath is a required field
+	S3OutputPath *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DebugHookConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DebugHookConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DebugHookConfig"}
+
+	if s.S3OutputPath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3OutputPath"))
+	}
+	if s.CollectionConfigurations != nil {
+		for i, v := range s.CollectionConfigurations {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CollectionConfigurations", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Configuration information for debugging rules.
+type DebugRuleConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The instance type to deploy for a training job.
+	InstanceType ProcessingInstanceType `type:"string" enum:"true"`
+
+	// Path to local storage location for rules. Defaults to /opt/ml/processing/output/rule/.
+	LocalPath *string `type:"string"`
+
+	// The name of the rule configuration. It must be unique relative to other rule
+	// configuration names.
+	//
+	// RuleConfigurationName is a required field
+	RuleConfigurationName *string `min:"1" type:"string" required:"true"`
+
+	// The Amazon Elastic Container (ECR) Image for the managed rule evaluation.
+	//
+	// RuleEvaluatorImage is a required field
+	RuleEvaluatorImage *string `type:"string" required:"true"`
+
+	// Runtime configuration for rule container.
+	RuleParameters map[string]string `type:"map"`
+
+	// Path to Amazon S3 storage location for rules.
+	S3OutputPath *string `type:"string"`
+
+	// The size, in GB, of the ML storage volume attached to the notebook instance.
+	VolumeSizeInGB *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s DebugRuleConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DebugRuleConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DebugRuleConfiguration"}
+
+	if s.RuleConfigurationName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RuleConfigurationName"))
+	}
+	if s.RuleConfigurationName != nil && len(*s.RuleConfigurationName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleConfigurationName", 1))
+	}
+
+	if s.RuleEvaluatorImage == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RuleEvaluatorImage"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Information about the status of the rule evaluation.
+type DebugRuleEvaluationStatus struct {
+	_ struct{} `type:"structure"`
+
+	// Timestamp when the rule evaluation status was last modified.
+	LastModifiedTime *time.Time `type:"timestamp"`
+
+	// The name of the rule configuration
+	RuleConfigurationName *string `min:"1" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the rule evaluation job.
+	RuleEvaluationJobArn *string `type:"string"`
+
+	// Status of the rule evaluation.
+	RuleEvaluationStatus RuleEvaluationStatus `type:"string" enum:"true"`
+
+	// Details from the rule evaluation.
+	StatusDetails *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DebugRuleEvaluationStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Gets the Amazon EC2 Container Registry path of the docker image of the model
 // that is hosted in this ProductionVariant.
 //
@@ -1137,6 +2034,37 @@ func (s *DesiredWeightAndCapacity) Validate() error {
 	return nil
 }
 
+// The domain's details.
+type DomainDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The creation time.
+	CreationTime *time.Time `type:"timestamp"`
+
+	// The domain's Amazon Resource Name (ARN).
+	DomainArn *string `type:"string"`
+
+	// The domain ID.
+	DomainId *string `type:"string"`
+
+	// The domain name.
+	DomainName *string `type:"string"`
+
+	// The last modified time.
+	LastModifiedTime *time.Time `type:"timestamp"`
+
+	// The status.
+	Status DomainStatus `type:"string" enum:"true"`
+
+	// The domain's URL.
+	Url *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DomainDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Provides summary information for an endpoint configuration.
 type EndpointConfigSummary struct {
 	_ struct{} `type:"structure"`
@@ -1160,6 +2088,53 @@ type EndpointConfigSummary struct {
 // String returns the string representation
 func (s EndpointConfigSummary) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Input object for the endpoint
+type EndpointInput struct {
+	_ struct{} `type:"structure"`
+
+	// An endpoint in customer's account which has enabled DataCaptureConfig enabled.
+	//
+	// EndpointName is a required field
+	EndpointName *string `type:"string" required:"true"`
+
+	// Path to the filesystem where the endpoint data is available to the container.
+	//
+	// LocalPath is a required field
+	LocalPath *string `type:"string" required:"true"`
+
+	// Whether input data distributed in Amazon S3 is fully replicated or sharded
+	// by an S3 key. Defauts to FullyReplicated
+	S3DataDistributionType ProcessingS3DataDistributionType `type:"string" enum:"true"`
+
+	// Whether the Pipe or File is used as the input mode for transfering data for
+	// the monitoring job. Pipe mode is recommended for large datasets. File mode
+	// is useful for small files that fit in memory. Defaults to File.
+	S3InputMode ProcessingS3InputMode `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s EndpointInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EndpointInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "EndpointInput"}
+
+	if s.EndpointName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
+	}
+
+	if s.LocalPath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LocalPath"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Provides summary information for an endpoint.
@@ -1224,6 +2199,136 @@ type EndpointSummary struct {
 
 // String returns the string representation
 func (s EndpointSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A summary of the properties of an experiment as returned by the Search API.
+type Experiment struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the user who created or modified an experiment, trial,
+	// or trial component.
+	CreatedBy *UserContext `type:"structure"`
+
+	// When the experiment was created.
+	CreationTime *time.Time `type:"timestamp"`
+
+	// The description of the experiment.
+	Description *string `type:"string"`
+
+	// The name of the experiment as displayed. If DisplayName isn't specified,
+	// ExperimentName is displayed.
+	DisplayName *string `min:"1" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the experiment.
+	ExperimentArn *string `type:"string"`
+
+	// The name of the experiment.
+	ExperimentName *string `min:"1" type:"string"`
+
+	// Information about the user who created or modified an experiment, trial,
+	// or trial component.
+	LastModifiedBy *UserContext `type:"structure"`
+
+	// When the experiment was last modified.
+	LastModifiedTime *time.Time `type:"timestamp"`
+
+	// The source of the experiment.
+	Source *ExperimentSource `type:"structure"`
+
+	// The list of tags that are associated with the experiment. You can use Search
+	// API to search on the tags.
+	Tags []Tag `type:"list"`
+}
+
+// String returns the string representation
+func (s Experiment) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Configuration for the experiment.
+type ExperimentConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the experiment.
+	ExperimentName *string `min:"1" type:"string"`
+
+	// Display name for the trial component.
+	TrialComponentDisplayName *string `min:"1" type:"string"`
+
+	// The name of the trial.
+	TrialName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ExperimentConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ExperimentConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ExperimentConfig"}
+	if s.ExperimentName != nil && len(*s.ExperimentName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ExperimentName", 1))
+	}
+	if s.TrialComponentDisplayName != nil && len(*s.TrialComponentDisplayName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TrialComponentDisplayName", 1))
+	}
+	if s.TrialName != nil && len(*s.TrialName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TrialName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The source of the experiment.
+type ExperimentSource struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the source.
+	//
+	// SourceArn is a required field
+	SourceArn *string `type:"string" required:"true"`
+
+	// The source type.
+	SourceType *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ExperimentSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A summary of the properties of an experiment. To get the complete set of
+// properties, call the DescribeExperiment API and provide the ExperimentName.
+type ExperimentSummary struct {
+	_ struct{} `type:"structure"`
+
+	// When the experiment was created.
+	CreationTime *time.Time `type:"timestamp"`
+
+	// The name of the experiment as displayed. If DisplayName isn't specified,
+	// ExperimentName is displayed.
+	DisplayName *string `min:"1" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the experiment.
+	ExperimentArn *string `type:"string"`
+
+	// The name of the experiment.
+	ExperimentName *string `min:"1" type:"string"`
+
+	// The source of the experiment.
+	ExperimentSource *ExperimentSource `type:"structure"`
+
+	// When the experiment was last modified.
+	LastModifiedTime *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation
+func (s ExperimentSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -1417,6 +2522,29 @@ func (s *Filter) Validate() error {
 	return nil
 }
 
+// The candidate result from a job.
+type FinalAutoMLJobObjectiveMetric struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the metric.
+	//
+	// MetricName is a required field
+	MetricName AutoMLMetricEnum `type:"string" required:"true" enum:"true"`
+
+	// The metric type used.
+	Type AutoMLJobObjectiveType `type:"string" enum:"true"`
+
+	// The value of the metric.
+	//
+	// Value is a required field
+	Value *float64 `type:"float" required:"true"`
+}
+
+// String returns the string representation
+func (s FinalAutoMLJobObjectiveMetric) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Shows the final value for the objective metric for a training job that was
 // launched by a hyperparameter tuning job. You define the objective metric
 // in the HyperParameterTuningJobObjective parameter of HyperParameterTuningJobConfig.
@@ -1440,6 +2568,73 @@ type FinalHyperParameterTuningJobObjectiveMetric struct {
 
 // String returns the string representation
 func (s FinalHyperParameterTuningJobObjectiveMetric) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Contains information about where human output will be stored.
+type FlowDefinitionOutputConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Key Management Service (KMS) key ID for server-side encryption.
+	KmsKeyId *string `type:"string"`
+
+	// The Amazon S3 path where the object containing human output will be made
+	// available.
+	//
+	// S3OutputPath is a required field
+	S3OutputPath *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s FlowDefinitionOutputConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FlowDefinitionOutputConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "FlowDefinitionOutputConfig"}
+
+	if s.S3OutputPath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3OutputPath"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Contains summary information about the flow definition.
+type FlowDefinitionSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The timestamp when SageMaker created the flow definition.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" required:"true"`
+
+	// The reason why the flow definition creation failed. A failure reason is returned
+	// only when the flow definition status is Failed.
+	FailureReason *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) of the flow definition.
+	//
+	// FlowDefinitionArn is a required field
+	FlowDefinitionArn *string `type:"string" required:"true"`
+
+	// The name of the flow definition.
+	//
+	// FlowDefinitionName is a required field
+	FlowDefinitionName *string `min:"1" type:"string" required:"true"`
+
+	// The status of the flow definition. Valid values:
+	//
+	// FlowDefinitionStatus is a required field
+	FlowDefinitionStatus FlowDefinitionStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s FlowDefinitionSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -1519,6 +2714,417 @@ func (s *GitConfigForUpdate) Validate() error {
 	return nil
 }
 
+// Defines under what conditions SageMaker creates a human loop.
+type HumanLoopActivationConditionsConfig struct {
+	_ struct{} `type:"structure"`
+
+	// JSON expressing use-case specific conditions declaratively. If any condition
+	// is matched, atomic tasks are created against the configured work team. The
+	// set of conditions is different for Rekognition and Textract.
+	//
+	// HumanLoopActivationConditions is a required field
+	HumanLoopActivationConditions aws.JSONValue `type:"jsonvalue" required:"true"`
+}
+
+// String returns the string representation
+func (s HumanLoopActivationConditionsConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HumanLoopActivationConditionsConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HumanLoopActivationConditionsConfig"}
+
+	if s.HumanLoopActivationConditions == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HumanLoopActivationConditions"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Provides information about how and under what conditions SageMaker creates
+// a human loop. If HumanLoopActivationConfig is not given, then all requests
+// go to humans.
+type HumanLoopActivationConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Container structure for defining under what conditions SageMaker creates
+	// a human loop.
+	//
+	// HumanLoopActivationConditionsConfig is a required field
+	HumanLoopActivationConditionsConfig *HumanLoopActivationConditionsConfig `type:"structure" required:"true"`
+
+	// Container for configuring the source of human task requests.
+	//
+	// HumanLoopRequestSource is a required field
+	HumanLoopRequestSource *HumanLoopRequestSource `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s HumanLoopActivationConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HumanLoopActivationConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HumanLoopActivationConfig"}
+
+	if s.HumanLoopActivationConditionsConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HumanLoopActivationConditionsConfig"))
+	}
+
+	if s.HumanLoopRequestSource == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HumanLoopRequestSource"))
+	}
+	if s.HumanLoopActivationConditionsConfig != nil {
+		if err := s.HumanLoopActivationConditionsConfig.Validate(); err != nil {
+			invalidParams.AddNested("HumanLoopActivationConditionsConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.HumanLoopRequestSource != nil {
+		if err := s.HumanLoopRequestSource.Validate(); err != nil {
+			invalidParams.AddNested("HumanLoopRequestSource", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Describes the work to be performed by human workers.
+type HumanLoopConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the human task user interface.
+	//
+	// HumanTaskUiArn is a required field
+	HumanTaskUiArn *string `type:"string" required:"true"`
+
+	// Defines the amount of money paid to an Amazon Mechanical Turk worker for
+	// each task performed.
+	//
+	// Use one of the following prices for bounding box tasks. Prices are in US
+	// dollars and should be based on the complexity of the task; the longer it
+	// takes in your initial testing, the more you should offer.
+	//
+	//    * 0.036
+	//
+	//    * 0.048
+	//
+	//    * 0.060
+	//
+	//    * 0.072
+	//
+	//    * 0.120
+	//
+	//    * 0.240
+	//
+	//    * 0.360
+	//
+	//    * 0.480
+	//
+	//    * 0.600
+	//
+	//    * 0.720
+	//
+	//    * 0.840
+	//
+	//    * 0.960
+	//
+	//    * 1.080
+	//
+	//    * 1.200
+	//
+	// Use one of the following prices for image classification, text classification,
+	// and custom tasks. Prices are in US dollars.
+	//
+	//    * 0.012
+	//
+	//    * 0.024
+	//
+	//    * 0.036
+	//
+	//    * 0.048
+	//
+	//    * 0.060
+	//
+	//    * 0.072
+	//
+	//    * 0.120
+	//
+	//    * 0.240
+	//
+	//    * 0.360
+	//
+	//    * 0.480
+	//
+	//    * 0.600
+	//
+	//    * 0.720
+	//
+	//    * 0.840
+	//
+	//    * 0.960
+	//
+	//    * 1.080
+	//
+	//    * 1.200
+	//
+	// Use one of the following prices for semantic segmentation tasks. Prices are
+	// in US dollars.
+	//
+	//    * 0.840
+	//
+	//    * 0.960
+	//
+	//    * 1.080
+	//
+	//    * 1.200
+	//
+	// Use one of the following prices for Textract AnalyzeDocument Important Form
+	// Key Amazon Augmented AI review tasks. Prices are in US dollars.
+	//
+	//    * 2.400
+	//
+	//    * 2.280
+	//
+	//    * 2.160
+	//
+	//    * 2.040
+	//
+	//    * 1.920
+	//
+	//    * 1.800
+	//
+	//    * 1.680
+	//
+	//    * 1.560
+	//
+	//    * 1.440
+	//
+	//    * 1.320
+	//
+	//    * 1.200
+	//
+	//    * 1.080
+	//
+	//    * 0.960
+	//
+	//    * 0.840
+	//
+	//    * 0.720
+	//
+	//    * 0.600
+	//
+	//    * 0.480
+	//
+	//    * 0.360
+	//
+	//    * 0.240
+	//
+	//    * 0.120
+	//
+	//    * 0.072
+	//
+	//    * 0.060
+	//
+	//    * 0.048
+	//
+	//    * 0.036
+	//
+	//    * 0.024
+	//
+	//    * 0.012
+	//
+	// Use one of the following prices for Rekognition DetectModerationLabels Amazon
+	// Augmented AI review tasks. Prices are in US dollars.
+	//
+	//    * 1.200
+	//
+	//    * 1.080
+	//
+	//    * 0.960
+	//
+	//    * 0.840
+	//
+	//    * 0.720
+	//
+	//    * 0.600
+	//
+	//    * 0.480
+	//
+	//    * 0.360
+	//
+	//    * 0.240
+	//
+	//    * 0.120
+	//
+	//    * 0.072
+	//
+	//    * 0.060
+	//
+	//    * 0.048
+	//
+	//    * 0.036
+	//
+	//    * 0.024
+	//
+	//    * 0.012
+	//
+	// Use one of the following prices for Amazon Augmented AI custom human review
+	// tasks. Prices are in US dollars.
+	//
+	//    * 1.200
+	//
+	//    * 1.080
+	//
+	//    * 0.960
+	//
+	//    * 0.840
+	//
+	//    * 0.720
+	//
+	//    * 0.600
+	//
+	//    * 0.480
+	//
+	//    * 0.360
+	//
+	//    * 0.240
+	//
+	//    * 0.120
+	//
+	//    * 0.072
+	//
+	//    * 0.060
+	//
+	//    * 0.048
+	//
+	//    * 0.036
+	//
+	//    * 0.024
+	//
+	//    * 0.012
+	PublicWorkforceTaskPrice *PublicWorkforceTaskPrice `type:"structure"`
+
+	// The length of time that a task remains available for labeling by human workers.
+	TaskAvailabilityLifetimeInSeconds *int64 `min:"1" type:"integer"`
+
+	// The number of human tasks.
+	//
+	// TaskCount is a required field
+	TaskCount *int64 `min:"1" type:"integer" required:"true"`
+
+	// A description for the human worker task.
+	//
+	// TaskDescription is a required field
+	TaskDescription *string `min:"1" type:"string" required:"true"`
+
+	// Keywords used to describe the task so that workers can discover the task.
+	TaskKeywords []string `min:"1" type:"list"`
+
+	// The amount of time that a worker has to complete a task.
+	TaskTimeLimitInSeconds *int64 `min:"30" type:"integer"`
+
+	// A title for the human worker task.
+	//
+	// TaskTitle is a required field
+	TaskTitle *string `min:"1" type:"string" required:"true"`
+
+	// Amazon Resource Name (ARN) of a team of workers.
+	//
+	// WorkteamArn is a required field
+	WorkteamArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s HumanLoopConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HumanLoopConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HumanLoopConfig"}
+
+	if s.HumanTaskUiArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HumanTaskUiArn"))
+	}
+	if s.TaskAvailabilityLifetimeInSeconds != nil && *s.TaskAvailabilityLifetimeInSeconds < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("TaskAvailabilityLifetimeInSeconds", 1))
+	}
+
+	if s.TaskCount == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TaskCount"))
+	}
+	if s.TaskCount != nil && *s.TaskCount < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("TaskCount", 1))
+	}
+
+	if s.TaskDescription == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TaskDescription"))
+	}
+	if s.TaskDescription != nil && len(*s.TaskDescription) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TaskDescription", 1))
+	}
+	if s.TaskKeywords != nil && len(s.TaskKeywords) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TaskKeywords", 1))
+	}
+	if s.TaskTimeLimitInSeconds != nil && *s.TaskTimeLimitInSeconds < 30 {
+		invalidParams.Add(aws.NewErrParamMinValue("TaskTimeLimitInSeconds", 30))
+	}
+
+	if s.TaskTitle == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TaskTitle"))
+	}
+	if s.TaskTitle != nil && len(*s.TaskTitle) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TaskTitle", 1))
+	}
+
+	if s.WorkteamArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("WorkteamArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Container for configuring the source of human task requests.
+type HumanLoopRequestSource struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether Amazon Rekognition or Amazon Textract are used as the integration
+	// source. The default field settings and JSON parsing rules are different based
+	// on the integration source. Valid values:
+	//
+	// AwsManagedHumanLoopRequestSource is a required field
+	AwsManagedHumanLoopRequestSource AwsManagedHumanLoopRequestSource `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s HumanLoopRequestSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HumanLoopRequestSource) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HumanLoopRequestSource"}
+	if len(s.AwsManagedHumanLoopRequestSource) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("AwsManagedHumanLoopRequestSource"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Information required for human workers to complete a labeling task.
 type HumanTaskConfig struct {
 	_ struct{} `type:"structure"`
@@ -1529,7 +3135,8 @@ type HumanTaskConfig struct {
 	AnnotationConsolidationConfig *AnnotationConsolidationConfig `type:"structure" required:"true"`
 
 	// Defines the maximum number of data objects that can be labeled by human workers
-	// at the same time. Each object may have more than one worker at one time.
+	// at the same time. Also referred to as batch size. Each object may have more
+	// than one worker at one time.
 	MaxConcurrentTaskCount *int64 `min:"1" type:"integer"`
 
 	// The number of human workers that will label an object.
@@ -1557,6 +3164,14 @@ type HumanTaskConfig struct {
 	//
 	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-NamedEntityRecognition
 	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationBoundingBox
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentSemanticSegmentation
+	//
 	// US East (Ohio) (us-east-2):
 	//
 	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-BoundingBox
@@ -1568,6 +3183,14 @@ type HumanTaskConfig struct {
 	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClass
 	//
 	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationBoundingBox
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentSemanticSegmentation
 	//
 	// US West (Oregon) (us-west-2):
 	//
@@ -1581,17 +3204,33 @@ type HumanTaskConfig struct {
 	//
 	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-NamedEntityRecognition
 	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationBoundingBox
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentSemanticSegmentation
+	//
 	// Canada (Central) (ca-central-1):
 	//
-	//    * arn:awslambda:ca-central-1:918755190332:function:PRE-BoundingBox
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-BoundingBox
 	//
-	//    * arn:awslambda:ca-central-1:918755190332:function:PRE-ImageMultiClass
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClass
 	//
-	//    * arn:awslambda:ca-central-1:918755190332:function:PRE-SemanticSegmentation
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-SemanticSegmentation
 	//
-	//    * arn:awslambda:ca-central-1:918755190332:function:PRE-TextMultiClass
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClass
 	//
-	//    * arn:awslambda:ca-central-1:918755190332:function:PRE-NamedEntityRecognition
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationBoundingBox
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentSemanticSegmentation
 	//
 	// EU (Ireland) (eu-west-1):
 	//
@@ -1605,29 +3244,53 @@ type HumanTaskConfig struct {
 	//
 	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-NamedEntityRecognition
 	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationBoundingBox
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentSemanticSegmentation
+	//
 	// EU (London) (eu-west-2):
 	//
-	//    * arn:awslambda:eu-west-2:487402164563:function:PRE-BoundingBox
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-BoundingBox
 	//
-	//    * arn:awslambda:eu-west-2:487402164563:function:PRE-ImageMultiClass
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClass
 	//
-	//    * arn:awslambda:eu-west-2:487402164563:function:PRE-SemanticSegmentation
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-SemanticSegmentation
 	//
-	//    * arn:awslambda:eu-west-2:487402164563:function:PRE-TextMultiClass
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClass
 	//
-	//    * arn:awslambda:eu-west-2:487402164563:function:PRE-NamedEntityRecognition
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationBoundingBox
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentSemanticSegmentation
 	//
 	// EU Frankfurt (eu-central-1):
 	//
-	//    * arn:awslambda:eu-central-1:203001061592:function:PRE-BoundingBox
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-BoundingBox
 	//
-	//    * arn:awslambda:eu-central-1:203001061592:function:PRE-ImageMultiClass
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClass
 	//
-	//    * arn:awslambda:eu-central-1:203001061592:function:PRE-SemanticSegmentation
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-SemanticSegmentation
 	//
-	//    * arn:awslambda:eu-central-1:203001061592:function:PRE-TextMultiClass
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClass
 	//
-	//    * arn:awslambda:eu-central-1:203001061592:function:PRE-NamedEntityRecognition
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationBoundingBox
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentSemanticSegmentation
 	//
 	// Asia Pacific (Tokyo) (ap-northeast-1):
 	//
@@ -1641,41 +3304,73 @@ type HumanTaskConfig struct {
 	//
 	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-NamedEntityRecognition
 	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationBoundingBox
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentSemanticSegmentation
+	//
 	// Asia Pacific (Seoul) (ap-northeast-2):
 	//
-	//    * arn:awslambda:ap-northeast-2:845288260483:function:PRE-BoundingBox
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-BoundingBox
 	//
-	//    * arn:awslambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClass
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClass
 	//
-	//    * arn:awslambda:ap-northeast-2:845288260483:function:PRE-SemanticSegmentation
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-SemanticSegmentation
 	//
-	//    * arn:awslambda:ap-northeast-2:845288260483:function:PRE-TextMultiClass
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClass
 	//
-	//    * arn:awslambda:ap-northeast-2:845288260483:function:PRE-NamedEntityRecognition
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationBoundingBox
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentSemanticSegmentation
 	//
 	// Asia Pacific (Mumbai) (ap-south-1):
 	//
-	//    * arn:awslambda:ap-south-1:565803892007:function:PRE-BoundingBox
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-BoundingBox
 	//
-	//    * arn:awslambda:ap-south-1:565803892007:function:PRE-ImageMultiClass
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClass
 	//
-	//    * arn:awslambda:ap-south-1:565803892007:function:PRE-SemanticSegmentation
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-SemanticSegmentation
 	//
-	//    * arn:awslambda:ap-south-1:565803892007:function:PRE-TextMultiClass
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClass
 	//
-	//    * arn:awslambda:ap-south-1:565803892007:function:PRE-NamedEntityRecognition
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationBoundingBox
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentSemanticSegmentation
 	//
 	// Asia Pacific (Singapore) (ap-southeast-1):
 	//
-	//    * arn:awslambda:ap-southeast-1:377565633583:function:PRE-BoundingBox
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-BoundingBox
 	//
-	//    * arn:awslambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClass
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClass
 	//
-	//    * arn:awslambda:ap-southeast-1:377565633583:function:PRE-SemanticSegmentation
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-SemanticSegmentation
 	//
-	//    * arn:awslambda:ap-southeast-1:377565633583:function:PRE-TextMultiClass
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClass
 	//
-	//    * arn:awslambda:ap-southeast-1:377565633583:function:PRE-NamedEntityRecognition
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationBoundingBox
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentSemanticSegmentation
 	//
 	// Asia Pacific (Sydney) (ap-southeast-2):
 	//
@@ -1688,6 +3383,14 @@ type HumanTaskConfig struct {
 	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClass
 	//
 	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VerificationBoundingBox
+	//
+	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentSemanticSegmentation
 	//
 	// PreHumanTaskLambdaArn is a required field
 	PreHumanTaskLambdaArn *string `type:"string" required:"true"`
@@ -1809,6 +3512,31 @@ func (s *HumanTaskConfig) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Container for human task user interface information.
+type HumanTaskUiSummary struct {
+	_ struct{} `type:"structure"`
+
+	// A timestamp when SageMaker created the human task user interface.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" required:"true"`
+
+	// The Amazon Resource Name (ARN) of the human task user interface.
+	//
+	// HumanTaskUiArn is a required field
+	HumanTaskUiArn *string `type:"string" required:"true"`
+
+	// The name of the human task user interface.
+	//
+	// HumanTaskUiName is a required field
+	HumanTaskUiName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s HumanTaskUiSummary) String() string {
+	return awsutil.Prettify(s)
 }
 
 // Specifies which training algorithm to use for training jobs that a hyperparameter
@@ -1951,6 +3679,9 @@ type HyperParameterTrainingJobDefinition struct {
 	// checkpoint data.
 	CheckpointConfig *CheckpointConfig `type:"structure"`
 
+	// The job definition name.
+	DefinitionName *string `min:"1" type:"string"`
+
 	// To encrypt all communications between ML compute instances in distributed
 	// training, choose True. Encryption provides greater security for distributed
 	// training, but training might take longer. How long it takes depends on the
@@ -1971,6 +3702,18 @@ type HyperParameterTrainingJobDefinition struct {
 	//
 	// The Semantic Segmentation built-in algorithm does not support network isolation.
 	EnableNetworkIsolation *bool `type:"boolean"`
+
+	// Specifies ranges of integer, continuous, and categorical hyperparameters
+	// that a hyperparameter tuning job searches. The hyperparameter tuning job
+	// launches training jobs with hyperparameter values within these ranges to
+	// find the combination of values that result in the training job with the best
+	// performance as measured by the objective metric of the hyperparameter tuning
+	// job.
+	//
+	// You can specify a maximum of 20 hyperparameters that a hyperparameter tuning
+	// job can search over. Every possible value of a categorical parameter range
+	// counts against this limit.
+	HyperParameterRanges *ParameterRanges `type:"structure"`
 
 	// An array of Channel objects that specify the input for the training jobs
 	// that the tuning job launches.
@@ -2012,6 +3755,12 @@ type HyperParameterTrainingJobDefinition struct {
 	// StoppingCondition is a required field
 	StoppingCondition *StoppingCondition `type:"structure" required:"true"`
 
+	// Defines the objective metric for a hyperparameter tuning job. Hyperparameter
+	// tuning uses the value of this metric to evaluate the training jobs it launches,
+	// and returns the training job that results in either the highest or lowest
+	// value for this metric, depending on the value you specify for the Type parameter.
+	TuningObjective *HyperParameterTuningJobObjective `type:"structure"`
+
 	// The VpcConfig object that specifies the VPC that you want the training jobs
 	// that this hyperparameter tuning job launches to connect to. Control access
 	// to and from your training container by configuring the VPC. For more information,
@@ -2030,6 +3779,9 @@ func (s *HyperParameterTrainingJobDefinition) Validate() error {
 
 	if s.AlgorithmSpecification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AlgorithmSpecification"))
+	}
+	if s.DefinitionName != nil && len(*s.DefinitionName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DefinitionName", 1))
 	}
 	if s.InputDataConfig != nil && len(s.InputDataConfig) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InputDataConfig", 1))
@@ -2063,6 +3815,11 @@ func (s *HyperParameterTrainingJobDefinition) Validate() error {
 			invalidParams.AddNested("CheckpointConfig", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.HyperParameterRanges != nil {
+		if err := s.HyperParameterRanges.Validate(); err != nil {
+			invalidParams.AddNested("HyperParameterRanges", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.InputDataConfig != nil {
 		for i, v := range s.InputDataConfig {
 			if err := v.Validate(); err != nil {
@@ -2083,6 +3840,11 @@ func (s *HyperParameterTrainingJobDefinition) Validate() error {
 	if s.StoppingCondition != nil {
 		if err := s.StoppingCondition.Validate(); err != nil {
 			invalidParams.AddNested("StoppingCondition", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.TuningObjective != nil {
+		if err := s.TuningObjective.Validate(); err != nil {
+			invalidParams.AddNested("TuningObjective", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.VpcConfig != nil {
@@ -2140,6 +3902,9 @@ type HyperParameterTrainingJobSummary struct {
 	// TrainingJobArn is a required field
 	TrainingJobArn *string `type:"string" required:"true"`
 
+	// The training job definition name.
+	TrainingJobDefinitionName *string `min:"1" type:"string"`
+
 	// The name of the training job.
 	//
 	// TrainingJobName is a required field
@@ -2187,7 +3952,7 @@ type HyperParameterTuningJobConfig struct {
 
 	// Specifies how hyperparameter tuning chooses the combinations of hyperparameter
 	// values to use for the training job it launches. To use the Bayesian search
-	// stategy, set this to Bayesian. To randomly search, set it to Random. For
+	// strategy, set this to Bayesian. To randomly search, set it to Random. For
 	// information about search strategies, see How Hyperparameter Tuning Works
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html).
 	//
@@ -2209,6 +3974,9 @@ type HyperParameterTuningJobConfig struct {
 	// job when they are unlikely to perform better than previously completed training
 	// jobs. For more information, see Stop Training Jobs Early (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html).
 	TrainingJobEarlyStoppingType TrainingJobEarlyStoppingType `type:"string" enum:"true"`
+
+	// The tuning job's completion criteria.
+	TuningJobCompletionCriteria *TuningJobCompletionCriteria `type:"structure"`
 }
 
 // String returns the string representation
@@ -2239,6 +4007,11 @@ func (s *HyperParameterTuningJobConfig) Validate() error {
 	if s.ResourceLimits != nil {
 		if err := s.ResourceLimits.Validate(); err != nil {
 			invalidParams.AddNested("ResourceLimits", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.TuningJobCompletionCriteria != nil {
+		if err := s.TuningJobCompletionCriteria.Validate(); err != nil {
+			invalidParams.AddNested("TuningJobCompletionCriteria", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2712,6 +4485,32 @@ func (s *IntegerParameterRangeSpecification) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Jupyter server's app settings.
+type JupyterServerAppSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The instance type and quantity.
+	DefaultResourceSpec *ResourceSpec `type:"structure"`
+}
+
+// String returns the string representation
+func (s JupyterServerAppSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The kernel gateway app settings.
+type KernelGatewayAppSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The instance type and quantity.
+	DefaultResourceSpec *ResourceSpec `type:"structure"`
+}
+
+// String returns the string representation
+func (s KernelGatewayAppSettings) String() string {
+	return awsutil.Prettify(s)
 }
 
 // Provides a breakdown of the number of objects labeled.
@@ -3516,6 +5315,633 @@ func (s ModelSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Container image configuration object for the monitoring job.
+type MonitoringAppSpecification struct {
+	_ struct{} `type:"structure"`
+
+	// An array of arguments for the container used to run the monitoring job.
+	ContainerArguments []string `min:"1" type:"list"`
+
+	// Specifies the entrypoint for a container used to run the monitoring job.
+	ContainerEntrypoint []string `min:"1" type:"list"`
+
+	// The container image to be run by the monitoring job.
+	//
+	// ImageUri is a required field
+	ImageUri *string `type:"string" required:"true"`
+
+	// An Amazon S3 URI to a script that is called after analysis has been performed.
+	// Applicable only for the built-in (first party) containers.
+	PostAnalyticsProcessorSourceUri *string `type:"string"`
+
+	// An Amazon S3 URI to a script that is called per row prior to running analysis.
+	// It can base64 decode the payload and convert it into a flatted json so that
+	// the built-in container can use the converted data. Applicable only for the
+	// built-in (first party) containers.
+	RecordPreprocessorSourceUri *string `type:"string"`
+}
+
+// String returns the string representation
+func (s MonitoringAppSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MonitoringAppSpecification) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MonitoringAppSpecification"}
+	if s.ContainerArguments != nil && len(s.ContainerArguments) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContainerArguments", 1))
+	}
+	if s.ContainerEntrypoint != nil && len(s.ContainerEntrypoint) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContainerEntrypoint", 1))
+	}
+
+	if s.ImageUri == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ImageUri"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Configuration for monitoring constraints and monitoring statistics. These
+// baseline resources are compared against the results of the current job from
+// the series of jobs scheduled to collect data periodically.
+type MonitoringBaselineConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The baseline constraint file in Amazon S3 that the current monitoring job
+	// should validated against.
+	ConstraintsResource *MonitoringConstraintsResource `type:"structure"`
+
+	// The baseline statistics file in Amazon S3 that the current monitoring job
+	// should be validated against.
+	StatisticsResource *MonitoringStatisticsResource `type:"structure"`
+}
+
+// String returns the string representation
+func (s MonitoringBaselineConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Configuration for the cluster used to run model monitoring jobs.
+type MonitoringClusterConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The number of ML compute instances to use in the model monitoring job. For
+	// distributed processing jobs, specify a value greater than 1. The default
+	// value is 1.
+	//
+	// InstanceCount is a required field
+	InstanceCount *int64 `min:"1" type:"integer" required:"true"`
+
+	// The ML compute instance type for the processing job.
+	//
+	// InstanceType is a required field
+	InstanceType ProcessingInstanceType `type:"string" required:"true" enum:"true"`
+
+	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
+	// encrypt data on the storage volume attached to the ML compute instance(s)
+	// that run the model monitoring job.
+	VolumeKmsKeyId *string `type:"string"`
+
+	// The size of the ML storage volume, in gigabytes, that you want to provision.
+	// You must specify sufficient ML storage for your scenario.
+	//
+	// VolumeSizeInGB is a required field
+	VolumeSizeInGB *int64 `min:"1" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s MonitoringClusterConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MonitoringClusterConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MonitoringClusterConfig"}
+
+	if s.InstanceCount == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceCount"))
+	}
+	if s.InstanceCount != nil && *s.InstanceCount < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("InstanceCount", 1))
+	}
+	if len(s.InstanceType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
+	}
+
+	if s.VolumeSizeInGB == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VolumeSizeInGB"))
+	}
+	if s.VolumeSizeInGB != nil && *s.VolumeSizeInGB < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("VolumeSizeInGB", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The constraints resource for a monitoring job.
+type MonitoringConstraintsResource struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon S3 URI for the constraints resource.
+	S3Uri *string `type:"string"`
+}
+
+// String returns the string representation
+func (s MonitoringConstraintsResource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Summary of information about the last monitoring job to run.
+type MonitoringExecutionSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The time at which the monitoring job was created.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" required:"true"`
+
+	// The name of teh endpoint used to run the monitoring job.
+	EndpointName *string `type:"string"`
+
+	// Contains the reason a monitoring job failed, if it failed.
+	FailureReason *string `type:"string"`
+
+	// A timestamp that indicates the last time the monitoring job was modified.
+	//
+	// LastModifiedTime is a required field
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
+
+	// The status of the monitoring job.
+	//
+	// MonitoringExecutionStatus is a required field
+	MonitoringExecutionStatus ExecutionStatus `type:"string" required:"true" enum:"true"`
+
+	// The name of the monitoring schedule.
+	//
+	// MonitoringScheduleName is a required field
+	MonitoringScheduleName *string `min:"1" type:"string" required:"true"`
+
+	// The Amazon Resource Name (ARN) of the monitoring job.
+	ProcessingJobArn *string `type:"string"`
+
+	// The time the monitoring job was scheduled.
+	//
+	// ScheduledTime is a required field
+	ScheduledTime *time.Time `type:"timestamp" required:"true"`
+}
+
+// String returns the string representation
+func (s MonitoringExecutionSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The inputs for a monitoring job.
+type MonitoringInput struct {
+	_ struct{} `type:"structure"`
+
+	// The endpoint for a monitoring job.
+	//
+	// EndpointInput is a required field
+	EndpointInput *EndpointInput `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s MonitoringInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MonitoringInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MonitoringInput"}
+
+	if s.EndpointInput == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EndpointInput"))
+	}
+	if s.EndpointInput != nil {
+		if err := s.EndpointInput.Validate(); err != nil {
+			invalidParams.AddNested("EndpointInput", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Defines the monitoring job.
+type MonitoringJobDefinition struct {
+	_ struct{} `type:"structure"`
+
+	// Baseline configuration used to validate that the data conforms to the specified
+	// constraints and statistics
+	BaselineConfig *MonitoringBaselineConfig `type:"structure"`
+
+	// Sets the environment variables in the Docker container.
+	Environment map[string]string `type:"map"`
+
+	// Configures the monitoring job to run a specified Docker container image.
+	//
+	// MonitoringAppSpecification is a required field
+	MonitoringAppSpecification *MonitoringAppSpecification `type:"structure" required:"true"`
+
+	// The array of inputs for the monitoring job. Currently we support monitoring
+	// an Amazon SageMaker Endpoint.
+	//
+	// MonitoringInputs is a required field
+	MonitoringInputs []MonitoringInput `min:"1" type:"list" required:"true"`
+
+	// The array of outputs from the monitoring job to be uploaded to Amazon Simple
+	// Storage Service (Amazon S3).
+	//
+	// MonitoringOutputConfig is a required field
+	MonitoringOutputConfig *MonitoringOutputConfig `type:"structure" required:"true"`
+
+	// Identifies the resources, ML compute instances, and ML storage volumes to
+	// deploy for a monitoring job. In distributed processing, you specify more
+	// than one instance.
+	//
+	// MonitoringResources is a required field
+	MonitoringResources *MonitoringResources `type:"structure" required:"true"`
+
+	// Specifies networking options for an monitoring job.
+	NetworkConfig *NetworkConfig `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume
+	// to perform tasks on your behalf.
+	//
+	// RoleArn is a required field
+	RoleArn *string `min:"20" type:"string" required:"true"`
+
+	// Specifies a time limit for how long the monitoring job is allowed to run.
+	StoppingCondition *MonitoringStoppingCondition `type:"structure"`
+}
+
+// String returns the string representation
+func (s MonitoringJobDefinition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MonitoringJobDefinition) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MonitoringJobDefinition"}
+
+	if s.MonitoringAppSpecification == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MonitoringAppSpecification"))
+	}
+
+	if s.MonitoringInputs == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MonitoringInputs"))
+	}
+	if s.MonitoringInputs != nil && len(s.MonitoringInputs) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MonitoringInputs", 1))
+	}
+
+	if s.MonitoringOutputConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MonitoringOutputConfig"))
+	}
+
+	if s.MonitoringResources == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MonitoringResources"))
+	}
+
+	if s.RoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
+	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
+	}
+	if s.MonitoringAppSpecification != nil {
+		if err := s.MonitoringAppSpecification.Validate(); err != nil {
+			invalidParams.AddNested("MonitoringAppSpecification", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.MonitoringInputs != nil {
+		for i, v := range s.MonitoringInputs {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MonitoringInputs", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.MonitoringOutputConfig != nil {
+		if err := s.MonitoringOutputConfig.Validate(); err != nil {
+			invalidParams.AddNested("MonitoringOutputConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.MonitoringResources != nil {
+		if err := s.MonitoringResources.Validate(); err != nil {
+			invalidParams.AddNested("MonitoringResources", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.NetworkConfig != nil {
+		if err := s.NetworkConfig.Validate(); err != nil {
+			invalidParams.AddNested("NetworkConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.StoppingCondition != nil {
+		if err := s.StoppingCondition.Validate(); err != nil {
+			invalidParams.AddNested("StoppingCondition", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The output object for a monitoring job.
+type MonitoringOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon S3 storage location where the results of a monitoring job are
+	// saved.
+	//
+	// S3Output is a required field
+	S3Output *MonitoringS3Output `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s MonitoringOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MonitoringOutput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MonitoringOutput"}
+
+	if s.S3Output == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3Output"))
+	}
+	if s.S3Output != nil {
+		if err := s.S3Output.Validate(); err != nil {
+			invalidParams.AddNested("S3Output", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The output configuration for monitoring jobs.
+type MonitoringOutputConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
+	// encrypt the model artifacts at rest using Amazon S3 server-side encryption.
+	KmsKeyId *string `type:"string"`
+
+	// Monitoring outputs for monitoring jobs. This is where the output of the periodic
+	// monitoring jobs is uploaded.
+	//
+	// MonitoringOutputs is a required field
+	MonitoringOutputs []MonitoringOutput `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s MonitoringOutputConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MonitoringOutputConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MonitoringOutputConfig"}
+
+	if s.MonitoringOutputs == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MonitoringOutputs"))
+	}
+	if s.MonitoringOutputs != nil && len(s.MonitoringOutputs) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MonitoringOutputs", 1))
+	}
+	if s.MonitoringOutputs != nil {
+		for i, v := range s.MonitoringOutputs {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MonitoringOutputs", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Identifies the resources to deploy for a monitoring job.
+type MonitoringResources struct {
+	_ struct{} `type:"structure"`
+
+	// The configuration for the cluster resources used to run the processing job.
+	//
+	// ClusterConfig is a required field
+	ClusterConfig *MonitoringClusterConfig `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s MonitoringResources) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MonitoringResources) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MonitoringResources"}
+
+	if s.ClusterConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClusterConfig"))
+	}
+	if s.ClusterConfig != nil {
+		if err := s.ClusterConfig.Validate(); err != nil {
+			invalidParams.AddNested("ClusterConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Information about where and how you want to store the results of a monitoring
+// job.
+type MonitoringS3Output struct {
+	_ struct{} `type:"structure"`
+
+	// The local path to the Amazon S3 storage location where Amazon SageMaker saves
+	// the results of a monitoring job. LocalPath is an absolute path for the output
+	// data.
+	//
+	// LocalPath is a required field
+	LocalPath *string `type:"string" required:"true"`
+
+	// Whether to upload the results of the monitoring job continuously or after
+	// the job completes.
+	S3UploadMode ProcessingS3UploadMode `type:"string" enum:"true"`
+
+	// A URI that identifies the Amazon S3 storage location where Amazon SageMaker
+	// saves the results of a monitoring job.
+	//
+	// S3Uri is a required field
+	S3Uri *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s MonitoringS3Output) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MonitoringS3Output) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MonitoringS3Output"}
+
+	if s.LocalPath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LocalPath"))
+	}
+
+	if s.S3Uri == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3Uri"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Configures the monitoring schedule and defines the monitoring job.
+type MonitoringScheduleConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Defines the monitoring job.
+	//
+	// MonitoringJobDefinition is a required field
+	MonitoringJobDefinition *MonitoringJobDefinition `type:"structure" required:"true"`
+
+	// Configures the monitoring schedule.
+	ScheduleConfig *ScheduleConfig `type:"structure"`
+}
+
+// String returns the string representation
+func (s MonitoringScheduleConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MonitoringScheduleConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MonitoringScheduleConfig"}
+
+	if s.MonitoringJobDefinition == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MonitoringJobDefinition"))
+	}
+	if s.MonitoringJobDefinition != nil {
+		if err := s.MonitoringJobDefinition.Validate(); err != nil {
+			invalidParams.AddNested("MonitoringJobDefinition", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.ScheduleConfig != nil {
+		if err := s.ScheduleConfig.Validate(); err != nil {
+			invalidParams.AddNested("ScheduleConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Summarizes the monitoring schedule.
+type MonitoringScheduleSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The creation time of the monitoring schedule.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" required:"true"`
+
+	// The name of the endpoint using the monitoring schedule.
+	EndpointName *string `type:"string"`
+
+	// The last time the monitoring schedule was modified.
+	//
+	// LastModifiedTime is a required field
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
+
+	// The Amazon Resource Name (ARN) of the monitoring schedule.
+	//
+	// MonitoringScheduleArn is a required field
+	MonitoringScheduleArn *string `type:"string" required:"true"`
+
+	// The name of the monitoring schedule.
+	//
+	// MonitoringScheduleName is a required field
+	MonitoringScheduleName *string `min:"1" type:"string" required:"true"`
+
+	// The status of the monitoring schedule.
+	//
+	// MonitoringScheduleStatus is a required field
+	MonitoringScheduleStatus ScheduleStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s MonitoringScheduleSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The statistics resource for a monitoring job.
+type MonitoringStatisticsResource struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon S3 URI for the statistics resource.
+	S3Uri *string `type:"string"`
+}
+
+// String returns the string representation
+func (s MonitoringStatisticsResource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A time limit for how long the monitoring job is allowed to run before stopping.
+type MonitoringStoppingCondition struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum runtime allowed in seconds.
+	//
+	// MaxRuntimeInSeconds is a required field
+	MaxRuntimeInSeconds *int64 `min:"1" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s MonitoringStoppingCondition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MonitoringStoppingCondition) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MonitoringStoppingCondition"}
+
+	if s.MaxRuntimeInSeconds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MaxRuntimeInSeconds"))
+	}
+	if s.MaxRuntimeInSeconds != nil && *s.MaxRuntimeInSeconds < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxRuntimeInSeconds", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Defines a list of NestedFilters objects. To satisfy the conditions specified
 // in the NestedFilters call, a resource must satisfy the conditions of all
 // of the filters.
@@ -3576,6 +6002,45 @@ func (s *NestedFilters) Validate() error {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Networking options for a job, such as network traffic encryption between
+// containers, whether to allow inbound and outbound network calls to and from
+// containers, and the VPC subnets and security groups to use for VPC-enabled
+// jobs.
+type NetworkConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Whether to allow inbound and outbound network calls to and from the containers
+	// used for the processing job.
+	EnableNetworkIsolation *bool `type:"boolean"`
+
+	// Specifies a VPC that your training jobs and hosted models have access to.
+	// Control access to and from your training and model containers by configuring
+	// the VPC. For more information, see Protect Endpoints by Using an Amazon Virtual
+	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
+	// and Protect Training Jobs by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
+	VpcConfig *VpcConfig `type:"structure"`
+}
+
+// String returns the string representation
+func (s NetworkConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *NetworkConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "NetworkConfig"}
+	if s.VpcConfig != nil {
+		if err := s.VpcConfig.Validate(); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3822,7 +6287,7 @@ type OutputDataConfig struct {
 	//
 	// The KMS key policy must grant permission to the IAM role that you specify
 	// in your CreateTrainingJob, CreateTransformJob, or CreateHyperParameterTuningJob
-	// requests. For more information, see Using Key Policies in AWS KMS (https://docs.aws.amazon.com/http:/docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
+	// requests. For more information, see Using Key Policies in AWS KMS (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
 	// in the AWS Key Management Service Developer Guide.
 	KmsKeyId *string `type:"string"`
 
@@ -3962,6 +6427,24 @@ func (s *ParameterRanges) Validate() error {
 	return nil
 }
 
+// The trial that a trial component is associated with and the experiment the
+// trial is part of. A component might not be associated with a trial. A component
+// can be associated with multiple trials.
+type Parent struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the experiment.
+	ExperimentName *string `min:"1" type:"string"`
+
+	// The name of the trial.
+	TrialName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s Parent) String() string {
+	return awsutil.Prettify(s)
+}
+
 // A previously completed or stopped hyperparameter tuning job to be used as
 // a starting point for a new hyperparameter tuning job.
 type ParentHyperParameterTuningJob struct {
@@ -3982,6 +6465,430 @@ func (s *ParentHyperParameterTuningJob) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ParentHyperParameterTuningJob"}
 	if s.HyperParameterTuningJobName != nil && len(*s.HyperParameterTuningJobName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("HyperParameterTuningJobName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Configuration for the cluster used to run a processing job.
+type ProcessingClusterConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The number of ML compute instances to use in the processing job. For distributed
+	// processing jobs, specify a value greater than 1. The default value is 1.
+	//
+	// InstanceCount is a required field
+	InstanceCount *int64 `min:"1" type:"integer" required:"true"`
+
+	// The ML compute instance type for the processing job.
+	//
+	// InstanceType is a required field
+	InstanceType ProcessingInstanceType `type:"string" required:"true" enum:"true"`
+
+	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
+	// encrypt data on the storage volume attached to the ML compute instance(s)
+	// that run the processing job.
+	VolumeKmsKeyId *string `type:"string"`
+
+	// The size of the ML storage volume in gigabytes that you want to provision.
+	// You must specify sufficient ML storage for your scenario.
+	//
+	// VolumeSizeInGB is a required field
+	VolumeSizeInGB *int64 `min:"1" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s ProcessingClusterConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ProcessingClusterConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ProcessingClusterConfig"}
+
+	if s.InstanceCount == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceCount"))
+	}
+	if s.InstanceCount != nil && *s.InstanceCount < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("InstanceCount", 1))
+	}
+	if len(s.InstanceType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
+	}
+
+	if s.VolumeSizeInGB == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VolumeSizeInGB"))
+	}
+	if s.VolumeSizeInGB != nil && *s.VolumeSizeInGB < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("VolumeSizeInGB", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The inputs for a processing job.
+type ProcessingInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the inputs for the processing job.
+	//
+	// InputName is a required field
+	InputName *string `type:"string" required:"true"`
+
+	// The S3 inputs for the processing job.
+	//
+	// S3Input is a required field
+	S3Input *ProcessingS3Input `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s ProcessingInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ProcessingInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ProcessingInput"}
+
+	if s.InputName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InputName"))
+	}
+
+	if s.S3Input == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3Input"))
+	}
+	if s.S3Input != nil {
+		if err := s.S3Input.Validate(); err != nil {
+			invalidParams.AddNested("S3Input", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Summary of information about a processing job.
+type ProcessingJobSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The time at which the processing job was created.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" required:"true"`
+
+	// An optional string, up to one KB in size, that contains metadata from the
+	// processing container when the processing job exits.
+	ExitMessage *string `type:"string"`
+
+	// A string, up to one KB in size, that contains the reason a processing job
+	// failed, if it failed.
+	FailureReason *string `type:"string"`
+
+	// A timestamp that indicates the last time the processing job was modified.
+	LastModifiedTime *time.Time `type:"timestamp"`
+
+	// The time at which the processing job completed.
+	ProcessingEndTime *time.Time `type:"timestamp"`
+
+	// The Amazon Resource Name (ARN) of the processing job..
+	//
+	// ProcessingJobArn is a required field
+	ProcessingJobArn *string `type:"string" required:"true"`
+
+	// The name of the processing job.
+	//
+	// ProcessingJobName is a required field
+	ProcessingJobName *string `min:"1" type:"string" required:"true"`
+
+	// The status of the processing job.
+	//
+	// ProcessingJobStatus is a required field
+	ProcessingJobStatus ProcessingJobStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s ProcessingJobSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes the results of a processing job.
+type ProcessingOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The name for the processing job output.
+	//
+	// OutputName is a required field
+	OutputName *string `type:"string" required:"true"`
+
+	// Configuration for processing job outputs in Amazon S3.
+	//
+	// S3Output is a required field
+	S3Output *ProcessingS3Output `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s ProcessingOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ProcessingOutput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ProcessingOutput"}
+
+	if s.OutputName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OutputName"))
+	}
+
+	if s.S3Output == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3Output"))
+	}
+	if s.S3Output != nil {
+		if err := s.S3Output.Validate(); err != nil {
+			invalidParams.AddNested("S3Output", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The output configuration for the processing job.
+type ProcessingOutputConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
+	// encrypt the processing job output. KmsKeyId can be an ID of a KMS key, ARN
+	// of a KMS key, alias of a KMS key, or alias of a KMS key. The KmsKeyId is
+	// applied to all outputs.
+	KmsKeyId *string `type:"string"`
+
+	// Output configuration information for a processing job.
+	//
+	// Outputs is a required field
+	Outputs []ProcessingOutput `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s ProcessingOutputConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ProcessingOutputConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ProcessingOutputConfig"}
+
+	if s.Outputs == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Outputs"))
+	}
+	if s.Outputs != nil {
+		for i, v := range s.Outputs {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Outputs", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Identifies the resources, ML compute instances, and ML storage volumes to
+// deploy for a processing job. In distributed training, you specify more than
+// one instance.
+type ProcessingResources struct {
+	_ struct{} `type:"structure"`
+
+	// The configuration for the resources in a cluster used to run the processing
+	// job.
+	//
+	// ClusterConfig is a required field
+	ClusterConfig *ProcessingClusterConfig `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s ProcessingResources) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ProcessingResources) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ProcessingResources"}
+
+	if s.ClusterConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClusterConfig"))
+	}
+	if s.ClusterConfig != nil {
+		if err := s.ClusterConfig.Validate(); err != nil {
+			invalidParams.AddNested("ClusterConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Information about where and how you want to obtain the inputs for an processing
+// job.
+type ProcessingS3Input struct {
+	_ struct{} `type:"structure"`
+
+	// The local path to the Amazon S3 bucket where you want Amazon SageMaker to
+	// download the inputs to run a processing job. LocalPath is an absolute path
+	// to the input data.
+	//
+	// LocalPath is a required field
+	LocalPath *string `type:"string" required:"true"`
+
+	// Whether to use Gzip compresion for Amazon S3 storage.
+	S3CompressionType ProcessingS3CompressionType `type:"string" enum:"true"`
+
+	// Whether the data stored in Amazon S3 is FullyReplicated or ShardedByS3Key.
+	S3DataDistributionType ProcessingS3DataDistributionType `type:"string" enum:"true"`
+
+	// Whether you use an S3Prefix or a ManifestFile for the data type. If you choose
+	// S3Prefix, S3Uri identifies a key name prefix. Amazon SageMaker uses all objects
+	// with the specified key name prefix for the processing job. If you choose
+	// ManifestFile, S3Uri identifies an object that is a manifest file containing
+	// a list of object keys that you want Amazon SageMaker to use for the processing
+	// job.
+	//
+	// S3DataType is a required field
+	S3DataType ProcessingS3DataType `type:"string" required:"true" enum:"true"`
+
+	// Wether to use File or Pipe input mode. In File mode, Amazon SageMaker copies
+	// the data from the input source onto the local Amazon Elastic Block Store
+	// (Amazon EBS) volumes before starting your training algorithm. This is the
+	// most commonly used input mode. In Pipe mode, Amazon SageMaker streams input
+	// data from the source directly to your algorithm without using the EBS volume.
+	//
+	// S3InputMode is a required field
+	S3InputMode ProcessingS3InputMode `type:"string" required:"true" enum:"true"`
+
+	// The URI for the Amazon S3 storage where you want Amazon SageMaker to download
+	// the artifacts needed to run a processing job.
+	//
+	// S3Uri is a required field
+	S3Uri *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ProcessingS3Input) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ProcessingS3Input) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ProcessingS3Input"}
+
+	if s.LocalPath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LocalPath"))
+	}
+	if len(s.S3DataType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("S3DataType"))
+	}
+	if len(s.S3InputMode) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("S3InputMode"))
+	}
+
+	if s.S3Uri == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3Uri"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Information about where and how you want to store the results of an processing
+// job.
+type ProcessingS3Output struct {
+	_ struct{} `type:"structure"`
+
+	// The local path to the Amazon S3 bucket where you want Amazon SageMaker to
+	// save the results of an processing job. LocalPath is an absolute path to the
+	// input data.
+	//
+	// LocalPath is a required field
+	LocalPath *string `type:"string" required:"true"`
+
+	// Whether to upload the results of the processing job continuously or after
+	// the job completes.
+	//
+	// S3UploadMode is a required field
+	S3UploadMode ProcessingS3UploadMode `type:"string" required:"true" enum:"true"`
+
+	// A URI that identifies the Amazon S3 bucket where you want Amazon SageMaker
+	// to save the results of a processing job.
+	//
+	// S3Uri is a required field
+	S3Uri *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ProcessingS3Output) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ProcessingS3Output) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ProcessingS3Output"}
+
+	if s.LocalPath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LocalPath"))
+	}
+	if len(s.S3UploadMode) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("S3UploadMode"))
+	}
+
+	if s.S3Uri == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3Uri"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Specifies a time limit for how long the processing job is allowed to run.
+type ProcessingStoppingCondition struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the maximum runtime in seconds.
+	//
+	// MaxRuntimeInSeconds is a required field
+	MaxRuntimeInSeconds *int64 `min:"1" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s ProcessingStoppingCondition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ProcessingStoppingCondition) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ProcessingStoppingCondition"}
+
+	if s.MaxRuntimeInSeconds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MaxRuntimeInSeconds"))
+	}
+	if s.MaxRuntimeInSeconds != nil && *s.MaxRuntimeInSeconds < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxRuntimeInSeconds", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4224,6 +7131,131 @@ func (s PropertyNameSuggestion) String() string {
 //    * 1.080
 //
 //    * 1.200
+//
+// Use one of the following prices for Textract AnalyzeDocument Important Form
+// Key Amazon Augmented AI review tasks. Prices are in US dollars.
+//
+//    * 2.400
+//
+//    * 2.280
+//
+//    * 2.160
+//
+//    * 2.040
+//
+//    * 1.920
+//
+//    * 1.800
+//
+//    * 1.680
+//
+//    * 1.560
+//
+//    * 1.440
+//
+//    * 1.320
+//
+//    * 1.200
+//
+//    * 1.080
+//
+//    * 0.960
+//
+//    * 0.840
+//
+//    * 0.720
+//
+//    * 0.600
+//
+//    * 0.480
+//
+//    * 0.360
+//
+//    * 0.240
+//
+//    * 0.120
+//
+//    * 0.072
+//
+//    * 0.060
+//
+//    * 0.048
+//
+//    * 0.036
+//
+//    * 0.024
+//
+//    * 0.012
+//
+// Use one of the following prices for Rekognition DetectModerationLabels Amazon
+// Augmented AI review tasks. Prices are in US dollars.
+//
+//    * 1.200
+//
+//    * 1.080
+//
+//    * 0.960
+//
+//    * 0.840
+//
+//    * 0.720
+//
+//    * 0.600
+//
+//    * 0.480
+//
+//    * 0.360
+//
+//    * 0.240
+//
+//    * 0.120
+//
+//    * 0.072
+//
+//    * 0.060
+//
+//    * 0.048
+//
+//    * 0.036
+//
+//    * 0.024
+//
+//    * 0.012
+//
+// Use one of the following prices for Amazon Augmented AI custom human review
+// tasks. Prices are in US dollars.
+//
+//    * 1.200
+//
+//    * 1.080
+//
+//    * 0.960
+//
+//    * 0.840
+//
+//    * 0.720
+//
+//    * 0.600
+//
+//    * 0.480
+//
+//    * 0.360
+//
+//    * 0.240
+//
+//    * 0.120
+//
+//    * 0.072
+//
+//    * 0.060
+//
+//    * 0.048
+//
+//    * 0.036
+//
+//    * 0.024
+//
+//    * 0.012
 type PublicWorkforceTaskPrice struct {
 	_ struct{} `type:"structure"`
 
@@ -4289,6 +7321,26 @@ type RenderingError struct {
 
 // String returns the string representation
 func (s RenderingError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The resolved attributes.
+type ResolvedAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// Applies a metric to minimize or maximize for the job's objective.
+	AutoMLJobObjective *AutoMLJobObjective `type:"structure"`
+
+	// How long a job is allowed to run, or how many candidates a job is allowed
+	// to generate.
+	CompletionCriteria *AutoMLJobCompletionCriteria `type:"structure"`
+
+	// The problem type.
+	ProblemType ProblemType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ResolvedAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -4433,6 +7485,35 @@ func (s *ResourceLimits) Validate() error {
 	return nil
 }
 
+// The instance type and quantity.
+type ResourceSpec struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the environment.
+	EnvironmentArn *string `type:"string"`
+
+	// The instance type.
+	InstanceType AppInstanceType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ResourceSpec) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The retention policy.
+type RetentionPolicy struct {
+	_ struct{} `type:"structure"`
+
+	// The home Amazon Elastic File System (EFS).
+	HomeEfsFileSystem RetentionType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s RetentionPolicy) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes the S3 data source.
 type S3DataSource struct {
 	_ struct{} `type:"structure"`
@@ -4510,6 +7591,68 @@ func (s *S3DataSource) Validate() error {
 
 	if s.S3Uri == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3Uri"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Configuration details about the monitoring schedule.
+type ScheduleConfig struct {
+	_ struct{} `type:"structure"`
+
+	// A cron expression that describes details about the monitoring schedule.
+	//
+	// Currently the only supported cron expressions are:
+	//
+	//    * If you want to set the job to start every hour, please use the following:
+	//    Hourly: cron(0 * ? * * *)
+	//
+	//    * If you want to start the job daily: cron(0 [00-23] ? * * *)
+	//
+	// For example, the following are valid cron expressions:
+	//
+	//    * Daily at noon UTC: cron(0 12 ? * * *)
+	//
+	//    * Daily at midnight UTC: cron(0 0 ? * * *)
+	//
+	// To support running every 6, 12 hours, the following are also supported:
+	//
+	// cron(0 [00-23]/[01-24] ? * * *)
+	//
+	// For example, the following are valid cron expressions:
+	//
+	//    * Every 12 hours, starting at 5pm UTC: cron(0 17/12 ? * * *)
+	//
+	//    * Every two hours starting at midnight: cron(0 0/2 ? * * *)
+	//
+	//    * Even though the cron expression is set to start at 5PM UTC, note that
+	//    there could be a delay of 0-20 minutes from the actual requested time
+	//    to run the execution.
+	//
+	//    * We recommend that if you would like a daily schedule, you do not provide
+	//    this parameter. Amazon SageMaker will pick a time for running every day.
+	//
+	// ScheduleExpression is a required field
+	ScheduleExpression *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ScheduleConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ScheduleConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ScheduleConfig"}
+
+	if s.ScheduleExpression == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ScheduleExpression"))
+	}
+	if s.ScheduleExpression != nil && len(*s.ScheduleExpression) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ScheduleExpression", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4606,8 +7749,17 @@ func (s *SearchExpression) Validate() error {
 type SearchRecord struct {
 	_ struct{} `type:"structure"`
 
+	// A summary of the properties of an experiment.
+	Experiment *Experiment `type:"structure"`
+
 	// A TrainingJob object that is returned as part of a Search request.
 	TrainingJob *TrainingJob `type:"structure"`
+
+	// A summary of the properties of a trial.
+	Trial *Trial `type:"structure"`
+
+	// A summary of the properties of a trial component.
+	TrialComponent *TrialComponent `type:"structure"`
 }
 
 // String returns the string representation
@@ -4725,6 +7877,25 @@ type SecondaryStatusTransition struct {
 
 // String returns the string representation
 func (s SecondaryStatusTransition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The sharing settings.
+type SharingSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The notebook output option.
+	NotebookOutputOption NotebookOutputOption `type:"string" enum:"true"`
+
+	// The AWS Key Management Service encryption key ID.
+	S3KmsKeyId *string `type:"string"`
+
+	// The Amazon S3 output path.
+	S3OutputPath *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SharingSettings) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -5002,6 +8173,51 @@ func (s *Tag) Validate() error {
 	return nil
 }
 
+// The TensorBoard app settings.
+type TensorBoardAppSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The instance type and quantity.
+	DefaultResourceSpec *ResourceSpec `type:"structure"`
+}
+
+// String returns the string representation
+func (s TensorBoardAppSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Configuration of storage locations for TensorBoard output.
+type TensorBoardOutputConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Path to local storage location for tensorBoard output. Defaults to /opt/ml/output/tensorboard.
+	LocalPath *string `type:"string"`
+
+	// Path to Amazon S3 storage location for TensorBoard output.
+	//
+	// S3OutputPath is a required field
+	S3OutputPath *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s TensorBoardOutputConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TensorBoardOutputConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TensorBoardOutputConfig"}
+
+	if s.S3OutputPath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3OutputPath"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Contains information about a training job.
 type TrainingJob struct {
 	_ struct{} `type:"structure"`
@@ -5009,8 +8225,28 @@ type TrainingJob struct {
 	// Information about the algorithm used for training, and algorithm metadata.
 	AlgorithmSpecification *AlgorithmSpecification `type:"structure"`
 
+	// The Amazon Resource Name (ARN) of the job.
+	AutoMLJobArn *string `min:"1" type:"string"`
+
+	// The billable time in seconds.
+	BillableTimeInSeconds *int64 `min:"1" type:"integer"`
+
+	// Contains information about the output location for managed spot training
+	// checkpoint data.
+	CheckpointConfig *CheckpointConfig `type:"structure"`
+
 	// A timestamp that indicates when the training job was created.
 	CreationTime *time.Time `type:"timestamp"`
+
+	// Configuration information for the debug hook parameters, collection configuration,
+	// and storage paths.
+	DebugHookConfig *DebugHookConfig `type:"structure"`
+
+	// Information about the debug rule configuration.
+	DebugRuleConfigurations []DebugRuleConfiguration `type:"list"`
+
+	// Information about the evaluation status of the rules for the training job.
+	DebugRuleEvaluationStatuses []DebugRuleEvaluationStatus `type:"list"`
 
 	// To encrypt all communications between ML compute instances in distributed
 	// training, choose True. Encryption provides greater security for distributed
@@ -5019,10 +8255,18 @@ type TrainingJob struct {
 	// a deep learning algorithm in distributed training.
 	EnableInterContainerTrafficEncryption *bool `type:"boolean"`
 
+	// When true, enables managed spot training using Amazon EC2 Spot instances
+	// to run training jobs instead of on-demand instances. For more information,
+	// see model-managed-spot-training.
+	EnableManagedSpotTraining *bool `type:"boolean"`
+
 	// If the TrainingJob was created with network isolation, the value is set to
 	// true. If network isolation is enabled, nodes can't communicate beyond the
 	// VPC they run in.
 	EnableNetworkIsolation *bool `type:"boolean"`
+
+	// Configuration for the experiment.
+	ExperimentConfig *ExperimentConfig `type:"structure"`
 
 	// If the training job failed, the reason it failed.
 	FailureReason *string `type:"string"`
@@ -5128,6 +8372,9 @@ type TrainingJob struct {
 	// in the AWS Billing and Cost Management User Guide.
 	Tags []Tag `type:"list"`
 
+	// Configuration of storage locations for TensorBoard output.
+	TensorBoardOutputConfig *TensorBoardOutputConfig `type:"structure"`
+
 	// Indicates the time when the training job ends on training instances. You
 	// are billed for the time interval between the value of TrainingStartTime and
 	// this time. For successful jobs and stopped jobs, this is the time after model
@@ -5166,6 +8413,9 @@ type TrainingJob struct {
 	// is due to the time it takes to download the training data and to the size
 	// of the training container.
 	TrainingStartTime *time.Time `type:"timestamp"`
+
+	// The training time in seconds.
+	TrainingTimeInSeconds *int64 `min:"1" type:"integer"`
 
 	// The Amazon Resource Name (ARN) of the associated hyperparameter tuning job
 	// if the training job was launched by a hyperparameter tuning job.
@@ -5381,7 +8631,7 @@ type TrainingSpecification struct {
 	SupportedTuningJobObjectiveMetrics []HyperParameterTuningJobObjective `type:"list"`
 
 	// Indicates whether the algorithm supports distributed training. If set to
-	// false, buyers can’t request more than one instance during training.
+	// false, buyers can't request more than one instance during training.
 	SupportsDistributedTraining *bool `type:"boolean"`
 
 	// A list of ChannelSpecification objects, which specify the input sources to
@@ -5786,7 +9036,7 @@ type TransformResources struct {
 	InstanceType TransformInstanceType `type:"string" required:"true" enum:"true"`
 
 	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s)
+	// encrypt model data on the storage volume attached to the ML compute instance(s)
 	// that run the batch transform job. The VolumeKmsKeyId can be any of the following
 	// formats:
 	//
@@ -5881,6 +9131,428 @@ func (s *TransformS3DataSource) Validate() error {
 	return nil
 }
 
+// A summary of the properties of a trial as returned by the Search API.
+type Trial struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the user who created or modified an experiment, trial,
+	// or trial component.
+	CreatedBy *UserContext `type:"structure"`
+
+	// When the trial was created.
+	CreationTime *time.Time `type:"timestamp"`
+
+	// The name of the trial as displayed. If DisplayName isn't specified, TrialName
+	// is displayed.
+	DisplayName *string `min:"1" type:"string"`
+
+	// The name of the experiment the trial is part of.
+	ExperimentName *string `min:"1" type:"string"`
+
+	// Information about the user who created or modified an experiment, trial,
+	// or trial component.
+	LastModifiedBy *UserContext `type:"structure"`
+
+	// Who last modified the trial.
+	LastModifiedTime *time.Time `type:"timestamp"`
+
+	// The source of the trial.
+	Source *TrialSource `type:"structure"`
+
+	// The list of tags that are associated with the trial. You can use Search API
+	// to search on the tags.
+	Tags []Tag `type:"list"`
+
+	// The Amazon Resource Name (ARN) of the trial.
+	TrialArn *string `type:"string"`
+
+	// A list of the components associated with the trial. For each component, a
+	// summary of the component's properties is included.
+	TrialComponentSummaries []TrialComponentSimpleSummary `type:"list"`
+
+	// The name of the trial.
+	TrialName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s Trial) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A summary of the properties of a trial component as returned by the Search
+// API.
+type TrialComponent struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the user who created or modified an experiment, trial,
+	// or trial component.
+	CreatedBy *UserContext `type:"structure"`
+
+	// When the component was created.
+	CreationTime *time.Time `type:"timestamp"`
+
+	// The name of the component as displayed. If DisplayName isn't specified, TrialComponentName
+	// is displayed.
+	DisplayName *string `min:"1" type:"string"`
+
+	// When the component ended.
+	EndTime *time.Time `type:"timestamp"`
+
+	// The input artifacts of the component.
+	InputArtifacts map[string]TrialComponentArtifact `type:"map"`
+
+	// Information about the user who created or modified an experiment, trial,
+	// or trial component.
+	LastModifiedBy *UserContext `type:"structure"`
+
+	// When the component was last modified.
+	LastModifiedTime *time.Time `type:"timestamp"`
+
+	// The metrics for the component.
+	Metrics []TrialComponentMetricSummary `type:"list"`
+
+	// The output artifacts of the component.
+	OutputArtifacts map[string]TrialComponentArtifact `type:"map"`
+
+	// The hyperparameters of the component.
+	Parameters map[string]TrialComponentParameterValue `type:"map"`
+
+	// An array of the parents of the component. A parent is a trial the component
+	// is associated with and the experiment the trial is part of. A component might
+	// not have any parents.
+	Parents []Parent `type:"list"`
+
+	// The source of the trial component.
+	Source *TrialComponentSource `type:"structure"`
+
+	// The source of the trial component.>
+	SourceDetail *TrialComponentSourceDetail `type:"structure"`
+
+	// When the component started.
+	StartTime *time.Time `type:"timestamp"`
+
+	// The status of the trial component.
+	Status *TrialComponentStatus `type:"structure"`
+
+	// The list of tags that are associated with the component. You can use Search
+	// API to search on the tags.
+	Tags []Tag `type:"list"`
+
+	// The Amazon Resource Name (ARN) of the trial component.
+	TrialComponentArn *string `type:"string"`
+
+	// The name of the trial component.
+	TrialComponentName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s TrialComponent) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Represents an input or output artifact of a trial component. You specify
+// TrialComponentArtifact as part of the InputArtifacts and OutputArtifacts
+// parameters in the CreateTrialComponent request.
+//
+// Examples of input artifacts are datasets, algorithms, hyperparameters, source
+// code, and instance types. Examples of output artifacts are metrics, snapshots,
+// logs, and images.
+type TrialComponentArtifact struct {
+	_ struct{} `type:"structure"`
+
+	// The media type of the artifact, which indicates the type of data in the artifact
+	// file. The media type consists of a type and a subtype concatenated with a
+	// slash (/) character, for example, text/csv, image/jpeg, and s3/uri. The type
+	// specifies the category of the media. The subtype specifies the kind of data.
+	MediaType *string `type:"string"`
+
+	// The location of the artifact.
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s TrialComponentArtifact) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TrialComponentArtifact) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TrialComponentArtifact"}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// A summary of the metrics of a trial component.
+type TrialComponentMetricSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The average value of the metric.
+	Avg *float64 `type:"double"`
+
+	// The number of samples used to generate the metric.
+	Count *int64 `type:"integer"`
+
+	// The most recent value of the metric.
+	Last *float64 `type:"double"`
+
+	// The maximum value of the metric.
+	Max *float64 `type:"double"`
+
+	// The name of the metric.
+	MetricName *string `min:"1" type:"string"`
+
+	// The minimum value of the metric.
+	Min *float64 `type:"double"`
+
+	// The Amazon Resource Name (ARN) of the source.
+	SourceArn *string `type:"string"`
+
+	// The standard deviation of the metric.
+	StdDev *float64 `type:"double"`
+
+	// When the metric was last updated.
+	TimeStamp *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation
+func (s TrialComponentMetricSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The value of a hyperparameter. Only one of NumberValue or StringValue can
+// be specified.
+//
+// This object is specified in the CreateTrialComponent request.
+type TrialComponentParameterValue struct {
+	_ struct{} `type:"structure"`
+
+	// The numeric value of a numeric hyperparameter. If you specify a value for
+	// this parameter, you can't specify the StringValue parameter.
+	NumberValue *float64 `type:"double"`
+
+	// The string value of a categorical hyperparameter. If you specify a value
+	// for this parameter, you can't specify the NumberValue parameter.
+	StringValue *string `type:"string"`
+}
+
+// String returns the string representation
+func (s TrialComponentParameterValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A short summary of a trial component.
+type TrialComponentSimpleSummary struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the user who created or modified an experiment, trial,
+	// or trial component.
+	CreatedBy *UserContext `type:"structure"`
+
+	// When the component was created.
+	CreationTime *time.Time `type:"timestamp"`
+
+	// The Amazon Resource Name (ARN) of the trial component.
+	TrialComponentArn *string `type:"string"`
+
+	// The name of the trial component.
+	TrialComponentName *string `min:"1" type:"string"`
+
+	// The source of the trial component.
+	TrialComponentSource *TrialComponentSource `type:"structure"`
+}
+
+// String returns the string representation
+func (s TrialComponentSimpleSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The source of the trial component.
+type TrialComponentSource struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the source.
+	//
+	// SourceArn is a required field
+	SourceArn *string `type:"string" required:"true"`
+
+	// The source job type.
+	SourceType *string `type:"string"`
+}
+
+// String returns the string representation
+func (s TrialComponentSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Detailed information about the source of a trial component.
+type TrialComponentSourceDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the source.
+	SourceArn *string `type:"string"`
+
+	// Contains information about a training job.
+	TrainingJob *TrainingJob `type:"structure"`
+}
+
+// String returns the string representation
+func (s TrialComponentSourceDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The status of the trial component.
+type TrialComponentStatus struct {
+	_ struct{} `type:"structure"`
+
+	// If the component failed, a message describing why.
+	Message *string `type:"string"`
+
+	// The status of the trial component.
+	PrimaryStatus TrialComponentPrimaryStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s TrialComponentStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A summary of the properties of a trial component. To get all the properties,
+// call the DescribeTrialComponent API and provide the TrialComponentName.
+type TrialComponentSummary struct {
+	_ struct{} `type:"structure"`
+
+	// Who created the component.
+	CreatedBy *UserContext `type:"structure"`
+
+	// When the component was created.
+	CreationTime *time.Time `type:"timestamp"`
+
+	// The name of the component as displayed. If DisplayName isn't specified, TrialComponentName
+	// is displayed.
+	DisplayName *string `min:"1" type:"string"`
+
+	// When the component ended.
+	EndTime *time.Time `type:"timestamp"`
+
+	// Who last modified the component.
+	LastModifiedBy *UserContext `type:"structure"`
+
+	// When the component was last modified.
+	LastModifiedTime *time.Time `type:"timestamp"`
+
+	// When the component started.
+	StartTime *time.Time `type:"timestamp"`
+
+	// The status of the component. States include:
+	//
+	//    * InProgress
+	//
+	//    * Completed
+	//
+	//    * Failed
+	Status *TrialComponentStatus `type:"structure"`
+
+	// The ARN of the trial component.
+	TrialComponentArn *string `type:"string"`
+
+	// The name of the trial component.
+	TrialComponentName *string `min:"1" type:"string"`
+
+	// The source of the trial component.
+	TrialComponentSource *TrialComponentSource `type:"structure"`
+}
+
+// String returns the string representation
+func (s TrialComponentSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The source of the trial.
+type TrialSource struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the source.
+	//
+	// SourceArn is a required field
+	SourceArn *string `type:"string" required:"true"`
+
+	// The source job type.
+	SourceType *string `type:"string"`
+}
+
+// String returns the string representation
+func (s TrialSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A summary of the properties of a trial. To get the complete set of properties,
+// call the DescribeTrial API and provide the TrialName.
+type TrialSummary struct {
+	_ struct{} `type:"structure"`
+
+	// When the trial was created.
+	CreationTime *time.Time `type:"timestamp"`
+
+	// The name of the trial as displayed. If DisplayName isn't specified, TrialName
+	// is displayed.
+	DisplayName *string `min:"1" type:"string"`
+
+	// When the trial was last modified.
+	LastModifiedTime *time.Time `type:"timestamp"`
+
+	// The Amazon Resource Name (ARN) of the trial.
+	TrialArn *string `type:"string"`
+
+	// The name of the trial.
+	TrialName *string `min:"1" type:"string"`
+
+	// The source of the trial.
+	TrialSource *TrialSource `type:"structure"`
+}
+
+// String returns the string representation
+func (s TrialSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The job completion criteria.
+type TuningJobCompletionCriteria struct {
+	_ struct{} `type:"structure"`
+
+	// The objective metric's value.
+	//
+	// TargetObjectiveMetricValue is a required field
+	TargetObjectiveMetricValue *float64 `type:"float" required:"true"`
+}
+
+// String returns the string representation
+func (s TuningJobCompletionCriteria) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TuningJobCompletionCriteria) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TuningJobCompletionCriteria"}
+
+	if s.TargetObjectiveMetricValue == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetObjectiveMetricValue"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Represents an amount of money in United States dollars/
 type USD struct {
 	_ struct{} `type:"structure"`
@@ -5955,6 +9627,108 @@ func (s *UiTemplate) Validate() error {
 	}
 	if s.Content != nil && len(*s.Content) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Content", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Container for user interface template information.
+type UiTemplateInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The SHA 256 hash that you used to create the request signature.
+	ContentSha256 *string `min:"1" type:"string"`
+
+	// The URL for the user interface template.
+	Url *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UiTemplateInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about the user who created or modified an experiment, trial,
+// or trial component.
+type UserContext struct {
+	_ struct{} `type:"structure"`
+
+	// The domain associated with the user.
+	DomainId *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) of the user's profile.
+	UserProfileArn *string `type:"string"`
+
+	// The name of the user's profile.
+	UserProfileName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s UserContext) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The user profile details.
+type UserProfileDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The creation time.
+	CreationTime *time.Time `type:"timestamp"`
+
+	// The domain ID.
+	DomainId *string `type:"string"`
+
+	// The last modified time.
+	LastModifiedTime *time.Time `type:"timestamp"`
+
+	// The status.
+	Status UserProfileStatus `type:"string" enum:"true"`
+
+	// The user profile name.
+	UserProfileName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s UserProfileDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A collection of settings.
+type UserSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The execution role for the user.
+	ExecutionRole *string `min:"20" type:"string"`
+
+	// The Jupyter server's app settings.
+	JupyterServerAppSettings *JupyterServerAppSettings `type:"structure"`
+
+	// The kernel gateway app settings.
+	KernelGatewayAppSettings *KernelGatewayAppSettings `type:"structure"`
+
+	// The security groups.
+	SecurityGroups []string `type:"list"`
+
+	// The sharing settings.
+	SharingSettings *SharingSettings `type:"structure"`
+
+	// The TensorBoard app settings.
+	TensorBoardAppSettings *TensorBoardAppSettings `type:"structure"`
+}
+
+// String returns the string representation
+func (s UserSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UserSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UserSettings"}
+	if s.ExecutionRole != nil && len(*s.ExecutionRole) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("ExecutionRole", 20))
 	}
 
 	if invalidParams.Len() > 0 {

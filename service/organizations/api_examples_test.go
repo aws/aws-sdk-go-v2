@@ -125,6 +125,10 @@ func ExampleClient_AttachPolicyRequest_shared00() {
 				fmt.Println(organizations.ErrCodeTargetNotFoundException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
+			case organizations.ErrCodePolicyChangesInProgressException:
+				fmt.Println(organizations.ErrCodePolicyChangesInProgressException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -181,6 +185,10 @@ func ExampleClient_AttachPolicyRequest_shared01() {
 				fmt.Println(organizations.ErrCodeTargetNotFoundException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
+			case organizations.ErrCodePolicyChangesInProgressException:
+				fmt.Println(organizations.ErrCodePolicyChangesInProgressException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -503,6 +511,8 @@ func ExampleClient_CreatePolicyRequest_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -654,6 +664,8 @@ func ExampleClient_DeletePolicyRequest_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -928,6 +940,8 @@ func ExampleClient_DescribePolicyRequest_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -982,6 +996,10 @@ func ExampleClient_DetachPolicyRequest_shared00() {
 				fmt.Println(organizations.ErrCodeTargetNotFoundException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
+			case organizations.ErrCodePolicyChangesInProgressException:
+				fmt.Println(organizations.ErrCodePolicyChangesInProgressException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1036,6 +1054,10 @@ func ExampleClient_DisablePolicyTypeRequest_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
+			case organizations.ErrCodePolicyChangesInProgressException:
+				fmt.Println(organizations.ErrCodePolicyChangesInProgressException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1143,6 +1165,10 @@ func ExampleClient_EnablePolicyTypeRequest_shared00() {
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
 			case organizations.ErrCodePolicyTypeNotAvailableForOrganizationException:
 				fmt.Println(organizations.ErrCodePolicyTypeNotAvailableForOrganizationException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
+			case organizations.ErrCodePolicyChangesInProgressException:
+				fmt.Println(organizations.ErrCodePolicyChangesInProgressException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1698,6 +1724,8 @@ func ExampleClient_ListPoliciesRequest_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1747,6 +1775,8 @@ func ExampleClient_ListPoliciesForTargetRequest_shared00() {
 				fmt.Println(organizations.ErrCodeTargetNotFoundException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1834,6 +1864,8 @@ func ExampleClient_ListTargetsForPolicyRequest_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -2046,6 +2078,10 @@ func ExampleClient_UpdatePolicyRequest_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
+			case organizations.ErrCodePolicyChangesInProgressException:
+				fmt.Println(organizations.ErrCodePolicyChangesInProgressException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -2102,6 +2138,10 @@ func ExampleClient_UpdatePolicyRequest_shared01() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
+			case organizations.ErrCodePolicyChangesInProgressException:
+				fmt.Println(organizations.ErrCodePolicyChangesInProgressException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

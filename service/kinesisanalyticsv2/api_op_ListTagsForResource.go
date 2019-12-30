@@ -57,7 +57,8 @@ const opListTagsForResource = "ListTagsForResource"
 // ListTagsForResourceRequest returns a request value for making API operation for
 // Amazon Kinesis Analytics.
 //
-// Retrieves the list of key-value tags assigned to the application.
+// Retrieves the list of key-value tags assigned to the application. For more
+// information, see Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html).
 //
 //    // Example sending a request using ListTagsForResourceRequest.
 //    req := client.ListTagsForResourceRequest(params)

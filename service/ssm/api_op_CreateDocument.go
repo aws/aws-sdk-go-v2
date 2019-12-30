@@ -44,6 +44,10 @@ type CreateDocumentInput struct {
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
+	// A list of SSM documents required by a document. For example, an ApplicationConfiguration
+	// document requires an ApplicationConfigurationSchema document.
+	Requires []DocumentRequires `min:"1" type:"list"`
+
 	// Optional metadata that you assign to a resource. Tags enable you to categorize
 	// a resource in different ways, such as by purpose, owner, or environment.
 	// For example, you might want to tag an SSM document to identify the types
@@ -91,10 +95,20 @@ func (s *CreateDocumentInput) Validate() error {
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+	if s.Requires != nil && len(s.Requires) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Requires", 1))
+	}
 	if s.Attachments != nil {
 		for i, v := range s.Attachments {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attachments", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Requires != nil {
+		for i, v := range s.Requires {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Requires", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}

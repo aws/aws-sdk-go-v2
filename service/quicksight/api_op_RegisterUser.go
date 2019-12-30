@@ -178,7 +178,7 @@ type RegisterUserOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
 	// The user name.
@@ -226,11 +226,6 @@ const opRegisterUser = "RegisterUser"
 // Creates an Amazon QuickSight user, whose identity is associated with the
 // AWS Identity and Access Management (IAM) identity or role specified in the
 // request.
-//
-// CLI Sample:
-//
-// aws quicksight register-user -\-aws-account-id=111122223333 -\-namespace=default
-// -\-email=pat@example.com -\-identity-type=IAM -\-user-role=AUTHOR -\-iam-arn=arn:aws:iam::111122223333:user/Pat
 //
 //    // Example sending a request using RegisterUserRequest.
 //    req := client.RegisterUserRequest(params)

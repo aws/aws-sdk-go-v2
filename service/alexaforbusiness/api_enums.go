@@ -41,8 +41,9 @@ type BusinessReportInterval string
 
 // Enum values for BusinessReportInterval
 const (
-	BusinessReportIntervalOneDay  BusinessReportInterval = "ONE_DAY"
-	BusinessReportIntervalOneWeek BusinessReportInterval = "ONE_WEEK"
+	BusinessReportIntervalOneDay     BusinessReportInterval = "ONE_DAY"
+	BusinessReportIntervalOneWeek    BusinessReportInterval = "ONE_WEEK"
+	BusinessReportIntervalThirtyDays BusinessReportInterval = "THIRTY_DAYS"
 )
 
 func (enum BusinessReportInterval) MarshalValue() (string, error) {
@@ -262,6 +263,25 @@ func (enum EnablementTypeFilter) MarshalValue() (string, error) {
 }
 
 func (enum EnablementTypeFilter) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type EndOfMeetingReminderType string
+
+// Enum values for EndOfMeetingReminderType
+const (
+	EndOfMeetingReminderTypeAnnouncementTimeCheck        EndOfMeetingReminderType = "ANNOUNCEMENT_TIME_CHECK"
+	EndOfMeetingReminderTypeAnnouncementVariableTimeLeft EndOfMeetingReminderType = "ANNOUNCEMENT_VARIABLE_TIME_LEFT"
+	EndOfMeetingReminderTypeChime                        EndOfMeetingReminderType = "CHIME"
+	EndOfMeetingReminderTypeKnock                        EndOfMeetingReminderType = "KNOCK"
+)
+
+func (enum EndOfMeetingReminderType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EndOfMeetingReminderType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

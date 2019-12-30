@@ -4,6 +4,7 @@ package licensemanager
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -12,28 +13,31 @@ import (
 type UpdateLicenseConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
-	// New human-friendly description of the license configuration.
+	// New description of the license configuration.
 	Description *string `type:"string"`
 
-	// ARN for a license configuration.
+	// Amazon Resource Name (ARN) of the license configuration.
 	//
 	// LicenseConfigurationArn is a required field
 	LicenseConfigurationArn *string `type:"string" required:"true"`
 
-	// New status of the license configuration (ACTIVE or INACTIVE).
+	// New status of the license configuration.
 	LicenseConfigurationStatus LicenseConfigurationStatus `type:"string" enum:"true"`
 
 	// New number of licenses managed by the license configuration.
 	LicenseCount *int64 `type:"long"`
 
-	// Sets the number of available licenses as a hard limit.
+	// New hard limit of the number of available licenses.
 	LicenseCountHardLimit *bool `type:"boolean"`
 
-	// List of flexible text strings designating license rules.
+	// New license rules.
 	LicenseRules []string `type:"list"`
 
 	// New name of the license configuration.
 	Name *string `type:"string"`
+
+	// New product information.
+	ProductInformationList []ProductInformation `type:"list"`
 }
 
 // String returns the string representation
@@ -47,6 +51,13 @@ func (s *UpdateLicenseConfigurationInput) Validate() error {
 
 	if s.LicenseConfigurationArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LicenseConfigurationArn"))
+	}
+	if s.ProductInformationList != nil {
+		for i, v := range s.ProductInformationList {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ProductInformationList", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -69,12 +80,14 @@ const opUpdateLicenseConfiguration = "UpdateLicenseConfiguration"
 // UpdateLicenseConfigurationRequest returns a request value for making API operation for
 // AWS License Manager.
 //
-// Modifies the attributes of an existing license configuration object. A license
-// configuration is an abstraction of a customer license agreement that can
-// be consumed and enforced by License Manager. Components include specifications
-// for the license type (Instances, cores, sockets, VCPUs), tenancy (shared
-// or Dedicated Host), host affinity (how long a VM is associated with a host),
-// the number of licenses purchased and used.
+// Modifies the attributes of an existing license configuration.
+//
+// A license configuration is an abstraction of a customer license agreement
+// that can be consumed and enforced by License Manager. Components include
+// specifications for the license type (licensing by instance, socket, CPU,
+// or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated
+// Host, or all of these), host affinity (how long a VM must be associated with
+// a host), and the number of licenses purchased and used.
 //
 //    // Example sending a request using UpdateLicenseConfigurationRequest.
 //    req := client.UpdateLicenseConfigurationRequest(params)

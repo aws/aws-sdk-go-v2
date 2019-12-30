@@ -36,6 +36,23 @@ func (enum CelebrityRecognitionSortBy) MarshalValueBuf(b []byte) ([]byte, error)
 	return append(b, enum...), nil
 }
 
+type ContentClassifier string
+
+// Enum values for ContentClassifier
+const (
+	ContentClassifierFreeOfPersonallyIdentifiableInformation ContentClassifier = "FreeOfPersonallyIdentifiableInformation"
+	ContentClassifierFreeOfAdultContent                      ContentClassifier = "FreeOfAdultContent"
+)
+
+func (enum ContentClassifier) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ContentClassifier) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ContentModerationSortBy string
 
 // Enum values for ContentModerationSortBy
@@ -226,12 +243,57 @@ func (enum PersonTrackingSortBy) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ProjectStatus string
+
+// Enum values for ProjectStatus
+const (
+	ProjectStatusCreating ProjectStatus = "CREATING"
+	ProjectStatusCreated  ProjectStatus = "CREATED"
+	ProjectStatusDeleting ProjectStatus = "DELETING"
+)
+
+func (enum ProjectStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProjectStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ProjectVersionStatus string
+
+// Enum values for ProjectVersionStatus
+const (
+	ProjectVersionStatusTrainingInProgress ProjectVersionStatus = "TRAINING_IN_PROGRESS"
+	ProjectVersionStatusTrainingCompleted  ProjectVersionStatus = "TRAINING_COMPLETED"
+	ProjectVersionStatusTrainingFailed     ProjectVersionStatus = "TRAINING_FAILED"
+	ProjectVersionStatusStarting           ProjectVersionStatus = "STARTING"
+	ProjectVersionStatusRunning            ProjectVersionStatus = "RUNNING"
+	ProjectVersionStatusFailed             ProjectVersionStatus = "FAILED"
+	ProjectVersionStatusStopping           ProjectVersionStatus = "STOPPING"
+	ProjectVersionStatusStopped            ProjectVersionStatus = "STOPPED"
+	ProjectVersionStatusDeleting           ProjectVersionStatus = "DELETING"
+)
+
+func (enum ProjectVersionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProjectVersionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type QualityFilter string
 
 // Enum values for QualityFilter
 const (
-	QualityFilterNone QualityFilter = "NONE"
-	QualityFilterAuto QualityFilter = "AUTO"
+	QualityFilterNone   QualityFilter = "NONE"
+	QualityFilterAuto   QualityFilter = "AUTO"
+	QualityFilterLow    QualityFilter = "LOW"
+	QualityFilterMedium QualityFilter = "MEDIUM"
+	QualityFilterHigh   QualityFilter = "HIGH"
 )
 
 func (enum QualityFilter) MarshalValue() (string, error) {
@@ -253,6 +315,7 @@ const (
 	ReasonLowSharpness     Reason = "LOW_SHARPNESS"
 	ReasonLowConfidence    Reason = "LOW_CONFIDENCE"
 	ReasonSmallBoundingBox Reason = "SMALL_BOUNDING_BOX"
+	ReasonLowFaceQuality   Reason = "LOW_FACE_QUALITY"
 )
 
 func (enum Reason) MarshalValue() (string, error) {

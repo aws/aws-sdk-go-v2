@@ -15,21 +15,24 @@ type ListForecastExportJobsInput struct {
 
 	// An array of filters. For each filter, you provide a condition and a match
 	// statement. The condition is either IS or IS_NOT, which specifies whether
-	// to include or exclude, respectively, from the list, the predictors that match
-	// the statement. The match statement consists of a key and a value. In this
-	// release, Name is the only valid key, which filters on the ForecastExportJobName
-	// property.
+	// to include or exclude the forecast export jobs that match the statement from
+	// the list, respectively. The match statement consists of a key and a value.
 	//
-	//    * Condition - IS or IS_NOT
+	// Filter properties
 	//
-	//    * Key - Name
+	//    * Condition - The condition to apply. Valid values are IS and IS_NOT.
+	//    To include the forecast export jobs that match the statement, specify
+	//    IS. To exclude matching forecast export jobs, specify IS_NOT.
 	//
-	//    * Value - the value to match
+	//    * Key - The name of the parameter to filter on. Valid values are ForecastArn
+	//    and Status.
 	//
-	// For example, to list all forecast export jobs named my_forecast_export_job,
-	// you would specify:
+	//    * Value - The value to match.
 	//
-	// "Filters": [ { "Condition": "IS", "Key": "Name", "Value": "my_forecast_export_job"
+	// For example, to list all jobs that export a forecast named electricityforecast,
+	// specify the following filter:
+	//
+	// "Filters": [ { "Condition": "IS", "Key": "ForecastArn", "Value": "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityforecast"
 	// } ]
 	Filters []Filter `type:"list"`
 
@@ -92,10 +95,10 @@ const opListForecastExportJobs = "ListForecastExportJobs"
 // Amazon Forecast Service.
 //
 // Returns a list of forecast export jobs created using the CreateForecastExportJob
-// operation. For each forecast export job, a summary of its properties, including
-// its Amazon Resource Name (ARN), is returned. You can retrieve the complete
-// set of properties by using the ARN with the DescribeForecastExportJob operation.
-// The list can be filtered using an array of Filter objects.
+// operation. For each forecast export job, this operation returns a summary
+// of its properties, including its Amazon Resource Name (ARN). To retrieve
+// the complete set of properties, use the ARN with the DescribeForecastExportJob
+// operation. You can filter the list using an array of Filter objects.
 //
 //    // Example sending a request using ListForecastExportJobsRequest.
 //    req := client.ListForecastExportJobsRequest(params)

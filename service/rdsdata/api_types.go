@@ -468,6 +468,23 @@ type SqlParameter struct {
 	// The name of the parameter.
 	Name *string `locationName:"name" type:"string"`
 
+	// A hint that specifies the correct object type for data type mapping.
+	//
+	// Values:
+	//
+	//    * DECIMAL - The corresponding String parameter value is sent as an object
+	//    of DECIMAL type to the database.
+	//
+	//    * TIMESTAMP - The corresponding String parameter value is sent as an object
+	//    of TIMESTAMP type to the database. The accepted format is YYYY-MM-DD HH:MM:SS[.FFF].
+	//
+	//    * TIME - The corresponding String parameter value is sent as an object
+	//    of TIME type to the database. The accepted format is HH:MM:SS[.FFF].
+	//
+	//    * DATE - The corresponding String parameter value is sent as an object
+	//    of DATE type to the database. The accepted format is YYYY-MM-DD.
+	TypeHint TypeHint `locationName:"typeHint" type:"string" enum:"true"`
+
 	// The value of the parameter.
 	Value *Field `locationName:"value" type:"structure"`
 }
@@ -484,6 +501,12 @@ func (s SqlParameter) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TypeHint) > 0 {
+		v := s.TypeHint
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "typeHint", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Value != nil {
 		v := s.Value

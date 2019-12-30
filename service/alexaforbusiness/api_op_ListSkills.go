@@ -12,22 +12,20 @@ import (
 type ListSkillsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Whether the skill is enabled under the user's account, or if it requires
-	// linking to be used.
+	// Whether the skill is enabled under the user's account.
 	EnablementType EnablementTypeFilter `type:"string" enum:"true"`
 
 	// The maximum number of results to include in the response. If more results
 	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved. Required.
+	// so that the remaining results can be retrieved.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
-	// Required.
 	NextToken *string `min:"1" type:"string"`
 
-	// The ARN of the skill group for which to list enabled skills. Required.
+	// The ARN of the skill group for which to list enabled skills.
 	SkillGroupArn *string `type:"string"`
 
 	// Whether the skill is publicly available or is a private skill.

@@ -92,7 +92,7 @@ type GetRouteResponseOutput struct {
 	// The identifier.
 	RouteResponseId *string `locationName:"routeResponseId" type:"string"`
 
-	// After evaulating a selection expression, the result is compared against one
+	// After evaluating a selection expression, the result is compared against one
 	// or more selection keys to find a matching key. See Selection Expressions
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
 	// for a list of expressions and each expression's associated selection key

@@ -184,6 +184,19 @@
       "endpointdiscovery":{
       }
     },
+    "DescribeContributorInsights":{
+      "name":"DescribeContributorInsights",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeContributorInsightsInput"},
+      "output":{"shape":"DescribeContributorInsightsOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
     "DescribeEndpoints":{
       "name":"DescribeEndpoints",
       "http":{
@@ -253,6 +266,19 @@
       "endpointdiscovery":{
       }
     },
+    "DescribeTableReplicaAutoScaling":{
+      "name":"DescribeTableReplicaAutoScaling",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeTableReplicaAutoScalingInput"},
+      "output":{"shape":"DescribeTableReplicaAutoScalingOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
     "DescribeTimeToLive":{
       "name":"DescribeTimeToLive",
       "http":{
@@ -298,6 +324,19 @@
       ],
       "endpointdiscovery":{
       }
+    },
+    "ListContributorInsights":{
+      "name":"ListContributorInsights",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListContributorInsightsInput"},
+      "output":{"shape":"ListContributorInsightsOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
     },
     "ListGlobalTables":{
       "name":"ListGlobalTables",
@@ -521,6 +560,19 @@
       "endpointdiscovery":{
       }
     },
+    "UpdateContributorInsights":{
+      "name":"UpdateContributorInsights",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateContributorInsightsInput"},
+      "output":{"shape":"UpdateContributorInsightsOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
     "UpdateGlobalTable":{
       "name":"UpdateGlobalTable",
       "http":{
@@ -595,6 +647,21 @@
       "endpointdiscovery":{
       }
     },
+    "UpdateTableReplicaAutoScaling":{
+      "name":"UpdateTableReplicaAutoScaling",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateTableReplicaAutoScalingInput"},
+      "output":{"shape":"UpdateTableReplicaAutoScalingOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
     "UpdateTimeToLive":{
       "name":"UpdateTimeToLive",
       "http":{
@@ -614,6 +681,15 @@
     }
   },
   "shapes":{
+    "ArchivalReason":{"type":"string"},
+    "ArchivalSummary":{
+      "type":"structure",
+      "members":{
+        "ArchivalDateTime":{"shape":"Date"},
+        "ArchivalReason":{"shape":"ArchivalReason"},
+        "ArchivalBackupArn":{"shape":"BackupArn"}
+      }
+    },
     "AttributeAction":{
       "type":"string",
       "enum":[
@@ -1058,6 +1134,43 @@
       },
       "exception":true
     },
+    "ContributorInsightsAction":{
+      "type":"string",
+      "enum":[
+        "ENABLE",
+        "DISABLE"
+      ]
+    },
+    "ContributorInsightsRule":{
+      "type":"string",
+      "pattern":"[A-Za-z0-9][A-Za-z0-9\\-\\_\\.]{0,126}[A-Za-z0-9]"
+    },
+    "ContributorInsightsRuleList":{
+      "type":"list",
+      "member":{"shape":"ContributorInsightsRule"}
+    },
+    "ContributorInsightsStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLING",
+        "ENABLED",
+        "DISABLING",
+        "DISABLED",
+        "FAILED"
+      ]
+    },
+    "ContributorInsightsSummaries":{
+      "type":"list",
+      "member":{"shape":"ContributorInsightsSummary"}
+    },
+    "ContributorInsightsSummary":{
+      "type":"structure",
+      "members":{
+        "TableName":{"shape":"TableName"},
+        "IndexName":{"shape":"IndexName"},
+        "ContributorInsightsStatus":{"shape":"ContributorInsightsStatus"}
+      }
+    },
     "CreateBackupInput":{
       "type":"structure",
       "required":[
@@ -1111,6 +1224,16 @@
       "required":["RegionName"],
       "members":{
         "RegionName":{"shape":"RegionName"}
+      }
+    },
+    "CreateReplicationGroupMemberAction":{
+      "type":"structure",
+      "required":["RegionName"],
+      "members":{
+        "RegionName":{"shape":"RegionName"},
+        "KMSMasterKeyId":{"shape":"KMSMasterKeyId"},
+        "ProvisionedThroughputOverride":{"shape":"ProvisionedThroughputOverride"},
+        "GlobalSecondaryIndexes":{"shape":"ReplicaGlobalSecondaryIndexList"}
       }
     },
     "CreateTableInput":{
@@ -1209,6 +1332,13 @@
         "RegionName":{"shape":"RegionName"}
       }
     },
+    "DeleteReplicationGroupMemberAction":{
+      "type":"structure",
+      "required":["RegionName"],
+      "members":{
+        "RegionName":{"shape":"RegionName"}
+      }
+    },
     "DeleteRequest":{
       "type":"structure",
       "required":["Key"],
@@ -1253,6 +1383,25 @@
       "type":"structure",
       "members":{
         "ContinuousBackupsDescription":{"shape":"ContinuousBackupsDescription"}
+      }
+    },
+    "DescribeContributorInsightsInput":{
+      "type":"structure",
+      "required":["TableName"],
+      "members":{
+        "TableName":{"shape":"TableName"},
+        "IndexName":{"shape":"IndexName"}
+      }
+    },
+    "DescribeContributorInsightsOutput":{
+      "type":"structure",
+      "members":{
+        "TableName":{"shape":"TableName"},
+        "IndexName":{"shape":"IndexName"},
+        "ContributorInsightsRuleList":{"shape":"ContributorInsightsRuleList"},
+        "ContributorInsightsStatus":{"shape":"ContributorInsightsStatus"},
+        "LastUpdateDateTime":{"shape":"LastUpdateDateTime"},
+        "FailureException":{"shape":"FailureException"}
       }
     },
     "DescribeEndpointsRequest":{
@@ -1321,6 +1470,19 @@
         "Table":{"shape":"TableDescription"}
       }
     },
+    "DescribeTableReplicaAutoScalingInput":{
+      "type":"structure",
+      "required":["TableName"],
+      "members":{
+        "TableName":{"shape":"TableName"}
+      }
+    },
+    "DescribeTableReplicaAutoScalingOutput":{
+      "type":"structure",
+      "members":{
+        "TableAutoScalingDescription":{"shape":"TableAutoScalingDescription"}
+      }
+    },
     "DescribeTimeToLiveInput":{
       "type":"structure",
       "required":["TableName"],
@@ -1351,6 +1513,8 @@
       "member":{"shape":"Endpoint"}
     },
     "ErrorMessage":{"type":"string"},
+    "ExceptionDescription":{"type":"string"},
+    "ExceptionName":{"type":"string"},
     "ExpectedAttributeMap":{
       "type":"map",
       "key":{"shape":"AttributeName"},
@@ -1377,6 +1541,13 @@
       "value":{"shape":"AttributeValue"}
     },
     "ExpressionAttributeValueVariable":{"type":"string"},
+    "FailureException":{
+      "type":"structure",
+      "members":{
+        "ExceptionName":{"shape":"ExceptionName"},
+        "ExceptionDescription":{"shape":"ExceptionDescription"}
+      }
+    },
     "FilterConditionMap":{
       "type":"map",
       "key":{"shape":"AttributeName"},
@@ -1431,6 +1602,18 @@
         "Projection":{"shape":"Projection"},
         "ProvisionedThroughput":{"shape":"ProvisionedThroughput"}
       }
+    },
+    "GlobalSecondaryIndexAutoScalingUpdate":{
+      "type":"structure",
+      "members":{
+        "IndexName":{"shape":"IndexName"},
+        "ProvisionedWriteCapacityAutoScalingUpdate":{"shape":"AutoScalingSettingsUpdate"}
+      }
+    },
+    "GlobalSecondaryIndexAutoScalingUpdateList":{
+      "type":"list",
+      "member":{"shape":"GlobalSecondaryIndexAutoScalingUpdate"},
+      "min":1
     },
     "GlobalSecondaryIndexDescription":{
       "type":"structure",
@@ -1697,6 +1880,7 @@
         "ExpressionAttributeNames":{"shape":"ExpressionAttributeNameMap"}
       }
     },
+    "LastUpdateDateTime":{"type":"timestamp"},
     "LimitExceededException":{
       "type":"structure",
       "members":{
@@ -1724,6 +1908,25 @@
       "members":{
         "BackupSummaries":{"shape":"BackupSummaries"},
         "LastEvaluatedBackupArn":{"shape":"BackupArn"}
+      }
+    },
+    "ListContributorInsightsInput":{
+      "type":"structure",
+      "members":{
+        "TableName":{"shape":"TableName"},
+        "NextToken":{"shape":"NextTokenString"},
+        "MaxResults":{"shape":"ListContributorInsightsLimit"}
+      }
+    },
+    "ListContributorInsightsLimit":{
+      "type":"integer",
+      "max":100
+    },
+    "ListContributorInsightsOutput":{
+      "type":"structure",
+      "members":{
+        "ContributorInsightsSummaries":{"shape":"ContributorInsightsSummaries"},
+        "NextToken":{"shape":"NextTokenString"}
       }
     },
     "ListGlobalTablesInput":{
@@ -1928,6 +2131,12 @@
       },
       "exception":true
     },
+    "ProvisionedThroughputOverride":{
+      "type":"structure",
+      "members":{
+        "ReadCapacityUnits":{"shape":"PositiveLongObject"}
+      }
+    },
     "Put":{
       "type":"structure",
       "required":[
@@ -2029,15 +2238,97 @@
       },
       "exception":true
     },
+    "ReplicaAutoScalingDescription":{
+      "type":"structure",
+      "members":{
+        "RegionName":{"shape":"RegionName"},
+        "GlobalSecondaryIndexes":{"shape":"ReplicaGlobalSecondaryIndexAutoScalingDescriptionList"},
+        "ReplicaProvisionedReadCapacityAutoScalingSettings":{"shape":"AutoScalingSettingsDescription"},
+        "ReplicaProvisionedWriteCapacityAutoScalingSettings":{"shape":"AutoScalingSettingsDescription"},
+        "ReplicaStatus":{"shape":"ReplicaStatus"}
+      }
+    },
+    "ReplicaAutoScalingDescriptionList":{
+      "type":"list",
+      "member":{"shape":"ReplicaAutoScalingDescription"}
+    },
+    "ReplicaAutoScalingUpdate":{
+      "type":"structure",
+      "required":["RegionName"],
+      "members":{
+        "RegionName":{"shape":"RegionName"},
+        "ReplicaGlobalSecondaryIndexUpdates":{"shape":"ReplicaGlobalSecondaryIndexAutoScalingUpdateList"},
+        "ReplicaProvisionedReadCapacityAutoScalingUpdate":{"shape":"AutoScalingSettingsUpdate"}
+      }
+    },
+    "ReplicaAutoScalingUpdateList":{
+      "type":"list",
+      "member":{"shape":"ReplicaAutoScalingUpdate"},
+      "min":1
+    },
     "ReplicaDescription":{
       "type":"structure",
       "members":{
-        "RegionName":{"shape":"RegionName"}
+        "RegionName":{"shape":"RegionName"},
+        "ReplicaStatus":{"shape":"ReplicaStatus"},
+        "ReplicaStatusDescription":{"shape":"ReplicaStatusDescription"},
+        "ReplicaStatusPercentProgress":{"shape":"ReplicaStatusPercentProgress"},
+        "KMSMasterKeyId":{"shape":"KMSMasterKeyId"},
+        "ProvisionedThroughputOverride":{"shape":"ProvisionedThroughputOverride"},
+        "GlobalSecondaryIndexes":{"shape":"ReplicaGlobalSecondaryIndexDescriptionList"}
       }
     },
     "ReplicaDescriptionList":{
       "type":"list",
       "member":{"shape":"ReplicaDescription"}
+    },
+    "ReplicaGlobalSecondaryIndex":{
+      "type":"structure",
+      "required":["IndexName"],
+      "members":{
+        "IndexName":{"shape":"IndexName"},
+        "ProvisionedThroughputOverride":{"shape":"ProvisionedThroughputOverride"}
+      }
+    },
+    "ReplicaGlobalSecondaryIndexAutoScalingDescription":{
+      "type":"structure",
+      "members":{
+        "IndexName":{"shape":"IndexName"},
+        "IndexStatus":{"shape":"IndexStatus"},
+        "ProvisionedReadCapacityAutoScalingSettings":{"shape":"AutoScalingSettingsDescription"},
+        "ProvisionedWriteCapacityAutoScalingSettings":{"shape":"AutoScalingSettingsDescription"}
+      }
+    },
+    "ReplicaGlobalSecondaryIndexAutoScalingDescriptionList":{
+      "type":"list",
+      "member":{"shape":"ReplicaGlobalSecondaryIndexAutoScalingDescription"}
+    },
+    "ReplicaGlobalSecondaryIndexAutoScalingUpdate":{
+      "type":"structure",
+      "members":{
+        "IndexName":{"shape":"IndexName"},
+        "ProvisionedReadCapacityAutoScalingUpdate":{"shape":"AutoScalingSettingsUpdate"}
+      }
+    },
+    "ReplicaGlobalSecondaryIndexAutoScalingUpdateList":{
+      "type":"list",
+      "member":{"shape":"ReplicaGlobalSecondaryIndexAutoScalingUpdate"}
+    },
+    "ReplicaGlobalSecondaryIndexDescription":{
+      "type":"structure",
+      "members":{
+        "IndexName":{"shape":"IndexName"},
+        "ProvisionedThroughputOverride":{"shape":"ProvisionedThroughputOverride"}
+      }
+    },
+    "ReplicaGlobalSecondaryIndexDescriptionList":{
+      "type":"list",
+      "member":{"shape":"ReplicaGlobalSecondaryIndexDescription"}
+    },
+    "ReplicaGlobalSecondaryIndexList":{
+      "type":"list",
+      "member":{"shape":"ReplicaGlobalSecondaryIndex"},
+      "min":1
     },
     "ReplicaGlobalSecondaryIndexSettingsDescription":{
       "type":"structure",
@@ -2119,11 +2410,14 @@
       "type":"string",
       "enum":[
         "CREATING",
+        "CREATION_FAILED",
         "UPDATING",
         "DELETING",
         "ACTIVE"
       ]
     },
+    "ReplicaStatusDescription":{"type":"string"},
+    "ReplicaStatusPercentProgress":{"type":"string"},
     "ReplicaUpdate":{
       "type":"structure",
       "members":{
@@ -2134,6 +2428,19 @@
     "ReplicaUpdateList":{
       "type":"list",
       "member":{"shape":"ReplicaUpdate"}
+    },
+    "ReplicationGroupUpdate":{
+      "type":"structure",
+      "members":{
+        "Create":{"shape":"CreateReplicationGroupMemberAction"},
+        "Update":{"shape":"UpdateReplicationGroupMemberAction"},
+        "Delete":{"shape":"DeleteReplicationGroupMemberAction"}
+      }
+    },
+    "ReplicationGroupUpdateList":{
+      "type":"list",
+      "member":{"shape":"ReplicationGroupUpdate"},
+      "min":1
     },
     "RequestLimitExceeded":{
       "type":"structure",
@@ -2256,7 +2563,8 @@
       "members":{
         "Status":{"shape":"SSEStatus"},
         "SSEType":{"shape":"SSEType"},
-        "KMSMasterKeyArn":{"shape":"KMSMasterKeyArn"}
+        "KMSMasterKeyArn":{"shape":"KMSMasterKeyArn"},
+        "InaccessibleEncryptionDateTime":{"shape":"Date"}
       }
     },
     "SSEEnabled":{"type":"boolean"},
@@ -2388,6 +2696,7 @@
     "StreamEnabled":{"type":"boolean"},
     "StreamSpecification":{
       "type":"structure",
+      "required":["StreamEnabled"],
       "members":{
         "StreamEnabled":{"shape":"StreamEnabled"},
         "StreamViewType":{"shape":"StreamViewType"}
@@ -2416,6 +2725,14 @@
       "exception":true
     },
     "TableArn":{"type":"string"},
+    "TableAutoScalingDescription":{
+      "type":"structure",
+      "members":{
+        "TableName":{"shape":"TableName"},
+        "TableStatus":{"shape":"TableStatus"},
+        "Replicas":{"shape":"ReplicaAutoScalingDescriptionList"}
+      }
+    },
     "TableCreationDateTime":{"type":"timestamp"},
     "TableDescription":{
       "type":"structure",
@@ -2436,8 +2753,11 @@
         "StreamSpecification":{"shape":"StreamSpecification"},
         "LatestStreamLabel":{"shape":"String"},
         "LatestStreamArn":{"shape":"StreamArn"},
+        "GlobalTableVersion":{"shape":"String"},
+        "Replicas":{"shape":"ReplicaDescriptionList"},
         "RestoreSummary":{"shape":"RestoreSummary"},
-        "SSEDescription":{"shape":"SSEDescription"}
+        "SSEDescription":{"shape":"SSEDescription"},
+        "ArchivalSummary":{"shape":"ArchivalSummary"}
       }
     },
     "TableId":{
@@ -2474,7 +2794,10 @@
         "CREATING",
         "UPDATING",
         "DELETING",
-        "ACTIVE"
+        "ACTIVE",
+        "INACCESSIBLE_ENCRYPTION_CREDENTIALS",
+        "ARCHIVING",
+        "ARCHIVED"
       ]
     },
     "Tag":{
@@ -2682,6 +3005,26 @@
         "ContinuousBackupsDescription":{"shape":"ContinuousBackupsDescription"}
       }
     },
+    "UpdateContributorInsightsInput":{
+      "type":"structure",
+      "required":[
+        "TableName",
+        "ContributorInsightsAction"
+      ],
+      "members":{
+        "TableName":{"shape":"TableName"},
+        "IndexName":{"shape":"IndexName"},
+        "ContributorInsightsAction":{"shape":"ContributorInsightsAction"}
+      }
+    },
+    "UpdateContributorInsightsOutput":{
+      "type":"structure",
+      "members":{
+        "TableName":{"shape":"TableName"},
+        "IndexName":{"shape":"IndexName"},
+        "ContributorInsightsStatus":{"shape":"ContributorInsightsStatus"}
+      }
+    },
     "UpdateExpression":{"type":"string"},
     "UpdateGlobalSecondaryIndexAction":{
       "type":"structure",
@@ -2759,6 +3102,16 @@
         "ItemCollectionMetrics":{"shape":"ItemCollectionMetrics"}
       }
     },
+    "UpdateReplicationGroupMemberAction":{
+      "type":"structure",
+      "required":["RegionName"],
+      "members":{
+        "RegionName":{"shape":"RegionName"},
+        "KMSMasterKeyId":{"shape":"KMSMasterKeyId"},
+        "ProvisionedThroughputOverride":{"shape":"ProvisionedThroughputOverride"},
+        "GlobalSecondaryIndexes":{"shape":"ReplicaGlobalSecondaryIndexList"}
+      }
+    },
     "UpdateTableInput":{
       "type":"structure",
       "required":["TableName"],
@@ -2769,13 +3122,30 @@
         "ProvisionedThroughput":{"shape":"ProvisionedThroughput"},
         "GlobalSecondaryIndexUpdates":{"shape":"GlobalSecondaryIndexUpdateList"},
         "StreamSpecification":{"shape":"StreamSpecification"},
-        "SSESpecification":{"shape":"SSESpecification"}
+        "SSESpecification":{"shape":"SSESpecification"},
+        "ReplicaUpdates":{"shape":"ReplicationGroupUpdateList"}
       }
     },
     "UpdateTableOutput":{
       "type":"structure",
       "members":{
         "TableDescription":{"shape":"TableDescription"}
+      }
+    },
+    "UpdateTableReplicaAutoScalingInput":{
+      "type":"structure",
+      "required":["TableName"],
+      "members":{
+        "GlobalSecondaryIndexUpdates":{"shape":"GlobalSecondaryIndexAutoScalingUpdateList"},
+        "TableName":{"shape":"TableName"},
+        "ProvisionedWriteCapacityAutoScalingUpdate":{"shape":"AutoScalingSettingsUpdate"},
+        "ReplicaUpdates":{"shape":"ReplicaAutoScalingUpdateList"}
+      }
+    },
+    "UpdateTableReplicaAutoScalingOutput":{
+      "type":"structure",
+      "members":{
+        "TableAutoScalingDescription":{"shape":"TableAutoScalingDescription"}
       }
     },
     "UpdateTimeToLiveInput":{

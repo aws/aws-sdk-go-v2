@@ -177,6 +177,45 @@ func (s HlsConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The configuration for pre-roll ad insertion.
+type LivePreRollConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The URL for the ad decision server (ADS) for pre-roll ads. This includes
+	// the specification of static parameters and placeholders for dynamic parameters.
+	// AWS Elemental MediaTailor substitutes player-specific and session-specific
+	// parameters as needed when calling the ADS. Alternately, for testing, you
+	// can provide a static VAST URL. The maximum length is 25,000 characters.
+	AdDecisionServerUrl *string `type:"string"`
+
+	// The maximum allowed duration for the pre-roll ad avail. AWS Elemental MediaTailor
+	// won't play pre-roll ads to exceed this duration, regardless of the total
+	// duration of ads that the ADS returns.
+	MaxDurationSeconds *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s LivePreRollConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LivePreRollConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AdDecisionServerUrl != nil {
+		v := *s.AdDecisionServerUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AdDecisionServerUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxDurationSeconds != nil {
+		v := *s.MaxDurationSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxDurationSeconds", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 type PlaybackConfiguration struct {
 	_ struct{} `type:"structure"`
 

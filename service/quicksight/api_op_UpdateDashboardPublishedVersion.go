@@ -13,7 +13,7 @@ import (
 type UpdateDashboardPublishedVersionInput struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID that contains the dashboard you are updating.
+	// The ID of the AWS account that contains the dashboard that you're updating.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -93,7 +93,7 @@ func (s UpdateDashboardPublishedVersionInput) MarshalFields(e protocol.FieldEnco
 type UpdateDashboardPublishedVersionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the dashboard.
+	// The Amazon Resource Name (ARN) of the dashboard.
 	DashboardArn *string `type:"string"`
 
 	// The ID for the dashboard.
@@ -102,7 +102,7 @@ type UpdateDashboardPublishedVersionOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -141,11 +141,6 @@ const opUpdateDashboardPublishedVersion = "UpdateDashboardPublishedVersion"
 // Amazon QuickSight.
 //
 // Updates the published version of a dashboard.
-//
-// CLI syntax:
-//
-// aws quicksight update-dashboard-published-version --aws-account-id 111122223333
-// --dashboard-id dashboard-w1 ---version-number 2
 //
 //    // Example sending a request using UpdateDashboardPublishedVersionRequest.
 //    req := client.UpdateDashboardPublishedVersionRequest(params)

@@ -26,6 +26,13 @@ type CreateTrainingJobInput struct {
 	// checkpoint data.
 	CheckpointConfig *CheckpointConfig `type:"structure"`
 
+	// Configuration information for the debug hook parameters, collection configuration,
+	// and storage paths.
+	DebugHookConfig *DebugHookConfig `type:"structure"`
+
+	// Configuration information for debugging rules.
+	DebugRuleConfigurations []DebugRuleConfiguration `type:"list"`
+
 	// To encrypt all communications between ML compute instances in distributed
 	// training, choose True. Encryption provides greater security for distributed
 	// training, but training might take longer. How long it takes depends on the
@@ -56,6 +63,9 @@ type CreateTrainingJobInput struct {
 	//
 	// The Semantic Segmentation built-in algorithm does not support network isolation.
 	EnableNetworkIsolation *bool `type:"boolean"`
+
+	// Configuration for the experiment.
+	ExperimentConfig *ExperimentConfig `type:"structure"`
 
 	// Algorithm-specific parameters that influence the quality of the model. You
 	// set hyperparameters before you start the learning process. For a list of
@@ -134,6 +144,9 @@ type CreateTrainingJobInput struct {
 	// in the AWS Billing and Cost Management User Guide.
 	Tags []Tag `type:"list"`
 
+	// Configuration of storage locations for TensorBoard output.
+	TensorBoardOutputConfig *TensorBoardOutputConfig `type:"structure"`
+
 	// The name of the training job. The name must be unique within an AWS Region
 	// in an AWS account.
 	//
@@ -198,6 +211,23 @@ func (s *CreateTrainingJobInput) Validate() error {
 			invalidParams.AddNested("CheckpointConfig", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.DebugHookConfig != nil {
+		if err := s.DebugHookConfig.Validate(); err != nil {
+			invalidParams.AddNested("DebugHookConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.DebugRuleConfigurations != nil {
+		for i, v := range s.DebugRuleConfigurations {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DebugRuleConfigurations", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.ExperimentConfig != nil {
+		if err := s.ExperimentConfig.Validate(); err != nil {
+			invalidParams.AddNested("ExperimentConfig", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.InputDataConfig != nil {
 		for i, v := range s.InputDataConfig {
 			if err := v.Validate(); err != nil {
@@ -225,6 +255,11 @@ func (s *CreateTrainingJobInput) Validate() error {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
+		}
+	}
+	if s.TensorBoardOutputConfig != nil {
+		if err := s.TensorBoardOutputConfig.Validate(); err != nil {
+			invalidParams.AddNested("TensorBoardOutputConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.VpcConfig != nil {
@@ -297,8 +332,7 @@ const opCreateTrainingJob = "CreateTrainingJob"
 //
 //    * StoppingCondition - To help cap training costs, use MaxRuntimeInSeconds
 //    to set a time limit for training. Use MaxWaitTimeInSeconds to specify
-//    how long you are willing to to wait for a managed spot training job to
-//    complete.
+//    how long you are willing to wait for a managed spot training job to complete.
 //
 // For more information about Amazon SageMaker, see How It Works (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
 //

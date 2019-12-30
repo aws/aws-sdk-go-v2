@@ -54,6 +54,8 @@ type DescribePackagingGroupOutput struct {
 
 	Arn *string `locationName:"arn" type:"string"`
 
+	DomainName *string `locationName:"domainName" type:"string"`
+
 	Id *string `locationName:"id" type:"string"`
 }
 
@@ -69,6 +71,12 @@ func (s DescribePackagingGroupOutput) MarshalFields(e protocol.FieldEncoder) err
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "domainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Id != nil {
 		v := *s.Id

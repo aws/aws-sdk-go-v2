@@ -58,6 +58,8 @@ type testAliasedStruct struct {
 
 	Value13 testAliasedBool
 	Value14 testAliasedBoolSlice
+
+	Value15 map[testAliasedString]string
 }
 
 type testNamedPointer *int
@@ -256,6 +258,11 @@ var sharedTestCases = []struct {
 					{BOOL: aws.Bool(false)},
 					{BOOL: aws.Bool(true)},
 				}},
+				"Value15": {M: map[string]dynamodb.AttributeValue{
+					"TestKey": {
+						S: aws.String("TestElement"),
+					},
+				}},
 			},
 		},
 		actual: &testAliasedStruct{},
@@ -278,6 +285,7 @@ var sharedTestCases = []struct {
 			Value12: testAliasedStringSlice{"1", "2", "3"},
 			Value13: true,
 			Value14: testAliasedBoolSlice{true, false, true},
+			Value15: map[testAliasedString]string{"TestKey": "TestElement"},
 		},
 	},
 	{

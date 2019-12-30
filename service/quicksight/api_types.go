@@ -14,14 +14,14 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// The active IAM policy assignment.
+// The active AWS Identity and Access Management (IAM) policy assignment.
 type ActiveIAMPolicyAssignment struct {
 	_ struct{} `type:"structure"`
 
 	// A name for the IAM policy assignment.
 	AssignmentName *string `min:"1" type:"string"`
 
-	// The ARN of the resource.
+	// The Amazon Resource Name (ARN) of the resource.
 	PolicyArn *string `type:"string"`
 }
 
@@ -47,7 +47,7 @@ func (s ActiveIAMPolicyAssignment) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Ad hoc filtering option.
+// Ad hoc (one-time) filtering option.
 type AdHocFilteringOption struct {
 	_ struct{} `type:"structure"`
 
@@ -71,11 +71,11 @@ func (s AdHocFilteringOption) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Amazon Elasticsearch parameters.
+// Amazon Elasticsearch Service parameters.
 type AmazonElasticsearchParameters struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Elasticsearch domain.
+	// The Amazon Elasticsearch Service domain.
 	//
 	// Domain is a required field
 	Domain *string `min:"1" type:"string" required:"true"`
@@ -114,11 +114,11 @@ func (s AmazonElasticsearchParameters) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Athena parameters.
+// Amazon Athena parameters.
 type AthenaParameters struct {
 	_ struct{} `type:"structure"`
 
-	// The workgroup that Athena uses.
+	// The workgroup that Amazon Athena uses.
 	WorkGroup *string `min:"1" type:"string"`
 }
 
@@ -151,7 +151,7 @@ func (s AthenaParameters) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Aurora parameters.
+// Amazon Aurora parameters.
 type AuroraParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -230,7 +230,7 @@ func (s AuroraParameters) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Aurora PostgreSQL parameters.
+// Amazon Aurora with PostgreSQL compatibility parameters.
 type AuroraPostgreSqlParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -356,9 +356,9 @@ func (s AwsIotAnalyticsParameters) MarshalFields(e protocol.FieldEncoder) error 
 type CalculatedColumn struct {
 	_ struct{} `type:"structure"`
 
-	// A unique ID to identify a calculated column. During dataset update, if the
-	// column ID of a calculated column matches that of an existing calculated column,
-	// QuickSight preserves the existing calculated column.
+	// A unique ID to identify a calculated column. During a dataset update, if
+	// the column ID of a calculated column matches that of an existing calculated
+	// column, Amazon QuickSight preserves the existing calculated column.
 	//
 	// ColumnId is a required field
 	ColumnId *string `min:"1" type:"string" required:"true"`
@@ -442,8 +442,8 @@ type CastColumnTypeOperation struct {
 	// ColumnName is a required field
 	ColumnName *string `min:"1" type:"string" required:"true"`
 
-	// When casting a column from string to datetime type, you can supply a QuickSight
-	// supported format string to denote the source data format.
+	// When casting a column from string to datetime type, you can supply a string
+	// in a format supported by Amazon QuickSight to denote the source data format.
 	Format *string `type:"string"`
 
 	// New column data type.
@@ -500,9 +500,9 @@ func (s CastColumnTypeOperation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Groupings of columns that work together in certain QuickSight features. This
-// is a variant type structure. No more than one of the attributes should be
-// non-null for this structure to be valid.
+// Groupings of columns that work together in certain Amazon QuickSight features.
+// This is a variant type structure. For this structure to be valid, only one
+// of the attributes can be non-null.
 type ColumnGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -541,7 +541,7 @@ func (s ColumnGroup) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A structure describing the name, datatype, and geographic role of the columns.
+// A structure describing the name, data type, and geographic role of the columns.
 type ColumnGroupColumnSchema struct {
 	_ struct{} `type:"structure"`
 
@@ -569,7 +569,7 @@ func (s ColumnGroupColumnSchema) MarshalFields(e protocol.FieldEncoder) error {
 type ColumnGroupSchema struct {
 	_ struct{} `type:"structure"`
 
-	// A structure containing the list of column group column schemas.
+	// A structure containing the list of schemas for column group columns.
 	ColumnGroupColumnSchemaList []ColumnGroupColumnSchema `type:"list"`
 
 	// The name of the column group schema.
@@ -646,9 +646,9 @@ func (s ColumnSchema) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A tag for a column in a TagColumnOperation. This is a variant type structure.
-// No more than one of the attributes should be non-null for this structure
-// to be valid.
+// A tag for a column in a TagColumnOperation structure. This is a variant type
+// structure. For this structure to be valid, only one of the attributes can
+// be non-null.
 type ColumnTag struct {
 	_ struct{} `type:"structure"`
 
@@ -729,7 +729,7 @@ func (s CreateColumnsOperation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The combination of username and password that are used as credentials.
+// The combination of user name and password that are used as credentials.
 type CredentialPair struct {
 	_ struct{} `type:"structure"`
 
@@ -738,7 +738,7 @@ type CredentialPair struct {
 	// Password is a required field
 	Password *string `min:"1" type:"string" required:"true"`
 
-	// Username.
+	// User name.
 	//
 	// Username is a required field
 	Username *string `min:"1" type:"string" required:"true"`
@@ -797,7 +797,7 @@ type CustomSql struct {
 	// The column schema from the SQL query result set.
 	Columns []InputColumn `min:"1" type:"list"`
 
-	// The ARN of the data source.
+	// The Amazon Resource Name (ARN) of the data source.
 	//
 	// DataSourceArn is a required field
 	DataSourceArn *string `type:"string" required:"true"`
@@ -895,19 +895,19 @@ func (s CustomSql) MarshalFields(e protocol.FieldEncoder) error {
 type Dashboard struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource name (ARN) of the resource.
+	// The Amazon Resource Name (ARN) of the resource.
 	Arn *string `type:"string"`
 
-	// The time this was created.
+	// The time that this dataset was created.
 	CreatedTime *time.Time `type:"timestamp"`
 
 	// Dashboard ID.
 	DashboardId *string `min:"1" type:"string"`
 
-	// The last time this was published.
+	// The last time that this dataset was published.
 	LastPublishedTime *time.Time `type:"timestamp"`
 
-	// The last time this was updated.
+	// The last time that this dataset was updated.
 	LastUpdatedTime *time.Time `type:"timestamp"`
 
 	// A display name for the dataset.
@@ -1009,10 +1009,10 @@ func (s DashboardError) MarshalFields(e protocol.FieldEncoder) error {
 type DashboardPublishOptions struct {
 	_ struct{} `type:"structure"`
 
-	// Ad hoc filtering option.
+	// Ad hoc (one-time) filtering option.
 	AdHocFilteringOption *AdHocFilteringOption `type:"structure"`
 
-	// Export to CSV option.
+	// Export to .csv option.
 	ExportToCSVOption *ExportToCSVOption `type:"structure"`
 
 	// Sheet controls option.
@@ -1090,7 +1090,7 @@ func (s DashboardSourceEntity) MarshalFields(e protocol.FieldEncoder) error {
 type DashboardSourceTemplate struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource name (ARN) of the resource.
+	// The Amazon Resource Name (ARN) of the resource.
 	//
 	// Arn is a required field
 	Arn *string `type:"string" required:"true"`
@@ -1161,22 +1161,22 @@ func (s DashboardSourceTemplate) MarshalFields(e protocol.FieldEncoder) error {
 type DashboardSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource name (ARN) of the resource.
+	// The Amazon Resource Name (ARN) of the resource.
 	Arn *string `type:"string"`
 
-	// The time this was created.
+	// The time that this dashboard was created.
 	CreatedTime *time.Time `type:"timestamp"`
 
 	// Dashboard ID.
 	DashboardId *string `min:"1" type:"string"`
 
-	// The last time this was published.
+	// The last time that this dashboard was published.
 	LastPublishedTime *time.Time `type:"timestamp"`
 
-	// The last time this was updated.
+	// The last time that this dashboard was updated.
 	LastUpdatedTime *time.Time `type:"timestamp"`
 
-	// A display name for the dataset.
+	// A display name for the dashboard.
 	Name *string `min:"1" type:"string"`
 
 	// Published version number.
@@ -1242,10 +1242,10 @@ func (s DashboardSummary) MarshalFields(e protocol.FieldEncoder) error {
 type DashboardVersion struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource name (ARN) of the resource.
+	// The Amazon Resource Name (ARN) of the resource.
 	Arn *string `type:"string"`
 
-	// The time this was created.
+	// The time that this dashboard version was created.
 	CreatedTime *time.Time `type:"timestamp"`
 
 	// Description.
@@ -1257,7 +1257,7 @@ type DashboardVersion struct {
 	// Source entity ARN.
 	SourceEntityArn *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status ResourceStatus `type:"string" enum:"true"`
 
 	// Version number.
@@ -1327,10 +1327,10 @@ func (s DashboardVersion) MarshalFields(e protocol.FieldEncoder) error {
 type DashboardVersionSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource name (ARN) of the resource.
+	// The Amazon Resource Name (ARN) of the resource.
 	Arn *string `type:"string"`
 
-	// The time this was created.
+	// The time that this dashboard version was created.
 	CreatedTime *time.Time `type:"timestamp"`
 
 	// Description.
@@ -1339,7 +1339,7 @@ type DashboardVersionSummary struct {
 	// Source entity ARN.
 	SourceEntityArn *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status ResourceStatus `type:"string" enum:"true"`
 
 	// Version number.
@@ -1397,27 +1397,27 @@ func (s DashboardVersionSummary) MarshalFields(e protocol.FieldEncoder) error {
 type DataSet struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource name (ARN) of the resource.
+	// The Amazon Resource Name (ARN) of the resource.
 	Arn *string `type:"string"`
 
-	// Groupings of columns that work together in certain QuickSight features. Currently
-	// only geospatial hierarchy is supported.
+	// Groupings of columns that work together in certain Amazon QuickSight features.
+	// Currently, only geospatial hierarchy is supported.
 	ColumnGroups []ColumnGroup `min:"1" type:"list"`
 
 	// The amount of SPICE capacity used by this dataset. This is 0 if the dataset
 	// isn't imported into SPICE.
 	ConsumedSpiceCapacityInBytes *int64 `type:"long"`
 
-	// The time this was created.
+	// The time that this dataset was created.
 	CreatedTime *time.Time `type:"timestamp"`
 
 	// The ID of the dataset.
 	DataSetId *string `type:"string"`
 
-	// Indicates whether or not you want to import the data into SPICE.
+	// Indicates whether you want to import the data into SPICE.
 	ImportMode DataSetImportMode `type:"string" enum:"true"`
 
-	// The last time this was updated.
+	// The last time that this dataset was updated.
 	LastUpdatedTime *time.Time `type:"timestamp"`
 
 	// Configures the combination and transformation of the data from the physical
@@ -1434,7 +1434,7 @@ type DataSet struct {
 	// Declares the physical tables that are available in the underlying data sources.
 	PhysicalTableMap map[string]PhysicalTable `min:"1" type:"map"`
 
-	// Row-level security configuration on the dataset.
+	// The row-level security configuration for the dataset.
 	RowLevelPermissionDataSet *RowLevelPermissionDataSet `type:"structure"`
 }
 
@@ -1598,7 +1598,7 @@ func (s DataSetConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 type DataSetReference struct {
 	_ struct{} `type:"structure"`
 
-	// Dataset ARN.
+	// Dataset Amazon Resource Name (ARN).
 	//
 	// DataSetArn is a required field
 	DataSetArn *string `type:"string" required:"true"`
@@ -1683,25 +1683,25 @@ func (s DataSetSchema) MarshalFields(e protocol.FieldEncoder) error {
 type DataSetSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource name (ARN) of the dataset.
+	// The Amazon Resource Name (ARN) of the dataset.
 	Arn *string `type:"string"`
 
-	// The time this was created.
+	// The time that this dataset was created.
 	CreatedTime *time.Time `type:"timestamp"`
 
 	// The ID of the dataset.
 	DataSetId *string `type:"string"`
 
-	// Indicates whether or not you want to import the data into SPICE.
+	// Indicates whether you want to import the data into SPICE.
 	ImportMode DataSetImportMode `type:"string" enum:"true"`
 
-	// The last time this was updated.
+	// The last time that this dataset was updated.
 	LastUpdatedTime *time.Time `type:"timestamp"`
 
 	// A display name for the dataset.
 	Name *string `min:"1" type:"string"`
 
-	// Row-level security configuration on the dataset.
+	// The row-level security configuration for the dataset.
 	RowLevelPermissionDataSet *RowLevelPermissionDataSet `type:"structure"`
 }
 
@@ -1763,37 +1763,39 @@ func (s DataSetSummary) MarshalFields(e protocol.FieldEncoder) error {
 type DataSource struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource name (ARN) of the data source.
+	// The Amazon Resource Name (ARN) of the data source.
 	Arn *string `type:"string"`
 
-	// The time this was created.
+	// The time that this data source was created.
 	CreatedTime *time.Time `type:"timestamp"`
 
-	// The ID of the data source. This is unique per AWS Region per AWS account.
+	// The ID of the data source. This ID is unique per AWS Region for each AWS
+	// account.
 	DataSourceId *string `type:"string"`
 
-	// The parameters QuickSight uses to connect to your underlying source. This
-	// is a variant type structure. At most one of the attributes should be non-null
-	// for this structure to be valid.
+	// The parameters that Amazon QuickSight uses to connect to your underlying
+	// source. This is a variant type structure. For this structure to be valid,
+	// only one of the attributes can be non-null.
 	DataSourceParameters *DataSourceParameters `type:"structure"`
 
 	// Error information from the last update or the creation of the data source.
 	ErrorInfo *DataSourceErrorInfo `type:"structure"`
 
-	// The last time this was updated.
+	// The last time that this data source was updated.
 	LastUpdatedTime *time.Time `type:"timestamp"`
 
 	// A display name for the data source.
 	Name *string `min:"1" type:"string"`
 
-	// SSL properties that apply when QuickSight connects to your underlying source.
+	// Secure Socket Layer (SSL) properties that apply when QuickSight connects
+	// to your underlying source.
 	SslProperties *SslProperties `type:"structure"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status ResourceStatus `type:"string" enum:"true"`
 
-	// The type of the data source. This indicates which database engine the data
-	// source connects to.
+	// The type of the data source. This type indicates which database engine the
+	// data source connects to.
 	Type DataSourceType `type:"string" enum:"true"`
 
 	// The VPC connection information. You need to use this parameter only when
@@ -1919,7 +1921,7 @@ func (s DataSourceCredentials) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Error information on data source creation or update.
+// Error information for the data source creation or update.
 type DataSourceErrorInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1952,19 +1954,19 @@ func (s DataSourceErrorInfo) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The parameters QuickSight uses to connect to your underlying source. This
-// is a variant type structure. At most one of the attributes should be non-null
-// for this structure to be valid.
+// The parameters that Amazon QuickSight uses to connect to your underlying
+// data source. This is a variant type structure. For this structure to be valid,
+// only one of the attributes can be non-null.
 type DataSourceParameters struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon Elasticsearch parameters.
+	// Amazon Elasticsearch Service parameters.
 	AmazonElasticsearchParameters *AmazonElasticsearchParameters `type:"structure"`
 
-	// Athena parameters.
+	// Amazon Athena parameters.
 	AthenaParameters *AthenaParameters `type:"structure"`
 
-	// Aurora MySQL parameters.
+	// Amazon Aurora MySQL parameters.
 	AuroraParameters *AuroraParameters `type:"structure"`
 
 	// Aurora PostgreSQL parameters.
@@ -1988,10 +1990,10 @@ type DataSourceParameters struct {
 	// Presto parameters.
 	PrestoParameters *PrestoParameters `type:"structure"`
 
-	// RDS parameters.
+	// Amazon RDS parameters.
 	RdsParameters *RdsParameters `type:"structure"`
 
-	// Redshift parameters.
+	// Amazon Redshift parameters.
 	RedshiftParameters *RedshiftParameters `type:"structure"`
 
 	// S3 parameters.
@@ -2367,11 +2369,11 @@ func (s DecimalParameter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Error information on a data set SPICE ingestion.
+// Error information for the SPICE ingestion of a dataset.
 type ErrorInfo struct {
 	_ struct{} `type:"structure"`
 
-	// Error essage.
+	// Error message.
 	Message *string `type:"string"`
 
 	// Error type.
@@ -2400,7 +2402,7 @@ func (s ErrorInfo) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Export to CSV option.
+// Export to .csv option.
 type ExportToCSVOption struct {
 	_ struct{} `type:"structure"`
 
@@ -2424,12 +2426,12 @@ func (s ExportToCSVOption) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A transform operation that filters rows based on some condition.
+// A transform operation that filters rows based on a condition.
 type FilterOperation struct {
 	_ struct{} `type:"structure"`
 
-	// An expression that must evaluate to a boolean value. Rows for which the expression
-	// is evaluated to true are kept in the dataset.
+	// An expression that must evaluate to a Boolean value. Rows for which the expression
+	// evaluates to true are kept in the dataset.
 	//
 	// ConditionExpression is a required field
 	ConditionExpression *string `min:"1" type:"string" required:"true"`
@@ -2555,7 +2557,7 @@ func (s GeoSpatialColumnGroup) MarshalFields(e protocol.FieldEncoder) error {
 type Group struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource name (ARN) for the group.
+	// The Amazon Resource Name (ARN) for the group.
 	Arn *string `type:"string"`
 
 	// The group description.
@@ -2607,7 +2609,7 @@ func (s Group) MarshalFields(e protocol.FieldEncoder) error {
 type GroupMember struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource name (ARN) for the group member (user).
+	// The Amazon Resource Name (ARN) for the group member (user).
 	Arn *string `type:"string"`
 
 	// The name of the group member (user).
@@ -2636,7 +2638,7 @@ func (s GroupMember) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// IAM policy assignment.
+// An IAM policy assignment.
 type IAMPolicyAssignment struct {
 	_ struct{} `type:"structure"`
 
@@ -2649,13 +2651,13 @@ type IAMPolicyAssignment struct {
 	// Assignment status.
 	AssignmentStatus AssignmentStatus `type:"string" enum:"true"`
 
-	// AWS account ID.
+	// The AWS account ID.
 	AwsAccountId *string `min:"12" type:"string"`
 
 	// Identities.
 	Identities map[string][]string `type:"map"`
 
-	// Policy ARN.
+	// The Amazon Resource Name (ARN) for the IAM policy.
 	PolicyArn *string `type:"string"`
 }
 
@@ -2716,7 +2718,7 @@ func (s IAMPolicyAssignment) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// IAM policy assignment Summary.
+// IAM policy assignment summary.
 type IAMPolicyAssignmentSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2749,16 +2751,16 @@ func (s IAMPolicyAssignmentSummary) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Information on the SPICE ingestion for a dataset.
+// Information about the SPICE ingestion for a dataset.
 type Ingestion struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource name (ARN) of the resource.
+	// The Amazon Resource Name (ARN) of the resource.
 	//
 	// Arn is a required field
 	Arn *string `type:"string" required:"true"`
 
-	// The time this ingestion started.
+	// The time that this ingestion started.
 	//
 	// CreatedTime is a required field
 	CreatedTime *time.Time `type:"timestamp" required:"true"`
@@ -2769,7 +2771,7 @@ type Ingestion struct {
 	// Ingestion ID.
 	IngestionId *string `min:"1" type:"string"`
 
-	// Size of the data ingested in bytes.
+	// The size of the data ingested, in bytes.
 	IngestionSizeInBytes *int64 `type:"long"`
 
 	// Ingestion status.
@@ -2777,10 +2779,10 @@ type Ingestion struct {
 	// IngestionStatus is a required field
 	IngestionStatus IngestionStatus `type:"string" required:"true" enum:"true"`
 
-	// The time this ingestion took, measured in seconds.
+	// The time that this ingestion took, measured in seconds.
 	IngestionTimeInSeconds *int64 `type:"long"`
 
-	// Information on queued dataset SPICE ingestion.
+	// Information about a queued dataset SPICE ingestion.
 	QueueInfo *QueueInfo `type:"structure"`
 
 	// Event source for this ingestion.
@@ -2789,7 +2791,7 @@ type Ingestion struct {
 	// Type of this ingestion.
 	RequestType IngestionRequestType `type:"string" enum:"true"`
 
-	// Information on rows during a data set SPICE ingestion.
+	// Information about rows for a data set SPICE ingestion.
 	RowInfo *RowInfo `type:"structure"`
 }
 
@@ -2870,7 +2872,7 @@ func (s Ingestion) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Metadata on a column that is used as the input of a transform operation.
+// Metadata for a column that is used as the input of a transform operation.
 type InputColumn struct {
 	_ struct{} `type:"structure"`
 
@@ -3124,10 +3126,10 @@ func (s JoinInstruction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A unit that joins and data transformations operate on. A logical table has
-// a source, which can be either a physical table or result of a join. When
-// it points to a physical table, a logical table acts as a mutable copy of
-// that table through transform operations.
+// A logical table is a unit that joins and that data transformations operate
+// on. A logical table has a source, which can be either a physical table or
+// result of a join. When a logical table points to a physical table, the logical
+// table acts as a mutable copy of that physical table through transform operations.
 type LogicalTable struct {
 	_ struct{} `type:"structure"`
 
@@ -3215,9 +3217,8 @@ func (s LogicalTable) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information on the source of a logical table. This is a variant type structure.
-// No more than one of the attributes should be non-null for this structure
-// to be valid.
+// Information about the source of a logical table. This is a variant type structure.
+// For this structure to be valid, only one of the attributes can be non-null.
 type LogicalTableSource struct {
 	_ struct{} `type:"structure"`
 
@@ -3633,9 +3634,9 @@ func (s Parameters) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A view of a data source. Contains information on the shape of the data in
-// the underlying source. This is a variant type structure. No more than one
-// of the attributes can be non-null for this structure to be valid.
+// A view of a data source that contains information about the shape of the
+// data in the underlying source. This is a variant type structure. For this
+// structure to be valid, only one of the attributes can be non-null.
 type PhysicalTable struct {
 	_ struct{} `type:"structure"`
 
@@ -3907,7 +3908,7 @@ func (s ProjectOperation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information on queued dataset SPICE ingestion.
+// Information about a queued dataset SPICE ingestion.
 type QueueInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -3945,7 +3946,7 @@ func (s QueueInfo) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// RDS parameters.
+// Amazon RDS parameters.
 type RdsParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -4006,12 +4007,13 @@ func (s RdsParameters) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Redshift parameters. The ClusterId field can be blank if Host and Port are
-// both set, and the other way around.
+// Amazon Redshift parameters. The ClusterId field can be blank if Host and
+// Port are both set. The Host and Port fields can be blank if the ClusterId
+// field is set.
 type RedshiftParameters struct {
 	_ struct{} `type:"structure"`
 
-	// Cluster ID. This can be blank if the Host and Port are provided.
+	// Cluster ID. This field can be blank if the Host and Port are provided.
 	ClusterId *string `min:"1" type:"string"`
 
 	// Database.
@@ -4019,10 +4021,10 @@ type RedshiftParameters struct {
 	// Database is a required field
 	Database *string `min:"1" type:"string" required:"true"`
 
-	// Host. This can be blank if the ClusterId is provided.
+	// Host. This field can be blank if ClusterId is provided.
 	Host *string `min:"1" type:"string"`
 
-	// Port. This can be blank if the ClusterId is provided.
+	// Port. This field can be blank if the ClusterId is provided.
 	Port *int64 `type:"integer"`
 }
 
@@ -4087,7 +4089,7 @@ func (s RedshiftParameters) MarshalFields(e protocol.FieldEncoder) error {
 type RelationalTable struct {
 	_ struct{} `type:"structure"`
 
-	// Data source ARN.
+	// The Amazon Resource Name (ARN) for the data source.
 	//
 	// DataSourceArn is a required field
 	DataSourceArn *string `type:"string" required:"true"`
@@ -4097,12 +4099,12 @@ type RelationalTable struct {
 	// InputColumns is a required field
 	InputColumns []InputColumn `min:"1" type:"list" required:"true"`
 
-	// Name of the relational table.
+	// The name of the relational table.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// The schema name. Applies to certain relational database engines.
+	// The schema name. This name applies to certain relational database engines.
 	Schema *string `type:"string"`
 }
 
@@ -4185,12 +4187,12 @@ func (s RelationalTable) MarshalFields(e protocol.FieldEncoder) error {
 type RenameColumnOperation struct {
 	_ struct{} `type:"structure"`
 
-	// Name of the column to be renamed.
+	// The name of the column to be renamed.
 	//
 	// ColumnName is a required field
 	ColumnName *string `min:"1" type:"string" required:"true"`
 
-	// New name for the column.
+	// The new name for the column.
 	//
 	// NewColumnName is a required field
 	NewColumnName *string `min:"1" type:"string" required:"true"`
@@ -4246,14 +4248,15 @@ func (s RenameColumnOperation) MarshalFields(e protocol.FieldEncoder) error {
 type ResourcePermission struct {
 	_ struct{} `type:"structure"`
 
-	// The action to grant or revoke permissions on. For example, "quicksight:DescribeDashboard".
+	// The action to grant or revoke permissions on, for example "quicksight:DescribeDashboard".
 	//
 	// Actions is a required field
 	Actions []string `min:"1" type:"list" required:"true"`
 
-	// The ARN of a QuickSight user or group, or an IAM ARN. If you are using cross-account
-	// resource sharing, this is the IAM ARN of an account root. Otherwise, it is
-	// the ARN of a QuickSight user or group. .
+	// The Amazon Resource Name (ARN) of an Amazon QuickSight user or group, or
+	// an IAM ARN. If you are using cross-account resource sharing, this is the
+	// IAM ARN of an account root. Otherwise, it is the ARN of a QuickSight user
+	// or group. .
 	//
 	// Principal is a required field
 	Principal *string `min:"1" type:"string" required:"true"`
@@ -4311,7 +4314,7 @@ func (s ResourcePermission) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information on rows during a data set SPICE ingestion.
+// Information about rows for a data set SPICE ingestion.
 type RowInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -4344,11 +4347,11 @@ func (s RowInfo) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Row-level security configuration on the dataset.
+// The row-level security configuration for the dataset.
 type RowLevelPermissionDataSet struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource name (ARN) of the permission dataset.
+	// The Amazon Resource Name (ARN) of the permission dataset.
 	//
 	// Arn is a required field
 	Arn *string `type:"string" required:"true"`
@@ -4448,7 +4451,7 @@ func (s S3Parameters) MarshalFields(e protocol.FieldEncoder) error {
 type S3Source struct {
 	_ struct{} `type:"structure"`
 
-	// Data source ARN.
+	// The amazon Resource Name (ARN) for the data source.
 	//
 	// DataSourceArn is a required field
 	DataSourceArn *string `type:"string" required:"true"`
@@ -4458,7 +4461,7 @@ type S3Source struct {
 	// InputColumns is a required field
 	InputColumns []InputColumn `min:"1" type:"list" required:"true"`
 
-	// Information on the S3 source file(s) format.
+	// Information about the format for the S3 source file or files.
 	UploadSettings *UploadSettings `type:"structure"`
 }
 
@@ -4812,12 +4815,12 @@ func (s SqlServerParameters) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// SSL properties that apply when QuickSight connects to your underlying data
-// source.
+// Secure Socket Layer (SSL) properties that apply when QuickSight connects
+// to your underlying data source.
 type SslProperties struct {
 	_ struct{} `type:"structure"`
 
-	// A boolean flag to control whether SSL should be disabled.
+	// A Boolean option to control whether SSL should be disabled.
 	DisableSsl *bool `type:"boolean"`
 }
 
@@ -4898,8 +4901,8 @@ func (s StringParameter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The keys of the key-value pairs for the resource tag or tags assigned to
-// the resource.
+// The key or keys of the key-value pairs for the resource tag or tags assigned
+// to the resource.
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -5029,19 +5032,19 @@ func (s TagColumnOperation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A template object. A template is an entity in QuickSight which encapsulates
-// the metadata required to create an analysis that can be used to create dashboard.
-// It adds a layer of abstraction by replacing the dataset associated with the
-// analysis with placeholders. Templates can be used to create dashboards by
-// replacing dataset placeholders with datasets which follow the same schema
-// that was used to create the source analysis and template.
+// A template object. A template is an entity in QuickSight that encapsulates
+// the metadata required to create an analysis and that you can use to create
+// a dashboard. A template adds a layer of abstraction by using placeholders
+// to replace the dataset associated with the analysis. You can use templates
+// to create dashboards by replacing dataset placeholders with datasets that
+// follow the same schema that was used to create the source analysis and template.
 //
 // You can share templates across AWS accounts by allowing users in other AWS
 // accounts to create a template or a dashboard from an existing template.
 type Template struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the template.
+	// The Amazon Resource Name (ARN) of the template.
 	Arn *string `type:"string"`
 
 	// Time when this was created.
@@ -5053,7 +5056,7 @@ type Template struct {
 	// The display name of the template.
 	Name *string `min:"1" type:"string"`
 
-	// The ID for the template. This is unique per region per AWS account.
+	// The ID for the template. This is unique per AWS Region for each AWS account.
 	TemplateId *string `min:"1" type:"string"`
 
 	// A structure describing the versions of the template.
@@ -5115,7 +5118,7 @@ type TemplateAlias struct {
 	// The display name of the template alias.
 	AliasName *string `min:"1" type:"string"`
 
-	// The ARN of the template alias.
+	// The Amazon Resource Name (ARN) of the template alias.
 	Arn *string `type:"string"`
 
 	// The version number of the template alias.
@@ -5187,7 +5190,7 @@ func (s TemplateError) MarshalFields(e protocol.FieldEncoder) error {
 type TemplateSourceAnalysis struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource name (ARN) of the resource.
+	// The Amazon Resource Name (ARN) of the resource.
 	//
 	// Arn is a required field
 	Arn *string `type:"string" required:"true"`
@@ -5312,7 +5315,7 @@ func (s TemplateSourceEntity) MarshalFields(e protocol.FieldEncoder) error {
 type TemplateSourceTemplate struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource name (ARN) of the resource.
+	// The Amazon Resource Name (ARN) of the resource.
 	//
 	// Arn is a required field
 	Arn *string `type:"string" required:"true"`
@@ -5355,10 +5358,10 @@ type TemplateSummary struct {
 	// A summary of a template.
 	Arn *string `type:"string"`
 
-	// The last time this was created.
+	// The last time that this template was created.
 	CreatedTime *time.Time `type:"timestamp"`
 
-	// The last time this was updated.
+	// The last time that this template was updated.
 	LastUpdatedTime *time.Time `type:"timestamp"`
 
 	// A structure containing a list of version numbers for the template summary.
@@ -5367,7 +5370,7 @@ type TemplateSummary struct {
 	// A display name for the template.
 	Name *string `min:"1" type:"string"`
 
-	// The ID of the template. This is unique per region per AWS account.
+	// The ID of the template. This ID is unique per AWS Region for each AWS account.
 	TemplateId *string `min:"1" type:"string"`
 }
 
@@ -5423,7 +5426,7 @@ func (s TemplateSummary) MarshalFields(e protocol.FieldEncoder) error {
 type TemplateVersion struct {
 	_ struct{} `type:"structure"`
 
-	// The time this was created.
+	// The time that this template version was created.
 	CreatedTime *time.Time `type:"timestamp"`
 
 	// Schema of the dataset identified by the placeholder. The idea is that any
@@ -5437,10 +5440,11 @@ type TemplateVersion struct {
 	// Errors associated with the template.
 	Errors []TemplateError `min:"1" type:"list"`
 
-	// The ARN of the analysis or template which was used to create this template.
+	// The Amazon Resource Name (ARN) of the analysis or template which was used
+	// to create this template.
 	SourceEntityArn *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status ResourceStatus `type:"string" enum:"true"`
 
 	// The version number of the template.
@@ -5519,10 +5523,10 @@ type TemplateVersionSummary struct {
 	// The ARN of the template version.
 	Arn *string `type:"string"`
 
-	// The time this was created.
+	// The time that this template version was created.
 	CreatedTime *time.Time `type:"timestamp"`
 
-	// The desription of the template version.
+	// The description of the template version.
 	Description *string `min:"1" type:"string"`
 
 	// The status of the template version.
@@ -5653,8 +5657,7 @@ func (s TeradataParameters) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A data transformation on a logical table. This is a variant type structure.
-// No more than one of the attributes should be non-null for this structure
-// to be valid.
+// For this structure to be valid, only one of the attributes can be non-null.
 type TransformOperation struct {
 	_ struct{} `type:"structure"`
 
@@ -5826,11 +5829,11 @@ func (s TwitterParameters) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information on source file(s) format.
+// Information about the format for a source file or files.
 type UploadSettings struct {
 	_ struct{} `type:"structure"`
 
-	// Whether or not the file(s) has a header row.
+	// Whether the file has a header row, or the files each have a header row.
 	ContainsHeader *bool `type:"boolean"`
 
 	// The delimiter between values in the file.
@@ -5907,12 +5910,12 @@ func (s UploadSettings) MarshalFields(e protocol.FieldEncoder) error {
 type User struct {
 	_ struct{} `type:"structure"`
 
-	// Active status of user. When you create an Amazon QuickSight user that’s
-	// not an IAM user or an AD user, that user is inactive until they sign in and
-	// provide a password.
+	// The active status of user. When you create an Amazon QuickSight user that’s
+	// not an IAM user or an Active Directory user, that user is inactive until
+	// they sign in and provide a password.
 	Active *bool `type:"boolean"`
 
-	// The Amazon Resource name (ARN) for the user.
+	// The Amazon Resource Name (ARN) for the user.
 	Arn *string `type:"string"`
 
 	// The user's email address.
@@ -6000,7 +6003,7 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 type VpcConnectionProperties struct {
 	_ struct{} `type:"structure"`
 
-	// VPC connection ARN.
+	// The Amazon Resource Name (ARN) for the VPC connection.
 	//
 	// VpcConnectionArn is a required field
 	VpcConnectionArn *string `type:"string" required:"true"`

@@ -79,10 +79,9 @@ const opDescribeConformancePackCompliance = "DescribeConformancePackCompliance"
 // DescribeConformancePackComplianceRequest returns a request value for making API operation for
 // AWS Config.
 //
-// Returns compliance information for each rule in that conformance pack.
+// Returns compliance details for each rule in that conformance pack.
 //
-// You must provide exact rule names otherwise AWS Config cannot return evaluation
-// results due to insufficient data.
+// You must provide exact rule names.
 //
 //    // Example sending a request using DescribeConformancePackComplianceRequest.
 //    req := client.DescribeConformancePackComplianceRequest(params)

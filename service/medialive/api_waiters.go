@@ -209,3 +209,204 @@ func (c *Client) WaitUntilChannelStopped(ctx context.Context, input *DescribeCha
 
 	return w.Wait(ctx)
 }
+
+// WaitUntilMultiplexCreated uses the MediaLive API operation
+// DescribeMultiplex to wait for a condition to be met before returning.
+// If the condition is not met within the max attempt window, an error will
+// be returned.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Client) WaitUntilMultiplexCreated(ctx context.Context, input *DescribeMultiplexInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
+		Name:        "WaitUntilMultiplexCreated",
+		MaxAttempts: 5,
+		Delay:       aws.ConstantWaiterDelay(3 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
+			{
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "State",
+				Expected: "IDLE",
+			},
+			{
+				State:   aws.RetryWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "State",
+				Expected: "CREATING",
+			},
+			{
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.StatusWaiterMatch,
+				Expected: 500,
+			},
+			{
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "State",
+				Expected: "CREATE_FAILED",
+			},
+		},
+		Logger: c.Config.Logger,
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
+			var inCpy *DescribeMultiplexInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req := c.DescribeMultiplexRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req.Request, nil
+		},
+	}
+	w.ApplyOptions(opts...)
+
+	return w.Wait(ctx)
+}
+
+// WaitUntilMultiplexDeleted uses the MediaLive API operation
+// DescribeMultiplex to wait for a condition to be met before returning.
+// If the condition is not met within the max attempt window, an error will
+// be returned.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Client) WaitUntilMultiplexDeleted(ctx context.Context, input *DescribeMultiplexInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
+		Name:        "WaitUntilMultiplexDeleted",
+		MaxAttempts: 20,
+		Delay:       aws.ConstantWaiterDelay(5 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
+			{
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "State",
+				Expected: "DELETED",
+			},
+			{
+				State:   aws.RetryWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "State",
+				Expected: "DELETING",
+			},
+			{
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.StatusWaiterMatch,
+				Expected: 500,
+			},
+		},
+		Logger: c.Config.Logger,
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
+			var inCpy *DescribeMultiplexInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req := c.DescribeMultiplexRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req.Request, nil
+		},
+	}
+	w.ApplyOptions(opts...)
+
+	return w.Wait(ctx)
+}
+
+// WaitUntilMultiplexRunning uses the MediaLive API operation
+// DescribeMultiplex to wait for a condition to be met before returning.
+// If the condition is not met within the max attempt window, an error will
+// be returned.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Client) WaitUntilMultiplexRunning(ctx context.Context, input *DescribeMultiplexInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
+		Name:        "WaitUntilMultiplexRunning",
+		MaxAttempts: 120,
+		Delay:       aws.ConstantWaiterDelay(5 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
+			{
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "State",
+				Expected: "RUNNING",
+			},
+			{
+				State:   aws.RetryWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "State",
+				Expected: "STARTING",
+			},
+			{
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.StatusWaiterMatch,
+				Expected: 500,
+			},
+		},
+		Logger: c.Config.Logger,
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
+			var inCpy *DescribeMultiplexInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req := c.DescribeMultiplexRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req.Request, nil
+		},
+	}
+	w.ApplyOptions(opts...)
+
+	return w.Wait(ctx)
+}
+
+// WaitUntilMultiplexStopped uses the MediaLive API operation
+// DescribeMultiplex to wait for a condition to be met before returning.
+// If the condition is not met within the max attempt window, an error will
+// be returned.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Client) WaitUntilMultiplexStopped(ctx context.Context, input *DescribeMultiplexInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
+		Name:        "WaitUntilMultiplexStopped",
+		MaxAttempts: 28,
+		Delay:       aws.ConstantWaiterDelay(5 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
+			{
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "State",
+				Expected: "IDLE",
+			},
+			{
+				State:   aws.RetryWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "State",
+				Expected: "STOPPING",
+			},
+			{
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.StatusWaiterMatch,
+				Expected: 500,
+			},
+		},
+		Logger: c.Config.Logger,
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
+			var inCpy *DescribeMultiplexInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req := c.DescribeMultiplexRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req.Request, nil
+		},
+	}
+	w.ApplyOptions(opts...)
+
+	return w.Wait(ctx)
+}

@@ -3,12 +3,186 @@
 package costexplorer
 
 import (
+	"fmt"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 var _ aws.Config
 var _ = awsutil.Prettify
+
+//
+//  Cost Category is in preview release for AWS Billing and Cost Management
+//  and is subject to change. Your use of Cost Categories is subject to the
+//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
+//  (Section 1.10).
+//
+// The structure of Cost Categories. This includes detailed metadata and the
+// set of rules for the CostCategory object.
+type CostCategory struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for your Cost Category.
+	//
+	// CostCategoryArn is a required field
+	CostCategoryArn *string `min:"20" type:"string" required:"true"`
+
+	// The Cost Category's effective end date.
+	EffectiveEnd *string `min:"20" type:"string"`
+
+	// The Cost Category's effective start date.
+	//
+	// EffectiveStart is a required field
+	EffectiveStart *string `min:"20" type:"string" required:"true"`
+
+	// The unique name of the Cost Category.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The rule schema version in this particular Cost Category.
+	//
+	// RuleVersion is a required field
+	RuleVersion CostCategoryRuleVersion `type:"string" required:"true" enum:"true"`
+
+	// Rules are processed in order. If there are multiple rules that match the
+	// line item, then the first rule to match is used to determine that Cost Category
+	// value.
+	//
+	// Rules is a required field
+	Rules []CostCategoryRule `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s CostCategory) String() string {
+	return awsutil.Prettify(s)
+}
+
+//
+//  Cost Category is in preview release for AWS Billing and Cost Management
+//  and is subject to change. Your use of Cost Categories is subject to the
+//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
+//  (Section 1.10).
+//
+// A reference to a Cost Category containing only enough information to identify
+// the Cost Category.
+//
+// You can use this information to retrieve the full Cost Category information
+// using DescribeCostCategory.
+type CostCategoryReference struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for your Cost Category Reference.
+	CostCategoryArn *string `min:"20" type:"string"`
+
+	// The Cost Category's effective end date.
+	EffectiveEnd *string `min:"20" type:"string"`
+
+	// The Cost Category's effective start date.
+	EffectiveStart *string `min:"20" type:"string"`
+
+	// The unique name of the Cost Category.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s CostCategoryReference) String() string {
+	return awsutil.Prettify(s)
+}
+
+//
+//  Cost Category is in preview release for AWS Billing and Cost Management
+//  and is subject to change. Your use of Cost Categories is subject to the
+//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
+//  (Section 1.10).
+//
+// Rules are processed in order. If there are multiple rules that match the
+// line item, then the first rule to match is used to determine that Cost Category
+// value.
+type CostCategoryRule struct {
+	_ struct{} `type:"structure"`
+
+	// An Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// object used to categorize costs. This supports dimensions, Tags, and nested
+	// expressions. Currently the only dimensions supported is LINKED_ACCOUNT.
+	//
+	// Root level OR is not supported. We recommend you create a separate rule instead.
+	//
+	// Rule is a required field
+	Rule *Expression `type:"structure" required:"true"`
+
+	// The value a line item will be categorized as, if it matches the rule.
+	//
+	// Value is a required field
+	Value *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CostCategoryRule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CostCategoryRule) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CostCategoryRule"}
+
+	if s.Rule == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Rule"))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+	if s.Value != nil && len(*s.Value) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
+	}
+	if s.Rule != nil {
+		if err := s.Rule.Validate(); err != nil {
+			invalidParams.AddNested("Rule", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+//
+//  Cost Category is in preview release for AWS Billing and Cost Management
+//  and is subject to change. Your use of Cost Categories is subject to the
+//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
+//  (Section 1.10).
+//
+// The values that are available for Cost Categories.
+type CostCategoryValues struct {
+	_ struct{} `type:"structure"`
+
+	// The unique name of the Cost Category.
+	Key *string `min:"1" type:"string"`
+
+	// The specific value of the Cost Category.
+	Values []string `type:"list"`
+}
+
+// String returns the string representation
+func (s CostCategoryValues) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CostCategoryValues) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CostCategoryValues"}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
 
 // The amount of instance usage that a reservation covered.
 type Coverage struct {
@@ -436,6 +610,14 @@ type Expression struct {
 	// Return results that match both Dimension objects.
 	And []Expression `type:"list"`
 
+	//  Cost Category is in preview release for AWS Billing and Cost Management
+	//  and is subject to change. Your use of Cost Categories is subject to the
+	//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
+	//  (Section 1.10).
+	//
+	// The specific CostCategory used for Expression.
+	CostCategories *CostCategoryValues `type:"structure"`
+
 	// The specific Dimension to use for Expression.
 	Dimensions *DimensionValues `type:"structure"`
 
@@ -452,6 +634,33 @@ type Expression struct {
 // String returns the string representation
 func (s Expression) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Expression) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Expression"}
+	if s.CostCategories != nil {
+		if err := s.CostCategories.Validate(); err != nil {
+			invalidParams.AddNested("CostCategories", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Not != nil {
+		if err := s.Not.Validate(); err != nil {
+			invalidParams.AddNested("Not", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Or != nil {
+		for i, v := range s.Or {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Or", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // The forecast created for your query.

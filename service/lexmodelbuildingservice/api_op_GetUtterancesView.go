@@ -24,7 +24,7 @@ type GetUtterancesViewInput struct {
 	// BotVersions is a required field
 	BotVersions []string `location:"querystring" locationName:"bot_versions" min:"1" type:"list" required:"true"`
 
-	// To return utterances that were recognized and handled, useDetected. To return
+	// To return utterances that were recognized and handled, use Detected. To return
 	// utterances that were not recognized, use Missed.
 	//
 	// StatusType is a required field
@@ -102,7 +102,9 @@ type GetUtterancesViewOutput struct {
 
 	// An array of UtteranceList objects, each containing a list of UtteranceData
 	// objects describing the utterances that were processed by your bot. The response
-	// contains a maximum of 100 UtteranceData objects for each version.
+	// contains a maximum of 100 UtteranceData objects for each version. Amazon
+	// Lex returns the most frequent utterances received by the bot in the last
+	// 15 days.
 	Utterances []UtteranceList `locationName:"utterances" type:"list"`
 }
 
@@ -155,9 +157,13 @@ const opGetUtterancesView = "GetUtterancesView"
 // two versions.
 //
 // Utterance statistics are generated once a day. Data is available for the
-// last 15 days. You can request information for up to 5 versions in each request.
-// The response contains information about a maximum of 100 utterances for each
-// version.
+// last 15 days. You can request information for up to 5 versions of your bot
+// in each request. Amazon Lex returns the most frequent utterances received
+// by the bot in the last 15 days. The response contains information about a
+// maximum of 100 utterances for each version.
+//
+// If you set childDirected field to true when you created your bot, or if you
+// opted out of participating in improving Amazon Lex, utterances are not available.
 //
 // This operation requires permissions for the lex:GetUtterancesView action.
 //

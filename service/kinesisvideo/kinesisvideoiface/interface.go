@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Kinesis Video.
 //    func myFunc(svc kinesisvideoiface.ClientAPI) bool {
-//        // Make svc.CreateStream request
+//        // Make svc.CreateSignalingChannel request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        kinesisvideoiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateStream(input *kinesisvideo.CreateStreamInput) (*kinesisvideo.CreateStreamOutput, error) {
+//    func (m *mockClientClient) CreateSignalingChannel(input *kinesisvideo.CreateSignalingChannelInput) (*kinesisvideo.CreateSignalingChannelOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,23 +61,41 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	CreateSignalingChannelRequest(*kinesisvideo.CreateSignalingChannelInput) kinesisvideo.CreateSignalingChannelRequest
+
 	CreateStreamRequest(*kinesisvideo.CreateStreamInput) kinesisvideo.CreateStreamRequest
 
+	DeleteSignalingChannelRequest(*kinesisvideo.DeleteSignalingChannelInput) kinesisvideo.DeleteSignalingChannelRequest
+
 	DeleteStreamRequest(*kinesisvideo.DeleteStreamInput) kinesisvideo.DeleteStreamRequest
+
+	DescribeSignalingChannelRequest(*kinesisvideo.DescribeSignalingChannelInput) kinesisvideo.DescribeSignalingChannelRequest
 
 	DescribeStreamRequest(*kinesisvideo.DescribeStreamInput) kinesisvideo.DescribeStreamRequest
 
 	GetDataEndpointRequest(*kinesisvideo.GetDataEndpointInput) kinesisvideo.GetDataEndpointRequest
 
+	GetSignalingChannelEndpointRequest(*kinesisvideo.GetSignalingChannelEndpointInput) kinesisvideo.GetSignalingChannelEndpointRequest
+
+	ListSignalingChannelsRequest(*kinesisvideo.ListSignalingChannelsInput) kinesisvideo.ListSignalingChannelsRequest
+
 	ListStreamsRequest(*kinesisvideo.ListStreamsInput) kinesisvideo.ListStreamsRequest
+
+	ListTagsForResourceRequest(*kinesisvideo.ListTagsForResourceInput) kinesisvideo.ListTagsForResourceRequest
 
 	ListTagsForStreamRequest(*kinesisvideo.ListTagsForStreamInput) kinesisvideo.ListTagsForStreamRequest
 
+	TagResourceRequest(*kinesisvideo.TagResourceInput) kinesisvideo.TagResourceRequest
+
 	TagStreamRequest(*kinesisvideo.TagStreamInput) kinesisvideo.TagStreamRequest
+
+	UntagResourceRequest(*kinesisvideo.UntagResourceInput) kinesisvideo.UntagResourceRequest
 
 	UntagStreamRequest(*kinesisvideo.UntagStreamInput) kinesisvideo.UntagStreamRequest
 
 	UpdateDataRetentionRequest(*kinesisvideo.UpdateDataRetentionInput) kinesisvideo.UpdateDataRetentionRequest
+
+	UpdateSignalingChannelRequest(*kinesisvideo.UpdateSignalingChannelInput) kinesisvideo.UpdateSignalingChannelRequest
 
 	UpdateStreamRequest(*kinesisvideo.UpdateStreamInput) kinesisvideo.UpdateStreamRequest
 }

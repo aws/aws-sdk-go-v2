@@ -18,3 +18,39 @@ func (enum ErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
+
+type GroupByAttribute string
+
+// Enum values for GroupByAttribute
+const (
+	GroupByAttributeTargetId     GroupByAttribute = "TARGET_ID"
+	GroupByAttributeRegion       GroupByAttribute = "REGION"
+	GroupByAttributeResourceType GroupByAttribute = "RESOURCE_TYPE"
+)
+
+func (enum GroupByAttribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GroupByAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TargetIdType string
+
+// Enum values for TargetIdType
+const (
+	TargetIdTypeAccount TargetIdType = "ACCOUNT"
+	TargetIdTypeOu      TargetIdType = "OU"
+	TargetIdTypeRoot    TargetIdType = "ROOT"
+)
+
+func (enum TargetIdType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TargetIdType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

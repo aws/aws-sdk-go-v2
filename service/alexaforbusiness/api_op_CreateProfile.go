@@ -25,11 +25,15 @@ type CreateProfileInput struct {
 	// DistanceUnit is a required field
 	DistanceUnit DistanceUnit `type:"string" required:"true" enum:"true"`
 
-	// The locale of the room profile.
+	// The locale of the room profile. (This is currently only available to a limited
+	// preview audience.)
 	Locale *string `min:"1" type:"string"`
 
 	// The maximum volume limit for a room profile.
 	MaxVolumeLimit *int64 `type:"integer"`
+
+	// The meeting room settings of a room profile.
+	MeetingRoomConfiguration *CreateMeetingRoomConfiguration `type:"structure"`
 
 	// Whether PSTN calling is enabled.
 	PSTNEnabled *bool `type:"boolean"`
@@ -101,6 +105,11 @@ func (s *CreateProfileInput) Validate() error {
 	}
 	if len(s.WakeWord) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("WakeWord"))
+	}
+	if s.MeetingRoomConfiguration != nil {
+		if err := s.MeetingRoomConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("MeetingRoomConfiguration", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {

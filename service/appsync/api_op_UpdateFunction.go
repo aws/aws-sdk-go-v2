@@ -21,7 +21,7 @@ type UpdateFunctionInput struct {
 	// The Function DataSource name.
 	//
 	// DataSourceName is a required field
-	DataSourceName *string `locationName:"dataSourceName" type:"string" required:"true"`
+	DataSourceName *string `locationName:"dataSourceName" min:"1" type:"string" required:"true"`
 
 	// The Function description.
 	Description *string `locationName:"description" type:"string"`
@@ -29,7 +29,7 @@ type UpdateFunctionInput struct {
 	// The function ID.
 	//
 	// FunctionId is a required field
-	FunctionId *string `location:"uri" locationName:"functionId" type:"string" required:"true"`
+	FunctionId *string `location:"uri" locationName:"functionId" min:"1" type:"string" required:"true"`
 
 	// The version of the request mapping template. Currently the supported value
 	// is 2018-05-29.
@@ -40,7 +40,7 @@ type UpdateFunctionInput struct {
 	// The Function name.
 	//
 	// Name is a required field
-	Name *string `locationName:"name" type:"string" required:"true"`
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
 	// The Function request mapping template. Functions support only the 2018-05-29
 	// version of the request mapping template.
@@ -68,9 +68,15 @@ func (s *UpdateFunctionInput) Validate() error {
 	if s.DataSourceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DataSourceName"))
 	}
+	if s.DataSourceName != nil && len(*s.DataSourceName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DataSourceName", 1))
+	}
 
 	if s.FunctionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionId"))
+	}
+	if s.FunctionId != nil && len(*s.FunctionId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionId", 1))
 	}
 
 	if s.FunctionVersion == nil {
@@ -79,6 +85,9 @@ func (s *UpdateFunctionInput) Validate() error {
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if s.RequestMappingTemplate == nil {

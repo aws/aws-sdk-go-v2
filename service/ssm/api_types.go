@@ -13,6 +13,23 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Information includes the AWS account ID where the current document is shared
+// and the version shared with that account.
+type AccountSharingInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The AWS account ID where the current document is shared.
+	AccountId *string `type:"string"`
+
+	// The version of the current document shared with the account.
+	SharedDocumentVersion *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AccountSharingInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
 // An activation registers one or more on-premises servers or virtual machines
 // (VMs) with AWS so that you can configure those servers or VMs using Run Command.
 // A server or VM that has been registered with AWS is called a managed instance.
@@ -1350,7 +1367,7 @@ type ComplianceItem struct {
 
 	// An ID for the compliance item. For example, if the compliance item is a Windows
 	// patch, the ID could be the number of the KB article; for example: KB4010320.
-	Id *string `min:"1" type:"string"`
+	Id *string `type:"string"`
 
 	// An ID for the resource. For a managed instance, this is the instance ID.
 	ResourceId *string `min:"1" type:"string"`
@@ -1386,7 +1403,7 @@ type ComplianceItemEntry struct {
 
 	// The compliance item ID. For example, if the compliance item is a Windows
 	// patch, the ID could be the number of the KB article.
-	Id *string `min:"1" type:"string"`
+	Id *string `type:"string"`
 
 	// The severity of the compliance status. Severity can be one of the following:
 	// Critical, High, Medium, Low, Informational, Unspecified.
@@ -1413,9 +1430,6 @@ func (s ComplianceItemEntry) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ComplianceItemEntry) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ComplianceItemEntry"}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
 	if len(s.Severity) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Severity"))
 	}
@@ -1712,6 +1726,10 @@ type DocumentDescription struct {
 	// The list of OS platforms compatible with this Systems Manager document.
 	PlatformTypes []PlatformType `type:"list"`
 
+	// A list of SSM documents required by a document. For example, an ApplicationConfiguration
+	// document requires an ApplicationConfigurationSchema document.
+	Requires []DocumentRequires `min:"1" type:"list"`
+
 	// The schema version.
 	SchemaVersion *string `type:"string"`
 
@@ -1806,6 +1824,10 @@ type DocumentIdentifier struct {
 
 	// The operating system platform.
 	PlatformTypes []PlatformType `type:"list"`
+
+	// A list of SSM documents required by a document. For example, an ApplicationConfiguration
+	// document requires an ApplicationConfigurationSchema document.
+	Requires []DocumentRequires `min:"1" type:"list"`
 
 	// The schema version.
 	SchemaVersion *string `type:"string"`
@@ -1906,6 +1928,39 @@ type DocumentParameter struct {
 // String returns the string representation
 func (s DocumentParameter) String() string {
 	return awsutil.Prettify(s)
+}
+
+// An SSM document required by the current document.
+type DocumentRequires struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the required SSM document. The name can be an Amazon Resource
+	// Name (ARN).
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// The document version required by the current document.
+	Version *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DocumentRequires) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DocumentRequires) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DocumentRequires"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Version information about the document.
@@ -2335,6 +2390,9 @@ type InstancePatchState struct {
 	// on the instance.
 	InstalledOtherCount *int64 `type:"integer"`
 
+	// Reserved for future use.
+	InstalledPendingRebootCount *int64 `type:"integer"`
+
 	// The number of instances with patches installed that are specified in a RejectedPatches
 	// list. Patches with a status of InstalledRejected were typically installed
 	// before they were added to a RejectedPatches list.
@@ -2348,6 +2406,9 @@ type InstancePatchState struct {
 	//
 	// InstanceId is a required field
 	InstanceId *string `type:"string" required:"true"`
+
+	// Reserved for future use.
+	LastNoRebootInstallOperationTime *time.Time `type:"timestamp"`
 
 	// The number of patches from the patch baseline that are applicable for the
 	// instance but aren't currently installed.
@@ -2383,6 +2444,9 @@ type InstancePatchState struct {
 	//
 	// PatchGroup is a required field
 	PatchGroup *string `min:"1" type:"string" required:"true"`
+
+	// Reserved for future use.
+	RebootOption RebootOption `type:"string" enum:"true"`
 
 	// The ID of the patch baseline snapshot used during the patching operation
 	// when this compliance data was collected.

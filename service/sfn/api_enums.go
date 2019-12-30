@@ -92,6 +92,25 @@ func (enum HistoryEventType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type LogLevel string
+
+// Enum values for LogLevel
+const (
+	LogLevelAll   LogLevel = "ALL"
+	LogLevelError LogLevel = "ERROR"
+	LogLevelFatal LogLevel = "FATAL"
+	LogLevelOff   LogLevel = "OFF"
+)
+
+func (enum LogLevel) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LogLevel) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StateMachineStatus string
 
 // Enum values for StateMachineStatus
@@ -105,6 +124,23 @@ func (enum StateMachineStatus) MarshalValue() (string, error) {
 }
 
 func (enum StateMachineStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type StateMachineType string
+
+// Enum values for StateMachineType
+const (
+	StateMachineTypeStandard StateMachineType = "STANDARD"
+	StateMachineTypeExpress  StateMachineType = "EXPRESS"
+)
+
+func (enum StateMachineType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StateMachineType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

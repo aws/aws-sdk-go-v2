@@ -877,7 +877,9 @@ type ConfigurationItem struct {
 	// CloudTrail, see What Is AWS CloudTrail (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html).
 	//
 	// An empty field indicates that the current configuration was not initiated
-	// by any event.
+	// by any event. As of Version 1.3, the relatedEvents field is empty. You can
+	// access the LookupEvents API (https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_LookupEvents.html)
+	// in the AWS CloudTrail API Reference to retrieve the events for the resource.
 	RelatedEvents []string `locationName:"relatedEvents" type:"list"`
 
 	// A list of related AWS resources.
@@ -1000,12 +1002,18 @@ func (s ConformancePackComplianceFilters) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Summary includes the name and status of the conformance pack.
 type ConformancePackComplianceSummary struct {
 	_ struct{} `type:"structure"`
 
+	// The status of the conformance pack. The allowed values are COMPLIANT and
+	// NON_COMPLIANT.
+	//
 	// ConformancePackComplianceStatus is a required field
 	ConformancePackComplianceStatus ConformancePackComplianceType `type:"string" required:"true" enum:"true"`
 
+	// The name of the conformance pack name.
+	//
 	// ConformancePackName is a required field
 	ConformancePackName *string `min:"1" type:"string" required:"true"`
 }
@@ -1016,7 +1024,8 @@ func (s ConformancePackComplianceSummary) String() string {
 }
 
 // Returns details of a conformance pack. A conformance pack is a collection
-// of AWS Config rules that can be easily deployed in an account and a region.
+// of AWS Config rules and remediation actions that can be easily deployed in
+// an account and a region.
 type ConformancePackDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1038,15 +1047,16 @@ type ConformancePackDetail struct {
 	// ConformancePackName is a required field
 	ConformancePackName *string `min:"1" type:"string" required:"true"`
 
+	// AWS service that created the conformance pack.
 	CreatedBy *string `min:"1" type:"string"`
 
-	// Location of an Amazon S3 bucket where AWS Config can deliver evaluation results
-	// and conformance pack template that is used to create a pack.
+	// Conformance pack template that is used to create a pack. The delivery bucket
+	// name should start with awsconfigconforms. For example: "Resource": "arn:aws:s3:::your_bucket_name/*".
 	//
 	// DeliveryS3Bucket is a required field
 	DeliveryS3Bucket *string `min:"3" type:"string" required:"true"`
 
-	// Any folder structure you want to add to an Amazon S3 bucket.
+	// The prefix for the Amazon S3 bucket.
 	DeliveryS3KeyPrefix *string `min:"1" type:"string"`
 
 	// Last time when conformation pack update was requested.
@@ -1072,6 +1082,9 @@ type ConformancePackEvaluationFilters struct {
 	ConfigRuleNames []string `type:"list"`
 
 	// Filters the results by resource IDs.
+	//
+	// This is valid only when you provide resource type. If there is no resource
+	// type, you will see an error.
 	ResourceIds []string `type:"list"`
 
 	// Filters the results by the resource type (for example, "AWS::EC2::Instance").
@@ -1105,9 +1118,7 @@ type ConformancePackEvaluationResult struct {
 	// Supplementary information about how the evaluation determined the compliance.
 	Annotation *string `type:"string"`
 
-	// Filters the results by compliance.
-	//
-	// The allowed values are COMPLIANT and NON_COMPLIANT.
+	// The compliance type. The allowed values are COMPLIANT and NON_COMPLIANT.
 	//
 	// ComplianceType is a required field
 	ComplianceType ConformancePackComplianceType `type:"string" required:"true" enum:"true"`
@@ -1178,12 +1189,12 @@ func (s *ConformancePackInputParameter) Validate() error {
 type ConformancePackRuleCompliance struct {
 	_ struct{} `type:"structure"`
 
-	// Filters the results by compliance.
+	// Compliance of the AWS Config rule
 	//
 	// The allowed values are COMPLIANT and NON_COMPLIANT.
 	ComplianceType ConformancePackComplianceType `type:"string" enum:"true"`
 
-	// Filters the results by AWS Config rule name.
+	// Name of the config rule.
 	ConfigRuleName *string `min:"1" type:"string"`
 }
 
@@ -1225,7 +1236,7 @@ type ConformancePackStatusDetail struct {
 	//
 	//    * DELETE_IN_PROGRESS when a conformance pack deletion is in progress.
 	//
-	//    * DELETE_FAILED when a conformance pack deletion failed from your account.
+	//    * DELETE_FAILED when a conformance pack deletion failed in your account.
 	//
 	// ConformancePackState is a required field
 	ConformancePackState ConformancePackState `type:"string" required:"true" enum:"true"`
@@ -1925,7 +1936,7 @@ type OrganizationConformancePackStatus struct {
 	_ struct{} `type:"structure"`
 
 	// An error code that is returned when organization conformance pack creation
-	// or deletion has failed in the member account.
+	// or deletion has failed in a member account.
 	ErrorCode *string `type:"string"`
 
 	// An error message indicating that organization conformance pack creation or

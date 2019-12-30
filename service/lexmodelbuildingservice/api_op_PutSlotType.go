@@ -26,6 +26,9 @@ type PutSlotTypeInput struct {
 	// you get a PreconditionFailedException exception.
 	Checksum *string `locationName:"checksum" type:"string"`
 
+	// When set to true a new numbered version of the slot type is created. This
+	// is the same as calling the CreateSlotTypeVersion operation. If you do not
+	// specify createVersion, the default is false.
 	CreateVersion *bool `locationName:"createVersion" type:"boolean"`
 
 	// A description of the slot type.
@@ -157,6 +160,9 @@ type PutSlotTypeOutput struct {
 	// Checksum of the $LATEST version of the slot type.
 	Checksum *string `locationName:"checksum" type:"string"`
 
+	// True if a new version of the slot type was created. If the createVersion
+	// field was not specified in the request, the createVersion field is set to
+	// false in the response.
 	CreateVersion *bool `locationName:"createVersion" type:"boolean"`
 
 	// The date that the slot type was created.

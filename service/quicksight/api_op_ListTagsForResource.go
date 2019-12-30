@@ -13,7 +13,8 @@ import (
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the resource you want a list of tags for.
+	// The Amazon Resource Name (ARN) of the resource that you want a list of tags
+	// for.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"ResourceArn" type:"string" required:"true"`
@@ -57,7 +58,7 @@ type ListTagsForResourceOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned
@@ -100,11 +101,6 @@ const opListTagsForResource = "ListTagsForResource"
 // Amazon QuickSight.
 //
 // Lists the tags assigned to a resource.
-//
-// CLI syntax:
-//
-//    * aws quicksight list-tags-for-resource --resource-arn arn:aws:quicksight:us-east-1:111111111111:dataset/dataset1
-//    --region us-east-1
 //
 //    // Example sending a request using ListTagsForResourceRequest.
 //    req := client.ListTagsForResourceRequest(params)

@@ -73,10 +73,16 @@ func TestListObjectsPagination(t *testing.T) {
 		},
 	}
 
-	svc.Client = s3.New(defaults.Config())
+	cfg := defaults.Config()
+	cfg.Region = "us-west-2"
+
+	svc.Client = s3.New(cfg)
 	svc.objects = objects
 
-	keys := getKeys(svc, "foo")
+	keys, err := getKeys(svc, "foo")
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
 	expected := []string{"1", "2", "3"}
 
 	if e, a := 3, len(keys); e != a {

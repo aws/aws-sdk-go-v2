@@ -13,7 +13,7 @@ import (
 type ListIAMPolicyAssignmentsForUserInput struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS account ID that contains the assignment.
+	// The ID of the AWS account that contains the assignments.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -111,7 +111,7 @@ func (s ListIAMPolicyAssignmentsForUserInput) MarshalFields(e protocol.FieldEnco
 type ListIAMPolicyAssignmentsForUserOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Active assignments for this user.
+	// The active assignments for this user.
 	ActiveAssignments []ActiveIAMPolicyAssignment `type:"list"`
 
 	// The token for the next set of results, or null if there are no more results.
@@ -120,7 +120,7 @@ type ListIAMPolicyAssignmentsForUserOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -164,13 +164,9 @@ const opListIAMPolicyAssignmentsForUser = "ListIAMPolicyAssignmentsForUser"
 // ListIAMPolicyAssignmentsForUserRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Lists all the assignments and the ARNs for the associated IAM policies assigned
-// to the specified user and the group or groups that the user belongs to.
-//
-// CLI syntax:
-//
-// aws quicksight list-iam-policy-assignments-for-user --aws-account-id=111122223333
-// --user-name=user5 --namespace=default --max-result=6 --region=us-east-1
+// Lists all the IAM policy assignments, including the Amazon Resource Names
+// (ARNs) for the IAM policies assigned to the specified user and group or groups
+// that the user belongs to.
 //
 //    // Example sending a request using ListIAMPolicyAssignmentsForUserRequest.
 //    req := client.ListIAMPolicyAssignmentsForUserRequest(params)

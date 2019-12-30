@@ -64,9 +64,10 @@ const opListDatasetGroups = "ListDatasetGroups"
 // Amazon Forecast Service.
 //
 // Returns a list of dataset groups created using the CreateDatasetGroup operation.
-// For each dataset group, a summary of its properties, including its Amazon
-// Resource Name (ARN), is returned. You can retrieve the complete set of properties
-// by using the ARN with the DescribeDatasetGroup operation.
+// For each dataset group, this operation returns a summary of its properties,
+// including its Amazon Resource Name (ARN). You can retrieve the complete set
+// of properties by using the dataset group ARN with the DescribeDatasetGroup
+// operation.
 //
 //    // Example sending a request using ListDatasetGroupsRequest.
 //    req := client.ListDatasetGroupsRequest(params)

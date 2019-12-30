@@ -450,3 +450,40 @@ func (s ResponseCard) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+
+// The sentiment expressed in an utterance.
+//
+// When the bot is configured to send utterances to Amazon Comprehend for sentiment
+// analysis, this field structure contains the result of the analysis.
+type SentimentResponse struct {
+	_ struct{} `type:"structure"`
+
+	// The inferred sentiment that Amazon Comprehend has the highest confidence
+	// in.
+	SentimentLabel *string `locationName:"sentimentLabel" type:"string"`
+
+	// The likelihood that the sentiment was correctly inferred.
+	SentimentScore *string `locationName:"sentimentScore" type:"string"`
+}
+
+// String returns the string representation
+func (s SentimentResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SentimentResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SentimentLabel != nil {
+		v := *s.SentimentLabel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sentimentLabel", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SentimentScore != nil {
+		v := *s.SentimentScore
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sentimentScore", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}

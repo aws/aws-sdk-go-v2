@@ -13,7 +13,7 @@ type GetDocumentTextDetectionInput struct {
 	_ struct{} `type:"structure"`
 
 	// A unique identifier for the text detection job. The JobId is returned from
-	// StartDocumentTextDetection.
+	// StartDocumentTextDetection. A JobId value is only valid for 7 days.
 	//
 	// JobId is a required field
 	JobId *string `min:"1" type:"string" required:"true"`
@@ -63,6 +63,8 @@ type GetDocumentTextDetectionOutput struct {
 	// The results of the text-detection operation.
 	Blocks []Block `type:"list"`
 
+	DetectDocumentTextModelVersion *string `type:"string"`
+
 	// Information about a document that Amazon Textract processed. DocumentMetadata
 	// is returned in every page of paginated responses from an Amazon Textract
 	// video operation.
@@ -76,10 +78,11 @@ type GetDocumentTextDetectionOutput struct {
 	// results.
 	NextToken *string `min:"1" type:"string"`
 
-	// The current status of an asynchronous document text-detection operation.
+	// The current status of an asynchronous text-detection operation for the document.
 	StatusMessage *string `type:"string"`
 
-	// A list of warnings that occurred during the document text-detection operation.
+	// A list of warnings that occurred during the text-detection operation for
+	// the document.
 	Warnings []Warning `type:"list"`
 }
 

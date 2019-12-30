@@ -315,8 +315,17 @@ type PostContentOutput struct {
 	//    intent was created.
 	MessageFormat MessageFormatType `location:"header" locationName:"x-amz-lex-message-format" type:"string" enum:"true"`
 
+	// The sentiment expressed in and utterance.
+	//
+	// When the bot is configured to send utterances to Amazon Comprehend for sentiment
+	// analysis, this field contains the result of the analysis.
+	SentimentResponse *string `location:"header" locationName:"x-amz-lex-sentiment" type:"string"`
+
 	// Map of key/value pairs representing the session-specific context information.
 	SessionAttributes aws.JSONValue `location:"header" locationName:"x-amz-lex-session-attributes" type:"jsonvalue"`
+
+	// The unique identifier for the session.
+	SessionId *string `location:"header" locationName:"x-amz-lex-session-id" type:"string"`
 
 	// If the dialogState value is ElicitSlot, returns the name of the slot for
 	// which Amazon Lex is eliciting a value.
@@ -379,11 +388,23 @@ func (s PostContentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "x-amz-lex-message-format", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.SentimentResponse != nil {
+		v := *s.SentimentResponse
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-lex-sentiment", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.SessionAttributes != nil {
 		v := s.SessionAttributes
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "x-amz-lex-session-attributes", protocol.JSONValue{V: v, EscapeMode: protocol.Base64Escape}, metadata)
+	}
+	if s.SessionId != nil {
+		v := *s.SessionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-lex-session-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SlotToElicit != nil {
 		v := *s.SlotToElicit

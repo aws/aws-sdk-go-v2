@@ -3,6 +3,7 @@
 package sfn
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -148,6 +149,32 @@ type ActivityTimedOutEventDetails struct {
 // String returns the string representation
 func (s ActivityTimedOutEventDetails) String() string {
 	return awsutil.Prettify(s)
+}
+
+type CloudWatchLogsLogGroup struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the the CloudWatch log group to which you want your logs emitted
+	// to. The ARN must end with :*
+	LogGroupArn *string `locationName:"logGroupArn" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s CloudWatchLogsLogGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CloudWatchLogsLogGroup) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CloudWatchLogsLogGroup"}
+	if s.LogGroupArn != nil && len(*s.LogGroupArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Contains details about an abort of an execution.
@@ -507,6 +534,72 @@ func (s LambdaFunctionTimedOutEventDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
+type LogDestination struct {
+	_ struct{} `type:"structure"`
+
+	// An object describing a CloudWatch log group. For more information, see AWS::Logs::LogGroup
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html)
+	// in the AWS CloudFormation User Guide.
+	CloudWatchLogsLogGroup *CloudWatchLogsLogGroup `locationName:"cloudWatchLogsLogGroup" type:"structure"`
+}
+
+// String returns the string representation
+func (s LogDestination) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LogDestination) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LogDestination"}
+	if s.CloudWatchLogsLogGroup != nil {
+		if err := s.CloudWatchLogsLogGroup.Validate(); err != nil {
+			invalidParams.AddNested("CloudWatchLogsLogGroup", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+type LoggingConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// An object that describes where your execution history events will be logged.
+	// Limited to size 1. Required, if your log level is not set to OFF.
+	Destinations []LogDestination `locationName:"destinations" type:"list"`
+
+	// Determines whether execution history data is included in your log. When set
+	// to FALSE, data is excluded.
+	IncludeExecutionData *bool `locationName:"includeExecutionData" type:"boolean"`
+
+	// Defines which category of execution history events are logged.
+	Level LogLevel `locationName:"level" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s LoggingConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LoggingConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LoggingConfiguration"}
+	if s.Destinations != nil {
+		for i, v := range s.Destinations {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Destinations", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Contains details about an iteration of a Map state.
 type MapIterationEventDetails struct {
 	_ struct{} `type:"structure"`
@@ -614,6 +707,9 @@ type StateMachineListItem struct {
 	//
 	// StateMachineArn is a required field
 	StateMachineArn *string `locationName:"stateMachineArn" min:"1" type:"string" required:"true"`
+
+	// Type is a required field
+	Type StateMachineType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation

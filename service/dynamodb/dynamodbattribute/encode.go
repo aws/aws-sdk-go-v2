@@ -15,12 +15,18 @@ import (
 // instead of string in seconds since January 1, 1970 UTC.
 //
 // This type is useful as an alternative to the struct tag `unixtime` when you
-// want to have your time value marshaled as Unix time in seconds intead of
-// the default time.RFC3339.
+// want to have your time value marshaled as Unix time in seconds into a number
+// attribute type instead of the default time.RFC3339Nano.
 //
 // Important to note that zero value time as unixtime is not 0 seconds
 // from January 1, 1970 UTC, but -62135596800. Which is seconds between
 // January 1, 0001 UTC, and January 1, 0001 UTC.
+//
+// Also, important to note: the default UnixTime implementation of the Marshaler
+// interface will marshal into an attribute of type of number; therefore,
+// it may not be used as a sort key if the attribute value is of type string. Further,
+// the time.RFC3339Nano format removes trailing zeros from the seconds field
+// and thus may not sort correctly once formatted.
 type UnixTime time.Time
 
 // MarshalDynamoDBAttributeValue implements the Marshaler interface so that

@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS S3 Control.
 //    func myFunc(svc s3controliface.ClientAPI) bool {
-//        // Make svc.CreateJob request
+//        // Make svc.CreateAccessPoint request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        s3controliface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateJob(input *s3control.CreateJobInput) (*s3control.CreateJobOutput, error) {
+//    func (m *mockClientClient) CreateAccessPoint(input *s3control.CreateAccessPointInput) (*s3control.CreateAccessPointOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,15 +61,31 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	CreateAccessPointRequest(*s3control.CreateAccessPointInput) s3control.CreateAccessPointRequest
+
 	CreateJobRequest(*s3control.CreateJobInput) s3control.CreateJobRequest
+
+	DeleteAccessPointRequest(*s3control.DeleteAccessPointInput) s3control.DeleteAccessPointRequest
+
+	DeleteAccessPointPolicyRequest(*s3control.DeleteAccessPointPolicyInput) s3control.DeleteAccessPointPolicyRequest
 
 	DeletePublicAccessBlockRequest(*s3control.DeletePublicAccessBlockInput) s3control.DeletePublicAccessBlockRequest
 
 	DescribeJobRequest(*s3control.DescribeJobInput) s3control.DescribeJobRequest
 
+	GetAccessPointRequest(*s3control.GetAccessPointInput) s3control.GetAccessPointRequest
+
+	GetAccessPointPolicyRequest(*s3control.GetAccessPointPolicyInput) s3control.GetAccessPointPolicyRequest
+
+	GetAccessPointPolicyStatusRequest(*s3control.GetAccessPointPolicyStatusInput) s3control.GetAccessPointPolicyStatusRequest
+
 	GetPublicAccessBlockRequest(*s3control.GetPublicAccessBlockInput) s3control.GetPublicAccessBlockRequest
 
+	ListAccessPointsRequest(*s3control.ListAccessPointsInput) s3control.ListAccessPointsRequest
+
 	ListJobsRequest(*s3control.ListJobsInput) s3control.ListJobsRequest
+
+	PutAccessPointPolicyRequest(*s3control.PutAccessPointPolicyInput) s3control.PutAccessPointPolicyRequest
 
 	PutPublicAccessBlockRequest(*s3control.PutPublicAccessBlockInput) s3control.PutPublicAccessBlockRequest
 

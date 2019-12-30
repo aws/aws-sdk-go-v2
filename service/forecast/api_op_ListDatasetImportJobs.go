@@ -15,22 +15,24 @@ type ListDatasetImportJobsInput struct {
 
 	// An array of filters. For each filter, you provide a condition and a match
 	// statement. The condition is either IS or IS_NOT, which specifies whether
-	// to include or exclude, respectively, from the list, the predictors that match
-	// the statement. The match statement consists of a key and a value. In this
-	// release, Name is the only valid key, which filters on the DatasetImportJobName
-	// property.
+	// to include or exclude the datasets that match the statement from the list,
+	// respectively. The match statement consists of a key and a value.
 	//
-	//    * Condition - IS or IS_NOT
+	// Filter properties
 	//
-	//    * Key - Name
+	//    * Condition - The condition to apply. Valid values are IS and IS_NOT.
+	//    To include the datasets that match the statement, specify IS. To exclude
+	//    matching datasets, specify IS_NOT.
 	//
-	//    * Value - the value to match
+	//    * Key - The name of the parameter to filter on. Valid values are DatasetArn
+	//    and Status.
 	//
-	// For example, to list all dataset import jobs named my_dataset_import_job,
-	// you would specify:
+	//    * Value - The value to match.
 	//
-	// "Filters": [ { "Condition": "IS", "Key": "Name", "Value": "my_dataset_import_job"
-	// } ]
+	// For example, to list all dataset import jobs whose status is ACTIVE, you
+	// specify the following filter:
+	//
+	// "Filters": [ { "Condition": "IS", "Key": "Status", "Value": "ACTIVE" } ]
 	Filters []Filter `type:"list"`
 
 	// The number of items to return in the response.
@@ -92,8 +94,8 @@ const opListDatasetImportJobs = "ListDatasetImportJobs"
 // Amazon Forecast Service.
 //
 // Returns a list of dataset import jobs created using the CreateDatasetImportJob
-// operation. For each import job, a summary of its properties, including its
-// Amazon Resource Name (ARN), is returned. You can retrieve the complete set
+// operation. For each import job, this operation returns a summary of its properties,
+// including its Amazon Resource Name (ARN). You can retrieve the complete set
 // of properties by using the ARN with the DescribeDatasetImportJob operation.
 // You can filter the list by providing an array of Filter objects.
 //

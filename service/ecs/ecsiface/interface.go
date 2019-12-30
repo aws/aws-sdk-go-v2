@@ -26,7 +26,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon ECS.
 //    func myFunc(svc ecsiface.ClientAPI) bool {
-//        // Make svc.CreateCluster request
+//        // Make svc.CreateCapacityProvider request
 //    }
 //
 //    func main() {
@@ -46,7 +46,7 @@ import (
 //    type mockClientClient struct {
 //        ecsiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateCluster(input *ecs.CreateClusterInput) (*ecs.CreateClusterOutput, error) {
+//    func (m *mockClientClient) CreateCapacityProvider(input *ecs.CreateCapacityProviderInput) (*ecs.CreateCapacityProviderOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,6 +64,8 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	CreateCapacityProviderRequest(*ecs.CreateCapacityProviderInput) ecs.CreateCapacityProviderRequest
+
 	CreateClusterRequest(*ecs.CreateClusterInput) ecs.CreateClusterRequest
 
 	CreateServiceRequest(*ecs.CreateServiceInput) ecs.CreateServiceRequest
@@ -83,6 +85,8 @@ type ClientAPI interface {
 	DeregisterContainerInstanceRequest(*ecs.DeregisterContainerInstanceInput) ecs.DeregisterContainerInstanceRequest
 
 	DeregisterTaskDefinitionRequest(*ecs.DeregisterTaskDefinitionInput) ecs.DeregisterTaskDefinitionRequest
+
+	DescribeCapacityProvidersRequest(*ecs.DescribeCapacityProvidersInput) ecs.DescribeCapacityProvidersRequest
 
 	DescribeClustersRequest(*ecs.DescribeClustersInput) ecs.DescribeClustersRequest
 
@@ -121,6 +125,8 @@ type ClientAPI interface {
 	PutAccountSettingDefaultRequest(*ecs.PutAccountSettingDefaultInput) ecs.PutAccountSettingDefaultRequest
 
 	PutAttributesRequest(*ecs.PutAttributesInput) ecs.PutAttributesRequest
+
+	PutClusterCapacityProvidersRequest(*ecs.PutClusterCapacityProvidersInput) ecs.PutClusterCapacityProvidersRequest
 
 	RegisterContainerInstanceRequest(*ecs.RegisterContainerInstanceInput) ecs.RegisterContainerInstanceRequest
 

@@ -61,17 +61,18 @@ type DescribeDatasetOutput struct {
 	// The dataset type.
 	DatasetType DatasetType `type:"string" enum:"true"`
 
-	// The dataset domain.
+	// The domain associated with the dataset.
 	Domain Domain `type:"string" enum:"true"`
 
-	// An AWS Key Management Service (KMS) key and the AWS Identity and Access Management
-	// (IAM) role that Amazon Forecast can assume to access the key.
+	// The AWS Key Management Service (KMS) key and the AWS Identity and Access
+	// Management (IAM) role that Amazon Forecast can assume to access the key.
 	EncryptionConfig *EncryptionConfig `type:"structure"`
 
-	// When the dataset is created, LastModificationTime is the same as CreationTime.
-	// After a CreateDatasetImportJob operation is called, LastModificationTime
-	// is when the import job finished or failed. While data is being imported to
-	// the dataset, LastModificationTime is the current query time.
+	// When you create a dataset, LastModificationTime is the same as CreationTime.
+	// While data is being imported to the dataset, LastModificationTime is the
+	// current time of the DescribeDataset call. After a CreateDatasetImportJob
+	// operation has finished, LastModificationTime is when the import job completed
+	// or failed.
 	LastModificationTime *time.Time `type:"timestamp"`
 
 	// An array of SchemaAttribute objects that specify the dataset fields. Each
@@ -89,9 +90,9 @@ type DescribeDatasetOutput struct {
 	//    * UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED
 	//
 	// The UPDATE states apply while data is imported to the dataset from a call
-	// to the CreateDatasetImportJob operation. During this time, the status reflects
-	// the status of the dataset import job. For example, when the import job status
-	// is CREATE_IN_PROGRESS, the status of the dataset is UPDATE_IN_PROGRESS.
+	// to the CreateDatasetImportJob operation and reflect the status of the dataset
+	// import job. For example, when the import job status is CREATE_IN_PROGRESS,
+	// the status of the dataset is UPDATE_IN_PROGRESS.
 	//
 	// The Status of the dataset must be ACTIVE before you can import training data.
 	Status *string `type:"string"`
@@ -109,8 +110,8 @@ const opDescribeDataset = "DescribeDataset"
 //
 // Describes an Amazon Forecast dataset created using the CreateDataset operation.
 //
-// In addition to listing the properties provided by the user in the CreateDataset
-// request, this operation includes the following properties:
+// In addition to listing the parameters specified in the CreateDataset request,
+// this operation includes the following dataset properties:
 //
 //    * CreationTime
 //

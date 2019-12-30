@@ -13,6 +13,67 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// A chat message.
+type ChatMessage struct {
+	_ struct{} `type:"structure"`
+
+	// The content of the chat message.
+	//
+	// Content is a required field
+	Content *string `min:"1" type:"string" required:"true"`
+
+	// The type of the content. Supported types are text/plain.
+	//
+	// ContentType is a required field
+	ContentType *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ChatMessage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ChatMessage) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ChatMessage"}
+
+	if s.Content == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Content"))
+	}
+	if s.Content != nil && len(*s.Content) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Content", 1))
+	}
+
+	if s.ContentType == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContentType"))
+	}
+	if s.ContentType != nil && len(*s.ContentType) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContentType", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ChatMessage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Content != nil {
+		v := *s.Content
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Content", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ContentType != nil {
+		v := *s.ContentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ContentType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Contains summary information about a contact flow.
 type ContactFlowSummary struct {
 	_ struct{} `type:"structure"`
@@ -740,6 +801,49 @@ func (s HoursOfOperationSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The customer's details.
+type ParticipantDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Display name of the participant.
+	//
+	// DisplayName is a required field
+	DisplayName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ParticipantDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ParticipantDetails) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ParticipantDetails"}
+
+	if s.DisplayName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DisplayName"))
+	}
+	if s.DisplayName != nil && len(*s.DisplayName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DisplayName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ParticipantDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DisplayName != nil {
+		v := *s.DisplayName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DisplayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

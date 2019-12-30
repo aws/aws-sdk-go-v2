@@ -70,6 +70,8 @@ type ClientAPI interface {
 
 	DeleteDashboardsRequest(*cloudwatch.DeleteDashboardsInput) cloudwatch.DeleteDashboardsRequest
 
+	DeleteInsightRulesRequest(*cloudwatch.DeleteInsightRulesInput) cloudwatch.DeleteInsightRulesRequest
+
 	DescribeAlarmHistoryRequest(*cloudwatch.DescribeAlarmHistoryInput) cloudwatch.DescribeAlarmHistoryRequest
 
 	DescribeAlarmsRequest(*cloudwatch.DescribeAlarmsInput) cloudwatch.DescribeAlarmsRequest
@@ -78,11 +80,19 @@ type ClientAPI interface {
 
 	DescribeAnomalyDetectorsRequest(*cloudwatch.DescribeAnomalyDetectorsInput) cloudwatch.DescribeAnomalyDetectorsRequest
 
+	DescribeInsightRulesRequest(*cloudwatch.DescribeInsightRulesInput) cloudwatch.DescribeInsightRulesRequest
+
 	DisableAlarmActionsRequest(*cloudwatch.DisableAlarmActionsInput) cloudwatch.DisableAlarmActionsRequest
+
+	DisableInsightRulesRequest(*cloudwatch.DisableInsightRulesInput) cloudwatch.DisableInsightRulesRequest
 
 	EnableAlarmActionsRequest(*cloudwatch.EnableAlarmActionsInput) cloudwatch.EnableAlarmActionsRequest
 
+	EnableInsightRulesRequest(*cloudwatch.EnableInsightRulesInput) cloudwatch.EnableInsightRulesRequest
+
 	GetDashboardRequest(*cloudwatch.GetDashboardInput) cloudwatch.GetDashboardRequest
+
+	GetInsightRuleReportRequest(*cloudwatch.GetInsightRuleReportInput) cloudwatch.GetInsightRuleReportRequest
 
 	GetMetricDataRequest(*cloudwatch.GetMetricDataInput) cloudwatch.GetMetricDataRequest
 
@@ -99,6 +109,8 @@ type ClientAPI interface {
 	PutAnomalyDetectorRequest(*cloudwatch.PutAnomalyDetectorInput) cloudwatch.PutAnomalyDetectorRequest
 
 	PutDashboardRequest(*cloudwatch.PutDashboardInput) cloudwatch.PutDashboardRequest
+
+	PutInsightRuleRequest(*cloudwatch.PutInsightRuleInput) cloudwatch.PutInsightRuleRequest
 
 	PutMetricAlarmRequest(*cloudwatch.PutMetricAlarmInput) cloudwatch.PutMetricAlarmRequest
 

@@ -50,6 +50,9 @@ type PutIntentInput struct {
 	// or neither.
 	ConfirmationPrompt *Prompt `locationName:"confirmationPrompt" type:"structure"`
 
+	// When set to true a new numbered version of the intent is created. This is
+	// the same as calling the CreateIntentVersion operation. If you do not specify
+	// createVersion, the default is false.
 	CreateVersion *bool `locationName:"createVersion" type:"boolean"`
 
 	// A description of the intent.
@@ -303,6 +306,9 @@ type PutIntentOutput struct {
 	// before fulfilling it.
 	ConfirmationPrompt *Prompt `locationName:"confirmationPrompt" type:"structure"`
 
+	// True if a new version of the intent was created. If the createVersion field
+	// was not specified in the request, the createVersion field is set to false
+	// in the response.
 	CreateVersion *bool `locationName:"createVersion" type:"boolean"`
 
 	// The date that the intent was created.

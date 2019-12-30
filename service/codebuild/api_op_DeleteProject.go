@@ -54,7 +54,7 @@ const opDeleteProject = "DeleteProject"
 // DeleteProjectRequest returns a request value for making API operation for
 // AWS CodeBuild.
 //
-// Deletes a build project.
+// Deletes a build project. When you delete a project, its builds are not deleted.
 //
 //    // Example sending a request using DeleteProjectRequest.
 //    req := client.DeleteProjectRequest(params)

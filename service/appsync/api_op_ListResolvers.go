@@ -23,7 +23,7 @@ type ListResolversInput struct {
 
 	// An identifier that was returned from the previous call to this operation,
 	// which can be used to return the next set of items in the list.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+	NextToken *string `location:"querystring" locationName:"nextToken" min:"1" type:"string"`
 
 	// The type name.
 	//
@@ -42,6 +42,9 @@ func (s *ListResolversInput) Validate() error {
 
 	if s.ApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if s.TypeName == nil {
@@ -90,7 +93,7 @@ type ListResolversOutput struct {
 
 	// An identifier to be passed in the next request to this operation to return
 	// the next set of items in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
+	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// The Resolver objects.
 	Resolvers []Resolver `locationName:"resolvers" type:"list"`

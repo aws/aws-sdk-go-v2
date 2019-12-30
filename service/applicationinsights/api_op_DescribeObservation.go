@@ -15,7 +15,7 @@ type DescribeObservationInput struct {
 	// The ID of the observation.
 	//
 	// ObservationId is a required field
-	ObservationId *string `type:"string" required:"true"`
+	ObservationId *string `min:"38" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -29,6 +29,9 @@ func (s *DescribeObservationInput) Validate() error {
 
 	if s.ObservationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObservationId"))
+	}
+	if s.ObservationId != nil && len(*s.ObservationId) < 38 {
+		invalidParams.Add(aws.NewErrParamMinLen("ObservationId", 38))
 	}
 
 	if invalidParams.Len() > 0 {

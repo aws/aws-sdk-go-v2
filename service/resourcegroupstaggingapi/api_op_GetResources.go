@@ -13,6 +13,19 @@ import (
 type GetResourcesInput struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies whether to exclude resources that are compliant with the tag policy.
+	// Set this to true if you are interested in retrieving information on noncompliant
+	// resources only.
+	//
+	// You can use this parameter only if the IncludeComplianceDetails parameter
+	// is also set to true.
+	ExcludeCompliantResources *bool `type:"boolean"`
+
+	// Specifies whether to include details regarding the compliance with the effective
+	// tag policy. Set this to true to determine whether resources are compliant
+	// with the tag policy and to get details.
+	IncludeComplianceDetails *bool `type:"boolean"`
+
 	// A string that indicates that additional data is available. Leave this value
 	// empty for your initial request. If the response includes a PaginationToken,
 	// use that string for this value to request an additional page of data.
@@ -76,6 +89,8 @@ type GetResourcesInput struct {
 	//    and (key3, irrespective of the value)
 	TagFilters []TagFilter `type:"list"`
 
+	// AWS recommends using ResourcesPerPage instead of this parameter.
+	//
 	// A limit that restricts the number of tags (key and value pairs) returned
 	// by GetResources in paginated output. A resource with no tags is counted as
 	// having one tag (one key and value pair).
@@ -86,10 +101,10 @@ type GetResourcesInput struct {
 	// in another request to get the remaining data. For example, if you specify
 	// a TagsPerPage of 100 and the account has 22 resources with 10 tags each (meaning
 	// that each resource has 10 key and value pairs), the output will consist of
-	// 3 pages, with the first page displaying the first 10 resources, each with
-	// its 10 tags, the second page displaying the next 10 resources each with its
-	// 10 tags, and the third page displaying the remaining 2 resources, each with
-	// its 10 tags.
+	// three pages. The first page displays the first 10 resources, each with its
+	// 10 tags. The second page displays the next 10 resources, each with its 10
+	// tags. The third page displays the remaining 2 resources, each with its 10
+	// tags.
 	//
 	// You can set TagsPerPage to a minimum of 100 items and the maximum of 500
 	// items.
@@ -141,13 +156,21 @@ const opGetResources = "GetResources"
 // AWS Resource Groups Tagging API.
 //
 // Returns all the tagged or previously tagged resources that are located in
-// the specified region for the AWS account. You can optionally specify filters
-// (tags and resource types) in your request, depending on what information
-// you want returned. The response includes all tags that are associated with
-// the requested resources.
+// the specified Region for the AWS account.
+//
+// Depending on what information you want returned, you can also specify the
+// following:
+//
+//    * Filters that specify what tags and resource types you want returned.
+//    The response includes all tags that are associated with the requested
+//    resources.
+//
+//    * Information about compliance with the account's effective tag policy.
+//    For more information on tag policies, see Tag Policies (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+//    in the AWS Organizations User Guide.
 //
 // You can check the PaginationToken response parameter to determine if a query
-// completed. Queries can occasionally return fewer results on a page than allowed.
+// is complete. Queries occasionally return fewer results on a page than allowed.
 // The PaginationToken response parameter value is null only when there are
 // no more results to display.
 //

@@ -13,29 +13,29 @@ import (
 type UpdateIAMPolicyAssignmentInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the assignment. It must be unique within an AWS account.
+	// The name of the assignment. This name must be unique within an AWS account.
 	//
 	// AssignmentName is a required field
 	AssignmentName *string `location:"uri" locationName:"AssignmentName" min:"1" type:"string" required:"true"`
 
-	// The status of an assignment:
+	// The status of the assignment. Possible values are as follows:
 	//
-	//    * ENABLED - Anything specified in this assignment is used while creating
+	//    * ENABLED - Anything specified in this assignment is used when creating
 	//    the data source.
 	//
-	//    * DISABLED - This assignment isn't used while creating the data source.
+	//    * DISABLED - This assignment isn't used when creating the data source.
 	//
-	//    * DRAFT - Assignment is an unfinished draft and isn't used while creating
+	//    * DRAFT - This assignment is an unfinished draft and isn't used when creating
 	//    the data source.
 	AssignmentStatus AssignmentStatus `type:"string" enum:"true"`
 
-	// The AWS account ID that contains the IAM policy assignment.
+	// The ID of the AWS account that contains the IAM policy assignment.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
-	// QuickSight users and/or groups that you want to assign to the specified IAM
-	// policy.
+	// The QuickSight users, groups, or both that you want to assign the policy
+	// to.
 	Identities map[string][]string `type:"map"`
 
 	// The namespace of the assignment.
@@ -43,8 +43,8 @@ type UpdateIAMPolicyAssignmentInput struct {
 	// Namespace is a required field
 	Namespace *string `location:"uri" locationName:"Namespace" type:"string" required:"true"`
 
-	// An IAM policy ARN that will be applied to specified QuickSight users and
-	// groups in this assignment.
+	// The ARN for the IAM policy to apply to the QuickSight users and groups specified
+	// in this assignment.
 	PolicyArn *string `type:"string"`
 }
 
@@ -144,28 +144,28 @@ type UpdateIAMPolicyAssignmentOutput struct {
 	// The name of the assignment.
 	AssignmentName *string `min:"1" type:"string"`
 
-	// The status of the assignment:
+	// The status of the assignment. Possible values are as follows:
 	//
-	//    * ENABLED - Anything specified in this assignment is used while creating
+	//    * ENABLED - Anything specified in this assignment is used when creating
 	//    the data source.
 	//
-	//    * DISABLED - This assignment isn't used while creating the data source.
+	//    * DISABLED - This assignment isn't used when creating the data source.
 	//
-	//    * DRAFT - Assignment is an unfinished draft and isn't used while creating
+	//    * DRAFT - This assignment is an unfinished draft and isn't used when creating
 	//    the data source.
 	AssignmentStatus AssignmentStatus `type:"string" enum:"true"`
 
-	// QuickSight users and/or groups that are assigned to this IAM policy.
+	// The QuickSight users, groups, or both that the IAM policy is assigned to.
 	Identities map[string][]string `type:"map"`
 
-	// The IAM policy ARN assigned to the QuickSight users and groups specified
-	// in this request.
+	// The ARN for the IAM policy applied to the QuickSight users and groups specified
+	// in this assignment.
 	PolicyArn *string `type:"string"`
 
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -232,14 +232,8 @@ const opUpdateIAMPolicyAssignment = "UpdateIAMPolicyAssignment"
 // UpdateIAMPolicyAssignmentRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Updates an existing assignment. This operation updates only the optional
-// parameter or parameters that are specified in the request.
-//
-// CLI syntax:
-//
-// aws quicksight update-iam-policy-assignment --aws-account-id=111122223333
-// --assignment-name=FullAccessAssignment --assignment-status=DRAFT --policy-arns=arn:aws:iam::aws:policy/AdministratorAccess
-// --identities="user=user-1,user-2,group=admin" --namespace=default --region=us-east-1
+// Updates an existing IAM policy assignment. This operation updates only the
+// optional parameter or parameters that are specified in the request.
 //
 //    // Example sending a request using UpdateIAMPolicyAssignmentRequest.
 //    req := client.UpdateIAMPolicyAssignmentRequest(params)
