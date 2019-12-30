@@ -12,3 +12,4 @@ SDK Enhancements
 SDK Bugs
 --
 * `service/dynamodb/dynamodbattribute`: Fixes a panic when decoding into a map with a key string type alias. ([#465](https://github.com/aws/aws-sdk-go/pull/465))
+  * Fixes [#410](https://github.com/aws/aws-sdk-go-v2/issues/410),  by adding support for keys that are string aliases.
