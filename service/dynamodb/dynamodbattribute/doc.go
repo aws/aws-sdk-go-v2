@@ -91,5 +91,5 @@
 // replaced with have been replaced with dynamodbattribute.Marshaler and
 // dynamodbattribute.Unmarshaler interfaces.
 //
-// `time.Time` is marshaled as RFC3339 format.
+// `time.Time` is marshaled as `time.RFC3339Nano` format.
 package dynamodbattribute
