@@ -3,6 +3,7 @@
 package main
 
 import (
+	"context"
 	"errors"
 	"flag"
 	"fmt"
@@ -32,7 +33,7 @@ func main() {
 	// assume role
 	svc := sts.New(config)
 	input := &sts.AssumeRoleInput{RoleArn: aws.String(roleArn), RoleSessionName: aws.String(roleSessionName)}
-	out, err := svc.AssumeRoleRequest(input).Send()
+	out, err := svc.AssumeRoleRequest(input).Send(context.TODO())
 	if err != nil {
 		exitErrorf("aws assume role %s: %v", roleArn, err)
 	}
