@@ -16,7 +16,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 )
 
-var svc = func() *sqs.SQS {
+var svc = func() *sqs.Client {
 	cfg := unit.Config()
 	cfg.Handlers.Validate.Remove(defaults.ValidateParametersHandler)
 

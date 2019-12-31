@@ -128,32 +128,12 @@ func (r *referenceResolver) resolveShape(shape *Shape) {
 	}
 }
 
-// renameToplevelShapes renames all top level shapes of an API to their
-// exportable variant. The shapes are also updated to include notations
-// if they are Input or Outputs.
-func (a *API) renameToplevelShapes() {
-	for _, v := range a.OperationList() {
-		if v.HasInput() {
-			name := v.ExportedName + "Input"
-			if _, ok := a.Shapes[name]; !ok {
-				v.InputRef.Shape.Rename(name)
-			}
-		}
-		if v.HasOutput() {
-			name := v.ExportedName + "Output"
-			if _, ok := a.Shapes[name]; !ok {
-				v.OutputRef.Shape.Rename(name)
-			}
-		}
-		v.InputRef.Payload = a.ExportableName(v.InputRef.Payload)
-		v.OutputRef.Payload = a.ExportableName(v.OutputRef.Payload)
-	}
-}
-
 // fixStutterNames fixes all name struttering based on Go naming conventions.
 // "Stuttering" is when the prefix of a structure or function matches the
 // package name (case insensitive).
 func (a *API) fixStutterNames() {
+	// TODO remove this customization?
+
 	str, end := a.StructName(), ""
 	if len(str) > 1 {
 		l := len(str) - 1
@@ -174,6 +154,21 @@ func (a *API) fixStutterNames() {
 		newName := re.ReplaceAllString(k, "")
 		if newName != s.ShapeName {
 			s.Rename(newName)
+		}
+	}
+}
+
+func (a *API) applyShapeNameAliases() {
+	service, ok := shapeNameAliases[a.ServiceID()]
+	if !ok {
+		return
+	}
+
+	// Generic Shape Aliases
+	for name, s := range a.Shapes {
+		if alias, ok := service[name]; ok {
+			s.Rename(alias)
+			s.AliasedShapeName = true
 		}
 	}
 }
@@ -200,14 +195,11 @@ func (a *API) renameExportable() {
 		}
 
 		for mName, member := range s.MemberRefs {
+			ref := s.MemberRefs[mName]
+			ref.OrigShapeName = mName
+			s.MemberRefs[mName] = ref
+
 			newName := a.ExportableName(mName)
-
-			// if no location name is set on the member ref, but is set on the shape,
-			// we will take that name and place it on the reference.
-			if member.LocationName == "" && member.Shape.LocationName != "" {
-				member.LocationName = member.Shape.LocationName
-			}
-
 			if newName != mName {
 				delete(s.MemberRefs, mName)
 				s.MemberRefs[newName] = member
@@ -235,16 +227,15 @@ func (a *API) renameExportable() {
 		for i, n := range s.Required {
 			s.Required[i] = a.ExportableName(n)
 		}
-
-		// remove location name
-		s.LocationName = ""
 	}
 
 	for _, s := range a.Shapes {
+		// fix enum names
 		if s.IsEnum() {
 			s.EnumConsts = make([]string, len(s.Enum))
 			for i := range s.Enum {
-				shape := strings.Title(s.ShapeName)
+				shape := s.ShapeName
+				shape = strings.ToUpper(shape[0:1]) + shape[1:]
 				s.EnumConsts[i] = shape + s.EnumName(i)
 			}
 		}
@@ -261,10 +252,6 @@ func (a *API) renameCollidingFields() {
 				namesWithFixes[k] = struct{}{}
 			}
 
-			if strings.HasSuffix(k, "Pager") {
-				namesWithFixes[k] = struct{}{}
-			}
-
 			if collides(k) {
 				renameCollidingField(k, v, field)
 			}
@@ -277,13 +264,6 @@ func (a *API) renameCollidingFields() {
 					renameCollidingField(name, v, field)
 				}
 			}
-
-			if strings.HasSuffix(name, "Pager") {
-				if field, ok := v.MemberRefs[name+"Pager"]; ok {
-					renameCollidingField(name, v, field)
-				}
-			}
-
 		}
 	}
 }
@@ -292,7 +272,6 @@ func (a *API) renameCollidingFields() {
 func collides(name string) bool {
 	switch name {
 	case "String",
-		"GoString",
 		"Validate":
 		return true
 	default:
@@ -302,9 +281,16 @@ func collides(name string) bool {
 
 func renameCollidingField(name string, v *Shape, field *ShapeRef) {
 	newName := name + "_"
-	fmt.Printf("Shape %s's field %q renamed to %q\n", v.ShapeName, name, newName)
+	debugLogger.Logf("Shape %s's field %q renamed to %q", v.ShapeName, name, newName)
 	delete(v.MemberRefs, name)
 	v.MemberRefs[newName] = field
+}
+
+func (a *API) renameAPIPayloadShapes() {
+	for _, op := range a.Operations {
+		op.InputRef.Payload = a.ExportableName(op.InputRef.Payload)
+		op.OutputRef.Payload = a.ExportableName(op.OutputRef.Payload)
+	}
 }
 
 // createInputOutputShapes creates toplevel input/output shapes if they
@@ -312,16 +298,37 @@ func renameCollidingField(name string, v *Shape, field *ShapeRef) {
 // have an input and output structure in the signature.
 func (a *API) createInputOutputShapes() {
 	for _, op := range a.Operations {
-		if !op.HasInput() {
-			setAsPlacholderShape(&op.InputRef, op.ExportedName+"Input", a)
-		}
+		createAPIParamShape(a, op.Name, &op.InputRef, op.ExportedName+"Input")
 		op.InputRef.Shape.UsedAsInput = true
 
-		if !op.HasOutput() {
-			setAsPlacholderShape(&op.OutputRef, op.ExportedName+"Output", a)
-		}
+		createAPIParamShape(a, op.Name, &op.OutputRef, op.ExportedName+"Output")
 		op.OutputRef.Shape.UsedAsOutput = true
 	}
+}
+
+func createAPIParamShape(a *API, opName string, ref *ShapeRef, shapeName string) {
+	if len(ref.ShapeName) == 0 {
+		setAsPlacholderShape(ref, shapeName, a)
+		return
+	}
+
+	// nothing to do if already the correct name.
+	if s := ref.Shape; s.AliasedShapeName || s.ShapeName == shapeName {
+		return
+	}
+
+	if s, ok := a.Shapes[shapeName]; ok {
+		panic(fmt.Sprintf(
+			"attempting to create duplicate API parameter, shape: %v, op: %v, initial name: %v, other origShapeName: %v, pkg: %s\n",
+			shapeName, opName, ref.ShapeName, s.OrigShapeName, a.PackageName(),
+		))
+	}
+
+	ref.Shape.removeRef(ref)
+	ref.OrigShapeName = shapeName
+	ref.ShapeName = shapeName
+	ref.Shape = ref.Shape.Clone(shapeName)
+	ref.Shape.refs = append(ref.Shape.refs, ref)
 }
 
 func setAsPlacholderShape(tgtShapeRef *ShapeRef, name string, a *API) {
@@ -368,5 +375,26 @@ func (a *API) setMetadataEndpointsKey() {
 		a.Metadata.EndpointsID = v
 	} else {
 		a.Metadata.EndpointsID = a.Metadata.EndpointPrefix
+	}
+}
+
+func (a *API) injectUnboundedOutputStreaming() {
+	for _, op := range a.Operations {
+		if op.AuthType != V4UnsignedBodyAuthType {
+			continue
+		}
+		for _, ref := range op.InputRef.Shape.MemberRefs {
+			if ref.Streaming || ref.Shape.Streaming {
+				if len(ref.Documentation) != 0 {
+					ref.Documentation += `
+//`
+				}
+				ref.Documentation += `
+// To use an non-seekable io.Reader for this request wrap the io.Reader with
+// "aws.ReadSeekCloser". The SDK will not retry request errors for non-seekable
+// readers. This will allow the SDK to send the reader's payload as chunked
+// transfer encoding.`
+			}
+		}
 	}
 }

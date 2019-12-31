@@ -1,5 +1,3 @@
-// +build go1.7
-
 package ini
 
 import (
@@ -13,7 +11,7 @@ import (
 
 func TestValidDataFiles(t *testing.T) {
 	const expectedFileSuffix = "_expected"
-	filepath.Walk("./testdata/valid", func(path string, info os.FileInfo, err error) error {
+	err := filepath.Walk(filepath.Join("testdata", "valid"), func(path string, info os.FileInfo, err error) error {
 		if strings.HasSuffix(path, expectedFileSuffix) {
 			return nil
 		}
@@ -65,24 +63,24 @@ func TestValidDataFiles(t *testing.T) {
 				case string:
 					a := p.String(k)
 					if e != a {
-						t.Errorf("%s: expected %v, but received %v", path, e, a)
+						t.Errorf("%s: expected %v, but received %v for profile %v", path, e, a, profile)
 					}
 				case int:
 					a := p.Int(k)
 					if int64(e) != a {
-						t.Errorf("%s: expected %v, but received %v", path, e, a)
+						t.Errorf("%s: expected %v, but received %v for profile %v", path, e, a, profile)
 					}
 				case float64:
 					v := p.values[k]
 					if v.Type == IntegerType {
 						a := p.Int(k)
 						if int64(e) != a {
-							t.Errorf("%s: expected %v, but received %v", path, e, a)
+							t.Errorf("%s: expected %v, but received %v for profile %v", path, e, a, profile)
 						}
 					} else {
 						a := p.Float64(k)
 						if e != a {
-							t.Errorf("%s: expected %v, but received %v", path, e, a)
+							t.Errorf("%s: expected %v, but received %v for profile %v", path, e, a, profile)
 						}
 					}
 				default:
@@ -93,6 +91,9 @@ func TestValidDataFiles(t *testing.T) {
 
 		return nil
 	})
+	if err != nil {
+		t.Fatalf("Error while walking the file tree rooted at root, %d", err)
+	}
 }
 
 func TestInvalidDataFiles(t *testing.T) {

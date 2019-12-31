@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ssm"
 )
 
-// SSMAPI provides an interface to enable mocking the
-// ssm.SSM service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// ssm.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // Amazon Simple Systems Manager (SSM).
-//    func myFunc(svc ssmiface.SSMAPI) bool {
+//    // Amazon SSM.
+//    func myFunc(svc ssmiface.ClientAPI) bool {
 //        // Make svc.AddTagsToResource request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSSMClient struct {
-//        ssmiface.SSMAPI
+//    type mockClientClient struct {
+//        ssmiface.ClientPI
 //    }
-//    func (m *mockSSMClient) AddTagsToResource(input *ssm.AddTagsToResourceInput) (*ssm.AddTagsToResourceOutput, error) {
+//    func (m *mockClientClient) AddTagsToResource(input *ssm.AddTagsToResourceInput) (*ssm.AddTagsToResourceOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockSSMClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type SSMAPI interface {
+type ClientAPI interface {
 	AddTagsToResourceRequest(*ssm.AddTagsToResourceInput) ssm.AddTagsToResourceRequest
 
 	CancelCommandRequest(*ssm.CancelCommandInput) ssm.CancelCommandRequest
@@ -77,6 +76,8 @@ type SSMAPI interface {
 	CreateDocumentRequest(*ssm.CreateDocumentInput) ssm.CreateDocumentRequest
 
 	CreateMaintenanceWindowRequest(*ssm.CreateMaintenanceWindowInput) ssm.CreateMaintenanceWindowRequest
+
+	CreateOpsItemRequest(*ssm.CreateOpsItemInput) ssm.CreateOpsItemRequest
 
 	CreatePatchBaselineRequest(*ssm.CreatePatchBaselineInput) ssm.CreatePatchBaselineRequest
 
@@ -158,6 +159,8 @@ type SSMAPI interface {
 
 	DescribeMaintenanceWindowsForTargetRequest(*ssm.DescribeMaintenanceWindowsForTargetInput) ssm.DescribeMaintenanceWindowsForTargetRequest
 
+	DescribeOpsItemsRequest(*ssm.DescribeOpsItemsInput) ssm.DescribeOpsItemsRequest
+
 	DescribeParametersRequest(*ssm.DescribeParametersInput) ssm.DescribeParametersRequest
 
 	DescribePatchBaselinesRequest(*ssm.DescribePatchBaselinesInput) ssm.DescribePatchBaselinesRequest
@@ -166,9 +169,13 @@ type SSMAPI interface {
 
 	DescribePatchGroupsRequest(*ssm.DescribePatchGroupsInput) ssm.DescribePatchGroupsRequest
 
+	DescribePatchPropertiesRequest(*ssm.DescribePatchPropertiesInput) ssm.DescribePatchPropertiesRequest
+
 	DescribeSessionsRequest(*ssm.DescribeSessionsInput) ssm.DescribeSessionsRequest
 
 	GetAutomationExecutionRequest(*ssm.GetAutomationExecutionInput) ssm.GetAutomationExecutionRequest
+
+	GetCalendarStateRequest(*ssm.GetCalendarStateInput) ssm.GetCalendarStateRequest
 
 	GetCommandInvocationRequest(*ssm.GetCommandInvocationInput) ssm.GetCommandInvocationRequest
 
@@ -194,6 +201,10 @@ type SSMAPI interface {
 
 	GetMaintenanceWindowTaskRequest(*ssm.GetMaintenanceWindowTaskInput) ssm.GetMaintenanceWindowTaskRequest
 
+	GetOpsItemRequest(*ssm.GetOpsItemInput) ssm.GetOpsItemRequest
+
+	GetOpsSummaryRequest(*ssm.GetOpsSummaryInput) ssm.GetOpsSummaryRequest
+
 	GetParameterRequest(*ssm.GetParameterInput) ssm.GetParameterRequest
 
 	GetParameterHistoryRequest(*ssm.GetParameterHistoryInput) ssm.GetParameterHistoryRequest
@@ -205,6 +216,8 @@ type SSMAPI interface {
 	GetPatchBaselineRequest(*ssm.GetPatchBaselineInput) ssm.GetPatchBaselineRequest
 
 	GetPatchBaselineForPatchGroupRequest(*ssm.GetPatchBaselineForPatchGroupInput) ssm.GetPatchBaselineForPatchGroupRequest
+
+	GetServiceSettingRequest(*ssm.GetServiceSettingInput) ssm.GetServiceSettingRequest
 
 	LabelParameterVersionRequest(*ssm.LabelParameterVersionInput) ssm.LabelParameterVersionRequest
 
@@ -250,6 +263,8 @@ type SSMAPI interface {
 
 	RemoveTagsFromResourceRequest(*ssm.RemoveTagsFromResourceInput) ssm.RemoveTagsFromResourceRequest
 
+	ResetServiceSettingRequest(*ssm.ResetServiceSettingInput) ssm.ResetServiceSettingRequest
+
 	ResumeSessionRequest(*ssm.ResumeSessionInput) ssm.ResumeSessionRequest
 
 	SendAutomationSignalRequest(*ssm.SendAutomationSignalInput) ssm.SendAutomationSignalRequest
@@ -282,7 +297,13 @@ type SSMAPI interface {
 
 	UpdateManagedInstanceRoleRequest(*ssm.UpdateManagedInstanceRoleInput) ssm.UpdateManagedInstanceRoleRequest
 
+	UpdateOpsItemRequest(*ssm.UpdateOpsItemInput) ssm.UpdateOpsItemRequest
+
 	UpdatePatchBaselineRequest(*ssm.UpdatePatchBaselineInput) ssm.UpdatePatchBaselineRequest
+
+	UpdateResourceDataSyncRequest(*ssm.UpdateResourceDataSyncInput) ssm.UpdateResourceDataSyncRequest
+
+	UpdateServiceSettingRequest(*ssm.UpdateServiceSettingInput) ssm.UpdateServiceSettingRequest
 }
 
-var _ SSMAPI = (*ssm.SSM)(nil)
+var _ ClientAPI = (*ssm.Client)(nil)

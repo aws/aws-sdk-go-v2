@@ -8,6 +8,7 @@ import (
 	"crypto/rand"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -62,4 +63,37 @@ func ConfigWithDefaultRegion(region string) aws.Config {
 	}
 
 	return cfg
+}
+
+// CreateFileOfSize will return an *os.File that is of size bytes
+func CreateFileOfSize(dir string, size int64) (*os.File, error) {
+	file, err := ioutil.TempFile(dir, "s3Bench")
+	if err != nil {
+		return nil, err
+	}
+
+	err = file.Truncate(size)
+	if err != nil {
+		file.Close()
+		os.Remove(file.Name())
+		return nil, err
+	}
+
+	return file, nil
+}
+
+// SizeToName returns a human-readable string for the given size bytes
+func SizeToName(size int) string {
+	units := []string{"B", "KB", "MB", "GB"}
+	i := 0
+	for size >= 1024 {
+		size /= 1024
+		i++
+	}
+
+	if i > len(units)-1 {
+		i = len(units) - 1
+	}
+
+	return fmt.Sprintf("%d%s", size, units[i])
 }

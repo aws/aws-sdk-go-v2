@@ -33,7 +33,7 @@ const credsFailRespTmpl = `{
 
 func initTestServer(expireOn string, failAssume bool) *httptest.Server {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/latest/meta-data/iam/security-credentials" {
+		if r.URL.Path == "/latest/meta-data/iam/security-credentials/" {
 			fmt.Fprintln(w, "RoleName")
 		} else if r.URL.Path == "/latest/meta-data/iam/security-credentials/RoleName" {
 			if failAssume {
@@ -42,10 +42,9 @@ func initTestServer(expireOn string, failAssume bool) *httptest.Server {
 				fmt.Fprintf(w, credsRespTmpl, expireOn)
 			}
 		} else {
-			http.Error(w, "bad request", http.StatusBadRequest)
+			http.Error(w, "Not Found", http.StatusNotFound)
 		}
 	}))
-
 	return server
 }
 

@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ecr"
 )
 
-// ECRAPI provides an interface to enable mocking the
-// ecr.ECR service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// ecr.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // Amazon EC2 Container Registry.
-//    func myFunc(svc ecriface.ECRAPI) bool {
+//    // Amazon ECR.
+//    func myFunc(svc ecriface.ClientAPI) bool {
 //        // Make svc.BatchCheckLayerAvailability request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockECRClient struct {
-//        ecriface.ECRAPI
+//    type mockClientClient struct {
+//        ecriface.ClientPI
 //    }
-//    func (m *mockECRClient) BatchCheckLayerAvailability(input *ecr.BatchCheckLayerAvailabilityInput) (*ecr.BatchCheckLayerAvailabilityOutput, error) {
+//    func (m *mockClientClient) BatchCheckLayerAvailability(input *ecr.BatchCheckLayerAvailabilityInput) (*ecr.BatchCheckLayerAvailabilityOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockECRClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type ECRAPI interface {
+type ClientAPI interface {
 	BatchCheckLayerAvailabilityRequest(*ecr.BatchCheckLayerAvailabilityInput) ecr.BatchCheckLayerAvailabilityRequest
 
 	BatchDeleteImageRequest(*ecr.BatchDeleteImageInput) ecr.BatchDeleteImageRequest
@@ -77,6 +76,8 @@ type ECRAPI interface {
 	DeleteRepositoryRequest(*ecr.DeleteRepositoryInput) ecr.DeleteRepositoryRequest
 
 	DeleteRepositoryPolicyRequest(*ecr.DeleteRepositoryPolicyInput) ecr.DeleteRepositoryPolicyRequest
+
+	DescribeImageScanFindingsRequest(*ecr.DescribeImageScanFindingsInput) ecr.DescribeImageScanFindingsRequest
 
 	DescribeImagesRequest(*ecr.DescribeImagesInput) ecr.DescribeImagesRequest
 
@@ -100,9 +101,15 @@ type ECRAPI interface {
 
 	PutImageRequest(*ecr.PutImageInput) ecr.PutImageRequest
 
+	PutImageScanningConfigurationRequest(*ecr.PutImageScanningConfigurationInput) ecr.PutImageScanningConfigurationRequest
+
+	PutImageTagMutabilityRequest(*ecr.PutImageTagMutabilityInput) ecr.PutImageTagMutabilityRequest
+
 	PutLifecyclePolicyRequest(*ecr.PutLifecyclePolicyInput) ecr.PutLifecyclePolicyRequest
 
 	SetRepositoryPolicyRequest(*ecr.SetRepositoryPolicyInput) ecr.SetRepositoryPolicyRequest
+
+	StartImageScanRequest(*ecr.StartImageScanInput) ecr.StartImageScanRequest
 
 	StartLifecyclePolicyPreviewRequest(*ecr.StartLifecyclePolicyPreviewInput) ecr.StartLifecyclePolicyPreviewRequest
 
@@ -113,4 +120,4 @@ type ECRAPI interface {
 	UploadLayerPartRequest(*ecr.UploadLayerPartInput) ecr.UploadLayerPartRequest
 }
 
-var _ ECRAPI = (*ecr.ECR)(nil)
+var _ ClientAPI = (*ecr.Client)(nil)

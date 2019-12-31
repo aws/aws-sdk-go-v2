@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice"
 )
 
-// LexRuntimeServiceAPI provides an interface to enable mocking the
-// lexruntimeservice.LexRuntimeService service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// lexruntimeservice.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,8 +22,8 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Lex Runtime Service.
-//    func myFunc(svc lexruntimeserviceiface.LexRuntimeServiceAPI) bool {
-//        // Make svc.PostContent request
+//    func myFunc(svc lexruntimeserviceiface.ClientAPI) bool {
+//        // Make svc.DeleteSession request
 //    }
 //
 //    func main() {
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockLexRuntimeServiceClient struct {
-//        lexruntimeserviceiface.LexRuntimeServiceAPI
+//    type mockClientClient struct {
+//        lexruntimeserviceiface.ClientPI
 //    }
-//    func (m *mockLexRuntimeServiceClient) PostContent(input *lexruntimeservice.PostContentInput) (*lexruntimeservice.PostContentOutput, error) {
+//    func (m *mockClientClient) DeleteSession(input *lexruntimeservice.DeleteSessionInput) (*lexruntimeservice.DeleteSessionOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockLexRuntimeServiceClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,10 +60,16 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type LexRuntimeServiceAPI interface {
+type ClientAPI interface {
+	DeleteSessionRequest(*lexruntimeservice.DeleteSessionInput) lexruntimeservice.DeleteSessionRequest
+
+	GetSessionRequest(*lexruntimeservice.GetSessionInput) lexruntimeservice.GetSessionRequest
+
 	PostContentRequest(*lexruntimeservice.PostContentInput) lexruntimeservice.PostContentRequest
 
 	PostTextRequest(*lexruntimeservice.PostTextInput) lexruntimeservice.PostTextRequest
+
+	PutSessionRequest(*lexruntimeservice.PutSessionInput) lexruntimeservice.PutSessionRequest
 }
 
-var _ LexRuntimeServiceAPI = (*lexruntimeservice.LexRuntimeService)(nil)
+var _ ClientAPI = (*lexruntimeservice.Client)(nil)

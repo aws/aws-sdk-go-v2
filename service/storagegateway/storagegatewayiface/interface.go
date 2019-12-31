@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway"
 )
 
-// StorageGatewayAPI provides an interface to enable mocking the
-// storagegateway.StorageGateway service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// storagegateway.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Storage Gateway.
-//    func myFunc(svc storagegatewayiface.StorageGatewayAPI) bool {
+//    func myFunc(svc storagegatewayiface.ClientAPI) bool {
 //        // Make svc.ActivateGateway request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockStorageGatewayClient struct {
-//        storagegatewayiface.StorageGatewayAPI
+//    type mockClientClient struct {
+//        storagegatewayiface.ClientPI
 //    }
-//    func (m *mockStorageGatewayClient) ActivateGateway(input *storagegateway.ActivateGatewayInput) (*storagegateway.ActivateGatewayOutput, error) {
+//    func (m *mockClientClient) ActivateGateway(input *storagegateway.ActivateGatewayInput) (*storagegateway.ActivateGatewayOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockStorageGatewayClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type StorageGatewayAPI interface {
+type ClientAPI interface {
 	ActivateGatewayRequest(*storagegateway.ActivateGatewayInput) storagegateway.ActivateGatewayRequest
 
 	AddCacheRequest(*storagegateway.AddCacheInput) storagegateway.AddCacheRequest
@@ -71,6 +70,10 @@ type StorageGatewayAPI interface {
 	AddUploadBufferRequest(*storagegateway.AddUploadBufferInput) storagegateway.AddUploadBufferRequest
 
 	AddWorkingStorageRequest(*storagegateway.AddWorkingStorageInput) storagegateway.AddWorkingStorageRequest
+
+	AssignTapePoolRequest(*storagegateway.AssignTapePoolInput) storagegateway.AssignTapePoolRequest
+
+	AttachVolumeRequest(*storagegateway.AttachVolumeInput) storagegateway.AttachVolumeRequest
 
 	CancelArchivalRequest(*storagegateway.CancelArchivalInput) storagegateway.CancelArchivalRequest
 
@@ -108,6 +111,8 @@ type StorageGatewayAPI interface {
 
 	DeleteVolumeRequest(*storagegateway.DeleteVolumeInput) storagegateway.DeleteVolumeRequest
 
+	DescribeAvailabilityMonitorTestRequest(*storagegateway.DescribeAvailabilityMonitorTestInput) storagegateway.DescribeAvailabilityMonitorTestRequest
+
 	DescribeBandwidthRateLimitRequest(*storagegateway.DescribeBandwidthRateLimitInput) storagegateway.DescribeBandwidthRateLimitRequest
 
 	DescribeCacheRequest(*storagegateway.DescribeCacheInput) storagegateway.DescribeCacheRequest
@@ -141,6 +146,8 @@ type StorageGatewayAPI interface {
 	DescribeVTLDevicesRequest(*storagegateway.DescribeVTLDevicesInput) storagegateway.DescribeVTLDevicesRequest
 
 	DescribeWorkingStorageRequest(*storagegateway.DescribeWorkingStorageInput) storagegateway.DescribeWorkingStorageRequest
+
+	DetachVolumeRequest(*storagegateway.DetachVolumeInput) storagegateway.DetachVolumeRequest
 
 	DisableGatewayRequest(*storagegateway.DisableGatewayInput) storagegateway.DisableGatewayRequest
 
@@ -180,6 +187,8 @@ type StorageGatewayAPI interface {
 
 	ShutdownGatewayRequest(*storagegateway.ShutdownGatewayInput) storagegateway.ShutdownGatewayRequest
 
+	StartAvailabilityMonitorTestRequest(*storagegateway.StartAvailabilityMonitorTestInput) storagegateway.StartAvailabilityMonitorTestRequest
+
 	StartGatewayRequest(*storagegateway.StartGatewayInput) storagegateway.StartGatewayRequest
 
 	UpdateBandwidthRateLimitRequest(*storagegateway.UpdateBandwidthRateLimitInput) storagegateway.UpdateBandwidthRateLimitRequest
@@ -196,9 +205,11 @@ type StorageGatewayAPI interface {
 
 	UpdateSMBFileShareRequest(*storagegateway.UpdateSMBFileShareInput) storagegateway.UpdateSMBFileShareRequest
 
+	UpdateSMBSecurityStrategyRequest(*storagegateway.UpdateSMBSecurityStrategyInput) storagegateway.UpdateSMBSecurityStrategyRequest
+
 	UpdateSnapshotScheduleRequest(*storagegateway.UpdateSnapshotScheduleInput) storagegateway.UpdateSnapshotScheduleRequest
 
 	UpdateVTLDeviceTypeRequest(*storagegateway.UpdateVTLDeviceTypeInput) storagegateway.UpdateVTLDeviceTypeRequest
 }
 
-var _ StorageGatewayAPI = (*storagegateway.StorageGateway)(nil)
+var _ ClientAPI = (*storagegateway.Client)(nil)

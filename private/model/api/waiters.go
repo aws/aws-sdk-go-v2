@@ -45,12 +45,11 @@ type Waiter struct {
 // this API.
 func (a *API) WaitersGoCode() string {
 	var buf bytes.Buffer
-	buf.WriteString(`import (
-		"context"
-		"time"
-
-		"github.com/aws/aws-sdk-go-v2/aws"
-	)`)
+	fmt.Fprintf(&buf, "import (\n%q\n%q\n\n%q\n)",
+		"time",
+		"context",
+		SDKImportRoot+"/aws",
+	)
 
 	for _, w := range a.Waiters {
 		buf.WriteString(w.GoCode())

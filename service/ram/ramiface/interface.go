@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ram"
 )
 
-// RAMAPI provides an interface to enable mocking the
-// ram.RAM service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// ram.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS Resource Access Manager.
-//    func myFunc(svc ramiface.RAMAPI) bool {
+//    // RAM.
+//    func myFunc(svc ramiface.ClientAPI) bool {
 //        // Make svc.AcceptResourceShareInvitation request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockRAMClient struct {
-//        ramiface.RAMAPI
+//    type mockClientClient struct {
+//        ramiface.ClientPI
 //    }
-//    func (m *mockRAMClient) AcceptResourceShareInvitation(input *ram.AcceptResourceShareInvitationInput) (*ram.AcceptResourceShareInvitationOutput, error) {
+//    func (m *mockClientClient) AcceptResourceShareInvitation(input *ram.AcceptResourceShareInvitationInput) (*ram.AcceptResourceShareInvitationOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockRAMClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,10 +60,12 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type RAMAPI interface {
+type ClientAPI interface {
 	AcceptResourceShareInvitationRequest(*ram.AcceptResourceShareInvitationInput) ram.AcceptResourceShareInvitationRequest
 
 	AssociateResourceShareRequest(*ram.AssociateResourceShareInput) ram.AssociateResourceShareRequest
+
+	AssociateResourceSharePermissionRequest(*ram.AssociateResourceSharePermissionInput) ram.AssociateResourceSharePermissionRequest
 
 	CreateResourceShareRequest(*ram.CreateResourceShareInput) ram.CreateResourceShareRequest
 
@@ -72,7 +73,11 @@ type RAMAPI interface {
 
 	DisassociateResourceShareRequest(*ram.DisassociateResourceShareInput) ram.DisassociateResourceShareRequest
 
+	DisassociateResourceSharePermissionRequest(*ram.DisassociateResourceSharePermissionInput) ram.DisassociateResourceSharePermissionRequest
+
 	EnableSharingWithAwsOrganizationRequest(*ram.EnableSharingWithAwsOrganizationInput) ram.EnableSharingWithAwsOrganizationRequest
+
+	GetPermissionRequest(*ram.GetPermissionInput) ram.GetPermissionRequest
 
 	GetResourcePoliciesRequest(*ram.GetResourcePoliciesInput) ram.GetResourcePoliciesRequest
 
@@ -82,9 +87,17 @@ type RAMAPI interface {
 
 	GetResourceSharesRequest(*ram.GetResourceSharesInput) ram.GetResourceSharesRequest
 
+	ListPendingInvitationResourcesRequest(*ram.ListPendingInvitationResourcesInput) ram.ListPendingInvitationResourcesRequest
+
+	ListPermissionsRequest(*ram.ListPermissionsInput) ram.ListPermissionsRequest
+
 	ListPrincipalsRequest(*ram.ListPrincipalsInput) ram.ListPrincipalsRequest
 
+	ListResourceSharePermissionsRequest(*ram.ListResourceSharePermissionsInput) ram.ListResourceSharePermissionsRequest
+
 	ListResourcesRequest(*ram.ListResourcesInput) ram.ListResourcesRequest
+
+	PromoteResourceShareCreatedFromPolicyRequest(*ram.PromoteResourceShareCreatedFromPolicyInput) ram.PromoteResourceShareCreatedFromPolicyRequest
 
 	RejectResourceShareInvitationRequest(*ram.RejectResourceShareInvitationInput) ram.RejectResourceShareInvitationRequest
 
@@ -95,4 +108,4 @@ type RAMAPI interface {
 	UpdateResourceShareRequest(*ram.UpdateResourceShareInput) ram.UpdateResourceShareRequest
 }
 
-var _ RAMAPI = (*ram.RAM)(nil)
+var _ ClientAPI = (*ram.Client)(nil)

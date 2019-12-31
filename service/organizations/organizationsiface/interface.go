@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/organizations"
 )
 
-// OrganizationsAPI provides an interface to enable mocking the
-// organizations.Organizations service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// organizations.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS Organizations.
-//    func myFunc(svc organizationsiface.OrganizationsAPI) bool {
+//    // Organizations.
+//    func myFunc(svc organizationsiface.ClientAPI) bool {
 //        // Make svc.AcceptHandshake request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockOrganizationsClient struct {
-//        organizationsiface.OrganizationsAPI
+//    type mockClientClient struct {
+//        organizationsiface.ClientPI
 //    }
-//    func (m *mockOrganizationsClient) AcceptHandshake(input *organizations.AcceptHandshakeInput) (*organizations.AcceptHandshakeOutput, error) {
+//    func (m *mockClientClient) AcceptHandshake(input *organizations.AcceptHandshakeInput) (*organizations.AcceptHandshakeOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockOrganizationsClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type OrganizationsAPI interface {
+type ClientAPI interface {
 	AcceptHandshakeRequest(*organizations.AcceptHandshakeInput) organizations.AcceptHandshakeRequest
 
 	AttachPolicyRequest(*organizations.AttachPolicyInput) organizations.AttachPolicyRequest
@@ -69,6 +68,8 @@ type OrganizationsAPI interface {
 	CancelHandshakeRequest(*organizations.CancelHandshakeInput) organizations.CancelHandshakeRequest
 
 	CreateAccountRequest(*organizations.CreateAccountInput) organizations.CreateAccountRequest
+
+	CreateGovCloudAccountRequest(*organizations.CreateGovCloudAccountInput) organizations.CreateGovCloudAccountRequest
 
 	CreateOrganizationRequest(*organizations.CreateOrganizationInput) organizations.CreateOrganizationRequest
 
@@ -87,6 +88,8 @@ type OrganizationsAPI interface {
 	DescribeAccountRequest(*organizations.DescribeAccountInput) organizations.DescribeAccountRequest
 
 	DescribeCreateAccountStatusRequest(*organizations.DescribeCreateAccountStatusInput) organizations.DescribeCreateAccountStatusRequest
+
+	DescribeEffectivePolicyRequest(*organizations.DescribeEffectivePolicyInput) organizations.DescribeEffectivePolicyRequest
 
 	DescribeHandshakeRequest(*organizations.DescribeHandshakeInput) organizations.DescribeHandshakeRequest
 
@@ -136,15 +139,21 @@ type OrganizationsAPI interface {
 
 	ListRootsRequest(*organizations.ListRootsInput) organizations.ListRootsRequest
 
+	ListTagsForResourceRequest(*organizations.ListTagsForResourceInput) organizations.ListTagsForResourceRequest
+
 	ListTargetsForPolicyRequest(*organizations.ListTargetsForPolicyInput) organizations.ListTargetsForPolicyRequest
 
 	MoveAccountRequest(*organizations.MoveAccountInput) organizations.MoveAccountRequest
 
 	RemoveAccountFromOrganizationRequest(*organizations.RemoveAccountFromOrganizationInput) organizations.RemoveAccountFromOrganizationRequest
 
+	TagResourceRequest(*organizations.TagResourceInput) organizations.TagResourceRequest
+
+	UntagResourceRequest(*organizations.UntagResourceInput) organizations.UntagResourceRequest
+
 	UpdateOrganizationalUnitRequest(*organizations.UpdateOrganizationalUnitInput) organizations.UpdateOrganizationalUnitRequest
 
 	UpdatePolicyRequest(*organizations.UpdatePolicyInput) organizations.UpdatePolicyRequest
 }
 
-var _ OrganizationsAPI = (*organizations.Organizations)(nil)
+var _ ClientAPI = (*organizations.Client)(nil)

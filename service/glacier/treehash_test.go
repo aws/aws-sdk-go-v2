@@ -13,7 +13,7 @@ func ExampleComputeHashes() {
 	r := testCreateReader()
 
 	h := glacier.ComputeHashes(r)
-	n, _ := r.Seek(0, 1) // Check position after checksumming
+	n, _ := r.Seek(0, io.SeekCurrent) // Check position after checksumming
 
 	fmt.Printf("linear: %x\n", h.LinearHash)
 	fmt.Printf("tree: %x\n", h.TreeHash)

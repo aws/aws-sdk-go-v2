@@ -310,7 +310,7 @@ func (i *testCase) TestCase(idx int) string {
 		case "rest-xml":
 			i.InputTest.Body = util.SortXML(bytes.NewReader([]byte(i.InputTest.Body)))
 		case "json", "rest-json":
-			i.InputTest.Body = strings.Replace(i.InputTest.Body, " ", "", -1)
+			// Nothing to do
 		}
 
 		jsonValues := buildJSONValues(i.Given.InputRef.Shape)
@@ -430,11 +430,13 @@ func generateTestSuite(filename string) string {
 		}
 
 		suite.Type = getType(inout)
-		suite.API.NoInitMethods = true       // don't generate init methods
-		suite.API.NoStringerMethods = true   // don't generate stringer methods
-		suite.API.NoConstServiceNames = true // don't generate service names
+		suite.API.NoInitMethods = true               // don't generate init methods
+		suite.API.NoStringerMethods = true           // don't generate stringer methods
+		suite.API.NoConstServiceNames = true         // don't generate service names
+		suite.API.UseServiceIDForClientStruct = true // need unique client types.
 		suite.API.Setup()
 		suite.API.Metadata.EndpointPrefix = suite.API.PackageName()
+		suite.API.Metadata.EndpointsID = suite.API.Metadata.EndpointPrefix
 
 		// Sort in order for deterministic test generation
 		names := make([]string, 0, len(suite.API.Shapes))

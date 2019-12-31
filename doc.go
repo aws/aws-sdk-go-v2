@@ -18,7 +18,7 @@ pinned to specific version of the SDK
 
 	dep ensure --add github.com/aws/aws-sdk-go-v2
 
-### Hello AWS
+Hello AWS
 
 This example shows how you can use the v2 SDK to make an API request using the
 SDK's Amazon DynamoDB client.
@@ -26,6 +26,7 @@ SDK's Amazon DynamoDB client.
 	package main
 
 	import (
+		"context"
 		"github.com/aws/aws-sdk-go-v2/aws"
 		"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 		"github.com/aws/aws-sdk-go-v2/aws/external"
@@ -53,7 +54,7 @@ SDK's Amazon DynamoDB client.
 		})
 
 		// Send the request, and get the response or error back
-		resp, err := req.Send()
+		resp, err := req.Send(context.Background())
 		if err != nil {
 			panic("failed to describe table, "+err.Error())
 		}

@@ -8,6 +8,7 @@ LINTIGNOREDEPS='vendor/.+\.go'
 LINTIGNOREPKGCOMMENT='service/[^/]+/doc_custom.go:.+package comment should be of the form'
 LINTIGNOREENDPOINTS='aws/endpoints/defaults.go:.+(method|const) .+ should be '
 UNIT_TEST_TAGS="example codegen awsinclude"
+ALL_TAGS="example codegen awsinclude integration perftest sdktool"
 
 # SDK's Core and client packages that are compatable with Go 1.9+.
 SDK_CORE_PKGS=./aws/... ./private/... ./internal/...
@@ -19,7 +20,6 @@ SDK_EXAMPLES_PKGS=./example/...
 SDK_MODELS_PKGS=./models/...
 SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_EXAMPLES_PKGS} ${SDK_MODELS_PKGS}
 
-SDK_V1_USAGE=$(shell go list -f '''{{ if not .Standard }}{{ range $$_, $$name := .Imports }} * {{ $$.ImportPath }} -> {{ $$name }}{{ print "\n" }}{{ end }}{{ end }}''' ./... | sort -u | grep '''/aws-sdk-go/''')
 
 all: generate unit
 
@@ -48,7 +48,7 @@ gen-endpoints:
 	go generate ./models/endpoints
 
 gen-tools:
-	go generate ./internal/awstesting/cmd/op_crawler/
+	go generate -tags sdktool ./internal/awstesting/cmd/op_crawler/
 
 cleanup-models:
 	@echo "Cleaning up stale model versions"
@@ -57,22 +57,27 @@ cleanup-models:
 ###################
 # Unit/CI Testing #
 ###################
-unit: verify
+build:
+	go build -o /dev/null -tags ${ALL_TAGS} ${SDK_ALL_PKGS}
+
+unit: verify build
 	@echo "go test SDK and vendor packages"
 	@go test -tags ${UNIT_TEST_TAGS} ${SDK_ALL_PKGS}
 
-unit-with-race-cover: verify
+unit-with-race-cover: verify build
 	@echo "go test SDK and vendor packages"
 	@go test -tags ${UNIT_TEST_TAGS} -race -cpu=1,2,4 ${SDK_ALL_PKGS}
 
-#ci-test: generate unit-with-race-cover ci-test-generate-validate
-#
-#ci-test-generate-validate:
-#	@echo "CI test validate no generated code changes"
-#	git add . -A
-#	gitstatus=`git diff --cached --ignore-space-change`; \
-#	echo "$$gitstatus"; \
-#	if [ "$$gitstatus" != "" ] && [ "$$gitstatus" != "skipping validation" ]; then echo "$$gitstatus"; exit 1; fi
+ci-test: generate unit-with-race-cover ci-test-generate-validate
+
+ci-test-generate-validate:
+	@echo "CI test validate no generated code changes"
+	git update-index --assume-unchanged go.mod go.sum
+	git add . -A
+	gitstatus=`git diff --cached --ignore-space-change`; \
+	git update-index --no-assume-unchanged go.mod go.sum
+	echo "$$gitstatus"; \
+	if [ "$$gitstatus" != "" ]; then echo "$$gitstatus"; exit 1; fi
 
 #######################
 # Integration Testing #
@@ -98,43 +103,29 @@ cleanup-integ-buckets:
 ###################
 # Sandbox Testing #
 ###################
-sandbox-tests: sandbox-test-go1.9 sandbox-test-go1.10 sandbox-test-go1.11 sandbox-test-go1.12 sandbox-test-gotip
+sandbox-tests: sandbox-test-go1.12 sandbox-test-go1.13 sandbox-test-gotip
 
-sandbox-build-go1.9:
-	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.9 -t "aws-sdk-go-1.9" .
-sandbox-go1.9: sandbox-build-go1.9
-	docker run -i -t aws-sdk-go-1.9 bash
-sandbox-test-go1.9: sandbox-build-go1.9
-	docker run -t aws-sdk-go-1.9
-
-sandbox-build-go1.10:
-	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.10 -t "aws-sdk-go-1.10" .
-sandbox-go1.10: sandbox-build-go1.10
-	docker run -i -t aws-sdk-go-1.10 bash
-sandbox-test-go1.10: sandbox-build-go1.10
-	docker run -t aws-sdk-go-1.10
-
-sandbox-build-go1.11:
-	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.11 -t "aws-sdk-go-1.11" .
-sandbox-go1.11: sandbox-build-go1.11
-	docker run -i -t aws-sdk-go-1.11 bash
-sandbox-test-go1.11: sandbox-build-go1.11
-	docker run -t aws-sdk-go-1.11
+sandbox-build-go1.13:
+	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.13 -t "aws-sdk-go-v2-1.13" .
+sandbox-go1.13: sandbox-build-go1.13
+	docker run -i -t aws-sdk-go-v2-1.13 bash
+sandbox-test-go1.13: sandbox-build-go1.13
+	docker run -t aws-sdk-go-v2-1.13
 
 sandbox-build-go1.12:
-	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.12 -t "aws-sdk-go-1.12" .
+	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.12 -t "aws-sdk-go-v2-1.12" .
 sandbox-go1.12: sandbox-build-go1.12
-	docker run -i -t aws-sdk-go-1.12 bash
+	docker run -i -t aws-sdk-go-v2-1.12 bash
 sandbox-test-go1.12: sandbox-build-go1.12
-	docker run -t aws-sdk-go-1.12
+	docker run -t aws-sdk-go-v2-1.12
 
 sandbox-build-gotip:
 	@echo "Run make update-aws-golang-tip, if this test fails because missing aws-golang:tip container"
-	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.gotip -t "aws-sdk-go-tip" .
+	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.gotip -t "aws-sdk-go-v2-tip" .
 sandbox-gotip: sandbox-build-gotip
-	docker run -i -t aws-sdk-go-tip bash
+	docker run -i -t aws-sdk-go-v2-tip bash
 sandbox-test-gotip: sandbox-build-gotip
-	docker run -t aws-sdk-go-tip
+	docker run -t aws-sdk-go-v2-tip
 
 update-aws-golang-tip:
 	docker build --no-cache=true -f ./internal/awstesting/sandbox/Dockerfile.golang-tip -t "aws-golang:tip" .
@@ -156,7 +147,9 @@ vet:
 
 sdkv1check:
 	@echo "Checking for usage of AWS SDK for Go v1"
-	@if [ ! -z "${SDK_V1_USAGE}" ]; then echo "Using of V1 SDK packages"; echo "${SDK_V1_USAGE}"; exit 1; fi
+	@sdkv1usage=`go list -test -f '''{{ if not .Standard }}{{ range $$_, $$name := .Imports }} * {{ $$.ImportPath }} -> {{ $$name }}{{ print "\n" }}{{ end }}{{ range $$_, $$name := .TestImports }} *: {{ $$.ImportPath }} -> {{ $$name }}{{ print "\n" }}{{ end }}{{ end}}''' ./... | sort -u | grep '''/aws-sdk-go/'''`; \
+	echo "$$sdkv1usage"; \
+	if [ "$$sdkv1usage" != "" ]; then exit 1; fi
 
 ################
 # Dependencies #
@@ -166,8 +159,8 @@ get-deps: get-deps-tests get-deps-x-tests get-deps-codegen get-deps-verify
 
 get-deps-tests:
 	@echo "go get SDK testing dependencies"
-	go get github.com/stretchr/testify
 	go get golang.org/x/net/html
+	go get github.com/google/go-cmp
 
 get-deps-x-tests:
 	@echo "go get SDK testing golang.org/x dependencies"

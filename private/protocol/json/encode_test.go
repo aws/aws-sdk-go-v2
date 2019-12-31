@@ -177,7 +177,7 @@ func (s *payloadShape) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	if s.TimeVal != nil {
 		e.SetValue(protocol.BodyTarget, "timeval", protocol.TimeValue{
-			V: *s.TimeVal, Format: protocol.UnixTimeFormat,
+			V: *s.TimeVal, Format: protocol.UnixTimeFormatName,
 		}, protocol.Metadata{})
 	}
 	if s.Nested != nil {

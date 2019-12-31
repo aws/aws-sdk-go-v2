@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics"
 )
 
-// MarketplaceCommerceAnalyticsAPI provides an interface to enable mocking the
-// marketplacecommerceanalytics.MarketplaceCommerceAnalytics service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// marketplacecommerceanalytics.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Marketplace Commerce Analytics.
-//    func myFunc(svc marketplacecommerceanalyticsiface.MarketplaceCommerceAnalyticsAPI) bool {
+//    func myFunc(svc marketplacecommerceanalyticsiface.ClientAPI) bool {
 //        // Make svc.GenerateDataSet request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockMarketplaceCommerceAnalyticsClient struct {
-//        marketplacecommerceanalyticsiface.MarketplaceCommerceAnalyticsAPI
+//    type mockClientClient struct {
+//        marketplacecommerceanalyticsiface.ClientPI
 //    }
-//    func (m *mockMarketplaceCommerceAnalyticsClient) GenerateDataSet(input *marketplacecommerceanalytics.GenerateDataSetInput) (*marketplacecommerceanalytics.GenerateDataSetOutput, error) {
+//    func (m *mockClientClient) GenerateDataSet(input *marketplacecommerceanalytics.GenerateDataSetInput) (*marketplacecommerceanalytics.GenerateDataSetOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockMarketplaceCommerceAnalyticsClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,10 +60,10 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type MarketplaceCommerceAnalyticsAPI interface {
+type ClientAPI interface {
 	GenerateDataSetRequest(*marketplacecommerceanalytics.GenerateDataSetInput) marketplacecommerceanalytics.GenerateDataSetRequest
 
 	StartSupportDataExportRequest(*marketplacecommerceanalytics.StartSupportDataExportInput) marketplacecommerceanalytics.StartSupportDataExportRequest
 }
 
-var _ MarketplaceCommerceAnalyticsAPI = (*marketplacecommerceanalytics.MarketplaceCommerceAnalytics)(nil)
+var _ ClientAPI = (*marketplacecommerceanalytics.Client)(nil)

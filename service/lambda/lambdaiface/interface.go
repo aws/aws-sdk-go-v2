@@ -9,13 +9,15 @@
 package lambdaiface
 
 import (
+	"context"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
 )
 
-// LambdaAPI provides an interface to enable mocking the
-// lambda.Lambda service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// lambda.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +25,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Lambda.
-//    func myFunc(svc lambdaiface.LambdaAPI) bool {
+//    func myFunc(svc lambdaiface.ClientAPI) bool {
 //        // Make svc.AddLayerVersionPermission request
 //    }
 //
@@ -41,16 +43,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockLambdaClient struct {
-//        lambdaiface.LambdaAPI
+//    type mockClientClient struct {
+//        lambdaiface.ClientPI
 //    }
-//    func (m *mockLambdaClient) AddLayerVersionPermission(input *lambda.AddLayerVersionPermissionInput) (*lambda.AddLayerVersionPermissionOutput, error) {
+//    func (m *mockClientClient) AddLayerVersionPermission(input *lambda.AddLayerVersionPermissionInput) (*lambda.AddLayerVersionPermissionOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockLambdaClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +63,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type LambdaAPI interface {
+type ClientAPI interface {
 	AddLayerVersionPermissionRequest(*lambda.AddLayerVersionPermissionInput) lambda.AddLayerVersionPermissionRequest
 
 	AddPermissionRequest(*lambda.AddPermissionInput) lambda.AddPermissionRequest
@@ -80,7 +82,11 @@ type LambdaAPI interface {
 
 	DeleteFunctionConcurrencyRequest(*lambda.DeleteFunctionConcurrencyInput) lambda.DeleteFunctionConcurrencyRequest
 
+	DeleteFunctionEventInvokeConfigRequest(*lambda.DeleteFunctionEventInvokeConfigInput) lambda.DeleteFunctionEventInvokeConfigRequest
+
 	DeleteLayerVersionRequest(*lambda.DeleteLayerVersionInput) lambda.DeleteLayerVersionRequest
+
+	DeleteProvisionedConcurrencyConfigRequest(*lambda.DeleteProvisionedConcurrencyConfigInput) lambda.DeleteProvisionedConcurrencyConfigRequest
 
 	GetAccountSettingsRequest(*lambda.GetAccountSettingsInput) lambda.GetAccountSettingsRequest
 
@@ -90,13 +96,21 @@ type LambdaAPI interface {
 
 	GetFunctionRequest(*lambda.GetFunctionInput) lambda.GetFunctionRequest
 
+	GetFunctionConcurrencyRequest(*lambda.GetFunctionConcurrencyInput) lambda.GetFunctionConcurrencyRequest
+
 	GetFunctionConfigurationRequest(*lambda.GetFunctionConfigurationInput) lambda.GetFunctionConfigurationRequest
 
+	GetFunctionEventInvokeConfigRequest(*lambda.GetFunctionEventInvokeConfigInput) lambda.GetFunctionEventInvokeConfigRequest
+
 	GetLayerVersionRequest(*lambda.GetLayerVersionInput) lambda.GetLayerVersionRequest
+
+	GetLayerVersionByArnRequest(*lambda.GetLayerVersionByArnInput) lambda.GetLayerVersionByArnRequest
 
 	GetLayerVersionPolicyRequest(*lambda.GetLayerVersionPolicyInput) lambda.GetLayerVersionPolicyRequest
 
 	GetPolicyRequest(*lambda.GetPolicyInput) lambda.GetPolicyRequest
+
+	GetProvisionedConcurrencyConfigRequest(*lambda.GetProvisionedConcurrencyConfigInput) lambda.GetProvisionedConcurrencyConfigRequest
 
 	InvokeRequest(*lambda.InvokeInput) lambda.InvokeRequest
 
@@ -106,11 +120,15 @@ type LambdaAPI interface {
 
 	ListEventSourceMappingsRequest(*lambda.ListEventSourceMappingsInput) lambda.ListEventSourceMappingsRequest
 
+	ListFunctionEventInvokeConfigsRequest(*lambda.ListFunctionEventInvokeConfigsInput) lambda.ListFunctionEventInvokeConfigsRequest
+
 	ListFunctionsRequest(*lambda.ListFunctionsInput) lambda.ListFunctionsRequest
 
 	ListLayerVersionsRequest(*lambda.ListLayerVersionsInput) lambda.ListLayerVersionsRequest
 
 	ListLayersRequest(*lambda.ListLayersInput) lambda.ListLayersRequest
+
+	ListProvisionedConcurrencyConfigsRequest(*lambda.ListProvisionedConcurrencyConfigsInput) lambda.ListProvisionedConcurrencyConfigsRequest
 
 	ListTagsRequest(*lambda.ListTagsInput) lambda.ListTagsRequest
 
@@ -121,6 +139,10 @@ type LambdaAPI interface {
 	PublishVersionRequest(*lambda.PublishVersionInput) lambda.PublishVersionRequest
 
 	PutFunctionConcurrencyRequest(*lambda.PutFunctionConcurrencyInput) lambda.PutFunctionConcurrencyRequest
+
+	PutFunctionEventInvokeConfigRequest(*lambda.PutFunctionEventInvokeConfigInput) lambda.PutFunctionEventInvokeConfigRequest
+
+	PutProvisionedConcurrencyConfigRequest(*lambda.PutProvisionedConcurrencyConfigInput) lambda.PutProvisionedConcurrencyConfigRequest
 
 	RemoveLayerVersionPermissionRequest(*lambda.RemoveLayerVersionPermissionInput) lambda.RemoveLayerVersionPermissionRequest
 
@@ -137,6 +159,14 @@ type LambdaAPI interface {
 	UpdateFunctionCodeRequest(*lambda.UpdateFunctionCodeInput) lambda.UpdateFunctionCodeRequest
 
 	UpdateFunctionConfigurationRequest(*lambda.UpdateFunctionConfigurationInput) lambda.UpdateFunctionConfigurationRequest
+
+	UpdateFunctionEventInvokeConfigRequest(*lambda.UpdateFunctionEventInvokeConfigInput) lambda.UpdateFunctionEventInvokeConfigRequest
+
+	WaitUntilFunctionActive(context.Context, *lambda.GetFunctionConfigurationInput, ...aws.WaiterOption) error
+
+	WaitUntilFunctionExists(context.Context, *lambda.GetFunctionInput, ...aws.WaiterOption) error
+
+	WaitUntilFunctionUpdated(context.Context, *lambda.GetFunctionConfigurationInput, ...aws.WaiterOption) error
 }
 
-var _ LambdaAPI = (*lambda.Lambda)(nil)
+var _ ClientAPI = (*lambda.Client)(nil)

@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/xray"
 )
 
-// XRayAPI provides an interface to enable mocking the
-// xray.XRay service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// xray.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS X-Ray.
-//    func myFunc(svc xrayiface.XRayAPI) bool {
+//    func myFunc(svc xrayiface.ClientAPI) bool {
 //        // Make svc.BatchGetTraces request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockXRayClient struct {
-//        xrayiface.XRayAPI
+//    type mockClientClient struct {
+//        xrayiface.ClientPI
 //    }
-//    func (m *mockXRayClient) BatchGetTraces(input *xray.BatchGetTracesInput) (*xray.BatchGetTracesOutput, error) {
+//    func (m *mockClientClient) BatchGetTraces(input *xray.BatchGetTracesInput) (*xray.BatchGetTracesOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockXRayClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type XRayAPI interface {
+type ClientAPI interface {
 	BatchGetTracesRequest(*xray.BatchGetTracesInput) xray.BatchGetTracesRequest
 
 	CreateGroupRequest(*xray.CreateGroupInput) xray.CreateGroupRequest
@@ -86,6 +85,8 @@ type XRayAPI interface {
 
 	GetServiceGraphRequest(*xray.GetServiceGraphInput) xray.GetServiceGraphRequest
 
+	GetTimeSeriesServiceStatisticsRequest(*xray.GetTimeSeriesServiceStatisticsInput) xray.GetTimeSeriesServiceStatisticsRequest
+
 	GetTraceGraphRequest(*xray.GetTraceGraphInput) xray.GetTraceGraphRequest
 
 	GetTraceSummariesRequest(*xray.GetTraceSummariesInput) xray.GetTraceSummariesRequest
@@ -101,4 +102,4 @@ type XRayAPI interface {
 	UpdateSamplingRuleRequest(*xray.UpdateSamplingRuleInput) xray.UpdateSamplingRuleRequest
 }
 
-var _ XRayAPI = (*xray.XRay)(nil)
+var _ ClientAPI = (*xray.Client)(nil)

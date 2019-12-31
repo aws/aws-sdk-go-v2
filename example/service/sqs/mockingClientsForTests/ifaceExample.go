@@ -47,7 +47,7 @@ func main() {
 
 // Queue provides the ability to handle SQS messages.
 type Queue struct {
-	Client sqsiface.SQSAPI
+	Client sqsiface.ClientAPI
 	URL    string
 }
 

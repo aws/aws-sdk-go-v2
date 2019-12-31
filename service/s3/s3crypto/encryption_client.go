@@ -20,7 +20,7 @@ const DefaultMinFileSize = 1024 * 512 * 5
 // AES GCM will load all data into memory. However, the rest of the content algorithms
 // do not load the entire contents into memory.
 type EncryptionClient struct {
-	S3Client             s3iface.S3API
+	S3Client             s3iface.ClientAPI
 	ContentCipherBuilder ContentCipherBuilder
 	// SaveStrategy will dictate where the envelope is saved.
 	//
@@ -72,12 +72,11 @@ func (c *EncryptionClient) PutObjectRequest(input *s3.PutObjectInput) s3.PutObje
 	req := c.S3Client.PutObjectRequest(input)
 
 	// Get Size of file
-	n, err := input.Body.Seek(0, 2)
+	n, err := aws.SeekerLen(input.Body)
 	if err != nil {
 		req.Error = err
 		return req
 	}
-	input.Body.Seek(0, 0)
 
 	dst, err := getWriterStore(req.Request, c.TempFolderPath, n >= c.MinFileSize)
 	if err != nil {
@@ -116,7 +115,7 @@ func (c *EncryptionClient) PutObjectRequest(input *s3.PutObjectInput) s3.PutObje
 		shaHex := hex.EncodeToString(sha.GetValue())
 		req.HTTPRequest.Header.Set("X-Amz-Content-Sha256", shaHex)
 
-		dst.Seek(0, 0)
+		dst.Seek(0, io.SeekStart)
 		input.Body = dst
 
 		err = c.SaveStrategy.Save(env, r)
@@ -129,7 +128,11 @@ func (c *EncryptionClient) PutObjectRequest(input *s3.PutObjectInput) s3.PutObje
 // PutObject is a wrapper for PutObjectRequest
 func (c *EncryptionClient) PutObject(input *s3.PutObjectInput) (*s3.PutObjectOutput, error) {
 	req := c.PutObjectRequest(input)
-	return req.Send(context.Background())
+	resp, err := req.Send(context.Background())
+	if err != nil {
+		return nil, err
+	}
+	return resp.PutObjectOutput, nil
 }
 
 // PutObjectWithContext is a wrapper for PutObjectRequest with the additional
@@ -142,5 +145,9 @@ func (c *EncryptionClient) PutObject(input *s3.PutObjectInput) (*s3.PutObjectOut
 func (c *EncryptionClient) PutObjectWithContext(ctx context.Context, input *s3.PutObjectInput, opts ...request.Option) (*s3.PutObjectOutput, error) {
 	req := c.PutObjectRequest(input)
 	req.ApplyOptions(opts...)
-	return req.Send(ctx)
+	resp, err := req.Send(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return resp.PutObjectOutput, nil
 }

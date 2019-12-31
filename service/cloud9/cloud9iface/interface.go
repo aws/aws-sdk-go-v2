@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloud9"
 )
 
-// Cloud9API provides an interface to enable mocking the
-// cloud9.Cloud9 service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// cloud9.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Cloud9.
-//    func myFunc(svc cloud9iface.Cloud9API) bool {
+//    func myFunc(svc cloud9iface.ClientAPI) bool {
 //        // Make svc.CreateEnvironmentEC2 request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloud9Client struct {
-//        cloud9iface.Cloud9API
+//    type mockClientClient struct {
+//        cloud9iface.ClientPI
 //    }
-//    func (m *mockCloud9Client) CreateEnvironmentEC2(input *cloud9.CreateEnvironmentEC2Input) (*cloud9.CreateEnvironmentEC2Output, error) {
+//    func (m *mockClientClient) CreateEnvironmentEC2(input *cloud9.CreateEnvironmentEC2Input) (*cloud9.CreateEnvironmentEC2Output, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockCloud9Client{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type Cloud9API interface {
+type ClientAPI interface {
 	CreateEnvironmentEC2Request(*cloud9.CreateEnvironmentEC2Input) cloud9.CreateEnvironmentEC2Request
 
 	CreateEnvironmentMembershipRequest(*cloud9.CreateEnvironmentMembershipInput) cloud9.CreateEnvironmentMembershipRequest
@@ -83,4 +82,4 @@ type Cloud9API interface {
 	UpdateEnvironmentMembershipRequest(*cloud9.UpdateEnvironmentMembershipInput) cloud9.UpdateEnvironmentMembershipRequest
 }
 
-var _ Cloud9API = (*cloud9.Cloud9)(nil)
+var _ ClientAPI = (*cloud9.Client)(nil)

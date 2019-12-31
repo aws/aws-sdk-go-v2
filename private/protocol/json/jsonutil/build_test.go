@@ -2,11 +2,11 @@ package jsonutil_test
 
 import (
 	"encoding/json"
+	"strings"
 	"testing"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/private/protocol/json/jsonutil"
-	"github.com/stretchr/testify/assert"
 )
 
 func S(s string) *string {
@@ -83,11 +83,19 @@ func TestBuildJSON(t *testing.T) {
 	for _, test := range jsonTests {
 		out, err := jsonutil.BuildJSON(test.in)
 		if test.err != "" {
-			assert.Error(t, err)
-			assert.Contains(t, err.Error(), test.err)
+			if err == nil {
+				t.Fatalf("expect error, got none")
+			}
+			if e, a := test.err, err.Error(); !strings.Contains(a, e) {
+				t.Errorf("expect %q, within %q", e, a)
+			}
 		} else {
-			assert.NoError(t, err)
-			assert.Equal(t, string(out), test.out)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			if e, a := test.out, string(out); e != a {
+				t.Errorf("expect %v output, got %v", e, a)
+			}
 		}
 	}
 }

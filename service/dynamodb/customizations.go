@@ -5,27 +5,15 @@ import (
 	"hash/crc32"
 	"io"
 	"io/ioutil"
-	"math"
 	"strconv"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	client "github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 )
 
-type retryer struct {
-	client.DefaultRetryer
-}
-
-func (d retryer) RetryRules(r *request.Request) time.Duration {
-	delay := time.Duration(math.Pow(2, float64(r.RetryCount))) * 50
-	return delay * time.Millisecond
-}
-
 func init() {
-	initClient = func(c *DynamoDB) {
+	initClient = func(c *Client) {
 		if c.Config.Retryer == nil {
 			// Only override the retryer with a custom one if the config
 			// does not already contain a retryer
@@ -36,7 +24,7 @@ func init() {
 		c.Handlers.Unmarshal.PushFrontNamed(validateCRC32Handler)
 	}
 
-	initRequest = func(c *DynamoDB, req *aws.Request) {
+	initRequest = func(c *Client, req *aws.Request) {
 		if c.DisableComputeChecksums {
 			// Checksum validation is off, remove the validator.
 			req.Handlers.Unmarshal.Remove(validateCRC32Handler)
@@ -44,12 +32,11 @@ func init() {
 	}
 }
 
-func setCustomRetryer(c *DynamoDB) {
-	c.Retryer = retryer{
-		DefaultRetryer: client.DefaultRetryer{
-			NumMaxRetries: 10,
-		},
-	}
+func setCustomRetryer(c *Client) {
+	c.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 10
+		d.MinRetryDelay = 50 * time.Millisecond
+	})
 }
 
 func drainBody(b io.ReadCloser, length int64) (out *bytes.Buffer, err error) {
@@ -69,13 +56,13 @@ func drainBody(b io.ReadCloser, length int64) (out *bytes.Buffer, err error) {
 
 var disableCompressionHandler = aws.NamedHandler{Name: "dynamodb.DisableCompression", Fn: disableCompression}
 
-func disableCompression(r *request.Request) {
+func disableCompression(r *aws.Request) {
 	r.HTTPRequest.Header.Set("Accept-Encoding", "identity")
 }
 
 var validateCRC32Handler = aws.NamedHandler{Name: "dynamodb.ValidateCRC32", Fn: validateCRC32}
 
-func validateCRC32(r *request.Request) {
+func validateCRC32(r *aws.Request) {
 	if r.Error != nil {
 		return // already have an error, no need to verify CRC
 	}

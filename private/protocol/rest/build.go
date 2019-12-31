@@ -322,7 +322,17 @@ func convertType(v reflect.Value, tag reflect.StructTag) (str string, err error)
 	case float64:
 		str = strconv.FormatFloat(value, 'f', -1, 64)
 	case time.Time:
-		str = value.UTC().Format(RFC822)
+		format := tag.Get("timestampFormat")
+		if len(format) == 0 {
+			format = protocol.RFC822TimeFormatName
+			if tag.Get("location") == "querystring" {
+				format = protocol.ISO8601TimeFormatName
+			}
+		}
+		str, err = protocol.FormatTime(format, value)
+		if err != nil {
+			return "", err
+		}
 	case aws.JSONValue:
 		if len(value) == 0 {
 			return "", &protocol.ErrValueNotSet{}

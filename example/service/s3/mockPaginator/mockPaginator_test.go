@@ -11,15 +11,15 @@ import (
 )
 
 type mockS3Client struct {
-	*s3.S3
+	*s3.Client
 	index   int
 	objects []s3.ListObjectsOutput
 }
 
 func (c *mockS3Client) ListObjectsRequest(input *s3.ListObjectsInput) s3.ListObjectsRequest {
-	req := c.S3.ListObjectsRequest(input)
+	req := c.Client.ListObjectsRequest(input)
 	req.Copy = func(v *s3.ListObjectsInput) s3.ListObjectsRequest {
-		r := c.S3.ListObjectsRequest(v)
+		r := c.Client.ListObjectsRequest(v)
 		r.Handlers.Clear()
 		r.Handlers.Send.PushBack(func(r *aws.Request) {
 			object := c.objects[c.index]
@@ -72,10 +72,16 @@ func TestListObjectsPagination(t *testing.T) {
 		},
 	}
 
-	svc.S3 = s3.New(defaults.Config())
+	cfg := defaults.Config()
+	cfg.Region = "us-west-2"
+
+	svc.Client = s3.New(cfg)
 	svc.objects = objects
 
-	keys := getKeys(svc, "foo")
+	keys, err := getKeys(svc, "foo")
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
 	expected := []string{"1", "2", "3"}
 
 	if e, a := 3, len(keys); e != a {

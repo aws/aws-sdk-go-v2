@@ -15,18 +15,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 )
 
-// DynamoDBAPI provides an interface to enable mocking the
-// dynamodb.DynamoDB service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// dynamodb.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // Amazon DynamoDB.
-//    func myFunc(svc dynamodbiface.DynamoDBAPI) bool {
+//    // DynamoDB.
+//    func myFunc(svc dynamodbiface.ClientAPI) bool {
 //        // Make svc.BatchGetItem request
 //    }
 //
@@ -44,16 +43,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockDynamoDBClient struct {
-//        dynamodbiface.DynamoDBAPI
+//    type mockClientClient struct {
+//        dynamodbiface.ClientPI
 //    }
-//    func (m *mockDynamoDBClient) BatchGetItem(input *dynamodb.BatchGetItemInput) (*dynamodb.BatchGetItemOutput, error) {
+//    func (m *mockClientClient) BatchGetItem(input *dynamodb.BatchGetItemInput) (*dynamodb.BatchGetItemOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockDynamoDBClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -64,7 +63,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type DynamoDBAPI interface {
+type ClientAPI interface {
 	BatchGetItemRequest(*dynamodb.BatchGetItemInput) dynamodb.BatchGetItemRequest
 
 	BatchWriteItemRequest(*dynamodb.BatchWriteItemInput) dynamodb.BatchWriteItemRequest
@@ -85,6 +84,8 @@ type DynamoDBAPI interface {
 
 	DescribeContinuousBackupsRequest(*dynamodb.DescribeContinuousBackupsInput) dynamodb.DescribeContinuousBackupsRequest
 
+	DescribeContributorInsightsRequest(*dynamodb.DescribeContributorInsightsInput) dynamodb.DescribeContributorInsightsRequest
+
 	DescribeEndpointsRequest(*dynamodb.DescribeEndpointsInput) dynamodb.DescribeEndpointsRequest
 
 	DescribeGlobalTableRequest(*dynamodb.DescribeGlobalTableInput) dynamodb.DescribeGlobalTableRequest
@@ -95,11 +96,15 @@ type DynamoDBAPI interface {
 
 	DescribeTableRequest(*dynamodb.DescribeTableInput) dynamodb.DescribeTableRequest
 
+	DescribeTableReplicaAutoScalingRequest(*dynamodb.DescribeTableReplicaAutoScalingInput) dynamodb.DescribeTableReplicaAutoScalingRequest
+
 	DescribeTimeToLiveRequest(*dynamodb.DescribeTimeToLiveInput) dynamodb.DescribeTimeToLiveRequest
 
 	GetItemRequest(*dynamodb.GetItemInput) dynamodb.GetItemRequest
 
 	ListBackupsRequest(*dynamodb.ListBackupsInput) dynamodb.ListBackupsRequest
+
+	ListContributorInsightsRequest(*dynamodb.ListContributorInsightsInput) dynamodb.ListContributorInsightsRequest
 
 	ListGlobalTablesRequest(*dynamodb.ListGlobalTablesInput) dynamodb.ListGlobalTablesRequest
 
@@ -127,6 +132,8 @@ type DynamoDBAPI interface {
 
 	UpdateContinuousBackupsRequest(*dynamodb.UpdateContinuousBackupsInput) dynamodb.UpdateContinuousBackupsRequest
 
+	UpdateContributorInsightsRequest(*dynamodb.UpdateContributorInsightsInput) dynamodb.UpdateContributorInsightsRequest
+
 	UpdateGlobalTableRequest(*dynamodb.UpdateGlobalTableInput) dynamodb.UpdateGlobalTableRequest
 
 	UpdateGlobalTableSettingsRequest(*dynamodb.UpdateGlobalTableSettingsInput) dynamodb.UpdateGlobalTableSettingsRequest
@@ -135,6 +142,8 @@ type DynamoDBAPI interface {
 
 	UpdateTableRequest(*dynamodb.UpdateTableInput) dynamodb.UpdateTableRequest
 
+	UpdateTableReplicaAutoScalingRequest(*dynamodb.UpdateTableReplicaAutoScalingInput) dynamodb.UpdateTableReplicaAutoScalingRequest
+
 	UpdateTimeToLiveRequest(*dynamodb.UpdateTimeToLiveInput) dynamodb.UpdateTimeToLiveRequest
 
 	WaitUntilTableExists(context.Context, *dynamodb.DescribeTableInput, ...aws.WaiterOption) error
@@ -142,4 +151,4 @@ type DynamoDBAPI interface {
 	WaitUntilTableNotExists(context.Context, *dynamodb.DescribeTableInput, ...aws.WaiterOption) error
 }
 
-var _ DynamoDBAPI = (*dynamodb.DynamoDB)(nil)
+var _ ClientAPI = (*dynamodb.Client)(nil)

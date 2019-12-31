@@ -15,10 +15,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/appstream"
 )
 
-// AppStreamAPI provides an interface to enable mocking the
-// appstream.AppStream service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// appstream.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -26,7 +25,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon AppStream.
-//    func myFunc(svc appstreamiface.AppStreamAPI) bool {
+//    func myFunc(svc appstreamiface.ClientAPI) bool {
 //        // Make svc.AssociateFleet request
 //    }
 //
@@ -44,16 +43,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockAppStreamClient struct {
-//        appstreamiface.AppStreamAPI
+//    type mockClientClient struct {
+//        appstreamiface.ClientPI
 //    }
-//    func (m *mockAppStreamClient) AssociateFleet(input *appstream.AssociateFleetInput) (*appstream.AssociateFleetOutput, error) {
+//    func (m *mockClientClient) AssociateFleet(input *appstream.AssociateFleetInput) (*appstream.AssociateFleetOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockAppStreamClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -64,7 +63,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type AppStreamAPI interface {
+type ClientAPI interface {
 	AssociateFleetRequest(*appstream.AssociateFleetInput) appstream.AssociateFleetRequest
 
 	BatchAssociateUserStackRequest(*appstream.BatchAssociateUserStackInput) appstream.BatchAssociateUserStackRequest
@@ -85,6 +84,8 @@ type AppStreamAPI interface {
 
 	CreateStreamingURLRequest(*appstream.CreateStreamingURLInput) appstream.CreateStreamingURLRequest
 
+	CreateUsageReportSubscriptionRequest(*appstream.CreateUsageReportSubscriptionInput) appstream.CreateUsageReportSubscriptionRequest
+
 	CreateUserRequest(*appstream.CreateUserInput) appstream.CreateUserRequest
 
 	DeleteDirectoryConfigRequest(*appstream.DeleteDirectoryConfigInput) appstream.DeleteDirectoryConfigRequest
@@ -98,6 +99,8 @@ type AppStreamAPI interface {
 	DeleteImagePermissionsRequest(*appstream.DeleteImagePermissionsInput) appstream.DeleteImagePermissionsRequest
 
 	DeleteStackRequest(*appstream.DeleteStackInput) appstream.DeleteStackRequest
+
+	DeleteUsageReportSubscriptionRequest(*appstream.DeleteUsageReportSubscriptionInput) appstream.DeleteUsageReportSubscriptionRequest
 
 	DeleteUserRequest(*appstream.DeleteUserInput) appstream.DeleteUserRequest
 
@@ -114,6 +117,8 @@ type AppStreamAPI interface {
 	DescribeSessionsRequest(*appstream.DescribeSessionsInput) appstream.DescribeSessionsRequest
 
 	DescribeStacksRequest(*appstream.DescribeStacksInput) appstream.DescribeStacksRequest
+
+	DescribeUsageReportSubscriptionsRequest(*appstream.DescribeUsageReportSubscriptionsInput) appstream.DescribeUsageReportSubscriptionsRequest
 
 	DescribeUserStackAssociationsRequest(*appstream.DescribeUserStackAssociationsInput) appstream.DescribeUserStackAssociationsRequest
 
@@ -158,4 +163,4 @@ type AppStreamAPI interface {
 	WaitUntilFleetStopped(context.Context, *appstream.DescribeFleetsInput, ...aws.WaiterOption) error
 }
 
-var _ AppStreamAPI = (*appstream.AppStream)(nil)
+var _ ClientAPI = (*appstream.Client)(nil)

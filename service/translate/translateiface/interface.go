@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/translate"
 )
 
-// TranslateAPI provides an interface to enable mocking the
-// translate.Translate service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// translate.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Translate.
-//    func myFunc(svc translateiface.TranslateAPI) bool {
+//    func myFunc(svc translateiface.ClientAPI) bool {
 //        // Make svc.DeleteTerminology request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockTranslateClient struct {
-//        translateiface.TranslateAPI
+//    type mockClientClient struct {
+//        translateiface.ClientPI
 //    }
-//    func (m *mockTranslateClient) DeleteTerminology(input *translate.DeleteTerminologyInput) (*translate.DeleteTerminologyOutput, error) {
+//    func (m *mockClientClient) DeleteTerminology(input *translate.DeleteTerminologyInput) (*translate.DeleteTerminologyOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockTranslateClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type TranslateAPI interface {
+type ClientAPI interface {
 	DeleteTerminologyRequest(*translate.DeleteTerminologyInput) translate.DeleteTerminologyRequest
 
 	GetTerminologyRequest(*translate.GetTerminologyInput) translate.GetTerminologyRequest
@@ -70,7 +69,7 @@ type TranslateAPI interface {
 
 	ListTerminologiesRequest(*translate.ListTerminologiesInput) translate.ListTerminologiesRequest
 
-	TextRequest(*translate.TextInput) translate.TextRequest
+	TranslateTextRequest(*translate.TranslateTextInput) translate.TranslateTextRequest
 }
 
-var _ TranslateAPI = (*translate.Translate)(nil)
+var _ ClientAPI = (*translate.Client)(nil)

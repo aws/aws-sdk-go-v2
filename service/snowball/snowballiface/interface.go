@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/snowball"
 )
 
-// SnowballAPI provides an interface to enable mocking the
-// snowball.Snowball service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// snowball.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // Amazon Import/Export Snowball.
-//    func myFunc(svc snowballiface.SnowballAPI) bool {
+//    // Amazon Snowball.
+//    func myFunc(svc snowballiface.ClientAPI) bool {
 //        // Make svc.CancelCluster request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSnowballClient struct {
-//        snowballiface.SnowballAPI
+//    type mockClientClient struct {
+//        snowballiface.ClientPI
 //    }
-//    func (m *mockSnowballClient) CancelCluster(input *snowball.CancelClusterInput) (*snowball.CancelClusterOutput, error) {
+//    func (m *mockClientClient) CancelCluster(input *snowball.CancelClusterInput) (*snowball.CancelClusterOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockSnowballClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type SnowballAPI interface {
+type ClientAPI interface {
 	CancelClusterRequest(*snowball.CancelClusterInput) snowball.CancelClusterRequest
 
 	CancelJobRequest(*snowball.CancelJobInput) snowball.CancelJobRequest
@@ -86,6 +85,8 @@ type SnowballAPI interface {
 
 	GetSnowballUsageRequest(*snowball.GetSnowballUsageInput) snowball.GetSnowballUsageRequest
 
+	GetSoftwareUpdatesRequest(*snowball.GetSoftwareUpdatesInput) snowball.GetSoftwareUpdatesRequest
+
 	ListClusterJobsRequest(*snowball.ListClusterJobsInput) snowball.ListClusterJobsRequest
 
 	ListClustersRequest(*snowball.ListClustersInput) snowball.ListClustersRequest
@@ -99,4 +100,4 @@ type SnowballAPI interface {
 	UpdateJobRequest(*snowball.UpdateJobInput) snowball.UpdateJobRequest
 }
 
-var _ SnowballAPI = (*snowball.Snowball)(nil)
+var _ ClientAPI = (*snowball.Client)(nil)

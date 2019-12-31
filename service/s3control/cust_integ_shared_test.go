@@ -19,7 +19,7 @@ import (
 )
 
 var (
-	svc                            *s3control.S3Control
+	svc                            *s3control.Client
 	s3ControlEndpoint, stsEndpoint string
 	accountID                      string
 	insecureTLS, useDualstack      bool
@@ -41,12 +41,11 @@ func init() {
 	flag.StringVar(&accountID, "account", "",
 		"The AWS account `ID`.",
 	)
-	flag.Parse()
 }
 
 func TestMain(m *testing.M) {
 	setup()
-
+	flag.Parse()
 	os.Exit(m.Run())
 }
 

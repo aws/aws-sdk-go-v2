@@ -9,21 +9,23 @@
 package medialiveiface
 
 import (
+	"context"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/medialive"
 )
 
-// MediaLiveAPI provides an interface to enable mocking the
-// medialive.MediaLive service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// medialive.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS Elemental MediaLive.
-//    func myFunc(svc medialiveiface.MediaLiveAPI) bool {
+//    // MediaLive.
+//    func myFunc(svc medialiveiface.ClientAPI) bool {
 //        // Make svc.BatchUpdateSchedule request
 //    }
 //
@@ -41,16 +43,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockMediaLiveClient struct {
-//        medialiveiface.MediaLiveAPI
+//    type mockClientClient struct {
+//        medialiveiface.ClientPI
 //    }
-//    func (m *mockMediaLiveClient) BatchUpdateSchedule(input *medialive.BatchUpdateScheduleInput) (*medialive.BatchUpdateScheduleOutput, error) {
+//    func (m *mockClientClient) BatchUpdateSchedule(input *medialive.BatchUpdateScheduleInput) (*medialive.BatchUpdateScheduleOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockMediaLiveClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +63,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type MediaLiveAPI interface {
+type ClientAPI interface {
 	BatchUpdateScheduleRequest(*medialive.BatchUpdateScheduleInput) medialive.BatchUpdateScheduleRequest
 
 	CreateChannelRequest(*medialive.CreateChannelInput) medialive.CreateChannelRequest
@@ -70,19 +72,37 @@ type MediaLiveAPI interface {
 
 	CreateInputSecurityGroupRequest(*medialive.CreateInputSecurityGroupInput) medialive.CreateInputSecurityGroupRequest
 
+	CreateMultiplexRequest(*medialive.CreateMultiplexInput) medialive.CreateMultiplexRequest
+
+	CreateMultiplexProgramRequest(*medialive.CreateMultiplexProgramInput) medialive.CreateMultiplexProgramRequest
+
+	CreateTagsRequest(*medialive.CreateTagsInput) medialive.CreateTagsRequest
+
 	DeleteChannelRequest(*medialive.DeleteChannelInput) medialive.DeleteChannelRequest
 
 	DeleteInputRequest(*medialive.DeleteInputInput) medialive.DeleteInputRequest
 
 	DeleteInputSecurityGroupRequest(*medialive.DeleteInputSecurityGroupInput) medialive.DeleteInputSecurityGroupRequest
 
+	DeleteMultiplexRequest(*medialive.DeleteMultiplexInput) medialive.DeleteMultiplexRequest
+
+	DeleteMultiplexProgramRequest(*medialive.DeleteMultiplexProgramInput) medialive.DeleteMultiplexProgramRequest
+
 	DeleteReservationRequest(*medialive.DeleteReservationInput) medialive.DeleteReservationRequest
+
+	DeleteScheduleRequest(*medialive.DeleteScheduleInput) medialive.DeleteScheduleRequest
+
+	DeleteTagsRequest(*medialive.DeleteTagsInput) medialive.DeleteTagsRequest
 
 	DescribeChannelRequest(*medialive.DescribeChannelInput) medialive.DescribeChannelRequest
 
 	DescribeInputRequest(*medialive.DescribeInputInput) medialive.DescribeInputRequest
 
 	DescribeInputSecurityGroupRequest(*medialive.DescribeInputSecurityGroupInput) medialive.DescribeInputSecurityGroupRequest
+
+	DescribeMultiplexRequest(*medialive.DescribeMultiplexInput) medialive.DescribeMultiplexRequest
+
+	DescribeMultiplexProgramRequest(*medialive.DescribeMultiplexProgramInput) medialive.DescribeMultiplexProgramRequest
 
 	DescribeOfferingRequest(*medialive.DescribeOfferingInput) medialive.DescribeOfferingRequest
 
@@ -96,21 +116,55 @@ type MediaLiveAPI interface {
 
 	ListInputsRequest(*medialive.ListInputsInput) medialive.ListInputsRequest
 
+	ListMultiplexProgramsRequest(*medialive.ListMultiplexProgramsInput) medialive.ListMultiplexProgramsRequest
+
+	ListMultiplexesRequest(*medialive.ListMultiplexesInput) medialive.ListMultiplexesRequest
+
 	ListOfferingsRequest(*medialive.ListOfferingsInput) medialive.ListOfferingsRequest
 
 	ListReservationsRequest(*medialive.ListReservationsInput) medialive.ListReservationsRequest
+
+	ListTagsForResourceRequest(*medialive.ListTagsForResourceInput) medialive.ListTagsForResourceRequest
 
 	PurchaseOfferingRequest(*medialive.PurchaseOfferingInput) medialive.PurchaseOfferingRequest
 
 	StartChannelRequest(*medialive.StartChannelInput) medialive.StartChannelRequest
 
+	StartMultiplexRequest(*medialive.StartMultiplexInput) medialive.StartMultiplexRequest
+
 	StopChannelRequest(*medialive.StopChannelInput) medialive.StopChannelRequest
 
+	StopMultiplexRequest(*medialive.StopMultiplexInput) medialive.StopMultiplexRequest
+
 	UpdateChannelRequest(*medialive.UpdateChannelInput) medialive.UpdateChannelRequest
+
+	UpdateChannelClassRequest(*medialive.UpdateChannelClassInput) medialive.UpdateChannelClassRequest
 
 	UpdateInputRequest(*medialive.UpdateInputInput) medialive.UpdateInputRequest
 
 	UpdateInputSecurityGroupRequest(*medialive.UpdateInputSecurityGroupInput) medialive.UpdateInputSecurityGroupRequest
+
+	UpdateMultiplexRequest(*medialive.UpdateMultiplexInput) medialive.UpdateMultiplexRequest
+
+	UpdateMultiplexProgramRequest(*medialive.UpdateMultiplexProgramInput) medialive.UpdateMultiplexProgramRequest
+
+	UpdateReservationRequest(*medialive.UpdateReservationInput) medialive.UpdateReservationRequest
+
+	WaitUntilChannelCreated(context.Context, *medialive.DescribeChannelInput, ...aws.WaiterOption) error
+
+	WaitUntilChannelDeleted(context.Context, *medialive.DescribeChannelInput, ...aws.WaiterOption) error
+
+	WaitUntilChannelRunning(context.Context, *medialive.DescribeChannelInput, ...aws.WaiterOption) error
+
+	WaitUntilChannelStopped(context.Context, *medialive.DescribeChannelInput, ...aws.WaiterOption) error
+
+	WaitUntilMultiplexCreated(context.Context, *medialive.DescribeMultiplexInput, ...aws.WaiterOption) error
+
+	WaitUntilMultiplexDeleted(context.Context, *medialive.DescribeMultiplexInput, ...aws.WaiterOption) error
+
+	WaitUntilMultiplexRunning(context.Context, *medialive.DescribeMultiplexInput, ...aws.WaiterOption) error
+
+	WaitUntilMultiplexStopped(context.Context, *medialive.DescribeMultiplexInput, ...aws.WaiterOption) error
 }
 
-var _ MediaLiveAPI = (*medialive.MediaLive)(nil)
+var _ ClientAPI = (*medialive.Client)(nil)

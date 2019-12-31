@@ -15,18 +15,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/signer"
 )
 
-// SignerAPI provides an interface to enable mocking the
-// signer.Signer service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// signer.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS Signer.
-//    func myFunc(svc signeriface.SignerAPI) bool {
+//    // signer.
+//    func myFunc(svc signeriface.ClientAPI) bool {
 //        // Make svc.CancelSigningProfile request
 //    }
 //
@@ -44,16 +43,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSignerClient struct {
-//        signeriface.SignerAPI
+//    type mockClientClient struct {
+//        signeriface.ClientPI
 //    }
-//    func (m *mockSignerClient) CancelSigningProfile(input *signer.CancelSigningProfileInput) (*signer.CancelSigningProfileOutput, error) {
+//    func (m *mockClientClient) CancelSigningProfile(input *signer.CancelSigningProfileInput) (*signer.CancelSigningProfileOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockSignerClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -64,7 +63,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type SignerAPI interface {
+type ClientAPI interface {
 	CancelSigningProfileRequest(*signer.CancelSigningProfileInput) signer.CancelSigningProfileRequest
 
 	DescribeSigningJobRequest(*signer.DescribeSigningJobInput) signer.DescribeSigningJobRequest
@@ -79,11 +78,17 @@ type SignerAPI interface {
 
 	ListSigningProfilesRequest(*signer.ListSigningProfilesInput) signer.ListSigningProfilesRequest
 
+	ListTagsForResourceRequest(*signer.ListTagsForResourceInput) signer.ListTagsForResourceRequest
+
 	PutSigningProfileRequest(*signer.PutSigningProfileInput) signer.PutSigningProfileRequest
 
 	StartSigningJobRequest(*signer.StartSigningJobInput) signer.StartSigningJobRequest
 
+	TagResourceRequest(*signer.TagResourceInput) signer.TagResourceRequest
+
+	UntagResourceRequest(*signer.UntagResourceInput) signer.UntagResourceRequest
+
 	WaitUntilSuccessfulSigningJob(context.Context, *signer.DescribeSigningJobInput, ...aws.WaiterOption) error
 }
 
-var _ SignerAPI = (*signer.Signer)(nil)
+var _ ClientAPI = (*signer.Client)(nil)

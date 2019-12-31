@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/mobile"
 )
 
-// MobileAPI provides an interface to enable mocking the
-// mobile.Mobile service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// mobile.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Mobile.
-//    func myFunc(svc mobileiface.MobileAPI) bool {
+//    func myFunc(svc mobileiface.ClientAPI) bool {
 //        // Make svc.CreateProject request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockMobileClient struct {
-//        mobileiface.MobileAPI
+//    type mockClientClient struct {
+//        mobileiface.ClientPI
 //    }
-//    func (m *mockMobileClient) CreateProject(input *mobile.CreateProjectInput) (*mobile.CreateProjectOutput, error) {
+//    func (m *mockClientClient) CreateProject(input *mobile.CreateProjectInput) (*mobile.CreateProjectOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockMobileClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type MobileAPI interface {
+type ClientAPI interface {
 	CreateProjectRequest(*mobile.CreateProjectInput) mobile.CreateProjectRequest
 
 	DeleteProjectRequest(*mobile.DeleteProjectInput) mobile.DeleteProjectRequest
@@ -81,4 +80,4 @@ type MobileAPI interface {
 	UpdateProjectRequest(*mobile.UpdateProjectInput) mobile.UpdateProjectRequest
 }
 
-var _ MobileAPI = (*mobile.Mobile)(nil)
+var _ ClientAPI = (*mobile.Client)(nil)

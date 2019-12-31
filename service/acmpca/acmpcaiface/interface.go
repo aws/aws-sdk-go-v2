@@ -15,18 +15,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/acmpca"
 )
 
-// ACMPCAAPI provides an interface to enable mocking the
-// acmpca.ACMPCA service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// acmpca.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS Certificate Manager Private Certificate Authority.
-//    func myFunc(svc acmpcaiface.ACMPCAAPI) bool {
+//    // ACM-PCA.
+//    func myFunc(svc acmpcaiface.ClientAPI) bool {
 //        // Make svc.CreateCertificateAuthority request
 //    }
 //
@@ -44,16 +43,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockACMPCAClient struct {
-//        acmpcaiface.ACMPCAAPI
+//    type mockClientClient struct {
+//        acmpcaiface.ClientPI
 //    }
-//    func (m *mockACMPCAClient) CreateCertificateAuthority(input *acmpca.CreateCertificateAuthorityInput) (*acmpca.CreateCertificateAuthorityOutput, error) {
+//    func (m *mockClientClient) CreateCertificateAuthority(input *acmpca.CreateCertificateAuthorityInput) (*acmpca.CreateCertificateAuthorityOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockACMPCAClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -64,12 +63,16 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type ACMPCAAPI interface {
+type ClientAPI interface {
 	CreateCertificateAuthorityRequest(*acmpca.CreateCertificateAuthorityInput) acmpca.CreateCertificateAuthorityRequest
 
 	CreateCertificateAuthorityAuditReportRequest(*acmpca.CreateCertificateAuthorityAuditReportInput) acmpca.CreateCertificateAuthorityAuditReportRequest
 
+	CreatePermissionRequest(*acmpca.CreatePermissionInput) acmpca.CreatePermissionRequest
+
 	DeleteCertificateAuthorityRequest(*acmpca.DeleteCertificateAuthorityInput) acmpca.DeleteCertificateAuthorityRequest
+
+	DeletePermissionRequest(*acmpca.DeletePermissionInput) acmpca.DeletePermissionRequest
 
 	DescribeCertificateAuthorityRequest(*acmpca.DescribeCertificateAuthorityInput) acmpca.DescribeCertificateAuthorityRequest
 
@@ -86,6 +89,8 @@ type ACMPCAAPI interface {
 	IssueCertificateRequest(*acmpca.IssueCertificateInput) acmpca.IssueCertificateRequest
 
 	ListCertificateAuthoritiesRequest(*acmpca.ListCertificateAuthoritiesInput) acmpca.ListCertificateAuthoritiesRequest
+
+	ListPermissionsRequest(*acmpca.ListPermissionsInput) acmpca.ListPermissionsRequest
 
 	ListTagsRequest(*acmpca.ListTagsInput) acmpca.ListTagsRequest
 
@@ -106,4 +111,4 @@ type ACMPCAAPI interface {
 	WaitUntilCertificateIssued(context.Context, *acmpca.GetCertificateInput, ...aws.WaiterOption) error
 }
 
-var _ ACMPCAAPI = (*acmpca.ACMPCA)(nil)
+var _ ClientAPI = (*acmpca.Client)(nil)

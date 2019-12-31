@@ -15,7 +15,7 @@ const (
 
 // kmsKeyHandler will make calls to KMS to get the masterkey
 type kmsKeyHandler struct {
-	kms   kmsiface.KMSAPI
+	kms   kmsiface.ClientAPI
 	cmkID string
 
 	CipherData
@@ -29,7 +29,7 @@ type kmsKeyHandler struct {
 //	cmkID := "arn to key"
 //	matdesc := s3crypto.MaterialDescription{}
 //	handler := s3crypto.NewKMSKeyGenerator(kms.New(cfg), cmkID)
-func NewKMSKeyGenerator(kmsClient kmsiface.KMSAPI, cmkID string) CipherDataGenerator {
+func NewKMSKeyGenerator(kmsClient kmsiface.ClientAPI, cmkID string) CipherDataGenerator {
 	return NewKMSKeyGeneratorWithMatDesc(kmsClient, cmkID, MaterialDescription{})
 }
 
@@ -41,7 +41,7 @@ func NewKMSKeyGenerator(kmsClient kmsiface.KMSAPI, cmkID string) CipherDataGener
 //	cmkID := "arn to key"
 //	matdesc := s3crypto.MaterialDescription{}
 //	handler, err := s3crypto.NewKMSKeyGeneratorWithMatDesc(kms.New(cfg), cmkID, matdesc)
-func NewKMSKeyGeneratorWithMatDesc(kmsClient kmsiface.KMSAPI, cmkID string, matdesc MaterialDescription) CipherDataGenerator {
+func NewKMSKeyGeneratorWithMatDesc(kmsClient kmsiface.ClientAPI, cmkID string, matdesc MaterialDescription) CipherDataGenerator {
 	if matdesc == nil {
 		matdesc = MaterialDescription{}
 	}

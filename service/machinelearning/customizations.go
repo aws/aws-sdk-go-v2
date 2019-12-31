@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	initRequest = func(c *MachineLearning, r *aws.Request) {
+	initRequest = func(c *Client, r *aws.Request) {
 		switch r.Operation.Name {
 		case opPredict:
 			r.Handlers.Build.PushBack(updatePredictEndpoint)

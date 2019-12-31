@@ -48,16 +48,10 @@ const bucketRegionHeader = "X-Amz-Bucket-Region"
 // derived from the region the S3 service client was created in.
 //
 // See GetBucketRegion for more information.
-func GetBucketRegionWithClient(ctx context.Context, svc s3iface.S3API, bucket string, opts ...aws.Option) (string, error) {
+func GetBucketRegionWithClient(ctx context.Context, svc s3iface.ClientAPI, bucket string, opts ...aws.Option) (string, error) {
 	req := svc.HeadBucketRequest(&s3.HeadBucketInput{
 		Bucket: aws.String(bucket),
 	})
-
-	// Disable HTTP redirects to prevent an invalid 301 from eating the response
-	// because Go's HTTP client will fail, and drop the response if an 301 is
-	// received without a location header. S3 will return a 301 without the
-	// location header for HeadObject API calls.
-	req.DisableFollowRedirects = true
 
 	var bucketRegion string
 	req.Handlers.Send.PushBack(func(r *aws.Request) {

@@ -88,7 +88,7 @@ func loadConfig() (addr, bucket, region string) {
 	return addr, bucket, region
 }
 
-func listenAndServe(addr, bucket string, svc s3iface.S3API) error {
+func listenAndServe(addr, bucket string, svc s3iface.ClientAPI) error {
 	l, err := net.Listen("tcp", addr)
 	if err != nil {
 		return fmt.Errorf("failed to start service listener, %v", err)

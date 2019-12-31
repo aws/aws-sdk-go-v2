@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice"
 )
 
-// IoT1ClickDevicesServiceAPI provides an interface to enable mocking the
-// iot1clickdevicesservice.IoT1ClickDevicesService service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// iot1clickdevicesservice.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS IoT 1-Click Devices Service.
-//    func myFunc(svc iot1clickdevicesserviceiface.IoT1ClickDevicesServiceAPI) bool {
+//    func myFunc(svc iot1clickdevicesserviceiface.ClientAPI) bool {
 //        // Make svc.ClaimDevicesByClaimCode request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockIoT1ClickDevicesServiceClient struct {
-//        iot1clickdevicesserviceiface.IoT1ClickDevicesServiceAPI
+//    type mockClientClient struct {
+//        iot1clickdevicesserviceiface.ClientPI
 //    }
-//    func (m *mockIoT1ClickDevicesServiceClient) ClaimDevicesByClaimCode(input *iot1clickdevicesservice.ClaimDevicesByClaimCodeInput) (*iot1clickdevicesservice.ClaimDevicesByClaimCodeOutput, error) {
+//    func (m *mockClientClient) ClaimDevicesByClaimCode(input *iot1clickdevicesservice.ClaimDevicesByClaimCodeInput) (*iot1clickdevicesservice.ClaimDevicesByClaimCodeOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockIoT1ClickDevicesServiceClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type IoT1ClickDevicesServiceAPI interface {
+type ClientAPI interface {
 	ClaimDevicesByClaimCodeRequest(*iot1clickdevicesservice.ClaimDevicesByClaimCodeInput) iot1clickdevicesservice.ClaimDevicesByClaimCodeRequest
 
 	DescribeDeviceRequest(*iot1clickdevicesservice.DescribeDeviceInput) iot1clickdevicesservice.DescribeDeviceRequest
@@ -78,9 +77,15 @@ type IoT1ClickDevicesServiceAPI interface {
 
 	ListDevicesRequest(*iot1clickdevicesservice.ListDevicesInput) iot1clickdevicesservice.ListDevicesRequest
 
+	ListTagsForResourceRequest(*iot1clickdevicesservice.ListTagsForResourceInput) iot1clickdevicesservice.ListTagsForResourceRequest
+
+	TagResourceRequest(*iot1clickdevicesservice.TagResourceInput) iot1clickdevicesservice.TagResourceRequest
+
 	UnclaimDeviceRequest(*iot1clickdevicesservice.UnclaimDeviceInput) iot1clickdevicesservice.UnclaimDeviceRequest
+
+	UntagResourceRequest(*iot1clickdevicesservice.UntagResourceInput) iot1clickdevicesservice.UntagResourceRequest
 
 	UpdateDeviceStateRequest(*iot1clickdevicesservice.UpdateDeviceStateInput) iot1clickdevicesservice.UpdateDeviceStateRequest
 }
 
-var _ IoT1ClickDevicesServiceAPI = (*iot1clickdevicesservice.IoT1ClickDevicesService)(nil)
+var _ ClientAPI = (*iot1clickdevicesservice.Client)(nil)

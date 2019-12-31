@@ -12,19 +12,18 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/codecommit"
 )
 
-// CodeCommitAPI provides an interface to enable mocking the
-// codecommit.CodeCommit service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// codecommit.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS CodeCommit.
-//    func myFunc(svc codecommitiface.CodeCommitAPI) bool {
-//        // Make svc.BatchGetRepositories request
+//    // CodeCommit.
+//    func myFunc(svc codecommitiface.ClientAPI) bool {
+//        // Make svc.AssociateApprovalRuleTemplateWithRepository request
 //    }
 //
 //    func main() {
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCodeCommitClient struct {
-//        codecommitiface.CodeCommitAPI
+//    type mockClientClient struct {
+//        codecommitiface.ClientPI
 //    }
-//    func (m *mockCodeCommitClient) BatchGetRepositories(input *codecommit.BatchGetRepositoriesInput) (*codecommit.BatchGetRepositoriesOutput, error) {
+//    func (m *mockClientClient) AssociateApprovalRuleTemplateWithRepository(input *codecommit.AssociateApprovalRuleTemplateWithRepositoryInput) (*codecommit.AssociateApprovalRuleTemplateWithRepositoryOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockCodeCommitClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,14 +60,34 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type CodeCommitAPI interface {
+type ClientAPI interface {
+	AssociateApprovalRuleTemplateWithRepositoryRequest(*codecommit.AssociateApprovalRuleTemplateWithRepositoryInput) codecommit.AssociateApprovalRuleTemplateWithRepositoryRequest
+
+	BatchAssociateApprovalRuleTemplateWithRepositoriesRequest(*codecommit.BatchAssociateApprovalRuleTemplateWithRepositoriesInput) codecommit.BatchAssociateApprovalRuleTemplateWithRepositoriesRequest
+
+	BatchDescribeMergeConflictsRequest(*codecommit.BatchDescribeMergeConflictsInput) codecommit.BatchDescribeMergeConflictsRequest
+
+	BatchDisassociateApprovalRuleTemplateFromRepositoriesRequest(*codecommit.BatchDisassociateApprovalRuleTemplateFromRepositoriesInput) codecommit.BatchDisassociateApprovalRuleTemplateFromRepositoriesRequest
+
+	BatchGetCommitsRequest(*codecommit.BatchGetCommitsInput) codecommit.BatchGetCommitsRequest
+
 	BatchGetRepositoriesRequest(*codecommit.BatchGetRepositoriesInput) codecommit.BatchGetRepositoriesRequest
+
+	CreateApprovalRuleTemplateRequest(*codecommit.CreateApprovalRuleTemplateInput) codecommit.CreateApprovalRuleTemplateRequest
 
 	CreateBranchRequest(*codecommit.CreateBranchInput) codecommit.CreateBranchRequest
 
+	CreateCommitRequest(*codecommit.CreateCommitInput) codecommit.CreateCommitRequest
+
 	CreatePullRequestRequest(*codecommit.CreatePullRequestInput) codecommit.CreatePullRequestRequest
 
+	CreatePullRequestApprovalRuleRequest(*codecommit.CreatePullRequestApprovalRuleInput) codecommit.CreatePullRequestApprovalRuleRequest
+
 	CreateRepositoryRequest(*codecommit.CreateRepositoryInput) codecommit.CreateRepositoryRequest
+
+	CreateUnreferencedMergeCommitRequest(*codecommit.CreateUnreferencedMergeCommitInput) codecommit.CreateUnreferencedMergeCommitRequest
+
+	DeleteApprovalRuleTemplateRequest(*codecommit.DeleteApprovalRuleTemplateInput) codecommit.DeleteApprovalRuleTemplateRequest
 
 	DeleteBranchRequest(*codecommit.DeleteBranchInput) codecommit.DeleteBranchRequest
 
@@ -76,9 +95,19 @@ type CodeCommitAPI interface {
 
 	DeleteFileRequest(*codecommit.DeleteFileInput) codecommit.DeleteFileRequest
 
+	DeletePullRequestApprovalRuleRequest(*codecommit.DeletePullRequestApprovalRuleInput) codecommit.DeletePullRequestApprovalRuleRequest
+
 	DeleteRepositoryRequest(*codecommit.DeleteRepositoryInput) codecommit.DeleteRepositoryRequest
 
+	DescribeMergeConflictsRequest(*codecommit.DescribeMergeConflictsInput) codecommit.DescribeMergeConflictsRequest
+
 	DescribePullRequestEventsRequest(*codecommit.DescribePullRequestEventsInput) codecommit.DescribePullRequestEventsRequest
+
+	DisassociateApprovalRuleTemplateFromRepositoryRequest(*codecommit.DisassociateApprovalRuleTemplateFromRepositoryInput) codecommit.DisassociateApprovalRuleTemplateFromRepositoryRequest
+
+	EvaluatePullRequestApprovalRulesRequest(*codecommit.EvaluatePullRequestApprovalRulesInput) codecommit.EvaluatePullRequestApprovalRulesRequest
+
+	GetApprovalRuleTemplateRequest(*codecommit.GetApprovalRuleTemplateInput) codecommit.GetApprovalRuleTemplateRequest
 
 	GetBlobRequest(*codecommit.GetBlobInput) codecommit.GetBlobRequest
 
@@ -98,13 +127,25 @@ type CodeCommitAPI interface {
 
 	GetFolderRequest(*codecommit.GetFolderInput) codecommit.GetFolderRequest
 
+	GetMergeCommitRequest(*codecommit.GetMergeCommitInput) codecommit.GetMergeCommitRequest
+
 	GetMergeConflictsRequest(*codecommit.GetMergeConflictsInput) codecommit.GetMergeConflictsRequest
 
+	GetMergeOptionsRequest(*codecommit.GetMergeOptionsInput) codecommit.GetMergeOptionsRequest
+
 	GetPullRequestRequest(*codecommit.GetPullRequestInput) codecommit.GetPullRequestRequest
+
+	GetPullRequestApprovalStatesRequest(*codecommit.GetPullRequestApprovalStatesInput) codecommit.GetPullRequestApprovalStatesRequest
+
+	GetPullRequestOverrideStateRequest(*codecommit.GetPullRequestOverrideStateInput) codecommit.GetPullRequestOverrideStateRequest
 
 	GetRepositoryRequest(*codecommit.GetRepositoryInput) codecommit.GetRepositoryRequest
 
 	GetRepositoryTriggersRequest(*codecommit.GetRepositoryTriggersInput) codecommit.GetRepositoryTriggersRequest
+
+	ListApprovalRuleTemplatesRequest(*codecommit.ListApprovalRuleTemplatesInput) codecommit.ListApprovalRuleTemplatesRequest
+
+	ListAssociatedApprovalRuleTemplatesForRepositoryRequest(*codecommit.ListAssociatedApprovalRuleTemplatesForRepositoryInput) codecommit.ListAssociatedApprovalRuleTemplatesForRepositoryRequest
 
 	ListBranchesRequest(*codecommit.ListBranchesInput) codecommit.ListBranchesRequest
 
@@ -112,7 +153,23 @@ type CodeCommitAPI interface {
 
 	ListRepositoriesRequest(*codecommit.ListRepositoriesInput) codecommit.ListRepositoriesRequest
 
+	ListRepositoriesForApprovalRuleTemplateRequest(*codecommit.ListRepositoriesForApprovalRuleTemplateInput) codecommit.ListRepositoriesForApprovalRuleTemplateRequest
+
+	ListTagsForResourceRequest(*codecommit.ListTagsForResourceInput) codecommit.ListTagsForResourceRequest
+
+	MergeBranchesByFastForwardRequest(*codecommit.MergeBranchesByFastForwardInput) codecommit.MergeBranchesByFastForwardRequest
+
+	MergeBranchesBySquashRequest(*codecommit.MergeBranchesBySquashInput) codecommit.MergeBranchesBySquashRequest
+
+	MergeBranchesByThreeWayRequest(*codecommit.MergeBranchesByThreeWayInput) codecommit.MergeBranchesByThreeWayRequest
+
 	MergePullRequestByFastForwardRequest(*codecommit.MergePullRequestByFastForwardInput) codecommit.MergePullRequestByFastForwardRequest
+
+	MergePullRequestBySquashRequest(*codecommit.MergePullRequestBySquashInput) codecommit.MergePullRequestBySquashRequest
+
+	MergePullRequestByThreeWayRequest(*codecommit.MergePullRequestByThreeWayInput) codecommit.MergePullRequestByThreeWayRequest
+
+	OverridePullRequestApprovalRulesRequest(*codecommit.OverridePullRequestApprovalRulesInput) codecommit.OverridePullRequestApprovalRulesRequest
 
 	PostCommentForComparedCommitRequest(*codecommit.PostCommentForComparedCommitInput) codecommit.PostCommentForComparedCommitRequest
 
@@ -124,11 +181,25 @@ type CodeCommitAPI interface {
 
 	PutRepositoryTriggersRequest(*codecommit.PutRepositoryTriggersInput) codecommit.PutRepositoryTriggersRequest
 
+	TagResourceRequest(*codecommit.TagResourceInput) codecommit.TagResourceRequest
+
 	TestRepositoryTriggersRequest(*codecommit.TestRepositoryTriggersInput) codecommit.TestRepositoryTriggersRequest
+
+	UntagResourceRequest(*codecommit.UntagResourceInput) codecommit.UntagResourceRequest
+
+	UpdateApprovalRuleTemplateContentRequest(*codecommit.UpdateApprovalRuleTemplateContentInput) codecommit.UpdateApprovalRuleTemplateContentRequest
+
+	UpdateApprovalRuleTemplateDescriptionRequest(*codecommit.UpdateApprovalRuleTemplateDescriptionInput) codecommit.UpdateApprovalRuleTemplateDescriptionRequest
+
+	UpdateApprovalRuleTemplateNameRequest(*codecommit.UpdateApprovalRuleTemplateNameInput) codecommit.UpdateApprovalRuleTemplateNameRequest
 
 	UpdateCommentRequest(*codecommit.UpdateCommentInput) codecommit.UpdateCommentRequest
 
 	UpdateDefaultBranchRequest(*codecommit.UpdateDefaultBranchInput) codecommit.UpdateDefaultBranchRequest
+
+	UpdatePullRequestApprovalRuleContentRequest(*codecommit.UpdatePullRequestApprovalRuleContentInput) codecommit.UpdatePullRequestApprovalRuleContentRequest
+
+	UpdatePullRequestApprovalStateRequest(*codecommit.UpdatePullRequestApprovalStateInput) codecommit.UpdatePullRequestApprovalStateRequest
 
 	UpdatePullRequestDescriptionRequest(*codecommit.UpdatePullRequestDescriptionInput) codecommit.UpdatePullRequestDescriptionRequest
 
@@ -141,4 +212,4 @@ type CodeCommitAPI interface {
 	UpdateRepositoryNameRequest(*codecommit.UpdateRepositoryNameInput) codecommit.UpdateRepositoryNameRequest
 }
 
-var _ CodeCommitAPI = (*codecommit.CodeCommit)(nil)
+var _ ClientAPI = (*codecommit.Client)(nil)

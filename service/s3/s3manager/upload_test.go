@@ -12,10 +12,10 @@ import (
 	"sort"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
@@ -24,7 +24,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
 )
 
-var emptyList = []string{}
+var emptyList []string
 
 func val(i interface{}, s string) interface{} {
 	v, err := awsutil.ValuesAtPath(i, s)
@@ -51,7 +51,7 @@ func contains(src []string, s string) bool {
 	return false
 }
 
-func loggingSvc(ignoreOps []string) (*s3.S3, *[]string, *[]interface{}) {
+func loggingSvc(ignoreOps []string) (*s3.Client, *[]string, *[]interface{}) {
 	var m sync.Mutex
 	partNum := 0
 	names := []string{}
@@ -61,7 +61,7 @@ func loggingSvc(ignoreOps []string) (*s3.S3, *[]string, *[]interface{}) {
 	svc.Handlers.UnmarshalMeta.Clear()
 	svc.Handlers.UnmarshalError.Clear()
 	svc.Handlers.Send.Clear()
-	svc.Handlers.Send.PushBack(func(r *request.Request) {
+	svc.Handlers.Send.PushBack(func(r *aws.Request) {
 		m.Lock()
 		defer m.Unlock()
 
@@ -104,7 +104,7 @@ func TestUploadOrderMulti(t *testing.T) {
 
 	resp, err := u.Upload(&s3manager.UploadInput{
 		Bucket:               aws.String("Bucket"),
-		Key:                  aws.String("Key"),
+		Key:                  aws.String("Key - value"),
 		Body:                 bytes.NewReader(buf12MB),
 		ServerSideEncryption: s3.ServerSideEncryptionAwsKms,
 		SSEKMSKeyId:          aws.String("KmsId"),
@@ -120,8 +120,8 @@ func TestUploadOrderMulti(t *testing.T) {
 		t.Errorf("Expected %v, but received %v", expected, *ops)
 	}
 
-	if "https://location" != resp.Location {
-		t.Errorf("Expected %q, but received %q", "https://location", resp.Location)
+	if e, a := `https://endpoint/Bucket/Key%20-%20value`, resp.Location; e != a {
+		t.Errorf("Expected %q, but received %q", e, a)
 	}
 
 	if "UPLOAD-ID" != resp.UploadID {
@@ -277,12 +277,41 @@ func TestUploadFailIfPartSizeTooSmall(t *testing.T) {
 	}
 }
 
+type negativeReader struct {
+}
+
+func (nr *negativeReader) Read(_ []byte) (int, error) {
+	return -1, io.ErrUnexpectedEOF
+}
+
+func TestUploadReaderReturnsNegative(t *testing.T) {
+	s, _, _ := loggingSvc(emptyList)
+	mgr := s3manager.NewUploaderWithClient(s, func(u *s3manager.Uploader) {
+		u.Concurrency = 1
+	})
+
+	// should not panic
+	_, err := mgr.Upload(&s3manager.UploadInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   &negativeReader{},
+	})
+	if err == nil {
+		t.Error("Expected error, but received none")
+	}
+
+	aerr := err.(awserr.Error)
+	if aerr.OrigErr() != io.ErrUnexpectedEOF {
+		t.Fatalf("expected %s. Got %s", io.ErrUnexpectedEOF, aerr.OrigErr())
+	}
+}
+
 func TestUploadOrderSingle(t *testing.T) {
 	s, ops, args := loggingSvc(emptyList)
 	mgr := s3manager.NewUploaderWithClient(s)
 	resp, err := mgr.Upload(&s3manager.UploadInput{
 		Bucket:               aws.String("Bucket"),
-		Key:                  aws.String("Key"),
+		Key:                  aws.String("Key - value"),
 		Body:                 bytes.NewReader(buf2MB),
 		ServerSideEncryption: s3.ServerSideEncryptionAwsKms,
 		SSEKMSKeyId:          aws.String("KmsId"),
@@ -297,8 +326,8 @@ func TestUploadOrderSingle(t *testing.T) {
 		t.Errorf("Expected %v, but received %v", vals, *ops)
 	}
 
-	if len(resp.Location) == 0 {
-		t.Error("Expected Location to not be empty")
+	if e, a := `https://endpoint/Bucket/Key%20-%20value`, resp.Location; e != a {
+		t.Errorf("Expected %q, but received %q", e, a)
 	}
 
 	if e := "VERSION-ID"; e != *resp.VersionID {
@@ -324,7 +353,7 @@ func TestUploadOrderSingle(t *testing.T) {
 
 func TestUploadOrderSingleFailure(t *testing.T) {
 	s, ops, _ := loggingSvc(emptyList)
-	s.Handlers.Send.PushBack(func(r *request.Request) {
+	s.Handlers.Send.PushBack(func(r *aws.Request) {
 		r.HTTPResponse.StatusCode = 400
 	})
 	mgr := s3manager.NewUploaderWithClient(s)
@@ -379,7 +408,7 @@ func TestUploadOrderZero(t *testing.T) {
 
 func TestUploadOrderMultiFailure(t *testing.T) {
 	s, ops, _ := loggingSvc(emptyList)
-	s.Handlers.Send.PushBack(func(r *request.Request) {
+	s.Handlers.Send.PushBack(func(r *aws.Request) {
 		switch t := r.Data.(type) {
 		case *s3.UploadPartOutput:
 			if *t.ETag == "ETAG2" {
@@ -408,7 +437,7 @@ func TestUploadOrderMultiFailure(t *testing.T) {
 
 func TestUploadOrderMultiFailureOnComplete(t *testing.T) {
 	s, ops, _ := loggingSvc(emptyList)
-	s.Handlers.Send.PushBack(func(r *request.Request) {
+	s.Handlers.Send.PushBack(func(r *aws.Request) {
 		switch r.Data.(type) {
 		case *s3.CompleteMultipartUploadOutput:
 			r.HTTPResponse.StatusCode = 400
@@ -436,7 +465,7 @@ func TestUploadOrderMultiFailureOnComplete(t *testing.T) {
 
 func TestUploadOrderMultiFailureOnCreate(t *testing.T) {
 	s, ops, _ := loggingSvc(emptyList)
-	s.Handlers.Send.PushBack(func(r *request.Request) {
+	s.Handlers.Send.PushBack(func(r *aws.Request) {
 		switch r.Data.(type) {
 		case *s3.CreateMultipartUploadOutput:
 			r.HTTPResponse.StatusCode = 400
@@ -461,7 +490,7 @@ func TestUploadOrderMultiFailureOnCreate(t *testing.T) {
 
 func TestUploadOrderMultiFailureLeaveParts(t *testing.T) {
 	s, ops, _ := loggingSvc(emptyList)
-	s.Handlers.Send.PushBack(func(r *request.Request) {
+	s.Handlers.Send.PushBack(func(r *aws.Request) {
 		switch data := r.Data.(type) {
 		case *s3.UploadPartOutput:
 			if *data.ETag == "ETAG2" {
@@ -572,7 +601,7 @@ func (s *sizedReader) Read(p []byte) (n int, err error) {
 		n -= s.cur - s.size
 	}
 
-	return
+	return n, err
 }
 
 func TestUploadOrderMultiBufferedReader(t *testing.T) {
@@ -897,7 +926,7 @@ func TestReaderAt(t *testing.T) {
 	svc.Handlers.Send.Clear()
 
 	contentLen := ""
-	svc.Handlers.Send.PushBack(func(r *request.Request) {
+	svc.Handlers.Send.PushBack(func(r *aws.Request) {
 		contentLen = r.HTTPRequest.Header.Get("Content-Length")
 		r.HTTPResponse = &http.Response{
 			StatusCode: 200,
@@ -934,7 +963,7 @@ func TestSSE(t *testing.T) {
 	partNum := 0
 	mutex := &sync.Mutex{}
 
-	svc.Handlers.Send.PushBack(func(r *request.Request) {
+	svc.Handlers.Send.PushBack(func(r *aws.Request) {
 		mutex.Lock()
 		defer mutex.Unlock()
 		r.HTTPResponse = &http.Response{
@@ -998,10 +1027,150 @@ func TestUploadWithContextCanceled(t *testing.T) {
 		t.Fatalf("expected error, did not get one")
 	}
 	aerr := err.(awserr.Error)
-	if e, a := request.ErrCodeRequestCanceled, aerr.Code(); e != a {
+	if e, a := aws.ErrCodeRequestCanceled, aerr.Code(); e != a {
 		t.Errorf("expected error code %q, got %q", e, a)
 	}
 	if e, a := "canceled", aerr.Message(); !strings.Contains(a, e) {
 		t.Errorf("expected error message to contain %q, but did not %q", e, a)
+	}
+}
+
+// S3 Uploader incorrectly fails an upload if the content being uploaded
+// has a size of MinPartSize * MaxUploadParts.
+func TestUploadMaxPartsEOF(t *testing.T) {
+	s, ops, _ := loggingSvc(emptyList)
+	mgr := s3manager.NewUploaderWithClient(s, func(u *s3manager.Uploader) {
+		u.Concurrency = 1
+		u.PartSize = s3manager.DefaultUploadPartSize
+		u.MaxUploadParts = 2
+	})
+	f := bytes.NewReader(make([]byte, int(mgr.PartSize)*mgr.MaxUploadParts))
+
+	r1 := io.NewSectionReader(f, 0, s3manager.DefaultUploadPartSize)
+	r2 := io.NewSectionReader(f, s3manager.DefaultUploadPartSize, 2*s3manager.DefaultUploadPartSize)
+	body := io.MultiReader(r1, r2)
+
+	_, err := mgr.Upload(&s3manager.UploadInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   body,
+	})
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	expectOps := []string{
+		"CreateMultipartUpload",
+		"UploadPart",
+		"UploadPart",
+		"CompleteMultipartUpload",
+	}
+	if e, a := expectOps, *ops; !reflect.DeepEqual(e, a) {
+		t.Errorf("expect %v ops, got %v", e, a)
+	}
+}
+
+func TestUploadBufferStrategy(t *testing.T) {
+	cases := map[string]struct {
+		PartSize  int64
+		Size      int64
+		Strategy  s3manager.ReadSeekerWriteToProvider
+		callbacks int
+	}{
+		"NoBuffer": {
+			PartSize: s3manager.DefaultUploadPartSize,
+			Strategy: nil,
+		},
+		"SinglePart": {
+			PartSize:  s3manager.DefaultUploadPartSize,
+			Size:      s3manager.DefaultUploadPartSize,
+			Strategy:  &recordedBufferProvider{size: int(s3manager.DefaultUploadPartSize)},
+			callbacks: 1,
+		},
+		"MultiPart": {
+			PartSize:  s3manager.DefaultUploadPartSize,
+			Size:      s3manager.DefaultUploadPartSize * 2,
+			Strategy:  &recordedBufferProvider{size: int(s3manager.DefaultUploadPartSize)},
+			callbacks: 2,
+		},
+	}
+
+	for name, tCase := range cases {
+		t.Run(name, func(t *testing.T) {
+			_ = tCase
+			cfg := unit.Config()
+			svc := s3.New(cfg)
+			svc.Handlers.Unmarshal.Clear()
+			svc.Handlers.UnmarshalMeta.Clear()
+			svc.Handlers.UnmarshalError.Clear()
+			svc.Handlers.Send.Clear()
+
+			var etag int64
+			svc.Handlers.Send.PushBack(func(r *aws.Request) {
+				if r.Body != nil {
+					io.Copy(ioutil.Discard, r.Body)
+				}
+
+				r.HTTPResponse = &http.Response{
+					StatusCode: 200,
+					Body:       ioutil.NopCloser(bytes.NewReader([]byte{})),
+				}
+
+				switch data := r.Data.(type) {
+				case *s3.CreateMultipartUploadOutput:
+					data.UploadId = aws.String("UPLOAD-ID")
+				case *s3.UploadPartOutput:
+					data.ETag = aws.String(fmt.Sprintf("ETAG%d", atomic.AddInt64(&etag, 1)))
+				case *s3.CompleteMultipartUploadOutput:
+					data.Location = aws.String("https://location")
+					data.VersionId = aws.String("VERSION-ID")
+				case *s3.PutObjectOutput:
+					data.VersionId = aws.String("VERSION-ID")
+				}
+			})
+
+			uploader := s3manager.NewUploaderWithClient(svc, func(u *s3manager.Uploader) {
+				u.PartSize = tCase.PartSize
+				u.BufferProvider = tCase.Strategy
+				u.Concurrency = 1
+			})
+
+			expected := getTestBytes(int(tCase.Size))
+			_, err := uploader.Upload(&s3manager.UploadInput{
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("key"),
+				Body:   bytes.NewReader(expected),
+			})
+			if err != nil {
+				t.Fatalf("failed to upload file: %v", err)
+			}
+
+			switch strat := tCase.Strategy.(type) {
+			case *recordedBufferProvider:
+				if !bytes.Equal(expected, strat.content) {
+					t.Errorf("content buffered did not match expected")
+				}
+				if tCase.callbacks != strat.callbackCount {
+					t.Errorf("expected %v, got %v callbacks", tCase.callbacks, strat.callbackCount)
+				}
+			}
+		})
+	}
+}
+
+type recordedBufferProvider struct {
+	content       []byte
+	size          int
+	callbackCount int
+}
+
+func (r *recordedBufferProvider) GetWriteTo(seeker io.ReadSeeker) (s3manager.ReadSeekerWriteTo, func()) {
+	b := make([]byte, r.size)
+	w := &s3manager.BufferedReadSeekerWriteTo{BufferedReadSeeker: s3manager.NewBufferedReadSeeker(seeker, b)}
+
+	return w, func() {
+		r.content = append(r.content, b...)
+		r.callbackCount++
 	}
 }

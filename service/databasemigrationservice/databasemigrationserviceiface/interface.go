@@ -15,10 +15,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice"
 )
 
-// DatabaseMigrationServiceAPI provides an interface to enable mocking the
-// databasemigrationservice.DatabaseMigrationService service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// databasemigrationservice.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -26,7 +25,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Database Migration Service.
-//    func myFunc(svc databasemigrationserviceiface.DatabaseMigrationServiceAPI) bool {
+//    func myFunc(svc databasemigrationserviceiface.ClientAPI) bool {
 //        // Make svc.AddTagsToResource request
 //    }
 //
@@ -44,16 +43,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockDatabaseMigrationServiceClient struct {
-//        databasemigrationserviceiface.DatabaseMigrationServiceAPI
+//    type mockClientClient struct {
+//        databasemigrationserviceiface.ClientPI
 //    }
-//    func (m *mockDatabaseMigrationServiceClient) AddTagsToResource(input *databasemigrationservice.AddTagsToResourceInput) (*databasemigrationservice.AddTagsToResourceOutput, error) {
+//    func (m *mockClientClient) AddTagsToResource(input *databasemigrationservice.AddTagsToResourceInput) (*databasemigrationservice.AddTagsToResourceOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockDatabaseMigrationServiceClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -64,8 +63,10 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type DatabaseMigrationServiceAPI interface {
+type ClientAPI interface {
 	AddTagsToResourceRequest(*databasemigrationservice.AddTagsToResourceInput) databasemigrationservice.AddTagsToResourceRequest
+
+	ApplyPendingMaintenanceActionRequest(*databasemigrationservice.ApplyPendingMaintenanceActionInput) databasemigrationservice.ApplyPendingMaintenanceActionRequest
 
 	CreateEndpointRequest(*databasemigrationservice.CreateEndpointInput) databasemigrationservice.CreateEndpointRequest
 
@@ -78,6 +79,8 @@ type DatabaseMigrationServiceAPI interface {
 	CreateReplicationTaskRequest(*databasemigrationservice.CreateReplicationTaskInput) databasemigrationservice.CreateReplicationTaskRequest
 
 	DeleteCertificateRequest(*databasemigrationservice.DeleteCertificateInput) databasemigrationservice.DeleteCertificateRequest
+
+	DeleteConnectionRequest(*databasemigrationservice.DeleteConnectionInput) databasemigrationservice.DeleteConnectionRequest
 
 	DeleteEndpointRequest(*databasemigrationservice.DeleteEndpointInput) databasemigrationservice.DeleteEndpointRequest
 
@@ -106,6 +109,8 @@ type DatabaseMigrationServiceAPI interface {
 	DescribeEventsRequest(*databasemigrationservice.DescribeEventsInput) databasemigrationservice.DescribeEventsRequest
 
 	DescribeOrderableReplicationInstancesRequest(*databasemigrationservice.DescribeOrderableReplicationInstancesInput) databasemigrationservice.DescribeOrderableReplicationInstancesRequest
+
+	DescribePendingMaintenanceActionsRequest(*databasemigrationservice.DescribePendingMaintenanceActionsInput) databasemigrationservice.DescribePendingMaintenanceActionsRequest
 
 	DescribeRefreshSchemasStatusRequest(*databasemigrationservice.DescribeRefreshSchemasStatusInput) databasemigrationservice.DescribeRefreshSchemasStatusRequest
 
@@ -167,7 +172,7 @@ type DatabaseMigrationServiceAPI interface {
 
 	WaitUntilReplicationTaskStopped(context.Context, *databasemigrationservice.DescribeReplicationTasksInput, ...aws.WaiterOption) error
 
-	WaitUntilTestConnectionSucceeds(context.Context, *databasemigrationservice.TestConnectionInput, ...aws.WaiterOption) error
+	WaitUntilTestConnectionSucceeds(context.Context, *databasemigrationservice.DescribeConnectionsInput, ...aws.WaiterOption) error
 }
 
-var _ DatabaseMigrationServiceAPI = (*databasemigrationservice.DatabaseMigrationService)(nil)
+var _ ClientAPI = (*databasemigrationservice.Client)(nil)

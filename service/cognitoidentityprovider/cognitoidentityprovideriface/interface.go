@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
 )
 
-// CognitoIdentityProviderAPI provides an interface to enable mocking the
-// cognitoidentityprovider.CognitoIdentityProvider service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// cognitoidentityprovider.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Cognito Identity Provider.
-//    func myFunc(svc cognitoidentityprovideriface.CognitoIdentityProviderAPI) bool {
+//    func myFunc(svc cognitoidentityprovideriface.ClientAPI) bool {
 //        // Make svc.AddCustomAttributes request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCognitoIdentityProviderClient struct {
-//        cognitoidentityprovideriface.CognitoIdentityProviderAPI
+//    type mockClientClient struct {
+//        cognitoidentityprovideriface.ClientPI
 //    }
-//    func (m *mockCognitoIdentityProviderClient) AddCustomAttributes(input *cognitoidentityprovider.AddCustomAttributesInput) (*cognitoidentityprovider.AddCustomAttributesOutput, error) {
+//    func (m *mockClientClient) AddCustomAttributes(input *cognitoidentityprovider.AddCustomAttributesInput) (*cognitoidentityprovider.AddCustomAttributesOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockCognitoIdentityProviderClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type CognitoIdentityProviderAPI interface {
+type ClientAPI interface {
 	AddCustomAttributesRequest(*cognitoidentityprovider.AddCustomAttributesInput) cognitoidentityprovider.AddCustomAttributesRequest
 
 	AdminAddUserToGroupRequest(*cognitoidentityprovider.AdminAddUserToGroupInput) cognitoidentityprovider.AdminAddUserToGroupRequest
@@ -103,6 +102,8 @@ type CognitoIdentityProviderAPI interface {
 	AdminRespondToAuthChallengeRequest(*cognitoidentityprovider.AdminRespondToAuthChallengeInput) cognitoidentityprovider.AdminRespondToAuthChallengeRequest
 
 	AdminSetUserMFAPreferenceRequest(*cognitoidentityprovider.AdminSetUserMFAPreferenceInput) cognitoidentityprovider.AdminSetUserMFAPreferenceRequest
+
+	AdminSetUserPasswordRequest(*cognitoidentityprovider.AdminSetUserPasswordInput) cognitoidentityprovider.AdminSetUserPasswordRequest
 
 	AdminSetUserSettingsRequest(*cognitoidentityprovider.AdminSetUserSettingsInput) cognitoidentityprovider.AdminSetUserSettingsRequest
 
@@ -202,6 +203,8 @@ type CognitoIdentityProviderAPI interface {
 
 	ListResourceServersRequest(*cognitoidentityprovider.ListResourceServersInput) cognitoidentityprovider.ListResourceServersRequest
 
+	ListTagsForResourceRequest(*cognitoidentityprovider.ListTagsForResourceInput) cognitoidentityprovider.ListTagsForResourceRequest
+
 	ListUserImportJobsRequest(*cognitoidentityprovider.ListUserImportJobsInput) cognitoidentityprovider.ListUserImportJobsRequest
 
 	ListUserPoolClientsRequest(*cognitoidentityprovider.ListUserPoolClientsInput) cognitoidentityprovider.ListUserPoolClientsRequest
@@ -232,6 +235,10 @@ type CognitoIdentityProviderAPI interface {
 
 	StopUserImportJobRequest(*cognitoidentityprovider.StopUserImportJobInput) cognitoidentityprovider.StopUserImportJobRequest
 
+	TagResourceRequest(*cognitoidentityprovider.TagResourceInput) cognitoidentityprovider.TagResourceRequest
+
+	UntagResourceRequest(*cognitoidentityprovider.UntagResourceInput) cognitoidentityprovider.UntagResourceRequest
+
 	UpdateAuthEventFeedbackRequest(*cognitoidentityprovider.UpdateAuthEventFeedbackInput) cognitoidentityprovider.UpdateAuthEventFeedbackRequest
 
 	UpdateDeviceStatusRequest(*cognitoidentityprovider.UpdateDeviceStatusInput) cognitoidentityprovider.UpdateDeviceStatusRequest
@@ -255,4 +262,4 @@ type CognitoIdentityProviderAPI interface {
 	VerifyUserAttributeRequest(*cognitoidentityprovider.VerifyUserAttributeInput) cognitoidentityprovider.VerifyUserAttributeRequest
 }
 
-var _ CognitoIdentityProviderAPI = (*cognitoidentityprovider.CognitoIdentityProvider)(nil)
+var _ ClientAPI = (*cognitoidentityprovider.Client)(nil)

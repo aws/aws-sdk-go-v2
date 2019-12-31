@@ -61,7 +61,7 @@ var (
 	}
 )
 
-func runTests(t *testing.T, svc *s3.S3, tests []s3BucketTest) {
+func runTests(t *testing.T, svc *s3.Client, tests []s3BucketTest) {
 	t.Helper()
 
 	for i, test := range tests {

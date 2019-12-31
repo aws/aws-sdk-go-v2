@@ -13,7 +13,7 @@ type accountIDGetter interface {
 func init() {
 	initClient = defaultInitClientFn
 }
-func defaultInitClientFn(c *S3Control) {
+func defaultInitClientFn(c *Client) {
 	c.Handlers.UnmarshalError.PushBackNamed(s3err.RequestFailureWrapperHandler())
 }
 func buildPrefixHostHandler(fieldName, value string) aws.NamedHandler {

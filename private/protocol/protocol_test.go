@@ -5,10 +5,7 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
-	metadata "github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
@@ -39,12 +36,12 @@ func jsonData(set bool, b []byte, size, delta int) {
 	}
 }
 
-func buildNewRequest(data interface{}) *request.Request {
+func buildNewRequest(data interface{}) *aws.Request {
 	v := url.Values{}
 	v.Set("test", "TEST")
 	v.Add("test1", "TEST1")
 
-	req := &request.Request{
+	req := &aws.Request{
 		HTTPRequest: &http.Request{
 			Header: make(http.Header),
 			Body:   &awstesting.ReadCloser{Size: 2048},
@@ -57,7 +54,7 @@ func buildNewRequest(data interface{}) *request.Request {
 		}{
 			"Test",
 		},
-		Metadata: metadata.Metadata{
+		Metadata: aws.Metadata{
 			ServiceName:   "test",
 			TargetPrefix:  "test",
 			JSONVersion:   "test",
@@ -66,7 +63,7 @@ func buildNewRequest(data interface{}) *request.Request {
 			SigningName:   "test",
 			SigningRegion: "test",
 		},
-		Operation: &request.Operation{
+		Operation: &aws.Operation{
 			Name: "test",
 		},
 	}
@@ -104,7 +101,7 @@ const (
 	xmlType
 )
 
-func checkForLeak(data interface{}, build, fn func(*request.Request), t *testing.T, result expected) {
+func checkForLeak(data interface{}, build, fn func(*aws.Request), t *testing.T, result expected) {
 	req := buildNewRequest(data)
 	reader := req.HTTPResponse.Body.(*awstesting.ReadCloser)
 	switch result.dataType {
@@ -117,13 +114,21 @@ func checkForLeak(data interface{}, build, fn func(*request.Request), t *testing
 	fn(req)
 
 	if result.errExists {
-		assert.NotNil(t, req.Error)
+		if req.Error == nil {
+			t.Fatalf("expect error, got none")
+		}
 	} else {
-		assert.Nil(t, req.Error)
+		if req.Error != nil {
+			t.Fatalf("expect no error, got %v", req.Error)
+		}
 	}
 
-	assert.Equal(t, reader.Closed, result.closed)
-	assert.Equal(t, reader.Size, result.size)
+	if e, a := reader.Closed, result.closed; e != a {
+		t.Errorf("expect %v closed, got %v", e, a)
+	}
+	if e, a := reader.Size, result.size; e != a {
+		t.Errorf("expect %v size, got %v", e, a)
+	}
 }
 
 func TestJSONRpc(t *testing.T) {

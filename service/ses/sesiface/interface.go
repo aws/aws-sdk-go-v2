@@ -15,18 +15,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ses"
 )
 
-// SESAPI provides an interface to enable mocking the
-// ses.SES service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// ses.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // Amazon Simple Email Service.
-//    func myFunc(svc sesiface.SESAPI) bool {
+//    // Amazon SES.
+//    func myFunc(svc sesiface.ClientAPI) bool {
 //        // Make svc.CloneReceiptRuleSet request
 //    }
 //
@@ -44,16 +43,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSESClient struct {
-//        sesiface.SESAPI
+//    type mockClientClient struct {
+//        sesiface.ClientPI
 //    }
-//    func (m *mockSESClient) CloneReceiptRuleSet(input *ses.CloneReceiptRuleSetInput) (*ses.CloneReceiptRuleSetOutput, error) {
+//    func (m *mockClientClient) CloneReceiptRuleSet(input *ses.CloneReceiptRuleSetInput) (*ses.CloneReceiptRuleSetOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockSESClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -64,7 +63,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type SESAPI interface {
+type ClientAPI interface {
 	CloneReceiptRuleSetRequest(*ses.CloneReceiptRuleSetInput) ses.CloneReceiptRuleSetRequest
 
 	CreateConfigurationSetRequest(*ses.CreateConfigurationSetInput) ses.CreateConfigurationSetRequest
@@ -149,6 +148,8 @@ type SESAPI interface {
 
 	ListVerifiedEmailAddressesRequest(*ses.ListVerifiedEmailAddressesInput) ses.ListVerifiedEmailAddressesRequest
 
+	PutConfigurationSetDeliveryOptionsRequest(*ses.PutConfigurationSetDeliveryOptionsInput) ses.PutConfigurationSetDeliveryOptionsRequest
+
 	PutIdentityPolicyRequest(*ses.PutIdentityPolicyInput) ses.PutIdentityPolicyRequest
 
 	ReorderReceiptRuleSetRequest(*ses.ReorderReceiptRuleSetInput) ses.ReorderReceiptRuleSetRequest
@@ -208,4 +209,4 @@ type SESAPI interface {
 	WaitUntilIdentityExists(context.Context, *ses.GetIdentityVerificationAttributesInput, ...aws.WaiterOption) error
 }
 
-var _ SESAPI = (*ses.SES)(nil)
+var _ ClientAPI = (*ses.Client)(nil)

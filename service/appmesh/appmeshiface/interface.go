@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/appmesh"
 )
 
-// AppMeshAPI provides an interface to enable mocking the
-// appmesh.AppMesh service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// appmesh.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS App Mesh.
-//    func myFunc(svc appmeshiface.AppMeshAPI) bool {
+//    func myFunc(svc appmeshiface.ClientAPI) bool {
 //        // Make svc.CreateMesh request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockAppMeshClient struct {
-//        appmeshiface.AppMeshAPI
+//    type mockClientClient struct {
+//        appmeshiface.ClientPI
 //    }
-//    func (m *mockAppMeshClient) CreateMesh(input *appmesh.CreateMeshInput) (*appmesh.CreateMeshOutput, error) {
+//    func (m *mockClientClient) CreateMesh(input *appmesh.CreateMeshInput) (*appmesh.CreateMeshOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockAppMeshClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type AppMeshAPI interface {
+type ClientAPI interface {
 	CreateMeshRequest(*appmesh.CreateMeshInput) appmesh.CreateMeshRequest
 
 	CreateRouteRequest(*appmesh.CreateRouteInput) appmesh.CreateRouteRequest
@@ -69,6 +68,8 @@ type AppMeshAPI interface {
 	CreateVirtualNodeRequest(*appmesh.CreateVirtualNodeInput) appmesh.CreateVirtualNodeRequest
 
 	CreateVirtualRouterRequest(*appmesh.CreateVirtualRouterInput) appmesh.CreateVirtualRouterRequest
+
+	CreateVirtualServiceRequest(*appmesh.CreateVirtualServiceInput) appmesh.CreateVirtualServiceRequest
 
 	DeleteMeshRequest(*appmesh.DeleteMeshInput) appmesh.DeleteMeshRequest
 
@@ -78,6 +79,8 @@ type AppMeshAPI interface {
 
 	DeleteVirtualRouterRequest(*appmesh.DeleteVirtualRouterInput) appmesh.DeleteVirtualRouterRequest
 
+	DeleteVirtualServiceRequest(*appmesh.DeleteVirtualServiceInput) appmesh.DeleteVirtualServiceRequest
+
 	DescribeMeshRequest(*appmesh.DescribeMeshInput) appmesh.DescribeMeshRequest
 
 	DescribeRouteRequest(*appmesh.DescribeRouteInput) appmesh.DescribeRouteRequest
@@ -86,19 +89,33 @@ type AppMeshAPI interface {
 
 	DescribeVirtualRouterRequest(*appmesh.DescribeVirtualRouterInput) appmesh.DescribeVirtualRouterRequest
 
+	DescribeVirtualServiceRequest(*appmesh.DescribeVirtualServiceInput) appmesh.DescribeVirtualServiceRequest
+
 	ListMeshesRequest(*appmesh.ListMeshesInput) appmesh.ListMeshesRequest
 
 	ListRoutesRequest(*appmesh.ListRoutesInput) appmesh.ListRoutesRequest
 
+	ListTagsForResourceRequest(*appmesh.ListTagsForResourceInput) appmesh.ListTagsForResourceRequest
+
 	ListVirtualNodesRequest(*appmesh.ListVirtualNodesInput) appmesh.ListVirtualNodesRequest
 
 	ListVirtualRoutersRequest(*appmesh.ListVirtualRoutersInput) appmesh.ListVirtualRoutersRequest
+
+	ListVirtualServicesRequest(*appmesh.ListVirtualServicesInput) appmesh.ListVirtualServicesRequest
+
+	TagResourceRequest(*appmesh.TagResourceInput) appmesh.TagResourceRequest
+
+	UntagResourceRequest(*appmesh.UntagResourceInput) appmesh.UntagResourceRequest
+
+	UpdateMeshRequest(*appmesh.UpdateMeshInput) appmesh.UpdateMeshRequest
 
 	UpdateRouteRequest(*appmesh.UpdateRouteInput) appmesh.UpdateRouteRequest
 
 	UpdateVirtualNodeRequest(*appmesh.UpdateVirtualNodeInput) appmesh.UpdateVirtualNodeRequest
 
 	UpdateVirtualRouterRequest(*appmesh.UpdateVirtualRouterInput) appmesh.UpdateVirtualRouterRequest
+
+	UpdateVirtualServiceRequest(*appmesh.UpdateVirtualServiceInput) appmesh.UpdateVirtualServiceRequest
 }
 
-var _ AppMeshAPI = (*appmesh.AppMesh)(nil)
+var _ ClientAPI = (*appmesh.Client)(nil)

@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi"
 )
 
-// ApiGatewayManagementApiAPI provides an interface to enable mocking the
-// apigatewaymanagementapi.ApiGatewayManagementApi service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// apigatewaymanagementapi.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,8 +22,8 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AmazonApiGatewayManagementApi.
-//    func myFunc(svc apigatewaymanagementapiiface.ApiGatewayManagementApiAPI) bool {
-//        // Make svc.PostToConnection request
+//    func myFunc(svc apigatewaymanagementapiiface.ClientAPI) bool {
+//        // Make svc.DeleteConnection request
 //    }
 //
 //    func main() {
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockApiGatewayManagementApiClient struct {
-//        apigatewaymanagementapiiface.ApiGatewayManagementApiAPI
+//    type mockClientClient struct {
+//        apigatewaymanagementapiiface.ClientPI
 //    }
-//    func (m *mockApiGatewayManagementApiClient) PostToConnection(input *apigatewaymanagementapi.PostToConnectionInput) (*apigatewaymanagementapi.PostToConnectionOutput, error) {
+//    func (m *mockClientClient) DeleteConnection(input *apigatewaymanagementapi.DeleteConnectionInput) (*apigatewaymanagementapi.DeleteConnectionOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockApiGatewayManagementApiClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,8 +60,12 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type ApiGatewayManagementApiAPI interface {
+type ClientAPI interface {
+	DeleteConnectionRequest(*apigatewaymanagementapi.DeleteConnectionInput) apigatewaymanagementapi.DeleteConnectionRequest
+
+	GetConnectionRequest(*apigatewaymanagementapi.GetConnectionInput) apigatewaymanagementapi.GetConnectionRequest
+
 	PostToConnectionRequest(*apigatewaymanagementapi.PostToConnectionInput) apigatewaymanagementapi.PostToConnectionRequest
 }
 
-var _ ApiGatewayManagementApiAPI = (*apigatewaymanagementapi.ApiGatewayManagementApi)(nil)
+var _ ClientAPI = (*apigatewaymanagementapi.Client)(nil)

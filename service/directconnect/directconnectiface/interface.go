@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/directconnect"
 )
 
-// DirectConnectAPI provides an interface to enable mocking the
-// directconnect.DirectConnect service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// directconnect.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,8 +22,8 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Direct Connect.
-//    func myFunc(svc directconnectiface.DirectConnectAPI) bool {
-//        // Make svc.AllocateConnectionOnInterconnect request
+//    func myFunc(svc directconnectiface.ClientAPI) bool {
+//        // Make svc.AcceptDirectConnectGatewayAssociationProposal request
 //    }
 //
 //    func main() {
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockDirectConnectClient struct {
-//        directconnectiface.DirectConnectAPI
+//    type mockClientClient struct {
+//        directconnectiface.ClientPI
 //    }
-//    func (m *mockDirectConnectClient) AllocateConnectionOnInterconnect(input *directconnect.AllocateConnectionOnInterconnectInput) (*directconnect.DisassociateConnectionFromLagOutput, error) {
+//    func (m *mockClientClient) AcceptDirectConnectGatewayAssociationProposal(input *directconnect.AcceptDirectConnectGatewayAssociationProposalInput) (*directconnect.AcceptDirectConnectGatewayAssociationProposalOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockDirectConnectClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,9 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type DirectConnectAPI interface {
+type ClientAPI interface {
+	AcceptDirectConnectGatewayAssociationProposalRequest(*directconnect.AcceptDirectConnectGatewayAssociationProposalInput) directconnect.AcceptDirectConnectGatewayAssociationProposalRequest
+
 	AllocateConnectionOnInterconnectRequest(*directconnect.AllocateConnectionOnInterconnectInput) directconnect.AllocateConnectionOnInterconnectRequest
 
 	AllocateHostedConnectionRequest(*directconnect.AllocateHostedConnectionInput) directconnect.AllocateHostedConnectionRequest
@@ -69,6 +70,8 @@ type DirectConnectAPI interface {
 	AllocatePrivateVirtualInterfaceRequest(*directconnect.AllocatePrivateVirtualInterfaceInput) directconnect.AllocatePrivateVirtualInterfaceRequest
 
 	AllocatePublicVirtualInterfaceRequest(*directconnect.AllocatePublicVirtualInterfaceInput) directconnect.AllocatePublicVirtualInterfaceRequest
+
+	AllocateTransitVirtualInterfaceRequest(*directconnect.AllocateTransitVirtualInterfaceInput) directconnect.AllocateTransitVirtualInterfaceRequest
 
 	AssociateConnectionWithLagRequest(*directconnect.AssociateConnectionWithLagInput) directconnect.AssociateConnectionWithLagRequest
 
@@ -82,6 +85,8 @@ type DirectConnectAPI interface {
 
 	ConfirmPublicVirtualInterfaceRequest(*directconnect.ConfirmPublicVirtualInterfaceInput) directconnect.ConfirmPublicVirtualInterfaceRequest
 
+	ConfirmTransitVirtualInterfaceRequest(*directconnect.ConfirmTransitVirtualInterfaceInput) directconnect.ConfirmTransitVirtualInterfaceRequest
+
 	CreateBGPPeerRequest(*directconnect.CreateBGPPeerInput) directconnect.CreateBGPPeerRequest
 
 	CreateConnectionRequest(*directconnect.CreateConnectionInput) directconnect.CreateConnectionRequest
@@ -89,6 +94,8 @@ type DirectConnectAPI interface {
 	CreateDirectConnectGatewayRequest(*directconnect.CreateDirectConnectGatewayInput) directconnect.CreateDirectConnectGatewayRequest
 
 	CreateDirectConnectGatewayAssociationRequest(*directconnect.CreateDirectConnectGatewayAssociationInput) directconnect.CreateDirectConnectGatewayAssociationRequest
+
+	CreateDirectConnectGatewayAssociationProposalRequest(*directconnect.CreateDirectConnectGatewayAssociationProposalInput) directconnect.CreateDirectConnectGatewayAssociationProposalRequest
 
 	CreateInterconnectRequest(*directconnect.CreateInterconnectInput) directconnect.CreateInterconnectRequest
 
@@ -98,6 +105,8 @@ type DirectConnectAPI interface {
 
 	CreatePublicVirtualInterfaceRequest(*directconnect.CreatePublicVirtualInterfaceInput) directconnect.CreatePublicVirtualInterfaceRequest
 
+	CreateTransitVirtualInterfaceRequest(*directconnect.CreateTransitVirtualInterfaceInput) directconnect.CreateTransitVirtualInterfaceRequest
+
 	DeleteBGPPeerRequest(*directconnect.DeleteBGPPeerInput) directconnect.DeleteBGPPeerRequest
 
 	DeleteConnectionRequest(*directconnect.DeleteConnectionInput) directconnect.DeleteConnectionRequest
@@ -105,6 +114,8 @@ type DirectConnectAPI interface {
 	DeleteDirectConnectGatewayRequest(*directconnect.DeleteDirectConnectGatewayInput) directconnect.DeleteDirectConnectGatewayRequest
 
 	DeleteDirectConnectGatewayAssociationRequest(*directconnect.DeleteDirectConnectGatewayAssociationInput) directconnect.DeleteDirectConnectGatewayAssociationRequest
+
+	DeleteDirectConnectGatewayAssociationProposalRequest(*directconnect.DeleteDirectConnectGatewayAssociationProposalInput) directconnect.DeleteDirectConnectGatewayAssociationProposalRequest
 
 	DeleteInterconnectRequest(*directconnect.DeleteInterconnectInput) directconnect.DeleteInterconnectRequest
 
@@ -117,6 +128,8 @@ type DirectConnectAPI interface {
 	DescribeConnectionsRequest(*directconnect.DescribeConnectionsInput) directconnect.DescribeConnectionsRequest
 
 	DescribeConnectionsOnInterconnectRequest(*directconnect.DescribeConnectionsOnInterconnectInput) directconnect.DescribeConnectionsOnInterconnectRequest
+
+	DescribeDirectConnectGatewayAssociationProposalsRequest(*directconnect.DescribeDirectConnectGatewayAssociationProposalsInput) directconnect.DescribeDirectConnectGatewayAssociationProposalsRequest
 
 	DescribeDirectConnectGatewayAssociationsRequest(*directconnect.DescribeDirectConnectGatewayAssociationsInput) directconnect.DescribeDirectConnectGatewayAssociationsRequest
 
@@ -148,9 +161,11 @@ type DirectConnectAPI interface {
 
 	UntagResourceRequest(*directconnect.UntagResourceInput) directconnect.UntagResourceRequest
 
+	UpdateDirectConnectGatewayAssociationRequest(*directconnect.UpdateDirectConnectGatewayAssociationInput) directconnect.UpdateDirectConnectGatewayAssociationRequest
+
 	UpdateLagRequest(*directconnect.UpdateLagInput) directconnect.UpdateLagRequest
 
 	UpdateVirtualInterfaceAttributesRequest(*directconnect.UpdateVirtualInterfaceAttributesInput) directconnect.UpdateVirtualInterfaceAttributesRequest
 }
 
-var _ DirectConnectAPI = (*directconnect.DirectConnect)(nil)
+var _ ClientAPI = (*directconnect.Client)(nil)

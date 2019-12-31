@@ -15,10 +15,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/glacier"
 )
 
-// GlacierAPI provides an interface to enable mocking the
-// glacier.Glacier service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// glacier.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -26,7 +25,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Glacier.
-//    func myFunc(svc glacieriface.GlacierAPI) bool {
+//    func myFunc(svc glacieriface.ClientAPI) bool {
 //        // Make svc.AbortMultipartUpload request
 //    }
 //
@@ -44,16 +43,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockGlacierClient struct {
-//        glacieriface.GlacierAPI
+//    type mockClientClient struct {
+//        glacieriface.ClientPI
 //    }
-//    func (m *mockGlacierClient) AbortMultipartUpload(input *glacier.AbortMultipartUploadInput) (*glacier.AbortMultipartUploadOutput, error) {
+//    func (m *mockClientClient) AbortMultipartUpload(input *glacier.AbortMultipartUploadInput) (*glacier.AbortMultipartUploadOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockGlacierClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -64,7 +63,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type GlacierAPI interface {
+type ClientAPI interface {
 	AbortMultipartUploadRequest(*glacier.AbortMultipartUploadInput) glacier.AbortMultipartUploadRequest
 
 	AbortVaultLockRequest(*glacier.AbortVaultLockInput) glacier.AbortVaultLockRequest
@@ -136,4 +135,4 @@ type GlacierAPI interface {
 	WaitUntilVaultNotExists(context.Context, *glacier.DescribeVaultInput, ...aws.WaiterOption) error
 }
 
-var _ GlacierAPI = (*glacier.Glacier)(nil)
+var _ ClientAPI = (*glacier.Client)(nil)

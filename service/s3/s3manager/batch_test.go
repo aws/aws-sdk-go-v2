@@ -290,7 +290,7 @@ func TestBatchDelete(t *testing.T) {
 		count++
 	}))
 
-	svc := &mockS3Client{S3: buildS3SvcClient(server.URL)}
+	svc := &mockS3Client{Client: buildS3SvcClient(server.URL)}
 	for i, c := range cases {
 		batcher := BatchDelete{
 			Client:    svc,
@@ -310,15 +310,15 @@ func TestBatchDelete(t *testing.T) {
 }
 
 type mockS3Client struct {
-	*s3.S3
+	*s3.Client
 	index   int
 	objects []s3.ListObjectsOutput
 }
 
 func (client *mockS3Client) ListObjectsRequest(input *s3.ListObjectsInput) s3.ListObjectsRequest {
-	req := client.S3.ListObjectsRequest(input)
+	req := client.Client.ListObjectsRequest(input)
 	req.Copy = func(v *s3.ListObjectsInput) s3.ListObjectsRequest {
-		r := client.S3.ListObjectsRequest(v)
+		r := client.Client.ListObjectsRequest(v)
 		r.Handlers.Send.PushBack(func(r *aws.Request) {
 			object := client.objects[client.index]
 			client.index++
@@ -367,7 +367,7 @@ func TestBatchDeleteList(t *testing.T) {
 		},
 	}
 
-	svc := &mockS3Client{S3: buildS3SvcClient(server.URL), objects: objects}
+	svc := &mockS3Client{Client: buildS3SvcClient(server.URL), objects: objects}
 
 	batcher := BatchDelete{
 		Client:    svc,
@@ -381,7 +381,7 @@ func TestBatchDeleteList(t *testing.T) {
 	req := svc.ListObjectsRequest(input)
 	iter := &DeleteListIterator{
 		Bucket:    input.Bucket,
-		Paginator: req.Paginate(),
+		Paginator: s3.NewListObjectsPaginator(req),
 	}
 
 	if err := batcher.Delete(context.Background(), iter); err != nil {
@@ -393,7 +393,7 @@ func TestBatchDeleteList(t *testing.T) {
 	}
 }
 
-func buildS3SvcClient(u string) *s3.S3 {
+func buildS3SvcClient(u string) *s3.Client {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(u)
 	cfg.Credentials = aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
@@ -413,7 +413,7 @@ func TestBatchDeleteList_EmptyListObjects(t *testing.T) {
 	}))
 
 	svc := &mockS3Client{
-		S3: buildS3SvcClient(server.URL),
+		Client: buildS3SvcClient(server.URL),
 		objects: []s3.ListObjectsOutput{
 			// Simulate empty listing
 			{Contents: []s3.Object{}},
@@ -436,7 +436,7 @@ func TestBatchDeleteList_EmptyListObjects(t *testing.T) {
 	// called on it
 	iter := &DeleteListIterator{
 		Bucket:    input.Bucket,
-		Paginator: req.Paginate(),
+		Paginator: s3.NewListObjectsPaginator(req),
 	}
 
 	if err := batcher.Delete(context.Background(), iter); err != nil {
@@ -669,7 +669,7 @@ func TestBatchUpload(t *testing.T) {
 }
 
 type mockClient struct {
-	s3iface.S3API
+	s3iface.ClientAPI
 	Put       func() (*s3.PutObjectOutput, error)
 	Get       func() (*s3.GetObjectOutput, error)
 	List      func() (*s3.ListObjectsOutput, error)
@@ -684,24 +684,24 @@ type response struct {
 
 func (client *mockClient) DeleteObjectsRequest(input *s3.DeleteObjectsInput) s3.DeleteObjectsRequest {
 	if client.Deletes == nil {
-		return client.S3API.DeleteObjectsRequest(input)
+		return client.ClientAPI.DeleteObjectsRequest(input)
 	}
 
-	req := client.S3API.DeleteObjectsRequest(input)
+	req := client.ClientAPI.DeleteObjectsRequest(input)
 	req.Handlers.Clear()
 	req.Data, req.Error = client.Deletes()
 	return req
 }
 
 func (client *mockClient) PutObjectRequest(input *s3.PutObjectInput) s3.PutObjectRequest {
-	req := client.S3API.PutObjectRequest(input)
+	req := client.ClientAPI.PutObjectRequest(input)
 	req.Handlers.Clear()
 	req.Data, req.Error = client.Put()
 	return req
 }
 
 func (client *mockClient) ListObjectsRequest(input *s3.ListObjectsInput) s3.ListObjectsRequest {
-	req := client.S3API.ListObjectsRequest(input)
+	req := client.ClientAPI.ListObjectsRequest(input)
 	req.Handlers.Clear()
 	req.Data, req.Error = client.List()
 	return req
@@ -732,7 +732,7 @@ func TestBatchError(t *testing.T) {
 	}
 
 	svc := &mockClient{
-		S3API: buildS3SvcClient(server.URL),
+		ClientAPI: buildS3SvcClient(server.URL),
 		Put: func() (*s3.PutObjectOutput, error) {
 			resp := responses[index]
 			index++
@@ -928,7 +928,7 @@ func TestAfter(t *testing.T) {
 	}
 
 	svc := &mockClient{
-		S3API: buildS3SvcClient(server.URL),
+		ClientAPI: buildS3SvcClient(server.URL),
 		Put: func() (*s3.PutObjectOutput, error) {
 			resp := responses[index]
 			index++
@@ -1033,7 +1033,7 @@ func TestBatchDeleteError(t *testing.T) {
 
 	index := 0
 	svc := &mockClient{
-		S3API: buildS3SvcClient(server.URL),
+		ClientAPI: buildS3SvcClient(server.URL),
 		Deletes: func() (*s3.DeleteObjectsOutput, error) {
 			resp := cases[index].output
 			index++

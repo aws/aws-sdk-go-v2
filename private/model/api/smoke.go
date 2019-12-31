@@ -56,13 +56,16 @@ func (a *API) APISmokeTestsGoCode() string {
 	w := bytes.NewBuffer(nil)
 
 	a.resetImports()
-	a.imports["context"] = true
-	a.imports["testing"] = true
-	a.imports["time"] = true
-	a.imports["github.com/aws/aws-sdk-go-v2/aws"] = true
-	a.imports["github.com/aws/aws-sdk-go-v2/aws/awserr"] = true
-	a.imports["github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"] = true
-	a.imports["github.com/aws/aws-sdk-go-v2/service/"+a.PackageName()] = true
+	a.AddImport("context")
+	a.AddImport("testing")
+	a.AddImport("time")
+	a.AddSDKImport("aws")
+	a.AddSDKImport("aws/awserr")
+	a.AddSDKImport("internal/awstesting/integration")
+	a.AddImport(a.ImportPath())
+	if len(a.SmokeTests.TestCases) != 0 {
+		a.AddSDKImport("aws/defaults")
+	}
 
 	smokeTests := struct {
 		API *API
@@ -96,7 +99,7 @@ var smokeTestTmpl = template.Must(template.New(`smokeTestTmpl`).Parse(`
 		params := {{ $testCase.BuildInputShape $op.InputRef }}
 
 		req := svc.{{ $op.ExportedName }}Request(params)
-
+		req.Handlers.Validate.Remove(defaults.ValidateParametersHandler)
 		_, err := req.Send(ctx)
 		{{- if $testCase.ExpectErr }}
 			if err == nil {

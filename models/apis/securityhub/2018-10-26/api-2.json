@@ -24,7 +24,8 @@
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
         {"shape":"LimitExceededException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidAccessException"}
       ]
     },
     "BatchDisableStandards":{
@@ -38,6 +39,7 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
+        {"shape":"InvalidAccessException"},
         {"shape":"LimitExceededException"}
       ]
     },
@@ -52,6 +54,7 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
+        {"shape":"InvalidAccessException"},
         {"shape":"LimitExceededException"}
       ]
     },
@@ -66,7 +69,24 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccessException"}
+      ]
+    },
+    "CreateActionTarget":{
+      "name":"CreateActionTarget",
+      "http":{
+        "method":"POST",
+        "requestUri":"/actionTargets"
+      },
+      "input":{"shape":"CreateActionTargetRequest"},
+      "output":{"shape":"CreateActionTargetResponse"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InvalidAccessException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceConflictException"}
       ]
     },
     "CreateInsight":{
@@ -80,7 +100,9 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccessException"},
+        {"shape":"ResourceConflictException"}
       ]
     },
     "CreateMembers":{
@@ -94,7 +116,9 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccessException"},
+        {"shape":"ResourceConflictException"}
       ]
     },
     "DeclineInvitations":{
@@ -108,7 +132,22 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
-        {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccessException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "DeleteActionTarget":{
+      "name":"DeleteActionTarget",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/actionTargets/{ActionTargetArn+}"
+      },
+      "input":{"shape":"DeleteActionTargetRequest"},
+      "output":{"shape":"DeleteActionTargetResponse"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InvalidAccessException"},
         {"shape":"ResourceNotFoundException"}
       ]
     },
@@ -123,7 +162,9 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"InvalidAccessException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceNotFoundException"}
       ]
     },
     "DeleteInvitations":{
@@ -138,7 +179,8 @@
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
         {"shape":"LimitExceededException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidAccessException"}
       ]
     },
     "DeleteMembers":{
@@ -152,8 +194,55 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
+        {"shape":"InvalidAccessException"},
         {"shape":"LimitExceededException"},
         {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "DescribeActionTargets":{
+      "name":"DescribeActionTargets",
+      "http":{
+        "method":"POST",
+        "requestUri":"/actionTargets/get"
+      },
+      "input":{"shape":"DescribeActionTargetsRequest"},
+      "output":{"shape":"DescribeActionTargetsResponse"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InvalidAccessException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "DescribeHub":{
+      "name":"DescribeHub",
+      "http":{
+        "method":"GET",
+        "requestUri":"/accounts"
+      },
+      "input":{"shape":"DescribeHubRequest"},
+      "output":{"shape":"DescribeHubResponse"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccessException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "DescribeProducts":{
+      "name":"DescribeProducts",
+      "http":{
+        "method":"GET",
+        "requestUri":"/products"
+      },
+      "input":{"shape":"DescribeProductsRequest"},
+      "output":{"shape":"DescribeProductsResponse"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccessException"},
+        {"shape":"InvalidInputException"}
       ]
     },
     "DisableImportFindingsForProduct":{
@@ -167,7 +256,9 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidAccessException"},
+        {"shape":"LimitExceededException"}
       ]
     },
     "DisableSecurityHub":{
@@ -180,7 +271,9 @@
       "output":{"shape":"DisableSecurityHubResponse"},
       "errors":[
         {"shape":"InternalException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccessException"},
+        {"shape":"ResourceNotFoundException"}
       ]
     },
     "DisassociateFromMasterAccount":{
@@ -194,6 +287,7 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
+        {"shape":"InvalidAccessException"},
         {"shape":"LimitExceededException"},
         {"shape":"ResourceNotFoundException"}
       ]
@@ -209,6 +303,7 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
+        {"shape":"InvalidAccessException"},
         {"shape":"LimitExceededException"},
         {"shape":"ResourceNotFoundException"}
       ]
@@ -223,7 +318,10 @@
       "output":{"shape":"EnableImportFindingsForProductResponse"},
       "errors":[
         {"shape":"InternalException"},
-        {"shape":"InvalidInputException"}
+        {"shape":"InvalidInputException"},
+        {"shape":"InvalidAccessException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"LimitExceededException"}
       ]
     },
     "EnableSecurityHub":{
@@ -236,7 +334,10 @@
       "output":{"shape":"EnableSecurityHubResponse"},
       "errors":[
         {"shape":"InternalException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccessException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"AccessDeniedException"}
       ]
     },
     "GetEnabledStandards":{
@@ -250,6 +351,7 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
+        {"shape":"InvalidAccessException"},
         {"shape":"LimitExceededException"}
       ]
     },
@@ -264,8 +366,8 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
-        {"shape":"LimitExceededException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"InvalidAccessException"},
+        {"shape":"LimitExceededException"}
       ]
     },
     "GetInsightResults":{
@@ -279,7 +381,9 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"InvalidAccessException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceNotFoundException"}
       ]
     },
     "GetInsights":{
@@ -293,7 +397,9 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"InvalidAccessException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceNotFoundException"}
       ]
     },
     "GetInvitationsCount":{
@@ -307,8 +413,8 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
-        {"shape":"LimitExceededException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"InvalidAccessException"},
+        {"shape":"LimitExceededException"}
       ]
     },
     "GetMasterAccount":{
@@ -322,6 +428,7 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
+        {"shape":"InvalidAccessException"},
         {"shape":"LimitExceededException"},
         {"shape":"ResourceNotFoundException"}
       ]
@@ -337,6 +444,7 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
+        {"shape":"InvalidAccessException"},
         {"shape":"LimitExceededException"},
         {"shape":"ResourceNotFoundException"}
       ]
@@ -352,6 +460,7 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
+        {"shape":"InvalidAccessException"},
         {"shape":"LimitExceededException"},
         {"shape":"ResourceNotFoundException"}
       ]
@@ -366,7 +475,8 @@
       "output":{"shape":"ListEnabledProductsForImportResponse"},
       "errors":[
         {"shape":"InternalException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccessException"}
       ]
     },
     "ListInvitations":{
@@ -380,8 +490,8 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
-        {"shape":"LimitExceededException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"InvalidAccessException"},
+        {"shape":"LimitExceededException"}
       ]
     },
     "ListMembers":{
@@ -395,7 +505,65 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
-        {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccessException"},
+        {"shape":"LimitExceededException"}
+      ]
+    },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"GET",
+        "requestUri":"/tags/{ResourceArn}"
+      },
+      "input":{"shape":"ListTagsForResourceRequest"},
+      "output":{"shape":"ListTagsForResourceResponse"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/tags/{ResourceArn}"
+      },
+      "input":{"shape":"TagResourceRequest"},
+      "output":{"shape":"TagResourceResponse"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/tags/{ResourceArn}"
+      },
+      "input":{"shape":"UntagResourceRequest"},
+      "output":{"shape":"UntagResourceResponse"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "UpdateActionTarget":{
+      "name":"UpdateActionTarget",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/actionTargets/{ActionTargetArn+}"
+      },
+      "input":{"shape":"UpdateActionTargetRequest"},
+      "output":{"shape":"UpdateActionTargetResponse"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidAccessException"},
         {"shape":"ResourceNotFoundException"}
       ]
     },
@@ -411,6 +579,7 @@
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
         {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccessException"},
         {"shape":"ResourceNotFoundException"}
       ]
     },
@@ -425,6 +594,7 @@
       "errors":[
         {"shape":"InternalException"},
         {"shape":"InvalidInputException"},
+        {"shape":"InvalidAccessException"},
         {"shape":"LimitExceededException"},
         {"shape":"ResourceNotFoundException"}
       ]
@@ -433,6 +603,10 @@
   "shapes":{
     "AcceptInvitationRequest":{
       "type":"structure",
+      "required":[
+        "MasterId",
+        "InvitationId"
+      ],
       "members":{
         "MasterId":{"shape":"NonEmptyString"},
         "InvitationId":{"shape":"NonEmptyString"}
@@ -442,6 +616,15 @@
       "type":"structure",
       "members":{
       }
+    },
+    "AccessDeniedException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"NonEmptyString"},
+        "Code":{"shape":"NonEmptyString"}
+      },
+      "error":{"httpStatusCode":403},
+      "exception":true
     },
     "AccountDetails":{
       "type":"structure",
@@ -458,6 +641,23 @@
     "AccountIdList":{
       "type":"list",
       "member":{"shape":"NonEmptyString"}
+    },
+    "ActionTarget":{
+      "type":"structure",
+      "required":[
+        "ActionTargetArn",
+        "Name",
+        "Description"
+      ],
+      "members":{
+        "ActionTargetArn":{"shape":"NonEmptyString"},
+        "Name":{"shape":"NonEmptyString"},
+        "Description":{"shape":"NonEmptyString"}
+      }
+    },
+    "ActionTargetList":{
+      "type":"list",
+      "member":{"shape":"ActionTarget"}
     },
     "ArnList":{
       "type":"list",
@@ -511,6 +711,8 @@
         "CreatedAt",
         "UpdatedAt",
         "Severity",
+        "Title",
+        "Description",
         "Resources"
       ],
       "members":{
@@ -684,6 +886,10 @@
       }
     },
     "Boolean":{"type":"boolean"},
+    "CategoryList":{
+      "type":"list",
+      "member":{"shape":"NonEmptyString"}
+    },
     "Compliance":{
       "type":"structure",
       "members":{
@@ -706,6 +912,26 @@
         "ImageId":{"shape":"NonEmptyString"},
         "ImageName":{"shape":"NonEmptyString"},
         "LaunchedAt":{"shape":"NonEmptyString"}
+      }
+    },
+    "CreateActionTargetRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Description",
+        "Id"
+      ],
+      "members":{
+        "Name":{"shape":"NonEmptyString"},
+        "Description":{"shape":"NonEmptyString"},
+        "Id":{"shape":"NonEmptyString"}
+      }
+    },
+    "CreateActionTargetResponse":{
+      "type":"structure",
+      "required":["ActionTargetArn"],
+      "members":{
+        "ActionTargetArn":{"shape":"NonEmptyString"}
       }
     },
     "CreateInsightRequest":{
@@ -765,6 +991,7 @@
     },
     "DeclineInvitationsRequest":{
       "type":"structure",
+      "required":["AccountIds"],
       "members":{
         "AccountIds":{"shape":"AccountIdList"}
       }
@@ -773,6 +1000,24 @@
       "type":"structure",
       "members":{
         "UnprocessedAccounts":{"shape":"ResultList"}
+      }
+    },
+    "DeleteActionTargetRequest":{
+      "type":"structure",
+      "required":["ActionTargetArn"],
+      "members":{
+        "ActionTargetArn":{
+          "shape":"NonEmptyString",
+          "location":"uri",
+          "locationName":"ActionTargetArn"
+        }
+      }
+    },
+    "DeleteActionTargetResponse":{
+      "type":"structure",
+      "required":["ActionTargetArn"],
+      "members":{
+        "ActionTargetArn":{"shape":"NonEmptyString"}
       }
     },
     "DeleteInsightRequest":{
@@ -795,6 +1040,7 @@
     },
     "DeleteInvitationsRequest":{
       "type":"structure",
+      "required":["AccountIds"],
       "members":{
         "AccountIds":{"shape":"AccountIdList"}
       }
@@ -815,6 +1061,62 @@
       "type":"structure",
       "members":{
         "UnprocessedAccounts":{"shape":"ResultList"}
+      }
+    },
+    "DescribeActionTargetsRequest":{
+      "type":"structure",
+      "members":{
+        "ActionTargetArns":{"shape":"ArnList"},
+        "NextToken":{"shape":"NextToken"},
+        "MaxResults":{"shape":"MaxResults"}
+      }
+    },
+    "DescribeActionTargetsResponse":{
+      "type":"structure",
+      "required":["ActionTargets"],
+      "members":{
+        "ActionTargets":{"shape":"ActionTargetList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "DescribeHubRequest":{
+      "type":"structure",
+      "members":{
+        "HubArn":{
+          "shape":"NonEmptyString",
+          "location":"querystring",
+          "locationName":"HubArn"
+        }
+      }
+    },
+    "DescribeHubResponse":{
+      "type":"structure",
+      "members":{
+        "HubArn":{"shape":"NonEmptyString"},
+        "SubscribedAt":{"shape":"NonEmptyString"}
+      }
+    },
+    "DescribeProductsRequest":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"NextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"MaxResults"
+        }
+      }
+    },
+    "DescribeProductsResponse":{
+      "type":"structure",
+      "required":["Products"],
+      "members":{
+        "Products":{"shape":"ProductsList"},
+        "NextToken":{"shape":"NextToken"}
       }
     },
     "DisableImportFindingsForProductRequest":{
@@ -881,6 +1183,7 @@
     "EnableSecurityHubRequest":{
       "type":"structure",
       "members":{
+        "Tags":{"shape":"TagMap"}
       }
     },
     "EnableSecurityHubResponse":{
@@ -1069,6 +1372,15 @@
       "error":{"httpStatusCode":500},
       "exception":true
     },
+    "InvalidAccessException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"NonEmptyString"},
+        "Code":{"shape":"NonEmptyString"}
+      },
+      "error":{"httpStatusCode":401},
+      "exception":true
+    },
     "InvalidInputException":{
       "type":"structure",
       "members":{
@@ -1203,6 +1515,23 @@
         "NextToken":{"shape":"NonEmptyString"}
       }
     },
+    "ListTagsForResourceRequest":{
+      "type":"structure",
+      "required":["ResourceArn"],
+      "members":{
+        "ResourceArn":{
+          "shape":"ResourceArn",
+          "location":"uri",
+          "locationName":"ResourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse":{
+      "type":"structure",
+      "members":{
+        "Tags":{"shape":"TagMap"}
+      }
+    },
     "Malware":{
       "type":"structure",
       "required":["Name"],
@@ -1255,7 +1584,7 @@
     },
     "MapFilterComparison":{
       "type":"string",
-      "enum":["CONTAINS"]
+      "enum":["EQUALS"]
     },
     "MapFilterList":{
       "type":"list",
@@ -1364,9 +1693,27 @@
         "TerminatedAt":{"shape":"NonEmptyString"}
       }
     },
+    "Product":{
+      "type":"structure",
+      "required":["ProductArn"],
+      "members":{
+        "ProductArn":{"shape":"NonEmptyString"},
+        "ProductName":{"shape":"NonEmptyString"},
+        "CompanyName":{"shape":"NonEmptyString"},
+        "Description":{"shape":"NonEmptyString"},
+        "Categories":{"shape":"CategoryList"},
+        "MarketplaceUrl":{"shape":"NonEmptyString"},
+        "ActivationUrl":{"shape":"NonEmptyString"},
+        "ProductSubscriptionResourcePolicy":{"shape":"NonEmptyString"}
+      }
+    },
     "ProductSubscriptionArnList":{
       "type":"list",
       "member":{"shape":"NonEmptyString"}
+    },
+    "ProductsList":{
+      "type":"list",
+      "member":{"shape":"Product"}
     },
     "Recommendation":{
       "type":"structure",
@@ -1417,6 +1764,19 @@
         "Tags":{"shape":"FieldMap"},
         "Details":{"shape":"ResourceDetails"}
       }
+    },
+    "ResourceArn":{
+      "type":"string",
+      "pattern":"^arn:aws:securityhub:.*"
+    },
+    "ResourceConflictException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"NonEmptyString"},
+        "Code":{"shape":"NonEmptyString"}
+      },
+      "error":{"httpStatusCode":409},
+      "exception":true
     },
     "ResourceDetails":{
       "type":"structure",
@@ -1489,7 +1849,8 @@
         "PENDING",
         "READY",
         "FAILED",
-        "DELETING"
+        "DELETING",
+        "INCOMPLETE"
       ]
     },
     "StandardsSubscription":{
@@ -1542,7 +1903,6 @@
       "type":"string",
       "enum":[
         "EQUALS",
-        "CONTAINS",
         "PREFIX"
       ]
     },
@@ -1553,6 +1913,49 @@
     "StringList":{
       "type":"list",
       "member":{"shape":"NonEmptyString"}
+    },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^(?!aws:)[a-zA-Z+-=._:/]+$"
+    },
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"},
+      "max":50,
+      "min":1
+    },
+    "TagMap":{
+      "type":"map",
+      "key":{"shape":"TagKey"},
+      "value":{"shape":"TagValue"},
+      "max":50,
+      "min":1
+    },
+    "TagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceArn",
+        "Tags"
+      ],
+      "members":{
+        "ResourceArn":{
+          "shape":"ResourceArn",
+          "location":"uri",
+          "locationName":"ResourceArn"
+        },
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "TagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256
     },
     "ThreatIntelIndicator":{
       "type":"structure",
@@ -1603,6 +2006,48 @@
     "TypeList":{
       "type":"list",
       "member":{"shape":"NonEmptyString"}
+    },
+    "UntagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceArn",
+        "TagKeys"
+      ],
+      "members":{
+        "ResourceArn":{
+          "shape":"ResourceArn",
+          "location":"uri",
+          "locationName":"ResourceArn"
+        },
+        "TagKeys":{
+          "shape":"TagKeyList",
+          "location":"querystring",
+          "locationName":"tagKeys"
+        }
+      }
+    },
+    "UntagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateActionTargetRequest":{
+      "type":"structure",
+      "required":["ActionTargetArn"],
+      "members":{
+        "ActionTargetArn":{
+          "shape":"NonEmptyString",
+          "location":"uri",
+          "locationName":"ActionTargetArn"
+        },
+        "Name":{"shape":"NonEmptyString"},
+        "Description":{"shape":"NonEmptyString"}
+      }
+    },
+    "UpdateActionTargetResponse":{
+      "type":"structure",
+      "members":{
+      }
     },
     "UpdateFindingsRequest":{
       "type":"structure",

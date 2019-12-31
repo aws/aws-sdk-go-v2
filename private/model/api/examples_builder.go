@@ -4,7 +4,6 @@ package api
 
 import (
 	"bytes"
-	"fmt"
 )
 
 type examplesBuilder interface {
@@ -26,11 +25,11 @@ func (builder defaultExamplesBuilder) Imports(a *API) string {
 	"strings"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/external"
+	"` + SDKImportRoot + `/aws"
+	"` + SDKImportRoot + `/aws/awserr"
+	"` + SDKImportRoot + `/aws/external"
+	"` + a.ImportPath() + `"
 	`)
 
-	buf.WriteString(fmt.Sprintf("\"%s/%s\"", "github.com/aws/aws-sdk-go-v2/service", a.PackageName()))
 	return buf.String()
 }

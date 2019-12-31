@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint"
 )
 
-// PinpointAPI provides an interface to enable mocking the
-// pinpoint.Pinpoint service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// pinpoint.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Pinpoint.
-//    func myFunc(svc pinpointiface.PinpointAPI) bool {
+//    func myFunc(svc pinpointiface.ClientAPI) bool {
 //        // Make svc.CreateApp request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockPinpointClient struct {
-//        pinpointiface.PinpointAPI
+//    type mockClientClient struct {
+//        pinpointiface.ClientPI
 //    }
-//    func (m *mockPinpointClient) CreateApp(input *pinpoint.CreateAppInput) (*pinpoint.CreateAppOutput, error) {
+//    func (m *mockClientClient) CreateApp(input *pinpoint.CreateAppInput) (*pinpoint.CreateAppOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockPinpointClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,16 +60,26 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type PinpointAPI interface {
+type ClientAPI interface {
 	CreateAppRequest(*pinpoint.CreateAppInput) pinpoint.CreateAppRequest
 
 	CreateCampaignRequest(*pinpoint.CreateCampaignInput) pinpoint.CreateCampaignRequest
+
+	CreateEmailTemplateRequest(*pinpoint.CreateEmailTemplateInput) pinpoint.CreateEmailTemplateRequest
 
 	CreateExportJobRequest(*pinpoint.CreateExportJobInput) pinpoint.CreateExportJobRequest
 
 	CreateImportJobRequest(*pinpoint.CreateImportJobInput) pinpoint.CreateImportJobRequest
 
+	CreateJourneyRequest(*pinpoint.CreateJourneyInput) pinpoint.CreateJourneyRequest
+
+	CreatePushTemplateRequest(*pinpoint.CreatePushTemplateInput) pinpoint.CreatePushTemplateRequest
+
 	CreateSegmentRequest(*pinpoint.CreateSegmentInput) pinpoint.CreateSegmentRequest
+
+	CreateSmsTemplateRequest(*pinpoint.CreateSmsTemplateInput) pinpoint.CreateSmsTemplateRequest
+
+	CreateVoiceTemplateRequest(*pinpoint.CreateVoiceTemplateInput) pinpoint.CreateVoiceTemplateRequest
 
 	DeleteAdmChannelRequest(*pinpoint.DeleteAdmChannelInput) pinpoint.DeleteAdmChannelRequest
 
@@ -90,19 +99,29 @@ type PinpointAPI interface {
 
 	DeleteEmailChannelRequest(*pinpoint.DeleteEmailChannelInput) pinpoint.DeleteEmailChannelRequest
 
+	DeleteEmailTemplateRequest(*pinpoint.DeleteEmailTemplateInput) pinpoint.DeleteEmailTemplateRequest
+
 	DeleteEndpointRequest(*pinpoint.DeleteEndpointInput) pinpoint.DeleteEndpointRequest
 
 	DeleteEventStreamRequest(*pinpoint.DeleteEventStreamInput) pinpoint.DeleteEventStreamRequest
 
 	DeleteGcmChannelRequest(*pinpoint.DeleteGcmChannelInput) pinpoint.DeleteGcmChannelRequest
 
+	DeleteJourneyRequest(*pinpoint.DeleteJourneyInput) pinpoint.DeleteJourneyRequest
+
+	DeletePushTemplateRequest(*pinpoint.DeletePushTemplateInput) pinpoint.DeletePushTemplateRequest
+
 	DeleteSegmentRequest(*pinpoint.DeleteSegmentInput) pinpoint.DeleteSegmentRequest
 
 	DeleteSmsChannelRequest(*pinpoint.DeleteSmsChannelInput) pinpoint.DeleteSmsChannelRequest
 
+	DeleteSmsTemplateRequest(*pinpoint.DeleteSmsTemplateInput) pinpoint.DeleteSmsTemplateRequest
+
 	DeleteUserEndpointsRequest(*pinpoint.DeleteUserEndpointsInput) pinpoint.DeleteUserEndpointsRequest
 
 	DeleteVoiceChannelRequest(*pinpoint.DeleteVoiceChannelInput) pinpoint.DeleteVoiceChannelRequest
+
+	DeleteVoiceTemplateRequest(*pinpoint.DeleteVoiceTemplateInput) pinpoint.DeleteVoiceTemplateRequest
 
 	GetAdmChannelRequest(*pinpoint.GetAdmChannelInput) pinpoint.GetAdmChannelRequest
 
@@ -116,6 +135,8 @@ type PinpointAPI interface {
 
 	GetAppRequest(*pinpoint.GetAppInput) pinpoint.GetAppRequest
 
+	GetApplicationDateRangeKpiRequest(*pinpoint.GetApplicationDateRangeKpiInput) pinpoint.GetApplicationDateRangeKpiRequest
+
 	GetApplicationSettingsRequest(*pinpoint.GetApplicationSettingsInput) pinpoint.GetApplicationSettingsRequest
 
 	GetAppsRequest(*pinpoint.GetAppsInput) pinpoint.GetAppsRequest
@@ -126,6 +147,8 @@ type PinpointAPI interface {
 
 	GetCampaignActivitiesRequest(*pinpoint.GetCampaignActivitiesInput) pinpoint.GetCampaignActivitiesRequest
 
+	GetCampaignDateRangeKpiRequest(*pinpoint.GetCampaignDateRangeKpiInput) pinpoint.GetCampaignDateRangeKpiRequest
+
 	GetCampaignVersionRequest(*pinpoint.GetCampaignVersionInput) pinpoint.GetCampaignVersionRequest
 
 	GetCampaignVersionsRequest(*pinpoint.GetCampaignVersionsInput) pinpoint.GetCampaignVersionsRequest
@@ -135,6 +158,8 @@ type PinpointAPI interface {
 	GetChannelsRequest(*pinpoint.GetChannelsInput) pinpoint.GetChannelsRequest
 
 	GetEmailChannelRequest(*pinpoint.GetEmailChannelInput) pinpoint.GetEmailChannelRequest
+
+	GetEmailTemplateRequest(*pinpoint.GetEmailTemplateInput) pinpoint.GetEmailTemplateRequest
 
 	GetEndpointRequest(*pinpoint.GetEndpointInput) pinpoint.GetEndpointRequest
 
@@ -150,6 +175,16 @@ type PinpointAPI interface {
 
 	GetImportJobsRequest(*pinpoint.GetImportJobsInput) pinpoint.GetImportJobsRequest
 
+	GetJourneyRequest(*pinpoint.GetJourneyInput) pinpoint.GetJourneyRequest
+
+	GetJourneyDateRangeKpiRequest(*pinpoint.GetJourneyDateRangeKpiInput) pinpoint.GetJourneyDateRangeKpiRequest
+
+	GetJourneyExecutionActivityMetricsRequest(*pinpoint.GetJourneyExecutionActivityMetricsInput) pinpoint.GetJourneyExecutionActivityMetricsRequest
+
+	GetJourneyExecutionMetricsRequest(*pinpoint.GetJourneyExecutionMetricsInput) pinpoint.GetJourneyExecutionMetricsRequest
+
+	GetPushTemplateRequest(*pinpoint.GetPushTemplateInput) pinpoint.GetPushTemplateRequest
+
 	GetSegmentRequest(*pinpoint.GetSegmentInput) pinpoint.GetSegmentRequest
 
 	GetSegmentExportJobsRequest(*pinpoint.GetSegmentExportJobsInput) pinpoint.GetSegmentExportJobsRequest
@@ -164,9 +199,19 @@ type PinpointAPI interface {
 
 	GetSmsChannelRequest(*pinpoint.GetSmsChannelInput) pinpoint.GetSmsChannelRequest
 
+	GetSmsTemplateRequest(*pinpoint.GetSmsTemplateInput) pinpoint.GetSmsTemplateRequest
+
 	GetUserEndpointsRequest(*pinpoint.GetUserEndpointsInput) pinpoint.GetUserEndpointsRequest
 
 	GetVoiceChannelRequest(*pinpoint.GetVoiceChannelInput) pinpoint.GetVoiceChannelRequest
+
+	GetVoiceTemplateRequest(*pinpoint.GetVoiceTemplateInput) pinpoint.GetVoiceTemplateRequest
+
+	ListJourneysRequest(*pinpoint.ListJourneysInput) pinpoint.ListJourneysRequest
+
+	ListTagsForResourceRequest(*pinpoint.ListTagsForResourceInput) pinpoint.ListTagsForResourceRequest
+
+	ListTemplatesRequest(*pinpoint.ListTemplatesInput) pinpoint.ListTemplatesRequest
 
 	PhoneNumberValidateRequest(*pinpoint.PhoneNumberValidateInput) pinpoint.PhoneNumberValidateRequest
 
@@ -179,6 +224,10 @@ type PinpointAPI interface {
 	SendMessagesRequest(*pinpoint.SendMessagesInput) pinpoint.SendMessagesRequest
 
 	SendUsersMessagesRequest(*pinpoint.SendUsersMessagesInput) pinpoint.SendUsersMessagesRequest
+
+	TagResourceRequest(*pinpoint.TagResourceInput) pinpoint.TagResourceRequest
+
+	UntagResourceRequest(*pinpoint.UntagResourceInput) pinpoint.UntagResourceRequest
 
 	UpdateAdmChannelRequest(*pinpoint.UpdateAdmChannelInput) pinpoint.UpdateAdmChannelRequest
 
@@ -198,17 +247,29 @@ type PinpointAPI interface {
 
 	UpdateEmailChannelRequest(*pinpoint.UpdateEmailChannelInput) pinpoint.UpdateEmailChannelRequest
 
+	UpdateEmailTemplateRequest(*pinpoint.UpdateEmailTemplateInput) pinpoint.UpdateEmailTemplateRequest
+
 	UpdateEndpointRequest(*pinpoint.UpdateEndpointInput) pinpoint.UpdateEndpointRequest
 
 	UpdateEndpointsBatchRequest(*pinpoint.UpdateEndpointsBatchInput) pinpoint.UpdateEndpointsBatchRequest
 
 	UpdateGcmChannelRequest(*pinpoint.UpdateGcmChannelInput) pinpoint.UpdateGcmChannelRequest
 
+	UpdateJourneyRequest(*pinpoint.UpdateJourneyInput) pinpoint.UpdateJourneyRequest
+
+	UpdateJourneyStateRequest(*pinpoint.UpdateJourneyStateInput) pinpoint.UpdateJourneyStateRequest
+
+	UpdatePushTemplateRequest(*pinpoint.UpdatePushTemplateInput) pinpoint.UpdatePushTemplateRequest
+
 	UpdateSegmentRequest(*pinpoint.UpdateSegmentInput) pinpoint.UpdateSegmentRequest
 
 	UpdateSmsChannelRequest(*pinpoint.UpdateSmsChannelInput) pinpoint.UpdateSmsChannelRequest
 
+	UpdateSmsTemplateRequest(*pinpoint.UpdateSmsTemplateInput) pinpoint.UpdateSmsTemplateRequest
+
 	UpdateVoiceChannelRequest(*pinpoint.UpdateVoiceChannelInput) pinpoint.UpdateVoiceChannelRequest
+
+	UpdateVoiceTemplateRequest(*pinpoint.UpdateVoiceTemplateInput) pinpoint.UpdateVoiceTemplateRequest
 }
 
-var _ PinpointAPI = (*pinpoint.Pinpoint)(nil)
+var _ ClientAPI = (*pinpoint.Client)(nil)

@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3control"
 )
 
-// S3ControlAPI provides an interface to enable mocking the
-// s3control.S3Control service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// s3control.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,8 +22,8 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS S3 Control.
-//    func myFunc(svc s3controliface.S3ControlAPI) bool {
-//        // Make svc.DeletePublicAccessBlock request
+//    func myFunc(svc s3controliface.ClientAPI) bool {
+//        // Make svc.CreateAccessPoint request
 //    }
 //
 //    func main() {
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockS3ControlClient struct {
-//        s3controliface.S3ControlAPI
+//    type mockClientClient struct {
+//        s3controliface.ClientPI
 //    }
-//    func (m *mockS3ControlClient) DeletePublicAccessBlock(input *s3control.DeletePublicAccessBlockInput) (*s3control.DeletePublicAccessBlockOutput, error) {
+//    func (m *mockClientClient) CreateAccessPoint(input *s3control.CreateAccessPointInput) (*s3control.CreateAccessPointOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockS3ControlClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,12 +60,38 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type S3ControlAPI interface {
+type ClientAPI interface {
+	CreateAccessPointRequest(*s3control.CreateAccessPointInput) s3control.CreateAccessPointRequest
+
+	CreateJobRequest(*s3control.CreateJobInput) s3control.CreateJobRequest
+
+	DeleteAccessPointRequest(*s3control.DeleteAccessPointInput) s3control.DeleteAccessPointRequest
+
+	DeleteAccessPointPolicyRequest(*s3control.DeleteAccessPointPolicyInput) s3control.DeleteAccessPointPolicyRequest
+
 	DeletePublicAccessBlockRequest(*s3control.DeletePublicAccessBlockInput) s3control.DeletePublicAccessBlockRequest
+
+	DescribeJobRequest(*s3control.DescribeJobInput) s3control.DescribeJobRequest
+
+	GetAccessPointRequest(*s3control.GetAccessPointInput) s3control.GetAccessPointRequest
+
+	GetAccessPointPolicyRequest(*s3control.GetAccessPointPolicyInput) s3control.GetAccessPointPolicyRequest
+
+	GetAccessPointPolicyStatusRequest(*s3control.GetAccessPointPolicyStatusInput) s3control.GetAccessPointPolicyStatusRequest
 
 	GetPublicAccessBlockRequest(*s3control.GetPublicAccessBlockInput) s3control.GetPublicAccessBlockRequest
 
+	ListAccessPointsRequest(*s3control.ListAccessPointsInput) s3control.ListAccessPointsRequest
+
+	ListJobsRequest(*s3control.ListJobsInput) s3control.ListJobsRequest
+
+	PutAccessPointPolicyRequest(*s3control.PutAccessPointPolicyInput) s3control.PutAccessPointPolicyRequest
+
 	PutPublicAccessBlockRequest(*s3control.PutPublicAccessBlockInput) s3control.PutPublicAccessBlockRequest
+
+	UpdateJobPriorityRequest(*s3control.UpdateJobPriorityInput) s3control.UpdateJobPriorityRequest
+
+	UpdateJobStatusRequest(*s3control.UpdateJobStatusInput) s3control.UpdateJobStatusRequest
 }
 
-var _ S3ControlAPI = (*s3control.S3Control)(nil)
+var _ ClientAPI = (*s3control.Client)(nil)

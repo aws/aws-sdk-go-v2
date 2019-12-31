@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/glue"
 )
 
-// GlueAPI provides an interface to enable mocking the
-// glue.Glue service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// glue.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Glue.
-//    func myFunc(svc glueiface.GlueAPI) bool {
+//    func myFunc(svc glueiface.ClientAPI) bool {
 //        // Make svc.BatchCreatePartition request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockGlueClient struct {
-//        glueiface.GlueAPI
+//    type mockClientClient struct {
+//        glueiface.ClientPI
 //    }
-//    func (m *mockGlueClient) BatchCreatePartition(input *glue.BatchCreatePartitionInput) (*glue.BatchCreatePartitionOutput, error) {
+//    func (m *mockClientClient) BatchCreatePartition(input *glue.BatchCreatePartitionInput) (*glue.BatchCreatePartitionOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockGlueClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type GlueAPI interface {
+type ClientAPI interface {
 	BatchCreatePartitionRequest(*glue.BatchCreatePartitionInput) glue.BatchCreatePartitionRequest
 
 	BatchDeleteConnectionRequest(*glue.BatchDeleteConnectionInput) glue.BatchDeleteConnectionRequest
@@ -72,9 +71,21 @@ type GlueAPI interface {
 
 	BatchDeleteTableVersionRequest(*glue.BatchDeleteTableVersionInput) glue.BatchDeleteTableVersionRequest
 
+	BatchGetCrawlersRequest(*glue.BatchGetCrawlersInput) glue.BatchGetCrawlersRequest
+
+	BatchGetDevEndpointsRequest(*glue.BatchGetDevEndpointsInput) glue.BatchGetDevEndpointsRequest
+
+	BatchGetJobsRequest(*glue.BatchGetJobsInput) glue.BatchGetJobsRequest
+
 	BatchGetPartitionRequest(*glue.BatchGetPartitionInput) glue.BatchGetPartitionRequest
 
+	BatchGetTriggersRequest(*glue.BatchGetTriggersInput) glue.BatchGetTriggersRequest
+
+	BatchGetWorkflowsRequest(*glue.BatchGetWorkflowsInput) glue.BatchGetWorkflowsRequest
+
 	BatchStopJobRunRequest(*glue.BatchStopJobRunInput) glue.BatchStopJobRunRequest
+
+	CancelMLTaskRunRequest(*glue.CancelMLTaskRunInput) glue.CancelMLTaskRunRequest
 
 	CreateClassifierRequest(*glue.CreateClassifierInput) glue.CreateClassifierRequest
 
@@ -88,6 +99,8 @@ type GlueAPI interface {
 
 	CreateJobRequest(*glue.CreateJobInput) glue.CreateJobRequest
 
+	CreateMLTransformRequest(*glue.CreateMLTransformInput) glue.CreateMLTransformRequest
+
 	CreatePartitionRequest(*glue.CreatePartitionInput) glue.CreatePartitionRequest
 
 	CreateScriptRequest(*glue.CreateScriptInput) glue.CreateScriptRequest
@@ -100,6 +113,8 @@ type GlueAPI interface {
 
 	CreateUserDefinedFunctionRequest(*glue.CreateUserDefinedFunctionInput) glue.CreateUserDefinedFunctionRequest
 
+	CreateWorkflowRequest(*glue.CreateWorkflowInput) glue.CreateWorkflowRequest
+
 	DeleteClassifierRequest(*glue.DeleteClassifierInput) glue.DeleteClassifierRequest
 
 	DeleteConnectionRequest(*glue.DeleteConnectionInput) glue.DeleteConnectionRequest
@@ -111,6 +126,8 @@ type GlueAPI interface {
 	DeleteDevEndpointRequest(*glue.DeleteDevEndpointInput) glue.DeleteDevEndpointRequest
 
 	DeleteJobRequest(*glue.DeleteJobInput) glue.DeleteJobRequest
+
+	DeleteMLTransformRequest(*glue.DeleteMLTransformInput) glue.DeleteMLTransformRequest
 
 	DeletePartitionRequest(*glue.DeletePartitionInput) glue.DeletePartitionRequest
 
@@ -125,6 +142,8 @@ type GlueAPI interface {
 	DeleteTriggerRequest(*glue.DeleteTriggerInput) glue.DeleteTriggerRequest
 
 	DeleteUserDefinedFunctionRequest(*glue.DeleteUserDefinedFunctionInput) glue.DeleteUserDefinedFunctionRequest
+
+	DeleteWorkflowRequest(*glue.DeleteWorkflowInput) glue.DeleteWorkflowRequest
 
 	GetCatalogImportStatusRequest(*glue.GetCatalogImportStatusInput) glue.GetCatalogImportStatusRequest
 
@@ -156,11 +175,21 @@ type GlueAPI interface {
 
 	GetJobRequest(*glue.GetJobInput) glue.GetJobRequest
 
+	GetJobBookmarkRequest(*glue.GetJobBookmarkInput) glue.GetJobBookmarkRequest
+
 	GetJobRunRequest(*glue.GetJobRunInput) glue.GetJobRunRequest
 
 	GetJobRunsRequest(*glue.GetJobRunsInput) glue.GetJobRunsRequest
 
 	GetJobsRequest(*glue.GetJobsInput) glue.GetJobsRequest
+
+	GetMLTaskRunRequest(*glue.GetMLTaskRunInput) glue.GetMLTaskRunRequest
+
+	GetMLTaskRunsRequest(*glue.GetMLTaskRunsInput) glue.GetMLTaskRunsRequest
+
+	GetMLTransformRequest(*glue.GetMLTransformInput) glue.GetMLTransformRequest
+
+	GetMLTransformsRequest(*glue.GetMLTransformsInput) glue.GetMLTransformsRequest
 
 	GetMappingRequest(*glue.GetMappingInput) glue.GetMappingRequest
 
@@ -184,6 +213,8 @@ type GlueAPI interface {
 
 	GetTablesRequest(*glue.GetTablesInput) glue.GetTablesRequest
 
+	GetTagsRequest(*glue.GetTagsInput) glue.GetTagsRequest
+
 	GetTriggerRequest(*glue.GetTriggerInput) glue.GetTriggerRequest
 
 	GetTriggersRequest(*glue.GetTriggersInput) glue.GetTriggersRequest
@@ -192,27 +223,63 @@ type GlueAPI interface {
 
 	GetUserDefinedFunctionsRequest(*glue.GetUserDefinedFunctionsInput) glue.GetUserDefinedFunctionsRequest
 
+	GetWorkflowRequest(*glue.GetWorkflowInput) glue.GetWorkflowRequest
+
+	GetWorkflowRunRequest(*glue.GetWorkflowRunInput) glue.GetWorkflowRunRequest
+
+	GetWorkflowRunPropertiesRequest(*glue.GetWorkflowRunPropertiesInput) glue.GetWorkflowRunPropertiesRequest
+
+	GetWorkflowRunsRequest(*glue.GetWorkflowRunsInput) glue.GetWorkflowRunsRequest
+
 	ImportCatalogToGlueRequest(*glue.ImportCatalogToGlueInput) glue.ImportCatalogToGlueRequest
+
+	ListCrawlersRequest(*glue.ListCrawlersInput) glue.ListCrawlersRequest
+
+	ListDevEndpointsRequest(*glue.ListDevEndpointsInput) glue.ListDevEndpointsRequest
+
+	ListJobsRequest(*glue.ListJobsInput) glue.ListJobsRequest
+
+	ListTriggersRequest(*glue.ListTriggersInput) glue.ListTriggersRequest
+
+	ListWorkflowsRequest(*glue.ListWorkflowsInput) glue.ListWorkflowsRequest
 
 	PutDataCatalogEncryptionSettingsRequest(*glue.PutDataCatalogEncryptionSettingsInput) glue.PutDataCatalogEncryptionSettingsRequest
 
 	PutResourcePolicyRequest(*glue.PutResourcePolicyInput) glue.PutResourcePolicyRequest
 
+	PutWorkflowRunPropertiesRequest(*glue.PutWorkflowRunPropertiesInput) glue.PutWorkflowRunPropertiesRequest
+
 	ResetJobBookmarkRequest(*glue.ResetJobBookmarkInput) glue.ResetJobBookmarkRequest
+
+	SearchTablesRequest(*glue.SearchTablesInput) glue.SearchTablesRequest
 
 	StartCrawlerRequest(*glue.StartCrawlerInput) glue.StartCrawlerRequest
 
 	StartCrawlerScheduleRequest(*glue.StartCrawlerScheduleInput) glue.StartCrawlerScheduleRequest
 
+	StartExportLabelsTaskRunRequest(*glue.StartExportLabelsTaskRunInput) glue.StartExportLabelsTaskRunRequest
+
+	StartImportLabelsTaskRunRequest(*glue.StartImportLabelsTaskRunInput) glue.StartImportLabelsTaskRunRequest
+
 	StartJobRunRequest(*glue.StartJobRunInput) glue.StartJobRunRequest
 
+	StartMLEvaluationTaskRunRequest(*glue.StartMLEvaluationTaskRunInput) glue.StartMLEvaluationTaskRunRequest
+
+	StartMLLabelingSetGenerationTaskRunRequest(*glue.StartMLLabelingSetGenerationTaskRunInput) glue.StartMLLabelingSetGenerationTaskRunRequest
+
 	StartTriggerRequest(*glue.StartTriggerInput) glue.StartTriggerRequest
+
+	StartWorkflowRunRequest(*glue.StartWorkflowRunInput) glue.StartWorkflowRunRequest
 
 	StopCrawlerRequest(*glue.StopCrawlerInput) glue.StopCrawlerRequest
 
 	StopCrawlerScheduleRequest(*glue.StopCrawlerScheduleInput) glue.StopCrawlerScheduleRequest
 
 	StopTriggerRequest(*glue.StopTriggerInput) glue.StopTriggerRequest
+
+	TagResourceRequest(*glue.TagResourceInput) glue.TagResourceRequest
+
+	UntagResourceRequest(*glue.UntagResourceInput) glue.UntagResourceRequest
 
 	UpdateClassifierRequest(*glue.UpdateClassifierInput) glue.UpdateClassifierRequest
 
@@ -228,6 +295,8 @@ type GlueAPI interface {
 
 	UpdateJobRequest(*glue.UpdateJobInput) glue.UpdateJobRequest
 
+	UpdateMLTransformRequest(*glue.UpdateMLTransformInput) glue.UpdateMLTransformRequest
+
 	UpdatePartitionRequest(*glue.UpdatePartitionInput) glue.UpdatePartitionRequest
 
 	UpdateTableRequest(*glue.UpdateTableInput) glue.UpdateTableRequest
@@ -235,6 +304,8 @@ type GlueAPI interface {
 	UpdateTriggerRequest(*glue.UpdateTriggerInput) glue.UpdateTriggerRequest
 
 	UpdateUserDefinedFunctionRequest(*glue.UpdateUserDefinedFunctionInput) glue.UpdateUserDefinedFunctionRequest
+
+	UpdateWorkflowRequest(*glue.UpdateWorkflowInput) glue.UpdateWorkflowRequest
 }
 
-var _ GlueAPI = (*glue.Glue)(nil)
+var _ ClientAPI = (*glue.Client)(nil)

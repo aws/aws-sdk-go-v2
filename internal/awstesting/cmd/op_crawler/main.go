@@ -1,3 +1,5 @@
+// +build sdktool
+
 package main
 
 import (
@@ -436,17 +438,17 @@ func computeBodyLength(r io.ReadSeeker) (int64, error) {
 		return -1, nil
 	}
 
-	curOffset, err := r.Seek(0, 1)
+	curOffset, err := r.Seek(0, io.SeekCurrent)
 	if err != nil {
 		return 0, err
 	}
 
-	endOffset, err := r.Seek(0, 2)
+	endOffset, err := r.Seek(0, io.SeekEnd)
 	if err != nil {
 		return 0, err
 	}
 
-	_, err = r.Seek(curOffset, 0)
+	_, err = r.Seek(curOffset, io.SeekStart)
 	if err != nil {
 		return 0, err
 	}

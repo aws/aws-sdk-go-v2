@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail"
 )
 
-// PinpointEmailAPI provides an interface to enable mocking the
-// pinpointemail.PinpointEmail service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// pinpointemail.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // Amazon Pinpoint Email Service.
-//    func myFunc(svc pinpointemailiface.PinpointEmailAPI) bool {
+//    // Pinpoint Email.
+//    func myFunc(svc pinpointemailiface.ClientAPI) bool {
 //        // Make svc.CreateConfigurationSet request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockPinpointEmailClient struct {
-//        pinpointemailiface.PinpointEmailAPI
+//    type mockClientClient struct {
+//        pinpointemailiface.ClientPI
 //    }
-//    func (m *mockPinpointEmailClient) CreateConfigurationSet(input *pinpointemail.CreateConfigurationSetInput) (*pinpointemail.CreateConfigurationSetOutput, error) {
+//    func (m *mockClientClient) CreateConfigurationSet(input *pinpointemail.CreateConfigurationSetInput) (*pinpointemail.CreateConfigurationSetOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockPinpointEmailClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type PinpointEmailAPI interface {
+type ClientAPI interface {
 	CreateConfigurationSetRequest(*pinpointemail.CreateConfigurationSetInput) pinpointemail.CreateConfigurationSetRequest
 
 	CreateConfigurationSetEventDestinationRequest(*pinpointemail.CreateConfigurationSetEventDestinationInput) pinpointemail.CreateConfigurationSetEventDestinationRequest
@@ -96,6 +95,8 @@ type PinpointEmailAPI interface {
 
 	GetDeliverabilityTestReportRequest(*pinpointemail.GetDeliverabilityTestReportInput) pinpointemail.GetDeliverabilityTestReportRequest
 
+	GetDomainDeliverabilityCampaignRequest(*pinpointemail.GetDomainDeliverabilityCampaignInput) pinpointemail.GetDomainDeliverabilityCampaignRequest
+
 	GetDomainStatisticsReportRequest(*pinpointemail.GetDomainStatisticsReportInput) pinpointemail.GetDomainStatisticsReportRequest
 
 	GetEmailIdentityRequest(*pinpointemail.GetEmailIdentityInput) pinpointemail.GetEmailIdentityRequest
@@ -106,7 +107,11 @@ type PinpointEmailAPI interface {
 
 	ListDeliverabilityTestReportsRequest(*pinpointemail.ListDeliverabilityTestReportsInput) pinpointemail.ListDeliverabilityTestReportsRequest
 
+	ListDomainDeliverabilityCampaignsRequest(*pinpointemail.ListDomainDeliverabilityCampaignsInput) pinpointemail.ListDomainDeliverabilityCampaignsRequest
+
 	ListEmailIdentitiesRequest(*pinpointemail.ListEmailIdentitiesInput) pinpointemail.ListEmailIdentitiesRequest
+
+	ListTagsForResourceRequest(*pinpointemail.ListTagsForResourceInput) pinpointemail.ListTagsForResourceRequest
 
 	PutAccountDedicatedIpWarmupAttributesRequest(*pinpointemail.PutAccountDedicatedIpWarmupAttributesInput) pinpointemail.PutAccountDedicatedIpWarmupAttributesRequest
 
@@ -134,7 +139,11 @@ type PinpointEmailAPI interface {
 
 	SendEmailRequest(*pinpointemail.SendEmailInput) pinpointemail.SendEmailRequest
 
+	TagResourceRequest(*pinpointemail.TagResourceInput) pinpointemail.TagResourceRequest
+
+	UntagResourceRequest(*pinpointemail.UntagResourceInput) pinpointemail.UntagResourceRequest
+
 	UpdateConfigurationSetEventDestinationRequest(*pinpointemail.UpdateConfigurationSetEventDestinationInput) pinpointemail.UpdateConfigurationSetEventDestinationRequest
 }
 
-var _ PinpointEmailAPI = (*pinpointemail.PinpointEmail)(nil)
+var _ ClientAPI = (*pinpointemail.Client)(nil)

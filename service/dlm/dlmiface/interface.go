@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dlm"
 )
 
-// DLMAPI provides an interface to enable mocking the
-// dlm.DLM service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// dlm.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // Amazon Data Lifecycle Manager.
-//    func myFunc(svc dlmiface.DLMAPI) bool {
+//    // Amazon DLM.
+//    func myFunc(svc dlmiface.ClientAPI) bool {
 //        // Make svc.CreateLifecyclePolicy request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockDLMClient struct {
-//        dlmiface.DLMAPI
+//    type mockClientClient struct {
+//        dlmiface.ClientPI
 //    }
-//    func (m *mockDLMClient) CreateLifecyclePolicy(input *dlm.CreateLifecyclePolicyInput) (*dlm.CreateLifecyclePolicyOutput, error) {
+//    func (m *mockClientClient) CreateLifecyclePolicy(input *dlm.CreateLifecyclePolicyInput) (*dlm.CreateLifecyclePolicyOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockDLMClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type DLMAPI interface {
+type ClientAPI interface {
 	CreateLifecyclePolicyRequest(*dlm.CreateLifecyclePolicyInput) dlm.CreateLifecyclePolicyRequest
 
 	DeleteLifecyclePolicyRequest(*dlm.DeleteLifecyclePolicyInput) dlm.DeleteLifecyclePolicyRequest
@@ -70,7 +69,13 @@ type DLMAPI interface {
 
 	GetLifecyclePolicyRequest(*dlm.GetLifecyclePolicyInput) dlm.GetLifecyclePolicyRequest
 
+	ListTagsForResourceRequest(*dlm.ListTagsForResourceInput) dlm.ListTagsForResourceRequest
+
+	TagResourceRequest(*dlm.TagResourceInput) dlm.TagResourceRequest
+
+	UntagResourceRequest(*dlm.UntagResourceInput) dlm.UntagResourceRequest
+
 	UpdateLifecyclePolicyRequest(*dlm.UpdateLifecyclePolicyInput) dlm.UpdateLifecyclePolicyRequest
 }
 
-var _ DLMAPI = (*dlm.DLM)(nil)
+var _ ClientAPI = (*dlm.Client)(nil)

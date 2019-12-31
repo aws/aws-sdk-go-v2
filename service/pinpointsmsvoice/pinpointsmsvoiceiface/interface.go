@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice"
 )
 
-// PinpointSMSVoiceAPI provides an interface to enable mocking the
-// pinpointsmsvoice.PinpointSMSVoice service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// pinpointsmsvoice.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // Amazon Pinpoint SMS and Voice Service.
-//    func myFunc(svc pinpointsmsvoiceiface.PinpointSMSVoiceAPI) bool {
+//    // Pinpoint SMS Voice.
+//    func myFunc(svc pinpointsmsvoiceiface.ClientAPI) bool {
 //        // Make svc.CreateConfigurationSet request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockPinpointSMSVoiceClient struct {
-//        pinpointsmsvoiceiface.PinpointSMSVoiceAPI
+//    type mockClientClient struct {
+//        pinpointsmsvoiceiface.ClientPI
 //    }
-//    func (m *mockPinpointSMSVoiceClient) CreateConfigurationSet(input *pinpointsmsvoice.CreateConfigurationSetInput) (*pinpointsmsvoice.CreateConfigurationSetOutput, error) {
+//    func (m *mockClientClient) CreateConfigurationSet(input *pinpointsmsvoice.CreateConfigurationSetInput) (*pinpointsmsvoice.CreateConfigurationSetOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockPinpointSMSVoiceClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type PinpointSMSVoiceAPI interface {
+type ClientAPI interface {
 	CreateConfigurationSetRequest(*pinpointsmsvoice.CreateConfigurationSetInput) pinpointsmsvoice.CreateConfigurationSetRequest
 
 	CreateConfigurationSetEventDestinationRequest(*pinpointsmsvoice.CreateConfigurationSetEventDestinationInput) pinpointsmsvoice.CreateConfigurationSetEventDestinationRequest
@@ -72,9 +71,11 @@ type PinpointSMSVoiceAPI interface {
 
 	GetConfigurationSetEventDestinationsRequest(*pinpointsmsvoice.GetConfigurationSetEventDestinationsInput) pinpointsmsvoice.GetConfigurationSetEventDestinationsRequest
 
+	ListConfigurationSetsRequest(*pinpointsmsvoice.ListConfigurationSetsInput) pinpointsmsvoice.ListConfigurationSetsRequest
+
 	SendVoiceMessageRequest(*pinpointsmsvoice.SendVoiceMessageInput) pinpointsmsvoice.SendVoiceMessageRequest
 
 	UpdateConfigurationSetEventDestinationRequest(*pinpointsmsvoice.UpdateConfigurationSetEventDestinationInput) pinpointsmsvoice.UpdateConfigurationSetEventDestinationRequest
 }
 
-var _ PinpointSMSVoiceAPI = (*pinpointsmsvoice.PinpointSMSVoice)(nil)
+var _ ClientAPI = (*pinpointsmsvoice.Client)(nil)

@@ -20,7 +20,7 @@ type SaveStrategy interface {
 
 // S3SaveStrategy will save the metadata to a separate instruction file in S3
 type S3SaveStrategy struct {
-	Client                *s3.S3
+	Client                *s3.Client
 	InstructionFileSuffix string
 }
 
@@ -79,7 +79,7 @@ type LoadStrategy interface {
 
 // S3LoadStrategy will load the instruction file from s3
 type S3LoadStrategy struct {
-	Client                *s3.S3
+	Client                *s3.Client
 	InstructionFileSuffix string
 }
 
@@ -125,7 +125,7 @@ func (load HeaderV2LoadStrategy) Load(req *aws.Request) (Envelope, error) {
 }
 
 type defaultV2LoadStrategy struct {
-	client *s3.S3
+	client *s3.Client
 	suffix string
 }
 

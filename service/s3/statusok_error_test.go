@@ -161,14 +161,13 @@ func TestCompleteMultipartUploadError(t *testing.T) {
 	}
 }
 
-func newCopyTestSvc(errMsg string) *s3.S3 {
+func newCopyTestSvc(errMsg string) *s3.Client {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, errMsg, http.StatusOK)
 	}))
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
-
+	cfg.Retryer = aws.NoOpRetryer{}
 	svc := s3.New(cfg)
 	svc.ForcePathStyle = true
 

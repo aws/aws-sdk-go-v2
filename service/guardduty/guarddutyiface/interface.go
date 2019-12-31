@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/guardduty"
 )
 
-// GuardDutyAPI provides an interface to enable mocking the
-// guardduty.GuardDuty service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// guardduty.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon GuardDuty.
-//    func myFunc(svc guarddutyiface.GuardDutyAPI) bool {
+//    func myFunc(svc guarddutyiface.ClientAPI) bool {
 //        // Make svc.AcceptInvitation request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockGuardDutyClient struct {
-//        guarddutyiface.GuardDutyAPI
+//    type mockClientClient struct {
+//        guarddutyiface.ClientPI
 //    }
-//    func (m *mockGuardDutyClient) AcceptInvitation(input *guardduty.AcceptInvitationInput) (*guardduty.AcceptInvitationOutput, error) {
+//    func (m *mockClientClient) AcceptInvitation(input *guardduty.AcceptInvitationInput) (*guardduty.AcceptInvitationOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockGuardDutyClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type GuardDutyAPI interface {
+type ClientAPI interface {
 	AcceptInvitationRequest(*guardduty.AcceptInvitationInput) guardduty.AcceptInvitationRequest
 
 	ArchiveFindingsRequest(*guardduty.ArchiveFindingsInput) guardduty.ArchiveFindingsRequest
@@ -73,6 +72,8 @@ type GuardDutyAPI interface {
 	CreateIPSetRequest(*guardduty.CreateIPSetInput) guardduty.CreateIPSetRequest
 
 	CreateMembersRequest(*guardduty.CreateMembersInput) guardduty.CreateMembersRequest
+
+	CreatePublishingDestinationRequest(*guardduty.CreatePublishingDestinationInput) guardduty.CreatePublishingDestinationRequest
 
 	CreateSampleFindingsRequest(*guardduty.CreateSampleFindingsInput) guardduty.CreateSampleFindingsRequest
 
@@ -90,7 +91,11 @@ type GuardDutyAPI interface {
 
 	DeleteMembersRequest(*guardduty.DeleteMembersInput) guardduty.DeleteMembersRequest
 
+	DeletePublishingDestinationRequest(*guardduty.DeletePublishingDestinationInput) guardduty.DeletePublishingDestinationRequest
+
 	DeleteThreatIntelSetRequest(*guardduty.DeleteThreatIntelSetInput) guardduty.DeleteThreatIntelSetRequest
+
+	DescribePublishingDestinationRequest(*guardduty.DescribePublishingDestinationInput) guardduty.DescribePublishingDestinationRequest
 
 	DisassociateFromMasterAccountRequest(*guardduty.DisassociateFromMasterAccountInput) guardduty.DisassociateFromMasterAccountRequest
 
@@ -128,13 +133,21 @@ type GuardDutyAPI interface {
 
 	ListMembersRequest(*guardduty.ListMembersInput) guardduty.ListMembersRequest
 
+	ListPublishingDestinationsRequest(*guardduty.ListPublishingDestinationsInput) guardduty.ListPublishingDestinationsRequest
+
+	ListTagsForResourceRequest(*guardduty.ListTagsForResourceInput) guardduty.ListTagsForResourceRequest
+
 	ListThreatIntelSetsRequest(*guardduty.ListThreatIntelSetsInput) guardduty.ListThreatIntelSetsRequest
 
 	StartMonitoringMembersRequest(*guardduty.StartMonitoringMembersInput) guardduty.StartMonitoringMembersRequest
 
 	StopMonitoringMembersRequest(*guardduty.StopMonitoringMembersInput) guardduty.StopMonitoringMembersRequest
 
+	TagResourceRequest(*guardduty.TagResourceInput) guardduty.TagResourceRequest
+
 	UnarchiveFindingsRequest(*guardduty.UnarchiveFindingsInput) guardduty.UnarchiveFindingsRequest
+
+	UntagResourceRequest(*guardduty.UntagResourceInput) guardduty.UntagResourceRequest
 
 	UpdateDetectorRequest(*guardduty.UpdateDetectorInput) guardduty.UpdateDetectorRequest
 
@@ -144,7 +157,9 @@ type GuardDutyAPI interface {
 
 	UpdateIPSetRequest(*guardduty.UpdateIPSetInput) guardduty.UpdateIPSetRequest
 
+	UpdatePublishingDestinationRequest(*guardduty.UpdatePublishingDestinationInput) guardduty.UpdatePublishingDestinationRequest
+
 	UpdateThreatIntelSetRequest(*guardduty.UpdateThreatIntelSetInput) guardduty.UpdateThreatIntelSetRequest
 }
 
-var _ GuardDutyAPI = (*guardduty.GuardDuty)(nil)
+var _ ClientAPI = (*guardduty.Client)(nil)

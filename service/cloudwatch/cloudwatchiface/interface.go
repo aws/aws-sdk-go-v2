@@ -15,18 +15,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch"
 )
 
-// CloudWatchAPI provides an interface to enable mocking the
-// cloudwatch.CloudWatch service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// cloudwatch.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // Amazon CloudWatch.
-//    func myFunc(svc cloudwatchiface.CloudWatchAPI) bool {
+//    // CloudWatch.
+//    func myFunc(svc cloudwatchiface.ClientAPI) bool {
 //        // Make svc.DeleteAlarms request
 //    }
 //
@@ -44,16 +43,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloudWatchClient struct {
-//        cloudwatchiface.CloudWatchAPI
+//    type mockClientClient struct {
+//        cloudwatchiface.ClientPI
 //    }
-//    func (m *mockCloudWatchClient) DeleteAlarms(input *cloudwatch.DeleteAlarmsInput) (*cloudwatch.DeleteAlarmsOutput, error) {
+//    func (m *mockClientClient) DeleteAlarms(input *cloudwatch.DeleteAlarmsInput) (*cloudwatch.DeleteAlarmsOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockCloudWatchClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -64,10 +63,14 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type CloudWatchAPI interface {
+type ClientAPI interface {
 	DeleteAlarmsRequest(*cloudwatch.DeleteAlarmsInput) cloudwatch.DeleteAlarmsRequest
 
+	DeleteAnomalyDetectorRequest(*cloudwatch.DeleteAnomalyDetectorInput) cloudwatch.DeleteAnomalyDetectorRequest
+
 	DeleteDashboardsRequest(*cloudwatch.DeleteDashboardsInput) cloudwatch.DeleteDashboardsRequest
+
+	DeleteInsightRulesRequest(*cloudwatch.DeleteInsightRulesInput) cloudwatch.DeleteInsightRulesRequest
 
 	DescribeAlarmHistoryRequest(*cloudwatch.DescribeAlarmHistoryInput) cloudwatch.DescribeAlarmHistoryRequest
 
@@ -75,11 +78,21 @@ type CloudWatchAPI interface {
 
 	DescribeAlarmsForMetricRequest(*cloudwatch.DescribeAlarmsForMetricInput) cloudwatch.DescribeAlarmsForMetricRequest
 
+	DescribeAnomalyDetectorsRequest(*cloudwatch.DescribeAnomalyDetectorsInput) cloudwatch.DescribeAnomalyDetectorsRequest
+
+	DescribeInsightRulesRequest(*cloudwatch.DescribeInsightRulesInput) cloudwatch.DescribeInsightRulesRequest
+
 	DisableAlarmActionsRequest(*cloudwatch.DisableAlarmActionsInput) cloudwatch.DisableAlarmActionsRequest
+
+	DisableInsightRulesRequest(*cloudwatch.DisableInsightRulesInput) cloudwatch.DisableInsightRulesRequest
 
 	EnableAlarmActionsRequest(*cloudwatch.EnableAlarmActionsInput) cloudwatch.EnableAlarmActionsRequest
 
+	EnableInsightRulesRequest(*cloudwatch.EnableInsightRulesInput) cloudwatch.EnableInsightRulesRequest
+
 	GetDashboardRequest(*cloudwatch.GetDashboardInput) cloudwatch.GetDashboardRequest
+
+	GetInsightRuleReportRequest(*cloudwatch.GetInsightRuleReportInput) cloudwatch.GetInsightRuleReportRequest
 
 	GetMetricDataRequest(*cloudwatch.GetMetricDataInput) cloudwatch.GetMetricDataRequest
 
@@ -91,7 +104,13 @@ type CloudWatchAPI interface {
 
 	ListMetricsRequest(*cloudwatch.ListMetricsInput) cloudwatch.ListMetricsRequest
 
+	ListTagsForResourceRequest(*cloudwatch.ListTagsForResourceInput) cloudwatch.ListTagsForResourceRequest
+
+	PutAnomalyDetectorRequest(*cloudwatch.PutAnomalyDetectorInput) cloudwatch.PutAnomalyDetectorRequest
+
 	PutDashboardRequest(*cloudwatch.PutDashboardInput) cloudwatch.PutDashboardRequest
+
+	PutInsightRuleRequest(*cloudwatch.PutInsightRuleInput) cloudwatch.PutInsightRuleRequest
 
 	PutMetricAlarmRequest(*cloudwatch.PutMetricAlarmInput) cloudwatch.PutMetricAlarmRequest
 
@@ -99,7 +118,11 @@ type CloudWatchAPI interface {
 
 	SetAlarmStateRequest(*cloudwatch.SetAlarmStateInput) cloudwatch.SetAlarmStateRequest
 
+	TagResourceRequest(*cloudwatch.TagResourceInput) cloudwatch.TagResourceRequest
+
+	UntagResourceRequest(*cloudwatch.UntagResourceInput) cloudwatch.UntagResourceRequest
+
 	WaitUntilAlarmExists(context.Context, *cloudwatch.DescribeAlarmsInput, ...aws.WaiterOption) error
 }
 
-var _ CloudWatchAPI = (*cloudwatch.CloudWatch)(nil)
+var _ ClientAPI = (*cloudwatch.Client)(nil)

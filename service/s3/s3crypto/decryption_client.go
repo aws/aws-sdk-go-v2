@@ -26,7 +26,7 @@ type CEKEntry func(CipherData) (ContentCipher, error)
 //	* AES/GCM
 //	* AES/CBC
 type DecryptionClient struct {
-	S3Client s3iface.S3API
+	S3Client s3iface.ClientAPI
 	// LoadStrategy is used to load the metadata either from the metadata of the object
 	// or from a separate file in s3.
 	//
@@ -119,7 +119,11 @@ func (c *DecryptionClient) GetObjectRequest(input *s3.GetObjectInput) s3.GetObje
 // GetObject is a wrapper for GetObjectRequest
 func (c *DecryptionClient) GetObject(input *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	req := c.GetObjectRequest(input)
-	return req.Send(context.Background())
+	resp, err := req.Send(context.Background())
+	if err != nil {
+		return nil, err
+	}
+	return resp.GetObjectOutput, nil
 }
 
 // GetObjectWithContext is a wrapper for GetObjectRequest with the additional
@@ -132,5 +136,9 @@ func (c *DecryptionClient) GetObject(input *s3.GetObjectInput) (*s3.GetObjectOut
 func (c *DecryptionClient) GetObjectWithContext(ctx context.Context, input *s3.GetObjectInput, opts ...request.Option) (*s3.GetObjectOutput, error) {
 	req := c.GetObjectRequest(input)
 	req.ApplyOptions(opts...)
-	return req.Send(ctx)
+	resp, err := req.Send(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return resp.GetObjectOutput, nil
 }

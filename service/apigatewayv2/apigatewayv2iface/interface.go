@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2"
 )
 
-// ApiGatewayV2API provides an interface to enable mocking the
-// apigatewayv2.ApiGatewayV2 service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// apigatewayv2.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AmazonApiGatewayV2.
-//    func myFunc(svc apigatewayv2iface.ApiGatewayV2API) bool {
+//    func myFunc(svc apigatewayv2iface.ClientAPI) bool {
 //        // Make svc.CreateApi request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockApiGatewayV2Client struct {
-//        apigatewayv2iface.ApiGatewayV2API
+//    type mockClientClient struct {
+//        apigatewayv2iface.ClientPI
 //    }
-//    func (m *mockApiGatewayV2Client) CreateApi(input *apigatewayv2.CreateApiInput) (*apigatewayv2.CreateApiOutput, error) {
+//    func (m *mockClientClient) CreateApi(input *apigatewayv2.CreateApiInput) (*apigatewayv2.CreateApiOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockApiGatewayV2Client{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type ApiGatewayV2API interface {
+type ClientAPI interface {
 	CreateApiRequest(*apigatewayv2.CreateApiInput) apigatewayv2.CreateApiRequest
 
 	CreateApiMappingRequest(*apigatewayv2.CreateApiMappingInput) apigatewayv2.CreateApiMappingRequest
@@ -90,6 +89,8 @@ type ApiGatewayV2API interface {
 
 	DeleteAuthorizerRequest(*apigatewayv2.DeleteAuthorizerInput) apigatewayv2.DeleteAuthorizerRequest
 
+	DeleteCorsConfigurationRequest(*apigatewayv2.DeleteCorsConfigurationInput) apigatewayv2.DeleteCorsConfigurationRequest
+
 	DeleteDeploymentRequest(*apigatewayv2.DeleteDeploymentInput) apigatewayv2.DeleteDeploymentRequest
 
 	DeleteDomainNameRequest(*apigatewayv2.DeleteDomainNameInput) apigatewayv2.DeleteDomainNameRequest
@@ -103,6 +104,8 @@ type ApiGatewayV2API interface {
 	DeleteRouteRequest(*apigatewayv2.DeleteRouteInput) apigatewayv2.DeleteRouteRequest
 
 	DeleteRouteResponseRequest(*apigatewayv2.DeleteRouteResponseInput) apigatewayv2.DeleteRouteResponseRequest
+
+	DeleteRouteSettingsRequest(*apigatewayv2.DeleteRouteSettingsInput) apigatewayv2.DeleteRouteSettingsRequest
 
 	DeleteStageRequest(*apigatewayv2.DeleteStageInput) apigatewayv2.DeleteStageRequest
 
@@ -152,6 +155,16 @@ type ApiGatewayV2API interface {
 
 	GetStagesRequest(*apigatewayv2.GetStagesInput) apigatewayv2.GetStagesRequest
 
+	GetTagsRequest(*apigatewayv2.GetTagsInput) apigatewayv2.GetTagsRequest
+
+	ImportApiRequest(*apigatewayv2.ImportApiInput) apigatewayv2.ImportApiRequest
+
+	ReimportApiRequest(*apigatewayv2.ReimportApiInput) apigatewayv2.ReimportApiRequest
+
+	TagResourceRequest(*apigatewayv2.TagResourceInput) apigatewayv2.TagResourceRequest
+
+	UntagResourceRequest(*apigatewayv2.UntagResourceInput) apigatewayv2.UntagResourceRequest
+
 	UpdateApiRequest(*apigatewayv2.UpdateApiInput) apigatewayv2.UpdateApiRequest
 
 	UpdateApiMappingRequest(*apigatewayv2.UpdateApiMappingInput) apigatewayv2.UpdateApiMappingRequest
@@ -175,4 +188,4 @@ type ApiGatewayV2API interface {
 	UpdateStageRequest(*apigatewayv2.UpdateStageInput) apigatewayv2.UpdateStageRequest
 }
 
-var _ ApiGatewayV2API = (*apigatewayv2.ApiGatewayV2)(nil)
+var _ ClientAPI = (*apigatewayv2.Client)(nil)

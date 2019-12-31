@@ -5,6 +5,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws/external"
@@ -24,16 +25,19 @@ func main() {
 
 	bucket := os.Args[1]
 	svc := s3.New(cfg)
-	keys := getKeys(svc, bucket)
+	keys, err := getKeys(svc, bucket)
+	if err != nil {
+		log.Fatalf("failed to get keys, %v", err)
+	}
 
 	fmt.Printf("keys for bucket %q,\n%v\n", bucket, keys)
 }
 
-func getKeys(svc s3iface.S3API, bucket string) []string {
+func getKeys(svc s3iface.ClientAPI, bucket string) ([]string, error) {
 	req := svc.ListObjectsRequest(&s3.ListObjectsInput{
 		Bucket: &bucket,
 	})
-	p := req.Paginate()
+	p := s3.NewListObjectsPaginator(req)
 	keys := []string{}
 	for p.Next(context.Background()) {
 		page := p.CurrentPage()
@@ -41,5 +45,9 @@ func getKeys(svc s3iface.S3API, bucket string) []string {
 			keys = append(keys, *obj.Key)
 		}
 	}
-	return keys
+	if err := p.Err(); err != nil {
+		return nil, err
+	}
+
+	return keys, nil
 }

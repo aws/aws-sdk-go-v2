@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail"
 )
 
-// CloudTrailAPI provides an interface to enable mocking the
-// cloudtrail.CloudTrail service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// cloudtrail.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS CloudTrail.
-//    func myFunc(svc cloudtrailiface.CloudTrailAPI) bool {
+//    // CloudTrail.
+//    func myFunc(svc cloudtrailiface.ClientAPI) bool {
 //        // Make svc.AddTags request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloudTrailClient struct {
-//        cloudtrailiface.CloudTrailAPI
+//    type mockClientClient struct {
+//        cloudtrailiface.ClientPI
 //    }
-//    func (m *mockCloudTrailClient) AddTags(input *cloudtrail.AddTagsInput) (*cloudtrail.AddTagsOutput, error) {
+//    func (m *mockClientClient) AddTags(input *cloudtrail.AddTagsInput) (*cloudtrail.AddTagsOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockCloudTrailClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type CloudTrailAPI interface {
+type ClientAPI interface {
 	AddTagsRequest(*cloudtrail.AddTagsInput) cloudtrail.AddTagsRequest
 
 	CreateTrailRequest(*cloudtrail.CreateTrailInput) cloudtrail.CreateTrailRequest
@@ -72,15 +71,23 @@ type CloudTrailAPI interface {
 
 	GetEventSelectorsRequest(*cloudtrail.GetEventSelectorsInput) cloudtrail.GetEventSelectorsRequest
 
+	GetInsightSelectorsRequest(*cloudtrail.GetInsightSelectorsInput) cloudtrail.GetInsightSelectorsRequest
+
+	GetTrailRequest(*cloudtrail.GetTrailInput) cloudtrail.GetTrailRequest
+
 	GetTrailStatusRequest(*cloudtrail.GetTrailStatusInput) cloudtrail.GetTrailStatusRequest
 
 	ListPublicKeysRequest(*cloudtrail.ListPublicKeysInput) cloudtrail.ListPublicKeysRequest
 
 	ListTagsRequest(*cloudtrail.ListTagsInput) cloudtrail.ListTagsRequest
 
+	ListTrailsRequest(*cloudtrail.ListTrailsInput) cloudtrail.ListTrailsRequest
+
 	LookupEventsRequest(*cloudtrail.LookupEventsInput) cloudtrail.LookupEventsRequest
 
 	PutEventSelectorsRequest(*cloudtrail.PutEventSelectorsInput) cloudtrail.PutEventSelectorsRequest
+
+	PutInsightSelectorsRequest(*cloudtrail.PutInsightSelectorsInput) cloudtrail.PutInsightSelectorsRequest
 
 	RemoveTagsRequest(*cloudtrail.RemoveTagsInput) cloudtrail.RemoveTagsRequest
 
@@ -91,4 +98,4 @@ type CloudTrailAPI interface {
 	UpdateTrailRequest(*cloudtrail.UpdateTrailInput) cloudtrail.UpdateTrailRequest
 }
 
-var _ CloudTrailAPI = (*cloudtrail.CloudTrail)(nil)
+var _ ClientAPI = (*cloudtrail.Client)(nil)

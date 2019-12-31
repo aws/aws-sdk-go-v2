@@ -223,7 +223,20 @@ func buildScalar(v reflect.Value, buf *bytes.Buffer, tag reflect.StructTag, pare
 	default:
 		switch converted := value.Interface().(type) {
 		case time.Time:
-			buf.Write(strconv.AppendInt(scratch[:0], converted.UTC().Unix(), 10))
+			format := tag.Get("timestampFormat")
+			if len(format) == 0 {
+				format = protocol.UnixTimeFormatName
+			}
+
+			ts, err := protocol.FormatTime(format, converted)
+			if err != nil {
+				return err
+			}
+			if format != protocol.UnixTimeFormatName {
+				ts = `"` + ts + `"`
+			}
+
+			buf.WriteString(ts)
 		case []byte:
 			if !value.IsNil() {
 				buf.WriteByte('"')

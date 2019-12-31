@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness"
 )
 
-// AlexaForBusinessAPI provides an interface to enable mocking the
-// alexaforbusiness.AlexaForBusiness service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// alexaforbusiness.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Alexa For Business.
-//    func myFunc(svc alexaforbusinessiface.AlexaForBusinessAPI) bool {
+//    func myFunc(svc alexaforbusinessiface.ClientAPI) bool {
 //        // Make svc.ApproveSkill request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockAlexaForBusinessClient struct {
-//        alexaforbusinessiface.AlexaForBusinessAPI
+//    type mockClientClient struct {
+//        alexaforbusinessiface.ClientPI
 //    }
-//    func (m *mockAlexaForBusinessClient) ApproveSkill(input *alexaforbusiness.ApproveSkillInput) (*alexaforbusiness.ApproveSkillOutput, error) {
+//    func (m *mockClientClient) ApproveSkill(input *alexaforbusiness.ApproveSkillInput) (*alexaforbusiness.ApproveSkillOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockAlexaForBusinessClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,10 +60,12 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type AlexaForBusinessAPI interface {
+type ClientAPI interface {
 	ApproveSkillRequest(*alexaforbusiness.ApproveSkillInput) alexaforbusiness.ApproveSkillRequest
 
 	AssociateContactWithAddressBookRequest(*alexaforbusiness.AssociateContactWithAddressBookInput) alexaforbusiness.AssociateContactWithAddressBookRequest
+
+	AssociateDeviceWithNetworkProfileRequest(*alexaforbusiness.AssociateDeviceWithNetworkProfileInput) alexaforbusiness.AssociateDeviceWithNetworkProfileRequest
 
 	AssociateDeviceWithRoomRequest(*alexaforbusiness.AssociateDeviceWithRoomInput) alexaforbusiness.AssociateDeviceWithRoomRequest
 
@@ -81,6 +82,10 @@ type AlexaForBusinessAPI interface {
 	CreateConferenceProviderRequest(*alexaforbusiness.CreateConferenceProviderInput) alexaforbusiness.CreateConferenceProviderRequest
 
 	CreateContactRequest(*alexaforbusiness.CreateContactInput) alexaforbusiness.CreateContactRequest
+
+	CreateGatewayGroupRequest(*alexaforbusiness.CreateGatewayGroupInput) alexaforbusiness.CreateGatewayGroupRequest
+
+	CreateNetworkProfileRequest(*alexaforbusiness.CreateNetworkProfileInput) alexaforbusiness.CreateNetworkProfileRequest
 
 	CreateProfileRequest(*alexaforbusiness.CreateProfileInput) alexaforbusiness.CreateProfileRequest
 
@@ -99,6 +104,12 @@ type AlexaForBusinessAPI interface {
 	DeleteContactRequest(*alexaforbusiness.DeleteContactInput) alexaforbusiness.DeleteContactRequest
 
 	DeleteDeviceRequest(*alexaforbusiness.DeleteDeviceInput) alexaforbusiness.DeleteDeviceRequest
+
+	DeleteDeviceUsageDataRequest(*alexaforbusiness.DeleteDeviceUsageDataInput) alexaforbusiness.DeleteDeviceUsageDataRequest
+
+	DeleteGatewayGroupRequest(*alexaforbusiness.DeleteGatewayGroupInput) alexaforbusiness.DeleteGatewayGroupRequest
+
+	DeleteNetworkProfileRequest(*alexaforbusiness.DeleteNetworkProfileInput) alexaforbusiness.DeleteNetworkProfileRequest
 
 	DeleteProfileRequest(*alexaforbusiness.DeleteProfileInput) alexaforbusiness.DeleteProfileRequest
 
@@ -134,6 +145,14 @@ type AlexaForBusinessAPI interface {
 
 	GetDeviceRequest(*alexaforbusiness.GetDeviceInput) alexaforbusiness.GetDeviceRequest
 
+	GetGatewayRequest(*alexaforbusiness.GetGatewayInput) alexaforbusiness.GetGatewayRequest
+
+	GetGatewayGroupRequest(*alexaforbusiness.GetGatewayGroupInput) alexaforbusiness.GetGatewayGroupRequest
+
+	GetInvitationConfigurationRequest(*alexaforbusiness.GetInvitationConfigurationInput) alexaforbusiness.GetInvitationConfigurationRequest
+
+	GetNetworkProfileRequest(*alexaforbusiness.GetNetworkProfileInput) alexaforbusiness.GetNetworkProfileRequest
+
 	GetProfileRequest(*alexaforbusiness.GetProfileInput) alexaforbusiness.GetProfileRequest
 
 	GetRoomRequest(*alexaforbusiness.GetRoomInput) alexaforbusiness.GetRoomRequest
@@ -148,6 +167,10 @@ type AlexaForBusinessAPI interface {
 
 	ListDeviceEventsRequest(*alexaforbusiness.ListDeviceEventsInput) alexaforbusiness.ListDeviceEventsRequest
 
+	ListGatewayGroupsRequest(*alexaforbusiness.ListGatewayGroupsInput) alexaforbusiness.ListGatewayGroupsRequest
+
+	ListGatewaysRequest(*alexaforbusiness.ListGatewaysInput) alexaforbusiness.ListGatewaysRequest
+
 	ListSkillsRequest(*alexaforbusiness.ListSkillsInput) alexaforbusiness.ListSkillsRequest
 
 	ListSkillsStoreCategoriesRequest(*alexaforbusiness.ListSkillsStoreCategoriesInput) alexaforbusiness.ListSkillsStoreCategoriesRequest
@@ -159,6 +182,8 @@ type AlexaForBusinessAPI interface {
 	ListTagsRequest(*alexaforbusiness.ListTagsInput) alexaforbusiness.ListTagsRequest
 
 	PutConferencePreferenceRequest(*alexaforbusiness.PutConferencePreferenceInput) alexaforbusiness.PutConferencePreferenceRequest
+
+	PutInvitationConfigurationRequest(*alexaforbusiness.PutInvitationConfigurationInput) alexaforbusiness.PutInvitationConfigurationRequest
 
 	PutRoomSkillParameterRequest(*alexaforbusiness.PutRoomSkillParameterInput) alexaforbusiness.PutRoomSkillParameterRequest
 
@@ -178,6 +203,8 @@ type AlexaForBusinessAPI interface {
 
 	SearchDevicesRequest(*alexaforbusiness.SearchDevicesInput) alexaforbusiness.SearchDevicesRequest
 
+	SearchNetworkProfilesRequest(*alexaforbusiness.SearchNetworkProfilesInput) alexaforbusiness.SearchNetworkProfilesRequest
+
 	SearchProfilesRequest(*alexaforbusiness.SearchProfilesInput) alexaforbusiness.SearchProfilesRequest
 
 	SearchRoomsRequest(*alexaforbusiness.SearchRoomsInput) alexaforbusiness.SearchRoomsRequest
@@ -185,6 +212,8 @@ type AlexaForBusinessAPI interface {
 	SearchSkillGroupsRequest(*alexaforbusiness.SearchSkillGroupsInput) alexaforbusiness.SearchSkillGroupsRequest
 
 	SearchUsersRequest(*alexaforbusiness.SearchUsersInput) alexaforbusiness.SearchUsersRequest
+
+	SendAnnouncementRequest(*alexaforbusiness.SendAnnouncementInput) alexaforbusiness.SendAnnouncementRequest
 
 	SendInvitationRequest(*alexaforbusiness.SendInvitationInput) alexaforbusiness.SendInvitationRequest
 
@@ -206,6 +235,12 @@ type AlexaForBusinessAPI interface {
 
 	UpdateDeviceRequest(*alexaforbusiness.UpdateDeviceInput) alexaforbusiness.UpdateDeviceRequest
 
+	UpdateGatewayRequest(*alexaforbusiness.UpdateGatewayInput) alexaforbusiness.UpdateGatewayRequest
+
+	UpdateGatewayGroupRequest(*alexaforbusiness.UpdateGatewayGroupInput) alexaforbusiness.UpdateGatewayGroupRequest
+
+	UpdateNetworkProfileRequest(*alexaforbusiness.UpdateNetworkProfileInput) alexaforbusiness.UpdateNetworkProfileRequest
+
 	UpdateProfileRequest(*alexaforbusiness.UpdateProfileInput) alexaforbusiness.UpdateProfileRequest
 
 	UpdateRoomRequest(*alexaforbusiness.UpdateRoomInput) alexaforbusiness.UpdateRoomRequest
@@ -213,4 +248,4 @@ type AlexaForBusinessAPI interface {
 	UpdateSkillGroupRequest(*alexaforbusiness.UpdateSkillGroupInput) alexaforbusiness.UpdateSkillGroupRequest
 }
 
-var _ AlexaForBusinessAPI = (*alexaforbusiness.AlexaForBusiness)(nil)
+var _ ClientAPI = (*alexaforbusiness.Client)(nil)

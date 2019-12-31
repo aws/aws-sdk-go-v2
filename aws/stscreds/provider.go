@@ -61,7 +61,7 @@ role's credentials need to be refreshed.
 
 The StdinTokenProvider function is available to prompt on stdin to retrieve
 the MFA token code from the user. You can also implement custom prompts by
-satisfing the TokenProvider function signature.
+satisfying the TokenProvider function signature.
 
 Using StdinTokenProvider with multiple AssumeRoleProviders, or Credentials will
 have undesirable results as the StdinTokenProvider will not be synchronized. A

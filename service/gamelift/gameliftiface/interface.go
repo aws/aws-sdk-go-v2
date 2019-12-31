@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/gamelift"
 )
 
-// GameLiftAPI provides an interface to enable mocking the
-// gamelift.GameLift service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// gamelift.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon GameLift.
-//    func myFunc(svc gameliftiface.GameLiftAPI) bool {
+//    func myFunc(svc gameliftiface.ClientAPI) bool {
 //        // Make svc.AcceptMatch request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockGameLiftClient struct {
-//        gameliftiface.GameLiftAPI
+//    type mockClientClient struct {
+//        gameliftiface.ClientPI
 //    }
-//    func (m *mockGameLiftClient) AcceptMatch(input *gamelift.AcceptMatchInput) (*gamelift.AcceptMatchOutput, error) {
+//    func (m *mockClientClient) AcceptMatch(input *gamelift.AcceptMatchInput) (*gamelift.AcceptMatchOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockGameLiftClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type GameLiftAPI interface {
+type ClientAPI interface {
 	AcceptMatchRequest(*gamelift.AcceptMatchInput) gamelift.AcceptMatchRequest
 
 	CreateAliasRequest(*gamelift.CreateAliasInput) gamelift.CreateAliasRequest
@@ -82,6 +81,8 @@ type GameLiftAPI interface {
 
 	CreatePlayerSessionsRequest(*gamelift.CreatePlayerSessionsInput) gamelift.CreatePlayerSessionsRequest
 
+	CreateScriptRequest(*gamelift.CreateScriptInput) gamelift.CreateScriptRequest
+
 	CreateVpcPeeringAuthorizationRequest(*gamelift.CreateVpcPeeringAuthorizationInput) gamelift.CreateVpcPeeringAuthorizationRequest
 
 	CreateVpcPeeringConnectionRequest(*gamelift.CreateVpcPeeringConnectionInput) gamelift.CreateVpcPeeringConnectionRequest
@@ -96,7 +97,11 @@ type GameLiftAPI interface {
 
 	DeleteMatchmakingConfigurationRequest(*gamelift.DeleteMatchmakingConfigurationInput) gamelift.DeleteMatchmakingConfigurationRequest
 
+	DeleteMatchmakingRuleSetRequest(*gamelift.DeleteMatchmakingRuleSetInput) gamelift.DeleteMatchmakingRuleSetRequest
+
 	DeleteScalingPolicyRequest(*gamelift.DeleteScalingPolicyInput) gamelift.DeleteScalingPolicyRequest
+
+	DeleteScriptRequest(*gamelift.DeleteScriptInput) gamelift.DeleteScriptRequest
 
 	DeleteVpcPeeringAuthorizationRequest(*gamelift.DeleteVpcPeeringAuthorizationInput) gamelift.DeleteVpcPeeringAuthorizationRequest
 
@@ -140,6 +145,8 @@ type GameLiftAPI interface {
 
 	DescribeScalingPoliciesRequest(*gamelift.DescribeScalingPoliciesInput) gamelift.DescribeScalingPoliciesRequest
 
+	DescribeScriptRequest(*gamelift.DescribeScriptInput) gamelift.DescribeScriptRequest
+
 	DescribeVpcPeeringAuthorizationsRequest(*gamelift.DescribeVpcPeeringAuthorizationsInput) gamelift.DescribeVpcPeeringAuthorizationsRequest
 
 	DescribeVpcPeeringConnectionsRequest(*gamelift.DescribeVpcPeeringConnectionsInput) gamelift.DescribeVpcPeeringConnectionsRequest
@@ -153,6 +160,8 @@ type GameLiftAPI interface {
 	ListBuildsRequest(*gamelift.ListBuildsInput) gamelift.ListBuildsRequest
 
 	ListFleetsRequest(*gamelift.ListFleetsInput) gamelift.ListFleetsRequest
+
+	ListScriptsRequest(*gamelift.ListScriptsInput) gamelift.ListScriptsRequest
 
 	PutScalingPolicyRequest(*gamelift.PutScalingPolicyInput) gamelift.PutScalingPolicyRequest
 
@@ -194,7 +203,9 @@ type GameLiftAPI interface {
 
 	UpdateRuntimeConfigurationRequest(*gamelift.UpdateRuntimeConfigurationInput) gamelift.UpdateRuntimeConfigurationRequest
 
+	UpdateScriptRequest(*gamelift.UpdateScriptInput) gamelift.UpdateScriptRequest
+
 	ValidateMatchmakingRuleSetRequest(*gamelift.ValidateMatchmakingRuleSetInput) gamelift.ValidateMatchmakingRuleSetRequest
 }
 
-var _ GameLiftAPI = (*gamelift.GameLift)(nil)
+var _ ClientAPI = (*gamelift.Client)(nil)

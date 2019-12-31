@@ -84,26 +84,4 @@
 // See the s3manager package's GetBucketRegion function documentation for more information
 // https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3manager/#GetBucketRegion
 //
-// S3 Crypto Client
-//
-// The s3crypto package provides the tools to upload and download encrypted
-// content from S3. The Encryption and Decryption clients can be used concurrently
-// once the client is created.
-//
-//   cfg, err := external.LoadDefaultAWSConfig()
-//
-//    // Create the decryption client.
-//    svc := s3crypto.NewDecryptionClient(cfg)
-//
-//    // The object will be downloaded from S3 and decrypted locally. By metadata
-//    // about the object's encryption will instruct the decryption client how
-//    // decrypt the content of the object. By default KMS is used for keys.
-//    result, err := svc.GetObject(&s3.GetObjectInput {
-//        Bucket: aws.String(myBucket),
-//        Key: aws.String(myKey),
-//    })
-//
-// See the s3crypto package documentation for more information.
-// https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3crypto/
-//
 package s3

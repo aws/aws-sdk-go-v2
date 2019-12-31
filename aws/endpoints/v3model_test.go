@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"reflect"
 	"regexp"
+	"strings"
 	"testing"
 )
 
@@ -520,5 +521,48 @@ func TestResolveEndpoint_AwsGlobal(t *testing.T) {
 	}
 	if !resolved.SigningNameDerived {
 		t.Errorf("expect the signing name to be derived")
+	}
+}
+
+func TestEndpointFor_EmptyRegion(t *testing.T) {
+	cases := map[string]struct {
+		Service    string
+		Region     string
+		RealRegion string
+		ExpectErr  string
+	}{
+		// Legacy services that previous accepted empty region
+		"ec2metadata": {Service: "ec2metadata", RealRegion: "aws-global"},
+
+		// Other services
+		"s3":           {Service: "s3", Region: "us-east-1", RealRegion: "us-east-1"},
+		"s3 no region": {Service: "s3", ExpectErr: "could not resolve endpoint"},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			actual, err := NewDefaultResolver().ResolveEndpoint(c.Service, c.Region)
+			if len(c.ExpectErr) != 0 {
+				if e, a := c.ExpectErr, err.Error(); !strings.Contains(a, e) {
+					t.Errorf("expect %q error in %q", e, a)
+				}
+				return
+			}
+			if err != nil {
+				t.Fatalf("expect no error got, %v", err)
+			}
+
+			expect, err := NewDefaultResolver().ResolveEndpoint(c.Service, c.RealRegion)
+			if err != nil {
+				t.Fatalf("failed to get endpoint for default resolver")
+			}
+			if e, a := expect.URL, actual.URL; e != a {
+				t.Errorf("expect %v URL, got %v", e, a)
+			}
+			if e, a := expect.SigningRegion, actual.SigningRegion; e != a {
+				t.Errorf("expect %v signing region, got %v", e, a)
+			}
+
+		})
 	}
 }

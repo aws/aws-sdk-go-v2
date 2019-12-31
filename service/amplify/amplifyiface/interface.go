@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/amplify"
 )
 
-// AmplifyAPI provides an interface to enable mocking the
-// amplify.Amplify service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// amplify.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS Amplify.
-//    func myFunc(svc amplifyiface.AmplifyAPI) bool {
+//    // Amplify.
+//    func myFunc(svc amplifyiface.ClientAPI) bool {
 //        // Make svc.CreateApp request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockAmplifyClient struct {
-//        amplifyiface.AmplifyAPI
+//    type mockClientClient struct {
+//        amplifyiface.ClientPI
 //    }
-//    func (m *mockAmplifyClient) CreateApp(input *amplify.CreateAppInput) (*amplify.CreateAppOutput, error) {
+//    func (m *mockClientClient) CreateApp(input *amplify.CreateAppInput) (*amplify.CreateAppOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockAmplifyClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,14 +60,22 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type AmplifyAPI interface {
+type ClientAPI interface {
 	CreateAppRequest(*amplify.CreateAppInput) amplify.CreateAppRequest
+
+	CreateBackendEnvironmentRequest(*amplify.CreateBackendEnvironmentInput) amplify.CreateBackendEnvironmentRequest
 
 	CreateBranchRequest(*amplify.CreateBranchInput) amplify.CreateBranchRequest
 
+	CreateDeploymentRequest(*amplify.CreateDeploymentInput) amplify.CreateDeploymentRequest
+
 	CreateDomainAssociationRequest(*amplify.CreateDomainAssociationInput) amplify.CreateDomainAssociationRequest
 
+	CreateWebhookRequest(*amplify.CreateWebhookInput) amplify.CreateWebhookRequest
+
 	DeleteAppRequest(*amplify.DeleteAppInput) amplify.DeleteAppRequest
+
+	DeleteBackendEnvironmentRequest(*amplify.DeleteBackendEnvironmentInput) amplify.DeleteBackendEnvironmentRequest
 
 	DeleteBranchRequest(*amplify.DeleteBranchInput) amplify.DeleteBranchRequest
 
@@ -76,7 +83,15 @@ type AmplifyAPI interface {
 
 	DeleteJobRequest(*amplify.DeleteJobInput) amplify.DeleteJobRequest
 
+	DeleteWebhookRequest(*amplify.DeleteWebhookInput) amplify.DeleteWebhookRequest
+
+	GenerateAccessLogsRequest(*amplify.GenerateAccessLogsInput) amplify.GenerateAccessLogsRequest
+
 	GetAppRequest(*amplify.GetAppInput) amplify.GetAppRequest
+
+	GetArtifactUrlRequest(*amplify.GetArtifactUrlInput) amplify.GetArtifactUrlRequest
+
+	GetBackendEnvironmentRequest(*amplify.GetBackendEnvironmentInput) amplify.GetBackendEnvironmentRequest
 
 	GetBranchRequest(*amplify.GetBranchInput) amplify.GetBranchRequest
 
@@ -84,7 +99,13 @@ type AmplifyAPI interface {
 
 	GetJobRequest(*amplify.GetJobInput) amplify.GetJobRequest
 
+	GetWebhookRequest(*amplify.GetWebhookInput) amplify.GetWebhookRequest
+
 	ListAppsRequest(*amplify.ListAppsInput) amplify.ListAppsRequest
+
+	ListArtifactsRequest(*amplify.ListArtifactsInput) amplify.ListArtifactsRequest
+
+	ListBackendEnvironmentsRequest(*amplify.ListBackendEnvironmentsInput) amplify.ListBackendEnvironmentsRequest
 
 	ListBranchesRequest(*amplify.ListBranchesInput) amplify.ListBranchesRequest
 
@@ -92,15 +113,27 @@ type AmplifyAPI interface {
 
 	ListJobsRequest(*amplify.ListJobsInput) amplify.ListJobsRequest
 
+	ListTagsForResourceRequest(*amplify.ListTagsForResourceInput) amplify.ListTagsForResourceRequest
+
+	ListWebhooksRequest(*amplify.ListWebhooksInput) amplify.ListWebhooksRequest
+
+	StartDeploymentRequest(*amplify.StartDeploymentInput) amplify.StartDeploymentRequest
+
 	StartJobRequest(*amplify.StartJobInput) amplify.StartJobRequest
 
 	StopJobRequest(*amplify.StopJobInput) amplify.StopJobRequest
+
+	TagResourceRequest(*amplify.TagResourceInput) amplify.TagResourceRequest
+
+	UntagResourceRequest(*amplify.UntagResourceInput) amplify.UntagResourceRequest
 
 	UpdateAppRequest(*amplify.UpdateAppInput) amplify.UpdateAppRequest
 
 	UpdateBranchRequest(*amplify.UpdateBranchInput) amplify.UpdateBranchRequest
 
 	UpdateDomainAssociationRequest(*amplify.UpdateDomainAssociationInput) amplify.UpdateDomainAssociationRequest
+
+	UpdateWebhookRequest(*amplify.UpdateWebhookInput) amplify.UpdateWebhookRequest
 }
 
-var _ AmplifyAPI = (*amplify.Amplify)(nil)
+var _ ClientAPI = (*amplify.Client)(nil)

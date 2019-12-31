@@ -33,7 +33,7 @@ func main() {
 	svc := s3.New(cfg)
 
 	req := svc.ListObjectsRequest(&s3.ListObjectsInput{Bucket: &os.Args[1]})
-	p := req.Paginate()
+	p := s3.NewListObjectsPaginator(req)
 	for p.Next(context.TODO()) {
 		page := p.CurrentPage()
 		for _, obj := range page.Contents {

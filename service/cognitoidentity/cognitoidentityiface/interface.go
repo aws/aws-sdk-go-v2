@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity"
 )
 
-// CognitoIdentityAPI provides an interface to enable mocking the
-// cognitoidentity.CognitoIdentity service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// cognitoidentity.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Cognito Identity.
-//    func myFunc(svc cognitoidentityiface.CognitoIdentityAPI) bool {
+//    func myFunc(svc cognitoidentityiface.ClientAPI) bool {
 //        // Make svc.CreateIdentityPool request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCognitoIdentityClient struct {
-//        cognitoidentityiface.CognitoIdentityAPI
+//    type mockClientClient struct {
+//        cognitoidentityiface.ClientPI
 //    }
-//    func (m *mockCognitoIdentityClient) CreateIdentityPool(input *cognitoidentity.CreateIdentityPoolInput) (*cognitoidentity.UpdateIdentityPoolOutput, error) {
+//    func (m *mockClientClient) CreateIdentityPool(input *cognitoidentity.CreateIdentityPoolInput) (*cognitoidentity.CreateIdentityPoolOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockCognitoIdentityClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type CognitoIdentityAPI interface {
+type ClientAPI interface {
 	CreateIdentityPoolRequest(*cognitoidentity.CreateIdentityPoolInput) cognitoidentity.CreateIdentityPoolRequest
 
 	DeleteIdentitiesRequest(*cognitoidentity.DeleteIdentitiesInput) cognitoidentity.DeleteIdentitiesRequest
@@ -86,17 +85,23 @@ type CognitoIdentityAPI interface {
 
 	ListIdentityPoolsRequest(*cognitoidentity.ListIdentityPoolsInput) cognitoidentity.ListIdentityPoolsRequest
 
+	ListTagsForResourceRequest(*cognitoidentity.ListTagsForResourceInput) cognitoidentity.ListTagsForResourceRequest
+
 	LookupDeveloperIdentityRequest(*cognitoidentity.LookupDeveloperIdentityInput) cognitoidentity.LookupDeveloperIdentityRequest
 
 	MergeDeveloperIdentitiesRequest(*cognitoidentity.MergeDeveloperIdentitiesInput) cognitoidentity.MergeDeveloperIdentitiesRequest
 
 	SetIdentityPoolRolesRequest(*cognitoidentity.SetIdentityPoolRolesInput) cognitoidentity.SetIdentityPoolRolesRequest
 
+	TagResourceRequest(*cognitoidentity.TagResourceInput) cognitoidentity.TagResourceRequest
+
 	UnlinkDeveloperIdentityRequest(*cognitoidentity.UnlinkDeveloperIdentityInput) cognitoidentity.UnlinkDeveloperIdentityRequest
 
 	UnlinkIdentityRequest(*cognitoidentity.UnlinkIdentityInput) cognitoidentity.UnlinkIdentityRequest
 
-	UpdateIdentityPoolRequest(*cognitoidentity.UpdateIdentityPoolOutput) cognitoidentity.UpdateIdentityPoolRequest
+	UntagResourceRequest(*cognitoidentity.UntagResourceInput) cognitoidentity.UntagResourceRequest
+
+	UpdateIdentityPoolRequest(*cognitoidentity.UpdateIdentityPoolInput) cognitoidentity.UpdateIdentityPoolRequest
 }
 
-var _ CognitoIdentityAPI = (*cognitoidentity.CognitoIdentity)(nil)
+var _ ClientAPI = (*cognitoidentity.Client)(nil)

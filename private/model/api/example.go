@@ -54,9 +54,9 @@ var exampleCustomizations = map[string]template.FuncMap{}
 
 var exampleTmpls = template.Must(template.New("example").Funcs(exampleFuncMap).Parse(`
 {{ generateTypes . }}
-{{ commentify (wrap .Title 80 false) }}
+{{ commentify (wrap .Title 80) }}
 //
-{{ commentify (wrap .Description 80 false) }}
+{{ commentify (wrap .Description 80) }}
 func Example{{ .API.StructName }}_{{ .MethodName }}() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -227,17 +227,8 @@ func (a *API) AttachExamples(filename string) {
 	p.setup()
 }
 
-var examplesBuilderCustomizations = map[string]examplesBuilder{
-	"wafregional": wafregionalExamplesBuilder{},
-}
-
 func (p *ExamplesDefinition) setup() {
-	var builder examplesBuilder
-	ok := false
-	if builder, ok = examplesBuilderCustomizations[p.API.PackageName()]; !ok {
-		builder = defaultExamplesBuilder{}
-	}
-
+	builder := defaultExamplesBuilder{}
 	keys := p.Examples.Names()
 	for _, n := range keys {
 		examples := p.Examples[n]
@@ -288,12 +279,7 @@ type exHeader struct {
 // examples.json file.
 func (a *API) ExamplesGoCode() string {
 	var buf bytes.Buffer
-	var builder examplesBuilder
-	ok := false
-	if builder, ok = examplesBuilderCustomizations[a.PackageName()]; !ok {
-		builder = defaultExamplesBuilder{}
-	}
-
+	builder := defaultExamplesBuilder{}
 	if err := exampleHeader.ExecuteTemplate(&buf, "exampleHeader", &exHeader{builder, a}); err != nil {
 		panic(err)
 	}

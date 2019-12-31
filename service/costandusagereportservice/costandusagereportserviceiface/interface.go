@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice"
 )
 
-// CostAndUsageReportServiceAPI provides an interface to enable mocking the
-// costandusagereportservice.CostAndUsageReportService service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// costandusagereportservice.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Cost and Usage Report Service.
-//    func myFunc(svc costandusagereportserviceiface.CostAndUsageReportServiceAPI) bool {
+//    func myFunc(svc costandusagereportserviceiface.ClientAPI) bool {
 //        // Make svc.DeleteReportDefinition request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCostAndUsageReportServiceClient struct {
-//        costandusagereportserviceiface.CostAndUsageReportServiceAPI
+//    type mockClientClient struct {
+//        costandusagereportserviceiface.ClientPI
 //    }
-//    func (m *mockCostAndUsageReportServiceClient) DeleteReportDefinition(input *costandusagereportservice.DeleteReportDefinitionInput) (*costandusagereportservice.DeleteReportDefinitionOutput, error) {
+//    func (m *mockClientClient) DeleteReportDefinition(input *costandusagereportservice.DeleteReportDefinitionInput) (*costandusagereportservice.DeleteReportDefinitionOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockCostAndUsageReportServiceClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,12 +60,14 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type CostAndUsageReportServiceAPI interface {
+type ClientAPI interface {
 	DeleteReportDefinitionRequest(*costandusagereportservice.DeleteReportDefinitionInput) costandusagereportservice.DeleteReportDefinitionRequest
 
 	DescribeReportDefinitionsRequest(*costandusagereportservice.DescribeReportDefinitionsInput) costandusagereportservice.DescribeReportDefinitionsRequest
 
+	ModifyReportDefinitionRequest(*costandusagereportservice.ModifyReportDefinitionInput) costandusagereportservice.ModifyReportDefinitionRequest
+
 	PutReportDefinitionRequest(*costandusagereportservice.PutReportDefinitionInput) costandusagereportservice.PutReportDefinitionRequest
 }
 
-var _ CostAndUsageReportServiceAPI = (*costandusagereportservice.CostAndUsageReportService)(nil)
+var _ ClientAPI = (*costandusagereportservice.Client)(nil)
