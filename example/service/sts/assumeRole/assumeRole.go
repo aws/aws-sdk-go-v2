@@ -40,7 +40,7 @@ func main() {
 
 	awsConfig := svc.Config.Copy()
 	awsConfig.Credentials = CredentialsProvider{Credentials: out.Credentials}
-	fmt.Sprintf("aws config:\n%+v", awsConfig)
+	fmt.Printf("aws config:\n%+v", awsConfig)
 }
 
 type CredentialsProvider struct {
