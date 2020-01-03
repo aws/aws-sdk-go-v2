@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type GetRateBasedRuleInput struct {
@@ -47,7 +46,7 @@ type GetRateBasedRuleOutput struct {
 
 	// Information about the RateBasedRule that you specified in the GetRateBasedRule
 	// request.
-	Rule *waf.RateBasedRule `type:"structure"`
+	Rule *RateBasedRule `type:"structure"`
 }
 
 // String returns the string representation

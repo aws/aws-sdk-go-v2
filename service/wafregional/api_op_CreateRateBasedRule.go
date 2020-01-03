@@ -8,7 +8,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type CreateRateBasedRuleInput struct {
@@ -53,7 +52,7 @@ type CreateRateBasedRuleInput struct {
 	// RateLimit is a required field
 	RateLimit *int64 `min:"100" type:"long" required:"true"`
 
-	Tags []waf.Tag `min:"1" type:"list"`
+	Tags []Tag `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -118,7 +117,7 @@ type CreateRateBasedRuleOutput struct {
 	ChangeToken *string `min:"1" type:"string"`
 
 	// The RateBasedRule that is returned in the CreateRateBasedRule response.
-	Rule *waf.RateBasedRule `type:"structure"`
+	Rule *RateBasedRule `type:"structure"`
 }
 
 // String returns the string representation

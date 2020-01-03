@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type ListWebACLsInput struct {
@@ -56,7 +55,7 @@ type ListWebACLsOutput struct {
 	NextMarker *string `min:"1" type:"string"`
 
 	// An array of WebACLSummary objects.
-	WebACLs []waf.WebACLSummary `type:"list"`
+	WebACLs []WebACLSummary `type:"list"`
 }
 
 // String returns the string representation

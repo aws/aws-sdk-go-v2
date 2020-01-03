@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type ListLoggingConfigurationsInput struct {
@@ -49,7 +48,7 @@ type ListLoggingConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of LoggingConfiguration objects.
-	LoggingConfigurations []waf.LoggingConfiguration `type:"list"`
+	LoggingConfigurations []LoggingConfiguration `type:"list"`
 
 	// If you have more LoggingConfigurations than the number that you specified
 	// for Limit in the request, the response includes a NextMarker value. To list

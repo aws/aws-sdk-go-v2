@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type ListRegexMatchSetsInput struct {
@@ -57,7 +56,7 @@ type ListRegexMatchSetsOutput struct {
 	NextMarker *string `min:"1" type:"string"`
 
 	// An array of RegexMatchSetSummary objects.
-	RegexMatchSets []waf.RegexMatchSetSummary `type:"list"`
+	RegexMatchSets []RegexMatchSetSummary `type:"list"`
 }
 
 // String returns the string representation

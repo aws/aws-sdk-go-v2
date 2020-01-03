@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 // A request to get a SqlInjectionMatchSet.
@@ -57,7 +56,7 @@ type GetSqlInjectionMatchSetOutput struct {
 	//    FieldToMatch and TextTransformation
 	//
 	//    * FieldToMatch: Contains Data and Type
-	SqlInjectionMatchSet *waf.SqlInjectionMatchSet `type:"structure"`
+	SqlInjectionMatchSet *SqlInjectionMatchSet `type:"structure"`
 }
 
 // String returns the string representation

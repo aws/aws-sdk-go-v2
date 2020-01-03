@@ -8,7 +8,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type CreateRuleGroupInput struct {
@@ -34,7 +33,7 @@ type CreateRuleGroupInput struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	Tags []waf.Tag `min:"1" type:"list"`
+	Tags []Tag `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -89,7 +88,7 @@ type CreateRuleGroupOutput struct {
 	ChangeToken *string `min:"1" type:"string"`
 
 	// An empty RuleGroup.
-	RuleGroup *waf.RuleGroup `type:"structure"`
+	RuleGroup *RuleGroup `type:"structure"`
 }
 
 // String returns the string representation

@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type GetSampledRequestsInput struct {
@@ -38,7 +37,7 @@ type GetSampledRequestsInput struct {
 	// time range in the previous three hours.
 	//
 	// TimeWindow is a required field
-	TimeWindow *waf.TimeWindow `type:"structure" required:"true"`
+	TimeWindow *TimeWindow `type:"structure" required:"true"`
 
 	// The WebACLId of the WebACL for which you want GetSampledRequests to return
 	// a sample of requests.
@@ -102,13 +101,13 @@ type GetSampledRequestsOutput struct {
 
 	// A complex type that contains detailed information about each of the requests
 	// in the sample.
-	SampledRequests []waf.SampledHTTPRequest `type:"list"`
+	SampledRequests []SampledHTTPRequest `type:"list"`
 
 	// Usually, TimeWindow is the time range that you specified in the GetSampledRequests
 	// request. However, if your AWS resource received more than 5,000 requests
 	// during the time range that you specified in the request, GetSampledRequests
 	// returns the time range for the first 5,000 requests.
-	TimeWindow *waf.TimeWindow `type:"structure"`
+	TimeWindow *TimeWindow `type:"structure"`
 }
 
 // String returns the string representation

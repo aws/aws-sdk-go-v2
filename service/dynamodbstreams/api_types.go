@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 )
 
 var _ aws.Config
@@ -35,10 +34,10 @@ type AttributeValue struct {
 	BS [][]byte `type:"list"`
 
 	// A List data type.
-	L []dynamodb.AttributeValue `type:"list"`
+	L []AttributeValue `type:"list"`
 
 	// A Map data type.
-	M map[string]dynamodb.AttributeValue `type:"map"`
+	M map[string]AttributeValue `type:"map"`
 
 	// A Number data type.
 	N *string `type:"string"`
@@ -238,7 +237,7 @@ type StreamDescription struct {
 	CreationRequestDateTime *time.Time `type:"timestamp"`
 
 	// The key attribute(s) of the stream's DynamoDB table.
-	KeySchema []dynamodb.KeySchemaElement `min:"1" type:"list"`
+	KeySchema []KeySchemaElement `min:"1" type:"list"`
 
 	// The shard ID of the item where the operation stopped, inclusive of the previous
 	// result set. Use this value to start a new operation, excluding this value
@@ -317,13 +316,13 @@ type StreamRecord struct {
 	ApproximateCreationDateTime *time.Time `type:"timestamp"`
 
 	// The primary key attribute(s) for the DynamoDB item that was modified.
-	Keys map[string]dynamodb.AttributeValue `type:"map"`
+	Keys map[string]AttributeValue `type:"map"`
 
 	// The item in the DynamoDB table as it appeared after it was modified.
-	NewImage map[string]dynamodb.AttributeValue `type:"map"`
+	NewImage map[string]AttributeValue `type:"map"`
 
 	// The item in the DynamoDB table as it appeared before it was modified.
-	OldImage map[string]dynamodb.AttributeValue `type:"map"`
+	OldImage map[string]AttributeValue `type:"map"`
 
 	// The sequence number of the stream record.
 	SequenceNumber *string `min:"21" type:"string"`

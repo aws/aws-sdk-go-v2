@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 // A request to get an XssMatchSet.
@@ -56,7 +55,7 @@ type GetXssMatchSetOutput struct {
 	//    * XssMatchTuple: Each XssMatchTuple object contains FieldToMatch and TextTransformation
 	//
 	//    * FieldToMatch: Contains Data and Type
-	XssMatchSet *waf.XssMatchSet `type:"structure"`
+	XssMatchSet *XssMatchSet `type:"structure"`
 }
 
 // String returns the string representation

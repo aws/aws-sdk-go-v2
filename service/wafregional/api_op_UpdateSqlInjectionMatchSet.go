@@ -8,7 +8,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 // A request to update a SqlInjectionMatchSet.
@@ -37,7 +36,7 @@ type UpdateSqlInjectionMatchSetInput struct {
 	//    * FieldToMatch: Contains Data and Type
 	//
 	// Updates is a required field
-	Updates []waf.SqlInjectionMatchSetUpdate `min:"1" type:"list" required:"true"`
+	Updates []SqlInjectionMatchSetUpdate `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
