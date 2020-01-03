@@ -8,7 +8,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type UpdateRuleInput struct {
@@ -35,7 +34,7 @@ type UpdateRuleInput struct {
 	//    * FieldToMatch: Contains Data and Type
 	//
 	// Updates is a required field
-	Updates []waf.RuleUpdate `type:"list" required:"true"`
+	Updates []RuleUpdate `type:"list" required:"true"`
 }
 
 // String returns the string representation

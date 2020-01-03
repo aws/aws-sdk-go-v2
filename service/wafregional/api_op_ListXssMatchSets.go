@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 // A request to list the XssMatchSet objects created by the current AWS account.
@@ -58,7 +57,7 @@ type ListXssMatchSetsOutput struct {
 	NextMarker *string `min:"1" type:"string"`
 
 	// An array of XssMatchSetSummary objects.
-	XssMatchSets []waf.XssMatchSetSummary `type:"list"`
+	XssMatchSets []XssMatchSetSummary `type:"list"`
 }
 
 // String returns the string representation

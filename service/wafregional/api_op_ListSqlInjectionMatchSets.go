@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 // A request to list the SqlInjectionMatchSet objects created by the current
@@ -59,7 +58,7 @@ type ListSqlInjectionMatchSetsOutput struct {
 	NextMarker *string `min:"1" type:"string"`
 
 	// An array of SqlInjectionMatchSetSummary objects.
-	SqlInjectionMatchSets []waf.SqlInjectionMatchSetSummary `type:"list"`
+	SqlInjectionMatchSets []SqlInjectionMatchSetSummary `type:"list"`
 }
 
 // String returns the string representation

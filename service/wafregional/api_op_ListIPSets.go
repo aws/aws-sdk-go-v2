@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type ListIPSetsInput struct {
@@ -48,7 +47,7 @@ type ListIPSetsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of IPSetSummary objects.
-	IPSets []waf.IPSetSummary `type:"list"`
+	IPSets []IPSetSummary `type:"list"`
 
 	// To list more IPSet objects, submit another ListIPSets request, and in the
 	// next request use the NextMarker response value as the NextMarker value.

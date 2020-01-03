@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type GetWebACLInput struct {
@@ -57,7 +56,7 @@ type GetWebACLOutput struct {
 	//    Priority, and RuleId
 	//
 	//    * Action: Contains Type
-	WebACL *waf.WebACL `type:"structure"`
+	WebACL *WebACL `type:"structure"`
 }
 
 // String returns the string representation

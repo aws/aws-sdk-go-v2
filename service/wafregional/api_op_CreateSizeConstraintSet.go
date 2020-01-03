@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type CreateSizeConstraintSetInput struct {
@@ -63,7 +62,7 @@ type CreateSizeConstraintSetOutput struct {
 	ChangeToken *string `min:"1" type:"string"`
 
 	// A SizeConstraintSet that contains no SizeConstraint objects.
-	SizeConstraintSet *waf.SizeConstraintSet `type:"structure"`
+	SizeConstraintSet *SizeConstraintSet `type:"structure"`
 }
 
 // String returns the string representation

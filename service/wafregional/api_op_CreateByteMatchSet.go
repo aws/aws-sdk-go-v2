@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type CreateByteMatchSetInput struct {
@@ -58,7 +57,7 @@ type CreateByteMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A ByteMatchSet that contains no ByteMatchTuple objects.
-	ByteMatchSet *waf.ByteMatchSet `type:"structure"`
+	ByteMatchSet *ByteMatchSet `type:"structure"`
 
 	// The ChangeToken that you used to submit the CreateByteMatchSet request. You
 	// can also use this value to query the status of the request. For more information,

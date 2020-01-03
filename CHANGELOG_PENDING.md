@@ -1,5 +1,12 @@
+Breaking Change
+---
+* Add generated service for wafregional and dynamodbstreams #463
+  * Updates the wafregional and dynamodbstreams API clients to include all API operations, and types that were previously shared between waf and dynamodb API clients respectively. This update ensures that all API clients include all operations and types needed for that client, and shares no types with another client package.
+  * To migrate your applications to use the updated wafregional and dynamodbstreams you'll need to update the package the impacted type is imported from to match the client the type is being used with.
+
 Services
 ---
+
 
 SDK Features
 ---

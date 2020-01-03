@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type GetIPSetInput struct {
@@ -52,7 +51,7 @@ type GetIPSetOutput struct {
 	//
 	//    * IPSetDescriptors: Contains an array of IPSetDescriptor objects. Each
 	//    IPSetDescriptor object contains Type and Value
-	IPSet *waf.IPSet `type:"structure"`
+	IPSet *IPSet `type:"structure"`
 }
 
 // String returns the string representation

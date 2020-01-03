@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type ListGeoMatchSetsInput struct {
@@ -49,7 +48,7 @@ type ListGeoMatchSetsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of GeoMatchSetSummary objects.
-	GeoMatchSets []waf.GeoMatchSetSummary `type:"list"`
+	GeoMatchSets []GeoMatchSetSummary `type:"list"`
 
 	// If you have more GeoMatchSet objects than the number that you specified for
 	// Limit in the request, the response includes a NextMarker value. To list more

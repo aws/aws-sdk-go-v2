@@ -8,7 +8,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type CreateWebACLInput struct {
@@ -24,7 +23,7 @@ type CreateWebACLInput struct {
 	// WebACL.
 	//
 	// DefaultAction is a required field
-	DefaultAction *waf.WafAction `type:"structure" required:"true"`
+	DefaultAction *WafAction `type:"structure" required:"true"`
 
 	// A friendly name or description for the metrics for this WebACL.The name can
 	// contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length
@@ -41,7 +40,7 @@ type CreateWebACLInput struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	Tags []waf.Tag `min:"1" type:"list"`
+	Tags []Tag `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -105,7 +104,7 @@ type CreateWebACLOutput struct {
 	ChangeToken *string `min:"1" type:"string"`
 
 	// The WebACL returned in the CreateWebACL response.
-	WebACL *waf.WebACL `type:"structure"`
+	WebACL *WebACL `type:"structure"`
 }
 
 // String returns the string representation
