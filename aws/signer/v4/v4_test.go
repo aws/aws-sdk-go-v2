@@ -125,7 +125,7 @@ func TestPresignRequest(t *testing.T) {
 	req, body := buildRequest("dynamodb", "us-east-1", "{}")
 
 	signer := buildSigner()
-	signer.Presign(req, body, "dynamodb", "us-east-1", 300*time.Second, time.Unix(0, 0))
+	signer.Presign(context.Background(), req, body, "dynamodb", "us-east-1", 300*time.Second, time.Unix(0, 0))
 
 	expectedDate := "19700101T000000Z"
 	expectedHeaders := "content-length;content-type;host;x-amz-meta-other-header;x-amz-meta-other-header_with_underscore"
@@ -159,7 +159,7 @@ func TestPresignBodyWithArrayRequest(t *testing.T) {
 	req.URL.RawQuery = "Foo=z&Foo=o&Foo=m&Foo=a"
 
 	signer := buildSigner()
-	signer.Presign(req, body, "dynamodb", "us-east-1", 300*time.Second, time.Unix(0, 0))
+	signer.Presign(context.Background(), req, body, "dynamodb", "us-east-1", 300*time.Second, time.Unix(0, 0))
 
 	expectedDate := "19700101T000000Z"
 	expectedHeaders := "content-length;content-type;host;x-amz-meta-other-header;x-amz-meta-other-header_with_underscore"
@@ -191,7 +191,7 @@ func TestPresignBodyWithArrayRequest(t *testing.T) {
 func TestSignRequest(t *testing.T) {
 	req, body := buildRequest("dynamodb", "us-east-1", "{}")
 	signer := buildSigner()
-	signer.Sign(req, body, "dynamodb", "us-east-1", time.Unix(0, 0))
+	signer.Sign(context.Background(), req, body, "dynamodb", "us-east-1", time.Unix(0, 0))
 
 	expectedDate := "19700101T000000Z"
 	expectedSig := "AWS4-HMAC-SHA256 Credential=AKID/19700101/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;x-amz-date;x-amz-meta-other-header;x-amz-meta-other-header_with_underscore;x-amz-security-token;x-amz-target, Signature=a518299330494908a70222cec6899f6f32f297f8595f6df1776d998936652ad9"
@@ -208,7 +208,7 @@ func TestSignRequest(t *testing.T) {
 func TestSignUnseekableBody(t *testing.T) {
 	req, body := buildRequestWithBodyReader("mock-service", "mock-region", bytes.NewBuffer([]byte("hello")))
 	signer := buildSigner()
-	_, err := signer.Sign(req, body, "mock-service", "mock-region", time.Now())
+	_, err := signer.Sign(context.Background(), req, body, "mock-service", "mock-region", time.Now())
 	if err == nil {
 		t.Fatalf("expect error signing request")
 	}
@@ -224,7 +224,7 @@ func TestSignUnsignedPayloadUnseekableBody(t *testing.T) {
 	signer := buildSigner()
 	signer.UnsignedPayload = true
 
-	_, err := signer.Sign(req, body, "mock-service", "mock-region", time.Now())
+	_, err := signer.Sign(context.Background(), req, body, "mock-service", "mock-region", time.Now())
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -241,7 +241,7 @@ func TestSignPreComputedHashUnseekableBody(t *testing.T) {
 	signer := buildSigner()
 
 	req.Header.Set("X-Amz-Content-Sha256", "some-content-sha256")
-	_, err := signer.Sign(req, body, "mock-service", "mock-region", time.Now())
+	_, err := signer.Sign(context.Background(), req, body, "mock-service", "mock-region", time.Now())
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -255,7 +255,7 @@ func TestSignPreComputedHashUnseekableBody(t *testing.T) {
 func TestSignBodyS3(t *testing.T) {
 	req, body := buildRequest("s3", "us-east-1", "hello")
 	signer := buildSigner()
-	signer.Sign(req, body, "s3", "us-east-1", time.Now())
+	signer.Sign(context.Background(), req, body, "s3", "us-east-1", time.Now())
 	hash := req.Header.Get("X-Amz-Content-Sha256")
 	if e, a := "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824", hash; e != a {
 		t.Errorf("expect %v, got %v", e, a)
@@ -265,7 +265,7 @@ func TestSignBodyS3(t *testing.T) {
 func TestSignBodyGlacier(t *testing.T) {
 	req, body := buildRequest("glacier", "us-east-1", "hello")
 	signer := buildSigner()
-	signer.Sign(req, body, "glacier", "us-east-1", time.Now())
+	signer.Sign(context.Background(), req, body, "glacier", "us-east-1", time.Now())
 	hash := req.Header.Get("X-Amz-Content-Sha256")
 	if e, a := "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824", hash; e != a {
 		t.Errorf("expect %v, got %v", e, a)
@@ -275,7 +275,7 @@ func TestSignBodyGlacier(t *testing.T) {
 func TestPresign_SignedPayload(t *testing.T) {
 	req, body := buildRequest("glacier", "us-east-1", "hello")
 	signer := buildSigner()
-	signer.Presign(req, body, "glacier", "us-east-1", 5*time.Minute, time.Now())
+	signer.Presign(context.Background(), req, body, "glacier", "us-east-1", 5*time.Minute, time.Now())
 	hash := req.Header.Get("X-Amz-Content-Sha256")
 	if e, a := "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824", hash; e != a {
 		t.Errorf("expect %v, got %v", e, a)
@@ -286,7 +286,7 @@ func TestPresign_UnsignedPayload(t *testing.T) {
 	req, body := buildRequest("service-name", "us-east-1", "hello")
 	signer := buildSigner()
 	signer.UnsignedPayload = true
-	signer.Presign(req, body, "service-name", "us-east-1", 5*time.Minute, time.Now())
+	signer.Presign(context.Background(), req, body, "service-name", "us-east-1", 5*time.Minute, time.Now())
 	hash := req.Header.Get("X-Amz-Content-Sha256")
 	if e, a := "UNSIGNED-PAYLOAD", hash; e != a {
 		t.Errorf("expect %v, got %v", e, a)
@@ -296,7 +296,7 @@ func TestPresign_UnsignedPayload(t *testing.T) {
 func TestPresign_UnsignedPayload_S3(t *testing.T) {
 	req, body := buildRequest("s3", "us-east-1", "hello")
 	signer := buildSigner()
-	signer.Presign(req, body, "s3", "us-east-1", 5*time.Minute, time.Now())
+	signer.Presign(context.Background(), req, body, "s3", "us-east-1", 5*time.Minute, time.Now())
 	if a := req.Header.Get("X-Amz-Content-Sha256"); len(a) != 0 {
 		t.Errorf("expect no content sha256 got %v", a)
 	}
@@ -306,7 +306,7 @@ func TestSignPrecomputedBodyChecksum(t *testing.T) {
 	req, body := buildRequest("dynamodb", "us-east-1", "hello")
 	req.Header.Set("X-Amz-Content-Sha256", "PRECOMPUTED")
 	signer := buildSigner()
-	signer.Sign(req, body, "dynamodb", "us-east-1", time.Now())
+	signer.Sign(context.Background(), req, body, "dynamodb", "us-east-1", time.Now())
 	hash := req.Header.Get("X-Amz-Content-Sha256")
 	if e, a := "PRECOMPUTED", hash; e != a {
 		t.Errorf("expect %v, got %v", e, a)
@@ -620,7 +620,7 @@ func TestSignWithRequestBody(t *testing.T) {
 
 	req, err := http.NewRequest("POST", server.URL, nil)
 
-	_, err = signer.Sign(req, bytes.NewReader(expectBody), "service", "region", time.Now())
+	_, err = signer.Sign(context.Background(), req, bytes.NewReader(expectBody), "service", "region", time.Now())
 	if err != nil {
 		t.Errorf("expect not no error, got %v", err)
 	}
@@ -654,7 +654,7 @@ func TestSignWithRequestBody_Overwrite(t *testing.T) {
 
 	req, err := http.NewRequest("GET", server.URL, strings.NewReader("invalid body"))
 
-	_, err = signer.Sign(req, nil, "service", "region", time.Now())
+	_, err = signer.Sign(context.Background(), req, nil, "service", "region", time.Now())
 	req.ContentLength = 0
 
 	if err != nil {
@@ -698,7 +698,7 @@ func TestSignWithBody_ReplaceRequestBody(t *testing.T) {
 	s := NewSigner(creds)
 	origBody := req.Body
 
-	_, err := s.Sign(req, seekerBody, "dynamodb", "us-east-1", time.Now())
+	_, err := s.Sign(context.Background(), req, seekerBody, "dynamodb", "us-east-1", time.Now())
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -723,7 +723,7 @@ func TestSignWithBody_NoReplaceRequestBody(t *testing.T) {
 
 	origBody := req.Body
 
-	_, err := s.Sign(req, seekerBody, "dynamodb", "us-east-1", time.Now())
+	_, err := s.Sign(context.Background(), req, seekerBody, "dynamodb", "us-east-1", time.Now())
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -757,7 +757,7 @@ func BenchmarkPresignRequest(b *testing.B) {
 	signer := buildSigner()
 	req, body := buildRequest("dynamodb", "us-east-1", "{}")
 	for i := 0; i < b.N; i++ {
-		signer.Presign(req, body, "dynamodb", "us-east-1", 300*time.Second, time.Now())
+		signer.Presign(context.Background(), req, body, "dynamodb", "us-east-1", 300*time.Second, time.Now())
 	}
 }
 
@@ -765,7 +765,7 @@ func BenchmarkSignRequest(b *testing.B) {
 	signer := buildSigner()
 	req, body := buildRequest("dynamodb", "us-east-1", "{}")
 	for i := 0; i < b.N; i++ {
-		signer.Sign(req, body, "dynamodb", "us-east-1", time.Now())
+		signer.Sign(context.Background(), req, body, "dynamodb", "us-east-1", time.Now())
 	}
 }
 
