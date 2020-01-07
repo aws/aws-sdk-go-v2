@@ -2651,6 +2651,23 @@ func (enum RuleAction) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type Scope string
+
+// Enum values for Scope
+const (
+	ScopeAvailabilityZone Scope = "Availability Zone"
+	ScopeRegion           Scope = "Region"
+)
+
+func (enum Scope) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Scope) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ServiceState string
 
 // Enum values for ServiceState
@@ -3791,23 +3808,6 @@ func (enum VpnStaticRouteSource) MarshalValue() (string, error) {
 }
 
 func (enum VpnStaticRouteSource) MarshalValueBuf(b []byte) ([]byte, error) {
-	b = b[0:0]
-	return append(b, enum...), nil
-}
-
-type Scope string
-
-// Enum values for Scope
-const (
-	ScopeAvailabilityZone Scope = "Availability Zone"
-	ScopeRegion           Scope = "Region"
-)
-
-func (enum Scope) MarshalValue() (string, error) {
-	return string(enum), nil
-}
-
-func (enum Scope) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
