@@ -12,7 +12,6 @@ import (
 
 func TestProtoGetApiKeyRequest_Diff(t *testing.T) {
 	svc := apigateway.New(mock.Config())
-
 	input := apigateway.GetApiKeyInput{
 		ApiKey:       aws.String("mock key"),
 		IncludeValue: aws.Bool(true),
@@ -33,7 +32,6 @@ func TestProtoGetApiKeyRequest_Diff(t *testing.T) {
 	if diff := cmp.Diff(request.HTTPRequest.Header, prototypeRequest.HTTPRequest.Header); diff != "" {
 		t.Errorf("Found diff: %v", diff)
 	}
-
 	if diff := cmp.Diff(request.HTTPRequest.URL, prototypeRequest.HTTPRequest.URL); diff != "" {
 		t.Errorf("Found diff: %v", diff)
 	}

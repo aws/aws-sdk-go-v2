@@ -25,7 +25,9 @@ func (m protoGetApiKeyMarshaler) marshalOperation(r *aws.Request) {
 		r.Error = err
 		return
 	}
-	if err := encoder.Encode(); err != nil {
+
+	err = encoder.Encode()
+	if err != nil {
 		r.Error = err
 		return
 	}

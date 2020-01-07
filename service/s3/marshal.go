@@ -17,13 +17,14 @@ type protoPutObjectMarshaler struct {
 func (m protoPutObjectMarshaler) marshalOperation(r *aws.Request) {
 	var err error
 	encoder := rest.NewEncoder(r.HTTPRequest)
-
 	err = marshalPutObjectInputShapeAWSREST(m.input, encoder)
 	if err != nil {
 		r.Error = err
 		return
 	}
-	if err := encoder.Encode(); err != nil {
+
+	err = encoder.Encode()
+	if err != nil {
 		r.Error = err
 		return
 	}
@@ -112,7 +113,6 @@ func marshalPutObjectInputShapeAWSREST(input *PutObjectInput, encoder *rest.Enco
 	if input.Expires != nil {
 		if err := encoder.AddHeader("Expires").Time(*input.Expires, protocol.RFC822TimeFormatName); err != nil {
 			return awserr.New(aws.ErrCodeSerialization, "failed to marshal header for shape Expires using REST encoder:\n \t %v", err)
-
 		}
 	}
 	if input.ObjectLockRetainUntilDate != nil {
@@ -124,13 +124,11 @@ func marshalPutObjectInputShapeAWSREST(input *PutObjectInput, encoder *rest.Enco
 	if input.Bucket != nil {
 		if err := encoder.SetURI("Bucket").String(*input.Bucket); err != nil {
 			return awserr.New(aws.ErrCodeSerialization, "failed to marshal URI for shape Bucket using REST encoder:\n \t %v", err)
-
 		}
 	}
 	if input.Key != nil {
 		if err := encoder.SetURI("Key").String(*input.Key); err != nil {
 			return awserr.New(aws.ErrCodeSerialization, "failed to marshal URI for shape Key using REST encoder:\n \t %v", err)
-
 		}
 	}
 	return nil

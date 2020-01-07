@@ -13,7 +13,6 @@ import (
 
 func TestProtoPutObjectRequest_Diff(t *testing.T) {
 	svc := s3.New(mock.Config())
-
 	input := s3.PutObjectInput{
 		ACL:                s3.ObjectCannedACLAuthenticatedRead,
 		Body:               nil,
@@ -67,7 +66,6 @@ func TestProtoPutObjectRequest_Diff(t *testing.T) {
 	if diff := cmp.Diff(request.HTTPRequest.Header, prototypeRequest.HTTPRequest.Header); diff != "" {
 		t.Errorf("Found diff: %v", diff)
 	}
-
 	if diff := cmp.Diff(request.HTTPRequest.URL, prototypeRequest.HTTPRequest.URL); diff != "" {
 		t.Errorf("Found diff: %v", diff)
 	}
