@@ -1,10 +1,10 @@
 package rdsutils
 
 import (
+	"context"
 	"fmt"
 	"net/url"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 )
 
@@ -26,24 +26,24 @@ var ErrNoConnectionFormat = awserr.New("NoConnectionFormat", "No connection form
 // string with the provided parameters. params field is required to have
 // a tls specification and allowCleartextPasswords must be set to true.
 type ConnectionStringBuilder struct {
-	dbName       string
-	endpoint     string
-	region       string
-	user         string
-	credProvider aws.CredentialsProvider
+	dbName   string
+	endpoint string
+	region   string
+	user     string
+	signer   HTTPV4Signer
 
 	connectFormat ConnectionFormat
 	params        url.Values
 }
 
 // NewConnectionStringBuilder will return an ConnectionStringBuilder
-func NewConnectionStringBuilder(endpoint, region, dbUser, dbName string, credProvider aws.CredentialsProvider) ConnectionStringBuilder {
+func NewConnectionStringBuilder(endpoint, region, dbUser, dbName string, signer HTTPV4Signer) ConnectionStringBuilder {
 	return ConnectionStringBuilder{
-		dbName:       dbName,
-		endpoint:     endpoint,
-		region:       region,
-		user:         dbUser,
-		credProvider: credProvider,
+		dbName:   dbName,
+		endpoint: endpoint,
+		region:   region,
+		user:     dbUser,
+		signer:   signer,
 	}
 }
 
@@ -99,19 +99,19 @@ func (b ConnectionStringBuilder) WithTCPFormat() ConnectionStringBuilder {
 // to the desired database.
 //
 //	Example:
-//	b := rdsutils.NewConnectionStringBuilder(endpoint, region, user, dbname, credProvider)
-//	connectStr, err := b.WithTCPFormat().Build()
+//	signer := v4.NewSigner(credsProvider)
+//	b := rdsutils.NewConnectionStringBuilder(endpoint, region, user, dbname, signer)
+//	connectStr, err := b.WithTCPFormat().Build(ctx)
 //	if err != nil {
 //		panic(err)
 //	}
 //	const dbType = "mysql"
 //	db, err := sql.Open(dbType, connectStr)
-func (b ConnectionStringBuilder) Build() (string, error) {
+func (b ConnectionStringBuilder) Build(ctx context.Context) (string, error) {
 	if b.connectFormat == NoConnectionFormat {
 		return "", ErrNoConnectionFormat
 	}
-
-	authToken, err := BuildAuthToken(b.endpoint, b.region, b.user, b.credProvider)
+	authToken, err := BuildAuthToken(ctx, b.endpoint, b.region, b.user, b.signer)
 	if err != nil {
 		return "", err
 	}

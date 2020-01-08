@@ -45,7 +45,7 @@ func (t *tokenProvider) fetchTokenHandler(r *aws.Request) {
 		return
 	}
 
-	output, err := t.client.getToken(t.configuredTTL)
+	output, err := t.client.getToken(r.Context(), t.configuredTTL)
 	if err != nil {
 		// change the disabled flag on token provider to true, when error is request timeout error.
 		if requestFailureError, ok := err.(awserr.RequestFailure); ok {
