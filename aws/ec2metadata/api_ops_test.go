@@ -2,6 +2,7 @@ package ec2metadata_test
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -291,10 +292,10 @@ func TestGetMetadata(t *testing.T) {
 
 			c.Handlers.Complete.PushBack(op.addToOperationPerformedList)
 
-			resp, err := c.GetMetadata("some/path")
+			resp, err := c.GetMetadata(context.Background(), "some/path")
 
 			// token should stay alive, since default duration is 26000 seconds
-			resp, err = c.GetMetadata("some/path")
+			resp, err = c.GetMetadata(context.Background(), "some/path")
 
 			if len(x.expectedError) != 0 {
 				if err == nil {
@@ -347,7 +348,7 @@ func TestGetUserData_Error(t *testing.T) {
 	cfg.EndpointResolver = aws.EndpointResolverFunc(myCustomResolver)
 	c := ec2metadata.New(cfg)
 
-	resp, err := c.GetUserData()
+	resp, err := c.GetUserData(context.Background())
 	if err == nil {
 		t.Fatalf("expect error")
 	}
@@ -439,7 +440,7 @@ func TestGetRegion(t *testing.T) {
 			c := ec2metadata.New(cfg)
 			c.Handlers.Complete.PushBack(op.addToOperationPerformedList)
 
-			resp, err := c.Region()
+			resp, err := c.Region(context.Background())
 
 			if len(x.expectedError) != 0 {
 				if err == nil {
@@ -515,7 +516,7 @@ func TestMetadataIAMInfo_success(t *testing.T) {
 			c := ec2metadata.New(cfg)
 			c.Handlers.Complete.PushBack(op.addToOperationPerformedList)
 
-			iamInfo, err := c.IAMInfo()
+			iamInfo, err := c.IAMInfo(context.Background())
 
 			if len(x.expectedError) != 0 {
 				if err == nil {
@@ -599,7 +600,7 @@ func TestMetadataIAMInfo_failure(t *testing.T) {
 
 			c.Handlers.Complete.PushBack(op.addToOperationPerformedList)
 
-			iamInfo, err := c.IAMInfo()
+			iamInfo, err := c.IAMInfo(context.Background())
 			if err == nil {
 				t.Fatalf("expect error")
 			}
@@ -632,7 +633,7 @@ func TestMetadataNotAvailable(t *testing.T) {
 		r.Retryable = aws.Bool(true) // network errors are retryable
 	})
 
-	if c.Available() {
+	if c.Available(context.Background()) {
 		t.Fatalf("expect not available")
 	}
 }
@@ -649,7 +650,7 @@ func TestMetadataErrorResponse(t *testing.T) {
 		r.Retryable = aws.Bool(false) // network errors are retryable
 	})
 
-	data, err := c.GetMetadata("uri/path")
+	data, err := c.GetMetadata(context.Background(), "uri/path")
 	if e, a := "error message text", err.Error(); !strings.Contains(a, e) {
 		t.Fatalf("expect %v to be in %v", e, a)
 	}
@@ -710,7 +711,7 @@ func TestEC2RoleProviderInstanceIdentity(t *testing.T) {
 			cfg.EndpointResolver = aws.EndpointResolverFunc(myCustomResolver)
 			c := ec2metadata.New(cfg)
 			c.Handlers.Complete.PushBack(op.addToOperationPerformedList)
-			doc, err := c.GetInstanceIdentityDocument()
+			doc, err := c.GetInstanceIdentityDocument(context.Background())
 
 			if err != nil {
 				t.Fatalf("expected no error, got %v", err)
@@ -760,7 +761,7 @@ func TestEC2MetadataRetryFailure(t *testing.T) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.EndpointResolverFunc(myCustomResolver)
 	c := ec2metadata.New(cfg)
-
+	// Handler on client that logs if retried
 	c.Handlers.AfterRetry.PushBack(func(i *aws.Request) {
 		t.Logf("%v received, retrying operation %v", i.HTTPResponse.StatusCode, i.Operation.Name)
 	})
@@ -768,7 +769,7 @@ func TestEC2MetadataRetryFailure(t *testing.T) {
 		t.Logf("%v operation exited with status %v", i.Operation.Name, i.HTTPResponse.StatusCode)
 	})
 
-	resp, err := c.GetMetadata("some/path")
+	resp, err := c.GetMetadata(context.Background(), "some/path")
 	if err != nil {
 		t.Fatalf("Expected none, got error %v", err)
 	}
@@ -776,7 +777,7 @@ func TestEC2MetadataRetryFailure(t *testing.T) {
 		t.Fatalf("Expected response to be profile_name, got %v", resp)
 	}
 
-	resp, err = c.GetMetadata("some/path")
+	resp, err = c.GetMetadata(context.Background(), "some/path")
 	if err != nil {
 		t.Fatalf("Expected none, got error %v", err)
 	}
@@ -823,14 +824,13 @@ func TestEC2MetadataRetryOnce(t *testing.T) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.EndpointResolverFunc(myCustomResolver)
 	c := ec2metadata.New(cfg)
-
 	// Handler on client that logs if retried
 	c.Handlers.AfterRetry.PushBack(func(i *aws.Request) {
 		t.Logf("%v received, retrying operation %v", i.HTTPResponse.StatusCode, i.Operation.Name)
 		tokenRetryCount++
 	})
 
-	_, err := c.GetMetadata("some/path")
+	_, err := c.GetMetadata(context.Background(), "some/path")
 
 	if tokenRetryCount != 1 {
 		t.Fatalf("Expected number of retries for fetching token to be 1, got %v", tokenRetryCount)
@@ -870,7 +870,7 @@ func TestEC2Metadata_Concurrency(t *testing.T) {
 		go func() {
 			defer wg.Done()
 			for j := 0; j < 10; j++ {
-				resp, err := c.GetMetadata("some/data")
+				resp, err := c.GetMetadata(context.Background(), "some/data")
 				if err != nil {
 					t.Errorf("expect no error, got %v", err)
 				}
@@ -950,7 +950,7 @@ func TestExhaustiveRetryToFetchToken(t *testing.T) {
 	c := ec2metadata.New(cfg)
 	c.Handlers.Complete.PushBack(op.addToOperationPerformedList)
 
-	resp, err := c.GetMetadata("/some/path")
+	resp, err := c.GetMetadata(context.Background(), "/some/path")
 	if err != nil {
 		t.Fatalf("Expected no error, got %v", err)
 	}
@@ -958,7 +958,7 @@ func TestExhaustiveRetryToFetchToken(t *testing.T) {
 		t.Fatalf("Expected %v, got %v", e, a)
 	}
 
-	resp, err = c.GetMetadata("/some/path")
+	resp, err = c.GetMetadata(context.Background(), "/some/path")
 	if err != nil {
 		t.Fatalf("Expected no error, got %v", err)
 	}
@@ -966,7 +966,7 @@ func TestExhaustiveRetryToFetchToken(t *testing.T) {
 		t.Fatalf("Expected %v, got %v", e, a)
 	}
 
-	resp, err = c.GetMetadata("/some/path")
+	resp, err = c.GetMetadata(context.Background(), "/some/path")
 	if err != nil {
 		t.Fatalf("Expected no error, got %v", err)
 	}
@@ -974,7 +974,7 @@ func TestExhaustiveRetryToFetchToken(t *testing.T) {
 		t.Fatalf("Expected %v, got %v", e, a)
 	}
 
-	resp, err = c.GetMetadata("/some/path")
+	resp, err = c.GetMetadata(context.Background(), "/some/path")
 	expectedOperationsPerformed := []string{"GetToken", "GetMetadata", "GetMetadata", "GetMetadata", "GetMetadata"}
 	if err != nil {
 		t.Fatalf("Expected no error, got %v", err)
@@ -1009,28 +1009,28 @@ func TestExhaustiveRetryWith401(t *testing.T) {
 	c := ec2metadata.New(cfg)
 	c.Handlers.Complete.PushBack(op.addToOperationPerformedList)
 
-	resp, err := c.GetMetadata("/some/path")
+	resp, err := c.GetMetadata(context.Background(), "/some/path")
 	if err == nil {
 		t.Fatalf("Expected %v error, got none", err)
 	}
 	if e, a := "", resp; e != a {
 		t.Fatalf("Expected %v, got %v", e, a)
 	}
-	resp, err = c.GetMetadata("/some/path")
+	resp, err = c.GetMetadata(context.Background(), "/some/path")
 	if err == nil {
 		t.Fatalf("Expected %v error, got none", err)
 	}
 	if e, a := "", resp; e != a {
 		t.Fatalf("Expected %v, got %v", e, a)
 	}
-	resp, err = c.GetMetadata("/some/path")
+	resp, err = c.GetMetadata(context.Background(), "/some/path")
 	if err == nil {
 		t.Fatalf("Expected %v error, got none", err)
 	}
 	if e, a := "", resp; e != a {
 		t.Fatalf("Expected %v, got %v", e, a)
 	}
-	resp, err = c.GetMetadata("/some/path")
+	resp, err = c.GetMetadata(context.Background(), "/some/path")
 
 	expectedOperationsPerformed := []string{"GetToken", "GetMetadata", "GetToken", "GetMetadata", "GetToken", "GetMetadata", "GetToken", "GetMetadata"}
 
@@ -1089,7 +1089,7 @@ func TestRequestTimeOut(t *testing.T) {
 
 	c.Handlers.Complete.PushBack(op.addToOperationPerformedList)
 
-	resp, err := c.GetMetadata("/some/path")
+	resp, err := c.GetMetadata(context.Background(), "/some/path")
 
 	expectedOperationsPerformed := []string{"GetToken", "GetMetadata"}
 
@@ -1105,7 +1105,7 @@ func TestRequestTimeOut(t *testing.T) {
 		t.Fatalf("Found diff in operations performed: \n %v \n", diff)
 	}
 
-	resp, err = c.GetMetadata("/some/path")
+	resp, err = c.GetMetadata(context.Background(), "/some/path")
 
 	expectedOperationsPerformed = []string{"GetToken", "GetMetadata", "GetMetadata"}
 
@@ -1163,7 +1163,7 @@ func TestTokenExpiredBehavior(t *testing.T) {
 	c := ec2metadata.New(cfg)
 	c.Handlers.Complete.PushBack(op.addToOperationPerformedList)
 
-	resp, err := c.GetMetadata("/some/path")
+	resp, err := c.GetMetadata(context.Background(), "/some/path")
 	if err != nil {
 		t.Fatalf("Expected no error, got %v", err)
 	}
@@ -1174,7 +1174,7 @@ func TestTokenExpiredBehavior(t *testing.T) {
 	// store the token received before
 	var firstToken = activeToken
 
-	resp, err = c.GetMetadata("/some/path")
+	resp, err = c.GetMetadata(context.Background(), "/some/path")
 	if err != nil {
 		t.Fatalf("Expected no error, got %v", err)
 	}

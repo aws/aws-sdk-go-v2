@@ -2,6 +2,7 @@ package v2
 
 import (
 	"bytes"
+	"context"
 	"net/http"
 	"net/url"
 	"os"
@@ -75,7 +76,7 @@ func TestSignRequestWithAndWithoutSession(t *testing.T) {
 
 	signer := builder.BuildSigner()
 
-	err := signer.Sign()
+	err := signer.Sign(context.Background())
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -122,7 +123,7 @@ func TestSignRequestWithAndWithoutSession(t *testing.T) {
 	builder.SessionToken = "SESSION"
 	signer = builder.BuildSigner()
 
-	err = signer.Sign()
+	err = signer.Sign(context.Background())
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -165,7 +166,7 @@ func TestMoreComplexSignRequest(t *testing.T) {
 
 	signer := builder.BuildSigner()
 
-	err := signer.Sign()
+	err := signer.Sign(context.Background())
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}

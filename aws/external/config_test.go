@@ -1,6 +1,7 @@
 package external
 
 import (
+	"context"
 	"reflect"
 	"testing"
 
@@ -93,7 +94,7 @@ func TestConfigs_ResolveAWSConfig(t *testing.T) {
 		t.Errorf("expect %v region, got %v", e, a)
 	}
 
-	creds, err := cfg.Credentials.Retrieve()
+	creds, err := cfg.Credentials.Retrieve(context.Background())
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
