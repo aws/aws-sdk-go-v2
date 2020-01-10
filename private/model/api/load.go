@@ -5,6 +5,7 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"sort"
@@ -172,6 +173,9 @@ func (a *API) Setup() {
 	}
 
 	a.fixStutterNames()
+	if err := a.validateShapeNames(); err != nil {
+		log.Fatalf(err.Error())
+	}
 	a.renameExportable()
 	a.applyShapeNameAliases()
 	a.createInputOutputShapes()
