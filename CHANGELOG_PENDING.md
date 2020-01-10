@@ -5,7 +5,10 @@ Breaking Change
   * To migrate your applications to use the updated wafregional and dynamodbstreams you'll need to update the package the impacted type is imported from to match the client the type is being used with.
 * `aws`: Context has been added to EC2Metadata operations.([#461](https://github.com/aws/aws-sdk-go-v2/pull/461))
   * Also updates utilities that directly or indirectly depend on EC2Metadata client. Signer utilities, credential providers now take in context.
-  
+* `private/model`: Add utility for validating shape names for structs and enums for the service packages ([#471](https://github.com/aws/aws-sdk-go-v2/pull/471))
+  * Fixes bug which allowed service package structs, enums to start with non alphabetic character 
+  * Fixes the incorrect enum types in mediapackage service package, changing enum types __AdTriggersElement, __PeriodTriggersElement to AdTriggersElement, PeriodTriggersElement respectively.
+
 Services
 ---
 
