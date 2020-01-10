@@ -22,7 +22,7 @@ type DescribeCertificatesInput struct {
 	//    * Must match an existing CertificateIdentifier.
 	CertificateIdentifier *string `type:"string"`
 
-	// This parameter is not currently supported.
+	// This parameter isn't currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeCertificates
@@ -32,7 +32,7 @@ type DescribeCertificatesInput struct {
 
 	// The maximum number of records to include in the response. If more records
 	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
+	// is included in the response so you can retrieve the remaining results.
 	//
 	// Default: 100
 	//

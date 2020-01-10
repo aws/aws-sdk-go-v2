@@ -80,6 +80,23 @@
         {"shape":"InvalidParameterValueException"}
       ]
     },
+    "CompleteMigration":{
+      "name":"CompleteMigration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CompleteMigrationMessage"},
+      "output":{
+        "shape":"CompleteMigrationResponse",
+        "resultWrapper":"CompleteMigrationResult"
+      },
+      "errors":[
+        {"shape":"ReplicationGroupNotFoundFault"},
+        {"shape":"InvalidReplicationGroupStateFault"},
+        {"shape":"ReplicationGroupNotUnderMigrationFault"}
+      ]
+    },
     "CopySnapshot":{
       "name":"CopySnapshot",
       "http":{
@@ -854,6 +871,24 @@
         {"shape":"InvalidParameterCombinationException"}
       ]
     },
+    "StartMigration":{
+      "name":"StartMigration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartMigrationMessage"},
+      "output":{
+        "shape":"StartMigrationResponse",
+        "resultWrapper":"StartMigrationResult"
+      },
+      "errors":[
+        {"shape":"ReplicationGroupNotFoundFault"},
+        {"shape":"InvalidReplicationGroupStateFault"},
+        {"shape":"ReplicationGroupAlreadyUnderMigrationFault"},
+        {"shape":"InvalidParameterValueException"}
+      ]
+    },
     "TestFailover":{
       "name":"TestFailover",
       "http":{
@@ -920,6 +955,20 @@
         "ScaleUpModifications":{"shape":"NodeTypeList"},
         "ScaleDownModifications":{"shape":"NodeTypeList"}
       }
+    },
+    "AuthTokenUpdateStatus":{
+      "type":"string",
+      "enum":[
+        "SETTING",
+        "ROTATING"
+      ]
+    },
+    "AuthTokenUpdateStrategyType":{
+      "type":"string",
+      "enum":[
+        "SET",
+        "ROTATE"
+      ]
     },
     "AuthorizationAlreadyExistsFault":{
       "type":"structure",
@@ -988,23 +1037,19 @@
     "AwsQueryErrorMessage":{"type":"string"},
     "BatchApplyUpdateActionMessage":{
       "type":"structure",
-      "required":[
-        "ReplicationGroupIds",
-        "ServiceUpdateName"
-      ],
+      "required":["ServiceUpdateName"],
       "members":{
         "ReplicationGroupIds":{"shape":"ReplicationGroupIdList"},
+        "CacheClusterIds":{"shape":"CacheClusterIdList"},
         "ServiceUpdateName":{"shape":"String"}
       }
     },
     "BatchStopUpdateActionMessage":{
       "type":"structure",
-      "required":[
-        "ReplicationGroupIds",
-        "ServiceUpdateName"
-      ],
+      "required":["ServiceUpdateName"],
       "members":{
         "ReplicationGroupIds":{"shape":"ReplicationGroupIdList"},
+        "CacheClusterIds":{"shape":"CacheClusterIdList"},
         "ServiceUpdateName":{"shape":"String"}
       }
     },
@@ -1036,6 +1081,7 @@
         "SnapshotRetentionLimit":{"shape":"IntegerOptional"},
         "SnapshotWindow":{"shape":"String"},
         "AuthTokenEnabled":{"shape":"BooleanOptional"},
+        "AuthTokenLastModifiedDate":{"shape":"TStamp"},
         "TransitEncryptionEnabled":{"shape":"BooleanOptional"},
         "AtRestEncryptionEnabled":{"shape":"BooleanOptional"}
       },
@@ -1051,6 +1097,11 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "CacheClusterIdList":{
+      "type":"list",
+      "member":{"shape":"String"},
+      "max":20
     },
     "CacheClusterList":{
       "type":"list",
@@ -1160,6 +1211,26 @@
       "member":{
         "shape":"CacheNodeTypeSpecificValue",
         "locationName":"CacheNodeTypeSpecificValue"
+      }
+    },
+    "CacheNodeUpdateStatus":{
+      "type":"structure",
+      "members":{
+        "CacheNodeId":{"shape":"String"},
+        "NodeUpdateStatus":{"shape":"NodeUpdateStatus"},
+        "NodeDeletionDate":{"shape":"TStamp"},
+        "NodeUpdateStartDate":{"shape":"TStamp"},
+        "NodeUpdateEndDate":{"shape":"TStamp"},
+        "NodeUpdateInitiatedBy":{"shape":"NodeUpdateInitiatedBy"},
+        "NodeUpdateInitiatedDate":{"shape":"TStamp"},
+        "NodeUpdateStatusModifiedDate":{"shape":"TStamp"}
+      }
+    },
+    "CacheNodeUpdateStatusList":{
+      "type":"list",
+      "member":{
+        "shape":"CacheNodeUpdateStatus",
+        "locationName":"CacheNodeUpdateStatus"
       }
     },
     "CacheParameterGroup":{
@@ -1422,6 +1493,20 @@
       },
       "exception":true
     },
+    "CompleteMigrationMessage":{
+      "type":"structure",
+      "required":["ReplicationGroupId"],
+      "members":{
+        "ReplicationGroupId":{"shape":"String"},
+        "Force":{"shape":"Boolean"}
+      }
+    },
+    "CompleteMigrationResponse":{
+      "type":"structure",
+      "members":{
+        "ReplicationGroup":{"shape":"ReplicationGroup"}
+      }
+    },
     "ConfigureShard":{
       "type":"structure",
       "required":[
@@ -1602,6 +1687,17 @@
       "members":{
         "Snapshot":{"shape":"Snapshot"}
       }
+    },
+    "CustomerNodeEndpoint":{
+      "type":"structure",
+      "members":{
+        "Address":{"shape":"String"},
+        "Port":{"shape":"IntegerOptional"}
+      }
+    },
+    "CustomerNodeEndpointList":{
+      "type":"list",
+      "member":{"shape":"CustomerNodeEndpoint"}
     },
     "DecreaseReplicaCountMessage":{
       "type":"structure",
@@ -1834,6 +1930,8 @@
       "members":{
         "ServiceUpdateName":{"shape":"String"},
         "ReplicationGroupIds":{"shape":"ReplicationGroupIdList"},
+        "CacheClusterIds":{"shape":"CacheClusterIdList"},
+        "Engine":{"shape":"String"},
         "ServiceUpdateStatus":{"shape":"ServiceUpdateStatusList"},
         "ServiceUpdateTimeRange":{"shape":"TimeRangeFilter"},
         "UpdateActionStatus":{"shape":"UpdateActionStatusList"},
@@ -2093,7 +2191,9 @@
         "AutoMinorVersionUpgrade":{"shape":"BooleanOptional"},
         "SnapshotRetentionLimit":{"shape":"IntegerOptional"},
         "SnapshotWindow":{"shape":"String"},
-        "CacheNodeType":{"shape":"String"}
+        "CacheNodeType":{"shape":"String"},
+        "AuthToken":{"shape":"String"},
+        "AuthTokenUpdateStrategy":{"shape":"AuthTokenUpdateStrategyType"}
       }
     },
     "ModifyCacheClusterResult":{
@@ -2137,6 +2237,10 @@
         "PrimaryClusterId":{"shape":"String"},
         "SnapshottingClusterId":{"shape":"String"},
         "AutomaticFailoverEnabled":{"shape":"BooleanOptional"},
+        "NodeGroupId":{
+          "shape":"String",
+          "deprecated":true
+        },
         "CacheSecurityGroupNames":{"shape":"CacheSecurityGroupNameList"},
         "SecurityGroupIds":{"shape":"SecurityGroupIdsList"},
         "PreferredMaintenanceWindow":{"shape":"String"},
@@ -2149,10 +2253,8 @@
         "SnapshotRetentionLimit":{"shape":"IntegerOptional"},
         "SnapshotWindow":{"shape":"String"},
         "CacheNodeType":{"shape":"String"},
-        "NodeGroupId":{
-          "shape":"String",
-          "deprecated":true
-        }
+        "AuthToken":{"shape":"String"},
+        "AuthTokenUpdateStrategy":{"shape":"AuthTokenUpdateStrategyType"}
       }
     },
     "ModifyReplicationGroupResult":{
@@ -2436,7 +2538,8 @@
         "NumCacheNodes":{"shape":"IntegerOptional"},
         "CacheNodeIdsToRemove":{"shape":"CacheNodeIdsList"},
         "EngineVersion":{"shape":"String"},
-        "CacheNodeType":{"shape":"String"}
+        "CacheNodeType":{"shape":"String"},
+        "AuthTokenStatus":{"shape":"AuthTokenUpdateStatus"}
       }
     },
     "PreferredAvailabilityZoneList":{
@@ -2450,6 +2553,7 @@
       "type":"structure",
       "members":{
         "ReplicationGroupId":{"shape":"String"},
+        "CacheClusterId":{"shape":"String"},
         "ServiceUpdateName":{"shape":"String"},
         "UpdateActionStatus":{"shape":"UpdateActionStatus"}
       }
@@ -2547,6 +2651,7 @@
         "ClusterEnabled":{"shape":"BooleanOptional"},
         "CacheNodeType":{"shape":"String"},
         "AuthTokenEnabled":{"shape":"BooleanOptional"},
+        "AuthTokenLastModifiedDate":{"shape":"TStamp"},
         "TransitEncryptionEnabled":{"shape":"BooleanOptional"},
         "AtRestEncryptionEnabled":{"shape":"BooleanOptional"},
         "KmsKeyId":{"shape":"String"}
@@ -2559,6 +2664,17 @@
       },
       "error":{
         "code":"ReplicationGroupAlreadyExists",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "ReplicationGroupAlreadyUnderMigrationFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"ReplicationGroupAlreadyUnderMigrationFault",
         "httpStatusCode":400,
         "senderFault":true
       },
@@ -2594,12 +2710,24 @@
       },
       "exception":true
     },
+    "ReplicationGroupNotUnderMigrationFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"ReplicationGroupNotUnderMigrationFault",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "ReplicationGroupPendingModifiedValues":{
       "type":"structure",
       "members":{
         "PrimaryClusterId":{"shape":"String"},
         "AutomaticFailoverStatus":{"shape":"PendingAutomaticFailoverStatus"},
-        "Resharding":{"shape":"ReshardingStatus"}
+        "Resharding":{"shape":"ReshardingStatus"},
+        "AuthTokenStatus":{"shape":"AuthTokenUpdateStatus"}
       }
     },
     "ReservedCacheNode":{
@@ -2965,6 +3093,23 @@
         "replication-group"
       ]
     },
+    "StartMigrationMessage":{
+      "type":"structure",
+      "required":[
+        "ReplicationGroupId",
+        "CustomerNodeEndpointList"
+      ],
+      "members":{
+        "ReplicationGroupId":{"shape":"String"},
+        "CustomerNodeEndpointList":{"shape":"CustomerNodeEndpointList"}
+      }
+    },
+    "StartMigrationResponse":{
+      "type":"structure",
+      "members":{
+        "ReplicationGroup":{"shape":"ReplicationGroup"}
+      }
+    },
     "String":{"type":"string"},
     "Subnet":{
       "type":"structure",
@@ -3080,6 +3225,7 @@
       "type":"structure",
       "members":{
         "ReplicationGroupId":{"shape":"String"},
+        "CacheClusterId":{"shape":"String"},
         "ServiceUpdateName":{"shape":"String"},
         "ErrorType":{"shape":"String"},
         "ErrorMessage":{"shape":"String"}
@@ -3096,6 +3242,7 @@
       "type":"structure",
       "members":{
         "ReplicationGroupId":{"shape":"String"},
+        "CacheClusterId":{"shape":"String"},
         "ServiceUpdateName":{"shape":"String"},
         "ServiceUpdateReleaseDate":{"shape":"TStamp"},
         "ServiceUpdateSeverity":{"shape":"ServiceUpdateSeverity"},
@@ -3108,7 +3255,9 @@
         "UpdateActionStatusModifiedDate":{"shape":"TStamp"},
         "SlaMet":{"shape":"SlaMet"},
         "NodeGroupUpdateStatus":{"shape":"NodeGroupUpdateStatusList"},
-        "EstimatedUpdateTime":{"shape":"String"}
+        "CacheNodeUpdateStatus":{"shape":"CacheNodeUpdateStatusList"},
+        "EstimatedUpdateTime":{"shape":"String"},
+        "Engine":{"shape":"String"}
       }
     },
     "UpdateActionList":{

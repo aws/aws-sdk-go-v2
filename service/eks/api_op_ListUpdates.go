@@ -32,6 +32,9 @@ type ListUpdatesInput struct {
 	// Pagination continues from the end of the previous results that returned the
 	// nextToken value.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+
+	// The name of the Amazon EKS managed node group to list updates for.
+	NodegroupName *string `location:"querystring" locationName:"nodegroupName" type:"string"`
 }
 
 // String returns the string representation
@@ -77,6 +80,12 @@ func (s ListUpdatesInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.NodegroupName != nil {
+		v := *s.NodegroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nodegroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -127,8 +136,8 @@ const opListUpdates = "ListUpdates"
 // ListUpdatesRequest returns a request value for making API operation for
 // Amazon Elastic Kubernetes Service.
 //
-// Lists the updates associated with an Amazon EKS cluster in your AWS account,
-// in the specified Region.
+// Lists the updates associated with an Amazon EKS cluster or managed node group
+// in your AWS account, in the specified Region.
 //
 //    // Example sending a request using ListUpdatesRequest.
 //    req := client.ListUpdatesRequest(params)

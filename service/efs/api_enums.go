@@ -60,6 +60,7 @@ type TransitionToIARules string
 
 // Enum values for TransitionToIARules
 const (
+	TransitionToIARulesAfter7Days  TransitionToIARules = "AFTER_7_DAYS"
 	TransitionToIARulesAfter14Days TransitionToIARules = "AFTER_14_DAYS"
 	TransitionToIARulesAfter30Days TransitionToIARules = "AFTER_30_DAYS"
 	TransitionToIARulesAfter60Days TransitionToIARules = "AFTER_60_DAYS"

@@ -252,14 +252,20 @@ func (enum Ac3MetadataControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Enable Acceleration (AccelerationMode) on any job that you want processed
-// with accelerated transcoding.
+// Specify whether the service runs your job with accelerated transcoding. Choose
+// DISABLED if you don't want accelerated transcoding. Choose ENABLED if you
+// want your job to run with accelerated transcoding and to fail if your input
+// files or your job settings aren't compatible with accelerated transcoding.
+// Choose PREFERRED if you want your job to run with accelerated transcoding
+// if the job is compatible with the feature and to run at standard speed if
+// it's not.
 type AccelerationMode string
 
 // Enum values for AccelerationMode
 const (
-	AccelerationModeDisabled AccelerationMode = "DISABLED"
-	AccelerationModeEnabled  AccelerationMode = "ENABLED"
+	AccelerationModeDisabled  AccelerationMode = "DISABLED"
+	AccelerationModeEnabled   AccelerationMode = "ENABLED"
+	AccelerationModePreferred AccelerationMode = "PREFERRED"
 )
 
 func (enum AccelerationMode) MarshalValue() (string, error) {
@@ -267,6 +273,36 @@ func (enum AccelerationMode) MarshalValue() (string, error) {
 }
 
 func (enum AccelerationMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Describes whether the current job is running with accelerated transcoding.
+// For jobs that have Acceleration (AccelerationMode) set to DISABLED, AccelerationStatus
+// is always NOT_APPLICABLE. For jobs that have Acceleration (AccelerationMode)
+// set to ENABLED or PREFERRED, AccelerationStatus is one of the other states.
+// AccelerationStatus is IN_PROGRESS initially, while the service determines
+// whether the input files and job settings are compatible with accelerated
+// transcoding. If they are, AcclerationStatus is ACCELERATED. If your input
+// files and job settings aren't compatible with accelerated transcoding, the
+// service either fails your job or runs it without accelerated transcoding,
+// depending on how you set Acceleration (AccelerationMode). When the service
+// runs your job without accelerated transcoding, AccelerationStatus is NOT_ACCELERATED.
+type AccelerationStatus string
+
+// Enum values for AccelerationStatus
+const (
+	AccelerationStatusNotApplicable  AccelerationStatus = "NOT_APPLICABLE"
+	AccelerationStatusInProgress     AccelerationStatus = "IN_PROGRESS"
+	AccelerationStatusAccelerated    AccelerationStatus = "ACCELERATED"
+	AccelerationStatusNotAccelerated AccelerationStatus = "NOT_ACCELERATED"
+)
+
+func (enum AccelerationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AccelerationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -291,6 +327,28 @@ func (enum AfdSignaling) MarshalValue() (string, error) {
 }
 
 func (enum AfdSignaling) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Ignore this setting unless this input is a QuickTime animation. Specify which
+// part of this input MediaConvert uses for your outputs. Leave this setting
+// set to DISCARD in order to delete the alpha channel and preserve the video.
+// Use REMAP_TO_LUMA for this setting to delete the video and map the alpha
+// channel to the luma channel of your outputs.
+type AlphaBehavior string
+
+// Enum values for AlphaBehavior
+const (
+	AlphaBehaviorDiscard     AlphaBehavior = "DISCARD"
+	AlphaBehaviorRemapToLuma AlphaBehavior = "REMAP_TO_LUMA"
+)
+
+func (enum AlphaBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AlphaBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -401,10 +459,12 @@ func (enum AudioDefaultSelection) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Choosing FOLLOW_INPUT will cause the ISO 639 language code of the output
-// to follow the ISO 639 language code of the input. The language specified
-// for languageCode' will be used when USE_CONFIGURED is selected or when FOLLOW_INPUT
-// is selected but there is no ISO 639 language code specified by the input.
+// Specify which source for language code takes precedence for this audio track.
+// When you choose Follow input (FOLLOW_INPUT), the service uses the language
+// code from the input track if it's present. If there's no languge code on
+// the input track, the service uses the code that you specify in the setting
+// Language code (languageCode or customLanguageCode). When you choose Use configured
+// (USE_CONFIGURED), the service uses the language code that you specify.
 type AudioLanguageCodeControl string
 
 // Enum values for AudioLanguageCodeControl
@@ -560,6 +620,7 @@ const (
 	BillingTagsSourceQueue       BillingTagsSource = "QUEUE"
 	BillingTagsSourcePreset      BillingTagsSource = "PRESET"
 	BillingTagsSourceJobTemplate BillingTagsSource = "JOB_TEMPLATE"
+	BillingTagsSourceJob         BillingTagsSource = "JOB"
 )
 
 func (enum BillingTagsSource) MarshalValue() (string, error) {
@@ -902,6 +963,29 @@ func (enum CmafManifestDurationFormat) MarshalValueBuf(b []byte) ([]byte, error)
 	return append(b, enum...), nil
 }
 
+// Specify whether your DASH profile is on-demand or main. When you choose Main
+// profile (MAIN_PROFILE), the service signals urn:mpeg:dash:profile:isoff-main:2011
+// in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE),
+// the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd.
+// When you choose On-demand, you must also set the output group setting Segment
+// control (SegmentControl) to Single file (SINGLE_FILE).
+type CmafMpdProfile string
+
+// Enum values for CmafMpdProfile
+const (
+	CmafMpdProfileMainProfile     CmafMpdProfile = "MAIN_PROFILE"
+	CmafMpdProfileOnDemandProfile CmafMpdProfile = "ON_DEMAND_PROFILE"
+)
+
+func (enum CmafMpdProfile) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CmafMpdProfile) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // When set to SINGLE_FILE, a single output file is generated, which is internally
 // segmented using the Fragment Length and Segment Length. When set to SEGMENTED_FILES,
 // separate segment files will be created.
@@ -1138,6 +1222,29 @@ func (enum DashIsoHbbtvCompliance) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Specify whether your DASH profile is on-demand or main. When you choose Main
+// profile (MAIN_PROFILE), the service signals urn:mpeg:dash:profile:isoff-main:2011
+// in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE),
+// the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd.
+// When you choose On-demand, you must also set the output group setting Segment
+// control (SegmentControl) to Single file (SINGLE_FILE).
+type DashIsoMpdProfile string
+
+// Enum values for DashIsoMpdProfile
+const (
+	DashIsoMpdProfileMainProfile     DashIsoMpdProfile = "MAIN_PROFILE"
+	DashIsoMpdProfileOnDemandProfile DashIsoMpdProfile = "ON_DEMAND_PROFILE"
+)
+
+func (enum DashIsoMpdProfile) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DashIsoMpdProfile) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // This setting can improve the compatibility of your output with video players
 // on obsolete devices. It applies only to DASH H.264 outputs with DRM encryption.
 // Choose Unencrypted SEI (UNENCRYPTED_SEI) only to correct problems with playback
@@ -1315,6 +1422,45 @@ func (enum DescribeEndpointsMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Use Dolby Vision Mode to choose how the service will handle Dolby Vision
+// MaxCLL and MaxFALL properies.
+type DolbyVisionLevel6Mode string
+
+// Enum values for DolbyVisionLevel6Mode
+const (
+	DolbyVisionLevel6ModePassthrough DolbyVisionLevel6Mode = "PASSTHROUGH"
+	DolbyVisionLevel6ModeRecalculate DolbyVisionLevel6Mode = "RECALCULATE"
+	DolbyVisionLevel6ModeSpecify     DolbyVisionLevel6Mode = "SPECIFY"
+)
+
+func (enum DolbyVisionLevel6Mode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DolbyVisionLevel6Mode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// In the current MediaConvert implementation, the Dolby Vision profile is always
+// 5 (PROFILE_5). Therefore, all of your inputs must contain Dolby Vision frame
+// interleaved data.
+type DolbyVisionProfile string
+
+// Enum values for DolbyVisionProfile
+const (
+	DolbyVisionProfileProfile5 DolbyVisionProfile = "PROFILE_5"
+)
+
+func (enum DolbyVisionProfile) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DolbyVisionProfile) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Applies only to 29.97 fps outputs. When this feature is enabled, the service
 // will use drop-frame timecode on outputs. If it is not possible to use drop-frame
 // timecode, the system will fall back to non-drop-frame. This setting is enabled
@@ -1469,6 +1615,26 @@ func (enum DvbSubtitleTeletextSpacing) MarshalValue() (string, error) {
 }
 
 func (enum DvbSubtitleTeletextSpacing) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Specify whether your DVB subtitles are standard or for hearing impaired.
+// Choose hearing impaired if your subtitles include audio descriptions and
+// dialogue. Choose standard if your subtitles include only dialogue.
+type DvbSubtitlingType string
+
+// Enum values for DvbSubtitlingType
+const (
+	DvbSubtitlingTypeHearingImpaired DvbSubtitlingType = "HEARING_IMPAIRED"
+	DvbSubtitlingTypeStandard        DvbSubtitlingType = "STANDARD"
+)
+
+func (enum DvbSubtitlingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DvbSubtitlingType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -3015,17 +3181,17 @@ func (enum H265UnregisteredSeiTimecode) MarshalValueBuf(b []byte) ([]byte, error
 	return append(b, enum...), nil
 }
 
-// Use this setting only for outputs encoded with H.265 that are in CMAF or
-// DASH output groups. If you include writeMp4PackagingType in your JSON job
-// specification for other outputs, your video might not work properly with
-// downstream systems and video players. If the location of parameter set NAL
-// units don't matter in your workflow, ignore this setting. The service defaults
-// to marking your output as HEV1. Choose HVC1 to mark your output as HVC1.
-// This makes your output compliant with this specification: ISO IECJTC1 SC29
-// N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service
-// stores parameter set NAL units in the sample headers but not in the samples
-// directly. Keep the default HEV1 to mark your output as HEV1. For these outputs,
-// the service writes parameter set NAL units directly into the samples.
+// If the location of parameter set NAL units doesn't matter in your workflow,
+// ignore this setting. Use this setting only with CMAF or DASH outputs, or
+// with standalone file outputs in an MPEG-4 container (MP4 outputs). Choose
+// HVC1 to mark your output as HVC1. This makes your output compliant with the
+// following specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15
+// 3rd Edition. For these outputs, the service stores parameter set NAL units
+// in the sample headers but not in the samples directly. For MP4 outputs, when
+// you choose HVC1, your output video might not work properly with some downstream
+// systems and video players. The service defaults to marking your output as
+// HEV1. For these outputs, the service writes parameter set NAL units directly
+// into the samples.
 type H265WriteMp4PackagingType string
 
 // Enum values for H265WriteMp4PackagingType
@@ -4372,6 +4538,71 @@ func (enum Mp4MoovPlacement) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Use this setting only in DASH output groups that include sidecar TTML or
+// IMSC captions. You specify sidecar captions in a separate output from your
+// audio and video. Choose Raw (RAW) for captions in a single XML file in a
+// raw container. Choose Fragmented MPEG-4 (FRAGMENTED_MP4) for captions in
+// XML format contained within fragmented MP4 files. This set of fragmented
+// MP4 files is separate from your video and audio fragmented MP4 files.
+type MpdCaptionContainerType string
+
+// Enum values for MpdCaptionContainerType
+const (
+	MpdCaptionContainerTypeRaw           MpdCaptionContainerType = "RAW"
+	MpdCaptionContainerTypeFragmentedMp4 MpdCaptionContainerType = "FRAGMENTED_MP4"
+)
+
+func (enum MpdCaptionContainerType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MpdCaptionContainerType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Use this setting only when you specify SCTE-35 markers from ESAM. Choose
+// INSERT to put SCTE-35 markers in this output at the insertion points that
+// you specify in an ESAM XML document. Provide the document in the setting
+// SCC XML (sccXml).
+type MpdScte35Esam string
+
+// Enum values for MpdScte35Esam
+const (
+	MpdScte35EsamInsert MpdScte35Esam = "INSERT"
+	MpdScte35EsamNone   MpdScte35Esam = "NONE"
+)
+
+func (enum MpdScte35Esam) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MpdScte35Esam) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Ignore this setting unless you have SCTE-35 markers in your input video file.
+// Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear
+// in your input to also appear in this output. Choose None (NONE) if you don't
+// want those SCTE-35 markers in this output.
+type MpdScte35Source string
+
+// Enum values for MpdScte35Source
+const (
+	MpdScte35SourcePassthrough MpdScte35Source = "PASSTHROUGH"
+	MpdScte35SourceNone        MpdScte35Source = "NONE"
+)
+
+func (enum MpdScte35Source) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MpdScte35Source) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Adaptive quantization. Allows intra-frame quantizers to vary to improve visual
 // quality.
 type Mpeg2AdaptiveQuantization string
@@ -5188,6 +5419,26 @@ func (enum RespondToAfd) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Choose an Amazon S3 canned ACL for MediaConvert to apply to this output.
+type S3ObjectCannedAcl string
+
+// Enum values for S3ObjectCannedAcl
+const (
+	S3ObjectCannedAclPublicRead             S3ObjectCannedAcl = "PUBLIC_READ"
+	S3ObjectCannedAclAuthenticatedRead      S3ObjectCannedAcl = "AUTHENTICATED_READ"
+	S3ObjectCannedAclBucketOwnerRead        S3ObjectCannedAcl = "BUCKET_OWNER_READ"
+	S3ObjectCannedAclBucketOwnerFullControl S3ObjectCannedAcl = "BUCKET_OWNER_FULL_CONTROL"
+)
+
+func (enum S3ObjectCannedAcl) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum S3ObjectCannedAcl) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Specify how you want your data keys managed. AWS uses data keys to encrypt
 // your content. AWS also encrypts the data keys themselves, using a customer
 // master key (CMK), and then stores the encrypted data keys alongside your
@@ -5251,6 +5502,7 @@ type SccDestinationFramerate string
 const (
 	SccDestinationFramerateFramerate2397             SccDestinationFramerate = "FRAMERATE_23_97"
 	SccDestinationFramerateFramerate24               SccDestinationFramerate = "FRAMERATE_24"
+	SccDestinationFramerateFramerate25               SccDestinationFramerate = "FRAMERATE_25"
 	SccDestinationFramerateFramerate2997Dropframe    SccDestinationFramerate = "FRAMERATE_29_97_DROPFRAME"
 	SccDestinationFramerateFramerate2997NonDropframe SccDestinationFramerate = "FRAMERATE_29_97_NON_DROPFRAME"
 )

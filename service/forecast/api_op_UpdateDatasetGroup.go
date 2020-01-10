@@ -12,8 +12,8 @@ import (
 type UpdateDatasetGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// An array of Amazon Resource Names (ARNs) of the datasets to add to the dataset
-	// group.
+	// An array of the Amazon Resource Names (ARNs) of the datasets to add to the
+	// dataset group.
 	//
 	// DatasetArns is a required field
 	DatasetArns []string `type:"list" required:"true"`
@@ -61,11 +61,11 @@ const opUpdateDatasetGroup = "UpdateDatasetGroup"
 // UpdateDatasetGroupRequest returns a request value for making API operation for
 // Amazon Forecast Service.
 //
-// Replaces any existing datasets in the dataset group with the specified datasets.
+// Replaces the datasets in a dataset group with the specified datasets.
 //
-// The Status of the dataset group must be ACTIVE before creating a predictor
-// using the dataset group. Use the DescribeDatasetGroup operation to get the
-// status.
+// The Status of the dataset group must be ACTIVE before you can use the dataset
+// group to create a predictor. Use the DescribeDatasetGroup operation to get
+// the status.
 //
 //    // Example sending a request using UpdateDatasetGroupRequest.
 //    req := client.UpdateDatasetGroupRequest(params)

@@ -14,7 +14,7 @@ import (
 type CreateDirectoryInput struct {
 	_ struct{} `type:"structure"`
 
-	// A textual description for the directory.
+	// A description for the directory.
 	Description *string `type:"string"`
 
 	// The fully qualified name for the directory, such as corp.example.com.
@@ -26,10 +26,13 @@ type CreateDirectoryInput struct {
 	// creates a directory administrator account with the user name Administrator
 	// and this password.
 	//
+	// If you need to change the password for the administrator account, you can
+	// use the ResetUserPassword API call.
+	//
 	// Password is a required field
 	Password *string `type:"string" required:"true" sensitive:"true"`
 
-	// The short name of the directory, such as CORP.
+	// The NetBIOS name of the directory, such as CORP.
 	ShortName *string `type:"string"`
 
 	// The size of the directory.
@@ -101,7 +104,9 @@ const opCreateDirectory = "CreateDirectory"
 // CreateDirectoryRequest returns a request value for making API operation for
 // AWS Directory Service.
 //
-// Creates a Simple AD directory.
+// Creates a Simple AD directory. For more information, see Simple Active Directory
+// (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html)
+// in the AWS Directory Service Admin Guide.
 //
 // Before you call CreateDirectory, ensure that all of the required permissions
 // have been explicitly granted through a policy. For details about what permissions

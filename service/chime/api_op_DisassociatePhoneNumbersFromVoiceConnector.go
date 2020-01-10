@@ -102,7 +102,7 @@ const opDisassociatePhoneNumbersFromVoiceConnector = "DisassociatePhoneNumbersFr
 // DisassociatePhoneNumbersFromVoiceConnectorRequest returns a request value for making API operation for
 // Amazon Chime.
 //
-// Disassociates the specified phone number from the specified Amazon Chime
+// Disassociates the specified phone numbers from the specified Amazon Chime
 // Voice Connector.
 //
 //    // Example sending a request using DisassociatePhoneNumbersFromVoiceConnectorRequest.

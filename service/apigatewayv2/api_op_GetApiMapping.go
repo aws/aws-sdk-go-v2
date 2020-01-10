@@ -71,7 +71,7 @@ type GetApiMappingOutput struct {
 	// The identifier.
 	ApiMappingId *string `locationName:"apiMappingId" type:"string"`
 
-	// After evaulating a selection expression, the result is compared against one
+	// After evaluating a selection expression, the result is compared against one
 	// or more selection keys to find a matching key. See Selection Expressions
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
 	// for a list of expressions and each expression's associated selection key
@@ -121,7 +121,7 @@ const opGetApiMapping = "GetApiMapping"
 // GetApiMappingRequest returns a request value for making API operation for
 // AmazonApiGatewayV2.
 //
-// The API mapping.
+// Gets an API mapping.
 //
 //    // Example sending a request using GetApiMappingRequest.
 //    req := client.GetApiMappingRequest(params)

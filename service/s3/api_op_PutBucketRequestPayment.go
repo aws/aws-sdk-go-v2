@@ -14,9 +14,13 @@ import (
 type PutBucketRequestPaymentInput struct {
 	_ struct{} `type:"structure" payload:"RequestPaymentConfiguration"`
 
+	// The bucket name.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
+	// Container for Payer.
+	//
 	// RequestPaymentConfiguration is a required field
 	RequestPaymentConfiguration *RequestPaymentConfiguration `locationName:"RequestPaymentConfiguration" type:"structure" required:"true" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 }
@@ -96,8 +100,14 @@ const opPutBucketRequestPayment = "PutBucketRequestPayment"
 // Sets the request payment configuration for a bucket. By default, the bucket
 // owner pays for downloads from the bucket. This configuration parameter enables
 // the bucket owner (only) to specify that the person requesting the download
-// will be charged for the download. Documentation on requester pays buckets
-// can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html
+// will be charged for the download. For more information, see Requester Pays
+// Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html).
+//
+// The following operations are related to PutBucketRequestPayment:
+//
+//    * CreateBucket
+//
+//    * GetBucketRequestPayment
 //
 //    // Example sending a request using PutBucketRequestPaymentRequest.
 //    req := client.PutBucketRequestPaymentRequest(params)

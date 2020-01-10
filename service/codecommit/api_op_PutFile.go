@@ -13,14 +13,13 @@ type PutFileInput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the branch where you want to add or update the file. If this
-	// is an empty repository, this branch will be created.
+	// is an empty repository, this branch is created.
 	//
 	// BranchName is a required field
 	BranchName *string `locationName:"branchName" min:"1" type:"string" required:"true"`
 
-	// A message about why this file was added or updated. While optional, adding
-	// a message is strongly encouraged in order to provide a more useful commit
-	// history for your repository.
+	// A message about why this file was added or updated. Although it is optional,
+	// a message makes the commit history for your repository more useful.
 	CommitMessage *string `locationName:"commitMessage" type:"string"`
 
 	// An email address for the person adding or updating the file.
@@ -34,29 +33,28 @@ type PutFileInput struct {
 	FileContent []byte `locationName:"fileContent" type:"blob" required:"true"`
 
 	// The file mode permissions of the blob. Valid file mode permissions are listed
-	// below.
+	// here.
 	FileMode FileModeTypeEnum `locationName:"fileMode" type:"string" enum:"true"`
 
 	// The name of the file you want to add or update, including the relative path
 	// to the file in the repository.
 	//
-	// If the path does not currently exist in the repository, the path will be
-	// created as part of adding the file.
+	// If the path does not currently exist in the repository, the path is created
+	// as part of adding the file.
 	//
 	// FilePath is a required field
 	FilePath *string `locationName:"filePath" type:"string" required:"true"`
 
-	// The name of the person adding or updating the file. While optional, adding
-	// a name is strongly encouraged in order to provide a more useful commit history
-	// for your repository.
+	// The name of the person adding or updating the file. Although it is optional,
+	// a name makes the commit history for your repository more useful.
 	Name *string `locationName:"name" type:"string"`
 
 	// The full commit ID of the head commit in the branch where you want to add
 	// or update the file. If this is an empty repository, no commit ID is required.
 	// If this is not an empty repository, a commit ID is required.
 	//
-	// The commit ID must match the ID of the head commit at the time of the operation,
-	// or an error will occur, and the file will not be added or updated.
+	// The commit ID must match the ID of the head commit at the time of the operation.
+	// Otherwise, an error occurs, and the file is not added or updated.
 	ParentCommitId *string `locationName:"parentCommitId" type:"string"`
 
 	// The name of the repository where you want to add or update the file.
@@ -110,7 +108,7 @@ type PutFileOutput struct {
 	// BlobId is a required field
 	BlobId *string `locationName:"blobId" type:"string" required:"true"`
 
-	// The full SHA of the commit that contains this file change.
+	// The full SHA ID of the commit that contains this file change.
 	//
 	// CommitId is a required field
 	CommitId *string `locationName:"commitId" type:"string" required:"true"`

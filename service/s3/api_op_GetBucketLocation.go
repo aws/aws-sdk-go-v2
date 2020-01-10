@@ -13,6 +13,8 @@ import (
 type GetBucketLocationInput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the bucket for which to get the location.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -58,6 +60,8 @@ func (s GetBucketLocationInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetBucketLocationOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies the Region where the bucket resides. For a list of all the Amazon
+	// S3 supported location constraints by Region, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region).
 	LocationConstraint BucketLocationConstraint `type:"string" enum:"true"`
 }
 
@@ -82,7 +86,17 @@ const opGetBucketLocation = "GetBucketLocation"
 // GetBucketLocationRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns the region the bucket resides in.
+// Returns the Region the bucket resides in. You set the bucket's Region using
+// the LocationConstraint request parameter in a CreateBucket request. For more
+// information, see CreateBucket.
+//
+// To use this implementation of the operation, you must be the bucket owner.
+//
+// The following operations are related to GetBucketLocation:
+//
+//    * GetObject
+//
+//    * CreateBucket
 //
 //    // Example sending a request using GetBucketLocationRequest.
 //    req := client.GetBucketLocationRequest(params)

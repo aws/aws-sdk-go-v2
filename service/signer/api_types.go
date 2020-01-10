@@ -38,17 +38,17 @@ func (s Destination) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The encryption algorithm options that are available to an AWS Signer job.
+// The encryption algorithm options that are available to a code signing job.
 type EncryptionAlgorithmOptions struct {
 	_ struct{} `type:"structure"`
 
-	// The set of accepted encryption algorithms that are allowed in an AWS Signer
+	// The set of accepted encryption algorithms that are allowed in a code signing
 	// job.
 	//
 	// AllowedValues is a required field
 	AllowedValues []EncryptionAlgorithm `locationName:"allowedValues" type:"list" required:"true"`
 
-	// The default encryption algorithm that is used by an AWS Signer job.
+	// The default encryption algorithm that is used by a code signing job.
 	//
 	// DefaultValue is a required field
 	DefaultValue EncryptionAlgorithm `locationName:"defaultValue" type:"string" required:"true" enum:"true"`
@@ -82,16 +82,16 @@ func (s EncryptionAlgorithmOptions) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// The hash algorithms that are available to an AWS Signer job.
+// The hash algorithms that are available to a code signing job.
 type HashAlgorithmOptions struct {
 	_ struct{} `type:"structure"`
 
-	// The set of accepted hash algorithms allowed in an AWS Signer job.
+	// The set of accepted hash algorithms allowed in a code signing job.
 	//
 	// AllowedValues is a required field
 	AllowedValues []HashAlgorithm `locationName:"allowedValues" type:"list" required:"true"`
 
-	// The default hash algorithm that is used in an AWS Signer job.
+	// The default hash algorithm that is used in a code signing job.
 	//
 	// DefaultValue is a required field
 	DefaultValue HashAlgorithm `locationName:"defaultValue" type:"string" required:"true" enum:"true"`
@@ -125,7 +125,8 @@ func (s HashAlgorithmOptions) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The name and prefix of the S3 bucket where AWS Signer saves your signed objects.
+// The name and prefix of the S3 bucket where code signing saves your signed
+// objects.
 type S3Destination struct {
 	_ struct{} `type:"structure"`
 
@@ -159,7 +160,7 @@ func (s S3Destination) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The S3 bucket name and key where AWS Signer saved your signed code image.
+// The S3 bucket name and key where code signing saved your signed code image.
 type S3SignedObject struct {
 	_ struct{} `type:"structure"`
 
@@ -287,16 +288,16 @@ func (s SignedObject) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The configuration of an AWS Signer operation.
+// The configuration of a code signing operation.
 type SigningConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The encryption algorithm options that are available for an AWS Signer job.
+	// The encryption algorithm options that are available for a code signing job.
 	//
 	// EncryptionAlgorithmOptions is a required field
 	EncryptionAlgorithmOptions *EncryptionAlgorithmOptions `locationName:"encryptionAlgorithmOptions" type:"structure" required:"true"`
 
-	// The hash algorithm options that are available for an AWS Signer job.
+	// The hash algorithm options that are available for a a code signing job.
 	//
 	// HashAlgorithmOptions is a required field
 	HashAlgorithmOptions *HashAlgorithmOptions `locationName:"hashAlgorithmOptions" type:"structure" required:"true"`
@@ -330,11 +331,11 @@ type SigningConfigurationOverrides struct {
 	_ struct{} `type:"structure"`
 
 	// A specified override of the default encryption algorithm that is used in
-	// an AWS Signer job.
+	// a code signing job.
 	EncryptionAlgorithm EncryptionAlgorithm `locationName:"encryptionAlgorithm" type:"string" enum:"true"`
 
-	// A specified override of the default hash algorithm that is used in an AWS
-	// Signer job.
+	// A specified override of the default hash algorithm that is used in a code
+	// signing job.
 	HashAlgorithm HashAlgorithm `locationName:"hashAlgorithm" type:"string" enum:"true"`
 }
 
@@ -360,16 +361,16 @@ func (s SigningConfigurationOverrides) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// The image format of an AWS Signer platform or profile.
+// The image format of a code signing platform or profile.
 type SigningImageFormat struct {
 	_ struct{} `type:"structure"`
 
-	// The default format of an AWS Signer signing image.
+	// The default format of a code signing signing image.
 	//
 	// DefaultFormat is a required field
 	DefaultFormat ImageFormat `locationName:"defaultFormat" type:"string" required:"true" enum:"true"`
 
-	// The supported formats of an AWS Signer signing image.
+	// The supported formats of a code signing signing image.
 	//
 	// SupportedFormats is a required field
 	SupportedFormats []ImageFormat `locationName:"supportedFormats" type:"list" required:"true"`
@@ -517,33 +518,33 @@ func (s SigningMaterial) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains information about the signing configurations and parameters that
-// is used to perform an AWS Signer job.
+// is used to perform a code signing job.
 type SigningPlatform struct {
 	_ struct{} `type:"structure"`
 
-	// The category of an AWS Signer platform.
+	// The category of a code signing platform.
 	Category Category `locationName:"category" type:"string" enum:"true"`
 
-	// The display name of an AWS Signer platform.
+	// The display name of a code signing platform.
 	DisplayName *string `locationName:"displayName" type:"string"`
 
-	// The maximum size (in MB) of code that can be signed by a AWS Signer platform.
+	// The maximum size (in MB) of code that can be signed by a code signing platform.
 	MaxSizeInMB *int64 `locationName:"maxSizeInMB" type:"integer"`
 
-	// Any partner entities linked to an AWS Signer platform.
+	// Any partner entities linked to a code signing platform.
 	Partner *string `locationName:"partner" type:"string"`
 
-	// The ID of an AWS Signer platform.
+	// The ID of a code signing; platform.
 	PlatformId *string `locationName:"platformId" type:"string"`
 
-	// The configuration of an AWS Signer platform. This includes the designated
+	// The configuration of a code signing platform. This includes the designated
 	// hash algorithm and encryption algorithm of a signing platform.
 	SigningConfiguration *SigningConfiguration `locationName:"signingConfiguration" type:"structure"`
 
-	// The signing image format that is used by an AWS Signer platform.
+	// The image format of a code signing platform or profile.
 	SigningImageFormat *SigningImageFormat `locationName:"signingImageFormat" type:"structure"`
 
-	// The types of targets that can be signed by an AWS Signer platform.
+	// The types of targets that can be signed by a code signing platform.
 	Target *string `locationName:"target" type:"string"`
 }
 
@@ -605,7 +606,7 @@ func (s SigningPlatform) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Any overrides that are applied to the signing configuration of an AWS Signer
+// Any overrides that are applied to the signing configuration of a code signing
 // platform.
 type SigningPlatformOverrides struct {
 	_ struct{} `type:"structure"`
@@ -631,25 +632,31 @@ func (s SigningPlatformOverrides) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the ACM certificates and AWS Signer configuration
-// parameters that can be used by a given AWS Signer user.
+// Contains information about the ACM certificates and code signing configuration
+// parameters that can be used by a given code signing user.
 type SigningProfile struct {
 	_ struct{} `type:"structure"`
+
+	// Amazon Resource Name (ARN) for the signing profile.
+	Arn *string `locationName:"arn" type:"string"`
 
 	// The ID of a platform that is available for use by a signing profile.
 	PlatformId *string `locationName:"platformId" type:"string"`
 
-	// The name of the AWS Signer profile.
+	// The name of the signing profile.
 	ProfileName *string `locationName:"profileName" min:"2" type:"string"`
 
 	// The ACM certificate that is available for use by a signing profile.
 	SigningMaterial *SigningMaterial `locationName:"signingMaterial" type:"structure"`
 
-	// The parameters that are available for use by an AWS Signer user.
+	// The parameters that are available for use by a code signing user.
 	SigningParameters map[string]string `locationName:"signingParameters" type:"map"`
 
-	// The status of an AWS Signer profile.
+	// The status of a code signing profile.
 	Status SigningProfileStatus `locationName:"status" type:"string" enum:"true"`
+
+	// A list of tags associated with the signing profile.
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -659,6 +666,12 @@ func (s SigningProfile) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SigningProfile) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.PlatformId != nil {
 		v := *s.PlatformId
 
@@ -694,6 +707,18 @@ func (s SigningProfile) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }

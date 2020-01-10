@@ -381,6 +381,192 @@ func (s *Content) Validate() error {
 	return nil
 }
 
+// Creates settings for the end of meeting reminder feature that are applied
+// to a room profile. The end of meeting reminder enables Alexa to remind users
+// when a meeting is ending.
+type CreateEndOfMeetingReminder struct {
+	_ struct{} `type:"structure"`
+
+	// Whether an end of meeting reminder is enabled or not.
+	//
+	// Enabled is a required field
+	Enabled *bool `type:"boolean" required:"true"`
+
+	// A range of 3 to 15 minutes that determines when the reminder begins.
+	//
+	// ReminderAtMinutes is a required field
+	ReminderAtMinutes []int64 `min:"1" type:"list" required:"true"`
+
+	// The type of sound that users hear during the end of meeting reminder.
+	//
+	// ReminderType is a required field
+	ReminderType EndOfMeetingReminderType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s CreateEndOfMeetingReminder) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateEndOfMeetingReminder) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateEndOfMeetingReminder"}
+
+	if s.Enabled == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
+	}
+
+	if s.ReminderAtMinutes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ReminderAtMinutes"))
+	}
+	if s.ReminderAtMinutes != nil && len(s.ReminderAtMinutes) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ReminderAtMinutes", 1))
+	}
+	if len(s.ReminderType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("ReminderType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Creates settings for the instant booking feature that are applied to a room
+// profile. When users start their meeting with Alexa, Alexa automatically books
+// the room for the configured duration if the room is available.
+type CreateInstantBooking struct {
+	_ struct{} `type:"structure"`
+
+	// Duration between 15 and 240 minutes at increments of 15 that determines how
+	// long to book an available room when a meeting is started with Alexa.
+	//
+	// DurationInMinutes is a required field
+	DurationInMinutes *int64 `type:"integer" required:"true"`
+
+	// Whether instant booking is enabled or not.
+	//
+	// Enabled is a required field
+	Enabled *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateInstantBooking) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateInstantBooking) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateInstantBooking"}
+
+	if s.DurationInMinutes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DurationInMinutes"))
+	}
+
+	if s.Enabled == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Creates meeting room settings of a room profile.
+type CreateMeetingRoomConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Creates settings for the end of meeting reminder feature that are applied
+	// to a room profile. The end of meeting reminder enables Alexa to remind users
+	// when a meeting is ending.
+	EndOfMeetingReminder *CreateEndOfMeetingReminder `type:"structure"`
+
+	// Settings to automatically book a room for a configured duration if it's free
+	// when joining a meeting with Alexa.
+	InstantBooking *CreateInstantBooking `type:"structure"`
+
+	// Settings for requiring a check in when a room is reserved. Alexa can cancel
+	// a room reservation if it's not checked into to make the room available for
+	// others. Users can check in by joining the meeting with Alexa or an AVS device,
+	// or by saying “Alexa, check in.”
+	RequireCheckIn *CreateRequireCheckIn `type:"structure"`
+
+	// Whether room utilization metrics are enabled or not.
+	RoomUtilizationMetricsEnabled *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s CreateMeetingRoomConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateMeetingRoomConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateMeetingRoomConfiguration"}
+	if s.EndOfMeetingReminder != nil {
+		if err := s.EndOfMeetingReminder.Validate(); err != nil {
+			invalidParams.AddNested("EndOfMeetingReminder", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.InstantBooking != nil {
+		if err := s.InstantBooking.Validate(); err != nil {
+			invalidParams.AddNested("InstantBooking", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.RequireCheckIn != nil {
+		if err := s.RequireCheckIn.Validate(); err != nil {
+			invalidParams.AddNested("RequireCheckIn", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Creates settings for the require check in feature that are applied to a room
+// profile. Require check in allows a meeting room’s Alexa or AVS device to
+// prompt the user to check in; otherwise, the room will be released.
+type CreateRequireCheckIn struct {
+	_ struct{} `type:"structure"`
+
+	// Whether require check in is enabled or not.
+	//
+	// Enabled is a required field
+	Enabled *bool `type:"boolean" required:"true"`
+
+	// Duration between 5 and 20 minutes to determine when to release the room if
+	// it's not checked into.
+	//
+	// ReleaseAfterMinutes is a required field
+	ReleaseAfterMinutes *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateRequireCheckIn) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateRequireCheckIn) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRequireCheckIn"}
+
+	if s.Enabled == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
+	}
+
+	if s.ReleaseAfterMinutes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ReleaseAfterMinutes"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // The details about the developer that published the skill.
 type DeveloperInfo struct {
 	_ struct{} `type:"structure"`
@@ -560,6 +746,27 @@ func (s DeviceStatusInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Settings for the end of meeting reminder feature that are applied to a room
+// profile. The end of meeting reminder enables Alexa to remind users when a
+// meeting is ending.
+type EndOfMeetingReminder struct {
+	_ struct{} `type:"structure"`
+
+	// Whether an end of meeting reminder is enabled or not.
+	Enabled *bool `type:"boolean"`
+
+	// A range of 3 to 15 minutes that determines when the reminder begins.
+	ReminderAtMinutes []int64 `min:"1" type:"list"`
+
+	// The type of sound that users hear during the end of meeting reminder.
+	ReminderType EndOfMeetingReminderType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s EndOfMeetingReminder) String() string {
+	return awsutil.Prettify(s)
+}
+
 // A filter name and value pair that is used to return a more specific list
 // of results. Filters can be used to match a set of resources by various criteria.
 type Filter struct {
@@ -730,6 +937,53 @@ func (s *IPDialIn) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Settings for the instant booking feature that are applied to a room profile.
+// When users start their meeting with Alexa, Alexa automatically books the
+// room for the configured duration if the room is available.
+type InstantBooking struct {
+	_ struct{} `type:"structure"`
+
+	// Duration between 15 and 240 minutes at increments of 15 that determines how
+	// long to book an available room when a meeting is started with Alexa.
+	DurationInMinutes *int64 `type:"integer"`
+
+	// Whether instant booking is enabled or not.
+	Enabled *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s InstantBooking) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Meeting room settings of a room profile.
+type MeetingRoomConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Settings for the end of meeting reminder feature that are applied to a room
+	// profile. The end of meeting reminder enables Alexa to remind users when a
+	// meeting is ending.
+	EndOfMeetingReminder *EndOfMeetingReminder `type:"structure"`
+
+	// Settings to automatically book the room if available for a configured duration
+	// when joining a meeting with Alexa.
+	InstantBooking *InstantBooking `type:"structure"`
+
+	// Settings for requiring a check in when a room is reserved. Alexa can cancel
+	// a room reservation if it's not checked into. This makes the room available
+	// for others. Users can check in by joining the meeting with Alexa or an AVS
+	// device, or by saying “Alexa, check in.”
+	RequireCheckIn *RequireCheckIn `type:"structure"`
+
+	// Whether room utilization metrics are enabled or not.
+	RoomUtilizationMetricsEnabled *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s MeetingRoomConfiguration) String() string {
+	return awsutil.Prettify(s)
 }
 
 // The values that indicate whether a pin is always required (YES), never required
@@ -968,11 +1222,15 @@ type Profile struct {
 	// Retrieves if the profile is default or not.
 	IsDefault *bool `type:"boolean"`
 
-	// The locale of a room profile.
+	// The locale of a room profile. (This is currently available only to a limited
+	// preview audience.)
 	Locale *string `min:"1" type:"string"`
 
 	// The max volume limit of a room profile.
 	MaxVolumeLimit *int64 `type:"integer"`
+
+	// Meeting room settings of a room profile.
+	MeetingRoomConfiguration *MeetingRoomConfiguration `type:"structure"`
 
 	// The PSTN setting of a room profile.
 	PSTNEnabled *bool `type:"boolean"`
@@ -1014,7 +1272,8 @@ type ProfileData struct {
 	// Retrieves if the profile data is default or not.
 	IsDefault *bool `type:"boolean"`
 
-	// The locale of a room profile.
+	// The locale of a room profile. (This is currently available only to a limited
+	// preview audience.)
 	Locale *string `min:"1" type:"string"`
 
 	// The ARN of a room profile.
@@ -1026,7 +1285,7 @@ type ProfileData struct {
 	// The temperature unit of a room profile.
 	TemperatureUnit TemperatureUnit `type:"string" enum:"true"`
 
-	// The timezone of a room profile.
+	// The time zone of a room profile.
 	Timezone *string `min:"1" type:"string"`
 
 	// The wake word of a room profile.
@@ -1035,6 +1294,25 @@ type ProfileData struct {
 
 // String returns the string representation
 func (s ProfileData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Settings for the require check in feature that are applied to a room profile.
+// Require check in allows a meeting room’s Alexa or AVS device to prompt
+// the user to check in; otherwise, the room will be released.
+type RequireCheckIn struct {
+	_ struct{} `type:"structure"`
+
+	// Whether require check in is enabled or not.
+	Enabled *bool `type:"boolean"`
+
+	// Duration between 5 and 20 minutes to determine when to release the room if
+	// it's not checked into.
+	ReleaseAfterMinutes *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s RequireCheckIn) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -1419,7 +1697,7 @@ type Tag struct {
 	// Key is a required field
 	Key *string `min:"1" type:"string" required:"true"`
 
-	// The value of a tag. Tag values are case-sensitive and can be null.
+	// The value of a tag. Tag values are case sensitive and can be null.
 	//
 	// Value is a required field
 	Value *string `type:"string" required:"true"`
@@ -1486,6 +1764,123 @@ func (s *Text) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Settings for the end of meeting reminder feature that are applied to a room
+// profile. The end of meeting reminder enables Alexa to remind users when a
+// meeting is ending.
+type UpdateEndOfMeetingReminder struct {
+	_ struct{} `type:"structure"`
+
+	// Whether an end of meeting reminder is enabled or not.
+	Enabled *bool `type:"boolean"`
+
+	// Updates settings for the end of meeting reminder feature that are applied
+	// to a room profile. The end of meeting reminder enables Alexa to remind users
+	// when a meeting is ending.
+	ReminderAtMinutes []int64 `min:"1" type:"list"`
+
+	// The type of sound that users hear during the end of meeting reminder.
+	ReminderType EndOfMeetingReminderType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s UpdateEndOfMeetingReminder) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateEndOfMeetingReminder) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateEndOfMeetingReminder"}
+	if s.ReminderAtMinutes != nil && len(s.ReminderAtMinutes) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ReminderAtMinutes", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Updates settings for the instant booking feature that are applied to a room
+// profile. If instant booking is enabled, Alexa automatically reserves a room
+// if it is free when a user joins a meeting with Alexa.
+type UpdateInstantBooking struct {
+	_ struct{} `type:"structure"`
+
+	// Duration between 15 and 240 minutes at increments of 15 that determines how
+	// long to book an available room when a meeting is started with Alexa.
+	DurationInMinutes *int64 `type:"integer"`
+
+	// Whether instant booking is enabled or not.
+	Enabled *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s UpdateInstantBooking) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Updates meeting room settings of a room profile.
+type UpdateMeetingRoomConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Settings for the end of meeting reminder feature that are applied to a room
+	// profile. The end of meeting reminder enables Alexa to remind users when a
+	// meeting is ending.
+	EndOfMeetingReminder *UpdateEndOfMeetingReminder `type:"structure"`
+
+	// Settings to automatically book an available room available for a configured
+	// duration when joining a meeting with Alexa.
+	InstantBooking *UpdateInstantBooking `type:"structure"`
+
+	// Settings for requiring a check in when a room is reserved. Alexa can cancel
+	// a room reservation if it's not checked into to make the room available for
+	// others. Users can check in by joining the meeting with Alexa or an AVS device,
+	// or by saying “Alexa, check in.”
+	RequireCheckIn *UpdateRequireCheckIn `type:"structure"`
+
+	// Whether room utilization metrics are enabled or not.
+	RoomUtilizationMetricsEnabled *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s UpdateMeetingRoomConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateMeetingRoomConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateMeetingRoomConfiguration"}
+	if s.EndOfMeetingReminder != nil {
+		if err := s.EndOfMeetingReminder.Validate(); err != nil {
+			invalidParams.AddNested("EndOfMeetingReminder", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Updates settings for the require check in feature that are applied to a room
+// profile. Require check in allows a meeting room’s Alexa or AVS device to
+// prompt the user to check in; otherwise, the room will be released.
+type UpdateRequireCheckIn struct {
+	_ struct{} `type:"structure"`
+
+	// Whether require check in is enabled or not.
+	Enabled *bool `type:"boolean"`
+
+	// Duration between 5 and 20 minutes to determine when to release the room if
+	// it's not checked into.
+	ReleaseAfterMinutes *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s UpdateRequireCheckIn) String() string {
+	return awsutil.Prettify(s)
 }
 
 // Information related to a user.

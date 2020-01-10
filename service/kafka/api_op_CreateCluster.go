@@ -27,8 +27,7 @@ type CreateClusterInput struct {
 	// ClusterName is a required field
 	ClusterName *string `locationName:"clusterName" min:"1" type:"string" required:"true"`
 
-	// Represents the configuration that you want MSK to use for the brokers in
-	// a cluster.
+	// Represents the configuration that you want MSK to use for the cluster.
 	ConfigurationInfo *ConfigurationInfo `locationName:"configurationInfo" type:"structure"`
 
 	// Includes all encryption-related information.
@@ -47,6 +46,9 @@ type CreateClusterInput struct {
 	//
 	// NumberOfBrokerNodes is a required field
 	NumberOfBrokerNodes *int64 `locationName:"numberOfBrokerNodes" min:"1" type:"integer" required:"true"`
+
+	// The settings for open monitoring.
+	OpenMonitoring *OpenMonitoringInfo `locationName:"openMonitoring" type:"structure"`
 
 	// Create tags when creating the cluster.
 	Tags map[string]string `locationName:"tags" type:"map"`
@@ -98,6 +100,11 @@ func (s *CreateClusterInput) Validate() error {
 	if s.EncryptionInfo != nil {
 		if err := s.EncryptionInfo.Validate(); err != nil {
 			invalidParams.AddNested("EncryptionInfo", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.OpenMonitoring != nil {
+		if err := s.OpenMonitoring.Validate(); err != nil {
+			invalidParams.AddNested("OpenMonitoring", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -158,6 +165,12 @@ func (s CreateClusterInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "numberOfBrokerNodes", protocol.Int64Value(v), metadata)
+	}
+	if s.OpenMonitoring != nil {
+		v := s.OpenMonitoring
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "openMonitoring", v, metadata)
 	}
 	if s.Tags != nil {
 		v := s.Tags

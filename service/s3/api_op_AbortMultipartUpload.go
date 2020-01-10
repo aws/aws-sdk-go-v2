@@ -13,7 +13,14 @@ import (
 type AbortMultipartUploadInput struct {
 	_ struct{} `type:"structure"`
 
-	// Name of the bucket to which the multipart upload was initiated.
+	// The bucket name to which the upload was taking place.
+	//
+	// When using this API with an access point, you must direct requests to the
+	// access point hostname. The access point hostname takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com.
+	// When using this operation using an access point through the AWS SDKs, you
+	// provide the access point ARN in place of the bucket name. For more information
+	// about access point ARNs, see Using Access Points (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html)
+	// in the Amazon Simple Storage Service Developer Guide.
 	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
@@ -25,8 +32,9 @@ type AbortMultipartUploadInput struct {
 
 	// Confirms that the requester knows that she or he will be charged for the
 	// request. Bucket owners need not specify this parameter in their requests.
-	// Documentation on downloading objects from requester pays buckets can be found
-	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+	// For information about downloading objects from Requester Pays buckets, see
+	// Downloading Objects in Requestor Pays Buckets (https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
+	// in the Amazon S3 Developer Guide.
 	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"true"`
 
 	// Upload ID that identifies the multipart upload.
@@ -131,11 +139,31 @@ const opAbortMultipartUpload = "AbortMultipartUpload"
 // AbortMultipartUploadRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Aborts a multipart upload.
+// This operation aborts a multipart upload. After a multipart upload is aborted,
+// no additional parts can be uploaded using that upload ID. The storage consumed
+// by any previously uploaded parts will be freed. However, if any part uploads
+// are currently in progress, those part uploads might or might not succeed.
+// As a result, it might be necessary to abort a given multipart upload multiple
+// times in order to completely free all storage consumed by all parts.
 //
 // To verify that all parts have been removed, so you don't get charged for
-// the part storage, you should call the List Parts operation and ensure the
-// parts list is empty.
+// the part storage, you should call the ListParts operation and ensure that
+// the parts list is empty.
+//
+// For information about permissions required to use the multipart upload API,
+// see Multipart Upload API and Permissions (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html).
+//
+// The following operations are related to AbortMultipartUpload:
+//
+//    * CreateMultipartUpload
+//
+//    * UploadPart
+//
+//    * CompleteMultipartUpload
+//
+//    * ListParts
+//
+//    * ListMultipartUploads
 //
 //    // Example sending a request using AbortMultipartUploadRequest.
 //    req := client.AbortMultipartUploadRequest(params)

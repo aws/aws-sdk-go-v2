@@ -24,10 +24,10 @@ type PostCommentForPullRequestInput struct {
 	// BeforeCommitId is a required field
 	BeforeCommitId *string `locationName:"beforeCommitId" type:"string" required:"true"`
 
-	// A unique, client-generated idempotency token that when provided in a request,
+	// A unique, client-generated idempotency token that, when provided in a request,
 	// ensures the request cannot be repeated with a changed parameter. If a request
 	// is received with the same parameters and a token is included, the request
-	// will return information about the initial request that used that token.
+	// returns information about the initial request that used that token.
 	ClientRequestToken *string `locationName:"clientRequestToken" type:"string" idempotencyToken:"true"`
 
 	// The content of your comment on the change.
@@ -36,8 +36,8 @@ type PostCommentForPullRequestInput struct {
 	Content *string `locationName:"content" type:"string" required:"true"`
 
 	// The location of the change where you want to post your comment. If no location
-	// is provided, the comment will be posted as a general comment on the pull
-	// request difference between the before commit ID and the after commit ID.
+	// is provided, the comment is posted as a general comment on the pull request
+	// difference between the before commit ID and the after commit ID.
 	Location *Location `locationName:"location" type:"structure"`
 
 	// The system-generated ID of the pull request. To get this ID, use ListPullRequests.
@@ -92,14 +92,14 @@ func (s *PostCommentForPullRequestInput) Validate() error {
 type PostCommentForPullRequestOutput struct {
 	_ struct{} `type:"structure"`
 
-	// In the directionality of the pull request, the blob ID of the 'after' blob.
+	// In the directionality of the pull request, the blob ID of the after blob.
 	AfterBlobId *string `locationName:"afterBlobId" type:"string"`
 
 	// The full commit ID of the commit in the destination branch where the pull
-	// request will be merged.
+	// request is merged.
 	AfterCommitId *string `locationName:"afterCommitId" type:"string"`
 
-	// In the directionality of the pull request, the blob ID of the 'before' blob.
+	// In the directionality of the pull request, the blob ID of the before blob.
 	BeforeBlobId *string `locationName:"beforeBlobId" type:"string"`
 
 	// The full commit ID of the commit in the source branch used to create the

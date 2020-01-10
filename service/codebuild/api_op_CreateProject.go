@@ -82,7 +82,7 @@ type CreateProjectInput struct {
 	// A version of the build input to be built for this project. If not specified,
 	// the latest version is used. If specified, it must be one of:
 	//
-	//    * For AWS CodeCommit: the commit ID to use.
+	//    * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
 	//
 	//    * For GitHub: the commit ID, pull request ID, branch name, or tag name
 	//    that corresponds to the version of the source code you want to build.

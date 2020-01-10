@@ -262,6 +262,14 @@ func (s GenericAttachment) MarshalFields(e protocol.FieldEncoder) error {
 type IntentSummary struct {
 	_ struct{} `type:"structure"`
 
+	// A user-defined label that identifies a particular intent. You can use this
+	// label to return to a previous intent.
+	//
+	// Use the checkpointLabelFilter parameter of the GetSessionRequest operation
+	// to filter the intents returned by the operation to those with only the specified
+	// label.
+	CheckpointLabel *string `locationName:"checkpointLabel" min:"1" type:"string"`
+
 	// The status of the intent after the user responds to the confirmation prompt.
 	// If the user confirms the intent, Amazon Lex sets this field to Confirmed.
 	// If the user denies the intent, Amazon Lex sets this value to Denied. The
@@ -323,8 +331,30 @@ func (s IntentSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *IntentSummary) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "IntentSummary"}
+	if s.CheckpointLabel != nil && len(*s.CheckpointLabel) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CheckpointLabel", 1))
+	}
+	if len(s.DialogActionType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("DialogActionType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s IntentSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CheckpointLabel != nil {
+		v := *s.CheckpointLabel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "checkpointLabel", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.ConfirmationStatus) > 0 {
 		v := s.ConfirmationStatus
 
@@ -417,6 +447,43 @@ func (s ResponseCard) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The sentiment expressed in an utterance.
+//
+// When the bot is configured to send utterances to Amazon Comprehend for sentiment
+// analysis, this field structure contains the result of the analysis.
+type SentimentResponse struct {
+	_ struct{} `type:"structure"`
+
+	// The inferred sentiment that Amazon Comprehend has the highest confidence
+	// in.
+	SentimentLabel *string `locationName:"sentimentLabel" type:"string"`
+
+	// The likelihood that the sentiment was correctly inferred.
+	SentimentScore *string `locationName:"sentimentScore" type:"string"`
+}
+
+// String returns the string representation
+func (s SentimentResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SentimentResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SentimentLabel != nil {
+		v := *s.SentimentLabel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sentimentLabel", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SentimentScore != nil {
+		v := *s.SentimentScore
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sentimentScore", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

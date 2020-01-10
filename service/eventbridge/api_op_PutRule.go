@@ -26,6 +26,9 @@ type PutRuleInput struct {
 
 	// The name of the rule that you're creating or updating.
 	//
+	// A rule can't have the same name as another rule in the same Region or on
+	// the same event bus.
+	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 

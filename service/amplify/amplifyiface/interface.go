@@ -63,6 +63,8 @@ import (
 type ClientAPI interface {
 	CreateAppRequest(*amplify.CreateAppInput) amplify.CreateAppRequest
 
+	CreateBackendEnvironmentRequest(*amplify.CreateBackendEnvironmentInput) amplify.CreateBackendEnvironmentRequest
+
 	CreateBranchRequest(*amplify.CreateBranchInput) amplify.CreateBranchRequest
 
 	CreateDeploymentRequest(*amplify.CreateDeploymentInput) amplify.CreateDeploymentRequest
@@ -72,6 +74,8 @@ type ClientAPI interface {
 	CreateWebhookRequest(*amplify.CreateWebhookInput) amplify.CreateWebhookRequest
 
 	DeleteAppRequest(*amplify.DeleteAppInput) amplify.DeleteAppRequest
+
+	DeleteBackendEnvironmentRequest(*amplify.DeleteBackendEnvironmentInput) amplify.DeleteBackendEnvironmentRequest
 
 	DeleteBranchRequest(*amplify.DeleteBranchInput) amplify.DeleteBranchRequest
 
@@ -87,6 +91,8 @@ type ClientAPI interface {
 
 	GetArtifactUrlRequest(*amplify.GetArtifactUrlInput) amplify.GetArtifactUrlRequest
 
+	GetBackendEnvironmentRequest(*amplify.GetBackendEnvironmentInput) amplify.GetBackendEnvironmentRequest
+
 	GetBranchRequest(*amplify.GetBranchInput) amplify.GetBranchRequest
 
 	GetDomainAssociationRequest(*amplify.GetDomainAssociationInput) amplify.GetDomainAssociationRequest
@@ -98,6 +104,8 @@ type ClientAPI interface {
 	ListAppsRequest(*amplify.ListAppsInput) amplify.ListAppsRequest
 
 	ListArtifactsRequest(*amplify.ListArtifactsInput) amplify.ListArtifactsRequest
+
+	ListBackendEnvironmentsRequest(*amplify.ListBackendEnvironmentsInput) amplify.ListBackendEnvironmentsRequest
 
 	ListBranchesRequest(*amplify.ListBranchesInput) amplify.ListBranchesRequest
 

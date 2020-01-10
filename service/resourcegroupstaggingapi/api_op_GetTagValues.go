@@ -12,7 +12,7 @@ import (
 type GetTagValuesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The key for which you want to list all existing values in the specified region
+	// The key for which you want to list all existing values in the specified Region
 	// for the AWS account.
 	//
 	// Key is a required field
@@ -68,7 +68,7 @@ const opGetTagValues = "GetTagValues"
 // GetTagValuesRequest returns a request value for making API operation for
 // AWS Resource Groups Tagging API.
 //
-// Returns all tag values for the specified key in the specified region for
+// Returns all tag values for the specified key in the specified Region for
 // the AWS account.
 //
 //    // Example sending a request using GetTagValuesRequest.

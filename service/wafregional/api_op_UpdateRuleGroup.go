@@ -8,7 +8,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type UpdateRuleGroupInput struct {
@@ -35,7 +34,7 @@ type UpdateRuleGroupInput struct {
 	// update requests, ActivatedRule|Action is used instead of ActivatedRule|OverrideAction.
 	//
 	// Updates is a required field
-	Updates []waf.RuleGroupUpdate `min:"1" type:"list" required:"true"`
+	Updates []RuleGroupUpdate `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation

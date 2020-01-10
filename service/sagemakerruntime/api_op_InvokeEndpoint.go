@@ -20,7 +20,7 @@ type InvokeEndpointInput struct {
 	// Amazon SageMaker passes all of the data in the body to the model.
 	//
 	// For information about the format of the request body, see Common Data Formats—Inference
-	// (http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html).
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html).
 	//
 	// Body is a required field
 	Body []byte `type:"blob" required:"true" sensitive:"true"`
@@ -28,14 +28,27 @@ type InvokeEndpointInput struct {
 	// The MIME type of the input data in the request body.
 	ContentType *string `location:"header" locationName:"Content-Type" type:"string"`
 
+	// Provides additional information about a request for an inference submitted
+	// to a model hosted at an Amazon SageMaker endpoint. The information is an
+	// opaque value that is forwarded verbatim. You could use this value, for example,
+	// to provide an ID that you can use to track a request or to provide other
+	// metadata that a service endpoint was programmed to process. The value must
+	// consist of no more than 1024 visible US-ASCII characters as specified in
+	// Section 3.3.6. Field Value Components (https://tools.ietf.org/html/rfc7230#section-3.2.6)
+	// of the Hypertext Transfer Protocol (HTTP/1.1). This feature is currently
+	// supported in the AWS SDKs but not in the Amazon SageMaker Python SDK.
 	CustomAttributes *string `location:"header" locationName:"X-Amzn-SageMaker-Custom-Attributes" type:"string" sensitive:"true"`
 
 	// The name of the endpoint that you specified when you created the endpoint
-	// using the CreateEndpoint (http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html)
+	// using the CreateEndpoint (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html)
 	// API.
 	//
 	// EndpointName is a required field
 	EndpointName *string `location:"uri" locationName:"EndpointName" type:"string" required:"true"`
+
+	// Specifies the model to be requested for an inference when invoking a multi-model
+	// endpoint.
+	TargetModel *string `location:"header" locationName:"X-Amzn-SageMaker-Target-Model" min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -53,6 +66,9 @@ func (s *InvokeEndpointInput) Validate() error {
 
 	if s.EndpointName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
+	}
+	if s.TargetModel != nil && len(*s.TargetModel) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TargetModel", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -82,6 +98,12 @@ func (s InvokeEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "X-Amzn-SageMaker-Custom-Attributes", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.TargetModel != nil {
+		v := *s.TargetModel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-SageMaker-Target-Model", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.EndpointName != nil {
 		v := *s.EndpointName
 
@@ -103,7 +125,7 @@ type InvokeEndpointOutput struct {
 	// Includes the inference provided by the model.
 	//
 	// For information about the format of the response body, see Common Data Formats—Inference
-	// (http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html).
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html).
 	//
 	// Body is a required field
 	Body []byte `type:"blob" required:"true" sensitive:"true"`
@@ -111,6 +133,19 @@ type InvokeEndpointOutput struct {
 	// The MIME type of the inference returned in the response body.
 	ContentType *string `location:"header" locationName:"Content-Type" type:"string"`
 
+	// Provides additional information in the response about the inference returned
+	// by a model hosted at an Amazon SageMaker endpoint. The information is an
+	// opaque value that is forwarded verbatim. You could use this value, for example,
+	// to return an ID received in the CustomAttributes header of a request or other
+	// metadata that a service endpoint was programmed to produce. The value must
+	// consist of no more than 1024 visible US-ASCII characters as specified in
+	// Section 3.3.6. Field Value Components (https://tools.ietf.org/html/rfc7230#section-3.2.6)
+	// of the Hypertext Transfer Protocol (HTTP/1.1). If the customer wants the
+	// custom attribute returned, the model must set the custom attribute to be
+	// included on the way back.
+	//
+	// This feature is currently supported in the AWS SDKs but not in the Amazon
+	// SageMaker Python SDK.
 	CustomAttributes *string `location:"header" locationName:"X-Amzn-SageMaker-Custom-Attributes" type:"string" sensitive:"true"`
 
 	// Identifies the production variant that was invoked.
@@ -160,15 +195,21 @@ const opInvokeEndpoint = "InvokeEndpoint"
 // your client applications use this API to get inferences from the model hosted
 // at the specified endpoint.
 //
-// For an overview of Amazon SageMaker, see How It Works (http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
+// For an overview of Amazon SageMaker, see How It Works (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
 //
 // Amazon SageMaker strips all POST headers except those supported by the API.
 // Amazon SageMaker might add additional headers. You should not rely on the
 // behavior of headers outside those enumerated in the request syntax.
 //
-// Cals to InvokeEndpoint are authenticated by using AWS Signature Version 4.
-// For information, see Authenticating Requests (AWS Signature Version 4) (http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
+// Calls to InvokeEndpoint are authenticated by using AWS Signature Version
+// 4. For information, see Authenticating Requests (AWS Signature Version 4)
+// (http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
 // in the Amazon S3 API Reference.
+//
+// A customer's model containers must respond to requests within 60 seconds.
+// The model itself can have a maximum processing time of 60 seconds before
+// responding to the /invocations. If your model is going to take 50-60 seconds
+// of processing time, the SDK socket timeout should be set to be 70 seconds.
 //
 // Endpoints are scoped to an individual account, and are not public. The URL
 // does not contain the account ID, but Amazon SageMaker determines the account

@@ -518,11 +518,14 @@ func (s PartnerEventSourceAccount) String() string {
 type PutEventsRequestEntry struct {
 	_ struct{} `type:"structure"`
 
-	// A valid JSON string. There is no other schema imposed. The JSON string can
+	// A valid JSON object. There is no other schema imposed. The JSON object can
 	// contain fields and nested subobjects.
+	//
+	// This field is required.
 	Detail *string `type:"string"`
 
 	// Free-form string used to decide which fields to expect in the event detail.
+	// This field is required.
 	DetailType *string `type:"string"`
 
 	// The event bus that will receive the event. Only the rules that are associated
@@ -582,18 +585,19 @@ func (s PutEventsResultEntry) String() string {
 type PutPartnerEventsRequestEntry struct {
 	_ struct{} `type:"structure"`
 
-	// A valid JSON string. There is no other schema imposed. The JSON string can
-	// contain fields and nested subobjects.
+	// A valid JSON object. There is no other schema imposed. The JSON object can
+	// contain fields and nested subobjects. This field is required.
 	Detail *string `type:"string"`
 
 	// A free-form string used to decide which fields to expect in the event detail.
+	// This field is required.
 	DetailType *string `type:"string"`
 
 	// AWS resources, identified by Amazon Resource Name (ARN), that the event primarily
 	// concerns. Any number, including zero, can be present.
 	Resources []string `type:"list"`
 
-	// The event source that is generating the evntry.
+	// The event source that is generating the evntry. This field is required.
 	Source *string `type:"string"`
 
 	// The date and time of the event.
@@ -878,7 +882,8 @@ type Target struct {
 	// in the Amazon EC2 Container Service Developer Guide.
 	EcsParameters *EcsParameters `type:"structure"`
 
-	// The ID of the target.
+	// A name for the target. Use a string that will help you identify the target.
+	// Each target associated with a rule must have an Id unique for that rule.
 	//
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`

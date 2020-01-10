@@ -3,6 +3,9 @@
 package rekognition
 
 import (
+	"fmt"
+	"time"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
@@ -29,6 +32,35 @@ type AgeRange struct {
 // String returns the string representation
 func (s AgeRange) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Assets are the images that you use to train and evaluate a model version.
+// Assets are referenced by Sagemaker GroundTruth manifest files.
+type Asset struct {
+	_ struct{} `type:"structure"`
+
+	// The S3 bucket that contains the Ground Truth manifest file.
+	GroundTruthManifest *GroundTruthManifest `type:"structure"`
+}
+
+// String returns the string representation
+func (s Asset) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Asset) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Asset"}
+	if s.GroundTruthManifest != nil {
+		if err := s.GroundTruthManifest.Validate(); err != nil {
+			invalidParams.AddNested("GroundTruthManifest", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Indicates whether or not the face has a beard, and the confidence level in
@@ -248,6 +280,28 @@ func (s ContentModerationDetection) String() string {
 	return awsutil.Prettify(s)
 }
 
+// A custom label detected in an image by a call to DetectCustomLabels.
+type CustomLabel struct {
+	_ struct{} `type:"structure"`
+
+	// The confidence that the model has in the detection of the custom label. The
+	// range is 0-100. A higher value indicates a higher confidence.
+	Confidence *float64 `type:"float"`
+
+	// The location of the detected object on the image that corresponds to the
+	// custom label. Includes an axis aligned coarse bounding box surrounding the
+	// object and a finer grain polygon for more accurate spatial information.
+	Geometry *Geometry `type:"structure"`
+
+	// The name of the custom label.
+	Name *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CustomLabel) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The emotions that appear to be expressed on the face, and the confidence
 // level in the determination. The API is only making a determination of the
 // physical appearance of a person's face. It is not a determination of the
@@ -265,6 +319,25 @@ type Emotion struct {
 
 // String returns the string representation
 func (s Emotion) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The evaluation results for the training of a model.
+type EvaluationResult struct {
+	_ struct{} `type:"structure"`
+
+	// The F1 score for the evaluation of all labels. The F1 score metric evaluates
+	// the overall precision and recall performance of the model as a single value.
+	// A higher value indicates better precision and recall performance. A lower
+	// score indicates that precision, recall, or both are performing poorly.
+	F1Score *float64 `type:"float"`
+
+	// The S3 bucket that contains the training summary.
+	Summary *Summary `type:"structure"`
+}
+
+// String returns the string representation
+func (s EvaluationResult) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -385,7 +458,7 @@ type FaceDetail struct {
 	// level in the determination.
 	EyesOpen *EyeOpen `type:"structure"`
 
-	// Gender of the face and the confidence level in the determination.
+	// The predicted gender of a detected face.
 	Gender *Gender `type:"structure"`
 
 	// Indicates the location of landmarks on the face. Default attribute.
@@ -505,14 +578,29 @@ func (s *FaceSearchSettings) Validate() error {
 	return nil
 }
 
-// Gender of the face and the confidence level in the determination.
+// The predicted gender of a detected face.
+//
+// Amazon Rekognition makes gender binary (male/female) predictions based on
+// the physical appearance of a face in a particular image. This kind of prediction
+// is not designed to categorize a person’s gender identity, and you shouldn't
+// use Amazon Rekognition to make such a determination. For example, a male
+// actor wearing a long-haired wig and earrings for a role might be predicted
+// as female.
+//
+// Using Amazon Rekognition to make gender binary predictions is best suited
+// for use cases where aggregate gender distribution statistics need to be analyzed
+// without identifying specific users. For example, the percentage of female
+// users compared to male users on a social media platform.
+//
+// We don't recommend using gender binary predictions to make decisions that
+// impact an individual's rights, privacy, or access to services.
 type Gender struct {
 	_ struct{} `type:"structure"`
 
-	// Level of confidence in the determination.
+	// Level of confidence in the prediction.
 	Confidence *float64 `type:"float"`
 
-	// Gender of the face.
+	// The predicted gender of the face.
 	Value GenderType `type:"string" enum:"true"`
 }
 
@@ -521,21 +609,137 @@ func (s Gender) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Information about where the text detected by DetectText is located on an
-// image.
+// Information about where an object (DetectCustomLabels) or text (DetectText)
+// is located on an image.
 type Geometry struct {
 	_ struct{} `type:"structure"`
 
-	// An axis-aligned coarse representation of the detected text's location on
+	// An axis-aligned coarse representation of the detected item's location on
 	// the image.
 	BoundingBox *BoundingBox `type:"structure"`
 
-	// Within the bounding box, a fine-grained polygon around the detected text.
+	// Within the bounding box, a fine-grained polygon around the detected item.
 	Polygon []Point `type:"list"`
 }
 
 // String returns the string representation
 func (s Geometry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The S3 bucket that contains the Ground Truth manifest file.
+type GroundTruthManifest struct {
+	_ struct{} `type:"structure"`
+
+	// Provides the S3 bucket name and object name.
+	//
+	// The region for the S3 bucket containing the S3 object must match the region
+	// you use for Amazon Rekognition operations.
+	//
+	// For Amazon Rekognition to process an S3 object, the user must have permission
+	// to access the S3 object. For more information, see Resource-Based Policies
+	// in the Amazon Rekognition Developer Guide.
+	S3Object *S3Object `type:"structure"`
+}
+
+// String returns the string representation
+func (s GroundTruthManifest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GroundTruthManifest) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GroundTruthManifest"}
+	if s.S3Object != nil {
+		if err := s.S3Object.Validate(); err != nil {
+			invalidParams.AddNested("S3Object", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Shows the results of the human in the loop evaluation. If there is no HumanLoopArn,
+// the input did not trigger human review.
+type HumanLoopActivationOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Shows the result of condition evaluations, including those conditions which
+	// activated a human review.
+	HumanLoopActivationConditionsEvaluationResults aws.JSONValue `type:"jsonvalue"`
+
+	// Shows if and why human review was needed.
+	HumanLoopActivationReasons []string `min:"1" type:"list"`
+
+	// The Amazon Resource Name (ARN) of the HumanLoop created.
+	HumanLoopArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s HumanLoopActivationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Sets up the flow definition the image will be sent to if one of the conditions
+// is met. You can also set certain attributes of the image before review.
+type HumanLoopConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Sets attributes of the input data.
+	DataAttributes *HumanLoopDataAttributes `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the flow definition.
+	//
+	// FlowDefinitionArn is a required field
+	FlowDefinitionArn *string `type:"string" required:"true"`
+
+	// The name of the human review used for this image. This should be kept unique
+	// within a region.
+	//
+	// HumanLoopName is a required field
+	HumanLoopName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s HumanLoopConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HumanLoopConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HumanLoopConfig"}
+
+	if s.FlowDefinitionArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FlowDefinitionArn"))
+	}
+
+	if s.HumanLoopName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HumanLoopName"))
+	}
+	if s.HumanLoopName != nil && len(*s.HumanLoopName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("HumanLoopName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Allows you to set attributes of the image. Currently, you can declare an
+// image as free of personally identifiable information.
+type HumanLoopDataAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// Sets whether the input image is free of personally identifiable information.
+	ContentClassifiers []ContentClassifier `type:"list"`
+}
+
+// String returns the string representation
+func (s HumanLoopDataAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -835,6 +1039,35 @@ func (s *NotificationChannel) Validate() error {
 	return nil
 }
 
+// The S3 bucket and folder location where training output is placed.
+type OutputConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The S3 bucket where training output is placed.
+	S3Bucket *string `min:"3" type:"string"`
+
+	// The prefix applied to the training output files.
+	S3KeyPrefix *string `type:"string"`
+}
+
+// String returns the string representation
+func (s OutputConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OutputConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OutputConfig"}
+	if s.S3Bucket != nil && len(*s.S3Bucket) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("S3Bucket", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // A parent label for a label. A label can have 0, 1, or more parents.
 type Parent struct {
 	_ struct{} `type:"structure"`
@@ -922,9 +1155,9 @@ func (s PersonMatch) String() string {
 // 700x200 and the operation returns X=0.5 and Y=0.25, then the point is at
 // the (350,50) pixel coordinate on the image.
 //
-// An array of Point objects, Polygon, is returned by DetectText. Polygon represents
-// a fine-grained polygon around detected text. For more information, see Geometry
-// in the Amazon Rekognition Developer Guide.
+// An array of Point objects, Polygon, is returned by DetectText and by DetectCustomLabels.
+// Polygon represents a fine-grained polygon around a detected item. For more
+// information, see Geometry in the Amazon Rekognition Developer Guide.
 type Point struct {
 	_ struct{} `type:"structure"`
 
@@ -956,6 +1189,70 @@ type Pose struct {
 
 // String returns the string representation
 func (s Pose) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A description of a Amazon Rekognition Custom Labels project.
+type ProjectDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The Unix timestamp for the date and time that the project was created.
+	CreationTimestamp *time.Time `type:"timestamp"`
+
+	// The Amazon Resource Name (ARN) of the project.
+	ProjectArn *string `min:"20" type:"string"`
+
+	// The current status of the project.
+	Status ProjectStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ProjectDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The description of a version of a model.
+type ProjectVersionDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The duration, in seconds, that the model version has been billed for training.
+	// This value is only returned if the model version has been successfully trained.
+	BillableTrainingTimeInSeconds *int64 `type:"long"`
+
+	// The Unix datetime for the date and time that training started.
+	CreationTimestamp *time.Time `type:"timestamp"`
+
+	// The training results. EvaluationResult is only returned if training is successful.
+	EvaluationResult *EvaluationResult `type:"structure"`
+
+	// The minimum number of inference units used by the model. For more information,
+	// see StartProjectVersion.
+	MinInferenceUnits *int64 `min:"1" type:"integer"`
+
+	// The location where training results are saved.
+	OutputConfig *OutputConfig `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the model version.
+	ProjectVersionArn *string `min:"20" type:"string"`
+
+	// The current status of the model version.
+	Status ProjectVersionStatus `type:"string" enum:"true"`
+
+	// A descriptive message for an error or warning that occurred.
+	StatusMessage *string `type:"string"`
+
+	// The manifest file that represents the testing results.
+	TestingDataResult *TestingDataResult `type:"structure"`
+
+	// The manifest file that represents the training results.
+	TrainingDataResult *TrainingDataResult `type:"structure"`
+
+	// The Unix date and time that training of the model ended.
+	TrainingEndTimestamp *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation
+func (s ProjectVersionDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -1100,6 +1397,30 @@ func (s *StreamProcessorSettings) Validate() error {
 	return nil
 }
 
+// The S3 bucket that contains the training summary. The training summary includes
+// aggregated evaluation metrics for the entire testing dataset and metrics
+// for each individual label.
+//
+// You get the training summary S3 bucket location by calling DescribeProjectVersions.
+type Summary struct {
+	_ struct{} `type:"structure"`
+
+	// Provides the S3 bucket name and object name.
+	//
+	// The region for the S3 bucket containing the S3 object must match the region
+	// you use for Amazon Rekognition operations.
+	//
+	// For Amazon Rekognition to process an S3 object, the user must have permission
+	// to access the S3 object. For more information, see Resource-Based Policies
+	// in the Amazon Rekognition Developer Guide.
+	S3Object *S3Object `type:"structure"`
+}
+
+// String returns the string representation
+func (s Summary) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Indicates whether or not the face is wearing sunglasses, and the confidence
 // level in the determination.
 type Sunglasses struct {
@@ -1114,6 +1435,60 @@ type Sunglasses struct {
 
 // String returns the string representation
 func (s Sunglasses) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The dataset used for testing. Optionally, if AutoCreate is set, Amazon Rekognition
+// Custom Labels creates a testing dataset using an 80/20 split of the training
+// dataset.
+type TestingData struct {
+	_ struct{} `type:"structure"`
+
+	// The assets used for testing.
+	Assets []Asset `type:"list"`
+
+	// If specified, Amazon Rekognition Custom Labels creates a testing dataset
+	// with an 80/20 split of the training dataset.
+	AutoCreate *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s TestingData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TestingData) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TestingData"}
+	if s.Assets != nil {
+		for i, v := range s.Assets {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Assets", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// A Sagemaker Groundtruth format manifest file representing the dataset used
+// for testing.
+type TestingDataResult struct {
+	_ struct{} `type:"structure"`
+
+	// The testing dataset that was supplied for training.
+	Input *TestingData `type:"structure"`
+
+	// The subset of the dataset that was actually tested. Some images (assets)
+	// might not be tested due to file formatting and other issues.
+	Output *TestingData `type:"structure"`
+}
+
+// String returns the string representation
+func (s TestingDataResult) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -1158,6 +1533,54 @@ type TextDetection struct {
 
 // String returns the string representation
 func (s TextDetection) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The dataset used for training.
+type TrainingData struct {
+	_ struct{} `type:"structure"`
+
+	// A Sagemaker GroundTruth manifest file that contains the training images (assets).
+	Assets []Asset `type:"list"`
+}
+
+// String returns the string representation
+func (s TrainingData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TrainingData) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TrainingData"}
+	if s.Assets != nil {
+		for i, v := range s.Assets {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Assets", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// A Sagemaker Groundtruth format manifest file that represents the dataset
+// used for training.
+type TrainingDataResult struct {
+	_ struct{} `type:"structure"`
+
+	// The training assets that you supplied for training.
+	Input *TrainingData `type:"structure"`
+
+	// The images (assets) that were actually trained by Amazon Rekognition Custom
+	// Labels.
+	Output *TrainingData `type:"structure"`
+}
+
+// String returns the string representation
+func (s TrainingDataResult) String() string {
 	return awsutil.Prettify(s)
 }
 

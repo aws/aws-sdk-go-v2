@@ -12,6 +12,10 @@ import (
 type DetectModerationLabelsInput struct {
 	_ struct{} `type:"structure"`
 
+	// Sets up the configuration for human evaluation, including the FlowDefinition
+	// the image will be sent to.
+	HumanLoopConfig *HumanLoopConfig `type:"structure"`
+
 	// The input image as base64-encoded bytes or an S3 object. If you use the AWS
 	// CLI to call Amazon Rekognition operations, passing base64-encoded image bytes
 	// is not supported.
@@ -44,6 +48,11 @@ func (s *DetectModerationLabelsInput) Validate() error {
 	if s.Image == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
+	if s.HumanLoopConfig != nil {
+		if err := s.HumanLoopConfig.Validate(); err != nil {
+			invalidParams.AddNested("HumanLoopConfig", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.Image != nil {
 		if err := s.Image.Validate(); err != nil {
 			invalidParams.AddNested("Image", err.(aws.ErrInvalidParams))
@@ -58,6 +67,9 @@ func (s *DetectModerationLabelsInput) Validate() error {
 
 type DetectModerationLabelsOutput struct {
 	_ struct{} `type:"structure"`
+
+	// Shows the results of the human in the loop evaluation.
+	HumanLoopActivationOutput *HumanLoopActivationOutput `type:"structure"`
 
 	// Array of detected Moderation labels and the time, in milliseconds from the
 	// start of the video, they were detected.

@@ -101,6 +101,8 @@ type DescribeHyperParameterTuningJobOutput struct {
 	// of the training jobs that this tuning job launches.
 	TrainingJobDefinition *HyperParameterTrainingJobDefinition `type:"structure"`
 
+	TrainingJobDefinitions []HyperParameterTrainingJobDefinition `min:"1" type:"list"`
+
 	// The TrainingJobStatusCounters object that specifies the number of training
 	// jobs, categorized by status, that this tuning job launched.
 	//

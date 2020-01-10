@@ -2,6 +2,23 @@
 
 package codecommit
 
+type ApprovalState string
+
+// Enum values for ApprovalState
+const (
+	ApprovalStateApprove ApprovalState = "APPROVE"
+	ApprovalStateRevoke  ApprovalState = "REVOKE"
+)
+
+func (enum ApprovalState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ApprovalState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ChangeTypeEnum string
 
 // Enum values for ChangeTypeEnum
@@ -128,6 +145,23 @@ func (enum OrderEnum) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type OverrideStatus string
+
+// Enum values for OverrideStatus
+const (
+	OverrideStatusOverride OverrideStatus = "OVERRIDE"
+	OverrideStatusRevoke   OverrideStatus = "REVOKE"
+)
+
+func (enum OverrideStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OverrideStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PullRequestEventType string
 
 // Enum values for PullRequestEventType
@@ -136,6 +170,11 @@ const (
 	PullRequestEventTypePullRequestStatusChanged          PullRequestEventType = "PULL_REQUEST_STATUS_CHANGED"
 	PullRequestEventTypePullRequestSourceReferenceUpdated PullRequestEventType = "PULL_REQUEST_SOURCE_REFERENCE_UPDATED"
 	PullRequestEventTypePullRequestMergeStateChanged      PullRequestEventType = "PULL_REQUEST_MERGE_STATE_CHANGED"
+	PullRequestEventTypePullRequestApprovalRuleCreated    PullRequestEventType = "PULL_REQUEST_APPROVAL_RULE_CREATED"
+	PullRequestEventTypePullRequestApprovalRuleUpdated    PullRequestEventType = "PULL_REQUEST_APPROVAL_RULE_UPDATED"
+	PullRequestEventTypePullRequestApprovalRuleDeleted    PullRequestEventType = "PULL_REQUEST_APPROVAL_RULE_DELETED"
+	PullRequestEventTypePullRequestApprovalRuleOverridden PullRequestEventType = "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN"
+	PullRequestEventTypePullRequestApprovalStateChanged   PullRequestEventType = "PULL_REQUEST_APPROVAL_STATE_CHANGED"
 )
 
 func (enum PullRequestEventType) MarshalValue() (string, error) {

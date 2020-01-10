@@ -56,6 +56,24 @@ func (enum ResourceShareAssociationType) MarshalValueBuf(b []byte) ([]byte, erro
 	return append(b, enum...), nil
 }
 
+type ResourceShareFeatureSet string
+
+// Enum values for ResourceShareFeatureSet
+const (
+	ResourceShareFeatureSetCreatedFromPolicy   ResourceShareFeatureSet = "CREATED_FROM_POLICY"
+	ResourceShareFeatureSetPromotingToStandard ResourceShareFeatureSet = "PROMOTING_TO_STANDARD"
+	ResourceShareFeatureSetStandard            ResourceShareFeatureSet = "STANDARD"
+)
+
+func (enum ResourceShareFeatureSet) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceShareFeatureSet) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ResourceShareInvitationStatus string
 
 // Enum values for ResourceShareInvitationStatus

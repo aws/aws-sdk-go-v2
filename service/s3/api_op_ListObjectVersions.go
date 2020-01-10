@@ -13,10 +13,23 @@ import (
 type ListObjectVersionsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The bucket name that contains the objects.
+	//
+	// When using this API with an access point, you must direct requests to the
+	// access point hostname. The access point hostname takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com.
+	// When using this operation using an access point through the AWS SDKs, you
+	// provide the access point ARN in place of the bucket name. For more information
+	// about access point ARNs, see Using Access Points (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html)
+	// in the Amazon Simple Storage Service Developer Guide.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
-	// A delimiter is a character you use to group keys.
+	// A delimiter is a character that you specify to group keys. All keys that
+	// contain the same string between the prefix and the first occurrence of the
+	// delimiter are grouped under a single result element in CommonPrefixes. These
+	// groups are counted as one result against the max-keys limitation. These keys
+	// are not returned elsewhere in the response.
 	Delimiter *string `location:"querystring" locationName:"delimiter" type:"string"`
 
 	// Requests Amazon S3 to encode the object keys in the response and specifies
@@ -31,10 +44,17 @@ type ListObjectVersionsInput struct {
 	KeyMarker *string `location:"querystring" locationName:"key-marker" type:"string"`
 
 	// Sets the maximum number of keys returned in the response. The response might
-	// contain fewer keys but will never contain more.
+	// contain fewer keys but will never contain more. If additional keys satisfy
+	// the search criteria, but were not returned because max-keys was exceeded,
+	// the response contains <isTruncated>true</isTruncated>. To return the additional
+	// keys, see key-marker and version-id-marker.
 	MaxKeys *int64 `location:"querystring" locationName:"max-keys" type:"integer"`
 
-	// Limits the response to keys that begin with the specified prefix.
+	// Use this parameter to select only those keys that begin with the specified
+	// prefix. You can use prefixes to separate a bucket into different groupings
+	// of keys. (You can think of using prefix to make groups in the same way you'd
+	// use a folder in a file system.) You can use prefix with delimiter to roll
+	// up numerous objects into a single result under CommonPrefixes.
 	Prefix *string `location:"querystring" locationName:"prefix" type:"string"`
 
 	// Specifies the object version you want to start listing from.
@@ -118,39 +138,64 @@ func (s ListObjectVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListObjectVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	// All of the keys rolled up into a common prefix count as a single return when
+	// calculating the number of returns.
 	CommonPrefixes []CommonPrefix `type:"list" flattened:"true"`
 
+	// Container for an object that is a delete marker.
 	DeleteMarkers []DeleteMarkerEntry `locationName:"DeleteMarker" type:"list" flattened:"true"`
 
+	// The delimiter grouping the included keys. A delimiter is a character that
+	// you specify to group keys. All keys that contain the same string between
+	// the prefix and the first occurrence of the delimiter are grouped under a
+	// single result element in CommonPrefixes. These groups are counted as one
+	// result against the max-keys limitation. These keys are not returned elsewhere
+	// in the response.
 	Delimiter *string `type:"string"`
 
-	// Encoding type used by Amazon S3 to encode object keys in the response.
+	// Encoding type used by Amazon S3 to encode object key names in the XML response.
+	//
+	// If you specify encoding-type request parameter, Amazon S3 includes this element
+	// in the response, and returns encoded key name values in the following response
+	// elements:
+	//
+	// KeyMarker, NextKeyMarker, Prefix, Key, and Delimiter.
 	EncodingType EncodingType `type:"string" enum:"true"`
 
-	// A flag that indicates whether or not Amazon S3 returned all of the results
-	// that satisfied the search criteria. If your results were truncated, you can
-	// make a follow-up paginated request using the NextKeyMarker and NextVersionIdMarker
+	// A flag that indicates whether Amazon S3 returned all of the results that
+	// satisfied the search criteria. If your results were truncated, you can make
+	// a follow-up paginated request using the NextKeyMarker and NextVersionIdMarker
 	// response parameters as a starting place in another request to return the
 	// rest of the results.
 	IsTruncated *bool `type:"boolean"`
 
-	// Marks the last Key returned in a truncated response.
+	// Marks the last key returned in a truncated response.
 	KeyMarker *string `type:"string"`
 
+	// Specifies the maximum number of objects to return.
 	MaxKeys *int64 `type:"integer"`
 
+	// Bucket name.
 	Name *string `type:"string"`
 
-	// Use this value for the key marker request parameter in a subsequent request.
+	// When the number of responses exceeds the value of MaxKeys, NextKeyMarker
+	// specifies the first key not returned that satisfies the search criteria.
+	// Use this value for the key-marker request parameter in a subsequent request.
 	NextKeyMarker *string `type:"string"`
 
-	// Use this value for the next version id marker parameter in a subsequent request.
+	// When the number of responses exceeds the value of MaxKeys, NextVersionIdMarker
+	// specifies the first object version not returned that satisfies the search
+	// criteria. Use this value for the version-id-marker request parameter in a
+	// subsequent request.
 	NextVersionIdMarker *string `type:"string"`
 
+	// Selects objects that start with the value supplied by this parameter.
 	Prefix *string `type:"string"`
 
+	// Marks the last version of the key returned in a truncated response.
 	VersionIdMarker *string `type:"string"`
 
+	// Container for version information.
 	Versions []ObjectVersion `locationName:"Version" type:"list" flattened:"true"`
 }
 
@@ -265,7 +310,24 @@ const opListObjectVersions = "ListObjectVersions"
 // ListObjectVersionsRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns metadata about all of the versions of objects in a bucket.
+// Returns metadata about all of the versions of objects in a bucket. You can
+// also use request parameters as selection criteria to return metadata about
+// a subset of all the object versions.
+//
+// A 200 OK response can contain valid or invalid XML. Make sure to design your
+// application to parse the contents of the response and handle it appropriately.
+//
+// To use this operation, you must have READ access to the bucket.
+//
+// The following operations are related to ListObjectVersions:
+//
+//    * ListObjectsV2
+//
+//    * GetObject
+//
+//    * PutObject
+//
+//    * DeleteObject
 //
 //    // Example sending a request using ListObjectVersionsRequest.
 //    req := client.ListObjectVersionsRequest(params)

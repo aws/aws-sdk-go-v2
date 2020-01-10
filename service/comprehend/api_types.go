@@ -180,6 +180,22 @@ func (s ClassifierMetadata) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Specifies the class that categorizes the document being analyzed
+type DocumentClass struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the class.
+	Name *string `min:"1" type:"string"`
+
+	// The confidence score that Amazon Comprehend has this class correctly attributed.
+	Score *float64 `type:"float"`
+}
+
+// String returns the string representation
+func (s DocumentClass) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Provides information for filtering a list of document classification jobs.
 // For more information, see the operation. You can provide only one filter
 // parameter in each request.
@@ -566,6 +582,69 @@ func (s DominantLanguageDetectionJobProperties) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The filter used to determine which endpoints are are returned. You can filter
+// jobs on their name, model, status, or the date and time that they were created.
+// You can only set one filter at a time.
+type EndpointFilter struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies a date after which the returned endpoint or endpoints were created.
+	CreationTimeAfter *time.Time `type:"timestamp"`
+
+	// Specifies a date before which the returned endpoint or endpoints were created.
+	CreationTimeBefore *time.Time `type:"timestamp"`
+
+	// The Amazon Resource Number (ARN) of the model to which the endpoint is attached.
+	ModelArn *string `type:"string"`
+
+	// Specifies the status of the endpoint being returned. Possible values are:
+	// Creating, Ready, Updating, Deleting, Failed.
+	Status EndpointStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s EndpointFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Specifies information about the specified endpoint.
+type EndpointProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The creation date and time of the endpoint.
+	CreationTime *time.Time `type:"timestamp"`
+
+	// The number of inference units currently used by the model using this endpoint.
+	CurrentInferenceUnits *int64 `min:"1" type:"integer"`
+
+	// The desired number of inference units to be used by the model using this
+	// endpoint. Each inference unit represents of a throughput of 100 characters
+	// per second.
+	DesiredInferenceUnits *int64 `min:"1" type:"integer"`
+
+	// The Amazon Resource Number (ARN) of the endpoint.
+	EndpointArn *string `type:"string"`
+
+	// The date and time that the endpoint was last modified.
+	LastModifiedTime *time.Time `type:"timestamp"`
+
+	// Specifies a reason for failure in cases of Failed status.
+	Message *string `type:"string"`
+
+	// The Amazon Resource Number (ARN) of the model to which the endpoint is attached.
+	ModelArn *string `type:"string"`
+
+	// Specifies the status of the endpoint. Because the endpoint updates and creation
+	// are asynchronous, so customers will need to wait for the endpoint to be Ready
+	// status before making inference requests.
+	Status EndpointStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s EndpointProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Provides information for filtering a list of dominant language detection
 // jobs. For more information, see the operation.
 type EntitiesDetectionJobFilter struct {
@@ -944,7 +1023,7 @@ type EntityRecognizerMetadataEntityTypesListItem struct {
 	// item on the list of entity types.
 	EvaluationMetrics *EntityTypesEvaluationMetrics `type:"structure"`
 
-	// indicates the number of times the given entity name was seen in the training
+	// Indicates the number of times the given entity type was seen in the training
 	// data.
 	NumberOfTrainMentions *int64 `type:"integer"`
 

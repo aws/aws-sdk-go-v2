@@ -36,7 +36,7 @@ const opDisassociateAdminAccount = "DisassociateAdminAccount"
 //
 // Disassociates the account that has been set as the AWS Firewall Manager administrator
 // account. To set a different account as the administrator account, you must
-// submit an AssociateAdminAccount request .
+// submit an AssociateAdminAccount request.
 //
 //    // Example sending a request using DisassociateAdminAccountRequest.
 //    req := client.DisassociateAdminAccountRequest(params)

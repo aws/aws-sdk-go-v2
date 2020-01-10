@@ -13,6 +13,8 @@ import (
 type GetBucketReplicationInput struct {
 	_ struct{} `type:"structure"`
 
+	// The bucket name for which to get the replication information.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -89,6 +91,25 @@ const opGetBucketReplication = "GetBucketReplication"
 // It can take a while to propagate the put or delete a replication configuration
 // to all Amazon S3 systems. Therefore, a get request soon after put or delete
 // can return a wrong result.
+//
+// For information about replication configuration, see Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+// This operation requires permissions for the s3:GetReplicationConfiguration
+// action. For more information about permissions, see Using Bucket Policies
+// and User Policies (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html).
+//
+// If you include the Filter element in a replication configuration, you must
+// also include the DeleteMarkerReplication and Priority elements. The response
+// also returns those elements.
+//
+// For information about GetBucketReplication errors, see ReplicationErrorCodeList
+//
+// The following operations are related to GetBucketReplication:
+//
+//    * PutBucketReplication
+//
+//    * DeleteBucketReplication
 //
 //    // Example sending a request using GetBucketReplicationRequest.
 //    req := client.GetBucketReplicationRequest(params)

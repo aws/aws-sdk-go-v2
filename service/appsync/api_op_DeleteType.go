@@ -21,7 +21,7 @@ type DeleteTypeInput struct {
 	// The type name.
 	//
 	// TypeName is a required field
-	TypeName *string `location:"uri" locationName:"typeName" type:"string" required:"true"`
+	TypeName *string `location:"uri" locationName:"typeName" min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -39,6 +39,9 @@ func (s *DeleteTypeInput) Validate() error {
 
 	if s.TypeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
+	}
+	if s.TypeName != nil && len(*s.TypeName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TypeName", 1))
 	}
 
 	if invalidParams.Len() > 0 {

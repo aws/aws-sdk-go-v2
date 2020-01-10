@@ -59,8 +59,12 @@ type Api struct {
 	// The API ID.
 	ApiId *string `locationName:"apiId" type:"string"`
 
-	// An API key selection expression. See API Key Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions).
+	// An API key selection expression. Supported only for WebSocket APIs. See API
+	// Key Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions).
 	ApiKeySelectionExpression *string `locationName:"apiKeySelectionExpression" type:"string"`
+
+	// A CORS configuration. Supported only for HTTP APIs.
+	CorsConfiguration *Cors `locationName:"corsConfiguration" type:"structure"`
 
 	// The timestamp when the API was created.
 	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"iso8601"`
@@ -68,25 +72,33 @@ type Api struct {
 	// The description of the API.
 	Description *string `locationName:"description" type:"string"`
 
-	// Avoid validating models when creating a deployment.
+	// Avoid validating models when creating a deployment. Supported only for WebSocket
+	// APIs.
 	DisableSchemaValidation *bool `locationName:"disableSchemaValidation" type:"boolean"`
+
+	// The validation information during API import. This may include particular
+	// properties of your OpenAPI definition which are ignored during import. Supported
+	// only for HTTP APIs.
+	ImportInfo []string `locationName:"importInfo" type:"list"`
 
 	// The name of the API.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
 
-	// The API protocol: Currently only WEBSOCKET is supported.
+	// The API protocol.
 	//
 	// ProtocolType is a required field
 	ProtocolType ProtocolType `locationName:"protocolType" type:"string" required:"true" enum:"true"`
 
-	// The route selection expression for the API.
+	// The route selection expression for the API. For HTTP APIs, the routeSelectionExpression
+	// must be ${request.method} ${request.path}. If not provided, this will be
+	// the default for HTTP APIs. This property is required for WebSocket APIs.
 	//
 	// RouteSelectionExpression is a required field
 	RouteSelectionExpression *string `locationName:"routeSelectionExpression" type:"string" required:"true"`
 
-	// Tags for the API.
+	// A collection of tags associated with the API.
 	Tags map[string]string `locationName:"tags" type:"map"`
 
 	// A version identifier for the API.
@@ -122,6 +134,12 @@ func (s Api) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "apiKeySelectionExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.CorsConfiguration != nil {
+		v := s.CorsConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "corsConfiguration", v, metadata)
+	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate
 
@@ -140,6 +158,18 @@ func (s Api) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "disableSchemaValidation", protocol.BoolValue(v), metadata)
+	}
+	if s.ImportInfo != nil {
+		v := s.ImportInfo
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "importInfo", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -254,20 +284,19 @@ type Authorizer struct {
 	// Specifies the required credentials as an IAM role for API Gateway to invoke
 	// the authorizer. To specify an IAM role for API Gateway to assume, use the
 	// role's Amazon Resource Name (ARN). To use resource-based permissions on the
-	// Lambda function, specify null.
+	// Lambda function, specify null. Supported only for REQUEST authorizers.
 	AuthorizerCredentialsArn *string `locationName:"authorizerCredentialsArn" type:"string"`
 
 	// The authorizer identifier.
 	AuthorizerId *string `locationName:"authorizerId" type:"string"`
 
-	// The time to live (TTL), in seconds, of cached authorizer results. If it equals
-	// 0, authorization caching is disabled. If it is greater than 0, API Gateway
-	// will cache authorizer responses. If this field is not set, the default value
-	// is 300. The maximum value is 3600, or 1 hour.
+	// Authorizer caching is not currently supported. Don't specify this value for
+	// authorizers.
 	AuthorizerResultTtlInSeconds *int64 `locationName:"authorizerResultTtlInSeconds" type:"integer"`
 
-	// The authorizer type. Currently the only valid value is REQUEST, for a Lambda
-	// function using incoming request parameters.
+	// The authorizer type. For WebSocket APIs, specify REQUEST for a Lambda function
+	// using incoming request parameters. For HTTP APIs, specify JWT to use JSON
+	// Web Tokens.
 	AuthorizerType AuthorizerType `locationName:"authorizerType" type:"string" enum:"true"`
 
 	// The authorizer's Uniform Resource Identifier (URI). ForREQUEST authorizers,
@@ -276,36 +305,40 @@ type Authorizer struct {
 	// , where {region} is the same as the region hosting the Lambda function, path
 	// indicates that the remaining substring in the URI should be treated as the
 	// path to the resource, including the initial /. For Lambda functions, this
-	// is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.
+	// is usually of the form /2015-03-31/functions/[FunctionARN]/invocations. Supported
+	// only for REQUEST authorizers.
 	AuthorizerUri *string `locationName:"authorizerUri" type:"string"`
 
 	// The identity source for which authorization is requested.
 	//
-	// For the REQUEST authorizer, this is required when authorization caching is
-	// enabled. The value is a comma-separated string of one or more mapping expressions
-	// of the specified request parameters. For example, if an Auth header and a
-	// Name query string parameters are defined as identity sources, this value
-	// is method.request.header.Auth, method.request.querystring.Name. These parameters
-	// will be used to derive the authorization caching key and to perform runtime
-	// validation of the REQUEST authorizer by verifying all of the identity-related
-	// request parameters are present, not null, and non-empty. Only when this is
-	// true does the authorizer invoke the authorizer Lambda function, otherwise,
-	// it returns a 401 Unauthorized response without calling the Lambda function.
-	// The valid value is a string of comma-separated mapping expressions of the
-	// specified request parameters. When the authorization caching is not enabled,
-	// this property is optional.
+	// For a REQUEST authorizer, this is optional. The value is a set of one or
+	// more mapping expressions of the specified request parameters. Currently,
+	// the identity source can be headers, query string parameters, stage variables,
+	// and context parameters. For example, if an Auth header and a Name query string
+	// parameter are defined as identity sources, this value is route.request.header.Auth,
+	// route.request.querystring.Name. These parameters will be used to perform
+	// runtime validation for Lambda-based authorizers by verifying all of the identity-related
+	// request parameters are present in the request, not null, and non-empty. Only
+	// when this is true does the authorizer invoke the authorizer Lambda function.
+	// Otherwise, it returns a 401 Unauthorized response without calling the Lambda
+	// function.
+	//
+	// For JWT, a single entry that specifies where to extract the JSON Web Token
+	// (JWT) from inbound requests. Currently only header-based and query parameter-based
+	// selections are supported, for example "$request.header.Authorization".
 	IdentitySource []string `locationName:"identitySource" type:"list"`
 
 	// The validation expression does not apply to the REQUEST authorizer.
 	IdentityValidationExpression *string `locationName:"identityValidationExpression" type:"string"`
 
+	// Represents the configuration of a JWT authorizer. Required for the JWT authorizer
+	// type. Supported only for HTTP APIs.
+	JwtConfiguration *JWTConfiguration `locationName:"jwtConfiguration" type:"structure"`
+
 	// The name of the authorizer.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
-
-	// For REQUEST authorizer, this is not defined.
-	ProviderArns []string `locationName:"providerArns" type:"list"`
 }
 
 // String returns the string representation
@@ -363,23 +396,128 @@ func (s Authorizer) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "identityValidationExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.JwtConfiguration != nil {
+		v := s.JwtConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "jwtConfiguration", v, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if s.ProviderArns != nil {
-		v := s.ProviderArns
+	return nil
+}
+
+// Represents a CORS configuration. Supported only for HTTP APIs. See Configuring
+// CORS (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html)
+// for more information.
+type Cors struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether credentials are included in the CORS request. Supported
+	// only for HTTP APIs.
+	AllowCredentials *bool `locationName:"allowCredentials" type:"boolean"`
+
+	// Represents a collection of allowed headers. Supported only for HTTP APIs.
+	AllowHeaders []string `locationName:"allowHeaders" type:"list"`
+
+	// Represents a collection of allowed HTTP methods. Supported only for HTTP
+	// APIs.
+	AllowMethods []string `locationName:"allowMethods" type:"list"`
+
+	// Represents a collection of allowed origins. Supported only for HTTP APIs.
+	AllowOrigins []string `locationName:"allowOrigins" type:"list"`
+
+	// Represents a collection of exposed headers. Supported only for HTTP APIs.
+	ExposeHeaders []string `locationName:"exposeHeaders" type:"list"`
+
+	// The number of seconds that the browser should cache preflight request results.
+	// Supported only for HTTP APIs.
+	MaxAge *int64 `locationName:"maxAge" type:"integer"`
+}
+
+// String returns the string representation
+func (s Cors) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Cors) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Cors"}
+	if s.MaxAge != nil && *s.MaxAge < -1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxAge", -1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Cors) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AllowCredentials != nil {
+		v := *s.AllowCredentials
 
 		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "providerArns", metadata)
+		e.SetValue(protocol.BodyTarget, "allowCredentials", protocol.BoolValue(v), metadata)
+	}
+	if s.AllowHeaders != nil {
+		v := s.AllowHeaders
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "allowHeaders", metadata)
 		ls0.Start()
 		for _, v1 := range v {
 			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
+	}
+	if s.AllowMethods != nil {
+		v := s.AllowMethods
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "allowMethods", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.AllowOrigins != nil {
+		v := s.AllowOrigins
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "allowOrigins", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.ExposeHeaders != nil {
+		v := s.ExposeHeaders
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "exposeHeaders", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.MaxAge != nil {
+		v := *s.MaxAge
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxAge", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -388,6 +526,9 @@ func (s Authorizer) MarshalFields(e protocol.FieldEncoder) error {
 // must be associated with a Stage for it to be callable over the internet.
 type Deployment struct {
 	_ struct{} `type:"structure"`
+
+	// Specifies whether a deployment was automatically released.
+	AutoDeployed *bool `locationName:"autoDeployed" type:"boolean"`
 
 	// The date and time when the Deployment resource was created.
 	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"iso8601"`
@@ -412,6 +553,12 @@ func (s Deployment) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Deployment) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AutoDeployed != nil {
+		v := *s.AutoDeployed
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "autoDeployed", protocol.BoolValue(v), metadata)
+	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate
 
@@ -461,7 +608,7 @@ type DomainName struct {
 	// The domain name configurations.
 	DomainNameConfigurations []DomainNameConfiguration `locationName:"domainNameConfigurations" type:"list"`
 
-	// Tags for the DomainName.
+	// The collection of tags associated with a domain name.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
@@ -515,7 +662,7 @@ func (s DomainName) MarshalFields(e protocol.FieldEncoder) error {
 type DomainNameConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// A domain name for the WebSocket API.
+	// A domain name for the API.
 	ApiGatewayDomainName *string `locationName:"apiGatewayDomainName" type:"string"`
 
 	// An AWS-managed certificate that will be used by the edge-optimized endpoint
@@ -530,6 +677,10 @@ type DomainNameConfiguration struct {
 	// for this domain name was uploaded.
 	CertificateUploadDate *time.Time `locationName:"certificateUploadDate" type:"timestamp" timestampFormat:"iso8601"`
 
+	// The status of the domain name migration. The valid values are AVAILABLE and
+	// UPDATING. If the status is UPDATING, the domain cannot be modified further
+	// until the existing operation is complete. If it is AVAILABLE, the domain
+	// can be updated.
 	DomainNameStatus DomainNameStatus `locationName:"domainNameStatus" type:"string" enum:"true"`
 
 	// An optional text message containing detailed information about status of
@@ -542,6 +693,8 @@ type DomainNameConfiguration struct {
 	// The Amazon Route 53 Hosted Zone ID of the endpoint.
 	HostedZoneId *string `locationName:"hostedZoneId" type:"string"`
 
+	// The Transport Layer Security (TLS) version of the security policy for this
+	// domain name. The valid values are TLS_1_0 and TLS_1_2.
 	SecurityPolicy SecurityPolicy `locationName:"securityPolicy" type:"string" enum:"true"`
 }
 
@@ -614,6 +767,11 @@ func (s DomainNameConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 type Integration struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies whether an integration is managed by API Gateway. If you created
+	// an API using using quick create, the resulting integration is managed by
+	// API Gateway. You can update a managed integration, but you can't delete it.
+	ApiGatewayManaged *bool `locationName:"apiGatewayManaged" type:"boolean"`
+
 	// The connection ID.
 	ConnectionId *string `locationName:"connectionId" type:"string"`
 
@@ -622,8 +780,9 @@ type Integration struct {
 	// internet.
 	ConnectionType ConnectionType `locationName:"connectionType" type:"string" enum:"true"`
 
-	// Specifies how to handle response payload content type conversions. Supported
-	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:
+	// Supported only for WebSocket APIs. Specifies how to handle response payload
+	// content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT,
+	// with the following behaviors:
 	//
 	// CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string
 	// to the corresponding binary blob.
@@ -652,8 +811,8 @@ type Integration struct {
 	// Specifies the integration's HTTP method type.
 	IntegrationMethod *string `locationName:"integrationMethod" type:"string"`
 
-	// The integration response selection expression for the integration. See Integration
-	// Response Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions).
+	// The integration response selection expression for the integration. Supported
+	// only for WebSocket APIs. See Integration Response Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions).
 	IntegrationResponseSelectionExpression *string `locationName:"integrationResponseSelectionExpression" type:"string"`
 
 	// The integration type of an integration. One of the following:
@@ -661,21 +820,23 @@ type Integration struct {
 	// AWS: for integrating the route or method request with an AWS service action,
 	// including the Lambda function-invoking action. With the Lambda function-invoking
 	// action, this is referred to as the Lambda custom integration. With any other
-	// AWS service action, this is known as AWS integration.
+	// AWS service action, this is known as AWS integration. Supported only for
+	// WebSocket APIs.
 	//
 	// AWS_PROXY: for integrating the route or method request with the Lambda function-invoking
 	// action with the client request passed through as-is. This integration is
 	// also referred to as Lambda proxy integration.
 	//
 	// HTTP: for integrating the route or method request with an HTTP endpoint.
-	// This integration is also referred to as the HTTP custom integration.
+	// This integration is also referred to as the HTTP custom integration. Supported
+	// only for WebSocket APIs.
 	//
 	// HTTP_PROXY: for integrating route or method request with an HTTP endpoint,
 	// with the client request passed through as-is. This is also referred to as
 	// HTTP proxy integration.
 	//
 	// MOCK: for integrating the route or method request with API Gateway as a "loopback"
-	// endpoint without invoking any backend.
+	// endpoint without invoking any backend. Supported only for WebSocket APIs.
 	IntegrationType IntegrationType `locationName:"integrationType" type:"string" enum:"true"`
 
 	// For a Lambda proxy integration, this is the URI of the Lambda function.
@@ -684,7 +845,8 @@ type Integration struct {
 	// Specifies the pass-through behavior for incoming requests based on the Content-Type
 	// header in the request, and the available mapping templates specified as the
 	// requestTemplates property on the Integration resource. There are three valid
-	// values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER.
+	// values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. Supported only for WebSocket
+	// APIs.
 	//
 	// WHEN_NO_MATCH passes the request body for unmapped content types through
 	// to the integration backend without transformation.
@@ -698,6 +860,10 @@ type Integration struct {
 	// Media Type response.
 	PassthroughBehavior PassthroughBehavior `locationName:"passthroughBehavior" type:"string" enum:"true"`
 
+	// Specifies the format of the payload sent to an integration. Required for
+	// HTTP APIs. Currently, the only supported value is 1.0.
+	PayloadFormatVersion *string `locationName:"payloadFormatVersion" type:"string"`
+
 	// A key-value map specifying request parameters that are passed from the method
 	// request to the backend. The key is an integration request parameter name
 	// and the associated value is a method request parameter value or static value
@@ -705,20 +871,22 @@ type Integration struct {
 	// the backend. The method request parameter value must match the pattern of
 	// method.request.{location}.{name} , where {location} is querystring, path,
 	// or header; and {name} must be a valid and unique method request parameter
-	// name.
+	// name. Supported only for WebSocket APIs.
 	RequestParameters map[string]string `locationName:"requestParameters" type:"map"`
 
 	// Represents a map of Velocity templates that are applied on the request payload
 	// based on the value of the Content-Type header sent by the client. The content
 	// type value is the key in this map, and the template (as a String) is the
-	// value.
+	// value. Supported only for WebSocket APIs.
 	RequestTemplates map[string]string `locationName:"requestTemplates" type:"map"`
 
-	// The template selection expression for the integration.
+	// The template selection expression for the integration. Supported only for
+	// WebSocket APIs.
 	TemplateSelectionExpression *string `locationName:"templateSelectionExpression" type:"string"`
 
 	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
-	// milliseconds or 29 seconds.
+	// milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000
+	// milliseconds, or 5 seconds for HTTP APIs.
 	TimeoutInMillis *int64 `locationName:"timeoutInMillis" min:"50" type:"integer"`
 }
 
@@ -729,6 +897,12 @@ func (s Integration) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Integration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApiGatewayManaged != nil {
+		v := *s.ApiGatewayManaged
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "apiGatewayManaged", protocol.BoolValue(v), metadata)
+	}
 	if s.ConnectionId != nil {
 		v := *s.ConnectionId
 
@@ -795,6 +969,12 @@ func (s Integration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "passthroughBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.PayloadFormatVersion != nil {
+		v := *s.PayloadFormatVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "payloadFormatVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.RequestParameters != nil {
 		v := s.RequestParameters
 
@@ -838,8 +1018,9 @@ func (s Integration) MarshalFields(e protocol.FieldEncoder) error {
 type IntegrationResponse struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies how to handle response payload content type conversions. Supported
-	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:
+	// Supported only for WebSocket APIs. Specifies how to handle response payload
+	// content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT,
+	// with the following behaviors:
 	//
 	// CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string
 	// to the corresponding binary blob.
@@ -939,8 +1120,52 @@ func (s IntegrationResponse) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Represents a data model for an API. See Create Models and Mapping Templates
-// for Request and Response Mappings (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html).
+// Represents the configuration of a JWT authorizer. Required for the JWT authorizer
+// type. Supported only for HTTP APIs.
+type JWTConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// A list of the intended recipients of the JWT. A valid JWT must provide an
+	// aud that matches at least one entry in this list. See RFC 7519 (https://tools.ietf.org/html/rfc7519#section-4.1.3).
+	// Supported only for HTTP APIs.
+	Audience []string `locationName:"audience" type:"list"`
+
+	// The base domain of the identity provider that issues JSON Web Tokens. For
+	// example, an Amazon Cognito user pool has the following format: https://cognito-idp.{region}.amazonaws.com/{userPoolId}
+	// . Required for the JWT authorizer type. Supported only for HTTP APIs.
+	Issuer *string `locationName:"issuer" type:"string"`
+}
+
+// String returns the string representation
+func (s JWTConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JWTConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Audience != nil {
+		v := s.Audience
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "audience", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Issuer != nil {
+		v := *s.Issuer
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "issuer", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Represents a data model for an API. Supported only for WebSocket APIs. See
+// Create Models and Mapping Templates for Request and Response Mappings (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html).
 type Model struct {
 	_ struct{} `type:"structure"`
 
@@ -1032,38 +1257,46 @@ func (s ParameterConstraints) MarshalFields(e protocol.FieldEncoder) error {
 type Route struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies whether an API key is required for this route.
+	// Specifies whether a route is managed by API Gateway. If you created an API
+	// using quick create, the $default route is managed by API Gateway. You can't
+	// modify the $default route key.
+	ApiGatewayManaged *bool `locationName:"apiGatewayManaged" type:"boolean"`
+
+	// Specifies whether an API key is required for this route. Supported only for
+	// WebSocket APIs.
 	ApiKeyRequired *bool `locationName:"apiKeyRequired" type:"boolean"`
 
 	// A list of authorization scopes configured on a route. The scopes are used
-	// with a COGNITO_USER_POOLS authorizer to authorize the method invocation.
-	// The authorization works by matching the route scopes against the scopes parsed
-	// from the access token in the incoming request. The method invocation is authorized
-	// if any route scope matches a claimed scope in the access token. Otherwise,
-	// the invocation is not authorized. When the route scope is configured, the
-	// client must provide an access token instead of an identity token for authorization
-	// purposes.
+	// with a JWT authorizer to authorize the method invocation. The authorization
+	// works by matching the route scopes against the scopes parsed from the access
+	// token in the incoming request. The method invocation is authorized if any
+	// route scope matches a claimed scope in the access token. Otherwise, the invocation
+	// is not authorized. When the route scope is configured, the client must provide
+	// an access token instead of an identity token for authorization purposes.
 	AuthorizationScopes []string `locationName:"authorizationScopes" type:"list"`
 
-	// The authorization type for the route. Valid values are NONE for open access,
-	// AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer
+	// The authorization type for the route. For WebSocket APIs, valid values are
+	// NONE for open access, AWS_IAM for using AWS IAM permissions, and CUSTOM for
+	// using a Lambda authorizer For HTTP APIs, valid values are NONE for open access,
+	// or JWT for using JSON Web Tokens.
 	AuthorizationType AuthorizationType `locationName:"authorizationType" type:"string" enum:"true"`
 
-	// The identifier of the Authorizer resource to be associated with this route,
-	// if the authorizationType is CUSTOM . The authorizer identifier is generated
-	// by API Gateway when you created the authorizer.
+	// The identifier of the Authorizer resource to be associated with this route.
+	// The authorizer identifier is generated by API Gateway when you created the
+	// authorizer.
 	AuthorizerId *string `locationName:"authorizerId" type:"string"`
 
-	// The model selection expression for the route.
+	// The model selection expression for the route. Supported only for WebSocket
+	// APIs.
 	ModelSelectionExpression *string `locationName:"modelSelectionExpression" type:"string"`
 
 	// The operation name for the route.
 	OperationName *string `locationName:"operationName" type:"string"`
 
-	// The request models for the route.
+	// The request models for the route. Supported only for WebSocket APIs.
 	RequestModels map[string]string `locationName:"requestModels" type:"map"`
 
-	// The request parameters for the route.
+	// The request parameters for the route. Supported only for WebSocket APIs.
 	RequestParameters map[string]ParameterConstraints `locationName:"requestParameters" type:"map"`
 
 	// The route ID.
@@ -1074,7 +1307,8 @@ type Route struct {
 	// RouteKey is a required field
 	RouteKey *string `locationName:"routeKey" type:"string" required:"true"`
 
-	// The route response selection expression for the route.
+	// The route response selection expression for the route. Supported only for
+	// WebSocket APIs.
 	RouteResponseSelectionExpression *string `locationName:"routeResponseSelectionExpression" type:"string"`
 
 	// The target for the route.
@@ -1088,6 +1322,12 @@ func (s Route) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Route) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApiGatewayManaged != nil {
+		v := *s.ApiGatewayManaged
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "apiGatewayManaged", protocol.BoolValue(v), metadata)
+	}
 	if s.ApiKeyRequired != nil {
 		v := *s.ApiKeyRequired
 
@@ -1185,7 +1425,8 @@ func (s Route) MarshalFields(e protocol.FieldEncoder) error {
 type RouteResponse struct {
 	_ struct{} `type:"structure"`
 
-	// Represents the model selection expression of a route response.
+	// Represents the model selection expression of a route response. Supported
+	// only for WebSocket APIs.
 	ModelSelectionExpression *string `locationName:"modelSelectionExpression" type:"string"`
 
 	// Represents the response models of a route response.
@@ -1261,20 +1502,21 @@ type RouteSettings struct {
 
 	// Specifies whether (true) or not (false) data trace logging is enabled for
 	// this route. This property affects the log entries pushed to Amazon CloudWatch
-	// Logs.
+	// Logs. Supported only for WebSocket APIs.
 	DataTraceEnabled *bool `locationName:"dataTraceEnabled" type:"boolean"`
 
 	// Specifies whether detailed metrics are enabled.
 	DetailedMetricsEnabled *bool `locationName:"detailedMetricsEnabled" type:"boolean"`
 
-	// Specifies the logging level for this route: DEBUG, INFO, or WARN. This property
-	// affects the log entries pushed to Amazon CloudWatch Logs.
+	// Specifies the logging level for this route: INFO, ERROR, or OFF. This property
+	// affects the log entries pushed to Amazon CloudWatch Logs. Supported only
+	// for WebSocket APIs.
 	LoggingLevel LoggingLevel `locationName:"loggingLevel" type:"string" enum:"true"`
 
-	// Specifies the throttling burst limit.
+	// Specifies the throttling burst limit. Supported only for WebSocket APIs.
 	ThrottlingBurstLimit *int64 `locationName:"throttlingBurstLimit" type:"integer"`
 
-	// Specifies the throttling rate limit.
+	// Specifies the throttling rate limit. Supported only for WebSocket APIs.
 	ThrottlingRateLimit *float64 `locationName:"throttlingRateLimit" type:"double"`
 }
 
@@ -1325,7 +1567,17 @@ type Stage struct {
 	// Settings for logging access in this stage.
 	AccessLogSettings *AccessLogSettings `locationName:"accessLogSettings" type:"structure"`
 
-	// The identifier of a client certificate for a Stage.
+	// Specifies whether a stage is managed by API Gateway. If you created an API
+	// using quick create, the $default stage is managed by API Gateway. You can't
+	// modify the $default stage.
+	ApiGatewayManaged *bool `locationName:"apiGatewayManaged" type:"boolean"`
+
+	// Specifies whether updates to an API automatically trigger a new deployment.
+	// The default value is false.
+	AutoDeploy *bool `locationName:"autoDeploy" type:"boolean"`
+
+	// The identifier of a client certificate for a Stage. Supported only for WebSocket
+	// APIs.
 	ClientCertificateId *string `locationName:"clientCertificateId" type:"string"`
 
 	// The timestamp when the stage was created.
@@ -1334,16 +1586,21 @@ type Stage struct {
 	// Default route settings for the stage.
 	DefaultRouteSettings *RouteSettings `locationName:"defaultRouteSettings" type:"structure"`
 
-	// The identifier of the Deployment that the Stage is associated with.
+	// The identifier of the Deployment that the Stage is associated with. Can't
+	// be updated if autoDeploy is enabled.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 
 	// The description of the stage.
 	Description *string `locationName:"description" type:"string"`
 
+	// Describes the status of the last deployment of a stage. Supported only for
+	// stages with autoDeploy enabled.
+	LastDeploymentStatusMessage *string `locationName:"lastDeploymentStatusMessage" type:"string"`
+
 	// The timestamp when the stage was last updated.
 	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp" timestampFormat:"iso8601"`
 
-	// Route settings for the stage.
+	// Route settings for the stage, by routeKey.
 	RouteSettings map[string]RouteSettings `locationName:"routeSettings" type:"map"`
 
 	// The name of the stage.
@@ -1353,10 +1610,10 @@ type Stage struct {
 
 	// A map that defines the stage variables for a stage resource. Variable names
 	// can have alphanumeric and underscore characters, and the values must match
-	// [A-Za-z0-9-._~:/?#&=,]+.
+	// [A-Za-z0-9-._~:/?#&=,]+. Supported only for WebSocket APIs.
 	StageVariables map[string]string `locationName:"stageVariables" type:"map"`
 
-	// Tags for the Stage.
+	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
@@ -1372,6 +1629,18 @@ func (s Stage) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "accessLogSettings", v, metadata)
+	}
+	if s.ApiGatewayManaged != nil {
+		v := *s.ApiGatewayManaged
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "apiGatewayManaged", protocol.BoolValue(v), metadata)
+	}
+	if s.AutoDeploy != nil {
+		v := *s.AutoDeploy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "autoDeploy", protocol.BoolValue(v), metadata)
 	}
 	if s.ClientCertificateId != nil {
 		v := *s.ClientCertificateId
@@ -1403,6 +1672,12 @@ func (s Stage) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastDeploymentStatusMessage != nil {
+		v := *s.LastDeploymentStatusMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastDeploymentStatusMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastUpdatedDate != nil {
 		v := *s.LastUpdatedDate

@@ -18,7 +18,8 @@ type ListBotsInput struct {
 	// AccountId is a required field
 	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
 
-	// The maximum number of results to return in a single call. Default is 10.
+	// The maximum number of results to return in a single call. The default is
+	// 10.
 	MaxResults *int64 `location:"querystring" locationName:"max-results" min:"1" type:"integer"`
 
 	// The token to use to retrieve the next page of results.
@@ -131,6 +132,12 @@ func (c *Client) ListBotsRequest(input *ListBotsInput) ListBotsRequest {
 		Name:       opListBots,
 		HTTPMethod: "GET",
 		HTTPPath:   "/accounts/{accountId}/bots",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -163,6 +170,53 @@ func (r ListBotsRequest) Send(ctx context.Context) (*ListBotsResponse, error) {
 	}
 
 	return resp, nil
+}
+
+// NewListBotsRequestPaginator returns a paginator for ListBots.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListBotsRequest(input)
+//   p := chime.NewListBotsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListBotsPaginator(req ListBotsRequest) ListBotsPaginator {
+	return ListBotsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListBotsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListBotsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListBotsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListBotsPaginator) CurrentPage() *ListBotsOutput {
+	return p.Pager.CurrentPage().(*ListBotsOutput)
 }
 
 // ListBotsResponse is the response type for the

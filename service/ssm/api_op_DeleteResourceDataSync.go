@@ -16,6 +16,9 @@ type DeleteResourceDataSyncInput struct {
 	//
 	// SyncName is a required field
 	SyncName *string `min:"1" type:"string" required:"true"`
+
+	// Specify the type of resource data sync to delete.
+	SyncType *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -32,6 +35,9 @@ func (s *DeleteResourceDataSyncInput) Validate() error {
 	}
 	if s.SyncName != nil && len(*s.SyncName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SyncName", 1))
+	}
+	if s.SyncType != nil && len(*s.SyncType) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SyncType", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -55,9 +61,8 @@ const opDeleteResourceDataSync = "DeleteResourceDataSync"
 // Amazon Simple Systems Manager (SSM).
 //
 // Deletes a Resource Data Sync configuration. After the configuration is deleted,
-// changes to inventory data on managed instances are no longer synced with
-// the target Amazon S3 bucket. Deleting a sync configuration does not delete
-// data in the target Amazon S3 bucket.
+// changes to data on managed instances are no longer synced to or from the
+// target. Deleting a sync configuration does not delete data.
 //
 //    // Example sending a request using DeleteResourceDataSyncRequest.
 //    req := client.DeleteResourceDataSyncRequest(params)

@@ -115,7 +115,7 @@ type CreateGroupMembershipOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -148,19 +148,6 @@ const opCreateGroupMembership = "CreateGroupMembership"
 // Amazon QuickSight.
 //
 // Adds an Amazon QuickSight user to an Amazon QuickSight group.
-//
-// The permissions resource is arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name> .
-//
-// The condition resource is the user name.
-//
-// The condition key is quicksight:UserName.
-//
-// The response is the group member object.
-//
-// CLI Sample:
-//
-// aws quicksight create-group-membership --aws-account-id=111122223333 --namespace=default
-// --group-name=Sales --member-name=Pat
 //
 //    // Example sending a request using CreateGroupMembershipRequest.
 //    req := client.CreateGroupMembershipRequest(params)

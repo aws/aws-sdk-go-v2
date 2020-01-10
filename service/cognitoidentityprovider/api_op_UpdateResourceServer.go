@@ -96,6 +96,9 @@ const opUpdateResourceServer = "UpdateResourceServer"
 //
 // Updates the name and scopes of resource server. All other fields are read-only.
 //
+// If you don't provide a value for an attribute, it will be set to the default
+// value.
+//
 //    // Example sending a request using UpdateResourceServerRequest.
 //    req := client.UpdateResourceServerRequest(params)
 //    resp, err := req.Send(context.TODO())

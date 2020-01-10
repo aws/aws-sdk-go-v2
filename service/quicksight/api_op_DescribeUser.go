@@ -94,7 +94,7 @@ type DescribeUserOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
 	// The user name.
@@ -130,16 +130,6 @@ const opDescribeUser = "DescribeUser"
 // Amazon QuickSight.
 //
 // Returns information about a user, given the user name.
-//
-// The permission resource is arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name> .
-//
-// The response is a user object that contains the user's Amazon Resource Name
-// (ARN), AWS Identity and Access Management (IAM) role, and email address.
-//
-// CLI Sample:
-//
-// aws quicksight describe-user --aws-account-id=111122223333 --namespace=default
-// --user-name=Pat
 //
 //    // Example sending a request using DescribeUserRequest.
 //    req := client.DescribeUserRequest(params)

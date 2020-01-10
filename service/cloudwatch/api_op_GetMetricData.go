@@ -150,11 +150,11 @@ const opGetMetricData = "GetMetricData"
 // Amazon CloudWatch.
 //
 // You can use the GetMetricData API to retrieve as many as 100 different metrics
-// in a single request, with a total of as many as 100,800 datapoints. You can
-// also optionally perform math expressions on the values of the returned statistics,
-// to create new time series that represent new insights into your data. For
-// example, using Lambda metrics, you could divide the Errors metric by the
-// Invocations metric to get an error rate time series. For more information
+// in a single request, with a total of as many as 100,800 data points. You
+// can also optionally perform math expressions on the values of the returned
+// statistics, to create new time series that represent new insights into your
+// data. For example, using Lambda metrics, you could divide the Errors metric
+// by the Invocations metric to get an error rate time series. For more information
 // about metric math expressions, see Metric Math Syntax and Functions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax)
 // in the Amazon CloudWatch User Guide.
 //

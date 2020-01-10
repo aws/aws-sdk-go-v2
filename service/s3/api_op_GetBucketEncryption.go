@@ -86,7 +86,21 @@ const opGetBucketEncryption = "GetBucketEncryption"
 // GetBucketEncryptionRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns the server-side encryption configuration of a bucket.
+// Returns the default encryption configuration for an Amazon S3 bucket. For
+// information about the Amazon S3 default encryption feature, see Amazon S3
+// Default Bucket Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html).
+//
+// To use this operation, you must have permission to perform the s3:GetEncryptionConfiguration
+// action. The bucket owner has this permission by default. The bucket owner
+// can grant this permission to others. For more information about permissions,
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+//
+// The following operations are related to GetBucketEncryption:
+//
+//    * PutBucketEncryption
+//
+//    * DeleteBucketEncryption
 //
 //    // Example sending a request using GetBucketEncryptionRequest.
 //    req := client.GetBucketEncryptionRequest(params)

@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Cost Explorer.
 //    func myFunc(svc costexploreriface.ClientAPI) bool {
-//        // Make svc.GetCostAndUsage request
+//        // Make svc.CreateCostCategoryDefinition request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        costexploreriface.ClientPI
 //    }
-//    func (m *mockClientClient) GetCostAndUsage(input *costexplorer.GetCostAndUsageInput) (*costexplorer.GetCostAndUsageOutput, error) {
+//    func (m *mockClientClient) CreateCostCategoryDefinition(input *costexplorer.CreateCostCategoryDefinitionInput) (*costexplorer.CreateCostCategoryDefinitionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,7 +61,15 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	CreateCostCategoryDefinitionRequest(*costexplorer.CreateCostCategoryDefinitionInput) costexplorer.CreateCostCategoryDefinitionRequest
+
+	DeleteCostCategoryDefinitionRequest(*costexplorer.DeleteCostCategoryDefinitionInput) costexplorer.DeleteCostCategoryDefinitionRequest
+
+	DescribeCostCategoryDefinitionRequest(*costexplorer.DescribeCostCategoryDefinitionInput) costexplorer.DescribeCostCategoryDefinitionRequest
+
 	GetCostAndUsageRequest(*costexplorer.GetCostAndUsageInput) costexplorer.GetCostAndUsageRequest
+
+	GetCostAndUsageWithResourcesRequest(*costexplorer.GetCostAndUsageWithResourcesInput) costexplorer.GetCostAndUsageWithResourcesRequest
 
 	GetCostForecastRequest(*costexplorer.GetCostForecastInput) costexplorer.GetCostForecastRequest
 
@@ -75,9 +83,21 @@ type ClientAPI interface {
 
 	GetRightsizingRecommendationRequest(*costexplorer.GetRightsizingRecommendationInput) costexplorer.GetRightsizingRecommendationRequest
 
+	GetSavingsPlansCoverageRequest(*costexplorer.GetSavingsPlansCoverageInput) costexplorer.GetSavingsPlansCoverageRequest
+
+	GetSavingsPlansPurchaseRecommendationRequest(*costexplorer.GetSavingsPlansPurchaseRecommendationInput) costexplorer.GetSavingsPlansPurchaseRecommendationRequest
+
+	GetSavingsPlansUtilizationRequest(*costexplorer.GetSavingsPlansUtilizationInput) costexplorer.GetSavingsPlansUtilizationRequest
+
+	GetSavingsPlansUtilizationDetailsRequest(*costexplorer.GetSavingsPlansUtilizationDetailsInput) costexplorer.GetSavingsPlansUtilizationDetailsRequest
+
 	GetTagsRequest(*costexplorer.GetTagsInput) costexplorer.GetTagsRequest
 
 	GetUsageForecastRequest(*costexplorer.GetUsageForecastInput) costexplorer.GetUsageForecastRequest
+
+	ListCostCategoryDefinitionsRequest(*costexplorer.ListCostCategoryDefinitionsInput) costexplorer.ListCostCategoryDefinitionsRequest
+
+	UpdateCostCategoryDefinitionRequest(*costexplorer.UpdateCostCategoryDefinitionInput) costexplorer.UpdateCostCategoryDefinitionRequest
 }
 
 var _ ClientAPI = (*costexplorer.Client)(nil)

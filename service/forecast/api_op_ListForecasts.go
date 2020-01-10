@@ -15,20 +15,25 @@ type ListForecastsInput struct {
 
 	// An array of filters. For each filter, you provide a condition and a match
 	// statement. The condition is either IS or IS_NOT, which specifies whether
-	// to include or exclude, respectively, from the list, the predictors that match
-	// the statement. The match statement consists of a key and a value. In this
-	// release, Name is the only valid key, which filters on the ForecastName property.
+	// to include or exclude the forecasts that match the statement from the list,
+	// respectively. The match statement consists of a key and a value.
 	//
-	//    * Condition - IS or IS_NOT
+	// Filter properties
 	//
-	//    * Key - Name
+	//    * Condition - The condition to apply. Valid values are IS and IS_NOT.
+	//    To include the forecasts that match the statement, specify IS. To exclude
+	//    matching forecasts, specify IS_NOT.
 	//
-	//    * Value - the value to match
+	//    * Key - The name of the parameter to filter on. Valid values are DatasetGroupArn,
+	//    PredictorArn, and Status.
 	//
-	// For example, to list all forecasts named my_forecast, you would specify:
+	//    * Value - The value to match.
 	//
-	// "Filters": [ { "Condition": "IS", "Key": "Name", "Value": "my_forecast" }
-	// ]
+	// For example, to list all forecasts whose status is not ACTIVE, you would
+	// specify:
+	//
+	// "Filters": [ { "Condition": "IS_NOT", "Key": "Status", "Value": "ACTIVE"
+	// } ]
 	Filters []Filter `type:"list"`
 
 	// The number of items to return in the response.
@@ -90,9 +95,9 @@ const opListForecasts = "ListForecasts"
 // Amazon Forecast Service.
 //
 // Returns a list of forecasts created using the CreateForecast operation. For
-// each forecast, a summary of its properties, including its Amazon Resource
-// Name (ARN), is returned. You can retrieve the complete set of properties
-// by using the ARN with the DescribeForecast operation. The list can be filtered
+// each forecast, this operation returns a summary of its properties, including
+// its Amazon Resource Name (ARN). To retrieve the complete set of properties,
+// specify the ARN with the DescribeForecast operation. You can filter the list
 // using an array of Filter objects.
 //
 //    // Example sending a request using ListForecastsRequest.

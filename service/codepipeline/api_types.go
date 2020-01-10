@@ -190,6 +190,10 @@ type ActionDeclaration struct {
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
+	// The variable namespace associated with the action. All variables produced
+	// as output by this action fall under this namespace.
+	Namespace *string `locationName:"namespace" min:"1" type:"string"`
+
 	// The name or ID of the result of the action declaration, such as a test or
 	// build artifact.
 	OutputArtifacts []OutputArtifact `locationName:"outputArtifacts" type:"list"`
@@ -223,6 +227,9 @@ func (s *ActionDeclaration) Validate() error {
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+	if s.Namespace != nil && len(*s.Namespace) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Namespace", 1))
 	}
 	if s.Region != nil && len(*s.Region) < 4 {
 		invalidParams.Add(aws.NewErrParamMinLen("Region", 4))
@@ -367,8 +374,16 @@ type ActionExecutionInput struct {
 	// Details of input artifacts of the action that correspond to the action execution.
 	InputArtifacts []ArtifactDetail `locationName:"inputArtifacts" type:"list"`
 
+	// The variable namespace associated with the action. All variables produced
+	// as output by this action fall under this namespace.
+	Namespace *string `locationName:"namespace" min:"1" type:"string"`
+
 	// The AWS Region for the action, such as us-east-1.
 	Region *string `locationName:"region" min:"4" type:"string"`
+
+	// Configuration data for an action execution with all variable references replaced
+	// with their real values for the execution.
+	ResolvedConfiguration map[string]string `locationName:"resolvedConfiguration" type:"map"`
 
 	// The ARN of the IAM service role that performs the declared action. This is
 	// assumed through the roleArn for the pipeline.
@@ -390,6 +405,10 @@ type ActionExecutionOutput struct {
 
 	// Details of output artifacts of the action that correspond to the action execution.
 	OutputArtifacts []ArtifactDetail `locationName:"outputArtifacts" type:"list"`
+
+	// The outputVariables field shows the key-value pairs that were output as part
+	// of that execution.
+	OutputVariables map[string]string `locationName:"outputVariables" type:"map"`
 }
 
 // String returns the string representation

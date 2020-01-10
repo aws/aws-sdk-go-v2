@@ -14,6 +14,8 @@ import (
 type DeleteBucketPolicyInput struct {
 	_ struct{} `type:"structure"`
 
+	// The bucket name.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -75,7 +77,29 @@ const opDeleteBucketPolicy = "DeleteBucketPolicy"
 // DeleteBucketPolicyRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Deletes the policy from the bucket.
+// This implementation of the DELETE operation uses the policy subresource to
+// delete the policy of a specified bucket. If you are using an identity other
+// than the root user of the AWS account that owns the bucket, the calling identity
+// must have the DeleteBucketPolicy permissions on the specified bucket and
+// belong to the bucket owner's account to use this operation.
+//
+// If you don't have DeleteBucketPolicy permissions, Amazon S3 returns a 403
+// Access Denied error. If you have the correct permissions, but you're not
+// using an identity that belongs to the bucket owner's account, Amazon S3 returns
+// a 405 Method Not Allowed error.
+//
+// As a security precaution, the root user of the AWS account that owns a bucket
+// can always use this operation, even if the policy explicitly denies the root
+// user the ability to perform this action.
+//
+// For more information about bucket policies, see Using Bucket Policies and
+// UserPolicies (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html).
+//
+// The following operations are related to DeleteBucketPolicy
+//
+//    * CreateBucket
+//
+//    * DeleteObject
 //
 //    // Example sending a request using DeleteBucketPolicyRequest.
 //    req := client.DeleteBucketPolicyRequest(params)

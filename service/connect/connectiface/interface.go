@@ -79,17 +79,33 @@ type ClientAPI interface {
 
 	GetMetricDataRequest(*connect.GetMetricDataInput) connect.GetMetricDataRequest
 
+	ListContactFlowsRequest(*connect.ListContactFlowsInput) connect.ListContactFlowsRequest
+
+	ListHoursOfOperationsRequest(*connect.ListHoursOfOperationsInput) connect.ListHoursOfOperationsRequest
+
+	ListPhoneNumbersRequest(*connect.ListPhoneNumbersInput) connect.ListPhoneNumbersRequest
+
+	ListQueuesRequest(*connect.ListQueuesInput) connect.ListQueuesRequest
+
 	ListRoutingProfilesRequest(*connect.ListRoutingProfilesInput) connect.ListRoutingProfilesRequest
 
 	ListSecurityProfilesRequest(*connect.ListSecurityProfilesInput) connect.ListSecurityProfilesRequest
+
+	ListTagsForResourceRequest(*connect.ListTagsForResourceInput) connect.ListTagsForResourceRequest
 
 	ListUserHierarchyGroupsRequest(*connect.ListUserHierarchyGroupsInput) connect.ListUserHierarchyGroupsRequest
 
 	ListUsersRequest(*connect.ListUsersInput) connect.ListUsersRequest
 
+	StartChatContactRequest(*connect.StartChatContactInput) connect.StartChatContactRequest
+
 	StartOutboundVoiceContactRequest(*connect.StartOutboundVoiceContactInput) connect.StartOutboundVoiceContactRequest
 
 	StopContactRequest(*connect.StopContactInput) connect.StopContactRequest
+
+	TagResourceRequest(*connect.TagResourceInput) connect.TagResourceRequest
+
+	UntagResourceRequest(*connect.UntagResourceInput) connect.UntagResourceRequest
 
 	UpdateContactAttributesRequest(*connect.UpdateContactAttributesInput) connect.UpdateContactAttributesRequest
 

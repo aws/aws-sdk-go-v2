@@ -63,7 +63,7 @@ const opGetIndexingConfiguration = "GetIndexingConfiguration"
 // GetIndexingConfigurationRequest returns a request value for making API operation for
 // AWS IoT.
 //
-// Gets the search configuration.
+// Gets the indexing configuration.
 //
 //    // Example sending a request using GetIndexingConfigurationRequest.
 //    req := client.GetIndexingConfigurationRequest(params)

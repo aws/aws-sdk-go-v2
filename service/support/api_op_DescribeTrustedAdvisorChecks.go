@@ -63,7 +63,8 @@ const opDescribeTrustedAdvisorChecks = "DescribeTrustedAdvisorChecks"
 // Returns information about all available Trusted Advisor checks, including
 // name, ID, category, description, and metadata. You must specify a language
 // code; English ("en") and Japanese ("ja") are currently supported. The response
-// contains a TrustedAdvisorCheckDescription for each check.
+// contains a TrustedAdvisorCheckDescription for each check. The region must
+// be set to us-east-1.
 //
 //    // Example sending a request using DescribeTrustedAdvisorChecksRequest.
 //    req := client.DescribeTrustedAdvisorChecksRequest(params)

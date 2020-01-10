@@ -96,6 +96,12 @@ func (c *Client) ListModelPackagesRequest(input *ListModelPackagesInput) ListMod
 		Name:       opListModelPackages,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -128,6 +134,53 @@ func (r ListModelPackagesRequest) Send(ctx context.Context) (*ListModelPackagesR
 	}
 
 	return resp, nil
+}
+
+// NewListModelPackagesRequestPaginator returns a paginator for ListModelPackages.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListModelPackagesRequest(input)
+//   p := sagemaker.NewListModelPackagesRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListModelPackagesPaginator(req ListModelPackagesRequest) ListModelPackagesPaginator {
+	return ListModelPackagesPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListModelPackagesInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListModelPackagesPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListModelPackagesPaginator struct {
+	aws.Pager
+}
+
+func (p *ListModelPackagesPaginator) CurrentPage() *ListModelPackagesOutput {
+	return p.Pager.CurrentPage().(*ListModelPackagesOutput)
 }
 
 // ListModelPackagesResponse is the response type for the

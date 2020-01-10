@@ -59,15 +59,15 @@ type GetTrailStatusOutput struct {
 	// CloudWatch Logs.
 	LatestCloudWatchLogsDeliveryTime *time.Time `type:"timestamp"`
 
-	// This field is deprecated.
+	// This field is no longer in use.
 	LatestDeliveryAttemptSucceeded *string `type:"string"`
 
-	// This field is deprecated.
+	// This field is no longer in use.
 	LatestDeliveryAttemptTime *string `type:"string"`
 
 	// Displays any Amazon S3 error that CloudTrail encountered when attempting
 	// to deliver log files to the designated bucket. For more information see the
-	// topic Error Responses (http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)
+	// topic Error Responses (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)
 	// in the Amazon S3 API Reference.
 	//
 	// This error occurs only when there is a problem with the destination S3 bucket
@@ -82,7 +82,7 @@ type GetTrailStatusOutput struct {
 
 	// Displays any Amazon S3 error that CloudTrail encountered when attempting
 	// to deliver a digest file to the designated bucket. For more information see
-	// the topic Error Responses (http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)
+	// the topic Error Responses (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)
 	// in the Amazon S3 API Reference.
 	//
 	// This error occurs only when there is a problem with the destination S3 bucket
@@ -95,15 +95,15 @@ type GetTrailStatusOutput struct {
 	// to an account's Amazon S3 bucket.
 	LatestDigestDeliveryTime *time.Time `type:"timestamp"`
 
-	// This field is deprecated.
+	// This field is no longer in use.
 	LatestNotificationAttemptSucceeded *string `type:"string"`
 
-	// This field is deprecated.
+	// This field is no longer in use.
 	LatestNotificationAttemptTime *string `type:"string"`
 
 	// Displays any Amazon SNS error that CloudTrail encountered when attempting
 	// to send a notification. For more information about Amazon SNS errors, see
-	// the Amazon SNS Developer Guide (http://docs.aws.amazon.com/sns/latest/dg/welcome.html).
+	// the Amazon SNS Developer Guide (https://docs.aws.amazon.com/sns/latest/dg/welcome.html).
 	LatestNotificationError *string `type:"string"`
 
 	// Specifies the date and time of the most recent Amazon SNS notification that
@@ -118,10 +118,10 @@ type GetTrailStatusOutput struct {
 	// API calls for an AWS account.
 	StopLoggingTime *time.Time `type:"timestamp"`
 
-	// This field is deprecated.
+	// This field is no longer in use.
 	TimeLoggingStarted *string `type:"string"`
 
-	// This field is deprecated.
+	// This field is no longer in use.
 	TimeLoggingStopped *string `type:"string"`
 }
 

@@ -13,45 +13,43 @@ import (
 type GetDashboardEmbedUrlInput struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID that contains the dashboard you are embedding.
+	// The ID for the AWS account that contains the dashboard that you're embedding.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
-	// The ID for the dashboard, also added to IAM policy
+	// The ID for the dashboard, also added to the IAM policy.
 	//
 	// DashboardId is a required field
-	DashboardId *string `location:"uri" locationName:"DashboardId" type:"string" required:"true"`
+	DashboardId *string `location:"uri" locationName:"DashboardId" min:"1" type:"string" required:"true"`
 
-	// The authentication method the user uses to sign in (IAM only).
+	// The authentication method that the user uses to sign in.
 	//
 	// IdentityType is a required field
 	IdentityType IdentityType `location:"querystring" locationName:"creds-type" type:"string" required:"true" enum:"true"`
 
-	// Remove the reset button on embedded dashboard. The default is FALSE, which
-	// allows the reset button.
+	// Remove the reset button on the embedded dashboard. The default is FALSE,
+	// which enables the reset button.
 	ResetDisabled *bool `location:"querystring" locationName:"reset-disabled" type:"boolean"`
 
-	// How many minutes the session is valid. The session lifetime must be between
-	// 15 and 600 minutes.
+	// How many minutes the session is valid. The session lifetime must be 15-600
+	// minutes.
 	SessionLifetimeInMinutes *int64 `location:"querystring" locationName:"session-lifetime" min:"15" type:"long"`
 
-	// Remove the undo/redo button on embedded dashboard. The default is FALSE,
+	// Remove the undo/redo button on the embedded dashboard. The default is FALSE,
 	// which enables the undo/redo button.
 	UndoRedoDisabled *bool `location:"querystring" locationName:"undo-redo-disabled" type:"boolean"`
 
-	// The Amazon QuickSight user's ARN, for use with QUICKSIGHT identity type.
-	// You can use this for any of the following:
+	// The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT
+	// identity type. You can use this for any Amazon QuickSight users in your account
+	// (readers, authors, or admins) authenticated as one of the following:
 	//
-	//    * Amazon QuickSight users in your account (readers, authors, or admins)
+	//    * Active Directory (AD) users or group members
 	//
-	//    * AD users
+	//    * Invited nonfederated users
 	//
-	//    * Invited non-federated users
-	//
-	//    * Federated IAM users
-	//
-	//    * Federated IAM role-based sessions
+	//    * IAM users and IAM role-based sessions authenticated through Federated
+	//    Single Sign-On using SAML, OpenID Connect, or IAM federation.
 	UserArn *string `location:"querystring" locationName:"user-arn" type:"string"`
 }
 
@@ -73,6 +71,9 @@ func (s *GetDashboardEmbedUrlInput) Validate() error {
 
 	if s.DashboardId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DashboardId"))
+	}
+	if s.DashboardId != nil && len(*s.DashboardId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DashboardId", 1))
 	}
 	if len(s.IdentityType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityType"))
@@ -139,16 +140,16 @@ func (s GetDashboardEmbedUrlInput) MarshalFields(e protocol.FieldEncoder) error 
 type GetDashboardEmbedUrlOutput struct {
 	_ struct{} `type:"structure"`
 
-	// URL that you can put into your server-side webpage to embed your dashboard.
+	// An URL that you can put into your server-side webpage to embed your dashboard.
 	// This URL is valid for 5 minutes, and the resulting session is valid for 10
-	// hours. The API provides the URL with an auth_code that enables a single-signon
-	// session.
+	// hours. The API provides the URL with an auth_code value that enables a single
+	// sign-on session.
 	EmbedUrl *string `type:"string" sensitive:"true"`
 
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -180,33 +181,15 @@ const opGetDashboardEmbedUrl = "GetDashboardEmbedUrl"
 // GetDashboardEmbedUrlRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Generates a server-side embeddable URL and authorization code. Before this
-// can work properly, first you need to configure the dashboards and user permissions.
-// For more information, see Embedding Amazon QuickSight Dashboards (https://docs.aws.amazon.com/en_us/quicksight/latest/user/embedding.html).
+// Generates a server-side embeddable URL and authorization code. For this process
+// to work properly, first configure the dashboards and user permissions. For
+// more information, see Embedding Amazon QuickSight Dashboards (https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html)
+// in the Amazon QuickSight User Guide or Embedding Amazon QuickSight Dashboards
+// (https://docs.aws.amazon.com/quicksight/latest/APIReference/qs-dev-embedded-dashboards.html)
+// in the Amazon QuickSight API Reference.
 //
 // Currently, you can use GetDashboardEmbedURL only from the server, not from
 // the user’s browser.
-//
-// CLI Sample:
-//
-// Assume the role with permissions enabled for actions: quickSight:RegisterUser
-// and quicksight:GetDashboardEmbedURL. You can use assume-role, assume-role-with-web-identity,
-// or assume-role-with-saml.
-//
-// aws sts assume-role --role-arn "arn:aws:iam::111122223333:role/embedding_quicksight_dashboard_role"
-// --role-session-name embeddingsession
-//
-// If the user does not exist in QuickSight, register the user:
-//
-// aws quicksight register-user --aws-account-id 111122223333 --namespace default
-// --identity-type IAM --iam-arn "arn:aws:iam::111122223333:role/embedding_quicksight_dashboard_role"
-// --user-role READER --session-name "embeddingsession" --email user123@example.com
-// --region us-east-1
-//
-// Get the URL for the embedded dashboard
-//
-// aws quicksight get-dashboard-embed-url --aws-account-id 111122223333 --dashboard-id
-// 1a1ac2b2-3fc3-4b44-5e5d-c6db6778df89 --identity-type IAM
 //
 //    // Example sending a request using GetDashboardEmbedUrlRequest.
 //    req := client.GetDashboardEmbedUrlRequest(params)

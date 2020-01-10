@@ -175,6 +175,8 @@ type ClientAPI interface {
 
 	GetAutomationExecutionRequest(*ssm.GetAutomationExecutionInput) ssm.GetAutomationExecutionRequest
 
+	GetCalendarStateRequest(*ssm.GetCalendarStateInput) ssm.GetCalendarStateRequest
+
 	GetCommandInvocationRequest(*ssm.GetCommandInvocationInput) ssm.GetCommandInvocationRequest
 
 	GetConnectionStatusRequest(*ssm.GetConnectionStatusInput) ssm.GetConnectionStatusRequest
@@ -298,6 +300,8 @@ type ClientAPI interface {
 	UpdateOpsItemRequest(*ssm.UpdateOpsItemInput) ssm.UpdateOpsItemRequest
 
 	UpdatePatchBaselineRequest(*ssm.UpdatePatchBaselineInput) ssm.UpdatePatchBaselineRequest
+
+	UpdateResourceDataSyncRequest(*ssm.UpdateResourceDataSyncInput) ssm.UpdateResourceDataSyncRequest
 
 	UpdateServiceSettingRequest(*ssm.UpdateServiceSettingInput) ssm.UpdateServiceSettingRequest
 }

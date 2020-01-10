@@ -11,11 +11,12 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // A Block represents items that are recognized in a document within a group
-// of pixels close to each other. The information returned in a Block depends
-// on the type of operation. In document-text detection (for example DetectDocumentText),
-// you get information about the detected words and lines of text. In text analysis
-// (for example AnalyzeDocument), you can also get information about the fields,
-// tables and selection elements that are detected in the document.
+// of pixels close to each other. The information returned in a Block object
+// depends on the type of operation. In text detection for documents (for example
+// DetectDocumentText), you get information about the detected words and lines
+// of text. In text analysis (for example AnalyzeDocument), you can also get
+// information about the fields, tables, and selection elements that are detected
+// in the document.
 //
 // An array of Block objects is returned by both synchronous and asynchronous
 // operations. In synchronous operations, such as DetectDocumentText, the array
@@ -26,7 +27,7 @@ var _ = awsutil.Prettify
 type Block struct {
 	_ struct{} `type:"structure"`
 
-	// The type of text that's recognized in a block. In text-detection operations,
+	// The type of text item that's recognized. In operations for text detection,
 	// the following types are returned:
 	//
 	//    * PAGE - Contains a list of the LINE Block objects that are detected on
@@ -35,46 +36,46 @@ type Block struct {
 	//    * WORD - A word detected on a document page. A word is one or more ISO
 	//    basic Latin script characters that aren't separated by spaces.
 	//
-	//    * LINE - A string of tab-delimited, contiguous words that's detected on
-	//    a document page.
+	//    * LINE - A string of tab-delimited, contiguous words that are detected
+	//    on a document page.
 	//
 	// In text analysis operations, the following types are returned:
 	//
 	//    * PAGE - Contains a list of child Block objects that are detected on a
 	//    document page.
 	//
-	//    * KEY_VALUE_SET - Stores the KEY and VALUE Block objects for a field that's
-	//    detected on a document page. Use the EntityType field to determine if
-	//    a KEY_VALUE_SET object is a KEY Block object or a VALUE Block object.
+	//    * KEY_VALUE_SET - Stores the KEY and VALUE Block objects for linked text
+	//    that's detected on a document page. Use the EntityType field to determine
+	//    if a KEY_VALUE_SET object is a KEY Block object or a VALUE Block object.
 	//
-	//    * WORD - A word detected on a document page. A word is one or more ISO
-	//    basic Latin script characters that aren't separated by spaces that's detected
+	//    * WORD - A word that's detected on a document page. A word is one or more
+	//    ISO basic Latin script characters that aren't separated by spaces.
+	//
+	//    * LINE - A string of tab-delimited, contiguous words that are detected
 	//    on a document page.
 	//
-	//    * LINE - A string of tab-delimited, contiguous words that's detected on
-	//    a document page.
-	//
-	//    * TABLE - A table that's detected on a document page. A table is any grid-based
-	//    information with 2 or more rows or columns with a cell span of 1 row and
-	//    1 column each.
+	//    * TABLE - A table that's detected on a document page. A table is grid-based
+	//    information with two or more rows or columns, with a cell span of one
+	//    row and one column each.
 	//
 	//    * CELL - A cell within a detected table. The cell is the parent of the
 	//    block that contains the text in the cell.
 	//
-	//    * SELECTION_ELEMENT - A selectable element such as a radio button or checkbox
-	//    that's detected on a document page. Use the value of SelectionStatus to
-	//    determine the status of the selection element.
+	//    * SELECTION_ELEMENT - A selection element such as an option button (radio
+	//    button) or a check box that's detected on a document page. Use the value
+	//    of SelectionStatus to determine the status of the selection element.
 	BlockType BlockType `type:"string" enum:"true"`
 
 	// The column in which a table cell appears. The first column position is 1.
 	// ColumnIndex isn't returned by DetectDocumentText and GetDocumentTextDetection.
 	ColumnIndex *int64 `type:"integer"`
 
-	// The number of columns that a table cell spans. ColumnSpan isn't returned
-	// by DetectDocumentText and GetDocumentTextDetection.
+	// The number of columns that a table cell spans. Currently this value is always
+	// 1, even if the number of columns spanned is greater than 1. ColumnSpan isn't
+	// returned by DetectDocumentText and GetDocumentTextDetection.
 	ColumnSpan *int64 `type:"integer"`
 
-	// The confidence that Amazon Textract has in the accuracy of the recognized
+	// The confidence score that Amazon Textract has in the accuracy of the recognized
 	// text and the accuracy of the geometry points around the recognized text.
 	Confidence *float64 `type:"float"`
 
@@ -96,15 +97,15 @@ type Block struct {
 	// a single operation.
 	Id *string `type:"string"`
 
-	// The page in which a block was detected. Page is returned by asynchronous
-	// operations. Page values greater than 1 are only returned for multi-page documents
-	// that are in PDF format. A scanned image (JPG/PNG), even if it contains multiple
-	// document pages, is always considered to be a single-page document and the
-	// value of Page is always 1. Synchronous operations don't return Page as every
+	// The page on which a block was detected. Page is returned by asynchronous
+	// operations. Page values greater than 1 are only returned for multipage documents
+	// that are in PDF format. A scanned image (JPEG/PNG), even if it contains multiple
+	// document pages, is considered to be a single-page document. The value of
+	// Page is always 1. Synchronous operations don't return Page because every
 	// input document is considered to be a single-page document.
 	Page *int64 `type:"integer"`
 
-	// A list of child blocks of the current block. For example a LINE object has
+	// A list of child blocks of the current block. For example, a LINE object has
 	// child blocks for each WORD block that's part of the line of text. There aren't
 	// Relationship objects in the list for relationships that don't exist, such
 	// as when the current block has no child blocks. The list size can be the following:
@@ -118,11 +119,13 @@ type Block struct {
 	// isn't returned by DetectDocumentText and GetDocumentTextDetection.
 	RowIndex *int64 `type:"integer"`
 
-	// The number of rows that a table spans. RowSpan isn't returned by DetectDocumentText
-	// and GetDocumentTextDetection.
+	// The number of rows that a table cell spans. Currently this value is always
+	// 1, even if the number of rows spanned is greater than 1. RowSpan isn't returned
+	// by DetectDocumentText and GetDocumentTextDetection.
 	RowSpan *int64 `type:"integer"`
 
-	// The selection status of a selectable element such as a radio button or checkbox.
+	// The selection status of a selection element, such as an option button or
+	// check box.
 	SelectionStatus SelectionStatus `type:"string" enum:"true"`
 
 	// The word or line of text that's recognized by Amazon Textract.
@@ -134,10 +137,11 @@ func (s Block) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The bounding box around the recognized text, key, value, table or table cell
-// on a document page. The left (x-coordinate) and top (y-coordinate) are coordinates
-// that represent the top and left sides of the bounding box. Note that the
-// upper-left corner of the image is the origin (0,0).
+// The bounding box around the detected page, text, key-value pair, table, table
+// cell, or selection element on a document page. The left (x-coordinate) and
+// top (y-coordinate) are coordinates that represent the top and left sides
+// of the bounding box. Note that the upper-left corner of the image is the
+// origin (0,0).
 //
 // The top and left values returned are ratios of the overall document page
 // size. For example, if the input image is 700 x 200 pixels, and the top-left
@@ -196,18 +200,18 @@ func (s BoundingBox) String() string {
 type Document struct {
 	_ struct{} `type:"structure"`
 
-	// A blob of base-64 encoded documents bytes. The maximum size of a document
-	// that's provided in a blob of bytes is 5 MB. The document bytes must be in
-	// PNG or JPG format.
+	// A blob of base64-encoded document bytes. The maximum size of a document that's
+	// provided in a blob of bytes is 5 MB. The document bytes must be in PNG or
+	// JPEG format.
 	//
-	// If you are using an AWS SDK to call Amazon Textract, you might not need to
+	// If you're using an AWS SDK to call Amazon Textract, you might not need to
 	// base64-encode image bytes passed using the Bytes field.
 	//
 	// Bytes is automatically base64 encoded/decoded by the SDK.
 	Bytes []byte `min:"1" type:"blob"`
 
 	// Identifies an S3 object as the document source. The maximum size of a document
-	// stored in an S3 bucket is 5 MB.
+	// that's stored in an S3 bucket is 5 MB.
 	S3Object *S3Object `type:"structure"`
 }
 
@@ -237,7 +241,7 @@ func (s *Document) Validate() error {
 // The Amazon S3 bucket that contains the document to be processed. It's used
 // by asynchronous operations such as StartDocumentTextDetection.
 //
-// The input document can be an image file in JPG or PNG format. It can also
+// The input document can be an image file in JPEG or PNG format. It can also
 // be a file in PDF format.
 type DocumentLocation struct {
 	_ struct{} `type:"structure"`
@@ -270,7 +274,7 @@ func (s *DocumentLocation) Validate() error {
 type DocumentMetadata struct {
 	_ struct{} `type:"structure"`
 
-	// The number of pages detected in the document.
+	// The number of pages that are detected in the document.
 	Pages *int64 `type:"integer"`
 }
 
@@ -279,21 +283,105 @@ func (s DocumentMetadata) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Information about where a recognized text, key, value, table, or table cell
-// is located on a document page.
+// Information about where the following items are located on a document page:
+// detected page, text, key-value pairs, tables, table cells, and selection
+// elements.
 type Geometry struct {
 	_ struct{} `type:"structure"`
 
-	// An axis-aligned coarse representation of the location of the recognized text
+	// An axis-aligned coarse representation of the location of the recognized item
 	// on the document page.
 	BoundingBox *BoundingBox `type:"structure"`
 
-	// Within the bounding box, a fine-grained polygon around the recognized text.
+	// Within the bounding box, a fine-grained polygon around the recognized item.
 	Polygon []Point `type:"list"`
 }
 
 // String returns the string representation
 func (s Geometry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Shows the results of the human in the loop evaluation. If there is no HumanLoopArn,
+// the input did not trigger human review.
+type HumanLoopActivationOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Shows the result of condition evaluations, including those conditions which
+	// activated a human review.
+	HumanLoopActivationConditionsEvaluationResults aws.JSONValue `type:"jsonvalue"`
+
+	// Shows if and why human review was needed.
+	HumanLoopActivationReasons []string `min:"1" type:"list"`
+
+	// The Amazon Resource Name (ARN) of the HumanLoop created.
+	HumanLoopArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s HumanLoopActivationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Sets up the human review workflow the document will be sent to if one of
+// the conditions is met. You can also set certain attributes of the image before
+// review.
+type HumanLoopConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Sets attributes of the input data.
+	DataAttributes *HumanLoopDataAttributes `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the flow definition.
+	//
+	// FlowDefinitionArn is a required field
+	FlowDefinitionArn *string `type:"string" required:"true"`
+
+	// The name of the human workflow used for this image. This should be kept unique
+	// within a region.
+	//
+	// HumanLoopName is a required field
+	HumanLoopName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s HumanLoopConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HumanLoopConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HumanLoopConfig"}
+
+	if s.FlowDefinitionArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FlowDefinitionArn"))
+	}
+
+	if s.HumanLoopName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HumanLoopName"))
+	}
+	if s.HumanLoopName != nil && len(*s.HumanLoopName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("HumanLoopName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Allows you to set attributes of the image. Currently, you can declare an
+// image as free of personally identifiable information and adult content.
+type HumanLoopDataAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// Sets whether the input image is free of personally identifiable information
+	// or adult content.
+	ContentClassifiers []ContentClassifier `type:"list"`
+}
+
+// String returns the string representation
+func (s HumanLoopDataAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -345,9 +433,9 @@ func (s *NotificationChannel) Validate() error {
 }
 
 // The X and Y coordinates of a point on a document page. The X and Y values
-// returned are ratios of the overall document page size. For example, if the
-// input document is 700 x 200 and the operation returns X=0.5 and Y=0.25, then
-// the point is at the (350,50) pixel coordinate on the document page.
+// that are returned are ratios of the overall document page size. For example,
+// if the input document is 700 x 200 and the operation returns X=0.5 and Y=0.25,
+// then the point is at the (350,50) pixel coordinate on the document page.
 //
 // An array of Point objects, Polygon, is returned by DetectDocumentText. Polygon
 // represents a fine-grained polygon around detected text. For more information,
@@ -381,7 +469,10 @@ type Relationship struct {
 	Ids []string `type:"list"`
 
 	// The type of relationship that the blocks in the IDs array have with the current
-	// block. The relationship can be VALUE or CHILD.
+	// block. The relationship can be VALUE or CHILD. A relationship of type VALUE
+	// is a list that contains the ID of the VALUE block that's associated with
+	// the KEY of a key-value pair. A relationship of type CHILD is a list of IDs
+	// that identify WORD blocks.
 	Type RelationshipType `type:"string" enum:"true"`
 }
 
@@ -403,8 +494,9 @@ type S3Object struct {
 	// The name of the S3 bucket.
 	Bucket *string `min:"3" type:"string"`
 
-	// The file name of the input document. It must be an image file (.JPG or .PNG
-	// format). Asynchronous operations also support PDF files.
+	// The file name of the input document. Synchronous operations can use image
+	// files that are in JPEG or PNG format. Asynchronous operations also support
+	// PDF format files.
 	Name *string `min:"1" type:"string"`
 
 	// If the bucket has versioning enabled, you can specify the object version.
@@ -436,7 +528,7 @@ func (s *S3Object) Validate() error {
 }
 
 // A warning about an issue that occurred during asynchronous text analysis
-// (StartDocumentAnalysis) or asynchronous document-text detection (StartDocumentTextDetection).
+// (StartDocumentAnalysis) or asynchronous document text detection (StartDocumentTextDetection).
 type Warning struct {
 	_ struct{} `type:"structure"`
 

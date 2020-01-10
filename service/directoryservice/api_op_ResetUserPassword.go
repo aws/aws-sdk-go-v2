@@ -79,6 +79,20 @@ const opResetUserPassword = "ResetUserPassword"
 // Resets the password for any user in your AWS Managed Microsoft AD or Simple
 // AD directory.
 //
+// You can reset the password for any user in your directory with the following
+// exceptions:
+//
+//    * For Simple AD, you cannot reset the password for any user that is a
+//    member of either the Domain Admins or Enterprise Admins group except for
+//    the administrator user.
+//
+//    * For AWS Managed Microsoft AD, you can only reset the password for a
+//    user that is in an OU based off of the NetBIOS name that you typed when
+//    you created your directory. For example, you cannot reset the password
+//    for a user in the AWS Reserved OU. For more information about the OU structure
+//    for an AWS Managed Microsoft AD directory, see What Gets Created (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_what_gets_created.html)
+//    in the AWS Directory Service Administration Guide.
+//
 //    // Example sending a request using ResetUserPasswordRequest.
 //    req := client.ResetUserPasswordRequest(params)
 //    resp, err := req.Send(context.TODO())

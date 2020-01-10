@@ -1728,8 +1728,9 @@ type H265RateControlMode string
 
 // Enum values for H265RateControlMode
 const (
-	H265RateControlModeCbr  H265RateControlMode = "CBR"
-	H265RateControlModeQvbr H265RateControlMode = "QVBR"
+	H265RateControlModeCbr       H265RateControlMode = "CBR"
+	H265RateControlModeMultiplex H265RateControlMode = "MULTIPLEX"
+	H265RateControlModeQvbr      H265RateControlMode = "QVBR"
 )
 
 func (enum H265RateControlMode) MarshalValue() (string, error) {
@@ -2816,6 +2817,24 @@ func (enum M2tsKlv) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// M2ts Nielsen Id3 Behavior
+type M2tsNielsenId3Behavior string
+
+// Enum values for M2tsNielsenId3Behavior
+const (
+	M2tsNielsenId3BehaviorNoPassthrough M2tsNielsenId3Behavior = "NO_PASSTHROUGH"
+	M2tsNielsenId3BehaviorPassthrough   M2tsNielsenId3Behavior = "PASSTHROUGH"
+)
+
+func (enum M2tsNielsenId3Behavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum M2tsNielsenId3Behavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // M2ts Pcr Control
 type M2tsPcrControl string
 
@@ -2928,6 +2947,24 @@ func (enum M2tsTimedMetadataBehavior) MarshalValueBuf(b []byte) ([]byte, error) 
 	return append(b, enum...), nil
 }
 
+// M3u8 Nielsen Id3 Behavior
+type M3u8NielsenId3Behavior string
+
+// Enum values for M3u8NielsenId3Behavior
+const (
+	M3u8NielsenId3BehaviorNoPassthrough M3u8NielsenId3Behavior = "NO_PASSTHROUGH"
+	M3u8NielsenId3BehaviorPassthrough   M3u8NielsenId3Behavior = "PASSTHROUGH"
+)
+
+func (enum M3u8NielsenId3Behavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum M3u8NielsenId3Behavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // M3u8 Pcr Control
 type M3u8PcrControl string
 
@@ -3018,6 +3055,31 @@ func (enum MsSmoothH265PackagingType) MarshalValueBuf(b []byte) ([]byte, error) 
 	return append(b, enum...), nil
 }
 
+// The current state of the multiplex.
+type MultiplexState string
+
+// Enum values for MultiplexState
+const (
+	MultiplexStateCreating     MultiplexState = "CREATING"
+	MultiplexStateCreateFailed MultiplexState = "CREATE_FAILED"
+	MultiplexStateIdle         MultiplexState = "IDLE"
+	MultiplexStateStarting     MultiplexState = "STARTING"
+	MultiplexStateRunning      MultiplexState = "RUNNING"
+	MultiplexStateRecovering   MultiplexState = "RECOVERING"
+	MultiplexStateStopping     MultiplexState = "STOPPING"
+	MultiplexStateDeleting     MultiplexState = "DELETING"
+	MultiplexStateDeleted      MultiplexState = "DELETED"
+)
+
+func (enum MultiplexState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MultiplexState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Network Input Server Validation
 type NetworkInputServerValidation string
 
@@ -3032,6 +3094,24 @@ func (enum NetworkInputServerValidation) MarshalValue() (string, error) {
 }
 
 func (enum NetworkInputServerValidation) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// State of Nielsen PCM to ID3 tagging
+type NielsenPcmToId3TaggingState string
+
+// Enum values for NielsenPcmToId3TaggingState
+const (
+	NielsenPcmToId3TaggingStateDisabled NielsenPcmToId3TaggingState = "DISABLED"
+	NielsenPcmToId3TaggingStateEnabled  NielsenPcmToId3TaggingState = "ENABLED"
+)
+
+func (enum NielsenPcmToId3TaggingState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NielsenPcmToId3TaggingState) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -3146,13 +3226,14 @@ func (enum ReservationMaximumFramerate) MarshalValueBuf(b []byte) ([]byte, error
 }
 
 // Resolution based on lines of vertical resolution; SD is less than 720 lines,
-// HD is 720 to 1080 lines, UHD is greater than 1080 lines
+// HD is 720 to 1080 lines, FHD is 1080 lines, UHD is greater than 1080 lines
 type ReservationResolution string
 
 // Enum values for ReservationResolution
 const (
 	ReservationResolutionSd  ReservationResolution = "SD"
 	ReservationResolutionHd  ReservationResolution = "HD"
+	ReservationResolutionFhd ReservationResolution = "FHD"
 	ReservationResolutionUhd ReservationResolution = "UHD"
 )
 
@@ -3165,14 +3246,15 @@ func (enum ReservationResolution) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Resource type, 'INPUT', 'OUTPUT', or 'CHANNEL'
+// Resource type, 'INPUT', 'OUTPUT', 'MULTIPLEX', or 'CHANNEL'
 type ReservationResourceType string
 
 // Enum values for ReservationResourceType
 const (
-	ReservationResourceTypeInput   ReservationResourceType = "INPUT"
-	ReservationResourceTypeOutput  ReservationResourceType = "OUTPUT"
-	ReservationResourceTypeChannel ReservationResourceType = "CHANNEL"
+	ReservationResourceTypeInput     ReservationResourceType = "INPUT"
+	ReservationResourceTypeOutput    ReservationResourceType = "OUTPUT"
+	ReservationResourceTypeMultiplex ReservationResourceType = "MULTIPLEX"
+	ReservationResourceTypeChannel   ReservationResourceType = "CHANNEL"
 )
 
 func (enum ReservationResourceType) MarshalValue() (string, error) {

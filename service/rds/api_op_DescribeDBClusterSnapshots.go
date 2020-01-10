@@ -15,7 +15,7 @@ type DescribeDBClusterSnapshotsInput struct {
 
 	// The ID of the DB cluster to retrieve the list of DB cluster snapshots for.
 	// This parameter can't be used in conjunction with the DBClusterSnapshotIdentifier
-	// parameter. This parameter is not case-sensitive.
+	// parameter. This parameter isn't case-sensitive.
 	//
 	// Constraints:
 	//
@@ -71,7 +71,7 @@ type DescribeDBClusterSnapshotsInput struct {
 
 	// The maximum number of records to include in the response. If more records
 	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
+	// is included in the response so you can retrieve the remaining results.
 	//
 	// Default: 100
 	//

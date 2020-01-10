@@ -120,6 +120,10 @@ const opUpdateClusterVersion = "UpdateClusterVersion"
 // is eventually consistent). When the update is complete (either Failed or
 // Successful), the cluster status moves to Active.
 //
+// If your cluster has managed node groups attached to it, all of your node
+// groups’ Kubernetes versions must match the cluster’s Kubernetes version
+// in order to update the cluster to a new Kubernetes version.
+//
 //    // Example sending a request using UpdateClusterVersionRequest.
 //    req := client.UpdateClusterVersionRequest(params)
 //    resp, err := req.Send(context.TODO())

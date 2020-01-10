@@ -22,7 +22,7 @@ type CreateRouteInput struct {
 	// RouteName is a required field
 	RouteName *string `locationName:"routeName" min:"1" type:"string" required:"true"`
 
-	// An object representing the specification of a route.
+	// An object that represents a route specification. Specify one route type.
 	//
 	// Spec is a required field
 	Spec *RouteSpec `locationName:"spec" type:"structure" required:"true"`
@@ -143,7 +143,7 @@ func (s CreateRouteInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateRouteOutput struct {
 	_ struct{} `type:"structure" payload:"Route"`
 
-	// An object representing a route returned by a describe operation.
+	// An object that represents a route returned by a describe operation.
 	//
 	// Route is a required field
 	Route *RouteData `locationName:"route" type:"structure" required:"true"`

@@ -71,11 +71,15 @@ type ClientAPI interface {
 
 	CreateImportJobRequest(*pinpoint.CreateImportJobInput) pinpoint.CreateImportJobRequest
 
+	CreateJourneyRequest(*pinpoint.CreateJourneyInput) pinpoint.CreateJourneyRequest
+
 	CreatePushTemplateRequest(*pinpoint.CreatePushTemplateInput) pinpoint.CreatePushTemplateRequest
 
 	CreateSegmentRequest(*pinpoint.CreateSegmentInput) pinpoint.CreateSegmentRequest
 
 	CreateSmsTemplateRequest(*pinpoint.CreateSmsTemplateInput) pinpoint.CreateSmsTemplateRequest
+
+	CreateVoiceTemplateRequest(*pinpoint.CreateVoiceTemplateInput) pinpoint.CreateVoiceTemplateRequest
 
 	DeleteAdmChannelRequest(*pinpoint.DeleteAdmChannelInput) pinpoint.DeleteAdmChannelRequest
 
@@ -103,6 +107,8 @@ type ClientAPI interface {
 
 	DeleteGcmChannelRequest(*pinpoint.DeleteGcmChannelInput) pinpoint.DeleteGcmChannelRequest
 
+	DeleteJourneyRequest(*pinpoint.DeleteJourneyInput) pinpoint.DeleteJourneyRequest
+
 	DeletePushTemplateRequest(*pinpoint.DeletePushTemplateInput) pinpoint.DeletePushTemplateRequest
 
 	DeleteSegmentRequest(*pinpoint.DeleteSegmentInput) pinpoint.DeleteSegmentRequest
@@ -114,6 +120,8 @@ type ClientAPI interface {
 	DeleteUserEndpointsRequest(*pinpoint.DeleteUserEndpointsInput) pinpoint.DeleteUserEndpointsRequest
 
 	DeleteVoiceChannelRequest(*pinpoint.DeleteVoiceChannelInput) pinpoint.DeleteVoiceChannelRequest
+
+	DeleteVoiceTemplateRequest(*pinpoint.DeleteVoiceTemplateInput) pinpoint.DeleteVoiceTemplateRequest
 
 	GetAdmChannelRequest(*pinpoint.GetAdmChannelInput) pinpoint.GetAdmChannelRequest
 
@@ -167,6 +175,14 @@ type ClientAPI interface {
 
 	GetImportJobsRequest(*pinpoint.GetImportJobsInput) pinpoint.GetImportJobsRequest
 
+	GetJourneyRequest(*pinpoint.GetJourneyInput) pinpoint.GetJourneyRequest
+
+	GetJourneyDateRangeKpiRequest(*pinpoint.GetJourneyDateRangeKpiInput) pinpoint.GetJourneyDateRangeKpiRequest
+
+	GetJourneyExecutionActivityMetricsRequest(*pinpoint.GetJourneyExecutionActivityMetricsInput) pinpoint.GetJourneyExecutionActivityMetricsRequest
+
+	GetJourneyExecutionMetricsRequest(*pinpoint.GetJourneyExecutionMetricsInput) pinpoint.GetJourneyExecutionMetricsRequest
+
 	GetPushTemplateRequest(*pinpoint.GetPushTemplateInput) pinpoint.GetPushTemplateRequest
 
 	GetSegmentRequest(*pinpoint.GetSegmentInput) pinpoint.GetSegmentRequest
@@ -188,6 +204,10 @@ type ClientAPI interface {
 	GetUserEndpointsRequest(*pinpoint.GetUserEndpointsInput) pinpoint.GetUserEndpointsRequest
 
 	GetVoiceChannelRequest(*pinpoint.GetVoiceChannelInput) pinpoint.GetVoiceChannelRequest
+
+	GetVoiceTemplateRequest(*pinpoint.GetVoiceTemplateInput) pinpoint.GetVoiceTemplateRequest
+
+	ListJourneysRequest(*pinpoint.ListJourneysInput) pinpoint.ListJourneysRequest
 
 	ListTagsForResourceRequest(*pinpoint.ListTagsForResourceInput) pinpoint.ListTagsForResourceRequest
 
@@ -235,6 +255,10 @@ type ClientAPI interface {
 
 	UpdateGcmChannelRequest(*pinpoint.UpdateGcmChannelInput) pinpoint.UpdateGcmChannelRequest
 
+	UpdateJourneyRequest(*pinpoint.UpdateJourneyInput) pinpoint.UpdateJourneyRequest
+
+	UpdateJourneyStateRequest(*pinpoint.UpdateJourneyStateInput) pinpoint.UpdateJourneyStateRequest
+
 	UpdatePushTemplateRequest(*pinpoint.UpdatePushTemplateInput) pinpoint.UpdatePushTemplateRequest
 
 	UpdateSegmentRequest(*pinpoint.UpdateSegmentInput) pinpoint.UpdateSegmentRequest
@@ -244,6 +268,8 @@ type ClientAPI interface {
 	UpdateSmsTemplateRequest(*pinpoint.UpdateSmsTemplateInput) pinpoint.UpdateSmsTemplateRequest
 
 	UpdateVoiceChannelRequest(*pinpoint.UpdateVoiceChannelInput) pinpoint.UpdateVoiceChannelRequest
+
+	UpdateVoiceTemplateRequest(*pinpoint.UpdateVoiceTemplateInput) pinpoint.UpdateVoiceTemplateRequest
 }
 
 var _ ClientAPI = (*pinpoint.Client)(nil)

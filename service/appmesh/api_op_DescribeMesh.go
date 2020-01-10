@@ -55,7 +55,7 @@ func (s DescribeMeshInput) MarshalFields(e protocol.FieldEncoder) error {
 type DescribeMeshOutput struct {
 	_ struct{} `type:"structure" payload:"Mesh"`
 
-	// An object representing a service mesh returned by a describe operation.
+	// An object that represents a service mesh returned by a describe operation.
 	//
 	// Mesh is a required field
 	Mesh *MeshData `locationName:"mesh" type:"structure" required:"true"`

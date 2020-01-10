@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Personalize.
 //    func myFunc(svc personalizeiface.ClientAPI) bool {
-//        // Make svc.CreateCampaign request
+//        // Make svc.CreateBatchInferenceJob request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        personalizeiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateCampaign(input *personalize.CreateCampaignInput) (*personalize.CreateCampaignOutput, error) {
+//    func (m *mockClientClient) CreateBatchInferenceJob(input *personalize.CreateBatchInferenceJobInput) (*personalize.CreateBatchInferenceJobOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,6 +61,8 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	CreateBatchInferenceJobRequest(*personalize.CreateBatchInferenceJobInput) personalize.CreateBatchInferenceJobRequest
+
 	CreateCampaignRequest(*personalize.CreateCampaignInput) personalize.CreateCampaignRequest
 
 	CreateDatasetRequest(*personalize.CreateDatasetInput) personalize.CreateDatasetRequest
@@ -91,6 +93,8 @@ type ClientAPI interface {
 
 	DescribeAlgorithmRequest(*personalize.DescribeAlgorithmInput) personalize.DescribeAlgorithmRequest
 
+	DescribeBatchInferenceJobRequest(*personalize.DescribeBatchInferenceJobInput) personalize.DescribeBatchInferenceJobRequest
+
 	DescribeCampaignRequest(*personalize.DescribeCampaignInput) personalize.DescribeCampaignRequest
 
 	DescribeDatasetRequest(*personalize.DescribeDatasetInput) personalize.DescribeDatasetRequest
@@ -112,6 +116,8 @@ type ClientAPI interface {
 	DescribeSolutionVersionRequest(*personalize.DescribeSolutionVersionInput) personalize.DescribeSolutionVersionRequest
 
 	GetSolutionMetricsRequest(*personalize.GetSolutionMetricsInput) personalize.GetSolutionMetricsRequest
+
+	ListBatchInferenceJobsRequest(*personalize.ListBatchInferenceJobsInput) personalize.ListBatchInferenceJobsRequest
 
 	ListCampaignsRequest(*personalize.ListCampaignsInput) personalize.ListCampaignsRequest
 

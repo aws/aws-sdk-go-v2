@@ -65,7 +65,7 @@ type ModifyDBClusterInput struct {
 	CopyTagsToSnapshot *bool `type:"boolean"`
 
 	// The DB cluster identifier for the cluster being modified. This parameter
-	// is not case-sensitive.
+	// isn't case-sensitive.
 	//
 	// Constraints: This identifier must match the identifier of an existing DB
 	// cluster.

@@ -63,8 +63,7 @@ type GetDomainNameOutput struct {
 	// The domain name configurations.
 	DomainNameConfigurations []DomainNameConfiguration `locationName:"domainNameConfigurations" type:"list"`
 
-	// A key value pair of string with key length between[1-128] and value length
-	// between[1-256]
+	// Represents a collection of tags associated with the resource.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 

@@ -8,7 +8,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type CreateRuleInput struct {
@@ -34,7 +33,7 @@ type CreateRuleInput struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	Tags []waf.Tag `min:"1" type:"list"`
+	Tags []Tag `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -89,7 +88,7 @@ type CreateRuleOutput struct {
 	ChangeToken *string `min:"1" type:"string"`
 
 	// The Rule returned in the CreateRule response.
-	Rule *waf.Rule `type:"structure"`
+	Rule *Rule `type:"structure"`
 }
 
 // String returns the string representation

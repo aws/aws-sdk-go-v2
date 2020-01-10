@@ -2,6 +2,22 @@
 
 package guardduty
 
+type DestinationType string
+
+// Enum values for DestinationType
+const (
+	DestinationTypeS3 DestinationType = "S3"
+)
+
+func (enum DestinationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DestinationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DetectorStatus string
 
 // Enum values for DetectorStatus
@@ -143,6 +159,25 @@ func (enum OrderBy) MarshalValue() (string, error) {
 }
 
 func (enum OrderBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type PublishingStatus string
+
+// Enum values for PublishingStatus
+const (
+	PublishingStatusPendingVerification                   PublishingStatus = "PENDING_VERIFICATION"
+	PublishingStatusPublishing                            PublishingStatus = "PUBLISHING"
+	PublishingStatusUnableToPublishFixDestinationProperty PublishingStatus = "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY"
+	PublishingStatusStopped                               PublishingStatus = "STOPPED"
+)
+
+func (enum PublishingStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PublishingStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

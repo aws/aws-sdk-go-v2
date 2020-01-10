@@ -12,14 +12,13 @@ import (
 type ListLicenseSpecificationsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// Maximum number of results to return in a single call. To retrieve the remaining
-	// results, make another call with the returned NextToken value.
+	// Maximum number of results to return in a single call.
 	MaxResults *int64 `type:"integer"`
 
 	// Token for the next set of results.
 	NextToken *string `type:"string"`
 
-	// ARN of an AMI or Amazon EC2 instance that has an associated license configuration.
+	// Amazon Resource Name (ARN) of a resource that has an associated license configuration.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `type:"string" required:"true"`
@@ -64,7 +63,7 @@ const opListLicenseSpecificationsForResource = "ListLicenseSpecificationsForReso
 // ListLicenseSpecificationsForResourceRequest returns a request value for making API operation for
 // AWS License Manager.
 //
-// Returns the license configuration for a resource.
+// Describes the license configurations for the specified resource.
 //
 //    // Example sending a request using ListLicenseSpecificationsForResourceRequest.
 //    req := client.ListLicenseSpecificationsForResourceRequest(params)

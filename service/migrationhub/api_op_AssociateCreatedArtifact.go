@@ -22,7 +22,8 @@ type AssociateCreatedArtifactInput struct {
 	// to test if the caller has permission to make the call.
 	DryRun *bool `type:"boolean"`
 
-	// Unique identifier that references the migration task.
+	// Unique identifier that references the migration task. Do not store personal
+	// data in this field.
 	//
 	// MigrationTaskName is a required field
 	MigrationTaskName *string `min:"1" type:"string" required:"true"`

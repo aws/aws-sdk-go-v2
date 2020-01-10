@@ -38,8 +38,8 @@ const opGetNotificationChannel = "GetNotificationChannel"
 // GetNotificationChannelRequest returns a request value for making API operation for
 // Firewall Management Service.
 //
-// Returns information about the Amazon Simple Notification Service (SNS) topic
-// that is used to record AWS Firewall Manager SNS logs.
+// Information about the Amazon Simple Notification Service (SNS) topic that
+// is used to record AWS Firewall Manager SNS logs.
 //
 //    // Example sending a request using GetNotificationChannelRequest.
 //    req := client.GetNotificationChannelRequest(params)

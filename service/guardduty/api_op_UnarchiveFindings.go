@@ -13,13 +13,12 @@ import (
 type UnarchiveFindingsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the detector that specifies the GuardDuty service whose findings
-	// you want to unarchive.
+	// The ID of the detector associated with the findings to unarchive.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// IDs of the findings that you want to unarchive.
+	// IDs of the findings to unarchive.
 	//
 	// FindingIds is a required field
 	FindingIds []string `locationName:"findingIds" type:"list" required:"true"`
@@ -95,7 +94,7 @@ const opUnarchiveFindings = "UnarchiveFindings"
 // UnarchiveFindingsRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Unarchives Amazon GuardDuty findings specified by the list of finding IDs.
+// Unarchives GuardDuty findings specified by the findingIds.
 //
 //    // Example sending a request using UnarchiveFindingsRequest.
 //    req := client.UnarchiveFindingsRequest(params)

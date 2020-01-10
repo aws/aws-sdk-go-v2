@@ -6,7 +6,8 @@ type ActionType string
 
 // Enum values for ActionType
 const (
-	ActionTypeRestoreCluster ActionType = "restore-cluster"
+	ActionTypeRestoreCluster      ActionType = "restore-cluster"
+	ActionTypeRecommendNodeConfig ActionType = "recommend-node-config"
 )
 
 func (enum ActionType) MarshalValue() (string, error) {
@@ -18,6 +19,23 @@ func (enum ActionType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type Mode string
+
+// Enum values for Mode
+const (
+	ModeStandard        Mode = "standard"
+	ModeHighPerformance Mode = "high-performance"
+)
+
+func (enum Mode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Mode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NodeConfigurationOptionsFilterName string
 
 // Enum values for NodeConfigurationOptionsFilterName
@@ -25,6 +43,7 @@ const (
 	NodeConfigurationOptionsFilterNameNodeType                        NodeConfigurationOptionsFilterName = "NodeType"
 	NodeConfigurationOptionsFilterNameNumberOfNodes                   NodeConfigurationOptionsFilterName = "NumberOfNodes"
 	NodeConfigurationOptionsFilterNameEstimatedDiskUtilizationPercent NodeConfigurationOptionsFilterName = "EstimatedDiskUtilizationPercent"
+	NodeConfigurationOptionsFilterNameMode                            NodeConfigurationOptionsFilterName = "Mode"
 )
 
 func (enum NodeConfigurationOptionsFilterName) MarshalValue() (string, error) {
@@ -110,6 +129,56 @@ func (enum ScheduleState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ScheduledActionFilterName string
+
+// Enum values for ScheduledActionFilterName
+const (
+	ScheduledActionFilterNameClusterIdentifier ScheduledActionFilterName = "cluster-identifier"
+	ScheduledActionFilterNameIamRole           ScheduledActionFilterName = "iam-role"
+)
+
+func (enum ScheduledActionFilterName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScheduledActionFilterName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ScheduledActionState string
+
+// Enum values for ScheduledActionState
+const (
+	ScheduledActionStateActive   ScheduledActionState = "ACTIVE"
+	ScheduledActionStateDisabled ScheduledActionState = "DISABLED"
+)
+
+func (enum ScheduledActionState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScheduledActionState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ScheduledActionTypeValues string
+
+// Enum values for ScheduledActionTypeValues
+const (
+	ScheduledActionTypeValuesResizeCluster ScheduledActionTypeValues = "ResizeCluster"
+)
+
+func (enum ScheduledActionTypeValues) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScheduledActionTypeValues) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SnapshotAttributeToSortBy string
 
 // Enum values for SnapshotAttributeToSortBy
@@ -153,6 +222,7 @@ const (
 	SourceTypeClusterParameterGroup SourceType = "cluster-parameter-group"
 	SourceTypeClusterSecurityGroup  SourceType = "cluster-security-group"
 	SourceTypeClusterSnapshot       SourceType = "cluster-snapshot"
+	SourceTypeScheduledAction       SourceType = "scheduled-action"
 )
 
 func (enum SourceType) MarshalValue() (string, error) {

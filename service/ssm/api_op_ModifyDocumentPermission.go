@@ -31,6 +31,10 @@ type ModifyDocumentPermissionInput struct {
 	//
 	// PermissionType is a required field
 	PermissionType DocumentPermissionType `type:"string" required:"true" enum:"true"`
+
+	// (Optional) The version of the document to share. If it's not specified, the
+	// system choose the Default version to share.
+	SharedDocumentVersion *string `type:"string"`
 }
 
 // String returns the string representation

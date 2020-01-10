@@ -13,7 +13,7 @@ type PromoteReadReplicaDBClusterInput struct {
 	_ struct{} `type:"structure"`
 
 	// The identifier of the DB cluster Read Replica to promote. This parameter
-	// is not case-sensitive.
+	// isn't case-sensitive.
 	//
 	// Constraints:
 	//

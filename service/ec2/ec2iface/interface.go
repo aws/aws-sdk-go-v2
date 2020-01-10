@@ -66,6 +66,8 @@ import (
 type ClientAPI interface {
 	AcceptReservedInstancesExchangeQuoteRequest(*ec2.AcceptReservedInstancesExchangeQuoteInput) ec2.AcceptReservedInstancesExchangeQuoteRequest
 
+	AcceptTransitGatewayPeeringAttachmentRequest(*ec2.AcceptTransitGatewayPeeringAttachmentInput) ec2.AcceptTransitGatewayPeeringAttachmentRequest
+
 	AcceptTransitGatewayVpcAttachmentRequest(*ec2.AcceptTransitGatewayVpcAttachmentInput) ec2.AcceptTransitGatewayVpcAttachmentRequest
 
 	AcceptVpcEndpointConnectionsRequest(*ec2.AcceptVpcEndpointConnectionsInput) ec2.AcceptVpcEndpointConnectionsRequest
@@ -95,6 +97,8 @@ type ClientAPI interface {
 	AssociateRouteTableRequest(*ec2.AssociateRouteTableInput) ec2.AssociateRouteTableRequest
 
 	AssociateSubnetCidrBlockRequest(*ec2.AssociateSubnetCidrBlockInput) ec2.AssociateSubnetCidrBlockRequest
+
+	AssociateTransitGatewayMulticastDomainRequest(*ec2.AssociateTransitGatewayMulticastDomainInput) ec2.AssociateTransitGatewayMulticastDomainRequest
 
 	AssociateTransitGatewayRouteTableRequest(*ec2.AssociateTransitGatewayRouteTableInput) ec2.AssociateTransitGatewayRouteTableRequest
 
@@ -176,6 +180,10 @@ type ClientAPI interface {
 
 	CreateLaunchTemplateVersionRequest(*ec2.CreateLaunchTemplateVersionInput) ec2.CreateLaunchTemplateVersionRequest
 
+	CreateLocalGatewayRouteRequest(*ec2.CreateLocalGatewayRouteInput) ec2.CreateLocalGatewayRouteRequest
+
+	CreateLocalGatewayRouteTableVpcAssociationRequest(*ec2.CreateLocalGatewayRouteTableVpcAssociationInput) ec2.CreateLocalGatewayRouteTableVpcAssociationRequest
+
 	CreateNatGatewayRequest(*ec2.CreateNatGatewayInput) ec2.CreateNatGatewayRequest
 
 	CreateNetworkAclRequest(*ec2.CreateNetworkAclInput) ec2.CreateNetworkAclRequest
@@ -215,6 +223,10 @@ type ClientAPI interface {
 	CreateTrafficMirrorTargetRequest(*ec2.CreateTrafficMirrorTargetInput) ec2.CreateTrafficMirrorTargetRequest
 
 	CreateTransitGatewayRequest(*ec2.CreateTransitGatewayInput) ec2.CreateTransitGatewayRequest
+
+	CreateTransitGatewayMulticastDomainRequest(*ec2.CreateTransitGatewayMulticastDomainInput) ec2.CreateTransitGatewayMulticastDomainRequest
+
+	CreateTransitGatewayPeeringAttachmentRequest(*ec2.CreateTransitGatewayPeeringAttachmentInput) ec2.CreateTransitGatewayPeeringAttachmentRequest
 
 	CreateTransitGatewayRouteRequest(*ec2.CreateTransitGatewayRouteInput) ec2.CreateTransitGatewayRouteRequest
 
@@ -264,6 +276,10 @@ type ClientAPI interface {
 
 	DeleteLaunchTemplateVersionsRequest(*ec2.DeleteLaunchTemplateVersionsInput) ec2.DeleteLaunchTemplateVersionsRequest
 
+	DeleteLocalGatewayRouteRequest(*ec2.DeleteLocalGatewayRouteInput) ec2.DeleteLocalGatewayRouteRequest
+
+	DeleteLocalGatewayRouteTableVpcAssociationRequest(*ec2.DeleteLocalGatewayRouteTableVpcAssociationInput) ec2.DeleteLocalGatewayRouteTableVpcAssociationRequest
+
 	DeleteNatGatewayRequest(*ec2.DeleteNatGatewayInput) ec2.DeleteNatGatewayRequest
 
 	DeleteNetworkAclRequest(*ec2.DeleteNetworkAclInput) ec2.DeleteNetworkAclRequest
@@ -302,6 +318,10 @@ type ClientAPI interface {
 
 	DeleteTransitGatewayRequest(*ec2.DeleteTransitGatewayInput) ec2.DeleteTransitGatewayRequest
 
+	DeleteTransitGatewayMulticastDomainRequest(*ec2.DeleteTransitGatewayMulticastDomainInput) ec2.DeleteTransitGatewayMulticastDomainRequest
+
+	DeleteTransitGatewayPeeringAttachmentRequest(*ec2.DeleteTransitGatewayPeeringAttachmentInput) ec2.DeleteTransitGatewayPeeringAttachmentRequest
+
 	DeleteTransitGatewayRouteRequest(*ec2.DeleteTransitGatewayRouteInput) ec2.DeleteTransitGatewayRouteRequest
 
 	DeleteTransitGatewayRouteTableRequest(*ec2.DeleteTransitGatewayRouteTableInput) ec2.DeleteTransitGatewayRouteTableRequest
@@ -330,6 +350,10 @@ type ClientAPI interface {
 
 	DeregisterImageRequest(*ec2.DeregisterImageInput) ec2.DeregisterImageRequest
 
+	DeregisterTransitGatewayMulticastGroupMembersRequest(*ec2.DeregisterTransitGatewayMulticastGroupMembersInput) ec2.DeregisterTransitGatewayMulticastGroupMembersRequest
+
+	DeregisterTransitGatewayMulticastGroupSourcesRequest(*ec2.DeregisterTransitGatewayMulticastGroupSourcesInput) ec2.DeregisterTransitGatewayMulticastGroupSourcesRequest
+
 	DescribeAccountAttributesRequest(*ec2.DescribeAccountAttributesInput) ec2.DescribeAccountAttributesRequest
 
 	DescribeAddressesRequest(*ec2.DescribeAddressesInput) ec2.DescribeAddressesRequest
@@ -356,6 +380,8 @@ type ClientAPI interface {
 
 	DescribeClientVpnTargetNetworksRequest(*ec2.DescribeClientVpnTargetNetworksInput) ec2.DescribeClientVpnTargetNetworksRequest
 
+	DescribeCoipPoolsRequest(*ec2.DescribeCoipPoolsInput) ec2.DescribeCoipPoolsRequest
+
 	DescribeConversionTasksRequest(*ec2.DescribeConversionTasksInput) ec2.DescribeConversionTasksRequest
 
 	DescribeCustomerGatewaysRequest(*ec2.DescribeCustomerGatewaysInput) ec2.DescribeCustomerGatewaysRequest
@@ -369,6 +395,8 @@ type ClientAPI interface {
 	DescribeExportImageTasksRequest(*ec2.DescribeExportImageTasksInput) ec2.DescribeExportImageTasksRequest
 
 	DescribeExportTasksRequest(*ec2.DescribeExportTasksInput) ec2.DescribeExportTasksRequest
+
+	DescribeFastSnapshotRestoresRequest(*ec2.DescribeFastSnapshotRestoresInput) ec2.DescribeFastSnapshotRestoresRequest
 
 	DescribeFleetHistoryRequest(*ec2.DescribeFleetHistoryInput) ec2.DescribeFleetHistoryRequest
 
@@ -408,6 +436,10 @@ type ClientAPI interface {
 
 	DescribeInstanceStatusRequest(*ec2.DescribeInstanceStatusInput) ec2.DescribeInstanceStatusRequest
 
+	DescribeInstanceTypeOfferingsRequest(*ec2.DescribeInstanceTypeOfferingsInput) ec2.DescribeInstanceTypeOfferingsRequest
+
+	DescribeInstanceTypesRequest(*ec2.DescribeInstanceTypesInput) ec2.DescribeInstanceTypesRequest
+
 	DescribeInstancesRequest(*ec2.DescribeInstancesInput) ec2.DescribeInstancesRequest
 
 	DescribeInternetGatewaysRequest(*ec2.DescribeInternetGatewaysInput) ec2.DescribeInternetGatewaysRequest
@@ -417,6 +449,18 @@ type ClientAPI interface {
 	DescribeLaunchTemplateVersionsRequest(*ec2.DescribeLaunchTemplateVersionsInput) ec2.DescribeLaunchTemplateVersionsRequest
 
 	DescribeLaunchTemplatesRequest(*ec2.DescribeLaunchTemplatesInput) ec2.DescribeLaunchTemplatesRequest
+
+	DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsRequest(*ec2.DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInput) ec2.DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsRequest
+
+	DescribeLocalGatewayRouteTableVpcAssociationsRequest(*ec2.DescribeLocalGatewayRouteTableVpcAssociationsInput) ec2.DescribeLocalGatewayRouteTableVpcAssociationsRequest
+
+	DescribeLocalGatewayRouteTablesRequest(*ec2.DescribeLocalGatewayRouteTablesInput) ec2.DescribeLocalGatewayRouteTablesRequest
+
+	DescribeLocalGatewayVirtualInterfaceGroupsRequest(*ec2.DescribeLocalGatewayVirtualInterfaceGroupsInput) ec2.DescribeLocalGatewayVirtualInterfaceGroupsRequest
+
+	DescribeLocalGatewayVirtualInterfacesRequest(*ec2.DescribeLocalGatewayVirtualInterfacesInput) ec2.DescribeLocalGatewayVirtualInterfacesRequest
+
+	DescribeLocalGatewaysRequest(*ec2.DescribeLocalGatewaysInput) ec2.DescribeLocalGatewaysRequest
 
 	DescribeMovingAddressesRequest(*ec2.DescribeMovingAddressesInput) ec2.DescribeMovingAddressesRequest
 
@@ -488,6 +532,10 @@ type ClientAPI interface {
 
 	DescribeTransitGatewayAttachmentsRequest(*ec2.DescribeTransitGatewayAttachmentsInput) ec2.DescribeTransitGatewayAttachmentsRequest
 
+	DescribeTransitGatewayMulticastDomainsRequest(*ec2.DescribeTransitGatewayMulticastDomainsInput) ec2.DescribeTransitGatewayMulticastDomainsRequest
+
+	DescribeTransitGatewayPeeringAttachmentsRequest(*ec2.DescribeTransitGatewayPeeringAttachmentsInput) ec2.DescribeTransitGatewayPeeringAttachmentsRequest
+
 	DescribeTransitGatewayRouteTablesRequest(*ec2.DescribeTransitGatewayRouteTablesInput) ec2.DescribeTransitGatewayRouteTablesRequest
 
 	DescribeTransitGatewayVpcAttachmentsRequest(*ec2.DescribeTransitGatewayVpcAttachmentsInput) ec2.DescribeTransitGatewayVpcAttachmentsRequest
@@ -540,6 +588,8 @@ type ClientAPI interface {
 
 	DisableEbsEncryptionByDefaultRequest(*ec2.DisableEbsEncryptionByDefaultInput) ec2.DisableEbsEncryptionByDefaultRequest
 
+	DisableFastSnapshotRestoresRequest(*ec2.DisableFastSnapshotRestoresInput) ec2.DisableFastSnapshotRestoresRequest
+
 	DisableTransitGatewayRouteTablePropagationRequest(*ec2.DisableTransitGatewayRouteTablePropagationInput) ec2.DisableTransitGatewayRouteTablePropagationRequest
 
 	DisableVgwRoutePropagationRequest(*ec2.DisableVgwRoutePropagationInput) ec2.DisableVgwRoutePropagationRequest
@@ -558,11 +608,15 @@ type ClientAPI interface {
 
 	DisassociateSubnetCidrBlockRequest(*ec2.DisassociateSubnetCidrBlockInput) ec2.DisassociateSubnetCidrBlockRequest
 
+	DisassociateTransitGatewayMulticastDomainRequest(*ec2.DisassociateTransitGatewayMulticastDomainInput) ec2.DisassociateTransitGatewayMulticastDomainRequest
+
 	DisassociateTransitGatewayRouteTableRequest(*ec2.DisassociateTransitGatewayRouteTableInput) ec2.DisassociateTransitGatewayRouteTableRequest
 
 	DisassociateVpcCidrBlockRequest(*ec2.DisassociateVpcCidrBlockInput) ec2.DisassociateVpcCidrBlockRequest
 
 	EnableEbsEncryptionByDefaultRequest(*ec2.EnableEbsEncryptionByDefaultInput) ec2.EnableEbsEncryptionByDefaultRequest
+
+	EnableFastSnapshotRestoresRequest(*ec2.EnableFastSnapshotRestoresInput) ec2.EnableFastSnapshotRestoresRequest
 
 	EnableTransitGatewayRouteTablePropagationRequest(*ec2.EnableTransitGatewayRouteTablePropagationInput) ec2.EnableTransitGatewayRouteTablePropagationRequest
 
@@ -584,9 +638,13 @@ type ClientAPI interface {
 
 	GetCapacityReservationUsageRequest(*ec2.GetCapacityReservationUsageInput) ec2.GetCapacityReservationUsageRequest
 
+	GetCoipPoolUsageRequest(*ec2.GetCoipPoolUsageInput) ec2.GetCoipPoolUsageRequest
+
 	GetConsoleOutputRequest(*ec2.GetConsoleOutputInput) ec2.GetConsoleOutputRequest
 
 	GetConsoleScreenshotRequest(*ec2.GetConsoleScreenshotInput) ec2.GetConsoleScreenshotRequest
+
+	GetDefaultCreditSpecificationRequest(*ec2.GetDefaultCreditSpecificationInput) ec2.GetDefaultCreditSpecificationRequest
 
 	GetEbsDefaultKmsKeyIdRequest(*ec2.GetEbsDefaultKmsKeyIdInput) ec2.GetEbsDefaultKmsKeyIdRequest
 
@@ -601,6 +659,8 @@ type ClientAPI interface {
 	GetReservedInstancesExchangeQuoteRequest(*ec2.GetReservedInstancesExchangeQuoteInput) ec2.GetReservedInstancesExchangeQuoteRequest
 
 	GetTransitGatewayAttachmentPropagationsRequest(*ec2.GetTransitGatewayAttachmentPropagationsInput) ec2.GetTransitGatewayAttachmentPropagationsRequest
+
+	GetTransitGatewayMulticastDomainAssociationsRequest(*ec2.GetTransitGatewayMulticastDomainAssociationsInput) ec2.GetTransitGatewayMulticastDomainAssociationsRequest
 
 	GetTransitGatewayRouteTableAssociationsRequest(*ec2.GetTransitGatewayRouteTableAssociationsInput) ec2.GetTransitGatewayRouteTableAssociationsRequest
 
@@ -621,6 +681,8 @@ type ClientAPI interface {
 	ModifyCapacityReservationRequest(*ec2.ModifyCapacityReservationInput) ec2.ModifyCapacityReservationRequest
 
 	ModifyClientVpnEndpointRequest(*ec2.ModifyClientVpnEndpointInput) ec2.ModifyClientVpnEndpointRequest
+
+	ModifyDefaultCreditSpecificationRequest(*ec2.ModifyDefaultCreditSpecificationInput) ec2.ModifyDefaultCreditSpecificationRequest
 
 	ModifyEbsDefaultKmsKeyIdRequest(*ec2.ModifyEbsDefaultKmsKeyIdInput) ec2.ModifyEbsDefaultKmsKeyIdRequest
 
@@ -643,6 +705,8 @@ type ClientAPI interface {
 	ModifyInstanceCreditSpecificationRequest(*ec2.ModifyInstanceCreditSpecificationInput) ec2.ModifyInstanceCreditSpecificationRequest
 
 	ModifyInstanceEventStartTimeRequest(*ec2.ModifyInstanceEventStartTimeInput) ec2.ModifyInstanceEventStartTimeRequest
+
+	ModifyInstanceMetadataOptionsRequest(*ec2.ModifyInstanceMetadataOptionsInput) ec2.ModifyInstanceMetadataOptionsRequest
 
 	ModifyInstancePlacementRequest(*ec2.ModifyInstancePlacementInput) ec2.ModifyInstancePlacementRequest
 
@@ -706,6 +770,12 @@ type ClientAPI interface {
 
 	RegisterImageRequest(*ec2.RegisterImageInput) ec2.RegisterImageRequest
 
+	RegisterTransitGatewayMulticastGroupMembersRequest(*ec2.RegisterTransitGatewayMulticastGroupMembersInput) ec2.RegisterTransitGatewayMulticastGroupMembersRequest
+
+	RegisterTransitGatewayMulticastGroupSourcesRequest(*ec2.RegisterTransitGatewayMulticastGroupSourcesInput) ec2.RegisterTransitGatewayMulticastGroupSourcesRequest
+
+	RejectTransitGatewayPeeringAttachmentRequest(*ec2.RejectTransitGatewayPeeringAttachmentInput) ec2.RejectTransitGatewayPeeringAttachmentRequest
+
 	RejectTransitGatewayVpcAttachmentRequest(*ec2.RejectTransitGatewayVpcAttachmentInput) ec2.RejectTransitGatewayVpcAttachmentRequest
 
 	RejectVpcEndpointConnectionsRequest(*ec2.RejectVpcEndpointConnectionsInput) ec2.RejectVpcEndpointConnectionsRequest
@@ -757,6 +827,10 @@ type ClientAPI interface {
 	RunInstancesRequest(*ec2.RunInstancesInput) ec2.RunInstancesRequest
 
 	RunScheduledInstancesRequest(*ec2.RunScheduledInstancesInput) ec2.RunScheduledInstancesRequest
+
+	SearchLocalGatewayRoutesRequest(*ec2.SearchLocalGatewayRoutesInput) ec2.SearchLocalGatewayRoutesRequest
+
+	SearchTransitGatewayMulticastGroupsRequest(*ec2.SearchTransitGatewayMulticastGroupsInput) ec2.SearchTransitGatewayMulticastGroupsRequest
 
 	SearchTransitGatewayRoutesRequest(*ec2.SearchTransitGatewayRoutesInput) ec2.SearchTransitGatewayRoutesRequest
 
@@ -817,6 +891,8 @@ type ClientAPI interface {
 	WaitUntilNetworkInterfaceAvailable(context.Context, *ec2.DescribeNetworkInterfacesInput, ...aws.WaiterOption) error
 
 	WaitUntilPasswordDataAvailable(context.Context, *ec2.GetPasswordDataInput, ...aws.WaiterOption) error
+
+	WaitUntilSecurityGroupExists(context.Context, *ec2.DescribeSecurityGroupsInput, ...aws.WaiterOption) error
 
 	WaitUntilSnapshotCompleted(context.Context, *ec2.DescribeSnapshotsInput, ...aws.WaiterOption) error
 

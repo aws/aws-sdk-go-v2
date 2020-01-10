@@ -14,6 +14,12 @@ type CreateDatasetImportJobInput struct {
 
 	// The location of the training data to import and an AWS Identity and Access
 	// Management (IAM) role that Amazon Forecast can assume to access the data.
+	// The training data must be stored in an Amazon S3 bucket.
+	//
+	// If encryption is used, DataSource must include an AWS Key Management Service
+	// (KMS) key and the IAM role must allow Amazon Forecast permission to access
+	// the key. The KMS key and IAM role must match those specified in the EncryptionConfig
+	// parameter of the CreateDataset operation.
 	//
 	// DataSource is a required field
 	DataSource *DataSource `type:"structure" required:"true"`
@@ -24,20 +30,24 @@ type CreateDatasetImportJobInput struct {
 	// DatasetArn is a required field
 	DatasetArn *string `type:"string" required:"true"`
 
-	// The name for the dataset import job. It is recommended to include the current
-	// timestamp in the name to guard against getting a ResourceAlreadyExistsException
-	// exception, for example, 20190721DatasetImport.
+	// The name for the dataset import job. We recommend including the current timestamp
+	// in the name, for example, 20190721DatasetImport. This can help you avoid
+	// getting a ResourceAlreadyExistsException exception.
 	//
 	// DatasetImportJobName is a required field
 	DatasetImportJobName *string `min:"1" type:"string" required:"true"`
 
-	// The format of timestamps in the dataset. Two formats are supported, dependent
-	// on the DataFrequency specified when the dataset was created.
+	// The format of timestamps in the dataset. The format that you specify depends
+	// on the DataFrequency specified when the dataset was created. The following
+	// formats are supported
 	//
-	//    * "yyyy-MM-dd" For data frequencies: Y, M, W, and D
+	//    * "yyyy-MM-dd" For the following data frequencies: Y, M, W, and D
 	//
-	//    * "yyyy-MM-dd HH:mm:ss" For data frequencies: H, 30min, 15min, and 1min;
-	//    and optionally, for: Y, M, W, and D
+	//    * "yyyy-MM-dd HH:mm:ss" For the following data frequencies: H, 30min,
+	//    15min, and 1min; and optionally, for: Y, M, W, and D
+	//
+	// If the format isn't specified, Amazon Forecast expects the format to be "yyyy-MM-dd
+	// HH:mm:ss".
 	TimestampFormat *string `type:"string"`
 }
 
@@ -102,24 +112,14 @@ const opCreateDatasetImportJob = "CreateDatasetImportJob"
 // Management (IAM) role that Amazon Forecast can assume to access the data.
 // For more information, see aws-forecast-iam-roles.
 //
-// Two properties of the training data are optionally specified:
+// The training data must be in CSV format. The delimiter must be a comma (,).
 //
-//    * The delimiter that separates the data fields. The default delimiter
-//    is a comma (,), which is the only supported delimiter in this release.
+// You can specify the path to a specific CSV file, the S3 bucket, or to a folder
+// in the S3 bucket. For the latter two cases, Amazon Forecast imports all files
+// up to the limit of 10,000 files.
 //
-//    * The format of timestamps. If the format is not specified, Amazon Forecast
-//    expects the format to be "yyyy-MM-dd HH:mm:ss".
-//
-// When Amazon Forecast uploads your training data, it verifies that the data
-// was collected at the DataFrequency specified when the target dataset was
-// created. For more information, see CreateDataset and howitworks-datasets-groups.
-// Amazon Forecast also verifies the delimiter and timestamp format.
-//
-// You can use the ListDatasetImportJobs operation to get a list of all your
-// dataset import jobs, filtered by specified criteria.
-//
-// To get a list of all your dataset import jobs, filtered by the specified
-// criteria, use the ListDatasetGroups operation.
+// To get a list of all your dataset import jobs, filtered by specified criteria,
+// use the ListDatasetImportJobs operation.
 //
 //    // Example sending a request using CreateDatasetImportJobRequest.
 //    req := client.CreateDatasetImportJobRequest(params)

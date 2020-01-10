@@ -88,6 +88,8 @@ type ClientAPI interface {
 
 	CopyOptionGroupRequest(*rds.CopyOptionGroupInput) rds.CopyOptionGroupRequest
 
+	CreateCustomAvailabilityZoneRequest(*rds.CreateCustomAvailabilityZoneInput) rds.CreateCustomAvailabilityZoneRequest
+
 	CreateDBClusterRequest(*rds.CreateDBClusterInput) rds.CreateDBClusterRequest
 
 	CreateDBClusterEndpointRequest(*rds.CreateDBClusterEndpointInput) rds.CreateDBClusterEndpointRequest
@@ -102,6 +104,8 @@ type ClientAPI interface {
 
 	CreateDBParameterGroupRequest(*rds.CreateDBParameterGroupInput) rds.CreateDBParameterGroupRequest
 
+	CreateDBProxyRequest(*rds.CreateDBProxyInput) rds.CreateDBProxyRequest
+
 	CreateDBSecurityGroupRequest(*rds.CreateDBSecurityGroupInput) rds.CreateDBSecurityGroupRequest
 
 	CreateDBSnapshotRequest(*rds.CreateDBSnapshotInput) rds.CreateDBSnapshotRequest
@@ -113,6 +117,8 @@ type ClientAPI interface {
 	CreateGlobalClusterRequest(*rds.CreateGlobalClusterInput) rds.CreateGlobalClusterRequest
 
 	CreateOptionGroupRequest(*rds.CreateOptionGroupInput) rds.CreateOptionGroupRequest
+
+	DeleteCustomAvailabilityZoneRequest(*rds.DeleteCustomAvailabilityZoneInput) rds.DeleteCustomAvailabilityZoneRequest
 
 	DeleteDBClusterRequest(*rds.DeleteDBClusterInput) rds.DeleteDBClusterRequest
 
@@ -128,6 +134,8 @@ type ClientAPI interface {
 
 	DeleteDBParameterGroupRequest(*rds.DeleteDBParameterGroupInput) rds.DeleteDBParameterGroupRequest
 
+	DeleteDBProxyRequest(*rds.DeleteDBProxyInput) rds.DeleteDBProxyRequest
+
 	DeleteDBSecurityGroupRequest(*rds.DeleteDBSecurityGroupInput) rds.DeleteDBSecurityGroupRequest
 
 	DeleteDBSnapshotRequest(*rds.DeleteDBSnapshotInput) rds.DeleteDBSnapshotRequest
@@ -138,11 +146,17 @@ type ClientAPI interface {
 
 	DeleteGlobalClusterRequest(*rds.DeleteGlobalClusterInput) rds.DeleteGlobalClusterRequest
 
+	DeleteInstallationMediaRequest(*rds.DeleteInstallationMediaInput) rds.DeleteInstallationMediaRequest
+
 	DeleteOptionGroupRequest(*rds.DeleteOptionGroupInput) rds.DeleteOptionGroupRequest
+
+	DeregisterDBProxyTargetsRequest(*rds.DeregisterDBProxyTargetsInput) rds.DeregisterDBProxyTargetsRequest
 
 	DescribeAccountAttributesRequest(*rds.DescribeAccountAttributesInput) rds.DescribeAccountAttributesRequest
 
 	DescribeCertificatesRequest(*rds.DescribeCertificatesInput) rds.DescribeCertificatesRequest
+
+	DescribeCustomAvailabilityZonesRequest(*rds.DescribeCustomAvailabilityZonesInput) rds.DescribeCustomAvailabilityZonesRequest
 
 	DescribeDBClusterBacktracksRequest(*rds.DescribeDBClusterBacktracksInput) rds.DescribeDBClusterBacktracksRequest
 
@@ -170,6 +184,12 @@ type ClientAPI interface {
 
 	DescribeDBParametersRequest(*rds.DescribeDBParametersInput) rds.DescribeDBParametersRequest
 
+	DescribeDBProxiesRequest(*rds.DescribeDBProxiesInput) rds.DescribeDBProxiesRequest
+
+	DescribeDBProxyTargetGroupsRequest(*rds.DescribeDBProxyTargetGroupsInput) rds.DescribeDBProxyTargetGroupsRequest
+
+	DescribeDBProxyTargetsRequest(*rds.DescribeDBProxyTargetsInput) rds.DescribeDBProxyTargetsRequest
+
 	DescribeDBSecurityGroupsRequest(*rds.DescribeDBSecurityGroupsInput) rds.DescribeDBSecurityGroupsRequest
 
 	DescribeDBSnapshotAttributesRequest(*rds.DescribeDBSnapshotAttributesInput) rds.DescribeDBSnapshotAttributesRequest
@@ -189,6 +209,8 @@ type ClientAPI interface {
 	DescribeEventsRequest(*rds.DescribeEventsInput) rds.DescribeEventsRequest
 
 	DescribeGlobalClustersRequest(*rds.DescribeGlobalClustersInput) rds.DescribeGlobalClustersRequest
+
+	DescribeInstallationMediaRequest(*rds.DescribeInstallationMediaInput) rds.DescribeInstallationMediaRequest
 
 	DescribeOptionGroupOptionsRequest(*rds.DescribeOptionGroupOptionsInput) rds.DescribeOptionGroupOptionsRequest
 
@@ -210,6 +232,8 @@ type ClientAPI interface {
 
 	FailoverDBClusterRequest(*rds.FailoverDBClusterInput) rds.FailoverDBClusterRequest
 
+	ImportInstallationMediaRequest(*rds.ImportInstallationMediaInput) rds.ImportInstallationMediaRequest
+
 	ListTagsForResourceRequest(*rds.ListTagsForResourceInput) rds.ListTagsForResourceRequest
 
 	ModifyCurrentDBClusterCapacityRequest(*rds.ModifyCurrentDBClusterCapacityInput) rds.ModifyCurrentDBClusterCapacityRequest
@@ -225,6 +249,10 @@ type ClientAPI interface {
 	ModifyDBInstanceRequest(*rds.ModifyDBInstanceInput) rds.ModifyDBInstanceRequest
 
 	ModifyDBParameterGroupRequest(*rds.ModifyDBParameterGroupInput) rds.ModifyDBParameterGroupRequest
+
+	ModifyDBProxyRequest(*rds.ModifyDBProxyInput) rds.ModifyDBProxyRequest
+
+	ModifyDBProxyTargetGroupRequest(*rds.ModifyDBProxyTargetGroupInput) rds.ModifyDBProxyTargetGroupRequest
 
 	ModifyDBSnapshotRequest(*rds.ModifyDBSnapshotInput) rds.ModifyDBSnapshotRequest
 
@@ -245,6 +273,8 @@ type ClientAPI interface {
 	PurchaseReservedDBInstancesOfferingRequest(*rds.PurchaseReservedDBInstancesOfferingInput) rds.PurchaseReservedDBInstancesOfferingRequest
 
 	RebootDBInstanceRequest(*rds.RebootDBInstanceInput) rds.RebootDBInstanceRequest
+
+	RegisterDBProxyTargetsRequest(*rds.RegisterDBProxyTargetsInput) rds.RegisterDBProxyTargetsRequest
 
 	RemoveFromGlobalClusterRequest(*rds.RemoveFromGlobalClusterInput) rds.RemoveFromGlobalClusterRequest
 

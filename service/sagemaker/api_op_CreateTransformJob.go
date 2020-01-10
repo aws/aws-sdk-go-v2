@@ -17,8 +17,8 @@ type CreateTransformJobInput struct {
 	// request. A record is a single unit of input data that inference can be made
 	// on. For example, a single line in a CSV file is a record.
 	//
-	// To enable the batch strategy, you must set SplitType to Line, RecordIO, or
-	// TFRecord.
+	// To enable the batch strategy, you must set the SplitType property of the
+	// DataProcessing object to Line, RecordIO, or TFRecord.
 	//
 	// To use only one record when making an HTTP invocation request to a container,
 	// set BatchStrategy to SingleRecord and SplitType to Line.
@@ -40,10 +40,13 @@ type CreateTransformJobInput struct {
 	// 16 key and values entries in the map.
 	Environment map[string]string `type:"map"`
 
+	// Configuration for the experiment.
+	ExperimentConfig *ExperimentConfig `type:"structure"`
+
 	// The maximum number of parallel requests that can be sent to each instance
 	// in a transform job. If MaxConcurrentTransforms is set to 0 or left unset,
 	// Amazon SageMaker checks the optional execution-parameters to determine the
-	// optimal settings for your chosen algorithm. If the execution-parameters endpoint
+	// settings for your chosen algorithm. If the execution-parameters endpoint
 	// is not enabled, the default value is 1. For more information on execution-parameters,
 	// see How Containers Serve Requests (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-batch-code.html#your-algorithms-batch-code-how-containe-serves-requests).
 	// For built-in algorithms, you don't need to set a value for MaxConcurrentTransforms.
@@ -128,6 +131,11 @@ func (s *CreateTransformJobInput) Validate() error {
 	if s.TransformResources == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TransformResources"))
 	}
+	if s.ExperimentConfig != nil {
+		if err := s.ExperimentConfig.Validate(); err != nil {
+			invalidParams.AddNested("ExperimentConfig", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
 			if err := v.Validate(); err != nil {
@@ -200,8 +208,8 @@ const opCreateTransformJob = "CreateTransformJob"
 //    * TransformResources - Identifies the ML compute instances for the transform
 //    job.
 //
-// For more information about how batch transformation works Amazon SageMaker,
-// see How It Works (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html).
+// For more information about how batch transformation works, see Batch Transform
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html).
 //
 //    // Example sending a request using CreateTransformJobRequest.
 //    req := client.CreateTransformJobRequest(params)

@@ -49,6 +49,8 @@ type DescribeTrainingJobOutput struct {
 	// AlgorithmSpecification is a required field
 	AlgorithmSpecification *AlgorithmSpecification `type:"structure" required:"true"`
 
+	AutoMLJobArn *string `min:"1" type:"string"`
+
 	// The billable time in seconds.
 	//
 	// You can calculate the savings from using managed spot training using the
@@ -65,6 +67,16 @@ type DescribeTrainingJobOutput struct {
 	//
 	// CreationTime is a required field
 	CreationTime *time.Time `type:"timestamp" required:"true"`
+
+	// Configuration information for the debug hook parameters, collection configuration,
+	// and storage paths.
+	DebugHookConfig *DebugHookConfig `type:"structure"`
+
+	// Configuration information for debugging rules.
+	DebugRuleConfigurations []DebugRuleConfiguration `type:"list"`
+
+	// Status about the debug rule evaluation.
+	DebugRuleEvaluationStatuses []DebugRuleEvaluationStatus `type:"list"`
 
 	// To encrypt all communications between ML compute instances in distributed
 	// training, choose True. Encryption provides greater security for distributed
@@ -86,6 +98,9 @@ type DescribeTrainingJobOutput struct {
 	//
 	// The Semantic Segmentation built-in algorithm does not support network isolation.
 	EnableNetworkIsolation *bool `type:"boolean"`
+
+	// Configuration for the experiment.
+	ExperimentConfig *ExperimentConfig `type:"structure"`
 
 	// If the training job failed, the reason it failed.
 	FailureReason *string `type:"string"`
@@ -201,6 +216,9 @@ type DescribeTrainingJobOutput struct {
 	//
 	// StoppingCondition is a required field
 	StoppingCondition *StoppingCondition `type:"structure" required:"true"`
+
+	// Configuration of storage locations for TensorBoard output.
+	TensorBoardOutputConfig *TensorBoardOutputConfig `type:"structure"`
 
 	// Indicates the time when the training job ends on training instances. You
 	// are billed for the time interval between the value of TrainingStartTime and

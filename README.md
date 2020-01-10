@@ -1,12 +1,28 @@
-![Build Status](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoib1lGQ3N6RFJsalI5a3BPcXB3Rytaak9kYVh1ZW1lZExPNjgzaU9Udng3VE5OL1I3czIwcVhkMUlUeG91ajBVaWRYcVVJSEVQcmZwTWVyT1p5MGszbnA4PSIsIml2UGFyYW1ldGVyU3BlYyI6IkhrZ1VMN20zRmtYY1BrR0wiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master) [![Documentation](https://godoc.org/github.com/aws/aws-sdk-go-v2?status.svg)](https://godoc.org/github.com/aws/aws-sdk-go-v2)
+![Build Status](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoib1lGQ3N6RFJsalI5a3BPcXB3Rytaak9kYVh1ZW1lZExPNjgzaU9Udng3VE5OL1I3czIwcVhkMUlUeG91ajBVaWRYcVVJSEVQcmZwTWVyT1p5MGszbnA4PSIsIml2UGFyYW1ldGVyU3BlYyI6IkhrZ1VMN20zRmtYY1BrR0wiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master) [![API Reference](https://img.shields.io/badge/api-reference-blue.svg)](https://docs.aws.amazon.com/sdk-for-go/v2/api) [![Join the chat at https://gitter.im/aws/aws-sdk-go](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/aws/aws-sdk-go-v2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-blue.svg)](https://github.com/aws/aws-sdk-go/blob/master/LICENSE.txt)
 
 # AWS SDK for Go v2
 
-`aws-sdk-go-v2` is the **Developer Preview** for the v2 AWS SDK for the Go programming language. While in Developer Preview (aka **beta**) the SDK may release minor version changes that break backwards compatability. The release notes for the breaking change will include information about the breaking change, and how you can migrate to the latest version.
+`aws-sdk-go-v2` is the **Developer Preview** (aka **beta**) for the v2 AWS SDK for the Go programming language. This Developer Preview is provided to receive feedback from the language community on SDK changes prior to the final release. As such users should expect the SDK to release minor version releases that break backwards compatability. The release notes for the breaking change will include information about the breaking change, and how you can migrate to the latest version.
 
-Check out the [Issues] and [Projects] for design and updates being made to the SDK. The v2 SDK requires a minimum version of `Go 1.11`.
+Check out the [Issues] and [Projects] for design and updates being made to the SDK. The v2 SDK requires a minimum version of `Go 1.12`.
 
 We'll be expanding out the [Issues] and [Projects] sections with additional changes to the SDK based on your feedback, and SDK's core's improvements. Check the the SDK's [CHANGE_LOG] for information about the latest updates to the SDK.
+
+## Project Status
+The SDK is in preview state as we work to design and implement potentially breaking changes to the SDK as we update the SDK's layout and usage patterns based on your feedback. You can also expect periodic service API model updates as well.
+
+We are actively seeking community feedback for several changes to the SDK. Please review our [design] page on issues
+that are currently pending community feedback.
+
+Users should expect significant changes that could affect the following (non-exhaustive) areas:
+* Package Locations
+  * Includes Location of Service API Types
+* Modularization
+* Credential Providers
+* Paginators
+* Waiters
+* Service Endpoint Resolution
+* Minimum Supported Go Release following the [Language Release Policy](https://golang.org/doc/devel/release.html#policy)
 
 ## Getting started
 
@@ -16,7 +32,7 @@ The best way to get started working with the SDK is to use `go get` to add the S
 go get github.com/aws/aws-sdk-go-v2
 ```
 
-Without Go Modules, or in a GOPATH with Go 1.11 or 1.12 use the `/...` suffix on the `go get` to retrieve all of the SDK's dependencies.
+Without Go Modules, or in a GOPATH use the `/...` suffix on the `go get` to retrieve all of the SDK's dependencies.
 
 ```sh
 go get github.com/aws/aws-sdk-go-v2/...
@@ -91,3 +107,4 @@ see LICENSE.txt and NOTICE.txt for more information.
 [CHANGE_LOG]: https://github.com/aws/aws-sdk-go-v2/blob/master/CHANGELOG.md
 [Amazon DynamoDB]: https://aws.amazon.com/dynamodb/
 [Gitter channel]: https://gitter.im/aws/aws-sdk-go-v2
+[design]: https://github.com/aws/aws-sdk-go-v2/blob/master/DESIGN.md

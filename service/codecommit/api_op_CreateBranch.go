@@ -78,7 +78,7 @@ const opCreateBranch = "CreateBranch"
 // CreateBranchRequest returns a request value for making API operation for
 // AWS CodeCommit.
 //
-// Creates a new branch in a repository and points the branch to a commit.
+// Creates a branch in a repository and points the branch to a commit.
 //
 // Calling the create branch operation does not set a repository's default branch.
 // To do this, call the update default branch operation.

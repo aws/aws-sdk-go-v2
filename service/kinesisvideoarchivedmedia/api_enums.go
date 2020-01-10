@@ -109,8 +109,9 @@ type HLSDiscontinuityMode string
 
 // Enum values for HLSDiscontinuityMode
 const (
-	HLSDiscontinuityModeAlways HLSDiscontinuityMode = "ALWAYS"
-	HLSDiscontinuityModeNever  HLSDiscontinuityMode = "NEVER"
+	HLSDiscontinuityModeAlways          HLSDiscontinuityMode = "ALWAYS"
+	HLSDiscontinuityModeNever           HLSDiscontinuityMode = "NEVER"
+	HLSDiscontinuityModeOnDiscontinuity HLSDiscontinuityMode = "ON_DISCONTINUITY"
 )
 
 func (enum HLSDiscontinuityMode) MarshalValue() (string, error) {

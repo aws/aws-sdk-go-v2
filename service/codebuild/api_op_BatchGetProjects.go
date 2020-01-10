@@ -60,7 +60,7 @@ const opBatchGetProjects = "BatchGetProjects"
 // BatchGetProjectsRequest returns a request value for making API operation for
 // AWS CodeBuild.
 //
-// Gets information about build projects.
+// Gets information about one or more build projects.
 //
 //    // Example sending a request using BatchGetProjectsRequest.
 //    req := client.BatchGetProjectsRequest(params)

@@ -90,6 +90,12 @@ func (c *Client) ListMigrationTasksRequest(input *ListMigrationTasksInput) ListM
 		Name:       opListMigrationTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -122,6 +128,53 @@ func (r ListMigrationTasksRequest) Send(ctx context.Context) (*ListMigrationTask
 	}
 
 	return resp, nil
+}
+
+// NewListMigrationTasksRequestPaginator returns a paginator for ListMigrationTasks.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListMigrationTasksRequest(input)
+//   p := migrationhub.NewListMigrationTasksRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListMigrationTasksPaginator(req ListMigrationTasksRequest) ListMigrationTasksPaginator {
+	return ListMigrationTasksPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListMigrationTasksInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListMigrationTasksPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListMigrationTasksPaginator struct {
+	aws.Pager
+}
+
+func (p *ListMigrationTasksPaginator) CurrentPage() *ListMigrationTasksOutput {
+	return p.Pager.CurrentPage().(*ListMigrationTasksOutput)
 }
 
 // ListMigrationTasksResponse is the response type for the

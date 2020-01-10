@@ -22,6 +22,21 @@ const (
 	LanguageCodeArSa LanguageCode = "ar-SA"
 	LanguageCodeRuRu LanguageCode = "ru-RU"
 	LanguageCodeZhCn LanguageCode = "zh-CN"
+	LanguageCodeNlNl LanguageCode = "nl-NL"
+	LanguageCodeIdId LanguageCode = "id-ID"
+	LanguageCodeTaIn LanguageCode = "ta-IN"
+	LanguageCodeFaIr LanguageCode = "fa-IR"
+	LanguageCodeEnIe LanguageCode = "en-IE"
+	LanguageCodeEnAb LanguageCode = "en-AB"
+	LanguageCodeEnWl LanguageCode = "en-WL"
+	LanguageCodePtPt LanguageCode = "pt-PT"
+	LanguageCodeTeIn LanguageCode = "te-IN"
+	LanguageCodeTrTr LanguageCode = "tr-TR"
+	LanguageCodeDeCh LanguageCode = "de-CH"
+	LanguageCodeHeIl LanguageCode = "he-IL"
+	LanguageCodeMsMy LanguageCode = "ms-MY"
+	LanguageCodeJaJp LanguageCode = "ja-JP"
+	LanguageCodeArAe LanguageCode = "ar-AE"
 )
 
 func (enum LanguageCode) MarshalValue() (string, error) {

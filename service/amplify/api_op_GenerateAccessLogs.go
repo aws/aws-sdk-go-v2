@@ -121,7 +121,6 @@ const opGenerateAccessLogs = "GenerateAccessLogs"
 // AWS Amplify.
 //
 // Retrieve website access logs for a specific time range via a pre-signed URL.
-// Optionally, deliver the logs to a given S3 bucket.
 //
 //    // Example sending a request using GenerateAccessLogsRequest.
 //    req := client.GenerateAccessLogsRequest(params)

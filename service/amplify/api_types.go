@@ -330,6 +330,9 @@ type AutoBranchCreationConfig struct {
 	// Framework for the auto created branch.
 	Framework *string `locationName:"framework" type:"string"`
 
+	// The Amplify Environment name for the pull request.
+	PullRequestEnvironmentName *string `locationName:"pullRequestEnvironmentName" type:"string"`
+
 	// Stage for the auto created branch.
 	Stage Stage `locationName:"stage" type:"string" enum:"true"`
 }
@@ -402,11 +405,97 @@ func (s AutoBranchCreationConfig) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "framework", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.PullRequestEnvironmentName != nil {
+		v := *s.PullRequestEnvironmentName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pullRequestEnvironmentName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.Stage) > 0 {
 		v := s.Stage
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "stage", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Backend environment for an Amplify App.
+type BackendEnvironment struct {
+	_ struct{} `type:"structure"`
+
+	// Arn for a backend environment, part of an Amplify App.
+	//
+	// BackendEnvironmentArn is a required field
+	BackendEnvironmentArn *string `locationName:"backendEnvironmentArn" min:"1" type:"string" required:"true"`
+
+	// Creation date and time for a backend environment, part of an Amplify App.
+	//
+	// CreateTime is a required field
+	CreateTime *time.Time `locationName:"createTime" type:"timestamp" required:"true"`
+
+	// Name of deployment artifacts.
+	DeploymentArtifacts *string `locationName:"deploymentArtifacts" min:"1" type:"string"`
+
+	// Name for a backend environment, part of an Amplify App.
+	//
+	// EnvironmentName is a required field
+	EnvironmentName *string `locationName:"environmentName" min:"1" type:"string" required:"true"`
+
+	// CloudFormation stack name of backend environment.
+	StackName *string `locationName:"stackName" min:"1" type:"string"`
+
+	// Last updated date and time for a backend environment, part of an Amplify
+	// App.
+	//
+	// UpdateTime is a required field
+	UpdateTime *time.Time `locationName:"updateTime" type:"timestamp" required:"true"`
+}
+
+// String returns the string representation
+func (s BackendEnvironment) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BackendEnvironment) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BackendEnvironmentArn != nil {
+		v := *s.BackendEnvironmentArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "backendEnvironmentArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreateTime != nil {
+		v := *s.CreateTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.DeploymentArtifacts != nil {
+		v := *s.DeploymentArtifacts
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "deploymentArtifacts", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "environmentName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stackName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UpdateTime != nil {
+		v := *s.UpdateTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "updateTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -422,6 +511,9 @@ type Branch struct {
 
 	// List of custom resources that are linked to this branch.
 	AssociatedResources []string `locationName:"associatedResources" type:"list"`
+
+	// ARN for a Backend Environment, part of an Amplify App.
+	BackendEnvironmentArn *string `locationName:"backendEnvironmentArn" min:"1" type:"string"`
 
 	// Basic Authorization credentials for a branch, part of an Amplify App.
 	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string"`
@@ -492,6 +584,9 @@ type Branch struct {
 	// Framework is a required field
 	Framework *string `locationName:"framework" type:"string" required:"true"`
 
+	// The Amplify Environment name for the pull request.
+	PullRequestEnvironmentName *string `locationName:"pullRequestEnvironmentName" type:"string"`
+
 	// The source branch if the branch is a pull request branch.
 	SourceBranch *string `locationName:"sourceBranch" min:"1" type:"string"`
 
@@ -546,6 +641,12 @@ func (s Branch) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	if s.BackendEnvironmentArn != nil {
+		v := *s.BackendEnvironmentArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "backendEnvironmentArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.BasicAuthCredentials != nil {
 		v := *s.BasicAuthCredentials
@@ -649,6 +750,12 @@ func (s Branch) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "framework", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PullRequestEnvironmentName != nil {
+		v := *s.PullRequestEnvironmentName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pullRequestEnvironmentName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SourceBranch != nil {
 		v := *s.SourceBranch
@@ -810,7 +917,7 @@ type DomainAssociation struct {
 	// DomainStatus is a required field
 	DomainStatus DomainStatus `locationName:"domainStatus" type:"string" required:"true" enum:"true"`
 
-	// Enables automated creation of Subdomains for branches.
+	// Enables automated creation of Subdomains for branches. (Currently not supported)
 	//
 	// EnableAutoSubDomain is a required field
 	EnableAutoSubDomain *bool `locationName:"enableAutoSubDomain" type:"boolean" required:"true"`

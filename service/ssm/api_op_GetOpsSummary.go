@@ -15,9 +15,7 @@ type GetOpsSummaryInput struct {
 
 	// Optional aggregators that return counts of OpsItems based on one or more
 	// expressions.
-	//
-	// Aggregators is a required field
-	Aggregators []OpsAggregator `min:"1" type:"list" required:"true"`
+	Aggregators []OpsAggregator `min:"1" type:"list"`
 
 	// Optional filters used to scope down the returned OpsItems.
 	Filters []OpsFilter `min:"1" type:"list"`
@@ -29,6 +27,12 @@ type GetOpsSummaryInput struct {
 
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string `type:"string"`
+
+	// The OpsItem data type to return.
+	ResultAttributes []OpsResultAttribute `min:"1" type:"list"`
+
+	// Specify the name of a resource data sync to get.
+	SyncName *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -39,10 +43,6 @@ func (s GetOpsSummaryInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetOpsSummaryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetOpsSummaryInput"}
-
-	if s.Aggregators == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Aggregators"))
-	}
 	if s.Aggregators != nil && len(s.Aggregators) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Aggregators", 1))
 	}
@@ -51,6 +51,12 @@ func (s *GetOpsSummaryInput) Validate() error {
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.ResultAttributes != nil && len(s.ResultAttributes) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResultAttributes", 1))
+	}
+	if s.SyncName != nil && len(*s.SyncName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SyncName", 1))
 	}
 	if s.Aggregators != nil {
 		for i, v := range s.Aggregators {
@@ -63,6 +69,13 @@ func (s *GetOpsSummaryInput) Validate() error {
 		for i, v := range s.Filters {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.ResultAttributes != nil {
+		for i, v := range s.ResultAttributes {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResultAttributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}

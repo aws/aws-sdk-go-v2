@@ -12,12 +12,12 @@ import (
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// ARN of the resource.
+	// Amazon Resource Name (ARN) of the license configuration.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `type:"string" required:"true"`
 
-	// List keys identifying tags to remove.
+	// Keys identifying the tags to remove.
 	//
 	// TagKeys is a required field
 	TagKeys []string `type:"list" required:"true"`
@@ -60,7 +60,7 @@ const opUntagResource = "UntagResource"
 // UntagResourceRequest returns a request value for making API operation for
 // AWS License Manager.
 //
-// Remove tags from a resource.
+// Removes the specified tags from the specified license configuration.
 //
 //    // Example sending a request using UntagResourceRequest.
 //    req := client.UntagResourceRequest(params)

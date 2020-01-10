@@ -99,6 +99,10 @@ type ClientAPI interface {
 
 	GenerateDataKeyRequest(*kms.GenerateDataKeyInput) kms.GenerateDataKeyRequest
 
+	GenerateDataKeyPairRequest(*kms.GenerateDataKeyPairInput) kms.GenerateDataKeyPairRequest
+
+	GenerateDataKeyPairWithoutPlaintextRequest(*kms.GenerateDataKeyPairWithoutPlaintextInput) kms.GenerateDataKeyPairWithoutPlaintextRequest
+
 	GenerateDataKeyWithoutPlaintextRequest(*kms.GenerateDataKeyWithoutPlaintextInput) kms.GenerateDataKeyWithoutPlaintextRequest
 
 	GenerateRandomRequest(*kms.GenerateRandomInput) kms.GenerateRandomRequest
@@ -108,6 +112,8 @@ type ClientAPI interface {
 	GetKeyRotationStatusRequest(*kms.GetKeyRotationStatusInput) kms.GetKeyRotationStatusRequest
 
 	GetParametersForImportRequest(*kms.GetParametersForImportInput) kms.GetParametersForImportRequest
+
+	GetPublicKeyRequest(*kms.GetPublicKeyInput) kms.GetPublicKeyRequest
 
 	ImportKeyMaterialRequest(*kms.ImportKeyMaterialInput) kms.ImportKeyMaterialRequest
 
@@ -133,6 +139,8 @@ type ClientAPI interface {
 
 	ScheduleKeyDeletionRequest(*kms.ScheduleKeyDeletionInput) kms.ScheduleKeyDeletionRequest
 
+	SignRequest(*kms.SignInput) kms.SignRequest
+
 	TagResourceRequest(*kms.TagResourceInput) kms.TagResourceRequest
 
 	UntagResourceRequest(*kms.UntagResourceInput) kms.UntagResourceRequest
@@ -142,6 +150,8 @@ type ClientAPI interface {
 	UpdateCustomKeyStoreRequest(*kms.UpdateCustomKeyStoreInput) kms.UpdateCustomKeyStoreRequest
 
 	UpdateKeyDescriptionRequest(*kms.UpdateKeyDescriptionInput) kms.UpdateKeyDescriptionRequest
+
+	VerifyRequest(*kms.VerifyInput) kms.VerifyRequest
 }
 
 var _ ClientAPI = (*kms.Client)(nil)

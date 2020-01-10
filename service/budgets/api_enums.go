@@ -9,10 +9,12 @@ type BudgetType string
 
 // Enum values for BudgetType
 const (
-	BudgetTypeUsage         BudgetType = "USAGE"
-	BudgetTypeCost          BudgetType = "COST"
-	BudgetTypeRiUtilization BudgetType = "RI_UTILIZATION"
-	BudgetTypeRiCoverage    BudgetType = "RI_COVERAGE"
+	BudgetTypeUsage                   BudgetType = "USAGE"
+	BudgetTypeCost                    BudgetType = "COST"
+	BudgetTypeRiUtilization           BudgetType = "RI_UTILIZATION"
+	BudgetTypeRiCoverage              BudgetType = "RI_COVERAGE"
+	BudgetTypeSavingsPlansUtilization BudgetType = "SAVINGS_PLANS_UTILIZATION"
+	BudgetTypeSavingsPlansCoverage    BudgetType = "SAVINGS_PLANS_COVERAGE"
 )
 
 func (enum BudgetType) MarshalValue() (string, error) {

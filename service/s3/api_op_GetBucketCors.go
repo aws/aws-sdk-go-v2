@@ -13,6 +13,8 @@ import (
 type GetBucketCorsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The bucket name for which to get the cors configuration.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -58,6 +60,8 @@ func (s GetBucketCorsInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetBucketCorsOutput struct {
 	_ struct{} `type:"structure"`
 
+	// A set of origins and methods (cross-origin access that you want to allow).
+	// You can add up to 100 rules to the configuration.
 	CORSRules []CORSRule `locationName:"CORSRule" type:"list" flattened:"true"`
 }
 
@@ -88,7 +92,20 @@ const opGetBucketCors = "GetBucketCors"
 // GetBucketCorsRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns the CORS configuration for the bucket.
+// Returns the cors configuration information set for the bucket.
+//
+// To use this operation, you must have permission to perform the s3:GetBucketCORS
+// action. By default, the bucket owner has this permission and can grant it
+// to others.
+//
+// For more information about cors, see Enabling Cross-Origin Resource Sharing
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html).
+//
+// The following operations are related to GetBucketCors:
+//
+//    * PutBucketCors
+//
+//    * DeleteBucketCors
 //
 //    // Example sending a request using GetBucketCorsRequest.
 //    req := client.GetBucketCorsRequest(params)

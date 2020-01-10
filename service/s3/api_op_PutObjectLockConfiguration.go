@@ -13,21 +13,22 @@ import (
 type PutObjectLockConfigurationInput struct {
 	_ struct{} `type:"structure" payload:"ObjectLockConfiguration"`
 
-	// The bucket whose object lock configuration you want to create or replace.
+	// The bucket whose Object Lock configuration you want to create or replace.
 	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
-	// The object lock configuration that you want to apply to the specified bucket.
+	// The Object Lock configuration that you want to apply to the specified bucket.
 	ObjectLockConfiguration *ObjectLockConfiguration `locationName:"ObjectLockConfiguration" type:"structure" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 
 	// Confirms that the requester knows that she or he will be charged for the
 	// request. Bucket owners need not specify this parameter in their requests.
-	// Documentation on downloading objects from requester pays buckets can be found
-	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+	// For information about downloading objects from Requester Pays buckets, see
+	// Downloading Objects in Requestor Pays Buckets (https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
+	// in the Amazon S3 Developer Guide.
 	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"true"`
 
-	// A token to allow Amazon S3 object lock to be enabled for an existing bucket.
+	// A token to allow Object Lock to be enabled for an existing bucket.
 	Token *string `location:"header" locationName:"x-amz-bucket-object-lock-token" type:"string"`
 }
 
@@ -116,9 +117,16 @@ const opPutObjectLockConfiguration = "PutObjectLockConfiguration"
 // PutObjectLockConfigurationRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Places an object lock configuration on the specified bucket. The rule specified
-// in the object lock configuration will be applied by default to every new
+// Places an Object Lock configuration on the specified bucket. The rule specified
+// in the Object Lock configuration will be applied by default to every new
 // object placed in the specified bucket.
+//
+// DefaultRetention requires either Days or Years. You can't specify both at
+// the same time.
+//
+// Related Resources
+//
+//    * Locking Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html)
 //
 //    // Example sending a request using PutObjectLockConfigurationRequest.
 //    req := client.PutObjectLockConfigurationRequest(params)

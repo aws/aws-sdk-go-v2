@@ -156,6 +156,8 @@ func ExampleClient_DeleteAliasRequest_shared00() {
 				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
 			case lambda.ErrCodeInvalidParameterValueException:
 				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeResourceConflictException:
+				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
 			case lambda.ErrCodeTooManyRequestsException:
 				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
 			default:
@@ -567,6 +569,10 @@ func ExampleClient_InvokeRequest_shared00() {
 				fmt.Println(lambda.ErrCodeKMSNotFoundException, aerr.Error())
 			case lambda.ErrCodeInvalidRuntimeException:
 				fmt.Println(lambda.ErrCodeInvalidRuntimeException, aerr.Error())
+			case lambda.ErrCodeResourceConflictException:
+				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
+			case lambda.ErrCodeResourceNotReadyException:
+				fmt.Println(lambda.ErrCodeResourceNotReadyException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -609,6 +615,8 @@ func ExampleClient_InvokeAsyncRequest_shared00() {
 				fmt.Println(lambda.ErrCodeInvalidRequestContentException, aerr.Error())
 			case lambda.ErrCodeInvalidRuntimeException:
 				fmt.Println(lambda.ErrCodeInvalidRuntimeException, aerr.Error())
+			case lambda.ErrCodeResourceConflictException:
+				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -783,6 +791,8 @@ func ExampleClient_PublishVersionRequest_shared00() {
 				fmt.Println(lambda.ErrCodeCodeStorageExceededException, aerr.Error())
 			case lambda.ErrCodePreconditionFailedException:
 				fmt.Println(lambda.ErrCodePreconditionFailedException, aerr.Error())
+			case lambda.ErrCodeResourceConflictException:
+				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -874,6 +884,8 @@ func ExampleClient_UpdateAliasRequest_shared00() {
 				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
 			case lambda.ErrCodePreconditionFailedException:
 				fmt.Println(lambda.ErrCodePreconditionFailedException, aerr.Error())
+			case lambda.ErrCodeResourceConflictException:
+				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -972,6 +984,8 @@ func ExampleClient_UpdateFunctionCodeRequest_shared00() {
 				fmt.Println(lambda.ErrCodeCodeStorageExceededException, aerr.Error())
 			case lambda.ErrCodePreconditionFailedException:
 				fmt.Println(lambda.ErrCodePreconditionFailedException, aerr.Error())
+			case lambda.ErrCodeResourceConflictException:
+				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

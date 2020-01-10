@@ -150,6 +150,10 @@ type RunJobFlowInput struct {
 	// resources on your behalf.
 	ServiceRole *string `type:"string"`
 
+	// Specifies the number of steps that can be executed concurrently. The default
+	// value is 1. The maximum value is 256.
+	StepConcurrencyLevel *int64 `type:"integer"`
+
 	// A list of steps to run.
 	Steps []StepConfig `type:"list"`
 
@@ -169,13 +173,10 @@ type RunJobFlowInput struct {
 	// A list of tags to associate with a cluster and propagate to Amazon EC2 instances.
 	Tags []Tag `type:"list"`
 
-	// This member will be deprecated.
-	//
-	// Whether the cluster is visible to all IAM users of the AWS account associated
-	// with the cluster. If this value is set to true, all IAM users of that AWS
-	// account can view and (if they have the proper policy permissions set) manage
-	// the cluster. If it is set to false, only the IAM user that created the cluster
-	// can view and manage it.
+	// A value of true indicates that all IAM users in the AWS account can perform
+	// cluster actions if they have the proper IAM policy permissions. This is the
+	// default. A value of false indicates that only the IAM user who created the
+	// cluster can perform actions.
 	VisibleToAllUsers *bool `type:"boolean"`
 }
 
@@ -229,6 +230,9 @@ func (s *RunJobFlowInput) Validate() error {
 // The result of the RunJobFlow operation.
 type RunJobFlowOutput struct {
 	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name of the cluster.
+	ClusterArn *string `min:"20" type:"string"`
 
 	// An unique identifier for the job flow.
 	JobFlowId *string `type:"string"`

@@ -18,10 +18,9 @@ type GetCostAndUsageInput struct {
 	// of dimension filters. For more information, see Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
 	Filter *Expression `type:"structure"`
 
-	// Sets the AWS cost granularity to MONTHLY or DAILY. If Granularity isn't set,
-	// the response object doesn't include the Granularity, either MONTHLY or DAILY.
-	//
-	// The GetCostAndUsageRequest operation supports only DAILY and MONTHLY granularities.
+	// Sets the AWS cost granularity to MONTHLY or DAILY, or HOURLY. If Granularity
+	// isn't set, the response object doesn't include the Granularity, either MONTHLY
+	// or DAILY, or HOURLY.
 	Granularity Granularity `type:"string" enum:"true"`
 
 	// You can group AWS costs using up to two different groups, either dimensions,
@@ -30,7 +29,7 @@ type GetCostAndUsageInput struct {
 	// When you group by tag key, you get all tag values, including empty strings.
 	//
 	// Valid values are AZ, INSTANCE_TYPE, LEGAL_ENTITY_NAME, LINKED_ACCOUNT, OPERATION,
-	// PLATFORM, PURCHASE_TYPE, SERVICE, TAGS, TENANCY, and USAGE_TYPE.
+	// PLATFORM, PURCHASE_TYPE, SERVICE, TAGS, TENANCY, RECORD_TYPE, and USAGE_TYPE.
 	GroupBy []GroupDefinition `type:"list"`
 
 	// Which metrics are returned in the query. For more information about blended
@@ -75,6 +74,11 @@ func (s *GetCostAndUsageInput) Validate() error {
 
 	if s.TimePeriod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TimePeriod"))
+	}
+	if s.Filter != nil {
+		if err := s.Filter.Validate(); err != nil {
+			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.TimePeriod != nil {
 		if err := s.TimePeriod.Validate(); err != nil {

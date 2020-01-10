@@ -88,6 +88,8 @@ const opUntagResource = "UntagResource"
 // UntagResourceRequest returns a request value for making API operation for
 // AmazonApiGatewayV2.
 //
+// Deletes a Tag.
+//
 //    // Example sending a request using UntagResourceRequest.
 //    req := client.UntagResourceRequest(params)
 //    resp, err := req.Send(context.TODO())

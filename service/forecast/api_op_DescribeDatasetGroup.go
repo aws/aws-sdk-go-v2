@@ -54,17 +54,12 @@ type DescribeDatasetGroupOutput struct {
 	// The name of the dataset group.
 	DatasetGroupName *string `min:"1" type:"string"`
 
-	// The domain associated with the dataset group. The Domain and DatasetType
-	// that you choose determine the fields that must be present in the training
-	// data that you import to the dataset. For example, if you choose the RETAIL
-	// domain and TARGET_TIME_SERIES as the DatasetType, Amazon Forecast requires
-	// item_id, timestamp, and demand fields to be present in your data. For more
-	// information, see howitworks-datasets-groups.
+	// The domain associated with the dataset group.
 	Domain Domain `type:"string" enum:"true"`
 
 	// When the dataset group was created or last updated from a call to the UpdateDatasetGroup
 	// operation. While the dataset group is being updated, LastModificationTime
-	// is the current query time.
+	// is the current time of the DescribeDatasetGroup call.
 	LastModificationTime *time.Time `type:"timestamp"`
 
 	// The status of the dataset group. States include:
@@ -77,10 +72,10 @@ type DescribeDatasetGroupOutput struct {
 	//
 	//    * UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED
 	//
-	// The UPDATE states apply when the UpdateDatasetGroup operation is called.
+	// The UPDATE states apply when you call the UpdateDatasetGroup operation.
 	//
-	// The Status of the dataset group must be ACTIVE before creating a predictor
-	// using the dataset group.
+	// The Status of the dataset group must be ACTIVE before you can use the dataset
+	// group to create a predictor.
 	Status *string `type:"string"`
 }
 
@@ -96,7 +91,7 @@ const opDescribeDatasetGroup = "DescribeDatasetGroup"
 //
 // Describes a dataset group created using the CreateDatasetGroup operation.
 //
-// In addition to listing the properties provided by the user in the CreateDatasetGroup
+// In addition to listing the parameters provided in the CreateDatasetGroup
 // request, this operation includes the following properties:
 //
 //    * DatasetArns - The datasets belonging to the group.

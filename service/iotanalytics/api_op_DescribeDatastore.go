@@ -18,8 +18,9 @@ type DescribeDatastoreInput struct {
 	// DatastoreName is a required field
 	DatastoreName *string `location:"uri" locationName:"datastoreName" min:"1" type:"string" required:"true"`
 
-	// If true, additional statistical information about the datastore is included
-	// in the response.
+	// If true, additional statistical information about the data store is included
+	// in the response. This feature cannot be used with a data store whose S3 storage
+	// is customer-managed.
 	IncludeStatistics *bool `location:"querystring" locationName:"includeStatistics" type:"boolean"`
 }
 

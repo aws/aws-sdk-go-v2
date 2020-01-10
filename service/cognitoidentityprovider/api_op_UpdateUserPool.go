@@ -13,6 +13,15 @@ import (
 type UpdateUserPoolInput struct {
 	_ struct{} `type:"structure"`
 
+	// Use this setting to define which verified available method a user can use
+	// to recover their password when they call ForgotPassword. It allows you to
+	// define a preferred method when a user has more than one method available.
+	// With this setting, SMS does not qualify for a valid password recovery mechanism
+	// if the user also has SMS MFA enabled. In the absence of this setting, Cognito
+	// uses the legacy behavior to determine the recovery method where SMS is preferred
+	// over email.
+	AccountRecoverySetting *AccountRecoverySettingType `type:"structure"`
+
 	// The configuration for AdminCreateUser requests.
 	AdminCreateUserConfig *AdminCreateUserConfigType `type:"structure"`
 
@@ -104,6 +113,11 @@ func (s *UpdateUserPoolInput) Validate() error {
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+	if s.AccountRecoverySetting != nil {
+		if err := s.AccountRecoverySetting.Validate(); err != nil {
+			invalidParams.AddNested("AccountRecoverySetting", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.AdminCreateUserConfig != nil {
 		if err := s.AdminCreateUserConfig.Validate(); err != nil {
 			invalidParams.AddNested("AdminCreateUserConfig", err.(aws.ErrInvalidParams))
@@ -162,9 +176,11 @@ const opUpdateUserPool = "UpdateUserPool"
 // UpdateUserPoolRequest returns a request value for making API operation for
 // Amazon Cognito Identity Provider.
 //
-// Updates the specified user pool with the specified attributes. If you don't
-// provide a value for an attribute, it will be set to the default value. You
-// can get a list of the current user pool settings with .
+// Updates the specified user pool with the specified attributes. You can get
+// a list of the current user pool settings with .
+//
+// If you don't provide a value for an attribute, it will be set to the default
+// value.
 //
 //    // Example sending a request using UpdateUserPoolRequest.
 //    req := client.UpdateUserPoolRequest(params)

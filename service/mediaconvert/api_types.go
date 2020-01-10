@@ -275,7 +275,8 @@ func (s Ac3Settings) MarshalFields(e protocol.FieldEncoder) error {
 type AccelerationSettings struct {
 	_ struct{} `type:"structure"`
 
-	// Acceleration configuration for the job.
+	// Specify the conditions when the service will run your job with accelerated
+	// transcoding.
 	//
 	// Mode is a required field
 	Mode AccelerationMode `locationName:"mode" type:"string" required:"true" enum:"true"`
@@ -628,12 +629,16 @@ type AudioDescription struct {
 	// * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings
 	CodecSettings *AudioCodecSettings `locationName:"codecSettings" type:"structure"`
 
-	// Specify the language for this audio output track, using the ISO 639-2 or
-	// ISO 639-3 three-letter language code. The language specified will be used
-	// when 'Follow Input Language Code' is not selected or when 'Follow Input Language
-	// Code' is selected but there is no ISO 639 language code specified by the
-	// input.
-	CustomLanguageCode *string `locationName:"customLanguageCode" min:"3" type:"string"`
+	// Specify the language for this audio output track. The service puts this language
+	// code into your output audio track when you set Language code control (AudioLanguageCodeControl)
+	// to Use configured (USE_CONFIGURED). The service also uses your specified
+	// custom language code when you set Language code control (AudioLanguageCodeControl)
+	// to Follow input (FOLLOW_INPUT), but your input file doesn't specify a language
+	// code. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming
+	// outputs, you can also use any other code in the full RFC-5646 specification.
+	// Streaming outputs are those that are in one of the following output groups:
+	// CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming.
+	CustomLanguageCode *string `locationName:"customLanguageCode" type:"string"`
 
 	// Indicates the language of the audio output track. The ISO 639 language specified
 	// in the 'Language Code' drop down will be used when 'Follow Input Language
@@ -641,10 +646,12 @@ type AudioDescription struct {
 	// there is no ISO 639 language code specified by the input.
 	LanguageCode LanguageCode `locationName:"languageCode" type:"string" enum:"true"`
 
-	// Choosing FOLLOW_INPUT will cause the ISO 639 language code of the output
-	// to follow the ISO 639 language code of the input. The language specified
-	// for languageCode' will be used when USE_CONFIGURED is selected or when FOLLOW_INPUT
-	// is selected but there is no ISO 639 language code specified by the input.
+	// Specify which source for language code takes precedence for this audio track.
+	// When you choose Follow input (FOLLOW_INPUT), the service uses the language
+	// code from the input track if it's present. If there's no languge code on
+	// the input track, the service uses the code that you specify in the setting
+	// Language code (languageCode or customLanguageCode). When you choose Use configured
+	// (USE_CONFIGURED), the service uses the language code that you specify.
 	LanguageCodeControl AudioLanguageCodeControl `locationName:"languageCodeControl" type:"string" enum:"true"`
 
 	// Advanced audio remixing settings.
@@ -665,9 +672,6 @@ func (s AudioDescription) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AudioDescription) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AudioDescription"}
-	if s.CustomLanguageCode != nil && len(*s.CustomLanguageCode) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("CustomLanguageCode", 3))
-	}
 	if s.AudioNormalizationSettings != nil {
 		if err := s.AudioNormalizationSettings.Validate(); err != nil {
 			invalidParams.AddNested("AudioNormalizationSettings", err.(aws.ErrInvalidParams))
@@ -1330,13 +1334,16 @@ type CaptionDescription struct {
 	// each input.
 	CaptionSelectorName *string `locationName:"captionSelectorName" min:"1" type:"string"`
 
-	// Indicates the language of the caption output track, using the ISO 639-2 or
-	// ISO 639-3 three-letter language code. For most captions output formats, the
-	// encoder puts this language information in the output captions metadata. If
-	// your output captions format is DVB-Sub or Burn in, the encoder uses this
-	// language information to choose the font language for rendering the captions
-	// text.
-	CustomLanguageCode *string `locationName:"customLanguageCode" min:"3" type:"string"`
+	// Specify the language for this captions output track. For most captions output
+	// formats, the encoder puts this language information in the output captions
+	// metadata. If your output captions format is DVB-Sub or Burn in, the encoder
+	// uses this language information when automatically selecting the font script
+	// for rendering the captions text. For all outputs, you can use an ISO 639-2
+	// or ISO 639-3 code. For streaming outputs, you can also use any other code
+	// in the full RFC-5646 specification. Streaming outputs are those that are
+	// in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft
+	// Smooth Streaming.
+	CustomLanguageCode *string `locationName:"customLanguageCode" type:"string"`
 
 	// Specific settings required by destination type. Note that burnin_destination_settings
 	// are not available if the source of the caption data is Embedded or Teletext.
@@ -1367,9 +1374,6 @@ func (s *CaptionDescription) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CaptionDescription"}
 	if s.CaptionSelectorName != nil && len(*s.CaptionSelectorName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CaptionSelectorName", 1))
-	}
-	if s.CustomLanguageCode != nil && len(*s.CustomLanguageCode) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("CustomLanguageCode", 3))
 	}
 	if s.DestinationSettings != nil {
 		if err := s.DestinationSettings.Validate(); err != nil {
@@ -1422,13 +1426,16 @@ func (s CaptionDescription) MarshalFields(e protocol.FieldEncoder) error {
 type CaptionDescriptionPreset struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates the language of the caption output track, using the ISO 639-2 or
-	// ISO 639-3 three-letter language code. For most captions output formats, the
-	// encoder puts this language information in the output captions metadata. If
-	// your output captions format is DVB-Sub or Burn in, the encoder uses this
-	// language information to choose the font language for rendering the captions
-	// text.
-	CustomLanguageCode *string `locationName:"customLanguageCode" min:"3" type:"string"`
+	// Specify the language for this captions output track. For most captions output
+	// formats, the encoder puts this language information in the output captions
+	// metadata. If your output captions format is DVB-Sub or Burn in, the encoder
+	// uses this language information when automatically selecting the font script
+	// for rendering the captions text. For all outputs, you can use an ISO 639-2
+	// or ISO 639-3 code. For streaming outputs, you can also use any other code
+	// in the full RFC-5646 specification. Streaming outputs are those that are
+	// in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft
+	// Smooth Streaming.
+	CustomLanguageCode *string `locationName:"customLanguageCode" type:"string"`
 
 	// Specific settings required by destination type. Note that burnin_destination_settings
 	// are not available if the source of the caption data is Embedded or Teletext.
@@ -1457,9 +1464,6 @@ func (s CaptionDescriptionPreset) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CaptionDescriptionPreset) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CaptionDescriptionPreset"}
-	if s.CustomLanguageCode != nil && len(*s.CustomLanguageCode) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("CustomLanguageCode", 3))
-	}
 	if s.DestinationSettings != nil {
 		if err := s.DestinationSettings.Validate(); err != nil {
 			invalidParams.AddNested("DestinationSettings", err.(aws.ErrInvalidParams))
@@ -1858,6 +1862,67 @@ func (s ChannelMapping) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specify the details for each pair of HLS and DASH additional manifests that
+// you want the service to generate for this CMAF output group. Each pair of
+// manifests can reference a different subset of outputs in the group.
+type CmafAdditionalManifest struct {
+	_ struct{} `type:"structure"`
+
+	// Specify a name modifier that the service adds to the name of this manifest
+	// to make it different from the file names of the other main manifests in the
+	// output group. For example, say that the default main manifest for your HLS
+	// group is film-name.m3u8. If you enter "-no-premium" for this setting, then
+	// the file name the service generates for this top-level manifest is film-name-no-premium.m3u8.
+	// For HLS output groups, specify a manifestNameModifier that is different from
+	// the nameModifier of the output. The service uses the output name modifier
+	// to create unique names for the individual variant manifests.
+	ManifestNameModifier *string `locationName:"manifestNameModifier" min:"1" type:"string"`
+
+	// Specify the outputs that you want this additional top-level manifest to reference.
+	SelectedOutputs []string `locationName:"selectedOutputs" type:"list"`
+}
+
+// String returns the string representation
+func (s CmafAdditionalManifest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CmafAdditionalManifest) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CmafAdditionalManifest"}
+	if s.ManifestNameModifier != nil && len(*s.ManifestNameModifier) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ManifestNameModifier", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CmafAdditionalManifest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ManifestNameModifier != nil {
+		v := *s.ManifestNameModifier
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "manifestNameModifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SelectedOutputs != nil {
+		v := s.SelectedOutputs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "selectedOutputs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Settings for CMAF encryption
 type CmafEncryptionSettings struct {
 	_ struct{} `type:"structure"`
@@ -1953,6 +2018,14 @@ func (s CmafEncryptionSettings) MarshalFields(e protocol.FieldEncoder) error {
 type CmafGroupSettings struct {
 	_ struct{} `type:"structure"`
 
+	// By default, the service creates one top-level .m3u8 HLS manifest and one
+	// top -level .mpd DASH manifest for each CMAF output group in your job. These
+	// default manifests reference every output in the output group. To create additional
+	// top-level manifests that reference a subset of the outputs in the output
+	// group, specify a list of them here. For each additional manifest that you
+	// specify, the service creates one HLS manifest and one DASH manifest.
+	AdditionalManifests []CmafAdditionalManifest `locationName:"additionalManifests" type:"list"`
+
 	// A partial URI prefix that will be put in the manifest file at the top level
 	// BaseURL element. Can be used if streams are delivered from a different URL
 	// than the manifest file.
@@ -2012,6 +2085,14 @@ type CmafGroupSettings struct {
 	// to 1, your final segment is 3.5 seconds.
 	MinFinalSegmentLength *float64 `locationName:"minFinalSegmentLength" type:"double"`
 
+	// Specify whether your DASH profile is on-demand or main. When you choose Main
+	// profile (MAIN_PROFILE), the service signals urn:mpeg:dash:profile:isoff-main:2011
+	// in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE),
+	// the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd.
+	// When you choose On-demand, you must also set the output group setting Segment
+	// control (SegmentControl) to Single file (SINGLE_FILE).
+	MpdProfile CmafMpdProfile `locationName:"mpdProfile" type:"string" enum:"true"`
+
 	// When set to SINGLE_FILE, a single output file is generated, which is internally
 	// segmented using the Fragment Length and Segment Length. When set to SEGMENTED_FILES,
 	// separate segment files will be created.
@@ -2052,6 +2133,13 @@ func (s *CmafGroupSettings) Validate() error {
 	if s.SegmentLength != nil && *s.SegmentLength < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("SegmentLength", 1))
 	}
+	if s.AdditionalManifests != nil {
+		for i, v := range s.AdditionalManifests {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AdditionalManifests", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 	if s.Encryption != nil {
 		if err := s.Encryption.Validate(); err != nil {
 			invalidParams.AddNested("Encryption", err.(aws.ErrInvalidParams))
@@ -2066,6 +2154,18 @@ func (s *CmafGroupSettings) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CmafGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AdditionalManifests != nil {
+		v := s.AdditionalManifests
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "additionalManifests", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.BaseUrl != nil {
 		v := *s.BaseUrl
 
@@ -2131,6 +2231,12 @@ func (s CmafGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "minFinalSegmentLength", protocol.Float64Value(v), metadata)
+	}
+	if len(s.MpdProfile) > 0 {
+		v := s.MpdProfile
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "mpdProfile", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.SegmentControl) > 0 {
 		v := s.SegmentControl
@@ -2303,6 +2409,9 @@ type ContainerSettings struct {
 	// Settings for MP4 container. You can create audio-only AAC outputs with this
 	// container.
 	Mp4Settings *Mp4Settings `locationName:"mp4Settings" type:"structure"`
+
+	// Settings for MP4 segments in DASH
+	MpdSettings *MpdSettings `locationName:"mpdSettings" type:"structure"`
 }
 
 // String returns the string representation
@@ -2368,6 +2477,70 @@ func (s ContainerSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "mp4Settings", v, metadata)
 	}
+	if s.MpdSettings != nil {
+		v := s.MpdSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "mpdSettings", v, metadata)
+	}
+	return nil
+}
+
+// Specify the details for each additional DASH manifest that you want the service
+// to generate for this output group. Each manifest can reference a different
+// subset of outputs in the group.
+type DashAdditionalManifest struct {
+	_ struct{} `type:"structure"`
+
+	// Specify a name modifier that the service adds to the name of this manifest
+	// to make it different from the file names of the other main manifests in the
+	// output group. For example, say that the default main manifest for your DASH
+	// group is film-name.mpd. If you enter "-no-premium" for this setting, then
+	// the file name the service generates for this top-level manifest is film-name-no-premium.mpd.
+	ManifestNameModifier *string `locationName:"manifestNameModifier" min:"1" type:"string"`
+
+	// Specify the outputs that you want this additional top-level manifest to reference.
+	SelectedOutputs []string `locationName:"selectedOutputs" type:"list"`
+}
+
+// String returns the string representation
+func (s DashAdditionalManifest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DashAdditionalManifest) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DashAdditionalManifest"}
+	if s.ManifestNameModifier != nil && len(*s.ManifestNameModifier) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ManifestNameModifier", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DashAdditionalManifest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ManifestNameModifier != nil {
+		v := *s.ManifestNameModifier
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "manifestNameModifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SelectedOutputs != nil {
+		v := s.SelectedOutputs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "selectedOutputs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	return nil
 }
 
@@ -2416,6 +2589,12 @@ func (s DashIsoEncryptionSettings) MarshalFields(e protocol.FieldEncoder) error 
 type DashIsoGroupSettings struct {
 	_ struct{} `type:"structure"`
 
+	// By default, the service creates one .mpd DASH manifest for each DASH ISO
+	// output group in your job. This default manifest references every output in
+	// the output group. To create additional DASH manifests that reference a subset
+	// of the outputs in the output group, specify a list of them here.
+	AdditionalManifests []DashAdditionalManifest `locationName:"additionalManifests" type:"list"`
+
 	// A partial URI prefix that will be put in the manifest (.mpd) file at the
 	// top level BaseURL element. Can be used if streams are delivered from a different
 	// URL than the manifest file.
@@ -2450,6 +2629,14 @@ type DashIsoGroupSettings struct {
 	// playout.
 	MinBufferTime *int64 `locationName:"minBufferTime" type:"integer"`
 
+	// Specify whether your DASH profile is on-demand or main. When you choose Main
+	// profile (MAIN_PROFILE), the service signals urn:mpeg:dash:profile:isoff-main:2011
+	// in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE),
+	// the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd.
+	// When you choose On-demand, you must also set the output group setting Segment
+	// control (SegmentControl) to Single file (SINGLE_FILE).
+	MpdProfile DashIsoMpdProfile `locationName:"mpdProfile" type:"string" enum:"true"`
+
 	// When set to SINGLE_FILE, a single output file is generated, which is internally
 	// segmented using the Fragment Length and Segment Length. When set to SEGMENTED_FILES,
 	// separate segment files will be created.
@@ -2462,12 +2649,13 @@ type DashIsoGroupSettings struct {
 	// files as in other output types.
 	SegmentLength *int64 `locationName:"segmentLength" min:"1" type:"integer"`
 
-	// When you enable Precise segment duration in manifests (writeSegmentTimelineInRepresentation),
-	// your DASH manifest shows precise segment durations. The segment duration
-	// information appears inside the SegmentTimeline element, inside SegmentTemplate
-	// at the Representation level. When this feature isn't enabled, the segment
-	// durations in your DASH manifest are approximate. The segment duration information
-	// appears in the duration attribute of the SegmentTemplate element.
+	// If you get an HTTP error in the 400 range when you play back your DASH output,
+	// enable this setting and run your transcoding job again. When you enable this
+	// setting, the service writes precise segment durations in the DASH manifest.
+	// The segment duration information appears inside the SegmentTimeline element,
+	// inside SegmentTemplate at the Representation level. When you don't enable
+	// this setting, the service writes approximate segment durations in your DASH
+	// manifest.
 	WriteSegmentTimelineInRepresentation DashIsoWriteSegmentTimelineInRepresentation `locationName:"writeSegmentTimelineInRepresentation" type:"string" enum:"true"`
 }
 
@@ -2485,6 +2673,13 @@ func (s *DashIsoGroupSettings) Validate() error {
 	if s.SegmentLength != nil && *s.SegmentLength < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("SegmentLength", 1))
 	}
+	if s.AdditionalManifests != nil {
+		for i, v := range s.AdditionalManifests {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AdditionalManifests", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2494,6 +2689,18 @@ func (s *DashIsoGroupSettings) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DashIsoGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AdditionalManifests != nil {
+		v := s.AdditionalManifests
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "additionalManifests", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.BaseUrl != nil {
 		v := *s.BaseUrl
 
@@ -2535,6 +2742,12 @@ func (s DashIsoGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "minBufferTime", protocol.Int64Value(v), metadata)
+	}
+	if len(s.MpdProfile) > 0 {
+		v := s.MpdProfile
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "mpdProfile", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.SegmentControl) > 0 {
 		v := s.SegmentControl
@@ -2634,6 +2847,88 @@ func (s DestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "s3Settings", v, metadata)
+	}
+	return nil
+}
+
+// Settings for Dolby Vision
+type DolbyVision struct {
+	_ struct{} `type:"structure"`
+
+	// Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to override
+	// the MaxCLL and MaxFALL values in your input with new values.
+	L6Metadata *DolbyVisionLevel6Metadata `locationName:"l6Metadata" type:"structure"`
+
+	// Use Dolby Vision Mode to choose how the service will handle Dolby Vision
+	// MaxCLL and MaxFALL properies.
+	L6Mode DolbyVisionLevel6Mode `locationName:"l6Mode" type:"string" enum:"true"`
+
+	// In the current MediaConvert implementation, the Dolby Vision profile is always
+	// 5 (PROFILE_5). Therefore, all of your inputs must contain Dolby Vision frame
+	// interleaved data.
+	Profile DolbyVisionProfile `locationName:"profile" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s DolbyVision) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DolbyVision) MarshalFields(e protocol.FieldEncoder) error {
+	if s.L6Metadata != nil {
+		v := s.L6Metadata
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "l6Metadata", v, metadata)
+	}
+	if len(s.L6Mode) > 0 {
+		v := s.L6Mode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "l6Mode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Profile) > 0 {
+		v := s.Profile
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "profile", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to override
+// the MaxCLL and MaxFALL values in your input with new values.
+type DolbyVisionLevel6Metadata struct {
+	_ struct{} `type:"structure"`
+
+	// Maximum Content Light Level. Static HDR metadata that corresponds to the
+	// brightest pixel in the entire stream. Measured in nits.
+	MaxCll *int64 `locationName:"maxCll" type:"integer"`
+
+	// Maximum Frame-Average Light Level. Static HDR metadata that corresponds to
+	// the highest frame-average brightness in the entire stream. Measured in nits.
+	MaxFall *int64 `locationName:"maxFall" type:"integer"`
+}
+
+// String returns the string representation
+func (s DolbyVisionLevel6Metadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DolbyVisionLevel6Metadata) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MaxCll != nil {
+		v := *s.MaxCll
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxCll", protocol.Int64Value(v), metadata)
+	}
+	if s.MaxFall != nil {
+		v := *s.MaxFall
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxFall", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -2857,6 +3152,11 @@ type DvbSubDestinationSettings struct {
 	// burn-in and DVB-Sub font settings must match.
 	ShadowYOffset *int64 `locationName:"shadowYOffset" type:"integer"`
 
+	// Specify whether your DVB subtitles are standard or for hearing impaired.
+	// Choose hearing impaired if your subtitles include audio descriptions and
+	// dialogue. Choose standard if your subtitles include only dialogue.
+	SubtitlingType DvbSubtitlingType `locationName:"subtitlingType" type:"string" enum:"true"`
+
 	// Only applies to jobs with input captions in Teletext or STL formats. Specify
 	// whether the spacing between letters in your captions is set by the captions
 	// grid or varies depending on letter width. Choose fixed grid to conform to
@@ -2992,6 +3292,12 @@ func (s DvbSubDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "shadowYOffset", protocol.Int64Value(v), metadata)
+	}
+	if len(s.SubtitlingType) > 0 {
+		v := s.SubtitlingType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "subtitlingType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.TeletextSpacing) > 0 {
 		v := s.TeletextSpacing
@@ -4834,17 +5140,17 @@ type H265Settings struct {
 	// Inserts timecode for each frame as 4 bytes of an unregistered SEI message.
 	UnregisteredSeiTimecode H265UnregisteredSeiTimecode `locationName:"unregisteredSeiTimecode" type:"string" enum:"true"`
 
-	// Use this setting only for outputs encoded with H.265 that are in CMAF or
-	// DASH output groups. If you include writeMp4PackagingType in your JSON job
-	// specification for other outputs, your video might not work properly with
-	// downstream systems and video players. If the location of parameter set NAL
-	// units don't matter in your workflow, ignore this setting. The service defaults
-	// to marking your output as HEV1. Choose HVC1 to mark your output as HVC1.
-	// This makes your output compliant with this specification: ISO IECJTC1 SC29
-	// N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service
-	// stores parameter set NAL units in the sample headers but not in the samples
-	// directly. Keep the default HEV1 to mark your output as HEV1. For these outputs,
-	// the service writes parameter set NAL units directly into the samples.
+	// If the location of parameter set NAL units doesn't matter in your workflow,
+	// ignore this setting. Use this setting only with CMAF or DASH outputs, or
+	// with standalone file outputs in an MPEG-4 container (MP4 outputs). Choose
+	// HVC1 to mark your output as HVC1. This makes your output compliant with the
+	// following specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15
+	// 3rd Edition. For these outputs, the service stores parameter set NAL units
+	// in the sample headers but not in the samples directly. For MP4 outputs, when
+	// you choose HVC1, your output video might not work properly with some downstream
+	// systems and video players. The service defaults to marking your output as
+	// HEV1. For these outputs, the service writes parameter set NAL units directly
+	// into the samples.
 	WriteMp4PackagingType H265WriteMp4PackagingType `locationName:"writeMp4PackagingType" type:"string" enum:"true"`
 }
 
@@ -5280,6 +5586,67 @@ func (s Hdr10Metadata) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specify the details for each additional HLS manifest that you want the service
+// to generate for this output group. Each manifest can reference a different
+// subset of outputs in the group.
+type HlsAdditionalManifest struct {
+	_ struct{} `type:"structure"`
+
+	// Specify a name modifier that the service adds to the name of this manifest
+	// to make it different from the file names of the other main manifests in the
+	// output group. For example, say that the default main manifest for your HLS
+	// group is film-name.m3u8. If you enter "-no-premium" for this setting, then
+	// the file name the service generates for this top-level manifest is film-name-no-premium.m3u8.
+	// For HLS output groups, specify a manifestNameModifier that is different from
+	// the nameModifier of the output. The service uses the output name modifier
+	// to create unique names for the individual variant manifests.
+	ManifestNameModifier *string `locationName:"manifestNameModifier" min:"1" type:"string"`
+
+	// Specify the outputs that you want this additional top-level manifest to reference.
+	SelectedOutputs []string `locationName:"selectedOutputs" type:"list"`
+}
+
+// String returns the string representation
+func (s HlsAdditionalManifest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HlsAdditionalManifest) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HlsAdditionalManifest"}
+	if s.ManifestNameModifier != nil && len(*s.ManifestNameModifier) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ManifestNameModifier", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HlsAdditionalManifest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ManifestNameModifier != nil {
+		v := *s.ManifestNameModifier
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "manifestNameModifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SelectedOutputs != nil {
+		v := s.SelectedOutputs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "selectedOutputs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Caption Language Mapping
 type HlsCaptionLanguageMapping struct {
 	_ struct{} `type:"structure"`
@@ -5287,7 +5654,7 @@ type HlsCaptionLanguageMapping struct {
 	// Caption channel.
 	CaptionChannel *int64 `locationName:"captionChannel" type:"integer"`
 
-	// Specify the language for this caption channel, using the ISO 639-2 or ISO
+	// Specify the language for this captions channel, using the ISO 639-2 or ISO
 	// 639-3 three-letter language code
 	CustomLanguageCode *string `locationName:"customLanguageCode" min:"3" type:"string"`
 
@@ -5458,6 +5825,12 @@ type HlsGroupSettings struct {
 	// themselves.
 	AdMarkers []HlsAdMarkers `locationName:"adMarkers" type:"list"`
 
+	// By default, the service creates one top-level .m3u8 HLS manifest for each
+	// HLS output group in your job. This default manifest references every output
+	// in the output group. To create additional top-level manifests that reference
+	// a subset of the outputs in the output group, specify a list of them here.
+	AdditionalManifests []HlsAdditionalManifest `locationName:"additionalManifests" type:"list"`
+
 	// A partial URI prefix that will be prepended to each output in the media .m3u8
 	// file. Can be used if base manifest is delivered from a different URL than
 	// the main .m3u8 file.
@@ -5587,6 +5960,13 @@ func (s *HlsGroupSettings) Validate() error {
 	if s.TimestampDeltaMilliseconds != nil && *s.TimestampDeltaMilliseconds < -2.147483648e+09 {
 		invalidParams.Add(aws.NewErrParamMinValue("TimestampDeltaMilliseconds", -2.147483648e+09))
 	}
+	if s.AdditionalManifests != nil {
+		for i, v := range s.AdditionalManifests {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AdditionalManifests", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 	if s.CaptionLanguageMappings != nil {
 		for i, v := range s.CaptionLanguageMappings {
 			if err := v.Validate(); err != nil {
@@ -5616,6 +5996,18 @@ func (s HlsGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.Start()
 		for _, v1 := range v {
 			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.AdditionalManifests != nil {
+		v := s.AdditionalManifests
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "additionalManifests", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
 		}
 		ls0.End()
 
@@ -6751,8 +7143,8 @@ type InsertableImage struct {
 	// blank.
 	Height *int64 `locationName:"height" type:"integer"`
 
-	// Specify the Amazon S3 location of the image that you want to overlay on the
-	// video. Use a PNG or TGA file.
+	// Specify the HTTP, HTTPS, or Amazon S3 location of the image that you want
+	// to overlay on the video. Use a PNG or TGA file.
 	ImageInserterInput *string `locationName:"imageInserterInput" min:"14" type:"string"`
 
 	// Specify the distance, in pixels, between the inserted image and the left
@@ -6882,6 +7274,19 @@ type Job struct {
 	// complex content.
 	AccelerationSettings *AccelerationSettings `locationName:"accelerationSettings" type:"structure"`
 
+	// Describes whether the current job is running with accelerated transcoding.
+	// For jobs that have Acceleration (AccelerationMode) set to DISABLED, AccelerationStatus
+	// is always NOT_APPLICABLE. For jobs that have Acceleration (AccelerationMode)
+	// set to ENABLED or PREFERRED, AccelerationStatus is one of the other states.
+	// AccelerationStatus is IN_PROGRESS initially, while the service determines
+	// whether the input files and job settings are compatible with accelerated
+	// transcoding. If they are, AcclerationStatus is ACCELERATED. If your input
+	// files and job settings aren't compatible with accelerated transcoding, the
+	// service either fails your job or runs it without accelerated transcoding,
+	// depending on how you set Acceleration (AccelerationMode). When the service
+	// runs your job without accelerated transcoding, AccelerationStatus is NOT_ACCELERATED.
+	AccelerationStatus AccelerationStatus `locationName:"accelerationStatus" type:"string" enum:"true"`
+
 	// An identifier for this resource that is unique within all of AWS.
 	Arn *string `locationName:"arn" type:"string"`
 
@@ -6921,6 +7326,10 @@ type Job struct {
 	// The job template that the job is created from, if it is created from a job
 	// template.
 	JobTemplate *string `locationName:"jobTemplate" type:"string"`
+
+	// Provides messages from the service about jobs that you have already successfully
+	// submitted.
+	Messages *JobMessages `locationName:"messages" type:"structure"`
 
 	// List of output group details
 	OutputGroupDetails []OutputGroupDetail `locationName:"outputGroupDetails" type:"list"`
@@ -6985,6 +7394,12 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "accelerationSettings", v, metadata)
 	}
+	if len(s.AccelerationStatus) > 0 {
+		v := s.AccelerationStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "accelerationStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.Arn != nil {
 		v := *s.Arn
 
@@ -7039,6 +7454,12 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "jobTemplate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Messages != nil {
+		v := s.Messages
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "messages", v, metadata)
 	}
 	if s.OutputGroupDetails != nil {
 		v := s.OutputGroupDetails
@@ -7116,6 +7537,54 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
+
+	}
+	return nil
+}
+
+// Provides messages from the service about jobs that you have already successfully
+// submitted.
+type JobMessages struct {
+	_ struct{} `type:"structure"`
+
+	// List of messages that are informational only and don't indicate a problem
+	// with your job.
+	Info []string `locationName:"info" type:"list"`
+
+	// List of messages that warn about conditions that might cause your job not
+	// to run or to fail.
+	Warning []string `locationName:"warning" type:"list"`
+}
+
+// String returns the string representation
+func (s JobMessages) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobMessages) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Info != nil {
+		v := s.Info
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "info", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Warning != nil {
+		v := s.Warning
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "warning", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
 
 	}
 	return nil
@@ -8725,6 +9194,59 @@ func (s Mp4Settings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Settings for MP4 segments in DASH
+type MpdSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Use this setting only in DASH output groups that include sidecar TTML or
+	// IMSC captions. You specify sidecar captions in a separate output from your
+	// audio and video. Choose Raw (RAW) for captions in a single XML file in a
+	// raw container. Choose Fragmented MPEG-4 (FRAGMENTED_MP4) for captions in
+	// XML format contained within fragmented MP4 files. This set of fragmented
+	// MP4 files is separate from your video and audio fragmented MP4 files.
+	CaptionContainerType MpdCaptionContainerType `locationName:"captionContainerType" type:"string" enum:"true"`
+
+	// Use this setting only when you specify SCTE-35 markers from ESAM. Choose
+	// INSERT to put SCTE-35 markers in this output at the insertion points that
+	// you specify in an ESAM XML document. Provide the document in the setting
+	// SCC XML (sccXml).
+	Scte35Esam MpdScte35Esam `locationName:"scte35Esam" type:"string" enum:"true"`
+
+	// Ignore this setting unless you have SCTE-35 markers in your input video file.
+	// Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear
+	// in your input to also appear in this output. Choose None (NONE) if you don't
+	// want those SCTE-35 markers in this output.
+	Scte35Source MpdScte35Source `locationName:"scte35Source" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s MpdSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MpdSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.CaptionContainerType) > 0 {
+		v := s.CaptionContainerType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "captionContainerType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Scte35Esam) > 0 {
+		v := s.Scte35Esam
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "scte35Esam", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Scte35Source) > 0 {
+		v := s.Scte35Source
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "scte35Source", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to
 // the value MPEG2.
 type Mpeg2Settings struct {
@@ -9103,6 +9625,64 @@ func (s Mpeg2Settings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specify the details for each additional Microsoft Smooth Streaming manifest
+// that you want the service to generate for this output group. Each manifest
+// can reference a different subset of outputs in the group.
+type MsSmoothAdditionalManifest struct {
+	_ struct{} `type:"structure"`
+
+	// Specify a name modifier that the service adds to the name of this manifest
+	// to make it different from the file names of the other main manifests in the
+	// output group. For example, say that the default main manifest for your Microsoft
+	// Smooth group is film-name.ismv. If you enter "-no-premium" for this setting,
+	// then the file name the service generates for this top-level manifest is film-name-no-premium.ismv.
+	ManifestNameModifier *string `locationName:"manifestNameModifier" min:"1" type:"string"`
+
+	// Specify the outputs that you want this additional top-level manifest to reference.
+	SelectedOutputs []string `locationName:"selectedOutputs" type:"list"`
+}
+
+// String returns the string representation
+func (s MsSmoothAdditionalManifest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MsSmoothAdditionalManifest) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MsSmoothAdditionalManifest"}
+	if s.ManifestNameModifier != nil && len(*s.ManifestNameModifier) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ManifestNameModifier", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MsSmoothAdditionalManifest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ManifestNameModifier != nil {
+		v := *s.ManifestNameModifier
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "manifestNameModifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SelectedOutputs != nil {
+		v := s.SelectedOutputs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "selectedOutputs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to specify
 // the value SpekeKeyProvider.
 type MsSmoothEncryptionSettings struct {
@@ -9134,6 +9714,13 @@ func (s MsSmoothEncryptionSettings) MarshalFields(e protocol.FieldEncoder) error
 // MS_SMOOTH_GROUP_SETTINGS.
 type MsSmoothGroupSettings struct {
 	_ struct{} `type:"structure"`
+
+	// By default, the service creates one .ism Microsoft Smooth Streaming manifest
+	// for each Microsoft Smooth Streaming output group in your job. This default
+	// manifest references every output in the output group. To create additional
+	// manifests that reference a subset of the outputs in the output group, specify
+	// a list of them here.
+	AdditionalManifests []MsSmoothAdditionalManifest `locationName:"additionalManifests" type:"list"`
 
 	// COMBINE_DUPLICATE_STREAMS combines identical audio encoding settings across
 	// a Microsoft Smooth output group into a single audio stream.
@@ -9174,6 +9761,13 @@ func (s *MsSmoothGroupSettings) Validate() error {
 	if s.FragmentLength != nil && *s.FragmentLength < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("FragmentLength", 1))
 	}
+	if s.AdditionalManifests != nil {
+		for i, v := range s.AdditionalManifests {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AdditionalManifests", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9183,6 +9777,18 @@ func (s *MsSmoothGroupSettings) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s MsSmoothGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AdditionalManifests != nil {
+		v := s.AdditionalManifests
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "additionalManifests", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if len(s.AudioDeduplication) > 0 {
 		v := s.AudioDeduplication
 
@@ -10784,9 +11390,40 @@ func (s ResourceTags) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Optional. Have MediaConvert automatically apply Amazon S3 access control
+// for the outputs in this output group. When you don't use this setting, S3
+// automatically applies the default access control list PRIVATE.
+type S3DestinationAccessControl struct {
+	_ struct{} `type:"structure"`
+
+	// Choose an Amazon S3 canned ACL for MediaConvert to apply to this output.
+	CannedAcl S3ObjectCannedAcl `locationName:"cannedAcl" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s S3DestinationAccessControl) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s S3DestinationAccessControl) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.CannedAcl) > 0 {
+		v := s.CannedAcl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "cannedAcl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Settings associated with S3 destination
 type S3DestinationSettings struct {
 	_ struct{} `type:"structure"`
+
+	// Optional. Have MediaConvert automatically apply Amazon S3 access control
+	// for the outputs in this output group. When you don't use this setting, S3
+	// automatically applies the default access control list PRIVATE.
+	AccessControl *S3DestinationAccessControl `locationName:"accessControl" type:"structure"`
 
 	// Settings for how your job outputs are encrypted as they are uploaded to Amazon
 	// S3.
@@ -10800,6 +11437,12 @@ func (s S3DestinationSettings) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s S3DestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccessControl != nil {
+		v := s.AccessControl
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "accessControl", v, metadata)
+	}
 	if s.Encryption != nil {
 		v := s.Encryption
 
@@ -11884,6 +12527,9 @@ type VideoPreprocessor struct {
 	// picture.
 	Deinterlacer *Deinterlacer `locationName:"deinterlacer" type:"structure"`
 
+	// Enable Dolby Vision feature to produce Dolby Vision compatible video output.
+	DolbyVision *DolbyVision `locationName:"dolbyVision" type:"structure"`
+
 	// Enable the Image inserter (ImageInserter) feature to include a graphic overlay
 	// on your video. Enable or disable this feature for each output individually.
 	// This setting is disabled by default.
@@ -11948,6 +12594,12 @@ func (s VideoPreprocessor) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "deinterlacer", v, metadata)
 	}
+	if s.DolbyVision != nil {
+		v := s.DolbyVision
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "dolbyVision", v, metadata)
+	}
 	if s.ImageInserter != nil {
 		v := s.ImageInserter
 
@@ -11972,6 +12624,13 @@ func (s VideoPreprocessor) MarshalFields(e protocol.FieldEncoder) error {
 // Selector for video.
 type VideoSelector struct {
 	_ struct{} `type:"structure"`
+
+	// Ignore this setting unless this input is a QuickTime animation. Specify which
+	// part of this input MediaConvert uses for your outputs. Leave this setting
+	// set to DISCARD in order to delete the alpha channel and preserve the video.
+	// Use REMAP_TO_LUMA for this setting to delete the video and map the alpha
+	// channel to the luma channel of your outputs.
+	AlphaBehavior AlphaBehavior `locationName:"alphaBehavior" type:"string" enum:"true"`
 
 	// If your input video has accurate color space metadata, or if you don't know
 	// about color space, leave this set to the default value Follow (FOLLOW). The
@@ -12053,6 +12712,12 @@ func (s *VideoSelector) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s VideoSelector) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AlphaBehavior) > 0 {
+		v := s.AlphaBehavior
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "alphaBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if len(s.ColorSpace) > 0 {
 		v := s.ColorSpace
 

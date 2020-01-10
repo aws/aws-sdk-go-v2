@@ -22,7 +22,7 @@ type ListComponentsInput struct {
 	// The name of the resource group.
 	//
 	// ResourceGroupName is a required field
-	ResourceGroupName *string `type:"string" required:"true"`
+	ResourceGroupName *string `min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -39,6 +39,9 @@ func (s *ListComponentsInput) Validate() error {
 
 	if s.ResourceGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupName"))
+	}
+	if s.ResourceGroupName != nil && len(*s.ResourceGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceGroupName", 1))
 	}
 
 	if invalidParams.Len() > 0 {

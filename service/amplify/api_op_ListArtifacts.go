@@ -19,9 +19,6 @@ type ListArtifactsInput struct {
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Type for an artifact.
-	ArtifactType ArtifactType `locationName:"artifactType" type:"string" enum:"true"`
-
 	// Name for a branch, part of an Amplify App.
 	//
 	// BranchName is a required field
@@ -81,12 +78,6 @@ func (s *ListArtifactsInput) Validate() error {
 func (s ListArtifactsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
-	if len(s.ArtifactType) > 0 {
-		v := s.ArtifactType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "artifactType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
 	if s.AppId != nil {
 		v := *s.AppId
 

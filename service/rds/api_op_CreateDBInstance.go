@@ -96,6 +96,13 @@ type CreateDBInstanceInput struct {
 	// Constraint: The AvailabilityZone parameter can't be specified if the DB instance
 	// is a Multi-AZ deployment. The specified Availability Zone must be in the
 	// same AWS Region as the current endpoint.
+	//
+	// If you're creating a DB instance in an RDS on VMware environment, specify
+	// the identifier of the custom Availability Zone to create the DB instance
+	// in.
+	//
+	// For more information about RDS on VMware, see the RDS on VMware User Guide.
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html)
 	AvailabilityZone *string `type:"string"`
 
 	// The number of days for which automated backups are retained. Setting this
@@ -167,7 +174,7 @@ type CreateDBInstanceInput struct {
 	// MySQL
 	//
 	// The name of the database to create when the DB instance is created. If this
-	// parameter is not specified, no database is created in the DB instance.
+	// parameter isn't specified, no database is created in the DB instance.
 	//
 	// Constraints:
 	//
@@ -178,7 +185,7 @@ type CreateDBInstanceInput struct {
 	// MariaDB
 	//
 	// The name of the database to create when the DB instance is created. If this
-	// parameter is not specified, no database is created in the DB instance.
+	// parameter isn't specified, no database is created in the DB instance.
 	//
 	// Constraints:
 	//
@@ -189,7 +196,7 @@ type CreateDBInstanceInput struct {
 	// PostgreSQL
 	//
 	// The name of the database to create when the DB instance is created. If this
-	// parameter is not specified, the default "postgres" database is created in
+	// parameter isn't specified, the default "postgres" database is created in
 	// the DB instance.
 	//
 	// Constraints:
@@ -220,7 +227,7 @@ type CreateDBInstanceInput struct {
 	// Amazon Aurora
 	//
 	// The name of the database to create when the primary instance of the DB cluster
-	// is created. If this parameter is not specified, no database is created in
+	// is created. If this parameter isn't specified, no database is created in
 	// the DB instance.
 	//
 	// Constraints:
@@ -231,8 +238,8 @@ type CreateDBInstanceInput struct {
 	DBName *string `type:"string"`
 
 	// The name of the DB parameter group to associate with this DB instance. If
-	// you do not specify a value for DBParameterGroupName, then the default DBParameterGroup
-	// for the specified DB engine is used.
+	// you do not specify a value, then the default DB parameter group for the specified
+	// DB engine and version is used.
 	//
 	// Constraints:
 	//
@@ -257,6 +264,13 @@ type CreateDBInstanceInput struct {
 	// The database can't be deleted when deletion protection is enabled. By default,
 	// deletion protection is disabled. For more information, see Deleting a DB
 	// Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
+	//
+	// Amazon Aurora
+	//
+	// Not applicable. You can enable or disable deletion protection for the DB
+	// cluster. For more information, see CreateDBCluster. DB instances in a DB
+	// cluster can be deleted even when deletion protection is enabled for the DB
+	// cluster.
 	DeletionProtection *bool `type:"boolean"`
 
 	// The Active Directory directory ID to create the DB instance in. Currently,
@@ -404,8 +418,10 @@ type CreateDBInstanceInput struct {
 	// values, see Amazon RDS Provisioned IOPS Storage to Improve Performance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS)
 	// in the Amazon RDS User Guide.
 	//
-	// Constraints: Must be a multiple between 1 and 50 of the storage amount for
-	// the DB instance.
+	// Constraints: For MariaDB, MySQL, Oracle, and PostgreSQL DB instances, must
+	// be a multiple between .5 and 50 of the storage amount for the DB instance.
+	// For SQL Server DB instances, must be a multiple between 1 and 50 of the storage
+	// amount for the DB instance.
 	Iops *int64 `type:"integer"`
 
 	// The AWS KMS key identifier for an encrypted DB instance.
@@ -680,13 +696,13 @@ type CreateDBInstanceInput struct {
 	// A value that indicates whether the DB instance is publicly accessible. When
 	// the DB instance is publicly accessible, it is an Internet-facing instance
 	// with a publicly resolvable DNS name, which resolves to a public IP address.
-	// When the DB instance is not publicly accessible, it is an internal instance
+	// When the DB instance isn't publicly accessible, it is an internal instance
 	// with a DNS name that resolves to a private IP address.
 	//
 	// Default: The default behavior varies depending on whether DBSubnetGroupName
 	// is specified.
 	//
-	// If DBSubnetGroupName is not specified, and PubliclyAccessible is not specified,
+	// If DBSubnetGroupName isn't specified, and PubliclyAccessible isn't specified,
 	// the following applies:
 	//
 	//    * If the default VPC in the target region doesn’t have an Internet gateway
@@ -695,7 +711,7 @@ type CreateDBInstanceInput struct {
 	//    * If the default VPC in the target region has an Internet gateway attached
 	//    to it, the DB instance is public.
 	//
-	// If DBSubnetGroupName is specified, and PubliclyAccessible is not specified,
+	// If DBSubnetGroupName is specified, and PubliclyAccessible isn't specified,
 	// the following applies:
 	//
 	//    * If the subnets are part of a VPC that doesn’t have an Internet gateway
@@ -706,7 +722,7 @@ type CreateDBInstanceInput struct {
 	PubliclyAccessible *bool `type:"boolean"`
 
 	// A value that indicates whether the DB instance is encrypted. By default,
-	// it is not encrypted.
+	// it isn't encrypted.
 	//
 	// Amazon Aurora
 	//

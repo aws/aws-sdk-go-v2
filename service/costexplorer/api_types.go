@@ -3,12 +3,186 @@
 package costexplorer
 
 import (
+	"fmt"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 var _ aws.Config
 var _ = awsutil.Prettify
+
+//
+//  Cost Category is in preview release for AWS Billing and Cost Management
+//  and is subject to change. Your use of Cost Categories is subject to the
+//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
+//  (Section 1.10).
+//
+// The structure of Cost Categories. This includes detailed metadata and the
+// set of rules for the CostCategory object.
+type CostCategory struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for your Cost Category.
+	//
+	// CostCategoryArn is a required field
+	CostCategoryArn *string `min:"20" type:"string" required:"true"`
+
+	// The Cost Category's effective end date.
+	EffectiveEnd *string `min:"20" type:"string"`
+
+	// The Cost Category's effective start date.
+	//
+	// EffectiveStart is a required field
+	EffectiveStart *string `min:"20" type:"string" required:"true"`
+
+	// The unique name of the Cost Category.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The rule schema version in this particular Cost Category.
+	//
+	// RuleVersion is a required field
+	RuleVersion CostCategoryRuleVersion `type:"string" required:"true" enum:"true"`
+
+	// Rules are processed in order. If there are multiple rules that match the
+	// line item, then the first rule to match is used to determine that Cost Category
+	// value.
+	//
+	// Rules is a required field
+	Rules []CostCategoryRule `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s CostCategory) String() string {
+	return awsutil.Prettify(s)
+}
+
+//
+//  Cost Category is in preview release for AWS Billing and Cost Management
+//  and is subject to change. Your use of Cost Categories is subject to the
+//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
+//  (Section 1.10).
+//
+// A reference to a Cost Category containing only enough information to identify
+// the Cost Category.
+//
+// You can use this information to retrieve the full Cost Category information
+// using DescribeCostCategory.
+type CostCategoryReference struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for your Cost Category Reference.
+	CostCategoryArn *string `min:"20" type:"string"`
+
+	// The Cost Category's effective end date.
+	EffectiveEnd *string `min:"20" type:"string"`
+
+	// The Cost Category's effective start date.
+	EffectiveStart *string `min:"20" type:"string"`
+
+	// The unique name of the Cost Category.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s CostCategoryReference) String() string {
+	return awsutil.Prettify(s)
+}
+
+//
+//  Cost Category is in preview release for AWS Billing and Cost Management
+//  and is subject to change. Your use of Cost Categories is subject to the
+//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
+//  (Section 1.10).
+//
+// Rules are processed in order. If there are multiple rules that match the
+// line item, then the first rule to match is used to determine that Cost Category
+// value.
+type CostCategoryRule struct {
+	_ struct{} `type:"structure"`
+
+	// An Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// object used to categorize costs. This supports dimensions, Tags, and nested
+	// expressions. Currently the only dimensions supported is LINKED_ACCOUNT.
+	//
+	// Root level OR is not supported. We recommend you create a separate rule instead.
+	//
+	// Rule is a required field
+	Rule *Expression `type:"structure" required:"true"`
+
+	// The value a line item will be categorized as, if it matches the rule.
+	//
+	// Value is a required field
+	Value *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CostCategoryRule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CostCategoryRule) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CostCategoryRule"}
+
+	if s.Rule == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Rule"))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+	if s.Value != nil && len(*s.Value) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
+	}
+	if s.Rule != nil {
+		if err := s.Rule.Validate(); err != nil {
+			invalidParams.AddNested("Rule", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+//
+//  Cost Category is in preview release for AWS Billing and Cost Management
+//  and is subject to change. Your use of Cost Categories is subject to the
+//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
+//  (Section 1.10).
+//
+// The values that are available for Cost Categories.
+type CostCategoryValues struct {
+	_ struct{} `type:"structure"`
+
+	// The unique name of the Cost Category.
+	Key *string `min:"1" type:"string"`
+
+	// The specific value of the Cost Category.
+	Values []string `type:"list"`
+}
+
+// String returns the string representation
+func (s CostCategoryValues) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CostCategoryValues) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CostCategoryValues"}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
 
 // The amount of instance usage that a reservation covered.
 type Coverage struct {
@@ -143,6 +317,9 @@ type CurrentInstance struct {
 
 	// Utilization information of the current instance during the lookback period.
 	ResourceUtilization *ResourceUtilization `type:"structure"`
+
+	// Number of hours during the lookback period covered by Savings Plans.
+	SavingsPlansCoveredHoursInLookbackPeriod *string `type:"string"`
 
 	// Cost allocation resource tags applied to the instance.
 	Tags []TagValues `type:"list"`
@@ -425,13 +602,21 @@ func (s ElastiCacheInstanceDetails) String() string {
 //
 // For GetRightsizingRecommendation action, a combination of OR and NOT is not
 // supported. OR is not supported between different dimensions, or dimensions
-// and tags. NOT operators aren't supported. Dimentions are also limited to
+// and tags. NOT operators aren't supported. Dimensions are also limited to
 // LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE.
 type Expression struct {
 	_ struct{} `type:"structure"`
 
 	// Return results that match both Dimension objects.
 	And []Expression `type:"list"`
+
+	//  Cost Category is in preview release for AWS Billing and Cost Management
+	//  and is subject to change. Your use of Cost Categories is subject to the
+	//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
+	//  (Section 1.10).
+	//
+	// The specific CostCategory used for Expression.
+	CostCategories *CostCategoryValues `type:"structure"`
 
 	// The specific Dimension to use for Expression.
 	Dimensions *DimensionValues `type:"structure"`
@@ -449,6 +634,33 @@ type Expression struct {
 // String returns the string representation
 func (s Expression) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Expression) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Expression"}
+	if s.CostCategories != nil {
+		if err := s.CostCategories.Validate(); err != nil {
+			invalidParams.AddNested("CostCategories", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Not != nil {
+		if err := s.Not.Validate(); err != nil {
+			invalidParams.AddNested("Not", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Or != nil {
+		for i, v := range s.Or {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Or", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // The forecast created for your query.
@@ -774,7 +986,7 @@ type ReservationPurchaseRecommendationDetail struct {
 	EstimatedMonthlySavingsPercentage *string `type:"string"`
 
 	// How much AWS estimates that you would have spent for all usage during the
-	// specified historical period if you had had a reservation.
+	// specified historical period if you had a reservation.
 	EstimatedReservationCostForLookbackPeriod *string `type:"string"`
 
 	// Details about the instances that AWS recommends that you purchase.
@@ -991,6 +1203,399 @@ type RightsizingRecommendationSummary struct {
 
 // String returns the string representation
 func (s RightsizingRecommendationSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The amortized amount of Savings Plans purchased in a specific account during
+// a specific time interval.
+type SavingsPlansAmortizedCommitment struct {
+	_ struct{} `type:"structure"`
+
+	// The amortized amount of your Savings Plans commitment that was purchased
+	// with either a Partial or a NoUpfront.
+	AmortizedRecurringCommitment *string `type:"string"`
+
+	// The amortized amount of your Savings Plans commitment that was purchased
+	// with an Upfront or PartialUpfront Savings Plans.
+	AmortizedUpfrontCommitment *string `type:"string"`
+
+	// The total amortized amount of your Savings Plans commitment, regardless of
+	// your Savings Plans purchase method.
+	TotalAmortizedCommitment *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SavingsPlansAmortizedCommitment) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The amount of Savings Plans eligible usage that is covered by Savings Plans.
+// All calculations consider the On-Demand equivalent of your Savings Plans
+// usage.
+type SavingsPlansCoverage struct {
+	_ struct{} `type:"structure"`
+
+	// The attribute that applies to a specific Dimension.
+	Attributes map[string]string `type:"map"`
+
+	// The amount of Savings Plans eligible usage that the Savings Plans covered.
+	Coverage *SavingsPlansCoverageData `type:"structure"`
+
+	// The time period that you want the usage and costs for.
+	TimePeriod *DateInterval `type:"structure"`
+}
+
+// String returns the string representation
+func (s SavingsPlansCoverage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Specific coverage percentage, On-Demand costs, and spend covered by Savings
+// Plans, and total Savings Plans costs for an account.
+type SavingsPlansCoverageData struct {
+	_ struct{} `type:"structure"`
+
+	// The percentage of your existing Savings Planscovered usage, divided by all
+	// of your eligible Savings Plans usage in an account(or set of accounts).
+	CoveragePercentage *string `type:"string"`
+
+	// The cost of your Amazon Web Services usage at the public On-Demand rate.
+	OnDemandCost *string `type:"string"`
+
+	// The amount of your Amazon Web Services usage that is covered by a Savings
+	// Plans.
+	SpendCoveredBySavingsPlans *string `type:"string"`
+
+	// The total cost of your Amazon Web Services usage, regardless of your purchase
+	// option.
+	TotalCost *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SavingsPlansCoverageData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Attribute details on a specific Savings Plan.
+type SavingsPlansDetails struct {
+	_ struct{} `type:"structure"`
+
+	// A group of instance types that Savings Plans applies to.
+	InstanceFamily *string `type:"string"`
+
+	// The unique ID used to distinguish Savings Plans from one another.
+	OfferingId *string `type:"string"`
+
+	// A collection of AWS resources in a geographic area. Each AWS Region is isolated
+	// and independent of the other Regions.
+	Region *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SavingsPlansDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Contains your request parameters, Savings Plan Recommendations Summary, and
+// Details.
+type SavingsPlansPurchaseRecommendation struct {
+	_ struct{} `type:"structure"`
+
+	// The lookback period in days, used to generate the recommendation.
+	LookbackPeriodInDays LookbackPeriodInDays `type:"string" enum:"true"`
+
+	// The payment option used to generate the recommendation.
+	PaymentOption PaymentOption `type:"string" enum:"true"`
+
+	// Details for the Savings Plans we recommend you to purchase to cover existing,
+	// Savings Plans eligible workloads.
+	SavingsPlansPurchaseRecommendationDetails []SavingsPlansPurchaseRecommendationDetail `type:"list"`
+
+	// Summary metrics for your Savings Plans Recommendations.
+	SavingsPlansPurchaseRecommendationSummary *SavingsPlansPurchaseRecommendationSummary `type:"structure"`
+
+	// The requested Savings Plans recommendation type.
+	SavingsPlansType SupportedSavingsPlansType `type:"string" enum:"true"`
+
+	// The Savings Plans recommendation term in years, used to generate the recommendation.
+	TermInYears TermInYears `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s SavingsPlansPurchaseRecommendation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Details for your recommended Savings Plans.
+type SavingsPlansPurchaseRecommendationDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The AccountID the recommendation is generated for.
+	AccountId *string `type:"string"`
+
+	// The currency code Amazon Web Services used to generate the recommendations
+	// and present potential savings.
+	CurrencyCode *string `type:"string"`
+
+	// The average value of hourly On-Demand spend over the lookback period of the
+	// applicable usage type.
+	CurrentAverageHourlyOnDemandSpend *string `type:"string"`
+
+	// The highest value of hourly On-Demand spend over the lookback period of the
+	// applicable usage type.
+	CurrentMaximumHourlyOnDemandSpend *string `type:"string"`
+
+	// The lowest value of hourly On-Demand spend over the lookback period of the
+	// applicable usage type.
+	CurrentMinimumHourlyOnDemandSpend *string `type:"string"`
+
+	// The estimated utilization of the recommended Savings Plans.
+	EstimatedAverageUtilization *string `type:"string"`
+
+	// The estimated monthly savings amount, based on the recommended Savings Plans.
+	EstimatedMonthlySavingsAmount *string `type:"string"`
+
+	// The remaining On-Demand cost estimated to not be covered by the recommended
+	// Savings Plans, over the length of the lookback period.
+	EstimatedOnDemandCost *string `type:"string"`
+
+	// The estimated On-Demand costs you would expect with no additional commitment,
+	// based on your usage of the selected time period and the Savings Plans you
+	// own.
+	EstimatedOnDemandCostWithCurrentCommitment *string `type:"string"`
+
+	// The estimated return on investment based on the recommended Savings Plans
+	// purchased. This is calculated as estimatedSavingsAmount/ estimatedSPCost*100.
+	EstimatedROI *string `type:"string"`
+
+	// The cost of the recommended Savings Plans over the length of the lookback
+	// period.
+	EstimatedSPCost *string `type:"string"`
+
+	// The estimated savings amount based on the recommended Savings Plans over
+	// the length of the lookback period.
+	EstimatedSavingsAmount *string `type:"string"`
+
+	// The estimated savings percentage relative to the total cost of applicable
+	// On-Demand usage over the lookback period.
+	EstimatedSavingsPercentage *string `type:"string"`
+
+	// The recommended hourly commitment level for the Savings Plans type, and configuration
+	// based on the usage during the lookback period.
+	HourlyCommitmentToPurchase *string `type:"string"`
+
+	// Details for your recommended Savings Plans.
+	SavingsPlansDetails *SavingsPlansDetails `type:"structure"`
+
+	// The upfront cost of the recommended Savings Plans, based on the selected
+	// payment option.
+	UpfrontCost *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SavingsPlansPurchaseRecommendationDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Metadata about your Savings Plans Purchase Recommendations.
+type SavingsPlansPurchaseRecommendationMetadata struct {
+	_ struct{} `type:"structure"`
+
+	// The timestamp showing when the recommendations were generated.
+	GenerationTimestamp *string `type:"string"`
+
+	// The unique identifier for the recommendation set.
+	RecommendationId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SavingsPlansPurchaseRecommendationMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Summary metrics for your Savings Plans Purchase Recommendations.
+type SavingsPlansPurchaseRecommendationSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The currency code Amazon Web Services used to generate the recommendations
+	// and present potential savings.
+	CurrencyCode *string `type:"string"`
+
+	// The current total on demand spend of the applicable usage types over the
+	// lookback period.
+	CurrentOnDemandSpend *string `type:"string"`
+
+	// The recommended Savings Plans cost on a daily (24 hourly) basis.
+	DailyCommitmentToPurchase *string `type:"string"`
+
+	// The estimated monthly savings amount, based on the recommended Savings Plans
+	// purchase.
+	EstimatedMonthlySavingsAmount *string `type:"string"`
+
+	// The estimated On-Demand costs you would expect with no additional commitment,
+	// based on your usage of the selected time period and the Savings Plans you
+	// own.
+	EstimatedOnDemandCostWithCurrentCommitment *string `type:"string"`
+
+	// The estimated return on investment based on the recommended Savings Plans
+	// and estimated savings.
+	EstimatedROI *string `type:"string"`
+
+	// The estimated total savings over the lookback period, based on the purchase
+	// of the recommended Savings Plans.
+	EstimatedSavingsAmount *string `type:"string"`
+
+	// The estimated savings relative to the total cost of On-Demand usage, over
+	// the lookback period. This is calculated as estimatedSavingsAmount/ CurrentOnDemandSpend*100.
+	EstimatedSavingsPercentage *string `type:"string"`
+
+	// The estimated total cost of the usage after purchasing the recommended Savings
+	// Plans. This is a sum of the cost of Savings Plans during this term, and the
+	// remaining On-Demand usage.
+	EstimatedTotalCost *string `type:"string"`
+
+	// The recommended hourly commitment based on the recommendation parameters.
+	HourlyCommitmentToPurchase *string `type:"string"`
+
+	// The aggregate number of Savings Plans recommendations that exist for your
+	// account.
+	TotalRecommendationCount *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SavingsPlansPurchaseRecommendationSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The amount of savings you're accumulating, against the public On-Demand rate
+// of the usage accrued in an account.
+type SavingsPlansSavings struct {
+	_ struct{} `type:"structure"`
+
+	// The savings amount that you are accumulating for the usage that is covered
+	// by a Savings Plans, when compared to the On-Demand equivalent of the same
+	// usage.
+	NetSavings *string `type:"string"`
+
+	// How much the amount that the usage would have cost if it was accrued at the
+	// On-Demand rate.
+	OnDemandCostEquivalent *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SavingsPlansSavings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The measurement of how well you are using your existing Savings Plans.
+type SavingsPlansUtilization struct {
+	_ struct{} `type:"structure"`
+
+	// The total amount of Savings Plans commitment that's been purchased in an
+	// account (or set of accounts).
+	TotalCommitment *string `type:"string"`
+
+	// The amount of your Savings Plans commitment that was not consumed from Savings
+	// Plans eligible usage in a specific period.
+	UnusedCommitment *string `type:"string"`
+
+	// The amount of your Savings Plans commitment that was consumed from Savings
+	// Plans eligible usage in a specific period.
+	UsedCommitment *string `type:"string"`
+
+	// The amount of UsedCommitment divided by the TotalCommitment for your Savings
+	// Plans.
+	UtilizationPercentage *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SavingsPlansUtilization) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The aggregated utilization metrics for your Savings Plans usage.
+type SavingsPlansUtilizationAggregates struct {
+	_ struct{} `type:"structure"`
+
+	// The total amortized commitment for a Savings Plans. This includes the sum
+	// of the upfront and recurring Savings Plans fees.
+	AmortizedCommitment *SavingsPlansAmortizedCommitment `type:"structure"`
+
+	// The amount saved by using existing Savings Plans. Savings returns both net
+	// savings from Savings Plans, as well as the onDemandCostEquivalent of the
+	// Savings Plans when considering the utilization rate.
+	Savings *SavingsPlansSavings `type:"structure"`
+
+	// A ratio of your effectiveness of using existing Savings Plans to apply to
+	// workloads that are Savings Plans eligible.
+	//
+	// Utilization is a required field
+	Utilization *SavingsPlansUtilization `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s SavingsPlansUtilizationAggregates) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The amount of Savings Plans utilization, in hours.
+type SavingsPlansUtilizationByTime struct {
+	_ struct{} `type:"structure"`
+
+	// The total amortized commitment for a Savings Plans. This includes the sum
+	// of the upfront and recurring Savings Plans fees.
+	AmortizedCommitment *SavingsPlansAmortizedCommitment `type:"structure"`
+
+	// The amount saved by using existing Savings Plans. Savings returns both net
+	// savings from Savings Plans as well as the onDemandCostEquivalent of the Savings
+	// Plans when considering the utilization rate.
+	Savings *SavingsPlansSavings `type:"structure"`
+
+	// The time period that you want the usage and costs for.
+	//
+	// TimePeriod is a required field
+	TimePeriod *DateInterval `type:"structure" required:"true"`
+
+	// A ratio of your effectiveness of using existing Savings Plans to apply to
+	// workloads that are Savings Plans eligible.
+	//
+	// Utilization is a required field
+	Utilization *SavingsPlansUtilization `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s SavingsPlansUtilizationByTime) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A single daily or monthly Savings Plans utilization rate, and details for
+// your account. Master accounts in an organization have access to member accounts.
+// You can use GetDimensionValues to determine the possible dimension values.
+type SavingsPlansUtilizationDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The total amortized commitment for a Savings Plans. Includes the sum of the
+	// upfront and recurring Savings Plans fees.
+	AmortizedCommitment *SavingsPlansAmortizedCommitment `type:"structure"`
+
+	// The attribute that applies to a specific Dimension.
+	Attributes map[string]string `type:"map"`
+
+	// The amount saved by using existing Savings Plans. Savings returns both net
+	// savings from savings plans as well as the onDemandCostEquivalent of the Savings
+	// Plans when considering the utilization rate.
+	Savings *SavingsPlansSavings `type:"structure"`
+
+	// The unique Amazon Resource Name (ARN) for a particular Savings Plan.
+	SavingsPlanArn *string `type:"string"`
+
+	// A ratio of your effectiveness of using existing Savings Plans to apply to
+	// workloads that are Savings Plans eligible.
+	Utilization *SavingsPlansUtilization `type:"structure"`
+}
+
+// String returns the string representation
+func (s SavingsPlansUtilizationDetail) String() string {
 	return awsutil.Prettify(s)
 }
 

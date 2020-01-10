@@ -31,7 +31,9 @@ type CreateCacheClusterInput struct {
 	//
 	//    * Must be at least 16 characters and no more than 128 characters in length.
 	//
-	//    * Cannot contain any of the following characters: '/', '"', or '@'.
+	//    * The only permitted printable special characters are !, &, #, $, ^, <,
+	//    >, and -. Other printable special characters cannot be used in the AUTH
+	//    token.
 	//
 	// For more information, see AUTH password (http://redis.io/commands/AUTH) at
 	// http://redis.io/commands/AUTH.

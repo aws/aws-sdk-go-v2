@@ -71,6 +71,8 @@ const opListTagsForResource = "ListTagsForResource"
 //
 // Currently, you can list tags on an account in AWS Organizations.
 //
+// This operation can be called only from the organization's master account.
+//
 //    // Example sending a request using ListTagsForResourceRequest.
 //    req := client.ListTagsForResourceRequest(params)
 //    resp, err := req.Send(context.TODO())

@@ -79,6 +79,8 @@ type ClientAPI interface {
 
 	DeleteWorkspaceImageRequest(*workspaces.DeleteWorkspaceImageInput) workspaces.DeleteWorkspaceImageRequest
 
+	DeregisterWorkspaceDirectoryRequest(*workspaces.DeregisterWorkspaceDirectoryInput) workspaces.DeregisterWorkspaceDirectoryRequest
+
 	DescribeAccountRequest(*workspaces.DescribeAccountInput) workspaces.DescribeAccountRequest
 
 	DescribeAccountModificationsRequest(*workspaces.DescribeAccountModificationsInput) workspaces.DescribeAccountModificationsRequest
@@ -111,6 +113,12 @@ type ClientAPI interface {
 
 	ModifyClientPropertiesRequest(*workspaces.ModifyClientPropertiesInput) workspaces.ModifyClientPropertiesRequest
 
+	ModifySelfservicePermissionsRequest(*workspaces.ModifySelfservicePermissionsInput) workspaces.ModifySelfservicePermissionsRequest
+
+	ModifyWorkspaceAccessPropertiesRequest(*workspaces.ModifyWorkspaceAccessPropertiesInput) workspaces.ModifyWorkspaceAccessPropertiesRequest
+
+	ModifyWorkspaceCreationPropertiesRequest(*workspaces.ModifyWorkspaceCreationPropertiesInput) workspaces.ModifyWorkspaceCreationPropertiesRequest
+
 	ModifyWorkspacePropertiesRequest(*workspaces.ModifyWorkspacePropertiesInput) workspaces.ModifyWorkspacePropertiesRequest
 
 	ModifyWorkspaceStateRequest(*workspaces.ModifyWorkspaceStateInput) workspaces.ModifyWorkspaceStateRequest
@@ -118,6 +126,8 @@ type ClientAPI interface {
 	RebootWorkspacesRequest(*workspaces.RebootWorkspacesInput) workspaces.RebootWorkspacesRequest
 
 	RebuildWorkspacesRequest(*workspaces.RebuildWorkspacesInput) workspaces.RebuildWorkspacesRequest
+
+	RegisterWorkspaceDirectoryRequest(*workspaces.RegisterWorkspaceDirectoryInput) workspaces.RegisterWorkspaceDirectoryRequest
 
 	RestoreWorkspaceRequest(*workspaces.RestoreWorkspaceInput) workspaces.RestoreWorkspaceRequest
 

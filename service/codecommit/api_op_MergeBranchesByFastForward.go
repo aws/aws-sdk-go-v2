@@ -13,7 +13,7 @@ type MergeBranchesByFastForwardInput struct {
 	_ struct{} `type:"structure"`
 
 	// The branch, tag, HEAD, or other fully qualified reference used to identify
-	// a commit. For example, a branch name or a full commit ID.
+	// a commit (for example, a branch name or a full commit ID).
 	//
 	// DestinationCommitSpecifier is a required field
 	DestinationCommitSpecifier *string `locationName:"destinationCommitSpecifier" type:"string" required:"true"`
@@ -24,12 +24,12 @@ type MergeBranchesByFastForwardInput struct {
 	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
 
 	// The branch, tag, HEAD, or other fully qualified reference used to identify
-	// a commit. For example, a branch name or a full commit ID.
+	// a commit (for example, a branch name or a full commit ID).
 	//
 	// SourceCommitSpecifier is a required field
 	SourceCommitSpecifier *string `locationName:"sourceCommitSpecifier" type:"string" required:"true"`
 
-	// The branch where the merge will be applied.
+	// The branch where the merge is applied.
 	TargetBranch *string `locationName:"targetBranch" min:"1" type:"string"`
 }
 

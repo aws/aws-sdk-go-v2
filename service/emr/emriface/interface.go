@@ -102,6 +102,8 @@ type ClientAPI interface {
 
 	ListStepsRequest(*emr.ListStepsInput) emr.ListStepsRequest
 
+	ModifyClusterRequest(*emr.ModifyClusterInput) emr.ModifyClusterRequest
+
 	ModifyInstanceFleetRequest(*emr.ModifyInstanceFleetInput) emr.ModifyInstanceFleetRequest
 
 	ModifyInstanceGroupsRequest(*emr.ModifyInstanceGroupsInput) emr.ModifyInstanceGroupsRequest

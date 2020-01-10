@@ -15,44 +15,62 @@ import (
 type PutObjectInput struct {
 	_ struct{} `type:"structure" payload:"Body"`
 
-	// The canned ACL to apply to the object.
+	// The canned ACL to apply to the object. For more information, see Canned ACL
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
 	ACL ObjectCannedACL `location:"header" locationName:"x-amz-acl" type:"string" enum:"true"`
 
 	// Object data.
 	Body io.ReadSeeker `type:"blob"`
 
-	// Name of the bucket to which the PUT operation was initiated.
+	// Bucket name to which the PUT operation was initiated.
+	//
+	// When using this API with an access point, you must direct requests to the
+	// access point hostname. The access point hostname takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com.
+	// When using this operation using an access point through the AWS SDKs, you
+	// provide the access point ARN in place of the bucket name. For more information
+	// about access point ARNs, see Using Access Points (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html)
+	// in the Amazon Simple Storage Service Developer Guide.
 	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
-	// Specifies caching behavior along the request/reply chain.
+	// Can be used to specify caching behavior along the request/reply chain. For
+	// more information, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
+	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9).
 	CacheControl *string `location:"header" locationName:"Cache-Control" type:"string"`
 
-	// Specifies presentational information for the object.
+	// Specifies presentational information for the object. For more information,
+	// see http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1 (http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1).
 	ContentDisposition *string `location:"header" locationName:"Content-Disposition" type:"string"`
 
 	// Specifies what content encodings have been applied to the object and thus
 	// what decoding mechanisms must be applied to obtain the media-type referenced
-	// by the Content-Type header field.
+	// by the Content-Type header field. For more information, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11
+	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11).
 	ContentEncoding *string `location:"header" locationName:"Content-Encoding" type:"string"`
 
 	// The language the content is in.
 	ContentLanguage *string `location:"header" locationName:"Content-Language" type:"string"`
 
 	// Size of the body in bytes. This parameter is useful when the size of the
-	// body cannot be determined automatically.
+	// body cannot be determined automatically. For more information, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13
+	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13).
 	ContentLength *int64 `location:"header" locationName:"Content-Length" type:"long"`
 
-	// The base64-encoded 128-bit MD5 digest of the part data. This parameter is
-	// auto-populated when using the command from the CLI. This parameted is required
-	// if object lock parameters are specified.
+	// The base64-encoded 128-bit MD5 digest of the message (without the headers)
+	// according to RFC 1864. This header can be used as a message integrity check
+	// to verify that the data is the same data that was originally sent. Although
+	// it is optional, we recommend using the Content-MD5 mechanism as an end-to-end
+	// integrity check. For more information about REST request authentication,
+	// see REST Authentication (https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html).
 	ContentMD5 *string `location:"header" locationName:"Content-MD5" type:"string"`
 
-	// A standard MIME type describing the format of the object data.
+	// A standard MIME type describing the format of the contents. For more information,
+	// see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17 (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
 	ContentType *string `location:"header" locationName:"Content-Type" type:"string"`
 
-	// The date and time at which the object is no longer cacheable.
+	// The date and time at which the object is no longer cacheable. For more information,
+	// see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21 (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21).
 	Expires *time.Time `location:"header" locationName:"Expires" type:"timestamp"`
 
 	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object.
@@ -75,34 +93,37 @@ type PutObjectInput struct {
 	// A map of metadata to store with the object in S3.
 	Metadata map[string]string `location:"headers" locationName:"x-amz-meta-" type:"map"`
 
-	// The Legal Hold status that you want to apply to the specified object.
+	// Specifies whether a legal hold will be applied to this object. For more information
+	// about S3 Object Lock, see Object Lock (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
 	ObjectLockLegalHoldStatus ObjectLockLegalHoldStatus `location:"header" locationName:"x-amz-object-lock-legal-hold" type:"string" enum:"true"`
 
-	// The object lock mode that you want to apply to this object.
+	// The Object Lock mode that you want to apply to this object.
 	ObjectLockMode ObjectLockMode `location:"header" locationName:"x-amz-object-lock-mode" type:"string" enum:"true"`
 
-	// The date and time when you want this object's object lock to expire.
+	// The date and time when you want this object's Object Lock to expire.
 	ObjectLockRetainUntilDate *time.Time `location:"header" locationName:"x-amz-object-lock-retain-until-date" type:"timestamp" timestampFormat:"iso8601"`
 
 	// Confirms that the requester knows that she or he will be charged for the
 	// request. Bucket owners need not specify this parameter in their requests.
-	// Documentation on downloading objects from requester pays buckets can be found
-	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+	// For information about downloading objects from Requester Pays buckets, see
+	// Downloading Objects in Requestor Pays Buckets (https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
+	// in the Amazon S3 Developer Guide.
 	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"true"`
 
-	// Specifies the algorithm to use to when encrypting the object (e.g., AES256).
+	// Specifies the algorithm to use to when encrypting the object (for example,
+	// AES256).
 	SSECustomerAlgorithm *string `location:"header" locationName:"x-amz-server-side-encryption-customer-algorithm" type:"string"`
 
 	// Specifies the customer-provided encryption key for Amazon S3 to use in encrypting
 	// data. This value is used to store the object and then it is discarded; Amazon
-	// does not store the encryption key. The key must be appropriate for use with
-	// the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm
+	// S3 does not store the encryption key. The key must be appropriate for use
+	// with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm
 	// header.
 	SSECustomerKey *string `location:"header" locationName:"x-amz-server-side-encryption-customer-key" type:"string" sensitive:"true"`
 
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
-	// Amazon S3 uses this header for a message integrity check to ensure the encryption
-	// key was transmitted without error.
+	// Amazon S3 uses this header for a message integrity check to ensure that the
+	// encryption key was transmitted without error.
 	SSECustomerKeyMD5 *string `location:"header" locationName:"x-amz-server-side-encryption-customer-key-MD5" type:"string"`
 
 	// Specifies the AWS KMS Encryption Context to use for object encryption. The
@@ -110,17 +131,22 @@ type PutObjectInput struct {
 	// encryption context key-value pairs.
 	SSEKMSEncryptionContext *string `location:"header" locationName:"x-amz-server-side-encryption-context" type:"string" sensitive:"true"`
 
-	// Specifies the AWS KMS key ID to use for object encryption. All GET and PUT
-	// requests for an object protected by AWS KMS will fail if not made via SSL
-	// or using SigV4. Documentation on configuring any of the officially supported
-	// AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+	// If x-amz-server-side-encryption is present and has the value of aws:kms,
+	// this header specifies the ID of the AWS Key Management Service (AWS KMS)
+	// customer master key (CMK) that was used for the object.
+	//
+	// If the value of x-amz-server-side-encryption is aws:kms, this header specifies
+	// the ID of the AWS KMS CMK that will be used for the object. If you specify
+	// x-amz-server-side-encryption:aws:kms, but do not providex-amz-server-side-encryption-aws-kms-key-id,
+	// Amazon S3 uses the AWS managed CMK in AWS to protect the data.
 	SSEKMSKeyId *string `location:"header" locationName:"x-amz-server-side-encryption-aws-kms-key-id" type:"string" sensitive:"true"`
 
-	// The Server-side encryption algorithm used when storing this object in S3
-	// (e.g., AES256, aws:kms).
+	// The server-side encryption algorithm used when storing this object in Amazon
+	// S3 (for example, AES256, aws:kms).
 	ServerSideEncryption ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string" enum:"true"`
 
-	// The type of storage to use for the object. Defaults to 'STANDARD'.
+	// If you don't specify, Standard is the default storage class. Amazon S3 supports
+	// other storage classes.
 	StorageClass StorageClass `location:"header" locationName:"x-amz-storage-class" type:"string" enum:"true"`
 
 	// The tag-set for the object. The tag-set must be encoded as URL Query parameters.
@@ -129,7 +155,22 @@ type PutObjectInput struct {
 
 	// If the bucket is configured as a website, redirects requests for this object
 	// to another object in the same bucket or to an external URL. Amazon S3 stores
-	// the value of this header in the object metadata.
+	// the value of this header in the object metadata. For information about object
+	// metadata, see Object Key and Metadata (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html).
+	//
+	// In the following example, the request header sets the redirect to an object
+	// (anotherPage.html) in the same bucket:
+	//
+	// x-amz-website-redirect-location: /anotherPage.html
+	//
+	// In the following example, the request header sets the object redirect to
+	// another website:
+	//
+	// x-amz-website-redirect-location: http://www.example.com/
+	//
+	// For more information about website hosting in Amazon S3, see Hosting Websites
+	// on Amazon S3 (https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
+	// and How to Configure Website Page Redirects (https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html).
 	WebsiteRedirectLocation *string `location:"header" locationName:"x-amz-website-redirect-location" type:"string"`
 }
 
@@ -373,8 +414,10 @@ type PutObjectOutput struct {
 	// Entity tag for the uploaded object.
 	ETag *string `location:"header" locationName:"ETag" type:"string"`
 
-	// If the object expiration is configured, this will contain the expiration
-	// date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded.
+	// If the expiration is configured for the object (see PutBucketLifecycleConfiguration),
+	// the response includes this header. It includes the expiry-date and rule-id
+	// key-value pairs that provide information about object expiration. The value
+	// of the rule-id is URL encoded.
 	Expiration *string `location:"header" locationName:"x-amz-expiration" type:"string"`
 
 	// If present, indicates that the requester was successfully charged for the
@@ -387,7 +430,7 @@ type PutObjectOutput struct {
 	SSECustomerAlgorithm *string `location:"header" locationName:"x-amz-server-side-encryption-customer-algorithm" type:"string"`
 
 	// If server-side encryption with a customer-provided encryption key was requested,
-	// the response will include this header to provide round trip message integrity
+	// the response will include this header to provide round-trip message integrity
 	// verification of the customer-provided encryption key.
 	SSECustomerKeyMD5 *string `location:"header" locationName:"x-amz-server-side-encryption-customer-key-MD5" type:"string"`
 
@@ -396,12 +439,15 @@ type PutObjectOutput struct {
 	// the encryption context key-value pairs.
 	SSEKMSEncryptionContext *string `location:"header" locationName:"x-amz-server-side-encryption-context" type:"string" sensitive:"true"`
 
-	// If present, specifies the ID of the AWS Key Management Service (KMS) master
-	// encryption key that was used for the object.
+	// If x-amz-server-side-encryption is present and has the value of aws:kms,
+	// this header specifies the ID of the AWS Key Management Service (AWS KMS)
+	// customer master key (CMK) that was used for the object.
 	SSEKMSKeyId *string `location:"header" locationName:"x-amz-server-side-encryption-aws-kms-key-id" type:"string" sensitive:"true"`
 
-	// The Server-side encryption algorithm used when storing this object in S3
-	// (e.g., AES256, aws:kms).
+	// If you specified server-side encryption either with an AWS KMS customer master
+	// key (CMK) or Amazon S3-managed encryption key in your PUT request, the response
+	// includes this header. It confirms the encryption algorithm that Amazon S3
+	// used to encrypt the object.
 	ServerSideEncryption ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string" enum:"true"`
 
 	// Version of the object.
@@ -477,7 +523,169 @@ const opPutObject = "PutObject"
 // PutObjectRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Adds an object to a bucket.
+// Adds an object to a bucket. You must have WRITE permissions on a bucket to
+// add an object to it.
+//
+// Amazon S3 never adds partial objects; if you receive a success response,
+// Amazon S3 added the entire object to the bucket.
+//
+// Amazon S3 is a distributed system. If it receives multiple write requests
+// for the same object simultaneously, it overwrites all but the last object
+// written. Amazon S3 does not provide object locking; if you need this, make
+// sure to build it into your application layer or use versioning instead.
+//
+// To ensure that data is not corrupted traversing the network, use the Content-MD5
+// header. When you use this header, Amazon S3 checks the object against the
+// provided MD5 value and, if they do not match, returns an error. Additionally,
+// you can calculate the MD5 while putting an object to Amazon S3 and compare
+// the returned ETag to the calculated MD5 value.
+//
+// To configure your application to send the request headers before sending
+// the request body, use the 100-continue HTTP status code. For PUT operations,
+// this helps you avoid sending the message body if the message is rejected
+// based on the headers (for example, because authentication fails or a redirect
+// occurs). For more information on the 100-continue HTTP status code, see Section
+// 8.2.3 of http://www.ietf.org/rfc/rfc2616.txt (http://www.ietf.org/rfc/rfc2616.txt).
+//
+// You can optionally request server-side encryption. With server-side encryption,
+// Amazon S3 encrypts your data as it writes it to disks in its data centers
+// and decrypts the data when you access it. You have the option to provide
+// your own encryption key or use AWS managed encryption keys. For more information,
+// see Using Server-Side Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html).
+//
+// Access Permissions
+//
+// You can optionally specify the accounts or groups that should be granted
+// specific permissions on the new object. There are two ways to grant the permissions
+// using the request headers:
+//
+//    * Specify a canned ACL with the x-amz-acl request header. For more information,
+//    see Canned ACL (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
+//
+//    * Specify access permissions explicitly with the x-amz-grant-read, x-amz-grant-read-acp,
+//    x-amz-grant-write-acp, and x-amz-grant-full-control headers. These parameters
+//    map to the set of permissions that Amazon S3 supports in an ACL. For more
+//    information, see Access Control List (ACL) Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html).
+//
+// You can use either a canned ACL or specify access permissions explicitly.
+// You cannot do both.
+//
+// Server-Side- Encryption-Specific Request Headers
+//
+// You can optionally tell Amazon S3 to encrypt data at rest using server-side
+// encryption. Server-side encryption is for data encryption at rest. Amazon
+// S3 encrypts your data as it writes it to disks in its data centers and decrypts
+// it when you access it. The option you use depends on whether you want to
+// use AWS managed encryption keys or provide your own encryption key.
+//
+//    * Use encryption keys managed by Amazon S3 or customer master keys (CMKs)
+//    stored in AWS Key Management Service (AWS KMS) – If you want AWS to
+//    manage the keys used to encrypt data, specify the following headers in
+//    the request. x-amz-server-side​-encryption x-amz-server-side-encryption-aws-kms-key-id
+//    x-amz-server-side-encryption-context If you specify x-amz-server-side-encryption:aws:kms,
+//    but don't provide x-amz-server-side- encryption-aws-kms-key-id, Amazon
+//    S3 uses the AWS managed CMK in AWS KMS to protect the data. All GET and
+//    PUT requests for an object protected by AWS KMS fail if you don't make
+//    them with SSL or by using SigV4. For more information about server-side
+//    encryption with CMKs stored in AWS KMS (SSE-KMS), see Protecting Data
+//    Using Server-Side Encryption with CMKs stored in AWS (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html).
+//
+//    * Use customer-provided encryption keys – If you want to manage your
+//    own encryption keys, provide all the following headers in the request.
+//    x-amz-server-side​-encryption​-customer-algorithm x-amz-server-side​-encryption​-customer-key
+//    x-amz-server-side​-encryption​-customer-key-MD5 For more information
+//    about server-side encryption with CMKs stored in KMS (SSE-KMS), see Protecting
+//    Data Using Server-Side Encryption with CMKs stored in AWS KMS (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html).
+//
+// Access-Control-List (ACL)-Specific Request Headers
+//
+// You also can use the following access control–related headers with this
+// operation. By default, all objects are private. Only the owner has full access
+// control. When adding a new object, you can grant permissions to individual
+// AWS accounts or to predefined groups defined by Amazon S3. These permissions
+// are then added to the Access Control List (ACL) on the object. For more information,
+// see Using ACLs (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html).
+// With this operation, you can grant access permissions using one of the following
+// two methods:
+//
+//    * Specify a canned ACL (x-amz-acl) — Amazon S3 supports a set of predefined
+//    ACLs, known as canned ACLs. Each canned ACL has a predefined set of grantees
+//    and permissions. For more information, see Canned ACL (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
+//
+//    * Specify access permissions explicitly — To explicitly grant access
+//    permissions to specific AWS accounts or groups, use the following headers.
+//    Each header maps to specific permissions that Amazon S3 supports in an
+//    ACL. For more information, see Access Control List (ACL) Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html).
+//    In the header, you specify a list of grantees who get the specific permission.
+//    To grant permissions explicitly use: x-amz-grant-read x-amz-grant-write
+//    x-amz-grant-read-acp x-amz-grant-write-acp x-amz-grant-full-control You
+//    specify each grantee as a type=value pair, where the type is one of the
+//    following: emailAddress – if the value specified is the email address
+//    of an AWS account Using email addresses to specify a grantee is only supported
+//    in the following AWS Regions: US East (N. Virginia) US West (N. California)
+//    US West (Oregon) Asia Pacific (Singapore) Asia Pacific (Sydney) Asia Pacific
+//    (Tokyo) EU (Ireland) South America (São Paulo) For a list of all the
+//    Amazon S3 supported Regions and endpoints, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
+//    in the AWS General Reference id – if the value specified is the canonical
+//    user ID of an AWS account uri – if you are granting permissions to a
+//    predefined group For example, the following x-amz-grant-read header grants
+//    the AWS accounts identified by email addresses permissions to read object
+//    data and its metadata: x-amz-grant-read: emailAddress="xyz@amazon.com",
+//    emailAddress="abc@amazon.com"
+//
+// Server-Side- Encryption-Specific Request Headers
+//
+// You can optionally tell Amazon S3 to encrypt data at rest using server-side
+// encryption. Server-side encryption is for data encryption at rest. Amazon
+// S3 encrypts your data as it writes it to disks in its data centers and decrypts
+// it when you access it. The option you use depends on whether you want to
+// use AWS-managed encryption keys or provide your own encryption key.
+//
+//    * Use encryption keys managed by Amazon S3 or customer master keys (CMKs)
+//    stored in AWS Key Management Service (AWS KMS) – If you want AWS to
+//    manage the keys used to encrypt data, specify the following headers in
+//    the request. x-amz-server-side​-encryption x-amz-server-side-encryption-aws-kms-key-id
+//    x-amz-server-side-encryption-context If you specify x-amz-server-side-encryption:aws:kms,
+//    but don't provide x-amz-server-side- encryption-aws-kms-key-id, Amazon
+//    S3 uses the default AWS KMS CMK to protect the data. All GET and PUT requests
+//    for an object protected by AWS KMS fail if you don't make them with SSL
+//    or by using SigV4. For more information about server-side encryption with
+//    CMKs stored in AWS KMS (SSE-KMS), see Protecting Data Using Server-Side
+//    Encryption with CMKs stored in AWS KMS (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html).
+//
+//    * Use customer-provided encryption keys – If you want to manage your
+//    own encryption keys, provide all the following headers in the request.
+//    If you use this feature, the ETag value that Amazon S3 returns in the
+//    response is not the MD5 of the object. x-amz-server-side​-encryption​-customer-algorithm
+//    x-amz-server-side​-encryption​-customer-key x-amz-server-side​-encryption​-customer-key-MD5
+//    For more information about server-side encryption with CMKs stored in
+//    AWS KMS (SSE-KMS), see Protecting Data Using Server-Side Encryption with
+//    CMKs stored in AWS KMS (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html).
+//
+// Storage Class Options
+//
+// By default, Amazon S3 uses the Standard storage class to store newly created
+// objects. The Standard storage class provides high durability and high availability.
+// You can specify other storage classes depending on the performance needs.
+// For more information, see Storage Classes (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+// Versioning
+//
+// If you enable versioning for a bucket, Amazon S3 automatically generates
+// a unique version ID for the object being stored. Amazon S3 returns this ID
+// in the response using the x-amz-version-id response header. If versioning
+// is suspended, Amazon S3 always uses null as the version ID for the object
+// stored. For more information about returning the versioning state of a bucket,
+// see GetBucketVersioning. If you enable versioning for a bucket, when Amazon
+// S3 receives multiple write requests for the same object simultaneously, it
+// stores all of the objects.
+//
+// Related Resources
+//
+//    * CopyObject
+//
+//    * DeleteObject
 //
 //    // Example sending a request using PutObjectRequest.
 //    req := client.PutObjectRequest(params)

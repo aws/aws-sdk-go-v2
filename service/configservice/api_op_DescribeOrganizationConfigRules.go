@@ -38,7 +38,7 @@ type DescribeOrganizationConfigRulesOutput struct {
 	// next page of results in a paginated response.
 	NextToken *string `type:"string"`
 
-	// Retuns a list OrganizationConfigRule objects.
+	// Returns a list of OrganizationConfigRule objects.
 	OrganizationConfigRules []OrganizationConfigRule `type:"list"`
 }
 

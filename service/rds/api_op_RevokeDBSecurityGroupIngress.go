@@ -32,8 +32,8 @@ type RevokeDBSecurityGroupIngressInput struct {
 	// and either EC2SecurityGroupName or EC2SecurityGroupId must be provided.
 	EC2SecurityGroupName *string `type:"string"`
 
-	// The AWS Account Number of the owner of the EC2 security group specified in
-	// the EC2SecurityGroupName parameter. The AWS Access Key ID is not an acceptable
+	// The AWS account number of the owner of the EC2 security group specified in
+	// the EC2SecurityGroupName parameter. The AWS access key ID isn't an acceptable
 	// value. For VPC DB security groups, EC2SecurityGroupId must be provided. Otherwise,
 	// EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId
 	// must be provided.

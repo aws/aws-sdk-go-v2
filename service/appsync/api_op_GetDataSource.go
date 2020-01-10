@@ -21,7 +21,7 @@ type GetDataSourceInput struct {
 	// The name of the data source.
 	//
 	// Name is a required field
-	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
+	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -39,6 +39,9 @@ func (s *GetDataSourceInput) Validate() error {
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {

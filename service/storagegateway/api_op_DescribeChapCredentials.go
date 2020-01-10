@@ -77,6 +77,7 @@ const opDescribeChapCredentials = "DescribeChapCredentials"
 //
 // Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials
 // information for a specified iSCSI target, one for each target-initiator pair.
+// This operation is supported in the volume and tape gateway types.
 //
 //    // Example sending a request using DescribeChapCredentialsRequest.
 //    req := client.DescribeChapCredentialsRequest(params)

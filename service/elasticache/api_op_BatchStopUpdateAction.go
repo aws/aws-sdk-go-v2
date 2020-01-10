@@ -12,10 +12,11 @@ import (
 type BatchStopUpdateActionInput struct {
 	_ struct{} `type:"structure"`
 
+	// The cache cluster IDs
+	CacheClusterIds []string `type:"list"`
+
 	// The replication group IDs
-	//
-	// ReplicationGroupIds is a required field
-	ReplicationGroupIds []string `type:"list" required:"true"`
+	ReplicationGroupIds []string `type:"list"`
 
 	// The unique ID of the service update
 	//
@@ -31,10 +32,6 @@ func (s BatchStopUpdateActionInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchStopUpdateActionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchStopUpdateActionInput"}
-
-	if s.ReplicationGroupIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroupIds"))
-	}
 
 	if s.ServiceUpdateName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceUpdateName"))

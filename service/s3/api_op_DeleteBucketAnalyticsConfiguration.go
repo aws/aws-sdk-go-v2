@@ -97,7 +97,20 @@ const opDeleteBucketAnalyticsConfiguration = "DeleteBucketAnalyticsConfiguration
 //
 // To use this operation, you must have permissions to perform the s3:PutAnalyticsConfiguration
 // action. The bucket owner has this permission by default. The bucket owner
-// can grant this permission to others.
+// can grant this permission to others. For more information about permissions,
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev//using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+//
+// For information about the Amazon S3 analytics feature, see Amazon S3 Analytics
+// – Storage Class Analysis (https://docs.aws.amazon.com/AmazonS3/latest/dev/analytics-storage-class.html).
+//
+// The following operations are related to DeleteBucketAnalyticsConfiguration:
+//
+//    *
+//
+//    *
+//
+//    *
 //
 //    // Example sending a request using DeleteBucketAnalyticsConfigurationRequest.
 //    req := client.DeleteBucketAnalyticsConfigurationRequest(params)

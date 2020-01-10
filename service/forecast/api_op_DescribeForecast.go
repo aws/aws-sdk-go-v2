@@ -47,11 +47,14 @@ type DescribeForecastOutput struct {
 	// The ARN of the dataset group that provided the data used to train the predictor.
 	DatasetGroupArn *string `type:"string"`
 
-	// The same forecast ARN as given in the request.
+	// The forecast ARN as specified in the request.
 	ForecastArn *string `type:"string"`
 
 	// The name of the forecast.
 	ForecastName *string `min:"1" type:"string"`
+
+	// The quantiles at which proababilistic forecasts were generated.
+	ForecastTypes []string `min:"1" type:"list"`
 
 	// Initially, the same as CreationTime (status is CREATE_PENDING). Updated when
 	// inference (creating the forecast) starts (status changed to CREATE_IN_PROGRESS),
@@ -90,8 +93,8 @@ const opDescribeForecast = "DescribeForecast"
 //
 // Describes a forecast created using the CreateForecast operation.
 //
-// In addition to listing the properties provided by the user in the CreateForecast
-// request, this operation includes the following properties:
+// In addition to listing the properties provided in the CreateForecast request,
+// this operation lists the following properties:
 //
 //    * DatasetGroupArn - The dataset group that provided the training data.
 //

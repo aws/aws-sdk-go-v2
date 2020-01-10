@@ -13,13 +13,13 @@ import (
 type UpdateLicenseSpecificationsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// License configuration ARNs to be added to a resource.
+	// ARNs of the license configurations to add.
 	AddLicenseSpecifications []LicenseSpecification `type:"list"`
 
-	// License configuration ARNs to be removed from a resource.
+	// ARNs of the license configurations to remove.
 	RemoveLicenseSpecifications []LicenseSpecification `type:"list"`
 
-	// ARN for an AWS server resource.
+	// Amazon Resource Name (ARN) of the AWS resource.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `type:"string" required:"true"`
@@ -72,11 +72,13 @@ const opUpdateLicenseSpecificationsForResource = "UpdateLicenseSpecificationsFor
 // UpdateLicenseSpecificationsForResourceRequest returns a request value for making API operation for
 // AWS License Manager.
 //
-// Adds or removes license configurations for a specified AWS resource. This
-// operation currently supports updating the license specifications of AMIs,
-// instances, and hosts. Launch templates and AWS CloudFormation templates are
-// not managed from this operation as those resources send the license configurations
-// directly to a resource creation operation, such as RunInstances.
+// Adds or removes the specified license configurations for the specified AWS
+// resource.
+//
+// You can update the license specifications of AMIs, instances, and hosts.
+// You cannot update the license specifications for launch templates and AWS
+// CloudFormation templates, as they send license configurations to the operation
+// that creates the resource.
 //
 //    // Example sending a request using UpdateLicenseSpecificationsForResourceRequest.
 //    req := client.UpdateLicenseSpecificationsForResourceRequest(params)

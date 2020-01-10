@@ -877,7 +877,9 @@ type ConfigurationItem struct {
 	// CloudTrail, see What Is AWS CloudTrail (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html).
 	//
 	// An empty field indicates that the current configuration was not initiated
-	// by any event.
+	// by any event. As of Version 1.3, the relatedEvents field is empty. You can
+	// access the LookupEvents API (https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_LookupEvents.html)
+	// in the AWS CloudTrail API Reference to retrieve the events for the resource.
 	RelatedEvents []string `locationName:"relatedEvents" type:"list"`
 
 	// A list of related AWS resources.
@@ -979,6 +981,285 @@ type ConfigurationRecorderStatus struct {
 
 // String returns the string representation
 func (s ConfigurationRecorderStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Filters the conformance pack by compliance types and AWS Config rule names.
+type ConformancePackComplianceFilters struct {
+	_ struct{} `type:"structure"`
+
+	// Filters the results by compliance.
+	//
+	// The allowed values are COMPLIANT and NON_COMPLIANT.
+	ComplianceType ConformancePackComplianceType `type:"string" enum:"true"`
+
+	// Filters the results by AWS Config rule names.
+	ConfigRuleNames []string `type:"list"`
+}
+
+// String returns the string representation
+func (s ConformancePackComplianceFilters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Summary includes the name and status of the conformance pack.
+type ConformancePackComplianceSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The status of the conformance pack. The allowed values are COMPLIANT and
+	// NON_COMPLIANT.
+	//
+	// ConformancePackComplianceStatus is a required field
+	ConformancePackComplianceStatus ConformancePackComplianceType `type:"string" required:"true" enum:"true"`
+
+	// The name of the conformance pack name.
+	//
+	// ConformancePackName is a required field
+	ConformancePackName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ConformancePackComplianceSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Returns details of a conformance pack. A conformance pack is a collection
+// of AWS Config rules and remediation actions that can be easily deployed in
+// an account and a region.
+type ConformancePackDetail struct {
+	_ struct{} `type:"structure"`
+
+	// Amazon Resource Name (ARN) of the conformance pack.
+	//
+	// ConformancePackArn is a required field
+	ConformancePackArn *string `min:"1" type:"string" required:"true"`
+
+	// ID of the conformance pack.
+	//
+	// ConformancePackId is a required field
+	ConformancePackId *string `min:"1" type:"string" required:"true"`
+
+	// A list of ConformancePackInputParameter objects.
+	ConformancePackInputParameters []ConformancePackInputParameter `type:"list"`
+
+	// Name of the conformance pack.
+	//
+	// ConformancePackName is a required field
+	ConformancePackName *string `min:"1" type:"string" required:"true"`
+
+	// AWS service that created the conformance pack.
+	CreatedBy *string `min:"1" type:"string"`
+
+	// Conformance pack template that is used to create a pack. The delivery bucket
+	// name should start with awsconfigconforms. For example: "Resource": "arn:aws:s3:::your_bucket_name/*".
+	//
+	// DeliveryS3Bucket is a required field
+	DeliveryS3Bucket *string `min:"3" type:"string" required:"true"`
+
+	// The prefix for the Amazon S3 bucket.
+	DeliveryS3KeyPrefix *string `min:"1" type:"string"`
+
+	// Last time when conformation pack update was requested.
+	LastUpdateRequestedTime *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation
+func (s ConformancePackDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Filters a conformance pack by AWS Config rule names, compliance types, AWS
+// resource types, and resource IDs.
+type ConformancePackEvaluationFilters struct {
+	_ struct{} `type:"structure"`
+
+	// Filters the results by compliance.
+	//
+	// The allowed values are COMPLIANT and NON_COMPLIANT.
+	ComplianceType ConformancePackComplianceType `type:"string" enum:"true"`
+
+	// Filters the results by AWS Config rule names.
+	ConfigRuleNames []string `type:"list"`
+
+	// Filters the results by resource IDs.
+	//
+	// This is valid only when you provide resource type. If there is no resource
+	// type, you will see an error.
+	ResourceIds []string `type:"list"`
+
+	// Filters the results by the resource type (for example, "AWS::EC2::Instance").
+	ResourceType *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ConformancePackEvaluationFilters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ConformancePackEvaluationFilters) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ConformancePackEvaluationFilters"}
+	if s.ResourceType != nil && len(*s.ResourceType) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceType", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The details of a conformance pack evaluation. Provides AWS Config rule and
+// AWS resource type that was evaluated, the compliance of the conformance pack,
+// related time stamps, and supplementary information.
+type ConformancePackEvaluationResult struct {
+	_ struct{} `type:"structure"`
+
+	// Supplementary information about how the evaluation determined the compliance.
+	Annotation *string `type:"string"`
+
+	// The compliance type. The allowed values are COMPLIANT and NON_COMPLIANT.
+	//
+	// ComplianceType is a required field
+	ComplianceType ConformancePackComplianceType `type:"string" required:"true" enum:"true"`
+
+	// The time when AWS Config rule evaluated AWS resource.
+	//
+	// ConfigRuleInvokedTime is a required field
+	ConfigRuleInvokedTime *time.Time `type:"timestamp" required:"true"`
+
+	// Uniquely identifies an evaluation result.
+	//
+	// EvaluationResultIdentifier is a required field
+	EvaluationResultIdentifier *EvaluationResultIdentifier `type:"structure" required:"true"`
+
+	// The time when AWS Config recorded the evaluation result.
+	//
+	// ResultRecordedTime is a required field
+	ResultRecordedTime *time.Time `type:"timestamp" required:"true"`
+}
+
+// String returns the string representation
+func (s ConformancePackEvaluationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Input parameters in the form of key-value pairs for the conformance pack,
+// both of which you define. Keys can have a maximum character length of 128
+// characters, and values can have a maximum length of 256 characters.
+type ConformancePackInputParameter struct {
+	_ struct{} `type:"structure"`
+
+	// One part of a key-value pair.
+	//
+	// ParameterName is a required field
+	ParameterName *string `type:"string" required:"true"`
+
+	// Another part of the key-value pair.
+	//
+	// ParameterValue is a required field
+	ParameterValue *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ConformancePackInputParameter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ConformancePackInputParameter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ConformancePackInputParameter"}
+
+	if s.ParameterName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ParameterName"))
+	}
+
+	if s.ParameterValue == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ParameterValue"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Compliance information of one or more AWS Config rules within a conformance
+// pack. You can filter using AWS Config rule names and compliance types.
+type ConformancePackRuleCompliance struct {
+	_ struct{} `type:"structure"`
+
+	// Compliance of the AWS Config rule
+	//
+	// The allowed values are COMPLIANT and NON_COMPLIANT.
+	ComplianceType ConformancePackComplianceType `type:"string" enum:"true"`
+
+	// Name of the config rule.
+	ConfigRuleName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ConformancePackRuleCompliance) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Status details of a conformance pack.
+type ConformancePackStatusDetail struct {
+	_ struct{} `type:"structure"`
+
+	// Amazon Resource Name (ARN) of comformance pack.
+	//
+	// ConformancePackArn is a required field
+	ConformancePackArn *string `min:"1" type:"string" required:"true"`
+
+	// ID of the conformance pack.
+	//
+	// ConformancePackId is a required field
+	ConformancePackId *string `min:"1" type:"string" required:"true"`
+
+	// Name of the conformance pack.
+	//
+	// ConformancePackName is a required field
+	ConformancePackName *string `min:"1" type:"string" required:"true"`
+
+	// Indicates deployment status of conformance pack.
+	//
+	// AWS Config sets the state of the conformance pack to:
+	//
+	//    * CREATE_IN_PROGRESS when a conformance pack creation is in progress for
+	//    an account.
+	//
+	//    * CREATE_COMPLETE when a conformance pack has been successfully created
+	//    in your account.
+	//
+	//    * CREATE_FAILED when a conformance pack creation failed in your account.
+	//
+	//    * DELETE_IN_PROGRESS when a conformance pack deletion is in progress.
+	//
+	//    * DELETE_FAILED when a conformance pack deletion failed in your account.
+	//
+	// ConformancePackState is a required field
+	ConformancePackState ConformancePackState `type:"string" required:"true" enum:"true"`
+
+	// The reason of conformance pack creation failure.
+	ConformancePackStatusReason *string `type:"string"`
+
+	// Last time when conformation pack creation and update was successful.
+	LastUpdateCompletedTime *time.Time `type:"timestamp"`
+
+	// Last time when conformation pack creation and update was requested.
+	//
+	// LastUpdateRequestedTime is a required field
+	LastUpdateRequestedTime *time.Time `type:"timestamp" required:"true"`
+
+	// Amazon Resource Name (ARN) of AWS CloudFormation stack.
+	//
+	// StackArn is a required field
+	StackArn *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ConformancePackStatusDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -1449,7 +1730,7 @@ type OrganizationConfigRule struct {
 	// The timestamp of the last update.
 	LastUpdateTime *time.Time `type:"timestamp"`
 
-	// The Amazon Resource Name (ARN) of organization config rule.
+	// Amazon Resource Name (ARN) of organization config rule.
 	//
 	// OrganizationConfigRuleArn is a required field
 	OrganizationConfigRuleArn *string `min:"1" type:"string" required:"true"`
@@ -1532,6 +1813,188 @@ type OrganizationConfigRuleStatus struct {
 
 // String returns the string representation
 func (s OrganizationConfigRuleStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// An organization conformance pack that has information about conformance packs
+// that AWS Config creates in member accounts.
+type OrganizationConformancePack struct {
+	_ struct{} `type:"structure"`
+
+	// A list of ConformancePackInputParameter objects.
+	ConformancePackInputParameters []ConformancePackInputParameter `type:"list"`
+
+	// Location of an Amazon S3 bucket where AWS Config can deliver evaluation results
+	// and conformance pack template that is used to create a pack.
+	//
+	// DeliveryS3Bucket is a required field
+	DeliveryS3Bucket *string `min:"3" type:"string" required:"true"`
+
+	// Any folder structure you want to add to an Amazon S3 bucket.
+	DeliveryS3KeyPrefix *string `min:"1" type:"string"`
+
+	// A comma-separated list of accounts excluded from organization conformance
+	// pack.
+	ExcludedAccounts []string `type:"list"`
+
+	// Last time when organization conformation pack was updated.
+	//
+	// LastUpdateTime is a required field
+	LastUpdateTime *time.Time `type:"timestamp" required:"true"`
+
+	// Amazon Resource Name (ARN) of organization conformance pack.
+	//
+	// OrganizationConformancePackArn is a required field
+	OrganizationConformancePackArn *string `min:"1" type:"string" required:"true"`
+
+	// The name you assign to an organization conformance pack.
+	//
+	// OrganizationConformancePackName is a required field
+	OrganizationConformancePackName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s OrganizationConformancePack) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Organization conformance pack creation or deletion status in each member
+// account. This includes the name of the conformance pack, the status, error
+// code and error message when the conformance pack creation or deletion failed.
+type OrganizationConformancePackDetailedStatus struct {
+	_ struct{} `type:"structure"`
+
+	// The 12-digit account ID of a member account.
+	//
+	// AccountId is a required field
+	AccountId *string `type:"string" required:"true"`
+
+	// The name of conformance pack deployed in the member account.
+	//
+	// ConformancePackName is a required field
+	ConformancePackName *string `min:"1" type:"string" required:"true"`
+
+	// An error code that is returned when conformance pack creation or deletion
+	// failed in the member account.
+	ErrorCode *string `type:"string"`
+
+	// An error message indicating that conformance pack account creation or deletion
+	// has failed due to an error in the member account.
+	ErrorMessage *string `type:"string"`
+
+	// The timestamp of the last status update.
+	LastUpdateTime *time.Time `type:"timestamp"`
+
+	// Indicates deployment status for conformance pack in a member account. When
+	// master account calls PutOrganizationConformancePack action for the first
+	// time, conformance pack status is created in the member account. When master
+	// account calls PutOrganizationConformancePack action for the second time,
+	// conformance pack status is updated in the member account. Conformance pack
+	// status is deleted when the master account deletes OrganizationConformancePack
+	// and disables service access for config-multiaccountsetup.amazonaws.com.
+	//
+	// AWS Config sets the state of the conformance pack to:
+	//
+	//    * CREATE_SUCCESSFUL when conformance pack has been created in the member
+	//    account.
+	//
+	//    * CREATE_IN_PROGRESS when conformance pack is being created in the member
+	//    account.
+	//
+	//    * CREATE_FAILED when conformance pack creation has failed in the member
+	//    account.
+	//
+	//    * DELETE_FAILED when conformance pack deletion has failed in the member
+	//    account.
+	//
+	//    * DELETE_IN_PROGRESS when conformance pack is being deleted in the member
+	//    account.
+	//
+	//    * DELETE_SUCCESSFUL when conformance pack has been deleted in the member
+	//    account.
+	//
+	//    * UPDATE_SUCCESSFUL when conformance pack has been updated in the member
+	//    account.
+	//
+	//    * UPDATE_IN_PROGRESS when conformance pack is being updated in the member
+	//    account.
+	//
+	//    * UPDATE_FAILED when conformance pack deletion has failed in the member
+	//    account.
+	//
+	// Status is a required field
+	Status OrganizationResourceDetailedStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s OrganizationConformancePackDetailedStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Returns the status for an organization conformance pack in an organization.
+type OrganizationConformancePackStatus struct {
+	_ struct{} `type:"structure"`
+
+	// An error code that is returned when organization conformance pack creation
+	// or deletion has failed in a member account.
+	ErrorCode *string `type:"string"`
+
+	// An error message indicating that organization conformance pack creation or
+	// deletion failed due to an error.
+	ErrorMessage *string `type:"string"`
+
+	// The timestamp of the last update.
+	LastUpdateTime *time.Time `type:"timestamp"`
+
+	// The name that you assign to organization conformance pack.
+	//
+	// OrganizationConformancePackName is a required field
+	OrganizationConformancePackName *string `min:"1" type:"string" required:"true"`
+
+	// Indicates deployment status of an organization conformance pack. When master
+	// account calls PutOrganizationConformancePack for the first time, conformance
+	// pack status is created in all the member accounts. When master account calls
+	// PutOrganizationConformancePack for the second time, conformance pack status
+	// is updated in all the member accounts. Additionally, conformance pack status
+	// is updated when one or more member accounts join or leave an organization.
+	// Conformance pack status is deleted when the master account deletes OrganizationConformancePack
+	// in all the member accounts and disables service access for config-multiaccountsetup.amazonaws.com.
+	//
+	// AWS Config sets the state of the conformance pack to:
+	//
+	//    * CREATE_SUCCESSFUL when an organization conformance pack has been successfully
+	//    created in all the member accounts.
+	//
+	//    * CREATE_IN_PROGRESS when an organization conformance pack creation is
+	//    in progress.
+	//
+	//    * CREATE_FAILED when an organization conformance pack creation failed
+	//    in one or more member accounts within that organization.
+	//
+	//    * DELETE_FAILED when an organization conformance pack deletion failed
+	//    in one or more member accounts within that organization.
+	//
+	//    * DELETE_IN_PROGRESS when an organization conformance pack deletion is
+	//    in progress.
+	//
+	//    * DELETE_SUCCESSFUL when an organization conformance pack has been successfully
+	//    deleted from all the member accounts.
+	//
+	//    * UPDATE_SUCCESSFUL when an organization conformance pack has been successfully
+	//    updated in all the member accounts.
+	//
+	//    * UPDATE_IN_PROGRESS when an organization conformance pack update is in
+	//    progress.
+	//
+	//    * UPDATE_FAILED when an organization conformance pack update failed in
+	//    one or more member accounts within that organization.
+	//
+	// Status is a required field
+	Status OrganizationResourceStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s OrganizationConformancePackStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -1710,6 +2173,58 @@ func (s *OrganizationManagedRuleMetadata) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Status filter object to filter results based on specific member account ID
+// or status type for an organization conformance pack.
+type OrganizationResourceDetailedStatusFilters struct {
+	_ struct{} `type:"structure"`
+
+	// The 12-digit account ID of the member account within an organization.
+	AccountId *string `type:"string"`
+
+	// Indicates deployment status for conformance pack in a member account. When
+	// master account calls PutOrganizationConformancePack action for the first
+	// time, conformance pack status is created in the member account. When master
+	// account calls PutOrganizationConformancePack action for the second time,
+	// conformance pack status is updated in the member account. Conformance pack
+	// status is deleted when the master account deletes OrganizationConformancePack
+	// and disables service access for config-multiaccountsetup.amazonaws.com.
+	//
+	// AWS Config sets the state of the conformance pack to:
+	//
+	//    * CREATE_SUCCESSFUL when conformance pack has been created in the member
+	//    account.
+	//
+	//    * CREATE_IN_PROGRESS when conformance pack is being created in the member
+	//    account.
+	//
+	//    * CREATE_FAILED when conformance pack creation has failed in the member
+	//    account.
+	//
+	//    * DELETE_FAILED when conformance pack deletion has failed in the member
+	//    account.
+	//
+	//    * DELETE_IN_PROGRESS when conformance pack is being deleted in the member
+	//    account.
+	//
+	//    * DELETE_SUCCESSFUL when conformance pack has been deleted in the member
+	//    account.
+	//
+	//    * UPDATE_SUCCESSFUL when conformance pack has been updated in the member
+	//    account.
+	//
+	//    * UPDATE_IN_PROGRESS when conformance pack is being updated in the member
+	//    account.
+	//
+	//    * UPDATE_FAILED when conformance pack deletion has failed in the member
+	//    account.
+	Status OrganizationResourceDetailedStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s OrganizationResourceDetailedStatusFilters) String() string {
+	return awsutil.Prettify(s)
 }
 
 // An object that represents the account ID and region of an aggregator account

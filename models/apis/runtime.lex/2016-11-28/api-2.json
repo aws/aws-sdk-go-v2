@@ -32,7 +32,7 @@
       "name":"GetSession",
       "http":{
         "method":"GET",
-        "requestUri":"/bot/{botName}/alias/{botAlias}/user/{userId}/session"
+        "requestUri":"/bot/{botName}/alias/{botAlias}/user/{userId}/session/"
       },
       "input":{"shape":"GetSessionRequest"},
       "output":{"shape":"GetSessionResponse"},
@@ -291,6 +291,11 @@
           "shape":"UserId",
           "location":"uri",
           "locationName":"userId"
+        },
+        "checkpointLabelFilter":{
+          "shape":"IntentSummaryCheckpointLabel",
+          "location":"querystring",
+          "locationName":"checkpointLabelFilter"
         }
       }
     },
@@ -310,12 +315,19 @@
       "required":["dialogActionType"],
       "members":{
         "intentName":{"shape":"IntentName"},
+        "checkpointLabel":{"shape":"IntentSummaryCheckpointLabel"},
         "slots":{"shape":"StringMap"},
         "confirmationStatus":{"shape":"ConfirmationStatus"},
         "dialogActionType":{"shape":"DialogActionType"},
         "fulfillmentState":{"shape":"FulfillmentState"},
         "slotToElicit":{"shape":"String"}
       }
+    },
+    "IntentSummaryCheckpointLabel":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"[a-zA-Z0-9-]+"
     },
     "IntentSummaryList":{
       "type":"list",
@@ -454,6 +466,11 @@
           "location":"header",
           "locationName":"x-amz-lex-session-attributes"
         },
+        "sentimentResponse":{
+          "shape":"String",
+          "location":"header",
+          "locationName":"x-amz-lex-sentiment"
+        },
         "message":{
           "shape":"Text",
           "location":"header",
@@ -479,7 +496,12 @@
           "location":"header",
           "locationName":"x-amz-lex-input-transcript"
         },
-        "audioStream":{"shape":"BlobStream"}
+        "audioStream":{"shape":"BlobStream"},
+        "sessionId":{
+          "shape":"String",
+          "location":"header",
+          "locationName":"x-amz-lex-session-id"
+        }
       },
       "payload":"audioStream"
     },
@@ -519,10 +541,12 @@
         "slots":{"shape":"StringMap"},
         "sessionAttributes":{"shape":"StringMap"},
         "message":{"shape":"Text"},
+        "sentimentResponse":{"shape":"SentimentResponse"},
         "messageFormat":{"shape":"MessageFormatType"},
         "dialogState":{"shape":"DialogState"},
         "slotToElicit":{"shape":"String"},
-        "responseCard":{"shape":"ResponseCard"}
+        "responseCard":{"shape":"ResponseCard"},
+        "sessionId":{"shape":"String"}
       }
     },
     "PutSessionRequest":{
@@ -550,6 +574,7 @@
         },
         "sessionAttributes":{"shape":"StringMap"},
         "dialogAction":{"shape":"DialogAction"},
+        "recentIntentSummaryView":{"shape":"IntentSummaryList"},
         "accept":{
           "shape":"Accept",
           "location":"header",
@@ -627,6 +652,15 @@
         "genericAttachments":{"shape":"genericAttachmentList"}
       }
     },
+    "SentimentLabel":{"type":"string"},
+    "SentimentResponse":{
+      "type":"structure",
+      "members":{
+        "sentimentLabel":{"shape":"SentimentLabel"},
+        "sentimentScore":{"shape":"SentimentScore"}
+      }
+    },
+    "SentimentScore":{"type":"string"},
     "String":{"type":"string"},
     "StringMap":{
       "type":"map",

@@ -46,7 +46,13 @@ type UpdateFleetInput struct {
 	// The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To
 	// assume a role, a fleet instance calls the AWS Security Token Service (STS)
 	// AssumeRole API operation and passes the ARN of the role to use. The operation
-	// creates a new session with temporary credentials.
+	// creates a new session with temporary credentials. AppStream 2.0 retrieves
+	// the temporary credentials and creates the AppStream_Machine_Role credential
+	// profile on the instance.
+	//
+	// For more information, see Using an IAM Role to Grant Permissions to Applications
+	// and Scripts Running on AppStream 2.0 Streaming Instances (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
+	// in the Amazon AppStream 2.0 Administration Guide.
 	IamRoleArn *string `type:"string"`
 
 	// The amount of time that users can be idle (inactive) before they are disconnected

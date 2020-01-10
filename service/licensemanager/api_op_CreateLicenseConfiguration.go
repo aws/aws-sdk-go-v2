@@ -4,6 +4,7 @@ package licensemanager
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -12,22 +13,33 @@ import (
 type CreateLicenseConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Human-friendly description of the license configuration.
+	// Description of the license configuration.
 	Description *string `type:"string"`
 
 	// Number of licenses managed by the license configuration.
 	LicenseCount *int64 `type:"long"`
 
-	// Flag indicating whether hard or soft license enforcement is used. Exceeding
-	// a hard limit results in the blocked deployment of new instances.
+	// Indicates whether hard or soft license enforcement is used. Exceeding a hard
+	// limit blocks the launch of new instances.
 	LicenseCountHardLimit *bool `type:"boolean"`
 
-	// Dimension to use to track the license inventory.
+	// Dimension used to track the license inventory.
 	//
 	// LicenseCountingType is a required field
 	LicenseCountingType LicenseCountingType `type:"string" required:"true" enum:"true"`
 
-	// Array of configured License Manager rules.
+	// License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost).
+	// Available rules vary by dimension.
+	//
+	//    * Cores dimension: allowedTenancy | maximumCores | minimumCores
+	//
+	//    * Instances dimension: allowedTenancy | maximumCores | minimumCores |
+	//    maximumSockets | minimumSockets | maximumVcpus | minimumVcpus
+	//
+	//    * Sockets dimension: allowedTenancy | maximumSockets | minimumSockets
+	//
+	//    * vCPUs dimension: allowedTenancy | honorVcpuOptimization | maximumVcpus
+	//    | minimumVcpus
 	LicenseRules []string `type:"list"`
 
 	// Name of the license configuration.
@@ -35,10 +47,10 @@ type CreateLicenseConfigurationInput struct {
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
-	// The tags to apply to the resources during launch. You can only tag instances
-	// and volumes on launch. The specified tags are applied to all instances or
-	// volumes that are created during launch. To tag a resource after it has been
-	// created, see CreateTags .
+	// Product information.
+	ProductInformationList []ProductInformation `type:"list"`
+
+	// Tags to add to the license configuration.
 	Tags []Tag `type:"list"`
 }
 
@@ -57,6 +69,13 @@ func (s *CreateLicenseConfigurationInput) Validate() error {
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+	if s.ProductInformationList != nil {
+		for i, v := range s.ProductInformationList {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ProductInformationList", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -67,7 +86,7 @@ func (s *CreateLicenseConfigurationInput) Validate() error {
 type CreateLicenseConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// ARN of the license configuration object after its creation.
+	// Amazon Resource Name (ARN) of the license configuration.
 	LicenseConfigurationArn *string `type:"string"`
 }
 
@@ -81,13 +100,14 @@ const opCreateLicenseConfiguration = "CreateLicenseConfiguration"
 // CreateLicenseConfigurationRequest returns a request value for making API operation for
 // AWS License Manager.
 //
-// Creates a new license configuration object. A license configuration is an
-// abstraction of a customer license agreement that can be consumed and enforced
-// by License Manager. Components include specifications for the license type
-// (licensing by instance, socket, CPU, or VCPU), tenancy (shared tenancy, Amazon
-// EC2 Dedicated Instance, Amazon EC2 Dedicated Host, or any of these), host
-// affinity (how long a VM must be associated with a host), the number of licenses
-// purchased and used.
+// Creates a license configuration.
+//
+// A license configuration is an abstraction of a customer license agreement
+// that can be consumed and enforced by License Manager. Components include
+// specifications for the license type (licensing by instance, socket, CPU,
+// or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated
+// Host, or all of these), host affinity (how long a VM must be associated with
+// a host), and the number of licenses purchased and used.
 //
 //    // Example sending a request using CreateLicenseConfigurationRequest.
 //    req := client.CreateLicenseConfigurationRequest(params)

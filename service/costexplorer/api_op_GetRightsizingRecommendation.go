@@ -38,7 +38,7 @@ type GetRightsizingRecommendationInput struct {
 	//
 	// For GetRightsizingRecommendation action, a combination of OR and NOT is not
 	// supported. OR is not supported between different dimensions, or dimensions
-	// and tags. NOT operators aren't supported. Dimentions are also limited to
+	// and tags. NOT operators aren't supported. Dimensions are also limited to
 	// LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE.
 	Filter *Expression `type:"structure"`
 
@@ -50,7 +50,8 @@ type GetRightsizingRecommendationInput struct {
 	// object.
 	PageSize *int64 `type:"integer"`
 
-	// The specific service that you want recommendations for.
+	// The specific service that you want recommendations for. The only valid value
+	// for GetRightsizingRecommendation is "AmazonEC2".
 	//
 	// Service is a required field
 	Service *string `type:"string" required:"true"`
@@ -67,6 +68,11 @@ func (s *GetRightsizingRecommendationInput) Validate() error {
 
 	if s.Service == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Service"))
+	}
+	if s.Filter != nil {
+		if err := s.Filter.Validate(); err != nil {
+			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {

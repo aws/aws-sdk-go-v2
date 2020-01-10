@@ -69,6 +69,25 @@ func (enum ResourceTypeValues) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type RetentionIntervalUnitValues string
+
+// Enum values for RetentionIntervalUnitValues
+const (
+	RetentionIntervalUnitValuesDays   RetentionIntervalUnitValues = "DAYS"
+	RetentionIntervalUnitValuesWeeks  RetentionIntervalUnitValues = "WEEKS"
+	RetentionIntervalUnitValuesMonths RetentionIntervalUnitValues = "MONTHS"
+	RetentionIntervalUnitValuesYears  RetentionIntervalUnitValues = "YEARS"
+)
+
+func (enum RetentionIntervalUnitValues) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RetentionIntervalUnitValues) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SettablePolicyStateValues string
 
 // Enum values for SettablePolicyStateValues

@@ -20,26 +20,26 @@ type GetDifferencesInput struct {
 
 	// The file path in which to check differences. Limits the results to this path.
 	// Can also be used to specify the changed name of a directory or folder, if
-	// it has changed. If not specified, differences will be shown for all paths.
+	// it has changed. If not specified, differences are shown for all paths.
 	AfterPath *string `locationName:"afterPath" type:"string"`
 
 	// The branch, tag, HEAD, or other fully qualified reference used to identify
-	// a commit. For example, the full commit ID. Optional. If not specified, all
-	// changes prior to the afterCommitSpecifier value will be shown. If you do
-	// not use beforeCommitSpecifier in your request, consider limiting the results
-	// with maxResults.
+	// a commit (for example, the full commit ID). Optional. If not specified, all
+	// changes before the afterCommitSpecifier value are shown. If you do not use
+	// beforeCommitSpecifier in your request, consider limiting the results with
+	// maxResults.
 	BeforeCommitSpecifier *string `locationName:"beforeCommitSpecifier" type:"string"`
 
 	// The file path in which to check for differences. Limits the results to this
 	// path. Can also be used to specify the previous name of a directory or folder.
-	// If beforePath and afterPath are not specified, differences will be shown
-	// for all paths.
+	// If beforePath and afterPath are not specified, differences are shown for
+	// all paths.
 	BeforePath *string `locationName:"beforePath" type:"string"`
 
-	// A non-negative integer used to limit the number of returned results.
+	// A non-zero, non-negative integer used to limit the number of returned results.
 	MaxResults *int64 `type:"integer"`
 
-	// An enumeration token that when provided in a request, returns the next batch
+	// An enumeration token that, when provided in a request, returns the next batch
 	// of the results.
 	NextToken *string `type:"string"`
 
@@ -78,8 +78,8 @@ func (s *GetDifferencesInput) Validate() error {
 type GetDifferencesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A differences data type object that contains information about the differences,
-	// including whether the difference is added, modified, or deleted (A, D, M).
+	// A data type object that contains information about the differences, including
+	// whether the difference is added, modified, or deleted (A, D, M).
 	Differences []Difference `locationName:"differences" type:"list"`
 
 	// An enumeration token that can be used in a request to return the next batch
@@ -98,7 +98,7 @@ const opGetDifferences = "GetDifferences"
 // AWS CodeCommit.
 //
 // Returns information about the differences in a valid commit specifier (such
-// as a branch, tag, HEAD, commit ID or other fully qualified reference). Results
+// as a branch, tag, HEAD, commit ID, or other fully qualified reference). Results
 // can be limited to a specified path.
 //
 //    // Example sending a request using GetDifferencesRequest.

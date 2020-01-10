@@ -37,7 +37,13 @@ type CreateImageBuilderInput struct {
 	// The Amazon Resource Name (ARN) of the IAM role to apply to the image builder.
 	// To assume a role, the image builder calls the AWS Security Token Service
 	// (STS) AssumeRole API operation and passes the ARN of the role to use. The
-	// operation creates a new session with temporary credentials.
+	// operation creates a new session with temporary credentials. AppStream 2.0
+	// retrieves the temporary credentials and creates the AppStream_Machine_Role
+	// credential profile on the instance.
+	//
+	// For more information, see Using an IAM Role to Grant Permissions to Applications
+	// and Scripts Running on AppStream 2.0 Streaming Instances (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
+	// in the Amazon AppStream 2.0 Administration Guide.
 	IamRoleArn *string `type:"string"`
 
 	// The ARN of the public, private, or shared image to use.
@@ -46,7 +52,48 @@ type CreateImageBuilderInput struct {
 	// The name of the image used to create the image builder.
 	ImageName *string `min:"1" type:"string"`
 
-	// The instance type to use when launching the image builder.
+	// The instance type to use when launching the image builder. The following
+	// instance types are available:
+	//
+	//    * stream.standard.medium
+	//
+	//    * stream.standard.large
+	//
+	//    * stream.compute.large
+	//
+	//    * stream.compute.xlarge
+	//
+	//    * stream.compute.2xlarge
+	//
+	//    * stream.compute.4xlarge
+	//
+	//    * stream.compute.8xlarge
+	//
+	//    * stream.memory.large
+	//
+	//    * stream.memory.xlarge
+	//
+	//    * stream.memory.2xlarge
+	//
+	//    * stream.memory.4xlarge
+	//
+	//    * stream.memory.8xlarge
+	//
+	//    * stream.graphics-design.large
+	//
+	//    * stream.graphics-design.xlarge
+	//
+	//    * stream.graphics-design.2xlarge
+	//
+	//    * stream.graphics-design.4xlarge
+	//
+	//    * stream.graphics-desktop.2xlarge
+	//
+	//    * stream.graphics-pro.4xlarge
+	//
+	//    * stream.graphics-pro.8xlarge
+	//
+	//    * stream.graphics-pro.16xlarge
 	//
 	// InstanceType is a required field
 	InstanceType *string `min:"1" type:"string" required:"true"`

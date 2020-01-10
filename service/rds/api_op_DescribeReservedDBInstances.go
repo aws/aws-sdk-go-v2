@@ -23,7 +23,7 @@ type DescribeReservedDBInstancesInput struct {
 	// Valid Values: 1 | 3 | 31536000 | 94608000
 	Duration *string `type:"string"`
 
-	// This parameter is not currently supported.
+	// This parameter isn't currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// The lease identifier filter value. Specify this parameter to show only the
@@ -40,7 +40,7 @@ type DescribeReservedDBInstancesInput struct {
 
 	// The maximum number of records to include in the response. If more than the
 	// MaxRecords value is available, a pagination token called a marker is included
-	// in the response so that the following results can be retrieved.
+	// in the response so you can retrieve the remaining results.
 	//
 	// Default: 100
 	//

@@ -54,6 +54,43 @@ func (enum InvocationType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type LastUpdateStatus string
+
+// Enum values for LastUpdateStatus
+const (
+	LastUpdateStatusSuccessful LastUpdateStatus = "Successful"
+	LastUpdateStatusFailed     LastUpdateStatus = "Failed"
+	LastUpdateStatusInProgress LastUpdateStatus = "InProgress"
+)
+
+func (enum LastUpdateStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LastUpdateStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type LastUpdateStatusReasonCode string
+
+// Enum values for LastUpdateStatusReasonCode
+const (
+	LastUpdateStatusReasonCodeEniLimitExceeded            LastUpdateStatusReasonCode = "EniLimitExceeded"
+	LastUpdateStatusReasonCodeInsufficientRolePermissions LastUpdateStatusReasonCode = "InsufficientRolePermissions"
+	LastUpdateStatusReasonCodeInvalidConfiguration        LastUpdateStatusReasonCode = "InvalidConfiguration"
+	LastUpdateStatusReasonCodeInternalError               LastUpdateStatusReasonCode = "InternalError"
+)
+
+func (enum LastUpdateStatusReasonCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LastUpdateStatusReasonCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LogType string
 
 // Enum values for LogType
@@ -71,6 +108,24 @@ func (enum LogType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ProvisionedConcurrencyStatusEnum string
+
+// Enum values for ProvisionedConcurrencyStatusEnum
+const (
+	ProvisionedConcurrencyStatusEnumInProgress ProvisionedConcurrencyStatusEnum = "IN_PROGRESS"
+	ProvisionedConcurrencyStatusEnumReady      ProvisionedConcurrencyStatusEnum = "READY"
+	ProvisionedConcurrencyStatusEnumFailed     ProvisionedConcurrencyStatusEnum = "FAILED"
+)
+
+func (enum ProvisionedConcurrencyStatusEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProvisionedConcurrencyStatusEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Runtime string
 
 // Enum values for Runtime
@@ -80,10 +135,13 @@ const (
 	RuntimeNodejs610    Runtime = "nodejs6.10"
 	RuntimeNodejs810    Runtime = "nodejs8.10"
 	RuntimeNodejs10X    Runtime = "nodejs10.x"
+	RuntimeNodejs12X    Runtime = "nodejs12.x"
 	RuntimeJava8        Runtime = "java8"
+	RuntimeJava11       Runtime = "java11"
 	RuntimePython27     Runtime = "python2.7"
 	RuntimePython36     Runtime = "python3.6"
 	RuntimePython37     Runtime = "python3.7"
+	RuntimePython38     Runtime = "python3.8"
 	RuntimeDotnetcore10 Runtime = "dotnetcore1.0"
 	RuntimeDotnetcore20 Runtime = "dotnetcore2.0"
 	RuntimeDotnetcore21 Runtime = "dotnetcore2.1"
@@ -98,6 +156,48 @@ func (enum Runtime) MarshalValue() (string, error) {
 }
 
 func (enum Runtime) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type State string
+
+// Enum values for State
+const (
+	StatePending  State = "Pending"
+	StateActive   State = "Active"
+	StateInactive State = "Inactive"
+	StateFailed   State = "Failed"
+)
+
+func (enum State) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum State) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type StateReasonCode string
+
+// Enum values for StateReasonCode
+const (
+	StateReasonCodeIdle                        StateReasonCode = "Idle"
+	StateReasonCodeCreating                    StateReasonCode = "Creating"
+	StateReasonCodeRestoring                   StateReasonCode = "Restoring"
+	StateReasonCodeEniLimitExceeded            StateReasonCode = "EniLimitExceeded"
+	StateReasonCodeInsufficientRolePermissions StateReasonCode = "InsufficientRolePermissions"
+	StateReasonCodeInvalidConfiguration        StateReasonCode = "InvalidConfiguration"
+	StateReasonCodeInternalError               StateReasonCode = "InternalError"
+	StateReasonCodeSubnetOutOfIpaddresses      StateReasonCode = "SubnetOutOfIPAddresses"
+)
+
+func (enum StateReasonCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StateReasonCode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

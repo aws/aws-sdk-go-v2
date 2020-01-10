@@ -44,6 +44,8 @@ func (s *DescribeTransformJobInput) Validate() error {
 type DescribeTransformJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	AutoMLJobArn *string `min:"1" type:"string"`
+
 	// Specifies the number of records to include in a mini-batch for an HTTP inference
 	// request. A record is a single unit of input data that inference can be made
 	// on. For example, a single line in a CSV file is a record.
@@ -69,6 +71,9 @@ type DescribeTransformJobOutput struct {
 	// The environment variables to set in the Docker container. We support up to
 	// 16 key and values entries in the map.
 	Environment map[string]string `type:"map"`
+
+	// Configuration for the experiment.
+	ExperimentConfig *ExperimentConfig `type:"structure"`
 
 	// If the transform job failed, FailureReason describes why it failed. A transform
 	// job creates a log file, which includes error messages, and stores it as an

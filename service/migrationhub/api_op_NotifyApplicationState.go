@@ -4,6 +4,7 @@ package migrationhub
 
 import (
 	"context"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -12,7 +13,8 @@ import (
 type NotifyApplicationStateInput struct {
 	_ struct{} `type:"structure"`
 
-	// The configurationId in ADS that uniquely identifies the grouped application.
+	// The configurationId in Application Discovery Service that uniquely identifies
+	// the grouped application.
 	//
 	// ApplicationId is a required field
 	ApplicationId *string `min:"1" type:"string" required:"true"`
@@ -25,6 +27,9 @@ type NotifyApplicationStateInput struct {
 	//
 	// Status is a required field
 	Status ApplicationStatus `type:"string" required:"true" enum:"true"`
+
+	// The timestamp when the application state changed.
+	UpdateDateTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

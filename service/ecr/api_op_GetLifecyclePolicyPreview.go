@@ -136,6 +136,12 @@ func (c *Client) GetLifecyclePolicyPreviewRequest(input *GetLifecyclePolicyPrevi
 		Name:       opGetLifecyclePolicyPreview,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -168,6 +174,53 @@ func (r GetLifecyclePolicyPreviewRequest) Send(ctx context.Context) (*GetLifecyc
 	}
 
 	return resp, nil
+}
+
+// NewGetLifecyclePolicyPreviewRequestPaginator returns a paginator for GetLifecyclePolicyPreview.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.GetLifecyclePolicyPreviewRequest(input)
+//   p := ecr.NewGetLifecyclePolicyPreviewRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewGetLifecyclePolicyPreviewPaginator(req GetLifecyclePolicyPreviewRequest) GetLifecyclePolicyPreviewPaginator {
+	return GetLifecyclePolicyPreviewPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *GetLifecyclePolicyPreviewInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// GetLifecyclePolicyPreviewPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetLifecyclePolicyPreviewPaginator struct {
+	aws.Pager
+}
+
+func (p *GetLifecyclePolicyPreviewPaginator) CurrentPage() *GetLifecyclePolicyPreviewOutput {
+	return p.Pager.CurrentPage().(*GetLifecyclePolicyPreviewOutput)
 }
 
 // GetLifecyclePolicyPreviewResponse is the response type for the

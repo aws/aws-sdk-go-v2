@@ -13,7 +13,7 @@ import (
 type DescribeParametersInput struct {
 	_ struct{} `type:"structure"`
 
-	// One or more filters. Use a filter to return a more specific list of results.
+	// This data type is deprecated. Instead, use ParameterFilters.
 	Filters []ParametersFilter `type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns

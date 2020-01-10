@@ -14,6 +14,11 @@ import (
 type UpdateIdentityPoolInput struct {
 	_ struct{} `type:"structure"`
 
+	// Enables or disables the Basic (Classic) authentication flow. For more information,
+	// see Identity Pools (Federated Identities) Authentication Flow (https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html)
+	// in the Amazon Cognito Developer Guide.
+	AllowClassicFlow *bool `type:"boolean"`
+
 	// TRUE if the identity pool supports unauthenticated logins.
 	//
 	// AllowUnauthenticatedIdentities is a required field
@@ -97,6 +102,11 @@ func (s *UpdateIdentityPoolInput) Validate() error {
 // An object representing an Amazon Cognito identity pool.
 type UpdateIdentityPoolOutput struct {
 	_ struct{} `type:"structure"`
+
+	// Enables or disables the Basic (Classic) authentication flow. For more information,
+	// see Identity Pools (Federated Identities) Authentication Flow (https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html)
+	// in the Amazon Cognito Developer Guide.
+	AllowClassicFlow *bool `type:"boolean"`
 
 	// TRUE if the identity pool supports unauthenticated logins.
 	//

@@ -13,12 +13,12 @@ import (
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) for the given GuardDuty resource
+	// The Amazon Resource Name (ARN) for the resource to remove tags from.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`
 
-	// The tag keys to remove from a resource.
+	// The tag keys to remove from the resource.
 	//
 	// TagKeys is a required field
 	TagKeys []string `location:"querystring" locationName:"tagKeys" min:"1" type:"list" required:"true"`

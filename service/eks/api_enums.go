@@ -2,6 +2,23 @@
 
 package eks
 
+type AMITypes string
+
+// Enum values for AMITypes
+const (
+	AMITypesAl2X8664    AMITypes = "AL2_x86_64"
+	AMITypesAl2X8664Gpu AMITypes = "AL2_x86_64_GPU"
+)
+
+func (enum AMITypes) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AMITypes) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ClusterStatus string
 
 // Enum values for ClusterStatus
@@ -10,6 +27,7 @@ const (
 	ClusterStatusActive   ClusterStatus = "ACTIVE"
 	ClusterStatusDeleting ClusterStatus = "DELETING"
 	ClusterStatusFailed   ClusterStatus = "FAILED"
+	ClusterStatusUpdating ClusterStatus = "UPDATING"
 )
 
 func (enum ClusterStatus) MarshalValue() (string, error) {
@@ -25,14 +43,17 @@ type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeSubnetNotFound        ErrorCode = "SubnetNotFound"
-	ErrorCodeSecurityGroupNotFound ErrorCode = "SecurityGroupNotFound"
-	ErrorCodeEniLimitReached       ErrorCode = "EniLimitReached"
-	ErrorCodeIpNotAvailable        ErrorCode = "IpNotAvailable"
-	ErrorCodeAccessDenied          ErrorCode = "AccessDenied"
-	ErrorCodeOperationNotPermitted ErrorCode = "OperationNotPermitted"
-	ErrorCodeVpcIdNotFound         ErrorCode = "VpcIdNotFound"
-	ErrorCodeUnknown               ErrorCode = "Unknown"
+	ErrorCodeSubnetNotFound            ErrorCode = "SubnetNotFound"
+	ErrorCodeSecurityGroupNotFound     ErrorCode = "SecurityGroupNotFound"
+	ErrorCodeEniLimitReached           ErrorCode = "EniLimitReached"
+	ErrorCodeIpNotAvailable            ErrorCode = "IpNotAvailable"
+	ErrorCodeAccessDenied              ErrorCode = "AccessDenied"
+	ErrorCodeOperationNotPermitted     ErrorCode = "OperationNotPermitted"
+	ErrorCodeVpcIdNotFound             ErrorCode = "VpcIdNotFound"
+	ErrorCodeUnknown                   ErrorCode = "Unknown"
+	ErrorCodeNodeCreationFailure       ErrorCode = "NodeCreationFailure"
+	ErrorCodePodEvictionFailure        ErrorCode = "PodEvictionFailure"
+	ErrorCodeInsufficientFreeAddresses ErrorCode = "InsufficientFreeAddresses"
 )
 
 func (enum ErrorCode) MarshalValue() (string, error) {
@@ -40,6 +61,26 @@ func (enum ErrorCode) MarshalValue() (string, error) {
 }
 
 func (enum ErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type FargateProfileStatus string
+
+// Enum values for FargateProfileStatus
+const (
+	FargateProfileStatusCreating     FargateProfileStatus = "CREATING"
+	FargateProfileStatusActive       FargateProfileStatus = "ACTIVE"
+	FargateProfileStatusDeleting     FargateProfileStatus = "DELETING"
+	FargateProfileStatusCreateFailed FargateProfileStatus = "CREATE_FAILED"
+	FargateProfileStatusDeleteFailed FargateProfileStatus = "DELETE_FAILED"
+)
+
+func (enum FargateProfileStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FargateProfileStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -64,6 +105,55 @@ func (enum LogType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type NodegroupIssueCode string
+
+// Enum values for NodegroupIssueCode
+const (
+	NodegroupIssueCodeAutoScalingGroupNotFound         NodegroupIssueCode = "AutoScalingGroupNotFound"
+	NodegroupIssueCodeEc2securityGroupNotFound         NodegroupIssueCode = "Ec2SecurityGroupNotFound"
+	NodegroupIssueCodeEc2securityGroupDeletionFailure  NodegroupIssueCode = "Ec2SecurityGroupDeletionFailure"
+	NodegroupIssueCodeEc2launchTemplateNotFound        NodegroupIssueCode = "Ec2LaunchTemplateNotFound"
+	NodegroupIssueCodeEc2launchTemplateVersionMismatch NodegroupIssueCode = "Ec2LaunchTemplateVersionMismatch"
+	NodegroupIssueCodeIamInstanceProfileNotFound       NodegroupIssueCode = "IamInstanceProfileNotFound"
+	NodegroupIssueCodeIamNodeRoleNotFound              NodegroupIssueCode = "IamNodeRoleNotFound"
+	NodegroupIssueCodeAsgInstanceLaunchFailures        NodegroupIssueCode = "AsgInstanceLaunchFailures"
+	NodegroupIssueCodeInstanceLimitExceeded            NodegroupIssueCode = "InstanceLimitExceeded"
+	NodegroupIssueCodeInsufficientFreeAddresses        NodegroupIssueCode = "InsufficientFreeAddresses"
+	NodegroupIssueCodeAccessDenied                     NodegroupIssueCode = "AccessDenied"
+	NodegroupIssueCodeInternalFailure                  NodegroupIssueCode = "InternalFailure"
+)
+
+func (enum NodegroupIssueCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NodegroupIssueCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type NodegroupStatus string
+
+// Enum values for NodegroupStatus
+const (
+	NodegroupStatusCreating     NodegroupStatus = "CREATING"
+	NodegroupStatusActive       NodegroupStatus = "ACTIVE"
+	NodegroupStatusUpdating     NodegroupStatus = "UPDATING"
+	NodegroupStatusDeleting     NodegroupStatus = "DELETING"
+	NodegroupStatusCreateFailed NodegroupStatus = "CREATE_FAILED"
+	NodegroupStatusDeleteFailed NodegroupStatus = "DELETE_FAILED"
+	NodegroupStatusDegraded     NodegroupStatus = "DEGRADED"
+)
+
+func (enum NodegroupStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NodegroupStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type UpdateParamType string
 
 // Enum values for UpdateParamType
@@ -73,6 +163,12 @@ const (
 	UpdateParamTypeEndpointPrivateAccess UpdateParamType = "EndpointPrivateAccess"
 	UpdateParamTypeEndpointPublicAccess  UpdateParamType = "EndpointPublicAccess"
 	UpdateParamTypeClusterLogging        UpdateParamType = "ClusterLogging"
+	UpdateParamTypeDesiredSize           UpdateParamType = "DesiredSize"
+	UpdateParamTypeLabelsToAdd           UpdateParamType = "LabelsToAdd"
+	UpdateParamTypeLabelsToRemove        UpdateParamType = "LabelsToRemove"
+	UpdateParamTypeMaxSize               UpdateParamType = "MaxSize"
+	UpdateParamTypeMinSize               UpdateParamType = "MinSize"
+	UpdateParamTypeReleaseVersion        UpdateParamType = "ReleaseVersion"
 )
 
 func (enum UpdateParamType) MarshalValue() (string, error) {
@@ -110,6 +206,7 @@ const (
 	UpdateTypeVersionUpdate        UpdateType = "VersionUpdate"
 	UpdateTypeEndpointAccessUpdate UpdateType = "EndpointAccessUpdate"
 	UpdateTypeLoggingUpdate        UpdateType = "LoggingUpdate"
+	UpdateTypeConfigUpdate         UpdateType = "ConfigUpdate"
 )
 
 func (enum UpdateType) MarshalValue() (string, error) {

@@ -13,6 +13,23 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Information includes the AWS account ID where the current document is shared
+// and the version shared with that account.
+type AccountSharingInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The AWS account ID where the current document is shared.
+	AccountId *string `type:"string"`
+
+	// The version of the current document shared with the account.
+	SharedDocumentVersion *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AccountSharingInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
 // An activation registers one or more on-premises servers or virtual machines
 // (VMs) with AWS so that you can configure those servers or VMs using Run Command.
 // A server or VM that has been registered with AWS is called a managed instance.
@@ -574,16 +591,21 @@ func (s AttachmentInformation) String() string {
 	return awsutil.Prettify(s)
 }
 
-// A key and value pair that identifies the location of an attachment to a document.
+// Identifying information about a document attachment, including the file name
+// and a key-value pair that identifies the location of an attachment to a document.
 type AttachmentsSource struct {
 	_ struct{} `type:"structure"`
 
-	// The key of a key and value pair that identifies the location of an attachment
+	// The key of a key-value pair that identifies the location of an attachment
 	// to a document.
 	Key AttachmentsSourceKey `type:"string" enum:"true"`
 
-	// The URL of the location of a document attachment, such as the URL of an Amazon
-	// S3 bucket.
+	// The name of the document attachment file.
+	Name *string `type:"string"`
+
+	// The value of a key-value pair that identifies the location of an attachment
+	// to a document. The format is the URL of the location of a document attachment,
+	// such as the URL of an Amazon S3 bucket.
 	Values []string `min:"1" type:"list"`
 }
 
@@ -1345,7 +1367,7 @@ type ComplianceItem struct {
 
 	// An ID for the compliance item. For example, if the compliance item is a Windows
 	// patch, the ID could be the number of the KB article; for example: KB4010320.
-	Id *string `min:"1" type:"string"`
+	Id *string `type:"string"`
 
 	// An ID for the resource. For a managed instance, this is the instance ID.
 	ResourceId *string `min:"1" type:"string"`
@@ -1381,7 +1403,7 @@ type ComplianceItemEntry struct {
 
 	// The compliance item ID. For example, if the compliance item is a Windows
 	// patch, the ID could be the number of the KB article.
-	Id *string `min:"1" type:"string"`
+	Id *string `type:"string"`
 
 	// The severity of the compliance status. Severity can be one of the following:
 	// Critical, High, Medium, Low, Informational, Unspecified.
@@ -1408,9 +1430,6 @@ func (s ComplianceItemEntry) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ComplianceItemEntry) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ComplianceItemEntry"}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
 	if len(s.Severity) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Severity"))
 	}
@@ -1707,6 +1726,10 @@ type DocumentDescription struct {
 	// The list of OS platforms compatible with this Systems Manager document.
 	PlatformTypes []PlatformType `type:"list"`
 
+	// A list of SSM documents required by a document. For example, an ApplicationConfiguration
+	// document requires an ApplicationConfigurationSchema document.
+	Requires []DocumentRequires `min:"1" type:"list"`
+
 	// The schema version.
 	SchemaVersion *string `type:"string"`
 
@@ -1801,6 +1824,10 @@ type DocumentIdentifier struct {
 
 	// The operating system platform.
 	PlatformTypes []PlatformType `type:"list"`
+
+	// A list of SSM documents required by a document. For example, an ApplicationConfiguration
+	// document requires an ApplicationConfigurationSchema document.
+	Requires []DocumentRequires `min:"1" type:"list"`
 
 	// The schema version.
 	SchemaVersion *string `type:"string"`
@@ -1901,6 +1928,39 @@ type DocumentParameter struct {
 // String returns the string representation
 func (s DocumentParameter) String() string {
 	return awsutil.Prettify(s)
+}
+
+// An SSM document required by the current document.
+type DocumentRequires struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the required SSM document. The name can be an Amazon Resource
+	// Name (ARN).
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// The document version required by the current document.
+	Version *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DocumentRequires) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DocumentRequires) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DocumentRequires"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Version information about the document.
@@ -2330,6 +2390,9 @@ type InstancePatchState struct {
 	// on the instance.
 	InstalledOtherCount *int64 `type:"integer"`
 
+	// Reserved for future use.
+	InstalledPendingRebootCount *int64 `type:"integer"`
+
 	// The number of instances with patches installed that are specified in a RejectedPatches
 	// list. Patches with a status of InstalledRejected were typically installed
 	// before they were added to a RejectedPatches list.
@@ -2343,6 +2406,9 @@ type InstancePatchState struct {
 	//
 	// InstanceId is a required field
 	InstanceId *string `type:"string" required:"true"`
+
+	// Reserved for future use.
+	LastNoRebootInstallOperationTime *time.Time `type:"timestamp"`
 
 	// The number of patches from the patch baseline that are applicable for the
 	// instance but aren't currently installed.
@@ -2378,6 +2444,9 @@ type InstancePatchState struct {
 	//
 	// PatchGroup is a required field
 	PatchGroup *string `min:"1" type:"string" required:"true"`
+
+	// Reserved for future use.
+	RebootOption RebootOption `type:"string" enum:"true"`
 
 	// The ID of the patch baseline snapshot used during the patching operation
 	// when this compliance data was collected.
@@ -3637,6 +3706,9 @@ func (s OpsEntity) String() string {
 type OpsEntityItem struct {
 	_ struct{} `type:"structure"`
 
+	// The time OpsItem data was captured.
+	CaptureTime *string `type:"string"`
+
 	// The detailed data content for an OpsItem summaries result item.
 	Content []map[string]string `type:"list"`
 }
@@ -3701,6 +3773,10 @@ func (s *OpsFilter) Validate() error {
 type OpsItem struct {
 	_ struct{} `type:"structure"`
 
+	// An OpsItem category. Category options include: Availability, Cost, Performance,
+	// Recovery, Security.
+	Category *string `min:"1" type:"string"`
+
 	// The ARN of the AWS account that created the OpsItem.
 	CreatedBy *string `type:"string"`
 
@@ -3753,6 +3829,9 @@ type OpsItem struct {
 	// For example, related OpsItems can include OpsItems with similar error messages,
 	// impacted resources, or statuses for the impacted resource.
 	RelatedOpsItems []RelatedOpsItem `type:"list"`
+
+	// The severity of the OpsItem. Severity options range from 1 to 4.
+	Severity *string `min:"1" type:"string"`
 
 	// The origin of the OpsItem, such as Amazon EC2 or AWS Systems Manager. The
 	// impacted resource is a subset of source.
@@ -3857,6 +3936,9 @@ func (s OpsItemNotification) String() string {
 type OpsItemSummary struct {
 	_ struct{} `type:"structure"`
 
+	// A list of OpsItems by category.
+	Category *string `min:"1" type:"string"`
+
 	// The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem.
 	CreatedBy *string `type:"string"`
 
@@ -3879,6 +3961,9 @@ type OpsItemSummary struct {
 	// The importance of this OpsItem in relation to other OpsItems in the system.
 	Priority *int64 `min:"1" type:"integer"`
 
+	// A list of OpsItems by severity.
+	Severity *string `min:"1" type:"string"`
+
 	// The impacted AWS resource.
 	Source *string `min:"1" type:"string"`
 
@@ -3893,6 +3978,39 @@ type OpsItemSummary struct {
 // String returns the string representation
 func (s OpsItemSummary) String() string {
 	return awsutil.Prettify(s)
+}
+
+// The OpsItem data type to return.
+type OpsResultAttribute struct {
+	_ struct{} `type:"structure"`
+
+	// Name of the data type. Valid value: AWS:OpsItem, AWS:EC2InstanceInformation,
+	// AWS:OpsItemTrendline, or AWS:ComplianceSummary.
+	//
+	// TypeName is a required field
+	TypeName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s OpsResultAttribute) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OpsResultAttribute) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OpsResultAttribute"}
+
+	if s.TypeName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
+	}
+	if s.TypeName != nil && len(*s.TypeName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TypeName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Information about the source where the association execution details are
@@ -4075,9 +4193,19 @@ func (s ParameterMetadata) String() string {
 
 // One or more filters. Use a filter to return a more specific list of results.
 //
-// The Name and Tier filter keys can't be used with the GetParametersByPath
-// API action. Also, the Label filter key can't be used with the DescribeParameters
-// API action.
+// The ParameterStringFilter object is used by the DescribeParameters and GetParametersByPath
+// API actions. However, not all of the pattern values listed for Key can be
+// used with both actions.
+//
+// For DescribeActions, all of the listed patterns are valid, with the exception
+// of Label.
+//
+// For GetParametersByPath, the following patterns listed for Key are not valid:
+// Name, Path, and Tier.
+//
+// For examples of CLI commands demonstrating valid parameter filter constructions,
+// see Searching for Systems Manager Parameters (http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html)
+// in the AWS Systems Manager User Guide.
 type ParameterStringFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -4086,8 +4214,14 @@ type ParameterStringFilter struct {
 	// Key is a required field
 	Key *string `min:"1" type:"string" required:"true"`
 
-	// Valid options are Equals and BeginsWith. For Path filter, valid options are
-	// Recursive and OneLevel.
+	// For all filters used with DescribeParameters, valid options include Equals
+	// and BeginsWith. The Name filter additionally supports the Contains option.
+	// (Exception: For filters using the key Path, valid options include Recursive
+	// and OneLevel.)
+	//
+	// For filters used with GetParametersByPath, valid options include Equals and
+	// BeginsWith. (Exception: For filters using the key Label, the only valid option
+	// is Equals.)
 	Option *string `min:"1" type:"string"`
 
 	// The value you want to search for.
@@ -4716,6 +4850,56 @@ func (s ResourceComplianceSummaryItem) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Information about the AwsOrganizationsSource resource data sync source. A
+// sync source of this type can synchronize data from AWS Organizations or,
+// if an AWS Organization is not present, from multiple AWS Regions.
+type ResourceDataSyncAwsOrganizationsSource struct {
+	_ struct{} `type:"structure"`
+
+	// If an AWS Organization is present, this is either OrganizationalUnits or
+	// EntireOrganization. For OrganizationalUnits, the data is aggregated from
+	// a set of organization units. For EntireOrganization, the data is aggregated
+	// from the entire AWS Organization.
+	//
+	// OrganizationSourceType is a required field
+	OrganizationSourceType *string `min:"1" type:"string" required:"true"`
+
+	// The AWS Organizations organization units included in the sync.
+	OrganizationalUnits []ResourceDataSyncOrganizationalUnit `min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s ResourceDataSyncAwsOrganizationsSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResourceDataSyncAwsOrganizationsSource) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceDataSyncAwsOrganizationsSource"}
+
+	if s.OrganizationSourceType == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OrganizationSourceType"))
+	}
+	if s.OrganizationSourceType != nil && len(*s.OrganizationSourceType) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("OrganizationSourceType", 1))
+	}
+	if s.OrganizationalUnits != nil && len(s.OrganizationalUnits) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("OrganizationalUnits", 1))
+	}
+	if s.OrganizationalUnits != nil {
+		for i, v := range s.OrganizationalUnits {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OrganizationalUnits", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Information about a Resource Data Sync configuration, including its current
 // status and last successful sync.
 type ResourceDataSyncItem struct {
@@ -4739,13 +4923,51 @@ type ResourceDataSyncItem struct {
 	// The date and time the configuration was created (UTC).
 	SyncCreatedTime *time.Time `type:"timestamp"`
 
+	// The date and time the resource data sync was changed.
+	SyncLastModifiedTime *time.Time `type:"timestamp"`
+
 	// The name of the Resource Data Sync.
 	SyncName *string `min:"1" type:"string"`
+
+	// Information about the source where the data was synchronized.
+	SyncSource *ResourceDataSyncSourceWithState `type:"structure"`
+
+	// The type of resource data sync. If SyncType is SyncToDestination, then the
+	// resource data sync synchronizes data to an Amazon S3 bucket. If the SyncType
+	// is SyncFromSource then the resource data sync synchronizes data from AWS
+	// Organizations or from multiple AWS Regions.
+	SyncType *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
 func (s ResourceDataSyncItem) String() string {
 	return awsutil.Prettify(s)
+}
+
+// The AWS Organizations organizational unit data source for the sync.
+type ResourceDataSyncOrganizationalUnit struct {
+	_ struct{} `type:"structure"`
+
+	// The AWS Organization unit ID data source for the sync.
+	OrganizationalUnitId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ResourceDataSyncOrganizationalUnit) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResourceDataSyncOrganizationalUnit) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceDataSyncOrganizationalUnit"}
+	if s.OrganizationalUnitId != nil && len(*s.OrganizationalUnitId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("OrganizationalUnitId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Information about the target Amazon S3 bucket for the Resource Data Sync.
@@ -4811,6 +5033,115 @@ func (s *ResourceDataSyncS3Destination) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Information about the source of the data included in the resource data sync.
+type ResourceDataSyncSource struct {
+	_ struct{} `type:"structure"`
+
+	// The field name in SyncSource for the ResourceDataSyncAwsOrganizationsSource
+	// type.
+	AwsOrganizationsSource *ResourceDataSyncAwsOrganizationsSource `type:"structure"`
+
+	// Whether to automatically synchronize and aggregate data from new AWS Regions
+	// when those Regions come online.
+	IncludeFutureRegions *bool `type:"boolean"`
+
+	// The SyncSource AWS Regions included in the resource data sync.
+	//
+	// SourceRegions is a required field
+	SourceRegions []string `type:"list" required:"true"`
+
+	// The type of data source for the resource data sync. SourceType is either
+	// AwsOrganizations (if an organization is present in AWS Organizations) or
+	// singleAccountMultiRegions.
+	//
+	// SourceType is a required field
+	SourceType *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ResourceDataSyncSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResourceDataSyncSource) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceDataSyncSource"}
+
+	if s.SourceRegions == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SourceRegions"))
+	}
+
+	if s.SourceType == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SourceType"))
+	}
+	if s.SourceType != nil && len(*s.SourceType) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SourceType", 1))
+	}
+	if s.AwsOrganizationsSource != nil {
+		if err := s.AwsOrganizationsSource.Validate(); err != nil {
+			invalidParams.AddNested("AwsOrganizationsSource", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The data type name for including resource data sync state. There are four
+// sync states:
+//
+// OrganizationNotExists (Your organization doesn't exist)
+//
+// NoPermissions (The system can't locate the service-linked role. This role
+// is automatically created when a user creates a resource data sync in Explorer.)
+//
+// InvalidOrganizationalUnit (You specified or selected an invalid unit in the
+// resource data sync configuration.)
+//
+// TrustedAccessDisabled (You disabled Systems Manager access in the organization
+// in AWS Organizations.)
+type ResourceDataSyncSourceWithState struct {
+	_ struct{} `type:"structure"`
+
+	// The field name in SyncSource for the ResourceDataSyncAwsOrganizationsSource
+	// type.
+	AwsOrganizationsSource *ResourceDataSyncAwsOrganizationsSource `type:"structure"`
+
+	// Whether to automatically synchronize and aggregate data from new AWS Regions
+	// when those Regions come online.
+	IncludeFutureRegions *bool `type:"boolean"`
+
+	// The SyncSource AWS Regions included in the resource data sync.
+	SourceRegions []string `type:"list"`
+
+	// The type of data source for the resource data sync. SourceType is either
+	// AwsOrganizations (if an organization is present in AWS Organizations) or
+	// singleAccountMultiRegions.
+	SourceType *string `min:"1" type:"string"`
+
+	// The data type name for including resource data sync state. There are four
+	// sync states:
+	//
+	// OrganizationNotExists: Your organization doesn't exist.
+	//
+	// NoPermissions: The system can't locate the service-linked role. This role
+	// is automatically created when a user creates a resource data sync in Explorer.
+	//
+	// InvalidOrganizationalUnit: You specified or selected an invalid unit in the
+	// resource data sync configuration.
+	//
+	// TrustedAccessDisabled: You disabled Systems Manager access in the organization
+	// in AWS Organizations.
+	State *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ResourceDataSyncSourceWithState) String() string {
+	return awsutil.Prettify(s)
 }
 
 // The inventory item result attribute.
@@ -5325,8 +5656,16 @@ func (s *Tag) Validate() error {
 //    * Key=tag-key,Values=Name,Instance-Type,CostCenter
 //
 //    * (Maintenance window targets only) Key=resource-groups:Name,Values=ProductionResourceGroup
+//    This example demonstrates how to target all resources in the resource
+//    group ProductionResourceGroup in your maintenance window.
 //
 //    * (Maintenance window targets only) Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
+//    This example demonstrates how to target only Amazon EC2 instances and
+//    VPCs in your maintenance window.
+//
+//    * (State Manager association targets only) Key=InstanceIds,Values=* This
+//    example demonstrates how to target all managed instances in the AWS Region
+//    where the association was created.
 //
 // For information about how to send commands that target instances using Key,Value
 // parameters, see Using Targets and Rate Controls to Send Commands to a Fleet

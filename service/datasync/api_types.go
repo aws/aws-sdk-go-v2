@@ -301,6 +301,13 @@ type Options struct {
 	// currently supported for Amazon EFS.
 	PreserveDevices PreserveDevices `type:"string" enum:"true"`
 
+	// A value that determines whether tasks should be queued before executing the
+	// tasks. If set to ENABLED, the tasks will be queued. The default is ENABLED.
+	//
+	// If you use the same agent to run multiple tasks you can enable the tasks
+	// to run in series. For more information see queue-task-execution.
+	TaskQueueing TaskQueueing `type:"string" enum:"true"`
+
 	// The user ID (UID) of the file's owner.
 	//
 	// Default value: INT_VALUE. This preserves the integer value of the ID.
@@ -501,6 +508,10 @@ type TaskExecutionResultDetail struct {
 	// The status of the PREPARING phase.
 	PrepareStatus PhaseStatus `type:"string" enum:"true"`
 
+	// The total time in milliseconds that AWS DataSync took to transfer the file
+	// from the source to the destination location.
+	TotalDuration *int64 `type:"long"`
+
 	// The total time in milliseconds that AWS DataSync spent in the TRANSFERRING
 	// phase.
 	TransferDuration *int64 `type:"long"`
@@ -540,4 +551,35 @@ type TaskListEntry struct {
 // String returns the string representation
 func (s TaskListEntry) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Specifies the schedule you want your task to use for repeated executions.
+// For more information, see Schedule Expressions for Rules (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html).
+type TaskSchedule struct {
+	_ struct{} `type:"structure"`
+
+	// A cron expression that specifies when AWS DataSync initiates a scheduled
+	// transfer from a source to a destination location.
+	//
+	// ScheduleExpression is a required field
+	ScheduleExpression *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s TaskSchedule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TaskSchedule) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TaskSchedule"}
+
+	if s.ScheduleExpression == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ScheduleExpression"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }

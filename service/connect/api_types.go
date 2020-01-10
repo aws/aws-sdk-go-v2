@@ -13,15 +13,127 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// The credentials to use for federation.
+// A chat message.
+type ChatMessage struct {
+	_ struct{} `type:"structure"`
+
+	// The content of the chat message.
+	//
+	// Content is a required field
+	Content *string `min:"1" type:"string" required:"true"`
+
+	// The type of the content. Supported types are text/plain.
+	//
+	// ContentType is a required field
+	ContentType *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ChatMessage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ChatMessage) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ChatMessage"}
+
+	if s.Content == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Content"))
+	}
+	if s.Content != nil && len(*s.Content) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Content", 1))
+	}
+
+	if s.ContentType == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContentType"))
+	}
+	if s.ContentType != nil && len(*s.ContentType) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContentType", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ChatMessage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Content != nil {
+		v := *s.Content
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Content", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ContentType != nil {
+		v := *s.ContentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ContentType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Contains summary information about a contact flow.
+type ContactFlowSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the contact flow.
+	Arn *string `type:"string"`
+
+	// The type of contact flow.
+	ContactFlowType ContactFlowType `type:"string" enum:"true"`
+
+	// The identifier of the contact flow.
+	Id *string `type:"string"`
+
+	// The name of the contact flow.
+	Name *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ContactFlowSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ContactFlowSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ContactFlowType) > 0 {
+		v := s.ContactFlowType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ContactFlowType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Contains credentials to use for federation.
 type Credentials struct {
 	_ struct{} `type:"structure"`
 
-	// An access token generated for a federated user to access Amazon Connect
+	// An access token generated for a federated user to access Amazon Connect.
 	AccessToken *string `type:"string" sensitive:"true"`
 
 	// A token generated with an expiration time for the session a user is logged
-	// in to Amazon Connect
+	// in to Amazon Connect.
 	AccessTokenExpiration *time.Time `type:"timestamp"`
 
 	// Renews a token generated for a user to access the Amazon Connect instance.
@@ -67,7 +179,7 @@ func (s Credentials) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A CurrentMetric object that contains the Name and Unit for the metric.
+// Contains information about a real-time metric.
 type CurrentMetric struct {
 	_ struct{} `type:"structure"`
 
@@ -100,14 +212,14 @@ func (s CurrentMetric) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A CurrentMetricData object.
+// Contains the data for a real-time metric.
 type CurrentMetricData struct {
 	_ struct{} `type:"structure"`
 
-	// The metric in a CurrentMetricData object.
+	// Information about the metric.
 	Metric *CurrentMetric `type:"structure"`
 
-	// The value of the metric in the CurrentMetricData object.
+	// The value of the metric.
 	Value *float64 `type:"double"`
 }
 
@@ -133,14 +245,14 @@ func (s CurrentMetricData) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A CurrentMetricResult object.
+// Contains information about a set of real-time metrics.
 type CurrentMetricResult struct {
 	_ struct{} `type:"structure"`
 
-	// The Collections for the CurrentMetricResult object.
+	// The set of metrics.
 	Collections []CurrentMetricData `type:"list"`
 
-	// The Dimensions for the CurrentMetricResult object.
+	// The dimensions for the metrics.
 	Dimensions *Dimensions `type:"structure"`
 }
 
@@ -172,14 +284,14 @@ func (s CurrentMetricResult) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A Dimensions object that includes the Channel and Queue for the metric.
+// Contains information about the dimensions for a set of metrics.
 type Dimensions struct {
 	_ struct{} `type:"structure"`
 
-	// The channel used for grouping and filters. Only VOICE is supported.
+	// The channel used for grouping and filters.
 	Channel Channel `type:"string" enum:"true"`
 
-	// A QueueReference object used as one part of dimension for the metrics results.
+	// Information about the queue for which metrics are returned.
 	Queue *QueueReference `type:"structure"`
 }
 
@@ -205,15 +317,15 @@ func (s Dimensions) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The filter, either channel or queues, to apply to the metric results retrieved.
+// Contains the filter to apply when retrieving metrics.
 type Filters struct {
 	_ struct{} `type:"structure"`
 
-	// The Channel to use as a filter for the metrics returned. Only VOICE is supported.
+	// The channel to use to filter the metrics.
 	Channels []Channel `type:"list"`
 
-	// A list of up to 100 queue IDs or queue ARNs to use to filter the metrics
-	// retrieved. You can include both IDs and ARNs in a request.
+	// The queues to use to filter the metrics. You can specify up to 100 queues
+	// per request.
 	Queues []string `min:"1" type:"list"`
 }
 
@@ -264,25 +376,23 @@ func (s Filters) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A HierarchyGroup object that contains information about a hierarchy group
-// in your Amazon Connect instance.
+// Contains information about a hierarchy group.
 type HierarchyGroup struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) for the hierarchy group.
+	// The Amazon Resource Name (ARN) of the hierarchy group.
 	Arn *string `type:"string"`
 
-	// A HierarchyPath object that contains information about the levels in the
-	// hierarchy group.
+	// Information about the levels in the hierarchy group.
 	HierarchyPath *HierarchyPath `type:"structure"`
 
-	// The identifier for the hierarchy group.
+	// The identifier of the hierarchy group.
 	Id *string `type:"string"`
 
-	// The identifier for the level in the hierarchy group.
+	// The identifier of the level in the hierarchy group.
 	LevelId *string `type:"string"`
 
-	// The name of the hierarchy group in your instance.
+	// The name of the hierarchy group.
 	Name *string `type:"string"`
 }
 
@@ -326,12 +436,11 @@ func (s HierarchyGroup) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A HierarchyGroupSummary object that contains information about the hierarchy
-// group, including ARN, Id, and Name.
+// Contains summary information about a hierarchy group.
 type HierarchyGroupSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN for the hierarchy group.
+	// The Amazon Resource Name (ARN) of the hierarchy group.
 	Arn *string `type:"string"`
 
 	// The identifier of the hierarchy group.
@@ -369,18 +478,17 @@ func (s HierarchyGroupSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A HierarchyLevel object that contains information about the levels in a hierarchy
-// group, including ARN, Id, and Name.
+// Contains information about a hierarchy level.
 type HierarchyLevel struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN for the hierarchy group level.
+	// The Amazon Resource Name (ARN) of the hierarchy level.
 	Arn *string `type:"string"`
 
-	// The identifier for the hierarchy group level.
+	// The identifier of the hierarchy level.
 	Id *string `type:"string"`
 
-	// The name of the hierarchy group level.
+	// The name of the hierarchy level.
 	Name *string `type:"string"`
 }
 
@@ -412,29 +520,23 @@ func (s HierarchyLevel) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A HierarchyPath object that contains information about the levels of the
-// hierarchy group.
+// Contains information about the levels of a hierarchy group.
 type HierarchyPath struct {
 	_ struct{} `type:"structure"`
 
-	// A HierarchyGroupSummary object that contains information about the level
-	// of the hierarchy group, including ARN, Id, and Name.
+	// Information about level five.
 	LevelFive *HierarchyGroupSummary `type:"structure"`
 
-	// A HierarchyGroupSummary object that contains information about the level
-	// of the hierarchy group, including ARN, Id, and Name.
+	// Information about level four.
 	LevelFour *HierarchyGroupSummary `type:"structure"`
 
-	// A HierarchyGroupSummary object that contains information about the level
-	// of the hierarchy group, including ARN, Id, and Name.
+	// Information about level one.
 	LevelOne *HierarchyGroupSummary `type:"structure"`
 
-	// A HierarchyGroupSummary object that contains information about the level
-	// of the hierarchy group, including ARN, Id, and Name.
+	// Information about level three.
 	LevelThree *HierarchyGroupSummary `type:"structure"`
 
-	// A HierarchyGroupSummary object that contains information about the level
-	// of the hierarchy group, including ARN, Id, and Name.
+	// Information about level two.
 	LevelTwo *HierarchyGroupSummary `type:"structure"`
 }
 
@@ -478,29 +580,23 @@ func (s HierarchyPath) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A HierarchyStructure object that contains information about the hierarchy
-// group structure.
+// Contains information about a hierarchy structure.
 type HierarchyStructure struct {
 	_ struct{} `type:"structure"`
 
-	// A HierarchyLevel object that contains information about the hierarchy group
-	// level.
+	// Information about level five.
 	LevelFive *HierarchyLevel `type:"structure"`
 
-	// A HierarchyLevel object that contains information about the hierarchy group
-	// level.
+	// Information about level four.
 	LevelFour *HierarchyLevel `type:"structure"`
 
-	// A HierarchyLevel object that contains information about the hierarchy group
-	// level.
+	// Information about level one.
 	LevelOne *HierarchyLevel `type:"structure"`
 
-	// A HierarchyLevel object that contains information about the hierarchy group
-	// level.
+	// Information about level three.
 	LevelThree *HierarchyLevel `type:"structure"`
 
-	// A HierarchyLevel object that contains information about the hierarchy group
-	// level.
+	// Information about level two.
 	LevelTwo *HierarchyLevel `type:"structure"`
 }
 
@@ -544,12 +640,11 @@ func (s HierarchyStructure) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A HistoricalMetric object that contains the Name, Unit, Statistic, and Threshold
-// for the metric.
+// Contains information about a historical metric.
 type HistoricalMetric struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the historical metric.
+	// The name of the metric.
 	Name HistoricalMetricName `type:"string" enum:"true"`
 
 	// The statistic for the metric.
@@ -596,14 +691,14 @@ func (s HistoricalMetric) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A HistoricalMetricData object than contains a Metric and a Value.
+// Contains the data for a historical metric.
 type HistoricalMetricData struct {
 	_ struct{} `type:"structure"`
 
-	// A HistoricalMetric object.
+	// Information about the metric.
 	Metric *HistoricalMetric `type:"structure"`
 
-	// The Value of the metric.
+	// The value of the metric.
 	Value *float64 `type:"double"`
 }
 
@@ -629,14 +724,14 @@ func (s HistoricalMetricData) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The metrics data returned from a GetMetricData operation.
+// Contains information about the historical metrics retrieved.
 type HistoricalMetricResult struct {
 	_ struct{} `type:"structure"`
 
-	// A list of HistoricalMetricData objects.
+	// The set of metrics.
 	Collections []HistoricalMetricData `type:"list"`
 
-	// The Dimensions for the metrics.
+	// The dimension for the metrics.
 	Dimensions *Dimensions `type:"structure"`
 }
 
@@ -668,15 +763,159 @@ func (s HistoricalMetricResult) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A QueueReference object that contains the the QueueId and ARN for the queue
-// resource for which metrics are returned.
+// Contains summary information about hours of operation for a contact center.
+type HoursOfOperationSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the hours of operation.
+	Arn *string `type:"string"`
+
+	// The identifier of the hours of operation.
+	Id *string `type:"string"`
+
+	// The name of the hours of operation.
+	Name *string `type:"string"`
+}
+
+// String returns the string representation
+func (s HoursOfOperationSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HoursOfOperationSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The customer's details.
+type ParticipantDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Display name of the participant.
+	//
+	// DisplayName is a required field
+	DisplayName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ParticipantDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ParticipantDetails) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ParticipantDetails"}
+
+	if s.DisplayName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DisplayName"))
+	}
+	if s.DisplayName != nil && len(*s.DisplayName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DisplayName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ParticipantDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DisplayName != nil {
+		v := *s.DisplayName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DisplayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Contains summary information about a phone number for a contact center.
+type PhoneNumberSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the phone number.
+	Arn *string `type:"string"`
+
+	// The identifier of the phone number.
+	Id *string `type:"string"`
+
+	// The phone number.
+	PhoneNumber *string `type:"string"`
+
+	// The ISO country code.
+	PhoneNumberCountryCode PhoneNumberCountryCode `type:"string" enum:"true"`
+
+	// The type of phone number.
+	PhoneNumberType PhoneNumberType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s PhoneNumberSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PhoneNumberSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PhoneNumber != nil {
+		v := *s.PhoneNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PhoneNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.PhoneNumberCountryCode) > 0 {
+		v := s.PhoneNumberCountryCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PhoneNumberCountryCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.PhoneNumberType) > 0 {
+		v := s.PhoneNumberType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PhoneNumberType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Contains information about a queue resource for which metrics are returned.
 type QueueReference struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of queue.
+	// The Amazon Resource Name (ARN) of the queue.
 	Arn *string `type:"string"`
 
-	// The ID of the queue associated with the metrics returned.
+	// The identifier of the queue.
 	Id *string `type:"string"`
 }
 
@@ -702,12 +941,62 @@ func (s QueueReference) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A RoutingProfileSummary object that contains information about a routing
-// profile, including ARN, Id, and Name.
+// Contains summary information about a queue.
+type QueueSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the queue.
+	Arn *string `type:"string"`
+
+	// The identifier of the queue.
+	Id *string `type:"string"`
+
+	// The name of the queue.
+	Name *string `min:"1" type:"string"`
+
+	// The type of queue.
+	QueueType QueueType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s QueueSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s QueueSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.QueueType) > 0 {
+		v := s.QueueType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "QueueType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Contains summary information about a routing profile.
 type RoutingProfileSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the routing profile.
+	// The Amazon Resource Name (ARN) of the routing profile.
 	Arn *string `type:"string"`
 
 	// The identifier of the routing profile.
@@ -745,12 +1034,11 @@ func (s RoutingProfileSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A SecurityProfileSummary object that contains information about a security
-// profile, including ARN, Id, Name.
+// Contains information about a security profile.
 type SecurityProfileSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the security profile.
+	// The Amazon Resource Name (ARN) of the security profile.
 	Arn *string `type:"string"`
 
 	// The identifier of the security profile.
@@ -788,17 +1076,14 @@ func (s SecurityProfileSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A Threshold object that includes a comparison and ThresholdValue to compare
-// to. Used with service level metrics.
+// Contains information about the threshold for service level metrics.
 type Threshold struct {
 	_ struct{} `type:"structure"`
 
-	// The Threshold to use to compare service level metrics to. Only "Less than"
-	// (LT) comparisons are supported.
+	// The type of comparison. Only "less than" (LT) comparisons are supported.
 	Comparison Comparison `type:"string" enum:"true"`
 
-	// The value of the threshold to compare the metric to. Only "Less than" (LT)
-	// comparisons are supported.
+	// The threshold value to compare.
 	ThresholdValue *float64 `type:"double"`
 }
 
@@ -824,35 +1109,36 @@ func (s Threshold) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A User object that contains information about a user account in your Amazon
-// Connect instance, including configuration settings.
+// Contains information about a user account for a Amazon Connect instance.
 type User struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the user account.
+	// The Amazon Resource Name (ARN) of the user account.
 	Arn *string `type:"string"`
 
-	// The directory Id for the user account in the existing directory used for
-	// identity management.
+	// The identifier of the user account in the directory used for identity management.
 	DirectoryUserId *string `type:"string"`
 
-	// The identifier for the hierarchy group assigned to the user.
+	// The identifier of the hierarchy group for the user.
 	HierarchyGroupId *string `type:"string"`
 
 	// The identifier of the user account.
 	Id *string `type:"string"`
 
-	// A UserIdentityInfo object.
+	// Information about the user identity.
 	IdentityInfo *UserIdentityInfo `type:"structure"`
 
-	// A UserPhoneConfig object.
+	// Information about the phone configuration for the user.
 	PhoneConfig *UserPhoneConfig `type:"structure"`
 
-	// The identifier of the routing profile assigned to the user.
+	// The identifier of the routing profile for the user.
 	RoutingProfileId *string `type:"string"`
 
-	// The identifier(s) for the security profile assigned to the user.
+	// The identifiers of the security profiles for the user.
 	SecurityProfileIds []string `min:"1" type:"list"`
+
+	// The tags.
+	Tags map[string]string `min:"1" type:"map"`
 
 	// The user name assigned to the user account.
 	Username *string `min:"1" type:"string"`
@@ -919,6 +1205,18 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	if s.Username != nil {
 		v := *s.Username
 
@@ -928,21 +1226,20 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A UserIdentityInfo object that contains information about the user's identity,
-// including email address, first name, and last name.
+// Contains information about the identity of a user.
 type UserIdentityInfo struct {
 	_ struct{} `type:"structure"`
 
-	// The email address added to the user account. If you are using SAML for identity
-	// management and include this parameter, an InvalidRequestException is returned.
+	// The email address. If you are using SAML for identity management and include
+	// this parameter, an error is returned.
 	Email *string `type:"string"`
 
-	// The first name used in the user account. This is required if you are using
-	// Amazon Connect or SAML for identity management.
+	// The first name. This is required if you are using Amazon Connect or SAML
+	// for identity management.
 	FirstName *string `min:"1" type:"string"`
 
-	// The last name used in the user account. This is required if you are using
-	// Amazon Connect or SAML for identity management.
+	// The last name. This is required if you are using Amazon Connect or SAML for
+	// identity management.
 	LastName *string `min:"1" type:"string"`
 }
 
@@ -990,21 +1287,20 @@ func (s UserIdentityInfo) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A UserPhoneConfig object that contains information about the user phone configuration
-// settings.
+// Contains information about the phone configuration settings for a user.
 type UserPhoneConfig struct {
 	_ struct{} `type:"structure"`
 
-	// The After Call Work (ACW) timeout setting, in seconds, for the user.
+	// The After Call Work (ACW) timeout setting, in seconds.
 	AfterContactWorkTimeLimit *int64 `type:"integer"`
 
-	// The Auto accept setting for the user, Yes or No.
+	// The Auto accept setting.
 	AutoAccept *bool `type:"boolean"`
 
 	// The phone number for the user's desk phone.
 	DeskPhoneNumber *string `type:"string"`
 
-	// The phone type selected for the user, either Soft phone or Desk phone.
+	// The phone type.
 	//
 	// PhoneType is a required field
 	PhoneType PhoneType `type:"string" required:"true" enum:"true"`
@@ -1057,18 +1353,17 @@ func (s UserPhoneConfig) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A UserSummary object that contains Information about a user, including ARN,
-// Id, and user name.
+// Contains summary information about a user.
 type UserSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN for the user account.
+	// The Amazon Resource Name (ARN) of the user account.
 	Arn *string `type:"string"`
 
-	// The identifier for the user account.
+	// The identifier of the user account.
 	Id *string `type:"string"`
 
-	// The Amazon Connect user name for the user account.
+	// The Amazon Connect user name of the user account.
 	Username *string `min:"1" type:"string"`
 }
 

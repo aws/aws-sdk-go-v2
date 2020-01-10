@@ -18,7 +18,9 @@ type TagResourceInput struct {
 	ResourceArn *string `min:"20" type:"string" required:"true"`
 
 	// The tags to assign to the identity pool.
-	Tags map[string]string `type:"map"`
+	//
+	// Tags is a required field
+	Tags map[string]string `type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -35,6 +37,10 @@ func (s *TagResourceInput) Validate() error {
 	}
 	if s.ResourceArn != nil && len(*s.ResourceArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 20))
+	}
+
+	if s.Tags == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 
 	if invalidParams.Len() > 0 {

@@ -25,11 +25,11 @@ type UpdateTableInput struct {
 	// values are estimated based on the consumed read and write capacity of your
 	// table and global secondary indexes over the past 30 minutes.
 	//
-	//    * PROVISIONED - Sets the billing mode to PROVISIONED. We recommend using
-	//    PROVISIONED for predictable workloads.
+	//    * PROVISIONED - We recommend using PROVISIONED for predictable workloads.
+	//    PROVISIONED sets the billing mode to Provisioned Mode (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual).
 	//
-	//    * PAY_PER_REQUEST - Sets the billing mode to PAY_PER_REQUEST. We recommend
-	//    using PAY_PER_REQUEST for unpredictable workloads.
+	//    * PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable
+	//    workloads. PAY_PER_REQUEST sets the billing mode to On-Demand Mode (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand).
 	BillingMode BillingMode `type:"string" enum:"true"`
 
 	// An array of one or more global secondary indexes for the table. For each
@@ -42,12 +42,21 @@ type UpdateTableInput struct {
 	//
 	//    * Delete - remove a global secondary index from the table.
 	//
+	// You can create or delete only one global secondary index per UpdateTable
+	// operation.
+	//
 	// For more information, see Managing Global Secondary Indexes (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html)
 	// in the Amazon DynamoDB Developer Guide.
 	GlobalSecondaryIndexUpdates []GlobalSecondaryIndexUpdate `type:"list"`
 
 	// The new provisioned throughput settings for the specified table or index.
 	ProvisionedThroughput *ProvisionedThroughput `type:"structure"`
+
+	// A list of replica update actions (create, delete, or update) for the table.
+	//
+	// This property only applies to Version 2019.11.21 (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
+	// of global tables.
+	ReplicaUpdates []ReplicationGroupUpdate `min:"1" type:"list"`
 
 	// The new server-side encryption settings for the specified table.
 	SSESpecification *SSESpecification `type:"structure"`
@@ -73,6 +82,9 @@ func (s UpdateTableInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTableInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateTableInput"}
+	if s.ReplicaUpdates != nil && len(s.ReplicaUpdates) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ReplicaUpdates", 1))
+	}
 
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
@@ -97,6 +109,18 @@ func (s *UpdateTableInput) Validate() error {
 	if s.ProvisionedThroughput != nil {
 		if err := s.ProvisionedThroughput.Validate(); err != nil {
 			invalidParams.AddNested("ProvisionedThroughput", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.ReplicaUpdates != nil {
+		for i, v := range s.ReplicaUpdates {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ReplicaUpdates", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.StreamSpecification != nil {
+		if err := s.StreamSpecification.Validate(); err != nil {
+			invalidParams.AddNested("StreamSpecification", err.(aws.ErrInvalidParams))
 		}
 	}
 

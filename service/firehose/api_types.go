@@ -204,7 +204,10 @@ type DeliveryStreamDescription struct {
 	// DeliveryStreamName is a required field
 	DeliveryStreamName *string `min:"1" type:"string" required:"true"`
 
-	// The status of the delivery stream.
+	// The status of the delivery stream. If the status of a delivery stream is
+	// CREATING_FAILED, this status doesn't change, and you can't invoke CreateDeliveryStream
+	// again on it. However, you can invoke the DeleteDeliveryStream operation to
+	// delete it.
 	//
 	// DeliveryStreamStatus is a required field
 	DeliveryStreamStatus DeliveryStreamStatus `type:"string" required:"true" enum:"true"`
@@ -223,6 +226,11 @@ type DeliveryStreamDescription struct {
 	//
 	// Destinations is a required field
 	Destinations []DestinationDescription `type:"list" required:"true"`
+
+	// Provides details in case one of the following operations fails due to an
+	// error related to KMS: CreateDeliveryStream, DeleteDeliveryStream, StartDeliveryStreamEncryption,
+	// StopDeliveryStreamEncryption.
+	FailureDescription *FailureDescription `type:"structure"`
 
 	// Indicates whether there are more destinations available to list.
 	//
@@ -250,18 +258,87 @@ func (s DeliveryStreamDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Indicates the server-side encryption (SSE) status for the delivery stream.
+// Contains information about the server-side encryption (SSE) status for the
+// delivery stream, the type customer master key (CMK) in use, if any, and the
+// ARN of the CMK. You can get DeliveryStreamEncryptionConfiguration by invoking
+// the DescribeDeliveryStream operation.
 type DeliveryStreamEncryptionConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// Provides details in case one of the following operations fails due to an
+	// error related to KMS: CreateDeliveryStream, DeleteDeliveryStream, StartDeliveryStreamEncryption,
+	// StopDeliveryStreamEncryption.
+	FailureDescription *FailureDescription `type:"structure"`
+
+	// If KeyType is CUSTOMER_MANAGED_CMK, this field contains the ARN of the customer
+	// managed CMK. If KeyType is AWS_OWNED_CMK, DeliveryStreamEncryptionConfiguration
+	// doesn't contain a value for KeyARN.
+	KeyARN *string `min:"1" type:"string"`
+
+	// Indicates the type of customer master key (CMK) that is used for encryption.
+	// The default setting is AWS_OWNED_CMK. For more information about CMKs, see
+	// Customer Master Keys (CMKs) (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys).
+	KeyType KeyType `type:"string" enum:"true"`
+
+	// This is the server-side encryption (SSE) status for the delivery stream.
 	// For a full description of the different values of this status, see StartDeliveryStreamEncryption
-	// and StopDeliveryStreamEncryption.
+	// and StopDeliveryStreamEncryption. If this status is ENABLING_FAILED or DISABLING_FAILED,
+	// it is the status of the most recent attempt to enable or disable SSE, respectively.
 	Status DeliveryStreamEncryptionStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
 func (s DeliveryStreamEncryptionConfiguration) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Used to specify the type and Amazon Resource Name (ARN) of the CMK needed
+// for Server-Side Encryption (SSE).
+type DeliveryStreamEncryptionConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// If you set KeyType to CUSTOMER_MANAGED_CMK, you must specify the Amazon Resource
+	// Name (ARN) of the CMK. If you set KeyType to AWS_OWNED_CMK, Kinesis Data
+	// Firehose uses a service-account CMK.
+	KeyARN *string `min:"1" type:"string"`
+
+	// Indicates the type of customer master key (CMK) to use for encryption. The
+	// default setting is AWS_OWNED_CMK. For more information about CMKs, see Customer
+	// Master Keys (CMKs) (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys).
+	// When you invoke CreateDeliveryStream or StartDeliveryStreamEncryption with
+	// KeyType set to CUSTOMER_MANAGED_CMK, Kinesis Data Firehose invokes the Amazon
+	// KMS operation CreateGrant (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html)
+	// to create a grant that allows the Kinesis Data Firehose service to use the
+	// customer managed CMK to perform encryption and decryption. Kinesis Data Firehose
+	// manages that grant.
+	//
+	// When you invoke StartDeliveryStreamEncryption to change the CMK for a delivery
+	// stream that is already encrypted with a customer managed CMK, Kinesis Data
+	// Firehose schedules the grant it had on the old CMK for retirement.
+	//
+	// KeyType is a required field
+	KeyType KeyType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s DeliveryStreamEncryptionConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeliveryStreamEncryptionConfigurationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeliveryStreamEncryptionConfigurationInput"}
+	if s.KeyARN != nil && len(*s.KeyARN) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("KeyARN", 1))
+	}
+	if len(s.KeyType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("KeyType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // The deserializer you want Kinesis Data Firehose to use for converting the
@@ -431,8 +508,8 @@ type ElasticsearchDestinationConfiguration struct {
 	// already has another type, Kinesis Data Firehose returns an error during run
 	// time.
 	//
-	// TypeName is a required field
-	TypeName *string `min:"1" type:"string" required:"true"`
+	// For Elasticsearch 7.x, don't specify a TypeName.
+	TypeName *string `type:"string"`
 }
 
 // String returns the string representation
@@ -466,13 +543,6 @@ func (s *ElasticsearchDestinationConfiguration) Validate() error {
 
 	if s.S3Configuration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3Configuration"))
-	}
-
-	if s.TypeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
-	}
-	if s.TypeName != nil && len(*s.TypeName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TypeName", 1))
 	}
 	if s.BufferingHints != nil {
 		if err := s.BufferingHints.Validate(); err != nil {
@@ -540,8 +610,9 @@ type ElasticsearchDestinationDescription struct {
 	// The Amazon S3 destination.
 	S3DestinationDescription *S3DestinationDescription `type:"structure"`
 
-	// The Elasticsearch type name.
-	TypeName *string `min:"1" type:"string"`
+	// The Elasticsearch type name. This applies to Elasticsearch 6.x and lower
+	// versions. For Elasticsearch 7.x, there's no value for TypeName.
+	TypeName *string `type:"string"`
 }
 
 // String returns the string representation
@@ -601,7 +672,12 @@ type ElasticsearchDestinationUpdate struct {
 	// The Elasticsearch type name. For Elasticsearch 6.x, there can be only one
 	// type per index. If you try to specify a new type for an existing index that
 	// already has another type, Kinesis Data Firehose returns an error during runtime.
-	TypeName *string `min:"1" type:"string"`
+	//
+	// If you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery
+	// stream, Kinesis Data Firehose still delivers data to Elasticsearch with the
+	// old index name and type name. If you want to update your delivery stream
+	// with a new index name, provide an empty string for TypeName.
+	TypeName *string `type:"string"`
 }
 
 // String returns the string representation
@@ -623,9 +699,6 @@ func (s *ElasticsearchDestinationUpdate) Validate() error {
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
-	}
-	if s.TypeName != nil && len(*s.TypeName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TypeName", 1))
 	}
 	if s.BufferingHints != nil {
 		if err := s.BufferingHints.Validate(); err != nil {
@@ -968,6 +1041,28 @@ func (s *ExtendedS3DestinationUpdate) Validate() error {
 	return nil
 }
 
+// Provides details in case one of the following operations fails due to an
+// error related to KMS: CreateDeliveryStream, DeleteDeliveryStream, StartDeliveryStreamEncryption,
+// StopDeliveryStreamEncryption.
+type FailureDescription struct {
+	_ struct{} `type:"structure"`
+
+	// A message providing details about the error that caused the failure.
+	//
+	// Details is a required field
+	Details *string `type:"string" required:"true"`
+
+	// The type of error that caused the failure.
+	//
+	// Type is a required field
+	Type DeliveryStreamFailureType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s FailureDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The native Hive / HCatalog JsonSerDe. Used by Kinesis Data Firehose for deserializing
 // data, which means converting it from the JSON format in preparation for serializing
 // it to the Parquet or ORC format. This is one of two deserializers you can
@@ -1274,7 +1369,7 @@ type ParquetSerDe struct {
 
 	// The compression code to use over data blocks. The possible values are UNCOMPRESSED,
 	// SNAPPY, and GZIP, with the default being SNAPPY. Use SNAPPY for higher decompression
-	// speed. Use GZIP if the compression ration is more important than speed.
+	// speed. Use GZIP if the compression ratio is more important than speed.
 	Compression ParquetCompression `type:"string" enum:"true"`
 
 	// Indicates whether to enable dictionary compression.

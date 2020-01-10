@@ -12,7 +12,7 @@ import (
 type DeleteLogSubscriptionInput struct {
 	_ struct{} `type:"structure"`
 
-	// Identifier (ID) of the directory whose log subscription you want to delete.
+	// Identifier of the directory whose log subscription you want to delete.
 	//
 	// DirectoryId is a required field
 	DirectoryId *string `type:"string" required:"true"`

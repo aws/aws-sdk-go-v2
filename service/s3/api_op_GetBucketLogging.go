@@ -13,6 +13,8 @@ import (
 type GetBucketLoggingInput struct {
 	_ struct{} `type:"structure"`
 
+	// The bucket name for which to get the logging information.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -88,6 +90,12 @@ const opGetBucketLogging = "GetBucketLogging"
 //
 // Returns the logging status of a bucket and the permissions users have to
 // view and modify that status. To use GET, you must be the bucket owner.
+//
+// The following operations are related to GetBucketLogging:
+//
+//    * CreateBucket
+//
+//    * PutBucketLogging
 //
 //    // Example sending a request using GetBucketLoggingRequest.
 //    req := client.GetBucketLoggingRequest(params)

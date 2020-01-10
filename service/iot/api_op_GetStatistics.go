@@ -13,7 +13,7 @@ import (
 type GetStatisticsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The aggregation field name. Currently not supported.
+	// The aggregation field name.
 	AggregationField *string `locationName:"aggregationField" min:"1" type:"string"`
 
 	// The name of the index to search. The default value is AWS_Things.
@@ -117,7 +117,9 @@ const opGetStatistics = "GetStatistics"
 // GetStatisticsRequest returns a request value for making API operation for
 // AWS IoT.
 //
-// Gets statistics about things that match the specified query.
+// Returns the count, average, sum, minimum, maximum, sum of squares, variance,
+// and standard deviation for the specified aggregated field. If the aggregation
+// field is of type String, only the count statistic is returned.
 //
 //    // Example sending a request using GetStatisticsRequest.
 //    req := client.GetStatisticsRequest(params)

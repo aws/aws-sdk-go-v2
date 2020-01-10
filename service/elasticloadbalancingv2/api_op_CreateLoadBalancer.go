@@ -35,8 +35,8 @@ type CreateLoadBalancerInput struct {
 	//
 	// The nodes of an internal load balancer have only private IP addresses. The
 	// DNS name of an internal load balancer is publicly resolvable to the private
-	// IP addresses of the nodes. Therefore, internal load balancers can only route
-	// requests from clients with access to the VPC for the load balancer.
+	// IP addresses of the nodes. Therefore, internal load balancers can route requests
+	// only from clients with access to the VPC for the load balancer.
 	//
 	// The default is an Internet-facing load balancer.
 	Scheme LoadBalancerSchemeEnum `type:"string" enum:"true"`
@@ -53,7 +53,9 @@ type CreateLoadBalancerInput struct {
 	//
 	// [Network Load Balancers] You can specify subnets from one or more Availability
 	// Zones. You can specify one Elastic IP address per subnet if you need static
-	// IP addresses for your load balancer.
+	// IP addresses for your internet-facing load balancer. For internal load balancers,
+	// you can specify one private IP address per subnet from the IPv4 range of
+	// the subnet.
 	SubnetMappings []SubnetMapping `type:"list"`
 
 	// The IDs of the public subnets. You can specify only one subnet per Availability

@@ -13,6 +13,8 @@ import (
 type CreateEndpointConfigInput struct {
 	_ struct{} `type:"structure"`
 
+	DataCaptureConfig *DataCaptureConfig `type:"structure"`
+
 	// The name of the endpoint configuration. You specify this name in a CreateEndpoint
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html)
 	// request.
@@ -24,17 +26,20 @@ type CreateEndpointConfigInput struct {
 	// SageMaker uses to encrypt data on the storage volume attached to the ML compute
 	// instance that hosts the endpoint.
 	//
-	// Nitro-based instances do not support encryption with AWS KMS. If any of the
-	// models that you specify in the ProductionVariants parameter use nitro-based
-	// instances, do not specify a value for the KmsKeyId parameter. If you specify
-	// a value for KmsKeyId when using any nitro-based instances, the call to CreateEndpointConfig
+	// Certain Nitro-based instances include local storage, dependent on the instance
+	// type. Local storage volumes are encrypted using a hardware module on the
+	// instance. You can't request a KmsKeyId when using an instance type with local
+	// storage. If any of the models that you specify in the ProductionVariants
+	// parameter use nitro-based instances with local storage, do not specify a
+	// value for the KmsKeyId parameter. If you specify a value for KmsKeyId when
+	// using any nitro-based instances with local storage, the call to CreateEndpointConfig
 	// fails.
 	//
-	// For a list of nitro-based instances, see Nitro-based Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances)
-	// in the Amazon Elastic Compute Cloud User Guide for Linux Instances.
+	// For a list of instance types that support local instance storage, see Instance
+	// Store Volumes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes).
 	//
-	// For more information about storage volumes on nitro-based instances, see
-	// Amazon EBS and NVMe on Linux Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nvme-ebs-volumes.html).
+	// For more information about local instance storage encryption, see SSD Instance
+	// Store Volumes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html).
 	KmsKeyId *string `type:"string"`
 
 	// An list of ProductionVariant objects, one for each model that you want to
@@ -67,6 +72,11 @@ func (s *CreateEndpointConfigInput) Validate() error {
 	}
 	if s.ProductionVariants != nil && len(s.ProductionVariants) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProductionVariants", 1))
+	}
+	if s.DataCaptureConfig != nil {
+		if err := s.DataCaptureConfig.Validate(); err != nil {
+			invalidParams.AddNested("DataCaptureConfig", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.ProductionVariants != nil {
 		for i, v := range s.ProductionVariants {

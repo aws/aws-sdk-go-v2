@@ -22,8 +22,8 @@ func (enum Broker) MarshalValueBuf(b []byte) ([]byte, error) {
 }
 
 // The distribution of broker nodes across Availability Zones. By default, broker
-// nodes are distributed among three Availability Zones. Currently, the only
-// supported value is DEFAULT. You can either specify this value explicitly
+// nodes are distributed among the Availability Zones of your Region. Currently,
+// the only supported value is DEFAULT. You can either specify this value explicitly
 // or leave it out.
 type BrokerAZDistribution string
 

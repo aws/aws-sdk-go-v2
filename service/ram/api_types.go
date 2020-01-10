@@ -89,6 +89,10 @@ type Resource struct {
 	// The time when the association was last updated.
 	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp"`
 
+	// The ARN of the resource group. This value is returned only if the resource
+	// is a resource group.
+	ResourceGroupArn *string `locationName:"resourceGroupArn" type:"string"`
+
 	// The Amazon Resource Name (ARN) of the resource share.
 	ResourceShareArn *string `locationName:"resourceShareArn" type:"string"`
 
@@ -129,6 +133,12 @@ func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "lastUpdatedTime",
 			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
+	if s.ResourceGroupArn != nil {
+		v := *s.ResourceGroupArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceGroupArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.ResourceShareArn != nil {
 		v := *s.ResourceShareArn
 
@@ -166,6 +176,21 @@ type ResourceShare struct {
 
 	// The time when the resource share was created.
 	CreationTime *time.Time `locationName:"creationTime" type:"timestamp"`
+
+	// Indicates how the resource share was created. Possible values include:
+	//
+	//    * CREATED_FROM_POLICY - Indicates that the resource share was created
+	//    from an AWS Identity and Access Management (AWS IAM) policy attached to
+	//    a resource. These resource shares are visible only to the AWS account
+	//    that created it. They cannot be modified in AWS RAM.
+	//
+	//    * PROMOTING_TO_STANDARD - The resource share is in the process of being
+	//    promoted. For more information, see PromoteResourceShareCreatedFromPolicy.
+	//
+	//    * STANDARD - Indicates that the resource share was created in AWS RAM
+	//    using the console or APIs. These resource shares are visible to all principals.
+	//    They can be modified in AWS RAM.
+	FeatureSet ResourceShareFeatureSet `locationName:"featureSet" type:"string" enum:"true"`
 
 	// The time when the resource share was last updated.
 	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp"`
@@ -208,6 +233,12 @@ func (s ResourceShare) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "creationTime",
 			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if len(s.FeatureSet) > 0 {
+		v := s.FeatureSet
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "featureSet", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.LastUpdatedTime != nil {
 		v := *s.LastUpdatedTime
@@ -453,6 +484,188 @@ func (s ResourceShareInvitation) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Information about an AWS RAM permission.
+type ResourceSharePermissionDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the permission.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The date and time when the permission was created.
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp"`
+
+	// The identifier for the version of the permission that is set as the default
+	// version.
+	DefaultVersion *bool `locationName:"defaultVersion" type:"boolean"`
+
+	// The date and time when the permission was last updated.
+	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp"`
+
+	// The name of the permission.
+	Name *string `locationName:"name" type:"string"`
+
+	// The permission's effect and actions in JSON format. The effect indicates
+	// whether the actions are allowed or denied. The actions list the API actions
+	// to which the principal is granted or denied access.
+	Permission *string `locationName:"permission" type:"string"`
+
+	// The resource type to which the permission applies.
+	ResourceType *string `locationName:"resourceType" type:"string"`
+
+	// The identifier for the version of the permission.
+	Version *string `locationName:"version" type:"string"`
+}
+
+// String returns the string representation
+func (s ResourceSharePermissionDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResourceSharePermissionDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.DefaultVersion != nil {
+		v := *s.DefaultVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "defaultVersion", protocol.BoolValue(v), metadata)
+	}
+	if s.LastUpdatedTime != nil {
+		v := *s.LastUpdatedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastUpdatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Permission != nil {
+		v := *s.Permission
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "permission", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceType != nil {
+		v := *s.ResourceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Information about a permission that is associated with a resource share.
+type ResourceSharePermissionSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the permission.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The date and time when the permission was created.
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp"`
+
+	// The identifier for the version of the permission that is set as the default
+	// version.
+	DefaultVersion *bool `locationName:"defaultVersion" type:"boolean"`
+
+	// The date and time when the permission was last updated.
+	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp"`
+
+	// The name of the permission.
+	Name *string `locationName:"name" type:"string"`
+
+	// The type of resource to which the permission applies.
+	ResourceType *string `locationName:"resourceType" type:"string"`
+
+	// The current status of the permission.
+	Status *string `locationName:"status" type:"string"`
+
+	// The identifier for the version of the permission.
+	Version *string `locationName:"version" type:"string"`
+}
+
+// String returns the string representation
+func (s ResourceSharePermissionSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResourceSharePermissionSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.DefaultVersion != nil {
+		v := *s.DefaultVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "defaultVersion", protocol.BoolValue(v), metadata)
+	}
+	if s.LastUpdatedTime != nil {
+		v := *s.LastUpdatedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastUpdatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceType != nil {
+		v := *s.ResourceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

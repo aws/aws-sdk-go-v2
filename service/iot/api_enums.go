@@ -395,6 +395,41 @@ func (enum DeviceCertificateUpdateAction) MarshalValueBuf(b []byte) ([]byte, err
 	return append(b, enum...), nil
 }
 
+type DomainConfigurationStatus string
+
+// Enum values for DomainConfigurationStatus
+const (
+	DomainConfigurationStatusEnabled  DomainConfigurationStatus = "ENABLED"
+	DomainConfigurationStatusDisabled DomainConfigurationStatus = "DISABLED"
+)
+
+func (enum DomainConfigurationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DomainConfigurationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DomainType string
+
+// Enum values for DomainType
+const (
+	DomainTypeEndpoint        DomainType = "ENDPOINT"
+	DomainTypeAwsManaged      DomainType = "AWS_MANAGED"
+	DomainTypeCustomerManaged DomainType = "CUSTOMER_MANAGED"
+)
+
+func (enum DomainType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DomainType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DynamicGroupStatus string
 
 // Enum values for DynamicGroupStatus
@@ -452,6 +487,24 @@ func (enum EventType) MarshalValue() (string, error) {
 }
 
 func (enum EventType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type FieldType string
+
+// Enum values for FieldType
+const (
+	FieldTypeNumber  FieldType = "Number"
+	FieldTypeString  FieldType = "String"
+	FieldTypeBoolean FieldType = "Boolean"
+)
+
+func (enum FieldType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FieldType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -672,6 +725,8 @@ const (
 	ResourceTypeCognitoIdentityPool ResourceType = "COGNITO_IDENTITY_POOL"
 	ResourceTypeClientId            ResourceType = "CLIENT_ID"
 	ResourceTypeAccountSettings     ResourceType = "ACCOUNT_SETTINGS"
+	ResourceTypeRoleAlias           ResourceType = "ROLE_ALIAS"
+	ResourceTypeIamRole             ResourceType = "IAM_ROLE"
 )
 
 func (enum ResourceType) MarshalValue() (string, error) {
@@ -679,6 +734,41 @@ func (enum ResourceType) MarshalValue() (string, error) {
 }
 
 func (enum ResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ServerCertificateStatus string
+
+// Enum values for ServerCertificateStatus
+const (
+	ServerCertificateStatusInvalid ServerCertificateStatus = "INVALID"
+	ServerCertificateStatusValid   ServerCertificateStatus = "VALID"
+)
+
+func (enum ServerCertificateStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ServerCertificateStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ServiceType string
+
+// Enum values for ServiceType
+const (
+	ServiceTypeData               ServiceType = "DATA"
+	ServiceTypeCredentialProvider ServiceType = "CREDENTIAL_PROVIDER"
+	ServiceTypeJobs               ServiceType = "JOBS"
+)
+
+func (enum ServiceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ServiceType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -768,6 +858,25 @@ func (enum ThingIndexingMode) MarshalValue() (string, error) {
 }
 
 func (enum ThingIndexingMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TopicRuleDestinationStatus string
+
+// Enum values for TopicRuleDestinationStatus
+const (
+	TopicRuleDestinationStatusEnabled    TopicRuleDestinationStatus = "ENABLED"
+	TopicRuleDestinationStatusInProgress TopicRuleDestinationStatus = "IN_PROGRESS"
+	TopicRuleDestinationStatusDisabled   TopicRuleDestinationStatus = "DISABLED"
+	TopicRuleDestinationStatusError      TopicRuleDestinationStatus = "ERROR"
+)
+
+func (enum TopicRuleDestinationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TopicRuleDestinationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

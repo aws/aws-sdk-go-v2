@@ -97,7 +97,11 @@ type ClientAPI interface {
 
 	DeleteTrustRequest(*directoryservice.DeleteTrustInput) directoryservice.DeleteTrustRequest
 
+	DeregisterCertificateRequest(*directoryservice.DeregisterCertificateInput) directoryservice.DeregisterCertificateRequest
+
 	DeregisterEventTopicRequest(*directoryservice.DeregisterEventTopicInput) directoryservice.DeregisterEventTopicRequest
+
+	DescribeCertificateRequest(*directoryservice.DescribeCertificateInput) directoryservice.DescribeCertificateRequest
 
 	DescribeConditionalForwardersRequest(*directoryservice.DescribeConditionalForwardersInput) directoryservice.DescribeConditionalForwardersRequest
 
@@ -107,15 +111,21 @@ type ClientAPI interface {
 
 	DescribeEventTopicsRequest(*directoryservice.DescribeEventTopicsInput) directoryservice.DescribeEventTopicsRequest
 
+	DescribeLDAPSSettingsRequest(*directoryservice.DescribeLDAPSSettingsInput) directoryservice.DescribeLDAPSSettingsRequest
+
 	DescribeSharedDirectoriesRequest(*directoryservice.DescribeSharedDirectoriesInput) directoryservice.DescribeSharedDirectoriesRequest
 
 	DescribeSnapshotsRequest(*directoryservice.DescribeSnapshotsInput) directoryservice.DescribeSnapshotsRequest
 
 	DescribeTrustsRequest(*directoryservice.DescribeTrustsInput) directoryservice.DescribeTrustsRequest
 
+	DisableLDAPSRequest(*directoryservice.DisableLDAPSInput) directoryservice.DisableLDAPSRequest
+
 	DisableRadiusRequest(*directoryservice.DisableRadiusInput) directoryservice.DisableRadiusRequest
 
 	DisableSsoRequest(*directoryservice.DisableSsoInput) directoryservice.DisableSsoRequest
+
+	EnableLDAPSRequest(*directoryservice.EnableLDAPSInput) directoryservice.EnableLDAPSRequest
 
 	EnableRadiusRequest(*directoryservice.EnableRadiusInput) directoryservice.EnableRadiusRequest
 
@@ -125,6 +135,8 @@ type ClientAPI interface {
 
 	GetSnapshotLimitsRequest(*directoryservice.GetSnapshotLimitsInput) directoryservice.GetSnapshotLimitsRequest
 
+	ListCertificatesRequest(*directoryservice.ListCertificatesInput) directoryservice.ListCertificatesRequest
+
 	ListIpRoutesRequest(*directoryservice.ListIpRoutesInput) directoryservice.ListIpRoutesRequest
 
 	ListLogSubscriptionsRequest(*directoryservice.ListLogSubscriptionsInput) directoryservice.ListLogSubscriptionsRequest
@@ -132,6 +144,8 @@ type ClientAPI interface {
 	ListSchemaExtensionsRequest(*directoryservice.ListSchemaExtensionsInput) directoryservice.ListSchemaExtensionsRequest
 
 	ListTagsForResourceRequest(*directoryservice.ListTagsForResourceInput) directoryservice.ListTagsForResourceRequest
+
+	RegisterCertificateRequest(*directoryservice.RegisterCertificateInput) directoryservice.RegisterCertificateRequest
 
 	RegisterEventTopicRequest(*directoryservice.RegisterEventTopicInput) directoryservice.RegisterEventTopicRequest
 

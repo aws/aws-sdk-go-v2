@@ -20,6 +20,29 @@ func (enum AdMarkers) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type AdTriggersElement string
+
+// Enum values for AdTriggersElement
+const (
+	AdTriggersElementSpliceInsert                           AdTriggersElement = "SPLICE_INSERT"
+	AdTriggersElementBreak                                  AdTriggersElement = "BREAK"
+	AdTriggersElementProviderAdvertisement                  AdTriggersElement = "PROVIDER_ADVERTISEMENT"
+	AdTriggersElementDistributorAdvertisement               AdTriggersElement = "DISTRIBUTOR_ADVERTISEMENT"
+	AdTriggersElementProviderPlacementOpportunity           AdTriggersElement = "PROVIDER_PLACEMENT_OPPORTUNITY"
+	AdTriggersElementDistributorPlacementOpportunity        AdTriggersElement = "DISTRIBUTOR_PLACEMENT_OPPORTUNITY"
+	AdTriggersElementProviderOverlayPlacementOpportunity    AdTriggersElement = "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY"
+	AdTriggersElementDistributorOverlayPlacementOpportunity AdTriggersElement = "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
+)
+
+func (enum AdTriggersElement) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AdTriggersElement) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // This setting allows the delivery restriction flags on SCTE-35 segmentation
 // descriptors todetermine whether a message signals an ad. Choosing "NONE"
 // means no SCTE-35 messages becomeads. Choosing "RESTRICTED" means SCTE-35
@@ -96,6 +119,22 @@ func (enum Origination) MarshalValue() (string, error) {
 }
 
 func (enum Origination) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type PeriodTriggersElement string
+
+// Enum values for PeriodTriggersElement
+const (
+	PeriodTriggersElementAds PeriodTriggersElement = "ADS"
+)
+
+func (enum PeriodTriggersElement) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PeriodTriggersElement) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -185,45 +224,6 @@ func (enum StreamOrder) MarshalValue() (string, error) {
 }
 
 func (enum StreamOrder) MarshalValueBuf(b []byte) ([]byte, error) {
-	b = b[0:0]
-	return append(b, enum...), nil
-}
-
-type __AdTriggersElement string
-
-// Enum values for __AdTriggersElement
-const (
-	__AdTriggersElementSpliceInsert                           __AdTriggersElement = "SPLICE_INSERT"
-	__AdTriggersElementBreak                                  __AdTriggersElement = "BREAK"
-	__AdTriggersElementProviderAdvertisement                  __AdTriggersElement = "PROVIDER_ADVERTISEMENT"
-	__AdTriggersElementDistributorAdvertisement               __AdTriggersElement = "DISTRIBUTOR_ADVERTISEMENT"
-	__AdTriggersElementProviderPlacementOpportunity           __AdTriggersElement = "PROVIDER_PLACEMENT_OPPORTUNITY"
-	__AdTriggersElementDistributorPlacementOpportunity        __AdTriggersElement = "DISTRIBUTOR_PLACEMENT_OPPORTUNITY"
-	__AdTriggersElementProviderOverlayPlacementOpportunity    __AdTriggersElement = "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY"
-	__AdTriggersElementDistributorOverlayPlacementOpportunity __AdTriggersElement = "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
-)
-
-func (enum __AdTriggersElement) MarshalValue() (string, error) {
-	return string(enum), nil
-}
-
-func (enum __AdTriggersElement) MarshalValueBuf(b []byte) ([]byte, error) {
-	b = b[0:0]
-	return append(b, enum...), nil
-}
-
-type __PeriodTriggersElement string
-
-// Enum values for __PeriodTriggersElement
-const (
-	__PeriodTriggersElementAds __PeriodTriggersElement = "ADS"
-)
-
-func (enum __PeriodTriggersElement) MarshalValue() (string, error) {
-	return string(enum), nil
-}
-
-func (enum __PeriodTriggersElement) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

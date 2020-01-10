@@ -46,8 +46,8 @@ func (s *DescribeGatewayInformationInput) Validate() error {
 type DescribeGatewayInformationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was
-	// used to monitor and log events in the gateway.
+	// The Amazon Resource Name (ARN) of the Amazon CloudWatch Log Group that is
+	// used to monitor events in the gateway.
 	CloudWatchLogGroupARN *string `type:"string"`
 
 	// The ID of the Amazon EC2 instance that was used to launch the gateway.
@@ -80,6 +80,9 @@ type DescribeGatewayInformationOutput struct {
 
 	// The type of the gateway.
 	GatewayType *string `min:"2" type:"string"`
+
+	// The type of hypervisor environment used by the host.
+	HostEnvironment HostEnvironment `type:"string" enum:"true"`
 
 	// The date on which the last software update was applied to the gateway. If
 	// the gateway has never been updated, this field does not return a value in

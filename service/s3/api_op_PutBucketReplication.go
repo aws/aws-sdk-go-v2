@@ -14,6 +14,8 @@ import (
 type PutBucketReplicationInput struct {
 	_ struct{} `type:"structure" payload:"ReplicationConfiguration"`
 
+	// The name of the bucket
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
@@ -23,7 +25,6 @@ type PutBucketReplicationInput struct {
 	// ReplicationConfiguration is a required field
 	ReplicationConfiguration *ReplicationConfiguration `locationName:"ReplicationConfiguration" type:"structure" required:"true" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 
-	// A token that allows Amazon S3 object lock to be enabled for an existing bucket.
 	Token *string `location:"header" locationName:"x-amz-bucket-object-lock-token" type:"string"`
 }
 
@@ -106,8 +107,55 @@ const opPutBucketReplication = "PutBucketReplication"
 // Amazon Simple Storage Service.
 //
 // Creates a replication configuration or replaces an existing one. For more
-// information, see Cross-Region Replication (CRR) (https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html)
+// information, see Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html)
 // in the Amazon S3 Developer Guide.
+//
+// To perform this operation, the user or role performing the operation must
+// have the iam:PassRole (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html)
+// permission.
+//
+// Specify the replication configuration in the request body. In the replication
+// configuration, you provide the name of the destination bucket where you want
+// Amazon S3 to replicate objects, the IAM role that Amazon S3 can assume to
+// replicate objects on your behalf, and other relevant information.
+//
+// A replication configuration must include at least one rule, and can contain
+// a maximum of 1,000. Each rule identifies a subset of objects to replicate
+// by filtering the objects in the source bucket. To choose additional subsets
+// of objects to replicate, add a rule for each subset. All rules must specify
+// the same destination bucket.
+//
+// To specify a subset of the objects in the source bucket to apply a replication
+// rule to, add the Filter element as a child of the Rule element. You can filter
+// objects based on an object key prefix, one or more object tags, or both.
+// When you add the Filter element in the configuration, you must also add the
+// following elements: DeleteMarkerReplication, Status, and Priority.
+//
+// For information about enabling versioning on a bucket, see Using Versioning
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html).
+//
+// By default, a resource owner, in this case the AWS account that created the
+// bucket, can perform this operation. The resource owner can also grant others
+// permissions to perform the operation. For more information about permissions,
+// see Specifying Permissions in a Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+//
+// Handling Replication of Encrypted Objects
+//
+// By default, Amazon S3 doesn't replicate objects that are stored at rest using
+// server-side encryption with CMKs stored in AWS KMS. To replicate AWS KMS-encrypted
+// objects, add the following: SourceSelectionCriteria, SseKmsEncryptedObjects,
+// Status, EncryptionConfiguration, and ReplicaKmsKeyID. For information about
+// replication configuration, see Replicating Objects Created with SSE Using
+// CMKs stored in AWS KMS (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-config-for-kms-objects.html).
+//
+// For information on PutBucketReplication errors, see ReplicationErrorCodeList
+//
+// The following operations are related to PutBucketReplication:
+//
+//    * GetBucketReplication
+//
+//    * DeleteBucketReplication
 //
 //    // Example sending a request using PutBucketReplicationRequest.
 //    req := client.PutBucketReplicationRequest(params)

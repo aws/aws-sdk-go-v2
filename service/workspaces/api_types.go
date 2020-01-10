@@ -13,7 +13,7 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// Describes a modification to the configuration of bring your own license (BYOL)
+// Describes a modification to the configuration of Bring Your Own License (BYOL)
 // for the specified account.
 type AccountModification struct {
 	_ struct{} `type:"structure"`
@@ -57,24 +57,38 @@ func (s ComputeType) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes the default values used to create a WorkSpace.
+// Describes the default values that are used to create WorkSpaces. For more
+// information, see Update Directory Details for Your WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html).
 type DefaultWorkspaceCreationProperties struct {
 	_ struct{} `type:"structure"`
 
 	// The identifier of any security groups to apply to WorkSpaces when they are
 	// created.
-	CustomSecurityGroupId *string `type:"string"`
+	CustomSecurityGroupId *string `min:"11" type:"string"`
 
 	// The organizational unit (OU) in the directory for the WorkSpace machine accounts.
 	DefaultOu *string `type:"string"`
 
-	// The public IP address to attach to all WorkSpaces that are created or rebuilt.
+	// Specifies whether to automatically assign an Elastic public IP address to
+	// WorkSpaces in this directory by default. If enabled, the Elastic public IP
+	// address allows outbound internet access from your WorkSpaces when you’re
+	// using an internet gateway in the Amazon VPC in which your WorkSpaces are
+	// located. If you're using a Network Address Translation (NAT) gateway for
+	// outbound internet access from your VPC, or if your WorkSpaces are in public
+	// subnets and you manually assign them Elastic IP addresses, you should disable
+	// this setting. This setting applies to new WorkSpaces that you launch or to
+	// existing WorkSpaces that you rebuild. For more information, see Configure
+	// a VPC for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html).
 	EnableInternetAccess *bool `type:"boolean"`
+
+	// Specifies whether maintenance mode is enabled for WorkSpaces. For more information,
+	// see WorkSpace Maintenance (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html).
+	EnableMaintenanceMode *bool `type:"boolean"`
 
 	// Specifies whether the directory is enabled for Amazon WorkDocs.
 	EnableWorkDocs *bool `type:"boolean"`
 
-	// Specifies whether the WorkSpace user is an administrator on the WorkSpace.
+	// Specifies whether WorkSpace users are local administrators on their WorkSpaces.
 	UserEnabledAsLocalAdministrator *bool `type:"boolean"`
 }
 
@@ -272,6 +286,35 @@ func (s RootStorage) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Describes the self-service permissions for a directory. For more information,
+// see Enable Self-Service WorkSpace Management Capabilities for Your Users
+// (https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html).
+type SelfservicePermissions struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether users can change the compute type (bundle) for their WorkSpace.
+	ChangeComputeType ReconnectEnum `type:"string" enum:"true"`
+
+	// Specifies whether users can increase the volume size of the drives on their
+	// WorkSpace.
+	IncreaseVolumeSize ReconnectEnum `type:"string" enum:"true"`
+
+	// Specifies whether users can rebuild the operating system of a WorkSpace to
+	// its original state.
+	RebuildWorkspace ReconnectEnum `type:"string" enum:"true"`
+
+	// Specifies whether users can restart their WorkSpace.
+	RestartWorkspace ReconnectEnum `type:"string" enum:"true"`
+
+	// Specifies whether users can switch the running mode of their WorkSpace.
+	SwitchRunningMode ReconnectEnum `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s SelfservicePermissions) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes a snapshot.
 type Snapshot struct {
 	_ struct{} `type:"structure"`
@@ -399,7 +442,7 @@ type Workspace struct {
 	ComputerName *string `type:"string"`
 
 	// The identifier of the AWS Directory Service directory for the WorkSpace.
-	DirectoryId *string `type:"string"`
+	DirectoryId *string `min:"10" type:"string"`
 
 	// The error code that is returned if the WorkSpace cannot be created.
 	ErrorCode *string `type:"string"`
@@ -421,7 +464,7 @@ type Workspace struct {
 	State WorkspaceState `type:"string" enum:"true"`
 
 	// The identifier of the subnet for the WorkSpace.
-	SubnetId *string `type:"string"`
+	SubnetId *string `min:"15" type:"string"`
 
 	// The user for the WorkSpace.
 	UserName *string `min:"1" type:"string"`
@@ -444,6 +487,44 @@ func (s Workspace) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The device types and operating systems that can be used to access a WorkSpace.
+// For more information, see Amazon WorkSpaces Client Network Requirements (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-network-requirements.html).
+type WorkspaceAccessProperties struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether users can use Android devices to access their WorkSpaces.
+	DeviceTypeAndroid AccessPropertyValue `type:"string" enum:"true"`
+
+	// Indicates whether users can use Chromebooks to access their WorkSpaces.
+	DeviceTypeChromeOs AccessPropertyValue `type:"string" enum:"true"`
+
+	// Indicates whether users can use iOS devices to access their WorkSpaces.
+	DeviceTypeIos AccessPropertyValue `type:"string" enum:"true"`
+
+	// Indicates whether users can use macOS clients to access their WorkSpaces.
+	// To restrict WorkSpaces access to trusted devices (also known as managed devices)
+	// with valid certificates, specify a value of TRUST. For more information,
+	// see Restrict WorkSpaces Access to Trusted Devices (https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html).
+	DeviceTypeOsx AccessPropertyValue `type:"string" enum:"true"`
+
+	// Indicates whether users can access their WorkSpaces through a web browser.
+	DeviceTypeWeb AccessPropertyValue `type:"string" enum:"true"`
+
+	// Indicates whether users can use Windows clients to access their WorkSpaces.
+	// To restrict WorkSpaces access to trusted devices (also known as managed devices)
+	// with valid certificates, specify a value of TRUST. For more information,
+	// see Restrict WorkSpaces Access to Trusted Devices (https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html).
+	DeviceTypeWindows AccessPropertyValue `type:"string" enum:"true"`
+
+	// Indicates whether users can use zero client devices to access their WorkSpaces.
+	DeviceTypeZeroClient AccessPropertyValue `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s WorkspaceAccessProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes a WorkSpace bundle.
 type WorkspaceBundle struct {
 	_ struct{} `type:"structure"`
@@ -456,6 +537,12 @@ type WorkspaceBundle struct {
 
 	// A description.
 	Description *string `type:"string"`
+
+	// The image identifier of the bundle.
+	ImageId *string `type:"string"`
+
+	// The last time that the bundle was updated.
+	LastUpdatedTime *time.Time `type:"timestamp"`
 
 	// The name of the bundle.
 	Name *string `min:"1" type:"string"`
@@ -499,7 +586,47 @@ func (s WorkspaceConnectionStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes an AWS Directory Service directory that is used with Amazon WorkSpaces.
+// Describes the default properties that are used for creating WorkSpaces. For
+// more information, see Update Directory Details for Your WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html).
+type WorkspaceCreationProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of your custom security group.
+	CustomSecurityGroupId *string `min:"11" type:"string"`
+
+	// The default organizational unit (OU) for your WorkSpace directories.
+	DefaultOu *string `type:"string"`
+
+	// Indicates whether internet access is enabled for your WorkSpaces.
+	EnableInternetAccess *bool `type:"boolean"`
+
+	// Indicates whether maintenance mode is enabled for your WorkSpaces. For more
+	// information, see WorkSpace Maintenance (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html).
+	EnableMaintenanceMode *bool `type:"boolean"`
+
+	// Indicates whether users are local administrators of their WorkSpaces.
+	UserEnabledAsLocalAdministrator *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s WorkspaceCreationProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *WorkspaceCreationProperties) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "WorkspaceCreationProperties"}
+	if s.CustomSecurityGroupId != nil && len(*s.CustomSecurityGroupId) < 11 {
+		invalidParams.Add(aws.NewErrParamMinLen("CustomSecurityGroupId", 11))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Describes a directory that is used with Amazon WorkSpaces.
 type WorkspaceDirectory struct {
 	_ struct{} `type:"structure"`
 
@@ -510,7 +637,7 @@ type WorkspaceDirectory struct {
 	CustomerUserName *string `min:"1" type:"string"`
 
 	// The directory identifier.
-	DirectoryId *string `type:"string"`
+	DirectoryId *string `min:"10" type:"string"`
 
 	// The name of the directory.
 	DirectoryName *string `type:"string"`
@@ -532,17 +659,28 @@ type WorkspaceDirectory struct {
 	// in their Amazon WorkSpaces client application to connect to the directory.
 	RegistrationCode *string `min:"1" type:"string"`
 
-	// The state of the directory's registration with Amazon WorkSpaces
+	// The default self-service permissions for WorkSpaces in the directory.
+	SelfservicePermissions *SelfservicePermissions `type:"structure"`
+
+	// The state of the directory's registration with Amazon WorkSpaces.
 	State WorkspaceDirectoryState `type:"string" enum:"true"`
 
 	// The identifiers of the subnets used with the directory.
 	SubnetIds []string `type:"list"`
 
+	// Specifies whether the directory is dedicated or shared. To use Bring Your
+	// Own License (BYOL), this value must be set to DEDICATED. For more information,
+	// see Bring Your Own Windows Desktop Images (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
+	Tenancy Tenancy `type:"string" enum:"true"`
+
+	// The devices and operating systems that users can use to access Workspaces.
+	WorkspaceAccessProperties *WorkspaceAccessProperties `type:"structure"`
+
 	// The default creation properties for all WorkSpaces in the directory.
 	WorkspaceCreationProperties *DefaultWorkspaceCreationProperties `type:"structure"`
 
 	// The identifier of the security group that is assigned to new WorkSpaces.
-	WorkspaceSecurityGroupId *string `type:"string"`
+	WorkspaceSecurityGroupId *string `min:"11" type:"string"`
 }
 
 // String returns the string representation
@@ -572,8 +710,9 @@ type WorkspaceImage struct {
 	// The operating system that the image is running.
 	OperatingSystem *OperatingSystem `type:"structure"`
 
-	// Specifies whether the image is running on dedicated hardware. When bring
-	// your own license (BYOL) is enabled, this value is set to DEDICATED.
+	// Specifies whether the image is running on dedicated hardware. When Bring
+	// Your Own License (BYOL) is enabled, this value is set to DEDICATED. For more
+	// information, see Bring Your Own Windows Desktop Images (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
 	RequiredTenancy WorkspaceImageRequiredTenancy `type:"string" enum:"true"`
 
 	// The status of the image.
@@ -600,7 +739,7 @@ type WorkspaceProperties struct {
 	RunningMode RunningMode `type:"string" enum:"true"`
 
 	// The time after a user logs off when WorkSpaces are automatically stopped.
-	// Configured in 60 minute intervals.
+	// Configured in 60-minute intervals.
 	RunningModeAutoStopTimeoutInMinutes *int64 `type:"integer"`
 
 	// The size of the user storage.
@@ -626,7 +765,7 @@ type WorkspaceRequest struct {
 	// You can use DescribeWorkspaceDirectories to list the available directories.
 	//
 	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
+	DirectoryId *string `min:"10" type:"string" required:"true"`
 
 	// Indicates whether the data stored on the root volume is encrypted.
 	RootVolumeEncryptionEnabled *bool `type:"boolean"`
@@ -634,8 +773,8 @@ type WorkspaceRequest struct {
 	// The tags for the WorkSpace.
 	Tags []Tag `type:"list"`
 
-	// The username of the user for the WorkSpace. This username must exist in the
-	// AWS Directory Service directory for the WorkSpace.
+	// The user name of the user for the WorkSpace. This user name must exist in
+	// the AWS Directory Service directory for the WorkSpace.
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -665,6 +804,9 @@ func (s *WorkspaceRequest) Validate() error {
 
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
+	}
+	if s.DirectoryId != nil && len(*s.DirectoryId) < 10 {
+		invalidParams.Add(aws.NewErrParamMinLen("DirectoryId", 10))
 	}
 
 	if s.UserName == nil {

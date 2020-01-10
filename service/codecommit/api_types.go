@@ -13,7 +13,168 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// Information about errors in a BatchDescribeMergeConflicts operation.
+// Returns information about a specific approval on a pull request.
+type Approval struct {
+	_ struct{} `type:"structure"`
+
+	// The state of the approval, APPROVE or REVOKE. REVOKE states are not stored.
+	ApprovalState ApprovalState `locationName:"approvalState" type:"string" enum:"true"`
+
+	// The Amazon Resource Name (ARN) of the user.
+	UserArn *string `locationName:"userArn" type:"string"`
+}
+
+// String returns the string representation
+func (s Approval) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Returns information about an approval rule.
+type ApprovalRule struct {
+	_ struct{} `type:"structure"`
+
+	// The content of the approval rule.
+	ApprovalRuleContent *string `locationName:"approvalRuleContent" min:"1" type:"string"`
+
+	// The system-generated ID of the approval rule.
+	ApprovalRuleId *string `locationName:"approvalRuleId" type:"string"`
+
+	// The name of the approval rule.
+	ApprovalRuleName *string `locationName:"approvalRuleName" min:"1" type:"string"`
+
+	// The date the approval rule was created, in timestamp format.
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
+
+	// The date the approval rule was most recently changed, in timestamp format.
+	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp"`
+
+	// The Amazon Resource Name (ARN) of the user who made the most recent changes
+	// to the approval rule.
+	LastModifiedUser *string `locationName:"lastModifiedUser" type:"string"`
+
+	// The approval rule template used to create the rule.
+	OriginApprovalRuleTemplate *OriginApprovalRuleTemplate `locationName:"originApprovalRuleTemplate" type:"structure"`
+
+	// The SHA-256 hash signature for the content of the approval rule.
+	RuleContentSha256 *string `locationName:"ruleContentSha256" type:"string"`
+}
+
+// String returns the string representation
+func (s ApprovalRule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Returns information about an event for an approval rule.
+type ApprovalRuleEventMetadata struct {
+	_ struct{} `type:"structure"`
+
+	// The content of the approval rule.
+	ApprovalRuleContent *string `locationName:"approvalRuleContent" min:"1" type:"string"`
+
+	// The system-generated ID of the approval rule.
+	ApprovalRuleId *string `locationName:"approvalRuleId" type:"string"`
+
+	// The name of the approval rule.
+	ApprovalRuleName *string `locationName:"approvalRuleName" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ApprovalRuleEventMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Returns information about an override event for approval rules for a pull
+// request.
+type ApprovalRuleOverriddenEventMetadata struct {
+	_ struct{} `type:"structure"`
+
+	// The status of the override event.
+	OverrideStatus OverrideStatus `locationName:"overrideStatus" type:"string" enum:"true"`
+
+	// The revision ID of the pull request when the override event occurred.
+	RevisionId *string `locationName:"revisionId" type:"string"`
+}
+
+// String returns the string representation
+func (s ApprovalRuleOverriddenEventMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Returns information about an approval rule template.
+type ApprovalRuleTemplate struct {
+	_ struct{} `type:"structure"`
+
+	// The content of the approval rule template.
+	ApprovalRuleTemplateContent *string `locationName:"approvalRuleTemplateContent" min:"1" type:"string"`
+
+	// The description of the approval rule template.
+	ApprovalRuleTemplateDescription *string `locationName:"approvalRuleTemplateDescription" type:"string"`
+
+	// The system-generated ID of the approval rule template.
+	ApprovalRuleTemplateId *string `locationName:"approvalRuleTemplateId" type:"string"`
+
+	// The name of the approval rule template.
+	ApprovalRuleTemplateName *string `locationName:"approvalRuleTemplateName" min:"1" type:"string"`
+
+	// The date the approval rule template was created, in timestamp format.
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
+
+	// The date the approval rule template was most recently changed, in timestamp
+	// format.
+	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp"`
+
+	// The Amazon Resource Name (ARN) of the user who made the most recent changes
+	// to the approval rule template.
+	LastModifiedUser *string `locationName:"lastModifiedUser" type:"string"`
+
+	// The SHA-256 hash signature for the content of the approval rule template.
+	RuleContentSha256 *string `locationName:"ruleContentSha256" type:"string"`
+}
+
+// String returns the string representation
+func (s ApprovalRuleTemplate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Returns information about a change in the approval state for a pull request.
+type ApprovalStateChangedEventMetadata struct {
+	_ struct{} `type:"structure"`
+
+	// The approval status for the pull request.
+	ApprovalStatus ApprovalState `locationName:"approvalStatus" type:"string" enum:"true"`
+
+	// The revision ID of the pull request when the approval state changed.
+	RevisionId *string `locationName:"revisionId" type:"string"`
+}
+
+// String returns the string representation
+func (s ApprovalStateChangedEventMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Returns information about errors in a BatchAssociateApprovalRuleTemplateWithRepositories
+// operation.
+type BatchAssociateApprovalRuleTemplateWithRepositoriesError struct {
+	_ struct{} `type:"structure"`
+
+	// An error code that specifies whether the repository name was not valid or
+	// not found.
+	ErrorCode *string `locationName:"errorCode" type:"string"`
+
+	// An error message that provides details about why the repository name was
+	// not found or not valid.
+	ErrorMessage *string `locationName:"errorMessage" type:"string"`
+
+	// The name of the repository where the association was not made.
+	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s BatchAssociateApprovalRuleTemplateWithRepositoriesError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Returns information about errors in a BatchDescribeMergeConflicts operation.
 type BatchDescribeMergeConflictsError struct {
 	_ struct{} `type:"structure"`
 
@@ -35,6 +196,29 @@ type BatchDescribeMergeConflictsError struct {
 
 // String returns the string representation
 func (s BatchDescribeMergeConflictsError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Returns information about errors in a BatchDisassociateApprovalRuleTemplateFromRepositories
+// operation.
+type BatchDisassociateApprovalRuleTemplateFromRepositoriesError struct {
+	_ struct{} `type:"structure"`
+
+	// An error code that specifies whether the repository name was not valid or
+	// not found.
+	ErrorCode *string `locationName:"errorCode" type:"string"`
+
+	// An error message that provides details about why the repository name was
+	// either not found or not valid.
+	ErrorMessage *string `locationName:"errorMessage" type:"string"`
+
+	// The name of the repository where the association with the template was not
+	// able to be removed.
+	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s BatchDisassociateApprovalRuleTemplateFromRepositoriesError) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -76,7 +260,7 @@ type BlobMetadata struct {
 	//    * 120000 indicates a symlink
 	Mode *string `locationName:"mode" type:"string"`
 
-	// The path to the blob and any associated file name, if any.
+	// The path to the blob and associated file name, if any.
 	Path *string `locationName:"path" type:"string"`
 }
 
@@ -108,10 +292,10 @@ type Comment struct {
 	// The Amazon Resource Name (ARN) of the person who posted the comment.
 	AuthorArn *string `locationName:"authorArn" type:"string"`
 
-	// A unique, client-generated idempotency token that when provided in a request,
+	// A unique, client-generated idempotency token that, when provided in a request,
 	// ensures the request cannot be repeated with a changed parameter. If a request
 	// is received with the same parameters and a token is included, the request
-	// will return information about the initial request that used that token.
+	// returns information about the initial request that used that token.
 	ClientRequestToken *string `locationName:"clientRequestToken" type:"string"`
 
 	// The system-generated comment ID.
@@ -142,16 +326,16 @@ func (s Comment) String() string {
 type CommentsForComparedCommit struct {
 	_ struct{} `type:"structure"`
 
-	// The full blob ID of the commit used to establish the 'after' of the comparison.
+	// The full blob ID of the commit used to establish the after of the comparison.
 	AfterBlobId *string `locationName:"afterBlobId" type:"string"`
 
-	// The full commit ID of the commit used to establish the 'after' of the comparison.
+	// The full commit ID of the commit used to establish the after of the comparison.
 	AfterCommitId *string `locationName:"afterCommitId" type:"string"`
 
-	// The full blob ID of the commit used to establish the 'before' of the comparison.
+	// The full blob ID of the commit used to establish the before of the comparison.
 	BeforeBlobId *string `locationName:"beforeBlobId" type:"string"`
 
-	// The full commit ID of the commit used to establish the 'before' of the comparison.
+	// The full commit ID of the commit used to establish the before of the comparison.
 	BeforeCommitId *string `locationName:"beforeCommitId" type:"string"`
 
 	// An array of comment objects. Each comment object contains information about
@@ -160,7 +344,7 @@ type CommentsForComparedCommit struct {
 
 	// Location information about the comment on the comparison, including the file
 	// name, line number, and whether the version of the file where the comment
-	// was made is 'BEFORE' or 'AFTER'.
+	// was made is BEFORE or AFTER.
 	Location *Location `locationName:"location" type:"structure"`
 
 	// The name of the repository that contains the compared commits.
@@ -179,7 +363,7 @@ type CommentsForPullRequest struct {
 	// The full blob ID of the file on which you want to comment on the source commit.
 	AfterBlobId *string `locationName:"afterBlobId" type:"string"`
 
-	// he full commit ID of the commit that was the tip of the source branch at
+	// The full commit ID of the commit that was the tip of the source branch at
 	// the time the comment was made.
 	AfterCommitId *string `locationName:"afterCommitId" type:"string"`
 
@@ -188,9 +372,9 @@ type CommentsForPullRequest struct {
 	BeforeBlobId *string `locationName:"beforeBlobId" type:"string"`
 
 	// The full commit ID of the commit that was the tip of the destination branch
-	// when the pull request was created. This commit will be superceded by the
-	// after commit in the source branch when and if you merge the source branch
-	// into the destination branch.
+	// when the pull request was created. This commit is superceded by the after
+	// commit in the source branch when and if you merge the source branch into
+	// the destination branch.
 	BeforeCommitId *string `locationName:"beforeCommitId" type:"string"`
 
 	// An array of comment objects. Each comment object contains information about
@@ -199,7 +383,7 @@ type CommentsForPullRequest struct {
 
 	// Location information about the comment on the pull request, including the
 	// file name, line number, and whether the version of the file where the comment
-	// was made is 'BEFORE' (destination branch) or 'AFTER' (source branch).
+	// was made is BEFORE (destination branch) or AFTER (source branch).
 	Location *Location `locationName:"location" type:"structure"`
 
 	// The system-generated ID of the pull request.
@@ -218,7 +402,7 @@ func (s CommentsForPullRequest) String() string {
 type Commit struct {
 	_ struct{} `type:"structure"`
 
-	// Any additional data associated with the specified commit.
+	// Any other data associated with the specified commit.
 	AdditionalData *string `locationName:"additionalData" type:"string"`
 
 	// Information about the author of the specified commit. Information includes
@@ -226,7 +410,7 @@ type Commit struct {
 	// the email address for the author, as configured in Git.
 	Author *UserInfo `locationName:"author" type:"structure"`
 
-	// The full SHA of the specified commit.
+	// The full SHA ID of the specified commit.
 	CommitId *string `locationName:"commitId" type:"string"`
 
 	// Information about the person who committed the specified commit, also known
@@ -317,18 +501,18 @@ func (s ConflictMetadata) String() string {
 	return awsutil.Prettify(s)
 }
 
-// A list of inputs to use when resolving conflicts during a merge if AUTOMERGE
-// is chosen as the conflict resolution strategy.
+// If AUTOMERGE is the conflict resolution strategy, a list of inputs to use
+// when resolving conflicts during a merge.
 type ConflictResolution struct {
 	_ struct{} `type:"structure"`
 
-	// Files that will be deleted as part of the merge conflict resolution.
+	// Files to be deleted as part of the merge conflict resolution.
 	DeleteFiles []DeleteFileEntry `locationName:"deleteFiles" type:"list"`
 
-	// Files that will have content replaced as part of the merge conflict resolution.
+	// Files to have content replaced as part of the merge conflict resolution.
 	ReplaceContents []ReplaceContentEntry `locationName:"replaceContents" type:"list"`
 
-	// File modes that will be set as part of the merge conflict resolution.
+	// File modes that are set as part of the merge conflict resolution.
 	SetFileModes []SetFileModeEntry `locationName:"setFileModes" type:"list"`
 }
 
@@ -368,12 +552,11 @@ func (s *ConflictResolution) Validate() error {
 	return nil
 }
 
-// A file that will be deleted as part of a commit.
+// A file that is deleted as part of a commit.
 type DeleteFileEntry struct {
 	_ struct{} `type:"structure"`
 
-	// The full path of the file that will be deleted, including the name of the
-	// file.
+	// The full path of the file to be deleted, including the name of the file.
 	//
 	// FilePath is a required field
 	FilePath *string `locationName:"filePath" type:"string" required:"true"`
@@ -420,11 +603,35 @@ func (s Difference) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Returns information about the approval rules applied to a pull request and
+// whether conditions have been met.
+type Evaluation struct {
+	_ struct{} `type:"structure"`
+
+	// The names of the approval rules that have not had their conditions met.
+	ApprovalRulesNotSatisfied []string `locationName:"approvalRulesNotSatisfied" type:"list"`
+
+	// The names of the approval rules that have had their conditions met.
+	ApprovalRulesSatisfied []string `locationName:"approvalRulesSatisfied" type:"list"`
+
+	// Whether the state of the pull request is approved.
+	Approved *bool `locationName:"approved" type:"boolean"`
+
+	// Whether the approval rule requirements for the pull request have been overridden
+	// and no longer need to be met.
+	Overridden *bool `locationName:"overridden" type:"boolean"`
+}
+
+// String returns the string representation
+func (s Evaluation) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Returns information about a file in a repository.
 type File struct {
 	_ struct{} `type:"structure"`
 
-	// The fully-qualified path to the file in the repository.
+	// The fully qualified path to the file in the repository.
 	AbsolutePath *string `locationName:"absolutePath" type:"string"`
 
 	// The blob ID that contains the file information.
@@ -443,12 +650,12 @@ func (s File) String() string {
 	return awsutil.Prettify(s)
 }
 
-// A file that will be added, updated, or deleted as part of a commit.
+// A file to be added, updated, or deleted as part of a commit.
 type FileMetadata struct {
 	_ struct{} `type:"structure"`
 
-	// The full path to the file that will be added or updated, including the name
-	// of the file.
+	// The full path to the file to be added or updated, including the name of the
+	// file.
 	AbsolutePath *string `locationName:"absolutePath" type:"string"`
 
 	// The blob ID that contains the file information.
@@ -506,7 +713,7 @@ func (s FileSizes) String() string {
 type Folder struct {
 	_ struct{} `type:"structure"`
 
-	// The fully-qualified path of the folder in the repository.
+	// The fully qualified path of the folder in the repository.
 	AbsolutePath *string `locationName:"absolutePath" type:"string"`
 
 	// The relative path of the specified folder from the folder where the query
@@ -555,11 +762,11 @@ type Location struct {
 	// if any.
 	FilePath *string `locationName:"filePath" type:"string"`
 
-	// The position of a change within a compared file, in line number format.
+	// The position of a change in a compared file, in line number format.
 	FilePosition *int64 `locationName:"filePosition" type:"long"`
 
 	// In a comparison of commits or a pull request, whether the change is in the
-	// 'before' or 'after' of that comparison.
+	// before or after of that comparison.
 	RelativeFileVersion RelativeFileVersionEnum `locationName:"relativeFileVersion" type:"string" enum:"true"`
 }
 
@@ -581,9 +788,9 @@ type MergeHunk struct {
 	// A Boolean value indicating whether a combination of hunks contains a conflict.
 	// Conflicts occur when the same file or the same lines in a file were modified
 	// in both the source and destination of a merge or pull request. Valid values
-	// include true, false, and null. This will be true when the hunk represents
-	// a conflict and one or more files contains a line conflict. File mode conflicts
-	// in a merge will not set this to be true.
+	// include true, false, and null. True when the hunk represents a conflict and
+	// one or more files contains a line conflict. File mode conflicts in a merge
+	// do not set this to true.
 	IsConflict *bool `locationName:"isConflict" type:"boolean"`
 
 	// Information about the merge hunk in the source of a merge or pull request.
@@ -603,8 +810,8 @@ type MergeHunkDetail struct {
 	// The end position of the hunk in the merge result.
 	EndLine *int64 `locationName:"endLine" type:"integer"`
 
-	// The base-64 encoded content of the hunk merged region that might or might
-	// not contain a conflict.
+	// The base-64 encoded content of the hunk merged region that might contain
+	// a conflict.
 	HunkContent *string `locationName:"hunkContent" type:"string"`
 
 	// The start position of the hunk in the merge result.
@@ -646,8 +853,8 @@ type MergeOperations struct {
 	// The operation on a file in the destination of a merge or pull request.
 	Destination ChangeTypeEnum `locationName:"destination" type:"string" enum:"true"`
 
-	// The operation on a file (add, modify, or delete) of a file in the source
-	// of a merge or pull request.
+	// The operation (add, modify, or delete) on a file in the source of a merge
+	// or pull request.
 	Source ChangeTypeEnum `locationName:"source" type:"string" enum:"true"`
 }
 
@@ -675,17 +882,37 @@ func (s ObjectTypes) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Returns information about the template that created the approval rule for
+// a pull request.
+type OriginApprovalRuleTemplate struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the template that created the approval rule.
+	ApprovalRuleTemplateId *string `locationName:"approvalRuleTemplateId" type:"string"`
+
+	// The name of the template that created the approval rule.
+	ApprovalRuleTemplateName *string `locationName:"approvalRuleTemplateName" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s OriginApprovalRuleTemplate) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Returns information about a pull request.
 type PullRequest struct {
 	_ struct{} `type:"structure"`
 
+	// The approval rules applied to the pull request.
+	ApprovalRules []ApprovalRule `locationName:"approvalRules" type:"list"`
+
 	// The Amazon Resource Name (ARN) of the user who created the pull request.
 	AuthorArn *string `locationName:"authorArn" type:"string"`
 
-	// A unique, client-generated idempotency token that when provided in a request,
+	// A unique, client-generated idempotency token that, when provided in a request,
 	// ensures the request cannot be repeated with a changed parameter. If a request
 	// is received with the same parameters and a token is included, the request
-	// will return information about the initial request that used that token.
+	// returns information about the initial request that used that token.
 	ClientRequestToken *string `locationName:"clientRequestToken" type:"string"`
 
 	// The date and time the pull request was originally created, in timestamp format.
@@ -710,8 +937,11 @@ type PullRequest struct {
 	// branch for the pull request.
 	PullRequestTargets []PullRequestTarget `locationName:"pullRequestTargets" type:"list"`
 
+	// The system-generated revision ID for the pull request.
+	RevisionId *string `locationName:"revisionId" type:"string"`
+
 	// The user-defined title of the pull request. This title is displayed in the
-	// list of pull requests to other users of the repository.
+	// list of pull requests to other repository users.
 	Title *string `locationName:"title" type:"string"`
 }
 
@@ -750,9 +980,18 @@ type PullRequestEvent struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the user whose actions resulted in the
-	// event. Examples include updating the pull request with additional commits
-	// or changing the status of a pull request.
+	// event. Examples include updating the pull request with more commits or changing
+	// the status of a pull request.
 	ActorArn *string `locationName:"actorArn" type:"string"`
+
+	// Information about a pull request event.
+	ApprovalRuleEventMetadata *ApprovalRuleEventMetadata `locationName:"approvalRuleEventMetadata" type:"structure"`
+
+	// Information about an approval rule override event for a pull request.
+	ApprovalRuleOverriddenEventMetadata *ApprovalRuleOverriddenEventMetadata `locationName:"approvalRuleOverriddenEventMetadata" type:"structure"`
+
+	// Information about an approval state change for a pull request.
+	ApprovalStateChangedEventMetadata *ApprovalStateChangedEventMetadata `locationName:"approvalStateChangedEventMetadata" type:"structure"`
 
 	// The day and time of the pull request event, in timestamp format.
 	EventDate *time.Time `locationName:"eventDate" type:"timestamp"`
@@ -760,8 +999,8 @@ type PullRequestEvent struct {
 	// Information about the source and destination branches for the pull request.
 	PullRequestCreatedEventMetadata *PullRequestCreatedEventMetadata `locationName:"pullRequestCreatedEventMetadata" type:"structure"`
 
-	// The type of the pull request event, for example a status change event (PULL_REQUEST_STATUS_CHANGED)
-	// or update event (PULL_REQUEST_SOURCE_REFERENCE_UPDATED).
+	// The type of the pull request event (for example, a status change event (PULL_REQUEST_STATUS_CHANGED)
+	// or update event (PULL_REQUEST_SOURCE_REFERENCE_UPDATED)).
 	PullRequestEventType PullRequestEventType `locationName:"pullRequestEventType" type:"string" enum:"true"`
 
 	// The system-generated ID of the pull request.
@@ -787,7 +1026,7 @@ func (s PullRequestEvent) String() string {
 type PullRequestMergedStateChangedEventMetadata struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the branch that the pull request will be merged into.
+	// The name of the branch that the pull request is merged into.
 	DestinationReference *string `locationName:"destinationReference" type:"string"`
 
 	// Information about the merge state change event.
@@ -848,8 +1087,8 @@ type PullRequestTarget struct {
 	// commit where the pull request was or will be merged.
 	DestinationCommit *string `locationName:"destinationCommit" type:"string"`
 
-	// The branch of the repository where the pull request changes will be merged
-	// into. Also known as the destination branch.
+	// The branch of the repository where the pull request changes are merged. Also
+	// known as the destination branch.
 	DestinationReference *string `locationName:"destinationReference" type:"string"`
 
 	// The commit ID of the most recent commit that the source branch and the destination
@@ -866,7 +1105,7 @@ type PullRequestTarget struct {
 
 	// The full commit ID of the tip of the source branch used to create the pull
 	// request. If the pull request branch is updated by a push while the pull request
-	// is open, the commit ID will change to reflect the new tip of the branch.
+	// is open, the commit ID changes to reflect the new tip of the branch.
 	SourceCommit *string `locationName:"sourceCommit" type:"string"`
 
 	// The branch of the repository that contains the changes for the pull request.
@@ -879,7 +1118,7 @@ func (s PullRequestTarget) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Information about a file that will be added or updated as part of a commit.
+// Information about a file added or updated as part of a commit.
 type PutFileEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -1032,25 +1271,25 @@ func (s RepositoryNameIdPair) String() string {
 type RepositoryTrigger struct {
 	_ struct{} `type:"structure"`
 
-	// The branches that will be included in the trigger configuration. If you specify
-	// an empty array, the trigger will apply to all branches.
+	// The branches to be included in the trigger configuration. If you specify
+	// an empty array, the trigger applies to all branches.
 	//
 	// Although no content is required in the array, you must include the array
 	// itself.
 	Branches []string `locationName:"branches" type:"list"`
 
-	// Any custom data associated with the trigger that will be included in the
-	// information sent to the target of the trigger.
+	// Any custom data associated with the trigger to be included in the information
+	// sent to the target of the trigger.
 	CustomData *string `locationName:"customData" type:"string"`
 
-	// The ARN of the resource that is the target for a trigger. For example, the
-	// ARN of a topic in Amazon SNS.
+	// The ARN of the resource that is the target for a trigger (for example, the
+	// ARN of a topic in Amazon SNS).
 	//
 	// DestinationArn is a required field
 	DestinationArn *string `locationName:"destinationArn" type:"string" required:"true"`
 
-	// The repository events that will cause the trigger to run actions in another
-	// service, such as sending a notification through Amazon SNS.
+	// The repository events that cause the trigger to run actions in another service,
+	// such as sending a notification through Amazon SNS.
 	//
 	// The valid value "all" cannot be used with any other values.
 	//
@@ -1094,7 +1333,7 @@ func (s *RepositoryTrigger) Validate() error {
 type RepositoryTriggerExecutionFailure struct {
 	_ struct{} `type:"structure"`
 
-	// Additional message information about the trigger that did not run.
+	// Message information about the trigger that did not run.
 	FailureMessage *string `locationName:"failureMessage" type:"string"`
 
 	// The name of the trigger that did not run.
@@ -1199,7 +1438,7 @@ func (s SubModule) String() string {
 type SymbolicLink struct {
 	_ struct{} `type:"structure"`
 
-	// The fully-qualified path to the folder that contains the symbolic link.
+	// The fully qualified path to the folder that contains the symbolic link.
 	AbsolutePath *string `locationName:"absolutePath" type:"string"`
 
 	// The blob ID that contains the information about the symbolic link.
@@ -1222,8 +1461,8 @@ func (s SymbolicLink) String() string {
 type Target struct {
 	_ struct{} `type:"structure"`
 
-	// The branch of the repository where the pull request changes will be merged
-	// into. Also known as the destination branch.
+	// The branch of the repository where the pull request changes are merged. Also
+	// known as the destination branch.
 	DestinationReference *string `locationName:"destinationReference" type:"string"`
 
 	// The name of the repository that contains the pull request.

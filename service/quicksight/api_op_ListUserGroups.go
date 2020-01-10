@@ -13,7 +13,7 @@ import (
 type ListUserGroupsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS Account ID that the user is in. Currently, you use the ID for the
+	// The AWS account ID that the user is in. Currently, you use the ID for the
 	// AWS account that contains your Amazon QuickSight account.
 	//
 	// AwsAccountId is a required field
@@ -167,15 +167,6 @@ const opListUserGroups = "ListUserGroups"
 //
 // Lists the Amazon QuickSight groups that an Amazon QuickSight user is a member
 // of.
-//
-// The permission resource is arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name> .
-//
-// The response is a one or more group objects.
-//
-// CLI Sample:
-//
-// aws quicksight list-user-groups -\-user-name=Pat -\-aws-account-id=111122223333
-// -\-namespace=default -\-region=us-east-1
 //
 //    // Example sending a request using ListUserGroupsRequest.
 //    req := client.ListUserGroupsRequest(params)

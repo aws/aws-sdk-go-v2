@@ -92,8 +92,28 @@ const opDeleteBucketMetricsConfiguration = "DeleteBucketMetricsConfiguration"
 // DeleteBucketMetricsConfigurationRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Deletes a metrics configuration (specified by the metrics configuration ID)
-// from the bucket.
+// Deletes a metrics configuration for the Amazon CloudWatch request metrics
+// (specified by the metrics configuration ID) from the bucket. Note that this
+// doesn't include the daily storage metrics.
+//
+// To use this operation, you must have permissions to perform the s3:PutMetricsConfiguration
+// action. The bucket owner has this permission by default. The bucket owner
+// can grant this permission to others. For more information about permissions,
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+//
+// For information about CloudWatch request metrics for Amazon S3, see Monitoring
+// Metrics with Amazon CloudWatch (https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html).
+//
+// The following operations are related to DeleteBucketMetricsConfiguration:
+//
+//    * GetBucketMetricsConfiguration
+//
+//    * PutBucketMetricsConfiguration
+//
+//    * ListBucketMetricsConfigurations
+//
+//    * Monitoring Metrics with Amazon CloudWatch (https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html)
 //
 //    // Example sending a request using DeleteBucketMetricsConfigurationRequest.
 //    req := client.DeleteBucketMetricsConfigurationRequest(params)

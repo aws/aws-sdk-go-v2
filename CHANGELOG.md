@@ -1,3 +1,41 @@
+Release v0.18.0 (2019-12-12)
+===
+
+Services
+---
+* Synced the V2 SDK with latest AWS service API definitions.
+
+SDK Bugs
+---
+* `aws/endpoints`: aws/endpoints: Fix SDK resolving endpoint without region ([#420](https://github.com/aws/aws-sdk-go-v2/pull/420))
+  * Fixes the SDK's endpoint resolve incorrectly resolving endpoints for a service when the region is empty. Also fixes the SDK attempting to resolve a service when the service value is empty.
+  * Related to [aws/aws-sdk-go#2909](https://github.com/aws/aws-sdk-go/issues/2909)
+
+Release v0.17.0 (2019-11-20)
+===
+
+Services
+---
+* Synced the V2 SDK with latest AWS service API definitions.
+
+SDK Enhancements
+---
+* SDK minimum version requirement has been updated to Go 1.12 ([#432](https://github.com/aws/aws-sdk-go-v2/pull/432))
+
+Release v0.16.0 (2019-11-12)
+===
+
+Services
+---
+* Synced the V2 SDK with latest AWS service API definitions.
+
+Release v0.15.0 (2019-10-18)
+===
+
+Services
+---
+* Synced the V2 SDK with latest AWS service API definitions.
+
 Release v0.14.0 (2019-10-08)
 ===
 

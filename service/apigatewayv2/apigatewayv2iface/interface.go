@@ -89,6 +89,8 @@ type ClientAPI interface {
 
 	DeleteAuthorizerRequest(*apigatewayv2.DeleteAuthorizerInput) apigatewayv2.DeleteAuthorizerRequest
 
+	DeleteCorsConfigurationRequest(*apigatewayv2.DeleteCorsConfigurationInput) apigatewayv2.DeleteCorsConfigurationRequest
+
 	DeleteDeploymentRequest(*apigatewayv2.DeleteDeploymentInput) apigatewayv2.DeleteDeploymentRequest
 
 	DeleteDomainNameRequest(*apigatewayv2.DeleteDomainNameInput) apigatewayv2.DeleteDomainNameRequest
@@ -102,6 +104,8 @@ type ClientAPI interface {
 	DeleteRouteRequest(*apigatewayv2.DeleteRouteInput) apigatewayv2.DeleteRouteRequest
 
 	DeleteRouteResponseRequest(*apigatewayv2.DeleteRouteResponseInput) apigatewayv2.DeleteRouteResponseRequest
+
+	DeleteRouteSettingsRequest(*apigatewayv2.DeleteRouteSettingsInput) apigatewayv2.DeleteRouteSettingsRequest
 
 	DeleteStageRequest(*apigatewayv2.DeleteStageInput) apigatewayv2.DeleteStageRequest
 
@@ -152,6 +156,10 @@ type ClientAPI interface {
 	GetStagesRequest(*apigatewayv2.GetStagesInput) apigatewayv2.GetStagesRequest
 
 	GetTagsRequest(*apigatewayv2.GetTagsInput) apigatewayv2.GetTagsRequest
+
+	ImportApiRequest(*apigatewayv2.ImportApiInput) apigatewayv2.ImportApiRequest
+
+	ReimportApiRequest(*apigatewayv2.ReimportApiInput) apigatewayv2.ReimportApiRequest
 
 	TagResourceRequest(*apigatewayv2.TagResourceInput) apigatewayv2.TagResourceRequest
 

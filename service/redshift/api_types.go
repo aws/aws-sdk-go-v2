@@ -1041,6 +1041,9 @@ type NodeConfigurationOption struct {
 	// The estimated disk utilizaton percentage.
 	EstimatedDiskUtilizationPercent *float64 `type:"double"`
 
+	// The category of the node configuration recommendation.
+	Mode Mode `type:"string" enum:"true"`
+
 	// The node type, such as, "ds2.8xlarge".
 	NodeType *string `type:"string"`
 
@@ -1322,6 +1325,55 @@ func (s ReservedNodeOffering) String() string {
 	return awsutil.Prettify(s)
 }
 
+type ResizeClusterMessage struct {
+	_ struct{} `type:"structure"`
+
+	// A boolean value indicating whether the resize operation is using the classic
+	// resize process. If you don't provide this parameter or set the value to false,
+	// the resize type is elastic.
+	Classic *bool `type:"boolean"`
+
+	// The unique identifier for the cluster to resize.
+	//
+	// ClusterIdentifier is a required field
+	ClusterIdentifier *string `type:"string" required:"true"`
+
+	// The new cluster type for the specified cluster.
+	ClusterType *string `type:"string"`
+
+	// The new node type for the nodes you are adding. If not specified, the cluster's
+	// current node type is used.
+	NodeType *string `type:"string"`
+
+	// The new number of nodes for the cluster.
+	//
+	// NumberOfNodes is a required field
+	NumberOfNodes *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s ResizeClusterMessage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResizeClusterMessage) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResizeClusterMessage"}
+
+	if s.ClusterIdentifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
+	}
+
+	if s.NumberOfNodes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfNodes"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Describes a resize operation.
 type ResizeInfo struct {
 	_ struct{} `type:"structure"`
@@ -1344,21 +1396,26 @@ type RestoreStatus struct {
 	_ struct{} `type:"structure"`
 
 	// The number of megabytes per second being transferred from the backup storage.
-	// Returns the average rate for a completed backup.
+	// Returns the average rate for a completed backup. This field is only updated
+	// when you restore to DC2 and DS2 node types.
 	CurrentRestoreRateInMegaBytesPerSecond *float64 `type:"double"`
 
 	// The amount of time an in-progress restore has been running, or the amount
-	// of time it took a completed restore to finish.
+	// of time it took a completed restore to finish. This field is only updated
+	// when you restore to DC2 and DS2 node types.
 	ElapsedTimeInSeconds *int64 `type:"long"`
 
 	// The estimate of the time remaining before the restore will complete. Returns
-	// 0 for a completed restore.
+	// 0 for a completed restore. This field is only updated when you restore to
+	// DC2 and DS2 node types.
 	EstimatedTimeToCompletionInSeconds *int64 `type:"long"`
 
 	// The number of megabytes that have been transferred from snapshot storage.
+	// This field is only updated when you restore to DC2 and DS2 node types.
 	ProgressInMegaBytes *int64 `type:"long"`
 
-	// The size of the set of snapshot data used to restore the cluster.
+	// The size of the set of snapshot data used to restore the cluster. This field
+	// is only updated when you restore to DC2 and DS2 node types.
 	SnapshotSizeInMegaBytes *int64 `type:"long"`
 
 	// The status of the restore action. Returns starting, restoring, completed,
@@ -1390,6 +1447,130 @@ type RevisionTarget struct {
 // String returns the string representation
 func (s RevisionTarget) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Describes a scheduled action. You can use a scheduled action to trigger some
+// Amazon Redshift API operations on a schedule. For information about which
+// API operations can be scheduled, see ScheduledActionType.
+type ScheduledAction struct {
+	_ struct{} `type:"structure"`
+
+	// The end time in UTC when the schedule is no longer active. After this time,
+	// the scheduled action does not trigger.
+	EndTime *time.Time `type:"timestamp"`
+
+	// The IAM role to assume to run the scheduled action. This IAM role must have
+	// permission to run the Amazon Redshift API operation in the scheduled action.
+	// This IAM role must allow the Amazon Redshift scheduler (Principal scheduler.redshift.amazonaws.com)
+	// to assume permissions on your behalf. For more information about the IAM
+	// role to use with the Amazon Redshift scheduler, see Using Identity-Based
+	// Policies for Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html)
+	// in the Amazon Redshift Cluster Management Guide.
+	IamRole *string `type:"string"`
+
+	// List of times when the scheduled action will run.
+	NextInvocations []time.Time `locationNameList:"ScheduledActionTime" type:"list"`
+
+	// The schedule for a one-time (at format) or recurring (cron format) scheduled
+	// action. Schedule invocations must be separated by at least one hour.
+	//
+	// Format of at expressions is "at(yyyy-mm-ddThh:mm:ss)". For example, "at(2016-03-04T17:27:00)".
+	//
+	// Format of cron expressions is "cron(Minutes Hours Day-of-month Month Day-of-week
+	// Year)". For example, "cron(0, 10, *, *, MON, *)". For more information, see
+	// Cron Expressions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
+	// in the Amazon CloudWatch Events User Guide.
+	Schedule *string `type:"string"`
+
+	// The description of the scheduled action.
+	ScheduledActionDescription *string `type:"string"`
+
+	// The name of the scheduled action.
+	ScheduledActionName *string `type:"string"`
+
+	// The start time in UTC when the schedule is active. Before this time, the
+	// scheduled action does not trigger.
+	StartTime *time.Time `type:"timestamp"`
+
+	// The state of the scheduled action. For example, DISABLED.
+	State ScheduledActionState `type:"string" enum:"true"`
+
+	// A JSON format string of the Amazon Redshift API operation with input parameters.
+	//
+	// "{\"ResizeCluster\":{\"NodeType\":\"ds2.8xlarge\",\"ClusterIdentifier\":\"my-test-cluster\",\"NumberOfNodes\":3}}".
+	TargetAction *ScheduledActionType `type:"structure"`
+}
+
+// String returns the string representation
+func (s ScheduledAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A set of elements to filter the returned scheduled actions.
+type ScheduledActionFilter struct {
+	_ struct{} `type:"structure"`
+
+	// The type of element to filter.
+	//
+	// Name is a required field
+	Name ScheduledActionFilterName `type:"string" required:"true" enum:"true"`
+
+	// List of values. Compare if the value (of type defined by Name) equals an
+	// item in the list of scheduled actions.
+	//
+	// Values is a required field
+	Values []string `locationNameList:"item" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s ScheduledActionFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ScheduledActionFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ScheduledActionFilter"}
+	if len(s.Name) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if s.Values == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The action type that specifies an Amazon Redshift API operation that is supported
+// by the Amazon Redshift scheduler.
+type ScheduledActionType struct {
+	_ struct{} `type:"structure"`
+
+	// An action that runs a ResizeCluster API operation.
+	ResizeCluster *ResizeClusterMessage `type:"structure"`
+}
+
+// String returns the string representation
+func (s ScheduledActionType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ScheduledActionType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ScheduledActionType"}
+	if s.ResizeCluster != nil {
+		if err := s.ResizeCluster.Validate(); err != nil {
+			invalidParams.AddNested("ResizeCluster", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Describes a snapshot.

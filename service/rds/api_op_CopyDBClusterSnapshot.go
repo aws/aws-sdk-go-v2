@@ -44,7 +44,8 @@ type CopyDBClusterSnapshotInput struct {
 	// The URL that contains a Signature Version 4 signed request for the CopyDBClusterSnapshot
 	// API action in the AWS Region that contains the source DB cluster snapshot
 	// to copy. The PreSignedUrl parameter must be used when copying an encrypted
-	// DB cluster snapshot from another AWS Region.
+	// DB cluster snapshot from another AWS Region. Don't specify PreSignedUrl when
+	// you are copying an encrypted DB cluster snapshot in the same AWS Region.
 	//
 	// The pre-signed URL must be a valid request for the CopyDBSClusterSnapshot
 	// API action that can be executed in the source AWS Region that contains the
@@ -70,10 +71,14 @@ type CopyDBClusterSnapshotInput struct {
 	// To learn how to generate a Signature Version 4 signed request, see Authenticating
 	// Requests: Using Query Parameters (AWS Signature Version 4) (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
 	// and Signature Version 4 Signing Process (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+	//
+	// If you are using an AWS SDK tool or the AWS CLI, you can specify SourceRegion
+	// (or --source-region for the AWS CLI) instead of specifying PreSignedUrl manually.
+	// Specifying SourceRegion autogenerates a pre-signed URL that is a valid request
+	// for the operation that can be executed in the source AWS Region.
 	PreSignedUrl *string `type:"string"`
 
-	// The identifier of the DB cluster snapshot to copy. This parameter is not
-	// case-sensitive.
+	// The identifier of the DB cluster snapshot to copy. This parameter isn't case-sensitive.
 	//
 	// You can't copy an encrypted, shared DB cluster snapshot from one AWS Region
 	// to another.
@@ -105,7 +110,7 @@ type CopyDBClusterSnapshotInput struct {
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// The identifier of the new DB cluster snapshot to create from the source DB
-	// cluster snapshot. This parameter is not case-sensitive.
+	// cluster snapshot. This parameter isn't case-sensitive.
 	//
 	// Constraints:
 	//
@@ -199,6 +204,11 @@ const opCopyDBClusterSnapshot = "CopyDBClusterSnapshot"
 //    To learn how to generate a Signature Version 4 signed request, see Authenticating
 //    Requests: Using Query Parameters (AWS Signature Version 4) (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
 //    and Signature Version 4 Signing Process (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+//    If you are using an AWS SDK tool or the AWS CLI, you can specify SourceRegion
+//    (or --source-region for the AWS CLI) instead of specifying PreSignedUrl
+//    manually. Specifying SourceRegion autogenerates a pre-signed URL that
+//    is a valid request for the operation that can be executed in the source
+//    AWS Region.
 //
 //    * TargetDBClusterSnapshotIdentifier - The identifier for the new copy
 //    of the DB cluster snapshot in the destination AWS Region.

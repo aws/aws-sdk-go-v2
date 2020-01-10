@@ -37,6 +37,9 @@ type PutSigningProfileInput struct {
 	// Map of key-value pairs for signing. These can include any information that
 	// you want to use during signing.
 	SigningParameters map[string]string `locationName:"signingParameters" type:"map"`
+
+	// Tags to be associated with the signing profile being created.
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -61,6 +64,9 @@ func (s *PutSigningProfileInput) Validate() error {
 
 	if s.SigningMaterial == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SigningMaterial"))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 	if s.SigningMaterial != nil {
 		if err := s.SigningMaterial.Validate(); err != nil {
@@ -108,6 +114,18 @@ func (s PutSigningProfileInput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	if s.ProfileName != nil {
 		v := *s.ProfileName
 
@@ -145,7 +163,7 @@ const opPutSigningProfile = "PutSigningProfile"
 // PutSigningProfileRequest returns a request value for making API operation for
 // AWS Signer.
 //
-// Creates a signing profile. A signing profile is an AWS Signer template that
+// Creates a signing profile. A signing profile is a code signing template that
 // can be used to carry out a pre-defined signing job. For more information,
 // see http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html
 // (http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html)

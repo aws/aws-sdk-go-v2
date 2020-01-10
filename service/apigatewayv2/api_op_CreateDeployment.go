@@ -71,6 +71,8 @@ func (s CreateDeploymentInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateDeploymentOutput struct {
 	_ struct{} `type:"structure"`
 
+	AutoDeployed *bool `locationName:"autoDeployed" type:"boolean"`
+
 	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The identifier.
@@ -92,6 +94,12 @@ func (s CreateDeploymentOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateDeploymentOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AutoDeployed != nil {
+		v := *s.AutoDeployed
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "autoDeployed", protocol.BoolValue(v), metadata)
+	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate
 

@@ -17,3 +17,20 @@ func (enum RecipeProvider) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
+
+type TrainingMode string
+
+// Enum values for TrainingMode
+const (
+	TrainingModeFull   TrainingMode = "FULL"
+	TrainingModeUpdate TrainingMode = "UPDATE"
+)
+
+func (enum TrainingMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrainingMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

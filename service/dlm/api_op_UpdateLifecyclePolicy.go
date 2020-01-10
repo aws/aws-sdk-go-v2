@@ -20,9 +20,8 @@ type UpdateLifecyclePolicyInput struct {
 	// specified by the lifecycle policy.
 	ExecutionRoleArn *string `type:"string"`
 
-	// The configuration of the lifecycle policy.
-	//
-	// Target tags cannot be re-used across policies.
+	// The configuration of the lifecycle policy. You cannot update the policy type
+	// or the resource type.
 	PolicyDetails *PolicyDetails `type:"structure"`
 
 	// The identifier of the lifecycle policy.

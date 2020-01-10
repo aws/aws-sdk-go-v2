@@ -170,12 +170,17 @@ func (c *Client) WaitUntilStackDeleteComplete(ctx context.Context, input *Descri
 			{
 				State:   aws.FailureWaiterState,
 				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				Expected: "UPDATE_ROLLBACK_IN_PROGRESS",
+			},
+			{
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
 				Expected: "UPDATE_ROLLBACK_FAILED",
 			},
 			{
 				State:   aws.FailureWaiterState,
 				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
-				Expected: "UPDATE_ROLLBACK_IN_PROGRESS",
+				Expected: "UPDATE_ROLLBACK_COMPLETE",
 			},
 		},
 		Logger: c.Config.Logger,
@@ -218,6 +223,75 @@ func (c *Client) WaitUntilStackExists(ctx context.Context, input *DescribeStacks
 			},
 			{
 				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
+				Expected: "ValidationError",
+			},
+		},
+		Logger: c.Config.Logger,
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
+			var inCpy *DescribeStacksInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req := c.DescribeStacksRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req.Request, nil
+		},
+	}
+	w.ApplyOptions(opts...)
+
+	return w.Wait(ctx)
+}
+
+// WaitUntilStackImportComplete uses the AWS CloudFormation API operation
+// DescribeStacks to wait for a condition to be met before returning.
+// If the condition is not met within the max attempt window, an error will
+// be returned.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Client) WaitUntilStackImportComplete(ctx context.Context, input *DescribeStacksInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
+		Name:        "WaitUntilStackImportComplete",
+		MaxAttempts: 120,
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
+			{
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Stacks[].StackStatus",
+				Expected: "IMPORT_COMPLETE",
+			},
+			{
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				Expected: "ROLLBACK_COMPLETE",
+			},
+			{
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				Expected: "ROLLBACK_FAILED",
+			},
+			{
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				Expected: "IMPORT_ROLLBACK_IN_PROGRESS",
+			},
+			{
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				Expected: "IMPORT_ROLLBACK_FAILED",
+			},
+			{
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				Expected: "IMPORT_ROLLBACK_COMPLETE",
+			},
+			{
+				State:    aws.FailureWaiterState,
 				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "ValidationError",
 			},
@@ -289,6 +363,50 @@ func (c *Client) WaitUntilStackUpdateComplete(ctx context.Context, input *Descri
 				inCpy = &tmp
 			}
 			req := c.DescribeStacksRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req.Request, nil
+		},
+	}
+	w.ApplyOptions(opts...)
+
+	return w.Wait(ctx)
+}
+
+// WaitUntilTypeRegistrationComplete uses the AWS CloudFormation API operation
+// DescribeTypeRegistration to wait for a condition to be met before returning.
+// If the condition is not met within the max attempt window, an error will
+// be returned.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Client) WaitUntilTypeRegistrationComplete(ctx context.Context, input *DescribeTypeRegistrationInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
+		Name:        "WaitUntilTypeRegistrationComplete",
+		MaxAttempts: 120,
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
+			{
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "ProgressStatus",
+				Expected: "COMPLETE",
+			},
+			{
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "ProgressStatus",
+				Expected: "FAILED",
+			},
+		},
+		Logger: c.Config.Logger,
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
+			var inCpy *DescribeTypeRegistrationInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req := c.DescribeTypeRegistrationRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
 			return req.Request, nil

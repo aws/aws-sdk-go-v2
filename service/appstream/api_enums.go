@@ -334,6 +334,7 @@ const (
 	StackAttributeFeedbackUrl                 StackAttribute = "FEEDBACK_URL"
 	StackAttributeThemeName                   StackAttribute = "THEME_NAME"
 	StackAttributeUserSettings                StackAttribute = "USER_SETTINGS"
+	StackAttributeEmbedHostDomains            StackAttribute = "EMBED_HOST_DOMAINS"
 	StackAttributeIamRoleArn                  StackAttribute = "IAM_ROLE_ARN"
 	StackAttributeAccessEndpoints             StackAttribute = "ACCESS_ENDPOINTS"
 )

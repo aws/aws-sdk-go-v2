@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type ListByteMatchSetsInput struct {
@@ -49,7 +48,7 @@ type ListByteMatchSetsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of ByteMatchSetSummary objects.
-	ByteMatchSets []waf.ByteMatchSetSummary `type:"list"`
+	ByteMatchSets []ByteMatchSetSummary `type:"list"`
 
 	// If you have more ByteMatchSet objects than the number that you specified
 	// for Limit in the request, the response includes a NextMarker value. To list

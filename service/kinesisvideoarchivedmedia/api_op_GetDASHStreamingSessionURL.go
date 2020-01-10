@@ -13,7 +13,7 @@ import (
 type GetDASHStreamingSessionURLInput struct {
 	_ struct{} `type:"structure"`
 
-	// The time range of the requested fragment, and the source of the timestamps.
+	// The time range of the requested fragment and the source of the timestamps.
 	//
 	// This parameter is required if PlaybackMode is ON_DEMAND or LIVE_REPLAY. This
 	// parameter is optional if PlaybackMode is LIVE. If PlaybackMode is LIVE, the
@@ -258,9 +258,9 @@ const opGetDASHStreamingSessionURL = "GetDASHStreamingSessionURL"
 // data through MPEG-DASH:
 //
 //    * The media must contain h.264 or h.265 encoded video and, optionally,
-//    AAC or G.711 encoded audio. Specifically, the codec id of track 1 should
+//    AAC or G.711 encoded audio. Specifically, the codec ID of track 1 should
 //    be V_MPEG/ISO/AVC (for h.264) or V_MPEGH/ISO/HEVC (for H.265). Optionally,
-//    the codec id of track 2 should be A_AAC (for AAC) or A_MS/ACM (for G.711).
+//    the codec ID of track 2 should be A_AAC (for AAC) or A_MS/ACM (for G.711).
 //
 //    * Data retention must be greater than 0.
 //
@@ -295,7 +295,7 @@ const opGetDASHStreamingSessionURL = "GetDASHStreamingSessionURL"
 //
 // Provide the URL (containing the encrypted session token) for the MPEG-DASH
 // manifest to a media player that supports the MPEG-DASH protocol. Kinesis
-// Video Streams makes the initialization fragment, and media fragments available
+// Video Streams makes the initialization fragment and media fragments available
 // through the manifest URL. The initialization fragment contains the codec
 // private data for the stream, and other data needed to set up the video or
 // audio decoder and renderer. The media fragments contain encoded video frames

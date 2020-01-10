@@ -20,7 +20,7 @@ type DisassociateResourceShareInput struct {
 	// The principals.
 	Principals []string `locationName:"principals" type:"list"`
 
-	// The Amazon Resource Names (ARN) of the resources.
+	// The Amazon Resource Names (ARNs) of the resources.
 	ResourceArns []string `locationName:"resourceArns" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the resource share.

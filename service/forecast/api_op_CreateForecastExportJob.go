@@ -12,9 +12,13 @@ import (
 type CreateForecastExportJobInput struct {
 	_ struct{} `type:"structure"`
 
-	// The path to the Amazon S3 bucket where you want to save the forecast and
-	// an AWS Identity and Access Management (IAM) role that Amazon Forecast can
-	// assume to access the bucket.
+	// The location where you want to save the forecast and an AWS Identity and
+	// Access Management (IAM) role that Amazon Forecast can assume to access the
+	// location. The forecast must be exported to an Amazon S3 bucket.
+	//
+	// If encryption is used, Destination must include an AWS Key Management Service
+	// (KMS) key. The IAM role must allow Amazon Forecast permission to access the
+	// key.
 	//
 	// Destination is a required field
 	Destination *DataDestination `type:"structure" required:"true"`
@@ -83,7 +87,12 @@ const opCreateForecastExportJob = "CreateForecastExportJob"
 // Amazon Forecast Service.
 //
 // Exports a forecast created by the CreateForecast operation to your Amazon
-// Simple Storage Service (Amazon S3) bucket.
+// Simple Storage Service (Amazon S3) bucket. The forecast file name will match
+// the following conventions:
+//
+// <ForecastExportJobName>_<ExportTimestamp>_<PageNumber>
+//
+// where the <ExportTimestamp> component is in Java SimpleDateFormat (yyyy-MM-ddTHH-mm-ssZ).
 //
 // You must specify a DataDestination object that includes an AWS Identity and
 // Access Management (IAM) role that Amazon Forecast can assume to access the
@@ -95,8 +104,8 @@ const opCreateForecastExportJob = "CreateForecastExportJob"
 // operation.
 //
 // The Status of the forecast export job must be ACTIVE before you can access
-// the forecast in your Amazon S3 bucket. Use the DescribeForecastExportJob
-// operation to get the status.
+// the forecast in your Amazon S3 bucket. To get the status, use the DescribeForecastExportJob
+// operation.
 //
 //    // Example sending a request using CreateForecastExportJobRequest.
 //    req := client.CreateForecastExportJobRequest(params)

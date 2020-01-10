@@ -65,7 +65,7 @@ type mockCredsProvider struct {
 	invalidateCalled bool
 }
 
-func (m *mockCredsProvider) Retrieve() (aws.Credentials, error) {
+func (m *mockCredsProvider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 	m.retrieveCalled = true
 	return aws.Credentials{Source: "mockCredsProvider"}, nil
 }

@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type GetRuleGroupInput struct {
@@ -46,7 +45,7 @@ type GetRuleGroupOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the RuleGroup that you specified in the GetRuleGroup request.
-	RuleGroup *waf.RuleGroup `type:"structure"`
+	RuleGroup *RuleGroup `type:"structure"`
 }
 
 // String returns the string representation

@@ -112,7 +112,7 @@ const opListConfigurationRevisions = "ListConfigurationRevisions"
 // ListConfigurationRevisionsRequest returns a request value for making API operation for
 // Managed Streaming for Kafka.
 //
-// Returns a list of all the MSK configurations in this Region.
+// Returns a list of all the revisions of an MSK configuration.
 //
 //    // Example sending a request using ListConfigurationRevisionsRequest.
 //    req := client.ListConfigurationRevisionsRequest(params)

@@ -81,10 +81,9 @@ const opUntagResources = "UntagResources"
 //
 //    * To remove tags from a resource, you need the necessary permissions for
 //    the service that the resource belongs to as well as permissions for removing
-//    tags. For more information, see Obtaining Permissions for Tagging (http://docs.aws.amazon.com/ARG/latest/userguide/obtaining-permissions-for-tagging.html)
-//    in the AWS Resource Groups User Guide.
+//    tags. For more information, see this list (http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html).
 //
-//    * You can only tag resources that are located in the specified region
+//    * You can only tag resources that are located in the specified Region
 //    for the AWS account.
 //
 //    // Example sending a request using UntagResourcesRequest.

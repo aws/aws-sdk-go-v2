@@ -25,6 +25,7 @@ type Context string
 const (
 	ContextCostAndUsage Context = "COST_AND_USAGE"
 	ContextReservations Context = "RESERVATIONS"
+	ContextSavingsPlans Context = "SAVINGS_PLANS"
 )
 
 func (enum Context) MarshalValue() (string, error) {
@@ -32,6 +33,23 @@ func (enum Context) MarshalValue() (string, error) {
 }
 
 func (enum Context) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The rule schema version in this particular Cost Category.
+type CostCategoryRuleVersion string
+
+// Enum values for CostCategoryRuleVersion
+const (
+	CostCategoryRuleVersionCostCategoryExpressionV1 CostCategoryRuleVersion = "CostCategoryExpression.v1"
+)
+
+func (enum CostCategoryRuleVersion) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CostCategoryRuleVersion) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -62,7 +80,11 @@ const (
 	DimensionInstanceTypeFamily Dimension = "INSTANCE_TYPE_FAMILY"
 	DimensionBillingEntity      Dimension = "BILLING_ENTITY"
 	DimensionReservationId      Dimension = "RESERVATION_ID"
+	DimensionResourceId         Dimension = "RESOURCE_ID"
 	DimensionRightsizingType    Dimension = "RIGHTSIZING_TYPE"
+	DimensionSavingsPlansType   Dimension = "SAVINGS_PLANS_TYPE"
+	DimensionSavingsPlanArn     Dimension = "SAVINGS_PLAN_ARN"
+	DimensionPaymentOption      Dimension = "PAYMENT_OPTION"
 )
 
 func (enum Dimension) MarshalValue() (string, error) {
@@ -96,8 +118,9 @@ type GroupDefinitionType string
 
 // Enum values for GroupDefinitionType
 const (
-	GroupDefinitionTypeDimension GroupDefinitionType = "DIMENSION"
-	GroupDefinitionTypeTag       GroupDefinitionType = "TAG"
+	GroupDefinitionTypeDimension    GroupDefinitionType = "DIMENSION"
+	GroupDefinitionTypeTag          GroupDefinitionType = "TAG"
+	GroupDefinitionTypeCostCategory GroupDefinitionType = "COST_CATEGORY"
 )
 
 func (enum GroupDefinitionType) MarshalValue() (string, error) {
@@ -200,6 +223,23 @@ func (enum RightsizingType) MarshalValue() (string, error) {
 }
 
 func (enum RightsizingType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SupportedSavingsPlansType string
+
+// Enum values for SupportedSavingsPlansType
+const (
+	SupportedSavingsPlansTypeComputeSp     SupportedSavingsPlansType = "COMPUTE_SP"
+	SupportedSavingsPlansTypeEc2InstanceSp SupportedSavingsPlansType = "EC2_INSTANCE_SP"
+)
+
+func (enum SupportedSavingsPlansType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SupportedSavingsPlansType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

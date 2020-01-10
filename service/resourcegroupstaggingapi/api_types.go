@@ -10,6 +10,26 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Information that shows whether a resource is compliant with the effective
+// tag policy, including details on any noncompliant tag keys.
+type ComplianceDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Whether a resource is compliant with the effective tag policy.
+	ComplianceStatus *bool `type:"boolean"`
+
+	// The tag value is noncompliant with the effective tag policy.
+	KeysWithNoncompliantValues []string `type:"list"`
+
+	// The tag key is noncompliant with the effective tag policy.
+	NoncompliantKeys []string `type:"list"`
+}
+
+// String returns the string representation
+func (s ComplianceDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Details of the common errors that all actions return.
 type FailureInfo struct {
 	_ struct{} `type:"structure"`
@@ -36,6 +56,10 @@ func (s FailureInfo) String() string {
 type ResourceTagMapping struct {
 	_ struct{} `type:"structure"`
 
+	// Information that shows whether a resource is compliant with the effective
+	// tag policy, including details on any noncompliant tag keys.
+	ComplianceDetails *ComplianceDetails `type:"structure"`
+
 	// The ARN of the resource.
 	ResourceARN *string `min:"1" type:"string"`
 
@@ -48,14 +72,44 @@ func (s ResourceTagMapping) String() string {
 	return awsutil.Prettify(s)
 }
 
+// A count of noncompliant resources.
+type Summary struct {
+	_ struct{} `type:"structure"`
+
+	// The timestamp that shows when this summary was generated in this Region.
+	LastUpdated *string `type:"string"`
+
+	// The count of noncompliant resources.
+	NonCompliantResources *int64 `type:"long"`
+
+	// The AWS Region that the summary applies to.
+	Region *string `min:"1" type:"string"`
+
+	// The AWS resource type.
+	ResourceType *string `type:"string"`
+
+	// The account identifier or the root identifier of the organization. If you
+	// don't know the root ID, you can call the AWS Organizations ListRoots (http://docs.aws.amazon.com/organizations/latest/APIReference/API_ListRoots.html)
+	// API.
+	TargetId *string `min:"6" type:"string"`
+
+	// Whether the target is an account, an OU, or the organization root.
+	TargetIdType TargetIdType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s Summary) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The metadata that you apply to AWS resources to help you categorize and organize
 // them. Each tag consists of a key and an optional value, both of which you
-// define. For more information, see Tag Basics (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-basics)
-// in the Amazon EC2 User Guide for Linux Instances.
+// define. For more information, see Tagging AWS Resources (http://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+// in the AWS General Reference.
 type Tag struct {
 	_ struct{} `type:"structure"`
 
-	// One part of a key-value pair that make up a tag. A key is a general label
+	// One part of a key-value pair that makes up a tag. A key is a general label
 	// that acts like a category for more specific tag values.
 	//
 	// Key is a required field
@@ -78,7 +132,7 @@ func (s Tag) String() string {
 type TagFilter struct {
 	_ struct{} `type:"structure"`
 
-	// One part of a key-value pair that make up a tag. A key is a general label
+	// One part of a key-value pair that makes up a tag. A key is a general label
 	// that acts like a category for more specific tag values.
 	Key *string `min:"1" type:"string"`
 

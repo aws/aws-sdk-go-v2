@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 type CreateGeoMatchSetInput struct {
@@ -64,7 +63,7 @@ type CreateGeoMatchSetOutput struct {
 
 	// The GeoMatchSet returned in the CreateGeoMatchSet response. The GeoMatchSet
 	// contains no GeoMatchConstraints.
-	GeoMatchSet *waf.GeoMatchSet `type:"structure"`
+	GeoMatchSet *GeoMatchSet `type:"structure"`
 }
 
 // String returns the string representation

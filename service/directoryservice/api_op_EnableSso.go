@@ -75,7 +75,9 @@ const opEnableSso = "EnableSso"
 // EnableSsoRequest returns a request value for making API operation for
 // AWS Directory Service.
 //
-// Enables single sign-on for a directory.
+// Enables single sign-on for a directory. Single sign-on allows users in your
+// directory to access certain AWS services from a computer joined to the directory
+// without having to enter their credentials separately.
 //
 //    // Example sending a request using EnableSsoRequest.
 //    req := client.EnableSsoRequest(params)

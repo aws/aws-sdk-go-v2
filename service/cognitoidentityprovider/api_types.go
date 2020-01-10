@@ -3,6 +3,7 @@
 package cognitoidentityprovider
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -11,6 +12,39 @@ import (
 
 var _ aws.Config
 var _ = awsutil.Prettify
+
+// The data type for AccountRecoverySetting.
+type AccountRecoverySettingType struct {
+	_ struct{} `type:"structure"`
+
+	// The list of RecoveryOptionTypes.
+	RecoveryMechanisms []RecoveryOptionType `min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s AccountRecoverySettingType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AccountRecoverySettingType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AccountRecoverySettingType"}
+	if s.RecoveryMechanisms != nil && len(s.RecoveryMechanisms) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RecoveryMechanisms", 1))
+	}
+	if s.RecoveryMechanisms != nil {
+		for i, v := range s.RecoveryMechanisms {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RecoveryMechanisms", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
 
 // Account takeover action type.
 type AccountTakeoverActionType struct {
@@ -654,6 +688,22 @@ func (s DomainDescriptionType) String() string {
 type EmailConfigurationType struct {
 	_ struct{} `type:"structure"`
 
+	// The set of configuration rules that can be applied to emails sent using Amazon
+	// SES. A configuration set is applied to an email by including a reference
+	// to the configuration set in the headers of the email. Once applied, all of
+	// the rules in that configuration set are applied to the email. Configuration
+	// sets can be used to apply the following types of rules to emails:
+	//
+	//    * Event publishing – Amazon SES can track the number of send, delivery,
+	//    open, click, bounce, and complaint events for each email sent. Use event
+	//    publishing to send information about these events to other AWS services
+	//    such as SNS and CloudWatch.
+	//
+	//    * IP pool management – When leasing dedicated IP addresses with Amazon
+	//    SES, you can create groups of IP addresses, called dedicated IP pools.
+	//    You can then associate the dedicated IP pools with configuration sets.
+	ConfigurationSet *string `min:"1" type:"string"`
+
 	// Specifies whether Amazon Cognito emails your users by using its built-in
 	// email functionality or your Amazon SES email configuration. Specify one of
 	// the following values:
@@ -696,6 +746,11 @@ type EmailConfigurationType struct {
 	// in the Amazon Cognito Developer Guide.
 	EmailSendingAccount EmailSendingAccountType `type:"string" enum:"true"`
 
+	// Identifies either the sender’s email address or the sender’s name with
+	// their email address. For example, testuser@example.com or Test User <testuser@example.com>.
+	// This address will appear before the body of the email.
+	From *string `type:"string"`
+
 	// The destination to which the receiver of the email should reply to.
 	ReplyToEmailAddress *string `type:"string"`
 
@@ -720,6 +775,9 @@ func (s EmailConfigurationType) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EmailConfigurationType) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EmailConfigurationType"}
+	if s.ConfigurationSet != nil && len(*s.ConfigurationSet) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationSet", 1))
+	}
 	if s.SourceArn != nil && len(*s.SourceArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("SourceArn", 20))
 	}
@@ -1294,6 +1352,47 @@ func (s *ProviderUserIdentifierType) Validate() error {
 	return nil
 }
 
+// A map containing a priority as a key, and recovery method name as a value.
+type RecoveryOptionType struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the recovery method for a user.
+	//
+	// Name is a required field
+	Name RecoveryOptionNameType `type:"string" required:"true" enum:"true"`
+
+	// A positive integer specifying priority of a method with 1 being the highest
+	// priority.
+	//
+	// Priority is a required field
+	Priority *int64 `min:"1" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s RecoveryOptionType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RecoveryOptionType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RecoveryOptionType"}
+	if len(s.Name) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if s.Priority == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Priority"))
+	}
+	if s.Priority != nil && *s.Priority < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Priority", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // A resource server scope.
 type ResourceServerScopeType struct {
 	_ struct{} `type:"structure"`
@@ -1847,7 +1946,28 @@ type UserPoolClientType struct {
 	// App callback URLs such as myapp://example are also supported.
 	DefaultRedirectURI *string `min:"1" type:"string"`
 
-	// The explicit authentication flows.
+	// The authentication flows that are supported by the user pool clients. Flow
+	// names without the ALLOW_ prefix are deprecated in favor of new names with
+	// the ALLOW_ prefix. Note that values with ALLOW_ prefix cannot be used along
+	// with values without ALLOW_ prefix.
+	//
+	// Valid values include:
+	//
+	//    * ALLOW_ADMIN_USER_PASSWORD_AUTH: Enable admin based user password authentication
+	//    flow ADMIN_USER_PASSWORD_AUTH. This setting replaces the ADMIN_NO_SRP_AUTH
+	//    setting. With this authentication flow, Cognito receives the password
+	//    in the request instead of using the SRP (Secure Remote Password protocol)
+	//    protocol to verify passwords.
+	//
+	//    * ALLOW_CUSTOM_AUTH: Enable Lambda trigger based authentication.
+	//
+	//    * ALLOW_USER_PASSWORD_AUTH: Enable user password-based authentication.
+	//    In this flow, Cognito receives the password in the request instead of
+	//    using the SRP protocol to verify passwords.
+	//
+	//    * ALLOW_USER_SRP_AUTH: Enable SRP based authentication.
+	//
+	//    * ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.
 	ExplicitAuthFlows []ExplicitAuthFlowsType `type:"list"`
 
 	// The date the user pool client was last modified.
@@ -1855,6 +1975,44 @@ type UserPoolClientType struct {
 
 	// A list of allowed logout URLs for the identity providers.
 	LogoutURLs []string `type:"list"`
+
+	// Use this setting to choose which errors and responses are returned by Cognito
+	// APIs during authentication, account confirmation, and password recovery when
+	// the user does not exist in the user pool. When set to ENABLED and the user
+	// does not exist, authentication returns an error indicating either the username
+	// or password was incorrect, and account confirmation and password recovery
+	// return a response indicating a code was sent to a simulated destination.
+	// When set to LEGACY, those APIs will return a UserNotFoundException exception
+	// if the user does not exist in the user pool.
+	//
+	// Valid values include:
+	//
+	//    * ENABLED - This prevents user existence-related errors.
+	//
+	//    * LEGACY - This represents the old behavior of Cognito where user existence
+	//    related errors are not prevented.
+	//
+	// This setting affects the behavior of following APIs:
+	//
+	//    * AdminInitiateAuth
+	//
+	//    * AdminRespondToAuthChallenge
+	//
+	//    * InitiateAuth
+	//
+	//    * RespondToAuthChallenge
+	//
+	//    * ForgotPassword
+	//
+	//    * ConfirmForgotPassword
+	//
+	//    * ConfirmSignUp
+	//
+	//    * ResendConfirmationCode
+	//
+	// After January 1st 2020, the value of PreventUserExistenceErrors will default
+	// to ENABLED for newly created user pool clients if no value is provided.
+	PreventUserExistenceErrors PreventUserExistenceErrorTypes `type:"string" enum:"true"`
 
 	// The Read-only attributes.
 	ReadAttributes []string `type:"list"`
@@ -1938,6 +2096,15 @@ func (s *UserPoolPolicyType) Validate() error {
 // A container for information about the user pool.
 type UserPoolType struct {
 	_ struct{} `type:"structure"`
+
+	// Use this setting to define which verified available method a user can use
+	// to recover their password when they call ForgotPassword. It allows you to
+	// define a preferred method when a user has more than one method available.
+	// With this setting, SMS does not qualify for a valid password recovery mechanism
+	// if the user also has SMS MFA enabled. In the absence of this setting, Cognito
+	// uses the legacy behavior to determine the recovery method where SMS is preferred
+	// over email.
+	AccountRecoverySetting *AccountRecoverySettingType `type:"structure"`
 
 	// The configuration for AdminCreateUser requests.
 	AdminCreateUserConfig *AdminCreateUserConfigType `type:"structure"`

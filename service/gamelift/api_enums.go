@@ -108,6 +108,14 @@ const (
 	EC2InstanceTypeC42xlarge  EC2InstanceType = "c4.2xlarge"
 	EC2InstanceTypeC44xlarge  EC2InstanceType = "c4.4xlarge"
 	EC2InstanceTypeC48xlarge  EC2InstanceType = "c4.8xlarge"
+	EC2InstanceTypeC5Large    EC2InstanceType = "c5.large"
+	EC2InstanceTypeC5Xlarge   EC2InstanceType = "c5.xlarge"
+	EC2InstanceTypeC52xlarge  EC2InstanceType = "c5.2xlarge"
+	EC2InstanceTypeC54xlarge  EC2InstanceType = "c5.4xlarge"
+	EC2InstanceTypeC59xlarge  EC2InstanceType = "c5.9xlarge"
+	EC2InstanceTypeC512xlarge EC2InstanceType = "c5.12xlarge"
+	EC2InstanceTypeC518xlarge EC2InstanceType = "c5.18xlarge"
+	EC2InstanceTypeC524xlarge EC2InstanceType = "c5.24xlarge"
 	EC2InstanceTypeR3Large    EC2InstanceType = "r3.large"
 	EC2InstanceTypeR3Xlarge   EC2InstanceType = "r3.xlarge"
 	EC2InstanceTypeR32xlarge  EC2InstanceType = "r3.2xlarge"
@@ -119,6 +127,14 @@ const (
 	EC2InstanceTypeR44xlarge  EC2InstanceType = "r4.4xlarge"
 	EC2InstanceTypeR48xlarge  EC2InstanceType = "r4.8xlarge"
 	EC2InstanceTypeR416xlarge EC2InstanceType = "r4.16xlarge"
+	EC2InstanceTypeR5Large    EC2InstanceType = "r5.large"
+	EC2InstanceTypeR5Xlarge   EC2InstanceType = "r5.xlarge"
+	EC2InstanceTypeR52xlarge  EC2InstanceType = "r5.2xlarge"
+	EC2InstanceTypeR54xlarge  EC2InstanceType = "r5.4xlarge"
+	EC2InstanceTypeR58xlarge  EC2InstanceType = "r5.8xlarge"
+	EC2InstanceTypeR512xlarge EC2InstanceType = "r5.12xlarge"
+	EC2InstanceTypeR516xlarge EC2InstanceType = "r5.16xlarge"
+	EC2InstanceTypeR524xlarge EC2InstanceType = "r5.24xlarge"
 	EC2InstanceTypeM3Medium   EC2InstanceType = "m3.medium"
 	EC2InstanceTypeM3Large    EC2InstanceType = "m3.large"
 	EC2InstanceTypeM3Xlarge   EC2InstanceType = "m3.xlarge"
@@ -128,6 +144,14 @@ const (
 	EC2InstanceTypeM42xlarge  EC2InstanceType = "m4.2xlarge"
 	EC2InstanceTypeM44xlarge  EC2InstanceType = "m4.4xlarge"
 	EC2InstanceTypeM410xlarge EC2InstanceType = "m4.10xlarge"
+	EC2InstanceTypeM5Large    EC2InstanceType = "m5.large"
+	EC2InstanceTypeM5Xlarge   EC2InstanceType = "m5.xlarge"
+	EC2InstanceTypeM52xlarge  EC2InstanceType = "m5.2xlarge"
+	EC2InstanceTypeM54xlarge  EC2InstanceType = "m5.4xlarge"
+	EC2InstanceTypeM58xlarge  EC2InstanceType = "m5.8xlarge"
+	EC2InstanceTypeM512xlarge EC2InstanceType = "m5.12xlarge"
+	EC2InstanceTypeM516xlarge EC2InstanceType = "m5.16xlarge"
+	EC2InstanceTypeM524xlarge EC2InstanceType = "m5.24xlarge"
 )
 
 func (enum EC2InstanceType) MarshalValue() (string, error) {
@@ -388,8 +412,9 @@ type OperatingSystem string
 
 // Enum values for OperatingSystem
 const (
-	OperatingSystemWindows2012 OperatingSystem = "WINDOWS_2012"
-	OperatingSystemAmazonLinux OperatingSystem = "AMAZON_LINUX"
+	OperatingSystemWindows2012  OperatingSystem = "WINDOWS_2012"
+	OperatingSystemAmazonLinux  OperatingSystem = "AMAZON_LINUX"
+	OperatingSystemAmazonLinux2 OperatingSystem = "AMAZON_LINUX_2"
 )
 
 func (enum OperatingSystem) MarshalValue() (string, error) {

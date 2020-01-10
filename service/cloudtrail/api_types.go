@@ -13,8 +13,8 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // The Amazon S3 buckets or AWS Lambda functions that you specify in your event
-// selectors for your trail to log data events. Data events provide insight
-// into the resource operations performed on or within a resource itself. These
+// selectors for your trail to log data events. Data events provide information
+// about the resource operations performed on or within a resource itself. These
 // are also known as data plane operations. You can specify up to 250 data resources
 // for a trail.
 //
@@ -24,7 +24,7 @@ var _ = awsutil.Prettify
 //
 // The following example demonstrates how logging works when you configure logging
 // of all data events for an S3 bucket named bucket-1. In this example, the
-// CloudTrail user spcified an empty prefix, and the option to log both Read
+// CloudTrail user specified an empty prefix, and the option to log both Read
 // and Write data events.
 //
 // A user uploads an image file to bucket-1.
@@ -72,11 +72,6 @@ type DataResource struct {
 	//    even if that activity is performed on a bucket that belongs to another
 	//    AWS account.
 	//
-	//    * To log data events for all objects in all S3 buckets that include my-bucket
-	//    in their names, specify the prefix as aws:s3:::my-bucket. The trail logs
-	//    data events for all objects in all buckets whose name contains a match
-	//    for my-bucket.
-	//
 	//    * To log data events for all objects in an S3 bucket, specify the bucket
 	//    and an empty object prefix such as arn:aws:s3:::bucket-1/. The trail logs
 	//    data events for all objects in this S3 bucket.
@@ -90,10 +85,10 @@ type DataResource struct {
 	//    performed by any user or role in your AWS account, even if that activity
 	//    is performed on a function that belongs to another AWS account.
 	//
-	//    * To log data eents for a specific Lambda function, specify the function
-	//    ARN. Lambda function ARNs are exact. Unlike S3, you cannot use matching.
-	//    For example, if you specify a function ARN arn:aws:lambda:us-west-2:111111111111:function:helloworld,
-	//    data events will only be logged for arn:aws:lambda:us-west-2:111111111111:function:helloworld.
+	//    * To log data events for a specific Lambda function, specify the function
+	//    ARN. Lambda function ARNs are exact. For example, if you specify a function
+	//    ARN arn:aws:lambda:us-west-2:111111111111:function:helloworld, data events
+	//    will only be logged for arn:aws:lambda:us-west-2:111111111111:function:helloworld.
 	//    They will not be logged for arn:aws:lambda:us-west-2:111111111111:function:helloworld2.
 	Values []string `type:"list"`
 }
@@ -162,15 +157,23 @@ type EventSelector struct {
 	// selectors in a trail. This limit does not apply if you configure resource
 	// logging for all data events.
 	//
-	// For more information, see Data Events (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events)
+	// For more information, see Data Events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events)
 	// and Limits in AWS CloudTrail (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html)
 	// in the AWS CloudTrail User Guide.
 	DataResources []DataResource `type:"list"`
 
+	// An optional list of service event sources from which you do not want management
+	// events to be logged on your trail. In this release, the list can be empty
+	// (disables the filter), or it can filter out AWS Key Management Service events
+	// by containing "kms.amazonaws.com". By default, ExcludeManagementEventSources
+	// is empty, and AWS KMS events are included in events that are logged to your
+	// trail.
+	ExcludeManagementEventSources []string `type:"list"`
+
 	// Specify if you want your event selector to include management events for
 	// your trail.
 	//
-	// For more information, see Management Events (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events)
+	// For more information, see Management Events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events)
 	// in the AWS CloudTrail User Guide.
 	//
 	// By default, the value is true.
@@ -186,6 +189,21 @@ type EventSelector struct {
 
 // String returns the string representation
 func (s EventSelector) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A JSON string that contains a list of insight types that are logged on a
+// trail.
+type InsightSelector struct {
+	_ struct{} `type:"structure"`
+
+	// The type of insights to log on a trail. In this release, only ApiCallRateInsight
+	// is supported as an insight type.
+	InsightType InsightType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s InsightSelector) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -263,8 +281,8 @@ type Resource struct {
 	// The type of a resource referenced by the event returned. When the resource
 	// type cannot be determined, null is returned. Some examples of resource types
 	// are: Instance for EC2, Trail for CloudTrail, DBInstance for RDS, and AccessKey
-	// for IAM. For a list of resource types supported for event lookup, see Resource
-	// Types Supported for Event Lookup (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/lookup_supported_resourcetypes.html).
+	// for IAM. To learn more about how to look up and filter events by the resource
+	// types supported for a service, see Filtering CloudTrail Events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events-console.html#filtering-cloudtrail-events).
 	ResourceType *string `type:"string"`
 }
 
@@ -338,6 +356,10 @@ type Trail struct {
 	// Specifies if the trail has custom event selectors.
 	HasCustomEventSelectors *bool `type:"boolean"`
 
+	// Specifies whether a trail has insight types specified in an InsightSelector
+	// list.
+	HasInsightSelectors *bool `type:"boolean"`
+
 	// The region in which the trail was created.
 	HomeRegion *string `type:"string"`
 
@@ -345,7 +367,7 @@ type Trail struct {
 	// Otherwise, False.
 	IncludeGlobalServiceEvents *bool `type:"boolean"`
 
-	// Specifies whether the trail belongs only to one region or exists in all regions.
+	// Specifies whether the trail exists only in one region or exists in all regions.
 	IsMultiRegionTrail *bool `type:"boolean"`
 
 	// Specifies whether the trail is an organization trail.
@@ -364,12 +386,12 @@ type Trail struct {
 	Name *string `type:"string"`
 
 	// Name of the Amazon S3 bucket into which CloudTrail delivers your trail files.
-	// See Amazon S3 Bucket Naming Requirements (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html).
+	// See Amazon S3 Bucket Naming Requirements (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html).
 	S3BucketName *string `type:"string"`
 
 	// Specifies the Amazon S3 key prefix that comes after the name of the bucket
 	// you have designated for log file delivery. For more information, see Finding
-	// Your CloudTrail Log Files (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html).The
+	// Your CloudTrail Log Files (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html).The
 	// maximum length is 200 characters.
 	S3KeyPrefix *string `type:"string"`
 
@@ -379,7 +401,7 @@ type Trail struct {
 	// arn:aws:sns:us-east-2:123456789012:MyTopic
 	SnsTopicARN *string `type:"string"`
 
-	// This field is deprecated. Use SnsTopicARN.
+	// This field is no longer in use. Use SnsTopicARN.
 	SnsTopicName *string `deprecated:"true" type:"string"`
 
 	// Specifies the ARN of the trail. The format of a trail ARN is:
@@ -390,5 +412,25 @@ type Trail struct {
 
 // String returns the string representation
 func (s Trail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about a CloudTrail trail, including the trail's name, home region,
+// and Amazon Resource Name (ARN).
+type TrailInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The AWS region in which a trail was created.
+	HomeRegion *string `type:"string"`
+
+	// The name of a trail.
+	Name *string `type:"string"`
+
+	// The ARN of a trail.
+	TrailARN *string `type:"string"`
+}
+
+// String returns the string representation
+func (s TrailInfo) String() string {
 	return awsutil.Prettify(s)
 }

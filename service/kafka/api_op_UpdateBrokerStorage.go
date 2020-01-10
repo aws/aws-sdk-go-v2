@@ -27,6 +27,11 @@ type UpdateBrokerStorageInput struct {
 	// Describes the target volume size and the ID of the broker to apply the update
 	// to.
 	//
+	// The value you specify for Target-Volume-in-GiB must be a whole number that
+	// is greater than 100 GiB.
+	//
+	// The storage per broker after the update operation can't exceed 16384 GiB.
+	//
 	// TargetBrokerEBSVolumeInfo is a required field
 	TargetBrokerEBSVolumeInfo []BrokerEBSVolumeInfo `locationName:"targetBrokerEBSVolumeInfo" type:"list" required:"true"`
 }

@@ -364,7 +364,7 @@ func (s SecurityGroupMembership) String() string {
 type Subnet struct {
 	_ struct{} `type:"structure"`
 
-	// The Availability Zone (AZ) for subnet subnet.
+	// The Availability Zone (AZ) for the subnet.
 	SubnetAvailabilityZone *string `type:"string"`
 
 	// The system-assigned identifier for the subnet.

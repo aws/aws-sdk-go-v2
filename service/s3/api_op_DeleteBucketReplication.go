@@ -16,9 +16,6 @@ type DeleteBucketReplicationInput struct {
 
 	// The bucket name.
 	//
-	// It can take a while to propagate the deletion of a replication configuration
-	// to all Amazon S3 systems.
-	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -80,9 +77,25 @@ const opDeleteBucketReplication = "DeleteBucketReplication"
 // DeleteBucketReplicationRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Deletes the replication configuration from the bucket. For information about
-// replication configuration, see Cross-Region Replication (CRR) (https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html)
+// Deletes the replication configuration from the bucket.
+//
+// To use this operation, you must have permissions to perform the s3:PutReplicationConfiguration
+// action. The bucket owner has these permissions by default and can grant it
+// to others. For more information about permissions, see Permissions Related
+// to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+//
+// It can take a while for the deletion of a replication configuration to fully
+// propagate.
+//
+// For information about replication configuration, see Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html)
 // in the Amazon S3 Developer Guide.
+//
+// The following operations are related to DeleteBucketReplication:
+//
+//    * PutBucketReplication
+//
+//    * GetBucketReplication
 //
 //    // Example sending a request using DeleteBucketReplicationRequest.
 //    req := client.DeleteBucketReplicationRequest(params)

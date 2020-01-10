@@ -2,6 +2,26 @@
 
 package comprehend
 
+type EndpointStatus string
+
+// Enum values for EndpointStatus
+const (
+	EndpointStatusCreating  EndpointStatus = "CREATING"
+	EndpointStatusDeleting  EndpointStatus = "DELETING"
+	EndpointStatusFailed    EndpointStatus = "FAILED"
+	EndpointStatusInService EndpointStatus = "IN_SERVICE"
+	EndpointStatusUpdating  EndpointStatus = "UPDATING"
+)
+
+func (enum EndpointStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EndpointStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EntityType string
 
 // Enum values for EntityType
@@ -68,12 +88,18 @@ type LanguageCode string
 
 // Enum values for LanguageCode
 const (
-	LanguageCodeEn LanguageCode = "en"
-	LanguageCodeEs LanguageCode = "es"
-	LanguageCodeFr LanguageCode = "fr"
-	LanguageCodeDe LanguageCode = "de"
-	LanguageCodeIt LanguageCode = "it"
-	LanguageCodePt LanguageCode = "pt"
+	LanguageCodeEn   LanguageCode = "en"
+	LanguageCodeEs   LanguageCode = "es"
+	LanguageCodeFr   LanguageCode = "fr"
+	LanguageCodeDe   LanguageCode = "de"
+	LanguageCodeIt   LanguageCode = "it"
+	LanguageCodePt   LanguageCode = "pt"
+	LanguageCodeAr   LanguageCode = "ar"
+	LanguageCodeHi   LanguageCode = "hi"
+	LanguageCodeJa   LanguageCode = "ja"
+	LanguageCodeKo   LanguageCode = "ko"
+	LanguageCodeZh   LanguageCode = "zh"
+	LanguageCodeZhTw LanguageCode = "zh-TW"
 )
 
 func (enum LanguageCode) MarshalValue() (string, error) {

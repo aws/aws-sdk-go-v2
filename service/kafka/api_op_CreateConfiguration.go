@@ -23,7 +23,8 @@ type CreateConfigurationInput struct {
 	// KafkaVersions is a required field
 	KafkaVersions []string `locationName:"kafkaVersions" type:"list" required:"true"`
 
-	// The name of the configuration.
+	// The name of the configuration. Configuration names are strings that match
+	// the regex "^[0-9A-Za-z-]+$".
 	//
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
@@ -111,7 +112,8 @@ type CreateConfigurationOutput struct {
 	// Latest revision of the configuration.
 	LatestRevision *ConfigurationRevision `locationName:"latestRevision" type:"structure"`
 
-	// The name of the configuration.
+	// The name of the configuration. Configuration names are strings that match
+	// the regex "^[0-9A-Za-z-]+$".
 	Name *string `locationName:"name" type:"string"`
 }
 

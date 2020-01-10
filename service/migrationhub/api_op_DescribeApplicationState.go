@@ -13,7 +13,8 @@ import (
 type DescribeApplicationStateInput struct {
 	_ struct{} `type:"structure"`
 
-	// The configurationId in ADS that uniquely identifies the grouped application.
+	// The configurationId in Application Discovery Service that uniquely identifies
+	// the grouped application.
 	//
 	// ApplicationId is a required field
 	ApplicationId *string `min:"1" type:"string" required:"true"`

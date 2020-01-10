@@ -92,16 +92,6 @@ const opTransactGetItems = "TransactGetItems"
 // cannot retrieve items from tables in more than one AWS account or Region.
 // The aggregate size of the items in the transaction cannot exceed 4 MB.
 //
-// All AWS Regions and AWS GovCloud (US) support up to 25 items per transaction
-// with up to 4 MB of data, except the following AWS Regions:
-//
-//    * China (Beijing)
-//
-//    * China (Ningxia)
-//
-// The China (Beijing) and China (Ningxia) Regions support up to 10 items per
-// transaction with up to 4 MB of data.
-//
 // DynamoDB rejects the entire TransactGetItems request if any of the following
 // is true:
 //

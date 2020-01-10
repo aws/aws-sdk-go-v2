@@ -78,9 +78,15 @@ type ClientAPI interface {
 
 	ListSigningProfilesRequest(*signer.ListSigningProfilesInput) signer.ListSigningProfilesRequest
 
+	ListTagsForResourceRequest(*signer.ListTagsForResourceInput) signer.ListTagsForResourceRequest
+
 	PutSigningProfileRequest(*signer.PutSigningProfileInput) signer.PutSigningProfileRequest
 
 	StartSigningJobRequest(*signer.StartSigningJobInput) signer.StartSigningJobRequest
+
+	TagResourceRequest(*signer.TagResourceInput) signer.TagResourceRequest
+
+	UntagResourceRequest(*signer.UntagResourceInput) signer.UntagResourceRequest
 
 	WaitUntilSuccessfulSigningJob(context.Context, *signer.DescribeSigningJobInput, ...aws.WaiterOption) error
 }

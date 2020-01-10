@@ -44,12 +44,14 @@ type DescribeDatasetImportJobOutput struct {
 	// When the dataset import job was created.
 	CreationTime *time.Time `type:"timestamp"`
 
-	// The size of the dataset in gigabytes (GB) after completion of the import
-	// job.
+	// The size of the dataset in gigabytes (GB) after the import job has finished.
 	DataSize *float64 `type:"double"`
 
-	// The location of the training data to import. The training data must be stored
-	// in an Amazon S3 bucket.
+	// The location of the training data to import and an AWS Identity and Access
+	// Management (IAM) role that Amazon Forecast can assume to access the data.
+	//
+	// If encryption is used, DataSource includes an AWS Key Management Service
+	// (KMS) key.
 	DataSource *DataSource `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the dataset that the training data was
@@ -65,13 +67,14 @@ type DescribeDatasetImportJobOutput struct {
 	// Statistical information about each field in the input data.
 	FieldStatistics map[string]Statistics `type:"map"`
 
-	// Dependent on the status as follows:
+	// The last time that the dataset was modified. The time depends on the status
+	// of the job, as follows:
 	//
-	//    * CREATE_PENDING - same as CreationTime
+	//    * CREATE_PENDING - The same time as CreationTime.
 	//
-	//    * CREATE_IN_PROGRESS - the current timestamp
+	//    * CREATE_IN_PROGRESS - The current timestamp.
 	//
-	//    * ACTIVE or CREATE_FAILED - when the job finished or failed
+	//    * ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time `type:"timestamp"`
 
 	// If an error occurred, an informational message about the error.
@@ -88,13 +91,14 @@ type DescribeDatasetImportJobOutput struct {
 	//    * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	Status *string `type:"string"`
 
-	// The format of timestamps in the dataset. Two formats are supported dependent
-	// on the DataFrequency specified when the dataset was created.
+	// The format of timestamps in the dataset. The format that you specify depends
+	// on the DataFrequency specified when the dataset was created. The following
+	// formats are supported
 	//
-	//    * "yyyy-MM-dd" For data frequencies: Y, M, W, and D
+	//    * "yyyy-MM-dd" For the following data frequencies: Y, M, W, and D
 	//
-	//    * "yyyy-MM-dd HH:mm:ss" For data frequencies: H, 30min, 15min, and 1min;
-	//    and optionally, for: Y, M, W, and D
+	//    * "yyyy-MM-dd HH:mm:ss" For the following data frequencies: H, 30min,
+	//    15min, and 1min; and optionally, for: Y, M, W, and D
 	TimestampFormat *string `type:"string"`
 }
 
@@ -110,7 +114,7 @@ const opDescribeDatasetImportJob = "DescribeDatasetImportJob"
 //
 // Describes a dataset import job created using the CreateDatasetImportJob operation.
 //
-// In addition to listing the properties provided by the user in the CreateDatasetImportJob
+// In addition to listing the parameters provided in the CreateDatasetImportJob
 // request, this operation includes the following properties:
 //
 //    * CreationTime

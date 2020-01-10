@@ -44,6 +44,11 @@ type InitiateAuthInput struct {
 	//    will invoke the user migration Lambda if the USERNAME is not found in
 	//    the user pool.
 	//
+	//    * ADMIN_USER_PASSWORD_AUTH: Admin-based user password authentication.
+	//    This replaces the ADMIN_NO_SRP_AUTH authentication flow. In this flow,
+	//    Cognito receives the password in the request instead of using the SRP
+	//    process to verify passwords.
+	//
 	// ADMIN_NO_SRP_AUTH is not a valid value.
 	//
 	// AuthFlow is a required field

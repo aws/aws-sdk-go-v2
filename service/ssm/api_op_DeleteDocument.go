@@ -16,6 +16,12 @@ type DeleteDocumentInput struct {
 	// versions of the document are deleted.
 	DocumentVersion *string `type:"string"`
 
+	// Some SSM document types require that you specify a Force flag before you
+	// can delete the document. For example, you must specify a Force flag to delete
+	// a document of type ApplicationConfigurationSchema. You can restrict access
+	// to the Force flag in an AWS Identity and Access Management (IAM) policy.
+	Force *bool `type:"boolean"`
+
 	// The name of the document.
 	//
 	// Name is a required field

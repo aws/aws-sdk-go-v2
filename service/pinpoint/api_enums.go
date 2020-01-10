@@ -219,13 +219,15 @@ type JobStatus string
 
 // Enum values for JobStatus
 const (
-	JobStatusCreated      JobStatus = "CREATED"
-	JobStatusInitializing JobStatus = "INITIALIZING"
-	JobStatusProcessing   JobStatus = "PROCESSING"
-	JobStatusCompleting   JobStatus = "COMPLETING"
-	JobStatusCompleted    JobStatus = "COMPLETED"
-	JobStatusFailing      JobStatus = "FAILING"
-	JobStatusFailed       JobStatus = "FAILED"
+	JobStatusCreated                    JobStatus = "CREATED"
+	JobStatusPreparingForInitialization JobStatus = "PREPARING_FOR_INITIALIZATION"
+	JobStatusInitializing               JobStatus = "INITIALIZING"
+	JobStatusProcessing                 JobStatus = "PROCESSING"
+	JobStatusPendingJob                 JobStatus = "PENDING_JOB"
+	JobStatusCompleting                 JobStatus = "COMPLETING"
+	JobStatusCompleted                  JobStatus = "COMPLETED"
+	JobStatusFailing                    JobStatus = "FAILING"
+	JobStatusFailed                     JobStatus = "FAILED"
 )
 
 func (enum JobStatus) MarshalValue() (string, error) {
@@ -267,6 +269,23 @@ func (enum Mode) MarshalValue() (string, error) {
 }
 
 func (enum Mode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Operator string
+
+// Enum values for Operator
+const (
+	OperatorAll Operator = "ALL"
+	OperatorAny Operator = "ANY"
+)
+
+func (enum Operator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Operator) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -323,12 +342,33 @@ func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type State string
+
+// Enum values for State
+const (
+	StateDraft     State = "DRAFT"
+	StateActive    State = "ACTIVE"
+	StateCompleted State = "COMPLETED"
+	StateCancelled State = "CANCELLED"
+	StateClosed    State = "CLOSED"
+)
+
+func (enum State) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum State) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TemplateType string
 
 // Enum values for TemplateType
 const (
 	TemplateTypeEmail TemplateType = "EMAIL"
 	TemplateTypeSms   TemplateType = "SMS"
+	TemplateTypeVoice TemplateType = "VOICE"
 	TemplateTypePush  TemplateType = "PUSH"
 )
 
