@@ -3,14 +3,37 @@
 package api
 
 import (
+	"encoding/base64"
+	"encoding/json"
 	"fmt"
 	"reflect"
 	"sort"
 	"strings"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 // ShapeValueBuilder provides the logic to build the nested values for a shape.
-type ShapeValueBuilder struct{}
+// Base64BlobValues is true if the blob field in shapeRef.Shape.Type is base64
+// encoded.
+type ShapeValueBuilder struct {
+	// Specifies if API shapes modeled as blob types, input values are base64
+	// encoded or not, and strings values instead.
+	Base64BlobValues bool
+
+	// The helper that will provide the logic and formated code to convert a
+	// timestamp input value into a Go time.Time.
+	ParseTimeString func(ref *ShapeRef, v string) (string, error)
+}
+
+// NewShapeValueBuilder returns an initialized ShapeValueBuilder for generating
+// API shape types initialized with values.
+func NewShapeValueBuilder() ShapeValueBuilder {
+	return ShapeValueBuilder{
+		ParseTimeString: parseUnixTimeString,
+	}
+}
 
 // BuildShape will recursively build the referenced shape based on the json
 // object provided. isMap will dictate how the field name is specified. If
@@ -36,17 +59,19 @@ func (b ShapeValueBuilder) BuildShape(ref *ShapeRef, shapes map[string]interface
 		}
 
 		memName := name
+		passRef := ref.Shape.MemberRefs[name]
 		if isMap {
 			memName = fmt.Sprintf("%q", memName)
+			passRef = &ref.Shape.ValueRef
 		}
 
 		switch v := shape.(type) {
 		case map[string]interface{}:
-			ret += b.BuildComplex(name, memName, ref, v, parentCollection)
+			ret += b.BuildComplex(name, memName, passRef, ref.Shape, v, parentCollection)
 		case []interface{}:
-			ret += b.BuildList(name, memName, ref, v)
+			ret += b.BuildList(name, memName, passRef, v)
 		default:
-			ret += b.BuildScalar(name, memName, ref, v, parentCollection)
+			ret += b.BuildScalar(name, memName, passRef, v, ref.Shape.Payload == name, parentCollection)
 		}
 	}
 	return ret
@@ -61,131 +86,136 @@ func (b ShapeValueBuilder) BuildList(name, memName string, ref *ShapeRef, v []in
 		return ""
 	}
 
-	t := ""
-	dataType := ""
-	format := ""
-	isComplex := false
-	isEnum := false
-	passRef := ref
-	isMap := false
+	passRef := &ref.Shape.MemberRef
+	ret += fmt.Sprintf("%s: []%s {\n", memName, b.GoType(ref, true))
+	ret += b.buildListElements(passRef, v)
+	ret += "},\n"
+	return ret
+}
 
-	if ref.Shape.MemberRefs[name] != nil {
-		isEnum = ref.Shape.MemberRefs[name].Shape.MemberRef.Shape.IsEnum()
-		t = b.GoType(&ref.Shape.MemberRefs[name].Shape.MemberRef, true)
-		dataType = ref.Shape.MemberRefs[name].Shape.MemberRef.Shape.Type
-		passRef = ref.Shape.MemberRefs[name]
-		if dataType == "map" {
-			t = fmt.Sprintf("map[string]%s", b.GoType(&ref.Shape.MemberRefs[name].Shape.MemberRef.Shape.ValueRef, true))
-			passRef = &ref.Shape.MemberRefs[name].Shape.MemberRef.Shape.ValueRef
-			isMap = true
-		}
-	} else if ref.Shape.MemberRef.Shape != nil && ref.Shape.MemberRef.Shape.MemberRefs[name] != nil {
-		isEnum = ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.MemberRef.Shape.IsEnum()
-		t = b.GoType(&ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.MemberRef, true)
-		dataType = ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.MemberRef.Shape.Type
-		passRef = &ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.MemberRef
-	} else {
-		isEnum = ref.Shape.MemberRef.Shape.IsEnum()
-		t = b.GoType(&ref.Shape.MemberRef, true)
-		dataType = ref.Shape.MemberRef.Shape.Type
-		passRef = &ref.Shape.MemberRef
+func (b ShapeValueBuilder) buildListElements(ref *ShapeRef, v []interface{}) string {
+	if len(v) == 0 || ref == nil {
+		return ""
 	}
 
+	var ret, format string
+	var isComplex, isList bool
+
+	isEnum := ref.Shape.IsEnum()
+
+	// get format for atomic type. If it is not an atomic type,
+	// get the element.
 	switch v[0].(type) {
 	case string:
 		format = "%s"
 	case bool:
 		format = "%t"
 	case float64:
-		if dataType == "integer" || dataType == "int64" {
+		switch ref.Shape.Type {
+		case "integer", "int64", "long":
 			format = "%d"
-		} else {
+		default:
 			format = "%f"
 		}
-	default:
-		if ref.Shape.MemberRefs[name] != nil {
-		} else {
-			passRef = ref.Shape.MemberRef.Shape.MemberRefs[name]
-
-			// if passRef is nil that means we are either in a map or within a nested array
-			if passRef == nil {
-				passRef = &ref.Shape.MemberRef
-			}
-		}
+	case []interface{}:
+		isList = true
+	case map[string]interface{}:
 		isComplex = true
 	}
 
-	ret += fmt.Sprintf("%s: []%s {\n", memName, t)
 	for _, elem := range v {
 		if isComplex {
-			ret += fmt.Sprintf("{\n%s\n},\n", b.BuildShape(passRef, elem.(map[string]interface{}), isMap, isMap))
+			isMap := ref.Shape.Type == "map"
+			ret += fmt.Sprintf("{\n%s\n},\n", b.BuildShape(ref, elem.(map[string]interface{}), isMap, isMap))
 		} else if isEnum {
-			ret += fmt.Sprintf("%s,\n", getEnumName(passRef, t, elem.(string)))
+			//			t := b.GoType(&ref.Shape.MemberRef, true)
+			t := b.GoType(ref, true)
+			ret += fmt.Sprintf("%s,\n", getEnumName(ref, t, elem.(string)))
+		} else if isList {
+			ret += fmt.Sprintf("{\n%s\n},\n", b.buildListElements(&ref.Shape.MemberRef, elem.([]interface{})))
 		} else {
-			if dataType == "integer" || dataType == "int64" || dataType == "long" {
+			var strVal string
+
+			switch ref.Shape.Type {
+			case "timestamp":
+				strVal = b.BuildTimestamp(ref, fmt.Sprintf(format, elem), true)
+
+			case "integer", "int64", "long":
 				elem = int(elem.(float64))
+				fallthrough
+
+			default:
+				strVal = getValue(ref.Shape.Type, fmt.Sprintf(format, elem), true)
 			}
-			ret += fmt.Sprintf("%s,\n", getValue(t, fmt.Sprintf(format, elem), true))
+
+			ret += fmt.Sprintf("%s,\n", strVal)
 		}
 	}
-
-	ret += "},\n"
 	return ret
 }
 
 // BuildScalar will build atomic Go types.
-func (b ShapeValueBuilder) BuildScalar(name, memName string, ref *ShapeRef, shape interface{}, parentCollection bool) string {
+func (b ShapeValueBuilder) BuildScalar(name, memName string, ref *ShapeRef, shape interface{}, isPayload, parentCollection bool) string {
 	if ref == nil || ref.Shape == nil {
-		return ""
-	} else if ref.Shape.MemberRefs[name] == nil {
-		if ref.Shape.MemberRef.Shape != nil && ref.Shape.MemberRef.Shape.MemberRefs[name] != nil {
-			if ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.IsEnum() {
-				refTemp := ref.Shape.MemberRef.Shape.MemberRefs[name]
-				return fmt.Sprintf("%s: %s, \n", memName, getEnumName(refTemp, b.GoType(refTemp, true), shape.(string)))
-			}
-			return correctType(memName, ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.Type, shape, parentCollection)
-		}
-
-		if ref.Shape.Type != "structure" && ref.Shape.Type != "map" {
-			if ref.Shape.IsEnum() {
-				return fmt.Sprintf("%s: %s, \n", memName, getEnumName(ref, b.GoType(ref, true), shape.(string)))
-			}
-			return correctType(memName, ref.Shape.Type, shape, parentCollection)
-		}
 		return ""
 	}
 
 	switch v := shape.(type) {
 	case bool:
-		return convertToCorrectType(memName, ref.Shape.MemberRefs[name].Shape.Type, fmt.Sprintf("%t", v), parentCollection)
+		return convertToCorrectType(memName, ref.Shape.Type,
+			fmt.Sprintf("%t", v), parentCollection)
+
 	case int:
-		if ref.Shape.MemberRefs[name].Shape.Type == "timestamp" {
-			return parseTimeString(ref, memName, fmt.Sprintf("%d", v))
+		if ref.Shape.Type == "timestamp" {
+			return fmt.Sprintf("%s: %s,\n",
+				memName, b.BuildTimestamp(ref, fmt.Sprintf("%d", v), false))
 		}
-		return convertToCorrectType(memName, ref.Shape.MemberRefs[name].Shape.Type, fmt.Sprintf("%d", v), parentCollection)
+		return convertToCorrectType(memName, ref.Shape.Type,
+			fmt.Sprintf("%d", v), parentCollection)
+
 	case float64:
-		dataType := ref.Shape.MemberRefs[name].Shape.Type
+
+		dataType := ref.Shape.Type
+
+		if dataType == "timestamp" {
+			return fmt.Sprintf("%s: %s,\n",
+				memName, b.BuildTimestamp(ref, fmt.Sprintf("%f", v), false))
+		}
 		if dataType == "integer" || dataType == "int64" || dataType == "long" {
-			return convertToCorrectType(memName, ref.Shape.MemberRefs[name].Shape.Type, fmt.Sprintf("%d", int(shape.(float64))), parentCollection)
+			return convertToCorrectType(memName, ref.Shape.Type,
+				fmt.Sprintf("%d", int(shape.(float64))), parentCollection)
 		}
-		return convertToCorrectType(memName, ref.Shape.MemberRefs[name].Shape.Type, fmt.Sprintf("%f", v), parentCollection)
+		return convertToCorrectType(memName, ref.Shape.Type,
+			fmt.Sprintf("%f", v), parentCollection)
+
 	case string:
-		t := ref.Shape.MemberRefs[name].Shape.Type
-
-		if ref.Shape.MemberRefs[name].Shape.IsEnum() {
-			return fmt.Sprintf("%s: %s,\n", memName, getEnumName(ref.Shape.MemberRefs[name], b.GoType(ref.Shape.MemberRefs[name], false), shape.(string)))
-		}
-
+		t := ref.Shape.Type
 		switch t {
 		case "timestamp":
-			return parseTimeString(ref, memName, fmt.Sprintf("%s", v))
+			return fmt.Sprintf("%s: %s,\n", memName, b.BuildTimestamp(ref, v, parentCollection))
+
+		case "jsonvalue":
+			return fmt.Sprintf("%s: %#v,\n", memName, parseJSONString(v))
+
 		case "blob":
-			if (ref.Shape.MemberRefs[name].Streaming || ref.Shape.MemberRefs[name].Shape.Streaming) && ref.Shape.Payload == name {
+			if (ref.Streaming || ref.Shape.Streaming) && isPayload {
+				ref.API.AddImport("strings")
 				return fmt.Sprintf("%s: aws.ReadSeekCloser(strings.NewReader(%q)),\n", memName, v)
 			}
-
+			if b.Base64BlobValues {
+				decodedBlob, err := base64.StdEncoding.DecodeString(v)
+				if err != nil {
+					panic(fmt.Errorf("Failed to decode string: %v", err))
+				}
+				return fmt.Sprintf("%s: []byte(%q),\n", memName, decodedBlob)
+			}
 			return fmt.Sprintf("%s: []byte(%q),\n", memName, v)
+
 		default:
+			if ref.Shape.IsEnum() {
+				return fmt.Sprintf("%s: %s,\n", memName, getEnumName(ref, b.GoType(ref, parentCollection), v))
+			}
+
 			return convertToCorrectType(memName, t, v, parentCollection)
 		}
 	default:
@@ -195,47 +225,52 @@ func (b ShapeValueBuilder) BuildScalar(name, memName string, ref *ShapeRef, shap
 
 // BuildComplex will build the shape's value for complex types such as structs,
 // and maps.
-func (b ShapeValueBuilder) BuildComplex(name, memName string, ref *ShapeRef, v map[string]interface{}, asValue bool) string {
-	t := ""
-	if ref == nil {
-		return b.BuildShape(nil, v, true, false)
-	}
-
-	member := ref.Shape.MemberRefs[name]
-
-	if member != nil && member.Shape != nil {
-		t = ref.Shape.MemberRefs[name].Shape.Type
-	} else {
-		t = ref.Shape.Type
-	}
-
-	switch t {
+func (b ShapeValueBuilder) BuildComplex(name, memName string, ref *ShapeRef, parent *Shape, v map[string]interface{}, asValue bool) string {
+	switch parent.Type {
 	case "structure":
-		passRef := ref.Shape.MemberRefs[name]
-		// passRef will be nil if the entry is a map. In that case
-		// we want to pass the reference, because the previous call
-		// passed the value reference.
-		if passRef == nil {
-			passRef = ref
-		}
-
-		mem := "&"
-		if asValue {
-			mem = ""
-		}
-
-		return fmt.Sprintf(`%s: %s%s{
+		if ref.Shape.Type == "map" {
+			return fmt.Sprintf(`%s: %s{
 				%s
 			},
-			`, memName, mem, b.GoType(passRef, true), b.BuildShape(passRef, v, false, false))
+			`, memName, b.GoType(ref, true), b.BuildShape(ref, v, true, true))
+		} else {
+			return fmt.Sprintf(`%s: &%s{
+				%s
+			},
+			`, memName, b.GoType(ref, true), b.BuildShape(ref, v, false, false))
+		}
 	case "map":
-		return fmt.Sprintf(`%s: %s{
+		if ref.Shape.Type == "map" {
+			return fmt.Sprintf(`%q: %s{
 				%s
 			},
-			`, name, b.GoType(ref.Shape.MemberRefs[name], true), b.BuildShape(&ref.Shape.MemberRefs[name].Shape.ValueRef, v, true, true))
+			`, name, b.GoType(ref, true), b.BuildShape(ref, v, true, true))
+		} else {
+			return fmt.Sprintf(`%s: %s{
+				%s
+			},
+			`, memName, b.GoType(ref, true), b.BuildShape(ref, v, false, false))
+		}
+	default:
+		panic(fmt.Sprintf("Expected complex type but received %q", ref.Shape.Type))
+	}
+}
+
+// BuildTimestamp returns a Go code string initializing a time.Time to the
+// value specified for the member.
+func (b ShapeValueBuilder) BuildTimestamp(ref *ShapeRef, v string, asValueType bool) string {
+	ref.API.AddImport("time")
+
+	t, err := b.ParseTimeString(ref, v)
+	if err != nil {
+		panic(fmt.Errorf("failed to parse time string, %v", err))
 	}
 
-	return ""
+	if asValueType {
+		return t
+	}
+
+	return fmt.Sprintf("aws.Time(%s)", t)
 }
 
 // GoType returns the string of the shape's Go type identifier.
@@ -247,8 +282,30 @@ func (b ShapeValueBuilder) GoType(ref *ShapeRef, elem bool) string {
 	if elem {
 		return ref.Shape.GoTypeWithPkgNameElem()
 	}
-
 	return ref.GoTypeWithPkgName()
+}
+
+// parseJSONString a json string and returns aws.JSONValue.
+func parseJSONString(input string) aws.JSONValue {
+	var v aws.JSONValue
+	if err := json.Unmarshal([]byte(input), &v); err != nil {
+		panic(fmt.Sprintf("unable to unmarshal JSONValue, %v", err))
+	}
+	return v
+}
+
+// parseUnixTimeString returns a string which assigns the value of a time
+// member using an inline function Defined inline function parses time in
+// UnixTimeFormat.
+func parseUnixTimeString(ref *ShapeRef, v string) (string, error) {
+	ref.API.AddImport("time")
+
+	t, err := protocol.ParseTime(protocol.UnixTimeFormatName, v)
+	if err != nil {
+		return "", err
+	}
+
+	return fmt.Sprintf("time.Unix(0, %d)", t.UnixNano()), nil
 }
 
 func getEnumName(ref *ShapeRef, t, name string) string {
@@ -260,4 +317,8 @@ func getEnumName(ref *ShapeRef, t, name string) string {
 	}
 
 	return fmt.Sprintf("%s(%q)", t, name)
+}
+
+func convertToCorrectType(memName, t, v string, asValue bool) string {
+	return fmt.Sprintf("%s: %s,\n", memName, getValue(t, v, asValue))
 }
