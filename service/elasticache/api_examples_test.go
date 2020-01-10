@@ -5,7 +5,6 @@ package elasticache_test
 import (
 	"context"
 	"fmt"
-	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -14,16 +13,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/elasticache"
 )
 
-var _ time.Duration
-var _ strings.Reader
 var _ aws.Config
 
-func parseTime(layout, value string) *time.Time {
+func parseTime(layout, value string) time.Time {
 	t, err := time.Parse(layout, value)
 	if err != nil {
 		panic(err)
 	}
-	return &t
+	return t
 }
 
 // AddTagsToResource
@@ -1407,7 +1404,7 @@ func ExampleClient_DescribeEventsRequest_shared01() {
 
 	svc := elasticache.New(cfg)
 	input := &elasticache.DescribeEventsInput{
-		StartTime: parseTime("2006-01-02T15:04:05Z", "2016-12-22T15:00:00.000Z"),
+		StartTime: aws.Time(parseTime("2006-01-02T15:04:05Z", "2016-12-22T15:00:00.000Z")),
 	}
 
 	req := svc.DescribeEventsRequest(input)

@@ -5,8 +5,6 @@ package kms_test
 import (
 	"context"
 	"fmt"
-	"strings"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
@@ -14,17 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/kms"
 )
 
-var _ time.Duration
-var _ strings.Reader
 var _ aws.Config
-
-func parseTime(layout, value string) *time.Time {
-	t, err := time.Parse(layout, value)
-	if err != nil {
-		panic(err)
-	}
-	return &t
-}
 
 // To cancel deletion of a customer master key (CMK)
 //
@@ -132,8 +120,8 @@ func ExampleClient_CreateGrantRequest_shared00() {
 		GranteePrincipal: aws.String("arn:aws:iam::111122223333:role/ExampleRole"),
 		KeyId:            aws.String("arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab"),
 		Operations: []kms.GrantOperation{
-			kms.GrantOperation("Encrypt"),
-			kms.GrantOperation("Decrypt"),
+			kms.GrantOperationEncrypt,
+			kms.GrantOperationDecrypt,
 		},
 	}
 

@@ -5,7 +5,6 @@ package rds_test
 import (
 	"context"
 	"fmt"
-	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -14,16 +13,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/rds"
 )
 
-var _ time.Duration
-var _ strings.Reader
 var _ aws.Config
 
-func parseTime(layout, value string) *time.Time {
+func parseTime(layout, value string) time.Time {
 	t, err := time.Parse(layout, value)
 	if err != nil {
 		panic(err)
 	}
-	return &t
+	return t
 }
 
 // To add a source identifier to an event notification subscription
@@ -3323,7 +3320,7 @@ func ExampleClient_RestoreDBClusterToPointInTimeRequest_shared00() {
 	svc := rds.New(cfg)
 	input := &rds.RestoreDBClusterToPointInTimeInput{
 		DBClusterIdentifier:       aws.String("sample-restored-cluster1"),
-		RestoreToTime:             parseTime("2006-01-02T15:04:05Z", "2016-09-13T18:45:00Z"),
+		RestoreToTime:             aws.Time(parseTime("2006-01-02T15:04:05Z", "2016-09-13T18:45:00Z")),
 		SourceDBClusterIdentifier: aws.String("sample-cluster1"),
 	}
 
@@ -3468,7 +3465,7 @@ func ExampleClient_RestoreDBInstanceToPointInTimeRequest_shared00() {
 
 	svc := rds.New(cfg)
 	input := &rds.RestoreDBInstanceToPointInTimeInput{
-		RestoreTime:                parseTime("2006-01-02T15:04:05Z", "2016-09-13T18:45:00Z"),
+		RestoreTime:                aws.Time(parseTime("2006-01-02T15:04:05Z", "2016-09-13T18:45:00Z")),
 		SourceDBInstanceIdentifier: aws.String("mysql-sample"),
 		TargetDBInstanceIdentifier: aws.String("mysql-sample-restored"),
 	}

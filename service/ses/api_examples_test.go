@@ -5,8 +5,6 @@ package ses_test
 import (
 	"context"
 	"fmt"
-	"strings"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
@@ -14,17 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ses"
 )
 
-var _ time.Duration
-var _ strings.Reader
 var _ aws.Config
-
-func parseTime(layout, value string) *time.Time {
-	t, err := time.Parse(layout, value)
-	if err != nil {
-		panic(err)
-	}
-	return &t
-}
 
 // CloneReceiptRuleSet
 //
@@ -123,7 +111,12 @@ func ExampleClient_CreateReceiptRuleRequest_shared00() {
 		After: aws.String(""),
 		Rule: &ses.ReceiptRule{
 			Actions: []ses.ReceiptAction{
-				{},
+				{
+					S3Action: &ses.S3Action{
+						BucketName:      aws.String("MyBucket"),
+						ObjectKeyPrefix: aws.String("email"),
+					},
+				},
 			},
 			Enabled:     aws.Bool(true),
 			Name:        aws.String("MyRule"),
@@ -1523,7 +1516,12 @@ func ExampleClient_UpdateReceiptRuleRequest_shared00() {
 	input := &ses.UpdateReceiptRuleInput{
 		Rule: &ses.ReceiptRule{
 			Actions: []ses.ReceiptAction{
-				{},
+				{
+					S3Action: &ses.S3Action{
+						BucketName:      aws.String("MyBucket"),
+						ObjectKeyPrefix: aws.String("email"),
+					},
+				},
 			},
 			Enabled:     aws.Bool(true),
 			Name:        aws.String("MyRule"),

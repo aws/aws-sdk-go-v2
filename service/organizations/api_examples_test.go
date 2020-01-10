@@ -5,8 +5,6 @@ package organizations_test
 import (
 	"context"
 	"fmt"
-	"strings"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
@@ -14,17 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/organizations"
 )
 
-var _ time.Duration
-var _ strings.Reader
 var _ aws.Config
-
-func parseTime(layout, value string) *time.Time {
-	t, err := time.Parse(layout, value)
-	if err != nil {
-		panic(err)
-	}
-	return &t
-}
 
 // To accept a handshake from another account
 //
@@ -1436,7 +1424,7 @@ func ExampleClient_ListCreateAccountStatusRequest_shared00() {
 	svc := organizations.New(cfg)
 	input := &organizations.ListCreateAccountStatusInput{
 		States: []organizations.CreateAccountState{
-			organizations.CreateAccountState("SUCCEEDED"),
+			organizations.CreateAccountStateSucceeded,
 		},
 	}
 
@@ -1484,7 +1472,7 @@ func ExampleClient_ListCreateAccountStatusRequest_shared01() {
 	svc := organizations.New(cfg)
 	input := &organizations.ListCreateAccountStatusInput{
 		States: []organizations.CreateAccountState{
-			organizations.CreateAccountState("IN_PROGRESS"),
+			organizations.CreateAccountStateInProgress,
 		},
 	}
 
