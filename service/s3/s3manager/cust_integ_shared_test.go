@@ -30,13 +30,13 @@ func TestMain(m *testing.M) {
 
 	svc = s3.New(integCfg)
 	bucketName = aws.String(s3integ.GenerateBucketName())
-	if err := s3integ.SetupTest(ctx, svc, *bucketName); err != nil {
+	if err := s3integ.SetupBucket(ctx, svc, *bucketName); err != nil {
 		panic(err)
 	}
 
 	var result int
 	defer func() {
-		if err := s3integ.CleanupTest(ctx, svc, *bucketName); err != nil {
+		if err := s3integ.CleanupBucket(ctx, svc, *bucketName); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 		if r := recover(); r != nil {

@@ -395,6 +395,11 @@ func (a *API) APIOperationGoCode(op *Operation) string {
 		a.AddSDKImport("private/protocol")
 	}
 
+	if op.HasEndpointARN {
+		a.AddImport("fmt")
+		a.AddSDKImport("service", a.PackageName(), "internal", "arn")
+	}
+
 	// Need to generate code before imports are generated.
 	code := op.GoCode()
 	return a.importsGoCode() + code

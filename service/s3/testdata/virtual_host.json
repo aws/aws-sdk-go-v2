@@ -2,7 +2,7 @@
     {
         "Bucket": "bucket-name",
         "ConfiguredAddressingStyle": "default",
-        "ExpectedUri": "https://bucket-name.s3.amazonaws.com",
+        "ExpectedUri": "https://bucket-name.s3.us-east-1.amazonaws.com",
         "Region": "us-east-1",
         "UseDualstack": false,
         "UseS3Accelerate": false
@@ -34,7 +34,7 @@
     {
         "Bucket": "BucketName",
         "ConfiguredAddressingStyle": "default",
-        "ExpectedUri": "https://s3.amazonaws.com/BucketName",
+        "ExpectedUri": "https://s3.us-east-1.amazonaws.com/BucketName",
         "Region": "us-east-1",
         "UseDualstack": false,
         "UseS3Accelerate": false
@@ -42,7 +42,7 @@
     {
         "Bucket": "BucketName",
         "ConfiguredAddressingStyle": "default",
-        "ExpectedUri": "https://s3.amazonaws.com/BucketName",
+        "ExpectedUri": "https://s3.us-east-1.amazonaws.com/BucketName",
         "Region": "us-east-1",
         "UseDualstack": false,
         "UseS3Accelerate": false
@@ -146,7 +146,7 @@
     {
         "Bucket": "bucket-name",
         "ConfiguredAddressingStyle": "path",
-        "ExpectedUri": "https://s3.amazonaws.com/bucket-name",
+        "ExpectedUri": "https://s3.us-east-1.amazonaws.com/bucket-name",
         "Region": "us-east-1",
         "UseDualstack": false,
         "UseS3Accelerate": false

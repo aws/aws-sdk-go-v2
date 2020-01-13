@@ -54,7 +54,10 @@ func TestSuppressEventStream(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		c.API.Setup()
+		err := c.API.Setup()
+		if err != nil {
+			t.Fatal(err)
+		}
 		if e, a := c.Ops, c.API.OperationNames(); !stringsEqual(e, a) {
 			t.Errorf("expect %v ops, got %v", e, a)
 		}
