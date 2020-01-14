@@ -4,11 +4,13 @@ package s3
 
 import (
 	"context"
+	"fmt"
 	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3/internal/arn"
 )
 
 type GetObjectTorrentInput struct {
@@ -88,6 +90,20 @@ func (s GetObjectTorrentInput) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.PathTarget, "Key", protocol.StringValue(v), metadata)
 	}
 	return nil
+}
+
+func (s *GetObjectTorrentInput) getEndpointARN() (arn.Resource, error) {
+	if s.Bucket == nil {
+		return nil, fmt.Errorf("member Bucket is nil")
+	}
+	return parseEndpointARN(*s.Bucket)
+}
+
+func (s *GetObjectTorrentInput) hasEndpointARN() bool {
+	if s.Bucket == nil {
+		return false
+	}
+	return arn.IsARN(*s.Bucket)
 }
 
 type GetObjectTorrentOutput struct {
