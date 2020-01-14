@@ -201,7 +201,7 @@ func (c *Client) ProtoPutObjectRequest(input *PutObjectInput) ProtoPutObjectRequ
 	req.Handlers.Build.Swap(restxml.BuildHandler.Name,
 		protoPutObjectMarshaler{
 			input: input,
-		}.getNamedBuildHandler(),
+		}.NamedHandler(),
 	)
 
 	return ProtoPutObjectRequest{Request: req, Input: input, Copy: c.ProtoPutObjectRequest}

@@ -7,22 +7,22 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-const protoOpGetApiKey = "GetApiKey"
+const protoOpGetAPIKey = "GetApiKey"
 
-// ProtoGetApiKeyRequest returns a request value for making API operation for
+// ProtoGetAPIKeyRequest returns a request value for making API operation for
 // Amazon API Gateway.
 //
 // Gets information about the current ApiKey resource.
 //
-//    // Example sending a request using ProtoGetApiKeyRequest.
-//    req := client.ProtoGetApiKeyRequest(params)
+//    // Example sending a request using ProtoGetAPIKeyRequest.
+//    req := client.ProtoGetAPIKeyRequest(params)
 //    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ProtoGetApiKeyRequest(input *GetApiKeyInput) ProtoGetApiKeyRequest {
+func (c *Client) ProtoGetAPIKeyRequest(input *GetApiKeyInput) ProtoGetAPIKeyRequest {
 	op := &aws.Operation{
-		Name:       protoOpGetApiKey,
+		Name:       protoOpGetAPIKey,
 		HTTPMethod: "GET",
 		HTTPPath:   "/apikeys/{api_Key}",
 	}
@@ -33,27 +33,27 @@ func (c *Client) ProtoGetApiKeyRequest(input *GetApiKeyInput) ProtoGetApiKeyRequ
 
 	req := c.newRequest(op, input, &GetApiKeyOutput{})
 	// swap existing build handler on svc, with a new named build handler
-	req.Handlers.Build.Swap(restjson.BuildHandler.Name, protoGetApiKeyMarshaler{input: input}.getNamedBuildHandler())
-	return ProtoGetApiKeyRequest{Request: req, Input: input, Copy: c.ProtoGetApiKeyRequest}
+	req.Handlers.Build.Swap(restjson.BuildHandler.Name, protoGetAPIKeyMarshaler{input: input}.NamedHandler())
+	return ProtoGetAPIKeyRequest{Request: req, Input: input, Copy: c.ProtoGetAPIKeyRequest}
 }
 
-// ProtoGetApiKeyRequest is the request type for the
+// ProtoGetAPIKeyRequest is the request type for the
 // GetApiKey API operation.
-type ProtoGetApiKeyRequest struct {
+type ProtoGetAPIKeyRequest struct {
 	*aws.Request
 	Input *GetApiKeyInput
-	Copy  func(*GetApiKeyInput) ProtoGetApiKeyRequest
+	Copy  func(*GetApiKeyInput) ProtoGetAPIKeyRequest
 }
 
 // Send marshals and sends the GetApiKey API request.
-func (r ProtoGetApiKeyRequest) Send(ctx context.Context) (*ProtoGetApiKeyResponse, error) {
+func (r ProtoGetAPIKeyRequest) Send(ctx context.Context) (*ProtoGetAPIKeyResponse, error) {
 	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	resp := &ProtoGetApiKeyResponse{
+	resp := &ProtoGetAPIKeyResponse{
 		GetApiKeyOutput: r.Request.Data.(*GetApiKeyOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
@@ -61,9 +61,9 @@ func (r ProtoGetApiKeyRequest) Send(ctx context.Context) (*ProtoGetApiKeyRespons
 	return resp, nil
 }
 
-// ProtoGetApiKeyResponse is the response type for the
+// ProtoGetAPIKeyResponse is the response type for the
 // GetApiKey API operation.
-type ProtoGetApiKeyResponse struct {
+type ProtoGetAPIKeyResponse struct {
 	*GetApiKeyOutput
 
 	response *aws.Response
@@ -71,6 +71,6 @@ type ProtoGetApiKeyResponse struct {
 
 // SDKResponseMetdata returns the response metadata for the
 // GetApiKey request.
-func (r *ProtoGetApiKeyResponse) SDKResponseMetdata() *aws.Response {
+func (r *ProtoGetAPIKeyResponse) SDKResponseMetdata() *aws.Response {
 	return r.response
 }

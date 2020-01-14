@@ -1,6 +1,7 @@
 package s3_test
 
 import (
+	"bytes"
 	"context"
 	"testing"
 	"time"
@@ -67,6 +68,9 @@ func TestProtoPutObjectRequest_Diff(t *testing.T) {
 		t.Errorf("Found diff: %v", diff)
 	}
 	if diff := cmp.Diff(request.HTTPRequest.URL, prototypeRequest.HTTPRequest.URL); diff != "" {
+		t.Errorf("Found diff: %v", diff)
+	}
+	if diff := cmp.Diff(request.Body, prototypeRequest.Body, cmp.AllowUnexported(bytes.Reader{})); diff != "" {
 		t.Errorf("Found diff: %v", diff)
 	}
 }

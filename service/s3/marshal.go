@@ -112,23 +112,23 @@ func marshalPutObjectInputShapeAWSREST(input *PutObjectInput, encoder *rest.Enco
 	}
 	if input.Expires != nil {
 		if err := encoder.AddHeader("Expires").Time(*input.Expires, protocol.RFC822TimeFormatName); err != nil {
-			return awserr.New(aws.ErrCodeSerialization, "failed to marshal header for shape Expires using REST encoder:\n \t %v", err)
+			return awserr.New(aws.ErrCodeSerialization, "failed to marshal header for shape Expires using REST encoder", err)
 		}
 	}
 	if input.ObjectLockRetainUntilDate != nil {
 		if err := encoder.AddHeader("x-amz-object-lock-retain-until-date").Time(*input.ObjectLockRetainUntilDate, protocol.ISO8601TimeFormatName); err != nil {
-			return awserr.New(aws.ErrCodeSerialization, "failed to marshal header for shape ObjectLockRetainUntilDate using REST encoder:\n \t %v", err)
+			return awserr.New(aws.ErrCodeSerialization, "failed to marshal header for shape ObjectLockRetainUntilDate using REST encoder", err)
 		}
 	}
 	//  Encoding shapes with location `uri`
 	if input.Bucket != nil {
 		if err := encoder.SetURI("Bucket").String(*input.Bucket); err != nil {
-			return awserr.New(aws.ErrCodeSerialization, "failed to marshal URI for shape Bucket using REST encoder:\n \t %v", err)
+			return awserr.New(aws.ErrCodeSerialization, "failed to marshal URI for shape Bucket using REST encoder", err)
 		}
 	}
 	if input.Key != nil {
 		if err := encoder.SetURI("Key").String(*input.Key); err != nil {
-			return awserr.New(aws.ErrCodeSerialization, "failed to marshal URI for shape Key using REST encoder:\n \t %v", err)
+			return awserr.New(aws.ErrCodeSerialization, "failed to marshal URI for shape Key using REST encoder", err)
 		}
 	}
 	return nil
@@ -152,11 +152,11 @@ func marshalShapeMapForHeaders(encoder *rest.Encoder, locationName string, input
 	}
 }
 
-// getNamedBuildHandler returns a Named Build Handler for an operation marshal function
-func (m protoPutObjectMarshaler) getNamedBuildHandler() aws.NamedHandler {
-	const BuildHandler = "ProtoPutBucket.BuildHandler"
+// NamedHandler returns a Named Build Handler for an operation marshal function
+func (m protoPutObjectMarshaler) NamedHandler() aws.NamedHandler {
+	const buildHandler = "ProtoPutBucket.BuildHandler"
 	return aws.NamedHandler{
-		Name: BuildHandler,
+		Name: buildHandler,
 		Fn:   m.marshalOperation,
 	}
 }

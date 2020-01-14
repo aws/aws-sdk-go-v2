@@ -1,6 +1,7 @@
 package apigateway_test
 
 import (
+	"bytes"
 	"context"
 	"testing"
 
@@ -23,7 +24,7 @@ func TestProtoGetApiKeyRequest_Diff(t *testing.T) {
 		t.Error(err)
 	}
 
-	prototypeRequest := svc.ProtoGetApiKeyRequest(&input)
+	prototypeRequest := svc.ProtoGetAPIKeyRequest(&input)
 	_, err = prototypeRequest.Send(context.TODO())
 	if err != nil {
 		t.Error(err)
@@ -33,6 +34,9 @@ func TestProtoGetApiKeyRequest_Diff(t *testing.T) {
 		t.Errorf("Found diff: %v", diff)
 	}
 	if diff := cmp.Diff(request.HTTPRequest.URL, prototypeRequest.HTTPRequest.URL); diff != "" {
+		t.Errorf("Found diff: %v", diff)
+	}
+	if diff := cmp.Diff(request.Body, prototypeRequest.Body, cmp.AllowUnexported(bytes.Reader{})); diff != "" {
 		t.Errorf("Found diff: %v", diff)
 	}
 }
