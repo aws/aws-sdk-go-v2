@@ -21,6 +21,8 @@ SDK Enhancements
   * Adds an implementation of RingBuffer data structure which acts as a revolving buffer of a predefined length. The RingBuffer implements io.ReadWriter interface.
   * Adds unit tests to test the behavior of the ring buffer. 
 * `aws/ec2metadata`: Adds support for EC2Metadata client to use secure tokens provided by the IMDS ([#453](https://github.com/aws/aws-sdk-go-v2/pull/453)) 
+  * Modifies EC2Metadata client to use request context within its operations ([#462](https://github.com/aws/aws-sdk-go-v2/pull/462))
+  * Reduces the default dialer timeout and response header timeout to help reduce latency for known issues with EC2Metadata client running inside a container
   * Modifies and adds tests to verify the behavior of the EC2Metadata client.
 * `service/dynamodb/dynamodbattribute`: Adds clarifying docs on dynamodbattribute.UnixTime ([#464](https://github.com/aws/aws-sdk-go-v2/pull/464))
 * `example/service/sts/assumeRole`: added sts assume role example ([#224](https://github.com/aws/aws-sdk-go-v2/pull/224))

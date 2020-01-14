@@ -761,6 +761,10 @@ func TestEC2MetadataRetryFailure(t *testing.T) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.EndpointResolverFunc(myCustomResolver)
 	c := ec2metadata.New(cfg)
+	// mock retryer with minimum throttle delay set to 1 ms
+	c.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.MinThrottleDelay = 1 * time.Millisecond
+	})
 	// Handler on client that logs if retried
 	c.Handlers.AfterRetry.PushBack(func(i *aws.Request) {
 		t.Logf("%v received, retrying operation %v", i.HTTPResponse.StatusCode, i.Operation.Name)
@@ -794,7 +798,7 @@ func TestEC2MetadataRetryOnce(t *testing.T) {
 	mux.HandleFunc("/latest/api/token", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == "PUT" && r.Header.Get(ttlHeader) != "" {
 			w.Header().Set(ttlHeader, "200")
-			for retry {
+			if retry {
 				retry = false
 				http.Error(w, "service unavailable", http.StatusServiceUnavailable)
 				return
@@ -824,6 +828,10 @@ func TestEC2MetadataRetryOnce(t *testing.T) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.EndpointResolverFunc(myCustomResolver)
 	c := ec2metadata.New(cfg)
+	// mock retryer with minimum throttle delay set to 1 ms
+	c.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.MinThrottleDelay = 1 * time.Millisecond
+	})
 	// Handler on client that logs if retried
 	c.Handlers.AfterRetry.PushBack(func(i *aws.Request) {
 		t.Logf("%v received, retrying operation %v", i.HTTPResponse.StatusCode, i.Operation.Name)
@@ -1088,8 +1096,12 @@ func TestRequestTimeOut(t *testing.T) {
 	}
 
 	c.Handlers.Complete.PushBack(op.addToOperationPerformedList)
-
+	start := time.Now()
 	resp, err := c.GetMetadata(context.Background(), "/some/path")
+
+	if e, a := 1*time.Second, time.Since(start); e < a {
+		t.Fatalf("expected duration of test to be less than %v, got %v", e, a)
+	}
 
 	expectedOperationsPerformed := []string{"GetToken", "GetMetadata"}
 
@@ -1105,7 +1117,11 @@ func TestRequestTimeOut(t *testing.T) {
 		t.Fatalf("Found diff in operations performed: \n %v \n", diff)
 	}
 
+	start = time.Now()
 	resp, err = c.GetMetadata(context.Background(), "/some/path")
+	if e, a := 1*time.Second, time.Since(start); e < a {
+		t.Fatalf("expected duration of test to be less than %v, got %v", e, a)
+	}
 
 	expectedOperationsPerformed = []string{"GetToken", "GetMetadata", "GetMetadata"}
 
