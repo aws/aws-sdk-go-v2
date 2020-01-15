@@ -19,7 +19,7 @@ func TestRequireEndpointIfRegionProvided(t *testing.T) {
 	req := svc.SearchRequest(nil)
 	err := req.Build()
 
-	if e, a := "", req.Metadata.Endpoint; e != a {
+	if e, a := "", req.Endpoint.URL; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if err == nil {
@@ -39,7 +39,7 @@ func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
 	req := svc.SearchRequest(nil)
 	err := req.Build()
 
-	if e, a := "", req.Metadata.Endpoint; e != a {
+	if e, a := "", req.Endpoint.URL; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if err == nil {
@@ -60,7 +60,7 @@ func TestRequireEndpointUsed(t *testing.T) {
 	req := svc.SearchRequest(nil)
 	err := req.Build()
 
-	if e, a := "https://endpoint", req.Metadata.Endpoint; e != a {
+	if e, a := "https://endpoint", req.Endpoint.URL; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if err != nil {

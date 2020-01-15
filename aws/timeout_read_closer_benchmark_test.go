@@ -43,7 +43,6 @@ func BenchmarkTimeoutReadCloser(b *testing.B) {
 		ServiceName:   "fooService",
 		SigningName:   "foo",
 		SigningRegion: "foo",
-		Endpoint:      "localhost",
 		APIVersion:    "2001-01-01",
 		JSONVersion:   "1.1",
 		TargetPrefix:  "Foo",

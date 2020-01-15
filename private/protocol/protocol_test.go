@@ -54,12 +54,12 @@ func buildNewRequest(data interface{}) *aws.Request {
 		}{
 			"Test",
 		},
+		Endpoint: aws.Endpoint{URL: "test"},
 		Metadata: aws.Metadata{
 			ServiceName:   "test",
 			TargetPrefix:  "test",
 			JSONVersion:   "test",
 			APIVersion:    "test",
-			Endpoint:      "test",
 			SigningName:   "test",
 			SigningRegion: "test",
 		},

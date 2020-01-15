@@ -22,9 +22,9 @@ func updatePredictEndpoint(r *aws.Request) {
 		return
 	}
 
-	r.Metadata.Endpoint = *r.Params.(*PredictInput).PredictEndpoint
+	r.Endpoint.URL = *r.Params.(*PredictInput).PredictEndpoint
 
-	uri, err := url.Parse(r.Metadata.Endpoint)
+	uri, err := url.Parse(r.Endpoint.URL)
 	if err != nil {
 		r.Error = err
 		return

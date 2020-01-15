@@ -422,14 +422,14 @@ func SignSDKRequest(req *aws.Request, opts ...func(*Signer)) {
 		return
 	}
 
-	region := req.Metadata.SigningRegion
+	region := req.Endpoint.SigningRegion
 	if region == "" {
 		region = req.Config.Region
 	}
 
-	name := req.Metadata.SigningName
+	name := req.Endpoint.SigningName
 	if name == "" {
-		name = req.Metadata.ServiceName
+		name = req.Metadata.SigningName
 	}
 
 	v4 := NewSigner(req.Config.Credentials, func(v4 *Signer) {
