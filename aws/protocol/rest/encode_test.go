@@ -21,8 +21,8 @@ func TestEncoder(t *testing.T) {
 	expected := http.Request{
 		Header: map[string][]string{
 			"custom-user-header": {"someValue"},
-			"x-amzn-header-foo":  {"someValue"},
-			"x-amzn-meta-foo":    {"someValue"},
+			"X-Amzn-Header-Foo":  {"someValue"},
+			"X-Amzn-Meta-Foo":    {"someValue"},
 		},
 		URL: &url.URL{
 			Path:     "/some/someValue/path",

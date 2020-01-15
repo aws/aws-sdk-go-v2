@@ -13,7 +13,7 @@ import (
 
 func TestHeaderValue(t *testing.T) {
 	const keyName = "test-key"
-	const expectedKeyName = keyName
+	const expectedKeyName = "Test-Key"
 
 	cases := map[string]struct {
 		header   http.Header
@@ -142,20 +142,20 @@ func TestHeaders(t *testing.T) {
 	}{
 		"set": {
 			headers: http.Header{
-				"x-amzn-meta-foo": {"bazValue"},
+				"X-Amzn-Meta-Foo": {"bazValue"},
 			},
 			values: map[string]string{
 				"foo":   "fooValue",
 				" bar ": "barValue",
 			},
 			expected: http.Header{
-				"x-amzn-meta-foo": {"fooValue"},
-				"x-amzn-meta-bar": {"barValue"},
+				"X-Amzn-Meta-Foo": {"fooValue"},
+				"X-Amzn-Meta-Bar": {"barValue"},
 			},
 		},
 		"add": {
 			headers: http.Header{
-				"x-amzn-meta-foo": {"bazValue"},
+				"X-Amzn-Meta-Foo": {"bazValue"},
 			},
 			values: map[string]string{
 				"foo":   "fooValue",
@@ -163,8 +163,8 @@ func TestHeaders(t *testing.T) {
 			},
 			append: true,
 			expected: http.Header{
-				"x-amzn-meta-foo": {"bazValue", "fooValue"},
-				"x-amzn-meta-bar": {"barValue"},
+				"X-Amzn-Meta-Foo": {"bazValue", "fooValue"},
+				"X-Amzn-Meta-Bar": {"barValue"},
 			},
 		},
 	}
