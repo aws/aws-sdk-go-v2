@@ -207,11 +207,12 @@ func TestEndpointResolve(t *testing.T) {
 		SSLCommonName:     "new sslCommonName",
 	}
 
-	resolved := e.resolve("service", "region", "dnsSuffix",
-		defs, ResolveOptions{},
-	)
+	resolved := e.resolve("service", "partition", "region", "dnsSuffix", defs, ResolveOptions{})
 
 	if e, a := "https://service.region.dnsSuffix", resolved.URL; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "partition", resolved.PartitionID; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "signing_service", resolved.SigningName; e != a {
