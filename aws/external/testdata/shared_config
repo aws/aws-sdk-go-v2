@@ -68,3 +68,6 @@ aws_secret_access_key = assume_role_w_creds_secret
 [assume_role_wo_creds]
 role_arn = assume_role_wo_creds_role_arn
 source_profile = assume_role_wo_creds
+
+[valid_arn_region]
+s3_use_arn_region=true

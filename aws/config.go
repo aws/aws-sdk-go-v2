@@ -78,6 +78,17 @@ type Config struct {
 	// Disabling this feature is useful when you want to use local endpoints
 	// for testing that do not support the modeled host prefix pattern.
 	DisableEndpointHostPrefix bool
+
+	// ExternalConfig defines how additional configuration can be loaded by service
+	// clients.
+	ExternalConfig ExternalConfig
+}
+
+// ExternalConfig is an interface that encapsulates the behavior of loading
+// additional configuration from an external source.
+type ExternalConfig interface {
+	// ResolveConfig calls the provide function passing slice of configuration sources
+	ResolveConfig(func(configs []interface{}) error) error
 }
 
 // NewConfig returns a new Config pointer that can be chained with builder

@@ -4,21 +4,62 @@ package api
 
 import (
 	"bytes"
+	"fmt"
 	"text/template"
 )
+
+type externalConfigBinding struct {
+	ResolverMethodName string
+
+	MustResolveEnvConfig    bool
+	MustResolveSharedConfig bool
+}
 
 type serviceConfigField struct {
 	Name string
 	Doc  string
 	Type string
+
+	ExternalConfigMethod *externalConfigBinding
+}
+
+// HasExternalConfigBinding returns whether the service config field binds to an externally resolve
+// configuration property.
+func (s serviceConfigField) HasExternalConfigBinding() bool {
+	return s.ExternalConfigMethod != nil
+}
+
+func (s serviceConfigField) ConfigProviderInterfaceName() string {
+	return s.Name + "Resolver"
+}
+
+// ConfigProviderGoCode returns the string to render the config provider interface
+func (s serviceConfigField) ConfigProviderGoCode() string {
+	if !s.HasExternalConfigBinding() {
+		return ""
+	}
+
+	return fmt.Sprintf(`
+// %s is an interface for retrieving external configuration value for %s
+type %s interface {
+	%s() (%s, error)
+}
+`,
+		s.ConfigProviderInterfaceName(),
+		s.Name,
+		s.ConfigProviderInterfaceName(),
+		s.ExternalConfigMethod.ResolverMethodName,
+		s.Type,
+	)
 }
 
 type serviceConfigFields []serviceConfigField
 
-func (fs serviceConfigFields) GoCode() string {
+// ServiceClientGoCode returns rendered service configuration fields suitable for a structure definition
+func (fs serviceConfigFields) ServiceClientGoCode() string {
 	w := bytes.NewBuffer(nil)
 
-	if err := svcConfigTmpl.Execute(w, fs); err != nil {
+	if err := tplServiceConfigFields.Execute(w, fs); err != nil {
 		panic("failed to render serviceConfigFields " + err.Error())
 	}
 
@@ -69,6 +110,16 @@ be returned. The bucket name must be DNS compatible to also work with
 accelerate.
 			`,
 		},
+		{
+			Name: "UseARNRegion", Type: "bool",
+			Doc: `Set this to ` + "`true`" + ` to use the region specified
+in the ARN, when an ARN is provided as an argument to a bucket parameter.`,
+			ExternalConfigMethod: &externalConfigBinding{
+				ResolverMethodName:      "GetS3UseARNRegion",
+				MustResolveEnvConfig:    true,
+				MustResolveSharedConfig: true,
+			},
+		},
 	},
 
 	"DynamoDB": {
@@ -86,7 +137,7 @@ accelerate.
 	},
 }
 
-var svcConfigTmpl = template.Must(template.New("svcConfigTmpl").
+var tplServiceConfigFields = template.Must(template.New("tplServiceConfigFields").
 	Funcs(template.FuncMap{
 		"Commentify": commentify,
 	}).
@@ -95,5 +146,44 @@ var svcConfigTmpl = template.Must(template.New("svcConfigTmpl").
 {{ range $i, $field := $ }}
 	{{ Commentify $field.Doc }}
 	{{ $field.Name }} {{ $field.Type }}
+{{ end }}
+`))
+
+var tplExtServiceConfigInterfaces = template.Must(template.New("tplExtServiceConfigInterfaces").Funcs(
+	map[string]interface{}{
+		"ExternalServiceSpecificConfigs": func(a *API) serviceConfigFields {
+			if !a.HasExternalServiceConfigFields() {
+				return nil
+			}
+
+			var fields serviceConfigFields
+			for _, field := range serviceSpecificConfigs[a.ServiceID()] {
+				if field.HasExternalConfigBinding() {
+					fields = append(fields, field)
+				}
+			}
+
+			return fields
+		},
+	}).Parse(`
+{{ define "interfaces" }}
+	{{- $fields := ExternalServiceSpecificConfigs . -}}
+	{{- range $i, $field := $fields }}
+		{{ $field.ConfigProviderGoCode }}
+	{{ end }}
+{{ end }}
+{{ define "tests" }}
+	{{- $fields := ExternalServiceSpecificConfigs . -}}
+	{{- range $i, $field := $fields }}
+		// {{ $field.ConfigProviderInterfaceName }} Assertions
+		var (
+			{{- if $field.ExternalConfigMethod.MustResolveEnvConfig }}
+				_ {{ $.SvcExtConfigInterfacesPackageName }}.{{ $field.ConfigProviderInterfaceName }} = &external.EnvConfig{}
+			{{- end }}
+			{{- if $field.ExternalConfigMethod.MustResolveSharedConfig }}
+				_ {{ $.SvcExtConfigInterfacesPackageName }}.{{ $field.ConfigProviderInterfaceName }} = &external.SharedConfig{}
+			{{- end }}
+		)
+	{{ end }}
 {{ end }}
 `))

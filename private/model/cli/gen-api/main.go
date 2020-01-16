@@ -160,6 +160,7 @@ func writeServiceFiles(g *generateInfo, pkgDir string) {
 	Must(writeServiceDocFile(g))
 	Must(writeAPIFile(g))
 	Must(writeServiceFile(g))
+	Must(writeServiceExternalConfig(g))
 	Must(writeInterfaceFile(g))
 	Must(writeWaitersFile(g))
 	Must(writeAPIErrorsFile(g))
@@ -172,6 +173,37 @@ func writeServiceFiles(g *generateInfo, pkgDir string) {
 	if len(g.API.SmokeTests.TestCases) > 0 {
 		Must(writeAPISmokeTestsFile(g))
 	}
+}
+
+func writeServiceExternalConfig(g *generateInfo) error {
+	if !g.HasExternalServiceConfigFields() {
+		return nil
+	}
+
+	pkgName := g.SvcExtConfigInterfacesPackageName()
+	pkgPath := filepath.Join(g.PackageDir, "internal", pkgName)
+	err := os.MkdirAll(pkgPath, 0775)
+	if err != nil {
+		return fmt.Errorf("failed to create package directory: %v", err)
+	}
+
+	err = writeGoFile(
+		filepath.Join(pkgPath, fmt.Sprintf("%s.go", pkgName)),
+		codeLayout,
+		"",
+		pkgName,
+		g.SvcExtConfigInterfacesGoCode(),
+	)
+
+	err = writeGoFile(
+		filepath.Join(pkgPath, fmt.Sprintf("%s_test.go", pkgName)),
+		codeLayout,
+		"",
+		pkgName+"_test",
+		g.SvcExtConfigInterfacesTestGoCode(),
+	)
+
+	return err
 }
 
 // Must will panic if the error passed in is not nil.

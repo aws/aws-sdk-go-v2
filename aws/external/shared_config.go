@@ -26,6 +26,9 @@ const (
 
 	// Additional Config fields
 	regionKey = `region`
+
+	// S3 ARN Region Usage
+	s3UseARNRegionKey = "s3_use_arn_region"
 )
 
 // DefaultSharedConfigProfile is the default profile to be used when
@@ -96,6 +99,16 @@ type SharedConfig struct {
 	//
 	//	region
 	Region string
+
+	// Specifies if the S3 service should allow ARNs to direct the region
+	// the client's requests are sent to.
+	//
+	// s3_use_arn_region=true
+	S3UseARNRegion bool
+}
+
+func (c *SharedConfig) GetS3UseARNRegion() (bool, error) {
+	return c.S3UseARNRegion, nil
 }
 
 // GetRegion returns the region for the profile if a region is set.
@@ -336,6 +349,9 @@ func (c *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) err
 	if v := section.String(regionKey); len(v) > 0 {
 		c.Region = v
 	}
+
+	// S3 Use ARN Region
+	c.S3UseARNRegion = section.Bool(s3UseARNRegionKey)
 
 	return nil
 }

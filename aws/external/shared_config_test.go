@@ -157,6 +157,14 @@ func TestNewSharedConfig(t *testing.T) {
 				Err:      awserr.New("INIParseError", "", nil),
 			},
 		},
+		{
+			Profile:   "valid_arn_region",
+			Filenames: []string{testConfigFilename},
+			Expected: SharedConfig{
+				Profile:        "valid_arn_region",
+				S3UseARNRegion: true,
+			},
+		},
 	}
 
 	for i, c := range cases {

@@ -113,6 +113,30 @@ func (a *API) StructName() string {
 	return "Client"
 }
 
+// HasServiceClientConfigFields returns whether the service being generated has service specific configuration.
+// This is used to only generated the associate package and structure if configuration options exist.
+func (a *API) HasServiceClientConfigFields() bool {
+	cfgs := serviceSpecificConfigs[a.ServiceID()]
+	return len(cfgs) > 0
+}
+
+// HasExternalServiceConfigFields returns the service client config fields for the service
+func (a *API) HasExternalServiceConfigFields() bool {
+	for _, field := range serviceSpecificConfigs[a.ServiceID()] {
+		if field.HasExternalConfigBinding() {
+			return true
+		}
+	}
+
+	return false
+}
+
+// SvcExtConfigInterfacesPackageName returns the internal package name to generate external configuration
+// resolvers.
+func (a *API) SvcExtConfigInterfacesPackageName() string {
+	return strings.ToLower(a.ServiceID()) + "external"
+}
+
 // UseInitMethods returns if the service's init method should be rendered.
 func (a *API) UseInitMethods() bool {
 	return !a.NoInitMethods
@@ -568,12 +592,24 @@ var tplService = template.Must(template.New("service").Funcs(template.FuncMap{
 		return a.Metadata.EndpointsID
 	},
 	"ServiceSpecificConfig": func(a *API) string {
-		cfgs, ok := serviceSpecificConfigs[a.ServiceID()]
-		if !ok || len(cfgs) == 0 {
+		if !a.HasServiceClientConfigFields() {
 			return ""
 		}
+		return serviceSpecificConfigs[a.ServiceID()].ServiceClientGoCode()
+	},
+	"ExternalServiceSpecificConfigs": func(a *API) serviceConfigFields {
+		if !a.HasExternalServiceConfigFields() {
+			return nil
+		}
 
-		return cfgs.GoCode()
+		var fields serviceConfigFields
+		for _, field := range serviceSpecificConfigs[a.ServiceID()] {
+			if field.HasExternalConfigBinding() {
+				fields = append(fields, field)
+			}
+		}
+
+		return fields
 	},
 }).Parse(`
 // {{ .StructName }} provides the API operation methods for making requests to
@@ -631,6 +667,12 @@ func New(config aws.Config) *{{ .StructName }} {
     	),
     }
 
+	{{ if .HasExternalServiceConfigFields }}
+		if config.ExternalConfig != nil {
+			config.ExternalConfig.ResolveConfig(resolveServiceConfig(svc))
+		}
+	{{- end }}
+
 	// Handlers
 	{{- if eq .Metadata.SignatureVersion "v2" }}
 		svc.Handlers.Sign.PushBackNamed(v2.SignRequestHandler)
@@ -666,6 +708,25 @@ func (c *{{ .StructName }}) newRequest(op *aws.Operation, params, data interface
 
 	return req
 }
+
+{{ if .HasExternalServiceConfigFields }}
+func resolveServiceConfig(svc *{{ .StructName }}) func(configs []interface{}) error {
+	return func(configs []interface{}) error {
+		{{- $fields := ExternalServiceSpecificConfigs . -}}
+		for _, cfg := range configs {
+			{{- range $_, $field := $fields }}
+				if c, ok := cfg.({{ $.SvcExtConfigInterfacesPackageName }}.{{ $field.ConfigProviderInterfaceName }}); ok {
+					v, err := c.{{ $field.ExternalConfigMethod.ResolverMethodName }}()
+					if err != nil {
+						return err
+					}
+					svc.{{ $field.Name }} = v
+				}
+			{{- end }}
+		}
+	}
+}
+{{- end }}
 `))
 
 // ServicePackageDoc generates the contents of the doc file for the service.
@@ -694,6 +755,10 @@ func (a *API) ServiceGoCode() string {
 	}
 	a.AddSDKImport("private/protocol", a.ProtocolPackage())
 
+	if a.HasExternalServiceConfigFields() {
+		a.AddSDKImport("service", a.PackageName(), "internal", a.SvcExtConfigInterfacesPackageName())
+	}
+
 	var buf bytes.Buffer
 	err := tplService.Execute(&buf, a)
 	if err != nil {
@@ -702,6 +767,36 @@ func (a *API) ServiceGoCode() string {
 
 	code := a.importsGoCode() + buf.String()
 	return code
+}
+
+// SvcExtConfigInterfacesGoCode generates the specific code for loading external configuration
+// for the service client.
+func (a *API) SvcExtConfigInterfacesGoCode() string {
+	a.resetImports()
+
+	var buf bytes.Buffer
+	err := tplExtServiceConfigInterfaces.ExecuteTemplate(&buf, "interfaces", a)
+	if err != nil {
+		panic(err)
+	}
+
+	return a.importsGoCode() + buf.String()
+}
+
+// SvcExtConfigInterfacesTestGoCode generates the specific code for loading external configuration
+// for the service client.
+func (a *API) SvcExtConfigInterfacesTestGoCode() string {
+	a.resetImports()
+	a.AddSDKImport("aws", "external")
+	a.AddSDKImport("service", a.PackageName(), "internal", a.SvcExtConfigInterfacesPackageName())
+
+	var buf bytes.Buffer
+	err := tplExtServiceConfigInterfaces.ExecuteTemplate(&buf, "tests", a)
+	if err != nil {
+		panic(err)
+	}
+
+	return a.importsGoCode() + buf.String()
 }
 
 // ExampleGoCode renders service example code. Returning it as a string.

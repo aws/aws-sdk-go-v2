@@ -100,6 +100,15 @@ func (cs Configs) ResolveAWSConfig(resolvers []AWSConfigResolver) (aws.Config, e
 	return cfg, nil
 }
 
+// ResolveConfig calls the provide function passing slice of configuration sources
+func (cs Configs) ResolveConfig(f func(configs []interface{}) error) error {
+	var cfgs []interface{}
+	for i := range cs {
+		cfgs = append(cfgs, cs[i])
+	}
+	return f(cfgs)
+}
+
 // LoadDefaultAWSConfig reads the SDK's default external configurations, and
 // populates an AWS Config with the values from the external configurations.
 //
