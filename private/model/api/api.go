@@ -131,9 +131,9 @@ func (a *API) HasExternalServiceConfigFields() bool {
 	return false
 }
 
-// SvcExtConfigInterfacesPackageName returns the internal package name to generate external configuration
+// ExternalConfigPackageName returns the internal package name to generate external configuration
 // resolvers.
-func (a *API) SvcExtConfigInterfacesPackageName() string {
+func (a *API) ExternalConfigPackageName() string {
 	return strings.ToLower(a.ServiceID()) + "external"
 }
 
@@ -668,8 +668,10 @@ func New(config aws.Config) *{{ .StructName }} {
     }
 
 	{{ if .HasExternalServiceConfigFields }}
-		if config.ExternalConfig != nil {
-			config.ExternalConfig.ResolveConfig(resolveServiceConfig(svc))
+		if config.AdditionalConfig != nil {
+			if err := config.AdditionalConfig.ResolveConfig(resolveServiceConfig(svc)); err != nil {
+				panic(fmt.Errorf("failed to resolve service configuration"))
+			}
 		}
 	{{- end }}
 
@@ -713,17 +715,14 @@ func (c *{{ .StructName }}) newRequest(op *aws.Operation, params, data interface
 func resolveServiceConfig(svc *{{ .StructName }}) func(configs []interface{}) error {
 	return func(configs []interface{}) error {
 		{{- $fields := ExternalServiceSpecificConfigs . -}}
-		for _, cfg := range configs {
-			{{- range $_, $field := $fields }}
-				if c, ok := cfg.({{ $.SvcExtConfigInterfacesPackageName }}.{{ $field.ConfigProviderInterfaceName }}); ok {
-					v, err := c.{{ $field.ExternalConfigMethod.ResolverMethodName }}()
-					if err != nil {
-						return err
-					}
-					svc.{{ $field.Name }} = v
-				}
-			{{- end }}
-		}
+		{{- range $idx, $field := $fields }}
+			if value, ok, err := {{ $.ExternalConfigPackageName }}.{{ $field.ExternalConfigResolverName }}(configs); err != nil {
+				return err
+			} else if ok {
+				svc.{{ $field.Name }} = value
+			}
+		{{ end }}
+		return nil
 	}
 }
 {{- end }}
@@ -756,7 +755,8 @@ func (a *API) ServiceGoCode() string {
 	a.AddSDKImport("private/protocol", a.ProtocolPackage())
 
 	if a.HasExternalServiceConfigFields() {
-		a.AddSDKImport("service", a.PackageName(), "internal", a.SvcExtConfigInterfacesPackageName())
+		a.AddImport("fmt")
+		a.AddSDKImport("service", a.PackageName(), "internal", a.ExternalConfigPackageName())
 	}
 
 	var buf bytes.Buffer
@@ -769,13 +769,36 @@ func (a *API) ServiceGoCode() string {
 	return code
 }
 
+// ServiceTestGoCode generates service client specific unit-tests
+func (a *API) ServiceTestGoCode() string {
+	// At this time we only need to generate client tests for external config resolution
+	if !a.HasExternalServiceConfigFields() {
+		return ""
+	}
+
+	a.resetImports()
+	a.AddImport("testing")
+	a.AddImport("fmt")
+	a.AddImport("strings")
+
+	var buf bytes.Buffer
+	err := tplServiceClientTests.Execute(&buf, a)
+	if err != nil {
+		panic(err)
+	}
+
+	code := a.importsGoCode() + buf.String()
+
+	return code
+}
+
 // SvcExtConfigInterfacesGoCode generates the specific code for loading external configuration
 // for the service client.
 func (a *API) SvcExtConfigInterfacesGoCode() string {
 	a.resetImports()
 
 	var buf bytes.Buffer
-	err := tplExtServiceConfigInterfaces.ExecuteTemplate(&buf, "interfaces", a)
+	err := tplExtServiceConfigResolvers.ExecuteTemplate(&buf, "resolvers", a)
 	if err != nil {
 		panic(err)
 	}
@@ -788,10 +811,10 @@ func (a *API) SvcExtConfigInterfacesGoCode() string {
 func (a *API) SvcExtConfigInterfacesTestGoCode() string {
 	a.resetImports()
 	a.AddSDKImport("aws", "external")
-	a.AddSDKImport("service", a.PackageName(), "internal", a.SvcExtConfigInterfacesPackageName())
+	a.AddSDKImport("service", a.PackageName(), "internal", a.ExternalConfigPackageName())
 
 	var buf bytes.Buffer
-	err := tplExtServiceConfigInterfaces.ExecuteTemplate(&buf, "tests", a)
+	err := tplExtServiceConfigResolvers.ExecuteTemplate(&buf, "tests", a)
 	if err != nil {
 		panic(err)
 	}
@@ -1078,3 +1101,106 @@ func (a *API) hasNonIOShapes() bool {
 	}
 	return false
 }
+
+var tplServiceClientTests = template.Must(template.New("tplServiceClientTests").
+	Funcs(map[string]interface{}{
+		"ExternalConfigFields": func(a *API) serviceConfigFields {
+			var fields serviceConfigFields
+
+			for _, field := range serviceSpecificConfigs[a.ServiceID()] {
+				if field.HasExternalConfigBinding() {
+					fields = append(fields, field)
+				}
+			}
+
+			return fields
+		},
+		"MockConfigFieldValue": func(s serviceConfigField) (string, error) {
+			switch s.Type {
+			case "bool":
+				return "true", nil
+			case "string":
+				return `"mockString"`, nil
+			case "int", "float32", "float64":
+				return "42", nil
+			default:
+				return "", fmt.Errorf("unimplemented mock config field type")
+			}
+		},
+		"DefaultConfigFieldValue": func(s serviceConfigField) (string, error) {
+			switch s.Type {
+			case "bool":
+				return "false", nil
+			case "string":
+				return `""`, nil
+			case "int", "float32", "float64":
+				return "0", nil
+			default:
+				return "", fmt.Errorf("unimplement default config field type")
+			}
+		},
+	}).
+	Parse(`
+{{- $fields := ExternalConfigFields . -}}
+{{ if .HasExternalServiceConfigFields }}
+{{- range $_, $field := $fields }}
+type mock{{ $field.Name }} func() (value bool, ok bool, err error)
+
+func (m mock{{ $field.Name }}) {{ $field.ExternalConfigMethod.ResolverMethodName }}() (value bool, ok bool, err error) {
+	return m()
+}
+{{ end }}
+
+func TestExternalConfigResolver(t *testing.T) {
+	{{- range $_, $field := $fields }}
+	t.Run("{{ $field.Name }}", func(t *testing.T) {
+		t.Run("value not found", func(t *testing.T) {
+			svc := &{{ $.StructName }}{}
+			err := resolveServiceConfig(svc)([]interface{}{
+				mock{{ $field.Name }}(func() (value {{ $field.Type }}, ok bool, err error) {
+					return value, ok, err
+				}),
+			})
+			if err != nil {
+				t.Errorf("expected no error, got %v", err)
+			}
+			if e, a := {{ DefaultConfigFieldValue $field }}, svc.{{ $field.Name }}; e != a {
+				t.Errorf("expected %v, got %v", e, a)
+			}
+		})
+		t.Run("resolve error", func(t *testing.T) {
+			svc := &{{ $.StructName }}{}
+			err := resolveServiceConfig(svc)([]interface{}{
+				mock{{ $field.Name }}(func() (value {{ $field.Type }}, ok bool, err error) {
+					err = fmt.Errorf("resolve error")
+					return value, ok, err
+				}),
+			})
+			if err == nil {
+				t.Fatalf("expected error, got none")
+			}
+			if e, a := "resolve error", err.Error(); !strings.Contains(a, e) {
+				t.Errorf("expected %v, got %v", e, a)
+			}
+		})
+		t.Run("value found", func(t *testing.T) {
+			{{- $mockValue := MockConfigFieldValue $field -}}
+			svc := &{{ $.StructName }}{}
+			err := resolveServiceConfig(svc)([]interface{}{
+				mock{{ $field.Name }}(func() (value {{ $field.Type }}, ok bool, err error) {
+					value = {{ $mockValue }}
+					return value, true, err
+				}),
+			})
+			if err != nil {
+				t.Errorf("expected no error, got %v", err)
+			}
+			if e, a := {{ $mockValue }}, svc.{{ $field.Name }}; e != a {
+				t.Errorf("expected %v, got %v", e, a)
+			}
+		})
+	})
+	{{ end }}
+}
+{{- end }}
+`))

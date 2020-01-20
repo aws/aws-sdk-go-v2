@@ -104,11 +104,17 @@ type SharedConfig struct {
 	// the client's requests are sent to.
 	//
 	// s3_use_arn_region=true
-	S3UseARNRegion bool
+	S3UseARNRegion *bool
 }
 
-func (c *SharedConfig) GetS3UseARNRegion() (bool, error) {
-	return c.S3UseARNRegion, nil
+// GetS3UseARNRegion retions if the S3 service should allow ARNs to direct the region
+// the client's requests are sent to.
+func (c *SharedConfig) GetS3UseARNRegion() (value, ok bool, err error) {
+	if c.S3UseARNRegion == nil {
+		return false, false, nil
+	}
+
+	return *c.S3UseARNRegion, true, nil
 }
 
 // GetRegion returns the region for the profile if a region is set.
@@ -351,7 +357,10 @@ func (c *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) err
 	}
 
 	// S3 Use ARN Region
-	c.S3UseARNRegion = section.Bool(s3UseARNRegionKey)
+	if section.Has(s3UseARNRegionKey) {
+		v := section.Bool(s3UseARNRegionKey)
+		c.S3UseARNRegion = &v
+	}
 
 	return nil
 }

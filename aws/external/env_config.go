@@ -143,7 +143,7 @@ type EnvConfig struct {
 	// the client's requests are sent to.
 	//
 	// AWS_S3_USE_ARN_REGION=true
-	S3UseARNRegion bool
+	S3UseARNRegion *bool
 }
 
 // LoadEnvConfig reads configuration values from the OS's environment variables.
@@ -180,16 +180,20 @@ func NewEnvConfig() (EnvConfig, error) {
 
 	s3UseARNRegion := os.Getenv(S3UseARNRegionEnvVar)
 	if len(s3UseARNRegion) != 0 {
+		var v bool
+
 		switch {
 		case strings.EqualFold(s3UseARNRegion, "false"):
-			cfg.S3UseARNRegion = false
+			v = false
 		case strings.EqualFold(s3UseARNRegion, "true"):
-			cfg.S3UseARNRegion = true
+			v = true
 		default:
 			return cfg, fmt.Errorf(
 				"invalid value for environment variable, %s=%s, need true or false",
 				S3UseARNRegionEnvVar, s3UseARNRegion)
 		}
+
+		cfg.S3UseARNRegion = &v
 	}
 
 	return cfg, nil
@@ -252,8 +256,12 @@ func (c EnvConfig) GetCustomCABundle() ([]byte, error) {
 
 // GetS3UseARNRegion returns whether to allow ARNs to direct the region
 // the S3 client's requests are sent to.
-func (c EnvConfig) GetS3UseARNRegion() (bool, error) {
-	return c.S3UseARNRegion, nil
+func (c EnvConfig) GetS3UseARNRegion() (value, ok bool, err error) {
+	if c.S3UseARNRegion == nil {
+		return false, false, nil
+	}
+
+	return *c.S3UseARNRegion, true, nil
 }
 
 func setFromEnvVal(dst *string, keys []string) {

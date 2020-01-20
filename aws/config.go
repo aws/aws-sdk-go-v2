@@ -79,15 +79,14 @@ type Config struct {
 	// for testing that do not support the modeled host prefix pattern.
 	DisableEndpointHostPrefix bool
 
-	// ExternalConfig defines how additional configuration can be loaded by service
-	// clients.
-	ExternalConfig ExternalConfig
+	// ConfigResolver defines how additional configuration can be loaded by clients.
+	AdditionalConfig ConfigResolver
 }
 
-// ExternalConfig is an interface that encapsulates the behavior of loading
-// additional configuration from an external source.
-type ExternalConfig interface {
-	// ResolveConfig calls the provide function passing slice of configuration sources
+// ConfigResolver is an interface that encapsulates the behavior of loading
+// additional configuration.
+type ConfigResolver interface {
+	// ResolveConfig calls the provide function passing a slice of configuration sources
 	ResolveConfig(func(configs []interface{}) error) error
 }
 

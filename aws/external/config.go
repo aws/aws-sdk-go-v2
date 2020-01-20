@@ -100,7 +100,8 @@ func (cs Configs) ResolveAWSConfig(resolvers []AWSConfigResolver) (aws.Config, e
 	return cfg, nil
 }
 
-// ResolveConfig calls the provide function passing slice of configuration sources
+// ResolveConfig calls the provide function passing slice of configuration sources.
+// This implements the aws.ConfigResolver interface.
 func (cs Configs) ResolveConfig(f func(configs []interface{}) error) error {
 	var cfgs []interface{}
 	for i := range cs {

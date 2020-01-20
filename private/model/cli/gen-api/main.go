@@ -180,7 +180,7 @@ func writeServiceExternalConfig(g *generateInfo) error {
 		return nil
 	}
 
-	pkgName := g.SvcExtConfigInterfacesPackageName()
+	pkgName := g.ExternalConfigPackageName()
 	pkgPath := filepath.Join(g.PackageDir, "internal", pkgName)
 	err := os.MkdirAll(pkgPath, 0775)
 	if err != nil {
@@ -251,12 +251,30 @@ func writeExamplesFile(g *generateInfo) error {
 
 // writeServiceFile writes out the service initialization file.
 func writeServiceFile(g *generateInfo) error {
-	return writeGoFile(filepath.Join(g.PackageDir, "api_client.go"),
+	err := writeGoFile(filepath.Join(g.PackageDir, "api_client.go"),
 		codeLayout,
 		"",
 		g.API.PackageName(),
 		g.API.ServiceGoCode(),
 	)
+	if err != nil {
+		return err
+	}
+
+	svcTestCode := g.API.ServiceTestGoCode()
+	if len(svcTestCode) != 0 {
+		err = writeGoFile(filepath.Join(g.PackageDir, "api_client_test.go"),
+			codeLayout,
+			"",
+			g.API.PackageName(),
+			svcTestCode,
+		)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 // writeInterfaceFile writes out the service interface file.

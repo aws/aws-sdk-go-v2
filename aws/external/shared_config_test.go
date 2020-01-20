@@ -162,7 +162,7 @@ func TestNewSharedConfig(t *testing.T) {
 			Filenames: []string{testConfigFilename},
 			Expected: SharedConfig{
 				Profile:        "valid_arn_region",
-				S3UseARNRegion: true,
+				S3UseARNRegion: aws.Bool(true),
 			},
 		},
 	}

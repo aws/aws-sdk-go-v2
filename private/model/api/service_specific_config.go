@@ -4,7 +4,6 @@ package api
 
 import (
 	"bytes"
-	"fmt"
 	"text/template"
 )
 
@@ -29,28 +28,14 @@ func (s serviceConfigField) HasExternalConfigBinding() bool {
 	return s.ExternalConfigMethod != nil
 }
 
-func (s serviceConfigField) ConfigProviderInterfaceName() string {
-	return s.Name + "Resolver"
+// ExternalConfigInterfaceName returns the name of the external service config method name
+func (s serviceConfigField) ExternalConfigInterfaceName() string {
+	return s.Name + "Provider"
 }
 
-// ConfigProviderGoCode returns the string to render the config provider interface
-func (s serviceConfigField) ConfigProviderGoCode() string {
-	if !s.HasExternalConfigBinding() {
-		return ""
-	}
-
-	return fmt.Sprintf(`
-// %s is an interface for retrieving external configuration value for %s
-type %s interface {
-	%s() (%s, error)
-}
-`,
-		s.ConfigProviderInterfaceName(),
-		s.Name,
-		s.ConfigProviderInterfaceName(),
-		s.ExternalConfigMethod.ResolverMethodName,
-		s.Type,
-	)
+// ExternalConfigResolverName returns the name of the external service config resolver
+func (s serviceConfigField) ExternalConfigResolverName() string {
+	return "Resolve" + s.Name
 }
 
 type serviceConfigFields []serviceConfigField
@@ -149,9 +134,9 @@ var tplServiceConfigFields = template.Must(template.New("tplServiceConfigFields"
 {{ end }}
 `))
 
-var tplExtServiceConfigInterfaces = template.Must(template.New("tplExtServiceConfigInterfaces").Funcs(
+var tplExtServiceConfigResolvers = template.Must(template.New("tplExtServiceConfigResolvers").Funcs(
 	map[string]interface{}{
-		"ExternalServiceSpecificConfigs": func(a *API) serviceConfigFields {
+		"ExternalConfigFields": func(a *API) serviceConfigFields {
 			if !a.HasExternalServiceConfigFields() {
 				return nil
 			}
@@ -166,22 +151,41 @@ var tplExtServiceConfigInterfaces = template.Must(template.New("tplExtServiceCon
 			return fields
 		},
 	}).Parse(`
-{{ define "interfaces" }}
-	{{- $fields := ExternalServiceSpecificConfigs . -}}
-	{{- range $i, $field := $fields }}
-		{{ $field.ConfigProviderGoCode }}
+{{ define "resolvers" }}
+	{{- $fields := ExternalConfigFields . -}}
+	{{- range $_, $field := $fields }}
+		// {{ $field.ExternalConfigInterfaceName }} is an interface for retrieving external configuration value for {{ $field.Name }}
+		type {{ $field.ExternalConfigInterfaceName }} interface {
+			{{ $field.ExternalConfigMethod.ResolverMethodName }}() (value {{ $field.Type }}, ok bool, err error)
+		}
+
+		func {{ $field.ExternalConfigResolverName }}(configs []interface{}) (value {{ $field.Type }}, ok bool, err error) {
+			for _, cfg := range configs {
+				if p, pOk := cfg.({{ $field.ExternalConfigInterfaceName }}); pOk {
+					value, ok, err = p.{{ $field.ExternalConfigMethod.ResolverMethodName }}()
+					if err != nil {
+						return value, false, err
+					}
+					if ok {
+						break
+					}
+				}
+			}
+
+			return value, ok, err
+		}
 	{{ end }}
 {{ end }}
 {{ define "tests" }}
-	{{- $fields := ExternalServiceSpecificConfigs . -}}
+	{{- $fields := ExternalConfigFields . -}}
 	{{- range $i, $field := $fields }}
-		// {{ $field.ConfigProviderInterfaceName }} Assertions
+		// {{ $field.ExternalConfigInterfaceName }} Assertions
 		var (
 			{{- if $field.ExternalConfigMethod.MustResolveEnvConfig }}
-				_ {{ $.SvcExtConfigInterfacesPackageName }}.{{ $field.ConfigProviderInterfaceName }} = &external.EnvConfig{}
+				_ {{ $.ExternalConfigPackageName }}.{{ $field.ExternalConfigInterfaceName }} = &external.EnvConfig{}
 			{{- end }}
 			{{- if $field.ExternalConfigMethod.MustResolveSharedConfig }}
-				_ {{ $.SvcExtConfigInterfacesPackageName }}.{{ $field.ConfigProviderInterfaceName }} = &external.SharedConfig{}
+				_ {{ $.ExternalConfigPackageName }}.{{ $field.ExternalConfigInterfaceName }} = &external.SharedConfig{}
 			{{- end }}
 		)
 	{{ end }}

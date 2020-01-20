@@ -220,7 +220,7 @@ func TestNewEnvConfig(t *testing.T) {
 				"AWS_S3_USE_ARN_REGION": "true",
 			},
 			Config: EnvConfig{
-				S3UseARNRegion: true,
+				S3UseARNRegion: aws.Bool(true),
 			},
 		},
 	}

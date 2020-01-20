@@ -350,6 +350,6 @@ type WithS3UseARNRegion bool
 
 // GetS3UseARNRegion returns whether to enable usage of the region specified
 // in an ARN passed as an S3 bucket value.
-func (w WithS3UseARNRegion) GetS3UseARNRegion() (bool, error) {
-	return bool(w), nil
+func (w WithS3UseARNRegion) GetS3UseARNRegion() (value, ok bool, err error) {
+	return bool(w), true, nil
 }
