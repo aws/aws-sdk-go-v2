@@ -8,12 +8,17 @@ Breaking Change
 * `private/model`: Add utility for validating shape names for structs and enums for the service packages ([#471](https://github.com/aws/aws-sdk-go-v2/pull/471))
   * Fixes bug which allowed service package structs, enums to start with non alphabetic character 
   * Fixes the incorrect enum types in mediapackage service package, changing enum types __AdTriggersElement, __PeriodTriggersElement to AdTriggersElement, PeriodTriggersElement respectively.
+* `aws`: Client, Metadata, and Request structures have been refactored to simplify the usage of resolved endpoints ([#473](https://github.com/aws/aws-sdk-go-v2/pull/473))
+  * `aws.Client.Endpoint` struct member has been removed, and `aws.Request.Endpoint` struct member has been added of type `aws.Endpoint`
+  * `aws.Client.Region` structure member has been removed
 
 Services
 ---
 
 SDK Features
 ---
+* `aws`: `PartitionID` has been added to `aws.Endpoint` structure, and is used by the endpoint resolver to indicate which AWS partition an endpoint was resolved for ([#473](https://github.com/aws/aws-sdk-go-v2/pull/473))
+* `aws/endpoints`: Updated resolvers to populate `PartitionID` for a resolved `aws.Endpoint` ([#473](https://github.com/aws/aws-sdk-go-v2/pull/473))
 
 SDK Enhancements
 ---
