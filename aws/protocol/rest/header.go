@@ -43,17 +43,11 @@ func newHeaderValue(header http.Header, key string, append bool) HeaderValue {
 }
 
 func (h HeaderValue) modifyHeader(value string) {
-	lk := strings.ToLower(h.key)
-
-	val := h.header[lk]
-
 	if h.append {
-		val = append(val, value)
+		h.header.Add(h.key, value)
 	} else {
-		val = append(val[:0], value)
+		h.header.Set(h.key, value)
 	}
-
-	h.header[lk] = val
 }
 
 // String encodes the value v as the header string value
