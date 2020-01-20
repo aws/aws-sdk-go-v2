@@ -1157,7 +1157,7 @@ func TestRequestEndpointConstruction(t *testing.T) {
 		ExpectedEndpoint aws.Endpoint
 	}{
 		"resolved modeled endpoint": {
-			EndpointResolver: func(_, _ string) (endpoint aws.Endpoint, err error) {
+			EndpointResolver: func(_, _ string) (aws.Endpoint, error) {
 				return aws.Endpoint{
 					URL:           "https://localhost",
 					SigningName:   "foo-service",
@@ -1171,7 +1171,7 @@ func TestRequestEndpointConstruction(t *testing.T) {
 			},
 		},
 		"resolved endpoint missing signing region": {
-			EndpointResolver: func(_, _ string) (endpoint aws.Endpoint, err error) {
+			EndpointResolver: func(_, _ string) (aws.Endpoint, error) {
 				return aws.Endpoint{
 					URL:         "https://localhost",
 					SigningName: "foo-service",
@@ -1184,7 +1184,7 @@ func TestRequestEndpointConstruction(t *testing.T) {
 			},
 		},
 		"resolved endpoint missing signing name": {
-			EndpointResolver: func(_, _ string) (endpoint aws.Endpoint, err error) {
+			EndpointResolver: func(_, _ string) (aws.Endpoint, error) {
 				return aws.Endpoint{
 					URL:           "https://localhost",
 					SigningRegion: "bar-region",
@@ -1197,7 +1197,7 @@ func TestRequestEndpointConstruction(t *testing.T) {
 			},
 		},
 		"resolved endpoint signing name derived": {
-			EndpointResolver: func(_, _ string) (endpoint aws.Endpoint, err error) {
+			EndpointResolver: func(_, _ string) (aws.Endpoint, error) {
 				return aws.Endpoint{
 					URL:                "https://localhost",
 					SigningRegion:      "bar-region",
@@ -1210,6 +1210,18 @@ func TestRequestEndpointConstruction(t *testing.T) {
 				SigningName:        "meta-foo-service",
 				SigningRegion:      "bar-region",
 				SigningNameDerived: true,
+			},
+		},
+		"resolved endpoint missing signing region and signing name": {
+			EndpointResolver: func(_, _ string) (aws.Endpoint, error) {
+				return aws.Endpoint{
+					URL: "https://localhost",
+				}, nil
+			},
+			ExpectedEndpoint: aws.Endpoint{
+				URL:           "https://localhost",
+				SigningName:   "meta-foo-service",
+				SigningRegion: "meta-bar-region",
 			},
 		},
 	}
