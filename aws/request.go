@@ -116,7 +116,7 @@ func New(cfg Config, metadata Metadata, handlers Handlers,
 			endpoint.SigningRegion = metadata.SigningRegion
 		}
 
-		if len(endpoint.SigningName) == 0 && endpoint.SigningNameDerived {
+		if len(endpoint.SigningName) == 0 || (len(endpoint.SigningName) > 0 && endpoint.SigningNameDerived) {
 			endpoint.SigningName = metadata.SigningName
 		}
 
