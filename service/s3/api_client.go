@@ -6,6 +6,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
+	"github.com/aws/aws-sdk-go-v2/service/s3/internal/s3external"
 )
 
 // Client provides the API operation methods for making requests to
@@ -57,6 +58,10 @@ type Client struct {
 	// accelerate.
 	//
 	UseAccelerate bool
+
+	// Set this to `true` to use the region specified
+	// in the ARN, when an ARN is provided as an argument to a bucket parameter.
+	UseARNRegion bool
 }
 
 // Used for custom client initialization logic
@@ -91,6 +96,10 @@ func New(config aws.Config) *Client {
 		),
 	}
 
+	if config.ExternalConfig != nil {
+		config.ExternalConfig.ResolveConfig(resolveServiceConfig(svc))
+	}
+
 	// Handlers
 	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
 	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
@@ -117,4 +126,18 @@ func (c *Client) newRequest(op *aws.Operation, params, data interface{}) *aws.Re
 	}
 
 	return req
+}
+
+func resolveServiceConfig(svc *Client) func(configs []interface{}) error {
+	return func(configs []interface{}) error {
+		for _, cfg := range configs {
+			if c, ok := cfg.(s3external.UseARNRegionResolver); ok {
+				v, err := c.GetS3UseARNRegion()
+				if err != nil {
+					return err
+				}
+				svc.UseARNRegion = v
+			}
+		}
+	}
 }
