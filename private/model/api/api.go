@@ -670,7 +670,7 @@ func New(config aws.Config) *{{ .StructName }} {
 	{{ if .HasExternalServiceConfigFields }}
 		if config.AdditionalConfig != nil {
 			if err := config.AdditionalConfig.ResolveConfig(resolveServiceConfig(svc)); err != nil {
-				panic(fmt.Errorf("failed to resolve service configuration"))
+				panic(fmt.Errorf("failed to resolve service configuration: %v", err))
 			}
 		}
 	{{- end }}
