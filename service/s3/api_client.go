@@ -8,7 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
-	"github.com/aws/aws-sdk-go-v2/service/s3/internal/s3external"
+	"github.com/aws/aws-sdk-go-v2/service/s3/internal/external"
 )
 
 // Client provides the API operation methods for making requests to
@@ -100,7 +100,7 @@ func New(config aws.Config) *Client {
 
 	if config.AdditionalConfig != nil {
 		if err := config.AdditionalConfig.ResolveConfig(resolveServiceConfig(svc)); err != nil {
-			panic(fmt.Errorf("failed to resolve service configuration"))
+			panic(fmt.Errorf("failed to resolve service configuration: %v", err))
 		}
 	}
 
@@ -134,7 +134,7 @@ func (c *Client) newRequest(op *aws.Operation, params, data interface{}) *aws.Re
 
 func resolveServiceConfig(svc *Client) func(configs []interface{}) error {
 	return func(configs []interface{}) error {
-		if value, ok, err := s3external.ResolveUseARNRegion(configs); err != nil {
+		if value, ok, err := external.ResolveUseARNRegion(configs); err != nil {
 			return err
 		} else if ok {
 			svc.UseARNRegion = value
