@@ -60,7 +60,7 @@ type API struct {
 	BaseImportPath string
 
 	initialized bool
-	imports     map[string]bool
+	imports     map[packageImport]bool
 	serviceID   string
 	path        string
 
@@ -131,10 +131,16 @@ func (a *API) HasExternalServiceConfigFields() bool {
 	return false
 }
 
-// ExternalConfigPackageName returns the internal package name to generate external configuration
+// InternalConfigResolverPackageName returns the internal package name to generate external configuration
 // resolvers.
-func (a *API) ExternalConfigPackageName() string {
-	return strings.ToLower(a.ServiceID()) + "external"
+func (a *API) InternalConfigResolverPackageName() string {
+	return "external"
+}
+
+// ConfigResolverHelpersPackage returns the package name to generate external configuration
+// resolver helpers.
+func (a *API) ConfigResolverHelpersPackage() string {
+	return "external"
 }
 
 // UseInitMethods returns if the service's init method should be rendered.
@@ -245,7 +251,21 @@ func (a *API) ShapeEnumList() []*Shape {
 
 // resetImports resets the import map to default values.
 func (a *API) resetImports() {
-	a.imports = map[string]bool{}
+	a.imports = map[packageImport]bool{}
+}
+
+type packageImport struct {
+	Path  string
+	Alias string
+}
+
+// ImportSpec returns Go import specification string
+func (p packageImport) ImportSpec() string {
+	if len(p.Alias) != 0 {
+		return fmt.Sprintf("%s %q", p.Alias, p.Path)
+	} else {
+		return fmt.Sprintf("%q", p.Path)
+	}
 }
 
 // importsGoCode returns the generated Go import code.
@@ -254,26 +274,30 @@ func (a *API) importsGoCode() string {
 		return ""
 	}
 
-	corePkgs, extPkgs := []string{}, []string{}
+	corePkgs, extPkgs := []packageImport{}, []packageImport{}
 	for i := range a.imports {
-		if strings.Contains(i, ".") {
+		if strings.Contains(i.Path, ".") {
 			extPkgs = append(extPkgs, i)
 		} else {
 			corePkgs = append(corePkgs, i)
 		}
 	}
-	sort.Strings(corePkgs)
-	sort.Strings(extPkgs)
+	sort.Slice(corePkgs, func(i, j int) bool {
+		return corePkgs[i].Path < corePkgs[j].Path
+	})
+	sort.Slice(extPkgs, func(i, j int) bool {
+		return extPkgs[i].Path < extPkgs[j].Path
+	})
 
 	code := "import (\n"
 	for _, i := range corePkgs {
-		code += fmt.Sprintf("\t%q\n", i)
+		code += fmt.Sprintf("\t%s\n", i.ImportSpec())
 	}
 	if len(corePkgs) > 0 {
 		code += "\n"
 	}
 	for _, i := range extPkgs {
-		code += fmt.Sprintf("\t%q\n", i)
+		code += fmt.Sprintf("\t%s\n", i.ImportSpec())
 	}
 	code += ")\n\n"
 	return code
@@ -300,7 +324,13 @@ var tplAPI = template.Must(template.New("api").Parse(`
 
 // AddImport adds the import path to the generated file's import.
 func (a *API) AddImport(v string) error {
-	a.imports[v] = true
+	a.imports[packageImport{Path: v}] = true
+	return nil
+}
+
+// AddImportWithAlias adds the import path with the given alias to the generated file's import
+func (a *API) AddImportWithAlias(alias, path string) error {
+	a.imports[packageImport{Alias: alias, Path: path}] = true
 	return nil
 }
 
@@ -310,7 +340,17 @@ func (a *API) AddSDKImport(v ...string) error {
 	e = append(e, SDKImportRoot)
 	e = append(e, v...)
 
-	a.imports[path.Join(e...)] = true
+	a.imports[packageImport{Path: path.Join(e...)}] = true
+	return nil
+}
+
+// AddSDKImportWithAlias adds a SDK package import with the given alias to the generated file's import.
+func (a *API) AddSDKImportWithAlias(alias string, sdkPath ...string) error {
+	e := make([]string, 0, 5)
+	e = append(e, SDKImportRoot)
+	e = append(e, sdkPath...)
+
+	a.imports[packageImport{Alias: alias, Path: path.Join(e...)}] = true
 	return nil
 }
 
@@ -597,20 +637,7 @@ var tplService = template.Must(template.New("service").Funcs(template.FuncMap{
 		}
 		return serviceSpecificConfigs[a.ServiceID()].ServiceClientGoCode()
 	},
-	"ExternalServiceSpecificConfigs": func(a *API) serviceConfigFields {
-		if !a.HasExternalServiceConfigFields() {
-			return nil
-		}
-
-		var fields serviceConfigFields
-		for _, field := range serviceSpecificConfigs[a.ServiceID()] {
-			if field.HasExternalConfigBinding() {
-				fields = append(fields, field)
-			}
-		}
-
-		return fields
-	},
+	"ExternalServiceSpecificConfigs": externalConfigFields,
 }).Parse(`
 // {{ .StructName }} provides the API operation methods for making requests to
 // {{ .NiceName }}. See this package's package overview docs
@@ -716,7 +743,7 @@ func resolveServiceConfig(svc *{{ .StructName }}) func(configs []interface{}) er
 	return func(configs []interface{}) error {
 		{{- $fields := ExternalServiceSpecificConfigs . -}}
 		{{- range $idx, $field := $fields }}
-			if value, ok, err := {{ $.ExternalConfigPackageName }}.{{ $field.ExternalConfigResolverName }}(configs); err != nil {
+			if value, ok, err := {{ $.InternalConfigResolverPackageName }}.{{ $field.ExternalConfigResolverName }}(configs); err != nil {
 				return err
 			} else if ok {
 				svc.{{ $field.Name }} = value
@@ -732,7 +759,7 @@ func resolveServiceConfig(svc *{{ .StructName }}) func(configs []interface{}) er
 //
 // Will also read in the custom doc templates for the service if found.
 func (a *API) ServicePackageDoc() string {
-	a.imports = map[string]bool{}
+	a.imports = map[packageImport]bool{}
 
 	var buf bytes.Buffer
 	if err := tplServiceDoc.Execute(&buf, a); err != nil {
@@ -756,7 +783,7 @@ func (a *API) ServiceGoCode() string {
 
 	if a.HasExternalServiceConfigFields() {
 		a.AddImport("fmt")
-		a.AddSDKImport("service", a.PackageName(), "internal", a.ExternalConfigPackageName())
+		a.AddSDKImport("service", a.PackageName(), "internal", a.InternalConfigResolverPackageName())
 	}
 
 	var buf bytes.Buffer
@@ -792,13 +819,13 @@ func (a *API) ServiceTestGoCode() string {
 	return code
 }
 
-// SvcExtConfigInterfacesGoCode generates the specific code for loading external configuration
+// ExternalConfigResolversGoCode generates the specific code for loading external configuration
 // for the service client.
-func (a *API) SvcExtConfigInterfacesGoCode() string {
+func (a *API) ExternalConfigResolversGoCode() string {
 	a.resetImports()
 
 	var buf bytes.Buffer
-	err := tplExtServiceConfigResolvers.ExecuteTemplate(&buf, "resolvers", a)
+	err := tplExternalConfigResolvers.ExecuteTemplate(&buf, "resolvers", a)
 	if err != nil {
 		panic(err)
 	}
@@ -806,15 +833,28 @@ func (a *API) SvcExtConfigInterfacesGoCode() string {
 	return a.importsGoCode() + buf.String()
 }
 
-// SvcExtConfigInterfacesTestGoCode generates the specific code for loading external configuration
+// ExternalConfigResolversTestGoCode generates the specific code for loading external configuration
 // for the service client.
-func (a *API) SvcExtConfigInterfacesTestGoCode() string {
+func (a *API) ExternalConfigResolversTestGoCode() string {
 	a.resetImports()
 	a.AddSDKImport("aws", "external")
-	a.AddSDKImport("service", a.PackageName(), "internal", a.ExternalConfigPackageName())
+	a.AddSDKImportWithAlias("svcExternal", "service", a.PackageName(), "internal", a.InternalConfigResolverPackageName())
 
 	var buf bytes.Buffer
-	err := tplExtServiceConfigResolvers.ExecuteTemplate(&buf, "tests", a)
+	err := tplExternalConfigResolvers.ExecuteTemplate(&buf, "tests", a)
+	if err != nil {
+		panic(err)
+	}
+
+	return a.importsGoCode() + buf.String()
+}
+
+// ExternalConfigHelpersGoCode generates helper provders for use with external configuration loading
+func (a *API) ExternalConfigHelpersGoCode() string {
+	a.resetImports()
+
+	var buf bytes.Buffer
+	err := tplExternalConfigHelpers.Execute(&buf, a)
 	if err != nil {
 		panic(err)
 	}
@@ -1104,17 +1144,7 @@ func (a *API) hasNonIOShapes() bool {
 
 var tplServiceClientTests = template.Must(template.New("tplServiceClientTests").
 	Funcs(map[string]interface{}{
-		"ExternalConfigFields": func(a *API) serviceConfigFields {
-			var fields serviceConfigFields
-
-			for _, field := range serviceSpecificConfigs[a.ServiceID()] {
-				if field.HasExternalConfigBinding() {
-					fields = append(fields, field)
-				}
-			}
-
-			return fields
-		},
+		"ExternalConfigFields": externalConfigFields,
 		"MockConfigFieldValue": func(s serviceConfigField) (string, error) {
 			switch s.Type {
 			case "bool":
@@ -1146,7 +1176,7 @@ var tplServiceClientTests = template.Must(template.New("tplServiceClientTests").
 {{- range $_, $field := $fields }}
 type mock{{ $field.Name }} func() (value bool, ok bool, err error)
 
-func (m mock{{ $field.Name }}) {{ $field.ExternalConfigMethod.ResolverMethodName }}() (value bool, ok bool, err error) {
+func (m mock{{ $field.Name }}) {{ $field.ExternalConfigBinding.ResolverMethodName }}() (value bool, ok bool, err error) {
 	return m()
 }
 {{ end }}

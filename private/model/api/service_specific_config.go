@@ -4,6 +4,7 @@ package api
 
 import (
 	"bytes"
+	"fmt"
 	"text/template"
 )
 
@@ -19,23 +20,28 @@ type serviceConfigField struct {
 	Doc  string
 	Type string
 
-	ExternalConfigMethod *externalConfigBinding
+	ExternalConfigBinding *externalConfigBinding
 }
 
 // HasExternalConfigBinding returns whether the service config field binds to an externally resolve
 // configuration property.
 func (s serviceConfigField) HasExternalConfigBinding() bool {
-	return s.ExternalConfigMethod != nil
+	return s.ExternalConfigBinding != nil
 }
 
-// ExternalConfigInterfaceName returns the name of the external service config method name
-func (s serviceConfigField) ExternalConfigInterfaceName() string {
+// ExternalConfigProviderName returns the name of the external service config method name
+func (s serviceConfigField) ExternalConfigProviderName() string {
 	return s.Name + "Provider"
 }
 
 // ExternalConfigResolverName returns the name of the external service config resolver
 func (s serviceConfigField) ExternalConfigResolverName() string {
 	return "Resolve" + s.Name
+}
+
+// ExternalConfigProviderSignature returns the signature of the external config resolver method
+func (s serviceConfigField) ExternalConfigProviderSignature() string {
+	return fmt.Sprintf("%s() (value %s, ok bool, err error)", s.ExternalConfigBinding.ResolverMethodName, s.Type)
 }
 
 type serviceConfigFields []serviceConfigField
@@ -99,7 +105,7 @@ accelerate.
 			Name: "UseARNRegion", Type: "bool",
 			Doc: `Set this to ` + "`true`" + ` to use the region specified
 in the ARN, when an ARN is provided as an argument to a bucket parameter.`,
-			ExternalConfigMethod: &externalConfigBinding{
+			ExternalConfigBinding: &externalConfigBinding{
 				ResolverMethodName:      "GetS3UseARNRegion",
 				MustResolveEnvConfig:    true,
 				MustResolveSharedConfig: true,
@@ -134,35 +140,36 @@ var tplServiceConfigFields = template.Must(template.New("tplServiceConfigFields"
 {{ end }}
 `))
 
-var tplExtServiceConfigResolvers = template.Must(template.New("tplExtServiceConfigResolvers").Funcs(
+var tplExternalConfigHelpers = template.Must(template.New("tplExternalConfigHelpers").Funcs(
 	map[string]interface{}{
-		"ExternalConfigFields": func(a *API) serviceConfigFields {
-			if !a.HasExternalServiceConfigFields() {
-				return nil
-			}
+		"ExternalConfigFields": externalConfigFields,
+	}).Parse(`
+{{- $fields := ExternalConfigFields . -}}
+{{- range $_, $field := $fields }}
+type With{{ $field.Name }} {{ $field.Type }}
 
-			var fields serviceConfigFields
-			for _, field := range serviceSpecificConfigs[a.ServiceID()] {
-				if field.HasExternalConfigBinding() {
-					fields = append(fields, field)
-				}
-			}
+func (v With{{ $field.Name }}) {{ $field.ExternalConfigProviderSignature }} {
+	return {{ $field.Type }}(v), true, nil
+}
+{{ end }}
+`))
 
-			return fields
-		},
+var tplExternalConfigResolvers = template.Must(template.New("tplExternalConfigResolvers").Funcs(
+	map[string]interface{}{
+		"ExternalConfigFields": externalConfigFields,
 	}).Parse(`
 {{ define "resolvers" }}
 	{{- $fields := ExternalConfigFields . -}}
 	{{- range $_, $field := $fields }}
-		// {{ $field.ExternalConfigInterfaceName }} is an interface for retrieving external configuration value for {{ $field.Name }}
-		type {{ $field.ExternalConfigInterfaceName }} interface {
-			{{ $field.ExternalConfigMethod.ResolverMethodName }}() (value {{ $field.Type }}, ok bool, err error)
+		// {{ $field.ExternalConfigProviderName }} is an interface for retrieving external configuration value for {{ $field.Name }}
+		type {{ $field.ExternalConfigProviderName }} interface {
+			{{ $field.ExternalConfigProviderSignature }}
 		}
 
 		func {{ $field.ExternalConfigResolverName }}(configs []interface{}) (value {{ $field.Type }}, ok bool, err error) {
 			for _, cfg := range configs {
-				if p, pOk := cfg.({{ $field.ExternalConfigInterfaceName }}); pOk {
-					value, ok, err = p.{{ $field.ExternalConfigMethod.ResolverMethodName }}()
+				if p, pOk := cfg.({{ $field.ExternalConfigProviderName }}); pOk {
+					value, ok, err = p.{{ $field.ExternalConfigBinding.ResolverMethodName }}()
 					if err != nil {
 						return value, false, err
 					}
@@ -179,15 +186,30 @@ var tplExtServiceConfigResolvers = template.Must(template.New("tplExtServiceConf
 {{ define "tests" }}
 	{{- $fields := ExternalConfigFields . -}}
 	{{- range $i, $field := $fields }}
-		// {{ $field.ExternalConfigInterfaceName }} Assertions
+		// {{ $field.ExternalConfigProviderName }} Assertions
 		var (
-			{{- if $field.ExternalConfigMethod.MustResolveEnvConfig }}
-				_ {{ $.ExternalConfigPackageName }}.{{ $field.ExternalConfigInterfaceName }} = &external.EnvConfig{}
+			{{- if $field.ExternalConfigBinding.MustResolveEnvConfig }}
+				_ svcExternal.{{ $field.ExternalConfigProviderName }} = &external.EnvConfig{}
 			{{- end }}
-			{{- if $field.ExternalConfigMethod.MustResolveSharedConfig }}
-				_ {{ $.ExternalConfigPackageName }}.{{ $field.ExternalConfigInterfaceName }} = &external.SharedConfig{}
+			{{- if $field.ExternalConfigBinding.MustResolveSharedConfig }}
+				_ svcExternal.{{ $field.ExternalConfigProviderName }} = &external.SharedConfig{}
 			{{- end }}
 		)
 	{{ end }}
 {{ end }}
 `))
+
+func externalConfigFields(a *API) serviceConfigFields {
+	if !a.HasExternalServiceConfigFields() {
+		return nil
+	}
+
+	var fields serviceConfigFields
+	for _, field := range serviceSpecificConfigs[a.ServiceID()] {
+		if field.HasExternalConfigBinding() {
+			fields = append(fields, field)
+		}
+	}
+
+	return fields
+}

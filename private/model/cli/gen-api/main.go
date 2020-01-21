@@ -180,7 +180,7 @@ func writeServiceExternalConfig(g *generateInfo) error {
 		return nil
 	}
 
-	pkgName := g.ExternalConfigPackageName()
+	pkgName := g.InternalConfigResolverPackageName()
 	pkgPath := filepath.Join(g.PackageDir, "internal", pkgName)
 	err := os.MkdirAll(pkgPath, 0775)
 	if err != nil {
@@ -192,16 +192,41 @@ func writeServiceExternalConfig(g *generateInfo) error {
 		codeLayout,
 		"",
 		pkgName,
-		g.SvcExtConfigInterfacesGoCode(),
+		g.ExternalConfigResolversGoCode(),
 	)
+	if err != nil {
+		return err
+	}
 
 	err = writeGoFile(
 		filepath.Join(pkgPath, fmt.Sprintf("%s_test.go", pkgName)),
 		codeLayout,
 		"",
 		pkgName+"_test",
-		g.SvcExtConfigInterfacesTestGoCode(),
+		g.ExternalConfigResolversTestGoCode(),
 	)
+	if err != nil {
+		return err
+	}
+
+	// Generate Helpers
+	pkgName = g.ConfigResolverHelpersPackage()
+	pkgPath = filepath.Join(g.PackageDir, pkgName)
+	err = os.MkdirAll(pkgPath, 0775)
+	if err != nil {
+		return fmt.Errorf("failed to create package directory: %v", err)
+	}
+
+	err = writeGoFile(
+		filepath.Join(pkgPath, fmt.Sprintf("%s.go", pkgName)),
+		codeLayout,
+		"",
+		pkgName,
+		g.ExternalConfigHelpersGoCode(),
+	)
+	if err != nil {
+		return err
+	}
 
 	return err
 }

@@ -162,7 +162,7 @@ WaitUntil{{ .Name }}(context.Context, {{ .Operation.InputRef.GoTypeWithPkgName }
 // InterfaceSignature returns a string representing the Waiter's interface
 // function signature.
 func (w *Waiter) InterfaceSignature() string {
-	w.Operation.API.imports["context"] = true
+	w.Operation.API.imports[packageImport{Path: "context"}] = true
 
 	var buf bytes.Buffer
 	if err := waiterTmpls.ExecuteTemplate(&buf, "waiter interface", w); err != nil {

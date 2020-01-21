@@ -343,13 +343,3 @@ func NewWithEC2MetadataRegion(ctx context.Context, client *ec2metadata.Client) W
 func (p WithEC2MetadataRegion) GetRegion() (string, error) {
 	return p.client.Region(p.ctx)
 }
-
-// WithS3UseARNRegion is used to specify whether to enable usage of the region specified
-// in an ARN passed as an S3 bucket value.
-type WithS3UseARNRegion bool
-
-// GetS3UseARNRegion returns whether to enable usage of the region specified
-// in an ARN passed as an S3 bucket value.
-func (w WithS3UseARNRegion) GetS3UseARNRegion() (value, ok bool, err error) {
-	return bool(w), true, nil
-}
