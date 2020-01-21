@@ -2,7 +2,23 @@
 
 package s3external
 
-// UseARNRegionResolver is an interface for retrieving external configuration value for UseARNRegion
-type UseARNRegionResolver interface {
-	GetS3UseARNRegion() (bool, error)
+// UseARNRegionProvider is an interface for retrieving external configuration value for UseARNRegion
+type UseARNRegionProvider interface {
+	GetS3UseARNRegion() (value bool, ok bool, err error)
+}
+
+func ResolveUseARNRegion(configs []interface{}) (value bool, ok bool, err error) {
+	for _, cfg := range configs {
+		if p, pOk := cfg.(UseARNRegionProvider); pOk {
+			value, ok, err = p.GetS3UseARNRegion()
+			if err != nil {
+				return value, false, err
+			}
+			if ok {
+				break
+			}
+		}
+	}
+
+	return value, ok, err
 }

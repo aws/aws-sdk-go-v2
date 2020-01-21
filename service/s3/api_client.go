@@ -3,6 +3,8 @@
 package s3
 
 import (
+	"fmt"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
@@ -96,8 +98,10 @@ func New(config aws.Config) *Client {
 		),
 	}
 
-	if config.ExternalConfig != nil {
-		config.ExternalConfig.ResolveConfig(resolveServiceConfig(svc))
+	if config.AdditionalConfig != nil {
+		if err := config.AdditionalConfig.ResolveConfig(resolveServiceConfig(svc)); err != nil {
+			panic(fmt.Errorf("failed to resolve service configuration"))
+		}
 	}
 
 	// Handlers
@@ -130,14 +134,12 @@ func (c *Client) newRequest(op *aws.Operation, params, data interface{}) *aws.Re
 
 func resolveServiceConfig(svc *Client) func(configs []interface{}) error {
 	return func(configs []interface{}) error {
-		for _, cfg := range configs {
-			if c, ok := cfg.(s3external.UseARNRegionResolver); ok {
-				v, err := c.GetS3UseARNRegion()
-				if err != nil {
-					return err
-				}
-				svc.UseARNRegion = v
-			}
+		if value, ok, err := s3external.ResolveUseARNRegion(configs); err != nil {
+			return err
+		} else if ok {
+			svc.UseARNRegion = value
 		}
+
+		return nil
 	}
 }

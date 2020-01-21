@@ -7,8 +7,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3/internal/s3external"
 )
 
-// UseARNRegionResolver Assertions
+// UseARNRegionProvider Assertions
 var (
-	_ s3external.UseARNRegionResolver = &external.EnvConfig{}
-	_ s3external.UseARNRegionResolver = &external.SharedConfig{}
+	_ s3external.UseARNRegionProvider = &external.EnvConfig{}
+	_ s3external.UseARNRegionProvider = &external.SharedConfig{}
 )
