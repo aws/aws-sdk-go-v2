@@ -7,6 +7,8 @@ type UseARNRegionProvider interface {
 	GetS3UseARNRegion() (value bool, ok bool, err error)
 }
 
+// ResolveUseARNRegion extracts the first instance of a UseARNRegion from the config slice.
+// Additionally returns a boolean to indicate if the value was found in provided configs, and error if one is encountered.
 func ResolveUseARNRegion(configs []interface{}) (value bool, ok bool, err error) {
 	for _, cfg := range configs {
 		if p, pOk := cfg.(UseARNRegionProvider); pOk {
