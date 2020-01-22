@@ -209,26 +209,7 @@ func writeServiceExternalConfig(g *generateInfo) error {
 		return err
 	}
 
-	// Generate Helpers
-	pkgName = g.ConfigResolverHelpersPackage()
-	pkgPath = filepath.Join(g.PackageDir, pkgName)
-	err = os.MkdirAll(pkgPath, 0775)
-	if err != nil {
-		return fmt.Errorf("failed to create package directory: %v", err)
-	}
-
-	err = writeGoFile(
-		filepath.Join(pkgPath, fmt.Sprintf("%s.go", pkgName)),
-		codeLayout,
-		"",
-		pkgName,
-		g.ExternalConfigHelpersGoCode(),
-	)
-	if err != nil {
-		return err
-	}
-
-	return err
+	return nil
 }
 
 // Must will panic if the error passed in is not nil.

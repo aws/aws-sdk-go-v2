@@ -140,20 +140,6 @@ var tplServiceConfigFields = template.Must(template.New("tplServiceConfigFields"
 {{ end }}
 `))
 
-var tplExternalConfigHelpers = template.Must(template.New("tplExternalConfigHelpers").Funcs(
-	map[string]interface{}{
-		"ExternalConfigFields": externalConfigFields,
-	}).Parse(`
-{{- $fields := ExternalConfigFields . -}}
-{{- range $_, $field := $fields }}
-type With{{ $field.Name }} {{ $field.Type }}
-
-func (v With{{ $field.Name }}) {{ $field.ExternalConfigProviderSignature }} {
-	return {{ $field.Type }}(v), true, nil
-}
-{{ end }}
-`))
-
 var tplExternalConfigResolvers = template.Must(template.New("tplExternalConfigResolvers").Funcs(
 	map[string]interface{}{
 		"ExternalConfigFields": externalConfigFields,
@@ -166,6 +152,8 @@ var tplExternalConfigResolvers = template.Must(template.New("tplExternalConfigRe
 			{{ $field.ExternalConfigProviderSignature }}
 		}
 
+		// {{ $field.ExternalConfigResolverName }} extracts the first instance of a {{ $field.Name }} from the config slice.
+		// Additionally returns a boolean to indicate if the value was found in provided configs, and error if one is encountered.
 		func {{ $field.ExternalConfigResolverName }}(configs []interface{}) (value {{ $field.Type }}, ok bool, err error) {
 			for _, cfg := range configs {
 				if p, pOk := cfg.({{ $field.ExternalConfigProviderName }}); pOk {

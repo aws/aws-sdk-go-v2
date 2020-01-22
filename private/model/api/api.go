@@ -849,19 +849,6 @@ func (a *API) ExternalConfigResolversTestGoCode() string {
 	return a.importsGoCode() + buf.String()
 }
 
-// ExternalConfigHelpersGoCode generates helper provders for use with external configuration loading
-func (a *API) ExternalConfigHelpersGoCode() string {
-	a.resetImports()
-
-	var buf bytes.Buffer
-	err := tplExternalConfigHelpers.Execute(&buf, a)
-	if err != nil {
-		panic(err)
-	}
-
-	return a.importsGoCode() + buf.String()
-}
-
 // ExampleGoCode renders service example code. Returning it as a string.
 func (a *API) ExampleGoCode() string {
 	exs := []string{}
