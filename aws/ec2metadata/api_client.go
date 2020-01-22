@@ -227,7 +227,7 @@ func unmarshalError(r *aws.Request) {
 }
 
 func validateEndpointHandler(r *aws.Request) {
-	if r.Metadata.Endpoint == "" {
+	if len(r.Endpoint.URL) == 0 {
 		r.Error = aws.ErrMissingEndpoint
 	}
 }

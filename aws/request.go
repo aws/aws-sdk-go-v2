@@ -36,6 +36,7 @@ const (
 type Request struct {
 	Config           Config
 	Metadata         Metadata
+	Endpoint         Endpoint
 	Handlers         Handlers
 	Retryer          Retryer
 	AttemptTime      time.Time
@@ -111,12 +112,12 @@ func New(cfg Config, metadata Metadata, handlers Handlers,
 
 	if err == nil {
 		// TODO so ugly
-		metadata.Endpoint = endpoint.URL
-		if len(endpoint.SigningName) > 0 && !endpoint.SigningNameDerived {
-			metadata.SigningName = endpoint.SigningName
+		if len(endpoint.SigningRegion) == 0 {
+			endpoint.SigningRegion = metadata.SigningRegion
 		}
-		if len(endpoint.SigningRegion) > 0 {
-			metadata.SigningRegion = endpoint.SigningRegion
+
+		if len(endpoint.SigningName) == 0 || (len(endpoint.SigningName) > 0 && endpoint.SigningNameDerived) {
+			endpoint.SigningName = metadata.SigningName
 		}
 
 		httpReq.URL, err = url.Parse(endpoint.URL + operation.HTTPPath)
@@ -127,10 +128,10 @@ func New(cfg Config, metadata Metadata, handlers Handlers,
 	}
 
 	r := &Request{
-		Config:   cfg,
-		Metadata: metadata,
-		Handlers: handlers.Copy(),
-
+		Config:      cfg,
+		Metadata:    metadata,
+		Endpoint:    endpoint,
+		Handlers:    handlers.Copy(),
 		Retryer:     retryer,
 		Time:        time.Now(),
 		ExpireTime:  0,
