@@ -754,7 +754,6 @@ func TestSerializationErrConnectionReset(t *testing.T) {
 		ServiceName:   "fooService",
 		SigningName:   "foo",
 		SigningRegion: "foo",
-		Endpoint:      "localhost",
 		APIVersion:    "2001-01-01",
 		JSONVersion:   "1.1",
 		TargetPrefix:  "Foo",
@@ -1150,4 +1149,98 @@ func (f *stubSeekFail) ReadAt(b []byte, offset int64) (int, error) {
 }
 func (f *stubSeekFail) Seek(offset int64, mode int) (int64, error) {
 	return 0, f.Err
+}
+
+func TestRequestEndpointConstruction(t *testing.T) {
+	cases := map[string]struct {
+		EndpointResolver aws.EndpointResolverFunc
+		ExpectedEndpoint aws.Endpoint
+	}{
+		"resolved modeled endpoint": {
+			EndpointResolver: func(_, _ string) (aws.Endpoint, error) {
+				return aws.Endpoint{
+					URL:           "https://localhost",
+					SigningName:   "foo-service",
+					SigningRegion: "bar-region",
+				}, nil
+			},
+			ExpectedEndpoint: aws.Endpoint{
+				URL:           "https://localhost",
+				SigningName:   "foo-service",
+				SigningRegion: "bar-region",
+			},
+		},
+		"resolved endpoint missing signing region": {
+			EndpointResolver: func(_, _ string) (aws.Endpoint, error) {
+				return aws.Endpoint{
+					URL:         "https://localhost",
+					SigningName: "foo-service",
+				}, nil
+			},
+			ExpectedEndpoint: aws.Endpoint{
+				URL:           "https://localhost",
+				SigningName:   "foo-service",
+				SigningRegion: "meta-bar-region",
+			},
+		},
+		"resolved endpoint missing signing name": {
+			EndpointResolver: func(_, _ string) (aws.Endpoint, error) {
+				return aws.Endpoint{
+					URL:           "https://localhost",
+					SigningRegion: "bar-region",
+				}, nil
+			},
+			ExpectedEndpoint: aws.Endpoint{
+				URL:           "https://localhost",
+				SigningName:   "meta-foo-service",
+				SigningRegion: "bar-region",
+			},
+		},
+		"resolved endpoint signing name derived": {
+			EndpointResolver: func(_, _ string) (aws.Endpoint, error) {
+				return aws.Endpoint{
+					URL:                "https://localhost",
+					SigningRegion:      "bar-region",
+					SigningName:        "derived-signing-name",
+					SigningNameDerived: true,
+				}, nil
+			},
+			ExpectedEndpoint: aws.Endpoint{
+				URL:                "https://localhost",
+				SigningName:        "meta-foo-service",
+				SigningRegion:      "bar-region",
+				SigningNameDerived: true,
+			},
+		},
+		"resolved endpoint missing signing region and signing name": {
+			EndpointResolver: func(_, _ string) (aws.Endpoint, error) {
+				return aws.Endpoint{
+					URL: "https://localhost",
+				}, nil
+			},
+			ExpectedEndpoint: aws.Endpoint{
+				URL:           "https://localhost",
+				SigningName:   "meta-foo-service",
+				SigningRegion: "meta-bar-region",
+			},
+		},
+	}
+
+	meta := aws.Metadata{
+		ServiceName:   "FooService",
+		SigningName:   "meta-foo-service",
+		SigningRegion: "meta-bar-region",
+	}
+
+	for name, tt := range cases {
+		t.Run(name, func(t *testing.T) {
+			client := aws.NewClient(aws.Config{EndpointResolver: tt.EndpointResolver}, meta)
+
+			request := client.NewRequest(&aws.Operation{Name: "ZapOperation", HTTPMethod: "PUT", HTTPPath: "/"}, nil, nil)
+
+			if e, a := tt.ExpectedEndpoint, request.Endpoint; !reflect.DeepEqual(e, a) {
+				t.Errorf("expected %v, got %v", e, a)
+			}
+		})
+	}
 }

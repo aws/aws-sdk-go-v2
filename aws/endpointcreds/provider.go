@@ -134,7 +134,7 @@ func (p *Provider) getCredentials(ctx context.Context) (*getCredentialsOutput, e
 }
 
 func validateEndpointHandler(r *aws.Request) {
-	if len(r.Metadata.Endpoint) == 0 {
+	if len(r.Endpoint.URL) == 0 {
 		r.Error = aws.ErrMissingEndpoint
 	}
 }
