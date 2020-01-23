@@ -188,7 +188,7 @@ var tplExternalConfigResolvers = template.Must(template.New("tplExternalConfigRe
 `))
 
 func externalConfigFields(a *API) serviceConfigFields {
-	if !a.HasExternalServiceConfigFields() {
+	if !a.HasExternalClientConfigFields() {
 		return nil
 	}
 

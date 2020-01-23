@@ -449,7 +449,7 @@ func generateTestSuite(filename string) string {
 			s.Rename(svcPrefix + "TestShape" + name)
 		}
 
-		svcCode := addImports(suite.API.ServiceGoCode())
+		svcCode := addImports(suite.API.ClientGoCode())
 		if i == 0 {
 			importMatch := reImportRemoval.FindStringSubmatch(svcCode)
 			buf.WriteString(importMatch[0] + "\n\n")
