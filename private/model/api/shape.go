@@ -271,7 +271,7 @@ func (s *Shape) GoStructType(name string, ref *ShapeRef) string {
 			rtype = "io.ReadCloser"
 		}
 
-		s.API.imports["io"] = true
+		s.API.imports[packageImport{Path: "io"}] = true
 		return rtype
 	}
 
@@ -283,7 +283,7 @@ func (s *Shape) GoStructType(name string, ref *ShapeRef) string {
 	for _, v := range s.Validations {
 		// TODO move this to shape validation resolution
 		if (v.Ref.Shape.Type == "map" || v.Ref.Shape.Type == "list") && v.Type == ShapeValidationNested {
-			s.API.imports["fmt"] = true
+			s.API.imports[packageImport{Path: "fmt"}] = true
 		}
 	}
 
@@ -318,7 +318,7 @@ func (ref *ShapeRef) GoTypeWithPkgName() string {
 func getPkgName(s *Shape) string {
 	pkg := s.resolvePkg
 	if pkg != "" {
-		s.API.imports[pkg] = true
+		s.API.imports[packageImport{Path: pkg}] = true
 		pkg = path.Base(pkg)
 	} else {
 		pkg = s.API.PackageName()
@@ -368,7 +368,7 @@ func goType(s *Shape, withPkgName, pointer bool) string {
 	case "float", "double":
 		return prefix + "float64"
 	case "timestamp":
-		s.API.imports["time"] = true
+		s.API.imports[packageImport{Path: "time"}] = true
 		return prefix + "time.Time"
 	default:
 		panic("Unsupported shape type: " + s.Type)

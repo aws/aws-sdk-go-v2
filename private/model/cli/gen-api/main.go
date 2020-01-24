@@ -159,7 +159,8 @@ func writeServiceFiles(g *generateInfo, pkgDir string) {
 	// write files for service client and API
 	Must(writeServiceDocFile(g))
 	Must(writeAPIFile(g))
-	Must(writeServiceFile(g))
+	Must(writeClientFile(g))
+	Must(writeClientConfig(g))
 	Must(writeInterfaceFile(g))
 	Must(writeWaitersFile(g))
 	Must(writeAPIErrorsFile(g))
@@ -172,6 +173,63 @@ func writeServiceFiles(g *generateInfo, pkgDir string) {
 	if len(g.API.SmokeTests.TestCases) > 0 {
 		Must(writeAPISmokeTestsFile(g))
 	}
+}
+
+func writeClientConfig(g *generateInfo) error {
+	if !g.HasExternalClientConfigFields() {
+		return nil
+	}
+
+	err := writeGoFile(filepath.Join(g.PackageDir, "api_client_config.go"),
+		codeLayout,
+		"",
+		g.API.PackageName(),
+		g.API.ClientConfigGoCode(),
+	)
+	if err != nil {
+		return err
+	}
+
+	err = writeGoFile(filepath.Join(g.PackageDir, "api_client_config_test.go"),
+		codeLayout,
+		"",
+		g.API.PackageName(),
+		g.API.ClientConfigTestsGoCode(),
+	)
+	if err != nil {
+		return err
+	}
+
+	pkgName := g.InternalConfigResolverPackageName()
+	pkgPath := filepath.Join(g.PackageDir, "internal", pkgName)
+	err = os.MkdirAll(pkgPath, 0775)
+	if err != nil {
+		return fmt.Errorf("failed to create package directory: %v", err)
+	}
+
+	err = writeGoFile(
+		filepath.Join(pkgPath, fmt.Sprintf("%s.go", pkgName)),
+		codeLayout,
+		"",
+		pkgName,
+		g.ClientConfigResolversGoCode(),
+	)
+	if err != nil {
+		return err
+	}
+
+	err = writeGoFile(
+		filepath.Join(pkgPath, fmt.Sprintf("%s_test.go", pkgName)),
+		codeLayout,
+		"",
+		pkgName+"_test",
+		g.ClientConfigResolversTestGoCode(),
+	)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // Must will panic if the error passed in is not nil.
@@ -197,7 +255,7 @@ func writeGoFile(file string, layout string, args ...interface{}) error {
 func writeServiceDocFile(g *generateInfo) error {
 	return writeGoFile(filepath.Join(g.PackageDir, "api_doc.go"),
 		codeLayout,
-		strings.TrimSpace(g.API.ServicePackageDoc()),
+		strings.TrimSpace(g.API.ClientPackageDoc()),
 		g.API.PackageName(),
 		"",
 	)
@@ -217,14 +275,19 @@ func writeExamplesFile(g *generateInfo) error {
 	return nil
 }
 
-// writeServiceFile writes out the service initialization file.
-func writeServiceFile(g *generateInfo) error {
-	return writeGoFile(filepath.Join(g.PackageDir, "api_client.go"),
+// writeClientFile writes out the service initialization file.
+func writeClientFile(g *generateInfo) error {
+	err := writeGoFile(filepath.Join(g.PackageDir, "api_client.go"),
 		codeLayout,
 		"",
 		g.API.PackageName(),
-		g.API.ServiceGoCode(),
+		g.API.ClientGoCode(),
 	)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // writeInterfaceFile writes out the service interface file.

@@ -215,6 +215,14 @@ func TestNewEnvConfig(t *testing.T) {
 				SharedConfigFile:      "/path/to/config/file",
 			},
 		},
+		{
+			Env: map[string]string{
+				"AWS_S3_USE_ARN_REGION": "true",
+			},
+			Config: EnvConfig{
+				S3UseARNRegion: aws.Bool(true),
+			},
+		},
 	}
 
 	for _, c := range cases {

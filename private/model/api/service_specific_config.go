@@ -4,28 +4,60 @@ package api
 
 import (
 	"bytes"
+	"fmt"
 	"text/template"
 )
 
-type serviceConfigField struct {
+type externalConfigBinding struct {
+	ResolverMethodName string
+
+	MustResolveEnvConfig    bool
+	MustResolveSharedConfig bool
+}
+
+type clientConfigField struct {
 	Name string
 	Doc  string
 	Type string
+
+	ExternalConfigBinding *externalConfigBinding
 }
 
-type serviceConfigFields []serviceConfigField
+// HasExternalConfigBinding returns whether the service config field binds to an externally resolve
+// configuration property.
+func (s clientConfigField) HasExternalConfigBinding() bool {
+	return s.ExternalConfigBinding != nil
+}
 
-func (fs serviceConfigFields) GoCode() string {
+// ExternalConfigProviderName returns the name of the external service config method name
+func (s clientConfigField) ExternalConfigProviderName() string {
+	return s.Name + "Provider"
+}
+
+// ExternalConfigResolverName returns the name of the external service config resolver
+func (s clientConfigField) ExternalConfigResolverName() string {
+	return "Resolve" + s.Name
+}
+
+// ExternalConfigProviderSignature returns the signature of the external config resolver method
+func (s clientConfigField) ExternalConfigProviderSignature() string {
+	return fmt.Sprintf("%s() (value %s, ok bool, err error)", s.ExternalConfigBinding.ResolverMethodName, s.Type)
+}
+
+type clientConfigFields []clientConfigField
+
+// ClientGoCode returns rendered service configuration fields suitable for a structure definition
+func (fs clientConfigFields) ClientGoCode() string {
 	w := bytes.NewBuffer(nil)
 
-	if err := svcConfigTmpl.Execute(w, fs); err != nil {
-		panic("failed to render serviceConfigFields " + err.Error())
+	if err := tplClientConfigFields.Execute(w, fs); err != nil {
+		panic("failed to render clientConfigFields " + err.Error())
 	}
 
 	return w.String()
 }
 
-var serviceSpecificConfigs = map[string]serviceConfigFields{
+var clientSpecificConfigs = map[string]clientConfigFields{
 	"S3": {
 		{
 			Name: "Disable100Continue", Type: "bool",
@@ -69,6 +101,16 @@ be returned. The bucket name must be DNS compatible to also work with
 accelerate.
 			`,
 		},
+		{
+			Name: "UseARNRegion", Type: "bool",
+			Doc: `Set this to ` + "`true`" + ` to use the region specified
+in the ARN, when an ARN is provided as an argument to a bucket parameter.`,
+			ExternalConfigBinding: &externalConfigBinding{
+				ResolverMethodName:      "GetS3UseARNRegion",
+				MustResolveEnvConfig:    true,
+				MustResolveSharedConfig: true,
+			},
+		},
 	},
 
 	"DynamoDB": {
@@ -86,7 +128,7 @@ accelerate.
 	},
 }
 
-var svcConfigTmpl = template.Must(template.New("svcConfigTmpl").
+var tplClientConfigFields = template.Must(template.New("tplClientConfigFields").
 	Funcs(template.FuncMap{
 		"Commentify": commentify,
 	}).
@@ -97,3 +139,65 @@ var svcConfigTmpl = template.Must(template.New("svcConfigTmpl").
 	{{ $field.Name }} {{ $field.Type }}
 {{ end }}
 `))
+
+var tplExternalConfigResolvers = template.Must(template.New("tplExternalConfigResolvers").Funcs(
+	map[string]interface{}{
+		"ExternalConfigFields": externalConfigFields,
+	}).Parse(`
+{{ define "resolvers" }}
+	{{- $fields := ExternalConfigFields . -}}
+	{{- range $_, $field := $fields }}
+		// {{ $field.ExternalConfigProviderName }} is an interface for retrieving external configuration value for {{ $field.Name }}
+		type {{ $field.ExternalConfigProviderName }} interface {
+			{{ $field.ExternalConfigProviderSignature }}
+		}
+
+		// {{ $field.ExternalConfigResolverName }} extracts the first instance of a {{ $field.Name }} from the config slice.
+		// Additionally returns a boolean to indicate if the value was found in provided configs, and error if one is encountered.
+		func {{ $field.ExternalConfigResolverName }}(configs []interface{}) (value {{ $field.Type }}, ok bool, err error) {
+			for _, cfg := range configs {
+				if p, pOk := cfg.({{ $field.ExternalConfigProviderName }}); pOk {
+					value, ok, err = p.{{ $field.ExternalConfigBinding.ResolverMethodName }}()
+					if err != nil {
+						return value, false, err
+					}
+					if ok {
+						break
+					}
+				}
+			}
+
+			return value, ok, err
+		}
+	{{ end }}
+{{ end }}
+{{ define "tests" }}
+	{{- $fields := ExternalConfigFields . -}}
+	{{- range $i, $field := $fields }}
+		// {{ $field.ExternalConfigProviderName }} Assertions
+		var (
+			{{- if $field.ExternalConfigBinding.MustResolveEnvConfig }}
+				_ svcExternal.{{ $field.ExternalConfigProviderName }} = &external.EnvConfig{}
+			{{- end }}
+			{{- if $field.ExternalConfigBinding.MustResolveSharedConfig }}
+				_ svcExternal.{{ $field.ExternalConfigProviderName }} = &external.SharedConfig{}
+			{{- end }}
+		)
+	{{ end }}
+{{ end }}
+`))
+
+func externalConfigFields(a *API) clientConfigFields {
+	if !a.HasExternalClientConfigFields() {
+		return nil
+	}
+
+	var fields clientConfigFields
+	for _, field := range clientSpecificConfigs[a.ServiceID()] {
+		if field.HasExternalConfigBinding() {
+			fields = append(fields, field)
+		}
+	}
+
+	return fields
+}
