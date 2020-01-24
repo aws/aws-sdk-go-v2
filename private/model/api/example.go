@@ -255,23 +255,23 @@ func getValue(t, v string, asValue bool) string {
 
 // AttachExamples will create a new ExamplesDefinition from the examples file
 // and reference the API object.
-func (a *API) AttachExamples(filename string) {
+func (a *API) AttachExamples(filename string) error {
 	p := ExamplesDefinition{API: a}
 
 	f, err := os.Open(filename)
 	defer f.Close()
 	if err != nil {
-		panic(err)
+		return err
 	}
 	err = json.NewDecoder(f).Decode(&p)
 	if err != nil {
-		panic(err)
+		return fmt.Errorf("failed to decode %s, err: %v", filename, err)
 	}
 
-	p.setup()
+	return p.setup()
 }
 
-func (p *ExamplesDefinition) setup() {
+func (p *ExamplesDefinition) setup() error {
 	builder := NewExamplesBuilder()
 	keys := p.Examples.Names()
 	for _, n := range keys {
@@ -293,6 +293,8 @@ func (p *ExamplesDefinition) setup() {
 	}
 
 	p.API.Examples = p.Examples
+
+	return nil
 }
 
 func (ex *Example) HasVisitedError(errRef *ShapeRef) bool {

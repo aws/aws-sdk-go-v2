@@ -2,27 +2,43 @@
 
 package api
 
-func (a *API) suppressEventStreams() {
-	const eventStreamMemberName = "EventStream"
+import (
+	"fmt"
+	"os"
+)
 
-	for name, op := range a.Operations {
-		outbound := hasEventStream(op.InputRef.Shape)
-		inbound := hasEventStream(op.OutputRef.Shape)
+func (a *API) suppressEventStreams() error {
+	for opName, op := range a.Operations {
+		inputRef := getEventStreamMember(op.InputRef.Shape)
+		outputRef := getEventStreamMember(op.OutputRef.Shape)
 
-		if !(outbound || inbound) {
+		if inputRef == nil && outputRef == nil {
 			continue
 		}
 
-		a.removeOperation(name)
-	}
-}
+		err := fmt.Errorf("eventstream support not implemented, %s, %s",
+			op.ExportedName)
 
-func hasEventStream(topShape *Shape) bool {
-	for _, ref := range topShape.MemberRefs {
-		if ref.Shape.IsEventStream {
-			return true
+		if a.IgnoreUnsupportedAPIs {
+			fmt.Fprintf(os.Stderr, "removing operation, %s, %v\n", opName, err)
+			delete(a.Operations, opName)
+			continue
+		}
+		return UnsupportedAPIModelError{
+			Err: err,
 		}
 	}
 
-	return false
+	return nil
+}
+
+func getEventStreamMember(topShape *Shape) *ShapeRef {
+	for _, ref := range topShape.MemberRefs {
+		if !ref.Shape.IsEventStream {
+			continue
+		}
+		return ref
+	}
+
+	return nil
 }
