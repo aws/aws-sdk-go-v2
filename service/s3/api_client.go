@@ -98,7 +98,7 @@ func New(config aws.Config) *Client {
 	}
 
 	if config.AdditionalConfig != nil {
-		if err := config.AdditionalConfig.ResolveConfig(resolveServiceConfig(svc)); err != nil {
+		if err := config.AdditionalConfig.ResolveConfig(resolveClientConfig(svc)); err != nil {
 			panic(fmt.Errorf("failed to resolve service configuration: %v", err))
 		}
 	}

@@ -18,7 +18,7 @@ func TestExternalConfigResolver(t *testing.T) {
 	t.Run("UseARNRegion", func(t *testing.T) {
 		t.Run("value not found", func(t *testing.T) {
 			svc := &Client{}
-			err := resolveServiceConfig(svc)([]interface{}{
+			err := resolveClientConfig(svc)([]interface{}{
 				mockUseARNRegion(func() (value bool, ok bool, err error) {
 					return value, ok, err
 				}),
@@ -32,7 +32,7 @@ func TestExternalConfigResolver(t *testing.T) {
 		})
 		t.Run("resolve error", func(t *testing.T) {
 			svc := &Client{}
-			err := resolveServiceConfig(svc)([]interface{}{
+			err := resolveClientConfig(svc)([]interface{}{
 				mockUseARNRegion(func() (value bool, ok bool, err error) {
 					err = fmt.Errorf("resolve error")
 					return value, ok, err
@@ -47,9 +47,12 @@ func TestExternalConfigResolver(t *testing.T) {
 		})
 		t.Run("value found", func(t *testing.T) {
 			svc := &Client{}
-			err := resolveServiceConfig(svc)([]interface{}{
+			err := resolveClientConfig(svc)([]interface{}{
 				mockUseARNRegion(func() (value bool, ok bool, err error) {
 					value = true
+					return value, true, err
+				}),
+				mockUseARNRegion(func() (value bool, ok bool, err error) {
 					return value, true, err
 				}),
 			})
