@@ -304,21 +304,6 @@ func (ex *Example) HasVisitedError(errRef *ShapeRef) bool {
 	return ok
 }
 
-//func parseTimeString(ref *ShapeRef, memName, v string) string {
-//	if ref.Location == "header" {
-//		return fmt.Sprintf("%s: parseTime(%q, %q),\n", memName, "Mon, 2 Jan 2006 15:04:05 GMT", v)
-//	} else {
-//		switch ref.API.Metadata.Protocol {
-//		case "json", "rest-json":
-//			return fmt.Sprintf("%s: parseTime(%q, %q),\n", memName, "2006-01-02T15:04:05Z", v)
-//		case "rest-xml", "ec2", "query":
-//			return fmt.Sprintf("%s: parseTime(%q, %q),\n", memName, "2006-01-02T15:04:05Z", v)
-//		default:
-//			panic("Unsupported time type: " + ref.API.Metadata.Protocol)
-//		}
-//	}
-//}
-//
 func (ex *Example) MethodName() string {
 	return fmt.Sprintf("%sRequest_%s", ex.OperationName, ex.Index)
 }
