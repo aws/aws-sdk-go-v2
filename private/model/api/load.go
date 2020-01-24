@@ -22,7 +22,7 @@ type Loader struct {
 
 	// Allows ignoring API models that are unsupported by the SDK without
 	// failing the load of other supported APIs.
-	IgnoreUnsupportedAPIs bool
+	KeepUnsupportedAPIs bool
 }
 
 // Load loads the API model files from disk returning the map of API package.
@@ -31,14 +31,14 @@ func (l Loader) Load(modelPaths []string) (APIs, error) {
 	apis := APIs{}
 	for _, modelPath := range modelPaths {
 		a, err := loadAPI(modelPath, l.BaseImport, func(a *API) {
-			a.IgnoreUnsupportedAPIs = l.IgnoreUnsupportedAPIs
+			a.KeepUnsupportedAPIs = l.KeepUnsupportedAPIs
 		})
 		if err != nil {
 			return nil, fmt.Errorf("failed to load API, %v, %v", modelPath, err)
 		}
 
 		if len(a.Operations) == 0 {
-			if l.IgnoreUnsupportedAPIs {
+			if !l.KeepUnsupportedAPIs {
 				fmt.Fprintf(os.Stderr, "API has no operations, ignoring model %s, %v\n",
 					modelPath, a.ImportPath())
 				continue

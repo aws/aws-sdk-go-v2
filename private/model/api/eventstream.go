@@ -16,16 +16,16 @@ func (a *API) suppressEventStreams() error {
 			continue
 		}
 
-		err := fmt.Errorf("eventstream support not implemented, %s, %s",
-			op.ExportedName)
-
-		if a.IgnoreUnsupportedAPIs {
-			fmt.Fprintf(os.Stderr, "removing operation, %s, %v\n", opName, err)
-			delete(a.Operations, opName)
+		if !a.KeepUnsupportedAPIs {
+			fmt.Fprintf(os.Stderr,
+				"removing unsupported eventstream operation, %s\n",
+				opName)
+			a.removeOperation(opName)
 			continue
 		}
 		return UnsupportedAPIModelError{
-			Err: err,
+			Err: fmt.Errorf("eventstream support not implemented, %s",
+				op.ExportedName),
 		}
 	}
 

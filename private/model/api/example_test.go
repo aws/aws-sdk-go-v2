@@ -4,8 +4,9 @@ package api
 
 import (
 	"encoding/json"
-	"github.com/google/go-cmp/cmp"
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
 )
 
 func buildAPI() (*API, error) {
@@ -126,32 +127,18 @@ func TestExampleGeneration(t *testing.T) {
 	def.API = a
 
 	def.setup()
-	expected := `
-import (
-	"fmt"
+	expected := `import (
 	"context"
-	"strings"
-	"time"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/fooservice"
-	
 )
 
-var _ time.Duration
-var _ strings.Reader
+
 var _ aws.Config
-
-func parseTime(layout, value string) *time.Time {
-	t, err := time.Parse(layout, value)
-	if err != nil {
-		panic(err)
-	}
-	return &t
-}
-
 // I pity the foo
 //
 // Foo bar baz qux
