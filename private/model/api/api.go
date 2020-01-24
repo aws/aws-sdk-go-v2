@@ -356,17 +356,6 @@ func (a *API) AddSDKImportWithAlias(alias string, sdkPath ...string) error {
 	return nil
 }
 
-// AddSDKClientImport adds the import path for the generate API client's path,
-// and any sub package specified.
-func (a *API) AddSDKClientImport(v ...string) error {
-	e := make([]string, 0, 5)
-	e = append(e, a.BaseImportPath, a.PackageName())
-	e = append(e, v...)
-
-	a.imports[packageImport{Path: path.Join(e...)}] = true
-	return nil
-}
-
 // APIGoCode renders the API in Go code. Returning it as a string
 func (a *API) APIGoCode() string {
 	a.resetImports()

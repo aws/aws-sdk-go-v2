@@ -24,7 +24,7 @@ func (a *API) ExamplesGoCode() string {
 	a.AddSDKImport("aws")
 	a.AddSDKImport("aws/awserr")
 	a.AddSDKImport("aws/external")
-	a.AddSDKClientImport()
+	a.AddImport(a.ImportPath())
 
 	var extra = `
 var _ aws.Config
