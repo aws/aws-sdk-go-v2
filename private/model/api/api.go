@@ -361,7 +361,7 @@ func (a *API) AddSDKClientImport(v ...string) error {
 	e = append(e, a.BaseImportPath, a.PackageName())
 	e = append(e, v...)
 
-	a.imports[path.Join(e...)] = true
+	a.imports[packageImport{Path: path.Join(e...)}] = true
 	return nil
 }
 
