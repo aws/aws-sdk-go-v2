@@ -15,7 +15,7 @@ type externalConfigBinding struct {
 	MustResolveSharedConfig bool
 }
 
-type serviceConfigField struct {
+type clientConfigField struct {
 	Name string
 	Doc  string
 	Type string
@@ -25,39 +25,39 @@ type serviceConfigField struct {
 
 // HasExternalConfigBinding returns whether the service config field binds to an externally resolve
 // configuration property.
-func (s serviceConfigField) HasExternalConfigBinding() bool {
+func (s clientConfigField) HasExternalConfigBinding() bool {
 	return s.ExternalConfigBinding != nil
 }
 
 // ExternalConfigProviderName returns the name of the external service config method name
-func (s serviceConfigField) ExternalConfigProviderName() string {
+func (s clientConfigField) ExternalConfigProviderName() string {
 	return s.Name + "Provider"
 }
 
 // ExternalConfigResolverName returns the name of the external service config resolver
-func (s serviceConfigField) ExternalConfigResolverName() string {
+func (s clientConfigField) ExternalConfigResolverName() string {
 	return "Resolve" + s.Name
 }
 
 // ExternalConfigProviderSignature returns the signature of the external config resolver method
-func (s serviceConfigField) ExternalConfigProviderSignature() string {
+func (s clientConfigField) ExternalConfigProviderSignature() string {
 	return fmt.Sprintf("%s() (value %s, ok bool, err error)", s.ExternalConfigBinding.ResolverMethodName, s.Type)
 }
 
-type serviceConfigFields []serviceConfigField
+type clientConfigFields []clientConfigField
 
-// ServiceClientGoCode returns rendered service configuration fields suitable for a structure definition
-func (fs serviceConfigFields) ServiceClientGoCode() string {
+// ClientGoCode returns rendered service configuration fields suitable for a structure definition
+func (fs clientConfigFields) ClientGoCode() string {
 	w := bytes.NewBuffer(nil)
 
-	if err := tplServiceConfigFields.Execute(w, fs); err != nil {
-		panic("failed to render serviceConfigFields " + err.Error())
+	if err := tplClientConfigFields.Execute(w, fs); err != nil {
+		panic("failed to render clientConfigFields " + err.Error())
 	}
 
 	return w.String()
 }
 
-var serviceSpecificConfigs = map[string]serviceConfigFields{
+var clientSpecificConfigs = map[string]clientConfigFields{
 	"S3": {
 		{
 			Name: "Disable100Continue", Type: "bool",
@@ -128,7 +128,7 @@ in the ARN, when an ARN is provided as an argument to a bucket parameter.`,
 	},
 }
 
-var tplServiceConfigFields = template.Must(template.New("tplServiceConfigFields").
+var tplClientConfigFields = template.Must(template.New("tplClientConfigFields").
 	Funcs(template.FuncMap{
 		"Commentify": commentify,
 	}).
@@ -187,13 +187,13 @@ var tplExternalConfigResolvers = template.Must(template.New("tplExternalConfigRe
 {{ end }}
 `))
 
-func externalConfigFields(a *API) serviceConfigFields {
+func externalConfigFields(a *API) clientConfigFields {
 	if !a.HasExternalClientConfigFields() {
 		return nil
 	}
 
-	var fields serviceConfigFields
-	for _, field := range serviceSpecificConfigs[a.ServiceID()] {
+	var fields clientConfigFields
+	for _, field := range clientSpecificConfigs[a.ServiceID()] {
 		if field.HasExternalConfigBinding() {
 			fields = append(fields, field)
 		}
