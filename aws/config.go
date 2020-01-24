@@ -78,6 +78,16 @@ type Config struct {
 	// Disabling this feature is useful when you want to use local endpoints
 	// for testing that do not support the modeled host prefix pattern.
 	DisableEndpointHostPrefix bool
+
+	// ConfigResolver defines how additional configuration can be loaded by clients.
+	AdditionalConfig ConfigResolver
+}
+
+// ConfigResolver is an interface that encapsulates the behavior of loading
+// additional configuration.
+type ConfigResolver interface {
+	// ResolveConfig calls the provide function passing a slice of configuration sources
+	ResolveConfig(func(configs []interface{}) error) error
 }
 
 // NewConfig returns a new Config pointer that can be chained with builder
