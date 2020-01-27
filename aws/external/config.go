@@ -97,6 +97,12 @@ func (cs Configs) ResolveAWSConfig(resolvers []AWSConfigResolver) (aws.Config, e
 		}
 	}
 
+	var sources []interface{}
+	for _, s := range cs {
+		sources = append(sources, s)
+	}
+	cfg.ConfigSources = sources
+
 	return cfg, nil
 }
 

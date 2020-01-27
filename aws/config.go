@@ -79,8 +79,9 @@ type Config struct {
 	// for testing that do not support the modeled host prefix pattern.
 	DisableEndpointHostPrefix bool
 
-	// ConfigResolver defines how additional configuration can be loaded by clients.
-	AdditionalConfig ConfigResolver
+	// ConfigSources are the sources that were used to the aws.Config.
+	// Allows for additional configuration can be loaded by clients.
+	ConfigSources []interface{}
 }
 
 // ConfigResolver is an interface that encapsulates the behavior of loading
