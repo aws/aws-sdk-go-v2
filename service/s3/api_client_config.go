@@ -6,14 +6,16 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3/internal/external"
 )
 
-func resolveClientConfig(svc *Client) func(configs []interface{}) error {
-	return func(configs []interface{}) error {
-		if value, ok, err := external.ResolveUseARNRegion(configs); err != nil {
-			return err
-		} else if ok {
-			svc.UseARNRegion = value
-		}
-
+func resolveClientConfig(svc *Client, configs []interface{}) error {
+	if len(configs) == 0 {
 		return nil
 	}
+
+	if value, ok, err := external.ResolveUseARNRegion(configs); err != nil {
+		return err
+	} else if ok {
+		svc.UseARNRegion = value
+	}
+
+	return nil
 }
