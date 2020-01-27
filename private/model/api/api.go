@@ -324,13 +324,13 @@ var tplAPI = template.Must(template.New("api").Parse(`
 
 // AddImport adds the import path to the generated file's import.
 func (a *API) AddImport(v ...string) error {
-	a.imports[packageImport{Path: strings.Join(v, "/")}] = true
+	a.imports[packageImport{Path: path.Join(v...)}] = true
 	return nil
 }
 
 // AddImportWithAlias adds the import path with the given alias to the generated file's import
-func (a *API) AddImportWithAlias(alias, path string) error {
-	a.imports[packageImport{Alias: alias, Path: path}] = true
+func (a *API) AddImportWithAlias(alias string, v ...string) error {
+	a.imports[packageImport{Alias: alias, Path: path.Join(v...)}] = true
 	return nil
 }
 
