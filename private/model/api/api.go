@@ -323,8 +323,8 @@ var tplAPI = template.Must(template.New("api").Parse(`
 `))
 
 // AddImport adds the import path to the generated file's import.
-func (a *API) AddImport(v string) error {
-	a.imports[packageImport{Path: v}] = true
+func (a *API) AddImport(v ...string) error {
+	a.imports[packageImport{Path: strings.Join(v, "/")}] = true
 	return nil
 }
 
@@ -397,7 +397,7 @@ func (a *API) APIOperationGoCode(op *Operation) string {
 
 	if op.HasEndpointARN {
 		a.AddImport("fmt")
-		a.AddSDKImport("service", a.PackageName(), "internal", "arn")
+		a.AddImport(a.ImportPath(), "internal", "arn")
 	}
 
 	// Need to generate code before imports are generated.

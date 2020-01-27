@@ -36,12 +36,6 @@ func (a *API) updateTopLevelShapeReferences() {
 // writeShapeNames sets each shape's API and shape name values. Binding the
 // shape to its parent API.
 func (a *API) writeShapeNames() {
-	writeOrigShapeName := func(s *ShapeRef) {
-		if len(s.ShapeName) > 0 {
-			s.OrigShapeName = s.ShapeName
-		}
-	}
-
 	for n, s := range a.Shapes {
 		s.API = a
 		s.ShapeName = n
@@ -456,5 +450,11 @@ func (a *API) injectUnboundedOutputStreaming() {
 // transfer encoding.`
 			}
 		}
+	}
+}
+
+func writeOrigShapeName(s *ShapeRef) {
+	if len(s.ShapeName) > 0 && len(s.OrigShapeName) == 0 {
+		s.OrigShapeName = s.ShapeName
 	}
 }
