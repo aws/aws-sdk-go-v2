@@ -3,6 +3,7 @@ package s3_test
 import (
 	"context"
 	"testing"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/mock"
@@ -14,24 +15,22 @@ func TestProtoGetObjectRequest_Send(t *testing.T) {
 	svc := s3.New(mock.Config())
 	input := s3.GetObjectInput{
 		Bucket:                     aws.String("mock bucket"),
-		IfMatch:                    nil,
-		IfModifiedSince:            nil,
-		IfNoneMatch:                nil,
-		IfUnmodifiedSince:          nil,
+		IfMatch:                    aws.String("mock value"),
+		IfModifiedSince:            aws.Time(time.Now()),
+		IfNoneMatch:                aws.String("mock value for no match"),
+		IfUnmodifiedSince:          aws.Time(time.Now().Add(-10 * time.Minute)),
 		Key:                        aws.String("mock key"),
-		PartNumber:                 nil,
-		Range:                      nil,
-		RequestPayer:               "",
-		ResponseCacheControl:       nil,
-		ResponseContentDisposition: nil,
-		ResponseContentEncoding:    nil,
-		ResponseContentLanguage:    nil,
-		ResponseContentType:        nil,
-		ResponseExpires:            nil,
-		SSECustomerAlgorithm:       nil,
-		SSECustomerKey:             nil,
-		SSECustomerKeyMD5:          nil,
-		VersionId:                  nil,
+		PartNumber:                 aws.Int64(10),
+		Range:                      aws.String("mock range"),
+		RequestPayer:               s3.RequestPayerRequester,
+		ResponseCacheControl:       aws.String("mock value"),
+		ResponseContentDisposition: aws.String("mock value"),
+		ResponseContentEncoding:    aws.String("mock value"),
+		ResponseContentLanguage:    aws.String("mock value"),
+		ResponseContentType:        aws.String("mock value"),
+		ResponseExpires:            aws.Time(time.Now().Add(10 * time.Minute)),
+		SSECustomerAlgorithm:       aws.String("AES256"),
+		VersionId:                  aws.String("mock version value"),
 	}
 
 	request := svc.GetObjectRequest(&input)

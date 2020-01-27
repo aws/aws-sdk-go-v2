@@ -26,39 +26,28 @@ type protoGetObjectUnmarshaler struct {
 // This method calls appropriate unmarshal shape functions as per the output shape and protocol used by the
 // service.
 func (u protoGetObjectUnmarshaler) unmarshalOperation(r *aws.Request) {
-
-	var (
-		buff       bytes.Buffer
-		body       io.Reader
-		decoder    *xml.Decoder
-		startToken xml.Token
-		err        error
-	)
-
-	if r.HTTPResponse.Body != nil {
-		body = io.TeeReader(r.HTTPResponse.Body, &buff)
-		decoder = xml.NewDecoder(body)
-		startToken, err = decoder.Token()
-		// we will encounter io.EOF if body does not have an xml
-		if err != nil && err != io.EOF {
-			r.Error = awserr.New(aws.ErrCodeSerialization, "Failed to decode response body with invalid XML", err)
-			return
-		}
-	}
-
 	// isRequestError checks if operation response returned a error response
 	if isRequestError(r) {
 		// if startToken is nil, it would mean there is no xml response body
-		if startToken == nil {
+		if r.HTTPResponse.Body == nil {
 			// fall back to status code error message
 			statusText := http.StatusText(r.HTTPResponse.StatusCode)
 			errCode := strings.Replace(statusText, " ", "", -1)
 			errMsg := statusText
 			r.Error = awserr.NewRequestFailure(
-				awserr.New(errCode, errMsg, err),
+				awserr.New(errCode, errMsg, nil),
 				r.HTTPResponse.StatusCode,
 				r.RequestID,
 			)
+			return
+		}
+
+		var buff bytes.Buffer
+		body := io.TeeReader(r.HTTPResponse.Body, &buff)
+		decoder := xml.NewDecoder(body)
+		startToken, err := decoder.Token()
+		if err != nil {
+			r.Error = awserr.New(aws.ErrCodeSerialization, "Failed to decode response body with invalid XML", err)
 			return
 		}
 
