@@ -323,14 +323,14 @@ var tplAPI = template.Must(template.New("api").Parse(`
 `))
 
 // AddImport adds the import path to the generated file's import.
-func (a *API) AddImport(v string) error {
-	a.imports[packageImport{Path: v}] = true
+func (a *API) AddImport(v ...string) error {
+	a.imports[packageImport{Path: path.Join(v...)}] = true
 	return nil
 }
 
 // AddImportWithAlias adds the import path with the given alias to the generated file's import
-func (a *API) AddImportWithAlias(alias, path string) error {
-	a.imports[packageImport{Alias: alias, Path: path}] = true
+func (a *API) AddImportWithAlias(alias string, v ...string) error {
+	a.imports[packageImport{Alias: alias, Path: path.Join(v...)}] = true
 	return nil
 }
 
@@ -393,6 +393,11 @@ func (a *API) APIOperationGoCode(op *Operation) string {
 	}
 	if !a.NoGenMarshalers || !a.NoGenUnmarshalers {
 		a.AddSDKImport("private/protocol")
+	}
+
+	if op.HasEndpointARN {
+		a.AddImport("fmt")
+		a.AddImport(a.ImportPath(), "internal", "arn")
 	}
 
 	// Need to generate code before imports are generated.
