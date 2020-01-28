@@ -478,7 +478,10 @@ func TestCreateInputOutputShapes(t *testing.T) {
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
 			a := c.API
-			a.Setup()
+			err := a.Setup()
+			if err != nil {
+				t.Error(err)
+			}
 
 			for opName, op := range a.Operations {
 				if e, a := op.InputRef.ShapeName, op.InputRef.Shape.ShapeName; e != a {

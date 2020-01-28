@@ -57,7 +57,9 @@ func loadAPI(modelPath, baseImport string) (*API, error) {
 		return nil, err
 	}
 
-	a.Setup()
+	if err := a.Setup(); err != nil {
+		return nil, err
+	}
 
 	return a, nil
 }
@@ -154,16 +156,20 @@ func (a *API) Attach(filename string) {
 
 // AttachString will unmarshal a raw JSON string, and setup the
 // API if not already done so.
-func (a *API) AttachString(str string) {
+func (a *API) AttachString(str string) error {
 	json.Unmarshal([]byte(str), a)
 
 	if !a.initialized {
-		a.Setup()
+		if err := a.Setup(); err != nil {
+			return err
+		}
 	}
+
+	return nil
 }
 
 // Setup initializes the API.
-func (a *API) Setup() {
+func (a *API) Setup() error {
 	a.setMetadataEndpointsKey()
 	a.writeShapeNames()
 	a.resolveReferences()
@@ -185,7 +191,9 @@ func (a *API) Setup() {
 	//a.setupEventStreams()
 	//a.findEndpointDiscoveryOp()
 	a.suppressEventStreams()
-	a.customizationPasses()
+	if err := a.customizationPasses(); err != nil {
+		return err
+	}
 	a.injectUnboundedOutputStreaming()
 
 	if !a.NoRemoveUnusedShapes {
@@ -197,4 +205,6 @@ func (a *API) Setup() {
 	}
 
 	a.initialized = true
+
+	return nil
 }

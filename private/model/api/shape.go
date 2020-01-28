@@ -39,6 +39,9 @@ type ShapeRef struct {
 	OrigShapeName string `json:"-"`
 
 	GenerateGetter bool
+
+	// Flags whether the member reference is a endpoint ARN
+	EndpointARN bool
 }
 
 // CanBeEmpty returns if the shape value can sent request as an empty value.
@@ -119,6 +122,9 @@ type Shape struct {
 
 	// Sensitive types should not be logged by SDK type loggers.
 	Sensitive bool `json:"sensitive"`
+
+	// Flags that a member of the shape is an EndpointARN
+	HasEndpointARNMember bool
 }
 
 // ErrorCodeName will return the error shape's name formated for
@@ -161,7 +167,6 @@ func (s *Shape) Rename(newName string) {
 	}
 
 	delete(s.API.Shapes, s.ShapeName)
-	s.OrigShapeName = s.ShapeName
 	s.API.Shapes[newName] = s
 	s.ShapeName = newName
 }
@@ -624,6 +629,12 @@ var structShapeTmpl = func() *template.Template {
 			hostLabelsShapeTmpl.Tree),
 	)
 
+	template.Must(
+		shapeTmpl.AddParseTree(
+			"endpointARNShapeTmpl",
+			endpointARNShapeTmpl.Tree),
+	)
+
 	return shapeTmpl
 }()
 
@@ -698,6 +709,10 @@ func (s *{{ $builderShapeName }}) get{{ $name }}() (v {{ $.GoStructValueType $na
 
 {{ if $.HasHostLabelMembers }}
 	{{ template "hostLabelsShapeTmpl" $ }}
+{{ end }}
+
+{{ if $.HasEndpointARNMember }}
+	{{ template "endpointARNShapeTmpl" $ }}
 {{ end }}
 `
 

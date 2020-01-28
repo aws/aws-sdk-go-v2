@@ -25,7 +25,10 @@ func TestResolvedReferences(t *testing.T) {
 		}
 	}`
 	a := API{}
-	a.AttachString(json)
+	err := a.AttachString(json)
+	if err != nil {
+		t.Fatalf("failed to unmarshal json: %v", err)
+	}
 	if len(a.Shapes["OtherTest"].refs) != 2 {
 		t.Errorf("Expected %d, but received %d", 2, len(a.Shapes["OtherTest"].refs))
 	}
