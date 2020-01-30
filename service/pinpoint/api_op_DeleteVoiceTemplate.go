@@ -15,6 +15,8 @@ type DeleteVoiceTemplateInput struct {
 
 	// TemplateName is a required field
 	TemplateName *string `location:"uri" locationName:"template-name" type:"string" required:"true"`
+
+	Version *string `location:"querystring" locationName:"version" type:"string"`
 }
 
 // String returns the string representation
@@ -45,6 +47,12 @@ func (s DeleteVoiceTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "template-name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -79,8 +87,8 @@ const opDeleteVoiceTemplate = "DeleteVoiceTemplate"
 // DeleteVoiceTemplateRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Deletes a message template that was designed for use in messages that were
-// sent through the voice channel.
+// Deletes a message template for messages that were sent through the voice
+// channel.
 //
 //    // Example sending a request using DeleteVoiceTemplateRequest.
 //    req := client.DeleteVoiceTemplateRequest(params)

@@ -9,7 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// A request representing an offering renewal.
+// A request that represents an offering renewal.
 type RenewOfferingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,9 +58,9 @@ const opRenewOffering = "RenewOffering"
 //
 // Explicitly sets the quantity of devices to renew for an offering, starting
 // from the effectiveDate of the next period. The API returns a NotEligible
-// error if the user is not permitted to invoke the operation. Please contact
-// aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com)
-// if you believe that you should be able to invoke this operation.
+// error if the user is not permitted to invoke the operation. If you must be
+// able to invoke this operation, contact aws-devicefarm-support@amazon.com
+// (mailto:aws-devicefarm-support@amazon.com).
 //
 //    // Example sending a request using RenewOfferingRequest.
 //    req := client.RenewOfferingRequest(params)

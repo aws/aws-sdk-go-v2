@@ -12,7 +12,7 @@ import (
 type DeleteNetworkProfileInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the network profile you want to delete.
+	// The ARN of the network profile to delete.
 	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`

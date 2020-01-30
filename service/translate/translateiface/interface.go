@@ -63,11 +63,19 @@ import (
 type ClientAPI interface {
 	DeleteTerminologyRequest(*translate.DeleteTerminologyInput) translate.DeleteTerminologyRequest
 
+	DescribeTextTranslationJobRequest(*translate.DescribeTextTranslationJobInput) translate.DescribeTextTranslationJobRequest
+
 	GetTerminologyRequest(*translate.GetTerminologyInput) translate.GetTerminologyRequest
 
 	ImportTerminologyRequest(*translate.ImportTerminologyInput) translate.ImportTerminologyRequest
 
 	ListTerminologiesRequest(*translate.ListTerminologiesInput) translate.ListTerminologiesRequest
+
+	ListTextTranslationJobsRequest(*translate.ListTextTranslationJobsInput) translate.ListTextTranslationJobsRequest
+
+	StartTextTranslationJobRequest(*translate.StartTextTranslationJobInput) translate.StartTextTranslationJobRequest
+
+	StopTextTranslationJobRequest(*translate.StopTextTranslationJobInput) translate.StopTextTranslationJobRequest
 
 	TranslateTextRequest(*translate.TranslateTextInput) translate.TranslateTextRequest
 }

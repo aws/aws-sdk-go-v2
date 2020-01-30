@@ -46,6 +46,7 @@ type ActionExecutionStatus string
 // Enum values for ActionExecutionStatus
 const (
 	ActionExecutionStatusInProgress ActionExecutionStatus = "InProgress"
+	ActionExecutionStatusAbandoned  ActionExecutionStatus = "Abandoned"
 	ActionExecutionStatusSucceeded  ActionExecutionStatus = "Succeeded"
 	ActionExecutionStatusFailed     ActionExecutionStatus = "Failed"
 )
@@ -206,6 +207,8 @@ type PipelineExecutionStatus string
 // Enum values for PipelineExecutionStatus
 const (
 	PipelineExecutionStatusInProgress PipelineExecutionStatus = "InProgress"
+	PipelineExecutionStatusStopped    PipelineExecutionStatus = "Stopped"
+	PipelineExecutionStatusStopping   PipelineExecutionStatus = "Stopping"
 	PipelineExecutionStatusSucceeded  PipelineExecutionStatus = "Succeeded"
 	PipelineExecutionStatusSuperseded PipelineExecutionStatus = "Superseded"
 	PipelineExecutionStatusFailed     PipelineExecutionStatus = "Failed"
@@ -226,6 +229,8 @@ type StageExecutionStatus string
 const (
 	StageExecutionStatusInProgress StageExecutionStatus = "InProgress"
 	StageExecutionStatusFailed     StageExecutionStatus = "Failed"
+	StageExecutionStatusStopped    StageExecutionStatus = "Stopped"
+	StageExecutionStatusStopping   StageExecutionStatus = "Stopping"
 	StageExecutionStatusSucceeded  StageExecutionStatus = "Succeeded"
 )
 

@@ -88,9 +88,15 @@ type ClientAPI interface {
 
 	ExportServerEngineAttributeRequest(*opsworkscm.ExportServerEngineAttributeInput) opsworkscm.ExportServerEngineAttributeRequest
 
+	ListTagsForResourceRequest(*opsworkscm.ListTagsForResourceInput) opsworkscm.ListTagsForResourceRequest
+
 	RestoreServerRequest(*opsworkscm.RestoreServerInput) opsworkscm.RestoreServerRequest
 
 	StartMaintenanceRequest(*opsworkscm.StartMaintenanceInput) opsworkscm.StartMaintenanceRequest
+
+	TagResourceRequest(*opsworkscm.TagResourceInput) opsworkscm.TagResourceRequest
+
+	UntagResourceRequest(*opsworkscm.UntagResourceInput) opsworkscm.UntagResourceRequest
 
 	UpdateServerRequest(*opsworkscm.UpdateServerInput) opsworkscm.UpdateServerRequest
 

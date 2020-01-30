@@ -21,21 +21,20 @@ type ListDevicesInput struct {
 	//
 	//    * Attribute: The aspect of a device such as platform or model used as
 	//    the selection criteria in a device filter. Allowed values include: ARN:
-	//    The Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".
-	//    PLATFORM: The device platform. Valid values are "ANDROID" or "IOS". OS_VERSION:
-	//    The operating system version. For example, "10.3.2". MODEL: The device
-	//    model. For example, "iPad 5th Gen". AVAILABILITY: The current availability
-	//    of the device. Valid values are "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY",
-	//    or "TEMPORARY_NOT_AVAILABLE". FORM_FACTOR: The device form factor. Valid
-	//    values are "PHONE" or "TABLET". MANUFACTURER: The device manufacturer.
-	//    For example, "Apple". REMOTE_ACCESS_ENABLED: Whether the device is enabled
-	//    for remote access. Valid values are "TRUE" or "FALSE". REMOTE_DEBUG_ENABLED:
-	//    Whether the device is enabled for remote debugging. Valid values are "TRUE"
-	//    or "FALSE". This attribute will be ignored, as remote debugging is no
-	//    longer supported (https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html).
-	//    INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance. INSTANCE_LABELS:
-	//    The label of the device instance. FLEET_TYPE: The fleet type. Valid values
-	//    are "PUBLIC" or "PRIVATE".
+	//    The Amazon Resource Name (ARN) of the device (for example, arn:aws:devicefarm:us-west-2::device:12345Example).
+	//    PLATFORM: The device platform. Valid values are ANDROID or IOS. OS_VERSION:
+	//    The operating system version (for example, 10.3.2). MODEL: The device
+	//    model (for example, iPad 5th Gen). AVAILABILITY: The current availability
+	//    of the device. Valid values are AVAILABLE, HIGHLY_AVAILABLE, BUSY, or
+	//    TEMPORARY_NOT_AVAILABLE. FORM_FACTOR: The device form factor. Valid values
+	//    are PHONE or TABLET. MANUFACTURER: The device manufacturer (for example,
+	//    Apple). REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote
+	//    access. Valid values are TRUE or FALSE. REMOTE_DEBUG_ENABLED: Whether
+	//    the device is enabled for remote debugging. Valid values are TRUE or FALSE.
+	//    Because remote debugging is no longer supported (https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html),
+	//    this attribute is ignored. INSTANCE_ARN: The Amazon Resource Name (ARN)
+	//    of the device instance. INSTANCE_LABELS: The label of the device instance.
+	//    FLEET_TYPE: The fleet type. Valid values are PUBLIC or PRIVATE.
 	//
 	//    * Operator: The filter operator. The EQUALS operator is available for
 	//    every attribute except INSTANCE_LABELS. The CONTAINS operator is available
@@ -47,8 +46,8 @@ type ListDevicesInput struct {
 	//    * Values: An array of one or more filter values. The IN and NOT_IN operators
 	//    take a values array that has one or more elements. The other operators
 	//    require an array with a single element. In a request, the AVAILABILITY
-	//    attribute takes "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE"
-	//    as values.
+	//    attribute takes the following values: AVAILABLE, HIGHLY_AVAILABLE, BUSY,
+	//    or TEMPORARY_NOT_AVAILABLE.
 	Filters []DeviceFilter `locationName:"filters" type:"list"`
 
 	// An identifier that was returned from the previous call to this operation,
@@ -85,7 +84,7 @@ type ListDevicesOutput struct {
 	Devices []Device `locationName:"devices" type:"list"`
 
 	// If the number of items that are returned is significantly large, this is
-	// an identifier that is also returned, which can be used in a subsequent call
+	// an identifier that is also returned. It can be used in a subsequent call
 	// to this operation to return the next set of items in the list.
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
 }

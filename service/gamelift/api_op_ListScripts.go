@@ -12,12 +12,12 @@ import (
 type ListScriptsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages.
+	// The maximum number of results to return. Use this parameter with NextToken
+	// to get results as a set of sequential pages.
 	Limit *int64 `min:"1" type:"integer"`
 
-	// Token that indicates the start of the next sequential page of results. Use
-	// the token that is returned with a previous call to this action. To start
+	// A token that indicates the start of the next sequential page of results.
+	// Use the token that is returned with a previous call to this action. To start
 	// at the beginning of the result set, do not specify a value.
 	NextToken *string `min:"1" type:"string"`
 }
@@ -46,12 +46,12 @@ func (s *ListScriptsInput) Validate() error {
 type ListScriptsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Token that indicates where to resume retrieving results on the next call
+	// A token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
 	// of the list.
 	NextToken *string `min:"1" type:"string"`
 
-	// Set of properties describing the requested script.
+	// A set of properties describing the requested script.
 	Scripts []Script `type:"list"`
 }
 

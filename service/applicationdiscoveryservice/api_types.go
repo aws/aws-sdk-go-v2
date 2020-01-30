@@ -429,7 +429,8 @@ func (s ExportInfo) String() string {
 // A filter that can use conditional operators.
 //
 // For more information about filters, see Querying Discovered Configuration
-// Items (http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html).
+// Items (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html)
+// in the AWS Application Discovery Service User Guide.
 type Filter struct {
 	_ struct{} `type:"structure"`
 

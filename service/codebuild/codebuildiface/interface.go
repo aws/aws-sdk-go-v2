@@ -83,11 +83,15 @@ type ClientAPI interface {
 
 	DeleteReportGroupRequest(*codebuild.DeleteReportGroupInput) codebuild.DeleteReportGroupRequest
 
+	DeleteResourcePolicyRequest(*codebuild.DeleteResourcePolicyInput) codebuild.DeleteResourcePolicyRequest
+
 	DeleteSourceCredentialsRequest(*codebuild.DeleteSourceCredentialsInput) codebuild.DeleteSourceCredentialsRequest
 
 	DeleteWebhookRequest(*codebuild.DeleteWebhookInput) codebuild.DeleteWebhookRequest
 
 	DescribeTestCasesRequest(*codebuild.DescribeTestCasesInput) codebuild.DescribeTestCasesRequest
+
+	GetResourcePolicyRequest(*codebuild.GetResourcePolicyInput) codebuild.GetResourcePolicyRequest
 
 	ImportSourceCredentialsRequest(*codebuild.ImportSourceCredentialsInput) codebuild.ImportSourceCredentialsRequest
 
@@ -107,7 +111,13 @@ type ClientAPI interface {
 
 	ListReportsForReportGroupRequest(*codebuild.ListReportsForReportGroupInput) codebuild.ListReportsForReportGroupRequest
 
+	ListSharedProjectsRequest(*codebuild.ListSharedProjectsInput) codebuild.ListSharedProjectsRequest
+
+	ListSharedReportGroupsRequest(*codebuild.ListSharedReportGroupsInput) codebuild.ListSharedReportGroupsRequest
+
 	ListSourceCredentialsRequest(*codebuild.ListSourceCredentialsInput) codebuild.ListSourceCredentialsRequest
+
+	PutResourcePolicyRequest(*codebuild.PutResourcePolicyInput) codebuild.PutResourcePolicyRequest
 
 	StartBuildRequest(*codebuild.StartBuildInput) codebuild.StartBuildRequest
 

@@ -184,7 +184,7 @@ type Entity struct {
 	// The segment of input text extracted as this entity.
 	Text *string `min:"1" type:"string"`
 
-	// Contextual information for the entity
+	// Contextual information for the entity.
 	Traits []Trait `type:"list"`
 
 	// Describes the specific type of entity with category of entities.
@@ -193,6 +193,143 @@ type Entity struct {
 
 // String returns the string representation
 func (s Entity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The detected attributes that relate to an entity. This includes an extracted
+// segment of the text that is an attribute of an entity, or otherwise related
+// to an entity. InferICD10CM detects the following attributes: Direction, System,
+// Organ or Site, and Acuity.
+type ICD10CMAttribute struct {
+	_ struct{} `type:"structure"`
+
+	// The 0-based character offset in the input text that shows where the attribute
+	// begins. The offset returns the UTF-8 code point in the string.
+	BeginOffset *int64 `type:"integer"`
+
+	// The 0-based character offset in the input text that shows where the attribute
+	// ends. The offset returns the UTF-8 code point in the string.
+	EndOffset *int64 `type:"integer"`
+
+	// The numeric identifier for this attribute. This is a monotonically increasing
+	// id unique within this response rather than a global unique identifier.
+	Id *int64 `type:"integer"`
+
+	// The level of confidence that Amazon Comprehend Medical has that this attribute
+	// is correctly related to this entity.
+	RelationshipScore *float64 `type:"float"`
+
+	// The level of confidence that Amazon Comprehend Medical has that the segment
+	// of text is correctly recognized as an attribute.
+	Score *float64 `type:"float"`
+
+	// The segment of input text which contains the detected attribute.
+	Text *string `min:"1" type:"string"`
+
+	// The contextual information for the attribute. The traits recognized by InferICD10CM
+	// are DIAGNOSIS, SIGN, SYMPTOM, and NEGATION.
+	Traits []ICD10CMTrait `type:"list"`
+
+	// The type of attribute. InferICD10CM detects entities of the type DX_NAME.
+	Type ICD10CMAttributeType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ICD10CMAttribute) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The ICD-10-CM concepts that the entity could refer to, along with a score
+// indicating the likelihood of the match.
+type ICD10CMConcept struct {
+	_ struct{} `type:"structure"`
+
+	// The ICD-10-CM code that identifies the concept found in the knowledge base
+	// from the Centers for Disease Control.
+	Code *string `min:"1" type:"string"`
+
+	// The long description of the ICD-10-CM code in the ontology.
+	Description *string `min:"1" type:"string"`
+
+	// The level of confidence that Amazon Comprehend Medical has that the entity
+	// is accurately linked to an ICD-10-CM concept.
+	Score *float64 `type:"float"`
+}
+
+// String returns the string representation
+func (s ICD10CMConcept) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The collection of medical entities extracted from the input text and their
+// associated information. For each entity, the response provides the entity
+// text, the entity category, where the entity text begins and ends, and the
+// level of confidence that Amazon Comprehend Medical has in the detection and
+// analysis. Attributes and traits of the entity are also returned.
+type ICD10CMEntity struct {
+	_ struct{} `type:"structure"`
+
+	// The detected attributes that relate to the entity. An extracted segment of
+	// the text that is an attribute of an entity, or otherwise related to an entity,
+	// such as the nature of a medical condition.
+	Attributes []ICD10CMAttribute `type:"list"`
+
+	// The 0-based character offset in the input text that shows where the entity
+	// begins. The offset returns the UTF-8 code point in the string.
+	BeginOffset *int64 `type:"integer"`
+
+	// The category of the entity. InferICD10CM detects entities in the MEDICAL_CONDITION
+	// category.
+	Category ICD10CMEntityCategory `type:"string" enum:"true"`
+
+	// The 0-based character offset in the input text that shows where the entity
+	// ends. The offset returns the UTF-8 code point in the string.
+	EndOffset *int64 `type:"integer"`
+
+	// The ICD-10-CM concepts that the entity could refer to, along with a score
+	// indicating the likelihood of the match.
+	ICD10CMConcepts []ICD10CMConcept `type:"list"`
+
+	// The numeric identifier for the entity. This is a monotonically increasing
+	// id unique within this response rather than a global unique identifier.
+	Id *int64 `type:"integer"`
+
+	// The level of confidence that Amazon Comprehend Medical has in the accuracy
+	// of the detection.
+	Score *float64 `type:"float"`
+
+	// The segment of input text that is matched to the detected entity.
+	Text *string `min:"1" type:"string"`
+
+	// Provides Contextual information for the entity. The traits recognized by
+	// InferICD10CM are DIAGNOSIS, SIGN, SYMPTOM, and NEGATION.
+	Traits []ICD10CMTrait `type:"list"`
+
+	// Describes the specific type of entity with category of entities. InferICD10CM
+	// detects entities of the type DX_NAME.
+	Type ICD10CMEntityType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ICD10CMEntity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Contextual information for the entity. The traits recognized by InferICD10CM
+// are DIAGNOSIS, SIGN, SYMPTOM, and NEGATION.
+type ICD10CMTrait struct {
+	_ struct{} `type:"structure"`
+
+	// Provides a name or contextual description about the trait.
+	Name ICD10CMTraitName `type:"string" enum:"true"`
+
+	// The level of confidence that Amazon Comprehend Medical has that the segment
+	// of text is correctly recognized as a trait.
+	Score *float64 `type:"float"`
+}
+
+// String returns the string representation
+func (s ICD10CMTrait) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -273,6 +410,140 @@ func (s *OutputDataConfig) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// The extracted attributes that relate to this entity. The attributes recognized
+// by InferRxNorm are DOSAGE, DURATION, FORM, FREQUENCY, RATE, ROUTE_OR_MODE.
+type RxNormAttribute struct {
+	_ struct{} `type:"structure"`
+
+	// The 0-based character offset in the input text that shows where the attribute
+	// begins. The offset returns the UTF-8 code point in the string.
+	BeginOffset *int64 `type:"integer"`
+
+	// The 0-based character offset in the input text that shows where the attribute
+	// ends. The offset returns the UTF-8 code point in the string.
+	EndOffset *int64 `type:"integer"`
+
+	// The numeric identifier for this attribute. This is a monotonically increasing
+	// id unique within this response rather than a global unique identifier.
+	Id *int64 `type:"integer"`
+
+	// The level of confidence that Amazon Comprehend Medical has that the attribute
+	// is accurately linked to an entity.
+	RelationshipScore *float64 `type:"float"`
+
+	// The level of confidence that Comprehend Medical has that the segment of text
+	// is correctly recognized as an attribute.
+	Score *float64 `type:"float"`
+
+	// The segment of input text which corresponds to the detected attribute.
+	Text *string `min:"1" type:"string"`
+
+	// Contextual information for the attribute. InferRxNorm recognizes the trait
+	// NEGATION for attributes, i.e. that the patient is not taking a specific dose
+	// or form of a medication.
+	Traits []RxNormTrait `type:"list"`
+
+	// The type of attribute. The types of attributes recognized by InferRxNorm
+	// are BRAND_NAME and GENERIC_NAME.
+	Type RxNormAttributeType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s RxNormAttribute) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The RxNorm concept that the entity could refer to, along with a score indicating
+// the likelihood of the match.
+type RxNormConcept struct {
+	_ struct{} `type:"structure"`
+
+	// RxNorm concept ID, also known as the RxCUI.
+	Code *string `min:"1" type:"string"`
+
+	// The description of the RxNorm concept.
+	Description *string `min:"1" type:"string"`
+
+	// The level of confidence that Amazon Comprehend Medical has that the entity
+	// is accurately linked to the reported RxNorm concept.
+	Score *float64 `type:"float"`
+}
+
+// String returns the string representation
+func (s RxNormConcept) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The collection of medical entities extracted from the input text and their
+// associated information. For each entity, the response provides the entity
+// text, the entity category, where the entity text begins and ends, and the
+// level of confidence that Amazon Comprehend Medical has in the detection and
+// analysis. Attributes and traits of the entity are also returned.
+type RxNormEntity struct {
+	_ struct{} `type:"structure"`
+
+	// The extracted attributes that relate to the entity. The attributes recognized
+	// by InferRxNorm are DOSAGE, DURATION, FORM, FREQUENCY, RATE, ROUTE_OR_MODE,
+	// and STRENGTH.
+	Attributes []RxNormAttribute `type:"list"`
+
+	// The 0-based character offset in the input text that shows where the entity
+	// begins. The offset returns the UTF-8 code point in the string.
+	BeginOffset *int64 `type:"integer"`
+
+	// The category of the entity. The recognized categories are GENERIC or BRAND_NAME.
+	Category RxNormEntityCategory `type:"string" enum:"true"`
+
+	// The 0-based character offset in the input text that shows where the entity
+	// ends. The offset returns the UTF-8 code point in the string.
+	EndOffset *int64 `type:"integer"`
+
+	// The numeric identifier for the entity. This is a monotonically increasing
+	// id unique within this response rather than a global unique identifier.
+	Id *int64 `type:"integer"`
+
+	// The RxNorm concepts that the entity could refer to, along with a score indicating
+	// the likelihood of the match.
+	RxNormConcepts []RxNormConcept `type:"list"`
+
+	// The level of confidence that Amazon Comprehend Medical has in the accuracy
+	// of the detected entity.
+	Score *float64 `type:"float"`
+
+	// The segment of input text extracted from which the entity was detected.
+	Text *string `min:"1" type:"string"`
+
+	// Contextual information for the entity.
+	Traits []RxNormTrait `type:"list"`
+
+	// Describes the specific type of entity. For InferRxNorm, the recognized entity
+	// type is MEDICATION.
+	Type RxNormEntityType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s RxNormEntity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The contextual information for the entity. InferRxNorm recognizes the trait
+// NEGATION, which is any indication that the patient is not taking a medication.
+type RxNormTrait struct {
+	_ struct{} `type:"structure"`
+
+	// Provides a name or contextual description about the trait.
+	Name RxNormTraitName `type:"string" enum:"true"`
+
+	// The level of confidence that Amazon Comprehend Medical has in the accuracy
+	// of the detected trait.
+	Score *float64 `type:"float"`
+}
+
+// String returns the string representation
+func (s RxNormTrait) String() string {
+	return awsutil.Prettify(s)
 }
 
 // Provides contextual information about the extracted entity.

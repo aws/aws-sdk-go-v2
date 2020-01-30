@@ -13,7 +13,8 @@ import (
 type ResolveAliasInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for the alias you want to resolve.
+	// The unique identifier of the alias that you want to retrieve a fleet ID for.
+	// You can use either the alias ID or ARN value.
 	//
 	// AliasId is a required field
 	AliasId *string `type:"string" required:"true"`
@@ -42,7 +43,11 @@ func (s *ResolveAliasInput) Validate() error {
 type ResolveAliasOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Fleet identifier that is associated with the requested alias.
+	// The Amazon Resource Name (ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
+	// associated with the GameLift fleet resource that this alias points to.
+	FleetArn *string `min:"1" type:"string"`
+
+	// The fleet identifier that the alias is pointing to.
 	FleetId *string `type:"string"`
 }
 
@@ -56,7 +61,7 @@ const opResolveAlias = "ResolveAlias"
 // ResolveAliasRequest returns a request value for making API operation for
 // Amazon GameLift.
 //
-// Retrieves the fleet ID that a specified alias is currently pointing to.
+// Retrieves the fleet ID that an alias is currently pointing to.
 //
 //    * CreateAlias
 //

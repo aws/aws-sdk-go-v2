@@ -13,8 +13,8 @@ import (
 type ListBuildsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages.
+	// The maximum number of results to return. Use this parameter with NextToken
+	// to get results as a set of sequential pages.
 	Limit *int64 `min:"1" type:"integer"`
 
 	// Token that indicates the start of the next sequential page of results. Use
@@ -65,7 +65,7 @@ func (s *ListBuildsInput) Validate() error {
 type ListBuildsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Collection of build records that match the request.
+	// A collection of build records that match the request.
 	Builds []Build `type:"list"`
 
 	// Token that indicates where to resume retrieving results on the next call

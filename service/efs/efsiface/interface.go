@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // EFS.
 //    func myFunc(svc efsiface.ClientAPI) bool {
-//        // Make svc.CreateFileSystem request
+//        // Make svc.CreateAccessPoint request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        efsiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateFileSystem(input *efs.CreateFileSystemInput) (*efs.CreateFileSystemOutput, error) {
+//    func (m *mockClientClient) CreateAccessPoint(input *efs.CreateAccessPointInput) (*efs.CreateAccessPointOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,17 +61,27 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	CreateAccessPointRequest(*efs.CreateAccessPointInput) efs.CreateAccessPointRequest
+
 	CreateFileSystemRequest(*efs.CreateFileSystemInput) efs.CreateFileSystemRequest
 
 	CreateMountTargetRequest(*efs.CreateMountTargetInput) efs.CreateMountTargetRequest
 
 	CreateTagsRequest(*efs.CreateTagsInput) efs.CreateTagsRequest
 
+	DeleteAccessPointRequest(*efs.DeleteAccessPointInput) efs.DeleteAccessPointRequest
+
 	DeleteFileSystemRequest(*efs.DeleteFileSystemInput) efs.DeleteFileSystemRequest
+
+	DeleteFileSystemPolicyRequest(*efs.DeleteFileSystemPolicyInput) efs.DeleteFileSystemPolicyRequest
 
 	DeleteMountTargetRequest(*efs.DeleteMountTargetInput) efs.DeleteMountTargetRequest
 
 	DeleteTagsRequest(*efs.DeleteTagsInput) efs.DeleteTagsRequest
+
+	DescribeAccessPointsRequest(*efs.DescribeAccessPointsInput) efs.DescribeAccessPointsRequest
+
+	DescribeFileSystemPolicyRequest(*efs.DescribeFileSystemPolicyInput) efs.DescribeFileSystemPolicyRequest
 
 	DescribeFileSystemsRequest(*efs.DescribeFileSystemsInput) efs.DescribeFileSystemsRequest
 
@@ -83,9 +93,17 @@ type ClientAPI interface {
 
 	DescribeTagsRequest(*efs.DescribeTagsInput) efs.DescribeTagsRequest
 
+	ListTagsForResourceRequest(*efs.ListTagsForResourceInput) efs.ListTagsForResourceRequest
+
 	ModifyMountTargetSecurityGroupsRequest(*efs.ModifyMountTargetSecurityGroupsInput) efs.ModifyMountTargetSecurityGroupsRequest
 
+	PutFileSystemPolicyRequest(*efs.PutFileSystemPolicyInput) efs.PutFileSystemPolicyRequest
+
 	PutLifecycleConfigurationRequest(*efs.PutLifecycleConfigurationInput) efs.PutLifecycleConfigurationRequest
+
+	TagResourceRequest(*efs.TagResourceInput) efs.TagResourceRequest
+
+	UntagResourceRequest(*efs.UntagResourceInput) efs.UntagResourceRequest
 
 	UpdateFileSystemRequest(*efs.UpdateFileSystemInput) efs.UpdateFileSystemRequest
 }

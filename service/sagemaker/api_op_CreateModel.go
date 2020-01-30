@@ -18,8 +18,6 @@ type CreateModelInput struct {
 
 	// Isolates the model container. No inbound or outbound network calls can be
 	// made to or from the model container.
-	//
-	// The Semantic Segmentation built-in algorithm does not support network isolation.
 	EnableNetworkIsolation *bool `type:"boolean"`
 
 	// The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can

@@ -7,6 +7,7 @@ type EndpointType string
 // Enum values for EndpointType
 const (
 	EndpointTypePublic      EndpointType = "PUBLIC"
+	EndpointTypeVpc         EndpointType = "VPC"
 	EndpointTypeVpcEndpoint EndpointType = "VPC_ENDPOINT"
 )
 

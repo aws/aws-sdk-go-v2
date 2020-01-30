@@ -74,7 +74,8 @@ const opEnableSecurityHub = "EnableSecurityHub"
 // AWS SecurityHub.
 //
 // Enables Security Hub for your account in the current Region or the Region
-// you specify in the request. When you enable Security Hub, you grant to Security
+// you specify in the request. Enabling Security Hub also enables the CIS AWS
+// Foundations standard. When you enable Security Hub, you grant to Security
 // Hub the permissions necessary to gather findings from AWS Config, Amazon
 // GuardDuty, Amazon Inspector, and Amazon Macie. To learn more, see Setting
 // Up AWS Security Hub (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html).

@@ -26,10 +26,10 @@ type InitializeClusterInput struct {
 	SignedCert *string `type:"string" required:"true"`
 
 	// The issuing certificate of the issuing certificate authority (CA) that issued
-	// (signed) the cluster certificate. This can be a root (self-signed) certificate
-	// or a certificate chain that begins with the certificate that issued the cluster
-	// certificate and ends with a root certificate. The certificate or certificate
-	// chain must be in PEM format and can contain a maximum of 5000 characters.
+	// (signed) the cluster certificate. You must use a self-signed certificate.
+	// The certificate used to sign the HSM CSR must be directly available, and
+	// thus must be the root certificate. The certificate must be in PEM format
+	// and can contain a maximum of 5000 characters.
 	//
 	// TrustAnchor is a required field
 	TrustAnchor *string `type:"string" required:"true"`

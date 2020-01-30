@@ -26,9 +26,8 @@ type UpdateDetectorModelInput struct {
 	// DetectorModelName is a required field
 	DetectorModelName *string `location:"uri" locationName:"detectorModelName" min:"1" type:"string" required:"true"`
 
-	// When set to SERIAL, variables are updated and event conditions evaluated
-	// in the order that the events are defined. When set to BATCH, variables are
-	// updated and events performed only after all event conditions are evaluated.
+	// Information about the order in which events are evaluated and how actions
+	// are executed.
 	EvaluationMethod EvaluationMethod `locationName:"evaluationMethod" type:"string" enum:"true"`
 
 	// The ARN of the role that grants permission to AWS IoT Events to perform its

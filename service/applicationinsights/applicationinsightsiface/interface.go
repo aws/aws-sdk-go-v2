@@ -93,6 +93,8 @@ type ClientAPI interface {
 
 	ListComponentsRequest(*applicationinsights.ListComponentsInput) applicationinsights.ListComponentsRequest
 
+	ListConfigurationHistoryRequest(*applicationinsights.ListConfigurationHistoryInput) applicationinsights.ListConfigurationHistoryRequest
+
 	ListLogPatternSetsRequest(*applicationinsights.ListLogPatternSetsInput) applicationinsights.ListLogPatternSetsRequest
 
 	ListLogPatternsRequest(*applicationinsights.ListLogPatternsInput) applicationinsights.ListLogPatternsRequest

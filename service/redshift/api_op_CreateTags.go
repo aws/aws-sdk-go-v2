@@ -16,7 +16,7 @@ type CreateTagsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) to which you want to add the tag or tags.
-	// For example, arn:aws:redshift:us-east-1:123456789:cluster:t1.
+	// For example, arn:aws:redshift:us-east-2:123456789:cluster:t1.
 	//
 	// ResourceName is a required field
 	ResourceName *string `type:"string" required:"true"`
@@ -68,7 +68,7 @@ const opCreateTags = "CreateTags"
 // CreateTagsRequest returns a request value for making API operation for
 // Amazon Redshift.
 //
-// Adds one or more tags to a specified resource.
+// Adds tags to a cluster.
 //
 // A resource can have up to 50 tags. If you try to create more than 50 tags
 // for a resource, you will receive an error and the attempt will fail.

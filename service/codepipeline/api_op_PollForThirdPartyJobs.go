@@ -71,8 +71,8 @@ const opPollForThirdPartyJobs = "PollForThirdPartyJobs"
 // on. Used for partner actions only.
 //
 // When this API is called, AWS CodePipeline returns temporary credentials for
-// the Amazon S3 bucket used to store artifacts for the pipeline, if the action
-// requires access to that Amazon S3 bucket for input or output artifacts.
+// the S3 bucket used to store artifacts for the pipeline, if the action requires
+// access to that S3 bucket for input or output artifacts.
 //
 //    // Example sending a request using PollForThirdPartyJobsRequest.
 //    req := client.PollForThirdPartyJobsRequest(params)

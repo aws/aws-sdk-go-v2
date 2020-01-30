@@ -38,6 +38,23 @@ func (enum ComplianceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ControlStatus string
+
+// Enum values for ControlStatus
+const (
+	ControlStatusEnabled  ControlStatus = "ENABLED"
+	ControlStatusDisabled ControlStatus = "DISABLED"
+)
+
+func (enum ControlStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ControlStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DateRangeUnit string
 
 // Enum values for DateRangeUnit
@@ -166,6 +183,25 @@ func (enum RecordState) MarshalValue() (string, error) {
 }
 
 func (enum RecordState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SeverityRating string
+
+// Enum values for SeverityRating
+const (
+	SeverityRatingLow      SeverityRating = "LOW"
+	SeverityRatingMedium   SeverityRating = "MEDIUM"
+	SeverityRatingHigh     SeverityRating = "HIGH"
+	SeverityRatingCritical SeverityRating = "CRITICAL"
+)
+
+func (enum SeverityRating) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SeverityRating) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

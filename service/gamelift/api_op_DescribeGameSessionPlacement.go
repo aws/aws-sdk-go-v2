@@ -13,7 +13,7 @@ import (
 type DescribeGameSessionPlacementInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a game session placement to retrieve.
+	// A unique identifier for a game session placement to retrieve.
 	//
 	// PlacementId is a required field
 	PlacementId *string `min:"1" type:"string" required:"true"`

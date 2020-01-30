@@ -1769,6 +1769,33 @@ func (s AwsJobExecutionsRolloutConfig) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
+// Configuration information for pre-signed URLs. Valid when protocols contains
+// HTTP.
+type AwsJobPresignedUrlConfig struct {
+	_ struct{} `type:"structure"`
+
+	// How long (in seconds) pre-signed URLs are valid. Valid values are 60 - 3600,
+	// the default value is 1800 seconds. Pre-signed URLs are generated when a request
+	// for the job document is received.
+	ExpiresInSec *int64 `locationName:"expiresInSec" type:"long"`
+}
+
+// String returns the string representation
+func (s AwsJobPresignedUrlConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsJobPresignedUrlConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ExpiresInSec != nil {
+		v := *s.ExpiresInSec
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "expiresInSec", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // A Device Defender security profile behavior.
 type Behavior struct {
 	_ struct{} `type:"structure"`
@@ -5679,6 +5706,10 @@ type OTAUpdateInfo struct {
 	// Configuration for the rollout of OTA updates.
 	AwsJobExecutionsRolloutConfig *AwsJobExecutionsRolloutConfig `locationName:"awsJobExecutionsRolloutConfig" type:"structure"`
 
+	// Configuration information for pre-signed URLs. Valid when protocols contains
+	// HTTP.
+	AwsJobPresignedUrlConfig *AwsJobPresignedUrlConfig `locationName:"awsJobPresignedUrlConfig" type:"structure"`
+
 	// The date when the OTA update was created.
 	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 
@@ -5702,6 +5733,11 @@ type OTAUpdateInfo struct {
 
 	// The status of the OTA update.
 	OtaUpdateStatus OTAUpdateStatus `locationName:"otaUpdateStatus" type:"string" enum:"true"`
+
+	// The protocol used to transfer the OTA update image. Valid values are [HTTP],
+	// [MQTT], [HTTP, MQTT]. When both HTTP and MQTT are specified, the target device
+	// can choose the protocol.
+	Protocols []Protocol `locationName:"protocols" min:"1" type:"list"`
 
 	// Specifies whether the OTA update will continue to run (CONTINUOUS), or will
 	// be complete after all those things specified as targets have completed the
@@ -5751,6 +5787,12 @@ func (s OTAUpdateInfo) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "awsJobExecutionsRolloutConfig", v, metadata)
+	}
+	if s.AwsJobPresignedUrlConfig != nil {
+		v := s.AwsJobPresignedUrlConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "awsJobPresignedUrlConfig", v, metadata)
 	}
 	if s.CreationDate != nil {
 		v := *s.CreationDate
@@ -5807,6 +5849,18 @@ func (s OTAUpdateInfo) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "otaUpdateStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Protocols != nil {
+		v := s.Protocols
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "protocols", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	if len(s.TargetSelection) > 0 {
 		v := s.TargetSelection
@@ -6313,7 +6367,7 @@ type PutAssetPropertyValueEntry struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the AWS IoT SiteWise asset. You must specify either a propertyAlias
-	// or both an analiasId and a propertyId. Accepts substitution templates.
+	// or both an aliasId and a propertyId. Accepts substitution templates.
 	AssetId *string `locationName:"assetId" type:"string"`
 
 	// Optional. A unique identifier for this entry that you can define to better
@@ -6327,7 +6381,7 @@ type PutAssetPropertyValueEntry struct {
 	PropertyAlias *string `locationName:"propertyAlias" min:"1" type:"string"`
 
 	// The ID of the asset's property. You must specify either a propertyAlias or
-	// both an analiasId and a propertyId. Accepts substitution templates.
+	// both an aliasId and a propertyId. Accepts substitution templates.
 	PropertyId *string `locationName:"propertyId" type:"string"`
 
 	// A list of property values to insert that each contain timestamp, quality,

@@ -91,6 +91,10 @@ const opCreateLogGroup = "CreateLogGroup"
 // exist or the CMK is disabled, you will receive an InvalidParameterException
 // error.
 //
+// Important: CloudWatch Logs supports only symmetric CMKs. Do not associate
+// an asymmetric CMK with your log group. For more information, see Using Symmetric
+// and Asymmetric Keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html).
+//
 //    // Example sending a request using CreateLogGroupRequest.
 //    req := client.CreateLogGroupRequest(params)
 //    resp, err := req.Send(context.TODO())

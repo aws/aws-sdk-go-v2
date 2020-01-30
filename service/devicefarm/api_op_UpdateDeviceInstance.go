@@ -20,8 +20,7 @@ type UpdateDeviceInstanceInput struct {
 	// An array of strings that you want to associate with the device instance.
 	Labels []string `locationName:"labels" type:"list"`
 
-	// The Amazon Resource Name (ARN) of the profile that you want to associate
-	// with the device instance.
+	// The ARN of the profile that you want to associate with the device instance.
 	ProfileArn *string `locationName:"profileArn" min:"32" type:"string"`
 }
 
@@ -53,7 +52,7 @@ func (s *UpdateDeviceInstanceInput) Validate() error {
 type UpdateDeviceInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object containing information about your device instance.
+	// An object that contains information about your device instance.
 	DeviceInstance *DeviceInstance `locationName:"deviceInstance" type:"structure"`
 }
 
@@ -67,7 +66,7 @@ const opUpdateDeviceInstance = "UpdateDeviceInstance"
 // UpdateDeviceInstanceRequest returns a request value for making API operation for
 // AWS Device Farm.
 //
-// Updates information about an existing private device instance.
+// Updates information about a private device instance.
 //
 //    // Example sending a request using UpdateDeviceInstanceRequest.
 //    req := client.UpdateDeviceInstanceRequest(params)

@@ -20,8 +20,8 @@ type UpdateInstanceProfileInput struct {
 	// The updated description for your instance profile.
 	Description *string `locationName:"description" type:"string"`
 
-	// An array of strings specifying the list of app packages that should not be
-	// cleaned up from the device after a test run is over.
+	// An array of strings that specifies the list of app packages that should not
+	// be cleaned up from the device after a test run is over.
 	//
 	// The list of packages is only considered if you set packageCleanup to true.
 	ExcludeAppPackagesFromCleanup []string `locationName:"excludeAppPackagesFromCleanup" type:"list"`
@@ -63,7 +63,7 @@ func (s *UpdateInstanceProfileInput) Validate() error {
 type UpdateInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object containing information about your instance profile.
+	// An object that contains information about your instance profile.
 	InstanceProfile *InstanceProfile `locationName:"instanceProfile" type:"structure"`
 }
 

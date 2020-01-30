@@ -22,7 +22,7 @@ type DeleteTagsInput struct {
 	// A list of tag keys to delete.
 	//
 	// TagKeys is a required field
-	TagKeys []string `type:"list" required:"true"`
+	TagKeys []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -40,6 +40,9 @@ func (s *DeleteTagsInput) Validate() error {
 
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
+	}
+	if s.TagKeys != nil && len(s.TagKeys) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TagKeys", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -110,6 +113,9 @@ const opDeleteTags = "DeleteTags"
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteTags
 func (c *Client) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteTags, has been deprecated")
+	}
 	op := &aws.Operation{
 		Name:       opDeleteTags,
 		HTTPMethod: "POST",

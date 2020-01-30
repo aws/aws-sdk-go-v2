@@ -22,6 +22,9 @@ type InviteUsersInput struct {
 	//
 	// UserEmailList is a required field
 	UserEmailList []string `type:"list" required:"true"`
+
+	// The user type.
+	UserType UserType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -62,6 +65,12 @@ func (s InviteUsersInput) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	if len(s.UserType) > 0 {
+		v := s.UserType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UserType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.AccountId != nil {
 		v := *s.AccountId

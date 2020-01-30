@@ -340,6 +340,24 @@ func (enum AudioNormalizationAlgorithmControl) MarshalValueBuf(b []byte) ([]byte
 	return append(b, enum...), nil
 }
 
+// Audio Only Hls Segment Type
+type AudioOnlyHlsSegmentType string
+
+// Enum values for AudioOnlyHlsSegmentType
+const (
+	AudioOnlyHlsSegmentTypeAac  AudioOnlyHlsSegmentType = "AAC"
+	AudioOnlyHlsSegmentTypeFmp4 AudioOnlyHlsSegmentType = "FMP4"
+)
+
+func (enum AudioOnlyHlsSegmentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AudioOnlyHlsSegmentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Audio Only Hls Track Type
 type AudioOnlyHlsTrackType string
 
@@ -1118,6 +1136,24 @@ func (enum FollowPoint) MarshalValue() (string, error) {
 }
 
 func (enum FollowPoint) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Frame Capture Interval Unit
+type FrameCaptureIntervalUnit string
+
+// Enum values for FrameCaptureIntervalUnit
+const (
+	FrameCaptureIntervalUnitMilliseconds FrameCaptureIntervalUnit = "MILLISECONDS"
+	FrameCaptureIntervalUnitSeconds      FrameCaptureIntervalUnit = "SECONDS"
+)
+
+func (enum FrameCaptureIntervalUnit) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FrameCaptureIntervalUnit) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -1937,6 +1973,42 @@ func (enum HlsEncryptionType) MarshalValue() (string, error) {
 }
 
 func (enum HlsEncryptionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Hls H265 Packaging Type
+type HlsH265PackagingType string
+
+// Enum values for HlsH265PackagingType
+const (
+	HlsH265PackagingTypeHev1 HlsH265PackagingType = "HEV1"
+	HlsH265PackagingTypeHvc1 HlsH265PackagingType = "HVC1"
+)
+
+func (enum HlsH265PackagingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HlsH265PackagingType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// State of HLS ID3 Segment Tagging
+type HlsId3SegmentTaggingState string
+
+// Enum values for HlsId3SegmentTaggingState
+const (
+	HlsId3SegmentTaggingStateDisabled HlsId3SegmentTaggingState = "DISABLED"
+	HlsId3SegmentTaggingStateEnabled  HlsId3SegmentTaggingState = "ENABLED"
+)
+
+func (enum HlsId3SegmentTaggingState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HlsId3SegmentTaggingState) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

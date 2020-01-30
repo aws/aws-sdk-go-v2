@@ -13,16 +13,16 @@ import (
 type UpdateProjectInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the project whose name you wish to update.
+	// The Amazon Resource Name (ARN) of the project whose name to update.
 	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
 
-	// The number of minutes a test run in the project will execute before it times
+	// The number of minutes a test run in the project executes before it times
 	// out.
 	DefaultJobTimeoutMinutes *int64 `locationName:"defaultJobTimeoutMinutes" type:"integer"`
 
-	// A string representing the new name of the project that you are updating.
+	// A string that represents the new name of the project that you are updating.
 	Name *string `locationName:"name" type:"string"`
 }
 
@@ -52,7 +52,7 @@ func (s *UpdateProjectInput) Validate() error {
 type UpdateProjectOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The project you wish to update.
+	// The project to update.
 	Project *Project `locationName:"project" type:"structure"`
 }
 

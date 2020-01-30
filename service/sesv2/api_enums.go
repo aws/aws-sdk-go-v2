@@ -93,18 +93,34 @@ func (enum DimensionValueSource) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type DkimSigningAttributesOrigin string
+
+// Enum values for DkimSigningAttributesOrigin
+const (
+	DkimSigningAttributesOriginAwsSes   DkimSigningAttributesOrigin = "AWS_SES"
+	DkimSigningAttributesOriginExternal DkimSigningAttributesOrigin = "EXTERNAL"
+)
+
+func (enum DkimSigningAttributesOrigin) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DkimSigningAttributesOrigin) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The DKIM authentication status of the identity. The status can be one of
 // the following:
 //
-//    * PENDING – The DKIM verification process was initiated, and Amazon
-//    SES hasn't yet detected the CNAME records in the DNS configuration for
+//    * PENDING – The verification process was initiated, but Amazon SES hasn't
+//    yet detected the DKIM records in the DNS configuration for the domain.
+//
+//    * SUCCESS – The verification process completed successfully.
+//
+//    * FAILED – The verification process failed. This typically occurs when
+//    Amazon SES fails to find the DKIM records in the DNS configuration of
 //    the domain.
-//
-//    * SUCCESS – The DKIM authentication process completed successfully.
-//
-//    * FAILED – The DKIM authentication process failed. This can happen when
-//    Amazon SES fails to find the required CNAME records in the DNS configuration
-//    of the domain.
 //
 //    * TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from
 //    determining the DKIM authentication status of the domain.
@@ -210,13 +226,15 @@ func (enum MailFromDomainStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// A string representing the cause for suppression for an email destination.
-// It can be one of the following:
+// The reason that the address was added to the suppression list for your account.
+// The value can be one of the following:
 //
-//    * COMPLAINT – Amazon SES will suppress an email address that receive
-//    a complaint.
+//    * COMPLAINT – Amazon SES added an email address to the suppression list
+//    for your account because a message sent to that address results in a complaint.
 //
-//    * BOUNCE – Amazon SES will suppress an email address that hard bounces.
+//    * BOUNCE – Amazon SES added an email address to the suppression list
+//    for your account because a message sent to that address results in a hard
+//    bounce.
 type SuppressionListReason string
 
 // Enum values for SuppressionListReason

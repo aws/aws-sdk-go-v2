@@ -57,7 +57,9 @@ type DescribePatchGroupStateOutput struct {
 	// The number of instances with installed patches.
 	InstancesWithInstalledPatches *int64 `type:"integer"`
 
-	// Reserved for future use.
+	// The number of instances with patches installed by Patch Manager that have
+	// not been rebooted after the patch installation. The status of these instances
+	// is NON_COMPLIANT.
 	InstancesWithInstalledPendingRebootPatches *int64 `type:"integer"`
 
 	// The number of instances with patches installed that are specified in a RejectedPatches

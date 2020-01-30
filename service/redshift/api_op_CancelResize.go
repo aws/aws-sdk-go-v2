@@ -128,7 +128,7 @@ const opCancelResize = "CancelResize"
 // CancelResizeRequest returns a request value for making API operation for
 // Amazon Redshift.
 //
-// Cancels a resize operation.
+// Cancels a resize operation for a cluster.
 //
 //    // Example sending a request using CancelResizeRequest.
 //    req := client.CancelResizeRequest(params)

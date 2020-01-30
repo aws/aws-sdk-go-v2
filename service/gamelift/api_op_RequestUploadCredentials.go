@@ -13,7 +13,8 @@ import (
 type RequestUploadCredentialsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a build to get credentials for.
+	// A unique identifier for a build to get credentials for. You can use either
+	// the build ID or ARN value.
 	//
 	// BuildId is a required field
 	BuildId *string `type:"string" required:"true"`

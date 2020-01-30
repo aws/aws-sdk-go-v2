@@ -835,6 +835,9 @@ type AudioOnlyHlsSettings struct {
 	// play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with
 	// DEFAULT=NO, AUTOSELECT=NO
 	AudioTrackType AudioOnlyHlsTrackType `locationName:"audioTrackType" type:"string" enum:"true"`
+
+	// Specifies the segment type.
+	SegmentType AudioOnlyHlsSegmentType `locationName:"segmentType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -876,6 +879,12 @@ func (s AudioOnlyHlsSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "audioTrackType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.SegmentType) > 0 {
+		v := s.SegmentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "segmentType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -3616,6 +3625,31 @@ func (s FixedModeScheduleActionStartSettings) MarshalFields(e protocol.FieldEnco
 	return nil
 }
 
+// Fmp4 Hls Settings
+type Fmp4HlsSettings struct {
+	_ struct{} `type:"structure"`
+
+	// List all the audio groups that are used with the video output stream. Input
+	// all the audio GROUP-IDs that are associated to the video, separate by ','.
+	AudioRenditionSets *string `locationName:"audioRenditionSets" type:"string"`
+}
+
+// String returns the string representation
+func (s Fmp4HlsSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Fmp4HlsSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AudioRenditionSets != nil {
+		v := *s.AudioRenditionSets
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "audioRenditionSets", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Settings to specify if an action follows another.
 type FollowModeScheduleActionStartSettings struct {
 	_ struct{} `type:"structure"`
@@ -3751,6 +3785,9 @@ type FrameCaptureSettings struct {
 	//
 	// CaptureInterval is a required field
 	CaptureInterval *int64 `locationName:"captureInterval" min:"1" type:"integer" required:"true"`
+
+	// Unit for the frame capture interval.
+	CaptureIntervalUnits FrameCaptureIntervalUnit `locationName:"captureIntervalUnits" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3782,6 +3819,12 @@ func (s FrameCaptureSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "captureInterval", protocol.Int64Value(v), metadata)
+	}
+	if len(s.CaptureIntervalUnits) > 0 {
+		v := s.CaptureIntervalUnits
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "captureIntervalUnits", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -4061,7 +4104,10 @@ type H264Settings struct {
 	// video complexity. Recommended instead of QVBRif you want to maintain a specific
 	// average bitrate over the duration of the channel.CBR: Quality varies, depending
 	// on the video complexity. Recommended only if you distributeyour assets to
-	// devices that cannot handle variable bitrates.
+	// devices that cannot handle variable bitrates.Multiplex: This rate control
+	// mode is only supported (and is required) when the video is beingdelivered
+	// to a MediaLive Multiplex in which case the rate control configuration is
+	// controlledby the properties within the Multiplex Program.
 	RateControlMode H264RateControlMode `locationName:"rateControlMode" type:"string" enum:"true"`
 
 	// Sets the scan type of the output to progressive or top-field-first interlaced.
@@ -5018,10 +5064,22 @@ type HlsGroupSettings struct {
 	// the main .m3u8 file.
 	BaseUrlContent *string `locationName:"baseUrlContent" type:"string"`
 
+	// Optional. One value per output group.This field is required only if you are
+	// completing Base URL content A, and the downstream system has notified you
+	// that the media files for pipeline 1 of all outputs are in a location different
+	// from the media files for pipeline 0.
+	BaseUrlContent1 *string `locationName:"baseUrlContent1" type:"string"`
+
 	// A partial URI prefix that will be prepended to each output in the media .m3u8
 	// file. Can be used if base manifest is delivered from a different URL than
 	// the main .m3u8 file.
 	BaseUrlManifest *string `locationName:"baseUrlManifest" type:"string"`
+
+	// Optional. One value per output group.Complete this field only if you are
+	// completing Base URL manifest A, and the downstream system has notified you
+	// that the child manifest files for pipeline 1 of all outputs are in a location
+	// different from the child manifest files for pipeline 0.
+	BaseUrlManifest1 *string `locationName:"baseUrlManifest1" type:"string"`
 
 	// Mapping of up to 4 caption channels to caption languages. Is only meaningful
 	// if captionLanguageSetting is set to "insert".
@@ -5066,6 +5124,9 @@ type HlsGroupSettings struct {
 
 	// Parameters that control interactions with the CDN.
 	HlsCdnSettings *HlsCdnSettings `locationName:"hlsCdnSettings" type:"structure"`
+
+	// State of HLS ID3 Segment Tagging
+	HlsId3SegmentTagging HlsId3SegmentTaggingState `locationName:"hlsId3SegmentTagging" type:"string" enum:"true"`
 
 	// DISABLED: Do not create an I-frame-only manifest, but do create the master
 	// and media manifests (according to the Output Selection field).STANDARD: Create
@@ -5262,11 +5323,23 @@ func (s HlsGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "baseUrlContent", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.BaseUrlContent1 != nil {
+		v := *s.BaseUrlContent1
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "baseUrlContent1", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.BaseUrlManifest != nil {
 		v := *s.BaseUrlManifest
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "baseUrlManifest", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.BaseUrlManifest1 != nil {
+		v := *s.BaseUrlManifest1
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "baseUrlManifest1", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.CaptionLanguageMappings != nil {
 		v := s.CaptionLanguageMappings
@@ -5327,6 +5400,12 @@ func (s HlsGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "hlsCdnSettings", v, metadata)
+	}
+	if len(s.HlsId3SegmentTagging) > 0 {
+		v := s.HlsId3SegmentTagging
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "hlsId3SegmentTagging", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.IFrameOnlyPlaylists) > 0 {
 		v := s.IFrameOnlyPlaylists
@@ -5481,6 +5560,48 @@ func (s HlsGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Settings for the action to insert a user-defined ID3 tag in each HLS segment
+type HlsId3SegmentTaggingScheduleActionSettings struct {
+	_ struct{} `type:"structure"`
+
+	// ID3 tag to insert into each segment. Supports special keyword identifiers
+	// to substitute in segment-related values.\nSupported keyword identifiers:
+	// https://docs.aws.amazon.com/medialive/latest/ug/variable-data-identifiers.html
+	//
+	// Tag is a required field
+	Tag *string `locationName:"tag" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s HlsId3SegmentTaggingScheduleActionSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HlsId3SegmentTaggingScheduleActionSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HlsId3SegmentTaggingScheduleActionSettings"}
+
+	if s.Tag == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Tag"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HlsId3SegmentTaggingScheduleActionSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Tag != nil {
+		v := *s.Tag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "tag", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Hls Input Settings
 type HlsInputSettings struct {
 	_ struct{} `type:"structure"`
@@ -5607,6 +5728,10 @@ func (s HlsMediaStoreSettings) MarshalFields(e protocol.FieldEncoder) error {
 type HlsOutputSettings struct {
 	_ struct{} `type:"structure"`
 
+	// Only applicable when this output is referencing an H.265 video description.Specifies
+	// whether MP4 segments should be packaged as HEV1 or HVC1.
+	H265PackagingType HlsH265PackagingType `locationName:"h265PackagingType" type:"string" enum:"true"`
+
 	// Settings regarding the underlying stream. These settings are different for
 	// audio-only outputs.
 	//
@@ -5650,6 +5775,12 @@ func (s *HlsOutputSettings) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s HlsOutputSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.H265PackagingType) > 0 {
+		v := s.H265PackagingType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "h265PackagingType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.HlsSettings != nil {
 		v := s.HlsSettings
 
@@ -5677,6 +5808,9 @@ type HlsSettings struct {
 
 	// Audio Only Hls Settings
 	AudioOnlyHlsSettings *AudioOnlyHlsSettings `locationName:"audioOnlyHlsSettings" type:"structure"`
+
+	// Fmp4 Hls Settings
+	Fmp4HlsSettings *Fmp4HlsSettings `locationName:"fmp4HlsSettings" type:"structure"`
 
 	// Standard Hls Settings
 	StandardHlsSettings *StandardHlsSettings `locationName:"standardHlsSettings" type:"structure"`
@@ -5714,6 +5848,12 @@ func (s HlsSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "audioOnlyHlsSettings", v, metadata)
+	}
+	if s.Fmp4HlsSettings != nil {
+		v := s.Fmp4HlsSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "fmp4HlsSettings", v, metadata)
 	}
 	if s.StandardHlsSettings != nil {
 		v := s.StandardHlsSettings
@@ -9110,38 +9250,6 @@ func (s MultiplexSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-type MultiplexValidationError struct {
-	_ struct{} `type:"structure"`
-
-	// Path to the source of the error.
-	ElementPath *string `locationName:"elementPath" type:"string"`
-
-	// The error message.
-	ErrorMessage *string `locationName:"errorMessage" type:"string"`
-}
-
-// String returns the string representation
-func (s MultiplexValidationError) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s MultiplexValidationError) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ElementPath != nil {
-		v := *s.ElementPath
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "elementPath", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ErrorMessage != nil {
-		v := *s.ErrorMessage
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "errorMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
 // The video configuration for each program in a multiplex.
 type MultiplexVideoSettings struct {
 	_ struct{} `type:"structure"`
@@ -10764,6 +10872,9 @@ func (s ScheduleAction) MarshalFields(e protocol.FieldEncoder) error {
 type ScheduleActionSettings struct {
 	_ struct{} `type:"structure"`
 
+	// Action to insert HLS ID3 segment tagging
+	HlsId3SegmentTaggingSettings *HlsId3SegmentTaggingScheduleActionSettings `locationName:"hlsId3SegmentTaggingSettings" type:"structure"`
+
 	// Action to insert HLS metadata
 	HlsTimedMetadataSettings *HlsTimedMetadataScheduleActionSettings `locationName:"hlsTimedMetadataSettings" type:"structure"`
 
@@ -10797,6 +10908,11 @@ func (s ScheduleActionSettings) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScheduleActionSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ScheduleActionSettings"}
+	if s.HlsId3SegmentTaggingSettings != nil {
+		if err := s.HlsId3SegmentTaggingSettings.Validate(); err != nil {
+			invalidParams.AddNested("HlsId3SegmentTaggingSettings", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.HlsTimedMetadataSettings != nil {
 		if err := s.HlsTimedMetadataSettings.Validate(); err != nil {
 			invalidParams.AddNested("HlsTimedMetadataSettings", err.(aws.ErrInvalidParams))
@@ -10841,6 +10957,12 @@ func (s *ScheduleActionSettings) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ScheduleActionSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HlsId3SegmentTaggingSettings != nil {
+		v := s.HlsId3SegmentTaggingSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hlsId3SegmentTaggingSettings", v, metadata)
+	}
 	if s.HlsTimedMetadataSettings != nil {
 		v := s.HlsTimedMetadataSettings
 
@@ -12341,6 +12463,36 @@ func (s UdpOutputSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "fecOutputSettings", v, metadata)
+	}
+	return nil
+}
+
+type ValidationError struct {
+	_ struct{} `type:"structure"`
+
+	ElementPath *string `locationName:"elementPath" type:"string"`
+
+	ErrorMessage *string `locationName:"errorMessage" type:"string"`
+}
+
+// String returns the string representation
+func (s ValidationError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ValidationError) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ElementPath != nil {
+		v := *s.ElementPath
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "elementPath", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ErrorMessage != nil {
+		v := *s.ErrorMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "errorMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

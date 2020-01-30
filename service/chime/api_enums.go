@@ -323,6 +323,23 @@ func (enum RoomMembershipRole) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type UserType string
+
+// Enum values for UserType
+const (
+	UserTypePrivateUser  UserType = "PrivateUser"
+	UserTypeSharedDevice UserType = "SharedDevice"
+)
+
+func (enum UserType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UserType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type VoiceConnectorAwsRegion string
 
 // Enum values for VoiceConnectorAwsRegion

@@ -95,8 +95,7 @@ const opCreateSmsTemplate = "CreateSmsTemplate"
 // CreateSmsTemplateRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Creates a message template that you can use in messages that are sent through
-// the SMS channel.
+// Creates a message template for messages that are sent through the SMS channel.
 //
 //    // Example sending a request using CreateSmsTemplateRequest.
 //    req := client.CreateSmsTemplateRequest(params)

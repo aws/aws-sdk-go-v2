@@ -95,8 +95,8 @@ const opCreatePushTemplate = "CreatePushTemplate"
 // CreatePushTemplateRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Creates a message template that you can use in messages that are sent through
-// a push notification channel.
+// Creates a message template for messages that are sent through a push notification
+// channel.
 //
 //    // Example sending a request using CreatePushTemplateRequest.
 //    req := client.CreatePushTemplateRequest(params)

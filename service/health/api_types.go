@@ -23,6 +23,7 @@ type AffectedEntity struct {
 	// . Example: arn:aws:health:us-east-1:111222333444:entity/AVh5GGT7ul1arKr1sE1K
 	EntityArn *string `locationName:"entityArn" type:"string"`
 
+	// The URL of the affected entity.
 	EntityUrl *string `locationName:"entityUrl" type:"string"`
 
 	// The ID of the affected entity.
@@ -147,9 +148,7 @@ func (s *EntityFilter) Validate() error {
 	return nil
 }
 
-// Summary information about an event, returned by the DescribeEvents operation.
-// The DescribeEventDetails operation also returns this information, as well
-// as the EventDescription and additional event metadata.
+// Summary information about an AWS Health event.
 type Event struct {
 	_ struct{} `type:"structure"`
 
@@ -158,7 +157,7 @@ type Event struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The AWS Availability Zone of the event. For example, us-east-1a.
-	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
+	AvailabilityZone *string `locationName:"availabilityZone" min:"6" type:"string"`
 
 	// The date and time that the event ended.
 	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
@@ -175,7 +174,7 @@ type Event struct {
 	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp"`
 
 	// The AWS region name of the event.
-	Region *string `locationName:"region" type:"string"`
+	Region *string `locationName:"region" min:"2" type:"string"`
 
 	// The AWS service that is affected by the event. For example, EC2, RDS.
 	Service *string `locationName:"service" min:"2" type:"string"`
@@ -191,6 +190,46 @@ type Event struct {
 // String returns the string representation
 func (s Event) String() string {
 	return awsutil.Prettify(s)
+}
+
+// The values used to filter results from the DescribeEventDetailsForOrganization
+// and DescribeAffectedEntitiesForOrganization operations.
+type EventAccountFilter struct {
+	_ struct{} `type:"structure"`
+
+	// The 12-digit AWS account numbers that contains the affected entities.
+	//
+	// AwsAccountId is a required field
+	AwsAccountId *string `locationName:"awsAccountId" type:"string" required:"true"`
+
+	// The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
+	//
+	// EventArn is a required field
+	EventArn *string `locationName:"eventArn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s EventAccountFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EventAccountFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "EventAccountFilter"}
+
+	if s.AwsAccountId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AwsAccountId"))
+	}
+
+	if s.EventArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EventArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // The number of events of each issue type. Returned by the DescribeEventAggregates
@@ -294,7 +333,7 @@ type EventFilter struct {
 	// A list of event type category codes (issue, scheduledChange, or accountNotification).
 	EventTypeCategories []EventTypeCategory `locationName:"eventTypeCategories" min:"1" type:"list"`
 
-	// A list of unique identifiers for event types. For example, "AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED"
+	// A list of unique identifiers for event types. For example, "AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED".
 	EventTypeCodes []string `locationName:"eventTypeCodes" min:"1" type:"list"`
 
 	// A list of dates and times that the event was last updated.
@@ -410,6 +449,215 @@ func (s *EventTypeFilter) Validate() error {
 	}
 	if s.EventTypeCodes != nil && len(s.EventTypeCodes) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("EventTypeCodes", 1))
+	}
+	if s.Services != nil && len(s.Services) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Services", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Error information returned when a DescribeAffectedEntitiesForOrganization
+// operation cannot find or process a specific entity.
+type OrganizationAffectedEntitiesErrorItem struct {
+	_ struct{} `type:"structure"`
+
+	// The 12-digit AWS account numbers that contains the affected entities.
+	AwsAccountId *string `locationName:"awsAccountId" type:"string"`
+
+	// The unique identifier for the event type. The format is AWS_SERVICE_DESCRIPTION.
+	// For example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT.
+	ErrorMessage *string `locationName:"errorMessage" type:"string"`
+
+	// The name of the error.
+	ErrorName *string `locationName:"errorName" type:"string"`
+
+	// The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
+	EventArn *string `locationName:"eventArn" type:"string"`
+}
+
+// String returns the string representation
+func (s OrganizationAffectedEntitiesErrorItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Summary information about an event, returned by the DescribeEventsForOrganization
+// operation.
+type OrganizationEvent struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The date and time that the event ended.
+	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
+
+	// The category of the event type.
+	EventTypeCategory EventTypeCategory `locationName:"eventTypeCategory" min:"3" type:"string" enum:"true"`
+
+	// The unique identifier for the event type. The format is AWS_SERVICE_DESCRIPTION.
+	// For example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT.
+	EventTypeCode *string `locationName:"eventTypeCode" min:"3" type:"string"`
+
+	// The most recent date and time that the event was updated.
+	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp"`
+
+	// The AWS Region name of the event.
+	Region *string `locationName:"region" min:"2" type:"string"`
+
+	// The AWS service that is affected by the event. For example, EC2, RDS.
+	Service *string `locationName:"service" min:"2" type:"string"`
+
+	// The date and time that the event began.
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
+
+	// The most recent status of the event. Possible values are open, closed, and
+	// upcoming.
+	StatusCode EventStatusCode `locationName:"statusCode" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s OrganizationEvent) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Detailed information about an event. A combination of an Event object, an
+// EventDescription object, and additional metadata about the event. Returned
+// by the DescribeEventDetailsForOrganization operation.
+type OrganizationEventDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The 12-digit AWS account numbers that contains the affected entities.
+	AwsAccountId *string `locationName:"awsAccountId" type:"string"`
+
+	// Summary information about an AWS Health event.
+	Event *Event `locationName:"event" type:"structure"`
+
+	// The detailed description of the event. Included in the information returned
+	// by the DescribeEventDetails operation.
+	EventDescription *EventDescription `locationName:"eventDescription" type:"structure"`
+
+	// Additional metadata about the event.
+	EventMetadata map[string]string `locationName:"eventMetadata" type:"map"`
+}
+
+// String returns the string representation
+func (s OrganizationEventDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Error information returned when a DescribeEventDetailsForOrganization operation
+// cannot find a specified event.
+type OrganizationEventDetailsErrorItem struct {
+	_ struct{} `type:"structure"`
+
+	// Error information returned when a DescribeEventDetailsForOrganization operation
+	// cannot find a specified event.
+	AwsAccountId *string `locationName:"awsAccountId" type:"string"`
+
+	// A message that describes the error.
+	ErrorMessage *string `locationName:"errorMessage" type:"string"`
+
+	// The name of the error.
+	ErrorName *string `locationName:"errorName" type:"string"`
+
+	// The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
+	EventArn *string `locationName:"eventArn" type:"string"`
+}
+
+// String returns the string representation
+func (s OrganizationEventDetailsErrorItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The values to filter results from the DescribeEventsForOrganization operation.
+type OrganizationEventFilter struct {
+	_ struct{} `type:"structure"`
+
+	// A list of 12-digit AWS account numbers that contains the affected entities.
+	AwsAccountIds []string `locationName:"awsAccountIds" min:"1" type:"list"`
+
+	// A range of dates and times that is used by the EventFilter and EntityFilter
+	// objects. If from is set and to is set: match items where the timestamp (startTime,
+	// endTime, or lastUpdatedTime) is between from and to inclusive. If from is
+	// set and to is not set: match items where the timestamp value is equal to
+	// or after from. If from is not set and to is set: match items where the timestamp
+	// value is equal to or before to.
+	EndTime *DateTimeRange `locationName:"endTime" type:"structure"`
+
+	// REPLACEME
+	EntityArns []string `locationName:"entityArns" min:"1" type:"list"`
+
+	// A list of entity identifiers, such as EC2 instance IDs (i-34ab692e) or EBS
+	// volumes (vol-426ab23e).
+	EntityValues []string `locationName:"entityValues" min:"1" type:"list"`
+
+	// A list of event status codes.
+	EventStatusCodes []EventStatusCode `locationName:"eventStatusCodes" min:"1" type:"list"`
+
+	// REPLACEME
+	EventTypeCategories []EventTypeCategory `locationName:"eventTypeCategories" min:"1" type:"list"`
+
+	// A list of unique identifiers for event types. For example, "AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED".
+	EventTypeCodes []string `locationName:"eventTypeCodes" min:"1" type:"list"`
+
+	// A range of dates and times that is used by the EventFilter and EntityFilter
+	// objects. If from is set and to is set: match items where the timestamp (startTime,
+	// endTime, or lastUpdatedTime) is between from and to inclusive. If from is
+	// set and to is not set: match items where the timestamp value is equal to
+	// or after from. If from is not set and to is set: match items where the timestamp
+	// value is equal to or before to.
+	LastUpdatedTime *DateTimeRange `locationName:"lastUpdatedTime" type:"structure"`
+
+	// A list of AWS Regions.
+	Regions []string `locationName:"regions" min:"1" type:"list"`
+
+	// The AWS services associated with the event. For example, EC2, RDS.
+	Services []string `locationName:"services" min:"1" type:"list"`
+
+	// A range of dates and times that is used by the EventFilter and EntityFilter
+	// objects. If from is set and to is set: match items where the timestamp (startTime,
+	// endTime, or lastUpdatedTime) is between from and to inclusive. If from is
+	// set and to is not set: match items where the timestamp value is equal to
+	// or after from. If from is not set and to is set: match items where the timestamp
+	// value is equal to or before to.
+	StartTime *DateTimeRange `locationName:"startTime" type:"structure"`
+}
+
+// String returns the string representation
+func (s OrganizationEventFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OrganizationEventFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OrganizationEventFilter"}
+	if s.AwsAccountIds != nil && len(s.AwsAccountIds) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AwsAccountIds", 1))
+	}
+	if s.EntityArns != nil && len(s.EntityArns) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EntityArns", 1))
+	}
+	if s.EntityValues != nil && len(s.EntityValues) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EntityValues", 1))
+	}
+	if s.EventStatusCodes != nil && len(s.EventStatusCodes) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EventStatusCodes", 1))
+	}
+	if s.EventTypeCategories != nil && len(s.EventTypeCategories) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EventTypeCategories", 1))
+	}
+	if s.EventTypeCodes != nil && len(s.EventTypeCodes) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EventTypeCodes", 1))
+	}
+	if s.Regions != nil && len(s.Regions) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Regions", 1))
 	}
 	if s.Services != nil && len(s.Services) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Services", 1))

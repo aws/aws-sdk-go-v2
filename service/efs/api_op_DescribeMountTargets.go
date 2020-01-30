@@ -13,8 +13,15 @@ import (
 type DescribeMountTargetsInput struct {
 	_ struct{} `type:"structure"`
 
+	// (Optional) The ID of the access point whose mount targets that you want to
+	// list. It must be included in your request if a FileSystemId or MountTargetId
+	// is not included in your request. Accepts either an access point ID or ARN
+	// as input.
+	AccessPointId *string `location:"querystring" locationName:"AccessPointId" type:"string"`
+
 	// (Optional) ID of the file system whose mount targets you want to list (String).
-	// It must be included in your request if MountTargetId is not included.
+	// It must be included in your request if an AccessPointId or MountTargetId
+	// is not included. Accepts either a file system ID or ARN as input.
 	FileSystemId *string `location:"querystring" locationName:"FileSystemId" type:"string"`
 
 	// (Optional) Opaque pagination token returned from a previous DescribeMountTargets
@@ -24,11 +31,12 @@ type DescribeMountTargetsInput struct {
 
 	// (Optional) Maximum number of mount targets to return in the response. Currently,
 	// this number is automatically set to 10, and other values are ignored. The
-	// response is paginated at 10 per page if you have more than 10 mount targets.
+	// response is paginated at 100 per page if you have more than 100 mount targets.
 	MaxItems *int64 `location:"querystring" locationName:"MaxItems" min:"1" type:"integer"`
 
 	// (Optional) ID of the mount target that you want to have described (String).
-	// It must be included in your request if FileSystemId is not included.
+	// It must be included in your request if FileSystemId is not included. Accepts
+	// either a mount target ID or ARN as input.
 	MountTargetId *string `location:"querystring" locationName:"MountTargetId" type:"string"`
 }
 
@@ -54,6 +62,12 @@ func (s *DescribeMountTargetsInput) Validate() error {
 func (s DescribeMountTargetsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if s.AccessPointId != nil {
+		v := *s.AccessPointId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "AccessPointId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.FileSystemId != nil {
 		v := *s.FileSystemId
 

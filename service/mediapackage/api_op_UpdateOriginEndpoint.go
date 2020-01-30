@@ -13,6 +13,9 @@ import (
 type UpdateOriginEndpointInput struct {
 	_ struct{} `type:"structure"`
 
+	// CDN Authorization credentials
+	Authorization *Authorization `locationName:"authorization" type:"structure"`
+
 	// A Common Media Application Format (CMAF) packaging configuration.
 	CmafPackage *CmafPackageCreateOrUpdateParameters `locationName:"cmafPackage" type:"structure"`
 
@@ -53,6 +56,11 @@ func (s *UpdateOriginEndpointInput) Validate() error {
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
+	if s.Authorization != nil {
+		if err := s.Authorization.Validate(); err != nil {
+			invalidParams.AddNested("Authorization", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.CmafPackage != nil {
 		if err := s.CmafPackage.Validate(); err != nil {
 			invalidParams.AddNested("CmafPackage", err.(aws.ErrInvalidParams))
@@ -84,6 +92,12 @@ func (s *UpdateOriginEndpointInput) Validate() error {
 func (s UpdateOriginEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if s.Authorization != nil {
+		v := s.Authorization
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "authorization", v, metadata)
+	}
 	if s.CmafPackage != nil {
 		v := s.CmafPackage
 
@@ -164,6 +178,9 @@ type UpdateOriginEndpointOutput struct {
 
 	Arn *string `locationName:"arn" type:"string"`
 
+	// CDN Authorization credentials
+	Authorization *Authorization `locationName:"authorization" type:"structure"`
+
 	ChannelId *string `locationName:"channelId" type:"string"`
 
 	// A Common Media Application Format (CMAF) packaging configuration.
@@ -210,6 +227,12 @@ func (s UpdateOriginEndpointOutput) MarshalFields(e protocol.FieldEncoder) error
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Authorization != nil {
+		v := s.Authorization
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "authorization", v, metadata)
 	}
 	if s.ChannelId != nil {
 		v := *s.ChannelId

@@ -13,9 +13,9 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 //
-//  Cost Category is in preview release for AWS Billing and Cost Management
-//  and is subject to change. Your use of Cost Categories is subject to the
-//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
+//  Cost Category is in public beta for AWS Billing and Cost Management and
+//  is subject to change. Your use of Cost Categories is subject to the Beta
+//  Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
 //  (Section 1.10).
 //
 // The structure of Cost Categories. This includes detailed metadata and the
@@ -60,9 +60,9 @@ func (s CostCategory) String() string {
 }
 
 //
-//  Cost Category is in preview release for AWS Billing and Cost Management
-//  and is subject to change. Your use of Cost Categories is subject to the
-//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
+//  Cost Category is in public beta for AWS Billing and Cost Management and
+//  is subject to change. Your use of Cost Categories is subject to the Beta
+//  Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
 //  (Section 1.10).
 //
 // A reference to a Cost Category containing only enough information to identify
@@ -92,9 +92,9 @@ func (s CostCategoryReference) String() string {
 }
 
 //
-//  Cost Category is in preview release for AWS Billing and Cost Management
-//  and is subject to change. Your use of Cost Categories is subject to the
-//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
+//  Cost Category is in public beta for AWS Billing and Cost Management and
+//  is subject to change. Your use of Cost Categories is subject to the Beta
+//  Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
 //  (Section 1.10).
 //
 // Rules are processed in order. If there are multiple rules that match the
@@ -150,9 +150,9 @@ func (s *CostCategoryRule) Validate() error {
 }
 
 //
-//  Cost Category is in preview release for AWS Billing and Cost Management
-//  and is subject to change. Your use of Cost Categories is subject to the
-//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
+//  Cost Category is in public beta for AWS Billing and Cost Management and
+//  is subject to change. Your use of Cost Categories is subject to the Beta
+//  Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
 //  (Section 1.10).
 //
 // The values that are available for Cost Categories.
@@ -610,9 +610,9 @@ type Expression struct {
 	// Return results that match both Dimension objects.
 	And []Expression `type:"list"`
 
-	//  Cost Category is in preview release for AWS Billing and Cost Management
-	//  and is subject to change. Your use of Cost Categories is subject to the
-	//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
+	//  Cost Category is in public beta for AWS Billing and Cost Management and
+	//  is subject to change. Your use of Cost Categories is subject to the Beta
+	//  Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
 	//  (Section 1.10).
 	//
 	// The specific CostCategory used for Expression.

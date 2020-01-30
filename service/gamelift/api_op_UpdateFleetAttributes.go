@@ -16,7 +16,8 @@ type UpdateFleetAttributesInput struct {
 	// Human-readable description of a fleet.
 	Description *string `min:"1" type:"string"`
 
-	// Unique identifier for a fleet to update attribute metadata for.
+	// A unique identifier for a fleet to update attribute metadata for. You can
+	// use either the fleet ID or ARN value.
 	//
 	// FleetId is a required field
 	FleetId *string `type:"string" required:"true"`
@@ -28,7 +29,7 @@ type UpdateFleetAttributesInput struct {
 	// time.
 	MetricGroups []string `type:"list"`
 
-	// Descriptive label that is associated with a fleet. Fleet names do not need
+	// A descriptive label that is associated with a fleet. Fleet names do not need
 	// to be unique.
 	Name *string `min:"1" type:"string"`
 
@@ -77,7 +78,8 @@ func (s *UpdateFleetAttributesInput) Validate() error {
 type UpdateFleetAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a fleet that was updated.
+	// A unique identifier for a fleet that was updated. Use either the fleet ID
+	// or ARN value.
 	FleetId *string `type:"string"`
 }
 
@@ -107,9 +109,7 @@ const opUpdateFleetAttributes = "UpdateFleetAttributes"
 //
 //    * DeleteFleet
 //
-//    * Describe fleets: DescribeFleetAttributes DescribeFleetCapacity DescribeFleetPortSettings
-//    DescribeFleetUtilization DescribeRuntimeConfiguration DescribeEC2InstanceLimits
-//    DescribeFleetEvents
+//    * DescribeFleetAttributes
 //
 //    * Update fleets: UpdateFleetAttributes UpdateFleetCapacity UpdateFleetPortSettings
 //    UpdateRuntimeConfiguration

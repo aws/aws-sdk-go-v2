@@ -13,15 +13,15 @@ import (
 type GetInstanceAccessInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a fleet that contains the instance you want access
-	// to. The fleet can be in any of the following statuses: ACTIVATING, ACTIVE,
-	// or ERROR. Fleets with an ERROR status may be accessible for a short time
-	// before they are deleted.
+	// A unique identifier for a fleet that contains the instance you want access
+	// to. You can use either the fleet ID or ARN value. The fleet can be in any
+	// of the following statuses: ACTIVATING, ACTIVE, or ERROR. Fleets with an ERROR
+	// status may be accessible for a short time before they are deleted.
 	//
 	// FleetId is a required field
 	FleetId *string `type:"string" required:"true"`
 
-	// Unique identifier for an instance you want to get access to. You can access
+	// A unique identifier for an instance you want to get access to. You can access
 	// an instance in any status.
 	//
 	// InstanceId is a required field
@@ -55,8 +55,8 @@ func (s *GetInstanceAccessInput) Validate() error {
 type GetInstanceAccessOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Object that contains connection information for a fleet instance, including
-	// IP address and access credentials.
+	// The connection information for a fleet instance, including IP address and
+	// access credentials.
 	InstanceAccess *InstanceAccess `type:"structure"`
 }
 

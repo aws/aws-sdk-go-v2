@@ -16,17 +16,18 @@ type UpdateFleetCapacityInput struct {
 	// Number of EC2 instances you want this fleet to host.
 	DesiredInstances *int64 `type:"integer"`
 
-	// Unique identifier for a fleet to update capacity for.
+	// A unique identifier for a fleet to update capacity for. You can use either
+	// the fleet ID or ARN value.
 	//
 	// FleetId is a required field
 	FleetId *string `type:"string" required:"true"`
 
-	// Maximum value allowed for the fleet's instance count. Default if not set
-	// is 1.
+	// The maximum value allowed for the fleet's instance count. Default if not
+	// set is 1.
 	MaxSize *int64 `type:"integer"`
 
-	// Minimum value allowed for the fleet's instance count. Default if not set
-	// is 0.
+	// The minimum value allowed for the fleet's instance count. Default if not
+	// set is 0.
 	MinSize *int64 `type:"integer"`
 }
 
@@ -53,7 +54,7 @@ func (s *UpdateFleetCapacityInput) Validate() error {
 type UpdateFleetCapacityOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a fleet that was updated.
+	// A unique identifier for a fleet that was updated.
 	FleetId *string `type:"string"`
 }
 
@@ -96,9 +97,7 @@ const opUpdateFleetCapacity = "UpdateFleetCapacity"
 //
 //    * DeleteFleet
 //
-//    * Describe fleets: DescribeFleetAttributes DescribeFleetCapacity DescribeFleetPortSettings
-//    DescribeFleetUtilization DescribeRuntimeConfiguration DescribeEC2InstanceLimits
-//    DescribeFleetEvents
+//    * DescribeFleetAttributes
 //
 //    * Update fleets: UpdateFleetAttributes UpdateFleetCapacity UpdateFleetPortSettings
 //    UpdateRuntimeConfiguration

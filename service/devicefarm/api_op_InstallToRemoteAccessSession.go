@@ -14,8 +14,7 @@ import (
 type InstallToRemoteAccessSessionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the app about which you are requesting
-	// information.
+	// The ARN of the app about which you are requesting information.
 	//
 	// AppArn is a required field
 	AppArn *string `locationName:"appArn" min:"32" type:"string" required:"true"`

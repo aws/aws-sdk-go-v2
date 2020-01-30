@@ -66,9 +66,9 @@ const opListCostCategoryDefinitions = "ListCostCategoryDefinitions"
 // AWS Cost Explorer Service.
 //
 //
-//  Cost Category is in preview release for AWS Billing and Cost Management
-//  and is subject to change. Your use of Cost Categories is subject to the
-//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
+//  Cost Category is in public beta for AWS Billing and Cost Management and
+//  is subject to change. Your use of Cost Categories is subject to the Beta
+//  Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
 //  (Section 1.10).
 //
 // Returns the name, ARN and effective dates of all Cost Categories defined

@@ -4,6 +4,7 @@ package cloudhsmv2
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -33,6 +34,8 @@ type CreateClusterInput struct {
 	//
 	// SubnetIds is a required field
 	SubnetIds []string `min:"1" type:"list" required:"true"`
+
+	TagList []Tag `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -53,6 +56,16 @@ func (s *CreateClusterInput) Validate() error {
 	}
 	if s.SubnetIds != nil && len(s.SubnetIds) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SubnetIds", 1))
+	}
+	if s.TagList != nil && len(s.TagList) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TagList", 1))
+	}
+	if s.TagList != nil {
+		for i, v := range s.TagList {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagList", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

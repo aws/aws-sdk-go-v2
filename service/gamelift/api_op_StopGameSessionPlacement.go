@@ -13,7 +13,7 @@ import (
 type StopGameSessionPlacementInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a game session placement to cancel.
+	// A unique identifier for a game session placement to cancel.
 	//
 	// PlacementId is a required field
 	PlacementId *string `min:"1" type:"string" required:"true"`

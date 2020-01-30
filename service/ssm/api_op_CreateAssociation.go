@@ -30,10 +30,11 @@ type CreateAssociationInput struct {
 	// The instance ID.
 	//
 	// InstanceId has been deprecated. To specify an instance ID for an association,
-	// use the Targets parameter. If you use the parameter InstanceId, you cannot
-	// use the parameters AssociationName, DocumentVersion, MaxErrors, MaxConcurrency,
-	// OutputLocation, or ScheduleExpression. To use these parameters, you must
-	// use the Targets parameter.
+	// use the Targets parameter. Requests that include the parameter InstanceID
+	// with SSM documents that use schema version 2.0 or later will fail. In addition,
+	// if you use the parameter InstanceId, you cannot use the parameters AssociationName,
+	// DocumentVersion, MaxErrors, MaxConcurrency, OutputLocation, or ScheduleExpression.
+	// To use these parameters, you must use the Targets parameter.
 	InstanceId *string `type:"string"`
 
 	// The maximum number of targets allowed to run the association at the same

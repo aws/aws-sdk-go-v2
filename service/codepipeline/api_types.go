@@ -15,8 +15,8 @@ var _ = awsutil.Prettify
 
 // Represents an AWS session credentials object. These credentials are temporary
 // credentials that are issued by AWS Secure Token Service (STS). They can be
-// used to access input and output artifacts in the Amazon S3 bucket used to
-// store artifact for the pipeline in AWS CodePipeline.
+// used to access input and output artifacts in the S3 bucket used to store
+// artifact for the pipeline in AWS CodePipeline.
 type AWSSessionCredentials struct {
 	_ struct{} `type:"structure" sensitive:"true"`
 
@@ -786,7 +786,7 @@ func (s *ArtifactDetails) Validate() error {
 type ArtifactLocation struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon S3 bucket that contains the artifact.
+	// The S3 bucket that contains the artifact.
 	S3Location *S3ArtifactLocation `locationName:"s3Location" type:"structure"`
 
 	// The type of artifact in the location.
@@ -834,7 +834,7 @@ func (s ArtifactRevision) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The Amazon S3 bucket where artifacts for the pipeline are stored.
+// The S3 bucket where artifacts for the pipeline are stored.
 //
 // You must include either artifactStore or artifactStores in your pipeline,
 // but you cannot use both. If you create a cross-region action in your pipeline,
@@ -847,11 +847,11 @@ type ArtifactStore struct {
 	// key for Amazon S3 is used.
 	EncryptionKey *EncryptionKey `locationName:"encryptionKey" type:"structure"`
 
-	// The Amazon S3 bucket used for storing the artifacts for a pipeline. You can
-	// specify the name of an S3 bucket but not a folder in the bucket. A folder
-	// to contain the pipeline artifacts is created for you based on the name of
-	// the pipeline. You can use any Amazon S3 bucket in the same AWS Region as
-	// the pipeline to store your pipeline artifacts.
+	// The S3 bucket used for storing the artifacts for a pipeline. You can specify
+	// the name of an S3 bucket but not a folder in the bucket. A folder to contain
+	// the pipeline artifacts is created for you based on the name of the pipeline.
+	// You can use any S3 bucket in the same AWS Region as the pipeline to store
+	// your pipeline artifacts.
 	//
 	// Location is a required field
 	Location *string `locationName:"location" min:"3" type:"string" required:"true"`
@@ -1228,8 +1228,8 @@ type JobData struct {
 
 	// Represents an AWS session credentials object. These credentials are temporary
 	// credentials that are issued by AWS Secure Token Service (STS). They can be
-	// used to access input and output artifacts in the Amazon S3 bucket used to
-	// store artifacts for the pipeline in AWS CodePipeline.
+	// used to access input and output artifacts in the S3 bucket used to store
+	// artifacts for the pipeline in AWS CodePipeline.
 	ArtifactCredentials *AWSSessionCredentials `locationName:"artifactCredentials" type:"structure" sensitive:"true"`
 
 	// A system-generated token, such as a AWS CodeDeploy deployment ID, required
@@ -1392,8 +1392,8 @@ func (s PipelineContext) String() string {
 type PipelineDeclaration struct {
 	_ struct{} `type:"structure"`
 
-	// Represents information about the Amazon S3 bucket where artifacts are stored
-	// for the pipeline.
+	// Represents information about the S3 bucket where artifacts are stored for
+	// the pipeline.
 	//
 	// You must include either artifactStore or artifactStores in your pipeline,
 	// but you cannot use both. If you create a cross-region action in your pipeline,
@@ -1493,21 +1493,30 @@ type PipelineExecution struct {
 	// The ID of the pipeline execution.
 	PipelineExecutionId *string `locationName:"pipelineExecutionId" type:"string"`
 
-	// The name of the pipeline that was executed.
+	// The name of the pipeline with the specified pipeline execution.
 	PipelineName *string `locationName:"pipelineName" min:"1" type:"string"`
 
-	// The version number of the pipeline that was executed.
+	// The version number of the pipeline with the specified pipeline execution.
 	PipelineVersion *int64 `locationName:"pipelineVersion" min:"1" type:"integer"`
 
 	// The status of the pipeline execution.
 	//
 	//    * InProgress: The pipeline execution is currently running.
 	//
+	//    * Stopped: The pipeline execution was manually stopped. For more information,
+	//    see Stopped Executions (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped).
+	//
+	//    * Stopping: The pipeline execution received a request to be manually stopped.
+	//    Depending on the selected stop mode, the execution is either completing
+	//    or abandoning in-progress actions. For more information, see Stopped Executions
+	//    (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped).
+	//
 	//    * Succeeded: The pipeline execution was completed successfully.
 	//
 	//    * Superseded: While this pipeline execution was waiting for the next stage
 	//    to be completed, a newer pipeline execution advanced and continued through
-	//    the pipeline instead.
+	//    the pipeline instead. For more information, see Superseded Executions
+	//    (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded).
 	//
 	//    * Failed: The pipeline execution was not completed successfully.
 	Status PipelineExecutionStatus `locationName:"status" type:"string" enum:"true"`
@@ -1539,14 +1548,26 @@ type PipelineExecutionSummary struct {
 	//
 	//    * InProgress: The pipeline execution is currently running.
 	//
+	//    * Stopped: The pipeline execution was manually stopped. For more information,
+	//    see Stopped Executions (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped).
+	//
+	//    * Stopping: The pipeline execution received a request to be manually stopped.
+	//    Depending on the selected stop mode, the execution is either completing
+	//    or abandoning in-progress actions. For more information, see Stopped Executions
+	//    (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped).
+	//
 	//    * Succeeded: The pipeline execution was completed successfully.
 	//
 	//    * Superseded: While this pipeline execution was waiting for the next stage
 	//    to be completed, a newer pipeline execution advanced and continued through
-	//    the pipeline instead.
+	//    the pipeline instead. For more information, see Superseded Executions
+	//    (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded).
 	//
 	//    * Failed: The pipeline execution was not completed successfully.
 	Status PipelineExecutionStatus `locationName:"status" type:"string" enum:"true"`
+
+	// The interaction that stopped a pipeline execution.
+	StopTrigger *StopExecutionTrigger `locationName:"stopTrigger" type:"structure"`
 
 	// The interaction or event that started a pipeline execution, such as automated
 	// change detection or a StartPipelineExecution API call.
@@ -1599,17 +1620,17 @@ func (s PipelineSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The location of the Amazon S3 bucket that contains a revision.
+// The location of the S3 bucket that contains a revision.
 type S3ArtifactLocation struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the Amazon S3 bucket.
+	// The name of the S3 bucket.
 	//
 	// BucketName is a required field
 	BucketName *string `locationName:"bucketName" type:"string" required:"true"`
 
-	// The key of the object in the Amazon S3 bucket, which uniquely identifies
-	// the object in the bucket.
+	// The key of the object in the S3 bucket, which uniquely identifies the object
+	// in the bucket.
 	//
 	// ObjectKey is a required field
 	ObjectKey *string `locationName:"objectKey" type:"string" required:"true"`
@@ -1782,6 +1803,19 @@ func (s StageState) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The interaction that stopped a pipeline execution.
+type StopExecutionTrigger struct {
+	_ struct{} `type:"structure"`
+
+	// The user-specified reason the pipeline was stopped.
+	Reason *string `locationName:"reason" type:"string"`
+}
+
+// String returns the string representation
+func (s StopExecutionTrigger) String() string {
+	return awsutil.Prettify(s)
+}
+
 // A tag is a key-value pair that is used to manage the resource.
 type Tag struct {
 	_ struct{} `type:"structure"`
@@ -1853,8 +1887,8 @@ type ThirdPartyJobData struct {
 
 	// Represents an AWS session credentials object. These credentials are temporary
 	// credentials that are issued by AWS Secure Token Service (STS). They can be
-	// used to access input and output artifacts in the Amazon S3 bucket used to
-	// store artifact for the pipeline in AWS CodePipeline.
+	// used to access input and output artifacts in the S3 bucket used to store
+	// artifact for the pipeline in AWS CodePipeline.
 	ArtifactCredentials *AWSSessionCredentials `locationName:"artifactCredentials" type:"structure" sensitive:"true"`
 
 	// A system-generated token, such as a AWS CodeDeploy deployment ID, that a

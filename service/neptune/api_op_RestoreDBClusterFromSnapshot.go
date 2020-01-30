@@ -49,6 +49,11 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// Not supported.
 	DatabaseName *string `type:"string"`
 
+	// A value that indicates whether the DB cluster has deletion protection enabled.
+	// The database can't be deleted when deletion protection is enabled. By default,
+	// deletion protection is disabled.
+	DeletionProtection *bool `type:"boolean"`
+
 	// The list of logs that the restored DB cluster is to export to Amazon CloudWatch
 	// Logs.
 	EnableCloudwatchLogsExports []string `type:"list"`
@@ -90,7 +95,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 	//    encrypted, then the restored DB cluster is not encrypted.
 	KmsKeyId *string `type:"string"`
 
-	// The name of the option group to use for the restored DB cluster.
+	// (Not supported by Neptune)
 	OptionGroupName *string `type:"string"`
 
 	// The port number on which the new DB cluster accepts connections.

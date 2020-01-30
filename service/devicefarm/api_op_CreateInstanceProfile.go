@@ -15,10 +15,10 @@ type CreateInstanceProfileInput struct {
 	// The description of your instance profile.
 	Description *string `locationName:"description" type:"string"`
 
-	// An array of strings specifying the list of app packages that should not be
-	// cleaned up from the device after a test run is over.
+	// An array of strings that specifies the list of app packages that should not
+	// be cleaned up from the device after a test run.
 	//
-	// The list of packages is only considered if you set packageCleanup to true.
+	// The list of packages is considered only if you set packageCleanup to true.
 	ExcludeAppPackagesFromCleanup []string `locationName:"excludeAppPackagesFromCleanup" type:"list"`
 
 	// The name of your instance profile.
@@ -26,12 +26,12 @@ type CreateInstanceProfileInput struct {
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
 
-	// When set to true, Device Farm will remove app packages after a test run.
-	// The default value is false for private devices.
+	// When set to true, Device Farm removes app packages after a test run. The
+	// default value is false for private devices.
 	PackageCleanup *bool `locationName:"packageCleanup" type:"boolean"`
 
-	// When set to true, Device Farm will reboot the instance after a test run.
-	// The default value is true.
+	// When set to true, Device Farm reboots the instance after a test run. The
+	// default value is true.
 	RebootAfterUse *bool `locationName:"rebootAfterUse" type:"boolean"`
 }
 
@@ -57,7 +57,7 @@ func (s *CreateInstanceProfileInput) Validate() error {
 type CreateInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object containing information about your instance profile.
+	// An object that contains information about your instance profile.
 	InstanceProfile *InstanceProfile `locationName:"instanceProfile" type:"structure"`
 }
 

@@ -65,6 +65,60 @@ func (enum BackupType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type DataRepositoryTaskFilterName string
+
+// Enum values for DataRepositoryTaskFilterName
+const (
+	DataRepositoryTaskFilterNameFileSystemId  DataRepositoryTaskFilterName = "file-system-id"
+	DataRepositoryTaskFilterNameTaskLifecycle DataRepositoryTaskFilterName = "task-lifecycle"
+)
+
+func (enum DataRepositoryTaskFilterName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DataRepositoryTaskFilterName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DataRepositoryTaskLifecycle string
+
+// Enum values for DataRepositoryTaskLifecycle
+const (
+	DataRepositoryTaskLifecyclePending   DataRepositoryTaskLifecycle = "PENDING"
+	DataRepositoryTaskLifecycleExecuting DataRepositoryTaskLifecycle = "EXECUTING"
+	DataRepositoryTaskLifecycleFailed    DataRepositoryTaskLifecycle = "FAILED"
+	DataRepositoryTaskLifecycleSucceeded DataRepositoryTaskLifecycle = "SUCCEEDED"
+	DataRepositoryTaskLifecycleCanceled  DataRepositoryTaskLifecycle = "CANCELED"
+	DataRepositoryTaskLifecycleCanceling DataRepositoryTaskLifecycle = "CANCELING"
+)
+
+func (enum DataRepositoryTaskLifecycle) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DataRepositoryTaskLifecycle) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DataRepositoryTaskType string
+
+// Enum values for DataRepositoryTaskType
+const (
+	DataRepositoryTaskTypeExportToRepository DataRepositoryTaskType = "EXPORT_TO_REPOSITORY"
+)
+
+func (enum DataRepositoryTaskType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DataRepositoryTaskType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The lifecycle status of the file system.
 type FileSystemLifecycle string
 
@@ -137,6 +191,38 @@ func (enum FilterName) MarshalValue() (string, error) {
 }
 
 func (enum FilterName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ReportFormat string
+
+// Enum values for ReportFormat
+const (
+	ReportFormatReportCsv20191124 ReportFormat = "REPORT_CSV_20191124"
+)
+
+func (enum ReportFormat) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ReportScope string
+
+// Enum values for ReportScope
+const (
+	ReportScopeFailedFilesOnly ReportScope = "FAILED_FILES_ONLY"
+)
+
+func (enum ReportScope) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportScope) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

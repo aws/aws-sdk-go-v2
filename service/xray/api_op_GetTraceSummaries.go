@@ -129,7 +129,8 @@ type GetTraceSummariesOutput struct {
 	// most most recent results, closest to the end of the time frame.
 	NextToken *string `type:"string"`
 
-	// Trace IDs and metadata for traces that were found in the specified time frame.
+	// Trace IDs and annotations for traces that were found in the specified time
+	// frame.
 	TraceSummaries []TraceSummary `type:"list"`
 
 	// The total number of traces processed, including traces that did not match
@@ -183,7 +184,7 @@ const opGetTraceSummaries = "GetTraceSummaries"
 // GetTraceSummariesRequest returns a request value for making API operation for
 // AWS X-Ray.
 //
-// Retrieves IDs and metadata for traces available for a specified time frame
+// Retrieves IDs and annotations for traces available for a specified time frame
 // using an optional filter. To get the full traces, pass the trace IDs to BatchGetTraces.
 //
 // A filter expression can target traced requests that hit specific service

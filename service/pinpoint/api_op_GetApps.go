@@ -72,7 +72,8 @@ const opGetApps = "GetApps"
 // GetAppsRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Retrieves information about all of your applications.
+// Retrieves information about all the applications that are associated with
+// your Amazon Pinpoint account.
 //
 //    // Example sending a request using GetAppsRequest.
 //    req := client.GetAppsRequest(params)

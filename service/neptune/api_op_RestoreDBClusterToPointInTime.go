@@ -40,6 +40,11 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// Example: mySubnetgroup
 	DBSubnetGroupName *string `type:"string"`
 
+	// A value that indicates whether the DB cluster has deletion protection enabled.
+	// The database can't be deleted when deletion protection is enabled. By default,
+	// deletion protection is disabled.
+	DeletionProtection *bool `type:"boolean"`
+
 	// The list of logs that the restored DB cluster is to export to CloudWatch
 	// Logs.
 	EnableCloudwatchLogsExports []string `type:"list"`
@@ -76,7 +81,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// the restore request is rejected.
 	KmsKeyId *string `type:"string"`
 
-	// The name of the option group for the new DB cluster.
+	// (Not supported by Neptune)
 	OptionGroupName *string `type:"string"`
 
 	// The port number on which the new DB cluster accepts connections.

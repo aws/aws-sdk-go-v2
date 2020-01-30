@@ -12,7 +12,12 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// Contains information about a backup of an AWS CloudHSM cluster.
+// Contains information about a backup of an AWS CloudHSM cluster. All backup
+// objects contain the BackupId, BackupState, ClusterId, and CreateTimestamp
+// parameters. Backups that were copied into a destination region additionally
+// contain the CopyTimestamp, SourceBackup, SourceCluster, and SourceRegion
+// paramters. A backup that is pending deletion will include the DeleteTimestamp
+// parameter.
 type Backup struct {
 	_ struct{} `type:"structure"`
 
@@ -27,6 +32,7 @@ type Backup struct {
 	// The identifier (ID) of the cluster that was backed up.
 	ClusterId *string `type:"string"`
 
+	// The date and time when the backup was copied from a source backup.
 	CopyTimestamp *time.Time `type:"timestamp"`
 
 	// The date and time when the backup was created.
@@ -35,11 +41,18 @@ type Backup struct {
 	// The date and time when the backup will be permanently deleted.
 	DeleteTimestamp *time.Time `type:"timestamp"`
 
+	// The identifier (ID) of the source backup from which the new backup was copied.
 	SourceBackup *string `type:"string"`
 
+	// The identifier (ID) of the cluster containing the source backup from which
+	// the new backup was copied. .
 	SourceCluster *string `type:"string"`
 
+	// The AWS region that contains the source backup from which the new backup
+	// was copied.
 	SourceRegion *string `type:"string"`
+
+	TagList []Tag `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -112,8 +125,11 @@ type Cluster struct {
 	// A description of the cluster's state.
 	StateMessage *string `type:"string"`
 
-	// A map of the cluster's subnets and their corresponding Availability Zones.
+	// A map from availability zone to the cluster’s subnet in that availability
+	// zone.
 	SubnetMapping map[string]string `type:"map"`
+
+	TagList []Tag `min:"1" type:"list"`
 
 	// The identifier (ID) of the virtual private cloud (VPC) that contains the
 	// cluster.
@@ -125,15 +141,23 @@ func (s Cluster) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Contains information about the backup that will be copied and created by
+// the CopyBackupToRegion operation.
 type DestinationBackup struct {
 	_ struct{} `type:"structure"`
 
+	// The date and time when both the source backup was created.
 	CreateTimestamp *time.Time `type:"timestamp"`
 
+	// The identifier (ID) of the source backup from which the new backup was copied.
 	SourceBackup *string `type:"string"`
 
+	// The identifier (ID) of the cluster containing the source backup from which
+	// the new backup was copied.
 	SourceCluster *string `type:"string"`
 
+	// The AWS region that contains the source backup from which the new backup
+	// was copied.
 	SourceRegion *string `type:"string"`
 }
 

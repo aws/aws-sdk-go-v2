@@ -18,6 +18,9 @@ type UpdateUserInput struct {
 	// AccountId is a required field
 	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
 
+	// The Alexa for Business metadata.
+	AlexaForBusinessMetadata *AlexaForBusinessMetadata `type:"structure"`
+
 	// The user license type to update. This must be a supported license type for
 	// the Amazon Chime account that the user belongs to.
 	LicenseType License `type:"string" enum:"true"`
@@ -26,6 +29,9 @@ type UpdateUserInput struct {
 	//
 	// UserId is a required field
 	UserId *string `location:"uri" locationName:"userId" type:"string" required:"true"`
+
+	// The user type.
+	UserType UserType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -55,11 +61,23 @@ func (s *UpdateUserInput) Validate() error {
 func (s UpdateUserInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if s.AlexaForBusinessMetadata != nil {
+		v := s.AlexaForBusinessMetadata
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AlexaForBusinessMetadata", v, metadata)
+	}
 	if len(s.LicenseType) > 0 {
 		v := s.LicenseType
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LicenseType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.UserType) > 0 {
+		v := s.UserType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UserType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.AccountId != nil {
 		v := *s.AccountId

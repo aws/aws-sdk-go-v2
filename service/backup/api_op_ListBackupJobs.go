@@ -32,15 +32,15 @@ type ListBackupJobsInput struct {
 
 	// Returns only backup jobs for the specified resources:
 	//
+	//    * DynamoDB for Amazon DynamoDB
+	//
 	//    * EBS for Amazon Elastic Block Store
 	//
-	//    * SGW for AWS Storage Gateway
+	//    * EFS for Amazon Elastic File System
 	//
 	//    * RDS for Amazon Relational Database Service
 	//
-	//    * DDB for Amazon DynamoDB
-	//
-	//    * EFS for Amazon Elastic File System
+	//    * Storage Gateway for AWS Storage Gateway
 	ByResourceType *string `location:"querystring" locationName:"resourceType" type:"string"`
 
 	// Returns only backup jobs that are in the specified state.

@@ -13,7 +13,7 @@ import (
 type GetSamplingRulesInput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 }
 
@@ -38,7 +38,7 @@ func (s GetSamplingRulesInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetSamplingRulesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 
 	// Rule definitions and metadata.

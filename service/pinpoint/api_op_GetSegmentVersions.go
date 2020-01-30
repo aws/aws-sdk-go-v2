@@ -109,7 +109,7 @@ const opGetSegmentVersions = "GetSegmentVersions"
 // Amazon Pinpoint.
 //
 // Retrieves information about the configuration, dimension, and other settings
-// for all versions of a specific segment that's associated with an application.
+// for all the versions of a specific segment that's associated with an application.
 //
 //    // Example sending a request using GetSegmentVersionsRequest.
 //    req := client.GetSegmentVersionsRequest(params)

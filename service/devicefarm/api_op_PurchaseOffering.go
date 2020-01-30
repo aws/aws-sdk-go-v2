@@ -19,7 +19,7 @@ type PurchaseOfferingInput struct {
 	// The ID of the offering promotion to be applied to the purchase.
 	OfferingPromotionId *string `locationName:"offeringPromotionId" min:"4" type:"string"`
 
-	// The number of device slots you wish to purchase in an offering request.
+	// The number of device slots to purchase in an offering request.
 	Quantity *int64 `locationName:"quantity" type:"integer"`
 }
 
@@ -44,7 +44,7 @@ func (s *PurchaseOfferingInput) Validate() error {
 	return nil
 }
 
-// The result of the purchase offering (e.g., success or failure).
+// The result of the purchase offering (for example, success or failure).
 type PurchaseOfferingOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -65,9 +65,8 @@ const opPurchaseOffering = "PurchaseOffering"
 // Immediately purchases offerings for an AWS account. Offerings renew with
 // the latest total purchased quantity for an offering, unless the renewal was
 // overridden. The API returns a NotEligible error if the user is not permitted
-// to invoke the operation. Please contact aws-devicefarm-support@amazon.com
-// (mailto:aws-devicefarm-support@amazon.com) if you believe that you should
-// be able to invoke this operation.
+// to invoke the operation. If you must be able to invoke this operation, contact
+// aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com).
 //
 //    // Example sending a request using PurchaseOfferingRequest.
 //    req := client.PurchaseOfferingRequest(params)

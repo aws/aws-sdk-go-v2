@@ -14,15 +14,16 @@ import (
 type UpdateFleetPortSettingsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a fleet to update port settings for.
+	// A unique identifier for a fleet to update port settings for. You can use
+	// either the fleet ID or ARN value.
 	//
 	// FleetId is a required field
 	FleetId *string `type:"string" required:"true"`
 
-	// Collection of port settings to be added to the fleet record.
+	// A collection of port settings to be added to the fleet record.
 	InboundPermissionAuthorizations []IpPermission `type:"list"`
 
-	// Collection of port settings to be removed from the fleet record.
+	// A collection of port settings to be removed from the fleet record.
 	InboundPermissionRevocations []IpPermission `type:"list"`
 }
 
@@ -63,7 +64,7 @@ func (s *UpdateFleetPortSettingsInput) Validate() error {
 type UpdateFleetPortSettingsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a fleet that was updated.
+	// A unique identifier for a fleet that was updated.
 	FleetId *string `type:"string"`
 }
 
@@ -96,9 +97,7 @@ const opUpdateFleetPortSettings = "UpdateFleetPortSettings"
 //
 //    * DeleteFleet
 //
-//    * Describe fleets: DescribeFleetAttributes DescribeFleetCapacity DescribeFleetPortSettings
-//    DescribeFleetUtilization DescribeRuntimeConfiguration DescribeEC2InstanceLimits
-//    DescribeFleetEvents
+//    * DescribeFleetAttributes
 //
 //    * Update fleets: UpdateFleetAttributes UpdateFleetCapacity UpdateFleetPortSettings
 //    UpdateRuntimeConfiguration

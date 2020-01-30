@@ -13,7 +13,7 @@ import (
 type DeleteRunInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) for the run you wish to delete.
+	// The Amazon Resource Name (ARN) for the run to delete.
 	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
@@ -58,7 +58,7 @@ const opDeleteRun = "DeleteRun"
 //
 // Deletes the run, given the run ARN.
 //
-// Note Deleting this resource does not stop an in-progress run.
+// Deleting this resource does not stop an in-progress run.
 //
 //    // Example sending a request using DeleteRunRequest.
 //    req := client.DeleteRunRequest(params)

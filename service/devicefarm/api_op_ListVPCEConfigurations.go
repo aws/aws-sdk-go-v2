@@ -12,8 +12,8 @@ import (
 type ListVPCEConfigurationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// An integer specifying the maximum number of items you want to return in the
-	// API response.
+	// An integer that specifies the maximum number of items you want to return
+	// in the API response.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
 	// An identifier that was returned from the previous call to this operation,
@@ -46,8 +46,8 @@ type ListVPCEConfigurationsOutput struct {
 	// which can be used to return the next set of items in the list.
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
 
-	// An array of VPCEConfiguration objects containing information about your VPC
-	// endpoint configuration.
+	// An array of VPCEConfiguration objects that contain information about your
+	// VPC endpoint configuration.
 	VpceConfigurations []VPCEConfiguration `locationName:"vpceConfigurations" type:"list"`
 }
 

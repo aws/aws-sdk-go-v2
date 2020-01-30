@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AWSHealth.
 //    func myFunc(svc healthiface.ClientAPI) bool {
-//        // Make svc.DescribeAffectedEntities request
+//        // Make svc.DescribeAffectedAccountsForOrganization request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        healthiface.ClientPI
 //    }
-//    func (m *mockClientClient) DescribeAffectedEntities(input *health.DescribeAffectedEntitiesInput) (*health.DescribeAffectedEntitiesOutput, error) {
+//    func (m *mockClientClient) DescribeAffectedAccountsForOrganization(input *health.DescribeAffectedAccountsForOrganizationInput) (*health.DescribeAffectedAccountsForOrganizationOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,7 +61,11 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	DescribeAffectedAccountsForOrganizationRequest(*health.DescribeAffectedAccountsForOrganizationInput) health.DescribeAffectedAccountsForOrganizationRequest
+
 	DescribeAffectedEntitiesRequest(*health.DescribeAffectedEntitiesInput) health.DescribeAffectedEntitiesRequest
+
+	DescribeAffectedEntitiesForOrganizationRequest(*health.DescribeAffectedEntitiesForOrganizationInput) health.DescribeAffectedEntitiesForOrganizationRequest
 
 	DescribeEntityAggregatesRequest(*health.DescribeEntityAggregatesInput) health.DescribeEntityAggregatesRequest
 
@@ -69,9 +73,19 @@ type ClientAPI interface {
 
 	DescribeEventDetailsRequest(*health.DescribeEventDetailsInput) health.DescribeEventDetailsRequest
 
+	DescribeEventDetailsForOrganizationRequest(*health.DescribeEventDetailsForOrganizationInput) health.DescribeEventDetailsForOrganizationRequest
+
 	DescribeEventTypesRequest(*health.DescribeEventTypesInput) health.DescribeEventTypesRequest
 
 	DescribeEventsRequest(*health.DescribeEventsInput) health.DescribeEventsRequest
+
+	DescribeEventsForOrganizationRequest(*health.DescribeEventsForOrganizationInput) health.DescribeEventsForOrganizationRequest
+
+	DescribeHealthServiceStatusForOrganizationRequest(*health.DescribeHealthServiceStatusForOrganizationInput) health.DescribeHealthServiceStatusForOrganizationRequest
+
+	DisableHealthServiceAccessForOrganizationRequest(*health.DisableHealthServiceAccessForOrganizationInput) health.DisableHealthServiceAccessForOrganizationRequest
+
+	EnableHealthServiceAccessForOrganizationRequest(*health.EnableHealthServiceAccessForOrganizationInput) health.EnableHealthServiceAccessForOrganizationRequest
 }
 
 var _ ClientAPI = (*health.Client)(nil)

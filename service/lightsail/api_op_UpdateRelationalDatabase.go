@@ -18,6 +18,9 @@ type UpdateRelationalDatabaseInput struct {
 	// Default: false
 	ApplyImmediately *bool `locationName:"applyImmediately" type:"boolean"`
 
+	// Indicates the certificate that needs to be associated with the database.
+	CaCertificateIdentifier *string `locationName:"caCertificateIdentifier" type:"string"`
+
 	// When true, disables automated backup retention for your database.
 	//
 	// Disabling backup retention deletes all automated database backups. Before

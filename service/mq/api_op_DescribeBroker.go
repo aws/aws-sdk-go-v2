@@ -102,6 +102,9 @@ type DescribeBrokerOutput struct {
 
 	SecurityGroups []string `locationName:"securityGroups" type:"list"`
 
+	// The storage type of the broker.
+	StorageType BrokerStorageType `locationName:"storageType" type:"string" enum:"true"`
+
 	SubnetIds []string `locationName:"subnetIds" type:"list"`
 
 	Tags map[string]string `locationName:"tags" type:"map"`
@@ -254,6 +257,12 @@ func (s DescribeBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	if len(s.StorageType) > 0 {
+		v := s.StorageType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "storageType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.SubnetIds != nil {
 		v := s.SubnetIds

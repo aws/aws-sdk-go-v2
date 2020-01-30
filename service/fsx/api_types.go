@@ -23,7 +23,7 @@ type ActiveDirectoryBackupAttributes struct {
 	ActiveDirectoryId *string `min:"12" type:"string"`
 
 	// The fully qualified domain name of the self-managed AD directory.
-	DomainName *string `type:"string"`
+	DomainName *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -60,7 +60,8 @@ type Backup struct {
 	FileSystem *FileSystem `type:"structure" required:"true"`
 
 	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt this
-	// backup's data.
+	// backup of the Amazon FSx for Windows file system's data at rest. Amazon FSx
+	// for Lustre does not support KMS encryption.
 	KmsKeyId *string `min:"1" type:"string"`
 
 	// The lifecycle status of the backup.
@@ -99,6 +100,67 @@ type BackupFailureDetails struct {
 // String returns the string representation
 func (s BackupFailureDetails) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Provides a report detailing the data repository task results of the files
+// processed that match the criteria specified in the report Scope parameter.
+// FSx delivers the report to the file system's linked data repository in Amazon
+// S3, using the path specified in the report Path parameter. You can specify
+// whether or not a report gets generated for a task using the Enabled parameter.
+type CompletionReport struct {
+	_ struct{} `type:"structure"`
+
+	// Set Enabled to True to generate a CompletionReport when the task completes.
+	// If set to true, then you need to provide a report Scope, Path, and Format.
+	// Set Enabled to False if you do not want a CompletionReport generated when
+	// the task completes.
+	//
+	// Enabled is a required field
+	Enabled *bool `type:"boolean" required:"true"`
+
+	// Required if Enabled is set to true. Specifies the format of the CompletionReport.
+	// REPORT_CSV_20191124 is the only format currently supported. When Format is
+	// set to REPORT_CSV_20191124, the CompletionReport is provided in CSV format,
+	// and is delivered to {path}/task-{id}/failures.csv.
+	Format ReportFormat `type:"string" enum:"true"`
+
+	// Required if Enabled is set to true. Specifies the location of the report
+	// on the file system's linked S3 data repository. An absolute path that defines
+	// where the completion report will be stored in the destination location. The
+	// Path you provide must be located within the file system’s ExportPath. An
+	// example Path value is "s3://myBucket/myExportPath/optionalPrefix". The report
+	// provides the following information for each file in the report: FilePath,
+	// FileStatus, and ErrorCode. To learn more about a file system's ExportPath,
+	// see .
+	Path *string `min:"3" type:"string"`
+
+	// Required if Enabled is set to true. Specifies the scope of the CompletionReport;
+	// FAILED_FILES_ONLY is the only scope currently supported. When Scope is set
+	// to FAILED_FILES_ONLY, the CompletionReport only contains information about
+	// files that the data repository task failed to process.
+	Scope ReportScope `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s CompletionReport) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CompletionReport) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CompletionReport"}
+
+	if s.Enabled == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
+	}
+	if s.Path != nil && len(*s.Path) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("Path", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // The Lustre configuration for the file system being created. This value is
@@ -303,6 +365,174 @@ func (s DataRepositoryConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
+// A description of the data repository task. You use data repository tasks
+// to perform bulk transfer operations between your Amazon FSx file system and
+// its linked data repository.
+type DataRepositoryTask struct {
+	_ struct{} `type:"structure"`
+
+	// The time that the resource was created, in seconds (since 1970-01-01T00:00:00Z),
+	// also known as Unix time.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" required:"true"`
+
+	// The time that Amazon FSx completed processing the task, populated after the
+	// task is complete.
+	EndTime *time.Time `type:"timestamp"`
+
+	// Failure message describing why the task failed, it is populated only when
+	// Lifecycle is set to FAILED.
+	FailureDetails *DataRepositoryTaskFailureDetails `type:"structure"`
+
+	// The globally unique ID of the file system, assigned by Amazon FSx.
+	//
+	// FileSystemId is a required field
+	FileSystemId *string `min:"11" type:"string" required:"true"`
+
+	// The lifecycle status of the data repository task, as follows:
+	//
+	//    * PENDING - Amazon FSx has not started the task.
+	//
+	//    * EXECUTING - Amazon FSx is processing the task.
+	//
+	//    * FAILED - Amazon FSx was not able to complete the task. For example,
+	//    there may be files the task failed to process. The DataRepositoryTaskFailureDetails
+	//    property provides more information about task failures.
+	//
+	//    * SUCCEEDED - FSx completed the task successfully.
+	//
+	//    * CANCELED - Amazon FSx canceled the task and it did not complete.
+	//
+	//    * CANCELING - FSx is in process of canceling the task.
+	//
+	// You cannot delete an FSx for Lustre file system if there are data repository
+	// tasks for the file system in the PENDING or EXECUTING states. Please retry
+	// when the data repository task is finished (with a status of CANCELED, SUCCEEDED,
+	// or FAILED). You can use the DescribeDataRepositoryTask action to monitor
+	// the task status. Contact the FSx team if you need to delete your file system
+	// immediately.
+	//
+	// Lifecycle is a required field
+	Lifecycle DataRepositoryTaskLifecycle `type:"string" required:"true" enum:"true"`
+
+	// An array of paths on the Amazon FSx for Lustre file system that specify the
+	// data for the data repository task to process. For example, in an EXPORT_TO_REPOSITORY
+	// task, the paths specify which data to export to the linked data repository.
+	//
+	// (Default) If Paths is not specified, Amazon FSx uses the file system root
+	// directory.
+	Paths []string `type:"list"`
+
+	// Provides a report detailing the data repository task results of the files
+	// processed that match the criteria specified in the report Scope parameter.
+	// FSx delivers the report to the file system's linked data repository in Amazon
+	// S3, using the path specified in the report Path parameter. You can specify
+	// whether or not a report gets generated for a task using the Enabled parameter.
+	Report *CompletionReport `type:"structure"`
+
+	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
+	// AWS resources. We require an ARN when you need to specify a resource unambiguously
+	// across all of AWS. For more information, see Amazon Resource Names (ARNs)
+	// and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
+	ResourceARN *string `min:"8" type:"string"`
+
+	// The time that Amazon FSx began processing the task.
+	StartTime *time.Time `type:"timestamp"`
+
+	// Provides the status of the number of files that the task has processed successfully
+	// and failed to process.
+	Status *DataRepositoryTaskStatus `type:"structure"`
+
+	// A list of Tag values, with a maximum of 50 elements.
+	Tags []Tag `min:"1" type:"list"`
+
+	// The system-generated, unique 17-digit ID of the data repository task.
+	//
+	// TaskId is a required field
+	TaskId *string `min:"12" type:"string" required:"true"`
+
+	// The type of data repository task; EXPORT_TO_REPOSITORY is the only type currently
+	// supported.
+	//
+	// Type is a required field
+	Type DataRepositoryTaskType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s DataRepositoryTask) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Provides information about why a data repository task failed. Only populated
+// when the task Lifecycle is set to FAILED.
+type DataRepositoryTaskFailureDetails struct {
+	_ struct{} `type:"structure"`
+
+	// A detailed error message.
+	Message *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DataRepositoryTaskFailureDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// (Optional) An array of filter objects you can use to filter the response
+// of data repository tasks you will see in the the response. You can filter
+// the tasks returned in the response by one or more file system IDs, task lifecycles,
+// and by task type. A filter object consists of a filter Name, and one or more
+// Values for the filter.
+type DataRepositoryTaskFilter struct {
+	_ struct{} `type:"structure"`
+
+	// Name of the task property to use in filtering the tasks returned in the response.
+	//
+	//    * Use file-system-id to retrieve data repository tasks for specific file
+	//    systems.
+	//
+	//    * Use task-lifecycle to retrieve data repository tasks with one or more
+	//    specific lifecycle states, as follows: CANCELED, EXECUTING, FAILED, PENDING,
+	//    and SUCCEEDED.
+	Name DataRepositoryTaskFilterName `type:"string" enum:"true"`
+
+	// Use Values to include the specific file system IDs and task lifecycle states
+	// for the filters you are using.
+	Values []string `type:"list"`
+}
+
+// String returns the string representation
+func (s DataRepositoryTaskFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Provides the task status showing a running total of the total number of files
+// to be processed, the number successfully processed, and the number of files
+// the task failed to process.
+type DataRepositoryTaskStatus struct {
+	_ struct{} `type:"structure"`
+
+	// A running total of the number of files that the task failed to process.
+	FailedCount *int64 `type:"long"`
+
+	// The time at which the task status was last updated.
+	LastUpdatedTime *time.Time `type:"timestamp"`
+
+	// A running total of the number of files that the task has successfully processed.
+	SucceededCount *int64 `type:"long"`
+
+	// The total number of files that the task will process. While a task is executing,
+	// the sum of SucceededCount plus FailedCount may not equal TotalCount. When
+	// the task is complete, TotalCount equals the sum of SucceededCount plus FailedCount.
+	TotalCount *int64 `type:"long"`
+}
+
+// String returns the string representation
+func (s DataRepositoryTaskStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The configuration object for the Microsoft Windows file system used in the
 // DeleteFileSystem operation.
 type DeleteFileSystemWindowsConfiguration struct {
@@ -383,6 +613,7 @@ type FileSystem struct {
 
 	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the
 	// file system's data for an Amazon FSx for Windows File Server file system.
+	// Amazon FSx for Lustre does not support KMS encryption.
 	KmsKeyId *string `min:"1" type:"string"`
 
 	// The lifecycle status of the file system, following are the possible values
@@ -429,7 +660,7 @@ type FileSystem struct {
 	ResourceARN *string `min:"8" type:"string"`
 
 	// The storage capacity of the file system in gigabytes (GB).
-	StorageCapacity *int64 `min:"1" type:"integer"`
+	StorageCapacity *int64 `type:"integer"`
 
 	// The ID of the subnet to contain the endpoint for the file system. One and
 	// only one is supported. The file system is launched in the Availability Zone
@@ -512,7 +743,7 @@ type SelfManagedActiveDirectoryAttributes struct {
 	DnsIps []string `min:"1" type:"list"`
 
 	// The fully qualified domain name of the self-managed AD directory.
-	DomainName *string `type:"string"`
+	DomainName *string `min:"1" type:"string"`
 
 	// The name of the domain group whose members have administrative privileges
 	// for the FSx file system.
@@ -542,7 +773,7 @@ type SelfManagedActiveDirectoryConfiguration struct {
 	// A list of up to two IP addresses of DNS servers or domain controllers in
 	// the self-managed AD directory. The IP addresses need to be either in the
 	// same VPC CIDR range as the one in which your Amazon FSx file system is being
-	// created, or in the private IP version 4 (Iv4) address ranges, as specified
+	// created, or in the private IP version 4 (IPv4) address ranges, as specified
 	// in RFC 1918 (http://www.faqs.org/rfcs/rfc1918.html):
 	//
 	//    * 10.0.0.0 - 10.255.255.255 (10/8 prefix)
@@ -558,7 +789,7 @@ type SelfManagedActiveDirectoryConfiguration struct {
 	// corp.example.com.
 	//
 	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
+	DomainName *string `min:"1" type:"string" required:"true"`
 
 	// (Optional) The name of the domain group whose members are granted administrative
 	// privileges for the file system. Administrative privileges include taking
@@ -614,6 +845,9 @@ func (s *SelfManagedActiveDirectoryConfiguration) Validate() error {
 
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
+	}
+	if s.DomainName != nil && len(*s.DomainName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 1))
 	}
 	if s.FileSystemAdministratorsGroup != nil && len(*s.FileSystemAdministratorsGroup) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FileSystemAdministratorsGroup", 1))
@@ -839,7 +1073,7 @@ type WindowsFileSystemConfiguration struct {
 	// use the file system's DNSName instead. For more information and instruction
 	// on mapping and mounting file shares, see https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html).
-	PreferredFileServerIp *string `type:"string"`
+	PreferredFileServerIp *string `min:"7" type:"string"`
 
 	// For MULTI_AZ_1 deployment types, it specifies the ID of the subnet where
 	// the preferred file server is located. Must be one of the two subnet IDs specified

@@ -12,6 +12,36 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Provides information about when a transcription job should be executed.
+type JobExecutionSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether a job should be queued by Amazon Transcribe when the concurrent
+	// execution limit is exceeded. When the AllowDeferredExecution field is true,
+	// jobs are queued and will be executed when the number of executing jobs falls
+	// below the concurrent execution limit. If the field is false, Amazon Transcribe
+	// returns a LimitExceededException exception.
+	//
+	// If you specify the AllowDeferredExecution field, you must specify the DataAccessRoleArn
+	// field.
+	AllowDeferredExecution *bool `type:"boolean"`
+
+	// The Amazon Resource Name (ARN) of a role that has access to the S3 bucket
+	// that contains the input files. Amazon Transcribe will assume this role to
+	// read queued media files. If you have specified an output S3 bucket for the
+	// transcription results, this role should have access to the output bucket
+	// as well.
+	//
+	// If you specify the AllowDeferredExecution field, you must specify the DataAccessRoleArn
+	// field.
+	DataAccessRoleArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s JobExecutionSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes the input media file in a transcription request.
 type Media struct {
 	_ struct{} `type:"structure"`
@@ -91,6 +121,16 @@ type Settings struct {
 	// request. If you set both, your request returns a BadRequestException.
 	ShowSpeakerLabels *bool `type:"boolean"`
 
+	// Set to mask to remove filtered text from the transcript and replace it with
+	// three asterisks ("***") as placeholder text. Set to remove to remove filtered
+	// text from the transcript without using placeholder text.
+	VocabularyFilterMethod VocabularyFilterMethod `type:"string" enum:"true"`
+
+	// The name of the vocabulary filter to use when transcribing the audio. The
+	// filter that you specify must have the same language code as the transcription
+	// job.
+	VocabularyFilterName *string `min:"1" type:"string"`
+
 	// The name of a vocabulary to use when processing the transcription job.
 	VocabularyName *string `min:"1" type:"string"`
 }
@@ -108,6 +148,9 @@ func (s *Settings) Validate() error {
 	}
 	if s.MaxSpeakerLabels != nil && *s.MaxSpeakerLabels < 2 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxSpeakerLabels", 2))
+	}
+	if s.VocabularyFilterName != nil && len(*s.VocabularyFilterName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("VocabularyFilterName", 1))
 	}
 	if s.VocabularyName != nil && len(*s.VocabularyName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("VocabularyName", 1))
@@ -182,6 +225,9 @@ type TranscriptionJob struct {
 	//    in the Amazon Web Services General Reference.
 	FailureReason *string `type:"string"`
 
+	// Provides information about how a transcription job is executed.
+	JobExecutionSettings *JobExecutionSettings `type:"structure"`
+
 	// The language code for the input speech.
 	LanguageCode LanguageCode `type:"string" enum:"true"`
 
@@ -199,6 +245,9 @@ type TranscriptionJob struct {
 	// identified and to specify a custom vocabulary to use when processing the
 	// transcription job.
 	Settings *Settings `type:"structure"`
+
+	// A timestamp that shows with the job was started processing.
+	StartTime *time.Time `type:"timestamp"`
 
 	// An object that describes the output of the transcription job.
 	Transcript *Transcript `type:"structure"`
@@ -242,6 +291,9 @@ type TranscriptionJobSummary struct {
 	// TranscriptFileUri field.
 	OutputLocationType OutputLocationType `type:"string" enum:"true"`
 
+	// A timestamp that shows when the job started processing.
+	StartTime *time.Time `type:"timestamp"`
+
 	// The name of the transcription job.
 	TranscriptionJobName *string `min:"1" type:"string"`
 
@@ -252,6 +304,26 @@ type TranscriptionJobSummary struct {
 
 // String returns the string representation
 func (s TranscriptionJobSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Provides information about a vocabulary filter.
+type VocabularyFilterInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The language code of the words in the vocabulary filter.
+	LanguageCode LanguageCode `type:"string" enum:"true"`
+
+	// The date and time that the vocabulary was last updated.
+	LastModifiedTime *time.Time `type:"timestamp"`
+
+	// The name of the vocabulary filter. The name must be unique in the account
+	// that holds the filter.
+	VocabularyFilterName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s VocabularyFilterInfo) String() string {
 	return awsutil.Prettify(s)
 }
 

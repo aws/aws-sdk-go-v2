@@ -10,23 +10,27 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// A request to change your account's suppression preferences for an specific
+// A request to change the account suppression list preferences for a specific
 // configuration set.
 type PutConfigurationSetSuppressionOptionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the configuration set that you want to enable or disable email
-	// sending for.
+	// The name of the configuration set that you want to change the suppression
+	// list preferences for.
 	//
 	// ConfigurationSetName is a required field
 	ConfigurationSetName *string `location:"uri" locationName:"ConfigurationSetName" type:"string" required:"true"`
 
-	// A list of reasons to suppress email addresses. The only valid reasons are:
+	// A list that contains the reasons that email addresses are automatically added
+	// to the suppression list for your account. This list can contain any or all
+	// of the following:
 	//
-	//    * COMPLAINT – Amazon SES will suppress an email address that receives
-	//    a complaint.
+	//    * COMPLAINT – Amazon SES adds an email address to the suppression list
+	//    for your account when a message sent to that address results in a complaint.
 	//
-	//    * BOUNCE – Amazon SES will suppress an email address that hard bounces.
+	//    * BOUNCE – Amazon SES adds an email address to the suppression list
+	//    for your account when a message sent to that address results in a hard
+	//    bounce.
 	SuppressedReasons []SuppressionListReason `type:"list"`
 }
 
@@ -95,7 +99,7 @@ const opPutConfigurationSetSuppressionOptions = "PutConfigurationSetSuppressionO
 // PutConfigurationSetSuppressionOptionsRequest returns a request value for making API operation for
 // Amazon Simple Email Service.
 //
-// Specify your account's suppression preferences for a configuration set.
+// Specify the account suppression list preferences for a configuration set.
 //
 //    // Example sending a request using PutConfigurationSetSuppressionOptionsRequest.
 //    req := client.PutConfigurationSetSuppressionOptionsRequest(params)

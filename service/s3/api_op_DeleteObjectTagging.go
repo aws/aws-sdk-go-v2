@@ -136,7 +136,7 @@ const opDeleteObjectTagging = "DeleteObjectTagging"
 // Amazon Simple Storage Service.
 //
 // Removes the entire tag set from the specified object. For more information
-// about managing object tags, see Object Tagging (https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html#MultiFactorAuthenticationDelete).
+// about managing object tags, see Object Tagging (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html).
 //
 // To use this operation, you must have permission to perform the s3:DeleteObjectTagging
 // action.

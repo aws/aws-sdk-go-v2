@@ -51,8 +51,6 @@ type DescribeModelOutput struct {
 
 	// If True, no inbound or outbound network calls can be made to or from the
 	// model container.
-	//
-	// The Semantic Segmentation built-in algorithm does not support network isolation.
 	EnableNetworkIsolation *bool `type:"boolean"`
 
 	// The Amazon Resource Name (ARN) of the IAM role that you specified for the

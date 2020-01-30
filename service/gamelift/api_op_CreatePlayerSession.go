@@ -13,7 +13,7 @@ import (
 type CreatePlayerSessionInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for the game session to add a player to.
+	// A unique identifier for the game session to add a player to.
 	//
 	// GameSessionId is a required field
 	GameSessionId *string `min:"1" type:"string" required:"true"`
@@ -22,7 +22,7 @@ type CreatePlayerSessionInput struct {
 	// use this data, so it can be formatted as needed for use in the game.
 	PlayerData *string `min:"1" type:"string"`
 
-	// Unique identifier for a player. Player IDs are developer-defined.
+	// A unique identifier for a player. Player IDs are developer-defined.
 	//
 	// PlayerId is a required field
 	PlayerId *string `min:"1" type:"string" required:"true"`

@@ -59,8 +59,8 @@ const opListOfferingPromotions = "ListOfferingPromotions"
 // Returns a list of offering promotions. Each offering promotion record contains
 // the ID and description of the promotion. The API returns a NotEligible error
 // if the caller is not permitted to invoke the operation. Contact aws-devicefarm-support@amazon.com
-// (mailto:aws-devicefarm-support@amazon.com) if you believe that you should
-// be able to invoke this operation.
+// (mailto:aws-devicefarm-support@amazon.com) if you must be able to invoke
+// this operation.
 //
 //    // Example sending a request using ListOfferingPromotionsRequest.
 //    req := client.ListOfferingPromotionsRequest(params)

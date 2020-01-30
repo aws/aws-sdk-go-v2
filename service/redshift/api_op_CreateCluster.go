@@ -42,7 +42,7 @@ type CreateClusterInput struct {
 	// Default: A random, system-chosen Availability Zone in the region that is
 	// specified by the endpoint.
 	//
-	// Example: us-east-1d
+	// Example: us-east-2d
 	//
 	// Constraint: The specified Availability Zone must be in the same region as
 	// the current endpoint.
@@ -231,8 +231,8 @@ type CreateClusterInput struct {
 	// types, go to Working with Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes)
 	// in the Amazon Redshift Cluster Management Guide.
 	//
-	// Valid Values: ds2.xlarge | ds2.8xlarge | ds2.xlarge | ds2.8xlarge | dc1.large
-	// | dc1.8xlarge | dc2.large | dc2.8xlarge
+	// Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large
+	// | dc2.8xlarge | ra3.16xlarge
 	//
 	// NodeType is a required field
 	NodeType *string `type:"string" required:"true"`
@@ -343,7 +343,7 @@ const opCreateCluster = "CreateCluster"
 // CreateClusterRequest returns a request value for making API operation for
 // Amazon Redshift.
 //
-// Creates a new cluster.
+// Creates a new cluster with the specified parameters.
 //
 // To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster
 // subnet group name. The cluster subnet group identifies the subnets of your

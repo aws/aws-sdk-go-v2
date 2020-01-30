@@ -20,10 +20,6 @@ type ModifyDBInstanceInput struct {
 	// Indicates that major version upgrades are allowed. Changing this parameter
 	// doesn't result in an outage and the change is asynchronously applied as soon
 	// as possible.
-	//
-	// Constraints: This parameter must be set to true when specifying a value for
-	// the EngineVersion parameter that is a different major version than the DB
-	// instance's current version.
 	AllowMajorVersionUpgrade *bool `type:"boolean"`
 
 	// Specifies whether the modifications in this request and any pending modifications
@@ -127,6 +123,11 @@ type ModifyDBInstanceInput struct {
 	// Example: mySubnetGroup
 	DBSubnetGroupName *string `type:"string"`
 
+	// A value that indicates whether the DB instance has deletion protection enabled.
+	// The database can't be deleted when deletion protection is enabled. By default,
+	// deletion protection is disabled.
+	DeletionProtection *bool `type:"boolean"`
+
 	// Not supported.
 	Domain *string `type:"string"`
 
@@ -144,17 +145,12 @@ type ModifyDBInstanceInput struct {
 	// Default: false
 	EnableIAMDatabaseAuthentication *bool `type:"boolean"`
 
-	// Not supported.
+	// (Not supported by Neptune)
 	EnablePerformanceInsights *bool `type:"boolean"`
 
-	// The version number of the database engine to upgrade to. Changing this parameter
-	// results in an outage and the change is applied during the next maintenance
-	// window unless the ApplyImmediately parameter is set to true for this request.
-	//
-	// For major version upgrades, if a nondefault DB parameter group is currently
-	// in use, a new DB parameter group in the DB parameter group family for the
-	// new engine version must be specified. The new DB parameter group can be the
-	// default for that DB parameter group family.
+	// The version number of the database engine to upgrade to. Currently, setting
+	// this parameter has no effect. To upgrade your database engine to the most
+	// recent release, use the ApplyPendingMaintenanceAction API.
 	EngineVersion *string `type:"string"`
 
 	// The new Provisioned IOPS (I/O operations per second) value for the instance.
@@ -211,20 +207,10 @@ type ModifyDBInstanceInput struct {
 	// Example: mydbinstance
 	NewDBInstanceIdentifier *string `type:"string"`
 
-	// Indicates that the DB instance should be associated with the specified option
-	// group. Changing this parameter doesn't result in an outage except in the
-	// following case and the change is applied during the next maintenance window
-	// unless the ApplyImmediately parameter is set to true for this request. If
-	// the parameter change results in an option group that enables OEM, this change
-	// can cause a brief (sub-second) period during which new connections are rejected
-	// but existing connections are not interrupted.
-	//
-	// Permanent options, such as the TDE option for Oracle Advanced Security TDE,
-	// can't be removed from an option group, and that option group can't be removed
-	// from a DB instance once it is associated with a DB instance
+	// (Not supported by Neptune)
 	OptionGroupName *string `type:"string"`
 
-	// Not supported.
+	// (Not supported by Neptune)
 	PerformanceInsightsKMSKeyId *string `type:"string"`
 
 	// The daily time range during which automated backups are created if automated

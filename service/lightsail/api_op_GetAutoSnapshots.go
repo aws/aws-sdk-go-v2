@@ -12,7 +12,8 @@ import (
 type GetAutoSnapshotsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the source resource from which to get automatic snapshot information.
+	// The name of the source instance or disk from which to get automatic snapshot
+	// information.
 	//
 	// ResourceName is a required field
 	ResourceName *string `locationName:"resourceName" type:"string" required:"true"`
@@ -41,10 +42,10 @@ type GetAutoSnapshotsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that describe the automatic snapshots that are available
-	// for the specified source resource.asdf
+	// for the specified source instance or disk.
 	AutoSnapshots []AutoSnapshotDetails `locationName:"autoSnapshots" type:"list"`
 
-	// The name of the source resource for the automatic snapshots.
+	// The name of the source instance or disk for the automatic snapshots.
 	ResourceName *string `locationName:"resourceName" type:"string"`
 
 	// The resource type (e.g., Instance or Disk).
@@ -61,8 +62,8 @@ const opGetAutoSnapshots = "GetAutoSnapshots"
 // GetAutoSnapshotsRequest returns a request value for making API operation for
 // Amazon Lightsail.
 //
-// Returns the available automatic snapshots for the specified resource name.
-// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
+// Returns the available automatic snapshots for an instance or disk. For more
+// information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
 //
 //    // Example sending a request using GetAutoSnapshotsRequest.
 //    req := client.GetAutoSnapshotsRequest(params)

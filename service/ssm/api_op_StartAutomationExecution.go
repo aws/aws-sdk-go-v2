@@ -54,6 +54,19 @@ type StartAutomationExecutionInput struct {
 	// in the Automation document.
 	Parameters map[string][]string `min:"1" type:"map"`
 
+	// Optional metadata that you assign to a resource. You can specify a maximum
+	// of five tags for an automation. Tags enable you to categorize a resource
+	// in different ways, such as by purpose, owner, or environment. For example,
+	// you might want to tag an automation to identify an environment or operating
+	// system. In this case, you could specify the following key name/value pairs:
+	//
+	//    * Key=environment,Value=test
+	//
+	//    * Key=OS,Value=Windows
+	//
+	// To add tags to an existing patch baseline, use the AddTagsToResource action.
+	Tags []Tag `type:"list"`
+
 	// A location is a combination of AWS Regions and/or AWS accounts where you
 	// want to run the Automation. Use this action to start an Automation in multiple
 	// Regions and multiple accounts. For more information, see Executing Automations
@@ -102,6 +115,13 @@ func (s *StartAutomationExecutionInput) Validate() error {
 	}
 	if s.TargetParameterName != nil && len(*s.TargetParameterName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TargetParameterName", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 	if s.TargetLocations != nil {
 		for i, v := range s.TargetLocations {

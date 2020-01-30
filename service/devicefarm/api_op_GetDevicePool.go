@@ -45,7 +45,7 @@ func (s *GetDevicePoolInput) Validate() error {
 type GetDevicePoolOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object containing information about the requested device pool.
+	// An object that contains information about the requested device pool.
 	DevicePool *DevicePool `locationName:"devicePool" type:"structure"`
 }
 

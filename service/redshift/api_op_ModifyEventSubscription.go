@@ -49,8 +49,8 @@ type ModifyEventSubscriptionInput struct {
 	// for all Amazon Redshift objects in your AWS account. You must specify a source
 	// type in order to specify source IDs.
 	//
-	// Valid values: cluster, cluster-parameter-group, cluster-security-group, and
-	// cluster-snapshot.
+	// Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot,
+	// and scheduled-action.
 	SourceType *string `type:"string"`
 
 	// The name of the modified Amazon Redshift event notification subscription.

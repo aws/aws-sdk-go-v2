@@ -108,7 +108,7 @@ const opUpdateJourneyState = "UpdateJourneyState"
 // UpdateJourneyStateRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Cancels an active journey.
+// Cancels (stops) an active journey.
 //
 //    // Example sending a request using UpdateJourneyStateRequest.
 //    req := client.UpdateJourneyStateRequest(params)

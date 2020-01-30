@@ -13,8 +13,7 @@ import (
 type UpdateDevicePoolInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the Device Farm device pool you wish to
-	// update.
+	// The Amazon Resource Name (ARN) of the Device Farm device pool to update.
 	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
@@ -23,13 +22,13 @@ type UpdateDevicePoolInput struct {
 	// set this parameter to true, the maxDevices parameter does not apply, and
 	// Device Farm does not limit the number of devices that it adds to your device
 	// pool. In this case, Device Farm adds all available devices that meet the
-	// criteria that are specified for the rules parameter.
+	// criteria specified in the rules parameter.
 	//
 	// If you use this parameter in your request, you cannot use the maxDevices
 	// parameter in the same request.
 	ClearMaxDevices *bool `locationName:"clearMaxDevices" type:"boolean"`
 
-	// A description of the device pool you wish to update.
+	// A description of the device pool to update.
 	Description *string `locationName:"description" type:"string"`
 
 	// The number of devices that Device Farm can add to your device pool. Device
@@ -45,12 +44,11 @@ type UpdateDevicePoolInput struct {
 	// parameter in the same request.
 	MaxDevices *int64 `locationName:"maxDevices" type:"integer"`
 
-	// A string representing the name of the device pool you wish to update.
+	// A string that represents the name of the device pool to update.
 	Name *string `locationName:"name" type:"string"`
 
-	// Represents the rules you wish to modify for the device pool. Updating rules
-	// is optional; however, if you choose to update rules for your request, the
-	// update will replace the existing rules.
+	// Represents the rules to modify for the device pool. Updating rules is optional.
+	// If you update rules for your request, the update replaces the existing rules.
 	Rules []Rule `locationName:"rules" type:"list"`
 }
 

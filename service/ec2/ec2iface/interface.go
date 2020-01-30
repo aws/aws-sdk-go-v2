@@ -444,6 +444,8 @@ type ClientAPI interface {
 
 	DescribeInternetGatewaysRequest(*ec2.DescribeInternetGatewaysInput) ec2.DescribeInternetGatewaysRequest
 
+	DescribeIpv6PoolsRequest(*ec2.DescribeIpv6PoolsInput) ec2.DescribeIpv6PoolsRequest
+
 	DescribeKeyPairsRequest(*ec2.DescribeKeyPairsInput) ec2.DescribeKeyPairsRequest
 
 	DescribeLaunchTemplateVersionsRequest(*ec2.DescribeLaunchTemplateVersionsInput) ec2.DescribeLaunchTemplateVersionsRequest
@@ -635,6 +637,8 @@ type ClientAPI interface {
 	ExportImageRequest(*ec2.ExportImageInput) ec2.ExportImageRequest
 
 	ExportTransitGatewayRoutesRequest(*ec2.ExportTransitGatewayRoutesInput) ec2.ExportTransitGatewayRoutesRequest
+
+	GetAssociatedIpv6PoolCidrsRequest(*ec2.GetAssociatedIpv6PoolCidrsInput) ec2.GetAssociatedIpv6PoolCidrsRequest
 
 	GetCapacityReservationUsageRequest(*ec2.GetCapacityReservationUsageInput) ec2.GetCapacityReservationUsageRequest
 
@@ -837,6 +841,8 @@ type ClientAPI interface {
 	SendDiagnosticInterruptRequest(*ec2.SendDiagnosticInterruptInput) ec2.SendDiagnosticInterruptRequest
 
 	StartInstancesRequest(*ec2.StartInstancesInput) ec2.StartInstancesRequest
+
+	StartVpcEndpointServicePrivateDnsVerificationRequest(*ec2.StartVpcEndpointServicePrivateDnsVerificationInput) ec2.StartVpcEndpointServicePrivateDnsVerificationRequest
 
 	StopInstancesRequest(*ec2.StopInstancesInput) ec2.StopInstancesRequest
 
