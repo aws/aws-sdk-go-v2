@@ -13,8 +13,9 @@ import (
 type DeleteGameSessionQueueInput struct {
 	_ struct{} `type:"structure"`
 
-	// Descriptive label that is associated with game session queue. Queue names
-	// must be unique within each region.
+	// A descriptive label that is associated with game session queue. Queue names
+	// must be unique within each Region. You can use either the queue ID or ARN
+	// value.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`

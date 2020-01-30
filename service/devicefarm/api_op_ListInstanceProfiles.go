@@ -12,8 +12,8 @@ import (
 type ListInstanceProfilesInput struct {
 	_ struct{} `type:"structure"`
 
-	// An integer specifying the maximum number of items you want to return in the
-	// API response.
+	// An integer that specifies the maximum number of items you want to return
+	// in the API response.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
 	// An identifier that was returned from the previous call to this operation,
@@ -42,7 +42,7 @@ func (s *ListInstanceProfilesInput) Validate() error {
 type ListInstanceProfilesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object containing information about your instance profiles.
+	// An object that contains information about your instance profiles.
 	InstanceProfiles []InstanceProfile `locationName:"instanceProfiles" type:"list"`
 
 	// An identifier that can be used in the next call to this operation to return

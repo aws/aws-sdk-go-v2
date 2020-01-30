@@ -27,9 +27,8 @@ type DescribeFileSystemsInput struct {
 	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
 
 	// (Optional) Specifies the maximum number of file systems to return in the
-	// response (integer). Currently, this number is automatically set to 10, and
-	// other values are ignored. The response is paginated at 10 per page if you
-	// have more than 10 file systems.
+	// response (integer). This number is automatically set to 100. The response
+	// is paginated at 100 per page if you have more than 100 file systems.
 	MaxItems *int64 `location:"querystring" locationName:"MaxItems" min:"1" type:"integer"`
 }
 
@@ -176,6 +175,12 @@ func (c *Client) DescribeFileSystemsRequest(input *DescribeFileSystemsInput) Des
 		Name:       opDescribeFileSystems,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-02-01/file-systems",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"NextMarker"},
+			LimitToken:      "MaxItems",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -208,6 +213,53 @@ func (r DescribeFileSystemsRequest) Send(ctx context.Context) (*DescribeFileSyst
 	}
 
 	return resp, nil
+}
+
+// NewDescribeFileSystemsRequestPaginator returns a paginator for DescribeFileSystems.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.DescribeFileSystemsRequest(input)
+//   p := efs.NewDescribeFileSystemsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewDescribeFileSystemsPaginator(req DescribeFileSystemsRequest) DescribeFileSystemsPaginator {
+	return DescribeFileSystemsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *DescribeFileSystemsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeFileSystemsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeFileSystemsPaginator struct {
+	aws.Pager
+}
+
+func (p *DescribeFileSystemsPaginator) CurrentPage() *DescribeFileSystemsOutput {
+	return p.Pager.CurrentPage().(*DescribeFileSystemsOutput)
 }
 
 // DescribeFileSystemsResponse is the response type for the

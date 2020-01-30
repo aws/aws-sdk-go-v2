@@ -12,7 +12,7 @@ import (
 type GetInstanceProfileInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of your instance profile.
+	// The Amazon Resource Name (ARN) of an instance profile.
 	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
@@ -43,7 +43,7 @@ func (s *GetInstanceProfileInput) Validate() error {
 type GetInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object containing information about your instance profile.
+	// An object that contains information about an instance profile.
 	InstanceProfile *InstanceProfile `locationName:"instanceProfile" type:"structure"`
 }
 

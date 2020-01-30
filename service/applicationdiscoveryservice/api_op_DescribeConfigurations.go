@@ -72,7 +72,8 @@ const opDescribeConfigurations = "DescribeConfigurations"
 // etc.
 //
 // For a complete list of outputs for each asset type, see Using the DescribeConfigurations
-// Action (http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#DescribeConfigurations).
+// Action (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#DescribeConfigurations)
+// in the AWS Application Discovery Service User Guide.
 //
 //    // Example sending a request using DescribeConfigurationsRequest.
 //    req := client.DescribeConfigurationsRequest(params)

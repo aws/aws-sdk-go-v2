@@ -13,6 +13,200 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Provides a description of an EFS file system access point.
+type AccessPointDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The unique Amazon Resource Name (ARN) associated with the access point.
+	AccessPointArn *string `type:"string"`
+
+	// The ID of the access point, assigned by Amazon EFS.
+	AccessPointId *string `type:"string"`
+
+	// The opaque string specified in the request to ensure idempotent creation.
+	ClientToken *string `min:"1" type:"string"`
+
+	// The ID of the EFS file system that the access point applies to.
+	FileSystemId *string `type:"string"`
+
+	// Identifies the lifecycle phase of the access point.
+	LifeCycleState LifeCycleState `type:"string" enum:"true"`
+
+	// The name of the access point. This is the value of the Name tag.
+	Name *string `type:"string"`
+
+	// Identified the AWS account that owns the access point resource.
+	OwnerId *string `type:"string"`
+
+	// The full POSIX identity, including the user ID, group ID, and secondary group
+	// IDs on the access point that is used for all file operations by NFS clients
+	// using the access point.
+	PosixUser *PosixUser `type:"structure"`
+
+	// The directory on the Amazon EFS file system that the access point exposes
+	// as the root directory to NFS clients using the access point.
+	RootDirectory *RootDirectory `type:"structure"`
+
+	// The tags associated with the access point, presented as an array of Tag objects.
+	Tags []Tag `type:"list"`
+}
+
+// String returns the string representation
+func (s AccessPointDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AccessPointDescription) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccessPointArn != nil {
+		v := *s.AccessPointArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AccessPointArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AccessPointId != nil {
+		v := *s.AccessPointId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AccessPointId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ClientToken != nil {
+		v := *s.ClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ClientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FileSystemId != nil {
+		v := *s.FileSystemId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FileSystemId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.LifeCycleState) > 0 {
+		v := s.LifeCycleState
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LifeCycleState", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OwnerId != nil {
+		v := *s.OwnerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OwnerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PosixUser != nil {
+		v := s.PosixUser
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PosixUser", v, metadata)
+	}
+	if s.RootDirectory != nil {
+		v := s.RootDirectory
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "RootDirectory", v, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Required if the RootDirectory > Path specified does not exist. Specifies
+// the POSIX IDs and permissions to apply to the access point's RootDirectory
+// > Path. If the access point root directory does not exist, EFS creates it
+// with these settings when a client connects to the access point. When specifying
+// CreationInfo, you must include values for all properties.
+//
+// If you do not provide CreationInfo and the specified RootDirectory does not
+// exist, attempts to mount the file system using the access point will fail.
+type CreationInfo struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the POSIX group ID to apply to the RootDirectory. Accepts values
+	// from 0 to 2^32 (4294967295).
+	//
+	// OwnerGid is a required field
+	OwnerGid *int64 `type:"long" required:"true"`
+
+	// Specifies the POSIX user ID to apply to the RootDirectory. Accepts values
+	// from 0 to 2^32 (4294967295).
+	//
+	// OwnerUid is a required field
+	OwnerUid *int64 `type:"long" required:"true"`
+
+	// Specifies the POSIX permissions to apply to the RootDirectory, in the format
+	// of an octal number representing the file's mode bits.
+	//
+	// Permissions is a required field
+	Permissions *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreationInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreationInfo) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreationInfo"}
+
+	if s.OwnerGid == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OwnerGid"))
+	}
+
+	if s.OwnerUid == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OwnerUid"))
+	}
+
+	if s.Permissions == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Permissions"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreationInfo) MarshalFields(e protocol.FieldEncoder) error {
+	if s.OwnerGid != nil {
+		v := *s.OwnerGid
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OwnerGid", protocol.Int64Value(v), metadata)
+	}
+	if s.OwnerUid != nil {
+		v := *s.OwnerUid
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OwnerUid", protocol.Int64Value(v), metadata)
+	}
+	if s.Permissions != nil {
+		v := *s.Permissions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Permissions", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // A description of the file system.
 type FileSystemDescription struct {
 	_ struct{} `type:"structure"`
@@ -297,6 +491,17 @@ func (s LifecyclePolicy) MarshalFields(e protocol.FieldEncoder) error {
 type MountTargetDescription struct {
 	_ struct{} `type:"structure"`
 
+	// The unique and consistent identifier of the Availability Zone (AZ) that the
+	// mount target resides in. For example, use1-az1 is an AZ ID for the us-east-1
+	// Region and it has the same location in every AWS account.
+	AvailabilityZoneId *string `type:"string"`
+
+	// The name of the Availability Zone (AZ) that the mount target resides in.
+	// AZs are independently mapped to names for each AWS account. For example,
+	// the Availability Zone us-east-1a for your AWS account might not be the same
+	// location as us-east-1a for another AWS account.
+	AvailabilityZoneName *string `type:"string"`
+
 	// The ID of the file system for which the mount target is intended.
 	//
 	// FileSystemId is a required field
@@ -335,6 +540,18 @@ func (s MountTargetDescription) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s MountTargetDescription) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AvailabilityZoneId != nil {
+		v := *s.AvailabilityZoneId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AvailabilityZoneId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AvailabilityZoneName != nil {
+		v := *s.AvailabilityZoneName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AvailabilityZoneName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.FileSystemId != nil {
 		v := *s.FileSystemId
 
@@ -376,6 +593,146 @@ func (s MountTargetDescription) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SubnetId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The full POSIX identity, including the user ID, group ID, and any secondary
+// group IDs, on the access point that is used for all file system operations
+// performed by NFS clients using the access point.
+type PosixUser struct {
+	_ struct{} `type:"structure"`
+
+	// The POSIX group ID used for all file system operations using this access
+	// point.
+	//
+	// Gid is a required field
+	Gid *int64 `type:"long" required:"true"`
+
+	// Secondary POSIX group IDs used for all file system operations using this
+	// access point.
+	SecondaryGids []int64 `type:"list"`
+
+	// The POSIX user ID used for all file system operations using this access point.
+	//
+	// Uid is a required field
+	Uid *int64 `type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s PosixUser) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PosixUser) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PosixUser"}
+
+	if s.Gid == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Gid"))
+	}
+
+	if s.Uid == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Uid"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PosixUser) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Gid != nil {
+		v := *s.Gid
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Gid", protocol.Int64Value(v), metadata)
+	}
+	if s.SecondaryGids != nil {
+		v := s.SecondaryGids
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SecondaryGids", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.Int64Value(v1))
+		}
+		ls0.End()
+
+	}
+	if s.Uid != nil {
+		v := *s.Uid
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Uid", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Specifies the directory on the Amazon EFS file system that the access point
+// provides access to. The access point exposes the specified file system path
+// as the root directory of your file system to applications using the access
+// point. NFS clients using the access point can only access data in the access
+// point's RootDirectory and it's subdirectories.
+type RootDirectory struct {
+	_ struct{} `type:"structure"`
+
+	// (Optional) Specifies the POSIX IDs and permissions to apply to the access
+	// point's RootDirectory. If the RootDirectory > Path specified does not exist,
+	// EFS creates the root directory using the CreationInfo settings when a client
+	// connects to an access point. When specifying the CreationInfo, you must provide
+	// values for all properties.
+	//
+	// If you do not provide CreationInfo and the specified RootDirectory > Path
+	// does not exist, attempts to mount the file system using the access point
+	// will fail.
+	CreationInfo *CreationInfo `type:"structure"`
+
+	// Specifies the path on the EFS file system to expose as the root directory
+	// to NFS clients using the access point to access the EFS file system. A path
+	// can have up to four subdirectories. If the specified path does not exist,
+	// you are required to provide the CreationInfo.
+	Path *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s RootDirectory) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RootDirectory) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RootDirectory"}
+	if s.Path != nil && len(*s.Path) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Path", 1))
+	}
+	if s.CreationInfo != nil {
+		if err := s.CreationInfo.Validate(); err != nil {
+			invalidParams.AddNested("CreationInfo", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RootDirectory) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreationInfo != nil {
+		v := s.CreationInfo
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CreationInfo", v, metadata)
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

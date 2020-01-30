@@ -72,7 +72,7 @@ const opBatchModifyClusterSnapshots = "BatchModifyClusterSnapshots"
 // BatchModifyClusterSnapshotsRequest returns a request value for making API operation for
 // Amazon Redshift.
 //
-// Modifies the settings for a list of snapshots.
+// Modifies the settings for a set of cluster snapshots.
 //
 //    // Example sending a request using BatchModifyClusterSnapshotsRequest.
 //    req := client.BatchModifyClusterSnapshotsRequest(params)

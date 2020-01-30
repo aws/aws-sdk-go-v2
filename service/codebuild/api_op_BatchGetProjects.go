@@ -12,7 +12,9 @@ import (
 type BatchGetProjectsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The names of the build projects.
+	// The names or ARNs of the build projects. To get information about a project
+	// shared with your AWS account, its ARN must be specified. You cannot specify
+	// a shared project using its name.
 	//
 	// Names is a required field
 	Names []string `locationName:"names" min:"1" type:"list" required:"true"`

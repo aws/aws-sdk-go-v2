@@ -9,6 +9,9 @@
 package ecriface
 
 import (
+	"context"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/ecr"
 )
 
@@ -118,6 +121,10 @@ type ClientAPI interface {
 	UntagResourceRequest(*ecr.UntagResourceInput) ecr.UntagResourceRequest
 
 	UploadLayerPartRequest(*ecr.UploadLayerPartInput) ecr.UploadLayerPartRequest
+
+	WaitUntilImageScanComplete(context.Context, *ecr.DescribeImageScanFindingsInput, ...aws.WaiterOption) error
+
+	WaitUntilLifecyclePolicyPreviewComplete(context.Context, *ecr.GetLifecyclePolicyPreviewInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*ecr.Client)(nil)

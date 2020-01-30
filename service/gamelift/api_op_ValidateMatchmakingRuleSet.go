@@ -13,7 +13,7 @@ import (
 type ValidateMatchmakingRuleSetInput struct {
 	_ struct{} `type:"structure"`
 
-	// Collection of matchmaking rules to validate, formatted as a JSON string.
+	// A collection of matchmaking rules to validate, formatted as a JSON string.
 	//
 	// RuleSetBody is a required field
 	RuleSetBody *string `min:"1" type:"string" required:"true"`
@@ -45,7 +45,7 @@ func (s *ValidateMatchmakingRuleSetInput) Validate() error {
 type ValidateMatchmakingRuleSetOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Response indicating whether the rule set is valid.
+	// A response indicating whether the rule set is valid.
 	Valid *bool `type:"boolean"`
 }
 

@@ -1774,8 +1774,8 @@ type Activity struct {
 	Holdout *HoldoutActivity `type:"structure"`
 
 	// The settings for a multivariate split activity. This type of activity sends
-	// participants down one of as many as five paths in a journey, based on conditions
-	// that you specify.
+	// participants down one of as many as five paths (including a default Else
+	// path) in a journey, based on conditions that you specify.
 	MultiCondition *MultiConditionalSplitActivity `type:"structure"`
 
 	// The settings for a random split activity. This type of activity randomly
@@ -3380,7 +3380,7 @@ type CampaignResponse struct {
 	// Arn is a required field
 	Arn *string `type:"string" required:"true"`
 
-	// The date, ISO 8601 format, when the campaign was created.
+	// The date, in ISO 8601 format, when the campaign was created.
 	//
 	// CreationDate is a required field
 	CreationDate *string `type:"string" required:"true"`
@@ -3940,11 +3940,11 @@ type ConditionalSplitActivity struct {
 	// are met.
 	EvaluationWaitTime *WaitTime `type:"structure"`
 
-	// The unique identifier for the activity to perform if the condition isn't
+	// The unique identifier for the activity to perform if the conditions aren't
 	// met.
 	FalseActivity *string `type:"string"`
 
-	// The unique identifier for the activity to perform if the condition is met.
+	// The unique identifier for the activity to perform if the conditions are met.
 	TrueActivity *string `type:"string"`
 }
 
@@ -4812,6 +4812,17 @@ type EmailMessageActivity struct {
 
 	// The name of the email template to use for the message.
 	TemplateName *string `type:"string"`
+
+	// The unique identifier for the version of the email template to use for the
+	// message. If specified, this value must match the identifier for an existing
+	// template version. To retrieve a list of versions and version identifiers
+	// for a template, use the Template Versions resource.
+	//
+	// If you don't specify a value for this property, Amazon Pinpoint uses the
+	// active version of the template. The active version is typically the version
+	// of a template that's been most recently reviewed and approved for use, depending
+	// on your workflow. It isn't necessarily the latest version of a template.
+	TemplateVersion *string `type:"string"`
 }
 
 // String returns the string representation
@@ -4838,6 +4849,12 @@ func (s EmailMessageActivity) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateVersion != nil {
+		v := *s.TemplateVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4940,7 +4957,7 @@ type EmailTemplateResponse struct {
 	// The Amazon Resource Name (ARN) of the message template.
 	Arn *string `type:"string"`
 
-	// The date when the message template was created.
+	// The date, in ISO 8601 format, when the message template was created.
 	//
 	// CreationDate is a required field
 	CreationDate *string `type:"string" required:"true"`
@@ -4955,7 +4972,7 @@ type EmailTemplateResponse struct {
 	// based on the message template.
 	HtmlPart *string `type:"string"`
 
-	// The date when the message template was last modified.
+	// The date, in ISO 8601 format, when the message template was last modified.
 	//
 	// LastModifiedDate is a required field
 	LastModifiedDate *string `type:"string" required:"true"`
@@ -4986,6 +5003,11 @@ type EmailTemplateResponse struct {
 	// The message body, in plain text format, that's used in email messages that
 	// are based on the message template.
 	TextPart *string `type:"string"`
+
+	// The unique identifier, as an integer, for the active version of the message
+	// template, or the version of the template that you specified by using the
+	// version parameter in your request.
+	Version *string `type:"string"`
 }
 
 // String returns the string representation
@@ -5066,6 +5088,12 @@ func (s EmailTemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "TextPart", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5299,16 +5327,16 @@ type EndpointDemographic struct {
 	// code, followed by an underscore (_), followed by an ISO 3166-1 alpha-2 value.
 	Locale *string `type:"string"`
 
-	// The manufacturer of the endpoint device, such as Apple or Samsung.
+	// The manufacturer of the endpoint device, such as apple or samsung.
 	Make *string `type:"string"`
 
-	// The model name or number of the endpoint device, such as iPhone.
+	// The model name or number of the endpoint device, such as iPhone or SM-G900F.
 	Model *string `type:"string"`
 
 	// The model version of the endpoint device.
 	ModelVersion *string `type:"string"`
 
-	// The platform of the endpoint device, such as iOS or Android.
+	// The platform of the endpoint device, such as ios.
 	Platform *string `type:"string"`
 
 	// The platform version of the endpoint device.
@@ -7568,6 +7596,11 @@ type HoldoutActivity struct {
 
 	// The percentage of participants who shouldn't continue the journey.
 	//
+	// To determine which participants are held out, Amazon Pinpoint applies a probability-based
+	// algorithm to the percentage that you specify. Therefore, the actual percentage
+	// of participants who are held out may not be equal to the percentage that
+	// you specify.
+	//
 	// Percentage is a required field
 	Percentage *int64 `type:"integer" required:"true"`
 }
@@ -8351,7 +8384,7 @@ func (s JourneyExecutionActivityMetricsResponse) MarshalFields(e protocol.FieldE
 }
 
 // Provides the results of a query that retrieved the data for a standard execution
-// metric that applies to a journey.
+// metric that applies to a journey, and provides information about that query.
 type JourneyExecutionMetricsResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -8470,8 +8503,9 @@ func (s JourneyLimits) MarshalFields(e protocol.FieldEncoder) error {
 type JourneyResponse struct {
 	_ struct{} `type:"structure"`
 
-	// The configuration and other settings for the activities that comprise the
-	// journey.
+	// A map that contains a set of Activity objects, one object for each activity
+	// in the journey. For each Activity object, the key is the unique identifier
+	// (string) for an activity and the value is the settings for the activity.
 	Activities map[string]Activity `type:"map"`
 
 	// The unique identifier for the application that the journey applies to.
@@ -8555,7 +8589,7 @@ type JourneyResponse struct {
 	//    time and a refresh frequency hasn't been specified for it. If a journey's
 	//    status is CLOSED, you can't add participants to it, and no existing participants
 	//    can enter the journey for the first time. However, any existing participants
-	//    who are currently waiting to start an activity may resume the journey.
+	//    who are currently waiting to start an activity may continue the journey.
 	State State `type:"string" enum:"true"`
 
 	// A string-to-string map of key-value pairs that identifies the tags that are
@@ -9467,8 +9501,8 @@ func (s MultiConditionalBranch) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the settings for a multivariate split activity in a journey. This
-// type of activity sends participants down one of as many as five paths in
-// a journey, based on conditions that you specify.
+// type of activity sends participants down one of as many as five paths (including
+// a default Else path) in a journey, based on conditions that you specify.
 type MultiConditionalSplitActivity struct {
 	_ struct{} `type:"structure"`
 
@@ -9476,7 +9510,8 @@ type MultiConditionalSplitActivity struct {
 	// and the activity to perform for each path.
 	Branches []MultiConditionalBranch `type:"list"`
 
-	// The activity to perform by default for any path in the activity.
+	// The unique identifier for the activity to perform for participants who don't
+	// meet any of the conditions specified for other paths in the activity.
 	DefaultActivity *string `type:"string"`
 
 	// The amount of time to wait or the date and time when Amazon Pinpoint determines
@@ -10004,7 +10039,7 @@ type PushNotificationTemplateResponse struct {
 	// channels (DefaultPushNotificationTemplate).
 	Baidu *AndroidPushNotificationTemplate `type:"structure"`
 
-	// The date when the message template was created.
+	// The date, in ISO 8601 format, when the message template was created.
 	//
 	// CreationDate is a required field
 	CreationDate *string `type:"string" required:"true"`
@@ -10024,7 +10059,7 @@ type PushNotificationTemplateResponse struct {
 	// template for push notification channels (DefaultPushNotificationTemplate).
 	GCM *AndroidPushNotificationTemplate `type:"structure"`
 
-	// The date when the message template was last modified.
+	// The date, in ISO 8601 format, when the message template was last modified.
 	//
 	// LastModifiedDate is a required field
 	LastModifiedDate *string `type:"string" required:"true"`
@@ -10047,6 +10082,11 @@ type PushNotificationTemplateResponse struct {
 	//
 	// TemplateType is a required field
 	TemplateType TemplateType `type:"string" required:"true" enum:"true"`
+
+	// The unique identifier, as an integer, for the active version of the message
+	// template, or the version of the template that you specified by using the
+	// version parameter in your request.
+	Version *string `type:"string"`
 }
 
 // String returns the string representation
@@ -10140,6 +10180,12 @@ func (s PushNotificationTemplateResponse) MarshalFields(e protocol.FieldEncoder)
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "TemplateType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	return nil
 }
 
@@ -10225,6 +10271,11 @@ type RandomSplitEntry struct {
 	NextActivity *string `type:"string"`
 
 	// The percentage of participants to send down the activity path.
+	//
+	// To determine which participants are sent down each path, Amazon Pinpoint
+	// applies a probability-based algorithm to the percentages that you specify
+	// for the paths. Therefore, the actual percentage of participants who are sent
+	// down a path may not be equal to the percentage that you specify.
 	Percentage *int64 `type:"integer"`
 }
 
@@ -10796,7 +10847,7 @@ type SMSTemplateResponse struct {
 	// template.
 	Body *string `type:"string"`
 
-	// The date when the message template was created.
+	// The date, in ISO 8601 format, when the message template was created.
 	//
 	// CreationDate is a required field
 	CreationDate *string `type:"string" required:"true"`
@@ -10807,7 +10858,7 @@ type SMSTemplateResponse struct {
 	// defines the default value for that variable.
 	DefaultSubstitutions *string `type:"string"`
 
-	// The date when the message template was last modified.
+	// The date, in ISO 8601 format, when the message template was last modified.
 	//
 	// LastModifiedDate is a required field
 	LastModifiedDate *string `type:"string" required:"true"`
@@ -10830,6 +10881,11 @@ type SMSTemplateResponse struct {
 	//
 	// TemplateType is a required field
 	TemplateType TemplateType `type:"string" required:"true" enum:"true"`
+
+	// The unique identifier, as an integer, for the active version of the message
+	// template, or the version of the template that you specified by using the
+	// version parameter in your request.
+	Version *string `type:"string"`
 }
 
 // String returns the string representation
@@ -10898,6 +10954,12 @@ func (s SMSTemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "TemplateType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -12447,13 +12509,24 @@ func (s TagsModel) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies the name of the message template to use for the message.
+// Specifies the name and version of the message template to use for the message.
 type Template struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the message template to use for the message. If specified, this
 	// value must match the name of an existing message template.
 	Name *string `type:"string"`
+
+	// The unique identifier for the version of the message template to use for
+	// the message. If specified, this value must match the identifier for an existing
+	// template version. To retrieve a list of versions and version identifiers
+	// for a template, use the Template Versions resource.
+	//
+	// If you don't specify a value for this property, Amazon Pinpoint uses the
+	// active version of the template. The active version is typically the version
+	// of a template that's been most recently reviewed and approved for use, depending
+	// on your workflow. It isn't necessarily the latest version of a template.
+	Version *string `type:"string"`
 }
 
 // String returns the string representation
@@ -12468,6 +12541,40 @@ func (s Template) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Specifies which version of a message template to use as the active version
+// of the template.
+type TemplateActiveVersionRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for the version of the message template to use as the
+	// active version of the template. If specified, this value must match the identifier
+	// for an existing template version. To retrieve a list of versions and version
+	// identifiers for a template, use the Template Versions resource.
+	Version *string `type:"string"`
+}
+
+// String returns the string representation
+func (s TemplateActiveVersionRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TemplateActiveVersionRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -12531,7 +12638,7 @@ type TemplateResponse struct {
 	// The Amazon Resource Name (ARN) of the message template.
 	Arn *string `type:"string"`
 
-	// The date when the message template was created.
+	// The date, in ISO 8601 format, when the message template was created.
 	//
 	// CreationDate is a required field
 	CreationDate *string `type:"string" required:"true"`
@@ -12542,7 +12649,7 @@ type TemplateResponse struct {
 	// defines the default value for that variable.
 	DefaultSubstitutions *string `type:"string"`
 
-	// The date when the message template was last modified.
+	// The date, in ISO 8601 format, when the message template was last modified.
 	//
 	// LastModifiedDate is a required field
 	LastModifiedDate *string `type:"string" required:"true"`
@@ -12560,10 +12667,15 @@ type TemplateResponse struct {
 	// TemplateName is a required field
 	TemplateName *string `type:"string" required:"true"`
 
-	// The type of channel that the message template is designed for.
+	// The type of channel that the message template is designed for. Possible values
+	// are: EMAIL, PUSH, SMS, and VOICE.
 	//
 	// TemplateType is a required field
 	TemplateType TemplateType `type:"string" required:"true" enum:"true"`
+
+	// The unique identifier, as an integer, for the active version of the message
+	// template.
+	Version *string `type:"string"`
 }
 
 // String returns the string representation
@@ -12626,6 +12738,168 @@ func (s TemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "TemplateType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Provides information about a specific version of a message template.
+type TemplateVersionResponse struct {
+	_ struct{} `type:"structure"`
+
+	// The date, in ISO 8601 format, when the version of the message template was
+	// created.
+	//
+	// CreationDate is a required field
+	CreationDate *string `type:"string" required:"true"`
+
+	// A JSON object that specifies the default values that are used for message
+	// variables in the version of the message template. This object is a set of
+	// key-value pairs. Each key defines a message variable in the template. The
+	// corresponding value defines the default value for that variable.
+	DefaultSubstitutions *string `type:"string"`
+
+	// The date, in ISO 8601 format, when the version of the message template was
+	// last modified.
+	//
+	// LastModifiedDate is a required field
+	LastModifiedDate *string `type:"string" required:"true"`
+
+	// The custom description of the version of the message template.
+	TemplateDescription *string `type:"string"`
+
+	// The name of the message template.
+	//
+	// TemplateName is a required field
+	TemplateName *string `type:"string" required:"true"`
+
+	// The type of channel that the message template is designed for. Possible values
+	// are: EMAIL, PUSH, SMS, and VOICE.
+	//
+	// TemplateType is a required field
+	TemplateType *string `type:"string" required:"true"`
+
+	// The unique identifier for the version of the message template. This value
+	// is an integer that Amazon Pinpoint automatically increments and assigns to
+	// each new version of a template.
+	Version *string `type:"string"`
+}
+
+// String returns the string representation
+func (s TemplateVersionResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TemplateVersionResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreationDate != nil {
+		v := *s.CreationDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DefaultSubstitutions != nil {
+		v := *s.DefaultSubstitutions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultSubstitutions", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastModifiedDate != nil {
+		v := *s.LastModifiedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateDescription != nil {
+		v := *s.TemplateDescription
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateType != nil {
+		v := *s.TemplateType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Provides information about all the versions of a specific message template.
+type TemplateVersionsResponse struct {
+	_ struct{} `type:"structure"`
+
+	// An array of responses, one for each version of the message template.
+	//
+	// Item is a required field
+	Item []TemplateVersionResponse `type:"list" required:"true"`
+
+	// The message that's returned from the API for the request to retrieve information
+	// about all the versions of the message template.
+	Message *string `type:"string"`
+
+	// The string to use in a subsequent request to get the next page of results
+	// in a paginated response. This value is null if there are no additional pages.
+	NextToken *string `type:"string"`
+
+	// The unique identifier for the request to retrieve information about all the
+	// versions of the message template.
+	RequestID *string `type:"string"`
+}
+
+// String returns the string representation
+func (s TemplateVersionsResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TemplateVersionsResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Item != nil {
+		v := s.Item
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Item", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RequestID != nil {
+		v := *s.RequestID
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RequestID", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -13118,7 +13392,7 @@ type VoiceTemplateResponse struct {
 	// template, in plain text format.
 	Body *string `type:"string"`
 
-	// The date when the message template was created.
+	// The date, in ISO 8601 format, when the message template was created.
 	//
 	// CreationDate is a required field
 	CreationDate *string `type:"string" required:"true"`
@@ -13135,7 +13409,7 @@ type VoiceTemplateResponse struct {
 	// (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
 	LanguageCode *string `type:"string"`
 
-	// The date when the message template was last modified.
+	// The date, in ISO 8601 format, when the message template was last modified.
 	//
 	// LastModifiedDate is a required field
 	LastModifiedDate *string `type:"string" required:"true"`
@@ -13158,6 +13432,11 @@ type VoiceTemplateResponse struct {
 	//
 	// TemplateType is a required field
 	TemplateType TemplateType `type:"string" required:"true" enum:"true"`
+
+	// The unique identifier, as an integer, for the active version of the message
+	// template, or the version of the template that you specified by using the
+	// version parameter in your request.
+	Version *string `type:"string"`
 
 	// The name of the voice that's used when delivering messages that are based
 	// on the message template. For a list of supported voices, see the Amazon Polly
@@ -13237,6 +13516,12 @@ func (s VoiceTemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "TemplateType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VoiceId != nil {
 		v := *s.VoiceId
@@ -13661,8 +13946,11 @@ func (s WriteEventStream) MarshalFields(e protocol.FieldEncoder) error {
 type WriteJourneyRequest struct {
 	_ struct{} `type:"structure"`
 
-	// The configuration and other settings for the activities that comprise the
-	// journey.
+	// A map that contains a set of Activity objects, one object for each activity
+	// in the journey. For each Activity object, the key is the unique identifier
+	// (string) for an activity and the value is the settings for the activity.
+	// An activity identifier can contain a maximum of 128 characters. The characters
+	// must be alphanumeric characters.
 	Activities map[string]Activity `type:"map"`
 
 	// The date, in ISO 8601 format, when the journey was created.
@@ -13710,7 +13998,9 @@ type WriteJourneyRequest struct {
 	// The schedule settings for the journey.
 	Schedule *JourneySchedule `type:"structure"`
 
-	// The unique identifier for the first activity in the journey.
+	// The unique identifier for the first activity in the journey. An activity
+	// identifier can contain a maximum of 128 characters. The characters must be
+	// alphanumeric characters.
 	StartActivity *string `type:"string"`
 
 	// The segment that defines which users are participants in the journey.

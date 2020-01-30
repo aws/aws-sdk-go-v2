@@ -13,21 +13,21 @@ import (
 type CreateVpcPeeringConnectionInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a fleet. This tells Amazon GameLift which GameLift
-	// VPC to peer with.
+	// A unique identifier for a fleet. You can use either the fleet ID or ARN value.
+	// This tells Amazon GameLift which GameLift VPC to peer with.
 	//
 	// FleetId is a required field
 	FleetId *string `type:"string" required:"true"`
 
-	// Unique identifier for the AWS account with the VPC that you want to peer
+	// A unique identifier for the AWS account with the VPC that you want to peer
 	// your Amazon GameLift fleet with. You can find your Account ID in the AWS
 	// Management Console under account settings.
 	//
 	// PeerVpcAwsAccountId is a required field
 	PeerVpcAwsAccountId *string `min:"1" type:"string" required:"true"`
 
-	// Unique identifier for a VPC with resources to be accessed by your Amazon
-	// GameLift fleet. The VPC must be in the same region where your fleet is deployed.
+	// A unique identifier for a VPC with resources to be accessed by your Amazon
+	// GameLift fleet. The VPC must be in the same Region where your fleet is deployed.
 	// Look up a VPC ID using the VPC Dashboard (https://console.aws.amazon.com/vpc/)
 	// in the AWS Management Console. Learn more about VPC peering in VPC Peering
 	// with Amazon GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
@@ -88,7 +88,7 @@ const opCreateVpcPeeringConnection = "CreateVpcPeeringConnection"
 // enables the game servers on your fleet to communicate directly with other
 // AWS resources. You can peer with VPCs in any AWS account that you have access
 // to, including the account that you use to manage your Amazon GameLift fleets.
-// You cannot peer with VPCs that are in different regions. For more information,
+// You cannot peer with VPCs that are in different Regions. For more information,
 // see VPC Peering with Amazon GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
 //
 // Before calling this operation to establish the peering connection, you first

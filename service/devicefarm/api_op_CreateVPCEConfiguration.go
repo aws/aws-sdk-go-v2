@@ -18,7 +18,7 @@ type CreateVPCEConfigurationInput struct {
 	// ServiceDnsName is a required field
 	ServiceDnsName *string `locationName:"serviceDnsName" type:"string" required:"true"`
 
-	// An optional description, providing more details about your VPC endpoint configuration.
+	// An optional description that provides details about your VPC endpoint configuration.
 	VpceConfigurationDescription *string `locationName:"vpceConfigurationDescription" type:"string"`
 
 	// The friendly name you give to your VPC endpoint configuration, to manage
@@ -27,8 +27,8 @@ type CreateVPCEConfigurationInput struct {
 	// VpceConfigurationName is a required field
 	VpceConfigurationName *string `locationName:"vpceConfigurationName" type:"string" required:"true"`
 
-	// The name of the VPC endpoint service running inside your AWS account that
-	// you want Device Farm to test.
+	// The name of the VPC endpoint service running in your AWS account that you
+	// want Device Farm to test.
 	//
 	// VpceServiceName is a required field
 	VpceServiceName *string `locationName:"vpceServiceName" type:"string" required:"true"`
@@ -64,7 +64,7 @@ func (s *CreateVPCEConfigurationInput) Validate() error {
 type CreateVPCEConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object containing information about your VPC endpoint configuration.
+	// An object that contains information about your VPC endpoint configuration.
 	VpceConfiguration *VPCEConfiguration `locationName:"vpceConfiguration" type:"structure"`
 }
 

@@ -41,6 +41,14 @@ type CreateDocumentClassifierInput struct {
 	// LanguageCode is a required field
 	LanguageCode LanguageCode `type:"string" required:"true" enum:"true"`
 
+	// Indicates the mode in which the classifier will be trained. The classifier
+	// can be trained in multi-class mode, which identifies one and only one class
+	// for each document, or multi-label mode, which identifies one or more labels
+	// for each document. In multi-label mode, multiple labels for an individual
+	// document are separated by a delimiter. The default delimiter between labels
+	// is a pipe (|).
+	Mode DocumentClassifierMode `type:"string" enum:"true"`
+
 	// Enables the addition of output results configuration parameters for custom
 	// classifier jobs.
 	OutputDataConfig *DocumentClassifierOutputDataConfig `type:"structure"`

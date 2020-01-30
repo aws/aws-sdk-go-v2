@@ -404,3 +404,51 @@ func (s *SecurityServicePolicyData) Validate() error {
 	}
 	return nil
 }
+
+// A collection of key:value pairs associated with an AWS resource. The key:value
+// pair can be anything you define. Typically, the tag key represents a category
+// (such as "environment") and the tag value represents a specific value within
+// that category (such as "test," "development," or "production"). You can add
+// up to 50 tags to each AWS resource.
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// Part of the key:value pair that defines a tag. You can use a tag key to describe
+	// a category of information, such as "customer." Tag keys are case-sensitive.
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
+
+	// Part of the key:value pair that defines a tag. You can use a tag value to
+	// describe a specific value within a category, such as "companyA" or "companyB."
+	// Tag values are case-sensitive.
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}

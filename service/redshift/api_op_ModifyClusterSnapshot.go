@@ -69,6 +69,9 @@ const opModifyClusterSnapshot = "ModifyClusterSnapshot"
 //
 // Modifies the settings for a snapshot.
 //
+// This exanmple modifies the manual retention period setting for a cluster
+// snapshot.
+//
 //    // Example sending a request using ModifyClusterSnapshotRequest.
 //    req := client.ModifyClusterSnapshotRequest(params)
 //    resp, err := req.Send(context.TODO())

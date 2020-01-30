@@ -19,8 +19,15 @@ type GetPersonalizedRankingInput struct {
 	// CampaignArn is a required field
 	CampaignArn *string `locationName:"campaignArn" type:"string" required:"true"`
 
+	// The contextual metadata to use when getting recommendations. Contextual metadata
+	// includes any interaction information that might be relevant when getting
+	// a user's recommendations, such as the user's current location or device type.
+	// For more information, see Contextual Metadata.
+	Context map[string]string `locationName:"context" type:"map"`
+
 	// A list of items (itemId's) to rank. If an item was not included in the training
-	// dataset, the item is appended to the end of the reranked list.
+	// dataset, the item is appended to the end of the reranked list. The maximum
+	// is 500.
 	//
 	// InputList is a required field
 	InputList []string `locationName:"inputList" type:"list" required:"true"`
@@ -68,6 +75,18 @@ func (s GetPersonalizedRankingInput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "campaignArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.Context != nil {
+		v := s.Context
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "context", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	if s.InputList != nil {
 		v := s.InputList
 
@@ -92,7 +111,8 @@ func (s GetPersonalizedRankingInput) MarshalFields(e protocol.FieldEncoder) erro
 type GetPersonalizedRankingOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of items in order of most likely interest to the user.
+	// A list of items in order of most likely interest to the user. The maximum
+	// is 500.
 	PersonalizedRanking []PredictedItem `locationName:"personalizedRanking" type:"list"`
 }
 

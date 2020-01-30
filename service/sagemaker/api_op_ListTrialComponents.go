@@ -19,7 +19,12 @@ type ListTrialComponentsInput struct {
 	// A filter that returns only components created before the specified time.
 	CreatedBefore *time.Time `type:"timestamp"`
 
-	// The maximum number of components to return in the response.
+	// A filter that returns only components that are part of the specified experiment.
+	// If you specify ExperimentName, you can't filter by SourceArn or TrialName.
+	ExperimentName *string `min:"1" type:"string"`
+
+	// The maximum number of components to return in the response. The default value
+	// is 10.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// If the previous call to ListTrialComponents didn't return the full set of
@@ -33,8 +38,13 @@ type ListTrialComponentsInput struct {
 	SortOrder SortOrder `type:"string" enum:"true"`
 
 	// A filter that returns only components that have the specified source Amazon
-	// Resource Name (ARN).
+	// Resource Name (ARN). If you specify SourceArn, you can't filter by ExperimentName
+	// or TrialName.
 	SourceArn *string `type:"string"`
+
+	// A filter that returns only components that are part of the specified trial.
+	// If you specify TrialName, you can't filter by ExperimentName or SourceArn.
+	TrialName *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -45,8 +55,14 @@ func (s ListTrialComponentsInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTrialComponentsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTrialComponentsInput"}
+	if s.ExperimentName != nil && len(*s.ExperimentName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ExperimentName", 1))
+	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.TrialName != nil && len(*s.TrialName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TrialName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -75,9 +91,16 @@ const opListTrialComponents = "ListTrialComponents"
 // ListTrialComponentsRequest returns a request value for making API operation for
 // Amazon SageMaker Service.
 //
-// Lists the trial components in your account. You can filter the list to show
-// only components that were created in a specific time range. You can sort
-// the list by trial component name or creation time.
+// Lists the trial components in your account. You can sort the list by trial
+// component name or creation time. You can filter the list to show only components
+// that were created in a specific time range. You can also filter on one of
+// the following:
+//
+//    * ExperimentName
+//
+//    * SourceArn
+//
+//    * TrialName
 //
 //    // Example sending a request using ListTrialComponentsRequest.
 //    req := client.ListTrialComponentsRequest(params)

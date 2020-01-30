@@ -57,8 +57,6 @@ type GetEmailIdentityOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An object that contains information about the DKIM attributes for the identity.
-	// This object includes the tokens that you use to create the CNAME records
-	// that are required to complete the DKIM verification process.
 	DkimAttributes *DkimAttributes `type:"structure"`
 
 	// The feedback forwarding configuration for the identity.

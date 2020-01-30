@@ -14,18 +14,16 @@ import (
 type StartMatchBackfillInput struct {
 	_ struct{} `type:"structure"`
 
-	// Name of the matchmaker to use for this request. The name of the matchmaker
-	// that was used with the original game session is listed in the GameSession
-	// object, MatchmakerData property. This property contains a matchmaking configuration
-	// ARN value, which includes the matchmaker name. (In the ARN value "arn:aws:gamelift:us-west-2:111122223333:matchmakingconfiguration/MM-4v4",
-	// the matchmaking configuration name is "MM-4v4".) Use only the name for this
-	// parameter.
+	// Name of the matchmaker to use for this request. You can use either the configuration
+	// name or ARN value. The ARN of the matchmaker that was used with the original
+	// game session is listed in the GameSession object, MatchmakerData property.
 	//
 	// ConfigurationName is a required field
-	ConfigurationName *string `type:"string" required:"true"`
+	ConfigurationName *string `min:"1" type:"string" required:"true"`
 
-	// Amazon Resource Name (ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
-	// that is assigned to a game session and uniquely identifies it.
+	// Amazon Resource Name (ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
+	// that is assigned to a game session and uniquely identifies it. This is the
+	// same as the game session ID.
 	//
 	// GameSessionArn is a required field
 	GameSessionArn *string `min:"1" type:"string" required:"true"`
@@ -40,13 +38,13 @@ type StartMatchBackfillInput struct {
 	//    JSON syntax, formatted as a string. For more details, see Match Data (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data).
 	//
 	//    * LatencyInMs -\\- If the matchmaker uses player latency, include a latency
-	//    value, in milliseconds, for the region that the game session is currently
-	//    in. Do not include latency values for any other region.
+	//    value, in milliseconds, for the Region that the game session is currently
+	//    in. Do not include latency values for any other Region.
 	//
 	// Players is a required field
 	Players []Player `type:"list" required:"true"`
 
-	// Unique identifier for a matchmaking ticket. If no ticket ID is specified
+	// A unique identifier for a matchmaking ticket. If no ticket ID is specified
 	// here, Amazon GameLift will generate one in the form of a UUID. Use this identifier
 	// to track the match backfill ticket status and retrieve match results.
 	TicketId *string `type:"string"`
@@ -63,6 +61,9 @@ func (s *StartMatchBackfillInput) Validate() error {
 
 	if s.ConfigurationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationName"))
+	}
+	if s.ConfigurationName != nil && len(*s.ConfigurationName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationName", 1))
 	}
 
 	if s.GameSessionArn == nil {

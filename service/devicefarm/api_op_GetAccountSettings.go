@@ -38,8 +38,8 @@ const opGetAccountSettings = "GetAccountSettings"
 // GetAccountSettingsRequest returns a request value for making API operation for
 // AWS Device Farm.
 //
-// Returns the number of unmetered iOS and/or unmetered Android devices that
-// have been purchased by the account.
+// Returns the number of unmetered iOS or unmetered Android devices that have
+// been purchased by the account.
 //
 //    // Example sending a request using GetAccountSettingsRequest.
 //    req := client.GetAccountSettingsRequest(params)

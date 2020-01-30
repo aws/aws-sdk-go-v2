@@ -71,7 +71,8 @@ const opCreateLogStream = "CreateLogStream"
 // Creates a log stream for the specified log group.
 //
 // There is no limit on the number of log streams that you can create for a
-// log group.
+// log group. There is a limit of 50 TPS on CreateLogStream operations, after
+// which transactions are throttled.
 //
 // You must use the following guidelines when naming a log stream:
 //

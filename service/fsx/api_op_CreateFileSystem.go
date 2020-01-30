@@ -24,9 +24,10 @@ type CreateFileSystemInput struct {
 	// FileSystemType is a required field
 	FileSystemType FileSystemType `type:"string" required:"true" enum:"true"`
 
-	// The ID of your AWS Key Management Service (AWS KMS) key. This ID is used
-	// to encrypt the data in your file system at rest. For more information, see
-	// Encrypt (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html)
+	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the
+	// file system's data for an Amazon FSx for Windows File Server file system
+	// at rest. Amazon FSx for Lustre does not support KMS encryption. For more
+	// information, see Encrypt (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html)
 	// in the AWS Key Management Service API Reference.
 	KmsKeyId *string `min:"1" type:"string"`
 
@@ -47,7 +48,7 @@ type CreateFileSystemInput struct {
 	// in increments of 3600 GiB.
 	//
 	// StorageCapacity is a required field
-	StorageCapacity *int64 `min:"1" type:"integer" required:"true"`
+	StorageCapacity *int64 `type:"integer" required:"true"`
 
 	// Specifies the IDs of the subnets that the file system will be accessible
 	// from. For Windows MULTI_AZ_1 file system deployment types, provide exactly
@@ -91,9 +92,6 @@ func (s *CreateFileSystemInput) Validate() error {
 
 	if s.StorageCapacity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StorageCapacity"))
-	}
-	if s.StorageCapacity != nil && *s.StorageCapacity < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("StorageCapacity", 1))
 	}
 
 	if s.SubnetIds == nil {

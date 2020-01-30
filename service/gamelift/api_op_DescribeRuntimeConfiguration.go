@@ -13,7 +13,8 @@ import (
 type DescribeRuntimeConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a fleet to get the run-time configuration for.
+	// A unique identifier for a fleet to get the runtime configuration for. You
+	// can use either the fleet ID or ARN value.
 	//
 	// FleetId is a required field
 	FleetId *string `type:"string" required:"true"`
@@ -57,8 +58,8 @@ const opDescribeRuntimeConfiguration = "DescribeRuntimeConfiguration"
 // DescribeRuntimeConfigurationRequest returns a request value for making API operation for
 // Amazon GameLift.
 //
-// Retrieves the current run-time configuration for the specified fleet. The
-// run-time configuration tells Amazon GameLift how to launch server processes
+// Retrieves the current runtime configuration for the specified fleet. The
+// runtime configuration tells Amazon GameLift how to launch server processes
 // on instances in the fleet.
 //
 // Learn more
@@ -77,8 +78,7 @@ const opDescribeRuntimeConfiguration = "DescribeRuntimeConfiguration"
 //    DescribeFleetUtilization DescribeRuntimeConfiguration DescribeEC2InstanceLimits
 //    DescribeFleetEvents
 //
-//    * Update fleets: UpdateFleetAttributes UpdateFleetCapacity UpdateFleetPortSettings
-//    UpdateRuntimeConfiguration
+//    * UpdateFleetAttributes
 //
 //    * Manage fleet actions: StartFleetActions StopFleetActions
 //

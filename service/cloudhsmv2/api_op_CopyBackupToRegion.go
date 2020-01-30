@@ -4,6 +4,7 @@ package cloudhsmv2
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -21,6 +22,8 @@ type CopyBackupToRegionInput struct {
 	//
 	// DestinationRegion is a required field
 	DestinationRegion *string `type:"string" required:"true"`
+
+	TagList []Tag `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -38,6 +41,16 @@ func (s *CopyBackupToRegionInput) Validate() error {
 
 	if s.DestinationRegion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DestinationRegion"))
+	}
+	if s.TagList != nil && len(s.TagList) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TagList", 1))
+	}
+	if s.TagList != nil {
+		for i, v := range s.TagList {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagList", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

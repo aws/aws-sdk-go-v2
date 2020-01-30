@@ -442,8 +442,8 @@ func (s AncillarySourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 // depending on the value that you choose for Audio codec (Codec). For each
 // codec enum that you choose, define the corresponding settings object. The
 // following lists the codec enum, settings object pairs. * AAC, AacSettings
-// * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings
-// * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings
+// * MP2, Mp2Settings * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings
+// * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings
 type AudioCodecSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -478,6 +478,10 @@ type AudioCodecSettings struct {
 	// Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to
 	// the value MP2.
 	Mp2Settings *Mp2Settings `locationName:"mp2Settings" type:"structure"`
+
+	// Required when you set Codec, under AudioDescriptions>CodecSettings, to the
+	// value MP3.
+	Mp3Settings *Mp3Settings `locationName:"mp3Settings" type:"structure"`
 
 	// Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to
 	// the value WAV.
@@ -520,6 +524,11 @@ func (s *AudioCodecSettings) Validate() error {
 	if s.Mp2Settings != nil {
 		if err := s.Mp2Settings.Validate(); err != nil {
 			invalidParams.AddNested("Mp2Settings", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Mp3Settings != nil {
+		if err := s.Mp3Settings.Validate(); err != nil {
+			invalidParams.AddNested("Mp3Settings", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.WavSettings != nil {
@@ -578,6 +587,12 @@ func (s AudioCodecSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "mp2Settings", v, metadata)
 	}
+	if s.Mp3Settings != nil {
+		v := s.Mp3Settings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "mp3Settings", v, metadata)
+	}
 	if s.WavSettings != nil {
 		v := s.WavSettings
 
@@ -625,8 +640,8 @@ type AudioDescription struct {
 	// depending on the value that you choose for Audio codec (Codec). For each
 	// codec enum that you choose, define the corresponding settings object. The
 	// following lists the codec enum, settings object pairs. * AAC, AacSettings
-	// * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings
-	// * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings
+	// * MP2, Mp2Settings * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings
+	// * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings
 	CodecSettings *AudioCodecSettings `locationName:"codecSettings" type:"structure"`
 
 	// Specify the language for this audio output track. The service puts this language
@@ -2117,6 +2132,14 @@ type CmafGroupSettings struct {
 
 	// When set to ENABLED, an Apple HLS manifest will be generated for this output.
 	WriteHlsManifest CmafWriteHLSManifest `locationName:"writeHlsManifest" type:"string" enum:"true"`
+
+	// When you enable Precise segment duration in DASH manifests (writeSegmentTimelineInRepresentation),
+	// your DASH manifest shows precise segment durations. The segment duration
+	// information appears inside the SegmentTimeline element, inside SegmentTemplate
+	// at the Representation level. When this feature isn't enabled, the segment
+	// durations in your DASH manifest are approximate. The segment duration information
+	// appears in the duration attribute of the SegmentTemplate element.
+	WriteSegmentTimelineInRepresentation CmafWriteSegmentTimelineInRepresentation `locationName:"writeSegmentTimelineInRepresentation" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2268,6 +2291,51 @@ func (s CmafGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "writeHlsManifest", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if len(s.WriteSegmentTimelineInRepresentation) > 0 {
+		v := s.WriteSegmentTimelineInRepresentation
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "writeSegmentTimelineInRepresentation", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Settings for MP4 segments in CMAF
+type CmfcSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Use this setting only when you specify SCTE-35 markers from ESAM. Choose
+	// INSERT to put SCTE-35 markers in this output at the insertion points that
+	// you specify in an ESAM XML document. Provide the document in the setting
+	// SCC XML (sccXml).
+	Scte35Esam CmfcScte35Esam `locationName:"scte35Esam" type:"string" enum:"true"`
+
+	// Ignore this setting unless you have SCTE-35 markers in your input video file.
+	// Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear
+	// in your input to also appear in this output. Choose None (NONE) if you don't
+	// want those SCTE-35 markers in this output.
+	Scte35Source CmfcScte35Source `locationName:"scte35Source" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s CmfcSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CmfcSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Scte35Esam) > 0 {
+		v := s.Scte35Esam
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "scte35Esam", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Scte35Source) > 0 {
+		v := s.Scte35Source
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "scte35Source", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	return nil
 }
 
@@ -2381,6 +2449,9 @@ func (s ColorCorrector) MarshalFields(e protocol.FieldEncoder) error {
 type ContainerSettings struct {
 	_ struct{} `type:"structure"`
 
+	// Settings for MP4 segments in CMAF
+	CmfcSettings *CmfcSettings `locationName:"cmfcSettings" type:"structure"`
+
 	// Container for this output. Some containers require a container settings object.
 	// If not specified, the default object will be created.
 	Container ContainerType `locationName:"container" type:"string" enum:"true"`
@@ -2441,6 +2512,12 @@ func (s *ContainerSettings) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ContainerSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CmfcSettings != nil {
+		v := s.CmfcSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "cmfcSettings", v, metadata)
+	}
 	if len(s.Container) > 0 {
 		v := s.Container
 
@@ -9136,6 +9213,91 @@ func (s Mp2Settings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Required when you set Codec, under AudioDescriptions>CodecSettings, to the
+// value MP3.
+type Mp3Settings struct {
+	_ struct{} `type:"structure"`
+
+	// Specify the average bitrate in bits per second.
+	Bitrate *int64 `locationName:"bitrate" min:"16000" type:"integer"`
+
+	// Specify the number of channels in this output audio track. Choosing Mono
+	// on the console gives you 1 output channel; choosing Stereo gives you 2. In
+	// the API, valid values are 1 and 2.
+	Channels *int64 `locationName:"channels" min:"1" type:"integer"`
+
+	// Specify whether the service encodes this MP3 audio output with a constant
+	// bitrate (CBR) or a variable bitrate (VBR).
+	RateControlMode Mp3RateControlMode `locationName:"rateControlMode" type:"string" enum:"true"`
+
+	// Sample rate in hz.
+	SampleRate *int64 `locationName:"sampleRate" min:"22050" type:"integer"`
+
+	// Required when you set Bitrate control mode (rateControlMode) to VBR. Specify
+	// the audio quality of this MP3 output from 0 (highest quality) to 9 (lowest
+	// quality).
+	VbrQuality *int64 `locationName:"vbrQuality" type:"integer"`
+}
+
+// String returns the string representation
+func (s Mp3Settings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Mp3Settings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Mp3Settings"}
+	if s.Bitrate != nil && *s.Bitrate < 16000 {
+		invalidParams.Add(aws.NewErrParamMinValue("Bitrate", 16000))
+	}
+	if s.Channels != nil && *s.Channels < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Channels", 1))
+	}
+	if s.SampleRate != nil && *s.SampleRate < 22050 {
+		invalidParams.Add(aws.NewErrParamMinValue("SampleRate", 22050))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Mp3Settings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Bitrate != nil {
+		v := *s.Bitrate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "bitrate", protocol.Int64Value(v), metadata)
+	}
+	if s.Channels != nil {
+		v := *s.Channels
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "channels", protocol.Int64Value(v), metadata)
+	}
+	if len(s.RateControlMode) > 0 {
+		v := s.RateControlMode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "rateControlMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.SampleRate != nil {
+		v := *s.SampleRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sampleRate", protocol.Int64Value(v), metadata)
+	}
+	if s.VbrQuality != nil {
+		v := *s.VbrQuality
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "vbrQuality", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Settings for MP4 container. You can create audio-only AAC outputs with this
 // container.
 type Mp4Settings struct {
@@ -9146,6 +9308,14 @@ type Mp4Settings struct {
 	// and a 'cslg' (composition shift least greatest) box will be included per
 	// 14496-1 amendment 1. This improves compatibility with Apple players and tools.
 	CslgAtom Mp4CslgAtom `locationName:"cslgAtom" type:"string" enum:"true"`
+
+	// Ignore this setting unless compliance to the CTTS box version specification
+	// matters in your workflow. Specify a value of 1 to set your CTTS box version
+	// to 1 and make your output compliant with the specification. When you specify
+	// a value of 1, you must also set CSLG atom (cslgAtom) to the value INCLUDE.
+	// Keep the default value 0 to set your CTTS box version to 0. This can provide
+	// backward compatibility for some players and packagers.
+	CttsVersion *int64 `locationName:"cttsVersion" type:"integer"`
 
 	// Inserts a free-space box immediately after the moov box.
 	FreeSpaceBox Mp4FreeSpaceBox `locationName:"freeSpaceBox" type:"string" enum:"true"`
@@ -9172,6 +9342,12 @@ func (s Mp4Settings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "cslgAtom", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.CttsVersion != nil {
+		v := *s.CttsVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "cttsVersion", protocol.Int64Value(v), metadata)
 	}
 	if len(s.FreeSpaceBox) > 0 {
 		v := s.FreeSpaceBox
@@ -12127,9 +12303,9 @@ func (s TtmlDestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
 // the group of settings related to video encoding. The settings in this group
 // vary depending on the value that you choose for Video codec (Codec). For
 // each codec enum that you choose, define the corresponding settings object.
-// The following lists the codec enum, settings object pairs. * H_264, H264Settings
-// * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE,
-// FrameCaptureSettings
+// The following lists the codec enum, settings object pairs. * FRAME_CAPTURE,
+// FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2,
+// Mpeg2Settings * PRORES, ProresSettings
 type VideoCodecSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -12259,9 +12435,9 @@ type VideoDescription struct {
 	// the group of settings related to video encoding. The settings in this group
 	// vary depending on the value that you choose for Video codec (Codec). For
 	// each codec enum that you choose, define the corresponding settings object.
-	// The following lists the codec enum, settings object pairs. * H_264, H264Settings
-	// * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE,
-	// FrameCaptureSettings
+	// The following lists the codec enum, settings object pairs. * FRAME_CAPTURE,
+	// FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2,
+	// Mpeg2Settings * PRORES, ProresSettings
 	CodecSettings *VideoCodecSettings `locationName:"codecSettings" type:"structure"`
 
 	// Choose Insert (INSERT) for this setting to include color metadata in this
@@ -12625,11 +12801,12 @@ func (s VideoPreprocessor) MarshalFields(e protocol.FieldEncoder) error {
 type VideoSelector struct {
 	_ struct{} `type:"structure"`
 
-	// Ignore this setting unless this input is a QuickTime animation. Specify which
-	// part of this input MediaConvert uses for your outputs. Leave this setting
-	// set to DISCARD in order to delete the alpha channel and preserve the video.
-	// Use REMAP_TO_LUMA for this setting to delete the video and map the alpha
-	// channel to the luma channel of your outputs.
+	// Ignore this setting unless this input is a QuickTime animation with an alpha
+	// channel. Use this setting to create separate Key and Fill outputs. In each
+	// output, specify which part of the input MediaConvert uses. Leave this setting
+	// at the default value DISCARD to delete the alpha channel and preserve the
+	// video. Set it to REMAP_TO_LUMA to delete the video and map the alpha channel
+	// to the luma channel of your outputs.
 	AlphaBehavior AlphaBehavior `locationName:"alphaBehavior" type:"string" enum:"true"`
 
 	// If your input video has accurate color space metadata, or if you don't know

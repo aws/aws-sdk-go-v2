@@ -17,7 +17,8 @@ type StopFleetActionsInput struct {
 	// Actions is a required field
 	Actions []FleetAction `min:"1" type:"list" required:"true"`
 
-	// Unique identifier for a fleet
+	// A unique identifier for a fleet to stop actions on. You can use either the
+	// fleet ID or ARN value.
 	//
 	// FleetId is a required field
 	FleetId *string `type:"string" required:"true"`

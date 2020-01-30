@@ -94,7 +94,7 @@ const opGetRoom = "GetRoom"
 // GetRoomRequest returns a request value for making API operation for
 // Amazon Chime.
 //
-// Retrieves room details, such as name.
+// Retrieves room details, such as the room name.
 //
 //    // Example sending a request using GetRoomRequest.
 //    req := client.GetRoomRequest(params)

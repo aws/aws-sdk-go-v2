@@ -35,8 +35,10 @@ type AlgorithmSpecification struct {
 	//
 	//    * You use one of the Amazon SageMaker built-in algorithms
 	//
-	//    * You use one of the following prebuilt Amazon SageMaker Docker images:
-	//    Tensorflow MXNet PyTorch
+	//    * You use one of the following Prebuilt Amazon SageMaker Docker Images
+	//    (https://docs.aws.amazon.com/sagemaker/latest/dg/pre-built-containers-frameworks-deep-learning.html):
+	//    Tensorflow (version >= 1.15) MXNet (version >= 1.6) PyTorch (version >=
+	//    1.3)
 	//
 	//    * You specify at least one MetricDefinition
 	EnableSageMakerMetricsTimeSeries *bool `type:"boolean"`
@@ -1403,7 +1405,8 @@ func (s *CognitoMemberDefinition) Validate() error {
 type CollectionConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the tensor collection.
+	// The name of the tensor collection. The name must be unique relative to other
+	// rule configuration names.
 	CollectionName *string `min:"1" type:"string"`
 
 	// Parameter values for the tensor collection. The allowed parameters are "name",
@@ -1894,7 +1897,7 @@ type DebugRuleConfiguration struct {
 	// The instance type to deploy for a training job.
 	InstanceType ProcessingInstanceType `type:"string" enum:"true"`
 
-	// Path to local storage location for rules. Defaults to /opt/ml/processing/output/rule/.
+	// Path to local storage location for output of rules. Defaults to /opt/ml/processing/output/rule/.
 	LocalPath *string `type:"string"`
 
 	// The name of the rule configuration. It must be unique relative to other rule
@@ -1914,7 +1917,7 @@ type DebugRuleConfiguration struct {
 	// Path to Amazon S3 storage location for rules.
 	S3OutputPath *string `type:"string"`
 
-	// The size, in GB, of the ML storage volume attached to the notebook instance.
+	// The size, in GB, of the ML storage volume attached to the processing instance.
 	VolumeSizeInGB *int64 `type:"integer"`
 }
 
@@ -2714,7 +2717,7 @@ func (s *GitConfigForUpdate) Validate() error {
 	return nil
 }
 
-// Defines under what conditions SageMaker creates a human loop.
+// Defines under what conditions SageMaker creates a human loop. Used within .
 type HumanLoopActivationConditionsConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -3136,7 +3139,7 @@ type HumanTaskConfig struct {
 
 	// Defines the maximum number of data objects that can be labeled by human workers
 	// at the same time. Also referred to as batch size. Each object may have more
-	// than one worker at one time.
+	// than one worker at one time. The default value is 1000 objects.
 	MaxConcurrentTaskCount *int64 `min:"1" type:"integer"`
 
 	// The number of human workers that will label an object.
@@ -3401,8 +3404,9 @@ type HumanTaskConfig struct {
 
 	// The length of time that a task remains available for labeling by human workers.
 	// If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours
-	// (43200). For private and vendor workforces, the maximum is as listed.
-	TaskAvailabilityLifetimeInSeconds *int64 `min:"1" type:"integer"`
+	// (43200). The default value is 864000 seconds (1 day). For private and vendor
+	// workforces, the maximum is as listed.
+	TaskAvailabilityLifetimeInSeconds *int64 `min:"60" type:"integer"`
 
 	// A description of the task for your human workers.
 	//
@@ -3462,8 +3466,8 @@ func (s *HumanTaskConfig) Validate() error {
 	if s.PreHumanTaskLambdaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PreHumanTaskLambdaArn"))
 	}
-	if s.TaskAvailabilityLifetimeInSeconds != nil && *s.TaskAvailabilityLifetimeInSeconds < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("TaskAvailabilityLifetimeInSeconds", 1))
+	if s.TaskAvailabilityLifetimeInSeconds != nil && *s.TaskAvailabilityLifetimeInSeconds < 60 {
+		invalidParams.Add(aws.NewErrParamMinValue("TaskAvailabilityLifetimeInSeconds", 60))
 	}
 
 	if s.TaskDescription == nil {
@@ -3699,8 +3703,6 @@ type HyperParameterTrainingJobDefinition struct {
 	// to use a VPC, Amazon SageMaker downloads and uploads customer data and model
 	// artifacts through the specified VPC, but the training container does not
 	// have network access.
-	//
-	// The Semantic Segmentation built-in algorithm does not support network isolation.
 	EnableNetworkIsolation *bool `type:"boolean"`
 
 	// Specifies ranges of integer, continuous, and categorical hyperparameters
@@ -4311,6 +4313,16 @@ type InputConfig struct {
 	//    If using the CLI, {\"input\":[1,1024,1024,3]} Examples for two inputs:
 	//    If using the console, {"data1": [1,28,28,1], "data2":[1,28,28,1]} If using
 	//    the CLI, {\"data1\": [1,28,28,1], \"data2\":[1,28,28,1]}
+	//
+	//    * KERAS: You must specify the name and shape (NCHW format) of expected
+	//    data inputs using a dictionary format for your trained model. Note that
+	//    while Keras model artifacts should be uploaded in NHWC (channel-last)
+	//    format, DataInputConfig should be specified in NCHW (channel-first) format.
+	//    The dictionary formats required for the console and CLI are different.
+	//    Examples for one input: If using the console, {"input_1":[1,3,224,224]}
+	//    If using the CLI, {\"input_1\":[1,3,224,224]} Examples for two inputs:
+	//    If using the console, {"input_1": [1,3,224,224], "input_2":[1,3,224,224]}
+	//    If using the CLI, {\"input_1\": [1,3,224,224], \"input_2\":[1,3,224,224]}
 	//
 	//    * MXNET/ONNX: You must specify the name and shape (NCHW format) of the
 	//    expected data inputs in order using a dictionary format for your trained
@@ -5969,7 +5981,7 @@ type NestedFilters struct {
 	Filters []Filter `min:"1" type:"list" required:"true"`
 
 	// The name of the property to use in the nested filters. The value must match
-	// a listed property name, such as InputDataConfig .
+	// a listed property name, such as InputDataConfig.
 	//
 	// NestedPropertyName is a required field
 	NestedPropertyName *string `min:"1" type:"string" required:"true"`
@@ -7005,13 +7017,12 @@ func (s ProductionVariantSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// A type of SuggestionQuery. A suggestion query for retrieving property names
-// that match the specified hint.
+// Part of the SuggestionQuery type. Specifies a hint for retrieving property
+// names that begin with the specified text.
 type PropertyNameQuery struct {
 	_ struct{} `type:"structure"`
 
-	// Text that is part of a property's name. The property names of hyperparameter,
-	// metric, and tag key names that begin with the specified text in the PropertyNameHint.
+	// Text that begins a property's name.
 	//
 	// PropertyNameHint is a required field
 	PropertyNameHint *string `type:"string" required:"true"`
@@ -7906,13 +7917,13 @@ func (s SharingSettings) String() string {
 // of the JSON lines in the AugmentedManifestFile is shuffled. The shuffling
 // order is determined using the Seed value.
 //
-// For Pipe input mode, shuffling is done at the start of every epoch. With
-// large datasets, this ensures that the order of the training data is different
-// for each epoch, and it helps reduce bias and possible overfitting. In a multi-node
-// training job when ShuffleConfig is combined with S3DataDistributionType of
-// ShardedByS3Key, the data is shuffled across nodes so that the content sent
-// to a particular node on the first epoch might be sent to a different node
-// on the second epoch.
+// For Pipe input mode, when ShuffleConfig is specified shuffling is done at
+// the start of every epoch. With large datasets, this ensures that the order
+// of the training data is different for each epoch, and it helps reduce bias
+// and possible overfitting. In a multi-node training job when ShuffleConfig
+// is combined with S3DataDistributionType of ShardedByS3Key, the data is shuffled
+// across nodes so that the content sent to a particular node on the first epoch
+// might be sent to a different node on the second epoch.
 type ShuffleConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -8021,6 +8032,43 @@ func (s *SourceAlgorithmSpecification) Validate() error {
 	return nil
 }
 
+// A list of IP address ranges (CIDRs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)).
+// Used to create an allow list of IP addresses for a private workforce. For
+// more information, see .
+type SourceIpConfig struct {
+	_ struct{} `type:"structure"`
+
+	// A list of one to four Classless Inter-Domain Routing (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)
+	// (CIDR) values.
+	//
+	// Maximum: 4 CIDR values
+	//
+	// The following Length Constraints apply to individual CIDR values in the CIDR
+	// value list.
+	//
+	// Cidrs is a required field
+	Cidrs []string `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s SourceIpConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SourceIpConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SourceIpConfig"}
+
+	if s.Cidrs == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Cidrs"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Specifies a limit to how long a model training or compilation job can run.
 // It also specifies how long you are willing to wait for a managed spot training
 // job to complete. When the job reaches the time limit, Amazon SageMaker ends
@@ -8103,12 +8151,13 @@ func (s SubscribedWorkteam) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Limits the property names that are included in the response.
+// Specified in the GetSearchSuggestions request. Limits the property names
+// that are included in the response.
 type SuggestionQuery struct {
 	_ struct{} `type:"structure"`
 
-	// A type of SuggestionQuery. Defines a property name hint. Only property names
-	// that match the specified hint are included in the response.
+	// Defines a property name hint. Only property names that begin with the specified
+	// hint are included in the response.
 	PropertyNameQuery *PropertyNameQuery `type:"structure"`
 }
 
@@ -8960,13 +9009,13 @@ type TransformOutput struct {
 	// encrypt the model artifacts at rest using Amazon S3 server-side encryption.
 	// The KmsKeyId can be any of the following formats:
 	//
-	//    * // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	//    * // Amazon Resource Name (ARN) of a KMS Key "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	//    * Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	//    * // KMS Key Alias "alias/ExampleAlias"
+	//    * Alias name: alias/ExampleAlias
 	//
-	//    * // Amazon Resource Name (ARN) of a KMS Key Alias "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
+	//    * Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
 	//
 	// If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS
 	// key for Amazon S3 for your role's account. For more information, see KMS-Managed
@@ -9040,9 +9089,13 @@ type TransformResources struct {
 	// that run the batch transform job. The VolumeKmsKeyId can be any of the following
 	// formats:
 	//
-	//    * // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	//    * // Amazon Resource Name (ARN) of a KMS Key "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	//    * Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Alias name: alias/ExampleAlias
+	//
+	//    * Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
 	VolumeKmsKeyId *string `type:"string"`
 }
 
@@ -9790,6 +9843,41 @@ func (s *VpcConfig) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// A single private workforce, which is automatically created when you create
+// your first private work team. You can create one private work force in each
+// AWS Region. By default, any workforce related API operation used in a specific
+// region will apply to the workforce created in that region. To learn how to
+// create a private workforce, see Create a Private Workforce (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html).
+type Workforce struct {
+	_ struct{} `type:"structure"`
+
+	// The most recent date that was used to successfully add one or more IP address
+	// ranges (CIDRs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html))
+	// to a private workforce's allow list.
+	LastUpdatedDate *time.Time `type:"timestamp"`
+
+	// A list of one to four IP address ranges (CIDRs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html))
+	// to be added to the workforce allow list.
+	SourceIpConfig *SourceIpConfig `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the private workforce.
+	//
+	// WorkforceArn is a required field
+	WorkforceArn *string `type:"string" required:"true"`
+
+	// The name of the private workforce whose access you want to restrict. WorkforceName
+	// is automatically set to "default" when a workforce is created and cannot
+	// be modified.
+	//
+	// WorkforceName is a required field
+	WorkforceName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Workforce) String() string {
+	return awsutil.Prettify(s)
 }
 
 // Provides details about a labeling work team.

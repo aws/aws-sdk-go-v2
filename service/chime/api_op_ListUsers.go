@@ -26,6 +26,9 @@ type ListUsersInput struct {
 
 	// Optional. The user email address used to filter results. Maximum 1.
 	UserEmail *string `location:"querystring" locationName:"user-email" type:"string" sensitive:"true"`
+
+	// The user type.
+	UserType UserType `location:"querystring" locationName:"user-type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -77,6 +80,12 @@ func (s ListUsersInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "user-email", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.UserType) > 0 {
+		v := s.UserType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "user-type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }

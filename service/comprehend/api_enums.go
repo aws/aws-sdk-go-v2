@@ -2,6 +2,23 @@
 
 package comprehend
 
+type DocumentClassifierMode string
+
+// Enum values for DocumentClassifierMode
+const (
+	DocumentClassifierModeMultiClass DocumentClassifierMode = "MULTI_CLASS"
+	DocumentClassifierModeMultiLabel DocumentClassifierMode = "MULTI_LABEL"
+)
+
+func (enum DocumentClassifierMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DocumentClassifierMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EndpointStatus string
 
 // Enum values for EndpointStatus

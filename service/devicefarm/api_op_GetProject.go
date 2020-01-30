@@ -45,7 +45,7 @@ func (s *GetProjectInput) Validate() error {
 type GetProjectOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The project you wish to get information about.
+	// The project to get information about.
 	Project *Project `locationName:"project" type:"structure"`
 }
 

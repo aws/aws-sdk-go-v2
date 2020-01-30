@@ -137,6 +137,12 @@ type BrokerInstanceOption struct {
 	// The type of broker instance.
 	HostInstanceType *string `locationName:"hostInstanceType" type:"string"`
 
+	// The broker's storage type.
+	StorageType BrokerStorageType `locationName:"storageType" type:"string" enum:"true"`
+
+	// The list of supported deployment modes.
+	SupportedDeploymentModes []DeploymentMode `locationName:"supportedDeploymentModes" type:"list"`
+
 	// The list of supported engine versions.
 	SupportedEngineVersions []string `locationName:"supportedEngineVersions" type:"list"`
 }
@@ -171,6 +177,24 @@ func (s BrokerInstanceOption) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "hostInstanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.StorageType) > 0 {
+		v := s.StorageType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "storageType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.SupportedDeploymentModes != nil {
+		v := s.SupportedDeploymentModes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "supportedDeploymentModes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	if s.SupportedEngineVersions != nil {
 		v := s.SupportedEngineVersions

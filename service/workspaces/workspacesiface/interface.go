@@ -109,6 +109,8 @@ type ClientAPI interface {
 
 	ListAvailableManagementCidrRangesRequest(*workspaces.ListAvailableManagementCidrRangesInput) workspaces.ListAvailableManagementCidrRangesRequest
 
+	MigrateWorkspaceRequest(*workspaces.MigrateWorkspaceInput) workspaces.MigrateWorkspaceRequest
+
 	ModifyAccountRequest(*workspaces.ModifyAccountInput) workspaces.ModifyAccountRequest
 
 	ModifyClientPropertiesRequest(*workspaces.ModifyClientPropertiesInput) workspaces.ModifyClientPropertiesRequest

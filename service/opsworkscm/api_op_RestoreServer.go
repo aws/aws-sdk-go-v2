@@ -17,10 +17,10 @@ type RestoreServerInput struct {
 	// BackupId is a required field
 	BackupId *string `type:"string" required:"true"`
 
-	// The type of the instance to create. Valid values must be specified in the
-	// following format: ^([cm][34]|t2).* For example, m5.large. Valid values are
-	// m5.large, r5.xlarge, and r5.2xlarge. If you do not specify this parameter,
-	// RestoreServer uses the instance type from the specified backup.
+	// The type of instance to restore. Valid values must be specified in the following
+	// format: ^([cm][34]|t2).* For example, m5.large. Valid values are m5.large,
+	// r5.xlarge, and r5.2xlarge. If you do not specify this parameter, RestoreServer
+	// uses the instance type from the specified backup.
 	InstanceType *string `type:"string"`
 
 	// The name of the key pair to set on the new EC2 instance. This can be helpful
@@ -78,6 +78,12 @@ const opRestoreServer = "RestoreServer"
 // EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer
 // maintains the existing server endpoint, so configuration management of the
 // server's client devices (nodes) should continue to work.
+//
+// Restoring from a backup is performed by creating a new EC2 instance. If restoration
+// is successful, and the server is in a HEALTHY state, AWS OpsWorks CM switches
+// traffic over to the new instance. After restoration is finished, the old
+// EC2 instance is maintained in a Running or Stopped state, but is eventually
+// terminated.
 //
 // This operation is asynchronous.
 //

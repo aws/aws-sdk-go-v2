@@ -604,8 +604,22 @@ type AttachmentsSource struct {
 	Name *string `type:"string"`
 
 	// The value of a key-value pair that identifies the location of an attachment
-	// to a document. The format is the URL of the location of a document attachment,
-	// such as the URL of an Amazon S3 bucket.
+	// to a document. The format for Value depends on the type of key you specify.
+	//
+	//    * For the key SourceUrl, the value is an S3 bucket location. For example:
+	//    "Values": [ "s3://my-bucket/my-folder" ]
+	//
+	//    * For the key S3FileUrl, the value is a file in an S3 bucket. For example:
+	//    "Values": [ "s3://my-bucket/my-folder/my-file.py" ]
+	//
+	//    * For the key AttachmentReference, the value is constructed from the name
+	//    of another SSM document in your account, a version number of that document,
+	//    and a file attached to that document version that you want to reuse. For
+	//    example: "Values": [ "MyOtherDocument/3/my-other-file.py" ] However, if
+	//    the SSM document is shared with you from another account, the full SSM
+	//    document ARN must be specified instead of the document name only. For
+	//    example: "Values": [ "arn:aws:ssm:us-east-2:111122223333:document/OtherAccountDocument/3/their-file.py"
+	//    ]
 	Values []string `min:"1" type:"list"`
 }
 
@@ -771,8 +785,7 @@ type AutomationExecutionMetadata struct {
 	// The execution ID.
 	AutomationExecutionId *string `min:"36" type:"string"`
 
-	// The status of the execution. Valid values include: Running, Succeeded, Failed,
-	// Timed out, or Cancelled.
+	// The status of the execution.
 	AutomationExecutionStatus AutomationExecutionStatus `type:"string" enum:"true"`
 
 	// Use this filter with DescribeAutomationExecutions. Specify either Local or
@@ -801,7 +814,7 @@ type AutomationExecutionMetadata struct {
 	// still in progress.
 	ExecutionEndTime *time.Time `type:"timestamp"`
 
-	// The time the execution started.>
+	// The time the execution started.
 	ExecutionStartTime *time.Time `type:"timestamp"`
 
 	// The list of execution outputs as defined in the Automation document.
@@ -2390,7 +2403,8 @@ type InstancePatchState struct {
 	// on the instance.
 	InstalledOtherCount *int64 `type:"integer"`
 
-	// Reserved for future use.
+	// The number of patches installed by Patch Manager since the last time the
+	// instance was rebooted.
 	InstalledPendingRebootCount *int64 `type:"integer"`
 
 	// The number of instances with patches installed that are specified in a RejectedPatches
@@ -2407,7 +2421,8 @@ type InstancePatchState struct {
 	// InstanceId is a required field
 	InstanceId *string `type:"string" required:"true"`
 
-	// Reserved for future use.
+	// The time of the last attempt to patch the instance with NoReboot specified
+	// as the reboot option.
 	LastNoRebootInstallOperationTime *time.Time `type:"timestamp"`
 
 	// The number of patches from the patch baseline that are applicable for the
@@ -2445,7 +2460,18 @@ type InstancePatchState struct {
 	// PatchGroup is a required field
 	PatchGroup *string `min:"1" type:"string" required:"true"`
 
-	// Reserved for future use.
+	// Indicates the reboot option specified in the patch baseline.
+	//
+	// Reboot options apply to Install operations only. Reboots are not attempted
+	// for Patch Manager Scan operations.
+	//
+	//    * RebootIfNeeded: Patch Manager tries to reboot the instance if it installed
+	//    any patches, or if any patches are detected with a status of InstalledPendingReboot.
+	//
+	//    * NoReboot: Patch Manager attempts to install missing packages without
+	//    trying to reboot the system. Patches installed with this option are assigned
+	//    a status of InstalledPendingReboot. These patches might not be in effect
+	//    until a reboot is performed.
 	RebootOption RebootOption `type:"string" enum:"true"`
 
 	// The ID of the patch baseline snapshot used during the patching operation
@@ -2653,7 +2679,7 @@ type InventoryFilter struct {
 	// Key is a required field
 	Key *string `min:"1" type:"string" required:"true"`
 
-	// The type of filter. Valid values include the following: "Equal"|"NotEqual"|"BeginWith"|"LessThan"|"GreaterThan"
+	// The type of filter.
 	Type InventoryQueryOperatorType `type:"string" enum:"true"`
 
 	// Inventory filter values. Example: inventory filter where instance IDs are
@@ -3306,6 +3332,9 @@ func (s *MaintenanceWindowLambdaParameters) Validate() error {
 type MaintenanceWindowRunCommandParameters struct {
 	_ struct{} `type:"structure"`
 
+	// Configuration options for sending command output to CloudWatch Logs.
+	CloudWatchOutputConfig *CloudWatchOutputConfig `type:"structure"`
+
 	// Information about the commands to run.
 	Comment *string `type:"string"`
 
@@ -3315,6 +3344,19 @@ type MaintenanceWindowRunCommandParameters struct {
 
 	// SHA-256 or SHA-1. SHA-1 hashes have been deprecated.
 	DocumentHashType DocumentHashType `type:"string" enum:"true"`
+
+	// The SSM document version to use in the request. You can specify $DEFAULT,
+	// $LATEST, or a specific version number. If you run commands by using the AWS
+	// CLI, then you must escape the first two options by using a backslash. If
+	// you specify a version number, then you don't need to use the backslash. For
+	// example:
+	//
+	// --document-version "\$DEFAULT"
+	//
+	// --document-version "\$LATEST"
+	//
+	// --document-version "3"
+	DocumentVersion *string `type:"string"`
 
 	// Configurations for sending notifications about command status changes on
 	// a per-instance basis.
@@ -3351,6 +3393,11 @@ func (s *MaintenanceWindowRunCommandParameters) Validate() error {
 	}
 	if s.TimeoutSeconds != nil && *s.TimeoutSeconds < 30 {
 		invalidParams.Add(aws.NewErrParamMinValue("TimeoutSeconds", 30))
+	}
+	if s.CloudWatchOutputConfig != nil {
+		if err := s.CloudWatchOutputConfig.Validate(); err != nil {
+			invalidParams.AddNested("CloudWatchOutputConfig", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5515,8 +5562,7 @@ type StepExecution struct {
 	// The name of this execution step.
 	StepName *string `type:"string"`
 
-	// The execution status for this step. Valid values include: Pending, InProgress,
-	// Success, Cancelled, Failed, and TimedOut.
+	// The execution status for this step.
 	StepStatus AutomationExecutionStatus `type:"string" enum:"true"`
 
 	// The combination of AWS Regions and accounts targeted by the current Automation

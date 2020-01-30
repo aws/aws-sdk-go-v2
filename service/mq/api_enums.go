@@ -23,6 +23,24 @@ func (enum BrokerState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// The storage type of the broker.
+type BrokerStorageType string
+
+// Enum values for BrokerStorageType
+const (
+	BrokerStorageTypeEbs BrokerStorageType = "EBS"
+	BrokerStorageTypeEfs BrokerStorageType = "EFS"
+)
+
+func (enum BrokerStorageType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BrokerStorageType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The type of change pending for the ActiveMQ user.
 type ChangeType string
 

@@ -163,6 +163,8 @@ type ClientAPI interface {
 
 	ListScriptsRequest(*gamelift.ListScriptsInput) gamelift.ListScriptsRequest
 
+	ListTagsForResourceRequest(*gamelift.ListTagsForResourceInput) gamelift.ListTagsForResourceRequest
+
 	PutScalingPolicyRequest(*gamelift.PutScalingPolicyInput) gamelift.PutScalingPolicyRequest
 
 	RequestUploadCredentialsRequest(*gamelift.RequestUploadCredentialsInput) gamelift.RequestUploadCredentialsRequest
@@ -184,6 +186,10 @@ type ClientAPI interface {
 	StopGameSessionPlacementRequest(*gamelift.StopGameSessionPlacementInput) gamelift.StopGameSessionPlacementRequest
 
 	StopMatchmakingRequest(*gamelift.StopMatchmakingInput) gamelift.StopMatchmakingRequest
+
+	TagResourceRequest(*gamelift.TagResourceInput) gamelift.TagResourceRequest
+
+	UntagResourceRequest(*gamelift.UntagResourceInput) gamelift.UntagResourceRequest
 
 	UpdateAliasRequest(*gamelift.UpdateAliasInput) gamelift.UpdateAliasRequest
 

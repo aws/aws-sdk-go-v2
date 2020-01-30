@@ -130,8 +130,8 @@ const opListRoomMemberships = "ListRoomMemberships"
 // ListRoomMembershipsRequest returns a request value for making API operation for
 // Amazon Chime.
 //
-// Lists the membership details for the specified room, such as member IDs,
-// member email addresses, and member names.
+// Lists the membership details for the specified room, such as the members'
+// IDs, email addresses, and names.
 //
 //    // Example sending a request using ListRoomMembershipsRequest.
 //    req := client.ListRoomMembershipsRequest(params)

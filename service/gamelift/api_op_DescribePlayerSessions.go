@@ -13,11 +13,11 @@ import (
 type DescribePlayerSessionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for the game session to retrieve player sessions for.
+	// A unique identifier for the game session to retrieve player sessions for.
 	GameSessionId *string `min:"1" type:"string"`
 
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages. If a player session ID is specified,
+	// The maximum number of results to return. Use this parameter with NextToken
+	// to get results as a set of sequential pages. If a player session ID is specified,
 	// this parameter is ignored.
 	Limit *int64 `min:"1" type:"integer"`
 
@@ -27,10 +27,10 @@ type DescribePlayerSessionsInput struct {
 	// ID is specified, this parameter is ignored.
 	NextToken *string `min:"1" type:"string"`
 
-	// Unique identifier for a player to retrieve player sessions for.
+	// A unique identifier for a player to retrieve player sessions for.
 	PlayerId *string `min:"1" type:"string"`
 
-	// Unique identifier for a player session to retrieve.
+	// A unique identifier for a player session to retrieve.
 	PlayerSessionId *string `type:"string"`
 
 	// Player session status to filter results on.
@@ -89,7 +89,7 @@ type DescribePlayerSessionsOutput struct {
 	// of the list.
 	NextToken *string `min:"1" type:"string"`
 
-	// Collection of objects containing properties for each player session that
+	// A collection of objects containing properties for each player session that
 	// matches the request.
 	PlayerSessions []PlayerSession `type:"list"`
 }

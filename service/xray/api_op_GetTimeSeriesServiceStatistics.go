@@ -30,7 +30,7 @@ type GetTimeSeriesServiceStatisticsInput struct {
 	// The case-sensitive name of the group for which to pull statistics from.
 	GroupName *string `min:"1" type:"string"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 
 	// Aggregation period in seconds.
@@ -133,7 +133,7 @@ type GetTimeSeriesServiceStatisticsOutput struct {
 	// the group's filter expression.
 	ContainsOldGroupVersions *bool `type:"boolean"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 
 	// The collection of statistics.

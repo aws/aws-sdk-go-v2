@@ -768,6 +768,7 @@ type Framework string
 // Enum values for Framework
 const (
 	FrameworkTensorflow Framework = "TENSORFLOW"
+	FrameworkKeras      Framework = "KERAS"
 	FrameworkMxnet      Framework = "MXNET"
 	FrameworkOnnx       Framework = "ONNX"
 	FrameworkPytorch    Framework = "PYTORCH"
@@ -1966,6 +1967,12 @@ const (
 	TrainingInstanceTypeMlM44xlarge    TrainingInstanceType = "ml.m4.4xlarge"
 	TrainingInstanceTypeMlM410xlarge   TrainingInstanceType = "ml.m4.10xlarge"
 	TrainingInstanceTypeMlM416xlarge   TrainingInstanceType = "ml.m4.16xlarge"
+	TrainingInstanceTypeMlG4dnXlarge   TrainingInstanceType = "ml.g4dn.xlarge"
+	TrainingInstanceTypeMlG4dn2xlarge  TrainingInstanceType = "ml.g4dn.2xlarge"
+	TrainingInstanceTypeMlG4dn4xlarge  TrainingInstanceType = "ml.g4dn.4xlarge"
+	TrainingInstanceTypeMlG4dn8xlarge  TrainingInstanceType = "ml.g4dn.8xlarge"
+	TrainingInstanceTypeMlG4dn12xlarge TrainingInstanceType = "ml.g4dn.12xlarge"
+	TrainingInstanceTypeMlG4dn16xlarge TrainingInstanceType = "ml.g4dn.16xlarge"
 	TrainingInstanceTypeMlM5Large      TrainingInstanceType = "ml.m5.large"
 	TrainingInstanceTypeMlM5Xlarge     TrainingInstanceType = "ml.m5.xlarge"
 	TrainingInstanceTypeMlM52xlarge    TrainingInstanceType = "ml.m5.2xlarge"

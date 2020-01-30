@@ -77,6 +77,97 @@ func (s *EncryptionKey) Validate() error {
 	return nil
 }
 
+// The input configuration properties for requesting a batch translation job.
+type InputDataConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The multipurpose internet mail extension (MIME) type of the input files.
+	// Valid values are text/plain for plaintext files and text/html for HTML files.
+	//
+	// ContentType is a required field
+	ContentType *string `type:"string" required:"true"`
+
+	// The URI of the AWS S3 folder that contains the input file. The folder must
+	// be in the same Region as the API endpoint you are calling.
+	//
+	// S3Uri is a required field
+	S3Uri *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s InputDataConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InputDataConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "InputDataConfig"}
+
+	if s.ContentType == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContentType"))
+	}
+
+	if s.S3Uri == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3Uri"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The number of documents successfully and unsuccessfully processed during
+// a translation job.
+type JobDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The number of documents that could not be processed during a translation
+	// job.
+	DocumentsWithErrorsCount *int64 `type:"integer"`
+
+	// The number of documents used as input in a translation job.
+	InputDocumentsCount *int64 `type:"integer"`
+
+	// The number of documents successfully processed during a translation job.
+	TranslatedDocumentsCount *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s JobDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The output configuration properties for a batch translation job.
+type OutputDataConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The URI of the S3 folder that contains a translation job's output file. The
+	// folder must be in the same Region as the API endpoint that you are calling.
+	//
+	// S3Uri is a required field
+	S3Uri *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s OutputDataConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OutputDataConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OutputDataConfig"}
+
+	if s.S3Uri == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3Uri"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // The term being translated by the custom terminology.
 type Term struct {
 	_ struct{} `type:"structure"`
@@ -97,7 +188,9 @@ func (s Term) String() string {
 type TerminologyData struct {
 	_ struct{} `type:"structure"`
 
-	// The file containing the custom terminology data.
+	// The file containing the custom terminology data. Your version of the AWS
+	// SDK performs a Base64-encoding on this field before sending a request to
+	// the AWS service. Users of the SDK should not perform Base64-encoding themselves.
 	//
 	// File is automatically base64 encoded/decoded by the SDK.
 	//
@@ -191,5 +284,102 @@ type TerminologyProperties struct {
 
 // String returns the string representation
 func (s TerminologyProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Provides information for filtering a list of translation jobs. For more information,
+// see ListTextTranslationJobs.
+type TextTranslationJobFilter struct {
+	_ struct{} `type:"structure"`
+
+	// Filters the list of jobs by name.
+	JobName *string `min:"1" type:"string"`
+
+	// Filters the list of jobs based by job status.
+	JobStatus JobStatus `type:"string" enum:"true"`
+
+	// Filters the list of jobs based on the time that the job was submitted for
+	// processing and returns only the jobs submitted after the specified time.
+	// Jobs are returned in descending order, newest to oldest.
+	SubmittedAfterTime *time.Time `type:"timestamp"`
+
+	// Filters the list of jobs based on the time that the job was submitted for
+	// processing and returns only the jobs submitted before the specified time.
+	// Jobs are returned in ascending order, oldest to newest.
+	SubmittedBeforeTime *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation
+func (s TextTranslationJobFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TextTranslationJobFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TextTranslationJobFilter"}
+	if s.JobName != nil && len(*s.JobName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Provides information about a translation job.
+type TextTranslationJobProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM)
+	// role that granted Amazon Translate read access to the job's input data.
+	DataAccessRoleArn *string `min:"20" type:"string"`
+
+	// The time at which the translation job ended.
+	EndTime *time.Time `type:"timestamp"`
+
+	// The input configuration properties that were specified when the job was requested.
+	InputDataConfig *InputDataConfig `type:"structure"`
+
+	// The number of documents successfully and unsuccessfully processed during
+	// the translation job.
+	JobDetails *JobDetails `type:"structure"`
+
+	// The ID of the translation job.
+	JobId *string `min:"1" type:"string"`
+
+	// The user-defined name of the translation job.
+	JobName *string `min:"1" type:"string"`
+
+	// The status of the translation job.
+	JobStatus JobStatus `type:"string" enum:"true"`
+
+	// An explanation of any errors that may have occured during the translation
+	// job.
+	Message *string `type:"string"`
+
+	// The output configuration properties that were specified when the job was
+	// requested.
+	OutputDataConfig *OutputDataConfig `type:"structure"`
+
+	// The language code of the language of the source text. The language must be
+	// a language supported by Amazon Translate.
+	SourceLanguageCode *string `min:"2" type:"string"`
+
+	// The time at which the translation job was submitted.
+	SubmittedTime *time.Time `type:"timestamp"`
+
+	// The language code of the language of the target text. The language must be
+	// a language supported by Amazon Translate.
+	TargetLanguageCodes []string `min:"1" type:"list"`
+
+	// A list containing the names of the terminologies applied to a translation
+	// job. Only one terminology can be applied per StartTextTranslationJob request
+	// at this time.
+	TerminologyNames []string `type:"list"`
+}
+
+// String returns the string representation
+func (s TextTranslationJobProperties) String() string {
 	return awsutil.Prettify(s)
 }

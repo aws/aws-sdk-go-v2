@@ -13,7 +13,7 @@ import (
 type GetTraceGraphInput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 
 	// Trace IDs of requests for which to generate a service graph.
@@ -69,7 +69,7 @@ func (s GetTraceGraphInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetTraceGraphOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 
 	// The services that have processed one of the specified requests.

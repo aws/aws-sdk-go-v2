@@ -18,19 +18,19 @@ type UpdateVPCEConfigurationInput struct {
 	// Arn is a required field
 	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
 
-	// The DNS (domain) name used to connect to your private service in your Amazon
-	// VPC. The DNS name must not already be in use on the Internet.
+	// The DNS (domain) name used to connect to your private service in your VPC.
+	// The DNS name must not already be in use on the internet.
 	ServiceDnsName *string `locationName:"serviceDnsName" type:"string"`
 
-	// An optional description, providing more details about your VPC endpoint configuration.
+	// An optional description that provides details about your VPC endpoint configuration.
 	VpceConfigurationDescription *string `locationName:"vpceConfigurationDescription" type:"string"`
 
-	// The friendly name you give to your VPC endpoint configuration, to manage
-	// your configurations more easily.
+	// The friendly name you give to your VPC endpoint configuration to manage your
+	// configurations more easily.
 	VpceConfigurationName *string `locationName:"vpceConfigurationName" type:"string"`
 
-	// The name of the VPC endpoint service running inside your AWS account that
-	// you want Device Farm to test.
+	// The name of the VPC endpoint service running in your AWS account that you
+	// want Device Farm to test.
 	VpceServiceName *string `locationName:"vpceServiceName" type:"string"`
 }
 
@@ -59,7 +59,7 @@ func (s *UpdateVPCEConfigurationInput) Validate() error {
 type UpdateVPCEConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object containing information about your VPC endpoint configuration.
+	// An object that contains information about your VPC endpoint configuration.
 	VpceConfiguration *VPCEConfiguration `locationName:"vpceConfiguration" type:"structure"`
 }
 
@@ -73,8 +73,8 @@ const opUpdateVPCEConfiguration = "UpdateVPCEConfiguration"
 // UpdateVPCEConfigurationRequest returns a request value for making API operation for
 // AWS Device Farm.
 //
-// Updates information about an existing Amazon Virtual Private Cloud (VPC)
-// endpoint configuration.
+// Updates information about an Amazon Virtual Private Cloud (VPC) endpoint
+// configuration.
 //
 //    // Example sending a request using UpdateVPCEConfigurationRequest.
 //    req := client.UpdateVPCEConfigurationRequest(params)

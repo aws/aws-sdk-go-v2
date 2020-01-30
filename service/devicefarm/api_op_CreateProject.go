@@ -14,7 +14,7 @@ type CreateProjectInput struct {
 	_ struct{} `type:"structure"`
 
 	// Sets the execution timeout value (in minutes) for a project. All test runs
-	// in this project will use the specified execution timeout value unless overridden
+	// in this project use the specified execution timeout value unless overridden
 	// when scheduling a run.
 	DefaultJobTimeoutMinutes *int64 `locationName:"defaultJobTimeoutMinutes" type:"integer"`
 
@@ -61,7 +61,7 @@ const opCreateProject = "CreateProject"
 // CreateProjectRequest returns a request value for making API operation for
 // AWS Device Farm.
 //
-// Creates a new project.
+// Creates a project.
 //
 //    // Example sending a request using CreateProjectRequest.
 //    req := client.CreateProjectRequest(params)

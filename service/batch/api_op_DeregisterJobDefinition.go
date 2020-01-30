@@ -71,7 +71,8 @@ const opDeregisterJobDefinition = "DeregisterJobDefinition"
 // DeregisterJobDefinitionRequest returns a request value for making API operation for
 // AWS Batch.
 //
-// Deregisters an AWS Batch job definition.
+// Deregisters an AWS Batch job definition. Job definitions will be permanently
+// deleted after 180 days.
 //
 //    // Example sending a request using DeregisterJobDefinitionRequest.
 //    req := client.DeregisterJobDefinitionRequest(params)

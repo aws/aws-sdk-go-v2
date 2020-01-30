@@ -18,6 +18,28 @@ func (enum EncryptionKeyType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type JobStatus string
+
+// Enum values for JobStatus
+const (
+	JobStatusSubmitted          JobStatus = "SUBMITTED"
+	JobStatusInProgress         JobStatus = "IN_PROGRESS"
+	JobStatusCompleted          JobStatus = "COMPLETED"
+	JobStatusCompletedWithError JobStatus = "COMPLETED_WITH_ERROR"
+	JobStatusFailed             JobStatus = "FAILED"
+	JobStatusStopRequested      JobStatus = "STOP_REQUESTED"
+	JobStatusStopped            JobStatus = "STOPPED"
+)
+
+func (enum JobStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum JobStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MergeStrategy string
 
 // Enum values for MergeStrategy

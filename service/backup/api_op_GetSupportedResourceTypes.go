@@ -33,7 +33,7 @@ type GetSupportedResourceTypesOutput struct {
 	//
 	//    * EBS for Amazon Elastic Block Store
 	//
-	//    * SGW for AWS Storage Gateway
+	//    * Storage Gateway for AWS Storage Gateway
 	//
 	//    * RDS for Amazon Relational Database Service
 	//

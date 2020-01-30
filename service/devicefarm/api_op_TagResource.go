@@ -13,17 +13,17 @@ import (
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the resource(s) to which to add tags. You
-	// can associate tags with the following Device Farm resources: PROJECT, RUN,
-	// NETWORK_PROFILE, INSTANCE_PROFILE, DEVICE_INSTANCE, SESSION, DEVICE_POOL,
+	// The Amazon Resource Name (ARN) of the resource or resources to which to add
+	// tags. You can associate tags with the following Device Farm resources: PROJECT,
+	// RUN, NETWORK_PROFILE, INSTANCE_PROFILE, DEVICE_INSTANCE, SESSION, DEVICE_POOL,
 	// DEVICE, and VPCE_CONFIGURATION.
 	//
 	// ResourceARN is a required field
 	ResourceARN *string `min:"32" type:"string" required:"true"`
 
 	// The tags to add to the resource. A tag is an array of key-value pairs. Tag
-	// keys can have a maximum character length of 128 characters, and tag values
-	// can have a maximum length of 256 characters.
+	// keys can have a maximum character length of 128 characters. Tag values can
+	// have a maximum length of 256 characters.
 	//
 	// Tags is a required field
 	Tags []Tag `type:"list" required:"true"`
@@ -79,7 +79,7 @@ const opTagResource = "TagResource"
 // Associates the specified tags to a resource with the specified resourceArn.
 // If existing tags on a resource are not specified in the request parameters,
 // they are not changed. When a resource is deleted, the tags associated with
-// that resource are deleted as well.
+// that resource are also deleted.
 //
 //    // Example sending a request using TagResourceRequest.
 //    req := client.TagResourceRequest(params)

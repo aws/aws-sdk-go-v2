@@ -13,8 +13,7 @@ import (
 type DeleteUploadInput struct {
 	_ struct{} `type:"structure"`
 
-	// Represents the Amazon Resource Name (ARN) of the Device Farm upload you wish
-	// to delete.
+	// Represents the Amazon Resource Name (ARN) of the Device Farm upload to delete.
 	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`

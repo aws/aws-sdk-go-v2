@@ -2,6 +2,24 @@
 
 package cloudwatch
 
+type AnomalyDetectorStateValue string
+
+// Enum values for AnomalyDetectorStateValue
+const (
+	AnomalyDetectorStateValuePendingTraining         AnomalyDetectorStateValue = "PENDING_TRAINING"
+	AnomalyDetectorStateValueTrainedInsufficientData AnomalyDetectorStateValue = "TRAINED_INSUFFICIENT_DATA"
+	AnomalyDetectorStateValueTrained                 AnomalyDetectorStateValue = "TRAINED"
+)
+
+func (enum AnomalyDetectorStateValue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AnomalyDetectorStateValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator

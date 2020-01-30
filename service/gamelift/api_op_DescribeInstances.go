@@ -13,17 +13,18 @@ import (
 type DescribeInstancesInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a fleet to retrieve instance information for.
+	// A unique identifier for a fleet to retrieve instance information for. You
+	// can use either the fleet ID or ARN value.
 	//
 	// FleetId is a required field
 	FleetId *string `type:"string" required:"true"`
 
-	// Unique identifier for an instance to retrieve. Specify an instance ID or
+	// A unique identifier for an instance to retrieve. Specify an instance ID or
 	// leave blank to retrieve all instances in the fleet.
 	InstanceId *string `type:"string"`
 
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages.
+	// The maximum number of results to return. Use this parameter with NextToken
+	// to get results as a set of sequential pages.
 	Limit *int64 `min:"1" type:"integer"`
 
 	// Token that indicates the start of the next sequential page of results. Use
@@ -61,7 +62,7 @@ func (s *DescribeInstancesInput) Validate() error {
 type DescribeInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Collection of objects containing properties for each instance returned.
+	// A collection of objects containing properties for each instance returned.
 	Instances []Instance `type:"list"`
 
 	// Token that indicates where to resume retrieving results on the next call

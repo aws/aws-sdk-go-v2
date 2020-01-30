@@ -21,7 +21,7 @@ type TestInvokeAuthorizerInput struct {
 	// Specifies a test HTTP authorization request.
 	HttpContext *HttpContext `locationName:"httpContext" type:"structure"`
 
-	// Specifies a test MQTT authorization request.>
+	// Specifies a test MQTT authorization request.
 	MqttContext *MqttContext `locationName:"mqttContext" type:"structure"`
 
 	// Specifies a test TLS authorization request.

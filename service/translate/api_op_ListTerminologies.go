@@ -74,6 +74,12 @@ func (c *Client) ListTerminologiesRequest(input *ListTerminologiesInput) ListTer
 		Name:       opListTerminologies,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -106,6 +112,53 @@ func (r ListTerminologiesRequest) Send(ctx context.Context) (*ListTerminologiesR
 	}
 
 	return resp, nil
+}
+
+// NewListTerminologiesRequestPaginator returns a paginator for ListTerminologies.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListTerminologiesRequest(input)
+//   p := translate.NewListTerminologiesRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListTerminologiesPaginator(req ListTerminologiesRequest) ListTerminologiesPaginator {
+	return ListTerminologiesPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListTerminologiesInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListTerminologiesPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListTerminologiesPaginator struct {
+	aws.Pager
+}
+
+func (p *ListTerminologiesPaginator) CurrentPage() *ListTerminologiesOutput {
+	return p.Pager.CurrentPage().(*ListTerminologiesOutput)
 }
 
 // ListTerminologiesResponse is the response type for the

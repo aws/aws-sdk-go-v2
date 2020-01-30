@@ -45,7 +45,7 @@ func (s *GetDeviceInput) Validate() error {
 type GetDeviceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object containing information about the requested device.
+	// An object that contains information about the requested device.
 	Device *Device `locationName:"device" type:"structure"`
 }
 

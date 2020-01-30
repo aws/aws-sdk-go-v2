@@ -113,7 +113,7 @@ const opBatchSuspendUser = "BatchSuspendUser"
 // Chime Accounts (https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html)
 // in the Amazon Chime Administration Guide.
 //
-// Users suspended from a Team account are dissasociated from the account, but
+// Users suspended from a Team account are disassociated from the account, but
 // they can continue to use Amazon Chime as free users. To remove the suspension
 // from suspended Team account users, invite them to the Team account again.
 // You can use the InviteUsers action to do so.

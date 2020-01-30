@@ -472,7 +472,8 @@ type Workspace struct {
 	// Indicates whether the data stored on the user volume is encrypted.
 	UserVolumeEncryptionEnabled *bool `type:"boolean"`
 
-	// The KMS key used to encrypt data stored on your WorkSpace.
+	// The symmetric AWS KMS customer master key (CMK) used to encrypt data stored
+	// on your WorkSpace. Amazon WorkSpaces does not support asymmetric CMKs.
 	VolumeEncryptionKey *string `type:"string"`
 
 	// The identifier of the WorkSpace.
@@ -673,7 +674,7 @@ type WorkspaceDirectory struct {
 	// see Bring Your Own Windows Desktop Images (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
 	Tenancy Tenancy `type:"string" enum:"true"`
 
-	// The devices and operating systems that users can use to access Workspaces.
+	// The devices and operating systems that users can use to access WorkSpaces.
 	WorkspaceAccessProperties *WorkspaceAccessProperties `type:"structure"`
 
 	// The default creation properties for all WorkSpaces in the directory.
@@ -782,7 +783,8 @@ type WorkspaceRequest struct {
 	// Indicates whether the data stored on the user volume is encrypted.
 	UserVolumeEncryptionEnabled *bool `type:"boolean"`
 
-	// The KMS key used to encrypt data stored on your WorkSpace.
+	// The symmetric AWS KMS customer master key (CMK) used to encrypt data stored
+	// on your WorkSpace. Amazon WorkSpaces does not support asymmetric CMKs.
 	VolumeEncryptionKey *string `type:"string"`
 
 	// The WorkSpace properties.

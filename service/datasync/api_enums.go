@@ -89,6 +89,24 @@ func (enum Gid) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type LogLevel string
+
+// Enum values for LogLevel
+const (
+	LogLevelOff      LogLevel = "OFF"
+	LogLevelBasic    LogLevel = "BASIC"
+	LogLevelTransfer LogLevel = "TRANSFER"
+)
+
+func (enum LogLevel) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LogLevel) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Mtime string
 
 // Enum values for Mtime

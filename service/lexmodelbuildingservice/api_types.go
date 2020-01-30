@@ -27,6 +27,9 @@ type BotAliasMetadata struct {
 	// Checksum of the bot alias.
 	Checksum *string `locationName:"checksum" type:"string"`
 
+	// Settings that determine how Amazon Lex uses conversation logs for the alias.
+	ConversationLogs *ConversationLogsResponse `locationName:"conversationLogs" type:"structure"`
+
 	// The date that the bot alias was created.
 	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
 
@@ -65,6 +68,12 @@ func (s BotAliasMetadata) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ConversationLogs != nil {
+		v := s.ConversationLogs
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "conversationLogs", v, metadata)
 	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate
@@ -454,6 +463,122 @@ func (s CodeHook) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Provides the settings needed for conversation logs.
+type ConversationLogsRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of an IAM role with permission to write to
+	// your CloudWatch Logs for text logs and your S3 bucket for audio logs. If
+	// audio encryption is enabled, this role also provides access permission for
+	// the AWS KMS key used for encrypting audio logs. For more information, see
+	// Creating an IAM Role and Policy for Conversation Logs (https://docs.aws.amazon.com/lex/latest/dg/conversation-logs-role-and-policy.html).
+	//
+	// IamRoleArn is a required field
+	IamRoleArn *string `locationName:"iamRoleArn" min:"20" type:"string" required:"true"`
+
+	// The settings for your conversation logs. You can log the conversation text,
+	// conversation audio, or both.
+	//
+	// LogSettings is a required field
+	LogSettings []LogSettingsRequest `locationName:"logSettings" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s ConversationLogsRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ConversationLogsRequest) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ConversationLogsRequest"}
+
+	if s.IamRoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("IamRoleArn"))
+	}
+	if s.IamRoleArn != nil && len(*s.IamRoleArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("IamRoleArn", 20))
+	}
+
+	if s.LogSettings == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LogSettings"))
+	}
+	if s.LogSettings != nil {
+		for i, v := range s.LogSettings {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LogSettings", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ConversationLogsRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.IamRoleArn != nil {
+		v := *s.IamRoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "iamRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LogSettings != nil {
+		v := s.LogSettings
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "logSettings", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Contains information about conversation log settings.
+type ConversationLogsResponse struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the IAM role used to write your logs to
+	// CloudWatch Logs or an S3 bucket.
+	IamRoleArn *string `locationName:"iamRoleArn" min:"20" type:"string"`
+
+	// The settings for your conversation logs. You can log text, audio, or both.
+	LogSettings []LogSettingsResponse `locationName:"logSettings" type:"list"`
+}
+
+// String returns the string representation
+func (s ConversationLogsResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ConversationLogsResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.IamRoleArn != nil {
+		v := *s.IamRoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "iamRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LogSettings != nil {
+		v := s.LogSettings
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "logSettings", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Each slot type can have a set of values. Each enumeration value represents
 // a value the slot type can take.
 //
@@ -786,6 +911,159 @@ func (s IntentMetadata) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Settings used to configure delivery mode and destination for conversation
+// logs.
+type LogSettingsRequest struct {
+	_ struct{} `type:"structure"`
+
+	// Where the logs will be delivered. Text logs are delivered to a CloudWatch
+	// Logs log group. Audio logs are delivered to an S3 bucket.
+	//
+	// Destination is a required field
+	Destination Destination `locationName:"destination" type:"string" required:"true" enum:"true"`
+
+	// The Amazon Resource Name (ARN) of the AWS KMS customer managed key for encrypting
+	// audio logs delivered to an S3 bucket. The key does not apply to CloudWatch
+	// Logs and is optional for S3 buckets.
+	KmsKeyArn *string `locationName:"kmsKeyArn" min:"20" type:"string"`
+
+	// The type of logging to enable. Text logs are delivered to a CloudWatch Logs
+	// log group. Audio logs are delivered to an S3 bucket.
+	//
+	// LogType is a required field
+	LogType LogType `locationName:"logType" type:"string" required:"true" enum:"true"`
+
+	// The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket
+	// where the logs should be delivered.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `locationName:"resourceArn" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s LogSettingsRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LogSettingsRequest) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LogSettingsRequest"}
+	if len(s.Destination) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Destination"))
+	}
+	if s.KmsKeyArn != nil && len(*s.KmsKeyArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("KmsKeyArn", 20))
+	}
+	if len(s.LogType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("LogType"))
+	}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LogSettingsRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Destination) > 0 {
+		v := s.Destination
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "destination", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.KmsKeyArn != nil {
+		v := *s.KmsKeyArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "kmsKeyArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.LogType) > 0 {
+		v := s.LogType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "logType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The settings for conversation logs.
+type LogSettingsResponse struct {
+	_ struct{} `type:"structure"`
+
+	// The destination where logs are delivered.
+	Destination Destination `locationName:"destination" type:"string" enum:"true"`
+
+	// The Amazon Resource Name (ARN) of the key used to encrypt audio logs in an
+	// S3 bucket.
+	KmsKeyArn *string `locationName:"kmsKeyArn" min:"20" type:"string"`
+
+	// The type of logging that is enabled.
+	LogType LogType `locationName:"logType" type:"string" enum:"true"`
+
+	// The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket
+	// where the logs are delivered.
+	ResourceArn *string `locationName:"resourceArn" min:"1" type:"string"`
+
+	// The resource prefix is the first part of the S3 object key within the S3
+	// bucket that you specified to contain audio logs. For CloudWatch Logs it is
+	// the prefix of the log stream name within the log group that you specified.
+	ResourcePrefix *string `locationName:"resourcePrefix" type:"string"`
+}
+
+// String returns the string representation
+func (s LogSettingsResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LogSettingsResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Destination) > 0 {
+		v := s.Destination
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "destination", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.KmsKeyArn != nil {
+		v := *s.KmsKeyArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "kmsKeyArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.LogType) > 0 {
+		v := s.LogType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "logType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourcePrefix != nil {
+		v := *s.ResourcePrefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourcePrefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The message object that provides the message text and its type.
 type Message struct {
 	_ struct{} `type:"structure"`
@@ -999,6 +1277,13 @@ type Slot struct {
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
+	// Determines whether a slot is obfuscated in conversation logs and stored utterances.
+	// When you obfuscate a slot, the value is replaced by the slot name in curly
+	// braces ({}). For example, if the slot name is "full_name", obfuscated values
+	// are replaced with "{full_name}". For more information, see Slot Obfuscation
+	// (https://docs.aws.amazon.com/lex/latest/dg/how-obfuscate.html).
+	ObfuscationSetting ObfuscationSetting `locationName:"obfuscationSetting" type:"string" enum:"true"`
+
 	// Directs Lex the order in which to elicit this slot value from the user. For
 	// example, if the intent has two slots with priorities 1 and 2, AWS Lex first
 	// elicits a value for the slot with priority 1.
@@ -1086,6 +1371,12 @@ func (s Slot) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ObfuscationSetting) > 0 {
+		v := s.ObfuscationSetting
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "obfuscationSetting", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Priority != nil {
 		v := *s.Priority

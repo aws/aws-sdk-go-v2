@@ -24,7 +24,8 @@ type ListConfigurationsInput struct {
 	// {"key": "serverType", "value": "webServer"}
 	//
 	// For a complete list of filter options and guidance about using them with
-	// this action, see Querying Discovered Configuration Items (http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations).
+	// this action, see Using the ListConfigurations Action (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
+	// in the AWS Application Discovery Service User Guide.
 	Filters []Filter `locationName:"filters" type:"list"`
 
 	// The total number of items to return. The maximum value is 100.
@@ -38,7 +39,8 @@ type ListConfigurationsInput struct {
 
 	// Certain filter criteria return output that can be sorted in ascending or
 	// descending order. For a list of output characteristics for each filter, see
-	// Using the ListConfigurations Action (http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations).
+	// Using the ListConfigurations Action (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
+	// in the AWS Application Discovery Service User Guide.
 	OrderBy []OrderByElement `locationName:"orderBy" type:"list"`
 }
 
@@ -99,7 +101,7 @@ const opListConfigurations = "ListConfigurations"
 // AWS Application Discovery Service.
 //
 // Retrieves a list of configuration items as specified by the value passed
-// to the required paramater configurationType. Optional filtering may be applied
+// to the required parameter configurationType. Optional filtering may be applied
 // to refine search results.
 //
 //    // Example sending a request using ListConfigurationsRequest.

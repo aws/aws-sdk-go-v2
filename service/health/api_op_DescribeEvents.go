@@ -27,7 +27,7 @@ type DescribeEventsInput struct {
 	// the next batch of results, reissue the search request and include the returned
 	// token. When all results have been returned, the response does not contain
 	// a pagination token value.
-	NextToken *string `locationName:"nextToken" type:"string"`
+	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
 }
 
 // String returns the string representation
@@ -43,6 +43,9 @@ func (s *DescribeEventsInput) Validate() error {
 	}
 	if s.MaxResults != nil && *s.MaxResults < 10 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 4 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 	if s.Filter != nil {
 		if err := s.Filter.Validate(); err != nil {
@@ -67,7 +70,7 @@ type DescribeEventsOutput struct {
 	// the next batch of results, reissue the search request and include the returned
 	// token. When all results have been returned, the response does not contain
 	// a pagination token value.
-	NextToken *string `locationName:"nextToken" type:"string"`
+	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
 }
 
 // String returns the string representation

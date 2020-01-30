@@ -62,9 +62,9 @@ const opDeleteCostCategoryDefinition = "DeleteCostCategoryDefinition"
 // AWS Cost Explorer Service.
 //
 //
-//  Cost Category is in preview release for AWS Billing and Cost Management
-//  and is subject to change. Your use of Cost Categories is subject to the
-//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
+//  Cost Category is in public beta for AWS Billing and Cost Management and
+//  is subject to change. Your use of Cost Categories is subject to the Beta
+//  Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
 //  (Section 1.10).
 //
 // Deletes a Cost Category. Expenses from this month going forward will no longer

@@ -14,7 +14,7 @@ type DeleteDevicePoolInput struct {
 	_ struct{} `type:"structure"`
 
 	// Represents the Amazon Resource Name (ARN) of the Device Farm device pool
-	// you wish to delete.
+	// to delete.
 	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`

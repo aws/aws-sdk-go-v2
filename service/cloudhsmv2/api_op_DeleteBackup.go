@@ -56,8 +56,8 @@ const opDeleteBackup = "DeleteBackup"
 // AWS CloudHSM V2.
 //
 // Deletes a specified AWS CloudHSM backup. A backup can be restored up to 7
-// days after the DeleteBackup request. For more information on restoring a
-// backup, see RestoreBackup
+// days after the DeleteBackup request is made. For more information on restoring
+// a backup, see RestoreBackup.
 //
 //    // Example sending a request using DeleteBackupRequest.
 //    req := client.DeleteBackupRequest(params)

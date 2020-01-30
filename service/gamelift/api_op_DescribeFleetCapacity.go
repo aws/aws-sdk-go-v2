@@ -13,12 +13,12 @@ import (
 type DescribeFleetCapacityInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a fleet(s) to retrieve capacity information for. To
-	// request capacity information for all fleets, leave this parameter empty.
+	// A unique identifier for a fleet(s) to retrieve capacity information for.
+	// You can use either the fleet ID or ARN value.
 	FleetIds []string `min:"1" type:"list"`
 
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages. This parameter is ignored when
+	// The maximum number of results to return. Use this parameter with NextToken
+	// to get results as a set of sequential pages. This parameter is ignored when
 	// the request specifies one or a list of fleet IDs.
 	Limit *int64 `min:"1" type:"integer"`
 
@@ -57,7 +57,7 @@ func (s *DescribeFleetCapacityInput) Validate() error {
 type DescribeFleetCapacityOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Collection of objects containing capacity information for each requested
+	// A collection of objects containing capacity information for each requested
 	// fleet ID. Leave this parameter empty to retrieve capacity information for
 	// all fleets.
 	FleetCapacity []FleetCapacity `type:"list"`
@@ -107,8 +107,7 @@ const opDescribeFleetCapacity = "DescribeFleetCapacity"
 //    DescribeFleetUtilization DescribeRuntimeConfiguration DescribeEC2InstanceLimits
 //    DescribeFleetEvents
 //
-//    * Update fleets: UpdateFleetAttributes UpdateFleetCapacity UpdateFleetPortSettings
-//    UpdateRuntimeConfiguration
+//    * UpdateFleetAttributes
 //
 //    * Manage fleet actions: StartFleetActions StopFleetActions
 //

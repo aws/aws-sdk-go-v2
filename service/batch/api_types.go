@@ -442,13 +442,16 @@ type ComputeResource struct {
 	// limits (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html).
 	// If this is not specified, the default is BEST_FIT, which will use only the
 	// best fitting instance type, waiting for additional capacity if it's not available.
-	// This allocation strategy keeps costs lower but can limit scaling. BEST_FIT_PROGRESSIVE
-	// will select an additional instance type that is large enough to meet the
-	// requirements of the jobs in the queue, with a preference for an instance
-	// type with a lower cost. SPOT_CAPACITY_OPTIMIZED is only available for Spot
-	// Instance compute resources and will select an additional instance type that
-	// is large enough to meet the requirements of the jobs in the queue, with a
-	// preference for an instance type that is less likely to be interrupted.
+	// This allocation strategy keeps costs lower but can limit scaling. If you
+	// are using Spot Fleets with BEST_FIT then the Spot Fleet IAM Role must be
+	// specified. BEST_FIT_PROGRESSIVE will select additional instance types that
+	// are large enough to meet the requirements of the jobs in the queue, with
+	// a preference for instance types with a lower cost per vCPU. SPOT_CAPACITY_OPTIMIZED
+	// is only available for Spot Instance compute resources and will select additional
+	// instance types that are large enough to meet the requirements of the jobs
+	// in the queue, with a preference for instance types that are less likely to
+	// be interrupted. For more information, see Allocation Strategies (https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html)
+	// in the AWS Batch User Guide.
 	AllocationStrategy CRAllocationStrategy `locationName:"allocationStrategy" type:"string" enum:"true"`
 
 	// The maximum percentage that a Spot Instance price can be when compared with
@@ -525,8 +528,9 @@ type ComputeResource struct {
 	SecurityGroupIds []string `locationName:"securityGroupIds" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied
-	// to a SPOT compute environment. For more information, see Amazon EC2 Spot
-	// Fleet Role (https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html)
+	// to a SPOT compute environment. This role is required if the allocation strategy
+	// set to BEST_FIT or if the allocation strategy is not specified. For more
+	// information, see Amazon EC2 Spot Fleet Role (https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html)
 	// in the AWS Batch User Guide.
 	SpotIamFleetRole *string `locationName:"spotIamFleetRole" type:"string"`
 
@@ -1730,7 +1734,7 @@ type JobDetail struct {
 	// state.
 	CreatedAt *int64 `locationName:"createdAt" type:"long"`
 
-	// A list of job names or IDs on which this job depends.
+	// A list of job IDs on which this job depends.
 	DependsOn []JobDependency `locationName:"dependsOn" type:"list"`
 
 	// The job definition that is used by this job.

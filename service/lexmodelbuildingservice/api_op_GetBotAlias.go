@@ -85,6 +85,10 @@ type GetBotAliasOutput struct {
 	// Checksum of the bot alias.
 	Checksum *string `locationName:"checksum" type:"string"`
 
+	// The settings that determine how Amazon Lex uses conversation logs for the
+	// alias.
+	ConversationLogs *ConversationLogsResponse `locationName:"conversationLogs" type:"structure"`
+
 	// The date that the bot alias was created.
 	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
 
@@ -123,6 +127,12 @@ func (s GetBotAliasOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ConversationLogs != nil {
+		v := s.ConversationLogs
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "conversationLogs", v, metadata)
 	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate

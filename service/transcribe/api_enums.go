@@ -88,6 +88,7 @@ type TranscriptionJobStatus string
 
 // Enum values for TranscriptionJobStatus
 const (
+	TranscriptionJobStatusQueued     TranscriptionJobStatus = "QUEUED"
 	TranscriptionJobStatusInProgress TranscriptionJobStatus = "IN_PROGRESS"
 	TranscriptionJobStatusFailed     TranscriptionJobStatus = "FAILED"
 	TranscriptionJobStatusCompleted  TranscriptionJobStatus = "COMPLETED"
@@ -98,6 +99,23 @@ func (enum TranscriptionJobStatus) MarshalValue() (string, error) {
 }
 
 func (enum TranscriptionJobStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type VocabularyFilterMethod string
+
+// Enum values for VocabularyFilterMethod
+const (
+	VocabularyFilterMethodRemove VocabularyFilterMethod = "remove"
+	VocabularyFilterMethodMask   VocabularyFilterMethod = "mask"
+)
+
+func (enum VocabularyFilterMethod) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VocabularyFilterMethod) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

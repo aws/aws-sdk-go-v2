@@ -63,21 +63,31 @@ import (
 type ClientAPI interface {
 	CreateVocabularyRequest(*transcribe.CreateVocabularyInput) transcribe.CreateVocabularyRequest
 
+	CreateVocabularyFilterRequest(*transcribe.CreateVocabularyFilterInput) transcribe.CreateVocabularyFilterRequest
+
 	DeleteTranscriptionJobRequest(*transcribe.DeleteTranscriptionJobInput) transcribe.DeleteTranscriptionJobRequest
 
 	DeleteVocabularyRequest(*transcribe.DeleteVocabularyInput) transcribe.DeleteVocabularyRequest
+
+	DeleteVocabularyFilterRequest(*transcribe.DeleteVocabularyFilterInput) transcribe.DeleteVocabularyFilterRequest
 
 	GetTranscriptionJobRequest(*transcribe.GetTranscriptionJobInput) transcribe.GetTranscriptionJobRequest
 
 	GetVocabularyRequest(*transcribe.GetVocabularyInput) transcribe.GetVocabularyRequest
 
+	GetVocabularyFilterRequest(*transcribe.GetVocabularyFilterInput) transcribe.GetVocabularyFilterRequest
+
 	ListTranscriptionJobsRequest(*transcribe.ListTranscriptionJobsInput) transcribe.ListTranscriptionJobsRequest
 
 	ListVocabulariesRequest(*transcribe.ListVocabulariesInput) transcribe.ListVocabulariesRequest
 
+	ListVocabularyFiltersRequest(*transcribe.ListVocabularyFiltersInput) transcribe.ListVocabularyFiltersRequest
+
 	StartTranscriptionJobRequest(*transcribe.StartTranscriptionJobInput) transcribe.StartTranscriptionJobRequest
 
 	UpdateVocabularyRequest(*transcribe.UpdateVocabularyInput) transcribe.UpdateVocabularyRequest
+
+	UpdateVocabularyFilterRequest(*transcribe.UpdateVocabularyFilterInput) transcribe.UpdateVocabularyFilterRequest
 }
 
 var _ ClientAPI = (*transcribe.Client)(nil)

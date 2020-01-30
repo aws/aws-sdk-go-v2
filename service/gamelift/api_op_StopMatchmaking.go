@@ -13,7 +13,7 @@ import (
 type StopMatchmakingInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a matchmaking ticket.
+	// A unique identifier for a matchmaking ticket.
 	//
 	// TicketId is a required field
 	TicketId *string `type:"string" required:"true"`

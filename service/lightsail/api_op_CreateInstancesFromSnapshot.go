@@ -43,18 +43,19 @@ type CreateInstancesFromSnapshotInput struct {
 	// Use the get instance snapshots operation to return information about your
 	// existing snapshots.
 	//
-	// This parameter cannot be defined together with the source instance name parameter.
-	// The instance snapshot name and source instance name parameters are mutually
-	// exclusive.
+	// Constraint:
+	//
+	//    * This parameter cannot be defined together with the source instance name
+	//    parameter. The instance snapshot name and source instance name parameters
+	//    are mutually exclusive.
 	InstanceSnapshotName *string `locationName:"instanceSnapshotName" type:"string"`
 
 	// The name for your key pair.
 	KeyPairName *string `locationName:"keyPairName" type:"string"`
 
-	// The date of the automatic snapshot to use for the new instance.
-	//
-	// Use the get auto snapshots operation to identify the dates of the available
-	// automatic snapshots.
+	// The date of the automatic snapshot to use for the new instance. Use the get
+	// auto snapshots operation to identify the dates of the available automatic
+	// snapshots.
 	//
 	// Constraints:
 	//
@@ -64,19 +65,21 @@ type CreateInstancesFromSnapshotInput struct {
 	//    auto snapshot parameter. The restore date and use latest restorable auto
 	//    snapshot parameters are mutually exclusive.
 	//
-	// Define this parameter only when creating a new instance from an automatic
-	// snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
+	//    * Define this parameter only when creating a new instance from an automatic
+	//    snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
 	RestoreDate *string `locationName:"restoreDate" type:"string"`
 
 	// The name of the source instance from which the source automatic snapshot
 	// was created.
 	//
-	// This parameter cannot be defined together with the instance snapshot name
-	// parameter. The source instance name and instance snapshot name parameters
-	// are mutually exclusive.
+	// Constraints:
 	//
-	// Define this parameter only when creating a new instance from an automatic
-	// snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
+	//    * This parameter cannot be defined together with the instance snapshot
+	//    name parameter. The source instance name and instance snapshot name parameters
+	//    are mutually exclusive.
+	//
+	//    * Define this parameter only when creating a new instance from an automatic
+	//    snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
 	SourceInstanceName *string `locationName:"sourceInstanceName" type:"string"`
 
 	// The tag keys and optional values to add to the resource during create.
@@ -87,12 +90,14 @@ type CreateInstancesFromSnapshotInput struct {
 	// A Boolean value to indicate whether to use the latest available automatic
 	// snapshot.
 	//
-	// This parameter cannot be defined together with the restore date parameter.
-	// The use latest restorable auto snapshot and restore date parameters are mutually
-	// exclusive.
+	// Constraints:
 	//
-	// Define this parameter only when creating a new instance from an automatic
-	// snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
+	//    * This parameter cannot be defined together with the restore date parameter.
+	//    The use latest restorable auto snapshot and restore date parameters are
+	//    mutually exclusive.
+	//
+	//    * Define this parameter only when creating a new instance from an automatic
+	//    snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
 	UseLatestRestorableAutoSnapshot *bool `locationName:"useLatestRestorableAutoSnapshot" type:"boolean"`
 
 	// You can create a launch script that configures a server with additional user

@@ -135,7 +135,7 @@ const opGetDeliverabilityDashboardOptions = "GetDeliverabilityDashboardOptions"
 // When you use the Deliverability dashboard, you pay a monthly subscription
 // charge, in addition to any other fees that you accrue by using Amazon SES
 // and other AWS services. For more information about the features and cost
-// of a Deliverability dashboard subscription, see Amazon Pinpoint Pricing (http://aws.amazon.com/pinpoint/pricing/).
+// of a Deliverability dashboard subscription, see Amazon SES Pricing (http://aws.amazon.com/ses/pricing/).
 //
 //    // Example sending a request using GetDeliverabilityDashboardOptionsRequest.
 //    req := client.GetDeliverabilityDashboardOptionsRequest(params)

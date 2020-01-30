@@ -13,8 +13,7 @@ import (
 type StopRunInput struct {
 	_ struct{} `type:"structure"`
 
-	// Represents the Amazon Resource Name (ARN) of the Device Farm run you wish
-	// to stop.
+	// Represents the Amazon Resource Name (ARN) of the Device Farm run to stop.
 	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
@@ -60,12 +59,11 @@ const opStopRun = "StopRun"
 // StopRunRequest returns a request value for making API operation for
 // AWS Device Farm.
 //
-// Initiates a stop request for the current test run. AWS Device Farm will immediately
-// stop the run on devices where tests have not started executing, and you will
-// not be billed for these devices. On devices where tests have started executing,
-// Setup Suite and Teardown Suite tests will run to completion before stopping
-// execution on those devices. You will be billed for Setup, Teardown, and any
-// tests that were in progress or already completed.
+// Initiates a stop request for the current test run. AWS Device Farm immediately
+// stops the run on devices where tests have not started. You are not billed
+// for these devices. On devices where tests have started executing, setup suite
+// and teardown suite tests run to completion on those devices. You are billed
+// for setup, teardown, and any tests that were in progress or already completed.
 //
 //    // Example sending a request using StopRunRequest.
 //    req := client.StopRunRequest(params)

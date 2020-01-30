@@ -59,8 +59,8 @@ type StartSessionOutput struct {
 	//
 	// region represents the Region identifier for an AWS Region supported by AWS
 	// Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list
-	// of supported region values, see the Region column in the AWS Systems Manager
-	// table of regions and endpoints (http://docs.aws.amazon.com/general/latest/gr/rande.html#ssm_region)
+	// of supported region values, see the Region column in Systems Manager Service
+	// Endpoints (http://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region)
 	// in the AWS General Reference.
 	//
 	// session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.

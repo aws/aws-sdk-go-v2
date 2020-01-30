@@ -13,8 +13,7 @@ import (
 type DeleteProjectInput struct {
 	_ struct{} `type:"structure"`
 
-	// Represents the Amazon Resource Name (ARN) of the Device Farm project you
-	// wish to delete.
+	// Represents the Amazon Resource Name (ARN) of the Device Farm project to delete.
 	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
@@ -59,7 +58,7 @@ const opDeleteProject = "DeleteProject"
 //
 // Deletes an AWS Device Farm project, given the project ARN.
 //
-// Note Deleting this resource does not stop an in-progress run.
+// Deleting this resource does not stop an in-progress run.
 //
 //    // Example sending a request using DeleteProjectRequest.
 //    req := client.DeleteProjectRequest(params)

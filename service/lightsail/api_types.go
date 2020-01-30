@@ -1810,6 +1810,9 @@ type RelationalDatabase struct {
 	// for the database.
 	BackupRetentionEnabled *bool `locationName:"backupRetentionEnabled" type:"boolean"`
 
+	// The certificate associated with the database.
+	CaCertificateIdentifier *string `locationName:"caCertificateIdentifier" type:"string"`
+
 	// The timestamp when the database was created. Formatted in Unix time.
 	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 

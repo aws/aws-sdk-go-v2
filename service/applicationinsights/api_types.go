@@ -52,7 +52,11 @@ type ApplicationInfo struct {
 	OpsItemSNSTopicArn *string `min:"20" type:"string"`
 
 	// The issues on the user side that block Application Insights from successfully
-	// monitoring an application.
+	// monitoring an application. Example remarks include:
+	//
+	//    * “Configuring application, detected 1 Errors, 3 Warnings”
+	//
+	//    * “Configuring application, detected 1 Unconfigured Components”
 	Remarks *string `type:"string"`
 
 	// The name of the resource group used for the application.
@@ -61,6 +65,36 @@ type ApplicationInfo struct {
 
 // String returns the string representation
 func (s ApplicationInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The event information.
+type ConfigurationEvent struct {
+	_ struct{} `type:"structure"`
+
+	// The details of the event in plain text.
+	EventDetail *string `type:"string"`
+
+	// The name of the resource Application Insights attempted to configure.
+	EventResourceName *string `type:"string"`
+
+	// The resource type that Application Insights attempted to configure, for example,
+	// CLOUDWATCH_ALARM.
+	EventResourceType ConfigurationEventResourceType `type:"string" enum:"true"`
+
+	// The status of the configuration update event. Possible values include INFO,
+	// WARN, and ERROR.
+	EventStatus ConfigurationEventStatus `type:"string" enum:"true"`
+
+	// The timestamp of the event.
+	EventTime *time.Time `type:"timestamp"`
+
+	// The resource monitored by Application Insights.
+	MonitoredResourceARN *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ConfigurationEvent) String() string {
 	return awsutil.Prettify(s)
 }
 

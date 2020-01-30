@@ -245,6 +245,21 @@
         {"shape":"InvalidInputException"}
       ]
     },
+    "DescribeStandardsControls":{
+      "name":"DescribeStandardsControls",
+      "http":{
+        "method":"GET",
+        "requestUri":"/standards/controls/{StandardsSubscriptionArn+}"
+      },
+      "input":{"shape":"DescribeStandardsControlsRequest"},
+      "output":{"shape":"DescribeStandardsControlsResponse"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InvalidAccessException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
     "DisableImportFindingsForProduct":{
       "name":"DisableImportFindingsForProduct",
       "http":{
@@ -598,6 +613,21 @@
         {"shape":"LimitExceededException"},
         {"shape":"ResourceNotFoundException"}
       ]
+    },
+    "UpdateStandardsControl":{
+      "name":"UpdateStandardsControl",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/standards/control/{StandardsControlArn+}"
+      },
+      "input":{"shape":"UpdateStandardsControlRequest"},
+      "output":{"shape":"UpdateStandardsControlResponse"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InvalidAccessException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
     }
   },
   "shapes":{
@@ -663,6 +693,56 @@
       "type":"list",
       "member":{"shape":"NonEmptyString"}
     },
+    "AvailabilityZone":{
+      "type":"structure",
+      "members":{
+        "ZoneName":{"shape":"NonEmptyString"},
+        "SubnetId":{"shape":"NonEmptyString"}
+      }
+    },
+    "AvailabilityZones":{
+      "type":"list",
+      "member":{"shape":"AvailabilityZone"}
+    },
+    "AwsCloudFrontDistributionDetails":{
+      "type":"structure",
+      "members":{
+        "DomainName":{"shape":"NonEmptyString"},
+        "ETag":{"shape":"NonEmptyString"},
+        "LastModifiedTime":{"shape":"NonEmptyString"},
+        "Logging":{"shape":"AwsCloudFrontDistributionLogging"},
+        "Origins":{"shape":"AwsCloudFrontDistributionOrigins"},
+        "Status":{"shape":"NonEmptyString"},
+        "WebAclId":{"shape":"NonEmptyString"}
+      }
+    },
+    "AwsCloudFrontDistributionLogging":{
+      "type":"structure",
+      "members":{
+        "Bucket":{"shape":"NonEmptyString"},
+        "Enabled":{"shape":"Boolean"},
+        "IncludeCookies":{"shape":"Boolean"},
+        "Prefix":{"shape":"NonEmptyString"}
+      }
+    },
+    "AwsCloudFrontDistributionOriginItem":{
+      "type":"structure",
+      "members":{
+        "DomainName":{"shape":"NonEmptyString"},
+        "Id":{"shape":"NonEmptyString"},
+        "OriginPath":{"shape":"NonEmptyString"}
+      }
+    },
+    "AwsCloudFrontDistributionOriginItemList":{
+      "type":"list",
+      "member":{"shape":"AwsCloudFrontDistributionOriginItem"}
+    },
+    "AwsCloudFrontDistributionOrigins":{
+      "type":"structure",
+      "members":{
+        "Items":{"shape":"AwsCloudFrontDistributionOriginItemList"}
+      }
+    },
     "AwsEc2InstanceDetails":{
       "type":"structure",
       "members":{
@@ -677,12 +757,34 @@
         "LaunchedAt":{"shape":"NonEmptyString"}
       }
     },
+    "AwsElbv2LoadBalancerDetails":{
+      "type":"structure",
+      "members":{
+        "AvailabilityZones":{"shape":"AvailabilityZones"},
+        "CanonicalHostedZoneId":{"shape":"NonEmptyString"},
+        "CreatedTime":{"shape":"NonEmptyString"},
+        "DNSName":{"shape":"NonEmptyString"},
+        "IpAddressType":{"shape":"NonEmptyString"},
+        "Scheme":{"shape":"NonEmptyString"},
+        "SecurityGroups":{"shape":"SecurityGroups"},
+        "State":{"shape":"LoadBalancerState"},
+        "Type":{"shape":"NonEmptyString"},
+        "VpcId":{"shape":"NonEmptyString"}
+      }
+    },
     "AwsIamAccessKeyDetails":{
       "type":"structure",
       "members":{
-        "UserName":{"shape":"NonEmptyString"},
+        "UserName":{
+          "shape":"NonEmptyString",
+          "deprecated":true,
+          "deprecatedMessage":"This field is deprecated, use PrincipalName instead."
+        },
         "Status":{"shape":"AwsIamAccessKeyStatus"},
-        "CreatedAt":{"shape":"NonEmptyString"}
+        "CreatedAt":{"shape":"NonEmptyString"},
+        "PrincipalId":{"shape":"NonEmptyString"},
+        "PrincipalType":{"shape":"NonEmptyString"},
+        "PrincipalName":{"shape":"NonEmptyString"}
       }
     },
     "AwsIamAccessKeyStatus":{
@@ -691,6 +793,111 @@
         "Active",
         "Inactive"
       ]
+    },
+    "AwsIamRoleAssumeRolePolicyDocument":{
+      "type":"string",
+      "max":131072,
+      "min":1,
+      "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]+"
+    },
+    "AwsIamRoleDetails":{
+      "type":"structure",
+      "members":{
+        "AssumeRolePolicyDocument":{"shape":"AwsIamRoleAssumeRolePolicyDocument"},
+        "CreateDate":{"shape":"NonEmptyString"},
+        "RoleId":{"shape":"NonEmptyString"},
+        "RoleName":{"shape":"NonEmptyString"},
+        "MaxSessionDuration":{"shape":"Integer"},
+        "Path":{"shape":"NonEmptyString"}
+      }
+    },
+    "AwsKmsKeyDetails":{
+      "type":"structure",
+      "members":{
+        "AWSAccountId":{"shape":"NonEmptyString"},
+        "CreationDate":{"shape":"Double"},
+        "KeyId":{"shape":"NonEmptyString"},
+        "KeyManager":{"shape":"NonEmptyString"},
+        "KeyState":{"shape":"NonEmptyString"},
+        "Origin":{"shape":"NonEmptyString"}
+      }
+    },
+    "AwsLambdaFunctionCode":{
+      "type":"structure",
+      "members":{
+        "S3Bucket":{"shape":"NonEmptyString"},
+        "S3Key":{"shape":"NonEmptyString"},
+        "S3ObjectVersion":{"shape":"NonEmptyString"},
+        "ZipFile":{"shape":"NonEmptyString"}
+      }
+    },
+    "AwsLambdaFunctionDeadLetterConfig":{
+      "type":"structure",
+      "members":{
+        "TargetArn":{"shape":"NonEmptyString"}
+      }
+    },
+    "AwsLambdaFunctionDetails":{
+      "type":"structure",
+      "members":{
+        "Code":{"shape":"AwsLambdaFunctionCode"},
+        "CodeSha256":{"shape":"NonEmptyString"},
+        "DeadLetterConfig":{"shape":"AwsLambdaFunctionDeadLetterConfig"},
+        "Environment":{"shape":"AwsLambdaFunctionEnvironment"},
+        "FunctionName":{"shape":"NonEmptyString"},
+        "Handler":{"shape":"NonEmptyString"},
+        "KmsKeyArn":{"shape":"NonEmptyString"},
+        "LastModified":{"shape":"NonEmptyString"},
+        "Layers":{"shape":"AwsLambdaFunctionLayerList"},
+        "MasterArn":{"shape":"NonEmptyString"},
+        "MemorySize":{"shape":"Integer"},
+        "RevisionId":{"shape":"NonEmptyString"},
+        "Role":{"shape":"NonEmptyString"},
+        "Runtime":{"shape":"NonEmptyString"},
+        "Timeout":{"shape":"Integer"},
+        "TracingConfig":{"shape":"AwsLambdaFunctionTracingConfig"},
+        "VpcConfig":{"shape":"AwsLambdaFunctionVpcConfig"},
+        "Version":{"shape":"NonEmptyString"}
+      }
+    },
+    "AwsLambdaFunctionEnvironment":{
+      "type":"structure",
+      "members":{
+        "Variables":{"shape":"FieldMap"},
+        "Error":{"shape":"AwsLambdaFunctionEnvironmentError"}
+      }
+    },
+    "AwsLambdaFunctionEnvironmentError":{
+      "type":"structure",
+      "members":{
+        "ErrorCode":{"shape":"NonEmptyString"},
+        "Message":{"shape":"NonEmptyString"}
+      }
+    },
+    "AwsLambdaFunctionLayer":{
+      "type":"structure",
+      "members":{
+        "Arn":{"shape":"NonEmptyString"},
+        "CodeSize":{"shape":"Integer"}
+      }
+    },
+    "AwsLambdaFunctionLayerList":{
+      "type":"list",
+      "member":{"shape":"AwsLambdaFunctionLayer"}
+    },
+    "AwsLambdaFunctionTracingConfig":{
+      "type":"structure",
+      "members":{
+        "Mode":{"shape":"NonEmptyString"}
+      }
+    },
+    "AwsLambdaFunctionVpcConfig":{
+      "type":"structure",
+      "members":{
+        "SecurityGroupIds":{"shape":"NonEmptyStringList"},
+        "SubnetIds":{"shape":"NonEmptyStringList"},
+        "VpcId":{"shape":"NonEmptyString"}
+      }
     },
     "AwsS3BucketDetails":{
       "type":"structure",
@@ -840,6 +1047,35 @@
       "type":"list",
       "member":{"shape":"AwsSecurityFinding"}
     },
+    "AwsSnsTopicDetails":{
+      "type":"structure",
+      "members":{
+        "KmsMasterKeyId":{"shape":"NonEmptyString"},
+        "Subscription":{"shape":"AwsSnsTopicSubscriptionList"},
+        "TopicName":{"shape":"NonEmptyString"},
+        "Owner":{"shape":"NonEmptyString"}
+      }
+    },
+    "AwsSnsTopicSubscription":{
+      "type":"structure",
+      "members":{
+        "Endpoint":{"shape":"NonEmptyString"},
+        "Protocol":{"shape":"NonEmptyString"}
+      }
+    },
+    "AwsSnsTopicSubscriptionList":{
+      "type":"list",
+      "member":{"shape":"AwsSnsTopicSubscription"}
+    },
+    "AwsSqsQueueDetails":{
+      "type":"structure",
+      "members":{
+        "KmsDataKeyReusePeriodSeconds":{"shape":"Integer"},
+        "KmsMasterKeyId":{"shape":"NonEmptyString"},
+        "QueueName":{"shape":"NonEmptyString"},
+        "DeadLetterTargetArn":{"shape":"NonEmptyString"}
+      }
+    },
     "BatchDisableStandardsRequest":{
       "type":"structure",
       "required":["StandardsSubscriptionArns"],
@@ -913,6 +1149,13 @@
         "ImageName":{"shape":"NonEmptyString"},
         "LaunchedAt":{"shape":"NonEmptyString"}
       }
+    },
+    "ControlStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "CreateActionTargetRequest":{
       "type":"structure",
@@ -1116,6 +1359,34 @@
       "required":["Products"],
       "members":{
         "Products":{"shape":"ProductsList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "DescribeStandardsControlsRequest":{
+      "type":"structure",
+      "required":["StandardsSubscriptionArn"],
+      "members":{
+        "StandardsSubscriptionArn":{
+          "shape":"NonEmptyString",
+          "location":"uri",
+          "locationName":"StandardsSubscriptionArn"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"NextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"MaxResults"
+        }
+      }
+    },
+    "DescribeStandardsControlsResponse":{
+      "type":"structure",
+      "members":{
+        "Controls":{"shape":"StandardsControls"},
         "NextToken":{"shape":"NextToken"}
       }
     },
@@ -1532,6 +1803,13 @@
         "Tags":{"shape":"TagMap"}
       }
     },
+    "LoadBalancerState":{
+      "type":"structure",
+      "members":{
+        "Code":{"shape":"NonEmptyString"},
+        "Reason":{"shape":"NonEmptyString"}
+      }
+    },
     "Malware":{
       "type":"structure",
       "required":["Name"],
@@ -1637,6 +1915,10 @@
     "NonEmptyString":{
       "type":"string",
       "pattern":".*\\S.*"
+    },
+    "NonEmptyStringList":{
+      "type":"list",
+      "member":{"shape":"NonEmptyString"}
     },
     "Note":{
       "type":"structure",
@@ -1781,9 +2063,16 @@
     "ResourceDetails":{
       "type":"structure",
       "members":{
+        "AwsCloudFrontDistribution":{"shape":"AwsCloudFrontDistributionDetails"},
         "AwsEc2Instance":{"shape":"AwsEc2InstanceDetails"},
+        "AwsElbv2LoadBalancer":{"shape":"AwsElbv2LoadBalancerDetails"},
         "AwsS3Bucket":{"shape":"AwsS3BucketDetails"},
         "AwsIamAccessKey":{"shape":"AwsIamAccessKeyDetails"},
+        "AwsIamRole":{"shape":"AwsIamRoleDetails"},
+        "AwsKmsKey":{"shape":"AwsKmsKeyDetails"},
+        "AwsLambdaFunction":{"shape":"AwsLambdaFunctionDetails"},
+        "AwsSnsTopic":{"shape":"AwsSnsTopicDetails"},
+        "AwsSqsQueue":{"shape":"AwsSqsQueueDetails"},
         "Container":{"shape":"ContainerDetails"},
         "Other":{"shape":"FieldMap"}
       }
@@ -1812,6 +2101,10 @@
       "type":"list",
       "member":{"shape":"Result"}
     },
+    "SecurityGroups":{
+      "type":"list",
+      "member":{"shape":"NonEmptyString"}
+    },
     "Severity":{
       "type":"structure",
       "required":["Normalized"],
@@ -1819,6 +2112,15 @@
         "Product":{"shape":"Double"},
         "Normalized":{"shape":"Integer"}
       }
+    },
+    "SeverityRating":{
+      "type":"string",
+      "enum":[
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ]
     },
     "SortCriteria":{
       "type":"list",
@@ -1837,6 +2139,24 @@
         "asc",
         "desc"
       ]
+    },
+    "StandardsControl":{
+      "type":"structure",
+      "members":{
+        "StandardsControlArn":{"shape":"NonEmptyString"},
+        "ControlStatus":{"shape":"ControlStatus"},
+        "DisabledReason":{"shape":"NonEmptyString"},
+        "ControlStatusUpdatedAt":{"shape":"Timestamp"},
+        "ControlId":{"shape":"NonEmptyString"},
+        "Title":{"shape":"NonEmptyString"},
+        "Description":{"shape":"NonEmptyString"},
+        "RemediationUrl":{"shape":"NonEmptyString"},
+        "SeverityRating":{"shape":"SeverityRating"}
+      }
+    },
+    "StandardsControls":{
+      "type":"list",
+      "member":{"shape":"StandardsControl"}
     },
     "StandardsInputParameterMap":{
       "type":"map",
@@ -2078,6 +2398,24 @@
       }
     },
     "UpdateInsightResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateStandardsControlRequest":{
+      "type":"structure",
+      "required":["StandardsControlArn"],
+      "members":{
+        "StandardsControlArn":{
+          "shape":"NonEmptyString",
+          "location":"uri",
+          "locationName":"StandardsControlArn"
+        },
+        "ControlStatus":{"shape":"ControlStatus"},
+        "DisabledReason":{"shape":"NonEmptyString"}
+      }
+    },
+    "UpdateStandardsControlResponse":{
       "type":"structure",
       "members":{
       }

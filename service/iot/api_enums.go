@@ -698,6 +698,23 @@ func (enum PolicyTemplateName) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type Protocol string
+
+// Enum values for Protocol
+const (
+	ProtocolMqtt Protocol = "MQTT"
+	ProtocolHttp Protocol = "HTTP"
+)
+
+func (enum Protocol) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Protocol) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReportType string
 
 // Enum values for ReportType

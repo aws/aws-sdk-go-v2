@@ -12,6 +12,12 @@ import (
 type StartTranscriptionJobInput struct {
 	_ struct{} `type:"structure"`
 
+	// Provides information about how a transcription job is executed. Use this
+	// field to indicate that the job can be queued for deferred execution if the
+	// concurrency limit is reached and there are no slots available to immediately
+	// run the job.
+	JobExecutionSettings *JobExecutionSettings `type:"structure"`
+
 	// The language code for the language used in the input media file.
 	//
 	// LanguageCode is a required field

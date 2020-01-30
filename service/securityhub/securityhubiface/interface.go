@@ -91,6 +91,8 @@ type ClientAPI interface {
 
 	DescribeProductsRequest(*securityhub.DescribeProductsInput) securityhub.DescribeProductsRequest
 
+	DescribeStandardsControlsRequest(*securityhub.DescribeStandardsControlsInput) securityhub.DescribeStandardsControlsRequest
+
 	DisableImportFindingsForProductRequest(*securityhub.DisableImportFindingsForProductInput) securityhub.DisableImportFindingsForProductRequest
 
 	DisableSecurityHubRequest(*securityhub.DisableSecurityHubInput) securityhub.DisableSecurityHubRequest
@@ -136,6 +138,8 @@ type ClientAPI interface {
 	UpdateFindingsRequest(*securityhub.UpdateFindingsInput) securityhub.UpdateFindingsRequest
 
 	UpdateInsightRequest(*securityhub.UpdateInsightInput) securityhub.UpdateInsightRequest
+
+	UpdateStandardsControlRequest(*securityhub.UpdateStandardsControlInput) securityhub.UpdateStandardsControlRequest
 }
 
 var _ ClientAPI = (*securityhub.Client)(nil)

@@ -236,6 +236,12 @@ type Options struct {
 	// NONE: Ignore UID and GID.
 	Gid Gid `type:"string" enum:"true"`
 
+	// A value that determines the type of logs DataSync will deliver to your AWS
+	// CloudWatch Logs file. If set to OFF, no logs will be delivered. BASIC will
+	// deliver a few logs per transfer operation and TRANSFER will deliver a verbose
+	// log that contains logs for every file that is transferred.
+	LogLevel LogLevel `type:"string" enum:"true"`
+
 	// A value that indicates the last time that a file was modified (that is, a
 	// file was written to) before the PREPARING phase.
 	//

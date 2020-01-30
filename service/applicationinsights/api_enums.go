@@ -2,6 +2,42 @@
 
 package applicationinsights
 
+type ConfigurationEventResourceType string
+
+// Enum values for ConfigurationEventResourceType
+const (
+	ConfigurationEventResourceTypeCloudwatchAlarm ConfigurationEventResourceType = "CLOUDWATCH_ALARM"
+	ConfigurationEventResourceTypeCloudformation  ConfigurationEventResourceType = "CLOUDFORMATION"
+	ConfigurationEventResourceTypeSsmAssociation  ConfigurationEventResourceType = "SSM_ASSOCIATION"
+)
+
+func (enum ConfigurationEventResourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConfigurationEventResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ConfigurationEventStatus string
+
+// Enum values for ConfigurationEventStatus
+const (
+	ConfigurationEventStatusInfo  ConfigurationEventStatus = "INFO"
+	ConfigurationEventStatusWarn  ConfigurationEventStatus = "WARN"
+	ConfigurationEventStatusError ConfigurationEventStatus = "ERROR"
+)
+
+func (enum ConfigurationEventStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConfigurationEventStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FeedbackKey string
 
 // Enum values for FeedbackKey

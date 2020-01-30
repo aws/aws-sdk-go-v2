@@ -16,6 +16,7 @@ type BatchImportFindingsInput struct {
 
 	// A list of findings to import. To successfully import a finding, it must follow
 	// the AWS Security Finding Format (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html).
+	// Maximum of 100 findings per request.
 	//
 	// Findings is a required field
 	Findings []AwsSecurityFinding `type:"list" required:"true"`

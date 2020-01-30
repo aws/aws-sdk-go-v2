@@ -13,6 +13,8 @@ import (
 type UpdatePushTemplateInput struct {
 	_ struct{} `type:"structure" payload:"PushNotificationTemplateRequest"`
 
+	CreateNewVersion *bool `location:"querystring" locationName:"create-new-version" type:"boolean"`
+
 	// Specifies the content and settings for a message template that can be used
 	// in messages that are sent through a push notification channel.
 	//
@@ -21,6 +23,8 @@ type UpdatePushTemplateInput struct {
 
 	// TemplateName is a required field
 	TemplateName *string `location:"uri" locationName:"template-name" type:"string" required:"true"`
+
+	Version *string `location:"querystring" locationName:"version" type:"string"`
 }
 
 // String returns the string representation
@@ -62,6 +66,18 @@ func (s UpdatePushTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.PayloadTarget, "PushNotificationTemplateRequest", v, metadata)
 	}
+	if s.CreateNewVersion != nil {
+		v := *s.CreateNewVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "create-new-version", protocol.BoolValue(v), metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	return nil
 }
 
@@ -95,8 +111,8 @@ const opUpdatePushTemplate = "UpdatePushTemplate"
 // UpdatePushTemplateRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Updates an existing message template that you can use in messages that are
-// sent through a push notification channel.
+// Updates an existing message template for messages that are sent through a
+// push notification channel.
 //
 //    // Example sending a request using UpdatePushTemplateRequest.
 //    req := client.UpdatePushTemplateRequest(params)

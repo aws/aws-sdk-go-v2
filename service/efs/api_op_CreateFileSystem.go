@@ -19,7 +19,7 @@ type CreateFileSystemInput struct {
 	// creation.
 	//
 	// CreationToken is a required field
-	CreationToken *string `min:"1" type:"string" required:"true"`
+	CreationToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
 
 	// A Boolean value that, if true, creates an encrypted file system. When creating
 	// an encrypted file system, you have the option of specifying CreateFileSystemRequest$KmsKeyId
@@ -116,8 +116,14 @@ func (s *CreateFileSystemInput) Validate() error {
 func (s CreateFileSystemInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	var CreationToken string
 	if s.CreationToken != nil {
-		v := *s.CreationToken
+		CreationToken = *s.CreationToken
+	} else {
+		CreationToken = protocol.GetIdempotencyToken()
+	}
+	{
+		v := CreationToken
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "CreationToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)

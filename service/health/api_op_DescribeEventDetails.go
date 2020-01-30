@@ -69,10 +69,10 @@ const opDescribeEventDetails = "DescribeEventDetails"
 // AWS Health APIs and Notifications.
 //
 // Returns detailed information about one or more specified events. Information
-// includes standard event data (region, service, etc., as returned by DescribeEvents),
-// a detailed event description, and possible additional metadata that depends
-// upon the nature of the event. Affected entities are not included; to retrieve
-// those, use the DescribeAffectedEntities operation.
+// includes standard event data (region, service, and so on, as returned by
+// DescribeEvents), a detailed event description, and possible additional metadata
+// that depends upon the nature of the event. Affected entities are not included;
+// to retrieve those, use the DescribeAffectedEntities operation.
 //
 // If a specified event cannot be retrieved, an error message is returned for
 // that event.

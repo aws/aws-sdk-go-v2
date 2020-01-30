@@ -95,6 +95,17 @@ func (s CreateMountTargetInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateMountTargetOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The unique and consistent identifier of the Availability Zone (AZ) that the
+	// mount target resides in. For example, use1-az1 is an AZ ID for the us-east-1
+	// Region and it has the same location in every AWS account.
+	AvailabilityZoneId *string `type:"string"`
+
+	// The name of the Availability Zone (AZ) that the mount target resides in.
+	// AZs are independently mapped to names for each AWS account. For example,
+	// the Availability Zone us-east-1a for your AWS account might not be the same
+	// location as us-east-1a for another AWS account.
+	AvailabilityZoneName *string `type:"string"`
+
 	// The ID of the file system for which the mount target is intended.
 	//
 	// FileSystemId is a required field
@@ -133,6 +144,18 @@ func (s CreateMountTargetOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateMountTargetOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AvailabilityZoneId != nil {
+		v := *s.AvailabilityZoneId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AvailabilityZoneId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AvailabilityZoneName != nil {
+		v := *s.AvailabilityZoneName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AvailabilityZoneName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.FileSystemId != nil {
 		v := *s.FileSystemId
 

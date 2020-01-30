@@ -14,18 +14,19 @@ import (
 type CreateGameSessionInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for an alias associated with the fleet to create a game
-	// session in. Each request must reference either a fleet ID or alias ID, but
-	// not both.
+	// A unique identifier for an alias associated with the fleet to create a game
+	// session in. You can use either the alias ID or ARN value. Each request must
+	// reference either a fleet ID or alias ID, but not both.
 	AliasId *string `type:"string"`
 
-	// Unique identifier for a player or entity creating the game session. This
+	// A unique identifier for a player or entity creating the game session. This
 	// ID is used to enforce a resource protection policy (if one exists) that limits
 	// the number of concurrent active game sessions one player can have.
 	CreatorId *string `min:"1" type:"string"`
 
-	// Unique identifier for a fleet to create a game session in. Each request must
-	// reference either a fleet ID or alias ID, but not both.
+	// A unique identifier for a fleet to create a game session in. You can use
+	// either the fleet ID or ARN value. Each request must reference either a fleet
+	// ID or alias ID, but not both.
 	FleetId *string `type:"string"`
 
 	// Set of custom properties for a game session, formatted as key:value pairs.
@@ -55,14 +56,14 @@ type CreateGameSessionInput struct {
 	// deleted.
 	IdempotencyToken *string `min:"1" type:"string"`
 
-	// Maximum number of players that can be connected simultaneously to the game
-	// session.
+	// The maximum number of players that can be connected simultaneously to the
+	// game session.
 	//
 	// MaximumPlayerSessionCount is a required field
 	MaximumPlayerSessionCount *int64 `type:"integer" required:"true"`
 
-	// Descriptive label that is associated with a game session. Session names do
-	// not need to be unique.
+	// A descriptive label that is associated with a game session. Session names
+	// do not need to be unique.
 	Name *string `min:"1" type:"string"`
 }
 

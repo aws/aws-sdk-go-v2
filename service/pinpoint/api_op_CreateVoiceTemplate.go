@@ -95,8 +95,7 @@ const opCreateVoiceTemplate = "CreateVoiceTemplate"
 // CreateVoiceTemplateRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Creates a message template that you can use in messages that are sent through
-// the voice channel.
+// Creates a message template for messages that are sent through the voice channel.
 //
 //    // Example sending a request using CreateVoiceTemplateRequest.
 //    req := client.CreateVoiceTemplateRequest(params)

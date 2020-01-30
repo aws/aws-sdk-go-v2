@@ -38,8 +38,9 @@ type SubmitJobInput struct {
 	// begin.
 	DependsOn []JobDependency `locationName:"dependsOn" type:"list"`
 
-	// The job definition used by this job. This value can be either a name:revision
-	// or the Amazon Resource Name (ARN) for the job definition.
+	// The job definition used by this job. This value can be one of name, name:revision,
+	// or the Amazon Resource Name (ARN) for the job definition. If name is specified
+	// without a revision then the latest active revision is used.
 	//
 	// JobDefinition is a required field
 	JobDefinition *string `locationName:"jobDefinition" type:"string" required:"true"`

@@ -72,7 +72,8 @@ type GetConfigurationSetOutput struct {
 	// send using the configuration set.
 	SendingOptions *SendingOptions `type:"structure"`
 
-	// An object that contains information about your account's suppression preferences.
+	// An object that contains information about the suppression list preferences
+	// for your account.
 	SuppressionOptions *SuppressionOptions `type:"structure"`
 
 	// An array of objects that define the tags (keys and values) that are associated

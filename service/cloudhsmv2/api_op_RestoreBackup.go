@@ -56,7 +56,7 @@ const opRestoreBackup = "RestoreBackup"
 // AWS CloudHSM V2.
 //
 // Restores a specified AWS CloudHSM backup that is in the PENDING_DELETION
-// state. For more information on deleting a backup, see DeleteBackup.
+// state. For mor information on deleting a backup, see DeleteBackup.
 //
 //    // Example sending a request using RestoreBackupRequest.
 //    req := client.RestoreBackupRequest(params)

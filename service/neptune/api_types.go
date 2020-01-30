@@ -84,8 +84,7 @@ type DBCluster struct {
 	// Specifies the number of days for which automatic DB snapshots are retained.
 	BackupRetentionPeriod *int64 `type:"integer"`
 
-	// If present, specifies the name of the character set that this cluster is
-	// associated with.
+	// (Not supported by Neptune)
 	CharacterSetName *string `type:"string"`
 
 	// Identifies the clone group to which the DB cluster is associated.
@@ -105,7 +104,7 @@ type DBCluster struct {
 	// Provides the list of instances that make up the DB cluster.
 	DBClusterMembers []DBClusterMember `locationNameList:"DBClusterMember" type:"list"`
 
-	// Provides the list of option group memberships for this DB cluster.
+	// (Not supported by Neptune)
 	DBClusterOptionGroupMemberships []DBClusterOptionGroupStatus `locationNameList:"DBClusterOptionGroup" type:"list"`
 
 	// Specifies the name of the DB cluster parameter group for the DB cluster.
@@ -124,6 +123,10 @@ type DBCluster struct {
 	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
 	// cluster is accessed.
 	DbClusterResourceId *string `type:"string"`
+
+	// Indicates if the DB cluster has deletion protection enabled. The database
+	// can't be deleted when deletion protection is enabled.
+	DeletionProtection *bool `type:"boolean"`
 
 	// Specifies the earliest time to which a database can be restored with point-in-time
 	// restore.
@@ -455,8 +458,7 @@ type DBEngineVersion struct {
 	// The name of the DB parameter group family for the database engine.
 	DBParameterGroupFamily *string `type:"string"`
 
-	// The default character set for new instances of this engine version, if the
-	// CharacterSetName parameter of the CreateDBInstance API is not specified.
+	// (Not supported by Neptune)
 	DefaultCharacterSet *CharacterSet `type:"structure"`
 
 	// The name of the database engine.
@@ -469,8 +471,7 @@ type DBEngineVersion struct {
 	// Logs.
 	ExportableLogTypes []string `type:"list"`
 
-	// A list of the character sets supported by this engine for the CharacterSetName
-	// parameter of the CreateDBInstance action.
+	// (Not supported by Neptune)
 	SupportedCharacterSets []CharacterSet `locationNameList:"CharacterSet" type:"list"`
 
 	// A list of the time zones supported by this engine for the Timezone parameter
@@ -515,8 +516,7 @@ type DBInstance struct {
 	// The identifier of the CA certificate for this DB instance.
 	CACertificateIdentifier *string `type:"string"`
 
-	// If present, specifies the name of the character set that this instance is
-	// associated with.
+	// (Not supported by Neptune)
 	CharacterSetName *string `type:"string"`
 
 	// Specifies whether tags are copied from the DB instance to snapshots of the
@@ -562,6 +562,10 @@ type DBInstance struct {
 	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
 	// instance is accessed.
 	DbiResourceId *string `type:"string"`
+
+	// Indicates if the DB instance has deletion protection enabled. The database
+	// can't be deleted when deletion protection is enabled.
+	DeletionProtection *bool `type:"boolean"`
 
 	// Not supported
 	DomainMemberships []DomainMembership `locationNameList:"DomainMembership" type:"list"`
@@ -617,20 +621,17 @@ type DBInstance struct {
 	// Specifies if the DB instance is a Multi-AZ deployment.
 	MultiAZ *bool `type:"boolean"`
 
-	// Provides the list of option group memberships for this DB instance.
+	// (Not supported by Neptune)
 	OptionGroupMemberships []OptionGroupMembership `locationNameList:"OptionGroupMembership" type:"list"`
 
 	// Specifies that changes to the DB instance are pending. This element is only
 	// included when changes are pending. Specific changes are identified by subelements.
 	PendingModifiedValues *PendingModifiedValues `type:"structure"`
 
-	// True if Performance Insights is enabled for the DB instance, and otherwise
-	// false.
+	// (Not supported by Neptune)
 	PerformanceInsightsEnabled *bool `type:"boolean"`
 
-	// The AWS KMS key identifier for encryption of Performance Insights data. The
-	// KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
-	// KMS key alias for the KMS encryption key.
+	// (Not supported by Neptune)
 	PerformanceInsightsKMSKeyId *string `type:"string"`
 
 	// Specifies the daily time range during which automated backups are created
@@ -1108,7 +1109,7 @@ type OrderableDBInstanceOption struct {
 	// Indicates whether a DB instance supports provisioned IOPS.
 	SupportsIops *bool `type:"boolean"`
 
-	// True if a DB instance supports Performance Insights, otherwise false.
+	// (Not supported by Neptune)
 	SupportsPerformanceInsights *bool `type:"boolean"`
 
 	// Indicates whether a DB instance supports encrypted storage.
@@ -1266,7 +1267,8 @@ type PendingModifiedValues struct {
 	// Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.
 	MultiAZ *bool `type:"boolean"`
 
-	// Specifies the CloudWatch logs to be exported.
+	// This PendingCloudwatchLogsExports structure specifies pending changes to
+	// which CloudWatch logs are enabled and which are disabled.
 	PendingCloudwatchLogsExports *PendingCloudwatchLogsExports `type:"structure"`
 
 	// Specifies the pending port for the DB instance.

@@ -10,11 +10,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// A request to get a suppressed email destination.
+// A request to retrieve information about an email address that's on the suppression
+// list for your account.
 type GetSuppressedDestinationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Email destination to fetch from the suppression list.
+	// The email address that's on the account suppression list.
 	//
 	// EmailAddress is a required field
 	EmailAddress *string `location:"uri" locationName:"EmailAddress" type:"string" required:"true"`
@@ -52,11 +53,11 @@ func (s GetSuppressedDestinationInput) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Information about the suppressed email destination.
+// Information about the suppressed email address.
 type GetSuppressedDestinationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object containing information about the suppressed email destination.
+	// An object containing information about the suppressed email address.
 	//
 	// SuppressedDestination is a required field
 	SuppressedDestination *SuppressedDestination `type:"structure" required:"true"`
@@ -83,8 +84,8 @@ const opGetSuppressedDestination = "GetSuppressedDestination"
 // GetSuppressedDestinationRequest returns a request value for making API operation for
 // Amazon Simple Email Service.
 //
-// Used to fetch a single suppressed email destination from your suppression
-// list.
+// Retrieves information about a specific email address that's on the suppression
+// list for your account.
 //
 //    // Example sending a request using GetSuppressedDestinationRequest.
 //    req := client.GetSuppressedDestinationRequest(params)

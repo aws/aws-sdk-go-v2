@@ -17,7 +17,7 @@ type DisableAddOnInput struct {
 	// AddOnType is a required field
 	AddOnType AddOnType `locationName:"addOnType" type:"string" required:"true" enum:"true"`
 
-	// The name of the source resource from which to disable the add-on.
+	// The name of the source resource for which to disable the add-on.
 	//
 	// ResourceName is a required field
 	ResourceName *string `locationName:"resourceName" type:"string" required:"true"`

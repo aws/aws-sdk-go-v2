@@ -58,7 +58,7 @@ type ListRemoteAccessSessionsOutput struct {
 	// which can be used to return the next set of items in the list.
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
 
-	// A container representing the metadata from the service about each remote
+	// A container that represents the metadata from the service about each remote
 	// access session you are requesting.
 	RemoteAccessSessions []RemoteAccessSession `locationName:"remoteAccessSessions" type:"list"`
 }

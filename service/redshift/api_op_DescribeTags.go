@@ -26,7 +26,7 @@ type DescribeTagsInput struct {
 	MaxRecords *int64 `type:"integer"`
 
 	// The Amazon Resource Name (ARN) for which you want to describe the tag or
-	// tags. For example, arn:aws:redshift:us-east-1:123456789:cluster:t1.
+	// tags. For example, arn:aws:redshift:us-east-2:123456789:cluster:t1.
 	ResourceName *string `type:"string"`
 
 	// The type of resource with which you want to view tags. Valid resource types

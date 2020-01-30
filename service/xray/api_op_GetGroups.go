@@ -13,7 +13,7 @@ import (
 type GetGroupsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `min:"1" type:"string"`
 }
 
@@ -54,7 +54,7 @@ type GetGroupsOutput struct {
 	// The collection of all active groups.
 	Groups []GroupSummary `type:"list"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 }
 

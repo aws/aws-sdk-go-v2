@@ -66,7 +66,7 @@ type ListDevicePoolsOutput struct {
 	DevicePools []DevicePool `locationName:"devicePools" type:"list"`
 
 	// If the number of items that are returned is significantly large, this is
-	// an identifier that is also returned, which can be used in a subsequent call
+	// an identifier that is also returned. It can be used in a subsequent call
 	// to this operation to return the next set of items in the list.
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
 }

@@ -85,9 +85,15 @@ type ClientAPI interface {
 
 	ListPoliciesRequest(*fms.ListPoliciesInput) fms.ListPoliciesRequest
 
+	ListTagsForResourceRequest(*fms.ListTagsForResourceInput) fms.ListTagsForResourceRequest
+
 	PutNotificationChannelRequest(*fms.PutNotificationChannelInput) fms.PutNotificationChannelRequest
 
 	PutPolicyRequest(*fms.PutPolicyInput) fms.PutPolicyRequest
+
+	TagResourceRequest(*fms.TagResourceInput) fms.TagResourceRequest
+
+	UntagResourceRequest(*fms.UntagResourceInput) fms.UntagResourceRequest
 }
 
 var _ ClientAPI = (*fms.Client)(nil)

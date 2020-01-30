@@ -17,15 +17,15 @@ type UpdateUploadInput struct {
 	// Arn is a required field
 	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
 
-	// The upload's content type (for example, "application/x-yaml").
+	// The upload's content type (for example, application/x-yaml).
 	ContentType *string `locationName:"contentType" type:"string"`
 
-	// Set to true if the YAML file has changed and needs to be updated; otherwise,
+	// Set to true if the YAML file has changed and must be updated. Otherwise,
 	// set to false.
 	EditContent *bool `locationName:"editContent" type:"boolean"`
 
-	// The upload's test spec file name. The name should not contain the '/' character.
-	// The test spec file name must end with the .yaml or .yml file extension.
+	// The upload's test spec file name. The name must not contain any forward slashes
+	// (/). The test spec file name must end with the .yaml or .yml file extension.
 	Name *string `locationName:"name" type:"string"`
 }
 
@@ -68,7 +68,7 @@ const opUpdateUpload = "UpdateUpload"
 // UpdateUploadRequest returns a request value for making API operation for
 // AWS Device Farm.
 //
-// Update an uploaded test specification (test spec).
+// Updates an uploaded test spec.
 //
 //    // Example sending a request using UpdateUploadRequest.
 //    req := client.UpdateUploadRequest(params)
