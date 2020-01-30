@@ -67,6 +67,8 @@ type ClientAPI interface {
 
 	AssociatePhoneNumbersWithVoiceConnectorGroupRequest(*chime.AssociatePhoneNumbersWithVoiceConnectorGroupInput) chime.AssociatePhoneNumbersWithVoiceConnectorGroupRequest
 
+	AssociateSigninDelegateGroupsWithAccountRequest(*chime.AssociateSigninDelegateGroupsWithAccountInput) chime.AssociateSigninDelegateGroupsWithAccountRequest
+
 	BatchCreateAttendeeRequest(*chime.BatchCreateAttendeeInput) chime.BatchCreateAttendeeRequest
 
 	BatchCreateRoomMembershipRequest(*chime.BatchCreateRoomMembershipInput) chime.BatchCreateRoomMembershipRequest
@@ -94,6 +96,8 @@ type ClientAPI interface {
 	CreateRoomRequest(*chime.CreateRoomInput) chime.CreateRoomRequest
 
 	CreateRoomMembershipRequest(*chime.CreateRoomMembershipInput) chime.CreateRoomMembershipRequest
+
+	CreateUserRequest(*chime.CreateUserInput) chime.CreateUserRequest
 
 	CreateVoiceConnectorRequest(*chime.CreateVoiceConnectorInput) chime.CreateVoiceConnectorRequest
 
@@ -130,6 +134,8 @@ type ClientAPI interface {
 	DisassociatePhoneNumbersFromVoiceConnectorRequest(*chime.DisassociatePhoneNumbersFromVoiceConnectorInput) chime.DisassociatePhoneNumbersFromVoiceConnectorRequest
 
 	DisassociatePhoneNumbersFromVoiceConnectorGroupRequest(*chime.DisassociatePhoneNumbersFromVoiceConnectorGroupInput) chime.DisassociatePhoneNumbersFromVoiceConnectorGroupRequest
+
+	DisassociateSigninDelegateGroupsFromAccountRequest(*chime.DisassociateSigninDelegateGroupsFromAccountInput) chime.DisassociateSigninDelegateGroupsFromAccountRequest
 
 	GetAccountRequest(*chime.GetAccountInput) chime.GetAccountRequest
 

@@ -13,7 +13,7 @@ import (
 type GetGameSessionLogUrlInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for the game session to get logs for.
+	// A unique identifier for the game session to get logs for.
 	//
 	// GameSessionId is a required field
 	GameSessionId *string `min:"1" type:"string" required:"true"`

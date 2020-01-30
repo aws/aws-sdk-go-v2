@@ -13,22 +13,22 @@ import (
 type ListAliasesInput struct {
 	_ struct{} `type:"structure"`
 
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages.
+	// The maximum number of results to return. Use this parameter with NextToken
+	// to get results as a set of sequential pages.
 	Limit *int64 `min:"1" type:"integer"`
 
-	// Descriptive label that is associated with an alias. Alias names do not need
-	// to be unique.
+	// A descriptive label that is associated with an alias. Alias names do not
+	// need to be unique.
 	Name *string `min:"1" type:"string"`
 
-	// Token that indicates the start of the next sequential page of results. Use
-	// the token that is returned with a previous call to this action. To start
+	// A token that indicates the start of the next sequential page of results.
+	// Use the token that is returned with a previous call to this action. To start
 	// at the beginning of the result set, do not specify a value.
 	NextToken *string `min:"1" type:"string"`
 
-	// Type of routing to filter results on. Use this parameter to retrieve only
-	// aliases of a certain type. To retrieve all aliases, leave this parameter
-	// empty.
+	// The routing type to filter results on. Use this parameter to retrieve only
+	// aliases with a certain routing type. To retrieve all aliases, leave this
+	// parameter empty.
 	//
 	// Possible routing types include the following:
 	//
@@ -69,10 +69,10 @@ func (s *ListAliasesInput) Validate() error {
 type ListAliasesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Collection of alias records that match the list request.
+	// A collection of alias resources that match the request parameters.
 	Aliases []Alias `type:"list"`
 
-	// Token that indicates where to resume retrieving results on the next call
+	// A token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
 	// of the list.
 	NextToken *string `min:"1" type:"string"`

@@ -133,12 +133,10 @@ const opCreateTrialComponent = "CreateTrialComponent"
 // You can add tags to a trial component and then use the Search API to search
 // for the tags.
 //
-// You can create a trial component through a direct call to the CreateTrialComponent
-// API. However, you can't specify the Source property of the component in the
-// request, therefore, the component isn't associated with an Amazon SageMaker
-// job. You must use Amazon SageMaker Studio, the Amazon SageMaker Python SDK,
-// or the AWS SDK for Python (Boto) to create the component with a valid Source
-// property.
+// CreateTrialComponent can only be invoked from within an Amazon SageMaker
+// managed environment. This includes Amazon SageMaker training jobs, processing
+// jobs, transform jobs, and Amazon SageMaker notebooks. A call to CreateTrialComponent
+// from outside one of these environments results in an error.
 //
 //    // Example sending a request using CreateTrialComponentRequest.
 //    req := client.CreateTrialComponentRequest(params)

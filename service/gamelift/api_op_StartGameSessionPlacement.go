@@ -27,30 +27,31 @@ type StartGameSessionPlacementInput struct {
 	// a request to start a new game session (see Start a Game Session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	GameSessionData *string `min:"1" type:"string"`
 
-	// Descriptive label that is associated with a game session. Session names do
-	// not need to be unique.
+	// A descriptive label that is associated with a game session. Session names
+	// do not need to be unique.
 	GameSessionName *string `min:"1" type:"string"`
 
-	// Name of the queue to use to place the new game session.
+	// Name of the queue to use to place the new game session. You can use either
+	// the qieue name or ARN value.
 	//
 	// GameSessionQueueName is a required field
 	GameSessionQueueName *string `min:"1" type:"string" required:"true"`
 
-	// Maximum number of players that can be connected simultaneously to the game
-	// session.
+	// The maximum number of players that can be connected simultaneously to the
+	// game session.
 	//
 	// MaximumPlayerSessionCount is a required field
 	MaximumPlayerSessionCount *int64 `type:"integer" required:"true"`
 
-	// Unique identifier to assign to the new game session placement. This value
-	// is developer-defined. The value must be unique across all regions and cannot
+	// A unique identifier to assign to the new game session placement. This value
+	// is developer-defined. The value must be unique across all Regions and cannot
 	// be reused unless you are resubmitting a canceled or timed-out placement request.
 	//
 	// PlacementId is a required field
 	PlacementId *string `min:"1" type:"string" required:"true"`
 
 	// Set of values, expressed in milliseconds, indicating the amount of latency
-	// that a player experiences when connected to AWS regions. This information
+	// that a player experiences when connected to AWS Regions. This information
 	// is used to try to place the new game session where it can offer the best
 	// possible gameplay experience for the players.
 	PlayerLatencies []PlayerLatency `type:"list"`
@@ -150,11 +151,11 @@ const opStartGameSessionPlacement = "StartGameSessionPlacement"
 // destinations are listed in preference order.
 //
 // Alternatively, when requesting a game session with players, you can also
-// provide latency data for each player in relevant regions. Latency data indicates
+// provide latency data for each player in relevant Regions. Latency data indicates
 // the performance lag a player experiences when connected to a fleet in the
-// region. Amazon GameLift uses latency data to reorder the list of destinations
-// to place the game session in a region with minimal lag. If latency data is
-// provided for multiple players, Amazon GameLift calculates each region's average
+// Region. Amazon GameLift uses latency data to reorder the list of destinations
+// to place the game session in a Region with minimal lag. If latency data is
+// provided for multiple players, Amazon GameLift calculates each Region's average
 // lag for all players and reorders to get the best game play across all players.
 //
 // To place a new game session request, specify the following:
@@ -175,7 +176,7 @@ const opStartGameSessionPlacement = "StartGameSessionPlacement"
 //
 // To track the status of a placement request, call DescribeGameSessionPlacement
 // and check the request's status. If the status is FULFILLED, a new game session
-// has been created and a game session ARN and region are referenced. If the
+// has been created and a game session ARN and Region are referenced. If the
 // placement request times out, you can resubmit the request or retry it with
 // a different queue.
 //

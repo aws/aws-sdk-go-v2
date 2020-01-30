@@ -22,7 +22,8 @@ type ListTrialsInput struct {
 	// A filter that returns only trials that are part of the specified experiment.
 	ExperimentName *string `min:"1" type:"string"`
 
-	// The maximum number of trials to return in the response.
+	// The maximum number of trials to return in the response. The default value
+	// is 10.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// If the previous call to ListTrials didn't return the full set of trials,

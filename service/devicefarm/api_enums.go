@@ -443,6 +443,59 @@ func (enum SampleType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type TestGridSessionArtifactCategory string
+
+// Enum values for TestGridSessionArtifactCategory
+const (
+	TestGridSessionArtifactCategoryVideo TestGridSessionArtifactCategory = "VIDEO"
+	TestGridSessionArtifactCategoryLog   TestGridSessionArtifactCategory = "LOG"
+)
+
+func (enum TestGridSessionArtifactCategory) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TestGridSessionArtifactCategory) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TestGridSessionArtifactType string
+
+// Enum values for TestGridSessionArtifactType
+const (
+	TestGridSessionArtifactTypeUnknown     TestGridSessionArtifactType = "UNKNOWN"
+	TestGridSessionArtifactTypeVideo       TestGridSessionArtifactType = "VIDEO"
+	TestGridSessionArtifactTypeSeleniumLog TestGridSessionArtifactType = "SELENIUM_LOG"
+)
+
+func (enum TestGridSessionArtifactType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TestGridSessionArtifactType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TestGridSessionStatus string
+
+// Enum values for TestGridSessionStatus
+const (
+	TestGridSessionStatusActive  TestGridSessionStatus = "ACTIVE"
+	TestGridSessionStatusClosed  TestGridSessionStatus = "CLOSED"
+	TestGridSessionStatusErrored TestGridSessionStatus = "ERRORED"
+)
+
+func (enum TestGridSessionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TestGridSessionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TestType string
 
 // Enum values for TestType

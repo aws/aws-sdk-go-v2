@@ -48,6 +48,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline"
 	"github.com/aws/aws-sdk-go-v2/service/codestar"
+	"github.com/aws/aws-sdk-go-v2/service/codestarconnections"
 	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
@@ -65,6 +66,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline"
 	"github.com/aws/aws-sdk-go-v2/service/datasync"
 	"github.com/aws/aws-sdk-go-v2/service/dax"
+	"github.com/aws/aws-sdk-go-v2/service/detective"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice"
@@ -279,6 +281,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "codegurureviewer", value: reflect.ValueOf(codegurureviewer.New(cfg))},
 		{name: "codepipeline", value: reflect.ValueOf(codepipeline.New(cfg))},
 		{name: "codestar", value: reflect.ValueOf(codestar.New(cfg))},
+		{name: "codestarconnections", value: reflect.ValueOf(codestarconnections.New(cfg))},
 		{name: "codestarnotifications", value: reflect.ValueOf(codestarnotifications.New(cfg))},
 		{name: "cognitoidentity", value: reflect.ValueOf(cognitoidentity.New(cfg))},
 		{name: "cognitoidentityprovider", value: reflect.ValueOf(cognitoidentityprovider.New(cfg))},
@@ -296,6 +299,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "datapipeline", value: reflect.ValueOf(datapipeline.New(cfg))},
 		{name: "datasync", value: reflect.ValueOf(datasync.New(cfg))},
 		{name: "dax", value: reflect.ValueOf(dax.New(cfg))},
+		{name: "detective", value: reflect.ValueOf(detective.New(cfg))},
 		{name: "devicefarm", value: reflect.ValueOf(devicefarm.New(cfg))},
 		{name: "directconnect", value: reflect.ValueOf(directconnect.New(cfg))},
 		{name: "directoryservice", value: reflect.ValueOf(directoryservice.New(cfg))},

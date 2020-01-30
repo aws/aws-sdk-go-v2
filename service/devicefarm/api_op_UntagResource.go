@@ -12,10 +12,10 @@ import (
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the resource(s) from which to delete tags.
-	// You can associate tags with the following Device Farm resources: PROJECT,
-	// RUN, NETWORK_PROFILE, INSTANCE_PROFILE, DEVICE_INSTANCE, SESSION, DEVICE_POOL,
-	// DEVICE, and VPCE_CONFIGURATION.
+	// The Amazon Resource Name (ARN) of the resource or resources from which to
+	// delete tags. You can associate tags with the following Device Farm resources:
+	// PROJECT, RUN, NETWORK_PROFILE, INSTANCE_PROFILE, DEVICE_INSTANCE, SESSION,
+	// DEVICE_POOL, DEVICE, and VPCE_CONFIGURATION.
 	//
 	// ResourceARN is a required field
 	ResourceARN *string `min:"32" type:"string" required:"true"`

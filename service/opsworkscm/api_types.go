@@ -289,3 +289,51 @@ type ServerEvent struct {
 func (s ServerEvent) String() string {
 	return awsutil.Prettify(s)
 }
+
+// A map that contains tag keys and tag values to attach to an AWS OpsWorks
+// for Chef Automate or AWS OpsWorks for Puppet Enterprise server. Leading and
+// trailing white spaces are trimmed from both the key and value. A maximum
+// of 50 user-applied tags is allowed for tag-supported AWS OpsWorks-CM resources.
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// A tag key, such as Stage or Name. A tag key cannot be empty. The key can
+	// be a maximum of 127 characters, and can contain only Unicode letters, numbers,
+	// or separators, or the following special characters: + - = . _ : /
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
+
+	// An optional tag value, such as Production or test-owcm-server. The value
+	// can be a maximum of 255 characters, and contain only Unicode letters, numbers,
+	// or separators, or the following special characters: + - = . _ : /
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}

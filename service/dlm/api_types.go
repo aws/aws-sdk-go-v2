@@ -89,6 +89,145 @@ func (s CreateRule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the retention rule for cross-Region snapshot copies.
+type CrossRegionCopyRetainRule struct {
+	_ struct{} `type:"structure"`
+
+	// The amount of time to retain each snapshot. The maximum is 100 years. This
+	// is equivalent to 1200 months, 5200 weeks, or 36500 days.
+	Interval *int64 `min:"1" type:"integer"`
+
+	// The unit of time for time-based retention.
+	IntervalUnit RetentionIntervalUnitValues `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s CrossRegionCopyRetainRule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CrossRegionCopyRetainRule) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CrossRegionCopyRetainRule"}
+	if s.Interval != nil && *s.Interval < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Interval", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CrossRegionCopyRetainRule) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Interval != nil {
+		v := *s.Interval
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Interval", protocol.Int64Value(v), metadata)
+	}
+	if len(s.IntervalUnit) > 0 {
+		v := s.IntervalUnit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IntervalUnit", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Specifies a rule for cross-Region snapshot copies.
+type CrossRegionCopyRule struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to
+	// use for EBS encryption. If this parameter is not specified, your AWS managed
+	// CMK for EBS is used.
+	CmkArn *string `type:"string"`
+
+	// Copy all user-defined tags from the source snapshot to the copied snapshot.
+	CopyTags *bool `type:"boolean"`
+
+	// To encrypt a copy of an unencrypted snapshot if encryption by default is
+	// not enabled, enable encryption using this parameter. Copies of encrypted
+	// snapshots are encrypted, even if this parameter is false or if encryption
+	// by default is not enabled.
+	//
+	// Encrypted is a required field
+	Encrypted *bool `type:"boolean" required:"true"`
+
+	// The retention rule.
+	RetainRule *CrossRegionCopyRetainRule `type:"structure"`
+
+	// The target Region.
+	//
+	// TargetRegion is a required field
+	TargetRegion *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CrossRegionCopyRule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CrossRegionCopyRule) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CrossRegionCopyRule"}
+
+	if s.Encrypted == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Encrypted"))
+	}
+
+	if s.TargetRegion == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetRegion"))
+	}
+	if s.RetainRule != nil {
+		if err := s.RetainRule.Validate(); err != nil {
+			invalidParams.AddNested("RetainRule", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CrossRegionCopyRule) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CmkArn != nil {
+		v := *s.CmkArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CmkArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CopyTags != nil {
+		v := *s.CopyTags
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CopyTags", protocol.BoolValue(v), metadata)
+	}
+	if s.Encrypted != nil {
+		v := *s.Encrypted
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Encrypted", protocol.BoolValue(v), metadata)
+	}
+	if s.RetainRule != nil {
+		v := s.RetainRule
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "RetainRule", v, metadata)
+	}
+	if s.TargetRegion != nil {
+		v := *s.TargetRegion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TargetRegion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Specifies a rule for enabling fast snapshot restore. You can enable fast
 // snapshot restore based on either a count or a time interval.
 type FastRestoreRule struct {
@@ -551,10 +690,13 @@ type Schedule struct {
 	// created by this policy.
 	CopyTags *bool `type:"boolean"`
 
-	// The create rule.
+	// The creation rule.
 	CreateRule *CreateRule `type:"structure"`
 
-	// Enable fast snapshot restore.
+	// The rule for cross-Region snapshot copies.
+	CrossRegionCopyRules []CrossRegionCopyRule `type:"list"`
+
+	// The rule for enabling fast snapshot restore.
 	FastRestoreRule *FastRestoreRule `type:"structure"`
 
 	// The name of the schedule.
@@ -585,6 +727,13 @@ func (s *Schedule) Validate() error {
 	if s.CreateRule != nil {
 		if err := s.CreateRule.Validate(); err != nil {
 			invalidParams.AddNested("CreateRule", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.CrossRegionCopyRules != nil {
+		for i, v := range s.CrossRegionCopyRules {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CrossRegionCopyRules", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 	if s.FastRestoreRule != nil {
@@ -631,6 +780,18 @@ func (s Schedule) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "CreateRule", v, metadata)
+	}
+	if s.CrossRegionCopyRules != nil {
+		v := s.CrossRegionCopyRules
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "CrossRegionCopyRules", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.FastRestoreRule != nil {
 		v := s.FastRestoreRule

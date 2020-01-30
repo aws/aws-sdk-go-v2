@@ -94,11 +94,13 @@ type ModifyClusterInput struct {
 	// in the Amazon Redshift Cluster Management Guide.
 	ElasticIp *string `type:"string"`
 
-	// Indicates whether the cluster is encrypted. If the cluster is encrypted and
-	// you provide a value for the KmsKeyId parameter, we will encrypt the cluster
-	// with the provided KmsKeyId. If you don't provide a KmsKeyId, we will encrypt
-	// with the default key. In the China region we will use legacy encryption if
-	// you specify that the cluster is encrypted.
+	// Indicates whether the cluster is encrypted. If the value is encrypted (true)
+	// and you provide a value for the KmsKeyId parameter, we encrypt the cluster
+	// with the provided KmsKeyId. If you don't provide a KmsKeyId, we encrypt with
+	// the default key. In the China region we use legacy encryption if you specify
+	// that the cluster is encrypted.
+	//
+	// If the value is not encrypted (false), then the cluster is decrypted.
 	Encrypted *bool `type:"boolean"`
 
 	// An option that specifies whether to create the cluster with enhanced VPC
@@ -185,28 +187,20 @@ type ModifyClusterInput struct {
 	// The new node type of the cluster. If you specify a new node type, you must
 	// also specify the number of nodes parameter.
 	//
-	// When you submit your request to resize a cluster, Amazon Redshift sets access
-	// permissions for the cluster to read-only. After Amazon Redshift provisions
-	// a new cluster according to your resize requirements, there will be a temporary
-	// outage while the old cluster is deleted and your connection is switched to
-	// the new cluster. When the new connection is complete, the original access
-	// permissions for the cluster are restored. You can use DescribeResize to track
-	// the progress of the resize request.
+	// For more information about resizing clusters, go to Resizing Clusters in
+	// Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html)
+	// in the Amazon Redshift Cluster Management Guide.
 	//
 	// Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large
-	// | dc2.8xlarge
+	// | dc2.8xlarge | ra3.16xlarge
 	NodeType *string `type:"string"`
 
 	// The new number of nodes of the cluster. If you specify a new number of nodes,
 	// you must also specify the node type parameter.
 	//
-	// When you submit your request to resize a cluster, Amazon Redshift sets access
-	// permissions for the cluster to read-only. After Amazon Redshift provisions
-	// a new cluster according to your resize requirements, there will be a temporary
-	// outage while the old cluster is deleted and your connection is switched to
-	// the new cluster. When the new connection is complete, the original access
-	// permissions for the cluster are restored. You can use DescribeResize to track
-	// the progress of the resize request.
+	// For more information about resizing clusters, go to Resizing Clusters in
+	// Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html)
+	// in the Amazon Redshift Cluster Management Guide.
 	//
 	// Valid Values: Integer greater than 0.
 	NumberOfNodes *int64 `type:"integer"`
@@ -274,17 +268,18 @@ const opModifyCluster = "ModifyCluster"
 // ModifyClusterRequest returns a request value for making API operation for
 // Amazon Redshift.
 //
-// Modifies the settings for a cluster. For example, you can add another security
-// or parameter group, update the preferred maintenance window, or change the
-// master user password. Resetting a cluster password or modifying the security
-// groups associated with a cluster do not need a reboot. However, modifying
-// a parameter group requires a reboot for parameters to take effect. For more
-// information about managing clusters, go to Amazon Redshift Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
-// in the Amazon Redshift Cluster Management Guide.
+// Modifies the settings for a cluster.
 //
 // You can also change node type and the number of nodes to scale up or down
 // the cluster. When resizing a cluster, you must specify both the number of
 // nodes and the node type even if one of the parameters does not change.
+//
+// You can add another security or parameter group, or change the master user
+// password. Resetting a cluster password or modifying the security groups associated
+// with a cluster do not need a reboot. However, modifying a parameter group
+// requires a reboot for parameters to take effect. For more information about
+// managing clusters, go to Amazon Redshift Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using ModifyClusterRequest.
 //    req := client.ModifyClusterRequest(params)

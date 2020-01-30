@@ -33,6 +33,17 @@ type StartBuildInput struct {
 	// in the build project.
 	ComputeTypeOverride ComputeType `locationName:"computeTypeOverride" type:"string" enum:"true"`
 
+	// The AWS Key Management Service (AWS KMS) customer master key (CMK) that overrides
+	// the one specified in the build project. The CMK key encrypts the build output
+	// artifacts.
+	//
+	// You can use a cross-account KMS key to encrypt the build output artifacts
+	// if your service role has permission to that key.
+	//
+	// You can specify either the Amazon Resource Name (ARN) of the CMK or, if available,
+	// the CMK's alias (using the format alias/alias-name ).
+	EncryptionKeyOverride *string `locationName:"encryptionKeyOverride" min:"1" type:"string"`
+
 	// A container type for this build that overrides the one specified in the build
 	// project.
 	EnvironmentTypeOverride EnvironmentType `locationName:"environmentTypeOverride" type:"string" enum:"true"`
@@ -174,6 +185,9 @@ func (s StartBuildInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartBuildInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartBuildInput"}
+	if s.EncryptionKeyOverride != nil && len(*s.EncryptionKeyOverride) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EncryptionKeyOverride", 1))
+	}
 	if s.ImageOverride != nil && len(*s.ImageOverride) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ImageOverride", 1))
 	}

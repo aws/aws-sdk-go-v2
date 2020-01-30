@@ -16,7 +16,7 @@ type DeleteTagsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) from which you want to remove the tag or tags.
-	// For example, arn:aws:redshift:us-east-1:123456789:cluster:t1.
+	// For example, arn:aws:redshift:us-east-2:123456789:cluster:t1.
 	//
 	// ResourceName is a required field
 	ResourceName *string `type:"string" required:"true"`
@@ -64,8 +64,8 @@ const opDeleteTags = "DeleteTags"
 // DeleteTagsRequest returns a request value for making API operation for
 // Amazon Redshift.
 //
-// Deletes a tag or tags from a resource. You must provide the ARN of the resource
-// from which you want to delete the tag or tags.
+// Deletes tags from a resource. You must provide the ARN of the resource from
+// which you want to delete the tag or tags.
 //
 //    // Example sending a request using DeleteTagsRequest.
 //    req := client.DeleteTagsRequest(params)

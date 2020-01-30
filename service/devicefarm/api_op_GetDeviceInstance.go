@@ -44,7 +44,7 @@ func (s *GetDeviceInstanceInput) Validate() error {
 type GetDeviceInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object containing information about your device instance.
+	// An object that contains information about your device instance.
 	DeviceInstance *DeviceInstance `locationName:"deviceInstance" type:"structure"`
 }
 
@@ -58,7 +58,7 @@ const opGetDeviceInstance = "GetDeviceInstance"
 // GetDeviceInstanceRequest returns a request value for making API operation for
 // AWS Device Farm.
 //
-// Returns information about a device instance belonging to a private device
+// Returns information about a device instance that belongs to a private device
 // fleet.
 //
 //    // Example sending a request using GetDeviceInstanceRequest.

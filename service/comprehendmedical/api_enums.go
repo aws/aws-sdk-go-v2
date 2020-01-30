@@ -84,6 +84,77 @@ func (enum EntityType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ICD10CMAttributeType string
+
+// Enum values for ICD10CMAttributeType
+const (
+	ICD10CMAttributeTypeAcuity          ICD10CMAttributeType = "ACUITY"
+	ICD10CMAttributeTypeDirection       ICD10CMAttributeType = "DIRECTION"
+	ICD10CMAttributeTypeSystemOrganSite ICD10CMAttributeType = "SYSTEM_ORGAN_SITE"
+	ICD10CMAttributeTypeQuality         ICD10CMAttributeType = "QUALITY"
+	ICD10CMAttributeTypeQuantity        ICD10CMAttributeType = "QUANTITY"
+)
+
+func (enum ICD10CMAttributeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ICD10CMAttributeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ICD10CMEntityCategory string
+
+// Enum values for ICD10CMEntityCategory
+const (
+	ICD10CMEntityCategoryMedicalCondition ICD10CMEntityCategory = "MEDICAL_CONDITION"
+)
+
+func (enum ICD10CMEntityCategory) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ICD10CMEntityCategory) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ICD10CMEntityType string
+
+// Enum values for ICD10CMEntityType
+const (
+	ICD10CMEntityTypeDxName ICD10CMEntityType = "DX_NAME"
+)
+
+func (enum ICD10CMEntityType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ICD10CMEntityType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ICD10CMTraitName string
+
+// Enum values for ICD10CMTraitName
+const (
+	ICD10CMTraitNameNegation  ICD10CMTraitName = "NEGATION"
+	ICD10CMTraitNameDiagnosis ICD10CMTraitName = "DIAGNOSIS"
+	ICD10CMTraitNameSign      ICD10CMTraitName = "SIGN"
+	ICD10CMTraitNameSymptom   ICD10CMTraitName = "SYMPTOM"
+)
+
+func (enum ICD10CMTraitName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ICD10CMTraitName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type JobStatus string
 
 // Enum values for JobStatus
@@ -118,6 +189,77 @@ func (enum LanguageCode) MarshalValue() (string, error) {
 }
 
 func (enum LanguageCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RxNormAttributeType string
+
+// Enum values for RxNormAttributeType
+const (
+	RxNormAttributeTypeDosage      RxNormAttributeType = "DOSAGE"
+	RxNormAttributeTypeDuration    RxNormAttributeType = "DURATION"
+	RxNormAttributeTypeForm        RxNormAttributeType = "FORM"
+	RxNormAttributeTypeFrequency   RxNormAttributeType = "FREQUENCY"
+	RxNormAttributeTypeRate        RxNormAttributeType = "RATE"
+	RxNormAttributeTypeRouteOrMode RxNormAttributeType = "ROUTE_OR_MODE"
+	RxNormAttributeTypeStrength    RxNormAttributeType = "STRENGTH"
+)
+
+func (enum RxNormAttributeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RxNormAttributeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RxNormEntityCategory string
+
+// Enum values for RxNormEntityCategory
+const (
+	RxNormEntityCategoryMedication RxNormEntityCategory = "MEDICATION"
+)
+
+func (enum RxNormEntityCategory) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RxNormEntityCategory) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RxNormEntityType string
+
+// Enum values for RxNormEntityType
+const (
+	RxNormEntityTypeBrandName   RxNormEntityType = "BRAND_NAME"
+	RxNormEntityTypeGenericName RxNormEntityType = "GENERIC_NAME"
+)
+
+func (enum RxNormEntityType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RxNormEntityType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RxNormTraitName string
+
+// Enum values for RxNormTraitName
+const (
+	RxNormTraitNameNegation RxNormTraitName = "NEGATION"
+)
+
+func (enum RxNormTraitName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RxNormTraitName) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

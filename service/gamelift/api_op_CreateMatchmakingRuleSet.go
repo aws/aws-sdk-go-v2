@@ -4,6 +4,7 @@ package gamelift
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -13,18 +14,28 @@ import (
 type CreateMatchmakingRuleSetInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a matchmaking rule set. A matchmaking configuration
-	// identifies the rule set it uses by this name value. (Note: The rule set name
-	// is different from the optional "name" field in the rule set body.)
+	// A unique identifier for a matchmaking rule set. A matchmaking configuration
+	// identifies the rule set it uses by this name value. Note that the rule set
+	// name is different from the optional name field in the rule set body.
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
-	// Collection of matchmaking rules, formatted as a JSON string. Comments are
+	// A collection of matchmaking rules, formatted as a JSON string. Comments are
 	// not allowed in JSON, but most elements support a description field.
 	//
 	// RuleSetBody is a required field
 	RuleSetBody *string `min:"1" type:"string" required:"true"`
+
+	// A list of labels to assign to the new matchmaking rule set resource. Tags
+	// are developer-defined key-value pairs. Tagging AWS resources are useful for
+	// resource management, access management and cost allocation. For more information,
+	// see Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the AWS General Reference. Once the resource is created, you can use TagResource,
+	// UntagResource, and ListTagsForResource to add, remove, and view tags. The
+	// maximum tag limit may be lower than stated. See the AWS General Reference
+	// for actual tagging limits.
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -46,6 +57,13 @@ func (s *CreateMatchmakingRuleSetInput) Validate() error {
 	if s.RuleSetBody != nil && len(*s.RuleSetBody) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RuleSetBody", 1))
 	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -57,7 +75,7 @@ func (s *CreateMatchmakingRuleSetInput) Validate() error {
 type CreateMatchmakingRuleSetOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Object that describes the newly created matchmaking rule set.
+	// The newly created matchmaking rule set.
 	//
 	// RuleSet is a required field
 	RuleSet *MatchmakingRuleSet `type:"structure" required:"true"`
@@ -74,12 +92,12 @@ const opCreateMatchmakingRuleSet = "CreateMatchmakingRuleSet"
 // Amazon GameLift.
 //
 // Creates a new rule set for FlexMatch matchmaking. A rule set describes the
-// type of match to create, such as the number and size of teams, and sets the
-// parameters for acceptable player matches, such as minimum skill level or
-// character type. A rule set is used by a MatchmakingConfiguration.
+// type of match to create, such as the number and size of teams. It also sets
+// the parameters for acceptable player matches, such as minimum skill level
+// or character type. A rule set is used by a MatchmakingConfiguration.
 //
 // To create a matchmaking rule set, provide unique rule set name and the rule
-// set body in JSON format. Rule sets must be defined in the same region as
+// set body in JSON format. Rule sets must be defined in the same Region as
 // the matchmaking configuration they are used with.
 //
 // Since matchmaking rule sets cannot be edited, it is a good idea to check

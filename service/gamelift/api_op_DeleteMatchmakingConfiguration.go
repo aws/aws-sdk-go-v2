@@ -13,10 +13,11 @@ import (
 type DeleteMatchmakingConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a matchmaking configuration
+	// A unique identifier for a matchmaking configuration. You can use either the
+	// configuration name or ARN value.
 	//
 	// Name is a required field
-	Name *string `type:"string" required:"true"`
+	Name *string `min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -30,6 +31,9 @@ func (s *DeleteMatchmakingConfigurationInput) Validate() error {
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {

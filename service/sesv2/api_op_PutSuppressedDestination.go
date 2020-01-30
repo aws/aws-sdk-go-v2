@@ -10,16 +10,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// A request to suppress an email destination.
+// A request to add an email destination to the suppression list for your account.
 type PutSuppressedDestinationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Email destination to be suppressed.
+	// The email address that should be added to the suppression list for your account.
 	//
 	// EmailAddress is a required field
 	EmailAddress *string `type:"string" required:"true"`
 
-	// Reason for which the email destination is suppressed.
+	// The factors that should cause the email address to be added to the suppression
+	// list for your account.
 	//
 	// Reason is a required field
 	Reason SuppressionListReason `type:"string" required:"true" enum:"true"`
@@ -87,7 +88,7 @@ const opPutSuppressedDestination = "PutSuppressedDestination"
 // PutSuppressedDestinationRequest returns a request value for making API operation for
 // Amazon Simple Email Service.
 //
-// Puts (overwrites) an email destination in your suppression list.
+// Adds an email address to the suppression list for your account.
 //
 //    // Example sending a request using PutSuppressedDestinationRequest.
 //    req := client.PutSuppressedDestinationRequest(params)

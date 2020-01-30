@@ -149,8 +149,8 @@ type SendEmailOutput struct {
 	// A unique identifier for the message that is generated when the message is
 	// accepted.
 	//
-	// It is possible for the Amazon SES API v2 to accept a message without sending
-	// it. This can happen when the message that you're trying to send has an attachment
+	// It's possible for Amazon SES to accept a message without sending it. This
+	// can happen when the message that you're trying to send has an attachment
 	// contains a virus, or when you send a templated email that contains invalid
 	// personalization content, for example.
 	MessageId *string `type:"string"`
@@ -181,8 +181,8 @@ const opSendEmail = "SendEmail"
 // of messages:
 //
 //    * Simple – A standard email message. When you create this type of message,
-//    you specify the sender, the recipient, and the message body, and the Amazon
-//    SES API v2 assembles the message for you.
+//    you specify the sender, the recipient, and the message body, and Amazon
+//    SES assembles the message for you.
 //
 //    * Raw – A raw, MIME-formatted email message. When you send this type
 //    of email, you have to specify all of the message headers, as well as the

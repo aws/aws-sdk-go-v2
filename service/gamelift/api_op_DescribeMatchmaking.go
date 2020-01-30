@@ -13,7 +13,8 @@ import (
 type DescribeMatchmakingInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a matchmaking ticket. You can include up to 10 ID values.
+	// A unique identifier for a matchmaking ticket. You can include up to 10 ID
+	// values.
 	//
 	// TicketIds is a required field
 	TicketIds []string `type:"list" required:"true"`
@@ -42,7 +43,7 @@ func (s *DescribeMatchmakingInput) Validate() error {
 type DescribeMatchmakingOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Collection of existing matchmaking ticket objects matching the request.
+	// A collection of existing matchmaking ticket objects matching the request.
 	TicketList []MatchmakingTicket `type:"list"`
 }
 
@@ -73,7 +74,7 @@ const opDescribeMatchmaking = "DescribeMatchmaking"
 //
 //  Add FlexMatch to a Game Client (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html)
 //
-//  Set Up FlexMatch Event Notification (https://docs.aws.amazon.com/gamelift/latest/developerguidematch-notification.html)
+//  Set Up FlexMatch Event Notification (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html)
 //
 // Related operations
 //

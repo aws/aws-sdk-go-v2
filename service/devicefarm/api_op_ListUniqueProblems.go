@@ -53,7 +53,7 @@ type ListUniqueProblemsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// If the number of items that are returned is significantly large, this is
-	// an identifier that is also returned, which can be used in a subsequent call
+	// an identifier that is also returned. It can be used in a subsequent call
 	// to this operation to return the next set of items in the list.
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
 
@@ -61,19 +61,19 @@ type ListUniqueProblemsOutput struct {
 	//
 	// Allowed values include:
 	//
-	//    * PENDING: A pending condition.
+	//    * PENDING
 	//
-	//    * PASSED: A passing condition.
+	//    * PASSED
 	//
-	//    * WARNED: A warning condition.
+	//    * WARNED
 	//
-	//    * FAILED: A failed condition.
+	//    * FAILED
 	//
-	//    * SKIPPED: A skipped condition.
+	//    * SKIPPED
 	//
-	//    * ERRORED: An error condition.
+	//    * ERRORED
 	//
-	//    * STOPPED: A stopped condition.
+	//    * STOPPED
 	UniqueProblems map[string][]UniqueProblem `locationName:"uniqueProblems" type:"map"`
 }
 
@@ -87,7 +87,12 @@ const opListUniqueProblems = "ListUniqueProblems"
 // ListUniqueProblemsRequest returns a request value for making API operation for
 // AWS Device Farm.
 //
-// Gets information about unique problems.
+// Gets information about unique problems, such as exceptions or crashes.
+//
+// Unique problems are defined as a single instance of an error across a run,
+// job, or suite. For example, if a call in your application consistently raises
+// an exception (OutOfBoundsException in MyActivity.java:386), ListUniqueProblems
+// returns a single entry instead of many individual entries for that exception.
 //
 //    // Example sending a request using ListUniqueProblemsRequest.
 //    req := client.ListUniqueProblemsRequest(params)

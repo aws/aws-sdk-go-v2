@@ -106,9 +106,10 @@ const opPutLogEvents = "PutLogEvents"
 //
 // You must include the sequence token obtained from the response of the previous
 // call. An upload in a newly created log stream does not require a sequence
-// token. You can also get the sequence token using DescribeLogStreams. If you
-// call PutLogEvents twice within a narrow time period using the same value
-// for sequenceToken, both calls may be successful, or one may be rejected.
+// token. You can also get the sequence token in the expectedSequenceToken field
+// from InvalidSequenceTokenException. If you call PutLogEvents twice within
+// a narrow time period using the same value for sequenceToken, both calls may
+// be successful, or one may be rejected.
 //
 // The batch of events must satisfy the following constraints:
 //
@@ -128,10 +129,13 @@ const opPutLogEvents = "PutLogEvents"
 //    for PowerShell and the AWS SDK for .NET, the timestamp is specified in
 //    .NET format: yyyy-mm-ddThh:mm:ss. For example, 2017-09-15T13:45:30.)
 //
-//    * The maximum number of log events in a batch is 10,000.
-//
 //    * A batch of log events in a single request cannot span more than 24 hours.
 //    Otherwise, the operation fails.
+//
+//    * The maximum number of log events in a batch is 10,000.
+//
+//    * There is a quota of 5 requests per second per log stream. Additional
+//    requests are throttled. This quota can't be changed.
 //
 // If a call to PutLogEvents returns "UnrecognizedClientException" the most
 // likely cause is an invalid AWS access key ID or secret key.

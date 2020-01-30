@@ -75,7 +75,9 @@ const opListAssociations = "ListAssociations"
 // ListAssociationsRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Lists the associations for the specified Systems Manager document or instance.
+// Returns all State Manager associations in the current AWS account and Region.
+// You can limit the results to a specific State Manager association document
+// or instance by specifying a filter.
 //
 //    // Example sending a request using ListAssociationsRequest.
 //    req := client.ListAssociationsRequest(params)

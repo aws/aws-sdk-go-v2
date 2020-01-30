@@ -45,6 +45,9 @@ type Account struct {
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
+	// The sign-in delegate groups associated with the account.
+	SigninDelegateGroups []SigninDelegateGroup `type:"list"`
+
 	// Supported licenses for the Amazon Chime account.
 	SupportedLicenses []License `type:"list"`
 }
@@ -92,6 +95,18 @@ func (s Account) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SigninDelegateGroups != nil {
+		v := s.SigninDelegateGroups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SigninDelegateGroups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.SupportedLicenses != nil {
 		v := s.SupportedLicenses
@@ -143,6 +158,40 @@ func (s AccountSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "EnableDialOut", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// The Alexa for Business metadata associated with an Amazon Chime user, used
+// to integrate Alexa for Business with a device.
+type AlexaForBusinessMetadata struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the room resource.
+	AlexaForBusinessRoomArn *string `type:"string" sensitive:"true"`
+
+	// Starts or stops Alexa for Business.
+	IsAlexaForBusinessEnabled *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s AlexaForBusinessMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AlexaForBusinessMetadata) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AlexaForBusinessRoomArn != nil {
+		v := *s.AlexaForBusinessRoomArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AlexaForBusinessRoomArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.IsAlexaForBusinessEnabled != nil {
+		v := *s.IsAlexaForBusinessEnabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IsAlexaForBusinessEnabled", protocol.BoolValue(v), metadata)
 	}
 	return nil
 }
@@ -646,7 +695,9 @@ type Meeting struct {
 	// The media placement for the meeting.
 	MediaPlacement *MediaPlacement `type:"structure"`
 
-	// The Region in which to create the meeting. Available values: us-east-1, us-west-2.
+	// The Region in which to create the meeting. Available values: ap-northeast-1,
+	// ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-west-1,
+	// eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
 	MediaRegion *string `type:"string"`
 
 	// The Amazon Chime SDK meeting ID.
@@ -1542,6 +1593,31 @@ func (s RoomMembership) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An Active Directory (AD) group whose members are granted permission to act
+// as delegates.
+type SigninDelegateGroup struct {
+	_ struct{} `type:"structure"`
+
+	// The group name.
+	GroupName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SigninDelegateGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SigninDelegateGroup) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The streaming configuration associated with an Amazon Chime Voice Connector.
 // Specifies whether media streaming is enabled for sending to Amazon Kinesis,
 // and shows the retention period for the Amazon Kinesis data, in hours.
@@ -1849,6 +1925,9 @@ func (s UpdatePhoneNumberRequestItem) MarshalFields(e protocol.FieldEncoder) err
 type UpdateUserRequestItem struct {
 	_ struct{} `type:"structure"`
 
+	// The Alexa for Business metadata.
+	AlexaForBusinessMetadata *AlexaForBusinessMetadata `type:"structure"`
+
 	// The user license type.
 	LicenseType License `type:"string" enum:"true"`
 
@@ -1856,6 +1935,9 @@ type UpdateUserRequestItem struct {
 	//
 	// UserId is a required field
 	UserId *string `type:"string" required:"true"`
+
+	// The user type.
+	UserType UserType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1879,6 +1961,12 @@ func (s *UpdateUserRequestItem) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateUserRequestItem) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AlexaForBusinessMetadata != nil {
+		v := s.AlexaForBusinessMetadata
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AlexaForBusinessMetadata", v, metadata)
+	}
 	if len(s.LicenseType) > 0 {
 		v := s.LicenseType
 
@@ -1891,6 +1979,12 @@ func (s UpdateUserRequestItem) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if len(s.UserType) > 0 {
+		v := s.UserType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UserType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	return nil
 }
 
@@ -1900,6 +1994,9 @@ type User struct {
 
 	// The Amazon Chime account ID.
 	AccountId *string `type:"string"`
+
+	// The Alexa for Business metadata.
+	AlexaForBusinessMetadata *AlexaForBusinessMetadata `type:"structure"`
 
 	// The display name of the user.
 	DisplayName *string `type:"string" sensitive:"true"`
@@ -1933,6 +2030,9 @@ type User struct {
 
 	// The user registration status.
 	UserRegistrationStatus RegistrationStatus `type:"string" enum:"true"`
+
+	// The user type.
+	UserType UserType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1947,6 +2047,12 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "AccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AlexaForBusinessMetadata != nil {
+		v := s.AlexaForBusinessMetadata
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AlexaForBusinessMetadata", v, metadata)
 	}
 	if s.DisplayName != nil {
 		v := *s.DisplayName
@@ -2009,6 +2115,12 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "UserRegistrationStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.UserType) > 0 {
+		v := s.UserType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UserType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }

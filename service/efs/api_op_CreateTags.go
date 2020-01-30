@@ -118,6 +118,9 @@ const opCreateTags = "CreateTags"
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateTags
 func (c *Client) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, CreateTags, has been deprecated")
+	}
 	op := &aws.Operation{
 		Name:       opCreateTags,
 		HTTPMethod: "POST",

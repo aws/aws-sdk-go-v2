@@ -1017,10 +1017,12 @@
       "type":"string",
       "enum":[
         "AutoScalingGroupNotFound",
+        "AutoScalingGroupInvalidConfiguration",
         "Ec2SecurityGroupNotFound",
         "Ec2SecurityGroupDeletionFailure",
         "Ec2LaunchTemplateNotFound",
         "Ec2LaunchTemplateVersionMismatch",
+        "Ec2SubnetNotFound",
         "IamInstanceProfileNotFound",
         "IamNodeRoleNotFound",
         "AsgInstanceLaunchFailures",
@@ -1361,7 +1363,8 @@
         "LabelsToRemove",
         "MaxSize",
         "MinSize",
-        "ReleaseVersion"
+        "ReleaseVersion",
+        "PublicAccessCidrs"
       ]
     },
     "UpdateParams":{
@@ -1392,7 +1395,8 @@
         "subnetIds":{"shape":"StringList"},
         "securityGroupIds":{"shape":"StringList"},
         "endpointPublicAccess":{"shape":"BoxedBoolean"},
-        "endpointPrivateAccess":{"shape":"BoxedBoolean"}
+        "endpointPrivateAccess":{"shape":"BoxedBoolean"},
+        "publicAccessCidrs":{"shape":"StringList"}
       }
     },
     "VpcConfigResponse":{
@@ -1403,7 +1407,8 @@
         "clusterSecurityGroupId":{"shape":"String"},
         "vpcId":{"shape":"String"},
         "endpointPublicAccess":{"shape":"Boolean"},
-        "endpointPrivateAccess":{"shape":"Boolean"}
+        "endpointPrivateAccess":{"shape":"Boolean"},
+        "publicAccessCidrs":{"shape":"StringList"}
       }
     },
     "labelKey":{

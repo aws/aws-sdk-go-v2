@@ -91,10 +91,10 @@ const opPutTraceSegments = "PutTraceSegments"
 // PutTraceSegmentsRequest returns a request value for making API operation for
 // AWS X-Ray.
 //
-// Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents
-// and sends them to the X-Ray daemon, which uploads them in batches. A segment
-// document can be a completed segment, an in-progress segment, or an array
-// of subsegments.
+// Uploads segment documents to AWS X-Ray. The X-Ray SDK (https://docs.aws.amazon.com/xray/index.html)
+// generates segment documents and sends them to the X-Ray daemon, which uploads
+// them in batches. A segment document can be a completed segment, an in-progress
+// segment, or an array of subsegments.
 //
 // Segments must include the following fields. For the full segment document
 // schema, see AWS X-Ray Segment Documents (https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html)

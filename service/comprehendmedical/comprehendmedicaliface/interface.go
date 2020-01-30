@@ -71,6 +71,10 @@ type ClientAPI interface {
 
 	DetectPHIRequest(*comprehendmedical.DetectPHIInput) comprehendmedical.DetectPHIRequest
 
+	InferICD10CMRequest(*comprehendmedical.InferICD10CMInput) comprehendmedical.InferICD10CMRequest
+
+	InferRxNormRequest(*comprehendmedical.InferRxNormInput) comprehendmedical.InferRxNormRequest
+
 	ListEntitiesDetectionV2JobsRequest(*comprehendmedical.ListEntitiesDetectionV2JobsInput) comprehendmedical.ListEntitiesDetectionV2JobsRequest
 
 	ListPHIDetectionJobsRequest(*comprehendmedical.ListPHIDetectionJobsInput) comprehendmedical.ListPHIDetectionJobsRequest

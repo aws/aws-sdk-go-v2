@@ -15,7 +15,8 @@ import (
 type DeleteAliasInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a fleet alias. Specify the alias you want to delete.
+	// A unique identifier of the alias that you want to delete. You can use either
+	// the alias ID or ARN value.
 	//
 	// AliasId is a required field
 	AliasId *string `type:"string" required:"true"`

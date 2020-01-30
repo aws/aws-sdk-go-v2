@@ -140,6 +140,32 @@ type ClassifierEvaluationMetrics struct {
 	// 0.
 	F1Score *float64 `type:"double"`
 
+	// Indicates the fraction of labels that are incorrectly predicted. Also seen
+	// as the fraction of wrong labels compared to the total number of labels. Scores
+	// closer to zero are better.
+	HammingLoss *float64 `type:"double"`
+
+	// A measure of how accurate the classifier results are for the test data. It
+	// is a combination of the Micro Precision and Micro Recall values. The Micro
+	// F1Score is the harmonic mean of the two scores. The highest score is 1, and
+	// the worst score is 0.
+	MicroF1Score *float64 `type:"double"`
+
+	// A measure of the usefulness of the recognizer results in the test data. High
+	// precision means that the recognizer returned substantially more relevant
+	// results than irrelevant ones. Unlike the Precision metric which comes from
+	// averaging the precision of all available labels, this is based on the overall
+	// score of all precision scores added together.
+	MicroPrecision *float64 `type:"double"`
+
+	// A measure of how complete the classifier results are for the test data. High
+	// recall means that the classifier returned most of the relevant results. Specifically,
+	// this indicates how many of the correct categories in the text that the model
+	// can predict. It is a percentage of correct categories in the text that can
+	// found. Instead of averaging the recall scores of all labels (as with Recall),
+	// micro Recall is based on the overall score of all recall scores added together.
+	MicroRecall *float64 `type:"double"`
+
 	// A measure of the usefulness of the classifier results in the test data. High
 	// precision means that the classifier returned substantially more relevant
 	// results than irrelevant ones.
@@ -328,6 +354,14 @@ func (s DocumentClassifierFilter) String() string {
 type DocumentClassifierInputDataConfig struct {
 	_ struct{} `type:"structure"`
 
+	// Indicates the delimiter used to separate each label for training a multi-label
+	// classifier. The default delimiter between labels is a pipe (|). You can use
+	// a different character as a delimiter (if it's an allowed character) by specifying
+	// it under Delimiter for labels. If the training documents use a delimiter
+	// other than the default or the delimiter you specify, the labels on that line
+	// will be combined to make a single unique label, such as LABELLABELLABEL.
+	LabelDelimiter *string `min:"1" type:"string"`
+
 	// The Amazon S3 URI for the input data. The S3 bucket must be in the same region
 	// as the API endpoint that you are calling. The URI can point to a single input
 	// file or it can provide the prefix for a collection of input files.
@@ -348,6 +382,9 @@ func (s DocumentClassifierInputDataConfig) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DocumentClassifierInputDataConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DocumentClassifierInputDataConfig"}
+	if s.LabelDelimiter != nil && len(*s.LabelDelimiter) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("LabelDelimiter", 1))
+	}
 
 	if s.S3Uri == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3Uri"))
@@ -424,6 +461,12 @@ type DocumentClassifierProperties struct {
 	// Additional information about the status of the classifier.
 	Message *string `type:"string"`
 
+	// Indicates the mode in which the specific classifier was trained. This also
+	// indicates the format of input documents and the format of the confusion matrix.
+	// Each classifier can only be trained in one mode and this cannot be changed
+	// once the classifier is trained.
+	Mode DocumentClassifierMode `type:"string" enum:"true"`
+
 	// Provides output results configuration parameters for custom classifier jobs.
 	OutputDataConfig *DocumentClassifierOutputDataConfig `type:"structure"`
 
@@ -462,6 +505,22 @@ type DocumentClassifierProperties struct {
 
 // String returns the string representation
 func (s DocumentClassifierProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Specifies one of the label or labels that categorize the document being analyzed.
+type DocumentLabel struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the label.
+	Name *string `min:"1" type:"string"`
+
+	// The confidence score that Amazon Comprehend has this label correctly attributed.
+	Score *float64 `type:"float"`
+}
+
+// String returns the string representation
+func (s DocumentLabel) String() string {
 	return awsutil.Prettify(s)
 }
 

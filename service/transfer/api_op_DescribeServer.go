@@ -61,7 +61,8 @@ const opDescribeServer = "DescribeServer"
 //
 // Describes the server that you specify by passing the ServerId parameter.
 //
-// The response contains a description of the server's properties.
+// The response contains a description of the server's properties. When you
+// set EndpointType to VPC, the response will contain the EndpointDetails.
 //
 //    // Example sending a request using DescribeServerRequest.
 //    req := client.DescribeServerRequest(params)

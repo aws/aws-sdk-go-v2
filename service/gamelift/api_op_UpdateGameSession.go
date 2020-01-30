@@ -13,17 +13,17 @@ import (
 type UpdateGameSessionInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for the game session to update.
+	// A unique identifier for the game session to update.
 	//
 	// GameSessionId is a required field
 	GameSessionId *string `min:"1" type:"string" required:"true"`
 
-	// Maximum number of players that can be connected simultaneously to the game
-	// session.
+	// The maximum number of players that can be connected simultaneously to the
+	// game session.
 	MaximumPlayerSessionCount *int64 `type:"integer"`
 
-	// Descriptive label that is associated with a game session. Session names do
-	// not need to be unique.
+	// A descriptive label that is associated with a game session. Session names
+	// do not need to be unique.
 	Name *string `min:"1" type:"string"`
 
 	// Policy determining whether or not the game session accepts new players.
@@ -68,7 +68,7 @@ func (s *UpdateGameSessionInput) Validate() error {
 type UpdateGameSessionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Object that contains the updated game session metadata.
+	// The updated game session metadata.
 	GameSession *GameSession `type:"structure"`
 }
 

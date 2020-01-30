@@ -53,10 +53,7 @@ type CreateDBInstanceInput struct {
 	//    * Cannot be set to 0 if the DB instance is a source to Read Replicas
 	BackupRetentionPeriod *int64 `type:"integer"`
 
-	// Indicates that the DB instance should be associated with the specified CharacterSet.
-	//
-	// Not applicable. The character set is managed by the DB cluster. For more
-	// information, see CreateDBCluster.
+	// (Not supported by Neptune)
 	CharacterSetName *string `type:"string"`
 
 	// True to copy all tags from the DB instance to snapshots of the DB instance,
@@ -117,6 +114,15 @@ type CreateDBInstanceInput struct {
 	// If there is no DB subnet group, then it is a non-VPC DB instance.
 	DBSubnetGroupName *string `type:"string"`
 
+	// A value that indicates whether the DB instance has deletion protection enabled.
+	// The database can't be deleted when deletion protection is enabled. By default,
+	// deletion protection is disabled.
+	//
+	// You can enable or disable deletion protection for the DB cluster. For more
+	// information, see CreateDBCluster. DB instances in a DB cluster can be deleted
+	// even when deletion protection is enabled for the DB cluster.
+	DeletionProtection *bool `type:"boolean"`
+
 	// Specify the Active Directory Domain to create the instance in.
 	Domain *string `type:"string"`
 
@@ -134,7 +140,7 @@ type CreateDBInstanceInput struct {
 	// Default: false
 	EnableIAMDatabaseAuthentication *bool `type:"boolean"`
 
-	// True to enable Performance Insights for the DB instance, and otherwise false.
+	// (Not supported by Neptune)
 	EnablePerformanceInsights *bool `type:"boolean"`
 
 	// The name of the database engine to be used for this instance.
@@ -144,7 +150,8 @@ type CreateDBInstanceInput struct {
 	// Engine is a required field
 	Engine *string `type:"string" required:"true"`
 
-	// The version number of the database engine to use.
+	// The version number of the database engine to use. Currently, setting this
+	// parameter has no effect.
 	EngineVersion *string `type:"string"`
 
 	// The amount of Provisioned IOPS (input/output operations per second) to be
@@ -202,17 +209,10 @@ type CreateDBInstanceInput struct {
 	// AvailabilityZone parameter if the MultiAZ parameter is set to true.
 	MultiAZ *bool `type:"boolean"`
 
-	// Indicates that the DB instance should be associated with the specified option
-	// group.
-	//
-	// Permanent options, such as the TDE option for Oracle Advanced Security TDE,
-	// can't be removed from an option group, and that option group can't be removed
-	// from a DB instance once it is associated with a DB instance
+	// (Not supported by Neptune)
 	OptionGroupName *string `type:"string"`
 
-	// The AWS KMS key identifier for encryption of Performance Insights data. The
-	// KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
-	// KMS key alias for the KMS encryption key.
+	// (Not supported by Neptune)
 	PerformanceInsightsKMSKeyId *string `type:"string"`
 
 	// The port number on which the database accepts connections.

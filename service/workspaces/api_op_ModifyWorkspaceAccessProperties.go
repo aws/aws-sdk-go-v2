@@ -64,7 +64,7 @@ const opModifyWorkspaceAccessProperties = "ModifyWorkspaceAccessProperties"
 // Amazon WorkSpaces.
 //
 // Specifies which devices and operating systems users can use to access their
-// Workspaces. For more information, see Control Device Access (https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html#control-device-access).
+// WorkSpaces. For more information, see Control Device Access (https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html#control-device-access).
 //
 //    // Example sending a request using ModifyWorkspaceAccessPropertiesRequest.
 //    req := client.ModifyWorkspaceAccessPropertiesRequest(params)

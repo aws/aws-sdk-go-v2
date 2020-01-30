@@ -21,7 +21,7 @@ func (s DescribeVpcPeeringAuthorizationsInput) String() string {
 type DescribeVpcPeeringAuthorizationsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Collection of objects that describe all valid VPC peering operations for
+	// A collection of objects that describe all valid VPC peering operations for
 	// the current AWS account.
 	VpcPeeringAuthorizations []VpcPeeringAuthorization `type:"list"`
 }

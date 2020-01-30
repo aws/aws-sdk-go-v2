@@ -79,6 +79,8 @@ type ClientAPI interface {
 
 	ImportMigrationTaskRequest(*migrationhub.ImportMigrationTaskInput) migrationhub.ImportMigrationTaskRequest
 
+	ListApplicationStatesRequest(*migrationhub.ListApplicationStatesInput) migrationhub.ListApplicationStatesRequest
+
 	ListCreatedArtifactsRequest(*migrationhub.ListCreatedArtifactsInput) migrationhub.ListCreatedArtifactsRequest
 
 	ListDiscoveredResourcesRequest(*migrationhub.ListDiscoveredResourcesInput) migrationhub.ListDiscoveredResourcesRequest

@@ -60,6 +60,10 @@ type AnomalyDetector struct {
 
 	// The statistic associated with the anomaly detection model.
 	Stat *string `type:"string"`
+
+	// The current status of the anomaly detector's training. The possible values
+	// are TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA
+	StateValue AnomalyDetectorStateValue `type:"string" enum:"true"`
 }
 
 // String returns the string representation

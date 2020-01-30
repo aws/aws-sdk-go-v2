@@ -45,7 +45,7 @@ func (s *GetRunInput) Validate() error {
 type GetRunOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The run you wish to get results from.
+	// The run to get results from.
 	Run *Run `locationName:"run" type:"structure"`
 }
 

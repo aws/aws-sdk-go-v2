@@ -44,7 +44,7 @@ type ListOfferingsOutput struct {
 	// which can be used to return the next set of items in the list.
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
 
-	// A value representing the list offering results.
+	// A value that represents the list offering results.
 	Offerings []Offering `locationName:"offerings" type:"list"`
 }
 
@@ -61,9 +61,8 @@ const opListOfferings = "ListOfferings"
 // Returns a list of products or offerings that the user can manage through
 // the API. Each offering record indicates the recurring price per unit and
 // the frequency for that offering. The API returns a NotEligible error if the
-// user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com
-// (mailto:aws-devicefarm-support@amazon.com) if you believe that you should
-// be able to invoke this operation.
+// user is not permitted to invoke the operation. If you must be able to invoke
+// this operation, contact aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com).
 //
 //    // Example sending a request using ListOfferingsRequest.
 //    req := client.ListOfferingsRequest(params)

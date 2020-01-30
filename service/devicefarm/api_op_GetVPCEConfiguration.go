@@ -44,7 +44,7 @@ func (s *GetVPCEConfigurationInput) Validate() error {
 type GetVPCEConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object containing information about your VPC endpoint configuration.
+	// An object that contains information about your VPC endpoint configuration.
 	VpceConfiguration *VPCEConfiguration `locationName:"vpceConfiguration" type:"structure"`
 }
 

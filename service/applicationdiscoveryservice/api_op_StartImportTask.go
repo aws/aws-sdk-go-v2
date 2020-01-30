@@ -89,11 +89,11 @@ const opStartImportTask = "StartImportTask"
 // AWS Application Discovery Service.
 //
 // Starts an import task, which allows you to import details of your on-premises
-// environment directly into AWS without having to use the Application Discovery
-// Service (ADS) tools such as the Discovery Connector or Discovery Agent. This
-// gives you the option to perform migration assessment and planning directly
-// from your imported data, including the ability to group your devices as applications
-// and track their migration status.
+// environment directly into AWS Migration Hub without having to use the Application
+// Discovery Service (ADS) tools such as the Discovery Connector or Discovery
+// Agent. This gives you the option to perform migration assessment and planning
+// directly from your imported data, including the ability to group your devices
+// as applications and track their migration status.
 //
 // To start an import request, do this:
 //

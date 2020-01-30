@@ -132,7 +132,7 @@ const opModifyScheduledAction = "ModifyScheduledAction"
 // ModifyScheduledActionRequest returns a request value for making API operation for
 // Amazon Redshift.
 //
-// Modify a scheduled action.
+// Modifies a scheduled action.
 //
 //    // Example sending a request using ModifyScheduledActionRequest.
 //    req := client.ModifyScheduledActionRequest(params)

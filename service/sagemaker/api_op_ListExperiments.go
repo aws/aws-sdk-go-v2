@@ -19,7 +19,8 @@ type ListExperimentsInput struct {
 	// A filter that returns only experiments created before the specified time.
 	CreatedBefore *time.Time `type:"timestamp"`
 
-	// The maximum number of experiments to return in the response.
+	// The maximum number of experiments to return in the response. The default
+	// value is 10.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// If the previous call to ListExperiments didn't return the full set of experiments,

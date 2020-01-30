@@ -67,6 +67,8 @@ type ClientAPI interface {
 
 	CreateLocationEfsRequest(*datasync.CreateLocationEfsInput) datasync.CreateLocationEfsRequest
 
+	CreateLocationFsxWindowsRequest(*datasync.CreateLocationFsxWindowsInput) datasync.CreateLocationFsxWindowsRequest
+
 	CreateLocationNfsRequest(*datasync.CreateLocationNfsInput) datasync.CreateLocationNfsRequest
 
 	CreateLocationS3Request(*datasync.CreateLocationS3Input) datasync.CreateLocationS3Request
@@ -84,6 +86,8 @@ type ClientAPI interface {
 	DescribeAgentRequest(*datasync.DescribeAgentInput) datasync.DescribeAgentRequest
 
 	DescribeLocationEfsRequest(*datasync.DescribeLocationEfsInput) datasync.DescribeLocationEfsRequest
+
+	DescribeLocationFsxWindowsRequest(*datasync.DescribeLocationFsxWindowsInput) datasync.DescribeLocationFsxWindowsRequest
 
 	DescribeLocationNfsRequest(*datasync.DescribeLocationNfsInput) datasync.DescribeLocationNfsRequest
 

@@ -14,82 +14,92 @@ import (
 type CreateMatchmakingConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Flag that determines whether a match that was created with this configuration
+	// A flag that determines whether a match that was created with this configuration
 	// must be accepted by the matched players. To require acceptance, set to TRUE.
 	//
 	// AcceptanceRequired is a required field
 	AcceptanceRequired *bool `type:"boolean" required:"true"`
 
-	// Length of time (in seconds) to wait for players to accept a proposed match.
-	// If any player rejects the match or fails to accept before the timeout, the
-	// ticket continues to look for an acceptable match.
+	// The length of time (in seconds) to wait for players to accept a proposed
+	// match. If any player rejects the match or fails to accept before the timeout,
+	// the ticket continues to look for an acceptable match.
 	AcceptanceTimeoutSeconds *int64 `min:"1" type:"integer"`
 
-	// Number of player slots in a match to keep open for future players. For example,
-	// if the configuration's rule set specifies a match for a single 12-person
-	// team, and the additional player count is set to 2, only 10 players are selected
-	// for the match.
+	// The number of player slots in a match to keep open for future players. For
+	// example, assume that the configuration's rule set specifies a match for a
+	// single 12-person team. If the additional player count is set to 2, only 10
+	// players are initially selected for the match.
 	AdditionalPlayerCount *int64 `type:"integer"`
 
-	// Method used to backfill game sessions created with this matchmaking configuration.
-	// Specify MANUAL when your game manages backfill requests manually or does
-	// not use the match backfill feature. Specify AUTOMATIC to have GameLift create
-	// a StartMatchBackfill request whenever a game session has one or more open
-	// slots. Learn more about manual and automatic backfill in Backfill Existing
+	// The method used to backfill game sessions that are created with this matchmaking
+	// configuration. Specify MANUAL when your game manages backfill requests manually
+	// or does not use the match backfill feature. Specify AUTOMATIC to have GameLift
+	// create a StartMatchBackfill request whenever a game session has one or more
+	// open slots. Learn more about manual and automatic backfill in Backfill Existing
 	// Games with FlexMatch (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html).
 	BackfillMode BackfillMode `type:"string" enum:"true"`
 
 	// Information to be added to all events related to this matchmaking configuration.
 	CustomEventData *string `type:"string"`
 
-	// Meaningful description of the matchmaking configuration.
+	// A human-readable description of the matchmaking configuration.
 	Description *string `min:"1" type:"string"`
 
-	// Set of custom properties for a game session, formatted as key:value pairs.
+	// A set of custom properties for a game session, formatted as key-value pairs.
 	// These properties are passed to a game server process in the GameSession object
 	// with a request to start a new game session (see Start a Game Session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	// This information is added to the new GameSession object that is created for
 	// a successful match.
 	GameProperties []GameProperty `type:"list"`
 
-	// Set of custom game session properties, formatted as a single string value.
+	// A set of custom game session properties, formatted as a single string value.
 	// This data is passed to a game server process in the GameSession object with
 	// a request to start a new game session (see Start a Game Session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	// This information is added to the new GameSession object that is created for
 	// a successful match.
 	GameSessionData *string `min:"1" type:"string"`
 
-	// Amazon Resource Name (ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
-	// that is assigned to a game session queue and uniquely identifies it. Format
-	// is arn:aws:gamelift:<region>:<aws account>:gamesessionqueue/<queue name>.
-	// These queues are used when placing game sessions for matches that are created
-	// with this matchmaking configuration. Queues can be located in any region.
+	// Amazon Resource Name (ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
+	// that is assigned to a GameLift game session queue resource and uniquely identifies
+	// it. ARNs are unique across all Regions. These queues are used when placing
+	// game sessions for matches that are created with this matchmaking configuration.
+	// Queues can be located in any Region.
 	//
 	// GameSessionQueueArns is a required field
 	GameSessionQueueArns []string `type:"list" required:"true"`
 
-	// Unique identifier for a matchmaking configuration. This name is used to identify
-	// the configuration associated with a matchmaking request or ticket.
+	// A unique identifier for a matchmaking configuration. This name is used to
+	// identify the configuration associated with a matchmaking request or ticket.
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
-	// SNS topic ARN that is set up to receive matchmaking notifications.
+	// An SNS topic ARN that is set up to receive matchmaking notifications.
 	NotificationTarget *string `type:"string"`
 
-	// Maximum duration, in seconds, that a matchmaking ticket can remain in process
-	// before timing out. Requests that fail due to timing out can be resubmitted
+	// The maximum duration, in seconds, that a matchmaking ticket can remain in
+	// process before timing out. Requests that fail due to timing out can be resubmitted
 	// as needed.
 	//
 	// RequestTimeoutSeconds is a required field
 	RequestTimeoutSeconds *int64 `min:"1" type:"integer" required:"true"`
 
-	// Unique identifier for a matchmaking rule set to use with this configuration.
-	// A matchmaking configuration can only use rule sets that are defined in the
-	// same region.
+	// A unique identifier for a matchmaking rule set to use with this configuration.
+	// You can use either the rule set name or ARN value. A matchmaking configuration
+	// can only use rule sets that are defined in the same Region.
 	//
 	// RuleSetName is a required field
-	RuleSetName *string `type:"string" required:"true"`
+	RuleSetName *string `min:"1" type:"string" required:"true"`
+
+	// A list of labels to assign to the new matchmaking configuration resource.
+	// Tags are developer-defined key-value pairs. Tagging AWS resources are useful
+	// for resource management, access management and cost allocation. For more
+	// information, see Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the AWS General Reference. Once the resource is created, you can use TagResource,
+	// UntagResource, and ListTagsForResource to add, remove, and view tags. The
+	// maximum tag limit may be lower than stated. See the AWS General Reference
+	// for actual tagging limits.
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -132,10 +142,20 @@ func (s *CreateMatchmakingConfigurationInput) Validate() error {
 	if s.RuleSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
+	if s.RuleSetName != nil && len(*s.RuleSetName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleSetName", 1))
+	}
 	if s.GameProperties != nil {
 		for i, v := range s.GameProperties {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GameProperties", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}

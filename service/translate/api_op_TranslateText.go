@@ -13,11 +13,13 @@ type TranslateTextInput struct {
 	_ struct{} `type:"structure"`
 
 	// The language code for the language of the source text. The language must
-	// be a language supported by Amazon Translate.
+	// be a language supported by Amazon Translate. For a list of language codes,
+	// see what-is-languages.
 	//
 	// To have Amazon Translate determine the source language of your text, you
 	// can specify auto in the SourceLanguageCode field. If you specify auto, Amazon
-	// Translate will call Amazon Comprehend to determine the source language.
+	// Translate will call Amazon Comprehend (https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html)
+	// to determine the source language.
 	//
 	// SourceLanguageCode is a required field
 	SourceLanguageCode *string `min:"2" type:"string" required:"true"`
@@ -28,8 +30,9 @@ type TranslateTextInput struct {
 	// TargetLanguageCode is a required field
 	TargetLanguageCode *string `min:"2" type:"string" required:"true"`
 
-	// The TerminologyNames list that is taken as input to the TranslateText request.
-	// This has a minimum length of 0 and a maximum length of 1.
+	// The name of the terminology list file to be used in the TranslateText request.
+	// You can use 1 terminology list at most in a TranslateText request. Terminology
+	// lists can contain a maximum of 256 terms.
 	TerminologyNames []string `type:"list"`
 
 	// The text to translate. The text string can be a maximum of 5,000 bytes long.
@@ -92,7 +95,7 @@ type TranslateTextOutput struct {
 	// TargetLanguageCode is a required field
 	TargetLanguageCode *string `min:"2" type:"string" required:"true"`
 
-	// The the translated text. The maximum length of this text is 5kb.
+	// The translated text.
 	//
 	// TranslatedText is a required field
 	TranslatedText *string `type:"string" required:"true"`
@@ -108,56 +111,8 @@ const opTranslateText = "TranslateText"
 // TranslateTextRequest returns a request value for making API operation for
 // Amazon Translate.
 //
-// Translates input text from the source language to the target language. It
-// is not necessary to use English (en) as either the source or the target language
-// but not all language combinations are supported by Amazon Translate. For
-// more information, see Supported Language Pairs (http://docs.aws.amazon.com/translate/latest/dg/pairs.html).
-//
-//    * Arabic (ar)
-//
-//    * Chinese (Simplified) (zh)
-//
-//    * Chinese (Traditional) (zh-TW)
-//
-//    * Czech (cs)
-//
-//    * Danish (da)
-//
-//    * Dutch (nl)
-//
-//    * English (en)
-//
-//    * Finnish (fi)
-//
-//    * French (fr)
-//
-//    * German (de)
-//
-//    * Hebrew (he)
-//
-//    * Indonesian (id)
-//
-//    * Italian (it)
-//
-//    * Japanese (ja)
-//
-//    * Korean (ko)
-//
-//    * Polish (pl)
-//
-//    * Portuguese (pt)
-//
-//    * Russian (ru)
-//
-//    * Spanish (es)
-//
-//    * Swedish (sv)
-//
-//    * Turkish (tr)
-//
-// To have Amazon Translate determine the source language of your text, you
-// can specify auto in the SourceLanguageCode field. If you specify auto, Amazon
-// Translate will call Amazon Comprehend to determine the source language.
+// Translates input text from the source language to the target language. For
+// a list of available languages and language codes, see what-is-languages.
 //
 //    // Example sending a request using TranslateTextRequest.
 //    req := client.TranslateTextRequest(params)

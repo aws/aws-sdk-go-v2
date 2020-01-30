@@ -62,9 +62,9 @@ const opGetJobDetails = "GetJobDetails"
 // Returns information about a job. Used for custom actions only.
 //
 // When this API is called, AWS CodePipeline returns temporary credentials for
-// the Amazon S3 bucket used to store artifacts for the pipeline, if the action
-// requires access to that Amazon S3 bucket for input or output artifacts. This
-// API also returns any secret values defined for the action.
+// the S3 bucket used to store artifacts for the pipeline, if the action requires
+// access to that S3 bucket for input or output artifacts. This API also returns
+// any secret values defined for the action.
 //
 //    // Example sending a request using GetJobDetailsRequest.
 //    req := client.GetJobDetailsRequest(params)

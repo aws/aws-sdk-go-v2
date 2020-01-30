@@ -12,6 +12,27 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// The state of an application discovered through Migration Hub import, the
+// AWS Agentless Discovery Connector, or the AWS Application Discovery Agent.
+type ApplicationState struct {
+	_ struct{} `type:"structure"`
+
+	// The configurationId from the Application Discovery Service that uniquely
+	// identifies an application.
+	ApplicationId *string `min:"1" type:"string"`
+
+	// The current status of an application.
+	ApplicationStatus ApplicationStatus `type:"string" enum:"true"`
+
+	// The timestamp when the application status was last updated.
+	LastUpdatedTime *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation
+func (s ApplicationState) String() string {
+	return awsutil.Prettify(s)
+}
+
 // An ARN of the AWS cloud resource target receiving the migration (e.g., AMI,
 // EC2 instance, RDS instance, etc.).
 type CreatedArtifact struct {

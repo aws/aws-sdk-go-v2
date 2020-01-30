@@ -73,8 +73,7 @@ const opModifyClusterMaintenance = "ModifyClusterMaintenance"
 // ModifyClusterMaintenanceRequest returns a request value for making API operation for
 // Amazon Redshift.
 //
-// Modifies the maintenance settings of a cluster. For example, you can defer
-// a maintenance window. You can also update or cancel a deferment.
+// Modifies the maintenance settings of a cluster.
 //
 //    // Example sending a request using ModifyClusterMaintenanceRequest.
 //    req := client.ModifyClusterMaintenanceRequest(params)

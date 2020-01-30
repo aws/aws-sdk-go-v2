@@ -35,6 +35,9 @@ type PutBotAliasInput struct {
 	// you get a PreconditionFailedException exception.
 	Checksum *string `locationName:"checksum" type:"string"`
 
+	// Settings for conversation logs for the alias.
+	ConversationLogs *ConversationLogsRequest `locationName:"conversationLogs" type:"structure"`
+
 	// A description of the alias.
 	Description *string `locationName:"description" type:"string"`
 
@@ -73,6 +76,11 @@ func (s *PutBotAliasInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+	if s.ConversationLogs != nil {
+		if err := s.ConversationLogs.Validate(); err != nil {
+			invalidParams.AddNested("ConversationLogs", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -95,6 +103,12 @@ func (s PutBotAliasInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ConversationLogs != nil {
+		v := s.ConversationLogs
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "conversationLogs", v, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -128,6 +142,10 @@ type PutBotAliasOutput struct {
 
 	// The checksum for the current version of the alias.
 	Checksum *string `locationName:"checksum" type:"string"`
+
+	// The settings that determine how Amazon Lex uses conversation logs for the
+	// alias.
+	ConversationLogs *ConversationLogsResponse `locationName:"conversationLogs" type:"structure"`
 
 	// The date that the bot alias was created.
 	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
@@ -167,6 +185,12 @@ func (s PutBotAliasOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ConversationLogs != nil {
+		v := s.ConversationLogs
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "conversationLogs", v, metadata)
 	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate

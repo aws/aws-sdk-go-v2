@@ -475,6 +475,9 @@ type BackupRule struct {
 	// be completed or it is canceled by AWS Backup. This value is optional.
 	CompletionWindowMinutes *int64 `type:"long"`
 
+	// An array of CopyAction objects, which contains the details of the copy operation.
+	CopyActions []CopyAction `type:"list"`
+
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. AWS Backup transitions and expires backups automatically
 	// according to the lifecycle that you define.
@@ -527,6 +530,18 @@ func (s BackupRule) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "CompletionWindowMinutes", protocol.Int64Value(v), metadata)
+	}
+	if s.CopyActions != nil {
+		v := s.CopyActions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "CopyActions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.Lifecycle != nil {
 		v := s.Lifecycle
@@ -587,6 +602,9 @@ type BackupRuleInput struct {
 	// and returning an error.
 	CompletionWindowMinutes *int64 `type:"long"`
 
+	// An array of CopyAction objects, which contains the details of the copy operation.
+	CopyActions []CopyAction `type:"list"`
+
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. AWS Backup will transition and expire backups automatically
 	// according to the lifecycle that you define.
@@ -638,6 +656,13 @@ func (s *BackupRuleInput) Validate() error {
 	if s.TargetBackupVaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetBackupVaultName"))
 	}
+	if s.CopyActions != nil {
+		for i, v := range s.CopyActions {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CopyActions", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -652,6 +677,18 @@ func (s BackupRuleInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "CompletionWindowMinutes", protocol.Int64Value(v), metadata)
+	}
+	if s.CopyActions != nil {
+		v := s.CopyActions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "CopyActions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.Lifecycle != nil {
 		v := s.Lifecycle
@@ -709,12 +746,11 @@ type BackupSelection struct {
 	IamRoleArn *string `type:"string" required:"true"`
 
 	// An array of conditions used to specify a set of resources to assign to a
-	// backup plan; for example, "StringEquals": {"ec2:ResourceTag/Department":
+	// backup plan; for example, "STRINGEQUALS": {"ec2:ResourceTag/Department":
 	// "accounting".
 	ListOfTags []Condition `type:"list"`
 
-	// An array of strings that either contain Amazon Resource Names (ARNs) or match
-	// patterns such as "arn:aws:ec2:us-east-1:123456789012:volume/*" of resources
+	// An array of strings that contain Amazon Resource Names (ARNs) of resources
 	// to assign to a backup plan.
 	Resources []string `type:"list"`
 
@@ -995,7 +1031,7 @@ func (s CalculatedLifecycle) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains an array of triplets made up of a condition type (such as StringEquals),
+// Contains an array of triplets made up of a condition type (such as STRINGEQUALS),
 // a key, and a value. Conditions are used to filter resources in a selection
 // that is assigned to a backup plan.
 type Condition struct {
@@ -1007,7 +1043,7 @@ type Condition struct {
 	// ConditionKey is a required field
 	ConditionKey *string `type:"string" required:"true"`
 
-	// An operation, such as StringEquals, that is applied to a key-value pair used
+	// An operation, such as STRINGEQUALS, that is applied to a key-value pair used
 	// to filter resources in a selection.
 	//
 	// ConditionType is a required field
@@ -1069,13 +1105,234 @@ func (s Condition) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The details of the copy operation.
+type CopyAction struct {
+	_ struct{} `type:"structure"`
+
+	// An Amazon Resource Name (ARN) that uniquely identifies the destination backup
+	// vault for the copied backup. For example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+	//
+	// DestinationBackupVaultArn is a required field
+	DestinationBackupVaultArn *string `type:"string" required:"true"`
+
+	// Contains an array of Transition objects specifying how long in days before
+	// a recovery point transitions to cold storage or is deleted.
+	//
+	// Backups transitioned to cold storage must be stored in cold storage for a
+	// minimum of 90 days. Therefore, on the console, the “expire after days”
+	// setting must be 90 days greater than the “transition to cold after days”
+	// setting. The “transition to cold after days” setting cannot be changed
+	// after a backup has been transitioned to cold.
+	Lifecycle *Lifecycle `type:"structure"`
+}
+
+// String returns the string representation
+func (s CopyAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CopyAction) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CopyAction"}
+
+	if s.DestinationBackupVaultArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DestinationBackupVaultArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CopyAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DestinationBackupVaultArn != nil {
+		v := *s.DestinationBackupVaultArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DestinationBackupVaultArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Lifecycle != nil {
+		v := s.Lifecycle
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Lifecycle", v, metadata)
+	}
+	return nil
+}
+
+// Contains detailed information about a copy job.
+type CopyJob struct {
+	_ struct{} `type:"structure"`
+
+	// The size, in bytes, of a copy job.
+	BackupSizeInBytes *int64 `type:"long"`
+
+	// The date and time a job to create a copy job is completed, in Unix format
+	// and Coordinated Universal Time (UTC). The value of CompletionDate is accurate
+	// to milliseconds. For example, the value 1516925490.087 represents Friday,
+	// January 26, 2018 12:11:30.087 AM.
+	CompletionDate *time.Time `type:"timestamp"`
+
+	// Uniquely identifies a request to AWS Backup to copy a resource.
+	CopyJobId *string `type:"string"`
+
+	// Contains information about the backup plan and rule that AWS Backup used
+	// to initiate the recovery point backup.
+	CreatedBy *RecoveryPointCreator `type:"structure"`
+
+	// The date and time a copy job is created, in Unix format and Coordinated Universal
+	// Time (UTC). The value of CreationDate is accurate to milliseconds. For example,
+	// the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087
+	// AM.
+	CreationDate *time.Time `type:"timestamp"`
+
+	// An Amazon Resource Name (ARN) that uniquely identifies a destination copy
+	// vault; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+	DestinationBackupVaultArn *string `type:"string"`
+
+	// An ARN that uniquely identifies a destination recovery point; for example,
+	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+	DestinationRecoveryPointArn *string `type:"string"`
+
+	// Specifies the IAM role ARN used to copy the target recovery point; for example,
+	// arn:aws:iam::123456789012:role/S3Access.
+	IamRoleArn *string `type:"string"`
+
+	// The type of AWS resource to be copied; for example, an Amazon Elastic Block
+	// Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon
+	// RDS) database.
+	ResourceArn *string `type:"string"`
+
+	// The type of AWS resource to be copied; for example, an Amazon Elastic Block
+	// Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon
+	// RDS) database.
+	ResourceType *string `type:"string"`
+
+	// An Amazon Resource Name (ARN) that uniquely identifies a source copy vault;
+	// for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+	SourceBackupVaultArn *string `type:"string"`
+
+	// An ARN that uniquely identifies a source recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+	SourceRecoveryPointArn *string `type:"string"`
+
+	// The current state of a resource recovery point.
+	State CopyJobState `type:"string" enum:"true"`
+
+	// A detailed message explaining the status of the job that to copy a resource.
+	StatusMessage *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CopyJob) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CopyJob) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BackupSizeInBytes != nil {
+		v := *s.BackupSizeInBytes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BackupSizeInBytes", protocol.Int64Value(v), metadata)
+	}
+	if s.CompletionDate != nil {
+		v := *s.CompletionDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CompletionDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.CopyJobId != nil {
+		v := *s.CopyJobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CopyJobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedBy != nil {
+		v := s.CreatedBy
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CreatedBy", v, metadata)
+	}
+	if s.CreationDate != nil {
+		v := *s.CreationDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.DestinationBackupVaultArn != nil {
+		v := *s.DestinationBackupVaultArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DestinationBackupVaultArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DestinationRecoveryPointArn != nil {
+		v := *s.DestinationRecoveryPointArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DestinationRecoveryPointArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.IamRoleArn != nil {
+		v := *s.IamRoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IamRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ResourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceType != nil {
+		v := *s.ResourceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ResourceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SourceBackupVaultArn != nil {
+		v := *s.SourceBackupVaultArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SourceBackupVaultArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SourceRecoveryPointArn != nil {
+		v := *s.SourceRecoveryPointArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SourceRecoveryPointArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.StatusMessage != nil {
+		v := *s.StatusMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StatusMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Contains an array of Transition objects specifying how long in days before
 // a recovery point transitions to cold storage or is deleted.
+//
+// Backups transitioned to cold storage must be stored in cold storage for a
+// minimum of 90 days. Therefore, on the console, the “expire after days”
+// setting must be 90 days greater than the “transition to cold after days”
+// setting. The “transition to cold after days” setting cannot be changed
+// after a backup has been transitioned to cold.
 type Lifecycle struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the number of days after creation that a recovery point is deleted.
-	// Must be greater than MoveToColdStorageAfterDays.
+	// Must be greater than 90 days plus MoveToColdStorageAfterDays.
 	DeleteAfterDays *int64 `type:"long"`
 
 	// Specifies the number of days after creation that a recovery point is moved

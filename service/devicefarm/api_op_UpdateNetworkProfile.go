@@ -38,8 +38,8 @@ type UpdateNetworkProfileInput struct {
 	// The name of the network profile about which you are returning information.
 	Name *string `locationName:"name" type:"string"`
 
-	// The type of network profile you wish to return information about. Valid values
-	// are listed below.
+	// The type of network profile to return information about. Valid values are
+	// listed here.
 	Type NetworkProfileType `locationName:"type" type:"string" enum:"true"`
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600.
@@ -96,7 +96,7 @@ const opUpdateNetworkProfile = "UpdateNetworkProfile"
 // UpdateNetworkProfileRequest returns a request value for making API operation for
 // AWS Device Farm.
 //
-// Updates the network profile with specific settings.
+// Updates the network profile.
 //
 //    // Example sending a request using UpdateNetworkProfileRequest.
 //    req := client.UpdateNetworkProfileRequest(params)

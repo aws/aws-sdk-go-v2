@@ -26,8 +26,7 @@ type CreateDBClusterInput struct {
 	//    * Must be a value from 1 to 35
 	BackupRetentionPeriod *int64 `type:"integer"`
 
-	// A value that indicates that the DB cluster should be associated with the
-	// specified CharacterSet.
+	// (Not supported by Neptune)
 	CharacterSetName *string `type:"string"`
 
 	// The DB cluster identifier. This parameter is stored as a lowercase string.
@@ -66,6 +65,11 @@ type CreateDBClusterInput struct {
 	// you are creating.
 	DatabaseName *string `type:"string"`
 
+	// A value that indicates whether the DB cluster has deletion protection enabled.
+	// The database can't be deleted when deletion protection is enabled. By default,
+	// deletion protection is disabled.
+	DeletionProtection *bool `type:"boolean"`
+
 	// The list of log types that need to be enabled for exporting to CloudWatch
 	// Logs.
 	EnableCloudwatchLogsExports []string `type:"list"`
@@ -83,7 +87,8 @@ type CreateDBClusterInput struct {
 	// Engine is a required field
 	Engine *string `type:"string" required:"true"`
 
-	// The version number of the database engine to use.
+	// The version number of the database engine to use. Currently, setting this
+	// parameter has no effect.
 	//
 	// Example: 1.0.1
 	EngineVersion *string `type:"string"`
@@ -130,11 +135,7 @@ type CreateDBClusterInput struct {
 	//    * Cannot be a reserved word for the chosen database engine.
 	MasterUsername *string `type:"string"`
 
-	// A value that indicates that the DB cluster should be associated with the
-	// specified option group.
-	//
-	// Permanent options can't be removed from an option group. The option group
-	// can't be removed from a DB cluster once it is associated with a DB cluster.
+	// (Not supported by Neptune)
 	OptionGroupName *string `type:"string"`
 
 	// The port number on which the instances in the DB cluster accept connections.

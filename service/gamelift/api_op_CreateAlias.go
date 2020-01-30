@@ -4,6 +4,7 @@ package gamelift
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -13,19 +14,30 @@ import (
 type CreateAliasInput struct {
 	_ struct{} `type:"structure"`
 
-	// Human-readable description of an alias.
+	// A human-readable description of the alias.
 	Description *string `min:"1" type:"string"`
 
-	// Descriptive label that is associated with an alias. Alias names do not need
-	// to be unique.
+	// A descriptive label that is associated with an alias. Alias names do not
+	// need to be unique.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// Object that specifies the fleet and routing type to use for the alias.
+	// The routing configuration, including routing type and fleet target, for the
+	// alias.
 	//
 	// RoutingStrategy is a required field
 	RoutingStrategy *RoutingStrategy `type:"structure" required:"true"`
+
+	// A list of labels to assign to the new alias resource. Tags are developer-defined
+	// key-value pairs. Tagging AWS resources are useful for resource management,
+	// access management and cost allocation. For more information, see Tagging
+	// AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the AWS General Reference. Once the resource is created, you can use TagResource,
+	// UntagResource, and ListTagsForResource to add, remove, and view tags. The
+	// maximum tag limit may be lower than stated. See the AWS General Reference
+	// for actual tagging limits.
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -50,6 +62,13 @@ func (s *CreateAliasInput) Validate() error {
 	if s.RoutingStrategy == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoutingStrategy"))
 	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -61,7 +80,7 @@ func (s *CreateAliasInput) Validate() error {
 type CreateAliasOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Object that describes the newly created alias record.
+	// The newly created alias resource.
 	Alias *Alias `type:"structure"`
 }
 
@@ -76,11 +95,9 @@ const opCreateAlias = "CreateAlias"
 // Amazon GameLift.
 //
 // Creates an alias for a fleet. In most situations, you can use an alias ID
-// in place of a fleet ID. By using a fleet alias instead of a specific fleet
-// ID, you can switch gameplay and players to a new fleet without changing your
-// game client or other game components. For example, for games in production,
-// using an alias allows you to seamlessly redirect your player base to a new
-// game server update.
+// in place of a fleet ID. An alias provides a level of abstraction for a fleet
+// that is useful when redirecting player traffic from one fleet to another,
+// such as when updating your game build.
 //
 // Amazon GameLift supports two types of routing strategies for aliases: simple
 // and terminal. A simple alias points to an active fleet. A terminal alias
@@ -92,8 +109,8 @@ const opCreateAlias = "CreateAlias"
 // To create a fleet alias, specify an alias name, routing strategy, and optional
 // description. Each simple alias can point to only one fleet, but a fleet can
 // have multiple aliases. If successful, a new alias record is returned, including
-// an alias ID, which you can reference when creating a game session. You can
-// reassign an alias to another fleet by calling UpdateAlias.
+// an alias ID and an ARN. You can reassign an alias to another fleet by calling
+// UpdateAlias.
 //
 //    * CreateAlias
 //

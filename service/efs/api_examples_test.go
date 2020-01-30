@@ -440,6 +440,8 @@ func ExampleClient_DescribeMountTargetsRequest_shared00() {
 				fmt.Println(efs.ErrCodeFileSystemNotFound, aerr.Error())
 			case efs.ErrCodeMountTargetNotFound:
 				fmt.Println(efs.ErrCodeMountTargetNotFound, aerr.Error())
+			case efs.ErrCodeAccessPointNotFound:
+				fmt.Println(efs.ErrCodeAccessPointNotFound, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

@@ -150,13 +150,30 @@ func (s DescribedUser) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The configuration settings for the virtual private cloud (VPC) endpoint for
-// your SFTP server.
+// The virtual private cloud (VPC) endpoint settings that are configured for
+// your SFTP server. With a VPC endpoint, you can restrict access to your SFTP
+// server and resources only within your VPC. To control incoming internet traffic,
+// invoke the UpdateServer API and attach an Elastic IP to your server's endpoint.
 type EndpointDetails struct {
 	_ struct{} `type:"structure"`
 
+	// A list of address allocation IDs that are required to attach an Elastic IP
+	// address to your SFTP server's endpoint. This is only valid in the UpdateServer
+	// API.
+	//
+	// This property can only be use when EndpointType is set to VPC.
+	AddressAllocationIds []string `type:"list"`
+
+	// A list of subnet IDs that are required to host your SFTP server endpoint
+	// in your VPC.
+	SubnetIds []string `type:"list"`
+
 	// The ID of the VPC endpoint.
 	VpcEndpointId *string `min:"22" type:"string"`
+
+	// The VPC ID of the virtual private cloud in which the SFTP server's endpoint
+	// will be hosted.
+	VpcId *string `type:"string"`
 }
 
 // String returns the string representation

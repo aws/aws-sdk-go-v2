@@ -26,6 +26,20 @@ type CreateEndpointConfigInput struct {
 	// SageMaker uses to encrypt data on the storage volume attached to the ML compute
 	// instance that hosts the endpoint.
 	//
+	// The KmsKeyId can be any of the following formats:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Alias name: alias/ExampleAlias
+	//
+	//    * Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
+	//
+	// The KMS key policy must grant permission to the IAM role that you specify
+	// in your CreateEndpoint, UpdateEndpoint requests. For more information, refer
+	// to the AWS Key Management Service section Using Key Policies in AWS KMS (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
+	//
 	// Certain Nitro-based instances include local storage, dependent on the instance
 	// type. Local storage volumes are encrypted using a hardware module on the
 	// instance. You can't request a KmsKeyId when using an instance type with local

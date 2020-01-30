@@ -15,12 +15,13 @@ import (
 type DeleteScalingPolicyInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for a fleet to be deleted.
+	// A unique identifier for a fleet to be deleted. You can use either the fleet
+	// ID or ARN value.
 	//
 	// FleetId is a required field
 	FleetId *string `type:"string" required:"true"`
 
-	// Descriptive label that is associated with a scaling policy. Policy names
+	// A descriptive label that is associated with a scaling policy. Policy names
 	// do not need to be unique.
 	//
 	// Name is a required field

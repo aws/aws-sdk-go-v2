@@ -29,7 +29,7 @@ type CreateNetworkProfileInput struct {
 	// Proportion of received packets that fail to arrive from 0 to 100 percent.
 	DownlinkLossPercent *int64 `locationName:"downlinkLossPercent" type:"integer"`
 
-	// The name you wish to specify for the new network profile.
+	// The name for the new network profile.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
@@ -40,7 +40,7 @@ type CreateNetworkProfileInput struct {
 	// ProjectArn is a required field
 	ProjectArn *string `locationName:"projectArn" min:"32" type:"string" required:"true"`
 
-	// The type of network profile you wish to create. Valid values are listed below.
+	// The type of network profile to create. Valid values are listed here.
 	Type NetworkProfileType `locationName:"type" type:"string" enum:"true"`
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600.

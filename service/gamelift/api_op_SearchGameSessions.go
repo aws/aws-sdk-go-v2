@@ -13,9 +13,9 @@ import (
 type SearchGameSessionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for an alias associated with the fleet to search for active
-	// game sessions. Each request must reference either a fleet ID or alias ID,
-	// but not both.
+	// A unique identifier for an alias associated with the fleet to search for
+	// active game sessions. You can use either the alias ID or ARN value. Each
+	// request must reference either a fleet ID or alias ID, but not both.
 	AliasId *string `type:"string"`
 
 	// String containing the search criteria for the session search. If no filter
@@ -59,13 +59,14 @@ type SearchGameSessionsInput struct {
 	// ten players that have an open player slot: "maximumSessions>=10 AND hasAvailablePlayerSessions=true".
 	FilterExpression *string `min:"1" type:"string"`
 
-	// Unique identifier for a fleet to search for active game sessions. Each request
-	// must reference either a fleet ID or alias ID, but not both.
+	// A unique identifier for a fleet to search for active game sessions. You can
+	// use either the fleet ID or ARN value. Each request must reference either
+	// a fleet ID or alias ID, but not both.
 	FleetId *string `type:"string"`
 
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages. The maximum number of results returned
-	// is 20, even if this value is not set or is set higher than 20.
+	// The maximum number of results to return. Use this parameter with NextToken
+	// to get results as a set of sequential pages. The maximum number of results
+	// returned is 20, even if this value is not set or is set higher than 20.
 	Limit *int64 `min:"1" type:"integer"`
 
 	// Token that indicates the start of the next sequential page of results. Use
@@ -120,7 +121,7 @@ func (s *SearchGameSessionsInput) Validate() error {
 type SearchGameSessionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Collection of objects containing game session properties for each session
+	// A collection of objects containing game session properties for each session
 	// matching the request.
 	GameSessions []GameSession `type:"list"`
 
@@ -144,7 +145,7 @@ const opSearchGameSessions = "SearchGameSessions"
 // sorts them in a specified order. You can search or sort by the following
 // game session attributes:
 //
-//    * gameSessionId -- Unique identifier for the game session. You can use
+//    * gameSessionId -- A unique identifier for the game session. You can use
 //    either a GameSessionId or GameSessionArn value.
 //
 //    * gameSessionName -- Name assigned to a game session. This value is set

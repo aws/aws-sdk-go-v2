@@ -31,8 +31,16 @@ type BackupVaultEvent string
 const (
 	BackupVaultEventBackupJobStarted      BackupVaultEvent = "BACKUP_JOB_STARTED"
 	BackupVaultEventBackupJobCompleted    BackupVaultEvent = "BACKUP_JOB_COMPLETED"
+	BackupVaultEventBackupJobSuccessful   BackupVaultEvent = "BACKUP_JOB_SUCCESSFUL"
+	BackupVaultEventBackupJobFailed       BackupVaultEvent = "BACKUP_JOB_FAILED"
+	BackupVaultEventBackupJobExpired      BackupVaultEvent = "BACKUP_JOB_EXPIRED"
 	BackupVaultEventRestoreJobStarted     BackupVaultEvent = "RESTORE_JOB_STARTED"
 	BackupVaultEventRestoreJobCompleted   BackupVaultEvent = "RESTORE_JOB_COMPLETED"
+	BackupVaultEventRestoreJobSuccessful  BackupVaultEvent = "RESTORE_JOB_SUCCESSFUL"
+	BackupVaultEventRestoreJobFailed      BackupVaultEvent = "RESTORE_JOB_FAILED"
+	BackupVaultEventCopyJobStarted        BackupVaultEvent = "COPY_JOB_STARTED"
+	BackupVaultEventCopyJobSuccessful     BackupVaultEvent = "COPY_JOB_SUCCESSFUL"
+	BackupVaultEventCopyJobFailed         BackupVaultEvent = "COPY_JOB_FAILED"
 	BackupVaultEventRecoveryPointModified BackupVaultEvent = "RECOVERY_POINT_MODIFIED"
 	BackupVaultEventBackupPlanCreated     BackupVaultEvent = "BACKUP_PLAN_CREATED"
 	BackupVaultEventBackupPlanModified    BackupVaultEvent = "BACKUP_PLAN_MODIFIED"
@@ -59,6 +67,25 @@ func (enum ConditionType) MarshalValue() (string, error) {
 }
 
 func (enum ConditionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type CopyJobState string
+
+// Enum values for CopyJobState
+const (
+	CopyJobStateCreated   CopyJobState = "CREATED"
+	CopyJobStateRunning   CopyJobState = "RUNNING"
+	CopyJobStateCompleted CopyJobState = "COMPLETED"
+	CopyJobStateFailed    CopyJobState = "FAILED"
+)
+
+func (enum CopyJobState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CopyJobState) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

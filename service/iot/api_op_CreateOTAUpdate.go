@@ -20,6 +20,9 @@ type CreateOTAUpdateInput struct {
 	// Configuration for the rollout of OTA updates.
 	AwsJobExecutionsRolloutConfig *AwsJobExecutionsRolloutConfig `locationName:"awsJobExecutionsRolloutConfig" type:"structure"`
 
+	// Configuration information for pre-signed URLs.
+	AwsJobPresignedUrlConfig *AwsJobPresignedUrlConfig `locationName:"awsJobPresignedUrlConfig" type:"structure"`
+
 	// The description of the OTA update.
 	Description *string `locationName:"description" type:"string"`
 
@@ -32,6 +35,11 @@ type CreateOTAUpdateInput struct {
 	//
 	// OtaUpdateId is a required field
 	OtaUpdateId *string `location:"uri" locationName:"otaUpdateId" min:"1" type:"string" required:"true"`
+
+	// The protocol used to transfer the OTA update image. Valid values are [HTTP],
+	// [MQTT], [HTTP, MQTT]. When both HTTP and MQTT are specified, the target device
+	// can choose the protocol.
+	Protocols []Protocol `locationName:"protocols" min:"1" type:"list"`
 
 	// The IAM role that allows access to the AWS IoT Jobs service.
 	//
@@ -76,6 +84,9 @@ func (s *CreateOTAUpdateInput) Validate() error {
 	}
 	if s.OtaUpdateId != nil && len(*s.OtaUpdateId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("OtaUpdateId", 1))
+	}
+	if s.Protocols != nil && len(s.Protocols) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Protocols", 1))
 	}
 
 	if s.RoleArn == nil {
@@ -132,6 +143,12 @@ func (s CreateOTAUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "awsJobExecutionsRolloutConfig", v, metadata)
 	}
+	if s.AwsJobPresignedUrlConfig != nil {
+		v := s.AwsJobPresignedUrlConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "awsJobPresignedUrlConfig", v, metadata)
+	}
 	if s.Description != nil {
 		v := *s.Description
 
@@ -146,6 +163,18 @@ func (s CreateOTAUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.Start()
 		for _, v1 := range v {
 			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Protocols != nil {
+		v := s.Protocols
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "protocols", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 

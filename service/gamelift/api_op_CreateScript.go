@@ -4,6 +4,7 @@ package gamelift
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -12,27 +13,37 @@ import (
 type CreateScriptInput struct {
 	_ struct{} `type:"structure"`
 
-	// Descriptive label that is associated with a script. Script names do not need
-	// to be unique. You can use UpdateScript to change this value later.
+	// A descriptive label that is associated with a script. Script names do not
+	// need to be unique. You can use UpdateScript to change this value later.
 	Name *string `min:"1" type:"string"`
 
-	// Location of the Amazon S3 bucket where a zipped file containing your Realtime
-	// scripts is stored. The storage location must specify the Amazon S3 bucket
-	// name, the zip file name (the "key"), and a role ARN that allows Amazon GameLift
-	// to access the Amazon S3 storage location. The S3 bucket must be in the same
-	// region where you want to create a new script. By default, Amazon GameLift
-	// uploads the latest version of the zip file; if you have S3 object versioning
-	// turned on, you can use the ObjectVersion parameter to specify an earlier
-	// version.
+	// The location of the Amazon S3 bucket where a zipped file containing your
+	// Realtime scripts is stored. The storage location must specify the Amazon
+	// S3 bucket name, the zip file name (the "key"), and a role ARN that allows
+	// Amazon GameLift to access the Amazon S3 storage location. The S3 bucket must
+	// be in the same Region where you want to create a new script. By default,
+	// Amazon GameLift uploads the latest version of the zip file; if you have S3
+	// object versioning turned on, you can use the ObjectVersion parameter to specify
+	// an earlier version.
 	StorageLocation *S3Location `type:"structure"`
 
-	// Version that is associated with a build or script. Version strings do not
-	// need to be unique. You can use UpdateScript to change this value later.
+	// A list of labels to assign to the new script resource. Tags are developer-defined
+	// key-value pairs. Tagging AWS resources are useful for resource management,
+	// access management and cost allocation. For more information, see Tagging
+	// AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the AWS General Reference. Once the resource is created, you can use TagResource,
+	// UntagResource, and ListTagsForResource to add, remove, and view tags. The
+	// maximum tag limit may be lower than stated. See the AWS General Reference
+	// for actual tagging limits.
+	Tags []Tag `type:"list"`
+
+	// The version that is associated with a build or script. Version strings do
+	// not need to be unique. You can use UpdateScript to change this value later.
 	Version *string `min:"1" type:"string"`
 
-	// Data object containing your Realtime scripts and dependencies as a zip file.
-	// The zip file can have one or multiple files. Maximum size of a zip file is
-	// 5 MB.
+	// A data object containing your Realtime scripts and dependencies as a zip
+	// file. The zip file can have one or multiple files. Maximum size of a zip
+	// file is 5 MB.
 	//
 	// When using the AWS CLI tool to create a script, this parameter is set to
 	// the zip file name. It must be prepended with the string "fileb://" to indicate
@@ -61,6 +72,13 @@ func (s *CreateScriptInput) Validate() error {
 			invalidParams.AddNested("StorageLocation", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -71,12 +89,12 @@ func (s *CreateScriptInput) Validate() error {
 type CreateScriptOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The newly created script record with a unique script ID. The new script's
-	// storage location reflects an Amazon S3 location: (1) If the script was uploaded
-	// from an S3 bucket under your account, the storage location reflects the information
-	// that was provided in the CreateScript request; (2) If the script file was
-	// uploaded from a local zip file, the storage location reflects an S3 location
-	// controls by the Amazon GameLift service.
+	// The newly created script record with a unique script ID and ARN. The new
+	// script's storage location reflects an Amazon S3 location: (1) If the script
+	// was uploaded from an S3 bucket under your account, the storage location reflects
+	// the information that was provided in the CreateScript request; (2) If the
+	// script file was uploaded from a local zip file, the storage location reflects
+	// an S3 location controls by the Amazon GameLift service.
 	Script *Script `type:"structure"`
 }
 

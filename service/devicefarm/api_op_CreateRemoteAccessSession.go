@@ -15,7 +15,7 @@ type CreateRemoteAccessSessionInput struct {
 
 	// Unique identifier for the client. If you want access to multiple devices
 	// on the same client, you should pass the same clientId value in each call
-	// to CreateRemoteAccessSession. This is required only if remoteDebugEnabled
+	// to CreateRemoteAccessSession. This identifier is required only if remoteDebugEnabled
 	// is set to true.
 	//
 	// Remote debugging is no longer supported (https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html).
@@ -24,8 +24,7 @@ type CreateRemoteAccessSessionInput struct {
 	// The configuration information for the remote access session request.
 	Configuration *CreateRemoteAccessSessionConfiguration `locationName:"configuration" type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the device for which you want to create
-	// a remote access session.
+	// The ARN of the device for which you want to create a remote access session.
 	//
 	// DeviceArn is a required field
 	DeviceArn *string `locationName:"deviceArn" min:"32" type:"string" required:"true"`
@@ -40,15 +39,16 @@ type CreateRemoteAccessSessionInput struct {
 	//    and rotating the screen. You cannot run XCUITest framework-based tests
 	//    in this mode.
 	//
-	//    * NO_VIDEO: You are connected to the device but cannot interact with it
-	//    or view the screen. This mode has the fastest test execution speed. You
-	//    can run XCUITest framework-based tests in this mode.
+	//    * NO_VIDEO: You are connected to the device, but cannot interact with
+	//    it or view the screen. This mode has the fastest test execution speed.
+	//    You can run XCUITest framework-based tests in this mode.
 	//
-	//    * VIDEO_ONLY: You can view the screen but cannot touch or rotate it. You
-	//    can run XCUITest framework-based tests and watch the screen in this mode.
+	//    * VIDEO_ONLY: You can view the screen, but cannot touch or rotate it.
+	//    You can run XCUITest framework-based tests and watch the screen in this
+	//    mode.
 	InteractionMode InteractionMode `locationName:"interactionMode" type:"string" enum:"true"`
 
-	// The name of the remote access session that you wish to create.
+	// The name of the remote access session to create.
 	Name *string `locationName:"name" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the project for which you want to create
@@ -70,18 +70,16 @@ type CreateRemoteAccessSessionInput struct {
 	// Set to true to enable remote recording for the remote access session.
 	RemoteRecordEnabled *bool `locationName:"remoteRecordEnabled" type:"boolean"`
 
-	// When set to true, for private devices, Device Farm will not sign your app
-	// again. For public devices, Device Farm always signs your apps again and this
-	// parameter has no effect.
+	// When set to true, for private devices, Device Farm does not sign your app
+	// again. For public devices, Device Farm always signs your apps again.
 	//
-	// For more information about how Device Farm re-signs your app(s), see Do you
-	// modify my app? (https://aws.amazon.com/device-farm/faq/) in the AWS Device
-	// Farm FAQs.
+	// For more information on how Device Farm modifies your uploads during tests,
+	// see Do you modify my app? (https://aws.amazon.com/device-farm/faq/)
 	SkipAppResign *bool `locationName:"skipAppResign" type:"boolean"`
 
 	// Ignored. The public key of the ssh key pair you want to use for connecting
-	// to remote devices in your remote debugging session. This is only required
-	// if remoteDebugEnabled is set to true.
+	// to remote devices in your remote debugging session. This key is required
+	// only if remoteDebugEnabled is set to true.
 	//
 	// Remote debugging is no longer supported (https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html).
 	SshPublicKey *string `locationName:"sshPublicKey" type:"string"`

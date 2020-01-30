@@ -45,7 +45,7 @@ func (s *GetJobInput) Validate() error {
 type GetJobOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object containing information about the requested job.
+	// An object that contains information about the requested job.
 	Job *Job `locationName:"job" type:"structure"`
 }
 

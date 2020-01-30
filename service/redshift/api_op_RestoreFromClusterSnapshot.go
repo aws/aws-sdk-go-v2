@@ -34,7 +34,7 @@ type RestoreFromClusterSnapshotInput struct {
 	//
 	// Default: A random, system-chosen Availability Zone.
 	//
-	// Example: us-east-1a
+	// Example: us-east-2a
 	AvailabilityZone *string `type:"string"`
 
 	// The identifier of the cluster that will be created from restoring the snapshot.

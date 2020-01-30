@@ -13,7 +13,7 @@ import (
 type GetSamplingStatisticSummariesInput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 }
 
@@ -38,7 +38,7 @@ func (s GetSamplingStatisticSummariesInput) MarshalFields(e protocol.FieldEncode
 type GetSamplingStatisticSummariesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 
 	// Information about the number of requests instrumented for each sampling rule.

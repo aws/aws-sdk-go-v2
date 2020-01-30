@@ -22,8 +22,8 @@ type ListNetworkProfilesInput struct {
 	// which can be used to return the next set of items in the list.
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
 
-	// The type of network profile you wish to return information about. Valid values
-	// are listed below.
+	// The type of network profile to return information about. Valid values are
+	// listed here.
 	Type NetworkProfileType `locationName:"type" type:"string" enum:"true"`
 }
 

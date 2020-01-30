@@ -15,8 +15,9 @@ type AssociateKmsKeyInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.
-	// For more information, see Amazon Resource Names - AWS Key Management Service
-	// (AWS KMS) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms).
+	// This must be a symmetric CMK. For more information, see Amazon Resource Names
+	// - AWS Key Management Service (AWS KMS) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms)
+	// and Using Symmetric and Asymmetric Keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html).
 	//
 	// KmsKeyId is a required field
 	KmsKeyId *string `locationName:"kmsKeyId" type:"string" required:"true"`
@@ -76,6 +77,10 @@ const opAssociateKmsKey = "AssociateKmsKey"
 // association is stored as long as the data encrypted with the CMK is still
 // within Amazon CloudWatch Logs. This enables Amazon CloudWatch Logs to decrypt
 // this data whenever it is requested.
+//
+// Important: CloudWatch Logs supports only symmetric CMKs. Do not use an associate
+// an asymmetric CMK with your log group. For more information, see Using Symmetric
+// and Asymmetric Keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html).
 //
 // Note that it can take up to 5 minutes for this operation to take effect.
 //

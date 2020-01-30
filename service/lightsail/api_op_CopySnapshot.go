@@ -12,10 +12,8 @@ import (
 type CopySnapshotInput struct {
 	_ struct{} `type:"structure"`
 
-	// The date of the automatic snapshot to copy for the new manual snapshot.
-	//
-	// Use the get auto snapshots operation to identify the dates of the available
-	// automatic snapshots.
+	// The date of the source automatic snapshot to copy. Use the get auto snapshots
+	// operation to identify the dates of the available automatic snapshots.
 	//
 	// Constraints:
 	//
@@ -25,8 +23,8 @@ type CopySnapshotInput struct {
 	//    auto snapshot parameter. The restore date and use latest restorable auto
 	//    snapshot parameters are mutually exclusive.
 	//
-	// Define this parameter only when copying an automatic snapshot as a manual
-	// snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
+	//    * Define this parameter only when copying an automatic snapshot as a manual
+	//    snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots).
 	RestoreDate *string `locationName:"restoreDate" type:"string"`
 
 	// The AWS Region where the source manual or automatic snapshot is located.
@@ -34,32 +32,39 @@ type CopySnapshotInput struct {
 	// SourceRegion is a required field
 	SourceRegion RegionName `locationName:"sourceRegion" type:"string" required:"true" enum:"true"`
 
-	// The name of the source resource from which the automatic snapshot was created.
+	// The name of the source instance or disk from which the source automatic snapshot
+	// was created.
 	//
-	// Define this parameter only when copying an automatic snapshot as a manual
-	// snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
+	// Constraint:
+	//
+	//    * Define this parameter only when copying an automatic snapshot as a manual
+	//    snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots).
 	SourceResourceName *string `locationName:"sourceResourceName" type:"string"`
 
-	// The name of the source instance or disk snapshot to be copied.
+	// The name of the source manual snapshot to copy.
 	//
-	// Define this parameter only when copying a manual snapshot as another manual
-	// snapshot.
+	// Constraint:
+	//
+	//    * Define this parameter only when copying a manual snapshot as another
+	//    manual snapshot.
 	SourceSnapshotName *string `locationName:"sourceSnapshotName" type:"string"`
 
-	// The name of the new instance or disk snapshot to be created as a copy.
+	// The name of the new manual snapshot to be created as a copy.
 	//
 	// TargetSnapshotName is a required field
 	TargetSnapshotName *string `locationName:"targetSnapshotName" type:"string" required:"true"`
 
 	// A Boolean value to indicate whether to use the latest available automatic
-	// snapshot.
+	// snapshot of the specified source instance or disk.
 	//
-	// This parameter cannot be defined together with the restore date parameter.
-	// The use latest restorable auto snapshot and restore date parameters are mutually
-	// exclusive.
+	// Constraints:
 	//
-	// Define this parameter only when copying an automatic snapshot as a manual
-	// snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
+	//    * This parameter cannot be defined together with the restore date parameter.
+	//    The use latest restorable auto snapshot and restore date parameters are
+	//    mutually exclusive.
+	//
+	//    * Define this parameter only when copying an automatic snapshot as a manual
+	//    snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots).
 	UseLatestRestorableAutoSnapshot *bool `locationName:"useLatestRestorableAutoSnapshot" type:"boolean"`
 }
 
@@ -102,10 +107,10 @@ const opCopySnapshot = "CopySnapshot"
 // CopySnapshotRequest returns a request value for making API operation for
 // Amazon Lightsail.
 //
-// Copies a manual instance or disk snapshot as another manual snapshot, or
-// copies an automatic instance or disk snapshot as a manual snapshot. This
-// operation can also be used to copy a manual or automatic snapshot of an instance
-// or a disk from one AWS Region to another in Amazon Lightsail.
+// Copies a manual snapshot of an instance or disk as another manual snapshot,
+// or copies an automatic snapshot of an instance or disk as a manual snapshot.
+// This operation can also be used to copy a manual or automatic snapshot of
+// an instance or a disk from one AWS Region to another in Amazon Lightsail.
 //
 // When copying a manual snapshot, be sure to define the source region, source
 // snapshot name, and target snapshot name parameters.
@@ -113,8 +118,6 @@ const opCopySnapshot = "CopySnapshot"
 // When copying an automatic snapshot, be sure to define the source region,
 // source resource name, target snapshot name, and either the restore date or
 // the use latest restorable auto snapshot parameters.
-//
-// Database snapshots cannot be copied at this time.
 //
 //    // Example sending a request using CopySnapshotRequest.
 //    req := client.CopySnapshotRequest(params)

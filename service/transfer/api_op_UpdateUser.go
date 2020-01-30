@@ -32,6 +32,14 @@ type UpdateUserInput struct {
 	// In most cases, you can use this value instead of the scope down policy to
 	// lock your user down to the designated home directory ("chroot"). To do this,
 	// you can set Entry to '/' and set Target to the HomeDirectory parameter value.
+	//
+	// If the target of a logical directory entry does not exist in S3, the entry
+	// will be ignored. As a workaround, you can use the S3 api to create 0 byte
+	// objects as place holders for your directory. If using the CLI, use the s3api
+	// call instead of s3 so you can use the put-object operation. For example,
+	// you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/.
+	// Make sure that the end of the key name ends in a / for it to be considered
+	// a folder.
 	HomeDirectoryMappings []HomeDirectoryMapEntry `min:"1" type:"list"`
 
 	// The type of landing directory (folder) you want your users' home directory

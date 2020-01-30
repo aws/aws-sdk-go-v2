@@ -38,7 +38,7 @@ const opDescribeStorage = "DescribeStorage"
 // DescribeStorageRequest returns a request value for making API operation for
 // Amazon Redshift.
 //
-// Returns the total amount of snapshot usage and provisioned storage in megabytes.
+// Returns account level backups storage size and provisional storage.
 //
 //    // Example sending a request using DescribeStorageRequest.
 //    req := client.DescribeStorageRequest(params)

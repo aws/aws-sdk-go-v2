@@ -211,6 +211,8 @@ type ClientAPI interface {
 
 	ListTagsForResourceRequest(*pinpoint.ListTagsForResourceInput) pinpoint.ListTagsForResourceRequest
 
+	ListTemplateVersionsRequest(*pinpoint.ListTemplateVersionsInput) pinpoint.ListTemplateVersionsRequest
+
 	ListTemplatesRequest(*pinpoint.ListTemplatesInput) pinpoint.ListTemplatesRequest
 
 	PhoneNumberValidateRequest(*pinpoint.PhoneNumberValidateInput) pinpoint.PhoneNumberValidateRequest
@@ -266,6 +268,8 @@ type ClientAPI interface {
 	UpdateSmsChannelRequest(*pinpoint.UpdateSmsChannelInput) pinpoint.UpdateSmsChannelRequest
 
 	UpdateSmsTemplateRequest(*pinpoint.UpdateSmsTemplateInput) pinpoint.UpdateSmsTemplateRequest
+
+	UpdateTemplateActiveVersionRequest(*pinpoint.UpdateTemplateActiveVersionInput) pinpoint.UpdateTemplateActiveVersionRequest
 
 	UpdateVoiceChannelRequest(*pinpoint.UpdateVoiceChannelInput) pinpoint.UpdateVoiceChannelRequest
 

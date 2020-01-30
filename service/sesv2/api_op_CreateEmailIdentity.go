@@ -16,6 +16,14 @@ import (
 type CreateEmailIdentityInput struct {
 	_ struct{} `type:"structure"`
 
+	// If your request includes this object, Amazon SES configures the identity
+	// to use Bring Your Own DKIM (BYODKIM) for DKIM authentication purposes, as
+	// opposed to the default method, Easy DKIM (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
+	//
+	// You can only specify this object if the email identity is a domain, as opposed
+	// to an address.
+	DkimSigningAttributes *DkimSigningAttributes `type:"structure"`
+
 	// The email address or domain that you want to verify.
 	//
 	// EmailIdentity is a required field
@@ -38,6 +46,11 @@ func (s *CreateEmailIdentityInput) Validate() error {
 	if s.EmailIdentity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EmailIdentity"))
 	}
+	if s.DkimSigningAttributes != nil {
+		if err := s.DkimSigningAttributes.Validate(); err != nil {
+			invalidParams.AddNested("DkimSigningAttributes", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
 			if err := v.Validate(); err != nil {
@@ -56,6 +69,12 @@ func (s *CreateEmailIdentityInput) Validate() error {
 func (s CreateEmailIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if s.DkimSigningAttributes != nil {
+		v := s.DkimSigningAttributes
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DkimSigningAttributes", v, metadata)
+	}
 	if s.EmailIdentity != nil {
 		v := *s.EmailIdentity
 
@@ -77,17 +96,14 @@ func (s CreateEmailIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// If the email identity is a domain, this object contains tokens that you can
-// use to create a set of CNAME records. To sucessfully verify your domain,
-// you have to add these records to the DNS configuration for your domain.
+// If the email identity is a domain, this object contains information about
+// the DKIM verification status for the domain.
 //
 // If the email identity is an email address, this object is empty.
 type CreateEmailIdentityOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An object that contains information about the DKIM attributes for the identity.
-	// This object includes the tokens that you use to create the CNAME records
-	// that are required to complete the DKIM verification process.
 	DkimAttributes *DkimAttributes `type:"structure"`
 
 	// The email identity type.
@@ -142,11 +158,20 @@ const opCreateEmailIdentity = "CreateEmailIdentity"
 // Your email address is verified as soon as you follow the link in the verification
 // email.
 //
-// When you verify a domain, this operation provides a set of DKIM tokens, which
-// you can convert into CNAME tokens. You add these CNAME tokens to the DNS
-// configuration for your domain. Your domain is verified when Amazon SES detects
-// these records in the DNS configuration for your domain. For some DNS providers,
-// it can take 72 hours or more to complete the domain verification process.
+// When you verify a domain without specifying the DkimSigningAttributes object,
+// this operation provides a set of DKIM tokens. You can convert these tokens
+// into CNAME records, which you then add to the DNS configuration for your
+// domain. Your domain is verified when Amazon SES detects these records in
+// the DNS configuration for your domain. This verification method is known
+// as Easy DKIM (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
+//
+// Alternatively, you can perform the verification process by providing your
+// own public-private key pair. This verification method is known as Bring Your
+// Own DKIM (BYODKIM). To use BYODKIM, your call to the CreateEmailIdentity
+// operation has to include the DkimSigningAttributes object. When you specify
+// this object, you provide a selector (a component of the DNS record name that
+// identifies the public key that you want to use for DKIM authentication) and
+// a private key.
 //
 //    // Example sending a request using CreateEmailIdentityRequest.
 //    req := client.CreateEmailIdentityRequest(params)

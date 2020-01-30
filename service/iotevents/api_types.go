@@ -21,19 +21,19 @@ type Action struct {
 	// Information needed to clear the timer.
 	ClearTimer *ClearTimerAction `locationName:"clearTimer" type:"structure"`
 
-	// Sends information about the detector model instance and the event which triggered
+	// Sends information about the detector model instance and the event that triggered
 	// the action to a Kinesis Data Firehose delivery stream.
 	Firehose *FirehoseAction `locationName:"firehose" type:"structure"`
 
 	// Sends an IoT Events input, passing in information about the detector model
-	// instance and the event which triggered the action.
+	// instance and the event that triggered the action.
 	IotEvents *IotEventsAction `locationName:"iotEvents" type:"structure"`
 
 	// Publishes an MQTT message with the given topic to the AWS IoT message broker.
 	IotTopicPublish *IotTopicPublishAction `locationName:"iotTopicPublish" type:"structure"`
 
-	// Calls an AWS Lambda function, passing in information about the detector model
-	// instance and the event which triggered the action.
+	// Calls a Lambda function, passing in information about the detector model
+	// instance and the event that triggered the action.
 	Lambda *LambdaAction `locationName:"lambda" type:"structure"`
 
 	// Information needed to reset the timer.
@@ -48,7 +48,7 @@ type Action struct {
 	// Sends an Amazon SNS message.
 	Sns *SNSTopicPublishAction `locationName:"sns" type:"structure"`
 
-	// Sends information about the detector model instance and the event which triggered
+	// Sends information about the detector model instance and the event that triggered
 	// the action to an Amazon SQS queue.
 	Sqs *SqsAction `locationName:"sqs" type:"structure"`
 }
@@ -389,16 +389,15 @@ type DetectorModelConfiguration struct {
 	// The version of the detector model.
 	DetectorModelVersion *string `locationName:"detectorModelVersion" min:"1" type:"string"`
 
-	// When set to SERIAL, variables are updated and event conditions evaluated
-	// in the order that the events are defined. When set to BATCH, variables are
-	// updated and events performed only after all event conditions are evaluated.
+	// Information about the order in which events are evaluated and how actions
+	// are executed.
 	EvaluationMethod EvaluationMethod `locationName:"evaluationMethod" type:"string" enum:"true"`
 
-	// The input attribute key used to identify a device or system to create a detector
-	// (an instance of the detector model) and then to route each input received
-	// to the appropriate detector (instance). This parameter uses a JSON-path expression
-	// to specify the attribute-value pair in the message payload of each input
-	// that is used to identify the device associated with the input.
+	// The input attribute key used to identify a device or system in order to create
+	// a detector (an instance of the detector model) and then to route each input
+	// received to the appropriate detector (instance). This parameter uses a JSON-path
+	// expression to specify the attribute-value pair in the message payload of
+	// each input that is used to identify the device associated with the input.
 	Key *string `locationName:"key" min:"1" type:"string"`
 
 	// The time the detector model was last updated.
@@ -617,9 +616,8 @@ type DetectorModelVersionSummary struct {
 	// The ID of the detector model version.
 	DetectorModelVersion *string `locationName:"detectorModelVersion" min:"1" type:"string"`
 
-	// When set to SERIAL, variables are updated and event conditions evaluated
-	// in the order that the events are defined. When set to BATCH, variables are
-	// updated and events performed only after all event conditions are evaluated.
+	// Information about the order in which events are evaluated and how actions
+	// are executed.
 	EvaluationMethod EvaluationMethod `locationName:"evaluationMethod" type:"string" enum:"true"`
 
 	// The last time the detector model version was updated.
@@ -767,7 +765,7 @@ func (s Event) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Sends information about the detector model instance and the event which triggered
+// Sends information about the detector model instance and the event that triggered
 // the action to a Kinesis Data Firehose delivery stream.
 type FirehoseAction struct {
 	_ struct{} `type:"structure"`
@@ -1064,8 +1062,8 @@ func (s InputSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Sends an IoT Events input, passing in information about the detector model
-// instance and the event which triggered the action.
+// Sends an AWS IoT Events input, passing in information about the detector
+// model instance and the event that triggered the action.
 type IotEventsAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1152,12 +1150,12 @@ func (s IotTopicPublishAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Calls an AWS Lambda function, passing in information about the detector model
-// instance and the event which triggered the action.
+// Calls a Lambda function, passing in information about the detector model
+// instance and the event that triggered the action.
 type LambdaAction struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the AWS Lambda function which is executed.
+	// The ARN of the Lambda function that is executed.
 	//
 	// FunctionArn is a required field
 	FunctionArn *string `locationName:"functionArn" min:"1" type:"string" required:"true"`
@@ -1667,12 +1665,12 @@ func (s SetVariableAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Sends information about the detector model instance and the event which triggered
+// Sends information about the detector model instance and the event that triggered
 // the action to an Amazon SQS queue.
 type SqsAction struct {
 	_ struct{} `type:"structure"`
 
-	// The URL of the Amazon SQS queue where the data is written.
+	// The URL of the SQS queue where the data is written.
 	//
 	// QueueUrl is a required field
 	QueueUrl *string `locationName:"queueUrl" type:"string" required:"true"`

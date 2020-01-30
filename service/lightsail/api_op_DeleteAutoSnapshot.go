@@ -12,15 +12,15 @@ import (
 type DeleteAutoSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
-	// The date of the automatic snapshot to delete in YYYY-MM-DD format.
-	//
-	// Use the get auto snapshots operation to get the available automatic snapshots
-	// for a resource.
+	// The date of the automatic snapshot to delete in YYYY-MM-DD format. Use the
+	// get auto snapshots operation to get the available automatic snapshots for
+	// a resource.
 	//
 	// Date is a required field
 	Date *string `locationName:"date" type:"string" required:"true"`
 
-	// The name of the source resource from which to delete the automatic snapshot.
+	// The name of the source instance or disk from which to delete the automatic
+	// snapshot.
 	//
 	// ResourceName is a required field
 	ResourceName *string `locationName:"resourceName" type:"string" required:"true"`
@@ -66,7 +66,8 @@ const opDeleteAutoSnapshot = "DeleteAutoSnapshot"
 // DeleteAutoSnapshotRequest returns a request value for making API operation for
 // Amazon Lightsail.
 //
-// Deletes an automatic snapshot for an instance or disk.
+// Deletes an automatic snapshot of an instance or disk. For more information,
+// see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
 //
 //    // Example sending a request using DeleteAutoSnapshotRequest.
 //    req := client.DeleteAutoSnapshotRequest(params)

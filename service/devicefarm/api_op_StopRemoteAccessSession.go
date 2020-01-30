@@ -13,7 +13,7 @@ import (
 type StopRemoteAccessSessionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the remote access session you wish to stop.
+	// The Amazon Resource Name (ARN) of the remote access session to stop.
 	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
@@ -46,8 +46,8 @@ func (s *StopRemoteAccessSessionInput) Validate() error {
 type StopRemoteAccessSessionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A container representing the metadata from the service about the remote access
-	// session you are stopping.
+	// A container that represents the metadata from the service about the remote
+	// access session you are stopping.
 	RemoteAccessSession *RemoteAccessSession `locationName:"remoteAccessSession" type:"structure"`
 }
 

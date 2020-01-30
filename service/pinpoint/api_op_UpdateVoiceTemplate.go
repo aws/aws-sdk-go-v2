@@ -13,8 +13,12 @@ import (
 type UpdateVoiceTemplateInput struct {
 	_ struct{} `type:"structure" payload:"VoiceTemplateRequest"`
 
+	CreateNewVersion *bool `location:"querystring" locationName:"create-new-version" type:"boolean"`
+
 	// TemplateName is a required field
 	TemplateName *string `location:"uri" locationName:"template-name" type:"string" required:"true"`
+
+	Version *string `location:"querystring" locationName:"version" type:"string"`
 
 	// Specifies the content and settings for a message template that can be used
 	// in messages that are sent through the voice channel.
@@ -62,6 +66,18 @@ func (s UpdateVoiceTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.PayloadTarget, "VoiceTemplateRequest", v, metadata)
 	}
+	if s.CreateNewVersion != nil {
+		v := *s.CreateNewVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "create-new-version", protocol.BoolValue(v), metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	return nil
 }
 
@@ -95,8 +111,8 @@ const opUpdateVoiceTemplate = "UpdateVoiceTemplate"
 // UpdateVoiceTemplateRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Updates an existing message template that you can use in messages that are
-// sent through the voice channel.
+// Updates an existing message template for messages that are sent through the
+// voice channel.
 //
 //    // Example sending a request using UpdateVoiceTemplateRequest.
 //    req := client.UpdateVoiceTemplateRequest(params)

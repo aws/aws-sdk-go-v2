@@ -13,17 +13,17 @@ import (
 type DescribeMatchmakingRuleSetsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages.
+	// The maximum number of results to return. Use this parameter with NextToken
+	// to get results as a set of sequential pages.
 	Limit *int64 `min:"1" type:"integer"`
 
-	// List of one or more matchmaking rule set names to retrieve details for. (Note:
-	// The rule set name is different from the optional "name" field in the rule
-	// set body.)
+	// A list of one or more matchmaking rule set names to retrieve details for.
+	// (Note: The rule set name is different from the optional "name" field in the
+	// rule set body.) You can use either the rule set name or ARN value.
 	Names []string `min:"1" type:"list"`
 
-	// Token that indicates the start of the next sequential page of results. Use
-	// the token that is returned with a previous call to this action. To start
+	// A token that indicates the start of the next sequential page of results.
+	// Use the token that is returned with a previous call to this action. To start
 	// at the beginning of the result set, do not specify a value.
 	NextToken *string `min:"1" type:"string"`
 }
@@ -56,12 +56,12 @@ func (s *DescribeMatchmakingRuleSetsInput) Validate() error {
 type DescribeMatchmakingRuleSetsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Token that indicates where to resume retrieving results on the next call
+	// A token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
 	// of the list.
 	NextToken *string `min:"1" type:"string"`
 
-	// Collection of requested matchmaking rule set objects.
+	// A collection of requested matchmaking rule set objects.
 	//
 	// RuleSets is a required field
 	RuleSets []MatchmakingRuleSet `type:"list" required:"true"`
@@ -78,7 +78,7 @@ const opDescribeMatchmakingRuleSets = "DescribeMatchmakingRuleSets"
 // Amazon GameLift.
 //
 // Retrieves the details for FlexMatch matchmaking rule sets. You can request
-// all existing rule sets for the region, or provide a list of one or more rule
+// all existing rule sets for the Region, or provide a list of one or more rule
 // set names. When requesting multiple items, use the pagination parameters
 // to retrieve results as a set of sequential pages. If successful, a rule set
 // is returned for each requested name.

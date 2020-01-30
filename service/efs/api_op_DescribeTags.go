@@ -24,8 +24,9 @@ type DescribeTagsInput struct {
 	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
 
 	// (Optional) The maximum number of file system tags to return in the response.
-	// Currently, this number is automatically set to 10, and other values are ignored.
-	// The response is paginated at 10 per page if you have more than 10 tags.
+	// Currently, this number is automatically set to 100, and other values are
+	// ignored. The response is paginated at 100 per page if you have more than
+	// 100 tags.
 	MaxItems *int64 `location:"querystring" locationName:"MaxItems" min:"1" type:"integer"`
 }
 
@@ -149,10 +150,19 @@ const opDescribeTags = "DescribeTags"
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeTags
 func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DescribeTags, has been deprecated")
+	}
 	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-02-01/tags/{FileSystemId}/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"NextMarker"},
+			LimitToken:      "MaxItems",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -185,6 +195,53 @@ func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsResponse, e
 	}
 
 	return resp, nil
+}
+
+// NewDescribeTagsRequestPaginator returns a paginator for DescribeTags.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.DescribeTagsRequest(input)
+//   p := efs.NewDescribeTagsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewDescribeTagsPaginator(req DescribeTagsRequest) DescribeTagsPaginator {
+	return DescribeTagsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *DescribeTagsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeTagsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeTagsPaginator struct {
+	aws.Pager
+}
+
+func (p *DescribeTagsPaginator) CurrentPage() *DescribeTagsOutput {
+	return p.Pager.CurrentPage().(*DescribeTagsOutput)
 }
 
 // DescribeTagsResponse is the response type for the

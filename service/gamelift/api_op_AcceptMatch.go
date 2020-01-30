@@ -18,13 +18,13 @@ type AcceptMatchInput struct {
 	// AcceptanceType is a required field
 	AcceptanceType AcceptanceType `type:"string" required:"true" enum:"true"`
 
-	// Unique identifier for a player delivering the response. This parameter can
-	// include one or multiple player IDs.
+	// A unique identifier for a player delivering the response. This parameter
+	// can include one or multiple player IDs.
 	//
 	// PlayerIds is a required field
 	PlayerIds []string `type:"list" required:"true"`
 
-	// Unique identifier for a matchmaking ticket. The ticket must be in status
+	// A unique identifier for a matchmaking ticket. The ticket must be in status
 	// REQUIRES_ACCEPTANCE; otherwise this request will fail.
 	//
 	// TicketId is a required field

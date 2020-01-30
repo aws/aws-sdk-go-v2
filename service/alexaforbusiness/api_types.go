@@ -634,6 +634,9 @@ func (s Device) String() string {
 type DeviceData struct {
 	_ struct{} `type:"structure"`
 
+	// The time (in epoch) when the device data was created.
+	CreatedTime *time.Time `type:"timestamp"`
+
 	// The ARN of a device.
 	DeviceArn *string `type:"string"`
 
@@ -736,6 +739,9 @@ type DeviceStatusInfo struct {
 
 	// The latest available information about the connection status of a device.
 	ConnectionStatus ConnectionStatus `type:"string" enum:"true"`
+
+	// The time (in epoch) when the device connection status changed.
+	ConnectionStatusUpdatedTime *time.Time `type:"timestamp"`
 
 	// One or more device status detail descriptions.
 	DeviceStatusDetails []DeviceStatusDetail `type:"list"`

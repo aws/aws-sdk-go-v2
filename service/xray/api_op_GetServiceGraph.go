@@ -25,7 +25,7 @@ type GetServiceGraphInput struct {
 	// The name of a group to generate a graph based on.
 	GroupName *string `min:"1" type:"string"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 
 	// The start of the time frame for which to generate a graph.
@@ -113,7 +113,7 @@ type GetServiceGraphOutput struct {
 	// The end of the time frame for which the graph was generated.
 	EndTime *time.Time `type:"timestamp"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 
 	// The services that have processed a traced request during the specified time
@@ -180,8 +180,9 @@ const opGetServiceGraph = "GetServiceGraph"
 // Retrieves a document that describes services that process incoming requests,
 // and downstream services that they call as a result. Root services process
 // incoming requests and make calls to downstream services. Root services are
-// applications that use the AWS X-Ray SDK. Downstream services can be other
-// applications, AWS resources, HTTP web APIs, or SQL databases.
+// applications that use the AWS X-Ray SDK (https://docs.aws.amazon.com/xray/index.html).
+// Downstream services can be other applications, AWS resources, HTTP web APIs,
+// or SQL databases.
 //
 //    // Example sending a request using GetServiceGraphRequest.
 //    req := client.GetServiceGraphRequest(params)

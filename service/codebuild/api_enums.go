@@ -408,6 +408,23 @@ func (enum ServerType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type SharedResourceSortByType string
+
+// Enum values for SharedResourceSortByType
+const (
+	SharedResourceSortByTypeArn          SharedResourceSortByType = "ARN"
+	SharedResourceSortByTypeModifiedTime SharedResourceSortByType = "MODIFIED_TIME"
+)
+
+func (enum SharedResourceSortByType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SharedResourceSortByType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SortOrderType string
 
 // Enum values for SortOrderType

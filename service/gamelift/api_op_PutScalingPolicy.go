@@ -21,8 +21,9 @@ type PutScalingPolicyInput struct {
 	// before a scaling event is triggered.
 	EvaluationPeriods *int64 `min:"1" type:"integer"`
 
-	// Unique identifier for a fleet to apply this policy to. The fleet cannot be
-	// in any of the following statuses: ERROR or DELETING.
+	// A unique identifier for a fleet to apply this policy to. You can use either
+	// the fleet ID or ARN value. The fleet cannot be in any of the following statuses:
+	// ERROR or DELETING.
 	//
 	// FleetId is a required field
 	FleetId *string `type:"string" required:"true"`
@@ -67,15 +68,15 @@ type PutScalingPolicyInput struct {
 	// MetricName is a required field
 	MetricName MetricName `type:"string" required:"true" enum:"true"`
 
-	// Descriptive label that is associated with a scaling policy. Policy names
+	// A descriptive label that is associated with a scaling policy. Policy names
 	// do not need to be unique. A fleet can have only one scaling policy with the
 	// same name.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// Type of scaling policy to create. For a target-based policy, set the parameter
-	// MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration.
+	// The type of scaling policy to create. For a target-based policy, set the
+	// parameter MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration.
 	// For a rule-based policy set the following parameters: MetricName, ComparisonOperator,
 	// Threshold, EvaluationPeriods, ScalingAdjustmentType, and ScalingAdjustment.
 	PolicyType PolicyType `type:"string" enum:"true"`
@@ -83,7 +84,7 @@ type PutScalingPolicyInput struct {
 	// Amount of adjustment to make, based on the scaling adjustment type.
 	ScalingAdjustment *int64 `type:"integer"`
 
-	// Type of adjustment to make to a fleet's instance count (see FleetCapacity):
+	// The type of adjustment to make to a fleet's instance count (see FleetCapacity):
 	//
 	//    * ChangeInCapacity -- add (or subtract) the scaling adjustment value from
 	//    the current instance count. Positive values scale up while negative values
@@ -97,7 +98,7 @@ type PutScalingPolicyInput struct {
 	//    the fleet down by 10%.
 	ScalingAdjustmentType ScalingAdjustmentType `type:"string" enum:"true"`
 
-	// Object that contains settings for a target-based scaling policy.
+	// The settings for a target-based scaling policy.
 	TargetConfiguration *TargetConfiguration `type:"structure"`
 
 	// Metric value used to trigger a scaling event.
@@ -145,7 +146,7 @@ func (s *PutScalingPolicyInput) Validate() error {
 type PutScalingPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Descriptive label that is associated with a scaling policy. Policy names
+	// A descriptive label that is associated with a scaling policy. Policy names
 	// do not need to be unique.
 	Name *string `min:"1" type:"string"`
 }

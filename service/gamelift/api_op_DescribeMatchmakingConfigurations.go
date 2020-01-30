@@ -13,22 +13,25 @@ import (
 type DescribeMatchmakingConfigurationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages. This parameter is limited to 10.
+	// The maximum number of results to return. Use this parameter with NextToken
+	// to get results as a set of sequential pages. This parameter is limited to
+	// 10.
 	Limit *int64 `min:"1" type:"integer"`
 
-	// Unique identifier for a matchmaking configuration(s) to retrieve. To request
-	// all existing configurations, leave this parameter empty.
+	// A unique identifier for a matchmaking configuration(s) to retrieve. You can
+	// use either the configuration name or ARN value. To request all existing configurations,
+	// leave this parameter empty.
 	Names []string `type:"list"`
 
-	// Token that indicates the start of the next sequential page of results. Use
-	// the token that is returned with a previous call to this action. To start
+	// A token that indicates the start of the next sequential page of results.
+	// Use the token that is returned with a previous call to this action. To start
 	// at the beginning of the result set, do not specify a value.
 	NextToken *string `min:"1" type:"string"`
 
-	// Unique identifier for a matchmaking rule set. Use this parameter to retrieve
-	// all matchmaking configurations that use this rule set.
-	RuleSetName *string `type:"string"`
+	// A unique identifier for a matchmaking rule set. You can use either the rule
+	// set name or ARN value. Use this parameter to retrieve all matchmaking configurations
+	// that use this rule set.
+	RuleSetName *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -45,6 +48,9 @@ func (s *DescribeMatchmakingConfigurationsInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+	if s.RuleSetName != nil && len(*s.RuleSetName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleSetName", 1))
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -56,10 +62,10 @@ func (s *DescribeMatchmakingConfigurationsInput) Validate() error {
 type DescribeMatchmakingConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Collection of requested matchmaking configuration objects.
+	// A collection of requested matchmaking configurations.
 	Configurations []MatchmakingConfiguration `type:"list"`
 
-	// Token that indicates where to resume retrieving results on the next call
+	// A token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
 	// of the list.
 	NextToken *string `min:"1" type:"string"`

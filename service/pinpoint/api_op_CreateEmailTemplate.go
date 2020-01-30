@@ -95,8 +95,7 @@ const opCreateEmailTemplate = "CreateEmailTemplate"
 // CreateEmailTemplateRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Creates a message template that you can use in messages that are sent through
-// the email channel.
+// Creates a message template for messages that are sent through the email channel.
 //
 //    // Example sending a request using CreateEmailTemplateRequest.
 //    req := client.CreateEmailTemplateRequest(params)

@@ -15,6 +15,8 @@ type GetSmsTemplateInput struct {
 
 	// TemplateName is a required field
 	TemplateName *string `location:"uri" locationName:"template-name" type:"string" required:"true"`
+
+	Version *string `location:"querystring" locationName:"version" type:"string"`
 }
 
 // String returns the string representation
@@ -45,6 +47,12 @@ func (s GetSmsTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "template-name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -80,8 +88,8 @@ const opGetSmsTemplate = "GetSmsTemplate"
 // GetSmsTemplateRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Retrieves the content and settings for a message template that you can use
-// in messages that are sent through the SMS channel.
+// Retrieves the content and settings of a message template for messages that
+// are sent through the SMS channel.
 //
 //    // Example sending a request using GetSmsTemplateRequest.
 //    req := client.GetSmsTemplateRequest(params)

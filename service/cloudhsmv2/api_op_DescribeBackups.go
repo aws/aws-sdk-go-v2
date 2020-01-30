@@ -35,6 +35,8 @@ type DescribeBackupsInput struct {
 	// value to get more backups.
 	NextToken *string `type:"string"`
 
+	// Designates whether or not to sort the return backups by ascending chronological
+	// order of generation.
 	SortAscending *bool `type:"boolean"`
 }
 

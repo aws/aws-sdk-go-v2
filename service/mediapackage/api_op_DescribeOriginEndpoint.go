@@ -54,6 +54,9 @@ type DescribeOriginEndpointOutput struct {
 
 	Arn *string `locationName:"arn" type:"string"`
 
+	// CDN Authorization credentials
+	Authorization *Authorization `locationName:"authorization" type:"structure"`
+
 	ChannelId *string `locationName:"channelId" type:"string"`
 
 	// A Common Media Application Format (CMAF) packaging configuration.
@@ -100,6 +103,12 @@ func (s DescribeOriginEndpointOutput) MarshalFields(e protocol.FieldEncoder) err
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Authorization != nil {
+		v := s.Authorization
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "authorization", v, metadata)
 	}
 	if s.ChannelId != nil {
 		v := *s.ChannelId

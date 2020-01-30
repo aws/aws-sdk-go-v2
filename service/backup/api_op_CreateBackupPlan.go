@@ -151,8 +151,8 @@ const opCreateBackupPlan = "CreateBackupPlan"
 // Backup plans are documents that contain information that AWS Backup uses
 // to schedule tasks that create recovery points of resources.
 //
-// If you call CreateBackupPlan with a plan that already exists, the existing
-// backupPlanId is returned.
+// If you call CreateBackupPlan with a plan that already exists, an AlreadyExistsException
+// is returned.
 //
 //    // Example sending a request using CreateBackupPlanRequest.
 //    req := client.CreateBackupPlanRequest(params)

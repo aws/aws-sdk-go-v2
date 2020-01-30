@@ -331,11 +331,12 @@ func (enum AfdSignaling) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Ignore this setting unless this input is a QuickTime animation. Specify which
-// part of this input MediaConvert uses for your outputs. Leave this setting
-// set to DISCARD in order to delete the alpha channel and preserve the video.
-// Use REMAP_TO_LUMA for this setting to delete the video and map the alpha
-// channel to the luma channel of your outputs.
+// Ignore this setting unless this input is a QuickTime animation with an alpha
+// channel. Use this setting to create separate Key and Fill outputs. In each
+// output, specify which part of the input MediaConvert uses. Leave this setting
+// at the default value DISCARD to delete the alpha channel and preserve the
+// video. Set it to REMAP_TO_LUMA to delete the video and map the alpha channel
+// to the luma channel of your outputs.
 type AlphaBehavior string
 
 // Enum values for AlphaBehavior
@@ -422,6 +423,7 @@ type AudioCodec string
 const (
 	AudioCodecAac         AudioCodec = "AAC"
 	AudioCodecMp2         AudioCodec = "MP2"
+	AudioCodecMp3         AudioCodec = "MP3"
 	AudioCodecWav         AudioCodec = "WAV"
 	AudioCodecAiff        AudioCodec = "AIFF"
 	AudioCodecAc3         AudioCodec = "AC3"
@@ -1057,6 +1059,71 @@ func (enum CmafWriteHLSManifest) MarshalValue() (string, error) {
 }
 
 func (enum CmafWriteHLSManifest) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// When you enable Precise segment duration in DASH manifests (writeSegmentTimelineInRepresentation),
+// your DASH manifest shows precise segment durations. The segment duration
+// information appears inside the SegmentTimeline element, inside SegmentTemplate
+// at the Representation level. When this feature isn't enabled, the segment
+// durations in your DASH manifest are approximate. The segment duration information
+// appears in the duration attribute of the SegmentTemplate element.
+type CmafWriteSegmentTimelineInRepresentation string
+
+// Enum values for CmafWriteSegmentTimelineInRepresentation
+const (
+	CmafWriteSegmentTimelineInRepresentationEnabled  CmafWriteSegmentTimelineInRepresentation = "ENABLED"
+	CmafWriteSegmentTimelineInRepresentationDisabled CmafWriteSegmentTimelineInRepresentation = "DISABLED"
+)
+
+func (enum CmafWriteSegmentTimelineInRepresentation) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CmafWriteSegmentTimelineInRepresentation) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Use this setting only when you specify SCTE-35 markers from ESAM. Choose
+// INSERT to put SCTE-35 markers in this output at the insertion points that
+// you specify in an ESAM XML document. Provide the document in the setting
+// SCC XML (sccXml).
+type CmfcScte35Esam string
+
+// Enum values for CmfcScte35Esam
+const (
+	CmfcScte35EsamInsert CmfcScte35Esam = "INSERT"
+	CmfcScte35EsamNone   CmfcScte35Esam = "NONE"
+)
+
+func (enum CmfcScte35Esam) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CmfcScte35Esam) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Ignore this setting unless you have SCTE-35 markers in your input video file.
+// Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear
+// in your input to also appear in this output. Choose None (NONE) if you don't
+// want those SCTE-35 markers in this output.
+type CmfcScte35Source string
+
+// Enum values for CmfcScte35Source
+const (
+	CmfcScte35SourcePassthrough CmfcScte35Source = "PASSTHROUGH"
+	CmfcScte35SourceNone        CmfcScte35Source = "NONE"
+)
+
+func (enum CmfcScte35Source) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CmfcScte35Source) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -4475,6 +4542,25 @@ func (enum MovReference) MarshalValue() (string, error) {
 }
 
 func (enum MovReference) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Specify whether the service encodes this MP3 audio output with a constant
+// bitrate (CBR) or a variable bitrate (VBR).
+type Mp3RateControlMode string
+
+// Enum values for Mp3RateControlMode
+const (
+	Mp3RateControlModeCbr Mp3RateControlMode = "CBR"
+	Mp3RateControlModeVbr Mp3RateControlMode = "VBR"
+)
+
+func (enum Mp3RateControlMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Mp3RateControlMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

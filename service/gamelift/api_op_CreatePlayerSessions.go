@@ -13,7 +13,7 @@ import (
 type CreatePlayerSessionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier for the game session to add players to.
+	// A unique identifier for the game session to add players to.
 	//
 	// GameSessionId is a required field
 	GameSessionId *string `min:"1" type:"string" required:"true"`
@@ -63,7 +63,7 @@ func (s *CreatePlayerSessionsInput) Validate() error {
 type CreatePlayerSessionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Collection of player session objects created for the added players.
+	// A collection of player session objects created for the added players.
 	PlayerSessions []PlayerSession `type:"list"`
 }
 
