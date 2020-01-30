@@ -76,13 +76,15 @@ func TestConfigs_AppendFromLoaders(t *testing.T) {
 }
 
 func TestConfigs_ResolveAWSConfig(t *testing.T) {
-	cfg, err := Configs{
+	configSources := Configs{
 		WithRegion("mock-region"),
 		WithCredentialsValue(aws.Credentials{
 			AccessKeyID: "AKID", SecretAccessKey: "SECRET",
 			Source: "provider",
 		}),
-	}.ResolveAWSConfig([]AWSConfigResolver{
+	}
+
+	cfg, err := configSources.ResolveAWSConfig([]AWSConfigResolver{
 		ResolveRegion,
 		ResolveCredentialsValue,
 	})
@@ -100,5 +102,14 @@ func TestConfigs_ResolveAWSConfig(t *testing.T) {
 	}
 	if e, a := "provider", creds.Source; e != a {
 		t.Errorf("expect %v provider, got %v", e, a)
+	}
+
+	var expectedSources []interface{}
+	for _, s := range cfg.ConfigSources {
+		expectedSources = append(expectedSources, s)
+	}
+
+	if e, a := expectedSources, cfg.ConfigSources; !reflect.DeepEqual(e, a) {
+		t.Errorf("expected %v, got %v", e, a)
 	}
 }
