@@ -79,15 +79,9 @@ type Config struct {
 	// for testing that do not support the modeled host prefix pattern.
 	DisableEndpointHostPrefix bool
 
-	// ConfigResolver defines how additional configuration can be loaded by clients.
-	AdditionalConfig ConfigResolver
-}
-
-// ConfigResolver is an interface that encapsulates the behavior of loading
-// additional configuration.
-type ConfigResolver interface {
-	// ResolveConfig calls the provide function passing a slice of configuration sources
-	ResolveConfig(func(configs []interface{}) error) error
+	// ConfigSources are the sources that were used to construct the Config.
+	// Allows for additional configuration can be loaded by clients.
+	ConfigSources []interface{}
 }
 
 // NewConfig returns a new Config pointer that can be chained with builder

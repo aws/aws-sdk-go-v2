@@ -699,10 +699,8 @@ func New(config aws.Config) *{{ .StructName }} {
     }
 
 	{{ if .HasExternalClientConfigFields }}
-		if config.AdditionalConfig != nil {
-			if err := config.AdditionalConfig.ResolveConfig(resolveClientConfig(svc)); err != nil {
-				panic(fmt.Errorf("failed to resolve service configuration: %v", err))
-			}
+		if err := resolveClientConfig(svc, config.ConfigSources); err != nil {
+			panic(fmt.Errorf("failed to resolve service configuration: %v", err))
 		}
 	{{- end }}
 
@@ -1130,18 +1128,20 @@ func (a *API) hasNonIOShapes() bool {
 var tplClientConfig = template.Must(template.New("tplClientConfig").Funcs(map[string]interface{}{
 	"ExternalConfigFields": externalConfigFields,
 }).Parse(`
-func resolveClientConfig(svc *{{ .StructName }}) func(configs []interface{}) error {
-	return func(configs []interface{}) error {
-		{{- $fields := ExternalConfigFields . -}}
-		{{- range $idx, $field := $fields }}
-			if value, ok, err := {{ $.InternalConfigResolverPackageName }}.{{ $field.ExternalConfigResolverName }}(configs); err != nil {
-				return err
-			} else if ok {
-				svc.{{ $field.Name }} = value
-			}
-		{{ end }}
+func resolveClientConfig(svc *{{ .StructName }}, configs []interface{}) error {
+	if len(configs) == 0 {
 		return nil
 	}
+
+	{{ $fields := ExternalConfigFields . -}}
+	{{- range $idx, $field := $fields }}
+		if value, ok, err := {{ $.InternalConfigResolverPackageName }}.{{ $field.ExternalConfigResolverName }}(configs); err != nil {
+			return err
+		} else if ok {
+			svc.{{ $field.Name }} = value
+		}
+	{{ end }}
+	return nil
 }
 `))
 
@@ -1188,7 +1188,7 @@ func TestExternalConfigResolver(t *testing.T) {
 	t.Run("{{ $field.Name }}", func(t *testing.T) {
 		t.Run("value not found", func(t *testing.T) {
 			svc := &{{ $.StructName }}{}
-			err := resolveClientConfig(svc)([]interface{}{
+			err := resolveClientConfig(svc, []interface{}{
 				mock{{ $field.Name }}(func() (value {{ $field.Type }}, ok bool, err error) {
 					return value, ok, err
 				}),
@@ -1202,7 +1202,7 @@ func TestExternalConfigResolver(t *testing.T) {
 		})
 		t.Run("resolve error", func(t *testing.T) {
 			svc := &{{ $.StructName }}{}
-			err := resolveClientConfig(svc)([]interface{}{
+			err := resolveClientConfig(svc, []interface{}{
 				mock{{ $field.Name }}(func() (value {{ $field.Type }}, ok bool, err error) {
 					err = fmt.Errorf("resolve error")
 					return value, ok, err
@@ -1218,7 +1218,7 @@ func TestExternalConfigResolver(t *testing.T) {
 		t.Run("value found", func(t *testing.T) {
 			{{- $mockValue := MockConfigFieldValue $field -}}
 			svc := &{{ $.StructName }}{}
-			err := resolveClientConfig(svc)([]interface{}{
+			err := resolveClientConfig(svc, []interface{}{
 				mock{{ $field.Name }}(func() (value {{ $field.Type }}, ok bool, err error) {
 					value = {{ $mockValue }}
 					return value, true, err
