@@ -5,7 +5,6 @@ package waf_test
 import (
 	"context"
 	"fmt"
-	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -14,16 +13,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
-var _ time.Duration
-var _ strings.Reader
 var _ aws.Config
 
-func parseTime(layout, value string) *time.Time {
+func parseTime(layout, value string) time.Time {
 	t, err := time.Parse(layout, value)
 	if err != nil {
 		panic(err)
 	}
-	return &t
+	return t
 }
 
 // To create an IP set
@@ -851,8 +848,8 @@ func ExampleClient_GetSampledRequestsRequest_shared00() {
 		MaxItems: aws.Int64(100),
 		RuleId:   aws.String("WAFRule-1-Example"),
 		TimeWindow: &waf.TimeWindow{
-			EndTime:   parseTime("2006-01-02T15:04:05Z", "2016-09-27T15:50Z"),
-			StartTime: parseTime("2006-01-02T15:04:05Z", "2016-09-27T15:50Z"),
+			EndTime:   aws.Time(parseTime("2006-01-02T15:04:05Z", "2016-09-27T15:50Z")),
+			StartTime: aws.Time(parseTime("2006-01-02T15:04:05Z", "2016-09-27T15:50Z")),
 		},
 		WebAclId: aws.String("createwebacl-1472061481310"),
 	}
@@ -1277,6 +1274,15 @@ func ExampleClient_UpdateByteMatchSetRequest_shared00() {
 		Updates: []waf.ByteMatchSetUpdate{
 			{
 				Action: waf.ChangeActionDelete,
+				ByteMatchTuple: &waf.ByteMatchTuple{
+					FieldToMatch: &waf.FieldToMatch{
+						Data: aws.String("referer"),
+						Type: waf.MatchFieldTypeHeader,
+					},
+					PositionalConstraint: waf.PositionalConstraintContains,
+					TargetString:         []byte("badrefer1"),
+					TextTransformation:   waf.TextTransformationNone,
+				},
 			},
 		},
 	}
@@ -1333,6 +1339,10 @@ func ExampleClient_UpdateIPSetRequest_shared00() {
 		Updates: []waf.IPSetUpdate{
 			{
 				Action: waf.ChangeActionDelete,
+				IPSetDescriptor: &waf.IPSetDescriptor{
+					Type:  waf.IPSetDescriptorTypeIpv4,
+					Value: aws.String("192.0.2.44/32"),
+				},
 			},
 		},
 	}
@@ -1390,6 +1400,11 @@ func ExampleClient_UpdateRuleRequest_shared00() {
 		Updates: []waf.RuleUpdate{
 			{
 				Action: waf.ChangeActionDelete,
+				Predicate: &waf.Predicate{
+					DataId:  aws.String("MyByteMatchSetID"),
+					Negated: aws.Bool(false),
+					Type:    waf.PredicateTypeByteMatch,
+				},
 			},
 		},
 	}
@@ -1448,6 +1463,14 @@ func ExampleClient_UpdateSizeConstraintSetRequest_shared00() {
 		Updates: []waf.SizeConstraintSetUpdate{
 			{
 				Action: waf.ChangeActionDelete,
+				SizeConstraint: &waf.SizeConstraint{
+					ComparisonOperator: waf.ComparisonOperatorGt,
+					FieldToMatch: &waf.FieldToMatch{
+						Type: waf.MatchFieldTypeQueryString,
+					},
+					Size:               aws.Int64(0),
+					TextTransformation: waf.TextTransformationNone,
+				},
 			},
 		},
 	}
@@ -1506,6 +1529,12 @@ func ExampleClient_UpdateSqlInjectionMatchSetRequest_shared00() {
 		Updates: []waf.SqlInjectionMatchSetUpdate{
 			{
 				Action: waf.ChangeActionDelete,
+				SqlInjectionMatchTuple: &waf.SqlInjectionMatchTuple{
+					FieldToMatch: &waf.FieldToMatch{
+						Type: waf.MatchFieldTypeQueryString,
+					},
+					TextTransformation: waf.TextTransformationUrlDecode,
+				},
 			},
 		},
 	}
@@ -1563,6 +1592,13 @@ func ExampleClient_UpdateWebACLRequest_shared00() {
 		Updates: []waf.WebACLUpdate{
 			{
 				Action: waf.ChangeActionDelete,
+				ActivatedRule: &waf.ActivatedRule{
+					Action: &waf.WafAction{
+						Type: waf.WafActionTypeAllow,
+					},
+					Priority: aws.Int64(1),
+					RuleId:   aws.String("WAFRule-1-Example"),
+				},
 			},
 		},
 		WebACLId: aws.String("webacl-1472061481310"),
@@ -1623,6 +1659,12 @@ func ExampleClient_UpdateXssMatchSetRequest_shared00() {
 		Updates: []waf.XssMatchSetUpdate{
 			{
 				Action: waf.ChangeActionDelete,
+				XssMatchTuple: &waf.XssMatchTuple{
+					FieldToMatch: &waf.FieldToMatch{
+						Type: waf.MatchFieldTypeQueryString,
+					},
+					TextTransformation: waf.TextTransformationUrlDecode,
+				},
 			},
 		},
 		XssMatchSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),

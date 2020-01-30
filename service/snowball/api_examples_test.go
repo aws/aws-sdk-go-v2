@@ -5,8 +5,6 @@ package snowball_test
 import (
 	"context"
 	"fmt"
-	"strings"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
@@ -14,17 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/snowball"
 )
 
-var _ time.Duration
-var _ strings.Reader
 var _ aws.Config
-
-func parseTime(layout, value string) *time.Time {
-	t, err := time.Parse(layout, value)
-	if err != nil {
-		panic(err)
-	}
-	return &t
-}
 
 // To cancel a cluster job
 //
@@ -178,6 +166,7 @@ func ExampleClient_CreateClusterRequest_shared00() {
 			S3Resources: []snowball.S3Resource{
 				{
 					BucketArn: aws.String("arn:aws:s3:::MyBucket"),
+					KeyRange:  &snowball.KeyRange{},
 				},
 			},
 		},
@@ -239,6 +228,7 @@ func ExampleClient_CreateJobRequest_shared00() {
 			S3Resources: []snowball.S3Resource{
 				{
 					BucketArn: aws.String("arn:aws:s3:::MyBucket"),
+					KeyRange:  &snowball.KeyRange{},
 				},
 			},
 		},

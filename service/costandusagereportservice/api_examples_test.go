@@ -5,8 +5,6 @@ package costandusagereportservice_test
 import (
 	"context"
 	"fmt"
-	"strings"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
@@ -14,17 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice"
 )
 
-var _ time.Duration
-var _ strings.Reader
 var _ aws.Config
-
-func parseTime(layout, value string) *time.Time {
-	t, err := time.Parse(layout, value)
-	if err != nil {
-		panic(err)
-	}
-	return &t
-}
 
 // To delete the AWS Cost and Usage report named ExampleReport.
 //
@@ -111,11 +99,11 @@ func ExampleClient_PutReportDefinitionRequest_shared00() {
 	input := &costandusagereportservice.PutReportDefinitionInput{
 		ReportDefinition: &costandusagereportservice.ReportDefinition{
 			AdditionalArtifacts: []costandusagereportservice.AdditionalArtifact{
-				costandusagereportservice.AdditionalArtifact("REDSHIFT"),
-				costandusagereportservice.AdditionalArtifact("QUICKSIGHT"),
+				costandusagereportservice.AdditionalArtifactRedshift,
+				costandusagereportservice.AdditionalArtifactQuicksight,
 			},
 			AdditionalSchemaElements: []costandusagereportservice.SchemaElement{
-				costandusagereportservice.SchemaElement("RESOURCES"),
+				costandusagereportservice.SchemaElementResources,
 			},
 			Compression: costandusagereportservice.CompressionFormatZip,
 			Format:      costandusagereportservice.ReportFormatTextOrcsv,

@@ -15,16 +15,36 @@ import (
 // APIs provides a set of API models loaded by API package name.
 type APIs map[string]*API
 
-// LoadAPIs loads the API model files from disk returning the map of API
-// package. Returns error if multiple API model resolve to the same package
-// name.
-func LoadAPIs(modelPaths []string, baseImport string) (APIs, error) {
+// Loader provides the loading of APIs from files.
+type Loader struct {
+	// The base Go import path the loaded models will be appended to.
+	BaseImport string
+
+	// Allows ignoring API models that are unsupported by the SDK without
+	// failing the load of other supported APIs.
+	KeepUnsupportedAPIs bool
+}
+
+// Load loads the API model files from disk returning the map of API package.
+// Returns error if multiple API model resolve to the same package name.
+func (l Loader) Load(modelPaths []string) (APIs, error) {
 	apis := APIs{}
 	for _, modelPath := range modelPaths {
-		a, err := loadAPI(modelPath, baseImport)
+		a, err := loadAPI(modelPath, l.BaseImport, func(a *API) {
+			a.KeepUnsupportedAPIs = l.KeepUnsupportedAPIs
+		})
 		if err != nil {
 			return nil, fmt.Errorf("failed to load API, %v, %v", modelPath, err)
 		}
+
+		if len(a.Operations) == 0 {
+			if !l.KeepUnsupportedAPIs {
+				fmt.Fprintf(os.Stderr, "API has no operations, ignoring model %s, %v\n",
+					modelPath, a.ImportPath())
+				continue
+			}
+		}
+
 		importPath := a.ImportPath()
 		if _, ok := apis[importPath]; ok {
 			return nil, fmt.Errorf(
@@ -37,7 +57,9 @@ func LoadAPIs(modelPaths []string, baseImport string) (APIs, error) {
 	return apis, nil
 }
 
-func loadAPI(modelPath, baseImport string) (*API, error) {
+// attempts to load a model from disk into the import specified. Additional API
+// options are invoked before to the API's Setup being called.
+func loadAPI(modelPath, baseImport string, opts ...func(*API)) (*API, error) {
 	a := &API{
 		BaseImportPath:   baseImport,
 		BaseCrosslinkURL: "https://docs.aws.amazon.com",
@@ -57,7 +79,11 @@ func loadAPI(modelPath, baseImport string) (*API, error) {
 		return nil, err
 	}
 
-	if err := a.Setup(); err != nil {
+	for _, opt := range opts {
+		opt(a)
+	}
+
+	if err = a.Setup(); err != nil {
 		return nil, err
 	}
 
@@ -66,7 +92,7 @@ func loadAPI(modelPath, baseImport string) (*API, error) {
 
 type modelLoader struct {
 	Filename string
-	Loader   func(string)
+	Loader   func(string) error
 	Required bool
 }
 
@@ -80,7 +106,9 @@ func attachModelFiles(modelPath string, modelFiles ...modelLoader) error {
 			return fmt.Errorf("failed to load model file %v, %v", m.Filename, err)
 		}
 
-		m.Loader(filepath)
+		if err = m.Loader(filepath); err != nil {
+			return fmt.Errorf("model load failed, %s, %v", modelPath, err)
+		}
 	}
 
 	return nil
@@ -142,16 +170,19 @@ func TrimModelServiceVersions(modelPaths []string) (include, exclude []string) {
 
 // Attach opens a file by name, and unmarshal its JSON data.
 // Will proceed to setup the API if not already done so.
-func (a *API) Attach(filename string) {
+func (a *API) Attach(filename string) error {
 	a.path = filepath.Dir(filename)
 	f, err := os.Open(filename)
-	defer f.Close()
 	if err != nil {
-		panic(err)
+		return err
 	}
+	defer f.Close()
+
 	if err := json.NewDecoder(f).Decode(a); err != nil {
-		panic(fmt.Errorf("failed to decode %s, err: %v", filename, err))
+		return fmt.Errorf("failed to decode %s, err: %v", filename, err)
 	}
+
+	return nil
 }
 
 // AttachString will unmarshal a raw JSON string, and setup the
@@ -159,13 +190,11 @@ func (a *API) Attach(filename string) {
 func (a *API) AttachString(str string) error {
 	json.Unmarshal([]byte(str), a)
 
-	if !a.initialized {
-		if err := a.Setup(); err != nil {
-			return err
-		}
+	if a.initialized {
+		return nil
 	}
 
-	return nil
+	return a.Setup()
 }
 
 // Setup initializes the API.
@@ -188,9 +217,10 @@ func (a *API) Setup() error {
 	a.renameAPIPayloadShapes()
 	a.renameCollidingFields()
 	a.updateTopLevelShapeReferences()
-	//a.setupEventStreams()
+	if err := a.suppressEventStreams(); err != nil {
+		return err
+	}
 	//a.findEndpointDiscoveryOp()
-	a.suppressEventStreams()
 	if err := a.customizationPasses(); err != nil {
 		return err
 	}
@@ -207,4 +237,14 @@ func (a *API) Setup() error {
 	a.initialized = true
 
 	return nil
+}
+
+// UnsupportedAPIModelError provides wrapping of an error causing the API to
+// fail to load because the SDK does not support the API service defined.
+type UnsupportedAPIModelError struct {
+	Err error
+}
+
+func (e UnsupportedAPIModelError) Error() string {
+	return fmt.Sprintf("service API is not supported, %v", e.Err)
 }

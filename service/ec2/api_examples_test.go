@@ -5,7 +5,6 @@ package ec2_test
 import (
 	"context"
 	"fmt"
-	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -14,16 +13,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
 )
 
-var _ time.Duration
-var _ strings.Reader
 var _ aws.Config
 
-func parseTime(layout, value string) *time.Time {
+func parseTime(layout, value string) time.Time {
 	t, err := time.Parse(layout, value)
 	if err != nil {
 		panic(err)
 	}
-	return &t
+	return t
 }
 
 // To allocate an Elastic IP address for EC2-VPC
@@ -1057,6 +1054,9 @@ func ExampleClient_CreateImageRequest_shared00() {
 		BlockDeviceMappings: []ec2.BlockDeviceMapping{
 			{
 				DeviceName: aws.String("/dev/sdh"),
+				Ebs: &ec2.EbsBlockDevice{
+					VolumeSize: aws.Int64(100),
+				},
 			},
 			{
 				DeviceName:  aws.String("/dev/sdc"),
@@ -2475,7 +2475,7 @@ func ExampleClient_DescribeAccountAttributesRequest_shared00() {
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeAccountAttributesInput{
 		AttributeNames: []ec2.AccountAttributeName{
-			ec2.AccountAttributeName("supported-platforms"),
+			ec2.AccountAttributeNameSupportedPlatforms,
 		},
 	}
 
@@ -3597,8 +3597,8 @@ func ExampleClient_DescribeScheduledInstanceAvailabilityRequest_shared00() {
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeScheduledInstanceAvailabilityInput{
 		FirstSlotStartTimeRange: &ec2.SlotDateTimeRangeRequest{
-			EarliestTime: parseTime("2006-01-02T15:04:05Z", "2016-01-31T00:00:00Z"),
-			LatestTime:   parseTime("2006-01-02T15:04:05Z", "2016-01-31T04:00:00Z"),
+			EarliestTime: aws.Time(parseTime("2006-01-02T15:04:05Z", "2016-01-31T00:00:00Z")),
+			LatestTime:   aws.Time(parseTime("2006-01-02T15:04:05Z", "2016-01-31T04:00:00Z")),
 		},
 		Recurrence: &ec2.ScheduledInstanceRecurrenceRequest{
 			Frequency: aws.String("Weekly"),
@@ -3964,7 +3964,7 @@ func ExampleClient_DescribeSpotFleetRequestHistoryRequest_shared00() {
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeSpotFleetRequestHistoryInput{
 		SpotFleetRequestId: aws.String("sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE"),
-		StartTime:          parseTime("2006-01-02T15:04:05Z", "2015-05-26T00:00:00Z"),
+		StartTime:          aws.Time(parseTime("2006-01-02T15:04:05Z", "2015-05-26T00:00:00Z")),
 	}
 
 	req := svc.DescribeSpotFleetRequestHistoryRequest(input)
@@ -4068,14 +4068,14 @@ func ExampleClient_DescribeSpotPriceHistoryRequest_shared00() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeSpotPriceHistoryInput{
-		EndTime: parseTime("2006-01-02T15:04:05Z", "2014-01-06T08:09:10"),
+		EndTime: aws.Time(parseTime("2006-01-02T15:04:05Z", "2014-01-06T08:09:10")),
 		InstanceTypes: []ec2.InstanceType{
-			ec2.InstanceType("m1.xlarge"),
+			ec2.InstanceTypeM1Xlarge,
 		},
 		ProductDescriptions: []string{
 			"Linux/UNIX (Amazon VPC)",
 		},
-		StartTime: parseTime("2006-01-02T15:04:05Z", "2014-01-06T07:08:09"),
+		StartTime: aws.Time(parseTime("2006-01-02T15:04:05Z", "2014-01-06T07:08:09")),
 	}
 
 	req := svc.DescribeSpotPriceHistoryRequest(input)
@@ -5851,6 +5851,9 @@ func ExampleClient_RequestSpotFleetRequest_shared00() {
 			IamFleetRole: aws.String("arn:aws:iam::123456789012:role/my-spot-fleet-role"),
 			LaunchSpecifications: []ec2.SpotFleetLaunchSpecification{
 				{
+					IamInstanceProfile: &ec2.IamInstanceProfileSpecification{
+						Arn: aws.String("arn:aws:iam::123456789012:instance-profile/my-iam-role"),
+					},
 					ImageId:      aws.String("ami-1a2b3c4d"),
 					InstanceType: ec2.InstanceTypeM3Medium,
 					KeyName:      aws.String("my-key-pair"),
@@ -5906,9 +5909,15 @@ func ExampleClient_RequestSpotFleetRequest_shared01() {
 			IamFleetRole: aws.String("arn:aws:iam::123456789012:role/my-spot-fleet-role"),
 			LaunchSpecifications: []ec2.SpotFleetLaunchSpecification{
 				{
+					IamInstanceProfile: &ec2.IamInstanceProfileSpecification{
+						Arn: aws.String("arn:aws:iam::123456789012:instance-profile/my-iam-role"),
+					},
 					ImageId:      aws.String("ami-1a2b3c4d"),
 					InstanceType: ec2.InstanceTypeM3Medium,
 					KeyName:      aws.String("my-key-pair"),
+					Placement: &ec2.SpotPlacement{
+						AvailabilityZone: aws.String("us-west-2a, us-west-2b"),
+					},
 					SecurityGroups: []ec2.GroupIdentifier{
 						{
 							GroupId: aws.String("sg-1a2b3c4d"),
@@ -5957,6 +5966,9 @@ func ExampleClient_RequestSpotFleetRequest_shared02() {
 			IamFleetRole: aws.String("arn:aws:iam::123456789012:role/my-spot-fleet-role"),
 			LaunchSpecifications: []ec2.SpotFleetLaunchSpecification{
 				{
+					IamInstanceProfile: &ec2.IamInstanceProfileSpecification{
+						Arn: aws.String("arn:aws:iam::880185128111:instance-profile/my-iam-role"),
+					},
 					ImageId:      aws.String("ami-1a2b3c4d"),
 					InstanceType: ec2.InstanceTypeM3Medium,
 					KeyName:      aws.String("my-key-pair"),
@@ -6308,6 +6320,9 @@ func ExampleClient_RunInstancesRequest_shared00() {
 		BlockDeviceMappings: []ec2.BlockDeviceMapping{
 			{
 				DeviceName: aws.String("/dev/sdh"),
+				Ebs: &ec2.EbsBlockDevice{
+					VolumeSize: aws.Int64(100),
+				},
 			},
 		},
 		ImageId:      aws.String("ami-abc12345"),

@@ -5,8 +5,6 @@ package elasticbeanstalk_test
 import (
 	"context"
 	"fmt"
-	"strings"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
@@ -14,17 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk"
 )
 
-var _ time.Duration
-var _ strings.Reader
 var _ aws.Config
-
-func parseTime(layout, value string) *time.Time {
-	t, err := time.Parse(layout, value)
-	if err != nil {
-		panic(err)
-	}
-	return &t
-}
 
 // To abort a deployment
 //
@@ -609,7 +597,7 @@ func ExampleClient_DescribeEnvironmentHealthRequest_shared00() {
 	svc := elasticbeanstalk.New(cfg)
 	input := &elasticbeanstalk.DescribeEnvironmentHealthInput{
 		AttributeNames: []elasticbeanstalk.EnvironmentHealthAttribute{
-			elasticbeanstalk.EnvironmentHealthAttribute("All"),
+			elasticbeanstalk.EnvironmentHealthAttributeAll,
 		},
 		EnvironmentName: aws.String("my-env"),
 	}
@@ -754,7 +742,7 @@ func ExampleClient_DescribeInstancesHealthRequest_shared00() {
 	svc := elasticbeanstalk.New(cfg)
 	input := &elasticbeanstalk.DescribeInstancesHealthInput{
 		AttributeNames: []elasticbeanstalk.InstancesHealthAttribute{
-			elasticbeanstalk.InstancesHealthAttribute("All"),
+			elasticbeanstalk.InstancesHealthAttributeAll,
 		},
 		EnvironmentName: aws.String("my-env"),
 	}

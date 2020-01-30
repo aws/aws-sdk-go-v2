@@ -5,7 +5,6 @@ package autoscaling_test
 import (
 	"context"
 	"fmt"
-	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -14,16 +13,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling"
 )
 
-var _ time.Duration
-var _ strings.Reader
 var _ aws.Config
 
-func parseTime(layout, value string) *time.Time {
+func parseTime(layout, value string) time.Time {
 	t, err := time.Parse(layout, value)
 	if err != nil {
 		panic(err)
 	}
-	return &t
+	return t
 }
 
 // To attach an instance to an Auto Scaling group
@@ -1840,11 +1837,11 @@ func ExampleClient_PutScheduledUpdateGroupActionRequest_shared00() {
 	input := &autoscaling.PutScheduledUpdateGroupActionInput{
 		AutoScalingGroupName: aws.String("my-auto-scaling-group"),
 		DesiredCapacity:      aws.Int64(4),
-		EndTime:              parseTime("2006-01-02T15:04:05Z", "2014-05-12T08:00:00Z"),
+		EndTime:              aws.Time(parseTime("2006-01-02T15:04:05Z", "2014-05-12T08:00:00Z")),
 		MaxSize:              aws.Int64(6),
 		MinSize:              aws.Int64(2),
 		ScheduledActionName:  aws.String("my-scheduled-action"),
-		StartTime:            parseTime("2006-01-02T15:04:05Z", "2014-05-12T08:00:00Z"),
+		StartTime:            aws.Time(parseTime("2006-01-02T15:04:05Z", "2014-05-12T08:00:00Z")),
 	}
 
 	req := svc.PutScheduledUpdateGroupActionRequest(input)

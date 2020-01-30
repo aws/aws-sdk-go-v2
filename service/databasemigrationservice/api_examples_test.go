@@ -5,7 +5,6 @@ package databasemigrationservice_test
 import (
 	"context"
 	"fmt"
-	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -14,16 +13,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice"
 )
 
-var _ time.Duration
-var _ strings.Reader
 var _ aws.Config
 
-func parseTime(layout, value string) *time.Time {
+func parseTime(layout, value string) time.Time {
 	t, err := time.Parse(layout, value)
 	if err != nil {
 		panic(err)
 	}
-	return &t
+	return t
 }
 
 // Add tags to resource
@@ -268,7 +265,7 @@ func ExampleClient_CreateReplicationTaskRequest_shared00() {
 
 	svc := databasemigrationservice.New(cfg)
 	input := &databasemigrationservice.CreateReplicationTaskInput{
-		CdcStartTime:              parseTime("2006-01-02T15:04:05Z", "2016-12-14T18:25:43Z"),
+		CdcStartTime:              aws.Time(parseTime("2006-01-02T15:04:05Z", "2016-12-14T18:25:43Z")),
 		MigrationType:             databasemigrationservice.MigrationTypeValueFullLoad,
 		ReplicationInstanceArn:    aws.String("arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ"),
 		ReplicationTaskIdentifier: aws.String("task1"),
@@ -1364,7 +1361,7 @@ func ExampleClient_StartReplicationTaskRequest_shared00() {
 
 	svc := databasemigrationservice.New(cfg)
 	input := &databasemigrationservice.StartReplicationTaskInput{
-		CdcStartTime:             parseTime("2006-01-02T15:04:05Z", "2016-12-14T13:33:20Z"),
+		CdcStartTime:             aws.Time(parseTime("2006-01-02T15:04:05Z", "2016-12-14T13:33:20Z")),
 		ReplicationTaskArn:       aws.String("arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ"),
 		StartReplicationTaskType: databasemigrationservice.StartReplicationTaskTypeValueStartReplication,
 	}

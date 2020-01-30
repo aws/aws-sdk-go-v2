@@ -14,7 +14,41 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/util"
 )
 
-type Examples map[string][]Example
+// ExamplesGoCode will return a code representation of the entry within the
+// examples.json file.
+func (a *API) ExamplesGoCode() string {
+	a.resetImports()
+	a.AddImport("context")
+	a.AddImport("fmt")
+
+	a.AddSDKImport("aws")
+	a.AddSDKImport("aws/awserr")
+	a.AddSDKImport("aws/external")
+	a.AddImport(a.ImportPath())
+
+	var extra = `
+var _ aws.Config
+`
+
+	code := a.Examples.GoCode()
+	if len(code) == 0 {
+		return ""
+	}
+	if a.Examples.UsedTimestamp() {
+		a.AddImport("time")
+		extra += `
+func parseTime(layout, value string) time.Time {
+   t, err := time.Parse(layout, value)
+   if err != nil {
+	   panic(err)
+   }
+   return t
+}
+`
+	}
+
+	return a.importsGoCode() + extra + code
+}
 
 // ExamplesDefinition is the structural representation of the examples-1.json file
 type ExamplesDefinition struct {
@@ -28,7 +62,7 @@ type Example struct {
 	Operation     *Operation             `json:"-"`
 	OperationName string                 `json:"-"`
 	Index         string                 `json:"-"`
-	Builder       examplesBuilder        `json:"-"`
+	Builder       *ExamplesBuilder       `json:"-"`
 	VisitedErrors map[string]struct{}    `json:"-"`
 	Title         string                 `json:"title"`
 	Description   string                 `json:"description"`
@@ -90,6 +124,20 @@ func Example{{ .API.StructName }}_{{ .MethodName }}() {
 	fmt.Println(result)
 }
 `))
+
+type Examples map[string][]Example
+
+func (exs Examples) UsedTimestamp() bool {
+	for _, es := range exs {
+		for _, e := range es {
+			if e.Builder.HasTimestamp {
+				return true
+			}
+		}
+	}
+
+	return false
+}
 
 // Names will return the name of the example. This will also be the name of the operation
 // that is to be tested.
@@ -175,10 +223,6 @@ func correctType(memName string, t string, value interface{}, asValue bool) stri
 	return convertToCorrectType(memName, t, v, asValue)
 }
 
-func convertToCorrectType(memName, t, v string, asValue bool) string {
-	return fmt.Sprintf("%s: %s,\n", memName, getValue(t, v, asValue))
-}
-
 func getValue(t, v string, asValue bool) string {
 	if t[0] == '*' {
 		t = t[1:]
@@ -211,24 +255,24 @@ func getValue(t, v string, asValue bool) string {
 
 // AttachExamples will create a new ExamplesDefinition from the examples file
 // and reference the API object.
-func (a *API) AttachExamples(filename string) {
+func (a *API) AttachExamples(filename string) error {
 	p := ExamplesDefinition{API: a}
 
 	f, err := os.Open(filename)
 	defer f.Close()
 	if err != nil {
-		panic(err)
+		return err
 	}
 	err = json.NewDecoder(f).Decode(&p)
 	if err != nil {
-		panic(err)
+		return fmt.Errorf("failed to decode %s, err: %v", filename, err)
 	}
 
-	p.setup()
+	return p.setup()
 }
 
-func (p *ExamplesDefinition) setup() {
-	builder := defaultExamplesBuilder{}
+func (p *ExamplesDefinition) setup() error {
+	builder := NewExamplesBuilder()
 	keys := p.Examples.Names()
 	for _, n := range keys {
 		examples := p.Examples[n]
@@ -249,72 +293,15 @@ func (p *ExamplesDefinition) setup() {
 	}
 
 	p.API.Examples = p.Examples
+
+	return nil
 }
 
-var exampleHeader = template.Must(template.New("exampleHeader").Parse(`
-import (
-	{{ .Builder.Imports .API }}
-)
-
-var _ time.Duration
-var _ strings.Reader
-var _ aws.Config
-
-func parseTime(layout, value string) *time.Time {
-	t, err := time.Parse(layout, value)
-	if err != nil {
-		panic(err)
-	}
-	return &t
-}
-
-`))
-
-type exHeader struct {
-	Builder examplesBuilder
-	API     *API
-}
-
-// ExamplesGoCode will return a code representation of the entry within the
-// examples.json file.
-func (a *API) ExamplesGoCode() string {
-	var buf bytes.Buffer
-	builder := defaultExamplesBuilder{}
-	if err := exampleHeader.ExecuteTemplate(&buf, "exampleHeader", &exHeader{builder, a}); err != nil {
-		panic(err)
-	}
-
-	code := a.Examples.GoCode()
-	if len(code) == 0 {
-		return ""
-	}
-
-	buf.WriteString(code)
-	return buf.String()
-}
-
-// TODO: In the operation docuentation where we list errors, this needs to be done
-// there as well.
 func (ex *Example) HasVisitedError(errRef *ShapeRef) bool {
 	errName := errRef.Shape.ErrorCodeName()
 	_, ok := ex.VisitedErrors[errName]
 	ex.VisitedErrors[errName] = struct{}{}
 	return ok
-}
-
-func parseTimeString(ref *ShapeRef, memName, v string) string {
-	if ref.Location == "header" {
-		return fmt.Sprintf("%s: parseTime(%q, %q),\n", memName, "Mon, 2 Jan 2006 15:04:05 GMT", v)
-	} else {
-		switch ref.API.Metadata.Protocol {
-		case "json", "rest-json":
-			return fmt.Sprintf("%s: parseTime(%q, %q),\n", memName, "2006-01-02T15:04:05Z", v)
-		case "rest-xml", "ec2", "query":
-			return fmt.Sprintf("%s: parseTime(%q, %q),\n", memName, "2006-01-02T15:04:05Z", v)
-		default:
-			panic("Unsupported time type: " + ref.API.Metadata.Protocol)
-		}
-	}
 }
 
 func (ex *Example) MethodName() string {
