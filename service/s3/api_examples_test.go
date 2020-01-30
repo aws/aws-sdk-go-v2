@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	"strings"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
@@ -14,17 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-var _ time.Duration
-var _ strings.Reader
 var _ aws.Config
-
-func parseTime(layout, value string) *time.Time {
-	t, err := time.Parse(layout, value)
-	if err != nil {
-		panic(err)
-	}
-	return &t
-}
 
 // To abort a multipart upload
 //
@@ -1774,6 +1763,12 @@ func ExampleClient_PutBucketLifecycleConfigurationRequest_shared00() {
 		LifecycleConfiguration: &s3.BucketLifecycleConfiguration{
 			Rules: []s3.LifecycleRule{
 				{
+					Expiration: &s3.LifecycleExpiration{
+						Days: aws.Int64(3650),
+					},
+					Filter: &s3.LifecycleRuleFilter{
+						Prefix: aws.String("documents/"),
+					},
 					ID:     aws.String("TestOnly"),
 					Status: s3.ExpirationStatusEnabled,
 					Transitions: []s3.Transition{
@@ -1825,6 +1820,10 @@ func ExampleClient_PutBucketLoggingRequest_shared00() {
 				TargetBucket: aws.String("targetbucket"),
 				TargetGrants: []s3.TargetGrant{
 					{
+						Grantee: &s3.Grantee{
+							Type: s3.TypeGroup,
+							URI:  aws.String("http://acs.amazonaws.com/groups/global/AllUsers"),
+						},
 						Permission: s3.BucketLogsPermissionRead,
 					},
 				},
@@ -1946,6 +1945,10 @@ func ExampleClient_PutBucketReplicationRequest_shared00() {
 			Role: aws.String("arn:aws:iam::123456789012:role/examplerole"),
 			Rules: []s3.ReplicationRule{
 				{
+					Destination: &s3.Destination{
+						Bucket:       aws.String("arn:aws:s3:::destinationbucket"),
+						StorageClass: s3.StorageClassStandard,
+					},
 					Prefix: aws.String(""),
 					Status: s3.ReplicationRuleStatusEnabled,
 				},

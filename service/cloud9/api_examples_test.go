@@ -5,8 +5,6 @@ package cloud9_test
 import (
 	"context"
 	"fmt"
-	"strings"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
@@ -14,17 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloud9"
 )
 
-var _ time.Duration
-var _ strings.Reader
 var _ aws.Config
-
-func parseTime(layout, value string) *time.Time {
-	t, err := time.Parse(layout, value)
-	if err != nil {
-		panic(err)
-	}
-	return &t
-}
 
 // CreateEnvironmentEC2
 //
@@ -284,7 +272,7 @@ func ExampleClient_DescribeEnvironmentMembershipsRequest_shared01() {
 	input := &cloud9.DescribeEnvironmentMembershipsInput{
 		EnvironmentId: aws.String("8d9967e2f0624182b74e7690ad69ebEX"),
 		Permissions: []cloud9.Permissions{
-			cloud9.Permissions("owner"),
+			cloud9.PermissionsOwner,
 		},
 	}
 

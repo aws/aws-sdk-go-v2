@@ -27,6 +27,8 @@ type API struct {
 	Examples      Examples
 	SmokeTests    SmokeTestSuite
 
+	KeepUnsupportedAPIs bool
+
 	// Set to true to avoid removing unused shapes
 	NoRemoveUnusedShapes bool
 
