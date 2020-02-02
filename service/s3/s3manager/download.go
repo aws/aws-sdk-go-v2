@@ -42,7 +42,7 @@ func (e *errReadingBody) Unwrap() error {
 // Mutating the Downloader's properties is not safe to be done concurrently.
 type Downloader struct {
 	// The size (in bytes) to request from S3 for each part.
-	// The minimum allowed part size is 5MB, and  if this value is set to zero,
+	// The minimum allowed part size is 5MB, and if this value is set to zero,
 	// the DefaultDownloadPartSize value will be used.
 	//
 	// PartSize is ignored if the Range input parameter is provided.
@@ -322,15 +322,20 @@ func (d *downloader) download() (n int64, err error) {
 			go d.downloadPart(ch)
 		}
 
+		tailLen := d.cfg.PartSize
+		if tail := total % d.cfg.PartSize; tail > 0 {
+			tailLen = tail
+		}
+		d.pos = total - tailLen
+
 		// Assign work
 		for d.getErr() == nil {
-			if d.pos >= total {
+			if d.pos < d.cfg.PartSize {
 				break // We're finished queuing chunks
 			}
-
 			// Queue the next range of bytes to read.
 			ch <- dlchunk{w: d.w, start: d.pos, size: d.cfg.PartSize}
-			d.pos += d.cfg.PartSize
+			d.pos -= d.cfg.PartSize
 		}
 
 		// Wait for completion

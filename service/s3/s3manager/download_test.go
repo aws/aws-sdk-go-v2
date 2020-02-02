@@ -220,7 +220,7 @@ func TestDownloadOrder(t *testing.T) {
 		t.Errorf("expect %v API calls, got %v", e, a)
 	}
 
-	expectRngs := []string{"bytes=0-5242879", "bytes=5242880-10485759", "bytes=10485760-15728639"}
+	expectRngs := []string{"bytes=0-5242879", "bytes=10485760-15728639", "bytes=5242880-10485759"}
 	if e, a := expectRngs, *ranges; !reflect.DeepEqual(e, a) {
 		t.Errorf("expect %v ranges, got %v", e, a)
 	}
@@ -284,7 +284,7 @@ func TestDownloadSetPartSize(t *testing.T) {
 	if e, a := expectCalls, *names; !reflect.DeepEqual(e, a) {
 		t.Errorf("expect %v API calls, got %v", e, a)
 	}
-	expectRngs := []string{"bytes=0-0", "bytes=1-1", "bytes=2-2"}
+	expectRngs := []string{"bytes=0-0", "bytes=2-2", "bytes=1-1"}
 	if e, a := expectRngs, *ranges; !reflect.DeepEqual(e, a) {
 		t.Errorf("expect %v ranges, got %v", e, a)
 	}
