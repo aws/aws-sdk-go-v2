@@ -220,7 +220,7 @@ func (a *API) Setup() error {
 	if err := a.suppressEventStreams(); err != nil {
 		return err
 	}
-	//a.findEndpointDiscoveryOp()
+	a.findEndpointDiscoveryOp()
 	if err := a.customizationPasses(); err != nil {
 		return err
 	}

@@ -67,6 +67,8 @@ type API struct {
 	path        string
 
 	BaseCrosslinkURL string
+
+	EndpointDiscoveryOp *Operation
 }
 
 // A Metadata is the metadata about an API's definition.
@@ -397,6 +399,12 @@ func (a *API) APIOperationGoCode(op *Operation) string {
 		a.AddSDKImport("private/protocol")
 	}
 
+	if a.EndpointDiscoveryOp == op {
+		a.AddImport("time")
+		a.AddImport("net", "url")
+		a.AddSDKImport("aws", "crr")
+	}
+
 	if op.HasEndpointARN {
 		a.AddImport("fmt")
 		a.AddImport(a.ImportPath(), "internal", "arn")
@@ -654,6 +662,10 @@ var tplClient = template.Must(template.New("service").Funcs(template.FuncMap{
 type {{ .StructName }} struct {
 	*aws.Client
 	{{ ServiceSpecificConfig . -}}
+
+	{{ if .EndpointDiscoveryOp }}
+	endpointCache *crr.EndpointCache
+	{{ end -}}
 }
 
 {{ if .UseInitMethods -}}
@@ -704,6 +716,10 @@ func New(config aws.Config) *{{ .StructName }} {
 		if err := resolveClientConfig(svc, config.ConfigSources); err != nil {
 			panic(fmt.Errorf("failed to resolve service configuration: %v", err))
 		}
+	{{- end }}
+
+	{{- if .EndpointDiscoveryOp }}
+	svc.endpointCache = crr.NewEndpointCache(10)
 	{{- end }}
 
 	// Handlers
@@ -771,6 +787,10 @@ func (a *API) ClientGoCode() string {
 
 	if a.HasExternalClientConfigFields() {
 		a.AddImport("fmt")
+	}
+
+	if a.EndpointDiscoveryOp != nil {
+		a.AddSDKImport("aws", "crr")
 	}
 
 	var buf bytes.Buffer
