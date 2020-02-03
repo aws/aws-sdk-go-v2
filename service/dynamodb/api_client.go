@@ -4,6 +4,7 @@ package dynamodb
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/crr"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
@@ -21,6 +22,8 @@ type Client struct {
 
 	// Disables the computation and validation of request and response checksums.
 	DisableComputeChecksums bool
+
+	endpointCache *crr.EndpointCache
 }
 
 // Used for custom client initialization logic
@@ -56,6 +59,8 @@ func New(config aws.Config) *Client {
 			},
 		),
 	}
+
+	svc.endpointCache = crr.NewEndpointCache(10)
 
 	// Handlers
 	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
