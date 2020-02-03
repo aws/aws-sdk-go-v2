@@ -79,8 +79,12 @@ type Config struct {
 	// for testing that do not support the modeled host prefix pattern.
 	DisableEndpointHostPrefix bool
 
+	// EnableEndpointDiscovery will allow for endpoint discovery on operations that
+	// have the definition in its model. By default, endpoint discovery is off.
+	EnableEndpointDiscovery bool
+
 	// ConfigSources are the sources that were used to construct the Config.
-	// Allows for additional configuration can be loaded by clients.
+	// Allows for additional configuration to be loaded by clients.
 	ConfigSources []interface{}
 }
 
