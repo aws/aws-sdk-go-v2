@@ -40,7 +40,9 @@ const (
 
 	AWSCustomCABundleEnvVar = "AWS_CA_BUNDLE"
 
-	S3UseARNRegionEnvVar = "AWS_S3_USE_ARN_REGION"
+	AWSEnableEndpointDiscoveryEnvKey = "AWS_ENABLE_ENDPOINT_DISCOVERY"
+
+	AWSS3UseARNRegionEnvVar = "AWS_S3_USE_ARN_REGION"
 )
 
 var (
@@ -139,6 +141,11 @@ type EnvConfig struct {
 	//  AWS_CA_BUNDLE=$HOME/my_custom_ca_bundle
 	CustomCABundle string
 
+	// Enables endpoint discovery via environment variables.
+	//
+	//	AWS_ENABLE_ENDPOINT_DISCOVERY=true
+	EnableEndpointDiscovery *bool
+
 	// Specifies if the S3 service should allow ARNs to direct the region
 	// the client's requests are sent to.
 	//
@@ -178,22 +185,12 @@ func NewEnvConfig() (EnvConfig, error) {
 
 	cfg.CustomCABundle = os.Getenv(AWSCustomCABundleEnvVar)
 
-	s3UseARNRegion := os.Getenv(S3UseARNRegionEnvVar)
-	if len(s3UseARNRegion) != 0 {
-		var v bool
+	if err := setBoolFromEnvVal(&cfg.EnableEndpointDiscovery, []string{AWSEnableEndpointDiscoveryEnvKey}); err != nil {
+		return cfg, err
+	}
 
-		switch {
-		case strings.EqualFold(s3UseARNRegion, "false"):
-			v = false
-		case strings.EqualFold(s3UseARNRegion, "true"):
-			v = true
-		default:
-			return cfg, fmt.Errorf(
-				"invalid value for environment variable, %s=%s, need true or false",
-				S3UseARNRegionEnvVar, s3UseARNRegion)
-		}
-
-		cfg.S3UseARNRegion = &v
+	if err := setBoolFromEnvVal(&cfg.S3UseARNRegion, []string{AWSS3UseARNRegionEnvVar}); err != nil {
+		return cfg, err
 	}
 
 	return cfg, nil
@@ -254,6 +251,15 @@ func (c EnvConfig) GetCustomCABundle() ([]byte, error) {
 	return ioutil.ReadFile(c.CustomCABundle)
 }
 
+// GetEnableEndpointDiscovery returns whether to enable service endpoint discovery
+func (c EnvConfig) GetEnableEndpointDiscovery() (value, ok bool, err error) {
+	if c.EnableEndpointDiscovery == nil {
+		return false, false, nil
+	}
+
+	return *c.EnableEndpointDiscovery, true, nil
+}
+
 // GetS3UseARNRegion returns whether to allow ARNs to direct the region
 // the S3 client's requests are sent to.
 func (c EnvConfig) GetS3UseARNRegion() (value, ok bool, err error) {
@@ -271,4 +277,27 @@ func setFromEnvVal(dst *string, keys []string) {
 			break
 		}
 	}
+}
+
+func setBoolFromEnvVal(dst **bool, keys []string) error {
+	for _, k := range keys {
+		value := os.Getenv(k)
+		if len(value) == 0 {
+			continue
+		}
+
+		switch {
+		case strings.EqualFold(value, "false"):
+			*dst = aws.Bool(false)
+		case strings.EqualFold(value, "true"):
+			*dst = aws.Bool(true)
+		default:
+			return fmt.Errorf(
+				"invalid value for environment variable, %s=%s, need true or false",
+				k, value)
+		}
+		break
+	}
+
+	return nil
 }

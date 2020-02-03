@@ -394,3 +394,21 @@ func TestResolveFallbackEC2Credentials(t *testing.T) {
 		t.Errorf("expect %v expiry window, got %v", e, a)
 	}
 }
+
+func TestEnableEndpointDiscovery(t *testing.T) {
+	configs := Configs{
+		WithEnableEndpointDiscovery(true),
+		WithEnableEndpointDiscovery(false),
+	}
+
+	cfg := unit.Config()
+
+	err := ResolveEnableEndpointDiscovery(&cfg, configs)
+	if err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+
+	if e, a := true, cfg.EnableEndpointDiscovery; e != a {
+		t.Errorf("expected %v, got %v", e, a)
+	}
+}

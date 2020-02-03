@@ -165,6 +165,14 @@ func TestNewSharedConfig(t *testing.T) {
 				S3UseARNRegion: aws.Bool(true),
 			},
 		},
+		{
+			Profile:   "endpoint_discovery",
+			Filenames: []string{testConfigFilename},
+			Expected: SharedConfig{
+				Profile:                 "endpoint_discovery",
+				EnableEndpointDiscovery: aws.Bool(true),
+			},
+		},
 	}
 
 	for i, c := range cases {

@@ -19,6 +19,7 @@ var DefaultConfigLoaders = []ConfigLoader{
 var DefaultAWSConfigResolvers = []AWSConfigResolver{
 	ResolveDefaultAWSConfig,
 	ResolveCustomCABundle,
+	ResolveEnableEndpointDiscovery,
 
 	ResolveRegion,
 

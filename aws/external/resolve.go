@@ -234,3 +234,20 @@ func ResolveFallbackEC2Credentials(cfg *aws.Config, configs Configs) error {
 
 	return nil
 }
+
+// ResolveEnableEndpointDiscovery will configure the AWS config for Endpoint Discovery
+// based on the first value discovered from the provided slice of configs.
+func ResolveEnableEndpointDiscovery(cfg *aws.Config, configs Configs) error {
+	endpointDiscovery, found, err := GetEnableEndpointDiscovery(configs)
+	if err != nil {
+		return err
+	}
+
+	if !found {
+		return nil
+	}
+
+	cfg.EnableEndpointDiscovery = endpointDiscovery
+
+	return nil
+}

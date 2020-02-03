@@ -27,6 +27,9 @@ const (
 	// Additional Config fields
 	regionKey = `region`
 
+	// endpoint discovery group
+	enableEndpointDiscoveryKey = `endpoint_discovery_enabled` // optional
+
 	// S3 ARN Region Usage
 	s3UseARNRegionKey = "s3_use_arn_region"
 )
@@ -105,6 +108,21 @@ type SharedConfig struct {
 	//
 	// s3_use_arn_region=true
 	S3UseARNRegion *bool
+
+	// EnableEndpointDiscovery can be enabled in the shared config by setting
+	// endpoint_discovery_enabled to true
+	//
+	//	endpoint_discovery_enabled = true
+	EnableEndpointDiscovery *bool
+}
+
+// GetEnableEndpointDiscovery returns whether to enable service endpoint discovery
+func (c *SharedConfig) GetEnableEndpointDiscovery() (value, ok bool, err error) {
+	if c.EnableEndpointDiscovery == nil {
+		return false, false, nil
+	}
+
+	return *c.EnableEndpointDiscovery, true, nil
 }
 
 // GetS3UseARNRegion retions if the S3 service should allow ARNs to direct the region
@@ -360,6 +378,12 @@ func (c *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) err
 	if section.Has(s3UseARNRegionKey) {
 		v := section.Bool(s3UseARNRegionKey)
 		c.S3UseARNRegion = &v
+	}
+
+	// Endpoint discovery
+	if section.Has(enableEndpointDiscoveryKey) {
+		v := section.Bool(enableEndpointDiscoveryKey)
+		c.EnableEndpointDiscovery = &v
 	}
 
 	return nil
