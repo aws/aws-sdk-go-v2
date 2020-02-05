@@ -23,7 +23,7 @@ func (c WithSharedConfigProfile) GetSharedConfigProfile() (string, error) {
 	return string(c), nil
 }
 
-// GetSharedConfigProfile searchds the Configs for a SharedConfigProfileProvider
+// GetSharedConfigProfile searches the Configs for a SharedConfigProfileProvider
 // and returns the value if found. Returns an error if a provider fails before a
 // value is found.
 func GetSharedConfigProfile(configs Configs) (string, bool, error) {
@@ -157,7 +157,7 @@ func (v WithCredentialsValue) GetCredentialsValue() (aws.Credentials, error) {
 	return aws.Credentials(v), nil
 }
 
-// GetCredentialsValue searchds the Configs for a CredentialsValueProvider
+// GetCredentialsValue searches the Configs for a CredentialsValueProvider
 // and returns the value if found. Returns an error if a provider fails before a
 // value is found.
 func GetCredentialsValue(configs Configs) (aws.Credentials, bool, error) {
@@ -294,7 +294,7 @@ func (p WithMFATokenFunc) GetMFATokenFunc() (func() (string, error), error) {
 	return p, nil
 }
 
-// GetMFATokenFunc searchds the Configs for a MFATokenFuncProvider
+// GetMFATokenFunc searches the Configs for a MFATokenFuncProvider
 // and returns the value if found. Returns an error if a provider fails before a
 // value is found.
 func GetMFATokenFunc(configs Configs) (func() (string, error), bool, error) {

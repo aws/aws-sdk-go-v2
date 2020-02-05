@@ -18,11 +18,12 @@ const (
 	sessionTokenKey = `aws_session_token`     // optional
 
 	// Assume Role Credentials group
-	roleArnKey         = `role_arn`          // group required
-	sourceProfileKey   = `source_profile`    // group required
-	externalIDKey      = `external_id`       // optional
-	mfaSerialKey       = `mfa_serial`        // optional
-	roleSessionNameKey = `role_session_name` // optional
+	roleArnKey          = `role_arn`          // group required
+	sourceProfileKey    = `source_profile`    // group required
+	credentialSourceKey = `credential_source` // group required (or source_profile)
+	externalIDKey       = `external_id`       // optional
+	mfaSerialKey        = `mfa_serial`        // optional
+	roleSessionNameKey  = `role_session_name` // optional
 
 	// Additional Config fields
 	regionKey = `region`
@@ -30,14 +31,34 @@ const (
 	// endpoint discovery group
 	enableEndpointDiscoveryKey = `endpoint_discovery_enabled` // optional
 
+	// External Credential P/Crocess
+	credentialProcessKey = `credential_process` // optional
+
+	// Web Identity Token File
+	webIdentityTokenFileKey = `web_identity_token_file` // optional
+
 	// S3 ARN Region Usage
 	s3UseARNRegionKey = "s3_use_arn_region"
+
+	// ErrCodeSharedConfig AWS SDK Error Code for Shared Configuration Errors
+	ErrCodeSharedConfig = "SharedConfigErr"
 )
 
 // DefaultSharedConfigProfile is the default profile to be used when
 // loading configuration from the config files if another profile name
 // is not provided.
 var DefaultSharedConfigProfile = `default`
+
+// ErrSharedConfigSourceCollision will be returned if a section contains both
+// source_profile and credential_source
+var ErrSharedConfigSourceCollision = awserr.New(ErrCodeSharedConfig, "only source profile or credential source can be specified, not both", nil)
+
+// ErrSharedConfigECSContainerEnvVarEmpty will be returned if the environment
+// variables are empty and Environment was set as the credential source
+var ErrSharedConfigECSContainerEnvVarEmpty = awserr.New(ErrCodeSharedConfig, "EcsContainer was specified as the credential_source, but 'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' was not set", nil)
+
+// ErrSharedConfigInvalidCredSource will be returned if an invalid credential source was provided
+var ErrSharedConfigInvalidCredSource = awserr.New(ErrCodeSharedConfig, "credential source values must be EcsContainer, Ec2InstanceMetadata, or Environment", nil)
 
 // DefaultSharedCredentialsFilename returns the SDK's default file path
 // for the shared credentials file.
@@ -76,8 +97,8 @@ type AssumeRoleConfig struct {
 	MFASerial       string
 	RoleSessionName string
 
-	sourceProfile string
-	Source        *SharedConfig
+	SourceProfileName string
+	Source            *SharedConfig
 }
 
 // SharedConfig represents the configuration fields of the SDK config files.
@@ -95,6 +116,10 @@ type SharedConfig struct {
 	//	aws_session_token
 	Credentials aws.Credentials
 
+	CredentialSource     string
+	CredentialProcess    string
+	WebIdentityTokenFile string
+
 	AssumeRole AssumeRoleConfig
 
 	// Region is the region the SDK should use for looking up AWS service endpoints
@@ -103,17 +128,17 @@ type SharedConfig struct {
 	//	region
 	Region string
 
-	// Specifies if the S3 service should allow ARNs to direct the region
-	// the client's requests are sent to.
-	//
-	// s3_use_arn_region=true
-	S3UseARNRegion *bool
-
 	// EnableEndpointDiscovery can be enabled in the shared config by setting
 	// endpoint_discovery_enabled to true
 	//
 	//	endpoint_discovery_enabled = true
 	EnableEndpointDiscovery *bool
+
+	// Specifies if the S3 service should allow ARNs to direct the region
+	// the client's requests are sent to.
+	//
+	// s3_use_arn_region=true
+	S3UseARNRegion *bool
 }
 
 // GetEnableEndpointDiscovery returns whether to enable service endpoint discovery
@@ -221,14 +246,9 @@ func NewSharedConfig(profile string, filenames []string) (SharedConfig, error) {
 	}
 
 	cfg := SharedConfig{}
-	if err = cfg.setFromIniFiles(profile, files); err != nil {
+	profiles := map[string]struct{}{}
+	if err = cfg.setFromIniFiles(profiles, profile, files); err != nil {
 		return SharedConfig{}, err
-	}
-
-	if len(cfg.AssumeRole.sourceProfile) > 0 {
-		if err := cfg.setAssumeRoleSource(profile, files); err != nil {
-			return SharedConfig{}, err
-		}
 	}
 
 	return cfg, nil
@@ -242,7 +262,7 @@ type sharedConfigFile struct {
 func loadSharedConfigIniFiles(filenames []string) ([]sharedConfigFile, error) {
 	files := make([]sharedConfigFile, 0, len(filenames))
 
-	errs := SharedConfigNotExistErrors{}
+	var errs SharedConfigNotExistErrors
 	for _, filename := range filenames {
 		sections, err := ini.OpenFile(filename)
 		if aerr, ok := err.(awserr.Error); ok && aerr.Code() == ini.ErrCodeUnableToReadFile {
@@ -267,42 +287,12 @@ func loadSharedConfigIniFiles(filenames []string) ([]sharedConfigFile, error) {
 	return files, nil
 }
 
-func (c *SharedConfig) setAssumeRoleSource(origProfile string, files []sharedConfigFile) error {
-	var assumeRoleSrc SharedConfig
-
-	// Multiple level assume role chains are not support
-	if c.AssumeRole.sourceProfile == origProfile {
-		assumeRoleSrc = *c
-		assumeRoleSrc.AssumeRole = AssumeRoleConfig{}
-	} else {
-		err := assumeRoleSrc.setFromIniFiles(c.AssumeRole.sourceProfile, files)
-		if err != nil {
-			return SharedConfigAssumeRoleError{
-				Profile: c.Profile,
-				RoleARN: c.AssumeRole.RoleARN,
-				Err:     err,
-			}
-		}
-	}
-
-	if len(assumeRoleSrc.Credentials.AccessKeyID) == 0 {
-		return SharedConfigAssumeRoleError{
-			Profile: c.Profile,
-			RoleARN: c.AssumeRole.RoleARN,
-			Err:     fmt.Errorf("source profile has no shared credentials"),
-		}
-	}
-
-	c.AssumeRole.Source = &assumeRoleSrc
-
-	return nil
-}
-
 // Returns an error if all of the files fail to load. If at least one file is
 // successfully loaded and contains the profile, no error will be returned.
-func (c *SharedConfig) setFromIniFiles(profile string, files []sharedConfigFile) error {
+func (c *SharedConfig) setFromIniFiles(profiles map[string]struct{}, profile string, files []sharedConfigFile) error {
 	c.Profile = profile
 
+	// Trim files from the list that don't exist.
 	existErrs := SharedConfigNotExistErrors{}
 	for _, f := range files {
 		if err := c.setFromIniFile(profile, f); err != nil {
@@ -316,6 +306,56 @@ func (c *SharedConfig) setFromIniFiles(profile string, files []sharedConfigFile)
 
 	if len(existErrs) == len(files) {
 		return existErrs
+	}
+
+	if _, ok := profiles[profile]; ok {
+		// if this is the second instance of the profile the Assume Role
+		// options must be cleared because they are only valid for the
+		// first reference of a profile. The self linked instance of the
+		// profile only have credential provider options.
+		c.AssumeRole = AssumeRoleConfig{}
+	} else {
+		// First time a profile has been seen, It must either be a assume role
+		// or credentials. Assert if the credential type requires a role ARN,
+		// the ARN is also set.
+		if err := c.validateCredentialsRequireARN(profile); err != nil {
+			return err
+		}
+	}
+	profiles[profile] = struct{}{}
+
+	if err := c.validateCredentialType(); err != nil {
+		return err
+	}
+
+	// Link source profiles for assume roles
+	if len(c.AssumeRole.SourceProfileName) != 0 {
+		// Linked profile via source_profile ignore credential provider
+		// options, the source profile must provide the credentials.
+		c.clearCredentialOptions()
+
+		srcCfg := &SharedConfig{}
+		err := srcCfg.setFromIniFiles(profiles, c.AssumeRole.SourceProfileName, files)
+		if err != nil {
+			// SourceProfileName that doesn't exist is an error in configuration.
+			if _, ok := err.(SharedConfigNotExistErrors); ok {
+				err = SharedConfigAssumeRoleError{
+					RoleARN: c.AssumeRole.RoleARN,
+					Profile: c.AssumeRole.SourceProfileName,
+					Err:     err,
+				}
+			}
+			return err
+		}
+
+		if !srcCfg.hasCredentials() {
+			return SharedConfigAssumeRoleError{
+				RoleARN: c.AssumeRole.RoleARN,
+				Profile: c.AssumeRole.SourceProfileName,
+			}
+		}
+
+		c.AssumeRole.Source = srcCfg
 	}
 
 	return nil
@@ -360,13 +400,20 @@ func (c *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) err
 	srcProfile := section.String(sourceProfileKey)
 	if len(roleArn) > 0 && len(srcProfile) > 0 {
 		c.AssumeRole = AssumeRoleConfig{
-			RoleARN:         roleArn,
-			ExternalID:      section.String(externalIDKey),
-			MFASerial:       section.String(mfaSerialKey),
-			RoleSessionName: section.String(roleSessionNameKey),
-
-			sourceProfile: srcProfile,
+			RoleARN:           roleArn,
+			ExternalID:        section.String(externalIDKey),
+			MFASerial:         section.String(mfaSerialKey),
+			RoleSessionName:   section.String(roleSessionNameKey),
+			SourceProfileName: srcProfile,
 		}
+	}
+
+	if section.Has(credentialProcessKey) {
+		c.CredentialProcess = section.String(credentialProcessKey)
+	}
+
+	if section.Has(webIdentityTokenFileKey) {
+		c.WebIdentityTokenFile = section.String(webIdentityTokenFileKey)
 	}
 
 	// Region
@@ -387,6 +434,63 @@ func (c *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) err
 	}
 
 	return nil
+}
+
+func (c *SharedConfig) validateCredentialsRequireARN(profile string) error {
+	var credSource string
+
+	switch {
+	case len(c.AssumeRole.SourceProfileName) != 0:
+		credSource = sourceProfileKey
+	case len(c.CredentialSource) != 0:
+		credSource = credentialSourceKey
+	case len(c.WebIdentityTokenFile) != 0:
+		credSource = webIdentityTokenFileKey
+	}
+
+	if len(credSource) != 0 && len(c.AssumeRole.RoleARN) == 0 {
+		return CredentialRequiresARNError{
+			Type:    credSource,
+			Profile: profile,
+		}
+	}
+
+	return nil
+}
+
+func (c *SharedConfig) validateCredentialType() error {
+	// Only one or no credential type can be defined.
+	if !oneOrNone(
+		len(c.AssumeRole.SourceProfileName) != 0,
+		len(c.CredentialSource) != 0,
+		len(c.CredentialProcess) != 0,
+		len(c.WebIdentityTokenFile) != 0,
+	) {
+		return ErrSharedConfigSourceCollision
+	}
+
+	return nil
+}
+
+func (c *SharedConfig) hasCredentials() bool {
+	switch {
+	case len(c.AssumeRole.SourceProfileName) != 0:
+	case len(c.CredentialSource) != 0:
+	case len(c.CredentialProcess) != 0:
+	case len(c.WebIdentityTokenFile) != 0:
+	case c.Credentials.HasKeys():
+	default:
+		return false
+	}
+
+	return true
+}
+
+func (c *SharedConfig) clearCredentialOptions() {
+	c.CredentialSource = ""
+	c.CredentialProcess = ""
+	c.WebIdentityTokenFile = ""
+	c.Credentials = aws.Credentials{}
 }
 
 // SharedConfigNotExistErrors provides an error type for failure to load shared
@@ -464,6 +568,39 @@ func (e SharedConfigAssumeRoleError) Error() string {
 		e.RoleARN, e.Profile, e.Err)
 }
 
+// CredentialRequiresARNError provides the error for shared config credentials
+// that are incorrectly configured in the shared config or credentials file.
+type CredentialRequiresARNError struct {
+	// type of credentials that were configured.
+	Type string
+
+	// Profile name the credentials were in.
+	Profile string
+}
+
+// Code is the short id of the error.
+func (e CredentialRequiresARNError) Code() string {
+	return "CredentialRequiresARNError"
+}
+
+// Message is the description of the error
+func (e CredentialRequiresARNError) Message() string {
+	return fmt.Sprintf(
+		"credential type %s requires role_arn, profile %s",
+		e.Type, e.Profile,
+	)
+}
+
+// OrigErr is the underlying error that caused the failure.
+func (e CredentialRequiresARNError) OrigErr() error {
+	return nil
+}
+
+// Error satisfies the error interface.
+func (e CredentialRequiresARNError) Error() string {
+	return awserr.SprintError(e.Code(), e.Message(), "", nil)
+}
+
 func userHomeDir() string {
 	if runtime.GOOS == "windows" { // Windows
 		return os.Getenv("USERPROFILE")
@@ -471,4 +608,19 @@ func userHomeDir() string {
 
 	// *nix
 	return os.Getenv("HOME")
+}
+
+func oneOrNone(bs ...bool) bool {
+	var count int
+
+	for _, b := range bs {
+		if b {
+			count++
+			if count > 1 {
+				return false
+			}
+		}
+	}
+
+	return true
 }
