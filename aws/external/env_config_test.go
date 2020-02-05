@@ -18,8 +18,8 @@ var _ CredentialsEndpointProvider = (*EnvConfig)(nil)
 var _ ContainerCredentialsEndpointPathProvider = (*EnvConfig)(nil)
 
 func TestNewEnvConfig_Creds(t *testing.T) {
-	env := awstesting.StashEnv()
-	defer awstesting.PopEnv(env)
+	restoreEnv := awstesting.StashEnv()
+	defer restoreEnv()
 
 	cases := []struct {
 		Env map[string]string
@@ -102,8 +102,8 @@ func TestNewEnvConfig_Creds(t *testing.T) {
 }
 
 func TestNewEnvConfig(t *testing.T) {
-	env := awstesting.StashEnv()
-	defer awstesting.PopEnv(env)
+	restoreEnv := awstesting.StashEnv()
+	defer restoreEnv()
 
 	cases := []struct {
 		Env    map[string]string
@@ -253,8 +253,8 @@ func TestNewEnvConfig(t *testing.T) {
 }
 
 func TestSetEnvValue(t *testing.T) {
-	env := awstesting.StashEnv()
-	defer awstesting.PopEnv(env)
+	restoreEnv := awstesting.StashEnv()
+	defer restoreEnv()
 
 	os.Setenv("empty_key", "")
 	os.Setenv("second_key", "2")
