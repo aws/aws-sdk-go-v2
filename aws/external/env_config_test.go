@@ -223,6 +223,14 @@ func TestNewEnvConfig(t *testing.T) {
 				S3UseARNRegion: aws.Bool(true),
 			},
 		},
+		{
+			Env: map[string]string{
+				"AWS_ENABLE_ENDPOINT_DISCOVERY": "true",
+			},
+			Config: EnvConfig{
+				EnableEndpointDiscovery: aws.Bool(true),
+			},
+		},
 	}
 
 	for _, c := range cases {

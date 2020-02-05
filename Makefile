@@ -26,10 +26,9 @@ all: generate unit
 ###################
 # Code Generation #
 ###################
-generate: cleanup-models gen-test gen-endpoints gen-services gen-tools
+generate: cleanup-models gen-test gen-endpoints gen-services gen-external-asserts gen-tools
 
-gen-test: gen-protocol-test
-#gen-test: gen-protocol-test gen-codegen-test
+gen-test: gen-protocol-test gen-codegen-test
 
 #gen-codegen-test:
 #	@echo "Generating SDK API tests"
@@ -46,6 +45,14 @@ gen-protocol-test:
 gen-endpoints:
 	@echo "Generating SDK endpoints"
 	go generate ./models/endpoints
+
+gen-codegen-test:
+	@echo "Generating SDK API tests"
+	go generate ./private/model/api/codegentest/service
+
+gen-external-asserts:
+	@echo "Generating SDK external package implementor assertions"
+	go generate ./aws/external
 
 gen-tools:
 	go generate -tags sdktool ./internal/awstesting/cmd/op_crawler/

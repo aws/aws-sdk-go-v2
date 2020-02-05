@@ -42,6 +42,8 @@ type ShapeRef struct {
 
 	// Flags whether the member reference is a endpoint ARN
 	EndpointARN bool
+
+	EndpointDiscoveryID bool `json:"endpointdiscoveryid"`
 }
 
 // CanBeEmpty returns if the shape value can sent request as an empty value.
@@ -125,6 +127,13 @@ type Shape struct {
 
 	// Flags that a member of the shape is an EndpointARN
 	HasEndpointARNMember bool
+}
+
+// HasMember will return whether or not the shape has a given
+// member by name.
+func (s *Shape) HasMember(name string) bool {
+	_, ok := s.MemberRefs[name]
+	return ok
 }
 
 // ErrorCodeName will return the error shape's name formated for

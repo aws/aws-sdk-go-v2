@@ -343,3 +343,35 @@ func NewWithEC2MetadataRegion(ctx context.Context, client *ec2metadata.Client) W
 func (p WithEC2MetadataRegion) GetRegion() (string, error) {
 	return p.client.Region(p.ctx)
 }
+
+// EnableEndpointDiscoveryProvider provides access to the
+type EnableEndpointDiscoveryProvider interface {
+	GetEnableEndpointDiscovery() (value, found bool, err error)
+}
+
+// WithEnableEndpointDiscovery provides a wrapping type of a bool to satisfy
+// the EnableEndpointDiscoveryProvider interface.
+type WithEnableEndpointDiscovery bool
+
+// GetEnableEndpointDiscovery returns whether to enable service endpoint discovery
+func (w WithEnableEndpointDiscovery) GetEnableEndpointDiscovery() (value, found bool, err error) {
+	return bool(w), true, nil
+}
+
+// GetEnableEndpointDiscovery searches the provided configs and returns the value for
+// EndpointDiscoveryEnabled.
+func GetEnableEndpointDiscovery(configs Configs) (value, found bool, err error) {
+	for _, cfg := range configs {
+		if p, ok := cfg.(EnableEndpointDiscoveryProvider); ok {
+			value, found, err = p.GetEnableEndpointDiscovery()
+			if err != nil {
+				return false, false, err
+			}
+			if found {
+				break
+			}
+		}
+	}
+
+	return value, found, err
+}

@@ -432,6 +432,15 @@ func (a *API) setMetadataEndpointsKey() {
 	}
 }
 
+func (a *API) findEndpointDiscoveryOp() {
+	for _, op := range a.Operations {
+		if op.IsEndpointDiscoveryOp {
+			a.EndpointDiscoveryOp = op
+			return
+		}
+	}
+}
+
 func (a *API) injectUnboundedOutputStreaming() {
 	for _, op := range a.Operations {
 		if op.AuthType != V4UnsignedBodyAuthType {

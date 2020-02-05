@@ -71,3 +71,6 @@ source_profile = assume_role_wo_creds
 
 [valid_arn_region]
 s3_use_arn_region=true
+
+[endpoint_discovery]
+endpoint_discovery_enabled=true

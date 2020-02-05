@@ -33,6 +33,7 @@ func mockCRCResponse(svc *dynamodb.Client, status int, body, crc string) (req *a
 
 	listReq := svc.ListTablesRequest(nil)
 	req = listReq.Request
+	req.Handlers.Build.RemoveByName("crr.endpointdiscovery")
 	req.Handlers.Send.PushBack(func(*aws.Request) {
 		req.HTTPResponse = &http.Response{
 			ContentLength: int64(len(body)),
@@ -130,6 +131,7 @@ func TestValidateCRC32DoesNotMatch(t *testing.T) {
 	if req.Error == nil {
 		t.Fatalf("expect error, but got none")
 	}
+	req.Handlers.Build.RemoveByName("crr.endpointdiscovery")
 
 	aerr := req.Error.(awserr.Error)
 	if e, a := "CRC32CheckFailed", aerr.Code(); e != a {

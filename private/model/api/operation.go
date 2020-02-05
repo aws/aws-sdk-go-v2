@@ -28,6 +28,9 @@ type Operation struct {
 	CustomBuildHandlers []string       `json:"-"`
 	Endpoint            *EndpointTrait `json:"endpoint"`
 	HasEndpointARN      bool           `json:"-"`
+
+	IsEndpointDiscoveryOp bool               `json:"endpointoperation"`
+	EndpointDiscovery     *EndpointDiscovery `json:"endpointdiscovery"`
 }
 
 // EndpointTrait provides the structure of the modeled enpdoint trait, and its
@@ -36,6 +39,15 @@ type EndpointTrait struct {
 	// Specifies the hostPrefix template to prepend to the operation's request
 	// endpoint host.
 	HostPrefix string `json:"hostPrefix"`
+}
+
+// EndpointDiscovery represents a map of key values pairs that represents
+// metadata about how a given API will make a call to the discovery endpoint.
+type EndpointDiscovery struct {
+	// Required indicates that for a given operation that endpoint is required.
+	// Any required endpoint discovery operation cannot have endpoint discovery
+	// turned off.
+	Required bool `json:"required"`
 }
 
 // A HTTPInfo defines the method of HTTP request for the Operation.
@@ -157,6 +169,42 @@ func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoType }}) ({{
 		req.Handlers.Build.PushBackNamed({{ $handler }})
 	{{ end -}}
 
+	{{- if .EndpointDiscovery }}
+		{{- if not .EndpointDiscovery.Required }}
+			if req.Config.EnableEndpointDiscovery {
+		{{- end }}
+		de := discoverer{{ .API.EndpointDiscoveryOp.Name }}{
+			Client: c,
+			Required: {{ .EndpointDiscovery.Required }},
+			EndpointCache: c.endpointCache,
+			Params: map[string]*string{
+				"op": &req.Operation.Name,
+				{{- range $key, $ref := .InputRef.Shape.MemberRefs -}}
+					{{- if $ref.EndpointDiscoveryID -}}
+						{{- if ne (len $ref.LocationName) 0 -}}
+							"{{ $ref.LocationName }}": input.{{ $key }},
+						{{- else }}
+							"{{ $key }}": input.{{ $key }},
+						{{- end }}
+					{{- end }}
+				{{- end }}
+			},
+		}
+
+		for k, v := range de.Params {
+			if v == nil {
+				delete(de.Params, k)
+			}
+		}
+
+		req.Handlers.Build.PushFrontNamed(aws.NamedHandler{
+			Name: "crr.endpointdiscovery",
+			Fn: de.Handler,
+		})
+		{{- if not .EndpointDiscovery.Required }}
+			}
+		{{- end }}
+	{{ end -}}
 	return {{ $reqType }}{Request: req, Input: input, Copy: c.{{ $reqType }} }
 }
 
@@ -250,6 +298,79 @@ type {{ $respType }} struct {
 func (r * {{ $respType }}) SDKResponseMetdata() *aws.Response {
 	return r.response
 }
+
+{{- if .IsEndpointDiscoveryOp }}
+type discoverer{{ .ExportedName }} struct {
+	Context context.Context
+	Client *{{ .API.StructName }}
+	Required bool
+	EndpointCache *crr.EndpointCache
+	Params map[string]*string
+	Key string
+}
+
+func (d *discoverer{{ .ExportedName }}) Discover() (crr.Endpoint, error) {
+	input := &{{ .API.EndpointDiscoveryOp.InputRef.ShapeName }}{
+		{{ if .API.EndpointDiscoveryOp.InputRef.Shape.HasMember "Operation" -}}
+		Operation: d.Params["op"],
+		{{ end -}}
+		{{ if .API.EndpointDiscoveryOp.InputRef.Shape.HasMember "Identifiers" -}}
+		Identifiers: d.Params,
+		{{ end -}}
+	}
+
+	req := d.Client.{{ .API.EndpointDiscoveryOp.ExportedName }}Request(input)
+	resp, err := req.Send(d.Context)
+	if err != nil {
+		return crr.Endpoint{}, err
+	}
+
+	endpoint := crr.Endpoint{
+		Key: d.Key,
+	}
+
+	for _, e := range resp.Endpoints {
+		if e.Address == nil {
+			continue
+		}
+
+		cachedInMinutes := aws.Int64Value(e.CachePeriodInMinutes)
+		u, err := url.Parse(*e.Address)
+		if err != nil {
+			continue
+		}
+
+		addr := crr.WeightedAddress{
+			URL: u,
+			Expired:  time.Now().Add(time.Duration(cachedInMinutes) * time.Minute),
+		}
+
+		endpoint.Add(addr)
+	}
+
+	d.EndpointCache.Add(endpoint)
+
+	return endpoint, nil
+}
+
+func (d *discoverer{{ .ExportedName }}) Handler(r *aws.Request) {
+	d.Context = r.Context()
+	endpointKey := crr.BuildEndpointKey(d.Params)
+	d.Key = endpointKey
+
+	endpoint, err := d.EndpointCache.Get(d, endpointKey, d.Required)
+	if err != nil {
+		r.Error = err
+		return
+	}
+
+	if endpoint.URL != nil && len(endpoint.URL.String()) > 0 {
+		e := r.Endpoint
+		e.URL = endpoint.URL.String()
+		r.SetEndpoint(e)
+	}
+}
+{{- end }}
 `))
 
 // GoCode returns a string of rendered GoCode for this Operation
