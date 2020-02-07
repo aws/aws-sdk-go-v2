@@ -18,34 +18,34 @@ called. You also need to set the AWS_SDK_LOAD_CONFIG environment variable
     [default]
     credential_process = /command/to/call
 
-Creating a new session will use the credential process to retrieve credentials.
+Loading configuration using external will use the credential process to retrieve credentials.
 NOTE: If there are credentials in the profile you are using, the credential
 process will not be used.
 
     // Initialize a session to load credentials.
-    sess, _ := session.NewSession(&aws.Config{
-        Region: aws.String("us-east-1")},
-    )
+	cfg, _ := external.LoadDefaultAWSConfig()
 
     // Create S3 service client to use the credentials.
-    svc := s3.New(sess)
+    svc := s3.New(cfg)
 
 Another way to use the `credential_process` method is by using
 `credentials.NewProvider()` and providing a command to be executed to
 retrieve credentials:
 
     // Create credentials using the Provider.
-    creds := processcreds.NewProvider("/path/to/command")
+	cfg := aws.Config{
+		Credentials: processcreds.NewProvider("/path/to/command")
+	}
 
     // Create service client value configured for credentials.
-    svc := s3.New(sess, &aws.Config{Credentials: creds})
+    svc := s3.New(cfg)
 
 You can set a non-default timeout for the `credential_process` with another
 constructor, `credentials.NewProviderTimeout()`, providing the timeout. To
 set a one minute timeout:
 
     // Create credentials using the Provider.
-    creds := processcreds.NewProviderTimeout(
+    provider := processcreds.NewProviderTimeout(
         "/path/to/command",
         time.Duration(500) * time.Millisecond)
 
@@ -54,12 +54,10 @@ credentials using one or more option functions. For example, you can set a two
 minute timeout, a credential duration of 60 minutes, and a maximum stdout
 buffer size of 2k.
 
-    creds := processcreds.NewProvider(
+    provider := processcreds.NewProvider(
         "/path/to/command",
         func(opt *Provider) {
             opt.Timeout = time.Duration(2) * time.Minute
-            opt.Duration = time.Duration(60) * time.Minute
-            opt.MaxBufSize = 2048
         })
 
 You can also use your own `exec.Cmd`:
@@ -68,7 +66,7 @@ You can also use your own `exec.Cmd`:
 	myCommand := exec.Command("/path/to/command")
 
 	// Create credentials using your exec.Cmd and custom timeout
-	creds := processcreds.NewProviderCommand(
+	provider := processcreds.NewProviderCommand(
 		myCommand,
 		func(opt *processcreds.Provider) {
 			opt.Timeout = time.Duration(1) * time.Second
@@ -153,9 +151,6 @@ const (
 type Provider struct {
 	aws.SafeCredentialsProvider
 
-	// Expiry duration of the credentials. Defaults to 15 minutes if not set.
-	Duration time.Duration
-
 	// ExpiryWindow will allow the credentials to trigger refreshing prior to
 	// the credentials actually expiring. This is beneficial so race conditions
 	// with expiring credentials do not cause request to fail unexpectedly
@@ -183,23 +178,12 @@ func NewProvider(command string, options ...func(*Provider)) *Provider {
 	return NewProviderCommand(exec.Command(command), options...)
 }
 
-// NewProviderTimeout returns a pointer to a new Credentials object with
-// the specified command and timeout, and default duration and max buffer size.
-func NewProviderTimeout(command string, timeout time.Duration) *Provider {
-	p := NewProvider(command, func(opt *Provider) {
-		opt.Timeout = timeout
-	})
-
-	return p
-}
-
 // NewProviderCommand returns a pointer to a new Credentials object with
 // the specified command, and default timeout, duration and max buffer size.
 func NewProviderCommand(command *exec.Cmd, options ...func(*Provider)) *Provider {
 	p := &Provider{
-		command:  command,
-		Duration: DefaultDuration,
-		Timeout:  DefaultTimeout,
+		command: command,
+		Timeout: DefaultTimeout,
 	}
 
 	p.RetrieveFn = p.retrieveFn

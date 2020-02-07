@@ -305,7 +305,9 @@ func TestProcessProviderTimeout(t *testing.T) {
 		command = "ping -n 2 127.0.0.1>nul"
 	}
 
-	provider := processcreds.NewProviderTimeout(command, time.Duration(1)*time.Second)
+	provider := processcreds.NewProvider(command, func(provider *processcreds.Provider) {
+		provider.Timeout = time.Duration(1) * time.Second
+	})
 	if _, err := provider.Retrieve(context.Background()); err == nil || err.(awserr.Error).Code() != processcreds.ErrCodeProcessProviderExecution || err.(awserr.Error).Message() != "credential process timed out" {
 		t.Errorf("expected %v, got %v", processcreds.ErrCodeProcessProviderExecution, err)
 	}
