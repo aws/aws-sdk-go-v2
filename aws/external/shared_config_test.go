@@ -159,6 +159,70 @@ func TestNewSharedConfig(t *testing.T) {
 				EnableEndpointDiscovery: aws.Bool(true),
 			},
 		},
+		11: {
+			Filenames: []string{testConfigOtherFilename, testConfigFilename},
+			Profile:   "assume_role_with_credential_source",
+			Expected: SharedConfig{
+				Profile:          "assume_role_with_credential_source",
+				RoleARN:          "assume_role_with_credential_source_role_arn",
+				CredentialSource: credSourceEc2Metadata,
+			},
+		},
+		12: {
+			Filenames: []string{testConfigOtherFilename, testConfigFilename},
+			Profile:   "multiple_assume_role",
+			Expected: SharedConfig{
+				Profile:           "multiple_assume_role",
+				RoleARN:           "multiple_assume_role_role_arn",
+				SourceProfileName: "assume_role",
+				Source: &SharedConfig{
+					Profile:           "assume_role",
+					RoleARN:           "assume_role_role_arn",
+					SourceProfileName: "complete_creds",
+					Source: &SharedConfig{
+						Profile: "complete_creds",
+						Credentials: aws.Credentials{
+							AccessKeyID:     "complete_creds_akid",
+							SecretAccessKey: "complete_creds_secret",
+							Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+						},
+					},
+				},
+			},
+		},
+		13: {
+			Filenames: []string{testConfigOtherFilename, testConfigFilename},
+			Profile:   "multiple_assume_role_with_credential_source",
+			Expected: SharedConfig{
+				Profile:           "multiple_assume_role_with_credential_source",
+				RoleARN:           "multiple_assume_role_with_credential_source_role_arn",
+				SourceProfileName: "assume_role_with_credential_source",
+				Source: &SharedConfig{
+					Profile:          "assume_role_with_credential_source",
+					RoleARN:          "assume_role_with_credential_source_role_arn",
+					CredentialSource: credSourceEc2Metadata,
+				},
+			},
+		},
+		14: {
+			Filenames: []string{testConfigOtherFilename, testConfigFilename},
+			Profile:   "multiple_assume_role_with_credential_source2",
+			Expected: SharedConfig{
+				Profile:           "multiple_assume_role_with_credential_source2",
+				RoleARN:           "multiple_assume_role_with_credential_source2_role_arn",
+				SourceProfileName: "multiple_assume_role_with_credential_source",
+				Source: &SharedConfig{
+					Profile:           "multiple_assume_role_with_credential_source",
+					RoleARN:           "multiple_assume_role_with_credential_source_role_arn",
+					SourceProfileName: "assume_role_with_credential_source",
+					Source: &SharedConfig{
+						Profile:          "assume_role_with_credential_source",
+						RoleARN:          "assume_role_with_credential_source_role_arn",
+						CredentialSource: credSourceEc2Metadata,
+					},
+				},
+			},
+		},
 	}
 
 	for i, c := range cases {
