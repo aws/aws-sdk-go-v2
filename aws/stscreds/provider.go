@@ -136,11 +136,16 @@ type AssumeRoleProvider struct {
 	aws.SafeCredentialsProvider
 
 	// STS client to make assume role request with.
-	Client AssumeRoler
+	client AssumeRoler
 
 	// Role to be assumed.
-	RoleARN string
+	roleARN string
 
+	options AssumeRoleProviderOptions
+}
+
+// AssumeRoleProviderOptions is a structure of configurable options for AssumeRoleProvider
+type AssumeRoleProviderOptions struct {
 	// Session name, if you wish to reuse the credentials elsewhere.
 	RoleSessionName string
 
@@ -199,12 +204,17 @@ type AssumeRoleProvider struct {
 
 // NewAssumeRoleProvider constructs and returns a credentials provider that
 // will retrieve credentials by assuming a IAM role using STS.
-func NewAssumeRoleProvider(client AssumeRoler, roleARN string) *AssumeRoleProvider {
+func NewAssumeRoleProvider(client AssumeRoler, roleARN string, options ...func(*AssumeRoleProviderOptions)) *AssumeRoleProvider {
 	p := &AssumeRoleProvider{
-		Client:  client,
-		RoleARN: roleARN,
+		client:  client,
+		roleARN: roleARN,
 	}
+
 	p.RetrieveFn = p.retrieveFn
+
+	for _, option := range options {
+		option(&p.options)
+	}
 
 	return p
 }
@@ -212,30 +222,30 @@ func NewAssumeRoleProvider(client AssumeRoler, roleARN string) *AssumeRoleProvid
 // Retrieve generates a new set of temporary credentials using STS.
 func (p *AssumeRoleProvider) retrieveFn(ctx context.Context) (aws.Credentials, error) {
 	// Apply defaults where parameters are not set.
-	if len(p.RoleSessionName) == 0 {
+	if len(p.options.RoleSessionName) == 0 {
 		// Try to work out a role name that will hopefully end up unique.
-		p.RoleSessionName = fmt.Sprintf("%d", time.Now().UTC().UnixNano())
+		p.options.RoleSessionName = fmt.Sprintf("%d", time.Now().UTC().UnixNano())
 	}
-	if p.Duration == 0 {
+	if p.options.Duration == 0 {
 		// Expire as often as AWS permits.
-		p.Duration = DefaultDuration
+		p.options.Duration = DefaultDuration
 	}
 	input := &sts.AssumeRoleInput{
-		DurationSeconds: aws.Int64(int64(p.Duration / time.Second)),
-		RoleArn:         aws.String(p.RoleARN),
-		RoleSessionName: aws.String(p.RoleSessionName),
-		ExternalId:      p.ExternalID,
+		DurationSeconds: aws.Int64(int64(p.options.Duration / time.Second)),
+		RoleArn:         aws.String(p.roleARN),
+		RoleSessionName: aws.String(p.options.RoleSessionName),
+		ExternalId:      p.options.ExternalID,
 	}
-	if p.Policy != nil {
-		input.Policy = p.Policy
+	if p.options.Policy != nil {
+		input.Policy = p.options.Policy
 	}
-	if p.SerialNumber != nil {
-		if p.TokenCode != nil {
-			input.SerialNumber = p.SerialNumber
-			input.TokenCode = p.TokenCode
-		} else if p.TokenProvider != nil {
-			input.SerialNumber = p.SerialNumber
-			code, err := p.TokenProvider()
+	if p.options.SerialNumber != nil {
+		if p.options.TokenCode != nil {
+			input.SerialNumber = p.options.SerialNumber
+			input.TokenCode = p.options.TokenCode
+		} else if p.options.TokenProvider != nil {
+			input.SerialNumber = p.options.SerialNumber
+			code, err := p.options.TokenProvider()
 			if err != nil {
 				return aws.Credentials{}, err
 			}
@@ -247,7 +257,7 @@ func (p *AssumeRoleProvider) retrieveFn(ctx context.Context) (aws.Credentials, e
 		}
 	}
 
-	req := p.Client.AssumeRoleRequest(input)
+	req := p.client.AssumeRoleRequest(input)
 	resp, err := req.Send(ctx)
 	if err != nil {
 		return aws.Credentials{Source: ProviderName}, err
@@ -260,6 +270,6 @@ func (p *AssumeRoleProvider) retrieveFn(ctx context.Context) (aws.Credentials, e
 		Source:          ProviderName,
 
 		CanExpire: true,
-		Expires:   resp.Credentials.Expiration.Add(-p.ExpiryWindow),
+		Expires:   resp.Credentials.Expiration.Add(-p.options.ExpiryWindow),
 	}, nil
 }

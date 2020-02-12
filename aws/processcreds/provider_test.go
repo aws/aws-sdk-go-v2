@@ -21,10 +21,8 @@ import (
 )
 
 func TestProcessProviderFromSessionCfg(t *testing.T) {
-	t.Skip()
-
-	restoreEnvFn := awstesting.StashEnv()
-	defer restoreEnvFn()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	os.Setenv("AWS_SDK_LOAD_CONFIG", "1")
 	if runtime.GOOS == "windows" {
@@ -58,10 +56,8 @@ func TestProcessProviderFromSessionCfg(t *testing.T) {
 }
 
 func TestProcessProviderFromSessionWithProfileCfg(t *testing.T) {
-	t.Skip()
-
-	restoreEnvFn := awstesting.StashEnv()
-	defer restoreEnvFn()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	os.Setenv("AWS_SDK_LOAD_CONFIG", "1")
 	os.Setenv("AWS_PROFILE", "non_expire")
@@ -88,10 +84,8 @@ func TestProcessProviderFromSessionWithProfileCfg(t *testing.T) {
 }
 
 func TestProcessProviderNotFromCredProcCfg(t *testing.T) {
-	t.Skip()
-
-	restoreEnvFn := awstesting.StashEnv()
-	defer restoreEnvFn()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	os.Setenv("AWS_SDK_LOAD_CONFIG", "1")
 	os.Setenv("AWS_PROFILE", "not_alone")
@@ -122,10 +116,8 @@ func TestProcessProviderNotFromCredProcCfg(t *testing.T) {
 }
 
 func TestProcessProviderFromSessionCred(t *testing.T) {
-	t.Skip()
-
-	restoreEnvFn := awstesting.StashEnv()
-	defer restoreEnvFn()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	if runtime.GOOS == "windows" {
 		os.Setenv("AWS_SHARED_CREDENTIALS_FILE", "testdata\\shcred_win.ini")
@@ -158,10 +150,8 @@ func TestProcessProviderFromSessionCred(t *testing.T) {
 }
 
 func TestProcessProviderFromSessionWithProfileCred(t *testing.T) {
-	t.Skip()
-
-	restoreEnvFn := awstesting.StashEnv()
-	defer restoreEnvFn()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	os.Setenv("AWS_PROFILE", "non_expire")
 	if runtime.GOOS == "windows" {
@@ -187,10 +177,8 @@ func TestProcessProviderFromSessionWithProfileCred(t *testing.T) {
 }
 
 func TestProcessProviderNotFromCredProcCrd(t *testing.T) {
-	t.Skip()
-
-	restoreEnvFn := awstesting.StashEnv()
-	defer restoreEnvFn()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	os.Setenv("AWS_PROFILE", "not_alone")
 	if runtime.GOOS == "windows" {
@@ -220,8 +208,8 @@ func TestProcessProviderNotFromCredProcCrd(t *testing.T) {
 }
 
 func TestProcessProviderBadCommand(t *testing.T) {
-	restoreEnvFn := awstesting.StashEnv()
-	defer restoreEnvFn()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	creds := processcreds.NewProvider("/bad/process")
 	_, err := creds.Retrieve(context.Background())
@@ -231,8 +219,8 @@ func TestProcessProviderBadCommand(t *testing.T) {
 }
 
 func TestProcessProviderMoreEmptyCommands(t *testing.T) {
-	restoreEnvFn := awstesting.StashEnv()
-	defer restoreEnvFn()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	provider := processcreds.NewProvider("")
 	_, err := provider.Retrieve(context.Background())
@@ -243,8 +231,8 @@ func TestProcessProviderMoreEmptyCommands(t *testing.T) {
 }
 
 func TestProcessProviderExpectErrors(t *testing.T) {
-	restoreEnvFn := awstesting.StashEnv()
-	defer restoreEnvFn()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	provider := processcreds.NewProvider(
 		fmt.Sprintf(
@@ -296,8 +284,8 @@ func TestProcessProviderExpectErrors(t *testing.T) {
 }
 
 func TestProcessProviderTimeout(t *testing.T) {
-	restoreEnvFn := awstesting.StashEnv()
-	defer restoreEnvFn()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	command := "/bin/sleep 2"
 	if runtime.GOOS == "windows" {
@@ -305,8 +293,8 @@ func TestProcessProviderTimeout(t *testing.T) {
 		command = "ping -n 2 127.0.0.1>nul"
 	}
 
-	provider := processcreds.NewProvider(command, func(provider *processcreds.Provider) {
-		provider.Timeout = time.Duration(1) * time.Second
+	provider := processcreds.NewProvider(command, func(options *processcreds.ProviderOptions) {
+		options.Timeout = time.Duration(1) * time.Second
 	})
 	if _, err := provider.Retrieve(context.Background()); err == nil || err.(awserr.Error).Code() != processcreds.ErrCodeProcessProviderExecution || err.(awserr.Error).Message() != "credential process timed out" {
 		t.Errorf("expected %v, got %v", processcreds.ErrCodeProcessProviderExecution, err)
@@ -315,8 +303,8 @@ func TestProcessProviderTimeout(t *testing.T) {
 }
 
 func TestProcessProviderWithLongSessionToken(t *testing.T) {
-	restoreEnvFn := awstesting.StashEnv()
-	defer restoreEnvFn()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	provider := processcreds.NewProvider(
 		fmt.Sprintf(
@@ -345,8 +333,8 @@ type credentialTest struct {
 }
 
 func TestProcessProviderStatic(t *testing.T) {
-	restoreEnvFn := awstesting.StashEnv()
-	defer restoreEnvFn()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	// static
 	provider := processcreds.NewProvider(
@@ -367,8 +355,8 @@ func TestProcessProviderStatic(t *testing.T) {
 }
 
 func TestProcessProviderNotExpired(t *testing.T) {
-	restoreEnvFn := awstesting.StashEnv()
-	defer restoreEnvFn()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	// non-static, not expired
 	exp := &credentialTest{}
@@ -408,8 +396,8 @@ func TestProcessProviderNotExpired(t *testing.T) {
 }
 
 func TestProcessProviderExpired(t *testing.T) {
-	restoreEnvFn := awstesting.StashEnv()
-	defer restoreEnvFn()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	// non-static, expired
 	exp := &credentialTest{}
@@ -449,8 +437,8 @@ func TestProcessProviderExpired(t *testing.T) {
 }
 
 func TestProcessProviderForceExpire(t *testing.T) {
-	restoreEnvFn := awstesting.StashEnv()
-	defer restoreEnvFn()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	// non-static, not expired
 
@@ -505,8 +493,8 @@ func TestProcessProviderForceExpire(t *testing.T) {
 }
 
 func TestProcessProviderAltConstruct(t *testing.T) {
-	restoreEnvFn := awstesting.StashEnv()
-	defer restoreEnvFn()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	// constructing with exec.Cmd instead of string
 	myCommand := exec.Command(
@@ -516,8 +504,8 @@ func TestProcessProviderAltConstruct(t *testing.T) {
 			strings.Join(
 				[]string{"testdata", "static.json"},
 				string(os.PathSeparator))))
-	provider := processcreds.NewProviderCommand(myCommand, func(opt *processcreds.Provider) {
-		opt.Timeout = time.Duration(1) * time.Second
+	provider := processcreds.NewProviderCommand(myCommand, func(options *processcreds.ProviderOptions) {
+		options.Timeout = time.Duration(1) * time.Second
 	})
 	v, err := provider.Retrieve(context.Background())
 	if err != nil {
@@ -529,8 +517,8 @@ func TestProcessProviderAltConstruct(t *testing.T) {
 }
 
 func BenchmarkProcessProvider(b *testing.B) {
-	restoreEnvFn := awstesting.StashEnv()
-	defer restoreEnvFn()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	provider := processcreds.NewProvider(
 		fmt.Sprintf(

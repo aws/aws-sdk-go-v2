@@ -151,6 +151,17 @@ const (
 type Provider struct {
 	aws.SafeCredentialsProvider
 
+	// A string representing an os command that should return a JSON with
+	// credential information.
+	command *exec.Cmd
+
+	originalCommand []string
+
+	options ProviderOptions
+}
+
+// ProviderOptions is the configuration options for the processcreds Provider
+type ProviderOptions struct {
 	// ExpiryWindow will allow the credentials to trigger refreshing prior to
 	// the credentials actually expiring. This is beneficial so race conditions
 	// with expiring credentials do not cause request to fail unexpectedly
@@ -164,32 +175,28 @@ type Provider struct {
 
 	// Timeout limits the time a process can run.
 	Timeout time.Duration
-
-	// A string representing an os command that should return a JSON with
-	// credential information.
-	command *exec.Cmd
-
-	originalCommand []string
 }
 
 // NewProvider returns a pointer to a new Credentials object wrapping the
 // Provider. The credentials will expire every 15 minutes by default.
-func NewProvider(command string, options ...func(*Provider)) *Provider {
+func NewProvider(command string, options ...func(*ProviderOptions)) *Provider {
 	return NewProviderCommand(exec.Command(command), options...)
 }
 
 // NewProviderCommand returns a pointer to a new Credentials object with
 // the specified command, and default timeout, duration and max buffer size.
-func NewProviderCommand(command *exec.Cmd, options ...func(*Provider)) *Provider {
+func NewProviderCommand(command *exec.Cmd, options ...func(*ProviderOptions)) *Provider {
 	p := &Provider{
 		command: command,
-		Timeout: DefaultTimeout,
+		options: ProviderOptions{
+			Timeout: DefaultTimeout,
+		},
 	}
 
 	p.RetrieveFn = p.retrieveFn
 
 	for _, option := range options {
-		option(p)
+		option(&p.options)
 	}
 
 	return p
@@ -250,7 +257,7 @@ func (p *Provider) retrieveFn(ctx context.Context) (aws.Credentials, error) {
 	// Handle expiration
 	if resp.Expiration != nil {
 		creds.CanExpire = true
-		creds.Expires = (*resp.Expiration).Add(-p.ExpiryWindow)
+		creds.Expires = (*resp.Expiration).Add(-p.options.ExpiryWindow)
 	}
 
 	return creds, nil
@@ -282,7 +289,7 @@ func (p *Provider) prepareCommand(ctx context.Context) (context.Context, context
 		}
 	}
 
-	timeoutCtx, cancelFunc := context.WithTimeout(ctx, p.Timeout)
+	timeoutCtx, cancelFunc := context.WithTimeout(ctx, p.options.Timeout)
 
 	cmdArgs = append(cmdArgs, p.originalCommand...)
 	p.command = exec.CommandContext(timeoutCtx, cmdArgs[0], cmdArgs[1:]...)

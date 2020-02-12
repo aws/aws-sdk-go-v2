@@ -28,18 +28,23 @@ const (
 type WebIdentityRoleProvider struct {
 	aws.SafeCredentialsProvider
 
-	ExpiryWindow time.Duration
-
 	client stsiface.ClientAPI
 
 	tokenFilePath   string
 	roleARN         string
 	roleSessionName string
+
+	options WebIdentityRoleProviderOptions
+}
+
+// WebIdentityRoleProviderOptions is a structure of configurable options for WebIdentityRoleProvider
+type WebIdentityRoleProviderOptions struct {
+	ExpiryWindow time.Duration
 }
 
 // NewWebIdentityRoleProvider will return a new WebIdentityRoleProvider with the
 // provided stsiface.STSAPI
-func NewWebIdentityRoleProvider(svc stsiface.ClientAPI, roleARN, roleSessionName, path string) *WebIdentityRoleProvider {
+func NewWebIdentityRoleProvider(svc stsiface.ClientAPI, roleARN, roleSessionName, path string, options ...func(*WebIdentityRoleProviderOptions)) *WebIdentityRoleProvider {
 	p := &WebIdentityRoleProvider{
 		client:          svc,
 		tokenFilePath:   path,
@@ -48,6 +53,10 @@ func NewWebIdentityRoleProvider(svc stsiface.ClientAPI, roleARN, roleSessionName
 	}
 
 	p.RetrieveFn = p.retrieveFn
+
+	for _, option := range options {
+		option(&p.options)
+	}
 
 	return p
 }
@@ -88,7 +97,7 @@ func (p *WebIdentityRoleProvider) retrieveFn(ctx context.Context) (aws.Credentia
 		SessionToken:    aws.StringValue(resp.Credentials.SessionToken),
 		Source:          WebIdentityProviderName,
 		CanExpire:       true,
-		Expires:         resp.Credentials.Expiration.Add(-p.ExpiryWindow),
+		Expires:         resp.Credentials.Expiration.Add(-p.options.ExpiryWindow),
 	}
 	return value, nil
 }

@@ -85,9 +85,10 @@ func TestAssumeRoleProvider_WithTokenCode(t *testing.T) {
 			}
 		},
 	}
-	p := NewAssumeRoleProvider(stub, roleARN)
-	p.SerialNumber = aws.String("0123456789")
-	p.TokenCode = aws.String(tokenCode)
+	p := NewAssumeRoleProvider(stub, roleARN, func(options *AssumeRoleProviderOptions) {
+		options.SerialNumber = aws.String("0123456789")
+		options.TokenCode = aws.String(tokenCode)
+	})
 
 	creds, err := p.Retrieve(context.Background())
 	if err != nil {
@@ -116,11 +117,12 @@ func TestAssumeRoleProvider_WithTokenProvider(t *testing.T) {
 			}
 		},
 	}
-	p := NewAssumeRoleProvider(stub, roleARN)
-	p.SerialNumber = aws.String("0123456789")
-	p.TokenProvider = func() (string, error) {
-		return tokenCode, nil
-	}
+	p := NewAssumeRoleProvider(stub, roleARN, func(options *AssumeRoleProviderOptions) {
+		options.SerialNumber = aws.String("0123456789")
+		options.TokenProvider = func() (string, error) {
+			return tokenCode, nil
+		}
+	})
 
 	creds, err := p.Retrieve(context.Background())
 	if err != nil {
@@ -144,11 +146,12 @@ func TestAssumeRoleProvider_WithTokenProviderError(t *testing.T) {
 			t.Fatalf("API request should not of been called")
 		},
 	}
-	p := NewAssumeRoleProvider(stub, roleARN)
-	p.SerialNumber = aws.String("0123456789")
-	p.TokenProvider = func() (string, error) {
-		return "", fmt.Errorf("error occurred")
-	}
+	p := NewAssumeRoleProvider(stub, roleARN, func(options *AssumeRoleProviderOptions) {
+		options.SerialNumber = aws.String("0123456789")
+		options.TokenProvider = func() (string, error) {
+			return "", fmt.Errorf("error occurred")
+		}
+	})
 
 	creds, err := p.Retrieve(context.Background())
 	if err == nil {
@@ -172,8 +175,9 @@ func TestAssumeRoleProvider_MFAWithNoToken(t *testing.T) {
 			t.Fatalf("API request should not of been called")
 		},
 	}
-	p := NewAssumeRoleProvider(stub, roleARN)
-	p.SerialNumber = aws.String("0123456789")
+	p := NewAssumeRoleProvider(stub, roleARN, func(options *AssumeRoleProviderOptions) {
+		options.SerialNumber = aws.String("0123456789")
+	})
 
 	creds, err := p.Retrieve(context.Background())
 	if err == nil {

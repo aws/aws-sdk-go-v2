@@ -15,7 +15,7 @@ import (
 
 func TestClientDisableIMDS(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
-	defer restoreEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	os.Setenv("AWS_EC2_METADATA_DISABLED", "true")
 
