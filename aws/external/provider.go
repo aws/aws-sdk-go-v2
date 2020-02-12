@@ -2,6 +2,7 @@ package external
 
 import (
 	"context"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/ec2metadata"
@@ -142,141 +143,44 @@ func GetRegion(configs Configs) (string, bool, error) {
 	return "", false, nil
 }
 
-// CredentialsValueProvider provides access to the credentials external
+// CredentialsProviderProvider provides access to the credentials external
 // configuration value.
-type CredentialsValueProvider interface {
-	GetCredentialsValue() (aws.Credentials, error)
+type CredentialsProviderProvider interface {
+	GetCredentialsProvider() (aws.CredentialsProvider, bool, error)
 }
 
-// WithCredentialsValue provides wrapping of a credentials Value to satisfy the
-// CredentialsValueProvider interface.
-type WithCredentialsValue aws.Credentials
-
-// GetCredentialsValue returns the credentials value.
-func (v WithCredentialsValue) GetCredentialsValue() (aws.Credentials, error) {
-	return aws.Credentials(v), nil
+// WithCredentialsProvider provides wrapping of a credentials Value to satisfy the
+// CredentialsProviderProvider interface.
+type WithCredentialsProvider struct {
+	aws.CredentialsProvider
 }
 
-// GetCredentialsValue searches the Configs for a CredentialsValueProvider
+// GetCredentialsProvider returns the credentials value.
+func (v WithCredentialsProvider) GetCredentialsProvider() (aws.CredentialsProvider, bool, error) {
+	if v.CredentialsProvider == nil {
+		return nil, false, nil
+	}
+
+	return v.CredentialsProvider, true, nil
+}
+
+// GetCredentialsProvider searches the Configs for a CredentialsProviderProvider
 // and returns the value if found. Returns an error if a provider fails before a
 // value is found.
-func GetCredentialsValue(configs Configs) (aws.Credentials, bool, error) {
+func GetCredentialsProvider(configs Configs) (p aws.CredentialsProvider, found bool, err error) {
 	for _, cfg := range configs {
-		if p, ok := cfg.(CredentialsValueProvider); ok {
-			v, err := p.GetCredentialsValue()
+		if provider, ok := cfg.(CredentialsProviderProvider); ok {
+			p, found, err = provider.GetCredentialsProvider()
 			if err != nil {
-				return aws.Credentials{}, false, err
+				return nil, false, err
 			}
-			if v.HasKeys() {
-				return v, true, nil
+			if found {
+				break
 			}
 		}
 	}
 
-	return aws.Credentials{}, false, nil
-}
-
-// CredentialsEndpointProvider provides access to the credentials endpoint
-// external configuration value.
-type CredentialsEndpointProvider interface {
-	GetCredentialsEndpoint() (string, error)
-}
-
-// WithCredentialsEndpoint provides wrapping of a string to satisfy the
-// CredentialsEndpointProvider interface.
-type WithCredentialsEndpoint string
-
-// GetCredentialsEndpoint returns the endpoint.
-func (p WithCredentialsEndpoint) GetCredentialsEndpoint() (string, error) {
-	return string(p), nil
-}
-
-// GetCredentialsEndpoint searchds the Configs for a CredentialsEndpointProvider
-// and returns the value if found. Returns an error if a provider fails before a
-// value is found.
-func GetCredentialsEndpoint(configs Configs) (string, bool, error) {
-	for _, cfg := range configs {
-		if p, ok := cfg.(CredentialsEndpointProvider); ok {
-			v, err := p.GetCredentialsEndpoint()
-			if err != nil {
-				return "", false, err
-			}
-			if len(v) > 0 {
-				return v, true, nil
-			}
-		}
-	}
-
-	return "", false, nil
-}
-
-// ContainerCredentialsEndpointPathProvider provides access to the credentials endpoint path
-// external configuration value.
-type ContainerCredentialsEndpointPathProvider interface {
-	GetContainerCredentialsEndpointPath() (string, error)
-}
-
-// WithContainerCredentialsEndpointPath provides wrapping of a string to satisfy the
-// ContainerCredentialsEndpointPathProvider interface.
-type WithContainerCredentialsEndpointPath string
-
-// GetContainerCredentialsEndpointPath returns the endpoint path.
-func (p WithContainerCredentialsEndpointPath) GetContainerCredentialsEndpointPath() (string, error) {
-	return string(p), nil
-}
-
-// GetContainerCredentialsEndpointPath searchds the Configs for a
-// ContainerCredentialsEndpointPathProvider and returns the value if found.
-// Returns an error if a provider fails before a
-// value is found.
-func GetContainerCredentialsEndpointPath(configs Configs) (string, bool, error) {
-	for _, cfg := range configs {
-		if p, ok := cfg.(ContainerCredentialsEndpointPathProvider); ok {
-			v, err := p.GetContainerCredentialsEndpointPath()
-			if err != nil {
-				return "", false, err
-			}
-			if len(v) > 0 {
-				return v, true, nil
-			}
-		}
-	}
-
-	return "", false, nil
-}
-
-// AssumeRoleConfigProvider provides access to the assume role config
-// external configuration value.
-type AssumeRoleConfigProvider interface {
-	GetAssumeRoleConfig() (AssumeRoleConfig, error)
-}
-
-// WithAssumeRoleConfig provides wrapping of a string to satisfy the
-// AssumeRoleConfigProvider interface.
-type WithAssumeRoleConfig AssumeRoleConfig
-
-// GetAssumeRoleConfig returns the AssumeRoleConfig.
-func (p WithAssumeRoleConfig) GetAssumeRoleConfig() (AssumeRoleConfig, error) {
-	return AssumeRoleConfig(p), nil
-}
-
-// GetAssumeRoleConfig searchds the Configs for a AssumeRoleConfigProvider
-// and returns the value if found. Returns an error if a provider fails before a
-// value is found.
-func GetAssumeRoleConfig(configs Configs) (AssumeRoleConfig, bool, error) {
-	for _, cfg := range configs {
-		if p, ok := cfg.(AssumeRoleConfigProvider); ok {
-			v, err := p.GetAssumeRoleConfig()
-			if err != nil {
-				return AssumeRoleConfig{}, false, err
-			}
-			if len(v.RoleARN) > 0 && v.Source != nil {
-				return v, true, nil
-			}
-		}
-	}
-
-	return AssumeRoleConfig{}, false, nil
+	return p, found, err
 }
 
 // MFATokenFuncProvider provides access to the MFA token function needed for
@@ -374,4 +278,78 @@ func GetEnableEndpointDiscovery(configs Configs) (value, found bool, err error) 
 	}
 
 	return value, found, err
+}
+
+// WithAssumeRoleDuration provides a wrapping type of a time.Duration to satisfy
+type WithAssumeRoleDuration time.Duration
+
+// GetAssumeRoleDuration returns the wrapped time.Duration value to use when setting
+// the assume role credentials duration.
+func (w WithAssumeRoleDuration) GetAssumeRoleDuration() (time.Duration, bool, error) {
+	return time.Duration(w), true, nil
+}
+
+// HandlersFunc is a function pointer that takes a list of handlers and returns the modified set of handlers to use
+type HandlersFunc func(aws.Handlers) aws.Handlers
+
+// HandlersFuncProvider provides access to the configuration handlers
+type HandlersFuncProvider interface {
+	GetHandlersFunc() (HandlersFunc, bool, error)
+}
+
+// WithHandlersFunc implements the HandlersFuncProvider and delegates to the wrapped function
+type WithHandlersFunc HandlersFunc
+
+// GetHandlersFunc returns the wrapped haundlers function
+func (w WithHandlersFunc) GetHandlersFunc() (HandlersFunc, bool, error) {
+	return HandlersFunc(w), true, nil
+}
+
+// GetHandlersFunc searches the provided configs and returns the first HandlersFunc returned
+// by a configuration provider.
+func GetHandlersFunc(configs Configs) (f HandlersFunc, found bool, err error) {
+	for _, c := range configs {
+		if p, ok := c.(HandlersFuncProvider); ok {
+			f, found, err = p.GetHandlersFunc()
+			if err != nil {
+				return nil, false, err
+			}
+			if found {
+				break
+			}
+		}
+	}
+	return f, found, err
+}
+
+// EndpointResolverFunc is a function that is given the default EndpointResolver and returns an aws.EndpointResolver
+// that will be used
+type EndpointResolverFunc func(aws.EndpointResolver) aws.EndpointResolver
+
+// EndpointResolverFuncProvider is an interface for retrieving an aws.EndpointResolver from a configuration source
+type EndpointResolverFuncProvider interface {
+	GetEndpointResolverFunc() (EndpointResolverFunc, bool, error)
+}
+
+// WithEndpointResolverFunc wraps a aws.EndpointResolver value to satisfy the EndpointResolverFuncProvider interface
+type WithEndpointResolverFunc EndpointResolverFunc
+
+// GetEndpointResolverFunc returns the wrapped EndpointResolverFunc
+func (w WithEndpointResolverFunc) GetEndpointResolverFunc() (EndpointResolverFunc, bool, error) {
+	return EndpointResolverFunc(w), true, nil
+}
+
+// GetEndpointResolverFunc searches the provided config sources for a EndpointResolverFunc that can be used
+// to configure the aws.Config.EndpointResolver value.
+func GetEndpointResolverFunc(configs Configs) (f EndpointResolverFunc, found bool, err error) {
+	for _, c := range configs {
+		if p, ok := c.(EndpointResolverFuncProvider); ok {
+			f, found, err = p.GetEndpointResolverFunc()
+			if err != nil {
+				return nil, false, err
+			}
+		}
+	}
+
+	return f, found, err
 }

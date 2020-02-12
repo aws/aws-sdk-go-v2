@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
@@ -18,12 +19,13 @@ const (
 	sessionTokenKey = `aws_session_token`     // optional
 
 	// Assume Role Credentials group
-	roleArnKey          = `role_arn`          // group required
-	sourceProfileKey    = `source_profile`    // group required
-	credentialSourceKey = `credential_source` // group required (or source_profile)
-	externalIDKey       = `external_id`       // optional
-	mfaSerialKey        = `mfa_serial`        // optional
-	roleSessionNameKey  = `role_session_name` // optional
+	roleArnKey             = `role_arn`          // group required
+	sourceProfileKey       = `source_profile`    // group required
+	credentialSourceKey    = `credential_source` // group required (or source_profile)
+	externalIDKey          = `external_id`       // optional
+	mfaSerialKey           = `mfa_serial`        // optional
+	roleSessionNameKey     = `role_session_name` // optional
+	roleDurationSecondsKey = "duration_seconds"  // optional
 
 	// Additional Config fields
 	regionKey = `region`
@@ -92,13 +94,6 @@ var DefaultSharedConfigFiles = []string{
 // AssumeRoleConfig provides the values defining the configuration for an IAM
 // assume role.
 type AssumeRoleConfig struct {
-	RoleARN         string
-	ExternalID      string
-	MFASerial       string
-	RoleSessionName string
-
-	SourceProfileName string
-	Source            *SharedConfig
 }
 
 // SharedConfig represents the configuration fields of the SDK config files.
@@ -120,7 +115,14 @@ type SharedConfig struct {
 	CredentialProcess    string
 	WebIdentityTokenFile string
 
-	AssumeRole AssumeRoleConfig
+	RoleARN             string
+	ExternalID          string
+	MFASerial           string
+	RoleSessionName     string
+	RoleDurationSeconds *time.Duration
+
+	SourceProfileName string
+	Source            *SharedConfig
 
 	// Region is the region the SDK should use for looking up AWS service endpoints
 	// and signing requests.
@@ -165,15 +167,9 @@ func (c SharedConfig) GetRegion() (string, error) {
 	return c.Region, nil
 }
 
-// GetCredentialsValue returns the credentials for a profile if they were set.
-func (c SharedConfig) GetCredentialsValue() (aws.Credentials, error) {
+// GetCredentialsProvider returns the credentials for a profile if they were set.
+func (c SharedConfig) GetCredentialsProvider() (aws.Credentials, error) {
 	return c.Credentials, nil
-}
-
-// GetAssumeRoleConfig returns the assume role config for a profile. Will be
-// a zero value if not set.
-func (c SharedConfig) GetAssumeRoleConfig() (AssumeRoleConfig, error) {
-	return c.AssumeRole, nil
 }
 
 // LoadSharedConfigIgnoreNotExist is an alias for LoadSharedConfig with the
@@ -313,7 +309,7 @@ func (c *SharedConfig) setFromIniFiles(profiles map[string]struct{}, profile str
 		// options must be cleared because they are only valid for the
 		// first reference of a profile. The self linked instance of the
 		// profile only have credential provider options.
-		c.AssumeRole = AssumeRoleConfig{}
+		c.clearAssumeRoleOptions()
 	} else {
 		// First time a profile has been seen, It must either be a assume role
 		// or credentials. Assert if the credential type requires a role ARN,
@@ -329,19 +325,19 @@ func (c *SharedConfig) setFromIniFiles(profiles map[string]struct{}, profile str
 	}
 
 	// Link source profiles for assume roles
-	if len(c.AssumeRole.SourceProfileName) != 0 {
+	if len(c.SourceProfileName) != 0 {
 		// Linked profile via source_profile ignore credential provider
 		// options, the source profile must provide the credentials.
 		c.clearCredentialOptions()
 
 		srcCfg := &SharedConfig{}
-		err := srcCfg.setFromIniFiles(profiles, c.AssumeRole.SourceProfileName, files)
+		err := srcCfg.setFromIniFiles(profiles, c.SourceProfileName, files)
 		if err != nil {
 			// SourceProfileName that doesn't exist is an error in configuration.
 			if _, ok := err.(SharedConfigNotExistErrors); ok {
 				err = SharedConfigAssumeRoleError{
-					RoleARN: c.AssumeRole.RoleARN,
-					Profile: c.AssumeRole.SourceProfileName,
+					RoleARN: c.RoleARN,
+					Profile: c.SourceProfileName,
 					Err:     err,
 				}
 			}
@@ -350,12 +346,12 @@ func (c *SharedConfig) setFromIniFiles(profiles map[string]struct{}, profile str
 
 		if !srcCfg.hasCredentials() {
 			return SharedConfigAssumeRoleError{
-				RoleARN: c.AssumeRole.RoleARN,
-				Profile: c.AssumeRole.SourceProfileName,
+				RoleARN: c.RoleARN,
+				Profile: c.SourceProfileName,
 			}
 		}
 
-		c.AssumeRole.Source = srcCfg
+		c.Source = srcCfg
 	}
 
 	return nil
@@ -383,54 +379,36 @@ func (c *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) err
 		}
 	}
 
-	// Shared Credentials
-	akid := section.String(accessKeyIDKey)
-	secret := section.String(secretAccessKey)
-	if len(akid) > 0 && len(secret) > 0 {
-		c.Credentials = aws.Credentials{
-			AccessKeyID:     akid,
-			SecretAccessKey: secret,
-			SessionToken:    section.String(sessionTokenKey),
-			Source:          fmt.Sprintf("SharedConfigCredentials: %s", file.Filename),
-		}
-	}
-
 	// Assume Role
-	roleArn := section.String(roleArnKey)
-	srcProfile := section.String(sourceProfileKey)
-	if len(roleArn) > 0 && len(srcProfile) > 0 {
-		c.AssumeRole = AssumeRoleConfig{
-			RoleARN:           roleArn,
-			ExternalID:        section.String(externalIDKey),
-			MFASerial:         section.String(mfaSerialKey),
-			RoleSessionName:   section.String(roleSessionNameKey),
-			SourceProfileName: srcProfile,
-		}
+	updateString(&c.RoleARN, section, roleArnKey)
+	updateString(&c.ExternalID, section, externalIDKey)
+	updateString(&c.MFASerial, section, mfaSerialKey)
+	updateString(&c.RoleSessionName, section, roleSessionNameKey)
+	updateString(&c.SourceProfileName, section, sourceProfileKey)
+	updateString(&c.CredentialSource, section, credentialSourceKey)
+	updateString(&c.Region, section, regionKey)
+
+	if section.Has(roleDurationSecondsKey) {
+		d := time.Duration(section.Int(roleDurationSecondsKey)) * time.Second
+		c.RoleDurationSeconds = &d
 	}
 
-	if section.Has(credentialProcessKey) {
-		c.CredentialProcess = section.String(credentialProcessKey)
+	updateString(&c.CredentialProcess, section, credentialProcessKey)
+	updateString(&c.WebIdentityTokenFile, section, webIdentityTokenFileKey)
+
+	updateBoolPtr(&c.EnableEndpointDiscovery, section, enableEndpointDiscoveryKey)
+	updateBoolPtr(&c.S3UseARNRegion, section, s3UseARNRegionKey)
+
+	// Shared Credentials
+	creds := aws.Credentials{
+		AccessKeyID:     section.String(accessKeyIDKey),
+		SecretAccessKey: section.String(secretAccessKey),
+		SessionToken:    section.String(sessionTokenKey),
+		Source:          fmt.Sprintf("SharedConfigCredentials: %s", file.Filename),
 	}
 
-	if section.Has(webIdentityTokenFileKey) {
-		c.WebIdentityTokenFile = section.String(webIdentityTokenFileKey)
-	}
-
-	// Region
-	if v := section.String(regionKey); len(v) > 0 {
-		c.Region = v
-	}
-
-	// S3 Use ARN Region
-	if section.Has(s3UseARNRegionKey) {
-		v := section.Bool(s3UseARNRegionKey)
-		c.S3UseARNRegion = &v
-	}
-
-	// Endpoint discovery
-	if section.Has(enableEndpointDiscoveryKey) {
-		v := section.Bool(enableEndpointDiscoveryKey)
-		c.EnableEndpointDiscovery = &v
+	if creds.HasKeys() {
+		c.Credentials = creds
 	}
 
 	return nil
@@ -440,7 +418,7 @@ func (c *SharedConfig) validateCredentialsRequireARN(profile string) error {
 	var credSource string
 
 	switch {
-	case len(c.AssumeRole.SourceProfileName) != 0:
+	case len(c.SourceProfileName) != 0:
 		credSource = sourceProfileKey
 	case len(c.CredentialSource) != 0:
 		credSource = credentialSourceKey
@@ -448,7 +426,7 @@ func (c *SharedConfig) validateCredentialsRequireARN(profile string) error {
 		credSource = webIdentityTokenFileKey
 	}
 
-	if len(credSource) != 0 && len(c.AssumeRole.RoleARN) == 0 {
+	if len(credSource) != 0 && len(c.RoleARN) == 0 {
 		return CredentialRequiresARNError{
 			Type:    credSource,
 			Profile: profile,
@@ -461,7 +439,7 @@ func (c *SharedConfig) validateCredentialsRequireARN(profile string) error {
 func (c *SharedConfig) validateCredentialType() error {
 	// Only one or no credential type can be defined.
 	if !oneOrNone(
-		len(c.AssumeRole.SourceProfileName) != 0,
+		len(c.SourceProfileName) != 0,
 		len(c.CredentialSource) != 0,
 		len(c.CredentialProcess) != 0,
 		len(c.WebIdentityTokenFile) != 0,
@@ -474,7 +452,7 @@ func (c *SharedConfig) validateCredentialType() error {
 
 func (c *SharedConfig) hasCredentials() bool {
 	switch {
-	case len(c.AssumeRole.SourceProfileName) != 0:
+	case len(c.SourceProfileName) != 0:
 	case len(c.CredentialSource) != 0:
 	case len(c.CredentialProcess) != 0:
 	case len(c.WebIdentityTokenFile) != 0:
@@ -484,6 +462,14 @@ func (c *SharedConfig) hasCredentials() bool {
 	}
 
 	return true
+}
+
+func (c *SharedConfig) clearAssumeRoleOptions() {
+	c.RoleARN = ""
+	c.ExternalID = ""
+	c.MFASerial = ""
+	c.RoleSessionName = ""
+	c.SourceProfileName = ""
 }
 
 func (c *SharedConfig) clearCredentialOptions() {
@@ -623,4 +609,32 @@ func oneOrNone(bs ...bool) bool {
 	}
 
 	return true
+}
+
+// updateString will only update the dst with the value in the section key, key
+// is present in the section.
+func updateString(dst *string, section ini.Section, key string) {
+	if !section.Has(key) {
+		return
+	}
+	*dst = section.String(key)
+}
+
+// updateBool will only update the dst with the value in the section key, key
+// is present in the section.
+func updateBool(dst *bool, section ini.Section, key string) {
+	if !section.Has(key) {
+		return
+	}
+	*dst = section.Bool(key)
+}
+
+// updateBoolPtr will only update the dst with the value in the section key,
+// key is present in the section.
+func updateBoolPtr(dst **bool, section ini.Section, key string) {
+	if !section.Has(key) {
+		return
+	}
+	*dst = new(bool)
+	**dst = section.Bool(key)
 }

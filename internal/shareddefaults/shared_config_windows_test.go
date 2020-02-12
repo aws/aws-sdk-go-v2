@@ -11,7 +11,7 @@ import (
 
 func TestSharedCredsFilename(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
-	defer restoreEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	os.Setenv("HOME", "home_dir")
 	os.Setenv("USERPROFILE", "profile_dir")
@@ -26,7 +26,7 @@ func TestSharedCredsFilename(t *testing.T) {
 
 func TestSharedConfigFilename(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
-	defer restoreEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	os.Setenv("HOME", "home_dir")
 	os.Setenv("USERPROFILE", "profile_dir")

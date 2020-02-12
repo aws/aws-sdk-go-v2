@@ -100,7 +100,7 @@ func (c *FakeContext) Value(key interface{}) interface{} {
 
 // StashEnv stashes the current environment variables except variables listed in envToKeepx
 // Returns an function to pop out old environment
-func StashEnv(envToKeep ...string) func() {
+func StashEnv(envToKeep ...string) []string {
 	if runtime.GOOS == "windows" {
 		envToKeep = append(envToKeep, "ComSpec")
 		envToKeep = append(envToKeep, "SYSTEM32")
@@ -113,8 +113,22 @@ func StashEnv(envToKeep ...string) func() {
 	for key, val := range extraEnv {
 		os.Setenv(key, val)
 	}
-	return func() {
-		popEnv(originalEnv)
+	return originalEnv
+}
+
+// PopEnv takes the list of the environment values and injects them into the
+// process's environment variable data. Clears any existing environment values
+// that may already exist.
+func PopEnv(env []string) {
+	os.Clearenv()
+
+	for _, e := range env {
+		p := strings.SplitN(e, "=", 2)
+		k, v := p[0], ""
+		if len(p) > 1 {
+			v = p[1]
+		}
+		os.Setenv(k, v)
 	}
 }
 
@@ -143,20 +157,4 @@ func getEnvs(envs []string) map[string]string {
 		}
 	}
 	return extraEnvs
-}
-
-// PopEnv takes the list of the environment values and injects them into the
-// process's environment variable data. Clears any existing environment values
-// that may already exist.
-func popEnv(env []string) {
-	os.Clearenv()
-
-	for _, e := range env {
-		p := strings.SplitN(e, "=", 2)
-		k, v := p[0], ""
-		if len(p) > 1 {
-			v = p[1]
-		}
-		os.Setenv(k, v)
-	}
 }

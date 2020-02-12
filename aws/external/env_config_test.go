@@ -3,6 +3,7 @@ package external
 import (
 	"os"
 	"reflect"
+	"strconv"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -13,13 +14,10 @@ var _ SharedConfigProfileProvider = (*EnvConfig)(nil)
 var _ SharedConfigFilesProvider = (*EnvConfig)(nil)
 var _ CustomCABundleProvider = (*EnvConfig)(nil)
 var _ RegionProvider = (*EnvConfig)(nil)
-var _ CredentialsValueProvider = (*EnvConfig)(nil)
-var _ CredentialsEndpointProvider = (*EnvConfig)(nil)
-var _ ContainerCredentialsEndpointPathProvider = (*EnvConfig)(nil)
 
 func TestNewEnvConfig_Creds(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
-	defer restoreEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	cases := []struct {
 		Env map[string]string
@@ -103,13 +101,13 @@ func TestNewEnvConfig_Creds(t *testing.T) {
 
 func TestNewEnvConfig(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
-	defer restoreEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	cases := []struct {
 		Env    map[string]string
 		Config EnvConfig
 	}{
-		{
+		0: {
 			Env: map[string]string{
 				"AWS_REGION":  "region",
 				"AWS_PROFILE": "profile",
@@ -118,7 +116,7 @@ func TestNewEnvConfig(t *testing.T) {
 				Region: "region", SharedConfigProfile: "profile",
 			},
 		},
-		{
+		1: {
 			Env: map[string]string{
 				"AWS_REGION":          "region",
 				"AWS_DEFAULT_REGION":  "default_region",
@@ -129,7 +127,7 @@ func TestNewEnvConfig(t *testing.T) {
 				Region: "region", SharedConfigProfile: "profile",
 			},
 		},
-		{
+		2: {
 			Env: map[string]string{
 				"AWS_REGION":          "region",
 				"AWS_DEFAULT_REGION":  "default_region",
@@ -140,7 +138,7 @@ func TestNewEnvConfig(t *testing.T) {
 				Region: "region", SharedConfigProfile: "profile",
 			},
 		},
-		{
+		3: {
 			Env: map[string]string{
 				"AWS_DEFAULT_REGION":  "default_region",
 				"AWS_DEFAULT_PROFILE": "default_profile",
@@ -149,7 +147,7 @@ func TestNewEnvConfig(t *testing.T) {
 				Region: "default_region", SharedConfigProfile: "default_profile",
 			},
 		},
-		{
+		4: {
 			Env: map[string]string{
 				"AWS_REGION":  "region",
 				"AWS_PROFILE": "profile",
@@ -158,7 +156,7 @@ func TestNewEnvConfig(t *testing.T) {
 				Region: "region", SharedConfigProfile: "profile",
 			},
 		},
-		{
+		5: {
 			Env: map[string]string{
 				"AWS_REGION":          "region",
 				"AWS_DEFAULT_REGION":  "default_region",
@@ -169,7 +167,7 @@ func TestNewEnvConfig(t *testing.T) {
 				Region: "region", SharedConfigProfile: "profile",
 			},
 		},
-		{
+		6: {
 			Env: map[string]string{
 				"AWS_REGION":          "region",
 				"AWS_DEFAULT_REGION":  "default_region",
@@ -180,7 +178,7 @@ func TestNewEnvConfig(t *testing.T) {
 				Region: "region", SharedConfigProfile: "profile",
 			},
 		},
-		{
+		7: {
 			Env: map[string]string{
 				"AWS_DEFAULT_REGION":  "default_region",
 				"AWS_DEFAULT_PROFILE": "default_profile",
@@ -189,7 +187,7 @@ func TestNewEnvConfig(t *testing.T) {
 				Region: "default_region", SharedConfigProfile: "default_profile",
 			},
 		},
-		{
+		8: {
 			Env: map[string]string{
 				"AWS_CA_BUNDLE": "custom_ca_bundle",
 			},
@@ -197,7 +195,7 @@ func TestNewEnvConfig(t *testing.T) {
 				CustomCABundle: "custom_ca_bundle",
 			},
 		},
-		{
+		9: {
 			Env: map[string]string{
 				"AWS_CA_BUNDLE": "custom_ca_bundle",
 			},
@@ -205,7 +203,7 @@ func TestNewEnvConfig(t *testing.T) {
 				CustomCABundle: "custom_ca_bundle",
 			},
 		},
-		{
+		10: {
 			Env: map[string]string{
 				"AWS_SHARED_CREDENTIALS_FILE": "/path/to/aws/file",
 				"AWS_CONFIG_FILE":             "/path/to/config/file",
@@ -215,7 +213,7 @@ func TestNewEnvConfig(t *testing.T) {
 				SharedConfigFile:      "/path/to/config/file",
 			},
 		},
-		{
+		11: {
 			Env: map[string]string{
 				"AWS_S3_USE_ARN_REGION": "true",
 			},
@@ -223,7 +221,7 @@ func TestNewEnvConfig(t *testing.T) {
 				S3UseARNRegion: aws.Bool(true),
 			},
 		},
-		{
+		12: {
 			Env: map[string]string{
 				"AWS_ENABLE_ENDPOINT_DISCOVERY": "true",
 			},
@@ -233,35 +231,37 @@ func TestNewEnvConfig(t *testing.T) {
 		},
 	}
 
-	for _, c := range cases {
-		os.Clearenv()
+	for i, c := range cases {
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			os.Clearenv()
 
-		for k, v := range c.Env {
-			os.Setenv(k, v)
-		}
+			for k, v := range c.Env {
+				os.Setenv(k, v)
+			}
 
-		cfg, err := NewEnvConfig()
-		if err != nil {
-			t.Fatalf("expect no error, got %v", err)
-		}
+			cfg, err := NewEnvConfig()
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
 
-		if !reflect.DeepEqual(c.Config, cfg) {
-			t.Errorf("expect config to match.\n%s",
-				awstesting.SprintExpectActual(c.Config, cfg))
-		}
+			if !reflect.DeepEqual(c.Config, cfg) {
+				t.Errorf("expect config to match.\n%s",
+					awstesting.SprintExpectActual(c.Config, cfg))
+			}
+		})
 	}
 }
 
 func TestSetEnvValue(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
-	defer restoreEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	os.Setenv("empty_key", "")
 	os.Setenv("second_key", "2")
 	os.Setenv("third_key", "3")
 
 	var dst string
-	setFromEnvVal(&dst, []string{
+	setStringFromEnvVal(&dst, []string{
 		"empty_key", "first_key", "second_key", "third_key",
 	})
 
