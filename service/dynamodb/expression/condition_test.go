@@ -24,6 +24,32 @@ const (
 	invalidConditionOperand = "BuildOperand error"
 )
 
+func TestIsSet(t *testing.T) {
+	cases := []struct {
+		name     string
+		input    ConditionBuilder
+		expected bool
+	}{
+		{
+			name:     "set",
+			input:    Equal(Name("foo"), Value("bar")),
+			expected: true,
+		},
+		{
+			name:     "unset",
+			input:    ConditionBuilder{},
+			expected: false,
+		},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			if actual := IsSet(c.input); actual != c.expected {
+				t.Errorf("expected %t, got %t", c.expected, actual)
+			}
+		})
+	}
+}
+
 //Compare
 func TestCompare(t *testing.T) {
 	cases := []struct {
