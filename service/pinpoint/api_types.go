@@ -3147,28 +3147,12 @@ type CampaignEmailMessage struct {
 	HtmlBody *string `type:"string"`
 
 	// The subject line, or title, of the email.
-	//
-	// Title is a required field
-	Title *string `type:"string" required:"true"`
+	Title *string `type:"string"`
 }
 
 // String returns the string representation
 func (s CampaignEmailMessage) String() string {
 	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CampaignEmailMessage) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CampaignEmailMessage"}
-
-	if s.Title == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Title"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -9056,21 +9040,6 @@ func (s MessageConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *MessageConfiguration) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "MessageConfiguration"}
-	if s.EmailMessage != nil {
-		if err := s.EmailMessage.Validate(); err != nil {
-			invalidParams.AddNested("EmailMessage", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s MessageConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	if s.ADMMessage != nil {
@@ -13754,11 +13723,6 @@ func (s *WriteCampaignRequest) Validate() error {
 			}
 		}
 	}
-	if s.MessageConfiguration != nil {
-		if err := s.MessageConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("MessageConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
 	if s.Schedule != nil {
 		if err := s.Schedule.Validate(); err != nil {
 			invalidParams.AddNested("Schedule", err.(aws.ErrInvalidParams))
@@ -14257,11 +14221,6 @@ func (s *WriteTreatmentResource) Validate() error {
 
 	if s.SizePercent == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SizePercent"))
-	}
-	if s.MessageConfiguration != nil {
-		if err := s.MessageConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("MessageConfiguration", err.(aws.ErrInvalidParams))
-		}
 	}
 	if s.Schedule != nil {
 		if err := s.Schedule.Validate(); err != nil {

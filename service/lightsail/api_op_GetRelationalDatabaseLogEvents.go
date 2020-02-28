@@ -32,8 +32,12 @@ type GetRelationalDatabaseLogEventsInput struct {
 	// LogStreamName is a required field
 	LogStreamName *string `locationName:"logStreamName" type:"string" required:"true"`
 
-	// A token used for advancing to a specific page of results for your get relational
-	// database log events request.
+	// The token to advance to the next or previous page of results from your request.
+	//
+	// To get a page token, perform an initial GetRelationalDatabaseLogEvents request.
+	// If your results are paginated, the response will return a next forward token
+	// and/or next backward token that you can specify as the page token in a subsequent
+	// request.
 	PageToken *string `locationName:"pageToken" type:"string"`
 
 	// The name of your database for which to get log events.

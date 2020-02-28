@@ -159,6 +159,8 @@ const opCreateVirtualService = "CreateVirtualService"
 // are routed to the virtual node or virtual router that is specified as the
 // provider for the virtual service.
 //
+// For more information about virtual services, see Virtual Services (https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual_services.html).
+//
 //    // Example sending a request using CreateVirtualServiceRequest.
 //    req := client.CreateVirtualServiceRequest(params)
 //    resp, err := req.Send(context.TODO())

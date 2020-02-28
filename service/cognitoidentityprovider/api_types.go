@@ -929,7 +929,22 @@ type IdentityProviderType struct {
 	// The date the identity provider was last modified.
 	LastModifiedDate *time.Time `type:"timestamp"`
 
-	// The identity provider details, such as MetadataURL and MetadataFile.
+	// The identity provider details. The following list describes the provider
+	// detail keys for each identity provider type.
+	//
+	//    * For Google, Facebook and Login with Amazon: client_id client_secret
+	//    authorize_scopes
+	//
+	//    * For Sign in with Apple: client_id team_id key_id private_key authorize_scopes
+	//
+	//    * For OIDC providers: client_id client_secret attributes_request_method
+	//    oidc_issuer authorize_scopes authorize_url if not available from discovery
+	//    URL specified by oidc_issuer key token_url if not available from discovery
+	//    URL specified by oidc_issuer key attributes_url if not available from
+	//    discovery URL specified by oidc_issuer key jwks_uri if not available from
+	//    discovery URL specified by oidc_issuer key authorize_scopes
+	//
+	//    * For SAML providers: MetadataFile OR MetadataURL IDPSignOut optional
 	ProviderDetails map[string]string `type:"map"`
 
 	// The identity provider name.
@@ -1531,7 +1546,15 @@ type SchemaAttributeType struct {
 	// The attribute data type.
 	AttributeDataType AttributeDataType `type:"string" enum:"true"`
 
-	// Specifies whether the attribute type is developer only.
+	//
+	// We recommend that you use WriteAttributes (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UserPoolClientType.html#CognitoUserPools-Type-UserPoolClientType-WriteAttributes)
+	// in the user pool client to control how attributes can be mutated for new
+	// use cases instead of using DeveloperOnlyAttribute.
+	//
+	// Specifies whether the attribute type is developer only. This attribute can
+	// only be modified by an administrator. Users will not be able to modify this
+	// attribute using their access token. For example, DeveloperOnlyAttribute can
+	// be modified using the API but cannot be updated using the API.
 	DeveloperOnlyAttribute *bool `type:"boolean"`
 
 	// Specifies whether the value of the attribute can be changed.
@@ -1878,21 +1901,27 @@ func (s UserPoolClientDescription) String() string {
 type UserPoolClientType struct {
 	_ struct{} `type:"structure"`
 
+	// The allowed OAuth flows.
+	//
 	// Set to code to initiate a code grant flow, which provides an authorization
 	// code as the response. This code can be exchanged for access tokens with the
 	// token endpoint.
 	//
-	// Set to token to specify that the client should get the access token (and,
+	// Set to implicit to specify that the client should get the access token (and,
 	// optionally, ID token, based on scopes) directly.
+	//
+	// Set to client_credentials to specify that the client should get the access
+	// token (and, optionally, ID token, based on scopes) from the token endpoint
+	// using a combination of client and client_secret.
 	AllowedOAuthFlows []OAuthFlowType `type:"list"`
 
-	// Set to TRUE if the client is allowed to follow the OAuth protocol when interacting
+	// Set to true if the client is allowed to follow the OAuth protocol when interacting
 	// with Cognito user pools.
 	AllowedOAuthFlowsUserPoolClient *bool `type:"boolean"`
 
-	// A list of allowed OAuth scopes. Currently supported values are "phone", "email",
-	// "openid", and "Cognito". In addition to these values, custom scopes created
-	// in Resource Servers are also supported.
+	// The allowed OAuth scopes. Possible values provided by OAuth are: phone, email,
+	// openid, and profile. Possible values provided by AWS are: aws.cognito.signin.user.admin.
+	// Custom scopes created in Resource Servers are also supported.
 	AllowedOAuthScopes []string `type:"list"`
 
 	// The Amazon Pinpoint analytics configuration for the user pool client.
@@ -2010,7 +2039,7 @@ type UserPoolClientType struct {
 	//
 	//    * ResendConfirmationCode
 	//
-	// After January 1st 2020, the value of PreventUserExistenceErrors will default
+	// After February 15th 2020, the value of PreventUserExistenceErrors will default
 	// to ENABLED for newly created user pool clients if no value is provided.
 	PreventUserExistenceErrors PreventUserExistenceErrorTypes `type:"string" enum:"true"`
 
@@ -2206,6 +2235,12 @@ type UserPoolType struct {
 	// when a user signs up.
 	UsernameAttributes []UsernameAttributeType `type:"list"`
 
+	// You can choose to enable case sensitivity on the username input for the selected
+	// sign-in option. For example, when this is set to False, users will be able
+	// to sign in using either "username" or "Username". This configuration is immutable
+	// once it has been set. For more information, see .
+	UsernameConfiguration *UsernameConfigurationType `type:"structure"`
+
 	// The template for verification messages.
 	VerificationMessageTemplate *VerificationMessageTemplateType `type:"structure"`
 }
@@ -2261,6 +2296,47 @@ type UserType struct {
 // String returns the string representation
 func (s UserType) String() string {
 	return awsutil.Prettify(s)
+}
+
+// The username configuration type.
+type UsernameConfigurationType struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether username case sensitivity will be applied for all users
+	// in the user pool through Cognito APIs.
+	//
+	// Valid values include:
+	//
+	//    * True : Enables case sensitivity for all username input. When this option
+	//    is set to True, users must sign in using the exact capitalization of their
+	//    given username. For example, “UserName”. This is the default value.
+	//
+	//    * False : Enables case insensitivity for all username input. For example,
+	//    when this option is set to False, users will be able to sign in using
+	//    either "username" or "Username". This option also enables both preferred_username
+	//    and email alias to be case insensitive, in addition to the username attribute.
+	//
+	// CaseSensitive is a required field
+	CaseSensitive *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation
+func (s UsernameConfigurationType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UsernameConfigurationType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UsernameConfigurationType"}
+
+	if s.CaseSensitive == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CaseSensitive"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // The template for verification messages.

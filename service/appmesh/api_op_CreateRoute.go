@@ -180,6 +180,8 @@ const opCreateRoute = "CreateRoute"
 // If your route matches a request, you can distribute traffic to one or more
 // target virtual nodes with relative weighting.
 //
+// For more information about routes, see Routes (https://docs.aws.amazon.com//app-mesh/latest/userguide/routes.html).
+//
 //    // Example sending a request using CreateRouteRequest.
 //    req := client.CreateRouteRequest(params)
 //    resp, err := req.Send(context.TODO())

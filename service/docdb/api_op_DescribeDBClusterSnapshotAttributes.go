@@ -13,7 +13,7 @@ import (
 type DescribeDBClusterSnapshotAttributesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier for the DB cluster snapshot to describe the attributes for.
+	// The identifier for the cluster snapshot to describe the attributes for.
 	//
 	// DBClusterSnapshotIdentifier is a required field
 	DBClusterSnapshotIdentifier *string `type:"string" required:"true"`
@@ -41,7 +41,7 @@ func (s *DescribeDBClusterSnapshotAttributesInput) Validate() error {
 type DescribeDBClusterSnapshotAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about the attributes that are associated with a DB cluster
+	// Detailed information about the attributes that are associated with a cluster
 	// snapshot.
 	DBClusterSnapshotAttributesResult *DBClusterSnapshotAttributesResult `type:"structure"`
 }
@@ -56,14 +56,14 @@ const opDescribeDBClusterSnapshotAttributes = "DescribeDBClusterSnapshotAttribut
 // DescribeDBClusterSnapshotAttributesRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Returns a list of DB cluster snapshot attribute names and values for a manual
+// Returns a list of cluster snapshot attribute names and values for a manual
 // DB cluster snapshot.
 //
 // When you share snapshots with other AWS accounts, DescribeDBClusterSnapshotAttributes
 // returns the restore attribute and a list of IDs for the AWS accounts that
-// are authorized to copy or restore the manual DB cluster snapshot. If all
-// is included in the list of values for the restore attribute, then the manual
-// DB cluster snapshot is public and can be copied or restored by all AWS accounts.
+// are authorized to copy or restore the manual cluster snapshot. If all is
+// included in the list of values for the restore attribute, then the manual
+// cluster snapshot is public and can be copied or restored by all AWS accounts.
 //
 //    // Example sending a request using DescribeDBClusterSnapshotAttributesRequest.
 //    req := client.DescribeDBClusterSnapshotAttributesRequest(params)

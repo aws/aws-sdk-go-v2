@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -21,6 +22,21 @@ type UpdateEndpointInput struct {
 	//
 	// EndpointName is a required field
 	EndpointName *string `type:"string" required:"true"`
+
+	// When you are updating endpoint resources with RetainAllVariantProperties
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/API_UpdateEndpoint.html#SageMaker-UpdateEndpoint-request-RetainAllVariantProperties),
+	// whose value is set to true, ExcludeRetainedVariantProperties specifies the
+	// list of type VariantProperty (https://docs.aws.amazon.com/sagemaker/latest/dg/API_VariantProperty.html)
+	// to override with the values provided by EndpointConfig. If you don't specify
+	// a value for ExcludeAllVariantProperties, no variant properties are overridden.
+	ExcludeRetainedVariantProperties []VariantProperty `type:"list"`
+
+	// When updating endpoint resources, enables or disables the retention of variant
+	// properties, such as the instance count or the variant weight. To retain the
+	// variant properties of an endpoint when updating it, set RetainAllVariantProperties
+	// to true. To use the variant properties specified in a new EndpointConfig
+	// call when updating an endpoint, set RetainAllVariantProperties to false.
+	RetainAllVariantProperties *bool `type:"boolean"`
 }
 
 // String returns the string representation
@@ -38,6 +54,13 @@ func (s *UpdateEndpointInput) Validate() error {
 
 	if s.EndpointName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
+	}
+	if s.ExcludeRetainedVariantProperties != nil {
+		for i, v := range s.ExcludeRetainedVariantProperties {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ExcludeRetainedVariantProperties", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

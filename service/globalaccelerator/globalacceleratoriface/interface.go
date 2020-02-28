@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Global Accelerator.
 //    func myFunc(svc globalacceleratoriface.ClientAPI) bool {
-//        // Make svc.CreateAccelerator request
+//        // Make svc.AdvertiseByoipCidr request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        globalacceleratoriface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateAccelerator(input *globalaccelerator.CreateAcceleratorInput) (*globalaccelerator.CreateAcceleratorOutput, error) {
+//    func (m *mockClientClient) AdvertiseByoipCidr(input *globalaccelerator.AdvertiseByoipCidrInput) (*globalaccelerator.AdvertiseByoipCidrOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,6 +61,8 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	AdvertiseByoipCidrRequest(*globalaccelerator.AdvertiseByoipCidrInput) globalaccelerator.AdvertiseByoipCidrRequest
+
 	CreateAcceleratorRequest(*globalaccelerator.CreateAcceleratorInput) globalaccelerator.CreateAcceleratorRequest
 
 	CreateEndpointGroupRequest(*globalaccelerator.CreateEndpointGroupInput) globalaccelerator.CreateEndpointGroupRequest
@@ -73,6 +75,8 @@ type ClientAPI interface {
 
 	DeleteListenerRequest(*globalaccelerator.DeleteListenerInput) globalaccelerator.DeleteListenerRequest
 
+	DeprovisionByoipCidrRequest(*globalaccelerator.DeprovisionByoipCidrInput) globalaccelerator.DeprovisionByoipCidrRequest
+
 	DescribeAcceleratorRequest(*globalaccelerator.DescribeAcceleratorInput) globalaccelerator.DescribeAcceleratorRequest
 
 	DescribeAcceleratorAttributesRequest(*globalaccelerator.DescribeAcceleratorAttributesInput) globalaccelerator.DescribeAcceleratorAttributesRequest
@@ -83,9 +87,19 @@ type ClientAPI interface {
 
 	ListAcceleratorsRequest(*globalaccelerator.ListAcceleratorsInput) globalaccelerator.ListAcceleratorsRequest
 
+	ListByoipCidrsRequest(*globalaccelerator.ListByoipCidrsInput) globalaccelerator.ListByoipCidrsRequest
+
 	ListEndpointGroupsRequest(*globalaccelerator.ListEndpointGroupsInput) globalaccelerator.ListEndpointGroupsRequest
 
 	ListListenersRequest(*globalaccelerator.ListListenersInput) globalaccelerator.ListListenersRequest
+
+	ListTagsForResourceRequest(*globalaccelerator.ListTagsForResourceInput) globalaccelerator.ListTagsForResourceRequest
+
+	ProvisionByoipCidrRequest(*globalaccelerator.ProvisionByoipCidrInput) globalaccelerator.ProvisionByoipCidrRequest
+
+	TagResourceRequest(*globalaccelerator.TagResourceInput) globalaccelerator.TagResourceRequest
+
+	UntagResourceRequest(*globalaccelerator.UntagResourceInput) globalaccelerator.UntagResourceRequest
 
 	UpdateAcceleratorRequest(*globalaccelerator.UpdateAcceleratorInput) globalaccelerator.UpdateAcceleratorRequest
 
@@ -94,6 +108,8 @@ type ClientAPI interface {
 	UpdateEndpointGroupRequest(*globalaccelerator.UpdateEndpointGroupInput) globalaccelerator.UpdateEndpointGroupRequest
 
 	UpdateListenerRequest(*globalaccelerator.UpdateListenerInput) globalaccelerator.UpdateListenerRequest
+
+	WithdrawByoipCidrRequest(*globalaccelerator.WithdrawByoipCidrInput) globalaccelerator.WithdrawByoipCidrRequest
 }
 
 var _ ClientAPI = (*globalaccelerator.Client)(nil)

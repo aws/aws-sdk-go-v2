@@ -35,6 +35,24 @@ func (enum AddOnType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type AlarmState string
+
+// Enum values for AlarmState
+const (
+	AlarmStateOk               AlarmState = "OK"
+	AlarmStateAlarm            AlarmState = "ALARM"
+	AlarmStateInsufficientData AlarmState = "INSUFFICIENT_DATA"
+)
+
+func (enum AlarmState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AlarmState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AutoSnapshotStatus string
 
 // Enum values for AutoSnapshotStatus
@@ -83,6 +101,76 @@ func (enum CloudFormationStackRecordSourceType) MarshalValue() (string, error) {
 }
 
 func (enum CloudFormationStackRecordSourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ComparisonOperator string
+
+// Enum values for ComparisonOperator
+const (
+	ComparisonOperatorGreaterThanOrEqualToThreshold ComparisonOperator = "GreaterThanOrEqualToThreshold"
+	ComparisonOperatorGreaterThanThreshold          ComparisonOperator = "GreaterThanThreshold"
+	ComparisonOperatorLessThanThreshold             ComparisonOperator = "LessThanThreshold"
+	ComparisonOperatorLessThanOrEqualToThreshold    ComparisonOperator = "LessThanOrEqualToThreshold"
+)
+
+func (enum ComparisonOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComparisonOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ContactMethodStatus string
+
+// Enum values for ContactMethodStatus
+const (
+	ContactMethodStatusPendingVerification ContactMethodStatus = "PendingVerification"
+	ContactMethodStatusValid               ContactMethodStatus = "Valid"
+	ContactMethodStatusInvalid             ContactMethodStatus = "Invalid"
+)
+
+func (enum ContactMethodStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ContactMethodStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ContactMethodVerificationProtocol string
+
+// Enum values for ContactMethodVerificationProtocol
+const (
+	ContactMethodVerificationProtocolEmail ContactMethodVerificationProtocol = "Email"
+)
+
+func (enum ContactMethodVerificationProtocol) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ContactMethodVerificationProtocol) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ContactProtocol string
+
+// Enum values for ContactProtocol
+const (
+	ContactProtocolEmail ContactProtocol = "Email"
+	ContactProtocolSms   ContactProtocol = "SMS"
+)
+
+func (enum ContactProtocol) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ContactProtocol) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -450,6 +538,44 @@ func (enum LoadBalancerTlsCertificateStatus) MarshalValueBuf(b []byte) ([]byte, 
 	return append(b, enum...), nil
 }
 
+type MetricName string
+
+// Enum values for MetricName
+const (
+	MetricNameCpuutilization                 MetricName = "CPUUtilization"
+	MetricNameNetworkIn                      MetricName = "NetworkIn"
+	MetricNameNetworkOut                     MetricName = "NetworkOut"
+	MetricNameStatusCheckFailed              MetricName = "StatusCheckFailed"
+	MetricNameStatusCheckFailedInstance      MetricName = "StatusCheckFailed_Instance"
+	MetricNameStatusCheckFailedSystem        MetricName = "StatusCheckFailed_System"
+	MetricNameClientTlsnegotiationErrorCount MetricName = "ClientTLSNegotiationErrorCount"
+	MetricNameHealthyHostCount               MetricName = "HealthyHostCount"
+	MetricNameUnhealthyHostCount             MetricName = "UnhealthyHostCount"
+	MetricNameHttpcodeLb4xxCount             MetricName = "HTTPCode_LB_4XX_Count"
+	MetricNameHttpcodeLb5xxCount             MetricName = "HTTPCode_LB_5XX_Count"
+	MetricNameHttpcodeInstance2xxCount       MetricName = "HTTPCode_Instance_2XX_Count"
+	MetricNameHttpcodeInstance3xxCount       MetricName = "HTTPCode_Instance_3XX_Count"
+	MetricNameHttpcodeInstance4xxCount       MetricName = "HTTPCode_Instance_4XX_Count"
+	MetricNameHttpcodeInstance5xxCount       MetricName = "HTTPCode_Instance_5XX_Count"
+	MetricNameInstanceResponseTime           MetricName = "InstanceResponseTime"
+	MetricNameRejectedConnectionCount        MetricName = "RejectedConnectionCount"
+	MetricNameRequestCount                   MetricName = "RequestCount"
+	MetricNameDatabaseConnections            MetricName = "DatabaseConnections"
+	MetricNameDiskQueueDepth                 MetricName = "DiskQueueDepth"
+	MetricNameFreeStorageSpace               MetricName = "FreeStorageSpace"
+	MetricNameNetworkReceiveThroughput       MetricName = "NetworkReceiveThroughput"
+	MetricNameNetworkTransmitThroughput      MetricName = "NetworkTransmitThroughput"
+)
+
+func (enum MetricName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MetricName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MetricStatistic string
 
 // Enum values for MetricStatistic
@@ -601,6 +727,14 @@ const (
 	OperationTypeStopRelationalDatabase               OperationType = "StopRelationalDatabase"
 	OperationTypeEnableAddOn                          OperationType = "EnableAddOn"
 	OperationTypeDisableAddOn                         OperationType = "DisableAddOn"
+	OperationTypePutAlarm                             OperationType = "PutAlarm"
+	OperationTypeGetAlarms                            OperationType = "GetAlarms"
+	OperationTypeDeleteAlarm                          OperationType = "DeleteAlarm"
+	OperationTypeTestAlarm                            OperationType = "TestAlarm"
+	OperationTypeCreateContactMethod                  OperationType = "CreateContactMethod"
+	OperationTypeGetContactMethods                    OperationType = "GetContactMethods"
+	OperationTypeSendContactMethodVerification        OperationType = "SendContactMethodVerification"
+	OperationTypeDeleteContactMethod                  OperationType = "DeleteContactMethod"
 )
 
 func (enum OperationType) MarshalValue() (string, error) {
@@ -785,6 +919,8 @@ const (
 	ResourceTypeRelationalDatabaseSnapshot ResourceType = "RelationalDatabaseSnapshot"
 	ResourceTypeExportSnapshotRecord       ResourceType = "ExportSnapshotRecord"
 	ResourceTypeCloudFormationStackRecord  ResourceType = "CloudFormationStackRecord"
+	ResourceTypeAlarm                      ResourceType = "Alarm"
+	ResourceTypeContactMethod              ResourceType = "ContactMethod"
 )
 
 func (enum ResourceType) MarshalValue() (string, error) {
@@ -792,6 +928,25 @@ func (enum ResourceType) MarshalValue() (string, error) {
 }
 
 func (enum ResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TreatMissingData string
+
+// Enum values for TreatMissingData
+const (
+	TreatMissingDataBreaching    TreatMissingData = "breaching"
+	TreatMissingDataNotBreaching TreatMissingData = "notBreaching"
+	TreatMissingDataIgnore       TreatMissingData = "ignore"
+	TreatMissingDataMissing      TreatMissingData = "missing"
+)
+
+func (enum TreatMissingData) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TreatMissingData) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

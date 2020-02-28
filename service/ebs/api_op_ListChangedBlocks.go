@@ -15,6 +15,9 @@ type ListChangedBlocksInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the first snapshot to use for the comparison.
+	//
+	// The FirstSnapshotID parameter must be specified with a SecondSnapshotId parameter;
+	// otherwise, an error occurs.
 	FirstSnapshotId *string `location:"querystring" locationName:"firstSnapshotId" min:"1" type:"string"`
 
 	// The number of results to return.
@@ -24,6 +27,9 @@ type ListChangedBlocksInput struct {
 	NextToken *string `location:"querystring" locationName:"pageToken" type:"string"`
 
 	// The ID of the second snapshot to use for the comparison.
+	//
+	// The SecondSnapshotId parameter must be specified with a FirstSnapshotID parameter;
+	// otherwise, an error occurs.
 	//
 	// SecondSnapshotId is a required field
 	SecondSnapshotId *string `location:"uri" locationName:"secondSnapshotId" min:"1" type:"string" required:"true"`
@@ -109,7 +115,7 @@ type ListChangedBlocksOutput struct {
 	// An array of objects containing information about the changed blocks.
 	ChangedBlocks []ChangedBlock `type:"list"`
 
-	// The time when the block token expires.
+	// The time when the BlockToken expires.
 	ExpiryTime *time.Time `type:"timestamp"`
 
 	// The token to use to retrieve the next page of results. This value is null

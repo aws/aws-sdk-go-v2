@@ -496,10 +496,10 @@ type ConfigRule struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the AWS Config rule.
-	ConfigRuleArn *string `type:"string"`
+	ConfigRuleArn *string `min:"1" type:"string"`
 
 	// The ID of the AWS Config rule.
-	ConfigRuleId *string `type:"string"`
+	ConfigRuleId *string `min:"1" type:"string"`
 
 	// The name that you assign to the AWS Config rule. The name is required if
 	// you are adding a new rule.
@@ -571,6 +571,12 @@ func (s ConfigRule) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfigRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ConfigRule"}
+	if s.ConfigRuleArn != nil && len(*s.ConfigRuleArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigRuleArn", 1))
+	}
+	if s.ConfigRuleId != nil && len(*s.ConfigRuleId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigRuleId", 1))
+	}
 	if s.ConfigRuleName != nil && len(*s.ConfigRuleName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ConfigRuleName", 1))
 	}
@@ -702,6 +708,8 @@ type ConfigRuleEvaluationStatus struct {
 	//    * false - AWS Config has not once finished evaluating your AWS resources
 	//    against the rule.
 	FirstEvaluationStarted *bool `type:"boolean"`
+
+	LastDeactivatedTime *time.Time `type:"timestamp"`
 
 	// The error code that AWS Config returned when the rule last failed.
 	LastErrorCode *string `type:"string"`
@@ -2391,7 +2399,7 @@ type RemediationConfiguration struct {
 	Parameters map[string]RemediationParameterValue `type:"map"`
 
 	// The type of a resource.
-	ResourceType *string `type:"string"`
+	ResourceType *string `min:"1" type:"string"`
 
 	// Maximum time in seconds that AWS Config runs auto-remediation. If you do
 	// not select a number, the default is 60 seconds.
@@ -2412,7 +2420,7 @@ type RemediationConfiguration struct {
 	TargetType RemediationTargetType `type:"string" required:"true" enum:"true"`
 
 	// Version of the target. For example, version of the SSM document.
-	TargetVersion *string `type:"string"`
+	TargetVersion *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -2439,6 +2447,9 @@ func (s *RemediationConfiguration) Validate() error {
 	if s.MaximumAutomaticAttempts != nil && *s.MaximumAutomaticAttempts < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaximumAutomaticAttempts", 1))
 	}
+	if s.ResourceType != nil && len(*s.ResourceType) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceType", 1))
+	}
 	if s.RetryAttemptSeconds != nil && *s.RetryAttemptSeconds < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("RetryAttemptSeconds", 1))
 	}
@@ -2451,6 +2462,9 @@ func (s *RemediationConfiguration) Validate() error {
 	}
 	if len(s.TargetType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TargetType"))
+	}
+	if s.TargetVersion != nil && len(*s.TargetVersion) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TargetVersion", 1))
 	}
 	if s.ExecutionControls != nil {
 		if err := s.ExecutionControls.Validate(); err != nil {

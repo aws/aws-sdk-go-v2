@@ -95,7 +95,7 @@ type ListSnapshotBlocksOutput struct {
 	// An array of objects containing information about the blocks.
 	Blocks []Block `type:"list" sensitive:"true"`
 
-	// The time when the block token expires.
+	// The time when the BlockToken expires.
 	ExpiryTime *time.Time `type:"timestamp"`
 
 	// The token to use to retrieve the next page of results. This value is null

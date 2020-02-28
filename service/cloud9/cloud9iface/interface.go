@@ -77,6 +77,12 @@ type ClientAPI interface {
 
 	ListEnvironmentsRequest(*cloud9.ListEnvironmentsInput) cloud9.ListEnvironmentsRequest
 
+	ListTagsForResourceRequest(*cloud9.ListTagsForResourceInput) cloud9.ListTagsForResourceRequest
+
+	TagResourceRequest(*cloud9.TagResourceInput) cloud9.TagResourceRequest
+
+	UntagResourceRequest(*cloud9.UntagResourceInput) cloud9.UntagResourceRequest
+
 	UpdateEnvironmentRequest(*cloud9.UpdateEnvironmentInput) cloud9.UpdateEnvironmentRequest
 
 	UpdateEnvironmentMembershipRequest(*cloud9.UpdateEnvironmentMembershipInput) cloud9.UpdateEnvironmentMembershipRequest

@@ -13,8 +13,11 @@ import (
 type ListDataflowEndpointGroupsInput struct {
 	_ struct{} `type:"structure"`
 
+	// Maximum number of dataflow endpoint groups returned.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
 
+	// Next token returned in the request of a previous ListDataflowEndpointGroups
+	// call. Used to get the next page of results.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
@@ -45,8 +48,11 @@ func (s ListDataflowEndpointGroupsInput) MarshalFields(e protocol.FieldEncoder) 
 type ListDataflowEndpointGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	// A list of dataflow endpoint groups.
 	DataflowEndpointGroupList []DataflowEndpointListItem `locationName:"dataflowEndpointGroupList" type:"list"`
 
+	// Next token returned in the response of a previous ListDataflowEndpointGroups
+	// call. Used to get the next page of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 

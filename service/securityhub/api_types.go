@@ -220,8 +220,8 @@ type AwsCloudFrontDistributionLogging struct {
 	// Specifies whether you want CloudFront to include cookies in access logs.
 	IncludeCookies *bool `type:"boolean"`
 
-	// An optional string that you want CloudFront to prefix to the access log filenames
-	// for this distribution.
+	// An optional string that you want CloudFront to use as a prefix to the access
+	// log filenames for this distribution.
 	Prefix *string `type:"string"`
 }
 
@@ -336,6 +336,345 @@ func (s AwsCloudFrontDistributionOrigins) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
+// Information about an AWS CodeBuild project.
+type AwsCodeBuildProjectDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The AWS Key Management Service (AWS KMS) customer master key (CMK) used to
+	// encrypt the build output artifacts.
+	//
+	// You can specify either the Amazon Resource Name (ARN) of the CMK or, if available,
+	// the CMK alias (using the format alias/alias-name).
+	EncryptionKey *string `type:"string"`
+
+	// Information about the build environment for this build project.
+	Environment *AwsCodeBuildProjectEnvironment `type:"structure"`
+
+	// The name of the build project.
+	Name *string `type:"string"`
+
+	// The ARN of the IAM role that enables AWS CodeBuild to interact with dependent
+	// AWS services on behalf of the AWS account.
+	ServiceRole *string `type:"string"`
+
+	// Information about the build input source code for this build project.
+	Source *AwsCodeBuildProjectSource `type:"structure"`
+
+	// Information about the VPC configuration that AWS CodeBuild accesses.
+	VpcConfig *AwsCodeBuildProjectVpcConfig `type:"structure"`
+}
+
+// String returns the string representation
+func (s AwsCodeBuildProjectDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsCodeBuildProjectDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EncryptionKey != nil {
+		v := *s.EncryptionKey
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EncryptionKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Environment != nil {
+		v := s.Environment
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Environment", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ServiceRole != nil {
+		v := *s.ServiceRole
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ServiceRole", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Source != nil {
+		v := s.Source
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Source", v, metadata)
+	}
+	if s.VpcConfig != nil {
+		v := s.VpcConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "VpcConfig", v, metadata)
+	}
+	return nil
+}
+
+// Information about the build environment for this build project.
+type AwsCodeBuildProjectEnvironment struct {
+	_ struct{} `type:"structure"`
+
+	// The certificate to use with this build project.
+	Certificate *string `type:"string"`
+
+	// The type of credentials AWS CodeBuild uses to pull images in your build.
+	//
+	// Valid values:
+	//
+	//    * CODEBUILD specifies that AWS CodeBuild uses its own credentials. This
+	//    requires that you modify your ECR repository policy to trust the AWS CodeBuild
+	//    service principal.
+	//
+	//    * SERVICE_ROLE specifies that AWS CodeBuild uses your build project's
+	//    service role.
+	//
+	// When you use a cross-account or private registry image, you must use SERVICE_ROLE
+	// credentials. When you use an AWS CodeBuild curated image, you must use CODEBUILD
+	// credentials.
+	ImagePullCredentialsType *string `type:"string"`
+
+	// The credentials for access to a private registry.
+	RegistryCredential *AwsCodeBuildProjectEnvironmentRegistryCredential `type:"structure"`
+
+	// The type of build environment to use for related builds.
+	//
+	// The environment type ARM_CONTAINER is available only in regions US East (N.
+	// Virginia), US East (Ohio), US West (Oregon), Europe (Ireland), Asia Pacific
+	// (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and Europe (Frankfurt).
+	//
+	// The environment type LINUX_CONTAINER with compute type build.general1.2xlarge
+	// is available only in regions US East (N. Virginia), US East (N. Virginia),
+	// US West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe
+	// (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore),
+	// Asia Pacific (Sydney), China (Beijing), and China (Ningxia).
+	//
+	// The environment type LINUX_GPU_CONTAINER is available only in regions US
+	// East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central),
+	// Europe (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo),
+	// Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney) , China
+	// (Beijing), and China (Ningxia).
+	//
+	// Valid values: WINDOWS_CONTAINER | LINUX_CONTAINER | LINUX_GPU_CONTAINER |
+	// ARM_CONTAINER
+	Type *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsCodeBuildProjectEnvironment) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsCodeBuildProjectEnvironment) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Certificate != nil {
+		v := *s.Certificate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Certificate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ImagePullCredentialsType != nil {
+		v := *s.ImagePullCredentialsType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ImagePullCredentialsType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RegistryCredential != nil {
+		v := s.RegistryCredential
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "RegistryCredential", v, metadata)
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The credentials for access to a private registry.
+type AwsCodeBuildProjectEnvironmentRegistryCredential struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) or name of credentials created using AWS Secrets
+	// Manager.
+	//
+	// The credential can use the name of the credentials only if they exist in
+	// your current AWS Region.
+	Credential *string `type:"string"`
+
+	// The service that created the credentials to access a private Docker registry.
+	//
+	// The valid value,SECRETS_MANAGER, is for AWS Secrets Manager.
+	CredentialProvider *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsCodeBuildProjectEnvironmentRegistryCredential) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsCodeBuildProjectEnvironmentRegistryCredential) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Credential != nil {
+		v := *s.Credential
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Credential", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CredentialProvider != nil {
+		v := *s.CredentialProvider
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CredentialProvider", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Information about the build input source code for this build project.
+type AwsCodeBuildProjectSource struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the Git clone depth for the build project.
+	GitCloneDepth *int64 `type:"integer"`
+
+	// Whether to ignore SSL warnings while connecting to the project source code.
+	InsecureSsl *bool `type:"boolean"`
+
+	// Information about the location of the source code to be built.
+	//
+	// Valid values include:
+	//
+	//    * For source code settings that are specified in the source action of
+	//    a pipeline in AWS CodePipeline, location should not be specified. If it
+	//    is specified, AWS CodePipeline ignores it. This is because AWS CodePipeline
+	//    uses the settings in a pipeline's source action instead of this value.
+	//
+	//    * For source code in an AWS CodeCommit repository, the HTTPS clone URL
+	//    to the repository that contains the source code and the buildspec file
+	//    (for example, https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name
+	//    ).
+	//
+	//    * For source code in an S3 input bucket, one of the following. The path
+	//    to the ZIP file that contains the source code (for example, bucket-name/path/to/object-name.zip).
+	//    The path to the folder that contains the source code (for example, bucket-name/path/to/source-code/folder/).
+	//
+	//    * For source code in a GitHub repository, the HTTPS clone URL to the repository
+	//    that contains the source and the buildspec file.
+	//
+	//    * For source code in a Bitbucket repository, the HTTPS clone URL to the
+	//    repository that contains the source and the buildspec file.
+	Location *string `type:"string"`
+
+	// The type of repository that contains the source code to be built. Valid values
+	// are:
+	//
+	//    * BITBUCKET - The source code is in a Bitbucket repository.
+	//
+	//    * CODECOMMIT - The source code is in an AWS CodeCommit repository.
+	//
+	//    * CODEPIPELINE - The source code settings are specified in the source
+	//    action of a pipeline in AWS CodePipeline.
+	//
+	//    * GITHUB - The source code is in a GitHub repository.
+	//
+	//    * GITHUB_ENTERPRISE - The source code is in a GitHub Enterprise repository.
+	//
+	//    * NO_SOURCE - The project does not have input source code.
+	//
+	//    * S3 - The source code is in an S3 input bucket.
+	Type *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsCodeBuildProjectSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsCodeBuildProjectSource) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GitCloneDepth != nil {
+		v := *s.GitCloneDepth
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GitCloneDepth", protocol.Int64Value(v), metadata)
+	}
+	if s.InsecureSsl != nil {
+		v := *s.InsecureSsl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InsecureSsl", protocol.BoolValue(v), metadata)
+	}
+	if s.Location != nil {
+		v := *s.Location
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Location", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Information about the VPC configuration that AWS CodeBuild accesses.
+type AwsCodeBuildProjectVpcConfig struct {
+	_ struct{} `type:"structure"`
+
+	// A list of one or more security group IDs in your Amazon VPC.
+	SecurityGroupIds []string `type:"list"`
+
+	// A list of one or more subnet IDs in your Amazon VPC.
+	Subnets []string `type:"list"`
+
+	// The ID of the VPC.
+	VpcId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsCodeBuildProjectVpcConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsCodeBuildProjectVpcConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SecurityGroupIds != nil {
+		v := s.SecurityGroupIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SecurityGroupIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Subnets != nil {
+		v := s.Subnets
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Subnets", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.VpcId != nil {
+		v := *s.VpcId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VpcId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The details of an Amazon EC2 instance.
 type AwsEc2InstanceDetails struct {
 	_ struct{} `type:"structure"`
@@ -440,6 +779,823 @@ func (s AwsEc2InstanceDetails) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "VpcId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Information about the network interface attachment.
+type AwsEc2NetworkInterfaceAttachment struct {
+	_ struct{} `type:"structure"`
+
+	// The timestamp indicating when the attachment initiated.
+	AttachTime *string `type:"string"`
+
+	// The identifier of the network interface attachment
+	AttachmentId *string `type:"string"`
+
+	// Indicates whether the network interface is deleted when the instance is terminated.
+	DeleteOnTermination *bool `type:"boolean"`
+
+	// The device index of the network interface attachment on the instance.
+	DeviceIndex *int64 `type:"integer"`
+
+	// The ID of the instance.
+	InstanceId *string `type:"string"`
+
+	// The AWS account ID of the owner of the instance.
+	InstanceOwnerId *string `type:"string"`
+
+	// The attachment state.
+	//
+	// Valid values: attaching | attached | detaching | detached
+	Status *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsEc2NetworkInterfaceAttachment) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsEc2NetworkInterfaceAttachment) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AttachTime != nil {
+		v := *s.AttachTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AttachTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AttachmentId != nil {
+		v := *s.AttachmentId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AttachmentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DeleteOnTermination != nil {
+		v := *s.DeleteOnTermination
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeleteOnTermination", protocol.BoolValue(v), metadata)
+	}
+	if s.DeviceIndex != nil {
+		v := *s.DeviceIndex
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeviceIndex", protocol.Int64Value(v), metadata)
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.InstanceOwnerId != nil {
+		v := *s.InstanceOwnerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InstanceOwnerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Details about the network interface
+type AwsEc2NetworkInterfaceDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The network interface attachment.
+	Attachment *AwsEc2NetworkInterfaceAttachment `type:"structure"`
+
+	// The ID of the network interface.
+	NetworkInterfaceId *string `type:"string"`
+
+	// Security groups for the network interface.
+	SecurityGroups []AwsEc2NetworkInterfaceSecurityGroup `type:"list"`
+
+	// Indicates whether traffic to or from the instance is validated.
+	SourceDestCheck *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s AwsEc2NetworkInterfaceDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsEc2NetworkInterfaceDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Attachment != nil {
+		v := s.Attachment
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Attachment", v, metadata)
+	}
+	if s.NetworkInterfaceId != nil {
+		v := *s.NetworkInterfaceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NetworkInterfaceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SecurityGroups != nil {
+		v := s.SecurityGroups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SecurityGroups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.SourceDestCheck != nil {
+		v := *s.SourceDestCheck
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SourceDestCheck", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// A security group associated with the network interface.
+type AwsEc2NetworkInterfaceSecurityGroup struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the security group.
+	GroupId *string `type:"string"`
+
+	// The name of the security group.
+	GroupName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsEc2NetworkInterfaceSecurityGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsEc2NetworkInterfaceSecurityGroup) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Details about an EC2 security group.
+type AwsEc2SecurityGroupDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the security group.
+	GroupId *string `type:"string"`
+
+	// The name of the security group.
+	GroupName *string `type:"string"`
+
+	// The inbound rules associated with the security group.
+	IpPermissions []AwsEc2SecurityGroupIpPermission `type:"list"`
+
+	// [VPC only] The outbound rules associated with the security group.
+	IpPermissionsEgress []AwsEc2SecurityGroupIpPermission `type:"list"`
+
+	// The AWS account ID of the owner of the security group.
+	OwnerId *string `type:"string"`
+
+	// [VPC only] The ID of the VPC for the security group.
+	VpcId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsEc2SecurityGroupDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsEc2SecurityGroupDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.IpPermissions != nil {
+		v := s.IpPermissions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "IpPermissions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.IpPermissionsEgress != nil {
+		v := s.IpPermissionsEgress
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "IpPermissionsEgress", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.OwnerId != nil {
+		v := *s.OwnerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OwnerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VpcId != nil {
+		v := *s.VpcId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VpcId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An IP permission for an EC2 security group.
+type AwsEc2SecurityGroupIpPermission struct {
+	_ struct{} `type:"structure"`
+
+	// The start of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6
+	// type number.
+	//
+	// A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6
+	// types, you must specify all codes.
+	FromPort *int64 `type:"integer"`
+
+	// The IP protocol name (tcp, udp, icmp, icmpv6) or number.
+	//
+	// [VPC only] Use -1 to specify all protocols.
+	//
+	// When authorizing security group rules, specifying -1 or a protocol number
+	// other than tcp, udp, icmp, or icmpv6 allows traffic on all ports, regardless
+	// of any port range you specify.
+	//
+	// For tcp, udp, and icmp, you must specify a port range.
+	//
+	// For icmpv6, the port range is optional. If you omit the port range, traffic
+	// for all types and codes is allowed.
+	IpProtocol *string `type:"string"`
+
+	// The IPv4 ranges.
+	IpRanges []AwsEc2SecurityGroupIpRange `type:"list"`
+
+	// The IPv6 ranges.
+	Ipv6Ranges []AwsEc2SecurityGroupIpv6Range `type:"list"`
+
+	// [VPC only] The prefix list IDs for an AWS service. With outbound rules, this
+	// is the AWS service to access through a VPC endpoint from instances associated
+	// with the security group.
+	PrefixListIds []AwsEc2SecurityGroupPrefixListId `type:"list"`
+
+	// The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6
+	// code.
+	//
+	// A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
+	// types, you must specify all codes.
+	ToPort *int64 `type:"integer"`
+
+	// The security group and AWS account ID pairs.
+	UserIdGroupPairs []AwsEc2SecurityGroupUserIdGroupPair `type:"list"`
+}
+
+// String returns the string representation
+func (s AwsEc2SecurityGroupIpPermission) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsEc2SecurityGroupIpPermission) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FromPort != nil {
+		v := *s.FromPort
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FromPort", protocol.Int64Value(v), metadata)
+	}
+	if s.IpProtocol != nil {
+		v := *s.IpProtocol
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IpProtocol", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.IpRanges != nil {
+		v := s.IpRanges
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "IpRanges", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Ipv6Ranges != nil {
+		v := s.Ipv6Ranges
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Ipv6Ranges", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.PrefixListIds != nil {
+		v := s.PrefixListIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "PrefixListIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.ToPort != nil {
+		v := *s.ToPort
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ToPort", protocol.Int64Value(v), metadata)
+	}
+	if s.UserIdGroupPairs != nil {
+		v := s.UserIdGroupPairs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "UserIdGroupPairs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// A range of IPv4 addresses.
+type AwsEc2SecurityGroupIpRange struct {
+	_ struct{} `type:"structure"`
+
+	// The IPv4 CIDR range. You can either specify either a CIDR range or a source
+	// security group, but not both. To specify a single IPv4 address, use the /32
+	// prefix length.
+	CidrIp *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsEc2SecurityGroupIpRange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsEc2SecurityGroupIpRange) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CidrIp != nil {
+		v := *s.CidrIp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CidrIp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A range of IPv6 addresses.
+type AwsEc2SecurityGroupIpv6Range struct {
+	_ struct{} `type:"structure"`
+
+	// The IPv6 CIDR range. You can either specify either a CIDR range or a source
+	// security group, but not both. To specify a single IPv6 address, use the /128
+	// prefix length.
+	CidrIpv6 *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsEc2SecurityGroupIpv6Range) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsEc2SecurityGroupIpv6Range) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CidrIpv6 != nil {
+		v := *s.CidrIpv6
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CidrIpv6", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A prefix list ID.
+type AwsEc2SecurityGroupPrefixListId struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the prefix.
+	PrefixListId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsEc2SecurityGroupPrefixListId) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsEc2SecurityGroupPrefixListId) MarshalFields(e protocol.FieldEncoder) error {
+	if s.PrefixListId != nil {
+		v := *s.PrefixListId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PrefixListId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A relationship between a security group and a user.
+type AwsEc2SecurityGroupUserIdGroupPair struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the security group.
+	GroupId *string `type:"string"`
+
+	// The name of the security group.
+	GroupName *string `type:"string"`
+
+	// The status of a VPC peering connection, if applicable.
+	PeeringStatus *string `type:"string"`
+
+	// The ID of an AWS account.
+	//
+	// For a referenced security group in another VPC, the account ID of the referenced
+	// security group is returned in the response. If the referenced security group
+	// is deleted, this value is not returned.
+	//
+	// [EC2-Classic] Required when adding or removing rules that reference a security
+	// group in another AWS.
+	UserId *string `type:"string"`
+
+	// The ID of the VPC for the referenced security group, if applicable.
+	VpcId *string `type:"string"`
+
+	// The ID of the VPC peering connection, if applicable.
+	VpcPeeringConnectionId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsEc2SecurityGroupUserIdGroupPair) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsEc2SecurityGroupUserIdGroupPair) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PeeringStatus != nil {
+		v := *s.PeeringStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PeeringStatus", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VpcId != nil {
+		v := *s.VpcId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VpcId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VpcPeeringConnectionId != nil {
+		v := *s.VpcPeeringConnectionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VpcPeeringConnectionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Information about an Elasticsearch domain.
+type AwsElasticsearchDomainDetails struct {
+	_ struct{} `type:"structure"`
+
+	// IAM policy document specifying the access policies for the new Amazon ES
+	// domain.
+	AccessPolicies *string `type:"string"`
+
+	// Additional options for the domain endpoint.
+	DomainEndpointOptions *AwsElasticsearchDomainDomainEndpointOptions `type:"structure"`
+
+	// Unique identifier for an Amazon ES domain.
+	DomainId *string `type:"string"`
+
+	// Name of an Amazon ES domain.
+	//
+	// Domain names are unique across all domains owned by the same account within
+	// an AWS Region.
+	//
+	// Domain names must start with a lowercase letter and must be between 3 and
+	// 28 characters.
+	//
+	// Valid characters are a-z (lowercase only), 0-9, and – (hyphen).
+	DomainName *string `type:"string"`
+
+	// Elasticsearch version.
+	ElasticsearchVersion *string `type:"string"`
+
+	// Details about the configuration for encryption at rest.
+	EncryptionAtRestOptions *AwsElasticsearchDomainEncryptionAtRestOptions `type:"structure"`
+
+	// Domain-specific endpoint used to submit index, search, and data upload requests
+	// to an Amazon ES domain.
+	//
+	// The endpoint is a service URL.
+	Endpoint *string `type:"string"`
+
+	// The key-value pair that exists if the Amazon ES domain uses VPC endpoints.
+	Endpoints map[string]string `type:"map"`
+
+	// Details about the configuration for node-to-node encryption.
+	NodeToNodeEncryptionOptions *AwsElasticsearchDomainNodeToNodeEncryptionOptions `type:"structure"`
+
+	// Information that Amazon ES derives based on VPCOptions for the domain.
+	VPCOptions *AwsElasticsearchDomainVPCOptions `type:"structure"`
+}
+
+// String returns the string representation
+func (s AwsElasticsearchDomainDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsElasticsearchDomainDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccessPolicies != nil {
+		v := *s.AccessPolicies
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AccessPolicies", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DomainEndpointOptions != nil {
+		v := s.DomainEndpointOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DomainEndpointOptions", v, metadata)
+	}
+	if s.DomainId != nil {
+		v := *s.DomainId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ElasticsearchVersion != nil {
+		v := *s.ElasticsearchVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ElasticsearchVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EncryptionAtRestOptions != nil {
+		v := s.EncryptionAtRestOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "EncryptionAtRestOptions", v, metadata)
+	}
+	if s.Endpoint != nil {
+		v := *s.Endpoint
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Endpoint", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Endpoints != nil {
+		v := s.Endpoints
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Endpoints", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.NodeToNodeEncryptionOptions != nil {
+		v := s.NodeToNodeEncryptionOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "NodeToNodeEncryptionOptions", v, metadata)
+	}
+	if s.VPCOptions != nil {
+		v := s.VPCOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "VPCOptions", v, metadata)
+	}
+	return nil
+}
+
+// Additional options for the domain endpoint, such as whether to require HTTPS
+// for all traffic.
+type AwsElasticsearchDomainDomainEndpointOptions struct {
+	_ struct{} `type:"structure"`
+
+	// Whether to require that all traffic to the domain arrive over HTTPS.
+	EnforceHTTPS *bool `type:"boolean"`
+
+	// The TLS security policy to apply to the HTTPS endpoint of the Elasticsearch
+	// domain.
+	//
+	// Valid values:
+	//
+	//    * Policy-Min-TLS-1-0-2019-07, which supports TLSv1.0 and higher
+	//
+	//    * Policy-Min-TLS-1-2-2019-07, which only supports TLSv1.2
+	TLSSecurityPolicy *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsElasticsearchDomainDomainEndpointOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsElasticsearchDomainDomainEndpointOptions) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EnforceHTTPS != nil {
+		v := *s.EnforceHTTPS
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EnforceHTTPS", protocol.BoolValue(v), metadata)
+	}
+	if s.TLSSecurityPolicy != nil {
+		v := *s.TLSSecurityPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TLSSecurityPolicy", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Details about the configuration for encryption at rest.
+type AwsElasticsearchDomainEncryptionAtRestOptions struct {
+	_ struct{} `type:"structure"`
+
+	// Whether encryption at rest is enabled.
+	Enabled *bool `type:"boolean"`
+
+	// The KMS key ID. Takes the form 1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a.
+	KmsKeyId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsElasticsearchDomainEncryptionAtRestOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsElasticsearchDomainEncryptionAtRestOptions) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), metadata)
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Details about the configuration for node-to-node encryption.
+type AwsElasticsearchDomainNodeToNodeEncryptionOptions struct {
+	_ struct{} `type:"structure"`
+
+	// Whether node-to-node encryption is enabled.
+	Enabled *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s AwsElasticsearchDomainNodeToNodeEncryptionOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsElasticsearchDomainNodeToNodeEncryptionOptions) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// Information that Amazon ES derives based on VPCOptions for the domain.
+type AwsElasticsearchDomainVPCOptions struct {
+	_ struct{} `type:"structure"`
+
+	// The list of Availability Zones associated with the VPC subnets.
+	AvailabilityZones []string `type:"list"`
+
+	// The list of security group IDs associated with the VPC endpoints for the
+	// domain.
+	SecurityGroupIds []string `type:"list"`
+
+	// A list of subnet IDs associated with the VPC endpoints for the domain.
+	SubnetIds []string `type:"list"`
+
+	// ID for the VPC.
+	VPCId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsElasticsearchDomainVPCOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsElasticsearchDomainVPCOptions) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AvailabilityZones != nil {
+		v := s.AvailabilityZones
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "AvailabilityZones", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.SecurityGroupIds != nil {
+		v := s.SecurityGroupIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SecurityGroupIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.SubnetIds != nil {
+		v := s.SubnetIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SubnetIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.VPCId != nil {
+		v := *s.VPCId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VPCId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -738,11 +1894,15 @@ type AwsKmsKeyDetails struct {
 	// The state of the CMK.
 	KeyState *string `type:"string"`
 
-	// The source of the CMK's key material. When this value is AWS_KMS, AWS KMS
-	// created the key material. When this value is EXTERNAL, the key material was
-	// imported from your existing key management infrastructure or the CMK lacks
-	// key material. When this value is AWS_CLOUDHSM, the key material was created
-	// in the AWS CloudHSM cluster associated with a custom key store.
+	// The source of the CMK's key material.
+	//
+	// When this value is AWS_KMS, AWS KMS created the key material.
+	//
+	// When this value is EXTERNAL, the key material was imported from your existing
+	// key management infrastructure or the CMK lacks key material.
+	//
+	// When this value is AWS_CLOUDHSM, the key material was created in the AWS
+	// CloudHSM cluster associated with a custom key store.
 	Origin *string `type:"string"`
 }
 
@@ -1239,6 +2399,421 @@ func (s AwsLambdaFunctionVpcConfig) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
+// Details about a Lambda layer version.
+type AwsLambdaLayerVersionDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The layer's compatible runtimes. Maximum number of 5 items.
+	//
+	// Valid values: nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6
+	// | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5
+	// | provided
+	CompatibleRuntimes []string `type:"list"`
+
+	// The date that the version was created, in ISO 8601 format. For example, 2018-11-27T15:10:45.123+0000.
+	CreatedDate *string `type:"string"`
+
+	// The version number.
+	Version *int64 `type:"long"`
+}
+
+// String returns the string representation
+func (s AwsLambdaLayerVersionDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsLambdaLayerVersionDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CompatibleRuntimes != nil {
+		v := s.CompatibleRuntimes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "CompatibleRuntimes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.CreatedDate != nil {
+		v := *s.CreatedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// An AWS Identity and Access Management (IAM) role associated with the DB instance.
+type AwsRdsDbInstanceAssociatedRole struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the feature associated with the IAM)role.
+	FeatureName *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) of the IAM role that is associated with the
+	// DB instance.
+	RoleArn *string `type:"string"`
+
+	// Describes the state of the association between the IAM role and the DB instance.
+	// The Status property returns one of the following values:
+	//
+	//    * ACTIVE - the IAM role ARN is associated with the DB instance and can
+	//    be used to access other AWS services on your behalf.
+	//
+	//    * PENDING - the IAM role ARN is being associated with the DB instance.
+	//
+	//    * INVALID - the IAM role ARN is associated with the DB instance, but the
+	//    DB instance is unable to assume the IAM role in order to access other
+	//    AWS services on your behalf.
+	Status *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsRdsDbInstanceAssociatedRole) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsRdsDbInstanceAssociatedRole) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FeatureName != nil {
+		v := *s.FeatureName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FeatureName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Contains the details of an Amazon RDS DB instance.
+type AwsRdsDbInstanceDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The AWS Identity and Access Management (IAM) roles associated with the DB
+	// instance.
+	AssociatedRoles []AwsRdsDbInstanceAssociatedRole `type:"list"`
+
+	// The identifier of the CA certificate for this DB instance.
+	CACertificateIdentifier *string `type:"string"`
+
+	// If the DB instance is a member of a DB cluster, contains the name of the
+	// DB cluster that the DB instance is a member of.
+	DBClusterIdentifier *string `type:"string"`
+
+	// Contains the name of the compute and memory capacity class of the DB instance.
+	DBInstanceClass *string `type:"string"`
+
+	// Contains a user-supplied database identifier. This identifier is the unique
+	// key that identifies a DB instance.
+	DBInstanceIdentifier *string `type:"string"`
+
+	// The meaning of this parameter differs according to the database engine you
+	// use.
+	//
+	// MySQL, MariaDB, SQL Server, PostgreSQL
+	//
+	// Contains the name of the initial database of this instance that was provided
+	// at create time, if one was specified when the DB instance was created. This
+	// same name is returned for the life of the DB instance.
+	//
+	// Oracle
+	//
+	// Contains the Oracle System ID (SID) of the created DB instance. Not shown
+	// when the returned parameters do not apply to an Oracle DB instance.
+	DBName *string `type:"string"`
+
+	// Specifies the port that the DB instance listens on. If the DB instance is
+	// part of a DB cluster, this can be a different port than the DB cluster port.
+	DbInstancePort *int64 `type:"integer"`
+
+	// The AWS Region-unique, immutable identifier for the DB instance. This identifier
+	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
+	// instance is accessed.
+	DbiResourceId *string `type:"string"`
+
+	// Indicates whether the DB instance has deletion protection enabled.
+	//
+	// When deletion protection is enabled, the database cannot be deleted.
+	DeletionProtection *bool `type:"boolean"`
+
+	// Specifies the connection endpoint.
+	Endpoint *AwsRdsDbInstanceEndpoint `type:"structure"`
+
+	// Provides the name of the database engine to use for this DB instance.
+	Engine *string `type:"string"`
+
+	// Indicates the database engine version.
+	EngineVersion *string `type:"string"`
+
+	// True if mapping of AWS Identity and Access Management (IAM) accounts to database
+	// accounts is enabled, and otherwise false.
+	//
+	// IAM database authentication can be enabled for the following database engines.
+	//
+	//    * For MySQL 5.6, minor version 5.6.34 or higher
+	//
+	//    * For MySQL 5.7, minor version 5.7.16 or higher
+	//
+	//    * Aurora 5.6 or higher
+	IAMDatabaseAuthenticationEnabled *bool `type:"boolean"`
+
+	// Provides the date and time the DB instance was created.
+	InstanceCreateTime *string `type:"string"`
+
+	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted
+	// DB instance.
+	KmsKeyId *string `type:"string"`
+
+	// Specifies the accessibility options for the DB instance.
+	//
+	// A value of true specifies an Internet-facing instance with a publicly resolvable
+	// DNS name, which resolves to a public IP address.
+	//
+	// A value of false specifies an internal instance with a DNS name that resolves
+	// to a private IP address.
+	PubliclyAccessible *bool `type:"boolean"`
+
+	// Specifies whether the DB instance is encrypted.
+	StorageEncrypted *bool `type:"boolean"`
+
+	// The ARN from the key store with which the instance is associated for TDE
+	// encryption.
+	TdeCredentialArn *string `type:"string"`
+
+	// A list of VPC security groups that the DB instance belongs to.
+	VpcSecurityGroups []AwsRdsDbInstanceVpcSecurityGroup `type:"list"`
+}
+
+// String returns the string representation
+func (s AwsRdsDbInstanceDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsRdsDbInstanceDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AssociatedRoles != nil {
+		v := s.AssociatedRoles
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "AssociatedRoles", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.CACertificateIdentifier != nil {
+		v := *s.CACertificateIdentifier
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CACertificateIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DBInstanceClass != nil {
+		v := *s.DBInstanceClass
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DBInstanceClass", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DBName != nil {
+		v := *s.DBName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DBName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DbInstancePort != nil {
+		v := *s.DbInstancePort
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DbInstancePort", protocol.Int64Value(v), metadata)
+	}
+	if s.DbiResourceId != nil {
+		v := *s.DbiResourceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DbiResourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DeletionProtection != nil {
+		v := *s.DeletionProtection
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeletionProtection", protocol.BoolValue(v), metadata)
+	}
+	if s.Endpoint != nil {
+		v := s.Endpoint
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Endpoint", v, metadata)
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.IAMDatabaseAuthenticationEnabled != nil {
+		v := *s.IAMDatabaseAuthenticationEnabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IAMDatabaseAuthenticationEnabled", protocol.BoolValue(v), metadata)
+	}
+	if s.InstanceCreateTime != nil {
+		v := *s.InstanceCreateTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InstanceCreateTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PubliclyAccessible != nil {
+		v := *s.PubliclyAccessible
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PubliclyAccessible", protocol.BoolValue(v), metadata)
+	}
+	if s.StorageEncrypted != nil {
+		v := *s.StorageEncrypted
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StorageEncrypted", protocol.BoolValue(v), metadata)
+	}
+	if s.TdeCredentialArn != nil {
+		v := *s.TdeCredentialArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TdeCredentialArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VpcSecurityGroups != nil {
+		v := s.VpcSecurityGroups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "VpcSecurityGroups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Specifies the connection endpoint.
+type AwsRdsDbInstanceEndpoint struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the DNS address of the DB instance.
+	Address *string `type:"string"`
+
+	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
+	HostedZoneId *string `type:"string"`
+
+	// Specifies the port that the database engine is listening on.
+	Port *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s AwsRdsDbInstanceEndpoint) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsRdsDbInstanceEndpoint) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Address != nil {
+		v := *s.Address
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Address", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HostedZoneId != nil {
+		v := *s.HostedZoneId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HostedZoneId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// A VPC security groups that the DB instance belongs to.
+type AwsRdsDbInstanceVpcSecurityGroup struct {
+	_ struct{} `type:"structure"`
+
+	// The status of the VPC security group.
+	Status *string `type:"string"`
+
+	// The name of the VPC security group.
+	VpcSecurityGroupId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsRdsDbInstanceVpcSecurityGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsRdsDbInstanceVpcSecurityGroup) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VpcSecurityGroupId != nil {
+		v := *s.VpcSecurityGroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VpcSecurityGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The details of an Amazon S3 bucket.
 type AwsS3BucketDetails struct {
 	_ struct{} `type:"structure"`
@@ -1274,11 +2849,11 @@ func (s AwsS3BucketDetails) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides consistent format for the contents of the Security Hub-aggregated
 // findings. AwsSecurityFinding format enables you to share findings between
-// AWS security services and third-party solutions, and compliance checks.
+// AWS security services and third-party solutions, and security standards checks.
 //
 // A finding is a potential security issue generated either by AWS services
 // (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated
-// third-party solutions and compliance checks.
+// third-party solutions and standards checks.
 type AwsSecurityFinding struct {
 	_ struct{} `type:"structure"`
 
@@ -1288,12 +2863,13 @@ type AwsSecurityFinding struct {
 	AwsAccountId *string `type:"string" required:"true"`
 
 	// This data type is exclusive to findings that are generated as the result
-	// of a check run against a specific rule in a supported standard (for example,
-	// CIS AWS Foundations). Contains compliance-related finding details.
+	// of a check run against a specific rule in a supported security standard,
+	// such as CIS AWS Foundations. Contains security standard-related finding details.
 	Compliance *Compliance `type:"structure"`
 
 	// A finding's confidence. Confidence is defined as the likelihood that a finding
 	// accurately identifies the behavior or issue that it was intended to identify.
+	//
 	// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means
 	// zero percent confidence and 100 means 100 percent confidence.
 	Confidence *int64 `type:"integer"`
@@ -1305,6 +2881,7 @@ type AwsSecurityFinding struct {
 	CreatedAt *string `type:"string" required:"true"`
 
 	// The level of importance assigned to the resources associated with the finding.
+	//
 	// A score of 0 means that the underlying resources have no criticality, and
 	// a score of 100 is reserved for the most critical resources.
 	Criticality *int64 `type:"integer"`
@@ -1389,7 +2966,7 @@ type AwsSecurityFinding struct {
 	// provider's solution.
 	SourceUrl *string `type:"string"`
 
-	// Threat intel details related to a finding.
+	// Threat intelligence details related to a finding.
 	ThreatIntelIndicators []ThreatIntelIndicator `type:"list"`
 
 	// A finding's title.
@@ -1760,12 +3337,13 @@ type AwsSecurityFindingFilters struct {
 	CompanyName []StringFilter `type:"list"`
 
 	// Exclusive to findings that are generated as the result of a check run against
-	// a specific rule in a supported standard (for example, CIS AWS Foundations).
-	// Contains compliance-related finding details.
+	// a specific rule in a supported standard, such as CIS AWS Foundations. Contains
+	// security standard-related finding details.
 	ComplianceStatus []StringFilter `type:"list"`
 
 	// A finding's confidence. Confidence is defined as the likelihood that a finding
 	// accurately identifies the behavior or issue that it was intended to identify.
+	//
 	// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means
 	// zero percent confidence and 100 means 100 percent confidence.
 	Confidence []NumberFilter `type:"list"`
@@ -1775,6 +3353,7 @@ type AwsSecurityFindingFilters struct {
 	CreatedAt []DateFilter `type:"list"`
 
 	// The level of importance assigned to the resources associated with the finding.
+	//
 	// A score of 0 means that the underlying resources have no criticality, and
 	// a score of 100 is reserved for the most critical resources.
 	Criticality []NumberFilter `type:"list"`
@@ -1914,7 +3493,7 @@ type AwsSecurityFindingFilters struct {
 	// The key name associated with the instance.
 	ResourceAwsEc2InstanceKeyName []StringFilter `type:"list"`
 
-	// The date/time the instance was launched.
+	// The date and time the instance was launched.
 	ResourceAwsEc2InstanceLaunchedAt []DateFilter `type:"list"`
 
 	// The identifier of the subnet that the instance was launched in.
@@ -1987,22 +3566,22 @@ type AwsSecurityFindingFilters struct {
 	// provider's solution.
 	SourceUrl []StringFilter `type:"list"`
 
-	// The category of a threat intel indicator.
+	// The category of a threat intelligence indicator.
 	ThreatIntelIndicatorCategory []StringFilter `type:"list"`
 
-	// The date/time of the last observation of a threat intel indicator.
+	// The date/time of the last observation of a threat intelligence indicator.
 	ThreatIntelIndicatorLastObservedAt []DateFilter `type:"list"`
 
-	// The source of the threat intel.
+	// The source of the threat intelligence.
 	ThreatIntelIndicatorSource []StringFilter `type:"list"`
 
-	// The URL for more details from the source of the threat intel.
+	// The URL for more details from the source of the threat intelligence.
 	ThreatIntelIndicatorSourceUrl []StringFilter `type:"list"`
 
-	// The type of a threat intel indicator.
+	// The type of a threat intelligence indicator.
 	ThreatIntelIndicatorType []StringFilter `type:"list"`
 
-	// The value of a threat intel indicator.
+	// The value of a threat intelligence indicator.
 	ThreatIntelIndicatorValue []StringFilter `type:"list"`
 
 	// A finding's title.
@@ -3179,21 +4758,182 @@ func (s AwsSqsQueueDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Details about a WAF WebACL.
+type AwsWafWebAclDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The action to perform if none of the Rules contained in the WebACL match.
+	DefaultAction *string `type:"string"`
+
+	// A friendly name or description of the WebACL. You can't change the name of
+	// a WebACL after you create it.
+	Name *string `type:"string"`
+
+	// An array that contains the action for each rule in a WebACL, the priority
+	// of the rule, and the ID of the rule.
+	Rules []AwsWafWebAclRule `type:"list"`
+
+	// A unique identifier for a WebACL.
+	WebAclId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsWafWebAclDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsWafWebAclDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DefaultAction != nil {
+		v := *s.DefaultAction
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultAction", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Rules != nil {
+		v := s.Rules
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Rules", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.WebAclId != nil {
+		v := *s.WebAclId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "WebAclId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Details for a rule in a WAF WebACL.
+type AwsWafWebAclRule struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the action that CloudFront or AWS WAF takes when a web request
+	// matches the conditions in the Rule.
+	Action *WafAction `type:"structure"`
+
+	// Rules to exclude from a rule group.
+	ExcludedRules []WafExcludedRule `type:"list"`
+
+	// Use the OverrideAction to test your RuleGroup.
+	//
+	// Any rule in a RuleGroup can potentially block a request. If you set the OverrideAction
+	// to None, the RuleGroup blocks a request if any individual rule in the RuleGroup
+	// matches the request and is configured to block that request.
+	//
+	// However, if you first want to test the RuleGroup, set the OverrideAction
+	// to Count. The RuleGroup then overrides any block action specified by individual
+	// rules contained within the group. Instead of blocking matching requests,
+	// those requests are counted.
+	//
+	// ActivatedRule|OverrideAction applies only when updating or adding a RuleGroup
+	// to a WebACL. In this case you do not use ActivatedRule|Action. For all other
+	// update requests, ActivatedRule|Action is used instead of ActivatedRule|OverrideAction.
+	OverrideAction *WafOverrideAction `type:"structure"`
+
+	// Specifies the order in which the Rules in a WebACL are evaluated. Rules with
+	// a lower value for Priority are evaluated before Rules with a higher value.
+	// The value must be a unique integer. If you add multiple Rules to a WebACL,
+	// the values do not need to be consecutive.
+	Priority *int64 `type:"integer"`
+
+	// The identifier for a Rule.
+	RuleId *string `type:"string"`
+
+	// The rule type.
+	//
+	// Valid values: REGULAR | RATE_BASED | GROUP
+	//
+	// The default is REGULAR.
+	Type *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsWafWebAclRule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsWafWebAclRule) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Action != nil {
+		v := s.Action
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Action", v, metadata)
+	}
+	if s.ExcludedRules != nil {
+		v := s.ExcludedRules
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ExcludedRules", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.OverrideAction != nil {
+		v := s.OverrideAction
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "OverrideAction", v, metadata)
+	}
+	if s.Priority != nil {
+		v := *s.Priority
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Priority", protocol.Int64Value(v), metadata)
+	}
+	if s.RuleId != nil {
+		v := *s.RuleId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RuleId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Exclusive to findings that are generated as the result of a check run against
-// a specific rule in a supported standard (for example, CIS AWS Foundations).
-// Contains compliance-related finding details.
+// a specific rule in a supported security standard, such as CIS AWS Foundations.
+// Contains security standard-related finding details.
 //
 // Values include the following:
 //
-//    * Allowed values are the following: PASSED - Compliance check passed for
+//    * Allowed values are the following: PASSED - Standards check passed for
 //    all evaluated resources. WARNING - Some information is missing or this
-//    check is not supported given your configuration. FAILED - Compliance check
+//    check is not supported given your configuration. FAILED - Standards check
 //    failed for at least one evaluated resource. NOT_AVAILABLE - Check could
-//    not be performed due to a service outage or API error.
+//    not be performed due to a service outage, API error, or because the result
+//    of the AWS Config evaluation was NOT_APPLICABLE. If the AWS Config evaluation
+//    result was NOT_APPLICABLE, then after 3 days, Security Hub automatically
+//    archives the finding.
 type Compliance struct {
 	_ struct{} `type:"structure"`
 
-	// The result of a compliance check.
+	// List of requirements that are related to a standards control.
+	RelatedRequirements []string `type:"list"`
+
+	// The result of a standards check.
 	Status ComplianceStatus `type:"string" enum:"true"`
 }
 
@@ -3204,6 +4944,18 @@ func (s Compliance) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Compliance) MarshalFields(e protocol.FieldEncoder) error {
+	if s.RelatedRequirements != nil {
+		v := s.RelatedRequirements
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "RelatedRequirements", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
@@ -3339,7 +5091,7 @@ func (s DateRange) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Includes details of the list of the findings that can't be imported.
+// Includes details of the list of the findings that cannot be imported.
 type ImportFindingsError struct {
 	_ struct{} `type:"structure"`
 
@@ -3392,8 +5144,8 @@ type Insight struct {
 	_ struct{} `type:"structure"`
 
 	// One or more attributes used to filter the findings included in the insight.
-	// Only findings that match the criteria defined in the filters are included
-	// in the insight.
+	// The insight only includes findings that match the criteria defined in the
+	// filters.
 	//
 	// Filters is a required field
 	Filters *AwsSecurityFindingFilters `type:"structure" required:"true"`
@@ -3558,7 +5310,7 @@ type Invitation struct {
 	// The timestamp of when the invitation was sent.
 	InvitedAt *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
-	// The current status of the association between member and master accounts.
+	// The current status of the association between the member and master accounts.
 	MemberStatus *string `type:"string"`
 }
 
@@ -3649,9 +5401,12 @@ func (s KeywordFilter) MarshalFields(e protocol.FieldEncoder) error {
 type LoadBalancerState struct {
 	_ struct{} `type:"structure"`
 
-	// The state code. The initial state of the load balancer is provisioning. After
-	// the load balancer is fully set up and ready to route traffic, its state is
-	// active. If the load balancer could not be set up, its state is failed.
+	// The state code. The initial state of the load balancer is provisioning.
+	//
+	// After the load balancer is fully set up and ready to route traffic, its state
+	// is active.
+	//
+	// If the load balancer could not be set up, its state is failed.
 	Code *string `type:"string"`
 
 	// A description of the state.
@@ -4234,6 +5989,16 @@ type Product struct {
 	// A description of the product.
 	Description *string `type:"string"`
 
+	// The types of integration that the product supports. Available values are
+	// the following.
+	//
+	//    * SEND_FINDINGS_TO_SECURITY_HUB - Indicates that the integration sends
+	//    findings to Security Hub.
+	//
+	//    * RECEIVE_FINDINGS_FROM_SECURITY_HUB - Indicates that the integration
+	//    receives findings from Security Hub.
+	IntegrationTypes []IntegrationType `type:"list"`
+
 	// The URL for the page that contains more information about the product.
 	MarketplaceUrl *string `type:"string"`
 
@@ -4285,6 +6050,18 @@ func (s Product) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.IntegrationTypes != nil {
+		v := s.IntegrationTypes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "IntegrationTypes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	if s.MarketplaceUrl != nil {
 		v := *s.MarketplaceUrl
@@ -4450,7 +6227,12 @@ type Resource struct {
 	// processed.
 	Tags map[string]string `type:"map"`
 
-	// The type of the resource that details are provided for.
+	// The type of the resource that details are provided for. If possible, set
+	// Type to one of the supported resource types. For example, if the resource
+	// is an EC2 instance, then set Type to AwsEc2Instance.
+	//
+	// If the resource does not match any of the provided types, then set Type to
+	// Other.
 	//
 	// Type is a required field
 	Type *string `type:"string" required:"true"`
@@ -4532,14 +6314,36 @@ func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Additional details about a resource related to a finding.
+//
+// To provide the details, use the object that corresponds to the resource type.
+// For example, if the resource type is AwsEc2Instance, then you use the AwsEc2Instance
+// object to provide the details.
+//
+// If the type-specific object does not contain all of the fields you want to
+// populate, then you use the Other object to populate those additional fields.
+//
+// You also use the Other object to populate the details when the selected type
+// does not have a corresponding object.
 type ResourceDetails struct {
 	_ struct{} `type:"structure"`
 
 	// Details about a CloudFront distribution.
 	AwsCloudFrontDistribution *AwsCloudFrontDistributionDetails `type:"structure"`
 
+	// Details for an AWS CodeBuild project.
+	AwsCodeBuildProject *AwsCodeBuildProjectDetails `type:"structure"`
+
 	// Details about an Amazon EC2 instance related to a finding.
 	AwsEc2Instance *AwsEc2InstanceDetails `type:"structure"`
+
+	// Details for an AWS EC2 network interface.
+	AwsEc2NetworkInterface *AwsEc2NetworkInterfaceDetails `type:"structure"`
+
+	// Details for an EC2 security group.
+	AwsEc2SecurityGroup *AwsEc2SecurityGroupDetails `type:"structure"`
+
+	// Details for an Elasticsearch domain.
+	AwsElasticsearchDomain *AwsElasticsearchDomainDetails `type:"structure"`
 
 	// Details about a load balancer.
 	AwsElbv2LoadBalancer *AwsElbv2LoadBalancerDetails `type:"structure"`
@@ -4556,6 +6360,12 @@ type ResourceDetails struct {
 	// Details about a Lambda function.
 	AwsLambdaFunction *AwsLambdaFunctionDetails `type:"structure"`
 
+	// Details for a Lambda layer version.
+	AwsLambdaLayerVersion *AwsLambdaLayerVersionDetails `type:"structure"`
+
+	// Details for an RDS database instance.
+	AwsRdsDbInstance *AwsRdsDbInstanceDetails `type:"structure"`
+
 	// Details about an Amazon S3 Bucket related to a finding.
 	AwsS3Bucket *AwsS3BucketDetails `type:"structure"`
 
@@ -4565,10 +6375,22 @@ type ResourceDetails struct {
 	// Details about an SQS queue.
 	AwsSqsQueue *AwsSqsQueueDetails `type:"structure"`
 
+	// Details for a WAF WebACL.
+	AwsWafWebAcl *AwsWafWebAclDetails `type:"structure"`
+
 	// Details about a container resource related to a finding.
 	Container *ContainerDetails `type:"structure"`
 
-	// Details about a resource that doesn't have a specific type defined.
+	// Details about a resource that are not available in a type-specific details
+	// object. Use the Other object in the following cases.
+	//
+	//    * The type-specific object does not contain all of the fields that you
+	//    want to populate. In this case, first use the type-specific object to
+	//    populate those fields. Use the Other object to populate the fields that
+	//    are missing from the type-specific object.
+	//
+	//    * The resource type does not have a corresponding object. This includes
+	//    resources for which the type is Other.
 	Other map[string]string `type:"map"`
 }
 
@@ -4600,11 +6422,35 @@ func (s ResourceDetails) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "AwsCloudFrontDistribution", v, metadata)
 	}
+	if s.AwsCodeBuildProject != nil {
+		v := s.AwsCodeBuildProject
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AwsCodeBuildProject", v, metadata)
+	}
 	if s.AwsEc2Instance != nil {
 		v := s.AwsEc2Instance
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "AwsEc2Instance", v, metadata)
+	}
+	if s.AwsEc2NetworkInterface != nil {
+		v := s.AwsEc2NetworkInterface
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AwsEc2NetworkInterface", v, metadata)
+	}
+	if s.AwsEc2SecurityGroup != nil {
+		v := s.AwsEc2SecurityGroup
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AwsEc2SecurityGroup", v, metadata)
+	}
+	if s.AwsElasticsearchDomain != nil {
+		v := s.AwsElasticsearchDomain
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AwsElasticsearchDomain", v, metadata)
 	}
 	if s.AwsElbv2LoadBalancer != nil {
 		v := s.AwsElbv2LoadBalancer
@@ -4636,6 +6482,18 @@ func (s ResourceDetails) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "AwsLambdaFunction", v, metadata)
 	}
+	if s.AwsLambdaLayerVersion != nil {
+		v := s.AwsLambdaLayerVersion
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AwsLambdaLayerVersion", v, metadata)
+	}
+	if s.AwsRdsDbInstance != nil {
+		v := s.AwsRdsDbInstance
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AwsRdsDbInstance", v, metadata)
+	}
 	if s.AwsS3Bucket != nil {
 		v := s.AwsS3Bucket
 
@@ -4653,6 +6511,12 @@ func (s ResourceDetails) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "AwsSqsQueue", v, metadata)
+	}
+	if s.AwsWafWebAcl != nil {
+		v := s.AwsWafWebAcl
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AwsWafWebAcl", v, metadata)
 	}
 	if s.Container != nil {
 		v := s.Container
@@ -4675,14 +6539,14 @@ func (s ResourceDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Details about the account that wasn't processed.
+// Details about the account that was not processed.
 type Result struct {
 	_ struct{} `type:"structure"`
 
-	// An AWS account ID of the account that wasn't be processed.
+	// An AWS account ID of the account that was not processed.
 	AccountId *string `type:"string"`
 
-	// The reason that the account wasn't be processed.
+	// The reason that the account was not processed.
 	ProcessingResult *string `type:"string"`
 }
 
@@ -4791,43 +6655,88 @@ func (s SortCriterion) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Details for an individual compliance standard control.
+// Provides information about a specific standard.
+type Standard struct {
+	_ struct{} `type:"structure"`
+
+	// A description of the standard.
+	Description *string `type:"string"`
+
+	// The name of the standard.
+	Name *string `type:"string"`
+
+	// The ARN of a standard.
+	StandardsArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Standard) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Standard) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.StandardsArn != nil {
+		v := *s.StandardsArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StandardsArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Details for an individual security standard control.
 type StandardsControl struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the compliance standard control.
+	// The identifier of the security standard control.
 	ControlId *string `type:"string"`
 
-	// The current status of the compliance standard control. Indicates whether
-	// the control is enabled or disabled. Security Hub does not check against disabled
+	// The current status of the security standard control. Indicates whether the
+	// control is enabled or disabled. Security Hub does not check against disabled
 	// controls.
 	ControlStatus ControlStatus `type:"string" enum:"true"`
 
-	// The date and time that the status of the compliance standard control was
-	// most recently updated.
+	// The date and time that the status of the security standard control was most
+	// recently updated.
 	ControlStatusUpdatedAt *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
-	// The longer description of the compliance standard control. Provides information
+	// The longer description of the security standard control. Provides information
 	// about what the control is checking for.
 	Description *string `type:"string"`
 
 	// The reason provided for the most recent change in status for the control.
 	DisabledReason *string `type:"string"`
 
+	// The list of requirements that are related to this control.
+	RelatedRequirements []string `type:"list"`
+
 	// A link to remediation information for the control in the Security Hub user
-	// documentation
+	// documentation.
 	RemediationUrl *string `type:"string"`
 
-	// The severity of findings generated from this compliance standard control.
+	// The severity of findings generated from this security standard control.
 	//
 	// The finding severity is based on an assessment of how easy it would be to
-	// compromise AWS resources if the compliance issue is detected.
+	// compromise AWS resources if the issue is detected.
 	SeverityRating SeverityRating `type:"string" enum:"true"`
 
-	// The ARN of the compliance standard control.
+	// The ARN of the security standard control.
 	StandardsControlArn *string `type:"string"`
 
-	// The title of the compliance standard control.
+	// The title of the security standard control.
 	Title *string `type:"string"`
 }
 
@@ -4869,6 +6778,18 @@ func (s StandardsControl) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DisabledReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.RelatedRequirements != nil {
+		v := s.RelatedRequirements
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "RelatedRequirements", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	if s.RemediationUrl != nil {
 		v := *s.RemediationUrl
 
@@ -4901,9 +6822,6 @@ type StandardsSubscription struct {
 	_ struct{} `type:"structure"`
 
 	// The ARN of a standard.
-	//
-	// In this release, Security Hub supports only the CIS AWS Foundations standard,
-	// which uses the following ARN: arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0.
 	//
 	// StandardsArn is a required field
 	StandardsArn *string `type:"string" required:"true"`
@@ -4968,11 +6886,8 @@ func (s StandardsSubscription) MarshalFields(e protocol.FieldEncoder) error {
 type StandardsSubscriptionRequest struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the standard that you want to enable.
-	//
-	// In this release, Security Hub only supports the CIS AWS Foundations standard.
-	//
-	// Its ARN is arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0.
+	// The ARN of the standard that you want to enable. To view the list of available
+	// standards and their ARNs, use the DescribeStandards operation.
 	//
 	// StandardsArn is a required field
 	StandardsArn *string `type:"string" required:"true"`
@@ -5056,28 +6971,28 @@ func (s StringFilter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Details about the threat intel related to a finding.
+// Details about the threat intelligence related to a finding.
 type ThreatIntelIndicator struct {
 	_ struct{} `type:"structure"`
 
-	// The category of a threat intel indicator.
+	// The category of a threat intelligence indicator.
 	Category ThreatIntelIndicatorCategory `type:"string" enum:"true"`
 
-	// The date and time when the most recent instance of a threat intel indicator
-	// was observed.
+	// The date and time when the most recent instance of a threat intelligence
+	// indicator was observed.
 	LastObservedAt *string `type:"string"`
 
-	// The source of the threat intel indicator.
+	// The source of the threat intelligence indicator.
 	Source *string `type:"string"`
 
 	// The URL to the page or site where you can get more information about the
-	// threat intel indicator.
+	// threat intelligence indicator.
 	SourceUrl *string `type:"string"`
 
-	// The type of a threat intel indicator.
+	// The type of threat intelligence indicator.
 	Type ThreatIntelIndicatorType `type:"string" enum:"true"`
 
-	// The value of a threat intel indicator.
+	// The value of a threat intelligence indicator.
 	Value *string `type:"string"`
 }
 
@@ -5123,6 +7038,93 @@ func (s ThreatIntelIndicator) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Details about the action that CloudFront or AWS WAF takes when a web request
+// matches the conditions in the Rule.
+type WafAction struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies how you want AWS WAF to respond to requests that match the settings
+	// in a Rule.
+	//
+	// Valid settings include the following:
+	//
+	//    * ALLOW - AWS WAF allows requests
+	//
+	//    * BLOCK - AWS WAF blocks requests
+	//
+	//    * COUNT - AWS WAF increments a counter of the requests that match all
+	//    of the conditions in the rule. AWS WAF then continues to inspect the web
+	//    request based on the remaining rules in the web ACL. You can't specify
+	//    COUNT for the default action for a WebACL.
+	Type *string `type:"string"`
+}
+
+// String returns the string representation
+func (s WafAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s WafAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Type != nil {
+		v := *s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Details about a rule to exclude from a rule group.
+type WafExcludedRule struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for the rule to exclude from the rule group.
+	RuleId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s WafExcludedRule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s WafExcludedRule) MarshalFields(e protocol.FieldEncoder) error {
+	if s.RuleId != nil {
+		v := *s.RuleId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RuleId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Details about an override action for a rule.
+type WafOverrideAction struct {
+	_ struct{} `type:"structure"`
+
+	// COUNT overrides the action specified by the individual rule within a RuleGroup .
+	//
+	// If set to NONE, the rule's action takes place.
+	Type *string `type:"string"`
+}
+
+// String returns the string representation
+func (s WafOverrideAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s WafOverrideAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Type != nil {
+		v := *s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

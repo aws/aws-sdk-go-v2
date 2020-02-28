@@ -94,6 +94,7 @@ type DescribeSecretOutput struct {
 	// The user-provided friendly name of the secret.
 	Name *string `min:"1" type:"string"`
 
+	// Returns the name of the service that created this secret.
 	OwningService *string `min:"1" type:"string"`
 
 	// Specifies whether automatic rotation is enabled for this secret.

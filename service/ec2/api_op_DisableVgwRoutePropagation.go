@@ -15,6 +15,8 @@ import (
 type DisableVgwRoutePropagationInput struct {
 	_ struct{} `type:"structure"`
 
+	DryRun *bool `type:"boolean"`
+
 	// The ID of the virtual private gateway.
 	//
 	// GatewayId is a required field

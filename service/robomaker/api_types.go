@@ -14,6 +14,49 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Information about the batch policy.
+type BatchPolicy struct {
+	_ struct{} `type:"structure"`
+
+	// The number of active simulation jobs create as part of the batch that can
+	// be in an active state at the same time.
+	//
+	// Active states include: Pending,Preparing, Running, Restarting, RunningFailed
+	// and Terminating. All other states are terminal states.
+	MaxConcurrency *int64 `locationName:"maxConcurrency" type:"integer"`
+
+	// The amount of time, in seconds, to wait for the batch to complete.
+	//
+	// If a batch times out, and there are pending requests that were failing due
+	// to an internal failure (like InternalServiceError), they will be moved to
+	// the failed list and the batch status will be Failed. If the pending requests
+	// were failing for any other reason, the failed pending requests will be moved
+	// to the failed list and the batch status will be TimedOut.
+	TimeoutInSeconds *int64 `locationName:"timeoutInSeconds" type:"long"`
+}
+
+// String returns the string representation
+func (s BatchPolicy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BatchPolicy) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MaxConcurrency != nil {
+		v := *s.MaxConcurrency
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxConcurrency", protocol.Int64Value(v), metadata)
+	}
+	if s.TimeoutInSeconds != nil {
+		v := *s.TimeoutInSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timeoutInSeconds", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Information about a data source.
 type DataSource struct {
 	_ struct{} `type:"structure"`
@@ -495,6 +538,59 @@ func (s DeploymentLaunchConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "preLaunchFile", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Information about a failed create simulation job request.
+type FailedCreateSimulationJobRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The time, in milliseconds since the epoch, when the simulation job batch
+	// failed.
+	FailedAt *time.Time `locationName:"failedAt" type:"timestamp"`
+
+	// The failure code.
+	FailureCode SimulationJobErrorCode `locationName:"failureCode" type:"string" enum:"true"`
+
+	// The failure reason of the simulation job request.
+	FailureReason *string `locationName:"failureReason" type:"string"`
+
+	// The simulation job request.
+	Request *SimulationJobRequest `locationName:"request" type:"structure"`
+}
+
+// String returns the string representation
+func (s FailedCreateSimulationJobRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FailedCreateSimulationJobRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FailedAt != nil {
+		v := *s.FailedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "failedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if len(s.FailureCode) > 0 {
+		v := s.FailureCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "failureCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.FailureReason != nil {
+		v := *s.FailureReason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "failureReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Request != nil {
+		v := s.Request
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "request", v, metadata)
 	}
 	return nil
 }
@@ -1262,7 +1358,7 @@ type RobotApplicationSummary struct {
 	// The name of the robot application.
 	Name *string `locationName:"name" min:"1" type:"string"`
 
-	// Information about a robot software suite.
+	// Information about a robot software suite (ROS distribution).
 	RobotSoftwareSuite *RobotSoftwareSuite `locationName:"robotSoftwareSuite" type:"structure"`
 
 	// The version of the robot application.
@@ -1390,14 +1486,14 @@ func (s RobotDeployment) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information about a robot software suite.
+// Information about a robot software suite (ROS distribution).
 type RobotSoftwareSuite struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the robot software suite.
+	// The name of the robot software suite (ROS distribution).
 	Name RobotSoftwareSuiteType `locationName:"name" type:"string" enum:"true"`
 
-	// The version of the robot software suite.
+	// The version of the robot software suite (ROS distribution).
 	Version RobotSoftwareSuiteVersionType `locationName:"version" type:"string" enum:"true"`
 }
 
@@ -1615,7 +1711,7 @@ type SimulationApplicationSummary struct {
 	// The name of the simulation application.
 	Name *string `locationName:"name" min:"1" type:"string"`
 
-	// Information about a robot software suite.
+	// Information about a robot software suite (ROS distribution).
 	RobotSoftwareSuite *RobotSoftwareSuite `locationName:"robotSoftwareSuite" type:"structure"`
 
 	// Information about a simulation software suite.
@@ -1897,6 +1993,355 @@ func (s SimulationJob) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	if s.VpcConfig != nil {
+		v := s.VpcConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "vpcConfig", v, metadata)
+	}
+	return nil
+}
+
+// Information about a simulation job batch.
+type SimulationJobBatchSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the batch.
+	Arn *string `locationName:"arn" min:"1" type:"string"`
+
+	// The time, in milliseconds since the epoch, when the simulation job batch
+	// was created.
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
+
+	// The number of created simulation job requests.
+	CreatedRequestCount *int64 `locationName:"createdRequestCount" type:"integer"`
+
+	// The number of failed simulation job requests.
+	FailedRequestCount *int64 `locationName:"failedRequestCount" type:"integer"`
+
+	// The time, in milliseconds since the epoch, when the simulation job batch
+	// was last updated.
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
+
+	// The number of pending simulation job requests.
+	PendingRequestCount *int64 `locationName:"pendingRequestCount" type:"integer"`
+
+	// The status of the simulation job batch.
+	//
+	// Pending
+	//
+	// The simulation job batch request is pending.
+	//
+	// InProgress
+	//
+	// The simulation job batch is in progress.
+	//
+	// Failed
+	//
+	// The simulation job batch failed. One or more simulation job requests could
+	// not be completed due to an internal failure (like InternalServiceError).
+	// See failureCode and failureReason for more information.
+	//
+	// Completed
+	//
+	// The simulation batch job completed. A batch is complete when (1) there are
+	// no pending simulation job requests in the batch and none of the failed simulation
+	// job requests are due to InternalServiceError and (2) when all created simulation
+	// jobs have reached a terminal state (for example, Completed or Failed).
+	//
+	// Canceled
+	//
+	// The simulation batch job was cancelled.
+	//
+	// Canceling
+	//
+	// The simulation batch job is being cancelled.
+	//
+	// Completing
+	//
+	// The simulation batch job is completing.
+	//
+	// TimingOut
+	//
+	// The simulation job batch is timing out.
+	//
+	// If a batch timing out, and there are pending requests that were failing due
+	// to an internal failure (like InternalServiceError), the batch status will
+	// be Failed. If there are no such failing request, the batch status will be
+	// TimedOut.
+	//
+	// TimedOut
+	//
+	// The simulation batch job timed out.
+	Status SimulationJobBatchStatus `locationName:"status" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s SimulationJobBatchSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SimulationJobBatchSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.CreatedRequestCount != nil {
+		v := *s.CreatedRequestCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdRequestCount", protocol.Int64Value(v), metadata)
+	}
+	if s.FailedRequestCount != nil {
+		v := *s.FailedRequestCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "failedRequestCount", protocol.Int64Value(v), metadata)
+	}
+	if s.LastUpdatedAt != nil {
+		v := *s.LastUpdatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.PendingRequestCount != nil {
+		v := *s.PendingRequestCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pendingRequestCount", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Information about a simulation job request.
+type SimulationJobRequest struct {
+	_ struct{} `type:"structure"`
+
+	// Specify data sources to mount read-only files from S3 into your simulation.
+	// These files are available under /opt/robomaker/datasources/data_source_name.
+	//
+	// There is a limit of 100 files and a combined size of 25GB for all DataSourceConfig
+	// objects.
+	DataSources []DataSourceConfig `locationName:"dataSources" min:"1" type:"list"`
+
+	// The failure behavior the simulation job.
+	//
+	// Continue
+	//
+	// Restart the simulation job in the same host instance.
+	//
+	// Fail
+	//
+	// Stop the simulation job and terminate the instance.
+	FailureBehavior FailureBehavior `locationName:"failureBehavior" type:"string" enum:"true"`
+
+	// The IAM role name that allows the simulation instance to call the AWS APIs
+	// that are specified in its associated policies on your behalf. This is how
+	// credentials are passed in to your simulation job.
+	IamRole *string `locationName:"iamRole" min:"1" type:"string"`
+
+	// The logging configuration.
+	LoggingConfig *LoggingConfig `locationName:"loggingConfig" type:"structure"`
+
+	// The maximum simulation job duration in seconds. The value must be 8 days
+	// (691,200 seconds) or less.
+	//
+	// MaxJobDurationInSeconds is a required field
+	MaxJobDurationInSeconds *int64 `locationName:"maxJobDurationInSeconds" type:"long" required:"true"`
+
+	// The output location.
+	OutputLocation *OutputLocation `locationName:"outputLocation" type:"structure"`
+
+	// The robot applications to use in the simulation job.
+	RobotApplications []RobotApplicationConfig `locationName:"robotApplications" min:"1" type:"list"`
+
+	// The simulation applications to use in the simulation job.
+	SimulationApplications []SimulationApplicationConfig `locationName:"simulationApplications" min:"1" type:"list"`
+
+	// A map that contains tag keys and tag values that are attached to the simulation
+	// job request.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
+	// Boolean indicating whether to use default simulation tool applications.
+	UseDefaultApplications *bool `locationName:"useDefaultApplications" type:"boolean"`
+
+	// If your simulation job accesses resources in a VPC, you provide this parameter
+	// identifying the list of security group IDs and subnet IDs. These must belong
+	// to the same VPC. You must provide at least one security group and two subnet
+	// IDs.
+	VpcConfig *VPCConfig `locationName:"vpcConfig" type:"structure"`
+}
+
+// String returns the string representation
+func (s SimulationJobRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SimulationJobRequest) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SimulationJobRequest"}
+	if s.DataSources != nil && len(s.DataSources) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DataSources", 1))
+	}
+	if s.IamRole != nil && len(*s.IamRole) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("IamRole", 1))
+	}
+
+	if s.MaxJobDurationInSeconds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MaxJobDurationInSeconds"))
+	}
+	if s.RobotApplications != nil && len(s.RobotApplications) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RobotApplications", 1))
+	}
+	if s.SimulationApplications != nil && len(s.SimulationApplications) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SimulationApplications", 1))
+	}
+	if s.DataSources != nil {
+		for i, v := range s.DataSources {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DataSources", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.LoggingConfig != nil {
+		if err := s.LoggingConfig.Validate(); err != nil {
+			invalidParams.AddNested("LoggingConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.OutputLocation != nil {
+		if err := s.OutputLocation.Validate(); err != nil {
+			invalidParams.AddNested("OutputLocation", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.RobotApplications != nil {
+		for i, v := range s.RobotApplications {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RobotApplications", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SimulationApplications != nil {
+		for i, v := range s.SimulationApplications {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SimulationApplications", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.VpcConfig != nil {
+		if err := s.VpcConfig.Validate(); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SimulationJobRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DataSources != nil {
+		v := s.DataSources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "dataSources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.FailureBehavior) > 0 {
+		v := s.FailureBehavior
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "failureBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.IamRole != nil {
+		v := *s.IamRole
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "iamRole", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LoggingConfig != nil {
+		v := s.LoggingConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "loggingConfig", v, metadata)
+	}
+	if s.MaxJobDurationInSeconds != nil {
+		v := *s.MaxJobDurationInSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxJobDurationInSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.OutputLocation != nil {
+		v := s.OutputLocation
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "outputLocation", v, metadata)
+	}
+	if s.RobotApplications != nil {
+		v := s.RobotApplications
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "robotApplications", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.SimulationApplications != nil {
+		v := s.SimulationApplications
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "simulationApplications", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.UseDefaultApplications != nil {
+		v := *s.UseDefaultApplications
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "useDefaultApplications", protocol.BoolValue(v), metadata)
 	}
 	if s.VpcConfig != nil {
 		v := s.VpcConfig

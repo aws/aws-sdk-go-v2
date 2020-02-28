@@ -168,6 +168,25 @@ func (s *CompletionReport) Validate() error {
 type CreateFileSystemLustreConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// (Optional) Choose SCRATCH_1 and SCRATCH_2 deployment types when you need
+	// temporary storage and shorter-term processing of data. The SCRATCH_2 deployment
+	// type provides in-transit encryption of data and higher burst throughput capacity
+	// than SCRATCH_1.
+	//
+	// Choose PERSISTENT_1 deployment type for longer-term storage and workloads
+	// and encryption of data in transit. To learn more about deployment types,
+	// see FSx for Lustre Deployment Options (https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html).
+	//
+	// Encryption of data in-transit is automatically enabled when you access a
+	// SCRATCH_2 or PERSISTENT_1 file system from Amazon EC2 instances that support
+	// this feature (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data- protection.html).
+	// (Default = SCRATCH_1)
+	//
+	// Encryption of data in-transit for SCRATCH_2 and PERSISTENT_1 deployment types
+	// is supported when accessed from supported instance types in supported AWS
+	// Regions. To learn more, Encrypting Data in Transit (https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html).
+	DeploymentType LustreDeploymentType `type:"string" enum:"true"`
+
 	// (Optional) The path in Amazon S3 where the root of your Amazon FSx file system
 	// is exported. The path must use the same Amazon S3 bucket as specified in
 	// ImportPath. You can provide an optional prefix to which new and changed data
@@ -198,9 +217,20 @@ type CreateFileSystemLustreConfiguration struct {
 	// be striped across is limited by the total number of disks that make up the
 	// file system.
 	//
-	// The chunk size default is 1,024 MiB (1 GiB) and can go as high as 512,000
+	// The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000
 	// MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.
 	ImportedFileChunkSize *int64 `min:"1" type:"integer"`
+
+	// (Optional) For the PERSISTENT_1 deployment type, describes the amount of
+	// read and write throughput for each 1 tebibyte of storage, in MB/s/TiB. File
+	// system throughput capacity is calculated by multiplying ﬁle system storage
+	// capacity (TiB) by the PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB
+	// ﬁle system, provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields
+	// 120 MB/s of ﬁle system throughput. You pay for the amount of throughput
+	// that you provision. (Default = 200 MB/s/TiB)
+	//
+	// Valid values are 50, 100, 200.
+	PerUnitStorageThroughput *int64 `min:"50" type:"integer"`
 
 	// The preferred time to perform weekly maintenance, in the UTC time zone.
 	WeeklyMaintenanceStartTime *string `min:"7" type:"string"`
@@ -222,6 +252,9 @@ func (s *CreateFileSystemLustreConfiguration) Validate() error {
 	}
 	if s.ImportedFileChunkSize != nil && *s.ImportedFileChunkSize < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("ImportedFileChunkSize", 1))
+	}
+	if s.PerUnitStorageThroughput != nil && *s.PerUnitStorageThroughput < 50 {
+		invalidParams.Add(aws.NewErrParamMinValue("PerUnitStorageThroughput", 50))
 	}
 	if s.WeeklyMaintenanceStartTime != nil && len(*s.WeeklyMaintenanceStartTime) < 7 {
 		invalidParams.Add(aws.NewErrParamMinLen("WeeklyMaintenanceStartTime", 7))
@@ -251,7 +284,9 @@ type CreateFileSystemWindowsConfiguration struct {
 	// to backups. This value defaults to false. If it's set to true, all tags for
 	// the file system are copied to all automatic and user-initiated backups where
 	// the user doesn't specify tags. If this value is true, and you specify one
-	// or more tags, only the specified tags are copied to backups.
+	// or more tags, only the specified tags are copied to backups. If you specify
+	// one or more tags when creating a user-initiated backup, no tags are copied
+	// from the file system, regardless of this value.
 	CopyTagsToBackups *bool `type:"boolean"`
 
 	// The preferred time to take daily automatic backups, formatted HH:MM in the
@@ -612,8 +647,12 @@ type FileSystem struct {
 	FileSystemType FileSystemType `type:"string" enum:"true"`
 
 	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the
-	// file system's data for an Amazon FSx for Windows File Server file system.
-	// Amazon FSx for Lustre does not support KMS encryption.
+	// file system's data for Amazon FSx for Windows File Server file systems and
+	// persistent Amazon FSx for Lustre file systems at rest. In either case, if
+	// not specified, the Amazon FSx managed key is used. The scratch Amazon FSx
+	// for Lustre file systems are always encrypted at rest using Amazon FSx managed
+	// keys. For more information, see Encrypt (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html)
+	// in the AWS Key Management Service API Reference.
 	KmsKeyId *string `min:"1" type:"string"`
 
 	// The lifecycle status of the file system, following are the possible values
@@ -723,6 +762,23 @@ type LustreFileSystemConfiguration struct {
 	// The data repository configuration object for Lustre file systems returned
 	// in the response of the CreateFileSystem operation.
 	DataRepositoryConfiguration *DataRepositoryConfiguration `type:"structure"`
+
+	// The deployment type of the FSX for Lustre file system.
+	DeploymentType LustreDeploymentType `type:"string" enum:"true"`
+
+	// You use the MountName value when mounting the file system.
+	//
+	// For the SCRATCH_1 deployment type, this value is always "fsx". For SCRATCH_2
+	// and PERSISTENT_1 deployment types, this value is a string that is unique
+	// within an AWS Region.
+	MountName *string `min:"1" type:"string"`
+
+	// Per unit storage throughput represents the megabytes per second of read or
+	// write throughput per 1 tebibyte of storage provisioned. File system throughput
+	// capacity is equal to Storage capacity (TiB) * PerUnitStorageThroughput (MB/s/TiB).
+	// This option is only valid for PERSISTENT_1 deployment types. Valid values
+	// are 50, 100, 200.
+	PerUnitStorageThroughput *int64 `min:"50" type:"integer"`
 
 	// The UTC time that you want to begin your weekly maintenance window.
 	WeeklyMaintenanceStartTime *string `min:"7" type:"string"`
@@ -1045,6 +1101,8 @@ type WindowsFileSystemConfiguration struct {
 	// the file system are copied to all automatic backups and any user-initiated
 	// backups where the user doesn't specify any tags. If this value is true, and
 	// you specify one or more tags, only the specified tags are copied to backups.
+	// If you specify one or more tags when creating a user-initiated backup, no
+	// tags are copied from the file system, regardless of this value.
 	CopyTagsToBackups *bool `type:"boolean"`
 
 	// The preferred time to take daily automatic backups, in the UTC time zone.

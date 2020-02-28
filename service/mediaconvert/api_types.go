@@ -796,8 +796,7 @@ type AudioNormalizationSettings struct {
 	AlgorithmControl AudioNormalizationAlgorithmControl `locationName:"algorithmControl" type:"string" enum:"true"`
 
 	// Content measuring above this level will be corrected to the target level.
-	// Content measuring below this level will not be corrected. Gating only applies
-	// when not using real_time_correction.
+	// Content measuring below this level will not be corrected.
 	CorrectionGateLevel *int64 `locationName:"correctionGateLevel" type:"integer"`
 
 	// If set to LOG, log each output's audio track loudness to a CSV file.
@@ -4436,11 +4435,22 @@ type H264QvbrSettings struct {
 	MaxAverageBitrate *int64 `locationName:"maxAverageBitrate" min:"1000" type:"integer"`
 
 	// Required when you use QVBR rate control mode. That is, when you specify qvbrSettings
-	// within h264Settings. Specify the target quality level for this output, from
-	// 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly
-	// lossless compression. The quality level for most broadcast-quality transcodes
-	// is between 6 and 9.
+	// within h264Settings. Specify the general target quality level for this output,
+	// from 1 to 10. Use higher numbers for greater quality. Level 10 results in
+	// nearly lossless compression. The quality level for most broadcast-quality
+	// transcodes is between 6 and 9. Optionally, to specify a value between whole
+	// numbers, also provide a value for the setting qvbrQualityLevelFineTune. For
+	// example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel
+	// to 7 and set qvbrQualityLevelFineTune to .33.
 	QvbrQualityLevel *int64 `locationName:"qvbrQualityLevel" min:"1" type:"integer"`
+
+	// Optional. Specify a value here to set the QVBR quality to a level that is
+	// between whole numbers. For example, if you want your QVBR quality level to
+	// be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+	// MediaConvert rounds your QVBR quality level to the nearest third of a whole
+	// number. For example, if you set qvbrQualityLevel to 7 and you set qvbrQualityLevelFineTune
+	// to .25, your actual QVBR quality level is 7.33.
+	QvbrQualityLevelFineTune *float64 `locationName:"qvbrQualityLevelFineTune" type:"double"`
 }
 
 // String returns the string representation
@@ -4477,6 +4487,12 @@ func (s H264QvbrSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "qvbrQualityLevel", protocol.Int64Value(v), metadata)
+	}
+	if s.QvbrQualityLevelFineTune != nil {
+		v := *s.QvbrQualityLevelFineTune
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "qvbrQualityLevelFineTune", protocol.Float64Value(v), metadata)
 	}
 	return nil
 }
@@ -4976,11 +4992,22 @@ type H265QvbrSettings struct {
 	MaxAverageBitrate *int64 `locationName:"maxAverageBitrate" min:"1000" type:"integer"`
 
 	// Required when you use QVBR rate control mode. That is, when you specify qvbrSettings
-	// within h265Settings. Specify the target quality level for this output, from
-	// 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly
-	// lossless compression. The quality level for most broadcast-quality transcodes
-	// is between 6 and 9.
+	// within h265Settings. Specify the general target quality level for this output,
+	// from 1 to 10. Use higher numbers for greater quality. Level 10 results in
+	// nearly lossless compression. The quality level for most broadcast-quality
+	// transcodes is between 6 and 9. Optionally, to specify a value between whole
+	// numbers, also provide a value for the setting qvbrQualityLevelFineTune. For
+	// example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel
+	// to 7 and set qvbrQualityLevelFineTune to .33.
 	QvbrQualityLevel *int64 `locationName:"qvbrQualityLevel" min:"1" type:"integer"`
+
+	// Optional. Specify a value here to set the QVBR quality to a level that is
+	// between whole numbers. For example, if you want your QVBR quality level to
+	// be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+	// MediaConvert rounds your QVBR quality level to the nearest third of a whole
+	// number. For example, if you set qvbrQualityLevel to 7 and you set qvbrQualityLevelFineTune
+	// to .25, your actual QVBR quality level is 7.33.
+	QvbrQualityLevelFineTune *float64 `locationName:"qvbrQualityLevelFineTune" type:"double"`
 }
 
 // String returns the string representation
@@ -5017,6 +5044,12 @@ func (s H265QvbrSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "qvbrQualityLevel", protocol.Int64Value(v), metadata)
+	}
+	if s.QvbrQualityLevelFineTune != nil {
+		v := *s.QvbrQualityLevelFineTune
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "qvbrQualityLevelFineTune", protocol.Float64Value(v), metadata)
 	}
 	return nil
 }
@@ -6271,7 +6304,10 @@ type HlsSettings struct {
 	// manifest
 	IFrameOnlyManifest HlsIFrameOnlyManifest `locationName:"iFrameOnlyManifest" type:"string" enum:"true"`
 
-	// String concatenated to end of segment filenames. Accepts "Format Identifiers":#format_identifier_parameters.
+	// Use this setting to add an identifying string to the filename of each segment.
+	// The service adds this string between the name modifier and segment index
+	// number. You can use format identifiers in the string. For more information,
+	// see https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html
 	SegmentModifier *string `locationName:"segmentModifier" type:"string"`
 }
 

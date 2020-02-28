@@ -4,7 +4,6 @@ package groundstation
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -14,6 +13,8 @@ import (
 type GetSatelliteInput struct {
 	_ struct{} `type:"structure"`
 
+	// UUID of a satellite.
+	//
 	// SatelliteId is a required field
 	SatelliteId *string `location:"uri" locationName:"satelliteId" type:"string" required:"true"`
 }
@@ -53,17 +54,17 @@ func (s GetSatelliteInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetSatelliteOutput struct {
 	_ struct{} `type:"structure"`
 
-	DateCreated *time.Time `locationName:"dateCreated" type:"timestamp"`
+	// A list of ground stations to which the satellite is on-boarded.
+	GroundStations []string `locationName:"groundStations" type:"list"`
 
-	LastUpdated *time.Time `locationName:"lastUpdated" type:"timestamp"`
-
+	// NORAD satellite ID number.
 	NoradSatelliteID *int64 `locationName:"noradSatelliteID" min:"1" type:"integer"`
 
+	// ARN of a satellite.
 	SatelliteArn *string `locationName:"satelliteArn" type:"string"`
 
+	// UUID of a satellite.
 	SatelliteId *string `locationName:"satelliteId" min:"1" type:"string"`
-
-	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -73,19 +74,17 @@ func (s GetSatelliteOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetSatelliteOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DateCreated != nil {
-		v := *s.DateCreated
+	if s.GroundStations != nil {
+		v := s.GroundStations
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "dateCreated",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.LastUpdated != nil {
-		v := *s.LastUpdated
+		ls0 := e.List(protocol.BodyTarget, "groundStations", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
 
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdated",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.NoradSatelliteID != nil {
 		v := *s.NoradSatelliteID
@@ -104,18 +103,6 @@ func (s GetSatelliteOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "satelliteId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
 	}
 	return nil
 }

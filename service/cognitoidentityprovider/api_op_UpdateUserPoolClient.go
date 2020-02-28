@@ -13,18 +13,27 @@ import (
 type UpdateUserPoolClientInput struct {
 	_ struct{} `type:"structure"`
 
+	// The allowed OAuth flows.
+	//
 	// Set to code to initiate a code grant flow, which provides an authorization
 	// code as the response. This code can be exchanged for access tokens with the
 	// token endpoint.
+	//
+	// Set to implicit to specify that the client should get the access token (and,
+	// optionally, ID token, based on scopes) directly.
+	//
+	// Set to client_credentials to specify that the client should get the access
+	// token (and, optionally, ID token, based on scopes) from the token endpoint
+	// using a combination of client and client_secret.
 	AllowedOAuthFlows []OAuthFlowType `type:"list"`
 
-	// Set to TRUE if the client is allowed to follow the OAuth protocol when interacting
+	// Set to true if the client is allowed to follow the OAuth protocol when interacting
 	// with Cognito user pools.
 	AllowedOAuthFlowsUserPoolClient *bool `type:"boolean"`
 
-	// A list of allowed OAuth scopes. Currently supported values are "phone", "email",
-	// "openid", and "Cognito". In addition to these values, custom scopes created
-	// in Resource Servers are also supported.
+	// The allowed OAuth scopes. Possible values provided by OAuth are: phone, email,
+	// openid, and profile. Possible values provided by AWS are: aws.cognito.signin.user.admin.
+	// Custom scopes created in Resource Servers are also supported.
 	AllowedOAuthScopes []string `type:"list"`
 
 	// The Amazon Pinpoint analytics configuration for collecting metrics for this
@@ -136,7 +145,7 @@ type UpdateUserPoolClientInput struct {
 	//
 	//    * ResendConfirmationCode
 	//
-	// After January 1st 2020, the value of PreventUserExistenceErrors will default
+	// After February 15th 2020, the value of PreventUserExistenceErrors will default
 	// to ENABLED for newly created user pool clients if no value is provided.
 	PreventUserExistenceErrors PreventUserExistenceErrorTypes `type:"string" enum:"true"`
 

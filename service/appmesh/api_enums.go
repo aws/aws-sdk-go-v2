@@ -97,6 +97,24 @@ func (enum HttpScheme) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ListenerTlsMode string
+
+// Enum values for ListenerTlsMode
+const (
+	ListenerTlsModeDisabled   ListenerTlsMode = "DISABLED"
+	ListenerTlsModePermissive ListenerTlsMode = "PERMISSIVE"
+	ListenerTlsModeStrict     ListenerTlsMode = "STRICT"
+)
+
+func (enum ListenerTlsMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ListenerTlsMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MeshStatusCode string
 
 // Enum values for MeshStatusCode

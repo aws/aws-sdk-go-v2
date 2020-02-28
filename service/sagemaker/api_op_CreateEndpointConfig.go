@@ -138,11 +138,11 @@ const opCreateEndpointConfig = "CreateEndpointConfig"
 // Amazon SageMaker to provision. Then you call the CreateEndpoint (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html)
 // API.
 //
-// Use this API only if you want to use Amazon SageMaker hosting services to
-// deploy models into production.
+// Use this API if you want to use Amazon SageMaker hosting services to deploy
+// models into production.
 //
-// In the request, you define one or more ProductionVariants, each of which
-// identifies a model. Each ProductionVariant parameter also describes the resources
+// In the request, you define a ProductionVariant, for each model that you want
+// to deploy. Each ProductionVariant parameter also describes the resources
 // that you want Amazon SageMaker to provision. This includes the number and
 // type of ML compute instances to deploy.
 //
@@ -151,6 +151,10 @@ const opCreateEndpointConfig = "CreateEndpointConfig"
 // that you want to host two models, A and B, and you assign traffic weight
 // 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds
 // of the traffic to Model A, and one-third to model B.
+//
+// For an example that calls this method when deploying a model to Amazon SageMaker
+// hosting services, see Deploy the Model to Amazon SageMaker Hosting Services
+// (AWS SDK for Python (Boto 3)). (https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto)
 //
 //    // Example sending a request using CreateEndpointConfigRequest.
 //    req := client.CreateEndpointConfigRequest(params)

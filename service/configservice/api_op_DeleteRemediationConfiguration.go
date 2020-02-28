@@ -19,7 +19,7 @@ type DeleteRemediationConfigurationInput struct {
 	ConfigRuleName *string `min:"1" type:"string" required:"true"`
 
 	// The type of a resource.
-	ResourceType *string `type:"string"`
+	ResourceType *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -36,6 +36,9 @@ func (s *DeleteRemediationConfigurationInput) Validate() error {
 	}
 	if s.ConfigRuleName != nil && len(*s.ConfigRuleName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ConfigRuleName", 1))
+	}
+	if s.ResourceType != nil && len(*s.ResourceType) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceType", 1))
 	}
 
 	if invalidParams.Len() > 0 {

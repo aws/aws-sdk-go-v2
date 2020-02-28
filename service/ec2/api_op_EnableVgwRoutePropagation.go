@@ -15,6 +15,8 @@ import (
 type EnableVgwRoutePropagationInput struct {
 	_ struct{} `type:"structure"`
 
+	DryRun *bool `type:"boolean"`
+
 	// The ID of the virtual private gateway that is attached to a VPC. The virtual
 	// private gateway must be attached to the same VPC that the routing tables
 	// are associated with.

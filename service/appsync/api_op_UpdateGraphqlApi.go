@@ -38,6 +38,9 @@ type UpdateGraphqlApiInput struct {
 
 	// The new Amazon Cognito user pool configuration for the GraphqlApi object.
 	UserPoolConfig *UserPoolConfig `locationName:"userPoolConfig" type:"structure"`
+
+	// A flag indicating whether to enable X-Ray tracing for the GraphqlApi.
+	XrayEnabled *bool `locationName:"xrayEnabled" type:"boolean"`
 }
 
 // String returns the string representation
@@ -130,6 +133,12 @@ func (s UpdateGraphqlApiInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "userPoolConfig", v, metadata)
+	}
+	if s.XrayEnabled != nil {
+		v := *s.XrayEnabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "xrayEnabled", protocol.BoolValue(v), metadata)
 	}
 	if s.ApiId != nil {
 		v := *s.ApiId

@@ -175,6 +175,8 @@ const opCreateVirtualNode = "CreateVirtualNode"
 // override the node.cluster value that is set by APPMESH_VIRTUAL_NODE_NAME
 // with the APPMESH_VIRTUAL_NODE_CLUSTER environment variable.
 //
+// For more information about virtual nodes, see Virtual Nodes (https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual_nodes.html).
+//
 //    // Example sending a request using CreateVirtualNodeRequest.
 //    req := client.CreateVirtualNodeRequest(params)
 //    resp, err := req.Send(context.TODO())

@@ -13,13 +13,13 @@ import (
 type UpdateStandardsControlInput struct {
 	_ struct{} `type:"structure"`
 
-	// The updated status of the compliance standard control.
+	// The updated status of the security standard control.
 	ControlStatus ControlStatus `type:"string" enum:"true"`
 
-	// A description of the reason why you are disabling a compliance standard control.
+	// A description of the reason why you are disabling a security standard control.
 	DisabledReason *string `type:"string"`
 
-	// The ARN of the compliance standard control to enable or disable.
+	// The ARN of the security standard control to enable or disable.
 	//
 	// StandardsControlArn is a required field
 	StandardsControlArn *string `location:"uri" locationName:"StandardsControlArn" type:"string" required:"true"`
@@ -88,7 +88,7 @@ const opUpdateStandardsControl = "UpdateStandardsControl"
 // UpdateStandardsControlRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Used to control whether an individual compliance standard control is enabled
+// Used to control whether an individual security standard control is enabled
 // or disabled.
 //
 //    // Example sending a request using UpdateStandardsControlRequest.

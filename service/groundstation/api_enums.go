@@ -65,6 +65,7 @@ const (
 	ContactStatusAvailable        ContactStatus = "AVAILABLE"
 	ContactStatusAwsCancelled     ContactStatus = "AWS_CANCELLED"
 	ContactStatusCancelled        ContactStatus = "CANCELLED"
+	ContactStatusCancelling       ContactStatus = "CANCELLING"
 	ContactStatusCompleted        ContactStatus = "COMPLETED"
 	ContactStatusFailed           ContactStatus = "FAILED"
 	ContactStatusFailedToSchedule ContactStatus = "FAILED_TO_SCHEDULE"

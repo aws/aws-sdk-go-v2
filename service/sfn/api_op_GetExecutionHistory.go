@@ -97,6 +97,8 @@ const opGetExecutionHistory = "GetExecutionHistory"
 // unchanged. Each pagination token expires after 24 hours. Using an expired
 // pagination token will return an HTTP 400 InvalidToken error.
 //
+// This API action is not supported by EXPRESS state machines.
+//
 //    // Example sending a request using GetExecutionHistoryRequest.
 //    req := client.GetExecutionHistoryRequest(params)
 //    resp, err := req.Send(context.TODO())

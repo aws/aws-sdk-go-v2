@@ -14,7 +14,7 @@ import (
 type DescribeDBSubnetGroupsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the DB subnet group to return details for.
+	// The name of the subnet group to return details for.
 	DBSubnetGroupName *string `type:"string"`
 
 	// This parameter is not currently supported.
@@ -61,7 +61,7 @@ func (s *DescribeDBSubnetGroupsInput) Validate() error {
 type DescribeDBSubnetGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about one or more DB subnet groups.
+	// Detailed information about one or more subnet groups.
 	DBSubnetGroups []DBSubnetGroup `locationNameList:"DBSubnetGroup" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter

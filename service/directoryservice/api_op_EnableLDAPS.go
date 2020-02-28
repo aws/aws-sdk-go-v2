@@ -17,8 +17,7 @@ type EnableLDAPSInput struct {
 	// DirectoryId is a required field
 	DirectoryId *string `type:"string" required:"true"`
 
-	// The type of LDAP security the customer wants to enable. The security can
-	// be either server or client, but currently only the default Client is supported.
+	// The type of LDAP security to enable. Currently only the value Client is supported.
 	//
 	// Type is a required field
 	Type LDAPSType `type:"string" required:"true" enum:"true"`

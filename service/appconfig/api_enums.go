@@ -46,7 +46,8 @@ type GrowthType string
 
 // Enum values for GrowthType
 const (
-	GrowthTypeLinear GrowthType = "LINEAR"
+	GrowthTypeLinear      GrowthType = "LINEAR"
+	GrowthTypeExponential GrowthType = "EXPONENTIAL"
 )
 
 func (enum GrowthType) MarshalValue() (string, error) {

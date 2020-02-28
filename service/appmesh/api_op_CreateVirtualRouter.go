@@ -163,6 +163,8 @@ const opCreateVirtualRouter = "CreateVirtualRouter"
 // mesh. After you create your virtual router, create and associate routes for
 // your virtual router that direct incoming requests to different virtual nodes.
 //
+// For more information about virtual routers, see Virtual Routers (https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual_routers.html).
+//
 //    // Example sending a request using CreateVirtualRouterRequest.
 //    req := client.CreateVirtualRouterRequest(params)
 //    resp, err := req.Send(context.TODO())

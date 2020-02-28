@@ -8,6 +8,7 @@ type ActionType string
 const (
 	ActionTypeRestoreCluster      ActionType = "restore-cluster"
 	ActionTypeRecommendNodeConfig ActionType = "recommend-node-config"
+	ActionTypeResizeCluster       ActionType = "resize-cluster"
 )
 
 func (enum ActionType) MarshalValue() (string, error) {

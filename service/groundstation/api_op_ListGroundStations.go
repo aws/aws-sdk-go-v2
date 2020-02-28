@@ -13,9 +13,15 @@ import (
 type ListGroundStationsInput struct {
 	_ struct{} `type:"structure"`
 
+	// Maximum number of ground stations returned.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
 
+	// Next token that can be supplied in the next call to get the next page of
+	// ground stations.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+
+	// Satellite ID to retrieve on-boarded ground stations.
+	SatelliteId *string `location:"querystring" locationName:"satelliteId" type:"string"`
 }
 
 // String returns the string representation
@@ -39,14 +45,23 @@ func (s ListGroundStationsInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.SatelliteId != nil {
+		v := *s.SatelliteId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "satelliteId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	return nil
 }
 
 type ListGroundStationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	// List of ground stations.
 	GroundStationList []GroundStationData `locationName:"groundStationList" type:"list"`
 
+	// Next token that can be supplied in the next call to get the next page of
+	// ground stations.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 

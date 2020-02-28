@@ -70,9 +70,9 @@ const opDisableImportFindingsForProduct = "DisableImportFindingsForProduct"
 // DisableImportFindingsForProductRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Disables the integration of the specified product with Security Hub. Findings
-// from that product are no longer sent to Security Hub after the integration
-// is disabled.
+// Disables the integration of the specified product with Security Hub. After
+// the integration is disabled, findings from that product are no longer sent
+// to Security Hub.
 //
 //    // Example sending a request using DisableImportFindingsForProductRequest.
 //    req := client.DisableImportFindingsForProductRequest(params)

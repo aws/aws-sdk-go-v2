@@ -13,7 +13,8 @@ import (
 type ListComponentBuildVersionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The component version arn whose versions you wish to list.
+	// The component version Amazon Resource Name (ARN) whose versions you want
+	// to list.
 	//
 	// ComponentVersionArn is a required field
 	ComponentVersionArn *string `locationName:"componentVersionArn" type:"string" required:"true"`
@@ -82,9 +83,9 @@ type ListComponentBuildVersionsOutput struct {
 	// The list of component summaries for the specified semantic version.
 	ComponentSummaryList []ComponentSummary `locationName:"componentSummaryList" type:"list"`
 
-	// The next token used for paginated responses. When this is not empty then
-	// there are additional elements that the service that not include in this request.
-	// Use this token with the next request to retrieve additional object.
+	// The next token used for paginated responses. When this is not empty, there
+	// are additional elements that the service has not included in this request.
+	// Use this token with the next request to retrieve additional objects.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// The request ID that uniquely identifies this request.

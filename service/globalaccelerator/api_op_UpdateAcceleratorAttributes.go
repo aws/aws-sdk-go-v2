@@ -30,8 +30,13 @@ type UpdateAcceleratorAttributesInput struct {
 	FlowLogsS3Bucket *string `type:"string"`
 
 	// Update the prefix for the location in the Amazon S3 bucket for the flow logs.
-	// Attribute is required if FlowLogsEnabled is true. If you don’t specify
-	// a prefix, the flow logs are stored in the root of the bucket.
+	// Attribute is required if FlowLogsEnabled is true.
+	//
+	// If you don’t specify a prefix, the flow logs are stored in the root of
+	// the bucket. If you specify slash (/) for the S3 bucket prefix, the log file
+	// bucket folder structure will include a double slash (//), like the following:
+	//
+	// s3-bucket_name//AWSLogs/aws_account_id
 	FlowLogsS3Prefix *string `type:"string"`
 }
 

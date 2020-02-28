@@ -73,6 +73,7 @@ func (s AdditionalAuthenticationProvider) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
+// The ApiCache object.
 type ApiCache struct {
 	_ struct{} `type:"structure"`
 
@@ -869,6 +870,9 @@ type GraphqlApi struct {
 
 	// The Amazon Cognito user pool configuration.
 	UserPoolConfig *UserPoolConfig `locationName:"userPoolConfig" type:"structure"`
+
+	// A flag representing whether X-Ray tracing is enabled for this GraphqlApi.
+	XrayEnabled *bool `locationName:"xrayEnabled" type:"boolean"`
 }
 
 // String returns the string representation
@@ -956,6 +960,12 @@ func (s GraphqlApi) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "userPoolConfig", v, metadata)
 	}
+	if s.XrayEnabled != nil {
+		v := *s.XrayEnabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "xrayEnabled", protocol.BoolValue(v), metadata)
+	}
 	return nil
 }
 
@@ -1010,6 +1020,8 @@ func (s HttpDataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The LambdaConflictHandlerConfig object when configuring LAMBDA as the Conflict
+// Handler.
 type LambdaConflictHandlerConfig struct {
 	_ struct{} `type:"structure"`
 

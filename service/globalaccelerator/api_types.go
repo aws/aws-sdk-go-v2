@@ -27,9 +27,9 @@ type Accelerator struct {
 	// The Domain Name System (DNS) name that Global Accelerator creates that points
 	// to your accelerator's static IP addresses.
 	//
-	// The naming convention for the DNS name is: a lower case letter a, followed
-	// by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For
-	// example: a1234567890abcdef.awsglobalaccelerator.com.
+	// The naming convention for the DNS name is the following: A lowercase letter
+	// a, followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com.
+	// For example: a1234567890abcdef.awsglobalaccelerator.com.
 	//
 	// For more information about the default DNS name, see Support for DNS Addressing
 	// in Global Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-accelerators.html#about-accelerators.dns-addressing)
@@ -82,14 +82,123 @@ type AcceleratorAttributes struct {
 	FlowLogsS3Bucket *string `type:"string"`
 
 	// The prefix for the location in the Amazon S3 bucket for the flow logs. Attribute
-	// is required if FlowLogsEnabled is true. If you don’t specify a prefix,
-	// the flow logs are stored in the root of the bucket.
+	// is required if FlowLogsEnabled is true.
+	//
+	// If you don’t specify a prefix, the flow logs are stored in the root of
+	// the bucket. If you specify slash (/) for the S3 bucket prefix, the log file
+	// bucket folder structure will include a double slash (//), like the following:
+	//
+	// s3-bucket_name//AWSLogs/aws_account_id
 	FlowLogsS3Prefix *string `type:"string"`
 }
 
 // String returns the string representation
 func (s AcceleratorAttributes) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Information about an IP address range that is provisioned for use with your
+// AWS resources through bring your own IP addresses (BYOIP).
+//
+// The following describes each BYOIP State that your IP address range can be
+// in.
+//
+//    * PENDING_PROVISIONING — You’ve submitted a request to provision an
+//    IP address range but it is not yet provisioned with AWS Global Accelerator.
+//
+//    * READY — The address range is provisioned with AWS Global Accelerator
+//    and can be advertised.
+//
+//    * PENDING_ADVERTISING — You’ve submitted a request for AWS Global
+//    Accelerator to advertise an address range but it is not yet being advertised.
+//
+//    * ADVERTISING — The address range is being advertised by AWS Global
+//    Accelerator.
+//
+//    * PENDING_WITHDRAWING — You’ve submitted a request to withdraw an
+//    address range from being advertised but it is still being advertised by
+//    AWS Global Accelerator.
+//
+//    * PENDING_DEPROVISIONING — You’ve submitted a request to deprovision
+//    an address range from AWS Global Accelerator but it is still provisioned.
+//
+//    * DEPROVISIONED — The address range is deprovisioned from AWS Global
+//    Accelerator.
+//
+//    * FAILED_PROVISION — The request to provision the address range from
+//    AWS Global Accelerator was not successful. Please make sure that you provide
+//    all of the correct information, and try again. If the request fails a
+//    second time, contact AWS support.
+//
+//    * FAILED_ADVERTISING — The request for AWS Global Accelerator to advertise
+//    the address range was not successful. Please make sure that you provide
+//    all of the correct information, and try again. If the request fails a
+//    second time, contact AWS support.
+//
+//    * FAILED_WITHDRAW — The request to withdraw the address range from advertising
+//    by AWS Global Accelerator was not successful. Please make sure that you
+//    provide all of the correct information, and try again. If the request
+//    fails a second time, contact AWS support.
+//
+//    * FAILED_DEPROVISION — The request to deprovision the address range
+//    from AWS Global Accelerator was not successful. Please make sure that
+//    you provide all of the correct information, and try again. If the request
+//    fails a second time, contact AWS support.
+type ByoipCidr struct {
+	_ struct{} `type:"structure"`
+
+	// The address range, in CIDR notation.
+	Cidr *string `type:"string"`
+
+	// The state of the address pool.
+	State ByoipCidrState `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ByoipCidr) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Provides authorization for Amazon to bring a specific IP address range to
+// a specific AWS account using bring your own IP addresses (BYOIP).
+//
+// For more information, see Bring Your Own IP Addresses (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
+// in the AWS Global Accelerator Developer Guide.
+type CidrAuthorizationContext struct {
+	_ struct{} `type:"structure"`
+
+	// The plain-text authorization message for the prefix and account.
+	//
+	// Message is a required field
+	Message *string `type:"string" required:"true"`
+
+	// The signed authorization message for the prefix and account.
+	//
+	// Signature is a required field
+	Signature *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CidrAuthorizationContext) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CidrAuthorizationContext) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CidrAuthorizationContext"}
+
+	if s.Message == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Message"))
+	}
+
+	if s.Signature == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Signature"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // A complex type for endpoints.
@@ -112,7 +221,9 @@ type EndpointConfiguration struct {
 	// An ID for the endpoint. If the endpoint is a Network Load Balancer or Application
 	// Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If
 	// the endpoint is an Elastic IP address, this is the Elastic IP address allocation
-	// ID.
+	// ID. For EC2 instances, this is the EC2 instance ID.
+	//
+	// An Application Load Balancer can be either internal or internet-facing.
 	EndpointId *string `type:"string"`
 
 	// The weight associated with the endpoint. When you add weights to endpoints,
@@ -152,7 +263,9 @@ type EndpointDescription struct {
 	// An ID for the endpoint. If the endpoint is a Network Load Balancer or Application
 	// Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If
 	// the endpoint is an Elastic IP address, this is the Elastic IP address allocation
-	// ID. An Application Load Balancer can be either internal or internet-facing.
+	// ID. For EC2 instances, this is the EC2 instance ID.
+	//
+	// An Application Load Balancer can be either internal or internet-facing.
 	EndpointId *string `type:"string"`
 
 	// The reason code associated with why the endpoint is not healthy. If the endpoint
@@ -334,6 +447,47 @@ func (s *PortRange) Validate() error {
 	}
 	if s.ToPort != nil && *s.ToPort < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("ToPort", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// A complex type that contains a Tag key and Tag value.
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// A string that contains a Tag key.
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
+
+	// A string that contains a Tag value.
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {

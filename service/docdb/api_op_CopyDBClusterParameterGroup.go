@@ -13,19 +13,19 @@ import (
 type CopyDBClusterParameterGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter
+	// The identifier or Amazon Resource Name (ARN) for the source cluster parameter
 	// group.
 	//
 	// Constraints:
 	//
-	//    * Must specify a valid DB cluster parameter group.
+	//    * Must specify a valid cluster parameter group.
 	//
-	//    * If the source DB cluster parameter group is in the same AWS Region as
-	//    the copy, specify a valid DB parameter group identifier; for example,
-	//    my-db-cluster-param-group, or a valid ARN.
+	//    * If the source cluster parameter group is in the same AWS Region as the
+	//    copy, specify a valid parameter group identifier; for example, my-db-cluster-param-group,
+	//    or a valid ARN.
 	//
-	//    * If the source DB parameter group is in a different AWS Region than the
-	//    copy, specify a valid DB cluster parameter group ARN; for example, arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1.
+	//    * If the source parameter group is in a different AWS Region than the
+	//    copy, specify a valid cluster parameter group ARN; for example, arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1.
 	//
 	// SourceDBClusterParameterGroupIdentifier is a required field
 	SourceDBClusterParameterGroupIdentifier *string `type:"string" required:"true"`
@@ -33,12 +33,12 @@ type CopyDBClusterParameterGroupInput struct {
 	// The tags that are to be assigned to the parameter group.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 
-	// A description for the copied DB cluster parameter group.
+	// A description for the copied cluster parameter group.
 	//
 	// TargetDBClusterParameterGroupDescription is a required field
 	TargetDBClusterParameterGroupDescription *string `type:"string" required:"true"`
 
-	// The identifier for the copied DB cluster parameter group.
+	// The identifier for the copied cluster parameter group.
 	//
 	// Constraints:
 	//
@@ -86,7 +86,7 @@ func (s *CopyDBClusterParameterGroupInput) Validate() error {
 type CopyDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster parameter group.
+	// Detailed information about a cluster parameter group.
 	DBClusterParameterGroup *DBClusterParameterGroup `type:"structure"`
 }
 
@@ -100,7 +100,7 @@ const opCopyDBClusterParameterGroup = "CopyDBClusterParameterGroup"
 // CopyDBClusterParameterGroupRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Copies the specified DB cluster parameter group.
+// Copies the specified cluster parameter group.
 //
 //    // Example sending a request using CopyDBClusterParameterGroupRequest.
 //    req := client.CopyDBClusterParameterGroupRequest(params)

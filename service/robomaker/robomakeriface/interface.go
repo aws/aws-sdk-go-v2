@@ -67,6 +67,8 @@ type ClientAPI interface {
 
 	CancelSimulationJobRequest(*robomaker.CancelSimulationJobInput) robomaker.CancelSimulationJobRequest
 
+	CancelSimulationJobBatchRequest(*robomaker.CancelSimulationJobBatchInput) robomaker.CancelSimulationJobBatchRequest
+
 	CreateDeploymentJobRequest(*robomaker.CreateDeploymentJobInput) robomaker.CreateDeploymentJobRequest
 
 	CreateFleetRequest(*robomaker.CreateFleetInput) robomaker.CreateFleetRequest
@@ -105,6 +107,8 @@ type ClientAPI interface {
 
 	DescribeSimulationJobRequest(*robomaker.DescribeSimulationJobInput) robomaker.DescribeSimulationJobRequest
 
+	DescribeSimulationJobBatchRequest(*robomaker.DescribeSimulationJobBatchInput) robomaker.DescribeSimulationJobBatchRequest
+
 	ListDeploymentJobsRequest(*robomaker.ListDeploymentJobsInput) robomaker.ListDeploymentJobsRequest
 
 	ListFleetsRequest(*robomaker.ListFleetsInput) robomaker.ListFleetsRequest
@@ -115,6 +119,8 @@ type ClientAPI interface {
 
 	ListSimulationApplicationsRequest(*robomaker.ListSimulationApplicationsInput) robomaker.ListSimulationApplicationsRequest
 
+	ListSimulationJobBatchesRequest(*robomaker.ListSimulationJobBatchesInput) robomaker.ListSimulationJobBatchesRequest
+
 	ListSimulationJobsRequest(*robomaker.ListSimulationJobsInput) robomaker.ListSimulationJobsRequest
 
 	ListTagsForResourceRequest(*robomaker.ListTagsForResourceInput) robomaker.ListTagsForResourceRequest
@@ -122,6 +128,8 @@ type ClientAPI interface {
 	RegisterRobotRequest(*robomaker.RegisterRobotInput) robomaker.RegisterRobotRequest
 
 	RestartSimulationJobRequest(*robomaker.RestartSimulationJobInput) robomaker.RestartSimulationJobRequest
+
+	StartSimulationJobBatchRequest(*robomaker.StartSimulationJobBatchInput) robomaker.StartSimulationJobBatchRequest
 
 	SyncDeploymentJobRequest(*robomaker.SyncDeploymentJobInput) robomaker.SyncDeploymentJobRequest
 

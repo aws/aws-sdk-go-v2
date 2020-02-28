@@ -21,6 +21,10 @@ type CreateStateMachineInput struct {
 	Definition *string `locationName:"definition" min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// Defines what execution history events are logged and where they are logged.
+	//
+	// By default, the level is set to OFF. For more information see Log Levels
+	// (https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html)
+	// in the AWS Step Functions User Guide.
 	LoggingConfiguration *LoggingConfiguration `locationName:"loggingConfiguration" type:"structure"`
 
 	// The name of the state machine.
@@ -36,6 +40,9 @@ type CreateStateMachineInput struct {
 	//    * special characters " # % \ ^ | ~ ` $ & , ; : /
 	//
 	//    * control characters (U+0000-001F, U+007F-009F)
+	//
+	// To enable logging with CloudWatch Logs, the name should only contain 0-9,
+	// A-Z, a-z, - and _.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
@@ -56,8 +63,9 @@ type CreateStateMachineInput struct {
 	// _ . : / = + - @.
 	Tags []Tag `locationName:"tags" type:"list"`
 
-	// Determines whether a Standard or Express state machine is created. If not
-	// set, Standard is created.
+	// Determines whether a Standard or Express state machine is created. The default
+	// is STANDARD. You cannot update the type of a state machine once it has been
+	// created.
 	Type StateMachineType `locationName:"type" type:"string" enum:"true"`
 }
 
@@ -136,17 +144,19 @@ const opCreateStateMachine = "CreateStateMachine"
 // Creates a state machine. A state machine consists of a collection of states
 // that can do work (Task states), determine to which states to transition next
 // (Choice states), stop an execution with an error (Fail states), and so on.
-// State machines are specified using a JSON-based, structured language.
+// State machines are specified using a JSON-based, structured language. For
+// more information, see Amazon States Language (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html)
+// in the AWS Step Functions User Guide.
 //
 // This operation is eventually consistent. The results are best effort and
 // may not reflect very recent updates and changes.
 //
 // CreateStateMachine is an idempotent API. Subsequent requests won’t create
 // a duplicate resource if it was already created. CreateStateMachine's idempotency
-// check is based on the state machine name and definition. If a following request
-// has a different roleArn or tags, Step Functions will ignore these differences
-// and treat it as an idempotent request of the previous. In this case, roleArn
-// and tags will not be updated, even if they are different.
+// check is based on the state machine name, definition, type, and LoggingConfiguration.
+// If a following request has a different roleArn or tags, Step Functions will
+// ignore these differences and treat it as an idempotent request of the previous.
+// In this case, roleArn and tags will not be updated, even if they are different.
 //
 //    // Example sending a request using CreateStateMachineRequest.
 //    req := client.CreateStateMachineRequest(params)

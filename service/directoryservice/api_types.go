@@ -79,6 +79,9 @@ type CertificateInfo struct {
 	// The common name for the certificate.
 	CommonName *string `type:"string"`
 
+	// The date and time when the certificate will expire.
+	ExpiryDateTime *time.Time `type:"timestamp"`
+
 	// The state of the certificate.
 	State CertificateState `type:"string" enum:"true"`
 }

@@ -10,18 +10,27 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request for ListProfilingGroups operation.
+// The structure representing the listProfilingGroupsRequest.
 type ListProfilingGroupsInput struct {
 	_ struct{} `type:"structure"`
 
-	// If set to true, returns the full description of the profiling groups instead
-	// of the names. Defaults to false.
+	// A Boolean value indicating whether to include a description.
 	IncludeDescription *bool `location:"querystring" locationName:"includeDescription" type:"boolean"`
 
-	// Upper bound on the number of results to list in a single call.
+	// The maximum number of profiling groups results returned by ListProfilingGroups
+	// in paginated output. When this parameter is used, ListProfilingGroups only
+	// returns maxResults results in a single page along with a nextToken response
+	// element. The remaining results of the initial request can be seen by sending
+	// another ListProfilingGroups request with the returned nextToken value.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
-	// Token for paginating results.
+	// The nextToken value returned from a previous paginated ListProfilingGroups
+	// request where maxResults was used and the results exceeded the value of that
+	// parameter. Pagination continues from the end of the previous results that
+	// returned the nextToken value.
+	//
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string `location:"querystring" locationName:"nextToken" min:"1" type:"string"`
 }
 
@@ -71,19 +80,22 @@ func (s ListProfilingGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Response for ListProfilingGroups operation.
+// The structure representing the listProfilingGroupsResponse.
 type ListProfilingGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Token for paginating results.
+	// The nextToken value to include in a future ListProfilingGroups request. When
+	// the results of a ListProfilingGroups request exceed maxResults, this value
+	// can be used to retrieve the next page of results. This value is null when
+	// there are no more results to return.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
-	// List of profiling group names.
+	// Information about profiling group names.
 	//
 	// ProfilingGroupNames is a required field
 	ProfilingGroupNames []string `locationName:"profilingGroupNames" type:"list" required:"true"`
 
-	// List of profiling group descriptions.
+	// Information about profiling groups.
 	ProfilingGroups []ProfilingGroupDescription `locationName:"profilingGroups" type:"list"`
 }
 
@@ -132,7 +144,7 @@ const opListProfilingGroups = "ListProfilingGroups"
 // ListProfilingGroupsRequest returns a request value for making API operation for
 // Amazon CodeGuru Profiler.
 //
-// List profiling groups in the account.
+// Lists profiling groups.
 //
 //    // Example sending a request using ListProfilingGroupsRequest.
 //    req := client.ListProfilingGroupsRequest(params)

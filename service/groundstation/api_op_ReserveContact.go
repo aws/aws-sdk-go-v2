@@ -14,21 +14,32 @@ import (
 type ReserveContactInput struct {
 	_ struct{} `type:"structure"`
 
+	// End time of a contact.
+	//
 	// EndTime is a required field
 	EndTime *time.Time `locationName:"endTime" type:"timestamp" required:"true"`
 
+	// Name of a ground station.
+	//
 	// GroundStation is a required field
 	GroundStation *string `locationName:"groundStation" type:"string" required:"true"`
 
+	// ARN of a mission profile.
+	//
 	// MissionProfileArn is a required field
 	MissionProfileArn *string `locationName:"missionProfileArn" type:"string" required:"true"`
 
+	// ARN of a satellite
+	//
 	// SatelliteArn is a required field
 	SatelliteArn *string `locationName:"satelliteArn" type:"string" required:"true"`
 
+	// Start time of a contact.
+	//
 	// StartTime is a required field
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" required:"true"`
 
+	// Tags assigned to a contact.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
@@ -121,6 +132,7 @@ func (s ReserveContactInput) MarshalFields(e protocol.FieldEncoder) error {
 type ReserveContactOutput struct {
 	_ struct{} `type:"structure"`
 
+	// UUID of a contact.
 	ContactId *string `locationName:"contactId" type:"string"`
 }
 

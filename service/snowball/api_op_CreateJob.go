@@ -81,7 +81,13 @@ type CreateJobInput struct {
 
 	// The type of AWS Snowball device to use for this job. Currently, the only
 	// supported device type for cluster jobs is EDGE.
+	//
+	// For more information, see Snowball Edge Device Options (https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html)
+	// in the Snowball Edge Developer Guide.
 	SnowballType SnowballType `type:"string" enum:"true"`
+
+	// The tax documents required in your AWS Region.
+	TaxDocuments *TaxDocuments `type:"structure"`
 }
 
 // String returns the string representation

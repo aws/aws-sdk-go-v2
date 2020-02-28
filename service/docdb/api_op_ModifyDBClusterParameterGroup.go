@@ -13,12 +13,12 @@ import (
 type ModifyDBClusterParameterGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the DB cluster parameter group to modify.
+	// The name of the cluster parameter group to modify.
 	//
 	// DBClusterParameterGroupName is a required field
 	DBClusterParameterGroupName *string `type:"string" required:"true"`
 
-	// A list of parameters in the DB cluster parameter group to modify.
+	// A list of parameters in the cluster parameter group to modify.
 	//
 	// Parameters is a required field
 	Parameters []Parameter `locationNameList:"Parameter" type:"list" required:"true"`
@@ -47,11 +47,11 @@ func (s *ModifyDBClusterParameterGroupInput) Validate() error {
 	return nil
 }
 
-// Contains the name of a DB cluster parameter group.
+// Contains the name of a cluster parameter group.
 type ModifyDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of a DB cluster parameter group.
+	// The name of a cluster parameter group.
 	//
 	// Constraints:
 	//
@@ -75,7 +75,7 @@ const opModifyDBClusterParameterGroup = "ModifyDBClusterParameterGroup"
 // ModifyDBClusterParameterGroupRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Modifies the parameters of a DB cluster parameter group. To modify more than
+// Modifies the parameters of a cluster parameter group. To modify more than
 // one parameter, submit a list of the following: ParameterName, ParameterValue,
 // and ApplyMethod. A maximum of 20 parameters can be modified in a single request.
 //
@@ -83,14 +83,13 @@ const opModifyDBClusterParameterGroup = "ModifyDBClusterParameterGroup"
 // parameters require a reboot or maintenance window before the change can take
 // effect.
 //
-// After you create a DB cluster parameter group, you should wait at least 5
-// minutes before creating your first DB cluster that uses that DB cluster parameter
-// group as the default parameter group. This allows Amazon DocumentDB to fully
-// complete the create action before the parameter group is used as the default
-// for a new DB cluster. This step is especially important for parameters that
-// are critical when creating the default database for a DB cluster, such as
-// the character set for the default database defined by the character_set_database
-// parameter.
+// After you create a cluster parameter group, you should wait at least 5 minutes
+// before creating your first cluster that uses that cluster parameter group
+// as the default parameter group. This allows Amazon DocumentDB to fully complete
+// the create action before the parameter group is used as the default for a
+// new cluster. This step is especially important for parameters that are critical
+// when creating the default database for a cluster, such as the character set
+// for the default database defined by the character_set_database parameter.
 //
 //    // Example sending a request using ModifyDBClusterParameterGroupRequest.
 //    req := client.ModifyDBClusterParameterGroupRequest(params)

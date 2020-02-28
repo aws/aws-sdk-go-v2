@@ -15,7 +15,13 @@ type ListGlobalTablesInput struct {
 	// The first global table name that this operation will evaluate.
 	ExclusiveStartGlobalTableName *string `min:"3" type:"string"`
 
-	// The maximum number of table names to return.
+	// The maximum number of table names to return, if the parameter is not specified
+	// DynamoDB defaults to 100.
+	//
+	// If the number of global tables DynamoDB finds reaches this limit, it stops
+	// the operation and returns the table names collected up to that point, with
+	// a table name in the LastEvaluatedGlobalTableName to apply in a subsequent
+	// operation to the ExclusiveStartGlobalTableName parameter.
 	Limit *int64 `min:"1" type:"integer"`
 
 	// Lists the global tables in a specific Region.

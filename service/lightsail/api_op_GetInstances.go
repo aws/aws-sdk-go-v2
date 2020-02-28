@@ -12,8 +12,11 @@ import (
 type GetInstancesInput struct {
 	_ struct{} `type:"structure"`
 
-	// A token used for advancing to the next page of results from your get instances
-	// request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetInstances request. If your results
+	// are paginated, the response will return a next page token that you can specify
+	// as the page token in a subsequent request.
 	PageToken *string `locationName:"pageToken" type:"string"`
 }
 
@@ -28,8 +31,12 @@ type GetInstancesOutput struct {
 	// An array of key-value pairs containing information about your instances.
 	Instances []Instance `locationName:"instances" type:"list"`
 
-	// A token used for advancing to the next page of results from your get instances
-	// request.
+	// The token to advance to the next page of resutls from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetInstances request and
+	// specify the next page token using the pageToken parameter.
 	NextPageToken *string `locationName:"nextPageToken" type:"string"`
 }
 

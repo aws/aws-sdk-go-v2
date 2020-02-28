@@ -71,6 +71,23 @@ func (enum DateRangeUnit) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type IntegrationType string
+
+// Enum values for IntegrationType
+const (
+	IntegrationTypeSendFindingsToSecurityHub      IntegrationType = "SEND_FINDINGS_TO_SECURITY_HUB"
+	IntegrationTypeReceiveFindingsFromSecurityHub IntegrationType = "RECEIVE_FINDINGS_FROM_SECURITY_HUB"
+)
+
+func (enum IntegrationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IntegrationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MalwareState string
 
 // Enum values for MalwareState

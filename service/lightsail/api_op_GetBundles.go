@@ -16,8 +16,11 @@ type GetBundlesInput struct {
 	// in your request.
 	IncludeInactive *bool `locationName:"includeInactive" type:"boolean"`
 
-	// A token used for advancing to the next page of results from your get bundles
-	// request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetBundles request. If your results
+	// are paginated, the response will return a next page token that you can specify
+	// as the page token in a subsequent request.
 	PageToken *string `locationName:"pageToken" type:"string"`
 }
 
@@ -33,8 +36,12 @@ type GetBundlesOutput struct {
 	// bundles.
 	Bundles []Bundle `locationName:"bundles" type:"list"`
 
-	// A token used for advancing to the next page of results from your get active
-	// names request.
+	// The token to advance to the next page of resutls from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetBundles request and specify
+	// the next page token using the pageToken parameter.
 	NextPageToken *string `locationName:"nextPageToken" type:"string"`
 }
 

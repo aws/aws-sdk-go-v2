@@ -483,14 +483,14 @@ func (s LifecyclePolicySummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Optional parameters that can be added to the policy. The set of valid parameters
-// depends on the combination of policyType and resourceType values.
+// Specifies optional parameters to add to a policy. The set of valid parameters
+// depends on the combination of policy type and resource type.
 type Parameters struct {
 	_ struct{} `type:"structure"`
 
-	// When executing an EBS Snapshot Management – Instance policy, execute all
-	// CreateSnapshots calls with the excludeBootVolume set to the supplied field.
-	// Defaults to false. Only valid for EBS Snapshot Management – Instance policies.
+	// [EBS Snapshot Management – Instance policies only] Indicates whether to
+	// exclude the root volume from snapshots created using CreateSnapshots (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSnapshots.html).
+	// The default is false.
 	ExcludeBootVolume *bool `type:"boolean"`
 }
 
@@ -514,11 +514,11 @@ func (s Parameters) MarshalFields(e protocol.FieldEncoder) error {
 type PolicyDetails struct {
 	_ struct{} `type:"structure"`
 
-	// A set of optional parameters that can be provided by the policy.
+	// A set of optional parameters for the policy.
 	Parameters *Parameters `type:"structure"`
 
-	// This field determines the valid target resource types and actions a policy
-	// can manage. This field defaults to EBS_SNAPSHOT_MANAGEMENT if not present.
+	// The valid target resource types and actions a policy can manage. The default
+	// is EBS_SNAPSHOT_MANAGEMENT.
 	PolicyType PolicyTypeValues `type:"string" enum:"true"`
 
 	// The resource type.
@@ -682,7 +682,7 @@ func (s RetainRule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies a schedule.
+// Specifies a backup schedule.
 type Schedule struct {
 	_ struct{} `type:"structure"`
 

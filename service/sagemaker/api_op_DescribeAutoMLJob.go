@@ -108,9 +108,9 @@ type DescribeAutoMLJobOutput struct {
 	// Returns the job's problem type.
 	ProblemType ProblemType `type:"string" enum:"true"`
 
-	// This contains ProblemType, AutoMLJobObjective and CompletionCriteria. They’re
+	// This contains ProblemType, AutoMLJobObjective and CompletionCriteria. They're
 	// auto-inferred values, if not provided by you. If you do provide them, then
-	// they’ll be the same as provided.
+	// they'll be the same as provided.
 	ResolvedAttributes *ResolvedAttributes `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management

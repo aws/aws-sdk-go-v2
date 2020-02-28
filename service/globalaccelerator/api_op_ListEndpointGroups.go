@@ -69,7 +69,8 @@ const opListEndpointGroups = "ListEndpointGroups"
 // ListEndpointGroupsRequest returns a request value for making API operation for
 // AWS Global Accelerator.
 //
-// List the endpoint groups that are associated with a listener.
+// List the endpoint groups that are associated with a listener. To see an AWS
+// CLI example of listing the endpoint groups for listener, scroll down to Example.
 //
 //    // Example sending a request using ListEndpointGroupsRequest.
 //    req := client.ListEndpointGroupsRequest(params)

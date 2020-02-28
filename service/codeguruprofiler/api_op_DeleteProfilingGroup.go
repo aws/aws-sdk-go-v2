@@ -10,11 +10,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request for DeleteProfilingGroup operation.
+// The structure representing the deleteProfilingGroupRequest.
 type DeleteProfilingGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the profiling group.
+	// The profiling group name to delete.
 	//
 	// ProfilingGroupName is a required field
 	ProfilingGroupName *string `location:"uri" locationName:"profilingGroupName" min:"1" type:"string" required:"true"`
@@ -55,7 +55,7 @@ func (s DeleteProfilingGroupInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Response for DeleteProfilingGroup operation.
+// The structure representing the deleteProfilingGroupResponse.
 type DeleteProfilingGroupOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -75,7 +75,7 @@ const opDeleteProfilingGroup = "DeleteProfilingGroup"
 // DeleteProfilingGroupRequest returns a request value for making API operation for
 // Amazon CodeGuru Profiler.
 //
-// Delete a profiling group.
+// Deletes a profiling group.
 //
 //    // Example sending a request using DeleteProfilingGroupRequest.
 //    req := client.DeleteProfilingGroupRequest(params)

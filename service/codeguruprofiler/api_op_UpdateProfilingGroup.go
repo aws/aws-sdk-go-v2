@@ -10,16 +10,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request for UpdateProfilingGroup operation.
+// The structure representing the updateProfilingGroupRequest.
 type UpdateProfilingGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// Remote configuration to configure the agents of the profiling group.
-	//
 	// AgentOrchestrationConfig is a required field
 	AgentOrchestrationConfig *AgentOrchestrationConfig `locationName:"agentOrchestrationConfig" type:"structure" required:"true"`
 
-	// The name of the profiling group.
+	// The name of the profiling group to update.
 	//
 	// ProfilingGroupName is a required field
 	ProfilingGroupName *string `location:"uri" locationName:"profilingGroupName" min:"1" type:"string" required:"true"`
@@ -75,11 +73,11 @@ func (s UpdateProfilingGroupInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Response for UpdateProfilingGroup operation.
+// The structure representing the updateProfilingGroupResponse.
 type UpdateProfilingGroupOutput struct {
 	_ struct{} `type:"structure" payload:"ProfilingGroup"`
 
-	// The description of a profiling group.
+	// Updated information about the profiling group.
 	//
 	// ProfilingGroup is a required field
 	ProfilingGroup *ProfilingGroupDescription `locationName:"profilingGroup" type:"structure" required:"true"`
@@ -106,7 +104,7 @@ const opUpdateProfilingGroup = "UpdateProfilingGroup"
 // UpdateProfilingGroupRequest returns a request value for making API operation for
 // Amazon CodeGuru Profiler.
 //
-// Update a profiling group.
+// Updates a profiling group.
 //
 //    // Example sending a request using UpdateProfilingGroupRequest.
 //    req := client.UpdateProfilingGroupRequest(params)

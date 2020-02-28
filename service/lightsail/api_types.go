@@ -80,6 +80,127 @@ func (s *AddOnRequest) Validate() error {
 	return nil
 }
 
+// Describes an alarm.
+//
+// An alarm is a way to monitor your Amazon Lightsail resource metrics. For
+// more information, see Alarms in Amazon Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms).
+type Alarm struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the alarm.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The arithmetic operation used when comparing the specified statistic and
+	// threshold.
+	ComparisonOperator ComparisonOperator `locationName:"comparisonOperator" type:"string" enum:"true"`
+
+	// The contact protocols for the alarm, such as Email, SMS (text messaging),
+	// or both.
+	ContactProtocols []ContactProtocol `locationName:"contactProtocols" type:"list"`
+
+	// The timestamp when the alarm was created.
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
+
+	// The number of data points that must not within the specified threshold to
+	// trigger the alarm.
+	DatapointsToAlarm *int64 `locationName:"datapointsToAlarm" type:"integer"`
+
+	// The number of periods over which data is compared to the specified threshold.
+	EvaluationPeriods *int64 `locationName:"evaluationPeriods" type:"integer"`
+
+	// An object that lists information about the location of the alarm.
+	Location *ResourceLocation `locationName:"location" type:"structure"`
+
+	// The name of the metric associated with the alarm.
+	MetricName MetricName `locationName:"metricName" type:"string" enum:"true"`
+
+	// An object that lists information about the resource monitored by the alarm.
+	MonitoredResourceInfo *MonitoredResourceInfo `locationName:"monitoredResourceInfo" type:"structure"`
+
+	// The name of the alarm.
+	Name *string `locationName:"name" type:"string"`
+
+	// Indicates whether the alarm is enabled.
+	NotificationEnabled *bool `locationName:"notificationEnabled" type:"boolean"`
+
+	// The alarm states that trigger a notification.
+	NotificationTriggers []AlarmState `locationName:"notificationTriggers" type:"list"`
+
+	// The period, in seconds, over which the statistic is applied.
+	Period *int64 `locationName:"period" min:"60" type:"integer"`
+
+	// The Lightsail resource type (e.g., Alarm).
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
+
+	// The current state of the alarm.
+	//
+	// An alarm has the following possible states:
+	//
+	//    * ALARM — The metric is outside of the defined threshold.
+	//
+	//    * INSUFFICIENT_DATA — The alarm has just started, the metric is not
+	//    available, or not enough data is available for the metric to determine
+	//    the alarm state.
+	//
+	//    * OK — The metric is within the defined threshold.
+	State AlarmState `locationName:"state" type:"string" enum:"true"`
+
+	// The statistic for the metric associated with the alarm.
+	//
+	// The following statistics are available:
+	//
+	//    * Minimum — The lowest value observed during the specified period. Use
+	//    this value to determine low volumes of activity for your application.
+	//
+	//    * Maximum — The highest value observed during the specified period.
+	//    Use this value to determine high volumes of activity for your application.
+	//
+	//    * Sum — All values submitted for the matching metric added together.
+	//    You can use this statistic to determine the total volume of a metric.
+	//
+	//    * Average — The value of Sum / SampleCount during the specified period.
+	//    By comparing this statistic with the Minimum and Maximum values, you can
+	//    determine the full scope of a metric and how close the average use is
+	//    to the Minimum and Maximum values. This comparison helps you to know when
+	//    to increase or decrease your resources.
+	//
+	//    * SampleCount — The count, or number, of data points used for the statistical
+	//    calculation.
+	Statistic MetricStatistic `locationName:"statistic" type:"string" enum:"true"`
+
+	// The support code. Include this code in your email to support when you have
+	// questions about your Lightsail alarm. This code enables our support team
+	// to look up your Lightsail information more easily.
+	SupportCode *string `locationName:"supportCode" type:"string"`
+
+	// The value against which the specified statistic is compared.
+	Threshold *float64 `locationName:"threshold" type:"double"`
+
+	// Specifies how the alarm handles missing data points.
+	//
+	// An alarm can treat missing data in the following ways:
+	//
+	//    * breaching — Assume the missing data is not within the threshold. Missing
+	//    data counts towards the number of times the metric is not within the threshold.
+	//
+	//    * notBreaching — Assume the missing data is within the threshold. Missing
+	//    data does not count towards the number of times the metric is not within
+	//    the threshold.
+	//
+	//    * ignore — Ignore the missing data. Maintains the current alarm state.
+	//
+	//    * missing — Missing data is treated as missing.
+	TreatMissingData TreatMissingData `locationName:"treatMissingData" type:"string" enum:"true"`
+
+	// The unit of the metric associated with the alarm.
+	Unit MetricUnit `locationName:"unit" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s Alarm) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes a block storage disk that is attached to an instance, and is included
 // in an automatic snapshot.
 type AttachedDisk struct {
@@ -352,6 +473,59 @@ type CloudFormationStackRecordSourceInfo struct {
 
 // String returns the string representation
 func (s CloudFormationStackRecordSourceInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes a contact method.
+//
+// A contact method is a way to send you notifications. For more information,
+// see Notifications in Amazon Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications).
+type ContactMethod struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the contact method.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The destination of the contact method, such as an email address or a mobile
+	// phone number.
+	ContactEndpoint *string `locationName:"contactEndpoint" type:"string"`
+
+	// The timestamp when the contact method was created.
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
+
+	// Describes the resource location.
+	Location *ResourceLocation `locationName:"location" type:"structure"`
+
+	// The name of the contact method.
+	Name *string `locationName:"name" type:"string"`
+
+	// The protocol of the contact method, such as email or SMS (text messaging).
+	Protocol ContactProtocol `locationName:"protocol" type:"string" enum:"true"`
+
+	// The Lightsail resource type (e.g., ContactMethod).
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
+
+	// The current status of the contact method.
+	//
+	// A contact method has the following possible status:
+	//
+	//    * PendingVerification — The contact method has not yet been verified,
+	//    and the verification has not yet expired.
+	//
+	//    * Valid — The contact method has been verified.
+	//
+	//    * InValid — An attempt was made to verify the contact method, but the
+	//    verification has expired.
+	Status ContactMethodStatus `locationName:"status" type:"string" enum:"true"`
+
+	// The support code. Include this code in your email to support when you have
+	// questions about your Lightsail contact method. This code enables our support
+	// team to look up your Lightsail information more easily.
+	SupportCode *string `locationName:"supportCode" type:"string"`
+}
+
+// String returns the string representation
+func (s ContactMethod) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -1614,6 +1788,31 @@ type MetricDatapoint struct {
 
 // String returns the string representation
 func (s MetricDatapoint) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes resource being monitored by an alarm.
+//
+// An alarm is a way to monitor your Amazon Lightsail resource metrics. For
+// more information, see Alarms in Amazon Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms).
+type MonitoredResourceInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource being monitored.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The name of the Lightsail resource being monitored.
+	Name *string `locationName:"name" type:"string"`
+
+	// The Lightsail resource type of the resource being monitored.
+	//
+	// Instances, load balancers, and relational databases are the only Lightsail
+	// resources that can currently be monitored by alarms.
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s MonitoredResourceInfo) String() string {
 	return awsutil.Prettify(s)
 }
 

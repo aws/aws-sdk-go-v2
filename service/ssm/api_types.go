@@ -4615,9 +4615,11 @@ type PatchRule struct {
 	// The number of days after the release date of each patch matched by the rule
 	// that the patch is marked as approved in the patch baseline. For example,
 	// a value of 7 means that patches are approved seven days after they are released.
-	//
-	// ApproveAfterDays is a required field
-	ApproveAfterDays *int64 `type:"integer" required:"true"`
+	ApproveAfterDays *int64 `type:"integer"`
+
+	// The cutoff date for auto approval of released patches. Any patches released
+	// on or before this date will be installed automatically
+	ApproveUntilDate *string `min:"1" type:"string"`
 
 	// A compliance severity level for all approved patches in a patch baseline.
 	// Valid compliance severity levels include the following: Unspecified, Critical,
@@ -4643,9 +4645,8 @@ func (s PatchRule) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PatchRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PatchRule"}
-
-	if s.ApproveAfterDays == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApproveAfterDays"))
+	if s.ApproveUntilDate != nil && len(*s.ApproveUntilDate) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ApproveUntilDate", 1))
 	}
 
 	if s.PatchFilterGroup == nil {
@@ -5086,8 +5087,8 @@ func (s *ResourceDataSyncS3Destination) Validate() error {
 type ResourceDataSyncSource struct {
 	_ struct{} `type:"structure"`
 
-	// The field name in SyncSource for the ResourceDataSyncAwsOrganizationsSource
-	// type.
+	// Information about the AwsOrganizationsSource resource data sync source. A
+	// sync source of this type can synchronize data from AWS Organizations.
 	AwsOrganizationsSource *ResourceDataSyncAwsOrganizationsSource `type:"structure"`
 
 	// Whether to automatically synchronize and aggregate data from new AWS Regions
