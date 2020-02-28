@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
@@ -98,7 +99,7 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 	}{
 		"credential source and source profile": {
 			envProfile:    "invalid_source_and_credential_source",
-			expectedError: ErrSharedConfigSourceCollision,
+			expectedError: awserr.New(ErrCodeSharedConfig, "only source profile or credential source can be specified, not both", nil),
 			init: func() {
 				os.Setenv("AWS_ACCESS_KEY", "access_key")
 				os.Setenv("AWS_SECRET_KEY", "secret_key")
@@ -216,7 +217,7 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 			}
 
 			config, err := LoadDefaultAWSConfig(configSources...)
-			if e, a := c.expectedError, err; e != a {
+			if e, a := c.expectedError, err; !reflect.DeepEqual(e, a) {
 				t.Fatalf("expected %v, but received %v", e, a)
 			}
 

@@ -169,15 +169,6 @@ type AssumeRoleProviderOptions struct {
 	// or an Amazon Resource Name (ARN) for a virtual device (such as arn:aws:iam::123456789012:mfa/user).
 	SerialNumber *string
 
-	// The value provided by the MFA device, if the trust policy of the role being
-	// assumed requires MFA (that is, if the policy includes a condition that tests
-	// for MFA). If the role being assumed requires MFA and if the TokenCode value
-	// is missing or expired, the AssumeRole call returns an "access denied" error.
-	//
-	// If SerialNumber is set and neither TokenCode nor TokenProvider are also
-	// set an error will be returned.
-	TokenCode *string
-
 	// Async method of providing MFA token code for assuming an IAM role with MFA.
 	// The value returned by the function will be used as the TokenCode in the Retrieve
 	// call. See StdinTokenProvider for a provider that prompts and reads from stdin.
@@ -240,10 +231,7 @@ func (p *AssumeRoleProvider) retrieveFn(ctx context.Context) (aws.Credentials, e
 		input.Policy = p.options.Policy
 	}
 	if p.options.SerialNumber != nil {
-		if p.options.TokenCode != nil {
-			input.SerialNumber = p.options.SerialNumber
-			input.TokenCode = p.options.TokenCode
-		} else if p.options.TokenProvider != nil {
+		if p.options.TokenProvider != nil {
 			input.SerialNumber = p.options.SerialNumber
 			code, err := p.options.TokenProvider()
 			if err != nil {

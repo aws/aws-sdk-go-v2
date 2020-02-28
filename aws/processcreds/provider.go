@@ -131,15 +131,7 @@ const (
 	// errMsgProcessProviderEmptyCmd command must not be empty
 	errMsgProcessProviderEmptyCmd = "command must not be empty"
 
-	// errMsgProcessProviderPipe failed to initialize pipe
-	errMsgProcessProviderPipe = "failed to initialize pipe"
-
-	// DefaultDuration is the default amount of time in minutes that the
-	// credentials will be valid for.
-	DefaultDuration = time.Duration(15) * time.Minute
-
-	// DefaultBufSize limits buffer size from growing to an enormous
-	// amount due to a faulty process.
+	// DefaultBufSize default initial buffer size to capture the process output
 	DefaultBufSize = int(8 * sdkio.KibiByte)
 
 	// DefaultTimeout default limit on time a process can run.
@@ -307,7 +299,7 @@ func (p *Provider) executeCredentialProcess(ctx context.Context) ([]byte, error)
 	}
 	defer cancelFunc()
 
-	output := bytes.NewBuffer(make([]byte, 0, 1*sdkio.MebiByte))
+	output := bytes.NewBuffer(make([]byte, 0, DefaultBufSize))
 
 	p.command.Stderr = os.Stderr // display stderr on console for MFA
 	p.command.Stdout = output    // get creds json on process's stdout

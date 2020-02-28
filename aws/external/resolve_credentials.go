@@ -25,13 +25,6 @@ const (
 var (
 	ecsContainerEndpoint = "http://169.254.170.2" // not constant to allow for swapping during unit-testing
 
-	// WebIdentityEmptyRoleARNErr will occur if 'AWS_WEB_IDENTITY_TOKEN_FILE' was set but
-	// 'AWS_ROLE_ARN' was not set.
-	WebIdentityEmptyRoleARNErr = awserr.New(stscreds.ErrCodeWebIdentity, "role ARN is not set", nil)
-
-	// WebIdentityEmptyTokenFilePathErr will occur if 'AWS_ROLE_ARN' was set but
-	// 'AWS_WEB_IDENTITY_TOKEN_FILE' was not set.
-	WebIdentityEmptyTokenFilePathErr = awserr.New(stscreds.ErrCodeWebIdentity, "token file path is not set", nil)
 )
 
 // ResolveCredentials extracts a credential provider from slice of config sources.
@@ -103,25 +96,32 @@ func resolveCredsFromProfile(cfg *aws.Config, envConfig *EnvConfig, sharedConfig
 	case sharedConfig.Source != nil:
 		// Assume IAM role with credentials source from a different profile.
 		err = resolveCredsFromProfile(cfg, envConfig, sharedConfig.Source, configs)
+
 	case sharedConfig.Credentials.HasKeys():
 		// Static Credentials from Shared Config/Credentials file.
 		cfg.Credentials = aws.StaticCredentialsProvider{
 			Value: sharedConfig.Credentials,
 		}
+
 	case len(sharedConfig.CredentialProcess) != 0:
 		// Get credentials from CredentialProcess
 		err = processCredentials(cfg, sharedConfig, configs)
+
 	case len(sharedConfig.CredentialSource) != 0:
 		err = resolveCredsFromSource(cfg, envConfig, sharedConfig, configs)
+
 	case len(sharedConfig.WebIdentityTokenFile) != 0:
 		// Credentials from Assume Web Identity token require an IAM Role, and
 		// that roll will be assumed. May be wrapped with another assume role
 		// via SourceProfile.
 		err = assumeWebIdentity(cfg, sharedConfig.WebIdentityTokenFile, sharedConfig.RoleARN, sharedConfig.RoleSessionName, configs)
+
 	case len(envConfig.ContainerCredentialsEndpoint) != 0:
 		err = resolveLocalHTTPCredProvider(cfg, envConfig.ContainerCredentialsEndpoint, envConfig.ContainerAuthorizationToken, configs)
+
 	case len(envConfig.ContainerCredentialsRelativePath) != 0:
 		err = resolveHTTPCredProvider(cfg, ecsContainerURI(envConfig.ContainerCredentialsRelativePath), envConfig.ContainerAuthorizationToken, configs)
+
 	default:
 		err = resolveEC2RoleCredentials(cfg, configs)
 	}
@@ -242,15 +242,18 @@ func resolveCredsFromSource(cfg *aws.Config, envConfig *EnvConfig, sharedCfg *Sh
 	switch sharedCfg.CredentialSource {
 	case credSourceEc2Metadata:
 		err = resolveEC2RoleCredentials(cfg, configs)
+
 	case credSourceEnvironment:
 		cfg.Credentials = aws.StaticCredentialsProvider{Value: envConfig.Credentials}
+
 	case credSourceECSContainer:
 		if len(envConfig.ContainerCredentialsRelativePath) == 0 {
-			return ErrSharedConfigECSContainerEnvVarEmpty
+			return awserr.New(ErrCodeSharedConfig, "EcsContainer was specified as the credential_source, but 'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' was not set", nil)
 		}
 		return resolveHTTPCredProvider(cfg, ecsContainerURI(envConfig.ContainerCredentialsRelativePath), envConfig.ContainerAuthorizationToken, nil)
+
 	default:
-		return ErrSharedConfigInvalidCredSource
+		return awserr.New(ErrCodeSharedConfig, "credential source values must be EcsContainer, Ec2InstanceMetadata, or Environment", nil)
 	}
 
 	return nil
@@ -258,11 +261,11 @@ func resolveCredsFromSource(cfg *aws.Config, envConfig *EnvConfig, sharedCfg *Sh
 
 func assumeWebIdentity(cfg *aws.Config, filepath string, roleARN, sessionName string, configs Configs) error {
 	if len(filepath) == 0 {
-		return WebIdentityEmptyTokenFilePathErr
+		return awserr.New(stscreds.ErrCodeWebIdentity, "token file path is not set", nil)
 	}
 
 	if len(roleARN) == 0 {
-		return WebIdentityEmptyRoleARNErr
+		return awserr.New(stscreds.ErrCodeWebIdentity, "role ARN is not set", nil)
 	}
 
 	var opts []func(*stscreds.WebIdentityRoleProviderOptions)
@@ -275,7 +278,7 @@ func assumeWebIdentity(cfg *aws.Config, filepath string, roleARN, sessionName st
 		opts = append(opts, options)
 	}
 
-	provider := stscreds.NewWebIdentityRoleProvider(sts.New(*cfg), roleARN, sessionName, filepath, opts...)
+	provider := stscreds.NewWebIdentityRoleProvider(sts.New(*cfg), roleARN, sessionName, stscreds.JWTFilename(filepath), opts...)
 
 	cfg.Credentials = provider
 
@@ -304,9 +307,7 @@ func credsFromAssumeRole(cfg *aws.Config, sharedCfg *SharedConfig, configs Confi
 		func(options *stscreds.AssumeRoleProviderOptions) {
 			options.RoleSessionName = sharedCfg.RoleSessionName
 			if sharedCfg.RoleDurationSeconds != nil {
-				if *sharedCfg.RoleDurationSeconds/time.Second < 900 {
-					options.Duration = time.Second * 900
-				} else {
+				if *sharedCfg.RoleDurationSeconds/time.Minute > 15 {
 					options.Duration = *sharedCfg.RoleDurationSeconds
 				}
 			}

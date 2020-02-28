@@ -125,7 +125,7 @@ func TestWebIdentityProviderRetrieve(t *testing.T) {
 			client.Handlers.Unmarshal.Clear()
 			client.Handlers.UnmarshalError.Clear()
 
-			p := stscreds.NewWebIdentityRoleProvider(client, c.roleARN, c.sessionName, c.tokenFilepath)
+			p := stscreds.NewWebIdentityRoleProvider(client, c.roleARN, c.sessionName, stscreds.JWTFilename(c.tokenFilepath))
 			credValue, err := p.Retrieve(context.Background())
 			if e, a := c.expectedError, err; !reflect.DeepEqual(e, a) {
 				t.Errorf("expected %v, but received %v", e, a)

@@ -30,7 +30,7 @@ type WebIdentityRoleProvider struct {
 
 	client stsiface.ClientAPI
 
-	tokenFilePath   string
+	jwtBytes        JWTBytes
 	roleARN         string
 	roleSessionName string
 
@@ -42,12 +42,30 @@ type WebIdentityRoleProviderOptions struct {
 	ExpiryWindow time.Duration
 }
 
+// JWTBytes is an interface for retrieving a JWT
+type JWTBytes interface {
+	GetJWTBytes() ([]byte, error)
+}
+
+// JWTFilename is a type for retrieving a JWT from the given file name
+type JWTFilename string
+
+// GetJWTBytes retrieves the JWT token from the file and returns the contents as a []byte
+func (j JWTFilename) GetJWTBytes() ([]byte, error) {
+	b, err := ioutil.ReadFile(string(j))
+	if err != nil {
+		return nil, fmt.Errorf("unable to read file at %s: %v", string(j), err)
+	}
+
+	return b, nil
+}
+
 // NewWebIdentityRoleProvider will return a new WebIdentityRoleProvider with the
-// provided stsiface.STSAPI
-func NewWebIdentityRoleProvider(svc stsiface.ClientAPI, roleARN, roleSessionName, path string, options ...func(*WebIdentityRoleProviderOptions)) *WebIdentityRoleProvider {
+// provided stsiface.ClientAPI
+func NewWebIdentityRoleProvider(svc stsiface.ClientAPI, roleARN, roleSessionName string, jwtBytes JWTBytes, options ...func(*WebIdentityRoleProviderOptions)) *WebIdentityRoleProvider {
 	p := &WebIdentityRoleProvider{
 		client:          svc,
-		tokenFilePath:   path,
+		jwtBytes:        jwtBytes,
 		roleARN:         roleARN,
 		roleSessionName: roleSessionName,
 	}
@@ -65,10 +83,9 @@ func NewWebIdentityRoleProvider(svc stsiface.ClientAPI, roleARN, roleSessionName
 // 'WebIdentityTokenFilePath' specified destination and if that is empty an
 // error will be returned.
 func (p *WebIdentityRoleProvider) retrieveFn(ctx context.Context) (aws.Credentials, error) {
-	b, err := ioutil.ReadFile(p.tokenFilePath)
+	b, err := p.jwtBytes.GetJWTBytes()
 	if err != nil {
-		errMsg := fmt.Sprintf("unable to read file at %s", p.tokenFilePath)
-		return aws.Credentials{}, awserr.New(ErrCodeWebIdentity, errMsg, err)
+		return aws.Credentials{}, awserr.New(ErrCodeWebIdentity, "failed to retrieve jwt from provide source", err)
 	}
 
 	sessionName := p.roleSessionName

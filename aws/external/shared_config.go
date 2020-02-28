@@ -51,17 +51,6 @@ const (
 // is not provided.
 var DefaultSharedConfigProfile = `default`
 
-// ErrSharedConfigSourceCollision will be returned if a section contains both
-// source_profile and credential_source
-var ErrSharedConfigSourceCollision = awserr.New(ErrCodeSharedConfig, "only source profile or credential source can be specified, not both", nil)
-
-// ErrSharedConfigECSContainerEnvVarEmpty will be returned if the environment
-// variables are empty and Environment was set as the credential source
-var ErrSharedConfigECSContainerEnvVarEmpty = awserr.New(ErrCodeSharedConfig, "EcsContainer was specified as the credential_source, but 'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' was not set", nil)
-
-// ErrSharedConfigInvalidCredSource will be returned if an invalid credential source was provided
-var ErrSharedConfigInvalidCredSource = awserr.New(ErrCodeSharedConfig, "credential source values must be EcsContainer, Ec2InstanceMetadata, or Environment", nil)
-
 // DefaultSharedCredentialsFilename returns the SDK's default file path
 // for the shared credentials file.
 //
@@ -444,7 +433,7 @@ func (c *SharedConfig) validateCredentialType() error {
 		len(c.CredentialProcess) != 0,
 		len(c.WebIdentityTokenFile) != 0,
 	) {
-		return ErrSharedConfigSourceCollision
+		return awserr.New(ErrCodeSharedConfig, "only source profile or credential source can be specified, not both", nil)
 	}
 
 	return nil
