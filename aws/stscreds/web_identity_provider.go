@@ -30,7 +30,7 @@ type WebIdentityRoleProvider struct {
 
 	client stsiface.ClientAPI
 
-	jwtBytes        JWTBytes
+	tokenRetriever  IdentityTokenRetriever
 	roleARN         string
 	roleSessionName string
 
@@ -42,16 +42,16 @@ type WebIdentityRoleProviderOptions struct {
 	ExpiryWindow time.Duration
 }
 
-// JWTBytes is an interface for retrieving a JWT
-type JWTBytes interface {
-	GetJWTBytes() ([]byte, error)
+// IdentityTokenRetriever is an interface for retrieving a JWT
+type IdentityTokenRetriever interface {
+	GetIdentityToken() ([]byte, error)
 }
 
-// JWTFilename is a type for retrieving a JWT from the given file name
-type JWTFilename string
+// IdentityTokenFile is for retrieving an identity token from the given file name
+type IdentityTokenFile string
 
-// GetJWTBytes retrieves the JWT token from the file and returns the contents as a []byte
-func (j JWTFilename) GetJWTBytes() ([]byte, error) {
+// GetIdentityToken retrieves the JWT token from the file and returns the contents as a []byte
+func (j IdentityTokenFile) GetIdentityToken() ([]byte, error) {
 	b, err := ioutil.ReadFile(string(j))
 	if err != nil {
 		return nil, fmt.Errorf("unable to read file at %s: %v", string(j), err)
@@ -62,10 +62,10 @@ func (j JWTFilename) GetJWTBytes() ([]byte, error) {
 
 // NewWebIdentityRoleProvider will return a new WebIdentityRoleProvider with the
 // provided stsiface.ClientAPI
-func NewWebIdentityRoleProvider(svc stsiface.ClientAPI, roleARN, roleSessionName string, jwtBytes JWTBytes, options ...func(*WebIdentityRoleProviderOptions)) *WebIdentityRoleProvider {
+func NewWebIdentityRoleProvider(svc stsiface.ClientAPI, roleARN, roleSessionName string, tokenRetriever IdentityTokenRetriever, options ...func(*WebIdentityRoleProviderOptions)) *WebIdentityRoleProvider {
 	p := &WebIdentityRoleProvider{
 		client:          svc,
-		jwtBytes:        jwtBytes,
+		tokenRetriever:  tokenRetriever,
 		roleARN:         roleARN,
 		roleSessionName: roleSessionName,
 	}
@@ -83,7 +83,7 @@ func NewWebIdentityRoleProvider(svc stsiface.ClientAPI, roleARN, roleSessionName
 // 'WebIdentityTokenFilePath' specified destination and if that is empty an
 // error will be returned.
 func (p *WebIdentityRoleProvider) retrieveFn(ctx context.Context) (aws.Credentials, error) {
-	b, err := p.jwtBytes.GetJWTBytes()
+	b, err := p.tokenRetriever.GetIdentityToken()
 	if err != nil {
 		return aws.Credentials{}, awserr.New(ErrCodeWebIdentity, "failed to retrieve jwt from provide source", err)
 	}

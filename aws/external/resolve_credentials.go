@@ -278,7 +278,7 @@ func assumeWebIdentity(cfg *aws.Config, filepath string, roleARN, sessionName st
 		opts = append(opts, options)
 	}
 
-	provider := stscreds.NewWebIdentityRoleProvider(sts.New(*cfg), roleARN, sessionName, stscreds.JWTFilename(filepath), opts...)
+	provider := stscreds.NewWebIdentityRoleProvider(sts.New(*cfg), roleARN, sessionName, stscreds.IdentityTokenFile(filepath), opts...)
 
 	cfg.Credentials = provider
 
