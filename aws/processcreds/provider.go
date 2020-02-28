@@ -131,9 +131,6 @@ const (
 	// errMsgProcessProviderEmptyCmd command must not be empty
 	errMsgProcessProviderEmptyCmd = "command must not be empty"
 
-	// DefaultBufSize default initial buffer size to capture the process output
-	DefaultBufSize = int(8 * sdkio.KibiByte)
-
 	// DefaultTimeout default limit on time a process can run.
 	DefaultTimeout = time.Duration(1) * time.Minute
 )
@@ -299,7 +296,7 @@ func (p *Provider) executeCredentialProcess(ctx context.Context) ([]byte, error)
 	}
 	defer cancelFunc()
 
-	output := bytes.NewBuffer(make([]byte, 0, DefaultBufSize))
+	output := bytes.NewBuffer(make([]byte, 0, int(8*sdkio.KibiByte)))
 
 	p.command.Stderr = os.Stderr // display stderr on console for MFA
 	p.command.Stdout = output    // get creds json on process's stdout
