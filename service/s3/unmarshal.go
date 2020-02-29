@@ -1,7 +1,6 @@
 package s3
 
 import (
-	"bytes"
 	"encoding/xml"
 	"io"
 	"net/http"
@@ -9,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/internal/sdkio"
 	restlegacy "github.com/aws/aws-sdk-go-v2/private/protocol/rest"
 )
 
@@ -23,27 +23,21 @@ type protoGetObjectUnmarshaler struct {
 }
 
 // unmarshalOperation is the top level method used with a handler stack to unmarshal an operation response
-// This method calls appropriate unmarshal shape functions as per the output shape and protocol used by the
-// service.
+// This method calls appropriate unmarshal shape functions as per the output shape and protocol used by the service.
 func (u protoGetObjectUnmarshaler) unmarshalOperation(r *aws.Request) {
+	defer r.HTTPResponse.Body.Close()
 	// isRequestError checks if operation response returned a error response
 	if isRequestError(r) {
 		// if startToken is nil, it would mean there is no xml response body
 		if r.HTTPResponse.Body == nil {
 			// fall back to status code error message
-			statusText := http.StatusText(r.HTTPResponse.StatusCode)
-			errCode := strings.Replace(statusText, " ", "", -1)
-			errMsg := statusText
-			r.Error = awserr.NewRequestFailure(
-				awserr.New(errCode, errMsg, nil),
-				r.HTTPResponse.StatusCode,
-				r.RequestID,
-			)
+			r.Error = getStatusCodeErrorMessage(r)
 			return
 		}
 
-		var buff bytes.Buffer
-		body := io.TeeReader(r.HTTPResponse.Body, &buff)
+		var buff []byte
+		ringBuff := sdkio.NewRingBuffer(buff)
+		body := io.TeeReader(r.HTTPResponse.Body, ringBuff)
 		decoder := xml.NewDecoder(body)
 		startToken, err := decoder.Token()
 		if err != nil {
@@ -54,7 +48,6 @@ func (u protoGetObjectUnmarshaler) unmarshalOperation(r *aws.Request) {
 		r.Error = unmarshalErrorPrototype(r, decoder, startToken)
 		return
 	}
-
 	// delegate to reflection based rest unmarshaler
 	restlegacy.UnmarshalMeta(r)
 
@@ -106,4 +99,16 @@ func (u protoGetObjectUnmarshaler) NamedHandler() aws.NamedHandler {
 		Name: unmarshalHandler,
 		Fn:   u.unmarshalOperation,
 	}
+}
+
+// returns a standard error message based on the status code of the request error
+func getStatusCodeErrorMessage(r *aws.Request) error {
+	statusText := http.StatusText(r.HTTPResponse.StatusCode)
+	errCode := strings.Replace(statusText, " ", "", -1)
+	errMsg := statusText
+	return awserr.NewRequestFailure(
+		awserr.New(errCode, errMsg, nil),
+		r.HTTPResponse.StatusCode,
+		r.RequestID,
+	)
 }
