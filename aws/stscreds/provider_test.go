@@ -74,37 +74,6 @@ func TestAssumeRoleProvider(t *testing.T) {
 	}
 }
 
-func TestAssumeRoleProvider_WithTokenCode(t *testing.T) {
-	stub := &stubSTS{
-		TestInput: func(in *sts.AssumeRoleInput) {
-			if e, a := "0123456789", *in.SerialNumber; e != a {
-				t.Errorf("expect %v, got %v", e, a)
-			}
-			if e, a := tokenCode, *in.TokenCode; e != a {
-				t.Errorf("expect %v, got %v", e, a)
-			}
-		},
-	}
-	p := NewAssumeRoleProvider(stub, roleARN)
-	p.SerialNumber = aws.String("0123456789")
-	p.TokenCode = aws.String(tokenCode)
-
-	creds, err := p.Retrieve(context.Background())
-	if err != nil {
-		t.Fatalf("Expect no error, %v", err)
-	}
-
-	if e, a := roleARN, creds.AccessKeyID; e != a {
-		t.Errorf("Expect access key ID to be reflected role ARN")
-	}
-	if e, a := "assumedSecretAccessKey", creds.SecretAccessKey; e != a {
-		t.Errorf("Expect secret access key to match")
-	}
-	if e, a := "assumedSessionToken", creds.SessionToken; e != a {
-		t.Errorf("Expect session token to match")
-	}
-}
-
 func TestAssumeRoleProvider_WithTokenProvider(t *testing.T) {
 	stub := &stubSTS{
 		TestInput: func(in *sts.AssumeRoleInput) {
@@ -116,11 +85,12 @@ func TestAssumeRoleProvider_WithTokenProvider(t *testing.T) {
 			}
 		},
 	}
-	p := NewAssumeRoleProvider(stub, roleARN)
-	p.SerialNumber = aws.String("0123456789")
-	p.TokenProvider = func() (string, error) {
-		return tokenCode, nil
-	}
+	p := NewAssumeRoleProvider(stub, roleARN, func(options *AssumeRoleProviderOptions) {
+		options.SerialNumber = aws.String("0123456789")
+		options.TokenProvider = func() (string, error) {
+			return tokenCode, nil
+		}
+	})
 
 	creds, err := p.Retrieve(context.Background())
 	if err != nil {
@@ -144,11 +114,12 @@ func TestAssumeRoleProvider_WithTokenProviderError(t *testing.T) {
 			t.Fatalf("API request should not of been called")
 		},
 	}
-	p := NewAssumeRoleProvider(stub, roleARN)
-	p.SerialNumber = aws.String("0123456789")
-	p.TokenProvider = func() (string, error) {
-		return "", fmt.Errorf("error occurred")
-	}
+	p := NewAssumeRoleProvider(stub, roleARN, func(options *AssumeRoleProviderOptions) {
+		options.SerialNumber = aws.String("0123456789")
+		options.TokenProvider = func() (string, error) {
+			return "", fmt.Errorf("error occurred")
+		}
+	})
 
 	creds, err := p.Retrieve(context.Background())
 	if err == nil {
@@ -172,8 +143,9 @@ func TestAssumeRoleProvider_MFAWithNoToken(t *testing.T) {
 			t.Fatalf("API request should not of been called")
 		},
 	}
-	p := NewAssumeRoleProvider(stub, roleARN)
-	p.SerialNumber = aws.String("0123456789")
+	p := NewAssumeRoleProvider(stub, roleARN, func(options *AssumeRoleProviderOptions) {
+		options.SerialNumber = aws.String("0123456789")
+	})
 
 	creds, err := p.Retrieve(context.Background())
 	if err == nil {

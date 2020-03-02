@@ -6,29 +6,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
-// AssumeRoleConfigProvider implementor assertions
+// CredentialsProviderProvider implementor assertions
 var (
-	_ AssumeRoleConfigProvider = &SharedConfig{}
-	_ AssumeRoleConfigProvider = WithAssumeRoleConfig(AssumeRoleConfig{})
-)
-
-// ContainerCredentialsEndpointPathProvider implementor assertions
-var (
-	_ ContainerCredentialsEndpointPathProvider = &EnvConfig{}
-	_ ContainerCredentialsEndpointPathProvider = WithContainerCredentialsEndpointPath("")
-)
-
-// CredentialsEndpointProvider implementor assertions
-var (
-	_ CredentialsEndpointProvider = &EnvConfig{}
-	_ CredentialsEndpointProvider = WithCredentialsEndpoint("")
-)
-
-// CredentialsValueProvider implementor assertions
-var (
-	_ CredentialsValueProvider = &EnvConfig{}
-	_ CredentialsValueProvider = &SharedConfig{}
-	_ CredentialsValueProvider = WithCredentialsValue(aws.Credentials{})
+	_ CredentialsProviderProvider = WithCredentialsProvider{aws.NewStaticCredentialsProvider("", "", "")}
 )
 
 // CustomCABundleProvider implementor assertions

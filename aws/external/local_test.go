@@ -2,9 +2,10 @@ package external
 
 import (
 	"fmt"
-	"os"
 	"strings"
 	"testing"
+
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 )
 
 func TestValidateLocalURL(t *testing.T) {
@@ -44,7 +45,8 @@ func TestValidateLocalURL(t *testing.T) {
 		{"169.254.170.2", true},
 	}
 
-	defer os.Clearenv()
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	for _, c := range cases {
 		t.Run(c.Host, func(t *testing.T) {

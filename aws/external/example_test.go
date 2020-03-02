@@ -34,13 +34,17 @@ func ExampleWithSharedConfigProfile() {
 	// Region: us-west-2
 }
 
-func ExampleWithCredentialsValue() {
+func ExampleWithCredentialsProvider() {
 	cfg, err := external.LoadDefaultAWSConfig(
 		// Hard coded credentials.
-		external.WithCredentialsValue(aws.Credentials{
-			AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION",
-			Source: "example hard coded credentials",
-		}),
+		external.WithCredentialsProvider{
+			CredentialsProvider: aws.StaticCredentialsProvider{
+				Value: aws.Credentials{
+					AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION",
+					Source: "example hard coded credentials",
+				},
+			},
+		},
 	)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "failed to load config, %v", err)
