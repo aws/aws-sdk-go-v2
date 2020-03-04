@@ -3,6 +3,7 @@ package defaults_test
 import (
 	"bytes"
 	"context"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -13,11 +14,9 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
@@ -60,117 +59,24 @@ func TestValidateEndpointHandlerErrorRegion(t *testing.T) {
 	}
 }
 
-type mockCredsProvider struct {
-	retrieveCalled   bool
-	invalidateCalled bool
-}
-
-func (m *mockCredsProvider) Retrieve(ctx context.Context) (aws.Credentials, error) {
-	m.retrieveCalled = true
-	return aws.Credentials{Source: "mockCredsProvider"}, nil
-}
-
-func (m *mockCredsProvider) Invalidate() {
-	m.invalidateCalled = true
-}
-
-func TestAfterRetry_RefreshCreds(t *testing.T) {
-	orig := sdk.SleepWithContext
-	defer func() { sdk.SleepWithContext = orig }()
-	sdk.SleepWithContext = func(context.Context, time.Duration) error { return nil }
-
-	credProvider := &mockCredsProvider{}
-
-	cfg := unit.Config()
-	cfg.Credentials = credProvider
-
-	svc := awstesting.NewClient(cfg)
-	req := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
-	req.Retryable = aws.Bool(true)
-	req.Error = awserr.New("ExpiredTokenException", "", nil)
-	req.HTTPResponse = &http.Response{
-		StatusCode: 403,
-	}
-
-	defaults.AfterRetryHandler.Fn(req)
-
-	if !credProvider.invalidateCalled {
-		t.Errorf("expect credentials to be invalidated")
-	}
-}
-
-func TestAfterRetry_NoPanicRefreshStaticCreds(t *testing.T) {
-	orig := sdk.SleepWithContext
-	defer func() { sdk.SleepWithContext = orig }()
-	sdk.SleepWithContext = func(context.Context, time.Duration) error { return nil }
-
-	credProvider := aws.NewStaticCredentialsProvider("AKID", "SECRET", "")
-
-	cfg := unit.Config()
-	cfg.Credentials = credProvider
-
-	svc := awstesting.NewClient(cfg)
-	req := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
-	req.Retryable = aws.Bool(true)
-	req.Error = awserr.New("ExpiredTokenException", "", nil)
-	req.HTTPResponse = &http.Response{
-		StatusCode: 403,
-	}
-
-	defaults.AfterRetryHandler.Fn(req)
-}
-
-func TestAfterRetryWithContextCanceled(t *testing.T) {
+func TestShouldRetry_WithContext(t *testing.T) {
 	c := awstesting.NewClient(unit.Config())
+	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{}, 0)}
 
 	req := c.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
-
-	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{}, 0)}
 	req.SetContext(ctx)
 
-	req.Error = fmt.Errorf("some error")
-	req.Retryable = aws.Bool(true)
-	req.HTTPResponse = &http.Response{
-		StatusCode: 500,
+	req.Error = &aws.HTTPResponseError{
+		Response: &http.Response{
+			StatusCode: 500,
+			Header:     http.Header{},
+		},
 	}
 
-	close(ctx.DoneCh)
-	ctx.Error = fmt.Errorf("context canceled")
+	defaults.RetryableCheckHandler.Fn(req)
 
-	defaults.AfterRetryHandler.Fn(req)
-
-	if req.Error == nil {
-		t.Fatalf("expect error but didn't receive one")
-	}
-
-	aerr := req.Error.(awserr.Error)
-
-	if e, a := aws.ErrCodeRequestCanceled, aerr.Code(); e != a {
-		t.Errorf("expect %q, error code got %q", e, a)
-	}
-}
-
-func TestAfterRetryWithContext(t *testing.T) {
-	c := awstesting.NewClient(unit.Config())
-
-	req := c.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
-
-	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{}, 0)}
-	req.SetContext(ctx)
-
-	req.Error = fmt.Errorf("some error")
-	req.Retryable = aws.Bool(true)
-	req.HTTPResponse = &http.Response{
-		StatusCode: 500,
-	}
-
-	defaults.AfterRetryHandler.Fn(req)
-
-	if req.Error != nil {
-		t.Fatalf("expect no error, got %v", req.Error)
-	}
-	if e, a := 1, req.RetryCount; e != a {
-		t.Errorf("expect retry count to be %d, got %d", e, a)
+	if req.RetryDelay == 0 {
+		t.Fatalf("expect retry delay got none")
 	}
 }
 
@@ -182,12 +88,6 @@ func TestSendWithContextCanceled(t *testing.T) {
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{}, 0)}
 	req.SetContext(ctx)
 
-	req.Error = fmt.Errorf("some error")
-	req.Retryable = aws.Bool(true)
-	req.HTTPResponse = &http.Response{
-		StatusCode: 500,
-	}
-
 	close(ctx.DoneCh)
 	ctx.Error = fmt.Errorf("context canceled")
 
@@ -197,10 +97,9 @@ func TestSendWithContextCanceled(t *testing.T) {
 		t.Fatalf("expect error but didn't receive one")
 	}
 
-	aerr := req.Error.(awserr.Error)
-
-	if e, a := aws.ErrCodeRequestCanceled, aerr.Code(); e != a {
-		t.Errorf("expect %q, error code got %q", e, a)
+	var aerr *aws.RequestCanceledError
+	if !errors.As(req.Error, &aerr) {
+		t.Fatalf("expect %T error, got %v", aerr, req.Error)
 	}
 }
 

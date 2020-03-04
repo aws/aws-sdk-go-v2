@@ -58,9 +58,6 @@ func TestUnsignedRequest_AssumeRoleWithWebIdentity(t *testing.T) {
 
 func TestSTSCustomRetryErrorCodes(t *testing.T) {
 	cfg := unit.Config()
-	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 1
-	})
 
 	svc := sts.New(cfg)
 	svc.Handlers.Validate.Clear()

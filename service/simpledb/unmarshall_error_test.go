@@ -3,12 +3,12 @@ package simpledb_test
 import (
 	"bytes"
 	"context"
+	"errors"
 	"io/ioutil"
 	"net/http"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/simpledb"
@@ -31,7 +31,7 @@ func TestStatusCodeError(t *testing.T) {
 	for _, test := range statusCodeErrorTests {
 		s := simpledb.New(unit.Config())
 		s.Handlers.Send.Clear()
-		s.Handlers.Send.PushBack(func(r *request.Request) {
+		s.Handlers.Send.PushBack(func(r *aws.Request) {
 			body := ioutil.NopCloser(bytes.NewReader([]byte{}))
 			r.HTTPResponse = &http.Response{
 				ContentLength: 0,
@@ -48,10 +48,15 @@ func TestStatusCodeError(t *testing.T) {
 		if err == nil {
 			t.Fatalf("expect error, got nil")
 		}
-		if e, a := test.code, err.(awserr.Error).Code(); e != a {
+
+		var v awserr.Error
+		if !errors.As(err, &v) {
+			t.Fatalf("expect API error, got %v", err)
+		}
+		if e, a := test.code, v.Code(); e != a {
 			t.Errorf("expect %v, got %v", e, a)
 		}
-		if e, a := test.message, err.(awserr.Error).Message(); e != a {
+		if e, a := test.message, v.Message(); e != a {
 			t.Errorf("expect %v, got %v", e, a)
 		}
 	}
@@ -103,7 +108,7 @@ func TestResponseError(t *testing.T) {
 	for _, test := range responseErrorTests {
 		s := simpledb.New(unit.Config())
 		s.Handlers.Send.Clear()
-		s.Handlers.Send.PushBack(func(r *request.Request) {
+		s.Handlers.Send.PushBack(func(r *aws.Request) {
 			xml := createXMLResponse(test.requestID, test.errors)
 			body := ioutil.NopCloser(bytes.NewReader([]byte(xml)))
 			r.HTTPResponse = &http.Response{
@@ -121,17 +126,26 @@ func TestResponseError(t *testing.T) {
 		if err == nil {
 			t.Fatalf("expect error, got none")
 		}
-		if e, a := test.code, err.(awserr.Error).Code(); e != a {
+
+		var v awserr.Error
+		if !errors.As(err, &v) {
+			t.Fatalf("expect awserr error, got %v", err)
+		}
+		if e, a := test.code, v.Code(); e != a {
 			t.Errorf("expect %v, got %v", e, a)
 		}
-		if e, a := test.message, err.(awserr.Error).Message(); e != a {
+		if e, a := test.message, v.Message(); e != a {
 			t.Errorf("expect %v, got %v", e, a)
 		}
 		if len(test.errors) > 0 {
-			if e, a := test.requestID, err.(awserr.RequestFailure).RequestID(); e != a {
+			var vv awserr.RequestFailure
+			if !errors.As(err, &vv) {
+				t.Fatalf("expect RequestFailure error, got %v", err)
+			}
+			if e, a := test.requestID, vv.RequestID(); e != a {
 				t.Errorf("expect %v, got %v", e, a)
 			}
-			if e, a := test.scode, err.(awserr.RequestFailure).StatusCode(); e != a {
+			if e, a := test.scode, vv.StatusCode(); e != a {
 				t.Errorf("expect %v, got %v", e, a)
 			}
 		}

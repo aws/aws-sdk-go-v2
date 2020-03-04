@@ -74,7 +74,7 @@ func Handlers() aws.Handlers {
 	handlers.Sign.PushBackNamed(BuildContentLengthHandler)
 	handlers.Send.PushBackNamed(ValidateReqSigHandler)
 	handlers.Send.PushBackNamed(SendHandler)
-	handlers.AfterRetry.PushBackNamed(AfterRetryHandler)
+	handlers.ShouldRetry.PushBackNamed(RetryableCheckHandler)
 	handlers.ValidateResponse.PushBackNamed(ValidateResponseHandler)
 
 	return handlers

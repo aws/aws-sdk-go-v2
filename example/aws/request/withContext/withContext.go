@@ -4,14 +4,13 @@ package main
 
 import (
 	"context"
+	"errors"
 	"flag"
 	"fmt"
 	"os"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
@@ -62,9 +61,8 @@ func main() {
 	})
 
 	if _, err := req.Send(ctx); err != nil {
-		if aerr, ok := err.(awserr.Error); ok && aerr.Code() == request.ErrCodeRequestCanceled {
-			// If the SDK can determine the request or retry delay was canceled
-			// by a context the ErrCodeRequestCanceled error code will be returned.
+		var cerr *aws.RequestCanceledError
+		if errors.As(err, &cerr) {
 			fmt.Fprintf(os.Stderr, "upload canceled due to timeout, %v\n", err)
 		} else {
 			fmt.Fprintf(os.Stderr, "failed to upload object, %v\n", err)

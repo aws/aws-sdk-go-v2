@@ -9,6 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	"github.com/aws/aws-sdk-go-v2/service/sts/stsiface"
@@ -102,7 +103,7 @@ func (p *WebIdentityRoleProvider) retrieveFn(ctx context.Context) (aws.Credentia
 
 	// InvalidIdentityToken error is a temporary error that can occur
 	// when assuming an Role with a JWT web identity token.
-	req.RetryErrorCodes = append(req.RetryErrorCodes, sts.ErrCodeInvalidIdentityTokenException)
+	req.Retryer = retry.AddWithErrorCodes(req.Retryer, sts.ErrCodeInvalidIdentityTokenException)
 	resp, err := req.Send(ctx)
 	if err != nil {
 		return aws.Credentials{}, awserr.New(ErrCodeWebIdentity, "failed to retrieve credentials", err)

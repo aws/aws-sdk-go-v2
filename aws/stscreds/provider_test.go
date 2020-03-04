@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
 
@@ -28,6 +29,7 @@ func (s *stubSTS) AssumeRoleRequest(input *sts.AssumeRoleInput) sts.AssumeRoleRe
 				r, _ := http.NewRequest("POST", "https://sts.amazonaws.com", nil)
 				return r
 			}(),
+			Retryer: retry.NewStandard(),
 			Handlers: func() aws.Handlers {
 				h := aws.Handlers{}
 

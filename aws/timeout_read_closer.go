@@ -1,21 +1,27 @@
 package aws
 
 import (
+	"fmt"
 	"io"
 	"time"
-
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-)
-
-var timeoutErr = awserr.New(
-	ErrCodeResponseTimeout,
-	"read on body has reached the timeout limit",
-	nil,
 )
 
 type readResult struct {
 	n   int
 	err error
+}
+
+// ResponseTimeoutError is an error when the reads from the response are
+// delayed longer than the timeout the read was configured for.
+type ResponseTimeoutError struct {
+	Timeout time.Duration
+}
+
+// RetryableError returns that the error is retryable.
+func (*ResponseTimeoutError) RetryableError() bool { return true }
+
+func (e *ResponseTimeoutError) Error() string {
+	return fmt.Sprintf("read on body reach timeout limit, %v", e.Timeout)
 }
 
 // timeoutReadCloser will handle body reads that take too long.
@@ -42,7 +48,7 @@ func (r *timeoutReadCloser) Read(b []byte) (int, error) {
 	case data := <-c:
 		return data.n, data.err
 	case <-timer.C:
-		return 0, timeoutErr
+		return 0, &ResponseTimeoutError{Timeout: r.duration}
 	}
 }
 
@@ -56,17 +62,6 @@ const (
 	HandlerResponseTimeout = "ResponseTimeoutHandler"
 )
 
-// adaptToResponseTimeoutError is a handler that will replace any top level error
-// to a ErrCodeResponseTimeout, if its child is that.
-func adaptToResponseTimeoutError(req *Request) {
-	if err, ok := req.Error.(awserr.Error); ok {
-		aerr, ok := err.OrigErr().(awserr.Error)
-		if ok && aerr.Code() == ErrCodeResponseTimeout {
-			req.Error = aerr
-		}
-	}
-}
-
 // WithResponseReadTimeout is a request option that will wrap the body in a timeout read closer.
 // This will allow for per read timeouts. If a timeout occurred, we will return the
 // ErrCodeResponseTimeout.
@@ -74,7 +69,6 @@ func adaptToResponseTimeoutError(req *Request) {
 //     svc.PutObjectWithContext(ctx, params, request.WithTimeoutReadCloser(30 * time.Second)
 func WithResponseReadTimeout(duration time.Duration) Option {
 	return func(r *Request) {
-
 		var timeoutHandler = NamedHandler{
 			HandlerResponseTimeout,
 			func(req *Request) {
@@ -87,8 +81,5 @@ func WithResponseReadTimeout(duration time.Duration) Option {
 		// remove the handler so we are not stomping over any new durations.
 		r.Handlers.Send.RemoveByName(HandlerResponseTimeout)
 		r.Handlers.Send.PushBackNamed(timeoutHandler)
-
-		r.Handlers.Unmarshal.PushBack(adaptToResponseTimeoutError)
-		r.Handlers.UnmarshalError.PushBack(adaptToResponseTimeoutError)
 	}
 }
