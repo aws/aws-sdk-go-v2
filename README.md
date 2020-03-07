@@ -4,7 +4,7 @@
 
 `aws-sdk-go-v2` is the **Developer Preview** (aka **beta**) for the v2 AWS SDK for the Go programming language. This Developer Preview is provided to receive feedback from the language community on SDK changes prior to the final release. As such users should expect the SDK to release minor version releases that break backwards compatability. The release notes for the breaking change will include information about the breaking change, and how you can migrate to the latest version.
 
-Check out the [Issues] and [Projects] for design and updates being made to the SDK. The v2 SDK requires a minimum version of `Go 1.12`.
+Check out the [Issues] and [Projects] for design and updates being made to the SDK. The v2 SDK requires a minimum version of `Go 1.13`.
 
 We'll be expanding out the [Issues] and [Projects] sections with additional changes to the SDK based on your feedback, and SDK's core's improvements. Check the the SDK's [CHANGE_LOG] for information about the latest updates to the SDK.
 
