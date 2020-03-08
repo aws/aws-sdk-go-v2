@@ -9,6 +9,7 @@ import (
 	"net/url"
 	"regexp"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -180,6 +181,35 @@ var ValidateResponseHandler = aws.NamedHandler{
 			// This may be replaced by a protocol's UnmarshalError handler
 			r.Error = &aws.HTTPResponseError{Response: r.HTTPResponse}
 		}
+	}}
+
+// RequestInvocationIDHeaderHandler sets the invocation id header for request
+// tracking across attempts.
+var RequestInvocationIDHeaderHandler = aws.NamedHandler{
+	Name: "core.RequestInvocationIDHeaderHandler",
+	Fn: func(r *aws.Request) {
+		const invocationIDHeader = "amz-sdk-invocation-id"
+		r.HTTPRequest.Header.Set(invocationIDHeader, r.InvocationID)
+	}}
+
+// RetryMetricHeaderHandler sets an additional header to the API request that
+// includes retry details for the service to consider.
+var RetryMetricHeaderHandler = aws.NamedHandler{
+	Name: "core.RetryMetricHeaderHandler",
+	Fn: func(r *aws.Request) {
+		const retryMetricHeader = "amz-sdk-request"
+		var parts []string
+
+		parts = append(parts, fmt.Sprintf("attempt=%d", r.AttemptNum))
+		if max := r.Retryer.MaxAttempts(); max != 0 {
+			parts = append(parts, fmt.Sprintf("max=%d", max))
+		}
+		// TODO "ttl=YYYYmmddTHHMMSSZ"
+		//    ttl = current_time + socket_read_timeout + estimated_skew
+		// SDK doesn't implement clock skew yet and not obvious how to obtain
+		// read deadlines.
+
+		r.HTTPRequest.Header.Set("amz-sdk-request", strings.Join(parts, "; "))
 	}}
 
 // RetryableCheckHandler performs final checks to determine if the request should

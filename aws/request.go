@@ -117,6 +117,9 @@ type Request struct {
 	SignedHeaderVals http.Header
 	LastSignedAt     time.Time
 
+	// ID for this operation's request that is shared across attempts.
+	InvocationID string
+
 	// The attempt number of this request for the operation.
 	AttemptNum int
 	// The number of times the operation has be retried.
@@ -171,7 +174,6 @@ func New(cfg Config, metadata Metadata, handlers Handlers,
 	}
 
 	httpReq, _ := http.NewRequest(method, "", nil)
-
 	r := &Request{
 		Config:      cfg,
 		Metadata:    metadata,
@@ -189,8 +191,17 @@ func New(cfg Config, metadata Metadata, handlers Handlers,
 		r.Retryer = &NoOpRetryer{}
 	}
 
-	// TODO need better way of handling this error... NewRequest should return error.
-	endpoint, err := cfg.EndpointResolver.ResolveEndpoint(metadata.EndpointsID, cfg.Region)
+	// TODO need better way of handling this error... NewRequest should return
+	// error.
+	uuid, err := sdk.UUIDVersion4()
+	if err != nil {
+		r.Error = err
+		return r
+	}
+	r.InvocationID = uuid
+
+	endpoint, err := cfg.EndpointResolver.ResolveEndpoint(
+		metadata.EndpointsID, cfg.Region)
 
 	if err == nil {
 		r.SetEndpoint(endpoint)
@@ -517,7 +528,8 @@ func (r *Request) Send() error {
 		r.AttemptTime = sdk.NowTime()
 		r.AttemptNum++
 
-		if err := r.Sign(); err != nil {
+		var err error
+		if err = r.Sign(); err != nil {
 			debugLogReqError(r, "Sign Request", notRetrying, err)
 			r.Error = err
 			return err
@@ -536,7 +548,6 @@ func (r *Request) Send() error {
 			return r.Error
 		}
 
-		var err error
 		relRetryToken, err = r.Retryer.GetRetryToken(r.Context(), reqErr)
 		if err != nil {
 			r.Error = err

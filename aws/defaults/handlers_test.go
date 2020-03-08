@@ -15,6 +15,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -325,5 +326,65 @@ func TestSendHandler_HEADNoBody(t *testing.T) {
 	}
 	if e, a := http.StatusOK, req.HTTPResponse.StatusCode; e != a {
 		t.Errorf("expect %d status code, got %d", e, a)
+	}
+}
+
+func TestRequestInvocationIDHeaderHandler(t *testing.T) {
+	cfg := unit.Config()
+	r := aws.New(cfg, aws.Metadata{}, cfg.Handlers, aws.NoOpRetryer{}, &aws.Operation{},
+		&struct{}{}, struct{}{})
+
+	if len(r.InvocationID) == 0 {
+		t.Fatalf("expect invocation id, got none")
+	}
+
+	defaults.RequestInvocationIDHeaderHandler.Fn(r)
+	if r.Error != nil {
+		t.Fatalf("expect no error, got %v", r.Error)
+	}
+
+	if e, a := r.InvocationID, r.HTTPRequest.Header.Get("amz-sdk-invocation-id"); e != a {
+		t.Errorf("expect %v invocation id, got %v", e, a)
+	}
+}
+
+func TestRetryMetricHeaderHandler(t *testing.T) {
+	cases := map[string]struct {
+		Attempt     int
+		MaxAttempts int
+		Expect      string
+	}{
+		"first attempt": {
+			Attempt: 1, MaxAttempts: 3,
+			Expect: "attempt=1; max=3",
+		},
+		"last attempt": {
+			Attempt: 3, MaxAttempts: 3,
+			Expect: "attempt=3; max=3",
+		},
+		"no max attempt": {
+			Attempt: 10,
+			Expect:  "attempt=10",
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			cfg := unit.Config()
+			r := aws.New(cfg, aws.Metadata{}, cfg.Handlers, aws.NoOpRetryer{},
+				&aws.Operation{}, &struct{}{}, struct{}{})
+
+			r.AttemptNum = c.Attempt
+			r.Retryer = retry.AddWithMaxAttempts(r.Retryer, c.MaxAttempts)
+
+			defaults.RetryMetricHeaderHandler.Fn(r)
+			if r.Error != nil {
+				t.Fatalf("expect no error, got %v", r.Error)
+			}
+
+			if e, a := c.Expect, r.HTTPRequest.Header.Get("amz-sdk-request"); e != a {
+				t.Errorf("expect %q metric, got %q", e, a)
+			}
+		})
 	}
 }

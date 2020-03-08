@@ -7,6 +7,13 @@ import (
 	"math/big"
 )
 
+func init() {
+	Reader = rand.Reader
+}
+
+// Reader provides a random reader that can reset during testing.
+var Reader io.Reader
+
 var floatMaxBigInt = big.NewInt(1 << 53)
 
 // Float64 returns a float64 read from an io.Reader source.

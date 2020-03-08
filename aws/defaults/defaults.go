@@ -72,6 +72,8 @@ func Handlers() aws.Handlers {
 	handlers.Build.PushBackNamed(AddHostExecEnvUserAgentHander)
 	handlers.Build.AfterEachFn = aws.HandlerListStopOnError
 	handlers.Sign.PushBackNamed(BuildContentLengthHandler)
+	handlers.Send.PushFrontNamed(RequestInvocationIDHeaderHandler)
+	handlers.Send.PushFrontNamed(RetryMetricHeaderHandler)
 	handlers.Send.PushBackNamed(ValidateReqSigHandler)
 	handlers.Send.PushBackNamed(SendHandler)
 	handlers.ShouldRetry.PushBackNamed(RetryableCheckHandler)
