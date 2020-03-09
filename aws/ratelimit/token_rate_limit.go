@@ -34,10 +34,25 @@ func isTimeoutError(error) bool {
 	return false
 }
 
+type canceledError struct {
+	Err error
+}
+
+func (c canceledError) CanceledError() bool { return true }
+func (c canceledError) Unwrap() error       { return c.Err }
+func (c canceledError) Error() string {
+	return fmt.Sprintf("canceled, %v", c.Err)
+}
+
 // GetToken may cause a available pool of retry quota to be
 // decremented. Will return an error if the decremented value can not be
 // reduced from the retry quota.
 func (l *TokenRateLimit) GetToken(ctx context.Context, cost uint) (func() error, error) {
+	select {
+	case <-ctx.Done():
+		return nil, canceledError{Err: ctx.Err()}
+	default:
+	}
 	if avail, ok := l.bucket.Retrieve(cost); !ok {
 		return nil, QuotaExceededError{Available: avail, Requested: cost}
 	}

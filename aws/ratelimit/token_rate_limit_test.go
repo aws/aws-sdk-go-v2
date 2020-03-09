@@ -2,6 +2,7 @@ package ratelimit
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"strings"
 	"testing"
@@ -64,5 +65,25 @@ func TestTokenRateLimit(t *testing.T) {
 				})
 			}
 		})
+	}
+}
+
+func TestTokenRateLimit_canceled(t *testing.T) {
+	rl := NewTokenRateLimit(10)
+
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+
+	fn, err := rl.GetToken(ctx, 1)
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if fn != nil {
+		t.Errorf("expect no release func returned")
+	}
+
+	var v interface{ CanceledError() bool }
+	if !errors.As(err, &v) {
+		t.Fatalf("expect %T error, got %v", v, err)
 	}
 }
