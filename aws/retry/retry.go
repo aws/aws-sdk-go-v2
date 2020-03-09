@@ -30,7 +30,7 @@ type Retryer interface {
 
 	// GetInitalToken returns the initial request token that can increment the
 	// retry token pool if the request is successful.
-	GetInitialToken() func(error) error
+	GetInitialToken() (releaseToken func(error) error)
 }
 
 // AddWithErrorCodes returns a Retryer with additional error codes considered
