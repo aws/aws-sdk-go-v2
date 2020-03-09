@@ -39,14 +39,14 @@ func (fn IsErrorRetryableFunc) IsErrorRetryable(err error) aws.Ternary {
 	return fn(err)
 }
 
-// RetryableOperationError is an IsErrorRetryable implementation which uses the
+// RetryableError is an IsErrorRetryable implementation which uses the
 // optional interface Retryable on the error value to determine if the error is
 // retryable.
-type RetryableOperationError struct{}
+type RetryableError struct{}
 
 // IsErrorRetryable returns if the error is retryable if it satisfies the
 // Retryable interface, and returns if the attempt should be retried.
-func (RetryableOperationError) IsErrorRetryable(err error) aws.Ternary {
+func (RetryableError) IsErrorRetryable(err error) aws.Ternary {
 	var v interface{ RetryableError() bool }
 
 	if !errors.As(err, &v) {
@@ -77,47 +77,65 @@ func (NoRetryCanceledError) IsErrorRetryable(err error) aws.Ternary {
 
 // RetryableConnectionError determines if the underlying error is an HTTP
 // connection and returns if it should be retried.
+//
+// Includes errors such as connection reset, connection refused, net dial,
+// temporary, and timeout errors.
 type RetryableConnectionError struct{}
 
 // IsErrorRetryable returns if the error is caused by and HTTP connection
 // error, and should be retried.
-func (RetryableConnectionError) IsErrorRetryable(err error) aws.Ternary {
+func (r RetryableConnectionError) IsErrorRetryable(err error) aws.Ternary {
 	if err == nil {
 		return aws.UnknownTernary
 	}
-	var conErrVal bool
+	var retryable bool
 
 	var conErr interface{ ConnectionError() bool }
 	var tempErr interface{ Temporary() bool }
+	var timeoutErr interface{ Timeout() bool }
 	var urlErr *url.Error
 	var netOpErr *net.OpError
 
 	switch {
-	case errors.As(err, &conErr):
-		conErrVal = conErr.ConnectionError()
+	case errors.As(err, &conErr) && conErr.ConnectionError():
+		retryable = true
+
+	case strings.Contains(err.Error(), "connection reset"):
+		retryable = true
 
 	case errors.As(err, &urlErr):
-		conErrVal = strings.Contains(urlErr.Error(), "connection refused")
+		// Refused connections should be retried as the service may not yet be
+		// running on the port. Go TCP dial considers refused connections as
+		// not temporary.
+		if strings.Contains(urlErr.Error(), "connection refused") {
+			retryable = true
+		} else {
+			return r.IsErrorRetryable(errors.Unwrap(urlErr))
+		}
 
 	case errors.As(err, &netOpErr):
-		conErrVal = netOpErr.Op == "dial"
-		if !conErrVal {
-			conErrVal = strings.Contains(netOpErr.Error(), "connection reset")
+		// Network dial, or temporary network errors are always retryable.
+		if strings.EqualFold(netOpErr.Op, "dial") || netOpErr.Temporary() {
+			retryable = true
+		} else {
+			return r.IsErrorRetryable(errors.Unwrap(netOpErr))
 		}
 
-	case errors.As(err, &tempErr):
-		// url.Error and net.OpError implement Temporary but have different
-		// expectations for when an error is or is not temporary.
-		conErrVal = tempErr.Temporary()
+	case errors.As(err, &tempErr) && tempErr.Temporary():
+		// Fallback to the generic temporary check, with temporary errors
+		// retryable.
+		retryable = true
+
+	case errors.As(err, &timeoutErr) && timeoutErr.Timeout():
+		// Fallback to the generic timeout check, with timeout errors
+		// retryable.
+		retryable = true
 
 	default:
-		if strings.Contains(err.Error(), "connection reset") {
-			return aws.TrueTernary
-		}
 		return aws.UnknownTernary
 	}
 
-	return aws.BoolTernary(conErrVal)
+	return aws.BoolTernary(retryable)
 
 }
 

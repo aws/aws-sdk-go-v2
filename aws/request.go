@@ -30,8 +30,9 @@ type RequestSendError struct {
 	Err      error
 }
 
-// RetryableError return that the error is retryable.
-func (e *RequestSendError) RetryableError() bool {
+// ConnectionError return that the error is related to not being able to send
+// the request.
+func (e *RequestSendError) ConnectionError() bool {
 	return true
 }
 

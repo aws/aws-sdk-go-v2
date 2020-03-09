@@ -73,8 +73,8 @@ var DefaultRetryableErrorCodes = map[string]struct{}{
 // DefaultRetryables provides the set of retryable checks that are used by
 // default.
 var DefaultRetryables = []IsErrorRetryable{
-	RetryableOperationError{},
 	NoRetryCanceledError{},
+	RetryableError{},
 	RetryableConnectionError{},
 	RetryableHTTPStatusCode{
 		Codes: DefaultRetryableHTTPStatusCodes,

@@ -14,14 +14,15 @@ type readResult struct {
 // ResponseTimeoutError is an error when the reads from the response are
 // delayed longer than the timeout the read was configured for.
 type ResponseTimeoutError struct {
-	Timeout time.Duration
+	TimeoutDur time.Duration
 }
 
-// RetryableError returns that the error is retryable.
-func (*ResponseTimeoutError) RetryableError() bool { return true }
+// Timeout returns that the error is was caused by a timeout, and can be
+// retried.
+func (*ResponseTimeoutError) Timeout() bool { return true }
 
 func (e *ResponseTimeoutError) Error() string {
-	return fmt.Sprintf("read on body reach timeout limit, %v", e.Timeout)
+	return fmt.Sprintf("read on body reach timeout limit, %v", e.TimeoutDur)
 }
 
 // timeoutReadCloser will handle body reads that take too long.
@@ -48,7 +49,7 @@ func (r *timeoutReadCloser) Read(b []byte) (int, error) {
 	case data := <-c:
 		return data.n, data.err
 	case <-timer.C:
-		return 0, &ResponseTimeoutError{Timeout: r.duration}
+		return 0, &ResponseTimeoutError{TimeoutDur: r.duration}
 	}
 }
 

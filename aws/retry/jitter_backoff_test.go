@@ -38,7 +38,7 @@ func TestExponentialJitterBackoff_AttemptDelay(t *testing.T) {
 		"max delay": {
 			MaxBackoff: 20 * time.Second,
 			RandFloat:  func() (float64, error) { return maxB, nil },
-			Attempt:    10,
+			Attempt:    1 << 53,
 			Expect:     timeconv.FloatSecondsDur(maxB * math.Exp2(math.Log2(20))),
 		},
 	}
