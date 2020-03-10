@@ -21,6 +21,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/internal/sdkio"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/internal/s3testing"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
 )
 
@@ -674,7 +675,7 @@ func TestDownloadBufferStrategy(t *testing.T) {
 	for name, tCase := range cases {
 		t.Logf("starting case: %v", name)
 
-		expected := getTestBytes(int(tCase.expectedSize))
+		expected := s3testing.GetTestBytes(int(tCase.expectedSize))
 
 		svc, _, _ := dlLoggingSvc(expected)
 
@@ -734,7 +735,7 @@ func (r *testErrReader) Read(p []byte) (int, error) {
 }
 
 func TestDownloadBufferStrategy_Errors(t *testing.T) {
-	expected := getTestBytes(int(10 * sdkio.MebiByte))
+	expected := s3testing.GetTestBytes(int(10 * sdkio.MebiByte))
 
 	svc, _, _ := dlLoggingSvc(expected)
 	strat := &recordedWriterReadFromProvider{
@@ -823,7 +824,7 @@ type badReader struct {
 }
 
 func (b *badReader) Read(p []byte) (int, error) {
-	tb := getTestBytes(len(p))
+	tb := s3testing.GetTestBytes(len(p))
 	copy(p, tb)
 	return len(p), b.err
 }
