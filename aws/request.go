@@ -516,10 +516,10 @@ func (r *Request) Send() error {
 		return err
 	}
 
-	// TODO (jasdel) Refactoring request error handling needs to consider the
-	// difference between API, connection, and SDK behavior errors. This
-	// consideration must include wrapping of underlying error when any SDK
-	// error occurs.
+	// TODO (jasdel), Issue #74 - Refactoring request error handling needs to
+	// consider the difference between API, connection, and SDK behavior
+	// errors. This consideration must include wrapping of underlying error
+	// when any SDK error occurs.
 
 	relRetryToken := r.Retryer.GetInitialToken()
 	for {
