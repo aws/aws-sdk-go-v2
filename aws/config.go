@@ -32,18 +32,8 @@ type Config struct {
 	Handlers Handlers
 
 	// Retryer guides how HTTP requests should be retried in case of
-	// recoverable failures.
-	//
-	// When nil or the value does not implement the request.Retryer interface,
-	// the client.DefaultRetryer will be used.
-	//
-	// When both Retryer and MaxRetries are non-nil, the former is used and
-	// the latter ignored.
-	//
-	// To set the Retryer field in a type-safe manner and with chaining, use
-	// the request.WithRetryer helper function:
-	//
-	//   cfg := request.WithRetryer(aws.NewConfig(), myRetryer)
+	// recoverable failures. When nil the API client will use a default
+	// retryer.
 	Retryer Retryer
 
 	// An integer value representing the logging level. The default log level

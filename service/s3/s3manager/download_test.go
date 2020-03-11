@@ -2,6 +2,7 @@ package s3manager_test
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -17,6 +18,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/internal/sdkio"
@@ -166,8 +168,8 @@ func dlLoggingSvcWithErrReader(cases []testErrReader) (*s3.Client, *[]string) {
 	case 0: // zero retries expected
 		cfg.Retryer = aws.NoOpRetryer{}
 	default:
-		cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-			d.NumMaxRetries = len(cases) - 1
+		cfg.Retryer = retry.NewStandard(func(s *retry.StandardOptions) {
+			s.MaxAttempts = len(cases)
 		})
 	}
 
@@ -544,11 +546,13 @@ func TestDownloadWithContextCanceled(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expected error, did not get one")
 	}
-	aerr := err.(awserr.Error)
-	if e, a := aws.ErrCodeRequestCanceled, aerr.Code(); e != a {
-		t.Errorf("expected error code %q, got %q", e, a)
+
+	var rc *aws.RequestCanceledError
+	if !errors.As(err, &rc) {
+		t.Fatalf("expect %T error, got %v", rc, err)
 	}
-	if e, a := "canceled", aerr.Message(); !strings.Contains(a, e) {
+
+	if e, a := "canceled", rc.Err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expected error message to contain %q, but did not %q", e, a)
 	}
 }
@@ -618,7 +622,6 @@ func TestDownload_WithFailure(t *testing.T) {
 			Body:   ioutil.NopCloser(&bytes.Buffer{}),
 		}
 		r.Error = awserr.New("ConnectionError", "some connection error", nil)
-		r.Retryable = aws.Bool(false)
 	})
 
 	start := time.Now()

@@ -19,6 +19,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/ec2metadata"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/google/go-cmp/cmp"
 )
 
@@ -620,7 +621,15 @@ func TestMetadataIAMInfo_failure(t *testing.T) {
 	}
 }
 
+type retryableError struct{}
+
+func (retryableError) Error() string        { return "retryable error" }
+func (retryableError) RetryableError() bool { return true }
+
 func TestMetadataNotAvailable(t *testing.T) {
+	restoreSleep := sdk.TestingUseNoOpSleep()
+	defer restoreSleep()
+
 	c := ec2metadata.New(unit.Config())
 	c.Handlers.Send.Clear()
 	c.Handlers.Send.PushBack(func(r *aws.Request) {
@@ -629,8 +638,7 @@ func TestMetadataNotAvailable(t *testing.T) {
 			Status:     http.StatusText(int(0)),
 			Body:       ioutil.NopCloser(bytes.NewReader([]byte{})),
 		}
-		r.Error = awserr.New("RequestError", "send request failed", nil)
-		r.Retryable = aws.Bool(true) // network errors are retryable
+		r.Error = &aws.RequestSendError{Response: r.HTTPResponse, Err: retryableError{}}
 	})
 
 	if c.Available(context.Background()) {
@@ -647,7 +655,6 @@ func TestMetadataErrorResponse(t *testing.T) {
 			Status:     http.StatusText(http.StatusBadRequest),
 			Body:       ioutil.NopCloser(strings.NewReader("error message text")),
 		}
-		r.Retryable = aws.Bool(false) // network errors are retryable
 	})
 
 	data, err := c.GetMetadata(context.Background(), "uri/path")
@@ -734,6 +741,9 @@ func TestEC2RoleProviderInstanceIdentity(t *testing.T) {
 }
 
 func TestEC2MetadataRetryFailure(t *testing.T) {
+	restoreSleep := sdk.TestingUseNoOpSleep()
+	defer restoreSleep()
+
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/latest/api/token", func(w http.ResponseWriter, r *http.Request) {
@@ -761,12 +771,9 @@ func TestEC2MetadataRetryFailure(t *testing.T) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.EndpointResolverFunc(myCustomResolver)
 	c := ec2metadata.New(cfg)
-	// mock retryer with minimum throttle delay set to 1 ms
-	c.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.MinThrottleDelay = 1 * time.Millisecond
-	})
+
 	// Handler on client that logs if retried
-	c.Handlers.AfterRetry.PushBack(func(i *aws.Request) {
+	c.Handlers.ShouldRetry.PushBack(func(i *aws.Request) {
 		t.Logf("%v received, retrying operation %v", i.HTTPResponse.StatusCode, i.Operation.Name)
 	})
 	c.Handlers.Complete.PushBack(func(i *aws.Request) {
@@ -791,6 +798,9 @@ func TestEC2MetadataRetryFailure(t *testing.T) {
 }
 
 func TestEC2MetadataRetryOnce(t *testing.T) {
+	restoreSleep := sdk.TestingUseNoOpSleep()
+	defer restoreSleep()
+
 	var secureDataFlow bool
 	var retry = true
 	mux := http.NewServeMux()
@@ -828,12 +838,9 @@ func TestEC2MetadataRetryOnce(t *testing.T) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.EndpointResolverFunc(myCustomResolver)
 	c := ec2metadata.New(cfg)
-	// mock retryer with minimum throttle delay set to 1 ms
-	c.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.MinThrottleDelay = 1 * time.Millisecond
-	})
+
 	// Handler on client that logs if retried
-	c.Handlers.AfterRetry.PushBack(func(i *aws.Request) {
+	c.Handlers.ShouldRetry.PushBack(func(i *aws.Request) {
 		t.Logf("%v received, retrying operation %v", i.HTTPResponse.StatusCode, i.Operation.Name)
 		tokenRetryCount++
 	})
@@ -1054,6 +1061,9 @@ func TestExhaustiveRetryWith401(t *testing.T) {
 }
 
 func TestRequestTimeOut(t *testing.T) {
+	restoreSleep := sdk.TestingUseNoOpSleep()
+	defer restoreSleep()
+
 	mux := http.NewServeMux()
 	done := make(chan bool)
 	mux.HandleFunc("/latest/api/token", func(w http.ResponseWriter, r *http.Request) {
@@ -1091,46 +1101,57 @@ func TestRequestTimeOut(t *testing.T) {
 
 	if httpclient, ok := cfg.HTTPClient.(httpClientTransportOptions); ok {
 		c.Config.HTTPClient = httpclient.WithTransportOptions(func(tr *http.Transport) {
-			tr.ResponseHeaderTimeout = 100 * time.Millisecond
+			tr.ResponseHeaderTimeout = 10 * time.Millisecond
 		})
 	}
 
-	c.Handlers.Complete.PushBack(op.addToOperationPerformedList)
-	start := time.Now()
-	resp, err := c.GetMetadata(context.Background(), "/some/path")
+	var retryDelays []time.Duration
+	c.Handlers.ShouldRetry.PushBack(func(r *aws.Request) {
+		if r.ShouldRetry {
+			retryDelays = append(retryDelays, r.RetryDelay)
+		}
+	})
 
-	if e, a := 1*time.Second, time.Since(start); e < a {
-		t.Fatalf("expected duration of test to be less than %v, got %v", e, a)
+	c.Handlers.CompleteAttempt.PushBack(op.addToOperationPerformedList)
+
+	resp, err := c.GetMetadata(context.Background(), "/some/path")
+	if err != nil {
+		t.Fatalf("Expected no error, got %v", err)
 	}
 
-	expectedOperationsPerformed := []string{"GetToken", "GetMetadata"}
+	if e, a := 2, len(retryDelays); e != a {
+		t.Errorf("expect %v retries, got %v", e, a)
+	}
+	for _, d := range retryDelays {
+		if e, a := 1*time.Second, d; a > d {
+			t.Errorf("expect %v max retry delay, got %v", e, a)
+		}
+	}
+
+	expectedOperationsPerformed := []string{"GetToken", "GetToken", "GetToken", "GetMetadata"}
 
 	if e, a := "IMDSProfileForSDKGo", resp; e != a {
 		t.Fatalf("Expected %v, got %v", e, a)
-	}
-
-	if err != nil {
-		t.Fatalf("Expected no error, got %v", err)
 	}
 
 	if diff := cmp.Diff(op.operationsPerformed, expectedOperationsPerformed); diff != "" {
 		t.Fatalf("Found diff in operations performed: \n %v \n", diff)
 	}
 
-	start = time.Now()
+	retryDelays = nil
 	resp, err = c.GetMetadata(context.Background(), "/some/path")
-	if e, a := 1*time.Second, time.Since(start); e < a {
-		t.Fatalf("expected duration of test to be less than %v, got %v", e, a)
+	if err != nil {
+		t.Fatalf("Expected no error, got %v", err)
 	}
 
-	expectedOperationsPerformed = []string{"GetToken", "GetMetadata", "GetMetadata"}
+	if e, a := 0, len(retryDelays); e != a {
+		t.Errorf("expect %v retries, got %v", e, a)
+	}
+
+	expectedOperationsPerformed = append(expectedOperationsPerformed, "GetMetadata")
 
 	if e, a := "IMDSProfileForSDKGo", resp; e != a {
 		t.Fatalf("Expected %v, got %v", e, a)
-	}
-
-	if err != nil {
-		t.Fatalf("Expected no error, got %v", err)
 	}
 
 	if diff := cmp.Diff(op.operationsPerformed, expectedOperationsPerformed); diff != "" {

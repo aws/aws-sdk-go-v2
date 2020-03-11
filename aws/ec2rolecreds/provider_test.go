@@ -2,6 +2,7 @@ package ec2rolecreds_test
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
@@ -98,16 +99,20 @@ func TestProvider_FailAssume(t *testing.T) {
 		t.Fatalf("expect error, got none")
 	}
 
-	e := err.(awserr.Error)
-	if e, a := "ErrorCode", e.Code(); e != a {
+	var aerr awserr.Error
+	if !errors.As(err, &aerr) {
+		t.Fatalf("expect %T error, got %v", err, aerr)
+	}
+	if e, a := "ErrorCode", aerr.Code(); e != a {
 		t.Errorf("expect %v code, got %v", e, a)
 	}
-	if e, a := "ErrorMsg", e.Message(); e != a {
+	if e, a := "ErrorMsg", aerr.Message(); e != a {
 		t.Errorf("expect %v message, got %v", e, a)
 	}
 
-	if err := e.OrigErr(); err != nil {
-		t.Fatalf("expect no error, got %v", err)
+	nestedErr := errors.Unwrap(aerr)
+	if nestedErr != nil {
+		t.Fatalf("expect no nested error, got %v", err)
 	}
 
 	if e, a := "", creds.AccessKeyID; e != a {

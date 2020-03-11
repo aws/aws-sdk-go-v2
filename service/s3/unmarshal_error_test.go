@@ -3,9 +3,11 @@ package s3_test
 import (
 	"bytes"
 	"context"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 	"strings"
 	"testing"
 
@@ -143,36 +145,44 @@ var testUnmarshalCases = []testErrorCase{
 
 func TestUnmarshalError(t *testing.T) {
 	for i, c := range testUnmarshalCases {
-		s := s3.New(unit.Config())
-		s.Handlers.Send.Clear()
-		s.Handlers.Send.PushBack(func(r *request.Request) {
-			r.HTTPResponse = c.RespFn()
-			if !c.WithoutStatusMsg {
-				r.HTTPResponse.Status = fmt.Sprintf("%d%s",
-					r.HTTPResponse.StatusCode,
-					http.StatusText(r.HTTPResponse.StatusCode))
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			s := s3.New(unit.Config())
+			s.Handlers.Send.Clear()
+			s.Handlers.Send.PushBack(func(r *request.Request) {
+				r.HTTPResponse = c.RespFn()
+				if !c.WithoutStatusMsg {
+					r.HTTPResponse.Status = fmt.Sprintf("%d%s",
+						r.HTTPResponse.StatusCode,
+						http.StatusText(r.HTTPResponse.StatusCode))
+				}
+			})
+			req := s.PutBucketAclRequest(&s3.PutBucketAclInput{
+				Bucket: aws.String("bucket"), ACL: s3.BucketCannedACLPublicRead,
+			})
+			_, err := req.Send(context.Background())
+
+			if err == nil {
+				t.Fatalf("expected error, got nil")
+			}
+
+			var v s3.RequestFailure
+			if !errors.As(err, &v) {
+				t.Fatalf("expect an API error, got %v", err)
+			}
+
+			if e, a := c.Code, v.Code(); e != a {
+				t.Errorf("Code: expect %s, got %s", e, a)
+			}
+			if e, a := c.Msg, v.Message(); e != a {
+				t.Errorf("Message: expect %s, got %s", e, a)
+			}
+			if e, a := c.ReqID, v.RequestID(); e != a {
+				t.Errorf("RequestID: expect %s, got %s", e, a)
+			}
+			if e, a := c.HostID, v.HostID(); e != a {
+				t.Errorf("HostID: expect %s, got %s", e, a)
 			}
 		})
-		req := s.PutBucketAclRequest(&s3.PutBucketAclInput{
-			Bucket: aws.String("bucket"), ACL: s3.BucketCannedACLPublicRead,
-		})
-		_, err := req.Send(context.Background())
-
-		if err == nil {
-			t.Fatalf("%d, expected error, got nil", i)
-		}
-		if e, a := c.Code, err.(awserr.Error).Code(); e != a {
-			t.Errorf("%d, Code: expect %s, got %s", i, e, a)
-		}
-		if e, a := c.Msg, err.(awserr.Error).Message(); e != a {
-			t.Errorf("%d, Message: expect %s, got %s", i, e, a)
-		}
-		if e, a := c.ReqID, err.(awserr.RequestFailure).RequestID(); e != a {
-			t.Errorf("%d, RequestID: expect %s, got %s", i, e, a)
-		}
-		if e, a := c.HostID, err.(s3.RequestFailure).HostID(); e != a {
-			t.Errorf("%d, HostID: expect %s, got %s", i, e, a)
-		}
 	}
 }
 

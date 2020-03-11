@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/base64"
 	"encoding/hex"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -13,7 +14,6 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -240,11 +240,12 @@ func TestGetObjectWithContext(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expected error, did not get one")
 	}
-	aerr := err.(awserr.Error)
-	if e, a := aws.ErrCodeRequestCanceled, aerr.Code(); e != a {
-		t.Errorf("expected error code %q, got %q", e, a)
+
+	var rc *aws.RequestCanceledError
+	if !errors.As(err, &rc) {
+		t.Fatalf("expect %T error, got %v", rc, err)
 	}
-	if e, a := "canceled", aerr.Message(); !strings.Contains(a, e) {
-		t.Errorf("expected error message to contain %q, but did not %q", e, a)
+	if e, a := "canceled", rc.Err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v to be in, %v", e, a)
 	}
 }

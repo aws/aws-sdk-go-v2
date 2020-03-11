@@ -1,6 +1,7 @@
 package s3err
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -15,7 +16,7 @@ type RequestFailure struct {
 	hostID string
 }
 
-// NewRequestFailure returns a request failure error decordated with S3
+// NewRequestFailure returns a request failure error decorated with S3
 // specific metadata.
 func NewRequestFailure(err awserr.RequestFailure, hostID string) *RequestFailure {
 	return &RequestFailure{RequestFailure: err, hostID: hostID}
@@ -24,15 +25,17 @@ func NewRequestFailure(err awserr.RequestFailure, hostID string) *RequestFailure
 func (r RequestFailure) Error() string {
 	extra := fmt.Sprintf("status code: %d, request id: %s, host id: %s",
 		r.StatusCode(), r.RequestID(), r.hostID)
-	return awserr.SprintError(r.Code(), r.Message(), extra, r.OrigErr())
-}
-func (r RequestFailure) String() string {
-	return r.Error()
+	return awserr.SprintError(r.Code(), r.Message(), extra, r.Unwrap())
 }
 
 // HostID returns the HostID request response value.
 func (r RequestFailure) HostID() string {
 	return r.hostID
+}
+
+// Unwrap returns the underling error if there was one.
+func (r RequestFailure) Unwrap() error {
+	return errors.Unwrap(r.RequestFailure)
 }
 
 // RequestFailureWrapperHandler returns a handler to rap an

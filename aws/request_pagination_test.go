@@ -7,6 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
@@ -58,9 +59,7 @@ func TestPagination(t *testing.T) {
 		},
 	}
 
-	retryer := aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 2
-	})
+	retryer := retry.NewStandard()
 	op := aws.Operation{
 		Name: "Operation",
 		Paginator: &aws.Paginator{
@@ -162,9 +161,7 @@ func TestPaginationTruncation(t *testing.T) {
 	}
 
 	reqNum := 0
-	retryer := aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 2
-	})
+	retryer := retry.NewStandard()
 	ops := []aws.Operation{
 		{
 			Name: "Operation",
@@ -275,9 +272,7 @@ func BenchmarkPagination(b *testing.B) {
 		{aws.String("3"), aws.String("")},
 	}
 
-	retryer := aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 2
-	})
+	retryer := retry.NewStandard()
 	op := aws.Operation{
 		Name: "Operation",
 		Paginator: &aws.Paginator{
@@ -345,9 +340,7 @@ func TestPaginationWithContextCancel(t *testing.T) {
 		},
 	}
 
-	retryer := aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 2
-	})
+	retryer := retry.NewStandard()
 	op := aws.Operation{
 		Name: "Operation",
 		Paginator: &aws.Paginator{

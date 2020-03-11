@@ -205,7 +205,7 @@ func (d Downloader) DownloadWithContext(ctx context.Context, w io.WriterAt, inpu
 	impl.cfg.RequestOptions = append(impl.cfg.RequestOptions, request.WithAppendUserAgent("S3Manager"))
 
 	if d.Retryer != nil {
-		impl.partBodyMaxRetries = d.Retryer.MaxRetries()
+		impl.partBodyMaxRetries = d.Retryer.MaxAttempts() - 1
 	}
 
 	impl.totalBytes = -1

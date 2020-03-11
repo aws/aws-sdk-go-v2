@@ -22,9 +22,10 @@ func TestCopySnapshotPresignedURL(t *testing.T) {
 	func() {
 		defer func() {
 			if r := recover(); r != nil {
-				t.Fatalf("expect CopySnapshotRequest with nill")
+				t.Fatalf("expect CopySnapshotRequest with nil")
 			}
 		}()
+
 		// Doesn't panic on nil input
 		req := svc.CopySnapshotRequest(nil)
 		req.Sign()
@@ -34,14 +35,18 @@ func TestCopySnapshotPresignedURL(t *testing.T) {
 		SourceRegion:     aws.String("us-west-1"),
 		SourceSnapshotId: aws.String("snap-id"),
 	})
-	req.Sign()
+	if err := req.Sign(); err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
 
 	b, _ := ioutil.ReadAll(req.HTTPRequest.Body)
 	q, _ := url.ParseQuery(string(b))
 	u, _ := url.QueryUnescape(q.Get("PresignedUrl"))
+
 	if e, a := "us-west-2", q.Get("DestinationRegion"); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
+
 	if e, a := "us-west-1", q.Get("SourceRegion"); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}

@@ -1,6 +1,7 @@
 package defaults_test
 
 import (
+	"errors"
 	"fmt"
 	"reflect"
 	"testing"
@@ -128,7 +129,11 @@ func TestMissingRequiredParameters(t *testing.T) {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
-	errs := req.Error.(awserr.BatchedErrors).OrigErrs()
+	var berr awserr.BatchedErrors
+	if !errors.As(req.Error, &berr) {
+		t.Fatalf("expect %T error, got %v", berr, req.Error)
+	}
+	errs := berr.Errs()
 	if e, a := 3, len(errs); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
@@ -171,7 +176,11 @@ func TestNestedMissingRequiredParameters(t *testing.T) {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
-	errs := req.Error.(awserr.BatchedErrors).OrigErrs()
+	var berr awserr.BatchedErrors
+	if !errors.As(req.Error, &berr) {
+		t.Fatalf("expect %T error, got %v", berr, req.Error)
+	}
+	errs := berr.Errs()
 	if e, a := 3, len(errs); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}

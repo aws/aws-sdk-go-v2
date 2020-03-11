@@ -5,6 +5,7 @@ package simpledb
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v2"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
@@ -49,6 +50,10 @@ func New(config aws.Config) *Client {
 				APIVersion:    "2009-04-15",
 			},
 		),
+	}
+
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
 	}
 
 	// Handlers

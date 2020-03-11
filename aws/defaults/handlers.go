@@ -9,11 +9,11 @@ import (
 	"net/url"
 	"regexp"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 )
 
 // Interface for matching types which also have a Len method.
@@ -134,6 +134,7 @@ func handleSendError(r *aws.Request, err error) {
 	if r.HTTPResponse != nil {
 		r.HTTPResponse.Body.Close()
 	}
+
 	// Capture the case where url.Error is returned for error processing
 	// response. e.g. 301 without location header comes back as string
 	// error and r.HTTPResponse is nil. Other URL redirect errors will
@@ -161,55 +162,84 @@ func handleSendError(r *aws.Request, err error) {
 
 	// Catch all request errors, and let the retryer determine
 	// if the error is retryable.
-	r.Error = awserr.New("RequestError", "send request failed", err)
+	r.Error = &aws.RequestSendError{Response: r.HTTPResponse, Err: err}
 
 	// Override the error with a context canceled error, if that was canceled.
 	ctx := r.Context()
 	select {
 	case <-ctx.Done():
-		r.Error = awserr.New(aws.ErrCodeRequestCanceled,
-			"request context canceled", ctx.Err())
-		r.Retryable = aws.Bool(false)
+		r.Error = &aws.RequestCanceledError{Err: ctx.Err()}
 	default:
 	}
 }
 
 // ValidateResponseHandler is a request handler to validate service response.
-var ValidateResponseHandler = aws.NamedHandler{Name: "core.ValidateResponseHandler", Fn: func(r *aws.Request) {
-	if r.HTTPResponse.StatusCode == 0 || r.HTTPResponse.StatusCode >= 300 {
-		// this may be replaced by an UnmarshalError handler
-		r.Error = awserr.New("UnknownError", "unknown error", nil)
-	}
-}}
-
-// AfterRetryHandler performs final checks to determine if the request should
-// be retried and how long to delay.
-var AfterRetryHandler = aws.NamedHandler{
-	Name: "core.AfterRetryHandler",
+var ValidateResponseHandler = aws.NamedHandler{
+	Name: "core.ValidateResponseHandler",
 	Fn: func(r *aws.Request) {
-		// set retry state based on the service's state
-		r.Retryable = aws.Bool(r.Retryer.ShouldRetry(r))
-
-		if r.WillRetry() {
-			r.RetryDelay = r.Retryer.RetryRules(r)
-
-			if err := sdk.SleepWithContext(r.Context(), r.RetryDelay); err != nil {
-				r.Error = awserr.New(aws.ErrCodeRequestCanceled,
-					"request context canceled", err)
-				r.Retryable = aws.Bool(false)
-				return
-			}
-
-			// when the expired token exception occurs the credentials
-			// need to be expired locally so that the next request to
-			// get credentials will trigger a credentials refresh.
-			if p, ok := r.Config.Credentials.(sdk.Invalidator); ok && r.IsErrorExpired() {
-				p.Invalidate()
-			}
-
-			r.RetryCount++
-			r.Error = nil
+		if r.HTTPResponse.StatusCode >= 300 {
+			// This may be replaced by a protocol's UnmarshalError handler
+			r.Error = &aws.HTTPResponseError{Response: r.HTTPResponse}
 		}
+	}}
+
+// RequestInvocationIDHeaderHandler sets the invocation id header for request
+// tracking across attempts.
+var RequestInvocationIDHeaderHandler = aws.NamedHandler{
+	Name: "core.RequestInvocationIDHeaderHandler",
+	Fn: func(r *aws.Request) {
+		const invocationIDHeader = "amz-sdk-invocation-id"
+		r.HTTPRequest.Header.Set(invocationIDHeader, r.InvocationID)
+	}}
+
+// RetryMetricHeaderHandler sets an additional header to the API request that
+// includes retry details for the service to consider.
+var RetryMetricHeaderHandler = aws.NamedHandler{
+	Name: "core.RetryMetricHeaderHandler",
+	Fn: func(r *aws.Request) {
+		const retryMetricHeader = "amz-sdk-request"
+		var parts []string
+
+		parts = append(parts, fmt.Sprintf("attempt=%d", r.AttemptNum))
+		if max := r.Retryer.MaxAttempts(); max != 0 {
+			parts = append(parts, fmt.Sprintf("max=%d", max))
+		}
+		// TODO "ttl=YYYYmmddTHHMMSSZ"
+		//    ttl = current_time + socket_read_timeout + estimated_skew
+		// SDK doesn't implement clock skew yet and not obvious how to obtain
+		// read deadlines.
+
+		r.HTTPRequest.Header.Set("amz-sdk-request", strings.Join(parts, "; "))
+	}}
+
+// RetryableCheckHandler performs final checks to determine if the request should
+// be retried and how long to delay.
+var RetryableCheckHandler = aws.NamedHandler{
+	Name: "core.RetryableCheckHandler",
+	Fn: func(r *aws.Request) {
+		r.ShouldRetry = false
+
+		retryable := r.Retryer.IsErrorRetryable(r.Error)
+		if !retryable {
+			return
+		}
+
+		if max := r.Retryer.MaxAttempts(); max > 0 && r.AttemptNum >= max {
+			r.Error = &aws.MaxAttemptsError{
+				Attempt: r.AttemptNum,
+				Err:     r.Error,
+			}
+			return
+		}
+
+		var err error
+		r.RetryDelay, err = r.Retryer.RetryDelay(r.AttemptNum, r.Error)
+		if err != nil {
+			r.Error = err
+			return
+		}
+
+		r.ShouldRetry = true
 	}}
 
 // ValidateEndpointHandler is a request handler to validate a request had the

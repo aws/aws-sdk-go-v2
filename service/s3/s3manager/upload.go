@@ -3,6 +3,7 @@ package s3manager
 import (
 	"bytes"
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"sort"
@@ -76,23 +77,19 @@ type multiUploadError struct {
 
 // Error returns the string representation of the error.
 //
-// See apierr.BaseError ErrorWithExtra for output format
-//
 // Satisfies the error interface.
 func (m multiUploadError) Error() string {
 	extra := fmt.Sprintf("upload id: %s", m.uploadID)
-	return awserr.SprintError(m.Code(), m.Message(), extra, m.OrigErr())
-}
-
-// String returns the string representation of the error.
-// Alias for Error to satisfy the stringer interface.
-func (m multiUploadError) String() string {
-	return m.Error()
+	return awserr.SprintError(m.Code(), m.Message(), extra, m.Unwrap())
 }
 
 // UploadID returns the id of the S3 upload which failed.
 func (m multiUploadError) UploadID() string {
 	return m.uploadID
+}
+
+func (m multiUploadError) Unwrap() error {
+	return errors.Unwrap(m.awsError)
 }
 
 // UploadOutput represents a response from the Upload() call.
