@@ -2,6 +2,7 @@ package s3
 
 import (
 	"encoding/xml"
+	"fmt"
 	"io"
 	"net/http"
 	"strings"
@@ -25,9 +26,9 @@ type protoGetObjectUnmarshaler struct {
 // unmarshalOperation is the top level method used with a handler stack to unmarshal an operation response
 // This method calls appropriate unmarshal shape functions as per the output shape and protocol used by the service.
 func (u protoGetObjectUnmarshaler) unmarshalOperation(r *aws.Request) {
-	defer r.HTTPResponse.Body.Close()
 	// isRequestError checks if operation response returned a error response
 	if isRequestError(r) {
+		defer r.HTTPResponse.Body.Close()
 		// if startToken is nil, it would mean there is no xml response body
 		if r.HTTPResponse.Body == nil {
 			// fall back to status code error message
@@ -35,13 +36,15 @@ func (u protoGetObjectUnmarshaler) unmarshalOperation(r *aws.Request) {
 			return
 		}
 
-		var buff []byte
+		buff := make([]byte, 1024)
+		readBuff := make([]byte, 1024)
 		ringBuff := sdkio.NewRingBuffer(buff)
 		body := io.TeeReader(r.HTTPResponse.Body, ringBuff)
 		decoder := xml.NewDecoder(body)
 		startToken, err := decoder.Token()
 		if err != nil {
-			r.Error = awserr.New(aws.ErrCodeSerialization, "Failed to decode response body with invalid XML", err)
+			ringBuff.Read(readBuff)
+			r.Error = awserr.New(aws.ErrCodeSerialization, fmt.Sprintf("Failed to decode response body with invalid XML. Here's a snapshot : %v", readBuff), err)
 			return
 		}
 
