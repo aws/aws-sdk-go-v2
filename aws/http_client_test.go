@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 )
@@ -25,5 +26,20 @@ func TestBuildableHTTPClient_NoFollowRedirect(t *testing.T) {
 
 	if e, a := http.StatusMovedPermanently, resp.StatusCode; e != a {
 		t.Errorf("expect %v code, got %v", e, a)
+	}
+}
+
+func TestBuildableHTTPClient_WithTimeout(t *testing.T) {
+	client := &aws.BuildableHTTPClient{}
+
+	expect := 10 * time.Millisecond
+	client2 := client.WithTimeout(expect).(*aws.BuildableHTTPClient)
+
+	if e, a := time.Duration(0), client.GetTimeout(); e != a {
+		t.Errorf("expect %v initial timeout, got %v", e, a)
+	}
+
+	if e, a := expect, client2.GetTimeout(); e != a {
+		t.Errorf("expect %v timeout, got %v", e, a)
 	}
 }
