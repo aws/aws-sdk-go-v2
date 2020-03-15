@@ -159,7 +159,7 @@ func (c *Client) ProtoGetObjectRequest(input *GetObjectInput) ProtoGetObjectRequ
 	req := c.newRequest(op, input, &GetObjectOutput{})
 	// unmarshalMeta handler is used for metadata headers
 	req.Handlers.UnmarshalMeta.Swap(restxml.UnmarshalMetaHandler.Name,
-		protoGetObjectUnmarshaler{output: &GetObjectOutput{}}.NamedHandler(),
+		protoGetObjectUnmarshaler{output: &GetObjectOutput{}}.namedHandler(),
 	)
 	return ProtoGetObjectRequest{Request: req, Input: input, Copy: c.ProtoGetObjectRequest}
 }

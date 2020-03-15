@@ -7,7 +7,8 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/internal/s3err"
+	"github.com/aws/aws-sdk-go-v2/internal/sdkio"
 )
 
 func TestUnmarshalError_Prototype(t *testing.T) {
@@ -25,19 +26,25 @@ func TestUnmarshalError_Prototype(t *testing.T) {
 		RequestID:    "",
 	}
 
+	buff := make([]byte, 1024)
+	ringBuff := sdkio.NewRingBuffer(buff)
 	var decoder *xml.Decoder
 	decoder = xml.NewDecoder(txt)
 	startTag, err := decoder.Token()
 	if err != nil {
 		t.Fatalf("Expected no error, got %v", err.Error())
 	}
-	err = unmarshalErrorPrototype(&mockReq, decoder, startTag)
 
-	if err == nil {
-		t.Fatalf("Expected an error, got none")
+	if start, ok := startTag.(xml.StartElement); ok {
+		err = unmarshalErrorPrototype(&mockReq, decoder, start, ringBuff)
+		if err == nil {
+			t.Fatalf("Expected an error, got none")
+		}
+	} else {
+		t.Fatalf("Failed to get start element from invalid xml")
 	}
 
-	if respErr, ok := err.(awserr.RequestFailure); ok {
+	if respErr, ok := err.(*s3err.RequestFailure); ok {
 		if e, a := "AccessDenied", respErr.Code(); e != a {
 			t.Fatalf(" Response Error Code: Expected %v, got %v", e, a)
 		}
@@ -47,7 +54,11 @@ func TestUnmarshalError_Prototype(t *testing.T) {
 		if e, a := "0380AF11C6689A57", respErr.RequestID(); e != a {
 			t.Fatalf(" Response Error Request Id: Expected %v, got %v", e, a)
 		}
+		if e, a := "c8bv/z7AAkLXxI8qsf/SYXTGmW0RHYI3o4hS+b7nVRKnGwhyrMsC3Hyf/3/3dNiQ3zJYF/ZYHXg=",
+			respErr.HostID(); e != a {
+			t.Fatalf("Response Error Host Id: Expected %v, got %v", e, a)
+		}
 	} else {
-		t.Fatalf("Expected error to be of type Request Failure")
+		t.Fatalf("Expected error to be of type s3 Request Failure, got %T", err)
 	}
 }

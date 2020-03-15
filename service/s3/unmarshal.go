@@ -4,11 +4,11 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io"
-	"net/http"
-	"strings"
+	"io/ioutil"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/internal/s3err"
 	"github.com/aws/aws-sdk-go-v2/internal/sdkio"
 	restlegacy "github.com/aws/aws-sdk-go-v2/private/protocol/rest"
 )
@@ -29,12 +29,7 @@ func (u protoGetObjectUnmarshaler) unmarshalOperation(r *aws.Request) {
 	// isRequestError checks if operation response returned a error response
 	if isRequestError(r) {
 		defer r.HTTPResponse.Body.Close()
-		// if startToken is nil, it would mean there is no xml response body
-		if r.HTTPResponse.Body == nil {
-			// fall back to status code error message
-			r.Error = getStatusCodeErrorMessage(r)
-			return
-		}
+		defer io.Copy(ioutil.Discard, r.HTTPResponse.Body)
 
 		buff := make([]byte, 1024)
 		readBuff := make([]byte, 1024)
@@ -48,9 +43,17 @@ func (u protoGetObjectUnmarshaler) unmarshalOperation(r *aws.Request) {
 			return
 		}
 
-		r.Error = unmarshalErrorPrototype(r, decoder, startToken)
+		if start, ok := startToken.(xml.StartElement); ok {
+			r.Error = unmarshalErrorPrototype(r, decoder, start, ringBuff)
+		} else {
+			ringBuff.Read(readBuff)
+			r.Error = awserr.New(aws.ErrCodeSerialization, fmt.Sprintf(
+				"Failed to decode response body with invalid XML. Here's a snapshot : %v", readBuff),
+				err)
+		}
 		return
 	}
+
 	// delegate to reflection based rest unmarshaler
 	restlegacy.UnmarshalMeta(r)
 
@@ -71,47 +74,46 @@ type protoXMLErrorResponse struct {
 	Code      string `xml:"Code"`
 	Message   string `xml:"Message"`
 	RequestID string `xml:"RequestId"`
+	HostID    string `xml:"HostId"`
 }
 
 // unmarshalError unmarshal's the error response
-func unmarshalErrorPrototype(r *aws.Request, d *xml.Decoder, startToken xml.Token) error {
+// Note: Services may have customizations that require custom error unmarshaling.
+// In this prototype, we do not prototype modeled error unmarshaling.
+func unmarshalErrorPrototype(r *aws.Request, d *xml.Decoder, start xml.StartElement, buffer *sdkio.RingBuffer) error {
 	// protoXMLErrorResponse is error response struct for xml errors.
 	var respErr = protoXMLErrorResponse{}
 
 	// Delegate to reflection based decoding utils
-	if start, ok := startToken.(xml.StartElement); ok {
-		err := d.DecodeElement(&respErr, &start)
-		if err != nil && err != io.EOF {
-			return awserr.New(aws.ErrCodeSerialization, "Serialization error: Failed to unmarshal error", err)
-		}
-	} else {
-		return awserr.New(aws.ErrCodeSerialization, "Serialization error: Failed to unmarshal invalid xml", nil)
+	err := d.DecodeElement(&respErr, &start)
+	if err != nil && err != io.EOF {
+		readBuff := make([]byte, 1024)
+		buffer.Read(readBuff)
+		return awserr.New(aws.ErrCodeSerialization, fmt.Sprintf("Failed to unmarshal error with invalid XML. Here's a snapshot : %v", buffer), err)
 	}
 
 	reqID := respErr.RequestID
 	if len(reqID) == 0 {
 		reqID = r.RequestID
 	}
-	return awserr.NewRequestFailure(awserr.New(respErr.Code, respErr.Message, nil), r.HTTPResponse.StatusCode, reqID)
+
+	hostID := respErr.HostID
+	if len(hostID) == 0 {
+		hostID = r.HTTPResponse.Header.Get("X-Amz-Id-2")
+	}
+
+	// return s3 specific error
+	return s3err.NewRequestFailure(
+		awserr.NewRequestFailure(
+			awserr.New(respErr.Code, respErr.Message, nil),
+			r.HTTPResponse.StatusCode, reqID),
+		hostID)
 }
 
-// NamedHandler returns a Named Handler for an operation unmarshal function
-func (u protoGetObjectUnmarshaler) NamedHandler() aws.NamedHandler {
-	const unmarshalHandler = "ProtoGetObject.UnmarshalHandler"
+// namedHandler returns a named handler for an operation unmarshal function
+func (u protoGetObjectUnmarshaler) namedHandler() aws.NamedHandler {
 	return aws.NamedHandler{
-		Name: unmarshalHandler,
+		Name: "ProtoGetObject.UnmarshalHandler",
 		Fn:   u.unmarshalOperation,
 	}
-}
-
-// returns a standard error message based on the status code of the request error
-func getStatusCodeErrorMessage(r *aws.Request) error {
-	statusText := http.StatusText(r.HTTPResponse.StatusCode)
-	errCode := strings.Replace(statusText, " ", "", -1)
-	errMsg := statusText
-	return awserr.NewRequestFailure(
-		awserr.New(errCode, errMsg, nil),
-		r.HTTPResponse.StatusCode,
-		r.RequestID,
-	)
 }
