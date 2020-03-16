@@ -226,7 +226,7 @@ var RetryMetricHeaderHandler = aws.NamedHandler{
 			parts = append(parts, fmt.Sprintf("ttl=%s", ttl.Format(unixTimeFormat)))
 		}
 
-		r.HTTPRequest.Header.Set("amz-sdk-request", strings.Join(parts, "; "))
+		r.HTTPRequest.Header.Set(retryMetricHeader, strings.Join(parts, "; "))
 	}}
 
 // RetryableCheckHandler performs final checks to determine if the request should
@@ -288,7 +288,10 @@ var AttemptClockSkewHandler = aws.NamedHandler{
 
 		respDate, err := http.ParseTime(respDateHeader)
 		if err != nil {
-			// unable to parse response error for some reason.
+			if r.Config.Logger != nil {
+				r.Config.Logger.Log(fmt.Sprintf("ERROR: unable to determine clock skew for %s/%s API response, invalid Date header value, %v",
+					r.Metadata.ServiceName, r.Operation.Name, respDateHeader))
+			}
 			return
 		}
 
