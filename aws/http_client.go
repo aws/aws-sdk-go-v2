@@ -6,8 +6,6 @@ import (
 	"reflect"
 	"sync"
 	"time"
-
-	"golang.org/x/net/http2"
 )
 
 // Defaults for the HTTPTransportBuilder.
@@ -87,10 +85,8 @@ func (b BuildableHTTPClient) build() *http.Client {
 		tr = defaultHTTPTransport()
 	}
 
-	// TODO Any way to ensure HTTP 2 is supported without depending on
-	// an unversioned experimental package?
-	// Maybe only clients that depend on HTTP/2 should call this?
-	http2.ConfigureTransport(tr)
+	// Ensure HTTP/2 remains enabled.
+	tr.ForceAttemptHTTP2 = true
 
 	return wrapWithoutRedirect(&http.Client{
 		Timeout:   b.clientTimeout,
