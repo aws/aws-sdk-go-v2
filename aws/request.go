@@ -118,6 +118,15 @@ type Request struct {
 	SignedHeaderVals http.Header
 	LastSignedAt     time.Time
 
+	// The time the response headers were received from the API call.
+	ResponseAt time.Time
+
+	// AttemptClockSkews are the estimated clock skew between the service
+	// response Date header, and when the SDK received the response per
+	// attempt. This estimate will include the latency of receiving the
+	// service's response headers.
+	AttemptClockSkews []time.Duration
+
 	// ID for this operation's request that is shared across attempts.
 	InvocationID string
 

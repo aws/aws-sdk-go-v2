@@ -76,6 +76,7 @@ func Handlers() aws.Handlers {
 	handlers.Send.PushFrontNamed(RetryMetricHeaderHandler)
 	handlers.Send.PushBackNamed(ValidateReqSigHandler)
 	handlers.Send.PushBackNamed(SendHandler)
+	handlers.Send.PushBackNamed(AttemptClockSkewHandler)
 	handlers.ShouldRetry.PushBackNamed(RetryableCheckHandler)
 	handlers.ValidateResponse.PushBackNamed(ValidateResponseHandler)
 

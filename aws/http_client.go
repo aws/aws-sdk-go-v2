@@ -44,7 +44,9 @@ type BuildableHTTPClient struct {
 	dialer    *net.Dialer
 
 	initOnce *sync.Once
-	client   *http.Client
+
+	clientTimeout time.Duration
+	client        *http.Client
 }
 
 // NewBuildableHTTPClient returns an initialized client for invoking HTTP
@@ -91,11 +93,12 @@ func (b BuildableHTTPClient) build() *http.Client {
 	http2.ConfigureTransport(tr)
 
 	return wrapWithoutRedirect(&http.Client{
+		Timeout:   b.clientTimeout,
 		Transport: tr,
 	})
 }
 
-func (b BuildableHTTPClient) reset() BuildableHTTPClient {
+func (b BuildableHTTPClient) initReset() BuildableHTTPClient {
 	b.initOnce = new(sync.Once)
 	b.client = nil
 	return b
@@ -108,7 +111,7 @@ func (b BuildableHTTPClient) reset() BuildableHTTPClient {
 // will be replaced with a default Transport value before invoking the option
 // functions.
 func (b BuildableHTTPClient) WithTransportOptions(opts ...func(*http.Transport)) HTTPClient {
-	b = b.reset()
+	b = b.initReset()
 
 	tr := b.GetTransport()
 	for _, opt := range opts {
@@ -123,7 +126,7 @@ func (b BuildableHTTPClient) WithTransportOptions(opts ...func(*http.Transport))
 // net.Dialer options applied. Will set the client's http.Transport DialContext
 // member.
 func (b BuildableHTTPClient) WithDialerOptions(opts ...func(*net.Dialer)) HTTPClient {
-	b = b.reset()
+	b = b.initReset()
 
 	dialer := b.GetDialer()
 	for _, opt := range opts {
@@ -134,6 +137,15 @@ func (b BuildableHTTPClient) WithDialerOptions(opts ...func(*net.Dialer)) HTTPCl
 	tr := b.GetTransport()
 	tr.DialContext = b.dialer.DialContext
 	b.transport = tr
+
+	return &b
+}
+
+// WithTimeout Sets the timeout used by the client for all requests.
+func (b BuildableHTTPClient) WithTimeout(timeout time.Duration) HTTPClient {
+	b = b.initReset()
+
+	b.clientTimeout = timeout
 
 	return &b
 }
@@ -160,6 +172,11 @@ func (b BuildableHTTPClient) GetDialer() *net.Dialer {
 	}
 
 	return dialer
+}
+
+// GetTimeout returns a copy of the client's timeout to cancel requests with.
+func (b BuildableHTTPClient) GetTimeout() time.Duration {
+	return b.clientTimeout
 }
 
 func defaultDialer() *net.Dialer {
