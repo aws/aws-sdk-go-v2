@@ -301,7 +301,7 @@ var AttemptClockSkewHandler = aws.NamedHandler{
 		}
 
 		r.AttemptClockSkews = append(r.AttemptClockSkews,
-			respDate.Add(-1*time.Second).Sub(r.ResponseAt.Add(-1*time.Second)),
+			respDate.Sub(r.ResponseAt),
 		)
 	},
 }
