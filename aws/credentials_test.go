@@ -42,7 +42,7 @@ func TestSafeCredentialsProvider_Cache(t *testing.T) {
 
 	var called bool
 	p := &SafeCredentialsProvider{
-		RetrieveFn: func(ctx context.Context) (Credentials, error) {
+		RetrieveFn: func() (Credentials, error) {
 			if called {
 				t.Fatalf("expect RetrieveFn to only be called once")
 			}
@@ -108,7 +108,7 @@ func TestSafeCredentialsProvider_Expires(t *testing.T) {
 	for _, c := range cases {
 		var called int
 		p := &SafeCredentialsProvider{
-			RetrieveFn: func(ctx context.Context) (Credentials, error) {
+			RetrieveFn: func() (Credentials, error) {
 				called++
 				return c.Creds(), nil
 			},
@@ -132,7 +132,7 @@ func TestSafeCredentialsProvider_Expires(t *testing.T) {
 
 func TestSafeCredentialsProvider_Error(t *testing.T) {
 	p := &SafeCredentialsProvider{
-		RetrieveFn: func(ctx context.Context) (Credentials, error) {
+		RetrieveFn: func() (Credentials, error) {
 			return Credentials{}, fmt.Errorf("failed")
 		},
 	}
@@ -156,7 +156,7 @@ func TestSafeCredentialsProvider_Race(t *testing.T) {
 	}
 	var called bool
 	p := &SafeCredentialsProvider{
-		RetrieveFn: func(ctx context.Context) (Credentials, error) {
+		RetrieveFn: func() (Credentials, error) {
 			time.Sleep(time.Duration(rand.Intn(10)) * time.Millisecond)
 			if called {
 				t.Fatalf("expect RetrieveFn only called once")

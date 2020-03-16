@@ -200,8 +200,8 @@ type credentialProcessResponse struct {
 }
 
 // retrieveFn executes the 'credential_process' and returns the credentials.
-func (p *Provider) retrieveFn(ctx context.Context) (aws.Credentials, error) {
-	out, err := p.executeCredentialProcess(ctx)
+func (p *Provider) retrieveFn() (aws.Credentials, error) {
+	out, err := p.executeCredentialProcess()
 	if err != nil {
 		return aws.Credentials{Source: ProviderName}, err
 	}
@@ -253,7 +253,7 @@ func (p *Provider) retrieveFn(ctx context.Context) (aws.Credentials, error) {
 }
 
 // prepareCommand prepares the command to be executed.
-func (p *Provider) prepareCommand(ctx context.Context) (context.Context, context.CancelFunc, error) {
+func (p *Provider) prepareCommand() (context.Context, context.CancelFunc, error) {
 
 	var cmdArgs []string
 	if runtime.GOOS == "windows" {
@@ -278,7 +278,7 @@ func (p *Provider) prepareCommand(ctx context.Context) (context.Context, context
 		}
 	}
 
-	timeoutCtx, cancelFunc := context.WithTimeout(ctx, p.options.Timeout)
+	timeoutCtx, cancelFunc := context.WithTimeout(context.Background(), p.options.Timeout)
 
 	cmdArgs = append(cmdArgs, p.originalCommand...)
 	p.command = exec.CommandContext(timeoutCtx, cmdArgs[0], cmdArgs[1:]...)
@@ -289,8 +289,8 @@ func (p *Provider) prepareCommand(ctx context.Context) (context.Context, context
 
 // executeCredentialProcess starts the credential process on the OS and
 // returns the results or an error.
-func (p *Provider) executeCredentialProcess(ctx context.Context) ([]byte, error) {
-	ctx, cancelFunc, err := p.prepareCommand(ctx)
+func (p *Provider) executeCredentialProcess() ([]byte, error) {
+	ctx, cancelFunc, err := p.prepareCommand()
 	if err != nil {
 		return nil, err
 	}

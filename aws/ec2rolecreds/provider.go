@@ -68,8 +68,8 @@ func New(client *ec2metadata.Client, options ...func(*ProviderOptions)) *Provide
 // Retrieve retrieves credentials from the EC2 service.
 // Error will be returned if the request fails, or unable to extract
 // the desired credentials.
-func (p *Provider) retrieveFn(ctx context.Context) (aws.Credentials, error) {
-	credsList, err := requestCredList(ctx, p.client)
+func (p *Provider) retrieveFn() (aws.Credentials, error) {
+	credsList, err := requestCredList(context.Background(), p.client)
 	if err != nil {
 		return aws.Credentials{}, err
 	}
@@ -80,7 +80,7 @@ func (p *Provider) retrieveFn(ctx context.Context) (aws.Credentials, error) {
 	}
 	credsName := credsList[0]
 
-	roleCreds, err := requestCred(ctx, p.client, credsName)
+	roleCreds, err := requestCred(context.Background(), p.client, credsName)
 	if err != nil {
 		return aws.Credentials{}, err
 	}

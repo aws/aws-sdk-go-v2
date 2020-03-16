@@ -83,7 +83,7 @@ func NewWebIdentityRoleProvider(svc stsiface.ClientAPI, roleARN, roleSessionName
 // retrieve will attempt to assume a role from a token which is located at
 // 'WebIdentityTokenFilePath' specified destination and if that is empty an
 // error will be returned.
-func (p *WebIdentityRoleProvider) retrieveFn(ctx context.Context) (aws.Credentials, error) {
+func (p *WebIdentityRoleProvider) retrieveFn() (aws.Credentials, error) {
 	b, err := p.tokenRetriever.GetIdentityToken()
 	if err != nil {
 		return aws.Credentials{}, awserr.New(ErrCodeWebIdentity, "failed to retrieve jwt from provide source", err)
@@ -104,7 +104,7 @@ func (p *WebIdentityRoleProvider) retrieveFn(ctx context.Context) (aws.Credentia
 	// InvalidIdentityToken error is a temporary error that can occur
 	// when assuming an Role with a JWT web identity token.
 	req.Retryer = retry.AddWithErrorCodes(req.Retryer, sts.ErrCodeInvalidIdentityTokenException)
-	resp, err := req.Send(ctx)
+	resp, err := req.Send(context.Background())
 	if err != nil {
 		return aws.Credentials{}, awserr.New(ErrCodeWebIdentity, "failed to retrieve credentials", err)
 	}

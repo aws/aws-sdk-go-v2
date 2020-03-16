@@ -7,6 +7,7 @@ LINTIGNOREINFLECTS3UPLOAD='service/s3/s3manager/upload\.go:.+struct field SSEKMS
 LINTIGNOREDEPS='vendor/.+\.go'
 LINTIGNOREPKGCOMMENT='service/[^/]+/doc_custom.go:.+package comment should be of the form'
 LINTIGNOREENDPOINTS='aws/endpoints/defaults.go:.+(method|const) .+ should be '
+LINTIGNORESINGLEFIGHT='internal/sync/singleflight/singleflight.go:.+error should be the last type'
 UNIT_TEST_TAGS="example codegen awsinclude"
 ALL_TAGS="example codegen awsinclude integration perftest sdktool"
 
@@ -145,7 +146,16 @@ verify: lint vet sdkv1check
 lint:
 	@echo "go lint SDK and vendor packages"
 	@lint=`golint ./...`; \
-	dolint=`echo "$$lint" | grep -E -v -e ${LINTIGNOREDOC} -e ${LINTIGNORECONST} -e ${LINTIGNORESTUTTER} -e ${LINTIGNOREINFLECT} -e ${LINTIGNOREDEPS} -e ${LINTIGNOREINFLECTS3UPLOAD} -e ${LINTIGNOREPKGCOMMENT} -e ${LINTIGNOREENDPOINTS}`; \
+	dolint=`echo "$$lint" | grep -E -v \
+	-e ${LINTIGNOREDOC} \
+	-e ${LINTIGNORECONST} \
+	-e ${LINTIGNORESTUTTER} \
+	-e ${LINTIGNOREINFLECT} \
+	-e ${LINTIGNOREDEPS} \
+	-e ${LINTIGNOREINFLECTS3UPLOAD} \
+	-e ${LINTIGNOREPKGCOMMENT} \
+	-e ${LINTIGNOREENDPOINTS} \
+	-e ${LINTIGNORESINGLEFIGHT}`; \
 	echo "$$dolint"; \
 	if [ "$$dolint" != "" ]; then exit 1; fi
 

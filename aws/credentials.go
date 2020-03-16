@@ -3,11 +3,12 @@ package aws
 import (
 	"context"
 	"math"
-	"sync"
 	"sync/atomic"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
+	"github.com/aws/aws-sdk-go-v2/internal/sync/singleflight"
 )
 
 // NeverExpire is the time identifier used when a credential provider's
@@ -83,10 +84,10 @@ type CredentialsProvider interface {
 // SafeCredentialsProvider provides caching and concurrency safe credentials
 // retrieval via the RetrieveFn.
 type SafeCredentialsProvider struct {
-	RetrieveFn func(ctx context.Context) (Credentials, error)
+	RetrieveFn func() (Credentials, error)
 
 	creds atomic.Value
-	m     sync.Mutex
+	sf    singleflight.Group
 }
 
 // Retrieve returns the credentials. If the credentials have already been
@@ -99,15 +100,23 @@ func (p *SafeCredentialsProvider) Retrieve(ctx context.Context) (Credentials, er
 		return *creds, nil
 	}
 
-	p.m.Lock()
-	defer p.m.Unlock()
+	resCh := p.sf.DoChan("", p.singleRetrieve)
+	select {
+	case res := <-resCh:
+		return res.Val.(Credentials), res.Err
+	case <-ctx.Done():
+		return Credentials{}, awserr.New("RequestCanceled",
+			"request context canceled", ctx.Err())
+	}
+}
 
-	// Make sure another goroutine didn't already update the credentials.
+func (p *SafeCredentialsProvider) singleRetrieve() (interface{}, error) {
 	if creds := p.getCreds(); creds != nil {
 		return *creds, nil
 	}
 
-	creds, err := p.RetrieveFn(ctx)
+	creds, err := p.RetrieveFn()
+
 	if err != nil {
 		return Credentials{}, err
 	}

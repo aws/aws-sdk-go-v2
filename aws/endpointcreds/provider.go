@@ -30,7 +30,6 @@
 package endpointcreds
 
 import (
-	"context"
 	"encoding/json"
 	"time"
 
@@ -99,8 +98,8 @@ func New(cfg aws.Config, options ...func(*ProviderOptions)) *Provider {
 
 // Retrieve will attempt to request the credentials from the endpoint the Provider
 // was configured for. And error will be returned if the retrieval fails.
-func (p *Provider) retrieveFn(ctx context.Context) (aws.Credentials, error) {
-	resp, err := p.getCredentials(ctx)
+func (p *Provider) retrieveFn() (aws.Credentials, error) {
+	resp, err := p.getCredentials()
 	if err != nil {
 		return aws.Credentials{},
 			awserr.New("CredentialsEndpointError", "failed to load credentials", err)
@@ -133,7 +132,7 @@ type errorOutput struct {
 	Message string `json:"message"`
 }
 
-func (p *Provider) getCredentials(ctx context.Context) (*getCredentialsOutput, error) {
+func (p *Provider) getCredentials() (*getCredentialsOutput, error) {
 	op := &aws.Operation{
 		Name:       "GetCredentials",
 		HTTPMethod: "GET",
@@ -141,7 +140,6 @@ func (p *Provider) getCredentials(ctx context.Context) (*getCredentialsOutput, e
 
 	out := &getCredentialsOutput{}
 	req := p.client.NewRequest(op, nil, out)
-	req.SetContext(ctx)
 	req.HTTPRequest.Header.Set("Accept", "application/json")
 	if authToken := p.options.AuthorizationToken; len(authToken) != 0 {
 		req.HTTPRequest.Header.Set("Authorization", authToken)
