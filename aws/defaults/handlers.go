@@ -211,15 +211,20 @@ var RetryMetricHeaderHandler = aws.NamedHandler{
 			GetTimeout() time.Duration
 		}
 
-		// Attempt extract the TTL from context deadline, or timeout on the client.
 		var ttl time.Time
-		if v, ok := r.Config.HTTPClient.(timeoutGetter); ok && v.GetTimeout() > 0 {
-			ttl = sdk.NowTime().Add(v.GetTimeout())
-		} else if deadline, ok := r.Context().Deadline(); ok {
-			ttl = deadline
+		// Attempt extract the TTL from context deadline, or timeout on the client.
+		if v, ok := r.Config.HTTPClient.(timeoutGetter); ok {
+			if t := v.GetTimeout(); t > 0 {
+				ttl = sdk.NowTime().Add(t)
+			}
+		}
+		if ttl.IsZero() {
+			if deadline, ok := r.Context().Deadline(); ok {
+				ttl = deadline
+			}
 		}
 
-		// Only append the ttl if it can be determined.
+		// Only append the TTL if it can be determined.
 		if !ttl.IsZero() && len(r.AttemptClockSkews) > 0 {
 			const unixTimeFormat = "20060102T150405Z"
 			ttl = ttl.Add(r.AttemptClockSkews[len(r.AttemptClockSkews)-1])
