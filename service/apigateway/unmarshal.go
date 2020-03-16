@@ -2,9 +2,12 @@ package apigateway
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"strings"
+
+	"github.com/aws/aws-sdk-go-v2/internal/sdkio"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
@@ -50,14 +53,15 @@ func (u protoCreateAPIKeyUnmarshaler) namedHandler() aws.NamedHandler {
 func unmarshalError(req *aws.Request) {
 	defer req.HTTPResponse.Body.Close()
 	defer io.Copy(ioutil.Discard, req.HTTPResponse.Body)
-	// buff := make([]byte, 1024)
-	// readBuff := make([]byte, 1024)
-	// ringBuff := sdkio.NewRingBuffer(buff)
-	// body := io.TeeReader(req.HTTPResponse.Body, ringBuff)
-	bodyBytes, err := ioutil.ReadAll(req.HTTPResponse.Body)
-
+	buff := make([]byte, 1024)
+	readBuff := make([]byte, 1024)
+	ringBuff := sdkio.NewRingBuffer(buff)
+	body := io.TeeReader(req.HTTPResponse.Body, ringBuff)
+	bodyBytes, err := ioutil.ReadAll(body)
 	if err != nil {
-		req.Error = awserr.New("SerializationError", "failed reading JSON error response", err)
+		ringBuff.Read(readBuff)
+		req.Error = awserr.New("SerializationError",
+			fmt.Sprintf("failed reading JSON error response, Here's a snapshot %s", readBuff), err)
 		return
 	}
 	if len(bodyBytes) == 0 {
