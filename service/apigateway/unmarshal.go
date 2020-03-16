@@ -44,7 +44,7 @@ func (u protoCreateAPIKeyUnmarshaler) namedHandler() aws.NamedHandler {
 	}
 }
 
-// UnmarshalError unmarshal's an error response.
+// unmarshalError unmarshal's an error response.
 // some service may have custom error handling
 // here we do not handle modelled exceptions.
 func unmarshalError(req *aws.Request) {
