@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
-const protoOpCreateApiKey = "CreateApiKey"
+const protoOpCreateAPIKey = "CreateApiKey"
 
 // ProtoCreateAPIKeyRequest returns a request value for making API operation for
 // Amazon API Gateway.
@@ -24,7 +24,7 @@ const protoOpCreateApiKey = "CreateApiKey"
 //    }
 func (c *Client) ProtoCreateAPIKeyRequest(input *CreateApiKeyInput) ProtoCreateAPIKeyRequest {
 	op := &aws.Operation{
-		Name:       protoOpCreateApiKey,
+		Name:       protoOpCreateAPIKey,
 		HTTPMethod: "POST",
 		HTTPPath:   "/apikeys",
 	}
