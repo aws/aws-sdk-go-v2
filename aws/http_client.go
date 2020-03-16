@@ -66,35 +66,26 @@ func NewBuildableHTTPClient() *BuildableHTTPClient {
 // Redirect (3xx) responses will not be followed, the HTTP response received
 // will returned instead.
 func (b *BuildableHTTPClient) Do(req *http.Request) (*http.Response, error) {
-	b.initOnce.Do(b.initClient)
+	b.initOnce.Do(b.build)
 
 	return b.client.Do(req)
 }
 
-func (b *BuildableHTTPClient) initClient() {
-	b.client = b.build()
-}
-
-// BuildHTTPClient returns an initialized HTTPClient built from the options of
-// the builder.
-func (b BuildableHTTPClient) build() *http.Client {
+func (b *BuildableHTTPClient) build() {
 	var tr *http.Transport
 	if b.transport != nil {
-		tr = shallowCopyStruct(b.transport).(*http.Transport)
+		tr = b.transport.Clone()
 	} else {
 		tr = defaultHTTPTransport()
 	}
 
-	// Ensure HTTP/2 remains enabled.
-	tr.ForceAttemptHTTP2 = true
-
-	return wrapWithoutRedirect(&http.Client{
+	b.client = wrapWithoutRedirect(&http.Client{
 		Timeout:   b.clientTimeout,
 		Transport: tr,
 	})
 }
 
-func (b BuildableHTTPClient) initReset() BuildableHTTPClient {
+func (b BuildableHTTPClient) reset() BuildableHTTPClient {
 	b.initOnce = new(sync.Once)
 	b.client = nil
 	return b
@@ -107,7 +98,7 @@ func (b BuildableHTTPClient) initReset() BuildableHTTPClient {
 // will be replaced with a default Transport value before invoking the option
 // functions.
 func (b BuildableHTTPClient) WithTransportOptions(opts ...func(*http.Transport)) HTTPClient {
-	b = b.initReset()
+	b = b.reset()
 
 	tr := b.GetTransport()
 	for _, opt := range opts {
@@ -122,7 +113,7 @@ func (b BuildableHTTPClient) WithTransportOptions(opts ...func(*http.Transport))
 // net.Dialer options applied. Will set the client's http.Transport DialContext
 // member.
 func (b BuildableHTTPClient) WithDialerOptions(opts ...func(*net.Dialer)) HTTPClient {
-	b = b.initReset()
+	b = b.reset()
 
 	dialer := b.GetDialer()
 	for _, opt := range opts {
@@ -139,11 +130,9 @@ func (b BuildableHTTPClient) WithDialerOptions(opts ...func(*net.Dialer)) HTTPCl
 
 // WithTimeout Sets the timeout used by the client for all requests.
 func (b BuildableHTTPClient) WithTimeout(timeout time.Duration) HTTPClient {
-	b = b.initReset()
-
-	b.clientTimeout = timeout
-
-	return &b
+	bb := b.reset()
+	bb.clientTimeout = timeout
+	return &bb
 }
 
 // GetTransport returns a copy of the client's HTTP Transport.
@@ -194,6 +183,7 @@ func defaultHTTPTransport() *http.Transport {
 		MaxIdleConnsPerHost:   DefaultHTTPTransportMaxIdleConnsPerHost,
 		IdleConnTimeout:       DefaultHTTPTransportIdleConnTimeout,
 		ExpectContinueTimeout: DefaultHTTPTransportExpectContinueTimeout,
+		ForceAttemptHTTP2:     true,
 	}
 
 	return tr
