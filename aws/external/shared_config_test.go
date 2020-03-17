@@ -406,10 +406,10 @@ func cmpFiles(expects, actuals []sharedConfigFile) bool {
 }
 
 func TestLoadSharedConfig(t *testing.T) {
-	origProf := DefaultSharedConfigProfile
+	origProf := defaultSharedConfigProfile
 	origFiles := DefaultSharedConfigFiles
 	defer func() {
-		DefaultSharedConfigProfile = origProf
+		defaultSharedConfigProfile = origProf
 		DefaultSharedConfigFiles = origFiles
 	}()
 
@@ -500,11 +500,11 @@ func TestLoadSharedConfig(t *testing.T) {
 
 	for i, c := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			DefaultSharedConfigProfile = origProf
+			defaultSharedConfigProfile = origProf
 			DefaultSharedConfigFiles = origFiles
 
 			if len(c.Profile) > 0 {
-				DefaultSharedConfigProfile = c.Profile
+				defaultSharedConfigProfile = c.Profile
 			}
 			if len(c.Files) > 0 {
 				DefaultSharedConfigFiles = c.Files
