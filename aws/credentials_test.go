@@ -222,6 +222,6 @@ func TestSafeProviderRetrieveConcurrent(t *testing.T) {
 	<-done
 
 	if e, a := uint32(1), atomic.LoadUint32(&stub.called); e != a {
-		t.Errorf("expected")
+		t.Errorf("expected %v, got %v", e, a)
 	}
 }
