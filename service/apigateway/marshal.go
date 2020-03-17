@@ -50,30 +50,52 @@ func marshalCreateAPIKeyInputShapeAWSJSON(v *CreateApiKeyInput, r *aws.Request, 
 		r.HTTPRequest.Header.Add("Content-Type", "application/x-amz-json-"+jsonVersion)
 	}
 
-	obj := enc.Object()
-	obj.Key("customerId").String(*v.CustomerId)
-	obj.Key("description").String(*v.Description)
-	obj.Key("enabled").Boolean(*v.Enabled)
-	obj.Key("generateDistinctId").Boolean(*v.GenerateDistinctId)
-	obj.Key("name").String(*v.Name)
-	stageKeyArray := obj.Key("stageKeys").Array()
-	for _, stageKey := range v.StageKeys {
-		stageKeyArrayObj := stageKeyArray.Value().Object()
-		stageKeyArrayObj.Key("restApiId").String(*stageKey.RestApiId)
-		stageKeyArrayObj.Key("stageName").String(*stageKey.StageName)
-		stageKeyArrayObj.Close()
+	if v != nil {
+		obj := enc.Object()
+		if v.CustomerId != nil {
+			obj.Key("customerId").String(*v.CustomerId)
+		}
+		if v.Description != nil {
+			obj.Key("description").String(*v.Description)
+		}
+		if v.Enabled != nil {
+			obj.Key("enabled").Boolean(*v.Enabled)
+		}
+		if v.GenerateDistinctId != nil {
+			obj.Key("generateDistinctId").Boolean(*v.GenerateDistinctId)
+		}
+		if v.Name != nil {
+			obj.Key("name").String(*v.Name)
+		}
+
+		if v.StageKeys != nil {
+			stageKeyArray := obj.Key("stageKeys").Array()
+			for _, stageKey := range v.StageKeys {
+				stageKeyArrayObj := stageKeyArray.Value().Object()
+				if stageKey.RestApiId != nil {
+					stageKeyArrayObj.Key("restApiId").String(*stageKey.RestApiId)
+				}
+				if stageKey.StageName != nil {
+					stageKeyArrayObj.Key("stageName").String(*stageKey.StageName)
+				}
+				stageKeyArrayObj.Close()
+			}
+			stageKeyArray.Close()
+		}
+
+		if v.Tags != nil {
+			tagObj := obj.Key("tags").Object()
+			for k, val := range v.Tags {
+				tagObj.Key(k).String(val)
+			}
+			tagObj.Close()
+		}
+
+		if v.Value != nil {
+			obj.Key("value").String(*v.Value)
+		}
+		obj.Close()
 	}
-	stageKeyArray.Close()
-
-	tagObj := obj.Key("tags").Object()
-	for k, val := range v.Tags {
-		tagObj.Key(k).String(val)
-	}
-	tagObj.Close()
-
-	obj.Key("value").String(*v.Value)
-	obj.Close()
-
 	r.SetBufferBody([]byte(enc.String()))
 	return nil
 }
