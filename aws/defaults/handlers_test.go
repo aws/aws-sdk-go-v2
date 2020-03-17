@@ -18,6 +18,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
@@ -349,10 +350,21 @@ func TestRequestInvocationIDHeaderHandler(t *testing.T) {
 }
 
 func TestRetryMetricHeaderHandler(t *testing.T) {
+	nowTime := sdk.NowTime
+	defer func() {
+		sdk.NowTime = nowTime
+	}()
+	sdk.NowTime = func() time.Time {
+		return time.Date(2020, 2, 2, 0, 0, 0, 0, time.UTC)
+	}
+
 	cases := map[string]struct {
-		Attempt     int
-		MaxAttempts int
-		Expect      string
+		Attempt           int
+		MaxAttempts       int
+		Client            aws.HTTPClient
+		ContextDeadline   time.Time
+		AttemptClockSkews []time.Duration
+		Expect            string
 	}{
 		"first attempt": {
 			Attempt: 1, MaxAttempts: 3,
@@ -366,15 +378,43 @@ func TestRetryMetricHeaderHandler(t *testing.T) {
 			Attempt: 10,
 			Expect:  "attempt=10",
 		},
+		"with ttl client timeout": {
+			Attempt: 2, MaxAttempts: 3,
+			AttemptClockSkews: []time.Duration{
+				10 * time.Second,
+			},
+			Client: func() aws.HTTPClient {
+				c := &aws.BuildableHTTPClient{}
+				return c.WithTimeout(10 * time.Second)
+			}(),
+			Expect: "attempt=2; max=3; ttl=20200202T000020Z",
+		},
+		"with ttl context deadline": {
+			Attempt: 1, MaxAttempts: 3,
+			AttemptClockSkews: []time.Duration{
+				10 * time.Second,
+			},
+			ContextDeadline: sdk.NowTime().Add(10 * time.Second),
+			Expect:          "attempt=1; max=3; ttl=20200202T000020Z",
+		},
 	}
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
 			cfg := unit.Config()
+			if c.Client != nil {
+				cfg.HTTPClient = c.Client
+			}
 			r := aws.New(cfg, aws.Metadata{}, cfg.Handlers, aws.NoOpRetryer{},
 				&aws.Operation{}, &struct{}{}, struct{}{})
+			if !c.ContextDeadline.IsZero() {
+				ctx, cancel := context.WithDeadline(r.Context(), c.ContextDeadline)
+				defer cancel()
+				r.SetContext(ctx)
+			}
 
 			r.AttemptNum = c.Attempt
+			r.AttemptClockSkews = c.AttemptClockSkews
 			r.Retryer = retry.AddWithMaxAttempts(r.Retryer, c.MaxAttempts)
 
 			defaults.RetryMetricHeaderHandler.Fn(r)
@@ -384,6 +424,95 @@ func TestRetryMetricHeaderHandler(t *testing.T) {
 
 			if e, a := c.Expect, r.HTTPRequest.Header.Get("amz-sdk-request"); e != a {
 				t.Errorf("expect %q metric, got %q", e, a)
+			}
+		})
+	}
+}
+
+func TestAttemptClockSkewHandler(t *testing.T) {
+	cases := map[string]struct {
+		Req    *aws.Request
+		Expect []time.Duration
+	}{
+		"no response": {Req: &aws.Request{}},
+		"failed response": {
+			Req: &aws.Request{
+				HTTPResponse: &http.Response{StatusCode: 0, Header: http.Header{}},
+			},
+		},
+		"no date header response": {
+			Req: &aws.Request{
+				HTTPResponse: &http.Response{StatusCode: 200, Header: http.Header{}},
+			},
+		},
+		"invalid date header response": {
+			Req: &aws.Request{
+				HTTPResponse: &http.Response{
+					StatusCode: 200,
+					Header:     http.Header{"Date": []string{"abc123"}},
+				},
+			},
+		},
+		"response at unset": {
+			Req: &aws.Request{
+				HTTPResponse: &http.Response{
+					StatusCode: 200,
+					Header: http.Header{
+						"Date": []string{"Thu, 05 Mar 2020 22:25:15 GMT"},
+					},
+				},
+			},
+		},
+		"first date response": {
+			Req: &aws.Request{
+				HTTPResponse: &http.Response{
+					StatusCode: 200,
+					Header: http.Header{
+						"Date": []string{"Thu, 05 Mar 2020 22:25:15 GMT"},
+					},
+				},
+				ResponseAt: time.Date(2020, 3, 5, 22, 25, 17, 0, time.UTC),
+			},
+			Expect: []time.Duration{-2 * time.Second},
+		},
+		"subsequent date response": {
+			Req: &aws.Request{
+				HTTPResponse: &http.Response{
+					StatusCode: 200,
+					Header: http.Header{
+						"Date": []string{"Thu, 05 Mar 2020 22:25:15 GMT"},
+					},
+				},
+				ResponseAt: time.Date(2020, 3, 5, 22, 25, 14, 0, time.UTC),
+				AttemptClockSkews: []time.Duration{
+					-2 * time.Second,
+				},
+			},
+			Expect: []time.Duration{
+				-2 * time.Second,
+				1 * time.Second,
+			},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			r := new(aws.Request)
+			*r = *c.Req
+
+			defaults.AttemptClockSkewHandler.Fn(r)
+			if err := r.Error; err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			if e, a := len(c.Expect), len(r.AttemptClockSkews); e != a {
+				t.Errorf("expect %v skews, got %v", e, a)
+			}
+
+			for i, s := range r.AttemptClockSkews {
+				if e, a := c.Expect[i], s; e != a {
+					t.Errorf("%d, expect %v skew, got %v", i, e, a)
+				}
 			}
 		})
 	}

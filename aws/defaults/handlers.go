@@ -14,6 +14,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 )
 
 // Interface for matching types which also have a Len method.
@@ -122,6 +123,7 @@ var SendHandler = aws.NamedHandler{
 
 		var err error
 		r.HTTPResponse, err = r.Config.HTTPClient.Do(r.HTTPRequest)
+		r.ResponseAt = sdk.NowTime()
 		if err != nil {
 			handleSendError(r, err)
 		}
@@ -204,12 +206,32 @@ var RetryMetricHeaderHandler = aws.NamedHandler{
 		if max := r.Retryer.MaxAttempts(); max != 0 {
 			parts = append(parts, fmt.Sprintf("max=%d", max))
 		}
-		// TODO "ttl=YYYYmmddTHHMMSSZ"
-		//    ttl = current_time + socket_read_timeout + estimated_skew
-		// SDK doesn't implement clock skew yet and not obvious how to obtain
-		// read deadlines.
 
-		r.HTTPRequest.Header.Set("amz-sdk-request", strings.Join(parts, "; "))
+		type timeoutGetter interface {
+			GetTimeout() time.Duration
+		}
+
+		var ttl time.Time
+		// Attempt extract the TTL from context deadline, or timeout on the client.
+		if v, ok := r.Config.HTTPClient.(timeoutGetter); ok {
+			if t := v.GetTimeout(); t > 0 {
+				ttl = sdk.NowTime().Add(t)
+			}
+		}
+		if ttl.IsZero() {
+			if deadline, ok := r.Context().Deadline(); ok {
+				ttl = deadline
+			}
+		}
+
+		// Only append the TTL if it can be determined.
+		if !ttl.IsZero() && len(r.AttemptClockSkews) > 0 {
+			const unixTimeFormat = "20060102T150405Z"
+			ttl = ttl.Add(r.AttemptClockSkews[len(r.AttemptClockSkews)-1])
+			parts = append(parts, fmt.Sprintf("ttl=%s", ttl.Format(unixTimeFormat)))
+		}
+
+		r.HTTPRequest.Header.Set(retryMetricHeader, strings.Join(parts, "; "))
 	}}
 
 // RetryableCheckHandler performs final checks to determine if the request should
@@ -252,3 +274,34 @@ var ValidateEndpointHandler = aws.NamedHandler{Name: "core.ValidateEndpointHandl
 		r.Error = aws.ErrMissingEndpoint
 	}
 }}
+
+// AttemptClockSkewHandler records the estimated clock skew between the client
+// and service response clocks. This estimation will be no more granular than
+// one second. It will not be populated until after at least the first
+// attempt's response is received.
+var AttemptClockSkewHandler = aws.NamedHandler{
+	Name: "core.AttemptClockSkewHandler",
+	Fn: func(r *aws.Request) {
+		if r.ResponseAt.IsZero() || r.HTTPResponse == nil || r.HTTPResponse.StatusCode == 0 {
+			return
+		}
+
+		respDateHeader := r.HTTPResponse.Header.Get("Date")
+		if len(respDateHeader) == 0 {
+			return
+		}
+
+		respDate, err := http.ParseTime(respDateHeader)
+		if err != nil {
+			if r.Config.Logger != nil {
+				r.Config.Logger.Log(fmt.Sprintf("ERROR: unable to determine clock skew for %s/%s API response, invalid Date header value, %v",
+					r.Metadata.ServiceName, r.Operation.Name, respDateHeader))
+			}
+			return
+		}
+
+		r.AttemptClockSkews = append(r.AttemptClockSkews,
+			respDate.Sub(r.ResponseAt),
+		)
+	},
+}
