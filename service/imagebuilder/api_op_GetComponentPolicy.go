@@ -13,7 +13,7 @@ import (
 type GetComponentPolicyInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the component whose policy you wish to
+	// The Amazon Resource Name (ARN) of the component whose policy you want to
 	// retrieve.
 	//
 	// ComponentArn is a required field

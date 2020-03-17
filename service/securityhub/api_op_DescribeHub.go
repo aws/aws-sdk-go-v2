@@ -38,7 +38,7 @@ func (s DescribeHubInput) MarshalFields(e protocol.FieldEncoder) error {
 type DescribeHubOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the Hub resource retrieved.
+	// The ARN of the Hub resource that was retrieved.
 	HubArn *string `type:"string"`
 
 	// The date and time when Security Hub was enabled in the account.

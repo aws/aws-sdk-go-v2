@@ -17,12 +17,9 @@ type AssociateWebACLInput struct {
 	//
 	// The ARN must be in one of the following formats:
 	//
-	//    * For a CloudFront distribution: arn:aws:cloudfront::account-id:distribution/distribution-id
+	//    * For an Application Load Balancer: arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
 	//
-	//    * For an Application Load Balancer: arn:aws:elasticloadbalancing: region:account-id:loadbalancer/app/load-balancer-name
-	//    /load-balancer-id
-	//
-	//    * For an Amazon API Gateway stage: arn:aws:apigateway:region ::/restapis/api-id/stages/stage-name
+	//    * For an Amazon API Gateway stage: arn:aws:apigateway:region::/restapis/api-id/stages/stage-name
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `min:"20" type:"string" required:"true"`
@@ -86,7 +83,7 @@ const opAssociateWebACL = "AssociateWebACL"
 // resource. A regional application can be an Application Load Balancer (ALB)
 // or an API Gateway stage.
 //
-// For AWS CloudFront, you can associate the Web ACL by providing the Id of
+// For AWS CloudFront, you can associate the Web ACL by providing the ARN of
 // the WebACL to the CloudFront API call UpdateDistribution. For information,
 // see UpdateDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html).
 //

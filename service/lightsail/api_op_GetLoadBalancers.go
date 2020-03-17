@@ -12,7 +12,11 @@ import (
 type GetLoadBalancersInput struct {
 	_ struct{} `type:"structure"`
 
-	// A token used for paginating the results from your GetLoadBalancers request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetLoadBalancers request. If your
+	// results are paginated, the response will return a next page token that you
+	// can specify as the page token in a subsequent request.
 	PageToken *string `locationName:"pageToken" type:"string"`
 }
 
@@ -27,8 +31,12 @@ type GetLoadBalancersOutput struct {
 	// An array of LoadBalancer objects describing your load balancers.
 	LoadBalancers []LoadBalancer `locationName:"loadBalancers" type:"list"`
 
-	// A token used for advancing to the next page of results from your GetLoadBalancers
-	// request.
+	// The token to advance to the next page of resutls from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetLoadBalancers request
+	// and specify the next page token using the pageToken parameter.
 	NextPageToken *string `locationName:"nextPageToken" type:"string"`
 }
 
@@ -43,10 +51,6 @@ const opGetLoadBalancers = "GetLoadBalancers"
 // Amazon Lightsail.
 //
 // Returns information about all load balancers in an account.
-//
-// If you are describing a long list of load balancers, you can paginate the
-// output to make the list more manageable. You can use the pageToken and nextPageToken
-// values to retrieve the next items in the list.
 //
 //    // Example sending a request using GetLoadBalancersRequest.
 //    req := client.GetLoadBalancersRequest(params)

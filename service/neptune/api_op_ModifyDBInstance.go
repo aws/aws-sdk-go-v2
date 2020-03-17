@@ -125,7 +125,7 @@ type ModifyDBInstanceInput struct {
 
 	// A value that indicates whether the DB instance has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled.
+	// deletion protection is disabled. See Deleting a DB Instance (https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html).
 	DeletionProtection *bool `type:"boolean"`
 
 	// Not supported.

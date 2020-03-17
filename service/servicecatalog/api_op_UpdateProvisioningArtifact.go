@@ -22,6 +22,9 @@ type UpdateProvisioningArtifactInput struct {
 	AcceptLanguage *string `type:"string"`
 
 	// Indicates whether the product version is active.
+	//
+	// Inactive provisioning artifacts are invisible to end users. End users cannot
+	// launch or update a provisioned product from an inactive provisioning artifact.
 	Active *bool `type:"boolean"`
 
 	// The updated description of the provisioning artifact.

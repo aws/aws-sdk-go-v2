@@ -13,20 +13,24 @@ import (
 type ListMembersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of items that you want in the response.
+	// The maximum number of items to return in the response.
 	MaxResults *int64 `location:"querystring" locationName:"MaxResults" min:"1" type:"integer"`
 
-	// Paginates results. Set the value of this parameter to NULL on your first
-	// call to the ListMembers operation. For subsequent calls to the operation,
-	// fill nextToken in the request with the value of nextToken from the previous
-	// response to continue listing data.
+	// The token that is required for pagination. On your first call to the ListMembers
+	// operation, set the value of this parameter to NULL.
+	//
+	// For subsequent calls to the operation, to continue listing data, set the
+	// value of this parameter to the value returned from the previous response.
 	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
 
-	// Specifies which member accounts the response includes based on their relationship
-	// status with the master account. The default value is TRUE. If onlyAssociated
-	// is set to TRUE, the response includes member accounts whose relationship
-	// status with the master is set to ENABLED or DISABLED. If onlyAssociated is
-	// set to FALSE, the response includes all existing member accounts.
+	// Specifies which member accounts to include in the response based on their
+	// relationship status with the master account. The default value is TRUE.
+	//
+	// If OnlyAssociated is set to TRUE, the response includes member accounts whose
+	// relationship status with the master is set to ENABLED or DISABLED.
+	//
+	// If OnlyAssociated is set to FALSE, the response includes all existing member
+	// accounts.
 	OnlyAssociated *bool `location:"querystring" locationName:"OnlyAssociated" type:"boolean"`
 }
 
@@ -79,7 +83,7 @@ type ListMembersOutput struct {
 	// Member details returned by the operation.
 	Members []Member `type:"list"`
 
-	// The token that is required for pagination.
+	// The pagination token to use to request the next page of results.
 	NextToken *string `type:"string"`
 }
 
@@ -132,6 +136,12 @@ func (c *Client) ListMembersRequest(input *ListMembersInput) ListMembersRequest 
 		Name:       opListMembers,
 		HTTPMethod: "GET",
 		HTTPPath:   "/members",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -164,6 +174,53 @@ func (r ListMembersRequest) Send(ctx context.Context) (*ListMembersResponse, err
 	}
 
 	return resp, nil
+}
+
+// NewListMembersRequestPaginator returns a paginator for ListMembers.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListMembersRequest(input)
+//   p := securityhub.NewListMembersRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListMembersPaginator(req ListMembersRequest) ListMembersPaginator {
+	return ListMembersPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListMembersInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListMembersPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListMembersPaginator struct {
+	aws.Pager
+}
+
+func (p *ListMembersPaginator) CurrentPage() *ListMembersOutput {
+	return p.Pager.CurrentPage().(*ListMembersOutput)
 }
 
 // ListMembersResponse is the response type for the

@@ -118,9 +118,10 @@ const opUpdateRoomMembership = "UpdateRoomMembership"
 // UpdateRoomMembershipRequest returns a request value for making API operation for
 // Amazon Chime.
 //
-// Updates room membership details, such as the member role. The member role
-// designates whether the member is a chat room administrator or a general chat
-// room member. The member role can be updated only for user IDs.
+// Updates room membership details, such as the member role, for a room in an
+// Amazon Chime Enterprise account. The member role designates whether the member
+// is a chat room administrator or a general chat room member. The member role
+// can be updated only for user IDs.
 //
 //    // Example sending a request using UpdateRoomMembershipRequest.
 //    req := client.UpdateRoomMembershipRequest(params)

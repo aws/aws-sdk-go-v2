@@ -108,6 +108,8 @@ type ClientAPI interface {
 
 	PutAnomalyDetectorRequest(*cloudwatch.PutAnomalyDetectorInput) cloudwatch.PutAnomalyDetectorRequest
 
+	PutCompositeAlarmRequest(*cloudwatch.PutCompositeAlarmInput) cloudwatch.PutCompositeAlarmRequest
+
 	PutDashboardRequest(*cloudwatch.PutDashboardInput) cloudwatch.PutDashboardRequest
 
 	PutInsightRuleRequest(*cloudwatch.PutInsightRuleInput) cloudwatch.PutInsightRuleRequest
@@ -123,6 +125,8 @@ type ClientAPI interface {
 	UntagResourceRequest(*cloudwatch.UntagResourceInput) cloudwatch.UntagResourceRequest
 
 	WaitUntilAlarmExists(context.Context, *cloudwatch.DescribeAlarmsInput, ...aws.WaiterOption) error
+
+	WaitUntilCompositeAlarmExists(context.Context, *cloudwatch.DescribeAlarmsInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*cloudwatch.Client)(nil)

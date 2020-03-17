@@ -27,13 +27,13 @@ type CreateInfrastructureConfigurationInput struct {
 	// InstanceProfileName is a required field
 	InstanceProfileName *string `locationName:"instanceProfileName" min:"1" type:"string" required:"true"`
 
-	// The instance types of the infrastructure configuration. You may specify one
-	// or more instance types to use for this build, the service will pick one of
+	// The instance types of the infrastructure configuration. You can specify one
+	// or more instance types to use for this build. The service will pick one of
 	// these instance types based on availability.
 	InstanceTypes []string `locationName:"instanceTypes" type:"list"`
 
 	// The key pair of the infrastructure configuration. This can be used to log
-	// onto and debug the instance used to create your image.
+	// on to and debug the instance used to create your image.
 	KeyPair *string `locationName:"keyPair" min:"1" type:"string"`
 
 	// The logging configuration of the infrastructure configuration.
@@ -49,18 +49,17 @@ type CreateInfrastructureConfigurationInput struct {
 	SecurityGroupIds []string `locationName:"securityGroupIds" type:"list"`
 
 	// The SNS topic on which to send image build events.
-	SnsTopicArn *string `locationName:"snsTopicArn" min:"1" type:"string"`
+	SnsTopicArn *string `locationName:"snsTopicArn" type:"string"`
 
-	// The subnet ID to place the instance used to customize your EC2 AMI in.
+	// The subnet ID in which to place the instance used to customize your EC2 AMI.
 	SubnetId *string `locationName:"subnetId" min:"1" type:"string"`
 
 	// The tags of the infrastructure configuration.
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 
 	// The terminate instance on failure setting of the infrastructure configuration.
-	// Set to false if you wish for Image Builder to retain the instance used to
-	// configure your AMI in the event that the build or test phase of your workflow
-	// failed.
+	// Set to false if you want Image Builder to retain the instance used to configure
+	// your AMI if the build or test phase of your workflow fails.
 	TerminateInstanceOnFailure *bool `locationName:"terminateInstanceOnFailure" type:"boolean"`
 }
 
@@ -95,9 +94,6 @@ func (s *CreateInfrastructureConfigurationInput) Validate() error {
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.SnsTopicArn != nil && len(*s.SnsTopicArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SnsTopicArn", 1))
 	}
 	if s.SubnetId != nil && len(*s.SubnetId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SubnetId", 1))

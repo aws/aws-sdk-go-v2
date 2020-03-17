@@ -1911,25 +1911,28 @@ type TargetDevice string
 
 // Enum values for TargetDevice
 const (
-	TargetDeviceLambda     TargetDevice = "lambda"
-	TargetDeviceMlM4       TargetDevice = "ml_m4"
-	TargetDeviceMlM5       TargetDevice = "ml_m5"
-	TargetDeviceMlC4       TargetDevice = "ml_c4"
-	TargetDeviceMlC5       TargetDevice = "ml_c5"
-	TargetDeviceMlP2       TargetDevice = "ml_p2"
-	TargetDeviceMlP3       TargetDevice = "ml_p3"
-	TargetDeviceMlInf1     TargetDevice = "ml_inf1"
-	TargetDeviceJetsonTx1  TargetDevice = "jetson_tx1"
-	TargetDeviceJetsonTx2  TargetDevice = "jetson_tx2"
-	TargetDeviceJetsonNano TargetDevice = "jetson_nano"
-	TargetDeviceRasp3b     TargetDevice = "rasp3b"
-	TargetDeviceDeeplens   TargetDevice = "deeplens"
-	TargetDeviceRk3399     TargetDevice = "rk3399"
-	TargetDeviceRk3288     TargetDevice = "rk3288"
-	TargetDeviceAisage     TargetDevice = "aisage"
-	TargetDeviceSbeC       TargetDevice = "sbe_c"
-	TargetDeviceQcs605     TargetDevice = "qcs605"
-	TargetDeviceQcs603     TargetDevice = "qcs603"
+	TargetDeviceLambda       TargetDevice = "lambda"
+	TargetDeviceMlM4         TargetDevice = "ml_m4"
+	TargetDeviceMlM5         TargetDevice = "ml_m5"
+	TargetDeviceMlC4         TargetDevice = "ml_c4"
+	TargetDeviceMlC5         TargetDevice = "ml_c5"
+	TargetDeviceMlP2         TargetDevice = "ml_p2"
+	TargetDeviceMlP3         TargetDevice = "ml_p3"
+	TargetDeviceMlInf1       TargetDevice = "ml_inf1"
+	TargetDeviceJetsonTx1    TargetDevice = "jetson_tx1"
+	TargetDeviceJetsonTx2    TargetDevice = "jetson_tx2"
+	TargetDeviceJetsonNano   TargetDevice = "jetson_nano"
+	TargetDeviceJetsonXavier TargetDevice = "jetson_xavier"
+	TargetDeviceRasp3b       TargetDevice = "rasp3b"
+	TargetDeviceImx8qm       TargetDevice = "imx8qm"
+	TargetDeviceDeeplens     TargetDevice = "deeplens"
+	TargetDeviceRk3399       TargetDevice = "rk3399"
+	TargetDeviceRk3288       TargetDevice = "rk3288"
+	TargetDeviceAisage       TargetDevice = "aisage"
+	TargetDeviceSbeC         TargetDevice = "sbe_c"
+	TargetDeviceQcs605       TargetDevice = "qcs605"
+	TargetDeviceQcs603       TargetDevice = "qcs603"
+	TargetDeviceAmbaCv22     TargetDevice = "amba_cv22"
 )
 
 func (enum TargetDevice) MarshalValue() (string, error) {
@@ -2173,6 +2176,24 @@ func (enum UserProfileStatus) MarshalValue() (string, error) {
 }
 
 func (enum UserProfileStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type VariantPropertyType string
+
+// Enum values for VariantPropertyType
+const (
+	VariantPropertyTypeDesiredInstanceCount VariantPropertyType = "DesiredInstanceCount"
+	VariantPropertyTypeDesiredWeight        VariantPropertyType = "DesiredWeight"
+	VariantPropertyTypeDataCaptureConfig    VariantPropertyType = "DataCaptureConfig"
+)
+
+func (enum VariantPropertyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VariantPropertyType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

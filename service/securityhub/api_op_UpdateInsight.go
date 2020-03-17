@@ -97,7 +97,7 @@ const opUpdateInsight = "UpdateInsight"
 // UpdateInsightRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Updates the Security Hub insight that the insight ARN specifies.
+// Updates the Security Hub insight identified by the specified insight ARN.
 //
 //    // Example sending a request using UpdateInsightRequest.
 //    req := client.UpdateInsightRequest(params)

@@ -60,7 +60,8 @@ const opListAccelerators = "ListAccelerators"
 // ListAcceleratorsRequest returns a request value for making API operation for
 // AWS Global Accelerator.
 //
-// List the accelerators for an AWS account.
+// List the accelerators for an AWS account. To see an AWS CLI example of listing
+// the accelerators for an AWS account, scroll down to Example.
 //
 //    // Example sending a request using ListAcceleratorsRequest.
 //    req := client.ListAcceleratorsRequest(params)

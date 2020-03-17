@@ -493,6 +493,10 @@ func ExampleClient_CreateReplicationGroupRequest_shared00() {
 				fmt.Println(elasticache.ErrCodeTagQuotaPerResourceExceeded, aerr.Error())
 			case elasticache.ErrCodeNodeGroupsPerReplicationGroupQuotaExceededFault:
 				fmt.Println(elasticache.ErrCodeNodeGroupsPerReplicationGroupQuotaExceededFault, aerr.Error())
+			case elasticache.ErrCodeGlobalReplicationGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeGlobalReplicationGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeInvalidGlobalReplicationGroupStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidGlobalReplicationGroupStateFault, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterValueException:
 				fmt.Println(elasticache.ErrCodeInvalidParameterValueException, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterCombinationException:
@@ -584,6 +588,10 @@ func ExampleClient_CreateReplicationGroupRequest_shared01() {
 				fmt.Println(elasticache.ErrCodeTagQuotaPerResourceExceeded, aerr.Error())
 			case elasticache.ErrCodeNodeGroupsPerReplicationGroupQuotaExceededFault:
 				fmt.Println(elasticache.ErrCodeNodeGroupsPerReplicationGroupQuotaExceededFault, aerr.Error())
+			case elasticache.ErrCodeGlobalReplicationGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeGlobalReplicationGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeInvalidGlobalReplicationGroupStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidGlobalReplicationGroupStateFault, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterValueException:
 				fmt.Println(elasticache.ErrCodeInvalidParameterValueException, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterCombinationException:
@@ -1897,6 +1905,8 @@ func ExampleClient_ModifyCacheParameterGroupRequest_shared00() {
 				fmt.Println(elasticache.ErrCodeInvalidParameterValueException, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterCombinationException:
 				fmt.Println(elasticache.ErrCodeInvalidParameterCombinationException, aerr.Error())
+			case elasticache.ErrCodeInvalidGlobalReplicationGroupStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidGlobalReplicationGroupStateFault, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -2180,6 +2190,8 @@ func ExampleClient_ResetCacheParameterGroupRequest_shared00() {
 				fmt.Println(elasticache.ErrCodeInvalidParameterValueException, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterCombinationException:
 				fmt.Println(elasticache.ErrCodeInvalidParameterCombinationException, aerr.Error())
+			case elasticache.ErrCodeInvalidGlobalReplicationGroupStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidGlobalReplicationGroupStateFault, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

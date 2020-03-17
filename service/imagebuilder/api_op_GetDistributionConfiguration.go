@@ -14,7 +14,7 @@ type GetDistributionConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the distribution configuration that you
-	// wish to retrieve.
+	// want to retrieve.
 	//
 	// DistributionConfigurationArn is a required field
 	DistributionConfigurationArn *string `location:"querystring" locationName:"distributionConfigurationArn" type:"string" required:"true"`

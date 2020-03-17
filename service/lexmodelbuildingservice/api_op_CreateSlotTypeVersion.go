@@ -83,7 +83,7 @@ type CreateSlotTypeVersionOutput struct {
 
 	// A list of EnumerationValue objects that defines the values that the slot
 	// type can take.
-	EnumerationValues []EnumerationValue `locationName:"enumerationValues" min:"1" type:"list"`
+	EnumerationValues []EnumerationValue `locationName:"enumerationValues" type:"list"`
 
 	// The date that the slot type was updated. When you create a resource, the
 	// creation date and last update date are the same.
@@ -91,6 +91,12 @@ type CreateSlotTypeVersionOutput struct {
 
 	// The name of the slot type.
 	Name *string `locationName:"name" min:"1" type:"string"`
+
+	// The built-in slot type used a the parent of the slot type.
+	ParentSlotTypeSignature *string `locationName:"parentSlotTypeSignature" min:"1" type:"string"`
+
+	// Configuration information that extends the parent built-in slot type.
+	SlotTypeConfigurations []SlotTypeConfiguration `locationName:"slotTypeConfigurations" type:"list"`
 
 	// The strategy that Amazon Lex uses to determine the value of the slot. For
 	// more information, see PutSlotType.
@@ -150,6 +156,24 @@ func (s CreateSlotTypeVersionOutput) MarshalFields(e protocol.FieldEncoder) erro
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ParentSlotTypeSignature != nil {
+		v := *s.ParentSlotTypeSignature
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "parentSlotTypeSignature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SlotTypeConfigurations != nil {
+		v := s.SlotTypeConfigurations
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "slotTypeConfigurations", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if len(s.ValueSelectionStrategy) > 0 {
 		v := s.ValueSelectionStrategy

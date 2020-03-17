@@ -13,8 +13,8 @@ import (
 type GetFolderPathInput struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using AWS administrator
+	// credentials to access the API.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// A comma-separated list of values. Specify "NAME" to include the names of

@@ -13,8 +13,8 @@ import (
 type CreateDBClusterSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the DB cluster to create a snapshot for. This parameter
-	// is not case sensitive.
+	// The identifier of the cluster to create a snapshot for. This parameter is
+	// not case sensitive.
 	//
 	// Constraints:
 	//
@@ -25,8 +25,8 @@ type CreateDBClusterSnapshotInput struct {
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
-	// The identifier of the DB cluster snapshot. This parameter is stored as a
-	// lowercase string.
+	// The identifier of the cluster snapshot. This parameter is stored as a lowercase
+	// string.
 	//
 	// Constraints:
 	//
@@ -41,7 +41,7 @@ type CreateDBClusterSnapshotInput struct {
 	// DBClusterSnapshotIdentifier is a required field
 	DBClusterSnapshotIdentifier *string `type:"string" required:"true"`
 
-	// The tags to be assigned to the DB cluster snapshot.
+	// The tags to be assigned to the cluster snapshot.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
@@ -71,7 +71,7 @@ func (s *CreateDBClusterSnapshotInput) Validate() error {
 type CreateDBClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster snapshot.
+	// Detailed information about a cluster snapshot.
 	DBClusterSnapshot *DBClusterSnapshot `type:"structure"`
 }
 
@@ -85,7 +85,7 @@ const opCreateDBClusterSnapshot = "CreateDBClusterSnapshot"
 // CreateDBClusterSnapshotRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Creates a snapshot of a DB cluster.
+// Creates a snapshot of a cluster.
 //
 //    // Example sending a request using CreateDBClusterSnapshotRequest.
 //    req := client.CreateDBClusterSnapshotRequest(params)

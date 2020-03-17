@@ -15,26 +15,25 @@ type DescribeDBInstancesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The user-provided instance identifier. If this parameter is specified, information
-	// from only the specific DB instance is returned. This parameter isn't case
-	// sensitive.
+	// from only the specific instance is returned. This parameter isn't case sensitive.
 	//
 	// Constraints:
 	//
 	//    * If provided, must match the identifier of an existing DBInstance.
 	DBInstanceIdentifier *string `type:"string"`
 
-	// A filter that specifies one or more DB instances to describe.
+	// A filter that specifies one or more instances to describe.
 	//
 	// Supported filters:
 	//
-	//    * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
-	//    Resource Names (ARNs). The results list includes only the information
-	//    about the DB instances that are associated with the DB clusters that are
-	//    identified by these ARNs.
+	//    * db-cluster-id - Accepts cluster identifiers and cluster Amazon Resource
+	//    Names (ARNs). The results list includes only the information about the
+	//    instances that are associated with the clusters that are identified by
+	//    these ARNs.
 	//
-	//    * db-instance-id - Accepts DB instance identifiers and DB instance ARNs.
-	//    The results list includes only the information about the DB instances
-	//    that are identified by these ARNs.
+	//    * db-instance-id - Accepts instance identifiers and instance ARNs. The
+	//    results list includes only the information about the instances that are
+	//    identified by these ARNs.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -78,7 +77,7 @@ func (s *DescribeDBInstancesInput) Validate() error {
 type DescribeDBInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about one or more DB instances.
+	// Detailed information about one or more instances.
 	DBInstances []DBInstance `locationNameList:"DBInstance" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter

@@ -144,6 +144,7 @@ const (
 	HostEnvironmentVmware HostEnvironment = "VMWARE"
 	HostEnvironmentHyperV HostEnvironment = "HYPER-V"
 	HostEnvironmentEc2    HostEnvironment = "EC2"
+	HostEnvironmentKvm    HostEnvironment = "KVM"
 	HostEnvironmentOther  HostEnvironment = "OTHER"
 )
 

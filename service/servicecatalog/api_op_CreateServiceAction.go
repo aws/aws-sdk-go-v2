@@ -43,7 +43,7 @@ type CreateServiceActionInput struct {
 	//
 	// The list of parameters in JSON format.
 	//
-	// For example: [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}].
+	// For example: [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}] or [{\"Name\":\"InstanceId\",\"Type\":\"TEXT_VALUE\"}].
 	//
 	// Definition is a required field
 	Definition map[string]string `min:"1" type:"map" required:"true"`

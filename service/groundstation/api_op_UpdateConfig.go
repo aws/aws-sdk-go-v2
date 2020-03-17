@@ -13,19 +13,23 @@ import (
 type UpdateConfigInput struct {
 	_ struct{} `type:"structure"`
 
-	// Object containing the parameters for a Config.
-	//
-	// See the subtype definitions for what each type of Config contains.
+	// Parameters of a Config.
 	//
 	// ConfigData is a required field
 	ConfigData *ConfigTypeData `locationName:"configData" type:"structure" required:"true"`
 
+	// UUID of a Config.
+	//
 	// ConfigId is a required field
 	ConfigId *string `location:"uri" locationName:"configId" type:"string" required:"true"`
 
+	// Type of a Config.
+	//
 	// ConfigType is a required field
 	ConfigType ConfigCapabilityType `location:"uri" locationName:"configType" type:"string" required:"true" enum:"true"`
 
+	// Name of a Config.
+	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 }
@@ -102,10 +106,13 @@ func (s UpdateConfigInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateConfigOutput struct {
 	_ struct{} `type:"structure"`
 
+	// ARN of a Config.
 	ConfigArn *string `locationName:"configArn" type:"string"`
 
+	// UUID of a Config.
 	ConfigId *string `locationName:"configId" type:"string"`
 
+	// Type of a Config.
 	ConfigType ConfigCapabilityType `locationName:"configType" type:"string" enum:"true"`
 }
 

@@ -69,6 +69,8 @@ type ClientAPI interface {
 
 	DeleteAccessPointPolicyRequest(*s3control.DeleteAccessPointPolicyInput) s3control.DeleteAccessPointPolicyRequest
 
+	DeleteJobTaggingRequest(*s3control.DeleteJobTaggingInput) s3control.DeleteJobTaggingRequest
+
 	DeletePublicAccessBlockRequest(*s3control.DeletePublicAccessBlockInput) s3control.DeletePublicAccessBlockRequest
 
 	DescribeJobRequest(*s3control.DescribeJobInput) s3control.DescribeJobRequest
@@ -79,6 +81,8 @@ type ClientAPI interface {
 
 	GetAccessPointPolicyStatusRequest(*s3control.GetAccessPointPolicyStatusInput) s3control.GetAccessPointPolicyStatusRequest
 
+	GetJobTaggingRequest(*s3control.GetJobTaggingInput) s3control.GetJobTaggingRequest
+
 	GetPublicAccessBlockRequest(*s3control.GetPublicAccessBlockInput) s3control.GetPublicAccessBlockRequest
 
 	ListAccessPointsRequest(*s3control.ListAccessPointsInput) s3control.ListAccessPointsRequest
@@ -86,6 +90,8 @@ type ClientAPI interface {
 	ListJobsRequest(*s3control.ListJobsInput) s3control.ListJobsRequest
 
 	PutAccessPointPolicyRequest(*s3control.PutAccessPointPolicyInput) s3control.PutAccessPointPolicyRequest
+
+	PutJobTaggingRequest(*s3control.PutJobTaggingInput) s3control.PutJobTaggingRequest
 
 	PutPublicAccessBlockRequest(*s3control.PutPublicAccessBlockInput) s3control.PutPublicAccessBlockRequest
 

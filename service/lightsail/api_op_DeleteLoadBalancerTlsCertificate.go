@@ -56,7 +56,9 @@ func (s *DeleteLoadBalancerTlsCertificateInput) Validate() error {
 type DeleteLoadBalancerTlsCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object describing the API operations.
+	// An array of objects that describe the result of the action, such as the status
+	// of the request, the time stamp of the request, and the resources affected
+	// by the request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
 
@@ -72,7 +74,7 @@ const opDeleteLoadBalancerTlsCertificate = "DeleteLoadBalancerTlsCertificate"
 //
 // Deletes an SSL/TLS certificate associated with a Lightsail load balancer.
 //
-// The delete load balancer tls certificate operation supports tag-based access
+// The DeleteLoadBalancerTlsCertificate operation supports tag-based access
 // control via resource tags applied to the resource identified by load balancer
 // name. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //

@@ -123,11 +123,10 @@ const opDescribeEvents = "DescribeEvents"
 // DescribeEventsRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Returns events related to DB instances, DB security groups, DB snapshots,
-// and DB parameter groups for the past 14 days. You can obtain events specific
-// to a particular DB instance, DB security group, DB snapshot, or DB parameter
-// group by providing the name as a parameter. By default, the events of the
-// past hour are returned.
+// Returns events related to instances, security groups, snapshots, and DB parameter
+// groups for the past 14 days. You can obtain events specific to a particular
+// DB instance, security group, snapshot, or parameter group by providing the
+// name as a parameter. By default, the events of the past hour are returned.
 //
 //    // Example sending a request using DescribeEventsRequest.
 //    req := client.DescribeEventsRequest(params)

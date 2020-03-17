@@ -13,7 +13,8 @@ import (
 type GetConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
-	// The application to get.
+	// The application to get. Specify either the application name or the application
+	// ID.
 	//
 	// Application is a required field
 	Application *string `location:"uri" locationName:"Application" min:"1" type:"string" required:"true"`
@@ -28,12 +29,14 @@ type GetConfigurationInput struct {
 	// ClientId is a required field
 	ClientId *string `location:"querystring" locationName:"client_id" min:"1" type:"string" required:"true"`
 
-	// The configuration to get.
+	// The configuration to get. Specify either the configuration name or the configuration
+	// ID.
 	//
 	// Configuration is a required field
 	Configuration *string `location:"uri" locationName:"Configuration" min:"1" type:"string" required:"true"`
 
-	// The environment to get.
+	// The environment to get. Specify either the environment name or the environment
+	// ID.
 	//
 	// Environment is a required field
 	Environment *string `location:"uri" locationName:"Environment" min:"1" type:"string" required:"true"`

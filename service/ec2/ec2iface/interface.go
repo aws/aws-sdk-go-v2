@@ -682,6 +682,8 @@ type ClientAPI interface {
 
 	ImportVolumeRequest(*ec2.ImportVolumeInput) ec2.ImportVolumeRequest
 
+	ModifyAvailabilityZoneGroupRequest(*ec2.ModifyAvailabilityZoneGroupInput) ec2.ModifyAvailabilityZoneGroupRequest
+
 	ModifyCapacityReservationRequest(*ec2.ModifyCapacityReservationInput) ec2.ModifyCapacityReservationRequest
 
 	ModifyClientVpnEndpointRequest(*ec2.ModifyClientVpnEndpointInput) ec2.ModifyClientVpnEndpointRequest

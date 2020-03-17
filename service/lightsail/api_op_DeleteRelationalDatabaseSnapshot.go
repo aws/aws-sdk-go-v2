@@ -40,8 +40,9 @@ func (s *DeleteRelationalDatabaseSnapshotInput) Validate() error {
 type DeleteRelationalDatabaseSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object describing the result of your delete relational database snapshot
-	// request.
+	// An array of objects that describe the result of the action, such as the status
+	// of the request, the time stamp of the request, and the resources affected
+	// by the request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
 

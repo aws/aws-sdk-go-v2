@@ -18,7 +18,7 @@ type StartImagePipelineExecutionInput struct {
 	// ClientToken is a required field
 	ClientToken *string `locationName:"clientToken" min:"1" type:"string" required:"true" idempotencyToken:"true"`
 
-	// The Amazon Resource Name (ARN) of the image pipeline that you wish to manually
+	// The Amazon Resource Name (ARN) of the image pipeline that you want to manually
 	// invoke.
 	//
 	// ImagePipelineArn is a required field

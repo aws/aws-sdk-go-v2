@@ -98,10 +98,17 @@ const (
 	// specified.
 	ErrCodeInvalidNetworkSettings = "InvalidNetworkSettings"
 
+	// ErrCodeInvalidPerUnitStorageThroughput for service response error code
+	// "InvalidPerUnitStorageThroughput".
+	//
+	// An invalid value for PerUnitStorageThroughput was provided. Please create
+	// your file system again, using a valid value.
+	ErrCodeInvalidPerUnitStorageThroughput = "InvalidPerUnitStorageThroughput"
+
 	// ErrCodeMissingFileSystemConfiguration for service response error code
 	// "MissingFileSystemConfiguration".
 	//
-	// File system configuration is required for this operation.
+	// A file system configuration is required for this operation.
 	ErrCodeMissingFileSystemConfiguration = "MissingFileSystemConfiguration"
 
 	// ErrCodeNotServiceResourceError for service response error code

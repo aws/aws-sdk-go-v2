@@ -73,7 +73,8 @@ const opInferICD10CM = "InferICD10CM"
 //
 // InferICD10CM detects medical conditions as entities listed in a patient record
 // and links those entities to normalized concept identifiers in the ICD-10-CM
-// knowledge base from the Centers for Disease Control.
+// knowledge base from the Centers for Disease Control. Amazon Comprehend Medical
+// only detects medical entities in English language texts.
 //
 //    // Example sending a request using InferICD10CMRequest.
 //    req := client.InferICD10CMRequest(params)

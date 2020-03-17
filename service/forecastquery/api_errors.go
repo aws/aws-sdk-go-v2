@@ -7,7 +7,7 @@ const (
 	// ErrCodeInvalidInputException for service response error code
 	// "InvalidInputException".
 	//
-	// The value that you provided was invalid or too long.
+	// The value is invalid or is too long.
 	ErrCodeInvalidInputException = "InvalidInputException"
 
 	// ErrCodeInvalidNextTokenException for service response error code

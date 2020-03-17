@@ -77,6 +77,7 @@ type SavingsPlanProductType string
 const (
 	SavingsPlanProductTypeEc2     SavingsPlanProductType = "EC2"
 	SavingsPlanProductTypeFargate SavingsPlanProductType = "Fargate"
+	SavingsPlanProductTypeLambda  SavingsPlanProductType = "Lambda"
 )
 
 func (enum SavingsPlanProductType) MarshalValue() (string, error) {
@@ -158,6 +159,7 @@ type SavingsPlanRateServiceCode string
 const (
 	SavingsPlanRateServiceCodeAmazonEc2 SavingsPlanRateServiceCode = "AmazonEC2"
 	SavingsPlanRateServiceCodeAmazonEcs SavingsPlanRateServiceCode = "AmazonECS"
+	SavingsPlanRateServiceCodeAwslambda SavingsPlanRateServiceCode = "AWSLambda"
 )
 
 func (enum SavingsPlanRateServiceCode) MarshalValue() (string, error) {
@@ -173,7 +175,9 @@ type SavingsPlanRateUnit string
 
 // Enum values for SavingsPlanRateUnit
 const (
-	SavingsPlanRateUnitHrs SavingsPlanRateUnit = "Hrs"
+	SavingsPlanRateUnitHrs            SavingsPlanRateUnit = "Hrs"
+	SavingsPlanRateUnitLambdaGbSecond SavingsPlanRateUnit = "Lambda-GB-Second"
+	SavingsPlanRateUnitRequest        SavingsPlanRateUnit = "Request"
 )
 
 func (enum SavingsPlanRateUnit) MarshalValue() (string, error) {

@@ -86,7 +86,7 @@ const opDeleteRoom = "DeleteRoom"
 // DeleteRoomRequest returns a request value for making API operation for
 // Amazon Chime.
 //
-// Deletes a chat room.
+// Deletes a chat room in an Amazon Chime Enterprise account.
 //
 //    // Example sending a request using DeleteRoomRequest.
 //    req := client.DeleteRoomRequest(params)

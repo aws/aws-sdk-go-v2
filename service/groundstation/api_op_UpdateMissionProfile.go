@@ -13,19 +13,32 @@ import (
 type UpdateMissionProfileInput struct {
 	_ struct{} `type:"structure"`
 
+	// Amount of time after a contact ends that you’d like to receive a CloudWatch
+	// event indicating the pass has finished.
 	ContactPostPassDurationSeconds *int64 `locationName:"contactPostPassDurationSeconds" min:"1" type:"integer"`
 
+	// Amount of time after a contact ends that you’d like to receive a CloudWatch
+	// event indicating the pass has finished.
 	ContactPrePassDurationSeconds *int64 `locationName:"contactPrePassDurationSeconds" min:"1" type:"integer"`
 
+	// A list of lists of ARNs. Each list of ARNs is an edge, with a from Config
+	// and a to Config.
 	DataflowEdges [][]string `locationName:"dataflowEdges" type:"list"`
 
+	// Smallest amount of time in seconds that you’d like to see for an available
+	// contact. AWS Ground Station will not present you with contacts shorter than
+	// this duration.
 	MinimumViableContactDurationSeconds *int64 `locationName:"minimumViableContactDurationSeconds" min:"1" type:"integer"`
 
+	// UUID of a mission profile.
+	//
 	// MissionProfileId is a required field
 	MissionProfileId *string `location:"uri" locationName:"missionProfileId" type:"string" required:"true"`
 
+	// Name of a mission profile.
 	Name *string `locationName:"name" min:"1" type:"string"`
 
+	// ARN of a tracking Config.
 	TrackingConfigArn *string `locationName:"trackingConfigArn" type:"string"`
 }
 
@@ -123,6 +136,7 @@ func (s UpdateMissionProfileInput) MarshalFields(e protocol.FieldEncoder) error 
 type UpdateMissionProfileOutput struct {
 	_ struct{} `type:"structure"`
 
+	// UUID of a mission profile.
 	MissionProfileId *string `locationName:"missionProfileId" type:"string"`
 }
 

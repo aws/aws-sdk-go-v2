@@ -13,7 +13,7 @@ import (
 type GetImageInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the image that you wish to retrieve.
+	// The Amazon Resource Name (ARN) of the image that you want to retrieve.
 	//
 	// ImageBuildVersionArn is a required field
 	ImageBuildVersionArn *string `location:"querystring" locationName:"imageBuildVersionArn" type:"string" required:"true"`

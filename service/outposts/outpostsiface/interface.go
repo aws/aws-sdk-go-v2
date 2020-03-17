@@ -63,6 +63,10 @@ import (
 type ClientAPI interface {
 	CreateOutpostRequest(*outposts.CreateOutpostInput) outposts.CreateOutpostRequest
 
+	DeleteOutpostRequest(*outposts.DeleteOutpostInput) outposts.DeleteOutpostRequest
+
+	DeleteSiteRequest(*outposts.DeleteSiteInput) outposts.DeleteSiteRequest
+
 	GetOutpostRequest(*outposts.GetOutpostInput) outposts.GetOutpostRequest
 
 	GetOutpostInstanceTypesRequest(*outposts.GetOutpostInstanceTypesInput) outposts.GetOutpostInstanceTypesRequest

@@ -16,13 +16,14 @@ type GetEnabledStandardsInput struct {
 	// The maximum number of results to return in the response.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// Paginates results. On your first call to the GetEnabledStandards operation,
-	// set the value of this parameter to NULL. For subsequent calls to the operation,
-	// fill nextToken in the request with the value of nextToken from the previous
-	// response to continue listing data.
+	// The token that is required for pagination. On your first call to the GetEnabledStandards
+	// operation, set the value of this parameter to NULL.
+	//
+	// For subsequent calls to the operation, to continue listing data, set the
+	// value of this parameter to the value returned from the previous response.
 	NextToken *string `type:"string"`
 
-	// A list of the standards subscription ARNs for the standards to retrieve.
+	// The list of the standards subscription ARNs for the standards to retrieve.
 	StandardsSubscriptionArns []string `min:"1" type:"list"`
 }
 
@@ -81,11 +82,11 @@ func (s GetEnabledStandardsInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetEnabledStandardsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The token that is required for pagination.
+	// The pagination token to use to request the next page of results.
 	NextToken *string `type:"string"`
 
-	// A list of StandardsSubscriptions objects that include information about the
-	// enabled standards.
+	// The list of StandardsSubscriptions objects that include information about
+	// the enabled standards.
 	StandardsSubscriptions []StandardsSubscription `type:"list"`
 }
 
@@ -137,6 +138,12 @@ func (c *Client) GetEnabledStandardsRequest(input *GetEnabledStandardsInput) Get
 		Name:       opGetEnabledStandards,
 		HTTPMethod: "POST",
 		HTTPPath:   "/standards/get",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -169,6 +176,53 @@ func (r GetEnabledStandardsRequest) Send(ctx context.Context) (*GetEnabledStanda
 	}
 
 	return resp, nil
+}
+
+// NewGetEnabledStandardsRequestPaginator returns a paginator for GetEnabledStandards.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.GetEnabledStandardsRequest(input)
+//   p := securityhub.NewGetEnabledStandardsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewGetEnabledStandardsPaginator(req GetEnabledStandardsRequest) GetEnabledStandardsPaginator {
+	return GetEnabledStandardsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *GetEnabledStandardsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// GetEnabledStandardsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetEnabledStandardsPaginator struct {
+	aws.Pager
+}
+
+func (p *GetEnabledStandardsPaginator) CurrentPage() *GetEnabledStandardsOutput {
+	return p.Pager.CurrentPage().(*GetEnabledStandardsOutput)
 }
 
 // GetEnabledStandardsResponse is the response type for the

@@ -10,16 +10,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request for ConfigureAgent operation.
+// The structure representing the configureAgentRequest.
 type ConfigureAgentInput struct {
 	_ struct{} `type:"structure"`
 
-	// Identifier of the instance of compute fleet being profiled by the agent.
-	// For instance, host name in EC2, task id for ECS, function name for AWS Lambda
 	FleetInstanceId *string `locationName:"fleetInstanceId" min:"1" type:"string"`
 
-	// The name of the profiling group.
-	//
 	// ProfilingGroupName is a required field
 	ProfilingGroupName *string `location:"uri" locationName:"profilingGroupName" min:"1" type:"string" required:"true"`
 }
@@ -68,12 +64,10 @@ func (s ConfigureAgentInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Response for ConfigureAgent operation.
+// The structure representing the configureAgentResponse.
 type ConfigureAgentOutput struct {
 	_ struct{} `type:"structure" payload:"Configuration"`
 
-	// The configuration for the agent to use.
-	//
 	// Configuration is a required field
 	Configuration *AgentConfiguration `locationName:"configuration" type:"structure" required:"true"`
 }
@@ -98,8 +92,6 @@ const opConfigureAgent = "ConfigureAgent"
 
 // ConfigureAgentRequest returns a request value for making API operation for
 // Amazon CodeGuru Profiler.
-//
-// Provides the configuration to use for an agent of the profiling group.
 //
 //    // Example sending a request using ConfigureAgentRequest.
 //    req := client.ConfigureAgentRequest(params)

@@ -100,6 +100,8 @@ const opListExecutions = "ListExecutions"
 // This operation is eventually consistent. The results are best effort and
 // may not reflect very recent updates and changes.
 //
+// This API action is not supported by EXPRESS state machines.
+//
 //    // Example sending a request using ListExecutionsRequest.
 //    req := client.ListExecutionsRequest(params)
 //    resp, err := req.Send(context.TODO())

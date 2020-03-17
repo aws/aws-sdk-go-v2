@@ -13,13 +13,13 @@ import (
 type CreateDBInstanceInput struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates that minor engine upgrades are applied automatically to the DB
-	// instance during the maintenance window.
+	// Indicates that minor engine upgrades are applied automatically to the instance
+	// during the maintenance window.
 	//
 	// Default: true
 	AutoMinorVersionUpgrade *bool `type:"boolean"`
 
-	// The Amazon EC2 Availability Zone that the DB instance is created in.
+	// The Amazon EC2 Availability Zone that the instance is created in.
 	//
 	// Default: A random, system-chosen Availability Zone in the endpoint's AWS
 	// Region.
@@ -31,17 +31,17 @@ type CreateDBInstanceInput struct {
 	// same AWS Region as the current endpoint.
 	AvailabilityZone *string `type:"string"`
 
-	// The identifier of the DB cluster that the instance will belong to.
+	// The identifier of the cluster that the instance will belong to.
 	//
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
-	// The compute and memory capacity of the DB instance; for example, db.r5.large.
+	// The compute and memory capacity of the instance; for example, db.r5.large.
 	//
 	// DBInstanceClass is a required field
 	DBInstanceClass *string `type:"string" required:"true"`
 
-	// The DB instance identifier. This parameter is stored as a lowercase string.
+	// The instance identifier. This parameter is stored as a lowercase string.
 	//
 	// Constraints:
 	//
@@ -85,8 +85,8 @@ type CreateDBInstanceInput struct {
 	// Valid values: 0-15
 	PromotionTier *int64 `type:"integer"`
 
-	// The tags to be assigned to the DB instance. You can assign up to 10 tags
-	// to an instance.
+	// The tags to be assigned to the instance. You can assign up to 10 tags to
+	// an instance.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
@@ -124,7 +124,7 @@ func (s *CreateDBInstanceInput) Validate() error {
 type CreateDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB instance.
+	// Detailed information about an instance.
 	DBInstance *DBInstance `type:"structure"`
 }
 
@@ -138,7 +138,7 @@ const opCreateDBInstance = "CreateDBInstance"
 // CreateDBInstanceRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Creates a new DB instance.
+// Creates a new instance.
 //
 //    // Example sending a request using CreateDBInstanceRequest.
 //    req := client.CreateDBInstanceRequest(params)

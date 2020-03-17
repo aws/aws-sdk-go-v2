@@ -75,6 +75,8 @@ type ClientAPI interface {
 
 	CreatePushTemplateRequest(*pinpoint.CreatePushTemplateInput) pinpoint.CreatePushTemplateRequest
 
+	CreateRecommenderConfigurationRequest(*pinpoint.CreateRecommenderConfigurationInput) pinpoint.CreateRecommenderConfigurationRequest
+
 	CreateSegmentRequest(*pinpoint.CreateSegmentInput) pinpoint.CreateSegmentRequest
 
 	CreateSmsTemplateRequest(*pinpoint.CreateSmsTemplateInput) pinpoint.CreateSmsTemplateRequest
@@ -110,6 +112,8 @@ type ClientAPI interface {
 	DeleteJourneyRequest(*pinpoint.DeleteJourneyInput) pinpoint.DeleteJourneyRequest
 
 	DeletePushTemplateRequest(*pinpoint.DeletePushTemplateInput) pinpoint.DeletePushTemplateRequest
+
+	DeleteRecommenderConfigurationRequest(*pinpoint.DeleteRecommenderConfigurationInput) pinpoint.DeleteRecommenderConfigurationRequest
 
 	DeleteSegmentRequest(*pinpoint.DeleteSegmentInput) pinpoint.DeleteSegmentRequest
 
@@ -184,6 +188,10 @@ type ClientAPI interface {
 	GetJourneyExecutionMetricsRequest(*pinpoint.GetJourneyExecutionMetricsInput) pinpoint.GetJourneyExecutionMetricsRequest
 
 	GetPushTemplateRequest(*pinpoint.GetPushTemplateInput) pinpoint.GetPushTemplateRequest
+
+	GetRecommenderConfigurationRequest(*pinpoint.GetRecommenderConfigurationInput) pinpoint.GetRecommenderConfigurationRequest
+
+	GetRecommenderConfigurationsRequest(*pinpoint.GetRecommenderConfigurationsInput) pinpoint.GetRecommenderConfigurationsRequest
 
 	GetSegmentRequest(*pinpoint.GetSegmentInput) pinpoint.GetSegmentRequest
 
@@ -262,6 +270,8 @@ type ClientAPI interface {
 	UpdateJourneyStateRequest(*pinpoint.UpdateJourneyStateInput) pinpoint.UpdateJourneyStateRequest
 
 	UpdatePushTemplateRequest(*pinpoint.UpdatePushTemplateInput) pinpoint.UpdatePushTemplateRequest
+
+	UpdateRecommenderConfigurationRequest(*pinpoint.UpdateRecommenderConfigurationInput) pinpoint.UpdateRecommenderConfigurationRequest
 
 	UpdateSegmentRequest(*pinpoint.UpdateSegmentInput) pinpoint.UpdateSegmentRequest
 

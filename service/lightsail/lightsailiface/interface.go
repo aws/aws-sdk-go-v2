@@ -77,6 +77,8 @@ type ClientAPI interface {
 
 	CreateCloudFormationStackRequest(*lightsail.CreateCloudFormationStackInput) lightsail.CreateCloudFormationStackRequest
 
+	CreateContactMethodRequest(*lightsail.CreateContactMethodInput) lightsail.CreateContactMethodRequest
+
 	CreateDiskRequest(*lightsail.CreateDiskInput) lightsail.CreateDiskRequest
 
 	CreateDiskFromSnapshotRequest(*lightsail.CreateDiskFromSnapshotInput) lightsail.CreateDiskFromSnapshotRequest
@@ -105,7 +107,11 @@ type ClientAPI interface {
 
 	CreateRelationalDatabaseSnapshotRequest(*lightsail.CreateRelationalDatabaseSnapshotInput) lightsail.CreateRelationalDatabaseSnapshotRequest
 
+	DeleteAlarmRequest(*lightsail.DeleteAlarmInput) lightsail.DeleteAlarmRequest
+
 	DeleteAutoSnapshotRequest(*lightsail.DeleteAutoSnapshotInput) lightsail.DeleteAutoSnapshotRequest
+
+	DeleteContactMethodRequest(*lightsail.DeleteContactMethodInput) lightsail.DeleteContactMethodRequest
 
 	DeleteDiskRequest(*lightsail.DeleteDiskInput) lightsail.DeleteDiskRequest
 
@@ -147,6 +153,8 @@ type ClientAPI interface {
 
 	GetActiveNamesRequest(*lightsail.GetActiveNamesInput) lightsail.GetActiveNamesRequest
 
+	GetAlarmsRequest(*lightsail.GetAlarmsInput) lightsail.GetAlarmsRequest
+
 	GetAutoSnapshotsRequest(*lightsail.GetAutoSnapshotsInput) lightsail.GetAutoSnapshotsRequest
 
 	GetBlueprintsRequest(*lightsail.GetBlueprintsInput) lightsail.GetBlueprintsRequest
@@ -154,6 +162,8 @@ type ClientAPI interface {
 	GetBundlesRequest(*lightsail.GetBundlesInput) lightsail.GetBundlesRequest
 
 	GetCloudFormationStackRecordsRequest(*lightsail.GetCloudFormationStackRecordsInput) lightsail.GetCloudFormationStackRecordsRequest
+
+	GetContactMethodsRequest(*lightsail.GetContactMethodsInput) lightsail.GetContactMethodsRequest
 
 	GetDiskRequest(*lightsail.GetDiskInput) lightsail.GetDiskRequest
 
@@ -241,6 +251,8 @@ type ClientAPI interface {
 
 	PeerVpcRequest(*lightsail.PeerVpcInput) lightsail.PeerVpcRequest
 
+	PutAlarmRequest(*lightsail.PutAlarmInput) lightsail.PutAlarmRequest
+
 	PutInstancePublicPortsRequest(*lightsail.PutInstancePublicPortsInput) lightsail.PutInstancePublicPortsRequest
 
 	RebootInstanceRequest(*lightsail.RebootInstanceInput) lightsail.RebootInstanceRequest
@@ -248,6 +260,8 @@ type ClientAPI interface {
 	RebootRelationalDatabaseRequest(*lightsail.RebootRelationalDatabaseInput) lightsail.RebootRelationalDatabaseRequest
 
 	ReleaseStaticIpRequest(*lightsail.ReleaseStaticIpInput) lightsail.ReleaseStaticIpRequest
+
+	SendContactMethodVerificationRequest(*lightsail.SendContactMethodVerificationInput) lightsail.SendContactMethodVerificationRequest
 
 	StartInstanceRequest(*lightsail.StartInstanceInput) lightsail.StartInstanceRequest
 
@@ -258,6 +272,8 @@ type ClientAPI interface {
 	StopRelationalDatabaseRequest(*lightsail.StopRelationalDatabaseInput) lightsail.StopRelationalDatabaseRequest
 
 	TagResourceRequest(*lightsail.TagResourceInput) lightsail.TagResourceRequest
+
+	TestAlarmRequest(*lightsail.TestAlarmInput) lightsail.TestAlarmRequest
 
 	UnpeerVpcRequest(*lightsail.UnpeerVpcInput) lightsail.UnpeerVpcRequest
 

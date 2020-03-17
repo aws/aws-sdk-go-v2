@@ -84,6 +84,39 @@ func (enum OutputLocationType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type RedactionOutput string
+
+// Enum values for RedactionOutput
+const (
+	RedactionOutputRedacted              RedactionOutput = "redacted"
+	RedactionOutputRedactedAndUnredacted RedactionOutput = "redacted_and_unredacted"
+)
+
+func (enum RedactionOutput) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RedactionOutput) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RedactionType string
+
+// Enum values for RedactionType
+const (
+	RedactionTypePii RedactionType = "PII"
+)
+
+func (enum RedactionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RedactionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TranscriptionJobStatus string
 
 // Enum values for TranscriptionJobStatus

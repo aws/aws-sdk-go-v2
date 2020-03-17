@@ -42,7 +42,9 @@ type PutParameterInput struct {
 
 	// The fully qualified name of the parameter that you want to add to the system.
 	// The fully qualified name includes the complete hierarchy of the parameter
-	// path and name. For example: /Dev/DBServer/MySQL/db-string13
+	// path and name. For parameters in a hierarchy, you must include a leading
+	// forward slash character (/) when you create or reference a parameter. For
+	// example: /Dev/DBServer/MySQL/db-string13
 	//
 	// Naming Constraints:
 	//
@@ -64,10 +66,10 @@ type PutParameterInput struct {
 	// in the AWS Systems Manager User Guide.
 	//
 	// The maximum length constraint listed below includes capacity for additional
-	// system attributes that are not part of the name. The maximum length for the
-	// fully qualified parameter name is 1011 characters, including the full length
-	// of the parameter ARN. For example, the following fully qualified parameter
-	// name is 65 characters, not 20 characters:
+	// system attributes that are not part of the name. The maximum length for a
+	// parameter name, including the full length of the parameter ARN, is 1011 characters.
+	// For example, the length of the following parameter name is 65 characters,
+	// not 20 characters:
 	//
 	// arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName
 	//

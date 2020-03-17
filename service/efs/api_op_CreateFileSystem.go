@@ -44,6 +44,9 @@ type CreateFileSystemInput struct {
 	//
 	// If KmsKeyId is specified, the CreateFileSystemRequest$Encrypted parameter
 	// must be set to true.
+	//
+	// EFS accepts only symmetric CMKs. You cannot use asymmetric CMKs with EFS
+	// file systems.
 	KmsKeyId *string `min:"1" type:"string"`
 
 	// The performance mode of the file system. We recommend generalPurpose performance

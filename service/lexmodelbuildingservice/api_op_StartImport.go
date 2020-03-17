@@ -4,6 +4,7 @@ package lexmodelbuildingservice
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -46,6 +47,10 @@ type StartImportInput struct {
 	//
 	// ResourceType is a required field
 	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true" enum:"true"`
+
+	// A list of tags to add to the imported bot. You can only add tags when you
+	// import a bot, you can't add tags to an intent or slot type.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -65,6 +70,13 @@ func (s *StartImportInput) Validate() error {
 	}
 	if len(s.ResourceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -95,6 +107,18 @@ func (s StartImportInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	return nil
 }
 
@@ -119,6 +143,9 @@ type StartImportOutput struct {
 
 	// The type of resource to import.
 	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
+
+	// A list of tags added to the imported bot.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -164,6 +191,18 @@ func (s StartImportOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	return nil
 }

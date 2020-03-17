@@ -124,9 +124,9 @@ const opListRooms = "ListRooms"
 // ListRoomsRequest returns a request value for making API operation for
 // Amazon Chime.
 //
-// Lists the room details for the specified Amazon Chime account. Optionally,
-// filter the results by a member ID (user ID or bot ID) to see a list of rooms
-// that the member belongs to.
+// Lists the room details for the specified Amazon Chime Enterprise account.
+// Optionally, filter the results by a member ID (user ID or bot ID) to see
+// a list of rooms that the member belongs to.
 //
 //    // Example sending a request using ListRoomsRequest.
 //    req := client.ListRoomsRequest(params)

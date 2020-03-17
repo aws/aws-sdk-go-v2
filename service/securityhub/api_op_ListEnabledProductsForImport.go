@@ -13,13 +13,14 @@ import (
 type ListEnabledProductsForImportInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of items that you want in the response.
+	// The maximum number of items to return in the response.
 	MaxResults *int64 `location:"querystring" locationName:"MaxResults" min:"1" type:"integer"`
 
-	// Paginates results. On your first call to the ListEnabledProductsForImport
-	// operation, set the value of this parameter to NULL. For subsequent calls
-	// to the operation, fill nextToken in the request with the value of NextToken
-	// from the previous response to continue listing data.
+	// The token that is required for pagination. On your first call to the ListEnabledProductsForImport
+	// operation, set the value of this parameter to NULL.
+	//
+	// For subsequent calls to the operation, to continue listing data, set the
+	// value of this parameter to the value returned from the previous response.
 	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
 }
 
@@ -63,10 +64,10 @@ func (s ListEnabledProductsForImportInput) MarshalFields(e protocol.FieldEncoder
 type ListEnabledProductsForImportOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The token that is required for pagination.
+	// The pagination token to use to request the next page of results.
 	NextToken *string `type:"string"`
 
-	// A list of ARNs for the resources that represent your subscriptions to products.
+	// The list of ARNs for the resources that represent your subscriptions to products.
 	ProductSubscriptions []string `type:"list"`
 }
 
@@ -103,8 +104,8 @@ const opListEnabledProductsForImport = "ListEnabledProductsForImport"
 // ListEnabledProductsForImportRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Lists all findings-generating solutions (products) whose findings you have
-// subscribed to receive in Security Hub.
+// Lists all findings-generating solutions (products) that you are subscribed
+// to receive findings from in Security Hub.
 //
 //    // Example sending a request using ListEnabledProductsForImportRequest.
 //    req := client.ListEnabledProductsForImportRequest(params)

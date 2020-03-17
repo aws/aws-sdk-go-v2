@@ -29,6 +29,12 @@ type DescribeDBClustersInput struct {
 	//    * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
 	//    Resource Names (ARNs). The results list will only include information
 	//    about the DB clusters identified by these ARNs.
+	//
+	//    * engine - Accepts an engine name (such as neptune), and restricts the
+	//    results list to DB clusters created by that engine.
+	//
+	// For example, to invoke this API from the AWS CLI and filter so that only
+	// Neptune DB clusters are returned, you could use the following command:
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBClusters request.
@@ -88,7 +94,10 @@ const opDescribeDBClusters = "DescribeDBClusters"
 // DescribeDBClustersRequest returns a request value for making API operation for
 // Amazon Neptune.
 //
-// Returns information about provisioned DB clusters. This API supports pagination.
+// Returns information about provisioned DB clusters, and supports pagination.
+//
+// This operation can also return information for Amazon RDS clusters and Amazon
+// DocDB clusters.
 //
 //    // Example sending a request using DescribeDBClustersRequest.
 //    req := client.DescribeDBClustersRequest(params)

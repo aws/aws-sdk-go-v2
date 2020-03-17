@@ -106,9 +106,8 @@ const opCreateVoiceConnectorGroup = "CreateVoiceConnectorGroup"
 // Amazon Chime.
 //
 // Creates an Amazon Chime Voice Connector group under the administrator's AWS
-// account. You can associate up to three existing Amazon Chime Voice Connectors
-// with the Amazon Chime Voice Connector group by including VoiceConnectorItems
-// in the request.
+// account. You can associate Amazon Chime Voice Connectors with the Amazon
+// Chime Voice Connector group by including VoiceConnectorItems in the request.
 //
 // You can include Amazon Chime Voice Connectors from different AWS Regions
 // in your group. This creates a fault tolerant mechanism for fallback in case

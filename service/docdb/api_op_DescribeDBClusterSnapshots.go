@@ -14,16 +14,16 @@ import (
 type DescribeDBClusterSnapshotsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the DB cluster to retrieve the list of DB cluster snapshots for.
-	// This parameter can't be used with the DBClusterSnapshotIdentifier parameter.
-	// This parameter is not case sensitive.
+	// The ID of the cluster to retrieve the list of cluster snapshots for. This
+	// parameter can't be used with the DBClusterSnapshotIdentifier parameter. This
+	// parameter is not case sensitive.
 	//
 	// Constraints:
 	//
 	//    * If provided, must match the identifier of an existing DBCluster.
 	DBClusterIdentifier *string `type:"string"`
 
-	// A specific DB cluster snapshot identifier to describe. This parameter can't
+	// A specific cluster snapshot identifier to describe. This parameter can't
 	// be used with the DBClusterIdentifier parameter. This value is stored as a
 	// lowercase string.
 	//
@@ -38,14 +38,14 @@ type DescribeDBClusterSnapshotsInput struct {
 	// This parameter is not currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
-	// Set to true to include manual DB cluster snapshots that are public and can
-	// be copied or restored by any AWS account, and otherwise false. The default
-	// is false.
+	// Set to true to include manual cluster snapshots that are public and can be
+	// copied or restored by any AWS account, and otherwise false. The default is
+	// false.
 	IncludePublic *bool `type:"boolean"`
 
-	// Set to true to include shared manual DB cluster snapshots from other AWS
-	// accounts that this AWS account has been given permission to copy or restore,
-	// and otherwise false. The default is false.
+	// Set to true to include shared manual cluster snapshots from other AWS accounts
+	// that this AWS account has been given permission to copy or restore, and otherwise
+	// false. The default is false.
 	IncludeShared *bool `type:"boolean"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -62,24 +62,24 @@ type DescribeDBClusterSnapshotsInput struct {
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int64 `type:"integer"`
 
-	// The type of DB cluster snapshots to be returned. You can specify one of the
+	// The type of cluster snapshots to be returned. You can specify one of the
 	// following values:
 	//
-	//    * automated - Return all DB cluster snapshots that Amazon DocumentDB has
+	//    * automated - Return all cluster snapshots that Amazon DocumentDB has
 	//    automatically created for your AWS account.
 	//
-	//    * manual - Return all DB cluster snapshots that you have manually created
+	//    * manual - Return all cluster snapshots that you have manually created
 	//    for your AWS account.
 	//
-	//    * shared - Return all manual DB cluster snapshots that have been shared
-	//    to your AWS account.
+	//    * shared - Return all manual cluster snapshots that have been shared to
+	//    your AWS account.
 	//
-	//    * public - Return all DB cluster snapshots that have been marked as public.
+	//    * public - Return all cluster snapshots that have been marked as public.
 	//
 	// If you don't specify a SnapshotType value, then both automated and manual
-	// DB cluster snapshots are returned. You can include shared DB cluster snapshots
+	// cluster snapshots are returned. You can include shared cluster snapshots
 	// with these results by setting the IncludeShared parameter to true. You can
-	// include public DB cluster snapshots with these results by setting the IncludePublic
+	// include public cluster snapshots with these results by setting the IncludePublic
 	// parameter to true.
 	//
 	// The IncludeShared and IncludePublic parameters don't apply for SnapshotType
@@ -115,7 +115,7 @@ func (s *DescribeDBClusterSnapshotsInput) Validate() error {
 type DescribeDBClusterSnapshotsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Provides a list of DB cluster snapshots.
+	// Provides a list of cluster snapshots.
 	DBClusterSnapshots []DBClusterSnapshot `locationNameList:"DBClusterSnapshot" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -134,7 +134,7 @@ const opDescribeDBClusterSnapshots = "DescribeDBClusterSnapshots"
 // DescribeDBClusterSnapshotsRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Returns information about DB cluster snapshots. This API operation supports
+// Returns information about cluster snapshots. This API operation supports
 // pagination.
 //
 //    // Example sending a request using DescribeDBClusterSnapshotsRequest.

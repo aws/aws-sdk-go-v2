@@ -19,6 +19,8 @@ type CreateVirtualNodeInput struct {
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
+	MeshOwner *string `location:"querystring" locationName:"meshOwner" min:"12" type:"string"`
+
 	// An object that represents the specification of a virtual node.
 	//
 	// Spec is a required field
@@ -44,6 +46,9 @@ func (s *CreateVirtualNodeInput) Validate() error {
 	}
 	if s.MeshName != nil && len(*s.MeshName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
+	}
+	if s.MeshOwner != nil && len(*s.MeshOwner) < 12 {
+		invalidParams.Add(aws.NewErrParamMinLen("MeshOwner", 12))
 	}
 
 	if s.Spec == nil {
@@ -121,6 +126,12 @@ func (s CreateVirtualNodeInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.MeshOwner != nil {
+		v := *s.MeshOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "meshOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	return nil
 }
 
@@ -174,6 +185,8 @@ const opCreateVirtualNode = "CreateVirtualNode"
 // If you require your Envoy stats or tracing to use a different name, you can
 // override the node.cluster value that is set by APPMESH_VIRTUAL_NODE_NAME
 // with the APPMESH_VIRTUAL_NODE_CLUSTER environment variable.
+//
+// For more information about virtual nodes, see Virtual Nodes (https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html).
 //
 //    // Example sending a request using CreateVirtualNodeRequest.
 //    req := client.CreateVirtualNodeRequest(params)

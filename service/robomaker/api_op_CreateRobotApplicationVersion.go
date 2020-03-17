@@ -84,7 +84,7 @@ type CreateRobotApplicationVersionOutput struct {
 	// The revision id of the robot application.
 	RevisionId *string `locationName:"revisionId" min:"1" type:"string"`
 
-	// The robot software suite used by the robot application.
+	// The robot software suite (ROS distribution) used by the robot application.
 	RobotSoftwareSuite *RobotSoftwareSuite `locationName:"robotSoftwareSuite" type:"structure"`
 
 	// The sources of the robot application.

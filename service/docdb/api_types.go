@@ -64,11 +64,11 @@ func (s Certificate) String() string {
 }
 
 // The configuration setting for the log types to be enabled for export to Amazon
-// CloudWatch Logs for a specific DB instance or DB cluster.
+// CloudWatch Logs for a specific instance or cluster.
 //
 // The EnableLogTypes and DisableLogTypes arrays determine which logs are exported
 // (or not exported) to CloudWatch Logs. The values within these arrays depend
-// on the DB engine that is being used.
+// on the engine that is being used.
 type CloudwatchLogsExportConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -84,47 +84,46 @@ func (s CloudwatchLogsExportConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Detailed information about a DB cluster.
+// Detailed information about a cluster.
 type DBCluster struct {
 	_ struct{} `type:"structure"`
 
 	// Provides a list of the AWS Identity and Access Management (IAM) roles that
-	// are associated with the DB cluster. IAM roles that are associated with a
-	// DB cluster grant permission for the DB cluster to access other AWS services
-	// on your behalf.
+	// are associated with the cluster. IAM roles that are associated with a cluster
+	// grant permission for the cluster to access other AWS services on your behalf.
 	AssociatedRoles []DBClusterRole `locationNameList:"DBClusterRole" type:"list"`
 
 	// Provides the list of Amazon EC2 Availability Zones that instances in the
-	// DB cluster can be created in.
+	// cluster can be created in.
 	AvailabilityZones []string `locationNameList:"AvailabilityZone" type:"list"`
 
-	// Specifies the number of days for which automatic DB snapshots are retained.
+	// Specifies the number of days for which automatic snapshots are retained.
 	BackupRetentionPeriod *int64 `type:"integer"`
 
-	// Specifies the time when the DB cluster was created, in Universal Coordinated
+	// Specifies the time when the cluster was created, in Universal Coordinated
 	// Time (UTC).
 	ClusterCreateTime *time.Time `type:"timestamp"`
 
-	// The Amazon Resource Name (ARN) for the DB cluster.
+	// The Amazon Resource Name (ARN) for the cluster.
 	DBClusterArn *string `type:"string"`
 
-	// Contains a user-supplied DB cluster identifier. This identifier is the unique
-	// key that identifies a DB cluster.
+	// Contains a user-supplied cluster identifier. This identifier is the unique
+	// key that identifies a cluster.
 	DBClusterIdentifier *string `type:"string"`
 
-	// Provides the list of instances that make up the DB cluster.
+	// Provides the list of instances that make up the cluster.
 	DBClusterMembers []DBClusterMember `locationNameList:"DBClusterMember" type:"list"`
 
-	// Specifies the name of the DB cluster parameter group for the DB cluster.
+	// Specifies the name of the cluster parameter group for the cluster.
 	DBClusterParameterGroup *string `type:"string"`
 
-	// Specifies information on the subnet group that is associated with the DB
-	// cluster, including the name, description, and subnets in the subnet group.
+	// Specifies information on the subnet group that is associated with the cluster,
+	// including the name, description, and subnets in the subnet group.
 	DBSubnetGroup *string `type:"string"`
 
-	// The AWS Region-unique, immutable identifier for the DB cluster. This identifier
-	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
-	// cluster is accessed.
+	// The AWS Region-unique, immutable identifier for the cluster. This identifier
+	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the cluster
+	// is accessed.
 	DbClusterResourceId *string `type:"string"`
 
 	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
@@ -137,14 +136,14 @@ type DBCluster struct {
 	// restore.
 	EarliestRestorableTime *time.Time `type:"timestamp"`
 
-	// A list of log types that this DB cluster is configured to export to Amazon
-	// CloudWatch Logs.
+	// A list of log types that this cluster is configured to export to Amazon CloudWatch
+	// Logs.
 	EnabledCloudwatchLogsExports []string `type:"list"`
 
-	// Specifies the connection endpoint for the primary instance of the DB cluster.
+	// Specifies the connection endpoint for the primary instance of the cluster.
 	Endpoint *string `type:"string"`
 
-	// Provides the name of the database engine to be used for this DB cluster.
+	// Provides the name of the database engine to be used for this cluster.
 	Engine *string `type:"string"`
 
 	// Indicates the database engine version.
@@ -154,17 +153,17 @@ type DBCluster struct {
 	HostedZoneId *string `type:"string"`
 
 	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted
-	// DB cluster.
+	// cluster.
 	KmsKeyId *string `type:"string"`
 
 	// Specifies the latest time to which a database can be restored with point-in-time
 	// restore.
 	LatestRestorableTime *time.Time `type:"timestamp"`
 
-	// Contains the master user name for the DB cluster.
+	// Contains the master user name for the cluster.
 	MasterUsername *string `type:"string"`
 
-	// Specifies whether the DB cluster has instances in multiple Availability Zones.
+	// Specifies whether the cluster has instances in multiple Availability Zones.
 	MultiAZ *bool `type:"boolean"`
 
 	// Specifies the progress of the operation as a percentage.
@@ -181,13 +180,12 @@ type DBCluster struct {
 	// in Universal Coordinated Time (UTC).
 	PreferredMaintenanceWindow *string `type:"string"`
 
-	// The reader endpoint for the DB cluster. The reader endpoint for a DB cluster
-	// load balances connections across the Amazon DocumentDB replicas that are
-	// available in a DB cluster. As clients request new connections to the reader
-	// endpoint, Amazon DocumentDB distributes the connection requests among the
-	// Amazon DocumentDB replicas in the DB cluster. This functionality can help
-	// balance your read workload across multiple Amazon DocumentDB replicas in
-	// your DB cluster.
+	// The reader endpoint for the cluster. The reader endpoint for a cluster load
+	// balances connections across the Amazon DocumentDB replicas that are available
+	// in a cluster. As clients request new connections to the reader endpoint,
+	// Amazon DocumentDB distributes the connection requests among the Amazon DocumentDB
+	// replicas in the cluster. This functionality can help balance your read workload
+	// across multiple Amazon DocumentDB replicas in your cluster.
 	//
 	// If a failover occurs, and the Amazon DocumentDB replica that you are connected
 	// to is promoted to be the primary instance, your connection is dropped. To
@@ -195,14 +193,14 @@ type DBCluster struct {
 	// the cluster, you can then reconnect to the reader endpoint.
 	ReaderEndpoint *string `type:"string"`
 
-	// Specifies the current state of this DB cluster.
+	// Specifies the current state of this cluster.
 	Status *string `type:"string"`
 
-	// Specifies whether the DB cluster is encrypted.
+	// Specifies whether the cluster is encrypted.
 	StorageEncrypted *bool `type:"boolean"`
 
-	// Provides a list of virtual private cloud (VPC) security groups that the DB
-	// cluster belongs to.
+	// Provides a list of virtual private cloud (VPC) security groups that the cluster
+	// belongs to.
 	VpcSecurityGroups []VpcSecurityGroupMembership `locationNameList:"VpcSecurityGroupMembership" type:"list"`
 }
 
@@ -211,19 +209,19 @@ func (s DBCluster) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Contains information about an instance that is part of a DB cluster.
+// Contains information about an instance that is part of a cluster.
 type DBClusterMember struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the status of the DB cluster parameter group for this member of
-	// the DB cluster.
+	// Specifies the status of the cluster parameter group for this member of the
+	// DB cluster.
 	DBClusterParameterGroupStatus *string `type:"string"`
 
-	// Specifies the instance identifier for this member of the DB cluster.
+	// Specifies the instance identifier for this member of the cluster.
 	DBInstanceIdentifier *string `type:"string"`
 
 	// A value that is true if the cluster member is the primary instance for the
-	// DB cluster and false otherwise.
+	// cluster and false otherwise.
 	IsClusterWriter *bool `type:"boolean"`
 
 	// A value that specifies the order in which an Amazon DocumentDB replica is
@@ -237,22 +235,21 @@ func (s DBClusterMember) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Detailed information about a DB cluster parameter group.
+// Detailed information about a cluster parameter group.
 type DBClusterParameterGroup struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) for the DB cluster parameter group.
+	// The Amazon Resource Name (ARN) for the cluster parameter group.
 	DBClusterParameterGroupArn *string `type:"string"`
 
-	// Provides the name of the DB cluster parameter group.
+	// Provides the name of the cluster parameter group.
 	DBClusterParameterGroupName *string `type:"string"`
 
-	// Provides the name of the DB parameter group family that this DB cluster parameter
+	// Provides the name of the parameter group family that this cluster parameter
 	// group is compatible with.
 	DBParameterGroupFamily *string `type:"string"`
 
-	// Provides the customer-specified description for this DB cluster parameter
-	// group.
+	// Provides the customer-specified description for this cluster parameter group.
 	Description *string `type:"string"`
 }
 
@@ -262,7 +259,7 @@ func (s DBClusterParameterGroup) String() string {
 }
 
 // Describes an AWS Identity and Access Management (IAM) role that is associated
-// with a DB cluster.
+// with a cluster.
 type DBClusterRole struct {
 	_ struct{} `type:"structure"`
 
@@ -270,17 +267,16 @@ type DBClusterRole struct {
 	// DB cluster.
 	RoleArn *string `type:"string"`
 
-	// Describes the state of association between the IAM role and the DB cluster.
+	// Describes the state of association between the IAM role and the cluster.
 	// The Status property returns one of the following values:
 	//
-	//    * ACTIVE - The IAM role ARN is associated with the DB cluster and can
-	//    be used to access other AWS services on your behalf.
+	//    * ACTIVE - The IAM role ARN is associated with the cluster and can be
+	//    used to access other AWS services on your behalf.
 	//
 	//    * PENDING - The IAM role ARN is being associated with the DB cluster.
 	//
-	//    * INVALID - The IAM role ARN is associated with the DB cluster, but the
-	//    DB cluster cannot assume the IAM role to access other AWS services on
-	//    your behalf.
+	//    * INVALID - The IAM role ARN is associated with the cluster, but the cluster
+	//    cannot assume the IAM role to access other AWS services on your behalf.
 	Status *string `type:"string"`
 }
 
@@ -289,66 +285,65 @@ func (s DBClusterRole) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Detailed information about a DB cluster snapshot.
+// Detailed information about a cluster snapshot.
 type DBClusterSnapshot struct {
 	_ struct{} `type:"structure"`
 
 	// Provides the list of Amazon EC2 Availability Zones that instances in the
-	// DB cluster snapshot can be restored in.
+	// cluster snapshot can be restored in.
 	AvailabilityZones []string `locationNameList:"AvailabilityZone" type:"list"`
 
-	// Specifies the time when the DB cluster was created, in Universal Coordinated
+	// Specifies the time when the cluster was created, in Universal Coordinated
 	// Time (UTC).
 	ClusterCreateTime *time.Time `type:"timestamp"`
 
-	// Specifies the DB cluster identifier of the DB cluster that this DB cluster
-	// snapshot was created from.
+	// Specifies the cluster identifier of the cluster that this cluster snapshot
+	// was created from.
 	DBClusterIdentifier *string `type:"string"`
 
-	// The Amazon Resource Name (ARN) for the DB cluster snapshot.
+	// The Amazon Resource Name (ARN) for the cluster snapshot.
 	DBClusterSnapshotArn *string `type:"string"`
 
-	// Specifies the identifier for the DB cluster snapshot.
+	// Specifies the identifier for the cluster snapshot.
 	DBClusterSnapshotIdentifier *string `type:"string"`
 
 	// Specifies the name of the database engine.
 	Engine *string `type:"string"`
 
-	// Provides the version of the database engine for this DB cluster snapshot.
+	// Provides the version of the database engine for this cluster snapshot.
 	EngineVersion *string `type:"string"`
 
 	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted
-	// DB cluster snapshot.
+	// cluster snapshot.
 	KmsKeyId *string `type:"string"`
 
-	// Provides the master user name for the DB cluster snapshot.
+	// Provides the master user name for the cluster snapshot.
 	MasterUsername *string `type:"string"`
 
 	// Specifies the percentage of the estimated data that has been transferred.
 	PercentProgress *int64 `type:"integer"`
 
-	// Specifies the port that the DB cluster was listening on at the time of the
-	// snapshot.
+	// Specifies the port that the cluster was listening on at the time of the snapshot.
 	Port *int64 `type:"integer"`
 
 	// Provides the time when the snapshot was taken, in UTC.
 	SnapshotCreateTime *time.Time `type:"timestamp"`
 
-	// Provides the type of the DB cluster snapshot.
+	// Provides the type of the cluster snapshot.
 	SnapshotType *string `type:"string"`
 
-	// If the DB cluster snapshot was copied from a source DB cluster snapshot,
-	// the ARN for the source DB cluster snapshot; otherwise, a null value.
+	// If the cluster snapshot was copied from a source cluster snapshot, the ARN
+	// for the source cluster snapshot; otherwise, a null value.
 	SourceDBClusterSnapshotArn *string `type:"string"`
 
-	// Specifies the status of this DB cluster snapshot.
+	// Specifies the status of this cluster snapshot.
 	Status *string `type:"string"`
 
-	// Specifies whether the DB cluster snapshot is encrypted.
+	// Specifies whether the cluster snapshot is encrypted.
 	StorageEncrypted *bool `type:"boolean"`
 
-	// Provides the virtual private cloud (VPC) ID that is associated with the DB
-	// cluster snapshot.
+	// Provides the virtual private cloud (VPC) ID that is associated with the cluster
+	// snapshot.
 	VpcId *string `type:"string"`
 }
 
@@ -357,26 +352,25 @@ func (s DBClusterSnapshot) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Contains the name and values of a manual DB cluster snapshot attribute.
+// Contains the name and values of a manual cluster snapshot attribute.
 //
-// Manual DB cluster snapshot attributes are used to authorize other AWS accounts
-// to restore a manual DB cluster snapshot.
+// Manual cluster snapshot attributes are used to authorize other AWS accounts
+// to restore a manual cluster snapshot.
 type DBClusterSnapshotAttribute struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the manual DB cluster snapshot attribute.
+	// The name of the manual cluster snapshot attribute.
 	//
 	// The attribute named restore refers to the list of AWS accounts that have
-	// permission to copy or restore the manual DB cluster snapshot.
+	// permission to copy or restore the manual cluster snapshot.
 	AttributeName *string `type:"string"`
 
-	// The values for the manual DB cluster snapshot attribute.
+	// The values for the manual cluster snapshot attribute.
 	//
 	// If the AttributeName field is set to restore, then this element returns a
 	// list of IDs of the AWS accounts that are authorized to copy or restore the
-	// manual DB cluster snapshot. If a value of all is in the list, then the manual
-	// DB cluster snapshot is public and available for any AWS account to copy or
-	// restore.
+	// manual cluster snapshot. If a value of all is in the list, then the manual
+	// cluster snapshot is public and available for any AWS account to copy or restore.
 	AttributeValues []string `locationNameList:"AttributeValue" type:"list"`
 }
 
@@ -385,15 +379,15 @@ func (s DBClusterSnapshotAttribute) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Detailed information about the attributes that are associated with a DB cluster
+// Detailed information about the attributes that are associated with a cluster
 // snapshot.
 type DBClusterSnapshotAttributesResult struct {
 	_ struct{} `type:"structure"`
 
-	// The list of attributes and values for the DB cluster snapshot.
+	// The list of attributes and values for the cluster snapshot.
 	DBClusterSnapshotAttributes []DBClusterSnapshotAttribute `locationNameList:"DBClusterSnapshotAttribute" type:"list"`
 
-	// The identifier of the DB cluster snapshot that the attributes apply to.
+	// The identifier of the cluster snapshot that the attributes apply to.
 	DBClusterSnapshotIdentifier *string `type:"string"`
 }
 
@@ -402,7 +396,7 @@ func (s DBClusterSnapshotAttributesResult) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Detailed information about a DB engine version.
+// Detailed information about an engine version.
 type DBEngineVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -412,7 +406,7 @@ type DBEngineVersion struct {
 	// The description of the database engine version.
 	DBEngineVersionDescription *string `type:"string"`
 
-	// The name of the DB parameter group family for the database engine.
+	// The name of the parameter group family for the database engine.
 	DBParameterGroupFamily *string `type:"string"`
 
 	// The name of the database engine.
@@ -439,74 +433,74 @@ func (s DBEngineVersion) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Detailed information about a DB instance.
+// Detailed information about an instance.
 type DBInstance struct {
 	_ struct{} `type:"structure"`
 
 	// Indicates that minor version patches are applied automatically.
 	AutoMinorVersionUpgrade *bool `type:"boolean"`
 
-	// Specifies the name of the Availability Zone that the DB instance is located
+	// Specifies the name of the Availability Zone that the instance is located
 	// in.
 	AvailabilityZone *string `type:"string"`
 
-	// Specifies the number of days for which automatic DB snapshots are retained.
+	// Specifies the number of days for which automatic snapshots are retained.
 	BackupRetentionPeriod *int64 `type:"integer"`
 
 	// The identifier of the CA certificate for this DB instance.
 	CACertificateIdentifier *string `type:"string"`
 
-	// Contains the name of the DB cluster that the DB instance is a member of if
-	// the DB instance is a member of a DB cluster.
+	// Contains the name of the cluster that the instance is a member of if the
+	// instance is a member of a cluster.
 	DBClusterIdentifier *string `type:"string"`
 
-	// The Amazon Resource Name (ARN) for the DB instance.
+	// The Amazon Resource Name (ARN) for the instance.
 	DBInstanceArn *string `type:"string"`
 
-	// Contains the name of the compute and memory capacity class of the DB instance.
+	// Contains the name of the compute and memory capacity class of the instance.
 	DBInstanceClass *string `type:"string"`
 
 	// Contains a user-provided database identifier. This identifier is the unique
-	// key that identifies a DB instance.
+	// key that identifies an instance.
 	DBInstanceIdentifier *string `type:"string"`
 
 	// Specifies the current state of this database.
 	DBInstanceStatus *string `type:"string"`
 
-	// Specifies information on the subnet group that is associated with the DB
-	// instance, including the name, description, and subnets in the subnet group.
+	// Specifies information on the subnet group that is associated with the instance,
+	// including the name, description, and subnets in the subnet group.
 	DBSubnetGroup *DBSubnetGroup `type:"structure"`
 
-	// The AWS Region-unique, immutable identifier for the DB instance. This identifier
-	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
-	// instance is accessed.
+	// The AWS Region-unique, immutable identifier for the instance. This identifier
+	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the instance
+	// is accessed.
 	DbiResourceId *string `type:"string"`
 
-	// A list of log types that this DB instance is configured to export to Amazon
+	// A list of log types that this instance is configured to export to Amazon
 	// CloudWatch Logs.
 	EnabledCloudwatchLogsExports []string `type:"list"`
 
 	// Specifies the connection endpoint.
 	Endpoint *Endpoint `type:"structure"`
 
-	// Provides the name of the database engine to be used for this DB instance.
+	// Provides the name of the database engine to be used for this instance.
 	Engine *string `type:"string"`
 
 	// Indicates the database engine version.
 	EngineVersion *string `type:"string"`
 
-	// Provides the date and time that the DB instance was created.
+	// Provides the date and time that the instance was created.
 	InstanceCreateTime *time.Time `type:"timestamp"`
 
 	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted
-	// DB instance.
+	// instance.
 	KmsKeyId *string `type:"string"`
 
 	// Specifies the latest time to which a database can be restored with point-in-time
 	// restore.
 	LatestRestorableTime *time.Time `type:"timestamp"`
 
-	// Specifies that changes to the DB instance are pending. This element is included
+	// Specifies that changes to the instance are pending. This element is included
 	// only when changes are pending. Specific changes are identified by subelements.
 	PendingModifiedValues *PendingModifiedValues `type:"structure"`
 
@@ -531,10 +525,10 @@ type DBInstance struct {
 	// is blank.
 	StatusInfos []DBInstanceStatusInfo `locationNameList:"DBInstanceStatusInfo" type:"list"`
 
-	// Specifies whether or not the DB instance is encrypted.
+	// Specifies whether or not the instance is encrypted.
 	StorageEncrypted *bool `type:"boolean"`
 
-	// Provides a list of VPC security group elements that the DB instance belongs
+	// Provides a list of VPC security group elements that the instance belongs
 	// to.
 	VpcSecurityGroups []VpcSecurityGroupMembership `locationNameList:"VpcSecurityGroupMembership" type:"list"`
 }
@@ -544,7 +538,7 @@ func (s DBInstance) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Provides a list of status information for a DB instance.
+// Provides a list of status information for an instance.
 type DBInstanceStatusInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -556,7 +550,7 @@ type DBInstanceStatusInfo struct {
 	// if the instance is in an error state.
 	Normal *bool `type:"boolean"`
 
-	// Status of the DB instance. For a StatusType of read replica, the values can
+	// Status of the instance. For a StatusType of read replica, the values can
 	// be replicating, error, stopped, or terminated.
 	Status *string `type:"string"`
 
@@ -569,26 +563,26 @@ func (s DBInstanceStatusInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Detailed information about a DB subnet group.
+// Detailed information about a subnet group.
 type DBSubnetGroup struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) for the DB subnet group.
 	DBSubnetGroupArn *string `type:"string"`
 
-	// Provides the description of the DB subnet group.
+	// Provides the description of the subnet group.
 	DBSubnetGroupDescription *string `type:"string"`
 
-	// The name of the DB subnet group.
+	// The name of the subnet group.
 	DBSubnetGroupName *string `type:"string"`
 
-	// Provides the status of the DB subnet group.
+	// Provides the status of the subnet group.
 	SubnetGroupStatus *string `type:"string"`
 
-	// Detailed information about one or more subnets within a DB subnet group.
+	// Detailed information about one or more subnets within a subnet group.
 	Subnets []Subnet `locationNameList:"Subnet" type:"list"`
 
-	// Provides the virtual private cloud (VPC) ID of the DB subnet group.
+	// Provides the virtual private cloud (VPC) ID of the subnet group.
 	VpcId *string `type:"string"`
 }
 
@@ -597,12 +591,12 @@ func (s DBSubnetGroup) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Network information for accessing a DB cluster or DB instance. Client programs
+// Network information for accessing a cluster or instance. Client programs
 // must specify a valid endpoint to access these Amazon DocumentDB resources.
 type Endpoint struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the DNS address of the DB instance.
+	// Specifies the DNS address of the instance.
 	Address *string `type:"string"`
 
 	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
@@ -622,7 +616,7 @@ func (s Endpoint) String() string {
 type EngineDefaults struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the DB cluster parameter group family to return the engine parameter
+	// The name of the cluster parameter group family to return the engine parameter
 	// information for.
 	DBParameterGroupFamily *string `type:"string"`
 
@@ -631,7 +625,7 @@ type EngineDefaults struct {
 	// the value specified by MaxRecords.
 	Marker *string `type:"string"`
 
-	// The parameters of a particular DB cluster parameter group family.
+	// The parameters of a particular cluster parameter group family.
 	Parameters []Parameter `locationNameList:"Parameter" type:"list"`
 }
 
@@ -726,26 +720,26 @@ func (s *Filter) Validate() error {
 	return nil
 }
 
-// The options that are available for a DB instance.
+// The options that are available for an instance.
 type OrderableDBInstanceOption struct {
 	_ struct{} `type:"structure"`
 
-	// A list of Availability Zones for a DB instance.
+	// A list of Availability Zones for an instance.
 	AvailabilityZones []AvailabilityZone `locationNameList:"AvailabilityZone" type:"list"`
 
-	// The DB instance class for a DB instance.
+	// The instance class for an instance.
 	DBInstanceClass *string `type:"string"`
 
-	// The engine type of a DB instance.
+	// The engine type of an instance.
 	Engine *string `type:"string"`
 
-	// The engine version of a DB instance.
+	// The engine version of an instance.
 	EngineVersion *string `type:"string"`
 
-	// The license model for a DB instance.
+	// The license model for an instance.
 	LicenseModel *string `type:"string"`
 
-	// Indicates whether a DB instance is in a virtual private cloud (VPC).
+	// Indicates whether an instance is in a virtual private cloud (VPC).
 	Vpc *bool `type:"boolean"`
 }
 
@@ -850,12 +844,12 @@ func (s PendingMaintenanceAction) String() string {
 	return awsutil.Prettify(s)
 }
 
-// One or more modified settings for a DB instance. These modified settings
-// have been requested, but haven't been applied yet.
+// One or more modified settings for an instance. These modified settings have
+// been requested, but haven't been applied yet.
 type PendingModifiedValues struct {
 	_ struct{} `type:"structure"`
 
-	// Contains the new AllocatedStorage size for the DB instance that will be applied
+	// Contains the new AllocatedStorage size for then instance that will be applied
 	// or is currently being applied.
 	AllocatedStorage *int64 `type:"integer"`
 
@@ -866,44 +860,44 @@ type PendingModifiedValues struct {
 	// the DB instance.
 	CACertificateIdentifier *string `type:"string"`
 
-	// Contains the new DBInstanceClass for the DB instance that will be applied
-	// or is currently being applied.
+	// Contains the new DBInstanceClass for the instance that will be applied or
+	// is currently being applied.
 	DBInstanceClass *string `type:"string"`
 
-	// Contains the new DBInstanceIdentifier for the DB instance that will be applied
+	// Contains the new DBInstanceIdentifier for the instance that will be applied
 	// or is currently being applied.
 	DBInstanceIdentifier *string `type:"string"`
 
-	// The new DB subnet group for the DB instance.
+	// The new subnet group for the instance.
 	DBSubnetGroupName *string `type:"string"`
 
 	// Indicates the database engine version.
 	EngineVersion *string `type:"string"`
 
-	// Specifies the new Provisioned IOPS value for the DB instance that will be
-	// applied or is currently being applied.
+	// Specifies the new Provisioned IOPS value for the instance that will be applied
+	// or is currently being applied.
 	Iops *int64 `type:"integer"`
 
-	// The license model for the DB instance.
+	// The license model for the instance.
 	//
 	// Valid values: license-included, bring-your-own-license, general-public-license
 	LicenseModel *string `type:"string"`
 
 	// Contains the pending or currently in-progress change of the master credentials
-	// for the DB instance.
+	// for the instance.
 	MasterUserPassword *string `type:"string"`
 
-	// Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.
+	// Indicates that the Single-AZ instance is to change to a Multi-AZ deployment.
 	MultiAZ *bool `type:"boolean"`
 
 	// A list of the log types whose configuration is still pending. These log types
 	// are in the process of being activated or deactivated.
 	PendingCloudwatchLogsExports *PendingCloudwatchLogsExports `type:"structure"`
 
-	// Specifies the pending port for the DB instance.
+	// Specifies the pending port for the instance.
 	Port *int64 `type:"integer"`
 
-	// Specifies the storage type to be associated with the DB instance.
+	// Specifies the storage type to be associated with the instance.
 	StorageType *string `type:"string"`
 }
 
@@ -972,7 +966,7 @@ func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The version of the database engine that a DB instance can be upgraded to.
+// The version of the database engine that an instance can be upgraded to.
 type UpgradeTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -980,7 +974,7 @@ type UpgradeTarget struct {
 	// DB instances that have AutoMinorVersionUpgrade set to true.
 	AutoUpgrade *bool `type:"boolean"`
 
-	// The version of the database engine that a DB instance can be upgraded to.
+	// The version of the database engine that an instance can be upgraded to.
 	Description *string `type:"string"`
 
 	// The name of the upgrade target database engine.

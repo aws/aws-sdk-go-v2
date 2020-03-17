@@ -111,9 +111,10 @@ const opCreateActionTarget = "CreateActionTarget"
 // CreateActionTargetRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Creates a custom action target in Security Hub. You can use custom actions
-// on findings and insights in Security Hub to trigger target actions in Amazon
-// CloudWatch Events.
+// Creates a custom action target in Security Hub.
+//
+// You can use custom actions on findings and insights in Security Hub to trigger
+// target actions in Amazon CloudWatch Events.
 //
 //    // Example sending a request using CreateActionTargetRequest.
 //    req := client.CreateActionTargetRequest(params)

@@ -78,6 +78,10 @@ const opDisassociateTrialComponent = "DisassociateTrialComponent"
 // associate a trial component with a trial, call the AssociateTrialComponent
 // API.
 //
+// To get a list of the trials a component is associated with, use the Search
+// API. Specify ExperimentTrialComponent for the Resource parameter. The list
+// appears in the response under Results.TrialComponent.Parents.
+//
 //    // Example sending a request using DisassociateTrialComponentRequest.
 //    req := client.DisassociateTrialComponentRequest(params)
 //    resp, err := req.Send(context.TODO())

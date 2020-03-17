@@ -13,8 +13,8 @@ import (
 type DeclineInvitationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account IDs that specify the accounts that invitations to Security
-	// Hub are declined from.
+	// The list of account IDs for the accounts from which to decline the invitations
+	// to Security Hub.
 	//
 	// AccountIds is a required field
 	AccountIds []string `type:"list" required:"true"`
@@ -61,8 +61,8 @@ func (s DeclineInvitationsInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeclineInvitationsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account ID and email address pairs of the AWS accounts that weren't
-	// processed.
+	// The list of AWS accounts that were not processed. For each account, the list
+	// includes the account ID and the email address.
 	UnprocessedAccounts []Result `type:"list"`
 }
 

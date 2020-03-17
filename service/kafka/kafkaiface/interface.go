@@ -85,6 +85,8 @@ type ClientAPI interface {
 
 	ListConfigurationsRequest(*kafka.ListConfigurationsInput) kafka.ListConfigurationsRequest
 
+	ListKafkaVersionsRequest(*kafka.ListKafkaVersionsInput) kafka.ListKafkaVersionsRequest
+
 	ListNodesRequest(*kafka.ListNodesInput) kafka.ListNodesRequest
 
 	ListTagsForResourceRequest(*kafka.ListTagsForResourceInput) kafka.ListTagsForResourceRequest

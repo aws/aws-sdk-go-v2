@@ -8895,6 +8895,9 @@ func (s MultiplexProgramServiceDescriptor) MarshalFields(e protocol.FieldEncoder
 type MultiplexProgramSettings struct {
 	_ struct{} `type:"structure"`
 
+	// Indicates which pipeline is preferred by the multiplex for program ingest.
+	PreferredChannelPipeline PreferredChannelPipeline `locationName:"preferredChannelPipeline" type:"string" enum:"true"`
+
 	// Unique program number.
 	//
 	// ProgramNumber is a required field
@@ -8938,6 +8941,12 @@ func (s *MultiplexProgramSettings) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s MultiplexProgramSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.PreferredChannelPipeline) > 0 {
+		v := s.PreferredChannelPipeline
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "preferredChannelPipeline", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.ProgramNumber != nil {
 		v := *s.ProgramNumber
 

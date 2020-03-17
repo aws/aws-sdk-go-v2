@@ -19,7 +19,11 @@ type DescribeActionTargetsInput struct {
 	// The maximum number of results to return.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// The token that is required for pagination.
+	// The token that is required for pagination. On your first call to the DescribeActionTargets
+	// operation, set the value of this parameter to NULL.
+	//
+	// For subsequent calls to the operation, to continue listing data, set the
+	// value of this parameter to the value returned from the previous response.
 	NextToken *string `type:"string"`
 }
 
@@ -81,7 +85,7 @@ type DescribeActionTargetsOutput struct {
 	// ActionTargets is a required field
 	ActionTargets []ActionTarget `type:"list" required:"true"`
 
-	// The token that is required for pagination.
+	// The pagination token to use to request the next page of results.
 	NextToken *string `type:"string"`
 }
 

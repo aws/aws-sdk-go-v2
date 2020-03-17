@@ -458,7 +458,8 @@ func (s Monitor) MarshalFields(e protocol.FieldEncoder) error {
 type Validator struct {
 	_ struct{} `type:"structure"`
 
-	// Either the JSON Schema content or an AWS Lambda function name.
+	// Either the JSON Schema content or the Amazon Resource Name (ARN) of an AWS
+	// Lambda function.
 	//
 	// Content is a required field
 	Content *string `type:"string" required:"true"`

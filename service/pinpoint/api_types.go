@@ -2024,9 +2024,11 @@ type AddressConfiguration struct {
 	ChannelType ChannelType `type:"string" enum:"true"`
 
 	// An object that maps custom attributes to attributes for the address and is
-	// attached to the message. For a push notification, this payload is added to
-	// the data.pinpoint object. For an email or text message, this payload is added
-	// to email/SMS delivery receipt event attributes.
+	// attached to the message. Attribute names are case sensitive.
+	//
+	// For a push notification, this payload is added to the data.pinpoint object.
+	// For an email or text message, this payload is added to email/SMS delivery
+	// receipt event attributes.
 	Context map[string]string `type:"map"`
 
 	// The raw, JSON-formatted string to use as the payload for the message. If
@@ -2159,8 +2161,8 @@ type AndroidPushNotificationTemplate struct {
 	Title *string `type:"string"`
 
 	// The URL to open in a recipient's default mobile browser, if a recipient taps
-	// a a push notification that's based on the message template and the value
-	// of the Action property is URL.
+	// a push notification that's based on the message template and the value of
+	// the Action property is URL.
 	Url *string `type:"string"`
 }
 
@@ -3147,28 +3149,12 @@ type CampaignEmailMessage struct {
 	HtmlBody *string `type:"string"`
 
 	// The subject line, or title, of the email.
-	//
-	// Title is a required field
-	Title *string `type:"string" required:"true"`
+	Title *string `type:"string"`
 }
 
 // String returns the string representation
 func (s CampaignEmailMessage) String() string {
 	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CampaignEmailMessage) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CampaignEmailMessage"}
-
-	if s.Title == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Title"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -4056,6 +4042,190 @@ func (s CreateApplicationRequest) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies Amazon Pinpoint configuration settings for retrieving and processing
+// recommendation data from a recommender model.
+type CreateRecommenderConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// A map of key-value pairs that defines 1-10 custom endpoint or user attributes,
+	// depending on the value for the RecommenderUserIdType property. Each of these
+	// attributes temporarily stores a recommended item that's retrieved from the
+	// recommender model and sent to an AWS Lambda function for additional processing.
+	// Each attribute can be used as a message variable in a message template.
+	//
+	// In the map, the key is the name of a custom attribute and the value is a
+	// custom display name for that attribute. The display name appears in the Attribute
+	// finder pane of the template editor on the Amazon Pinpoint console. The following
+	// restrictions apply to these names:
+	//
+	//    * An attribute name must start with a letter or number and it can contain
+	//    up to 50 characters. The characters can be letters, numbers, underscores
+	//    (_), or hyphens (-). Attribute names are case sensitive and must be unique.
+	//
+	//    * An attribute display name must start with a letter or number and it
+	//    can contain up to 25 characters. The characters can be letters, numbers,
+	//    spaces, underscores (_), or hyphens (-).
+	//
+	// This object is required if the configuration invokes an AWS Lambda function
+	// (LambdaFunctionArn) to process recommendation data. Otherwise, don't include
+	// this object in your request.
+	Attributes map[string]string `type:"map"`
+
+	// A custom description of the configuration for the recommender model. The
+	// description can contain up to 128 characters.
+	Description *string `type:"string"`
+
+	// A custom name of the configuration for the recommender model. The name must
+	// start with a letter or number and it can contain up to 128 characters. The
+	// characters can be letters, numbers, spaces, underscores (_), or hyphens (-).
+	Name *string `type:"string"`
+
+	// The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender
+	// model. This value enables the model to use attribute and event data that’s
+	// specific to a particular endpoint or user in an Amazon Pinpoint application.
+	// Valid values are:
+	//
+	//    * PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular
+	//    endpoint in Amazon Pinpoint. The data is correlated based on endpoint
+	//    IDs in Amazon Pinpoint. This is the default value.
+	//
+	//    * PINPOINT_USER_ID - Associate each user in the model with a particular
+	//    user and endpoint in Amazon Pinpoint. The data is correlated based on
+	//    user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition
+	//    in Amazon Pinpoint has to specify a both a user ID (UserId) and an endpoint
+	//    ID. Otherwise, messages won’t be sent to the user's endpoint.
+	RecommendationProviderIdType *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management
+	// (IAM) role that authorizes Amazon Pinpoint to retrieve recommendation data
+	// from the recommender model.
+	//
+	// RecommendationProviderRoleArn is a required field
+	RecommendationProviderRoleArn *string `type:"string" required:"true"`
+
+	// The Amazon Resource Name (ARN) of the recommender model to retrieve recommendation
+	// data from. This value must match the ARN of an Amazon Personalize campaign.
+	//
+	// RecommendationProviderUri is a required field
+	RecommendationProviderUri *string `type:"string" required:"true"`
+
+	// The name or Amazon Resource Name (ARN) of the AWS Lambda function to invoke
+	// for additional processing of recommendation data that's retrieved from the
+	// recommender model.
+	RecommendationTransformerUri *string `type:"string"`
+
+	// A custom display name for the standard endpoint or user attribute (RecommendationItems)
+	// that temporarily stores a recommended item for each endpoint or user, depending
+	// on the value for the RecommenderUserIdType property. This value is required
+	// if the configuration doesn't invoke an AWS Lambda function (LambdaFunctionArn)
+	// to perform additional processing of recommendation data.
+	//
+	// This name appears in the Attribute finder pane of the template editor on
+	// the Amazon Pinpoint console. The name can contain up to 25 characters. The
+	// characters can be letters, numbers, spaces, underscores (_), or hyphens (-).
+	// These restrictions don't apply to attribute values.
+	RecommendationsDisplayName *string `type:"string"`
+
+	// The number of recommended items to retrieve from the model for each endpoint
+	// or user, depending on the value for the RecommenderUserIdType property. This
+	// number determines how many recommended attributes are available for use as
+	// message variables in message templates. The minimum value is 1. The maximum
+	// value is 5. The default value is 5.
+	//
+	// To use multiple recommended items and custom attributes with message variables,
+	// you have to use an AWS Lambda function (LambdaFunctionArn) to perform additional
+	// processing of recommendation data.
+	RecommendationsPerMessage *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s CreateRecommenderConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateRecommenderConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRecommenderConfiguration"}
+
+	if s.RecommendationProviderRoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RecommendationProviderRoleArn"))
+	}
+
+	if s.RecommendationProviderUri == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RecommendationProviderUri"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateRecommenderConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Attributes != nil {
+		v := s.Attributes
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Attributes", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationProviderIdType != nil {
+		v := *s.RecommendationProviderIdType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationProviderIdType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationProviderRoleArn != nil {
+		v := *s.RecommendationProviderRoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationProviderRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationProviderUri != nil {
+		v := *s.RecommendationProviderUri
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationProviderUri", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationTransformerUri != nil {
+		v := *s.RecommendationTransformerUri
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationTransformerUri", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationsDisplayName != nil {
+		v := *s.RecommendationsDisplayName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationsDisplayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationsPerMessage != nil {
+		v := *s.RecommendationsPerMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationsPerMessage", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Provides information about a request to create a message template.
 type CreateTemplateMessageBody struct {
 	_ struct{} `type:"structure"`
@@ -4878,6 +5048,12 @@ type EmailTemplateRequest struct {
 	// in an HTML message.
 	HtmlPart *string `type:"string"`
 
+	// The unique identifier for the recommender model to use for the message template.
+	// Amazon Pinpoint uses this value to determine how to retrieve and process
+	// data from a recommender model when it sends messages that use the template,
+	// if the template contains message variables for recommendation data.
+	RecommenderId *string `type:"string"`
+
 	// The subject line, or title, to use in email messages that are based on the
 	// message template.
 	Subject *string `type:"string"`
@@ -4915,6 +5091,12 @@ func (s EmailTemplateRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "HtmlPart", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommenderId != nil {
+		v := *s.RecommenderId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommenderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Subject != nil {
 		v := *s.Subject
@@ -4976,6 +5158,10 @@ type EmailTemplateResponse struct {
 	//
 	// LastModifiedDate is a required field
 	LastModifiedDate *string `type:"string" required:"true"`
+
+	// The unique identifier for the recommender model that's used by the message
+	// template.
+	RecommenderId *string `type:"string"`
 
 	// The subject line, or title, that's used in email messages that are based
 	// on the message template.
@@ -5047,6 +5233,12 @@ func (s EmailTemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.RecommenderId != nil {
+		v := *s.RecommenderId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommenderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.Subject != nil {
 		v := *s.Subject
 
@@ -5113,14 +5305,16 @@ type EndpointBatchItem struct {
 
 	// One or more custom attributes that describe the endpoint by associating a
 	// name with an array of values. For example, the value of a custom attribute
-	// named Interests might be: ["science", "music", "travel"]. You can use these
-	// attributes as filter criteria when you create segments.
+	// named Interests might be: ["Science", "Music", "Travel"]. You can use these
+	// attributes as filter criteria when you create segments. Attribute names are
+	// case sensitive.
 	//
-	// When you define the name of a custom attribute, avoid using the following
-	// characters: number sign (#), colon (:), question mark (?), backslash (\),
-	// and slash (/). The Amazon Pinpoint console can't display attribute names
-	// that contain these characters. This limitation doesn't apply to attribute
-	// values.
+	// An attribute name can contain up to 50 characters. An attribute value can
+	// contain up to 100 characters. When you define the name of a custom attribute,
+	// avoid using the following characters: number sign (#), colon (:), question
+	// mark (?), backslash (\), and slash (/). The Amazon Pinpoint console can't
+	// display attribute names that contain these characters. This restriction doesn't
+	// apply to attribute values.
 	Attributes map[string][]string `type:"map"`
 
 	// The channel to use when sending messages or push notifications to the endpoint.
@@ -5162,8 +5356,8 @@ type EndpointBatchItem struct {
 	// The unique identifier for the request to create or update the endpoint.
 	RequestId *string `type:"string"`
 
-	// One or more custom user attributes that your app reports to Amazon Pinpoint
-	// for the user who's associated with the endpoint.
+	// One or more custom user attributes that describe the user who's associated
+	// with the endpoint.
 	User *EndpointUser `type:"structure"`
 }
 
@@ -5536,8 +5730,8 @@ type EndpointMessageResult struct {
 	//
 	//    * SUCCESSFUL - The message was successfully delivered to the endpoint.
 	//
-	//    * TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint will
-	//    attempt to deliver the message again later.
+	//    * TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't
+	//    attempt to send the message again.
 	//
 	//    * THROTTLED - Amazon Pinpoint throttled the operation to send the message
 	//    to the endpoint.
@@ -5626,14 +5820,16 @@ type EndpointRequest struct {
 
 	// One or more custom attributes that describe the endpoint by associating a
 	// name with an array of values. For example, the value of a custom attribute
-	// named Interests might be: ["science", "music", "travel"]. You can use these
-	// attributes as filter criteria when you create segments.
+	// named Interests might be: ["Science", "Music", "Travel"]. You can use these
+	// attributes as filter criteria when you create segments. Attribute names are
+	// case sensitive.
 	//
-	// When you define the name of a custom attribute, avoid using the following
-	// characters: number sign (#), colon (:), question mark (?), backslash (\),
-	// and slash (/). The Amazon Pinpoint console can't display attribute names
-	// that contain these characters. This limitation doesn't apply to attribute
-	// values.
+	// An attribute name can contain up to 50 characters. An attribute value can
+	// contain up to 100 characters. When you define the name of a custom attribute,
+	// avoid using the following characters: number sign (#), colon (:), question
+	// mark (?), backslash (\), and slash (/). The Amazon Pinpoint console can't
+	// display attribute names that contain these characters. This restriction doesn't
+	// apply to attribute values.
 	Attributes map[string][]string `type:"map"`
 
 	// The channel to use when sending messages or push notifications to the endpoint.
@@ -5788,7 +5984,7 @@ type EndpointResponse struct {
 
 	// One or more custom attributes that describe the endpoint by associating a
 	// name with an array of values. For example, the value of a custom attribute
-	// named Interests might be: ["science", "music", "travel"]. You can use these
+	// named Interests might be: ["Science", "Music", "Travel"]. You can use these
 	// attributes as filter criteria when you create segments.
 	Attributes map[string][]string `type:"map"`
 
@@ -5974,10 +6170,12 @@ type EndpointSendConfiguration struct {
 	// body.
 	BodyOverride *string `type:"string"`
 
-	// A map of custom attributes to attach to the message for the address. For
-	// a push notification, this payload is added to the data.pinpoint object. For
-	// an email or text message, this payload is added to email/SMS delivery receipt
-	// event attributes.
+	// A map of custom attributes to attach to the message for the address. Attribute
+	// names are case sensitive.
+	//
+	// For a push notification, this payload is added to the data.pinpoint object.
+	// For an email or text message, this payload is added to email/SMS delivery
+	// receipt event attributes.
 	Context map[string]string `type:"map"`
 
 	// The raw, JSON-formatted string to use as the payload for the message. If
@@ -6058,14 +6256,15 @@ type EndpointUser struct {
 
 	// One or more custom attributes that describe the user by associating a name
 	// with an array of values. For example, the value of an attribute named Interests
-	// might be: ["science", "music", "travel"]. You can use these attributes as
-	// filter criteria when you create segments.
+	// might be: ["Science", "Music", "Travel"]. You can use these attributes as
+	// filter criteria when you create segments. Attribute names are case sensitive.
 	//
-	// When you define the name of a custom attribute, avoid using the following
-	// characters: number sign (#), colon (:), question mark (?), backslash (\),
-	// and slash (/). The Amazon Pinpoint console can't display attribute names
-	// that contain these characters. This limitation doesn't apply to attribute
-	// values.
+	// An attribute name can contain up to 50 characters. An attribute value can
+	// contain up to 100 characters. When you define the name of a custom attribute,
+	// avoid using the following characters: number sign (#), colon (:), question
+	// mark (?), backslash (\), and slash (/). The Amazon Pinpoint console can't
+	// display attribute names that contain these characters. This restriction doesn't
+	// apply to attribute values.
 	UserAttributes map[string][]string `type:"map"`
 
 	// The unique identifier for the user.
@@ -6350,9 +6549,11 @@ type EventDimensions struct {
 	Attributes map[string]AttributeDimension `type:"map"`
 
 	// The name of the event that causes the campaign to be sent or the journey
-	// activity to be performed. This can be a standard type of event that Amazon
-	// Pinpoint generates, such as _email.delivered, or a custom event that's specific
-	// to your application.
+	// activity to be performed. This can be a standard event that Amazon Pinpoint
+	// generates, such as _email.delivered. For campaigns, this can also be a custom
+	// event that's specific to your application. For information about standard
+	// events, see Streaming Amazon Pinpoint Events (https://docs.aws.amazon.com/pinpoint/latest/developerguide/event-streams.html)
+	// in the Amazon Pinpoint Developer Guide.
 	EventType *SetDimension `type:"structure"`
 
 	// One or more custom metrics that your application reports to Amazon Pinpoint.
@@ -7694,8 +7895,8 @@ type ImportJobRequest struct {
 	// to, if the import job is meant to update an existing segment.
 	SegmentId *string `type:"string"`
 
-	// The custom name for the segment that's created by the import job, if the
-	// value of the DefineSegment property is true.
+	// A custom name for the segment that's created by the import job, if the value
+	// of the DefineSegment property is true.
 	SegmentName *string `type:"string"`
 }
 
@@ -8592,9 +8793,7 @@ type JourneyResponse struct {
 	//    who are currently waiting to start an activity may continue the journey.
 	State State `type:"string" enum:"true"`
 
-	// A string-to-string map of key-value pairs that identifies the tags that are
-	// associated with the journey. Each tag consists of a required tag key and
-	// an associated tag value.
+	// This object is not used or supported.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
@@ -8813,6 +9012,50 @@ func (s JourneysResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s JourneysResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Item != nil {
+		v := s.Item
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Item", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Provides information about all the recommender model configurations that
+// are associated with your Amazon Pinpoint account.
+type ListRecommenderConfigurationsResponse struct {
+	_ struct{} `type:"structure"`
+
+	// An array of responses, one for each recommender model configuration that's
+	// associated with your Amazon Pinpoint account.
+	//
+	// Item is a required field
+	Item []RecommenderConfigurationResponse `type:"list" required:"true"`
+
+	// The string to use in a subsequent request to get the next page of results
+	// in a paginated response. This value is null if there are no additional pages.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListRecommenderConfigurationsResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListRecommenderConfigurationsResponse) MarshalFields(e protocol.FieldEncoder) error {
 	if s.Item != nil {
 		v := s.Item
 
@@ -9054,21 +9297,6 @@ type MessageConfiguration struct {
 // String returns the string representation
 func (s MessageConfiguration) String() string {
 	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *MessageConfiguration) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "MessageConfiguration"}
-	if s.EmailMessage != nil {
-		if err := s.EmailMessage.Validate(); err != nil {
-			invalidParams.AddNested("EmailMessage", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -9323,8 +9551,8 @@ type MessageResult struct {
 	//    * SUCCESSFUL - The message was successfully delivered to the endpoint
 	//    address.
 	//
-	//    * TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint will
-	//    attempt to deliver the message again later.
+	//    * TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't
+	//    attempt to send the message again.
 	//
 	//    * THROTTLED - Amazon Pinpoint throttled the operation to send the message
 	//    to the endpoint address.
@@ -9943,6 +10171,12 @@ type PushNotificationTemplateRequest struct {
 	// push notification channels (DefaultPushNotificationTemplate).
 	GCM *AndroidPushNotificationTemplate `type:"structure"`
 
+	// The unique identifier for the recommender model to use for the message template.
+	// Amazon Pinpoint uses this value to determine how to retrieve and process
+	// data from a recommender model when it sends messages that use the template,
+	// if the template contains message variables for recommendation data.
+	RecommenderId *string `type:"string"`
+
 	// A string-to-string map of key-value pairs that defines the tags to associate
 	// with the message template. Each tag consists of a required tag key and an
 	// associated tag value.
@@ -9994,6 +10228,12 @@ func (s PushNotificationTemplateRequest) MarshalFields(e protocol.FieldEncoder) 
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "GCM", v, metadata)
+	}
+	if s.RecommenderId != nil {
+		v := *s.RecommenderId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommenderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Tags != nil {
 		v := s.Tags
@@ -10063,6 +10303,10 @@ type PushNotificationTemplateResponse struct {
 	//
 	// LastModifiedDate is a required field
 	LastModifiedDate *string `type:"string" required:"true"`
+
+	// The unique identifier for the recommender model that's used by the message
+	// template.
+	RecommenderId *string `type:"string"`
 
 	// A string-to-string map of key-value pairs that identifies the tags that are
 	// associated with the message template. Each tag consists of a required tag
@@ -10149,6 +10393,12 @@ func (s PushNotificationTemplateResponse) MarshalFields(e protocol.FieldEncoder)
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommenderId != nil {
+		v := *s.RecommenderId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommenderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Tags != nil {
 		v := s.Tags
@@ -10378,6 +10628,183 @@ func (s RecencyDimension) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "RecencyType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Provides information about Amazon Pinpoint configuration settings for retrieving
+// and processing data from a recommender model.
+type RecommenderConfigurationResponse struct {
+	_ struct{} `type:"structure"`
+
+	// A map that defines 1-10 custom endpoint or user attributes, depending on
+	// the value for the RecommenderUserIdType property. Each of these attributes
+	// temporarily stores a recommended item that's retrieved from the recommender
+	// model and sent to an AWS Lambda function for additional processing. Each
+	// attribute can be used as a message variable in a message template.
+	//
+	// This value is null if the configuration doesn't invoke an AWS Lambda function
+	// (LambdaFunctionArn) to perform additional processing of recommendation data.
+	Attributes map[string]string `type:"map"`
+
+	// The date, in extended ISO 8601 format, when the configuration was created
+	// for the recommender model.
+	//
+	// CreationDate is a required field
+	CreationDate *string `type:"string" required:"true"`
+
+	// The custom description of the configuration for the recommender model.
+	Description *string `type:"string"`
+
+	// The unique identifier for the recommender model configuration.
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
+
+	// The date, in extended ISO 8601 format, when the configuration for the recommender
+	// model was last modified.
+	//
+	// LastModifiedDate is a required field
+	LastModifiedDate *string `type:"string" required:"true"`
+
+	// The custom name of the configuration for the recommender model.
+	Name *string `type:"string"`
+
+	// The type of Amazon Pinpoint ID that's associated with unique user IDs in
+	// the recommender model. This value enables the model to use attribute and
+	// event data that’s specific to a particular endpoint or user in an Amazon
+	// Pinpoint application. Possible values are:
+	//
+	//    * PINPOINT_ENDPOINT_ID - Each user in the model is associated with a particular
+	//    endpoint in Amazon Pinpoint. The data is correlated based on endpoint
+	//    IDs in Amazon Pinpoint. This is the default value.
+	//
+	//    * PINPOINT_USER_ID - Each user in the model is associated with a particular
+	//    user and endpoint in Amazon Pinpoint. The data is correlated based on
+	//    user IDs in Amazon Pinpoint. If this value is specified, an endpoint definition
+	//    in Amazon Pinpoint has to specify both a user ID (UserId) and an endpoint
+	//    ID. Otherwise, messages won’t be sent to the user's endpoint.
+	RecommendationProviderIdType *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management
+	// (IAM) role that authorizes Amazon Pinpoint to retrieve recommendation data
+	// from the recommender model.
+	//
+	// RecommendationProviderRoleArn is a required field
+	RecommendationProviderRoleArn *string `type:"string" required:"true"`
+
+	// The Amazon Resource Name (ARN) of the recommender model that Amazon Pinpoint
+	// retrieves the recommendation data from. This value is the ARN of an Amazon
+	// Personalize campaign.
+	//
+	// RecommendationProviderUri is a required field
+	RecommendationProviderUri *string `type:"string" required:"true"`
+
+	// The name or Amazon Resource Name (ARN) of the AWS Lambda function that Amazon
+	// Pinpoint invokes to perform additional processing of recommendation data
+	// that it retrieves from the recommender model.
+	RecommendationTransformerUri *string `type:"string"`
+
+	// The custom display name for the standard endpoint or user attribute (RecommendationItems)
+	// that temporarily stores a recommended item for each endpoint or user, depending
+	// on the value for the RecommenderUserIdType property. This name appears in
+	// the Attribute finder pane of the template editor on the Amazon Pinpoint console.
+	//
+	// This value is null if the configuration doesn't invoke an AWS Lambda function
+	// (LambdaFunctionArn) to perform additional processing of recommendation data.
+	RecommendationsDisplayName *string `type:"string"`
+
+	// The number of recommended items that are retrieved from the model for each
+	// endpoint or user, depending on the value for the RecommenderUserIdType property.
+	// This number determines how many recommended attributes are available for
+	// use as message variables in message templates.
+	RecommendationsPerMessage *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s RecommenderConfigurationResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RecommenderConfigurationResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Attributes != nil {
+		v := s.Attributes
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Attributes", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.CreationDate != nil {
+		v := *s.CreationDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastModifiedDate != nil {
+		v := *s.LastModifiedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationProviderIdType != nil {
+		v := *s.RecommendationProviderIdType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationProviderIdType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationProviderRoleArn != nil {
+		v := *s.RecommendationProviderRoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationProviderRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationProviderUri != nil {
+		v := *s.RecommendationProviderUri
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationProviderUri", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationTransformerUri != nil {
+		v := *s.RecommendationTransformerUri
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationTransformerUri", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationsDisplayName != nil {
+		v := *s.RecommendationsDisplayName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationsDisplayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationsPerMessage != nil {
+		v := *s.RecommendationsPerMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationsPerMessage", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -10786,6 +11213,12 @@ type SMSTemplateRequest struct {
 	// address-specific variables and values.
 	DefaultSubstitutions *string `type:"string"`
 
+	// The unique identifier for the recommender model to use for the message template.
+	// Amazon Pinpoint uses this value to determine how to retrieve and process
+	// data from a recommender model when it sends messages that use the template,
+	// if the template contains message variables for recommendation data.
+	RecommenderId *string `type:"string"`
+
 	// A string-to-string map of key-value pairs that defines the tags to associate
 	// with the message template. Each tag consists of a required tag key and an
 	// associated tag value.
@@ -10813,6 +11246,12 @@ func (s SMSTemplateRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DefaultSubstitutions", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommenderId != nil {
+		v := *s.RecommenderId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommenderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Tags != nil {
 		v := s.Tags
@@ -10862,6 +11301,10 @@ type SMSTemplateResponse struct {
 	//
 	// LastModifiedDate is a required field
 	LastModifiedDate *string `type:"string" required:"true"`
+
+	// The unique identifier for the recommender model that's used by the message
+	// template.
+	RecommenderId *string `type:"string"`
 
 	// A string-to-string map of key-value pairs that identifies the tags that are
 	// associated with the message template. Each tag consists of a required tag
@@ -10924,6 +11367,12 @@ func (s SMSTemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommenderId != nil {
+		v := *s.RecommenderId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommenderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Tags != nil {
 		v := s.Tags
@@ -11001,7 +11450,9 @@ type Schedule struct {
 	// from the campaign, even if quiet time is enabled.
 	QuietTime *QuietTime `type:"structure"`
 
-	// The scheduled time, in ISO 8601 format, when the campaign began or will begin.
+	// The scheduled time when the campaign began or will begin. Valid values are:
+	// IMMEDIATE, to start the campaign immediately; or, a specific time in ISO
+	// 8601 format.
 	//
 	// StartTime is a required field
 	StartTime *string `type:"string" required:"true"`
@@ -12456,14 +12907,14 @@ func (s StartCondition) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies the tags (keys and values) for an application, campaign, journey,
-// message template, or segment.
+// Specifies the tags (keys and values) for an application, campaign, message
+// template, or segment.
 type TagsModel struct {
 	_ struct{} `type:"structure"`
 
 	// A string-to-string map of key-value pairs that defines the tags for an application,
-	// campaign, journey, message template, or segment. Each of these resources
-	// can have a maximum of 50 tags.
+	// campaign, message template, or segment. Each of these resources can have
+	// a maximum of 50 tags.
 	//
 	// Each tag consists of a required tag key and an associated tag value. The
 	// maximum length of a tag key is 128 characters. The maximum length of a tag
@@ -12556,10 +13007,12 @@ func (s Template) MarshalFields(e protocol.FieldEncoder) error {
 type TemplateActiveVersionRequest struct {
 	_ struct{} `type:"structure"`
 
-	// The unique identifier for the version of the message template to use as the
-	// active version of the template. If specified, this value must match the identifier
-	// for an existing template version. To retrieve a list of versions and version
-	// identifiers for a template, use the Template Versions resource.
+	// The version of the message template to use as the active version of the template.
+	// Valid values are: latest, for the most recent version of the template; or,
+	// the unique identifier for any existing version of the template. If you specify
+	// an identifier, the value must match the identifier for an existing template
+	// version. To retrieve a list of versions and version identifiers for a template,
+	// use the Template Versions resource.
 	Version *string `type:"string"`
 }
 
@@ -12592,7 +13045,8 @@ type TemplateConfiguration struct {
 	// The SMS template to use for the message.
 	SMSTemplate *Template `type:"structure"`
 
-	// The voice template to use for the message.
+	// The voice template to use for the message. This object isn't supported for
+	// campaigns.
 	VoiceTemplate *Template `type:"structure"`
 }
 
@@ -12635,7 +13089,11 @@ func (s TemplateConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 type TemplateResponse struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the message template.
+	// The Amazon Resource Name (ARN) of the message template. This value isn't
+	// included in a TemplateResponse object. To retrieve the ARN of a template,
+	// use the GetEmailTemplate, GetPushTemplate, GetSmsTemplate, or GetVoiceTemplate
+	// operation, depending on the type of template that you want to retrieve the
+	// ARN for.
 	Arn *string `type:"string"`
 
 	// The date, in ISO 8601 format, when the message template was created.
@@ -12644,9 +13102,10 @@ type TemplateResponse struct {
 	CreationDate *string `type:"string" required:"true"`
 
 	// The JSON object that specifies the default values that are used for message
-	// variables in the message template. This object is a set of key-value pairs.
-	// Each key defines a message variable in the template. The corresponding value
-	// defines the default value for that variable.
+	// variables in the message template. This object isn't included in a TemplateResponse
+	// object. To retrieve this object for a template, use the GetEmailTemplate,
+	// GetPushTemplate, GetSmsTemplate, or GetVoiceTemplate operation, depending
+	// on the type of template that you want to retrieve the object for.
 	DefaultSubstitutions *string `type:"string"`
 
 	// The date, in ISO 8601 format, when the message template was last modified.
@@ -12654,12 +13113,18 @@ type TemplateResponse struct {
 	// LastModifiedDate is a required field
 	LastModifiedDate *string `type:"string" required:"true"`
 
-	// A string-to-string map of key-value pairs that identifies the tags that are
-	// associated with the message template. Each tag consists of a required tag
-	// key and an associated tag value.
+	// A map of key-value pairs that identifies the tags that are associated with
+	// the message template. This object isn't included in a TemplateResponse object.
+	// To retrieve this object for a template, use the GetEmailTemplate, GetPushTemplate,
+	// GetSmsTemplate, or GetVoiceTemplate operation, depending on the type of template
+	// that you want to retrieve the object for.
 	Tags map[string]string `locationName:"tags" type:"map"`
 
-	// The custom description of the message template.
+	// The custom description of the message template. This value isn't included
+	// in a TemplateResponse object. To retrieve the description of a template,
+	// use the GetEmailTemplate, GetPushTemplate, GetSmsTemplate, or GetVoiceTemplate
+	// operation, depending on the type of template that you want to retrieve the
+	// description for.
 	TemplateDescription *string `type:"string"`
 
 	// The name of the message template.
@@ -13073,6 +13538,190 @@ func (s UpdateAttributesRequest) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	return nil
+}
+
+// Specifies Amazon Pinpoint configuration settings for retrieving and processing
+// recommendation data from a recommender model.
+type UpdateRecommenderConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// A map of key-value pairs that defines 1-10 custom endpoint or user attributes,
+	// depending on the value for the RecommenderUserIdType property. Each of these
+	// attributes temporarily stores a recommended item that's retrieved from the
+	// recommender model and sent to an AWS Lambda function for additional processing.
+	// Each attribute can be used as a message variable in a message template.
+	//
+	// In the map, the key is the name of a custom attribute and the value is a
+	// custom display name for that attribute. The display name appears in the Attribute
+	// finder pane of the template editor on the Amazon Pinpoint console. The following
+	// restrictions apply to these names:
+	//
+	//    * An attribute name must start with a letter or number and it can contain
+	//    up to 50 characters. The characters can be letters, numbers, underscores
+	//    (_), or hyphens (-). Attribute names are case sensitive and must be unique.
+	//
+	//    * An attribute display name must start with a letter or number and it
+	//    can contain up to 25 characters. The characters can be letters, numbers,
+	//    spaces, underscores (_), or hyphens (-).
+	//
+	// This object is required if the configuration invokes an AWS Lambda function
+	// (LambdaFunctionArn) to process recommendation data. Otherwise, don't include
+	// this object in your request.
+	Attributes map[string]string `type:"map"`
+
+	// A custom description of the configuration for the recommender model. The
+	// description can contain up to 128 characters.
+	Description *string `type:"string"`
+
+	// A custom name of the configuration for the recommender model. The name must
+	// start with a letter or number and it can contain up to 128 characters. The
+	// characters can be letters, numbers, spaces, underscores (_), or hyphens (-).
+	Name *string `type:"string"`
+
+	// The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender
+	// model. This value enables the model to use attribute and event data that’s
+	// specific to a particular endpoint or user in an Amazon Pinpoint application.
+	// Valid values are:
+	//
+	//    * PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular
+	//    endpoint in Amazon Pinpoint. The data is correlated based on endpoint
+	//    IDs in Amazon Pinpoint. This is the default value.
+	//
+	//    * PINPOINT_USER_ID - Associate each user in the model with a particular
+	//    user and endpoint in Amazon Pinpoint. The data is correlated based on
+	//    user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition
+	//    in Amazon Pinpoint has to specify a both a user ID (UserId) and an endpoint
+	//    ID. Otherwise, messages won’t be sent to the user's endpoint.
+	RecommendationProviderIdType *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management
+	// (IAM) role that authorizes Amazon Pinpoint to retrieve recommendation data
+	// from the recommender model.
+	//
+	// RecommendationProviderRoleArn is a required field
+	RecommendationProviderRoleArn *string `type:"string" required:"true"`
+
+	// The Amazon Resource Name (ARN) of the recommender model to retrieve recommendation
+	// data from. This value must match the ARN of an Amazon Personalize campaign.
+	//
+	// RecommendationProviderUri is a required field
+	RecommendationProviderUri *string `type:"string" required:"true"`
+
+	// The name or Amazon Resource Name (ARN) of the AWS Lambda function to invoke
+	// for additional processing of recommendation data that's retrieved from the
+	// recommender model.
+	RecommendationTransformerUri *string `type:"string"`
+
+	// A custom display name for the standard endpoint or user attribute (RecommendationItems)
+	// that temporarily stores a recommended item for each endpoint or user, depending
+	// on the value for the RecommenderUserIdType property. This value is required
+	// if the configuration doesn't invoke an AWS Lambda function (LambdaFunctionArn)
+	// to perform additional processing of recommendation data.
+	//
+	// This name appears in the Attribute finder pane of the template editor on
+	// the Amazon Pinpoint console. The name can contain up to 25 characters. The
+	// characters can be letters, numbers, spaces, underscores (_), or hyphens (-).
+	// These restrictions don't apply to attribute values.
+	RecommendationsDisplayName *string `type:"string"`
+
+	// The number of recommended items to retrieve from the model for each endpoint
+	// or user, depending on the value for the RecommenderUserIdType property. This
+	// number determines how many recommended attributes are available for use as
+	// message variables in message templates. The minimum value is 1. The maximum
+	// value is 5. The default value is 5.
+	//
+	// To use multiple recommended items and custom attributes with message variables,
+	// you have to use an AWS Lambda function (LambdaFunctionArn) to perform additional
+	// processing of recommendation data.
+	RecommendationsPerMessage *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s UpdateRecommenderConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateRecommenderConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRecommenderConfiguration"}
+
+	if s.RecommendationProviderRoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RecommendationProviderRoleArn"))
+	}
+
+	if s.RecommendationProviderUri == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RecommendationProviderUri"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateRecommenderConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Attributes != nil {
+		v := s.Attributes
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Attributes", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationProviderIdType != nil {
+		v := *s.RecommendationProviderIdType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationProviderIdType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationProviderRoleArn != nil {
+		v := *s.RecommendationProviderRoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationProviderRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationProviderUri != nil {
+		v := *s.RecommendationProviderUri
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationProviderUri", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationTransformerUri != nil {
+		v := *s.RecommendationTransformerUri
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationTransformerUri", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationsDisplayName != nil {
+		v := *s.RecommendationsDisplayName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationsDisplayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationsPerMessage != nil {
+		v := *s.RecommendationsPerMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationsPerMessage", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -13712,7 +14361,7 @@ type WriteCampaignRequest struct {
 	// The message configuration settings for the campaign.
 	MessageConfiguration *MessageConfiguration `type:"structure"`
 
-	// The custom name of the campaign.
+	// A custom name for the campaign.
 	Name *string `type:"string"`
 
 	// The schedule settings for the campaign.
@@ -13735,7 +14384,7 @@ type WriteCampaignRequest struct {
 	// A custom description of a variation of the campaign to use for A/B testing.
 	TreatmentDescription *string `type:"string"`
 
-	// The custom name of a variation of the campaign to use for A/B testing.
+	// A custom name for a variation of the campaign to use for A/B testing.
 	TreatmentName *string `type:"string"`
 }
 
@@ -13752,11 +14401,6 @@ func (s *WriteCampaignRequest) Validate() error {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AdditionalTreatments", i), err.(aws.ErrInvalidParams))
 			}
-		}
-	}
-	if s.MessageConfiguration != nil {
-		if err := s.MessageConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("MessageConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Schedule != nil {
@@ -13949,7 +14593,7 @@ type WriteJourneyRequest struct {
 	// A map that contains a set of Activity objects, one object for each activity
 	// in the journey. For each Activity object, the key is the unique identifier
 	// (string) for an activity and the value is the settings for the activity.
-	// An activity identifier can contain a maximum of 128 characters. The characters
+	// An activity identifier can contain a maximum of 100 characters. The characters
 	// must be alphanumeric characters.
 	Activities map[string]Activity `type:"map"`
 
@@ -13998,9 +14642,9 @@ type WriteJourneyRequest struct {
 	// The schedule settings for the journey.
 	Schedule *JourneySchedule `type:"structure"`
 
-	// The unique identifier for the first activity in the journey. An activity
-	// identifier can contain a maximum of 128 characters. The characters must be
-	// alphanumeric characters.
+	// The unique identifier for the first activity in the journey. The identifier
+	// for this activity can contain a maximum of 128 characters. The characters
+	// must be alphanumeric characters.
 	StartActivity *string `type:"string"`
 
 	// The segment that defines which users are participants in the journey.
@@ -14241,7 +14885,7 @@ type WriteTreatmentResource struct {
 	// A custom description of the treatment.
 	TreatmentDescription *string `type:"string"`
 
-	// The custom name of the treatment. A treatment is a variation of a campaign
+	// A custom name for the treatment. A treatment is a variation of a campaign
 	// that's used for A/B testing of a campaign.
 	TreatmentName *string `type:"string"`
 }
@@ -14257,11 +14901,6 @@ func (s *WriteTreatmentResource) Validate() error {
 
 	if s.SizePercent == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SizePercent"))
-	}
-	if s.MessageConfiguration != nil {
-		if err := s.MessageConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("MessageConfiguration", err.(aws.ErrInvalidParams))
-		}
 	}
 	if s.Schedule != nil {
 		if err := s.Schedule.Validate(); err != nil {

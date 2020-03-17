@@ -4615,9 +4615,10 @@ type PatchRule struct {
 	// The number of days after the release date of each patch matched by the rule
 	// that the patch is marked as approved in the patch baseline. For example,
 	// a value of 7 means that patches are approved seven days after they are released.
-	//
-	// ApproveAfterDays is a required field
-	ApproveAfterDays *int64 `type:"integer" required:"true"`
+	ApproveAfterDays *int64 `type:"integer"`
+
+	// Example API
+	ApproveUntilDate *string `min:"1" type:"string"`
 
 	// A compliance severity level for all approved patches in a patch baseline.
 	// Valid compliance severity levels include the following: Unspecified, Critical,
@@ -4643,9 +4644,8 @@ func (s PatchRule) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PatchRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PatchRule"}
-
-	if s.ApproveAfterDays == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApproveAfterDays"))
+	if s.ApproveUntilDate != nil && len(*s.ApproveUntilDate) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ApproveUntilDate", 1))
 	}
 
 	if s.PatchFilterGroup == nil {
@@ -4947,6 +4947,35 @@ func (s *ResourceDataSyncAwsOrganizationsSource) Validate() error {
 	return nil
 }
 
+// Synchronize Systems Manager Inventory data from multiple AWS accounts defined
+// in AWS Organizations to a centralized Amazon S3 bucket. Data is synchronized
+// to individual key prefixes in the central bucket. Each key prefix represents
+// a different AWS account ID.
+type ResourceDataSyncDestinationDataSharing struct {
+	_ struct{} `type:"structure"`
+
+	// The sharing data type. Only Organization is supported.
+	DestinationDataSharingType *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ResourceDataSyncDestinationDataSharing) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResourceDataSyncDestinationDataSharing) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceDataSyncDestinationDataSharing"}
+	if s.DestinationDataSharingType != nil && len(*s.DestinationDataSharingType) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DestinationDataSharingType", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Information about a Resource Data Sync configuration, including its current
 // status and last successful sync.
 type ResourceDataSyncItem struct {
@@ -5030,6 +5059,9 @@ type ResourceDataSyncS3Destination struct {
 	// BucketName is a required field
 	BucketName *string `min:"1" type:"string" required:"true"`
 
+	// Enables destination data sharing. By default, this field is null.
+	DestinationDataSharing *ResourceDataSyncDestinationDataSharing `type:"structure"`
+
 	// An Amazon S3 prefix for the bucket.
 	Prefix *string `min:"1" type:"string"`
 
@@ -5075,6 +5107,11 @@ func (s *ResourceDataSyncS3Destination) Validate() error {
 	if len(s.SyncFormat) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("SyncFormat"))
 	}
+	if s.DestinationDataSharing != nil {
+		if err := s.DestinationDataSharing.Validate(); err != nil {
+			invalidParams.AddNested("DestinationDataSharing", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5086,8 +5123,8 @@ func (s *ResourceDataSyncS3Destination) Validate() error {
 type ResourceDataSyncSource struct {
 	_ struct{} `type:"structure"`
 
-	// The field name in SyncSource for the ResourceDataSyncAwsOrganizationsSource
-	// type.
+	// Information about the AwsOrganizationsSource resource data sync source. A
+	// sync source of this type can synchronize data from AWS Organizations.
 	AwsOrganizationsSource *ResourceDataSyncAwsOrganizationsSource `type:"structure"`
 
 	// Whether to automatically synchronize and aggregate data from new AWS Regions

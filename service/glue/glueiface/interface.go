@@ -239,6 +239,8 @@ type ClientAPI interface {
 
 	ListJobsRequest(*glue.ListJobsInput) glue.ListJobsRequest
 
+	ListMLTransformsRequest(*glue.ListMLTransformsInput) glue.ListMLTransformsRequest
+
 	ListTriggersRequest(*glue.ListTriggersInput) glue.ListTriggersRequest
 
 	ListWorkflowsRequest(*glue.ListWorkflowsInput) glue.ListWorkflowsRequest
