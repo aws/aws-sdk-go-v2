@@ -11,33 +11,37 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request for GetProfile operation.
+// The structure representing the getProfileRequest.
 type GetProfileInput struct {
 	_ struct{} `type:"structure"`
 
-	// The format of the profile to return. Supports application/json or application/x-amzn-ion.
-	// Defaults to application/x-amzn-ion.
+	// The format of the profile to return. You can choose application/json or the
+	// default application/x-amzn-ion.
 	Accept *string `location:"header" locationName:"Accept" type:"string"`
 
-	// The end time of the profile to get. Either period or endTime must be specified.
-	// Must be greater than start and the overall time range to be in the past and
-	// not larger than a week.
+	// You must specify exactly two of the following parameters: startTime, period,
+	// and endTime.
 	EndTime *time.Time `location:"querystring" locationName:"endTime" type:"timestamp" timestampFormat:"iso8601"`
 
-	// Limit the max depth of the profile.
+	// The maximum depth of the graph.
 	MaxDepth *int64 `location:"querystring" locationName:"maxDepth" min:"1" type:"integer"`
 
-	// The period of the profile to get. Exactly two of startTime, period and endTime
-	// must be specified. Must be positive and the overall time range to be in the
-	// past and not larger than a week.
+	// The period of the profile to get. The time range must be in the past and
+	// not longer than one week.
+	//
+	// You must specify exactly two of the following parameters: startTime, period,
+	// and endTime.
 	Period *string `location:"querystring" locationName:"period" min:"1" type:"string"`
 
-	// The name of the profiling group.
+	// The name of the profiling group to get.
 	//
 	// ProfilingGroupName is a required field
 	ProfilingGroupName *string `location:"uri" locationName:"profilingGroupName" min:"1" type:"string" required:"true"`
 
 	// The start time of the profile to get.
+	//
+	// You must specify exactly two of the following parameters: startTime, period,
+	// and endTime.
 	StartTime *time.Time `location:"querystring" locationName:"startTime" type:"timestamp" timestampFormat:"iso8601"`
 }
 
@@ -114,21 +118,20 @@ func (s GetProfileInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Response for GetProfile operation.
+// The structure representing the getProfileResponse.
 type GetProfileOutput struct {
 	_ struct{} `type:"structure" payload:"Profile"`
 
-	// The content encoding of the profile in the payload.
+	// The content encoding of the profile.
 	ContentEncoding *string `location:"header" locationName:"Content-Encoding" type:"string"`
 
-	// The content type of the profile in the payload. Will be application/json
-	// or application/x-amzn-ion based on Accept header in the request.
+	// The content type of the profile in the payload. It is either application/json
+	// or the default application/x-amzn-ion.
 	//
 	// ContentType is a required field
 	ContentType *string `location:"header" locationName:"Content-Type" type:"string" required:"true"`
 
-	// The profile representing the aggregation of agent profiles of the profiling
-	// group for a time range.
+	// Information about the profile.
 	//
 	// Profile is a required field
 	Profile []byte `locationName:"profile" type:"blob" required:"true"`
@@ -167,14 +170,18 @@ const opGetProfile = "GetProfile"
 // GetProfileRequest returns a request value for making API operation for
 // Amazon CodeGuru Profiler.
 //
-// Get the aggregated profile of a profiling group for the specified time range.
+// Gets the aggregated profile of a profiling group for the specified time range.
 // If the requested time range does not align with the available aggregated
-// profiles, it will be expanded to attain alignment. If aggregated profiles
-// are available only for part of the period requested, the profile is returned
+// profiles, it is expanded to attain alignment. If aggregated profiles are
+// available only for part of the period requested, the profile is returned
 // from the earliest available to the latest within the requested time range.
-// For instance, if the requested time range is from 00:00 to 00:20 and the
-// available profiles are from 00:15 to 00:25, then the returned profile will
-// be from 00:15 to 00:20.
+//
+// For example, if the requested time range is from 00:00 to 00:20 and the available
+// profiles are from 00:15 to 00:25, the returned profile will be from 00:15
+// to 00:20.
+//
+// You must specify exactly two of the following parameters: startTime, period,
+// and endTime.
 //
 //    // Example sending a request using GetProfileRequest.
 //    req := client.GetProfileRequest(params)

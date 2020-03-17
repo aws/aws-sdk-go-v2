@@ -68,6 +68,8 @@ const opStopExecution = "StopExecution"
 //
 // Stops an execution.
 //
+// This API action is not supported by EXPRESS state machines.
+//
 //    // Example sending a request using StopExecutionRequest.
 //    req := client.StopExecutionRequest(params)
 //    resp, err := req.Send(context.TODO())

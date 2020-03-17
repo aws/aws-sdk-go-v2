@@ -12,11 +12,22 @@ import (
 type DescribeServiceActionExecutionParametersInput struct {
 	_ struct{} `type:"structure"`
 
+	// The language code.
+	//
+	//    * en - English (default)
+	//
+	//    * jp - Japanese
+	//
+	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
+	// The identifier of the provisioned product.
+	//
 	// ProvisionedProductId is a required field
 	ProvisionedProductId *string `min:"1" type:"string" required:"true"`
 
+	// The self-service action identifier.
+	//
 	// ServiceActionId is a required field
 	ServiceActionId *string `min:"1" type:"string" required:"true"`
 }
@@ -53,6 +64,7 @@ func (s *DescribeServiceActionExecutionParametersInput) Validate() error {
 type DescribeServiceActionExecutionParametersOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The parameters of the self-service action.
 	ServiceActionParameters []ExecutionParameter `type:"list"`
 }
 
@@ -65,6 +77,9 @@ const opDescribeServiceActionExecutionParameters = "DescribeServiceActionExecuti
 
 // DescribeServiceActionExecutionParametersRequest returns a request value for making API operation for
 // AWS Service Catalog.
+//
+// Finds the default parameters for a specific self-service action on a specific
+// provisioned product and returns a map of the results to the user.
 //
 //    // Example sending a request using DescribeServiceActionExecutionParametersRequest.
 //    req := client.DescribeServiceActionExecutionParametersRequest(params)

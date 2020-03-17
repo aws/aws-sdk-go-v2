@@ -16,6 +16,12 @@ const (
 	// One or more parameters are not valid.
 	ErrCodeInvalidParameterException = "InvalidParameterException"
 
+	// ErrCodeResourceLimitExceededException for service response error code
+	// "ResourceLimitExceededException".
+	//
+	// Account limits for this resource have been exceeded.
+	ErrCodeResourceLimitExceededException = "ResourceLimitExceededException"
+
 	// ErrCodeResourceNotFoundException for service response error code
 	// "ResourceNotFoundException".
 	//

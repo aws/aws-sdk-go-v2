@@ -13,7 +13,7 @@ import (
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the resource that you wish to tag.
+	// The Amazon Resource Name (ARN) of the resource that you want to tag.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`

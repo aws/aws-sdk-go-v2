@@ -243,6 +243,10 @@ func (s Mitigation) String() string {
 type Protection struct {
 	_ struct{} `type:"structure"`
 
+	// The unique identifier (ID) for the Route 53 health check that's associated
+	// with the protection.
+	HealthCheckIds []string `type:"list"`
+
 	// The unique identifier (ID) of the protection.
 	Id *string `min:"1" type:"string"`
 

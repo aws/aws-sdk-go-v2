@@ -13,85 +13,76 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// Contains information about why a human loop was triggered. If at least one
-// activation reason is evaluated to be true, the human loop is activated.
-type HumanLoopActivationReason struct {
+// Attributes of the data specified by the customer. Use these to describe the
+// data to be labeled.
+type HumanLoopDataAttributes struct {
 	_ struct{} `type:"structure"`
 
-	// True if the specified conditions were matched to trigger the human loop.
-	ConditionsMatched *bool `type:"boolean"`
+	// Declares that your content is free of personally identifiable information
+	// or adult content.
+	//
+	// Amazon SageMaker can restrict the Amazon Mechanical Turk workers who can
+	// view your task based on this information.
+	//
+	// ContentClassifiers is a required field
+	ContentClassifiers []ContentClassifier `type:"list" required:"true"`
 }
 
 // String returns the string representation
-func (s HumanLoopActivationReason) String() string {
+func (s HumanLoopDataAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s HumanLoopActivationReason) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ConditionsMatched != nil {
-		v := *s.ConditionsMatched
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HumanLoopDataAttributes) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HumanLoopDataAttributes"}
 
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ConditionsMatched", protocol.BoolValue(v), metadata)
+	if s.ContentClassifiers == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContentClassifiers"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
 	}
 	return nil
 }
 
-// Information about the corresponding flow definition's human loop activation
-// condition evaluation. Null if StartHumanLoop was invoked directly.
-type HumanLoopActivationResults struct {
-	_ struct{} `type:"structure"`
-
-	// A copy of the human loop activation conditions of the flow definition, augmented
-	// with the results of evaluating those conditions on the input provided to
-	// the StartHumanLoop operation.
-	HumanLoopActivationConditionsEvaluationResults *string `type:"string"`
-
-	// An object containing information about why a human loop was triggered.
-	HumanLoopActivationReason *HumanLoopActivationReason `type:"structure"`
-}
-
-// String returns the string representation
-func (s HumanLoopActivationResults) String() string {
-	return awsutil.Prettify(s)
-}
-
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s HumanLoopActivationResults) MarshalFields(e protocol.FieldEncoder) error {
-	if s.HumanLoopActivationConditionsEvaluationResults != nil {
-		v := *s.HumanLoopActivationConditionsEvaluationResults
+func (s HumanLoopDataAttributes) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ContentClassifiers != nil {
+		v := s.ContentClassifiers
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "HumanLoopActivationConditionsEvaluationResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.HumanLoopActivationReason != nil {
-		v := s.HumanLoopActivationReason
+		ls0 := e.List(protocol.BodyTarget, "ContentClassifiers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
 
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "HumanLoopActivationReason", v, metadata)
 	}
 	return nil
 }
 
-// An object containing the input.
-type HumanLoopInputContent struct {
+// An object containing the human loop input in JSON format.
+type HumanLoopInput struct {
 	_ struct{} `type:"structure"`
 
-	// Serialized input from the human loop.
+	// Serialized input from the human loop. The input must be a string representation
+	// of a file in JSON format.
 	//
 	// InputContent is a required field
 	InputContent *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
-func (s HumanLoopInputContent) String() string {
+func (s HumanLoopInput) String() string {
 	return awsutil.Prettify(s)
 }
 
 // Validate inspects the fields of the type to determine if they are valid.
-func (s *HumanLoopInputContent) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "HumanLoopInputContent"}
+func (s *HumanLoopInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HumanLoopInput"}
 
 	if s.InputContent == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputContent"))
@@ -104,7 +95,7 @@ func (s *HumanLoopInputContent) Validate() error {
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s HumanLoopInputContent) MarshalFields(e protocol.FieldEncoder) error {
+func (s HumanLoopInput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.InputContent != nil {
 		v := *s.InputContent
 
@@ -115,23 +106,23 @@ func (s HumanLoopInputContent) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about where the human output will be stored.
-type HumanLoopOutputContent struct {
+type HumanLoopOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The location of the Amazon S3 object where Amazon Augmented AI stores your
-	// human loop output. The output is stored at the following location: s3://S3OutputPath/HumanLoopName/CreationTime/output.json.
+	// human loop output.
 	//
 	// OutputS3Uri is a required field
 	OutputS3Uri *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
-func (s HumanLoopOutputContent) String() string {
+func (s HumanLoopOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s HumanLoopOutputContent) MarshalFields(e protocol.FieldEncoder) error {
+func (s HumanLoopOutput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.OutputS3Uri != nil {
 		v := *s.OutputS3Uri
 
@@ -199,55 +190,6 @@ func (s HumanLoopSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "HumanLoopStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-// Attributes of the data specified by the customer. Use these to describe the
-// data to be labeled.
-type HumanReviewDataAttributes struct {
-	_ struct{} `type:"structure"`
-
-	// Declares that your content is free of personally identifiable information
-	// or adult content. Amazon SageMaker may restrict the Amazon Mechanical Turk
-	// workers that can view your task based on this information.
-	//
-	// ContentClassifiers is a required field
-	ContentClassifiers []ContentClassifier `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s HumanReviewDataAttributes) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *HumanReviewDataAttributes) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "HumanReviewDataAttributes"}
-
-	if s.ContentClassifiers == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContentClassifiers"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s HumanReviewDataAttributes) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ContentClassifiers != nil {
-		v := s.ContentClassifiers
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ContentClassifiers", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
 	}
 	return nil
 }

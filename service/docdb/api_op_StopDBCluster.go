@@ -40,7 +40,7 @@ func (s *StopDBClusterInput) Validate() error {
 type StopDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster.
+	// Detailed information about a cluster.
 	DBCluster *DBCluster `type:"structure"`
 }
 

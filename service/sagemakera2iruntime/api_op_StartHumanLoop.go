@@ -14,7 +14,7 @@ type StartHumanLoopInput struct {
 	_ struct{} `type:"structure"`
 
 	// Attributes of the data specified by the customer.
-	DataAttributes *HumanReviewDataAttributes `type:"structure"`
+	DataAttributes *HumanLoopDataAttributes `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the flow definition.
 	//
@@ -24,7 +24,7 @@ type StartHumanLoopInput struct {
 	// An object containing information about the human loop.
 	//
 	// HumanLoopInput is a required field
-	HumanLoopInput *HumanLoopInputContent `type:"structure" required:"true"`
+	HumanLoopInput *HumanLoopInput `type:"structure" required:"true"`
 
 	// The name of the human loop.
 	//
@@ -106,9 +106,6 @@ func (s StartHumanLoopInput) MarshalFields(e protocol.FieldEncoder) error {
 type StartHumanLoopOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object containing information about the human loop activation.
-	HumanLoopActivationResults *HumanLoopActivationResults `type:"structure"`
-
 	// The Amazon Resource Name (ARN) of the human loop.
 	HumanLoopArn *string `type:"string"`
 }
@@ -120,12 +117,6 @@ func (s StartHumanLoopOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s StartHumanLoopOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.HumanLoopActivationResults != nil {
-		v := s.HumanLoopActivationResults
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "HumanLoopActivationResults", v, metadata)
-	}
 	if s.HumanLoopArn != nil {
 		v := *s.HumanLoopArn
 

@@ -25,34 +25,40 @@ type EntitySubType string
 
 // Enum values for EntitySubType
 const (
-	EntitySubTypeName            EntitySubType = "NAME"
-	EntitySubTypeDosage          EntitySubType = "DOSAGE"
-	EntitySubTypeRouteOrMode     EntitySubType = "ROUTE_OR_MODE"
-	EntitySubTypeForm            EntitySubType = "FORM"
-	EntitySubTypeFrequency       EntitySubType = "FREQUENCY"
-	EntitySubTypeDuration        EntitySubType = "DURATION"
-	EntitySubTypeGenericName     EntitySubType = "GENERIC_NAME"
-	EntitySubTypeBrandName       EntitySubType = "BRAND_NAME"
-	EntitySubTypeStrength        EntitySubType = "STRENGTH"
-	EntitySubTypeRate            EntitySubType = "RATE"
-	EntitySubTypeAcuity          EntitySubType = "ACUITY"
-	EntitySubTypeTestName        EntitySubType = "TEST_NAME"
-	EntitySubTypeTestValue       EntitySubType = "TEST_VALUE"
-	EntitySubTypeTestUnits       EntitySubType = "TEST_UNITS"
-	EntitySubTypeProcedureName   EntitySubType = "PROCEDURE_NAME"
-	EntitySubTypeTreatmentName   EntitySubType = "TREATMENT_NAME"
-	EntitySubTypeDate            EntitySubType = "DATE"
-	EntitySubTypeAge             EntitySubType = "AGE"
-	EntitySubTypeContactPoint    EntitySubType = "CONTACT_POINT"
-	EntitySubTypeEmail           EntitySubType = "EMAIL"
-	EntitySubTypeIdentifier      EntitySubType = "IDENTIFIER"
-	EntitySubTypeUrl             EntitySubType = "URL"
-	EntitySubTypeAddress         EntitySubType = "ADDRESS"
-	EntitySubTypeProfession      EntitySubType = "PROFESSION"
-	EntitySubTypeSystemOrganSite EntitySubType = "SYSTEM_ORGAN_SITE"
-	EntitySubTypeDirection       EntitySubType = "DIRECTION"
-	EntitySubTypeQuality         EntitySubType = "QUALITY"
-	EntitySubTypeQuantity        EntitySubType = "QUANTITY"
+	EntitySubTypeName                 EntitySubType = "NAME"
+	EntitySubTypeDosage               EntitySubType = "DOSAGE"
+	EntitySubTypeRouteOrMode          EntitySubType = "ROUTE_OR_MODE"
+	EntitySubTypeForm                 EntitySubType = "FORM"
+	EntitySubTypeFrequency            EntitySubType = "FREQUENCY"
+	EntitySubTypeDuration             EntitySubType = "DURATION"
+	EntitySubTypeGenericName          EntitySubType = "GENERIC_NAME"
+	EntitySubTypeBrandName            EntitySubType = "BRAND_NAME"
+	EntitySubTypeStrength             EntitySubType = "STRENGTH"
+	EntitySubTypeRate                 EntitySubType = "RATE"
+	EntitySubTypeAcuity               EntitySubType = "ACUITY"
+	EntitySubTypeTestName             EntitySubType = "TEST_NAME"
+	EntitySubTypeTestValue            EntitySubType = "TEST_VALUE"
+	EntitySubTypeTestUnits            EntitySubType = "TEST_UNITS"
+	EntitySubTypeProcedureName        EntitySubType = "PROCEDURE_NAME"
+	EntitySubTypeTreatmentName        EntitySubType = "TREATMENT_NAME"
+	EntitySubTypeDate                 EntitySubType = "DATE"
+	EntitySubTypeAge                  EntitySubType = "AGE"
+	EntitySubTypeContactPoint         EntitySubType = "CONTACT_POINT"
+	EntitySubTypeEmail                EntitySubType = "EMAIL"
+	EntitySubTypeIdentifier           EntitySubType = "IDENTIFIER"
+	EntitySubTypeUrl                  EntitySubType = "URL"
+	EntitySubTypeAddress              EntitySubType = "ADDRESS"
+	EntitySubTypeProfession           EntitySubType = "PROFESSION"
+	EntitySubTypeSystemOrganSite      EntitySubType = "SYSTEM_ORGAN_SITE"
+	EntitySubTypeDirection            EntitySubType = "DIRECTION"
+	EntitySubTypeQuality              EntitySubType = "QUALITY"
+	EntitySubTypeQuantity             EntitySubType = "QUANTITY"
+	EntitySubTypeTimeExpression       EntitySubType = "TIME_EXPRESSION"
+	EntitySubTypeTimeToMedicationName EntitySubType = "TIME_TO_MEDICATION_NAME"
+	EntitySubTypeTimeToDxName         EntitySubType = "TIME_TO_DX_NAME"
+	EntitySubTypeTimeToTestName       EntitySubType = "TIME_TO_TEST_NAME"
+	EntitySubTypeTimeToProcedureName  EntitySubType = "TIME_TO_PROCEDURE_NAME"
+	EntitySubTypeTimeToTreatmentName  EntitySubType = "TIME_TO_TREATMENT_NAME"
 )
 
 func (enum EntitySubType) MarshalValue() (string, error) {
@@ -73,6 +79,7 @@ const (
 	EntityTypeProtectedHealthInformation EntityType = "PROTECTED_HEALTH_INFORMATION"
 	EntityTypeTestTreatmentProcedure     EntityType = "TEST_TREATMENT_PROCEDURE"
 	EntityTypeAnatomy                    EntityType = "ANATOMY"
+	EntityTypeTimeExpression             EntityType = "TIME_EXPRESSION"
 )
 
 func (enum EntityType) MarshalValue() (string, error) {
@@ -189,6 +196,38 @@ func (enum LanguageCode) MarshalValue() (string, error) {
 }
 
 func (enum LanguageCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RelationshipType string
+
+// Enum values for RelationshipType
+const (
+	RelationshipTypeEvery           RelationshipType = "EVERY"
+	RelationshipTypeWithDosage      RelationshipType = "WITH_DOSAGE"
+	RelationshipTypeAdministeredVia RelationshipType = "ADMINISTERED_VIA"
+	RelationshipTypeFor             RelationshipType = "FOR"
+	RelationshipTypeNegative        RelationshipType = "NEGATIVE"
+	RelationshipTypeOverlap         RelationshipType = "OVERLAP"
+	RelationshipTypeDosage          RelationshipType = "DOSAGE"
+	RelationshipTypeRouteOrMode     RelationshipType = "ROUTE_OR_MODE"
+	RelationshipTypeForm            RelationshipType = "FORM"
+	RelationshipTypeFrequency       RelationshipType = "FREQUENCY"
+	RelationshipTypeDuration        RelationshipType = "DURATION"
+	RelationshipTypeStrength        RelationshipType = "STRENGTH"
+	RelationshipTypeRate            RelationshipType = "RATE"
+	RelationshipTypeAcuity          RelationshipType = "ACUITY"
+	RelationshipTypeTestValue       RelationshipType = "TEST_VALUE"
+	RelationshipTypeTestUnits       RelationshipType = "TEST_UNITS"
+	RelationshipTypeDirection       RelationshipType = "DIRECTION"
+)
+
+func (enum RelationshipType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RelationshipType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

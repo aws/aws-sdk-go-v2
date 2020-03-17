@@ -44,7 +44,7 @@ type CreateListenerInput struct {
 	// is, the uniqueness—of the request.
 	//
 	// IdempotencyToken is a required field
-	IdempotencyToken *string `type:"string" required:"true"`
+	IdempotencyToken *string `type:"string" required:"true" idempotencyToken:"true"`
 
 	// The list of port ranges to support for connections from clients to your accelerator.
 	//

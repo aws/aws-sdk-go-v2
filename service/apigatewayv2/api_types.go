@@ -772,12 +772,14 @@ type Integration struct {
 	// API Gateway. You can update a managed integration, but you can't delete it.
 	ApiGatewayManaged *bool `locationName:"apiGatewayManaged" type:"boolean"`
 
-	// The connection ID.
+	// The ID of the VPC link for a private integration. Supported only for HTTP
+	// APIs.
 	ConnectionId *string `locationName:"connectionId" type:"string"`
 
-	// The type of the network connection to the integration endpoint. Currently
-	// the only valid value is INTERNET, for connections through the public routable
-	// internet.
+	// The type of the network connection to the integration endpoint. Specify INTERNET
+	// for connections through the public routable internet or VPC_LINK for private
+	// connections between API Gateway and resources in a VPC. The default value
+	// is INTERNET.
 	ConnectionType ConnectionType `locationName:"connectionType" type:"string" enum:"true"`
 
 	// Supported only for WebSocket APIs. Specifies how to handle response payload
@@ -831,7 +833,7 @@ type Integration struct {
 	// This integration is also referred to as the HTTP custom integration. Supported
 	// only for WebSocket APIs.
 	//
-	// HTTP_PROXY: for integrating route or method request with an HTTP endpoint,
+	// HTTP_PROXY: for integrating the route or method request with an HTTP endpoint,
 	// with the client request passed through as-is. This is also referred to as
 	// HTTP proxy integration.
 	//
@@ -839,7 +841,16 @@ type Integration struct {
 	// endpoint without invoking any backend. Supported only for WebSocket APIs.
 	IntegrationType IntegrationType `locationName:"integrationType" type:"string" enum:"true"`
 
-	// For a Lambda proxy integration, this is the URI of the Lambda function.
+	// For a Lambda integration, specify the URI of a Lambda function.
+	//
+	// For an HTTP integration, specify a fully-qualified URL.
+	//
+	// For an HTTP API private integration, specify the ARN of an Application Load
+	// Balancer listener, Network Load Balancer listener, or AWS Cloud Map service.
+	// If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances
+	// to identify resources. You can use query parameters to target specific resources.
+	// To learn more, see DiscoverInstances (https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html).
+	// For private integrations, all resources must be owned by the same AWS account.
 	IntegrationUri *string `locationName:"integrationUri" type:"string"`
 
 	// Specifies the pass-through behavior for incoming requests based on the Content-Type
@@ -861,7 +872,7 @@ type Integration struct {
 	PassthroughBehavior PassthroughBehavior `locationName:"passthroughBehavior" type:"string" enum:"true"`
 
 	// Specifies the format of the payload sent to an integration. Required for
-	// HTTP APIs. Currently, the only supported value is 1.0.
+	// HTTP APIs.
 	PayloadFormatVersion *string `locationName:"payloadFormatVersion" type:"string"`
 
 	// A key-value map specifying request parameters that are passed from the method
@@ -888,6 +899,11 @@ type Integration struct {
 	// milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000
 	// milliseconds, or 5 seconds for HTTP APIs.
 	TimeoutInMillis *int64 `locationName:"timeoutInMillis" min:"50" type:"integer"`
+
+	// The TLS configuration for a private integration. If you specify a TLS configuration,
+	// private integration traffic uses the HTTPS protocol. Supported only for HTTP
+	// APIs.
+	TlsConfig *TlsConfig `locationName:"tlsConfig" type:"structure"`
 }
 
 // String returns the string representation
@@ -1010,6 +1026,12 @@ func (s Integration) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "timeoutInMillis", protocol.Int64Value(v), metadata)
+	}
+	if s.TlsConfig != nil {
+		v := s.TlsConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "tlsConfig", v, metadata)
 	}
 	return nil
 }
@@ -1513,10 +1535,10 @@ type RouteSettings struct {
 	// for WebSocket APIs.
 	LoggingLevel LoggingLevel `locationName:"loggingLevel" type:"string" enum:"true"`
 
-	// Specifies the throttling burst limit. Supported only for WebSocket APIs.
+	// Specifies the throttling burst limit.
 	ThrottlingBurstLimit *int64 `locationName:"throttlingBurstLimit" type:"integer"`
 
-	// Specifies the throttling rate limit. Supported only for WebSocket APIs.
+	// Specifies the throttling rate limit.
 	ThrottlingRateLimit *float64 `locationName:"throttlingRateLimit" type:"double"`
 }
 
@@ -1610,7 +1632,7 @@ type Stage struct {
 
 	// A map that defines the stage variables for a stage resource. Variable names
 	// can have alphanumeric and underscore characters, and the values must match
-	// [A-Za-z0-9-._~:/?#&=,]+. Supported only for WebSocket APIs.
+	// [A-Za-z0-9-._~:/?#&=,]+.
 	StageVariables map[string]string `locationName:"stageVariables" type:"map"`
 
 	// The collection of tags. Each tag element is associated with a given resource.
@@ -1727,6 +1749,185 @@ func (s Stage) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	return nil
+}
+
+// The TLS configuration for a private integration. If you specify a TLS configuration,
+// private integration traffic uses the HTTPS protocol. Supported only for HTTP
+// APIs.
+type TlsConfig struct {
+	_ struct{} `type:"structure"`
+
+	// If you specify a server name, API Gateway uses it to verify the hostname
+	// on the integration's certificate. The server name is also included in the
+	// TLS handshake to support Server Name Indication (SNI) or virtual hosting.
+	ServerNameToVerify *string `locationName:"serverNameToVerify" type:"string"`
+}
+
+// String returns the string representation
+func (s TlsConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TlsConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ServerNameToVerify != nil {
+		v := *s.ServerNameToVerify
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "serverNameToVerify", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The TLS configuration for a private integration. If you specify a TLS configuration,
+// private integration traffic uses the HTTPS protocol. Supported only for HTTP
+// APIs.
+type TlsConfigInput struct {
+	_ struct{} `type:"structure"`
+
+	// If you specify a server name, API Gateway uses it to verify the hostname
+	// on the integration's certificate. The server name is also included in the
+	// TLS handshake to support Server Name Indication (SNI) or virtual hosting.
+	ServerNameToVerify *string `locationName:"serverNameToVerify" type:"string"`
+}
+
+// String returns the string representation
+func (s TlsConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TlsConfigInput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ServerNameToVerify != nil {
+		v := *s.ServerNameToVerify
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "serverNameToVerify", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Represents a VPC link.
+type VpcLink struct {
+	_ struct{} `type:"structure"`
+
+	// The timestamp when the VPC link was created.
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"iso8601"`
+
+	// The name of the VPC link.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" type:"string" required:"true"`
+
+	// A list of security group IDs for the VPC link.
+	//
+	// SecurityGroupIds is a required field
+	SecurityGroupIds []string `locationName:"securityGroupIds" type:"list" required:"true"`
+
+	// A list of subnet IDs to include in the VPC link.
+	//
+	// SubnetIds is a required field
+	SubnetIds []string `locationName:"subnetIds" type:"list" required:"true"`
+
+	// Tags for the VPC link.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
+	// The ID of the VPC link.
+	//
+	// VpcLinkId is a required field
+	VpcLinkId *string `locationName:"vpcLinkId" type:"string" required:"true"`
+
+	// The status of the VPC link.
+	VpcLinkStatus VpcLinkStatus `locationName:"vpcLinkStatus" type:"string" enum:"true"`
+
+	// A message summarizing the cause of the status of the VPC link.
+	VpcLinkStatusMessage *string `locationName:"vpcLinkStatusMessage" type:"string"`
+
+	// The version of the VPC link.
+	VpcLinkVersion VpcLinkVersion `locationName:"vpcLinkVersion" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s VpcLink) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VpcLink) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreatedDate != nil {
+		v := *s.CreatedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdDate",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SecurityGroupIds != nil {
+		v := s.SecurityGroupIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "securityGroupIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.SubnetIds != nil {
+		v := s.SubnetIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "subnetIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.VpcLinkId != nil {
+		v := *s.VpcLinkId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "vpcLinkId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.VpcLinkStatus) > 0 {
+		v := s.VpcLinkStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "vpcLinkStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.VpcLinkStatusMessage != nil {
+		v := *s.VpcLinkStatusMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "vpcLinkStatusMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.VpcLinkVersion) > 0 {
+		v := s.VpcLinkVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "vpcLinkVersion", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }

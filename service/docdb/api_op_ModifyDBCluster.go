@@ -15,8 +15,8 @@ type ModifyDBClusterInput struct {
 
 	// A value that specifies whether the changes in this request and any pending
 	// changes are asynchronously applied as soon as possible, regardless of the
-	// PreferredMaintenanceWindow setting for the DB cluster. If this parameter
-	// is set to false, changes to the DB cluster are applied during the next maintenance
+	// PreferredMaintenanceWindow setting for the cluster. If this parameter is
+	// set to false, changes to the cluster are applied during the next maintenance
 	// window.
 	//
 	// The ApplyImmediately parameter affects only the NewDBClusterIdentifier and
@@ -39,12 +39,12 @@ type ModifyDBClusterInput struct {
 	BackupRetentionPeriod *int64 `type:"integer"`
 
 	// The configuration setting for the log types to be enabled for export to Amazon
-	// CloudWatch Logs for a specific DB instance or DB cluster. The EnableLogTypes
-	// and DisableLogTypes arrays determine which logs are exported (or not exported)
+	// CloudWatch Logs for a specific instance or cluster. The EnableLogTypes and
+	// DisableLogTypes arrays determine which logs are exported (or not exported)
 	// to CloudWatch Logs.
 	CloudwatchLogsExportConfiguration *CloudwatchLogsExportConfiguration `type:"structure"`
 
-	// The DB cluster identifier for the cluster that is being modified. This parameter
+	// The cluster identifier for the cluster that is being modified. This parameter
 	// is not case sensitive.
 	//
 	// Constraints:
@@ -54,7 +54,7 @@ type ModifyDBClusterInput struct {
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
-	// The name of the DB cluster parameter group to use for the DB cluster.
+	// The name of the cluster parameter group to use for the cluster.
 	DBClusterParameterGroupName *string `type:"string"`
 
 	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
@@ -75,8 +75,8 @@ type ModifyDBClusterInput struct {
 	// Constraints: Must contain from 8 to 100 characters.
 	MasterUserPassword *string `type:"string"`
 
-	// The new DB cluster identifier for the DB cluster when renaming a DB cluster.
-	// This value is stored as a lowercase string.
+	// The new cluster identifier for the cluster when renaming a cluster. This
+	// value is stored as a lowercase string.
 	//
 	// Constraints:
 	//
@@ -89,11 +89,11 @@ type ModifyDBClusterInput struct {
 	// Example: my-cluster2
 	NewDBClusterIdentifier *string `type:"string"`
 
-	// The port number on which the DB cluster accepts connections.
+	// The port number on which the cluster accepts connections.
 	//
 	// Constraints: Must be a value from 1150 to 65535.
 	//
-	// Default: The same port as the original DB cluster.
+	// Default: The same port as the original cluster.
 	Port *int64 `type:"integer"`
 
 	// The daily time range during which automated backups are created if automated
@@ -126,8 +126,8 @@ type ModifyDBClusterInput struct {
 	// Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string `type:"string"`
 
-	// A list of virtual private cloud (VPC) security groups that the DB cluster
-	// will belong to.
+	// A list of virtual private cloud (VPC) security groups that the cluster will
+	// belong to.
 	VpcSecurityGroupIds []string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 
@@ -153,7 +153,7 @@ func (s *ModifyDBClusterInput) Validate() error {
 type ModifyDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster.
+	// Detailed information about a cluster.
 	DBCluster *DBCluster `type:"structure"`
 }
 
@@ -167,9 +167,9 @@ const opModifyDBCluster = "ModifyDBCluster"
 // ModifyDBClusterRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Modifies a setting for an Amazon DocumentDB DB cluster. You can change one
-// or more database configuration parameters by specifying these parameters
-// and the new values in the request.
+// Modifies a setting for an Amazon DocumentDB cluster. You can change one or
+// more database configuration parameters by specifying these parameters and
+// the new values in the request.
 //
 //    // Example sending a request using ModifyDBClusterRequest.
 //    req := client.ModifyDBClusterRequest(params)

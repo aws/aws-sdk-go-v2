@@ -297,7 +297,7 @@ type SigningConfiguration struct {
 	// EncryptionAlgorithmOptions is a required field
 	EncryptionAlgorithmOptions *EncryptionAlgorithmOptions `locationName:"encryptionAlgorithmOptions" type:"structure" required:"true"`
 
-	// The hash algorithm options that are available for a a code signing job.
+	// The hash algorithm options that are available for a code signing job.
 	//
 	// HashAlgorithmOptions is a required field
 	HashAlgorithmOptions *HashAlgorithmOptions `locationName:"hashAlgorithmOptions" type:"structure" required:"true"`
@@ -365,12 +365,12 @@ func (s SigningConfigurationOverrides) MarshalFields(e protocol.FieldEncoder) er
 type SigningImageFormat struct {
 	_ struct{} `type:"structure"`
 
-	// The default format of a code signing signing image.
+	// The default format of a code signing image.
 	//
 	// DefaultFormat is a required field
 	DefaultFormat ImageFormat `locationName:"defaultFormat" type:"string" required:"true" enum:"true"`
 
-	// The supported formats of a code signing signing image.
+	// The supported formats of a code signing image.
 	//
 	// SupportedFormats is a required field
 	SupportedFormats []ImageFormat `locationName:"supportedFormats" type:"list" required:"true"`
@@ -518,7 +518,7 @@ func (s SigningMaterial) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains information about the signing configurations and parameters that
-// is used to perform a code signing job.
+// are used to perform a code signing job.
 type SigningPlatform struct {
 	_ struct{} `type:"structure"`
 
@@ -614,6 +614,13 @@ type SigningPlatformOverrides struct {
 	// A signing configuration that overrides the default encryption or hash algorithm
 	// of a signing job.
 	SigningConfiguration *SigningConfigurationOverrides `locationName:"signingConfiguration" type:"structure"`
+
+	// A signed image is a JSON object. When overriding the default signing platform
+	// configuration, a customer can select either of two signing formats, JSONEmbedded
+	// or JSONDetached. (A third format value, JSON, is reserved for future use.)
+	// With JSONEmbedded, the signing image has the payload embedded in it. With
+	// JSONDetached, the payload is not be embedded in the signing image.
+	SigningImageFormat ImageFormat `locationName:"signingImageFormat" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -629,6 +636,12 @@ func (s SigningPlatformOverrides) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "signingConfiguration", v, metadata)
 	}
+	if len(s.SigningImageFormat) > 0 {
+		v := s.SigningImageFormat
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "signingImageFormat", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	return nil
 }
 
@@ -637,7 +650,7 @@ func (s SigningPlatformOverrides) MarshalFields(e protocol.FieldEncoder) error {
 type SigningProfile struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon Resource Name (ARN) for the signing profile.
+	// The Amazon Resource Name (ARN) for the signing profile.
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The ID of a platform that is available for use by a signing profile.

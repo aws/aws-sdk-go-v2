@@ -91,6 +91,8 @@ type ClientAPI interface {
 
 	DescribeProductsRequest(*securityhub.DescribeProductsInput) securityhub.DescribeProductsRequest
 
+	DescribeStandardsRequest(*securityhub.DescribeStandardsInput) securityhub.DescribeStandardsRequest
+
 	DescribeStandardsControlsRequest(*securityhub.DescribeStandardsControlsInput) securityhub.DescribeStandardsControlsRequest
 
 	DisableImportFindingsForProductRequest(*securityhub.DisableImportFindingsForProductInput) securityhub.DisableImportFindingsForProductRequest

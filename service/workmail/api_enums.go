@@ -2,6 +2,23 @@
 
 package workmail
 
+type AccessControlRuleEffect string
+
+// Enum values for AccessControlRuleEffect
+const (
+	AccessControlRuleEffectAllow AccessControlRuleEffect = "ALLOW"
+	AccessControlRuleEffectDeny  AccessControlRuleEffect = "DENY"
+)
+
+func (enum AccessControlRuleEffect) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AccessControlRuleEffect) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EntityState string
 
 // Enum values for EntityState

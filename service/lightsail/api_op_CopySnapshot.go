@@ -93,7 +93,9 @@ func (s *CopySnapshotInput) Validate() error {
 type CopySnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of objects describing the API operation.
+	// An array of objects that describe the result of the action, such as the status
+	// of the request, the time stamp of the request, and the resources affected
+	// by the request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
 

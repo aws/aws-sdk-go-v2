@@ -91,7 +91,7 @@ const opDescribeCertificates = "DescribeCertificates"
 // Amazon DocumentDB with MongoDB compatibility.
 //
 // Returns a list of certificate authority (CA) certificates provided by Amazon
-// RDS for this AWS account.
+// DocumentDB for this AWS account.
 //
 //    // Example sending a request using DescribeCertificatesRequest.
 //    req := client.DescribeCertificatesRequest(params)

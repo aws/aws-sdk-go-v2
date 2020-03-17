@@ -54,7 +54,8 @@ const opDescribeListener = "DescribeListener"
 // DescribeListenerRequest returns a request value for making API operation for
 // AWS Global Accelerator.
 //
-// Describe a listener.
+// Describe a listener. To see an AWS CLI example of describing a listener,
+// scroll down to Example.
 //
 //    // Example sending a request using DescribeListenerRequest.
 //    req := client.DescribeListenerRequest(params)

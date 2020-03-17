@@ -12,8 +12,11 @@ import (
 type GetOperationsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// A token used for advancing to the next page of results from your get operations
-	// for resource request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetOperationsForResource request.
+	// If your results are paginated, the response will return a next page token
+	// that you can specify as the page token in a subsequent request.
 	PageToken *string `locationName:"pageToken" type:"string"`
 
 	// The name of the resource for which you are requesting information.
@@ -50,12 +53,17 @@ type GetOperationsForResourceOutput struct {
 	// It is now deprecated, and the API returns the next page token parameter instead.
 	NextPageCount *string `locationName:"nextPageCount" deprecated:"true" type:"string"`
 
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
+	// The token to advance to the next page of resutls from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetOperationsForResource
+	// request and specify the next page token using the pageToken parameter.
 	NextPageToken *string `locationName:"nextPageToken" type:"string"`
 
-	// An array of key-value pairs containing information about the results of your
-	// get operations for resource request.
+	// An array of objects that describe the result of the action, such as the status
+	// of the request, the time stamp of the request, and the resources affected
+	// by the request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
 

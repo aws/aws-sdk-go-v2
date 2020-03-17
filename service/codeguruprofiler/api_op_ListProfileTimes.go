@@ -11,26 +11,36 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request for ListProfileTimes operation.
+// The structure representing the listProfileTimesRequest.
 type ListProfileTimesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The end time of the time range to list profiles until.
+	// The end time of the time range from which to list the profiles.
 	//
 	// EndTime is a required field
 	EndTime *time.Time `location:"querystring" locationName:"endTime" type:"timestamp" timestampFormat:"iso8601" required:"true"`
 
-	// Upper bound on the number of results to list in a single call.
+	// The maximum number of profile time results returned by ListProfileTimes in
+	// paginated output. When this parameter is used, ListProfileTimes only returns
+	// maxResults results in a single page with a nextToken response element. The
+	// remaining results of the initial request can be seen by sending another ListProfileTimes
+	// request with the returned nextToken value.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
-	// Token for paginating results.
+	// The nextToken value returned from a previous paginated ListProfileTimes request
+	// where maxResults was used and the results exceeded the value of that parameter.
+	// Pagination continues from the end of the previous results that returned the
+	// nextToken value.
+	//
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string `location:"querystring" locationName:"nextToken" min:"1" type:"string"`
 
-	// The order (ascending or descending by start time of the profile) to list
-	// the profiles by. Defaults to TIMESTAMP_DESCENDING.
+	// The order (ascending or descending by start time of the profile) to use when
+	// listing profiles. Defaults to TIMESTAMP_DESCENDING.
 	OrderBy OrderBy `location:"querystring" locationName:"orderBy" type:"string" enum:"true"`
 
-	// The aggregation period to list the profiles for.
+	// The aggregation period.
 	//
 	// Period is a required field
 	Period AggregationPeriod `location:"querystring" locationName:"period" type:"string" required:"true" enum:"true"`
@@ -40,7 +50,7 @@ type ListProfileTimesInput struct {
 	// ProfilingGroupName is a required field
 	ProfilingGroupName *string `location:"uri" locationName:"profilingGroupName" min:"1" type:"string" required:"true"`
 
-	// The start time of the time range to list the profiles from.
+	// The start time of the time range from which to list the profiles.
 	//
 	// StartTime is a required field
 	StartTime *time.Time `location:"querystring" locationName:"startTime" type:"timestamp" timestampFormat:"iso8601" required:"true"`
@@ -136,14 +146,17 @@ func (s ListProfileTimesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Response for ListProfileTimes operation.
+// The structure representing the listProfileTimesResponse.
 type ListProfileTimesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Token for paginating results.
+	// The nextToken value to include in a future ListProfileTimes request. When
+	// the results of a ListProfileTimes request exceed maxResults, this value can
+	// be used to retrieve the next page of results. This value is null when there
+	// are no more results to return.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
-	// List of start times of the available profiles for the aggregation period
+	// The list of start times of the available profiles for the aggregation period
 	// in the specified time range.
 	//
 	// ProfileTimes is a required field

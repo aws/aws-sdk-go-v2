@@ -10,11 +10,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request for DescribeProfilingGroup operation.
+// The structure representing the describeProfilingGroupRequest.
 type DescribeProfilingGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the profiling group.
+	// The profiling group name.
 	//
 	// ProfilingGroupName is a required field
 	ProfilingGroupName *string `location:"uri" locationName:"profilingGroupName" min:"1" type:"string" required:"true"`
@@ -55,11 +55,11 @@ func (s DescribeProfilingGroupInput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Response for DescribeProfilingGroup operation.
+// The structure representing the describeProfilingGroupResponse.
 type DescribeProfilingGroupOutput struct {
 	_ struct{} `type:"structure" payload:"ProfilingGroup"`
 
-	// The description of a profiling group.
+	// Information about a profiling group.
 	//
 	// ProfilingGroup is a required field
 	ProfilingGroup *ProfilingGroupDescription `locationName:"profilingGroup" type:"structure" required:"true"`
@@ -86,7 +86,7 @@ const opDescribeProfilingGroup = "DescribeProfilingGroup"
 // DescribeProfilingGroupRequest returns a request value for making API operation for
 // Amazon CodeGuru Profiler.
 //
-// Describe a profiling group.
+// Describes a profiling group.
 //
 //    // Example sending a request using DescribeProfilingGroupRequest.
 //    req := client.DescribeProfilingGroupRequest(params)

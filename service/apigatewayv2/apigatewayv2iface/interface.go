@@ -83,6 +83,10 @@ type ClientAPI interface {
 
 	CreateStageRequest(*apigatewayv2.CreateStageInput) apigatewayv2.CreateStageRequest
 
+	CreateVpcLinkRequest(*apigatewayv2.CreateVpcLinkInput) apigatewayv2.CreateVpcLinkRequest
+
+	DeleteAccessLogSettingsRequest(*apigatewayv2.DeleteAccessLogSettingsInput) apigatewayv2.DeleteAccessLogSettingsRequest
+
 	DeleteApiRequest(*apigatewayv2.DeleteApiInput) apigatewayv2.DeleteApiRequest
 
 	DeleteApiMappingRequest(*apigatewayv2.DeleteApiMappingInput) apigatewayv2.DeleteApiMappingRequest
@@ -103,11 +107,15 @@ type ClientAPI interface {
 
 	DeleteRouteRequest(*apigatewayv2.DeleteRouteInput) apigatewayv2.DeleteRouteRequest
 
+	DeleteRouteRequestParameterRequest(*apigatewayv2.DeleteRouteRequestParameterInput) apigatewayv2.DeleteRouteRequestParameterRequest
+
 	DeleteRouteResponseRequest(*apigatewayv2.DeleteRouteResponseInput) apigatewayv2.DeleteRouteResponseRequest
 
 	DeleteRouteSettingsRequest(*apigatewayv2.DeleteRouteSettingsInput) apigatewayv2.DeleteRouteSettingsRequest
 
 	DeleteStageRequest(*apigatewayv2.DeleteStageInput) apigatewayv2.DeleteStageRequest
+
+	DeleteVpcLinkRequest(*apigatewayv2.DeleteVpcLinkInput) apigatewayv2.DeleteVpcLinkRequest
 
 	GetApiRequest(*apigatewayv2.GetApiInput) apigatewayv2.GetApiRequest
 
@@ -157,6 +165,10 @@ type ClientAPI interface {
 
 	GetTagsRequest(*apigatewayv2.GetTagsInput) apigatewayv2.GetTagsRequest
 
+	GetVpcLinkRequest(*apigatewayv2.GetVpcLinkInput) apigatewayv2.GetVpcLinkRequest
+
+	GetVpcLinksRequest(*apigatewayv2.GetVpcLinksInput) apigatewayv2.GetVpcLinksRequest
+
 	ImportApiRequest(*apigatewayv2.ImportApiInput) apigatewayv2.ImportApiRequest
 
 	ReimportApiRequest(*apigatewayv2.ReimportApiInput) apigatewayv2.ReimportApiRequest
@@ -186,6 +198,8 @@ type ClientAPI interface {
 	UpdateRouteResponseRequest(*apigatewayv2.UpdateRouteResponseInput) apigatewayv2.UpdateRouteResponseRequest
 
 	UpdateStageRequest(*apigatewayv2.UpdateStageInput) apigatewayv2.UpdateStageRequest
+
+	UpdateVpcLinkRequest(*apigatewayv2.UpdateVpcLinkInput) apigatewayv2.UpdateVpcLinkRequest
 }
 
 var _ ClientAPI = (*apigatewayv2.Client)(nil)

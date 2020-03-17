@@ -44,7 +44,7 @@ func (s *DescribeExecutionInput) Validate() error {
 type DescribeExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) that identifies the execution.
+	// The Amazon Resource Name (ARN) that id entifies the execution.
 	//
 	// ExecutionArn is a required field
 	ExecutionArn *string `locationName:"executionArn" min:"1" type:"string" required:"true"`
@@ -67,6 +67,9 @@ type DescribeExecutionOutput struct {
 	//    * special characters " # % \ ^ | ~ ` $ & , ; : /
 	//
 	//    * control characters (U+0000-001F, U+007F-009F)
+	//
+	// To enable logging with CloudWatch Logs, the name should only contain 0-9,
+	// A-Z, a-z, - and _.
 	Name *string `locationName:"name" min:"1" type:"string"`
 
 	// The JSON output data of the execution.
@@ -108,6 +111,8 @@ const opDescribeExecution = "DescribeExecution"
 //
 // This operation is eventually consistent. The results are best effort and
 // may not reflect very recent updates and changes.
+//
+// This API action is not supported by EXPRESS state machines.
 //
 //    // Example sending a request using DescribeExecutionRequest.
 //    req := client.DescribeExecutionRequest(params)

@@ -496,10 +496,10 @@ type ConfigRule struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the AWS Config rule.
-	ConfigRuleArn *string `type:"string"`
+	ConfigRuleArn *string `min:"1" type:"string"`
 
 	// The ID of the AWS Config rule.
-	ConfigRuleId *string `type:"string"`
+	ConfigRuleId *string `min:"1" type:"string"`
 
 	// The name that you assign to the AWS Config rule. The name is required if
 	// you are adding a new rule.
@@ -571,6 +571,12 @@ func (s ConfigRule) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfigRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ConfigRule"}
+	if s.ConfigRuleArn != nil && len(*s.ConfigRuleArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigRuleArn", 1))
+	}
+	if s.ConfigRuleId != nil && len(*s.ConfigRuleId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigRuleId", 1))
+	}
 	if s.ConfigRuleName != nil && len(*s.ConfigRuleName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ConfigRuleName", 1))
 	}
@@ -702,6 +708,8 @@ type ConfigRuleEvaluationStatus struct {
 	//    * false - AWS Config has not once finished evaluating your AWS resources
 	//    against the rule.
 	FirstEvaluationStarted *bool `type:"boolean"`
+
+	LastDeactivatedTime *time.Time `type:"timestamp"`
 
 	// The error code that AWS Config returned when the rule last failed.
 	LastErrorCode *string `type:"string"`

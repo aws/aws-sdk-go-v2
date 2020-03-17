@@ -17,7 +17,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// restored DB cluster can be created in.
 	AvailabilityZones []string `locationNameList:"AvailabilityZone" type:"list"`
 
-	// The name of the DB cluster to create from the DB snapshot or DB cluster snapshot.
+	// The name of the cluster to create from the snapshot or cluster snapshot.
 	// This parameter isn't case sensitive.
 	//
 	// Constraints:
@@ -33,7 +33,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
-	// The name of the DB subnet group to use for the new DB cluster.
+	// The name of the subnet group to use for the new cluster.
 	//
 	// Constraints: If provided, must match the name of an existing DBSubnetGroup.
 	//
@@ -50,7 +50,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// Logs.
 	EnableCloudwatchLogsExports []string `type:"list"`
 
-	// The database engine to use for the new DB cluster.
+	// The database engine to use for the new cluster.
 	//
 	// Default: The same as source.
 	//
@@ -59,41 +59,40 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// Engine is a required field
 	Engine *string `type:"string" required:"true"`
 
-	// The version of the database engine to use for the new DB cluster.
+	// The version of the database engine to use for the new cluster.
 	EngineVersion *string `type:"string"`
 
-	// The AWS KMS key identifier to use when restoring an encrypted DB cluster
-	// from a DB snapshot or DB cluster snapshot.
+	// The AWS KMS key identifier to use when restoring an encrypted cluster from
+	// a DB snapshot or cluster snapshot.
 	//
 	// The AWS KMS key identifier is the Amazon Resource Name (ARN) for the AWS
-	// KMS encryption key. If you are restoring a DB cluster with the same AWS account
-	// that owns the AWS KMS encryption key used to encrypt the new DB cluster,
-	// then you can use the AWS KMS key alias instead of the ARN for the AWS KMS
-	// encryption key.
+	// KMS encryption key. If you are restoring a cluster with the same AWS account
+	// that owns the AWS KMS encryption key used to encrypt the new cluster, then
+	// you can use the AWS KMS key alias instead of the ARN for the AWS KMS encryption
+	// key.
 	//
 	// If you do not specify a value for the KmsKeyId parameter, then the following
 	// occurs:
 	//
-	//    * If the DB snapshot or DB cluster snapshot in SnapshotIdentifier is encrypted,
-	//    then the restored DB cluster is encrypted using the AWS KMS key that was
-	//    used to encrypt the DB snapshot or the DB cluster snapshot.
+	//    * If the snapshot or cluster snapshot in SnapshotIdentifier is encrypted,
+	//    then the restored cluster is encrypted using the AWS KMS key that was
+	//    used to encrypt the snapshot or the cluster snapshot.
 	//
-	//    * If the DB snapshot or the DB cluster snapshot in SnapshotIdentifier
-	//    is not encrypted, then the restored DB cluster is not encrypted.
+	//    * If the snapshot or the cluster snapshot in SnapshotIdentifier is not
+	//    encrypted, then the restored DB cluster is not encrypted.
 	KmsKeyId *string `type:"string"`
 
-	// The port number on which the new DB cluster accepts connections.
+	// The port number on which the new cluster accepts connections.
 	//
 	// Constraints: Must be a value from 1150 to 65535.
 	//
-	// Default: The same port as the original DB cluster.
+	// Default: The same port as the original cluster.
 	Port *int64 `type:"integer"`
 
-	// The identifier for the DB snapshot or DB cluster snapshot to restore from.
+	// The identifier for the snapshot or cluster snapshot to restore from.
 	//
 	// You can use either the name or the Amazon Resource Name (ARN) to specify
-	// a DB cluster snapshot. However, you can use only the ARN to specify a DB
-	// snapshot.
+	// a cluster snapshot. However, you can use only the ARN to specify a snapshot.
 	//
 	// Constraints:
 	//
@@ -102,10 +101,10 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// SnapshotIdentifier is a required field
 	SnapshotIdentifier *string `type:"string" required:"true"`
 
-	// The tags to be assigned to the restored DB cluster.
+	// The tags to be assigned to the restored cluster.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 
-	// A list of virtual private cloud (VPC) security groups that the new DB cluster
+	// A list of virtual private cloud (VPC) security groups that the new cluster
 	// will belong to.
 	VpcSecurityGroupIds []string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
@@ -140,7 +139,7 @@ func (s *RestoreDBClusterFromSnapshotInput) Validate() error {
 type RestoreDBClusterFromSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster.
+	// Detailed information about a cluster.
 	DBCluster *DBCluster `type:"structure"`
 }
 
@@ -154,14 +153,14 @@ const opRestoreDBClusterFromSnapshot = "RestoreDBClusterFromSnapshot"
 // RestoreDBClusterFromSnapshotRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Creates a new DB cluster from a DB snapshot or DB cluster snapshot.
+// Creates a new cluster from a snapshot or cluster snapshot.
 //
-// If a DB snapshot is specified, the target DB cluster is created from the
-// source DB snapshot with a default configuration and default security group.
+// If a snapshot is specified, the target cluster is created from the source
+// DB snapshot with a default configuration and default security group.
 //
-// If a DB cluster snapshot is specified, the target DB cluster is created from
-// the source DB cluster restore point with the same configuration as the original
-// source DB cluster, except that the new DB cluster is created with the default
+// If a cluster snapshot is specified, the target cluster is created from the
+// source cluster restore point with the same configuration as the original
+// source DB cluster, except that the new cluster is created with the default
 // security group.
 //
 //    // Example sending a request using RestoreDBClusterFromSnapshotRequest.

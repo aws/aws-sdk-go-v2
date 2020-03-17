@@ -131,6 +131,11 @@ type GetIntegrationOutput struct {
 
 	// An integer with a value between [50-29000].
 	TimeoutInMillis *int64 `locationName:"timeoutInMillis" min:"50" type:"integer"`
+
+	// The TLS configuration for a private integration. If you specify a TLS configuration,
+	// private integration traffic uses the HTTPS protocol. Supported only for HTTP
+	// APIs.
+	TlsConfig *TlsConfig `locationName:"tlsConfig" type:"structure"`
 }
 
 // String returns the string representation
@@ -253,6 +258,12 @@ func (s GetIntegrationOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "timeoutInMillis", protocol.Int64Value(v), metadata)
+	}
+	if s.TlsConfig != nil {
+		v := s.TlsConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "tlsConfig", v, metadata)
 	}
 	return nil
 }

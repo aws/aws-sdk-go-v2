@@ -94,8 +94,8 @@ const opDescribeDetectorModel = "DescribeDetectorModel"
 // DescribeDetectorModelRequest returns a request value for making API operation for
 // AWS IoT Events.
 //
-// Describes a detector model. If the "version" parameter is not specified,
-// information about the latest version is returned.
+// Describes a detector model. If the version parameter is not specified, information
+// about the latest version is returned.
 //
 //    // Example sending a request using DescribeDetectorModelRequest.
 //    req := client.DescribeDetectorModelRequest(params)

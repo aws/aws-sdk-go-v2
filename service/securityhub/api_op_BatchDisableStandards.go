@@ -95,7 +95,9 @@ const opBatchDisableStandards = "BatchDisableStandards"
 // AWS SecurityHub.
 //
 // Disables the standards specified by the provided StandardsSubscriptionArns.
-// For more information, see Standards Supported in AWS Security Hub (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html).
+//
+// For more information, see Security Standards (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html)
+// section of the AWS Security Hub User Guide.
 //
 //    // Example sending a request using BatchDisableStandardsRequest.
 //    req := client.BatchDisableStandardsRequest(params)

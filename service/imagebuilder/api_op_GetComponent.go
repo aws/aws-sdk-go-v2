@@ -13,7 +13,8 @@ import (
 type GetComponentInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the component that you wish to retrieve.
+	// The Amazon Resource Name (ARN) of the component that you want to retrieve.
+	// Regex requires "/\d+$" suffix.
 	//
 	// ComponentBuildVersionArn is a required field
 	ComponentBuildVersionArn *string `location:"querystring" locationName:"componentBuildVersionArn" type:"string" required:"true"`

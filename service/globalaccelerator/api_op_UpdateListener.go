@@ -93,7 +93,8 @@ const opUpdateListener = "UpdateListener"
 // UpdateListenerRequest returns a request value for making API operation for
 // AWS Global Accelerator.
 //
-// Update a listener.
+// Update a listener. To see an AWS CLI example of updating listener, scroll
+// down to Example.
 //
 //    // Example sending a request using UpdateListenerRequest.
 //    req := client.UpdateListenerRequest(params)

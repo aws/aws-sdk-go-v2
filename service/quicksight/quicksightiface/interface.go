@@ -161,6 +161,8 @@ type ClientAPI interface {
 
 	RegisterUserRequest(*quicksight.RegisterUserInput) quicksight.RegisterUserRequest
 
+	SearchDashboardsRequest(*quicksight.SearchDashboardsInput) quicksight.SearchDashboardsRequest
+
 	TagResourceRequest(*quicksight.TagResourceInput) quicksight.TagResourceRequest
 
 	UntagResourceRequest(*quicksight.UntagResourceInput) quicksight.UntagResourceRequest

@@ -255,6 +255,12 @@ func (s DashEncryption) MarshalFields(e protocol.FieldEncoder) error {
 type DashManifest struct {
 	_ struct{} `type:"structure"`
 
+	// Determines the position of some tags in the Media Presentation Description
+	// (MPD). When set to FULL, elements like SegmentTemplate and ContentProtection
+	// are included in each Representation. When set to COMPACT, duplicate elements
+	// are combined and presented at the AdaptationSet level.
+	ManifestLayout ManifestLayout `locationName:"manifestLayout" type:"string" enum:"true"`
+
 	// An optional string to include in the name of the manifest.
 	ManifestName *string `locationName:"manifestName" type:"string"`
 
@@ -277,6 +283,12 @@ func (s DashManifest) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DashManifest) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ManifestLayout) > 0 {
+		v := s.ManifestLayout
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "manifestLayout", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.ManifestName != nil {
 		v := *s.ManifestName
 
@@ -316,9 +328,24 @@ type DashPackage struct {
 	// A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
 	Encryption *DashEncryption `locationName:"encryption" type:"structure"`
 
+	// A list of triggers that controls when the outgoing Dynamic Adaptive Streaming
+	// over HTTP (DASH)Media Presentation Description (MPD) will be partitioned
+	// into multiple periods. If empty, the content will notbe partitioned into
+	// more than one period. If the list contains "ADS", new periods will be created
+	// wherethe Asset contains SCTE-35 ad markers.
+	PeriodTriggers []PeriodTriggersElement `locationName:"periodTriggers" type:"list"`
+
 	// Duration (in seconds) of each segment. Actual segments will berounded to
 	// the nearest multiple of the source segment duration.
 	SegmentDurationSeconds *int64 `locationName:"segmentDurationSeconds" type:"integer"`
+
+	// Determines the type of SegmentTemplate included in the Media Presentation
+	// Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is presented
+	// in each SegmentTemplate, with $Number$ media URLs. When set to TIME_WITH_TIMELINE,
+	// a full timeline is presented in each SegmentTemplate, with $Time$ media URLs.
+	// When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate,
+	// with $Number$ media URLs.
+	SegmentTemplateFormat SegmentTemplateFormat `locationName:"segmentTemplateFormat" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -365,11 +392,29 @@ func (s DashPackage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "encryption", v, metadata)
 	}
+	if s.PeriodTriggers != nil {
+		v := s.PeriodTriggers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "periodTriggers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	if s.SegmentDurationSeconds != nil {
 		v := *s.SegmentDurationSeconds
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "segmentDurationSeconds", protocol.Int64Value(v), metadata)
+	}
+	if len(s.SegmentTemplateFormat) > 0 {
+		v := s.SegmentTemplateFormat
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "segmentTemplateFormat", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }

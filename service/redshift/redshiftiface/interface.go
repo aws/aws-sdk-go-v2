@@ -218,6 +218,8 @@ type ClientAPI interface {
 
 	ModifySnapshotScheduleRequest(*redshift.ModifySnapshotScheduleInput) redshift.ModifySnapshotScheduleRequest
 
+	PauseClusterRequest(*redshift.PauseClusterInput) redshift.PauseClusterRequest
+
 	PurchaseReservedNodeOfferingRequest(*redshift.PurchaseReservedNodeOfferingInput) redshift.PurchaseReservedNodeOfferingRequest
 
 	RebootClusterRequest(*redshift.RebootClusterInput) redshift.RebootClusterRequest
@@ -229,6 +231,8 @@ type ClientAPI interface {
 	RestoreFromClusterSnapshotRequest(*redshift.RestoreFromClusterSnapshotInput) redshift.RestoreFromClusterSnapshotRequest
 
 	RestoreTableFromClusterSnapshotRequest(*redshift.RestoreTableFromClusterSnapshotInput) redshift.RestoreTableFromClusterSnapshotRequest
+
+	ResumeClusterRequest(*redshift.ResumeClusterInput) redshift.ResumeClusterRequest
 
 	RevokeClusterSecurityGroupIngressRequest(*redshift.RevokeClusterSecurityGroupIngressInput) redshift.RevokeClusterSecurityGroupIngressRequest
 

@@ -56,7 +56,9 @@ type ImageFormat string
 
 // Enum values for ImageFormat
 const (
-	ImageFormatJson ImageFormat = "JSON"
+	ImageFormatJson         ImageFormat = "JSON"
+	ImageFormatJsonembedded ImageFormat = "JSONEmbedded"
+	ImageFormatJsondetached ImageFormat = "JSONDetached"
 )
 
 func (enum ImageFormat) MarshalValue() (string, error) {

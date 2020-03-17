@@ -382,7 +382,7 @@ type AnnotationConsolidationConfig struct {
 	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationBoundingBox
 	//
 	//    * Semantic segmentation verification - Uses a variant of the Expectation
-	//    Maximization approach to estimate the true class of verification judgement
+	//    Maximization approach to estimate the true class of verification judgment
 	//    for semantic segmentation labels based on annotations from individual
 	//    workers. arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationSemanticSegmentation
 	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationSemanticSegmentation
@@ -612,7 +612,7 @@ type AutoMLChannel struct {
 	// DataSource is a required field
 	DataSource *AutoMLDataSource `type:"structure" required:"true"`
 
-	// The name of the target variable in supervised learning, a.k.a. ‘y’.
+	// The name of the target variable in supervised learning, a.k.a. 'y'.
 	//
 	// TargetAttributeName is a required field
 	TargetAttributeName *string `min:"1" type:"string" required:"true"`
@@ -3018,7 +3018,10 @@ type HumanLoopConfig struct {
 	// The length of time that a task remains available for labeling by human workers.
 	TaskAvailabilityLifetimeInSeconds *int64 `min:"1" type:"integer"`
 
-	// The number of human tasks.
+	// The number of distinct workers who will perform the same task on each object.
+	// For example, if TaskCount is set to 3 for an image classification labeling
+	// job, three workers will classify each input image. Increasing TaskCount can
+	// improve label accuracy.
 	//
 	// TaskCount is a required field
 	TaskCount *int64 `min:"1" type:"integer" required:"true"`
@@ -8041,7 +8044,7 @@ type SourceIpConfig struct {
 	// A list of one to four Classless Inter-Domain Routing (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)
 	// (CIDR) values.
 	//
-	// Maximum: 4 CIDR values
+	// Maximum: Four CIDR values
 	//
 	// The following Length Constraints apply to individual CIDR values in the CIDR
 	// value list.
@@ -9790,6 +9793,49 @@ func (s *UserSettings) Validate() error {
 	return nil
 }
 
+// Specifies a production variant property type for an Endpoint.
+//
+// If you are updating an endpoint with the RetainAllVariantProperties (https://docs.aws.amazon.com/sagemaker/latest/dg/API_UpdateEndpoint.html#SageMaker-UpdateEndpoint-request-RetainAllVariantProperties)
+// option set to true, the VariantProperty objects listed in ExcludeRetainedVariantProperties
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/API_UpdateEndpoint.html#SageMaker-UpdateEndpoint-request-ExcludeRetainedVariantProperties)
+// override the existing variant properties of the endpoint.
+type VariantProperty struct {
+	_ struct{} `type:"structure"`
+
+	// The type of variant property. The supported values are:
+	//
+	//    * DesiredInstanceCount: Overrides the existing variant instance counts
+	//    using the InitialInstanceCount (https://docs.aws.amazon.com/sagemaker/latest/dg/API_ProductionVariant.html#SageMaker-Type-ProductionVariant-InitialInstanceCount)
+	//    values in the ProductionVariants (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html#SageMaker-CreateEndpointConfig-request-ProductionVariants).
+	//
+	//    * DesiredWeight: Overrides the existing variant weights using the InitialVariantWeight
+	//    (https://docs.aws.amazon.com/sagemaker/latest/dg/API_ProductionVariant.html#SageMaker-Type-ProductionVariant-InitialVariantWeight)
+	//    values in the ProductionVariants (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html#SageMaker-CreateEndpointConfig-request-ProductionVariants).
+	//
+	//    * DataCaptureConfig: (Not currently supported.)
+	//
+	// VariantPropertyType is a required field
+	VariantPropertyType VariantPropertyType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s VariantProperty) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VariantProperty) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VariantProperty"}
+	if len(s.VariantPropertyType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("VariantPropertyType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Specifies a VPC that your training jobs and hosted models have access to.
 // Control access to and from your training and model containers by configuring
 // the VPC. For more information, see Protect Endpoints by Using an Amazon Virtual
@@ -9805,12 +9851,8 @@ type VpcConfig struct {
 	SecurityGroupIds []string `min:"1" type:"list" required:"true"`
 
 	// The ID of the subnets in the VPC to which you want to connect your training
-	// job or model.
-	//
-	// Amazon EC2 P3 accelerated computing instances are not available in the c/d/e
-	// availability zones of region us-east-1. If you want to create endpoints with
-	// P3 instances in VPC mode in region us-east-1, create subnets in a/b/f availability
-	// zones instead.
+	// job or model. For information about the availability of specific instance
+	// types, see Supported Instance Types and Availability Zones (https://docs.aws.amazon.com/sagemaker/latest/dg/instance-types-az.html).
 	//
 	// Subnets is a required field
 	Subnets []string `min:"1" type:"list" required:"true"`
@@ -9847,7 +9889,7 @@ func (s *VpcConfig) Validate() error {
 
 // A single private workforce, which is automatically created when you create
 // your first private work team. You can create one private work force in each
-// AWS Region. By default, any workforce related API operation used in a specific
+// AWS Region. By default, any workforce-related API operation used in a specific
 // region will apply to the workforce created in that region. To learn how to
 // create a private workforce, see Create a Private Workforce (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html).
 type Workforce struct {
@@ -9868,8 +9910,8 @@ type Workforce struct {
 	WorkforceArn *string `type:"string" required:"true"`
 
 	// The name of the private workforce whose access you want to restrict. WorkforceName
-	// is automatically set to "default" when a workforce is created and cannot
-	// be modified.
+	// is automatically set to default when a workforce is created and cannot be
+	// modified.
 	//
 	// WorkforceName is a required field
 	WorkforceName *string `min:"1" type:"string" required:"true"`

@@ -623,6 +623,9 @@ func (s LoggingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 type MediaPlacement struct {
 	_ struct{} `type:"structure"`
 
+	// The audio fallback URL.
+	AudioFallbackUrl *string `type:"string"`
+
 	// The audio host URL.
 	AudioHostUrl *string `type:"string"`
 
@@ -649,6 +652,12 @@ func (s MediaPlacement) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s MediaPlacement) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AudioFallbackUrl != nil {
+		v := *s.AudioFallbackUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AudioFallbackUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.AudioHostUrl != nil {
 		v := *s.AudioHostUrl
 
@@ -1751,7 +1760,7 @@ type Termination struct {
 	// The IP addresses allowed to make calls, in CIDR format. Required.
 	CidrAllowedList []string `type:"list"`
 
-	// The limit on calls per second. Max value based on account service limit.
+	// The limit on calls per second. Max value based on account service quota.
 	// Default value of 1.
 	CpsLimit *int64 `min:"1" type:"integer"`
 

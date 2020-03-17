@@ -17,6 +17,7 @@ type UpdateStateMachineInput struct {
 	// Language (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
 	Definition *string `locationName:"definition" min:"1" type:"string" sensitive:"true"`
 
+	// The LoggingConfiguration data type is used to set CloudWatch Logs options.
 	LoggingConfiguration *LoggingConfiguration `locationName:"loggingConfiguration" type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the IAM role of the state machine.
@@ -80,10 +81,10 @@ const opUpdateStateMachine = "UpdateStateMachine"
 // UpdateStateMachineRequest returns a request value for making API operation for
 // AWS Step Functions.
 //
-// Updates an existing state machine by modifying its definition and/or roleArn.
-// Running executions will continue to use the previous definition and roleArn.
-// You must include at least one of definition or roleArn or you will receive
-// a MissingRequiredParameter error.
+// Updates an existing state machine by modifying its definition, roleArn, or
+// loggingConfiguration. Running executions will continue to use the previous
+// definition and roleArn. You must include at least one of definition or roleArn
+// or you will receive a MissingRequiredParameter error.
 //
 // All StartExecution calls within a few seconds will use the updated definition
 // and roleArn. Executions started immediately after calling UpdateStateMachine

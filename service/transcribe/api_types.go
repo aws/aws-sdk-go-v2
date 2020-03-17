@@ -12,6 +12,54 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Settings for content redaction within a transcription job.
+//
+// You can redact transcripts in US English (en-us). For more information see:
+// Automatic Content Redaction (https://docs.aws.amazon.com/transcribe/latest/dg/content-redaction.html)
+type ContentRedaction struct {
+	_ struct{} `type:"structure"`
+
+	// Request parameter where you choose whether to output only the redacted transcript
+	// or generate an additional unredacted transcript.
+	//
+	// When you choose redacted Amazon Transcribe outputs a JSON file with only
+	// the redacted transcript and related information.
+	//
+	// When you choose redacted_and_unredacted Amazon Transcribe outputs a JSON
+	// file with the unredacted transcript and related information in addition to
+	// the JSON file with the redacted transcript.
+	//
+	// RedactionOutput is a required field
+	RedactionOutput RedactionOutput `type:"string" required:"true" enum:"true"`
+
+	// Request parameter that defines the entities to be redacted. The only accepted
+	// value is PII.
+	//
+	// RedactionType is a required field
+	RedactionType RedactionType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s ContentRedaction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ContentRedaction) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ContentRedaction"}
+	if len(s.RedactionOutput) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("RedactionOutput"))
+	}
+	if len(s.RedactionType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("RedactionType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Provides information about when a transcription job should be executed.
 type JobExecutionSettings struct {
 	_ struct{} `type:"structure"`
@@ -46,16 +94,16 @@ func (s JobExecutionSettings) String() string {
 type Media struct {
 	_ struct{} `type:"structure"`
 
-	// The S3 location of the input media file. The URI must be in the same region
-	// as the API endpoint that you are calling. The general form is:
+	// The S3 object location of the input media file. The URI must be in the same
+	// region as the API endpoint that you are calling. The general form is:
 	//
-	// https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+	// s3://<bucket-name>/<keyprefix>/<objectkey>
 	//
 	// For example:
 	//
-	// https://s3.us-east-1.amazonaws.com/examplebucket/example.mp4
+	// s3://examplebucket/example.mp4
 	//
-	// https://s3.us-east-1.amazonaws.com/examplebucket/mediadocs/example.mp4
+	// s3://examplebucket/mediadocs/example.mp4
 	//
 	// For more information about S3 object names, see Object Keys (http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
 	// in the Amazon S3 Developer Guide.
@@ -166,12 +214,20 @@ func (s *Settings) Validate() error {
 type Transcript struct {
 	_ struct{} `type:"structure"`
 
-	// The location where the transcription is stored.
+	// The S3 object location of the redacted transcript.
 	//
-	// Use this URI to access the transcription. If you specified an S3 bucket in
-	// the OutputBucketName field when you created the job, this is the URI of that
-	// bucket. If you chose to store the transcription in Amazon Transcribe, this
+	// Use this URI to access the redacated transcript. If you specified an S3 bucket
+	// in the OutputBucketName field when you created the job, this is the URI of
+	// that bucket. If you chose to store the transcript in Amazon Transcribe, this
 	// is a shareable URL that provides secure access to that location.
+	RedactedTranscriptFileUri *string `min:"1" type:"string"`
+
+	// The S3 object location of the the transcript.
+	//
+	// Use this URI to access the transcript. If you specified an S3 bucket in the
+	// OutputBucketName field when you created the job, this is the URI of that
+	// bucket. If you chose to store the transcript in Amazon Transcribe, this is
+	// a shareable URL that provides secure access to that location.
 	TranscriptFileUri *string `min:"1" type:"string"`
 }
 
@@ -187,6 +243,10 @@ type TranscriptionJob struct {
 
 	// A timestamp that shows when the job was completed.
 	CompletionTime *time.Time `type:"timestamp"`
+
+	// An object that describes content redaction settings for the transcription
+	// job.
+	ContentRedaction *ContentRedaction `type:"structure"`
 
 	// A timestamp that shows when the job was created.
 	CreationTime *time.Time `type:"timestamp"`
@@ -270,6 +330,9 @@ type TranscriptionJobSummary struct {
 
 	// A timestamp that shows when the job was completed.
 	CompletionTime *time.Time `type:"timestamp"`
+
+	// The content redaction settings of the transcription job.
+	ContentRedaction *ContentRedaction `type:"structure"`
 
 	// A timestamp that shows when the job was created.
 	CreationTime *time.Time `type:"timestamp"`

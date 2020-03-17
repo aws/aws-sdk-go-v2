@@ -114,13 +114,18 @@ func (s ConstraintSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Details of an execution parameter value that is passed to a self-service
+// action when executed on a provisioned product.
 type ExecutionParameter struct {
 	_ struct{} `type:"structure"`
 
+	// The default values for the execution parameter.
 	DefaultValues []string `type:"list"`
 
+	// The name of the execution parameter.
 	Name *string `min:"1" type:"string"`
 
+	// The execution parameter type.
 	Type *string `min:"1" type:"string"`
 }
 

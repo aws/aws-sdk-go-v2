@@ -14,7 +14,7 @@ import (
 type DescribeDBClusterParametersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of a specific DB cluster parameter group to return parameter details
+	// The name of a specific cluster parameter group to return parameter details
 	// for.
 	//
 	// Constraints:
@@ -81,7 +81,7 @@ type DescribeDBClusterParametersOutput struct {
 	// the value specified by MaxRecords.
 	Marker *string `type:"string"`
 
-	// Provides a list of parameters for the DB cluster parameter group.
+	// Provides a list of parameters for the cluster parameter group.
 	Parameters []Parameter `locationNameList:"Parameter" type:"list"`
 }
 
@@ -95,8 +95,7 @@ const opDescribeDBClusterParameters = "DescribeDBClusterParameters"
 // DescribeDBClusterParametersRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Returns the detailed parameter list for a particular DB cluster parameter
-// group.
+// Returns the detailed parameter list for a particular cluster parameter group.
 //
 //    // Example sending a request using DescribeDBClusterParametersRequest.
 //    req := client.DescribeDBClusterParametersRequest(params)

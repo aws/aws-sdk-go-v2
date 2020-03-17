@@ -12,6 +12,10 @@ import (
 type DetectTextInput struct {
 	_ struct{} `type:"structure"`
 
+	// Optional parameters that let you set the criteria that the text must meet
+	// to be included in your response.
+	Filters *DetectTextFilters `type:"structure"`
+
 	// The input image as base64-encoded bytes or an Amazon S3 object. If you use
 	// the AWS CLI to call Amazon Rekognition operations, you can't pass image bytes.
 	//
@@ -52,6 +56,9 @@ type DetectTextOutput struct {
 
 	// An array of text that was detected in the input image.
 	TextDetections []TextDetection `type:"list"`
+
+	// The model version used to detect text.
+	TextModelVersion *string `type:"string"`
 }
 
 // String returns the string representation

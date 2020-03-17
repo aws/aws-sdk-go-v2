@@ -16,15 +16,15 @@ type CreateReplicationInstanceInput struct {
 	// instance.
 	AllocatedStorage *int64 `type:"integer"`
 
-	// Indicates whether minor engine upgrades will be applied automatically to
-	// the replication instance during the maintenance window. This parameter defaults
-	// to true.
+	// A value that indicates whether minor engine upgrades are applied automatically
+	// to the replication instance during the maintenance window. This parameter
+	// defaults to true.
 	//
 	// Default: true
 	AutoMinorVersionUpgrade *bool `type:"boolean"`
 
-	// The AWS Availability Zone where the replication instance will be created.
-	// The default value is a random, system-chosen Availability Zone in the endpoint's
+	// The Availability Zone where the replication instance will be created. The
+	// default value is a random, system-chosen Availability Zone in the endpoint's
 	// AWS Region, for example: us-east-1d
 	AvailabilityZone *string `type:"string"`
 
@@ -45,7 +45,7 @@ type CreateReplicationInstanceInput struct {
 	KmsKeyId *string `type:"string"`
 
 	// Specifies whether the replication instance is a Multi-AZ deployment. You
-	// cannot set the AvailabilityZone parameter if the Multi-AZ parameter is set
+	// can't set the AvailabilityZone parameter if the Multi-AZ parameter is set
 	// to true.
 	MultiAZ *bool `type:"boolean"`
 
@@ -85,7 +85,7 @@ type CreateReplicationInstanceInput struct {
 	//
 	//    * First character must be a letter.
 	//
-	//    * Cannot end with a hyphen or contain two consecutive hyphens.
+	//    * Can't end with a hyphen or contain two consecutive hyphens.
 	//
 	// Example: myrepinstance
 	//

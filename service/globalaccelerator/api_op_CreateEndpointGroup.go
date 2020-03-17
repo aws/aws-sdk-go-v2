@@ -43,7 +43,7 @@ type CreateEndpointGroupInput struct {
 	// is, the uniqueness—of the request.
 	//
 	// IdempotencyToken is a required field
-	IdempotencyToken *string `type:"string" required:"true"`
+	IdempotencyToken *string `type:"string" required:"true" idempotencyToken:"true"`
 
 	// The Amazon Resource Name (ARN) of the listener.
 	//

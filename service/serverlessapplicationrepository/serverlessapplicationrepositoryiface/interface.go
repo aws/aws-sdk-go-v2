@@ -85,6 +85,8 @@ type ClientAPI interface {
 
 	PutApplicationPolicyRequest(*serverlessapplicationrepository.PutApplicationPolicyInput) serverlessapplicationrepository.PutApplicationPolicyRequest
 
+	UnshareApplicationRequest(*serverlessapplicationrepository.UnshareApplicationInput) serverlessapplicationrepository.UnshareApplicationRequest
+
 	UpdateApplicationRequest(*serverlessapplicationrepository.UpdateApplicationInput) serverlessapplicationrepository.UpdateApplicationRequest
 }
 

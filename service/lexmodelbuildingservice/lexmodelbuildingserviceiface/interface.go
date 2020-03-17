@@ -123,6 +123,8 @@ type ClientAPI interface {
 
 	GetUtterancesViewRequest(*lexmodelbuildingservice.GetUtterancesViewInput) lexmodelbuildingservice.GetUtterancesViewRequest
 
+	ListTagsForResourceRequest(*lexmodelbuildingservice.ListTagsForResourceInput) lexmodelbuildingservice.ListTagsForResourceRequest
+
 	PutBotRequest(*lexmodelbuildingservice.PutBotInput) lexmodelbuildingservice.PutBotRequest
 
 	PutBotAliasRequest(*lexmodelbuildingservice.PutBotAliasInput) lexmodelbuildingservice.PutBotAliasRequest
@@ -132,6 +134,10 @@ type ClientAPI interface {
 	PutSlotTypeRequest(*lexmodelbuildingservice.PutSlotTypeInput) lexmodelbuildingservice.PutSlotTypeRequest
 
 	StartImportRequest(*lexmodelbuildingservice.StartImportInput) lexmodelbuildingservice.StartImportRequest
+
+	TagResourceRequest(*lexmodelbuildingservice.TagResourceInput) lexmodelbuildingservice.TagResourceRequest
+
+	UntagResourceRequest(*lexmodelbuildingservice.UntagResourceInput) lexmodelbuildingservice.UntagResourceRequest
 }
 
 var _ ClientAPI = (*lexmodelbuildingservice.Client)(nil)

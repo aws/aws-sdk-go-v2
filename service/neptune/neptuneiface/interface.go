@@ -178,6 +178,10 @@ type ClientAPI interface {
 
 	RestoreDBClusterToPointInTimeRequest(*neptune.RestoreDBClusterToPointInTimeInput) neptune.RestoreDBClusterToPointInTimeRequest
 
+	StartDBClusterRequest(*neptune.StartDBClusterInput) neptune.StartDBClusterRequest
+
+	StopDBClusterRequest(*neptune.StopDBClusterInput) neptune.StopDBClusterRequest
+
 	WaitUntilDBInstanceAvailable(context.Context, *neptune.DescribeDBInstancesInput, ...aws.WaiterOption) error
 
 	WaitUntilDBInstanceDeleted(context.Context, *neptune.DescribeDBInstancesInput, ...aws.WaiterOption) error

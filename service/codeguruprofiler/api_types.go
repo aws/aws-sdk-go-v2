@@ -13,18 +13,12 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// The configuration for the agent to use.
 type AgentConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the period to follow the configuration (to profile or not) and
-	// call back to get a new configuration.
-	//
 	// PeriodInSeconds is a required field
 	PeriodInSeconds *int64 `locationName:"periodInSeconds" type:"integer" required:"true"`
 
-	// Specifies if the profiling should be enabled by the agent.
-	//
 	// ShouldProfile is a required field
 	ShouldProfile *bool `locationName:"shouldProfile" type:"boolean" required:"true"`
 }
@@ -51,14 +45,9 @@ func (s AgentConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Configuration to orchestrate agents to create and report agent profiles of
-// the profiling group. Agents are orchestrated if they follow the agent orchestration
-// protocol.
 type AgentOrchestrationConfig struct {
 	_ struct{} `type:"structure"`
 
-	// If the agents should be enabled to create and report profiles.
-	//
 	// ProfilingEnabled is a required field
 	ProfilingEnabled *bool `locationName:"profilingEnabled" type:"boolean" required:"true"`
 }
@@ -93,14 +82,14 @@ func (s AgentOrchestrationConfig) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The time range of an aggregated profile.
+// Information about the time range of the latest available aggregated profile.
 type AggregatedProfileTime struct {
 	_ struct{} `type:"structure"`
 
-	// The aggregation period of the aggregated profile.
+	// The time period.
 	Period AggregationPeriod `locationName:"period" type:"string" enum:"true"`
 
-	// The start time of the aggregated profile.
+	// The start time.
 	Start *time.Time `locationName:"start" type:"timestamp" timestampFormat:"iso8601"`
 }
 
@@ -127,8 +116,7 @@ func (s AggregatedProfileTime) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Periods of time used for aggregation of profiles, represented using ISO 8601
-// format.
+// Information about the profile time.
 type ProfileTime struct {
 	_ struct{} `type:"structure"`
 
@@ -157,24 +145,22 @@ func (s ProfileTime) MarshalFields(e protocol.FieldEncoder) error {
 type ProfilingGroupDescription struct {
 	_ struct{} `type:"structure"`
 
-	// Configuration to orchestrate agents to create and report agent profiles of
-	// the profiling group. Agents are orchestrated if they follow the agent orchestration
-	// protocol.
 	AgentOrchestrationConfig *AgentOrchestrationConfig `locationName:"agentOrchestrationConfig" type:"structure"`
 
-	// The ARN of the profiling group.
+	// The Amazon Resource Name (ARN) identifying the profiling group.
 	Arn *string `locationName:"arn" type:"string"`
 
-	// The timestamp of when the profiling group was created.
+	// The time, in milliseconds since the epoch, when the profiling group was created.
 	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The name of the profiling group.
 	Name *string `locationName:"name" min:"1" type:"string"`
 
-	// The status of profiling of a profiling group.
+	// The status of the profiling group.
 	ProfilingStatus *ProfilingStatus `locationName:"profilingStatus" type:"structure"`
 
-	// The timestamp of when the profiling group was last updated.
+	// The time, in milliseconds since the epoch, when the profiling group was last
+	// updated.
 	UpdatedAt *time.Time `locationName:"updatedAt" type:"timestamp" timestampFormat:"iso8601"`
 }
 
@@ -226,18 +212,17 @@ func (s ProfilingGroupDescription) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// The status of profiling of a profiling group.
+// Information about the profiling status.
 type ProfilingStatus struct {
 	_ struct{} `type:"structure"`
 
-	// Timestamp of when the last interaction of the agent with configureAgent API
-	// for orchestration.
+	// The time, in milliseconds since the epoch, when the latest agent was orchestrated.
 	LatestAgentOrchestratedAt *time.Time `locationName:"latestAgentOrchestratedAt" type:"timestamp" timestampFormat:"iso8601"`
 
-	// Timestamp of when the latest agent profile was successfully reported.
+	// The time, in milliseconds since the epoch, when the latest agent was reported..
 	LatestAgentProfileReportedAt *time.Time `locationName:"latestAgentProfileReportedAt" type:"timestamp" timestampFormat:"iso8601"`
 
-	// The time range of latest aggregated profile available.
+	// The latest aggregated profile
 	LatestAggregatedProfile *AggregatedProfileTime `locationName:"latestAggregatedProfile" type:"structure"`
 }
 

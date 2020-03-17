@@ -17,12 +17,9 @@ type DisassociateWebACLInput struct {
 	//
 	// The ARN must be in one of the following formats:
 	//
-	//    * For a CloudFront distribution: arn:aws:cloudfront::account-id:distribution/distribution-id
+	//    * For an Application Load Balancer: arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
 	//
-	//    * For an Application Load Balancer: arn:aws:elasticloadbalancing: region:account-id:loadbalancer/app/load-balancer-name
-	//    /load-balancer-id
-	//
-	//    * For an Amazon API Gateway stage: arn:aws:apigateway:region ::/restapis/api-id/stages/stage-name
+	//    * For an Amazon API Gateway stage: arn:aws:apigateway:region::/restapis/api-id/stages/stage-name
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `min:"20" type:"string" required:"true"`
@@ -73,7 +70,7 @@ const opDisassociateWebACL = "DisassociateWebACL"
 // application can be an Application Load Balancer (ALB) or an API Gateway stage.
 //
 // For AWS CloudFront, you can disassociate the Web ACL by providing an empty
-// WebACLId in the CloudFront API call UpdateDistribution. For information,
+// web ACL ARN in the CloudFront API call UpdateDistribution. For information,
 // see UpdateDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html).
 //
 //    // Example sending a request using DisassociateWebACLRequest.

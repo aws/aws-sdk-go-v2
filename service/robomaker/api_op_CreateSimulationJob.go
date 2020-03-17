@@ -19,7 +19,8 @@ type CreateSimulationJobInput struct {
 	// of the request.
 	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string" idempotencyToken:"true"`
 
-	// The data sources for the simulation job.
+	// Specify data sources to mount read-only files from S3 into your simulation.
+	// These files are available under /opt/robomaker/datasources/data_source_name.
 	//
 	// There is a limit of 100 files and a combined size of 25GB for all DataSourceConfig
 	// objects.

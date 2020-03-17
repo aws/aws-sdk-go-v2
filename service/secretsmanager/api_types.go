@@ -91,9 +91,10 @@ type SecretListEntry struct {
 	// in the folder prod.
 	Name *string `min:"1" type:"string"`
 
+	// Returns the name of the service that created the secret.
 	OwningService *string `min:"1" type:"string"`
 
-	// Indicated whether automatic, scheduled rotation is enabled for this secret.
+	// Indicates whether automatic, scheduled rotation is enabled for this secret.
 	RotationEnabled *bool `type:"boolean"`
 
 	// The ARN of an AWS Lambda function that's invoked by Secrets Manager to rotate

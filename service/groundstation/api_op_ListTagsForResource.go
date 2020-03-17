@@ -13,6 +13,8 @@ import (
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
+	// ARN of a resource.
+	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`
 }
@@ -52,6 +54,7 @@ func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Tags assigned to a resource.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
@@ -82,7 +85,7 @@ const opListTagsForResource = "ListTagsForResource"
 // ListTagsForResourceRequest returns a request value for making API operation for
 // AWS Ground Station.
 //
-// Returns a list of tags or a specified resource.
+// Returns a list of tags for a specified resource.
 //
 //    // Example sending a request using ListTagsForResourceRequest.
 //    req := client.ListTagsForResourceRequest(params)

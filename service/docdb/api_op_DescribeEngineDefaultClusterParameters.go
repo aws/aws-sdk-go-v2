@@ -14,7 +14,7 @@ import (
 type DescribeEngineDefaultClusterParametersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the DB cluster parameter group family to return the engine parameter
+	// The name of the cluster parameter group family to return the engine parameter
 	// information for.
 	//
 	// DBParameterGroupFamily is a required field

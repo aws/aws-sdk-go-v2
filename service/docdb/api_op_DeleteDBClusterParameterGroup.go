@@ -15,15 +15,15 @@ import (
 type DeleteDBClusterParameterGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the DB cluster parameter group.
+	// The name of the cluster parameter group.
 	//
 	// Constraints:
 	//
-	//    * Must be the name of an existing DB cluster parameter group.
+	//    * Must be the name of an existing cluster parameter group.
 	//
-	//    * You can't delete a default DB cluster parameter group.
+	//    * You can't delete a default cluster parameter group.
 	//
-	//    * Cannot be associated with any DB clusters.
+	//    * Cannot be associated with any clusters.
 	//
 	// DBClusterParameterGroupName is a required field
 	DBClusterParameterGroupName *string `type:"string" required:"true"`
@@ -62,8 +62,8 @@ const opDeleteDBClusterParameterGroup = "DeleteDBClusterParameterGroup"
 // DeleteDBClusterParameterGroupRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Deletes a specified DB cluster parameter group. The DB cluster parameter
-// group to be deleted can't be associated with any DB clusters.
+// Deletes a specified cluster parameter group. The cluster parameter group
+// to be deleted can't be associated with any clusters.
 //
 //    // Example sending a request using DeleteDBClusterParameterGroupRequest.
 //    req := client.DeleteDBClusterParameterGroupRequest(params)
