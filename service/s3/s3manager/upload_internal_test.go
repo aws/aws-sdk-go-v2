@@ -174,10 +174,9 @@ func TestUploadByteSlicePool_Failures(t *testing.T) {
 						}
 
 						if r.Operation.Name == operation {
-							r.Retryable = aws.Bool(false)
 							r.Error = fmt.Errorf("request error")
 							r.HTTPResponse = &http.Response{
-								StatusCode: 500,
+								StatusCode: 400,
 								Body:       ioutil.NopCloser(bytes.NewReader([]byte{})),
 							}
 							return
