@@ -116,13 +116,11 @@ func (p *SafeCredentialsProvider) singleRetrieve() (interface{}, error) {
 	}
 
 	creds, err := p.RetrieveFn()
-
-	if err != nil {
-		return Credentials{}, err
+	if err == nil {
+		p.creds.Store(&creds)
 	}
-	p.creds.Store(&creds)
 
-	return creds, nil
+	return creds, err
 }
 
 func (p *SafeCredentialsProvider) getCreds() *Credentials {
