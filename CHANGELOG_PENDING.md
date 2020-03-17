@@ -31,6 +31,8 @@ SDK Features
 
 SDK Enhancements
 ---
+* `aws`: Add grouping of concurrent refresh of credentials ([#503](https://github.com/aws/aws-sdk-go-v2/pull/503)
+  * Concurrent calls to `Retrieve` are now grouped in order to prevent numerous synchronous calls to refresh the credentials. Replacing the mutex with a singleflight reduces the overall amount of time request signatures need to wait while retrieving credentials. This is improvement becomes pronounced when many requests are made concurrently.
 * `service/s3/s3manager`: Improve memory allocation behavior by replacing sync.Pool with custom pool implementation
   * Improves memory allocations that occur when the provided `io.Reader` to upload does not satisfy both the `io.ReaderAt` and `io.ReadSeeker` interfaces.
 

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math/rand"
 	"sync"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -42,7 +43,7 @@ func TestSafeCredentialsProvider_Cache(t *testing.T) {
 
 	var called bool
 	p := &SafeCredentialsProvider{
-		RetrieveFn: func(ctx context.Context) (Credentials, error) {
+		RetrieveFn: func() (Credentials, error) {
 			if called {
 				t.Fatalf("expect RetrieveFn to only be called once")
 			}
@@ -108,7 +109,7 @@ func TestSafeCredentialsProvider_Expires(t *testing.T) {
 	for _, c := range cases {
 		var called int
 		p := &SafeCredentialsProvider{
-			RetrieveFn: func(ctx context.Context) (Credentials, error) {
+			RetrieveFn: func() (Credentials, error) {
 				called++
 				return c.Creds(), nil
 			},
@@ -132,7 +133,7 @@ func TestSafeCredentialsProvider_Expires(t *testing.T) {
 
 func TestSafeCredentialsProvider_Error(t *testing.T) {
 	p := &SafeCredentialsProvider{
-		RetrieveFn: func(ctx context.Context) (Credentials, error) {
+		RetrieveFn: func() (Credentials, error) {
 			return Credentials{}, fmt.Errorf("failed")
 		},
 	}
@@ -156,7 +157,7 @@ func TestSafeCredentialsProvider_Race(t *testing.T) {
 	}
 	var called bool
 	p := &SafeCredentialsProvider{
-		RetrieveFn: func(ctx context.Context) (Credentials, error) {
+		RetrieveFn: func() (Credentials, error) {
 			time.Sleep(time.Duration(rand.Intn(10)) * time.Millisecond)
 			if called {
 				t.Fatalf("expect RetrieveFn only called once")
@@ -185,4 +186,42 @@ func TestSafeCredentialsProvider_Race(t *testing.T) {
 	}
 
 	wg.Wait()
+}
+
+type stubSafeProviderConcurrent struct {
+	SafeCredentialsProvider
+	called uint32
+	done   chan struct{}
+}
+
+func TestSafeProviderRetrieveConcurrent(t *testing.T) {
+	stub := &stubSafeProviderConcurrent{
+		done: make(chan struct{}),
+	}
+
+	stub.RetrieveFn = func() (Credentials, error) {
+		atomic.AddUint32(&stub.called, 1)
+		<-stub.done
+		return Credentials{
+			AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+			SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+		}, nil
+	}
+
+	done := make(chan struct{})
+	for i := 0; i < 2; i++ {
+		go func() {
+			stub.Retrieve(context.Background())
+			done <- struct{}{}
+		}()
+	}
+
+	// Validates that a single call to Retrieve is shared between two calls to Get
+	stub.done <- struct{}{}
+	<-done
+	<-done
+
+	if e, a := uint32(1), atomic.LoadUint32(&stub.called); e != a {
+		t.Errorf("expected %v, got %v", e, a)
+	}
 }

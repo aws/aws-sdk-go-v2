@@ -10,7 +10,7 @@ import (
 )
 
 func BenchmarkSafeCredentialsProvider_Retrieve(b *testing.B) {
-	retrieveFn := func(ctx context.Context) (Credentials, error) {
+	retrieveFn := func() (Credentials, error) {
 		return Credentials{
 			AccessKeyID:     "key",
 			SecretAccessKey: "secret",
@@ -45,7 +45,7 @@ func BenchmarkSafeCredentialsProvider_Retrieve(b *testing.B) {
 }
 
 func BenchmarkSafeCredentialsProvider_Retrieve_Invalidate(b *testing.B) {
-	retrieveFn := func(ctx context.Context) (Credentials, error) {
+	retrieveFn := func() (Credentials, error) {
 		time.Sleep(time.Millisecond)
 		return Credentials{
 			AccessKeyID:     "key",
