@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/iotdataplane"
@@ -26,12 +25,9 @@ func TestRequireEndpointIfRegionProvided(t *testing.T) {
 	if err == nil {
 		t.Errorf("expect error, got none")
 	}
-	var awsErr awserr.Error
-	if !errors.As(err, &awsErr) {
-		t.Fatalf("expected awserr.Error, got %T", err)
-	}
-	if e, a := aws.ErrCodeMissingEndpoint, awsErr.Code(); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+	var expected aws.MissingEndpointError
+	if !errors.As(err, &expected) {
+		t.Fatalf("expected %T, got %T", expected, err)
 	}
 }
 
@@ -51,12 +47,9 @@ func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
 	if err == nil {
 		t.Errorf("expect error, got none")
 	}
-	var awsErr awserr.Error
-	if !errors.As(err, &awsErr) {
-		t.Fatalf("expected awserr.Error, got %T", err)
-	}
-	if e, a := aws.ErrCodeMissingEndpoint, awsErr.Code(); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+	var expected aws.MissingEndpointError
+	if !errors.As(err, &expected) {
+		t.Fatalf("expected %T, got %T", expected, err)
 	}
 }
 

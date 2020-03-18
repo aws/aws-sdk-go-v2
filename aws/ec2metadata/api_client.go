@@ -234,6 +234,6 @@ func unmarshalError(r *aws.Request) {
 
 func validateEndpointHandler(r *aws.Request) {
 	if len(r.Endpoint.URL) == 0 {
-		r.Error = awserr.New(aws.ErrCodeMissingEndpoint, "'Endpoint' configuration is required for this service", nil)
+		r.Error = aws.MissingEndpointError{}
 	}
 }
