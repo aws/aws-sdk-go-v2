@@ -1,9 +1,11 @@
 package cloudsearchdomain_test
 
 import (
+	"errors"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain"
@@ -25,8 +27,12 @@ func TestRequireEndpointIfRegionProvided(t *testing.T) {
 	if err == nil {
 		t.Errorf("expect error, got none")
 	}
-	if e, a := aws.ErrMissingEndpoint, err; e != a {
-		t.Errorf("expect %v, got %v", e, a)
+	var awsErr awserr.Error
+	if !errors.As(err, &awsErr) {
+		t.Fatalf("expected awserr.Error, got %T", err)
+	}
+	if e, a := aws.ErrCodeMissingEndpoint, awsErr.Code(); e != a {
+		t.Errorf("expect %v to be %v", e, a)
 	}
 }
 
@@ -45,8 +51,12 @@ func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
 	if err == nil {
 		t.Errorf("expect error, got none")
 	}
-	if e, a := aws.ErrMissingEndpoint, err; e != a {
-		t.Errorf("expect %v, got %v", e, a)
+	var awsErr awserr.Error
+	if !errors.As(err, &awsErr) {
+		t.Fatalf("expected awserr.Error, got %T", err)
+	}
+	if e, a := aws.ErrCodeMissingEndpoint, awsErr.Code(); e != a {
+		t.Errorf("expect %v to be %v", e, a)
 	}
 }
 

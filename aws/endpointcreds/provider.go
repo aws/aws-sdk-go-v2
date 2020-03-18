@@ -150,7 +150,7 @@ func (p *Provider) getCredentials() (*getCredentialsOutput, error) {
 
 func validateEndpointHandler(r *aws.Request) {
 	if len(r.Endpoint.URL) == 0 {
-		r.Error = aws.ErrMissingEndpoint
+		r.Error = awserr.New(aws.ErrCodeMissingEndpoint, "'Endpoint' configuration is required for this service", nil)
 	}
 }
 

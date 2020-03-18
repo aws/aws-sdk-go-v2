@@ -269,9 +269,9 @@ var RetryableCheckHandler = aws.NamedHandler{
 // region is not valid.
 var ValidateEndpointHandler = aws.NamedHandler{Name: "core.ValidateEndpointHandler", Fn: func(r *aws.Request) {
 	if r.Endpoint.SigningRegion == "" && r.Config.Region == "" {
-		r.Error = aws.ErrMissingRegion
+		r.Error = awserr.New(aws.ErrCodeMissingRegion, "could not find region configuration", nil)
 	} else if len(r.Endpoint.URL) == 0 {
-		r.Error = aws.ErrMissingEndpoint
+		r.Error = awserr.New(aws.ErrCodeMissingEndpoint, "'Endpoint' configuration is required for this service", nil)
 	}
 }}
 

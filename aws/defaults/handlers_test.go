@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
@@ -56,7 +57,11 @@ func TestValidateEndpointHandlerErrorRegion(t *testing.T) {
 	if err == nil {
 		t.Errorf("expect error, got none")
 	}
-	if e, a := aws.ErrMissingRegion, err; e != a {
+	var awsErr awserr.Error
+	if !errors.As(err, &awsErr) {
+		t.Fatalf("expected awserr.Error, got %T", err)
+	}
+	if e, a := aws.ErrCodeMissingRegion, awsErr.Code(); e != a {
 		t.Errorf("expect %v to be %v", e, a)
 	}
 }
