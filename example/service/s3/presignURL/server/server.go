@@ -15,7 +15,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
@@ -54,7 +53,7 @@ func main() {
 	// to look in those partitions instead of AWS.
 	if len(region) == 0 {
 		var err error
-		region, err = s3manager.GetBucketRegion(context.Background(), cfg, bucket, endpoints.UsWest2RegionID)
+		region, err = s3manager.GetBucketRegion(context.Background(), cfg, bucket, "us-west-2")
 		if err != nil {
 			exitErrorf("failed to get bucket region, %v", err)
 		}

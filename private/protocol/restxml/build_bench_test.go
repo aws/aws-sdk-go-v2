@@ -1,16 +1,14 @@
 package restxml_test
 
 import (
+	"bytes"
+	"encoding/xml"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"testing"
 
-	"bytes"
-	"encoding/xml"
-
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront"
@@ -30,7 +28,7 @@ func TestMain(m *testing.M) {
 	cfg := unit.Config()
 
 	cfg.Credentials = aws.NewStaticCredentialsProvider("Key", "Secret", "Token")
-	cfg.Region = endpoints.UsWest2RegionID
+	cfg.Region = "us-west-2"
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 
 	cloudfrontSvc = cloudfront.New(cfg)
