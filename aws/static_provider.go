@@ -6,12 +6,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 )
 
-// StaticCredentialsProviderName provides a name of Static provider
-const StaticCredentialsProviderName = "StaticCredentialsProvider"
+const (
+	// StaticCredentialsProviderName provides a name of Static provider
+	StaticCredentialsProviderName = "StaticCredentialsProvider"
 
-var (
-	// ErrStaticCredentialsEmpty is emitted when static credentials are empty.
-	ErrStaticCredentialsEmpty = awserr.New("EmptyStaticCreds", "static credentials are empty", nil)
+	// ErrCodeStaticCredentialsEmpty is emitted when static credentials are empty.
+	ErrCodeStaticCredentialsEmpty = "EmptyStaticCreds"
 )
 
 // A StaticCredentialsProvider is a set of credentials which are set programmatically,
@@ -36,7 +36,7 @@ func NewStaticCredentialsProvider(key, secret, session string) StaticCredentials
 func (s StaticCredentialsProvider) Retrieve(ctx context.Context) (Credentials, error) {
 	v := s.Value
 	if v.AccessKeyID == "" || v.SecretAccessKey == "" {
-		return Credentials{Source: StaticCredentialsProviderName}, ErrStaticCredentialsEmpty
+		return Credentials{Source: StaticCredentialsProviderName}, awserr.New(ErrCodeStaticCredentialsEmpty, "static credentials are empty", nil)
 	}
 
 	if len(v.Source) == 0 {
