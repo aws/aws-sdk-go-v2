@@ -12,7 +12,7 @@ const (
 // StaticCredentialsEmptyError is emitted when static credentials are empty.
 type StaticCredentialsEmptyError struct{}
 
-func (StaticCredentialsEmptyError) Error() string {
+func (*StaticCredentialsEmptyError) Error() string {
 	return "static credentials are empty"
 }
 
@@ -38,7 +38,7 @@ func NewStaticCredentialsProvider(key, secret, session string) StaticCredentials
 func (s StaticCredentialsProvider) Retrieve(_ context.Context) (Credentials, error) {
 	v := s.Value
 	if v.AccessKeyID == "" || v.SecretAccessKey == "" {
-		return Credentials{Source: StaticCredentialsProviderName}, StaticCredentialsEmptyError{}
+		return Credentials{Source: StaticCredentialsProviderName}, &StaticCredentialsEmptyError{}
 	}
 
 	if len(v.Source) == 0 {

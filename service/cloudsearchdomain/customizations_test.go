@@ -26,7 +26,7 @@ func TestRequireEndpointIfRegionProvided(t *testing.T) {
 	if err == nil {
 		t.Errorf("expect error, got none")
 	}
-	var expected aws.MissingEndpointError
+	var expected *aws.MissingEndpointError
 	if !errors.As(err, &expected) {
 		t.Fatalf("expected %T, got %T", expected, err)
 	}
@@ -47,7 +47,7 @@ func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
 	if err == nil {
 		t.Errorf("expect error, got none")
 	}
-	var expected aws.MissingEndpointError
+	var expected *aws.MissingEndpointError
 	if !errors.As(err, &expected) {
 		t.Fatalf("expected %T, got %T", expected, err)
 	}

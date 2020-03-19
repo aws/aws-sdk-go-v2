@@ -56,7 +56,7 @@ func TestValidateEndpointHandlerErrorRegion(t *testing.T) {
 	if err == nil {
 		t.Errorf("expect error, got none")
 	}
-	var expected aws.MissingRegionError
+	var expected *aws.MissingRegionError
 	if !errors.As(err, &expected) {
 		t.Fatalf("expected %T, got %T", expected, err)
 	}
