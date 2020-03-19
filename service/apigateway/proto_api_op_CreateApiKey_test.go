@@ -1,7 +1,6 @@
 package apigateway_test
 
 import (
-	"bytes"
 	"context"
 	"net/http"
 	"net/http/httptest"
@@ -20,11 +19,11 @@ func TestProtoCreateApiKeyRequestUnmarshaler_Diff(t *testing.T) {
 		w.Write([]byte(`{
 	"customerId": "mock customer id",
 	"Name": "mock name",
-	"createDate": "2006-01-02T15:04:05Z",
+	"createdDate": 1494359783.453,
 	"description": "mock operation description",
 	"enabled": true,
 	"id": "mockid",
-	"lastUpdatedDate": "2006-01-02T15:04:05Z",
+	"lastUpdatedDate": 1494359783.453,
 	"stageKeys": ["mock stage key"],
 	"tags": {
 		"a": "1",
@@ -58,7 +57,7 @@ func TestProtoCreateApiKeyRequestUnmarshaler_Diff(t *testing.T) {
 		t.Error(err)
 	}
 
-	if diff := cmp.Diff(expectedResponse.CreateApiKeyOutput, prototypeResponse.CreateApiKeyOutput, cmp.AllowUnexported(bytes.Reader{})); diff != "" {
+	if diff := cmp.Diff(expectedResponse.CreateApiKeyOutput, prototypeResponse.CreateApiKeyOutput); diff != "" {
 		t.Errorf("Found diff: %v", diff)
 	}
 }

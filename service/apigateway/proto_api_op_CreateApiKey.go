@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
 const protoOpCreateAPIKey = "CreateApiKey"
@@ -37,7 +37,7 @@ func (c *Client) ProtoCreateAPIKeyRequest(input *CreateApiKeyInput) ProtoCreateA
 
 	req := c.newRequest(op, input, output)
 	// swap existing build handler on svc, with a new named build handler
-	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protoCreateAPIKeyUnmarshaler{output: output}.namedHandler())
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protoCreateAPIKeyUnmarshaler{output: output}.namedHandler())
 	return ProtoCreateAPIKeyRequest{Request: req, Input: input, Copy: c.ProtoCreateAPIKeyRequest}
 }
 
