@@ -269,9 +269,9 @@ var RetryableCheckHandler = aws.NamedHandler{
 // region is not valid.
 var ValidateEndpointHandler = aws.NamedHandler{Name: "core.ValidateEndpointHandler", Fn: func(r *aws.Request) {
 	if r.Endpoint.SigningRegion == "" && r.Config.Region == "" {
-		r.Error = aws.ErrMissingRegion
+		r.Error = &aws.MissingRegionError{}
 	} else if len(r.Endpoint.URL) == 0 {
-		r.Error = aws.ErrMissingEndpoint
+		r.Error = &aws.MissingEndpointError{}
 	}
 }}
 
