@@ -6,78 +6,12 @@ import (
 	"regexp"
 )
 
-// Partition identifiers
-const (
-	AwsPartitionID      = "aws"        // AWS Standard partition.
-	AwsCnPartitionID    = "aws-cn"     // AWS China partition.
-	AwsUsGovPartitionID = "aws-us-gov" // AWS GovCloud (US) partition.
-	AwsIsoPartitionID   = "aws-iso"    // AWS ISO (US) partition.
-	AwsIsoBPartitionID  = "aws-iso-b"  // AWS ISOB (US) partition.
-)
-
-// AWS Standard partition's regions.
-const (
-	ApEast1RegionID      = "ap-east-1"      // Asia Pacific (Hong Kong).
-	ApNortheast1RegionID = "ap-northeast-1" // Asia Pacific (Tokyo).
-	ApNortheast2RegionID = "ap-northeast-2" // Asia Pacific (Seoul).
-	ApSouth1RegionID     = "ap-south-1"     // Asia Pacific (Mumbai).
-	ApSoutheast1RegionID = "ap-southeast-1" // Asia Pacific (Singapore).
-	ApSoutheast2RegionID = "ap-southeast-2" // Asia Pacific (Sydney).
-	CaCentral1RegionID   = "ca-central-1"   // Canada (Central).
-	EuCentral1RegionID   = "eu-central-1"   // EU (Frankfurt).
-	EuNorth1RegionID     = "eu-north-1"     // EU (Stockholm).
-	EuWest1RegionID      = "eu-west-1"      // EU (Ireland).
-	EuWest2RegionID      = "eu-west-2"      // EU (London).
-	EuWest3RegionID      = "eu-west-3"      // EU (Paris).
-	MeSouth1RegionID     = "me-south-1"     // Middle East (Bahrain).
-	SaEast1RegionID      = "sa-east-1"      // South America (Sao Paulo).
-	UsEast1RegionID      = "us-east-1"      // US East (N. Virginia).
-	UsEast2RegionID      = "us-east-2"      // US East (Ohio).
-	UsWest1RegionID      = "us-west-1"      // US West (N. California).
-	UsWest2RegionID      = "us-west-2"      // US West (Oregon).
-)
-
-// AWS China partition's regions.
-const (
-	CnNorth1RegionID     = "cn-north-1"     // China (Beijing).
-	CnNorthwest1RegionID = "cn-northwest-1" // China (Ningxia).
-)
-
-// AWS GovCloud (US) partition's regions.
-const (
-	UsGovEast1RegionID = "us-gov-east-1" // AWS GovCloud (US-East).
-	UsGovWest1RegionID = "us-gov-west-1" // AWS GovCloud (US).
-)
-
-// AWS ISO (US) partition's regions.
-const (
-	UsIsoEast1RegionID = "us-iso-east-1" // US ISO East.
-)
-
-// AWS ISOB (US) partition's regions.
-const (
-	UsIsobEast1RegionID = "us-isob-east-1" // US ISOB East (Ohio).
-)
-
 // NewDefaultResolver returns an Endpoint resolver that will be able
 // to resolve endpoints for: AWS Standard, AWS China, AWS GovCloud (US), AWS ISO (US), and AWS ISOB (US).
-//
-// Use DefaultPartitions() to get the list of the default partitions.
 func NewDefaultResolver() *Resolver {
 	return &Resolver{
 		partitions: defaultPartitions,
 	}
-}
-
-// DefaultPartitions returns a list of the partitions the SDK is bundled
-// with. The available partitions are: AWS Standard, AWS China, AWS GovCloud (US), AWS ISO (US), and AWS ISOB (US).
-//
-//    partitions := endpoints.DefaultPartitions
-//    for _, p := range partitions {
-//        // ... inspect partitions
-//    }
-func DefaultPartitions() Partitions {
-	return defaultPartitions.Partitions()
 }
 
 var defaultPartitions = partitions{
@@ -86,11 +20,6 @@ var defaultPartitions = partitions{
 	awsusgovPartition,
 	awsisoPartition,
 	awsisobPartition,
-}
-
-// AwsPartition returns the Resolver for AWS Standard.
-func AwsPartition() Partition {
-	return awsPartition.Partition()
 }
 
 var awsPartition = partition{
@@ -4568,12 +4497,6 @@ var awsPartition = partition{
 		},
 	},
 }
-
-// AwsCnPartition returns the Resolver for AWS China.
-func AwsCnPartition() Partition {
-	return awscnPartition.Partition()
-}
-
 var awscnPartition = partition{
 	ID:        "aws-cn",
 	Name:      "AWS China",
@@ -5192,12 +5115,6 @@ var awscnPartition = partition{
 		},
 	},
 }
-
-// AwsUsGovPartition returns the Resolver for AWS GovCloud (US).
-func AwsUsGovPartition() Partition {
-	return awsusgovPartition.Partition()
-}
-
 var awsusgovPartition = partition{
 	ID:        "aws-us-gov",
 	Name:      "AWS GovCloud (US)",
@@ -6127,12 +6044,6 @@ var awsusgovPartition = partition{
 		},
 	},
 }
-
-// AwsIsoPartition returns the Resolver for AWS ISO (US).
-func AwsIsoPartition() Partition {
-	return awsisoPartition.Partition()
-}
-
 var awsisoPartition = partition{
 	ID:        "aws-iso",
 	Name:      "AWS ISO (US)",
@@ -6488,12 +6399,6 @@ var awsisoPartition = partition{
 		},
 	},
 }
-
-// AwsIsoBPartition returns the Resolver for AWS ISOB (US).
-func AwsIsoBPartition() Partition {
-	return awsisobPartition.Partition()
-}
-
 var awsisobPartition = partition{
 	ID:        "aws-iso-b",
 	Name:      "AWS ISOB (US)",

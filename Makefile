@@ -27,7 +27,7 @@ all: generate unit
 ###################
 # Code Generation #
 ###################
-generate: cleanup-models gen-test gen-endpoints gen-services gen-external-asserts gen-tools
+generate: cleanup-models gen-test gen-endpoints gen-services gen-external-asserts
 
 gen-test: gen-protocol-test gen-codegen-test
 
@@ -54,9 +54,6 @@ gen-codegen-test:
 gen-external-asserts:
 	@echo "Generating SDK external package implementor assertions"
 	go generate ./aws/external
-
-gen-tools:
-	go generate -tags sdktool ./internal/awstesting/cmd/op_crawler/
 
 cleanup-models:
 	@echo "Cleaning up stale model versions"

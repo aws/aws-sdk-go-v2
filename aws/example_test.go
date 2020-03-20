@@ -25,7 +25,7 @@ func ExampleEndpointResolverFunc() {
 	}
 
 	cfg := defaults.Config()
-	cfg.Region = endpoints.UsWest2RegionID
+	cfg.Region = "us-west-2"
 	cfg.EndpointResolver = aws.EndpointResolverFunc(myCustomResolver)
 
 	// Create the S3 service client with the shared config. This will
