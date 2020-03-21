@@ -365,13 +365,13 @@ func unmarshalTagsMapShapeAWSJSON(dec *json.Decoder, output *map[string]string, 
 					fmt.Sprintf("failed to decode response body with invalid JSON. Here's a snapshot: %s",
 						getSnapshot(ringBuffer)), err)
 			}
-			if v, ok := val.(string); !ok {
+			if v, ok := val.(string); ok {
+				m := *output
+				m[key] = v
+			} else {
 				return awserr.New(aws.ErrCodeSerialization,
 					fmt.Sprintf("invalid json, expected string. Here's a snapshot: %s",
 						getSnapshot(ringBuffer)), err)
-			} else {
-				m := *output
-				m[key] = v
 			}
 		} else {
 			return awserr.New(aws.ErrCodeSerialization,
