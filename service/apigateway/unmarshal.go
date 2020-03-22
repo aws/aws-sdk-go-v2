@@ -27,26 +27,8 @@ func (u protoCreateAPIKeyUnmarshaler) unmarshalOperation(r *aws.Request) {
 	buff := make([]byte, 1024)
 	ringBuffer := sdkio.NewRingBuffer(buff)
 	if isRequestError(r) {
-		jsonErr := jsonErrorResponse{}
-		// wrap a TeeReader to read from response body & write on a ring buffer
-		body := io.TeeReader(r.HTTPResponse.Body, ringBuffer)
-		defer r.HTTPResponse.Body.Close()
-		// build a json decoder
-		decoder := json.NewDecoder(body)
-		// call json error unmarshaler
-		unmarshalErrorShapeAWSJSON(decoder, &jsonErr, ringBuffer)
-		// Get error code from Header error type
-		code := r.HTTPResponse.Header.Get(errorCodeHeader)
-		if code == "" {
-			code = jsonErr.Code
-		}
-
-		code = strings.SplitN(code, ":", 2)[0]
-		r.Error = awserr.NewRequestFailure(
-			awserr.New(code, jsonErr.Message, nil),
-			r.HTTPResponse.StatusCode,
-			r.RequestID,
-		)
+		// call error unmarshaler
+		r.Error = unmarshalErrorShapeAWSRESTJSON(r, ringBuffer)
 		return
 	}
 
@@ -413,10 +395,16 @@ func (u protoCreateAPIKeyUnmarshaler) namedHandler() aws.NamedHandler {
 	}
 }
 
-// unmarshalErrorShapeAWSJSON unmarshal's a json error response body for the REST JSON protocol..
+// unmarshalErrorShapeAWSRESTJSON unmarshal's a json error response body for the REST JSON protocol..
 // some service may have custom error handling
 // here we do not handle modelled exceptions.
-func unmarshalErrorShapeAWSJSON(decoder *json.Decoder, errorResponse *jsonErrorResponse, ringBuffer *sdkio.RingBuffer) error {
+func unmarshalErrorShapeAWSRESTJSON(r *aws.Request, ringBuffer *sdkio.RingBuffer) error {
+	errorResponse := jsonErrorResponse{}
+	// wrap a TeeReader to read from response body & write on a ring buffer
+	body := io.TeeReader(r.HTTPResponse.Body, ringBuffer)
+	defer r.HTTPResponse.Body.Close()
+	// build a json decoder
+	decoder := json.NewDecoder(body)
 	startToken, err := decoder.Token()
 	if err == io.EOF {
 		// "Empty error response body"
@@ -492,7 +480,18 @@ func unmarshalErrorShapeAWSJSON(decoder *json.Decoder, errorResponse *jsonErrorR
 				getSnapshot(ringBuffer)), err)
 	}
 
-	return nil
+	// Get error code from Header error type
+	code := r.HTTPResponse.Header.Get(errorCodeHeader)
+	if code == "" {
+		code = errorResponse.Code
+	}
+
+	code = strings.SplitN(code, ":", 2)[0]
+	return awserr.NewRequestFailure(
+		awserr.New(code, errorResponse.Message, nil),
+		r.HTTPResponse.StatusCode,
+		r.RequestID,
+	)
 }
 
 type jsonErrorResponse struct {
