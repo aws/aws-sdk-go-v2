@@ -36,22 +36,22 @@ func (u protoGetObjectUnmarshaler) unmarshalOperation(r *aws.Request) {
 		ringBuff := sdkio.NewRingBuffer(buff)
 		body := io.TeeReader(r.HTTPResponse.Body, ringBuff)
 		decoder := xml.NewDecoder(body)
-		startToken, err := decoder.Token()
-		if err != nil {
-			ringBuff.Read(readBuff)
-			r.Error = awserr.New(aws.ErrCodeSerialization, fmt.Sprintf("Failed to decode response body with invalid XML. Here's a snapshot : %v", readBuff), err)
-			return
-		}
 
-		if start, ok := startToken.(xml.StartElement); ok {
-			r.Error = unmarshalErrorPrototype(r, decoder, start, ringBuff)
-		} else {
-			ringBuff.Read(readBuff)
-			r.Error = awserr.New(aws.ErrCodeSerialization, fmt.Sprintf(
-				"Failed to decode response body with invalid XML. Here's a snapshot : %v", readBuff),
-				err)
+		// recurse thru the xml body till we get the startElement,
+		// we ignore the xml preamble.
+		for {
+			startToken, err := decoder.Token()
+			if err != nil {
+				ringBuff.Read(readBuff)
+				r.Error = awserr.New(aws.ErrCodeSerialization, fmt.Sprintf("Failed to decode response body with invalid XML. Here's a snapshot : %v", readBuff), err)
+				return
+			}
+			// deligate to error unmarshaler if startElement is retrieved
+			if start, ok := startToken.(xml.StartElement); ok {
+				r.Error = unmarshalErrorPrototype(r, decoder, start, ringBuff)
+				return
+			}
 		}
-		return
 	}
 
 	// delegate to reflection based rest unmarshaler
@@ -77,9 +77,11 @@ type protoXMLErrorResponse struct {
 	HostID    string `xml:"HostId"`
 }
 
-// unmarshalError unmarshal's the error response
+// unmarshalErrorPrototype unmarshal's the error response.
+// The function takes in a startElement; this is to support 200 Errors
+// where we will be reading the startElement.
 // Note: Services may have customizations that require custom error unmarshaling.
-// In this prototype, we do not prototype modeled error unmarshaling.
+//  also, in this prototype, we do not prototype modeled error unmarshaling.
 func unmarshalErrorPrototype(r *aws.Request, d *xml.Decoder, start xml.StartElement, buffer *sdkio.RingBuffer) error {
 	// protoXMLErrorResponse is error response struct for xml errors.
 	var respErr = protoXMLErrorResponse{}
