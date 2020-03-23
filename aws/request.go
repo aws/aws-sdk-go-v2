@@ -52,7 +52,12 @@ func (e *HTTPDeserializationError) Error() string {
 }
 
 // ErrorStatusCode returns the Response status code
-func (e *HTTPDeserializationError) ErrorStatusCode() int { return e.Response.StatusCode }
+func (e *HTTPDeserializationError) ErrorStatusCode() int {
+	if e.Response != nil {
+		return e.Response.StatusCode
+	}
+	return 0
+}
 
 // ErrorRequestID returns the Request ID for error response request
 func (e *HTTPDeserializationError) ErrorRequestID() string { return e.RequestID }
