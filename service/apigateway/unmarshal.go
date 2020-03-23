@@ -35,17 +35,18 @@ func (u protoCreateAPIKeyUnmarshaler) unmarshalOperation(r *aws.Request) {
 	// If not error, then call rest unmarshaler
 	restlegacy.UnmarshalMeta(r)
 
-	// unmarshal output shape
-	r.Error = unmarshalProtoCreateAPIKeyOutputShapeAWSJSON(u.output, r.HTTPResponse.Body, ringBuffer)
-}
-
-func unmarshalProtoCreateAPIKeyOutputShapeAWSJSON(output *CreateApiKeyOutput, responseBody io.ReadCloser, ringBuffer *sdkio.RingBuffer) error {
 	// wrap a TeeReader to read from response body & write on snapshot
-	body := io.TeeReader(responseBody, ringBuffer)
-	defer responseBody.Close()
-	// build a json decoder
+	body := io.TeeReader(r.HTTPResponse.Body, ringBuffer)
+	defer r.HTTPResponse.Body.Close()
 	decoder := json.NewDecoder(body)
 
+	// unmarshal output shape
+	r.Error = unmarshalProtoCreateAPIKeyOutputShapeAWSJSON(u.output, decoder, ringBuffer)
+}
+
+// unmarshalProtoCreateAPIKeyOutputShapeAWSJSON unmarshal's the output shape for CreateApiKey Operation
+// It takes in the output shape, json decoder and a ring buffer
+func unmarshalProtoCreateAPIKeyOutputShapeAWSJSON(output *CreateApiKeyOutput, decoder *json.Decoder, ringBuffer *sdkio.RingBuffer) error {
 	// start token
 	startToken, err := decoder.Token()
 	if err == io.EOF {
@@ -182,7 +183,7 @@ func unmarshalProtoCreateAPIKeyOutputShapeAWSJSON(output *CreateApiKeyOutput, re
 		if t == "stageKeys" {
 			// create []string as modeled for the member shape
 			list := make([]string, 0)
-			err = unmarshalStageKeysListShapeAWSJSON(decoder, &list, ringBuffer)
+			err = unmarshalStageKeysListShapeAWSJSON(&list, decoder, ringBuffer)
 			if err != nil {
 				return awserr.New(aws.ErrCodeSerialization,
 					fmt.Sprintf("Error serializing StageKeys . Here's a snapshot: %s",
@@ -197,7 +198,7 @@ func unmarshalProtoCreateAPIKeyOutputShapeAWSJSON(output *CreateApiKeyOutput, re
 			// create []string as modeled for the member shape
 			m := make(map[string]string, 0)
 			// start of the list
-			err = unmarshalTagsMapShapeAWSJSON(decoder, &m, ringBuffer)
+			err = unmarshalTagsMapShapeAWSJSON(&m, decoder, ringBuffer)
 			if err != nil {
 				return awserr.New(aws.ErrCodeSerialization,
 					fmt.Sprintf("Error serializing Tags. Here's a snapshot: %s",
@@ -259,9 +260,9 @@ func unmarshalProtoCreateAPIKeyOutputShapeAWSJSON(output *CreateApiKeyOutput, re
 	return nil
 }
 
-func unmarshalStageKeysListShapeAWSJSON(dec *json.Decoder, list *[]string, ringBuffer *sdkio.RingBuffer) error {
+func unmarshalStageKeysListShapeAWSJSON(list *[]string, decoder *json.Decoder, ringBuffer *sdkio.RingBuffer) error {
 	// start of the list
-	startToken, err := dec.Token()
+	startToken, err := decoder.Token()
 
 	if err == io.EOF {
 		// "Empty List"
@@ -278,8 +279,8 @@ func unmarshalStageKeysListShapeAWSJSON(dec *json.Decoder, list *[]string, ringB
 				"Here's a snapshot: %s", t, getSnapshot(ringBuffer)), err)
 	}
 
-	for dec.More() {
-		token, err := dec.Token()
+	for decoder.More() {
+		token, err := decoder.Token()
 		if err != nil {
 			return awserr.New(aws.ErrCodeSerialization,
 				fmt.Sprintf("failed to decode response body with invalid JSON. Here's a snapshot: %s",
@@ -297,7 +298,7 @@ func unmarshalStageKeysListShapeAWSJSON(dec *json.Decoder, list *[]string, ringB
 	}
 
 	// end of the list
-	endToken, err := dec.Token()
+	endToken, err := decoder.Token()
 	if err != nil {
 		return awserr.New(aws.ErrCodeSerialization,
 			fmt.Sprintf("failed to decode response body with invalid JSON. Here's a snapshot: %s",
@@ -312,8 +313,8 @@ func unmarshalStageKeysListShapeAWSJSON(dec *json.Decoder, list *[]string, ringB
 	return nil
 }
 
-func unmarshalTagsMapShapeAWSJSON(dec *json.Decoder, output *map[string]string, ringBuffer *sdkio.RingBuffer) error {
-	startToken, err := dec.Token()
+func unmarshalTagsMapShapeAWSJSON(output *map[string]string, decoder *json.Decoder, ringBuffer *sdkio.RingBuffer) error {
+	startToken, err := decoder.Token()
 	if err == io.EOF {
 		// "Empty List"
 		return nil
@@ -331,8 +332,8 @@ func unmarshalTagsMapShapeAWSJSON(dec *json.Decoder, output *map[string]string, 
 	}
 
 	// decoder
-	for dec.More() {
-		token, err := dec.Token()
+	for decoder.More() {
+		token, err := decoder.Token()
 		if err != nil {
 			return awserr.New(aws.ErrCodeSerialization,
 				fmt.Sprintf("failed to decode response body with invalid JSON. Here's a snapshot: %s",
@@ -341,7 +342,7 @@ func unmarshalTagsMapShapeAWSJSON(dec *json.Decoder, output *map[string]string, 
 
 		// based on struct Stage
 		if key, ok := token.(string); ok {
-			val, err := dec.Token()
+			val, err := decoder.Token()
 			if err != nil {
 				return awserr.New(aws.ErrCodeSerialization,
 					fmt.Sprintf("failed to decode response body with invalid JSON. Here's a snapshot: %s",
@@ -364,7 +365,7 @@ func unmarshalTagsMapShapeAWSJSON(dec *json.Decoder, output *map[string]string, 
 	}
 
 	// end of the map
-	endToken, err := dec.Token()
+	endToken, err := decoder.Token()
 	if err != nil {
 		return awserr.New(aws.ErrCodeSerialization,
 			fmt.Sprintf("failed to decode response body with invalid JSON. Here's a snapshot: %s",
