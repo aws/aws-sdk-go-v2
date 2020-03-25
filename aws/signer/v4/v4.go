@@ -70,6 +70,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	v4Internal "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/rest"
 )
@@ -80,72 +81,8 @@ const (
 	shortTimeFormat  = "20060102"
 
 	// emptyStringSHA256 is a SHA256 of an empty string
-	emptyStringSHA256 = `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+	emptyStringSHA256 = v4Internal.EmptyStringSHA256
 )
-
-var ignoredHeaders = rules{
-	blacklist{
-		mapRule{
-			"Authorization":   struct{}{},
-			"User-Agent":      struct{}{},
-			"X-Amzn-Trace-Id": struct{}{},
-		},
-	},
-}
-
-// requiredSignedHeaders is a whitelist for build canonical headers.
-var requiredSignedHeaders = rules{
-	whitelist{
-		mapRule{
-			"Cache-Control":                         struct{}{},
-			"Content-Disposition":                   struct{}{},
-			"Content-Encoding":                      struct{}{},
-			"Content-Language":                      struct{}{},
-			"Content-Md5":                           struct{}{},
-			"Content-Type":                          struct{}{},
-			"Expires":                               struct{}{},
-			"If-Match":                              struct{}{},
-			"If-Modified-Since":                     struct{}{},
-			"If-None-Match":                         struct{}{},
-			"If-Unmodified-Since":                   struct{}{},
-			"Range":                                 struct{}{},
-			"X-Amz-Acl":                             struct{}{},
-			"X-Amz-Copy-Source":                     struct{}{},
-			"X-Amz-Copy-Source-If-Match":            struct{}{},
-			"X-Amz-Copy-Source-If-Modified-Since":   struct{}{},
-			"X-Amz-Copy-Source-If-None-Match":       struct{}{},
-			"X-Amz-Copy-Source-If-Unmodified-Since": struct{}{},
-			"X-Amz-Copy-Source-Range":               struct{}{},
-			"X-Amz-Copy-Source-Server-Side-Encryption-Customer-Algorithm": struct{}{},
-			"X-Amz-Copy-Source-Server-Side-Encryption-Customer-Key":       struct{}{},
-			"X-Amz-Copy-Source-Server-Side-Encryption-Customer-Key-Md5":   struct{}{},
-			"X-Amz-Grant-Full-control":                                    struct{}{},
-			"X-Amz-Grant-Read":                                            struct{}{},
-			"X-Amz-Grant-Read-Acp":                                        struct{}{},
-			"X-Amz-Grant-Write":                                           struct{}{},
-			"X-Amz-Grant-Write-Acp":                                       struct{}{},
-			"X-Amz-Metadata-Directive":                                    struct{}{},
-			"X-Amz-Mfa":                                                   struct{}{},
-			"X-Amz-Request-Payer":                                         struct{}{},
-			"X-Amz-Server-Side-Encryption":                                struct{}{},
-			"X-Amz-Server-Side-Encryption-Aws-Kms-Key-Id":                 struct{}{},
-			"X-Amz-Server-Side-Encryption-Customer-Algorithm":             struct{}{},
-			"X-Amz-Server-Side-Encryption-Customer-Key":                   struct{}{},
-			"X-Amz-Server-Side-Encryption-Customer-Key-Md5":               struct{}{},
-			"X-Amz-Storage-Class":                                         struct{}{},
-			"X-Amz-Website-Redirect-Location":                             struct{}{},
-			"X-Amz-Content-Sha256":                                        struct{}{},
-		},
-	},
-	patterns{"X-Amz-Meta-"},
-}
-
-// allowedHoisting is a whitelist for build query headers. The boolean value
-// represents whether or not it is a pattern.
-var allowedQueryHoisting = inclusiveRules{
-	blacklist{requiredSignedHeaders},
-	patterns{"X-Amz-"},
-}
 
 // Signer applies AWS v4 signing to given request. Use this to sign requests
 // that need to be signed with AWS V4 Signatures.
@@ -499,14 +436,14 @@ func (ctx *signingCtx) build(disableHeaderHoisting bool) error {
 	if ctx.isPresign {
 		if !disableHeaderHoisting {
 			urlValues := url.Values{}
-			urlValues, unsignedHeaders = buildQuery(allowedQueryHoisting, unsignedHeaders) // no depends
+			urlValues, unsignedHeaders = buildQuery(v4Internal.AllowedQueryHoisting, unsignedHeaders) // no depends
 			for k := range urlValues {
 				ctx.Query[k] = urlValues[k]
 			}
 		}
 	}
 
-	ctx.buildCanonicalHeaders(ignoredHeaders, unsignedHeaders)
+	ctx.buildCanonicalHeaders(v4Internal.IgnoredHeaders, unsignedHeaders)
 	ctx.buildCanonicalString() // depends on canon headers / signed headers
 	ctx.buildStringToSign()    // depends on canon string
 	ctx.buildSignature()       // depends on string to sign
@@ -550,7 +487,7 @@ func (ctx *signingCtx) buildCredentialString() {
 	}
 }
 
-func buildQuery(r rule, header http.Header) (url.Values, http.Header) {
+func buildQuery(r v4Internal.Rule, header http.Header) (url.Values, http.Header) {
 	query := url.Values{}
 	unsignedHeaders := http.Header{}
 	for k, h := range header {
@@ -564,7 +501,7 @@ func buildQuery(r rule, header http.Header) (url.Values, http.Header) {
 	return query, unsignedHeaders
 }
 
-func (ctx *signingCtx) buildCanonicalHeaders(r rule, header http.Header) {
+func (ctx *signingCtx) buildCanonicalHeaders(r v4Internal.Rule, header http.Header) {
 	var headers []string
 	headers = append(headers, "host")
 	for k, v := range header {
@@ -607,14 +544,14 @@ func (ctx *signingCtx) buildCanonicalHeaders(r rule, header http.Header) {
 				strings.Join(ctx.SignedHeaderVals[k], ",")
 		}
 	}
-	stripExcessSpaces(headerValues)
+	v4Internal.StripExcessSpaces(headerValues)
 	ctx.canonicalHeaders = strings.Join(headerValues, "\n")
 }
 
 func (ctx *signingCtx) buildCanonicalString() {
 	ctx.Request.URL.RawQuery = strings.Replace(ctx.Query.Encode(), "+", "%20", -1)
 
-	uri := getURIPath(ctx.Request.URL)
+	uri := v4Internal.GetURIPath(ctx.Request.URL)
 
 	if !ctx.DisableURIPathEscaping {
 		uri = rest.EscapePath(uri, false)
@@ -731,48 +668,4 @@ func makeSha256Reader(reader io.ReadSeeker) (hashBytes []byte, err error) {
 
 	io.Copy(hash, reader)
 	return hash.Sum(nil), nil
-}
-
-const doubleSpace = "  "
-
-// stripExcessSpaces will rewrite the passed in slice's string values to not
-// contain muliple side-by-side spaces.
-func stripExcessSpaces(vals []string) {
-	var j, k, l, m, spaces int
-	for i, str := range vals {
-		// Trim trailing spaces
-		for j = len(str) - 1; j >= 0 && str[j] == ' '; j-- {
-		}
-
-		// Trim leading spaces
-		for k = 0; k < j && str[k] == ' '; k++ {
-		}
-		str = str[k : j+1]
-
-		// Strip multiple spaces.
-		j = strings.Index(str, doubleSpace)
-		if j < 0 {
-			vals[i] = str
-			continue
-		}
-
-		buf := []byte(str)
-		for k, m, l = j, j, len(buf); k < l; k++ {
-			if buf[k] == ' ' {
-				if spaces == 0 {
-					// First space.
-					buf[m] = buf[k]
-					m++
-				}
-				spaces++
-			} else {
-				// End of multiple spaces.
-				spaces = 0
-				buf[m] = buf[k]
-				m++
-			}
-		}
-
-		vals[i] = string(buf[:m])
-	}
 }
