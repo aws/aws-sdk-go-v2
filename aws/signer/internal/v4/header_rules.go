@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// validator houses a set of Rule needed for validation of a
+// Rules houses a set of Rule needed for validation of a
 // string value
 type Rules []Rule
 
@@ -55,6 +55,7 @@ func (b Blacklist) IsValid(value string) bool {
 	return !b.Rule.IsValid(value)
 }
 
+// Patterns is a list of strings to match against
 type Patterns []string
 
 // IsValid for Patterns checks each pattern and returns if a match has

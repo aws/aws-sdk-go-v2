@@ -49,6 +49,7 @@ func StripExcessSpaces(vals []string) {
 	}
 }
 
+// GetURIPath returns the escaped URI component from the provided URL
 func GetURIPath(u *url.URL) string {
 	var uri string
 
