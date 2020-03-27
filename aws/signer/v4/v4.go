@@ -654,7 +654,7 @@ func buildBodyDigest(r *http.Request, body io.ReadSeeker, service string, unsign
 		s3Presign := presigned && service == "s3"
 
 		if unsigned || s3Presign {
-			hash = "UNSIGNED-PAYLOAD"
+			hash = v4Internal.UnsignedPayload
 			includeSHA256Header = !s3Presign
 		} else if body == nil {
 			hash = v4Internal.EmptyStringSHA256
