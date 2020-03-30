@@ -14,7 +14,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	v4Internal "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
@@ -551,7 +550,7 @@ func TestResignRequestExpiredRequest(t *testing.T) {
 	mockTime = mockTime.Add(15 * time.Minute)
 	SignSDKRequest(r)
 	if e, a := querySig, r.HTTPRequest.Header.Get("Authorization"); e == a {
-		t.Errorf("expect %v to be %v, was not", e, a)
+		t.Errorf("expected %v, got %v", e, a)
 	}
 	if e, a := origSignedAt, r.LastSignedAt; e == a {
 		t.Errorf("expect %v to be %v, was not", e, a)
@@ -629,21 +628,23 @@ func TestSignWithRequestBody_Overwrite(t *testing.T) {
 }
 
 func TestBuildCanonicalRequest(t *testing.T) {
-	req, body := buildRequest("dynamodb", "us-east-1", "{}")
+	req, _ := buildRequest("dynamodb", "us-east-1", "{}")
 	req.URL.RawQuery = "Foo=z&Foo=o&Foo=m&Foo=a"
-	ctx := &signingCtx{
+	ctx := &httpSigner{
 		ServiceName: "dynamodb",
 		Region:      "us-east-1",
 		Request:     req,
-		Body:        body,
-		Query:       req.URL.Query(),
 		Time:        time.Now(),
 		ExpireTime:  5 * time.Second,
 	}
 
-	ctx.buildCanonicalString()
-	expected := "https://example.org/bucket/key-._~,!@#$%^&*()?Foo=z&Foo=o&Foo=m&Foo=a"
-	if e, a := expected, ctx.Request.URL.String(); e != a {
+	build, err := ctx.Build()
+	if err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+
+	expected := "https://example.org/bucket/key-._~,!@#$%^&*()?Foo=a&Foo=m&Foo=o&Foo=z"
+	if e, a := expected, build.Request.URL.String(); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 }
@@ -692,21 +693,23 @@ func TestSignWithBody_NoReplaceRequestBody(t *testing.T) {
 }
 
 func TestRequestHost(t *testing.T) {
-	req, body := buildRequest("dynamodb", "us-east-1", "{}")
+	req, _ := buildRequest("dynamodb", "us-east-1", "{}")
 	req.URL.RawQuery = "Foo=z&Foo=o&Foo=m&Foo=a"
 	req.Host = "myhost"
-	ctx := &signingCtx{
+	ctx := &httpSigner{
 		ServiceName: "dynamodb",
 		Region:      "us-east-1",
 		Request:     req,
-		Body:        body,
-		Query:       req.URL.Query(),
 		Time:        time.Now(),
 		ExpireTime:  5 * time.Second,
 	}
 
-	ctx.buildCanonicalHeaders(v4Internal.IgnoredHeaders, ctx.Request.Header)
-	if !strings.Contains(ctx.canonicalHeaders, "host:"+req.Host) {
+	build, err := ctx.Build()
+	if err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+
+	if !strings.Contains(build.CanonicalString, "host:"+req.Host) {
 		t.Errorf("canonical host header invalid")
 	}
 }
