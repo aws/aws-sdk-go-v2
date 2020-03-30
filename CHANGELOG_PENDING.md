@@ -14,7 +14,11 @@ Services
 
 SDK Features
 ---
-
+* `aws/signer/v4`: New methods `SignHTTP` and `PresignHTTP` have been added ([#519](https://github.com/aws/aws-sdk-go-v2/pull/519))
+  * `SignHTTP` replaces `Sign`, and usage of `Sign` should be migrated before it's removal at a later date
+  * `PresignHTTP` replaces `Presign`, and usage of `Presign` should be migrated before it's removal at a later date
+  * `DisableRequestBodyOverwrite` and `UnsignedPayload` are now deprecated options and have no effect on `SignHTTP` or `PresignHTTP`. These options will be removed at a later date.
+  
 SDK Enhancements
 ---
 
