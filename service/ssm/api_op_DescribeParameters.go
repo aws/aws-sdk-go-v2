@@ -64,8 +64,7 @@ func (s *DescribeParametersInput) Validate() error {
 type DescribeParametersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
+	// The token to use when requesting the next set of items.
 	NextToken *string `type:"string"`
 
 	// Parameters returned by the request.

@@ -3,6 +3,7 @@ package aws_test
 import (
 	"bytes"
 	"context"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -108,7 +109,7 @@ func TestWaiterPathAll(t *testing.T) {
 	w := aws.Waiter{
 		MaxAttempts:      10,
 		Delay:            aws.ConstantWaiterDelay(0),
-		SleepWithContext: aws.SleepWithContext,
+		SleepWithContext: sdk.SleepWithContext,
 		Acceptors: []aws.WaiterAcceptor{
 			{
 				State:    aws.SuccessWaiterState,
@@ -178,7 +179,7 @@ func TestWaiterPath(t *testing.T) {
 	w := aws.Waiter{
 		MaxAttempts:      10,
 		Delay:            aws.ConstantWaiterDelay(0),
-		SleepWithContext: aws.SleepWithContext,
+		SleepWithContext: sdk.SleepWithContext,
 		Acceptors: []aws.WaiterAcceptor{
 			{
 				State:    aws.SuccessWaiterState,
@@ -248,7 +249,7 @@ func TestWaiterFailure(t *testing.T) {
 	w := aws.Waiter{
 		MaxAttempts:      10,
 		Delay:            aws.ConstantWaiterDelay(0),
-		SleepWithContext: aws.SleepWithContext,
+		SleepWithContext: sdk.SleepWithContext,
 		Acceptors: []aws.WaiterAcceptor{
 			{
 				State:    aws.SuccessWaiterState,
@@ -350,7 +351,7 @@ func TestWaiterError(t *testing.T) {
 	w := aws.Waiter{
 		MaxAttempts:      10,
 		Delay:            aws.ConstantWaiterDelay(0),
-		SleepWithContext: aws.SleepWithContext,
+		SleepWithContext: sdk.SleepWithContext,
 		Acceptors: []aws.WaiterAcceptor{
 			{
 				State:    aws.SuccessWaiterState,
@@ -417,7 +418,7 @@ func TestWaiterStatus(t *testing.T) {
 	w := aws.Waiter{
 		MaxAttempts:      10,
 		Delay:            aws.ConstantWaiterDelay(0),
-		SleepWithContext: aws.SleepWithContext,
+		SleepWithContext: sdk.SleepWithContext,
 		Acceptors: []aws.WaiterAcceptor{
 			{
 				State:    aws.SuccessWaiterState,
@@ -481,7 +482,7 @@ func TestWaiter_WithContextCanceled(t *testing.T) {
 		Name:             "TestWaiter",
 		MaxAttempts:      10,
 		Delay:            aws.ConstantWaiterDelay(1 * time.Millisecond),
-		SleepWithContext: aws.SleepWithContext,
+		SleepWithContext: sdk.SleepWithContext,
 		Acceptors: []aws.WaiterAcceptor{
 			{
 				State:    aws.SuccessWaiterState,
@@ -518,13 +519,13 @@ func TestWaiter_WithContextCanceled(t *testing.T) {
 	}
 
 	err := w.Wait(ctx)
-
 	if err == nil {
 		t.Fatalf("expect waiter to be canceled.")
 	}
-	aerr := err.(awserr.Error)
-	if e, a := aws.ErrCodeRequestCanceled, aerr.Code(); e != a {
-		t.Errorf("expect %q error code, got %q", e, a)
+
+	var ce *aws.RequestCanceledError
+	if !errors.As(err, &ce) {
+		t.Fatalf("expect %T error, got %v", ce, err)
 	}
 	if e, a := 2, reqCount; e != a {
 		t.Errorf("expect %d requests, got %d", e, a)
@@ -543,7 +544,7 @@ func TestWaiter_WithContext(t *testing.T) {
 		Name:             "TestWaiter",
 		MaxAttempts:      10,
 		Delay:            aws.ConstantWaiterDelay(1 * time.Millisecond),
-		SleepWithContext: aws.SleepWithContext,
+		SleepWithContext: sdk.SleepWithContext,
 		Acceptors: []aws.WaiterAcceptor{
 			{
 				State:    aws.SuccessWaiterState,
@@ -589,7 +590,7 @@ func TestWaiter_AttemptsExpires(t *testing.T) {
 		Name:             "TestWaiter",
 		MaxAttempts:      2,
 		Delay:            aws.ConstantWaiterDelay(1 * time.Millisecond),
-		SleepWithContext: aws.SleepWithContext,
+		SleepWithContext: sdk.SleepWithContext,
 		Acceptors: []aws.WaiterAcceptor{
 			{
 				State:    aws.SuccessWaiterState,

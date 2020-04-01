@@ -712,6 +712,10 @@ func New(config aws.Config) *{{ .StructName }} {
     	),
     }
 
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
+	}
+
 	{{ if .HasExternalClientConfigFields }}
 		if err := resolveClientConfig(svc, config.ConfigSources); err != nil {
 			panic(fmt.Errorf("failed to resolve service configuration: %v", err))
@@ -792,6 +796,8 @@ func (a *API) ClientGoCode() string {
 	if a.EndpointDiscoveryOp != nil {
 		a.AddSDKImport("aws", "crr")
 	}
+
+	a.AddSDKImport("aws/retry")
 
 	var buf bytes.Buffer
 	err := tplClient.Execute(&buf, a)

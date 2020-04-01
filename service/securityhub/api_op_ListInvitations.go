@@ -13,13 +13,14 @@ import (
 type ListInvitationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of items that you want in the response.
+	// The maximum number of items to return in the response.
 	MaxResults *int64 `location:"querystring" locationName:"MaxResults" min:"1" type:"integer"`
 
-	// Paginates results. On your first call to the ListInvitations operation, set
-	// the value of this parameter to NULL. For subsequent calls to the operation,
-	// fill nextToken in the request with the value of NextToken from the previous
-	// response to continue listing data.
+	// The token that is required for pagination. On your first call to the ListInvitations
+	// operation, set the value of this parameter to NULL.
+	//
+	// For subsequent calls to the operation, to continue listing data, set the
+	// value of this parameter to the value returned from the previous response.
 	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
 }
 
@@ -66,7 +67,7 @@ type ListInvitationsOutput struct {
 	// The details of the invitations returned by the operation.
 	Invitations []Invitation `type:"list"`
 
-	// The token that is required for pagination.
+	// The pagination token to use to request the next page of results.
 	NextToken *string `type:"string"`
 }
 
@@ -119,6 +120,12 @@ func (c *Client) ListInvitationsRequest(input *ListInvitationsInput) ListInvitat
 		Name:       opListInvitations,
 		HTTPMethod: "GET",
 		HTTPPath:   "/invitations",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -151,6 +158,53 @@ func (r ListInvitationsRequest) Send(ctx context.Context) (*ListInvitationsRespo
 	}
 
 	return resp, nil
+}
+
+// NewListInvitationsRequestPaginator returns a paginator for ListInvitations.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListInvitationsRequest(input)
+//   p := securityhub.NewListInvitationsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListInvitationsPaginator(req ListInvitationsRequest) ListInvitationsPaginator {
+	return ListInvitationsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListInvitationsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListInvitationsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListInvitationsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListInvitationsPaginator) CurrentPage() *ListInvitationsOutput {
+	return p.Pager.CurrentPage().(*ListInvitationsOutput)
 }
 
 // ListInvitationsResponse is the response type for the

@@ -50,7 +50,9 @@ func (s *AttachLoadBalancerTlsCertificateInput) Validate() error {
 type AttachLoadBalancerTlsCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object representing the API operations.
+	// An array of objects that describe the result of the action, such as the status
+	// of the request, the time stamp of the request, and the resources affected
+	// by the request.
 	//
 	// These SSL/TLS certificates are only usable by Lightsail load balancers. You
 	// can't get the certificate and use it for another purpose.
@@ -72,11 +74,11 @@ const opAttachLoadBalancerTlsCertificate = "AttachLoadBalancerTlsCertificate"
 //
 // Once you create and validate your certificate, you can attach it to your
 // load balancer. You can also use this API to rotate the certificates on your
-// account. Use the attach load balancer tls certificate operation with the
-// non-attached certificate, and it will replace the existing one and become
-// the attached certificate.
+// account. Use the AttachLoadBalancerTlsCertificate action with the non-attached
+// certificate, and it will replace the existing one and become the attached
+// certificate.
 //
-// The attach load balancer tls certificate operation supports tag-based access
+// The AttachLoadBalancerTlsCertificate operation supports tag-based access
 // control via resource tags applied to the resource identified by load balancer
 // name. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //

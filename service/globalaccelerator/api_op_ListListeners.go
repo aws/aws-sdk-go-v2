@@ -70,7 +70,8 @@ const opListListeners = "ListListeners"
 // ListListenersRequest returns a request value for making API operation for
 // AWS Global Accelerator.
 //
-// List the listeners for an accelerator.
+// List the listeners for an accelerator. To see an AWS CLI example of listing
+// the listeners for an accelerator, scroll down to Example.
 //
 //    // Example sending a request using ListListenersRequest.
 //    req := client.ListListenersRequest(params)

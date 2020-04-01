@@ -36,6 +36,32 @@ func (enum Affinity) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ByoipCidrState string
+
+// Enum values for ByoipCidrState
+const (
+	ByoipCidrStatePendingProvisioning   ByoipCidrState = "PENDING_PROVISIONING"
+	ByoipCidrStateReady                 ByoipCidrState = "READY"
+	ByoipCidrStatePendingAdvertising    ByoipCidrState = "PENDING_ADVERTISING"
+	ByoipCidrStateAdvertising           ByoipCidrState = "ADVERTISING"
+	ByoipCidrStatePendingWithdrawing    ByoipCidrState = "PENDING_WITHDRAWING"
+	ByoipCidrStatePendingDeprovisioning ByoipCidrState = "PENDING_DEPROVISIONING"
+	ByoipCidrStateDeprovisioned         ByoipCidrState = "DEPROVISIONED"
+	ByoipCidrStateFailedProvision       ByoipCidrState = "FAILED_PROVISION"
+	ByoipCidrStateFailedAdvertising     ByoipCidrState = "FAILED_ADVERTISING"
+	ByoipCidrStateFailedWithdraw        ByoipCidrState = "FAILED_WITHDRAW"
+	ByoipCidrStateFailedDeprovision     ByoipCidrState = "FAILED_DEPROVISION"
+)
+
+func (enum ByoipCidrState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ByoipCidrState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HealthCheckProtocol string
 
 // Enum values for HealthCheckProtocol

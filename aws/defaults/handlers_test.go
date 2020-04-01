@@ -3,6 +3,7 @@ package defaults_test
 import (
 	"bytes"
 	"context"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -13,8 +14,8 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
@@ -55,122 +56,30 @@ func TestValidateEndpointHandlerErrorRegion(t *testing.T) {
 	if err == nil {
 		t.Errorf("expect error, got none")
 	}
-	if e, a := aws.ErrMissingRegion, err; e != a {
-		t.Errorf("expect %v to be %v", e, a)
+	var expected *aws.MissingRegionError
+	if !errors.As(err, &expected) {
+		t.Fatalf("expected %T, got %T", expected, err)
 	}
 }
 
-type mockCredsProvider struct {
-	retrieveCalled   bool
-	invalidateCalled bool
-}
-
-func (m *mockCredsProvider) Retrieve(ctx context.Context) (aws.Credentials, error) {
-	m.retrieveCalled = true
-	return aws.Credentials{Source: "mockCredsProvider"}, nil
-}
-
-func (m *mockCredsProvider) Invalidate() {
-	m.invalidateCalled = true
-}
-
-func TestAfterRetry_RefreshCreds(t *testing.T) {
-	orig := sdk.SleepWithContext
-	defer func() { sdk.SleepWithContext = orig }()
-	sdk.SleepWithContext = func(context.Context, time.Duration) error { return nil }
-
-	credProvider := &mockCredsProvider{}
-
-	cfg := unit.Config()
-	cfg.Credentials = credProvider
-
-	svc := awstesting.NewClient(cfg)
-	req := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
-	req.Retryable = aws.Bool(true)
-	req.Error = awserr.New("ExpiredTokenException", "", nil)
-	req.HTTPResponse = &http.Response{
-		StatusCode: 403,
-	}
-
-	defaults.AfterRetryHandler.Fn(req)
-
-	if !credProvider.invalidateCalled {
-		t.Errorf("expect credentials to be invalidated")
-	}
-}
-
-func TestAfterRetry_NoPanicRefreshStaticCreds(t *testing.T) {
-	orig := sdk.SleepWithContext
-	defer func() { sdk.SleepWithContext = orig }()
-	sdk.SleepWithContext = func(context.Context, time.Duration) error { return nil }
-
-	credProvider := aws.NewStaticCredentialsProvider("AKID", "SECRET", "")
-
-	cfg := unit.Config()
-	cfg.Credentials = credProvider
-
-	svc := awstesting.NewClient(cfg)
-	req := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
-	req.Retryable = aws.Bool(true)
-	req.Error = awserr.New("ExpiredTokenException", "", nil)
-	req.HTTPResponse = &http.Response{
-		StatusCode: 403,
-	}
-
-	defaults.AfterRetryHandler.Fn(req)
-}
-
-func TestAfterRetryWithContextCanceled(t *testing.T) {
+func TestShouldRetry_WithContext(t *testing.T) {
 	c := awstesting.NewClient(unit.Config())
+	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{}, 0)}
 
 	req := c.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
-
-	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{}, 0)}
 	req.SetContext(ctx)
 
-	req.Error = fmt.Errorf("some error")
-	req.Retryable = aws.Bool(true)
-	req.HTTPResponse = &http.Response{
-		StatusCode: 500,
+	req.Error = &aws.HTTPResponseError{
+		Response: &http.Response{
+			StatusCode: 500,
+			Header:     http.Header{},
+		},
 	}
 
-	close(ctx.DoneCh)
-	ctx.Error = fmt.Errorf("context canceled")
+	defaults.RetryableCheckHandler.Fn(req)
 
-	defaults.AfterRetryHandler.Fn(req)
-
-	if req.Error == nil {
-		t.Fatalf("expect error but didn't receive one")
-	}
-
-	aerr := req.Error.(awserr.Error)
-
-	if e, a := aws.ErrCodeRequestCanceled, aerr.Code(); e != a {
-		t.Errorf("expect %q, error code got %q", e, a)
-	}
-}
-
-func TestAfterRetryWithContext(t *testing.T) {
-	c := awstesting.NewClient(unit.Config())
-
-	req := c.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
-
-	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{}, 0)}
-	req.SetContext(ctx)
-
-	req.Error = fmt.Errorf("some error")
-	req.Retryable = aws.Bool(true)
-	req.HTTPResponse = &http.Response{
-		StatusCode: 500,
-	}
-
-	defaults.AfterRetryHandler.Fn(req)
-
-	if req.Error != nil {
-		t.Fatalf("expect no error, got %v", req.Error)
-	}
-	if e, a := 1, req.RetryCount; e != a {
-		t.Errorf("expect retry count to be %d, got %d", e, a)
+	if req.RetryDelay == 0 {
+		t.Fatalf("expect retry delay got none")
 	}
 }
 
@@ -182,12 +91,6 @@ func TestSendWithContextCanceled(t *testing.T) {
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{}, 0)}
 	req.SetContext(ctx)
 
-	req.Error = fmt.Errorf("some error")
-	req.Retryable = aws.Bool(true)
-	req.HTTPResponse = &http.Response{
-		StatusCode: 500,
-	}
-
 	close(ctx.DoneCh)
 	ctx.Error = fmt.Errorf("context canceled")
 
@@ -197,10 +100,9 @@ func TestSendWithContextCanceled(t *testing.T) {
 		t.Fatalf("expect error but didn't receive one")
 	}
 
-	aerr := req.Error.(awserr.Error)
-
-	if e, a := aws.ErrCodeRequestCanceled, aerr.Code(); e != a {
-		t.Errorf("expect %q, error code got %q", e, a)
+	var aerr *aws.RequestCanceledError
+	if !errors.As(req.Error, &aerr) {
+		t.Fatalf("expect %T error, got %v", aerr, req.Error)
 	}
 }
 
@@ -426,5 +328,193 @@ func TestSendHandler_HEADNoBody(t *testing.T) {
 	}
 	if e, a := http.StatusOK, req.HTTPResponse.StatusCode; e != a {
 		t.Errorf("expect %d status code, got %d", e, a)
+	}
+}
+
+func TestRequestInvocationIDHeaderHandler(t *testing.T) {
+	cfg := unit.Config()
+	r := aws.New(cfg, aws.Metadata{}, cfg.Handlers, aws.NoOpRetryer{}, &aws.Operation{},
+		&struct{}{}, struct{}{})
+
+	if len(r.InvocationID) == 0 {
+		t.Fatalf("expect invocation id, got none")
+	}
+
+	defaults.RequestInvocationIDHeaderHandler.Fn(r)
+	if r.Error != nil {
+		t.Fatalf("expect no error, got %v", r.Error)
+	}
+
+	if e, a := r.InvocationID, r.HTTPRequest.Header.Get("amz-sdk-invocation-id"); e != a {
+		t.Errorf("expect %v invocation id, got %v", e, a)
+	}
+}
+
+func TestRetryMetricHeaderHandler(t *testing.T) {
+	nowTime := sdk.NowTime
+	defer func() {
+		sdk.NowTime = nowTime
+	}()
+	sdk.NowTime = func() time.Time {
+		return time.Date(2020, 2, 2, 0, 0, 0, 0, time.UTC)
+	}
+
+	cases := map[string]struct {
+		Attempt           int
+		MaxAttempts       int
+		Client            aws.HTTPClient
+		ContextDeadline   time.Time
+		AttemptClockSkews []time.Duration
+		Expect            string
+	}{
+		"first attempt": {
+			Attempt: 1, MaxAttempts: 3,
+			Expect: "attempt=1; max=3",
+		},
+		"last attempt": {
+			Attempt: 3, MaxAttempts: 3,
+			Expect: "attempt=3; max=3",
+		},
+		"no max attempt": {
+			Attempt: 10,
+			Expect:  "attempt=10",
+		},
+		"with ttl client timeout": {
+			Attempt: 2, MaxAttempts: 3,
+			AttemptClockSkews: []time.Duration{
+				10 * time.Second,
+			},
+			Client: func() aws.HTTPClient {
+				c := &aws.BuildableHTTPClient{}
+				return c.WithTimeout(10 * time.Second)
+			}(),
+			Expect: "attempt=2; max=3; ttl=20200202T000020Z",
+		},
+		"with ttl context deadline": {
+			Attempt: 1, MaxAttempts: 3,
+			AttemptClockSkews: []time.Duration{
+				10 * time.Second,
+			},
+			ContextDeadline: sdk.NowTime().Add(10 * time.Second),
+			Expect:          "attempt=1; max=3; ttl=20200202T000020Z",
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			cfg := unit.Config()
+			if c.Client != nil {
+				cfg.HTTPClient = c.Client
+			}
+			r := aws.New(cfg, aws.Metadata{}, cfg.Handlers, aws.NoOpRetryer{},
+				&aws.Operation{}, &struct{}{}, struct{}{})
+			if !c.ContextDeadline.IsZero() {
+				ctx, cancel := context.WithDeadline(r.Context(), c.ContextDeadline)
+				defer cancel()
+				r.SetContext(ctx)
+			}
+
+			r.AttemptNum = c.Attempt
+			r.AttemptClockSkews = c.AttemptClockSkews
+			r.Retryer = retry.AddWithMaxAttempts(r.Retryer, c.MaxAttempts)
+
+			defaults.RetryMetricHeaderHandler.Fn(r)
+			if r.Error != nil {
+				t.Fatalf("expect no error, got %v", r.Error)
+			}
+
+			if e, a := c.Expect, r.HTTPRequest.Header.Get("amz-sdk-request"); e != a {
+				t.Errorf("expect %q metric, got %q", e, a)
+			}
+		})
+	}
+}
+
+func TestAttemptClockSkewHandler(t *testing.T) {
+	cases := map[string]struct {
+		Req    *aws.Request
+		Expect []time.Duration
+	}{
+		"no response": {Req: &aws.Request{}},
+		"failed response": {
+			Req: &aws.Request{
+				HTTPResponse: &http.Response{StatusCode: 0, Header: http.Header{}},
+			},
+		},
+		"no date header response": {
+			Req: &aws.Request{
+				HTTPResponse: &http.Response{StatusCode: 200, Header: http.Header{}},
+			},
+		},
+		"invalid date header response": {
+			Req: &aws.Request{
+				HTTPResponse: &http.Response{
+					StatusCode: 200,
+					Header:     http.Header{"Date": []string{"abc123"}},
+				},
+			},
+		},
+		"response at unset": {
+			Req: &aws.Request{
+				HTTPResponse: &http.Response{
+					StatusCode: 200,
+					Header: http.Header{
+						"Date": []string{"Thu, 05 Mar 2020 22:25:15 GMT"},
+					},
+				},
+			},
+		},
+		"first date response": {
+			Req: &aws.Request{
+				HTTPResponse: &http.Response{
+					StatusCode: 200,
+					Header: http.Header{
+						"Date": []string{"Thu, 05 Mar 2020 22:25:15 GMT"},
+					},
+				},
+				ResponseAt: time.Date(2020, 3, 5, 22, 25, 17, 0, time.UTC),
+			},
+			Expect: []time.Duration{-2 * time.Second},
+		},
+		"subsequent date response": {
+			Req: &aws.Request{
+				HTTPResponse: &http.Response{
+					StatusCode: 200,
+					Header: http.Header{
+						"Date": []string{"Thu, 05 Mar 2020 22:25:15 GMT"},
+					},
+				},
+				ResponseAt: time.Date(2020, 3, 5, 22, 25, 14, 0, time.UTC),
+				AttemptClockSkews: []time.Duration{
+					-2 * time.Second,
+				},
+			},
+			Expect: []time.Duration{
+				-2 * time.Second,
+				1 * time.Second,
+			},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			r := new(aws.Request)
+			*r = *c.Req
+
+			defaults.AttemptClockSkewHandler.Fn(r)
+			if err := r.Error; err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			if e, a := len(c.Expect), len(r.AttemptClockSkews); e != a {
+				t.Errorf("expect %v skews, got %v", e, a)
+			}
+
+			for i, s := range r.AttemptClockSkews {
+				if e, a := c.Expect[i], s; e != a {
+					t.Errorf("%d, expect %v skew, got %v", i, e, a)
+				}
+			}
+		})
 	}
 }

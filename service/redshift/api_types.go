@@ -163,6 +163,8 @@ type Cluster struct {
 	//
 	//    * modifying
 	//
+	//    * paused
+	//
 	//    * rebooting
 	//
 	//    * renaming
@@ -1147,6 +1149,34 @@ func (s Parameter) String() string {
 	return awsutil.Prettify(s)
 }
 
+type PauseClusterMessage struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the cluster to be paused.
+	//
+	// ClusterIdentifier is a required field
+	ClusterIdentifier *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PauseClusterMessage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PauseClusterMessage) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PauseClusterMessage"}
+
+	if s.ClusterIdentifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Describes cluster attributes that are in a pending state. A change to one
 // or more the attributes was requested and is in progress or will be applied.
 type PendingModifiedValues struct {
@@ -1347,9 +1377,7 @@ type ResizeClusterMessage struct {
 	NodeType *string `type:"string"`
 
 	// The new number of nodes for the cluster.
-	//
-	// NumberOfNodes is a required field
-	NumberOfNodes *int64 `type:"integer" required:"true"`
+	NumberOfNodes *int64 `type:"integer"`
 }
 
 // String returns the string representation
@@ -1363,10 +1391,6 @@ func (s *ResizeClusterMessage) Validate() error {
 
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if s.NumberOfNodes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NumberOfNodes"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1429,6 +1453,34 @@ func (s RestoreStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
+type ResumeClusterMessage struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the cluster to be resumed.
+	//
+	// ClusterIdentifier is a required field
+	ClusterIdentifier *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ResumeClusterMessage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResumeClusterMessage) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResumeClusterMessage"}
+
+	if s.ClusterIdentifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Describes a RevisionTarget.
 type RevisionTarget struct {
 	_ struct{} `type:"structure"`
@@ -1478,8 +1530,8 @@ type ScheduledAction struct {
 	// Format of at expressions is "at(yyyy-mm-ddThh:mm:ss)". For example, "at(2016-03-04T17:27:00)".
 	//
 	// Format of cron expressions is "cron(Minutes Hours Day-of-month Month Day-of-week
-	// Year)". For example, "cron(0, 10, *, *, MON, *)". For more information, see
-	// Cron Expressions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
+	// Year)". For example, "cron(0 10 ? * MON *)". For more information, see Cron
+	// Expressions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
 	// in the Amazon CloudWatch Events User Guide.
 	Schedule *string `type:"string"`
 
@@ -1550,8 +1602,14 @@ func (s *ScheduledActionFilter) Validate() error {
 type ScheduledActionType struct {
 	_ struct{} `type:"structure"`
 
+	// An action that runs a PauseCluster API operation.
+	PauseCluster *PauseClusterMessage `type:"structure"`
+
 	// An action that runs a ResizeCluster API operation.
 	ResizeCluster *ResizeClusterMessage `type:"structure"`
+
+	// An action that runs a ResumeCluster API operation.
+	ResumeCluster *ResumeClusterMessage `type:"structure"`
 }
 
 // String returns the string representation
@@ -1562,9 +1620,19 @@ func (s ScheduledActionType) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScheduledActionType) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ScheduledActionType"}
+	if s.PauseCluster != nil {
+		if err := s.PauseCluster.Validate(); err != nil {
+			invalidParams.AddNested("PauseCluster", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.ResizeCluster != nil {
 		if err := s.ResizeCluster.Validate(); err != nil {
 			invalidParams.AddNested("ResizeCluster", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.ResumeCluster != nil {
+		if err := s.ResumeCluster.Validate(); err != nil {
+			invalidParams.AddNested("ResumeCluster", err.(aws.ErrInvalidParams))
 		}
 	}
 

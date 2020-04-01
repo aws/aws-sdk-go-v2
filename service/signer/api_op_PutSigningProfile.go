@@ -18,7 +18,7 @@ type PutSigningProfileInput struct {
 	// or signing-algorithm).
 	Overrides *SigningPlatformOverrides `locationName:"overrides" type:"structure"`
 
-	// The ID of the signing profile to be created.
+	// The ID of the signing platform to be created.
 	//
 	// PlatformId is a required field
 	PlatformId *string `locationName:"platformId" type:"string" required:"true"`
@@ -38,7 +38,7 @@ type PutSigningProfileInput struct {
 	// you want to use during signing.
 	SigningParameters map[string]string `locationName:"signingParameters" type:"map"`
 
-	// Tags to be associated with the signing profile being created.
+	// Tags to be associated with the signing profile that is being created.
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 

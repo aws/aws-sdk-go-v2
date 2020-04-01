@@ -12,8 +12,11 @@ import (
 type GetDomainsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A token used for advancing to the next page of results from your get domains
-	// request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetDomains request. If your results
+	// are paginated, the response will return a next page token that you can specify
+	// as the page token in a subsequent request.
 	PageToken *string `locationName:"pageToken" type:"string"`
 }
 
@@ -29,8 +32,12 @@ type GetDomainsOutput struct {
 	// entries in the user's account.
 	Domains []Domain `locationName:"domains" type:"list"`
 
-	// A token used for advancing to the next page of results from your get active
-	// names request.
+	// The token to advance to the next page of resutls from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetDomains request and specify
+	// the next page token using the pageToken parameter.
 	NextPageToken *string `locationName:"nextPageToken" type:"string"`
 }
 

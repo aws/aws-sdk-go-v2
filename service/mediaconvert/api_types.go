@@ -796,8 +796,7 @@ type AudioNormalizationSettings struct {
 	AlgorithmControl AudioNormalizationAlgorithmControl `locationName:"algorithmControl" type:"string" enum:"true"`
 
 	// Content measuring above this level will be corrected to the target level.
-	// Content measuring below this level will not be corrected. Gating only applies
-	// when not using real_time_correction.
+	// Content measuring below this level will not be corrected.
 	CorrectionGateLevel *int64 `locationName:"correctionGateLevel" type:"integer"`
 
 	// If set to LOG, log each output's audio track loudness to a CSV file.
@@ -1061,6 +1060,255 @@ func (s AudioSelectorGroup) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	return nil
+}
+
+// Settings for quality-defined variable bitrate encoding with the AV1 codec.
+// Required when you set Rate control mode to QVBR. Not valid when you set Rate
+// control mode to a value other than QVBR, or when you don't define Rate control
+// mode.
+type Av1QvbrSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Required when you use QVBR rate control mode. That is, when you specify qvbrSettings
+	// within av1Settings. Specify the general target quality level for this output,
+	// from 1 to 10. Use higher numbers for greater quality. Level 10 results in
+	// nearly lossless compression. The quality level for most broadcast-quality
+	// transcodes is between 6 and 9. Optionally, to specify a value between whole
+	// numbers, also provide a value for the setting qvbrQualityLevelFineTune. For
+	// example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel
+	// to 7 and set qvbrQualityLevelFineTune to .33.
+	QvbrQualityLevel *int64 `locationName:"qvbrQualityLevel" min:"1" type:"integer"`
+
+	// Optional. Specify a value here to set the QVBR quality to a level that is
+	// between whole numbers. For example, if you want your QVBR quality level to
+	// be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+	// MediaConvert rounds your QVBR quality level to the nearest third of a whole
+	// number. For example, if you set qvbrQualityLevel to 7 and you set qvbrQualityLevelFineTune
+	// to .25, your actual QVBR quality level is 7.33.
+	QvbrQualityLevelFineTune *float64 `locationName:"qvbrQualityLevelFineTune" type:"double"`
+}
+
+// String returns the string representation
+func (s Av1QvbrSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Av1QvbrSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Av1QvbrSettings"}
+	if s.QvbrQualityLevel != nil && *s.QvbrQualityLevel < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("QvbrQualityLevel", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Av1QvbrSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.QvbrQualityLevel != nil {
+		v := *s.QvbrQualityLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "qvbrQualityLevel", protocol.Int64Value(v), metadata)
+	}
+	if s.QvbrQualityLevelFineTune != nil {
+		v := *s.QvbrQualityLevelFineTune
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "qvbrQualityLevelFineTune", protocol.Float64Value(v), metadata)
+	}
+	return nil
+}
+
+// Required when you set Codec, under VideoDescription>CodecSettings to the
+// value AV1.
+type Av1Settings struct {
+	_ struct{} `type:"structure"`
+
+	// Adaptive quantization. Allows intra-frame quantizers to vary to improve visual
+	// quality.
+	AdaptiveQuantization Av1AdaptiveQuantization `locationName:"adaptiveQuantization" type:"string" enum:"true"`
+
+	// If you are using the console, use the Framerate setting to specify the frame
+	// rate for this output. If you want to keep the same frame rate as the input
+	// video, choose Follow source. If you want to do frame rate conversion, choose
+	// a frame rate from the dropdown list or choose Custom. The framerates shown
+	// in the dropdown list are decimal approximations of fractions. If you choose
+	// Custom, specify your frame rate as a fraction. If you are creating your transcoding
+	// job specification as a JSON file without the console, use FramerateControl
+	// to specify which value the service uses for the frame rate for this output.
+	// Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate
+	// from the input. Choose SPECIFIED if you want the service to use the frame
+	// rate you specify in the settings FramerateNumerator and FramerateDenominator.
+	FramerateControl Av1FramerateControl `locationName:"framerateControl" type:"string" enum:"true"`
+
+	// When set to INTERPOLATE, produces smoother motion during frame rate conversion.
+	FramerateConversionAlgorithm Av1FramerateConversionAlgorithm `locationName:"framerateConversionAlgorithm" type:"string" enum:"true"`
+
+	// When you use the API for transcode jobs that use frame rate conversion, specify
+	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
+	// FramerateDenominator to specify the denominator of this fraction. In this
+	// example, use 1001 for the value of FramerateDenominator. When you use the
+	// console for transcode jobs that use frame rate conversion, provide the value
+	// as a decimal number for Framerate. In this example, specify 23.976.
+	FramerateDenominator *int64 `locationName:"framerateDenominator" min:"1" type:"integer"`
+
+	// When you use the API for transcode jobs that use frame rate conversion, specify
+	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
+	// FramerateNumerator to specify the numerator of this fraction. In this example,
+	// use 24000 for the value of FramerateNumerator. When you use the console for
+	// transcode jobs that use frame rate conversion, provide the value as a decimal
+	// number for Framerate. In this example, specify 23.976.
+	FramerateNumerator *int64 `locationName:"framerateNumerator" min:"1" type:"integer"`
+
+	// Specify the GOP length (keyframe interval) in frames. With AV1, MediaConvert
+	// doesn't support GOP length in seconds. This value must be greater than zero
+	// and preferably equal to 1 + ((numberBFrames + 1) * x), where x is an integer
+	// value.
+	GopSize *float64 `locationName:"gopSize" type:"double"`
+
+	// Maximum bitrate in bits/second. For example, enter five megabits per second
+	// as 5000000. Required when Rate control mode is QVBR.
+	MaxBitrate *int64 `locationName:"maxBitrate" min:"1000" type:"integer"`
+
+	// Specify the number of B-frames. With AV1, MediaConvert supports only 7 or
+	// 15.
+	NumberBFramesBetweenReferenceFrames *int64 `locationName:"numberBFramesBetweenReferenceFrames" min:"7" type:"integer"`
+
+	// Settings for quality-defined variable bitrate encoding with the AV1 codec.
+	// Required when you set Rate control mode to QVBR. Not valid when you set Rate
+	// control mode to a value other than QVBR, or when you don't define Rate control
+	// mode.
+	QvbrSettings *Av1QvbrSettings `locationName:"qvbrSettings" type:"structure"`
+
+	// 'With AV1 outputs, for rate control mode, MediaConvert supports only quality-defined
+	// variable bitrate (QVBR). You can''t use CBR or VBR.'
+	RateControlMode Av1RateControlMode `locationName:"rateControlMode" type:"string" enum:"true"`
+
+	// Specify the number of slices per picture. This value must be 1, 2, 4, 8,
+	// 16, or 32. For progressive pictures, this value must be less than or equal
+	// to the number of macroblock rows. For interlaced pictures, this value must
+	// be less than or equal to half the number of macroblock rows.
+	Slices *int64 `locationName:"slices" min:"1" type:"integer"`
+
+	// Adjust quantization within each frame based on spatial variation of content
+	// complexity.
+	SpatialAdaptiveQuantization Av1SpatialAdaptiveQuantization `locationName:"spatialAdaptiveQuantization" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s Av1Settings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Av1Settings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Av1Settings"}
+	if s.FramerateDenominator != nil && *s.FramerateDenominator < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("FramerateDenominator", 1))
+	}
+	if s.FramerateNumerator != nil && *s.FramerateNumerator < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("FramerateNumerator", 1))
+	}
+	if s.MaxBitrate != nil && *s.MaxBitrate < 1000 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxBitrate", 1000))
+	}
+	if s.NumberBFramesBetweenReferenceFrames != nil && *s.NumberBFramesBetweenReferenceFrames < 7 {
+		invalidParams.Add(aws.NewErrParamMinValue("NumberBFramesBetweenReferenceFrames", 7))
+	}
+	if s.Slices != nil && *s.Slices < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Slices", 1))
+	}
+	if s.QvbrSettings != nil {
+		if err := s.QvbrSettings.Validate(); err != nil {
+			invalidParams.AddNested("QvbrSettings", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Av1Settings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AdaptiveQuantization) > 0 {
+		v := s.AdaptiveQuantization
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "adaptiveQuantization", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.FramerateControl) > 0 {
+		v := s.FramerateControl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "framerateControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.FramerateConversionAlgorithm) > 0 {
+		v := s.FramerateConversionAlgorithm
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "framerateConversionAlgorithm", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.FramerateDenominator != nil {
+		v := *s.FramerateDenominator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "framerateDenominator", protocol.Int64Value(v), metadata)
+	}
+	if s.FramerateNumerator != nil {
+		v := *s.FramerateNumerator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "framerateNumerator", protocol.Int64Value(v), metadata)
+	}
+	if s.GopSize != nil {
+		v := *s.GopSize
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "gopSize", protocol.Float64Value(v), metadata)
+	}
+	if s.MaxBitrate != nil {
+		v := *s.MaxBitrate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxBitrate", protocol.Int64Value(v), metadata)
+	}
+	if s.NumberBFramesBetweenReferenceFrames != nil {
+		v := *s.NumberBFramesBetweenReferenceFrames
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "numberBFramesBetweenReferenceFrames", protocol.Int64Value(v), metadata)
+	}
+	if s.QvbrSettings != nil {
+		v := s.QvbrSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "qvbrSettings", v, metadata)
+	}
+	if len(s.RateControlMode) > 0 {
+		v := s.RateControlMode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "rateControlMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Slices != nil {
+		v := *s.Slices
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "slices", protocol.Int64Value(v), metadata)
+	}
+	if len(s.SpatialAdaptiveQuantization) > 0 {
+		v := s.SpatialAdaptiveQuantization
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "spatialAdaptiveQuantization", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -2347,10 +2595,11 @@ type ColorCorrector struct {
 	Brightness *int64 `locationName:"brightness" min:"1" type:"integer"`
 
 	// Specify the color space you want for this output. The service supports conversion
-	// between HDR formats, between SDR formats, and from SDR to HDR. The service
-	// doesn't support conversion from HDR to SDR. SDR to HDR conversion doesn't
-	// upgrade the dynamic range. The converted video has an HDR format, but visually
-	// appears the same as an unconverted output.
+	// between HDR formats, between SDR formats, from SDR to HDR, and from HDR to
+	// SDR. SDR to HDR conversion doesn't upgrade the dynamic range. The converted
+	// video has an HDR format, but visually appears the same as an unconverted
+	// output. HDR to SDR conversion uses Elemental tone mapping technology to approximate
+	// the outcome of manually regrading from HDR to SDR.
 	ColorSpaceConversion ColorSpaceConversion `locationName:"colorSpaceConversion" type:"string" enum:"true"`
 
 	// Contrast level.
@@ -4436,11 +4685,22 @@ type H264QvbrSettings struct {
 	MaxAverageBitrate *int64 `locationName:"maxAverageBitrate" min:"1000" type:"integer"`
 
 	// Required when you use QVBR rate control mode. That is, when you specify qvbrSettings
-	// within h264Settings. Specify the target quality level for this output, from
-	// 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly
-	// lossless compression. The quality level for most broadcast-quality transcodes
-	// is between 6 and 9.
+	// within h264Settings. Specify the general target quality level for this output,
+	// from 1 to 10. Use higher numbers for greater quality. Level 10 results in
+	// nearly lossless compression. The quality level for most broadcast-quality
+	// transcodes is between 6 and 9. Optionally, to specify a value between whole
+	// numbers, also provide a value for the setting qvbrQualityLevelFineTune. For
+	// example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel
+	// to 7 and set qvbrQualityLevelFineTune to .33.
 	QvbrQualityLevel *int64 `locationName:"qvbrQualityLevel" min:"1" type:"integer"`
+
+	// Optional. Specify a value here to set the QVBR quality to a level that is
+	// between whole numbers. For example, if you want your QVBR quality level to
+	// be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+	// MediaConvert rounds your QVBR quality level to the nearest third of a whole
+	// number. For example, if you set qvbrQualityLevel to 7 and you set qvbrQualityLevelFineTune
+	// to .25, your actual QVBR quality level is 7.33.
+	QvbrQualityLevelFineTune *float64 `locationName:"qvbrQualityLevelFineTune" type:"double"`
 }
 
 // String returns the string representation
@@ -4477,6 +4737,12 @@ func (s H264QvbrSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "qvbrQualityLevel", protocol.Int64Value(v), metadata)
+	}
+	if s.QvbrQualityLevelFineTune != nil {
+		v := *s.QvbrQualityLevelFineTune
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "qvbrQualityLevelFineTune", protocol.Float64Value(v), metadata)
 	}
 	return nil
 }
@@ -4976,11 +5242,22 @@ type H265QvbrSettings struct {
 	MaxAverageBitrate *int64 `locationName:"maxAverageBitrate" min:"1000" type:"integer"`
 
 	// Required when you use QVBR rate control mode. That is, when you specify qvbrSettings
-	// within h265Settings. Specify the target quality level for this output, from
-	// 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly
-	// lossless compression. The quality level for most broadcast-quality transcodes
-	// is between 6 and 9.
+	// within h265Settings. Specify the general target quality level for this output,
+	// from 1 to 10. Use higher numbers for greater quality. Level 10 results in
+	// nearly lossless compression. The quality level for most broadcast-quality
+	// transcodes is between 6 and 9. Optionally, to specify a value between whole
+	// numbers, also provide a value for the setting qvbrQualityLevelFineTune. For
+	// example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel
+	// to 7 and set qvbrQualityLevelFineTune to .33.
 	QvbrQualityLevel *int64 `locationName:"qvbrQualityLevel" min:"1" type:"integer"`
+
+	// Optional. Specify a value here to set the QVBR quality to a level that is
+	// between whole numbers. For example, if you want your QVBR quality level to
+	// be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+	// MediaConvert rounds your QVBR quality level to the nearest third of a whole
+	// number. For example, if you set qvbrQualityLevel to 7 and you set qvbrQualityLevelFineTune
+	// to .25, your actual QVBR quality level is 7.33.
+	QvbrQualityLevelFineTune *float64 `locationName:"qvbrQualityLevelFineTune" type:"double"`
 }
 
 // String returns the string representation
@@ -5017,6 +5294,12 @@ func (s H265QvbrSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "qvbrQualityLevel", protocol.Int64Value(v), metadata)
+	}
+	if s.QvbrQualityLevelFineTune != nil {
+		v := *s.QvbrQualityLevelFineTune
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "qvbrQualityLevelFineTune", protocol.Float64Value(v), metadata)
 	}
 	return nil
 }
@@ -6271,7 +6554,10 @@ type HlsSettings struct {
 	// manifest
 	IFrameOnlyManifest HlsIFrameOnlyManifest `locationName:"iFrameOnlyManifest" type:"string" enum:"true"`
 
-	// String concatenated to end of segment filenames. Accepts "Format Identifiers":#format_identifier_parameters.
+	// Use this setting to add an identifying string to the filename of each segment.
+	// The service adds this string between the name modifier and segment index
+	// number. You can use format identifiers in the string. For more information,
+	// see https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html
 	SegmentModifier *string `locationName:"segmentModifier" type:"string"`
 }
 
@@ -12304,10 +12590,14 @@ func (s TtmlDestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
 // vary depending on the value that you choose for Video codec (Codec). For
 // each codec enum that you choose, define the corresponding settings object.
 // The following lists the codec enum, settings object pairs. * FRAME_CAPTURE,
-// FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2,
-// Mpeg2Settings * PRORES, ProresSettings
+// FrameCaptureSettings * AV1, Av1Settings * H_264, H264Settings * H_265, H265Settings
+// * MPEG2, Mpeg2Settings * PRORES, ProresSettings
 type VideoCodecSettings struct {
 	_ struct{} `type:"structure"`
+
+	// Required when you set Codec, under VideoDescription>CodecSettings to the
+	// value AV1.
+	Av1Settings *Av1Settings `locationName:"av1Settings" type:"structure"`
 
 	// Specifies the video codec. This must be equal to one of the enum values defined
 	// by the object VideoCodec.
@@ -12341,6 +12631,11 @@ func (s VideoCodecSettings) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VideoCodecSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "VideoCodecSettings"}
+	if s.Av1Settings != nil {
+		if err := s.Av1Settings.Validate(); err != nil {
+			invalidParams.AddNested("Av1Settings", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.FrameCaptureSettings != nil {
 		if err := s.FrameCaptureSettings.Validate(); err != nil {
 			invalidParams.AddNested("FrameCaptureSettings", err.(aws.ErrInvalidParams))
@@ -12375,6 +12670,12 @@ func (s *VideoCodecSettings) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s VideoCodecSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Av1Settings != nil {
+		v := s.Av1Settings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "av1Settings", v, metadata)
+	}
 	if len(s.Codec) > 0 {
 		v := s.Codec
 
@@ -12436,8 +12737,8 @@ type VideoDescription struct {
 	// vary depending on the value that you choose for Video codec (Codec). For
 	// each codec enum that you choose, define the corresponding settings object.
 	// The following lists the codec enum, settings object pairs. * FRAME_CAPTURE,
-	// FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2,
-	// Mpeg2Settings * PRORES, ProresSettings
+	// FrameCaptureSettings * AV1, Av1Settings * H_264, H264Settings * H_265, H265Settings
+	// * MPEG2, Mpeg2Settings * PRORES, ProresSettings
 	CodecSettings *VideoCodecSettings `locationName:"codecSettings" type:"structure"`
 
 	// Choose Insert (INSERT) for this setting to include color metadata in this

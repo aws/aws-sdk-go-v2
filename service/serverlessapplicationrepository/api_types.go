@@ -60,6 +60,11 @@ type ApplicationPolicyStatement struct {
 	// Actions is a required field
 	Actions []string `locationName:"actions" type:"list" required:"true"`
 
+	// An array of PrinciplalOrgIDs, which corresponds to AWS IAM aws:PrincipalOrgID
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#principal-org-id)
+	// global condition key.
+	PrincipalOrgIDs []string `locationName:"principalOrgIDs" type:"list"`
+
 	// An array of AWS account IDs, or * to make the application public.
 	//
 	// Principals is a required field
@@ -99,6 +104,18 @@ func (s ApplicationPolicyStatement) MarshalFields(e protocol.FieldEncoder) error
 
 		metadata := protocol.Metadata{}
 		ls0 := e.List(protocol.BodyTarget, "actions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.PrincipalOrgIDs != nil {
+		v := s.PrincipalOrgIDs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "principalOrgIDs", metadata)
 		ls0.Start()
 		for _, v1 := range v {
 			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})

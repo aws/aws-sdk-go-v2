@@ -12,6 +12,51 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// A rule that controls access to an Amazon WorkMail organization.
+type AccessControlRule struct {
+	_ struct{} `type:"structure"`
+
+	// Access protocol actions to include in the rule. Valid values include ActiveSync,
+	// AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
+	Actions []string `type:"list"`
+
+	// The date that the rule was created.
+	DateCreated *time.Time `type:"timestamp"`
+
+	// The date that the rule was modified.
+	DateModified *time.Time `type:"timestamp"`
+
+	// The rule description.
+	Description *string `type:"string"`
+
+	// The rule effect.
+	Effect AccessControlRuleEffect `type:"string" enum:"true"`
+
+	// IPv4 CIDR ranges to include in the rule.
+	IpRanges []string `type:"list"`
+
+	// The rule name.
+	Name *string `min:"1" type:"string"`
+
+	// Access protocol actions to exclude from the rule. Valid values include ActiveSync,
+	// AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
+	NotActions []string `type:"list"`
+
+	// IPv4 CIDR ranges to exclude from the rule.
+	NotIpRanges []string `type:"list"`
+
+	// User IDs to exclude from the rule.
+	NotUserIds []string `type:"list"`
+
+	// User IDs to include in the rule.
+	UserIds []string `type:"list"`
+}
+
+// String returns the string representation
+func (s AccessControlRule) String() string {
+	return awsutil.Prettify(s)
+}
+
 // At least one delegate must be associated to the resource to disable automatic
 // replies from the resource.
 type BookingOptions struct {
@@ -195,6 +240,47 @@ type Resource struct {
 // String returns the string representation
 func (s Resource) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Describes a tag applied to a resource.
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// The key of the tag.
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
+
+	// The value of the tag.
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // The representation of an Amazon WorkMail user.

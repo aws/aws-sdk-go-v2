@@ -2,14 +2,16 @@ package dynamodb_test
 
 import (
 	"bytes"
+	"errors"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 )
 
@@ -17,8 +19,8 @@ var db *dynamodb.Client
 
 func TestMain(m *testing.M) {
 	cfg := unit.Config()
-	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 2
+	cfg.Retryer = retry.NewStandard(func(s *retry.StandardOptions) {
+		s.MaxAttempts = 3
 	})
 
 	db = dynamodb.New(cfg)
@@ -51,38 +53,32 @@ func TestDefaultRetryRules(t *testing.T) {
 	cfg.Retryer = nil
 
 	svc := dynamodb.New(cfg)
-	if e, a := 10, svc.Retryer.MaxRetries(); e != a {
+	if e, a := 10, svc.Retryer.MaxAttempts(); e != a {
 		t.Errorf("expect %d max retries, got %d", e, a)
 	}
 }
 
 func TestCustomRetryRules(t *testing.T) {
 	cfg := unit.Config()
-	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 2
+	cfg.Retryer = retry.NewStandard(func(s *retry.StandardOptions) {
+		s.MaxAttempts = 1
 	})
 
 	svc := dynamodb.New(cfg)
-	if e, a := 2, svc.Retryer.MaxRetries(); e != a {
+	if e, a := 1, svc.Retryer.MaxAttempts(); e != a {
 		t.Errorf("expect %d max retries, got %d", e, a)
 	}
 }
 
-type testCustomRetryer struct {
-	aws.DefaultRetryer
-}
-
 func TestCustomRetry_FromConfig(t *testing.T) {
 	cfg := unit.Config()
-	cfg.Retryer = testCustomRetryer{aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 9.
-	})}
+	cfg.Retryer = retry.NewStandard(func(s *retry.StandardOptions) {
+		s.MaxAttempts = 9
+	})
 
 	svc := dynamodb.New(cfg)
 
-	retryer := svc.Retryer.(testCustomRetryer)
-
-	if e, a := 9, retryer.MaxRetries(); e != a {
+	if e, a := 9, svc.Retryer.MaxAttempts(); e != a {
 		t.Errorf("expect %d max retries from custom retryer, got %d", e, a)
 	}
 }
@@ -107,9 +103,8 @@ func TestValidateCRC32AlreadyErrorSkip(t *testing.T) {
 		t.Fatalf("expect error, but got none")
 	}
 
-	aerr := req.Error.(awserr.Error)
-	if aerr.Code() == "CRC32CheckFailed" {
-		t.Errorf("expect error code not to be CRC32CheckFailed")
+	if e, a := (&dynamodb.CRC32CheckFailedError{}), req.Error; errors.Is(a, e) {
+		t.Fatalf("expect error not to be %T", e)
 	}
 }
 
@@ -127,30 +122,27 @@ func TestValidateCRC32IsValid(t *testing.T) {
 }
 
 func TestValidateCRC32DoesNotMatch(t *testing.T) {
+	cleanup := sdk.TestingUseNoOpSleep()
+	defer cleanup()
+
 	req := mockCRCResponse(db, 200, "{}", "1234")
 	if req.Error == nil {
 		t.Fatalf("expect error, but got none")
 	}
 	req.Handlers.Build.RemoveByName("crr.endpointdiscovery")
 
-	aerr := req.Error.(awserr.Error)
-	if e, a := "CRC32CheckFailed", aerr.Code(); e != a {
-		t.Errorf("expect %s error code, got %s", e, a)
-	}
 	if e, a := 2, req.RetryCount; e != a {
 		t.Errorf("expect %d retry count, got %d", e, a)
+	}
+	if e, a := (&dynamodb.CRC32CheckFailedError{}), req.Error; !errors.Is(a, e) {
+		t.Fatalf("expect %T error, got %T", e, a)
 	}
 }
 
 func TestValidateCRC32DoesNotMatchNoComputeChecksum(t *testing.T) {
-	cfg := unit.Config()
-	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 2
-	})
-
-	svc := dynamodb.New(cfg)
+	svc := new(dynamodb.Client)
+	*svc = *db
 	svc.DisableComputeChecksums = true
-	svc.Handlers.Send.Clear() // mock sending
 
 	req := mockCRCResponse(svc, 200, `{"TableNames":["A"]}`, "1234")
 	if req.Error != nil {

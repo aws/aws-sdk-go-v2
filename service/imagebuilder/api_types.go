@@ -24,10 +24,10 @@ type Ami struct {
 	// The name of the EC2 AMI.
 	Name *string `locationName:"name" min:"1" type:"string"`
 
-	// The region of the EC2 AMI.
+	// The AWS Region of the EC2 AMI.
 	Region *string `locationName:"region" min:"1" type:"string"`
 
-	// Image state shows the images status and the reason for that status.
+	// Image state shows the image status and the reason for that status.
 	State *ImageState `locationName:"state" type:"structure"`
 }
 
@@ -71,11 +71,11 @@ func (s Ami) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Define and configure the outputs AMIs of the pipeline.
+// Define and configure the output AMIs of the pipeline.
 type AmiDistributionConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The tags to apply to AMIs distributed to this region.
+	// The tags to apply to AMIs distributed to this Region.
 	AmiTags map[string]string `locationName:"amiTags" min:"1" type:"map"`
 
 	// The description of the distribution configuration.
@@ -327,7 +327,7 @@ func (s ComponentConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A high level summary of a component.
+// A high-level summary of a component.
 type ComponentSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -439,7 +439,7 @@ func (s ComponentSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A high level overview of a component semantic version.
+// A high-level overview of a component semantic version.
 type ComponentVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -527,14 +527,19 @@ func (s ComponentVersion) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Defines the settings for a specific Region.
 type Distribution struct {
 	_ struct{} `type:"structure"`
 
-	// Define and configure the outputs AMIs of the pipeline.
+	// The specific AMI settings (for example, launch permissions, AMI tags).
 	AmiDistributionConfiguration *AmiDistributionConfiguration `locationName:"amiDistributionConfiguration" type:"structure"`
 
+	// The License Manager Configuration to associate with the AMI in the specified
+	// Region.
 	LicenseConfigurationArns []string `locationName:"licenseConfigurationArns" type:"list"`
 
+	// The target Region.
+	//
 	// Region is a required field
 	Region *string `locationName:"region" min:"1" type:"string" required:"true"`
 }
@@ -696,7 +701,7 @@ func (s DistributionConfiguration) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// A high level overview a distribution configuration.
+// A high-level overview of a distribution configuration.
 type DistributionConfigurationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -771,7 +776,7 @@ func (s DistributionConfigurationSummary) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
-// EBS specific block device mapping specifications.
+// Amazon EBS-specific block device mapping specifications.
 type EbsInstanceBlockDeviceSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -871,11 +876,16 @@ func (s EbsInstanceBlockDeviceSpecification) MarshalFields(e protocol.FieldEncod
 	return nil
 }
 
+// A filter name and value pair that is used to return a more specific list
+// of results from a list operation. Filters can be used to match a set of resources
+// by specific criteria, such as tags, attributes, or IDs.
 type Filter struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the filter. Filter names are case-sensitive.
 	Name *string `locationName:"name" type:"string"`
 
+	// The filter values. Filter values are case-sensitive.
 	Values []string `locationName:"values" min:"1" type:"list"`
 }
 
@@ -1100,7 +1110,7 @@ type ImagePipeline struct {
 	// The image tests configuration of the image pipeline.
 	ImageTestsConfiguration *ImageTestsConfiguration `locationName:"imageTestsConfiguration" type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the infrastruction configuration associated
+	// The Amazon Resource Name (ARN) of the infrastructure configuration associated
 	// with this image pipeline.
 	InfrastructureConfigurationArn *string `locationName:"infrastructureConfigurationArn" type:"string"`
 
@@ -1442,7 +1452,7 @@ func (s ImageRecipeSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Image state shows the images status and the reason for that status.
+// Image state shows the image status and the reason for that status.
 type ImageState struct {
 	_ struct{} `type:"structure"`
 
@@ -1584,7 +1594,7 @@ type ImageTestsConfiguration struct {
 	// Defines if tests should be executed when building this image.
 	ImageTestsEnabled *bool `locationName:"imageTestsEnabled" type:"boolean"`
 
-	// The maximum time in minutes that tests are permitted to run for.
+	// The maximum time in minutes that tests are permitted to run.
 	TimeoutMinutes *int64 `locationName:"timeoutMinutes" min:"60" type:"integer"`
 }
 
@@ -1627,7 +1637,7 @@ func (s ImageTestsConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 type ImageVersion struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the image semantic verion.
+	// The Amazon Resource Name (ARN) of the image semantic version.
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The date at which this image semantic version was created.
@@ -1696,7 +1706,7 @@ func (s ImageVersion) MarshalFields(e protocol.FieldEncoder) error {
 type InfrastructureConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the infrastruction configuration.
+	// The Amazon Resource Name (ARN) of the infrastructure configuration.
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The date on which the infrastructure configuration was created.
@@ -1705,37 +1715,37 @@ type InfrastructureConfiguration struct {
 	// The date on which the infrastructure configuration was last updated.
 	DateUpdated *string `locationName:"dateUpdated" type:"string"`
 
-	// The description of the infrastruction configuration.
+	// The description of the infrastructure configuration.
 	Description *string `locationName:"description" min:"1" type:"string"`
 
-	// The instance profile of the infrastruction configuration.
+	// The instance profile of the infrastructure configuration.
 	InstanceProfileName *string `locationName:"instanceProfileName" min:"1" type:"string"`
 
-	// The instance types of the infrastruction configuration.
+	// The instance types of the infrastructure configuration.
 	InstanceTypes []string `locationName:"instanceTypes" type:"list"`
 
-	// The EC2 key pair of the infrastruction configuration.
+	// The EC2 key pair of the infrastructure configuration.
 	KeyPair *string `locationName:"keyPair" min:"1" type:"string"`
 
-	// The logging configuration of the infrastruction configuration.
+	// The logging configuration of the infrastructure configuration.
 	Logging *Logging `locationName:"logging" type:"structure"`
 
-	// The name of the infrastruction configuration.
+	// The name of the infrastructure configuration.
 	Name *string `locationName:"name" type:"string"`
 
-	// The security group IDs of the infrastruction configuration.
+	// The security group IDs of the infrastructure configuration.
 	SecurityGroupIds []string `locationName:"securityGroupIds" type:"list"`
 
-	// The SNS Topic Amazon Resource Name (ARN) of the infrastruction configuration.
+	// The SNS topic Amazon Resource Name (ARN) of the infrastructure configuration.
 	SnsTopicArn *string `locationName:"snsTopicArn" min:"1" type:"string"`
 
-	// The subnet ID of the infrastruction configuration.
+	// The subnet ID of the infrastructure configuration.
 	SubnetId *string `locationName:"subnetId" min:"1" type:"string"`
 
-	// The tags of the infrastruction configuration.
+	// The tags of the infrastructure configuration.
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 
-	// The terminate instance on failure configuration of the infrastruction configuration.
+	// The terminate instance on failure configuration of the infrastructure configuration.
 	TerminateInstanceOnFailure *bool `locationName:"terminateInstanceOnFailure" type:"boolean"`
 }
 
@@ -1933,11 +1943,11 @@ type InstanceBlockDeviceMapping struct {
 	// The device to which these mappings apply.
 	DeviceName *string `locationName:"deviceName" min:"1" type:"string"`
 
-	// Use to manage EBS specific configuration for this mapping.
+	// Use to manage Amazon EBS-specific configuration for this mapping.
 	Ebs *EbsInstanceBlockDeviceSpecification `locationName:"ebs" type:"structure"`
 
 	// Use to remove a mapping from the parent image.
-	NoDevice *string `locationName:"noDevice" min:"1" type:"string"`
+	NoDevice *string `locationName:"noDevice" type:"string"`
 
 	// Use to manage instance ephemeral devices.
 	VirtualName *string `locationName:"virtualName" min:"1" type:"string"`
@@ -1953,9 +1963,6 @@ func (s *InstanceBlockDeviceMapping) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InstanceBlockDeviceMapping"}
 	if s.DeviceName != nil && len(*s.DeviceName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeviceName", 1))
-	}
-	if s.NoDevice != nil && len(*s.NoDevice) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NoDevice", 1))
 	}
 	if s.VirtualName != nil && len(*s.VirtualName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("VirtualName", 1))
@@ -2001,11 +2008,17 @@ func (s InstanceBlockDeviceMapping) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
+// Describes the configuration for a launch permission. The launch permission
+// modification request is sent to the EC2 ModifyImageAttribute (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html)
+// API on behalf of the user for each Region they have selected to distribute
+// the AMI.
 type LaunchPermissionConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the group.
 	UserGroups []string `locationName:"userGroups" type:"list"`
 
+	// The AWS account ID.
 	UserIds []string `locationName:"userIds" type:"list"`
 }
 
@@ -2043,11 +2056,11 @@ func (s LaunchPermissionConfiguration) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Logging configuration defines where Image Builder uploads your logs to.
+// Logging configuration defines where Image Builder uploads your logs.
 type Logging struct {
 	_ struct{} `type:"structure"`
 
-	// The S3 logging configuration.
+	// The Amazon S3 logging configuration.
 	S3Logs *S3Logs `locationName:"s3Logs" type:"structure"`
 }
 
@@ -2112,14 +2125,14 @@ func (s OutputResources) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// S3 Logging configuration.
+// Amazon S3 logging configuration.
 type S3Logs struct {
 	_ struct{} `type:"structure"`
 
-	// The S3 bucket in which to store the logs.
+	// The Amazon S3 bucket in which to store the logs.
 	S3BucketName *string `locationName:"s3BucketName" min:"1" type:"string"`
 
-	// The S3 path in which to store the logs.
+	// The Amazon S3 path in which to store the logs.
 	S3KeyPrefix *string `locationName:"s3KeyPrefix" min:"1" type:"string"`
 }
 
@@ -2167,10 +2180,13 @@ type Schedule struct {
 	_ struct{} `type:"structure"`
 
 	// The condition configures when the pipeline should trigger a new image build.
+	// When the pipelineExecutionStartCondition is set to EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE,
+	// EC2 Image Builder will build a new image only when there are known changes
+	// pending. When it is set to EXPRESSION_MATCH_ONLY, it will build a new image
+	// every time the CRON expression matches the current time.
 	PipelineExecutionStartCondition PipelineExecutionStartCondition `locationName:"pipelineExecutionStartCondition" type:"string" enum:"true"`
 
-	// The expression determines how often a pipeline starts the creation of new
-	// images.
+	// The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.
 	ScheduleExpression *string `locationName:"scheduleExpression" min:"1" type:"string"`
 }
 

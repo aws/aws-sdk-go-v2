@@ -13,12 +13,12 @@ import (
 type CreateDBSubnetGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The description for the DB subnet group.
+	// The description for the subnet group.
 	//
 	// DBSubnetGroupDescription is a required field
 	DBSubnetGroupDescription *string `type:"string" required:"true"`
 
-	// The name for the DB subnet group. This value is stored as a lowercase string.
+	// The name for the subnet group. This value is stored as a lowercase string.
 	//
 	// Constraints: Must contain no more than 255 letters, numbers, periods, underscores,
 	// spaces, or hyphens. Must not be default.
@@ -28,12 +28,12 @@ type CreateDBSubnetGroupInput struct {
 	// DBSubnetGroupName is a required field
 	DBSubnetGroupName *string `type:"string" required:"true"`
 
-	// The Amazon EC2 subnet IDs for the DB subnet group.
+	// The Amazon EC2 subnet IDs for the subnet group.
 	//
 	// SubnetIds is a required field
 	SubnetIds []string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
 
-	// The tags to be assigned to the DB subnet group.
+	// The tags to be assigned to the subnet group.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
@@ -67,7 +67,7 @@ func (s *CreateDBSubnetGroupInput) Validate() error {
 type CreateDBSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB subnet group.
+	// Detailed information about a subnet group.
 	DBSubnetGroup *DBSubnetGroup `type:"structure"`
 }
 
@@ -81,8 +81,8 @@ const opCreateDBSubnetGroup = "CreateDBSubnetGroup"
 // CreateDBSubnetGroupRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Creates a new DB subnet group. DB subnet groups must contain at least one
-// subnet in at least two Availability Zones in the AWS Region.
+// Creates a new subnet group. subnet groups must contain at least one subnet
+// in at least two Availability Zones in the AWS Region.
 //
 //    // Example sending a request using CreateDBSubnetGroupRequest.
 //    req := client.CreateDBSubnetGroupRequest(params)

@@ -1429,6 +1429,45 @@ func (s Slot) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Provides configuration information for a slot type.
+type SlotTypeConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// A regular expression used to validate the value of a slot.
+	RegexConfiguration *SlotTypeRegexConfiguration `locationName:"regexConfiguration" type:"structure"`
+}
+
+// String returns the string representation
+func (s SlotTypeConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SlotTypeConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SlotTypeConfiguration"}
+	if s.RegexConfiguration != nil {
+		if err := s.RegexConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("RegexConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SlotTypeConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.RegexConfiguration != nil {
+		v := s.RegexConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "regexConfiguration", v, metadata)
+	}
+	return nil
+}
+
 // Provides information about a slot type..
 type SlotTypeMetadata struct {
 	_ struct{} `type:"structure"`
@@ -1488,6 +1527,66 @@ func (s SlotTypeMetadata) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Provides a regular expression used to validate the value of a slot.
+type SlotTypeRegexConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// A regular expression used to validate the value of a slot.
+	//
+	// Use a standard regular expression. Amazon Lex supports the following characters
+	// in the regular expression:
+	//
+	//    * A-Z, a-z
+	//
+	//    * 0-9
+	//
+	//    * Unicode characters ("\ u<Unicode>")
+	//
+	// Represent Unicode characters with four digits, for example "\u0041" or "\u005A".
+	//
+	// The following regular expression operators are not supported:
+	//
+	//    * Infinite repeaters: *, +, or {x,} with no upper bound.
+	//
+	//    * Wild card (.)
+	//
+	// Pattern is a required field
+	Pattern *string `locationName:"pattern" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s SlotTypeRegexConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SlotTypeRegexConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SlotTypeRegexConfiguration"}
+
+	if s.Pattern == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Pattern"))
+	}
+	if s.Pattern != nil && len(*s.Pattern) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Pattern", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SlotTypeRegexConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Pattern != nil {
+		v := *s.Pattern
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pattern", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1560,6 +1659,67 @@ func (s Statement) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "responseCard", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A list of key/value pairs that identify a bot, bot alias, or bot channel.
+// Tag keys and values can consist of Unicode letters, digits, white space,
+// and any of the following symbols: _ . : / = + - @.
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// The key for the tag. Keys are not case-sensitive and must be unique.
+	//
+	// Key is a required field
+	Key *string `locationName:"key" min:"1" type:"string" required:"true"`
+
+	// The value associated with a key. The value may be an empty string but it
+	// can't be null.
+	//
+	// Value is a required field
+	Value *string `locationName:"value" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "key", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

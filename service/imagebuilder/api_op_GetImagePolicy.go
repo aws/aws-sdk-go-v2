@@ -13,7 +13,7 @@ import (
 type GetImagePolicyInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the image whose policy you wish to retrieve.
+	// The Amazon Resource Name (ARN) of the image whose policy you want to retrieve.
 	//
 	// ImageArn is a required field
 	ImageArn *string `location:"querystring" locationName:"imageArn" type:"string" required:"true"`

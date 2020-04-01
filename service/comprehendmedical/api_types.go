@@ -23,6 +23,9 @@ type Attribute struct {
 	// begins. The offset returns the UTF-8 code point in the string.
 	BeginOffset *int64 `type:"integer"`
 
+	// The category of attribute.
+	Category EntityType `type:"string" enum:"true"`
+
 	// The 0-based character offset in the input text that shows where the attribute
 	// ends. The offset returns the UTF-8 code point in the string.
 	EndOffset *int64 `type:"integer"`
@@ -34,6 +37,10 @@ type Attribute struct {
 	// The level of confidence that Amazon Comprehend Medical has that this attribute
 	// is correctly related to this entity.
 	RelationshipScore *float64 `type:"float"`
+
+	// The type of relationship between the entity and attribute. Type for the relationship
+	// is OVERLAP, indicating that the entity occurred at the same time as the Date_Expression.
+	RelationshipType RelationshipType `type:"string" enum:"true"`
 
 	// The level of confidence that Amazon Comprehend Medical has that the segment
 	// of text is correctly recognized as an attribute.
@@ -333,7 +340,7 @@ func (s ICD10CMTrait) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The input properties for an entities detection job
+// The input properties for an entities detection job.
 type InputDataConfig struct {
 	_ struct{} `type:"structure"`
 

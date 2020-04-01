@@ -14,8 +14,8 @@ type ImportComponentInput struct {
 	_ struct{} `type:"structure"`
 
 	// The change description of the component. Describes what change has been made
-	// in this version. In other words what makes this version different from other
-	// versions of this component.
+	// in this version, or what makes this version different from other versions
+	// of this component.
 	ChangeDescription *string `locationName:"changeDescription" min:"1" type:"string"`
 
 	// The idempotency token of the component.
@@ -23,13 +23,14 @@ type ImportComponentInput struct {
 	// ClientToken is a required field
 	ClientToken *string `locationName:"clientToken" min:"1" type:"string" required:"true" idempotencyToken:"true"`
 
-	// The data of the component.
+	// The data of the component. Used to specify the data inline. Either data or
+	// uri can be used to specify the data within the component.
 	Data *string `locationName:"data" min:"1" type:"string"`
 
 	// The description of the component. Describes the contents of the component.
 	Description *string `locationName:"description" min:"1" type:"string"`
 
-	// The format of the resource that you wish to import as a component.
+	// The format of the resource that you want to import as a component.
 	//
 	// Format is a required field
 	Format ComponentFormat `locationName:"format" type:"string" required:"true" enum:"true"`
@@ -47,9 +48,9 @@ type ImportComponentInput struct {
 	// Platform is a required field
 	Platform Platform `locationName:"platform" type:"string" required:"true" enum:"true"`
 
-	// The semantic version of the component. This version to follow the semantic
-	// version syntax. i.e. major.minor.patch. This could be versioned like software
-	// 2.0.1 or date like 2019.12.01.
+	// The semantic version of the component. This version follows the semantic
+	// version syntax. For example, major.minor.patch. This could be versioned like
+	// software (2.0.1) or like a date (2019.12.01).
 	//
 	// SemanticVersion is a required field
 	SemanticVersion *string `locationName:"semanticVersion" type:"string" required:"true"`
@@ -63,7 +64,10 @@ type ImportComponentInput struct {
 	// Type is a required field
 	Type ComponentType `locationName:"type" type:"string" required:"true" enum:"true"`
 
-	// The uri of the component.
+	// The uri of the component. Must be an S3 URL and the requester must have permission
+	// to access the S3 bucket. If you use S3, you can specify component content
+	// up to your service quota. Either data or uri can be used to specify the data
+	// within the component.
 	Uri *string `locationName:"uri" type:"string"`
 }
 

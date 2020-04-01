@@ -55,8 +55,8 @@ const opGetMasterAccount = "GetMasterAccount"
 // GetMasterAccountRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Provides the details for the Security Hub master account to the current member
-// account.
+// Provides the details for the Security Hub master account for the current
+// member account.
 //
 //    // Example sending a request using GetMasterAccountRequest.
 //    req := client.GetMasterAccountRequest(params)

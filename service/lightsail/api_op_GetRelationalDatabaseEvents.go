@@ -20,8 +20,11 @@ type GetRelationalDatabaseEventsInput struct {
 	// The minimum is 1 and the maximum is 14 days (20160 minutes).
 	DurationInMinutes *int64 `locationName:"durationInMinutes" type:"integer"`
 
-	// A token used for advancing to a specific page of results from for get relational
-	// database events request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetRelationalDatabaseEvents request.
+	// If your results are paginated, the response will return a next page token
+	// that you can specify as the page token in a subsequent request.
 	PageToken *string `locationName:"pageToken" type:"string"`
 
 	// The name of the database from which to get events.
@@ -52,8 +55,12 @@ func (s *GetRelationalDatabaseEventsInput) Validate() error {
 type GetRelationalDatabaseEventsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A token used for advancing to the next page of results from your get relational
-	// database events request.
+	// The token to advance to the next page of resutls from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetRelationalDatabaseEvents
+	// request and specify the next page token using the pageToken parameter.
 	NextPageToken *string `locationName:"nextPageToken" type:"string"`
 
 	// An object describing the result of your get relational database events request.

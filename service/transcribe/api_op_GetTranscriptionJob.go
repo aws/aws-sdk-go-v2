@@ -60,7 +60,8 @@ const opGetTranscriptionJob = "GetTranscriptionJob"
 // Returns information about a transcription job. To see the status of the job,
 // check the TranscriptionJobStatus field. If the status is COMPLETED, the job
 // is finished and you can find the results at the location specified in the
-// TranscriptionFileUri field.
+// TranscriptFileUri field. If you enable content redaction, the redacted transcript
+// appears in RedactedTranscriptFileUri.
 //
 //    // Example sending a request using GetTranscriptionJobRequest.
 //    req := client.GetTranscriptionJobRequest(params)

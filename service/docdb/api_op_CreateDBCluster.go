@@ -13,8 +13,8 @@ import (
 type CreateDBClusterInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of Amazon EC2 Availability Zones that instances in the DB cluster
-	// can be created in.
+	// A list of Amazon EC2 Availability Zones that instances in the cluster can
+	// be created in.
 	AvailabilityZones []string `locationNameList:"AvailabilityZone" type:"list"`
 
 	// The number of days for which automated backups are retained. You must specify
@@ -27,7 +27,7 @@ type CreateDBClusterInput struct {
 	//    * Must be a value from 1 to 35.
 	BackupRetentionPeriod *int64 `type:"integer"`
 
-	// The DB cluster identifier. This parameter is stored as a lowercase string.
+	// The cluster identifier. This parameter is stored as a lowercase string.
 	//
 	// Constraints:
 	//
@@ -42,10 +42,10 @@ type CreateDBClusterInput struct {
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
-	// The name of the DB cluster parameter group to associate with this DB cluster.
+	// The name of the cluster parameter group to associate with this cluster.
 	DBClusterParameterGroupName *string `type:"string"`
 
-	// A DB subnet group to associate with this DB cluster.
+	// A subnet group to associate with this cluster.
 	//
 	// Constraints: Must match the name of an existing DBSubnetGroup. Must not be
 	// default.
@@ -63,7 +63,7 @@ type CreateDBClusterInput struct {
 	// Logs.
 	EnableCloudwatchLogsExports []string `type:"list"`
 
-	// The name of the database engine to be used for this DB cluster.
+	// The name of the database engine to be used for this cluster.
 	//
 	// Valid values: docdb
 	//
@@ -73,11 +73,11 @@ type CreateDBClusterInput struct {
 	// The version number of the database engine to use.
 	EngineVersion *string `type:"string"`
 
-	// The AWS KMS key identifier for an encrypted DB cluster.
+	// The AWS KMS key identifier for an encrypted cluster.
 	//
 	// The AWS KMS key identifier is the Amazon Resource Name (ARN) for the AWS
-	// KMS encryption key. If you are creating a DB cluster using the same AWS account
-	// that owns the AWS KMS encryption key that is used to encrypt the new DB cluster,
+	// KMS encryption key. If you are creating a cluster using the same AWS account
+	// that owns the AWS KMS encryption key that is used to encrypt the new cluster,
 	// you can use the AWS KMS key alias instead of the ARN for the AWS KMS encryption
 	// key.
 	//
@@ -93,9 +93,9 @@ type CreateDBClusterInput struct {
 	// AWS KMS creates the default encryption key for your AWS account. Your AWS
 	// account has a different default encryption key for each AWS Region.
 	//
-	// If you create a replica of an encrypted DB cluster in another AWS Region,
-	// you must set KmsKeyId to a KMS key ID that is valid in the destination AWS
-	// Region. This key is used to encrypt the replica in that AWS Region.
+	// If you create a replica of an encrypted cluster in another AWS Region, you
+	// must set KmsKeyId to a KMS key ID that is valid in the destination AWS Region.
+	// This key is used to encrypt the replica in that AWS Region.
 	KmsKeyId *string `type:"string"`
 
 	// The password for the master database user. This password can contain any
@@ -107,7 +107,7 @@ type CreateDBClusterInput struct {
 	// MasterUserPassword is a required field
 	MasterUserPassword *string `type:"string" required:"true"`
 
-	// The name of the master user for the DB cluster.
+	// The name of the master user for the cluster.
 	//
 	// Constraints:
 	//
@@ -120,7 +120,7 @@ type CreateDBClusterInput struct {
 	// MasterUsername is a required field
 	MasterUsername *string `type:"string" required:"true"`
 
-	// The port number on which the instances in the DB cluster accept connections.
+	// The port number on which the instances in the cluster accept connections.
 	Port *int64 `type:"integer"`
 
 	// The daily time range during which automated backups are created if automated
@@ -153,13 +153,13 @@ type CreateDBClusterInput struct {
 	// Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string `type:"string"`
 
-	// Specifies whether the DB cluster is encrypted.
+	// Specifies whether the cluster is encrypted.
 	StorageEncrypted *bool `type:"boolean"`
 
-	// The tags to be assigned to the DB cluster.
+	// The tags to be assigned to the cluster.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 
-	// A list of EC2 VPC security groups to associate with this DB cluster.
+	// A list of EC2 VPC security groups to associate with this cluster.
 	VpcSecurityGroupIds []string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 
@@ -197,7 +197,7 @@ func (s *CreateDBClusterInput) Validate() error {
 type CreateDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster.
+	// Detailed information about a cluster.
 	DBCluster *DBCluster `type:"structure"`
 }
 
@@ -211,7 +211,7 @@ const opCreateDBCluster = "CreateDBCluster"
 // CreateDBClusterRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Creates a new Amazon DocumentDB DB cluster.
+// Creates a new Amazon DocumentDB cluster.
 //
 //    // Example sending a request using CreateDBClusterRequest.
 //    req := client.CreateDBClusterRequest(params)

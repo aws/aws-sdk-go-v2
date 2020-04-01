@@ -12,8 +12,11 @@ import (
 type GetExportSnapshotRecordsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A token used for advancing to a specific page of results for your get export
-	// snapshot records request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetExportSnapshotRecords request.
+	// If your results are paginated, the response will return a next page token
+	// that you can specify as the page token in a subsequent request.
 	PageToken *string `locationName:"pageToken" type:"string"`
 }
 
@@ -28,8 +31,12 @@ type GetExportSnapshotRecordsOutput struct {
 	// A list of objects describing the export snapshot records.
 	ExportSnapshotRecords []ExportSnapshotRecord `locationName:"exportSnapshotRecords" type:"list"`
 
-	// A token used for advancing to the next page of results of your get relational
-	// database bundles request.
+	// The token to advance to the next page of resutls from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetExportSnapshotRecords
+	// request and specify the next page token using the pageToken parameter.
 	NextPageToken *string `locationName:"nextPageToken" type:"string"`
 }
 

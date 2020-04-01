@@ -12,6 +12,9 @@ import (
 type StartTranscriptionJobInput struct {
 	_ struct{} `type:"structure"`
 
+	// An object that contains the request parameters for content redaction.
+	ContentRedaction *ContentRedaction `type:"structure"`
+
 	// Provides information about how a transcription job is executed. Use this
 	// field to indicate that the job can be queued for deferred execution if the
 	// concurrency limit is reached and there are no slots available to immediately
@@ -41,9 +44,12 @@ type StartTranscriptionJobInput struct {
 
 	// The location where the transcription is stored.
 	//
-	// If you set the OutputBucketName, Amazon Transcribe puts the transcription
-	// in the specified S3 bucket. When you call the GetTranscriptionJob operation,
-	// the operation returns this location in the TranscriptFileUri field. The S3
+	// If you set the OutputBucketName, Amazon Transcribe puts the transcript in
+	// the specified S3 bucket. When you call the GetTranscriptionJob operation,
+	// the operation returns this location in the TranscriptFileUri field. If you
+	// enable content redaction, the redacted transcript appears in RedactedTranscriptFileUri.
+	// If you enable content redaction and choose to output an unredacted transcript,
+	// that transcript's location still appears in the TranscriptFileUri. The S3
 	// bucket must have permissions that allow Amazon Transcribe to put files in
 	// the bucket. For more information, see Permissions Required for IAM User Roles
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user).
@@ -122,6 +128,11 @@ func (s *StartTranscriptionJobInput) Validate() error {
 	}
 	if s.TranscriptionJobName != nil && len(*s.TranscriptionJobName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TranscriptionJobName", 1))
+	}
+	if s.ContentRedaction != nil {
+		if err := s.ContentRedaction.Validate(); err != nil {
+			invalidParams.AddNested("ContentRedaction", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.Media != nil {
 		if err := s.Media.Validate(); err != nil {

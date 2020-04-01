@@ -78,15 +78,17 @@ func TestConfigs_AppendFromLoaders(t *testing.T) {
 func TestConfigs_ResolveAWSConfig(t *testing.T) {
 	configSources := Configs{
 		WithRegion("mock-region"),
-		WithCredentialsValue(aws.Credentials{
-			AccessKeyID: "AKID", SecretAccessKey: "SECRET",
-			Source: "provider",
-		}),
+		WithCredentialsProvider{aws.StaticCredentialsProvider{
+			Value: aws.Credentials{
+				AccessKeyID: "AKID", SecretAccessKey: "SECRET",
+				Source: "provider",
+			},
+		}},
 	}
 
 	cfg, err := configSources.ResolveAWSConfig([]AWSConfigResolver{
 		ResolveRegion,
-		ResolveCredentialsValue,
+		ResolveCredentials,
 	})
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)

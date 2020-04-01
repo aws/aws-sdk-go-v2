@@ -124,8 +124,8 @@ type DBCluster struct {
 	// cluster is accessed.
 	DbClusterResourceId *string `type:"string"`
 
-	// Indicates if the DB cluster has deletion protection enabled. The database
-	// can't be deleted when deletion protection is enabled.
+	// Indicates whether or not the DB cluster has deletion protection enabled.
+	// The database can't be deleted when deletion protection is enabled.
 	DeletionProtection *bool `type:"boolean"`
 
 	// Specifies the earliest time to which a database can be restored with point-in-time
@@ -336,7 +336,20 @@ type DBClusterSnapshot struct {
 	// The Amazon Resource Name (ARN) for the DB cluster snapshot.
 	DBClusterSnapshotArn *string `type:"string"`
 
-	// Specifies the identifier for the DB cluster snapshot.
+	// Specifies the identifier for a DB cluster snapshot. Must match the identifier
+	// of an existing snapshot.
+	//
+	// After you restore a DB cluster using a DBClusterSnapshotIdentifier, you must
+	// specify the same DBClusterSnapshotIdentifier for any future updates to the
+	// DB cluster. When you specify this property for an update, the DB cluster
+	// is not restored from the snapshot again, and the data in the database is
+	// not changed.
+	//
+	// However, if you don't specify the DBClusterSnapshotIdentifier, an empty DB
+	// cluster is created, and the original DB cluster is deleted. If you specify
+	// a property that is different from the previous snapshot restore property,
+	// the DB cluster is restored from the snapshot specified by the DBClusterSnapshotIdentifier,
+	// and the original DB cluster is deleted.
 	DBClusterSnapshotIdentifier *string `type:"string"`
 
 	// Specifies the name of the database engine.
@@ -563,8 +576,9 @@ type DBInstance struct {
 	// instance is accessed.
 	DbiResourceId *string `type:"string"`
 
-	// Indicates if the DB instance has deletion protection enabled. The database
-	// can't be deleted when deletion protection is enabled.
+	// Indicates whether or not the DB instance has deletion protection enabled.
+	// The instance can't be deleted when deletion protection is enabled. See Deleting
+	// a DB Instance (https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html).
 	DeletionProtection *bool `type:"boolean"`
 
 	// Not supported

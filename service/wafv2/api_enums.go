@@ -344,6 +344,7 @@ const (
 	ParameterExceptionFieldResourceType                   ParameterExceptionField = "RESOURCE_TYPE"
 	ParameterExceptionFieldTags                           ParameterExceptionField = "TAGS"
 	ParameterExceptionFieldTagKeys                        ParameterExceptionField = "TAG_KEYS"
+	ParameterExceptionFieldMetricName                     ParameterExceptionField = "METRIC_NAME"
 )
 
 func (enum ParameterExceptionField) MarshalValue() (string, error) {

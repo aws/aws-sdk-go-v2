@@ -13,17 +13,17 @@ import (
 type ResetDBClusterParameterGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the DB cluster parameter group to reset.
+	// The name of the cluster parameter group to reset.
 	//
 	// DBClusterParameterGroupName is a required field
 	DBClusterParameterGroupName *string `type:"string" required:"true"`
 
-	// A list of parameter names in the DB cluster parameter group to reset to the
+	// A list of parameter names in the cluster parameter group to reset to the
 	// default values. You can't use this parameter if the ResetAllParameters parameter
 	// is set to true.
 	Parameters []Parameter `locationNameList:"Parameter" type:"list"`
 
-	// A value that is set to true to reset all parameters in the DB cluster parameter
+	// A value that is set to true to reset all parameters in the cluster parameter
 	// group to their default values, and false otherwise. You can't use this parameter
 	// if there is a list of parameter names specified for the Parameters parameter.
 	ResetAllParameters *bool `type:"boolean"`
@@ -48,11 +48,11 @@ func (s *ResetDBClusterParameterGroupInput) Validate() error {
 	return nil
 }
 
-// Contains the name of a DB cluster parameter group.
+// Contains the name of a cluster parameter group.
 type ResetDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of a DB cluster parameter group.
+	// The name of a cluster parameter group.
 	//
 	// Constraints:
 	//
@@ -76,10 +76,10 @@ const opResetDBClusterParameterGroup = "ResetDBClusterParameterGroup"
 // ResetDBClusterParameterGroupRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Modifies the parameters of a DB cluster parameter group to the default value.
+// Modifies the parameters of a cluster parameter group to the default value.
 // To reset specific parameters, submit a list of the following: ParameterName
-// and ApplyMethod. To reset the entire DB cluster parameter group, specify
-// the DBClusterParameterGroupName and ResetAllParameters parameters.
+// and ApplyMethod. To reset the entire cluster parameter group, specify the
+// DBClusterParameterGroupName and ResetAllParameters parameters.
 //
 // When you reset the entire group, dynamic parameters are updated immediately
 // and static parameters are set to pending-reboot to take effect on the next

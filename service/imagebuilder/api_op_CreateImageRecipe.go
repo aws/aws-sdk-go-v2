@@ -239,8 +239,8 @@ const opCreateImageRecipe = "CreateImageRecipe"
 // CreateImageRecipeRequest returns a request value for making API operation for
 // EC2 Image Builder.
 //
-// Creates a new image recipe. Image Recipes defines how images are configured,
-// tested and assessed.
+// Creates a new image recipe. Image recipes define how images are configured,
+// tested, and assessed.
 //
 //    // Example sending a request using CreateImageRecipeRequest.
 //    req := client.CreateImageRecipeRequest(params)

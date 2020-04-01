@@ -7,8 +7,6 @@ import (
 	"net/http"
 	"testing"
 	"time"
-
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 )
 
 type testReader struct {
@@ -61,6 +59,7 @@ func TestTimeoutReadCloserSameDuration(t *testing.T) {
 
 func TestWithResponseReadTimeout(t *testing.T) {
 	r := Request{
+		Retryer: NoOpRetryer{},
 		HTTPResponse: &http.Response{
 			Body: ioutil.NopCloser(bytes.NewReader(nil)),
 		},
@@ -72,47 +71,9 @@ func TestWithResponseReadTimeout(t *testing.T) {
 	}
 	v, ok := r.HTTPResponse.Body.(*timeoutReadCloser)
 	if !ok {
-		t.Error("Expected the body to be a timeoutReadCloser")
+		t.Fatalf("Expected the body to be a timeoutReadCloser, got %T", r.HTTPResponse.Body)
 	}
 	if v.duration != time.Second {
 		t.Errorf("Expected %v, but receive %v\n", time.Second, v.duration)
-	}
-}
-
-func TestAdaptToResponseTimeout(t *testing.T) {
-	testCases := []struct {
-		childErr         error
-		r                Request
-		expectedRootCode string
-	}{
-		{
-			childErr: awserr.New(ErrCodeResponseTimeout, "timeout!", nil),
-			r: Request{
-				Error: awserr.New("ErrTest", "FooBar", awserr.New(ErrCodeResponseTimeout, "timeout!", nil)),
-			},
-			expectedRootCode: ErrCodeResponseTimeout,
-		},
-		{
-			childErr: awserr.New(ErrCodeResponseTimeout+"1", "timeout!", nil),
-			r: Request{
-				Error: awserr.New("ErrTest", "FooBar", awserr.New(ErrCodeResponseTimeout+"1", "timeout!", nil)),
-			},
-			expectedRootCode: "ErrTest",
-		},
-		{
-			r: Request{
-				Error: awserr.New("ErrTest", "FooBar", nil),
-			},
-			expectedRootCode: "ErrTest",
-		},
-	}
-
-	for i, c := range testCases {
-		adaptToResponseTimeoutError(&c.r)
-		if aerr, ok := c.r.Error.(awserr.Error); !ok {
-			t.Errorf("Case %d: Expected 'awserr', but received %v", i+1, c.r.Error)
-		} else if aerr.Code() != c.expectedRootCode {
-			t.Errorf("Case %d: Expected %q, but received %s", i+1, c.expectedRootCode, aerr.Code())
-		}
 	}
 }

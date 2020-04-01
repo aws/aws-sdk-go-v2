@@ -14,11 +14,11 @@ import (
 type DescribeOrderableDBInstanceOptionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The DB instance class filter value. Specify this parameter to show only the
-	// available offerings that match the specified DB instance class.
+	// The instance class filter value. Specify this parameter to show only the
+	// available offerings that match the specified instance class.
 	DBInstanceClass *string `type:"string"`
 
-	// The name of the engine to retrieve DB instance options for.
+	// The name of the engine to retrieve instance options for.
 	//
 	// Engine is a required field
 	Engine *string `type:"string" required:"true"`
@@ -88,7 +88,7 @@ type DescribeOrderableDBInstanceOptionsOutput struct {
 	// the value specified by MaxRecords.
 	Marker *string `type:"string"`
 
-	// The options that are available for a particular orderable DB instance.
+	// The options that are available for a particular orderable instance.
 	OrderableDBInstanceOptions []OrderableDBInstanceOption `locationNameList:"OrderableDBInstanceOption" type:"list"`
 }
 
@@ -102,7 +102,7 @@ const opDescribeOrderableDBInstanceOptions = "DescribeOrderableDBInstanceOptions
 // DescribeOrderableDBInstanceOptionsRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Returns a list of orderable DB instance options for the specified engine.
+// Returns a list of orderable instance options for the specified engine.
 //
 //    // Example sending a request using DescribeOrderableDBInstanceOptionsRequest.
 //    req := client.DescribeOrderableDBInstanceOptionsRequest(params)

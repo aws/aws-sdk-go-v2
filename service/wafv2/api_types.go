@@ -19,6 +19,9 @@ var _ = awsutil.Prettify
 // the prior release, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 //
 // All query arguments of a web request.
+//
+// This is used only to indicate the web request component for AWS WAF to inspect,
+// in the FieldToMatch specification.
 type AllQueryArguments struct {
 	_ struct{} `type:"structure"`
 }
@@ -34,6 +37,9 @@ func (s AllQueryArguments) String() string {
 // the prior release, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 //
 // Specifies that AWS WAF should allow requests.
+//
+// This is used only in the context of other settings, for example to specify
+// values for RuleAction and web ACL DefaultAction.
 type AllowAction struct {
 	_ struct{} `type:"structure"`
 }
@@ -85,6 +91,9 @@ func (s *AndStatement) Validate() error {
 // the prior release, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 //
 // Specifies that AWS WAF should block requests.
+//
+// This is used only in the context of other settings, for example to specify
+// values for RuleAction and web ACL DefaultAction.
 type BlockAction struct {
 	_ struct{} `type:"structure"`
 }
@@ -100,6 +109,9 @@ func (s BlockAction) String() string {
 // the prior release, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 //
 // The body of a web request. This immediately follows the request headers.
+//
+// This is used only to indicate the web request component for AWS WAF to inspect,
+// in the FieldToMatch specification.
 type Body struct {
 	_ struct{} `type:"structure"`
 }
@@ -266,6 +278,9 @@ func (s *ByteMatchStatement) Validate() error {
 // the prior release, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 //
 // Specifies that AWS WAF should count requests.
+//
+// This is used only in the context of other settings, for example to specify
+// values for RuleAction and web ACL DefaultAction.
 type CountAction struct {
 	_ struct{} `type:"structure"`
 }
@@ -357,12 +372,13 @@ type FieldToMatch struct {
 	// a form.
 	//
 	// Note that only the first 8 KB (8192 bytes) of the request body are forwarded
-	// to AWS WAF for inspection. If you don't need to inspect more than 8 KB, you
-	// can guarantee that you don't allow additional bytes in by combining a statement
-	// that inspects the body of the web request, such as ByteMatchStatement or
-	// RegexPatternSetReferenceStatement, with a SizeConstraintStatement that enforces
-	// an 8 KB size limit on the body of the request. AWS WAF doesn't support inspecting
-	// the entire contents of web requests whose bodies exceed the 8 KB limit.
+	// to AWS WAF for inspection by the underlying host service. If you don't need
+	// to inspect more than 8 KB, you can guarantee that you don't allow additional
+	// bytes in by combining a statement that inspects the body of the web request,
+	// such as ByteMatchStatement or RegexPatternSetReferenceStatement, with a SizeConstraintStatement
+	// that enforces an 8 KB size limit on the body of the request. AWS WAF doesn't
+	// support inspecting the entire contents of web requests whose bodies exceed
+	// the 8 KB limit.
 	Body *Body `type:"structure"`
 
 	// Inspect the HTTP method. The method indicates the type of operation that
@@ -380,6 +396,9 @@ type FieldToMatch struct {
 	// Inspect a single query argument. Provide the name of the query argument to
 	// inspect, such as UserName or SalesRegion. The name can be up to 30 characters
 	// long and isn't case sensitive.
+	//
+	// This is used only to indicate the web request component for AWS WAF to inspect,
+	// in the FieldToMatch specification.
 	SingleQueryArgument *SingleQueryArgument `type:"structure"`
 
 	// Inspect the request URI path. This is the part of a web request that identifies
@@ -816,14 +835,14 @@ func (s *ManagedRuleGroupStatement) Validate() error {
 // High-level information about a managed rule group, returned by ListAvailableManagedRuleGroups.
 // This provides information like the name and vendor name, that you provide
 // when you add a ManagedRuleGroupStatement to a web ACL. Managed rule groups
-// include AWS managed rule groups, which are free of charge to AWS WAF customers,
-// and AWS Marketplace managed rule groups, which you can subscribe to through
-// AWS Marketplace.
+// include AWS Managed Rules rule groups, which are free of charge to AWS WAF
+// customers, and AWS Marketplace managed rule groups, which you can subscribe
+// to through AWS Marketplace.
 type ManagedRuleGroupSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The description of the managed rule group, provided by AWS or the AWS Marketplace
-	// seller who manages it.
+	// The description of the managed rule group, provided by AWS Managed Rules
+	// or the AWS Marketplace seller who manages it.
 	Description *string `min:"1" type:"string"`
 
 	// The name of the managed rule group. You use this, along with the vendor name,
@@ -847,6 +866,9 @@ func (s ManagedRuleGroupSummary) String() string {
 //
 // The HTTP method of a web request. The method indicates the type of operation
 // that the request is asking the origin to perform.
+//
+// This is used only to indicate the web request component for AWS WAF to inspect,
+// in the FieldToMatch specification.
 type Method struct {
 	_ struct{} `type:"structure"`
 }
@@ -863,7 +885,10 @@ func (s Method) String() string {
 //
 // Specifies that AWS WAF should do nothing. This is generally used to try out
 // a rule without performing any actions. You set the OverrideAction on the
-// Rule, and override the actions that are set at the statement level.
+// Rule.
+//
+// This is used only in the context of other settings, for example to specify
+// values for RuleAction and web ACL DefaultAction.
 type NoneAction struct {
 	_ struct{} `type:"structure"`
 }
@@ -986,6 +1011,9 @@ func (s OverrideAction) String() string {
 //
 // The query string of a web request. This is the part of a URL that appears
 // after a ? character, if any.
+//
+// This is used only to indicate the web request component for AWS WAF to inspect,
+// in the FieldToMatch specification.
 type QueryString struct {
 	_ struct{} `type:"structure"`
 }
@@ -1663,6 +1691,9 @@ func (s SampledHTTPRequest) String() string {
 //
 // One of the headers in a web request, identified by name, for example, User-Agent
 // or Referer. This setting isn't case sensitive.
+//
+// This is used only to indicate the web request component for AWS WAF to inspect,
+// in the FieldToMatch specification.
 type SingleHeader struct {
 	_ struct{} `type:"structure"`
 
@@ -2364,6 +2395,9 @@ func (s *TimeWindow) Validate() error {
 //
 // The path component of the URI of a web request. This is the part of a web
 // request that identifies a resource, for example, /images/daily-ad.jpg.
+//
+// This is used only to indicate the web request component for AWS WAF to inspect,
+// in the FieldToMatch specification.
 type UriPath struct {
 	_ struct{} `type:"structure"`
 }

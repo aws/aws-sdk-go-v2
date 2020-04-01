@@ -62,7 +62,7 @@ const opDeleteDBSubnetGroup = "DeleteDBSubnetGroup"
 // DeleteDBSubnetGroupRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Deletes a DB subnet group.
+// Deletes a subnet group.
 //
 // The specified database subnet group must not be associated with any DB instances.
 //

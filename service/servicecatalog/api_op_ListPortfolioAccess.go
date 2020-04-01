@@ -21,6 +21,17 @@ type ListPortfolioAccessInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
+	// The ID of an organization node the portfolio is shared with. All children
+	// of this node with an inherited portfolio share will be returned.
+	OrganizationParentId *string `min:"1" type:"string"`
+
+	// The maximum number of items to return with this call.
+	PageSize *int64 `type:"integer"`
+
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
+	PageToken *string `type:"string"`
+
 	// The portfolio identifier.
 	//
 	// PortfolioId is a required field
@@ -35,6 +46,9 @@ func (s ListPortfolioAccessInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPortfolioAccessInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListPortfolioAccessInput"}
+	if s.OrganizationParentId != nil && len(*s.OrganizationParentId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("OrganizationParentId", 1))
+	}
 
 	if s.PortfolioId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
@@ -85,6 +99,12 @@ func (c *Client) ListPortfolioAccessRequest(input *ListPortfolioAccessInput) Lis
 		Name:       opListPortfolioAccess,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"PageToken"},
+			OutputTokens:    []string{"NextPageToken"},
+			LimitToken:      "PageSize",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -117,6 +137,53 @@ func (r ListPortfolioAccessRequest) Send(ctx context.Context) (*ListPortfolioAcc
 	}
 
 	return resp, nil
+}
+
+// NewListPortfolioAccessRequestPaginator returns a paginator for ListPortfolioAccess.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListPortfolioAccessRequest(input)
+//   p := servicecatalog.NewListPortfolioAccessRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListPortfolioAccessPaginator(req ListPortfolioAccessRequest) ListPortfolioAccessPaginator {
+	return ListPortfolioAccessPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListPortfolioAccessInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListPortfolioAccessPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListPortfolioAccessPaginator struct {
+	aws.Pager
+}
+
+func (p *ListPortfolioAccessPaginator) CurrentPage() *ListPortfolioAccessOutput {
+	return p.Pager.CurrentPage().(*ListPortfolioAccessOutput)
 }
 
 // ListPortfolioAccessResponse is the response type for the

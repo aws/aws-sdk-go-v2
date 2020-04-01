@@ -195,6 +195,24 @@ func (enum FilterName) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type LustreDeploymentType string
+
+// Enum values for LustreDeploymentType
+const (
+	LustreDeploymentTypeScratch1    LustreDeploymentType = "SCRATCH_1"
+	LustreDeploymentTypeScratch2    LustreDeploymentType = "SCRATCH_2"
+	LustreDeploymentTypePersistent1 LustreDeploymentType = "PERSISTENT_1"
+)
+
+func (enum LustreDeploymentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LustreDeploymentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReportFormat string
 
 // Enum values for ReportFormat

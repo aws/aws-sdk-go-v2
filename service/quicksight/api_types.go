@@ -1047,6 +1047,66 @@ func (s DashboardPublishOptions) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A filter that you apply when searching for dashboards.
+type DashboardSearchFilter struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the value that you want to use as a filter. For example, "Name":
+	// "QUICKSIGHT_USER".
+	Name DashboardFilterAttribute `type:"string" enum:"true"`
+
+	// The comparison operator that you want to use as a filter. For example, "Operator":
+	// "StringEquals".
+	//
+	// Operator is a required field
+	Operator FilterOperator `type:"string" required:"true" enum:"true"`
+
+	// The value of the named item, in this case QUICKSIGHT_USER, that you want
+	// to use as a filter. For example, "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1".
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DashboardSearchFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DashboardSearchFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DashboardSearchFilter"}
+	if len(s.Operator) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Operator"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DashboardSearchFilter) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Name) > 0 {
+		v := s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Operator) > 0 {
+		v := s.Operator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Operator", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Dashboard source entity.
 type DashboardSourceEntity struct {
 	_ struct{} `type:"structure"`

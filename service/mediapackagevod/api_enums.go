@@ -37,6 +37,39 @@ func (enum EncryptionMethod) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ManifestLayout string
+
+// Enum values for ManifestLayout
+const (
+	ManifestLayoutFull    ManifestLayout = "FULL"
+	ManifestLayoutCompact ManifestLayout = "COMPACT"
+)
+
+func (enum ManifestLayout) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ManifestLayout) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type PeriodTriggersElement string
+
+// Enum values for PeriodTriggersElement
+const (
+	PeriodTriggersElementAds PeriodTriggersElement = "ADS"
+)
+
+func (enum PeriodTriggersElement) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PeriodTriggersElement) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Profile string
 
 // Enum values for Profile
@@ -50,6 +83,24 @@ func (enum Profile) MarshalValue() (string, error) {
 }
 
 func (enum Profile) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SegmentTemplateFormat string
+
+// Enum values for SegmentTemplateFormat
+const (
+	SegmentTemplateFormatNumberWithTimeline SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"
+	SegmentTemplateFormatTimeWithTimeline   SegmentTemplateFormat = "TIME_WITH_TIMELINE"
+	SegmentTemplateFormatNumberWithDuration SegmentTemplateFormat = "NUMBER_WITH_DURATION"
+)
+
+func (enum SegmentTemplateFormat) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SegmentTemplateFormat) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

@@ -25,21 +25,25 @@ type UpdateImagePipelineInput struct {
 	// be used to configure and distribute images updated by this image pipeline.
 	DistributionConfigurationArn *string `locationName:"distributionConfigurationArn" type:"string"`
 
-	// The Amazon Resource Name (ARN) of the image pipeline that you wish to update.
+	// The Amazon Resource Name (ARN) of the image pipeline that you want to update.
 	//
 	// ImagePipelineArn is a required field
 	ImagePipelineArn *string `locationName:"imagePipelineArn" type:"string" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the image recipe that will be used to configure
 	// images updated by this image pipeline.
-	ImageRecipeArn *string `locationName:"imageRecipeArn" type:"string"`
+	//
+	// ImageRecipeArn is a required field
+	ImageRecipeArn *string `locationName:"imageRecipeArn" type:"string" required:"true"`
 
 	// The image test configuration of the image pipeline.
 	ImageTestsConfiguration *ImageTestsConfiguration `locationName:"imageTestsConfiguration" type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the infrastructure configuration that will
 	// be used to build images updated by this image pipeline.
-	InfrastructureConfigurationArn *string `locationName:"infrastructureConfigurationArn" type:"string"`
+	//
+	// InfrastructureConfigurationArn is a required field
+	InfrastructureConfigurationArn *string `locationName:"infrastructureConfigurationArn" type:"string" required:"true"`
 
 	// The schedule of the image pipeline.
 	Schedule *Schedule `locationName:"schedule" type:"structure"`
@@ -69,6 +73,14 @@ func (s *UpdateImagePipelineInput) Validate() error {
 
 	if s.ImagePipelineArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImagePipelineArn"))
+	}
+
+	if s.ImageRecipeArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ImageRecipeArn"))
+	}
+
+	if s.InfrastructureConfigurationArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InfrastructureConfigurationArn"))
 	}
 	if s.ImageTestsConfiguration != nil {
 		if err := s.ImageTestsConfiguration.Validate(); err != nil {

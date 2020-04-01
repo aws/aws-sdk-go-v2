@@ -23,13 +23,15 @@ type UpdateDistributionConfigurationInput struct {
 	Description *string `locationName:"description" min:"1" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the distribution configuration that you
-	// wish to update.
+	// want to update.
 	//
 	// DistributionConfigurationArn is a required field
 	DistributionConfigurationArn *string `locationName:"distributionConfigurationArn" type:"string" required:"true"`
 
 	// The distributions of the distribution configuration.
-	Distributions []Distribution `locationName:"distributions" type:"list"`
+	//
+	// Distributions is a required field
+	Distributions []Distribution `locationName:"distributions" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -53,6 +55,10 @@ func (s *UpdateDistributionConfigurationInput) Validate() error {
 
 	if s.DistributionConfigurationArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DistributionConfigurationArn"))
+	}
+
+	if s.Distributions == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Distributions"))
 	}
 	if s.Distributions != nil {
 		for i, v := range s.Distributions {

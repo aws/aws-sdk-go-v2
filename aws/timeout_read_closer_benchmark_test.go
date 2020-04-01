@@ -8,7 +8,8 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
@@ -55,8 +56,8 @@ func BenchmarkTimeoutReadCloser(b *testing.B) {
 		cfg,
 		meta,
 		handlers,
-		aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-			d.NumMaxRetries = 5
+		retry.NewStandard(func(s *retry.StandardOptions) {
+			s.MaxAttempts = 5
 		}),
 		op,
 		&struct {

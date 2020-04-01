@@ -14,13 +14,18 @@ import (
 type ListHumanLoopsInput struct {
 	_ struct{} `type:"structure"`
 
-	// (Optional) The timestamp of the date when you want the human loops to begin.
-	// For example, 1551000000.
+	// (Optional) The timestamp of the date when you want the human loops to begin
+	// in ISO 8601 format. For example, 2020-02-24.
 	CreationTimeAfter *time.Time `location:"querystring" locationName:"CreationTimeAfter" type:"timestamp"`
 
 	// (Optional) The timestamp of the date before which you want the human loops
-	// to begin. For example, 1550000000.
+	// to begin in ISO 8601 format. For example, 2020-02-24.
 	CreationTimeBefore *time.Time `location:"querystring" locationName:"CreationTimeBefore" type:"timestamp"`
+
+	// The Amazon Resource Name (ARN) of a flow definition.
+	//
+	// FlowDefinitionArn is a required field
+	FlowDefinitionArn *string `location:"querystring" locationName:"FlowDefinitionArn" type:"string" required:"true"`
 
 	// The total number of items to return. If the total number of available items
 	// is more than the value specified in MaxResults, then a NextToken will be
@@ -43,6 +48,10 @@ func (s ListHumanLoopsInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListHumanLoopsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListHumanLoopsInput"}
+
+	if s.FlowDefinitionArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FlowDefinitionArn"))
+	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
@@ -70,6 +79,12 @@ func (s ListHumanLoopsInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "CreationTimeBefore",
 			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
+	}
+	if s.FlowDefinitionArn != nil {
+		v := *s.FlowDefinitionArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "FlowDefinitionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -137,7 +152,8 @@ const opListHumanLoops = "ListHumanLoops"
 // ListHumanLoopsRequest returns a request value for making API operation for
 // Amazon Augmented AI Runtime.
 //
-// Returns information about human loops, given the specified parameters.
+// Returns information about human loops, given the specified parameters. If
+// a human loop was deleted, it will not be included.
 //
 //    // Example sending a request using ListHumanLoopsRequest.
 //    req := client.ListHumanLoopsRequest(params)

@@ -79,6 +79,22 @@ func (enum DashboardErrorType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type DashboardFilterAttribute string
+
+// Enum values for DashboardFilterAttribute
+const (
+	DashboardFilterAttributeQuicksightUser DashboardFilterAttribute = "QUICKSIGHT_USER"
+)
+
+func (enum DashboardFilterAttribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DashboardFilterAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DashboardUIState string
 
 // Enum values for DashboardUIState
@@ -211,6 +227,22 @@ func (enum FileFormat) MarshalValue() (string, error) {
 }
 
 func (enum FileFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type FilterOperator string
+
+// Enum values for FilterOperator
+const (
+	FilterOperatorStringEquals FilterOperator = "StringEquals"
+)
+
+func (enum FilterOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FilterOperator) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

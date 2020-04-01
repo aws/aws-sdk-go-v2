@@ -78,7 +78,7 @@ type DescribeLabelingJobOutput struct {
 	//
 	//    * Semantic segmentation labeling jobs using automated labeling: 20 labels
 	//
-	//    * Box bounding labeling jobs (all): 10 lables
+	//    * Box bounding labeling jobs (all): 10 labels
 	//
 	// The file is a JSON structure in the following format:
 	//

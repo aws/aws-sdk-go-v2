@@ -15,6 +15,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
@@ -70,6 +71,10 @@ func NewInputService1ProtocolTest(config aws.Config) *InputService1ProtocolTest 
 				APIVersion:    "2014-01-01",
 			},
 		),
+	}
+
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
 	}
 
 	// Handlers
@@ -413,6 +418,10 @@ func NewInputService2ProtocolTest(config aws.Config) *InputService2ProtocolTest 
 		),
 	}
 
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
+	}
+
 	// Handlers
 	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
 	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
@@ -579,6 +588,10 @@ func NewInputService3ProtocolTest(config aws.Config) *InputService3ProtocolTest 
 				APIVersion:    "2014-01-01",
 			},
 		),
+	}
+
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
 	}
 
 	// Handlers
@@ -862,6 +875,10 @@ func NewInputService4ProtocolTest(config aws.Config) *InputService4ProtocolTest 
 		),
 	}
 
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
+	}
+
 	// Handlers
 	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
 	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
@@ -1039,6 +1056,10 @@ func NewInputService5ProtocolTest(config aws.Config) *InputService5ProtocolTest 
 		),
 	}
 
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
+	}
+
 	// Handlers
 	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
 	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
@@ -1187,6 +1208,10 @@ func NewInputService6ProtocolTest(config aws.Config) *InputService6ProtocolTest 
 				APIVersion:    "2014-01-01",
 			},
 		),
+	}
+
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
 	}
 
 	// Handlers
@@ -1339,6 +1364,10 @@ func NewInputService7ProtocolTest(config aws.Config) *InputService7ProtocolTest 
 		),
 	}
 
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
+	}
+
 	// Handlers
 	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
 	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
@@ -1489,6 +1518,10 @@ func NewInputService8ProtocolTest(config aws.Config) *InputService8ProtocolTest 
 		),
 	}
 
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
+	}
+
 	// Handlers
 	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
 	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
@@ -1637,6 +1670,10 @@ func NewInputService9ProtocolTest(config aws.Config) *InputService9ProtocolTest 
 				APIVersion:    "2014-01-01",
 			},
 		),
+	}
+
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
 	}
 
 	// Handlers
@@ -1806,6 +1843,10 @@ func NewInputService10ProtocolTest(config aws.Config) *InputService10ProtocolTes
 		),
 	}
 
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
+	}
+
 	// Handlers
 	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
 	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
@@ -1966,6 +2007,10 @@ func NewInputService11ProtocolTest(config aws.Config) *InputService11ProtocolTes
 				APIVersion:    "2014-01-01",
 			},
 		),
+	}
+
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
 	}
 
 	// Handlers
@@ -2185,6 +2230,10 @@ func NewInputService12ProtocolTest(config aws.Config) *InputService12ProtocolTes
 		),
 	}
 
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
+	}
+
 	// Handlers
 	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
 	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
@@ -2332,6 +2381,10 @@ func NewInputService13ProtocolTest(config aws.Config) *InputService13ProtocolTes
 		),
 	}
 
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
+	}
+
 	// Handlers
 	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
 	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
@@ -2477,6 +2530,10 @@ func NewInputService14ProtocolTest(config aws.Config) *InputService14ProtocolTes
 				APIVersion:    "2014-01-01",
 			},
 		),
+	}
+
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
 	}
 
 	// Handlers
@@ -2632,6 +2689,10 @@ func NewInputService15ProtocolTest(config aws.Config) *InputService15ProtocolTes
 				APIVersion:    "2014-01-01",
 			},
 		),
+	}
+
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
 	}
 
 	// Handlers
@@ -2792,6 +2853,10 @@ func NewInputService16ProtocolTest(config aws.Config) *InputService16ProtocolTes
 				APIVersion:    "2014-01-01",
 			},
 		),
+	}
+
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
 	}
 
 	// Handlers
@@ -3028,6 +3093,10 @@ func NewInputService17ProtocolTest(config aws.Config) *InputService17ProtocolTes
 		),
 	}
 
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
+	}
+
 	// Handlers
 	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
 	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
@@ -3167,6 +3236,10 @@ func NewInputService18ProtocolTest(config aws.Config) *InputService18ProtocolTes
 				APIVersion:    "2014-01-01",
 			},
 		),
+	}
+
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
 	}
 
 	// Handlers
@@ -3401,6 +3474,10 @@ func NewInputService19ProtocolTest(config aws.Config) *InputService19ProtocolTes
 				APIVersion:    "2014-01-01",
 			},
 		),
+	}
+
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
 	}
 
 	// Handlers
@@ -3843,6 +3920,10 @@ func NewInputService20ProtocolTest(config aws.Config) *InputService20ProtocolTes
 		),
 	}
 
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
+	}
+
 	// Handlers
 	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
 	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
@@ -4029,6 +4110,10 @@ func NewInputService21ProtocolTest(config aws.Config) *InputService21ProtocolTes
 		),
 	}
 
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
+	}
+
 	// Handlers
 	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
 	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
@@ -4176,6 +4261,10 @@ func NewInputService22ProtocolTest(config aws.Config) *InputService22ProtocolTes
 				APIVersion:    "2014-01-01",
 			},
 		),
+	}
+
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
 	}
 
 	// Handlers
@@ -4410,6 +4499,10 @@ func NewInputService23ProtocolTest(config aws.Config) *InputService23ProtocolTes
 				APIVersion:    "2014-01-01",
 			},
 		),
+	}
+
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
 	}
 
 	// Handlers
@@ -5089,6 +5182,10 @@ func NewInputService24ProtocolTest(config aws.Config) *InputService24ProtocolTes
 		),
 	}
 
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
+	}
+
 	// Handlers
 	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
 	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
@@ -5333,6 +5430,10 @@ func NewInputService25ProtocolTest(config aws.Config) *InputService25ProtocolTes
 				APIVersion:    "2014-01-01",
 			},
 		),
+	}
+
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
 	}
 
 	// Handlers
@@ -5676,6 +5777,10 @@ func NewInputService26ProtocolTest(config aws.Config) *InputService26ProtocolTes
 		),
 	}
 
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
+	}
+
 	// Handlers
 	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
 	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
@@ -5942,6 +6047,10 @@ func NewInputService27ProtocolTest(config aws.Config) *InputService27ProtocolTes
 				APIVersion:    "2014-01-01",
 			},
 		),
+	}
+
+	if config.Retryer == nil {
+		svc.Retryer = retry.NewStandard()
 	}
 
 	// Handlers

@@ -2,8 +2,6 @@
 
 package codeguruprofiler
 
-// Periods of time used for aggregation of profiles, represented using ISO 8601
-// format.
 type AggregationPeriod string
 
 // Enum values for AggregationPeriod

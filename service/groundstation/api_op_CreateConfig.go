@@ -13,16 +13,17 @@ import (
 type CreateConfigInput struct {
 	_ struct{} `type:"structure"`
 
-	// Object containing the parameters for a Config.
-	//
-	// See the subtype definitions for what each type of Config contains.
+	// Parameters of a Config.
 	//
 	// ConfigData is a required field
 	ConfigData *ConfigTypeData `locationName:"configData" type:"structure" required:"true"`
 
+	// Name of a Config.
+	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
+	// Tags assigned to a Config.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
@@ -91,10 +92,13 @@ func (s CreateConfigInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateConfigOutput struct {
 	_ struct{} `type:"structure"`
 
+	// ARN of a Config.
 	ConfigArn *string `locationName:"configArn" type:"string"`
 
+	// UUID of a Config.
 	ConfigId *string `locationName:"configId" type:"string"`
 
+	// Type of a Config.
 	ConfigType ConfigCapabilityType `locationName:"configType" type:"string" enum:"true"`
 }
 

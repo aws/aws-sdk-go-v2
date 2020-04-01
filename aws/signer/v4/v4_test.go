@@ -19,49 +19,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 )
 
-func TestStripExcessHeaders(t *testing.T) {
-	vals := []string{
-		"",
-		"123",
-		"1 2 3",
-		"1 2 3 ",
-		"  1 2 3",
-		"1  2 3",
-		"1  23",
-		"1  2  3",
-		"1  2  ",
-		" 1  2  ",
-		"12   3",
-		"12   3   1",
-		"12           3     1",
-		"12     3       1abc123",
-	}
-
-	expected := []string{
-		"",
-		"123",
-		"1 2 3",
-		"1 2 3",
-		"1 2 3",
-		"1 2 3",
-		"1 23",
-		"1 2 3",
-		"1 2",
-		"1 2",
-		"12 3",
-		"12 3 1",
-		"12 3 1",
-		"12 3 1abc123",
-	}
-
-	stripExcessSpaces(vals)
-	for i := 0; i < len(vals); i++ {
-		if e, a := expected[i], vals[i]; e != a {
-			t.Errorf("%d, expect %v, got %v", i, e, a)
-		}
-	}
-}
-
 func buildRequest(serviceName, region, body string) (*http.Request, io.ReadSeeker) {
 
 	reader := strings.NewReader(body)
@@ -593,7 +550,7 @@ func TestResignRequestExpiredRequest(t *testing.T) {
 	mockTime = mockTime.Add(15 * time.Minute)
 	SignSDKRequest(r)
 	if e, a := querySig, r.HTTPRequest.Header.Get("Authorization"); e == a {
-		t.Errorf("expect %v to be %v, was not", e, a)
+		t.Errorf("expected %v, got %v", e, a)
 	}
 	if e, a := origSignedAt, r.LastSignedAt; e == a {
 		t.Errorf("expect %v to be %v, was not", e, a)
@@ -671,21 +628,23 @@ func TestSignWithRequestBody_Overwrite(t *testing.T) {
 }
 
 func TestBuildCanonicalRequest(t *testing.T) {
-	req, body := buildRequest("dynamodb", "us-east-1", "{}")
+	req, _ := buildRequest("dynamodb", "us-east-1", "{}")
 	req.URL.RawQuery = "Foo=z&Foo=o&Foo=m&Foo=a"
-	ctx := &signingCtx{
+	ctx := &httpSigner{
 		ServiceName: "dynamodb",
 		Region:      "us-east-1",
 		Request:     req,
-		Body:        body,
-		Query:       req.URL.Query(),
 		Time:        time.Now(),
 		ExpireTime:  5 * time.Second,
 	}
 
-	ctx.buildCanonicalString()
-	expected := "https://example.org/bucket/key-._~,!@#$%^&*()?Foo=z&Foo=o&Foo=m&Foo=a"
-	if e, a := expected, ctx.Request.URL.String(); e != a {
+	build, err := ctx.Build()
+	if err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+
+	expected := "https://example.org/bucket/key-._~,!@#$%^&*()?Foo=a&Foo=m&Foo=o&Foo=z"
+	if e, a := expected, build.Request.URL.String(); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 }
@@ -734,21 +693,23 @@ func TestSignWithBody_NoReplaceRequestBody(t *testing.T) {
 }
 
 func TestRequestHost(t *testing.T) {
-	req, body := buildRequest("dynamodb", "us-east-1", "{}")
+	req, _ := buildRequest("dynamodb", "us-east-1", "{}")
 	req.URL.RawQuery = "Foo=z&Foo=o&Foo=m&Foo=a"
 	req.Host = "myhost"
-	ctx := &signingCtx{
+	ctx := &httpSigner{
 		ServiceName: "dynamodb",
 		Region:      "us-east-1",
 		Request:     req,
-		Body:        body,
-		Query:       req.URL.Query(),
 		Time:        time.Now(),
 		ExpireTime:  5 * time.Second,
 	}
 
-	ctx.buildCanonicalHeaders(ignoredHeaders, ctx.Request.Header)
-	if !strings.Contains(ctx.canonicalHeaders, "host:"+req.Host) {
+	build, err := ctx.Build()
+	if err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+
+	if !strings.Contains(build.CanonicalString, "host:"+req.Host) {
 		t.Errorf("canonical host header invalid")
 	}
 }
@@ -766,32 +727,5 @@ func BenchmarkSignRequest(b *testing.B) {
 	req, body := buildRequest("dynamodb", "us-east-1", "{}")
 	for i := 0; i < b.N; i++ {
 		signer.Sign(context.Background(), req, body, "dynamodb", "us-east-1", time.Now())
-	}
-}
-
-var stripExcessSpaceCases = []string{
-	`AWS4-HMAC-SHA256 Credential=AKIDFAKEIDFAKEID/20160628/us-west-2/s3/aws4_request, SignedHeaders=host;x-amz-date, Signature=1234567890abcdef1234567890abcdef1234567890abcdef`,
-	`123   321   123   321`,
-	`   123   321   123   321   `,
-	`   123    321    123          321   `,
-	"123",
-	"1 2 3",
-	"  1 2 3",
-	"1  2 3",
-	"1  23",
-	"1  2  3",
-	"1  2  ",
-	" 1  2  ",
-	"12   3",
-	"12   3   1",
-	"12           3     1",
-	"12     3       1abc123",
-}
-
-func BenchmarkStripExcessSpaces(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		// Make sure to start with a copy of the cases
-		cases := append([]string{}, stripExcessSpaceCases...)
-		stripExcessSpaces(cases)
 	}
 }

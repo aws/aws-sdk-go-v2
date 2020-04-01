@@ -168,7 +168,7 @@ type LoggingLevel string
 const (
 	LoggingLevelError LoggingLevel = "ERROR"
 	LoggingLevelInfo  LoggingLevel = "INFO"
-	LoggingLevelFalse LoggingLevel = "false"
+	LoggingLevelOff   LoggingLevel = "OFF"
 )
 
 func (enum LoggingLevel) MarshalValue() (string, error) {
@@ -233,6 +233,44 @@ func (enum SecurityPolicy) MarshalValue() (string, error) {
 }
 
 func (enum SecurityPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The status of the VPC link.
+type VpcLinkStatus string
+
+// Enum values for VpcLinkStatus
+const (
+	VpcLinkStatusPending   VpcLinkStatus = "PENDING"
+	VpcLinkStatusAvailable VpcLinkStatus = "AVAILABLE"
+	VpcLinkStatusDeleting  VpcLinkStatus = "DELETING"
+	VpcLinkStatusFailed    VpcLinkStatus = "FAILED"
+	VpcLinkStatusInactive  VpcLinkStatus = "INACTIVE"
+)
+
+func (enum VpcLinkStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VpcLinkStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The version of the VPC link.
+type VpcLinkVersion string
+
+// Enum values for VpcLinkVersion
+const (
+	VpcLinkVersionV2 VpcLinkVersion = "V2"
+)
+
+func (enum VpcLinkVersion) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VpcLinkVersion) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

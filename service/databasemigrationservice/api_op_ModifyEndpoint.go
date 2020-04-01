@@ -22,26 +22,25 @@ type ModifyEndpointInput struct {
 	//
 	// Attributes include the following:
 	//
-	//    * serviceAccessRoleArn - The IAM role that has permission to access the
-	//    Amazon S3 bucket.
+	//    * serviceAccessRoleArn - The AWS Identity and Access Management (IAM)
+	//    role that has permission to access the Amazon S3 bucket.
 	//
 	//    * BucketName - The name of the S3 bucket to use.
 	//
 	//    * compressionType - An optional parameter to use GZIP to compress the
-	//    target files. Set to NONE (the default) or do not use to leave the files
-	//    uncompressed.
+	//    target files. Either set this parameter to NONE (the default) or don't
+	//    use it to leave the files uncompressed.
 	//
-	// Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string
+	// Shorthand syntax for these settings is as follows: ServiceAccessRoleArn=string
+	// ,BucketName=string,CompressionType=string
 	//
-	// JSON syntax:
-	//
-	// { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType":
-	// "none"|"gzip" }
+	// JSON syntax for these settings is as follows: { "ServiceAccessRoleArn": "string",
+	// "BucketName": "string", "CompressionType": "none"|"gzip" }
 	DmsTransferSettings *DmsTransferSettings `type:"structure"`
 
-	// Settings in JSON format for the target Amazon DynamoDB endpoint. For more
-	// information about the available settings, see Using Object Mapping to Migrate
-	// Data to DynamoDB (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html)
+	// Settings in JSON format for the target Amazon DynamoDB endpoint. For information
+	// about other available settings, see Using Object Mapping to Migrate Data
+	// to DynamoDB (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html)
 	// in the AWS Database Migration Service User Guide.
 	DynamoDbSettings *DynamoDbSettings `type:"structure"`
 
@@ -56,17 +55,18 @@ type ModifyEndpointInput struct {
 	// EndpointArn is a required field
 	EndpointArn *string `type:"string" required:"true"`
 
-	// The database endpoint identifier. Identifiers must begin with a letter; must
-	// contain only ASCII letters, digits, and hyphens; and must not end with a
-	// hyphen or contain two consecutive hyphens.
+	// The database endpoint identifier. Identifiers must begin with a letter and
+	// must contain only ASCII letters, digits, and hyphens. They can't end with
+	// a hyphen or contain two consecutive hyphens.
 	EndpointIdentifier *string `type:"string"`
 
 	// The type of endpoint. Valid values are source and target.
 	EndpointType ReplicationEndpointTypeValue `type:"string" enum:"true"`
 
 	// The type of engine for the endpoint. Valid values, depending on the EndpointType,
-	// include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift,
-	// s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
+	// include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql",
+	// "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis",
+	// "kafka", "elasticsearch", "documentdb", and "sqlserver".
 	EngineName *string `type:"string"`
 
 	// The external table definition.
@@ -76,8 +76,14 @@ type ModifyEndpointInput struct {
 	// pass the empty string ("") as an argument.
 	ExtraConnectionAttributes *string `type:"string"`
 
-	// Settings in JSON format for the target Amazon Kinesis Data Streams endpoint.
-	// For more information about the available settings, see Using Object Mapping
+	// Settings in JSON format for the target Apache Kafka endpoint. For information
+	// about other available settings, see Using Object Mapping to Migrate Data
+	// to Apache Kafka (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping)
+	// in the AWS Database Migration User Guide.
+	KafkaSettings *KafkaSettings `type:"structure"`
+
+	// Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams.
+	// For information about other available settings, see Using Object Mapping
 	// to Migrate Data to a Kinesis Data Stream (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping)
 	// in the AWS Database Migration User Guide.
 	KinesisSettings *KinesisSettings `type:"structure"`
@@ -94,6 +100,7 @@ type ModifyEndpointInput struct {
 	// The port used by the endpoint database.
 	Port *int64 `type:"integer"`
 
+	// Provides information that defines an Amazon Redshift endpoint.
 	RedshiftSettings *RedshiftSettings `type:"structure"`
 
 	// Settings in JSON format for the target Amazon S3 endpoint. For more information

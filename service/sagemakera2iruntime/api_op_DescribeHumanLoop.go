@@ -14,7 +14,7 @@ import (
 type DescribeHumanLoopInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the human loop.
+	// The unique name of the human loop.
 	//
 	// HumanLoopName is a required field
 	HumanLoopName *string `location:"uri" locationName:"HumanLoopName" min:"1" type:"string" required:"true"`
@@ -58,10 +58,10 @@ func (s DescribeHumanLoopInput) MarshalFields(e protocol.FieldEncoder) error {
 type DescribeHumanLoopOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The timestamp when Amazon Augmented AI created the human loop.
+	// The creation time when Amazon Augmented AI created the human loop.
 	//
-	// CreationTimestamp is a required field
-	CreationTimestamp *time.Time `type:"timestamp" required:"true"`
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// A failure code denoting a specific type of failure.
 	FailureCode *string `type:"string"`
@@ -80,18 +80,13 @@ type DescribeHumanLoopOutput struct {
 	// HumanLoopArn is a required field
 	HumanLoopArn *string `type:"string" required:"true"`
 
-	// An object containing information about the human loop input.
-	//
-	// HumanLoopInput is a required field
-	HumanLoopInput *HumanLoopInputContent `type:"structure" required:"true"`
-
 	// The name of the human loop.
 	//
 	// HumanLoopName is a required field
 	HumanLoopName *string `min:"1" type:"string" required:"true"`
 
 	// An object containing information about the output of the human loop.
-	HumanLoopOutput *HumanLoopOutputContent `type:"structure"`
+	HumanLoopOutput *HumanLoopOutput `type:"structure"`
 
 	// The status of the human loop. Valid values:
 	//
@@ -106,11 +101,11 @@ func (s DescribeHumanLoopOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeHumanLoopOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CreationTimestamp != nil {
-		v := *s.CreationTimestamp
+	if s.CreationTime != nil {
+		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTimestamp",
+		e.SetValue(protocol.BodyTarget, "CreationTime",
 			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.FailureCode != nil {
@@ -136,12 +131,6 @@ func (s DescribeHumanLoopOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "HumanLoopArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.HumanLoopInput != nil {
-		v := s.HumanLoopInput
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "HumanLoopInput", v, metadata)
 	}
 	if s.HumanLoopName != nil {
 		v := *s.HumanLoopName

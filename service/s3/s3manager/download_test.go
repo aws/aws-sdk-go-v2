@@ -2,6 +2,7 @@ package s3manager_test
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -17,10 +18,12 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/internal/sdkio"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/internal/s3testing"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
 )
 
@@ -166,8 +169,8 @@ func dlLoggingSvcWithErrReader(cases []testErrReader) (*s3.Client, *[]string) {
 	case 0: // zero retries expected
 		cfg.Retryer = aws.NoOpRetryer{}
 	default:
-		cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-			d.NumMaxRetries = len(cases) - 1
+		cfg.Retryer = retry.NewStandard(func(s *retry.StandardOptions) {
+			s.MaxAttempts = len(cases)
 		})
 	}
 
@@ -544,11 +547,13 @@ func TestDownloadWithContextCanceled(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expected error, did not get one")
 	}
-	aerr := err.(awserr.Error)
-	if e, a := aws.ErrCodeRequestCanceled, aerr.Code(); e != a {
-		t.Errorf("expected error code %q, got %q", e, a)
+
+	var rc *aws.RequestCanceledError
+	if !errors.As(err, &rc) {
+		t.Fatalf("expect %T error, got %v", rc, err)
 	}
-	if e, a := "canceled", aerr.Message(); !strings.Contains(a, e) {
+
+	if e, a := "canceled", rc.Err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expected error message to contain %q, but did not %q", e, a)
 	}
 }
@@ -618,7 +623,6 @@ func TestDownload_WithFailure(t *testing.T) {
 			Body:   ioutil.NopCloser(&bytes.Buffer{}),
 		}
 		r.Error = awserr.New("ConnectionError", "some connection error", nil)
-		r.Retryable = aws.Bool(false)
 	})
 
 	start := time.Now()
@@ -674,7 +678,7 @@ func TestDownloadBufferStrategy(t *testing.T) {
 	for name, tCase := range cases {
 		t.Logf("starting case: %v", name)
 
-		expected := getTestBytes(int(tCase.expectedSize))
+		expected := s3testing.GetTestBytes(int(tCase.expectedSize))
 
 		svc, _, _ := dlLoggingSvc(expected)
 
@@ -734,7 +738,7 @@ func (r *testErrReader) Read(p []byte) (int, error) {
 }
 
 func TestDownloadBufferStrategy_Errors(t *testing.T) {
-	expected := getTestBytes(int(10 * sdkio.MebiByte))
+	expected := s3testing.GetTestBytes(int(10 * sdkio.MebiByte))
 
 	svc, _, _ := dlLoggingSvc(expected)
 	strat := &recordedWriterReadFromProvider{
@@ -823,7 +827,7 @@ type badReader struct {
 }
 
 func (b *badReader) Read(p []byte) (int, error) {
-	tb := getTestBytes(len(p))
+	tb := s3testing.GetTestBytes(len(p))
 	copy(p, tb)
 	return len(p), b.err
 }

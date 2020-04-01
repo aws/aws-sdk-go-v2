@@ -8,6 +8,7 @@ type ActionType string
 const (
 	ActionTypeRestoreCluster      ActionType = "restore-cluster"
 	ActionTypeRecommendNodeConfig ActionType = "recommend-node-config"
+	ActionTypeResizeCluster       ActionType = "resize-cluster"
 )
 
 func (enum ActionType) MarshalValue() (string, error) {
@@ -168,6 +169,8 @@ type ScheduledActionTypeValues string
 // Enum values for ScheduledActionTypeValues
 const (
 	ScheduledActionTypeValuesResizeCluster ScheduledActionTypeValues = "ResizeCluster"
+	ScheduledActionTypeValuesPauseCluster  ScheduledActionTypeValues = "PauseCluster"
+	ScheduledActionTypeValuesResumeCluster ScheduledActionTypeValues = "ResumeCluster"
 )
 
 func (enum ScheduledActionTypeValues) MarshalValue() (string, error) {

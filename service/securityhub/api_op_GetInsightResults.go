@@ -13,7 +13,7 @@ import (
 type GetInsightResultsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the insight whose results you want to see.
+	// The ARN of the insight for which to return results.
 	//
 	// InsightArn is a required field
 	InsightArn *string `location:"uri" locationName:"InsightArn" type:"string" required:"true"`
@@ -81,7 +81,7 @@ const opGetInsightResults = "GetInsightResults"
 // GetInsightResultsRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Lists the results of the Security Hub insight that the insight ARN specifies.
+// Lists the results of the Security Hub insight specified by the insight ARN.
 //
 //    // Example sending a request using GetInsightResultsRequest.
 //    req := client.GetInsightResultsRequest(params)

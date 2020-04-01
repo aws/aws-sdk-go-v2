@@ -23,7 +23,7 @@ type CreateSimulationApplicationInput struct {
 	// The rendering engine for the simulation application.
 	RenderingEngine *RenderingEngine `locationName:"renderingEngine" type:"structure"`
 
-	// The robot software suite of the simulation application.
+	// The robot software suite (ROS distribution) used by the simulation application.
 	//
 	// RobotSoftwareSuite is a required field
 	RobotSoftwareSuite *RobotSoftwareSuite `locationName:"robotSoftwareSuite" type:"structure" required:"true"`
@@ -69,6 +69,11 @@ func (s *CreateSimulationApplicationInput) Validate() error {
 
 	if s.Sources == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Sources"))
+	}
+	if s.RenderingEngine != nil {
+		if err := s.RenderingEngine.Validate(); err != nil {
+			invalidParams.AddNested("RenderingEngine", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.Sources != nil {
 		for i, v := range s.Sources {
@@ -158,7 +163,7 @@ type CreateSimulationApplicationOutput struct {
 	// The revision id of the simulation application.
 	RevisionId *string `locationName:"revisionId" min:"1" type:"string"`
 
-	// Information about the robot software suite.
+	// Information about the robot software suite (ROS distribution).
 	RobotSoftwareSuite *RobotSoftwareSuite `locationName:"robotSoftwareSuite" type:"structure"`
 
 	// The simulation software suite used by the simulation application.

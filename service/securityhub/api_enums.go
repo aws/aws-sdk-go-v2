@@ -71,6 +71,23 @@ func (enum DateRangeUnit) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type IntegrationType string
+
+// Enum values for IntegrationType
+const (
+	IntegrationTypeSendFindingsToSecurityHub      IntegrationType = "SEND_FINDINGS_TO_SECURITY_HUB"
+	IntegrationTypeReceiveFindingsFromSecurityHub IntegrationType = "RECEIVE_FINDINGS_FROM_SECURITY_HUB"
+)
+
+func (enum IntegrationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IntegrationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MalwareState string
 
 // Enum values for MalwareState
@@ -183,6 +200,26 @@ func (enum RecordState) MarshalValue() (string, error) {
 }
 
 func (enum RecordState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SeverityLabel string
+
+// Enum values for SeverityLabel
+const (
+	SeverityLabelInformational SeverityLabel = "INFORMATIONAL"
+	SeverityLabelLow           SeverityLabel = "LOW"
+	SeverityLabelMedium        SeverityLabel = "MEDIUM"
+	SeverityLabelHigh          SeverityLabel = "HIGH"
+	SeverityLabelCritical      SeverityLabel = "CRITICAL"
+)
+
+func (enum SeverityLabel) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SeverityLabel) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -342,6 +379,25 @@ func (enum WorkflowState) MarshalValue() (string, error) {
 }
 
 func (enum WorkflowState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type WorkflowStatus string
+
+// Enum values for WorkflowStatus
+const (
+	WorkflowStatusNew        WorkflowStatus = "NEW"
+	WorkflowStatusNotified   WorkflowStatus = "NOTIFIED"
+	WorkflowStatusResolved   WorkflowStatus = "RESOLVED"
+	WorkflowStatusSuppressed WorkflowStatus = "SUPPRESSED"
+)
+
+func (enum WorkflowStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum WorkflowStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

@@ -124,7 +124,8 @@ const opCreateRegexPatternSet = "CreateRegexPatternSet"
 // 2019. For information, including how to migrate your AWS WAF resources from
 // the prior release, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 //
-// Creates a RegexPatternSet per the specifications provided.
+// Creates a RegexPatternSet, which you reference in a RegexPatternSetReferenceStatement,
+// to have AWS WAF inspect a web request component for the specified patterns.
 //
 //    // Example sending a request using CreateRegexPatternSetRequest.
 //    req := client.CreateRegexPatternSetRequest(params)

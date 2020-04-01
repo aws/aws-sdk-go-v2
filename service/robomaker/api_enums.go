@@ -32,10 +32,12 @@ const (
 	DeploymentJobErrorCodeRobotDeploymentNoResponse           DeploymentJobErrorCode = "RobotDeploymentNoResponse"
 	DeploymentJobErrorCodeRobotAgentConnectionTimeout         DeploymentJobErrorCode = "RobotAgentConnectionTimeout"
 	DeploymentJobErrorCodeGreengrassDeploymentFailed          DeploymentJobErrorCode = "GreengrassDeploymentFailed"
+	DeploymentJobErrorCodeInvalidGreengrassGroup              DeploymentJobErrorCode = "InvalidGreengrassGroup"
 	DeploymentJobErrorCodeMissingRobotArchitecture            DeploymentJobErrorCode = "MissingRobotArchitecture"
 	DeploymentJobErrorCodeMissingRobotApplicationArchitecture DeploymentJobErrorCode = "MissingRobotApplicationArchitecture"
 	DeploymentJobErrorCodeMissingRobotDeploymentResource      DeploymentJobErrorCode = "MissingRobotDeploymentResource"
 	DeploymentJobErrorCodeGreengrassGroupVersionDoesNotExist  DeploymentJobErrorCode = "GreengrassGroupVersionDoesNotExist"
+	DeploymentJobErrorCodeLambdaDeleted                       DeploymentJobErrorCode = "LambdaDeleted"
 	DeploymentJobErrorCodeExtractingBundleFailure             DeploymentJobErrorCode = "ExtractingBundleFailure"
 	DeploymentJobErrorCodePreLaunchFileFailure                DeploymentJobErrorCode = "PreLaunchFileFailure"
 	DeploymentJobErrorCodePostLaunchFileFailure               DeploymentJobErrorCode = "PostLaunchFileFailure"
@@ -186,6 +188,46 @@ func (enum RobotStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type SimulationJobBatchErrorCode string
+
+// Enum values for SimulationJobBatchErrorCode
+const (
+	SimulationJobBatchErrorCodeInternalServiceError SimulationJobBatchErrorCode = "InternalServiceError"
+)
+
+func (enum SimulationJobBatchErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SimulationJobBatchErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SimulationJobBatchStatus string
+
+// Enum values for SimulationJobBatchStatus
+const (
+	SimulationJobBatchStatusPending    SimulationJobBatchStatus = "Pending"
+	SimulationJobBatchStatusInProgress SimulationJobBatchStatus = "InProgress"
+	SimulationJobBatchStatusFailed     SimulationJobBatchStatus = "Failed"
+	SimulationJobBatchStatusCompleted  SimulationJobBatchStatus = "Completed"
+	SimulationJobBatchStatusCanceled   SimulationJobBatchStatus = "Canceled"
+	SimulationJobBatchStatusCanceling  SimulationJobBatchStatus = "Canceling"
+	SimulationJobBatchStatusCompleting SimulationJobBatchStatus = "Completing"
+	SimulationJobBatchStatusTimingOut  SimulationJobBatchStatus = "TimingOut"
+	SimulationJobBatchStatusTimedOut   SimulationJobBatchStatus = "TimedOut"
+)
+
+func (enum SimulationJobBatchStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SimulationJobBatchStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SimulationJobErrorCode string
 
 // Enum values for SimulationJobErrorCode
@@ -204,10 +246,14 @@ const (
 	SimulationJobErrorCodeInvalidBundleRobotApplication              SimulationJobErrorCode = "InvalidBundleRobotApplication"
 	SimulationJobErrorCodeInvalidBundleSimulationApplication         SimulationJobErrorCode = "InvalidBundleSimulationApplication"
 	SimulationJobErrorCodeInvalidS3resource                          SimulationJobErrorCode = "InvalidS3Resource"
+	SimulationJobErrorCodeLimitExceeded                              SimulationJobErrorCode = "LimitExceeded"
 	SimulationJobErrorCodeMismatchedEtag                             SimulationJobErrorCode = "MismatchedEtag"
 	SimulationJobErrorCodeRobotApplicationVersionMismatchedEtag      SimulationJobErrorCode = "RobotApplicationVersionMismatchedEtag"
 	SimulationJobErrorCodeSimulationApplicationVersionMismatchedEtag SimulationJobErrorCode = "SimulationApplicationVersionMismatchedEtag"
 	SimulationJobErrorCodeResourceNotFound                           SimulationJobErrorCode = "ResourceNotFound"
+	SimulationJobErrorCodeRequestThrottled                           SimulationJobErrorCode = "RequestThrottled"
+	SimulationJobErrorCodeBatchTimedOut                              SimulationJobErrorCode = "BatchTimedOut"
+	SimulationJobErrorCodeBatchCanceled                              SimulationJobErrorCode = "BatchCanceled"
 	SimulationJobErrorCodeInvalidInput                               SimulationJobErrorCode = "InvalidInput"
 	SimulationJobErrorCodeWrongRegionS3bucket                        SimulationJobErrorCode = "WrongRegionS3Bucket"
 	SimulationJobErrorCodeWrongRegionS3output                        SimulationJobErrorCode = "WrongRegionS3Output"

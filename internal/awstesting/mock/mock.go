@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 )
 
 func init() {
@@ -33,6 +34,10 @@ func Config() aws.Config { return config.Copy() }
 // NewMockClient creates and initializes a client that will connect to the
 // mock server
 func NewMockClient(cfg aws.Config) *aws.Client {
+	if cfg.Retryer == nil {
+		cfg.Retryer = retry.NewStandard()
+	}
+
 	return aws.NewClient(
 		cfg,
 		aws.Metadata{

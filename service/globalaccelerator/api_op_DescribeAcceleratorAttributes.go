@@ -55,7 +55,8 @@ const opDescribeAcceleratorAttributes = "DescribeAcceleratorAttributes"
 // DescribeAcceleratorAttributesRequest returns a request value for making API operation for
 // AWS Global Accelerator.
 //
-// Describe the attributes of an accelerator.
+// Describe the attributes of an accelerator. To see an AWS CLI example of describing
+// the attributes of an accelerator, scroll down to Example.
 //
 //    // Example sending a request using DescribeAcceleratorAttributesRequest.
 //    req := client.DescribeAcceleratorAttributesRequest(params)

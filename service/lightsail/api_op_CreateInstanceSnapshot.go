@@ -54,8 +54,9 @@ func (s *CreateInstanceSnapshotInput) Validate() error {
 type CreateInstanceSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An array of key-value pairs containing information about the results of your
-	// create instances snapshot request.
+	// An array of objects that describe the result of the action, such as the status
+	// of the request, the time stamp of the request, and the resources affected
+	// by the request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
 

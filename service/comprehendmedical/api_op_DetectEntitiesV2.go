@@ -80,7 +80,8 @@ const opDetectEntitiesV2 = "DetectEntitiesV2"
 //
 // Inspects the clinical text for a variety of medical entities and returns
 // specific information about them such as entity category, location, and confidence
-// score on that information.
+// score on that information. Amazon Comprehend Medical only detects medical
+// entities in English language texts.
 //
 // The DetectEntitiesV2 operation replaces the DetectEntities operation. This
 // new action uses a different model for determining the entities in your medical

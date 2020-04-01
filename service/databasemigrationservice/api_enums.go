@@ -129,7 +129,8 @@ type MessageFormatValue string
 
 // Enum values for MessageFormatValue
 const (
-	MessageFormatValueJson MessageFormatValue = "json"
+	MessageFormatValueJson            MessageFormatValue = "json"
+	MessageFormatValueJsonUnformatted MessageFormatValue = "json-unformatted"
 )
 
 func (enum MessageFormatValue) MarshalValue() (string, error) {

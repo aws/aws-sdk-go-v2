@@ -33,9 +33,10 @@ func (fd *fakeDynamoDB) GetItemRequest(input *dynamodb.GetItemInput) dynamodb.Ge
 	}
 	req := dynamodb.GetItemRequest{
 		Request: &aws.Request{
-			Data:  output,
-			Error: fd.err,
+			Data:        output,
+			Error:       fd.err,
 			HTTPRequest: &http.Request{},
+			Retryer:     aws.NoOpRetryer{},
 		},
 	}
 

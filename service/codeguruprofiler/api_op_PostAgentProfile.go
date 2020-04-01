@@ -10,28 +10,18 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request for PostAgentProfile operation.
+// The structure representing the postAgentProfileRequest.
 type PostAgentProfileInput struct {
 	_ struct{} `type:"structure" payload:"AgentProfile"`
 
-	// The profile collected by an agent for a time range.
-	//
 	// AgentProfile is a required field
 	AgentProfile []byte `locationName:"agentProfile" type:"blob" required:"true"`
 
-	// The content type of the agent profile in the payload. Recommended to send
-	// the profile gzipped with content-type application/octet-stream. Other accepted
-	// values are application/x-amzn-ion and application/json for unzipped Ion and
-	// JSON respectively.
-	//
 	// ContentType is a required field
 	ContentType *string `location:"header" locationName:"Content-Type" type:"string" required:"true"`
 
-	// Client generated token to deduplicate the agent profile during aggregation.
 	ProfileToken *string `location:"querystring" locationName:"profileToken" min:"1" type:"string" idempotencyToken:"true"`
 
-	// The name of the profiling group.
-	//
 	// ProfilingGroupName is a required field
 	ProfilingGroupName *string `location:"uri" locationName:"profilingGroupName" min:"1" type:"string" required:"true"`
 }
@@ -105,7 +95,7 @@ func (s PostAgentProfileInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Response for PostAgentProfile operation.
+// The structure representing the postAgentProfileResponse.
 type PostAgentProfileOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -124,8 +114,6 @@ const opPostAgentProfile = "PostAgentProfile"
 
 // PostAgentProfileRequest returns a request value for making API operation for
 // Amazon CodeGuru Profiler.
-//
-// Submit profile collected by an agent belonging to a profiling group for aggregation.
 //
 //    // Example sending a request using PostAgentProfileRequest.
 //    req := client.PostAgentProfileRequest(params)

@@ -21,7 +21,9 @@ func (s UnpeerVpcInput) String() string {
 type UnpeerVpcOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An array of key-value pairs containing information about the request operation.
+	// An array of objects that describe the result of the action, such as the status
+	// of the request, the time stamp of the request, and the resources affected
+	// by the request.
 	Operation *Operation `locationName:"operation" type:"structure"`
 }
 

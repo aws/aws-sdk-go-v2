@@ -35,6 +35,10 @@ type ListTrialsInput struct {
 
 	// The sort order. The default value is Descending.
 	SortOrder SortOrder `type:"string" enum:"true"`
+
+	// A filter that returns only trials that are associated with the specified
+	// trial component.
+	TrialComponentName *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -50,6 +54,9 @@ func (s *ListTrialsInput) Validate() error {
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.TrialComponentName != nil && len(*s.TrialComponentName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TrialComponentName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -79,9 +86,10 @@ const opListTrials = "ListTrials"
 // Amazon SageMaker Service.
 //
 // Lists the trials in your account. Specify an experiment name to limit the
-// list to the trials that are part of that experiment. The list can be filtered
-// to show only trials that were created in a specific time range. The list
-// can be sorted by trial name or creation time.
+// list to the trials that are part of that experiment. Specify a trial component
+// name to limit the list to the trials that associated with that trial component.
+// The list can be filtered to show only trials that were created in a specific
+// time range. The list can be sorted by trial name or creation time.
 //
 //    // Example sending a request using ListTrialsRequest.
 //    req := client.ListTrialsRequest(params)

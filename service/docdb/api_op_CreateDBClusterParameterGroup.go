@@ -13,28 +13,28 @@ import (
 type CreateDBClusterParameterGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the DB cluster parameter group.
+	// The name of the cluster parameter group.
 	//
 	// Constraints:
 	//
-	//    * Must match the name of an existing DBClusterParameterGroup.
+	//    * Must not match the name of an existing DBClusterParameterGroup.
 	//
 	// This value is stored as a lowercase string.
 	//
 	// DBClusterParameterGroupName is a required field
 	DBClusterParameterGroupName *string `type:"string" required:"true"`
 
-	// The DB cluster parameter group family name.
+	// The cluster parameter group family name.
 	//
 	// DBParameterGroupFamily is a required field
 	DBParameterGroupFamily *string `type:"string" required:"true"`
 
-	// The description for the DB cluster parameter group.
+	// The description for the cluster parameter group.
 	//
 	// Description is a required field
 	Description *string `type:"string" required:"true"`
 
-	// The tags to be assigned to the DB cluster parameter group.
+	// The tags to be assigned to the cluster parameter group.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
@@ -68,7 +68,7 @@ func (s *CreateDBClusterParameterGroupInput) Validate() error {
 type CreateDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster parameter group.
+	// Detailed information about a cluster parameter group.
 	DBClusterParameterGroup *DBClusterParameterGroup `type:"structure"`
 }
 
@@ -82,27 +82,27 @@ const opCreateDBClusterParameterGroup = "CreateDBClusterParameterGroup"
 // CreateDBClusterParameterGroupRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Creates a new DB cluster parameter group.
+// Creates a new cluster parameter group.
 //
-// Parameters in a DB cluster parameter group apply to all of the instances
-// in a DB cluster.
+// Parameters in a cluster parameter group apply to all of the instances in
+// a DB cluster.
 //
-// A DB cluster parameter group is initially created with the default parameters
-// for the database engine used by instances in the DB cluster. To provide custom
+// A cluster parameter group is initially created with the default parameters
+// for the database engine used by instances in the cluster. To provide custom
 // values for any of the parameters, you must modify the group after you create
 // it. After you create a DB cluster parameter group, you must associate it
-// with your DB cluster. For the new DB cluster parameter group and associated
-// settings to take effect, you must then reboot the DB instances in the DB
-// cluster without failover.
+// with your cluster. For the new DB cluster parameter group and associated
+// settings to take effect, you must then reboot the instances in the cluster
+// without failover.
 //
-// After you create a DB cluster parameter group, you should wait at least 5
-// minutes before creating your first DB cluster that uses that DB cluster parameter
-// group as the default parameter group. This allows Amazon DocumentDB to fully
-// complete the create action before the DB cluster parameter group is used
-// as the default for a new DB cluster. This step is especially important for
-// parameters that are critical when creating the default database for a DB
-// cluster, such as the character set for the default database defined by the
-// character_set_database parameter.
+// After you create a cluster parameter group, you should wait at least 5 minutes
+// before creating your first cluster that uses that cluster parameter group
+// as the default parameter group. This allows Amazon DocumentDB to fully complete
+// the create action before the cluster parameter group is used as the default
+// for a new cluster. This step is especially important for parameters that
+// are critical when creating the default database for a cluster, such as the
+// character set for the default database defined by the character_set_database
+// parameter.
 //
 //    // Example sending a request using CreateDBClusterParameterGroupRequest.
 //    req := client.CreateDBClusterParameterGroupRequest(params)

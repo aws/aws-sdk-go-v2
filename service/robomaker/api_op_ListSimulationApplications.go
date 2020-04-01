@@ -20,27 +20,22 @@ type ListSimulationApplicationsInput struct {
 	// value of the filtered item. You can use up to three filters.
 	Filters []Filter `locationName:"filters" min:"1" type:"list"`
 
-	// The maximum number of deployment job results returned by ListSimulationApplications
-	// in paginated output. When this parameter is used, ListSimulationApplications
-	// only returns maxResults results in a single page along with a nextToken response
-	// element. The remaining results of the initial request can be seen by sending
-	// another ListSimulationApplications request with the returned nextToken value.
-	// This value can be between 1 and 100. If this parameter is not used, then
-	// ListSimulationApplications returns up to 100 results and a nextToken value
-	// if applicable.
+	// When this parameter is used, ListSimulationApplications only returns maxResults
+	// results in a single page along with a nextToken response element. The remaining
+	// results of the initial request can be seen by sending another ListSimulationApplications
+	// request with the returned nextToken value. This value can be between 1 and
+	// 100. If this parameter is not used, then ListSimulationApplications returns
+	// up to 100 results and a nextToken value if applicable.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
 	// The nextToken value returned from a previous paginated ListSimulationApplications
 	// request where maxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
 	// returned the nextToken value.
-	//
-	// This token should be treated as an opaque identifier that is only used to
-	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// The version qualifier of the simulation application.
-	VersionQualifier *string `locationName:"versionQualifier" type:"string"`
+	VersionQualifier *string `locationName:"versionQualifier" min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -56,6 +51,9 @@ func (s *ListSimulationApplicationsInput) Validate() error {
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+	if s.VersionQualifier != nil && len(*s.VersionQualifier) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("VersionQualifier", 1))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {

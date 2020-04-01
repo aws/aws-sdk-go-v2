@@ -73,6 +73,8 @@ type ClientAPI interface {
 
 	CreateUserRequest(*workmail.CreateUserInput) workmail.CreateUserRequest
 
+	DeleteAccessControlRuleRequest(*workmail.DeleteAccessControlRuleInput) workmail.DeleteAccessControlRuleRequest
+
 	DeleteAliasRequest(*workmail.DeleteAliasInput) workmail.DeleteAliasRequest
 
 	DeleteGroupRequest(*workmail.DeleteGroupInput) workmail.DeleteGroupRequest
@@ -97,7 +99,11 @@ type ClientAPI interface {
 
 	DisassociateMemberFromGroupRequest(*workmail.DisassociateMemberFromGroupInput) workmail.DisassociateMemberFromGroupRequest
 
+	GetAccessControlEffectRequest(*workmail.GetAccessControlEffectInput) workmail.GetAccessControlEffectRequest
+
 	GetMailboxDetailsRequest(*workmail.GetMailboxDetailsInput) workmail.GetMailboxDetailsRequest
+
+	ListAccessControlRulesRequest(*workmail.ListAccessControlRulesInput) workmail.ListAccessControlRulesRequest
 
 	ListAliasesRequest(*workmail.ListAliasesInput) workmail.ListAliasesRequest
 
@@ -113,13 +119,21 @@ type ClientAPI interface {
 
 	ListResourcesRequest(*workmail.ListResourcesInput) workmail.ListResourcesRequest
 
+	ListTagsForResourceRequest(*workmail.ListTagsForResourceInput) workmail.ListTagsForResourceRequest
+
 	ListUsersRequest(*workmail.ListUsersInput) workmail.ListUsersRequest
+
+	PutAccessControlRuleRequest(*workmail.PutAccessControlRuleInput) workmail.PutAccessControlRuleRequest
 
 	PutMailboxPermissionsRequest(*workmail.PutMailboxPermissionsInput) workmail.PutMailboxPermissionsRequest
 
 	RegisterToWorkMailRequest(*workmail.RegisterToWorkMailInput) workmail.RegisterToWorkMailRequest
 
 	ResetPasswordRequest(*workmail.ResetPasswordInput) workmail.ResetPasswordRequest
+
+	TagResourceRequest(*workmail.TagResourceInput) workmail.TagResourceRequest
+
+	UntagResourceRequest(*workmail.UntagResourceInput) workmail.UntagResourceRequest
 
 	UpdateMailboxQuotaRequest(*workmail.UpdateMailboxQuotaInput) workmail.UpdateMailboxQuotaRequest
 

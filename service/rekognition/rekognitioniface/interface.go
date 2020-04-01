@@ -112,6 +112,8 @@ type ClientAPI interface {
 
 	GetPersonTrackingRequest(*rekognition.GetPersonTrackingInput) rekognition.GetPersonTrackingRequest
 
+	GetTextDetectionRequest(*rekognition.GetTextDetectionInput) rekognition.GetTextDetectionRequest
+
 	IndexFacesRequest(*rekognition.IndexFacesInput) rekognition.IndexFacesRequest
 
 	ListCollectionsRequest(*rekognition.ListCollectionsInput) rekognition.ListCollectionsRequest
@@ -141,6 +143,8 @@ type ClientAPI interface {
 	StartProjectVersionRequest(*rekognition.StartProjectVersionInput) rekognition.StartProjectVersionRequest
 
 	StartStreamProcessorRequest(*rekognition.StartStreamProcessorInput) rekognition.StartStreamProcessorRequest
+
+	StartTextDetectionRequest(*rekognition.StartTextDetectionInput) rekognition.StartTextDetectionRequest
 
 	StopProjectVersionRequest(*rekognition.StopProjectVersionInput) rekognition.StopProjectVersionRequest
 

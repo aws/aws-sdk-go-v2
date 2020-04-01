@@ -14,6 +14,7 @@ import (
 type ListImagesInput struct {
 	_ struct{} `type:"structure"`
 
+	// The filters.
 	Filters []Filter `locationName:"filters" min:"1" type:"list"`
 
 	// The maximum items to return in a request.
@@ -23,10 +24,10 @@ type ListImagesInput struct {
 	// a previously truncated response.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
-	// The owner defines whose images you wish to list. By default this request
-	// will only show images owned by your account. You may use this field to specify
-	// if you wish to view images owned by yourself, Amazon, or those images that
-	// have been shared with you by other customers.
+	// The owner defines which images you want to list. By default, this request
+	// will only show images owned by your account. You can use this field to specify
+	// if you want to view images owned by yourself, by Amazon, or those images
+	// that have been shared with you by other customers.
 	Owner Ownership `locationName:"owner" type:"string" enum:"true"`
 }
 
@@ -104,9 +105,9 @@ type ListImagesOutput struct {
 	// The list of image semantic versions.
 	ImageVersionList []ImageVersion `locationName:"imageVersionList" type:"list"`
 
-	// The next token used for paginated responses. When this is not empty then
-	// there are additional elements that the service that not include in this request.
-	// Use this token with the next request to retrieve additional object.
+	// The next token used for paginated responses. When this is not empty, there
+	// are additional elements that the service has not included in this request.
+	// Use this token with the next request to retrieve additional objects.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// The request ID that uniquely identifies this request.

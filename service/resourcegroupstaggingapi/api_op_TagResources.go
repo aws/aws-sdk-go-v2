@@ -60,8 +60,10 @@ func (s *TagResourcesInput) Validate() error {
 type TagResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Details of resources that could not be tagged. An error code, status code,
-	// and error message are returned for each failed item.
+	// A map containing a key-value pair for each failed item that couldn't be tagged.
+	// The key is the ARN of the failed resource. The value is a FailureInfo object
+	// that contains an error code, a status code, and an error message. If there
+	// are no errors, the FailedResourcesMap is empty.
 	FailedResourcesMap map[string]FailureInfo `type:"map"`
 }
 

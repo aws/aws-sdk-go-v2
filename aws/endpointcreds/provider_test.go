@@ -3,6 +3,7 @@ package endpointcreds_test
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
@@ -144,7 +145,10 @@ func TestFailedRetrieveCredentials(t *testing.T) {
 		t.Fatalf("expect error, got none")
 	}
 
-	aerr := err.(awserr.Error)
+	var aerr awserr.Error
+	if !errors.As(err, &aerr) {
+		t.Fatalf("expect %T error, got %v", err, aerr)
+	}
 	if e, a := "CredentialsEndpointError", aerr.Code(); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
@@ -152,7 +156,13 @@ func TestFailedRetrieveCredentials(t *testing.T) {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
-	aerr = aerr.OrigErr().(awserr.Error)
+	err = errors.Unwrap(aerr)
+	if err == nil {
+		t.Fatalf("expect nested error, got none")
+	}
+	if !errors.As(err, &aerr) {
+		t.Fatalf("expect %T error, got %v", err, aerr)
+	}
 	if e, a := "Error", aerr.Code(); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}

@@ -14,8 +14,6 @@ import (
 )
 
 var _ RegionProvider = (*SharedConfig)(nil)
-var _ CredentialsValueProvider = (*SharedConfig)(nil)
-var _ AssumeRoleConfigProvider = (*SharedConfig)(nil)
 
 var (
 	testConfigFilename      = filepath.Join("testdata", "shared_config")
@@ -29,12 +27,12 @@ func TestNewSharedConfig(t *testing.T) {
 		Expected  SharedConfig
 		Err       error
 	}{
-		{
+		0: {
 			Filenames: []string{"file_not_exist"},
 			Profile:   "default",
 			Err:       fmt.Errorf("failed to open shared config file, file_not_exist"),
 		},
-		{
+		1: {
 			Filenames: []string{testConfigFilename},
 			Profile:   "default",
 			Expected: SharedConfig{
@@ -42,7 +40,7 @@ func TestNewSharedConfig(t *testing.T) {
 				Region:  "default_region",
 			},
 		},
-		{
+		2: {
 			Filenames: []string{testConfigOtherFilename, testConfigFilename},
 			Profile:   "config_file_load_order",
 			Expected: SharedConfig{
@@ -55,7 +53,7 @@ func TestNewSharedConfig(t *testing.T) {
 				},
 			},
 		},
-		{
+		3: {
 			Filenames: []string{testConfigFilename, testConfigOtherFilename},
 			Profile:   "config_file_load_order",
 			Expected: SharedConfig{
@@ -68,30 +66,28 @@ func TestNewSharedConfig(t *testing.T) {
 				},
 			},
 		},
-		{
+		4: {
 			Filenames: []string{testConfigOtherFilename, testConfigFilename},
 			Profile:   "assume_role",
 			Expected: SharedConfig{
-				Profile: "assume_role",
-				AssumeRole: AssumeRoleConfig{
-					RoleARN:       "assume_role_role_arn",
-					sourceProfile: "complete_creds",
-					Source: &SharedConfig{
-						Profile: "complete_creds",
-						Credentials: aws.Credentials{
-							AccessKeyID:     "complete_creds_akid",
-							SecretAccessKey: "complete_creds_secret",
-							Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
-						},
+				Profile:           "assume_role",
+				RoleARN:           "assume_role_role_arn",
+				SourceProfileName: "complete_creds",
+				Source: &SharedConfig{
+					Profile: "complete_creds",
+					Credentials: aws.Credentials{
+						AccessKeyID:     "complete_creds_akid",
+						SecretAccessKey: "complete_creds_secret",
+						Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
 					},
 				},
 			},
 		},
-		{
+		5: {
 			Filenames: []string{testConfigOtherFilename, testConfigFilename},
 			Profile:   "assume_role_invalid_source_profile",
 			Err: SharedConfigAssumeRoleError{
-				Profile: "assume_role_invalid_source_profile",
+				Profile: "profile_not_exists",
 				RoleARN: "assume_role_invalid_source_profile_role_arn",
 				Err: SharedConfigNotExistErrors{
 					SharedConfigProfileNotExistError{
@@ -107,49 +103,39 @@ func TestNewSharedConfig(t *testing.T) {
 				},
 			},
 		},
-		{
+		6: {
 			Filenames: []string{testConfigOtherFilename, testConfigFilename},
 			Profile:   "assume_role_w_creds",
 			Expected: SharedConfig{
-				Profile: "assume_role_w_creds",
-				Credentials: aws.Credentials{
-					AccessKeyID:     "assume_role_w_creds_akid",
-					SecretAccessKey: "assume_role_w_creds_secret",
-					Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
-				},
-				AssumeRole: AssumeRoleConfig{
-					RoleARN:         "assume_role_w_creds_role_arn",
-					ExternalID:      "1234",
-					RoleSessionName: "assume_role_w_creds_session_name",
-					sourceProfile:   "assume_role_w_creds",
-					Source: &SharedConfig{
-						Profile: "assume_role_w_creds",
-						Credentials: aws.Credentials{
-							AccessKeyID:     "assume_role_w_creds_akid",
-							SecretAccessKey: "assume_role_w_creds_secret",
-							Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
-						},
+				Profile:           "assume_role_w_creds",
+				RoleARN:           "assume_role_w_creds_role_arn",
+				ExternalID:        "1234",
+				RoleSessionName:   "assume_role_w_creds_session_name",
+				SourceProfileName: "assume_role_w_creds",
+				Source: &SharedConfig{
+					Profile: "assume_role_w_creds",
+					Credentials: aws.Credentials{
+						AccessKeyID:     "assume_role_w_creds_akid",
+						SecretAccessKey: "assume_role_w_creds_secret",
+						Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
 					},
 				},
 			},
 		},
-		{
+		7: {
 			Filenames: []string{testConfigOtherFilename, testConfigFilename},
 			Profile:   "assume_role_wo_creds",
 			Expected: SharedConfig{
-				Profile: "assume_role_wo_creds",
-				AssumeRole: AssumeRoleConfig{
-					RoleARN:       "assume_role_wo_creds_role_arn",
-					sourceProfile: "assume_role_wo_creds",
-				},
+				Profile:           "assume_role_wo_creds",
+				RoleARN:           "assume_role_wo_creds_role_arn",
+				SourceProfileName: "assume_role_wo_creds",
 			},
 			Err: SharedConfigAssumeRoleError{
 				Profile: "assume_role_wo_creds",
 				RoleARN: "assume_role_wo_creds_role_arn",
-				Err:     fmt.Errorf("source profile has no shared credentials"),
 			},
 		},
-		{
+		8: {
 			Filenames: []string{filepath.Join("testdata", "shared_config_invalid_ini")},
 			Profile:   "profile_name",
 			Err: SharedConfigLoadError{
@@ -157,7 +143,7 @@ func TestNewSharedConfig(t *testing.T) {
 				Err:      awserr.New("INIParseError", "", nil),
 			},
 		},
-		{
+		9: {
 			Profile:   "valid_arn_region",
 			Filenames: []string{testConfigFilename},
 			Expected: SharedConfig{
@@ -165,12 +151,76 @@ func TestNewSharedConfig(t *testing.T) {
 				S3UseARNRegion: aws.Bool(true),
 			},
 		},
-		{
+		10: {
 			Profile:   "endpoint_discovery",
 			Filenames: []string{testConfigFilename},
 			Expected: SharedConfig{
 				Profile:                 "endpoint_discovery",
 				EnableEndpointDiscovery: aws.Bool(true),
+			},
+		},
+		11: {
+			Filenames: []string{testConfigOtherFilename, testConfigFilename},
+			Profile:   "assume_role_with_credential_source",
+			Expected: SharedConfig{
+				Profile:          "assume_role_with_credential_source",
+				RoleARN:          "assume_role_with_credential_source_role_arn",
+				CredentialSource: credSourceEc2Metadata,
+			},
+		},
+		12: {
+			Filenames: []string{testConfigOtherFilename, testConfigFilename},
+			Profile:   "multiple_assume_role",
+			Expected: SharedConfig{
+				Profile:           "multiple_assume_role",
+				RoleARN:           "multiple_assume_role_role_arn",
+				SourceProfileName: "assume_role",
+				Source: &SharedConfig{
+					Profile:           "assume_role",
+					RoleARN:           "assume_role_role_arn",
+					SourceProfileName: "complete_creds",
+					Source: &SharedConfig{
+						Profile: "complete_creds",
+						Credentials: aws.Credentials{
+							AccessKeyID:     "complete_creds_akid",
+							SecretAccessKey: "complete_creds_secret",
+							Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+						},
+					},
+				},
+			},
+		},
+		13: {
+			Filenames: []string{testConfigOtherFilename, testConfigFilename},
+			Profile:   "multiple_assume_role_with_credential_source",
+			Expected: SharedConfig{
+				Profile:           "multiple_assume_role_with_credential_source",
+				RoleARN:           "multiple_assume_role_with_credential_source_role_arn",
+				SourceProfileName: "assume_role_with_credential_source",
+				Source: &SharedConfig{
+					Profile:          "assume_role_with_credential_source",
+					RoleARN:          "assume_role_with_credential_source_role_arn",
+					CredentialSource: credSourceEc2Metadata,
+				},
+			},
+		},
+		14: {
+			Filenames: []string{testConfigOtherFilename, testConfigFilename},
+			Profile:   "multiple_assume_role_with_credential_source2",
+			Expected: SharedConfig{
+				Profile:           "multiple_assume_role_with_credential_source2",
+				RoleARN:           "multiple_assume_role_with_credential_source2_role_arn",
+				SourceProfileName: "multiple_assume_role_with_credential_source",
+				Source: &SharedConfig{
+					Profile:           "multiple_assume_role_with_credential_source",
+					RoleARN:           "multiple_assume_role_with_credential_source_role_arn",
+					SourceProfileName: "assume_role_with_credential_source",
+					Source: &SharedConfig{
+						Profile:          "assume_role_with_credential_source",
+						RoleARN:          "assume_role_with_credential_source_role_arn",
+						CredentialSource: credSourceEc2Metadata,
+					},
+				},
 			},
 		},
 	}
@@ -208,23 +258,23 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 		Expected SharedConfig
 		Err      error
 	}{
-		{
+		0: {
 			Profile:  "default",
 			Expected: SharedConfig{Region: "default_region"},
 		},
-		{
+		1: {
 			Profile:  "alt_profile_name",
 			Expected: SharedConfig{Region: "alt_profile_name_region"},
 		},
-		{
+		2: {
 			Profile:  "short_profile_name_first",
 			Expected: SharedConfig{Region: "short_profile_name_first_short"},
 		},
-		{
+		3: {
 			Profile:  "partial_creds",
 			Expected: SharedConfig{},
 		},
-		{
+		4: {
 			Profile: "complete_creds",
 			Expected: SharedConfig{
 				Credentials: aws.Credentials{
@@ -234,7 +284,7 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 				},
 			},
 		},
-		{
+		5: {
 			Profile: "complete_creds_with_token",
 			Expected: SharedConfig{
 				Credentials: aws.Credentials{
@@ -245,7 +295,7 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 				},
 			},
 		},
-		{
+		6: {
 			Profile: "full_profile",
 			Expected: SharedConfig{
 				Credentials: aws.Credentials{
@@ -256,30 +306,28 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 				Region: "full_profile_region",
 			},
 		},
-		{
-			Profile:  "partial_assume_role",
-			Expected: SharedConfig{},
+		7: {
+			Profile: "partial_assume_role",
+			Expected: SharedConfig{
+				RoleARN: "partial_assume_role_role_arn",
+			},
 		},
-		{
+		8: {
 			Profile: "assume_role",
 			Expected: SharedConfig{
-				AssumeRole: AssumeRoleConfig{
-					RoleARN:       "assume_role_role_arn",
-					sourceProfile: "complete_creds",
-				},
+				RoleARN:           "assume_role_role_arn",
+				SourceProfileName: "complete_creds",
 			},
 		},
-		{
+		9: {
 			Profile: "assume_role_w_mfa",
 			Expected: SharedConfig{
-				AssumeRole: AssumeRoleConfig{
-					RoleARN:       "assume_role_role_arn",
-					sourceProfile: "complete_creds",
-					MFASerial:     "0123456789",
-				},
+				RoleARN:           "assume_role_role_arn",
+				SourceProfileName: "complete_creds",
+				MFASerial:         "0123456789",
 			},
 		},
-		{
+		10: {
 			Profile: "does_not_exist",
 			Err: SharedConfigProfileNotExistError{
 				Filename: "testdata/shared_config",
@@ -368,10 +416,10 @@ func cmpFiles(expects, actuals []sharedConfigFile) bool {
 }
 
 func TestLoadSharedConfig(t *testing.T) {
-	origProf := DefaultSharedConfigProfile
+	origProf := defaultSharedConfigProfile
 	origFiles := DefaultSharedConfigFiles
 	defer func() {
-		DefaultSharedConfigProfile = origProf
+		defaultSharedConfigProfile = origProf
 		DefaultSharedConfigFiles = origFiles
 	}()
 
@@ -462,11 +510,11 @@ func TestLoadSharedConfig(t *testing.T) {
 
 	for i, c := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			DefaultSharedConfigProfile = origProf
+			defaultSharedConfigProfile = origProf
 			DefaultSharedConfigFiles = origFiles
 
 			if len(c.Profile) > 0 {
-				DefaultSharedConfigProfile = c.Profile
+				defaultSharedConfigProfile = c.Profile
 			}
 			if len(c.Files) > 0 {
 				DefaultSharedConfigFiles = c.Files
