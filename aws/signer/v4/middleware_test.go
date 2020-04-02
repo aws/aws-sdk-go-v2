@@ -11,7 +11,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws/client"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
 )
@@ -102,10 +101,10 @@ func TestComputePayloadHashMiddleware(t *testing.T) {
 	}
 }
 
-type mockSigner func(ctx context.Context, r *http.Request, payloadHash string, service string, region string, signingTime time.Time)
+type mockSigner func(ctx context.Context, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
 
-func (f mockSigner) SignHTTP(ctx context.Context, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) {
-	f(ctx, r, payloadHash, service, region, signingTime)
+func (f mockSigner) SignHTTP(ctx context.Context, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error {
+	return f(ctx, r, payloadHash, service, region, signingTime)
 }
 
 func TestSignHTTPRequestMiddleware(t *testing.T) {
@@ -130,7 +129,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 	for i, tt := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			c := &SignHTTPRequestMiddleware{
-				Signer: mockSigner(func(ctx context.Context, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) {
+				Signer: mockSigner(func(ctx context.Context, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error {
 					if e, a := tt.hash, payloadHash; e != a {
 						t.Errorf("expected %v, got %v", e, a)
 					}
@@ -140,6 +139,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 					if e, a := signingRegion, region; e != a {
 						t.Errorf("expected %v, got %v", e, a)
 					}
+					return nil
 				}),
 			}
 
@@ -147,7 +147,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 				return out, err
 			})
 
-			ctx := client.SetSigningMetadata(context.Background(), client.SigningMetadata{
+			ctx := SetSigningMetadata(context.Background(), SigningMetadata{
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
 			})
@@ -156,7 +156,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 				ctx = context.WithValue(ctx, payloadHashKey{}, tt.hash)
 			}
 
-			_, err := c.HandleFinalize(ctx, middleware.FinalizeInput{Request: &smithyHTTP.Request{HTTPRequest: &http.Request{}}}, next)
+			_, err := c.HandleFinalize(ctx, middleware.FinalizeInput{Request: &smithyHTTP.Request{Request: &http.Request{}}}, next)
 			if err != nil && tt.expectedErr == nil {
 				t.Errorf("expected no error, got %v", err)
 			} else if err != nil && tt.expectedErr != nil {
