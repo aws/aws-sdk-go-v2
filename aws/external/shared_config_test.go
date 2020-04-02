@@ -335,6 +335,16 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 				Err:      nil,
 			},
 		},
+		{
+			Profile:   "with_mixed_case_keys",
+			Expected: SharedConfig{
+				Credentials: aws.Credentials{
+					AccessKeyID:     "accessKey",
+					SecretAccessKey: "secret",
+					Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+				},
+			},
+		},
 	}
 
 	for i, c := range cases {

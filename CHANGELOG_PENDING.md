@@ -21,6 +21,8 @@ SDK Features
   
 SDK Enhancements
 ---
+* `internal/ini`: Normalize Section keys to lowercase ([#495](https://github.com/aws/aws-sdk-go-v2/pull/495))
+  * Update's SDK's ini utility to store all keys as lowercase. This brings the SDK inline with the AWS CLI's behavior.
 
 SDK Bugs
 ---

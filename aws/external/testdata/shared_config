@@ -84,6 +84,11 @@ s3_use_arn_region=true
 [endpoint_discovery]
 endpoint_discovery_enabled=true
 
+
+[with_mixed_case_keys]
+aWs_AcCeSs_kEy_ID = accessKey
+aWs_SecrEt_AccEsS_kEY = secret
+
 [assume_role_with_credential_source]
 role_arn = assume_role_with_credential_source_role_arn
 credential_source = Ec2InstanceMetadata
