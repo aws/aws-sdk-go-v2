@@ -336,7 +336,7 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 			},
 		},
 		{
-			Profile:   "with_mixed_case_keys",
+			Profile: "with_mixed_case_keys",
 			Expected: SharedConfig{
 				Credentials: aws.Credentials{
 					AccessKeyID:     "accessKey",

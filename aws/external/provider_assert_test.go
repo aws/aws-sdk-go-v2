@@ -17,6 +17,11 @@ var (
 	_ CustomCABundleProvider = WithCustomCABundle([]byte{})
 )
 
+// DefaultRegionProvider implementor assertions
+var (
+	_ DefaultRegionProvider = WithDefaultRegion("")
+)
+
 // EnableEndpointDiscoveryProvider implementor assertions
 var (
 	_ EnableEndpointDiscoveryProvider = &EnvConfig{}
