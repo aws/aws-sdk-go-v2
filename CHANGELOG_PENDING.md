@@ -18,7 +18,13 @@ SDK Features
   * `SignHTTP` replaces `Sign`, and usage of `Sign` should be migrated before it's removal at a later date
   * `PresignHTTP` replaces `Presign`, and usage of `Presign` should be migrated before it's removal at a later date
   * `DisableRequestBodyOverwrite` and `UnsignedPayload` are now deprecated options and have no effect on `SignHTTP` or `PresignHTTP`. These options will be removed at a later date.
-  
+* `aws/external`: Add Support for setting a default fallback region and resolving region from EC2 IMDS ([#523](https://github.com/aws/aws-sdk-go-v2/pull/523))
+  * `WithDefaultRegion` helper has been added which can be passed to `LoadDefaultAWSConfig`
+    * This helper can be used to configure a default fallback region in the event a region fails to be resolved from other sources
+  * Support has been added to resolve region using EC2 IMDS when available
+    * The IMDS region will be used if region as not found configured in either the shared config or the process environment.
+  * Fixes [#244](https://github.com/aws/aws-sdk-go-v2/issues/244)
+  * Fixes [#515](https://github.com/aws/aws-sdk-go-v2/issues/515)
 SDK Enhancements
 ---
 * `internal/ini`: Normalize Section keys to lowercase ([#495](https://github.com/aws/aws-sdk-go-v2/pull/495))

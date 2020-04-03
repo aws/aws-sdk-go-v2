@@ -23,6 +23,7 @@ var implAsserts = map[string][]string{
 	"MFATokenFuncProvider":            {`WithMFATokenFunc(func() (string, error) { return "", nil })`},
 	"EnableEndpointDiscoveryProvider": {envConfigType, sharedConfigType, "WithEnableEndpointDiscovery(true)"},
 	"CredentialsProviderProvider":     {`WithCredentialsProvider{aws.NewStaticCredentialsProvider("", "", "")}`},
+	"DefaultRegionProvider":           {`WithDefaultRegion("")`},
 }
 
 var tplProviderTests = template.Must(template.New("tplProviderTests").Funcs(map[string]interface{}{
