@@ -12,6 +12,10 @@ import (
 	"github.com/awslabs/smithy-go/transport/http"
 )
 
+// RequestCloner is a function that can take an input request type and clone the request
+// for use in a subsequent retry attempt
+type RequestCloner func(context.Context, interface{}) interface{}
+
 type retryMetadata struct {
 	AttemptNum       int
 	AttemptTime      time.Time
@@ -21,8 +25,16 @@ type retryMetadata struct {
 
 type retryMetadataKey struct{}
 
+// RetryMiddleware is a Smithy FinalizeMiddleware that handles retry attempts using the provided
+// Retryer implementation
 type RetryMiddleware struct {
-	Retryer Retryer
+	retryer       Retryer
+	requestCloner RequestCloner
+}
+
+// NewRetryMiddleware returns a new RetryMiddleware
+func NewRetryMiddleware(retryer Retryer, requestCloner RequestCloner) RetryMiddleware {
+	return RetryMiddleware{retryer: retryer, requestCloner: requestCloner}
 }
 
 func (r RetryMiddleware) ID() string {
@@ -34,33 +46,27 @@ func (r RetryMiddleware) Name() string {
 }
 
 func (r RetryMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (out middleware.FinalizeOutput, err error) {
-	const invocationIDHeader = "amz-sdk-invocation-id"
-
-	req := in.Request.(*http.Request)
-
-	// TODO: Don't see a compelling reason to make this a separate middleware that makes this available via context
-	invocationID, err := sdk.UUIDVersion4()
-	if err != nil {
-		return out, err
-	}
-
-	req.Header.Set(invocationIDHeader, invocationID)
-
 	var attemptNum, retryCount int
 	var attemptClockSkew time.Duration
 
-	maxAttempts := r.Retryer.MaxAttempts()
+	maxAttempts := r.retryer.MaxAttempts()
 
-	relRetryToken := r.Retryer.GetInitialToken()
+	relRetryToken := r.retryer.GetInitialToken()
+
+	origReq := r.requestCloner(ctx, in.Request)
+	origCtx := ctx
+
 	for {
 		attemptNum++
 
-		ctx = context.WithValue(ctx, retryMetadataKey{}, retryMetadata{
+		ctx = setRetryMetadata(origCtx, retryMetadata{
 			AttemptNum:       attemptNum,
 			AttemptTime:      sdk.NowTime(),
 			MaxAttempts:      maxAttempts,
 			AttemptClockSkew: attemptClockSkew,
 		})
+
+		in.Request = r.requestCloner(ctx, origReq)
 
 		out, reqErr := next.HandleFinalize(ctx, in)
 
@@ -69,7 +75,7 @@ func (r RetryMiddleware) HandleFinalize(ctx context.Context, in middleware.Final
 			return out, nil
 		}
 
-		retryable := r.Retryer.IsErrorRetryable(reqErr)
+		retryable := r.retryer.IsErrorRetryable(reqErr)
 		if !retryable {
 			return out, err
 		}
@@ -82,12 +88,12 @@ func (r RetryMiddleware) HandleFinalize(ctx context.Context, in middleware.Final
 			return out, err
 		}
 
-		retryDelay, err := r.Retryer.RetryDelay(attemptNum, reqErr)
+		relRetryToken, err = r.retryer.GetRetryToken(ctx, reqErr)
 		if err != nil {
 			return out, err
 		}
 
-		relRetryToken, err = r.Retryer.GetRetryToken(ctx, reqErr)
+		retryDelay, err := r.retryer.RetryDelay(attemptNum, reqErr)
 		if err != nil {
 			return out, err
 		}
@@ -105,33 +111,31 @@ func (r RetryMiddleware) HandleFinalize(ctx context.Context, in middleware.Final
 			}
 		}
 
+		// TODO: Pull this from future smithy Metadata context type
 		respContainer, ok := out.Result.(responseMeta)
 		if ok {
 			metadata := respContainer.GetResponseMetadata()
 			responseAt := metadata.GetResponseAt()
 			serverTime := metadata.GetServerTime()
 
+			// TODO: This should probably be computed and bubbled up from a deserializer
 			if !(responseAt.IsZero() || serverTime.IsZero()) {
 				attemptClockSkew = responseAt.Sub(serverTime)
 			}
 		}
 
-		in.Request = in.Request.(*http.Request).Clone(ctx)
-
 		retryCount++
 	}
 }
 
-type RetryMetricsHeaderMiddleware struct {
-	ClientTimeout time.Duration
-}
+type RetryMetricsHeaderMiddleware struct{}
 
 func (r RetryMetricsHeaderMiddleware) ID() string {
 	return "Retry Metrics Header Middleware"
 }
 
 func (r RetryMetricsHeaderMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (out middleware.FinalizeOutput, err error) {
-	metadata, ok := ctx.Value(retryMetadataKey{}).(retryMetadata)
+	metadata, ok := getRetryMetadata(ctx)
 	if !ok {
 		return out, fmt.Errorf("retry metadata value not found on context")
 	}
@@ -143,19 +147,6 @@ func (r RetryMetricsHeaderMiddleware) HandleFinalize(ctx context.Context, in mid
 	if metadata.MaxAttempts != 0 {
 		parts = append(parts, fmt.Sprintf("max=%d", metadata.MaxAttempts))
 	}
-
-	// TODO: Is there a method that we could know the client timeout? Maybe this is passed via middleware constructor?
-	//type timeoutGetter interface {
-	//	GetTimeout() time.Duration
-	//}
-	//
-	//var ttl time.Time
-	//// Attempt extract the TTL from the timeout on the client.
-	//if v, ok := r.Config.HTTPClient.(timeoutGetter); ok {
-	//	if t := v.GetTimeout(); t > 0 {
-	//		ttl = sdk.NowTime().Add(t)
-	//	}
-	//}
 
 	var ttl time.Time
 	if deadline, ok := ctx.Deadline(); ok {
@@ -169,9 +160,22 @@ func (r RetryMetricsHeaderMiddleware) HandleFinalize(ctx context.Context, in mid
 		parts = append(parts, fmt.Sprintf("ttl=%s", ttl.Format(unixTimeFormat)))
 	}
 
-	req := in.Request.(*http.Request)
-
-	req.Header.Set(retryMetricHeader, strings.Join(parts, "; "))
+	switch req := in.Request.(type) {
+	case *http.Request:
+		req.Header.Set(retryMetricHeader, strings.Join(parts, "; "))
+	default:
+		return middleware.FinalizeOutput{}, fmt.Errorf("unknown transport type %T", req)
+	}
 
 	return next.HandleFinalize(ctx, in)
+}
+
+// getRetryMetadata retrieves retryMetadata from the context and a bool indicating if it was set
+func getRetryMetadata(ctx context.Context) (retryMetadata, bool) {
+	metadata, ok := ctx.Value(retryMetadataKey{}).(retryMetadata)
+	return metadata, ok
+}
+
+func setRetryMetadata(ctx context.Context, metadata retryMetadata) context.Context {
+	return context.WithValue(ctx, retryMetadataKey{}, metadata)
 }
