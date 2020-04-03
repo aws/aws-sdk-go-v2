@@ -148,7 +148,7 @@ func ResolveDefaultRegion(cfg *aws.Config, configs Configs) error {
 
 	region, found, err := GetDefaultRegion(configs)
 	if err != nil {
-		return nil
+		return err
 	}
 	if !found {
 		return nil
