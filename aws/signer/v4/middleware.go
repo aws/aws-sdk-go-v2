@@ -63,7 +63,7 @@ func (m *UnsignedPayloadMiddleware) ID() string {
 }
 
 // HandleFinalize sets the payload hash to be an unsigned payload
-func (m *UnsignedPayloadMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (out middleware.FinalizeOutput, err error) {
+func (m *UnsignedPayloadMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 	ctx = SetPayloadHash(ctx, v4Internal.UnsignedPayload)
 	return next.HandleFinalize(ctx, in)
 }
@@ -77,31 +77,31 @@ func (m *ComputePayloadHashMiddleware) ID() string {
 }
 
 // HandleFinalize compute the payload hash for the request payload
-func (m *ComputePayloadHashMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (out middleware.FinalizeOutput, err error) {
+func (m *ComputePayloadHashMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 	req, ok := in.Request.(*smithyHTTP.Request)
 	if !ok {
-		return middleware.FinalizeOutput{}, &HashComputationError{cause: fmt.Sprintf("unexpected request middleware type %T", in.Request)}
+		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{cause: fmt.Sprintf("unexpected request middleware type %T", in.Request)}
 	}
 
 	body, ok := req.Stream.(io.ReadSeeker)
 	if !ok {
-		return middleware.FinalizeOutput{}, &HashComputationError{cause: errPayloadNotSeekable}
+		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{cause: errPayloadNotSeekable}
 	}
 
 	_, err = body.Seek(0, io.SeekStart)
 	if err != nil {
-		return middleware.FinalizeOutput{}, &HashComputationError{err: err}
+		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{err: err}
 	}
 
 	hash := sha256.New()
 	_, err = io.Copy(hash, body)
 	if err != nil {
-		return middleware.FinalizeOutput{}, &HashComputationError{err: err}
+		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{err: err}
 	}
 
 	_, err = body.Seek(0, io.SeekStart)
 	if err != nil {
-		return middleware.FinalizeOutput{}, &HashComputationError{err: err}
+		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{err: err}
 	}
 
 	ctx = SetPayloadHash(ctx, hex.EncodeToString(hash.Sum(nil)))
@@ -125,21 +125,21 @@ func (s *SignHTTPRequestMiddleware) ID() string {
 }
 
 // HandleFinalize will take the provided input and sign the request using the SigV4 authentication scheme
-func (s *SignHTTPRequestMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (out middleware.FinalizeOutput, err error) {
+func (s *SignHTTPRequestMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 	req, ok := in.Request.(*smithyHTTP.Request)
 	if !ok {
-		return middleware.FinalizeOutput{}, &SigningError{cause: fmt.Sprintf("unexpected request middleware type %T", in.Request)}
+		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &SigningError{cause: fmt.Sprintf("unexpected request middleware type %T", in.Request)}
 	}
 
 	signingMetadata := GetSigningMetadata(ctx)
 	payloadHash := GetPayloadHash(ctx)
 	if len(payloadHash) == 0 {
-		return middleware.FinalizeOutput{}, &SigningError{cause: "computed payload hash missing from context"}
+		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &SigningError{cause: "computed payload hash missing from context"}
 	}
 
 	err = s.Signer.SignHTTP(ctx, req.Request, payloadHash, signingMetadata.SigningName, signingMetadata.SigningRegion, sdk.NowTime())
 	if err != nil {
-		return middleware.FinalizeOutput{}, &SigningError{err: err}
+		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &SigningError{err: err}
 	}
 
 	return next.HandleFinalize(ctx, in)

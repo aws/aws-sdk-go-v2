@@ -15,34 +15,6 @@ import (
 	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
 )
 
-type nonSeeker struct{}
-
-func (nonSeeker) Read(p []byte) (n int, err error) {
-	return 0, io.EOF
-}
-
-type semiSeekable struct {
-	hasSeeked bool
-}
-
-func (s *semiSeekable) Seek(offset int64, whence int) (int64, error) {
-	if !s.hasSeeked {
-		s.hasSeeked = true
-		return 0, nil
-	}
-	return 0, fmt.Errorf("io seek error")
-}
-
-func (*semiSeekable) Read(p []byte) (n int, err error) {
-	return 0, io.EOF
-}
-
-type finalizeHandlerFunc func(ctx context.Context, in middleware.FinalizeInput) (middleware.FinalizeOutput, error)
-
-func (f finalizeHandlerFunc) HandleFinalize(ctx context.Context, in middleware.FinalizeInput) (middleware.FinalizeOutput, error) {
-	return f(ctx, in)
-}
-
 func TestComputePayloadHashMiddleware(t *testing.T) {
 	cases := []struct {
 		content      io.Reader
@@ -74,7 +46,7 @@ func TestComputePayloadHashMiddleware(t *testing.T) {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			c := &ComputePayloadHashMiddleware{}
 
-			next := finalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, err error) {
+			next := finalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 				value, ok := ctx.Value(payloadHashKey{}).(string)
 				if !ok {
 					t.Fatalf("expected payload hash value to be on context")
@@ -83,10 +55,10 @@ func TestComputePayloadHashMiddleware(t *testing.T) {
 					t.Errorf("expected %v, got %v", e, a)
 				}
 
-				return out, err
+				return out, metadata, err
 			})
 
-			_, err := c.HandleFinalize(context.Background(), middleware.FinalizeInput{Request: &smithyHTTP.Request{Stream: tt.content}}, next)
+			_, _, err := c.HandleFinalize(context.Background(), middleware.FinalizeInput{Request: &smithyHTTP.Request{Stream: tt.content}}, next)
 			if err != nil && tt.expectedErr == nil {
 				t.Errorf("expected no error, got %v", err)
 			} else if err != nil && tt.expectedErr != nil {
@@ -143,8 +115,8 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 				}),
 			}
 
-			next := finalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, err error) {
-				return out, err
+			next := finalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
+				return out, metadata, err
 			})
 
 			ctx := SetSigningMetadata(context.Background(), SigningMetadata{
@@ -156,7 +128,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 				ctx = context.WithValue(ctx, payloadHashKey{}, tt.hash)
 			}
 
-			_, err := c.HandleFinalize(ctx, middleware.FinalizeInput{Request: &smithyHTTP.Request{Request: &http.Request{}}}, next)
+			_, _, err := c.HandleFinalize(ctx, middleware.FinalizeInput{Request: &smithyHTTP.Request{Request: &http.Request{}}}, next)
 			if err != nil && tt.expectedErr == nil {
 				t.Errorf("expected no error, got %v", err)
 			} else if err != nil && tt.expectedErr != nil {
@@ -170,3 +142,36 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 		})
 	}
 }
+
+type nonSeeker struct{}
+
+func (nonSeeker) Read(p []byte) (n int, err error) {
+	return 0, io.EOF
+}
+
+type semiSeekable struct {
+	hasSeeked bool
+}
+
+func (s *semiSeekable) Seek(offset int64, whence int) (int64, error) {
+	if !s.hasSeeked {
+		s.hasSeeked = true
+		return 0, nil
+	}
+	return 0, fmt.Errorf("io seek error")
+}
+
+func (*semiSeekable) Read(p []byte) (n int, err error) {
+	return 0, io.EOF
+}
+
+type finalizeHandlerFunc func(ctx context.Context, in middleware.FinalizeInput) (middleware.FinalizeOutput, middleware.Metadata, error)
+
+func (f finalizeHandlerFunc) HandleFinalize(ctx context.Context, in middleware.FinalizeInput) (middleware.FinalizeOutput, middleware.Metadata, error) {
+	return f(ctx, in)
+}
+
+var (
+	_ middleware.FinalizeMiddleware = &ComputePayloadHashMiddleware{}
+	_ middleware.FinalizeMiddleware = &SignHTTPRequestMiddleware{}
+)
