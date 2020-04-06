@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	middleware2 "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/transport/http"
@@ -45,7 +46,7 @@ func (r RetryMiddleware) Name() string {
 	return r.ID()
 }
 
-func (r RetryMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (out middleware.FinalizeOutput, err error) {
+func (r RetryMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 	var attemptNum, retryCount int
 	var attemptClockSkew time.Duration
 
@@ -68,16 +69,16 @@ func (r RetryMiddleware) HandleFinalize(ctx context.Context, in middleware.Final
 
 		in.Request = r.requestCloner(ctx, origReq)
 
-		out, reqErr := next.HandleFinalize(ctx, in)
+		out, metadata, reqErr := next.HandleFinalize(ctx, in)
 
 		relRetryToken(reqErr)
 		if reqErr == nil {
-			return out, nil
+			return out, metadata, nil
 		}
 
 		retryable := r.retryer.IsErrorRetryable(reqErr)
 		if !retryable {
-			return out, err
+			return out, metadata, err
 		}
 
 		if maxAttempts > 0 && attemptNum >= maxAttempts {
@@ -85,44 +86,26 @@ func (r RetryMiddleware) HandleFinalize(ctx context.Context, in middleware.Final
 				Attempt: attemptNum,
 				Err:     err,
 			}
-			return out, err
+			return out, metadata, err
 		}
 
 		relRetryToken, err = r.retryer.GetRetryToken(ctx, reqErr)
 		if err != nil {
-			return out, err
+			return out, metadata, err
 		}
 
 		retryDelay, err := r.retryer.RetryDelay(attemptNum, reqErr)
 		if err != nil {
-			return out, err
+			return out, metadata, err
 		}
 
 		if err = sdk.SleepWithContext(ctx, retryDelay); err != nil {
 			err = &aws.RequestCanceledError{Err: err}
-			return out, err
+			return out, metadata, err
 		}
 
-		// TODO: Finalize what this interface and types look like, types and returns here are not final and exists to strictly model the required behavior
-		type responseMeta interface {
-			GetResponseMetadata() interface {
-				GetResponseAt() time.Time
-				GetServerTime() time.Time
-			}
-		}
-
-		// TODO: Pull this from future smithy Metadata context type
-		respContainer, ok := out.Result.(responseMeta)
-		if ok {
-			metadata := respContainer.GetResponseMetadata()
-			responseAt := metadata.GetResponseAt()
-			serverTime := metadata.GetServerTime()
-
-			// TODO: This should probably be computed and bubbled up from a deserializer
-			if !(responseAt.IsZero() || serverTime.IsZero()) {
-				attemptClockSkew = responseAt.Sub(serverTime)
-			}
-		}
+		responseMetadata := middleware2.GetResponseMetadata(metadata)
+		attemptClockSkew = responseMetadata.AttemptSkew
 
 		retryCount++
 	}
