@@ -24,46 +24,34 @@ const (
 	ErrCodeRead = "ReadError"
 )
 
-// HTTPSerializationError provides a generic request serialization error
-type HTTPSerializationError struct {
+// SerializationError provides a generic request serialization error
+type SerializationError struct {
 	Reason string // provides more context of error caused
 	Err    error  // original error
 }
 
-// Error returns a formatted error for HTTPSerializationError
-func (e *HTTPSerializationError) Error() string {
+// Error returns a formatted error for SerializationError
+func (e *SerializationError) Error() string {
 	return fmt.Sprintf("serialization failed: %v %v", e.Reason, e.Err)
 }
 
-// Unwrap returns the underlying Error in HTTPDeserializationError
-func (e *HTTPSerializationError) Unwrap() error { return e.Err }
+// Unwrap returns the underlying Error in DeserializationError
+func (e *SerializationError) Unwrap() error { return e.Err }
 
-// HTTPDeserializationError provides a generic request deserialization error
-type HTTPDeserializationError struct {
-	Response  *http.Response
-	RequestID string // Aws specific info
-	Reason    string // provides more context of error caused
-	Err       error  //  original error
+// DeserializationError provides a HTTP transport specific
+// request deserialization error
+type DeserializationError struct {
+	Reason string // provides more context of error caused
+	Err    error  //  original error
 }
 
-// Error returns a formatted error for HTTPDeserializationError
-func (e *HTTPDeserializationError) Error() string {
+// Error returns a formatted error for DeserializationError
+func (e *DeserializationError) Error() string {
 	return fmt.Sprintf("deserialization failed, %v, %v", e.Reason, e.Err)
 }
 
-// ErrorStatusCode returns the Response status code
-func (e *HTTPDeserializationError) ErrorStatusCode() int {
-	if e.Response != nil {
-		return e.Response.StatusCode
-	}
-	return 0
-}
-
-// ErrorRequestID returns the Request ID for error response request
-func (e *HTTPDeserializationError) ErrorRequestID() string { return e.RequestID }
-
-// Unwrap returns the underlying Error in HTTPDeserializationError
-func (e *HTTPDeserializationError) Unwrap() error { return e.Err }
+// Unwrap returns the underlying Error in DeserializationError
+func (e *DeserializationError) Unwrap() error { return e.Err }
 
 // RequestSendError provides a generic request transport error.
 type RequestSendError struct {

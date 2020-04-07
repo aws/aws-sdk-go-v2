@@ -2,22 +2,21 @@ package aws_test
 
 import (
 	"bytes"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"strings"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/sdkio"
+	"github.com/aws/aws-sdk-go-v2/private/protocol/json/jsonutil"
 )
 
 type mockOP struct {
-	Message *string
+	Message *string `locationName:"message" type:"string"`
 }
 
 type mockUnmarshaler struct {
@@ -64,36 +63,34 @@ func TestHTTPDeserializationError(t *testing.T) {
 				RequestID: "mockReqID",
 			}
 
-			op := mockOP{}
 			u := mockUnmarshaler{
-				output: &op,
+				output: &mockOP{},
 			}
 			// unmarshal request response
 			u.unmarshalOperation(r)
 
-			if r.Error != nil && !c.errorIsSet {
-				t.Fatalf("Expected no error, got %v", r.Error)
-			}
-
 			if c.errorIsSet {
-				var e *aws.HTTPDeserializationError
+				if r.Error == nil {
+					t.Fatal("Expected error, got none")
+				}
+				if r.Error == nil {
+					t.Fatal("Expected error, got none")
+				}
+				var e *aws.DeserializationError
 				if errors.As(r.Error, &e) {
-					if e, a := c.requestID, e.RequestID; e != a {
-						t.Fatalf("Expected request ID to be %v, got %v", e, a)
-					}
-					if e, a := c.responseStatus, e.ErrorStatusCode(); e != a {
-						t.Fatalf("Expected request ID to be %v, got %v", e, a)
-					}
 					if e, a := c.responseBody, e.Reason; !strings.Contains(a, e) {
-						t.Fatalf("Expected request ID to be %v, got %v", e, a)
+						t.Fatalf("Expected response body to contain %v, got %v", e, a)
 					}
 				} else {
-					t.Fatalf("Expected error to be of type %T", e)
+					t.Fatalf("Expected error to be of type %T, got %T", e, r.Error)
+				}
+			} else {
+				if r.Error != nil {
+					t.Fatalf("Expected no error, got %v", r.Error)
 				}
 			}
 		})
 	}
-
 }
 
 // unmarshal operation unmarshal's request response
@@ -102,66 +99,63 @@ func (u *mockUnmarshaler) unmarshalOperation(r *aws.Request) {
 	ringbuffer := sdkio.NewRingBuffer(b)
 	// wraps ring buffer around the response body
 	body := io.TeeReader(r.HTTPResponse.Body, ringbuffer)
-	decoder := json.NewDecoder(body)
 
 	// If unmarshaling function returns an error, it is a deserialization error
-	if err := unmarshalJSON(decoder, u.output); err != nil {
+	if err := jsonutil.UnmarshalJSON(u.output, body); err != nil {
 		snapshot := make([]byte, 1024)
 		ringbuffer.Read(snapshot)
-		r.Error = &aws.HTTPDeserializationError{
-			Response:  r.HTTPResponse,
-			RequestID: r.RequestID,
-			Reason:    fmt.Sprintf("Here's a snapshot of response being deserialized: %s", snapshot), // Additional context
-			Err:       err,
+		r.Error = &aws.DeserializationError{
+			Reason: fmt.Sprintf("Here's a snapshot of response being deserialized: %s", snapshot), // Additional context
+			Err:    err,
 		}
 	}
 }
 
-// Call unmarshal output shape of JSON doc
-func unmarshalJSON(dec *json.Decoder, output *mockOP) error {
-	// start token
-	startToken, err := dec.Token()
-	if err == io.EOF {
-		// Empty Response
-		return nil
-	}
-	if err != nil {
-		return fmt.Errorf("Failed  to decode JSON: %v", err)
-	}
-	if t, ok := startToken.(json.Delim); !ok {
-		if t.String() != "{" {
-			return fmt.Errorf("invalid JSON , expected { at start of json")
-		}
-	}
-
-	for dec.More() {
-		// fetch token for key
-		t, err := dec.Token()
-		if err != nil {
-			return fmt.Errorf("Failed  to decode JSON: %v", err)
-		}
-
-		// key with value as `*string`
-		if t == "message" {
-			val, err := dec.Token()
-			if err != nil {
-				log.Fatal(err)
-			}
-			if v, ok := val.(string); ok {
-				output.Message = &v
-			} else {
-				return fmt.Errorf("expected Message to be of type string, got %T", val)
-			}
-		}
-	}
-
-	// end token
-	endToken, err := dec.Token()
-	if err != nil {
-		return fmt.Errorf("Failed  to decode JSON: %v ", err)
-	}
-	if t, ok := endToken.(json.Delim); !ok || t.String() != "}" {
-		return fmt.Errorf("invalid JSON , expected } at start of json")
-	}
-	return nil
-}
+// // Call unmarshal output shape of JSON doc
+// func unmarshalJSON(dec *json.Decoder, output *mockOP) error {
+// 	// start token
+// 	startToken, err := dec.Token()
+// 	if err == io.EOF {
+// 		// Empty Response
+// 		return nil
+// 	}
+// 	if err != nil {
+// 		return fmt.Errorf("Failed  to decode JSON: %v", err)
+// 	}
+// 	if t, ok := startToken.(json.Delim); !ok {
+// 		if t.String() != "{" {
+// 			return fmt.Errorf("invalid JSON , expected { at start of json")
+// 		}
+// 	}
+//
+// 	for dec.More() {
+// 		// fetch token for key
+// 		t, err := dec.Token()
+// 		if err != nil {
+// 			return fmt.Errorf("Failed  to decode JSON: %v", err)
+// 		}
+//
+// 		// key with value as `*string`
+// 		if t == "message" {
+// 			val, err := dec.Token()
+// 			if err != nil {
+// 				log.Fatal(err)
+// 			}
+// 			if v, ok := val.(string); ok {
+// 				output.Message = &v
+// 			} else {
+// 				return fmt.Errorf("expected Message to be of type string, got %T", val)
+// 			}
+// 		}
+// 	}
+//
+// 	// end token
+// 	endToken, err := dec.Token()
+// 	if err != nil {
+// 		return fmt.Errorf("Failed  to decode JSON: %v ", err)
+// 	}
+// 	if t, ok := endToken.(json.Delim); !ok || t.String() != "}" {
+// 		return fmt.Errorf("invalid JSON , expected } at start of json")
+// 	}
+// 	return nil
+// }
