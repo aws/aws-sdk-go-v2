@@ -40,6 +40,20 @@ type KeyConditionBuilder struct {
 	mode             keyConditionMode
 }
 
+// IsSet returns true if the KeyConditionBuilder is set and returns
+// false otherwise. A zero value of a KeyConditionBuilder returns false.
+//
+// Example:
+//
+//     var keyCondition expression.KeyConditionBuilder
+//     keyCondition.IsSet() // returns false
+//
+//     keyCondition := expression.KeyEqual(expression.Key("foo"), expression.Value(5))
+//     keyCondition.IsSet() // returns true
+func (kcb KeyConditionBuilder) IsSet() bool {
+	return kcb.mode != unsetKeyCond
+}
+
 // KeyEqual returns a KeyConditionBuilder representing the equality clause
 // of the two argument OperandBuilders. The resulting KeyConditionBuilder can be
 // used as a part of other Key Condition Expressions or as an argument to the

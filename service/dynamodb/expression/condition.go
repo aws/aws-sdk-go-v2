@@ -88,6 +88,20 @@ type ConditionBuilder struct {
 	mode          conditionMode
 }
 
+// IsSet returns true if the ConditionBuilder is set and returns false
+// otherwise. A zero value of a ConditionBuilder returns false.
+//
+// Example:
+//
+//     var condition expression.ConditionBuilder
+//     condition.IsSet() // returns false
+//
+//     condition := expression.Equal(expression.Name("foo"), expression.Value(5))
+//     condition.IsSet() // returns true
+func (cb ConditionBuilder) IsSet() bool {
+	return cb.mode != unsetCond
+}
+
 // Equal returns a ConditionBuilder representing the equality clause of the two
 // argument OperandBuilders. The resulting ConditionBuilder can be used as a
 // part of other Condition Expressions or as an argument to the WithCondition()

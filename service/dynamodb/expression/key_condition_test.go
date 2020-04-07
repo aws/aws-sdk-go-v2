@@ -27,6 +27,32 @@ const (
 	invalidKeyConditionFormat = "buildKeyCondition error: invalid key condition constructed"
 )
 
+func TestIsKeySet(t *testing.T) {
+	cases := []struct {
+		name     string
+		input    KeyConditionBuilder
+		expected bool
+	}{
+		{
+			name:     "set",
+			input:    KeyEqual(Key("foo"), Value("bar")),
+			expected: true,
+		},
+		{
+			name:     "unset",
+			input:    KeyConditionBuilder{},
+			expected: false,
+		},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			if actual := c.input.IsSet(); actual != c.expected {
+				t.Errorf("expected %t, got %t", c.expected, actual)
+			}
+		})
+	}
+}
+
 func TestKeyCompare(t *testing.T) {
 	cases := []struct {
 		name         string
