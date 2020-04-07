@@ -13,8 +13,11 @@ import (
 type ListSatellitesInput struct {
 	_ struct{} `type:"structure"`
 
+	// Maximum number of satellites returned.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
 
+	// Next token that can be supplied in the next call to get the next page of
+	// satellites.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
@@ -45,8 +48,11 @@ func (s ListSatellitesInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListSatellitesOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Next token that can be supplied in the next call to get the next page of
+	// satellites.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
+	// List of satellites.
 	Satellites []SatelliteListItem `locationName:"satellites" type:"list"`
 }
 

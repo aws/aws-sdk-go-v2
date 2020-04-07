@@ -85,11 +85,15 @@ const opCreateEndpoint = "CreateEndpoint"
 // You create the endpoint configuration with the CreateEndpointConfig (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html)
 // API.
 //
-// Use this API only for hosting models using Amazon SageMaker hosting services.
+// Use this API to deploy models using Amazon SageMaker hosting services.
 //
-// You must not delete an EndpointConfig in use by an endpoint that is live
-// or while the UpdateEndpoint or CreateEndpoint operations are being performed
-// on the endpoint. To update an endpoint, you must create a new EndpointConfig.
+// For an example that calls this method when deploying a model to Amazon SageMaker
+// hosting services, see Deploy the Model to Amazon SageMaker Hosting Services
+// (AWS SDK for Python (Boto 3)). (https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto)
+//
+// You must not delete an EndpointConfig that is in use by an endpoint that
+// is live or while the UpdateEndpoint or CreateEndpoint operations are being
+// performed on the endpoint. To update an endpoint, you must create a new EndpointConfig.
 //
 // The endpoint name must be unique within an AWS Region in your AWS account.
 //
@@ -101,9 +105,6 @@ const opCreateEndpoint = "CreateEndpoint"
 // Amazon SageMaker can then process incoming requests for inferences. To check
 // the status of an endpoint, use the DescribeEndpoint (https://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html)
 // API.
-//
-// For an example, see Exercise 1: Using the K-Means Algorithm Provided by Amazon
-// SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/ex1.html).
 //
 // If any of the models hosted at this endpoint get model data from an Amazon
 // S3 location, Amazon SageMaker uses AWS Security Token Service to download

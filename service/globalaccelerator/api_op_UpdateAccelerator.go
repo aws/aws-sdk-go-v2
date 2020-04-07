@@ -72,7 +72,7 @@ const opUpdateAccelerator = "UpdateAccelerator"
 // Update an accelerator. To see an AWS CLI example of updating an accelerator,
 // scroll down to Example.
 //
-// You must specify the US-West-2 (Oregon) Region to create or update accelerators.
+// You must specify the US West (Oregon) Region to create or update accelerators.
 //
 //    // Example sending a request using UpdateAcceleratorRequest.
 //    req := client.UpdateAcceleratorRequest(params)

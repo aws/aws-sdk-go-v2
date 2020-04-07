@@ -23,6 +23,7 @@ func (m mockedReceiveMsgs) ReceiveMessageRequest(in *sqs.ReceiveMessageInput) sq
 		Request: &aws.Request{
 			Data:        &m.Resp,
 			HTTPRequest: &http.Request{},
+			Retryer:     aws.NoOpRetryer{},
 		},
 	}
 }

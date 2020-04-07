@@ -75,7 +75,9 @@ const opDetectPHI = "DetectPHI"
 // AWS Comprehend Medical.
 //
 // Inspects the clinical text for protected health information (PHI) entities
-// and entity category, location, and confidence score on that information.
+// and returns the entity category, location, and confidence score for each
+// entity. Amazon Comprehend Medical only detects entities in English language
+// texts.
 //
 //    // Example sending a request using DetectPHIRequest.
 //    req := client.DetectPHIRequest(params)

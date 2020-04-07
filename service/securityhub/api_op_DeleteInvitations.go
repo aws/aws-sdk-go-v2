@@ -13,7 +13,7 @@ import (
 type DeleteInvitationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of the account IDs that sent the invitations to delete.
+	// The list of the account IDs that sent the invitations to delete.
 	//
 	// AccountIds is a required field
 	AccountIds []string `type:"list" required:"true"`
@@ -60,8 +60,8 @@ func (s DeleteInvitationsInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteInvitationsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account ID and email address pairs of the AWS accounts that invitations
-	// weren't deleted for.
+	// The list of AWS accounts for which the invitations were not deleted. For
+	// each account, the list includes the account ID and the email address.
 	UnprocessedAccounts []Result `type:"list"`
 }
 

@@ -16,7 +16,11 @@ type DescribeProductsInput struct {
 	// The maximum number of results to return.
 	MaxResults *int64 `location:"querystring" locationName:"MaxResults" min:"1" type:"integer"`
 
-	// The token that is required for pagination.
+	// The token that is required for pagination. On your first call to the DescribeProducts
+	// operation, set the value of this parameter to NULL.
+	//
+	// For subsequent calls to the operation, to continue listing data, set the
+	// value of this parameter to the value returned from the previous response.
 	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
 }
 
@@ -60,7 +64,7 @@ func (s DescribeProductsInput) MarshalFields(e protocol.FieldEncoder) error {
 type DescribeProductsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The token that is required for pagination.
+	// The pagination token to use to request the next page of results.
 	NextToken *string `type:"string"`
 
 	// A list of products, including details for each product.
@@ -102,8 +106,8 @@ const opDescribeProducts = "DescribeProducts"
 // DescribeProductsRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Returns information about the products available that you can subscribe to
-// and integrate with Security Hub to consolidate findings.
+// Returns information about the available products that you can subscribe to
+// and integrate with Security Hub in order to consolidate findings.
 //
 //    // Example sending a request using DescribeProductsRequest.
 //    req := client.DescribeProductsRequest(params)

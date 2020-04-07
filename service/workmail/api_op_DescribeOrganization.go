@@ -41,6 +41,9 @@ func (s *DescribeOrganizationInput) Validate() error {
 type DescribeOrganizationOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name (ARN) of the organization.
+	ARN *string `min:"1" type:"string"`
+
 	// The alias for an organization.
 	Alias *string `min:"1" type:"string"`
 

@@ -13,8 +13,8 @@ import (
 type DeleteDBClusterInput struct {
 	_ struct{} `type:"structure"`
 
-	// The DB cluster identifier for the DB cluster to be deleted. This parameter
-	// isn't case sensitive.
+	// The cluster identifier for the cluster to be deleted. This parameter isn't
+	// case sensitive.
 	//
 	// Constraints:
 	//
@@ -23,8 +23,8 @@ type DeleteDBClusterInput struct {
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
-	// The DB cluster snapshot identifier of the new DB cluster snapshot created
-	// when SkipFinalSnapshot is set to false.
+	// The cluster snapshot identifier of the new cluster snapshot created when
+	// SkipFinalSnapshot is set to false.
 	//
 	// Specifying this parameter and also setting the SkipFinalShapshot parameter
 	// to true results in an error.
@@ -38,9 +38,9 @@ type DeleteDBClusterInput struct {
 	//    * Cannot end with a hyphen or contain two consecutive hyphens.
 	FinalDBSnapshotIdentifier *string `type:"string"`
 
-	// Determines whether a final DB cluster snapshot is created before the DB cluster
-	// is deleted. If true is specified, no DB cluster snapshot is created. If false
-	// is specified, a DB cluster snapshot is created before the DB cluster is deleted.
+	// Determines whether a final cluster snapshot is created before the cluster
+	// is deleted. If true is specified, no cluster snapshot is created. If false
+	// is specified, a cluster snapshot is created before the DB cluster is deleted.
 	//
 	// If SkipFinalSnapshot is false, you must specify a FinalDBSnapshotIdentifier
 	// parameter.
@@ -71,7 +71,7 @@ func (s *DeleteDBClusterInput) Validate() error {
 type DeleteDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster.
+	// Detailed information about a cluster.
 	DBCluster *DBCluster `type:"structure"`
 }
 
@@ -85,9 +85,9 @@ const opDeleteDBCluster = "DeleteDBCluster"
 // DeleteDBClusterRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Deletes a previously provisioned DB cluster. When you delete a DB cluster,
-// all automated backups for that DB cluster are deleted and can't be recovered.
-// Manual DB cluster snapshots of the specified DB cluster are not deleted.
+// Deletes a previously provisioned cluster. When you delete a cluster, all
+// automated backups for that cluster are deleted and can't be recovered. Manual
+// DB cluster snapshots of the specified cluster are not deleted.
 //
 //    // Example sending a request using DeleteDBClusterRequest.
 //    req := client.DeleteDBClusterRequest(params)

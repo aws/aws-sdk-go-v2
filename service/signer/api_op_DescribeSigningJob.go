@@ -79,7 +79,7 @@ type DescribeSigningJobOutput struct {
 	// Name of the S3 bucket where the signed code image is saved by code signing.
 	SignedObject *SignedObject `locationName:"signedObject" type:"structure"`
 
-	// Amazon Resource Name (ARN) of your code signing certificate.
+	// The Amazon Resource Name (ARN) of your code signing certificate.
 	SigningMaterial *SigningMaterial `locationName:"signingMaterial" type:"structure"`
 
 	// Map of user-assigned key-value pairs used during signing. These values contain

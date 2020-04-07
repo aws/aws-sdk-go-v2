@@ -86,9 +86,10 @@ const opAcceptInvitation = "AcceptInvitation"
 // AWS SecurityHub.
 //
 // Accepts the invitation to be a member account and be monitored by the Security
-// Hub master account that the invitation was sent from. When the member account
-// accepts the invitation, permission is granted to the master account to view
-// findings generated in the member account.
+// Hub master account that the invitation was sent from.
+//
+// When the member account accepts the invitation, permission is granted to
+// the master account to view findings generated in the member account.
 //
 //    // Example sending a request using AcceptInvitationRequest.
 //    req := client.AcceptInvitationRequest(params)

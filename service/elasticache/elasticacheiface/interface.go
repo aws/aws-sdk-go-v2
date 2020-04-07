@@ -84,9 +84,13 @@ type ClientAPI interface {
 
 	CreateCacheSubnetGroupRequest(*elasticache.CreateCacheSubnetGroupInput) elasticache.CreateCacheSubnetGroupRequest
 
+	CreateGlobalReplicationGroupRequest(*elasticache.CreateGlobalReplicationGroupInput) elasticache.CreateGlobalReplicationGroupRequest
+
 	CreateReplicationGroupRequest(*elasticache.CreateReplicationGroupInput) elasticache.CreateReplicationGroupRequest
 
 	CreateSnapshotRequest(*elasticache.CreateSnapshotInput) elasticache.CreateSnapshotRequest
+
+	DecreaseNodeGroupsInGlobalReplicationGroupRequest(*elasticache.DecreaseNodeGroupsInGlobalReplicationGroupInput) elasticache.DecreaseNodeGroupsInGlobalReplicationGroupRequest
 
 	DecreaseReplicaCountRequest(*elasticache.DecreaseReplicaCountInput) elasticache.DecreaseReplicaCountRequest
 
@@ -97,6 +101,8 @@ type ClientAPI interface {
 	DeleteCacheSecurityGroupRequest(*elasticache.DeleteCacheSecurityGroupInput) elasticache.DeleteCacheSecurityGroupRequest
 
 	DeleteCacheSubnetGroupRequest(*elasticache.DeleteCacheSubnetGroupInput) elasticache.DeleteCacheSubnetGroupRequest
+
+	DeleteGlobalReplicationGroupRequest(*elasticache.DeleteGlobalReplicationGroupInput) elasticache.DeleteGlobalReplicationGroupRequest
 
 	DeleteReplicationGroupRequest(*elasticache.DeleteReplicationGroupInput) elasticache.DeleteReplicationGroupRequest
 
@@ -118,6 +124,8 @@ type ClientAPI interface {
 
 	DescribeEventsRequest(*elasticache.DescribeEventsInput) elasticache.DescribeEventsRequest
 
+	DescribeGlobalReplicationGroupsRequest(*elasticache.DescribeGlobalReplicationGroupsInput) elasticache.DescribeGlobalReplicationGroupsRequest
+
 	DescribeReplicationGroupsRequest(*elasticache.DescribeReplicationGroupsInput) elasticache.DescribeReplicationGroupsRequest
 
 	DescribeReservedCacheNodesRequest(*elasticache.DescribeReservedCacheNodesInput) elasticache.DescribeReservedCacheNodesRequest
@@ -129,6 +137,12 @@ type ClientAPI interface {
 	DescribeSnapshotsRequest(*elasticache.DescribeSnapshotsInput) elasticache.DescribeSnapshotsRequest
 
 	DescribeUpdateActionsRequest(*elasticache.DescribeUpdateActionsInput) elasticache.DescribeUpdateActionsRequest
+
+	DisassociateGlobalReplicationGroupRequest(*elasticache.DisassociateGlobalReplicationGroupInput) elasticache.DisassociateGlobalReplicationGroupRequest
+
+	FailoverGlobalReplicationGroupRequest(*elasticache.FailoverGlobalReplicationGroupInput) elasticache.FailoverGlobalReplicationGroupRequest
+
+	IncreaseNodeGroupsInGlobalReplicationGroupRequest(*elasticache.IncreaseNodeGroupsInGlobalReplicationGroupInput) elasticache.IncreaseNodeGroupsInGlobalReplicationGroupRequest
 
 	IncreaseReplicaCountRequest(*elasticache.IncreaseReplicaCountInput) elasticache.IncreaseReplicaCountRequest
 
@@ -142,11 +156,15 @@ type ClientAPI interface {
 
 	ModifyCacheSubnetGroupRequest(*elasticache.ModifyCacheSubnetGroupInput) elasticache.ModifyCacheSubnetGroupRequest
 
+	ModifyGlobalReplicationGroupRequest(*elasticache.ModifyGlobalReplicationGroupInput) elasticache.ModifyGlobalReplicationGroupRequest
+
 	ModifyReplicationGroupRequest(*elasticache.ModifyReplicationGroupInput) elasticache.ModifyReplicationGroupRequest
 
 	ModifyReplicationGroupShardConfigurationRequest(*elasticache.ModifyReplicationGroupShardConfigurationInput) elasticache.ModifyReplicationGroupShardConfigurationRequest
 
 	PurchaseReservedCacheNodesOfferingRequest(*elasticache.PurchaseReservedCacheNodesOfferingInput) elasticache.PurchaseReservedCacheNodesOfferingRequest
+
+	RebalanceSlotsInGlobalReplicationGroupRequest(*elasticache.RebalanceSlotsInGlobalReplicationGroupInput) elasticache.RebalanceSlotsInGlobalReplicationGroupRequest
 
 	RebootCacheClusterRequest(*elasticache.RebootCacheClusterInput) elasticache.RebootCacheClusterRequest
 

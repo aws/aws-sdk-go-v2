@@ -13,7 +13,7 @@ import (
 type GetImageRecipeInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the image recipe that you wish to retrieve.
+	// The Amazon Resource Name (ARN) of the image recipe that you want to retrieve.
 	//
 	// ImageRecipeArn is a required field
 	ImageRecipeArn *string `location:"querystring" locationName:"imageRecipeArn" type:"string" required:"true"`

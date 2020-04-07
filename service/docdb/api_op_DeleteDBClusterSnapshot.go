@@ -13,9 +13,9 @@ import (
 type DeleteDBClusterSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the DB cluster snapshot to delete.
+	// The identifier of the cluster snapshot to delete.
 	//
-	// Constraints: Must be the name of an existing DB cluster snapshot in the available
+	// Constraints: Must be the name of an existing cluster snapshot in the available
 	// state.
 	//
 	// DBClusterSnapshotIdentifier is a required field
@@ -44,7 +44,7 @@ func (s *DeleteDBClusterSnapshotInput) Validate() error {
 type DeleteDBClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster snapshot.
+	// Detailed information about a cluster snapshot.
 	DBClusterSnapshot *DBClusterSnapshot `type:"structure"`
 }
 
@@ -58,10 +58,10 @@ const opDeleteDBClusterSnapshot = "DeleteDBClusterSnapshot"
 // DeleteDBClusterSnapshotRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Deletes a DB cluster snapshot. If the snapshot is being copied, the copy
-// operation is terminated.
+// Deletes a cluster snapshot. If the snapshot is being copied, the copy operation
+// is terminated.
 //
-// The DB cluster snapshot must be in the available state to be deleted.
+// The cluster snapshot must be in the available state to be deleted.
 //
 //    // Example sending a request using DeleteDBClusterSnapshotRequest.
 //    req := client.DeleteDBClusterSnapshotRequest(params)

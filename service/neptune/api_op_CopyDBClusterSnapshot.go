@@ -124,8 +124,6 @@ const opCopyDBClusterSnapshot = "CopyDBClusterSnapshot"
 // To copy a DB cluster snapshot from a shared manual DB cluster snapshot, SourceDBClusterSnapshotIdentifier
 // must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.
 //
-// You can't copy from one AWS Region to another.
-//
 //    // Example sending a request using CopyDBClusterSnapshotRequest.
 //    req := client.CopyDBClusterSnapshotRequest(params)
 //    resp, err := req.Send(context.TODO())

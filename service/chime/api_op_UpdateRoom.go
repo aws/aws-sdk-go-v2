@@ -103,7 +103,8 @@ const opUpdateRoom = "UpdateRoom"
 // UpdateRoomRequest returns a request value for making API operation for
 // Amazon Chime.
 //
-// Updates room details, such as the room name.
+// Updates room details, such as the room name, for a room in an Amazon Chime
+// Enterprise account.
 //
 //    // Example sending a request using UpdateRoomRequest.
 //    req := client.UpdateRoomRequest(params)

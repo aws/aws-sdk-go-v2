@@ -14,7 +14,7 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// An action to be performed when the "condition" is TRUE.
+// An action to be performed when the condition is TRUE.
 type Action struct {
 	_ struct{} `type:"structure"`
 
@@ -22,11 +22,11 @@ type Action struct {
 	ClearTimer *ClearTimerAction `locationName:"clearTimer" type:"structure"`
 
 	// Sends information about the detector model instance and the event that triggered
-	// the action to a Kinesis Data Firehose delivery stream.
+	// the action to an Amazon Kinesis Data Firehose delivery stream.
 	Firehose *FirehoseAction `locationName:"firehose" type:"structure"`
 
-	// Sends an IoT Events input, passing in information about the detector model
-	// instance and the event that triggered the action.
+	// Sends an AWS IoT Events input, passing in information about the detector
+	// model instance and the event that triggered the action.
 	IotEvents *IotEventsAction `locationName:"iotEvents" type:"structure"`
 
 	// Publishes an MQTT message with the given topic to the AWS IoT message broker.
@@ -185,7 +185,7 @@ func (s Action) MarshalFields(e protocol.FieldEncoder) error {
 
 // The attributes from the JSON payload that are made available by the input.
 // Inputs are derived from messages sent to the AWS IoT Events system using
-// BatchPutMessage. Each such message contains a JSON payload, and those attributes
+// BatchPutMessage. Each such message contains a JSON payload. Those attributes
 // (and their paired values) specified here are available for use in the condition
 // expressions used by detectors.
 type Attribute struct {
@@ -193,10 +193,10 @@ type Attribute struct {
 
 	// An expression that specifies an attribute-value pair in a JSON structure.
 	// Use this to specify an attribute from the JSON payload that is made available
-	// by the input. Inputs are derived from messages sent to the AWS IoT Events
-	// system (BatchPutMessage). Each such message contains a JSON payload, and
-	// the attribute (and its paired value) specified here are available for use
-	// in the "condition" expressions used by detectors.
+	// by the input. Inputs are derived from messages sent to AWS IoT Events (BatchPutMessage).
+	// Each such message contains a JSON payload. The attribute (and its paired
+	// value) specified here are available for use in the condition expressions
+	// used by detectors.
 	//
 	// Syntax: <field-name>.<field-name>...
 	//
@@ -393,11 +393,11 @@ type DetectorModelConfiguration struct {
 	// are executed.
 	EvaluationMethod EvaluationMethod `locationName:"evaluationMethod" type:"string" enum:"true"`
 
-	// The input attribute key used to identify a device or system in order to create
-	// a detector (an instance of the detector model) and then to route each input
-	// received to the appropriate detector (instance). This parameter uses a JSON-path
-	// expression to specify the attribute-value pair in the message payload of
-	// each input that is used to identify the device associated with the input.
+	// The input attribute key used to identify a device or system to create a detector
+	// (an instance of the detector model) and then to route each input received
+	// to the appropriate detector (instance). This parameter uses a JSON-path expression
+	// in the message payload of each input to specify the attribute-value pair
+	// that is used to identify the device associated with the input.
 	Key *string `locationName:"key" min:"1" type:"string"`
 
 	// The time the detector model was last updated.
@@ -691,17 +691,16 @@ func (s DetectorModelVersionSummary) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Specifies the "actions" to be performed when the "condition" evaluates to
-// TRUE.
+// Specifies the actions to be performed when the condition evaluates to TRUE.
 type Event struct {
 	_ struct{} `type:"structure"`
 
 	// The actions to be performed.
 	Actions []Action `locationName:"actions" type:"list"`
 
-	// [Optional] The Boolean expression that when TRUE causes the "actions" to
-	// be performed. If not present, the actions are performed (=TRUE); if the expression
-	// result is not a Boolean value, the actions are NOT performed (=FALSE).
+	// Optional. The Boolean expression that, when TRUE, causes the actions to be
+	// performed. If not present, the actions are performed (=TRUE). If the expression
+	// result is not a Boolean value, the actions are not performed (=FALSE).
 	Condition *string `locationName:"condition" type:"string"`
 
 	// The name of the event.
@@ -766,7 +765,7 @@ func (s Event) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Sends information about the detector model instance and the event that triggered
-// the action to a Kinesis Data Firehose delivery stream.
+// the action to an Amazon Kinesis Data Firehose delivery stream.
 type FirehoseAction struct {
 	_ struct{} `type:"structure"`
 
@@ -938,7 +937,7 @@ type InputDefinition struct {
 	// The attributes from the JSON payload that are made available by the input.
 	// Inputs are derived from messages sent to the AWS IoT Events system using
 	// BatchPutMessage. Each such message contains a JSON payload, and those attributes
-	// (and their paired values) specified here are available for use in the "condition"
+	// (and their paired values) specified here are available for use in the condition
 	// expressions used by detectors that monitor this input.
 	//
 	// Attributes is a required field
@@ -1106,12 +1105,14 @@ func (s IotEventsAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information required to publish the MQTT message via the AWS IoT message
+// Information required to publish the MQTT message through the AWS IoT message
 // broker.
 type IotTopicPublishAction struct {
 	_ struct{} `type:"structure"`
 
-	// The MQTT topic of the message.
+	// The MQTT topic of the message. You can use a string expression that includes
+	// variables ($variable.<variable-name>) and input values ($input.<input-name>.<path-to-datum>)
+	// as the topic string.
 	//
 	// MqttTopic is a required field
 	MqttTopic *string `locationName:"mqttTopic" min:"1" type:"string" required:"true"`
@@ -1297,7 +1298,7 @@ type OnEnterLifecycle struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the actions that are performed when the state is entered and the
-	// "condition" is TRUE.
+	// condition is TRUE.
 	Events []Event `locationName:"events" type:"list"`
 }
 
@@ -1340,13 +1341,13 @@ func (s OnEnterLifecycle) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// When exiting this state, perform these "actions" if the specified "condition"
+// When exiting this state, perform these actions if the specified condition
 // is TRUE.
 type OnExitLifecycle struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the "actions" that are performed when the state is exited and the
-	// "condition" is TRUE.
+	// Specifies the actions that are performed when the state is exited and the
+	// condition is TRUE.
 	Events []Event `locationName:"events" type:"list"`
 }
 
@@ -1389,14 +1390,14 @@ func (s OnExitLifecycle) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies the actions performed when the "condition" evaluates to TRUE.
+// Specifies the actions performed when the condition evaluates to TRUE.
 type OnInputLifecycle struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the actions performed when the "condition" evaluates to TRUE.
+	// Specifies the actions performed when the condition evaluates to TRUE.
 	Events []Event `locationName:"events" type:"list"`
 
-	// Specifies the actions performed, and the next state entered, when a "condition"
+	// Specifies the actions performed, and the next state entered, when a condition
 	// evaluates to TRUE.
 	TransitionEvents []TransitionEvent `locationName:"transitionEvents" type:"list"`
 }
@@ -1459,7 +1460,8 @@ func (s OnInputLifecycle) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information needed to reset the timer.
+// Information required to reset the timer. The timer is reset to the previously
+// evaluated result of the duration.
 type ResetTimerAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1549,11 +1551,17 @@ func (s SNSTopicPublishAction) MarshalFields(e protocol.FieldEncoder) error {
 type SetTimerAction struct {
 	_ struct{} `type:"structure"`
 
+	// The duration of the timer, in seconds. You can use a string expression that
+	// includes numbers, variables ($variable.<variable-name>), and input values
+	// ($input.<input-name>.<path-to-datum>) as the duration. The range of the duration
+	// is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds.
+	// The evaluated result of the duration is rounded down to the nearest whole
+	// number.
+	DurationExpression *string `locationName:"durationExpression" min:"1" type:"string"`
+
 	// The number of seconds until the timer expires. The minimum value is 60 seconds
 	// to ensure accuracy.
-	//
-	// Seconds is a required field
-	Seconds *int64 `locationName:"seconds" type:"integer" required:"true"`
+	Seconds *int64 `locationName:"seconds" min:"1" deprecated:"true" type:"integer"`
 
 	// The name of the timer.
 	//
@@ -1569,9 +1577,11 @@ func (s SetTimerAction) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetTimerAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetTimerAction"}
-
-	if s.Seconds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Seconds"))
+	if s.DurationExpression != nil && len(*s.DurationExpression) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DurationExpression", 1))
+	}
+	if s.Seconds != nil && *s.Seconds < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Seconds", 1))
 	}
 
 	if s.TimerName == nil {
@@ -1589,6 +1599,12 @@ func (s *SetTimerAction) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SetTimerAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DurationExpression != nil {
+		v := *s.DurationExpression
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "durationExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.Seconds != nil {
 		v := *s.Seconds
 
@@ -1675,8 +1691,8 @@ type SqsAction struct {
 	// QueueUrl is a required field
 	QueueUrl *string `locationName:"queueUrl" type:"string" required:"true"`
 
-	// Set this to TRUE if you want the data to be Base-64 encoded before it is
-	// written to the queue. Otherwise, set this to FALSE.
+	// Set this to TRUE if you want the data to be base-64 encoded before it is
+	// written to the queue.
 	UseBase64 *bool `locationName:"useBase64" type:"boolean"`
 }
 
@@ -1720,15 +1736,15 @@ func (s SqsAction) MarshalFields(e protocol.FieldEncoder) error {
 type State struct {
 	_ struct{} `type:"structure"`
 
-	// When entering this state, perform these "actions" if the "condition" is TRUE.
+	// When entering this state, perform these actions if the condition is TRUE.
 	OnEnter *OnEnterLifecycle `locationName:"onEnter" type:"structure"`
 
-	// When exiting this state, perform these "actions" if the specified "condition"
+	// When exiting this state, perform these actions if the specified condition
 	// is TRUE.
 	OnExit *OnExitLifecycle `locationName:"onExit" type:"structure"`
 
-	// When an input is received and the "condition" is TRUE, perform the specified
-	// "actions".
+	// When an input is received and the condition is TRUE, perform the specified
+	// actions.
 	OnInput *OnInputLifecycle `locationName:"onInput" type:"structure"`
 
 	// The name of the state.
@@ -1861,7 +1877,7 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies the actions performed and the next state entered when a "condition"
+// Specifies the actions performed and the next state entered when a condition
 // evaluates to TRUE.
 type TransitionEvent struct {
 	_ struct{} `type:"structure"`
@@ -1869,8 +1885,8 @@ type TransitionEvent struct {
 	// The actions to be performed.
 	Actions []Action `locationName:"actions" type:"list"`
 
-	// [Required] A Boolean expression that when TRUE causes the actions to be performed
-	// and the "nextState" to be entered.
+	// Required. A Boolean expression that when TRUE causes the actions to be performed
+	// and the nextState to be entered.
 	//
 	// Condition is a required field
 	Condition *string `locationName:"condition" type:"string" required:"true"`

@@ -14,7 +14,7 @@ import (
 type DescribeDBClusterParameterGroupsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of a specific DB cluster parameter group to return details for.
+	// The name of a specific cluster parameter group to return details for.
 	//
 	// Constraints:
 	//
@@ -65,7 +65,7 @@ func (s *DescribeDBClusterParameterGroupsInput) Validate() error {
 type DescribeDBClusterParameterGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of DB cluster parameter groups.
+	// A list of cluster parameter groups.
 	DBClusterParameterGroups []DBClusterParameterGroup `locationNameList:"DBClusterParameterGroup" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -86,7 +86,7 @@ const opDescribeDBClusterParameterGroups = "DescribeDBClusterParameterGroups"
 //
 // Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName
 // parameter is specified, the list contains only the description of the specified
-// DB cluster parameter group.
+// cluster parameter group.
 //
 //    // Example sending a request using DescribeDBClusterParameterGroupsRequest.
 //    req := client.DescribeDBClusterParameterGroupsRequest(params)

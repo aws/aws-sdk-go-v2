@@ -34,6 +34,9 @@ type RestoreTableFromBackupInput struct {
 	// Provisioned throughput settings for the restored table.
 	ProvisionedThroughputOverride *ProvisionedThroughput `type:"structure"`
 
+	// The new server-side encryption settings for the restored table.
+	SSESpecificationOverride *SSESpecification `type:"structure"`
+
 	// The name of the new table to which the backup must be restored.
 	//
 	// TargetTableName is a required field

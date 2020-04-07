@@ -13,6 +13,8 @@ import (
 type GetDataflowEndpointGroupInput struct {
 	_ struct{} `type:"structure"`
 
+	// UUID of a dataflow endpoint group.
+	//
 	// DataflowEndpointGroupId is a required field
 	DataflowEndpointGroupId *string `location:"uri" locationName:"dataflowEndpointGroupId" type:"string" required:"true"`
 }
@@ -52,12 +54,16 @@ func (s GetDataflowEndpointGroupInput) MarshalFields(e protocol.FieldEncoder) er
 type GetDataflowEndpointGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	// ARN of a dataflow endpoint group.
 	DataflowEndpointGroupArn *string `locationName:"dataflowEndpointGroupArn" type:"string"`
 
+	// UUID of a dataflow endpoint group.
 	DataflowEndpointGroupId *string `locationName:"dataflowEndpointGroupId" type:"string"`
 
+	// Details of a dataflow endpoint.
 	EndpointsDetails []EndpointDetails `locationName:"endpointsDetails" type:"list"`
 
+	// Tags assigned to a dataflow endpoint group.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 

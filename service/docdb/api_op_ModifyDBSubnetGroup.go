@@ -13,10 +13,10 @@ import (
 type ModifyDBSubnetGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The description for the DB subnet group.
+	// The description for the subnet group.
 	DBSubnetGroupDescription *string `type:"string"`
 
-	// The name for the DB subnet group. This value is stored as a lowercase string.
+	// The name for the subnet group. This value is stored as a lowercase string.
 	// You can't modify the default subnet group.
 	//
 	// Constraints: Must match the name of an existing DBSubnetGroup. Must not be
@@ -27,7 +27,7 @@ type ModifyDBSubnetGroupInput struct {
 	// DBSubnetGroupName is a required field
 	DBSubnetGroupName *string `type:"string" required:"true"`
 
-	// The Amazon EC2 subnet IDs for the DB subnet group.
+	// The Amazon EC2 subnet IDs for the subnet group.
 	//
 	// SubnetIds is a required field
 	SubnetIds []string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
@@ -59,7 +59,7 @@ func (s *ModifyDBSubnetGroupInput) Validate() error {
 type ModifyDBSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB subnet group.
+	// Detailed information about a subnet group.
 	DBSubnetGroup *DBSubnetGroup `type:"structure"`
 }
 
@@ -73,8 +73,8 @@ const opModifyDBSubnetGroup = "ModifyDBSubnetGroup"
 // ModifyDBSubnetGroupRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Modifies an existing DB subnet group. DB subnet groups must contain at least
-// one subnet in at least two Availability Zones in the AWS Region.
+// Modifies an existing subnet group. subnet groups must contain at least one
+// subnet in at least two Availability Zones in the AWS Region.
 //
 //    // Example sending a request using ModifyDBSubnetGroupRequest.
 //    req := client.ModifyDBSubnetGroupRequest(params)

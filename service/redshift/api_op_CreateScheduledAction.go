@@ -117,8 +117,8 @@ type CreateScheduledActionOutput struct {
 	// Format of at expressions is "at(yyyy-mm-ddThh:mm:ss)". For example, "at(2016-03-04T17:27:00)".
 	//
 	// Format of cron expressions is "cron(Minutes Hours Day-of-month Month Day-of-week
-	// Year)". For example, "cron(0, 10, *, *, MON, *)". For more information, see
-	// Cron Expressions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
+	// Year)". For example, "cron(0 10 ? * MON *)". For more information, see Cron
+	// Expressions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
 	// in the Amazon CloudWatch Events User Guide.
 	Schedule *string `type:"string"`
 

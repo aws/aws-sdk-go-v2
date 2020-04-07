@@ -952,6 +952,10 @@ type InstanceDetails struct {
 	// The network interface information of the EC2 instance.
 	NetworkInterfaces []NetworkInterface `locationName:"networkInterfaces" type:"list"`
 
+	// The Amazon Resource Name (ARN) of the AWS Outpost. Only applicable to AWS
+	// Outposts instances.
+	OutpostArn *string `locationName:"outpostArn" type:"string"`
+
 	// The platform of the EC2 instance.
 	Platform *string `locationName:"platform" type:"string"`
 
@@ -1028,6 +1032,12 @@ func (s InstanceDetails) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	if s.OutpostArn != nil {
+		v := *s.OutpostArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "outpostArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Platform != nil {
 		v := *s.Platform
@@ -1110,6 +1120,30 @@ func (s Invitation) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "relationshipStatus", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Contains information about the local IP address of the connection.
+type LocalIpDetails struct {
+	_ struct{} `type:"structure"`
+
+	// IPV4 remote address of the connection.
+	IpAddressV4 *string `locationName:"ipAddressV4" type:"string"`
+}
+
+// String returns the string representation
+func (s LocalIpDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LocalIpDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.IpAddressV4 != nil {
+		v := *s.IpAddressV4
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ipAddressV4", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1297,6 +1331,9 @@ type NetworkConnectionAction struct {
 	// Network connection direction.
 	ConnectionDirection *string `locationName:"connectionDirection" type:"string"`
 
+	// Local IP information of the connection.
+	LocalIpDetails *LocalIpDetails `locationName:"localIpDetails" type:"structure"`
+
 	// Local port information of the connection.
 	LocalPortDetails *LocalPortDetails `locationName:"localPortDetails" type:"structure"`
 
@@ -1328,6 +1365,12 @@ func (s NetworkConnectionAction) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "connectionDirection", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LocalIpDetails != nil {
+		v := s.LocalIpDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "localIpDetails", v, metadata)
 	}
 	if s.LocalPortDetails != nil {
 		v := s.LocalPortDetails
@@ -1573,6 +1616,9 @@ func (s PortProbeAction) MarshalFields(e protocol.FieldEncoder) error {
 type PortProbeDetail struct {
 	_ struct{} `type:"structure"`
 
+	// Local IP information of the connection.
+	LocalIpDetails *LocalIpDetails `locationName:"localIpDetails" type:"structure"`
+
 	// Local port information of the connection.
 	LocalPortDetails *LocalPortDetails `locationName:"localPortDetails" type:"structure"`
 
@@ -1587,6 +1633,12 @@ func (s PortProbeDetail) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PortProbeDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.LocalIpDetails != nil {
+		v := s.LocalIpDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "localIpDetails", v, metadata)
+	}
 	if s.LocalPortDetails != nil {
 		v := s.LocalPortDetails
 

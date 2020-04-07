@@ -16,16 +16,16 @@ type GetSnapshotBlockInput struct {
 
 	// The block index of the block from which to get data.
 	//
-	// Obtain the block index by running the list changed blocks or list snapshot
-	// blocks operations.
+	// Obtain the BlockIndex by running the ListChangedBlocks or ListSnapshotBlocks
+	// operations.
 	//
 	// BlockIndex is a required field
 	BlockIndex *int64 `location:"uri" locationName:"blockIndex" type:"integer" required:"true"`
 
 	// The block token of the block from which to get data.
 	//
-	// Obtain the block token by running the list changed blocks or list snapshot
-	// blocks operations.
+	// Obtain the BlockToken by running the ListChangedBlocks or ListSnapshotBlocks
+	// operations.
 	//
 	// BlockToken is a required field
 	BlockToken *string `location:"querystring" locationName:"blockToken" type:"string" required:"true"`
@@ -97,7 +97,7 @@ type GetSnapshotBlockOutput struct {
 	// The data content of the block.
 	BlockData io.ReadCloser `type:"blob" sensitive:"true"`
 
-	// The checksum generated for the block.
+	// The checksum generated for the block, which is Base64 encoded.
 	Checksum *string `location:"header" locationName:"x-amz-Checksum" type:"string"`
 
 	// The algorithm used to generate the checksum for the block, such as SHA256.

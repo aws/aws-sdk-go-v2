@@ -13,7 +13,7 @@ import (
 type RebootDBInstanceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The DB instance identifier. This parameter is stored as a lowercase string.
+	// The instance identifier. This parameter is stored as a lowercase string.
 	//
 	// Constraints:
 	//
@@ -51,7 +51,7 @@ func (s *RebootDBInstanceInput) Validate() error {
 type RebootDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB instance.
+	// Detailed information about an instance.
 	DBInstance *DBInstance `type:"structure"`
 }
 
@@ -65,13 +65,13 @@ const opRebootDBInstance = "RebootDBInstance"
 // RebootDBInstanceRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// You might need to reboot your DB instance, usually for maintenance reasons.
-// For example, if you make certain changes, or if you change the DB cluster
-// parameter group that is associated with the DB instance, you must reboot
-// the instance for the changes to take effect.
+// You might need to reboot your instance, usually for maintenance reasons.
+// For example, if you make certain changes, or if you change the cluster parameter
+// group that is associated with the instance, you must reboot the instance
+// for the changes to take effect.
 //
-// Rebooting a DB instance restarts the database engine service. Rebooting a
-// DB instance results in a momentary outage, during which the DB instance status
+// Rebooting an instance restarts the database engine service. Rebooting an
+// instance results in a momentary outage, during which the instance status
 // is set to rebooting.
 //
 //    // Example sending a request using RebootDBInstanceRequest.

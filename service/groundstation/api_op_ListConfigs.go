@@ -13,8 +13,11 @@ import (
 type ListConfigsInput struct {
 	_ struct{} `type:"structure"`
 
+	// Maximum number of Configs returned.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
 
+	// Next token returned in the request of a previous ListConfigs call. Used to
+	// get the next page of results.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
@@ -45,8 +48,11 @@ func (s ListConfigsInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListConfigsOutput struct {
 	_ struct{} `type:"structure"`
 
+	// List of Config items.
 	ConfigList []ConfigListItem `locationName:"configList" type:"list"`
 
+	// Next token returned in the response of a previous ListConfigs call. Used
+	// to get the next page of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 

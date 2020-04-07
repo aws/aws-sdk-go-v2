@@ -91,6 +91,9 @@ const opDeleteDBCluster = "DeleteDBCluster"
 // and can't be recovered. Manual DB cluster snapshots of the specified DB cluster
 // are not deleted.
 //
+// Note that the DB Cluster cannot be deleted if deletion protection is enabled.
+// To delete it, you must first set its DeletionProtection field to False.
+//
 //    // Example sending a request using DeleteDBClusterRequest.
 //    req := client.DeleteDBClusterRequest(params)
 //    resp, err := req.Send(context.TODO())

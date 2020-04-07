@@ -37,6 +37,9 @@ type StartExecutionInput struct {
 	//    * special characters " # % \ ^ | ~ ` $ & , ; : /
 	//
 	//    * control characters (U+0000-001F, U+007F-009F)
+	//
+	// To enable logging with CloudWatch Logs, the name should only contain 0-9,
+	// A-Z, a-z, - and _.
 	Name *string `locationName:"name" min:"1" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the state machine to execute.
@@ -73,7 +76,7 @@ func (s *StartExecutionInput) Validate() error {
 type StartExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) that identifies the execution.
+	// The Amazon Resource Name (ARN) that id entifies the execution.
 	//
 	// ExecutionArn is a required field
 	ExecutionArn *string `locationName:"executionArn" min:"1" type:"string" required:"true"`

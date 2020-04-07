@@ -53,9 +53,7 @@ type GetTagsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Represents a collection of tags associated with the resource.
-	//
-	// Tags is a required field
-	Tags map[string]string `locationName:"tags" type:"map" required:"true"`
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation

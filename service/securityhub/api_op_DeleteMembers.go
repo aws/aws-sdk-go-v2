@@ -13,7 +13,7 @@ import (
 type DeleteMembersInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account IDs of the member accounts to delete.
+	// The list of account IDs for the member accounts to delete.
 	AccountIds []string `type:"list"`
 }
 
@@ -44,8 +44,8 @@ func (s DeleteMembersInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteMembersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account ID and email address pairs of the AWS accounts that weren't
-	// deleted.
+	// The list of AWS accounts that were not deleted. For each account, the list
+	// includes the account ID and the email address.
 	UnprocessedAccounts []Result `type:"list"`
 }
 

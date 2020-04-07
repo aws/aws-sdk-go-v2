@@ -13,10 +13,15 @@ import (
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
+	// ARN of a resource tag.
+	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`
 
-	Tags map[string]string `locationName:"tags" type:"map"`
+	// Tags assigned to a resource.
+	//
+	// Tags is a required field
+	Tags map[string]string `locationName:"tags" type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -30,6 +35,10 @@ func (s *TagResourceInput) Validate() error {
 
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if s.Tags == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 
 	if invalidParams.Len() > 0 {

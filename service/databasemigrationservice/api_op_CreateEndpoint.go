@@ -37,9 +37,9 @@ type CreateEndpointInput struct {
 	// "BucketName": "string", "CompressionType": "none"|"gzip" }
 	DmsTransferSettings *DmsTransferSettings `type:"structure"`
 
-	// Settings in JSON format for the target Amazon DynamoDB endpoint. For more
-	// information about the available settings, see Using Object Mapping to Migrate
-	// Data to DynamoDB (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html)
+	// Settings in JSON format for the target Amazon DynamoDB endpoint. For information
+	// about other available settings, see Using Object Mapping to Migrate Data
+	// to DynamoDB (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html)
 	// in the AWS Database Migration Service User Guide.
 	DynamoDbSettings *DynamoDbSettings `type:"structure"`
 
@@ -49,9 +49,9 @@ type CreateEndpointInput struct {
 	// in the AWS Database Migration User Guide.
 	ElasticsearchSettings *ElasticsearchSettings `type:"structure"`
 
-	// The database endpoint identifier. Identifiers must begin with a letter; must
-	// contain only ASCII letters, digits, and hyphens; and must not end with a
-	// hyphen or contain two consecutive hyphens.
+	// The database endpoint identifier. Identifiers must begin with a letter and
+	// must contain only ASCII letters, digits, and hyphens. They can't end with
+	// a hyphen or contain two consecutive hyphens.
 	//
 	// EndpointIdentifier is a required field
 	EndpointIdentifier *string `type:"string" required:"true"`
@@ -62,8 +62,9 @@ type CreateEndpointInput struct {
 	EndpointType ReplicationEndpointTypeValue `type:"string" required:"true" enum:"true"`
 
 	// The type of engine for the endpoint. Valid values, depending on the EndpointType
-	// value, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql,
-	// redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
+	// value, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql",
+	// "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis",
+	// "kafka", "elasticsearch", "documentdb", and "sqlserver".
 	//
 	// EngineName is a required field
 	EngineName *string `type:"string" required:"true"`
@@ -79,8 +80,14 @@ type CreateEndpointInput struct {
 	// in the AWS Database Migration Service User Guide.
 	ExtraConnectionAttributes *string `type:"string"`
 
-	// Settings in JSON format for the target Amazon Kinesis Data Streams endpoint.
-	// For more information about the available settings, see Using Object Mapping
+	// Settings in JSON format for the target Apache Kafka endpoint. For information
+	// about other available settings, see Using Object Mapping to Migrate Data
+	// to Apache Kafka (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping)
+	// in the AWS Database Migration User Guide.
+	KafkaSettings *KafkaSettings `type:"structure"`
+
+	// Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams.
+	// For information about other available settings, see Using Object Mapping
 	// to Migrate Data to a Kinesis Data Stream (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping)
 	// in the AWS Database Migration User Guide.
 	KinesisSettings *KinesisSettings `type:"structure"`
@@ -107,6 +114,7 @@ type CreateEndpointInput struct {
 	// The port used by the endpoint database.
 	Port *int64 `type:"integer"`
 
+	// Provides information that defines an Amazon Redshift endpoint.
 	RedshiftSettings *RedshiftSettings `type:"structure"`
 
 	// Settings in JSON format for the target Amazon S3 endpoint. For more information

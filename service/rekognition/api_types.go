@@ -302,6 +302,53 @@ func (s CustomLabel) String() string {
 	return awsutil.Prettify(s)
 }
 
+// A set of optional parameters that you can use to set the criteria that the
+// text must meet to be included in your response. WordFilter looks at a word’s
+// height, width, and minimum confidence. RegionOfInterest lets you set a specific
+// region of the image to look for text in.
+type DetectTextFilters struct {
+	_ struct{} `type:"structure"`
+
+	// A Filter focusing on a certain area of the image. Uses a BoundingBox object
+	// to set the region of the image.
+	RegionsOfInterest []RegionOfInterest `type:"list"`
+
+	// A set of parameters that allow you to filter out certain results from your
+	// returned results.
+	WordFilter *DetectionFilter `type:"structure"`
+}
+
+// String returns the string representation
+func (s DetectTextFilters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A set of parameters that allow you to filter out certain results from your
+// returned results.
+type DetectionFilter struct {
+	_ struct{} `type:"structure"`
+
+	// Sets the minimum height of the word bounding box. Words with bounding box
+	// heights lesser than this value will be excluded from the result. Value is
+	// relative to the video frame height.
+	MinBoundingBoxHeight *float64 `type:"float"`
+
+	// Sets the minimum width of the word bounding box. Words with bounding boxes
+	// widths lesser than this value will be excluded from the result. Value is
+	// relative to the video frame width.
+	MinBoundingBoxWidth *float64 `type:"float"`
+
+	// Sets confidence of word detection. Words with detection confidence below
+	// this will be excluded from the result. Values should be between 0.5 and 1
+	// as Text in Video will not return any result below 0.5.
+	MinConfidence *float64 `type:"float"`
+}
+
+// String returns the string representation
+func (s DetectionFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The emotions that appear to be expressed on the face, and the confidence
 // level in the determination. The API is only making a determination of the
 // physical appearance of a person's face. It is not a determination of the
@@ -555,7 +602,7 @@ type FaceSearchSettings struct {
 	CollectionId *string `min:"1" type:"string"`
 
 	// Minimum face match confidence score that must be met to return a result for
-	// a recognized face. Default is 70. 0 is the lowest confidence. 100 is the
+	// a recognized face. Default is 80. 0 is the lowest confidence. 100 is the
 	// highest confidence.
 	FaceMatchThreshold *float64 `type:"float"`
 }
@@ -1256,6 +1303,24 @@ func (s ProjectVersionDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Specifies a location within the frame that Rekognition checks for text. Uses
+// a BoundingBox object to set a region of the screen.
+//
+// A word is included in the region if the word is more than half in that region.
+// If there is more than one region, the word will be compared with all regions
+// of the screen. Any word more than half in a region is kept in the results.
+type RegionOfInterest struct {
+	_ struct{} `type:"structure"`
+
+	// The box representing a region of interest on screen.
+	BoundingBox *BoundingBox `type:"structure"`
+}
+
+// String returns the string representation
+func (s RegionOfInterest) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Provides the S3 bucket name and object name.
 //
 // The region for the S3 bucket containing the S3 object must match the region
@@ -1315,6 +1380,26 @@ type Smile struct {
 
 // String returns the string representation
 func (s Smile) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Set of optional parameters that let you set the criteria text must meet to
+// be included in your response. WordFilter looks at a word's height, width
+// and minimum confidence. RegionOfInterest lets you set a specific region of
+// the screen to look for text in.
+type StartTextDetectionFilters struct {
+	_ struct{} `type:"structure"`
+
+	// Filter focusing on a certain area of the frame. Uses a BoundingBox object
+	// to set the region of the screen.
+	RegionsOfInterest []RegionOfInterest `type:"list"`
+
+	// Filters focusing on qualities of the text, such as confidence or size.
+	WordFilter *DetectionFilter `type:"structure"`
+}
+
+// String returns the string representation
+func (s StartTextDetectionFilters) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -1533,6 +1618,25 @@ type TextDetection struct {
 
 // String returns the string representation
 func (s TextDetection) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about text detected in a video. Incudes the detected text, the
+// time in milliseconds from the start of the video that the text was detected,
+// and where it was detected on the screen.
+type TextDetectionResult struct {
+	_ struct{} `type:"structure"`
+
+	// Details about text detected in a video.
+	TextDetection *TextDetection `type:"structure"`
+
+	// The time, in milliseconds from the start of the video, that the text was
+	// detected.
+	Timestamp *int64 `type:"long"`
+}
+
+// String returns the string representation
+func (s TextDetectionResult) String() string {
 	return awsutil.Prettify(s)
 }
 

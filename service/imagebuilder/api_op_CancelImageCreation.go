@@ -16,9 +16,9 @@ type CancelImageCreationInput struct {
 	// The idempotency token used to make this request idempotent.
 	//
 	// ClientToken is a required field
-	ClientToken *string `locationName:"clientToken" min:"1" type:"string" required:"true"`
+	ClientToken *string `locationName:"clientToken" min:"1" type:"string" required:"true" idempotencyToken:"true"`
 
-	// The Amazon Resource Name (ARN) of the image whose creation you wish to cancel.
+	// The Amazon Resource Name (ARN) of the image whose creation you want to cancel.
 	//
 	// ImageBuildVersionArn is a required field
 	ImageBuildVersionArn *string `locationName:"imageBuildVersionArn" type:"string" required:"true"`
@@ -54,8 +54,14 @@ func (s *CancelImageCreationInput) Validate() error {
 func (s CancelImageCreationInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	var ClientToken string
 	if s.ClientToken != nil {
-		v := *s.ClientToken
+		ClientToken = *s.ClientToken
+	} else {
+		ClientToken = protocol.GetIdempotencyToken()
+	}
+	{
+		v := ClientToken
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
@@ -115,7 +121,7 @@ const opCancelImageCreation = "CancelImageCreation"
 // CancelImageCreationRequest returns a request value for making API operation for
 // EC2 Image Builder.
 //
-// CancelImageCreation cancels the creation of Image. This operation may only
+// CancelImageCreation cancels the creation of Image. This operation can only
 // be used on images in a non-terminal state.
 //
 //    // Example sending a request using CancelImageCreationRequest.

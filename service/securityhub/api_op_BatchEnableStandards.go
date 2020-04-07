@@ -14,11 +14,7 @@ import (
 type BatchEnableStandardsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The list of standards compliance checks to enable.
-	//
-	// In this release, Security Hub supports only the CIS AWS Foundations standard.
-	//
-	// The ARN for the standard is arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0.
+	// The list of standards checks to enable.
 	//
 	// StandardsSubscriptionRequests is a required field
 	StandardsSubscriptionRequests []StandardsSubscriptionRequest `min:"1" type:"list" required:"true"`
@@ -106,9 +102,11 @@ const opBatchEnableStandards = "BatchEnableStandards"
 // BatchEnableStandardsRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Enables the standards specified by the provided standardsArn. In this release,
-// only CIS AWS Foundations standards are supported. For more information, see
-// Standards Supported in AWS Security Hub (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html).
+// Enables the standards specified by the provided StandardsArn. To obtain the
+// ARN for a standard, use the DescribeStandards operation.
+//
+// For more information, see the Security Standards (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html)
+// section of the AWS Security Hub User Guide.
 //
 //    // Example sending a request using BatchEnableStandardsRequest.
 //    req := client.BatchEnableStandardsRequest(params)

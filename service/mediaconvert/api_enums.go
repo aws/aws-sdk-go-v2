@@ -610,6 +610,112 @@ func (enum AudioTypeControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Adaptive quantization. Allows intra-frame quantizers to vary to improve visual
+// quality.
+type Av1AdaptiveQuantization string
+
+// Enum values for Av1AdaptiveQuantization
+const (
+	Av1AdaptiveQuantizationOff    Av1AdaptiveQuantization = "OFF"
+	Av1AdaptiveQuantizationLow    Av1AdaptiveQuantization = "LOW"
+	Av1AdaptiveQuantizationMedium Av1AdaptiveQuantization = "MEDIUM"
+	Av1AdaptiveQuantizationHigh   Av1AdaptiveQuantization = "HIGH"
+	Av1AdaptiveQuantizationHigher Av1AdaptiveQuantization = "HIGHER"
+	Av1AdaptiveQuantizationMax    Av1AdaptiveQuantization = "MAX"
+)
+
+func (enum Av1AdaptiveQuantization) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Av1AdaptiveQuantization) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// If you are using the console, use the Framerate setting to specify the frame
+// rate for this output. If you want to keep the same frame rate as the input
+// video, choose Follow source. If you want to do frame rate conversion, choose
+// a frame rate from the dropdown list or choose Custom. The framerates shown
+// in the dropdown list are decimal approximations of fractions. If you choose
+// Custom, specify your frame rate as a fraction. If you are creating your transcoding
+// job specification as a JSON file without the console, use FramerateControl
+// to specify which value the service uses for the frame rate for this output.
+// Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate
+// from the input. Choose SPECIFIED if you want the service to use the frame
+// rate you specify in the settings FramerateNumerator and FramerateDenominator.
+type Av1FramerateControl string
+
+// Enum values for Av1FramerateControl
+const (
+	Av1FramerateControlInitializeFromSource Av1FramerateControl = "INITIALIZE_FROM_SOURCE"
+	Av1FramerateControlSpecified            Av1FramerateControl = "SPECIFIED"
+)
+
+func (enum Av1FramerateControl) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Av1FramerateControl) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// When set to INTERPOLATE, produces smoother motion during frame rate conversion.
+type Av1FramerateConversionAlgorithm string
+
+// Enum values for Av1FramerateConversionAlgorithm
+const (
+	Av1FramerateConversionAlgorithmDuplicateDrop Av1FramerateConversionAlgorithm = "DUPLICATE_DROP"
+	Av1FramerateConversionAlgorithmInterpolate   Av1FramerateConversionAlgorithm = "INTERPOLATE"
+)
+
+func (enum Av1FramerateConversionAlgorithm) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Av1FramerateConversionAlgorithm) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// 'With AV1 outputs, for rate control mode, MediaConvert supports only quality-defined
+// variable bitrate (QVBR). You can''t use CBR or VBR.'
+type Av1RateControlMode string
+
+// Enum values for Av1RateControlMode
+const (
+	Av1RateControlModeQvbr Av1RateControlMode = "QVBR"
+)
+
+func (enum Av1RateControlMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Av1RateControlMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Adjust quantization within each frame based on spatial variation of content
+// complexity.
+type Av1SpatialAdaptiveQuantization string
+
+// Enum values for Av1SpatialAdaptiveQuantization
+const (
+	Av1SpatialAdaptiveQuantizationDisabled Av1SpatialAdaptiveQuantization = "DISABLED"
+	Av1SpatialAdaptiveQuantizationEnabled  Av1SpatialAdaptiveQuantization = "ENABLED"
+)
+
+func (enum Av1SpatialAdaptiveQuantization) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Av1SpatialAdaptiveQuantization) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Optional. Choose a tag type that AWS Billing and Cost Management will use
 // to sort your AWS Elemental MediaConvert costs on any billing report that
 // you set up. Any transcoding outputs that don't have an associated tag will
@@ -1178,10 +1284,11 @@ func (enum ColorSpace) MarshalValueBuf(b []byte) ([]byte, error) {
 }
 
 // Specify the color space you want for this output. The service supports conversion
-// between HDR formats, between SDR formats, and from SDR to HDR. The service
-// doesn't support conversion from HDR to SDR. SDR to HDR conversion doesn't
-// upgrade the dynamic range. The converted video has an HDR format, but visually
-// appears the same as an unconverted output.
+// between HDR formats, between SDR formats, from SDR to HDR, and from HDR to
+// SDR. SDR to HDR conversion doesn't upgrade the dynamic range. The converted
+// video has an HDR format, but visually appears the same as an unconverted
+// output. HDR to SDR conversion uses Elemental tone mapping technology to approximate
+// the outcome of manually regrading from HDR to SDR.
 type ColorSpaceConversion string
 
 // Enum values for ColorSpaceConversion
@@ -5794,6 +5901,7 @@ type VideoCodec string
 // Enum values for VideoCodec
 const (
 	VideoCodecFrameCapture VideoCodec = "FRAME_CAPTURE"
+	VideoCodecAv1          VideoCodec = "AV1"
 	VideoCodecH264         VideoCodec = "H_264"
 	VideoCodecH265         VideoCodec = "H_265"
 	VideoCodecMpeg2        VideoCodec = "MPEG2"

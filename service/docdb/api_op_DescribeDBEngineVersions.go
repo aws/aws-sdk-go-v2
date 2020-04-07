@@ -14,7 +14,7 @@ import (
 type DescribeDBEngineVersionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of a specific DB parameter group family to return details for.
+	// The name of a specific parameter group family to return details for.
 	//
 	// Constraints:
 	//
@@ -87,7 +87,7 @@ func (s *DescribeDBEngineVersionsInput) Validate() error {
 type DescribeDBEngineVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about one or more DB engine versions.
+	// Detailed information about one or more engine versions.
 	DBEngineVersions []DBEngineVersion `locationNameList:"DBEngineVersion" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -106,7 +106,7 @@ const opDescribeDBEngineVersions = "DescribeDBEngineVersions"
 // DescribeDBEngineVersionsRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Returns a list of the available DB engines.
+// Returns a list of the available engines.
 //
 //    // Example sending a request using DescribeDBEngineVersionsRequest.
 //    req := client.DescribeDBEngineVersionsRequest(params)

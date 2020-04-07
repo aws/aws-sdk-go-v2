@@ -33,6 +33,8 @@ type PutPlaybackConfigurationInput struct {
 	// The identifier for the playback configuration.
 	Name *string `type:"string"`
 
+	PersonalizationThresholdSeconds *int64 `min:"1" type:"integer"`
+
 	// The URL for a high-quality video asset to transcode and use to fill in time
 	// that's not used by ads. AWS Elemental MediaTailor shows the slate to fill
 	// in gaps in media content. Configuring the slate is optional for non-VPAID
@@ -58,6 +60,19 @@ type PutPlaybackConfigurationInput struct {
 // String returns the string representation
 func (s PutPlaybackConfigurationInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutPlaybackConfigurationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutPlaybackConfigurationInput"}
+	if s.PersonalizationThresholdSeconds != nil && *s.PersonalizationThresholdSeconds < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("PersonalizationThresholdSeconds", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -93,6 +108,12 @@ func (s PutPlaybackConfigurationInput) MarshalFields(e protocol.FieldEncoder) er
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PersonalizationThresholdSeconds != nil {
+		v := *s.PersonalizationThresholdSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PersonalizationThresholdSeconds", protocol.Int64Value(v), metadata)
 	}
 	if s.SlateAdUrl != nil {
 		v := *s.SlateAdUrl

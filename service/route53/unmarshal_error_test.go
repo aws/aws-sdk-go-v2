@@ -3,6 +3,7 @@ package route53_test
 import (
 	"bytes"
 	"context"
+	"errors"
 	"io/ioutil"
 	"net/http"
 	"testing"
@@ -116,18 +117,24 @@ but it already exists
 		t.Fatal("returned error is not a RequestFailure")
 	}
 
-	if batchErr, ok := err.(awserr.BatchedErrors); ok {
-		errs := batchErr.OrigErrs()
-		if e, a := 1, len(errs); e != a {
-			t.Errorf("expected %d, but received %d", e, a)
-		}
-		if e, a := "InvalidChangeBatch", errs[0].(awserr.Error).Code(); e != a {
-			t.Errorf("expected %s, but received %s", e, a)
-		}
-		if e, a := errorMessage, errs[0].(awserr.Error).Message(); e != a {
-			t.Errorf("expected %s, but received %s", e, a)
-		}
-	} else {
-		t.Fatal("returned error is not a BatchedErrors")
+	var be awserr.BatchedErrors
+	if !errors.As(err, &be) {
+		t.Fatalf("expect %T error, got %v", be, err)
+	}
+
+	errs := be.Errs()
+	if e, a := 1, len(errs); e != a {
+		t.Errorf("expected %d, but received %d", e, a)
+	}
+
+	var ee awserr.Error
+	if !errors.As(errs[0], &ee) {
+		t.Fatalf("expect %T error got %v", ee, errs[0])
+	}
+	if e, a := "InvalidChangeBatch", ee.Code(); e != a {
+		t.Errorf("expected %s, but received %s", e, a)
+	}
+	if e, a := errorMessage, ee.Message(); e != a {
+		t.Errorf("expected %s, but received %s", e, a)
 	}
 }

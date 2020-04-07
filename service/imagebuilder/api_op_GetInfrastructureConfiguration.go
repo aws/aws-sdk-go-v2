@@ -15,7 +15,7 @@ type GetInfrastructureConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the infrastructure configuration that you
-	// wish to retrieve.
+	// want to retrieve.
 	//
 	// InfrastructureConfigurationArn is a required field
 	InfrastructureConfigurationArn *string `location:"querystring" locationName:"infrastructureConfigurationArn" type:"string" required:"true"`
@@ -91,7 +91,7 @@ const opGetInfrastructureConfiguration = "GetInfrastructureConfiguration"
 // GetInfrastructureConfigurationRequest returns a request value for making API operation for
 // EC2 Image Builder.
 //
-// Gets a infrastructure configuration.
+// Gets an infrastructure configuration.
 //
 //    // Example sending a request using GetInfrastructureConfigurationRequest.
 //    req := client.GetInfrastructureConfigurationRequest(params)

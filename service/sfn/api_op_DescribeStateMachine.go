@@ -55,6 +55,7 @@ type DescribeStateMachineOutput struct {
 	// Definition is a required field
 	Definition *string `locationName:"definition" min:"1" type:"string" required:"true" sensitive:"true"`
 
+	// The LoggingConfiguration data type is used to set CloudWatch Logs options.
 	LoggingConfiguration *LoggingConfiguration `locationName:"loggingConfiguration" type:"structure"`
 
 	// The name of the state machine.
@@ -70,6 +71,9 @@ type DescribeStateMachineOutput struct {
 	//    * special characters " # % \ ^ | ~ ` $ & , ; : /
 	//
 	//    * control characters (U+0000-001F, U+007F-009F)
+	//
+	// To enable logging with CloudWatch Logs, the name should only contain 0-9,
+	// A-Z, a-z, - and _.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
@@ -89,6 +93,8 @@ type DescribeStateMachineOutput struct {
 	// The current status of the state machine.
 	Status StateMachineStatus `locationName:"status" type:"string" enum:"true"`
 
+	// The type of the state machine (STANDARD or EXPRESS).
+	//
 	// Type is a required field
 	Type StateMachineType `locationName:"type" type:"string" required:"true" enum:"true"`
 }

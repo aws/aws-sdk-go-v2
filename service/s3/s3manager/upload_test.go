@@ -2,6 +2,7 @@ package s3manager_test
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -21,6 +22,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/internal/s3testing"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
 )
 
@@ -300,9 +302,8 @@ func TestUploadReaderReturnsNegative(t *testing.T) {
 		t.Error("Expected error, but received none")
 	}
 
-	aerr := err.(awserr.Error)
-	if aerr.OrigErr() != io.ErrUnexpectedEOF {
-		t.Fatalf("expected %s. Got %s", io.ErrUnexpectedEOF, aerr.OrigErr())
+	if e, a := io.ErrUnexpectedEOF, err; !errors.Is(a, e) {
+		t.Fatalf("expect %v error, got %v", e, a)
 	}
 }
 
@@ -540,14 +541,22 @@ func TestUploadOrderReadFail1(t *testing.T) {
 		Body:   &failreader{times: 1},
 	})
 
-	if e, a := "ReadRequestBody", err.(awserr.Error).Code(); e != a {
-		t.Errorf("Expected %q, but received %q", e, a)
+	var aerr awserr.Error
+	if !errors.As(err, &aerr) {
+		t.Fatalf("expect %T error, got %v", aerr, err)
 	}
 
-	if e, a := err.(awserr.Error).OrigErr().Error(), "random failure"; e != a {
-		t.Errorf("Expected %q, but received %q", e, a)
+	if e, a := "ReadRequestBody", aerr.Code(); e != a {
+		t.Errorf("expect %q code, got %q", e, a)
 	}
 
+	origErr := errors.Unwrap(aerr)
+	if origErr == nil {
+		t.Fatalf("expect wrapped error, was none")
+	}
+	if e, a := "random failure", origErr.Error(); !strings.Contains(a, e) {
+		t.Errorf("expected %q, but received %q", e, a)
+	}
 	if e, a := []string{}, *ops; !reflect.DeepEqual(e, a) {
 		t.Errorf("Expected %v, but received %v", e, a)
 	}
@@ -564,16 +573,25 @@ func TestUploadOrderReadFail2(t *testing.T) {
 		Body:   &failreader{times: 2},
 	})
 
-	if e, a := "MultipartUpload", err.(awserr.Error).Code(); e != a {
+	var aerr awserr.Error
+	if !errors.As(err, &aerr) {
+		t.Fatalf("expect %T error, got %v", aerr, err)
+	}
+
+	if e, a := "MultipartUpload", aerr.Code(); e != a {
 		t.Errorf("Expected %q, but received %q", e, a)
 	}
 
-	if e, a := "ReadRequestBody", err.(awserr.Error).OrigErr().(awserr.Error).Code(); e != a {
+	origErr := errors.Unwrap(aerr)
+	if origErr == nil {
+		t.Fatalf("expect wrapped error, was none")
+	}
+	if e, a := "ReadRequestBody", origErr.(awserr.Error).Code(); e != a {
 		t.Errorf("Expected %q, but received %q", e, a)
 	}
 
-	if errStr := err.(awserr.Error).OrigErr().Error(); !strings.Contains(errStr, "random failure") {
-		t.Errorf("Expected error to contains 'random failure', but was %q", errStr)
+	if e, a := "random failure", origErr.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %q error, got %q", e, a)
 	}
 
 	if e, a := []string{"CreateMultipartUpload", "AbortMultipartUpload"}, *ops; !reflect.DeepEqual(e, a) {
@@ -724,12 +742,16 @@ func TestUploadOrderMultiBufferedReaderExceedTotalParts(t *testing.T) {
 		t.Errorf("Expected %q, but received %q", e, a)
 	}
 
-	if e, a := "TotalPartsExceeded", aerr.OrigErr().(awserr.Error).Code(); e != a {
-		t.Errorf("Expected %q, but received %q", e, a)
+	origErr := errors.Unwrap(aerr)
+	if origErr == nil {
+		t.Fatalf("expect wrapped error, was none")
+	}
+	if e, a := "TotalPartsExceeded", origErr.(awserr.Error).Code(); e != a {
+		t.Errorf("expect %q, but received %q", e, a)
 	}
 
-	if !strings.Contains(aerr.Error(), "configured MaxUploadParts (2)") {
-		t.Errorf("Expected error to contain 'configured MaxUploadParts (2)', but receievd %q", aerr.Error())
+	if e, a := "configured MaxUploadParts (2)", aerr.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %q, but received %q", e, a)
 	}
 }
 
@@ -1026,12 +1048,13 @@ func TestUploadWithContextCanceled(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expected error, did not get one")
 	}
-	aerr := err.(awserr.Error)
-	if e, a := aws.ErrCodeRequestCanceled, aerr.Code(); e != a {
-		t.Errorf("expected error code %q, got %q", e, a)
+
+	var rc *aws.RequestCanceledError
+	if !errors.As(err, &rc) {
+		t.Fatalf("expect %T error, got %v", rc, err)
 	}
-	if e, a := "canceled", aerr.Message(); !strings.Contains(a, e) {
-		t.Errorf("expected error message to contain %q, but did not %q", e, a)
+	if e, a := "canceled", rc.Err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v to be in, %v", e, a)
 	}
 }
 
@@ -1136,7 +1159,7 @@ func TestUploadBufferStrategy(t *testing.T) {
 				u.Concurrency = 1
 			})
 
-			expected := getTestBytes(int(tCase.Size))
+			expected := s3testing.GetTestBytes(int(tCase.Size))
 			_, err := uploader.Upload(&s3manager.UploadInput{
 				Bucket: aws.String("bucket"),
 				Key:    aws.String("key"),

@@ -10,16 +10,18 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request for CreateProfilingGroup operation.
+// The structure representing the createProfiliingGroupRequest.
 type CreateProfilingGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// Configuration to orchestrate agents to create and report agent profiles of
-	// the profiling group. Agents are orchestrated if they follow the agent orchestration
-	// protocol.
+	// The agent orchestration configuration.
 	AgentOrchestrationConfig *AgentOrchestrationConfig `locationName:"agentOrchestrationConfig" type:"structure"`
 
-	// Client token for the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
+	//
+	// This parameter specifies a unique identifier for the new profiling group
+	// that helps ensure idempotency.
 	//
 	// ClientToken is a required field
 	ClientToken *string `location:"querystring" locationName:"clientToken" min:"1" type:"string" required:"true" idempotencyToken:"true"`
@@ -95,11 +97,11 @@ func (s CreateProfilingGroupInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Response for CreateProfilingGroup operation.
+// The structure representing the createProfilingGroupResponse.
 type CreateProfilingGroupOutput struct {
 	_ struct{} `type:"structure" payload:"ProfilingGroup"`
 
-	// The description of a profiling group.
+	// Information about the new profiling group
 	//
 	// ProfilingGroup is a required field
 	ProfilingGroup *ProfilingGroupDescription `locationName:"profilingGroup" type:"structure" required:"true"`
@@ -126,7 +128,7 @@ const opCreateProfilingGroup = "CreateProfilingGroup"
 // CreateProfilingGroupRequest returns a request value for making API operation for
 // Amazon CodeGuru Profiler.
 //
-// Create a profiling group.
+// Creates a profiling group.
 //
 //    // Example sending a request using CreateProfilingGroupRequest.
 //    req := client.CreateProfilingGroupRequest(params)

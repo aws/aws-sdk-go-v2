@@ -12,8 +12,11 @@ import (
 type GetInstanceSnapshotsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A token used for advancing to the next page of results from your get instance
-	// snapshots request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetInstanceSnapshots request. If
+	// your results are paginated, the response will return a next page token that
+	// you can specify as the page token in a subsequent request.
 	PageToken *string `locationName:"pageToken" type:"string"`
 }
 
@@ -29,8 +32,12 @@ type GetInstanceSnapshotsOutput struct {
 	// get instance snapshots request.
 	InstanceSnapshots []InstanceSnapshot `locationName:"instanceSnapshots" type:"list"`
 
-	// A token used for advancing to the next page of results from your get instance
-	// snapshots request.
+	// The token to advance to the next page of resutls from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetInstanceSnapshots request
+	// and specify the next page token using the pageToken parameter.
 	NextPageToken *string `locationName:"nextPageToken" type:"string"`
 }
 

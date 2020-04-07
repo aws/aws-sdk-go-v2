@@ -13,7 +13,7 @@ import (
 type GetImagePipelineInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the image pipeline that you wish to retrieve.
+	// The Amazon Resource Name (ARN) of the image pipeline that you want to retrieve.
 	//
 	// ImagePipelineArn is a required field
 	ImagePipelineArn *string `location:"querystring" locationName:"imagePipelineArn" type:"string" required:"true"`

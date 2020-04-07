@@ -30,9 +30,7 @@ type ResizeClusterInput struct {
 	NodeType *string `type:"string"`
 
 	// The new number of nodes for the cluster.
-	//
-	// NumberOfNodes is a required field
-	NumberOfNodes *int64 `type:"integer" required:"true"`
+	NumberOfNodes *int64 `type:"integer"`
 }
 
 // String returns the string representation
@@ -46,10 +44,6 @@ func (s *ResizeClusterInput) Validate() error {
 
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if s.NumberOfNodes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NumberOfNodes"))
 	}
 
 	if invalidParams.Len() > 0 {

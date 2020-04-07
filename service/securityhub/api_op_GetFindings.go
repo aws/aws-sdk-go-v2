@@ -13,20 +13,21 @@ import (
 type GetFindingsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The findings attributes used to define a condition to filter the findings
-	// returned.
+	// The finding attributes used to define a condition to filter the returned
+	// findings.
 	Filters *AwsSecurityFindingFilters `type:"structure"`
 
 	// The maximum number of findings to return.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// Paginates results. On your first call to the GetFindings operation, set the
-	// value of this parameter to NULL. For subsequent calls to the operation, fill
-	// nextToken in the request with the value of nextToken from the previous response
-	// to continue listing data.
+	// The token that is required for pagination. On your first call to the GetFindings
+	// operation, set the value of this parameter to NULL.
+	//
+	// For subsequent calls to the operation, to continue listing data, set the
+	// value of this parameter to the value returned from the previous response.
 	NextToken *string `type:"string"`
 
-	// Findings attributes used to sort the list of findings returned.
+	// The finding attributes used to sort the list of returned findings.
 	SortCriteria []SortCriterion `type:"list"`
 }
 
@@ -93,7 +94,7 @@ type GetFindingsOutput struct {
 	// Findings is a required field
 	Findings []AwsSecurityFinding `type:"list" required:"true"`
 
-	// The token that is required for pagination.
+	// The pagination token to use to request the next page of results.
 	NextToken *string `type:"string"`
 }
 

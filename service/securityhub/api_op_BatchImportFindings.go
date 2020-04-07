@@ -75,7 +75,7 @@ type BatchImportFindingsOutput struct {
 	// FailedCount is a required field
 	FailedCount *int64 `type:"integer" required:"true"`
 
-	// The list of the findings that failed to import.
+	// The list of findings that failed to import.
 	FailedFindings []ImportFindingsError `type:"list"`
 
 	// The number of findings that were successfully imported.
@@ -125,8 +125,10 @@ const opBatchImportFindings = "BatchImportFindings"
 //
 // Imports security findings generated from an integrated third-party product
 // into Security Hub. This action is requested by the integrated product to
-// import its findings into Security Hub. The maximum allowed size for a finding
-// is 240 Kb. An error is returned for any finding larger than 240 Kb.
+// import its findings into Security Hub.
+//
+// The maximum allowed size for a finding is 240 Kb. An error is returned for
+// any finding larger than 240 Kb.
 //
 //    // Example sending a request using BatchImportFindingsRequest.
 //    req := client.BatchImportFindingsRequest(params)

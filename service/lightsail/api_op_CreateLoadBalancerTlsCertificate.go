@@ -74,7 +74,9 @@ func (s *CreateLoadBalancerTlsCertificateInput) Validate() error {
 type CreateLoadBalancerTlsCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object containing information about the API operations.
+	// An array of objects that describe the result of the action, such as the status
+	// of the request, the time stamp of the request, and the resources affected
+	// by the request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
 
@@ -92,7 +94,7 @@ const opCreateLoadBalancerTlsCertificate = "CreateLoadBalancerTlsCertificate"
 //
 // TLS is just an updated, more secure version of Secure Socket Layer (SSL).
 //
-// The create load balancer tls certificate operation supports tag-based access
+// The CreateLoadBalancerTlsCertificate operation supports tag-based access
 // control via resource tags applied to the resource identified by load balancer
 // name. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //

@@ -19,6 +19,8 @@ type CreateVirtualServiceInput struct {
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
+	MeshOwner *string `location:"querystring" locationName:"meshOwner" min:"12" type:"string"`
+
 	// An object that represents the specification of a virtual service.
 	//
 	// Spec is a required field
@@ -44,6 +46,9 @@ func (s *CreateVirtualServiceInput) Validate() error {
 	}
 	if s.MeshName != nil && len(*s.MeshName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
+	}
+	if s.MeshOwner != nil && len(*s.MeshOwner) < 12 {
+		invalidParams.Add(aws.NewErrParamMinLen("MeshOwner", 12))
 	}
 
 	if s.Spec == nil {
@@ -118,6 +123,12 @@ func (s CreateVirtualServiceInput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.MeshOwner != nil {
+		v := *s.MeshOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "meshOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	return nil
 }
 
@@ -158,6 +169,8 @@ const opCreateVirtualService = "CreateVirtualService"
 // services call your virtual service by its virtualServiceName, and those requests
 // are routed to the virtual node or virtual router that is specified as the
 // provider for the virtual service.
+//
+// For more information about virtual services, see Virtual Services (https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_services.html).
 //
 //    // Example sending a request using CreateVirtualServiceRequest.
 //    req := client.CreateVirtualServiceRequest(params)

@@ -19,15 +19,17 @@ type CreateFileSystemInput struct {
 	// when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
 	ClientRequestToken *string `min:"1" type:"string" idempotencyToken:"true"`
 
-	// The type of Amazon FSx file system to create.
+	// The type of Amazon FSx file system to create, either WINDOWS or LUSTRE.
 	//
 	// FileSystemType is a required field
 	FileSystemType FileSystemType `type:"string" required:"true" enum:"true"`
 
 	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the
-	// file system's data for an Amazon FSx for Windows File Server file system
-	// at rest. Amazon FSx for Lustre does not support KMS encryption. For more
-	// information, see Encrypt (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html)
+	// file system's data for Amazon FSx for Windows File Server file systems and
+	// Amazon FSx for Lustre PERSISTENT_1 file systems at rest. In either case,
+	// if not specified, the Amazon FSx managed key is used. The Amazon FSx for
+	// Lustre SCRATCH_1 and SCRATCH_2 file systems are always encrypted at rest
+	// using Amazon FSx managed keys. For more information, see Encrypt (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html)
 	// in the AWS Key Management Service API Reference.
 	KmsKeyId *string `min:"1" type:"string"`
 
@@ -44,15 +46,17 @@ type CreateFileSystemInput struct {
 	//
 	// For Windows file systems, valid values are 32 GiB - 65,536 GiB.
 	//
-	// For Lustre file systems, valid values are 1,200, 2,400, 3,600, then continuing
-	// in increments of 3600 GiB.
+	// For SCRATCH_1 Lustre file systems, valid values are 1,200, 2,400, 3,600,
+	// then continuing in increments of 3600 GiB. For SCRATCH_2 and PERSISTENT_1
+	// file systems, valid values are 1200, 2400, then continuing in increments
+	// of 2400 GiB.
 	//
 	// StorageCapacity is a required field
 	StorageCapacity *int64 `type:"integer" required:"true"`
 
 	// Specifies the IDs of the subnets that the file system will be accessible
 	// from. For Windows MULTI_AZ_1 file system deployment types, provide exactly
-	// two subnet IDs, one for the preferred file server and one for the standy
+	// two subnet IDs, one for the preferred file server and one for the standby
 	// file server. You specify one of these subnets as the preferred subnet using
 	// the WindowsConfiguration > PreferredSubnetID property.
 	//

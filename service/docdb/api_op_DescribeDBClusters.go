@@ -14,22 +14,21 @@ import (
 type DescribeDBClustersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The user-provided DB cluster identifier. If this parameter is specified,
-	// information from only the specific DB cluster is returned. This parameter
-	// isn't case sensitive.
+	// The user-provided cluster identifier. If this parameter is specified, information
+	// from only the specific cluster is returned. This parameter isn't case sensitive.
 	//
 	// Constraints:
 	//
 	//    * If provided, must match an existing DBClusterIdentifier.
 	DBClusterIdentifier *string `type:"string"`
 
-	// A filter that specifies one or more DB clusters to describe.
+	// A filter that specifies one or more clusters to describe.
 	//
 	// Supported filters:
 	//
-	//    * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
-	//    Resource Names (ARNs). The results list only includes information about
-	//    the DB clusters identified by these ARNs.
+	//    * db-cluster-id - Accepts cluster identifiers and cluster Amazon Resource
+	//    Names (ARNs). The results list only includes information about the clusters
+	//    identified by these ARNs.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -73,7 +72,7 @@ func (s *DescribeDBClustersInput) Validate() error {
 type DescribeDBClustersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of DB clusters.
+	// A list of clusters.
 	DBClusters []DBCluster `locationNameList:"DBCluster" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -92,8 +91,11 @@ const opDescribeDBClusters = "DescribeDBClusters"
 // DescribeDBClustersRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Returns information about provisioned Amazon DocumentDB DB clusters. This
-// API operation supports pagination.
+// Returns information about provisioned Amazon DocumentDB clusters. This API
+// operation supports pagination. For certain management features such as cluster
+// and instance lifecycle management, Amazon DocumentDB leverages operational
+// technology that is shared with Amazon RDS and Amazon Neptune. Use the filterName=engine,Values=docdb
+// filter parameter to return only Amazon DocumentDB clusters.
 //
 //    // Example sending a request using DescribeDBClustersRequest.
 //    req := client.DescribeDBClustersRequest(params)

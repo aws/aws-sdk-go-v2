@@ -116,11 +116,10 @@ type CreateDBInstanceInput struct {
 
 	// A value that indicates whether the DB instance has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled.
+	// deletion protection is disabled. See Deleting a DB Instance (https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html).
 	//
-	// You can enable or disable deletion protection for the DB cluster. For more
-	// information, see CreateDBCluster. DB instances in a DB cluster can be deleted
-	// even when deletion protection is enabled for the DB cluster.
+	// DB instances in a DB cluster can be deleted even when deletion protection
+	// is enabled in their parent DB cluster.
 	DeletionProtection *bool `type:"boolean"`
 
 	// Specify the Active Directory Domain to create the instance in.

@@ -161,6 +161,11 @@ type PutBotInput struct {
 	// If you don't specify this value, the default value is BUILD.
 	ProcessBehavior ProcessBehavior `locationName:"processBehavior" type:"string" enum:"true"`
 
+	// A list of tags to add to the bot. You can only add tags when you create a
+	// bot, you can't use the PutBot operation to update the tags on a bot. To update
+	// tags, use the TagResource operation.
+	Tags []Tag `locationName:"tags" type:"list"`
+
 	// The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions
 	// with the user. The locale configured for the voice must match the locale
 	// of the bot. For more information, see Voices in Amazon Polly (https://docs.aws.amazon.com/polly/latest/dg/voicelist.html)
@@ -207,6 +212,13 @@ func (s *PutBotInput) Validate() error {
 		for i, v := range s.Intents {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Intents", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -292,6 +304,18 @@ func (s PutBotInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "processBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.VoiceId != nil {
 		v := *s.VoiceId
@@ -399,6 +423,9 @@ type PutBotOutput struct {
 	//
 	// When the bot is in the READY state you can test and publish the bot.
 	Status Status `locationName:"status" type:"string" enum:"true"`
+
+	// A list of tags associated with the bot.
+	Tags []Tag `locationName:"tags" type:"list"`
 
 	// The version of the bot. For a new bot, the version is always $LATEST.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -512,6 +539,18 @@ func (s PutBotOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.Version != nil {
 		v := *s.Version

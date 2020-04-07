@@ -23,7 +23,7 @@ type CreateImageInput struct {
 	DistributionConfigurationArn *string `locationName:"distributionConfigurationArn" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the image recipe that defines how images
-	// are configured, tested and assessed.
+	// are configured, tested, and assessed.
 	//
 	// ImageRecipeArn is a required field
 	ImageRecipeArn *string `locationName:"imageRecipeArn" type:"string" required:"true"`

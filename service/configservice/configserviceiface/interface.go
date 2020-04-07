@@ -203,6 +203,8 @@ type ClientAPI interface {
 
 	PutRetentionConfigurationRequest(*configservice.PutRetentionConfigurationInput) configservice.PutRetentionConfigurationRequest
 
+	SelectAggregateResourceConfigRequest(*configservice.SelectAggregateResourceConfigInput) configservice.SelectAggregateResourceConfigRequest
+
 	SelectResourceConfigRequest(*configservice.SelectResourceConfigInput) configservice.SelectResourceConfigRequest
 
 	StartConfigRulesEvaluationRequest(*configservice.StartConfigRulesEvaluationInput) configservice.StartConfigRulesEvaluationRequest

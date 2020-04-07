@@ -45,7 +45,7 @@ type PutSlotTypeInput struct {
 	// using a Lambda function you can choose to return the value that the user
 	// entered or the first value in the resolution list as the slot value. The
 	// valueSelectionStrategy field indicates the option to use.
-	EnumerationValues []EnumerationValue `locationName:"enumerationValues" min:"1" type:"list"`
+	EnumerationValues []EnumerationValue `locationName:"enumerationValues" type:"list"`
 
 	// The name of the slot type. The name is not case sensitive.
 	//
@@ -58,6 +58,17 @@ type PutSlotTypeInput struct {
 	//
 	// Name is a required field
 	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
+
+	// The built-in slot type used as the parent of the slot type. When you define
+	// a parent slot type, the new slot type has all of the same configuration as
+	// the parent.
+	//
+	// Only AMAZON.AlphaNumeric is supported.
+	ParentSlotTypeSignature *string `locationName:"parentSlotTypeSignature" min:"1" type:"string"`
+
+	// Configuration information that extends the parent built-in slot type. The
+	// configuration is added to the settings for the parent slot type.
+	SlotTypeConfigurations []SlotTypeConfiguration `locationName:"slotTypeConfigurations" type:"list"`
 
 	// Determines the slot resolution strategy that Amazon Lex uses to return slot
 	// type values. The field can be set to one of the following values:
@@ -81,9 +92,6 @@ func (s PutSlotTypeInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutSlotTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutSlotTypeInput"}
-	if s.EnumerationValues != nil && len(s.EnumerationValues) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("EnumerationValues", 1))
-	}
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
@@ -91,10 +99,20 @@ func (s *PutSlotTypeInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+	if s.ParentSlotTypeSignature != nil && len(*s.ParentSlotTypeSignature) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ParentSlotTypeSignature", 1))
+	}
 	if s.EnumerationValues != nil {
 		for i, v := range s.EnumerationValues {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EnumerationValues", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SlotTypeConfigurations != nil {
+		for i, v := range s.SlotTypeConfigurations {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SlotTypeConfigurations", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -139,6 +157,24 @@ func (s PutSlotTypeInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
+	if s.ParentSlotTypeSignature != nil {
+		v := *s.ParentSlotTypeSignature
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "parentSlotTypeSignature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SlotTypeConfigurations != nil {
+		v := s.SlotTypeConfigurations
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "slotTypeConfigurations", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if len(s.ValueSelectionStrategy) > 0 {
 		v := s.ValueSelectionStrategy
 
@@ -173,7 +209,7 @@ type PutSlotTypeOutput struct {
 
 	// A list of EnumerationValue objects that defines the values that the slot
 	// type can take.
-	EnumerationValues []EnumerationValue `locationName:"enumerationValues" min:"1" type:"list"`
+	EnumerationValues []EnumerationValue `locationName:"enumerationValues" type:"list"`
 
 	// The date that the slot type was updated. When you create a slot type, the
 	// creation date and last update date are the same.
@@ -181,6 +217,12 @@ type PutSlotTypeOutput struct {
 
 	// The name of the slot type.
 	Name *string `locationName:"name" min:"1" type:"string"`
+
+	// The built-in slot type used as the parent of the slot type.
+	ParentSlotTypeSignature *string `locationName:"parentSlotTypeSignature" min:"1" type:"string"`
+
+	// Configuration information that extends the parent built-in slot type.
+	SlotTypeConfigurations []SlotTypeConfiguration `locationName:"slotTypeConfigurations" type:"list"`
 
 	// The slot resolution strategy that Amazon Lex uses to determine the value
 	// of the slot. For more information, see PutSlotType.
@@ -247,6 +289,24 @@ func (s PutSlotTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ParentSlotTypeSignature != nil {
+		v := *s.ParentSlotTypeSignature
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "parentSlotTypeSignature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SlotTypeConfigurations != nil {
+		v := s.SlotTypeConfigurations
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "slotTypeConfigurations", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if len(s.ValueSelectionStrategy) > 0 {
 		v := s.ValueSelectionStrategy

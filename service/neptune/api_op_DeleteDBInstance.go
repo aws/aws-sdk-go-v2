@@ -108,7 +108,8 @@ const opDeleteDBInstance = "DeleteDBInstance"
 // incompatible-restore, or incompatible-network, you can only delete it when
 // the SkipFinalSnapshot parameter is set to true.
 //
-// You can't delete a DB instance if it is the only instance in the DB cluster.
+// You can't delete a DB instance if it is the only instance in the DB cluster,
+// or if it has deletion protection enabled.
 //
 //    // Example sending a request using DeleteDBInstanceRequest.
 //    req := client.DeleteDBInstanceRequest(params)

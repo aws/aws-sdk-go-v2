@@ -13,8 +13,7 @@ import (
 type GetCurrentUserInput struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token.
 	//
 	// AuthenticationToken is a required field
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" required:"true" sensitive:"true"`
@@ -85,6 +84,11 @@ const opGetCurrentUser = "GetCurrentUser"
 //
 // Retrieves details of the current user for whom the authentication token was
 // generated. This is not a valid action for SigV4 (administrative API) clients.
+//
+// This action requires an authentication token. To get an authentication token,
+// register an application with Amazon WorkDocs. For more information, see Authentication
+// and Access Control for User Applications (https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html)
+// in the Amazon WorkDocs Developer Guide.
 //
 //    // Example sending a request using GetCurrentUserRequest.
 //    req := client.GetCurrentUserRequest(params)

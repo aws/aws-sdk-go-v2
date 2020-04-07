@@ -78,10 +78,10 @@ const opPutLoggingOptions = "PutLoggingOptions"
 //
 // Sets or updates the AWS IoT Events logging options.
 //
-// If you update the value of any "loggingOptions" field, it takes up to one
-// minute for the change to take effect. Also, if you change the policy attached
-// to the role you specified in the "roleArn" field (for example, to correct
-// an invalid policy) it takes up to five minutes for that change to take effect.
+// If you update the value of any loggingOptions field, it takes up to one minute
+// for the change to take effect. If you change the policy attached to the role
+// you specified in the roleArn field (for example, to correct an invalid policy),
+// it takes up to five minutes for that change to take effect.
 //
 //    // Example sending a request using PutLoggingOptionsRequest.
 //    req := client.PutLoggingOptionsRequest(params)

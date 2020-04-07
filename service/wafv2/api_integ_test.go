@@ -19,7 +19,25 @@ import (
 var _ aws.Config
 var _ awserr.Error
 
-func TestInteg_00_CreateRegexPatternSet(t *testing.T) {
+func TestInteg_00_ListWebACLs(t *testing.T) {
+	ctx, cancelFn := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancelFn()
+
+	cfg := integration.ConfigWithDefaultRegion("us-east-1")
+	svc := wafv2.New(cfg)
+	params := &wafv2.ListWebACLsInput{
+		Limit: aws.Int64(20),
+		Scope: wafv2.ScopeRegional,
+	}
+
+	req := svc.ListWebACLsRequest(params)
+	req.Handlers.Validate.Remove(defaults.ValidateParametersHandler)
+	_, err := req.Send(ctx)
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+}
+func TestInteg_01_CreateRegexPatternSet(t *testing.T) {
 	ctx, cancelFn := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelFn()
 

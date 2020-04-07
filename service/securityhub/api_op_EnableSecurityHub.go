@@ -74,11 +74,20 @@ const opEnableSecurityHub = "EnableSecurityHub"
 // AWS SecurityHub.
 //
 // Enables Security Hub for your account in the current Region or the Region
-// you specify in the request. Enabling Security Hub also enables the CIS AWS
-// Foundations standard. When you enable Security Hub, you grant to Security
-// Hub the permissions necessary to gather findings from AWS Config, Amazon
-// GuardDuty, Amazon Inspector, and Amazon Macie. To learn more, see Setting
-// Up AWS Security Hub (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html).
+// you specify in the request.
+//
+// When you enable Security Hub, you grant to Security Hub the permissions necessary
+// to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and
+// Amazon Macie.
+//
+// When you use the EnableSecurityHub operation to enable Security Hub, you
+// also automatically enable the CIS AWS Foundations standard. You do not enable
+// the Payment Card Industry Data Security Standard (PCI DSS) standard. To enable
+// a standard, use the BatchEnableStandards operation. To disable a standard,
+// use the BatchDisableStandards operation.
+//
+// To learn more, see Setting Up AWS Security Hub (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html)
+// in the AWS Security Hub User Guide.
 //
 //    // Example sending a request using EnableSecurityHubRequest.
 //    req := client.EnableSecurityHubRequest(params)

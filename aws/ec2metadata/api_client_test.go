@@ -2,20 +2,20 @@ package ec2metadata_test
 
 import (
 	"context"
+	"errors"
 	"os"
 	"strings"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/ec2metadata"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
 
 func TestClientDisableIMDS(t *testing.T) {
-	env := awstesting.StashEnv()
-	defer awstesting.PopEnv(env)
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
 
 	os.Setenv("AWS_EC2_METADATA_DISABLED", "true")
 
@@ -32,11 +32,12 @@ func TestClientDisableIMDS(t *testing.T) {
 		t.Errorf("expect no response, got %v", resp)
 	}
 
-	aerr := err.(awserr.Error)
-	if e, a := aws.ErrCodeRequestCanceled, aerr.Code(); e != a {
-		t.Errorf("expect %v error code, got %v", e, a)
+	var ce *aws.RequestCanceledError
+	if !errors.As(err, &ce) {
+		t.Fatalf("expect %T error, got %v", ce, err)
 	}
-	if e, a := "AWS_EC2_METADATA_DISABLED", aerr.Message(); !strings.Contains(a, e) {
+
+	if e, a := "AWS_EC2_METADATA_DISABLED", ce.Err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v in error message, got %v", e, a)
 	}
 }

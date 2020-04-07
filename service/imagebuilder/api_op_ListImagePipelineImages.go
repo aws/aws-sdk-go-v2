@@ -14,11 +14,14 @@ import (
 type ListImagePipelineImagesInput struct {
 	_ struct{} `type:"structure"`
 
+	// The filters.
 	Filters []Filter `locationName:"filters" min:"1" type:"list"`
 
-	// The Amazon Resource Name (ARN) of the image pipeline whose images you wish
+	// The Amazon Resource Name (ARN) of the image pipeline whose images you want
 	// to view.
-	ImagePipelineArn *string `locationName:"imagePipelineArn" type:"string"`
+	//
+	// ImagePipelineArn is a required field
+	ImagePipelineArn *string `locationName:"imagePipelineArn" type:"string" required:"true"`
 
 	// The maximum items to return in a request.
 	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
@@ -38,6 +41,10 @@ func (s *ListImagePipelineImagesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListImagePipelineImagesInput"}
 	if s.Filters != nil && len(s.Filters) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
+	}
+
+	if s.ImagePipelineArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ImagePipelineArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
@@ -102,9 +109,9 @@ type ListImagePipelineImagesOutput struct {
 	// The list of images built by this pipeline.
 	ImageSummaryList []ImageSummary `locationName:"imageSummaryList" type:"list"`
 
-	// The next token used for paginated responses. When this is not empty then
-	// there are additional elements that the service that not include in this request.
-	// Use this token with the next request to retrieve additional object.
+	// The next token used for paginated responses. When this is not empty, there
+	// are additional elements that the service has not included in this request.
+	// Use this token with the next request to retrieve additional objects.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// The request ID that uniquely identifies this request.

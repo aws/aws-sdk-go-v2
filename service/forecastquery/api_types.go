@@ -33,9 +33,7 @@ type Forecast struct {
 
 	// The forecast.
 	//
-	// The string of the string to array map is one of the following values:
-	//
-	//    * mean
+	// The string of the string-to-array map is one of the following values:
 	//
 	//    * p10
 	//

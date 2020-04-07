@@ -118,9 +118,9 @@ const opCreateRoomMembership = "CreateRoomMembership"
 // CreateRoomMembershipRequest returns a request value for making API operation for
 // Amazon Chime.
 //
-// Adds a member to a chat room. A member can be either a user or a bot. The
-// member role designates whether the member is a chat room administrator or
-// a general chat room member.
+// Adds a member to a chat room in an Amazon Chime Enterprise account. A member
+// can be either a user or a bot. The member role designates whether the member
+// is a chat room administrator or a general chat room member.
 //
 //    // Example sending a request using CreateRoomMembershipRequest.
 //    req := client.CreateRoomMembershipRequest(params)

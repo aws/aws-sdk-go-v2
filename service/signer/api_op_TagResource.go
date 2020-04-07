@@ -13,7 +13,7 @@ import (
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon Resource Name (ARN) for the signing profile.
+	// The Amazon Resource Name (ARN) for the signing profile.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`
@@ -96,8 +96,8 @@ const opTagResource = "TagResource"
 //
 // Adds one or more tags to a signing profile. Tags are labels that you can
 // use to identify and organize your AWS resources. Each tag consists of a key
-// and an optional value. You specify the signing profile using its Amazon Resource
-// Name (ARN). You specify the tag by using a key-value pair.
+// and an optional value. To specify the signing profile, use its Amazon Resource
+// Name (ARN). To specify the tag, use a key-value pair.
 //
 //    // Example sending a request using TagResourceRequest.
 //    req := client.TagResourceRequest(params)

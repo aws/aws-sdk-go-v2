@@ -49,8 +49,9 @@ type CreateKeyPairOutput struct {
 	// you just created.
 	KeyPair *KeyPair `locationName:"keyPair" type:"structure"`
 
-	// An array of key-value pairs containing information about the results of your
-	// create key pair request.
+	// An array of objects that describe the result of the action, such as the status
+	// of the request, the time stamp of the request, and the resources affected
+	// by the request.
 	Operation *Operation `locationName:"operation" type:"structure"`
 
 	// A base64-encoded RSA private key.

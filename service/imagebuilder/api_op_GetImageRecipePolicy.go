@@ -13,7 +13,7 @@ import (
 type GetImageRecipePolicyInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the image recipe whose policy you wish
+	// The Amazon Resource Name (ARN) of the image recipe whose policy you want
 	// to retrieve.
 	//
 	// ImageRecipeArn is a required field

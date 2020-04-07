@@ -18,6 +18,8 @@ type UpdateRouteInput struct {
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
+	MeshOwner *string `location:"querystring" locationName:"meshOwner" min:"12" type:"string"`
+
 	// RouteName is a required field
 	RouteName *string `location:"uri" locationName:"routeName" min:"1" type:"string" required:"true"`
 
@@ -44,6 +46,9 @@ func (s *UpdateRouteInput) Validate() error {
 	}
 	if s.MeshName != nil && len(*s.MeshName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
+	}
+	if s.MeshOwner != nil && len(*s.MeshOwner) < 12 {
+		invalidParams.Add(aws.NewErrParamMinLen("MeshOwner", 12))
 	}
 
 	if s.RouteName == nil {
@@ -114,6 +119,12 @@ func (s UpdateRouteInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "virtualRouterName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MeshOwner != nil {
+		v := *s.MeshOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "meshOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

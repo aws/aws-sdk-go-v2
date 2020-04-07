@@ -51,6 +51,9 @@ type DescribeStateMachineForExecutionOutput struct {
 	// Definition is a required field
 	Definition *string `locationName:"definition" min:"1" type:"string" required:"true" sensitive:"true"`
 
+	// The LoggingConfiguration data type is used to set CloudWatch Logs options.
+	LoggingConfiguration *LoggingConfiguration `locationName:"loggingConfiguration" type:"structure"`
+
 	// The name of the state machine associated with the execution.
 	//
 	// Name is a required field
@@ -88,6 +91,8 @@ const opDescribeStateMachineForExecution = "DescribeStateMachineForExecution"
 //
 // This operation is eventually consistent. The results are best effort and
 // may not reflect very recent updates and changes.
+//
+// This API action is not supported by EXPRESS state machines.
 //
 //    // Example sending a request using DescribeStateMachineForExecutionRequest.
 //    req := client.DescribeStateMachineForExecutionRequest(params)

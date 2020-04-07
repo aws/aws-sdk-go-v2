@@ -230,6 +230,45 @@ func (s Backend) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object that represents the default properties for a backend.
+type BackendDefaults struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents a client policy.
+	ClientPolicy *Policy `locationName:"clientPolicy" type:"structure"`
+}
+
+// String returns the string representation
+func (s BackendDefaults) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BackendDefaults) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BackendDefaults"}
+	if s.ClientPolicy != nil {
+		if err := s.ClientPolicy.Validate(); err != nil {
+			invalidParams.AddNested("ClientPolicy", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BackendDefaults) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ClientPolicy != nil {
+		v := s.ClientPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "clientPolicy", v, metadata)
+	}
+	return nil
+}
+
 // An object that represents the DNS service discovery information for your
 // virtual node.
 type DnsServiceDiscovery struct {
@@ -484,7 +523,7 @@ func (s GrpcRetryPolicy) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// An object that represents a GRPC route type.
+// An object that represents a gRPC route type.
 type GrpcRoute struct {
 	_ struct{} `type:"structure"`
 
@@ -1132,7 +1171,7 @@ func (s HttpRetryPolicy) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// An object that represents an HTTP or HTTP2 route type.
+// An object that represents an HTTP or HTTP/2 route type.
 type HttpRoute struct {
 	_ struct{} `type:"structure"`
 
@@ -1422,6 +1461,10 @@ type Listener struct {
 	//
 	// PortMapping is a required field
 	PortMapping *PortMapping `locationName:"portMapping" type:"structure" required:"true"`
+
+	// An object that represents the Transport Layer Security (TLS) properties for
+	// a listener.
+	Tls *ListenerTls `locationName:"tls" type:"structure"`
 }
 
 // String returns the string representation
@@ -1446,6 +1489,11 @@ func (s *Listener) Validate() error {
 			invalidParams.AddNested("PortMapping", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.Tls != nil {
+		if err := s.Tls.Validate(); err != nil {
+			invalidParams.AddNested("Tls", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1466,6 +1514,222 @@ func (s Listener) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "portMapping", v, metadata)
+	}
+	if s.Tls != nil {
+		v := s.Tls
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "tls", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents the Transport Layer Security (TLS) properties for
+// a listener.
+type ListenerTls struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents a listener's Transport Layer Security (TLS) certificate.
+	//
+	// Certificate is a required field
+	Certificate *ListenerTlsCertificate `locationName:"certificate" type:"structure" required:"true"`
+
+	// Mode is a required field
+	Mode ListenerTlsMode `locationName:"mode" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s ListenerTls) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListenerTls) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListenerTls"}
+
+	if s.Certificate == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Certificate"))
+	}
+	if len(s.Mode) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Mode"))
+	}
+	if s.Certificate != nil {
+		if err := s.Certificate.Validate(); err != nil {
+			invalidParams.AddNested("Certificate", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListenerTls) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Certificate != nil {
+		v := s.Certificate
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "certificate", v, metadata)
+	}
+	if len(s.Mode) > 0 {
+		v := s.Mode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "mode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// An object that represents an AWS Certicate Manager (ACM) certificate.
+type ListenerTlsAcmCertificate struct {
+	_ struct{} `type:"structure"`
+
+	// CertificateArn is a required field
+	CertificateArn *string `locationName:"certificateArn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListenerTlsAcmCertificate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListenerTlsAcmCertificate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListenerTlsAcmCertificate"}
+
+	if s.CertificateArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListenerTlsAcmCertificate) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CertificateArn != nil {
+		v := *s.CertificateArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "certificateArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that represents a listener's Transport Layer Security (TLS) certificate.
+type ListenerTlsCertificate struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents an AWS Certicate Manager (ACM) certificate.
+	Acm *ListenerTlsAcmCertificate `locationName:"acm" type:"structure"`
+
+	// An object that represents a local file certificate. The certificate must
+	// meet specific requirements and you must have proxy authorization enabled.
+	// For more information, see Transport Layer Security (TLS) (https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites).
+	File *ListenerTlsFileCertificate `locationName:"file" type:"structure"`
+}
+
+// String returns the string representation
+func (s ListenerTlsCertificate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListenerTlsCertificate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListenerTlsCertificate"}
+	if s.Acm != nil {
+		if err := s.Acm.Validate(); err != nil {
+			invalidParams.AddNested("Acm", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.File != nil {
+		if err := s.File.Validate(); err != nil {
+			invalidParams.AddNested("File", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListenerTlsCertificate) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Acm != nil {
+		v := s.Acm
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "acm", v, metadata)
+	}
+	if s.File != nil {
+		v := s.File
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "file", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents a local file certificate. The certificate must
+// meet specific requirements and you must have proxy authorization enabled.
+// For more information, see Transport Layer Security (TLS) (https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites).
+type ListenerTlsFileCertificate struct {
+	_ struct{} `type:"structure"`
+
+	// CertificateChain is a required field
+	CertificateChain *string `locationName:"certificateChain" min:"1" type:"string" required:"true"`
+
+	// PrivateKey is a required field
+	PrivateKey *string `locationName:"privateKey" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListenerTlsFileCertificate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListenerTlsFileCertificate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListenerTlsFileCertificate"}
+
+	if s.CertificateChain == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CertificateChain"))
+	}
+	if s.CertificateChain != nil && len(*s.CertificateChain) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateChain", 1))
+	}
+
+	if s.PrivateKey == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PrivateKey"))
+	}
+	if s.PrivateKey != nil && len(*s.PrivateKey) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("PrivateKey", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListenerTlsFileCertificate) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CertificateChain != nil {
+		v := *s.CertificateChain
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "certificateChain", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PrivateKey != nil {
+		v := *s.PrivateKey
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "privateKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1629,6 +1893,12 @@ type MeshRef struct {
 
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
+
+	// MeshOwner is a required field
+	MeshOwner *string `locationName:"meshOwner" min:"12" type:"string" required:"true"`
+
+	// ResourceOwner is a required field
+	ResourceOwner *string `locationName:"resourceOwner" min:"12" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -1649,6 +1919,18 @@ func (s MeshRef) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MeshOwner != nil {
+		v := *s.MeshOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "meshOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceOwner != nil {
+		v := *s.ResourceOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1711,6 +1993,112 @@ func (s MeshStatus) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// An object that represents a client policy.
+type Policy struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents a Transport Layer Security (TLS) client policy.
+	Tls *PolicyTls `locationName:"tls" type:"structure"`
+}
+
+// String returns the string representation
+func (s Policy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Policy) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Policy"}
+	if s.Tls != nil {
+		if err := s.Tls.Validate(); err != nil {
+			invalidParams.AddNested("Tls", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Policy) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Tls != nil {
+		v := s.Tls
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "tls", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents a Transport Layer Security (TLS) client policy.
+type PolicyTls struct {
+	_ struct{} `type:"structure"`
+
+	Enforce *bool `locationName:"enforce" type:"boolean"`
+
+	Ports []int64 `locationName:"ports" type:"list"`
+
+	// An object that represents a Transport Layer Security (TLS) validation context.
+	//
+	// Validation is a required field
+	Validation *TlsValidationContext `locationName:"validation" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s PolicyTls) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PolicyTls) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PolicyTls"}
+
+	if s.Validation == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Validation"))
+	}
+	if s.Validation != nil {
+		if err := s.Validation.Validate(); err != nil {
+			invalidParams.AddNested("Validation", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PolicyTls) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Enforce != nil {
+		v := *s.Enforce
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enforce", protocol.BoolValue(v), metadata)
+	}
+	if s.Ports != nil {
+		v := s.Ports
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ports", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.Int64Value(v1))
+		}
+		ls0.End()
+
+	}
+	if s.Validation != nil {
+		v := s.Validation
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "validation", v, metadata)
 	}
 	return nil
 }
@@ -1781,6 +2169,12 @@ type ResourceMetadata struct {
 	// LastUpdatedAt is a required field
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" required:"true"`
 
+	// MeshOwner is a required field
+	MeshOwner *string `locationName:"meshOwner" min:"12" type:"string" required:"true"`
+
+	// ResourceOwner is a required field
+	ResourceOwner *string `locationName:"resourceOwner" min:"12" type:"string" required:"true"`
+
 	// Uid is a required field
 	Uid *string `locationName:"uid" type:"string" required:"true"`
 
@@ -1814,6 +2208,18 @@ func (s ResourceMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
 			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.MeshOwner != nil {
+		v := *s.MeshOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "meshOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceOwner != nil {
+		v := *s.ResourceOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Uid != nil {
 		v := *s.Uid
@@ -1915,6 +2321,12 @@ type RouteRef struct {
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
+	// MeshOwner is a required field
+	MeshOwner *string `locationName:"meshOwner" min:"12" type:"string" required:"true"`
+
+	// ResourceOwner is a required field
+	ResourceOwner *string `locationName:"resourceOwner" min:"12" type:"string" required:"true"`
+
 	// RouteName is a required field
 	RouteName *string `locationName:"routeName" min:"1" type:"string" required:"true"`
 
@@ -1941,6 +2353,18 @@ func (s RouteRef) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.MeshOwner != nil {
+		v := *s.MeshOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "meshOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceOwner != nil {
+		v := *s.ResourceOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.RouteName != nil {
 		v := *s.RouteName
 
@@ -1960,13 +2384,13 @@ func (s RouteRef) MarshalFields(e protocol.FieldEncoder) error {
 type RouteSpec struct {
 	_ struct{} `type:"structure"`
 
-	// An object that represents a GRPC route type.
+	// An object that represents a gRPC route type.
 	GrpcRoute *GrpcRoute `locationName:"grpcRoute" type:"structure"`
 
-	// An object that represents an HTTP or HTTP2 route type.
+	// An object that represents an HTTP or HTTP/2 route type.
 	Http2Route *HttpRoute `locationName:"http2Route" type:"structure"`
 
-	// An object that represents an HTTP or HTTP2 route type.
+	// An object that represents an HTTP or HTTP/2 route type.
 	HttpRoute *HttpRoute `locationName:"httpRoute" type:"structure"`
 
 	Priority *int64 `locationName:"priority" type:"integer"`
@@ -2276,6 +2700,198 @@ func (s TcpRouteAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object that represents a Transport Layer Security (TLS) validation context.
+type TlsValidationContext struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents a Transport Layer Security (TLS) validation context
+	// trust.
+	//
+	// Trust is a required field
+	Trust *TlsValidationContextTrust `locationName:"trust" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s TlsValidationContext) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TlsValidationContext) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TlsValidationContext"}
+
+	if s.Trust == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Trust"))
+	}
+	if s.Trust != nil {
+		if err := s.Trust.Validate(); err != nil {
+			invalidParams.AddNested("Trust", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TlsValidationContext) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Trust != nil {
+		v := s.Trust
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "trust", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents a TLS validation context trust for an AWS Certicate
+// Manager (ACM) certificate.
+type TlsValidationContextAcmTrust struct {
+	_ struct{} `type:"structure"`
+
+	// CertificateAuthorityArns is a required field
+	CertificateAuthorityArns []string `locationName:"certificateAuthorityArns" min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s TlsValidationContextAcmTrust) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TlsValidationContextAcmTrust) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TlsValidationContextAcmTrust"}
+
+	if s.CertificateAuthorityArns == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityArns"))
+	}
+	if s.CertificateAuthorityArns != nil && len(s.CertificateAuthorityArns) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArns", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TlsValidationContextAcmTrust) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CertificateAuthorityArns != nil {
+		v := s.CertificateAuthorityArns
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "certificateAuthorityArns", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// An object that represents a Transport Layer Security (TLS) validation context
+// trust for a local file.
+type TlsValidationContextFileTrust struct {
+	_ struct{} `type:"structure"`
+
+	// CertificateChain is a required field
+	CertificateChain *string `locationName:"certificateChain" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s TlsValidationContextFileTrust) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TlsValidationContextFileTrust) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TlsValidationContextFileTrust"}
+
+	if s.CertificateChain == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CertificateChain"))
+	}
+	if s.CertificateChain != nil && len(*s.CertificateChain) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateChain", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TlsValidationContextFileTrust) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CertificateChain != nil {
+		v := *s.CertificateChain
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "certificateChain", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that represents a Transport Layer Security (TLS) validation context
+// trust.
+type TlsValidationContextTrust struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents a TLS validation context trust for an AWS Certicate
+	// Manager (ACM) certificate.
+	Acm *TlsValidationContextAcmTrust `locationName:"acm" type:"structure"`
+
+	// An object that represents a Transport Layer Security (TLS) validation context
+	// trust for a local file.
+	File *TlsValidationContextFileTrust `locationName:"file" type:"structure"`
+}
+
+// String returns the string representation
+func (s TlsValidationContextTrust) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TlsValidationContextTrust) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TlsValidationContextTrust"}
+	if s.Acm != nil {
+		if err := s.Acm.Validate(); err != nil {
+			invalidParams.AddNested("Acm", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.File != nil {
+		if err := s.File.Validate(); err != nil {
+			invalidParams.AddNested("File", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TlsValidationContextTrust) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Acm != nil {
+		v := s.Acm
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "acm", v, metadata)
+	}
+	if s.File != nil {
+		v := s.File
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "file", v, metadata)
+	}
+	return nil
+}
+
 // An object that represents a virtual node returned by a describe operation.
 type VirtualNodeData struct {
 	_ struct{} `type:"structure"`
@@ -2352,6 +2968,12 @@ type VirtualNodeRef struct {
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
+	// MeshOwner is a required field
+	MeshOwner *string `locationName:"meshOwner" min:"12" type:"string" required:"true"`
+
+	// ResourceOwner is a required field
+	ResourceOwner *string `locationName:"resourceOwner" min:"12" type:"string" required:"true"`
+
 	// VirtualNodeName is a required field
 	VirtualNodeName *string `locationName:"virtualNodeName" min:"1" type:"string" required:"true"`
 }
@@ -2374,6 +2996,18 @@ func (s VirtualNodeRef) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MeshOwner != nil {
+		v := *s.MeshOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "meshOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceOwner != nil {
+		v := *s.ResourceOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VirtualNodeName != nil {
 		v := *s.VirtualNodeName
@@ -2429,6 +3063,9 @@ func (s VirtualNodeServiceProvider) MarshalFields(e protocol.FieldEncoder) error
 type VirtualNodeSpec struct {
 	_ struct{} `type:"structure"`
 
+	// An object that represents the default properties for a backend.
+	BackendDefaults *BackendDefaults `locationName:"backendDefaults" type:"structure"`
+
 	Backends []Backend `locationName:"backends" type:"list"`
 
 	Listeners []Listener `locationName:"listeners" type:"list"`
@@ -2449,6 +3086,11 @@ func (s VirtualNodeSpec) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VirtualNodeSpec) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "VirtualNodeSpec"}
+	if s.BackendDefaults != nil {
+		if err := s.BackendDefaults.Validate(); err != nil {
+			invalidParams.AddNested("BackendDefaults", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.Backends != nil {
 		for i, v := range s.Backends {
 			if err := v.Validate(); err != nil {
@@ -2482,6 +3124,12 @@ func (s *VirtualNodeSpec) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s VirtualNodeSpec) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BackendDefaults != nil {
+		v := s.BackendDefaults
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "backendDefaults", v, metadata)
+	}
 	if s.Backends != nil {
 		v := s.Backends
 
@@ -2666,6 +3314,12 @@ type VirtualRouterRef struct {
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
+	// MeshOwner is a required field
+	MeshOwner *string `locationName:"meshOwner" min:"12" type:"string" required:"true"`
+
+	// ResourceOwner is a required field
+	ResourceOwner *string `locationName:"resourceOwner" min:"12" type:"string" required:"true"`
+
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
 }
@@ -2688,6 +3342,18 @@ func (s VirtualRouterRef) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MeshOwner != nil {
+		v := *s.MeshOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "meshOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceOwner != nil {
+		v := *s.ResourceOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VirtualRouterName != nil {
 		v := *s.VirtualRouterName
@@ -2816,6 +3482,9 @@ func (s VirtualRouterStatus) MarshalFields(e protocol.FieldEncoder) error {
 type VirtualServiceBackend struct {
 	_ struct{} `type:"structure"`
 
+	// An object that represents a client policy.
+	ClientPolicy *Policy `locationName:"clientPolicy" type:"structure"`
+
 	// VirtualServiceName is a required field
 	VirtualServiceName *string `locationName:"virtualServiceName" type:"string" required:"true"`
 }
@@ -2832,6 +3501,11 @@ func (s *VirtualServiceBackend) Validate() error {
 	if s.VirtualServiceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VirtualServiceName"))
 	}
+	if s.ClientPolicy != nil {
+		if err := s.ClientPolicy.Validate(); err != nil {
+			invalidParams.AddNested("ClientPolicy", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2841,6 +3515,12 @@ func (s *VirtualServiceBackend) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s VirtualServiceBackend) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ClientPolicy != nil {
+		v := s.ClientPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "clientPolicy", v, metadata)
+	}
 	if s.VirtualServiceName != nil {
 		v := *s.VirtualServiceName
 
@@ -2979,6 +3659,12 @@ type VirtualServiceRef struct {
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
+	// MeshOwner is a required field
+	MeshOwner *string `locationName:"meshOwner" min:"12" type:"string" required:"true"`
+
+	// ResourceOwner is a required field
+	ResourceOwner *string `locationName:"resourceOwner" min:"12" type:"string" required:"true"`
+
 	// VirtualServiceName is a required field
 	VirtualServiceName *string `locationName:"virtualServiceName" type:"string" required:"true"`
 }
@@ -3001,6 +3687,18 @@ func (s VirtualServiceRef) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MeshOwner != nil {
+		v := *s.MeshOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "meshOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceOwner != nil {
+		v := *s.ResourceOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VirtualServiceName != nil {
 		v := *s.VirtualServiceName

@@ -19,6 +19,8 @@ type CreateVirtualRouterInput struct {
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
+	MeshOwner *string `location:"querystring" locationName:"meshOwner" min:"12" type:"string"`
+
 	// An object that represents the specification of a virtual router.
 	//
 	// Spec is a required field
@@ -44,6 +46,9 @@ func (s *CreateVirtualRouterInput) Validate() error {
 	}
 	if s.MeshName != nil && len(*s.MeshName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
+	}
+	if s.MeshOwner != nil && len(*s.MeshOwner) < 12 {
+		invalidParams.Add(aws.NewErrParamMinLen("MeshOwner", 12))
 	}
 
 	if s.Spec == nil {
@@ -121,6 +126,12 @@ func (s CreateVirtualRouterInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.MeshOwner != nil {
+		v := *s.MeshOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "meshOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	return nil
 }
 
@@ -162,6 +173,8 @@ const opCreateVirtualRouter = "CreateVirtualRouter"
 // Virtual routers handle traffic for one or more virtual services within your
 // mesh. After you create your virtual router, create and associate routes for
 // your virtual router that direct incoming requests to different virtual nodes.
+//
+// For more information about virtual routers, see Virtual Routers (https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html).
 //
 //    // Example sending a request using CreateVirtualRouterRequest.
 //    req := client.CreateVirtualRouterRequest(params)

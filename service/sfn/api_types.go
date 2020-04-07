@@ -57,6 +57,9 @@ type ActivityListItem struct {
 	//
 	//    * control characters (U+0000-001F, U+007F-009F)
 	//
+	// To enable logging with CloudWatch Logs, the name should only contain 0-9,
+	// A-Z, a-z, - and _.
+	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 }
@@ -213,7 +216,7 @@ func (s ExecutionFailedEventDetails) String() string {
 type ExecutionListItem struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) that identifies the execution.
+	// The Amazon Resource Name (ARN) that id entifies the execution.
 	//
 	// ExecutionArn is a required field
 	ExecutionArn *string `locationName:"executionArn" min:"1" type:"string" required:"true"`
@@ -231,6 +234,9 @@ type ExecutionListItem struct {
 	//    * special characters " # % \ ^ | ~ ` $ & , ; : /
 	//
 	//    * control characters (U+0000-001F, U+007F-009F)
+	//
+	// To enable logging with CloudWatch Logs, the name should only contain 0-9,
+	// A-Z, a-z, - and _.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
@@ -563,15 +569,16 @@ func (s *LogDestination) Validate() error {
 	return nil
 }
 
+// The LoggingConfiguration data type is used to set CloudWatch Logs options.
 type LoggingConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// An object that describes where your execution history events will be logged.
-	// Limited to size 1. Required, if your log level is not set to OFF.
+	// An array of objects that describes where your execution history events will
+	// be logged. Limited to size 1. Required, if your log level is not set to OFF.
 	Destinations []LogDestination `locationName:"destinations" type:"list"`
 
-	// Determines whether execution history data is included in your log. When set
-	// to FALSE, data is excluded.
+	// Determines whether execution data is included in your log. When set to FALSE,
+	// data is excluded.
 	IncludeExecutionData *bool `locationName:"includeExecutionData" type:"boolean"`
 
 	// Defines which category of execution history events are logged.
@@ -665,6 +672,9 @@ type StateExitedEventDetails struct {
 	//
 	//    * control characters (U+0000-001F, U+007F-009F)
 	//
+	// To enable logging with CloudWatch Logs, the name should only contain 0-9,
+	// A-Z, a-z, - and _.
+	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
@@ -699,6 +709,9 @@ type StateMachineListItem struct {
 	//    * special characters " # % \ ^ | ~ ` $ & , ; : /
 	//
 	//    * control characters (U+0000-001F, U+007F-009F)
+	//
+	// To enable logging with CloudWatch Logs, the name should only contain 0-9,
+	// A-Z, a-z, - and _.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`

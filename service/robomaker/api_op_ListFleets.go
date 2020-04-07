@@ -20,12 +20,11 @@ type ListFleetsInput struct {
 	// value of the filtered item. You can use up to three filters.
 	Filters []Filter `locationName:"filters" min:"1" type:"list"`
 
-	// The maximum number of deployment job results returned by ListFleets in paginated
-	// output. When this parameter is used, ListFleets only returns maxResults results
-	// in a single page along with a nextToken response element. The remaining results
+	// When this parameter is used, ListFleets only returns maxResults results in
+	// a single page along with a nextToken response element. The remaining results
 	// of the initial request can be seen by sending another ListFleets request
-	// with the returned nextToken value. This value can be between 1 and 100. If
-	// this parameter is not used, then ListFleets returns up to 100 results and
+	// with the returned nextToken value. This value can be between 1 and 200. If
+	// this parameter is not used, then ListFleets returns up to 200 results and
 	// a nextToken value if applicable.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 

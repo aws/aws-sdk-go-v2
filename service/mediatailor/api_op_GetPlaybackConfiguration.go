@@ -75,6 +75,8 @@ type GetPlaybackConfigurationOutput struct {
 	// The identifier for the playback configuration.
 	Name *string `type:"string"`
 
+	PersonalizationThresholdSeconds *int64 `min:"1" type:"integer"`
+
 	// The Amazon Resource Name (ARN) for the playback configuration.
 	PlaybackConfigurationArn *string `type:"string"`
 
@@ -150,6 +152,12 @@ func (s GetPlaybackConfigurationOutput) MarshalFields(e protocol.FieldEncoder) e
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PersonalizationThresholdSeconds != nil {
+		v := *s.PersonalizationThresholdSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PersonalizationThresholdSeconds", protocol.Int64Value(v), metadata)
 	}
 	if s.PlaybackConfigurationArn != nil {
 		v := *s.PlaybackConfigurationArn

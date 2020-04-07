@@ -4,6 +4,7 @@ package s3control
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -59,6 +60,9 @@ type CreateJobInput struct {
 	//
 	// RoleArn is a required field
 	RoleArn *string `min:"1" type:"string" required:"true"`
+
+	// An optional set of tags to associate with the job when it is created.
+	Tags []S3Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -119,6 +123,13 @@ func (s *CreateJobInput) Validate() error {
 	if s.Report != nil {
 		if err := s.Report.Validate(); err != nil {
 			invalidParams.AddNested("Report", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -185,6 +196,18 @@ func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 
 			metadata := protocol.Metadata{}
 			e.SetValue(protocol.BodyTarget, "RoleArn", protocol.StringValue(v), metadata)
+		}
+		if s.Tags != nil {
+			v := s.Tags
+
+			metadata := protocol.Metadata{}
+			ls0 := e.List(protocol.BodyTarget, "Tags", metadata)
+			ls0.Start()
+			for _, v1 := range v {
+				ls0.ListAddFields(v1)
+			}
+			ls0.End()
+
 		}
 		return nil
 	}), protocol.Metadata{XMLNamespaceURI: "http://awss3control.amazonaws.com/doc/2018-08-20/"})

@@ -73,7 +73,8 @@ const opInferRxNorm = "InferRxNorm"
 //
 // InferRxNorm detects medications as entities listed in a patient record and
 // links to the normalized concept identifiers in the RxNorm database from the
-// National Library of Medicine.
+// National Library of Medicine. Amazon Comprehend Medical only detects medical
+// entities in English language texts.
 //
 //    // Example sending a request using InferRxNormRequest.
 //    req := client.InferRxNormRequest(params)

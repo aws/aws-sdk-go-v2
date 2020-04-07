@@ -112,7 +112,7 @@ const opCreateRoom = "CreateRoom"
 // CreateRoomRequest returns a request value for making API operation for
 // Amazon Chime.
 //
-// Creates a chat room for the specified Amazon Chime account.
+// Creates a chat room for the specified Amazon Chime Enterprise account.
 //
 //    // Example sending a request using CreateRoomRequest.
 //    req := client.CreateRoomRequest(params)

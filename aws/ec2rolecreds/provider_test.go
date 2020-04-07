@@ -2,6 +2,7 @@ package ec2rolecreds_test
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
@@ -59,7 +60,7 @@ func TestProvider(t *testing.T) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL + "/latest")
 
-	p := ec2rolecreds.NewProvider(ec2metadata.New(cfg))
+	p := ec2rolecreds.New(ec2metadata.New(cfg))
 
 	creds, err := p.Retrieve(context.Background())
 	if err != nil {
@@ -91,23 +92,27 @@ func TestProvider_FailAssume(t *testing.T) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL + "/latest")
 
-	p := ec2rolecreds.NewProvider(ec2metadata.New(cfg))
+	p := ec2rolecreds.New(ec2metadata.New(cfg))
 
 	creds, err := p.Retrieve(context.Background())
 	if err == nil {
 		t.Fatalf("expect error, got none")
 	}
 
-	e := err.(awserr.Error)
-	if e, a := "ErrorCode", e.Code(); e != a {
+	var aerr awserr.Error
+	if !errors.As(err, &aerr) {
+		t.Fatalf("expect %T error, got %v", err, aerr)
+	}
+	if e, a := "ErrorCode", aerr.Code(); e != a {
 		t.Errorf("expect %v code, got %v", e, a)
 	}
-	if e, a := "ErrorMsg", e.Message(); e != a {
+	if e, a := "ErrorMsg", aerr.Message(); e != a {
 		t.Errorf("expect %v message, got %v", e, a)
 	}
 
-	if err := e.OrigErr(); err != nil {
-		t.Fatalf("expect no error, got %v", err)
+	nestedErr := errors.Unwrap(aerr)
+	if nestedErr != nil {
+		t.Fatalf("expect no nested error, got %v", err)
 	}
 
 	if e, a := "", creds.AccessKeyID; e != a {
@@ -131,7 +136,7 @@ func TestProvider_IsExpired(t *testing.T) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL + "/latest")
 
-	p := ec2rolecreds.NewProvider(ec2metadata.New(cfg))
+	p := ec2rolecreds.New(ec2metadata.New(cfg))
 
 	sdk.NowTime = func() time.Time {
 		return time.Date(2014, 12, 16, 0, 55, 37, 0, time.UTC)
@@ -164,8 +169,9 @@ func TestProvider_ExpiryWindowIsExpired(t *testing.T) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL + "/latest")
 
-	p := ec2rolecreds.NewProvider(ec2metadata.New(cfg))
-	p.ExpiryWindow = time.Hour
+	p := ec2rolecreds.New(ec2metadata.New(cfg), func(options *ec2rolecreds.ProviderOptions) {
+		options.ExpiryWindow = time.Hour
+	})
 
 	sdk.NowTime = func() time.Time {
 		return time.Date(2014, 12, 16, 0, 40, 37, 0, time.UTC)
@@ -195,7 +201,7 @@ func BenchmarkProvider(b *testing.B) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL + "/latest")
 
-	p := ec2rolecreds.NewProvider(ec2metadata.New(cfg))
+	p := ec2rolecreds.New(ec2metadata.New(cfg))
 
 	if _, err := p.Retrieve(context.Background()); err != nil {
 		b.Fatal(err)

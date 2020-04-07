@@ -18,7 +18,7 @@ type DescribeCertificatesInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
-	// the vlue specified by MaxRecords.
+	// the value specified by MaxRecords.
 	Marker *string `type:"string"`
 
 	// The maximum number of records to include in the response. If more records

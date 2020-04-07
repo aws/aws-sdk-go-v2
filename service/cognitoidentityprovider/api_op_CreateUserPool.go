@@ -98,6 +98,12 @@ type CreateUserPoolInput struct {
 	// when a user signs up.
 	UsernameAttributes []UsernameAttributeType `type:"list"`
 
+	// You can choose to set case sensitivity on the username input for the selected
+	// sign-in option. For example, when this is set to False, users will be able
+	// to sign in using either "username" or "Username". This configuration is immutable
+	// once it has been set. For more information, see .
+	UsernameConfiguration *UsernameConfigurationType `type:"structure"`
+
 	// The template for the verification message that the user sees when the app
 	// requests permission to access the user's information.
 	VerificationMessageTemplate *VerificationMessageTemplateType `type:"structure"`
@@ -173,6 +179,11 @@ func (s *CreateUserPoolInput) Validate() error {
 	if s.UserPoolAddOns != nil {
 		if err := s.UserPoolAddOns.Validate(); err != nil {
 			invalidParams.AddNested("UserPoolAddOns", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.UsernameConfiguration != nil {
+		if err := s.UsernameConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("UsernameConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.VerificationMessageTemplate != nil {

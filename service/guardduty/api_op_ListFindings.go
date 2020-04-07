@@ -45,6 +45,8 @@ type ListFindingsInput struct {
 	//
 	//    * resource.instanceDetails.instanceId
 	//
+	//    * resource.instanceDetails.outpostArn
+	//
 	//    * resource.instanceDetails.networkInterfaces.ipv6Addresses
 	//
 	//    * resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
@@ -94,6 +96,8 @@ type ListFindingsInput struct {
 	//    * service.action.networkConnectionAction.localPortDetails.port
 	//
 	//    * service.action.networkConnectionAction.protocol
+	//
+	//    * service.action.networkConnectionAction.localIpDetails.ipAddressV4
 	//
 	//    * service.action.networkConnectionAction.remoteIpDetails.city.cityName
 	//

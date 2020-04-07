@@ -23,8 +23,7 @@ type DescribeLDAPSSettingsInput struct {
 	// The type of next token used for pagination.
 	NextToken *string `type:"string"`
 
-	// The type of LDAP security the customer wants to enable, either server or
-	// client. Currently supports only Client, (the default).
+	// The type of LDAP security to enable. Currently only the value Client is supported.
 	Type LDAPSType `type:"string" enum:"true"`
 }
 

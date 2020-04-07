@@ -13,9 +13,13 @@ import (
 type GetMinuteUsageInput struct {
 	_ struct{} `type:"structure"`
 
+	// The month being requested, with a value of 1-12.
+	//
 	// Month is a required field
 	Month *int64 `locationName:"month" type:"integer" required:"true"`
 
+	// The year being requested, in the format of YYYY.
+	//
 	// Year is a required field
 	Year *int64 `locationName:"year" type:"integer" required:"true"`
 }
@@ -65,14 +69,21 @@ func (s GetMinuteUsageInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetMinuteUsageOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Estimated number of minutes remaining for an account, specific to the month
+	// being requested.
 	EstimatedMinutesRemaining *int64 `locationName:"estimatedMinutesRemaining" type:"integer"`
 
+	// Returns whether or not an account has signed up for the reserved minutes
+	// pricing plan, specific to the month being requested.
 	IsReservedMinutesCustomer *bool `locationName:"isReservedMinutesCustomer" type:"boolean"`
 
+	// Total number of reserved minutes allocated, specific to the month being requested.
 	TotalReservedMinuteAllocation *int64 `locationName:"totalReservedMinuteAllocation" type:"integer"`
 
+	// Total scheduled minutes for an account, specific to the month being requested.
 	TotalScheduledMinutes *int64 `locationName:"totalScheduledMinutes" type:"integer"`
 
+	// Upcoming minutes scheduled for an account, specific to the month being requested.
 	UpcomingMinutesScheduled *int64 `locationName:"upcomingMinutesScheduled" type:"integer"`
 }
 

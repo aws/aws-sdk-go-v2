@@ -3,6 +3,7 @@ package sqs_test
 import (
 	"bytes"
 	"context"
+	"errors"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -10,7 +11,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
@@ -60,10 +60,12 @@ func TestSendMessageChecksumInvalid(t *testing.T) {
 		t.Fatalf("expect error, got nil")
 	}
 
-	if e, a := "InvalidChecksum", err.(awserr.Error).Code(); e != a {
-		t.Errorf("expect %v, got %v", e, a)
+	var ce *sqs.InvalidChecksumError
+	if !errors.As(err, &ce) {
+		t.Fatalf("expect %T error, got %v", ce, err)
 	}
-	if e, a := err.(awserr.Error).Message(), "expected MD5 checksum '000', got '098f6bcd4621d373cade4e832627b4f6'"; !strings.Contains(a, e) {
+	expectReason := "expected MD5 checksum '000', got '098f6bcd4621d373cade4e832627b4f6'"
+	if e, a := expectReason, ce.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v to be in %v, was not", e, a)
 	}
 }
@@ -105,10 +107,12 @@ func TestSendMessageChecksumNoInput(t *testing.T) {
 		t.Fatalf("expect error, got nil")
 	}
 
-	if e, a := "InvalidChecksum", err.(awserr.Error).Code(); e != a {
-		t.Errorf("expect %v, got %v", e, a)
+	var ce *sqs.InvalidChecksumError
+	if !errors.As(err, &ce) {
+		t.Fatalf("expect %T error, got %v", ce, err)
 	}
-	if e, a := err.(awserr.Error).Message(), "cannot compute checksum. missing body"; !strings.Contains(a, e) {
+	expectReason := "cannot compute checksum. missing body"
+	if e, a := expectReason, ce.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v to be in %v, was not", e, a)
 	}
 }
@@ -127,10 +131,12 @@ func TestSendMessageChecksumNoOutput(t *testing.T) {
 		t.Fatalf("expect error, got nil")
 	}
 
-	if e, a := "InvalidChecksum", err.(awserr.Error).Code(); e != a {
-		t.Errorf("expect %v, got %v", e, a)
+	var ce *sqs.InvalidChecksumError
+	if !errors.As(err, &ce) {
+		t.Fatalf("expect %T error, got %v", ce, err)
 	}
-	if e, a := err.(awserr.Error).Message(), "cannot verify checksum. missing response MD5"; !strings.Contains(a, e) {
+	expectReason := "cannot verify checksum. missing response MD5"
+	if e, a := expectReason, ce.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v to be in %v, was not", e, a)
 	}
 }
@@ -177,10 +183,12 @@ func TestRecieveMessageChecksumInvalid(t *testing.T) {
 		t.Fatalf("expect error, got nil")
 	}
 
-	if e, a := "InvalidChecksum", err.(awserr.Error).Code(); e != a {
-		t.Errorf("expect %v, got %v", e, a)
+	var ce *sqs.InvalidChecksumError
+	if !errors.As(err, &ce) {
+		t.Fatalf("expect %T error, got %v", ce, err)
 	}
-	if e, a := err.(awserr.Error).Message(), "invalid messages: 123, 456"; !strings.Contains(a, e) {
+	expectReason := "invalid messages: 123, 456"
+	if e, a := expectReason, ce.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v to be in %v, was not", e, a)
 	}
 }
@@ -267,10 +275,12 @@ func TestSendMessageBatchChecksumInvalid(t *testing.T) {
 		t.Fatalf("expect error, got nil")
 	}
 
-	if e, a := "InvalidChecksum", err.(awserr.Error).Code(); e != a {
-		t.Errorf("expect %v, got %v", e, a)
+	var ce *sqs.InvalidChecksumError
+	if !errors.As(err, &ce) {
+		t.Fatalf("expect %T error, got %v", ce, err)
 	}
-	if e, a := err.(awserr.Error).Message(), "invalid messages: 456, 789"; !strings.Contains(a, e) {
+	expectReason := "invalid messages: 456, 789"
+	if e, a := expectReason, ce.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v to be in %v, was not", e, a)
 	}
 }

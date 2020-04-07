@@ -13,12 +13,14 @@ import (
 type DescribeStandardsControlsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of compliance standard controls to return.
+	// The maximum number of security standard controls to return.
 	MaxResults *int64 `location:"querystring" locationName:"MaxResults" min:"1" type:"integer"`
 
-	// For requests to get the next page of results, the pagination token that was
-	// returned with the previous set of results. The initial request does not include
-	// a pagination token.
+	// The token that is required for pagination. On your first call to the DescribeStandardsControls
+	// operation, set the value of this parameter to NULL.
+	//
+	// For subsequent calls to the operation, to continue listing data, set the
+	// value of this parameter to the value returned from the previous response.
 	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
 
 	// The ARN of a resource that represents your subscription to a supported standard.
@@ -77,12 +79,10 @@ func (s DescribeStandardsControlsInput) MarshalFields(e protocol.FieldEncoder) e
 type DescribeStandardsControlsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of compliance standards controls.
+	// A list of security standards controls.
 	Controls []StandardsControl `type:"list"`
 
-	// If there are more compliance standards control remaining in the results,
-	// then this is the pagination token to use to request the next page of compliance
-	// standard controls.
+	// The pagination token to use to request the next page of results.
 	NextToken *string `type:"string"`
 }
 
@@ -119,7 +119,7 @@ const opDescribeStandardsControls = "DescribeStandardsControls"
 // DescribeStandardsControlsRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Returns a list of compliance standards controls.
+// Returns a list of security standards controls.
 //
 // For each control, the results include information about whether it is currently
 // enabled, the severity, and a link to remediation information.
@@ -137,6 +137,12 @@ func (c *Client) DescribeStandardsControlsRequest(input *DescribeStandardsContro
 		Name:       opDescribeStandardsControls,
 		HTTPMethod: "GET",
 		HTTPPath:   "/standards/controls/{StandardsSubscriptionArn+}",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -169,6 +175,53 @@ func (r DescribeStandardsControlsRequest) Send(ctx context.Context) (*DescribeSt
 	}
 
 	return resp, nil
+}
+
+// NewDescribeStandardsControlsRequestPaginator returns a paginator for DescribeStandardsControls.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.DescribeStandardsControlsRequest(input)
+//   p := securityhub.NewDescribeStandardsControlsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewDescribeStandardsControlsPaginator(req DescribeStandardsControlsRequest) DescribeStandardsControlsPaginator {
+	return DescribeStandardsControlsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *DescribeStandardsControlsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeStandardsControlsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeStandardsControlsPaginator struct {
+	aws.Pager
+}
+
+func (p *DescribeStandardsControlsPaginator) CurrentPage() *DescribeStandardsControlsOutput {
+	return p.Pager.CurrentPage().(*DescribeStandardsControlsOutput)
 }
 
 // DescribeStandardsControlsResponse is the response type for the

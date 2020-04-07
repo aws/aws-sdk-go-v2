@@ -13,12 +13,12 @@ import (
 type DeleteDBInstanceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The DB instance identifier for the DB instance to be deleted. This parameter
-	// isn't case sensitive.
+	// The instance identifier for the instance to be deleted. This parameter isn't
+	// case sensitive.
 	//
 	// Constraints:
 	//
-	//    * Must match the name of an existing DB instance.
+	//    * Must match the name of an existing instance.
 	//
 	// DBInstanceIdentifier is a required field
 	DBInstanceIdentifier *string `type:"string" required:"true"`
@@ -46,7 +46,7 @@ func (s *DeleteDBInstanceInput) Validate() error {
 type DeleteDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB instance.
+	// Detailed information about an instance.
 	DBInstance *DBInstance `type:"structure"`
 }
 
@@ -60,7 +60,7 @@ const opDeleteDBInstance = "DeleteDBInstance"
 // DeleteDBInstanceRequest returns a request value for making API operation for
 // Amazon DocumentDB with MongoDB compatibility.
 //
-// Deletes a previously provisioned DB instance.
+// Deletes a previously provisioned instance.
 //
 //    // Example sending a request using DeleteDBInstanceRequest.
 //    req := client.DeleteDBInstanceRequest(params)

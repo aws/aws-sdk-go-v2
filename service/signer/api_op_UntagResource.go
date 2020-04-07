@@ -13,12 +13,12 @@ import (
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon Resource Name (ARN) for the signing profile .
+	// The Amazon Resource Name (ARN) for the signing profile.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`
 
-	// A list of tag keys to be removed from the signing profile .
+	// A list of tag keys to be removed from the signing profile.
 	//
 	// TagKeys is a required field
 	TagKeys []string `location:"querystring" locationName:"tagKeys" min:"1" type:"list" required:"true"`
@@ -94,8 +94,8 @@ const opUntagResource = "UntagResource"
 // UntagResourceRequest returns a request value for making API operation for
 // AWS Signer.
 //
-// Remove one or more tags from a signing profile. Specify a list of tag keys
-// to remove the tags.
+// Removes one or more tags from a signing profile. To remove the tags, specify
+// a list of tag keys.
 //
 //    // Example sending a request using UntagResourceRequest.
 //    req := client.UntagResourceRequest(params)

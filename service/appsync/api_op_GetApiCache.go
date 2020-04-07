@@ -56,6 +56,7 @@ func (s GetApiCacheInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetApiCacheOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The ApiCache object.
 	ApiCache *ApiCache `locationName:"apiCache" type:"structure"`
 }
 
