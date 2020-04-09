@@ -26,13 +26,12 @@ const (
 
 // SerializationError provides a generic request serialization error
 type SerializationError struct {
-	Reason string // provides more context of error caused
-	Err    error  // original error
+	Err error // original error
 }
 
 // Error returns a formatted error for SerializationError
 func (e *SerializationError) Error() string {
-	return fmt.Sprintf("serialization failed: %v %v", e.Reason, e.Err)
+	return fmt.Sprintf("serialization failed: %v", e.Err)
 }
 
 // Unwrap returns the underlying Error in DeserializationError
@@ -41,13 +40,12 @@ func (e *SerializationError) Unwrap() error { return e.Err }
 // DeserializationError provides a HTTP transport specific
 // request deserialization error
 type DeserializationError struct {
-	Reason string // provides more context of error caused
-	Err    error  //  original error
+	Err error //  original error
 }
 
 // Error returns a formatted error for DeserializationError
 func (e *DeserializationError) Error() string {
-	return fmt.Sprintf("deserialization failed, %v, %v", e.Reason, e.Err)
+	return fmt.Sprintf("deserialization failed, %v", e.Err)
 }
 
 // Unwrap returns the underlying Error in DeserializationError

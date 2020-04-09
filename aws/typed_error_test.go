@@ -78,7 +78,7 @@ func TestHTTPDeserializationError(t *testing.T) {
 				}
 				var e *aws.DeserializationError
 				if errors.As(r.Error, &e) {
-					if e, a := c.responseBody, e.Reason; !strings.Contains(a, e) {
+					if e, a := c.responseBody, e.Unwrap().Error(); !strings.Contains(a, e) {
 						t.Fatalf("Expected response body to contain %v, got %v", e, a)
 					}
 				} else {
@@ -105,8 +105,8 @@ func (u *mockUnmarshaler) unmarshalOperation(r *aws.Request) {
 		snapshot := make([]byte, 1024)
 		ringbuffer.Read(snapshot)
 		r.Error = &aws.DeserializationError{
-			Reason: fmt.Sprintf("Here's a snapshot of response being deserialized: %s", snapshot), // Additional context
-			Err:    err,
+			Err: fmt.Errorf("unable to deserialize Json payload: %w.\n"+
+				"Here's a snapshot of response being deserialized: %s", err, snapshot),
 		}
 	}
 }
