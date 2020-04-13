@@ -44,7 +44,7 @@ func TestComputePayloadHashMiddleware(t *testing.T) {
 
 	for i, tt := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			c := &ComputePayloadHashMiddleware{}
+			c := &ComputePayloadSHA256Middleware{}
 
 			next := finalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 				value, ok := ctx.Value(payloadHashKey{}).(string)
@@ -101,7 +101,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 	for i, tt := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			c := &SignHTTPRequestMiddleware{
-				Signer: mockSigner(func(ctx context.Context, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error {
+				signer: mockSigner(func(ctx context.Context, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error {
 					if e, a := tt.hash, payloadHash; e != a {
 						t.Errorf("expected %v, got %v", e, a)
 					}
@@ -172,6 +172,6 @@ func (f finalizeHandlerFunc) HandleFinalize(ctx context.Context, in middleware.F
 }
 
 var (
-	_ middleware.FinalizeMiddleware = &ComputePayloadHashMiddleware{}
+	_ middleware.FinalizeMiddleware = &ComputePayloadSHA256Middleware{}
 	_ middleware.FinalizeMiddleware = &SignHTTPRequestMiddleware{}
 )

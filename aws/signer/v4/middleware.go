@@ -13,45 +13,33 @@ import (
 	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
 )
 
-const errPayloadNotSeekable = "request payload is not seekable"
-
 // HashComputationError indicates an error occurred while computing the signing hash
 type HashComputationError struct {
-	cause string
-	err   error
+	Err error
 }
 
 // Error is the error message
 func (e *HashComputationError) Error() string {
-	msg := "failed to compute payload hash"
-	if len(e.cause) == 0 {
-		return msg
-	}
-	return fmt.Sprintf("%s: %s", msg, e.cause)
+	return fmt.Sprintf("failed to compute payload hash: %v", e.Err)
 }
 
 // Unwrap returns the underlying error if one is set
 func (e *HashComputationError) Unwrap() error {
-	return e.err
+	return e.Err
 }
 
 // SigningError indicates an error condition occurred while performing SigV4 signing
 type SigningError struct {
-	cause string
-	err   error
+	Err error
 }
 
 func (e *SigningError) Error() string {
-	msg := "failed to sign request"
-	if len(e.cause) == 0 {
-		return msg
-	}
-	return fmt.Sprintf("%s: %s", msg, e.cause)
+	return fmt.Sprintf("failed to sign request: %v", e.Err)
 }
 
 // Unwrap returns the underlying error cause
 func (e *SigningError) Unwrap() error {
-	return e.err
+	return e.Err
 }
 
 // UnsignedPayloadMiddleware sets the SigV4 request payload hash to unsigned
@@ -59,49 +47,53 @@ type UnsignedPayloadMiddleware struct{}
 
 // ID returns the UnsignedPayloadMiddleware identifier
 func (m *UnsignedPayloadMiddleware) ID() string {
-	return "SigV4 unsigned payload middleware"
+	return "SigV4UnsignedPayloadMiddleware"
 }
 
 // HandleFinalize sets the payload hash to be an unsigned payload
-func (m *UnsignedPayloadMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
+func (m *UnsignedPayloadMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
 	ctx = SetPayloadHash(ctx, v4Internal.UnsignedPayload)
 	return next.HandleFinalize(ctx, in)
 }
 
-// ComputePayloadHashMiddleware computes sha256 payload hash to sign
-type ComputePayloadHashMiddleware struct{}
+// ComputePayloadSHA256Middleware computes sha256 payload hash to sign
+type ComputePayloadSHA256Middleware struct{}
 
 // ID is the middleware name
-func (m *ComputePayloadHashMiddleware) ID() string {
-	return "SignV4 Payload Hash Middleware"
+func (m *ComputePayloadSHA256Middleware) ID() string {
+	return "ComputePayloadSHA256Middleware"
 }
 
 // HandleFinalize compute the payload hash for the request payload
-func (m *ComputePayloadHashMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
+func (m *ComputePayloadSHA256Middleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
 	req, ok := in.Request.(*smithyHTTP.Request)
 	if !ok {
-		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{cause: fmt.Sprintf("unexpected request middleware type %T", in.Request)}
+		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{Err: fmt.Errorf("unexpected request middleware type %T", in.Request)}
 	}
 
 	body, ok := req.Stream.(io.ReadSeeker)
 	if !ok {
-		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{cause: errPayloadNotSeekable}
+		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{Err: fmt.Errorf("stream does not implement io.Seeker, got %T", req.Stream)}
 	}
 
 	_, err = body.Seek(0, io.SeekStart)
 	if err != nil {
-		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{err: err}
+		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{Err: fmt.Errorf("failed to seek body to start, %w", err)}
 	}
 
 	hash := sha256.New()
 	_, err = io.Copy(hash, body)
 	if err != nil {
-		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{err: err}
+		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{Err: fmt.Errorf("failed to compute payload hash, %w", err)}
 	}
 
 	_, err = body.Seek(0, io.SeekStart)
 	if err != nil {
-		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{err: err}
+		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{Err: fmt.Errorf("failed to seek body to start, %w", err)}
 	}
 
 	ctx = SetPayloadHash(ctx, hex.EncodeToString(hash.Sum(nil)))
@@ -111,35 +103,37 @@ func (m *ComputePayloadHashMiddleware) HandleFinalize(ctx context.Context, in mi
 
 // SignHTTPRequestMiddleware is a `FinalizeMiddleware` implementation for SigV4 HTTP Signing
 type SignHTTPRequestMiddleware struct {
-	Signer HTTPSigner
+	signer HTTPSigner
 }
 
 // NewSignHTTPRequestMiddleware constructs a SignHTTPRequestMiddleware using the given Signer for signing requests
 func NewSignHTTPRequestMiddleware(signer HTTPSigner) *SignHTTPRequestMiddleware {
-	return &SignHTTPRequestMiddleware{Signer: signer}
+	return &SignHTTPRequestMiddleware{signer: signer}
 }
 
 // ID is the SignHTTPRequestMiddleware identifier
 func (s *SignHTTPRequestMiddleware) ID() string {
-	return "SigV4 HTTP Signer"
+	return "SigV4SignHTTPRequestMiddleware"
 }
 
 // HandleFinalize will take the provided input and sign the request using the SigV4 authentication scheme
-func (s *SignHTTPRequestMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
+func (s *SignHTTPRequestMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
 	req, ok := in.Request.(*smithyHTTP.Request)
 	if !ok {
-		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &SigningError{cause: fmt.Sprintf("unexpected request middleware type %T", in.Request)}
+		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &SigningError{Err: fmt.Errorf("unexpected request middleware type %T", in.Request)}
 	}
 
 	signingMetadata := GetSigningMetadata(ctx)
 	payloadHash := GetPayloadHash(ctx)
 	if len(payloadHash) == 0 {
-		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &SigningError{cause: "computed payload hash missing from context"}
+		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &SigningError{Err: fmt.Errorf("computed payload hash missing from context")}
 	}
 
-	err = s.Signer.SignHTTP(ctx, req.Request, payloadHash, signingMetadata.SigningName, signingMetadata.SigningRegion, sdk.NowTime())
+	err = s.signer.SignHTTP(ctx, req.Request, payloadHash, signingMetadata.SigningName, signingMetadata.SigningRegion, sdk.NowTime())
 	if err != nil {
-		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &SigningError{err: err}
+		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &SigningError{Err: fmt.Errorf("failed to sign http request, %w", err)}
 	}
 
 	return next.HandleFinalize(ctx, in)
@@ -156,15 +150,9 @@ type signingMetadataKey struct{}
 
 // GetSigningMetadata retrieves the SigningMetadata from context. If there is no SigningMetadata attached to the context
 // an zero-value SigningMetadata will be returned.
-func GetSigningMetadata(ctx context.Context) SigningMetadata {
-	value := ctx.Value(signingMetadataKey{})
-
-	sm, ok := value.(SigningMetadata)
-	if !ok {
-		return SigningMetadata{}
-	}
-
-	return sm
+func GetSigningMetadata(ctx context.Context) (v SigningMetadata) {
+	v, _ = ctx.Value(signingMetadataKey{}).(SigningMetadata)
+	return v
 }
 
 // SetSigningMetadata adds the provided metadata to the context
@@ -176,12 +164,9 @@ func SetSigningMetadata(ctx context.Context, metadata SigningMetadata) context.C
 type payloadHashKey struct{}
 
 // GetPayloadHash retrieves the payload hash to use for signing
-func GetPayloadHash(ctx context.Context) string {
-	payloadHash, ok := ctx.Value(payloadHashKey{}).(string)
-	if !ok {
-		return ""
-	}
-	return payloadHash
+func GetPayloadHash(ctx context.Context) (v string) {
+	v, _ = ctx.Value(payloadHashKey{}).(string)
+	return v
 }
 
 // SetPayloadHash sets the payload hash to be used for signing the request
