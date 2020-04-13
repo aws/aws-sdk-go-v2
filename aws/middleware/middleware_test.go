@@ -12,9 +12,9 @@ import (
 	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
 )
 
-type mockBuildHandler func(context.Context, smithyMiddleware.BuildInput) (smithyMiddleware.BuildOutput, error)
+type mockBuildHandler func(context.Context, smithyMiddleware.BuildInput) (smithyMiddleware.BuildOutput, smithyMiddleware.Metadata, error)
 
-func (f mockBuildHandler) HandleBuild(ctx context.Context, in smithyMiddleware.BuildInput) (smithyMiddleware.BuildOutput, error) {
+func (f mockBuildHandler) HandleBuild(ctx context.Context, in smithyMiddleware.BuildInput) (smithyMiddleware.BuildOutput, smithyMiddleware.Metadata, error) {
 	return f(ctx, in)
 }
 
@@ -23,7 +23,9 @@ func TestRequestInvocationIDMiddleware(t *testing.T) {
 
 	in := smithyMiddleware.BuildInput{Request: &smithyHTTP.Request{Request: &http.Request{Header: make(http.Header)}}}
 	ctx := context.Background()
-	_, err := mid.HandleBuild(ctx, in, mockBuildHandler(func(ctx context.Context, input smithyMiddleware.BuildInput) (out smithyMiddleware.BuildOutput, err error) {
+	_, _, err := mid.HandleBuild(ctx, in, mockBuildHandler(func(ctx context.Context, input smithyMiddleware.BuildInput) (
+		out smithyMiddleware.BuildOutput, metadata smithyMiddleware.Metadata, err error,
+	) {
 		req := in.Request.(*smithyHTTP.Request)
 
 		value := req.Header.Get("amz-sdk-invocation-id")
@@ -36,14 +38,14 @@ func TestRequestInvocationIDMiddleware(t *testing.T) {
 			t.Errorf("invocation id was not a UUIDv4")
 		}
 
-		return out, err
+		return out, nil, err
 	}))
 	if err != nil {
 		t.Errorf("expected no error, got %v", err)
 	}
 
 	in = smithyMiddleware.BuildInput{}
-	_, err = mid.HandleBuild(ctx, in, nil)
+	_, _, err = mid.HandleBuild(ctx, in, nil)
 	if err != nil {
 		if e, a := "unknown transport type", err.Error(); !strings.Contains(a, e) {
 			t.Errorf("expected %q, got %q", e, a)

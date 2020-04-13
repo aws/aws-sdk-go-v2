@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	middleware2 "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	awsmiddle "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
-	"github.com/awslabs/smithy-go/middleware"
+	smithymiddle "github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -26,27 +26,27 @@ type retryMetadata struct {
 
 type retryMetadataKey struct{}
 
-// RetryMiddleware is a Smithy FinalizeMiddleware that handles retry attempts using the provided
+// AttemptMiddleware is a Smithy FinalizeMiddleware that handles retry attempts using the provided
 // Retryer implementation
-type RetryMiddleware struct {
+type AttemptMiddleware struct {
 	retryer       Retryer
 	requestCloner RequestCloner
 }
 
-// NewRetryMiddleware returns a new RetryMiddleware
-func NewRetryMiddleware(retryer Retryer, requestCloner RequestCloner) RetryMiddleware {
-	return RetryMiddleware{retryer: retryer, requestCloner: requestCloner}
+// NewAttemptMiddleware returns a new AttemptMiddleware
+func NewAttemptMiddleware(retryer Retryer, requestCloner RequestCloner) AttemptMiddleware {
+	return AttemptMiddleware{retryer: retryer, requestCloner: requestCloner}
 }
 
-func (r RetryMiddleware) ID() string {
-	return "Retry Middleware"
+// ID returns the middleware identifier
+func (r AttemptMiddleware) ID() string {
+	return "RetryAttemptMiddleware"
 }
 
-func (r RetryMiddleware) Name() string {
-	return r.ID()
-}
-
-func (r RetryMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
+// HandleFinalize utilizes the provider Retryer implementation to attempt retries over the next handler
+func (r AttemptMiddleware) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInput, next smithymiddle.FinalizeHandler) (
+	out smithymiddle.FinalizeOutput, metadata smithymiddle.Metadata, err error,
+) {
 	var attemptNum, retryCount int
 	var attemptClockSkew time.Duration
 
@@ -104,31 +104,36 @@ func (r RetryMiddleware) HandleFinalize(ctx context.Context, in middleware.Final
 			return out, metadata, err
 		}
 
-		responseMetadata := middleware2.GetResponseMetadata(metadata)
+		responseMetadata := awsmiddle.GetResponseMetadata(metadata)
 		attemptClockSkew = responseMetadata.AttemptSkew
 
 		retryCount++
 	}
 }
 
-type RetryMetricsHeaderMiddleware struct{}
+// MetricsHeaderMiddleware attaches SDK request metric header for retries to the transport
+type MetricsHeaderMiddleware struct{}
 
-func (r RetryMetricsHeaderMiddleware) ID() string {
-	return "Retry Metrics Header Middleware"
+// ID returns the middleware identifier
+func (r MetricsHeaderMiddleware) ID() string {
+	return "MetricsHeaderMiddleware"
 }
 
-func (r RetryMetricsHeaderMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (out middleware.FinalizeOutput, err error) {
-	metadata, ok := getRetryMetadata(ctx)
+// HandleFinalize attaches the sdk request metric header to the transport layer
+func (r MetricsHeaderMiddleware) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInput, next smithymiddle.FinalizeHandler) (
+	out smithymiddle.FinalizeOutput, metadata smithymiddle.Metadata, err error,
+) {
+	retryMetadata, ok := getRetryMetadata(ctx)
 	if !ok {
-		return out, fmt.Errorf("retry metadata value not found on context")
+		return out, smithymiddle.NewMetadata(), fmt.Errorf("retry metadata value not found on context")
 	}
 
 	const retryMetricHeader = "amz-sdk-request"
 	var parts []string
 
-	parts = append(parts, fmt.Sprintf("attempt=%d", metadata.AttemptNum))
-	if metadata.MaxAttempts != 0 {
-		parts = append(parts, fmt.Sprintf("max=%d", metadata.MaxAttempts))
+	parts = append(parts, fmt.Sprintf("attempt=%d", retryMetadata.AttemptNum))
+	if retryMetadata.MaxAttempts != 0 {
+		parts = append(parts, fmt.Sprintf("max=%d", retryMetadata.MaxAttempts))
 	}
 
 	var ttl time.Time
@@ -137,9 +142,9 @@ func (r RetryMetricsHeaderMiddleware) HandleFinalize(ctx context.Context, in mid
 	}
 
 	// Only append the TTL if it can be determined.
-	if !ttl.IsZero() && metadata.AttemptClockSkew > 0 {
+	if !ttl.IsZero() && retryMetadata.AttemptClockSkew > 0 {
 		const unixTimeFormat = "20060102T150405Z"
-		ttl = ttl.Add(metadata.AttemptClockSkew)
+		ttl = ttl.Add(retryMetadata.AttemptClockSkew)
 		parts = append(parts, fmt.Sprintf("ttl=%s", ttl.Format(unixTimeFormat)))
 	}
 
@@ -147,15 +152,15 @@ func (r RetryMetricsHeaderMiddleware) HandleFinalize(ctx context.Context, in mid
 	case *http.Request:
 		req.Header.Set(retryMetricHeader, strings.Join(parts, "; "))
 	default:
-		return middleware.FinalizeOutput{}, fmt.Errorf("unknown transport type %T", req)
+		return smithymiddle.FinalizeOutput{}, smithymiddle.NewMetadata(), fmt.Errorf("unknown transport type %T", req)
 	}
 
 	return next.HandleFinalize(ctx, in)
 }
 
 // getRetryMetadata retrieves retryMetadata from the context and a bool indicating if it was set
-func getRetryMetadata(ctx context.Context) (retryMetadata, bool) {
-	metadata, ok := ctx.Value(retryMetadataKey{}).(retryMetadata)
+func getRetryMetadata(ctx context.Context) (metadata retryMetadata, ok bool) {
+	metadata, ok = ctx.Value(retryMetadataKey{}).(retryMetadata)
 	return metadata, ok
 }
 

@@ -12,13 +12,13 @@ import (
 	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
 )
 
-type mockFinalizeHandler func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, err error)
+type mockFinalizeHandler func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error)
 
-func (f mockFinalizeHandler) HandleFinalize(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, err error) {
+func (f mockFinalizeHandler) HandleFinalize(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 	return f(ctx, in)
 }
 
-func TestRetryMetricsHeaderMiddleware(t *testing.T) {
+func TestMetricsHeaderMiddleware(t *testing.T) {
 	cases := []struct {
 		input          middleware.FinalizeInput
 		ctx            context.Context
@@ -41,7 +41,8 @@ func TestRetryMetricsHeaderMiddleware(t *testing.T) {
 			input: middleware.FinalizeInput{Request: &smithyHTTP.Request{Request: &http.Request{Header: make(http.Header)}}},
 			ctx: func() context.Context {
 				attemptTime := time.Date(2020, 01, 02, 03, 04, 05, 0, time.UTC)
-				ctx, _ := context.WithDeadline(context.Background(), attemptTime.Add(time.Minute))
+				ctx, cancel := context.WithDeadline(context.Background(), attemptTime.Add(time.Minute))
+				defer cancel()
 				return setRetryMetadata(ctx, retryMetadata{
 					AttemptNum:       1,
 					AttemptTime:      attemptTime,
@@ -49,7 +50,7 @@ func TestRetryMetricsHeaderMiddleware(t *testing.T) {
 					AttemptClockSkew: time.Second * 1,
 				})
 			}(),
-			expectedHeader: "attempt=0; max=5; ttl=20200102T030506Z",
+			expectedHeader: "attempt=1; max=5; ttl=20200102T030506Z",
 		},
 		{
 			ctx: func() context.Context {
@@ -59,18 +60,20 @@ func TestRetryMetricsHeaderMiddleware(t *testing.T) {
 		},
 	}
 
-	retryMiddleware := RetryMetricsHeaderMiddleware{}
+	retryMiddleware := MetricsHeaderMiddleware{}
 	for i, tt := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			ctx := tt.ctx
-			_, err := retryMiddleware.HandleFinalize(ctx, tt.input, mockFinalizeHandler(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, err error) {
+			_, _, err := retryMiddleware.HandleFinalize(ctx, tt.input, mockFinalizeHandler(func(ctx context.Context, in middleware.FinalizeInput) (
+				out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+			) {
 				req := in.Request.(*smithyHTTP.Request)
 
 				if e, a := tt.expectedHeader, req.Header.Get("amz-sdk-request"); e != a {
 					t.Errorf("expected %v, got %v", e, a)
 				}
 
-				return out, err
+				return out, nil, err
 			}))
 			if err != nil && len(tt.expectedErr) == 0 {
 				t.Fatalf("expected no error, got %q", err)

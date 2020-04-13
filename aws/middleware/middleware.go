@@ -17,11 +17,13 @@ type RequestInvocationIDMiddleware struct{}
 
 // ID the identifier for the RequestInvocationIDMiddleware
 func (r RequestInvocationIDMiddleware) ID() string {
-	return "Request Invocation ID Middleware"
+	return "RequestInvocationIDMiddleware"
 }
 
 // HandleBuild attaches a unique operation invocation id for the operation to the request
-func (r RequestInvocationIDMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (out middleware.BuildOutput, metadata middleware.Metadata, err error) {
+func (r RequestInvocationIDMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
+	out middleware.BuildOutput, metadata middleware.Metadata, err error,
+) {
 	const invocationIDHeader = "amz-sdk-invocation-id"
 
 	invocationID, err := sdk.UUIDVersion4()
@@ -43,12 +45,15 @@ func (r RequestInvocationIDMiddleware) HandleBuild(ctx context.Context, in middl
 // TODO: Could be a better name, since this calculates more then skew
 type AttemptClockSkewMiddleware struct{}
 
+// ID is the middleware identifier
 func (a AttemptClockSkewMiddleware) ID() string {
-	return "Attempt Clock Skew Middlware"
+	return "AttemptClockSkewMiddlware"
 }
 
 // HandleDeserialize calculates response metadata and clock skew
-func (a AttemptClockSkewMiddleware) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (out middleware.DeserializeOutput, metadata middleware.Metadata, err error) {
+func (a AttemptClockSkewMiddleware) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
 	respMeta := ResponseMetadata{}
 
 	deserialize, metadata, err := next.HandleDeserialize(ctx, in)
@@ -86,13 +91,9 @@ type ResponseMetadata struct {
 }
 
 // GetResponseMetadata retrieves response metadata from the context, if nil returns an empty value
-func GetResponseMetadata(metadata middleware.Metadata) ResponseMetadata {
-	switch v := metadata.Get(responseMetadataKey{}).(type) {
-	case ResponseMetadata:
-		return v
-	default:
-		return ResponseMetadata{}
-	}
+func GetResponseMetadata(metadata middleware.Metadata) (v ResponseMetadata) {
+	v, _ = metadata.Get(responseMetadataKey{}).(ResponseMetadata)
+	return v
 }
 
 // SetResponseMetadata sets the ResponseMetadata on the given context
