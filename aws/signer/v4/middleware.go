@@ -72,28 +72,28 @@ func (m *ComputePayloadSHA256Middleware) HandleFinalize(ctx context.Context, in 
 ) {
 	req, ok := in.Request.(*smithyHTTP.Request)
 	if !ok {
-		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{Err: fmt.Errorf("unexpected request middleware type %T", in.Request)}
+		return middleware.FinalizeOutput{}, metadata, &HashComputationError{Err: fmt.Errorf("unexpected request middleware type %T", in.Request)}
 	}
 
 	body, ok := req.Stream.(io.ReadSeeker)
 	if !ok {
-		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{Err: fmt.Errorf("stream does not implement io.Seeker, got %T", req.Stream)}
+		return middleware.FinalizeOutput{}, metadata, &HashComputationError{Err: fmt.Errorf("stream does not implement io.Seeker, got %T", req.Stream)}
 	}
 
 	_, err = body.Seek(0, io.SeekStart)
 	if err != nil {
-		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{Err: fmt.Errorf("failed to seek body to start, %w", err)}
+		return middleware.FinalizeOutput{}, metadata, &HashComputationError{Err: fmt.Errorf("failed to seek body to start, %w", err)}
 	}
 
 	hash := sha256.New()
 	_, err = io.Copy(hash, body)
 	if err != nil {
-		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{Err: fmt.Errorf("failed to compute payload hash, %w", err)}
+		return middleware.FinalizeOutput{}, metadata, &HashComputationError{Err: fmt.Errorf("failed to compute payload hash, %w", err)}
 	}
 
 	_, err = body.Seek(0, io.SeekStart)
 	if err != nil {
-		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &HashComputationError{Err: fmt.Errorf("failed to seek body to start, %w", err)}
+		return middleware.FinalizeOutput{}, metadata, &HashComputationError{Err: fmt.Errorf("failed to seek body to start, %w", err)}
 	}
 
 	ctx = SetPayloadHash(ctx, hex.EncodeToString(hash.Sum(nil)))
@@ -122,18 +122,18 @@ func (s *SignHTTPRequestMiddleware) HandleFinalize(ctx context.Context, in middl
 ) {
 	req, ok := in.Request.(*smithyHTTP.Request)
 	if !ok {
-		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &SigningError{Err: fmt.Errorf("unexpected request middleware type %T", in.Request)}
+		return middleware.FinalizeOutput{}, metadata, &SigningError{Err: fmt.Errorf("unexpected request middleware type %T", in.Request)}
 	}
 
 	signingMetadata := GetSigningMetadata(ctx)
 	payloadHash := GetPayloadHash(ctx)
 	if len(payloadHash) == 0 {
-		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &SigningError{Err: fmt.Errorf("computed payload hash missing from context")}
+		return middleware.FinalizeOutput{}, metadata, &SigningError{Err: fmt.Errorf("computed payload hash missing from context")}
 	}
 
 	err = s.signer.SignHTTP(ctx, req.Request, payloadHash, signingMetadata.SigningName, signingMetadata.SigningRegion, sdk.NowTime())
 	if err != nil {
-		return middleware.FinalizeOutput{}, middleware.NewMetadata(), &SigningError{Err: fmt.Errorf("failed to sign http request, %w", err)}
+		return middleware.FinalizeOutput{}, metadata, &SigningError{Err: fmt.Errorf("failed to sign http request, %w", err)}
 	}
 
 	return next.HandleFinalize(ctx, in)

@@ -28,14 +28,14 @@ func (r RequestInvocationIDMiddleware) HandleBuild(ctx context.Context, in middl
 
 	invocationID, err := sdk.UUIDVersion4()
 	if err != nil {
-		return out, middleware.NewMetadata(), err
+		return out, metadata, err
 	}
 
 	switch req := in.Request.(type) {
 	case *smithyHTTP.Request:
 		req.Header.Set(invocationIDHeader, invocationID)
 	default:
-		return middleware.BuildOutput{}, middleware.NewMetadata(), fmt.Errorf("unknown transport type %T", req)
+		return middleware.BuildOutput{}, metadata, fmt.Errorf("unknown transport type %T", req)
 	}
 
 	return next.HandleBuild(ctx, in)
@@ -56,18 +56,18 @@ func (a AttemptClockSkewMiddleware) HandleDeserialize(ctx context.Context, in mi
 ) {
 	respMeta := ResponseMetadata{}
 
-	deserialize, metadata, err := next.HandleDeserialize(ctx, in)
+	out, metadata, err = next.HandleDeserialize(ctx, in)
 	respMeta.ResponseAt = sdk.NowTime()
 
-	switch resp := deserialize.RawResponse.(type) {
+	switch resp := out.RawResponse.(type) {
 	case *smithyHTTP.Response:
 		respDateHeader := resp.Header.Get("Date")
 		if len(respDateHeader) == 0 {
 			break
 		}
-		var pErr error
-		respMeta.ServerTime, pErr = http.ParseTime(respDateHeader)
-		if pErr != nil {
+		var parseErr error
+		respMeta.ServerTime, parseErr = http.ParseTime(respDateHeader)
+		if parseErr != nil {
 			// TODO: What should logging of errors look like?
 			break
 		}
@@ -79,7 +79,7 @@ func (a AttemptClockSkewMiddleware) HandleDeserialize(ctx context.Context, in mi
 
 	setResponseMetadata(&metadata, respMeta)
 
-	return deserialize, metadata, err
+	return out, metadata, err
 }
 
 type responseMetadataKey struct{}
