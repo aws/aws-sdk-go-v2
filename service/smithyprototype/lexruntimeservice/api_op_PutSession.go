@@ -3,13 +3,18 @@
 package lexruntimeservice
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/json"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/rest"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/awslabs/smithy-go/middleware"
+	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
 	"github.com/aws/aws-sdk-go-v2/service/smithyprototype/lexruntimeservice/types"
 )
 
@@ -389,4 +394,104 @@ type PutSessionResponse struct {
 // PutSession request.
 func (r *PutSessionResponse) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+type putSessionSerializeMiddleware struct{}
+
+// ID is the middleware identifier
+func (p putSessionSerializeMiddleware) ID() string {
+	return "PutSessionSerializeMiddleware"
+}
+
+func (p putSessionSerializeMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyHTTP.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	input, ok := in.Parameters.(*PutSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+
+	restEncoder := rest.NewEncoder(request.Request)
+
+	restEncoder.AddHeader("Content-Type").String("application/json")
+
+	if err := serializePutSessionInputAWSREST(input, restEncoder); err != nil {
+		return middleware.SerializeOutput{}, metadata, err
+	}
+
+	jsonEncoder := json.NewEncoder()
+	if err := serializePutSessionInputAWSJSON(input, jsonEncoder.Value); err != nil {
+		return middleware.SerializeOutput{}, metadata, err
+	}
+
+	request.Stream = bytes.NewReader(jsonEncoder.Bytes())
+
+	return next.HandleSerialize(ctx, in)
+}
+
+func serializePutSessionInputAWSJSON(v *PutSessionInput, encoder json.Value) error {
+	object := encoder.Object()
+	defer object.Close()
+
+	if v == nil {
+		return nil
+	}
+
+	if v.DialogAction != nil {
+		value := object.Key("dialogAction")
+		if err := serializeDialogActionAWSJSON(v.DialogAction, value); err != nil {
+			return err
+		}
+	}
+
+	if v.RecentIntentSummaryView != nil {
+		value := object.Key("recentIntentSummaryView")
+		if err := serializeIntentSummaryListAWSJSON(v.RecentIntentSummaryView, value); err != nil {
+			return err
+		}
+	}
+
+	if v.SessionAttributes != nil {
+		value := object.Key("sessionAttributes")
+		if err := serializeStringMapAWSJSON(v.SessionAttributes, value); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func serializePutSessionInputAWSREST(v *PutSessionInput, encoder *rest.Encoder) error {
+	if v == nil {
+		return nil
+	}
+
+	if v.Accept != nil {
+		encoder.SetHeader("Accept").String(*v.Accept)
+	}
+
+	if v.BotAlias != nil {
+		if err := encoder.SetURI("botAlias").String(*v.BotAlias); err != nil {
+			return err
+		}
+	}
+
+	if v.BotName != nil {
+		if err := encoder.SetURI("botName").String(*v.BotName); err != nil {
+			return err
+		}
+	}
+
+	if v.UserId != nil {
+		if err := encoder.SetURI("userId").String(*v.UserId); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

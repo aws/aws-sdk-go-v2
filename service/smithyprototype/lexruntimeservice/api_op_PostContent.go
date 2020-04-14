@@ -4,12 +4,16 @@ package lexruntimeservice
 
 import (
 	"context"
+	"fmt"
 	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	v4 "github.com/aws/aws-sdk-go-v2/aws/protocol/rest"
+	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/awslabs/smithy-go/middleware"
+	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
 	types "github.com/aws/aws-sdk-go-v2/service/smithyprototype/lexruntimeservice/types"
 )
 
@@ -538,4 +542,91 @@ type PostContentResponse struct {
 // PostContent request.
 func (r *PostContentResponse) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+type postContentSerializeMiddleware struct{}
+
+func (p postContentSerializeMiddleware) ID() string {
+	return "PostContentSerializeMiddleware"
+}
+
+func (p postContentSerializeMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyHTTP.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	params, ok := in.Parameters.(*PostContentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown params parameters type %T", in.Parameters)
+	}
+
+	restEncoder := rest.NewEncoder(request.Request)
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	if err := serializePostContentInputAWSREST(params, restEncoder); err != nil {
+		return middleware.SerializeOutput{}, metadata, err
+	}
+
+	if err := serializePostContentAWSPayload(params, request); err != nil {
+		return middleware.SerializeOutput{}, metadata, err
+	}
+
+	return next.HandleSerialize(ctx, in)
+}
+
+func serializePostContentAWSPayload(v *PostContentInput, request *smithyHTTP.Request) error {
+	if v.InputStream != nil {
+		request.Stream = v.InputStream
+	}
+	return nil
+}
+
+func serializePostContentInputAWSREST(v *PostContentInput, encoder *rest.Encoder) error {
+	if v == nil {
+		return nil
+	}
+
+	if v.Accept != nil {
+		encoder.SetHeader("Accept").String(*v.Accept)
+	}
+
+	if v.BotAlias != nil {
+		if err := encoder.SetURI("botAlias").String(*v.BotAlias); err != nil {
+			return err
+		}
+	}
+
+	if v.BotName != nil {
+		if err := encoder.SetURI("botName").String(*v.BotName); err != nil {
+			return err
+		}
+	}
+
+	if v.ContentType != nil {
+		encoder.SetHeader("Content-Type").String(*v.ContentType)
+	}
+
+	if v.UserId != nil {
+		if err := encoder.SetURI("userId").String(*v.UserId); err != nil {
+			return err
+		}
+	}
+
+	if v.RequestAttributes != nil {
+		if err := encoder.SetHeader("x-amz-lex-session-attributes").JSONValue(v.RequestAttributes); err != nil {
+			return err
+		}
+	}
+
+	if v.SessionAttributes != nil {
+		if err := encoder.SetHeader("x-amz-lex-session-attributes").JSONValue(v.SessionAttributes); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

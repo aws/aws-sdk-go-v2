@@ -3,11 +3,17 @@
 package lexruntimeservice
 
 import (
+	"bytes"
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/json"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/rest"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/awslabs/smithy-go/middleware"
+	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
 	"github.com/aws/aws-sdk-go-v2/service/smithyprototype/lexruntimeservice/types"
 )
 
@@ -461,4 +467,96 @@ type PostTextResponse struct {
 // PostText request.
 func (r *PostTextResponse) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+type postTextSerializeMiddleware struct{}
+
+func (p postTextSerializeMiddleware) ID() string {
+	return "PostTextSerializeMiddleware"
+}
+
+func (p postTextSerializeMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyHTTP.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	input, ok := in.Parameters.(*PostTextInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+
+	restEncoder := rest.NewEncoder(request.Request)
+
+	restEncoder.AddHeader("Content-Type").String("application/json")
+
+	if err := serializePostTextInputAWSREST(input, restEncoder); err != nil {
+		return middleware.SerializeOutput{}, metadata, err
+	}
+
+	jsonEncoder := json.NewEncoder()
+	if err := serializePostTextInputAWSJSON(input, jsonEncoder.Value); err != nil {
+		return middleware.SerializeOutput{}, metadata, err
+	}
+
+	request.Stream = bytes.NewReader(jsonEncoder.Bytes())
+
+	return next.HandleSerialize(ctx, in)
+}
+
+func serializePostTextInputAWSJSON(v *PostTextInput, value json.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v == nil {
+		return nil
+	}
+
+	if v.InputText != nil {
+		object.Key("inputText").String(*v.InputText)
+	}
+
+	if v.RequestAttributes != nil {
+		value := object.Key("requestAttributes")
+		if err := serializeStringMapAWSJSON(v.RequestAttributes, value); err != nil {
+			return err
+		}
+	}
+
+	if v.SessionAttributes != nil {
+		value := object.Key("sessionAttributes")
+		if err := serializeStringMapAWSJSON(v.SessionAttributes, value); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func serializePostTextInputAWSREST(v *PostTextInput, encoder *rest.Encoder) error {
+	if v == nil {
+		return nil
+	}
+
+	if v.BotAlias != nil {
+		if err := encoder.SetURI("botAlias").String(*v.BotAlias); err != nil {
+			return err
+		}
+	}
+
+	if v.BotName != nil {
+		if err := encoder.SetURI("botName").String(*v.BotName); err != nil {
+			return err
+		}
+	}
+
+	if v.UserId != nil {
+		if err := encoder.SetURI("userId").String(*v.UserId); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

@@ -4,10 +4,14 @@ package lexruntimeservice
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/rest"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/awslabs/smithy-go/middleware"
+	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
 )
 
 type DeleteSessionInput struct {
@@ -200,4 +204,63 @@ type DeleteSessionResponse struct {
 // DeleteSession request.
 func (r *DeleteSessionResponse) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+type deleteSessionSerializeMiddleware struct{}
+
+// ID is the identifier for the middleware
+func (g deleteSessionSerializeMiddleware) ID() string {
+	return "GetSessionSerializeMiddleware"
+}
+
+// HandleSerialize will serialize the middleware input parameters to the provided input http request
+func (g deleteSessionSerializeMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyHTTP.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	input, ok := in.Parameters.(*DeleteSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+
+	restEncoder := rest.NewEncoder(request.Request)
+
+	restEncoder.AddHeader("Content-Type").String("application/json")
+
+	if err := serializeDeleteSessionInputAWSREST(input, restEncoder); err != nil {
+		return middleware.SerializeOutput{}, metadata, err
+	}
+
+	return next.HandleSerialize(ctx, in)
+}
+
+// serializeDeleteSessionInputAWSREST marshals the top level members of GetSessionInput that have HTTP bindings
+func serializeDeleteSessionInputAWSREST(v *DeleteSessionInput, encoder *rest.Encoder) error {
+	if v == nil {
+		return nil
+	}
+
+	if v.BotAlias != nil {
+		if err := encoder.SetURI("botAlias").String(*v.BotAlias); err != nil {
+			return err
+		}
+	}
+
+	if v.BotName != nil {
+		if err := encoder.SetURI("botName").String(*v.BotName); err != nil {
+			return err
+		}
+	}
+
+	if v.UserId != nil {
+		if err := encoder.SetURI("userId").String(*v.UserId); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

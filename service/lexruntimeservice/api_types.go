@@ -4,6 +4,7 @@ package lexruntimeservice
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/json"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
@@ -485,5 +486,125 @@ func (s SentimentResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "sentimentScore", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	return nil
+}
+
+func serializeIntentSummaryListAWSJSON(v []IntentSummary, value json.Value) error {
+	if v == nil {
+		value.Null()
+		return nil
+	}
+
+	array := value.Array()
+
+	for _, arrayValue := range v {
+		av := array.Value()
+		if err := serializeIntentSummaryAWSJSON(&arrayValue, av); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func serializeIntentSummaryAWSJSON(v *IntentSummary, value json.Value) error {
+	if v == nil {
+		value.Null()
+		return nil
+	}
+
+	object := value.Object()
+	defer object.Close()
+
+	if v.CheckpointLabel != nil {
+		object.Key("checkpointLabel").String(*v.CheckpointLabel)
+	}
+
+	if len(v.ConfirmationStatus) > 0 {
+		object.Key("confirmationStatus").String(string(v.ConfirmationStatus))
+	}
+
+	if len(v.DialogActionType) > 0 {
+		object.Key("dialogActionType").String(string(v.DialogActionType))
+	}
+
+	if len(v.FulfillmentState) > 0 {
+		object.Key("fulfillmentState").String(string(v.FulfillmentState))
+	}
+
+	if v.IntentName != nil {
+		object.Key("intentName").String(*v.IntentName)
+	}
+
+	if v.SlotToElicit != nil {
+		object.Key("slotToElicit").String(*v.SlotToElicit)
+	}
+
+	if v.Slots != nil {
+		value := object.Key("slots")
+		if err := serializeStringMapAWSJSON(v.Slots, value); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func serializeDialogActionAWSJSON(v *DialogAction, value json.Value) error {
+	if v == nil {
+		value.Null()
+		return nil
+	}
+
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.FulfillmentState) > 0 {
+		object.Key("fulfillmentState").String(string(v.FulfillmentState))
+	}
+
+	if v.IntentName != nil {
+		object.Key("intentName").String(*v.IntentName)
+	}
+
+	if v.Message != nil {
+		object.Key("message").String(*v.Message)
+	}
+
+	if len(v.MessageFormat) > 0 {
+		object.Key("messageFormat").String(string(v.MessageFormat))
+	}
+
+	if v.SlotToElicit != nil {
+		object.Key("slotToElicit").String(*v.SlotToElicit)
+	}
+
+	if v.Slots != nil {
+		value := object.Key("slots")
+		if err := serializeStringMapAWSJSON(v.Slots, value); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		object.Key("type").String(string(v.Type))
+	}
+
+	return nil
+}
+
+func serializeStringMapAWSJSON(v map[string]string, value json.Value) error {
+	if v == nil {
+		value.Null()
+		return nil
+	}
+
+	object := value.Object()
+	defer object.Close()
+
+	for k, kv := range v {
+		object.Key(k).String(kv)
+	}
+
 	return nil
 }
