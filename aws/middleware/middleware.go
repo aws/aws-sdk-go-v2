@@ -35,7 +35,7 @@ func (r RequestInvocationIDMiddleware) HandleBuild(ctx context.Context, in middl
 	case *smithyHTTP.Request:
 		req.Header.Set(invocationIDHeader, invocationID)
 	default:
-		return middleware.BuildOutput{}, metadata, fmt.Errorf("unknown transport type %T", req)
+		return out, metadata, fmt.Errorf("unknown transport type %T", req)
 	}
 
 	return next.HandleBuild(ctx, in)

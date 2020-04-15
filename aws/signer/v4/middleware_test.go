@@ -58,7 +58,12 @@ func TestComputePayloadHashMiddleware(t *testing.T) {
 				return out, metadata, err
 			})
 
-			_, _, err := c.HandleFinalize(context.Background(), middleware.FinalizeInput{Request: &smithyHTTP.Request{Stream: tt.content}}, next)
+			stream, err := smithyHTTP.NewStackRequest().(*smithyHTTP.Request).SetStream(tt.content)
+			if err != nil {
+				t.Fatalf("expected no error, got %v", err)
+			}
+
+			_, _, err = c.HandleFinalize(context.Background(), middleware.FinalizeInput{Request: stream}, next)
 			if err != nil && tt.expectedErr == nil {
 				t.Errorf("expected no error, got %v", err)
 			} else if err != nil && tt.expectedErr != nil {
