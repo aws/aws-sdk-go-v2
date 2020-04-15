@@ -73,7 +73,7 @@ func TestMetricsHeaderMiddleware(t *testing.T) {
 					t.Errorf("expected %v, got %v", e, a)
 				}
 
-				return out, nil, err
+				return out, metadata, err
 			}))
 			if err != nil && len(tt.expectedErr) == 0 {
 				t.Fatalf("expected no error, got %q", err)

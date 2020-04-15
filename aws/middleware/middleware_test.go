@@ -38,7 +38,7 @@ func TestRequestInvocationIDMiddleware(t *testing.T) {
 			t.Errorf("invocation id was not a UUIDv4")
 		}
 
-		return out, nil, err
+		return out, metadata, err
 	}))
 	if err != nil {
 		t.Errorf("expected no error, got %v", err)

@@ -80,6 +80,11 @@ const (
 	signingAlgorithm = "AWS4-HMAC-SHA256"
 )
 
+// HTTPSigner is an interface to a SigV4 signer that can sign HTTP requests
+type HTTPSigner interface {
+	SignHTTP(ctx context.Context, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
+}
+
 // Signer applies AWS v4 signing to given request. Use this to sign requests
 // that need to be signed with AWS V4 Signatures.
 type Signer struct {
@@ -654,7 +659,7 @@ func buildBodyDigest(r *http.Request, body io.ReadSeeker, service string, unsign
 		s3Presign := presigned && service == "s3"
 
 		if unsigned || s3Presign {
-			hash = "UNSIGNED-PAYLOAD"
+			hash = v4Internal.UnsignedPayload
 			includeSHA256Header = !s3Presign
 		} else if body == nil {
 			hash = v4Internal.EmptyStringSHA256

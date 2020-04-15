@@ -28,14 +28,14 @@ func (r RequestInvocationIDMiddleware) HandleBuild(ctx context.Context, in middl
 
 	invocationID, err := sdk.UUIDVersion4()
 	if err != nil {
-		return out, middleware.NewMetadata(), err
+		return out, metadata, err
 	}
 
 	switch req := in.Request.(type) {
 	case *smithyHTTP.Request:
 		req.Header.Set(invocationIDHeader, invocationID)
 	default:
-		return middleware.BuildOutput{}, middleware.NewMetadata(), fmt.Errorf("unknown transport type %T", req)
+		return out, metadata, fmt.Errorf("unknown transport type %T", req)
 	}
 
 	return next.HandleBuild(ctx, in)
@@ -56,17 +56,18 @@ func (a AttemptClockSkewMiddleware) HandleDeserialize(ctx context.Context, in mi
 ) {
 	respMeta := ResponseMetadata{}
 
-	deserialize, metadata, err := next.HandleDeserialize(ctx, in)
+	out, metadata, err = next.HandleDeserialize(ctx, in)
 	respMeta.ResponseAt = sdk.NowTime()
 
-	switch resp := deserialize.RawResponse.(type) {
+	switch resp := out.RawResponse.(type) {
 	case *smithyHTTP.Response:
 		respDateHeader := resp.Header.Get("Date")
 		if len(respDateHeader) == 0 {
 			break
 		}
-		respMeta.ServerTime, err = http.ParseTime(respDateHeader)
-		if err != nil {
+		var parseErr error
+		respMeta.ServerTime, parseErr = http.ParseTime(respDateHeader)
+		if parseErr != nil {
 			// TODO: What should logging of errors look like?
 			break
 		}
@@ -76,9 +77,9 @@ func (a AttemptClockSkewMiddleware) HandleDeserialize(ctx context.Context, in mi
 		respMeta.AttemptSkew = respMeta.ServerTime.Sub(respMeta.ResponseAt)
 	}
 
-	SetResponseMetadata(metadata, respMeta)
+	setResponseMetadata(&metadata, respMeta)
 
-	return deserialize, metadata, err
+	return out, metadata, err
 }
 
 type responseMetadataKey struct{}
@@ -96,7 +97,7 @@ func GetResponseMetadata(metadata middleware.Metadata) (v ResponseMetadata) {
 	return v
 }
 
-// SetResponseMetadata sets the ResponseMetadata on the given context
-func SetResponseMetadata(metadata middleware.Metadata, responseMetadata ResponseMetadata) {
+// setResponseMetadata sets the ResponseMetadata on the given context
+func setResponseMetadata(metadata *middleware.Metadata, responseMetadata ResponseMetadata) {
 	metadata.Set(responseMetadataKey{}, responseMetadata)
 }
