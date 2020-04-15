@@ -125,7 +125,7 @@ func (r MetricsHeaderMiddleware) HandleFinalize(ctx context.Context, in smithymi
 ) {
 	retryMetadata, ok := getRetryMetadata(ctx)
 	if !ok {
-		return out, smithymiddle.NewMetadata(), fmt.Errorf("retry metadata value not found on context")
+		return out, metadata, fmt.Errorf("retry metadata value not found on context")
 	}
 
 	const retryMetricHeader = "amz-sdk-request"
@@ -152,7 +152,7 @@ func (r MetricsHeaderMiddleware) HandleFinalize(ctx context.Context, in smithymi
 	case *http.Request:
 		req.Header.Set(retryMetricHeader, strings.Join(parts, "; "))
 	default:
-		return smithymiddle.FinalizeOutput{}, smithymiddle.NewMetadata(), fmt.Errorf("unknown transport type %T", req)
+		return smithymiddle.FinalizeOutput{}, metadata, fmt.Errorf("unknown transport type %T", req)
 	}
 
 	return next.HandleFinalize(ctx, in)

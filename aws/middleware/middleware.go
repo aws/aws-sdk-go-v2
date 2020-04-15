@@ -65,8 +65,9 @@ func (a AttemptClockSkewMiddleware) HandleDeserialize(ctx context.Context, in mi
 		if len(respDateHeader) == 0 {
 			break
 		}
-		respMeta.ServerTime, err = http.ParseTime(respDateHeader)
-		if err != nil {
+		var pErr error
+		respMeta.ServerTime, pErr = http.ParseTime(respDateHeader)
+		if pErr != nil {
 			// TODO: What should logging of errors look like?
 			break
 		}
@@ -76,7 +77,7 @@ func (a AttemptClockSkewMiddleware) HandleDeserialize(ctx context.Context, in mi
 		respMeta.AttemptSkew = respMeta.ServerTime.Sub(respMeta.ResponseAt)
 	}
 
-	SetResponseMetadata(metadata, respMeta)
+	setResponseMetadata(&metadata, respMeta)
 
 	return deserialize, metadata, err
 }
@@ -96,7 +97,7 @@ func GetResponseMetadata(metadata middleware.Metadata) (v ResponseMetadata) {
 	return v
 }
 
-// SetResponseMetadata sets the ResponseMetadata on the given context
-func SetResponseMetadata(metadata middleware.Metadata, responseMetadata ResponseMetadata) {
+// setResponseMetadata sets the ResponseMetadata on the given context
+func setResponseMetadata(metadata *middleware.Metadata, responseMetadata ResponseMetadata) {
 	metadata.Set(responseMetadataKey{}, responseMetadata)
 }
