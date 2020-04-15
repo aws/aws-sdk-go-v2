@@ -81,7 +81,7 @@ func (m *ComputePayloadSHA256Middleware) HandleFinalize(ctx context.Context, in 
 		return out, metadata, &HashComputationError{Err: fmt.Errorf("failed to compute payload hash, %w", err)}
 	}
 
-	if err := req.Rewind(); err != nil {
+	if err := req.RewindStream(); err != nil {
 		return out, metadata, &HashComputationError{Err: fmt.Errorf("failed to seek body to start, %w", err)}
 	}
 

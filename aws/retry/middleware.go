@@ -67,6 +67,14 @@ func (r AttemptMiddleware) HandleFinalize(ctx context.Context, in smithymiddle.F
 			AttemptClockSkew: attemptClockSkew,
 		})
 
+		if attemptNum > 1 {
+			if rewindable, ok := in.Request.(interface{ RewindStream() error }); ok {
+				if err := rewindable.RewindStream(); err != nil {
+					return out, metadata, fmt.Errorf("failed to rewind transport stream for retry, %w", err)
+				}
+			}
+		}
+
 		out, metadata, reqErr := next.HandleFinalize(attemptCtx, attemptInput)
 
 		relRetryToken(reqErr)
