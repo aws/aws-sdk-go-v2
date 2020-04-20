@@ -1,0 +1,1433 @@
+{
+  "smithy": "0.5.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "ids": [
+          "HttpMethodSemantics"
+        ]
+      },
+      {
+        "ids": [
+          "HttpResponseCodeSemantics"
+        ]
+      },
+      {
+        "ids": [
+          "PaginatedTrait"
+        ]
+      },
+      {
+        "ids": [
+          "HttpHeaderTrait"
+        ]
+      },
+      {
+        "ids": [
+          "HttpUriConflict"
+        ]
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.deepsense.runtimeservice#AWSDeepSenseRunTimeService": {
+      "type": "service",
+      "version": "2016-11-28",
+      "operations": [
+        {
+          "target": "com.amazonaws.deepsense.runtimeservice#DeleteSession"
+        },
+        {
+          "target": "com.amazonaws.deepsense.runtimeservice#GetSession"
+        },
+        {
+          "target": "com.amazonaws.deepsense.runtimeservice#PostContent"
+        },
+        {
+          "target": "com.amazonaws.deepsense.runtimeservice#PostText"
+        },
+        {
+          "target": "com.amazonaws.deepsense.runtimeservice#PutSession"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "Lex Runtime Service",
+          "arnNamespace": "lex",
+          "cloudFormationName": "LexRuntimeService",
+          "cloudTrailEventSource": "runtimeservice.deepsense.amazonaws.com"
+        },
+        "smithy.api#documentation": "<p>Amazon Lex provides both build and runtime endpoints. Each endpoint provides a set of\n      operations (API). Your conversational bot uses the runtime API to understand user utterances\n      (user input text or voice). For example, suppose a user says \"I want pizza\", your bot sends\n      this input to Amazon Lex using the runtime API. Amazon Lex recognizes that the user request is\n      for the OrderPizza intent (one of the intents defined in the bot). Then Amazon Lex engages in\n      user conversation on behalf of the bot to elicit required information (slot values, such as\n      pizza size and crust type), and then performs fulfillment activity (that you configured when\n      you created the bot). You use the build-time API to create and manage your Amazon Lex bot. For\n      a list of build-time operations, see the build-time API, . </p>",
+        "smithy.api#protocols": [
+          {
+            "name": "aws.rest-json-1.1",
+            "auth": [
+              "aws.v4"
+            ]
+          }
+        ],
+        "smithy.api#title": "Amazon Lex Runtime Service"
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#Accept": {
+      "type": "string"
+    },
+    "com.amazonaws.deepsense.runtimeservice#BadGatewayException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.deepsense.runtimeservice#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Either the Amazon Lex bot is still building, or one of the dependent services (Amazon Polly,\n      AWS Lambda) failed with an internal service error.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 502
+      }
+    },
+    "com.amazonaws.commonapi.exceptions#BadRequestException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.commonapi.exceptions#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> Request validation failed, there is no usable message in the context, or the bot build\n      failed, is still in progress, or contains unbuilt changes. </p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#BlobStream": {
+      "type": "blob"
+    },
+    "com.amazonaws.deepsense.runtimeservice#BotAlias": {
+      "type": "string"
+    },
+    "com.amazonaws.deepsense.runtimeservice#BotName": {
+      "type": "string"
+    },
+    "com.amazonaws.deepsense.runtimeservice.responsecard#Button": {
+      "type": "structure",
+      "members": {
+        "text": {
+          "target": "com.amazonaws.deepsense.runtimeservice.responsecard#ButtonTextStringWithLength",
+          "traits": {
+            "smithy.api#documentation": "<p>Text that is visible to the user on the button.</p>",
+            "smithy.api#required": true
+          }
+        },
+        "value": {
+          "target": "com.amazonaws.deepsense.runtimeservice.responsecard#ButtonValueStringWithLength",
+          "traits": {
+            "smithy.api#documentation": "<p>The value sent to Amazon Lex when a user chooses the button. For example, consider button\n      text \"NYC.\" When the user chooses the button, the value sent can be \"New York City.\"</p>",
+            "smithy.api#required": true
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents an option to be shown on the client platform (Facebook, Slack, etc.)</p>"
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice.responsecard#ButtonTextStringWithLength": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 15
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice.responsecard#ButtonValueStringWithLength": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1000
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#ConfirmationStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": {
+          "None": {
+            "name": "NONE"
+          },
+          "Confirmed": {
+            "name": "CONFIRMED"
+          },
+          "Denied": {
+            "name": "DENIED"
+          }
+        }
+      }
+    },
+    "com.amazonaws.commonapi.exceptions#ConflictException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.commonapi.exceptions#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> Two clients are using the same AWS account, Amazon Lex bot, and user ID. </p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 409
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice.responsecard#ContentType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": {
+          "application/vnd.amazonaws.card.generic": {
+            "name": "GENERIC"
+          }
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#DeleteSession": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.deepsense.runtimeservice#DeleteSessionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.deepsense.runtimeservice#DeleteSessionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.commonapi.exceptions#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#NotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes session information for a specified bot, alias, and user ID. </p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/bot/{botName}/alias/{botAlias}/user/{userId}/session",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#DeleteSessionRequest": {
+      "type": "structure",
+      "members": {
+        "botAlias": {
+          "target": "com.amazonaws.deepsense.runtimeservice#BotAlias",
+          "traits": {
+            "smithy.api#documentation": "<p>The alias in use for the bot that contains the session data.</p>",
+            "smithy.api#httpLabel": true,
+            "smithy.api#required": true
+          }
+        },
+        "botName": {
+          "target": "com.amazonaws.deepsense.runtimeservice#BotName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the bot that contains the session data.</p>",
+            "smithy.api#httpLabel": true,
+            "smithy.api#required": true
+          }
+        },
+        "userId": {
+          "target": "com.amazonaws.deepsense.runtimeservice#UserId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the user associated with the session data.</p>",
+            "smithy.api#httpLabel": true,
+            "smithy.api#required": true
+          }
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#DeleteSessionResponse": {
+      "type": "structure",
+      "members": {
+        "botAlias": {
+          "target": "com.amazonaws.deepsense.runtimeservice#BotAlias",
+          "traits": {
+            "smithy.api#documentation": "<p>The alias in use for the bot associated with the session data.</p>"
+          }
+        },
+        "botName": {
+          "target": "com.amazonaws.deepsense.runtimeservice#BotName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the bot associated with the session data.</p>"
+          }
+        },
+        "sessionId": {
+          "target": "com.amazonaws.deepsense.runtimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier for the session.</p>"
+          }
+        },
+        "userId": {
+          "target": "com.amazonaws.deepsense.runtimeservice#UserId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the client application user.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#DependencyFailedException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.deepsense.runtimeservice#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> One of the dependencies, such as AWS Lambda or Amazon Polly, threw an exception. For example, </p>\n         <ul>\n            <li>\n               <p>If Amazon Lex does not have sufficient permissions to call a Lambda function.</p>\n            </li>\n            <li>\n               <p>If a Lambda function takes longer than 30 seconds to execute.</p>\n            </li>\n            <li>\n               <p>If a fulfillment Lambda function returns a <code>Delegate</code> dialog action without\n          removing any slot values.</p>\n            </li>\n         </ul>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 424
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#DialogAction": {
+      "type": "structure",
+      "members": {
+        "fulfillmentState": {
+          "target": "com.amazonaws.deepsense.runtimeservice#FulfillmentState",
+          "traits": {
+            "smithy.api#documentation": "<p>The fulfillment state of the intent. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Failed</code> - The Lambda function associated with the intent failed to fulfill\n          the intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Fulfilled</code> - The intent has fulfilled by the Lambda function associated\n          with the intent. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReadyForFulfillment</code> - All of the information necessary for the intent is\n          present and the intent ready to be fulfilled by the client application.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "intentName": {
+          "target": "com.amazonaws.deepsense.runtimeservice#IntentName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the intent.</p>"
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.deepsense.runtimeservice#Text",
+          "traits": {
+            "smithy.api#documentation": "<p>The message that should be shown to the user. If you don't specify a message, Amazon Lex will\n      use the message configured for the intent.</p>"
+          }
+        },
+        "messageFormat": {
+          "target": "com.amazonaws.deepsense.runtimeservice#MessageFormatType",
+          "traits": {
+            "smithy.api#documentation": "<ul>\n            <li>\n               <p>\n                  <code>PlainText</code> - The message contains plain UTF-8 text.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CustomPayload</code> - The message is a custom format for the client.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SSML</code> - The message contains text formatted for voice output.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Composite</code> - The message contains an escaped JSON object containing one or\n          more messages. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/howitworks-manage-prompts.html\">Message\n            Groups</a>. </p>\n            </li>\n         </ul>"
+          }
+        },
+        "slotToElicit": {
+          "target": "com.amazonaws.deepsense.runtimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the slot that should be elicited from the user.</p>"
+          }
+        },
+        "slots": {
+          "target": "com.amazonaws.deepsense.runtimeservice#StringMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Map of the slots that have been gathered and their values. </p>"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.deepsense.runtimeservice#DialogActionType",
+          "traits": {
+            "smithy.api#documentation": "<p>The next action that the bot should take in its interaction with the user. The possible\n      values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConfirmIntent</code> - The next action is asking the user if the intent is\n          complete and ready to be fulfilled. This is a yes/no question such as \"Place the\n          order?\"</p>\n            </li>\n            <li>\n               <p>\n                  <code>Close</code> - Indicates that the there will not be a response from the user.\n          For example, the statement \"Your order has been placed\" does not require a\n          response.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Delegate</code> - The next action is determined by Amazon Lex.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitIntent</code> - The next action is to determine the intent that the user\n          wants to fulfill.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitSlot</code> - The next action is to elicit a slot value from the\n          user.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": true
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes the next action that the bot should take in its interaction with the user and\n      provides information about the context in which the action takes place. Use the\n        <code>DialogAction</code> data type to set the interaction to a specific state, or to return\n      the interaction to a previous state.</p>"
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#DialogActionType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": {
+          "ElicitIntent": {
+            "name": "ELICIT_INTENT"
+          },
+          "ConfirmIntent": {
+            "name": "CONFIRM_INTENT"
+          },
+          "ElicitSlot": {
+            "name": "ELICIT_SLOT"
+          },
+          "Close": {
+            "name": "CLOSE"
+          },
+          "Delegate": {
+            "name": "DELEGATE"
+          }
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#DialogState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": {
+          "ElicitIntent": {
+            "name": "ELICIT_INTENT"
+          },
+          "ConfirmIntent": {
+            "name": "CONFIRM_INTENT"
+          },
+          "ElicitSlot": {
+            "name": "ELICIT_SLOT"
+          },
+          "Fulfilled": {
+            "name": "FULFILLED"
+          },
+          "ReadyForFulfillment": {
+            "name": "READY_FOR_FULFILLMENT"
+          },
+          "Failed": {
+            "name": "FAILED"
+          }
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#ErrorMessage": {
+      "type": "string"
+    },
+    "com.amazonaws.deepsense.runtimeservice#FulfillmentState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": {
+          "Fulfilled": {
+            "name": "FULFILLED"
+          },
+          "Failed": {
+            "name": "FAILED"
+          },
+          "ReadyForFulfillment": {
+            "name": "READY_FOR_FULFILLMENT"
+          }
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice.responsecard#GenericAttachment": {
+      "type": "structure",
+      "members": {
+        "attachmentLinkUrl": {
+          "target": "com.amazonaws.deepsense.runtimeservice.responsecard#StringUrlWithLength",
+          "traits": {
+            "smithy.api#documentation": "<p>The URL of an attachment to the response card.</p>"
+          }
+        },
+        "buttons": {
+          "target": "com.amazonaws.deepsense.runtimeservice.responsecard#listOfButtons",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of options to show to the user.</p>"
+          }
+        },
+        "imageUrl": {
+          "target": "com.amazonaws.deepsense.runtimeservice.responsecard#StringUrlWithLength",
+          "traits": {
+            "smithy.api#documentation": "<p>The URL of an image that is displayed to the user.</p>"
+          }
+        },
+        "subTitle": {
+          "target": "com.amazonaws.deepsense.runtimeservice.responsecard#StringWithLength",
+          "traits": {
+            "smithy.api#documentation": "<p>The subtitle shown below the title.</p>"
+          }
+        },
+        "title": {
+          "target": "com.amazonaws.deepsense.runtimeservice.responsecard#StringWithLength",
+          "traits": {
+            "smithy.api#documentation": "<p>The title of the option.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents an option rendered to the user when a prompt is shown. It could be an image, a\n      button, a link, or text. </p>"
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#GetSession": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.deepsense.runtimeservice#GetSessionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.deepsense.runtimeservice#GetSessionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.commonapi.exceptions#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#NotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns session information for a specified bot, alias, and user ID.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/bot/{botName}/alias/{botAlias}/user/{userId}/session",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#GetSessionRequest": {
+      "type": "structure",
+      "members": {
+        "botAlias": {
+          "target": "com.amazonaws.deepsense.runtimeservice#BotAlias",
+          "traits": {
+            "smithy.api#documentation": "<p>The alias in use for the bot that contains the session data.</p>",
+            "smithy.api#httpLabel": true,
+            "smithy.api#required": true
+          }
+        },
+        "botName": {
+          "target": "com.amazonaws.deepsense.runtimeservice#BotName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the bot that contains the session data.</p>",
+            "smithy.api#httpLabel": true,
+            "smithy.api#required": true
+          }
+        },
+        "checkpointLabelFilter": {
+          "target": "com.amazonaws.deepsense.runtimeservice#IntentSummaryCheckpointLabel",
+          "traits": {
+            "smithy.api#documentation": "<p>A string used to filter the intents returned in the <code>recentIntentSummaryView</code>\n      structure. </p>\n         <p>When you specify a filter, only intents with their <code>checkpointLabel</code> field set\n      to that string are returned.</p>",
+            "smithy.api#httpQuery": "checkpointLabelFilter"
+          }
+        },
+        "userId": {
+          "target": "com.amazonaws.deepsense.runtimeservice#UserId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the client application user. Amazon Lex uses this to identify a user's conversation\n      with your bot. </p>",
+            "smithy.api#httpLabel": true,
+            "smithy.api#required": true
+          }
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#GetSessionResponse": {
+      "type": "structure",
+      "members": {
+        "dialogAction": {
+          "target": "com.amazonaws.deepsense.runtimeservice#DialogAction",
+          "traits": {
+            "smithy.api#documentation": "<p>Describes the current state of the bot.</p>"
+          }
+        },
+        "recentIntentSummaryView": {
+          "target": "com.amazonaws.deepsense.runtimeservice#IntentSummaryList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of information about the intents used in the session. The array can contain a\n      maximum of three summaries. If more than three intents are used in the session, the\n        <code>recentIntentSummaryView</code> operation contains information about the last three\n      intents used.</p>\n         <p>If you set the <code>checkpointLabelFilter</code> parameter in the request, the array\n      contains only the intents with the specified label.</p>"
+          }
+        },
+        "sessionAttributes": {
+          "target": "com.amazonaws.deepsense.runtimeservice#StringMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Map of key/value pairs representing the session-specific context information. It contains\n      application information passed between Amazon Lex and a client application.</p>"
+          }
+        },
+        "sessionId": {
+          "target": "com.amazonaws.deepsense.runtimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the session.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#HttpContentType": {
+      "type": "string"
+    },
+    "com.amazonaws.deepsense.runtimeservice#IntentName": {
+      "type": "string"
+    },
+    "com.amazonaws.deepsense.runtimeservice#IntentSummary": {
+      "type": "structure",
+      "members": {
+        "checkpointLabel": {
+          "target": "com.amazonaws.deepsense.runtimeservice#IntentSummaryCheckpointLabel",
+          "traits": {
+            "smithy.api#documentation": "<p>A user-defined label that identifies a particular intent. You can use this label to return\n      to a previous intent. </p>\n         <p>Use the <code>checkpointLabelFilter</code> parameter of the <code>GetSessionRequest</code>\n      operation to filter the intents returned by the operation to those with only the specified\n      label.</p>"
+          }
+        },
+        "confirmationStatus": {
+          "target": "com.amazonaws.deepsense.runtimeservice#ConfirmationStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the intent after the user responds to the confirmation prompt. If the user\n      confirms the intent, Amazon Lex sets this field to <code>Confirmed</code>. If the user denies the\n      intent, Amazon Lex sets this value to <code>Denied</code>. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Confirmed</code> - The user has responded \"Yes\" to the confirmation prompt,\n          confirming that the intent is complete and that it is ready to be fulfilled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Denied</code> - The user has responded \"No\" to the confirmation prompt.</p>\n            </li>\n            <li>\n               <p>\n                  <code>None</code> - The user has never been prompted for confirmation; or, the user\n          was prompted but did not confirm or deny the prompt.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "dialogActionType": {
+          "target": "com.amazonaws.deepsense.runtimeservice#DialogActionType",
+          "traits": {
+            "smithy.api#documentation": "<p>The next action that the bot should take in its interaction with the user. The possible\n      values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConfirmIntent</code> - The next action is asking the user if the intent is\n          complete and ready to be fulfilled. This is a yes/no question such as \"Place the\n          order?\"</p>\n            </li>\n            <li>\n               <p>\n                  <code>Close</code> - Indicates that the there will not be a response from the user.\n          For example, the statement \"Your order has been placed\" does not require a\n          response.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitIntent</code> - The next action is to determine the intent that the user\n          wants to fulfill.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitSlot</code> - The next action is to elicit a slot value from the\n          user.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": true
+          }
+        },
+        "fulfillmentState": {
+          "target": "com.amazonaws.deepsense.runtimeservice#FulfillmentState",
+          "traits": {
+            "smithy.api#documentation": "<p>The fulfillment state of the intent. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Failed</code> - The Lambda function associated with the intent failed to fulfill\n          the intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Fulfilled</code> - The intent has fulfilled by the Lambda function associated\n          with the intent. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReadyForFulfillment</code> - All of the information necessary for the intent is\n          present and the intent ready to be fulfilled by the client application.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "intentName": {
+          "target": "com.amazonaws.deepsense.runtimeservice#IntentName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the intent.</p>"
+          }
+        },
+        "slotToElicit": {
+          "target": "com.amazonaws.deepsense.runtimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The next slot to elicit from the user. If there is not slot to elicit, the field is\n      blank.</p>"
+          }
+        },
+        "slots": {
+          "target": "com.amazonaws.deepsense.runtimeservice#StringMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Map of the slots that have been gathered and their values. </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Provides information about the state of an intent. You can use this information to get the\n      current state of an intent so that you can process the intent, or so that you can return the\n      intent to its previous state.</p>"
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#IntentSummaryCheckpointLabel": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        },
+        "smithy.api#pattern": "[a-zA-Z0-9-]+"
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#IntentSummaryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.deepsense.runtimeservice#IntentSummary"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 3
+        }
+      }
+    },
+    "com.amazonaws.commonapi.exceptions#InternalFailureException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.commonapi.exceptions#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Internal service error. Retry the call.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500
+      }
+    },
+    "com.amazonaws.commonapi.exceptions#LimitExceededException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.commonapi.exceptions#String"
+        },
+        "retryAfterSeconds": {
+          "target": "com.amazonaws.commonapi.exceptions#String",
+          "traits": {
+            "smithy.api#httpHeader": "Retry-After"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Exceeded a limit.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#LoopDetectedException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.deepsense.runtimeservice#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>This exception is not used.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 508
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#MessageFormatType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": {
+          "PlainText": {
+            "name": "PLAIN_TEXT"
+          },
+          "CustomPayload": {
+            "name": "CUSTOM_PAYLOAD"
+          },
+          "SSML": {
+            "name": "SSML"
+          },
+          "Composite": {
+            "name": "COMPOSITE"
+          }
+        }
+      }
+    },
+    "com.amazonaws.commonapi.exceptions#NotAcceptableException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.commonapi.exceptions#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The accept header in the request does not have a valid value.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 406
+      }
+    },
+    "com.amazonaws.commonapi.exceptions#NotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.commonapi.exceptions#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The resource (such as the Amazon Lex bot or an alias) that is referred to is not\n      found.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#PostContent": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.deepsense.runtimeservice#PostContentRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.deepsense.runtimeservice#PostContentResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.commonapi.exceptions#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#NotAcceptableException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#RequestTimeoutException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#UnsupportedMediaTypeException"
+        },
+        {
+          "target": "com.amazonaws.deepsense.runtimeservice#BadGatewayException"
+        },
+        {
+          "target": "com.amazonaws.deepsense.runtimeservice#DependencyFailedException"
+        },
+        {
+          "target": "com.amazonaws.deepsense.runtimeservice#LoopDetectedException"
+        }
+      ],
+      "traits": {
+        "aws.api#unsignedPayload": [
+          "aws.v4"
+        ],
+        "smithy.api#auth": [
+          "aws.v4"
+        ],
+        "smithy.api#documentation": "<p> Sends user input (text or speech) to Amazon Lex. Clients use this API to send text and audio\n      requests to Amazon Lex at runtime. Amazon Lex interprets the user input using the machine learning model\n      that it built for the bot. </p>\n         <p>The <code>PostContent</code> operation supports audio input at 8kHz and 16kHz. You can use\n      8kHz audio to achieve higher speech recognition accuracy in telephone audio applications. </p>\n         <p> In response, Amazon Lex returns the next message to convey to the user. Consider the following\n      example messages: </p>\n         <ul>\n            <li>\n               <p> For a user input \"I would like a pizza,\" Amazon Lex might return a response with a message\n          eliciting slot data (for example, <code>PizzaSize</code>): \"What size pizza would you\n          like?\". </p>\n            </li>\n            <li>\n               <p> After the user provides all of the pizza order information, Amazon Lex might return a\n          response with a message to get user confirmation: \"Order the pizza?\". </p>\n            </li>\n            <li>\n               <p> After the user replies \"Yes\" to the confirmation prompt, Amazon Lex might return a\n          conclusion statement: \"Thank you, your cheese pizza has been ordered.\". </p>\n            </li>\n         </ul>\n         <p> Not all Amazon Lex messages require a response from the user. For example, conclusion\n      statements do not require a response. Some messages require only a yes or no response. In\n      addition to the <code>message</code>, Amazon Lex provides additional context about the message in\n      the response that you can use to enhance client behavior, such as displaying the appropriate\n      client user interface. Consider the following examples: </p>\n         <ul>\n            <li>\n               <p> If the message is to elicit slot data, Amazon Lex returns the following context\n          information: </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>x-amz-lex-dialog-state</code> header set to <code>ElicitSlot</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>x-amz-lex-intent-name</code> header set to the intent name in the current\n              context </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>x-amz-lex-slot-to-elicit</code> header set to the slot name for which the\n                <code>message</code> is eliciting information </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>x-amz-lex-slots</code> header set to a map of slots configured for the intent\n              with their current values </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p> If the message is a confirmation prompt, the <code>x-amz-lex-dialog-state</code>\n          header is set to <code>Confirmation</code> and the <code>x-amz-lex-slot-to-elicit</code>\n          header is omitted. </p>\n            </li>\n            <li>\n               <p> If the message is a clarification prompt configured for the intent, indicating that\n          the user intent is not understood, the <code>x-amz-dialog-state</code> header is set to\n            <code>ElicitIntent</code> and the <code>x-amz-slot-to-elicit</code> header is omitted.\n        </p>\n            </li>\n         </ul>\n         <p> In addition, Amazon Lex also returns your application-specific <code>sessionAttributes</code>.\n      For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html\">Managing Conversation Context</a>. </p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/bot/{botName}/alias/{botAlias}/user/{userId}/content",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#PostContentRequest": {
+      "type": "structure",
+      "members": {
+        "accept": {
+          "target": "com.amazonaws.deepsense.runtimeservice#Accept",
+          "traits": {
+            "smithy.api#documentation": "<p> You pass this value as the <code>Accept</code> HTTP header. </p>\n         <p> The message Amazon Lex returns in the response can be either text or speech based on the\n        <code>Accept</code> HTTP header value in the request. </p>\n         <ul>\n            <li>\n               <p> If the value is <code>text/plain; charset=utf-8</code>, Amazon Lex returns text in the\n          response. </p>\n            </li>\n            <li>\n               <p> If the value begins with <code>audio/</code>, Amazon Lex returns speech in the response.\n          Amazon Lex uses Amazon Polly to generate the speech (using the configuration you specified in the\n            <code>Accept</code> header). For example, if you specify <code>audio/mpeg</code> as the\n          value, Amazon Lex returns speech in the MPEG format.</p>\n            </li>\n            <li>\n               <p>If the value is <code>audio/pcm</code>, the speech returned is <code>audio/pcm</code>\n          in 16-bit, little endian format.\n          </p>\n            </li>\n            <li>\n               <p>The following are the accepted values:</p>\n               <ul>\n                  <li>\n                     <p>audio/mpeg</p>\n                  </li>\n                  <li>\n                     <p>audio/ogg</p>\n                  </li>\n                  <li>\n                     <p>audio/pcm</p>\n                  </li>\n                  <li>\n                     <p>text/plain; charset=utf-8</p>\n                  </li>\n                  <li>\n                     <p>audio/* (defaults to mpeg)</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+            "smithy.api#httpHeader": "Accept"
+          }
+        },
+        "botAlias": {
+          "target": "com.amazonaws.deepsense.runtimeservice#BotAlias",
+          "traits": {
+            "smithy.api#documentation": "<p>Alias of the Amazon Lex bot.</p>",
+            "smithy.api#httpLabel": true,
+            "smithy.api#required": true
+          }
+        },
+        "botName": {
+          "target": "com.amazonaws.deepsense.runtimeservice#BotName",
+          "traits": {
+            "smithy.api#documentation": "<p>Name of the Amazon Lex bot.</p>",
+            "smithy.api#httpLabel": true,
+            "smithy.api#required": true
+          }
+        },
+        "contentType": {
+          "target": "com.amazonaws.deepsense.runtimeservice#HttpContentType",
+          "traits": {
+            "smithy.api#documentation": "<p> You pass this value as the <code>Content-Type</code> HTTP header. </p>\n         <p> Indicates the audio format or text. The header value must start with one of the following\n      prefixes: </p>\n         <ul>\n            <li>\n               <p>PCM format, audio data must be in little-endian byte order.</p>\n               <ul>\n                  <li>\n                     <p>audio/l16; rate=16000; channels=1</p>\n                  </li>\n                  <li>\n                     <p>audio/x-l16; sample-rate=16000; channel-count=1</p>\n                  </li>\n                  <li>\n                     <p>audio/lpcm; sample-rate=8000; sample-size-bits=16; channel-count=1;\n              is-big-endian=false </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Opus format</p>\n               <ul>\n                  <li>\n                     <p>audio/x-cbr-opus-with-preamble; preamble-size=0; bit-rate=256000;\n              frame-size-milliseconds=4</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Text format</p>\n               <ul>\n                  <li>\n                     <p>text/plain; charset=utf-8</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+            "smithy.api#httpHeader": "Content-Type",
+            "smithy.api#required": true
+          }
+        },
+        "inputStream": {
+          "target": "com.amazonaws.deepsense.runtimeservice#BlobStream",
+          "traits": {
+            "smithy.api#documentation": "<p> User input in PCM or Opus audio format or text format as described in the\n        <code>Content-Type</code> HTTP header. </p>\n         <p>You can stream audio data to Amazon Lex or you can create a local buffer that captures all of\n      the audio data before sending. In general, you get better performance if you stream audio data\n      rather than buffering the data locally.</p>",
+            "smithy.api#httpPayload": true,
+            "smithy.api#required": true,
+            "smithy.api#streaming": { }
+          }
+        },
+        "requestAttributes": {
+          "target": "com.amazonaws.deepsense.runtimeservice#SynthesizedJsonAttributesString",
+          "traits": {
+            "smithy.api#documentation": "<p>You pass this value as the <code>x-amz-lex-request-attributes</code> HTTP header.</p>\n         <p>Request-specific information passed between Amazon Lex and a client application. The value must\n      be a JSON serialized and base64 encoded map with string keys and values. The total size of the\n        <code>requestAttributes</code> and <code>sessionAttributes</code> headers is limited to 12\n      KB.</p>\n         <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don't create any\n      request attributes with the prefix <code>x-amz-lex:</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs\">Setting Request\n        Attributes</a>.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-request-attributes"
+          }
+        },
+        "sessionAttributes": {
+          "target": "com.amazonaws.deepsense.runtimeservice#SynthesizedJsonAttributesString",
+          "traits": {
+            "smithy.api#documentation": "<p>You pass this value as the <code>x-amz-lex-session-attributes</code> HTTP header.</p>\n         <p>Application-specific information passed between Amazon Lex and a client application. The value\n      must be a JSON serialized and base64 encoded map with string keys and values. The total size\n      of the <code>sessionAttributes</code> and <code>requestAttributes</code> headers is limited to\n      12 KB.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs\">Setting Session\n        Attributes</a>.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-session-attributes"
+          }
+        },
+        "userId": {
+          "target": "com.amazonaws.deepsense.runtimeservice#UserId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the client application user. Amazon Lex uses this to identify a user's conversation\n      with your bot. At runtime, each request must contain the <code>userID</code> field.</p>\n         <p>To decide the user ID to use for your application, consider the following factors.</p>\n         <ul>\n            <li>\n               <p>The <code>userID</code> field must not contain any personally identifiable information\n          of the user, for example, name, personal identification numbers, or other end user\n          personal information.</p>\n            </li>\n            <li>\n               <p>If you want a user to start a conversation on one device and continue on another\n          device, use a user-specific identifier.</p>\n            </li>\n            <li>\n               <p>If you want the same user to be able to have two independent conversations on two\n          different devices, choose a device-specific identifier.</p>\n            </li>\n            <li>\n               <p>A user can't have two independent conversations with two different versions of the\n          same bot. For example, a user can't have a conversation with the PROD and BETA versions of\n          the same bot. If you anticipate that a user will need to have conversation with two\n          different versions, for example, while testing, include the bot alias in the user ID to\n          separate the two conversations.</p>\n            </li>\n         </ul>",
+            "smithy.api#httpLabel": true,
+            "smithy.api#required": true
+          }
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#PostContentResponse": {
+      "type": "structure",
+      "members": {
+        "audioStream": {
+          "target": "com.amazonaws.deepsense.runtimeservice#BlobStream",
+          "traits": {
+            "smithy.api#documentation": "<p>The prompt (or statement) to convey to the user. This is based on the bot configuration\n      and context. For example, if Amazon Lex did not understand the user intent, it sends the\n        <code>clarificationPrompt</code> configured for the bot. If the intent requires confirmation\n      before taking the fulfillment action, it sends the <code>confirmationPrompt</code>. Another\n      example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message\n      to convey to the user. Then Amazon Lex sends that message in the response. </p>",
+            "smithy.api#httpPayload": true,
+            "smithy.api#streaming": { }
+          }
+        },
+        "contentType": {
+          "target": "com.amazonaws.deepsense.runtimeservice#HttpContentType",
+          "traits": {
+            "smithy.api#documentation": "<p>Content type as specified in the <code>Accept</code> HTTP header in the request.</p>",
+            "smithy.api#httpHeader": "Content-Type"
+          }
+        },
+        "dialogState": {
+          "target": "com.amazonaws.deepsense.runtimeservice#DialogState",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies the current state of the user interaction. Amazon Lex returns one of the following\n      values as <code>dialogState</code>. The client can optionally use this information to\n      customize the user interface. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ElicitIntent</code> - Amazon Lex wants to elicit the user's intent. Consider the\n          following examples: </p>\n               <p> For example, a user might utter an intent (\"I want to order a pizza\"). If Amazon Lex\n          cannot infer the user intent from this utterance, it will return this dialog state.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfirmIntent</code> - Amazon Lex is expecting a \"yes\" or \"no\" response. </p>\n               <p>For example, Amazon Lex wants user confirmation before fulfilling an intent. Instead of a\n          simple \"yes\" or \"no\" response, a user might respond with additional information. For\n          example, \"yes, but make it a thick crust pizza\" or \"no, I want to order a drink.\" Amazon Lex\n          can process such additional information (in these examples, update the crust type slot or\n          change the intent from OrderPizza to OrderDrink). </p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitSlot</code> - Amazon Lex is expecting the value of a slot for the current intent. </p>\n               <p> For example, suppose that in the response Amazon Lex sends this message: \"What size pizza\n          would you like?\". A user might reply with the slot value (e.g., \"medium\"). The user might\n          also provide additional information in the response (e.g., \"medium thick crust pizza\").\n          Amazon Lex can process such additional information appropriately. </p>\n            </li>\n            <li>\n               <p>\n                  <code>Fulfilled</code> - Conveys that the Lambda function has successfully fulfilled the\n          intent. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReadyForFulfillment</code> - Conveys that the client has to fulfill the request.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code> - Conveys that the conversation with the user failed. </p>\n               <p> This can happen for various reasons, including that the user does not provide an\n          appropriate response to prompts from the service (you can configure how many times Amazon Lex\n          can prompt a user for specific information), or if the Lambda function fails to fulfill the\n          intent. </p>\n            </li>\n         </ul>",
+            "smithy.api#httpHeader": "x-amz-lex-dialog-state"
+          }
+        },
+        "inputTranscript": {
+          "target": "com.amazonaws.deepsense.runtimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The text used to process the request.</p>\n         <p>If the input was an audio stream, the <code>inputTranscript</code> field contains the text\n      extracted from the audio stream. This is the text that is actually processed to recognize\n      intents and slot values. You can use this information to determine if Amazon Lex is correctly\n      processing the audio that you send.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-input-transcript"
+          }
+        },
+        "intentName": {
+          "target": "com.amazonaws.deepsense.runtimeservice#IntentName",
+          "traits": {
+            "smithy.api#documentation": "<p>Current user intent that Amazon Lex is aware of.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-intent-name"
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.deepsense.runtimeservice#Text",
+          "traits": {
+            "smithy.api#documentation": "<p>The message to convey to the user. The message can come from the bot's configuration or\n      from a Lambda function.</p>\n         <p>If the intent is not configured with a Lambda function, or if the Lambda function returned\n        <code>Delegate</code> as the <code>dialogAction.type</code> in its response, Amazon Lex decides\n      on the next course of action and selects an appropriate message from the bot's configuration\n      based on the current interaction context. For example, if Amazon Lex isn't able to understand user\n      input, it uses a clarification prompt message.</p>\n         <p>When you create an intent you can assign messages to groups. When messages are assigned to\n      groups Amazon Lex returns one message from each group in the response. The message field is an\n      escaped JSON string containing the messages. For more information about the structure of the\n      JSON string returned, see <a>msg-prompts-formats</a>.</p>\n         <p>If the Lambda function returns a message, Amazon Lex passes it to the client in its\n      response.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-message"
+          }
+        },
+        "messageFormat": {
+          "target": "com.amazonaws.deepsense.runtimeservice#MessageFormatType",
+          "traits": {
+            "smithy.api#documentation": "<p>The format of the response message. One of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PlainText</code> - The message contains plain UTF-8 text.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CustomPayload</code> - The message is a custom format for the client.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SSML</code> - The message contains text formatted for voice output.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Composite</code> - The message contains an escaped JSON object containing one or\n          more messages from the groups that messages were assigned to when the intent was\n          created.</p>\n            </li>\n         </ul>",
+            "smithy.api#httpHeader": "x-amz-lex-message-format"
+          }
+        },
+        "sentimentResponse": {
+          "target": "com.amazonaws.deepsense.runtimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The sentiment expressed in and utterance.</p>\n         <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis,\n      this field contains the result of the analysis.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-sentiment"
+          }
+        },
+        "sessionAttributes": {
+          "target": "com.amazonaws.deepsense.runtimeservice#SynthesizedJsonString",
+          "traits": {
+            "smithy.api#documentation": "<p> Map of key/value pairs representing the session-specific context information. </p>",
+            "smithy.api#httpHeader": "x-amz-lex-session-attributes"
+          }
+        },
+        "sessionId": {
+          "target": "com.amazonaws.deepsense.runtimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier for the session.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-session-id"
+          }
+        },
+        "slotToElicit": {
+          "target": "com.amazonaws.deepsense.runtimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p> If the <code>dialogState</code> value is <code>ElicitSlot</code>, returns the name of the\n      slot for which Amazon Lex is eliciting a value. </p>",
+            "smithy.api#httpHeader": "x-amz-lex-slot-to-elicit"
+          }
+        },
+        "slots": {
+          "target": "com.amazonaws.deepsense.runtimeservice#SynthesizedJsonString",
+          "traits": {
+            "smithy.api#documentation": "<p>Map of zero or more intent slots (name/value pairs) Amazon Lex detected from the user input\n      during the conversation. The field is base-64 encoded.</p>\n         <p>Amazon Lex creates a resolution list containing likely values for a slot. The value that it\n      returns is determined by the <code>valueSelectionStrategy</code> selected when the slot type\n      was created or updated. If <code>valueSelectionStrategy</code> is set to\n        <code>ORIGINAL_VALUE</code>, the value provided by the user is returned, if the user value\n      is similar to the slot values. If <code>valueSelectionStrategy</code> is set to\n        <code>TOP_RESOLUTION</code> Amazon Lex returns the first value in the resolution list or, if\n      there is no resolution list, null. If you don't specify a <code>valueSelectionStrategy</code>,\n      the default is <code>ORIGINAL_VALUE</code>.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-slots"
+          }
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#PostText": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.deepsense.runtimeservice#PostTextRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.deepsense.runtimeservice#PostTextResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.commonapi.exceptions#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.deepsense.runtimeservice#BadGatewayException"
+        },
+        {
+          "target": "com.amazonaws.deepsense.runtimeservice#DependencyFailedException"
+        },
+        {
+          "target": "com.amazonaws.deepsense.runtimeservice#LoopDetectedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Sends user input to Amazon Lex. Client applications can use this API to send requests to\n      Amazon Lex at runtime. Amazon Lex then interprets the user input using the machine learning model it\n      built for the bot. </p>\n         <p> In response, Amazon Lex returns the next <code>message</code> to convey to the user an\n      optional <code>responseCard</code> to display. Consider the following example messages: </p>\n         <ul>\n            <li>\n               <p> For a user input \"I would like a pizza\", Amazon Lex might return a response with a\n          message eliciting slot data (for example, PizzaSize): \"What size pizza would you like?\"\n        </p>\n            </li>\n            <li>\n               <p> After the user provides all of the pizza order information, Amazon Lex might return a\n          response with a message to obtain user confirmation \"Proceed with the pizza order?\".\n        </p>\n            </li>\n            <li>\n               <p> After the user replies to a confirmation prompt with a \"yes\", Amazon Lex might return\n          a conclusion statement: \"Thank you, your cheese pizza has been ordered.\". </p>\n            </li>\n         </ul>\n\n         <p> Not all Amazon Lex messages require a user response. For example, a conclusion statement\n      does not require a response. Some messages require only a \"yes\" or \"no\" user response. In\n      addition to the <code>message</code>, Amazon Lex provides additional context about the message\n      in the response that you might use to enhance client behavior, for example, to display the\n      appropriate client user interface. These are the <code>slotToElicit</code>,\n        <code>dialogState</code>, <code>intentName</code>, and <code>slots</code> fields in the\n      response. Consider the following examples: </p>\n\n         <ul>\n            <li>\n               <p>If the message is to elicit slot data, Amazon Lex returns the following context\n          information:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>dialogState</code> set to ElicitSlot </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>intentName</code> set to the intent name in the current context </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>slotToElicit</code> set to the slot name for which the <code>message</code> is\n              eliciting information </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>slots</code> set to a map of slots, configured for the intent, with currently\n              known values </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p> If the message is a confirmation prompt, the <code>dialogState</code> is set to\n          ConfirmIntent and <code>SlotToElicit</code> is set to null. </p>\n            </li>\n            <li>\n               <p>If the message is a clarification prompt (configured for the intent) that indicates\n          that user intent is not understood, the <code>dialogState</code> is set to ElicitIntent\n          and <code>slotToElicit</code> is set to null. </p>\n            </li>\n         </ul>\n\n         <p> In addition, Amazon Lex also returns your application-specific\n        <code>sessionAttributes</code>. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html\">Managing Conversation Context</a>. </p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/bot/{botName}/alias/{botAlias}/user/{userId}/text",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#PostTextRequest": {
+      "type": "structure",
+      "members": {
+        "botAlias": {
+          "target": "com.amazonaws.deepsense.runtimeservice#BotAlias",
+          "traits": {
+            "smithy.api#documentation": "<p>The alias of the Amazon Lex bot.</p>",
+            "smithy.api#httpLabel": true,
+            "smithy.api#required": true
+          }
+        },
+        "botName": {
+          "target": "com.amazonaws.deepsense.runtimeservice#BotName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the Amazon Lex bot.</p>",
+            "smithy.api#httpLabel": true,
+            "smithy.api#required": true
+          }
+        },
+        "inputText": {
+          "target": "com.amazonaws.deepsense.runtimeservice#Text",
+          "traits": {
+            "smithy.api#documentation": "<p>The text that the user entered (Amazon Lex interprets this text).</p>",
+            "smithy.api#required": true
+          }
+        },
+        "requestAttributes": {
+          "target": "com.amazonaws.deepsense.runtimeservice#StringMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Request-specific information passed between Amazon Lex and a client application.</p>\n         <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don't create any\n      request attributes with the prefix <code>x-amz-lex:</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs\">Setting Request\n        Attributes</a>.</p>"
+          }
+        },
+        "sessionAttributes": {
+          "target": "com.amazonaws.deepsense.runtimeservice#StringMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Application-specific information passed between Amazon Lex and a client application.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs\">Setting Session\n        Attributes</a>.</p>"
+          }
+        },
+        "userId": {
+          "target": "com.amazonaws.deepsense.runtimeservice#UserId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the client application user. Amazon Lex uses this to identify a user's conversation\n      with your bot. At runtime, each request must contain the <code>userID</code> field.</p>\n         <p>To decide the user ID to use for your application, consider the following factors.</p>\n         <ul>\n            <li>\n               <p>The <code>userID</code> field must not contain any personally identifiable information\n          of the user, for example, name, personal identification numbers, or other end user\n          personal information.</p>\n            </li>\n            <li>\n               <p>If you want a user to start a conversation on one device and continue on another\n          device, use a user-specific identifier.</p>\n            </li>\n            <li>\n               <p>If you want the same user to be able to have two independent conversations on two\n          different devices, choose a device-specific identifier.</p>\n            </li>\n            <li>\n               <p>A user can't have two independent conversations with two different versions of the\n          same bot. For example, a user can't have a conversation with the PROD and BETA versions of\n          the same bot. If you anticipate that a user will need to have conversation with two\n          different versions, for example, while testing, include the bot alias in the user ID to\n          separate the two conversations.</p>\n            </li>\n         </ul>",
+            "smithy.api#httpLabel": true,
+            "smithy.api#required": true
+          }
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#PostTextResponse": {
+      "type": "structure",
+      "members": {
+        "dialogState": {
+          "target": "com.amazonaws.deepsense.runtimeservice#DialogState",
+          "traits": {
+            "smithy.api#documentation": "<p> Identifies the current state of the user interaction. Amazon Lex returns one of the following\n      values as <code>dialogState</code>. The client can optionally use this information to\n      customize the user interface. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ElicitIntent</code> - Amazon Lex wants to elicit user intent. </p>\n               <p>For example, a user might utter an intent (\"I want to order a pizza\"). If Amazon Lex cannot\n          infer the user intent from this utterance, it will return this dialogState.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfirmIntent</code> - Amazon Lex is expecting a \"yes\" or \"no\" response. </p>\n               <p> For example, Amazon Lex wants user confirmation before fulfilling an intent. </p>\n               <p>Instead of a simple \"yes\" or \"no,\" a user might respond with additional information.\n          For example, \"yes, but make it thick crust pizza\" or \"no, I want to order a drink\".\n          Amazon Lex can process such additional information (in these examples, update the crust\n          type slot value, or change intent from OrderPizza to OrderDrink).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitSlot</code> - Amazon Lex is expecting a slot value for the current intent. </p>\n               <p>For example, suppose that in the response Amazon Lex sends this message: \"What size pizza\n          would you like?\". A user might reply with the slot value (e.g., \"medium\"). The user might\n          also provide additional information in the response (e.g., \"medium thick crust pizza\").\n          Amazon Lex can process such additional information appropriately. </p>\n            </li>\n            <li>\n               <p>\n                  <code>Fulfilled</code> - Conveys that the Lambda function configured for the intent has\n          successfully fulfilled the intent. </p>\n\n            </li>\n            <li>\n               <p>\n                  <code>ReadyForFulfillment</code> - Conveys that the client has to fulfill the intent.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code> - Conveys that the conversation with the user failed. </p>\n               <p> This can happen for various reasons including that the user did not provide an\n          appropriate response to prompts from the service (you can configure how many times Amazon Lex\n          can prompt a user for specific information), or the Lambda function failed to fulfill the\n          intent. </p>\n            </li>\n         </ul>"
+          }
+        },
+        "intentName": {
+          "target": "com.amazonaws.deepsense.runtimeservice#IntentName",
+          "traits": {
+            "smithy.api#documentation": "<p>The current user intent that Amazon Lex is aware of.</p>"
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.deepsense.runtimeservice#Text",
+          "traits": {
+            "smithy.api#documentation": "<p>The message to convey to the user. The message can come from the bot's configuration or\n      from a Lambda function.</p>\n         <p>If the intent is not configured with a Lambda function, or if the Lambda function returned\n        <code>Delegate</code> as the <code>dialogAction.type</code> its response, Amazon Lex decides on\n      the next course of action and selects an appropriate message from the bot's configuration\n      based on the current interaction context. For example, if Amazon Lex isn't able to understand user\n      input, it uses a clarification prompt message.</p>\n         <p>When you create an intent you can assign messages to groups. When messages are assigned to\n      groups Amazon Lex returns one message from each group in the response. The message field is an\n      escaped JSON string containing the messages. For more information about the structure of the\n      JSON string returned, see <a>msg-prompts-formats</a>.</p>\n         <p>If the Lambda function returns a message, Amazon Lex passes it to the client in its\n      response.</p>"
+          }
+        },
+        "messageFormat": {
+          "target": "com.amazonaws.deepsense.runtimeservice#MessageFormatType",
+          "traits": {
+            "smithy.api#documentation": "<p>The format of the response message. One of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PlainText</code> - The message contains plain UTF-8 text.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CustomPayload</code> - The message is a custom format defined by the Lambda\n          function.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SSML</code> - The message contains text formatted for voice output.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Composite</code> - The message contains an escaped JSON object containing one or\n          more messages from the groups that messages were assigned to when the intent was\n          created.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "responseCard": {
+          "target": "com.amazonaws.deepsense.runtimeservice.responsecard#ResponseCard",
+          "traits": {
+            "smithy.api#documentation": "<p>Represents the options that the user has to respond to the current prompt. Response Card\n      can come from the bot configuration (in the Amazon Lex console, choose the settings button next\n      to a slot) or from a code hook (Lambda function). </p>"
+          }
+        },
+        "sentimentResponse": {
+          "target": "com.amazonaws.deepsense.runtimeservice#SentimentResponse",
+          "traits": {
+            "smithy.api#documentation": "<p>The sentiment expressed in and utterance.</p>\n         <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis,\n      this field contains the result of the analysis.</p>"
+          }
+        },
+        "sessionAttributes": {
+          "target": "com.amazonaws.deepsense.runtimeservice#StringMap",
+          "traits": {
+            "smithy.api#documentation": "<p>A map of key-value pairs representing the session-specific context information.</p>"
+          }
+        },
+        "sessionId": {
+          "target": "com.amazonaws.deepsense.runtimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the session.</p>"
+          }
+        },
+        "slotToElicit": {
+          "target": "com.amazonaws.deepsense.runtimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>If the <code>dialogState</code> value is <code>ElicitSlot</code>, returns the name of the\n      slot for which Amazon Lex is eliciting a value. </p>"
+          }
+        },
+        "slots": {
+          "target": "com.amazonaws.deepsense.runtimeservice#StringMap",
+          "traits": {
+            "smithy.api#documentation": "<p> The intent slots that Amazon Lex detected from the user input in the conversation. </p>\n         <p>Amazon Lex creates a resolution list containing likely values for a slot. The value that it\n      returns is determined by the <code>valueSelectionStrategy</code> selected when the slot type\n      was created or updated. If <code>valueSelectionStrategy</code> is set to\n        <code>ORIGINAL_VALUE</code>, the value provided by the user is returned, if the user value\n      is similar to the slot values. If <code>valueSelectionStrategy</code> is set to\n        <code>TOP_RESOLUTION</code> Amazon Lex returns the first value in the resolution list or, if\n      there is no resolution list, null. If you don't specify a <code>valueSelectionStrategy</code>,\n      the default is <code>ORIGINAL_VALUE</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#PutSession": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.deepsense.runtimeservice#PutSessionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.deepsense.runtimeservice#PutSessionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.commonapi.exceptions#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#NotAcceptableException"
+        },
+        {
+          "target": "com.amazonaws.commonapi.exceptions#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.deepsense.runtimeservice#BadGatewayException"
+        },
+        {
+          "target": "com.amazonaws.deepsense.runtimeservice#DependencyFailedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a new session or modifies an existing session with an Amazon Lex bot. Use this\n      operation to enable your application to set the state of the bot.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/how-session-api.html\">Managing Sessions</a>.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/bot/{botName}/alias/{botAlias}/user/{userId}/session",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#PutSessionRequest": {
+      "type": "structure",
+      "members": {
+        "accept": {
+          "target": "com.amazonaws.deepsense.runtimeservice#Accept",
+          "traits": {
+            "smithy.api#documentation": "<p>The message that Amazon Lex returns in the response can be either text or speech based\n      depending on the value of this field.</p>\n         <ul>\n            <li>\n               <p>If the value is <code>text/plain; charset=utf-8</code>, Amazon Lex returns text in the\n          response.</p>\n            </li>\n            <li>\n               <p>If the value begins with <code>audio/</code>, Amazon Lex returns speech in the response.\n          Amazon Lex uses Amazon Polly to generate the speech in the configuration that you specify. For\n          example, if you specify <code>audio/mpeg</code> as the value, Amazon Lex returns speech in the\n          MPEG format.</p>\n            </li>\n            <li>\n               <p>If the value is <code>audio/pcm</code>, the speech is returned as\n            <code>audio/pcm</code> in 16-bit, little endian format.</p>\n            </li>\n            <li>\n               <p>The following are the accepted values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>audio/mpeg</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>audio/ogg</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>audio/pcm</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>audio/*</code> (defaults to mpeg)</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>text/plain; charset=utf-8</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+            "smithy.api#httpHeader": "Accept"
+          }
+        },
+        "botAlias": {
+          "target": "com.amazonaws.deepsense.runtimeservice#BotAlias",
+          "traits": {
+            "smithy.api#documentation": "<p>The alias in use for the bot that contains the session data.</p>",
+            "smithy.api#httpLabel": true,
+            "smithy.api#required": true
+          }
+        },
+        "botName": {
+          "target": "com.amazonaws.deepsense.runtimeservice#BotName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the bot that contains the session data.</p>",
+            "smithy.api#httpLabel": true,
+            "smithy.api#required": true
+          }
+        },
+        "dialogAction": {
+          "target": "com.amazonaws.deepsense.runtimeservice#DialogAction",
+          "traits": {
+            "smithy.api#documentation": "<p>Sets the next action that the bot should take to fulfill the conversation.</p>"
+          }
+        },
+        "recentIntentSummaryView": {
+          "target": "com.amazonaws.deepsense.runtimeservice#IntentSummaryList",
+          "traits": {
+            "smithy.api#documentation": "<p>A summary of the recent intents for the bot. You can use the intent summary view to set a\n      checkpoint label on an intent and modify attributes of intents. You can also use it to remove\n      or add intent summary objects to the list.</p>\n         <p>An intent that you modify or add to the list must make sense for the bot. For example, the\n      intent name must be valid for the bot. You must provide valid values for:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>intentName</code>\n               </p>\n            </li>\n            <li>\n               <p>slot names</p>\n            </li>\n            <li>\n               <p>\n                  <code>slotToElict</code>\n               </p>\n            </li>\n         </ul>\n         <p>If you send the <code>recentIntentSummaryView</code> parameter in a\n        <code>PutSession</code> request, the contents of the new summary view replaces the old\n      summary view. For example, if a <code>GetSession</code> request returns three intents in the\n      summary view and you call <code>PutSession</code> with one intent in the summary view, the\n      next call to <code>GetSession</code> will only return one intent.</p>"
+          }
+        },
+        "sessionAttributes": {
+          "target": "com.amazonaws.deepsense.runtimeservice#StringMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Map of key/value pairs representing the session-specific context information. It contains\n      application information passed between Amazon Lex and a client application.</p>"
+          }
+        },
+        "userId": {
+          "target": "com.amazonaws.deepsense.runtimeservice#UserId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the client application user. Amazon Lex uses this to identify a user's conversation\n      with your bot. </p>",
+            "smithy.api#httpLabel": true,
+            "smithy.api#required": true
+          }
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#PutSessionResponse": {
+      "type": "structure",
+      "members": {
+        "audioStream": {
+          "target": "com.amazonaws.deepsense.runtimeservice#BlobStream",
+          "traits": {
+            "smithy.api#documentation": "<p>The audio version of the message to convey to the user.</p>",
+            "smithy.api#httpPayload": true,
+            "smithy.api#streaming": { }
+          }
+        },
+        "contentType": {
+          "target": "com.amazonaws.deepsense.runtimeservice#HttpContentType",
+          "traits": {
+            "smithy.api#documentation": "<p>Content type as specified in the <code>Accept</code> HTTP header in the request.</p>",
+            "smithy.api#httpHeader": "Content-Type"
+          }
+        },
+        "dialogState": {
+          "target": "com.amazonaws.deepsense.runtimeservice#DialogState",
+          "traits": {
+            "smithy.api#documentation": "<p></p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConfirmIntent</code> - Amazon Lex is expecting a \"yes\" or \"no\" response to confirm\n          the intent before fulfilling an intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitIntent</code> - Amazon Lex wants to elicit the user's intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitSlot</code> - Amazon Lex is expecting the value of a slot for the current\n          intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code> - Conveys that the conversation with the user has failed. This can\n          happen for various reasons, including the user does not provide an appropriate response to\n          prompts from the service, or if the Lambda function fails to fulfill the intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Fulfilled</code> - Conveys that the Lambda function has sucessfully fulfilled the\n          intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ReadyForFulfillment</code> - Conveys that the client has to fulfill the\n          intent.</p>\n            </li>\n         </ul>",
+            "smithy.api#httpHeader": "x-amz-lex-dialog-state"
+          }
+        },
+        "intentName": {
+          "target": "com.amazonaws.deepsense.runtimeservice#IntentName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the current intent.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-intent-name"
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.deepsense.runtimeservice#Text",
+          "traits": {
+            "smithy.api#documentation": "<p>The next message that should be presented to the user.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-message"
+          }
+        },
+        "messageFormat": {
+          "target": "com.amazonaws.deepsense.runtimeservice#MessageFormatType",
+          "traits": {
+            "smithy.api#documentation": "<p>The format of the response message. One of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PlainText</code> - The message contains plain UTF-8 text.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CustomPayload</code> - The message is a custom format for the client.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SSML</code> - The message contains text formatted for voice output.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Composite</code> - The message contains an escaped JSON object containing one or\n          more messages from the groups that messages were assigned to when the intent was\n          created.</p>\n            </li>\n         </ul>",
+            "smithy.api#httpHeader": "x-amz-lex-message-format"
+          }
+        },
+        "sessionAttributes": {
+          "target": "com.amazonaws.deepsense.runtimeservice#SynthesizedJsonString",
+          "traits": {
+            "smithy.api#documentation": "<p>Map of key/value pairs representing session-specific context information.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-session-attributes"
+          }
+        },
+        "sessionId": {
+          "target": "com.amazonaws.deepsense.runtimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the session.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-session-id"
+          }
+        },
+        "slotToElicit": {
+          "target": "com.amazonaws.deepsense.runtimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>If the <code>dialogState</code> is <code>ElicitSlot</code>, returns the name of the slot\n      for which Amazon Lex is eliciting a value.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-slot-to-elicit"
+          }
+        },
+        "slots": {
+          "target": "com.amazonaws.deepsense.runtimeservice#SynthesizedJsonString",
+          "traits": {
+            "smithy.api#documentation": "<p>Map of zero or more intent slots Amazon Lex detected from the user input during the\n      conversation.</p>\n         <p>Amazon Lex creates a resolution list containing likely values for a slot. The value that it\n      returns is determined by the <code>valueSelectionStrategy</code> selected when the slot type\n      was created or updated. If <code>valueSelectionStrategy</code> is set to\n        <code>ORIGINAL_VALUE</code>, the value provided by the user is returned, if the user value\n      is similar to the slot values. If <code>valueSelectionStrategy</code> is set to\n        <code>TOP_RESOLUTION</code> Amazon Lex returns the first value in the resolution list or, if\n      there is no resolution list, null. If you don't specify a <code>valueSelectionStrategy</code>\n      the default is <code>ORIGINAL_VALUE</code>. </p>",
+            "smithy.api#httpHeader": "x-amz-lex-slots"
+          }
+        }
+      }
+    },
+    "com.amazonaws.commonapi.exceptions#RequestTimeoutException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.commonapi.exceptions#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The input speech is too long.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 408
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice.responsecard#ResponseCard": {
+      "type": "structure",
+      "members": {
+        "contentType": {
+          "target": "com.amazonaws.deepsense.runtimeservice.responsecard#ContentType",
+          "traits": {
+            "smithy.api#documentation": "<p>The content type of the response.</p>"
+          }
+        },
+        "genericAttachments": {
+          "target": "com.amazonaws.deepsense.runtimeservice.responsecard#genericAttachmentList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of attachment objects representing options.</p>"
+          }
+        },
+        "version": {
+          "target": "com.amazonaws.deepsense.runtimeservice.responsecard#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the response card format.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>If you configure a response card when creating your bots, Amazon Lex substitutes the session\n      attributes and slot values that are available, and then returns it. The response card can also\n      come from a Lambda function ( <code>dialogCodeHook</code> and <code>fulfillmentActivity</code>\n      on an intent).</p>"
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#SentimentLabel": {
+      "type": "string"
+    },
+    "com.amazonaws.deepsense.runtimeservice#SentimentResponse": {
+      "type": "structure",
+      "members": {
+        "sentimentLabel": {
+          "target": "com.amazonaws.deepsense.runtimeservice#SentimentLabel",
+          "traits": {
+            "smithy.api#documentation": "<p>The inferred sentiment that Amazon Comprehend has the highest confidence in.</p>"
+          }
+        },
+        "sentimentScore": {
+          "target": "com.amazonaws.deepsense.runtimeservice#SentimentScore",
+          "traits": {
+            "smithy.api#documentation": "<p>The likelihood that the sentiment was correctly inferred.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The sentiment expressed in an utterance.</p>\n         <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis,\n      this field structure contains the result of the analysis.</p>"
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#SentimentScore": {
+      "type": "string"
+    },
+    "com.amazonaws.deepsense.runtimeservice#String": {
+      "type": "string"
+    },
+    "com.amazonaws.deepsense.runtimeservice.responsecard#String": {
+      "type": "string"
+    },
+    "com.amazonaws.commonapi.exceptions#String": {
+      "type": "string"
+    },
+    "com.amazonaws.deepsense.runtimeservice#StringMap": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.deepsense.runtimeservice#String"
+      },
+      "value": {
+        "target": "com.amazonaws.deepsense.runtimeservice#String"
+      },
+      "traits": {
+        "smithy.api#sensitive": true
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice.responsecard#StringUrlWithLength": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2048
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice.responsecard#StringWithLength": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 80
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#SynthesizedJsonAttributesString": {
+      "type": "string",
+      "traits": {
+        "smithy.api#mediaType": "application/json",
+        "smithy.api#sensitive": true
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#SynthesizedJsonString": {
+      "type": "string",
+      "traits": {
+        "smithy.api#mediaType": "application/json"
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#Text": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        },
+        "smithy.api#sensitive": true
+      }
+    },
+    "com.amazonaws.commonapi.exceptions#UnsupportedMediaTypeException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.commonapi.exceptions#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The Content-Type header (<code>PostContent</code> API) has an invalid value. </p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 415
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice#UserId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 2,
+          "max": 100
+        },
+        "smithy.api#pattern": "[0-9a-zA-Z._:-]+"
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice.responsecard#genericAttachmentList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.deepsense.runtimeservice.responsecard#GenericAttachment"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 10
+        }
+      }
+    },
+    "com.amazonaws.deepsense.runtimeservice.responsecard#listOfButtons": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.deepsense.runtimeservice.responsecard#Button"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 5
+        }
+      }
+    }
+  }
+}
