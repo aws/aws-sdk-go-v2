@@ -107,12 +107,10 @@ func setURI(uv URIValue, args []interface{}) error {
 		return reflectCall(reflect.ValueOf(uv.Float), args)
 	case bool:
 		return reflectCall(reflect.ValueOf(uv.Boolean), args)
-	case aws.JSONValue:
-		return reflectCall(reflect.ValueOf(uv.JSONValue), args)
 	case time.Time:
-		return reflectCall(reflect.ValueOf(uv.Time), args)
+		return reflectCall(reflect.ValueOf(uv.Timestamp), args)
 	case []byte:
-		return reflectCall(reflect.ValueOf(uv.ByteSlice), args)
+		return reflectCall(reflect.ValueOf(uv.Blob), args)
 	default:
 		return fmt.Errorf("unhandled value type")
 	}

@@ -28,25 +28,25 @@ func TestHeaderValue(t *testing.T) {
 				expectedKeyName: {"string value"},
 			},
 		},
-		"set float64": {
+		"set float": {
 			header: http.Header{expectedKeyName: []string{"foobar"}},
-			args:   []interface{}{3.14159},
+			args:   []interface{}{float32(3.14159)},
 			expected: map[string][]string{
 				expectedKeyName: {"3.14159"},
 			},
 		},
-		"set bool": {
+		"set double": {
+			header: http.Header{expectedKeyName: []string{"foobar"}},
+			args:   []interface{}{float64(3.14159)},
+			expected: map[string][]string{
+				expectedKeyName: {"3.14159"},
+			},
+		},
+		"set boolean": {
 			header: http.Header{expectedKeyName: []string{"foobar"}},
 			args:   []interface{}{true},
 			expected: map[string][]string{
 				expectedKeyName: {"true"},
-			},
-		},
-		"set json": {
-			header: http.Header{expectedKeyName: []string{"foobar"}},
-			args:   []interface{}{aws.JSONValue{"jsonKey": "jsonValue"}},
-			expected: map[string][]string{
-				expectedKeyName: {"eyJqc29uS2V5IjoianNvblZhbHVlIn0="},
 			},
 		},
 		"set time": {
@@ -56,7 +56,7 @@ func TestHeaderValue(t *testing.T) {
 				expectedKeyName: {"1970-01-01T00:00:00Z"},
 			},
 		},
-		"set byte slice": {
+		"set blob": {
 			header: http.Header{expectedKeyName: []string{"foobar"}},
 			args:   []interface{}{[]byte("baz")},
 			expected: map[string][]string{
@@ -71,7 +71,7 @@ func TestHeaderValue(t *testing.T) {
 				expectedKeyName: {"other string", "string value"},
 			},
 		},
-		"add float64": {
+		"add float": {
 			header: http.Header{expectedKeyName: []string{"1.61803"}},
 			args:   []interface{}{3.14159},
 			append: true,
@@ -103,7 +103,7 @@ func TestHeaderValue(t *testing.T) {
 				expectedKeyName: {"1991-09-17T00:00:00Z", "1970-01-01T00:00:00Z"},
 			},
 		},
-		"add byte slice": {
+		"add blob": {
 			header: http.Header{expectedKeyName: []string{"YmFy"}},
 			args:   []interface{}{[]byte("baz")},
 			append: true,
@@ -197,16 +197,16 @@ func setHeader(hv HeaderValue, args []interface{}) error {
 	switch value.(type) {
 	case string:
 		return reflectCall(reflect.ValueOf(hv.String), args)
-	case float64:
+	case float32:
 		return reflectCall(reflect.ValueOf(hv.Float), args)
+	case float64:
+		return reflectCall(reflect.ValueOf(hv.Double), args)
 	case bool:
 		return reflectCall(reflect.ValueOf(hv.Boolean), args)
-	case aws.JSONValue:
-		return reflectCall(reflect.ValueOf(hv.JSONValue), args)
 	case time.Time:
-		return reflectCall(reflect.ValueOf(hv.Time), args)
+		return reflectCall(reflect.ValueOf(hv.Timestamp), args)
 	case []byte:
-		return reflectCall(reflect.ValueOf(hv.ByteSlice), args)
+		return reflectCall(reflect.ValueOf(hv.Blob), args)
 	default:
 		return fmt.Errorf("unhandled header value type")
 	}

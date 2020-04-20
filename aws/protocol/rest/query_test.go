@@ -137,16 +137,16 @@ func setQueryValue(qv QueryValue, args []interface{}) error {
 	switch value.(type) {
 	case string:
 		return reflectCall(reflect.ValueOf(qv.String), args)
-	case float64:
+	case float32:
 		return reflectCall(reflect.ValueOf(qv.Float), args)
+	case float64:
+		return reflectCall(reflect.ValueOf(qv.Double), args)
 	case bool:
 		return reflectCall(reflect.ValueOf(qv.Boolean), args)
-	case aws.JSONValue:
-		return reflectCall(reflect.ValueOf(qv.JSONValue), args)
 	case time.Time:
-		return reflectCall(reflect.ValueOf(qv.Time), args)
+		return reflectCall(reflect.ValueOf(qv.Timestamp), args)
 	case []byte:
-		return reflectCall(reflect.ValueOf(qv.ByteSlice), args)
+		return reflectCall(reflect.ValueOf(qv.Blob), args)
 	default:
 		return fmt.Errorf("unhandled query value type")
 	}
