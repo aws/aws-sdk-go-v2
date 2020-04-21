@@ -29,6 +29,7 @@ SDK Features
     * The IMDS region will be used if region as not found configured in either the shared config or the process environment.
   * Fixes [#244](https://github.com/aws/aws-sdk-go-v2/issues/244)
   * Fixes [#515](https://github.com/aws/aws-sdk-go-v2/issues/515)
+
 SDK Enhancements
 ---
 * `service/dynamodb/expression`: Add IsSet helper for ConditionBuilder and KeyConditionBuilder ([#494](https://github.com/aws/aws-sdk-go-v2/pull/494))
@@ -36,7 +37,6 @@ SDK Enhancements
   * Implements [#493](https://github.com/aws/aws-sdk-go-v2/issues/493).
 * `internal/ini`: Normalize Section keys to lowercase ([#495](https://github.com/aws/aws-sdk-go-v2/pull/495))
   * Update's SDK's ini utility to store all keys as lowercase. This brings the SDK inline with the AWS CLI's behavior.
-
 
 SDK Bugs
 ---
