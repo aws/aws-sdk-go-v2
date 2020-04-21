@@ -1,5 +1,5 @@
 {
-  "smithy": "0.5.0",
+  "smithy": "1.0.0",
   "metadata": {
     "suppressions": [
       {
@@ -58,15 +58,11 @@
           "cloudTrailEventSource": "runtimeservice.deepsense.amazonaws.com"
         },
         "smithy.api#documentation": "<p>Amazon Lex provides both build and runtime endpoints. Each endpoint provides a set of\n      operations (API). Your conversational bot uses the runtime API to understand user utterances\n      (user input text or voice). For example, suppose a user says \"I want pizza\", your bot sends\n      this input to Amazon Lex using the runtime API. Amazon Lex recognizes that the user request is\n      for the OrderPizza intent (one of the intents defined in the bot). Then Amazon Lex engages in\n      user conversation on behalf of the bot to elicit required information (slot values, such as\n      pizza size and crust type), and then performs fulfillment activity (that you configured when\n      you created the bot). You use the build-time API to create and manage your Amazon Lex bot. For\n      a list of build-time operations, see the build-time API, . </p>",
-        "smithy.api#protocols": [
-          {
-            "name": "aws.rest-json-1.1",
-            "auth": [
-              "aws.v4"
-            ]
-          }
-        ],
-        "smithy.api#title": "Amazon Lex Runtime Service"
+        "aws.protocols#restJson1": true,
+        "smithy.api#title": "Amazon Lex Runtime Service",
+        "aws.auth#sigv4": {
+          "name": "lex"
+        }
       }
     },
     "com.amazonaws.deepsense.runtimeservice#Accept": {
@@ -99,7 +95,10 @@
       }
     },
     "com.amazonaws.deepsense.runtimeservice#BlobStream": {
-      "type": "blob"
+      "type": "blob",
+      "traits": {
+        "smithy.api#streaming": true
+      }
     },
     "com.amazonaws.deepsense.runtimeservice#BotAlias": {
       "type": "string"
@@ -150,17 +149,20 @@
     "com.amazonaws.deepsense.runtimeservice#ConfirmationStatus": {
       "type": "string",
       "traits": {
-        "smithy.api#enum": {
-          "None": {
+        "smithy.api#enum": [
+          {
+            "value": "None",
             "name": "NONE"
           },
-          "Confirmed": {
+          {
+            "value": "Confirmed",
             "name": "CONFIRMED"
           },
-          "Denied": {
+          {
+            "value": "Denied",
             "name": "DENIED"
           }
-        }
+        ]
       }
     },
     "com.amazonaws.commonapi.exceptions#ConflictException": {
@@ -179,11 +181,12 @@
     "com.amazonaws.deepsense.runtimeservice.responsecard#ContentType": {
       "type": "string",
       "traits": {
-        "smithy.api#enum": {
-          "application/vnd.amazonaws.card.generic": {
+        "smithy.api#enum": [
+          {
+            "value": "application/vnd.amazonaws.card.generic",
             "name": "GENERIC"
           }
-        }
+        ]
       }
     },
     "com.amazonaws.deepsense.runtimeservice#DeleteSession": {
@@ -345,48 +348,59 @@
     "com.amazonaws.deepsense.runtimeservice#DialogActionType": {
       "type": "string",
       "traits": {
-        "smithy.api#enum": {
-          "ElicitIntent": {
+        "smithy.api#enum": [
+          {
+            "value": "ElicitIntent",
             "name": "ELICIT_INTENT"
           },
-          "ConfirmIntent": {
+          {
+            "value": "ConfirmIntent",
             "name": "CONFIRM_INTENT"
           },
-          "ElicitSlot": {
+          {
+            "value": "ElicitSlot",
             "name": "ELICIT_SLOT"
           },
-          "Close": {
+          {
+            "value": "Close",
             "name": "CLOSE"
           },
-          "Delegate": {
+          {
+            "value": "Delegate",
             "name": "DELEGATE"
           }
-        }
+        ]
       }
     },
     "com.amazonaws.deepsense.runtimeservice#DialogState": {
       "type": "string",
       "traits": {
-        "smithy.api#enum": {
-          "ElicitIntent": {
+        "smithy.api#enum": [
+          {
+            "value": "ElicitIntent",
             "name": "ELICIT_INTENT"
           },
-          "ConfirmIntent": {
+          {
+            "value": "ConfirmIntent",
             "name": "CONFIRM_INTENT"
           },
-          "ElicitSlot": {
+          {
+            "value": "ElicitSlot",
             "name": "ELICIT_SLOT"
           },
-          "Fulfilled": {
+          {
+            "value": "Fulfilled",
             "name": "FULFILLED"
           },
-          "ReadyForFulfillment": {
+          {
+            "value": "ReadyForFulfillment",
             "name": "READY_FOR_FULFILLMENT"
           },
-          "Failed": {
+          {
+            "value": "Failed",
             "name": "FAILED"
           }
-        }
+        ]
       }
     },
     "com.amazonaws.deepsense.runtimeservice#ErrorMessage": {
@@ -395,17 +409,20 @@
     "com.amazonaws.deepsense.runtimeservice#FulfillmentState": {
       "type": "string",
       "traits": {
-        "smithy.api#enum": {
-          "Fulfilled": {
+        "smithy.api#enum": [
+          {
+            "value": "Fulfilled",
             "name": "FULFILLED"
           },
-          "Failed": {
+          {
+            "value": "Failed",
             "name": "FAILED"
           },
-          "ReadyForFulfillment": {
+          {
+            "value": "ReadyForFulfillment",
             "name": "READY_FOR_FULFILLMENT"
           }
-        }
+        ]
       }
     },
     "com.amazonaws.deepsense.runtimeservice.responsecard#GenericAttachment": {
@@ -669,20 +686,24 @@
     "com.amazonaws.deepsense.runtimeservice#MessageFormatType": {
       "type": "string",
       "traits": {
-        "smithy.api#enum": {
-          "PlainText": {
+        "smithy.api#enum": [
+          {
+            "value": "PlainText",
             "name": "PLAIN_TEXT"
           },
-          "CustomPayload": {
+          {
+            "value": "CustomPayload",
             "name": "CUSTOM_PAYLOAD"
           },
-          "SSML": {
+          {
+            "value": "SSML",
             "name": "SSML"
           },
-          "Composite": {
+          {
+            "value": "Composite",
             "name": "COMPOSITE"
           }
-        }
+        ]
       }
     },
     "com.amazonaws.commonapi.exceptions#NotAcceptableException": {
@@ -755,12 +776,7 @@
         }
       ],
       "traits": {
-        "aws.api#unsignedPayload": [
-          "aws.v4"
-        ],
-        "smithy.api#auth": [
-          "aws.v4"
-        ],
+        "aws.auth#unsignedPayload": true,
         "smithy.api#documentation": "<p> Sends user input (text or speech) to Amazon Lex. Clients use this API to send text and audio\n      requests to Amazon Lex at runtime. Amazon Lex interprets the user input using the machine learning model\n      that it built for the bot. </p>\n         <p>The <code>PostContent</code> operation supports audio input at 8kHz and 16kHz. You can use\n      8kHz audio to achieve higher speech recognition accuracy in telephone audio applications. </p>\n         <p> In response, Amazon Lex returns the next message to convey to the user. Consider the following\n      example messages: </p>\n         <ul>\n            <li>\n               <p> For a user input \"I would like a pizza,\" Amazon Lex might return a response with a message\n          eliciting slot data (for example, <code>PizzaSize</code>): \"What size pizza would you\n          like?\". </p>\n            </li>\n            <li>\n               <p> After the user provides all of the pizza order information, Amazon Lex might return a\n          response with a message to get user confirmation: \"Order the pizza?\". </p>\n            </li>\n            <li>\n               <p> After the user replies \"Yes\" to the confirmation prompt, Amazon Lex might return a\n          conclusion statement: \"Thank you, your cheese pizza has been ordered.\". </p>\n            </li>\n         </ul>\n         <p> Not all Amazon Lex messages require a response from the user. For example, conclusion\n      statements do not require a response. Some messages require only a yes or no response. In\n      addition to the <code>message</code>, Amazon Lex provides additional context about the message in\n      the response that you can use to enhance client behavior, such as displaying the appropriate\n      client user interface. Consider the following examples: </p>\n         <ul>\n            <li>\n               <p> If the message is to elicit slot data, Amazon Lex returns the following context\n          information: </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>x-amz-lex-dialog-state</code> header set to <code>ElicitSlot</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>x-amz-lex-intent-name</code> header set to the intent name in the current\n              context </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>x-amz-lex-slot-to-elicit</code> header set to the slot name for which the\n                <code>message</code> is eliciting information </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>x-amz-lex-slots</code> header set to a map of slots configured for the intent\n              with their current values </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p> If the message is a confirmation prompt, the <code>x-amz-lex-dialog-state</code>\n          header is set to <code>Confirmation</code> and the <code>x-amz-lex-slot-to-elicit</code>\n          header is omitted. </p>\n            </li>\n            <li>\n               <p> If the message is a clarification prompt configured for the intent, indicating that\n          the user intent is not understood, the <code>x-amz-dialog-state</code> header is set to\n            <code>ElicitIntent</code> and the <code>x-amz-slot-to-elicit</code> header is omitted.\n        </p>\n            </li>\n         </ul>\n         <p> In addition, Amazon Lex also returns your application-specific <code>sessionAttributes</code>.\n      For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html\">Managing Conversation Context</a>. </p>",
         "smithy.api#http": {
           "method": "POST",
@@ -808,8 +824,7 @@
           "traits": {
             "smithy.api#documentation": "<p> User input in PCM or Opus audio format or text format as described in the\n        <code>Content-Type</code> HTTP header. </p>\n         <p>You can stream audio data to Amazon Lex or you can create a local buffer that captures all of\n      the audio data before sending. In general, you get better performance if you stream audio data\n      rather than buffering the data locally.</p>",
             "smithy.api#httpPayload": true,
-            "smithy.api#required": true,
-            "smithy.api#streaming": { }
+            "smithy.api#required": true
           }
         },
         "requestAttributes": {
@@ -843,8 +858,7 @@
           "target": "com.amazonaws.deepsense.runtimeservice#BlobStream",
           "traits": {
             "smithy.api#documentation": "<p>The prompt (or statement) to convey to the user. This is based on the bot configuration\n      and context. For example, if Amazon Lex did not understand the user intent, it sends the\n        <code>clarificationPrompt</code> configured for the bot. If the intent requires confirmation\n      before taking the fulfillment action, it sends the <code>confirmationPrompt</code>. Another\n      example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message\n      to convey to the user. Then Amazon Lex sends that message in the response. </p>",
-            "smithy.api#httpPayload": true,
-            "smithy.api#streaming": { }
+            "smithy.api#httpPayload": true
           }
         },
         "contentType": {
@@ -1186,8 +1200,7 @@
           "target": "com.amazonaws.deepsense.runtimeservice#BlobStream",
           "traits": {
             "smithy.api#documentation": "<p>The audio version of the message to convey to the user.</p>",
-            "smithy.api#httpPayload": true,
-            "smithy.api#streaming": { }
+            "smithy.api#httpPayload": true
           }
         },
         "contentType": {
