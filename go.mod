@@ -1,6 +1,7 @@
 module github.com/aws/aws-sdk-go-v2
 
 require (
+	github.com/awslabs/smithy-go v0.0.0-20200421200441-f1e89484c1b9
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/google/go-cmp v0.4.0
 	github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af
