@@ -36,3 +36,6 @@ SDK Enhancements
 
 SDK Bugs
 ---
+* `internal/rand`: Fix SDK's UUID utility to handle partial read ([#]())
+  * Fixes the SDK's UUID utility to correctly handle partial reads from its crypto rand source. This error was sometimes causing the SDK's InvocationID value to fail to be obtained, due to a partial read from crypto.Rand.
+  * Fix [#534](https://github.com/aws/aws-sdk-go-v2/issues/534)
