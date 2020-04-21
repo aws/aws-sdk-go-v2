@@ -1,3 +1,4 @@
+
 Breaking Change
 ---
 * `aws/endpoints`: Several functions and types have been removed
@@ -11,6 +12,7 @@ Breaking Change
 
 Services
 ---
+* Synced the V2 SDK with latest AWS service API definitions.
 
 SDK Features
 ---
