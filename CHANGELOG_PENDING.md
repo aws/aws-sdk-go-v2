@@ -39,3 +39,7 @@ SDK Bugs
 * `internal/sdk`: Fix SDK's UUID utility to handle partial read ([#536](https://github.com/aws/aws-sdk-go-v2/pull/536))
   * Fixes the SDK's UUID utility to correctly handle partial reads from its crypto rand source. This error was sometimes causing the SDK's InvocationID value to fail to be obtained, due to a partial read from crypto.Rand.
   * Fix [#534](https://github.com/aws/aws-sdk-go-v2/issues/534)
+* `aws/defaults`: Fix request metadata headers causing signature errors ([#536](https://github.com/aws/aws-sdk-go-v2/pull/536))
+    * Fixes the SDK's adding the request metadata headers in the wrong location within the request handler stack. This created a situation where a request that was retried would sign the new attempt using the old value of the header. The header value would then be changed before sending the request.
+    * Fix [#533](https://github.com/aws/aws-sdk-go-v2/issues/533)
+    * Fix [#521](https://github.com/aws/aws-sdk-go-v2/issues/521)

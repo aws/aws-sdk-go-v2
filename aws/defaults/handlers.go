@@ -190,6 +190,12 @@ var ValidateResponseHandler = aws.NamedHandler{
 var RequestInvocationIDHeaderHandler = aws.NamedHandler{
 	Name: "core.RequestInvocationIDHeaderHandler",
 	Fn: func(r *aws.Request) {
+		if r.ExpireTime != 0 {
+			// ExpireTime set implies a presigned URL which will not have the
+			// header applied.
+			return
+		}
+
 		const invocationIDHeader = "amz-sdk-invocation-id"
 		r.HTTPRequest.Header.Set(invocationIDHeader, r.InvocationID)
 	}}
@@ -199,6 +205,12 @@ var RequestInvocationIDHeaderHandler = aws.NamedHandler{
 var RetryMetricHeaderHandler = aws.NamedHandler{
 	Name: "core.RetryMetricHeaderHandler",
 	Fn: func(r *aws.Request) {
+		if r.ExpireTime != 0 {
+			// ExpireTime set implies a presigned URL which will not have the
+			// header applied.
+			return
+		}
+
 		const retryMetricHeader = "amz-sdk-request"
 		var parts []string
 
