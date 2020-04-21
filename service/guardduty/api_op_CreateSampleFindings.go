@@ -18,7 +18,7 @@ type CreateSampleFindingsInput struct {
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// Types of sample findings to generate.
+	// The types of sample findings to generate.
 	FindingTypes []string `locationName:"findingTypes" type:"list"`
 }
 

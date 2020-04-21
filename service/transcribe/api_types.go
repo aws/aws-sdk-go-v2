@@ -13,21 +13,16 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Settings for content redaction within a transcription job.
-//
-// You can redact transcripts in US English (en-us). For more information see:
-// Automatic Content Redaction (https://docs.aws.amazon.com/transcribe/latest/dg/content-redaction.html)
 type ContentRedaction struct {
 	_ struct{} `type:"structure"`
 
-	// Request parameter where you choose whether to output only the redacted transcript
-	// or generate an additional unredacted transcript.
+	// The output transcript file stored in either the default S3 bucket or in a
+	// bucket you specify.
 	//
-	// When you choose redacted Amazon Transcribe outputs a JSON file with only
-	// the redacted transcript and related information.
+	// When you choose redacted Amazon Transcribe outputs only the redacted transcript.
 	//
-	// When you choose redacted_and_unredacted Amazon Transcribe outputs a JSON
-	// file with the unredacted transcript and related information in addition to
-	// the JSON file with the redacted transcript.
+	// When you choose redacted_and_unredacted Amazon Transcribe outputs both the
+	// redacted and unredacted transcripts.
 	//
 	// RedactionOutput is a required field
 	RedactionOutput RedactionOutput `type:"string" required:"true" enum:"true"`
@@ -66,8 +61,8 @@ type JobExecutionSettings struct {
 
 	// Indicates whether a job should be queued by Amazon Transcribe when the concurrent
 	// execution limit is exceeded. When the AllowDeferredExecution field is true,
-	// jobs are queued and will be executed when the number of executing jobs falls
-	// below the concurrent execution limit. If the field is false, Amazon Transcribe
+	// jobs are queued and executed when the number of executing jobs falls below
+	// the concurrent execution limit. If the field is false, Amazon Transcribe
 	// returns a LimitExceededException exception.
 	//
 	// If you specify the AllowDeferredExecution field, you must specify the DataAccessRoleArn
@@ -75,10 +70,9 @@ type JobExecutionSettings struct {
 	AllowDeferredExecution *bool `type:"boolean"`
 
 	// The Amazon Resource Name (ARN) of a role that has access to the S3 bucket
-	// that contains the input files. Amazon Transcribe will assume this role to
-	// read queued media files. If you have specified an output S3 bucket for the
-	// transcription results, this role should have access to the output bucket
-	// as well.
+	// that contains the input files. Amazon Transcribe assumes this role to read
+	// queued media files. If you have specified an output S3 bucket for the transcription
+	// results, this role should have access to the output bucket as well.
 	//
 	// If you specify the AllowDeferredExecution field, you must specify the DataAccessRoleArn
 	// field.
@@ -128,6 +122,232 @@ func (s *Media) Validate() error {
 	return nil
 }
 
+// Identifies the location of a medical transcript.
+type MedicalTranscript struct {
+	_ struct{} `type:"structure"`
+
+	// The S3 object location of the medical transcript.
+	//
+	// Use this URI to access the medical transcript. This URI points to the S3
+	// bucket you created to store the medical transcript.
+	TranscriptFileUri *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s MedicalTranscript) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The data structure that containts the information for a medical transcription
+// job.
+type MedicalTranscriptionJob struct {
+	_ struct{} `type:"structure"`
+
+	// A timestamp that shows when the job was completed.
+	CompletionTime *time.Time `type:"timestamp"`
+
+	// A timestamp that shows when the job was created.
+	CreationTime *time.Time `type:"timestamp"`
+
+	// If the TranscriptionJobStatus field is FAILED, this field contains information
+	// about why the job failed.
+	//
+	// The FailureReason field contains one of the following values:
+	//
+	//    * Unsupported media format- The media format specified in the MediaFormat
+	//    field of the request isn't valid. See the description of the MediaFormat
+	//    field for a list of valid values.
+	//
+	//    * The media format provided does not match the detected media format-
+	//    The media format of the audio file doesn't match the format specified
+	//    in the MediaFormat field in the request. Check the media format of your
+	//    media file and make sure the two values match.
+	//
+	//    * Invalid sample rate for audio file- The sample rate specified in the
+	//    MediaSampleRateHertz of the request isn't valid. The sample rate must
+	//    be between 8000 and 48000 Hertz.
+	//
+	//    * The sample rate provided does not match the detected sample rate- The
+	//    sample rate in the audio file doesn't match the sample rate specified
+	//    in the MediaSampleRateHertz field in the request. Check the sample rate
+	//    of your media file and make sure that the two values match.
+	//
+	//    * Invalid file size: file size too large- The size of your audio file
+	//    is larger than what Amazon Transcribe Medical can process. For more information,
+	//    see Guidlines and Quotas (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits)
+	//    in the Amazon Transcribe Medical Guide
+	//
+	//    * Invalid number of channels: number of channels too large- Your audio
+	//    contains more channels than Amazon Transcribe Medical is configured to
+	//    process. To request additional channels, see Amazon Transcribe Medical
+	//    Endpoints and Quotas (https://docs.aws.amazon.com/general/latest/gr/transcribe-medical.html)
+	//    in the Amazon Web Services General Reference
+	FailureReason *string `type:"string"`
+
+	// The language code for the language spoken in the source audio file. US English
+	// (en-US) is the only supported language for medical transcriptions. Any other
+	// value you enter for language code results in a BadRequestException error.
+	LanguageCode LanguageCode `type:"string" enum:"true"`
+
+	// Describes the input media file in a transcription request.
+	Media *Media `type:"structure"`
+
+	// The format of the input media file.
+	MediaFormat MediaFormat `type:"string" enum:"true"`
+
+	// The sample rate, in Hertz, of the source audio containing medical information.
+	//
+	// If you don't specify the sample rate, Amazon Transcribe Medical determines
+	// it for you. If you choose to specify the sample rate, it must match the rate
+	// detected by Amazon Transcribe Medical. In most cases, you should leave the
+	// MediaSampleHertz blank and let Amazon Transcribe Medical determine the sample
+	// rate.
+	MediaSampleRateHertz *int64 `min:"8000" type:"integer"`
+
+	// The name for a given medical transcription job.
+	MedicalTranscriptionJobName *string `min:"1" type:"string"`
+
+	// Object that contains object.
+	Settings *MedicalTranscriptionSetting `type:"structure"`
+
+	// The medical specialty of any clinicians providing a dictation or having a
+	// conversation. PRIMARYCARE is the only available setting for this object.
+	// This specialty enables you to generate transcriptions for the following medical
+	// fields:
+	//
+	//    * Family Medicine
+	Specialty Specialty `type:"string" enum:"true"`
+
+	// A timestamp that shows when the job started processing.
+	StartTime *time.Time `type:"timestamp"`
+
+	// An object that contains the MedicalTranscript. The MedicalTranscript contains
+	// the TranscriptFileUri.
+	Transcript *MedicalTranscript `type:"structure"`
+
+	// The completion status of a medical transcription job.
+	TranscriptionJobStatus TranscriptionJobStatus `type:"string" enum:"true"`
+
+	// The type of speech in the transcription job. CONVERSATION is generally used
+	// for patient-physician dialogues. DICTATION is the setting for physicians
+	// speaking their notes after seeing a patient. For more information, see how-it-works-med
+	Type Type `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s MedicalTranscriptionJob) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Provides summary information about a transcription job.
+type MedicalTranscriptionJobSummary struct {
+	_ struct{} `type:"structure"`
+
+	// A timestamp that shows when the job was completed.
+	CompletionTime *time.Time `type:"timestamp"`
+
+	// A timestamp that shows when the medical transcription job was created.
+	CreationTime *time.Time `type:"timestamp"`
+
+	// If the TranscriptionJobStatus field is FAILED, a description of the error.
+	FailureReason *string `type:"string"`
+
+	// The language of the transcript in the source audio file.
+	LanguageCode LanguageCode `type:"string" enum:"true"`
+
+	// The name of a medical transcription job.
+	MedicalTranscriptionJobName *string `min:"1" type:"string"`
+
+	// Indicates the location of the transcription job's output.
+	//
+	// The CUSTOMER_BUCKET is the S3 location provided in the OutputBucketName field
+	// when the
+	OutputLocationType OutputLocationType `type:"string" enum:"true"`
+
+	// The medical specialty of the transcription job. Primary care is the only
+	// valid value.
+	Specialty Specialty `type:"string" enum:"true"`
+
+	// A timestamp that shows when the job began processing.
+	StartTime *time.Time `type:"timestamp"`
+
+	// The status of the medical transcription job.
+	TranscriptionJobStatus TranscriptionJobStatus `type:"string" enum:"true"`
+
+	// The speech of the clinician in the input audio.
+	Type Type `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s MedicalTranscriptionJobSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Optional settings for the StartMedicalTranscriptionJob operation.
+type MedicalTranscriptionSetting struct {
+	_ struct{} `type:"structure"`
+
+	// Instructs Amazon Transcribe Medical to process each audio channel separately
+	// and then merge the transcription output of each channel into a single transcription.
+	//
+	// Amazon Transcribe Medical also produces a transcription of each item detected
+	// on an audio channel, including the start time and end time of the item and
+	// alternative transcriptions of item. The alternative transcriptions also come
+	// with confidence scores provided by Amazon Transcribe Medical.
+	//
+	// You can't set both ShowSpeakerLabels and ChannelIdentification in the same
+	// request. If you set both, your request returns a BadRequestException
+	ChannelIdentification *bool `type:"boolean"`
+
+	// The maximum number of alternatives that you tell the service to return. If
+	// you specify the MaxAlternatives field, you must set the ShowAlternatives
+	// field to true.
+	MaxAlternatives *int64 `min:"2" type:"integer"`
+
+	// The maximum number of speakers to identify in the input audio. If there are
+	// more speakers in the audio than this number, multiple speakers are identified
+	// as a single speaker. If you specify the MaxSpeakerLabels field, you must
+	// set the ShowSpeakerLabels field to true.
+	MaxSpeakerLabels *int64 `min:"2" type:"integer"`
+
+	// Determines whether alternative transcripts are generated along with the transcript
+	// that has the highest confidence. If you set ShowAlternatives field to true,
+	// you must also set the maximum number of alternatives to return in the MaxAlternatives
+	// field.
+	ShowAlternatives *bool `type:"boolean"`
+
+	// Determines whether the transcription job uses speaker recognition to identify
+	// different speakers in the input audio. Speaker recongition labels individual
+	// speakers in the audio file. If you set the ShowSpeakerLabels field to true,
+	// you must also set the maximum number of speaker labels in the MaxSpeakerLabels
+	// field.
+	//
+	// You can't set both ShowSpeakerLabels and ChannelIdentification in the same
+	// request. If you set both, your request returns a BadRequestException.
+	ShowSpeakerLabels *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s MedicalTranscriptionSetting) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MedicalTranscriptionSetting) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MedicalTranscriptionSetting"}
+	if s.MaxAlternatives != nil && *s.MaxAlternatives < 2 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxAlternatives", 2))
+	}
+	if s.MaxSpeakerLabels != nil && *s.MaxSpeakerLabels < 2 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxSpeakerLabels", 2))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Provides optional settings for the StartTranscriptionJob operation.
 type Settings struct {
 	_ struct{} `type:"structure"`
@@ -150,7 +370,7 @@ type Settings struct {
 	MaxAlternatives *int64 `min:"2" type:"integer"`
 
 	// The maximum number of speakers to identify in the input audio. If there are
-	// more speakers in the audio than this number, multiple speakers will be identified
+	// more speakers in the audio than this number, multiple speakers are identified
 	// as a single speaker. If you specify the MaxSpeakerLabels field, you must
 	// set the ShowSpeakerLabels field to true.
 	MaxSpeakerLabels *int64 `min:"2" type:"integer"`

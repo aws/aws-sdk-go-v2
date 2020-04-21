@@ -15,7 +15,8 @@ type ViewBillingInput struct {
 	_ struct{} `type:"structure"`
 
 	// The end date and time for the time period for which you want a list of billing
-	// records. Specify the date and time in Coordinated Universal time (UTC).
+	// records. Specify the date and time in Unix time format and Coordinated Universal
+	// time (UTC).
 	End *time.Time `type:"timestamp"`
 
 	// For an initial request for a list of billing records, omit this element.
@@ -35,8 +36,8 @@ type ViewBillingInput struct {
 	MaxItems *int64 `type:"integer"`
 
 	// The beginning date and time for the time period for which you want a list
-	// of billing records. Specify the date and time in Coordinated Universal time
-	// (UTC).
+	// of billing records. Specify the date and time in Unix time format and Coordinated
+	// Universal time (UTC).
 	Start *time.Time `type:"timestamp"`
 }
 

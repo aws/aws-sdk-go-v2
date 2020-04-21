@@ -13,7 +13,7 @@ import (
 type ListIPSetsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique ID of the detector the ipSet is associated with.
+	// The unique ID of the detector that the IPSet is associated with.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
@@ -24,8 +24,8 @@ type ListIPSetsInput struct {
 
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the list action. For subsequent calls
-	// to the action fill nextToken in the request with the value of NextToken from
-	// the previous response to continue listing data.
+	// to the action, fill nextToken in the request with the value of NextToken
+	// from the previous response to continue listing data.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
@@ -87,8 +87,8 @@ type ListIPSetsOutput struct {
 	// IpSetIds is a required field
 	IpSetIds []string `locationName:"ipSetIds" type:"list" required:"true"`
 
-	// Pagination parameter to be used on the next list operation to retrieve more
-	// items.
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 

@@ -57,6 +57,73 @@ func (s BatchPolicy) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Compute information for the simulation job.
+type Compute struct {
+	_ struct{} `type:"structure"`
+
+	// The simulation unit limit. Your simulation is allocated CPU and memory proportional
+	// to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB
+	// of memory. You are only billed for the SU utilization you consume up to the
+	// maximim value provided.
+	SimulationUnitLimit *int64 `locationName:"simulationUnitLimit" min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s Compute) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Compute) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Compute"}
+	if s.SimulationUnitLimit != nil && *s.SimulationUnitLimit < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("SimulationUnitLimit", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Compute) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SimulationUnitLimit != nil {
+		v := *s.SimulationUnitLimit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "simulationUnitLimit", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Compute information for the simulation job
+type ComputeResponse struct {
+	_ struct{} `type:"structure"`
+
+	// The simulation unit limit. Your simulation is allocated CPU and memory proportional
+	// to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB
+	// of memory. You are only billed for the SU utilization you consume up to the
+	// maximim value provided.
+	SimulationUnitLimit *int64 `locationName:"simulationUnitLimit" min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s ComputeResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ComputeResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SimulationUnitLimit != nil {
+		v := *s.SimulationUnitLimit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "simulationUnitLimit", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Information about a data source.
 type DataSource struct {
 	_ struct{} `type:"structure"`
@@ -1803,6 +1870,9 @@ type SimulationJob struct {
 	// A unique identifier for this SimulationJob request.
 	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string"`
 
+	// Compute information for the simulation job
+	Compute *ComputeResponse `locationName:"compute" type:"structure"`
+
 	// The data sources for the simulation job.
 	DataSources []DataSource `locationName:"dataSources" type:"list"`
 
@@ -1890,6 +1960,12 @@ func (s SimulationJob) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Compute != nil {
+		v := s.Compute
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "compute", v, metadata)
 	}
 	if s.DataSources != nil {
 		v := s.DataSources
@@ -2160,6 +2236,9 @@ func (s SimulationJobBatchSummary) MarshalFields(e protocol.FieldEncoder) error 
 type SimulationJobRequest struct {
 	_ struct{} `type:"structure"`
 
+	// Compute information for the simulation job
+	Compute *Compute `locationName:"compute" type:"structure"`
+
 	// Specify data sources to mount read-only files from S3 into your simulation.
 	// These files are available under /opt/robomaker/datasources/data_source_name.
 	//
@@ -2239,6 +2318,11 @@ func (s *SimulationJobRequest) Validate() error {
 	if s.SimulationApplications != nil && len(s.SimulationApplications) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SimulationApplications", 1))
 	}
+	if s.Compute != nil {
+		if err := s.Compute.Validate(); err != nil {
+			invalidParams.AddNested("Compute", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.DataSources != nil {
 		for i, v := range s.DataSources {
 			if err := v.Validate(); err != nil {
@@ -2284,6 +2368,12 @@ func (s *SimulationJobRequest) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SimulationJobRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Compute != nil {
+		v := s.Compute
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "compute", v, metadata)
+	}
 	if s.DataSources != nil {
 		v := s.DataSources
 

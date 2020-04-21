@@ -56,6 +56,23 @@ func (enum CallingNameStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type Capability string
+
+// Enum values for Capability
+const (
+	CapabilityVoice Capability = "Voice"
+	CapabilitySms   Capability = "SMS"
+)
+
+func (enum Capability) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Capability) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EmailStatus string
 
 // Enum values for EmailStatus
@@ -99,6 +116,23 @@ func (enum ErrorCode) MarshalValue() (string, error) {
 }
 
 func (enum ErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type GeoMatchLevel string
+
+// Enum values for GeoMatchLevel
+const (
+	GeoMatchLevelCountry  GeoMatchLevel = "Country"
+	GeoMatchLevelAreaCode GeoMatchLevel = "AreaCode"
+)
+
+func (enum GeoMatchLevel) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GeoMatchLevel) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -154,6 +188,23 @@ func (enum MemberType) MarshalValue() (string, error) {
 }
 
 func (enum MemberType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type NumberSelectionBehavior string
+
+// Enum values for NumberSelectionBehavior
+const (
+	NumberSelectionBehaviorPreferSticky NumberSelectionBehavior = "PreferSticky"
+	NumberSelectionBehaviorAvoidSticky  NumberSelectionBehavior = "AvoidSticky"
+)
+
+func (enum NumberSelectionBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NumberSelectionBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -284,6 +335,24 @@ func (enum PhoneNumberType) MarshalValue() (string, error) {
 }
 
 func (enum PhoneNumberType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ProxySessionStatus string
+
+// Enum values for ProxySessionStatus
+const (
+	ProxySessionStatusOpen       ProxySessionStatus = "Open"
+	ProxySessionStatusInProgress ProxySessionStatus = "InProgress"
+	ProxySessionStatusClosed     ProxySessionStatus = "Closed"
+)
+
+func (enum ProxySessionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProxySessionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

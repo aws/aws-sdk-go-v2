@@ -128,8 +128,6 @@ const opListMembers = "ListMembers"
 // ListMembersRequest returns a request value for making API operation for
 // Amazon Detective.
 //
-// Amazon Detective is currently in preview.
-//
 // Retrieves the list of member accounts for a behavior graph. Does not return
 // member accounts that were removed from the behavior graph.
 //

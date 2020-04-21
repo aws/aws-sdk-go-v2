@@ -12,7 +12,7 @@ import (
 type GetSearchSuggestionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the Amazon SageMaker resource to Search for.
+	// The name of the Amazon SageMaker resource to search for.
 	//
 	// Resource is a required field
 	Resource ResourceType `type:"string" required:"true" enum:"true"`

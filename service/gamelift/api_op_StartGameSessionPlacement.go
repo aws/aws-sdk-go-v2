@@ -32,7 +32,7 @@ type StartGameSessionPlacementInput struct {
 	GameSessionName *string `min:"1" type:"string"`
 
 	// Name of the queue to use to place the new game session. You can use either
-	// the qieue name or ARN value.
+	// the queue name or ARN value.
 	//
 	// GameSessionQueueName is a required field
 	GameSessionQueueName *string `min:"1" type:"string" required:"true"`

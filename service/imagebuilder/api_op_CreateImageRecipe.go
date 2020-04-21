@@ -35,7 +35,15 @@ type CreateImageRecipeInput struct {
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
 
-	// The parent image of the image recipe.
+	// The parent image of the image recipe. The value of the string can be the
+	// ARN of the parent image or an AMI ID. The format for the ARN follows this
+	// example: arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/2019.x.x.
+	// The ARN ends with /20xx.x.x, which communicates to EC2 Image Builder that
+	// you want to use the latest AMI created in 20xx (year). You can provide the
+	// specific version that you want to use, or you can use a wildcard in all of
+	// the fields. If you enter an AMI ID for the string value, you must have access
+	// to the AMI, and the AMI must be in the same Region in which you are using
+	// Image Builder.
 	//
 	// ParentImage is a required field
 	ParentImage *string `locationName:"parentImage" min:"1" type:"string" required:"true"`

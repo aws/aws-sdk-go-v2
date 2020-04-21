@@ -23,9 +23,11 @@ type GetSavingsPlansCoverageInput struct {
 	//
 	//    * INSTANCE_FAMILY
 	//
-	// GetSavingsPlansCoverage uses the same Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// GetSavingsPlansCoverage uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension.
 	// If there are multiple values for a dimension, they are OR'd together.
+	//
+	// Cost category is also supported.
 	Filter *Expression `type:"structure"`
 
 	// The granularity of the Amazon Web Services cost data for your Savings Plans.
@@ -116,9 +118,9 @@ const opGetSavingsPlansCoverage = "GetSavingsPlansCoverage"
 //
 // Retrieves the Savings Plans covered for your account. This enables you to
 // see how much of your cost is covered by a Savings Plan. An organization’s
-// master account can see the coverage of the associated member accounts. For
-// any time period, you can filter data for Savings Plans usage with the following
-// dimensions:
+// master account can see the coverage of the associated member accounts. This
+// supports dimensions, Cost Categories, and nested expressions. For any time
+// period, you can filter data for Savings Plans usage with the following dimensions:
 //
 //    * LINKED_ACCOUNT
 //

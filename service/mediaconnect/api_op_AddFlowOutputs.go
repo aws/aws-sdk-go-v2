@@ -11,7 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Adds outputs to an existing flow. You can create up to 20 outputs per flow.
+// Adds outputs to an existing flow. You can create up to 50 outputs per flow.
 type AddFlowOutputsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -124,7 +124,7 @@ const opAddFlowOutputs = "AddFlowOutputs"
 // AddFlowOutputsRequest returns a request value for making API operation for
 // AWS MediaConnect.
 //
-// Adds outputs to an existing flow. You can create up to 20 outputs per flow.
+// Adds outputs to an existing flow. You can create up to 50 outputs per flow.
 //
 //    // Example sending a request using AddFlowOutputsRequest.
 //    req := client.AddFlowOutputsRequest(params)

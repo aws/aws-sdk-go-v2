@@ -253,6 +253,9 @@ type BatchInferenceJobSummary struct {
 	// The time at which the batch inference job was last updated.
 	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
+	// The ARN of the solution version used by the batch inference job.
+	SolutionVersionArn *string `locationName:"solutionVersionArn" type:"string"`
+
 	// The status of the batch inference job. The status is one of the following
 	// values:
 	//
@@ -999,7 +1002,7 @@ type HPOObjective struct {
 	// A regular expression for finding the metric in the training job logs.
 	MetricRegex *string `locationName:"metricRegex" type:"string"`
 
-	// The data type of the metric.
+	// The type of the metric. Valid values are Maximize and Minimize.
 	Type *string `locationName:"type" type:"string"`
 }
 
@@ -1415,6 +1418,10 @@ type SolutionVersion struct {
 	// The UPDATE option can only be used after you've created a solution version
 	// with the FULL option and the training solution uses the native-recipe-hrnn-coldstart.
 	TrainingMode TrainingMode `locationName:"trainingMode" type:"string" enum:"true"`
+
+	// If hyperparameter optimization was performed, contains the hyperparameter
+	// values of the best performing model.
+	TunedHPOParams *TunedHPOParams `locationName:"tunedHPOParams" type:"structure"`
 }
 
 // String returns the string representation
@@ -1449,5 +1456,19 @@ type SolutionVersionSummary struct {
 
 // String returns the string representation
 func (s SolutionVersionSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// If hyperparameter optimization (HPO) was performed, contains the hyperparameter
+// values of the best performing model.
+type TunedHPOParams struct {
+	_ struct{} `type:"structure"`
+
+	// A list of the hyperparameter values of the best performing model.
+	AlgorithmHyperParameters map[string]string `locationName:"algorithmHyperParameters" type:"map"`
+}
+
+// String returns the string representation
+func (s TunedHPOParams) String() string {
 	return awsutil.Prettify(s)
 }

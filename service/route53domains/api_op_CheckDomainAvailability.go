@@ -13,11 +13,27 @@ import (
 type CheckDomainAvailabilityInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the domain that you want to get availability for.
+	// The name of the domain that you want to get availability for. The top-level
+	// domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list
+	// of supported TLDs, see Domains that You Can Register with Amazon Route 53
+	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+	// in the Amazon Route 53 Developer Guide.
 	//
-	// Constraints: The domain name can contain only the letters a through z, the
-	// numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not
-	// supported.
+	// The domain name can contain only the following characters:
+	//
+	//    * Letters a through z. Domain names are not case sensitive.
+	//
+	//    * Numbers 0 through 9.
+	//
+	//    * Hyphen (-). You can't specify a hyphen at the beginning or end of a
+	//    label.
+	//
+	//    * Period (.) to separate the labels in the name, such as the . in example.com.
+	//
+	// Internationalized domain names are not supported for some top-level domains.
+	// To determine whether the TLD that you want to use supports internationalized
+	// domain names, see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html).
+	// For more information, see Formatting Internationalized Domain Names (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html#domain-name-format-idns).
 	//
 	// DomainName is a required field
 	DomainName *string `type:"string" required:"true"`
@@ -70,9 +86,9 @@ type CheckDomainAvailabilityOutput struct {
 	// DONT_KNOW
 	//
 	// The TLD registry didn't reply with a definitive answer about whether the
-	// domain name is available. Amazon Route 53 can return this response for a
-	// variety of reasons, for example, the registry is performing maintenance.
-	// Try again later.
+	// domain name is available. Route 53 can return this response for a variety
+	// of reasons, for example, the registry is performing maintenance. Try again
+	// later.
 	//
 	// PENDING
 	//

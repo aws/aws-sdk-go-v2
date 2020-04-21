@@ -73,6 +73,9 @@ type GetPredictionOutput struct {
 
 	// The prediction outcomes.
 	Outcomes []string `locationName:"outcomes" type:"list"`
+
+	// The rule results in the prediction.
+	RuleResults []RuleResult `locationName:"ruleResults" type:"list"`
 }
 
 // String returns the string representation

@@ -18,8 +18,8 @@ type UpdateWebACLInput struct {
 	// DefaultAction is a required field
 	DefaultAction *DefaultAction `type:"structure" required:"true"`
 
-	// A friendly description of the Web ACL. You cannot change the description
-	// of a Web ACL after you create it.
+	// A description of the Web ACL that helps with identification. You cannot change
+	// the description of a Web ACL after you create it.
 	Description *string `min:"1" type:"string"`
 
 	// The unique identifier for the Web ACL. This ID is returned in the responses
@@ -41,8 +41,8 @@ type UpdateWebACLInput struct {
 	// LockToken is a required field
 	LockToken *string `min:"1" type:"string" required:"true"`
 
-	// A friendly name of the Web ACL. You cannot change the name of a Web ACL after
-	// you create it.
+	// The name of the Web ACL. You cannot change the name of a Web ACL after you
+	// create it.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
@@ -60,7 +60,7 @@ type UpdateWebACLInput struct {
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
 	//
-	//    * CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT
+	//    * CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT
 	//    --region=us-east-1.
 	//
 	//    * API and SDKs - For all calls, use the Region endpoint us-east-1.

@@ -74,6 +74,23 @@ func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type State string
+
+// Enum values for State
+const (
+	StateEnabled  State = "ENABLED"
+	StateDisabled State = "DISABLED"
+)
+
+func (enum State) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum State) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Status string
 
 // Enum values for Status

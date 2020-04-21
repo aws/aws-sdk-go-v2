@@ -95,6 +95,7 @@ const (
 	SnowballCapacityT80          SnowballCapacity = "T80"
 	SnowballCapacityT100         SnowballCapacity = "T100"
 	SnowballCapacityT42          SnowballCapacity = "T42"
+	SnowballCapacityT98          SnowballCapacity = "T98"
 	SnowballCapacityNoPreference SnowballCapacity = "NoPreference"
 )
 
@@ -115,6 +116,7 @@ const (
 	SnowballTypeEdge     SnowballType = "EDGE"
 	SnowballTypeEdgeC    SnowballType = "EDGE_C"
 	SnowballTypeEdgeCg   SnowballType = "EDGE_CG"
+	SnowballTypeEdgeS    SnowballType = "EDGE_S"
 )
 
 func (enum SnowballType) MarshalValue() (string, error) {

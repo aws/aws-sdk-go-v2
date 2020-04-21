@@ -232,7 +232,7 @@ type CreateClusterInput struct {
 	// in the Amazon Redshift Cluster Management Guide.
 	//
 	// Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large
-	// | dc2.8xlarge | ra3.16xlarge
+	// | dc2.8xlarge | ra3.4xlarge | ra3.16xlarge
 	//
 	// NodeType is a required field
 	NodeType *string `type:"string" required:"true"`

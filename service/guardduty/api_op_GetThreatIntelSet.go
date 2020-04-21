@@ -13,12 +13,12 @@ import (
 type GetThreatIntelSetInput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique ID of the detector the threatIntelSet is associated with.
+	// The unique ID of the detector that the threatIntelSet is associated with.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// The unique ID of the threatIntelSet you want to get.
+	// The unique ID of the threatIntelSet that you want to get.
 	//
 	// ThreatIntelSetId is a required field
 	ThreatIntelSetId *string `location:"uri" locationName:"threatIntelSetId" type:"string" required:"true"`
@@ -77,12 +77,12 @@ type GetThreatIntelSetOutput struct {
 	// Format is a required field
 	Format ThreatIntelSetFormat `locationName:"format" min:"1" type:"string" required:"true" enum:"true"`
 
-	// The URI of the file that contains the ThreatIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
+	// The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
 	//
 	// Location is a required field
 	Location *string `locationName:"location" min:"1" type:"string" required:"true"`
 
-	// A user-friendly ThreatIntelSet name that is displayed in all finding generated
+	// A user-friendly ThreatIntelSet name displayed in all findings that are generated
 	// by activity that involves IP addresses included in this ThreatIntelSet.
 	//
 	// Name is a required field
@@ -93,7 +93,7 @@ type GetThreatIntelSetOutput struct {
 	// Status is a required field
 	Status ThreatIntelSetStatus `locationName:"status" min:"1" type:"string" required:"true" enum:"true"`
 
-	// The tags of the Threat List resource.
+	// The tags of the threat list resource.
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 

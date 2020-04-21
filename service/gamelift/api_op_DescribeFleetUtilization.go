@@ -14,7 +14,10 @@ type DescribeFleetUtilizationInput struct {
 	_ struct{} `type:"structure"`
 
 	// A unique identifier for a fleet(s) to retrieve utilization data for. You
-	// can use either the fleet ID or ARN value.
+	// can use either the fleet ID or ARN value. To retrieve attributes for all
+	// current fleets, do not include this parameter. If the list of fleet identifiers
+	// includes fleets that don't currently exist, the request succeeds but no attributes
+	// for that fleet are returned.
 	FleetIds []string `min:"1" type:"list"`
 
 	// The maximum number of results to return. Use this parameter with NextToken
@@ -77,12 +80,15 @@ const opDescribeFleetUtilization = "DescribeFleetUtilization"
 // DescribeFleetUtilizationRequest returns a request value for making API operation for
 // Amazon GameLift.
 //
-// Retrieves utilization statistics for one or more fleets. You can request
-// utilization data for all fleets, or specify a list of one or more fleet IDs.
-// When requesting multiple fleets, use the pagination parameters to retrieve
-// results as a set of sequential pages. If successful, a FleetUtilization object
-// is returned for each requested fleet ID. When specifying a list of fleet
-// IDs, utilization objects are returned only for fleets that currently exist.
+// Retrieves utilization statistics for one or more fleets. These statistics
+// provide insight into how available hosting resources are currently being
+// used. To get statistics on available hosting resources, see DescribeFleetCapacity.
+//
+// You can request utilization data for all fleets, or specify a list of one
+// or more fleet IDs. When requesting multiple fleets, use the pagination parameters
+// to retrieve results as a set of sequential pages. If successful, a FleetUtilization
+// object is returned for each requested fleet ID, unless the fleet identifier
+// is not found.
 //
 // Some API actions may limit the number of fleet IDs allowed in one request.
 // If a request exceeds this limit, the request fails and the error message
@@ -90,7 +96,9 @@ const opDescribeFleetUtilization = "DescribeFleetUtilization"
 //
 // Learn more
 //
-//  Working with Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html).
+// Setting up GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+//
+// GameLift Metrics for Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
 //
 // Related operations
 //
@@ -106,7 +114,7 @@ const opDescribeFleetUtilization = "DescribeFleetUtilization"
 //
 //    * UpdateFleetAttributes
 //
-//    * Manage fleet actions: StartFleetActions StopFleetActions
+//    * StartFleetActions or StopFleetActions
 //
 //    // Example sending a request using DescribeFleetUtilizationRequest.
 //    req := client.DescribeFleetUtilizationRequest(params)

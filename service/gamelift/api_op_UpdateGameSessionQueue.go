@@ -96,6 +96,12 @@ const opUpdateGameSessionQueue = "UpdateGameSessionQueue"
 // the queue name to be updated and provide the new settings. When updating
 // destinations, provide a complete list of destinations.
 //
+// Learn more
+//
+//  Using Multi-Region Queues (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html)
+//
+// Related operations
+//
 //    * CreateGameSessionQueue
 //
 //    * DescribeGameSessionQueues

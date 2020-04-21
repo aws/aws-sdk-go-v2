@@ -67,7 +67,8 @@ type GetDomainDetailOutput struct {
 	AutoRenew *bool `type:"boolean"`
 
 	// The date when the domain was created as found in the response to a WHOIS
-	// query. The date and time is in Coordinated Universal time (UTC).
+	// query. The date and time is in Unix time format and Coordinated Universal
+	// time (UTC).
 	CreationDate *time.Time `type:"timestamp"`
 
 	// Reserved for future use.
@@ -79,7 +80,7 @@ type GetDomainDetailOutput struct {
 	DomainName *string `type:"string" required:"true"`
 
 	// The date when the registration for the domain is set to expire. The date
-	// and time is in Coordinated Universal time (UTC).
+	// and time is in Unix time format and Coordinated Universal time (UTC).
 	ExpirationDate *time.Time `type:"timestamp"`
 
 	// The name of the domain.
@@ -112,8 +113,8 @@ type GetDomainDetailOutput struct {
 	// Reserved for future use.
 	RegistryDomainId *string `type:"string"`
 
-	// Reseller of the domain. Domains registered or transferred using Amazon Route
-	// 53 domains will have "Amazon" as the reseller.
+	// Reseller of the domain. Domains registered or transferred using Route 53
+	// domains will have "Amazon" as the reseller.
 	Reseller *string `type:"string"`
 
 	// An array of domain name status codes, also known as Extensible Provisioning
@@ -145,7 +146,7 @@ type GetDomainDetailOutput struct {
 	TechPrivacy *bool `type:"boolean"`
 
 	// The last updated date of the domain as found in the response to a WHOIS query.
-	// The date and time is in Coordinated Universal time (UTC).
+	// The date and time is in Unix time format and Coordinated Universal time (UTC).
 	UpdatedDate *time.Time `type:"timestamp"`
 
 	// The fully qualified name of the WHOIS server that can answer the WHOIS query

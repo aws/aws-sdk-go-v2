@@ -55,16 +55,16 @@ const opDeleteBuild = "DeleteBuild"
 // DeleteBuildRequest returns a request value for making API operation for
 // Amazon GameLift.
 //
-// Deletes a build. This action permanently deletes the build record and any
-// uploaded build files.
+// Deletes a build. This action permanently deletes the build resource and any
+// uploaded build files. Deleting a build does not affect the status of any
+// active fleets using the build, but you can no longer create new fleets with
+// the deleted build.
 //
-// To delete a build, specify its ID. Deleting a build does not affect the status
-// of any active fleets using the build, but you can no longer create new fleets
-// with the deleted build.
+// To delete a build, specify the build ID.
 //
 // Learn more
 //
-//  Working with Builds (https://docs.aws.amazon.com/gamelift/latest/developerguide/build-intro.html)
+//  Upload a Custom Server Build (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
 //
 // Related operations
 //

@@ -13,7 +13,7 @@ import (
 type GetIPSetInput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique ID of the detector the ipSet is associated with.
+	// The unique ID of the detector that the IPSet is associated with.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
@@ -77,22 +77,22 @@ type GetIPSetOutput struct {
 	// Format is a required field
 	Format IpSetFormat `locationName:"format" min:"1" type:"string" required:"true" enum:"true"`
 
-	// The URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
+	// The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
 	//
 	// Location is a required field
 	Location *string `locationName:"location" min:"1" type:"string" required:"true"`
 
-	// The user friendly name for the IPSet.
+	// The user-friendly name for the IPSet.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
-	// The status of ipSet file uploaded.
+	// The status of IPSet file that was uploaded.
 	//
 	// Status is a required field
 	Status IpSetStatus `locationName:"status" min:"1" type:"string" required:"true" enum:"true"`
 
-	// The tags of the IP set resource.
+	// The tags of the IPSet resource.
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 

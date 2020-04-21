@@ -77,3 +77,37 @@ func (enum LoggingLevel) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
+
+type PayloadType string
+
+// Enum values for PayloadType
+const (
+	PayloadTypeString PayloadType = "STRING"
+	PayloadTypeJson   PayloadType = "JSON"
+)
+
+func (enum PayloadType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PayloadType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TagrisStatus string
+
+// Enum values for TagrisStatus
+const (
+	TagrisStatusActive    TagrisStatus = "ACTIVE"
+	TagrisStatusNotActive TagrisStatus = "NOT_ACTIVE"
+)
+
+func (enum TagrisStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TagrisStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

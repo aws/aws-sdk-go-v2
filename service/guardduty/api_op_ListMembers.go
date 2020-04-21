@@ -24,12 +24,14 @@ type ListMembersInput struct {
 
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the list action. For subsequent calls
-	// to the action fill nextToken in the request with the value of NextToken from
-	// the previous response to continue listing data.
+	// to the action, fill nextToken in the request with the value of NextToken
+	// from the previous response to continue listing data.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 
-	// Specifies whether to only return associated members or to return all members
-	// (including members which haven't been invited yet or have been disassociated).
+	// Specifies what member accounts the response includes based on their relationship
+	// status with the master account. The default value is "true". If set to "false"
+	// the response includes all existing member accounts (including members who
+	// haven't been invited yet or have been disassociated).
 	OnlyAssociated *string `location:"querystring" locationName:"onlyAssociated" type:"string"`
 }
 
@@ -95,8 +97,8 @@ type ListMembersOutput struct {
 	// A list of members.
 	Members []Member `locationName:"members" type:"list"`
 
-	// Pagination parameter to be used on the next list operation to retrieve more
-	// items.
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
@@ -133,8 +135,8 @@ const opListMembers = "ListMembers"
 // ListMembersRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Lists details about all member accounts for the current GuardDuty master
-// account.
+// Lists details about associated member accounts for the current GuardDuty
+// master account.
 //
 //    // Example sending a request using ListMembersRequest.
 //    req := client.ListMembersRequest(params)

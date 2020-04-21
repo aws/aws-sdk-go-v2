@@ -84,7 +84,8 @@ type DescribePublishingDestinationOutput struct {
 	// DestinationProperties is a required field
 	DestinationProperties *DestinationProperties `locationName:"destinationProperties" type:"structure" required:"true"`
 
-	// The type of the publishing destination. Currently, only S3 is supported.
+	// The type of publishing destination. Currently, only Amazon S3 buckets are
+	// supported.
 	//
 	// DestinationType is a required field
 	DestinationType DestinationType `locationName:"destinationType" min:"1" type:"string" required:"true" enum:"true"`

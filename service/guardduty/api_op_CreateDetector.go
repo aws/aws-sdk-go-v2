@@ -16,12 +16,12 @@ type CreateDetectorInput struct {
 	// The idempotency token for the create request.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
-	// A boolean value that specifies whether the detector is to be enabled.
+	// A Boolean value that specifies whether the detector is to be enabled.
 	//
 	// Enable is a required field
 	Enable *bool `locationName:"enable" type:"boolean" required:"true"`
 
-	// A enum value that specifies how frequently customer got Finding updates published.
+	// An enum value that specifies how frequently updated findings are exported.
 	FindingPublishingFrequency FindingPublishingFrequency `locationName:"findingPublishingFrequency" type:"string" enum:"true"`
 
 	// The tags to be added to a new detector resource.
@@ -123,8 +123,8 @@ const opCreateDetector = "CreateDetector"
 //
 // Creates a single Amazon GuardDuty detector. A detector is a resource that
 // represents the GuardDuty service. To start using GuardDuty, you must create
-// a detector in each region that you enable the service. You can have only
-// one detector per account per region.
+// a detector in each Region where you enable the service. You can have only
+// one detector per account per Region.
 //
 //    // Example sending a request using CreateDetectorRequest.
 //    req := client.CreateDetectorRequest(params)

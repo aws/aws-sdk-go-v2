@@ -2,6 +2,22 @@
 
 package codeguruprofiler
 
+type ActionGroup string
+
+// Enum values for ActionGroup
+const (
+	ActionGroupAgentPermissions ActionGroup = "agentPermissions"
+)
+
+func (enum ActionGroup) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActionGroup) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AggregationPeriod string
 
 // Enum values for AggregationPeriod

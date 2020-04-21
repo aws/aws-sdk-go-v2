@@ -163,8 +163,7 @@ func (s *CompletionReport) Validate() error {
 	return nil
 }
 
-// The Lustre configuration for the file system being created. This value is
-// required if FileSystemType is set to LUSTRE.
+// The Lustre configuration for the file system being created.
 type CreateFileSystemLustreConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -221,13 +220,12 @@ type CreateFileSystemLustreConfiguration struct {
 	// MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.
 	ImportedFileChunkSize *int64 `min:"1" type:"integer"`
 
-	// (Optional) For the PERSISTENT_1 deployment type, describes the amount of
-	// read and write throughput for each 1 tebibyte of storage, in MB/s/TiB. File
-	// system throughput capacity is calculated by multiplying ﬁle system storage
-	// capacity (TiB) by the PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB
-	// ﬁle system, provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields
-	// 120 MB/s of ﬁle system throughput. You pay for the amount of throughput
-	// that you provision. (Default = 200 MB/s/TiB)
+	// Required for the PERSISTENT_1 deployment type, describes the amount of read
+	// and write throughput for each 1 tebibyte of storage, in MB/s/TiB. File system
+	// throughput capacity is calculated by multiplying ﬁle system storage capacity
+	// (TiB) by the PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB ﬁle system,
+	// provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 117 MB/s of ﬁle
+	// system throughput. You pay for the amount of throughput that you provision.
 	//
 	// Valid values are 50, 100, 200.
 	PerUnitStorageThroughput *int64 `min:"50" type:"integer"`
@@ -298,13 +296,17 @@ type CreateFileSystemWindowsConfiguration struct {
 	//    * MULTI_AZ_1 - Deploys a high availability file system that is configured
 	//    for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.
 	//    You can only deploy a Multi-AZ file system in AWS Regions that have a
-	//    minimum of three Availability Zones.
+	//    minimum of three Availability Zones. Also supports HDD storage type
 	//
 	//    * SINGLE_AZ_1 - (Default) Choose to deploy a file system that is configured
 	//    for single AZ redundancy.
 	//
-	// To learn more about high availability Multi-AZ file systems, see High Availability
-	// for Amazon FSx for Windows File Server (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html).
+	//    * SINGLE_AZ_2 - The latest generation Single AZ file system. Specifies
+	//    a file system that is configured for single AZ redundancy and supports
+	//    HDD storage type.
+	//
+	// For more information, see Availability and Durability: Single-AZ and Multi-AZ
+	// File Systems (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html).
 	DeploymentType WindowsDeploymentType `type:"string" enum:"true"`
 
 	// Required when DeploymentType is set to MULTI_AZ_1. This specifies the subnet
@@ -701,9 +703,21 @@ type FileSystem struct {
 	// The storage capacity of the file system in gigabytes (GB).
 	StorageCapacity *int64 `type:"integer"`
 
-	// The ID of the subnet to contain the endpoint for the file system. One and
-	// only one is supported. The file system is launched in the Availability Zone
-	// associated with this subnet.
+	// The storage type of the file system. Valid values are SSD and HDD. If set
+	// to SSD, the file system uses solid state drive storage. If set to HDD, the
+	// file system uses hard disk drive storage.
+	StorageType StorageType `type:"string" enum:"true"`
+
+	// Specifies the IDs of the subnets that the file system is accessible from.
+	// For Windows MULTI_AZ_1 file system deployment type, there are two subnet
+	// IDs, one for the preferred file server and one for the standby file server.
+	// The preferred file server subnet identified in the PreferredSubnetID property.
+	// All other file systems have only one subnet ID.
+	//
+	// For Lustre file systems, and Single-AZ Windows file systems, this is the
+	// ID of the subnet that contains the endpoint for the file system. For MULTI_AZ_1
+	// Windows file systems, the endpoint for the file system is available in the
+	// PreferredSubnetID.
 	SubnetIds []string `type:"list"`
 
 	// The tags to associate with the file system. For more information, see Tagging
@@ -1111,10 +1125,17 @@ type WindowsFileSystemConfiguration struct {
 	// Specifies the file system deployment type, valid values are the following:
 	//
 	//    * MULTI_AZ_1 - Specifies a high availability file system that is configured
-	//    for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.
+	//    for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability,
+	//    and supports SSD and HDD storage.
 	//
 	//    * SINGLE_AZ_1 - (Default) Specifies a file system that is configured for
-	//    single AZ redundancy.
+	//    single AZ redundancy, only supports SSD storage.
+	//
+	//    * SINGLE_AZ_2 - Latest generation Single AZ file system. Specifies a file
+	//    system that is configured for single AZ redundancy and supports SSD and
+	//    HDD storage.
+	//
+	// For more information, see Single-AZ and Multi-AZ File Systems (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html).
 	DeploymentType WindowsDeploymentType `type:"string" enum:"true"`
 
 	// The list of maintenance operations in progress for this file system.
@@ -1125,12 +1146,11 @@ type WindowsFileSystemConfiguration struct {
 	//
 	// Use this IP address when mounting the file system on Linux SMB clients or
 	// Windows SMB clients that are not joined to a Microsoft Active Directory.
-	// Applicable for both SINGLE_AZ_1 and MULTI_AZ_1 deployment types. This IP
-	// address is temporarily unavailable when the file system is undergoing maintenance.
+	// Applicable for all Windows file system deployment types. This IP address
+	// is temporarily unavailable when the file system is undergoing maintenance.
 	// For Linux and Windows SMB clients that are joined to an Active Directory,
-	// use the file system's DNSName instead. For more information and instruction
-	// on mapping and mounting file shares, see https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html
-	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html).
+	// use the file system's DNSName instead. For more information on mapping and
+	// mounting file shares, see Accessing File Shares (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html).
 	PreferredFileServerIp *string `min:"7" type:"string"`
 
 	// For MULTI_AZ_1 deployment types, it specifies the ID of the subnet where
@@ -1138,13 +1158,16 @@ type WindowsFileSystemConfiguration struct {
 	// in SubnetIds property. Amazon FSx serves traffic from this subnet except
 	// in the event of a failover to the secondary file server.
 	//
-	// For SINGLE_AZ_1 deployment types, this value is the same as that for SubnetIDs.
+	// For SINGLE_AZ_1 and SINGLE_AZ_2 deployment types, this value is the same
+	// as that for SubnetIDs. For more information, see Availability and Durability:
+	// Single-AZ and Multi-AZ File Systems (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources)
 	PreferredSubnetId *string `min:"15" type:"string"`
 
 	// For MULTI_AZ_1 deployment types, use this endpoint when performing administrative
 	// tasks on the file system using Amazon FSx Remote PowerShell.
 	//
-	// For SINGLE_AZ_1 deployment types, this is the DNS name of the file system.
+	// For SINGLE_AZ_1 and SINGLE_AZ_2 deployment types, this is the DNS name of
+	// the file system.
 	//
 	// This endpoint is temporarily unavailable when the file system is undergoing
 	// maintenance.

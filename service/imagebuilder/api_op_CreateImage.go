@@ -22,6 +22,12 @@ type CreateImageInput struct {
 	// and configures the outputs of your pipeline.
 	DistributionConfigurationArn *string `locationName:"distributionConfigurationArn" type:"string"`
 
+	// Collects additional information about the image being created, including
+	// the operating system (OS) version and package list. This information is used
+	// to enhance the overall experience of using EC2 Image Builder. Enabled by
+	// default.
+	EnhancedImageMetadataEnabled *bool `locationName:"enhancedImageMetadataEnabled" type:"boolean"`
+
 	// The Amazon Resource Name (ARN) of the image recipe that defines how images
 	// are configured, tested, and assessed.
 	//
@@ -100,6 +106,12 @@ func (s CreateImageInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "distributionConfigurationArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EnhancedImageMetadataEnabled != nil {
+		v := *s.EnhancedImageMetadataEnabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enhancedImageMetadataEnabled", protocol.BoolValue(v), metadata)
 	}
 	if s.ImageRecipeArn != nil {
 		v := *s.ImageRecipeArn

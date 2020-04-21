@@ -22,7 +22,6 @@ type GetPersonalizedRankingInput struct {
 	// The contextual metadata to use when getting recommendations. Contextual metadata
 	// includes any interaction information that might be relevant when getting
 	// a user's recommendations, such as the user's current location or device type.
-	// For more information, see Contextual Metadata.
 	Context map[string]string `locationName:"context" type:"map"`
 
 	// A list of items (itemId's) to rank. If an item was not included in the training

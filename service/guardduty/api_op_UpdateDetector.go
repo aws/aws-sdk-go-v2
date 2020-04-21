@@ -21,7 +21,7 @@ type UpdateDetectorInput struct {
 	// Specifies whether the detector is enabled or not enabled.
 	Enable *bool `locationName:"enable" type:"boolean"`
 
-	// A enum value that specifies how frequently findings are exported, such as
+	// An enum value that specifies how frequently findings are exported, such as
 	// to CloudWatch Events.
 	FindingPublishingFrequency FindingPublishingFrequency `locationName:"findingPublishingFrequency" type:"string" enum:"true"`
 }

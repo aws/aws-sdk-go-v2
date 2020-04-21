@@ -2,6 +2,24 @@
 
 package applicationinsights
 
+type CloudWatchEventSource string
+
+// Enum values for CloudWatchEventSource
+const (
+	CloudWatchEventSourceEc2        CloudWatchEventSource = "EC2"
+	CloudWatchEventSourceCodeDeploy CloudWatchEventSource = "CODE_DEPLOY"
+	CloudWatchEventSourceHealth     CloudWatchEventSource = "HEALTH"
+)
+
+func (enum CloudWatchEventSource) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CloudWatchEventSource) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ConfigurationEventResourceType string
 
 // Enum values for ConfigurationEventResourceType

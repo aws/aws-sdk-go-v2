@@ -170,8 +170,9 @@ type QueryExecution struct {
 	// and DML, such as SHOW CREATE TABLE, or DESCRIBE <table>.
 	StatementType StatementType `type:"string" enum:"true"`
 
-	// The amount of data scanned during the query execution and the amount of time
-	// that it took to execute, and the type of statement that was run.
+	// Query execution statistics, such as the amount of data scanned, the amount
+	// of time that the query took to process, and the type of statement that was
+	// run.
 	Statistics *QueryExecutionStatistics `type:"structure"`
 
 	// The completion date, current state, submission time, and state change reason
@@ -266,12 +267,12 @@ type QueryExecutionStatus struct {
 	// The date and time that the query completed.
 	CompletionDateTime *time.Time `type:"timestamp"`
 
-	// The state of query execution. QUEUED state is listed but is not used by Athena
-	// and is reserved for future use. RUNNING indicates that the query has been
-	// submitted to the service, and Athena will execute the query as soon as resources
-	// are available. SUCCEEDED indicates that the query completed without errors.
-	// FAILED indicates that the query experienced an error and did not complete
-	// processing. CANCELLED indicates that a user input interrupted query execution.
+	// The state of query execution. QUEUED indicates that the query has been submitted
+	// to the service, and Athena will execute the query as soon as resources are
+	// available. RUNNING indicates that the query is in execution phase. SUCCEEDED
+	// indicates that the query completed without errors. FAILED indicates that
+	// the query experienced an error and did not complete processing. CANCELLED
+	// indicates that a user input interrupted query execution.
 	State QueryExecutionState `type:"string" enum:"true"`
 
 	// Further detail about the status of the query.

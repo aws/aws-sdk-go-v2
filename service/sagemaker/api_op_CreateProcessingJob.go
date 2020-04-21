@@ -57,7 +57,7 @@ type CreateProcessingJobInput struct {
 	StoppingCondition *ProcessingStoppingCondition `type:"structure"`
 
 	// (Optional) An array of key-value pairs. For more information, see Using Cost
-	// Allocation Tags (https://docs-aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
+	// Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
 	// in the AWS Billing and Cost Management User Guide.
 	Tags []Tag `type:"list"`
 }

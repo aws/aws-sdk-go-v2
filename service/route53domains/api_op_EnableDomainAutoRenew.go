@@ -56,11 +56,11 @@ const opEnableDomainAutoRenew = "EnableDomainAutoRenew"
 // domain registration is billed to your AWS account.
 //
 // The period during which you can renew a domain name varies by TLD. For a
-// list of TLDs and their renewal policies, see "Renewal, restoration, and deletion
-// times" (http://wiki.gandi.net/en/domains/renew#renewal_restoration_and_deletion_times)
-// on the website for our registrar associate, Gandi. Amazon Route 53 requires
-// that you renew before the end of the renewal period that is listed on the
-// Gandi website so we can complete processing before the deadline.
+// list of TLDs and their renewal policies, see Domains That You Can Register
+// with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+// in the Amazon Route 53 Developer Guide. Route 53 requires that you renew
+// before the end of the renewal period so we can complete processing before
+// the deadline.
 //
 //    // Example sending a request using EnableDomainAutoRenewRequest.
 //    req := client.EnableDomainAutoRenewRequest(params)

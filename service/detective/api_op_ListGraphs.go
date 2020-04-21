@@ -108,8 +108,6 @@ const opListGraphs = "ListGraphs"
 // ListGraphsRequest returns a request value for making API operation for
 // Amazon Detective.
 //
-// Amazon Detective is currently in preview.
-//
 // Returns the list of behavior graphs that the calling account is a master
 // of. This operation can only be called by a master account.
 //

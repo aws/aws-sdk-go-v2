@@ -11,6 +11,39 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+type AvailSuppression struct {
+	_ struct{} `type:"structure"`
+
+	Mode Mode `type:"string" enum:"true"`
+
+	// Sets the mode for avail suppression, also known as ad suppression. By default,
+	// ad suppression is off and all ad breaks are filled by MediaTailor with ads
+	// or slate.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AvailSuppression) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AvailSuppression) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Mode) > 0 {
+		v := s.Mode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Mode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The configuration for using a content delivery network (CDN), like Amazon
 // CloudFront, for content and ad segment management.
 type CdnConfiguration struct {

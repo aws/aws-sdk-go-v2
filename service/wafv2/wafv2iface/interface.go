@@ -73,9 +73,13 @@ type ClientAPI interface {
 
 	CreateWebACLRequest(*wafv2.CreateWebACLInput) wafv2.CreateWebACLRequest
 
+	DeleteFirewallManagerRuleGroupsRequest(*wafv2.DeleteFirewallManagerRuleGroupsInput) wafv2.DeleteFirewallManagerRuleGroupsRequest
+
 	DeleteIPSetRequest(*wafv2.DeleteIPSetInput) wafv2.DeleteIPSetRequest
 
 	DeleteLoggingConfigurationRequest(*wafv2.DeleteLoggingConfigurationInput) wafv2.DeleteLoggingConfigurationRequest
+
+	DeletePermissionPolicyRequest(*wafv2.DeletePermissionPolicyInput) wafv2.DeletePermissionPolicyRequest
 
 	DeleteRegexPatternSetRequest(*wafv2.DeleteRegexPatternSetInput) wafv2.DeleteRegexPatternSetRequest
 
@@ -90,6 +94,8 @@ type ClientAPI interface {
 	GetIPSetRequest(*wafv2.GetIPSetInput) wafv2.GetIPSetRequest
 
 	GetLoggingConfigurationRequest(*wafv2.GetLoggingConfigurationInput) wafv2.GetLoggingConfigurationRequest
+
+	GetPermissionPolicyRequest(*wafv2.GetPermissionPolicyInput) wafv2.GetPermissionPolicyRequest
 
 	GetRateBasedStatementManagedKeysRequest(*wafv2.GetRateBasedStatementManagedKeysInput) wafv2.GetRateBasedStatementManagedKeysRequest
 
@@ -120,6 +126,8 @@ type ClientAPI interface {
 	ListWebACLsRequest(*wafv2.ListWebACLsInput) wafv2.ListWebACLsRequest
 
 	PutLoggingConfigurationRequest(*wafv2.PutLoggingConfigurationInput) wafv2.PutLoggingConfigurationRequest
+
+	PutPermissionPolicyRequest(*wafv2.PutPermissionPolicyInput) wafv2.PutPermissionPolicyRequest
 
 	TagResourceRequest(*wafv2.TagResourceInput) wafv2.TagResourceRequest
 

@@ -66,8 +66,8 @@ func (s *UpdateDomainContactInput) Validate() error {
 type UpdateDomainContactOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Identifier for tracking the progress of the request. To use this ID to query
-	// the operation status, use GetOperationDetail.
+	// Identifier for tracking the progress of the request. To query the operation
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
 	//
 	// OperationId is a required field
 	OperationId *string `type:"string" required:"true"`

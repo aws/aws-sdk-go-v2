@@ -63,6 +63,10 @@ import (
 type ClientAPI interface {
 	AddFlowOutputsRequest(*mediaconnect.AddFlowOutputsInput) mediaconnect.AddFlowOutputsRequest
 
+	AddFlowSourcesRequest(*mediaconnect.AddFlowSourcesInput) mediaconnect.AddFlowSourcesRequest
+
+	AddFlowVpcInterfacesRequest(*mediaconnect.AddFlowVpcInterfacesInput) mediaconnect.AddFlowVpcInterfacesRequest
+
 	CreateFlowRequest(*mediaconnect.CreateFlowInput) mediaconnect.CreateFlowRequest
 
 	DeleteFlowRequest(*mediaconnect.DeleteFlowInput) mediaconnect.DeleteFlowRequest
@@ -79,6 +83,10 @@ type ClientAPI interface {
 
 	RemoveFlowOutputRequest(*mediaconnect.RemoveFlowOutputInput) mediaconnect.RemoveFlowOutputRequest
 
+	RemoveFlowSourceRequest(*mediaconnect.RemoveFlowSourceInput) mediaconnect.RemoveFlowSourceRequest
+
+	RemoveFlowVpcInterfaceRequest(*mediaconnect.RemoveFlowVpcInterfaceInput) mediaconnect.RemoveFlowVpcInterfaceRequest
+
 	RevokeFlowEntitlementRequest(*mediaconnect.RevokeFlowEntitlementInput) mediaconnect.RevokeFlowEntitlementRequest
 
 	StartFlowRequest(*mediaconnect.StartFlowInput) mediaconnect.StartFlowRequest
@@ -88,6 +96,8 @@ type ClientAPI interface {
 	TagResourceRequest(*mediaconnect.TagResourceInput) mediaconnect.TagResourceRequest
 
 	UntagResourceRequest(*mediaconnect.UntagResourceInput) mediaconnect.UntagResourceRequest
+
+	UpdateFlowRequest(*mediaconnect.UpdateFlowInput) mediaconnect.UpdateFlowRequest
 
 	UpdateFlowEntitlementRequest(*mediaconnect.UpdateFlowEntitlementInput) mediaconnect.UpdateFlowEntitlementRequest
 

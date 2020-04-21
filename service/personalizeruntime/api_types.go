@@ -19,6 +19,10 @@ type PredictedItem struct {
 
 	// The recommended item ID.
 	ItemId *string `locationName:"itemId" type:"string"`
+
+	// A numeric representation of the model's certainty in the item's suitability.
+	// For more information on scoring logic, see how-scores-work.
+	Score *float64 `locationName:"score" type:"double"`
 }
 
 // String returns the string representation
@@ -33,6 +37,12 @@ func (s PredictedItem) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "itemId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Score != nil {
+		v := *s.Score
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "score", protocol.Float64Value(v), metadata)
 	}
 	return nil
 }

@@ -414,6 +414,9 @@ type SMBFileShareInfo struct {
 	// For example @group1. Can only be set if Authentication is set to ActiveDirectory.
 	AdminUserList []string `type:"list"`
 
+	// The Amazon Resource Name (ARN) of the storage used for the audit logs.
+	AuditDestinationARN *string `type:"string"`
+
 	// The authentication method of the file share.
 	//
 	// Valid values are ActiveDirectory or GuestAccess. The default is ActiveDirectory.

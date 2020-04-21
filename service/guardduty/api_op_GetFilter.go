@@ -13,7 +13,7 @@ import (
 type GetFilterInput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique ID of the detector the filter is associated with.
+	// The unique ID of the detector that the filter is associated with.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`

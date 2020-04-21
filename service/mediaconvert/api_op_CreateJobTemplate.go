@@ -4,6 +4,7 @@ package mediaconvert
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -27,6 +28,13 @@ type CreateJobTemplateInput struct {
 
 	// Optional. A description of the job template you are creating.
 	Description *string `locationName:"description" type:"string"`
+
+	// Optional. Use queue hopping to avoid overly long waits in the backlog of
+	// the queue that you submit your job to. Specify an alternate queue and the
+	// maximum time that your job will wait in the initial queue before hopping.
+	// For more information about this feature, see the AWS Elemental MediaConvert
+	// User Guide.
+	HopDestinations []HopDestination `locationName:"hopDestinations" type:"list"`
 
 	// The name of the job template you are creating.
 	//
@@ -85,6 +93,13 @@ func (s *CreateJobTemplateInput) Validate() error {
 			invalidParams.AddNested("AccelerationSettings", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.HopDestinations != nil {
+		for i, v := range s.HopDestinations {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "HopDestinations", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 	if s.Settings != nil {
 		if err := s.Settings.Validate(); err != nil {
 			invalidParams.AddNested("Settings", err.(aws.ErrInvalidParams))
@@ -118,6 +133,18 @@ func (s CreateJobTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HopDestinations != nil {
+		v := s.HopDestinations
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "hopDestinations", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.Name != nil {
 		v := *s.Name

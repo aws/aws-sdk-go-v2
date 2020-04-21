@@ -20,18 +20,19 @@ type ListJobsInput struct {
 	// Optional. Number of jobs, up to twenty, that will be returned at one time.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
-	// Use this string, provided with the response to a previous request, to request
-	// the next batch of jobs.
+	// Optional. Use this string, provided with the response to a previous request,
+	// to request the next batch of jobs.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 
-	// When you request lists of resources, you can optionally specify whether they
+	// Optional. When you request lists of resources, you can specify whether they
 	// are sorted in ASCENDING or DESCENDING order. Default varies by resource.
 	Order Order `location:"querystring" locationName:"order" type:"string" enum:"true"`
 
-	// Provide a queue name to get back only jobs from that queue.
+	// Optional. Provide a queue name to get back only jobs from that queue.
 	Queue *string `location:"querystring" locationName:"queue" type:"string"`
 
-	// A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR.
+	// Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED,
+	// or ERROR.
 	Status JobStatus `location:"querystring" locationName:"status" type:"string" enum:"true"`
 }
 

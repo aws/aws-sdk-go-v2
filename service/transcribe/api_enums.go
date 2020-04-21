@@ -117,6 +117,22 @@ func (enum RedactionType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type Specialty string
+
+// Enum values for Specialty
+const (
+	SpecialtyPrimarycare Specialty = "PRIMARYCARE"
+)
+
+func (enum Specialty) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Specialty) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TranscriptionJobStatus string
 
 // Enum values for TranscriptionJobStatus
@@ -132,6 +148,23 @@ func (enum TranscriptionJobStatus) MarshalValue() (string, error) {
 }
 
 func (enum TranscriptionJobStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Type string
+
+// Enum values for Type
+const (
+	TypeConversation Type = "CONVERSATION"
+	TypeDictation    Type = "DICTATION"
+)
+
+func (enum Type) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Type) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

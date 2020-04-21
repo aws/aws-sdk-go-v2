@@ -1040,6 +1040,56 @@ func (s AudioSelectorSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The settings for Automatic Input Failover.
+type AutomaticInputFailoverSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Input preference when deciding which input to make active when a previously
+	// failed input has recovered.
+	InputPreference InputPreference `locationName:"inputPreference" type:"string" enum:"true"`
+
+	// The input ID of the secondary input in the automatic input failover pair.
+	//
+	// SecondaryInputId is a required field
+	SecondaryInputId *string `locationName:"secondaryInputId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AutomaticInputFailoverSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AutomaticInputFailoverSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AutomaticInputFailoverSettings"}
+
+	if s.SecondaryInputId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SecondaryInputId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AutomaticInputFailoverSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.InputPreference) > 0 {
+		v := s.InputPreference
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "inputPreference", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.SecondaryInputId != nil {
+		v := *s.SecondaryInputId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "secondaryInputId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Avail Blanking
 type AvailBlanking struct {
 	_ struct{} `type:"structure"`
@@ -4014,6 +4064,15 @@ type H264Settings struct {
 	// or 'pop' on I-frames.
 	FlickerAq H264FlickerAq `locationName:"flickerAq" type:"string" enum:"true"`
 
+	// This setting applies only when scan type is "interlaced." It controls whether
+	// coding is on a field basis or a frame basis. (When the video is progressive,
+	// the coding is always on a frame basis.)enabled: Always code on a field basis,
+	// so that odd and even sets of fields are coded separately.disabled: Code the
+	// two sets of fields separately (on a field basis) or together (on a frame
+	// basis, using PAFF or MBAFF), depending on what is most appropriate for the
+	// content.
+	ForceFieldPictures H264ForceFieldPictures `locationName:"forceFieldPictures" type:"string" enum:"true"`
+
 	// This field indicates how the output video frame rate is specified. If "specified"
 	// is selected then the output video frame rate is determined by framerateNumerator
 	// and framerateDenominator, else if "initializeFromSource" is selected then
@@ -4249,6 +4308,12 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "flickerAq", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.ForceFieldPictures) > 0 {
+		v := s.ForceFieldPictures
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "forceFieldPictures", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.FramerateControl) > 0 {
 		v := s.FramerateControl
@@ -6170,6 +6235,10 @@ func (s Input) MarshalFields(e protocol.FieldEncoder) error {
 type InputAttachment struct {
 	_ struct{} `type:"structure"`
 
+	// User-specified settings for defining what the conditions are for declaring
+	// the input unhealthy and failing over to a different input.
+	AutomaticInputFailoverSettings *AutomaticInputFailoverSettings `locationName:"automaticInputFailoverSettings" type:"structure"`
+
 	// User-specified name for the attachment. This is required if the user wants
 	// to use this input in an input switch action.
 	InputAttachmentName *string `locationName:"inputAttachmentName" type:"string"`
@@ -6189,6 +6258,11 @@ func (s InputAttachment) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputAttachment) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InputAttachment"}
+	if s.AutomaticInputFailoverSettings != nil {
+		if err := s.AutomaticInputFailoverSettings.Validate(); err != nil {
+			invalidParams.AddNested("AutomaticInputFailoverSettings", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.InputSettings != nil {
 		if err := s.InputSettings.Validate(); err != nil {
 			invalidParams.AddNested("InputSettings", err.(aws.ErrInvalidParams))
@@ -6203,6 +6277,12 @@ func (s *InputAttachment) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputAttachment) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AutomaticInputFailoverSettings != nil {
+		v := s.AutomaticInputFailoverSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "automaticInputFailoverSettings", v, metadata)
+	}
 	if s.InputAttachmentName != nil {
 		v := *s.InputAttachmentName
 

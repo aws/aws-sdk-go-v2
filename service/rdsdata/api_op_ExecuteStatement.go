@@ -31,6 +31,8 @@ type ExecuteStatementInput struct {
 	IncludeResultMetadata *bool `locationName:"includeResultMetadata" type:"boolean"`
 
 	// The parameters for the SQL statement.
+	//
+	// Array parameters are not supported.
 	Parameters []SqlParameter `locationName:"parameters" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
@@ -258,8 +260,8 @@ const opExecuteStatement = "ExecuteStatement"
 // If a call isn't part of a transaction because it doesn't include the transactionID
 // parameter, changes that result from the call are committed automatically.
 //
-// The response size limit is 1 MB or 1,000 records. If the call returns more
-// than 1 MB of response data or over 1,000 records, the call is terminated.
+// The response size limit is 1 MB. If the call returns more than 1 MB of response
+// data, the call is terminated.
 //
 //    // Example sending a request using ExecuteStatementRequest.
 //    req := client.ExecuteStatementRequest(params)

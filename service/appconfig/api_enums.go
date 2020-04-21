@@ -2,6 +2,27 @@
 
 package appconfig
 
+type DeploymentEventType string
+
+// Enum values for DeploymentEventType
+const (
+	DeploymentEventTypePercentageUpdated   DeploymentEventType = "PERCENTAGE_UPDATED"
+	DeploymentEventTypeRollbackStarted     DeploymentEventType = "ROLLBACK_STARTED"
+	DeploymentEventTypeRollbackCompleted   DeploymentEventType = "ROLLBACK_COMPLETED"
+	DeploymentEventTypeBakeTimeStarted     DeploymentEventType = "BAKE_TIME_STARTED"
+	DeploymentEventTypeDeploymentStarted   DeploymentEventType = "DEPLOYMENT_STARTED"
+	DeploymentEventTypeDeploymentCompleted DeploymentEventType = "DEPLOYMENT_COMPLETED"
+)
+
+func (enum DeploymentEventType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentEventType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeploymentState string
 
 // Enum values for DeploymentState
@@ -72,6 +93,25 @@ func (enum ReplicateTo) MarshalValue() (string, error) {
 }
 
 func (enum ReplicateTo) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TriggeredBy string
+
+// Enum values for TriggeredBy
+const (
+	TriggeredByUser            TriggeredBy = "USER"
+	TriggeredByAppconfig       TriggeredBy = "APPCONFIG"
+	TriggeredByCloudwatchAlarm TriggeredBy = "CLOUDWATCH_ALARM"
+	TriggeredByInternalError   TriggeredBy = "INTERNAL_ERROR"
+)
+
+func (enum TriggeredBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TriggeredBy) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

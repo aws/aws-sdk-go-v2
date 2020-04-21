@@ -49,6 +49,9 @@ type UpdateFlowSourceInput struct {
 	// only to Zixi-based streams.
 	StreamId *string `locationName:"streamId" type:"string"`
 
+	// The name of the VPC Interface to configure this Source with.
+	VpcInterfaceName *string `locationName:"vpcInterfaceName" type:"string"`
+
 	// The range of IP addresses that should be allowed to contribute content to
 	// your source. These IP addresses should be in the form of a Classless Inter-Domain
 	// Routing (CIDR) block; for example, 10.0.0.0/16.
@@ -129,6 +132,12 @@ func (s UpdateFlowSourceInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "streamId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VpcInterfaceName != nil {
+		v := *s.VpcInterfaceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "vpcInterfaceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.WhitelistCidr != nil {
 		v := *s.WhitelistCidr

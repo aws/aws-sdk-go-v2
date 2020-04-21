@@ -40,12 +40,14 @@ type GetReservationCoverageInput struct {
 	//
 	//    * TENANCY
 	//
-	// GetReservationCoverage uses the same Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// GetReservationCoverage uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension.
 	// You can nest only one level deep. If there are multiple values for a dimension,
 	// they are OR'd together.
 	//
 	// If you don't provide a SERVICE filter, Cost Explorer defaults to EC2.
+	//
+	// Cost category is also supported.
 	Filter *Expression `type:"structure"`
 
 	// The granularity of the AWS cost data for the reservation. Valid values are
@@ -161,8 +163,9 @@ const opGetReservationCoverage = "GetReservationCoverage"
 // see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon
 // Relational Database Service, or Amazon Redshift usage is covered by a reservation.
 // An organization's master account can see the coverage of the associated member
-// accounts. For any time period, you can filter data about reservation usage
-// by the following dimensions:
+// accounts. This supports dimensions, Cost Categories, and nested expressions.
+// For any time period, you can filter data about reservation usage by the following
+// dimensions:
 //
 //    * AZ
 //

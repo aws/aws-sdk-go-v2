@@ -15,12 +15,12 @@ type ListCostCategoryDefinitionsInput struct {
 	// The date when the Cost Category was effective.
 	EffectiveOn *string `min:"20" type:"string"`
 
+	// The number of entries a paginated response contains.
+	MaxResults *int64 `min:"1" type:"integer"`
+
 	// The token to retrieve the next set of results. Amazon Web Services provides
 	// the token when the response from a previous call has more results than the
 	// maximum page size.
-	//
-	// You can use this information to retrieve the full Cost Category information
-	// using DescribeCostCategory.
 	NextToken *string `type:"string"`
 }
 
@@ -34,6 +34,9 @@ func (s *ListCostCategoryDefinitionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListCostCategoryDefinitionsInput"}
 	if s.EffectiveOn != nil && len(*s.EffectiveOn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("EffectiveOn", 20))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -65,18 +68,13 @@ const opListCostCategoryDefinitions = "ListCostCategoryDefinitions"
 // ListCostCategoryDefinitionsRequest returns a request value for making API operation for
 // AWS Cost Explorer Service.
 //
-//
-//  Cost Category is in public beta for AWS Billing and Cost Management and
-//  is subject to change. Your use of Cost Categories is subject to the Beta
-//  Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-//  (Section 1.10).
-//
-// Returns the name, ARN and effective dates of all Cost Categories defined
-// in the account. You have the option to use EffectiveOn to return a list of
-// Cost Categories that were active on a specific date. If there is no EffectiveOn
-// specified, you’ll see Cost Categories that are effective on the current
-// date. If Cost Category is still effective, EffectiveEnd is omitted in the
-// response.
+// Returns the name, ARN, NumberOfRules and effective dates of all Cost Categories
+// defined in the account. You have the option to use EffectiveOn to return
+// a list of Cost Categories that were active on a specific date. If there is
+// no EffectiveOn specified, you’ll see Cost Categories that are effective
+// on the current date. If Cost Category is still effective, EffectiveEnd is
+// omitted in the response. ListCostCategoryDefinitions supports pagination.
+// The request can have a MaxResults range up to 100.
 //
 //    // Example sending a request using ListCostCategoryDefinitionsRequest.
 //    req := client.ListCostCategoryDefinitionsRequest(params)
@@ -91,6 +89,12 @@ func (c *Client) ListCostCategoryDefinitionsRequest(input *ListCostCategoryDefin
 		Name:       opListCostCategoryDefinitions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -123,6 +127,53 @@ func (r ListCostCategoryDefinitionsRequest) Send(ctx context.Context) (*ListCost
 	}
 
 	return resp, nil
+}
+
+// NewListCostCategoryDefinitionsRequestPaginator returns a paginator for ListCostCategoryDefinitions.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListCostCategoryDefinitionsRequest(input)
+//   p := costexplorer.NewListCostCategoryDefinitionsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListCostCategoryDefinitionsPaginator(req ListCostCategoryDefinitionsRequest) ListCostCategoryDefinitionsPaginator {
+	return ListCostCategoryDefinitionsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListCostCategoryDefinitionsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListCostCategoryDefinitionsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListCostCategoryDefinitionsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListCostCategoryDefinitionsPaginator) CurrentPage() *ListCostCategoryDefinitionsOutput {
+	return p.Pager.CurrentPage().(*ListCostCategoryDefinitionsOutput)
 }
 
 // ListCostCategoryDefinitionsResponse is the response type for the

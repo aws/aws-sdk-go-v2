@@ -40,6 +40,11 @@ func (s ApplicationComponent) String() string {
 type ApplicationInfo struct {
 	_ struct{} `type:"structure"`
 
+	// Indicates whether Application Insights can listen to CloudWatch events for
+	// the application resources, such as instance terminated, failed deployment,
+	// and others.
+	CWEMonitorEnabled *bool `type:"boolean"`
+
 	// The lifecycle of the application.
 	LifeCycle *string `type:"string"`
 
@@ -129,8 +134,54 @@ func (s LogPattern) String() string {
 type Observation struct {
 	_ struct{} `type:"structure"`
 
+	// The detail type of the CloudWatch Event-based observation, for example, EC2
+	// Instance State-change Notification.
+	CloudWatchEventDetailType *string `type:"string"`
+
+	// The ID of the CloudWatch Event-based observation related to the detected
+	// problem.
+	CloudWatchEventId *string `type:"string"`
+
+	// The source of the CloudWatch Event.
+	CloudWatchEventSource CloudWatchEventSource `type:"string" enum:"true"`
+
+	// The CodeDeploy application to which the deployment belongs.
+	CodeDeployApplication *string `type:"string"`
+
+	// The deployment group to which the CodeDeploy deployment belongs.
+	CodeDeployDeploymentGroup *string `type:"string"`
+
+	// The deployment ID of the CodeDeploy-based observation related to the detected
+	// problem.
+	CodeDeployDeploymentId *string `type:"string"`
+
+	// The instance group to which the CodeDeploy instance belongs.
+	CodeDeployInstanceGroupId *string `type:"string"`
+
+	// The status of the CodeDeploy deployment, for example SUCCESS or FAILURE.
+	CodeDeployState *string `type:"string"`
+
+	// The state of the instance, such as STOPPING or TERMINATING.
+	Ec2State *string `type:"string"`
+
 	// The time when the observation ended, in epoch seconds.
 	EndTime *time.Time `type:"timestamp"`
+
+	// The Amazon Resource Name (ARN) of the AWS Health Event-based observation.
+	HealthEventArn *string `type:"string"`
+
+	// The description of the AWS Health event provided by the service, such as
+	// Amazon EC2.
+	HealthEventDescription *string `type:"string"`
+
+	// The category of the AWS Health event, such as issue.
+	HealthEventTypeCategory *string `type:"string"`
+
+	// The type of the AWS Health event, for example, AWS_EC2_POWER_CONNECTIVITY_ISSUE.
+	HealthEventTypeCode *string `type:"string"`
+
+	// The service to which the AWS Health Event belongs, such as EC2.
+	HealthService *string `type:"string"`
 
 	// The ID of the observation type.
 	Id *string `min:"38" type:"string"`
@@ -168,6 +219,27 @@ type Observation struct {
 
 	// The value of the source observation metric.
 	Value *float64 `type:"double"`
+
+	// The X-Ray request error percentage for this node.
+	XRayErrorPercent *int64 `type:"integer"`
+
+	// The X-Ray request fault percentage for this node.
+	XRayFaultPercent *int64 `type:"integer"`
+
+	// The name of the X-Ray node.
+	XRayNodeName *string `type:"string"`
+
+	// The type of the X-Ray node.
+	XRayNodeType *string `type:"string"`
+
+	// The X-Ray node request average latency for this node.
+	XRayRequestAverageLatency *int64 `type:"long"`
+
+	// The X-Ray request count for this node.
+	XRayRequestCount *int64 `type:"integer"`
+
+	// The X-Ray request throttle percentage for this node.
+	XRayThrottlePercent *int64 `type:"integer"`
 }
 
 // String returns the string representation

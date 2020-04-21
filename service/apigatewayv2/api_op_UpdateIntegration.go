@@ -73,7 +73,7 @@ type UpdateIntegrationInput struct {
 	// for more information.
 	TemplateSelectionExpression *string `locationName:"templateSelectionExpression" type:"string"`
 
-	// An integer with a value between [50-29000].
+	// An integer with a value between [50-30000].
 	TimeoutInMillis *int64 `locationName:"timeoutInMillis" min:"50" type:"integer"`
 
 	// The TLS configuration for a private integration. If you specify a TLS configuration,
@@ -296,7 +296,7 @@ type UpdateIntegrationOutput struct {
 	// for more information.
 	TemplateSelectionExpression *string `locationName:"templateSelectionExpression" type:"string"`
 
-	// An integer with a value between [50-29000].
+	// An integer with a value between [50-30000].
 	TimeoutInMillis *int64 `locationName:"timeoutInMillis" min:"50" type:"integer"`
 
 	// The TLS configuration for a private integration. If you specify a TLS configuration,

@@ -57,12 +57,13 @@ const opDescribeBuild = "DescribeBuild"
 // DescribeBuildRequest returns a request value for making API operation for
 // Amazon GameLift.
 //
-// Retrieves properties for a build. To request a build record, specify a build
-// ID. If successful, an object containing the build properties is returned.
+// Retrieves properties for a custom game build. To request a build resource,
+// specify a build ID. If successful, an object containing the build properties
+// is returned.
 //
 // Learn more
 //
-//  Working with Builds (https://docs.aws.amazon.com/gamelift/latest/developerguide/build-intro.html)
+//  Upload a Custom Server Build (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
 //
 // Related operations
 //

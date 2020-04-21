@@ -15,12 +15,10 @@ type GetReservationPurchaseRecommendationInput struct {
 	// The account ID that is associated with the recommendation.
 	AccountId *string `type:"string"`
 
-	// The account scope that you want recommendations for. PAYER means that AWS
-	// includes the master account and any member accounts when it calculates its
-	// recommendations. LINKED means that AWS includes only member accounts when
-	// it calculates its recommendations.
-	//
-	// Valid values are PAYER and LINKED.
+	// The account scope that you want your recommendations for. Amazon Web Services
+	// calculates recommendations including the payer account and linked accounts
+	// if the value is set to PAYER. If the value is LINKED, recommendations are
+	// calculated for individual linked accounts only.
 	AccountScope AccountScope `type:"string" enum:"true"`
 
 	// The number of previous days that you want AWS to consider when it calculates

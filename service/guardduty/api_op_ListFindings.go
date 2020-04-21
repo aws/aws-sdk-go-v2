@@ -45,8 +45,6 @@ type ListFindingsInput struct {
 	//
 	//    * resource.instanceDetails.instanceId
 	//
-	//    * resource.instanceDetails.outpostArn
-	//
 	//    * resource.instanceDetails.networkInterfaces.ipv6Addresses
 	//
 	//    * resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
@@ -97,8 +95,6 @@ type ListFindingsInput struct {
 	//
 	//    * service.action.networkConnectionAction.protocol
 	//
-	//    * service.action.networkConnectionAction.localIpDetails.ipAddressV4
-	//
 	//    * service.action.networkConnectionAction.remoteIpDetails.city.cityName
 	//
 	//    * service.action.networkConnectionAction.remoteIpDetails.country.countryName
@@ -133,8 +129,8 @@ type ListFindingsInput struct {
 
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the list action. For subsequent calls
-	// to the action fill nextToken in the request with the value of NextToken from
-	// the previous response to continue listing data.
+	// to the action, fill nextToken in the request with the value of NextToken
+	// from the previous response to continue listing data.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// Represents the criteria used for sorting findings.
@@ -206,13 +202,13 @@ func (s ListFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListFindingsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The IDs of the findings you are listing.
+	// The IDs of the findings that you're listing.
 	//
 	// FindingIds is a required field
 	FindingIds []string `locationName:"findingIds" type:"list" required:"true"`
 
-	// Pagination parameter to be used on the next list operation to retrieve more
-	// items.
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 

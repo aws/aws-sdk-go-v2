@@ -14,8 +14,9 @@ type ListFleetsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A unique identifier for a build to return fleets for. Use this parameter
-	// to return only fleets using the specified build. Use either the build ID
-	// or ARN value.To retrieve all fleets, leave this parameter empty.
+	// to return only fleets using a specified build. Use either the build ID or
+	// ARN value. To retrieve all fleets, do not include either a BuildId and ScriptID
+	// parameter.
 	BuildId *string `type:"string"`
 
 	// The maximum number of results to return. Use this parameter with NextToken
@@ -28,8 +29,8 @@ type ListFleetsInput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// A unique identifier for a Realtime script to return fleets for. Use this
-	// parameter to return only fleets using the specified script. Use either the
-	// script ID or ARN value.To retrieve all fleets, leave this parameter empty.
+	// parameter to return only fleets using a specified script. Use either the
+	// script ID or ARN value. To retrieve all fleets, leave this parameter empty.
 	ScriptId *string `type:"string"`
 }
 
@@ -79,16 +80,16 @@ const opListFleets = "ListFleets"
 // ListFleetsRequest returns a request value for making API operation for
 // Amazon GameLift.
 //
-// Retrieves a collection of fleet records for this AWS account. You can filter
+// Retrieves a collection of fleet resources for this AWS account. You can filter
 // the result set to find only those fleets that are deployed with a specific
 // build or script. Use the pagination parameters to retrieve results in sequential
 // pages.
 //
-// Fleet records are not listed in a particular order.
+// Fleet resources are not listed in a particular order.
 //
 // Learn more
 //
-//  Set Up Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html).
+// Setting up GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 //
 // Related operations
 //
@@ -102,7 +103,7 @@ const opListFleets = "ListFleets"
 //
 //    * UpdateFleetAttributes
 //
-//    * Manage fleet actions: StartFleetActions StopFleetActions
+//    * StartFleetActions or StopFleetActions
 //
 //    // Example sending a request using ListFleetsRequest.
 //    req := client.ListFleetsRequest(params)

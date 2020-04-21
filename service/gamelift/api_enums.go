@@ -36,6 +36,23 @@ func (enum BackfillMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type BalancingStrategy string
+
+// Enum values for BalancingStrategy
+const (
+	BalancingStrategySpotOnly      BalancingStrategy = "SPOT_ONLY"
+	BalancingStrategySpotPreferred BalancingStrategy = "SPOT_PREFERRED"
+)
+
+func (enum BalancingStrategy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BalancingStrategy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type BuildStatus string
 
 // Enum values for BuildStatus
@@ -264,6 +281,183 @@ func (enum FleetType) MarshalValue() (string, error) {
 }
 
 func (enum FleetType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type GameServerClaimStatus string
+
+// Enum values for GameServerClaimStatus
+const (
+	GameServerClaimStatusClaimed GameServerClaimStatus = "CLAIMED"
+)
+
+func (enum GameServerClaimStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GameServerClaimStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type GameServerGroupAction string
+
+// Enum values for GameServerGroupAction
+const (
+	GameServerGroupActionReplaceInstanceTypes GameServerGroupAction = "REPLACE_INSTANCE_TYPES"
+)
+
+func (enum GameServerGroupAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GameServerGroupAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type GameServerGroupDeleteOption string
+
+// Enum values for GameServerGroupDeleteOption
+const (
+	GameServerGroupDeleteOptionSafeDelete  GameServerGroupDeleteOption = "SAFE_DELETE"
+	GameServerGroupDeleteOptionForceDelete GameServerGroupDeleteOption = "FORCE_DELETE"
+	GameServerGroupDeleteOptionRetain      GameServerGroupDeleteOption = "RETAIN"
+)
+
+func (enum GameServerGroupDeleteOption) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GameServerGroupDeleteOption) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type GameServerGroupInstanceType string
+
+// Enum values for GameServerGroupInstanceType
+const (
+	GameServerGroupInstanceTypeC4Large    GameServerGroupInstanceType = "c4.large"
+	GameServerGroupInstanceTypeC4Xlarge   GameServerGroupInstanceType = "c4.xlarge"
+	GameServerGroupInstanceTypeC42xlarge  GameServerGroupInstanceType = "c4.2xlarge"
+	GameServerGroupInstanceTypeC44xlarge  GameServerGroupInstanceType = "c4.4xlarge"
+	GameServerGroupInstanceTypeC48xlarge  GameServerGroupInstanceType = "c4.8xlarge"
+	GameServerGroupInstanceTypeC5Large    GameServerGroupInstanceType = "c5.large"
+	GameServerGroupInstanceTypeC5Xlarge   GameServerGroupInstanceType = "c5.xlarge"
+	GameServerGroupInstanceTypeC52xlarge  GameServerGroupInstanceType = "c5.2xlarge"
+	GameServerGroupInstanceTypeC54xlarge  GameServerGroupInstanceType = "c5.4xlarge"
+	GameServerGroupInstanceTypeC59xlarge  GameServerGroupInstanceType = "c5.9xlarge"
+	GameServerGroupInstanceTypeC512xlarge GameServerGroupInstanceType = "c5.12xlarge"
+	GameServerGroupInstanceTypeC518xlarge GameServerGroupInstanceType = "c5.18xlarge"
+	GameServerGroupInstanceTypeC524xlarge GameServerGroupInstanceType = "c5.24xlarge"
+	GameServerGroupInstanceTypeR4Large    GameServerGroupInstanceType = "r4.large"
+	GameServerGroupInstanceTypeR4Xlarge   GameServerGroupInstanceType = "r4.xlarge"
+	GameServerGroupInstanceTypeR42xlarge  GameServerGroupInstanceType = "r4.2xlarge"
+	GameServerGroupInstanceTypeR44xlarge  GameServerGroupInstanceType = "r4.4xlarge"
+	GameServerGroupInstanceTypeR48xlarge  GameServerGroupInstanceType = "r4.8xlarge"
+	GameServerGroupInstanceTypeR416xlarge GameServerGroupInstanceType = "r4.16xlarge"
+	GameServerGroupInstanceTypeR5Large    GameServerGroupInstanceType = "r5.large"
+	GameServerGroupInstanceTypeR5Xlarge   GameServerGroupInstanceType = "r5.xlarge"
+	GameServerGroupInstanceTypeR52xlarge  GameServerGroupInstanceType = "r5.2xlarge"
+	GameServerGroupInstanceTypeR54xlarge  GameServerGroupInstanceType = "r5.4xlarge"
+	GameServerGroupInstanceTypeR58xlarge  GameServerGroupInstanceType = "r5.8xlarge"
+	GameServerGroupInstanceTypeR512xlarge GameServerGroupInstanceType = "r5.12xlarge"
+	GameServerGroupInstanceTypeR516xlarge GameServerGroupInstanceType = "r5.16xlarge"
+	GameServerGroupInstanceTypeR524xlarge GameServerGroupInstanceType = "r5.24xlarge"
+	GameServerGroupInstanceTypeM4Large    GameServerGroupInstanceType = "m4.large"
+	GameServerGroupInstanceTypeM4Xlarge   GameServerGroupInstanceType = "m4.xlarge"
+	GameServerGroupInstanceTypeM42xlarge  GameServerGroupInstanceType = "m4.2xlarge"
+	GameServerGroupInstanceTypeM44xlarge  GameServerGroupInstanceType = "m4.4xlarge"
+	GameServerGroupInstanceTypeM410xlarge GameServerGroupInstanceType = "m4.10xlarge"
+	GameServerGroupInstanceTypeM5Large    GameServerGroupInstanceType = "m5.large"
+	GameServerGroupInstanceTypeM5Xlarge   GameServerGroupInstanceType = "m5.xlarge"
+	GameServerGroupInstanceTypeM52xlarge  GameServerGroupInstanceType = "m5.2xlarge"
+	GameServerGroupInstanceTypeM54xlarge  GameServerGroupInstanceType = "m5.4xlarge"
+	GameServerGroupInstanceTypeM58xlarge  GameServerGroupInstanceType = "m5.8xlarge"
+	GameServerGroupInstanceTypeM512xlarge GameServerGroupInstanceType = "m5.12xlarge"
+	GameServerGroupInstanceTypeM516xlarge GameServerGroupInstanceType = "m5.16xlarge"
+	GameServerGroupInstanceTypeM524xlarge GameServerGroupInstanceType = "m5.24xlarge"
+)
+
+func (enum GameServerGroupInstanceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GameServerGroupInstanceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type GameServerGroupStatus string
+
+// Enum values for GameServerGroupStatus
+const (
+	GameServerGroupStatusNew             GameServerGroupStatus = "NEW"
+	GameServerGroupStatusActivating      GameServerGroupStatus = "ACTIVATING"
+	GameServerGroupStatusActive          GameServerGroupStatus = "ACTIVE"
+	GameServerGroupStatusDeleteScheduled GameServerGroupStatus = "DELETE_SCHEDULED"
+	GameServerGroupStatusDeleting        GameServerGroupStatus = "DELETING"
+	GameServerGroupStatusDeleted         GameServerGroupStatus = "DELETED"
+	GameServerGroupStatusError           GameServerGroupStatus = "ERROR"
+)
+
+func (enum GameServerGroupStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GameServerGroupStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type GameServerHealthCheck string
+
+// Enum values for GameServerHealthCheck
+const (
+	GameServerHealthCheckHealthy GameServerHealthCheck = "HEALTHY"
+)
+
+func (enum GameServerHealthCheck) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GameServerHealthCheck) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type GameServerProtectionPolicy string
+
+// Enum values for GameServerProtectionPolicy
+const (
+	GameServerProtectionPolicyNoProtection   GameServerProtectionPolicy = "NO_PROTECTION"
+	GameServerProtectionPolicyFullProtection GameServerProtectionPolicy = "FULL_PROTECTION"
+)
+
+func (enum GameServerProtectionPolicy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GameServerProtectionPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type GameServerUtilizationStatus string
+
+// Enum values for GameServerUtilizationStatus
+const (
+	GameServerUtilizationStatusAvailable GameServerUtilizationStatus = "AVAILABLE"
+	GameServerUtilizationStatusUtilized  GameServerUtilizationStatus = "UTILIZED"
+)
+
+func (enum GameServerUtilizationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GameServerUtilizationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -549,6 +743,23 @@ func (enum ScalingStatusType) MarshalValue() (string, error) {
 }
 
 func (enum ScalingStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAscending  SortOrder = "ASCENDING"
+	SortOrderDescending SortOrder = "DESCENDING"
+)
+
+func (enum SortOrder) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SortOrder) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

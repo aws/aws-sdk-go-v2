@@ -20,10 +20,10 @@ type UpdateFleetPortSettingsInput struct {
 	// FleetId is a required field
 	FleetId *string `type:"string" required:"true"`
 
-	// A collection of port settings to be added to the fleet record.
+	// A collection of port settings to be added to the fleet resource.
 	InboundPermissionAuthorizations []IpPermission `type:"list"`
 
-	// A collection of port settings to be removed from the fleet record.
+	// A collection of port settings to be removed from the fleet resource.
 	InboundPermissionRevocations []IpPermission `type:"list"`
 }
 
@@ -87,7 +87,7 @@ const opUpdateFleetPortSettings = "UpdateFleetPortSettings"
 //
 // Learn more
 //
-//  Working with Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html).
+// Setting up GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 //
 // Related operations
 //
@@ -102,7 +102,7 @@ const opUpdateFleetPortSettings = "UpdateFleetPortSettings"
 //    * Update fleets: UpdateFleetAttributes UpdateFleetCapacity UpdateFleetPortSettings
 //    UpdateRuntimeConfiguration
 //
-//    * Manage fleet actions: StartFleetActions StopFleetActions
+//    * StartFleetActions or StopFleetActions
 //
 //    // Example sending a request using UpdateFleetPortSettingsRequest.
 //    req := client.UpdateFleetPortSettingsRequest(params)

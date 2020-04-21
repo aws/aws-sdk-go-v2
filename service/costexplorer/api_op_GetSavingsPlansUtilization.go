@@ -27,7 +27,7 @@ type GetSavingsPlansUtilizationInput struct {
 	//
 	//    * INSTANCE_TYPE_FAMILY
 	//
-	// GetSavingsPlansUtilization uses the same Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// GetSavingsPlansUtilization uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension.
 	Filter *Expression `type:"structure"`
 

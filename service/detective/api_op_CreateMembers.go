@@ -153,8 +153,6 @@ const opCreateMembers = "CreateMembers"
 // CreateMembersRequest returns a request value for making API operation for
 // Amazon Detective.
 //
-// Amazon Detective is currently in preview.
-//
 // Sends a request to invite the specified AWS accounts to be member accounts
 // in the behavior graph. This operation can only be called by the master account
 // for a behavior graph.

@@ -25,12 +25,16 @@ type CreateDataRepositoryTaskInput struct {
 
 	// (Optional) The path or paths on the Amazon FSx file system to use when the
 	// data repository task is processed. The default path is the file system root
-	// directory.
+	// directory. The paths you provide need to be relative to the mount point of
+	// the file system. If the mount point is /mnt/fsx and /mnt/fsx/path1 is a directory
+	// or file on the file system you want to export, then the path to provide is
+	// path1. If a path that you provide isn't valid, the task fails.
 	Paths []string `type:"list"`
 
 	// Defines whether or not Amazon FSx provides a CompletionReport once the task
 	// has completed. A CompletionReport provides a detailed report on the files
 	// that Amazon FSx processed that meet the criteria specified by the Scope parameter.
+	// For more information, see Working with Task Completion Reports (https://docs.aws.amazon.com/fsx/latest/LustreGuide/task-completion-report.html).
 	//
 	// Report is a required field
 	Report *CompletionReport `type:"structure" required:"true"`
@@ -116,8 +120,8 @@ const opCreateDataRepositoryTask = "CreateDataRepositoryTask"
 // repository. A CreateDataRepositoryTask operation will fail if a data repository
 // is not linked to the FSx file system. To learn more about data repository
 // tasks, see Using Data Repository Tasks (https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html).
-// To learn more about linking a data repository to your file system, see Step
-// 1: Create Your Amazon FSx for Lustre File System (https://docs.aws.amazon.com/fsx/latest/LustreGuide/getting-started-step1.html).
+// To learn more about linking a data repository to your file system, see Setting
+// the Export Prefix (https://docs.aws.amazon.com/fsx/latest/LustreGuide/export-data-repository.html#export-prefix).
 //
 //    // Example sending a request using CreateDataRepositoryTaskRequest.
 //    req := client.CreateDataRepositoryTaskRequest(params)

@@ -4,6 +4,7 @@ package chime
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -19,6 +20,9 @@ type CreateMeetingInput struct {
 	// ClientRequestToken is a required field
 	ClientRequestToken *string `min:"2" type:"string" required:"true" idempotencyToken:"true" sensitive:"true"`
 
+	// The external meeting ID.
+	ExternalMeetingId *string `min:"2" type:"string" sensitive:"true"`
+
 	// The Region in which to create the meeting. Available values: ap-northeast-1,
 	// ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-west-1,
 	// eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
@@ -30,6 +34,9 @@ type CreateMeetingInput struct {
 	// The configuration for resource targets to receive notifications when meeting
 	// and attendee events occur.
 	NotificationsConfiguration *MeetingNotificationConfiguration `type:"structure"`
+
+	// The tag key-value pairs.
+	Tags []Tag `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -47,12 +54,25 @@ func (s *CreateMeetingInput) Validate() error {
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 2))
 	}
+	if s.ExternalMeetingId != nil && len(*s.ExternalMeetingId) < 2 {
+		invalidParams.Add(aws.NewErrParamMinLen("ExternalMeetingId", 2))
+	}
 	if s.MeetingHostId != nil && len(*s.MeetingHostId) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("MeetingHostId", 2))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 	if s.NotificationsConfiguration != nil {
 		if err := s.NotificationsConfiguration.Validate(); err != nil {
 			invalidParams.AddNested("NotificationsConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -78,6 +98,12 @@ func (s CreateMeetingInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ClientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.ExternalMeetingId != nil {
+		v := *s.ExternalMeetingId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ExternalMeetingId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.MediaRegion != nil {
 		v := *s.MediaRegion
 
@@ -95,6 +121,18 @@ func (s CreateMeetingInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "NotificationsConfiguration", v, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	return nil
 }

@@ -78,6 +78,10 @@ type ClientAPI interface {
 
 	DeleteFacesRequest(*rekognition.DeleteFacesInput) rekognition.DeleteFacesRequest
 
+	DeleteProjectRequest(*rekognition.DeleteProjectInput) rekognition.DeleteProjectRequest
+
+	DeleteProjectVersionRequest(*rekognition.DeleteProjectVersionInput) rekognition.DeleteProjectVersionRequest
+
 	DeleteStreamProcessorRequest(*rekognition.DeleteStreamProcessorInput) rekognition.DeleteStreamProcessorRequest
 
 	DescribeCollectionRequest(*rekognition.DescribeCollectionInput) rekognition.DescribeCollectionRequest

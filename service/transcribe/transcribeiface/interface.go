@@ -65,11 +65,15 @@ type ClientAPI interface {
 
 	CreateVocabularyFilterRequest(*transcribe.CreateVocabularyFilterInput) transcribe.CreateVocabularyFilterRequest
 
+	DeleteMedicalTranscriptionJobRequest(*transcribe.DeleteMedicalTranscriptionJobInput) transcribe.DeleteMedicalTranscriptionJobRequest
+
 	DeleteTranscriptionJobRequest(*transcribe.DeleteTranscriptionJobInput) transcribe.DeleteTranscriptionJobRequest
 
 	DeleteVocabularyRequest(*transcribe.DeleteVocabularyInput) transcribe.DeleteVocabularyRequest
 
 	DeleteVocabularyFilterRequest(*transcribe.DeleteVocabularyFilterInput) transcribe.DeleteVocabularyFilterRequest
+
+	GetMedicalTranscriptionJobRequest(*transcribe.GetMedicalTranscriptionJobInput) transcribe.GetMedicalTranscriptionJobRequest
 
 	GetTranscriptionJobRequest(*transcribe.GetTranscriptionJobInput) transcribe.GetTranscriptionJobRequest
 
@@ -77,11 +81,15 @@ type ClientAPI interface {
 
 	GetVocabularyFilterRequest(*transcribe.GetVocabularyFilterInput) transcribe.GetVocabularyFilterRequest
 
+	ListMedicalTranscriptionJobsRequest(*transcribe.ListMedicalTranscriptionJobsInput) transcribe.ListMedicalTranscriptionJobsRequest
+
 	ListTranscriptionJobsRequest(*transcribe.ListTranscriptionJobsInput) transcribe.ListTranscriptionJobsRequest
 
 	ListVocabulariesRequest(*transcribe.ListVocabulariesInput) transcribe.ListVocabulariesRequest
 
 	ListVocabularyFiltersRequest(*transcribe.ListVocabularyFiltersInput) transcribe.ListVocabularyFiltersRequest
+
+	StartMedicalTranscriptionJobRequest(*transcribe.StartMedicalTranscriptionJobInput) transcribe.StartMedicalTranscriptionJobRequest
 
 	StartTranscriptionJobRequest(*transcribe.StartTranscriptionJobInput) transcribe.StartTranscriptionJobRequest
 

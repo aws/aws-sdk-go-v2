@@ -21,8 +21,9 @@ type UntagResourceInput struct {
 	// ResourceARN is a required field
 	ResourceARN *string `min:"1" type:"string" required:"true"`
 
-	// A list of one or more tags to remove from the specified GameLift resource.
-	// Tags are developer-defined and structured as key-value pairs.
+	// A list of one or more tag keys to remove from the specified GameLift resource.
+	// An AWS resource can have only one tag with a specific tag key, so specifying
+	// the tag key identifies which tag to remove.
 	//
 	// TagKeys is a required field
 	TagKeys []string `type:"list" required:"true"`

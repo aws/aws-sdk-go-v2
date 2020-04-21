@@ -13,8 +13,8 @@ import (
 type UpdateRegexPatternSetInput struct {
 	_ struct{} `type:"structure"`
 
-	// A friendly description of the set. You cannot change the description of a
-	// set after you create it.
+	// A description of the set that helps with identification. You cannot change
+	// the description of a set after you create it.
 	Description *string `min:"1" type:"string"`
 
 	// A unique identifier for the set. This ID is returned in the responses to
@@ -35,14 +35,13 @@ type UpdateRegexPatternSetInput struct {
 	// LockToken is a required field
 	LockToken *string `min:"1" type:"string" required:"true"`
 
-	// A friendly name of the set. You cannot change the name after you create the
-	// set.
+	// The name of the set. You cannot change the name after you create the set.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// RegularExpressionList is a required field
-	RegularExpressionList []Regex `min:"1" type:"list" required:"true"`
+	RegularExpressionList []Regex `type:"list" required:"true"`
 
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB)
@@ -51,7 +50,7 @@ type UpdateRegexPatternSetInput struct {
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
 	//
-	//    * CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT
+	//    * CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT
 	//    --region=us-east-1.
 	//
 	//    * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -95,9 +94,6 @@ func (s *UpdateRegexPatternSetInput) Validate() error {
 
 	if s.RegularExpressionList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RegularExpressionList"))
-	}
-	if s.RegularExpressionList != nil && len(s.RegularExpressionList) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RegularExpressionList", 1))
 	}
 	if len(s.Scope) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Scope"))

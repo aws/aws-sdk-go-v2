@@ -13,7 +13,7 @@ import (
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) for the given GuardDuty resource
+	// The Amazon Resource Name (ARN) for the given GuardDuty resource.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`
@@ -86,9 +86,9 @@ const opListTagsForResource = "ListTagsForResource"
 // Amazon GuardDuty.
 //
 // Lists tags for a resource. Tagging is currently supported for detectors,
-// finding filters, IP sets, and Threat Intel sets, with a limit of 50 tags
+// finding filters, IP sets, and threat intel sets, with a limit of 50 tags
 // per resource. When invoked, this operation returns all assigned tags for
-// a given resource..
+// a given resource.
 //
 //    // Example sending a request using ListTagsForResourceRequest.
 //    req := client.ListTagsForResourceRequest(params)

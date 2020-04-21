@@ -69,9 +69,10 @@ const opDisassociateWebACL = "DisassociateWebACL"
 // Disassociates a Web ACL from a regional application resource. A regional
 // application can be an Application Load Balancer (ALB) or an API Gateway stage.
 //
-// For AWS CloudFront, you can disassociate the Web ACL by providing an empty
-// web ACL ARN in the CloudFront API call UpdateDistribution. For information,
-// see UpdateDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html).
+// For AWS CloudFront, don't use this call. Instead, use your CloudFront distribution
+// configuration. To disassociate a Web ACL, provide an empty web ACL ID in
+// the CloudFront call UpdateDistribution. For information, see UpdateDistribution
+// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html).
 //
 //    // Example sending a request using DisassociateWebACLRequest.
 //    req := client.DisassociateWebACLRequest(params)

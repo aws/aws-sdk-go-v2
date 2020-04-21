@@ -849,7 +849,7 @@ type Integration struct {
 	// Balancer listener, Network Load Balancer listener, or AWS Cloud Map service.
 	// If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances
 	// to identify resources. You can use query parameters to target specific resources.
-	// To learn more, see DiscoverInstances (https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html).
+	// To learn more, see DiscoverInstances (https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html).
 	// For private integrations, all resources must be owned by the same AWS account.
 	IntegrationUri *string `locationName:"integrationUri" type:"string"`
 
@@ -895,9 +895,9 @@ type Integration struct {
 	// WebSocket APIs.
 	TemplateSelectionExpression *string `locationName:"templateSelectionExpression" type:"string"`
 
-	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
-	// milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000
-	// milliseconds, or 5 seconds for HTTP APIs.
+	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and
+	// between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is
+	// 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
 	TimeoutInMillis *int64 `locationName:"timeoutInMillis" min:"50" type:"integer"`
 
 	// The TLS configuration for a private integration. If you specify a TLS configuration,

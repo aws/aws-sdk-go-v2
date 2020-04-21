@@ -57,16 +57,19 @@ const opDescribeFleetPortSettings = "DescribeFleetPortSettings"
 // DescribeFleetPortSettingsRequest returns a request value for making API operation for
 // Amazon GameLift.
 //
-// Retrieves the inbound connection permissions for a fleet. Connection permissions
-// include a range of IP addresses and port settings that incoming traffic can
-// use to access server processes in the fleet. To get a fleet's inbound connection
-// permissions, specify a fleet ID. If successful, a collection of IpPermission
-// objects is returned for the requested fleet ID. If the requested fleet has
-// been deleted, the result set is empty.
+// Retrieves a fleet's inbound connection permissions. Connection permissions
+// specify the range of IP addresses and port settings that incoming traffic
+// can use to access server processes in the fleet. Game sessions that are running
+// on instances in the fleet use connections that fall in this range.
+//
+// To get a fleet's inbound connection permissions, specify the fleet's unique
+// identifier. If successful, a collection of IpPermission objects is returned
+// for the requested fleet ID. If the requested fleet has been deleted, the
+// result set is empty.
 //
 // Learn more
 //
-//  Working with Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html).
+// Setting up GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 //
 // Related operations
 //
@@ -82,7 +85,7 @@ const opDescribeFleetPortSettings = "DescribeFleetPortSettings"
 //
 //    * UpdateFleetAttributes
 //
-//    * Manage fleet actions: StartFleetActions StopFleetActions
+//    * StartFleetActions or StopFleetActions
 //
 //    // Example sending a request using DescribeFleetPortSettingsRequest.
 //    req := client.DescribeFleetPortSettingsRequest(params)

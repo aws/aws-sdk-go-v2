@@ -32,6 +32,7 @@ type CreateAutoMLJobInput struct {
 	GenerateCandidateDefinitionsOnly *bool `type:"boolean"`
 
 	// Similar to InputDataConfig supported by Tuning. Format(s) supported: CSV.
+	// Minimum of 1000 rows.
 	//
 	// InputDataConfig is a required field
 	InputDataConfig []AutoMLChannel `min:"1" type:"list" required:"true"`
@@ -144,6 +145,13 @@ const opCreateAutoMLJob = "CreateAutoMLJob"
 // Amazon SageMaker Service.
 //
 // Creates an AutoPilot job.
+//
+// After you run an AutoPilot job, you can find the best performing model by
+// calling , and then deploy that model by following the steps described in
+// Step 6.1: Deploy the Model to Amazon SageMaker Hosting Services (https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html).
+//
+// For information about how to use AutoPilot, see Use AutoPilot to Automate
+// Model Development (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html).
 //
 //    // Example sending a request using CreateAutoMLJobRequest.
 //    req := client.CreateAutoMLJobRequest(params)

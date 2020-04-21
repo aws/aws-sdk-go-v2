@@ -74,7 +74,8 @@ const opCreateSnapshotSchedule = "CreateSnapshotSchedule"
 // CreateSnapshotScheduleRequest returns a request value for making API operation for
 // Amazon Redshift.
 //
-// Creates a snapshot schedule with the rate of every 12 hours.
+// Create a snapshot schedule that can be associated to a cluster and which
+// overrides the default system backup schedule.
 //
 //    // Example sending a request using CreateSnapshotScheduleRequest.
 //    req := client.CreateSnapshotScheduleRequest(params)

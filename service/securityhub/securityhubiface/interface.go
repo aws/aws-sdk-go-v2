@@ -69,6 +69,8 @@ type ClientAPI interface {
 
 	BatchImportFindingsRequest(*securityhub.BatchImportFindingsInput) securityhub.BatchImportFindingsRequest
 
+	BatchUpdateFindingsRequest(*securityhub.BatchUpdateFindingsInput) securityhub.BatchUpdateFindingsRequest
+
 	CreateActionTargetRequest(*securityhub.CreateActionTargetInput) securityhub.CreateActionTargetRequest
 
 	CreateInsightRequest(*securityhub.CreateInsightInput) securityhub.CreateInsightRequest

@@ -436,6 +436,45 @@ func (s CompatibleVersionsMap) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Filter to apply in DescribePackage response.
+type DescribePackagesFilter struct {
+	_ struct{} `type:"structure"`
+
+	// Any field from PackageDetails.
+	Name DescribePackagesFilterName `type:"string" enum:"true"`
+
+	// A list of values for the specified field.
+	Value []string `type:"list"`
+}
+
+// String returns the string representation
+func (s DescribePackagesFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribePackagesFilter) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Name) > 0 {
+		v := s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Value != nil {
+		v := s.Value
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Value", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Options to configure endpoint for the Elasticsearch domain.
 type DomainEndpointOptions struct {
 	_ struct{} `type:"structure"`
@@ -532,6 +571,95 @@ func (s DomainInfo) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Information on a package that is associated with a domain.
+type DomainPackageDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Name of the domain you've associated a package with.
+	DomainName *string `min:"3" type:"string"`
+
+	// State of the association. Values are ASSOCIATING/ASSOCIATION_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION_FAILED.
+	DomainPackageStatus DomainPackageStatus `type:"string" enum:"true"`
+
+	// Additional information if the package is in an error state. Null otherwise.
+	ErrorDetails *ErrorDetails `type:"structure"`
+
+	// Timestamp of the most-recent update to the association status.
+	LastUpdated *time.Time `type:"timestamp"`
+
+	// Internal ID of the package.
+	PackageID *string `type:"string"`
+
+	// User specified name of the package.
+	PackageName *string `min:"3" type:"string"`
+
+	// Currently supports only TXT-DICTIONARY.
+	PackageType PackageType `type:"string" enum:"true"`
+
+	// The relative path on Amazon ES nodes, which can be used as synonym_path when
+	// the package is synonym file.
+	ReferencePath *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DomainPackageDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DomainPackageDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.DomainPackageStatus) > 0 {
+		v := s.DomainPackageStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainPackageStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ErrorDetails != nil {
+		v := s.ErrorDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ErrorDetails", v, metadata)
+	}
+	if s.LastUpdated != nil {
+		v := *s.LastUpdated
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdated",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.PackageID != nil {
+		v := *s.PackageID
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PackageID", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PackageName != nil {
+		v := *s.PackageName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PackageName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.PackageType) > 0 {
+		v := s.PackageType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PackageType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ReferencePath != nil {
+		v := *s.ReferencePath
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReferencePath", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1301,6 +1429,36 @@ func (s EncryptionAtRestOptionsStatus) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
+type ErrorDetails struct {
+	_ struct{} `type:"structure"`
+
+	ErrorMessage *string `type:"string"`
+
+	ErrorType *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ErrorDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ErrorDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ErrorMessage != nil {
+		v := *s.ErrorMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ErrorMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ErrorType != nil {
+		v := *s.ErrorType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ErrorType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // InstanceCountLimits represents the limits on number of instances that be
 // created in Amazon Elasticsearch for given InstanceType.
 type InstanceCountLimits struct {
@@ -1686,6 +1844,131 @@ func (s OptionStatus) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "UpdateVersion", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Basic information about a package.
+type PackageDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Timestamp which tells creation date of the package.
+	CreatedAt *time.Time `type:"timestamp"`
+
+	// Additional information if the package is in an error state. Null otherwise.
+	ErrorDetails *ErrorDetails `type:"structure"`
+
+	// User-specified description of the package.
+	PackageDescription *string `type:"string"`
+
+	// Internal ID of the package.
+	PackageID *string `type:"string"`
+
+	// User specified name of the package.
+	PackageName *string `min:"3" type:"string"`
+
+	// Current state of the package. Values are COPYING/COPY_FAILED/AVAILABLE/DELETING/DELETE_FAILED
+	PackageStatus PackageStatus `type:"string" enum:"true"`
+
+	// Currently supports only TXT-DICTIONARY.
+	PackageType PackageType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s PackageDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PackageDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.ErrorDetails != nil {
+		v := s.ErrorDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ErrorDetails", v, metadata)
+	}
+	if s.PackageDescription != nil {
+		v := *s.PackageDescription
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PackageDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PackageID != nil {
+		v := *s.PackageID
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PackageID", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PackageName != nil {
+		v := *s.PackageName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PackageName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.PackageStatus) > 0 {
+		v := s.PackageStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PackageStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.PackageType) > 0 {
+		v := s.PackageType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PackageType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// The S3 location for importing the package specified as S3BucketName and S3Key
+type PackageSource struct {
+	_ struct{} `type:"structure"`
+
+	// Name of the bucket containing the package.
+	S3BucketName *string `min:"3" type:"string"`
+
+	// Key (file name) of the package.
+	S3Key *string `type:"string"`
+}
+
+// String returns the string representation
+func (s PackageSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PackageSource) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PackageSource"}
+	if s.S3BucketName != nil && len(*s.S3BucketName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("S3BucketName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PackageSource) MarshalFields(e protocol.FieldEncoder) error {
+	if s.S3BucketName != nil {
+		v := *s.S3BucketName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "S3BucketName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.S3Key != nil {
+		v := *s.S3Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "S3Key", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

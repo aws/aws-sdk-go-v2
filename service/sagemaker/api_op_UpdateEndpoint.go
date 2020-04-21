@@ -23,12 +23,11 @@ type UpdateEndpointInput struct {
 	// EndpointName is a required field
 	EndpointName *string `type:"string" required:"true"`
 
-	// When you are updating endpoint resources with RetainAllVariantProperties
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/API_UpdateEndpoint.html#SageMaker-UpdateEndpoint-request-RetainAllVariantProperties),
+	// When you are updating endpoint resources with UpdateEndpointInput$RetainAllVariantProperties,
 	// whose value is set to true, ExcludeRetainedVariantProperties specifies the
-	// list of type VariantProperty (https://docs.aws.amazon.com/sagemaker/latest/dg/API_VariantProperty.html)
-	// to override with the values provided by EndpointConfig. If you don't specify
-	// a value for ExcludeAllVariantProperties, no variant properties are overridden.
+	// list of type VariantProperty to override with the values provided by EndpointConfig.
+	// If you don't specify a value for ExcludeAllVariantProperties, no variant
+	// properties are overridden.
 	ExcludeRetainedVariantProperties []VariantProperty `type:"list"`
 
 	// When updating endpoint resources, enables or disables the retention of variant
@@ -94,8 +93,7 @@ const opUpdateEndpoint = "UpdateEndpoint"
 //
 // When Amazon SageMaker receives the request, it sets the endpoint status to
 // Updating. After updating the endpoint, it sets the status to InService. To
-// check the status of an endpoint, use the DescribeEndpoint (https://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html)
-// API.
+// check the status of an endpoint, use the DescribeEndpoint API.
 //
 // You must not delete an EndpointConfig in use by an endpoint that is live
 // or while the UpdateEndpoint or CreateEndpoint operations are being performed

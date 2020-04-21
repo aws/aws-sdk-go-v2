@@ -79,6 +79,7 @@ type SecurityServiceType string
 // Enum values for SecurityServiceType
 const (
 	SecurityServiceTypeWaf                        SecurityServiceType = "WAF"
+	SecurityServiceTypeWafv2                      SecurityServiceType = "WAFV2"
 	SecurityServiceTypeShieldAdvanced             SecurityServiceType = "SHIELD_ADVANCED"
 	SecurityServiceTypeSecurityGroupsCommon       SecurityServiceType = "SECURITY_GROUPS_COMMON"
 	SecurityServiceTypeSecurityGroupsContentAudit SecurityServiceType = "SECURITY_GROUPS_CONTENT_AUDIT"

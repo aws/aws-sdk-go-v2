@@ -71,6 +71,8 @@ type ClientAPI interface {
 
 	DeleteLifecyclePolicyRequest(*mediastore.DeleteLifecyclePolicyInput) mediastore.DeleteLifecyclePolicyRequest
 
+	DeleteMetricPolicyRequest(*mediastore.DeleteMetricPolicyInput) mediastore.DeleteMetricPolicyRequest
+
 	DescribeContainerRequest(*mediastore.DescribeContainerInput) mediastore.DescribeContainerRequest
 
 	GetContainerPolicyRequest(*mediastore.GetContainerPolicyInput) mediastore.GetContainerPolicyRequest
@@ -78,6 +80,8 @@ type ClientAPI interface {
 	GetCorsPolicyRequest(*mediastore.GetCorsPolicyInput) mediastore.GetCorsPolicyRequest
 
 	GetLifecyclePolicyRequest(*mediastore.GetLifecyclePolicyInput) mediastore.GetLifecyclePolicyRequest
+
+	GetMetricPolicyRequest(*mediastore.GetMetricPolicyInput) mediastore.GetMetricPolicyRequest
 
 	ListContainersRequest(*mediastore.ListContainersInput) mediastore.ListContainersRequest
 
@@ -88,6 +92,8 @@ type ClientAPI interface {
 	PutCorsPolicyRequest(*mediastore.PutCorsPolicyInput) mediastore.PutCorsPolicyRequest
 
 	PutLifecyclePolicyRequest(*mediastore.PutLifecyclePolicyInput) mediastore.PutLifecyclePolicyRequest
+
+	PutMetricPolicyRequest(*mediastore.PutMetricPolicyInput) mediastore.PutMetricPolicyRequest
 
 	StartAccessLoggingRequest(*mediastore.StartAccessLoggingInput) mediastore.StartAccessLoggingRequest
 

@@ -31,12 +31,12 @@ type CreateRuleGroupInput struct {
 	// Capacity is a required field
 	Capacity *int64 `min:"1" type:"long" required:"true"`
 
-	// A friendly description of the rule group. You cannot change the description
-	// of a rule group after you create it.
+	// A description of the rule group that helps with identification. You cannot
+	// change the description of a rule group after you create it.
 	Description *string `min:"1" type:"string"`
 
-	// A friendly name of the rule group. You cannot change the name of a rule group
-	// after you create it.
+	// The name of the rule group. You cannot change the name of a rule group after
+	// you create it.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
@@ -54,7 +54,7 @@ type CreateRuleGroupInput struct {
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
 	//
-	//    * CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT
+	//    * CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT
 	//    --region=us-east-1.
 	//
 	//    * API and SDKs - For all calls, use the Region endpoint us-east-1.

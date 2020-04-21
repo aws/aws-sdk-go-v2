@@ -80,8 +80,7 @@ const opUpdateEndpointWeightsAndCapacities = "UpdateEndpointWeightsAndCapacities
 // endpoint, or capacity of one variant associated with an existing endpoint.
 // When it receives the request, Amazon SageMaker sets the endpoint status to
 // Updating. After updating the endpoint, it sets the status to InService. To
-// check the status of an endpoint, use the DescribeEndpoint (https://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html)
-// API.
+// check the status of an endpoint, use the DescribeEndpoint API.
 //
 //    // Example sending a request using UpdateEndpointWeightsAndCapacitiesRequest.
 //    req := client.UpdateEndpointWeightsAndCapacitiesRequest(params)

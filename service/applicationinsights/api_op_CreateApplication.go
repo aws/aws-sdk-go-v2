@@ -13,6 +13,11 @@ import (
 type CreateApplicationInput struct {
 	_ struct{} `type:"structure"`
 
+	// Indicates whether Application Insights can listen to CloudWatch events for
+	// the application resources, such as instance terminated, failed deployment,
+	// and others.
+	CWEMonitorEnabled *bool `type:"boolean"`
+
 	// When set to true, creates opsItems for any problems detected on an application.
 	OpsCenterEnabled *bool `type:"boolean"`
 

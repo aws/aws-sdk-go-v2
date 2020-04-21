@@ -426,6 +426,9 @@ type CreateAttendeeRequestItem struct {
 	//
 	// ExternalUserId is a required field
 	ExternalUserId *string `min:"2" type:"string" required:"true" sensitive:"true"`
+
+	// The tag key-value pairs.
+	Tags []Tag `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -443,6 +446,16 @@ func (s *CreateAttendeeRequestItem) Validate() error {
 	if s.ExternalUserId != nil && len(*s.ExternalUserId) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("ExternalUserId", 2))
 	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -457,6 +470,18 @@ func (s CreateAttendeeRequestItem) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ExternalUserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -536,6 +561,61 @@ func (s EventsConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "OutboundEventsHTTPSEndpoint", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The country and area code for a proxy phone number in a proxy phone session.
+type GeoMatchParams struct {
+	_ struct{} `type:"structure"`
+
+	// The area code.
+	//
+	// AreaCode is a required field
+	AreaCode *string `type:"string" required:"true"`
+
+	// The country.
+	//
+	// Country is a required field
+	Country *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GeoMatchParams) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GeoMatchParams) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GeoMatchParams"}
+
+	if s.AreaCode == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AreaCode"))
+	}
+
+	if s.Country == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Country"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GeoMatchParams) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AreaCode != nil {
+		v := *s.AreaCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AreaCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Country != nil {
+		v := *s.Country
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Country", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -701,6 +781,9 @@ func (s MediaPlacement) MarshalFields(e protocol.FieldEncoder) error {
 type Meeting struct {
 	_ struct{} `type:"structure"`
 
+	// The external meeting ID.
+	ExternalMeetingId *string `min:"2" type:"string" sensitive:"true"`
+
 	// The media placement for the meeting.
 	MediaPlacement *MediaPlacement `type:"structure"`
 
@@ -720,6 +803,12 @@ func (s Meeting) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Meeting) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ExternalMeetingId != nil {
+		v := *s.ExternalMeetingId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ExternalMeetingId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.MediaPlacement != nil {
 		v := s.MediaPlacement
 
@@ -1099,6 +1188,40 @@ func (s OriginationRoute) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The phone number and proxy phone number for a participant in an Amazon Chime
+// Voice Connector proxy session.
+type Participant struct {
+	_ struct{} `type:"structure"`
+
+	// The participant's phone number.
+	PhoneNumber *string `type:"string" sensitive:"true"`
+
+	// The participant's proxy phone number.
+	ProxyPhoneNumber *string `type:"string" sensitive:"true"`
+}
+
+// String returns the string representation
+func (s Participant) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Participant) MarshalFields(e protocol.FieldEncoder) error {
+	if s.PhoneNumber != nil {
+		v := *s.PhoneNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PhoneNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ProxyPhoneNumber != nil {
+		v := *s.ProxyPhoneNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProxyPhoneNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // A phone number used for Amazon Chime Business Calling or an Amazon Chime
 // Voice Connector.
 type PhoneNumber struct {
@@ -1470,6 +1593,213 @@ func (s PhoneNumberOrder) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The proxy configuration for an Amazon Chime Voice Connector.
+type Proxy struct {
+	_ struct{} `type:"structure"`
+
+	// The default number of minutes allowed for proxy sessions.
+	DefaultSessionExpiryMinutes *int64 `type:"integer"`
+
+	// When true, stops proxy sessions from being created on the specified Amazon
+	// Chime Voice Connector.
+	Disabled *bool `type:"boolean"`
+
+	// The phone number to route calls to after a proxy session expires.
+	FallBackPhoneNumber *string `type:"string" sensitive:"true"`
+
+	// The countries for proxy phone numbers to be selected from.
+	PhoneNumberCountries []string `type:"list"`
+}
+
+// String returns the string representation
+func (s Proxy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Proxy) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DefaultSessionExpiryMinutes != nil {
+		v := *s.DefaultSessionExpiryMinutes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultSessionExpiryMinutes", protocol.Int64Value(v), metadata)
+	}
+	if s.Disabled != nil {
+		v := *s.Disabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Disabled", protocol.BoolValue(v), metadata)
+	}
+	if s.FallBackPhoneNumber != nil {
+		v := *s.FallBackPhoneNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FallBackPhoneNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PhoneNumberCountries != nil {
+		v := s.PhoneNumberCountries
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "PhoneNumberCountries", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// The proxy session for an Amazon Chime Voice Connector.
+type ProxySession struct {
+	_ struct{} `type:"structure"`
+
+	// The proxy session capabilities.
+	Capabilities []Capability `type:"list"`
+
+	// The created timestamp, in ISO 8601 format.
+	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// The ended timestamp, in ISO 8601 format.
+	EndedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// The number of minutes allowed for the proxy session.
+	ExpiryMinutes *int64 `min:"1" type:"integer"`
+
+	// The preference for matching the country or area code of the proxy phone number
+	// with that of the first participant.
+	GeoMatchLevel GeoMatchLevel `type:"string" enum:"true"`
+
+	// The country and area code for the proxy phone number.
+	GeoMatchParams *GeoMatchParams `type:"structure"`
+
+	// The name of the proxy session.
+	Name *string `type:"string"`
+
+	// The preference for proxy phone number reuse, or stickiness, between the same
+	// participants across sessions.
+	NumberSelectionBehavior NumberSelectionBehavior `type:"string" enum:"true"`
+
+	// The proxy session participants.
+	Participants []Participant `type:"list"`
+
+	// The proxy session ID.
+	ProxySessionId *string `min:"1" type:"string"`
+
+	// The status of the proxy session.
+	Status ProxySessionStatus `type:"string" enum:"true"`
+
+	// The updated timestamp, in ISO 8601 format.
+	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// The Amazon Chime voice connector ID.
+	VoiceConnectorId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ProxySession) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ProxySession) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Capabilities != nil {
+		v := s.Capabilities
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Capabilities", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.CreatedTimestamp != nil {
+		v := *s.CreatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	if s.EndedTimestamp != nil {
+		v := *s.EndedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EndedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	if s.ExpiryMinutes != nil {
+		v := *s.ExpiryMinutes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ExpiryMinutes", protocol.Int64Value(v), metadata)
+	}
+	if len(s.GeoMatchLevel) > 0 {
+		v := s.GeoMatchLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GeoMatchLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.GeoMatchParams != nil {
+		v := s.GeoMatchParams
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "GeoMatchParams", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.NumberSelectionBehavior) > 0 {
+		v := s.NumberSelectionBehavior
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NumberSelectionBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Participants != nil {
+		v := s.Participants
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Participants", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.ProxySessionId != nil {
+		v := *s.ProxySessionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProxySessionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.UpdatedTimestamp != nil {
+		v := *s.UpdatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpdatedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VoiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The Amazon Chime chat room details.
 type Room struct {
 	_ struct{} `type:"structure"`
@@ -1674,6 +2004,67 @@ func (s StreamingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Disabled", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// Describes a tag applied to a resource.
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// The key of the tag.
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true" sensitive:"true"`
+
+	// The value of the tag.
+	//
+	// Value is a required field
+	Value *string `min:"1" type:"string" required:"true" sensitive:"true"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+	if s.Value != nil && len(*s.Value) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

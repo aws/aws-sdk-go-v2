@@ -15,9 +15,63 @@ import (
 
 var _ aws.Config
 
-// add-permission
+// To add permissions to a layer version
 //
-// This example adds a permission for an S3 bucket to invoke a Lambda function.
+// The following example grants permission for the account 223456789012 to use version
+// 1 of a layer named my-layer.
+func ExampleClient_AddLayerVersionPermissionRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.AddLayerVersionPermissionInput{
+		Action:        aws.String("lambda:GetLayerVersion"),
+		LayerName:     aws.String("my-layer"),
+		Principal:     aws.String("223456789012"),
+		StatementId:   aws.String("xaccount"),
+		VersionNumber: aws.Int64(1),
+	}
+
+	req := svc.AddLayerVersionPermissionRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeResourceConflictException:
+				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodePolicyLengthExceededException:
+				fmt.Println(lambda.ErrCodePolicyLengthExceededException, aerr.Error())
+			case lambda.ErrCodePreconditionFailedException:
+				fmt.Println(lambda.ErrCodePreconditionFailedException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To grant Amazon S3 permission to invoke a function
+//
+// The following example adds permission for Amazon S3 to invoke a Lambda function named
+// my-function for notifications from a bucket named my-bucket-1xpuxmplzrlbh in account
+// 123456789012.
 func ExampleClient_AddPermissionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -27,11 +81,11 @@ func ExampleClient_AddPermissionRequest_shared00() {
 	svc := lambda.New(cfg)
 	input := &lambda.AddPermissionInput{
 		Action:        aws.String("lambda:InvokeFunction"),
-		FunctionName:  aws.String("MyFunction"),
+		FunctionName:  aws.String("my-function"),
 		Principal:     aws.String("s3.amazonaws.com"),
 		SourceAccount: aws.String("123456789012"),
-		SourceArn:     aws.String("arn:aws:s3:::examplebucket/*"),
-		StatementId:   aws.String("ID-1"),
+		SourceArn:     aws.String("arn:aws:s3:::my-bucket-1xpuxmplzrlbh/*"),
+		StatementId:   aws.String("s3"),
 	}
 
 	req := svc.AddPermissionRequest(input)
@@ -67,9 +121,154 @@ func ExampleClient_AddPermissionRequest_shared00() {
 	fmt.Println(result)
 }
 
-// create-function
+// To grant another account permission to invoke a function
 //
-// This example creates a Lambda function.
+// The following example adds permission for account 223456789012 invoke a Lambda function
+// named my-function.
+func ExampleClient_AddPermissionRequest_shared01() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.AddPermissionInput{
+		Action:       aws.String("lambda:InvokeFunction"),
+		FunctionName: aws.String("my-function"),
+		Principal:    aws.String("223456789012"),
+		StatementId:  aws.String("xaccount"),
+	}
+
+	req := svc.AddPermissionRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeResourceConflictException:
+				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodePolicyLengthExceededException:
+				fmt.Println(lambda.ErrCodePolicyLengthExceededException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodePreconditionFailedException:
+				fmt.Println(lambda.ErrCodePreconditionFailedException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To create an alias for a Lambda function
+//
+// The following example creates an alias named LIVE that points to version 1 of the
+// my-function Lambda function.
+func ExampleClient_CreateAliasRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.CreateAliasInput{
+		Description:     aws.String("alias for live version of function"),
+		FunctionName:    aws.String("my-function"),
+		FunctionVersion: aws.String("1"),
+		Name:            aws.String("LIVE"),
+	}
+
+	req := svc.CreateAliasRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeResourceConflictException:
+				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To create a mapping between an event source and an AWS Lambda function
+//
+// The following example creates a mapping between an SQS queue and the my-function
+// Lambda function.
+func ExampleClient_CreateEventSourceMappingRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.CreateEventSourceMappingInput{
+		BatchSize:      aws.Int64(5),
+		EventSourceArn: aws.String("arn:aws:sqs:us-west-2:123456789012:my-queue"),
+		FunctionName:   aws.String("my-function"),
+	}
+
+	req := svc.CreateEventSourceMappingRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeResourceConflictException:
+				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To update an asynchronous invocation configuration
+//
+// The following example creates a function with a deployment package in Amazon S3 and
+// enables X-Ray tracing and environment variable encryption.
 func ExampleClient_CreateFunctionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -78,16 +277,31 @@ func ExampleClient_CreateFunctionRequest_shared00() {
 
 	svc := lambda.New(cfg)
 	input := &lambda.CreateFunctionInput{
-		Code:         &lambda.FunctionCode{},
-		Description:  aws.String(""),
-		FunctionName: aws.String("MyFunction"),
-		Handler:      aws.String("souce_file.handler_name"),
-		MemorySize:   aws.Int64(128),
+		Code: &lambda.FunctionCode{
+			S3Bucket: aws.String("my-bucket-1xpuxmplzrlbh"),
+			S3Key:    aws.String("function.zip"),
+		},
+		Description: aws.String("Process image objects from Amazon S3."),
+		Environment: &lambda.Environment{
+			Variables: map[string]string{
+				"BUCKET": "my-bucket-1xpuxmplzrlbh",
+				"PREFIX": "inbound",
+			},
+		},
+		FunctionName: aws.String("my-function"),
+		Handler:      aws.String("index.handler"),
+		KMSKeyArn:    aws.String("arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966"),
+		MemorySize:   aws.Int64(256),
 		Publish:      aws.Bool(true),
-		Role:         aws.String("arn:aws:iam::123456789012:role/service-role/role-name"),
+		Role:         aws.String("arn:aws:iam::123456789012:role/lambda-role"),
 		Runtime:      lambda.RuntimeNodejs12X,
-		Timeout:      aws.Int64(15),
-		VpcConfig:    &lambda.VpcConfig{},
+		Tags: map[string]string{
+			"DEPARTMENT": "Assets",
+		},
+		Timeout: aws.Int64(15),
+		TracingConfig: &lambda.TracingConfig{
+			Mode: lambda.TracingModeActive,
+		},
 	}
 
 	req := svc.CreateFunctionRequest(input)
@@ -123,7 +337,7 @@ func ExampleClient_CreateFunctionRequest_shared00() {
 
 // To delete a Lambda function alias
 //
-// This operation deletes a Lambda function alias
+// The following example deletes an alias named BLUE from a function named my-function
 func ExampleClient_DeleteAliasRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -132,8 +346,8 @@ func ExampleClient_DeleteAliasRequest_shared00() {
 
 	svc := lambda.New(cfg)
 	input := &lambda.DeleteAliasInput{
-		FunctionName: aws.String("myFunction"),
-		Name:         aws.String("alias"),
+		FunctionName: aws.String("my-function"),
+		Name:         aws.String("BLUE"),
 	}
 
 	req := svc.DeleteAliasRequest(input)
@@ -165,7 +379,8 @@ func ExampleClient_DeleteAliasRequest_shared00() {
 
 // To delete a Lambda function event source mapping
 //
-// This operation deletes a Lambda function event source mapping
+// The following example deletes an event source mapping. To get a mapping's UUID, use
+// ListEventSourceMappings.
 func ExampleClient_DeleteEventSourceMappingRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -174,7 +389,7 @@ func ExampleClient_DeleteEventSourceMappingRequest_shared00() {
 
 	svc := lambda.New(cfg)
 	input := &lambda.DeleteEventSourceMappingInput{
-		UUID: aws.String("12345kxodurf3443"),
+		UUID: aws.String("14e0db71-xmpl-4eb5-b481-8945cf9d10c2"),
 	}
 
 	req := svc.DeleteEventSourceMappingRequest(input)
@@ -206,9 +421,9 @@ func ExampleClient_DeleteEventSourceMappingRequest_shared00() {
 	fmt.Println(result)
 }
 
-// To delete a Lambda function
+// To delete a version of a Lambda function
 //
-// This operation deletes a Lambda function
+// The following example deletes version 1 of a Lambda function named my-function.
 func ExampleClient_DeleteFunctionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -217,7 +432,7 @@ func ExampleClient_DeleteFunctionRequest_shared00() {
 
 	svc := lambda.New(cfg)
 	input := &lambda.DeleteFunctionInput{
-		FunctionName: aws.String("myFunction"),
+		FunctionName: aws.String("my-function"),
 		Qualifier:    aws.String("1"),
 	}
 
@@ -250,9 +465,180 @@ func ExampleClient_DeleteFunctionRequest_shared00() {
 	fmt.Println(result)
 }
 
-// To retrieves a Lambda customer's account settings
+// To remove the reserved concurrent execution limit from a function
 //
-// This operation retrieves a Lambda customer's account settings
+// The following example deletes the reserved concurrent execution limit from a function
+// named my-function.
+func ExampleClient_DeleteFunctionConcurrencyRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.DeleteFunctionConcurrencyInput{
+		FunctionName: aws.String("my-function"),
+	}
+
+	req := svc.DeleteFunctionConcurrencyRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeResourceConflictException:
+				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To delete an asynchronous invocation configuration
+//
+// The following example deletes the asynchronous invocation configuration for the GREEN
+// alias of a function named my-function.
+func ExampleClient_DeleteFunctionEventInvokeConfigRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.DeleteFunctionEventInvokeConfigInput{
+		FunctionName: aws.String("my-function"),
+		Qualifier:    aws.String("GREEN"),
+	}
+
+	req := svc.DeleteFunctionEventInvokeConfigRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To delete a version of a Lambda layer
+//
+// The following example deletes version 2 of a layer named my-layer.
+func ExampleClient_DeleteLayerVersionRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.DeleteLayerVersionInput{
+		LayerName:     aws.String("my-layer"),
+		VersionNumber: aws.Int64(2),
+	}
+
+	req := svc.DeleteLayerVersionRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To delete a provisioned concurrency configuration
+//
+// The following example deletes the provisioned concurrency configuration for the GREEN
+// alias of a function named my-function.
+func ExampleClient_DeleteProvisionedConcurrencyConfigRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.DeleteProvisionedConcurrencyConfigInput{
+		FunctionName: aws.String("my-function"),
+		Qualifier:    aws.String("GREEN"),
+	}
+
+	req := svc.DeleteProvisionedConcurrencyConfigRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeResourceConflictException:
+				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To get account settings
+//
+// This operation takes no parameters and returns details about storage and concurrency
+// quotas in the current Region.
 func ExampleClient_GetAccountSettingsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -285,9 +671,10 @@ func ExampleClient_GetAccountSettingsRequest_shared00() {
 	fmt.Println(result)
 }
 
-// To retrieve a Lambda function alias
+// To get a Lambda function alias
 //
-// This operation retrieves a Lambda function alias
+// The following example returns details about an alias named BLUE for a function named
+// my-function
 func ExampleClient_GetAliasRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -296,8 +683,8 @@ func ExampleClient_GetAliasRequest_shared00() {
 
 	svc := lambda.New(cfg)
 	input := &lambda.GetAliasInput{
-		FunctionName: aws.String("myFunction"),
-		Name:         aws.String("myFunctionAlias"),
+		FunctionName: aws.String("my-function"),
+		Name:         aws.String("BLUE"),
 	}
 
 	req := svc.GetAliasRequest(input)
@@ -327,9 +714,10 @@ func ExampleClient_GetAliasRequest_shared00() {
 	fmt.Println(result)
 }
 
-// To retrieve a Lambda function's event source mapping
+// To get a Lambda function's event source mapping
 //
-// This operation retrieves a Lambda function's event source mapping
+// The following example returns details about an event source mapping. To get a mapping's
+// UUID, use ListEventSourceMappings.
 func ExampleClient_GetEventSourceMappingRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -338,7 +726,7 @@ func ExampleClient_GetEventSourceMappingRequest_shared00() {
 
 	svc := lambda.New(cfg)
 	input := &lambda.GetEventSourceMappingInput{
-		UUID: aws.String("123489-xxxxx-kdla8d89d7"),
+		UUID: aws.String("14e0db71-xmpl-4eb5-b481-8945cf9d10c2"),
 	}
 
 	req := svc.GetEventSourceMappingRequest(input)
@@ -368,9 +756,10 @@ func ExampleClient_GetEventSourceMappingRequest_shared00() {
 	fmt.Println(result)
 }
 
-// To retrieve a Lambda function's event source mapping
+// To get a Lambda function
 //
-// This operation retrieves a Lambda function's event source mapping
+// The following example returns code and configuration details for version 1 of a function
+// named my-function.
 func ExampleClient_GetFunctionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -379,7 +768,7 @@ func ExampleClient_GetFunctionRequest_shared00() {
 
 	svc := lambda.New(cfg)
 	input := &lambda.GetFunctionInput{
-		FunctionName: aws.String("myFunction"),
+		FunctionName: aws.String("my-function"),
 		Qualifier:    aws.String("1"),
 	}
 
@@ -410,9 +799,52 @@ func ExampleClient_GetFunctionRequest_shared00() {
 	fmt.Println(result)
 }
 
-// To retrieve a Lambda function's event source mapping
+// To get the reserved concurrency setting for a function
 //
-// This operation retrieves a Lambda function's event source mapping
+// The following example returns the reserved concurrency setting for a function named
+// my-function.
+func ExampleClient_GetFunctionConcurrencyRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.GetFunctionConcurrencyInput{
+		FunctionName: aws.String("my-function"),
+	}
+
+	req := svc.GetFunctionConcurrencyRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To get a Lambda function's event source mapping
+//
+// The following example returns and configuration details for version 1 of a function
+// named my-function.
 func ExampleClient_GetFunctionConfigurationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -421,7 +853,7 @@ func ExampleClient_GetFunctionConfigurationRequest_shared00() {
 
 	svc := lambda.New(cfg)
 	input := &lambda.GetFunctionConfigurationInput{
-		FunctionName: aws.String("myFunction"),
+		FunctionName: aws.String("my-function"),
 		Qualifier:    aws.String("1"),
 	}
 
@@ -452,9 +884,137 @@ func ExampleClient_GetFunctionConfigurationRequest_shared00() {
 	fmt.Println(result)
 }
 
+// To get an asynchronous invocation configuration
+//
+// The following example returns the asynchronous invocation configuration for the BLUE
+// alias of a function named my-function.
+func ExampleClient_GetFunctionEventInvokeConfigRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.GetFunctionEventInvokeConfigInput{
+		FunctionName: aws.String("my-function"),
+		Qualifier:    aws.String("BLUE"),
+	}
+
+	req := svc.GetFunctionEventInvokeConfigRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To get information about a Lambda layer version
+//
+// The following example returns information for version 1 of a layer named my-layer.
+func ExampleClient_GetLayerVersionRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.GetLayerVersionInput{
+		LayerName:     aws.String("my-layer"),
+		VersionNumber: aws.Int64(1),
+	}
+
+	req := svc.GetLayerVersionRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To get information about a Lambda layer version
+//
+// The following example returns information about the layer version with the specified
+// Amazon Resource Name (ARN).
+func ExampleClient_GetLayerVersionByArnRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.GetLayerVersionByArnInput{
+		Arn: aws.String("arn:aws:lambda:ca-central-1:123456789012:layer:blank-python-lib:3"),
+	}
+
+	req := svc.GetLayerVersionByArnRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To retrieve a Lambda function policy
 //
-// This operation retrieves a Lambda function policy
+// The following example returns the resource-based policy for version 1 of a Lambda
+// function named my-function.
 func ExampleClient_GetPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -463,7 +1023,7 @@ func ExampleClient_GetPolicyRequest_shared00() {
 
 	svc := lambda.New(cfg)
 	input := &lambda.GetPolicyInput{
-		FunctionName: aws.String("myFunction"),
+		FunctionName: aws.String("my-function"),
 		Qualifier:    aws.String("1"),
 	}
 
@@ -494,9 +1054,100 @@ func ExampleClient_GetPolicyRequest_shared00() {
 	fmt.Println(result)
 }
 
+// To get a provisioned concurrency configuration
+//
+// The following example returns details for the provisioned concurrency configuration
+// for the BLUE alias of the specified function.
+func ExampleClient_GetProvisionedConcurrencyConfigRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.GetProvisionedConcurrencyConfigInput{
+		FunctionName: aws.String("my-function"),
+		Qualifier:    aws.String("BLUE"),
+	}
+
+	req := svc.GetProvisionedConcurrencyConfigRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeProvisionedConcurrencyConfigNotFoundException:
+				fmt.Println(lambda.ErrCodeProvisionedConcurrencyConfigNotFoundException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To view a provisioned concurrency configuration
+//
+// The following example displays details for the provisioned concurrency configuration
+// for the BLUE alias of the specified function.
+func ExampleClient_GetProvisionedConcurrencyConfigRequest_shared01() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.GetProvisionedConcurrencyConfigInput{
+		FunctionName: aws.String("my-function"),
+		Qualifier:    aws.String("BLUE"),
+	}
+
+	req := svc.GetProvisionedConcurrencyConfigRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeProvisionedConcurrencyConfigNotFoundException:
+				fmt.Println(lambda.ErrCodeProvisionedConcurrencyConfigNotFoundException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To invoke a Lambda function
 //
-// This operation invokes a Lambda function
+// The following example invokes version 1 of a function named my-function with an empty
+// event payload.
 func ExampleClient_InvokeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -505,11 +1156,88 @@ func ExampleClient_InvokeRequest_shared00() {
 
 	svc := lambda.New(cfg)
 	input := &lambda.InvokeInput{
-		ClientContext:  aws.String("MyApp"),
-		FunctionName:   aws.String("MyFunction"),
+		FunctionName: aws.String("my-function"),
+		Payload:      []byte("{}"),
+		Qualifier:    aws.String("1"),
+	}
+
+	req := svc.InvokeRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeInvalidRequestContentException:
+				fmt.Println(lambda.ErrCodeInvalidRequestContentException, aerr.Error())
+			case lambda.ErrCodeRequestTooLargeException:
+				fmt.Println(lambda.ErrCodeRequestTooLargeException, aerr.Error())
+			case lambda.ErrCodeUnsupportedMediaTypeException:
+				fmt.Println(lambda.ErrCodeUnsupportedMediaTypeException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeEC2UnexpectedException:
+				fmt.Println(lambda.ErrCodeEC2UnexpectedException, aerr.Error())
+			case lambda.ErrCodeSubnetIPAddressLimitReachedException:
+				fmt.Println(lambda.ErrCodeSubnetIPAddressLimitReachedException, aerr.Error())
+			case lambda.ErrCodeENILimitReachedException:
+				fmt.Println(lambda.ErrCodeENILimitReachedException, aerr.Error())
+			case lambda.ErrCodeEC2ThrottledException:
+				fmt.Println(lambda.ErrCodeEC2ThrottledException, aerr.Error())
+			case lambda.ErrCodeEC2AccessDeniedException:
+				fmt.Println(lambda.ErrCodeEC2AccessDeniedException, aerr.Error())
+			case lambda.ErrCodeInvalidSubnetIDException:
+				fmt.Println(lambda.ErrCodeInvalidSubnetIDException, aerr.Error())
+			case lambda.ErrCodeInvalidSecurityGroupIDException:
+				fmt.Println(lambda.ErrCodeInvalidSecurityGroupIDException, aerr.Error())
+			case lambda.ErrCodeInvalidZipFileException:
+				fmt.Println(lambda.ErrCodeInvalidZipFileException, aerr.Error())
+			case lambda.ErrCodeKMSDisabledException:
+				fmt.Println(lambda.ErrCodeKMSDisabledException, aerr.Error())
+			case lambda.ErrCodeKMSInvalidStateException:
+				fmt.Println(lambda.ErrCodeKMSInvalidStateException, aerr.Error())
+			case lambda.ErrCodeKMSAccessDeniedException:
+				fmt.Println(lambda.ErrCodeKMSAccessDeniedException, aerr.Error())
+			case lambda.ErrCodeKMSNotFoundException:
+				fmt.Println(lambda.ErrCodeKMSNotFoundException, aerr.Error())
+			case lambda.ErrCodeInvalidRuntimeException:
+				fmt.Println(lambda.ErrCodeInvalidRuntimeException, aerr.Error())
+			case lambda.ErrCodeResourceConflictException:
+				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
+			case lambda.ErrCodeResourceNotReadyException:
+				fmt.Println(lambda.ErrCodeResourceNotReadyException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To invoke a Lambda function asynchronously
+//
+// The following example invokes version 1 of a function named my-function asynchronously.
+func ExampleClient_InvokeRequest_shared01() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.InvokeInput{
+		FunctionName:   aws.String("my-function"),
 		InvocationType: lambda.InvocationTypeEvent,
-		LogType:        lambda.LogTypeTail,
-		Payload:        []byte("fileb://file-path/input.json"),
+		Payload:        []byte("{}"),
 		Qualifier:      aws.String("1"),
 	}
 
@@ -578,7 +1306,7 @@ func ExampleClient_InvokeRequest_shared00() {
 
 // To invoke a Lambda function asynchronously
 //
-// This operation invokes a Lambda function asynchronously
+// The following example invokes a Lambda function asynchronously
 func ExampleClient_InvokeAsyncRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -587,8 +1315,8 @@ func ExampleClient_InvokeAsyncRequest_shared00() {
 
 	svc := lambda.New(cfg)
 	input := &lambda.InvokeAsyncInput{
-		FunctionName: aws.String("myFunction"),
-		InvokeArgs:   aws.ReadSeekCloser(strings.NewReader("fileb://file-path/input.json")),
+		FunctionName: aws.String("my-function"),
+		InvokeArgs:   aws.ReadSeekCloser(strings.NewReader("{}")),
 	}
 
 	req := svc.InvokeAsyncRequest(input)
@@ -620,9 +1348,9 @@ func ExampleClient_InvokeAsyncRequest_shared00() {
 	fmt.Println(result)
 }
 
-// To retrieve a Lambda function aliases
+// To list a function's aliases
 //
-// This operation retrieves a Lambda function's aliases
+// The following example returns a list of aliases for a function named my-function.
 func ExampleClient_ListAliasesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -631,10 +1359,7 @@ func ExampleClient_ListAliasesRequest_shared00() {
 
 	svc := lambda.New(cfg)
 	input := &lambda.ListAliasesInput{
-		FunctionName:    aws.String("myFunction"),
-		FunctionVersion: aws.String("1"),
-		Marker:          aws.String(""),
-		MaxItems:        aws.Int64(123),
+		FunctionName: aws.String("my-function"),
 	}
 
 	req := svc.ListAliasesRequest(input)
@@ -664,9 +1389,93 @@ func ExampleClient_ListAliasesRequest_shared00() {
 	fmt.Println(result)
 }
 
-// To retrieve a list of Lambda functions
+// To list the event source mappings for a function
 //
-// This operation retrieves a Lambda functions
+// The following example returns a list of the event source mappings for a function
+// named my-function.
+func ExampleClient_ListEventSourceMappingsRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.ListEventSourceMappingsInput{
+		FunctionName: aws.String("my-function"),
+	}
+
+	req := svc.ListEventSourceMappingsRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To view a list of asynchronous invocation configurations
+//
+// The following example returns a list of asynchronous invocation configurations for
+// a function named my-function.
+func ExampleClient_ListFunctionEventInvokeConfigsRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.ListFunctionEventInvokeConfigsInput{
+		FunctionName: aws.String("my-function"),
+	}
+
+	req := svc.ListFunctionEventInvokeConfigsRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To get a list of Lambda functions
+//
+// This operation returns a list of Lambda functions.
 func ExampleClient_ListFunctionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -674,10 +1483,7 @@ func ExampleClient_ListFunctionsRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.ListFunctionsInput{
-		Marker:   aws.String(""),
-		MaxItems: aws.Int64(25),
-	}
+	input := &lambda.ListFunctionsInput{}
 
 	req := svc.ListFunctionsRequest(input)
 	result, err := req.Send(context.Background())
@@ -704,9 +1510,174 @@ func ExampleClient_ListFunctionsRequest_shared00() {
 	fmt.Println(result)
 }
 
-// To retrieve a list of Lambda function versions
+// To list versions of a layer
 //
-// This operation retrieves a Lambda function versions
+// The following example displays information about the versions for the layer named
+// blank-java-lib
+func ExampleClient_ListLayerVersionsRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.ListLayerVersionsInput{
+		LayerName: aws.String("blank-java-lib"),
+	}
+
+	req := svc.ListLayerVersionsRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To list the layers that are compatible with your function's runtime
+//
+// The following example returns information about layers that are compatible with the
+// Python 3.7 runtime.
+func ExampleClient_ListLayersRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.ListLayersInput{
+		CompatibleRuntime: lambda.RuntimePython37,
+	}
+
+	req := svc.ListLayersRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To get a list of provisioned concurrency configurations
+//
+// The following example returns a list of provisioned concurrency configurations for
+// a function named my-function.
+func ExampleClient_ListProvisionedConcurrencyConfigsRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.ListProvisionedConcurrencyConfigsInput{
+		FunctionName: aws.String("my-function"),
+	}
+
+	req := svc.ListProvisionedConcurrencyConfigsRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To retrieve the list of tags for a Lambda function
+//
+// The following example displays the tags attached to the my-function Lambda function.
+func ExampleClient_ListTagsRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.ListTagsInput{
+		Resource: aws.String("arn:aws:lambda:us-west-2:123456789012:function:my-function"),
+	}
+
+	req := svc.ListTagsRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To list versions of a function
+//
+// The following example returns a list of versions of a function named my-function
 func ExampleClient_ListVersionsByFunctionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -715,9 +1686,7 @@ func ExampleClient_ListVersionsByFunctionRequest_shared00() {
 
 	svc := lambda.New(cfg)
 	input := &lambda.ListVersionsByFunctionInput{
-		FunctionName: aws.String("myFunction"),
-		Marker:       aws.String(""),
-		MaxItems:     aws.Int64(25),
+		FunctionName: aws.String("my-function"),
 	}
 
 	req := svc.ListVersionsByFunctionRequest(input)
@@ -733,6 +1702,60 @@ func ExampleClient_ListVersionsByFunctionRequest_shared00() {
 				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
 			case lambda.ErrCodeTooManyRequestsException:
 				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To create a Lambda layer version
+//
+// The following example creates a new Python library layer version. The command retrieves
+// the layer content a file named layer.zip in the specified S3 bucket.
+func ExampleClient_PublishLayerVersionRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.PublishLayerVersionInput{
+		CompatibleRuntimes: []lambda.Runtime{
+			lambda.RuntimePython36,
+			lambda.RuntimePython37,
+		},
+		Content: &lambda.LayerVersionContentInput{
+			S3Bucket: aws.String("lambda-layers-us-west-2-123456789012"),
+			S3Key:    aws.String("layer.zip"),
+		},
+		Description: aws.String("My Python layer"),
+		LayerName:   aws.String("my-layer"),
+		LicenseInfo: aws.String("MIT"),
+	}
+
+	req := svc.PublishLayerVersionRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeCodeStorageExceededException:
+				fmt.Println(lambda.ErrCodeCodeStorageExceededException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -796,9 +1819,190 @@ func ExampleClient_PublishVersionRequest_shared00() {
 	fmt.Println(result)
 }
 
+// To configure a reserved concurrency limit for a function
+//
+// The following example configures 100 reserved concurrent executions for the my-function
+// function.
+func ExampleClient_PutFunctionConcurrencyRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.PutFunctionConcurrencyInput{
+		FunctionName:                 aws.String("my-function"),
+		ReservedConcurrentExecutions: aws.Int64(100),
+	}
+
+	req := svc.PutFunctionConcurrencyRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodeResourceConflictException:
+				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To configure error handling for asynchronous invocation
+//
+// The following example sets a maximum event age of one hour and disables retries for
+// the specified function.
+func ExampleClient_PutFunctionEventInvokeConfigRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.PutFunctionEventInvokeConfigInput{
+		FunctionName:             aws.String("my-function"),
+		MaximumEventAgeInSeconds: aws.Int64(3600),
+		MaximumRetryAttempts:     aws.Int64(0),
+	}
+
+	req := svc.PutFunctionEventInvokeConfigRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To allocate provisioned concurrency
+//
+// The following example allocates 100 provisioned concurrency for the BLUE alias of
+// the specified function.
+func ExampleClient_PutProvisionedConcurrencyConfigRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.PutProvisionedConcurrencyConfigInput{
+		FunctionName:                    aws.String("my-function"),
+		ProvisionedConcurrentExecutions: aws.Int64(100),
+		Qualifier:                       aws.String("BLUE"),
+	}
+
+	req := svc.PutProvisionedConcurrencyConfigRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeResourceConflictException:
+				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To delete layer-version permissions
+//
+// The following example deletes permission for an account to configure a layer version.
+func ExampleClient_RemoveLayerVersionPermissionRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.RemoveLayerVersionPermissionInput{
+		LayerName:     aws.String("my-layer"),
+		StatementId:   aws.String("xaccount"),
+		VersionNumber: aws.Int64(1),
+	}
+
+	req := svc.RemoveLayerVersionPermissionRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodePreconditionFailedException:
+				fmt.Println(lambda.ErrCodePreconditionFailedException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To remove a Lambda function's permissions
 //
-// This operation removes a Lambda function's permissions
+// The following example removes a permissions statement named xaccount from the PROD
+// alias of a function named my-function.
 func ExampleClient_RemovePermissionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -807,9 +2011,9 @@ func ExampleClient_RemovePermissionRequest_shared00() {
 
 	svc := lambda.New(cfg)
 	input := &lambda.RemovePermissionInput{
-		FunctionName: aws.String("myFunction"),
-		Qualifier:    aws.String("1"),
-		StatementId:  aws.String("role-statement-id"),
+		FunctionName: aws.String("my-function"),
+		Qualifier:    aws.String("PROD"),
+		StatementId:  aws.String("xaccount"),
 	}
 
 	req := svc.RemovePermissionRequest(input)
@@ -841,9 +2045,104 @@ func ExampleClient_RemovePermissionRequest_shared00() {
 	fmt.Println(result)
 }
 
-// To update a Lambda function alias
+// To add tags to an existing Lambda function
 //
-// This operation updates a Lambda function alias
+// The following example adds a tag with the key name DEPARTMENT and a value of 'Department
+// A' to the specified Lambda function.
+func ExampleClient_TagResourceRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.TagResourceInput{
+		Resource: aws.String("arn:aws:lambda:us-west-2:123456789012:function:my-function"),
+		Tags: map[string]string{
+			"DEPARTMENT": "Department A",
+		},
+	}
+
+	req := svc.TagResourceRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodeResourceConflictException:
+				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To remove tags from an existing Lambda function
+//
+// The following example removes the tag with the key name DEPARTMENT tag from the my-function
+// Lambda function.
+func ExampleClient_UntagResourceRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.UntagResourceInput{
+		Resource: aws.String("arn:aws:lambda:us-west-2:123456789012:function:my-function"),
+		TagKeys: []string{
+			"DEPARTMENT",
+		},
+	}
+
+	req := svc.UntagResourceRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodeResourceConflictException:
+				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To update a function alias
+//
+// The following example updates the alias named BLUE to send 30% of traffic to version
+// 2 and 70% to version 1.
 func ExampleClient_UpdateAliasRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -852,10 +2151,14 @@ func ExampleClient_UpdateAliasRequest_shared00() {
 
 	svc := lambda.New(cfg)
 	input := &lambda.UpdateAliasInput{
-		Description:     aws.String(""),
-		FunctionName:    aws.String("myFunction"),
-		FunctionVersion: aws.String("1"),
-		Name:            aws.String("functionAlias"),
+		FunctionName:    aws.String("my-function"),
+		FunctionVersion: aws.String("2"),
+		Name:            aws.String("BLUE"),
+		RoutingConfig: &lambda.AliasRoutingConfiguration{
+			AdditionalVersionWeights: map[string]float64{
+				"1": 0.700000,
+			},
+		},
 	}
 
 	req := svc.UpdateAliasRequest(input)
@@ -939,7 +2242,9 @@ func ExampleClient_UpdateEventSourceMappingRequest_shared00() {
 
 // To update a Lambda function's code
 //
-// This operation updates a Lambda function's code
+// The following example replaces the code of the unpublished ($LATEST) version of a
+// function named my-function with the contents of the specified zip file in Amazon
+// S3.
 func ExampleClient_UpdateFunctionCodeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -948,12 +2253,9 @@ func ExampleClient_UpdateFunctionCodeRequest_shared00() {
 
 	svc := lambda.New(cfg)
 	input := &lambda.UpdateFunctionCodeInput{
-		FunctionName:    aws.String("myFunction"),
-		Publish:         aws.Bool(true),
-		S3Bucket:        aws.String("myBucket"),
-		S3Key:           aws.String("myKey"),
-		S3ObjectVersion: aws.String("1"),
-		ZipFile:         []byte("fileb://file-path/file.zip"),
+		FunctionName: aws.String("my-function"),
+		S3Bucket:     aws.String("my-bucket-1xpuxmplzrlbh"),
+		S3Key:        aws.String("function.zip"),
 	}
 
 	req := svc.UpdateFunctionCodeRequest(input)
@@ -991,7 +2293,8 @@ func ExampleClient_UpdateFunctionCodeRequest_shared00() {
 
 // To update a Lambda function's configuration
 //
-// This operation updates a Lambda function's configuration
+// The following example modifies the memory size to be 256 MB for the unpublished ($LATEST)
+// version of a function named my-function.
 func ExampleClient_UpdateFunctionConfigurationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -1000,14 +2303,8 @@ func ExampleClient_UpdateFunctionConfigurationRequest_shared00() {
 
 	svc := lambda.New(cfg)
 	input := &lambda.UpdateFunctionConfigurationInput{
-		Description:  aws.String(""),
-		FunctionName: aws.String("myFunction"),
-		Handler:      aws.String("index.handler"),
-		MemorySize:   aws.Int64(128),
-		Role:         aws.String("arn:aws:iam::123456789012:role/lambda_basic_execution"),
-		Runtime:      lambda.RuntimePython27,
-		Timeout:      aws.Int64(123),
-		VpcConfig:    &lambda.VpcConfig{},
+		FunctionName: aws.String("my-function"),
+		MemorySize:   aws.Int64(256),
 	}
 
 	req := svc.UpdateFunctionConfigurationRequest(input)
@@ -1027,6 +2324,53 @@ func ExampleClient_UpdateFunctionConfigurationRequest_shared00() {
 				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
 			case lambda.ErrCodePreconditionFailedException:
 				fmt.Println(lambda.ErrCodePreconditionFailedException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To update an asynchronous invocation configuration
+//
+// The following example adds an on-failure destination to the existing asynchronous
+// invocation configuration for a function named my-function.
+func ExampleClient_UpdateFunctionEventInvokeConfigRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
+	input := &lambda.UpdateFunctionEventInvokeConfigInput{
+		DestinationConfig: &lambda.DestinationConfig{
+			OnFailure: &lambda.OnFailure{
+				Destination: aws.String("arn:aws:sqs:us-east-2:123456789012:destination"),
+			},
+		},
+		FunctionName: aws.String("my-function"),
+	}
+
+	req := svc.UpdateFunctionEventInvokeConfigRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case lambda.ErrCodeServiceException:
+				fmt.Println(lambda.ErrCodeServiceException, aerr.Error())
+			case lambda.ErrCodeResourceNotFoundException:
+				fmt.Println(lambda.ErrCodeResourceNotFoundException, aerr.Error())
+			case lambda.ErrCodeInvalidParameterValueException:
+				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
+			case lambda.ErrCodeTooManyRequestsException:
+				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

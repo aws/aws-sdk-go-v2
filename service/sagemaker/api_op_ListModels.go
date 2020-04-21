@@ -80,8 +80,7 @@ const opListModels = "ListModels"
 // ListModelsRequest returns a request value for making API operation for
 // Amazon SageMaker Service.
 //
-// Lists models created with the CreateModel (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateModel.html)
-// API.
+// Lists models created with the CreateModel API.
 //
 //    // Example sending a request using ListModelsRequest.
 //    req := client.ListModelsRequest(params)

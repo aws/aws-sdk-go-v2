@@ -72,7 +72,7 @@ const opRequestUploadCredentials = "RequestUploadCredentials"
 //
 // Learn more
 //
-// Uploading Your Game (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
+//  Create a Build with Files in S3 (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build)
 //
 // Related operations
 //

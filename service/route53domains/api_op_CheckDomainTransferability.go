@@ -18,11 +18,22 @@ type CheckDomainTransferabilityInput struct {
 	// for the domain.
 	AuthCode *string `type:"string" sensitive:"true"`
 
-	// The name of the domain that you want to transfer to Amazon Route 53.
+	// The name of the domain that you want to transfer to Route 53. The top-level
+	// domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list
+	// of supported TLDs, see Domains that You Can Register with Amazon Route 53
+	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+	// in the Amazon Route 53 Developer Guide.
 	//
-	// Constraints: The domain name can contain only the letters a through z, the
-	// numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not
-	// supported.
+	// The domain name can contain only the following characters:
+	//
+	//    * Letters a through z. Domain names are not case sensitive.
+	//
+	//    * Numbers 0 through 9.
+	//
+	//    * Hyphen (-). You can't specify a hyphen at the beginning or end of a
+	//    label.
+	//
+	//    * Period (.) to separate the labels in the name, such as the . in example.com.
 	//
 	// DomainName is a required field
 	DomainName *string `type:"string" required:"true"`
@@ -52,7 +63,7 @@ type CheckDomainTransferabilityOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A complex type that contains information about whether the specified domain
-	// can be transferred to Amazon Route 53.
+	// can be transferred to Route 53.
 	//
 	// Transferability is a required field
 	Transferability *DomainTransferability `type:"structure" required:"true"`

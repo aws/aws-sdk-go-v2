@@ -95,6 +95,10 @@ type ClientAPI interface {
 
 	RejectInvitationRequest(*managedblockchain.RejectInvitationInput) managedblockchain.RejectInvitationRequest
 
+	UpdateMemberRequest(*managedblockchain.UpdateMemberInput) managedblockchain.UpdateMemberRequest
+
+	UpdateNodeRequest(*managedblockchain.UpdateNodeInput) managedblockchain.UpdateNodeRequest
+
 	VoteOnProposalRequest(*managedblockchain.VoteOnProposalInput) managedblockchain.VoteOnProposalRequest
 }
 

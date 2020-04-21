@@ -1306,6 +1306,24 @@ func (enum H264FlickerAq) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// H264 Force Field Pictures
+type H264ForceFieldPictures string
+
+// Enum values for H264ForceFieldPictures
+const (
+	H264ForceFieldPicturesDisabled H264ForceFieldPictures = "DISABLED"
+	H264ForceFieldPicturesEnabled  H264ForceFieldPictures = "ENABLED"
+)
+
+func (enum H264ForceFieldPictures) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H264ForceFieldPictures) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // H264 Framerate Control
 type H264FramerateControl string
 
@@ -2484,6 +2502,27 @@ func (enum InputMaximumBitrate) MarshalValue() (string, error) {
 }
 
 func (enum InputMaximumBitrate) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Input preference when deciding which input to make active when a previously
+// failed input has recovered.If \"EQUAL_INPUT_PREFERENCE\", then the active
+// input will stay active as long as it is healthy.If \"PRIMARY_INPUT_PREFERRED\",
+// then always switch back to the primary input when it is healthy.
+type InputPreference string
+
+// Enum values for InputPreference
+const (
+	InputPreferenceEqualInputPreference  InputPreference = "EQUAL_INPUT_PREFERENCE"
+	InputPreferencePrimaryInputPreferred InputPreference = "PRIMARY_INPUT_PREFERRED"
+)
+
+func (enum InputPreference) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InputPreference) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

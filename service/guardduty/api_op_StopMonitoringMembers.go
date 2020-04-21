@@ -13,14 +13,13 @@ import (
 type StopMonitoringMembersInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account IDs of the GuardDuty member accounts whose findings you
-	// want the master account to stop monitoring.
+	// A list of account IDs for the member accounts to stop monitoring.
 	//
 	// AccountIds is a required field
 	AccountIds []string `locationName:"accountIds" min:"1" type:"list" required:"true"`
 
-	// The unique ID of the detector of the GuardDuty account that you want to stop
-	// from monitor members' findings.
+	// The unique ID of the detector associated with the GuardDuty master account
+	// that is monitoring member accounts.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
@@ -83,8 +82,9 @@ func (s StopMonitoringMembersInput) MarshalFields(e protocol.FieldEncoder) error
 type StopMonitoringMembersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
+	// A list of objects that contain an accountId for each account that could not
+	// be processed, and a result string that indicates why the account was not
+	// processed.
 	//
 	// UnprocessedAccounts is a required field
 	UnprocessedAccounts []UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
@@ -117,8 +117,8 @@ const opStopMonitoringMembers = "StopMonitoringMembers"
 // StopMonitoringMembersRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Stops GuardDuty monitoring for the specified member accounnts. Use the StartMonitoringMembers
-// to restart monitoring for those accounts.
+// Stops GuardDuty monitoring for the specified member accounts. Use the StartMonitoringMembers
+// operation to restart monitoring for those accounts.
 //
 //    // Example sending a request using StopMonitoringMembersRequest.
 //    req := client.StopMonitoringMembersRequest(params)

@@ -19,13 +19,13 @@ type InviteMembersInput struct {
 	// AccountIds is a required field
 	AccountIds []string `locationName:"accountIds" min:"1" type:"list" required:"true"`
 
-	// The unique ID of the detector of the GuardDuty account with which you want
-	// to invite members.
+	// The unique ID of the detector of the GuardDuty account that you want to invite
+	// members with.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// A boolean value that specifies whether you want to disable email notification
+	// A Boolean value that specifies whether you want to disable email notification
 	// to the accounts that you’re inviting to GuardDuty as members.
 	DisableEmailNotification *bool `locationName:"disableEmailNotification" type:"boolean"`
 
@@ -103,8 +103,8 @@ func (s InviteMembersInput) MarshalFields(e protocol.FieldEncoder) error {
 type InviteMembersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
+	// A list of objects that contain the unprocessed account and a result string
+	// that explains why it was unprocessed.
 	//
 	// UnprocessedAccounts is a required field
 	UnprocessedAccounts []UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
@@ -138,9 +138,9 @@ const opInviteMembers = "InviteMembers"
 // Amazon GuardDuty.
 //
 // Invites other AWS accounts (created as members of the current AWS account
-// by CreateMembers) to enable GuardDuty and allow the current AWS account to
-// view and manage these accounts' GuardDuty findings on their behalf as the
-// master account.
+// by CreateMembers) to enable GuardDuty, and allow the current AWS account
+// to view and manage these accounts' GuardDuty findings on their behalf as
+// the master account.
 //
 //    // Example sending a request using InviteMembersRequest.
 //    req := client.InviteMembersRequest(params)

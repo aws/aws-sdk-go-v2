@@ -22,6 +22,9 @@ type CreateSMBFileShareInput struct {
 	// they like on the file share, regardless of file permissions.
 	AdminUserList []string `type:"list"`
 
+	// The Amazon Resource Name (ARN) of the storage used for the audit logs.
+	AuditDestinationARN *string `type:"string"`
+
 	// The authentication method that users use to access the file share.
 	//
 	// Valid values are ActiveDirectory or GuestAccess. The default is ActiveDirectory.
@@ -38,8 +41,7 @@ type CreateSMBFileShareInput struct {
 	// If this field is not populated, the default value S3_STANDARD is used. Optional.
 	DefaultStorageClass *string `min:"5" type:"string"`
 
-	// The Amazon Resource Name (ARN) of the file gateway on which you want to create
-	// a file share.
+	// The ARN of the file gateway on which you want to create a file share.
 	//
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`

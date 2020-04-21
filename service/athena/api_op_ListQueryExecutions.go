@@ -19,7 +19,9 @@ type ListQueryExecutionsInput struct {
 	// was truncated.
 	NextToken *string `min:"1" type:"string"`
 
-	// The name of the workgroup from which queries are being returned.
+	// The name of the workgroup from which queries are returned. If a workgroup
+	// is not specified, a list of available query execution IDs for the queries
+	// in the primary workgroup is returned.
 	WorkGroup *string `type:"string"`
 }
 
@@ -62,8 +64,9 @@ const opListQueryExecutions = "ListQueryExecutions"
 // Amazon Athena.
 //
 // Provides a list of available query execution IDs for the queries in the specified
-// workgroup. Requires you to have access to the workgroup in which the queries
-// ran.
+// workgroup. If a workgroup is not specified, returns a list of query execution
+// IDs for the primary workgroup. Requires you to have access to the workgroup
+// in which the queries ran.
 //
 // For code samples using the AWS SDK for Java, see Examples and Code Samples
 // (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the Amazon

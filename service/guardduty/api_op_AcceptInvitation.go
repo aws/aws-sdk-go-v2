@@ -18,7 +18,7 @@ type AcceptInvitationInput struct {
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// This value is used to validate the master account to the member account.
+	// The value that is used to validate the master account to the member account.
 	//
 	// InvitationId is a required field
 	InvitationId *string `locationName:"invitationId" type:"string" required:"true"`

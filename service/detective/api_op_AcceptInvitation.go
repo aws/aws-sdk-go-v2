@@ -74,8 +74,6 @@ const opAcceptInvitation = "AcceptInvitation"
 // AcceptInvitationRequest returns a request value for making API operation for
 // Amazon Detective.
 //
-// Amazon Detective is currently in preview.
-//
 // Accepts an invitation for the member account to contribute data to a behavior
 // graph. This operation can only be called by an invited member account.
 //

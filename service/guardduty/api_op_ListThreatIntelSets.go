@@ -13,18 +13,18 @@ import (
 type ListThreatIntelSetsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique ID of the detector the threatIntelSet is associated with.
+	// The unique ID of the detector that the threatIntelSet is associated with.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// You can use this parameter to indicate the maximum number of items you want
-	// in the response. The default value is 50. The maximum value is 50.
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response. The default value is 50. The maximum value is 50.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
 	// You can use this parameter to paginate results in the response. Set the value
 	// of this parameter to null on your first call to the list action. For subsequent
-	// calls to the action fill nextToken in the request with the value of NextToken
+	// calls to the action, fill nextToken in the request with the value of NextToken
 	// from the previous response to continue listing data.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
@@ -82,8 +82,8 @@ func (s ListThreatIntelSetsInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListThreatIntelSetsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination parameter to be used on the next list operation to retrieve more
-	// items.
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The IDs of the ThreatIntelSet resources.

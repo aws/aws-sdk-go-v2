@@ -97,6 +97,8 @@ type ClientAPI interface {
 
 	CreateCertificateFromCsrRequest(*iot.CreateCertificateFromCsrInput) iot.CreateCertificateFromCsrRequest
 
+	CreateDimensionRequest(*iot.CreateDimensionInput) iot.CreateDimensionRequest
+
 	CreateDomainConfigurationRequest(*iot.CreateDomainConfigurationInput) iot.CreateDomainConfigurationRequest
 
 	CreateDynamicThingGroupRequest(*iot.CreateDynamicThingGroupInput) iot.CreateDynamicThingGroupRequest
@@ -146,6 +148,8 @@ type ClientAPI interface {
 	DeleteCACertificateRequest(*iot.DeleteCACertificateInput) iot.DeleteCACertificateRequest
 
 	DeleteCertificateRequest(*iot.DeleteCertificateInput) iot.DeleteCertificateRequest
+
+	DeleteDimensionRequest(*iot.DeleteDimensionInput) iot.DeleteDimensionRequest
 
 	DeleteDomainConfigurationRequest(*iot.DeleteDomainConfigurationInput) iot.DeleteDomainConfigurationRequest
 
@@ -208,6 +212,8 @@ type ClientAPI interface {
 	DescribeCertificateRequest(*iot.DescribeCertificateInput) iot.DescribeCertificateRequest
 
 	DescribeDefaultAuthorizerRequest(*iot.DescribeDefaultAuthorizerInput) iot.DescribeDefaultAuthorizerRequest
+
+	DescribeDimensionRequest(*iot.DescribeDimensionInput) iot.DescribeDimensionRequest
 
 	DescribeDomainConfigurationRequest(*iot.DescribeDomainConfigurationInput) iot.DescribeDomainConfigurationRequest
 
@@ -304,6 +310,8 @@ type ClientAPI interface {
 	ListCertificatesRequest(*iot.ListCertificatesInput) iot.ListCertificatesRequest
 
 	ListCertificatesByCARequest(*iot.ListCertificatesByCAInput) iot.ListCertificatesByCARequest
+
+	ListDimensionsRequest(*iot.ListDimensionsInput) iot.ListDimensionsRequest
 
 	ListDomainConfigurationsRequest(*iot.ListDomainConfigurationsInput) iot.ListDomainConfigurationsRequest
 
@@ -430,6 +438,8 @@ type ClientAPI interface {
 	UpdateCACertificateRequest(*iot.UpdateCACertificateInput) iot.UpdateCACertificateRequest
 
 	UpdateCertificateRequest(*iot.UpdateCertificateInput) iot.UpdateCertificateRequest
+
+	UpdateDimensionRequest(*iot.UpdateDimensionInput) iot.UpdateDimensionRequest
 
 	UpdateDomainConfigurationRequest(*iot.UpdateDomainConfigurationInput) iot.UpdateDomainConfigurationRequest
 

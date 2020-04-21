@@ -10,12 +10,13 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// The GetOperationDetail request includes the following element.
+// The GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// request includes the following element.
 type GetOperationDetailInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier for the operation for which you want to get the status. Amazon
-	// Route 53 returned the identifier in the response to the original request.
+	// The identifier for the operation for which you want to get the status. Route
+	// 53 returned the identifier in the response to the original request.
 	//
 	// OperationId is a required field
 	OperationId *string `type:"string" required:"true"`

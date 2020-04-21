@@ -12,7 +12,7 @@ import (
 type ResendContactReachabilityEmailInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the domain for which you want Amazon Route 53 to resend a confirmation
+	// The name of the domain for which you want Route 53 to resend a confirmation
 	// email to the registrant contact.
 	DomainName *string `locationName:"domainName" type:"string"`
 }

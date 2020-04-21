@@ -37,4 +37,10 @@ const (
 	// Exception raised when a request fails due to temporary unavailability of
 	// the service.
 	ErrCodeServiceUnavailableException = "ServiceUnavailableException"
+
+	// ErrCodeThrottlingException for service response error code
+	// "ThrottlingException".
+	//
+	// The request was denied due to request throttling.
+	ErrCodeThrottlingException = "ThrottlingException"
 )

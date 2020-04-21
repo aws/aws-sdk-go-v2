@@ -59,7 +59,8 @@ const opListByoipCidrs = "ListByoipCidrs"
 // AWS Global Accelerator.
 //
 // Lists the IP address ranges that were specified in calls to ProvisionByoipCidr
-// (https://docs.aws.amazon.com/global-accelerator/latest/api/ProvisionByoipCidr.html).
+// (https://docs.aws.amazon.com/global-accelerator/latest/api/ProvisionByoipCidr.html),
+// including the current state and a history of state changes.
 //
 // To see an AWS CLI example of listing BYOIP CIDR addresses, scroll down to
 // Example.

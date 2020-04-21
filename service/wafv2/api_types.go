@@ -186,7 +186,7 @@ type ByteMatchStatement struct {
 	// in the part of web requests that you designate for inspection in FieldToMatch.
 	// The maximum length of the value is 50 bytes.
 	//
-	// Valid values depend on the areas that you specify for inspection in FieldToMatch:
+	// Valid values depend on the component that you specify for inspection in FieldToMatch:
 	//
 	//    * Method: The HTTP method that you want AWS WAF to search for. This indicates
 	//    the type of operation specified in the request.
@@ -220,8 +220,8 @@ type ByteMatchStatement struct {
 	// Text transformations eliminate some of the unusual formatting that attackers
 	// use in web requests in an effort to bypass detection. If you specify one
 	// or more transformations in a rule statement, AWS WAF performs all transformations
-	// on the content identified by FieldToMatch, starting from the lowest priority
-	// setting, before inspecting the content for a match.
+	// on the content of the request component identified by FieldToMatch, starting
+	// from the lowest priority setting, before inspecting the content for a match.
 	//
 	// TextTransformations is a required field
 	TextTransformations []TextTransformation `min:"1" type:"list" required:"true"`
@@ -357,9 +357,12 @@ func (s *ExcludedRule) Validate() error {
 // 2019. For information, including how to migrate your AWS WAF resources from
 // the prior release, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 //
-// The part of a web request that you want AWS WAF to inspect. Include the FieldToMatch
-// types that you want to inspect, with additional specifications as needed,
-// according to the type.
+// The part of a web request that you want AWS WAF to inspect. Include the single
+// FieldToMatch type that you want to inspect, with additional specifications
+// as needed, according to the type. You specify a single request component
+// in FieldToMatch for each rule statement that requires it. To inspect more
+// than one component of a web request, create a separate rule statement for
+// each component.
 type FieldToMatch struct {
 	_ struct{} `type:"structure"`
 
@@ -429,6 +432,104 @@ func (s *FieldToMatch) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// A rule group that's defined for an AWS Firewall Manager WAF policy.
+type FirewallManagerRuleGroup struct {
+	_ struct{} `type:"structure"`
+
+	// The processing guidance for an AWS Firewall Manager rule. This is like a
+	// regular rule Statement, but it can only contain a rule group reference.
+	//
+	// FirewallManagerStatement is a required field
+	FirewallManagerStatement *FirewallManagerStatement `type:"structure" required:"true"`
+
+	// The name of the rule group. You cannot change the name of a rule group after
+	// you create it.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The override action to apply to the rules in a rule group. Used only for
+	// rule statements that reference a rule group, like RuleGroupReferenceStatement
+	// and ManagedRuleGroupStatement.
+	//
+	// Set the override action to none to leave the rule actions in effect. Set
+	// it to count to only count matches, regardless of the rule action settings.
+	//
+	// In a Rule, you must specify either this OverrideAction setting or the rule
+	// Action setting, but not both:
+	//
+	//    * If the rule statement references a rule group, use this override action
+	//    setting and not the action setting.
+	//
+	//    * If the rule statement does not reference a rule group, use the rule
+	//    action setting and not this rule override action setting.
+	//
+	// OverrideAction is a required field
+	OverrideAction *OverrideAction `type:"structure" required:"true"`
+
+	// If you define more than one rule group in the first or last Firewall Manager
+	// rule groups, AWS WAF evaluates each request against the rule groups in order,
+	// starting from the lowest priority setting. The priorities don't need to be
+	// consecutive, but they must all be different.
+	//
+	// Priority is a required field
+	Priority *int64 `type:"integer" required:"true"`
+
+	//
+	// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
+	// 2019. For information, including how to migrate your AWS WAF resources from
+	// the prior release, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	//
+	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
+	//
+	// VisibilityConfig is a required field
+	VisibilityConfig *VisibilityConfig `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s FirewallManagerRuleGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The processing guidance for an AWS Firewall Manager rule. This is like a
+// regular rule Statement, but it can only contain a rule group reference.
+type FirewallManagerStatement struct {
+	_ struct{} `type:"structure"`
+
+	//
+	// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
+	// 2019. For information, including how to migrate your AWS WAF resources from
+	// the prior release, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	//
+	// A rule statement used to run the rules that are defined in a managed rule
+	// group. To use this, provide the vendor name and the name of the rule group
+	// in this statement. You can retrieve the required names by calling ListAvailableManagedRuleGroups.
+	//
+	// You can't nest a ManagedRuleGroupStatement, for example for use inside a
+	// NotStatement or OrStatement. It can only be referenced as a top-level statement
+	// within a rule.
+	ManagedRuleGroupStatement *ManagedRuleGroupStatement `type:"structure"`
+
+	//
+	// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
+	// 2019. For information, including how to migrate your AWS WAF resources from
+	// the prior release, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	//
+	// A rule statement used to run the rules that are defined in a RuleGroup. To
+	// use this, create a rule group with your rules, then provide the ARN of the
+	// rule group in this statement.
+	//
+	// You cannot nest a RuleGroupReferenceStatement, for example for use inside
+	// a NotStatement or OrStatement. It can only be referenced as a top-level statement
+	// within a rule.
+	RuleGroupReferenceStatement *RuleGroupReferenceStatement `type:"structure"`
+}
+
+// String returns the string representation
+func (s FirewallManagerStatement) String() string {
+	return awsutil.Prettify(s)
 }
 
 //
@@ -578,8 +679,8 @@ type IPSet struct {
 	// Addresses is a required field
 	Addresses []string `type:"list" required:"true"`
 
-	// A friendly description of the IP set. You cannot change the description of
-	// an IP set after you create it.
+	// A description of the IP set that helps with identification. You cannot change
+	// the description of an IP set after you create it.
 	Description *string `min:"1" type:"string"`
 
 	// Specify IPV4 or IPV6.
@@ -593,8 +694,8 @@ type IPSet struct {
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
 
-	// A friendly name of the IP set. You cannot change the name of an IPSet after
-	// you create it.
+	// The name of the IP set. You cannot change the name of an IPSet after you
+	// create it.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
@@ -665,8 +766,8 @@ type IPSetSummary struct {
 	// The Amazon Resource Name (ARN) of the entity.
 	ARN *string `min:"20" type:"string"`
 
-	// A friendly description of the IP set. You cannot change the description of
-	// an IP set after you create it.
+	// A description of the IP set that helps with identification. You cannot change
+	// the description of an IP set after you create it.
 	Description *string `min:"1" type:"string"`
 
 	// A unique identifier for the set. This ID is returned in the responses to
@@ -683,8 +784,8 @@ type IPSetSummary struct {
 	// operation.
 	LockToken *string `min:"1" type:"string"`
 
-	// A friendly name of the IP set. You cannot change the name of an IPSet after
-	// you create it.
+	// The name of the IP set. You cannot change the name of an IPSet after you
+	// create it.
 	Name *string `min:"1" type:"string"`
 }
 
@@ -981,14 +1082,21 @@ func (s *OrStatement) Validate() error {
 	return nil
 }
 
+// The override action to apply to the rules in a rule group. Used only for
+// rule statements that reference a rule group, like RuleGroupReferenceStatement
+// and ManagedRuleGroupStatement.
 //
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from
-// the prior release, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// Set the override action to none to leave the rule actions in effect. Set
+// it to count to only count matches, regardless of the rule action settings.
 //
-// The action to use to override the rule's Action setting. You can use no override
-// action, in which case the rule action is in effect, or count, in which case,
-// if the rule matches a web request, it only counts the match.
+// In a Rule, you must specify either this OverrideAction setting or the rule
+// Action setting, but not both:
+//
+//    * If the rule statement references a rule group, use this override action
+//    setting and not the action setting.
+//
+//    * If the rule statement does not reference a rule group, use the rule
+//    action setting and not this rule override action setting.
 type OverrideAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1175,20 +1283,19 @@ type RegexPatternSet struct {
 	// The Amazon Resource Name (ARN) of the entity.
 	ARN *string `min:"20" type:"string"`
 
-	// A friendly description of the set. You cannot change the description of a
-	// set after you create it.
+	// A description of the set that helps with identification. You cannot change
+	// the description of a set after you create it.
 	Description *string `min:"1" type:"string"`
 
 	// A unique identifier for the set. This ID is returned in the responses to
 	// create and list commands. You provide it to operations like update and delete.
 	Id *string `min:"1" type:"string"`
 
-	// A friendly name of the set. You cannot change the name after you create the
-	// set.
+	// The name of the set. You cannot change the name after you create the set.
 	Name *string `min:"1" type:"string"`
 
 	// The regular expression patterns in the set.
-	RegularExpressionList []Regex `min:"1" type:"list"`
+	RegularExpressionList []Regex `type:"list"`
 }
 
 // String returns the string representation
@@ -1230,8 +1337,8 @@ type RegexPatternSetReferenceStatement struct {
 	// Text transformations eliminate some of the unusual formatting that attackers
 	// use in web requests in an effort to bypass detection. If you specify one
 	// or more transformations in a rule statement, AWS WAF performs all transformations
-	// on the content identified by FieldToMatch, starting from the lowest priority
-	// setting, before inspecting the content for a match.
+	// on the content of the request component identified by FieldToMatch, starting
+	// from the lowest priority setting, before inspecting the content for a match.
 	//
 	// TextTransformations is a required field
 	TextTransformations []TextTransformation `min:"1" type:"list" required:"true"`
@@ -1297,8 +1404,8 @@ type RegexPatternSetSummary struct {
 	// The Amazon Resource Name (ARN) of the entity.
 	ARN *string `min:"20" type:"string"`
 
-	// A friendly description of the set. You cannot change the description of a
-	// set after you create it.
+	// A description of the set that helps with identification. You cannot change
+	// the description of a set after you create it.
 	Description *string `min:"1" type:"string"`
 
 	// A unique identifier for the set. This ID is returned in the responses to
@@ -1315,8 +1422,8 @@ type RegexPatternSetSummary struct {
 	// operation.
 	LockToken *string `min:"1" type:"string"`
 
-	// A friendly name of the data type instance. You cannot change the name after
-	// you create the instance.
+	// The name of the data type instance. You cannot change the name after you
+	// create the instance.
 	Name *string `min:"1" type:"string"`
 }
 
@@ -1338,19 +1445,44 @@ type Rule struct {
 	_ struct{} `type:"structure"`
 
 	// The action that AWS WAF should take on a web request when it matches the
-	// rule's statement. Settings at the web ACL level can override the rule action
+	// rule statement. Settings at the web ACL level can override the rule action
 	// setting.
+	//
+	// This is used only for rules whose statements do not reference a rule group.
+	// Rule statements that reference a rule group include RuleGroupReferenceStatement
+	// and ManagedRuleGroupStatement.
+	//
+	// You must specify either this Action setting or the rule OverrideAction setting,
+	// but not both:
+	//
+	//    * If the rule statement does not reference a rule group, use this rule
+	//    action setting and not the rule override action setting.
+	//
+	//    * If the rule statement references a rule group, use the override action
+	//    setting and not this action setting.
 	Action *RuleAction `type:"structure"`
 
-	// A friendly name of the rule. You can't change the name of a Rule after you
-	// create it.
+	// The name of the rule. You can't change the name of a Rule after you create
+	// it.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// The action to use to override the rule's Action setting. You can use no override
-	// action, in which case the rule action is in effect, or count action, in which
-	// case, if the rule matches a web request, it only counts the match.
+	// The override action to apply to the rules in a rule group. Used only for
+	// rule statements that reference a rule group, like RuleGroupReferenceStatement
+	// and ManagedRuleGroupStatement.
+	//
+	// Set the override action to none to leave the rule actions in effect. Set
+	// it to count to only count matches, regardless of the rule action settings.
+	//
+	// In a Rule, you must specify either this OverrideAction setting or the rule
+	// Action setting, but not both:
+	//
+	//    * If the rule statement references a rule group, use this override action
+	//    setting and not the action setting.
+	//
+	//    * If the rule statement does not reference a rule group, use the rule
+	//    action setting and not this rule override action setting.
 	OverrideAction *OverrideAction `type:"structure"`
 
 	// If you define more than one Rule in a WebACL, AWS WAF evaluates each request
@@ -1478,8 +1610,8 @@ type RuleGroup struct {
 	// Capacity is a required field
 	Capacity *int64 `min:"1" type:"long" required:"true"`
 
-	// A friendly description of the rule group. You cannot change the description
-	// of a rule group after you create it.
+	// A description of the rule group that helps with identification. You cannot
+	// change the description of a rule group after you create it.
 	Description *string `min:"1" type:"string"`
 
 	// A unique identifier for the rule group. This ID is returned in the responses
@@ -1489,8 +1621,8 @@ type RuleGroup struct {
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
 
-	// A friendly name of the rule group. You cannot change the name of a rule group
-	// after you create it.
+	// The name of the rule group. You cannot change the name of a rule group after
+	// you create it.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
@@ -1581,8 +1713,8 @@ type RuleGroupSummary struct {
 	// The Amazon Resource Name (ARN) of the entity.
 	ARN *string `min:"20" type:"string"`
 
-	// A friendly description of the rule group. You cannot change the description
-	// of a rule group after you create it.
+	// A description of the rule group that helps with identification. You cannot
+	// change the description of a rule group after you create it.
 	Description *string `min:"1" type:"string"`
 
 	// A unique identifier for the rule group. This ID is returned in the responses
@@ -1600,8 +1732,8 @@ type RuleGroupSummary struct {
 	// operation.
 	LockToken *string `min:"1" type:"string"`
 
-	// A friendly name of the data type instance. You cannot change the name after
-	// you create the instance.
+	// The name of the data type instance. You cannot change the name after you
+	// create the instance.
 	Name *string `min:"1" type:"string"`
 }
 
@@ -1803,8 +1935,8 @@ type SizeConstraintStatement struct {
 	// Text transformations eliminate some of the unusual formatting that attackers
 	// use in web requests in an effort to bypass detection. If you specify one
 	// or more transformations in a rule statement, AWS WAF performs all transformations
-	// on the content identified by FieldToMatch, starting from the lowest priority
-	// setting, before inspecting the content for a match.
+	// on the content of the request component identified by FieldToMatch, starting
+	// from the lowest priority setting, before inspecting the content for a match.
 	//
 	// TextTransformations is a required field
 	TextTransformations []TextTransformation `min:"1" type:"list" required:"true"`
@@ -1879,8 +2011,8 @@ type SqliMatchStatement struct {
 	// Text transformations eliminate some of the unusual formatting that attackers
 	// use in web requests in an effort to bypass detection. If you specify one
 	// or more transformations in a rule statement, AWS WAF performs all transformations
-	// on the content identified by FieldToMatch, starting from the lowest priority
-	// setting, before inspecting the content for a match.
+	// on the content of the request component identified by FieldToMatch, starting
+	// from the lowest priority setting, before inspecting the content for a match.
 	//
 	// TextTransformations is a required field
 	TextTransformations []TextTransformation `min:"1" type:"list" required:"true"`
@@ -2422,10 +2554,10 @@ type VisibilityConfig struct {
 	// CloudWatchMetricsEnabled is a required field
 	CloudWatchMetricsEnabled *bool `type:"boolean" required:"true"`
 
-	// A friendly name of the CloudWatch metric. The name can contain only alphanumeric
-	// characters (A-Z, a-z, 0-9), with length from one to 128 characters. It can't
-	// contain whitespace or metric names reserved for AWS WAF, for example "All"
-	// and "Default_Action." You can't change a MetricName after you create a VisibilityConfig.
+	// A name of the CloudWatch metric. The name can contain only alphanumeric characters
+	// (A-Z, a-z, 0-9), with length from one to 128 characters. It can't contain
+	// whitespace or metric names reserved for AWS WAF, for example "All" and "Default_Action."
+	// You can't change a MetricName after you create a VisibilityConfig.
 	//
 	// MetricName is a required field
 	MetricName *string `min:"1" type:"string" required:"true"`
@@ -2506,8 +2638,8 @@ type WebACL struct {
 	// DefaultAction is a required field
 	DefaultAction *DefaultAction `type:"structure" required:"true"`
 
-	// A friendly description of the Web ACL. You cannot change the description
-	// of a Web ACL after you create it.
+	// A description of the Web ACL that helps with identification. You cannot change
+	// the description of a Web ACL after you create it.
 	Description *string `min:"1" type:"string"`
 
 	// A unique identifier for the WebACL. This ID is returned in the responses
@@ -2517,11 +2649,38 @@ type WebACL struct {
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
 
-	// A friendly name of the Web ACL. You cannot change the name of a Web ACL after
-	// you create it.
+	// Indicates whether this web ACL is managed by AWS Firewall Manager. If true,
+	// then only AWS Firewall Manager can delete the web ACL or any Firewall Manager
+	// rule groups in the web ACL.
+	ManagedByFirewallManager *bool `type:"boolean"`
+
+	// The name of the Web ACL. You cannot change the name of a Web ACL after you
+	// create it.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
+
+	// The last set of rules for AWS WAF to process in the web ACL. This is defined
+	// in an AWS Firewall Manager WAF policy and contains only rule group references.
+	// You can't alter these. Any rules and rule groups that you define for the
+	// web ACL are prioritized before these.
+	//
+	// In the Firewall Manager WAF policy, the Firewall Manager administrator can
+	// define a set of rule groups to run first in the web ACL and a set of rule
+	// groups to run last. Within each set, the administrator prioritizes the rule
+	// groups, to determine their relative processing order.
+	PostProcessFirewallManagerRuleGroups []FirewallManagerRuleGroup `type:"list"`
+
+	// The first set of rules for AWS WAF to process in the web ACL. This is defined
+	// in an AWS Firewall Manager WAF policy and contains only rule group references.
+	// You can't alter these. Any rules and rule groups that you define for the
+	// web ACL are prioritized after these.
+	//
+	// In the Firewall Manager WAF policy, the Firewall Manager administrator can
+	// define a set of rule groups to run first in the web ACL and a set of rule
+	// groups to run last. Within each set, the administrator prioritizes the rule
+	// groups, to determine their relative processing order.
+	PreProcessFirewallManagerRuleGroups []FirewallManagerRuleGroup `type:"list"`
 
 	// The Rule statements used to identify the web requests that you want to allow,
 	// block, or count. Each rule includes one top-level statement that AWS WAF
@@ -2554,8 +2713,8 @@ type WebACLSummary struct {
 	// The Amazon Resource Name (ARN) of the entity.
 	ARN *string `min:"20" type:"string"`
 
-	// A friendly description of the Web ACL. You cannot change the description
-	// of a Web ACL after you create it.
+	// A description of the Web ACL that helps with identification. You cannot change
+	// the description of a Web ACL after you create it.
 	Description *string `min:"1" type:"string"`
 
 	// The unique identifier for the Web ACL. This ID is returned in the responses
@@ -2573,8 +2732,8 @@ type WebACLSummary struct {
 	// operation.
 	LockToken *string `min:"1" type:"string"`
 
-	// A friendly name of the Web ACL. You cannot change the name of a Web ACL after
-	// you create it.
+	// The name of the Web ACL. You cannot change the name of a Web ACL after you
+	// create it.
 	Name *string `min:"1" type:"string"`
 }
 
@@ -2607,8 +2766,8 @@ type XssMatchStatement struct {
 	// Text transformations eliminate some of the unusual formatting that attackers
 	// use in web requests in an effort to bypass detection. If you specify one
 	// or more transformations in a rule statement, AWS WAF performs all transformations
-	// on the content identified by FieldToMatch, starting from the lowest priority
-	// setting, before inspecting the content for a match.
+	// on the content of the request component identified by FieldToMatch, starting
+	// from the lowest priority setting, before inspecting the content for a match.
 	//
 	// TextTransformations is a required field
 	TextTransformations []TextTransformation `min:"1" type:"list" required:"true"`

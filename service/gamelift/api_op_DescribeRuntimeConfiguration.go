@@ -58,13 +58,19 @@ const opDescribeRuntimeConfiguration = "DescribeRuntimeConfiguration"
 // DescribeRuntimeConfigurationRequest returns a request value for making API operation for
 // Amazon GameLift.
 //
-// Retrieves the current runtime configuration for the specified fleet. The
-// runtime configuration tells Amazon GameLift how to launch server processes
-// on instances in the fleet.
+// Retrieves a fleet's runtime configuration settings. The runtime configuration
+// tells Amazon GameLift which server processes to run (and how) on each instance
+// in the fleet.
+//
+// To get a runtime configuration, specify the fleet's unique identifier. If
+// successful, a RuntimeConfiguration object is returned for the requested fleet.
+// If the requested fleet has been deleted, the result set is empty.
 //
 // Learn more
 //
-//  Working with Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html).
+// Setting up GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+//
+// Running Multiple Processes on a Fleet (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html)
 //
 // Related operations
 //
@@ -80,7 +86,7 @@ const opDescribeRuntimeConfiguration = "DescribeRuntimeConfiguration"
 //
 //    * UpdateFleetAttributes
 //
-//    * Manage fleet actions: StartFleetActions StopFleetActions
+//    * StartFleetActions or StopFleetActions
 //
 //    // Example sending a request using DescribeRuntimeConfigurationRequest.
 //    req := client.DescribeRuntimeConfigurationRequest(params)

@@ -19,7 +19,7 @@ type GetFindingsInput struct {
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// IDs of the findings that you want to retrieve.
+	// The IDs of the findings that you want to retrieve.
 	//
 	// FindingIds is a required field
 	FindingIds []string `locationName:"findingIds" type:"list" required:"true"`

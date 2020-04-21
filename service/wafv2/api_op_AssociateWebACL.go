@@ -83,9 +83,10 @@ const opAssociateWebACL = "AssociateWebACL"
 // resource. A regional application can be an Application Load Balancer (ALB)
 // or an API Gateway stage.
 //
-// For AWS CloudFront, you can associate the Web ACL by providing the ARN of
-// the WebACL to the CloudFront API call UpdateDistribution. For information,
-// see UpdateDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html).
+// For AWS CloudFront, don't use this call. Instead, use your CloudFront distribution
+// configuration. To associate a Web ACL, in the CloudFront call UpdateDistribution,
+// set the web ACL ID to the Amazon Resource Name (ARN) of the Web ACL. For
+// information, see UpdateDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html).
 //
 //    // Example sending a request using AssociateWebACLRequest.
 //    req := client.AssociateWebACLRequest(params)

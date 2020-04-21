@@ -12,6 +12,13 @@ import (
 type GetRightsizingRecommendationInput struct {
 	_ struct{} `type:"structure"`
 
+	// Enables you to customize recommendations across two attributes. You can choose
+	// to view recommendations for instances within the same instance families or
+	// across different instance families. You can also choose to view your estimated
+	// savings associated with recommendations with consideration of existing Savings
+	// Plans or RI benefits, or niether.
+	Configuration *RightsizingRecommendationConfiguration `type:"structure"`
+
 	// Use Expression to filter by cost or by usage. There are two patterns:
 	//
 	//    * Simple dimension values - You can set the dimension name and values
@@ -69,6 +76,11 @@ func (s *GetRightsizingRecommendationInput) Validate() error {
 	if s.Service == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Service"))
 	}
+	if s.Configuration != nil {
+		if err := s.Configuration.Validate(); err != nil {
+			invalidParams.AddNested("Configuration", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.Filter != nil {
 		if err := s.Filter.Validate(); err != nil {
 			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
@@ -83,6 +95,13 @@ func (s *GetRightsizingRecommendationInput) Validate() error {
 
 type GetRightsizingRecommendationOutput struct {
 	_ struct{} `type:"structure"`
+
+	// Enables you to customize recommendations across two attributes. You can choose
+	// to view recommendations for instances within the same instance families or
+	// across different instance families. You can also choose to view your estimated
+	// savings associated with recommendations with consideration of existing Savings
+	// Plans or RI benefits, or niether.
+	Configuration *RightsizingRecommendationConfiguration `type:"structure"`
 
 	// Information regarding this specific recommendation set.
 	Metadata *RightsizingRecommendationMetadata `type:"structure"`

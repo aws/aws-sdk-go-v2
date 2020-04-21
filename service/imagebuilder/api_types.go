@@ -943,6 +943,12 @@ type Image struct {
 	// The distribution configuration used when creating this image.
 	DistributionConfiguration *DistributionConfiguration `locationName:"distributionConfiguration" type:"structure"`
 
+	// Collects additional information about the image being created, including
+	// the operating system (OS) version and package list. This information is used
+	// to enhance the overall experience of using EC2 Image Builder. Enabled by
+	// default.
+	EnhancedImageMetadataEnabled *bool `locationName:"enhancedImageMetadataEnabled" type:"boolean"`
+
 	// The image recipe used when creating the image.
 	ImageRecipe *ImageRecipe `locationName:"imageRecipe" type:"structure"`
 
@@ -954,6 +960,10 @@ type Image struct {
 
 	// The name of the image.
 	Name *string `locationName:"name" type:"string"`
+
+	// The operating system version of the instance. For example, Amazon Linux 2,
+	// Ubuntu 18, or Microsoft Windows Server 2019.
+	OsVersion *string `locationName:"osVersion" min:"1" type:"string"`
 
 	// The output resources produced when creating this image.
 	OutputResources *OutputResources `locationName:"outputResources" type:"structure"`
@@ -1002,6 +1012,12 @@ func (s Image) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "distributionConfiguration", v, metadata)
 	}
+	if s.EnhancedImageMetadataEnabled != nil {
+		v := *s.EnhancedImageMetadataEnabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enhancedImageMetadataEnabled", protocol.BoolValue(v), metadata)
+	}
 	if s.ImageRecipe != nil {
 		v := s.ImageRecipe
 
@@ -1025,6 +1041,12 @@ func (s Image) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OsVersion != nil {
+		v := *s.OsVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "osVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.OutputResources != nil {
 		v := s.OutputResources
@@ -1103,6 +1125,12 @@ type ImagePipeline struct {
 	// with this image pipeline.
 	DistributionConfigurationArn *string `locationName:"distributionConfigurationArn" type:"string"`
 
+	// Collects additional information about the image being created, including
+	// the operating system (OS) version and package list. This information is used
+	// to enhance the overall experience of using EC2 Image Builder. Enabled by
+	// default.
+	EnhancedImageMetadataEnabled *bool `locationName:"enhancedImageMetadataEnabled" type:"boolean"`
+
 	// The Amazon Resource Name (ARN) of the image recipe associated with this image
 	// pipeline.
 	ImageRecipeArn *string `locationName:"imageRecipeArn" type:"string"`
@@ -1178,6 +1206,12 @@ func (s ImagePipeline) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "distributionConfigurationArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EnhancedImageMetadataEnabled != nil {
+		v := *s.EnhancedImageMetadataEnabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enhancedImageMetadataEnabled", protocol.BoolValue(v), metadata)
 	}
 	if s.ImageRecipeArn != nil {
 		v := *s.ImageRecipeArn
@@ -1498,6 +1532,10 @@ type ImageSummary struct {
 	// The name of the image.
 	Name *string `locationName:"name" type:"string"`
 
+	// The operating system version of the instance. For example, Amazon Linux 2,
+	// Ubuntu 18, or Microsoft Windows Server 2019.
+	OsVersion *string `locationName:"osVersion" min:"1" type:"string"`
+
 	// The output resources produced when creating this image.
 	OutputResources *OutputResources `locationName:"outputResources" type:"structure"`
 
@@ -1541,6 +1579,12 @@ func (s ImageSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OsVersion != nil {
+		v := *s.OsVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "osVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.OutputResources != nil {
 		v := s.OutputResources
@@ -1646,6 +1690,10 @@ type ImageVersion struct {
 	// The name of the image semantic version.
 	Name *string `locationName:"name" type:"string"`
 
+	// The operating system version of the instance. For example, Amazon Linux 2,
+	// Ubuntu 18, or Microsoft Windows Server 2019.
+	OsVersion *string `locationName:"osVersion" min:"1" type:"string"`
+
 	// The owner of the image semantic version.
 	Owner *string `locationName:"owner" min:"1" type:"string"`
 
@@ -1680,6 +1728,12 @@ func (s ImageVersion) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OsVersion != nil {
+		v := *s.OsVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "osVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Owner != nil {
 		v := *s.Owner

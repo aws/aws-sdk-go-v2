@@ -19,7 +19,7 @@ type ArchiveFindingsInput struct {
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// IDs of the findings that you want to archive.
+	// The IDs of the findings that you want to archive.
 	//
 	// FindingIds is a required field
 	FindingIds []string `locationName:"findingIds" type:"list" required:"true"`
@@ -95,9 +95,9 @@ const opArchiveFindings = "ArchiveFindings"
 // ArchiveFindingsRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Archives GuardDuty findings specified by the list of finding IDs.
+// Archives GuardDuty findings that are specified by the list of finding IDs.
 //
-// Only the master account can archive findings. Member accounts do not have
+// Only the master account can archive findings. Member accounts don't have
 // permission to archive findings from their accounts.
 //
 //    // Example sending a request using ArchiveFindingsRequest.

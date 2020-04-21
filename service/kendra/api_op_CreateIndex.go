@@ -12,6 +12,11 @@ import (
 type CreateIndexInput struct {
 	_ struct{} `type:"structure"`
 
+	// A token that you provide to identify the request to create an index. Multiple
+	// calls to the CreateIndex operation with the same client token will create
+	// only one index.”
+	ClientToken *string `min:"1" type:"string" idempotencyToken:"true"`
+
 	// A description for the index.
 	Description *string `min:"1" type:"string"`
 
@@ -40,6 +45,9 @@ func (s CreateIndexInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateIndexInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateIndexInput"}
+	if s.ClientToken != nil && len(*s.ClientToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 1))
+	}
 	if s.Description != nil && len(*s.Description) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}

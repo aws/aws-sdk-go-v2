@@ -13,7 +13,7 @@ import (
 type DeleteHumanLoopInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the human loop you want to delete.
+	// The name of the human loop that you want to delete.
 	//
 	// HumanLoopName is a required field
 	HumanLoopName *string `location:"uri" locationName:"HumanLoopName" min:"1" type:"string" required:"true"`

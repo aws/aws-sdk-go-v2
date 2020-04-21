@@ -49,12 +49,6 @@ func (s *DescribeCostCategoryDefinitionInput) Validate() error {
 type DescribeCostCategoryDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
-	//
-	//  Cost Category is in public beta for AWS Billing and Cost Management and
-	//  is subject to change. Your use of Cost Categories is subject to the Beta
-	//  Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-	//  (Section 1.10).
-	//
 	// The structure of Cost Categories. This includes detailed metadata and the
 	// set of rules for the CostCategory object.
 	CostCategory *CostCategory `type:"structure"`
@@ -69,12 +63,6 @@ const opDescribeCostCategoryDefinition = "DescribeCostCategoryDefinition"
 
 // DescribeCostCategoryDefinitionRequest returns a request value for making API operation for
 // AWS Cost Explorer Service.
-//
-//
-//  Cost Category is in public beta for AWS Billing and Cost Management and
-//  is subject to change. Your use of Cost Categories is subject to the Beta
-//  Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-//  (Section 1.10).
 //
 // Returns the name, ARN, rules, definition, and effective dates of a Cost Category
 // that's defined in the account.

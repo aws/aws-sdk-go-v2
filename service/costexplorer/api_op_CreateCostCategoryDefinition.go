@@ -23,14 +23,8 @@ type CreateCostCategoryDefinitionInput struct {
 	// RuleVersion is a required field
 	RuleVersion CostCategoryRuleVersion `type:"string" required:"true" enum:"true"`
 
-	// CreateCostCategoryDefinition supports dimensions, Tags, and nested expressions.
-	// Currently the only dimensions supported is LINKED_ACCOUNT.
-	//
-	// Root level OR is not supported. We recommend you create a separate rule instead.
-	//
-	// Rules are processed in order. If there are multiple rules that match the
-	// line item, then the first rule to match is used to determine that Cost Category
-	// value.
+	// The Cost Category rules used to categorize costs. For more information, see
+	// CostCategoryRule (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html).
 	//
 	// Rules is a required field
 	Rules []CostCategoryRule `min:"1" type:"list" required:"true"`
@@ -94,12 +88,6 @@ const opCreateCostCategoryDefinition = "CreateCostCategoryDefinition"
 
 // CreateCostCategoryDefinitionRequest returns a request value for making API operation for
 // AWS Cost Explorer Service.
-//
-//
-//  Cost Category is in public beta for AWS Billing and Cost Management and
-//  is subject to change. Your use of Cost Categories is subject to the Beta
-//  Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-//  (Section 1.10).
 //
 // Creates a new Cost Category with the requested name and rules.
 //

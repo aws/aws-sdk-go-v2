@@ -109,8 +109,6 @@ const opListInvitations = "ListInvitations"
 // ListInvitationsRequest returns a request value for making API operation for
 // Amazon Detective.
 //
-// Amazon Detective is currently in preview.
-//
 // Retrieves the list of open and accepted behavior graph invitations for the
 // member account. This operation can only be called by a member account.
 //

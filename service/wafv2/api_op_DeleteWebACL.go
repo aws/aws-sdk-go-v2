@@ -31,8 +31,8 @@ type DeleteWebACLInput struct {
 	// LockToken is a required field
 	LockToken *string `min:"1" type:"string" required:"true"`
 
-	// A friendly name of the Web ACL. You cannot change the name of a Web ACL after
-	// you create it.
+	// The name of the Web ACL. You cannot change the name of a Web ACL after you
+	// create it.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
@@ -44,7 +44,7 @@ type DeleteWebACLInput struct {
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
 	//
-	//    * CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT
+	//    * CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT
 	//    --region=us-east-1.
 	//
 	//    * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -112,6 +112,9 @@ const opDeleteWebACL = "DeleteWebACL"
 // the prior release, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 //
 // Deletes the specified WebACL.
+//
+// You can only use this if ManagedByFirewallManager is false in the specified
+// WebACL.
 //
 //    // Example sending a request using DeleteWebACLRequest.
 //    req := client.DeleteWebACLRequest(params)

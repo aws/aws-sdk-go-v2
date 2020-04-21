@@ -54,6 +54,9 @@ type AddOutputRequest struct {
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi-based streams.
 	StreamId *string `locationName:"streamId" type:"string"`
+
+	// The name of the VPC interface attachment to use for this output.
+	VpcInterfaceAttachment *VpcInterfaceAttachment `locationName:"vpcInterfaceAttachment" type:"structure"`
 }
 
 // String returns the string representation
@@ -152,6 +155,12 @@ func (s AddOutputRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "streamId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VpcInterfaceAttachment != nil {
+		v := s.VpcInterfaceAttachment
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "vpcInterfaceAttachment", v, metadata)
 	}
 	return nil
 }
@@ -372,6 +381,38 @@ func (s Entitlement) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The settings for source failover
+type FailoverConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Search window time to look for dash-7 packets
+	RecoveryWindow *int64 `locationName:"recoveryWindow" type:"integer"`
+
+	State State `locationName:"state" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s FailoverConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FailoverConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.RecoveryWindow != nil {
+		v := *s.RecoveryWindow
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "recoveryWindow", protocol.Int64Value(v), metadata)
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // The settings for a flow, including its source, outputs, and entitlements.
 type Flow struct {
 	_ struct{} `type:"structure"`
@@ -415,10 +456,18 @@ type Flow struct {
 	// Source is a required field
 	Source *Source `locationName:"source" type:"structure" required:"true"`
 
+	// The settings for source failover
+	SourceFailoverConfig *FailoverConfig `locationName:"sourceFailoverConfig" type:"structure"`
+
+	Sources []Source `locationName:"sources" type:"list"`
+
 	// The current status of the flow.
 	//
 	// Status is a required field
 	Status Status `locationName:"status" type:"string" required:"true" enum:"true"`
+
+	// The VPC Interfaces for this flow.
+	VpcInterfaces []VpcInterface `locationName:"vpcInterfaces" type:"list"`
 }
 
 // String returns the string representation
@@ -488,11 +537,41 @@ func (s Flow) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "source", v, metadata)
 	}
+	if s.SourceFailoverConfig != nil {
+		v := s.SourceFailoverConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "sourceFailoverConfig", v, metadata)
+	}
+	if s.Sources != nil {
+		v := s.Sources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "sources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.VpcInterfaces != nil {
+		v := s.VpcInterfaces
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "vpcInterfaces", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -793,6 +872,9 @@ type Output struct {
 
 	// Attributes related to the transport stream that are used in the output.
 	Transport *Transport `locationName:"transport" type:"structure"`
+
+	// The name of the VPC interface attachment to use for this output.
+	VpcInterfaceAttachment *VpcInterfaceAttachment `locationName:"vpcInterfaceAttachment" type:"structure"`
 }
 
 // String returns the string representation
@@ -862,6 +944,12 @@ func (s Output) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "transport", v, metadata)
 	}
+	if s.VpcInterfaceAttachment != nil {
+		v := s.VpcInterfaceAttachment
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "vpcInterfaceAttachment", v, metadata)
+	}
 	return nil
 }
 
@@ -900,6 +988,9 @@ type SetSourceRequest struct {
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi-based streams.
 	StreamId *string `locationName:"streamId" type:"string"`
+
+	// The name of the VPC interface to use for this source.
+	VpcInterfaceName *string `locationName:"vpcInterfaceName" type:"string"`
 
 	// The range of IP addresses that should be allowed to contribute content to
 	// your source. These IP addresses should be in the form of a Classless Inter-Domain
@@ -983,6 +1074,12 @@ func (s SetSourceRequest) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "streamId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.VpcInterfaceName != nil {
+		v := *s.VpcInterfaceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "vpcInterfaceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.WhitelistCidr != nil {
 		v := *s.WhitelistCidr
 
@@ -1029,6 +1126,9 @@ type Source struct {
 
 	// Attributes related to the transport stream that are used in the source.
 	Transport *Transport `locationName:"transport" type:"structure"`
+
+	// The name of the VPC Interface this Source is configured with.
+	VpcInterfaceName *string `locationName:"vpcInterfaceName" type:"string"`
 
 	// The range of IP addresses that should be allowed to contribute content to
 	// your source. These IP addresses should be in the form of a Classless Inter-Domain
@@ -1096,6 +1196,12 @@ func (s Source) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "transport", v, metadata)
+	}
+	if s.VpcInterfaceName != nil {
+		v := *s.VpcInterfaceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "vpcInterfaceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.WhitelistCidr != nil {
 		v := *s.WhitelistCidr
@@ -1303,6 +1409,236 @@ func (s UpdateEncryption) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The settings for source failover
+type UpdateFailoverConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Recovery window time to look for dash-7 packets
+	RecoveryWindow *int64 `locationName:"recoveryWindow" type:"integer"`
+
+	State State `locationName:"state" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s UpdateFailoverConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateFailoverConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.RecoveryWindow != nil {
+		v := *s.RecoveryWindow
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "recoveryWindow", protocol.Int64Value(v), metadata)
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// The settings for a VPC Source.
+type VpcInterface struct {
+	_ struct{} `type:"structure"`
+
+	// Immutable and has to be a unique against other VpcInterfaces in this Flow
+	//
+	// Name is a required field
+	Name *string `locationName:"name" type:"string" required:"true"`
+
+	// IDs of the network interfaces created in customer's account by MediaConnect.
+	//
+	// NetworkInterfaceIds is a required field
+	NetworkInterfaceIds []string `locationName:"networkInterfaceIds" type:"list" required:"true"`
+
+	// Role Arn MediaConnect can assumes to create ENIs in customer's account
+	//
+	// RoleArn is a required field
+	RoleArn *string `locationName:"roleArn" type:"string" required:"true"`
+
+	// Security Group IDs to be used on ENI.
+	//
+	// SecurityGroupIds is a required field
+	SecurityGroupIds []string `locationName:"securityGroupIds" type:"list" required:"true"`
+
+	// Subnet must be in the AZ of the Flow
+	//
+	// SubnetId is a required field
+	SubnetId *string `locationName:"subnetId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VpcInterface) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VpcInterface) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.NetworkInterfaceIds != nil {
+		v := s.NetworkInterfaceIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "networkInterfaceIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SecurityGroupIds != nil {
+		v := s.SecurityGroupIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "securityGroupIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.SubnetId != nil {
+		v := *s.SubnetId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "subnetId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The settings for attaching a VPC interface to an output.
+type VpcInterfaceAttachment struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the VPC interface to use for this output.
+	VpcInterfaceName *string `locationName:"vpcInterfaceName" type:"string"`
+}
+
+// String returns the string representation
+func (s VpcInterfaceAttachment) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VpcInterfaceAttachment) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VpcInterfaceName != nil {
+		v := *s.VpcInterfaceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "vpcInterfaceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Desired VPC Interface for a Flow
+type VpcInterfaceRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the VPC Interface. This value must be unique within the current
+	// flow.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" type:"string" required:"true"`
+
+	// Role Arn MediaConnect can assumes to create ENIs in customer's account
+	//
+	// RoleArn is a required field
+	RoleArn *string `locationName:"roleArn" type:"string" required:"true"`
+
+	// Security Group IDs to be used on ENI.
+	//
+	// SecurityGroupIds is a required field
+	SecurityGroupIds []string `locationName:"securityGroupIds" type:"list" required:"true"`
+
+	// Subnet must be in the AZ of the Flow
+	//
+	// SubnetId is a required field
+	SubnetId *string `locationName:"subnetId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VpcInterfaceRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VpcInterfaceRequest) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VpcInterfaceRequest"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if s.RoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
+
+	if s.SecurityGroupIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SecurityGroupIds"))
+	}
+
+	if s.SubnetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VpcInterfaceRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SecurityGroupIds != nil {
+		v := s.SecurityGroupIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "securityGroupIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.SubnetId != nil {
+		v := *s.SubnetId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "subnetId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

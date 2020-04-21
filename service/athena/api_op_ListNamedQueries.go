@@ -19,7 +19,9 @@ type ListNamedQueriesInput struct {
 	// was truncated.
 	NextToken *string `min:"1" type:"string"`
 
-	// The name of the workgroup from which the named queries are being returned.
+	// The name of the workgroup from which the named queries are returned. If a
+	// workgroup is not specified, the saved queries for the primary workgroup are
+	// returned.
 	WorkGroup *string `type:"string"`
 }
 
@@ -62,7 +64,8 @@ const opListNamedQueries = "ListNamedQueries"
 // Amazon Athena.
 //
 // Provides a list of available query IDs only for queries saved in the specified
-// workgroup. Requires that you have access to the workgroup.
+// workgroup. Requires that you have access to the workgroup. If a workgroup
+// is not specified, lists the saved queries for the primary workgroup.
 //
 // For code samples using the AWS SDK for Java, see Examples and Code Samples
 // (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the Amazon
