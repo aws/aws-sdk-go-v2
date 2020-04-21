@@ -5,6 +5,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -333,16 +334,45 @@ func TestSendHandler_HEADNoBody(t *testing.T) {
 
 func TestRequestInvocationIDHeaderHandler(t *testing.T) {
 	cfg := unit.Config()
-	r := aws.New(cfg, aws.Metadata{}, cfg.Handlers, aws.NoOpRetryer{}, &aws.Operation{},
+	cfg.Handlers.Send.Clear()
+
+	var invokeID string
+	cfg.Handlers.Build.PushBack(func(r *aws.Request) {
+		invokeID = r.InvocationID
+		if len(invokeID) == 0 {
+			t.Fatalf("expect non-empty invocation id")
+		}
+	})
+	cfg.Handlers.Send.PushBack(func(r *aws.Request) {
+		if e, a := invokeID, r.InvocationID; e != a {
+			t.Errorf("expect %v invoke ID, got %v", e, a)
+		}
+		r.Error = &aws.RequestSendError{Err: io.ErrUnexpectedEOF}
+	})
+	retryer := retry.NewStandard(func(o *retry.StandardOptions) {
+		o.MaxAttempts = 3
+	})
+	r := aws.New(cfg, aws.Metadata{}, cfg.Handlers, retryer, &aws.Operation{},
 		&struct{}{}, struct{}{})
 
 	if len(r.InvocationID) == 0 {
 		t.Fatalf("expect invocation id, got none")
 	}
 
-	defaults.RequestInvocationIDHeaderHandler.Fn(r)
-	if r.Error != nil {
-		t.Fatalf("expect no error, got %v", r.Error)
+	err := r.Send()
+	if err == nil {
+		t.Fatalf("expect error got on")
+	}
+	var maxErr *aws.MaxAttemptsError
+	if !errors.As(err, &maxErr) {
+		t.Fatalf("expect max errors, got %v", err)
+	} else {
+		if e, a := 3, maxErr.Attempt; e != a {
+			t.Errorf("expect %v attempts, got %v", e, a)
+		}
+	}
+	if len(invokeID) == 0 {
+		t.Fatalf("expect non-empty invocation id")
 	}
 
 	if e, a := r.InvocationID, r.HTTPRequest.Header.Get("amz-sdk-invocation-id"); e != a {
