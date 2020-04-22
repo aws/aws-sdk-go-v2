@@ -565,24 +565,22 @@ func (p postContentSerializeMiddleware) HandleSerialize(ctx context.Context, in 
 
 	restEncoder := rest.NewEncoder(request.Request)
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
 	if err := serializePostContentInputAWSREST(params, restEncoder); err != nil {
-		return middleware.SerializeOutput{}, metadata, err
+		return out, metadata, err
 	}
 
 	if err := serializePostContentAWSPayload(params, request); err != nil {
-		return middleware.SerializeOutput{}, metadata, err
+		return out, metadata, err
 	}
 
 	return next.HandleSerialize(ctx, in)
 }
 
-func serializePostContentAWSPayload(v *PostContentInput, request *smithyHTTP.Request) error {
+func serializePostContentAWSPayload(v *PostContentInput, request *smithyHTTP.Request) (err error) {
 	if v.InputStream != nil {
-		request.Stream = v.InputStream
+		request, err = request.SetStream(v.InputStream)
 	}
-	return nil
+	return err
 }
 
 func serializePostContentInputAWSREST(v *PostContentInput, encoder *rest.Encoder) error {

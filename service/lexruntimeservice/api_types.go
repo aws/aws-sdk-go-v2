@@ -3,6 +3,8 @@
 package lexruntimeservice
 
 import (
+	"fmt"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/json"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -491,8 +493,7 @@ func (s SentimentResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 func serializeIntentSummaryListAWSJSON(v []IntentSummary, value json.Value) error {
 	if v == nil {
-		value.Null()
-		return nil
+		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
 	array := value.Array()
@@ -509,8 +510,7 @@ func serializeIntentSummaryListAWSJSON(v []IntentSummary, value json.Value) erro
 
 func serializeIntentSummaryAWSJSON(v *IntentSummary, value json.Value) error {
 	if v == nil {
-		value.Null()
-		return nil
+		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
 	object := value.Object()
@@ -552,8 +552,7 @@ func serializeIntentSummaryAWSJSON(v *IntentSummary, value json.Value) error {
 
 func serializeDialogActionAWSJSON(v *DialogAction, value json.Value) error {
 	if v == nil {
-		value.Null()
-		return nil
+		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
 	object := value.Object()
@@ -595,8 +594,7 @@ func serializeDialogActionAWSJSON(v *DialogAction, value json.Value) error {
 
 func serializeStringMapAWSJSON(v map[string]string, value json.Value) error {
 	if v == nil {
-		value.Null()
-		return nil
+		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
 	object := value.Object()

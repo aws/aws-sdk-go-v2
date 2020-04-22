@@ -493,12 +493,12 @@ func (p postTextSerializeMiddleware) HandleSerialize(ctx context.Context, in mid
 	restEncoder.AddHeader("Content-Type").String("application/json")
 
 	if err := serializePostTextInputAWSREST(input, restEncoder); err != nil {
-		return middleware.SerializeOutput{}, metadata, err
+		return out, metadata, err
 	}
 
 	jsonEncoder := json.NewEncoder()
 	if err := serializePostTextInputAWSJSON(input, jsonEncoder.Value); err != nil {
-		return middleware.SerializeOutput{}, metadata, err
+		return out, metadata, err
 	}
 
 	request.Stream = bytes.NewReader(jsonEncoder.Bytes())

@@ -421,12 +421,12 @@ func (p putSessionSerializeMiddleware) HandleSerialize(ctx context.Context, in m
 	restEncoder.AddHeader("Content-Type").String("application/json")
 
 	if err := serializePutSessionInputAWSREST(input, restEncoder); err != nil {
-		return middleware.SerializeOutput{}, metadata, err
+		return out, metadata, err
 	}
 
 	jsonEncoder := json.NewEncoder()
 	if err := serializePutSessionInputAWSJSON(input, jsonEncoder.Value); err != nil {
-		return middleware.SerializeOutput{}, metadata, err
+		return out, metadata, err
 	}
 
 	request.Stream = bytes.NewReader(jsonEncoder.Bytes())

@@ -229,10 +229,8 @@ func (g deleteSessionSerializeMiddleware) HandleSerialize(ctx context.Context, i
 
 	restEncoder := rest.NewEncoder(request.Request)
 
-	restEncoder.AddHeader("Content-Type").String("application/json")
-
 	if err := serializeDeleteSessionInputAWSREST(input, restEncoder); err != nil {
-		return middleware.SerializeOutput{}, metadata, err
+		return out, metadata, err
 	}
 
 	return next.HandleSerialize(ctx, in)
