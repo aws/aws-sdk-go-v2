@@ -120,6 +120,64 @@ func (s ConfigurationProfileSummary) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
+// An object that describes a deployment event.
+type DeploymentEvent struct {
+	_ struct{} `type:"structure"`
+
+	// A description of the deployment event. Descriptions include, but are not
+	// limited to, the user account or the CloudWatch alarm ARN that initiated a
+	// rollback, the percentage of hosts that received the deployment, or in the
+	// case of an internal error, a recommendation to attempt a new deployment.
+	Description *string `type:"string"`
+
+	// The type of deployment event. Deployment event types include the start, stop,
+	// or completion of a deployment; a percentage update; the start or stop of
+	// a bake period; the start or completion of a rollback.
+	EventType DeploymentEventType `type:"string" enum:"true"`
+
+	// The date and time the event occurred.
+	OccurredAt *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// The entity that triggered the deployment event. Events can be triggered by
+	// a user, AWS AppConfig, an Amazon CloudWatch alarm, or an internal error.
+	TriggeredBy TriggeredBy `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s DeploymentEvent) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeploymentEvent) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.EventType) > 0 {
+		v := s.EventType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EventType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.OccurredAt != nil {
+		v := *s.OccurredAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OccurredAt",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	if len(s.TriggeredBy) > 0 {
+		v := s.TriggeredBy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TriggeredBy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 type DeploymentStrategy struct {
 	_ struct{} `type:"structure"`
 

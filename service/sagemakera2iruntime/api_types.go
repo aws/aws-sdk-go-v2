@@ -139,17 +139,18 @@ type HumanLoopSummary struct {
 	// When Amazon Augmented AI created the human loop.
 	CreationTime *time.Time `type:"timestamp"`
 
-	// The reason why the human loop failed. A failure reason is returned only when
-	// the status of the human loop is Failed.
+	// The reason why the human loop failed. A failure reason is returned when the
+	// status of the human loop is Failed.
 	FailureReason *string `type:"string"`
 
-	// The Amazon Resource Name (ARN) of the flow definition.
+	// The Amazon Resource Name (ARN) of the flow definition used to configure the
+	// human loop.
 	FlowDefinitionArn *string `type:"string"`
 
 	// The name of the human loop.
 	HumanLoopName *string `min:"1" type:"string"`
 
-	// The status of the human loop. Valid values:
+	// The status of the human loop.
 	HumanLoopStatus HumanLoopStatus `type:"string" enum:"true"`
 }
 

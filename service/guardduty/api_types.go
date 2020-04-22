@@ -15,7 +15,7 @@ var _ = awsutil.Prettify
 type AccessKeyDetails struct {
 	_ struct{} `type:"structure"`
 
-	// Access key ID of the user.
+	// The access key ID of the user.
 	AccessKeyId *string `locationName:"accessKeyId" type:"string"`
 
 	// The principal ID of the user.
@@ -66,12 +66,12 @@ func (s AccessKeyDetails) MarshalFields(e protocol.FieldEncoder) error {
 type AccountDetail struct {
 	_ struct{} `type:"structure"`
 
-	// Member account ID.
+	// The member account ID.
 	//
 	// AccountId is a required field
 	AccountId *string `locationName:"accountId" min:"12" type:"string" required:"true"`
 
-	// Member account's email address.
+	// The email address of the member account.
 	//
 	// Email is a required field
 	Email *string `locationName:"email" min:"1" type:"string" required:"true"`
@@ -123,11 +123,11 @@ func (s AccountDetail) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about action.
+// Contains information about actions.
 type Action struct {
 	_ struct{} `type:"structure"`
 
-	// GuardDuty Finding activity type.
+	// The GuardDuty finding activity type.
 	ActionType *string `locationName:"actionType" type:"string"`
 
 	// Information about the AWS_API_CALL action described in this finding.
@@ -183,23 +183,57 @@ func (s Action) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The account within the organization specified as the GuardDuty delegated
+// administrator.
+type AdminAccount struct {
+	_ struct{} `type:"structure"`
+
+	// The AWS account ID for the account.
+	AdminAccountId *string `locationName:"adminAccountId" type:"string"`
+
+	// Indicates whether the account is enabled as the delegated administrator.
+	AdminStatus AdminStatus `locationName:"adminStatus" min:"1" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s AdminAccount) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AdminAccount) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AdminAccountId != nil {
+		v := *s.AdminAccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "adminAccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.AdminStatus) > 0 {
+		v := s.AdminStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "adminStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Contains information about the API operation.
 type AwsApiCallAction struct {
 	_ struct{} `type:"structure"`
 
-	// AWS API name.
+	// The AWS API name.
 	Api *string `locationName:"api" type:"string"`
 
-	// AWS API caller type.
+	// The AWS API caller type.
 	CallerType *string `locationName:"callerType" type:"string"`
 
-	// Domain information for the AWS API call.
+	// The domain information for the AWS API call.
 	DomainDetails *DomainDetails `locationName:"domainDetails" type:"structure"`
 
-	// Remote IP information of the connection.
+	// The remote IP information of the connection.
 	RemoteIpDetails *RemoteIpDetails `locationName:"remoteIpDetails" type:"structure"`
 
-	// AWS service name whose API was invoked.
+	// The AWS service name whose API was invoked.
 	ServiceName *string `locationName:"serviceName" type:"string"`
 }
 
@@ -247,7 +281,7 @@ func (s AwsApiCallAction) MarshalFields(e protocol.FieldEncoder) error {
 type City struct {
 	_ struct{} `type:"structure"`
 
-	// City name of the remote IP address.
+	// The city name of the remote IP address.
 	CityName *string `locationName:"cityName" type:"string"`
 }
 
@@ -283,7 +317,7 @@ type Condition struct {
 	// querying for findings.
 	GreaterThan *int64 `locationName:"greaterThan" type:"long"`
 
-	// Represents a greater than equal condition to be applied to a single field
+	// Represents a greater than or equal condition to be applied to a single field
 	// when querying for findings.
 	GreaterThanOrEqual *int64 `locationName:"greaterThanOrEqual" type:"long"`
 
@@ -291,7 +325,7 @@ type Condition struct {
 	// querying for findings.
 	Gt *int64 `locationName:"gt" deprecated:"true" type:"integer"`
 
-	// Represents a greater than equal condition to be applied to a single field
+	// Represents a greater than or equal condition to be applied to a single field
 	// when querying for findings.
 	Gte *int64 `locationName:"gte" deprecated:"true" type:"integer"`
 
@@ -299,23 +333,23 @@ type Condition struct {
 	// for findings.
 	LessThan *int64 `locationName:"lessThan" type:"long"`
 
-	// Represents a less than equal condition to be applied to a single field when
-	// querying for findings.
+	// Represents a less than or equal condition to be applied to a single field
+	// when querying for findings.
 	LessThanOrEqual *int64 `locationName:"lessThanOrEqual" type:"long"`
 
 	// Represents a less than condition to be applied to a single field when querying
 	// for findings.
 	Lt *int64 `locationName:"lt" deprecated:"true" type:"integer"`
 
-	// Represents a less than equal condition to be applied to a single field when
-	// querying for findings.
+	// Represents a less than or equal condition to be applied to a single field
+	// when querying for findings.
 	Lte *int64 `locationName:"lte" deprecated:"true" type:"integer"`
 
 	// Represents the not equal condition to be applied to a single field when querying
 	// for findings.
 	Neq []string `locationName:"neq" deprecated:"true" type:"list"`
 
-	// Represents an not equal condition to be applied to a single field when querying
+	// Represents a not equal condition to be applied to a single field when querying
 	// for findings.
 	NotEquals []string `locationName:"notEquals" type:"list"`
 }
@@ -426,15 +460,14 @@ func (s Condition) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the country in which the remote IP address is
-// located.
+// Contains information about the country where the remote IP address is located.
 type Country struct {
 	_ struct{} `type:"structure"`
 
-	// Country code of the remote IP address.
+	// The country code of the remote IP address.
 	CountryCode *string `locationName:"countryCode" type:"string"`
 
-	// Country name of the remote IP address.
+	// The country name of the remote IP address.
 	CountryName *string `locationName:"countryName" type:"string"`
 }
 
@@ -460,8 +493,8 @@ func (s Country) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about a publishing destination, including the ID, type,
-// and status.
+// Contains information about the publishing destination, including the ID,
+// type, and status.
 type Destination struct {
 	_ struct{} `type:"structure"`
 
@@ -471,7 +504,7 @@ type Destination struct {
 	DestinationId *string `locationName:"destinationId" type:"string" required:"true"`
 
 	// The type of resource used for the publishing destination. Currently, only
-	// S3 is supported.
+	// Amazon S3 buckets are supported.
 	//
 	// DestinationType is a required field
 	DestinationType DestinationType `locationName:"destinationType" min:"1" type:"string" required:"true" enum:"true"`
@@ -510,8 +543,8 @@ func (s Destination) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains the ARN of the resource to publish to, such as an S3 bucket, and
-// the ARN of the KMS key to use to encrypt published findings.
+// Contains the Amazon Resource Name (ARN) of the resource to publish to, such
+// as an S3 bucket, and the ARN of the KMS key to use to encrypt published findings.
 type DestinationProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -548,7 +581,7 @@ func (s DestinationProperties) MarshalFields(e protocol.FieldEncoder) error {
 type DnsRequestAction struct {
 	_ struct{} `type:"structure"`
 
-	// Domain information for the API request.
+	// The domain information for the API request.
 	Domain *string `locationName:"domain" type:"string"`
 }
 
@@ -572,7 +605,7 @@ func (s DnsRequestAction) MarshalFields(e protocol.FieldEncoder) error {
 type DomainDetails struct {
 	_ struct{} `type:"structure"`
 
-	// Domain information for the AWS API call.
+	// The domain information for the AWS API call.
 	Domain *string `locationName:"domain" type:"string"`
 }
 
@@ -632,7 +665,7 @@ type Finding struct {
 	// AccountId is a required field
 	AccountId *string `locationName:"accountId" type:"string" required:"true"`
 
-	// The ARN for the finding.
+	// The ARN of the finding.
 	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" type:"string" required:"true"`
@@ -640,7 +673,7 @@ type Finding struct {
 	// The confidence score for the finding.
 	Confidence *float64 `locationName:"confidence" type:"double"`
 
-	// The time and date at which the finding was created.
+	// The time and date when the finding was created.
 	//
 	// CreatedAt is a required field
 	CreatedAt *string `locationName:"createdAt" type:"string" required:"true"`
@@ -656,7 +689,7 @@ type Finding struct {
 	// The partition associated with the finding.
 	Partition *string `locationName:"partition" type:"string"`
 
-	// The Region in which the finding was generated.
+	// The Region where the finding was generated.
 	//
 	// Region is a required field
 	Region *string `locationName:"region" type:"string" required:"true"`
@@ -680,15 +713,15 @@ type Finding struct {
 	// Severity is a required field
 	Severity *float64 `locationName:"severity" type:"double" required:"true"`
 
-	// The title for the finding.
+	// The title of the finding.
 	Title *string `locationName:"title" type:"string"`
 
-	// The type of the finding.
+	// The type of finding.
 	//
 	// Type is a required field
 	Type *string `locationName:"type" min:"1" type:"string" required:"true"`
 
-	// The time and date at which the finding was laste updated.
+	// The time and date when the finding was last updated.
 	//
 	// UpdatedAt is a required field
 	UpdatedAt *string `locationName:"updatedAt" type:"string" required:"true"`
@@ -829,7 +862,7 @@ func (s FindingCriteria) MarshalFields(e protocol.FieldEncoder) error {
 type FindingStatistics struct {
 	_ struct{} `type:"structure"`
 
-	// Represents a map of severity to count statistic for a set of findings
+	// Represents a map of severity to count statistics for a set of findings.
 	CountBySeverity map[string]int64 `locationName:"countBySeverity" type:"map"`
 }
 
@@ -859,10 +892,10 @@ func (s FindingStatistics) MarshalFields(e protocol.FieldEncoder) error {
 type GeoLocation struct {
 	_ struct{} `type:"structure"`
 
-	// Latitude information of remote IP address.
+	// The latitude information of the remote IP address.
 	Lat *float64 `locationName:"lat" type:"double"`
 
-	// Longitude information of remote IP address.
+	// The longitude information of the remote IP address.
 	Lon *float64 `locationName:"lon" type:"double"`
 }
 
@@ -892,10 +925,10 @@ func (s GeoLocation) MarshalFields(e protocol.FieldEncoder) error {
 type IamInstanceProfile struct {
 	_ struct{} `type:"structure"`
 
-	// AWS EC2 instance profile ARN.
+	// The profile ARN of the EC2 instance.
 	Arn *string `locationName:"arn" type:"string"`
 
-	// AWS EC2 instance profile ID.
+	// The profile ID of the EC2 instance.
 	Id *string `locationName:"id" type:"string"`
 }
 
@@ -925,7 +958,7 @@ func (s IamInstanceProfile) MarshalFields(e protocol.FieldEncoder) error {
 type InstanceDetails struct {
 	_ struct{} `type:"structure"`
 
-	// The availability zone of the EC2 instance.
+	// The Availability Zone of the EC2 instance.
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
 
 	// The profile information of the EC2 instance.
@@ -949,7 +982,7 @@ type InstanceDetails struct {
 	// The launch time of the EC2 instance.
 	LaunchTime *string `locationName:"launchTime" type:"string"`
 
-	// The network interface information of the EC2 instance.
+	// The elastic network interface information of the EC2 instance.
 	NetworkInterfaces []NetworkInterface `locationName:"networkInterfaces" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the AWS Outpost. Only applicable to AWS
@@ -1076,14 +1109,14 @@ func (s InstanceDetails) MarshalFields(e protocol.FieldEncoder) error {
 type Invitation struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the account from which the invitations was sent.
+	// The ID of the account that the invitation was sent from.
 	AccountId *string `locationName:"accountId" min:"12" type:"string"`
 
 	// The ID of the invitation. This value is used to validate the inviter account
 	// to the member account.
 	InvitationId *string `locationName:"invitationId" type:"string"`
 
-	// Timestamp at which the invitation was sent.
+	// The timestamp when the invitation was sent.
 	InvitedAt *string `locationName:"invitedAt" type:"string"`
 
 	// The status of the relationship between the inviter and invitee accounts.
@@ -1128,7 +1161,7 @@ func (s Invitation) MarshalFields(e protocol.FieldEncoder) error {
 type LocalIpDetails struct {
 	_ struct{} `type:"structure"`
 
-	// IPV4 remote address of the connection.
+	// The IPv4 local address of the connection.
 	IpAddressV4 *string `locationName:"ipAddressV4" type:"string"`
 }
 
@@ -1152,10 +1185,10 @@ func (s LocalIpDetails) MarshalFields(e protocol.FieldEncoder) error {
 type LocalPortDetails struct {
 	_ struct{} `type:"structure"`
 
-	// Port number of the local connection.
+	// The port number of the local connection.
 	Port *int64 `locationName:"port" type:"integer"`
 
-	// Port name of the local connection.
+	// The port name of the local connection.
 	PortName *string `locationName:"portName" type:"string"`
 }
 
@@ -1181,17 +1214,17 @@ func (s LocalPortDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the Master account and invitation.
+// Contains information about the master account and invitation.
 type Master struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the account used as the Master account.
+	// The ID of the account used as the master account.
 	AccountId *string `locationName:"accountId" min:"12" type:"string"`
 
-	// This value is used to validate the master account to the member account.
+	// The value used to validate the master account to the member account.
 	InvitationId *string `locationName:"invitationId" type:"string"`
 
-	// Timestamp at which the invitation was sent.
+	// The timestamp when the invitation was sent.
 	InvitedAt *string `locationName:"invitedAt" type:"string"`
 
 	// The status of the relationship between the master and member accounts.
@@ -1232,27 +1265,27 @@ func (s Master) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Continas information about the member account
+// Contains information about the member account.
 type Member struct {
 	_ struct{} `type:"structure"`
 
-	// Member account ID.
+	// The ID of the member account.
 	//
 	// AccountId is a required field
 	AccountId *string `locationName:"accountId" min:"12" type:"string" required:"true"`
 
-	// Member account's detector ID.
+	// The detector ID of the member account.
 	DetectorId *string `locationName:"detectorId" min:"1" type:"string"`
 
-	// Member account's email address.
+	// The email address of the member account.
 	//
 	// Email is a required field
 	Email *string `locationName:"email" min:"1" type:"string" required:"true"`
 
-	// Timestamp at which the invitation was sent
+	// The timestamp when the invitation was sent.
 	InvitedAt *string `locationName:"invitedAt" type:"string"`
 
-	// Master account ID.
+	// The master account ID.
 	//
 	// MasterId is a required field
 	MasterId *string `locationName:"masterId" type:"string" required:"true"`
@@ -1262,7 +1295,7 @@ type Member struct {
 	// RelationshipStatus is a required field
 	RelationshipStatus *string `locationName:"relationshipStatus" type:"string" required:"true"`
 
-	// Member last updated timestamp.
+	// The last-updated timestamp of the member.
 	//
 	// UpdatedAt is a required field
 	UpdatedAt *string `locationName:"updatedAt" type:"string" required:"true"`
@@ -1325,25 +1358,25 @@ func (s Member) MarshalFields(e protocol.FieldEncoder) error {
 type NetworkConnectionAction struct {
 	_ struct{} `type:"structure"`
 
-	// Network connection blocked information.
+	// Indicates whether EC2 blocked the network connection to your instance.
 	Blocked *bool `locationName:"blocked" type:"boolean"`
 
-	// Network connection direction.
+	// The network connection direction.
 	ConnectionDirection *string `locationName:"connectionDirection" type:"string"`
 
-	// Local IP information of the connection.
+	// The local IP information of the connection.
 	LocalIpDetails *LocalIpDetails `locationName:"localIpDetails" type:"structure"`
 
-	// Local port information of the connection.
+	// The local port information of the connection.
 	LocalPortDetails *LocalPortDetails `locationName:"localPortDetails" type:"structure"`
 
-	// Network connection protocol.
+	// The network connection protocol.
 	Protocol *string `locationName:"protocol" type:"string"`
 
-	// Remote IP information of the connection.
+	// The remote IP information of the connection.
 	RemoteIpDetails *RemoteIpDetails `locationName:"remoteIpDetails" type:"structure"`
 
-	// Remote port information of the connection.
+	// The remote port information of the connection.
 	RemotePortDetails *RemotePortDetails `locationName:"remotePortDetails" type:"structure"`
 }
 
@@ -1399,32 +1432,32 @@ func (s NetworkConnectionAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the network interface of the Ec2 instance.
+// Contains information about the elastic network interface of the EC2 instance.
 type NetworkInterface struct {
 	_ struct{} `type:"structure"`
 
-	// A list of EC2 instance IPv6 address information.
+	// A list of IPv6 addresses for the EC2 instance.
 	Ipv6Addresses []string `locationName:"ipv6Addresses" type:"list"`
 
-	// The ID of the network interface
+	// The ID of the network interface.
 	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
 
-	// Private DNS name of the EC2 instance.
+	// The private DNS name of the EC2 instance.
 	PrivateDnsName *string `locationName:"privateDnsName" type:"string"`
 
-	// Private IP address of the EC2 instance.
+	// The private IP address of the EC2 instance.
 	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
 	// Other private IP address information of the EC2 instance.
 	PrivateIpAddresses []PrivateIpAddressDetails `locationName:"privateIpAddresses" type:"list"`
 
-	// Public DNS name of the EC2 instance.
+	// The public DNS name of the EC2 instance.
 	PublicDnsName *string `locationName:"publicDnsName" type:"string"`
 
-	// Public IP address of the EC2 instance.
+	// The public IP address of the EC2 instance.
 	PublicIp *string `locationName:"publicIp" type:"string"`
 
-	// Security groups associated with the EC2 instance.
+	// The security groups associated with the EC2 instance.
 	SecurityGroups []SecurityGroup `locationName:"securityGroups" type:"list"`
 
 	// The subnet ID of the EC2 instance.
@@ -1522,20 +1555,21 @@ func (s NetworkInterface) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Continas information about the ISP organization of the remote IP address.
+// Contains information about the ISP organization of the remote IP address.
 type Organization struct {
 	_ struct{} `type:"structure"`
 
-	// Autonomous system number of the internet provider of the remote IP address.
+	// The Autonomous System Number (ASN) of the internet provider of the remote
+	// IP address.
 	Asn *string `locationName:"asn" type:"string"`
 
-	// Organization that registered this ASN.
+	// The organization that registered this ASN.
 	AsnOrg *string `locationName:"asnOrg" type:"string"`
 
-	// ISP information for the internet provider.
+	// The ISP information for the internet provider.
 	Isp *string `locationName:"isp" type:"string"`
 
-	// Name of the internet provider.
+	// The name of the internet provider.
 	Org *string `locationName:"org" type:"string"`
 }
 
@@ -1577,10 +1611,11 @@ func (s Organization) MarshalFields(e protocol.FieldEncoder) error {
 type PortProbeAction struct {
 	_ struct{} `type:"structure"`
 
-	// Port probe blocked information.
+	// Indicates whether EC2 blocked the port probe to the instance, such as with
+	// an ACL.
 	Blocked *bool `locationName:"blocked" type:"boolean"`
 
-	// A list of port probe details objects.
+	// A list of objects related to port probe details.
 	PortProbeDetails []PortProbeDetail `locationName:"portProbeDetails" type:"list"`
 }
 
@@ -1616,13 +1651,13 @@ func (s PortProbeAction) MarshalFields(e protocol.FieldEncoder) error {
 type PortProbeDetail struct {
 	_ struct{} `type:"structure"`
 
-	// Local IP information of the connection.
+	// The local IP information of the connection.
 	LocalIpDetails *LocalIpDetails `locationName:"localIpDetails" type:"structure"`
 
-	// Local port information of the connection.
+	// The local port information of the connection.
 	LocalPortDetails *LocalPortDetails `locationName:"localPortDetails" type:"structure"`
 
-	// Remote IP information of the connection.
+	// The remote IP information of the connection.
 	RemoteIpDetails *RemoteIpDetails `locationName:"remoteIpDetails" type:"structure"`
 }
 
@@ -1658,10 +1693,10 @@ func (s PortProbeDetail) MarshalFields(e protocol.FieldEncoder) error {
 type PrivateIpAddressDetails struct {
 	_ struct{} `type:"structure"`
 
-	// Private DNS name of the EC2 instance.
+	// The private DNS name of the EC2 instance.
 	PrivateDnsName *string `locationName:"privateDnsName" type:"string"`
 
-	// Private IP address of the EC2 instance.
+	// The private IP address of the EC2 instance.
 	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 }
 
@@ -1687,14 +1722,14 @@ func (s PrivateIpAddressDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the product code for the Ec2 instance.
+// Contains information about the product code for the EC2 instance.
 type ProductCode struct {
 	_ struct{} `type:"structure"`
 
-	// Product code information.
+	// The product code information.
 	Code *string `locationName:"code" type:"string"`
 
-	// Product code type.
+	// The product code type.
 	ProductType *string `locationName:"productType" type:"string"`
 }
 
@@ -1720,23 +1755,23 @@ func (s ProductCode) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Continas information about the remote IP address of the connection.
+// Contains information about the remote IP address of the connection.
 type RemoteIpDetails struct {
 	_ struct{} `type:"structure"`
 
-	// City information of the remote IP address.
+	// The city information of the remote IP address.
 	City *City `locationName:"city" type:"structure"`
 
-	// Country code of the remote IP address.
+	// The country code of the remote IP address.
 	Country *Country `locationName:"country" type:"structure"`
 
-	// Location information of the remote IP address.
+	// The location information of the remote IP address.
 	GeoLocation *GeoLocation `locationName:"geoLocation" type:"structure"`
 
-	// IPV4 remote address of the connection.
+	// The IPv4 remote address of the connection.
 	IpAddressV4 *string `locationName:"ipAddressV4" type:"string"`
 
-	// ISP Organization information of the remote IP address.
+	// The ISP organization information of the remote IP address.
 	Organization *Organization `locationName:"organization" type:"structure"`
 }
 
@@ -1784,10 +1819,10 @@ func (s RemoteIpDetails) MarshalFields(e protocol.FieldEncoder) error {
 type RemotePortDetails struct {
 	_ struct{} `type:"structure"`
 
-	// Port number of the remote connection.
+	// The port number of the remote connection.
 	Port *int64 `locationName:"port" type:"integer"`
 
-	// Port name of the remote connection.
+	// The port name of the remote connection.
 	PortName *string `locationName:"portName" type:"string"`
 }
 
@@ -1826,7 +1861,7 @@ type Resource struct {
 	// prompted GuardDuty to generate a finding.
 	InstanceDetails *InstanceDetails `locationName:"instanceDetails" type:"structure"`
 
-	// The type of the AWS resource.
+	// The type of AWS resource.
 	ResourceType *string `locationName:"resourceType" type:"string"`
 }
 
@@ -1862,10 +1897,10 @@ func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
 type SecurityGroup struct {
 	_ struct{} `type:"structure"`
 
-	// EC2 instance's security group ID.
+	// The security group ID of the EC2 instance.
 	GroupId *string `locationName:"groupId" type:"string"`
 
-	// EC2 instance's security group name.
+	// The security group name of the EC2 instance.
 	GroupName *string `locationName:"groupName" type:"string"`
 }
 
@@ -1895,36 +1930,36 @@ func (s SecurityGroup) MarshalFields(e protocol.FieldEncoder) error {
 type Service struct {
 	_ struct{} `type:"structure"`
 
-	// Information about the activity described in a finding.
+	// Information about the activity that is described in a finding.
 	Action *Action `locationName:"action" type:"structure"`
 
 	// Indicates whether this finding is archived.
 	Archived *bool `locationName:"archived" type:"boolean"`
 
-	// Total count of the occurrences of this finding type.
+	// The total count of the occurrences of this finding type.
 	Count *int64 `locationName:"count" type:"integer"`
 
-	// Detector ID for the GuardDuty service.
+	// The detector ID for the GuardDuty service.
 	DetectorId *string `locationName:"detectorId" min:"1" type:"string"`
 
-	// First seen timestamp of the activity that prompted GuardDuty to generate
+	// The first-seen timestamp of the activity that prompted GuardDuty to generate
 	// this finding.
 	EventFirstSeen *string `locationName:"eventFirstSeen" type:"string"`
 
-	// Last seen timestamp of the activity that prompted GuardDuty to generate this
-	// finding.
+	// The last-seen timestamp of the activity that prompted GuardDuty to generate
+	// this finding.
 	EventLastSeen *string `locationName:"eventLastSeen" type:"string"`
 
 	// An evidence object associated with the service.
 	Evidence *Evidence `locationName:"evidence" type:"structure"`
 
-	// Resource role information for this finding.
+	// The resource role information for this finding.
 	ResourceRole *string `locationName:"resourceRole" type:"string"`
 
 	// The name of the AWS service (GuardDuty) that generated a finding.
 	ServiceName *string `locationName:"serviceName" type:"string"`
 
-	// Feedback left about the finding.
+	// Feedback that was submitted about the finding.
 	UserFeedback *string `locationName:"userFeedback" type:"string"`
 }
 
@@ -2002,11 +2037,11 @@ func (s Service) MarshalFields(e protocol.FieldEncoder) error {
 type SortCriteria struct {
 	_ struct{} `type:"structure"`
 
-	// Represents the finding attribute (for example, accountId) by which to sort
-	// findings.
+	// Represents the finding attribute (for example, accountId) to sort findings
+	// by.
 	AttributeName *string `locationName:"attributeName" type:"string"`
 
-	// Order by which the sorted findings are to be displayed.
+	// The order by which the sorted findings are to be displayed.
 	OrderBy OrderBy `locationName:"orderBy" type:"string" enum:"true"`
 }
 
@@ -2032,14 +2067,14 @@ func (s SortCriteria) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about a tag associated with the Ec2 instance.
+// Contains information about a tag associated with the EC2 instance.
 type Tag struct {
 	_ struct{} `type:"structure"`
 
-	// EC2 instance tag key.
+	// The EC2 instance tag key.
 	Key *string `locationName:"key" type:"string"`
 
-	// EC2 instance tag value.
+	// The EC2 instance tag value.
 	Value *string `locationName:"value" type:"string"`
 }
 
@@ -2106,11 +2141,11 @@ func (s ThreatIntelligenceDetail) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the accounts that were not processed.
+// Contains information about the accounts that weren't processed.
 type UnprocessedAccount struct {
 	_ struct{} `type:"structure"`
 
-	// AWS Account ID.
+	// The AWS account ID.
 	//
 	// AccountId is a required field
 	AccountId *string `locationName:"accountId" min:"12" type:"string" required:"true"`

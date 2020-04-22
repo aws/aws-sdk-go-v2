@@ -33,7 +33,7 @@ type ListPresetsInput struct {
 	// the next batch of presets.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 
-	// When you request lists of resources, you can optionally specify whether they
+	// Optional. When you request lists of resources, you can specify whether they
 	// are sorted in ASCENDING or DESCENDING order. Default varies by resource.
 	Order Order `location:"querystring" locationName:"order" type:"string" enum:"true"`
 }

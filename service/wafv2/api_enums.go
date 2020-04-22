@@ -345,6 +345,7 @@ const (
 	ParameterExceptionFieldTags                           ParameterExceptionField = "TAGS"
 	ParameterExceptionFieldTagKeys                        ParameterExceptionField = "TAG_KEYS"
 	ParameterExceptionFieldMetricName                     ParameterExceptionField = "METRIC_NAME"
+	ParameterExceptionFieldFirewallManagerStatement       ParameterExceptionField = "FIREWALL_MANAGER_STATEMENT"
 )
 
 func (enum ParameterExceptionField) MarshalValue() (string, error) {

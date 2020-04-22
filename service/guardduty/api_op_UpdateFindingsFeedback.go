@@ -26,7 +26,7 @@ type UpdateFindingsFeedbackInput struct {
 	// Feedback is a required field
 	Feedback Feedback `locationName:"feedback" type:"string" required:"true" enum:"true"`
 
-	// IDs of the findings that you want to mark as useful or not useful.
+	// The IDs of the findings that you want to mark as useful or not useful.
 	//
 	// FindingIds is a required field
 	FindingIds []string `locationName:"findingIds" type:"list" required:"true"`

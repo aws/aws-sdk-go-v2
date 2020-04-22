@@ -354,7 +354,18 @@ type SecurityServicePolicyData struct {
 	// Details about the service that are specific to the service type, in JSON
 	// format. For service type SHIELD_ADVANCED, this is an empty string.
 	//
-	//    * Example: WAF ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\":
+	//    * Example: WAFV2 "SecurityServicePolicyData": "{ \"type\": \"WAFV2\",
+	//    \"postProcessRuleGroups\": [ { \"managedRuleGroupIdentifier\": { \"managedRuleGroupName\":
+	//    \"AWSManagedRulesAdminProtectionRuleSet\", \"vendor\": \"AWS\" } \"ruleGroupARN\":
+	//    \"rule group arn", \"overrideAction\": { \"type\": \"COUNT|\" }, \"excludedRules\":
+	//    [ { \"name\" : \"EntityName\" } ], \"type\": \"ManagedRuleGroup|RuleGroup\"
+	//    } ], \"preProcessRuleGroups\": [ { \"managedRuleGroupIdentifier\": { \"managedRuleGroupName\":
+	//    \"AWSManagedRulesAdminProtectionRuleSet\", \"vendor\": \"AWS\" } \"ruleGroupARN\":
+	//    \"rule group arn\", \"overrideAction\": { \"type\": \"COUNT\" }, \"excludedRules\":
+	//    [ { \"name\" : \"EntityName\" } ], \"type\": \"ManagedRuleGroup|RuleGroup\"
+	//    } ], \"defaultAction\": { \"type\": \"BLOCK\" }}"
+	//
+	//    * Example: WAF "ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\":
 	//    [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\"
 	//    : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}
 	//

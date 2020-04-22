@@ -96,7 +96,7 @@ const opDescribeFleetEvents = "DescribeFleetEvents"
 //
 // Learn more
 //
-//  Working with Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html).
+// Setting up GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 //
 // Related operations
 //
@@ -112,7 +112,7 @@ const opDescribeFleetEvents = "DescribeFleetEvents"
 //
 //    * UpdateFleetAttributes
 //
-//    * Manage fleet actions: StartFleetActions StopFleetActions
+//    * StartFleetActions or StopFleetActions
 //
 //    // Example sending a request using DescribeFleetEventsRequest.
 //    req := client.DescribeFleetEventsRequest(params)

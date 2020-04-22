@@ -83,8 +83,7 @@ const opDescribeHomeRegionControls = "DescribeHomeRegionControls"
 // DescribeHomeRegionControlsRequest returns a request value for making API operation for
 // AWS Migration Hub Config.
 //
-// This API permits filtering on the ControlId, HomeRegion, and RegionControlScope
-// fields.
+// This API permits filtering on the ControlId and HomeRegion fields.
 //
 //    // Example sending a request using DescribeHomeRegionControlsRequest.
 //    req := client.DescribeHomeRegionControlsRequest(params)

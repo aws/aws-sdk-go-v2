@@ -54,6 +54,9 @@ type UpdateFlowOutputInput struct {
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi-based streams.
 	StreamId *string `locationName:"streamId" type:"string"`
+
+	// The name of the VPC interface attachment to use for this output.
+	VpcInterfaceAttachment *VpcInterfaceAttachment `locationName:"vpcInterfaceAttachment" type:"structure"`
 }
 
 // String returns the string representation
@@ -148,6 +151,12 @@ func (s UpdateFlowOutputInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "streamId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VpcInterfaceAttachment != nil {
+		v := s.VpcInterfaceAttachment
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "vpcInterfaceAttachment", v, metadata)
 	}
 	if s.FlowArn != nil {
 		v := *s.FlowArn

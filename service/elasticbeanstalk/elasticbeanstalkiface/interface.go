@@ -119,6 +119,8 @@ type ClientAPI interface {
 
 	ListAvailableSolutionStacksRequest(*elasticbeanstalk.ListAvailableSolutionStacksInput) elasticbeanstalk.ListAvailableSolutionStacksRequest
 
+	ListPlatformBranchesRequest(*elasticbeanstalk.ListPlatformBranchesInput) elasticbeanstalk.ListPlatformBranchesRequest
+
 	ListPlatformVersionsRequest(*elasticbeanstalk.ListPlatformVersionsInput) elasticbeanstalk.ListPlatformVersionsRequest
 
 	ListTagsForResourceRequest(*elasticbeanstalk.ListTagsForResourceInput) elasticbeanstalk.ListTagsForResourceRequest

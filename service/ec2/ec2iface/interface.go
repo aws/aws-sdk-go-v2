@@ -350,6 +350,8 @@ type ClientAPI interface {
 
 	DeregisterImageRequest(*ec2.DeregisterImageInput) ec2.DeregisterImageRequest
 
+	DeregisterInstanceEventNotificationAttributesRequest(*ec2.DeregisterInstanceEventNotificationAttributesInput) ec2.DeregisterInstanceEventNotificationAttributesRequest
+
 	DeregisterTransitGatewayMulticastGroupMembersRequest(*ec2.DeregisterTransitGatewayMulticastGroupMembersInput) ec2.DeregisterTransitGatewayMulticastGroupMembersRequest
 
 	DeregisterTransitGatewayMulticastGroupSourcesRequest(*ec2.DeregisterTransitGatewayMulticastGroupSourcesInput) ec2.DeregisterTransitGatewayMulticastGroupSourcesRequest
@@ -433,6 +435,8 @@ type ClientAPI interface {
 	DescribeInstanceAttributeRequest(*ec2.DescribeInstanceAttributeInput) ec2.DescribeInstanceAttributeRequest
 
 	DescribeInstanceCreditSpecificationsRequest(*ec2.DescribeInstanceCreditSpecificationsInput) ec2.DescribeInstanceCreditSpecificationsRequest
+
+	DescribeInstanceEventNotificationAttributesRequest(*ec2.DescribeInstanceEventNotificationAttributesInput) ec2.DescribeInstanceEventNotificationAttributesRequest
 
 	DescribeInstanceStatusRequest(*ec2.DescribeInstanceStatusInput) ec2.DescribeInstanceStatusRequest
 
@@ -775,6 +779,8 @@ type ClientAPI interface {
 	RebootInstancesRequest(*ec2.RebootInstancesInput) ec2.RebootInstancesRequest
 
 	RegisterImageRequest(*ec2.RegisterImageInput) ec2.RegisterImageRequest
+
+	RegisterInstanceEventNotificationAttributesRequest(*ec2.RegisterInstanceEventNotificationAttributesInput) ec2.RegisterInstanceEventNotificationAttributesRequest
 
 	RegisterTransitGatewayMulticastGroupMembersRequest(*ec2.RegisterTransitGatewayMulticastGroupMembersInput) ec2.RegisterTransitGatewayMulticastGroupMembersRequest
 

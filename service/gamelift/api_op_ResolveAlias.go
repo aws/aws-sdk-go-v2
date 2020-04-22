@@ -45,7 +45,7 @@ type ResolveAliasOutput struct {
 
 	// The Amazon Resource Name (ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
 	// associated with the GameLift fleet resource that this alias points to.
-	FleetArn *string `min:"1" type:"string"`
+	FleetArn *string `type:"string"`
 
 	// The fleet identifier that the alias is pointing to.
 	FleetId *string `type:"string"`

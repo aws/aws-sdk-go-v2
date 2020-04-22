@@ -268,12 +268,31 @@ func (enum ServiceLimit) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// The storage type for your Amazon FSx file system.
+type StorageType string
+
+// Enum values for StorageType
+const (
+	StorageTypeSsd StorageType = "SSD"
+	StorageTypeHdd StorageType = "HDD"
+)
+
+func (enum StorageType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StorageType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type WindowsDeploymentType string
 
 // Enum values for WindowsDeploymentType
 const (
 	WindowsDeploymentTypeMultiAz1  WindowsDeploymentType = "MULTI_AZ_1"
 	WindowsDeploymentTypeSingleAz1 WindowsDeploymentType = "SINGLE_AZ_1"
+	WindowsDeploymentTypeSingleAz2 WindowsDeploymentType = "SINGLE_AZ_2"
 )
 
 func (enum WindowsDeploymentType) MarshalValue() (string, error) {

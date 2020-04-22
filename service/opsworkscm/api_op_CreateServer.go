@@ -26,11 +26,10 @@ type CreateServerInput struct {
 	// exceeded. The default value is 1.
 	BackupRetentionCount *int64 `min:"1" type:"integer"`
 
-	// Supported on servers running Chef Automate 2. A PEM-formatted HTTPS certificate.
-	// The value can be be a single, self-signed certificate, or a certificate chain.
-	// If you specify a custom certificate, you must also specify values for CustomDomain
-	// and CustomPrivateKey. The following are requirements for the CustomCertificate
-	// value:
+	// A PEM-formatted HTTPS certificate. The value can be be a single, self-signed
+	// certificate, or a certificate chain. If you specify a custom certificate,
+	// you must also specify values for CustomDomain and CustomPrivateKey. The following
+	// are requirements for the CustomCertificate value:
 	//
 	//    * You can provide either a self-signed, custom certificate, or the full
 	//    certificate chain.
@@ -48,20 +47,19 @@ type CreateServerInput struct {
 	//    * The certificate must match the value of CustomPrivateKey.
 	CustomCertificate *string `type:"string"`
 
-	// Supported on servers running Chef Automate 2. An optional public endpoint
-	// of a server, such as https://aws.my-company.com. To access the server, create
-	// a CNAME DNS record in your preferred DNS service that points the custom domain
-	// to the endpoint that is generated when the server is created (the value of
-	// the CreateServer Endpoint attribute). You cannot access the server by using
-	// the generated Endpoint value if the server is using a custom domain. If you
-	// specify a custom domain, you must also specify values for CustomCertificate
-	// and CustomPrivateKey.
+	// An optional public endpoint of a server, such as https://aws.my-company.com.
+	// To access the server, create a CNAME DNS record in your preferred DNS service
+	// that points the custom domain to the endpoint that is generated when the
+	// server is created (the value of the CreateServer Endpoint attribute). You
+	// cannot access the server by using the generated Endpoint value if the server
+	// is using a custom domain. If you specify a custom domain, you must also specify
+	// values for CustomCertificate and CustomPrivateKey.
 	CustomDomain *string `type:"string"`
 
-	// Supported on servers running Chef Automate 2. A private key in PEM format
-	// for connecting to the server by using HTTPS. The private key must not be
-	// encrypted; it cannot be protected by a password or passphrase. If you specify
-	// a custom private key, you must also specify values for CustomDomain and CustomCertificate.
+	// A private key in PEM format for connecting to the server by using HTTPS.
+	// The private key must not be encrypted; it cannot be protected by a password
+	// or passphrase. If you specify a custom private key, you must also specify
+	// values for CustomDomain and CustomCertificate.
 	CustomPrivateKey *string `type:"string" sensitive:"true"`
 
 	// Enable or disable scheduled backups. Valid values are true or false. The
@@ -203,11 +201,11 @@ type CreateServerInput struct {
 	//
 	//    * The key can be a maximum of 127 characters, and can contain only Unicode
 	//    letters, numbers, or separators, or the following special characters:
-	//    + - = . _ : /
+	//    + - = . _ : / @
 	//
 	//    * The value can be a maximum 255 characters, and contain only Unicode
 	//    letters, numbers, or separators, or the following special characters:
-	//    + - = . _ : /
+	//    + - = . _ : / @
 	//
 	//    * Leading and trailing white spaces are trimmed from both the key and
 	//    value.

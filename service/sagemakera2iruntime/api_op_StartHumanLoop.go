@@ -13,15 +13,17 @@ import (
 type StartHumanLoopInput struct {
 	_ struct{} `type:"structure"`
 
-	// Attributes of the data specified by the customer.
+	// Attributes of the specified data. Use DataAttributes to specify if your data
+	// is free of personally identifiable information and/or free of adult content.
 	DataAttributes *HumanLoopDataAttributes `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the flow definition.
+	// The Amazon Resource Name (ARN) of the flow definition associated with this
+	// human loop.
 	//
 	// FlowDefinitionArn is a required field
 	FlowDefinitionArn *string `type:"string" required:"true"`
 
-	// An object containing information about the human loop.
+	// An object that contains information about the human loop.
 	//
 	// HumanLoopInput is a required field
 	HumanLoopInput *HumanLoopInput `type:"structure" required:"true"`

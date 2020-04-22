@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Route 53 Domains.
 //    func myFunc(svc route53domainsiface.ClientAPI) bool {
-//        // Make svc.CheckDomainAvailability request
+//        // Make svc.AcceptDomainTransferFromAnotherAwsAccount request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        route53domainsiface.ClientPI
 //    }
-//    func (m *mockClientClient) CheckDomainAvailability(input *route53domains.CheckDomainAvailabilityInput) (*route53domains.CheckDomainAvailabilityOutput, error) {
+//    func (m *mockClientClient) AcceptDomainTransferFromAnotherAwsAccount(input *route53domains.AcceptDomainTransferFromAnotherAwsAccountInput) (*route53domains.AcceptDomainTransferFromAnotherAwsAccountOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,6 +61,10 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	AcceptDomainTransferFromAnotherAwsAccountRequest(*route53domains.AcceptDomainTransferFromAnotherAwsAccountInput) route53domains.AcceptDomainTransferFromAnotherAwsAccountRequest
+
+	CancelDomainTransferToAnotherAwsAccountRequest(*route53domains.CancelDomainTransferToAnotherAwsAccountInput) route53domains.CancelDomainTransferToAnotherAwsAccountRequest
+
 	CheckDomainAvailabilityRequest(*route53domains.CheckDomainAvailabilityInput) route53domains.CheckDomainAvailabilityRequest
 
 	CheckDomainTransferabilityRequest(*route53domains.CheckDomainTransferabilityInput) route53domains.CheckDomainTransferabilityRequest
@@ -91,6 +95,8 @@ type ClientAPI interface {
 
 	RegisterDomainRequest(*route53domains.RegisterDomainInput) route53domains.RegisterDomainRequest
 
+	RejectDomainTransferFromAnotherAwsAccountRequest(*route53domains.RejectDomainTransferFromAnotherAwsAccountInput) route53domains.RejectDomainTransferFromAnotherAwsAccountRequest
+
 	RenewDomainRequest(*route53domains.RenewDomainInput) route53domains.RenewDomainRequest
 
 	ResendContactReachabilityEmailRequest(*route53domains.ResendContactReachabilityEmailInput) route53domains.ResendContactReachabilityEmailRequest
@@ -98,6 +104,8 @@ type ClientAPI interface {
 	RetrieveDomainAuthCodeRequest(*route53domains.RetrieveDomainAuthCodeInput) route53domains.RetrieveDomainAuthCodeRequest
 
 	TransferDomainRequest(*route53domains.TransferDomainInput) route53domains.TransferDomainRequest
+
+	TransferDomainToAnotherAwsAccountRequest(*route53domains.TransferDomainToAnotherAwsAccountInput) route53domains.TransferDomainToAnotherAwsAccountRequest
 
 	UpdateDomainContactRequest(*route53domains.UpdateDomainContactInput) route53domains.UpdateDomainContactRequest
 

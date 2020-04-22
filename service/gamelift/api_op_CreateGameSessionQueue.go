@@ -138,6 +138,14 @@ const opCreateGameSessionQueue = "CreateGameSessionQueue"
 // and, if desired, a set of latency policies. If successful, a new queue object
 // is returned.
 //
+// Learn more
+//
+//  Design a Game Session Queue (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-design.html)
+//
+//  Create a Game Session Queue (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-creating.html)
+//
+// Related operations
+//
 //    * CreateGameSessionQueue
 //
 //    * DescribeGameSessionQueues

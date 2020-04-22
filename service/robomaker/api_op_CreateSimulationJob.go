@@ -19,6 +19,9 @@ type CreateSimulationJobInput struct {
 	// of the request.
 	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string" idempotencyToken:"true"`
 
+	// Compute information for the simulation job.
+	Compute *Compute `locationName:"compute" type:"structure"`
+
 	// Specify data sources to mount read-only files from S3 into your simulation.
 	// These files are available under /opt/robomaker/datasources/data_source_name.
 	//
@@ -105,6 +108,11 @@ func (s *CreateSimulationJobInput) Validate() error {
 	if s.SimulationApplications != nil && len(s.SimulationApplications) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SimulationApplications", 1))
 	}
+	if s.Compute != nil {
+		if err := s.Compute.Validate(); err != nil {
+			invalidParams.AddNested("Compute", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.DataSources != nil {
 		for i, v := range s.DataSources {
 			if err := v.Validate(); err != nil {
@@ -163,6 +171,12 @@ func (s CreateSimulationJobInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Compute != nil {
+		v := s.Compute
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "compute", v, metadata)
 	}
 	if s.DataSources != nil {
 		v := s.DataSources
@@ -260,6 +274,9 @@ type CreateSimulationJobOutput struct {
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string"`
+
+	// Compute information for the simulation job.
+	Compute *ComputeResponse `locationName:"compute" type:"structure"`
 
 	// The data sources for the simulation job.
 	DataSources []DataSource `locationName:"dataSources" type:"list"`
@@ -386,6 +403,12 @@ func (s CreateSimulationJobOutput) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Compute != nil {
+		v := s.Compute
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "compute", v, metadata)
 	}
 	if s.DataSources != nil {
 		v := s.DataSources

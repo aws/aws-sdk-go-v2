@@ -269,9 +269,7 @@ func (s Ac3Settings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Accelerated transcoding can significantly speed up jobs with long, visually
-// complex content. Outputs that use this feature incur pro-tier pricing. For
-// information about feature limitations, see the AWS Elemental MediaConvert
-// User Guide.
+// complex content.
 type AccelerationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -1962,6 +1960,65 @@ func (s CaptionSelector) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "sourceSettings", v, metadata)
+	}
+	return nil
+}
+
+// Ignore this setting unless your input captions format is SCC. To have the
+// service compensate for differing framerates between your input captions and
+// input video, specify the framerate of the captions file. Specify this value
+// as a fraction, using the settings Framerate numerator (framerateNumerator)
+// and Framerate denominator (framerateDenominator). For example, you might
+// specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps,
+// or 30000 / 1001 for 29.97 fps.
+type CaptionSourceFramerate struct {
+	_ struct{} `type:"structure"`
+
+	// Specify the denominator of the fraction that represents the framerate for
+	// the setting Caption source framerate (CaptionSourceFramerate). Use this setting
+	// along with the setting Framerate numerator (framerateNumerator).
+	FramerateDenominator *int64 `locationName:"framerateDenominator" min:"1" type:"integer"`
+
+	// Specify the numerator of the fraction that represents the framerate for the
+	// setting Caption source framerate (CaptionSourceFramerate). Use this setting
+	// along with the setting Framerate denominator (framerateDenominator).
+	FramerateNumerator *int64 `locationName:"framerateNumerator" min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s CaptionSourceFramerate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CaptionSourceFramerate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CaptionSourceFramerate"}
+	if s.FramerateDenominator != nil && *s.FramerateDenominator < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("FramerateDenominator", 1))
+	}
+	if s.FramerateNumerator != nil && *s.FramerateNumerator < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("FramerateNumerator", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CaptionSourceFramerate) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FramerateDenominator != nil {
+		v := *s.FramerateDenominator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "framerateDenominator", protocol.Int64Value(v), metadata)
+	}
+	if s.FramerateNumerator != nil {
+		v := *s.FramerateNumerator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "framerateNumerator", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -4532,6 +4589,15 @@ type FileSourceSettings struct {
 	// 608 data into 708.
 	Convert608To708 FileSourceConvert608To708 `locationName:"convert608To708" type:"string" enum:"true"`
 
+	// Ignore this setting unless your input captions format is SCC. To have the
+	// service compensate for differing framerates between your input captions and
+	// input video, specify the framerate of the captions file. Specify this value
+	// as a fraction, using the settings Framerate numerator (framerateNumerator)
+	// and Framerate denominator (framerateDenominator). For example, you might
+	// specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps,
+	// or 30000 / 1001 for 29.97 fps.
+	Framerate *CaptionSourceFramerate `locationName:"framerate" type:"structure"`
+
 	// External caption file used for loading captions. Accepted file extensions
 	// are 'scc', 'ttml', 'dfxp', 'stl', 'srt', 'xml', and 'smi'.
 	SourceFile *string `locationName:"sourceFile" min:"14" type:"string"`
@@ -4555,6 +4621,11 @@ func (s *FileSourceSettings) Validate() error {
 	if s.TimeDelta != nil && *s.TimeDelta < -2.147483648e+09 {
 		invalidParams.Add(aws.NewErrParamMinValue("TimeDelta", -2.147483648e+09))
 	}
+	if s.Framerate != nil {
+		if err := s.Framerate.Validate(); err != nil {
+			invalidParams.AddNested("Framerate", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4569,6 +4640,12 @@ func (s FileSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "convert608To708", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Framerate != nil {
+		v := s.Framerate
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "framerate", v, metadata)
 	}
 	if s.SourceFile != nil {
 		v := *s.SourceFile
@@ -6607,6 +6684,70 @@ func (s HlsSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Optional. Configuration for a destination queue to which the job can hop
+// once a customer-defined minimum wait time has passed.
+type HopDestination struct {
+	_ struct{} `type:"structure"`
+
+	// Optional. When you set up a job to use queue hopping, you can specify a different
+	// relative priority for the job in the destination queue. If you don't specify,
+	// the relative priority will remain the same as in the previous queue.
+	Priority *int64 `locationName:"priority" type:"integer"`
+
+	// Optional unless the job is submitted on the default queue. When you set up
+	// a job to use queue hopping, you can specify a destination queue. This queue
+	// cannot be the original queue to which the job is submitted. If the original
+	// queue isn't the default queue and you don't specify the destination queue,
+	// the job will move to the default queue.
+	Queue *string `locationName:"queue" type:"string"`
+
+	// Required for setting up a job to use queue hopping. Minimum wait time in
+	// minutes until the job can hop to the destination queue. Valid range is 1
+	// to 1440 minutes, inclusive.
+	WaitMinutes *int64 `locationName:"waitMinutes" type:"integer"`
+}
+
+// String returns the string representation
+func (s HopDestination) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HopDestination) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HopDestination"}
+	if s.Priority != nil && *s.Priority < -50 {
+		invalidParams.Add(aws.NewErrParamMinValue("Priority", -50))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HopDestination) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Priority != nil {
+		v := *s.Priority
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "priority", protocol.Int64Value(v), metadata)
+	}
+	if s.Queue != nil {
+		v := *s.Queue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "queue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.WaitMinutes != nil {
+		v := *s.WaitMinutes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "waitMinutes", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // To insert ID3 tags in your output, specify two values. Use ID3 tag (Id3)
 // to specify the base 64 encoded string and use Timecode (TimeCode) to specify
 // the time when the tag should be inserted. To insert multiple ID3 tags in
@@ -7653,11 +7794,8 @@ type Job struct {
 	// An identifier for this resource that is unique within all of AWS.
 	Arn *string `locationName:"arn" type:"string"`
 
-	// Optional. Choose a tag type that AWS Billing and Cost Management will use
-	// to sort your AWS Elemental MediaConvert costs on any billing report that
-	// you set up. Any transcoding outputs that don't have an associated tag will
-	// appear in your billing report unsorted. If you don't choose a valid value
-	// for this field, your job outputs will appear on the billing report unsorted.
+	// The tag type that AWS Billing and Cost Management will use to sort your AWS
+	// Elemental MediaConvert costs on any billing report that you set up.
 	BillingTagsSource BillingTagsSource `locationName:"billingTagsSource" type:"string" enum:"true"`
 
 	// The time, in Unix epoch format in seconds, when the job got created.
@@ -7671,6 +7809,9 @@ type Job struct {
 
 	// Error message of Job
 	ErrorMessage *string `locationName:"errorMessage" type:"string"`
+
+	// Optional list of hop destinations.
+	HopDestinations []HopDestination `locationName:"hopDestinations" type:"list"`
 
 	// A portion of the job's ARN, unique within your AWS Elemental MediaConvert
 	// resources
@@ -7700,10 +7841,13 @@ type Job struct {
 	// Relative priority on the job.
 	Priority *int64 `locationName:"priority" type:"integer"`
 
-	// Optional. When you create a job, you can specify a queue to send it to. If
-	// you don't specify, the job will go to the default queue. For more about queues,
-	// see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+	// When you create a job, you can specify a queue to send it to. If you don't
+	// specify, the job will go to the default queue. For more about queues, see
+	// the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
 	Queue *string `locationName:"queue" type:"string"`
+
+	// The job's queue hopping history.
+	QueueTransitions []QueueTransition `locationName:"queueTransitions" type:"list"`
 
 	// The number of times that the service automatically attempted to process your
 	// job after encountering an error.
@@ -7800,6 +7944,18 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "errorMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.HopDestinations != nil {
+		v := s.HopDestinations
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "hopDestinations", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.Id != nil {
 		v := *s.Id
 
@@ -7847,6 +8003,18 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "queue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.QueueTransitions != nil {
+		v := s.QueueTransitions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "queueTransitions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.RetryCount != nil {
 		v := *s.RetryCount
@@ -8141,6 +8309,9 @@ type JobTemplate struct {
 	// An optional description you create for each job template.
 	Description *string `locationName:"description" type:"string"`
 
+	// Optional list of hop destinations.
+	HopDestinations []HopDestination `locationName:"hopDestinations" type:"list"`
+
 	// The timestamp in epoch seconds when the Job template was last updated.
 	LastUpdated *time.Time `locationName:"lastUpdated" type:"timestamp" timestampFormat:"unixTimestamp"`
 
@@ -8211,6 +8382,18 @@ func (s JobTemplate) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HopDestinations != nil {
+		v := s.HopDestinations
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "hopDestinations", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.LastUpdated != nil {
 		v := *s.LastUpdated
@@ -11514,6 +11697,51 @@ func (s Queue) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Description of the source and destination queues between which the job has
+// moved, along with the timestamp of the move
+type QueueTransition struct {
+	_ struct{} `type:"structure"`
+
+	// The queue that the job was on after the transition.
+	DestinationQueue *string `locationName:"destinationQueue" type:"string"`
+
+	// The queue that the job was on before the transition.
+	SourceQueue *string `locationName:"sourceQueue" type:"string"`
+
+	// The time, in Unix epoch format, that the job moved from the source queue
+	// to the destination queue.
+	Timestamp *time.Time `locationName:"timestamp" type:"timestamp" timestampFormat:"unixTimestamp"`
+}
+
+// String returns the string representation
+func (s QueueTransition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s QueueTransition) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DestinationQueue != nil {
+		v := *s.DestinationQueue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "destinationQueue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SourceQueue != nil {
+		v := *s.SourceQueue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sourceQueue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Timestamp != nil {
+		v := *s.Timestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timestamp",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }

@@ -13,7 +13,7 @@ import (
 type CreateThreatIntelSetInput struct {
 	_ struct{} `type:"structure"`
 
-	// A boolean value that indicates whether GuardDuty is to start using the uploaded
+	// A Boolean value that indicates whether GuardDuty is to start using the uploaded
 	// ThreatIntelSet.
 	//
 	// Activate is a required field
@@ -22,8 +22,8 @@ type CreateThreatIntelSetInput struct {
 	// The idempotency token for the create request.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
-	// The unique ID of the detector of the GuardDuty account for which you want
-	// to create a threatIntelSet.
+	// The unique ID of the detector of the GuardDuty account that you want to create
+	// a threatIntelSet for.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
@@ -33,18 +33,18 @@ type CreateThreatIntelSetInput struct {
 	// Format is a required field
 	Format ThreatIntelSetFormat `locationName:"format" min:"1" type:"string" required:"true" enum:"true"`
 
-	// The URI of the file that contains the ThreatIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
+	// The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
 	//
 	// Location is a required field
 	Location *string `locationName:"location" min:"1" type:"string" required:"true"`
 
-	// A user-friendly ThreatIntelSet name that is displayed in all finding generated
+	// A user-friendly ThreatIntelSet name displayed in all findings that are generated
 	// by activity that involves IP addresses included in this ThreatIntelSet.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
-	// The tags to be added to a new Threat List resource.
+	// The tags to be added to a new threat list resource.
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 
@@ -185,9 +185,9 @@ const opCreateThreatIntelSet = "CreateThreatIntelSet"
 // CreateThreatIntelSetRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Create a new ThreatIntelSet. ThreatIntelSets consist of known malicious IP
-// addresses. GuardDuty generates findings based on ThreatIntelSets. Only users
-// of the master account can use this operation.
+// Creates a new ThreatIntelSet. ThreatIntelSets consist of known malicious
+// IP addresses. GuardDuty generates findings based on ThreatIntelSets. Only
+// users of the master account can use this operation.
 //
 //    // Example sending a request using CreateThreatIntelSetRequest.
 //    req := client.CreateThreatIntelSetRequest(params)

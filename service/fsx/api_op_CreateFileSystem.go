@@ -33,8 +33,7 @@ type CreateFileSystemInput struct {
 	// in the AWS Key Management Service API Reference.
 	KmsKeyId *string `min:"1" type:"string"`
 
-	// The Lustre configuration for the file system being created. This value is
-	// required if FileSystemType is set to LUSTRE.
+	// The Lustre configuration for the file system being created.
 	LustreConfiguration *CreateFileSystemLustreConfiguration `type:"structure"`
 
 	// A list of IDs specifying the security groups to apply to all network interfaces
@@ -42,17 +41,37 @@ type CreateFileSystemInput struct {
 	// to describe the file system.
 	SecurityGroupIds []string `type:"list"`
 
-	// The storage capacity of the file system being created.
+	// Sets the storage capacity of the file system that you're creating.
 	//
-	// For Windows file systems, valid values are 32 GiB - 65,536 GiB.
+	// For Lustre file systems:
 	//
-	// For SCRATCH_1 Lustre file systems, valid values are 1,200, 2,400, 3,600,
-	// then continuing in increments of 3600 GiB. For SCRATCH_2 and PERSISTENT_1
-	// file systems, valid values are 1200, 2400, then continuing in increments
-	// of 2400 GiB.
+	//    * For SCRATCH_2 and PERSISTENT_1 deployment types, valid values are 1.2,
+	//    2.4, and increments of 2.4 TiB.
+	//
+	//    * For SCRATCH_1 deployment type, valid values are 1.2, 2.4, and increments
+	//    of 3.6 TiB.
+	//
+	// For Windows file systems:
+	//
+	//    * If StorageType=SSD, valid values are 32 GiB - 65,536 GiB (64 TiB).
+	//
+	//    * If StorageType=HDD, valid values are 2000 GiB - 65,536 GiB (64 TiB).
 	//
 	// StorageCapacity is a required field
 	StorageCapacity *int64 `type:"integer" required:"true"`
+
+	// Sets the storage type for the Amazon FSx for Windows file system you're creating.
+	// Valid values are SSD and HDD.
+	//
+	//    * Set to SSD to use solid state drive storage. SSD is supported on all
+	//    Windows deployment types.
+	//
+	//    * Set to HDD to use hard disk drive storage. HDD is supported on SINGLE_AZ_2
+	//    and MULTI_AZ_1 Windows file system deployment types.
+	//
+	// Default value is SSD. For more information, see Storage Type Options (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-tco.html#saz-maz-storage-type)
+	// in the Amazon FSx for Windows User Guide.
+	StorageType StorageType `type:"string" enum:"true"`
 
 	// Specifies the IDs of the subnets that the file system will be accessible
 	// from. For Windows MULTI_AZ_1 file system deployment types, provide exactly
@@ -60,9 +79,9 @@ type CreateFileSystemInput struct {
 	// file server. You specify one of these subnets as the preferred subnet using
 	// the WindowsConfiguration > PreferredSubnetID property.
 	//
-	// For Windows SINGLE_AZ_1 file system deployment types and Lustre file systems,
-	// provide exactly one subnet ID. The file server is launched in that subnet's
-	// Availability Zone.
+	// For Windows SINGLE_AZ_1 and SINGLE_AZ_2 file system deployment types and
+	// Lustre file systems, provide exactly one subnet ID. The file server is launched
+	// in that subnet's Availability Zone.
 	//
 	// SubnetIds is a required field
 	SubnetIds []string `type:"list" required:"true"`
@@ -71,8 +90,7 @@ type CreateFileSystemInput struct {
 	// Name tag appears in the console as the file system name.
 	Tags []Tag `min:"1" type:"list"`
 
-	// The Microsoft Windows configuration for the file system being created. This
-	// value is required if FileSystemType is set to WINDOWS.
+	// The Microsoft Windows configuration for the file system being created.
 	WindowsConfiguration *CreateFileSystemWindowsConfiguration `type:"structure"`
 }
 

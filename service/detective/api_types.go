@@ -13,8 +13,6 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// Amazon Detective is currently in preview.
-//
 // An AWS account that is the master of or a member of a behavior graph.
 type Account struct {
 	_ struct{} `type:"structure"`
@@ -76,8 +74,6 @@ func (s Account) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Amazon Detective is currently in preview.
-//
 // A behavior graph in Detective.
 type Graph struct {
 	_ struct{} `type:"structure"`
@@ -113,8 +109,6 @@ func (s Graph) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Amazon Detective is currently in preview.
-//
 // Details about a member account that was invited to contribute to a behavior
 // graph.
 type MemberDetail struct {
@@ -122,6 +116,19 @@ type MemberDetail struct {
 
 	// The AWS account identifier for the member account.
 	AccountId *string `min:"12" type:"string"`
+
+	// For member accounts with a status of ACCEPTED_BUT_DISABLED, the reason that
+	// the member account is not enabled.
+	//
+	// The reason can have one of the following values:
+	//
+	//    * VOLUME_TOO_HIGH - Indicates that adding the member account would cause
+	//    the data volume for the behavior graph to be too high.
+	//
+	//    * VOLUME_UNKNOWN - Indicates that Detective is unable to verify the data
+	//    volume for the member account. This is usually because the member account
+	//    is not enrolled in Amazon GuardDuty.
+	DisabledReason MemberDisabledReason `type:"string" enum:"true"`
 
 	// The AWS account root user email address for the member account.
 	EmailAddress *string `min:"1" type:"string"`
@@ -135,6 +142,20 @@ type MemberDetail struct {
 
 	// The AWS account identifier of the master account for the behavior graph.
 	MasterId *string `min:"12" type:"string"`
+
+	// The member account data volume as a percentage of the maximum allowed data
+	// volume. 0 indicates 0 percent, and 100 indicates 100 percent.
+	//
+	// Note that this is not the percentage of the behavior graph data volume.
+	//
+	// For example, the data volume for the behavior graph is 80 GB per day. The
+	// maximum data volume is 160 GB per day. If the data volume for the member
+	// account is 40 GB per day, then PercentOfGraphUtilization is 25. It represents
+	// 25% of the maximum allowed data volume.
+	PercentOfGraphUtilization *float64 `type:"double"`
+
+	// The date and time when the graph utilization percentage was last updated.
+	PercentOfGraphUtilizationUpdatedTime *time.Time `type:"timestamp"`
 
 	// The current membership status of the member account. The status can have
 	// one of the following values:
@@ -154,6 +175,10 @@ type MemberDetail struct {
 	//
 	//    * ENABLED - Indicates that the member account accepted the invitation
 	//    to contribute to the behavior graph.
+	//
+	//    * ACCEPTED_BUT_DISABLED - Indicates that the member account accepted the
+	//    invitation but is prevented from contributing data to the behavior graph.
+	//    DisabledReason provides the reason why the member account is not enabled.
 	//
 	// Member accounts that declined an invitation or that were removed from the
 	// behavior graph are not included.
@@ -176,6 +201,12 @@ func (s MemberDetail) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "AccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.DisabledReason) > 0 {
+		v := s.DisabledReason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DisabledReason", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.EmailAddress != nil {
 		v := *s.EmailAddress
@@ -202,6 +233,19 @@ func (s MemberDetail) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "MasterId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.PercentOfGraphUtilization != nil {
+		v := *s.PercentOfGraphUtilization
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PercentOfGraphUtilization", protocol.Float64Value(v), metadata)
+	}
+	if s.PercentOfGraphUtilizationUpdatedTime != nil {
+		v := *s.PercentOfGraphUtilizationUpdatedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PercentOfGraphUtilizationUpdatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
@@ -218,8 +262,6 @@ func (s MemberDetail) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Amazon Detective is currently in preview.
-//
 // A member account that was included in a request but for which the request
 // could not be processed.
 type UnprocessedAccount struct {

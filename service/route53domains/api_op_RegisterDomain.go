@@ -13,7 +13,8 @@ import (
 type RegisterDomainInput struct {
 	_ struct{} `type:"structure"`
 
-	// Provides detailed contact information.
+	// Provides detailed contact information. For information about the values that
+	// you specify for each element, see ContactDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html).
 	//
 	// AdminContact is a required field
 	AdminContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
@@ -24,11 +25,26 @@ type RegisterDomainInput struct {
 	// Default: true
 	AutoRenew *bool `type:"boolean"`
 
-	// The domain name that you want to register.
+	// The domain name that you want to register. The top-level domain (TLD), such
+	// as .com, must be a TLD that Route 53 supports. For a list of supported TLDs,
+	// see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+	// in the Amazon Route 53 Developer Guide.
 	//
-	// Constraints: The domain name can contain only the letters a through z, the
-	// numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not
-	// supported.
+	// The domain name can contain only the following characters:
+	//
+	//    * Letters a through z. Domain names are not case sensitive.
+	//
+	//    * Numbers 0 through 9.
+	//
+	//    * Hyphen (-). You can't specify a hyphen at the beginning or end of a
+	//    label.
+	//
+	//    * Period (.) to separate the labels in the name, such as the . in example.com.
+	//
+	// Internationalized domain names are not supported for some top-level domains.
+	// To determine whether the TLD that you want to use supports internationalized
+	// domain names, see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html).
+	// For more information, see Formatting Internationalized Domain Names (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html#domain-name-format-idns).
 	//
 	// DomainName is a required field
 	DomainName *string `type:"string" required:"true"`
@@ -36,7 +52,7 @@ type RegisterDomainInput struct {
 	// The number of years that you want to register the domain for. Domains are
 	// registered for a minimum of one year. The maximum period depends on the top-level
 	// domain. For the range of valid values for your domain, see Domains that You
-	// Can Register with Amazon Route 53 (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+	// Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
 	// in the Amazon Route 53 Developer Guide.
 	//
 	// Default: 1
@@ -75,12 +91,14 @@ type RegisterDomainInput struct {
 	// Default: true
 	PrivacyProtectTechContact *bool `type:"boolean"`
 
-	// Provides detailed contact information.
+	// Provides detailed contact information. For information about the values that
+	// you specify for each element, see ContactDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html).
 	//
 	// RegistrantContact is a required field
 	RegistrantContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 
-	// Provides detailed contact information.
+	// Provides detailed contact information. For information about the values that
+	// you specify for each element, see ContactDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html).
 	//
 	// TechContact is a required field
 	TechContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
@@ -143,8 +161,8 @@ func (s *RegisterDomainInput) Validate() error {
 type RegisterDomainOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Identifier for tracking the progress of the request. To use this ID to query
-	// the operation status, use GetOperationDetail.
+	// Identifier for tracking the progress of the request. To query the operation
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
 	//
 	// OperationId is a required field
 	OperationId *string `type:"string" required:"true"`
@@ -167,10 +185,9 @@ const opRegisterDomain = "RegisterDomain"
 //
 // When you register a domain, Amazon Route 53 does the following:
 //
-//    * Creates a Amazon Route 53 hosted zone that has the same name as the
-//    domain. Amazon Route 53 assigns four name servers to your hosted zone
-//    and automatically updates your domain registration with the names of these
-//    name servers.
+//    * Creates a Route 53 hosted zone that has the same name as the domain.
+//    Route 53 assigns four name servers to your hosted zone and automatically
+//    updates your domain registration with the names of these name servers.
 //
 //    * Enables autorenew, so your domain registration will renew automatically
 //    each year. We'll notify you in advance of the renewal date so you can

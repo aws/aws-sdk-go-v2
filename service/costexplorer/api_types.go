@@ -12,12 +12,6 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-//
-//  Cost Category is in public beta for AWS Billing and Cost Management and
-//  is subject to change. Your use of Cost Categories is subject to the Beta
-//  Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-//  (Section 1.10).
-//
 // The structure of Cost Categories. This includes detailed metadata and the
 // set of rules for the CostCategory object.
 type CostCategory struct {
@@ -59,12 +53,6 @@ func (s CostCategory) String() string {
 	return awsutil.Prettify(s)
 }
 
-//
-//  Cost Category is in public beta for AWS Billing and Cost Management and
-//  is subject to change. Your use of Cost Categories is subject to the Beta
-//  Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-//  (Section 1.10).
-//
 // A reference to a Cost Category containing only enough information to identify
 // the Cost Category.
 //
@@ -73,7 +61,7 @@ func (s CostCategory) String() string {
 type CostCategoryReference struct {
 	_ struct{} `type:"structure"`
 
-	// The unique identifier for your Cost Category Reference.
+	// The unique identifier for your Cost Category.
 	CostCategoryArn *string `min:"20" type:"string"`
 
 	// The Cost Category's effective end date.
@@ -84,6 +72,9 @@ type CostCategoryReference struct {
 
 	// The unique name of the Cost Category.
 	Name *string `min:"1" type:"string"`
+
+	// The number of rules associated with a specific Cost Category.
+	NumberOfRules *int64 `type:"integer"`
 }
 
 // String returns the string representation
@@ -91,23 +82,25 @@ func (s CostCategoryReference) String() string {
 	return awsutil.Prettify(s)
 }
 
-//
-//  Cost Category is in public beta for AWS Billing and Cost Management and
-//  is subject to change. Your use of Cost Categories is subject to the Beta
-//  Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-//  (Section 1.10).
-//
 // Rules are processed in order. If there are multiple rules that match the
 // line item, then the first rule to match is used to determine that Cost Category
 // value.
 type CostCategoryRule struct {
 	_ struct{} `type:"structure"`
 
-	// An Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// An Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object used to categorize costs. This supports dimensions, Tags, and nested
-	// expressions. Currently the only dimensions supported is LINKED_ACCOUNT.
+	// expressions. Currently the only dimensions supported are LINKED_ACCOUNT,
+	// SERVICE_CODE, RECORD_TYPE, and LINKED_ACCOUNT_NAME.
 	//
-	// Root level OR is not supported. We recommend you create a separate rule instead.
+	// Root level OR is not supported. We recommend that you create a separate rule
+	// instead.
+	//
+	// RECORD_TYPE is a dimension used for Cost Explorer APIs, and is also supported
+	// for Cost Category expressions. This dimension uses different terms, depending
+	// on whether you're using the console or API/JSON editor. For a detailed comparison,
+	// see Term Comparisons (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms)
+	// in the AWS Billing and Cost Management User Guide.
 	//
 	// Rule is a required field
 	Rule *Expression `type:"structure" required:"true"`
@@ -149,13 +142,7 @@ func (s *CostCategoryRule) Validate() error {
 	return nil
 }
 
-//
-//  Cost Category is in public beta for AWS Billing and Cost Management and
-//  is subject to change. Your use of Cost Categories is subject to the Beta
-//  Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-//  (Section 1.10).
-//
-// The values that are available for Cost Categories.
+// The Cost Categories values used for filtering the costs.
 type CostCategoryValues struct {
 	_ struct{} `type:"structure"`
 
@@ -223,11 +210,11 @@ func (s CoverageByTime) String() string {
 	return awsutil.Prettify(s)
 }
 
-// How much it cost to run an instance.
+// How much it costs to run an instance.
 type CoverageCost struct {
 	_ struct{} `type:"structure"`
 
-	// How much an On-Demand instance cost.
+	// How much an On-Demand Instance costs.
 	OnDemandCost *string `type:"string"`
 }
 
@@ -384,12 +371,13 @@ type DimensionValues struct {
 	// results. For example, AZ returns a list of Availability Zones.
 	Key Dimension `type:"string" enum:"true"`
 
+	// The match options that you can use to filter your results. MatchOptions is
+	// only applicable for actions related to Cost Category. The default values
+	// for MatchOptions is EQUALS and CASE_SENSITIVE.
+	MatchOptions []MatchOption `type:"list"`
+
 	// The metadata values that you can use to filter and group your results. You
 	// can use GetDimensionValues to find specific values.
-	//
-	// Valid values for the SERVICE dimension are Amazon Elastic Compute Cloud -
-	// Compute, Amazon Elasticsearch Service, Amazon ElastiCache, Amazon Redshift,
-	// and Amazon Relational Database Service.
 	Values []string `type:"list"`
 }
 
@@ -610,12 +598,7 @@ type Expression struct {
 	// Return results that match both Dimension objects.
 	And []Expression `type:"list"`
 
-	//  Cost Category is in public beta for AWS Billing and Cost Management and
-	//  is subject to change. Your use of Cost Categories is subject to the Beta
-	//  Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-	//  (Section 1.10).
-	//
-	// The specific CostCategory used for Expression.
+	// The filter based on CostCategory values.
 	CostCategories *CostCategoryValues `type:"structure"`
 
 	// The specific Dimension to use for Expression.
@@ -1028,12 +1011,12 @@ func (s ReservationPurchaseRecommendationDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Information about this specific recommendation, such as the time stamp for
+// Information about this specific recommendation, such as the timestamp for
 // when AWS made a specific recommendation.
 type ReservationPurchaseRecommendationMetadata struct {
 	_ struct{} `type:"structure"`
 
-	// The time stamp for when AWS made this recommendation.
+	// The timestamp for when AWS made this recommendation.
 	GenerationTimestamp *string `type:"string"`
 
 	// The ID for this specific recommendation.
@@ -1163,6 +1146,49 @@ func (s RightsizingRecommendation) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Enables you to customize recommendations across two attributes. You can choose
+// to view recommendations for instances within the same instance families or
+// across different instance families. You can also choose to view your estimated
+// savings associated with recommendations with consideration of existing Savings
+// Plans or RI benefits, or niether.
+type RightsizingRecommendationConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The option to consider RI or Savings Plans discount benefits in your savings
+	// calculation. The default value is TRUE.
+	//
+	// BenefitsConsidered is a required field
+	BenefitsConsidered *bool `type:"boolean" required:"true"`
+
+	// The option to see recommendations within the same instance family, or recommendations
+	// for instances across other families. The default value is SAME_INSTANCE_FAMILY.
+	//
+	// RecommendationTarget is a required field
+	RecommendationTarget RecommendationTarget `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s RightsizingRecommendationConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RightsizingRecommendationConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RightsizingRecommendationConfiguration"}
+
+	if s.BenefitsConsidered == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BenefitsConsidered"))
+	}
+	if len(s.RecommendationTarget) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("RecommendationTarget"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Metadata for this recommendation set.
 type RightsizingRecommendationMetadata struct {
 	_ struct{} `type:"structure"`
@@ -1255,7 +1281,7 @@ func (s SavingsPlansCoverage) String() string {
 type SavingsPlansCoverageData struct {
 	_ struct{} `type:"structure"`
 
-	// The percentage of your existing Savings Planscovered usage, divided by all
+	// The percentage of your existing Savings Plans covered usage, divided by all
 	// of your eligible Savings Plans usage in an account(or set of accounts).
 	CoveragePercentage *string `type:"string"`
 
@@ -1301,13 +1327,19 @@ func (s SavingsPlansDetails) String() string {
 type SavingsPlansPurchaseRecommendation struct {
 	_ struct{} `type:"structure"`
 
+	// The account scope that you want your recommendations for. Amazon Web Services
+	// calculates recommendations including the payer account and linked accounts
+	// if the value is set to PAYER. If the value is LINKED, recommendations are
+	// calculated for individual linked accounts only.
+	AccountScope AccountScope `type:"string" enum:"true"`
+
 	// The lookback period in days, used to generate the recommendation.
 	LookbackPeriodInDays LookbackPeriodInDays `type:"string" enum:"true"`
 
 	// The payment option used to generate the recommendation.
 	PaymentOption PaymentOption `type:"string" enum:"true"`
 
-	// Details for the Savings Plans we recommend you to purchase to cover existing,
+	// Details for the Savings Plans we recommend that you purchase to cover existing
 	// Savings Plans eligible workloads.
 	SavingsPlansPurchaseRecommendationDetails []SavingsPlansPurchaseRecommendationDetail `type:"list"`
 
@@ -1619,6 +1651,11 @@ type TagValues struct {
 
 	// The key for the tag.
 	Key *string `type:"string"`
+
+	// The match options that you can use to filter your results. MatchOptions is
+	// only applicable for only applicable for actions related to Cost Category.
+	// The default values for MatchOptions is EQUALS and CASE_SENSITIVE.
+	MatchOptions []MatchOption `type:"list"`
 
 	// The specific value of the tag.
 	Values []string `type:"list"`

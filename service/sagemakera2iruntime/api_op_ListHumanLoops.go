@@ -28,15 +28,14 @@ type ListHumanLoopsInput struct {
 	FlowDefinitionArn *string `location:"querystring" locationName:"FlowDefinitionArn" type:"string" required:"true"`
 
 	// The total number of items to return. If the total number of available items
-	// is more than the value specified in MaxResults, then a NextToken will be
-	// provided in the output that you can use to resume pagination.
+	// is more than the value specified in MaxResults, then a NextToken is returned
+	// in the output. You can use this token to display the next page of results.
 	MaxResults *int64 `location:"querystring" locationName:"MaxResults" min:"1" type:"integer"`
 
-	// A token to resume pagination.
+	// A token to display the next page of results.
 	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
 
-	// An optional value that specifies whether you want the results sorted in Ascending
-	// or Descending order.
+	// Optional. The order for displaying results. Valid values: Ascending and Descending.
 	SortOrder SortOrder `location:"querystring" locationName:"SortOrder" type:"string" enum:"true"`
 }
 
@@ -110,12 +109,12 @@ func (s ListHumanLoopsInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListHumanLoopsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An array of objects containing information about the human loops.
+	// An array of objects that contain information about the human loops.
 	//
 	// HumanLoopSummaries is a required field
 	HumanLoopSummaries []HumanLoopSummary `type:"list" required:"true"`
 
-	// A token to resume pagination.
+	// A token to display the next page of results.
 	NextToken *string `type:"string"`
 }
 

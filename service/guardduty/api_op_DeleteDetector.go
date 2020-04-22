@@ -73,7 +73,7 @@ const opDeleteDetector = "DeleteDetector"
 // DeleteDetectorRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Deletes a Amazon GuardDuty detector specified by the detector ID.
+// Deletes an Amazon GuardDuty detector that is specified by the detector ID.
 //
 //    // Example sending a request using DeleteDetectorRequest.
 //    req := client.DeleteDetectorRequest(params)

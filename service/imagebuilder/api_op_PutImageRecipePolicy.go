@@ -108,7 +108,12 @@ const opPutImageRecipePolicy = "PutImageRecipePolicy"
 // PutImageRecipePolicyRequest returns a request value for making API operation for
 // EC2 Image Builder.
 //
-// Applies a policy to an image recipe.
+// Applies a policy to an image recipe. We recommend that you call the RAM API
+// CreateResourceShare (https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html)
+// to share resources. If you call the Image Builder API PutImageRecipePolicy,
+// you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html)
+// in order for the resource to be visible to all principals with whom the resource
+// is shared.
 //
 //    // Example sending a request using PutImageRecipePolicyRequest.
 //    req := client.PutImageRecipePolicyRequest(params)

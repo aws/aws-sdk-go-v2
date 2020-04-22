@@ -4,6 +4,7 @@ package chime
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -23,6 +24,9 @@ type CreateAttendeeInput struct {
 	//
 	// MeetingId is a required field
 	MeetingId *string `location:"uri" locationName:"meetingId" type:"string" required:"true"`
+
+	// The tag key-value pairs.
+	Tags []Tag `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -44,6 +48,16 @@ func (s *CreateAttendeeInput) Validate() error {
 	if s.MeetingId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MeetingId"))
 	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -60,6 +74,18 @@ func (s CreateAttendeeInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ExternalUserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.MeetingId != nil {
 		v := *s.MeetingId

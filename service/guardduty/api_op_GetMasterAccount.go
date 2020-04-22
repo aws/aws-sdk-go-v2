@@ -57,7 +57,7 @@ func (s GetMasterAccountInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetMasterAccountOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Master account details.
+	// The master account details.
 	//
 	// Master is a required field
 	Master *Master `locationName:"master" type:"structure" required:"true"`

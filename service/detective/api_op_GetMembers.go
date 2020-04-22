@@ -132,8 +132,6 @@ const opGetMembers = "GetMembers"
 // GetMembersRequest returns a request value for making API operation for
 // Amazon Detective.
 //
-// Amazon Detective is currently in preview.
-//
 // Returns the membership details for specified member accounts for a behavior
 // graph.
 //

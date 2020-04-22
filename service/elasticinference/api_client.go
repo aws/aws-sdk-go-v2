@@ -28,7 +28,7 @@ var initRequest func(*Client, *aws.Request)
 const (
 	ServiceName = "Amazon Elastic Inference" // Service's name
 	ServiceID   = "ElasticInference"         // Service's identifier
-	EndpointsID = "api.elastic-inference"    // Service's Endpoint identifier
+	EndpointsID = "elastic-inference"        // Service's Endpoint identifier
 )
 
 // New creates a new instance of the client from the provided Config.

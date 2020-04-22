@@ -61,6 +61,12 @@ const opDeleteGameSessionQueue = "DeleteGameSessionQueue"
 // requests that reference this queue will fail. To delete a queue, specify
 // the queue name.
 //
+// Learn more
+//
+//  Using Multi-Region Queues (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html)
+//
+// Related operations
+//
 //    * CreateGameSessionQueue
 //
 //    * DescribeGameSessionQueues

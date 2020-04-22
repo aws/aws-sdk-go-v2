@@ -99,7 +99,7 @@ const opUpdateFleetAttributes = "UpdateFleetAttributes"
 //
 // Learn more
 //
-//  Working with Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html).
+// Setting up GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 //
 // Related operations
 //
@@ -114,7 +114,7 @@ const opUpdateFleetAttributes = "UpdateFleetAttributes"
 //    * Update fleets: UpdateFleetAttributes UpdateFleetCapacity UpdateFleetPortSettings
 //    UpdateRuntimeConfiguration
 //
-//    * Manage fleet actions: StartFleetActions StopFleetActions
+//    * StartFleetActions or StopFleetActions
 //
 //    // Example sending a request using UpdateFleetAttributesRequest.
 //    req := client.UpdateFleetAttributesRequest(params)

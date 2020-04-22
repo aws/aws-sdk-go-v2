@@ -14,7 +14,7 @@ import (
 type DescribeHumanLoopInput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique name of the human loop.
+	// The name of the human loop that you want information about.
 	//
 	// HumanLoopName is a required field
 	HumanLoopName *string `location:"uri" locationName:"HumanLoopName" min:"1" type:"string" required:"true"`
@@ -63,11 +63,11 @@ type DescribeHumanLoopOutput struct {
 	// CreationTime is a required field
 	CreationTime *time.Time `type:"timestamp" required:"true"`
 
-	// A failure code denoting a specific type of failure.
+	// A failure code that identifies the type of failure.
 	FailureCode *string `type:"string"`
 
-	// The reason why a human loop has failed. The failure reason is returned when
-	// the human loop status is Failed.
+	// The reason why a human loop failed. The failure reason is returned when the
+	// status of the human loop is Failed.
 	FailureReason *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the flow definition.
@@ -80,15 +80,17 @@ type DescribeHumanLoopOutput struct {
 	// HumanLoopArn is a required field
 	HumanLoopArn *string `type:"string" required:"true"`
 
-	// The name of the human loop.
+	// The name of the human loop. The name must be lowercase, unique within the
+	// Region in your account, and can have up to 63 characters. Valid characters:
+	// a-z, 0-9, and - (hyphen).
 	//
 	// HumanLoopName is a required field
 	HumanLoopName *string `min:"1" type:"string" required:"true"`
 
-	// An object containing information about the output of the human loop.
+	// An object that contains information about the output of the human loop.
 	HumanLoopOutput *HumanLoopOutput `type:"structure"`
 
-	// The status of the human loop. Valid values:
+	// The status of the human loop.
 	//
 	// HumanLoopStatus is a required field
 	HumanLoopStatus HumanLoopStatus `type:"string" required:"true" enum:"true"`

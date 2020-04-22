@@ -64,8 +64,8 @@ func (s DeclineInvitationsInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeclineInvitationsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
+	// A list of objects that contain the unprocessed account and a result string
+	// that explains why it was unprocessed.
 	//
 	// UnprocessedAccounts is a required field
 	UnprocessedAccounts []UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
@@ -98,7 +98,7 @@ const opDeclineInvitations = "DeclineInvitations"
 // DeclineInvitationsRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Declines invitations sent to the current member account by AWS account specified
+// Declines invitations sent to the current member account by AWS accounts specified
 // by their account IDs.
 //
 //    // Example sending a request using DeclineInvitationsRequest.

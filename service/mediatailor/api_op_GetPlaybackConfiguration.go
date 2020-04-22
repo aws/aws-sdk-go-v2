@@ -59,6 +59,9 @@ type GetPlaybackConfigurationOutput struct {
 	// static VAST URL. The maximum length is 25,000 characters.
 	AdDecisionServerUrl *string `type:"string"`
 
+	// The configuration for Avail Suppression.
+	AvailSuppression *AvailSuppression `type:"structure"`
+
 	// The configuration for using a content delivery network (CDN), like Amazon
 	// CloudFront, for content and ad segment management.
 	CdnConfiguration *CdnConfiguration `type:"structure"`
@@ -122,6 +125,12 @@ func (s GetPlaybackConfigurationOutput) MarshalFields(e protocol.FieldEncoder) e
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "AdDecisionServerUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AvailSuppression != nil {
+		v := s.AvailSuppression
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AvailSuppression", v, metadata)
 	}
 	if s.CdnConfiguration != nil {
 		v := s.CdnConfiguration

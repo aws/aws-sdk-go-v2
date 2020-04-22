@@ -73,9 +73,13 @@ type ClientAPI interface {
 
 	CreateVariableRequest(*frauddetector.CreateVariableInput) frauddetector.CreateVariableRequest
 
+	DeleteDetectorRequest(*frauddetector.DeleteDetectorInput) frauddetector.DeleteDetectorRequest
+
 	DeleteDetectorVersionRequest(*frauddetector.DeleteDetectorVersionInput) frauddetector.DeleteDetectorVersionRequest
 
 	DeleteEventRequest(*frauddetector.DeleteEventInput) frauddetector.DeleteEventRequest
+
+	DeleteRuleVersionRequest(*frauddetector.DeleteRuleVersionInput) frauddetector.DeleteRuleVersionRequest
 
 	DescribeDetectorRequest(*frauddetector.DescribeDetectorInput) frauddetector.DescribeDetectorRequest
 

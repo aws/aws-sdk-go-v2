@@ -61,10 +61,12 @@ const (
 	DimensionAz                 Dimension = "AZ"
 	DimensionInstanceType       Dimension = "INSTANCE_TYPE"
 	DimensionLinkedAccount      Dimension = "LINKED_ACCOUNT"
+	DimensionLinkedAccountName  Dimension = "LINKED_ACCOUNT_NAME"
 	DimensionOperation          Dimension = "OPERATION"
 	DimensionPurchaseType       Dimension = "PURCHASE_TYPE"
 	DimensionRegion             Dimension = "REGION"
 	DimensionService            Dimension = "SERVICE"
+	DimensionServiceCode        Dimension = "SERVICE_CODE"
 	DimensionUsageType          Dimension = "USAGE_TYPE"
 	DimensionUsageTypeGroup     Dimension = "USAGE_TYPE_GROUP"
 	DimensionRecordType         Dimension = "RECORD_TYPE"
@@ -150,6 +152,27 @@ func (enum LookbackPeriodInDays) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type MatchOption string
+
+// Enum values for MatchOption
+const (
+	MatchOptionEquals          MatchOption = "EQUALS"
+	MatchOptionStartsWith      MatchOption = "STARTS_WITH"
+	MatchOptionEndsWith        MatchOption = "ENDS_WITH"
+	MatchOptionContains        MatchOption = "CONTAINS"
+	MatchOptionCaseSensitive   MatchOption = "CASE_SENSITIVE"
+	MatchOptionCaseInsensitive MatchOption = "CASE_INSENSITIVE"
+)
+
+func (enum MatchOption) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MatchOption) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Metric string
 
 // Enum values for Metric
@@ -206,6 +229,23 @@ func (enum PaymentOption) MarshalValue() (string, error) {
 }
 
 func (enum PaymentOption) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RecommendationTarget string
+
+// Enum values for RecommendationTarget
+const (
+	RecommendationTargetSameInstanceFamily  RecommendationTarget = "SAME_INSTANCE_FAMILY"
+	RecommendationTargetCrossInstanceFamily RecommendationTarget = "CROSS_INSTANCE_FAMILY"
+)
+
+func (enum RecommendationTarget) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RecommendationTarget) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

@@ -13,8 +13,7 @@ import (
 type CreateEndpointInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of an endpoint configuration. For more information, see CreateEndpointConfig
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html).
+	// The name of an endpoint configuration. For more information, see CreateEndpointConfig.
 	//
 	// EndpointConfigName is a required field
 	EndpointConfigName *string `type:"string" required:"true"`
@@ -82,8 +81,7 @@ const opCreateEndpoint = "CreateEndpoint"
 //
 // Creates an endpoint using the endpoint configuration specified in the request.
 // Amazon SageMaker uses the endpoint to provision resources and deploy models.
-// You create the endpoint configuration with the CreateEndpointConfig (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html)
-// API.
+// You create the endpoint configuration with the CreateEndpointConfig API.
 //
 // Use this API to deploy models using Amazon SageMaker hosting services.
 //
@@ -103,8 +101,7 @@ const opCreateEndpoint = "CreateEndpoint"
 // When Amazon SageMaker receives the request, it sets the endpoint status to
 // Creating. After it creates the endpoint, it sets the status to InService.
 // Amazon SageMaker can then process incoming requests for inferences. To check
-// the status of an endpoint, use the DescribeEndpoint (https://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html)
-// API.
+// the status of an endpoint, use the DescribeEndpoint API.
 //
 // If any of the models hosted at this endpoint get model data from an Amazon
 // S3 location, Amazon SageMaker uses AWS Security Token Service to download

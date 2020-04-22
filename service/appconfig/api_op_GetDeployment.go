@@ -118,6 +118,10 @@ type GetDeploymentOutput struct {
 	// The ID of the environment that was deployed.
 	EnvironmentId *string `type:"string"`
 
+	// A list containing all events related to a deployment. The most recent events
+	// are displayed first.
+	EventLog []DeploymentEvent `type:"list"`
+
 	// The amount of time AppConfig monitored for alarms before considering the
 	// deployment to be complete and no longer eligible for automatic roll back.
 	FinalBakeTimeInMinutes *int64 `type:"integer"`
@@ -212,6 +216,18 @@ func (s GetDeploymentOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "EnvironmentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EventLog != nil {
+		v := s.EventLog
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "EventLog", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.FinalBakeTimeInMinutes != nil {
 		v := *s.FinalBakeTimeInMinutes

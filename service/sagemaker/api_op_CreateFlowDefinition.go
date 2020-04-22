@@ -27,6 +27,10 @@ type CreateFlowDefinitionInput struct {
 	// HumanLoopConfig is a required field
 	HumanLoopConfig *HumanLoopConfig `type:"structure" required:"true"`
 
+	// Container for configuring the source of human task requests. Use to specify
+	// if Amazon Rekognition or Amazon Textract is used as an integration source.
+	HumanLoopRequestSource *HumanLoopRequestSource `type:"structure"`
+
 	// An object containing information about where the human review results will
 	// be uploaded.
 	//
@@ -83,6 +87,11 @@ func (s *CreateFlowDefinitionInput) Validate() error {
 	if s.HumanLoopConfig != nil {
 		if err := s.HumanLoopConfig.Validate(); err != nil {
 			invalidParams.AddNested("HumanLoopConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.HumanLoopRequestSource != nil {
+		if err := s.HumanLoopRequestSource.Validate(); err != nil {
+			invalidParams.AddNested("HumanLoopRequestSource", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.OutputConfig != nil {

@@ -117,6 +117,8 @@ type ClientAPI interface {
 
 	DeleteVpcLinkRequest(*apigatewayv2.DeleteVpcLinkInput) apigatewayv2.DeleteVpcLinkRequest
 
+	ExportApiRequest(*apigatewayv2.ExportApiInput) apigatewayv2.ExportApiRequest
+
 	GetApiRequest(*apigatewayv2.GetApiInput) apigatewayv2.GetApiRequest
 
 	GetApiMappingRequest(*apigatewayv2.GetApiMappingInput) apigatewayv2.GetApiMappingRequest

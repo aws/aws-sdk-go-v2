@@ -12,13 +12,12 @@ import (
 type SearchInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of results to return in a SearchResponse.
+	// The maximum number of results to return.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// If more than MaxResults resource objects match the specified SearchExpression,
-	// the SearchResponse includes a NextToken. The NextToken can be passed to the
-	// next SearchRequest to continue retrieving results for the specified SearchExpression
-	// and Sort parameters.
+	// If more than MaxResults resources match the specified SearchExpression, the
+	// response includes a NextToken. The NextToken can be passed to the next SearchRequest
+	// to continue retrieving results.
 	NextToken *string `type:"string"`
 
 	// The name of the Amazon SageMaker resource to search for.
@@ -26,8 +25,8 @@ type SearchInput struct {
 	// Resource is a required field
 	Resource ResourceType `type:"string" required:"true" enum:"true"`
 
-	// A Boolean conditional statement. Resource objects must satisfy this condition
-	// to be included in search results. You must provide at least one subexpression,
+	// A Boolean conditional statement. Resources must satisfy this condition to
+	// be included in search results. You must provide at least one subexpression,
 	// filter, or nested filter. The maximum number of recursive SubExpressions,
 	// NestedFilters, and Filters that can be included in a SearchExpression object
 	// is 50.
@@ -79,7 +78,7 @@ type SearchOutput struct {
 	// in the next request.
 	NextToken *string `type:"string"`
 
-	// A list of SearchResult objects.
+	// A list of SearchRecord objects.
 	Results []SearchRecord `type:"list"`
 }
 
@@ -93,9 +92,9 @@ const opSearch = "Search"
 // SearchRequest returns a request value for making API operation for
 // Amazon SageMaker Service.
 //
-// Finds Amazon SageMaker resources that match a search query. Matching resource
-// objects are returned as a list of SearchResult objects in the response. You
-// can sort the search results by any resource property in a ascending or descending
+// Finds Amazon SageMaker resources that match a search query. Matching resources
+// are returned as a list of SearchRecord objects in the response. You can sort
+// the search results by any resource property in a ascending or descending
 // order.
 //
 // You can query against the following value types: numeric, text, Boolean,

@@ -4,6 +4,7 @@ package mediaconvert
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -15,9 +16,9 @@ import (
 type CreateJobInput struct {
 	_ struct{} `type:"structure"`
 
-	// Accelerated transcoding can significantly speed up jobs with long, visually
-	// complex content. Outputs that use this feature incur pro-tier pricing. For
-	// information about feature limitations, see the AWS Elemental MediaConvert
+	// Optional. Accelerated transcoding can significantly speed up jobs with long,
+	// visually complex content. Outputs that use this feature incur pro-tier pricing.
+	// For information about feature limitations, see the AWS Elemental MediaConvert
 	// User Guide.
 	AccelerationSettings *AccelerationSettings `locationName:"accelerationSettings" type:"structure"`
 
@@ -28,18 +29,25 @@ type CreateJobInput struct {
 	// for this field, your job outputs will appear on the billing report unsorted.
 	BillingTagsSource BillingTagsSource `locationName:"billingTagsSource" type:"string" enum:"true"`
 
-	// Idempotency token for CreateJob operation.
+	// Optional. Idempotency token for CreateJob operation.
 	ClientRequestToken *string `locationName:"clientRequestToken" type:"string" idempotencyToken:"true"`
 
-	// When you create a job, you can either specify a job template or specify the
-	// transcoding settings individually
+	// Optional. Use queue hopping to avoid overly long waits in the backlog of
+	// the queue that you submit your job to. Specify an alternate queue and the
+	// maximum time that your job will wait in the initial queue before hopping.
+	// For more information about this feature, see the AWS Elemental MediaConvert
+	// User Guide.
+	HopDestinations []HopDestination `locationName:"hopDestinations" type:"list"`
+
+	// Optional. When you create a job, you can either specify a job template or
+	// specify the transcoding settings individually.
 	JobTemplate *string `locationName:"jobTemplate" type:"string"`
 
-	// Specify the relative priority for this job. In any given queue, the service
-	// begins processing the job with the highest value first. When more than one
-	// job has the same priority, the service begins processing the job that you
-	// submitted first. If you don't specify a priority, the service uses the default
-	// value 0.
+	// Optional. Specify the relative priority for this job. In any given queue,
+	// the service begins processing the job with the highest value first. When
+	// more than one job has the same priority, the service begins processing the
+	// job that you submitted first. If you don't specify a priority, the service
+	// uses the default value 0.
 	Priority *int64 `locationName:"priority" type:"integer"`
 
 	// Optional. When you create a job, you can specify a queue to send it to. If
@@ -58,24 +66,25 @@ type CreateJobInput struct {
 	// Settings is a required field
 	Settings *JobSettings `locationName:"settings" type:"structure" required:"true"`
 
-	// Enable this setting when you run a test job to estimate how many reserved
-	// transcoding slots (RTS) you need. When this is enabled, MediaConvert runs
-	// your job from an on-demand queue with similar performance to what you will
-	// see with one RTS in a reserved queue. This setting is disabled by default.
+	// Optional. Enable this setting when you run a test job to estimate how many
+	// reserved transcoding slots (RTS) you need. When this is enabled, MediaConvert
+	// runs your job from an on-demand queue with similar performance to what you
+	// will see with one RTS in a reserved queue. This setting is disabled by default.
 	SimulateReservedQueue SimulateReservedQueue `locationName:"simulateReservedQueue" type:"string" enum:"true"`
 
-	// Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch
-	// Events. Set the interval, in seconds, between status updates. MediaConvert
-	// sends an update at this interval from the time the service begins processing
-	// your job to the time it completes the transcode or encounters an error.
+	// Optional. Specify how often MediaConvert sends STATUS_UPDATE events to Amazon
+	// CloudWatch Events. Set the interval, in seconds, between status updates.
+	// MediaConvert sends an update at this interval from the time the service begins
+	// processing your job to the time it completes the transcode or encounters
+	// an error.
 	StatusUpdateInterval StatusUpdateInterval `locationName:"statusUpdateInterval" type:"string" enum:"true"`
 
-	// The tags that you want to add to the resource. You can tag resources with
-	// a key-value pair or with only a key.
+	// Optional. The tags that you want to add to the resource. You can tag resources
+	// with a key-value pair or with only a key.
 	Tags map[string]string `locationName:"tags" type:"map"`
 
-	// User-defined metadata that you want to associate with an MediaConvert job.
-	// You specify metadata in key/value pairs.
+	// Optional. User-defined metadata that you want to associate with an MediaConvert
+	// job. You specify metadata in key/value pairs.
 	UserMetadata map[string]string `locationName:"userMetadata" type:"map"`
 }
 
@@ -101,6 +110,13 @@ func (s *CreateJobInput) Validate() error {
 	if s.AccelerationSettings != nil {
 		if err := s.AccelerationSettings.Validate(); err != nil {
 			invalidParams.AddNested("AccelerationSettings", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.HopDestinations != nil {
+		for i, v := range s.HopDestinations {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "HopDestinations", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 	if s.Settings != nil {
@@ -142,6 +158,18 @@ func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HopDestinations != nil {
+		v := s.HopDestinations
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "hopDestinations", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.JobTemplate != nil {
 		v := *s.JobTemplate

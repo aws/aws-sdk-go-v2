@@ -13,7 +13,7 @@ import (
 type CreateIPSetInput struct {
 	_ struct{} `type:"structure"`
 
-	// A boolean value that indicates whether GuardDuty is to start using the uploaded
+	// A Boolean value that indicates whether GuardDuty is to start using the uploaded
 	// IPSet.
 	//
 	// Activate is a required field
@@ -22,8 +22,8 @@ type CreateIPSetInput struct {
 	// The idempotency token for the create request.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
-	// The unique ID of the detector of the GuardDuty account for which you want
-	// to create an IPSet.
+	// The unique ID of the detector of the GuardDuty account that you want to create
+	// an IPSet for.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
@@ -33,14 +33,15 @@ type CreateIPSetInput struct {
 	// Format is a required field
 	Format IpSetFormat `locationName:"format" min:"1" type:"string" required:"true" enum:"true"`
 
-	// The URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
+	// The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
 	//
 	// Location is a required field
 	Location *string `locationName:"location" min:"1" type:"string" required:"true"`
 
-	// The user friendly name to identify the IPSet. This name is displayed in all
-	// findings that are triggered by activity that involves IP addresses included
-	// in this IPSet.
+	// The user-friendly name to identify the IPSet.
+	//
+	// Allowed characters are alphanumerics, spaces, hyphens (-), and underscores
+	// (_).
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
@@ -186,11 +187,11 @@ const opCreateIPSet = "CreateIPSet"
 // CreateIPSetRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Creates a new IPSet, called Trusted IP list in the consoler user interface.
-// An IPSet is a list IP addresses trusted for secure communication with AWS
-// infrastructure and applications. GuardDuty does not generate findings for
-// IP addresses included in IPSets. Only users from the master account can use
-// this operation.
+// Creates a new IPSet, which is called a trusted IP list in the console user
+// interface. An IPSet is a list of IP addresses that are trusted for secure
+// communication with AWS infrastructure and applications. GuardDuty doesn't
+// generate findings for IP addresses that are included in IPSets. Only users
+// from the master account can use this operation.
 //
 //    // Example sending a request using CreateIPSetRequest.
 //    req := client.CreateIPSetRequest(params)

@@ -78,6 +78,12 @@ const opDescribeGameSessionQueues = "DescribeGameSessionQueues"
 // for each requested queue. When specifying a list of queues, objects are returned
 // only for queues that currently exist in the Region.
 //
+// Learn more
+//
+//  View Your Queues (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-console.html)
+//
+// Related operations
+//
 //    * CreateGameSessionQueue
 //
 //    * DescribeGameSessionQueues

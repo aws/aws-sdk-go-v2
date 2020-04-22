@@ -99,7 +99,7 @@ const opTagResource = "TagResource"
 //    * MatchmakingRuleSet
 //
 // To add a tag to a resource, specify the unique ARN value for the resource
-// and provide a trig list containing one or more tags. The operation succeeds
+// and provide a tag list containing one or more tags. The operation succeeds
 // even if the list includes tags that are already assigned to the specified
 // resource.
 //

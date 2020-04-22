@@ -17,8 +17,8 @@ type CreateTransformJobInput struct {
 	// request. A record is a single unit of input data that inference can be made
 	// on. For example, a single line in a CSV file is a record.
 	//
-	// To enable the batch strategy, you must set the SplitType property of the
-	// DataProcessing object to Line, RecordIO, or TFRecord.
+	// To enable the batch strategy, you must set the SplitType property to Line,
+	// RecordIO, or TFRecord.
 	//
 	// To use only one record when making an HTTP invocation request to a container,
 	// set BatchStrategy to SingleRecord and SplitType to Line.

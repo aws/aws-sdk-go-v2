@@ -257,17 +257,16 @@ const opCreateFleet = "CreateFleet"
 // set some configuration options, and specify the game server to deploy on
 // the new fleet.
 //
-// To create a new fleet, you must provide the following: (1) a fleet name,
-// (2) an EC2 instance type and fleet type (spot or on-demand), (3) the build
-// ID for your game build or script ID if using Realtime Servers, and (4) a
-// runtime configuration, which determines how game servers will run on each
-// instance in the fleet.
+// To create a new fleet, provide the following: (1) a fleet name, (2) an EC2
+// instance type and fleet type (spot or on-demand), (3) the build ID for your
+// game build or script ID if using Realtime Servers, and (4) a runtime configuration,
+// which determines how game servers will run on each instance in the fleet.
 //
 // If the CreateFleet call is successful, Amazon GameLift performs the following
 // tasks. You can track the process of a fleet by checking the fleet status
 // or by monitoring fleet creation events:
 //
-//    * Creates a fleet record. Status: NEW.
+//    * Creates a fleet resource. Status: NEW.
 //
 //    * Begins writing events to the fleet event log, which can be accessed
 //    in the Amazon GameLift console.
@@ -287,9 +286,9 @@ const opCreateFleet = "CreateFleet"
 //
 // Learn more
 //
-//  Setting Up Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// Setting Up Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 //
-//  Debug Fleet Creation Issues (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation)
+// Debug Fleet Creation Issues (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation)
 //
 // Related operations
 //
@@ -303,7 +302,7 @@ const opCreateFleet = "CreateFleet"
 //
 //    * UpdateFleetAttributes
 //
-//    * Manage fleet actions: StartFleetActions StopFleetActions
+//    * StartFleetActions or StopFleetActions
 //
 //    // Example sending a request using CreateFleetRequest.
 //    req := client.CreateFleetRequest(params)

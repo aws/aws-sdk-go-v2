@@ -86,7 +86,7 @@ const opPutLoggingConfiguration = "PutLoggingConfiguration"
 //
 // Create an Amazon Kinesis Data Firehose.
 //
-// Create the data firehose with a PUT source and in the region that you are
+// Create the data firehose with a PUT source and in the Region that you are
 // operating. If you are capturing logs for Amazon CloudFront, always create
 // the firehose in US East (N. Virginia).
 //

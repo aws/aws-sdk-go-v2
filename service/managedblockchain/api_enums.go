@@ -62,6 +62,7 @@ const (
 	MemberStatusCreating     MemberStatus = "CREATING"
 	MemberStatusAvailable    MemberStatus = "AVAILABLE"
 	MemberStatusCreateFailed MemberStatus = "CREATE_FAILED"
+	MemberStatusUpdating     MemberStatus = "UPDATING"
 	MemberStatusDeleting     MemberStatus = "DELETING"
 	MemberStatusDeleted      MemberStatus = "DELETED"
 )
@@ -102,6 +103,7 @@ const (
 	NodeStatusCreating     NodeStatus = "CREATING"
 	NodeStatusAvailable    NodeStatus = "AVAILABLE"
 	NodeStatusCreateFailed NodeStatus = "CREATE_FAILED"
+	NodeStatusUpdating     NodeStatus = "UPDATING"
 	NodeStatusDeleting     NodeStatus = "DELETING"
 	NodeStatusDeleted      NodeStatus = "DELETED"
 	NodeStatusFailed       NodeStatus = "FAILED"

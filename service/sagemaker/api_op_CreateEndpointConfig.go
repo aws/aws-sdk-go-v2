@@ -16,7 +16,6 @@ type CreateEndpointConfigInput struct {
 	DataCaptureConfig *DataCaptureConfig `type:"structure"`
 
 	// The name of the endpoint configuration. You specify this name in a CreateEndpoint
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html)
 	// request.
 	//
 	// EndpointConfigName is a required field
@@ -135,8 +134,7 @@ const opCreateEndpointConfig = "CreateEndpointConfig"
 // Creates an endpoint configuration that Amazon SageMaker hosting services
 // uses to deploy models. In the configuration, you identify one or more models,
 // created using the CreateModel API, to deploy and the resources that you want
-// Amazon SageMaker to provision. Then you call the CreateEndpoint (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html)
-// API.
+// Amazon SageMaker to provision. Then you call the CreateEndpoint API.
 //
 // Use this API if you want to use Amazon SageMaker hosting services to deploy
 // models into production.

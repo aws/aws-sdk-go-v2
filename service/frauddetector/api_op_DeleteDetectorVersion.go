@@ -66,7 +66,8 @@ const opDeleteDetectorVersion = "DeleteDetectorVersion"
 // DeleteDetectorVersionRequest returns a request value for making API operation for
 // Amazon Fraud Detector.
 //
-// Deletes the detector version.
+// Deletes the detector version. You cannot delete detector versions that are
+// in ACTIVE status.
 //
 //    // Example sending a request using DeleteDetectorVersionRequest.
 //    req := client.DeleteDetectorVersionRequest(params)

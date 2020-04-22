@@ -57,10 +57,10 @@ func (s GetDetectorInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetDetectorOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detector creation timestamp.
+	// The timestamp of when the detector was created.
 	CreatedAt *string `locationName:"createdAt" type:"string"`
 
-	// Finding publishing frequency.
+	// The publishing frequency of the finding.
 	FindingPublishingFrequency FindingPublishingFrequency `locationName:"findingPublishingFrequency" type:"string" enum:"true"`
 
 	// The GuardDuty service role.
@@ -76,7 +76,7 @@ type GetDetectorOutput struct {
 	// The tags of the detector resource.
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 
-	// Detector last update timestamp.
+	// The last-updated timestamp for the detector.
 	UpdatedAt *string `locationName:"updatedAt" type:"string"`
 }
 

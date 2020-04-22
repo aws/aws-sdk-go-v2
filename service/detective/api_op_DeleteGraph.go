@@ -71,8 +71,6 @@ const opDeleteGraph = "DeleteGraph"
 // DeleteGraphRequest returns a request value for making API operation for
 // Amazon Detective.
 //
-// Amazon Detective is currently in preview.
-//
 // Disables the specified behavior graph and queues it to be deleted. This operation
 // removes the graph from each member account's list of behavior graphs.
 //

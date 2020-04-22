@@ -73,8 +73,6 @@ const opDisassociateMembership = "DisassociateMembership"
 // DisassociateMembershipRequest returns a request value for making API operation for
 // Amazon Detective.
 //
-// Amazon Detective is currently in preview.
-//
 // Removes the member account from the specified behavior graph. This operation
 // can only be called by a member account that has the ENABLED status.
 //

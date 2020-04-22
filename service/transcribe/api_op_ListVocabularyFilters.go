@@ -56,8 +56,8 @@ type ListVocabularyFiltersOutput struct {
 	// operation to return in the next page of jobs.
 	NextToken *string `type:"string"`
 
-	// The list of vocabulary filters. It will contain at most MaxResults number
-	// of filters. If there are more filters, call the ListVocabularyFilters operation
+	// The list of vocabulary filters. It contains at most MaxResults number of
+	// filters. If there are more filters, call the ListVocabularyFilters operation
 	// again with the NextToken parameter in the request set to the value of the
 	// NextToken field in the response.
 	VocabularyFilters []VocabularyFilterInfo `type:"list"`

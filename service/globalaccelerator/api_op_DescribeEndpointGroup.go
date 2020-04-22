@@ -54,7 +54,8 @@ const opDescribeEndpointGroup = "DescribeEndpointGroup"
 // DescribeEndpointGroupRequest returns a request value for making API operation for
 // AWS Global Accelerator.
 //
-// Describe an endpoint group.
+// Describe an endpoint group. To see an AWS CLI example of describing an endpoint
+// group, scroll down to Example.
 //
 //    // Example sending a request using DescribeEndpointGroupRequest.
 //    req := client.DescribeEndpointGroupRequest(params)

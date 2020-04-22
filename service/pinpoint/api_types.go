@@ -11119,6 +11119,9 @@ type SMSMessage struct {
 	// your dedicated number.
 	Keyword *string `type:"string"`
 
+	// The URL of an image or video to display in the SMS message.
+	MediaUrl *string `type:"string"`
+
 	// The SMS message type. Valid values are: TRANSACTIONAL, the message is critical
 	// or time-sensitive, such as a one-time password that supports a customer transaction;
 	// and, PROMOTIONAL, the message is not critical or time-sensitive, such as
@@ -11158,6 +11161,12 @@ func (s SMSMessage) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Keyword", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MediaUrl != nil {
+		v := *s.MediaUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MediaUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.MessageType) > 0 {
 		v := s.MessageType

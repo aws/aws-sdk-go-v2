@@ -36,7 +36,7 @@ type GetReservationUtilizationInput struct {
 	//
 	//    * TENANCY
 	//
-	// GetReservationUtilization uses the same Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// GetReservationUtilization uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension,
 	// and nesting is supported up to only one level deep. If there are multiple
 	// values for a dimension, they are OR'd together.

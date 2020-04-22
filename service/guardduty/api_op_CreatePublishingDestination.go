@@ -16,14 +16,14 @@ type CreatePublishingDestinationInput struct {
 	// The idempotency token for the request.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
-	// Properties of the publishing destination, including the ARNs for the destination
-	// and the KMS key used for encryption.
+	// The properties of the publishing destination, including the ARNs for the
+	// destination and the KMS key used for encryption.
 	//
 	// DestinationProperties is a required field
 	DestinationProperties *DestinationProperties `locationName:"destinationProperties" type:"structure" required:"true"`
 
-	// The type of resource for the publishing destination. Currently only S3 is
-	// supported.
+	// The type of resource for the publishing destination. Currently only Amazon
+	// S3 buckets are supported.
 	//
 	// DestinationType is a required field
 	DestinationType DestinationType `locationName:"destinationType" min:"1" type:"string" required:"true" enum:"true"`
@@ -103,7 +103,7 @@ func (s CreatePublishingDestinationInput) MarshalFields(e protocol.FieldEncoder)
 type CreatePublishingDestinationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the publishing destination created.
+	// The ID of the publishing destination that is created.
 	//
 	// DestinationId is a required field
 	DestinationId *string `locationName:"destinationId" type:"string" required:"true"`
@@ -130,7 +130,7 @@ const opCreatePublishingDestination = "CreatePublishingDestination"
 // CreatePublishingDestinationRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Creates a publishing destination to send findings to. The resource to send
+// Creates a publishing destination to export findings to. The resource to export
 // findings to must exist before you use this operation.
 //
 //    // Example sending a request using CreatePublishingDestinationRequest.

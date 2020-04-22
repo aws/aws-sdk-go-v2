@@ -73,6 +73,14 @@ type ConstraintDetail struct {
 	// The owner of the constraint.
 	Owner *string `type:"string"`
 
+	// The identifier of the portfolio the product resides in. The constraint applies
+	// only to the instance of the product that lives within this portfolio.
+	PortfolioId *string `min:"1" type:"string"`
+
+	// The identifier of the product the constraint applies to. Note that a constraint
+	// applies to a specific instance of a product within a certain portfolio.
+	ProductId *string `min:"1" type:"string"`
+
 	// The type of constraint.
 	//
 	//    * LAUNCH

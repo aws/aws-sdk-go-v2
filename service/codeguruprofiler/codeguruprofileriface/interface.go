@@ -69,6 +69,8 @@ type ClientAPI interface {
 
 	DescribeProfilingGroupRequest(*codeguruprofiler.DescribeProfilingGroupInput) codeguruprofiler.DescribeProfilingGroupRequest
 
+	GetPolicyRequest(*codeguruprofiler.GetPolicyInput) codeguruprofiler.GetPolicyRequest
+
 	GetProfileRequest(*codeguruprofiler.GetProfileInput) codeguruprofiler.GetProfileRequest
 
 	ListProfileTimesRequest(*codeguruprofiler.ListProfileTimesInput) codeguruprofiler.ListProfileTimesRequest
@@ -76,6 +78,10 @@ type ClientAPI interface {
 	ListProfilingGroupsRequest(*codeguruprofiler.ListProfilingGroupsInput) codeguruprofiler.ListProfilingGroupsRequest
 
 	PostAgentProfileRequest(*codeguruprofiler.PostAgentProfileInput) codeguruprofiler.PostAgentProfileRequest
+
+	PutPermissionRequest(*codeguruprofiler.PutPermissionInput) codeguruprofiler.PutPermissionRequest
+
+	RemovePermissionRequest(*codeguruprofiler.RemovePermissionInput) codeguruprofiler.RemovePermissionRequest
 
 	UpdateProfilingGroupRequest(*codeguruprofiler.UpdateProfilingGroupInput) codeguruprofiler.UpdateProfilingGroupRequest
 }

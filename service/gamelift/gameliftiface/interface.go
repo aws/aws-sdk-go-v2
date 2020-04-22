@@ -63,11 +63,15 @@ import (
 type ClientAPI interface {
 	AcceptMatchRequest(*gamelift.AcceptMatchInput) gamelift.AcceptMatchRequest
 
+	ClaimGameServerRequest(*gamelift.ClaimGameServerInput) gamelift.ClaimGameServerRequest
+
 	CreateAliasRequest(*gamelift.CreateAliasInput) gamelift.CreateAliasRequest
 
 	CreateBuildRequest(*gamelift.CreateBuildInput) gamelift.CreateBuildRequest
 
 	CreateFleetRequest(*gamelift.CreateFleetInput) gamelift.CreateFleetRequest
+
+	CreateGameServerGroupRequest(*gamelift.CreateGameServerGroupInput) gamelift.CreateGameServerGroupRequest
 
 	CreateGameSessionRequest(*gamelift.CreateGameSessionInput) gamelift.CreateGameSessionRequest
 
@@ -93,6 +97,8 @@ type ClientAPI interface {
 
 	DeleteFleetRequest(*gamelift.DeleteFleetInput) gamelift.DeleteFleetRequest
 
+	DeleteGameServerGroupRequest(*gamelift.DeleteGameServerGroupInput) gamelift.DeleteGameServerGroupRequest
+
 	DeleteGameSessionQueueRequest(*gamelift.DeleteGameSessionQueueInput) gamelift.DeleteGameSessionQueueRequest
 
 	DeleteMatchmakingConfigurationRequest(*gamelift.DeleteMatchmakingConfigurationInput) gamelift.DeleteMatchmakingConfigurationRequest
@@ -106,6 +112,8 @@ type ClientAPI interface {
 	DeleteVpcPeeringAuthorizationRequest(*gamelift.DeleteVpcPeeringAuthorizationInput) gamelift.DeleteVpcPeeringAuthorizationRequest
 
 	DeleteVpcPeeringConnectionRequest(*gamelift.DeleteVpcPeeringConnectionInput) gamelift.DeleteVpcPeeringConnectionRequest
+
+	DeregisterGameServerRequest(*gamelift.DeregisterGameServerInput) gamelift.DeregisterGameServerRequest
 
 	DescribeAliasRequest(*gamelift.DescribeAliasInput) gamelift.DescribeAliasRequest
 
@@ -122,6 +130,10 @@ type ClientAPI interface {
 	DescribeFleetPortSettingsRequest(*gamelift.DescribeFleetPortSettingsInput) gamelift.DescribeFleetPortSettingsRequest
 
 	DescribeFleetUtilizationRequest(*gamelift.DescribeFleetUtilizationInput) gamelift.DescribeFleetUtilizationRequest
+
+	DescribeGameServerRequest(*gamelift.DescribeGameServerInput) gamelift.DescribeGameServerRequest
+
+	DescribeGameServerGroupRequest(*gamelift.DescribeGameServerGroupInput) gamelift.DescribeGameServerGroupRequest
 
 	DescribeGameSessionDetailsRequest(*gamelift.DescribeGameSessionDetailsInput) gamelift.DescribeGameSessionDetailsRequest
 
@@ -161,15 +173,23 @@ type ClientAPI interface {
 
 	ListFleetsRequest(*gamelift.ListFleetsInput) gamelift.ListFleetsRequest
 
+	ListGameServerGroupsRequest(*gamelift.ListGameServerGroupsInput) gamelift.ListGameServerGroupsRequest
+
+	ListGameServersRequest(*gamelift.ListGameServersInput) gamelift.ListGameServersRequest
+
 	ListScriptsRequest(*gamelift.ListScriptsInput) gamelift.ListScriptsRequest
 
 	ListTagsForResourceRequest(*gamelift.ListTagsForResourceInput) gamelift.ListTagsForResourceRequest
 
 	PutScalingPolicyRequest(*gamelift.PutScalingPolicyInput) gamelift.PutScalingPolicyRequest
 
+	RegisterGameServerRequest(*gamelift.RegisterGameServerInput) gamelift.RegisterGameServerRequest
+
 	RequestUploadCredentialsRequest(*gamelift.RequestUploadCredentialsInput) gamelift.RequestUploadCredentialsRequest
 
 	ResolveAliasRequest(*gamelift.ResolveAliasInput) gamelift.ResolveAliasRequest
+
+	ResumeGameServerGroupRequest(*gamelift.ResumeGameServerGroupInput) gamelift.ResumeGameServerGroupRequest
 
 	SearchGameSessionsRequest(*gamelift.SearchGameSessionsInput) gamelift.SearchGameSessionsRequest
 
@@ -187,6 +207,8 @@ type ClientAPI interface {
 
 	StopMatchmakingRequest(*gamelift.StopMatchmakingInput) gamelift.StopMatchmakingRequest
 
+	SuspendGameServerGroupRequest(*gamelift.SuspendGameServerGroupInput) gamelift.SuspendGameServerGroupRequest
+
 	TagResourceRequest(*gamelift.TagResourceInput) gamelift.TagResourceRequest
 
 	UntagResourceRequest(*gamelift.UntagResourceInput) gamelift.UntagResourceRequest
@@ -200,6 +222,10 @@ type ClientAPI interface {
 	UpdateFleetCapacityRequest(*gamelift.UpdateFleetCapacityInput) gamelift.UpdateFleetCapacityRequest
 
 	UpdateFleetPortSettingsRequest(*gamelift.UpdateFleetPortSettingsInput) gamelift.UpdateFleetPortSettingsRequest
+
+	UpdateGameServerRequest(*gamelift.UpdateGameServerInput) gamelift.UpdateGameServerRequest
+
+	UpdateGameServerGroupRequest(*gamelift.UpdateGameServerGroupInput) gamelift.UpdateGameServerGroupRequest
 
 	UpdateGameSessionRequest(*gamelift.UpdateGameSessionInput) gamelift.UpdateGameSessionRequest
 

@@ -88,10 +88,14 @@ func ExampleClient_AddTagsToResourceRequest_shared00() {
 			switch aerr.Code() {
 			case rds.ErrCodeDBInstanceNotFoundFault:
 				fmt.Println(rds.ErrCodeDBInstanceNotFoundFault, aerr.Error())
-			case rds.ErrCodeDBSnapshotNotFoundFault:
-				fmt.Println(rds.ErrCodeDBSnapshotNotFoundFault, aerr.Error())
 			case rds.ErrCodeDBClusterNotFoundFault:
 				fmt.Println(rds.ErrCodeDBClusterNotFoundFault, aerr.Error())
+			case rds.ErrCodeDBSnapshotNotFoundFault:
+				fmt.Println(rds.ErrCodeDBSnapshotNotFoundFault, aerr.Error())
+			case rds.ErrCodeDBProxyNotFoundFault:
+				fmt.Println(rds.ErrCodeDBProxyNotFoundFault, aerr.Error())
+			case rds.ErrCodeDBProxyTargetGroupNotFoundFault:
+				fmt.Println(rds.ErrCodeDBProxyTargetGroupNotFoundFault, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -2485,6 +2489,10 @@ func ExampleClient_ListTagsForResourceRequest_shared00() {
 				fmt.Println(rds.ErrCodeDBSnapshotNotFoundFault, aerr.Error())
 			case rds.ErrCodeDBClusterNotFoundFault:
 				fmt.Println(rds.ErrCodeDBClusterNotFoundFault, aerr.Error())
+			case rds.ErrCodeDBProxyNotFoundFault:
+				fmt.Println(rds.ErrCodeDBProxyNotFoundFault, aerr.Error())
+			case rds.ErrCodeDBProxyTargetGroupNotFoundFault:
+				fmt.Println(rds.ErrCodeDBProxyTargetGroupNotFoundFault, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -3146,6 +3154,10 @@ func ExampleClient_RemoveTagsFromResourceRequest_shared00() {
 				fmt.Println(rds.ErrCodeDBSnapshotNotFoundFault, aerr.Error())
 			case rds.ErrCodeDBClusterNotFoundFault:
 				fmt.Println(rds.ErrCodeDBClusterNotFoundFault, aerr.Error())
+			case rds.ErrCodeDBProxyNotFoundFault:
+				fmt.Println(rds.ErrCodeDBProxyNotFoundFault, aerr.Error())
+			case rds.ErrCodeDBProxyTargetGroupNotFoundFault:
+				fmt.Println(rds.ErrCodeDBProxyTargetGroupNotFoundFault, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

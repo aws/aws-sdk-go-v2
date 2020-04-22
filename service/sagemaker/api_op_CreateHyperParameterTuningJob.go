@@ -16,7 +16,7 @@ type CreateHyperParameterTuningJobInput struct {
 	// The HyperParameterTuningJobConfig object that describes the tuning job, including
 	// the search strategy, the objective metric used to evaluate training jobs,
 	// ranges of parameters to search, and resource limits for the tuning job. For
-	// more information, see automatic-model-tuning
+	// more information, see How Hyperparameter Tuning Works (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html).
 	//
 	// HyperParameterTuningJobConfig is a required field
 	HyperParameterTuningJobConfig *HyperParameterTuningJobConfig `type:"structure" required:"true"`

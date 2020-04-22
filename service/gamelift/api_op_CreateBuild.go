@@ -27,11 +27,11 @@ type CreateBuildInput struct {
 	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 
 	// Information indicating where your game build files are stored. Use this parameter
-	// only when creating a build with files stored in an Amazon S3 bucket that
-	// you own. The storage location must specify an Amazon S3 bucket name and key.
-	// The location must also specify a role ARN that you set up to allow Amazon
-	// GameLift to access your Amazon S3 bucket. The S3 bucket and your new build
-	// must be in the same Region.
+	// only when creating a build with files stored in an S3 bucket that you own.
+	// The storage location must specify an S3 bucket name and key. The location
+	// must also specify a role ARN that you set up to allow Amazon GameLift to
+	// access your S3 bucket. The S3 bucket and your new build must be in the same
+	// Region.
 	StorageLocation *S3Location `type:"structure"`
 
 	// A list of labels to assign to the new build resource. Tags are developer-defined
@@ -86,7 +86,7 @@ func (s *CreateBuildInput) Validate() error {
 type CreateBuildOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The newly created build record, including a unique build IDs and status.
+	// The newly created build resource, including a unique build IDs and status.
 	Build *Build `type:"structure"`
 
 	// Amazon S3 location for your game build file, including bucket name and key.
@@ -94,8 +94,8 @@ type CreateBuildOutput struct {
 
 	// This element is returned only when the operation is called without a storage
 	// location. It contains credentials to use when you are uploading a build file
-	// to an Amazon S3 bucket that is owned by Amazon GameLift. Credentials have
-	// a limited life span. To refresh these credentials, call RequestUploadCredentials.
+	// to an S3 bucket that is owned by Amazon GameLift. Credentials have a limited
+	// life span. To refresh these credentials, call RequestUploadCredentials.
 	UploadCredentials *AwsCredentials `type:"structure" sensitive:"true"`
 }
 
@@ -109,45 +109,40 @@ const opCreateBuild = "CreateBuild"
 // CreateBuildRequest returns a request value for making API operation for
 // Amazon GameLift.
 //
-// Creates a new Amazon GameLift build record for your game server binary files
-// and points to the location of your game server build files in an Amazon Simple
-// Storage Service (Amazon S3) location.
+// Creates a new Amazon GameLift build resource for your game server binary
+// files. Game server binaries must be combined into a zip file for use with
+// Amazon GameLift.
 //
-// Game server binaries must be combined into a zip file for use with Amazon
-// GameLift.
+// When setting up a new game build for GameLift, we recommend using the AWS
+// CLI command upload-build (https://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html)
+// . This helper command combines two tasks: (1) it uploads your build files
+// from a file directory to a GameLift Amazon S3 location, and (2) it creates
+// a new build resource.
 //
-// To create new builds directly from a file directory, use the AWS CLI command
-// upload-build (https://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html)
-// . This helper command uploads build files and creates a new build record
-// in one step, and automatically handles the necessary permissions.
+// The CreateBuild operation can used in the following scenarios:
 //
-// The CreateBuild operation should be used only in the following scenarios:
+//    * To create a new game build with build files that are in an S3 location
+//    under an AWS account that you control. To use this option, you must first
+//    give Amazon GameLift access to the S3 bucket. With permissions in place,
+//    call CreateBuild and specify a build name, operating system, and the S3
+//    storage location of your game build.
 //
-//    * To create a new game build with build files that are in an Amazon S3
-//    bucket under your own AWS account. To use this option, you must first
-//    give Amazon GameLift access to that Amazon S3 bucket. Then call CreateBuild
-//    and specify a build name, operating system, and the Amazon S3 storage
-//    location of your game build.
+//    * To directly upload your build files to a GameLift S3 location. To use
+//    this option, first call CreateBuild and specify a build name and operating
+//    system. This action creates a new build resource and also returns an S3
+//    location with temporary access credentials. Use the credentials to manually
+//    upload your build files to the specified S3 location. For more information,
+//    see Uploading Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html)
+//    in the Amazon S3 Developer Guide. Build files can be uploaded to the GameLift
+//    S3 location once only; that can't be updated.
 //
-//    * To upload build files directly to Amazon GameLift's Amazon S3 account.
-//    To use this option, first call CreateBuild and specify a build name and
-//    operating system. This action creates a new build record and returns an
-//    Amazon S3 storage location (bucket and key only) and temporary access
-//    credentials. Use the credentials to manually upload your build file to
-//    the provided storage location (see the Amazon S3 topic Uploading Objects
-//    (https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html)).
-//    You can upload build files to the GameLift Amazon S3 location only once.
-//
-// If successful, this operation creates a new build record with a unique build
-// ID and places it in INITIALIZED status. You can use DescribeBuild to check
-// the status of your build. A build must be in READY status before it can be
-// used to create fleets.
+// If successful, this operation creates a new build resource with a unique
+// build ID and places it in INITIALIZED status. A build must be in READY status
+// before you can create fleets with it.
 //
 // Learn more
 //
 // Uploading Your Game (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
-// https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 //
 //  Create a Build with Files in Amazon S3 (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build)
 //

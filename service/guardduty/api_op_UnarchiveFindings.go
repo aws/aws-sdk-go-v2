@@ -18,7 +18,7 @@ type UnarchiveFindingsInput struct {
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// IDs of the findings to unarchive.
+	// The IDs of the findings to unarchive.
 	//
 	// FindingIds is a required field
 	FindingIds []string `locationName:"findingIds" type:"list" required:"true"`

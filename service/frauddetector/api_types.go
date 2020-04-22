@@ -617,6 +617,22 @@ func (s RuleDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The rule results.
+type RuleResult struct {
+	_ struct{} `type:"structure"`
+
+	// The outcomes of the matched rule, based on the rule execution mode.
+	Outcomes []string `locationName:"outcomes" type:"list"`
+
+	// The rule ID that was matched, based on the rule execution mode.
+	RuleId *string `locationName:"ruleId" type:"string"`
+}
+
+// String returns the string representation
+func (s RuleResult) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The training data source.
 type TrainingDataSource struct {
 	_ struct{} `type:"structure"`

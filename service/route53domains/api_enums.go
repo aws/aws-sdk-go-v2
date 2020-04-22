@@ -293,32 +293,35 @@ type ExtraParamName string
 
 // Enum values for ExtraParamName
 const (
-	ExtraParamNameDunsNumber             ExtraParamName = "DUNS_NUMBER"
-	ExtraParamNameBrandNumber            ExtraParamName = "BRAND_NUMBER"
-	ExtraParamNameBirthDepartment        ExtraParamName = "BIRTH_DEPARTMENT"
-	ExtraParamNameBirthDateInYyyyMmDd    ExtraParamName = "BIRTH_DATE_IN_YYYY_MM_DD"
-	ExtraParamNameBirthCountry           ExtraParamName = "BIRTH_COUNTRY"
-	ExtraParamNameBirthCity              ExtraParamName = "BIRTH_CITY"
-	ExtraParamNameDocumentNumber         ExtraParamName = "DOCUMENT_NUMBER"
-	ExtraParamNameAuIdNumber             ExtraParamName = "AU_ID_NUMBER"
-	ExtraParamNameAuIdType               ExtraParamName = "AU_ID_TYPE"
-	ExtraParamNameCaLegalType            ExtraParamName = "CA_LEGAL_TYPE"
-	ExtraParamNameCaBusinessEntityType   ExtraParamName = "CA_BUSINESS_ENTITY_TYPE"
-	ExtraParamNameEsIdentification       ExtraParamName = "ES_IDENTIFICATION"
-	ExtraParamNameEsIdentificationType   ExtraParamName = "ES_IDENTIFICATION_TYPE"
-	ExtraParamNameEsLegalForm            ExtraParamName = "ES_LEGAL_FORM"
-	ExtraParamNameFiBusinessNumber       ExtraParamName = "FI_BUSINESS_NUMBER"
-	ExtraParamNameFiIdNumber             ExtraParamName = "FI_ID_NUMBER"
-	ExtraParamNameFiNationality          ExtraParamName = "FI_NATIONALITY"
-	ExtraParamNameFiOrganizationType     ExtraParamName = "FI_ORGANIZATION_TYPE"
-	ExtraParamNameItPin                  ExtraParamName = "IT_PIN"
-	ExtraParamNameItRegistrantEntityType ExtraParamName = "IT_REGISTRANT_ENTITY_TYPE"
-	ExtraParamNameRuPassportData         ExtraParamName = "RU_PASSPORT_DATA"
-	ExtraParamNameSeIdNumber             ExtraParamName = "SE_ID_NUMBER"
-	ExtraParamNameSgIdNumber             ExtraParamName = "SG_ID_NUMBER"
-	ExtraParamNameVatNumber              ExtraParamName = "VAT_NUMBER"
-	ExtraParamNameUkContactType          ExtraParamName = "UK_CONTACT_TYPE"
-	ExtraParamNameUkCompanyNumber        ExtraParamName = "UK_COMPANY_NUMBER"
+	ExtraParamNameDunsNumber                    ExtraParamName = "DUNS_NUMBER"
+	ExtraParamNameBrandNumber                   ExtraParamName = "BRAND_NUMBER"
+	ExtraParamNameBirthDepartment               ExtraParamName = "BIRTH_DEPARTMENT"
+	ExtraParamNameBirthDateInYyyyMmDd           ExtraParamName = "BIRTH_DATE_IN_YYYY_MM_DD"
+	ExtraParamNameBirthCountry                  ExtraParamName = "BIRTH_COUNTRY"
+	ExtraParamNameBirthCity                     ExtraParamName = "BIRTH_CITY"
+	ExtraParamNameDocumentNumber                ExtraParamName = "DOCUMENT_NUMBER"
+	ExtraParamNameAuIdNumber                    ExtraParamName = "AU_ID_NUMBER"
+	ExtraParamNameAuIdType                      ExtraParamName = "AU_ID_TYPE"
+	ExtraParamNameCaLegalType                   ExtraParamName = "CA_LEGAL_TYPE"
+	ExtraParamNameCaBusinessEntityType          ExtraParamName = "CA_BUSINESS_ENTITY_TYPE"
+	ExtraParamNameCaLegalRepresentative         ExtraParamName = "CA_LEGAL_REPRESENTATIVE"
+	ExtraParamNameCaLegalRepresentativeCapacity ExtraParamName = "CA_LEGAL_REPRESENTATIVE_CAPACITY"
+	ExtraParamNameEsIdentification              ExtraParamName = "ES_IDENTIFICATION"
+	ExtraParamNameEsIdentificationType          ExtraParamName = "ES_IDENTIFICATION_TYPE"
+	ExtraParamNameEsLegalForm                   ExtraParamName = "ES_LEGAL_FORM"
+	ExtraParamNameFiBusinessNumber              ExtraParamName = "FI_BUSINESS_NUMBER"
+	ExtraParamNameFiIdNumber                    ExtraParamName = "FI_ID_NUMBER"
+	ExtraParamNameFiNationality                 ExtraParamName = "FI_NATIONALITY"
+	ExtraParamNameFiOrganizationType            ExtraParamName = "FI_ORGANIZATION_TYPE"
+	ExtraParamNameItNationality                 ExtraParamName = "IT_NATIONALITY"
+	ExtraParamNameItPin                         ExtraParamName = "IT_PIN"
+	ExtraParamNameItRegistrantEntityType        ExtraParamName = "IT_REGISTRANT_ENTITY_TYPE"
+	ExtraParamNameRuPassportData                ExtraParamName = "RU_PASSPORT_DATA"
+	ExtraParamNameSeIdNumber                    ExtraParamName = "SE_ID_NUMBER"
+	ExtraParamNameSgIdNumber                    ExtraParamName = "SG_ID_NUMBER"
+	ExtraParamNameVatNumber                     ExtraParamName = "VAT_NUMBER"
+	ExtraParamNameUkContactType                 ExtraParamName = "UK_CONTACT_TYPE"
+	ExtraParamNameUkCompanyNumber               ExtraParamName = "UK_COMPANY_NUMBER"
 )
 
 func (enum ExtraParamName) MarshalValue() (string, error) {
@@ -354,22 +357,24 @@ type OperationType string
 
 // Enum values for OperationType
 const (
-	OperationTypeRegisterDomain          OperationType = "REGISTER_DOMAIN"
-	OperationTypeDeleteDomain            OperationType = "DELETE_DOMAIN"
-	OperationTypeTransferInDomain        OperationType = "TRANSFER_IN_DOMAIN"
-	OperationTypeUpdateDomainContact     OperationType = "UPDATE_DOMAIN_CONTACT"
-	OperationTypeUpdateNameserver        OperationType = "UPDATE_NAMESERVER"
-	OperationTypeChangePrivacyProtection OperationType = "CHANGE_PRIVACY_PROTECTION"
-	OperationTypeDomainLock              OperationType = "DOMAIN_LOCK"
-	OperationTypeEnableAutorenew         OperationType = "ENABLE_AUTORENEW"
-	OperationTypeDisableAutorenew        OperationType = "DISABLE_AUTORENEW"
-	OperationTypeAddDnssec               OperationType = "ADD_DNSSEC"
-	OperationTypeRemoveDnssec            OperationType = "REMOVE_DNSSEC"
-	OperationTypeExpireDomain            OperationType = "EXPIRE_DOMAIN"
-	OperationTypeTransferOutDomain       OperationType = "TRANSFER_OUT_DOMAIN"
-	OperationTypeChangeDomainOwner       OperationType = "CHANGE_DOMAIN_OWNER"
-	OperationTypeRenewDomain             OperationType = "RENEW_DOMAIN"
-	OperationTypePushDomain              OperationType = "PUSH_DOMAIN"
+	OperationTypeRegisterDomain            OperationType = "REGISTER_DOMAIN"
+	OperationTypeDeleteDomain              OperationType = "DELETE_DOMAIN"
+	OperationTypeTransferInDomain          OperationType = "TRANSFER_IN_DOMAIN"
+	OperationTypeUpdateDomainContact       OperationType = "UPDATE_DOMAIN_CONTACT"
+	OperationTypeUpdateNameserver          OperationType = "UPDATE_NAMESERVER"
+	OperationTypeChangePrivacyProtection   OperationType = "CHANGE_PRIVACY_PROTECTION"
+	OperationTypeDomainLock                OperationType = "DOMAIN_LOCK"
+	OperationTypeEnableAutorenew           OperationType = "ENABLE_AUTORENEW"
+	OperationTypeDisableAutorenew          OperationType = "DISABLE_AUTORENEW"
+	OperationTypeAddDnssec                 OperationType = "ADD_DNSSEC"
+	OperationTypeRemoveDnssec              OperationType = "REMOVE_DNSSEC"
+	OperationTypeExpireDomain              OperationType = "EXPIRE_DOMAIN"
+	OperationTypeTransferOutDomain         OperationType = "TRANSFER_OUT_DOMAIN"
+	OperationTypeChangeDomainOwner         OperationType = "CHANGE_DOMAIN_OWNER"
+	OperationTypeRenewDomain               OperationType = "RENEW_DOMAIN"
+	OperationTypePushDomain                OperationType = "PUSH_DOMAIN"
+	OperationTypeInternalTransferOutDomain OperationType = "INTERNAL_TRANSFER_OUT_DOMAIN"
+	OperationTypeInternalTransferInDomain  OperationType = "INTERNAL_TRANSFER_IN_DOMAIN"
 )
 
 func (enum OperationType) MarshalValue() (string, error) {
@@ -399,7 +404,7 @@ func (enum ReachabilityStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Whether the domain name can be transferred to Amazon Route 53.
+// Whether the domain name can be transferred to Route 53.
 //
 // You can transfer only domains that have a value of TRANSFERABLE for Transferable.
 //
@@ -407,11 +412,11 @@ func (enum ReachabilityStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 //
 // TRANSFERABLE
 //
-// The domain name can be transferred to Amazon Route 53.
+// The domain name can be transferred to Route 53.
 //
 // UNTRANSFERRABLE
 //
-// The domain name can't be transferred to Amazon Route 53.
+// The domain name can't be transferred to Route 53.
 //
 // DONT_KNOW
 //

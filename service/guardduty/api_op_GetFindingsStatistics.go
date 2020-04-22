@@ -19,10 +19,10 @@ type GetFindingsStatisticsInput struct {
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// Represents the criteria used for querying findings.
+	// Represents the criteria that is used for querying findings.
 	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure"`
 
-	// Types of finding statistics to retrieve.
+	// The types of finding statistics to retrieve.
 	//
 	// FindingStatisticTypes is a required field
 	FindingStatisticTypes []FindingStatisticType `locationName:"findingStatisticTypes" type:"list" required:"true"`
@@ -88,7 +88,7 @@ func (s GetFindingsStatisticsInput) MarshalFields(e protocol.FieldEncoder) error
 type GetFindingsStatisticsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Finding statistics object.
+	// The finding statistics object.
 	//
 	// FindingStatistics is a required field
 	FindingStatistics *FindingStatistics `locationName:"findingStatistics" type:"structure" required:"true"`
@@ -115,7 +115,7 @@ const opGetFindingsStatistics = "GetFindingsStatistics"
 // GetFindingsStatisticsRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Lists Amazon GuardDuty findings' statistics for the specified detector ID.
+// Lists Amazon GuardDuty findings statistics for the specified detector ID.
 //
 //    // Example sending a request using GetFindingsStatisticsRequest.
 //    req := client.GetFindingsStatisticsRequest(params)

@@ -85,6 +85,8 @@ type ClientAPI interface {
 
 	DeletePolicyRequest(*organizations.DeletePolicyInput) organizations.DeletePolicyRequest
 
+	DeregisterDelegatedAdministratorRequest(*organizations.DeregisterDelegatedAdministratorInput) organizations.DeregisterDelegatedAdministratorRequest
+
 	DescribeAccountRequest(*organizations.DescribeAccountInput) organizations.DescribeAccountRequest
 
 	DescribeCreateAccountStatusRequest(*organizations.DescribeCreateAccountStatusInput) organizations.DescribeCreateAccountStatusRequest
@@ -125,6 +127,10 @@ type ClientAPI interface {
 
 	ListCreateAccountStatusRequest(*organizations.ListCreateAccountStatusInput) organizations.ListCreateAccountStatusRequest
 
+	ListDelegatedAdministratorsRequest(*organizations.ListDelegatedAdministratorsInput) organizations.ListDelegatedAdministratorsRequest
+
+	ListDelegatedServicesForAccountRequest(*organizations.ListDelegatedServicesForAccountInput) organizations.ListDelegatedServicesForAccountRequest
+
 	ListHandshakesForAccountRequest(*organizations.ListHandshakesForAccountInput) organizations.ListHandshakesForAccountRequest
 
 	ListHandshakesForOrganizationRequest(*organizations.ListHandshakesForOrganizationInput) organizations.ListHandshakesForOrganizationRequest
@@ -144,6 +150,8 @@ type ClientAPI interface {
 	ListTargetsForPolicyRequest(*organizations.ListTargetsForPolicyInput) organizations.ListTargetsForPolicyRequest
 
 	MoveAccountRequest(*organizations.MoveAccountInput) organizations.MoveAccountRequest
+
+	RegisterDelegatedAdministratorRequest(*organizations.RegisterDelegatedAdministratorInput) organizations.RegisterDelegatedAdministratorRequest
 
 	RemoveAccountFromOrganizationRequest(*organizations.RemoveAccountFromOrganizationInput) organizations.RemoveAccountFromOrganizationRequest
 

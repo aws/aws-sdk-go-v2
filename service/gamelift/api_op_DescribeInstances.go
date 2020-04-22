@@ -90,6 +90,18 @@ const opDescribeInstances = "DescribeInstances"
 // to retrieve results as a set of sequential pages. If successful, an Instance
 // object is returned for each result.
 //
+// Learn more
+//
+// Remotely Access Fleet Instances (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html)
+//
+// Debug Fleet Issues (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)
+//
+// Related operations
+//
+//    * DescribeInstances
+//
+//    * GetInstanceAccess
+//
 //    // Example sending a request using DescribeInstancesRequest.
 //    req := client.DescribeInstancesRequest(params)
 //    resp, err := req.Send(context.TODO())

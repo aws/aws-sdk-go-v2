@@ -25,6 +25,12 @@ type UpdateImagePipelineInput struct {
 	// be used to configure and distribute images updated by this image pipeline.
 	DistributionConfigurationArn *string `locationName:"distributionConfigurationArn" type:"string"`
 
+	// Collects additional information about the image being created, including
+	// the operating system (OS) version and package list. This information is used
+	// to enhance the overall experience of using EC2 Image Builder. Enabled by
+	// default.
+	EnhancedImageMetadataEnabled *bool `locationName:"enhancedImageMetadataEnabled" type:"boolean"`
+
 	// The Amazon Resource Name (ARN) of the image pipeline that you want to update.
 	//
 	// ImagePipelineArn is a required field
@@ -126,6 +132,12 @@ func (s UpdateImagePipelineInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "distributionConfigurationArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EnhancedImageMetadataEnabled != nil {
+		v := *s.EnhancedImageMetadataEnabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enhancedImageMetadataEnabled", protocol.BoolValue(v), metadata)
 	}
 	if s.ImagePipelineArn != nil {
 		v := *s.ImagePipelineArn

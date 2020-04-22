@@ -65,7 +65,7 @@ func (s *ListBuildsInput) Validate() error {
 type ListBuildsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A collection of build records that match the request.
+	// A collection of build resources that match the request.
 	Builds []Build `type:"list"`
 
 	// Token that indicates where to resume retrieving results on the next call
@@ -84,16 +84,16 @@ const opListBuilds = "ListBuilds"
 // ListBuildsRequest returns a request value for making API operation for
 // Amazon GameLift.
 //
-// Retrieves build records for all builds associated with the AWS account in
-// use. You can limit results to builds that are in a specific status by using
-// the Status parameter. Use the pagination parameters to retrieve results in
-// a set of sequential pages.
+// Retrieves build resources for all builds associated with the AWS account
+// in use. You can limit results to builds that are in a specific status by
+// using the Status parameter. Use the pagination parameters to retrieve results
+// in a set of sequential pages.
 //
-// Build records are not listed in any particular order.
+// Build resources are not listed in any particular order.
 //
 // Learn more
 //
-//  Working with Builds (https://docs.aws.amazon.com/gamelift/latest/developerguide/build-intro.html)
+//  Upload a Custom Server Build (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
 //
 // Related operations
 //

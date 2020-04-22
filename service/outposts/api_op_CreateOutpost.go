@@ -14,9 +14,13 @@ type CreateOutpostInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Availability Zone.
+	//
+	// You must specify AvailabilityZone or AvailabilityZoneId.
 	AvailabilityZone *string `min:"1" type:"string"`
 
 	// The ID of the Availability Zone.
+	//
+	// You must specify AvailabilityZone or AvailabilityZoneId.
 	AvailabilityZoneId *string `min:"1" type:"string"`
 
 	// The Outpost description.

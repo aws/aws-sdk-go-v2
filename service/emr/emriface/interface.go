@@ -88,6 +88,8 @@ type ClientAPI interface {
 
 	GetBlockPublicAccessConfigurationRequest(*emr.GetBlockPublicAccessConfigurationInput) emr.GetBlockPublicAccessConfigurationRequest
 
+	GetManagedScalingPolicyRequest(*emr.GetManagedScalingPolicyInput) emr.GetManagedScalingPolicyRequest
+
 	ListBootstrapActionsRequest(*emr.ListBootstrapActionsInput) emr.ListBootstrapActionsRequest
 
 	ListClustersRequest(*emr.ListClustersInput) emr.ListClustersRequest
@@ -112,7 +114,11 @@ type ClientAPI interface {
 
 	PutBlockPublicAccessConfigurationRequest(*emr.PutBlockPublicAccessConfigurationInput) emr.PutBlockPublicAccessConfigurationRequest
 
+	PutManagedScalingPolicyRequest(*emr.PutManagedScalingPolicyInput) emr.PutManagedScalingPolicyRequest
+
 	RemoveAutoScalingPolicyRequest(*emr.RemoveAutoScalingPolicyInput) emr.RemoveAutoScalingPolicyRequest
+
+	RemoveManagedScalingPolicyRequest(*emr.RemoveManagedScalingPolicyInput) emr.RemoveManagedScalingPolicyRequest
 
 	RemoveTagsRequest(*emr.RemoveTagsInput) emr.RemoveTagsRequest
 

@@ -82,6 +82,8 @@ type ClientAPI interface {
 	ListMembersRequest(*detective.ListMembersInput) detective.ListMembersRequest
 
 	RejectInvitationRequest(*detective.RejectInvitationInput) detective.RejectInvitationRequest
+
+	StartMonitoringMemberRequest(*detective.StartMonitoringMemberInput) detective.StartMonitoringMemberRequest
 }
 
 var _ ClientAPI = (*detective.Client)(nil)

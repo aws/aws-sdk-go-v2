@@ -201,6 +201,54 @@ func (s InviteAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A configuration for logging events.
+type LogConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether logging is enabled.
+	Enabled *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s LogConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LogConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// A collection of log configurations.
+type LogConfigurations struct {
+	_ struct{} `type:"structure"`
+
+	// Parameters for publishing logs to Amazon CloudWatch Logs.
+	Cloudwatch *LogConfiguration `type:"structure"`
+}
+
+// String returns the string representation
+func (s LogConfigurations) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LogConfigurations) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Cloudwatch != nil {
+		v := s.Cloudwatch
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Cloudwatch", v, metadata)
+	}
+	return nil
+}
+
 // Member configuration properties.
 type Member struct {
 	_ struct{} `type:"structure"`
@@ -217,6 +265,9 @@ type Member struct {
 
 	// The unique identifier of the member.
 	Id *string `min:"1" type:"string"`
+
+	// Configuration properties for logging events associated with a member.
+	LogPublishingConfiguration *MemberLogPublishingConfiguration `type:"structure"`
 
 	// The name of the member.
 	Name *string `min:"1" type:"string"`
@@ -277,6 +328,12 @@ func (s Member) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.LogPublishingConfiguration != nil {
+		v := s.LogPublishingConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LogPublishingConfiguration", v, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
@@ -309,6 +366,10 @@ type MemberConfiguration struct {
 	//
 	// FrameworkConfiguration is a required field
 	FrameworkConfiguration *MemberFrameworkConfiguration `type:"structure" required:"true"`
+
+	// Configuration properties for logging events associated with a member of a
+	// Managed Blockchain network.
+	LogPublishingConfiguration *MemberLogPublishingConfiguration `type:"structure"`
 
 	// The name of the member.
 	//
@@ -360,6 +421,12 @@ func (s MemberConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "FrameworkConfiguration", v, metadata)
+	}
+	if s.LogPublishingConfiguration != nil {
+		v := s.LogPublishingConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LogPublishingConfiguration", v, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -470,6 +537,33 @@ func (s MemberFabricConfiguration) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
+// Configuration properties for logging events associated with a member of a
+// Managed Blockchain network using the Hyperledger Fabric framework.
+type MemberFabricLogPublishingConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Configuration properties for logging events associated with a member's Certificate
+	// Authority (CA). CA logs help you determine when a member in your account
+	// joins the network, or when new peers register with a member CA.
+	CaLogs *LogConfigurations `type:"structure"`
+}
+
+// String returns the string representation
+func (s MemberFabricLogPublishingConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MemberFabricLogPublishingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CaLogs != nil {
+		v := s.CaLogs
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CaLogs", v, metadata)
+	}
+	return nil
+}
+
 // Attributes relevant to a member for the blockchain framework that the Managed
 // Blockchain network uses.
 type MemberFrameworkAttributes struct {
@@ -528,6 +622,32 @@ func (s *MemberFrameworkConfiguration) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s MemberFrameworkConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Fabric != nil {
+		v := s.Fabric
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Fabric", v, metadata)
+	}
+	return nil
+}
+
+// Configuration properties for logging events associated with a member of a
+// Managed Blockchain network.
+type MemberLogPublishingConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Configuration properties for logging events associated with a member of a
+	// Managed Blockchain network using the Hyperledger Fabric framework.
+	Fabric *MemberFabricLogPublishingConfiguration `type:"structure"`
+}
+
+// String returns the string representation
+func (s MemberLogPublishingConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MemberLogPublishingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	if s.Fabric != nil {
 		v := s.Fabric
 
@@ -738,7 +858,7 @@ type NetworkFabricAttributes struct {
 	_ struct{} `type:"structure"`
 
 	// The edition of Amazon Managed Blockchain that Hyperledger Fabric uses. For
-	// more information, see Amazon Managed Blockchain Pricing (https://aws.amazon.com/managed-blockchain/pricing/).
+	// more information, see Amazon Managed Blockchain Pricing (http://aws.amazon.com/managed-blockchain/pricing/).
 	Edition Edition `type:"string" enum:"true"`
 
 	// The endpoint of the ordering service for the network.
@@ -772,7 +892,7 @@ type NetworkFabricConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// The edition of Amazon Managed Blockchain that the network uses. For more
-	// information, see Amazon Managed Blockchain Pricing (https://aws.amazon.com/managed-blockchain/pricing/).
+	// information, see Amazon Managed Blockchain Pricing (http://aws.amazon.com/managed-blockchain/pricing/).
 	//
 	// Edition is a required field
 	Edition Edition `type:"string" required:"true" enum:"true"`
@@ -972,6 +1092,10 @@ type Node struct {
 	// The instance type of the node.
 	InstanceType *string `type:"string"`
 
+	// Configuration properties for logging events associated with a peer node owned
+	// by a member in a Managed Blockchain network.
+	LogPublishingConfiguration *NodeLogPublishingConfiguration `type:"structure"`
+
 	// The unique identifier of the member to which the node belongs.
 	MemberId *string `min:"1" type:"string"`
 
@@ -1020,6 +1144,12 @@ func (s Node) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "InstanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.LogPublishingConfiguration != nil {
+		v := s.LogPublishingConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LogPublishingConfiguration", v, metadata)
+	}
 	if s.MemberId != nil {
 		v := *s.MemberId
 
@@ -1054,6 +1184,10 @@ type NodeConfiguration struct {
 	//
 	// InstanceType is a required field
 	InstanceType *string `type:"string" required:"true"`
+
+	// Configuration properties for logging events associated with a peer node owned
+	// by a member in a Managed Blockchain network.
+	LogPublishingConfiguration *NodeLogPublishingConfiguration `type:"structure"`
 }
 
 // String returns the string representation
@@ -1093,6 +1227,12 @@ func (s NodeConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "InstanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.LogPublishingConfiguration != nil {
+		v := s.LogPublishingConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LogPublishingConfiguration", v, metadata)
+	}
 	return nil
 }
 
@@ -1131,6 +1271,47 @@ func (s NodeFabricAttributes) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Configuration properties for logging events associated with a peer node owned
+// by a member in a Managed Blockchain network.
+type NodeFabricLogPublishingConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Configuration properties for logging events associated with chaincode execution
+	// on a peer node. Chaincode logs contain the results of instantiating, invoking,
+	// and querying the chaincode. A peer can run multiple instances of chaincode.
+	// When enabled, a log stream is created for all chaincodes, with an individual
+	// log stream for each chaincode.
+	ChaincodeLogs *LogConfigurations `type:"structure"`
+
+	// Configuration properties for a peer node log. Peer node logs contain messages
+	// generated when your client submits transaction proposals to peer nodes, requests
+	// to join channels, enrolls an admin peer, and lists the chaincode instances
+	// on a peer node.
+	PeerLogs *LogConfigurations `type:"structure"`
+}
+
+// String returns the string representation
+func (s NodeFabricLogPublishingConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NodeFabricLogPublishingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ChaincodeLogs != nil {
+		v := s.ChaincodeLogs
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ChaincodeLogs", v, metadata)
+	}
+	if s.PeerLogs != nil {
+		v := s.PeerLogs
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PeerLogs", v, metadata)
+	}
+	return nil
+}
+
 // Attributes relevant to a peer node on a Managed Blockchain network for the
 // blockchain framework that the network uses.
 type NodeFrameworkAttributes struct {
@@ -1148,6 +1329,33 @@ func (s NodeFrameworkAttributes) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s NodeFrameworkAttributes) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Fabric != nil {
+		v := s.Fabric
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Fabric", v, metadata)
+	}
+	return nil
+}
+
+// Configuration properties for logging events associated with a peer node owned
+// by a member in a Managed Blockchain network.
+type NodeLogPublishingConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Configuration properties for logging events associated with a node that is
+	// owned by a member of a Managed Blockchain network using the Hyperledger Fabric
+	// framework.
+	Fabric *NodeFabricLogPublishingConfiguration `type:"structure"`
+}
+
+// String returns the string representation
+func (s NodeLogPublishingConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NodeLogPublishingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	if s.Fabric != nil {
 		v := s.Fabric
 
@@ -1274,7 +1482,9 @@ type Proposal struct {
 	//    are not carried out.
 	//
 	//    * ACTION_FAILED - One or more of the specified ProposalActions in a proposal
-	//    that was approved could not be completed because of an error.
+	//    that was approved could not be completed because of an error. The ACTION_FAILED
+	//    status occurs even if only one ProposalAction fails and other actions
+	//    are successful.
 	Status ProposalStatus `type:"string" enum:"true"`
 
 	// The current total of YES votes cast on the proposal by members.

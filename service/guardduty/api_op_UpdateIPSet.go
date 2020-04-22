@@ -13,7 +13,7 @@ import (
 type UpdateIPSetInput struct {
 	_ struct{} `type:"structure"`
 
-	// The updated boolean value that specifies whether the IPSet is active or not.
+	// The updated Boolean value that specifies whether the IPSet is active or not.
 	Activate *bool `locationName:"activate" type:"boolean"`
 
 	// The detectorID that specifies the GuardDuty service whose IPSet you want
@@ -27,7 +27,7 @@ type UpdateIPSetInput struct {
 	// IpSetId is a required field
 	IpSetId *string `location:"uri" locationName:"ipSetId" type:"string" required:"true"`
 
-	// The updated URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
+	// The updated URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
 	Location *string `locationName:"location" min:"1" type:"string"`
 
 	// The unique ID that specifies the IPSet that you want to update.

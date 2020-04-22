@@ -2,6 +2,23 @@
 
 package mediatailor
 
+type Mode string
+
+// Enum values for Mode
+const (
+	ModeOff            Mode = "OFF"
+	ModeBehindLiveEdge Mode = "BEHIND_LIVE_EDGE"
+)
+
+func (enum Mode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Mode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OriginManifestType string
 
 // Enum values for OriginManifestType

@@ -65,19 +65,18 @@ const opStopFleetActions = "StopFleetActions"
 // Amazon GameLift.
 //
 // Suspends activity on a fleet. Currently, this operation is used to stop a
-// fleet's auto-scaling activity. It is used to temporarily stop scaling events
-// triggered by the fleet's scaling policies. The policies can be retained and
-// auto-scaling activity can be restarted using StartFleetActions. You can view
-// a fleet's stopped actions using DescribeFleetAttributes.
+// fleet's auto-scaling activity. It is used to temporarily stop triggering
+// scaling events. The policies can be retained and auto-scaling activity can
+// be restarted using StartFleetActions. You can view a fleet's stopped actions
+// using DescribeFleetAttributes.
 //
 // To stop fleet actions, specify the fleet ID and the type of actions to suspend.
 // When auto-scaling fleet actions are stopped, Amazon GameLift no longer initiates
-// scaling events except to maintain the fleet's desired instances setting (FleetCapacity.
-// Changes to the fleet's capacity must be done manually using UpdateFleetCapacity.
+// scaling events except in response to manual changes using UpdateFleetCapacity.
 //
 // Learn more
 //
-//  Working with Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html).
+// Setting up GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 //
 // Related operations
 //
@@ -87,14 +86,11 @@ const opStopFleetActions = "StopFleetActions"
 //
 //    * DeleteFleet
 //
-//    * Describe fleets: DescribeFleetAttributes DescribeFleetCapacity DescribeFleetPortSettings
-//    DescribeFleetUtilization DescribeRuntimeConfiguration DescribeEC2InstanceLimits
-//    DescribeFleetEvents
+//    * DescribeFleetAttributes
 //
-//    * Update fleets: UpdateFleetAttributes UpdateFleetCapacity UpdateFleetPortSettings
-//    UpdateRuntimeConfiguration
+//    * UpdateFleetAttributes
 //
-//    * Manage fleet actions: StartFleetActions StopFleetActions
+//    * StartFleetActions or StopFleetActions
 //
 //    // Example sending a request using StopFleetActionsRequest.
 //    req := client.StopFleetActionsRequest(params)

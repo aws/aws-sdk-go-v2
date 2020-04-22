@@ -29,7 +29,7 @@ type ListOperationsInput struct {
 
 	// An optional parameter that lets you get information about all the operations
 	// that you submitted after a specified date and time. Specify the date and
-	// time in Coordinated Universal time (UTC).
+	// time in Unix time format and Coordinated Universal time (UTC).
 	SubmittedSince *time.Time `type:"timestamp"`
 }
 
@@ -63,7 +63,9 @@ const opListOperations = "ListOperations"
 // ListOperationsRequest returns a request value for making API operation for
 // Amazon Route 53 Domains.
 //
-// This operation returns the operation IDs of operations that are not yet complete.
+// Returns information about all of the operations that return an operation
+// ID and that have ever been performed on domains that were registered by the
+// current account.
 //
 //    // Example sending a request using ListOperationsRequest.
 //    req := client.ListOperationsRequest(params)

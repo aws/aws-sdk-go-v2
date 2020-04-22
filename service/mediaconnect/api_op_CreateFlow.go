@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a new flow. The request must include one source. The request optionally
-// can include outputs (up to 20) and one entitlement.
+// can include outputs (up to 50) and one entitlement.
 type CreateFlowInput struct {
 	_ struct{} `type:"structure"`
 
@@ -32,9 +32,15 @@ type CreateFlowInput struct {
 	Outputs []AddOutputRequest `locationName:"outputs" type:"list"`
 
 	// The settings for the source of the flow.
-	//
-	// Source is a required field
-	Source *SetSourceRequest `locationName:"source" type:"structure" required:"true"`
+	Source *SetSourceRequest `locationName:"source" type:"structure"`
+
+	// The settings for source failover
+	SourceFailoverConfig *FailoverConfig `locationName:"sourceFailoverConfig" type:"structure"`
+
+	Sources []SetSourceRequest `locationName:"sources" type:"list"`
+
+	// The VPC interfaces you want on the flow.
+	VpcInterfaces []VpcInterfaceRequest `locationName:"vpcInterfaces" type:"list"`
 }
 
 // String returns the string representation
@@ -48,10 +54,6 @@ func (s *CreateFlowInput) Validate() error {
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.Source == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Source"))
 	}
 	if s.Entitlements != nil {
 		for i, v := range s.Entitlements {
@@ -70,6 +72,20 @@ func (s *CreateFlowInput) Validate() error {
 	if s.Source != nil {
 		if err := s.Source.Validate(); err != nil {
 			invalidParams.AddNested("Source", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Sources != nil {
+		for i, v := range s.Sources {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Sources", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.VpcInterfaces != nil {
+		for i, v := range s.VpcInterfaces {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "VpcInterfaces", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -125,6 +141,36 @@ func (s CreateFlowInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "source", v, metadata)
 	}
+	if s.SourceFailoverConfig != nil {
+		v := s.SourceFailoverConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "sourceFailoverConfig", v, metadata)
+	}
+	if s.Sources != nil {
+		v := s.Sources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "sources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.VpcInterfaces != nil {
+		v := s.VpcInterfaces
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "vpcInterfaces", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	return nil
 }
 
@@ -158,7 +204,7 @@ const opCreateFlow = "CreateFlow"
 // AWS MediaConnect.
 //
 // Creates a new flow. The request must include one source. The request optionally
-// can include outputs (up to 20) and entitlements (up to 50).
+// can include outputs (up to 50) and entitlements (up to 50).
 //
 //    // Example sending a request using CreateFlowRequest.
 //    req := client.CreateFlowRequest(params)

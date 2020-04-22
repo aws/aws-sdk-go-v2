@@ -128,8 +128,6 @@ const opDeleteMembers = "DeleteMembers"
 // DeleteMembersRequest returns a request value for making API operation for
 // Amazon Detective.
 //
-// Amazon Detective is currently in preview.
-//
 // Deletes one or more member accounts from the master account behavior graph.
 // This operation can only be called by a Detective master account. That account
 // cannot use DeleteMembers to delete their own account from the behavior graph.

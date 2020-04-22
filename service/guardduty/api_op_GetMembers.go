@@ -87,8 +87,8 @@ type GetMembersOutput struct {
 	// Members is a required field
 	Members []Member `locationName:"members" type:"list" required:"true"`
 
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
+	// A list of objects that contain the unprocessed account and a result string
+	// that explains why it was unprocessed.
 	//
 	// UnprocessedAccounts is a required field
 	UnprocessedAccounts []UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`

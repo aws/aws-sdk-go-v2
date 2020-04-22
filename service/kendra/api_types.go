@@ -109,6 +109,15 @@ func (s AdditionalResultAttributeValue) String() string {
 }
 
 // Provides filtering the query results based on document attributes.
+//
+// When you use the AndAllFilters or OrAllFilters, filters you can use a total
+// of 3 layers. For example, you can use:
+//
+// <AndAllFilters>
+//
+// <OrAllFilters>
+//
+// <EqualTo>
 type AttributeFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -763,7 +772,12 @@ type Document struct {
 	// searches, and to provide additional information in the query response.
 	Attributes []DocumentAttribute `min:"1" type:"list"`
 
-	// The contents of the document as a base-64 encoded string.
+	// The contents of the document.
+	//
+	// Documents passed to the Blob parameter must be base64 encoded. Your code
+	// might not need to encode the document file bytes if you're using an AWS SDK
+	// to call Amazon Kendra operations. If you are calling the Amazon Kendra endpoint
+	// directly using REST, you must base64 encode the contents before sending.
 	//
 	// Blob is automatically base64 encoded/decoded by the SDK.
 	Blob []byte `min:"1" type:"blob"`
@@ -1566,11 +1580,27 @@ type SharePointConfiguration struct {
 	// The Microsoft SharePoint attribute field that contains the title of the document.
 	DocumentTitleFieldName *string `min:"1" type:"string"`
 
+	// A list of regular expression patterns. Documents that match the patterns
+	// are excluded from the index. Documents that don't match the patterns are
+	// included in the index. If a document matches both an exclusion pattern and
+	// an inclusion pattern, the document is not included in the index.
+	//
+	// The regex is applied to the display URL of the SharePoint document.
+	ExclusionPatterns []string `type:"list"`
+
 	// A list of DataSourceToIndexFieldMapping objects that map Microsoft SharePoint
 	// attributes to custom fields in the Amazon Kendra index. You must first create
 	// the index fields using the operation before you map SharePoint attributes.
 	// For more information, see Mapping Data Source Fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
 	FieldMappings []DataSourceToIndexFieldMapping `min:"1" type:"list"`
+
+	// A list of regular expression patterns. Documents that match the patterns
+	// are included in the index. Documents that don't match the patterns are excluded
+	// from the index. If a document matches both an inclusion pattern and an exclusion
+	// pattern, the document is not included in the index.
+	//
+	// The regex is applied to the display URL of the SharePoint document.
+	InclusionPatterns []string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager.
 	// The credentials should be a user/password pair. For more information, see
@@ -1592,6 +1622,13 @@ type SharePointConfiguration struct {
 	//
 	// Urls is a required field
 	Urls []string `min:"1" type:"list" required:"true"`
+
+	// Set to TRUE to use the Microsoft SharePoint change log to determine the documents
+	// that need to be updated in the index. Depending on the size of the SharePoint
+	// change log, it may take longer for Amazon Kendra to use the change log than
+	// it takes it to determine the changed documents using the Amazon Kendra document
+	// crawler.
+	UseChangeLog *bool `type:"boolean"`
 
 	// Provides information for connecting to an Amazon VPC.
 	VpcConfiguration *DataSourceVpcConfiguration `type:"structure"`

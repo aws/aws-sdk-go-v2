@@ -1,3 +1,53 @@
+Release v0.21.0 (2020-04-21)
+===
+
+Breaking Change
+---
+* `aws/endpoints`: Several functions and types have been removed
+  * Removes `DecodeModel` and `DecodeModelOptions` from the package ([#509](https://github.com/aws/aws-sdk-go-v2/pull/509))
+  * Remove Region Constants, Partition Constants, and types use for exploring the endpoint data model ([#512](https://github.com/aws/aws-sdk-go-v2/pull/512))
+* `service/s3/s3crypto`: Package and associated encryption/decryption clients have been removed from the SDK ([#511](https://github.com/aws/aws-sdk-go-v2/pull/511))
+* `aws/external`: Removes several export constants and types ([#508](https://github.com/aws/aws-sdk-go-v2/pull/508))
+  * No longer exports AWS environment constants used by the external environment configuration loader
+  * `DefaultSharedConfigProfile` is now defined an exported constant
+* `aws`: `ErrMissingRegion`, `ErrMissingEndpoint`, `ErrStaticCredentialsEmpty` are now concrete error types ([#510](https://github.com/aws/aws-sdk-go-v2/pull/510))
+
+Services
+---
+* Synced the V2 SDK with latest AWS service API definitions.
+
+SDK Features
+---
+* `aws/signer/v4`: New methods `SignHTTP` and `PresignHTTP` have been added ([#519](https://github.com/aws/aws-sdk-go-v2/pull/519))
+  * `SignHTTP` replaces `Sign`, and usage of `Sign` should be migrated before it's removal at a later date
+  * `PresignHTTP` replaces `Presign`, and usage of `Presign` should be migrated before it's removal at a later date
+  * `DisableRequestBodyOverwrite` and `UnsignedPayload` are now deprecated options and have no effect on `SignHTTP` or `PresignHTTP`. These options will be removed at a later date.
+* `aws/external`: Add Support for setting a default fallback region and resolving region from EC2 IMDS ([#523](https://github.com/aws/aws-sdk-go-v2/pull/523))
+  * `WithDefaultRegion` helper has been added which can be passed to `LoadDefaultAWSConfig`
+    * This helper can be used to configure a default fallback region in the event a region fails to be resolved from other sources
+  * Support has been added to resolve region using EC2 IMDS when available
+    * The IMDS region will be used if region as not found configured in either the shared config or the process environment.
+  * Fixes [#244](https://github.com/aws/aws-sdk-go-v2/issues/244)
+  * Fixes [#515](https://github.com/aws/aws-sdk-go-v2/issues/515)
+
+SDK Enhancements
+---
+* `service/dynamodb/expression`: Add IsSet helper for ConditionBuilder and KeyConditionBuilder ([#494](https://github.com/aws/aws-sdk-go-v2/pull/494))
+  * Adds a IsSet helper for ConditionBuilder and KeyConditionBuilder to make it easier to determine if the condition builders have any conditions added to them.
+  * Implements [#493](https://github.com/aws/aws-sdk-go-v2/issues/493).
+* `internal/ini`: Normalize Section keys to lowercase ([#495](https://github.com/aws/aws-sdk-go-v2/pull/495))
+  * Update's SDK's ini utility to store all keys as lowercase. This brings the SDK inline with the AWS CLI's behavior.
+
+SDK Bugs
+---
+* `internal/sdk`: Fix SDK's UUID utility to handle partial read ([#536](https://github.com/aws/aws-sdk-go-v2/pull/536))
+  * Fixes the SDK's UUID utility to correctly handle partial reads from its crypto rand source. This error was sometimes causing the SDK's InvocationID value to fail to be obtained, due to a partial read from crypto.Rand.
+  * Fix [#534](https://github.com/aws/aws-sdk-go-v2/issues/534)
+* `aws/defaults`: Fix request metadata headers causing signature errors ([#536](https://github.com/aws/aws-sdk-go-v2/pull/536))
+    * Fixes the SDK's adding the request metadata headers in the wrong location within the request handler stack. This created a situation where a request that was retried would sign the new attempt using the old value of the header. The header value would then be changed before sending the request.
+    * Fix [#533](https://github.com/aws/aws-sdk-go-v2/issues/533)
+    * Fix [#521](https://github.com/aws/aws-sdk-go-v2/issues/521)
+
 Release v0.20.0 (2020-03-17)
 ===
 

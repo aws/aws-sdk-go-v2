@@ -751,7 +751,6 @@ const (
 	FlowDefinitionStatusActive       FlowDefinitionStatus = "Active"
 	FlowDefinitionStatusFailed       FlowDefinitionStatus = "Failed"
 	FlowDefinitionStatusDeleting     FlowDefinitionStatus = "Deleting"
-	FlowDefinitionStatusDeleted      FlowDefinitionStatus = "Deleted"
 )
 
 func (enum FlowDefinitionStatus) MarshalValue() (string, error) {
@@ -773,6 +772,7 @@ const (
 	FrameworkOnnx       Framework = "ONNX"
 	FrameworkPytorch    Framework = "PYTORCH"
 	FrameworkXgboost    Framework = "XGBOOST"
+	FrameworkTflite     Framework = "TFLITE"
 )
 
 func (enum Framework) MarshalValue() (string, error) {
@@ -1286,6 +1286,7 @@ const (
 	OperatorContains             Operator = "Contains"
 	OperatorExists               Operator = "Exists"
 	OperatorNotExists            Operator = "NotExists"
+	OperatorIn                   Operator = "In"
 )
 
 func (enum Operator) MarshalValue() (string, error) {
@@ -1932,6 +1933,7 @@ const (
 	TargetDeviceSbeC         TargetDevice = "sbe_c"
 	TargetDeviceQcs605       TargetDevice = "qcs605"
 	TargetDeviceQcs603       TargetDevice = "qcs603"
+	TargetDeviceSitaraAm57x  TargetDevice = "sitara_am57x"
 	TargetDeviceAmbaCv22     TargetDevice = "amba_cv22"
 )
 
@@ -1998,6 +2000,11 @@ const (
 	TrainingInstanceTypeMlC54xlarge    TrainingInstanceType = "ml.c5.4xlarge"
 	TrainingInstanceTypeMlC59xlarge    TrainingInstanceType = "ml.c5.9xlarge"
 	TrainingInstanceTypeMlC518xlarge   TrainingInstanceType = "ml.c5.18xlarge"
+	TrainingInstanceTypeMlC5nXlarge    TrainingInstanceType = "ml.c5n.xlarge"
+	TrainingInstanceTypeMlC5n2xlarge   TrainingInstanceType = "ml.c5n.2xlarge"
+	TrainingInstanceTypeMlC5n4xlarge   TrainingInstanceType = "ml.c5n.4xlarge"
+	TrainingInstanceTypeMlC5n9xlarge   TrainingInstanceType = "ml.c5n.9xlarge"
+	TrainingInstanceTypeMlC5n18xlarge  TrainingInstanceType = "ml.c5n.18xlarge"
 )
 
 func (enum TrainingInstanceType) MarshalValue() (string, error) {
@@ -2133,6 +2140,8 @@ const (
 	TrialComponentPrimaryStatusInProgress TrialComponentPrimaryStatus = "InProgress"
 	TrialComponentPrimaryStatusCompleted  TrialComponentPrimaryStatus = "Completed"
 	TrialComponentPrimaryStatusFailed     TrialComponentPrimaryStatus = "Failed"
+	TrialComponentPrimaryStatusStopping   TrialComponentPrimaryStatus = "Stopping"
+	TrialComponentPrimaryStatusStopped    TrialComponentPrimaryStatus = "Stopped"
 )
 
 func (enum TrialComponentPrimaryStatus) MarshalValue() (string, error) {

@@ -178,3 +178,20 @@ func (enum ModelVersionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
+
+type RuleExecutionMode string
+
+// Enum values for RuleExecutionMode
+const (
+	RuleExecutionModeAllMatched   RuleExecutionMode = "ALL_MATCHED"
+	RuleExecutionModeFirstMatched RuleExecutionMode = "FIRST_MATCHED"
+)
+
+func (enum RuleExecutionMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RuleExecutionMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

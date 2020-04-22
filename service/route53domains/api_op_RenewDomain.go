@@ -27,7 +27,7 @@ type RenewDomainInput struct {
 
 	// The number of years that you want to renew the domain for. The maximum number
 	// of years depends on the top-level domain. For the range of valid values for
-	// your domain, see Domains that You Can Register with Amazon Route 53 (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+	// your domain, see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
 	// in the Amazon Route 53 Developer Guide.
 	//
 	// Default: 1
@@ -63,8 +63,8 @@ func (s *RenewDomainInput) Validate() error {
 type RenewDomainOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier for tracking the progress of the request. To use this ID to
-	// query the operation status, use GetOperationDetail.
+	// Identifier for tracking the progress of the request. To query the operation
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
 	//
 	// OperationId is a required field
 	OperationId *string `type:"string" required:"true"`
@@ -86,7 +86,7 @@ const opRenewDomain = "RenewDomain"
 // We recommend that you renew your domain several weeks before the expiration
 // date. Some TLD registries delete domains before the expiration date if you
 // haven't renewed far enough in advance. For more information about renewing
-// domain registration, see Renewing Registration for a Domain (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-renew.html)
+// domain registration, see Renewing Registration for a Domain (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-renew.html)
 // in the Amazon Route 53 Developer Guide.
 //
 //    // Example sending a request using RenewDomainRequest.

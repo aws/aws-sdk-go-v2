@@ -57,7 +57,7 @@ func (s *UpdateBuildInput) Validate() error {
 type UpdateBuildOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The updated build record.
+	// The updated build resource.
 	Build *Build `type:"structure"`
 }
 
@@ -71,14 +71,14 @@ const opUpdateBuild = "UpdateBuild"
 // UpdateBuildRequest returns a request value for making API operation for
 // Amazon GameLift.
 //
-// Updates metadata in a build record, including the build name and version.
+// Updates metadata in a build resource, including the build name and version.
 // To update the metadata, specify the build ID to update and provide the new
 // values. If successful, a build object containing the updated metadata is
 // returned.
 //
 // Learn more
 //
-//  Working with Builds (https://docs.aws.amazon.com/gamelift/latest/developerguide/build-intro.html)
+//  Upload a Custom Server Build (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
 //
 // Related operations
 //

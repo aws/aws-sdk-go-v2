@@ -63,12 +63,12 @@ const opDeleteFleet = "DeleteFleet"
 // You do not need to explicitly delete the VPC peering connection--this is
 // done as part of the delete fleet process.
 //
-// This action removes the fleet's resources and the fleet record. Once a fleet
-// is deleted, you can no longer use that fleet.
+// This action removes the fleet and its resources. Once a fleet is deleted,
+// you can no longer use any of the resource in that fleet.
 //
 // Learn more
 //
-//  Working with Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html).
+// Setting up GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 //
 // Related operations
 //
@@ -82,7 +82,7 @@ const opDeleteFleet = "DeleteFleet"
 //
 //    * UpdateFleetAttributes
 //
-//    * Manage fleet actions: StartFleetActions StopFleetActions
+//    * StartFleetActions or StopFleetActions
 //
 //    // Example sending a request using DeleteFleetRequest.
 //    req := client.DeleteFleetRequest(params)

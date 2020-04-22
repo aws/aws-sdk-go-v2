@@ -2520,14 +2520,18 @@
         "JDBC_ENFORCE_SSL",
         "CUSTOM_JDBC_CERT",
         "SKIP_CUSTOM_JDBC_CERT_VALIDATION",
-        "CUSTOM_JDBC_CERT_STRING"
+        "CUSTOM_JDBC_CERT_STRING",
+        "CONNECTION_URL",
+        "KAFKA_BOOTSTRAP_SERVERS"
       ]
     },
     "ConnectionType":{
       "type":"string",
       "enum":[
         "JDBC",
-        "SFTP"
+        "SFTP",
+        "MONGODB",
+        "KAFKA"
       ]
     },
     "ConnectionsList":{
@@ -4173,10 +4177,7 @@
     },
     "GetUserDefinedFunctionsRequest":{
       "type":"structure",
-      "required":[
-        "DatabaseName",
-        "Pattern"
-      ],
+      "required":["Pattern"],
       "members":{
         "CatalogId":{"shape":"CatalogIdString"},
         "DatabaseName":{"shape":"NameString"},

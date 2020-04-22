@@ -13,7 +13,7 @@ import (
 type StopHumanLoopInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the human loop you want to stop.
+	// The name of the human loop that you want to stop.
 	//
 	// HumanLoopName is a required field
 	HumanLoopName *string `min:"1" type:"string" required:"true"`

@@ -75,7 +75,7 @@ func (c *Client) WaitUntilChannelCreated(ctx context.Context, input *DescribeCha
 func (c *Client) WaitUntilChannelDeleted(ctx context.Context, input *DescribeChannelInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilChannelDeleted",
-		MaxAttempts: 20,
+		MaxAttempts: 84,
 		Delay:       aws.ConstantWaiterDelay(5 * time.Second),
 		Acceptors: []aws.WaiterAcceptor{
 			{
@@ -173,7 +173,7 @@ func (c *Client) WaitUntilChannelRunning(ctx context.Context, input *DescribeCha
 func (c *Client) WaitUntilChannelStopped(ctx context.Context, input *DescribeChannelInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilChannelStopped",
-		MaxAttempts: 28,
+		MaxAttempts: 60,
 		Delay:       aws.ConstantWaiterDelay(5 * time.Second),
 		Acceptors: []aws.WaiterAcceptor{
 			{

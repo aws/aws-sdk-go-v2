@@ -82,8 +82,8 @@ func (s StartMonitoringMembersInput) MarshalFields(e protocol.FieldEncoder) erro
 type StartMonitoringMembersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
+	// A list of objects that contain the unprocessed account and a result string
+	// that explains why it was unprocessed.
 	//
 	// UnprocessedAccounts is a required field
 	UnprocessedAccounts []UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`

@@ -596,7 +596,8 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{"shape":"CreatePlacementGroupRequest"}
+      "input":{"shape":"CreatePlacementGroupRequest"},
+      "output":{"shape":"CreatePlacementGroupResult"}
     },
     "CreateReservedInstancesListing":{
       "name":"CreateReservedInstancesListing",
@@ -1268,6 +1269,15 @@
       },
       "input":{"shape":"DeregisterImageRequest"}
     },
+    "DeregisterInstanceEventNotificationAttributes":{
+      "name":"DeregisterInstanceEventNotificationAttributes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeregisterInstanceEventNotificationAttributesRequest"},
+      "output":{"shape":"DeregisterInstanceEventNotificationAttributesResult"}
+    },
     "DeregisterTransitGatewayMulticastGroupMembers":{
       "name":"DeregisterTransitGatewayMulticastGroupMembers",
       "http":{
@@ -1645,6 +1655,15 @@
       },
       "input":{"shape":"DescribeInstanceCreditSpecificationsRequest"},
       "output":{"shape":"DescribeInstanceCreditSpecificationsResult"}
+    },
+    "DescribeInstanceEventNotificationAttributes":{
+      "name":"DescribeInstanceEventNotificationAttributes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeInstanceEventNotificationAttributesRequest"},
+      "output":{"shape":"DescribeInstanceEventNotificationAttributesResult"}
     },
     "DescribeInstanceStatus":{
       "name":"DescribeInstanceStatus",
@@ -3166,6 +3185,15 @@
       },
       "input":{"shape":"RegisterImageRequest"},
       "output":{"shape":"RegisterImageResult"}
+    },
+    "RegisterInstanceEventNotificationAttributes":{
+      "name":"RegisterInstanceEventNotificationAttributes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RegisterInstanceEventNotificationAttributesRequest"},
+      "output":{"shape":"RegisterInstanceEventNotificationAttributesResult"}
     },
     "RegisterTransitGatewayMulticastGroupMembers":{
       "name":"RegisterTransitGatewayMulticastGroupMembers",
@@ -6787,6 +6815,10 @@
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
+        },
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
         }
       }
     },
@@ -7081,7 +7113,20 @@
           "shape":"PlacementStrategy",
           "locationName":"strategy"
         },
-        "PartitionCount":{"shape":"Integer"}
+        "PartitionCount":{"shape":"Integer"},
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
+        }
+      }
+    },
+    "CreatePlacementGroupResult":{
+      "type":"structure",
+      "members":{
+        "PlacementGroup":{
+          "shape":"PlacementGroup",
+          "locationName":"placementGroup"
+        }
       }
     },
     "CreateReservedInstancesListingRequest":{
@@ -8248,9 +8293,9 @@
     },
     "DeleteKeyPairRequest":{
       "type":"structure",
-      "required":["KeyName"],
       "members":{
         "KeyName":{"shape":"KeyPairName"},
+        "KeyPairId":{"shape":"KeyPairId"},
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
@@ -8980,6 +9025,32 @@
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
+        }
+      }
+    },
+    "DeregisterInstanceEventNotificationAttributesRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "InstanceTagAttribute":{"shape":"DeregisterInstanceTagAttributeRequest"}
+      }
+    },
+    "DeregisterInstanceEventNotificationAttributesResult":{
+      "type":"structure",
+      "members":{
+        "InstanceTagAttribute":{
+          "shape":"InstanceTagNotificationAttribute",
+          "locationName":"instanceTagAttribute"
+        }
+      }
+    },
+    "DeregisterInstanceTagAttributeRequest":{
+      "type":"structure",
+      "members":{
+        "IncludeAllTagsOfInstance":{"shape":"Boolean"},
+        "InstanceTagKeys":{
+          "shape":"InstanceTagKeySet",
+          "locationName":"InstanceTagKey"
         }
       }
     },
@@ -10303,6 +10374,21 @@
         "NextToken":{
           "shape":"String",
           "locationName":"nextToken"
+        }
+      }
+    },
+    "DescribeInstanceEventNotificationAttributesRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DescribeInstanceEventNotificationAttributesResult":{
+      "type":"structure",
+      "members":{
+        "InstanceTagAttribute":{
+          "shape":"InstanceTagNotificationAttribute",
+          "locationName":"instanceTagAttribute"
         }
       }
     },
@@ -16472,6 +16558,10 @@
         "PublicKeyMaterial":{
           "shape":"Blob",
           "locationName":"publicKeyMaterial"
+        },
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
         }
       }
     },
@@ -16485,6 +16575,14 @@
         "KeyName":{
           "shape":"String",
           "locationName":"keyName"
+        },
+        "KeyPairId":{
+          "shape":"String",
+          "locationName":"keyPairId"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "locationName":"tagSet"
         }
       }
     },
@@ -17638,6 +17736,26 @@
         }
       }
     },
+    "InstanceTagKeySet":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"item"
+      }
+    },
+    "InstanceTagNotificationAttribute":{
+      "type":"structure",
+      "members":{
+        "InstanceTagKeys":{
+          "shape":"InstanceTagKeySet",
+          "locationName":"instanceTagKeySet"
+        },
+        "IncludeAllTagsOfInstance":{
+          "shape":"Boolean",
+          "locationName":"includeAllTagsOfInstance"
+        }
+      }
+    },
     "InstanceType":{
       "type":"string",
       "enum":[
@@ -18340,6 +18458,10 @@
         "KeyPairId":{
           "shape":"String",
           "locationName":"keyPairId"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "locationName":"tagSet"
         }
       }
     },
@@ -22603,6 +22725,32 @@
         "ImageId":{
           "shape":"String",
           "locationName":"imageId"
+        }
+      }
+    },
+    "RegisterInstanceEventNotificationAttributesRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "InstanceTagAttribute":{"shape":"RegisterInstanceTagAttributeRequest"}
+      }
+    },
+    "RegisterInstanceEventNotificationAttributesResult":{
+      "type":"structure",
+      "members":{
+        "InstanceTagAttribute":{
+          "shape":"InstanceTagNotificationAttribute",
+          "locationName":"instanceTagAttribute"
+        }
+      }
+    },
+    "RegisterInstanceTagAttributeRequest":{
+      "type":"structure",
+      "members":{
+        "IncludeAllTagsOfInstance":{"shape":"Boolean"},
+        "InstanceTagKeys":{
+          "shape":"InstanceTagKeySet",
+          "locationName":"InstanceTagKey"
         }
       }
     },

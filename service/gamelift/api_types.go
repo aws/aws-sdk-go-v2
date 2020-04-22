@@ -31,9 +31,9 @@ type Alias struct {
 
 	// Amazon Resource Name (ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
 	// that is assigned to a GameLift alias resource and uniquely identifies it.
-	// ARNs are unique across all Regions.. In a GameLift alias ARN, the resource
+	// ARNs are unique across all Regions. In a GameLift alias ARN, the resource
 	// ID matches the alias ID value.
-	AliasArn *string `min:"1" type:"string"`
+	AliasArn *string `type:"string"`
 
 	// A unique identifier for an alias. Alias IDs are unique within a Region.
 	AliasId *string `type:"string"`
@@ -275,7 +275,7 @@ func (s *DesiredPlayerSession) Validate() error {
 //
 //    * UpdateFleetAttributes
 //
-//    * Manage fleet actions: StartFleetActions StopFleetActions
+//    * StartFleetActions or StopFleetActions
 type EC2InstanceCounts struct {
 	_ struct{} `type:"structure"`
 
@@ -344,7 +344,7 @@ type Event struct {
 	//
 	// Fleet creation events (ordered by fleet creation activity):
 	//
-	//    * FLEET_CREATED -- A fleet record was successfully created with a status
+	//    * FLEET_CREATED -- A fleet resource was successfully created with a status
 	//    of NEW. Event messaging includes the fleet ID.
 	//
 	//    * FLEET_STATE_DOWNLOADING -- Fleet status changed from NEW to DOWNLOADING.
@@ -471,7 +471,7 @@ func (s Event) String() string {
 //
 //    * UpdateFleetAttributes
 //
-//    * Manage fleet actions: StartFleetActions StopFleetActions
+//    * StartFleetActions or StopFleetActions
 type FleetAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -498,7 +498,7 @@ type FleetAttributes struct {
 	// that is assigned to a GameLift fleet resource and uniquely identifies it.
 	// ARNs are unique across all Regions. In a GameLift fleet ARN, the resource
 	// ID matches the FleetId value.
-	FleetArn *string `min:"1" type:"string"`
+	FleetArn *string `type:"string"`
 
 	// A unique identifier for a fleet.
 	FleetId *string `type:"string"`
@@ -630,7 +630,7 @@ func (s FleetAttributes) String() string {
 //
 //    * UpdateFleetAttributes
 //
-//    * Manage fleet actions: StartFleetActions StopFleetActions
+//    * StartFleetActions or StopFleetActions
 type FleetCapacity struct {
 	_ struct{} `type:"structure"`
 
@@ -666,7 +666,7 @@ func (s FleetCapacity) String() string {
 //
 //    * UpdateFleetAttributes
 //
-//    * Manage fleet actions: StartFleetActions StopFleetActions
+//    * StartFleetActions or StopFleetActions
 type FleetUtilization struct {
 	_ struct{} `type:"structure"`
 
@@ -738,6 +738,244 @@ func (s *GameProperty) Validate() error {
 	return nil
 }
 
+// This data type is part of Amazon GameLift FleetIQ with game server groups,
+// which is in preview release and is subject to change.
+//
+// Properties describing a game server resource.
+//
+// A game server resource is created by a successful call to RegisterGameServer
+// and deleted by calling DeregisterGameServer.
+type GameServer struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates when an available game server has been reserved but has not yet
+	// started hosting a game. Once it is claimed, game server remains in CLAIMED
+	// status for a maximum of one minute. During this time, game clients must connect
+	// to the game server and start the game, which triggers the game server to
+	// update its utilization status. After one minute, the game server claim status
+	// reverts to null.
+	ClaimStatus GameServerClaimStatus `type:"string" enum:"true"`
+
+	// The port and IP address that must be used to establish a client connection
+	// to the game server.
+	ConnectionInfo *string `min:"1" type:"string"`
+
+	// A game server tag that can be used to request sorted lists of game servers
+	// when calling ListGameServers. Custom sort keys are developer-defined. This
+	// property can be updated using UpdateGameServer.
+	CustomSortKey *string `min:"1" type:"string"`
+
+	// A set of custom game server properties, formatted as a single string value.
+	// This data is passed to a game client or service in response to requests ListGameServers
+	// or ClaimGameServer. This property can be updated using UpdateGameServer.
+	GameServerData *string `min:"1" type:"string"`
+
+	// The ARN identifier for the game server group where the game server is located.
+	GameServerGroupArn *string `min:"1" type:"string"`
+
+	// The name identifier for the game server group where the game server is located.
+	GameServerGroupName *string `min:"1" type:"string"`
+
+	// A custom string that uniquely identifies the game server. Game server IDs
+	// are developer-defined and are unique across all game server groups in an
+	// AWS account.
+	GameServerId *string `min:"3" type:"string"`
+
+	// The unique identifier for the instance where the game server is located.
+	InstanceId *string `min:"19" type:"string"`
+
+	// Time stamp indicating the last time the game server was claimed with a ClaimGameServer
+	// request. Format is a number expressed in Unix time as milliseconds (for example
+	// "1469498468.057"). This value is used to calculate when the game server's
+	// claim status.
+	LastClaimTime *time.Time `type:"timestamp"`
+
+	// Time stamp indicating the last time the game server was updated with health
+	// status using an UpdateGameServer request. Format is a number expressed in
+	// Unix time as milliseconds (for example "1469498468.057"). After game server
+	// registration, this property is only changed when a game server update specifies
+	// a health check value.
+	LastHealthCheckTime *time.Time `type:"timestamp"`
+
+	// Time stamp indicating when the game server resource was created with a RegisterGameServer
+	// request. Format is a number expressed in Unix time as milliseconds (for example
+	// "1469498468.057").
+	RegistrationTime *time.Time `type:"timestamp"`
+
+	// Indicates whether the game server is currently available for new games or
+	// is busy. Possible statuses include:
+	//
+	//    * AVAILABLE - The game server is available to be claimed. A game server
+	//    that has been claimed remains in this status until it reports game hosting
+	//    activity.
+	//
+	//    * IN_USE - The game server is currently hosting a game session with players.
+	UtilizationStatus GameServerUtilizationStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s GameServer) String() string {
+	return awsutil.Prettify(s)
+}
+
+// This data type is part of Amazon GameLift FleetIQ with game server groups,
+// which is in preview release and is subject to change.
+//
+// Properties describing a game server group resource. A game server group manages
+// certain properties of a corresponding EC2 Auto Scaling group.
+//
+// A game server group is created by a successful call to CreateGameServerGroup
+// and deleted by calling DeleteGameServerGroup. Game server group activity
+// can be temporarily suspended and resumed by calling SuspendGameServerGroup
+// and ResumeGameServerGroup.
+type GameServerGroup struct {
+	_ struct{} `type:"structure"`
+
+	// A generated unique ID for the EC2 Auto Scaling group with is associated with
+	// this game server group.
+	AutoScalingGroupArn *string `type:"string"`
+
+	// The fallback balancing method to use for the game server group when Spot
+	// instances in a Region become unavailable or are not viable for game hosting.
+	// Once triggered, this method remains active until Spot instances can once
+	// again be used. Method options include:
+	//
+	//    * SPOT_ONLY -- If Spot instances are unavailable, the game server group
+	//    provides no hosting capacity. No new instances are started, and the existing
+	//    nonviable Spot instances are terminated (once current gameplay ends) and
+	//    not replaced.
+	//
+	//    * SPOT_PREFERRED -- If Spot instances are unavailable, the game server
+	//    group continues to provide hosting capacity by using On-Demand instances.
+	//    Existing nonviable Spot instances are terminated (once current gameplay
+	//    ends) and replaced with new On-Demand instances.
+	BalancingStrategy BalancingStrategy `type:"string" enum:"true"`
+
+	// A time stamp indicating when this data object was created. Format is a number
+	// expressed in Unix time as milliseconds (for example "1469498468.057").
+	CreationTime *time.Time `type:"timestamp"`
+
+	// A generated unique ID for the game server group.
+	GameServerGroupArn *string `min:"1" type:"string"`
+
+	// A developer-defined identifier for the game server group. The name is unique
+	// per Region per AWS account.
+	GameServerGroupName *string `min:"1" type:"string"`
+
+	// A flag that indicates whether instances in the game server group are protected
+	// from early termination. Unprotected instances that have active game servers
+	// running may be terminated during a scale-down event, causing players to be
+	// dropped from the game. Protected instances cannot be terminated while there
+	// are active game servers running except in the event of a forced game server
+	// group deletion (see DeleteGameServerGroup). An exception to this is Spot
+	// Instances, which may be terminated by AWS regardless of protection status.
+	GameServerProtectionPolicy GameServerProtectionPolicy `type:"string" enum:"true"`
+
+	// The set of EC2 instance types that GameLift FleetIQ can use when rebalancing
+	// and autoscaling instances in the group.
+	InstanceDefinitions []InstanceDefinition `min:"2" type:"list"`
+
+	// A time stamp indicating when this game server group was last updated.
+	LastUpdatedTime *time.Time `type:"timestamp"`
+
+	// The Amazon Resource Name (ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
+	// for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling
+	// groups. The submitted role is validated to ensure that it contains the necessary
+	// permissions for game server groups.
+	RoleArn *string `min:"1" type:"string"`
+
+	// The current status of the game server group. Possible statuses include:
+	//
+	//    * NEW - GameLift FleetIQ has validated the CreateGameServerGroup() request.
+	//
+	//    * ACTIVATING - GameLift FleetIQ is setting up a game server group, which
+	//    includes creating an autoscaling group in your AWS account.
+	//
+	//    * ACTIVE - The game server group has been successfully created.
+	//
+	//    * DELETE_SCHEDULED - A request to delete the game server group has been
+	//    received.
+	//
+	//    * DELETING - GameLift FleetIQ has received a valid DeleteGameServerGroup()
+	//    request and is processing it. GameLift FleetIQ must first complete and
+	//    release hosts before it deletes the autoscaling group and the game server
+	//    group.
+	//
+	//    * DELETED - The game server group has been successfully deleted.
+	//
+	//    * ERROR - The asynchronous processes of activating or deleting a game
+	//    server group has failed, resulting in an error state.
+	Status GameServerGroupStatus `type:"string" enum:"true"`
+
+	// Additional information about the current game server group status. This information
+	// may provide additional insight on groups that in ERROR status.
+	StatusReason *string `min:"1" type:"string"`
+
+	// A list of activities that are currently suspended for this game server group.
+	// If this property is empty, all activities are occurring.
+	SuspendedActions []GameServerGroupAction `min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s GameServerGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// This data type is part of Amazon GameLift FleetIQ with game server groups,
+// which is in preview release and is subject to change.
+//
+// Configuration settings for intelligent autoscaling that uses target tracking.
+// An autoscaling policy can be specified when a new game server group is created
+// with CreateGameServerGroup. If a group has an autoscaling policy, the Auto
+// Scaling group takes action based on this policy, in addition to (and potentially
+// in conflict with) any other autoscaling policies that are separately applied
+// to the Auto Scaling group.
+type GameServerGroupAutoScalingPolicy struct {
+	_ struct{} `type:"structure"`
+
+	// Length of time, in seconds, it takes for a new instance to start new game
+	// server processes and register with GameLift FleetIQ. Specifying a warm-up
+	// time can be useful, particularly with game servers that take a long time
+	// to start up, because it avoids prematurely starting new instances
+	EstimatedInstanceWarmup *int64 `min:"1" type:"integer"`
+
+	// Settings for a target-based scaling policy applied to Auto Scaling group.
+	// These settings are used to create a target-based policy that tracks the GameLift
+	// FleetIQ metric "PercentUtilizedGameServers" and specifies a target value
+	// for the metric. As player usage changes, the policy triggers to adjust the
+	// game server group capacity so that the metric returns to the target value.
+	//
+	// TargetTrackingConfiguration is a required field
+	TargetTrackingConfiguration *TargetTrackingConfiguration `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s GameServerGroupAutoScalingPolicy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GameServerGroupAutoScalingPolicy) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GameServerGroupAutoScalingPolicy"}
+	if s.EstimatedInstanceWarmup != nil && *s.EstimatedInstanceWarmup < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("EstimatedInstanceWarmup", 1))
+	}
+
+	if s.TargetTrackingConfiguration == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetTrackingConfiguration"))
+	}
+	if s.TargetTrackingConfiguration != nil {
+		if err := s.TargetTrackingConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("TargetTrackingConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Properties describing a game session.
 //
 // A game session in ACTIVE status can host players. When a game session ends,
@@ -790,7 +1028,7 @@ type GameSession struct {
 
 	// The Amazon Resource Name (ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
 	// associated with the GameLift fleet that this game session is running on.
-	FleetArn *string `min:"1" type:"string"`
+	FleetArn *string `type:"string"`
 
 	// A unique identifier for a fleet that the game session is running on.
 	FleetId *string `type:"string"`
@@ -1258,6 +1496,50 @@ func (s InstanceCredentials) String() string {
 	return awsutil.Prettify(s)
 }
 
+// This data type is part of Amazon GameLift FleetIQ with game server groups,
+// which is in preview release and is subject to change.
+//
+// An allowed instance type for your game server group. GameLift FleetIQ periodically
+// evaluates each defined instance type for viability. It then updates the Auto
+// Scaling group with the list of viable instance types.
+type InstanceDefinition struct {
+	_ struct{} `type:"structure"`
+
+	// An EC2 instance type designation.
+	//
+	// InstanceType is a required field
+	InstanceType GameServerGroupInstanceType `type:"string" required:"true" enum:"true"`
+
+	// Instance weighting that indicates how much this instance type contributes
+	// to the total capacity of a game server group. Instance weights are used by
+	// GameLift FleetIQ to calculate the instance type's cost per unit hour and
+	// better identify the most cost-effective options. For detailed information
+	// on weighting instance capacity, see Instance Weighting (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html)
+	// in the Amazon EC2 Auto Scaling User Guide. Default value is "1".
+	WeightedCapacity *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s InstanceDefinition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InstanceDefinition) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "InstanceDefinition"}
+	if len(s.InstanceType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
+	}
+	if s.WeightedCapacity != nil && len(*s.WeightedCapacity) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("WeightedCapacity", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // A range of IP addresses and port settings that allow inbound traffic to connect
 // to server processes on an Amazon GameLift hosting resource. New game sessions
 // that are started on the fleet are assigned an IP address/port number combination,
@@ -1320,6 +1602,50 @@ func (s *IpPermission) Validate() error {
 	}
 	if s.ToPort != nil && *s.ToPort < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("ToPort", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// This data type is part of Amazon GameLift FleetIQ with game server groups,
+// which is in preview release and is subject to change.
+//
+// An EC2 launch template that contains configuration settings and game server
+// code to be deployed to all instances in a game server group.
+type LaunchTemplateSpecification struct {
+	_ struct{} `type:"structure"`
+
+	// A unique identifier for an existing EC2 launch template.
+	LaunchTemplateId *string `min:"1" type:"string"`
+
+	// A readable identifier for an existing EC2 launch template.
+	LaunchTemplateName *string `min:"3" type:"string"`
+
+	// The version of the EC2 launch template to use. If no version is specified,
+	// the default version will be used. EC2 allows you to specify a default version
+	// for a launch template, if none is set, the default is the first version created.
+	Version *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s LaunchTemplateSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LaunchTemplateSpecification) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LaunchTemplateSpecification"}
+	if s.LaunchTemplateId != nil && len(*s.LaunchTemplateId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("LaunchTemplateId", 1))
+	}
+	if s.LaunchTemplateName != nil && len(*s.LaunchTemplateName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("LaunchTemplateName", 3))
+	}
+	if s.Version != nil && len(*s.Version) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1793,7 +2119,7 @@ type PlayerSession struct {
 	// The Amazon Resource Name (ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
 	// associated with the GameLift fleet that the player's game session is running
 	// on.
-	FleetArn *string `min:"1" type:"string"`
+	FleetArn *string `type:"string"`
 
 	// A unique identifier for a fleet that the player's game session is running
 	// on.
@@ -1941,7 +2267,7 @@ func (s RoutingStrategy) String() string {
 //
 //    * UpdateFleetAttributes
 //
-//    * Manage fleet actions: StartFleetActions StopFleetActions
+//    * StartFleetActions or StopFleetActions
 type RuntimeConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1991,13 +2317,13 @@ func (s *RuntimeConfiguration) Validate() error {
 	return nil
 }
 
-// The location in Amazon S3 where build or script files are stored for access
-// by Amazon GameLift. This location is specified in CreateBuild, CreateScript,
-// and UpdateScript requests.
+// The location in S3 where build or script files are stored for access by Amazon
+// GameLift. This location is specified in CreateBuild, CreateScript, and UpdateScript
+// requests.
 type S3Location struct {
 	_ struct{} `type:"structure"`
 
-	// An Amazon S3 bucket identifier. This is the name of the S3 bucket.
+	// An S3 bucket identifier. This is the name of the S3 bucket.
 	Bucket *string `min:"1" type:"string"`
 
 	// The name of the zip file that contains the build files or script files.
@@ -2204,9 +2530,9 @@ type Script struct {
 	// are uploaded from an S3 location, this value remains at "0".
 	SizeOnDisk *int64 `min:"1" type:"long"`
 
-	// The location in Amazon S3 where build or script files are stored for access
-	// by Amazon GameLift. This location is specified in CreateBuild, CreateScript,
-	// and UpdateScript requests.
+	// The location in S3 where build or script files are stored for access by Amazon
+	// GameLift. This location is specified in CreateBuild, CreateScript, and UpdateScript
+	// requests.
 	StorageLocation *S3Location `type:"structure"`
 
 	// The version that is associated with a build or script. Version strings do
@@ -2388,6 +2714,42 @@ func (s *TargetConfiguration) Validate() error {
 	return nil
 }
 
+// This data type is part of Amazon GameLift FleetIQ with game server groups,
+// which is in preview release and is subject to change.
+//
+// Settings for a target-based scaling policy applied to Auto Scaling group.
+// These settings are used to create a target-based policy that tracks the GameLift
+// FleetIQ metric "PercentUtilizedGameServers" and specifies a target value
+// for the metric. As player usage changes, the policy triggers to adjust the
+// game server group capacity so that the metric returns to the target value.
+type TargetTrackingConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Desired value to use with a game server group target-based scaling policy.
+	//
+	// TargetValue is a required field
+	TargetValue *float64 `type:"double" required:"true"`
+}
+
+// String returns the string representation
+func (s TargetTrackingConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TargetTrackingConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TargetTrackingConfiguration"}
+
+	if s.TargetValue == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetValue"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Represents an authorization for a VPC peering connection between the VPC
 // for an Amazon GameLift fleet and another VPC on an account you have access
 // to. This authorization must exist and be valid for the peering connection
@@ -2455,7 +2817,7 @@ type VpcPeeringConnection struct {
 
 	// The Amazon Resource Name (ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
 	// associated with the GameLift fleet resource for this connection.
-	FleetArn *string `min:"1" type:"string"`
+	FleetArn *string `type:"string"`
 
 	// A unique identifier for a fleet. This ID determines the ID of the Amazon
 	// GameLift VPC for your fleet.

@@ -20,8 +20,8 @@ type CreateMembersInput struct {
 	// AccountDetails is a required field
 	AccountDetails []AccountDetail `locationName:"accountDetails" min:"1" type:"list" required:"true"`
 
-	// The unique ID of the detector of the GuardDuty account with which you want
-	// to associate member accounts.
+	// The unique ID of the detector of the GuardDuty account that you want to associate
+	// member accounts with.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
@@ -91,8 +91,8 @@ func (s CreateMembersInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateMembersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
+	// A list of objects that include the accountIds of the unprocessed accounts
+	// and a result string that explains why each was unprocessed.
 	//
 	// UnprocessedAccounts is a required field
 	UnprocessedAccounts []UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`

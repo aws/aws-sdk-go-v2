@@ -95,11 +95,17 @@ type ClientAPI interface {
 
 	DeleteThreatIntelSetRequest(*guardduty.DeleteThreatIntelSetInput) guardduty.DeleteThreatIntelSetRequest
 
+	DescribeOrganizationConfigurationRequest(*guardduty.DescribeOrganizationConfigurationInput) guardduty.DescribeOrganizationConfigurationRequest
+
 	DescribePublishingDestinationRequest(*guardduty.DescribePublishingDestinationInput) guardduty.DescribePublishingDestinationRequest
+
+	DisableOrganizationAdminAccountRequest(*guardduty.DisableOrganizationAdminAccountInput) guardduty.DisableOrganizationAdminAccountRequest
 
 	DisassociateFromMasterAccountRequest(*guardduty.DisassociateFromMasterAccountInput) guardduty.DisassociateFromMasterAccountRequest
 
 	DisassociateMembersRequest(*guardduty.DisassociateMembersInput) guardduty.DisassociateMembersRequest
+
+	EnableOrganizationAdminAccountRequest(*guardduty.EnableOrganizationAdminAccountInput) guardduty.EnableOrganizationAdminAccountRequest
 
 	GetDetectorRequest(*guardduty.GetDetectorInput) guardduty.GetDetectorRequest
 
@@ -133,6 +139,8 @@ type ClientAPI interface {
 
 	ListMembersRequest(*guardduty.ListMembersInput) guardduty.ListMembersRequest
 
+	ListOrganizationAdminAccountsRequest(*guardduty.ListOrganizationAdminAccountsInput) guardduty.ListOrganizationAdminAccountsRequest
+
 	ListPublishingDestinationsRequest(*guardduty.ListPublishingDestinationsInput) guardduty.ListPublishingDestinationsRequest
 
 	ListTagsForResourceRequest(*guardduty.ListTagsForResourceInput) guardduty.ListTagsForResourceRequest
@@ -156,6 +164,8 @@ type ClientAPI interface {
 	UpdateFindingsFeedbackRequest(*guardduty.UpdateFindingsFeedbackInput) guardduty.UpdateFindingsFeedbackRequest
 
 	UpdateIPSetRequest(*guardduty.UpdateIPSetInput) guardduty.UpdateIPSetRequest
+
+	UpdateOrganizationConfigurationRequest(*guardduty.UpdateOrganizationConfigurationInput) guardduty.UpdateOrganizationConfigurationRequest
 
 	UpdatePublishingDestinationRequest(*guardduty.UpdatePublishingDestinationInput) guardduty.UpdatePublishingDestinationRequest
 

@@ -24,7 +24,7 @@ type GetRateBasedStatementManagedKeysInput struct {
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
 	//
-	//    * CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT
+	//    * CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT
 	//    --region=us-east-1.
 	//
 	//    * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -39,8 +39,8 @@ type GetRateBasedStatementManagedKeysInput struct {
 	// WebACLId is a required field
 	WebACLId *string `min:"1" type:"string" required:"true"`
 
-	// A friendly name of the Web ACL. You cannot change the name of a Web ACL after
-	// you create it.
+	// The name of the Web ACL. You cannot change the name of a Web ACL after you
+	// create it.
 	//
 	// WebACLName is a required field
 	WebACLName *string `min:"1" type:"string" required:"true"`

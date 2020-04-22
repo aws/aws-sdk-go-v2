@@ -65,6 +65,9 @@ type DescribeSimulationJobOutput struct {
 	// of the request.
 	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string"`
 
+	// Compute information for the simulation job.
+	Compute *ComputeResponse `locationName:"compute" type:"structure"`
+
 	// The data sources for the simulation job.
 	DataSources []DataSource `locationName:"dataSources" type:"list"`
 
@@ -201,6 +204,12 @@ func (s DescribeSimulationJobOutput) MarshalFields(e protocol.FieldEncoder) erro
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Compute != nil {
+		v := s.Compute
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "compute", v, metadata)
 	}
 	if s.DataSources != nil {
 		v := s.DataSources

@@ -16,7 +16,7 @@ type GetCostAndUsageWithResourcesInput struct {
 	// can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated
 	// with that account's usage of that service. You can nest Expression objects
 	// to define any combination of dimension filters. For more information, see
-	// Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
+	// Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
 	//
 	// The GetCostAndUsageWithResources operation requires that you either group
 	// by or filter by a ResourceId.
@@ -33,7 +33,7 @@ type GetCostAndUsageWithResourcesInput struct {
 
 	// Which metrics are returned in the query. For more information about blended
 	// and unblended rates, see Why does the "blended" annotation appear on some
-	// line items in my bill? (https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
+	// line items in my bill? (http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
 	//
 	// Valid values are AmortizedCost, BlendedCost, NetAmortizedCost, NetUnblendedCost,
 	// NormalizedUsageAmount, UnblendedCost, and UsageQuantity.
@@ -123,7 +123,7 @@ const opGetCostAndUsageWithResources = "GetCostAndUsageWithResources"
 // specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity,
 // that you want the request to return. You can also filter and group your data
 // by various dimensions, such as SERVICE or AZ, in a specific time range. For
-// a complete list of valid dimensions, see the GetDimensionValues (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html)
+// a complete list of valid dimensions, see the GetDimensionValues (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html)
 // operation. Master accounts in an organization in AWS Organizations have access
 // to all member accounts. This API is currently available for the Amazon Elastic
 // Compute Cloud – Compute service only.

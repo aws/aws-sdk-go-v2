@@ -18,6 +18,9 @@ type UpdateSMBFileShareInput struct {
 	// @group1. Can only be set if Authentication is set to ActiveDirectory.
 	AdminUserList []string `type:"list"`
 
+	// The Amazon Resource Name (ARN) of the storage used for the audit logs.
+	AuditDestinationARN *string `type:"string"`
+
 	// The default storage class for objects put into an Amazon S3 bucket by the
 	// file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA, or S3_ONEZONE_IA.
 	// If this field is not populated, the default value S3_STANDARD is used. Optional.

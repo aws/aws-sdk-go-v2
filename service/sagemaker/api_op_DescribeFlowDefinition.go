@@ -75,6 +75,10 @@ type DescribeFlowDefinitionOutput struct {
 	// HumanLoopConfig is a required field
 	HumanLoopConfig *HumanLoopConfig `type:"structure" required:"true"`
 
+	// Container for configuring the source of human task requests. Used to specify
+	// if Amazon Rekognition or Amazon Textract is used as an integration source.
+	HumanLoopRequestSource *HumanLoopRequestSource `type:"structure"`
+
 	// An object containing information about the output file.
 	//
 	// OutputConfig is a required field

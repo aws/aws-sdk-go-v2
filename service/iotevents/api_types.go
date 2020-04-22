@@ -21,13 +21,35 @@ type Action struct {
 	// Information needed to clear the timer.
 	ClearTimer *ClearTimerAction `locationName:"clearTimer" type:"structure"`
 
+	// Writes to the DynamoDB table that you created. The default action payload
+	// contains all attribute-value pairs that have the information about the detector
+	// model instance and the event that triggered the action. You can also customize
+	// the payload (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html).
+	// One column of the DynamoDB table receives all attribute-value pairs in the
+	// payload that you specify. For more information, see Actions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html)
+	// in AWS IoT Events Developer Guide.
+	DynamoDB *DynamoDBAction `locationName:"dynamoDB" type:"structure"`
+
+	// Writes to the DynamoDB table that you created. The default action payload
+	// contains all attribute-value pairs that have the information about the detector
+	// model instance and the event that triggered the action. You can also customize
+	// the payload (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html).
+	// A separate column of the DynamoDB table receives one attribute-value pair
+	// in the payload that you specify. For more information, see Actions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html)
+	// in AWS IoT Events Developer Guide.
+	DynamoDBv2 *DynamoDBv2Action `locationName:"dynamoDBv2" type:"structure"`
+
 	// Sends information about the detector model instance and the event that triggered
 	// the action to an Amazon Kinesis Data Firehose delivery stream.
 	Firehose *FirehoseAction `locationName:"firehose" type:"structure"`
 
-	// Sends an AWS IoT Events input, passing in information about the detector
-	// model instance and the event that triggered the action.
+	// Sends AWS IoT Events input, which passes information about the detector model
+	// instance and the event that triggered the action.
 	IotEvents *IotEventsAction `locationName:"iotEvents" type:"structure"`
+
+	// Sends information about the detector model instance and the event that triggered
+	// the action to an AWS IoT SiteWise asset property.
+	IotSiteWise *IotSiteWiseAction `locationName:"iotSiteWise" type:"structure"`
 
 	// Publishes an MQTT message with the given topic to the AWS IoT message broker.
 	IotTopicPublish *IotTopicPublishAction `locationName:"iotTopicPublish" type:"structure"`
@@ -66,6 +88,16 @@ func (s *Action) Validate() error {
 			invalidParams.AddNested("ClearTimer", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.DynamoDB != nil {
+		if err := s.DynamoDB.Validate(); err != nil {
+			invalidParams.AddNested("DynamoDB", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.DynamoDBv2 != nil {
+		if err := s.DynamoDBv2.Validate(); err != nil {
+			invalidParams.AddNested("DynamoDBv2", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.Firehose != nil {
 		if err := s.Firehose.Validate(); err != nil {
 			invalidParams.AddNested("Firehose", err.(aws.ErrInvalidParams))
@@ -74,6 +106,11 @@ func (s *Action) Validate() error {
 	if s.IotEvents != nil {
 		if err := s.IotEvents.Validate(); err != nil {
 			invalidParams.AddNested("IotEvents", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.IotSiteWise != nil {
+		if err := s.IotSiteWise.Validate(); err != nil {
+			invalidParams.AddNested("IotSiteWise", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.IotTopicPublish != nil {
@@ -126,6 +163,18 @@ func (s Action) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "clearTimer", v, metadata)
 	}
+	if s.DynamoDB != nil {
+		v := s.DynamoDB
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "dynamoDB", v, metadata)
+	}
+	if s.DynamoDBv2 != nil {
+		v := s.DynamoDBv2
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "dynamoDBv2", v, metadata)
+	}
 	if s.Firehose != nil {
 		v := s.Firehose
 
@@ -137,6 +186,12 @@ func (s Action) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "iotEvents", v, metadata)
+	}
+	if s.IotSiteWise != nil {
+		v := s.IotSiteWise
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "iotSiteWise", v, metadata)
 	}
 	if s.IotTopicPublish != nil {
 		v := s.IotTopicPublish
@@ -179,6 +234,213 @@ func (s Action) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "sqs", v, metadata)
+	}
+	return nil
+}
+
+// A structure that contains timestamp information. For more information, see
+// TimeInNanos (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html)
+// in the AWS IoT SiteWise API Reference.
+//
+// For parameters that are string data type, you can specify the following options:
+//
+//    * Use a string. For example, the timeInSeconds value can be '1586400675'.
+//
+//    * Use an expression. For example, the timeInSeconds value can be '${$input.TemperatureInput.sensorData.timestamp/1000}'.
+//    For more information, see Expressions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
+//    in the AWS IoT Events Developer Guide.
+type AssetPropertyTimestamp struct {
+	_ struct{} `type:"structure"`
+
+	// The nanosecond offset converted from timeInSeconds. The valid range is between
+	// 0-999999999. You can also specify an expression.
+	OffsetInNanos *string `locationName:"offsetInNanos" type:"string"`
+
+	// The timestamp, in seconds, in the Unix epoch format. The valid range is between
+	// 1-31556889864403199. You can also specify an expression.
+	//
+	// TimeInSeconds is a required field
+	TimeInSeconds *string `locationName:"timeInSeconds" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AssetPropertyTimestamp) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AssetPropertyTimestamp) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AssetPropertyTimestamp"}
+
+	if s.TimeInSeconds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TimeInSeconds"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AssetPropertyTimestamp) MarshalFields(e protocol.FieldEncoder) error {
+	if s.OffsetInNanos != nil {
+		v := *s.OffsetInNanos
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "offsetInNanos", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TimeInSeconds != nil {
+		v := *s.TimeInSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timeInSeconds", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A structure that contains value information. For more information, see AssetPropertyValue
+// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html)
+// in the AWS IoT SiteWise API Reference.
+//
+// For parameters that are string data type, you can specify the following options:
+//
+//    * Use a string. For example, the quality value can be 'GOOD'.
+//
+//    * Use an expression. For example, the quality value can be $input.TemperatureInput.sensorData.quality
+//    . For more information, see Expressions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
+//    in the AWS IoT Events Developer Guide.
+type AssetPropertyValue struct {
+	_ struct{} `type:"structure"`
+
+	// The quality of the asset property value. The value must be GOOD, BAD, or
+	// UNCERTAIN. You can also specify an expression.
+	Quality *string `locationName:"quality" type:"string"`
+
+	// The timestamp associated with the asset property value. The default is the
+	// current event time.
+	Timestamp *AssetPropertyTimestamp `locationName:"timestamp" type:"structure"`
+
+	// The value to send to an asset property.
+	//
+	// Value is a required field
+	Value *AssetPropertyVariant `locationName:"value" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s AssetPropertyValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AssetPropertyValue) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AssetPropertyValue"}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+	if s.Timestamp != nil {
+		if err := s.Timestamp.Validate(); err != nil {
+			invalidParams.AddNested("Timestamp", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AssetPropertyValue) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Quality != nil {
+		v := *s.Quality
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "quality", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Timestamp != nil {
+		v := s.Timestamp
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "timestamp", v, metadata)
+	}
+	if s.Value != nil {
+		v := s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "value", v, metadata)
+	}
+	return nil
+}
+
+// A structure that contains an asset property value. For more information,
+// see Variant (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html)
+// in the AWS IoT SiteWise API Reference.
+//
+// You must specify one of the following value types, depending on the dataType
+// of the specified asset property. For more information, see AssetProperty
+// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetProperty.html)
+// in the AWS IoT SiteWise API Reference.
+//
+// For parameters that are string data type, you can specify the following options:
+//
+//    * Use a string. For example, the doubleValue value can be '47.9'.
+//
+//    * Use an expression. For example, the doubleValue value can be $input.TemperatureInput.sensorData.temperature.
+//    For more information, see Expressions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
+//    in the AWS IoT Events Developer Guide.
+type AssetPropertyVariant struct {
+	_ struct{} `type:"structure"`
+
+	// The asset property value is a Boolean value that must be TRUE or FALSE. You
+	// can also specify an expression. If you use an expression, the evaluated result
+	// should be a Boolean value.
+	BooleanValue *string `locationName:"booleanValue" type:"string"`
+
+	// The asset property value is a double. You can also specify an expression.
+	// If you use an expression, the evaluated result should be a double.
+	DoubleValue *string `locationName:"doubleValue" type:"string"`
+
+	// The asset property value is an integer. You can also specify an expression.
+	// If you use an expression, the evaluated result should be an integer.
+	IntegerValue *string `locationName:"integerValue" type:"string"`
+
+	// The asset property value is a string. You can also specify an expression.
+	// If you use an expression, the evaluated result should be a string.
+	StringValue *string `locationName:"stringValue" type:"string"`
+}
+
+// String returns the string representation
+func (s AssetPropertyVariant) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AssetPropertyVariant) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BooleanValue != nil {
+		v := *s.BooleanValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "booleanValue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DoubleValue != nil {
+		v := *s.DoubleValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "doubleValue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.IntegerValue != nil {
+		v := *s.IntegerValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "integerValue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.StringValue != nil {
+		v := *s.StringValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stringValue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -393,11 +655,15 @@ type DetectorModelConfiguration struct {
 	// are executed.
 	EvaluationMethod EvaluationMethod `locationName:"evaluationMethod" type:"string" enum:"true"`
 
-	// The input attribute key used to identify a device or system to create a detector
-	// (an instance of the detector model) and then to route each input received
-	// to the appropriate detector (instance). This parameter uses a JSON-path expression
-	// in the message payload of each input to specify the attribute-value pair
-	// that is used to identify the device associated with the input.
+	// The value used to identify a detector instance. When a device or system sends
+	// input, a new detector instance with a unique key value is created. AWS IoT
+	// Events can continue to route input to its corresponding detector instance
+	// based on this identifying information.
+	//
+	// This parameter uses a JSON-path expression to select the attribute-value
+	// pair in the message payload that is used for identification. To route the
+	// message to the correct detector instance, the device must send a message
+	// payload that contains the same attribute-value.
 	Key *string `locationName:"key" min:"1" type:"string"`
 
 	// The time the detector model was last updated.
@@ -691,6 +957,271 @@ func (s DetectorModelVersionSummary) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
+// Defines an action to write to the Amazon DynamoDB table that you created.
+// The standard action payload contains all attribute-value pairs that have
+// the information about the detector model instance and the event that triggered
+// the action. You can also customize the payload (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html).
+// One column of the DynamoDB table receives all attribute-value pairs in the
+// payload that you specify.
+//
+// The tableName and hashKeyField values must match the table name and the partition
+// key of the DynamoDB table.
+//
+// If the DynamoDB table also has a sort key, you must specify rangeKeyField.
+// The rangeKeyField value must match the sort key.
+//
+// The hashKeyValue and rangeKeyValue use substitution templates. These templates
+// provide data at runtime. The syntax is ${sql-expression}.
+//
+// You can use expressions for parameters that are string data type. For more
+// information, see Expressions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
+// in the AWS IoT Events Developer Guide.
+//
+// If the defined payload type is a string, DynamoDBAction writes non-JSON data
+// to the DynamoDB table as binary data. The DynamoDB console displays the data
+// as Base64-encoded text. The payloadField is <payload-field>_raw.
+type DynamoDBAction struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the hash key (also called the partition key).
+	//
+	// HashKeyField is a required field
+	HashKeyField *string `locationName:"hashKeyField" type:"string" required:"true"`
+
+	// The data type for the hash key (also called the partition key). You can specify
+	// the following values:
+	//
+	//    * STRING - The hash key is a string.
+	//
+	//    * NUMBER - The hash key is a number.
+	//
+	// If you don't specify hashKeyType, the default value is STRING.
+	HashKeyType *string `locationName:"hashKeyType" type:"string"`
+
+	// The value of the hash key (also called the partition key).
+	//
+	// HashKeyValue is a required field
+	HashKeyValue *string `locationName:"hashKeyValue" type:"string" required:"true"`
+
+	// The type of operation to perform. You can specify the following values:
+	//
+	//    * INSERT - Insert data as a new item into the DynamoDB table. This item
+	//    uses the specified hash key as a partition key. If you specified a range
+	//    key, the item uses the range key as a sort key.
+	//
+	//    * UPDATE - Update an existing item of the DynamoDB table with new data.
+	//    This item's partition key must match the specified hash key. If you specified
+	//    a range key, the range key must match the item's sort key.
+	//
+	//    * DELETE - Delete an existing item of the DynamoDB table. This item's
+	//    partition key must match the specified hash key. If you specified a range
+	//    key, the range key must match the item's sort key.
+	//
+	// If you don't specify this parameter, AWS IoT Events triggers the INSERT operation.
+	Operation *string `locationName:"operation" type:"string"`
+
+	// Information needed to configure the payload.
+	//
+	// By default, AWS IoT Events generates a standard payload in JSON for any action.
+	// This action payload contains all attribute-value pairs that have the information
+	// about the detector model instance and the event triggered the action. To
+	// configure the action payload, you can use contentExpression.
+	Payload *Payload `locationName:"payload" type:"structure"`
+
+	// The name of the DynamoDB column that receives the action payload.
+	//
+	// If you don't specify this parameter, the name of the DynamoDB column is payload.
+	PayloadField *string `locationName:"payloadField" type:"string"`
+
+	// The name of the range key (also called the sort key).
+	RangeKeyField *string `locationName:"rangeKeyField" type:"string"`
+
+	// The data type for the range key (also called the sort key), You can specify
+	// the following values:
+	//
+	//    * STRING - The range key is a string.
+	//
+	//    * NUMBER - The range key is number.
+	//
+	// If you don't specify rangeKeyField, the default value is STRING.
+	RangeKeyType *string `locationName:"rangeKeyType" type:"string"`
+
+	// The value of the range key (also called the sort key).
+	RangeKeyValue *string `locationName:"rangeKeyValue" type:"string"`
+
+	// The name of the DynamoDB table.
+	//
+	// TableName is a required field
+	TableName *string `locationName:"tableName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DynamoDBAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DynamoDBAction) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DynamoDBAction"}
+
+	if s.HashKeyField == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HashKeyField"))
+	}
+
+	if s.HashKeyValue == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HashKeyValue"))
+	}
+
+	if s.TableName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
+	}
+	if s.Payload != nil {
+		if err := s.Payload.Validate(); err != nil {
+			invalidParams.AddNested("Payload", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DynamoDBAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HashKeyField != nil {
+		v := *s.HashKeyField
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "hashKeyField", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HashKeyType != nil {
+		v := *s.HashKeyType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "hashKeyType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HashKeyValue != nil {
+		v := *s.HashKeyValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "hashKeyValue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Operation != nil {
+		v := *s.Operation
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "operation", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Payload != nil {
+		v := s.Payload
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "payload", v, metadata)
+	}
+	if s.PayloadField != nil {
+		v := *s.PayloadField
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "payloadField", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RangeKeyField != nil {
+		v := *s.RangeKeyField
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "rangeKeyField", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RangeKeyType != nil {
+		v := *s.RangeKeyType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "rangeKeyType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RangeKeyValue != nil {
+		v := *s.RangeKeyValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "rangeKeyValue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TableName != nil {
+		v := *s.TableName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "tableName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Defines an action to write to the Amazon DynamoDB table that you created.
+// The default action payload contains all attribute-value pairs that have the
+// information about the detector model instance and the event that triggered
+// the action. You can also customize the payload (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html).
+// A separate column of the DynamoDB table receives one attribute-value pair
+// in the payload that you specify.
+//
+// The type value for Payload must be JSON.
+//
+// You can use expressions for parameters that are strings. For more information,
+// see Expressions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
+// in the AWS IoT Events Developer Guide.
+type DynamoDBv2Action struct {
+	_ struct{} `type:"structure"`
+
+	// Information needed to configure the payload.
+	//
+	// By default, AWS IoT Events generates a standard payload in JSON for any action.
+	// This action payload contains all attribute-value pairs that have the information
+	// about the detector model instance and the event triggered the action. To
+	// configure the action payload, you can use contentExpression.
+	Payload *Payload `locationName:"payload" type:"structure"`
+
+	// The name of the DynamoDB table.
+	//
+	// TableName is a required field
+	TableName *string `locationName:"tableName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DynamoDBv2Action) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DynamoDBv2Action) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DynamoDBv2Action"}
+
+	if s.TableName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
+	}
+	if s.Payload != nil {
+		if err := s.Payload.Validate(); err != nil {
+			invalidParams.AddNested("Payload", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DynamoDBv2Action) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Payload != nil {
+		v := s.Payload
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "payload", v, metadata)
+	}
+	if s.TableName != nil {
+		v := *s.TableName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "tableName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Specifies the actions to be performed when the condition evaluates to TRUE.
 type Event struct {
 	_ struct{} `type:"structure"`
@@ -774,6 +1305,10 @@ type FirehoseAction struct {
 	// DeliveryStreamName is a required field
 	DeliveryStreamName *string `locationName:"deliveryStreamName" type:"string" required:"true"`
 
+	// You can configure the action payload when you send a message to an Amazon
+	// Kinesis Data Firehose delivery stream.
+	Payload *Payload `locationName:"payload" type:"structure"`
+
 	// A character separator that is used to separate records written to the Kinesis
 	// Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab),
 	// '\r\n' (Windows newline), ',' (comma).
@@ -792,6 +1327,11 @@ func (s *FirehoseAction) Validate() error {
 	if s.DeliveryStreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
 	}
+	if s.Payload != nil {
+		if err := s.Payload.Validate(); err != nil {
+			invalidParams.AddNested("Payload", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -806,6 +1346,12 @@ func (s FirehoseAction) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "deliveryStreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Payload != nil {
+		v := s.Payload
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "payload", v, metadata)
 	}
 	if s.Separator != nil {
 		v := *s.Separator
@@ -1070,6 +1616,10 @@ type IotEventsAction struct {
 	//
 	// InputName is a required field
 	InputName *string `locationName:"inputName" min:"1" type:"string" required:"true"`
+
+	// You can configure the action payload when you send a message to an AWS IoT
+	// Events input.
+	Payload *Payload `locationName:"payload" type:"structure"`
 }
 
 // String returns the string representation
@@ -1087,6 +1637,11 @@ func (s *IotEventsAction) Validate() error {
 	if s.InputName != nil && len(*s.InputName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InputName", 1))
 	}
+	if s.Payload != nil {
+		if err := s.Payload.Validate(); err != nil {
+			invalidParams.AddNested("Payload", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1102,6 +1657,108 @@ func (s IotEventsAction) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "inputName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.Payload != nil {
+		v := s.Payload
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "payload", v, metadata)
+	}
+	return nil
+}
+
+// Sends information about the detector model instance and the event that triggered
+// the action to a specified asset property in AWS IoT SiteWise.
+//
+// You must specify either propertyAlias or both assetId and propertyId to identify
+// the target asset property in AWS IoT SiteWise.
+//
+// For parameters that are string data type, you can specify the following options:
+//
+//    * Use a string. For example, the propertyAlias value can be '/company/windfarm/3/turbine/7/temperature'.
+//
+//    * Use an expression. For example, the propertyAlias value can be 'company/windfarm/${$input.TemperatureInput.sensorData.windfarmID}/turbine/${$input.TemperatureInput.sensorData.turbineID}/temperature'.
+//    For more information, see Expressions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
+//    in the AWS IoT Events Developer Guide.
+type IotSiteWiseAction struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the asset that has the specified property. You can specify an expression.
+	AssetId *string `locationName:"assetId" type:"string"`
+
+	// A unique identifier for this entry. You can use the entry ID to track which
+	// data entry causes an error in case of failure. The default is a new unique
+	// identifier. You can also specify an expression.
+	EntryId *string `locationName:"entryId" type:"string"`
+
+	// The alias of the asset property. You can also specify an expression.
+	PropertyAlias *string `locationName:"propertyAlias" type:"string"`
+
+	// The ID of the asset property. You can specify an expression.
+	PropertyId *string `locationName:"propertyId" type:"string"`
+
+	// The value to send to the asset property. This value contains timestamp, quality,
+	// and value (TQV) information.
+	//
+	// PropertyValue is a required field
+	PropertyValue *AssetPropertyValue `locationName:"propertyValue" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s IotSiteWiseAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *IotSiteWiseAction) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "IotSiteWiseAction"}
+
+	if s.PropertyValue == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PropertyValue"))
+	}
+	if s.PropertyValue != nil {
+		if err := s.PropertyValue.Validate(); err != nil {
+			invalidParams.AddNested("PropertyValue", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s IotSiteWiseAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AssetId != nil {
+		v := *s.AssetId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "assetId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EntryId != nil {
+		v := *s.EntryId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "entryId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PropertyAlias != nil {
+		v := *s.PropertyAlias
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "propertyAlias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PropertyId != nil {
+		v := *s.PropertyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "propertyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PropertyValue != nil {
+		v := s.PropertyValue
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "propertyValue", v, metadata)
+	}
 	return nil
 }
 
@@ -1116,6 +1773,10 @@ type IotTopicPublishAction struct {
 	//
 	// MqttTopic is a required field
 	MqttTopic *string `locationName:"mqttTopic" min:"1" type:"string" required:"true"`
+
+	// You can configure the action payload when you publish a message to an AWS
+	// IoT Core topic.
+	Payload *Payload `locationName:"payload" type:"structure"`
 }
 
 // String returns the string representation
@@ -1133,6 +1794,11 @@ func (s *IotTopicPublishAction) Validate() error {
 	if s.MqttTopic != nil && len(*s.MqttTopic) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MqttTopic", 1))
 	}
+	if s.Payload != nil {
+		if err := s.Payload.Validate(); err != nil {
+			invalidParams.AddNested("Payload", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1148,6 +1814,12 @@ func (s IotTopicPublishAction) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "mqttTopic", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.Payload != nil {
+		v := s.Payload
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "payload", v, metadata)
+	}
 	return nil
 }
 
@@ -1160,6 +1832,10 @@ type LambdaAction struct {
 	//
 	// FunctionArn is a required field
 	FunctionArn *string `locationName:"functionArn" min:"1" type:"string" required:"true"`
+
+	// You can configure the action payload when you send a message to a Lambda
+	// function.
+	Payload *Payload `locationName:"payload" type:"structure"`
 }
 
 // String returns the string representation
@@ -1177,6 +1853,11 @@ func (s *LambdaAction) Validate() error {
 	if s.FunctionArn != nil && len(*s.FunctionArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FunctionArn", 1))
 	}
+	if s.Payload != nil {
+		if err := s.Payload.Validate(); err != nil {
+			invalidParams.AddNested("Payload", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1191,6 +1872,12 @@ func (s LambdaAction) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "functionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Payload != nil {
+		v := s.Payload
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "payload", v, metadata)
 	}
 	return nil
 }
@@ -1460,8 +2147,75 @@ func (s OnInputLifecycle) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Information needed to configure the payload.
+//
+// By default, AWS IoT Events generates a standard payload in JSON for any action.
+// This action payload contains all attribute-value pairs that have the information
+// about the detector model instance and the event triggered the action. To
+// configure the action payload, you can use contentExpression.
+type Payload struct {
+	_ struct{} `type:"structure"`
+
+	// The content of the payload. You can use a string expression that includes
+	// quoted strings ('<string>'), variables ($variable.<variable-name>), input
+	// values ($input.<input-name>.<path-to-datum>), string concatenations, and
+	// quoted strings that contain ${} as the content. The recommended maximum size
+	// of a content expression is 1 KB.
+	//
+	// ContentExpression is a required field
+	ContentExpression *string `locationName:"contentExpression" min:"1" type:"string" required:"true"`
+
+	// The value of the payload type can be either STRING or JSON.
+	//
+	// Type is a required field
+	Type PayloadType `locationName:"type" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s Payload) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Payload) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Payload"}
+
+	if s.ContentExpression == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContentExpression"))
+	}
+	if s.ContentExpression != nil && len(*s.ContentExpression) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContentExpression", 1))
+	}
+	if len(s.Type) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Payload) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ContentExpression != nil {
+		v := *s.ContentExpression
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "contentExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Information required to reset the timer. The timer is reset to the previously
-// evaluated result of the duration.
+// evaluated result of the duration. The duration expression isn't reevaluated
+// when you reset the timer.
 type ResetTimerAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1508,6 +2262,10 @@ func (s ResetTimerAction) MarshalFields(e protocol.FieldEncoder) error {
 type SNSTopicPublishAction struct {
 	_ struct{} `type:"structure"`
 
+	// You can configure the action payload when you send a message as an Amazon
+	// SNS push notification.
+	Payload *Payload `locationName:"payload" type:"structure"`
+
 	// The ARN of the Amazon SNS target where the message is sent.
 	//
 	// TargetArn is a required field
@@ -1529,6 +2287,11 @@ func (s *SNSTopicPublishAction) Validate() error {
 	if s.TargetArn != nil && len(*s.TargetArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TargetArn", 1))
 	}
+	if s.Payload != nil {
+		if err := s.Payload.Validate(); err != nil {
+			invalidParams.AddNested("Payload", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1538,6 +2301,12 @@ func (s *SNSTopicPublishAction) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SNSTopicPublishAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Payload != nil {
+		v := s.Payload
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "payload", v, metadata)
+	}
 	if s.TargetArn != nil {
 		v := *s.TargetArn
 
@@ -1560,7 +2329,7 @@ type SetTimerAction struct {
 	DurationExpression *string `locationName:"durationExpression" min:"1" type:"string"`
 
 	// The number of seconds until the timer expires. The minimum value is 60 seconds
-	// to ensure accuracy.
+	// to ensure accuracy. The maximum value is 31622400 seconds.
 	Seconds *int64 `locationName:"seconds" min:"1" deprecated:"true" type:"integer"`
 
 	// The name of the timer.
@@ -1686,13 +2455,17 @@ func (s SetVariableAction) MarshalFields(e protocol.FieldEncoder) error {
 type SqsAction struct {
 	_ struct{} `type:"structure"`
 
+	// You can configure the action payload when you send a message to an Amazon
+	// SQS queue.
+	Payload *Payload `locationName:"payload" type:"structure"`
+
 	// The URL of the SQS queue where the data is written.
 	//
 	// QueueUrl is a required field
 	QueueUrl *string `locationName:"queueUrl" type:"string" required:"true"`
 
 	// Set this to TRUE if you want the data to be base-64 encoded before it is
-	// written to the queue.
+	// written to the queue. Otherwise, set this to FALSE.
 	UseBase64 *bool `locationName:"useBase64" type:"boolean"`
 }
 
@@ -1708,6 +2481,11 @@ func (s *SqsAction) Validate() error {
 	if s.QueueUrl == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
+	if s.Payload != nil {
+		if err := s.Payload.Validate(); err != nil {
+			invalidParams.AddNested("Payload", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1717,6 +2495,12 @@ func (s *SqsAction) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SqsAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Payload != nil {
+		v := s.Payload
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "payload", v, metadata)
+	}
 	if s.QueueUrl != nil {
 		v := *s.QueueUrl
 
@@ -1873,6 +2657,68 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type TagrisSweepListItem struct {
+	_ struct{} `type:"structure"`
+
+	TagrisAccountId *string `min:"12" type:"string"`
+
+	TagrisAmazonResourceName *string `min:"1" type:"string"`
+
+	TagrisInternalId *string `type:"string"`
+
+	TagrisVersion *int64 `type:"long"`
+}
+
+// String returns the string representation
+func (s TagrisSweepListItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagrisSweepListItem) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TagrisSweepListItem"}
+	if s.TagrisAccountId != nil && len(*s.TagrisAccountId) < 12 {
+		invalidParams.Add(aws.NewErrParamMinLen("TagrisAccountId", 12))
+	}
+	if s.TagrisAmazonResourceName != nil && len(*s.TagrisAmazonResourceName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TagrisAmazonResourceName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagrisSweepListItem) MarshalFields(e protocol.FieldEncoder) error {
+	if s.TagrisAccountId != nil {
+		v := *s.TagrisAccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TagrisAccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TagrisAmazonResourceName != nil {
+		v := *s.TagrisAmazonResourceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TagrisAmazonResourceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TagrisInternalId != nil {
+		v := *s.TagrisInternalId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TagrisInternalId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TagrisVersion != nil {
+		v := *s.TagrisVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TagrisVersion", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }

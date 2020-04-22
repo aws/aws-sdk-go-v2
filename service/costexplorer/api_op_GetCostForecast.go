@@ -26,7 +26,7 @@ type GetCostForecastInput struct {
 
 	// Which metric Cost Explorer uses to create your forecast. For more information
 	// about blended and unblended rates, see Why does the "blended" annotation
-	// appear on some line items in my bill? (https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
+	// appear on some line items in my bill? (http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
 	//
 	// Valid values for a GetCostForecast call are the following:
 	//

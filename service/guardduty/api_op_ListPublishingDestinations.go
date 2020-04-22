@@ -21,10 +21,10 @@ type ListPublishingDestinationsInput struct {
 	// The maximum number of results to return in the response.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
-	// A token to use for paginating results returned in the repsonse. Set the value
-	// of this parameter to null for the first request to a list action. For subsequent
-	// calls, use the NextToken value returned from the previous request to continue
-	// listing results after the first page.
+	// A token to use for paginating results that are returned in the response.
+	// Set the value of this parameter to null for the first request to a list action.
+	// For subsequent calls, use the NextToken value returned from the previous
+	// request to continue listing results after the first page.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
@@ -81,16 +81,16 @@ func (s ListPublishingDestinationsInput) MarshalFields(e protocol.FieldEncoder) 
 type ListPublishingDestinationsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A Destinations obect that includes information about each publishing destination
+	// A Destinations object that includes information about each publishing destination
 	// returned.
 	//
 	// Destinations is a required field
 	Destinations []Destination `locationName:"destinations" type:"list" required:"true"`
 
-	// A token to use for paginating results returned in the repsonse. Set the value
-	// of this parameter to null for the first request to a list action. For subsequent
-	// calls, use the NextToken value returned from the previous request to continue
-	// listing results after the first page.
+	// A token to use for paginating results that are returned in the response.
+	// Set the value of this parameter to null for the first request to a list action.
+	// For subsequent calls, use the NextToken value returned from the previous
+	// request to continue listing results after the first page.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 

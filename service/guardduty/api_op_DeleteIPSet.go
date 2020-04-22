@@ -88,7 +88,7 @@ const opDeleteIPSet = "DeleteIPSet"
 // DeleteIPSetRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Deletes the IPSet specified by the ipSetId. IPSets are called Trusted IP
+// Deletes the IPSet specified by the ipSetId. IPSets are called trusted IP
 // lists in the console user interface.
 //
 //    // Example sending a request using DeleteIPSetRequest.

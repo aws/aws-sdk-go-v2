@@ -13,7 +13,7 @@ import (
 type UpdatePublishingDestinationInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the detector associated with the publishing destinations to update.
+	// The ID of the publishing destination to update.
 	//
 	// DestinationId is a required field
 	DestinationId *string `location:"uri" locationName:"destinationId" type:"string" required:"true"`
@@ -22,7 +22,7 @@ type UpdatePublishingDestinationInput struct {
 	// of the publishing destination.
 	DestinationProperties *DestinationProperties `locationName:"destinationProperties" type:"structure"`
 
-	// The ID of the
+	// The ID of the detector associated with the publishing destinations to update.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`

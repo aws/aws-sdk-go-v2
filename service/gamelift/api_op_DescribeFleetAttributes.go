@@ -13,8 +13,11 @@ import (
 type DescribeFleetAttributesInput struct {
 	_ struct{} `type:"structure"`
 
-	// A unique identifier for a fleet(s) to retrieve attributes for. You can use
-	// either the fleet ID or ARN value.
+	// A list of unique fleet identifiers to retrieve attributes for. You can use
+	// either the fleet ID or ARN value. To retrieve attributes for all current
+	// fleets, do not include this parameter. If the list of fleet identifiers includes
+	// fleets that don't currently exist, the request succeeds but no attributes
+	// for that fleet are returned.
 	FleetIds []string `min:"1" type:"list"`
 
 	// The maximum number of results to return. Use this parameter with NextToken
@@ -58,7 +61,7 @@ type DescribeFleetAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A collection of objects containing attribute metadata for each requested
-	// fleet ID.
+	// fleet ID. Attribute objects are returned only for fleets that currently exist.
 	FleetAttributes []FleetAttributes `type:"list"`
 
 	// Token that indicates where to resume retrieving results on the next call
@@ -77,21 +80,23 @@ const opDescribeFleetAttributes = "DescribeFleetAttributes"
 // DescribeFleetAttributesRequest returns a request value for making API operation for
 // Amazon GameLift.
 //
-// Retrieves fleet properties, including metadata, status, and configuration,
-// for one or more fleets. You can request attributes for all fleets, or specify
-// a list of one or more fleet IDs. When requesting multiple fleets, use the
-// pagination parameters to retrieve results as a set of sequential pages. If
-// successful, a FleetAttributes object is returned for each requested fleet
-// ID. When specifying a list of fleet IDs, attribute objects are returned only
-// for fleets that currently exist.
+// Retrieves core properties, including configuration, status, and metadata,
+// for a fleet.
+//
+// To get attributes for one or more fleets, provide a list of fleet IDs or
+// fleet ARNs. To get attributes for all fleets, do not specify a fleet identifier.
+// When requesting attributes for multiple fleets, use the pagination parameters
+// to retrieve results as a set of sequential pages. If successful, a FleetAttributes
+// object is returned for each fleet requested, unless the fleet identifier
+// is not found.
 //
 // Some API actions may limit the number of fleet IDs allowed in one request.
 // If a request exceeds this limit, the request fails and the error message
-// includes the maximum allowed.
+// includes the maximum allowed number.
 //
 // Learn more
 //
-//  Working with Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html).
+// Setting up GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 //
 // Related operations
 //
@@ -107,7 +112,7 @@ const opDescribeFleetAttributes = "DescribeFleetAttributes"
 //
 //    * UpdateFleetAttributes
 //
-//    * Manage fleet actions: StartFleetActions StopFleetActions
+//    * StartFleetActions or StopFleetActions
 //
 //    // Example sending a request using DescribeFleetAttributesRequest.
 //    req := client.DescribeFleetAttributesRequest(params)

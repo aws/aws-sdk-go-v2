@@ -14,13 +14,13 @@ type DisassociateMembersInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of account IDs of the GuardDuty member accounts that you want to disassociate
-	// from master.
+	// from the master account.
 	//
 	// AccountIds is a required field
 	AccountIds []string `locationName:"accountIds" min:"1" type:"list" required:"true"`
 
 	// The unique ID of the detector of the GuardDuty account whose members you
-	// want to disassociate from master.
+	// want to disassociate from the master account.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
@@ -83,8 +83,8 @@ func (s DisassociateMembersInput) MarshalFields(e protocol.FieldEncoder) error {
 type DisassociateMembersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
+	// A list of objects that contain the unprocessed account and a result string
+	// that explains why it was unprocessed.
 	//
 	// UnprocessedAccounts is a required field
 	UnprocessedAccounts []UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`

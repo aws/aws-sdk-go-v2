@@ -18,8 +18,8 @@ type ListVocabulariesInput struct {
 
 	// When specified, the vocabularies returned in the list are limited to vocabularies
 	// whose name contains the specified string. The search is case-insensitive,
-	// ListVocabularies will return both "vocabularyname" and "VocabularyName" in
-	// the response list.
+	// ListVocabularies returns both "vocabularyname" and "VocabularyName" in the
+	// response list.
 	NameContains *string `min:"1" type:"string"`
 
 	// If the result of the previous request to ListVocabularies was truncated,

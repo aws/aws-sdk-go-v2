@@ -13,12 +13,12 @@ import (
 type DeleteThreatIntelSetInput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique ID of the detector the threatIntelSet is associated with.
+	// The unique ID of the detector that the threatIntelSet is associated with.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// The unique ID of the threatIntelSet you want to delete.
+	// The unique ID of the threatIntelSet that you want to delete.
 	//
 	// ThreatIntelSetId is a required field
 	ThreatIntelSetId *string `location:"uri" locationName:"threatIntelSetId" type:"string" required:"true"`
@@ -88,7 +88,7 @@ const opDeleteThreatIntelSet = "DeleteThreatIntelSet"
 // DeleteThreatIntelSetRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Deletes ThreatIntelSet specified by the ThreatIntelSet ID.
+// Deletes the ThreatIntelSet specified by the ThreatIntelSet ID.
 //
 //    // Example sending a request using DeleteThreatIntelSetRequest.
 //    req := client.DeleteThreatIntelSetRequest(params)
