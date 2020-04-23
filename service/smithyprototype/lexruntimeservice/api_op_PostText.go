@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/smithyprototype/lexruntimeservice/types"
 )
 
 type PostTextInput struct {
@@ -198,7 +199,7 @@ type PostTextOutput struct {
 	//    appropriate response to prompts from the service (you can configure how
 	//    many times Amazon Lex can prompt a user for specific information), or
 	//    the Lambda function failed to fulfill the intent.
-	DialogState DialogState `locationName:"dialogState" type:"string" enum:"true"`
+	DialogState types.DialogState `locationName:"dialogState" type:"string" enum:"true"`
 
 	// The current user intent that Amazon Lex is aware of.
 	IntentName *string `locationName:"intentName" type:"string"`
@@ -235,18 +236,18 @@ type PostTextOutput struct {
 	//    * Composite - The message contains an escaped JSON object containing one
 	//    or more messages from the groups that messages were assigned to when the
 	//    intent was created.
-	MessageFormat MessageFormatType `locationName:"messageFormat" type:"string" enum:"true"`
+	MessageFormat types.MessageFormatType `locationName:"messageFormat" type:"string" enum:"true"`
 
 	// Represents the options that the user has to respond to the current prompt.
 	// Response Card can come from the bot configuration (in the Amazon Lex console,
 	// choose the settings button next to a slot) or from a code hook (Lambda function).
-	ResponseCard *ResponseCard `locationName:"responseCard" type:"structure"`
+	ResponseCard *types.ResponseCard `locationName:"responseCard" type:"structure"`
 
 	// The sentiment expressed in and utterance.
 	//
 	// When the bot is configured to send utterances to Amazon Comprehend for sentiment
 	// analysis, this field contains the result of the analysis.
-	SentimentResponse *SentimentResponse `locationName:"sentimentResponse" type:"structure"`
+	SentimentResponse *types.SentimentResponse `locationName:"sentimentResponse" type:"structure"`
 
 	// A map of key-value pairs representing the session-specific context information.
 	SessionAttributes map[string]string `locationName:"sessionAttributes" type:"map" sensitive:"true"`

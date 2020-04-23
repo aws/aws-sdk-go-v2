@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/smithyprototype/lexruntimeservice/types"
 )
 
 type GetSessionInput struct {
@@ -105,7 +106,7 @@ type GetSessionOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Describes the current state of the bot.
-	DialogAction *DialogAction `locationName:"dialogAction" type:"structure"`
+	DialogAction *types.DialogAction `locationName:"dialogAction" type:"structure"`
 
 	// An array of information about the intents used in the session. The array
 	// can contain a maximum of three summaries. If more than three intents are
@@ -114,7 +115,7 @@ type GetSessionOutput struct {
 	//
 	// If you set the checkpointLabelFilter parameter in the request, the array
 	// contains only the intents with the specified label.
-	RecentIntentSummaryView []IntentSummary `locationName:"recentIntentSummaryView" type:"list"`
+	RecentIntentSummaryView []types.IntentSummary `locationName:"recentIntentSummaryView" type:"list"`
 
 	// Map of key/value pairs representing the session-specific context information.
 	// It contains application information passed between Amazon Lex and a client
