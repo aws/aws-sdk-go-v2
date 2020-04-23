@@ -40,6 +40,7 @@ type WebIdentityRoleProvider struct {
 
 // WebIdentityRoleProviderOptions is a structure of configurable options for WebIdentityRoleProvider
 type WebIdentityRoleProviderOptions struct {
+
 	ExpiryWindow time.Duration
 	PolicyArns   []PolicyDescriptorType
 }
@@ -97,7 +98,11 @@ func (p *WebIdentityRoleProvider) retrieveFn() (aws.Credentials, error) {
 		sessionName = strconv.FormatInt(sdk.NowTime().UnixNano(), 10)
 	}
 	req := p.client.AssumeRoleWithWebIdentityRequest(&sts.AssumeRoleWithWebIdentityInput{
+<<<<<<< HEAD
 		PolicyArns:       p.options.PolicyArns,
+=======
+		PolicyArns: 	  p.options.PolicyArns,
+>>>>>>> 9e76db39bade99ea866dc61e00a2a43d7b79a0ec
 		RoleArn:          &p.roleARN,
 		RoleSessionName:  &sessionName,
 		WebIdentityToken: aws.String(string(b)),
