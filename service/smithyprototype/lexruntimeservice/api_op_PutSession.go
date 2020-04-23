@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/smithyprototype/lexruntimeservice/types"
 )
 
 type PutSessionInput struct {
@@ -44,7 +45,7 @@ type PutSessionInput struct {
 	BotName *string `location:"uri" locationName:"botName" type:"string" required:"true"`
 
 	// Sets the next action that the bot should take to fulfill the conversation.
-	DialogAction *DialogAction `locationName:"dialogAction" type:"structure"`
+	DialogAction *types.DialogAction `locationName:"dialogAction" type:"structure"`
 
 	// A summary of the recent intents for the bot. You can use the intent summary
 	// view to set a checkpoint label on an intent and modify attributes of intents.
@@ -65,7 +66,7 @@ type PutSessionInput struct {
 	// if a GetSession request returns three intents in the summary view and you
 	// call PutSession with one intent in the summary view, the next call to GetSession
 	// will only return one intent.
-	RecentIntentSummaryView []IntentSummary `locationName:"recentIntentSummaryView" type:"list"`
+	RecentIntentSummaryView []types.IntentSummary `locationName:"recentIntentSummaryView" type:"list"`
 
 	// Map of key/value pairs representing the session-specific context information.
 	// It contains application information passed between Amazon Lex and a client
@@ -208,7 +209,7 @@ type PutSessionOutput struct {
 	//    the intent.
 	//
 	//    * ReadyForFulfillment - Conveys that the client has to fulfill the intent.
-	DialogState DialogState `location:"header" locationName:"x-amz-lex-dialog-state" type:"string" enum:"true"`
+	DialogState types.DialogState `location:"header" locationName:"x-amz-lex-dialog-state" type:"string" enum:"true"`
 
 	// The name of the current intent.
 	IntentName *string `location:"header" locationName:"x-amz-lex-intent-name" type:"string"`
@@ -227,7 +228,7 @@ type PutSessionOutput struct {
 	//    * Composite - The message contains an escaped JSON object containing one
 	//    or more messages from the groups that messages were assigned to when the
 	//    intent was created.
-	MessageFormat MessageFormatType `location:"header" locationName:"x-amz-lex-message-format" type:"string" enum:"true"`
+	MessageFormat types.MessageFormatType `location:"header" locationName:"x-amz-lex-message-format" type:"string" enum:"true"`
 
 	// Map of key/value pairs representing session-specific context information.
 	SessionAttributes aws.JSONValue `location:"header" locationName:"x-amz-lex-session-attributes" type:"jsonvalue"`

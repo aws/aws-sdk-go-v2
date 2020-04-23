@@ -7,9 +7,10 @@ import (
 	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	types "github.com/aws/aws-sdk-go-v2/service/smithyprototype/lexruntimeservice/types"
 )
 
 type PostContentInput struct {
@@ -269,7 +270,7 @@ type PostContentOutput struct {
 	//    appropriate response to prompts from the service (you can configure how
 	//    many times Amazon Lex can prompt a user for specific information), or
 	//    if the Lambda function fails to fulfill the intent.
-	DialogState DialogState `location:"header" locationName:"x-amz-lex-dialog-state" type:"string" enum:"true"`
+	DialogState types.DialogState `location:"header" locationName:"x-amz-lex-dialog-state" type:"string" enum:"true"`
 
 	// The text used to process the request.
 	//
@@ -313,7 +314,7 @@ type PostContentOutput struct {
 	//    * Composite - The message contains an escaped JSON object containing one
 	//    or more messages from the groups that messages were assigned to when the
 	//    intent was created.
-	MessageFormat MessageFormatType `location:"header" locationName:"x-amz-lex-message-format" type:"string" enum:"true"`
+	MessageFormat types.MessageFormatType `location:"header" locationName:"x-amz-lex-message-format" type:"string" enum:"true"`
 
 	// The sentiment expressed in and utterance.
 	//
