@@ -246,7 +246,7 @@ func (p *AssumeRoleProvider) retrieveFn() (aws.Credentials, error) {
 	}
 	input := &sts.AssumeRoleInput{
 		DurationSeconds: aws.Int64(int64(p.options.Duration / time.Second)),
-		PolicyArns:		 p.options.PolicyArns,
+		PolicyArns:      p.options.PolicyArns,
 		RoleArn:         aws.String(p.roleARN),
 		RoleSessionName: aws.String(p.options.RoleSessionName),
 		ExternalId:      p.options.ExternalID,

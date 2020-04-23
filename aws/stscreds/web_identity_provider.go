@@ -40,9 +40,8 @@ type WebIdentityRoleProvider struct {
 
 // WebIdentityRoleProviderOptions is a structure of configurable options for WebIdentityRoleProvider
 type WebIdentityRoleProviderOptions struct {
-
 	ExpiryWindow time.Duration
-	PolicyArns []PolicyDescriptorType
+	PolicyArns   []PolicyDescriptorType
 }
 
 // IdentityTokenRetriever is an interface for retrieving a JWT
@@ -98,7 +97,7 @@ func (p *WebIdentityRoleProvider) retrieveFn() (aws.Credentials, error) {
 		sessionName = strconv.FormatInt(sdk.NowTime().UnixNano(), 10)
 	}
 	req := p.client.AssumeRoleWithWebIdentityRequest(&sts.AssumeRoleWithWebIdentityInput{
-		PolicyArns: 	  p.options.PolicyArns,
+		PolicyArns:       p.options.PolicyArns,
 		RoleArn:          &p.roleARN,
 		RoleSessionName:  &sessionName,
 		WebIdentityToken: aws.String(string(b)),
