@@ -13,9 +13,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/rest"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/smithyprototype/lexruntimeservice/types"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
-	"github.com/aws/aws-sdk-go-v2/service/smithyprototype/lexruntimeservice/types"
 )
 
 type PutSessionInput struct {
@@ -444,21 +444,21 @@ func serializePutSessionInputAWSJSON(v *PutSessionInput, encoder json.Value) err
 
 	if v.DialogAction != nil {
 		value := object.Key("dialogAction")
-		if err := serializeDialogActionAWSJSON(v.DialogAction, value); err != nil {
+		if err := awsRestJson1_serializeJsonDialogAction(v.DialogAction, value); err != nil {
 			return err
 		}
 	}
 
 	if v.RecentIntentSummaryView != nil {
 		value := object.Key("recentIntentSummaryView")
-		if err := serializeIntentSummaryListAWSJSON(v.RecentIntentSummaryView, value); err != nil {
+		if err := awsRestJson1_serializeJsonIntentSummaryList(v.RecentIntentSummaryView, value); err != nil {
 			return err
 		}
 	}
 
 	if v.SessionAttributes != nil {
 		value := object.Key("sessionAttributes")
-		if err := serializeStringMapAWSJSON(v.SessionAttributes, value); err != nil {
+		if err := awsRestJson1_serializeJsonStringMap(v.SessionAttributes, value); err != nil {
 			return err
 		}
 	}
