@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/json"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/rest"
 	"github.com/aws/aws-sdk-go-v2/service/smithyprototype/lexruntimeservice/types"
@@ -25,22 +26,22 @@ func (g *awsRestJson1_serializeOpDeleteSession) HandleSerialize(ctx context.Cont
 ) {
 	request, ok := in.Request.(*smithyHTTP.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+		return out, metadata, &aws.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
 	input, ok := in.Parameters.(*DeleteSessionInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+		return out, metadata, &aws.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
 	restEncoder := rest.NewEncoder(request.Request)
 
 	if err := awsRestJson1_serializeRestDeleteSessionInput(input, restEncoder); err != nil {
-		return out, metadata, err
+		return out, metadata, &aws.SerializationError{Err: err}
 	}
 
 	if err := restEncoder.Encode(); err != nil {
-		return out, metadata, err
+		return out, metadata, &aws.SerializationError{Err: err}
 	}
 
 	return next.HandleSerialize(ctx, in)
@@ -59,22 +60,22 @@ func (g *awsRestJson1_serializeOpGetSession) HandleSerialize(ctx context.Context
 ) {
 	request, ok := in.Request.(*smithyHTTP.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+		return out, metadata, &aws.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
 	input, ok := in.Parameters.(*GetSessionInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+		return out, metadata, &aws.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
 	restEncoder := rest.NewEncoder(request.Request)
 
 	if err := awsRestJson1_serializeRestGetSessionInput(input, restEncoder); err != nil {
-		return out, metadata, err
+		return out, metadata, &aws.SerializationError{Err: err}
 	}
 
 	if err := restEncoder.Encode(); err != nil {
-		return out, metadata, err
+		return out, metadata, &aws.SerializationError{Err: err}
 	}
 
 	return next.HandleSerialize(ctx, in)
@@ -91,27 +92,27 @@ func (p awsRestJson1_serializeOpPostContent) HandleSerialize(ctx context.Context
 ) {
 	request, ok := in.Request.(*smithyHTTP.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+		return out, metadata, &aws.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
 	params, ok := in.Parameters.(*PostContentInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("unknown params parameters type %T", in.Parameters)
+		return out, metadata, &aws.SerializationError{Err: fmt.Errorf("unknown params parameters type %T", in.Parameters)}
 	}
 
 	restEncoder := rest.NewEncoder(request.Request)
 
 	if err := awsRestJson1_serializeRestPostContentInput(params, restEncoder); err != nil {
-		return out, metadata, err
+		return out, metadata, &aws.SerializationError{Err: err}
 	}
 
 	if err := restEncoder.Encode(); err != nil {
-		return out, metadata, err
+		return out, metadata, &aws.SerializationError{Err: err}
 	}
 
 	// TODO: If MediaType trait was applied in the Smithy model the content-type should get reflected as such
 	if request, err = request.SetStream(params.InputStream); err != nil {
-		return out, metadata, err
+		return out, metadata, &aws.SerializationError{Err: err}
 	}
 	in.Request = request
 
@@ -129,12 +130,12 @@ func (p awsRestJson1_serializeOpPostText) HandleSerialize(ctx context.Context, i
 ) {
 	request, ok := in.Request.(*smithyHTTP.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+		return out, metadata, &aws.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
 	input, ok := in.Parameters.(*PostTextInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+		return out, metadata, &aws.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
 	restEncoder := rest.NewEncoder(request.Request)
@@ -142,29 +143,132 @@ func (p awsRestJson1_serializeOpPostText) HandleSerialize(ctx context.Context, i
 	restEncoder.AddHeader("Content-Type").String("application/json")
 
 	if err := awsRestJson1_serializeRestPostTextInput(input, restEncoder); err != nil {
-		return out, metadata, err
+		return out, metadata, &aws.SerializationError{Err: err}
 	}
 
 	if err := restEncoder.Encode(); err != nil {
-		return out, metadata, err
+		return out, metadata, &aws.SerializationError{Err: err}
 	}
 
 	jsonEncoder := json.NewEncoder()
 	if err := awsRestJson1_serializeJsonPostTextInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, err
+		return out, metadata, &aws.SerializationError{Err: err}
 	}
 
 	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, err
+		return out, metadata, &aws.SerializationError{Err: err}
 	}
 	in.Request = request
 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsRestJson1_serializeOpPutSession struct{}
+
+// ID is the middleware identifier
+func (p *awsRestJson1_serializeOpPutSession) ID() string {
+	return "awsRestJson1_serializeOpPutSession"
+}
+
+func (p *awsRestJson1_serializeOpPutSession) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyHTTP.Request)
+	if !ok {
+		return out, metadata, &aws.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutSessionInput)
+	if !ok {
+		return out, metadata, &aws.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	restEncoder := rest.NewEncoder(request.Request)
+
+	restEncoder.AddHeader("Content-Type").String("application/json")
+
+	if err := awsRestJson1_serializeRestPutSessionInput(input, restEncoder); err != nil {
+		return out, metadata, &aws.SerializationError{Err: err}
+	}
+
+	jsonEncoder := json.NewEncoder()
+	if err := awsRestJson1_serializeJsonPutSessionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &aws.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &aws.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+func awsRestJson1_serializeJsonPutSessionInput(v *PutSessionInput, encoder json.Value) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	object := encoder.Object()
+	defer object.Close()
+
+	if v.DialogAction != nil {
+		value := object.Key("dialogAction")
+		if err := awsRestJson1_serializeJsonDialogAction(v.DialogAction, value); err != nil {
+			return err
+		}
+	}
+
+	if v.RecentIntentSummaryView != nil {
+		value := object.Key("recentIntentSummaryView")
+		if err := awsRestJson1_serializeJsonIntentSummaryList(v.RecentIntentSummaryView, value); err != nil {
+			return err
+		}
+	}
+
+	if v.SessionAttributes != nil {
+		value := object.Key("sessionAttributes")
+		if err := awsRestJson1_serializeJsonStringMap(v.SessionAttributes, value); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestJson1_serializeRestPutSessionInput(v *PutSessionInput, encoder *rest.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Accept != nil {
+		encoder.SetHeader("Accept").String(*v.Accept)
+	}
+
+	if v.BotAlias != nil {
+		if err := encoder.SetURI("botAlias").String(*v.BotAlias); err != nil {
+			return err
+		}
+	}
+
+	if v.BotName != nil {
+		if err := encoder.SetURI("botName").String(*v.BotName); err != nil {
+			return err
+		}
+	}
+
+	if v.UserId != nil {
+		if err := encoder.SetURI("userId").String(*v.UserId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestJson1_serializeRestPostContentInput(v *PostContentInput, encoder *rest.Encoder) error {
 	if v == nil {
-		return nil
+		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
 	if v.Accept != nil {
@@ -211,7 +315,7 @@ func awsRestJson1_serializeRestPostContentInput(v *PostContentInput, encoder *re
 // awsRestJson1_serializeRestGetSessionInput marshals the top level members of GetSessionInput that have HTTP bindings
 func awsRestJson1_serializeRestGetSessionInput(v *GetSessionInput, encoder *rest.Encoder) error {
 	if v == nil {
-		return nil
+		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
 	if v.BotAlias != nil {
@@ -242,7 +346,7 @@ func awsRestJson1_serializeRestGetSessionInput(v *GetSessionInput, encoder *rest
 // awsRestJson1_serializeRestDeleteSessionInput marshals the top level members of GetSessionInput that have HTTP bindings
 func awsRestJson1_serializeRestDeleteSessionInput(v *DeleteSessionInput, encoder *rest.Encoder) error {
 	if v == nil {
-		return nil
+		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
 	if v.BotAlias != nil {
@@ -267,12 +371,12 @@ func awsRestJson1_serializeRestDeleteSessionInput(v *DeleteSessionInput, encoder
 }
 
 func awsRestJson1_serializeJsonPostTextInput(v *PostTextInput, value json.Value) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
 	object := value.Object()
 	defer object.Close()
-
-	if v == nil {
-		return nil
-	}
 
 	if v.InputText != nil {
 		object.Key("inputText").String(*v.InputText)
@@ -297,7 +401,7 @@ func awsRestJson1_serializeJsonPostTextInput(v *PostTextInput, value json.Value)
 
 func awsRestJson1_serializeRestPostTextInput(v *PostTextInput, encoder *rest.Encoder) error {
 	if v == nil {
-		return nil
+		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
 	if v.BotAlias != nil {
