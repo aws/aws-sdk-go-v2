@@ -8,6 +8,7 @@ LINTIGNOREDEPS='vendor/.+\.go'
 LINTIGNOREPKGCOMMENT='service/[^/]+/doc_custom.go:.+package comment should be of the form'
 LINTIGNOREENDPOINTS='aws/endpoints/defaults.go:.+(method|const) .+ should be '
 LINTIGNORESINGLEFIGHT='internal/sync/singleflight/singleflight.go:.+error should be the last type'
+LINTIGNOREPROTO="service/smithyprototype/.+\.go:.+don't use underscores in Go names"
 UNIT_TEST_TAGS="example codegen awsinclude"
 ALL_TAGS="example codegen awsinclude integration perftest sdktool"
 
@@ -152,7 +153,8 @@ lint:
 	-e ${LINTIGNOREINFLECTS3UPLOAD} \
 	-e ${LINTIGNOREPKGCOMMENT} \
 	-e ${LINTIGNOREENDPOINTS} \
-	-e ${LINTIGNORESINGLEFIGHT}`; \
+	-e ${LINTIGNORESINGLEFIGHT} \
+	-e ${LINTIGNOREPROTO}`; \
 	echo "$$dolint"; \
 	if [ "$$dolint" != "" ]; then exit 1; fi
 
