@@ -1,11 +1,7 @@
 Services
 ---
+* Synced the V2 SDK with latest AWS service API definitions.
 
-SDK Features
+Breaking Changes
 ---
-
-SDK Enhancements
----
-
-SDK Bugs
----
+* Removed prototype and experiment types from master branch of SDK.

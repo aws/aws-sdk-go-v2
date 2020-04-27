@@ -59,12 +59,12 @@ const opResetCache = "ResetCache"
 // ResetCacheRequest returns a request value for making API operation for
 // AWS Storage Gateway.
 //
-// Resets all cache disks that have encountered a error and makes the disks
+// Resets all cache disks that have encountered an error and makes the disks
 // available for reconfiguration as cache storage. If your cache disk encounters
-// a error, the gateway prevents read and write operations on virtual tapes
+// an error, the gateway prevents read and write operations on virtual tapes
 // in the gateway. For example, an error can occur when a disk is corrupted
 // or removed from the gateway. When a cache is reset, the gateway loses its
-// cache storage. At this point you can reconfigure the disks as cache disks.
+// cache storage. At this point, you can reconfigure the disks as cache disks.
 // This operation is only supported in the cached volume and tape types.
 //
 // If the cache disk you are resetting contains data that has not been uploaded

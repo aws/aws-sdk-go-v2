@@ -36,6 +36,10 @@ func (s Alarm) String() string {
 // Represents a CloudWatch metric of your choosing for a target tracking scaling
 // policy to use with Application Auto Scaling.
 //
+// For information about the available metrics for a service, see AWS Services
+// That Publish CloudWatch Metrics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html)
+// in the Amazon CloudWatch User Guide.
+//
 // To create your customized metric specification:
 //
 //    * Add values for each required parameter from CloudWatch. You can use
@@ -47,7 +51,7 @@ func (s Alarm) String() string {
 //    * Choose a metric that changes proportionally with capacity. The value
 //    of the metric should increase or decrease in inverse proportion to the
 //    number of capacity units. That is, the value of the metric should decrease
-//    when capacity increases.
+//    when capacity increases, and increase when capacity decreases.
 //
 // For more information about CloudWatch, see Amazon CloudWatch Concepts (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html).
 type CustomizedMetricSpecification struct {
@@ -151,6 +155,12 @@ func (s *MetricDimension) Validate() error {
 
 // Represents a predefined metric for a target tracking scaling policy to use
 // with Application Auto Scaling.
+//
+// Only the AWS services that you're using send metrics to Amazon CloudWatch.
+// To determine whether a desired metric already exists by looking up its namespace
+// and dimension using the CloudWatch metrics dashboard in the console, follow
+// the procedure in Building Dashboards with CloudWatch (https://docs.aws.amazon.com/autoscaling/application/userguide/monitoring-cloudwatch.html)
+// in the Application Auto Scaling User Guide.
 type PredefinedMetricSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -255,6 +265,9 @@ type ScalableTarget struct {
 	//    name suffix that is not $LATEST. Example: function:my-function:prod or
 	//    function:my-function:1.
 	//
+	//    * Amazon Keyspaces table - The resource type is table and the unique identifier
+	//    is the table name. Example: keyspace/mykeyspace/table/mytable.
+	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
 
@@ -307,13 +320,16 @@ type ScalableTarget struct {
 	//    * lambda:function:ProvisionedConcurrency - The provisioned concurrency
 	//    for a Lambda function.
 	//
+	//    * cassandra:table:ReadCapacityUnits - The provisioned read capacity for
+	//    an Amazon Keyspaces table.
+	//
+	//    * cassandra:table:WriteCapacityUnits - The provisioned write capacity
+	//    for an Amazon Keyspaces table.
+	//
 	// ScalableDimension is a required field
 	ScalableDimension ScalableDimension `type:"string" required:"true" enum:"true"`
 
-	// The namespace of the AWS service that provides the resource or custom-resource
-	// for a resource provided by your own application or service. For more information,
-	// see AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the Amazon Web Services General Reference.
+	// The namespace of the AWS service that provides the resource, or a custom-resource.
 	//
 	// ServiceNamespace is a required field
 	ServiceNamespace ServiceNamespace `type:"string" required:"true" enum:"true"`
@@ -336,6 +352,9 @@ type ScalableTargetAction struct {
 	MaxCapacity *int64 `type:"integer"`
 
 	// The minimum capacity.
+	//
+	// For Lambda provisioned concurrency, the minimum value allowed is 0. For all
+	// other resources, the minimum value allowed is 1.
 	MinCapacity *int64 `type:"integer"`
 }
 
@@ -409,6 +428,9 @@ type ScalingActivity struct {
 	//    name suffix that is not $LATEST. Example: function:my-function:prod or
 	//    function:my-function:1.
 	//
+	//    * Amazon Keyspaces table - The resource type is table and the unique identifier
+	//    is the table name. Example: keyspace/mykeyspace/table/mytable.
+	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
 
@@ -455,13 +477,16 @@ type ScalingActivity struct {
 	//    * lambda:function:ProvisionedConcurrency - The provisioned concurrency
 	//    for a Lambda function.
 	//
+	//    * cassandra:table:ReadCapacityUnits - The provisioned read capacity for
+	//    an Amazon Keyspaces table.
+	//
+	//    * cassandra:table:WriteCapacityUnits - The provisioned write capacity
+	//    for an Amazon Keyspaces table.
+	//
 	// ScalableDimension is a required field
 	ScalableDimension ScalableDimension `type:"string" required:"true" enum:"true"`
 
-	// The namespace of the AWS service that provides the resource or custom-resource
-	// for a resource provided by your own application or service. For more information,
-	// see AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the Amazon Web Services General Reference.
+	// The namespace of the AWS service that provides the resource, or a custom-resource.
 	//
 	// ServiceNamespace is a required field
 	ServiceNamespace ServiceNamespace `type:"string" required:"true" enum:"true"`
@@ -552,6 +577,9 @@ type ScalingPolicy struct {
 	//    name suffix that is not $LATEST. Example: function:my-function:prod or
 	//    function:my-function:1.
 	//
+	//    * Amazon Keyspaces table - The resource type is table and the unique identifier
+	//    is the table name. Example: keyspace/mykeyspace/table/mytable.
+	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
 
@@ -598,13 +626,16 @@ type ScalingPolicy struct {
 	//    * lambda:function:ProvisionedConcurrency - The provisioned concurrency
 	//    for a Lambda function.
 	//
+	//    * cassandra:table:ReadCapacityUnits - The provisioned read capacity for
+	//    an Amazon Keyspaces table.
+	//
+	//    * cassandra:table:WriteCapacityUnits - The provisioned write capacity
+	//    for an Amazon Keyspaces table.
+	//
 	// ScalableDimension is a required field
 	ScalableDimension ScalableDimension `type:"string" required:"true" enum:"true"`
 
-	// The namespace of the AWS service that provides the resource or custom-resource
-	// for a resource provided by your own application or service. For more information,
-	// see AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the Amazon Web Services General Reference.
+	// The namespace of the AWS service that provides the resource, or a custom-resource.
 	//
 	// ServiceNamespace is a required field
 	ServiceNamespace ServiceNamespace `type:"string" required:"true" enum:"true"`
@@ -673,6 +704,9 @@ type ScheduledAction struct {
 	//    name suffix that is not $LATEST. Example: function:my-function:prod or
 	//    function:my-function:1.
 	//
+	//    * Amazon Keyspaces table - The resource type is table and the unique identifier
+	//    is the table name. Example: keyspace/mykeyspace/table/mytable.
+	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
 
@@ -718,10 +752,16 @@ type ScheduledAction struct {
 	//
 	//    * lambda:function:ProvisionedConcurrency - The provisioned concurrency
 	//    for a Lambda function.
+	//
+	//    * cassandra:table:ReadCapacityUnits - The provisioned read capacity for
+	//    an Amazon Keyspaces table.
+	//
+	//    * cassandra:table:WriteCapacityUnits - The provisioned write capacity
+	//    for an Amazon Keyspaces table.
 	ScalableDimension ScalableDimension `type:"string" enum:"true"`
 
 	// The new minimum and maximum capacity. You can set both values or just one.
-	// During the scheduled time, if the current capacity is below the minimum capacity,
+	// At the scheduled time, if the current capacity is below the minimum capacity,
 	// Application Auto Scaling scales out to the minimum capacity. If the current
 	// capacity is above the maximum capacity, Application Auto Scaling scales in
 	// to the maximum capacity.
@@ -735,13 +775,16 @@ type ScheduledAction struct {
 	//
 	//    * Cron expressions - "cron(fields)"
 	//
-	// At expressions are useful for one-time schedules. Specify the time, in UTC.
+	// At expressions are useful for one-time schedules. Specify the time in UTC.
 	//
 	// For rate expressions, value is a positive integer and unit is minute | minutes
 	// | hour | hours | day | days.
 	//
 	// For more information about cron expressions, see Cron Expressions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
 	// in the Amazon CloudWatch Events User Guide.
+	//
+	// For examples of using these expressions, see Scheduled Scaling (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html)
+	// in the Application Auto Scaling User Guide.
 	//
 	// Schedule is a required field
 	Schedule *string `min:"1" type:"string" required:"true"`
@@ -756,10 +799,7 @@ type ScheduledAction struct {
 	// ScheduledActionName is a required field
 	ScheduledActionName *string `min:"1" type:"string" required:"true"`
 
-	// The namespace of the AWS service that provides the resource or custom-resource
-	// for a resource provided by your own application or service. For more information,
-	// see AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the Amazon Web Services General Reference.
+	// The namespace of the AWS service that provides the resource, or a custom-resource.
 	//
 	// ServiceNamespace is a required field
 	ServiceNamespace ServiceNamespace `type:"string" required:"true" enum:"true"`
@@ -773,9 +813,10 @@ func (s ScheduledAction) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Represents a step adjustment for a StepScalingPolicyConfiguration. Describes
-// an adjustment based on the difference between the value of the aggregated
-// CloudWatch metric and the breach threshold that you've defined for the alarm.
+// Represents a step adjustment for a StepScalingPolicyConfiguration (https://docs.aws.amazon.com/autoscaling/application/APIReference/API_StepScalingPolicyConfiguration.html).
+// Describes an adjustment based on the difference between the value of the
+// aggregated CloudWatch metric and the breach threshold that you've defined
+// for the alarm.
 //
 // For the following examples, suppose that you have an alarm with a breach
 // threshold of 50:
@@ -822,8 +863,8 @@ type StepAdjustment struct {
 	MetricIntervalUpperBound *float64 `type:"double"`
 
 	// The amount by which to scale, based on the specified adjustment type. A positive
-	// value adds to the current scalable dimension while a negative number removes
-	// from the current scalable dimension.
+	// value adds to the current capacity while a negative number removes from the
+	// current capacity.
 	//
 	// ScalingAdjustment is a required field
 	ScalingAdjustment *int64 `type:"integer" required:"true"`
@@ -853,8 +894,10 @@ func (s *StepAdjustment) Validate() error {
 type StepScalingPolicyConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies whether the ScalingAdjustment value in a StepAdjustment is an absolute
-	// number or a percentage of the current capacity.
+	// Specifies whether the ScalingAdjustment value in a StepAdjustment (https://docs.aws.amazon.com/autoscaling/application/APIReference/API_StepAdjustment.html)
+	// is an absolute number or a percentage of the current capacity.
+	//
+	// AdjustmentType is required if you are adding a new step scaling policy configuration.
 	AdjustmentType AdjustmentType `type:"string" enum:"true"`
 
 	// The amount of time, in seconds, after a scaling activity completes where
@@ -862,7 +905,7 @@ type StepScalingPolicyConfiguration struct {
 	// events.
 	//
 	// For scale-out policies, while the cooldown period is in effect, the capacity
-	// that has been added by the previous scale-out event that initiated the cooldown
+	// that has been added by the previous scale-out action that initiated the cooldown
 	// is calculated as part of the desired capacity for the next scale out. The
 	// intention is to continuously (but not excessively) scale out. For example,
 	// an alarm triggers a step scaling policy to scale out an Amazon ECS service
@@ -870,7 +913,7 @@ type StepScalingPolicyConfiguration struct {
 	// of 5 minutes starts. During the cooldown period, if the alarm triggers the
 	// same policy again but at a more aggressive step adjustment to scale out the
 	// service by 3 tasks, the 2 tasks that were added in the previous scale-out
-	// event are considered part of that capacity and only 1 additional task is
+	// action are considered part of that capacity and only 1 additional task is
 	// added to the desired count.
 	//
 	// For scale-in policies, the cooldown period is used to block subsequent scale-in
@@ -878,6 +921,35 @@ type StepScalingPolicyConfiguration struct {
 	// to protect your application's availability. However, if another alarm triggers
 	// a scale-out policy during the cooldown period after a scale-in, Application
 	// Auto Scaling scales out your scalable target immediately.
+	//
+	// Application Auto Scaling provides a default value of 300 for the following
+	// scalable targets:
+	//
+	//    * ECS services
+	//
+	//    * Spot Fleet requests
+	//
+	//    * EMR clusters
+	//
+	//    * AppStream 2.0 fleets
+	//
+	//    * Aurora DB clusters
+	//
+	//    * Amazon SageMaker endpoint variants
+	//
+	//    * Custom resources
+	//
+	// For all other scalable targets, the default value is 0:
+	//
+	//    * DynamoDB tables
+	//
+	//    * DynamoDB global secondary indexes
+	//
+	//    * Amazon Comprehend document classification endpoints
+	//
+	//    * Lambda provisioned concurrency
+	//
+	//    * Amazon Keyspaces tables
 	Cooldown *int64 `type:"integer"`
 
 	// The aggregation type for the CloudWatch metrics. Valid values are Minimum,
@@ -885,19 +957,21 @@ type StepScalingPolicyConfiguration struct {
 	// as Average.
 	MetricAggregationType MetricAggregationType `type:"string" enum:"true"`
 
-	// The minimum number to adjust your scalable dimension as a result of a scaling
-	// activity. If the adjustment type is PercentChangeInCapacity, the scaling
-	// policy changes the scalable dimension of the scalable target by this amount.
+	// The minimum value to scale by when scaling by percentages. For example, suppose
+	// that you create a step scaling policy to scale out an Amazon ECS service
+	// by 25 percent and you specify a MinAdjustmentMagnitude of 2. If the service
+	// has 4 tasks and the scaling policy is performed, 25 percent of 4 is 1. However,
+	// because you specified a MinAdjustmentMagnitude of 2, Application Auto Scaling
+	// scales out the service by 2 tasks.
 	//
-	// For example, suppose that you create a step scaling policy to scale out an
-	// Amazon ECS service by 25 percent and you specify a MinAdjustmentMagnitude
-	// of 2. If the service has 4 tasks and the scaling policy is performed, 25
-	// percent of 4 is 1. However, because you specified a MinAdjustmentMagnitude
-	// of 2, Application Auto Scaling scales out the service by 2 tasks.
+	// Valid only if the adjustment type is PercentChangeInCapacity.
 	MinAdjustmentMagnitude *int64 `type:"integer"`
 
 	// A set of adjustments that enable you to scale based on the size of the alarm
 	// breach.
+	//
+	// At least one step adjustment is required if you are adding a new step scaling
+	// policy configuration.
 	StepAdjustments []StepAdjustment `type:"list"`
 }
 
@@ -960,9 +1034,9 @@ type TargetTrackingScalingPolicyConfiguration struct {
 
 	// Indicates whether scale in by the target tracking scaling policy is disabled.
 	// If the value is true, scale in is disabled and the target tracking scaling
-	// policy won't remove capacity from the scalable resource. Otherwise, scale
-	// in is enabled and the target tracking scaling policy can remove capacity
-	// from the scalable resource. The default value is false.
+	// policy won't remove capacity from the scalable target. Otherwise, scale in
+	// is enabled and the target tracking scaling policy can remove capacity from
+	// the scalable target. The default value is false.
 	DisableScaleIn *bool `type:"boolean"`
 
 	// A predefined metric. You can specify either a predefined metric or a customized
@@ -977,15 +1051,73 @@ type TargetTrackingScalingPolicyConfiguration struct {
 	// application's availability. However, if another alarm triggers a scale-out
 	// policy during the cooldown period after a scale-in, Application Auto Scaling
 	// scales out your scalable target immediately.
+	//
+	// Application Auto Scaling provides a default value of 300 for the following
+	// scalable targets:
+	//
+	//    * ECS services
+	//
+	//    * Spot Fleet requests
+	//
+	//    * EMR clusters
+	//
+	//    * AppStream 2.0 fleets
+	//
+	//    * Aurora DB clusters
+	//
+	//    * Amazon SageMaker endpoint variants
+	//
+	//    * Custom resources
+	//
+	// For all other scalable targets, the default value is 0:
+	//
+	//    * DynamoDB tables
+	//
+	//    * DynamoDB global secondary indexes
+	//
+	//    * Amazon Comprehend document classification endpoints
+	//
+	//    * Lambda provisioned concurrency
+	//
+	//    * Amazon Keyspaces tables
 	ScaleInCooldown *int64 `type:"integer"`
 
 	// The amount of time, in seconds, after a scale-out activity completes before
 	// another scale-out activity can start.
 	//
 	// While the cooldown period is in effect, the capacity that has been added
-	// by the previous scale-out event that initiated the cooldown is calculated
+	// by the previous scale-out action that initiated the cooldown is calculated
 	// as part of the desired capacity for the next scale out. The intention is
 	// to continuously (but not excessively) scale out.
+	//
+	// Application Auto Scaling provides a default value of 300 for the following
+	// scalable targets:
+	//
+	//    * ECS services
+	//
+	//    * Spot Fleet requests
+	//
+	//    * EMR clusters
+	//
+	//    * AppStream 2.0 fleets
+	//
+	//    * Aurora DB clusters
+	//
+	//    * Amazon SageMaker endpoint variants
+	//
+	//    * Custom resources
+	//
+	// For all other scalable targets, the default value is 0:
+	//
+	//    * DynamoDB tables
+	//
+	//    * DynamoDB global secondary indexes
+	//
+	//    * Amazon Comprehend document classification endpoints
+	//
+	//    * Lambda provisioned concurrency
+	//
+	//    * Amazon Keyspaces tables
 	ScaleOutCooldown *int64 `type:"integer"`
 
 	// The target value for the metric. The range is 8.515920e-109 to 1.174271e+108

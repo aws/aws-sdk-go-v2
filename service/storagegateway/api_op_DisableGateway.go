@@ -67,7 +67,7 @@ const opDisableGateway = "DisableGateway"
 // Use this operation for a tape gateway that is not reachable or not functioning.
 // This operation is only supported in the tape gateway type.
 //
-// Once a gateway is disabled it cannot be enabled.
+// After a gateway is disabled, it cannot be enabled.
 //
 //    // Example sending a request using DisableGatewayRequest.
 //    req := client.DisableGatewayRequest(params)

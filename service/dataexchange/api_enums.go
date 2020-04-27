@@ -145,6 +145,24 @@ func (enum ResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// The types of encryption supported in export jobs to Amazon S3.
+type ServerSideEncryptionTypes string
+
+// Enum values for ServerSideEncryptionTypes
+const (
+	ServerSideEncryptionTypesAwsKms ServerSideEncryptionTypes = "aws:kms"
+	ServerSideEncryptionTypesAes256 ServerSideEncryptionTypes = "AES256"
+)
+
+func (enum ServerSideEncryptionTypes) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ServerSideEncryptionTypes) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type State string
 
 // Enum values for State

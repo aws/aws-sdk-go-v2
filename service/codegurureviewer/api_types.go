@@ -56,6 +56,550 @@ func (s CodeCommitRepository) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Information about a code review.
+type CodeReview struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the code review to describe.
+	CodeReviewArn *string `min:"1" type:"string"`
+
+	// The time, in milliseconds since the epoch, when the code review was created.
+	CreatedTimeStamp *time.Time `type:"timestamp"`
+
+	// The time, in milliseconds since the epoch, when the code review was last
+	// updated.
+	LastUpdatedTimeStamp *time.Time `type:"timestamp"`
+
+	// The statistics from the code review.
+	Metrics *Metrics `type:"structure"`
+
+	// The name of the code review.
+	Name *string `min:"1" type:"string"`
+
+	// The owner of the repository.
+	Owner *string `min:"1" type:"string"`
+
+	// The provider type of the repository association.
+	ProviderType ProviderType `type:"string" enum:"true"`
+
+	// The pull request ID for the code review.
+	PullRequestId *string `min:"1" type:"string"`
+
+	// The name of the repository.
+	RepositoryName *string `min:"1" type:"string"`
+
+	// The type of the source code for the code review.
+	SourceCodeType *SourceCodeType `type:"structure"`
+
+	// The state of the code review.
+	State JobState `type:"string" enum:"true"`
+
+	// The reason for the state of the code review.
+	StateReason *string `type:"string"`
+
+	// The type of code review.
+	Type Type `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s CodeReview) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CodeReview) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CodeReviewArn != nil {
+		v := *s.CodeReviewArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CodeReviewArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedTimeStamp != nil {
+		v := *s.CreatedTimeStamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTimeStamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.LastUpdatedTimeStamp != nil {
+		v := *s.LastUpdatedTimeStamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimeStamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.Metrics != nil {
+		v := s.Metrics
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Metrics", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Owner != nil {
+		v := *s.Owner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Owner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ProviderType) > 0 {
+		v := s.ProviderType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProviderType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.PullRequestId != nil {
+		v := *s.PullRequestId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PullRequestId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RepositoryName != nil {
+		v := *s.RepositoryName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RepositoryName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SourceCodeType != nil {
+		v := s.SourceCodeType
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SourceCodeType", v, metadata)
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.StateReason != nil {
+		v := *s.StateReason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StateReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Information about the summary of the code review.
+type CodeReviewSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the code review to describe.
+	CodeReviewArn *string `min:"1" type:"string"`
+
+	// The time, in milliseconds since the epoch, when the code review was created.
+	CreatedTimeStamp *time.Time `type:"timestamp"`
+
+	// The time, in milliseconds since the epoch, when the code review was last
+	// updated.
+	LastUpdatedTimeStamp *time.Time `type:"timestamp"`
+
+	// The statistics from the code review.
+	MetricsSummary *MetricsSummary `type:"structure"`
+
+	// The name of the code review.
+	Name *string `min:"1" type:"string"`
+
+	// The owner of the repository.
+	Owner *string `min:"1" type:"string"`
+
+	// The provider type of the repository association.
+	ProviderType ProviderType `type:"string" enum:"true"`
+
+	// The pull request ID for the code review.
+	PullRequestId *string `min:"1" type:"string"`
+
+	// The name of the repository.
+	RepositoryName *string `min:"1" type:"string"`
+
+	// The state of the code review.
+	State JobState `type:"string" enum:"true"`
+
+	// The type of the code review.
+	Type Type `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s CodeReviewSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CodeReviewSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CodeReviewArn != nil {
+		v := *s.CodeReviewArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CodeReviewArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedTimeStamp != nil {
+		v := *s.CreatedTimeStamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTimeStamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.LastUpdatedTimeStamp != nil {
+		v := *s.LastUpdatedTimeStamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimeStamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.MetricsSummary != nil {
+		v := s.MetricsSummary
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "MetricsSummary", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Owner != nil {
+		v := *s.Owner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Owner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ProviderType) > 0 {
+		v := s.ProviderType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProviderType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.PullRequestId != nil {
+		v := *s.PullRequestId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PullRequestId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RepositoryName != nil {
+		v := *s.RepositoryName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RepositoryName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// The commit diff for the pull request.
+type CommitDiffSourceCodeType struct {
+	_ struct{} `type:"structure"`
+
+	// Destination Commit SHA
+	DestinationCommit *string `min:"6" type:"string"`
+
+	// Source Commit SHA.
+	SourceCommit *string `min:"6" type:"string"`
+}
+
+// String returns the string representation
+func (s CommitDiffSourceCodeType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CommitDiffSourceCodeType) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DestinationCommit != nil {
+		v := *s.DestinationCommit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DestinationCommit", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SourceCommit != nil {
+		v := *s.SourceCommit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SourceCommit", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Information about the statistics from the code review.
+type Metrics struct {
+	_ struct{} `type:"structure"`
+
+	// Total number of recommendations found in the code review.
+	FindingsCount *int64 `type:"long"`
+
+	// Lines of code metered in the code review.
+	MeteredLinesOfCodeCount *int64 `type:"long"`
+}
+
+// String returns the string representation
+func (s Metrics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Metrics) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FindingsCount != nil {
+		v := *s.FindingsCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FindingsCount", protocol.Int64Value(v), metadata)
+	}
+	if s.MeteredLinesOfCodeCount != nil {
+		v := *s.MeteredLinesOfCodeCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MeteredLinesOfCodeCount", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Information about metrics summaries.
+type MetricsSummary struct {
+	_ struct{} `type:"structure"`
+
+	// Total number of recommendations found in the code review.
+	FindingsCount *int64 `type:"long"`
+
+	// Lines of code metered in the code review.
+	MeteredLinesOfCodeCount *int64 `type:"long"`
+}
+
+// String returns the string representation
+func (s MetricsSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MetricsSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FindingsCount != nil {
+		v := *s.FindingsCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FindingsCount", protocol.Int64Value(v), metadata)
+	}
+	if s.MeteredLinesOfCodeCount != nil {
+		v := *s.MeteredLinesOfCodeCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MeteredLinesOfCodeCount", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Information about the recommendation feedback.
+type RecommendationFeedback struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) that identifies the code review.
+	CodeReviewArn *string `min:"1" type:"string"`
+
+	// The time at which the feedback was created.
+	CreatedTimeStamp *time.Time `type:"timestamp"`
+
+	// The time at which the feedback was last updated.
+	LastUpdatedTimeStamp *time.Time `type:"timestamp"`
+
+	// List for storing reactions. Reactions are utf-8 text code for emojis. You
+	// can send an empty list to clear off all your feedback.
+	Reactions []Reaction `type:"list"`
+
+	// The recommendation ID that can be used to track the provided recommendations.
+	// Later on it can be used to collect the feedback.
+	RecommendationId *string `min:"1" type:"string"`
+
+	// The user principal that made the API call.
+	UserId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s RecommendationFeedback) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RecommendationFeedback) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CodeReviewArn != nil {
+		v := *s.CodeReviewArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CodeReviewArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedTimeStamp != nil {
+		v := *s.CreatedTimeStamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTimeStamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.LastUpdatedTimeStamp != nil {
+		v := *s.LastUpdatedTimeStamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimeStamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.Reactions != nil {
+		v := s.Reactions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Reactions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.RecommendationId != nil {
+		v := *s.RecommendationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Information about recommendation feedback summaries.
+type RecommendationFeedbackSummary struct {
+	_ struct{} `type:"structure"`
+
+	// List for storing reactions. Reactions are utf-8 text code for emojis.
+	Reactions []Reaction `type:"list"`
+
+	// The recommendation ID that can be used to track the provided recommendations.
+	// Later on it can be used to collect the feedback.
+	RecommendationId *string `min:"1" type:"string"`
+
+	// The identifier for the user that gave the feedback.
+	UserId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s RecommendationFeedbackSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RecommendationFeedbackSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Reactions != nil {
+		v := s.Reactions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Reactions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.RecommendationId != nil {
+		v := *s.RecommendationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Information about recommendations.
+type RecommendationSummary struct {
+	_ struct{} `type:"structure"`
+
+	// A description of the recommendation generated by CodeGuru Reviewer for the
+	// lines of code between the start line and the end line.
+	Description *string `min:"1" type:"string"`
+
+	// Last line where the recommendation is applicable in the source commit or
+	// source branch. For a single line comment the start line and end line values
+	// will be the same.
+	EndLine *int64 `type:"integer"`
+
+	// Name of the file on which a recommendation is provided.
+	FilePath *string `min:"1" type:"string"`
+
+	// The recommendation ID that can be used to track the provided recommendations.
+	// Later on it can be used to collect the feedback.
+	RecommendationId *string `min:"1" type:"string"`
+
+	// Start line from where the recommendation is applicable in the source commit
+	// or source branch.
+	StartLine *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s RecommendationSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RecommendationSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EndLine != nil {
+		v := *s.EndLine
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EndLine", protocol.Int64Value(v), metadata)
+	}
+	if s.FilePath != nil {
+		v := *s.FilePath
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FilePath", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RecommendationId != nil {
+		v := *s.RecommendationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecommendationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.StartLine != nil {
+		v := *s.StartLine
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartLine", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Information about a repository.
 type Repository struct {
 	_ struct{} `type:"structure"`
@@ -102,7 +646,7 @@ type RepositoryAssociation struct {
 	// The Amazon Resource Name (ARN) identifying the repository association.
 	AssociationArn *string `min:"1" type:"string"`
 
-	// The id of the repository association.
+	// The ID of the repository association.
 	AssociationId *string `min:"1" type:"string"`
 
 	// The time, in milliseconds since the epoch, when the repository association
@@ -230,8 +774,7 @@ type RepositoryAssociationSummary struct {
 	//
 	// Failed
 	//
-	// The association failed. For more information about troubleshooting (or why
-	// it failed), see [troubleshooting topic].
+	// The association failed.
 	//
 	// Disassociating
 	//
@@ -288,6 +831,30 @@ func (s RepositoryAssociationSummary) MarshalFields(e protocol.FieldEncoder) err
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Information about the source code type.
+type SourceCodeType struct {
+	_ struct{} `type:"structure"`
+
+	// The commit diff for the pull request.
+	CommitDiff *CommitDiffSourceCodeType `type:"structure"`
+}
+
+// String returns the string representation
+func (s SourceCodeType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SourceCodeType) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CommitDiff != nil {
+		v := s.CommitDiff
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CommitDiff", v, metadata)
 	}
 	return nil
 }

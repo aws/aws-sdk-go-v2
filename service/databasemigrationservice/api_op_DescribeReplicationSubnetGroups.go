@@ -14,6 +14,8 @@ type DescribeReplicationSubnetGroupsInput struct {
 	_ struct{} `type:"structure"`
 
 	// Filters applied to the describe action.
+	//
+	// Valid filter names: replication-subnet-group-id
 	Filters []Filter `type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter

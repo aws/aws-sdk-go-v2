@@ -66,8 +66,9 @@ const opDeleteSnapshotSchedule = "DeleteSnapshotSchedule"
 // its Amazon Resource Name (ARN). This operation is only supported in stored
 // and cached volume gateway types.
 //
-// To list or delete a snapshot, you must use the Amazon EC2 API. in Amazon
-// Elastic Compute Cloud API Reference.
+// To list or delete a snapshot, you must use the Amazon EC2 API. For more information,
+// go to DescribeSnapshots (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html)
+// in the Amazon Elastic Compute Cloud API Reference.
 //
 //    // Example sending a request using DeleteSnapshotScheduleRequest.
 //    req := client.DeleteSnapshotScheduleRequest(params)

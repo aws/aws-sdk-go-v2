@@ -38,10 +38,11 @@ func (enum HomeDirectoryType) MarshalValueBuf(b []byte) ([]byte, error) {
 }
 
 // Returns information related to the type of user authentication that is in
-// use for a server's users. For SERVICE_MANAGED authentication, the Secure
-// Shell (SSH) public keys are stored with a user on an SFTP server instance.
-// For API_GATEWAY authentication, your custom authentication method is implemented
-// by using an API call. A server can have only one method of authentication.
+// use for a file transfer protocol-enabled server's users. For SERVICE_MANAGED
+// authentication, the Secure Shell (SSH) public keys are stored with a user
+// on the server instance. For API_GATEWAY authentication, your custom authentication
+// method is implemented by using an API call. The server can have only one
+// method of authentication.
 type IdentityProviderType string
 
 // Enum values for IdentityProviderType
@@ -59,15 +60,33 @@ func (enum IdentityProviderType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Describes the condition of the SFTP server with respect to its ability to
-// perform file operations. There are six possible states: OFFLINE, ONLINE,
-// STARTING, STOPPING, START_FAILED, and STOP_FAILED.
+type Protocol string
+
+// Enum values for Protocol
+const (
+	ProtocolSftp Protocol = "SFTP"
+	ProtocolFtp  Protocol = "FTP"
+	ProtocolFtps Protocol = "FTPS"
+)
+
+func (enum Protocol) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Protocol) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Describes the condition of a file transfer protocol-enabled server with respect
+// to its ability to perform file operations. There are six possible states:
+// OFFLINE, ONLINE, STARTING, STOPPING, START_FAILED, and STOP_FAILED.
 //
-// OFFLINE indicates that the SFTP server exists, but that it is not available
-// for file operations. ONLINE indicates that the SFTP server is available to
-// perform file operations. STARTING indicates that the SFTP server's was instantiated,
-// but the server is not yet available to perform file operations. Under normal
-// conditions, it can take a couple of minutes for an SFTP server to be completely
+// OFFLINE indicates that the server exists, but that it is not available for
+// file operations. ONLINE indicates that the server is available to perform
+// file operations. STARTING indicates that the server's was instantiated, but
+// the server is not yet available to perform file operations. Under normal
+// conditions, it can take a couple of minutes for the server to be completely
 // operational. Both START_FAILED and STOP_FAILED are error conditions.
 type State string
 

@@ -314,6 +314,10 @@ type Endpoint struct {
 	// MongoDbSettings structure.
 	MongoDbSettings *MongoDbSettings `type:"structure"`
 
+	// The settings for the MongoDB source endpoint. For more information, see the
+	// NeptuneSettings structure.
+	NeptuneSettings *NeptuneSettings `type:"structure"`
+
 	// The port value used to access the endpoint.
 	Port *int64 `type:"integer"`
 
@@ -625,6 +629,74 @@ type MongoDbSettings struct {
 // String returns the string representation
 func (s MongoDbSettings) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Provides information that defines an Amazon Neptune endpoint.
+type NeptuneSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The number of milliseconds for AWS DMS to wait to retry a bulk-load of migrated
+	// graph data to the Neptune target database before raising an error. The default
+	// is 250.
+	ErrorRetryDuration *int64 `type:"integer"`
+
+	// If you want IAM authorization enabled for this endpoint, set this parameter
+	// to true and attach the appropriate role policy document to your service role
+	// specified by ServiceAccessRoleArn. The default is false.
+	IamAuthEnabled *bool `type:"boolean"`
+
+	// The maximum size in KB of migrated graph data stored in a CSV file before
+	// AWS DMS bulk-loads the data to the Neptune target database. The default is
+	// 1048576 KB. If successful, AWS DMS clears the bucket, ready to store the
+	// next batch of migrated graph data.
+	MaxFileSize *int64 `type:"integer"`
+
+	// The number of times for AWS DMS to retry a bulk-load of migrated graph data
+	// to the Neptune target database before raising an error. The default is 5.
+	MaxRetryCount *int64 `type:"integer"`
+
+	// A folder path where you where you want AWS DMS to store migrated graph data
+	// in the S3 bucket specified by S3BucketName
+	//
+	// S3BucketFolder is a required field
+	S3BucketFolder *string `type:"string" required:"true"`
+
+	// The name of the S3 bucket for AWS DMS to temporarily store migrated graph
+	// data in CSV files before bulk-loading it to the Neptune target database.
+	// AWS DMS maps the SQL source data to graph data before storing it in these
+	// CSV files.
+	//
+	// S3BucketName is a required field
+	S3BucketName *string `type:"string" required:"true"`
+
+	// The ARN of the service role you have created for the Neptune target endpoint.
+	// For more information, see https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.ServiceRole
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.ServiceRole)
+	// in the AWS Database Migration Service User Guide.
+	ServiceAccessRoleArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s NeptuneSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *NeptuneSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "NeptuneSettings"}
+
+	if s.S3BucketFolder == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3BucketFolder"))
+	}
+
+	if s.S3BucketName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3BucketName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // In response to the DescribeOrderableReplicationInstances operation, this
@@ -1140,6 +1212,12 @@ type ReplicationTask struct {
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
 	TargetEndpointArn *string `type:"string"`
+
+	// Supplemental information that the task requires to migrate the data for certain
+	// source and target endpoints. For more information, see Specifying Supplemental
+	// Data for Task Settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html)
+	// in the AWS Database Migration User Guide.
+	TaskData *string `type:"string"`
 }
 
 // String returns the string representation
@@ -1527,6 +1605,11 @@ type SupportedEndpointType struct {
 	// "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis",
 	// "kafka", "elasticsearch", "documentdb", and "sqlserver".
 	EngineName *string `type:"string"`
+
+	// The earliest AWS DMS engine version that supports this endpoint engine. Note
+	// that endpoint engines released with AWS DMS versions earlier than 3.1.1 do
+	// not return a value for this parameter.
+	ReplicationInstanceEngineMinimumVersion *string `type:"string"`
 
 	// Indicates if Change Data Capture (CDC) is supported.
 	SupportsCDC *bool `type:"boolean"`

@@ -12,7 +12,8 @@ import (
 type DescribeServerInput struct {
 	_ struct{} `type:"structure"`
 
-	// A system-assigned unique identifier for an SFTP server.
+	// A system-assigned unique identifier for a file transfer protocol-enabled
+	// server.
 	//
 	// ServerId is a required field
 	ServerId *string `min:"19" type:"string" required:"true"`
@@ -43,7 +44,8 @@ func (s *DescribeServerInput) Validate() error {
 type DescribeServerOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An array containing the properties of the server with the ServerID you specified.
+	// An array containing the properties of a file transfer protocol-enabled server
+	// with the ServerID you specified.
 	//
 	// Server is a required field
 	Server *DescribedServer `type:"structure" required:"true"`
@@ -57,12 +59,13 @@ func (s DescribeServerOutput) String() string {
 const opDescribeServer = "DescribeServer"
 
 // DescribeServerRequest returns a request value for making API operation for
-// AWS Transfer for SFTP.
+// AWS Transfer Family.
 //
-// Describes the server that you specify by passing the ServerId parameter.
+// Describes a file transfer protocol-enabled server that you specify by passing
+// the ServerId parameter.
 //
-// The response contains a description of the server's properties. When you
-// set EndpointType to VPC, the response will contain the EndpointDetails.
+// The response contains a description of a server's properties. When you set
+// EndpointType to VPC, the response will contain the EndpointDetails.
 //
 //    // Example sending a request using DescribeServerRequest.
 //    req := client.DescribeServerRequest(params)

@@ -257,6 +257,8 @@ const opRestoreDBClusterFromSnapshot = "RestoreDBClusterFromSnapshot"
 // For more information on Amazon Aurora, see What Is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide.
 //
+// This action only applies to Aurora DB clusters.
+//
 //    // Example sending a request using RestoreDBClusterFromSnapshotRequest.
 //    req := client.RestoreDBClusterFromSnapshotRequest(params)
 //    resp, err := req.Send(context.TODO())

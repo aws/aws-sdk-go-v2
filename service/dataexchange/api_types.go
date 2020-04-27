@@ -605,6 +605,9 @@ type ExportAssetsToS3RequestDetails struct {
 	// DataSetId is a required field
 	DataSetId *string `type:"string" required:"true"`
 
+	// Encryption configuration for the export job.
+	Encryption *ExportServerSideEncryption `type:"structure"`
+
 	// The unique identifier for the revision associated with this export request.
 	//
 	// RevisionId is a required field
@@ -638,6 +641,11 @@ func (s *ExportAssetsToS3RequestDetails) Validate() error {
 			}
 		}
 	}
+	if s.Encryption != nil {
+		if err := s.Encryption.Validate(); err != nil {
+			invalidParams.AddNested("Encryption", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -665,6 +673,12 @@ func (s ExportAssetsToS3RequestDetails) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DataSetId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.Encryption != nil {
+		v := s.Encryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Encryption", v, metadata)
+	}
 	if s.RevisionId != nil {
 		v := *s.RevisionId
 
@@ -687,6 +701,9 @@ type ExportAssetsToS3ResponseDetails struct {
 	//
 	// DataSetId is a required field
 	DataSetId *string `type:"string" required:"true"`
+
+	// Encryption configuration of the export job.
+	Encryption *ExportServerSideEncryption `type:"structure"`
 
 	// The unique identifier for the revision associated with this export response.
 	//
@@ -719,11 +736,76 @@ func (s ExportAssetsToS3ResponseDetails) MarshalFields(e protocol.FieldEncoder) 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DataSetId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.Encryption != nil {
+		v := s.Encryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Encryption", v, metadata)
+	}
 	if s.RevisionId != nil {
 		v := *s.RevisionId
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "RevisionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Encryption configuration of the export job. Includes the encryption type
+// as well as the AWS KMS key. The KMS key is only necessary if you chose the
+// KMS encryption type.
+type ExportServerSideEncryption struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the the AWS KMS key you want to use to
+	// encrypt the Amazon S3 objects. This parameter is required if you choose aws:kms
+	// as an encryption type.
+	//
+	// KmsKeyArn is a required field
+	KmsKeyArn *string `type:"string" required:"true"`
+
+	// The type of server side encryption used for encrypting the objects in Amazon
+	// S3.
+	//
+	// Type is a required field
+	Type ServerSideEncryptionTypes `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s ExportServerSideEncryption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ExportServerSideEncryption) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ExportServerSideEncryption"}
+
+	if s.KmsKeyArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("KmsKeyArn"))
+	}
+	if len(s.Type) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ExportServerSideEncryption) MarshalFields(e protocol.FieldEncoder) error {
+	if s.KmsKeyArn != nil {
+		v := *s.KmsKeyArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KmsKeyArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -1195,7 +1277,7 @@ type JobError struct {
 	// Message is a required field
 	Message *string `type:"string" required:"true"`
 
-	// The unqiue identifier for the resource related to the error.
+	// The unique identifier for the resource related to the error.
 	ResourceId *string `type:"string"`
 
 	// The type of resource related to the error.

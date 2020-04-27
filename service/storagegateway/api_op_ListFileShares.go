@@ -13,7 +13,7 @@ import (
 type ListFileSharesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon resource Name (ARN) of the gateway whose file shares you want
+	// The Amazon Resource Name (ARN) of the gateway whose file shares you want
 	// to list. If this field is not present, all file shares under your account
 	// are listed.
 	GatewayARN *string `min:"50" type:"string"`

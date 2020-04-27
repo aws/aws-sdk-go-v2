@@ -58,8 +58,8 @@ func (s *UpdateBandwidthRateLimitInput) Validate() error {
 	return nil
 }
 
-// A JSON object containing the of the gateway whose throttle information was
-// updated.
+// A JSON object containing the Amazon Resource Name (ARN) of the gateway whose
+// throttle information was updated.
 type UpdateBandwidthRateLimitOutput struct {
 	_ struct{} `type:"structure"`
 

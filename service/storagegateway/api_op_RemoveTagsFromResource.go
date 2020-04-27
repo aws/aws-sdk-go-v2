@@ -20,7 +20,7 @@ type RemoveTagsFromResourceInput struct {
 	ResourceARN *string `min:"50" type:"string" required:"true"`
 
 	// The keys of the tags you want to remove from the specified resource. A tag
-	// is composed of a key/value pair.
+	// is composed of a key-value pair.
 	//
 	// TagKeys is a required field
 	TagKeys []string `type:"list" required:"true"`

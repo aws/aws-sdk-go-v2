@@ -95,6 +95,8 @@ type ClientAPI interface {
 
 	ListResourceSharePermissionsRequest(*ram.ListResourceSharePermissionsInput) ram.ListResourceSharePermissionsRequest
 
+	ListResourceTypesRequest(*ram.ListResourceTypesInput) ram.ListResourceTypesRequest
+
 	ListResourcesRequest(*ram.ListResourcesInput) ram.ListResourcesRequest
 
 	PromoteResourceShareCreatedFromPolicyRequest(*ram.PromoteResourceShareCreatedFromPolicyInput) ram.PromoteResourceShareCreatedFromPolicyRequest

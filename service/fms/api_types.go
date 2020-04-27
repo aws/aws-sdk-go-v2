@@ -64,13 +64,28 @@ func (s EvaluationResult) String() string {
 type Policy struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the AWS account IDs to exclude from the policy. The IncludeMap
-	// values are evaluated first, with all the appropriate account IDs added to
-	// the policy. Then the accounts listed in ExcludeMap are removed, resulting
-	// in the final list of accounts to add to the policy.
+	// Specifies the AWS account IDs and AWS Organizations organizational units
+	// (OUs) to exclude from the policy. Specifying an OU is the equivalent of specifying
+	// all accounts in the OU and in any of its child OUs, including any child OUs
+	// and accounts that are added at a later time.
 	//
-	// The key to the map is ACCOUNT. For example, a valid ExcludeMap would be {“ACCOUNT”
-	// : [“accountID1”, “accountID2”]}.
+	// You can specify inclusions or exclusions, but not both. If you specify an
+	// IncludeMap, AWS Firewall Manager applies the policy to all accounts specified
+	// by the IncludeMap, and does not evaluate any ExcludeMap specifications. If
+	// you do not specify an IncludeMap, then Firewall Manager applies the policy
+	// to all accounts except for those specified by the ExcludeMap.
+	//
+	// You can specify account IDs, OUs, or a combination:
+	//
+	//    * Specify account IDs by setting the key to ACCOUNT. For example, the
+	//    following is a valid map: {“ACCOUNT” : [“accountID1”, “accountID2”]}.
+	//
+	//    * Specify OUs by setting the key to ORG_UNIT. For example, the following
+	//    is a valid map: {“ORG_UNIT” : [“ouid111”, “ouid112”]}.
+	//
+	//    * Specify accounts and OUs together in a single map, separated with a
+	//    comma. For example, the following is a valid map: {“ACCOUNT” : [“accountID1”,
+	//    “accountID2”], “ORG_UNIT” : [“ouid111”, “ouid112”]}.
 	ExcludeMap map[string][]string `type:"map"`
 
 	// If set to True, resources with the tags that are specified in the ResourceTag
@@ -81,13 +96,28 @@ type Policy struct {
 	// ExcludeResourceTags is a required field
 	ExcludeResourceTags *bool `type:"boolean" required:"true"`
 
-	// Specifies the AWS account IDs to include in the policy. If IncludeMap is
-	// null, all accounts in the organization in AWS Organizations are included
-	// in the policy. If IncludeMap is not null, only values listed in IncludeMap
-	// are included in the policy.
+	// Specifies the AWS account IDs and AWS Organizations organizational units
+	// (OUs) to include in the policy. Specifying an OU is the equivalent of specifying
+	// all accounts in the OU and in any of its child OUs, including any child OUs
+	// and accounts that are added at a later time.
 	//
-	// The key to the map is ACCOUNT. For example, a valid IncludeMap would be {“ACCOUNT”
-	// : [“accountID1”, “accountID2”]}.
+	// You can specify inclusions or exclusions, but not both. If you specify an
+	// IncludeMap, AWS Firewall Manager applies the policy to all accounts specified
+	// by the IncludeMap, and does not evaluate any ExcludeMap specifications. If
+	// you do not specify an IncludeMap, then Firewall Manager applies the policy
+	// to all accounts except for those specified by the ExcludeMap.
+	//
+	// You can specify account IDs, OUs, or a combination:
+	//
+	//    * Specify account IDs by setting the key to ACCOUNT. For example, the
+	//    following is a valid map: {“ACCOUNT” : [“accountID1”, “accountID2”]}.
+	//
+	//    * Specify OUs by setting the key to ORG_UNIT. For example, the following
+	//    is a valid map: {“ORG_UNIT” : [“ouid111”, “ouid112”]}.
+	//
+	//    * Specify accounts and OUs together in a single map, separated with a
+	//    comma. For example, the following is a valid map: {“ACCOUNT” : [“accountID1”,
+	//    “accountID2”], “ORG_UNIT” : [“ouid111”, “ouid112”]}.
 	IncludeMap map[string][]string `type:"map"`
 
 	// The ID of the AWS Firewall Manager policy.
@@ -354,23 +384,14 @@ type SecurityServicePolicyData struct {
 	// Details about the service that are specific to the service type, in JSON
 	// format. For service type SHIELD_ADVANCED, this is an empty string.
 	//
-	//    * Example: WAFV2 "SecurityServicePolicyData": "{ \"type\": \"WAFV2\",
-	//    \"postProcessRuleGroups\": [ { \"managedRuleGroupIdentifier\": { \"managedRuleGroupName\":
-	//    \"AWSManagedRulesAdminProtectionRuleSet\", \"vendor\": \"AWS\" } \"ruleGroupARN\":
-	//    \"rule group arn", \"overrideAction\": { \"type\": \"COUNT|\" }, \"excludedRules\":
-	//    [ { \"name\" : \"EntityName\" } ], \"type\": \"ManagedRuleGroup|RuleGroup\"
-	//    } ], \"preProcessRuleGroups\": [ { \"managedRuleGroupIdentifier\": { \"managedRuleGroupName\":
-	//    \"AWSManagedRulesAdminProtectionRuleSet\", \"vendor\": \"AWS\" } \"ruleGroupARN\":
-	//    \"rule group arn\", \"overrideAction\": { \"type\": \"COUNT\" }, \"excludedRules\":
-	//    [ { \"name\" : \"EntityName\" } ], \"type\": \"ManagedRuleGroup|RuleGroup\"
-	//    } ], \"defaultAction\": { \"type\": \"BLOCK\" }}"
+	//    * Example: WAFV2 "ManagedServiceData": "{\"type\":\"WAFV2\",\"defaultAction\":{\"type\":\"ALLOW\"},\"preProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":null,\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"COUNT\"},\"excludedRules\":[{\"name\":\"EntityName\"}],\"ruleGroupType\":\"RuleGroup\"}],\"postProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":{\"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\",\"vendor\":\"AWS\"},\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"NONE\"},\"excludedRules\":[],\"ruleGroupType\":\"ManagedRuleGroup\"}],\"overrideCustomerWebACLAssociation\":false}"
 	//
-	//    * Example: WAF "ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\":
+	//    * Example: WAF Classic "ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\":
 	//    [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\"
 	//    : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}
 	//
-	//    * Example: SECURITY_GROUPS_COMMON "SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_COMMON","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false,\"securityGroups\":[{\"id\":\"
-	//    sg-000e55995d61a06bd\"}]}"},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"}
+	//    * Example: SECURITY_GROUPS_COMMON "SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_COMMON","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false,
+	//    \"applyToAllEC2InstanceENIs\":false,\"securityGroups\":[{\"id\":\" sg-000e55995d61a06bd\"}]}"},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"}
 	//
 	//    * Example: SECURITY_GROUPS_CONTENT_AUDIT "SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_CONTENT_AUDIT","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"securityGroups\":[{\"id\":\"
 	//    sg-000e55995d61a06bd \"}],\"securityGroupAction\":{\"type\":\"ALLOW\"}}"},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"}

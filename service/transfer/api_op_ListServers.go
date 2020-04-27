@@ -12,13 +12,14 @@ import (
 type ListServersInput struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the number of servers to return as a response to the ListServers
-	// query.
+	// Specifies the number of file transfer protocol-enabled servers to return
+	// as a response to the ListServers query.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// When additional results are obtained from the ListServers command, a NextToken
+	// When additional results are obtained from theListServers command, a NextToken
 	// parameter is returned in the output. You can then pass the NextToken parameter
-	// in a subsequent command to continue listing additional servers.
+	// in a subsequent command to continue listing additional file transfer protocol-enabled
+	// servers.
 	NextToken *string `min:"1" type:"string"`
 }
 
@@ -48,10 +49,11 @@ type ListServersOutput struct {
 
 	// When you can get additional results from the ListServers operation, a NextToken
 	// parameter is returned in the output. In a following command, you can pass
-	// in the NextToken parameter to continue listing additional servers.
+	// in the NextToken parameter to continue listing additional file transfer protocol-enabled
+	// servers.
 	NextToken *string `min:"1" type:"string"`
 
-	// An array of servers that were listed.
+	// An array of file transfer protocol-enabled servers that were listed.
 	//
 	// Servers is a required field
 	Servers []ListedServer `type:"list" required:"true"`
@@ -65,10 +67,10 @@ func (s ListServersOutput) String() string {
 const opListServers = "ListServers"
 
 // ListServersRequest returns a request value for making API operation for
-// AWS Transfer for SFTP.
+// AWS Transfer Family.
 //
-// Lists the Secure File Transfer Protocol (SFTP) servers that are associated
-// with your AWS account.
+// Lists the file transfer protocol-enabled servers that are associated with
+// your AWS account.
 //
 //    // Example sending a request using ListServersRequest.
 //    req := client.ListServersRequest(params)

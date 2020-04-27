@@ -80,15 +80,15 @@ type CreateEndpointInput struct {
 	// in the AWS Database Migration Service User Guide.
 	ExtraConnectionAttributes *string `type:"string"`
 
-	// Settings in JSON format for the target Apache Kafka endpoint. For information
-	// about other available settings, see Using Object Mapping to Migrate Data
-	// to Apache Kafka (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping)
+	// Settings in JSON format for the target Apache Kafka endpoint. For more information
+	// about the available settings, see Using Apache Kafka as a Target for AWS
+	// Database Migration Service (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html)
 	// in the AWS Database Migration User Guide.
 	KafkaSettings *KafkaSettings `type:"structure"`
 
 	// Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams.
-	// For information about other available settings, see Using Object Mapping
-	// to Migrate Data to a Kinesis Data Stream (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping)
+	// For more information about the available settings, see Using Amazon Kinesis
+	// Data Streams as a Target for AWS Database Migration Service (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html)
 	// in the AWS Database Migration User Guide.
 	KinesisSettings *KinesisSettings `type:"structure"`
 
@@ -103,10 +103,16 @@ type CreateEndpointInput struct {
 	KmsKeyId *string `type:"string"`
 
 	// Settings in JSON format for the source MongoDB endpoint. For more information
-	// about the available settings, see the configuration properties section in
-	// Using MongoDB as a Target for AWS Database Migration Service (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html)
+	// about the available settings, see Using MongoDB as a Target for AWS Database
+	// Migration Service (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html#CHAP_Source.MongoDB.Configuration)
 	// in the AWS Database Migration Service User Guide.
 	MongoDbSettings *MongoDbSettings `type:"structure"`
+
+	// Settings in JSON format for the target Amazon Neptune endpoint. For more
+	// information about the available settings, see https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings)
+	// in the AWS Database Migration Service User Guide.
+	NeptuneSettings *NeptuneSettings `type:"structure"`
 
 	// The password to be used to log in to the endpoint database.
 	Password *string `type:"string" sensitive:"true"`
@@ -168,6 +174,11 @@ func (s *CreateEndpointInput) Validate() error {
 	if s.ElasticsearchSettings != nil {
 		if err := s.ElasticsearchSettings.Validate(); err != nil {
 			invalidParams.AddNested("ElasticsearchSettings", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.NeptuneSettings != nil {
+		if err := s.NeptuneSettings.Validate(); err != nil {
+			invalidParams.AddNested("NeptuneSettings", err.(aws.ErrInvalidParams))
 		}
 	}
 

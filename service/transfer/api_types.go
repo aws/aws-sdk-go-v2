@@ -12,68 +12,87 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// Describes the properties of the server that was specified. Information returned
-// includes the following: the server Amazon Resource Name (ARN), the authentication
-// configuration and type, the logging role, the server ID and state, and assigned
-// tags or metadata.
+// Describes the properties of a file transfer protocol-enabled server that
+// was specified. Information returned includes the following: the server Amazon
+// Resource Name (ARN), the authentication configuration and type, the logging
+// role, the server ID and state, and assigned tags or metadata.
 type DescribedServer struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the unique Amazon Resource Name (ARN) for the server to be described.
+	// Specifies the unique Amazon Resource Name (ARN) for a file transfer protocol-enabled
+	// server to be described.
 	//
 	// Arn is a required field
 	Arn *string `min:"20" type:"string" required:"true"`
 
+	// The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM) certificate.
+	// Required when Protocols is set to FTPS.
+	Certificate *string `type:"string"`
+
 	// The virtual private cloud (VPC) endpoint settings that you configured for
-	// your SFTP server.
+	// your file transfer protocol-enabled server.
 	EndpointDetails *EndpointDetails `type:"structure"`
 
-	// The type of endpoint that your SFTP server is connected to. If your SFTP
-	// server is connected to a VPC endpoint, your server isn't accessible over
-	// the public internet.
+	// The type of endpoint that your file transfer protocol-enabled server is connected
+	// to. If your server is connected to a VPC endpoint, your server isn't accessible
+	// over the public internet.
 	EndpointType EndpointType `type:"string" enum:"true"`
 
-	// This value contains the message-digest algorithm (MD5) hash of the server's
-	// host key. This value is equivalent to the output of the ssh-keygen -l -E
-	// md5 -f my-new-server-key command.
+	// Contains the message-digest algorithm (MD5) hash of a file transfer protocol-enabled
+	// server's host key. This value is equivalent to the output of the ssh-keygen
+	// -l -E md5 -f my-new-server-key command.
 	HostKeyFingerprint *string `type:"string"`
 
 	// Specifies information to call a customer-supplied authentication API. This
-	// field is not populated when the IdentityProviderType of the server is SERVICE_MANAGED>.
+	// field is not populated when the IdentityProviderType of a file transfer protocol-enabled
+	// server is SERVICE_MANAGED.
 	IdentityProviderDetails *IdentityProviderDetails `type:"structure"`
 
-	// This property defines the mode of authentication method enabled for this
-	// service. A value of SERVICE_MANAGED means that you are using this server
-	// to store and access SFTP user credentials within the service. A value of
+	// Defines the mode of authentication method enabled for this service. A value
+	// of SERVICE_MANAGED means that you are using this file transfer protocol-enabled
+	// server to store and access user credentials within the service. A value of
 	// API_GATEWAY indicates that you have integrated an API Gateway endpoint that
 	// will be invoked for authenticating your user into the service.
 	IdentityProviderType IdentityProviderType `type:"string" enum:"true"`
 
-	// This property is an AWS Identity and Access Management (IAM) entity that
-	// allows the server to turn on Amazon CloudWatch logging for Amazon S3 events.
-	// When set, user activity can be viewed in your CloudWatch logs.
+	// An AWS Identity and Access Management (IAM) entity that allows a file transfer
+	// protocol-enabled server to turn on Amazon CloudWatch logging for Amazon S3
+	// events. When set, user activity can be viewed in your CloudWatch logs.
 	LoggingRole *string `min:"20" type:"string"`
 
-	// This property is a unique system-assigned identifier for the SFTP server
+	// Specifies the file transfer protocol or protocols over which your file transfer
+	// protocol client can connect to your server's endpoint. The available protocols
+	// are:
+	//
+	//    * Secure Shell (SSH) File Transfer Protocol (SFTP): File transfer over
+	//    SSH
+	//
+	//    * File Transfer Protocol Secure (FTPS): File transfer with TLS encryption
+	//
+	//    * File Transfer Protocol (FTP): Unencrypted file transfer
+	Protocols []Protocol `min:"1" type:"list"`
+
+	// Unique system-assigned identifier for a file transfer protocol-enabled server
 	// that you instantiate.
 	ServerId *string `min:"19" type:"string"`
 
-	// The condition of the SFTP server for the server that was described. A value
-	// of ONLINE indicates that the server can accept jobs and transfer files. A
-	// State value of OFFLINE means that the server cannot perform file transfer
-	// operations.
+	// The condition of a file transfer protocol-enabled server for the server that
+	// was described. A value of ONLINE indicates that the server can accept jobs
+	// and transfer files. A State value of OFFLINE means that the server cannot
+	// perform file transfer operations.
 	//
 	// The states of STARTING and STOPPING indicate that the server is in an intermediate
 	// state, either not fully able to respond, or not fully offline. The values
 	// of START_FAILED or STOP_FAILED can indicate an error condition.
 	State State `type:"string" enum:"true"`
 
-	// This property contains the key-value pairs that you can use to search for
-	// and group servers that were assigned to the server that was described.
+	// Contains the key-value pairs that you can use to search for and group file
+	// transfer protocol-enabled servers that were assigned to the server that was
+	// described.
 	Tags []Tag `min:"1" type:"list"`
 
-	// The number of users that are assigned to the SFTP server you specified with
-	// the ServerId.
+	// The number of users that are assigned to a file transfer protocol-enabled
+	// server you specified with the ServerId.
 	UserCount *int64 `type:"integer"`
 }
 
@@ -86,62 +105,59 @@ func (s DescribedServer) String() string {
 type DescribedUser struct {
 	_ struct{} `type:"structure"`
 
-	// This property contains the unique Amazon Resource Name (ARN) for the user
-	// that was requested to be described.
+	// Contains the unique Amazon Resource Name (ARN) for the user that was requested
+	// to be described.
 	//
 	// Arn is a required field
 	Arn *string `min:"20" type:"string" required:"true"`
 
-	// This property specifies the landing directory (or folder), which is the location
-	// that files are written to or read from in an Amazon S3 bucket for the described
-	// user. An example is /your s3 bucket name/home/username .
+	// Specifies the landing directory (or folder), which is the location that files
+	// are written to or read from in an Amazon S3 bucket for the described user.
+	// An example is /your s3 bucket name/home/username .
 	HomeDirectory *string `type:"string"`
 
-	// Logical directory mappings that you specified for what S3 paths and keys
-	// should be visible to your user and how you want to make them visible. You
-	// will need to specify the "Entry" and "Target" pair, where Entry shows how
-	// the path is made visible and Target is the actual S3 path. If you only specify
-	// a target, it will be displayed as is. You will need to also make sure that
-	// your AWS IAM Role provides access to paths in Target.
+	// Logical directory mappings that you specified for what Amazon S3 paths and
+	// keys should be visible to your user and how you want to make them visible.
+	// You will need to specify the "Entry" and "Target" pair, where Entry shows
+	// how the path is made visible and Target is the actual Amazon S3 path. If
+	// you only specify a target, it will be displayed as is. You will need to also
+	// make sure that your AWS IAM Role provides access to paths in Target.
 	//
-	// In most cases, you can use this value instead of the scope down policy to
-	// lock your user down to the designated home directory ("chroot"). To do this,
-	// you can set Entry to '/' and set Target to the HomeDirectory parameter value.
-	//
-	// In most cases, you can use this value instead of the scope down policy to
+	// In most cases, you can use this value instead of the scope-down policy to
 	// lock your user down to the designated home directory ("chroot"). To do this,
 	// you can set Entry to '/' and set Target to the HomeDirectory parameter value.
 	HomeDirectoryMappings []HomeDirectoryMapEntry `min:"1" type:"list"`
 
-	// The type of landing directory (folder) you mapped for your users' to see
-	// when they log into the SFTP server. If you set it to PATH, the user will
-	// see the absolute Amazon S3 bucket paths as is in their SFTP clients. If you
-	// set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings
-	// for how you want to make S3 paths visible to your user.
+	// The type of landing directory (folder) you mapped for your users to see when
+	// they log into the file transfer protocol-enabled server. If you set it to
+	// PATH, the user will see the absolute Amazon S3 bucket paths as is in their
+	// file transfer protocol clients. If you set it LOGICAL, you will need to provide
+	// mappings in the HomeDirectoryMappings for how you want to make Amazon S3
+	// paths visible to your users.
 	HomeDirectoryType HomeDirectoryType `type:"string" enum:"true"`
 
 	// Specifies the name of the policy in use for the described user.
 	Policy *string `type:"string"`
 
-	// This property specifies the IAM role that controls your user's access to
-	// your Amazon S3 bucket. The policies attached to this role will determine
-	// the level of access you want to provide your users when transferring files
-	// into and out of your Amazon S3 bucket or buckets. The IAM role should also
-	// contain a trust relationship that allows the SFTP server to access your resources
-	// when servicing your SFTP user's transfer requests.
+	// Specifies the IAM role that controls your users' access to your Amazon S3
+	// bucket. The policies attached to this role will determine the level of access
+	// you want to provide your users when transferring files into and out of your
+	// Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship
+	// that allows a file transfer protocol-enabled server to access your resources
+	// when servicing your users' transfer requests.
 	Role *string `min:"20" type:"string"`
 
-	// This property contains the public key portion of the Secure Shell (SSH) keys
-	// stored for the described user.
+	// Contains the public key portion of the Secure Shell (SSH) keys stored for
+	// the described user.
 	SshPublicKeys []SshPublicKey `type:"list"`
 
-	// This property contains the key-value pairs for the user requested. Tag can
-	// be used to search for and group users for a variety of purposes.
+	// Contains the key-value pairs for the user requested. Tag can be used to search
+	// for and group users for a variety of purposes.
 	Tags []Tag `min:"1" type:"list"`
 
-	// This property is the name of the user that was requested to be described.
-	// User names are used for authentication purposes. This is the string that
-	// will be used by your user when they log in to your SFTP server.
+	// The name of the user that was requested to be described. User names are used
+	// for authentication purposes. This is the string that will be used by your
+	// user when they log in to your file transfer protocol-enabled server.
 	UserName *string `min:"3" type:"string"`
 }
 
@@ -151,28 +167,29 @@ func (s DescribedUser) String() string {
 }
 
 // The virtual private cloud (VPC) endpoint settings that are configured for
-// your SFTP server. With a VPC endpoint, you can restrict access to your SFTP
-// server and resources only within your VPC. To control incoming internet traffic,
-// invoke the UpdateServer API and attach an Elastic IP to your server's endpoint.
+// your file transfer protocol-enabled server. With a VPC endpoint, you can
+// restrict access to your server and resources only within your VPC. To control
+// incoming internet traffic, invoke the UpdateServer API and attach an Elastic
+// IP to your server's endpoint.
 type EndpointDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A list of address allocation IDs that are required to attach an Elastic IP
-	// address to your SFTP server's endpoint. This is only valid in the UpdateServer
-	// API.
+	// address to your file transfer protocol-enabled server's endpoint. This is
+	// only valid in the UpdateServer API.
 	//
 	// This property can only be use when EndpointType is set to VPC.
 	AddressAllocationIds []string `type:"list"`
 
-	// A list of subnet IDs that are required to host your SFTP server endpoint
-	// in your VPC.
+	// A list of subnet IDs that are required to host your file transfer protocol-enabled
+	// server endpoint in your VPC.
 	SubnetIds []string `type:"list"`
 
 	// The ID of the VPC endpoint.
 	VpcEndpointId *string `min:"22" type:"string"`
 
-	// The VPC ID of the virtual private cloud in which the SFTP server's endpoint
-	// will be hosted.
+	// The VPC ID of the VPC in which a file transfer protocol-enabled server's
+	// endpoint will be hosted.
 	VpcId *string `type:"string"`
 }
 
@@ -233,16 +250,15 @@ func (s *HomeDirectoryMapEntry) Validate() error {
 }
 
 // Returns information related to the type of user authentication that is in
-// use for a server's users. A server can have only one method of authentication.
+// use for a file transfer protocol-enabled server's users. A server can have
+// only one method of authentication.
 type IdentityProviderDetails struct {
 	_ struct{} `type:"structure"`
 
-	// The InvocationRole parameter provides the type of InvocationRole used to
-	// authenticate the user account.
+	// Provides the type of InvocationRole used to authenticate the user account.
 	InvocationRole *string `min:"20" type:"string"`
 
-	// The Url parameter provides contains the location of the service endpoint
-	// used to authenticate users.
+	// Contains the location of the service endpoint used to authenticate users.
 	Url *string `type:"string"`
 }
 
@@ -264,46 +280,47 @@ func (s *IdentityProviderDetails) Validate() error {
 	return nil
 }
 
-// Returns properties of the server that was specified.
+// Returns properties of a file transfer protocol-enabled server that was specified.
 type ListedServer struct {
 	_ struct{} `type:"structure"`
 
-	// The unique Amazon Resource Name (ARN) for the server to be listed.
+	// The unique Amazon Resource Name (ARN) for a file transfer protocol-enabled
+	// server to be listed.
 	//
 	// Arn is a required field
 	Arn *string `min:"20" type:"string" required:"true"`
 
-	// The type of VPC endpoint that your SFTP server is connected to. If your SFTP
-	// server is connected to a VPC endpoint, your server isn't accessible over
-	// the public internet.
+	// The type of VPC endpoint that your file transfer protocol-enabled server
+	// is connected to. If your server is connected to a VPC endpoint, your server
+	// isn't accessible over the public internet.
 	EndpointType EndpointType `type:"string" enum:"true"`
 
-	// The authentication method used to validate a user for the server that was
-	// specified. This can include Secure Shell (SSH), user name and password combinations,
-	// or your own custom authentication method. Valid values include SERVICE_MANAGED
-	// or API_GATEWAY.
+	// The authentication method used to validate a user for a file transfer protocol-enabled
+	// server that was specified. This can include Secure Shell (SSH), user name
+	// and password combinations, or your own custom authentication method. Valid
+	// values include SERVICE_MANAGED or API_GATEWAY.
 	IdentityProviderType IdentityProviderType `type:"string" enum:"true"`
 
-	// The AWS Identity and Access Management entity that allows the server to turn
-	// on Amazon CloudWatch logging.
+	// The AWS Identity and Access Management (IAM) entity that allows a file transfer
+	// protocol-enabled server to turn on Amazon CloudWatch logging.
 	LoggingRole *string `min:"20" type:"string"`
 
-	// This value is the unique system assigned identifier for the SFTP servers
-	// that were listed.
+	// The unique system assigned identifier for a file transfer protocol-enabled
+	// servers that were listed.
 	ServerId *string `min:"19" type:"string"`
 
-	// This property describes the condition of the SFTP server for the server that
-	// was described. A value of ONLINE> indicates that the server can accept jobs
-	// and transfer files. A State value of OFFLINE means that the server cannot
-	// perform file transfer operations.
+	// Describes the condition of a file transfer protocol-enabled server for the
+	// server that was described. A value of ONLINE indicates that the server can
+	// accept jobs and transfer files. A State value of OFFLINE means that the server
+	// cannot perform file transfer operations.
 	//
 	// The states of STARTING and STOPPING indicate that the server is in an intermediate
 	// state, either not fully able to respond, or not fully offline. The values
 	// of START_FAILED or STOP_FAILED can indicate an error condition.
 	State State `type:"string" enum:"true"`
 
-	// This property is a numeric value that indicates the number of users that
-	// are assigned to the SFTP server you specified with the ServerId.
+	// A numeric value that indicates the number of users that are assigned to a
+	// file transfer protocol-enabled server you specified with the ServerId.
 	UserCount *int64 `type:"integer"`
 }
 
@@ -316,30 +333,31 @@ func (s ListedServer) String() string {
 type ListedUser struct {
 	_ struct{} `type:"structure"`
 
-	// This property is the unique Amazon Resource Name (ARN) for the user that
-	// you want to learn about.
+	// The unique Amazon Resource Name (ARN) for the user that you want to learn
+	// about.
 	//
 	// Arn is a required field
 	Arn *string `min:"20" type:"string" required:"true"`
 
-	// This value specifies the location that files are written to or read from
-	// an Amazon S3 bucket for the user you specify by their ARN.
+	// Specifies the location that files are written to or read from an Amazon S3
+	// bucket for the user you specify by their ARN.
 	HomeDirectory *string `type:"string"`
 
 	// The type of landing directory (folder) you mapped for your users' home directory.
 	// If you set it to PATH, the user will see the absolute Amazon S3 bucket paths
-	// as is in their SFTP clients. If you set it LOGICAL, you will need to provide
-	// mappings in the HomeDirectoryMappings for how you want to make S3 paths visible
-	// to your user.
+	// as is in their file transfer protocol clients. If you set it LOGICAL, you
+	// will need to provide mappings in the HomeDirectoryMappings for how you want
+	// to make Amazon S3 paths visible to your users.
 	HomeDirectoryType HomeDirectoryType `type:"string" enum:"true"`
 
 	// The role in use by this user. A role is an AWS Identity and Access Management
-	// (IAM) entity that, in this case, allows the SFTP server to act on a user's
-	// behalf. It allows the server to inherit the trust relationship that enables
-	// that user to perform file operations to their Amazon S3 bucket.
+	// (IAM) entity that, in this case, allows a file transfer protocol-enabled
+	// server to act on a user's behalf. It allows the server to inherit the trust
+	// relationship that enables that user to perform file operations to their Amazon
+	// S3 bucket.
 	Role *string `min:"20" type:"string"`
 
-	// This value is the number of SSH public keys stored for the user you specified.
+	// The number of SSH public keys stored for the user you specified.
 	SshPublicKeyCount *int64 `type:"integer"`
 
 	// The name of the user whose ARN was specified. User names are used for authentication
@@ -353,10 +371,11 @@ func (s ListedUser) String() string {
 }
 
 // Provides information about the public Secure Shell (SSH) key that is associated
-// with a user account for a specific server (as identified by ServerId). The
-// information returned includes the date the key was imported, the public key
-// contents, and the public key ID. A user can store more than one SSH public
-// key associated with their user name on a specific SFTP server.
+// with a user account for the specific file transfer protocol-enabled server
+// (as identified by ServerId). The information returned includes the date the
+// key was imported, the public key contents, and the public key ID. A user
+// can store more than one SSH public key associated with their user name on
+// a specific server.
 type SshPublicKey struct {
 	_ struct{} `type:"structure"`
 
@@ -395,8 +414,7 @@ type Tag struct {
 	// Key is a required field
 	Key *string `type:"string" required:"true"`
 
-	// This property contains one or more values that you assigned to the key name
-	// you create.
+	// Contains one or more values that you assigned to the key name you create.
 	//
 	// Value is a required field
 	Value *string `type:"string" required:"true"`

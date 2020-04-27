@@ -53,15 +53,15 @@ type CreateSMBFileShareInput struct {
 
 	// A list of users or groups in the Active Directory that are not allowed to
 	// access the file share. A group must be prefixed with the @ character. For
-	// example @group1. Can only be set if Authentication is set to ActiveDirectory.
+	// example, @group1. Can only be set if Authentication is set to ActiveDirectory.
 	InvalidUserList []string `type:"list"`
 
-	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
+	// True to use Amazon S3 server-side encryption with your own AWS KMS key, or
 	// false to use a key managed by Amazon S3. Optional.
 	KMSEncrypted *bool `type:"boolean"`
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
-	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side
+	// encryption. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string `min:"7" type:"string"`
 
 	// The ARN of the backed storage used for storing file data.
@@ -195,7 +195,7 @@ const opCreateSMBFileShare = "CreateSMBFileShare"
 //
 // Creates a Server Message Block (SMB) file share on an existing file gateway.
 // In Storage Gateway, a file share is a file system mount point backed by Amazon
-// S3 cloud storage. Storage Gateway expose file shares using a SMB interface.
+// S3 cloud storage. Storage Gateway expose file shares using an SMB interface.
 // This operation is only supported for file gateways.
 //
 // File gateways require AWS Security Token Service (AWS STS) to be activated

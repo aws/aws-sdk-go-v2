@@ -30,6 +30,12 @@ const (
 	// The resource specified in the request was not found.
 	ErrCodeNotFoundException = "NotFoundException"
 
+	// ErrCodeResourceNotFoundException for service response error code
+	// "ResourceNotFoundException".
+	//
+	// The resource specified in the request was not found.
+	ErrCodeResourceNotFoundException = "ResourceNotFoundException"
+
 	// ErrCodeThrottlingException for service response error code
 	// "ThrottlingException".
 	//

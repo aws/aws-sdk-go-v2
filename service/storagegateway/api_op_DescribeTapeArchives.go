@@ -13,7 +13,7 @@ import (
 type DescribeTapeArchivesInput struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies that the number of virtual tapes descried be limited to the specified
+	// Specifies that the number of virtual tapes described be limited to the specified
 	// number.
 	Limit *int64 `min:"1" type:"integer"`
 

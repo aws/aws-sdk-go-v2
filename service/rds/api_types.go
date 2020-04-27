@@ -2746,6 +2746,9 @@ func (s OptionVersion) String() string {
 type OrderableDBInstanceOption struct {
 	_ struct{} `type:"structure"`
 
+	// The Availability Zone group for a DB instance.
+	AvailabilityZoneGroup *string `type:"string"`
+
 	// A list of Availability Zones for a DB instance.
 	AvailabilityZones []AvailabilityZone `locationNameList:"AvailabilityZone" type:"list"`
 
@@ -2815,8 +2818,8 @@ type OrderableDBInstanceOption struct {
 	// True if a DB instance supports Performance Insights, otherwise false.
 	SupportsPerformanceInsights *bool `type:"boolean"`
 
-	// Whether or not Amazon RDS can automatically scale storage for DB instances
-	// that use the specified instance class.
+	// Whether Amazon RDS can automatically scale storage for DB instances that
+	// use the specified DB instance class.
 	SupportsStorageAutoscaling *bool `type:"boolean"`
 
 	// Indicates whether a DB instance supports encrypted storage.

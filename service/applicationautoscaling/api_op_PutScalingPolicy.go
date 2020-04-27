@@ -24,7 +24,8 @@ type PutScalingPolicyInput struct {
 	//
 	// TargetTrackingScaling—Not supported for Amazon EMR
 	//
-	// StepScaling—Not supported for DynamoDB, Amazon Comprehend, or AWS Lambda
+	// StepScaling—Not supported for DynamoDB, Amazon Comprehend, Lambda, or Amazon
+	// Keyspaces for Apache Cassandra.
 	//
 	// For more information, see Target Tracking Scaling Policies (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)
 	// and Step Scaling Policies (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)
@@ -70,6 +71,9 @@ type PutScalingPolicyInput struct {
 	//    unique identifier is the function name with a function version or alias
 	//    name suffix that is not $LATEST. Example: function:my-function:prod or
 	//    function:my-function:1.
+	//
+	//    * Amazon Keyspaces table - The resource type is table and the unique identifier
+	//    is the table name. Example: keyspace/mykeyspace/table/mytable.
 	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
@@ -117,13 +121,17 @@ type PutScalingPolicyInput struct {
 	//    * lambda:function:ProvisionedConcurrency - The provisioned concurrency
 	//    for a Lambda function.
 	//
+	//    * cassandra:table:ReadCapacityUnits - The provisioned read capacity for
+	//    an Amazon Keyspaces table.
+	//
+	//    * cassandra:table:WriteCapacityUnits - The provisioned write capacity
+	//    for an Amazon Keyspaces table.
+	//
 	// ScalableDimension is a required field
 	ScalableDimension ScalableDimension `type:"string" required:"true" enum:"true"`
 
-	// The namespace of the AWS service that provides the resource or custom-resource
-	// for a resource provided by your own application or service. For more information,
-	// see AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the Amazon Web Services General Reference.
+	// The namespace of the AWS service that provides the resource. For a resource
+	// provided by your own application or service, use custom-resource instead.
 	//
 	// ServiceNamespace is a required field
 	ServiceNamespace ServiceNamespace `type:"string" required:"true" enum:"true"`
@@ -209,19 +217,13 @@ const opPutScalingPolicy = "PutScalingPolicy"
 // PutScalingPolicyRequest returns a request value for making API operation for
 // Application Auto Scaling.
 //
-// Creates or updates a policy for an Application Auto Scaling scalable target.
+// Creates or updates a scaling policy for an Application Auto Scaling scalable
+// target.
 //
 // Each scalable target is identified by a service namespace, resource ID, and
 // scalable dimension. A scaling policy applies to the scalable target identified
 // by those three attributes. You cannot create a scaling policy until you have
-// registered the resource as a scalable target using RegisterScalableTarget.
-//
-// To update a policy, specify its policy name and the parameters that you want
-// to change. Any parameters that you don't specify are not changed by this
-// update request.
-//
-// You can view the scaling policies for a service namespace using DescribeScalingPolicies.
-// If you are no longer using a scaling policy, you can delete it using DeleteScalingPolicy.
+// registered the resource as a scalable target.
 //
 // Multiple scaling policies can be in force at the same time for the same scalable
 // target. You can have one or more target tracking scaling policies, one or
@@ -234,8 +236,13 @@ const opPutScalingPolicy = "PutScalingPolicy"
 // uses the policy with the highest calculated capacity (200% of 10 = 20) and
 // scales out to 30.
 //
-// Learn more about how to work with scaling policies in the Application Auto
-// Scaling User Guide (https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html).
+// For more information, see Target Tracking Scaling Policies (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)
+// and Step Scaling Policies (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)
+// in the Application Auto Scaling User Guide.
+//
+// If a scalable target is deregistered, the scalable target is no longer available
+// to execute scaling policies. Any scaling policies that were specified for
+// the scalable target are deleted.
 //
 //    // Example sending a request using PutScalingPolicyRequest.
 //    req := client.PutScalingPolicyRequest(params)

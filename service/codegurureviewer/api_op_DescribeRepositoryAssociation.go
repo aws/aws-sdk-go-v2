@@ -13,7 +13,8 @@ import (
 type DescribeRepositoryAssociationInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) identifying the association.
+	// The Amazon Resource Name (ARN) identifying the association. You can retrieve
+	// this ARN by calling ListRepositories.
 	//
 	// AssociationArn is a required field
 	AssociationArn *string `location:"uri" locationName:"AssociationArn" min:"1" type:"string" required:"true"`

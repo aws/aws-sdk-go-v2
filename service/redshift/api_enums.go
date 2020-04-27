@@ -256,3 +256,73 @@ func (enum TableRestoreStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
+
+type UsageLimitBreachAction string
+
+// Enum values for UsageLimitBreachAction
+const (
+	UsageLimitBreachActionLog        UsageLimitBreachAction = "log"
+	UsageLimitBreachActionEmitMetric UsageLimitBreachAction = "emit-metric"
+	UsageLimitBreachActionDisable    UsageLimitBreachAction = "disable"
+)
+
+func (enum UsageLimitBreachAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UsageLimitBreachAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type UsageLimitFeatureType string
+
+// Enum values for UsageLimitFeatureType
+const (
+	UsageLimitFeatureTypeSpectrum           UsageLimitFeatureType = "spectrum"
+	UsageLimitFeatureTypeConcurrencyScaling UsageLimitFeatureType = "concurrency-scaling"
+)
+
+func (enum UsageLimitFeatureType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UsageLimitFeatureType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type UsageLimitLimitType string
+
+// Enum values for UsageLimitLimitType
+const (
+	UsageLimitLimitTypeTime        UsageLimitLimitType = "time"
+	UsageLimitLimitTypeDataScanned UsageLimitLimitType = "data-scanned"
+)
+
+func (enum UsageLimitLimitType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UsageLimitLimitType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type UsageLimitPeriod string
+
+// Enum values for UsageLimitPeriod
+const (
+	UsageLimitPeriodDaily   UsageLimitPeriod = "daily"
+	UsageLimitPeriodWeekly  UsageLimitPeriod = "weekly"
+	UsageLimitPeriodMonthly UsageLimitPeriod = "monthly"
+)
+
+func (enum UsageLimitPeriod) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UsageLimitPeriod) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

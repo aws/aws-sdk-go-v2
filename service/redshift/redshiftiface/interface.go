@@ -102,6 +102,8 @@ type ClientAPI interface {
 
 	CreateTagsRequest(*redshift.CreateTagsInput) redshift.CreateTagsRequest
 
+	CreateUsageLimitRequest(*redshift.CreateUsageLimitInput) redshift.CreateUsageLimitRequest
+
 	DeleteClusterRequest(*redshift.DeleteClusterInput) redshift.DeleteClusterRequest
 
 	DeleteClusterParameterGroupRequest(*redshift.DeleteClusterParameterGroupInput) redshift.DeleteClusterParameterGroupRequest
@@ -125,6 +127,8 @@ type ClientAPI interface {
 	DeleteSnapshotScheduleRequest(*redshift.DeleteSnapshotScheduleInput) redshift.DeleteSnapshotScheduleRequest
 
 	DeleteTagsRequest(*redshift.DeleteTagsInput) redshift.DeleteTagsRequest
+
+	DeleteUsageLimitRequest(*redshift.DeleteUsageLimitInput) redshift.DeleteUsageLimitRequest
 
 	DescribeAccountAttributesRequest(*redshift.DescribeAccountAttributesInput) redshift.DescribeAccountAttributesRequest
 
@@ -182,6 +186,8 @@ type ClientAPI interface {
 
 	DescribeTagsRequest(*redshift.DescribeTagsInput) redshift.DescribeTagsRequest
 
+	DescribeUsageLimitsRequest(*redshift.DescribeUsageLimitsInput) redshift.DescribeUsageLimitsRequest
+
 	DisableLoggingRequest(*redshift.DisableLoggingInput) redshift.DisableLoggingRequest
 
 	DisableSnapshotCopyRequest(*redshift.DisableSnapshotCopyInput) redshift.DisableSnapshotCopyRequest
@@ -217,6 +223,8 @@ type ClientAPI interface {
 	ModifySnapshotCopyRetentionPeriodRequest(*redshift.ModifySnapshotCopyRetentionPeriodInput) redshift.ModifySnapshotCopyRetentionPeriodRequest
 
 	ModifySnapshotScheduleRequest(*redshift.ModifySnapshotScheduleInput) redshift.ModifySnapshotScheduleRequest
+
+	ModifyUsageLimitRequest(*redshift.ModifyUsageLimitInput) redshift.ModifyUsageLimitRequest
 
 	PauseClusterRequest(*redshift.PauseClusterInput) redshift.PauseClusterRequest
 

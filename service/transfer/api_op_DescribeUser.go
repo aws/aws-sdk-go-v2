@@ -12,15 +12,15 @@ import (
 type DescribeUserInput struct {
 	_ struct{} `type:"structure"`
 
-	// A system-assigned unique identifier for an SFTP server that has this user
-	// assigned.
+	// A system-assigned unique identifier for a file transfer protocol-enabled
+	// server that has this user assigned.
 	//
 	// ServerId is a required field
 	ServerId *string `min:"19" type:"string" required:"true"`
 
-	// The name of the user assigned to one or more servers. User names are part
-	// of the sign-in credentials to use the AWS Transfer for SFTP service and perform
-	// file transfer tasks.
+	// The name of the user assigned to one or more file transfer protocol-enabled
+	// servers. User names are part of the sign-in credentials to use the AWS Transfer
+	// Family service and perform file transfer tasks.
 	//
 	// UserName is a required field
 	UserName *string `min:"3" type:"string" required:"true"`
@@ -58,8 +58,8 @@ func (s *DescribeUserInput) Validate() error {
 type DescribeUserOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A system-assigned unique identifier for an SFTP server that has this user
-	// assigned.
+	// A system-assigned unique identifier for a file transfer protocol-enabled
+	// server that has this user assigned.
 	//
 	// ServerId is a required field
 	ServerId *string `min:"19" type:"string" required:"true"`
@@ -79,10 +79,10 @@ func (s DescribeUserOutput) String() string {
 const opDescribeUser = "DescribeUser"
 
 // DescribeUserRequest returns a request value for making API operation for
-// AWS Transfer for SFTP.
+// AWS Transfer Family.
 //
-// Describes the user assigned to a specific server, as identified by its ServerId
-// property.
+// Describes the user assigned to the specific file transfer protocol-enabled
+// server, as identified by its ServerId property.
 //
 // The response from this call returns the properties of the user associated
 // with the ServerId value that was specified.

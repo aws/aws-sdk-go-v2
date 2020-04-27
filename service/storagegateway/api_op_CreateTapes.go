@@ -29,12 +29,12 @@ type CreateTapesInput struct {
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
 
-	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
+	// True to use Amazon S3 server-side encryption with your own AWS KMS key, or
 	// false to use a key managed by Amazon S3. Optional.
 	KMSEncrypted *bool `type:"boolean"`
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
-	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side
+	// encryption. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string `min:"7" type:"string"`
 
 	// The number of virtual tapes that you want to create.
@@ -45,8 +45,8 @@ type CreateTapesInput struct {
 	// The ID of the pool that you want to add your tape to for archiving. The tape
 	// in this pool is archived in the S3 storage class that is associated with
 	// the pool. When you use your backup application to eject the tape, the tape
-	// is archived directly into the storage class (Glacier or Deep Archive) that
-	// corresponds to the pool.
+	// is archived directly into the storage class (S3 Glacier or S3 Glacier Deep
+	// Archive) that corresponds to the pool.
 	//
 	// Valid values: "GLACIER", "DEEP_ARCHIVE"
 	PoolId *string `min:"1" type:"string"`
@@ -71,7 +71,7 @@ type CreateTapesInput struct {
 
 	// The size, in bytes, of the virtual tapes that you want to create.
 	//
-	// The size must be aligned by gigabyte (1024*1024*1024 byte).
+	// The size must be aligned by gigabyte (1024*1024*1024 bytes).
 	//
 	// TapeSizeInBytes is a required field
 	TapeSizeInBytes *int64 `type:"long" required:"true"`

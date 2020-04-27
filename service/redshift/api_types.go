@@ -2073,6 +2073,50 @@ func (s UpdateTarget) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Describes a usage limit object for a cluster.
+type UsageLimit struct {
+	_ struct{} `type:"structure"`
+
+	// The limit amount. If time-based, this amount is in minutes. If data-based,
+	// this amount is in terabytes (TB).
+	Amount *int64 `type:"long"`
+
+	// The action that Amazon Redshift takes when the limit is reached. Possible
+	// values are:
+	//
+	//    * log - To log an event in a system table. The default is log.
+	//
+	//    * emit-metric - To emit CloudWatch metrics.
+	//
+	//    * disable - To disable the feature until the next usage period begins.
+	BreachAction UsageLimitBreachAction `type:"string" enum:"true"`
+
+	// The identifier of the cluster with a usage limit.
+	ClusterIdentifier *string `type:"string"`
+
+	// The Amazon Redshift feature to which the limit applies.
+	FeatureType UsageLimitFeatureType `type:"string" enum:"true"`
+
+	// The type of limit. Depending on the feature type, this can be based on a
+	// time duration or data size.
+	LimitType UsageLimitLimitType `type:"string" enum:"true"`
+
+	// The time period that the amount applies to. A weekly period begins on Sunday.
+	// The default is monthly.
+	Period UsageLimitPeriod `type:"string" enum:"true"`
+
+	// A list of tag instances.
+	Tags []Tag `locationNameList:"Tag" type:"list"`
+
+	// The identifier of the usage limit.
+	UsageLimitId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s UsageLimit) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes the members of a VPC security group.
 type VpcSecurityGroupMembership struct {
 	_ struct{} `type:"structure"`

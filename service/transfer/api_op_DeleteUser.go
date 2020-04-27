@@ -14,13 +14,14 @@ import (
 type DeleteUserInput struct {
 	_ struct{} `type:"structure"`
 
-	// A system-assigned unique identifier for an SFTP server instance that has
-	// the user assigned to it.
+	// A system-assigned unique identifier for a file transfer protocol-enabled
+	// server instance that has the user assigned to it.
 	//
 	// ServerId is a required field
 	ServerId *string `min:"19" type:"string" required:"true"`
 
-	// A unique string that identifies a user that is being deleted from the server.
+	// A unique string that identifies a user that is being deleted from a file
+	// transfer protocol-enabled server.
 	//
 	// UserName is a required field
 	UserName *string `min:"3" type:"string" required:"true"`
@@ -67,9 +68,10 @@ func (s DeleteUserOutput) String() string {
 const opDeleteUser = "DeleteUser"
 
 // DeleteUserRequest returns a request value for making API operation for
-// AWS Transfer for SFTP.
+// AWS Transfer Family.
 //
-// Deletes the user belonging to the server you specify.
+// Deletes the user belonging to a file transfer protocol-enabled server you
+// specify.
 //
 // No response returns from this operation.
 //

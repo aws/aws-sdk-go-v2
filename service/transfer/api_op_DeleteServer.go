@@ -14,7 +14,8 @@ import (
 type DeleteServerInput struct {
 	_ struct{} `type:"structure"`
 
-	// A unique system-assigned identifier for an SFTP server instance.
+	// A unique system-assigned identifier for a file transfer protocol-enabled
+	// server instance.
 	//
 	// ServerId is a required field
 	ServerId *string `min:"19" type:"string" required:"true"`
@@ -54,9 +55,9 @@ func (s DeleteServerOutput) String() string {
 const opDeleteServer = "DeleteServer"
 
 // DeleteServerRequest returns a request value for making API operation for
-// AWS Transfer for SFTP.
+// AWS Transfer Family.
 //
-// Deletes the Secure File Transfer Protocol (SFTP) server that you specify.
+// Deletes the file transfer protocol-enabled server that you specify.
 //
 // No response returns from this operation.
 //

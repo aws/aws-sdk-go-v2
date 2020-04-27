@@ -63,11 +63,23 @@ import (
 type ClientAPI interface {
 	AssociateRepositoryRequest(*codegurureviewer.AssociateRepositoryInput) codegurureviewer.AssociateRepositoryRequest
 
+	DescribeCodeReviewRequest(*codegurureviewer.DescribeCodeReviewInput) codegurureviewer.DescribeCodeReviewRequest
+
+	DescribeRecommendationFeedbackRequest(*codegurureviewer.DescribeRecommendationFeedbackInput) codegurureviewer.DescribeRecommendationFeedbackRequest
+
 	DescribeRepositoryAssociationRequest(*codegurureviewer.DescribeRepositoryAssociationInput) codegurureviewer.DescribeRepositoryAssociationRequest
 
 	DisassociateRepositoryRequest(*codegurureviewer.DisassociateRepositoryInput) codegurureviewer.DisassociateRepositoryRequest
 
+	ListCodeReviewsRequest(*codegurureviewer.ListCodeReviewsInput) codegurureviewer.ListCodeReviewsRequest
+
+	ListRecommendationFeedbackRequest(*codegurureviewer.ListRecommendationFeedbackInput) codegurureviewer.ListRecommendationFeedbackRequest
+
+	ListRecommendationsRequest(*codegurureviewer.ListRecommendationsInput) codegurureviewer.ListRecommendationsRequest
+
 	ListRepositoryAssociationsRequest(*codegurureviewer.ListRepositoryAssociationsInput) codegurureviewer.ListRepositoryAssociationsRequest
+
+	PutRecommendationFeedbackRequest(*codegurureviewer.PutRecommendationFeedbackInput) codegurureviewer.PutRecommendationFeedbackRequest
 }
 
 var _ ClientAPI = (*codegurureviewer.Client)(nil)

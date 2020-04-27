@@ -40,11 +40,11 @@ type CreateNFSFileShareInput struct {
 	// and otherwise to false. The default value is true.
 	GuessMIMETypeEnabled *bool `type:"boolean"`
 
-	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
+	// True to use Amazon S3 server-side encryption with your own AWS KMS key, or
 	// false to use a key managed by Amazon S3. Optional.
 	KMSEncrypted *bool `type:"boolean"`
 
-	// The Amazon Resource Name (ARN) AWS KMS key used for Amazon S3 server side
+	// The Amazon Resource Name (ARN) AWS KMS key used for Amazon S3 server-side
 	// encryption. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string `min:"7" type:"string"`
 
@@ -186,11 +186,11 @@ const opCreateNFSFileShare = "CreateNFSFileShare"
 //
 // Creates a Network File System (NFS) file share on an existing file gateway.
 // In Storage Gateway, a file share is a file system mount point backed by Amazon
-// S3 cloud storage. Storage Gateway exposes file shares using a NFS interface.
+// S3 cloud storage. Storage Gateway exposes file shares using an NFS interface.
 // This operation is only supported for file gateways.
 //
 // File gateway requires AWS Security Token Service (AWS STS) to be activated
-// to enable you create a file share. Make sure AWS STS is activated in the
+// to enable you to create a file share. Make sure AWS STS is activated in the
 // AWS Region you are creating your file gateway in. If AWS STS is not activated
 // in the AWS Region, activate it. For information about how to activate AWS
 // STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS

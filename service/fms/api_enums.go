@@ -27,6 +27,7 @@ type CustomerPolicyScopeIdType string
 // Enum values for CustomerPolicyScopeIdType
 const (
 	CustomerPolicyScopeIdTypeAccount CustomerPolicyScopeIdType = "ACCOUNT"
+	CustomerPolicyScopeIdTypeOrgUnit CustomerPolicyScopeIdType = "ORG_UNIT"
 )
 
 func (enum CustomerPolicyScopeIdType) MarshalValue() (string, error) {

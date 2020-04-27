@@ -72,7 +72,7 @@ type CreateReplicationTaskInput struct {
 	ReplicationTaskIdentifier *string `type:"string" required:"true"`
 
 	// Overall settings for the task, in JSON format. For more information, see
-	// Task Settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html)
+	// Specifying Task Settings for AWS Database Migration Service Tasks (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html)
 	// in the AWS Database Migration User Guide.
 	ReplicationTaskSettings *string `type:"string"`
 
@@ -82,7 +82,7 @@ type CreateReplicationTaskInput struct {
 	SourceEndpointArn *string `type:"string" required:"true"`
 
 	// The table mappings for the task, in JSON format. For more information, see
-	// Table Mapping (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html)
+	// Using Table Mapping to Specify Task Settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html)
 	// in the AWS Database Migration User Guide.
 	//
 	// TableMappings is a required field
@@ -95,6 +95,12 @@ type CreateReplicationTaskInput struct {
 	//
 	// TargetEndpointArn is a required field
 	TargetEndpointArn *string `type:"string" required:"true"`
+
+	// Supplemental information that the task requires to migrate the data for certain
+	// source and target endpoints. For more information, see Specifying Supplemental
+	// Data for Task Settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html)
+	// in the AWS Database Migration User Guide.
+	TaskData *string `type:"string"`
 }
 
 // String returns the string representation

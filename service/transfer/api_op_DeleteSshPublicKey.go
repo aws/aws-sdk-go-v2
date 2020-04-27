@@ -14,7 +14,7 @@ import (
 type DeleteSshPublicKeyInput struct {
 	_ struct{} `type:"structure"`
 
-	// A system-assigned unique identifier for a Secure File Transfer Protocol (SFTP)
+	// A system-assigned unique identifier for a file transfer protocol-enabled
 	// server instance that has the user assigned to it.
 	//
 	// ServerId is a required field
@@ -79,7 +79,7 @@ func (s DeleteSshPublicKeyOutput) String() string {
 const opDeleteSshPublicKey = "DeleteSshPublicKey"
 
 // DeleteSshPublicKeyRequest returns a request value for making API operation for
-// AWS Transfer for SFTP.
+// AWS Transfer Family.
 //
 // Deletes a user's Secure Shell (SSH) public key.
 //
