@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Elastic Inference.
 //    func myFunc(svc elasticinferenceiface.ClientAPI) bool {
-//        // Make svc.ListTagsForResource request
+//        // Make svc.DescribeAcceleratorOfferings request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        elasticinferenceiface.ClientPI
 //    }
-//    func (m *mockClientClient) ListTagsForResource(input *elasticinference.ListTagsForResourceInput) (*elasticinference.ListTagsForResourceOutput, error) {
+//    func (m *mockClientClient) DescribeAcceleratorOfferings(input *elasticinference.DescribeAcceleratorOfferingsInput) (*elasticinference.DescribeAcceleratorOfferingsOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,6 +61,12 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	DescribeAcceleratorOfferingsRequest(*elasticinference.DescribeAcceleratorOfferingsInput) elasticinference.DescribeAcceleratorOfferingsRequest
+
+	DescribeAcceleratorTypesRequest(*elasticinference.DescribeAcceleratorTypesInput) elasticinference.DescribeAcceleratorTypesRequest
+
+	DescribeAcceleratorsRequest(*elasticinference.DescribeAcceleratorsInput) elasticinference.DescribeAcceleratorsRequest
+
 	ListTagsForResourceRequest(*elasticinference.ListTagsForResourceInput) elasticinference.ListTagsForResourceRequest
 
 	TagResourceRequest(*elasticinference.TagResourceInput) elasticinference.TagResourceRequest

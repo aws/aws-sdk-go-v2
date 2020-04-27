@@ -9,7 +9,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// A JSON object containing the of the gateway to update.
+// A JSON object containing the Amazon Resource Name (ARN) of the gateway to
+// update.
 type UpdateGatewaySoftwareNowInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +43,8 @@ func (s *UpdateGatewaySoftwareNowInput) Validate() error {
 	return nil
 }
 
-// A JSON object containing the of the gateway that was updated.
+// A JSON object containing the Amazon Resource Name (ARN) of the gateway that
+// was updated.
 type UpdateGatewaySoftwareNowOutput struct {
 	_ struct{} `type:"structure"`
 

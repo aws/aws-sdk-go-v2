@@ -345,6 +345,15 @@ const opRestoreDBClusterFromS3 = "RestoreDBClusterFromS3"
 // Data to an Amazon Aurora MySQL DB Cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.html)
 // in the Amazon Aurora User Guide.
 //
+// This action only restores the DB cluster, not the DB instances for that DB
+// cluster. You must invoke the CreateDBInstance action to create DB instances
+// for the restored DB cluster, specifying the identifier of the restored DB
+// cluster in DBClusterIdentifier. You can create DB instances only after the
+// RestoreDBClusterFromS3 action has completed and the DB cluster is available.
+//
+// For more information on Amazon Aurora, see What Is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// in the Amazon Aurora User Guide.
+//
 // This action only applies to Aurora DB clusters.
 //
 //    // Example sending a request using RestoreDBClusterFromS3Request.

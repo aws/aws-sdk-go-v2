@@ -12,7 +12,8 @@ import (
 type ImportSshPublicKeyInput struct {
 	_ struct{} `type:"structure"`
 
-	// A system-assigned unique identifier for an SFTP server.
+	// A system-assigned unique identifier for a file transfer protocol-enabled
+	// server.
 	//
 	// ServerId is a required field
 	ServerId *string `min:"19" type:"string" required:"true"`
@@ -22,7 +23,8 @@ type ImportSshPublicKeyInput struct {
 	// SshPublicKeyBody is a required field
 	SshPublicKeyBody *string `type:"string" required:"true"`
 
-	// The name of the user account that is assigned to one or more servers.
+	// The name of the user account that is assigned to one or more file transfer
+	// protocol-enabled servers.
 	//
 	// UserName is a required field
 	UserName *string `min:"3" type:"string" required:"true"`
@@ -61,19 +63,19 @@ func (s *ImportSshPublicKeyInput) Validate() error {
 	return nil
 }
 
-// This response identifies the user, the server they belong to, and the identifier
-// of the SSH public key associated with that user. A user can have more than
-// one key on each server that they are associated with.
+// Identifies the user, the file transfer protocol-enabled server they belong
+// to, and the identifier of the SSH public key associated with that user. A
+// user can have more than one key on each server that they are associated with.
 type ImportSshPublicKeyOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A system-assigned unique identifier for an SFTP server.
+	// A system-assigned unique identifier for a file transfer protocol-enabled
+	// server.
 	//
 	// ServerId is a required field
 	ServerId *string `min:"19" type:"string" required:"true"`
 
-	// This identifier is the name given to a public key by the system that was
-	// imported.
+	// The name given to a public key by the system that was imported.
 	//
 	// SshPublicKeyId is a required field
 	SshPublicKeyId *string `min:"21" type:"string" required:"true"`
@@ -92,10 +94,11 @@ func (s ImportSshPublicKeyOutput) String() string {
 const opImportSshPublicKey = "ImportSshPublicKey"
 
 // ImportSshPublicKeyRequest returns a request value for making API operation for
-// AWS Transfer for SFTP.
+// AWS Transfer Family.
 //
 // Adds a Secure Shell (SSH) public key to a user account identified by a UserName
-// value assigned to a specific server, identified by ServerId.
+// value assigned to the specific file transfer protocol-enabled server, identified
+// by ServerId.
 //
 // The response returns the UserName value, the ServerId value, and the name
 // of the SshPublicKeyId.

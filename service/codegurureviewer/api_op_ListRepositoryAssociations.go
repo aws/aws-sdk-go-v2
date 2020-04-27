@@ -15,15 +15,14 @@ type ListRepositoryAssociationsInput struct {
 
 	// The maximum number of repository association results returned by ListRepositoryAssociations
 	// in paginated output. When this parameter is used, ListRepositoryAssociations
-	// only returns maxResults results in a single page along with a nextToken response
+	// only returns maxResults results in a single page with a nextToken response
 	// element. The remaining results of the initial request can be seen by sending
 	// another ListRepositoryAssociations request with the returned nextToken value.
-	// This value can be between 1 and 100. If this parameter is not used, then
-	// ListRepositoryAssociations returns up to 100 results and a nextToken value
-	// if applicable.
+	// This value can be between 1 and 25. If this parameter is not used, ListRepositoryAssociations
+	// returns up to 25 results and a nextToken value if applicable.
 	MaxResults *int64 `location:"querystring" locationName:"MaxResults" min:"1" type:"integer"`
 
-	// List of names to use as a filter.
+	// List of repository names to use as a filter.
 	Names []string `location:"querystring" locationName:"Name" min:"1" type:"list"`
 
 	// The nextToken value returned from a previous paginated ListRepositoryAssociations
@@ -31,12 +30,13 @@ type ListRepositoryAssociationsInput struct {
 	// parameter. Pagination continues from the end of the previous results that
 	// returned the nextToken value.
 	//
-	// This token should be treated as an opaque identifier that is only used to
-	// retrieve the next items in a list and not for other programmatic purposes.
+	// Treat this token as an opaque identifier that is only used to retrieve the
+	// next items in a list and not for other programmatic purposes.
 	NextToken *string `location:"querystring" locationName:"NextToken" min:"1" type:"string"`
 
-	// List of owners to use as a filter. For AWS CodeCommit, the owner is the AWS
-	// account id. For GitHub, it is the GitHub account name.
+	// List of owners to use as a filter. For GitHub, this is name of the GitHub
+	// account that was used to associate the repository. For AWS CodeCommit, it
+	// is the name of the CodeCommit account that was used to associate the repository.
 	Owners []string `location:"querystring" locationName:"Owner" min:"1" type:"list"`
 
 	// List of provider types to use as a filter.

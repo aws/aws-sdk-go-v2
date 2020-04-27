@@ -13,40 +13,42 @@ import (
 type CreateUserInput struct {
 	_ struct{} `type:"structure"`
 
-	// The landing directory (folder) for a user when they log in to the server
-	// using their SFTP client.
+	// The landing directory (folder) for a user when they log in to the file transfer
+	// protocol-enabled server using the client.
 	//
-	// An example is <your-Amazon-S3-bucket-name>/home/username.
+	// An example is your-Amazon-S3-bucket-name>/home/username.
 	HomeDirectory *string `type:"string"`
 
-	// Logical directory mappings that specify what S3 paths and keys should be
-	// visible to your user and how you want to make them visible. You will need
+	// Logical directory mappings that specify what Amazon S3 paths and keys should
+	// be visible to your user and how you want to make them visible. You will need
 	// to specify the "Entry" and "Target" pair, where Entry shows how the path
-	// is made visible and Target is the actual S3 path. If you only specify a target,
-	// it will be displayed as is. You will need to also make sure that your AWS
-	// IAM Role provides access to paths in Target. The following is an example.
+	// is made visible and Target is the actual Amazon S3 path. If you only specify
+	// a target, it will be displayed as is. You will need to also make sure that
+	// your AWS IAM Role provides access to paths in Target. The following is an
+	// example.
 	//
 	// '[ "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target":
 	// "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]'
 	//
-	// In most cases, you can use this value instead of the scope down policy to
+	// In most cases, you can use this value instead of the scope-down policy to
 	// lock your user down to the designated home directory ("chroot"). To do this,
 	// you can set Entry to '/' and set Target to the HomeDirectory parameter value.
 	//
-	// If the target of a logical directory entry does not exist in S3, the entry
-	// will be ignored. As a workaround, you can use the S3 api to create 0 byte
-	// objects as place holders for your directory. If using the CLI, use the s3api
-	// call instead of s3 so you can use the put-object operation. For example,
-	// you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/.
-	// Make sure that the end of the key name ends in a / for it to be considered
-	// a folder.
+	// If the target of a logical directory entry does not exist in Amazon S3, the
+	// entry will be ignored. As a workaround, you can use the Amazon S3 api to
+	// create 0 byte objects as place holders for your directory. If using the CLI,
+	// use the s3api call instead of s3 so you can use the put-object operation.
+	// For example, you use the following: aws s3api put-object --bucket bucketname
+	// --key path/to/folder/. Make sure that the end of the key name ends in a '/'
+	// for it to be considered a folder.
 	HomeDirectoryMappings []HomeDirectoryMapEntry `min:"1" type:"list"`
 
 	// The type of landing directory (folder) you want your users' home directory
-	// to be when they log into the SFTP server. If you set it to PATH, the user
-	// will see the absolute Amazon S3 bucket paths as is in their SFTP clients.
-	// If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings
-	// for how you want to make S3 paths visible to your user.
+	// to be when they log into the file transfer protocol-enabled server. If you
+	// set it to PATH, the user will see the absolute Amazon S3 bucket paths as
+	// is in their file transfer protocol clients. If you set it LOGICAL, you will
+	// need to provide mappings in the HomeDirectoryMappings for how you want to
+	// make Amazon S3 paths visible to your users.
 	HomeDirectoryType HomeDirectoryType `type:"string" enum:"true"`
 
 	// A scope-down policy for your user so you can use the same IAM role across
@@ -54,45 +56,45 @@ type CreateUserInput struct {
 	// Amazon S3 bucket. Variables that you can use inside this policy include ${Transfer:UserName},
 	// ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.
 	//
-	// For scope-down policies, AWS Transfer for SFTP stores the policy as a JSON
+	// For scope-down policies, AWS Transfer Family stores the policy as a JSON
 	// blob, instead of the Amazon Resource Name (ARN) of the policy. You save the
 	// policy as a JSON blob and pass it in the Policy argument.
 	//
-	// For an example of a scope-down policy, see "https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down">Creating
-	// a Scope-Down Policy.
+	// For an example of a scope-down policy, see Creating a Scope-Down Policy (https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down).
 	//
-	// For more information, see "https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html"
+	// For more information, see AssumeRole (https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html)
 	// in the AWS Security Token Service API Reference.
 	Policy *string `type:"string"`
 
-	// The IAM role that controls your user's access to your Amazon S3 bucket. The
+	// The IAM role that controls your users' access to your Amazon S3 bucket. The
 	// policies attached to this role will determine the level of access you want
 	// to provide your users when transferring files into and out of your Amazon
 	// S3 bucket or buckets. The IAM role should also contain a trust relationship
-	// that allows the SFTP server to access your resources when servicing your
-	// SFTP user's transfer requests.
+	// that allows the file transfer protocol-enabled server to access your resources
+	// when servicing your users' transfer requests.
 	//
 	// Role is a required field
 	Role *string `min:"20" type:"string" required:"true"`
 
-	// A system-assigned unique identifier for an SFTP server instance. This is
-	// the specific SFTP server that you added your user to.
+	// A system-assigned unique identifier for a file transfer protocol-enabled
+	// server instance. This is the specific server that you added your user to.
 	//
 	// ServerId is a required field
 	ServerId *string `min:"19" type:"string" required:"true"`
 
 	// The public portion of the Secure Shell (SSH) key used to authenticate the
-	// user to the SFTP server.
+	// user to the file transfer protocol-enabled server.
 	SshPublicKeyBody *string `type:"string"`
 
 	// Key-value pairs that can be used to group and search for users. Tags are
 	// metadata attached to users for any purpose.
 	Tags []Tag `min:"1" type:"list"`
 
-	// A unique string that identifies a user and is associated with a server as
-	// specified by the ServerId. This user name must be a minimum of 3 and a maximum
-	// of 32 characters long. The following are valid characters: a-z, A-Z, 0-9,
-	// underscore, and hyphen. The user name can't start with a hyphen.
+	// A unique string that identifies a user and is associated with a file transfer
+	// protocol-enabled server as specified by the ServerId. This user name must
+	// be a minimum of 3 and a maximum of 32 characters long. The following are
+	// valid characters: a-z, A-Z, 0-9, underscore, and hyphen. The user name can't
+	// start with a hyphen.
 	//
 	// UserName is a required field
 	UserName *string `min:"3" type:"string" required:"true"`
@@ -157,12 +159,14 @@ func (s *CreateUserInput) Validate() error {
 type CreateUserOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the SFTP server that the user is attached to.
+	// The ID of the file transfer protocol-enabled server that the user is attached
+	// to.
 	//
 	// ServerId is a required field
 	ServerId *string `min:"19" type:"string" required:"true"`
 
-	// A unique string that identifies a user account associated with an SFTP server.
+	// A unique string that identifies a user account associated with a file transfer
+	// protocol-enabled server.
 	//
 	// UserName is a required field
 	UserName *string `min:"3" type:"string" required:"true"`
@@ -176,15 +180,15 @@ func (s CreateUserOutput) String() string {
 const opCreateUser = "CreateUser"
 
 // CreateUserRequest returns a request value for making API operation for
-// AWS Transfer for SFTP.
+// AWS Transfer Family.
 //
-// Creates a user and associates them with an existing Secure File Transfer
-// Protocol (SFTP) server. You can only create and associate users with SFTP
-// servers that have the IdentityProviderType set to SERVICE_MANAGED. Using
-// parameters for CreateUser, you can specify the user name, set the home directory,
-// store the user's public key, and assign the user's AWS Identity and Access
-// Management (IAM) role. You can also optionally add a scope-down policy, and
-// assign metadata with tags that can be used to group and search for users.
+// Creates a user and associates them with an existing file transfer protocol-enabled
+// server. You can only create and associate users with servers that have the
+// IdentityProviderType set to SERVICE_MANAGED. Using parameters for CreateUser,
+// you can specify the user name, set the home directory, store the user's public
+// key, and assign the user's AWS Identity and Access Management (IAM) role.
+// You can also optionally add a scope-down policy, and assign metadata with
+// tags that can be used to group and search for users.
 //
 //    // Example sending a request using CreateUserRequest.
 //    req := client.CreateUserRequest(params)

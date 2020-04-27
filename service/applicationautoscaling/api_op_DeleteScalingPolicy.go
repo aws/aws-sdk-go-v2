@@ -57,6 +57,9 @@ type DeleteScalingPolicyInput struct {
 	//    name suffix that is not $LATEST. Example: function:my-function:prod or
 	//    function:my-function:1.
 	//
+	//    * Amazon Keyspaces table - The resource type is table and the unique identifier
+	//    is the table name. Example: keyspace/mykeyspace/table/mytable.
+	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
 
@@ -103,13 +106,17 @@ type DeleteScalingPolicyInput struct {
 	//    * lambda:function:ProvisionedConcurrency - The provisioned concurrency
 	//    for a Lambda function.
 	//
+	//    * cassandra:table:ReadCapacityUnits - The provisioned read capacity for
+	//    an Amazon Keyspaces table.
+	//
+	//    * cassandra:table:WriteCapacityUnits - The provisioned write capacity
+	//    for an Amazon Keyspaces table.
+	//
 	// ScalableDimension is a required field
 	ScalableDimension ScalableDimension `type:"string" required:"true" enum:"true"`
 
-	// The namespace of the AWS service that provides the resource or custom-resource
-	// for a resource provided by your own application or service. For more information,
-	// see AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the Amazon Web Services General Reference.
+	// The namespace of the AWS service that provides the resource. For a resource
+	// provided by your own application or service, use custom-resource instead.
 	//
 	// ServiceNamespace is a required field
 	ServiceNamespace ServiceNamespace `type:"string" required:"true" enum:"true"`
@@ -174,8 +181,6 @@ const opDeleteScalingPolicy = "DeleteScalingPolicy"
 // For more information, see Delete a Step Scaling Policy (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html#delete-step-scaling-policy)
 // and Delete a Target Tracking Scaling Policy (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html#delete-target-tracking-policy)
 // in the Application Auto Scaling User Guide.
-//
-// To create a scaling policy or update an existing one, see PutScalingPolicy.
 //
 //    // Example sending a request using DeleteScalingPolicyRequest.
 //    req := client.DeleteScalingPolicyRequest(params)

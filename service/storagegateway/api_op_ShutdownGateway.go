@@ -9,7 +9,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// A JSON object containing the of the gateway to shut down.
+// A JSON object containing the Amazon Resource Name (ARN) of the gateway to
+// shut down.
 type ShutdownGatewayInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +43,8 @@ func (s *ShutdownGatewayInput) Validate() error {
 	return nil
 }
 
-// A JSON object containing the of the gateway that was shut down.
+// A JSON object containing the Amazon Resource Name (ARN) of the gateway that
+// was shut down.
 type ShutdownGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,7 +73,7 @@ const opShutdownGateway = "ShutdownGateway"
 // the gateway component in the VM to avoid unpredictable conditions.
 //
 // After the gateway is shutdown, you cannot call any other API except StartGateway,
-// DescribeGatewayInformation, and ListGateways. For more information, see ActivateGateway.
+// DescribeGatewayInformation and ListGateways. For more information, see ActivateGateway.
 // Your applications cannot read from or write to the gateway's storage volumes,
 // and there are no snapshots taken.
 //

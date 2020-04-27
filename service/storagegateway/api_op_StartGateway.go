@@ -9,7 +9,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// A JSON object containing the of the gateway to start.
+// A JSON object containing the Amazon Resource Name (ARN) of the gateway to
+// start.
 type StartGatewayInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +43,8 @@ func (s *StartGatewayInput) Validate() error {
 	return nil
 }
 
-// A JSON object containing the of the gateway that was restarted.
+// A JSON object containing the Amazon Resource Name (ARN) of the gateway that
+// was restarted.
 type StartGatewayOutput struct {
 	_ struct{} `type:"structure"`
 

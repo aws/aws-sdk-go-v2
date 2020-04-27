@@ -142,6 +142,32 @@ func (enum Duration) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type EndpointTypesElement string
+
+// Enum values for EndpointTypesElement
+const (
+	EndpointTypesElementGcm             EndpointTypesElement = "GCM"
+	EndpointTypesElementApns            EndpointTypesElement = "APNS"
+	EndpointTypesElementApnsSandbox     EndpointTypesElement = "APNS_SANDBOX"
+	EndpointTypesElementApnsVoip        EndpointTypesElement = "APNS_VOIP"
+	EndpointTypesElementApnsVoipSandbox EndpointTypesElement = "APNS_VOIP_SANDBOX"
+	EndpointTypesElementAdm             EndpointTypesElement = "ADM"
+	EndpointTypesElementSms             EndpointTypesElement = "SMS"
+	EndpointTypesElementVoice           EndpointTypesElement = "VOICE"
+	EndpointTypesElementEmail           EndpointTypesElement = "EMAIL"
+	EndpointTypesElementBaidu           EndpointTypesElement = "BAIDU"
+	EndpointTypesElementCustom          EndpointTypesElement = "CUSTOM"
+)
+
+func (enum EndpointTypesElement) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EndpointTypesElement) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FilterType string
 
 // Enum values for FilterType

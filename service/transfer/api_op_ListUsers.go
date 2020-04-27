@@ -20,7 +20,7 @@ type ListUsersInput struct {
 	// to the NextToken parameter to continue listing additional users.
 	NextToken *string `min:"1" type:"string"`
 
-	// A system-assigned unique identifier for a Secure File Transfer Protocol (SFTP)
+	// A system-assigned unique identifier for a file transfer protocol-enabled
 	// server that has users assigned to it.
 	//
 	// ServerId is a required field
@@ -63,8 +63,8 @@ type ListUsersOutput struct {
 	// to the NextToken parameter to continue listing additional users.
 	NextToken *string `min:"1" type:"string"`
 
-	// A system-assigned unique identifier for an SFTP server that the users are
-	// assigned to.
+	// A system-assigned unique identifier for a file transfer protocol-enabled
+	// server that the users are assigned to.
 	//
 	// ServerId is a required field
 	ServerId *string `min:"19" type:"string" required:"true"`
@@ -84,9 +84,10 @@ func (s ListUsersOutput) String() string {
 const opListUsers = "ListUsers"
 
 // ListUsersRequest returns a request value for making API operation for
-// AWS Transfer for SFTP.
+// AWS Transfer Family.
 //
-// Lists the users for the server that you specify by passing the ServerId parameter.
+// Lists the users for a file transfer protocol-enabled server that you specify
+// by passing the ServerId parameter.
 //
 //    // Example sending a request using ListUsersRequest.
 //    req := client.ListUsersRequest(params)

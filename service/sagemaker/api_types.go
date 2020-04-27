@@ -7655,15 +7655,17 @@ func (s *ResourceLimits) Validate() error {
 	return nil
 }
 
-// The instance type and quantity.
+// The instance type and the Amazon Resource Name (ARN) of the image created
+// on the instance. The ARN is stored as metadata in Amazon SageMaker Studio
+// notebooks.
 type ResourceSpec struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the environment.
-	EnvironmentArn *string `type:"string"`
-
 	// The instance type.
 	InstanceType AppInstanceType `type:"string" enum:"true"`
+
+	// The Amazon Resource Name (ARN) of the image created on the instance.
+	SageMakerImageArn *string `type:"string"`
 }
 
 // String returns the string representation

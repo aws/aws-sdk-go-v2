@@ -14,7 +14,8 @@ import (
 type StopServerInput struct {
 	_ struct{} `type:"structure"`
 
-	// A system-assigned unique identifier for an SFTP server that you stopped.
+	// A system-assigned unique identifier for a file transfer protocol-enabled
+	// server that you stopped.
 	//
 	// ServerId is a required field
 	ServerId *string `min:"19" type:"string" required:"true"`
@@ -54,13 +55,13 @@ func (s StopServerOutput) String() string {
 const opStopServer = "StopServer"
 
 // StopServerRequest returns a request value for making API operation for
-// AWS Transfer for SFTP.
+// AWS Transfer Family.
 //
-// Changes the state of an SFTP server from ONLINE to OFFLINE. An OFFLINE server
-// cannot accept and process file transfer jobs. Information tied to your server
-// such as server and user properties are not affected by stopping your server.
-// Stopping a server will not reduce or impact your Secure File Transfer Protocol
-// (SFTP) endpoint billing.
+// Changes the state of a file transfer protocol-enabled server from ONLINE
+// to OFFLINE. An OFFLINE server cannot accept and process file transfer jobs.
+// Information tied to your server, such as server and user properties, are
+// not affected by stopping your server. Stopping the server will not reduce
+// or impact your file transfer protocol endpoint billing.
 //
 // The state of STOPPING indicates that the server is in an intermediate state,
 // either not fully able to respond, or not fully offline. The values of STOP_FAILED

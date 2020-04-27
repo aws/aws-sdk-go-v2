@@ -56,7 +56,8 @@ type AnalyzedResource struct {
 	// ResourceType is a required field
 	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true" enum:"true"`
 
-	// Indicates how the access that generated the finding is granted.
+	// Indicates how the access that generated the finding is granted. This is populated
+	// for Amazon S3 bucket findings.
 	SharedVia []string `locationName:"sharedVia" type:"list"`
 
 	// The current status of the finding generated from the analyzed resource.
@@ -537,6 +538,10 @@ type Finding struct {
 	// ResourceType is a required field
 	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true" enum:"true"`
 
+	// The sources of the finding. This indicates how the access that generated
+	// the finding is granted. It is populated for Amazon S3 bucket findings.
+	Sources []FindingSource `locationName:"sources" type:"list"`
+
 	// The current status of the finding.
 	//
 	// Status is a required field
@@ -641,6 +646,18 @@ func (s Finding) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.Sources != nil {
+		v := s.Sources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "sources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
@@ -653,6 +670,68 @@ func (s Finding) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "updatedAt",
 			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	return nil
+}
+
+// The source of the finding. This indicates how the access that generated the
+// finding is granted. It is populated for Amazon S3 bucket findings.
+type FindingSource struct {
+	_ struct{} `type:"structure"`
+
+	// Includes details about how the access that generated the finding is granted.
+	// This is populated for Amazon S3 bucket findings.
+	Detail *FindingSourceDetail `locationName:"detail" type:"structure"`
+
+	// Indicates the type of access that generated the finding.
+	//
+	// Type is a required field
+	Type FindingSourceType `locationName:"type" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s FindingSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FindingSource) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Detail != nil {
+		v := s.Detail
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "detail", v, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Includes details about how the access that generated the finding is granted.
+// This is populated for Amazon S3 bucket findings.
+type FindingSourceDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the access point that generated the finding.
+	AccessPointArn *string `locationName:"accessPointArn" type:"string"`
+}
+
+// String returns the string representation
+func (s FindingSourceDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FindingSourceDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccessPointArn != nil {
+		v := *s.AccessPointArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "accessPointArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -708,6 +787,10 @@ type FindingSummary struct {
 	//
 	// ResourceType is a required field
 	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true" enum:"true"`
+
+	// The sources of the finding. This indicates how the access that generated
+	// the finding is granted. It is populated for Amazon S3 bucket findings.
+	Sources []FindingSource `locationName:"sources" type:"list"`
 
 	// The status of the finding.
 	//
@@ -812,6 +895,18 @@ func (s FindingSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Sources != nil {
+		v := s.Sources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "sources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if len(s.Status) > 0 {
 		v := s.Status

@@ -97,7 +97,7 @@ const opUntagResource = "UntagResource"
 // UntagResourceRequest returns a request value for making API operation for
 // Amazon Elastic  Inference.
 //
-// Removes the specified tag(s) from an Elastic Inference Accelerator.
+// Removes the specified tags from an Elastic Inference Accelerator.
 //
 //    // Example sending a request using UntagResourceRequest.
 //    req := client.UntagResourceRequest(params)

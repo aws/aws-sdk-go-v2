@@ -44,7 +44,7 @@ func (s *DescribeCacheInput) Validate() error {
 type DescribeCacheOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The amount of cache in bytes allocated to the a gateway.
+	// The amount of cache in bytes allocated to a gateway.
 	CacheAllocatedInBytes *int64 `type:"long"`
 
 	// The file share's contribution to the overall percentage of the gateway's
@@ -66,7 +66,7 @@ type DescribeCacheOutput struct {
 	CacheUsedPercentage *float64 `type:"double"`
 
 	// An array of strings that identify disks that are to be configured as working
-	// storage. Each string have a minimum length of 1 and maximum length of 300.
+	// storage. Each string has a minimum length of 1 and maximum length of 300.
 	// You can get the disk IDs from the ListLocalDisks API.
 	DiskIds []string `type:"list"`
 
@@ -86,7 +86,7 @@ const opDescribeCache = "DescribeCache"
 // AWS Storage Gateway.
 //
 // Returns information about the cache of a gateway. This operation is only
-// supported in the cached volume, tape and file gateway types.
+// supported in the cached volume, tape, and file gateway types.
 //
 // The response includes disk IDs that are configured as cache, and it includes
 // the amount of cache allocated and used.

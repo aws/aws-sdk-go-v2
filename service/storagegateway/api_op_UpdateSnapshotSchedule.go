@@ -96,7 +96,8 @@ func (s *UpdateSnapshotScheduleInput) Validate() error {
 	return nil
 }
 
-// A JSON object containing the of the updated storage volume.
+// A JSON object containing the Amazon Resource Name (ARN) of the updated storage
+// volume.
 type UpdateSnapshotScheduleOutput struct {
 	_ struct{} `type:"structure"`
 

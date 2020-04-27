@@ -14,7 +14,8 @@ import (
 type StartServerInput struct {
 	_ struct{} `type:"structure"`
 
-	// A system-assigned unique identifier for an SFTP server that you start.
+	// A system-assigned unique identifier for a file transfer protocol-enabled
+	// server that you start.
 	//
 	// ServerId is a required field
 	ServerId *string `min:"19" type:"string" required:"true"`
@@ -54,11 +55,11 @@ func (s StartServerOutput) String() string {
 const opStartServer = "StartServer"
 
 // StartServerRequest returns a request value for making API operation for
-// AWS Transfer for SFTP.
+// AWS Transfer Family.
 //
-// Changes the state of a Secure File Transfer Protocol (SFTP) server from OFFLINE
-// to ONLINE. It has no impact on an SFTP server that is already ONLINE. An
-// ONLINE server can accept and process file transfer jobs.
+// Changes the state of a file transfer protocol-enabled server from OFFLINE
+// to ONLINE. It has no impact on a server that is already ONLINE. An ONLINE
+// server can accept and process file transfer jobs.
 //
 // The state of STARTING indicates that the server is in an intermediate state,
 // either not fully able to respond, or not fully online. The values of START_FAILED

@@ -42,7 +42,8 @@ func (s *DeleteVolumeInput) Validate() error {
 	return nil
 }
 
-// A JSON object containing the of the storage volume that was deleted
+// A JSON object containing the Amazon Resource Name (ARN) of the storage volume
+// that was deleted
 type DeleteVolumeOutput struct {
 	_ struct{} `type:"structure"`
 

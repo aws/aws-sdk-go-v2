@@ -12,13 +12,25 @@ import (
 type TestIdentityProviderInput struct {
 	_ struct{} `type:"structure"`
 
-	// A system-assigned identifier for a specific server. That server's user authentication
-	// method is tested with a user name and password.
+	// A system-assigned identifier for a specific file transfer protocol-enabled
+	// server. That server's user authentication method is tested with a user name
+	// and password.
 	//
 	// ServerId is a required field
 	ServerId *string `min:"19" type:"string" required:"true"`
 
-	// This request parameter is the name of the user account to be tested.
+	// The type of file transfer protocol to be tested.
+	//
+	// The available protocols are:
+	//
+	//    * Secure Shell (SSH) File Transfer Protocol (SFTP)
+	//
+	//    * File Transfer Protocol Secure (FTPS)
+	//
+	//    * File Transfer Protocol (FTP)
+	ServerProtocol Protocol `type:"string" enum:"true"`
+
+	// The name of the user account to be tested.
 	//
 	// UserName is a required field
 	UserName *string `min:"3" type:"string" required:"true"`
@@ -84,13 +96,14 @@ func (s TestIdentityProviderOutput) String() string {
 const opTestIdentityProvider = "TestIdentityProvider"
 
 // TestIdentityProviderRequest returns a request value for making API operation for
-// AWS Transfer for SFTP.
+// AWS Transfer Family.
 //
-// If the IdentityProviderType of the server is API_Gateway, tests whether your
-// API Gateway is set up successfully. We highly recommend that you call this
-// operation to test your authentication method as soon as you create your server.
-// By doing so, you can troubleshoot issues with the API Gateway integration
-// to ensure that your users can successfully use the service.
+// If the IdentityProviderType of a file transfer protocol-enabled server is
+// API_Gateway, tests whether your API Gateway is set up successfully. We highly
+// recommend that you call this operation to test your authentication method
+// as soon as you create your server. By doing so, you can troubleshoot issues
+// with the API Gateway integration to ensure that your users can successfully
+// use the service.
 //
 //    // Example sending a request using TestIdentityProviderRequest.
 //    req := client.TestIdentityProviderRequest(params)

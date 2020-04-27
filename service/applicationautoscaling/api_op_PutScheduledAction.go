@@ -13,7 +13,7 @@ import (
 type PutScheduledActionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The date and time for the scheduled action to end.
+	// The date and time for the recurring schedule to end.
 	EndTime *time.Time `type:"timestamp"`
 
 	// The identifier of the resource associated with the scheduled action. This
@@ -55,6 +55,9 @@ type PutScheduledActionInput struct {
 	//    unique identifier is the function name with a function version or alias
 	//    name suffix that is not $LATEST. Example: function:my-function:prod or
 	//    function:my-function:1.
+	//
+	//    * Amazon Keyspaces table - The resource type is table and the unique identifier
+	//    is the table name. Example: keyspace/mykeyspace/table/mytable.
 	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
@@ -102,11 +105,17 @@ type PutScheduledActionInput struct {
 	//    * lambda:function:ProvisionedConcurrency - The provisioned concurrency
 	//    for a Lambda function.
 	//
+	//    * cassandra:table:ReadCapacityUnits - The provisioned read capacity for
+	//    an Amazon Keyspaces table.
+	//
+	//    * cassandra:table:WriteCapacityUnits - The provisioned write capacity
+	//    for an Amazon Keyspaces table.
+	//
 	// ScalableDimension is a required field
 	ScalableDimension ScalableDimension `type:"string" required:"true" enum:"true"`
 
 	// The new minimum and maximum capacity. You can set both values or just one.
-	// During the scheduled time, if the current capacity is below the minimum capacity,
+	// At the scheduled time, if the current capacity is below the minimum capacity,
 	// Application Auto Scaling scales out to the minimum capacity. If the current
 	// capacity is above the maximum capacity, Application Auto Scaling scales in
 	// to the maximum capacity.
@@ -120,29 +129,31 @@ type PutScheduledActionInput struct {
 	//
 	//    * Cron expressions - "cron(fields)"
 	//
-	// At expressions are useful for one-time schedules. Specify the time, in UTC.
+	// At expressions are useful for one-time schedules. Specify the time in UTC.
 	//
 	// For rate expressions, value is a positive integer and unit is minute | minutes
 	// | hour | hours | day | days.
 	//
 	// For more information about cron expressions, see Cron Expressions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
 	// in the Amazon CloudWatch Events User Guide.
+	//
+	// For examples of using these expressions, see Scheduled Scaling (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html)
+	// in the Application Auto Scaling User Guide.
 	Schedule *string `min:"1" type:"string"`
 
-	// The name of the scheduled action.
+	// The name of the scheduled action. This name must be unique among all other
+	// scheduled actions on the specified scalable target.
 	//
 	// ScheduledActionName is a required field
 	ScheduledActionName *string `min:"1" type:"string" required:"true"`
 
-	// The namespace of the AWS service that provides the resource or custom-resource
-	// for a resource provided by your own application or service. For more information,
-	// see AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the Amazon Web Services General Reference.
+	// The namespace of the AWS service that provides the resource. For a resource
+	// provided by your own application or service, use custom-resource instead.
 	//
 	// ServiceNamespace is a required field
 	ServiceNamespace ServiceNamespace `type:"string" required:"true" enum:"true"`
 
-	// The date and time for the scheduled action to start.
+	// The date and time for this scheduled action to start.
 	StartTime *time.Time `type:"timestamp"`
 }
 
@@ -204,18 +215,21 @@ const opPutScheduledAction = "PutScheduledAction"
 // Each scalable target is identified by a service namespace, resource ID, and
 // scalable dimension. A scheduled action applies to the scalable target identified
 // by those three attributes. You cannot create a scheduled action until you
-// have registered the resource as a scalable target using RegisterScalableTarget.
+// have registered the resource as a scalable target.
 //
-// To update an action, specify its name and the parameters that you want to
-// change. If you don't specify start and end times, the old values are deleted.
-// Any other parameters that you don't specify are not changed by this update
-// request.
+// When start and end times are specified with a recurring schedule using a
+// cron expression or rates, they form the boundaries of when the recurring
+// action starts and stops.
 //
-// You can view the scheduled actions using DescribeScheduledActions. If you
-// are no longer using a scheduled action, you can delete it using DeleteScheduledAction.
+// To update a scheduled action, specify the parameters that you want to change.
+// If you don't specify start and end times, the old values are deleted.
 //
-// Learn more about how to work with scheduled actions in the Application Auto
-// Scaling User Guide (https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html).
+// For more information, see Scheduled Scaling (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html)
+// in the Application Auto Scaling User Guide.
+//
+// If a scalable target is deregistered, the scalable target is no longer available
+// to run scheduled actions. Any scheduled actions that were specified for the
+// scalable target are deleted.
 //
 //    // Example sending a request using PutScheduledActionRequest.
 //    req := client.PutScheduledActionRequest(params)

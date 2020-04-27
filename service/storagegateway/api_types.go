@@ -12,6 +12,105 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Information about the gateway's automatic tape creation policies, including
+// the automatic tape creation rules and the gateway that is using the policies.
+type AutomaticTapeCreationPolicyInfo struct {
+	_ struct{} `type:"structure"`
+
+	// An automatic tape creation policy consists of a list of automatic tape creation
+	// rules. This returns the rules that determine when and how to automatically
+	// create new tapes.
+	AutomaticTapeCreationRules []AutomaticTapeCreationRule `min:"1" type:"list"`
+
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and AWS Region.
+	GatewayARN *string `min:"50" type:"string"`
+}
+
+// String returns the string representation
+func (s AutomaticTapeCreationPolicyInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// An automatic tape creation policy consists of automatic tape creation rules
+// where each rule defines when and how to create new tapes.
+type AutomaticTapeCreationRule struct {
+	_ struct{} `type:"structure"`
+
+	// The minimum number of available virtual tapes that the gateway maintains
+	// at all times. If the number of tapes on the gateway goes below this value,
+	// the gateway creates as many new tapes as are needed to have MinimumNumTapes
+	// on the gateway.
+	//
+	// MinimumNumTapes is a required field
+	MinimumNumTapes *int64 `min:"1" type:"integer" required:"true"`
+
+	// The ID of the pool that you want to add your tape to for archiving. The tape
+	// in this pool is archived in the Amazon S3 storage class that is associated
+	// with the pool. When you use your backup application to eject the tape, the
+	// tape is archived directly into the storage class (S3 Glacier or S3 Glacier
+	// Deep Archive) that corresponds to the pool.
+	//
+	// Valid values: "GLACIER", "DEEP_ARCHIVE"
+	//
+	// PoolId is a required field
+	PoolId *string `min:"1" type:"string" required:"true"`
+
+	// A prefix that you append to the barcode of the virtual tape that you are
+	// creating. This prefix makes the barcode unique.
+	//
+	// The prefix must be 1-4 characters in length and must be one of the uppercase
+	// letters from A to Z.
+	//
+	// TapeBarcodePrefix is a required field
+	TapeBarcodePrefix *string `min:"1" type:"string" required:"true"`
+
+	// The size, in bytes, of the virtual tape capacity.
+	//
+	// TapeSizeInBytes is a required field
+	TapeSizeInBytes *int64 `type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s AutomaticTapeCreationRule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AutomaticTapeCreationRule) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AutomaticTapeCreationRule"}
+
+	if s.MinimumNumTapes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MinimumNumTapes"))
+	}
+	if s.MinimumNumTapes != nil && *s.MinimumNumTapes < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MinimumNumTapes", 1))
+	}
+
+	if s.PoolId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PoolId"))
+	}
+	if s.PoolId != nil && len(*s.PoolId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("PoolId", 1))
+	}
+
+	if s.TapeBarcodePrefix == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TapeBarcodePrefix"))
+	}
+	if s.TapeBarcodePrefix != nil && len(*s.TapeBarcodePrefix) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TapeBarcodePrefix", 1))
+	}
+
+	if s.TapeSizeInBytes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TapeSizeInBytes"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Describes an iSCSI cached volume.
 type CachediSCSIVolume struct {
 	_ struct{} `type:"structure"`
@@ -20,8 +119,8 @@ type CachediSCSIVolume struct {
 	// don’t have this time stamp.
 	CreatedDate *time.Time `type:"timestamp"`
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
-	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side
+	// encryption. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string `min:"7" type:"string"`
 
 	// If the cached volume was created from a snapshot, this field contains the
@@ -317,12 +416,12 @@ type NFSFileShareInfo struct {
 	// and otherwise to false. The default value is true.
 	GuessMIMETypeEnabled *bool `type:"boolean"`
 
-	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
+	// True to use Amazon S3 server-side encryption with your own AWS KMS key, or
 	// false to use a key managed by Amazon S3. Optional.
 	KMSEncrypted *bool `type:"boolean"`
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
-	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side
+	// encryption. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string `min:"7" type:"string"`
 
 	// The ARN of the backend storage used for storing file data.
@@ -455,8 +554,8 @@ type SMBFileShareInfo struct {
 	// false to use a key managed by Amazon S3. Optional.
 	KMSEncrypted *bool `type:"boolean"`
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
-	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side
+	// encryption. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string `min:"7" type:"string"`
 
 	// The ARN of the backend storage used for storing file data.
@@ -511,9 +610,9 @@ func (s SMBFileShareInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Provides additional information about an error that was returned by the service
-// as an or. See the errorCode and errorDetails members for more information
-// about the error.
+// Provides additional information about an error that was returned by the service.
+// See the errorCode and errorDetails members for more information about the
+// error.
 type StorageGatewayError struct {
 	_ struct{} `type:"structure"`
 
@@ -537,8 +636,8 @@ type StorediSCSIVolume struct {
 	// don’t have this time stamp.
 	CreatedDate *time.Time `type:"timestamp"`
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
-	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side
+	// encryption. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string `min:"7" type:"string"`
 
 	// Indicates if when the stored volume was created, existing data on the underlying
@@ -657,15 +756,15 @@ func (s *Tag) Validate() error {
 type Tape struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
-	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side
+	// encryption. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string `min:"7" type:"string"`
 
 	// The ID of the pool that contains tapes that will be archived. The tapes in
 	// this pool are archived in the S3 storage class that is associated with the
 	// pool. When you use your backup application to eject the tape, the tape is
-	// archived directly into the storage class (Glacier or Deep Archive) that corresponds
-	// to the pool.
+	// archived directly into the storage class (S3 Glacier or S# Glacier Deep Archive)
+	// that corresponds to the pool.
 	//
 	// Valid values: "GLACIER", "DEEP_ARCHIVE"
 	PoolId *string `min:"1" type:"string"`
@@ -716,8 +815,8 @@ type TapeArchive struct {
 	// format.
 	CompletionTime *time.Time `type:"timestamp"`
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
-	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side
+	// encryption. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string `min:"7" type:"string"`
 
 	// The ID of the pool that was used to archive the tape. The tapes in this pool
@@ -769,8 +868,8 @@ type TapeInfo struct {
 	// The ID of the pool that you want to add your tape to for archiving. The tape
 	// in this pool is archived in the S3 storage class that is associated with
 	// the pool. When you use your backup application to eject the tape, the tape
-	// is archived directly into the storage class (Glacier or Deep Archive) that
-	// corresponds to the pool.
+	// is archived directly into the storage class (S3 Glacier or S3 Glacier Deep
+	// Archive) that corresponds to the pool.
 	//
 	// Valid values: "GLACIER", "DEEP_ARCHIVE"
 	PoolId *string `min:"1" type:"string"`

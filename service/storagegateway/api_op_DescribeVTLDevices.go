@@ -78,7 +78,7 @@ type DescribeVTLDevicesOutput struct {
 	// to describe, this field does not appear in the response.
 	Marker *string `min:"1" type:"string"`
 
-	// An array of VTL device objects composed of the Amazon Resource Name(ARN)
+	// An array of VTL device objects composed of the Amazon Resource Name (ARN)
 	// of the VTL devices.
 	VTLDevices []VTLDevice `type:"list"`
 }

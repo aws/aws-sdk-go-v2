@@ -67,7 +67,7 @@ type ModifyReplicationTaskInput struct {
 	//    * Cannot end with a hyphen or contain two consecutive hyphens.
 	ReplicationTaskIdentifier *string `type:"string"`
 
-	// JSON file that contains settings for the task, such as target metadata settings.
+	// JSON file that contains settings for the task, such as task metadata settings.
 	ReplicationTaskSettings *string `type:"string"`
 
 	// When using the AWS CLI or boto3, provide the path of the JSON file that contains
@@ -75,6 +75,12 @@ type ModifyReplicationTaskInput struct {
 	// DMS API, provide the JSON as the parameter value, for example: --table-mappings
 	// file://mappingfile.json
 	TableMappings *string `type:"string"`
+
+	// Supplemental information that the task requires to migrate the data for certain
+	// source and target endpoints. For more information, see Specifying Supplemental
+	// Data for Task Settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html)
+	// in the AWS Database Migration User Guide.
+	TaskData *string `type:"string"`
 }
 
 // String returns the string representation

@@ -36,9 +36,11 @@ type ListResourcesInput struct {
 
 	// The resource type.
 	//
-	// Valid values: ec2:CapacityReservation | ec2:Subnet | ec2:TrafficMirrorTarget
-	// | ec2:TransitGateway | license-manager:LicenseConfiguration | rds:Cluster
-	// | route53resolver:ResolverRule | resource-groups:Group
+	// Valid values: codebuild:Project | codebuild:ReportGroup | ec2:CapacityReservation
+	// | ec2:DedicatedHost | ec2:Subnet | ec2:TrafficMirrorTarget | ec2:TransitGateway
+	// | imagebuilder:Component | imagebuilder:Image | imagebuilder:ImageRecipe
+	// | license-manager:LicenseConfiguration I resource-groups:Group | rds:Cluster
+	// | route53resolver:ResolverRule
 	ResourceType *string `locationName:"resourceType" type:"string"`
 }
 

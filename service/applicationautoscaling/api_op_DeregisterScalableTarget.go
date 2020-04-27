@@ -52,6 +52,9 @@ type DeregisterScalableTargetInput struct {
 	//    name suffix that is not $LATEST. Example: function:my-function:prod or
 	//    function:my-function:1.
 	//
+	//    * Amazon Keyspaces table - The resource type is table and the unique identifier
+	//    is the table name. Example: keyspace/mykeyspace/table/mytable.
+	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
 
@@ -98,13 +101,17 @@ type DeregisterScalableTargetInput struct {
 	//    * lambda:function:ProvisionedConcurrency - The provisioned concurrency
 	//    for a Lambda function.
 	//
+	//    * cassandra:table:ReadCapacityUnits - The provisioned read capacity for
+	//    an Amazon Keyspaces table.
+	//
+	//    * cassandra:table:WriteCapacityUnits - The provisioned write capacity
+	//    for an Amazon Keyspaces table.
+	//
 	// ScalableDimension is a required field
 	ScalableDimension ScalableDimension `type:"string" required:"true" enum:"true"`
 
-	// The namespace of the AWS service that provides the resource or custom-resource
-	// for a resource provided by your own application or service. For more information,
-	// see AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the Amazon Web Services General Reference.
+	// The namespace of the AWS service that provides the resource. For a resource
+	// provided by your own application or service, use custom-resource instead.
 	//
 	// ServiceNamespace is a required field
 	ServiceNamespace ServiceNamespace `type:"string" required:"true" enum:"true"`
@@ -152,12 +159,12 @@ const opDeregisterScalableTarget = "DeregisterScalableTarget"
 // DeregisterScalableTargetRequest returns a request value for making API operation for
 // Application Auto Scaling.
 //
-// Deregisters an Application Auto Scaling scalable target.
+// Deregisters an Application Auto Scaling scalable target when you have finished
+// using it. To see which resources have been registered, use DescribeScalableTargets
+// (https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html).
 //
-// Deregistering a scalable target deletes the scaling policies that are associated
-// with it.
-//
-// To create a scalable target or update an existing one, see RegisterScalableTarget.
+// Deregistering a scalable target deletes the scaling policies and the scheduled
+// actions that are associated with it.
 //
 //    // Example sending a request using DeregisterScalableTargetRequest.
 //    req := client.DeregisterScalableTargetRequest(params)

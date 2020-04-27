@@ -2247,7 +2247,7 @@ type ApplicationDateRangeKpiResponse struct {
 	// that the data was retrieved for. This value describes the associated metric
 	// and consists of two or more terms, which are comprised of lowercase alphanumeric
 	// characters, separated by a hyphen. For a list of possible values, see the
-	// Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html).
+	// Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html).
 	//
 	// KpiName is a required field
 	KpiName *string `type:"string" required:"true"`
@@ -2393,15 +2393,16 @@ type ApplicationSettingsResource struct {
 	// ApplicationId is a required field
 	ApplicationId *string `type:"string" required:"true"`
 
-	// The settings for the AWS Lambda function to use by default as a code hook
-	// for campaigns in the application.
+	// The settings for the AWS Lambda function to invoke by default as a code hook
+	// for campaigns in the application. You can use this hook to customize segments
+	// that are used by campaigns in the application.
 	CampaignHook *CampaignHook `type:"structure"`
 
 	// The date and time, in ISO 8601 format, when the application's settings were
 	// last modified.
 	LastModifiedDate *string `type:"string"`
 
-	// The default sending limits for campaigns in the application.
+	// The default sending limits for campaigns and journeys in the application.
 	Limits *CampaignLimits `type:"structure"`
 
 	// The default quiet time for campaigns and journeys in the application. Quiet
@@ -3035,6 +3036,32 @@ func (s BaseKpiResult) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the contents of a message that's sent through a custom channel
+// to recipients of a campaign.
+type CampaignCustomMessage struct {
+	_ struct{} `type:"structure"`
+
+	// The raw, JSON-formatted string to use as the payload for the message. The
+	// maximum size is 5 KB.
+	Data *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CampaignCustomMessage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CampaignCustomMessage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Data != nil {
+		v := *s.Data
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Data", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Provides the results of a query that retrieved the data for a standard metric
 // that applies to a campaign, and provides information about that query.
 type CampaignDateRangeKpiResponse struct {
@@ -3057,7 +3084,7 @@ type CampaignDateRangeKpiResponse struct {
 	// that the data was retrieved for. This value describes the associated metric
 	// and consists of two or more terms, which are comprised of lowercase alphanumeric
 	// characters, separated by a hyphen. For a list of possible values, see the
-	// Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html).
+	// Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html).
 	//
 	// KpiName is a required field
 	KpiName *string `type:"string" required:"true"`
@@ -3247,15 +3274,25 @@ func (s CampaignEventFilter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies the AWS Lambda function to use as a code hook for a campaign.
+// Specifies settings for invoking an AWS Lambda function that customizes a
+// segment for a campaign.
 type CampaignHook struct {
 	_ struct{} `type:"structure"`
 
 	// The name or Amazon Resource Name (ARN) of the AWS Lambda function that Amazon
-	// Pinpoint invokes to send messages for a campaign.
+	// Pinpoint invokes to customize a segment for a campaign.
 	LambdaFunctionName *string `type:"string"`
 
-	// Specifies which Lambda mode to use when invoking the AWS Lambda function.
+	// The mode that Amazon Pinpoint uses to invoke the AWS Lambda function. Possible
+	// values are:
+	//
+	//    * FILTER - Invoke the function to customize the segment that's used by
+	//    a campaign.
+	//
+	//    * DELIVERY - (Deprecated) Previously, invoked the function to send a campaign
+	//    through a custom channel. This functionality is not supported anymore.
+	//    To send a campaign through a custom channel, use the CustomDeliveryConfiguration
+	//    and CampaignCustomMessage objects of the campaign.
 	Mode Mode `type:"string" enum:"true"`
 
 	// The web URL that Amazon Pinpoint calls to invoke the AWS Lambda function
@@ -3291,12 +3328,16 @@ func (s CampaignHook) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies limits on the messages that a campaign can send.
+// For a campaign, specifies limits on the messages that the campaign can send.
+// For an application, specifies the default limits for messages that campaigns
+// and journeys in the application can send.
 type CampaignLimits struct {
 	_ struct{} `type:"structure"`
 
 	// The maximum number of messages that a campaign can send to a single endpoint
-	// during a 24-hour period. The maximum value is 100.
+	// during a 24-hour period. For an application, this value specifies the default
+	// limit for the number of messages that campaigns and journeys can send to
+	// a single endpoint during a 24-hour period. The maximum value is 100.
 	Daily *int64 `type:"integer"`
 
 	// The maximum amount of time, in seconds, that a campaign can attempt to deliver
@@ -3304,12 +3345,15 @@ type CampaignLimits struct {
 	// is 60 seconds.
 	MaximumDuration *int64 `type:"integer"`
 
-	// The maximum number of messages that a campaign can send each second. The
-	// minimum value is 50. The maximum value is 20,000.
+	// The maximum number of messages that a campaign can send each second. For
+	// an application, this value specifies the default limit for the number of
+	// messages that campaigns and journeys can send each second. The minimum value
+	// is 50. The maximum value is 20,000.
 	MessagesPerSecond *int64 `type:"integer"`
 
 	// The maximum number of messages that a campaign can send to a single endpoint
-	// during the course of the campaign. The maximum value is 100.
+	// during the course of the campaign. If a campaign recurs, this setting applies
+	// to all runs of the campaign. The maximum value is 100.
 	Total *int64 `type:"integer"`
 }
 
@@ -3371,8 +3415,12 @@ type CampaignResponse struct {
 	// CreationDate is a required field
 	CreationDate *string `type:"string" required:"true"`
 
+	// The delivery configuration settings for sending the campaign through a custom
+	// channel.
+	CustomDeliveryConfiguration *CustomDeliveryConfiguration `type:"structure"`
+
 	// The current status of the campaign's default treatment. This value exists
-	// only for campaigns that have more than one treatment, to support A/B testing.
+	// only for campaigns that have more than one treatment.
 	DefaultState *CampaignState `type:"structure"`
 
 	// The custom description of the campaign.
@@ -3383,6 +3431,7 @@ type CampaignResponse struct {
 	HoldoutPercent *int64 `type:"integer"`
 
 	// The settings for the AWS Lambda function to use as a code hook for the campaign.
+	// You can use this hook to customize the segment that's used by the campaign.
 	Hook *CampaignHook `type:"structure"`
 
 	// The unique identifier for the campaign.
@@ -3432,11 +3481,12 @@ type CampaignResponse struct {
 	// The message template that’s used for the campaign.
 	TemplateConfiguration *TemplateConfiguration `type:"structure"`
 
-	// The custom description of a variation of the campaign that's used for A/B
-	// testing.
+	// The custom description of the default treatment for the campaign.
 	TreatmentDescription *string `type:"string"`
 
-	// The custom name of a variation of the campaign that's used for A/B testing.
+	// The custom name of the default treatment for the campaign, if the campaign
+	// has multiple treatments. A treatment is a variation of a campaign that's
+	// used for A/B testing.
 	TreatmentName *string `type:"string"`
 
 	// The version number of the campaign.
@@ -3479,6 +3529,12 @@ func (s CampaignResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CustomDeliveryConfiguration != nil {
+		v := s.CustomDeliveryConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CustomDeliveryConfiguration", v, metadata)
 	}
 	if s.DefaultState != nil {
 		v := s.DefaultState
@@ -3655,9 +3711,12 @@ type CampaignState struct {
 	_ struct{} `type:"structure"`
 
 	// The current status of the campaign, or the current status of a treatment
-	// that belongs to an A/B test campaign. If a campaign uses A/B testing, the
-	// campaign has a status of COMPLETED only if all campaign treatments have a
-	// status of COMPLETED.
+	// that belongs to an A/B test campaign.
+	//
+	// If a campaign uses A/B testing, the campaign has a status of COMPLETED only
+	// if all campaign treatments have a status of COMPLETED. If you delete the
+	// segment that's associated with a campaign, the campaign fails and has a status
+	// of DELETED.
 	CampaignStatus CampaignStatus `type:"string" enum:"true"`
 }
 
@@ -4048,14 +4107,15 @@ type CreateRecommenderConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// A map of key-value pairs that defines 1-10 custom endpoint or user attributes,
-	// depending on the value for the RecommenderUserIdType property. Each of these
-	// attributes temporarily stores a recommended item that's retrieved from the
-	// recommender model and sent to an AWS Lambda function for additional processing.
-	// Each attribute can be used as a message variable in a message template.
+	// depending on the value for the RecommendationProviderIdType property. Each
+	// of these attributes temporarily stores a recommended item that's retrieved
+	// from the recommender model and sent to an AWS Lambda function for additional
+	// processing. Each attribute can be used as a message variable in a message
+	// template.
 	//
 	// In the map, the key is the name of a custom attribute and the value is a
 	// custom display name for that attribute. The display name appears in the Attribute
-	// finder pane of the template editor on the Amazon Pinpoint console. The following
+	// finder of the template editor on the Amazon Pinpoint console. The following
 	// restrictions apply to these names:
 	//
 	//    * An attribute name must start with a letter or number and it can contain
@@ -4067,12 +4127,13 @@ type CreateRecommenderConfiguration struct {
 	//    spaces, underscores (_), or hyphens (-).
 	//
 	// This object is required if the configuration invokes an AWS Lambda function
-	// (LambdaFunctionArn) to process recommendation data. Otherwise, don't include
-	// this object in your request.
+	// (RecommendationTransformerUri) to process recommendation data. Otherwise,
+	// don't include this object in your request.
 	Attributes map[string]string `type:"map"`
 
 	// A custom description of the configuration for the recommender model. The
-	// description can contain up to 128 characters.
+	// description can contain up to 128 characters. The characters can be letters,
+	// numbers, spaces, or the following symbols: _ ; () , ‐.
 	Description *string `type:"string"`
 
 	// A custom name of the configuration for the recommender model. The name must
@@ -4092,7 +4153,7 @@ type CreateRecommenderConfiguration struct {
 	//    * PINPOINT_USER_ID - Associate each user in the model with a particular
 	//    user and endpoint in Amazon Pinpoint. The data is correlated based on
 	//    user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition
-	//    in Amazon Pinpoint has to specify a both a user ID (UserId) and an endpoint
+	//    in Amazon Pinpoint has to specify both a user ID (UserId) and an endpoint
 	//    ID. Otherwise, messages won’t be sent to the user's endpoint.
 	RecommendationProviderIdType *string `type:"string"`
 
@@ -4115,26 +4176,26 @@ type CreateRecommenderConfiguration struct {
 	RecommendationTransformerUri *string `type:"string"`
 
 	// A custom display name for the standard endpoint or user attribute (RecommendationItems)
-	// that temporarily stores a recommended item for each endpoint or user, depending
-	// on the value for the RecommenderUserIdType property. This value is required
-	// if the configuration doesn't invoke an AWS Lambda function (LambdaFunctionArn)
+	// that temporarily stores recommended items for each endpoint or user, depending
+	// on the value for the RecommendationProviderIdType property. This value is
+	// required if the configuration doesn't invoke an AWS Lambda function (RecommendationTransformerUri)
 	// to perform additional processing of recommendation data.
 	//
-	// This name appears in the Attribute finder pane of the template editor on
-	// the Amazon Pinpoint console. The name can contain up to 25 characters. The
-	// characters can be letters, numbers, spaces, underscores (_), or hyphens (-).
-	// These restrictions don't apply to attribute values.
+	// This name appears in the Attribute finder of the template editor on the Amazon
+	// Pinpoint console. The name can contain up to 25 characters. The characters
+	// can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions
+	// don't apply to attribute values.
 	RecommendationsDisplayName *string `type:"string"`
 
 	// The number of recommended items to retrieve from the model for each endpoint
-	// or user, depending on the value for the RecommenderUserIdType property. This
-	// number determines how many recommended attributes are available for use as
-	// message variables in message templates. The minimum value is 1. The maximum
-	// value is 5. The default value is 5.
+	// or user, depending on the value for the RecommendationProviderIdType property.
+	// This number determines how many recommended items are available for use in
+	// message variables. The minimum value is 1. The maximum value is 5. The default
+	// value is 5.
 	//
 	// To use multiple recommended items and custom attributes with message variables,
-	// you have to use an AWS Lambda function (LambdaFunctionArn) to perform additional
-	// processing of recommendation data.
+	// you have to use an AWS Lambda function (RecommendationTransformerUri) to
+	// perform additional processing of recommendation data.
 	RecommendationsPerMessage *int64 `type:"integer"`
 }
 
@@ -4265,6 +4326,74 @@ func (s CreateTemplateMessageBody) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "RequestID", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Specifies the delivery configuration settings for sending a campaign or campaign
+// treatment through a custom channel. This object is required if you use the
+// CampaignCustomMessage object to define the message to send for the campaign
+// or campaign treatment.
+type CustomDeliveryConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The destination to send the campaign or treatment to. This value can be one
+	// of the following:
+	//
+	//    * The name or Amazon Resource Name (ARN) of an AWS Lambda function to
+	//    invoke to handle delivery of the campaign or treatment.
+	//
+	//    * The URL for a web application or service that supports HTTPS and can
+	//    receive the message. The URL has to be a full URL, including the HTTPS
+	//    protocol.
+	//
+	// DeliveryUri is a required field
+	DeliveryUri *string `type:"string" required:"true"`
+
+	// The types of endpoints to send the campaign or treatment to. Each valid value
+	// maps to a type of channel that you can associate with an endpoint by using
+	// the ChannelType property of an endpoint.
+	EndpointTypes []EndpointTypesElement `type:"list"`
+}
+
+// String returns the string representation
+func (s CustomDeliveryConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CustomDeliveryConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CustomDeliveryConfiguration"}
+
+	if s.DeliveryUri == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DeliveryUri"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CustomDeliveryConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DeliveryUri != nil {
+		v := *s.DeliveryUri
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeliveryUri", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EndpointTypes != nil {
+		v := s.EndpointTypes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "EndpointTypes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -4624,8 +4753,8 @@ func (s DirectMessageConfiguration) MarshalFields(e protocol.FieldEncoder) error
 type EmailChannelRequest struct {
 	_ struct{} `type:"structure"`
 
-	// The configuration set that you want to apply to email that you send through
-	// the channel by using the Amazon Pinpoint Email API (emailAPIreference.html).
+	// The Amazon SES configuration set (https://docs.aws.amazon.com/ses/latest/APIReference/API_ConfigurationSet.html)
+	// that you want to apply to messages that you send through the channel.
 	ConfigurationSet *string `type:"string"`
 
 	// Specifies whether to enable the email channel for the application.
@@ -4716,8 +4845,8 @@ type EmailChannelResponse struct {
 	// to.
 	ApplicationId *string `type:"string"`
 
-	// The configuration set that's applied to email that's sent through the channel
-	// by using the Amazon Pinpoint Email API (emailAPIreference.html).
+	// The Amazon SES configuration set (https://docs.aws.amazon.com/ses/latest/APIReference/API_ConfigurationSet.html)
+	// that's applied to messages that are sent through the channel.
 	ConfigurationSet *string `type:"string"`
 
 	// The date and time, in ISO 8601 format, when the email channel was enabled.
@@ -4726,7 +4855,7 @@ type EmailChannelResponse struct {
 	// Specifies whether the email channel is enabled for the application.
 	Enabled *bool `type:"boolean"`
 
-	// The verified email address that you send email from when you send email through
+	// The verified email address that email is sent from when you send email through
 	// the channel.
 	FromAddress *string `type:"string"`
 
@@ -4738,8 +4867,7 @@ type EmailChannelResponse struct {
 	Id *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the identity, verified with Amazon Simple
-	// Email Service (Amazon SES), that you use when you send email through the
-	// channel.
+	// Email Service (Amazon SES), that's used when you send email through the channel.
 	Identity *string `type:"string"`
 
 	// Specifies whether the email channel is archived.
@@ -4751,7 +4879,7 @@ type EmailChannelResponse struct {
 	// The date and time, in ISO 8601 format, when the email channel was last modified.
 	LastModifiedDate *string `type:"string"`
 
-	// The maximum number of emails that you can send through the channel each second.
+	// The maximum number of emails that can be sent through the channel each second.
 	MessagesPerSecond *int64 `type:"integer"`
 
 	// The type of messaging or notification platform for the channel. For the email
@@ -5356,8 +5484,8 @@ type EndpointBatchItem struct {
 	// The unique identifier for the request to create or update the endpoint.
 	RequestId *string `type:"string"`
 
-	// One or more custom user attributes that describe the user who's associated
-	// with the endpoint.
+	// One or more custom attributes that describe the user who's associated with
+	// the endpoint.
 	User *EndpointUser `type:"structure"`
 }
 
@@ -5868,8 +5996,8 @@ type EndpointRequest struct {
 	// The unique identifier for the most recent request to update the endpoint.
 	RequestId *string `type:"string"`
 
-	// One or more custom user attributes that describe the user who's associated
-	// with the endpoint.
+	// One or more custom attributes that describe the user who's associated with
+	// the endpoint.
 	User *EndpointUser `type:"structure"`
 }
 
@@ -8371,7 +8499,7 @@ type JourneyDateRangeKpiResponse struct {
 	// that the data was retrieved for. This value describes the associated metric
 	// and consists of two or more terms, which are comprised of lowercase alphanumeric
 	// characters, separated by a hyphen. For a list of possible values, see the
-	// Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html).
+	// Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html).
 	//
 	// KpiName is a required field
 	KpiName *string `type:"string" required:"true"`
@@ -9266,31 +9394,38 @@ type MessageConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// The message that the campaign sends through the ADM (Amazon Device Messaging)
-	// channel. This message overrides the default message.
+	// channel. If specified, this message overrides the default message.
 	ADMMessage *Message `type:"structure"`
 
 	// The message that the campaign sends through the APNs (Apple Push Notification
-	// service) channel. This message overrides the default message.
+	// service) channel. If specified, this message overrides the default message.
 	APNSMessage *Message `type:"structure"`
 
 	// The message that the campaign sends through the Baidu (Baidu Cloud Push)
-	// channel. This message overrides the default message.
+	// channel. If specified, this message overrides the default message.
 	BaiduMessage *Message `type:"structure"`
+
+	// The message that the campaign sends through a custom channel, as specified
+	// by the delivery configuration (CustomDeliveryConfiguration) settings for
+	// the campaign. If specified, this message overrides the default message.
+	CustomMessage *CampaignCustomMessage `type:"structure"`
 
 	// The default message that the campaign sends through all the channels that
 	// are configured for the campaign.
 	DefaultMessage *Message `type:"structure"`
 
-	// The message that the campaign sends through the email channel.
+	// The message that the campaign sends through the email channel. If specified,
+	// this message overrides the default message.
 	EmailMessage *CampaignEmailMessage `type:"structure"`
 
 	// The message that the campaign sends through the GCM channel, which enables
 	// Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging
-	// (FCM), formerly Google Cloud Messaging (GCM), service. This message overrides
-	// the default message.
+	// (FCM), formerly Google Cloud Messaging (GCM), service. If specified, this
+	// message overrides the default message.
 	GCMMessage *Message `type:"structure"`
 
-	// The message that the campaign sends through the SMS channel.
+	// The message that the campaign sends through the SMS channel. If specified,
+	// this message overrides the default message.
 	SMSMessage *CampaignSmsMessage `type:"structure"`
 }
 
@@ -9318,6 +9453,12 @@ func (s MessageConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "BaiduMessage", v, metadata)
+	}
+	if s.CustomMessage != nil {
+		v := s.CustomMessage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CustomMessage", v, metadata)
 	}
 	if s.DefaultMessage != nil {
 		v := s.DefaultMessage
@@ -10638,13 +10779,14 @@ type RecommenderConfigurationResponse struct {
 	_ struct{} `type:"structure"`
 
 	// A map that defines 1-10 custom endpoint or user attributes, depending on
-	// the value for the RecommenderUserIdType property. Each of these attributes
+	// the value for the RecommendationProviderIdType property. Each of these attributes
 	// temporarily stores a recommended item that's retrieved from the recommender
 	// model and sent to an AWS Lambda function for additional processing. Each
 	// attribute can be used as a message variable in a message template.
 	//
 	// This value is null if the configuration doesn't invoke an AWS Lambda function
-	// (LambdaFunctionArn) to perform additional processing of recommendation data.
+	// (RecommendationTransformerUri) to perform additional processing of recommendation
+	// data.
 	Attributes map[string]string `type:"map"`
 
 	// The date, in extended ISO 8601 format, when the configuration was created
@@ -10706,18 +10848,19 @@ type RecommenderConfigurationResponse struct {
 	RecommendationTransformerUri *string `type:"string"`
 
 	// The custom display name for the standard endpoint or user attribute (RecommendationItems)
-	// that temporarily stores a recommended item for each endpoint or user, depending
-	// on the value for the RecommenderUserIdType property. This name appears in
-	// the Attribute finder pane of the template editor on the Amazon Pinpoint console.
+	// that temporarily stores recommended items for each endpoint or user, depending
+	// on the value for the RecommendationProviderIdType property. This name appears
+	// in the Attribute finder of the template editor on the Amazon Pinpoint console.
 	//
 	// This value is null if the configuration doesn't invoke an AWS Lambda function
-	// (LambdaFunctionArn) to perform additional processing of recommendation data.
+	// (RecommendationTransformerUri) to perform additional processing of recommendation
+	// data.
 	RecommendationsDisplayName *string `type:"string"`
 
 	// The number of recommended items that are retrieved from the model for each
-	// endpoint or user, depending on the value for the RecommenderUserIdType property.
-	// This number determines how many recommended attributes are available for
-	// use as message variables in message templates.
+	// endpoint or user, depending on the value for the RecommendationProviderIdType
+	// property. This number determines how many recommended items are available
+	// for use in message variables.
 	RecommendationsPerMessage *int64 `type:"integer"`
 }
 
@@ -13428,6 +13571,11 @@ func (s TemplatesResponse) MarshalFields(e protocol.FieldEncoder) error {
 type TreatmentResource struct {
 	_ struct{} `type:"structure"`
 
+	// The delivery configuration settings for sending the treatment through a custom
+	// channel. This object is required if the MessageConfiguration object for the
+	// treatment specifies a CustomMessage object.
+	CustomDeliveryConfiguration *CustomDeliveryConfiguration `type:"structure"`
+
 	// The unique identifier for the treatment.
 	//
 	// Id is a required field
@@ -13454,8 +13602,7 @@ type TreatmentResource struct {
 	// The custom description of the treatment.
 	TreatmentDescription *string `type:"string"`
 
-	// The custom name of the treatment. A treatment is a variation of a campaign
-	// that's used for A/B testing of a campaign.
+	// The custom name of the treatment.
 	TreatmentName *string `type:"string"`
 }
 
@@ -13466,6 +13613,12 @@ func (s TreatmentResource) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s TreatmentResource) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CustomDeliveryConfiguration != nil {
+		v := s.CustomDeliveryConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CustomDeliveryConfiguration", v, metadata)
+	}
 	if s.Id != nil {
 		v := *s.Id
 
@@ -13557,14 +13710,15 @@ type UpdateRecommenderConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// A map of key-value pairs that defines 1-10 custom endpoint or user attributes,
-	// depending on the value for the RecommenderUserIdType property. Each of these
-	// attributes temporarily stores a recommended item that's retrieved from the
-	// recommender model and sent to an AWS Lambda function for additional processing.
-	// Each attribute can be used as a message variable in a message template.
+	// depending on the value for the RecommendationProviderIdType property. Each
+	// of these attributes temporarily stores a recommended item that's retrieved
+	// from the recommender model and sent to an AWS Lambda function for additional
+	// processing. Each attribute can be used as a message variable in a message
+	// template.
 	//
 	// In the map, the key is the name of a custom attribute and the value is a
 	// custom display name for that attribute. The display name appears in the Attribute
-	// finder pane of the template editor on the Amazon Pinpoint console. The following
+	// finder of the template editor on the Amazon Pinpoint console. The following
 	// restrictions apply to these names:
 	//
 	//    * An attribute name must start with a letter or number and it can contain
@@ -13576,12 +13730,13 @@ type UpdateRecommenderConfiguration struct {
 	//    spaces, underscores (_), or hyphens (-).
 	//
 	// This object is required if the configuration invokes an AWS Lambda function
-	// (LambdaFunctionArn) to process recommendation data. Otherwise, don't include
-	// this object in your request.
+	// (RecommendationTransformerUri) to process recommendation data. Otherwise,
+	// don't include this object in your request.
 	Attributes map[string]string `type:"map"`
 
 	// A custom description of the configuration for the recommender model. The
-	// description can contain up to 128 characters.
+	// description can contain up to 128 characters. The characters can be letters,
+	// numbers, spaces, or the following symbols: _ ; () , ‐.
 	Description *string `type:"string"`
 
 	// A custom name of the configuration for the recommender model. The name must
@@ -13601,7 +13756,7 @@ type UpdateRecommenderConfiguration struct {
 	//    * PINPOINT_USER_ID - Associate each user in the model with a particular
 	//    user and endpoint in Amazon Pinpoint. The data is correlated based on
 	//    user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition
-	//    in Amazon Pinpoint has to specify a both a user ID (UserId) and an endpoint
+	//    in Amazon Pinpoint has to specify both a user ID (UserId) and an endpoint
 	//    ID. Otherwise, messages won’t be sent to the user's endpoint.
 	RecommendationProviderIdType *string `type:"string"`
 
@@ -13624,26 +13779,26 @@ type UpdateRecommenderConfiguration struct {
 	RecommendationTransformerUri *string `type:"string"`
 
 	// A custom display name for the standard endpoint or user attribute (RecommendationItems)
-	// that temporarily stores a recommended item for each endpoint or user, depending
-	// on the value for the RecommenderUserIdType property. This value is required
-	// if the configuration doesn't invoke an AWS Lambda function (LambdaFunctionArn)
+	// that temporarily stores recommended items for each endpoint or user, depending
+	// on the value for the RecommendationProviderIdType property. This value is
+	// required if the configuration doesn't invoke an AWS Lambda function (RecommendationTransformerUri)
 	// to perform additional processing of recommendation data.
 	//
-	// This name appears in the Attribute finder pane of the template editor on
-	// the Amazon Pinpoint console. The name can contain up to 25 characters. The
-	// characters can be letters, numbers, spaces, underscores (_), or hyphens (-).
-	// These restrictions don't apply to attribute values.
+	// This name appears in the Attribute finder of the template editor on the Amazon
+	// Pinpoint console. The name can contain up to 25 characters. The characters
+	// can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions
+	// don't apply to attribute values.
 	RecommendationsDisplayName *string `type:"string"`
 
 	// The number of recommended items to retrieve from the model for each endpoint
-	// or user, depending on the value for the RecommenderUserIdType property. This
-	// number determines how many recommended attributes are available for use as
-	// message variables in message templates. The minimum value is 1. The maximum
-	// value is 5. The default value is 5.
+	// or user, depending on the value for the RecommendationProviderIdType property.
+	// This number determines how many recommended items are available for use in
+	// message variables. The minimum value is 1. The maximum value is 5. The default
+	// value is 5.
 	//
 	// To use multiple recommended items and custom attributes with message variables,
-	// you have to use an AWS Lambda function (LambdaFunctionArn) to perform additional
-	// processing of recommendation data.
+	// you have to use an AWS Lambda function (RecommendationTransformerUri) to
+	// perform additional processing of recommendation data.
 	RecommendationsPerMessage *int64 `type:"integer"`
 }
 
@@ -14270,18 +14425,20 @@ func (s WaitTime) MarshalFields(e protocol.FieldEncoder) error {
 type WriteApplicationSettingsRequest struct {
 	_ struct{} `type:"structure"`
 
-	// The settings for the AWS Lambda function to use by default as a code hook
-	// for campaigns in the application. To override these settings for a specific
-	// campaign, use the Campaign resource to define custom Lambda function settings
-	// for the campaign.
+	// The settings for the AWS Lambda function to invoke by default as a code hook
+	// for campaigns in the application. You can use this hook to customize segments
+	// that are used by campaigns in the application.
+	//
+	// To override these settings and define custom settings for a specific campaign,
+	// use the CampaignHook object of the Campaign resource.
 	CampaignHook *CampaignHook `type:"structure"`
 
 	// Specifies whether to enable application-related alarms in Amazon CloudWatch.
 	CloudWatchMetricsEnabled *bool `type:"boolean"`
 
-	// The default sending limits for campaigns in the application. To override
-	// these limits for a specific campaign, use the Campaign resource to define
-	// custom limits for the campaign.
+	// The default sending limits for campaigns and journeys in the application.
+	// To override these limits and define custom limits for a specific campaign
+	// or journey, use the Campaign resource or the Journey resource, respectively.
 	Limits *CampaignLimits `type:"structure"`
 
 	// The default quiet time for campaigns and journeys in the application. Quiet
@@ -14350,6 +14507,11 @@ type WriteCampaignRequest struct {
 	// in addition to the default treatment for the campaign.
 	AdditionalTreatments []WriteTreatmentResource `type:"list"`
 
+	// The delivery configuration settings for sending the campaign through a custom
+	// channel. This object is required if the MessageConfiguration object for the
+	// campaign specifies a CustomMessage object.
+	CustomDeliveryConfiguration *CustomDeliveryConfiguration `type:"structure"`
+
 	// A custom description of the campaign.
 	Description *string `type:"string"`
 
@@ -14357,11 +14519,13 @@ type WriteCampaignRequest struct {
 	// messages from the campaign.
 	HoldoutPercent *int64 `type:"integer"`
 
-	// The settings for the AWS Lambda function to use as a code hook for the campaign.
+	// The settings for the AWS Lambda function to invoke as a code hook for the
+	// campaign. You can use this hook to customize the segment that's used by the
+	// campaign.
 	Hook *CampaignHook `type:"structure"`
 
 	// Specifies whether to pause the campaign. A paused campaign doesn't run unless
-	// you resume it by setting this value to false.
+	// you resume it by changing this value to false.
 	IsPaused *bool `type:"boolean"`
 
 	// The messaging limits for the campaign.
@@ -14390,10 +14554,12 @@ type WriteCampaignRequest struct {
 	// The message template to use for the campaign.
 	TemplateConfiguration *TemplateConfiguration `type:"structure"`
 
-	// A custom description of a variation of the campaign to use for A/B testing.
+	// A custom description of the default treatment for the campaign.
 	TreatmentDescription *string `type:"string"`
 
-	// A custom name for a variation of the campaign to use for A/B testing.
+	// A custom name of the default treatment for the campaign, if the campaign
+	// has multiple treatments. A treatment is a variation of a campaign that's
+	// used for A/B testing.
 	TreatmentName *string `type:"string"`
 }
 
@@ -14410,6 +14576,11 @@ func (s *WriteCampaignRequest) Validate() error {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AdditionalTreatments", i), err.(aws.ErrInvalidParams))
 			}
+		}
+	}
+	if s.CustomDeliveryConfiguration != nil {
+		if err := s.CustomDeliveryConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("CustomDeliveryConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Schedule != nil {
@@ -14437,6 +14608,12 @@ func (s WriteCampaignRequest) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	if s.CustomDeliveryConfiguration != nil {
+		v := s.CustomDeliveryConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CustomDeliveryConfiguration", v, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -14876,6 +15053,11 @@ func (s WriteSegmentRequest) MarshalFields(e protocol.FieldEncoder) error {
 type WriteTreatmentResource struct {
 	_ struct{} `type:"structure"`
 
+	// The delivery configuration settings for sending the treatment through a custom
+	// channel. This object is required if the MessageConfiguration object for the
+	// treatment specifies a CustomMessage object.
+	CustomDeliveryConfiguration *CustomDeliveryConfiguration `type:"structure"`
+
 	// The message configuration settings for the treatment.
 	MessageConfiguration *MessageConfiguration `type:"structure"`
 
@@ -14894,8 +15076,7 @@ type WriteTreatmentResource struct {
 	// A custom description of the treatment.
 	TreatmentDescription *string `type:"string"`
 
-	// A custom name for the treatment. A treatment is a variation of a campaign
-	// that's used for A/B testing of a campaign.
+	// A custom name for the treatment.
 	TreatmentName *string `type:"string"`
 }
 
@@ -14911,6 +15092,11 @@ func (s *WriteTreatmentResource) Validate() error {
 	if s.SizePercent == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SizePercent"))
 	}
+	if s.CustomDeliveryConfiguration != nil {
+		if err := s.CustomDeliveryConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("CustomDeliveryConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.Schedule != nil {
 		if err := s.Schedule.Validate(); err != nil {
 			invalidParams.AddNested("Schedule", err.(aws.ErrInvalidParams))
@@ -14925,6 +15111,12 @@ func (s *WriteTreatmentResource) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s WriteTreatmentResource) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CustomDeliveryConfiguration != nil {
+		v := s.CustomDeliveryConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CustomDeliveryConfiguration", v, metadata)
+	}
 	if s.MessageConfiguration != nil {
 		v := s.MessageConfiguration
 

@@ -9,7 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// A JSON object containing the of the gateway.
+// A JSON object containing the Amazon Resource Name (ARN) of the gateway.
 type DescribeWorkingStorageInput struct {
 	_ struct{} `type:"structure"`
 

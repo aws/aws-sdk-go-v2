@@ -76,6 +76,8 @@ const (
 	MetricTypeAppStreamAverageCapacityUtilization      MetricType = "AppStreamAverageCapacityUtilization"
 	MetricTypeComprehendInferenceUtilization           MetricType = "ComprehendInferenceUtilization"
 	MetricTypeLambdaProvisionedConcurrencyUtilization  MetricType = "LambdaProvisionedConcurrencyUtilization"
+	MetricTypeCassandraReadCapacityUtilization         MetricType = "CassandraReadCapacityUtilization"
+	MetricTypeCassandraWriteCapacityUtilization        MetricType = "CassandraWriteCapacityUtilization"
 )
 
 func (enum MetricType) MarshalValue() (string, error) {
@@ -121,6 +123,8 @@ const (
 	ScalableDimensionCustomResourceResourceTypeProperty                        ScalableDimension = "custom-resource:ResourceType:Property"
 	ScalableDimensionComprehendDocumentClassifierEndpointDesiredInferenceUnits ScalableDimension = "comprehend:document-classifier-endpoint:DesiredInferenceUnits"
 	ScalableDimensionLambdaFunctionProvisionedConcurrency                      ScalableDimension = "lambda:function:ProvisionedConcurrency"
+	ScalableDimensionCassandraTableReadCapacityUnits                           ScalableDimension = "cassandra:table:ReadCapacityUnits"
+	ScalableDimensionCassandraTableWriteCapacityUnits                          ScalableDimension = "cassandra:table:WriteCapacityUnits"
 )
 
 func (enum ScalableDimension) MarshalValue() (string, error) {
@@ -167,6 +171,7 @@ const (
 	ServiceNamespaceCustomResource   ServiceNamespace = "custom-resource"
 	ServiceNamespaceComprehend       ServiceNamespace = "comprehend"
 	ServiceNamespaceLambda           ServiceNamespace = "lambda"
+	ServiceNamespaceCassandra        ServiceNamespace = "cassandra"
 )
 
 func (enum ServiceNamespace) MarshalValue() (string, error) {

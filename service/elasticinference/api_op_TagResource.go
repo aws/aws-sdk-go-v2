@@ -97,7 +97,7 @@ const opTagResource = "TagResource"
 // TagResourceRequest returns a request value for making API operation for
 // Amazon Elastic  Inference.
 //
-// Adds the specified tag(s) to an Elastic Inference Accelerator.
+// Adds the specified tags to an Elastic Inference Accelerator.
 //
 //    // Example sending a request using TagResourceRequest.
 //    req := client.TagResourceRequest(params)

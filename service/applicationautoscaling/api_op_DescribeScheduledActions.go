@@ -64,6 +64,9 @@ type DescribeScheduledActionsInput struct {
 	//    unique identifier is the function name with a function version or alias
 	//    name suffix that is not $LATEST. Example: function:my-function:prod or
 	//    function:my-function:1.
+	//
+	//    * Amazon Keyspaces table - The resource type is table and the unique identifier
+	//    is the table name. Example: keyspace/mykeyspace/table/mytable.
 	ResourceId *string `min:"1" type:"string"`
 
 	// The scalable dimension. This string consists of the service namespace, resource
@@ -109,15 +112,19 @@ type DescribeScheduledActionsInput struct {
 	//
 	//    * lambda:function:ProvisionedConcurrency - The provisioned concurrency
 	//    for a Lambda function.
+	//
+	//    * cassandra:table:ReadCapacityUnits - The provisioned read capacity for
+	//    an Amazon Keyspaces table.
+	//
+	//    * cassandra:table:WriteCapacityUnits - The provisioned write capacity
+	//    for an Amazon Keyspaces table.
 	ScalableDimension ScalableDimension `type:"string" enum:"true"`
 
 	// The names of the scheduled actions to describe.
 	ScheduledActionNames []string `type:"list"`
 
-	// The namespace of the AWS service that provides the resource or custom-resource
-	// for a resource provided by your own application or service. For more information,
-	// see AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the Amazon Web Services General Reference.
+	// The namespace of the AWS service that provides the resource. For a resource
+	// provided by your own application or service, use custom-resource instead.
 	//
 	// ServiceNamespace is a required field
 	ServiceNamespace ServiceNamespace `type:"string" required:"true" enum:"true"`
@@ -171,8 +178,8 @@ const opDescribeScheduledActions = "DescribeScheduledActions"
 // You can filter the results using the ResourceId, ScalableDimension, and ScheduledActionNames
 // parameters.
 //
-// To create a scheduled action or update an existing one, see PutScheduledAction.
-// If you are no longer using a scheduled action, you can delete it using DeleteScheduledAction.
+// For more information, see Scheduled Scaling (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html)
+// in the Application Auto Scaling User Guide.
 //
 //    // Example sending a request using DescribeScheduledActionsRequest.
 //    req := client.DescribeScheduledActionsRequest(params)

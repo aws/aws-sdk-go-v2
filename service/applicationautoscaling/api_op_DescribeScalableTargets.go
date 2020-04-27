@@ -64,6 +64,9 @@ type DescribeScalableTargetsInput struct {
 	//    unique identifier is the function name with a function version or alias
 	//    name suffix that is not $LATEST. Example: function:my-function:prod or
 	//    function:my-function:1.
+	//
+	//    * Amazon Keyspaces table - The resource type is table and the unique identifier
+	//    is the table name. Example: keyspace/mykeyspace/table/mytable.
 	ResourceIds []string `type:"list"`
 
 	// The scalable dimension associated with the scalable target. This string consists
@@ -109,12 +112,16 @@ type DescribeScalableTargetsInput struct {
 	//
 	//    * lambda:function:ProvisionedConcurrency - The provisioned concurrency
 	//    for a Lambda function.
+	//
+	//    * cassandra:table:ReadCapacityUnits - The provisioned read capacity for
+	//    an Amazon Keyspaces table.
+	//
+	//    * cassandra:table:WriteCapacityUnits - The provisioned write capacity
+	//    for an Amazon Keyspaces table.
 	ScalableDimension ScalableDimension `type:"string" enum:"true"`
 
-	// The namespace of the AWS service that provides the resource or custom-resource
-	// for a resource provided by your own application or service. For more information,
-	// see AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the Amazon Web Services General Reference.
+	// The namespace of the AWS service that provides the resource. For a resource
+	// provided by your own application or service, use custom-resource instead.
 	//
 	// ServiceNamespace is a required field
 	ServiceNamespace ServiceNamespace `type:"string" required:"true" enum:"true"`
@@ -162,10 +169,6 @@ const opDescribeScalableTargets = "DescribeScalableTargets"
 // Gets information about the scalable targets in the specified namespace.
 //
 // You can filter the results using ResourceIds and ScalableDimension.
-//
-// To create a scalable target or update an existing one, see RegisterScalableTarget.
-// If you are no longer using a scalable target, you can deregister it using
-// DeregisterScalableTarget.
 //
 //    // Example sending a request using DescribeScalableTargetsRequest.
 //    req := client.DescribeScalableTargetsRequest(params)

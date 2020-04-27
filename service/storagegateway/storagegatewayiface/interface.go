@@ -95,6 +95,8 @@ type ClientAPI interface {
 
 	CreateTapesRequest(*storagegateway.CreateTapesInput) storagegateway.CreateTapesRequest
 
+	DeleteAutomaticTapeCreationPolicyRequest(*storagegateway.DeleteAutomaticTapeCreationPolicyInput) storagegateway.DeleteAutomaticTapeCreationPolicyRequest
+
 	DeleteBandwidthRateLimitRequest(*storagegateway.DeleteBandwidthRateLimitInput) storagegateway.DeleteBandwidthRateLimitRequest
 
 	DeleteChapCredentialsRequest(*storagegateway.DeleteChapCredentialsInput) storagegateway.DeleteChapCredentialsRequest
@@ -153,6 +155,8 @@ type ClientAPI interface {
 
 	JoinDomainRequest(*storagegateway.JoinDomainInput) storagegateway.JoinDomainRequest
 
+	ListAutomaticTapeCreationPoliciesRequest(*storagegateway.ListAutomaticTapeCreationPoliciesInput) storagegateway.ListAutomaticTapeCreationPoliciesRequest
+
 	ListFileSharesRequest(*storagegateway.ListFileSharesInput) storagegateway.ListFileSharesRequest
 
 	ListGatewaysRequest(*storagegateway.ListGatewaysInput) storagegateway.ListGatewaysRequest
@@ -190,6 +194,8 @@ type ClientAPI interface {
 	StartAvailabilityMonitorTestRequest(*storagegateway.StartAvailabilityMonitorTestInput) storagegateway.StartAvailabilityMonitorTestRequest
 
 	StartGatewayRequest(*storagegateway.StartGatewayInput) storagegateway.StartGatewayRequest
+
+	UpdateAutomaticTapeCreationPolicyRequest(*storagegateway.UpdateAutomaticTapeCreationPolicyInput) storagegateway.UpdateAutomaticTapeCreationPolicyRequest
 
 	UpdateBandwidthRateLimitRequest(*storagegateway.UpdateBandwidthRateLimitInput) storagegateway.UpdateBandwidthRateLimitRequest
 

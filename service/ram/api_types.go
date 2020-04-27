@@ -670,6 +670,40 @@ func (s ResourceSharePermissionSummary) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
+// Information about the shareable resource types and the AWS services to which
+// they belong.
+type ServiceNameAndResourceType struct {
+	_ struct{} `type:"structure"`
+
+	// The shareable resource types.
+	ResourceType *string `locationName:"resourceType" type:"string"`
+
+	// The name of the AWS services to which the resources belong.
+	ServiceName *string `locationName:"serviceName" type:"string"`
+}
+
+// String returns the string representation
+func (s ServiceNameAndResourceType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ServiceNameAndResourceType) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ResourceType != nil {
+		v := *s.ResourceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ServiceName != nil {
+		v := *s.ServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "serviceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Information about a tag.
 type Tag struct {
 	_ struct{} `type:"structure"`

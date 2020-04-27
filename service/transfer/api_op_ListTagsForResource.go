@@ -60,7 +60,7 @@ func (s *ListTagsForResourceInput) Validate() error {
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// This value is the ARN you specified to list the tags of.
+	// The ARN you specified to list the tags of.
 	Arn *string `min:"20" type:"string"`
 
 	// When you can get additional results from the ListTagsForResource call, a
@@ -81,7 +81,7 @@ func (s ListTagsForResourceOutput) String() string {
 const opListTagsForResource = "ListTagsForResource"
 
 // ListTagsForResourceRequest returns a request value for making API operation for
-// AWS Transfer for SFTP.
+// AWS Transfer Family.
 //
 // Lists all of the tags associated with the Amazon Resource Number (ARN) you
 // specify. The resource can be a user, server, or role.

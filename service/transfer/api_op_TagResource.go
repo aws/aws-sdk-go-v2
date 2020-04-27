@@ -77,7 +77,7 @@ func (s TagResourceOutput) String() string {
 const opTagResource = "TagResource"
 
 // TagResourceRequest returns a request value for making API operation for
-// AWS Transfer for SFTP.
+// AWS Transfer Family.
 //
 // Attaches a key-value pair to a resource, as identified by its Amazon Resource
 // Name (ARN). Resources are users, servers, roles, and other entities.

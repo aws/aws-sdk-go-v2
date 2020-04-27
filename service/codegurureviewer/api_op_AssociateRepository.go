@@ -16,21 +16,20 @@ type AssociateRepositoryInput struct {
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	//
-	// If you want to add a new repository association, this parameter specifies
-	// a unique identifier for the new repository association that helps ensure
-	// idempotency.
+	// To add a new repository association, this parameter specifies a unique identifier
+	// for the new repository association that helps ensure idempotency.
 	//
-	// If you use the AWS CLI or one of the AWS SDK to call this operation, then
-	// you can leave this parameter empty. The CLI or SDK generates a random UUID
-	// for you and includes that in the request. If you don't use the SDK and instead
-	// generate a raw HTTP request to the Secrets Manager service endpoint, then
-	// you must generate a ClientRequestToken yourself for new versions and include
+	// If you use the AWS CLI or one of the AWS SDKs to call this operation, you
+	// can leave this parameter empty. The CLI or SDK generates a random UUID for
+	// you and includes that in the request. If you don't use the SDK and instead
+	// generate a raw HTTP request to the Secrets Manager service endpoint, you
+	// must generate a ClientRequestToken yourself for new versions and include
 	// that value in the request.
 	//
-	// You typically only need to interact with this value if you implement your
-	// own retry logic and want to ensure that a given repository association is
-	// not created twice. We recommend that you generate a UUID-type value to ensure
-	// uniqueness within the specified repository association.
+	// You typically interact with this value if you implement your own retry logic
+	// and want to ensure that a given repository association is not created twice.
+	// We recommend that you generate a UUID-type value to ensure uniqueness within
+	// the specified repository association.
 	//
 	// Amazon CodeGuru Reviewer uses this value to prevent the accidental creation
 	// of duplicate repository associations if there are failures and retries.
@@ -124,8 +123,9 @@ const opAssociateRepository = "AssociateRepository"
 //
 // Associates an AWS CodeCommit repository with Amazon CodeGuru Reviewer. When
 // you associate an AWS CodeCommit repository with Amazon CodeGuru Reviewer,
-// Amazon CodeGuru Reviewer will provide recommendations for each pull request.
-// You can view recommendations in the AWS CodeCommit repository.
+// Amazon CodeGuru Reviewer will provide recommendations for each pull request
+// raised within the repository. You can view recommendations in the AWS CodeCommit
+// repository.
 //
 // You can associate a GitHub repository using the Amazon CodeGuru Reviewer
 // console.

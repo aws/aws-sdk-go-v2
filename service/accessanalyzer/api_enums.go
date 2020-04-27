@@ -21,6 +21,24 @@ func (enum AnalyzerStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type FindingSourceType string
+
+// Enum values for FindingSourceType
+const (
+	FindingSourceTypeBucketAcl     FindingSourceType = "BUCKET_ACL"
+	FindingSourceTypePolicy        FindingSourceType = "POLICY"
+	FindingSourceTypeS3AccessPoint FindingSourceType = "S3_ACCESS_POINT"
+)
+
+func (enum FindingSourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FindingSourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FindingStatus string
 
 // Enum values for FindingStatus

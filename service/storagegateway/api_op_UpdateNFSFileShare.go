@@ -32,12 +32,12 @@ type UpdateNFSFileShareInput struct {
 	// and otherwise to false. The default value is true.
 	GuessMIMETypeEnabled *bool `type:"boolean"`
 
-	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
+	// True to use Amazon S3 server-side encryption with your own AWS KMS key, or
 	// false to use a key managed by Amazon S3. Optional.
 	KMSEncrypted *bool `type:"boolean"`
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
-	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side
+	// encryption. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string `min:"7" type:"string"`
 
 	// The default values for the file share. Optional.

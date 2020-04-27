@@ -14,9 +14,9 @@ import (
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// This is the value of the resource that will have the tag removed. An Amazon
-	// Resource Name (ARN) is an identifier for a specific AWS resource, such as
-	// a server, user, or role.
+	// The value of the resource that will have the tag removed. An Amazon Resource
+	// Name (ARN) is an identifier for a specific AWS resource, such as a server,
+	// user, or role.
 	//
 	// Arn is a required field
 	Arn *string `min:"20" type:"string" required:"true"`
@@ -70,7 +70,7 @@ func (s UntagResourceOutput) String() string {
 const opUntagResource = "UntagResource"
 
 // UntagResourceRequest returns a request value for making API operation for
-// AWS Transfer for SFTP.
+// AWS Transfer Family.
 //
 // Detaches a key-value pair from a resource, as identified by its Amazon Resource
 // Name (ARN). Resources are users, servers, roles, and other entities.

@@ -67,9 +67,9 @@ type ListTapesOutput struct {
 	// in the response body.
 	Marker *string `min:"1" type:"string"`
 
-	// An array of TapeInfo objects, where each object describes an a single tape.
-	// If there not tapes in the tape library or VTS, then the TapeInfos is an empty
-	// array.
+	// An array of TapeInfo objects, where each object describes a single tape.
+	// If there are no tapes in the tape library or VTS, then the TapeInfos is an
+	// empty array.
 	TapeInfos []TapeInfo `type:"list"`
 }
 

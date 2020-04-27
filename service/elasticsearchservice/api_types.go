@@ -2267,6 +2267,10 @@ type ServiceSoftwareOptions struct {
 	// The new service software version if one is available.
 	NewVersion *string `type:"string"`
 
+	// True if a service software is never automatically updated. False if a service
+	// software is automatically updated after AutomatedUpdateDate.
+	OptionalDeployment *bool `type:"boolean"`
+
 	// True if you are able to update you service software version. False if you
 	// are not able to update your service software version.
 	UpdateAvailable *bool `type:"boolean"`
@@ -2313,6 +2317,12 @@ func (s ServiceSoftwareOptions) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NewVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OptionalDeployment != nil {
+		v := *s.OptionalDeployment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OptionalDeployment", protocol.BoolValue(v), metadata)
 	}
 	if s.UpdateAvailable != nil {
 		v := *s.UpdateAvailable

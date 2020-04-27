@@ -84,6 +84,12 @@ type ClientAPI interface {
 	ListPackagingConfigurationsRequest(*mediapackagevod.ListPackagingConfigurationsInput) mediapackagevod.ListPackagingConfigurationsRequest
 
 	ListPackagingGroupsRequest(*mediapackagevod.ListPackagingGroupsInput) mediapackagevod.ListPackagingGroupsRequest
+
+	ListTagsForResourceRequest(*mediapackagevod.ListTagsForResourceInput) mediapackagevod.ListTagsForResourceRequest
+
+	TagResourceRequest(*mediapackagevod.TagResourceInput) mediapackagevod.TagResourceRequest
+
+	UntagResourceRequest(*mediapackagevod.UntagResourceInput) mediapackagevod.UntagResourceRequest
 }
 
 var _ ClientAPI = (*mediapackagevod.Client)(nil)

@@ -59,8 +59,8 @@ func (s *DeleteBandwidthRateLimitInput) Validate() error {
 	return nil
 }
 
-// A JSON object containing the of the gateway whose bandwidth rate information
-// was deleted.
+// A JSON object containing the Amazon Resource Name (ARN) of the gateway whose
+// bandwidth rate information was deleted.
 type DeleteBandwidthRateLimitOutput struct {
 	_ struct{} `type:"structure"`
 

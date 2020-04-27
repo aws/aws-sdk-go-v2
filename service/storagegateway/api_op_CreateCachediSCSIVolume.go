@@ -25,12 +25,12 @@ type CreateCachediSCSIVolumeInput struct {
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
 
-	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
+	// True to use Amazon S3 server-side encryption with your own AWS KMS key, or
 	// false to use a key managed by Amazon S3. Optional.
 	KMSEncrypted *bool `type:"boolean"`
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
-	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side
+	// encryption. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string `min:"7" type:"string"`
 
 	// The network interface of the gateway on which to expose the iSCSI target.
