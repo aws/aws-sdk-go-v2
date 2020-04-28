@@ -149,7 +149,7 @@ func (c *Client) ListSessions(ctx context.Context, input *ListSessionsInput, opt
 		Client: options.HTTPClient,
 	}, stack)
 
-	res, _, err := h.Handle(ctx, input)
+	res, metadata, err := h.Handle(ctx, input)
 	if err != nil {
 		return nil, &smithy.OperationError{
 			ServiceName:   "LexRuntimeService",
@@ -158,7 +158,10 @@ func (c *Client) ListSessions(ctx context.Context, input *ListSessionsInput, opt
 		}
 	}
 
-	return res.(*ListSessionsOutput), nil
+	out := res.(*ListSessionsOutput)
+	out.ResultMetadata = metadata
+
+	return out, nil
 }
 
 // Client interface generated for an operation as needed. This includes

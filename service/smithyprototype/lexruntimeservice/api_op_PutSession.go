@@ -194,6 +194,9 @@ type PutSessionOutput struct {
 	// or, if there is no resolution list, null. If you don't specify a valueSelectionStrategy
 	// the default is ORIGINAL_VALUE.
 	Slots aws.JSONValue `location:"header" locationName:"x-amz-lex-slots" type:"jsonvalue"`
+
+	// Operation result metadata
+	ResultMetadata middleware.Metadata
 }
 
 // String returns the string representation
@@ -239,7 +242,7 @@ func (c *Client) PutSession(ctx context.Context, input *PutSessionInput, optFns 
 		Client: options.HTTPClient,
 	}, stack)
 
-	res, _, err := h.Handle(ctx, input)
+	res, metadata, err := h.Handle(ctx, input)
 	if err != nil {
 		return nil, &smithy.OperationError{
 			ServiceName:   "LexRuntimeService",
@@ -248,5 +251,8 @@ func (c *Client) PutSession(ctx context.Context, input *PutSessionInput, optFns 
 		}
 	}
 
-	return res.(*PutSessionOutput), nil
+	out := res.(*PutSessionOutput)
+	out.ResultMetadata = metadata
+
+	return out, nil
 }

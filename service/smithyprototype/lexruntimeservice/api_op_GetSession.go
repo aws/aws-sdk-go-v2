@@ -140,7 +140,7 @@ func (c *Client) GetSession(ctx context.Context, input *GetSessionInput, optFns 
 		Client: options.HTTPClient,
 	}, stack)
 
-	res, _, err := h.Handle(ctx, input)
+	res, metadata, err := h.Handle(ctx, input)
 	if err != nil {
 		return nil, &smithy.OperationError{
 			ServiceName:   "LexRuntimeService",
@@ -149,5 +149,8 @@ func (c *Client) GetSession(ctx context.Context, input *GetSessionInput, optFns 
 		}
 	}
 
-	return res.(*GetSessionOutput), nil
+	out := res.(*GetSessionOutput)
+	out.ResultMetadata = metadata
+
+	return out, nil
 }

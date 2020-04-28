@@ -120,7 +120,7 @@ func (c *Client) DeleteSession(ctx context.Context, input *DeleteSessionInput, o
 		Client: options.HTTPClient,
 	}, stack)
 
-	res, _, err := h.Handle(ctx, input)
+	res, metadata, err := h.Handle(ctx, input)
 	if err != nil {
 		return nil, &smithy.OperationError{
 			ServiceName:   "LexRuntimeService",
@@ -129,5 +129,8 @@ func (c *Client) DeleteSession(ctx context.Context, input *DeleteSessionInput, o
 		}
 	}
 
-	return res.(*DeleteSessionOutput), nil
+	out := res.(*DeleteSessionOutput)
+	out.ResultMetadata = metadata
+
+	return out, nil
 }

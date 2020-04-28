@@ -303,7 +303,7 @@ func (c *Client) PostText(ctx context.Context, input *PostTextInput, optFns ...f
 		Client: options.HTTPClient,
 	}, stack)
 
-	res, _, err := h.Handle(ctx, input)
+	res, metadata, err := h.Handle(ctx, input)
 	if err != nil {
 		return nil, &smithy.OperationError{
 			ServiceName:   "LexRuntimeService",
@@ -312,5 +312,8 @@ func (c *Client) PostText(ctx context.Context, input *PostTextInput, optFns ...f
 		}
 	}
 
-	return res.(*PostTextOutput), nil
+	out := res.(*PostTextOutput)
+	out.ResultMetadata = metadata
+
+	return out, nil
 }
