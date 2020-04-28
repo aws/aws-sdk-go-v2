@@ -3,82 +3,106 @@
 package lexruntimeservice
 
 import (
+	"context"
+	"net/http"
+	"time"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	"github.com/awslabs/smithy-go/middleware"
 )
 
-// Client provides the API operation methods for making requests to
-// Amazon Lex Runtime Service. See this package's package overview docs
-// for details on the service.
-//
-// The client's methods are safe to use concurrently. It is not safe to
-// modify mutate any of the struct's properties though.
+// Client provides the client for interacting with the Amazon Lex Runtime Service.
 type Client struct {
-	*aws.Client
+	serviceName string
+	serviceID   string
+	endpointID  string
+	options     ClientOptions
 }
 
-// Used for custom client initialization logic
-var initClient func(*Client)
+// ClientOptions provides the set of configurations that can be applied to the
+// Client. Use functional options to modify this set when creating the client,
+// or when invoking API operations.
+type ClientOptions struct {
+	RegionID string
 
-// Used for custom request initialization logic
-var initRequest func(*Client, *aws.Request)
+	EndpointResolver aws.EndpointResolver
+	HTTPClient       HTTPClient
 
-const (
-	ServiceName = "Amazon Lex Runtime Service" // Service's name
-	ServiceID   = "LexRuntimeService"          // Service's identifier
-	EndpointsID = "runtime.lex"                // Service's Endpoint identifier
-)
+	// Signer is the signer for the client.
+	SigningName string
+	Signer      HTTPSigner
 
-// New creates a new instance of the client from the provided Config.
-//
-// Example:
-//     // Create a client from just a config.
-//     svc := lexruntimeservice.New(myConfig)
-func New(config aws.Config) *Client {
-	svc := &Client{
-		Client: aws.NewClient(
-			config,
-			aws.Metadata{
-				ServiceName:   ServiceName,
-				ServiceID:     ServiceID,
-				EndpointsID:   EndpointsID,
-				SigningName:   "lex",
-				SigningRegion: config.Region,
-				APIVersion:    "2016-11-28",
-			},
-		),
-	}
+	APIOptions []APIOptionFunc
 
-	if config.Retryer == nil {
-		svc.Retryer = retry.NewStandard()
-	}
-
-	// Handlers
-	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
-	svc.Handlers.Build.PushBackNamed(restjson.BuildHandler)
-	svc.Handlers.Unmarshal.PushBackNamed(restjson.UnmarshalHandler)
-	svc.Handlers.UnmarshalMeta.PushBackNamed(restjson.UnmarshalMetaHandler)
-	svc.Handlers.UnmarshalError.PushBackNamed(restjson.UnmarshalErrorHandler)
-
-	// Run custom client initialization if present
-	if initClient != nil {
-		initClient(svc)
-	}
-
-	return svc
+	Retryer  aws.Retryer
+	LogLevel aws.LogLevel
+	Logger   aws.Logger
 }
 
-// newRequest creates a new request for a client operation and runs any
-// custom request initialization.
-func (c *Client) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
-	req := c.NewRequest(op, params, data)
+// HTTPSigner provides the interface for implementations to sign HTTP AWS
+// requests.
+type HTTPSigner interface {
+	SignHTTP(ctx context.Context, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
+}
 
-	// Run custom request initialization if present
-	if initRequest != nil {
-		initRequest(c, req)
+// HTTPClient provides the interface for an implementation to round trip HTTP
+// requests to a service, returning a response or error.
+type HTTPClient interface {
+	Do(*http.Request) (*http.Response, error)
+}
+
+// NewClient returns an initialized client with the client options used to
+// specify the behavior of the client.
+func NewClient(cfg aws.Config, opts ...func(*ClientOptions)) *Client {
+	client := &Client{
+		serviceName: "Amazon Lex Runtime Service",
+		serviceID:   "LexRuntimeService",
+		endpointID:  "runtime.lex",
+
+		options: ClientOptions{
+			RegionID:         cfg.Region,
+			EndpointResolver: cfg.EndpointResolver,
+			Signer:           v4.NewSigner(cfg.Credentials),
+			HTTPClient:       cfg.HTTPClient,
+		},
 	}
 
-	return req
+	for _, fn := range opts {
+		fn(&client.options)
+	}
+
+	return client
+}
+
+// ServiceID returns the name of the identifier for the service API.
+func (c *Client) ServiceID() string { return c.serviceID }
+
+// ServiceName returns the full service name.
+func (c *Client) ServiceName() string { return c.serviceName }
+
+// APIOptionFunc provides the type for overriding options for API operation
+// calls. Allows modifying the middleware stack, and client options per API
+// operation call.
+type APIOptionFunc func(*ClientOptions, *middleware.Stack) error
+
+func (c *Client) invoke(ctx context.Context, stack *middleware.Stack, input interface{}, opts ...APIOptionFunc) (
+	result interface{}, metadata middleware.Metadata, err error,
+) {
+	clientOptions := c.options
+	for _, fn := range c.options.APIOptions {
+		if err := fn(&clientOptions, stack); err != nil {
+			return nil, metadata, err
+		}
+	}
+
+	for _, fn := range opts {
+		if err := fn(&clientOptions, stack); err != nil {
+			return nil, metadata, err
+		}
+	}
+
+	h := middleware.DecorateHandler(awshttp.ClientHandler{Client: clientOptions.HTTPClient}, stack)
+	return h.Handle(ctx, input)
 }

@@ -7,10 +7,11 @@ import (
 	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
-	types "github.com/aws/aws-sdk-go-v2/service/smithyprototype/lexruntimeservice/types"
+	"github.com/aws/aws-sdk-go-v2/service/smithyprototype/lexruntimeservice/types"
+	"github.com/awslabs/smithy-go"
+	"github.com/awslabs/smithy-go/middleware"
+	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 type PostContentInput struct {
@@ -70,13 +71,8 @@ type PostContentInput struct {
 	// that captures all of the audio data before sending. In general, you get better
 	// performance if you stream audio data rather than buffering the data locally.
 	//
-	// To use an non-seekable io.Reader for this request wrap the io.Reader with
-	// "aws.ReadSeekCloser". The SDK will not retry request errors for non-seekable
-	// readers. This will allow the SDK to send the reader's payload as chunked
-	// transfer encoding.
-	//
 	// InputStream is a required field
-	InputStream io.ReadSeeker `locationName:"inputStream" type:"blob" required:"true"`
+	InputStream io.Reader `locationName:"inputStream" type:"blob" required:"true"`
 
 	// You pass this value as the x-amz-lex-request-attributes HTTP header.
 	//
@@ -135,7 +131,7 @@ func (s PostContentInput) String() string {
 }
 
 // Validate inspects the fields of the type to determine if they are valid.
-func (s *PostContentInput) Validate() error {
+func validatePostContentInput(s *PostContentInput) error {
 	invalidParams := aws.ErrInvalidParams{Context: "PostContentInput"}
 
 	if s.BotAlias == nil {
@@ -163,60 +159,6 @@ func (s *PostContentInput) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PostContentInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Accept != nil {
-		v := *s.Accept
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Accept", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ContentType != nil {
-		v := *s.ContentType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RequestAttributes != nil {
-		v := s.RequestAttributes
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-request-attributes", protocol.JSONValue{V: v, EscapeMode: protocol.Base64Escape}, metadata)
-	}
-	if s.SessionAttributes != nil {
-		v := s.SessionAttributes
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-session-attributes", protocol.JSONValue{V: v, EscapeMode: protocol.Base64Escape}, metadata)
-	}
-	if s.BotAlias != nil {
-		v := *s.BotAlias
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botAlias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BotName != nil {
-		v := *s.BotName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.InputStream != nil {
-		v := s.InputStream
-
-		metadata := protocol.Metadata{}
-		e.SetStream(protocol.PayloadTarget, "inputStream", protocol.ReadSeekerStream{V: v}, metadata)
 	}
 	return nil
 }
@@ -344,6 +286,9 @@ type PostContentOutput struct {
 	// or, if there is no resolution list, null. If you don't specify a valueSelectionStrategy,
 	// the default is ORIGINAL_VALUE.
 	Slots aws.JSONValue `location:"header" locationName:"x-amz-lex-slots" type:"jsonvalue"`
+
+	// Operation result metadata
+	ResultMetadata middleware.Metadata
 }
 
 // String returns the string representation
@@ -351,82 +296,9 @@ func (s PostContentOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PostContentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ContentType != nil {
-		v := *s.ContentType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.DialogState) > 0 {
-		v := s.DialogState
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-dialog-state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.InputTranscript != nil {
-		v := *s.InputTranscript
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-input-transcript", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IntentName != nil {
-		v := *s.IntentName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-intent-name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Message != nil {
-		v := *s.Message
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.MessageFormat) > 0 {
-		v := s.MessageFormat
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-message-format", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.SentimentResponse != nil {
-		v := *s.SentimentResponse
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-sentiment", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SessionAttributes != nil {
-		v := s.SessionAttributes
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-session-attributes", protocol.JSONValue{V: v, EscapeMode: protocol.Base64Escape}, metadata)
-	}
-	if s.SessionId != nil {
-		v := *s.SessionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-session-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SlotToElicit != nil {
-		v := *s.SlotToElicit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-slot-to-elicit", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Slots != nil {
-		v := s.Slots
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-slots", protocol.JSONValue{V: v, EscapeMode: protocol.Base64Escape}, metadata)
-	}
-	// Skipping AudioStream Output type's body not valid.
-	return nil
-}
-
-const opPostContent = "PostContent"
-
-// PostContentRequest returns a request value for making API operation for
-// Amazon Lex Runtime Service.
+// PostContent invokes the API Amazon Lex Runtime Service, returning the
+// result or error.
+//
 //
 // Sends user input (text or speech) to Amazon Lex. Clients use this API to
 // send text and audio requests to Amazon Lex at runtime. Amazon Lex interprets
@@ -476,66 +348,26 @@ const opPostContent = "PostContent"
 // In addition, Amazon Lex also returns your application-specific sessionAttributes.
 // For more information, see Managing Conversation Context (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html).
 //
-//    // Example sending a request using PostContentRequest.
-//    req := client.PostContentRequest(params)
-//    resp, err := req.Send(context.TODO())
-//    if err == nil {
-//        fmt.Println(resp)
-//    }
-//
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContent
-func (c *Client) PostContentRequest(input *PostContentInput) PostContentRequest {
-	op := &aws.Operation{
-		Name:       opPostContent,
-		HTTPMethod: "POST",
-		HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/content",
-	}
+func (c *Client) PostContent(ctx context.Context, input *PostContentInput, opts ...APIOptionFunc) (
+	*PostContentOutput, error,
+) {
+	stack := middleware.NewStack("lex runtime post content", smithyhttp.NewStackRequest)
 
-	if input == nil {
-		input = &PostContentInput{}
-	}
+	// TODO add stack (de)serializers, retry, and signer
+	// Items like HTTP method and path are added via operation's serializer
+	//
+	//   HTTPMethod: "POST",
+	//   HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/content",
 
-	req := c.newRequest(op, input, &PostContentOutput{})
-	req.Handlers.Sign.Remove(v4.SignRequestHandler)
-	handler := v4.BuildNamedHandler("v4.CustomSignerHandler", v4.WithUnsignedPayload)
-	req.Handlers.Sign.PushFrontNamed(handler)
-	return PostContentRequest{Request: req, Input: input, Copy: c.PostContentRequest}
-}
-
-// PostContentRequest is the request type for the
-// PostContent API operation.
-type PostContentRequest struct {
-	*aws.Request
-	Input *PostContentInput
-	Copy  func(*PostContentInput) PostContentRequest
-}
-
-// Send marshals and sends the PostContent API request.
-func (r PostContentRequest) Send(ctx context.Context) (*PostContentResponse, error) {
-	r.Request.SetContext(ctx)
-	err := r.Request.Send()
+	res, _, err := c.invoke(ctx, stack, input, opts...)
 	if err != nil {
-		return nil, err
+		return nil, &smithy.OperationError{
+			ServiceName:   "LexRuntimeService",
+			OperationName: "PostContent",
+			Err:           err,
+		}
 	}
 
-	resp := &PostContentResponse{
-		PostContentOutput: r.Request.Data.(*PostContentOutput),
-		response:          &aws.Response{Request: r.Request},
-	}
-
-	return resp, nil
-}
-
-// PostContentResponse is the response type for the
-// PostContent API operation.
-type PostContentResponse struct {
-	*PostContentOutput
-
-	response *aws.Response
-}
-
-// SDKResponseMetdata returns the response metadata for the
-// PostContent request.
-func (r *PostContentResponse) SDKResponseMetdata() *aws.Response {
-	return r.response
+	return res.(*PostContentOutput), nil
 }

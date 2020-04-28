@@ -9,8 +9,10 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/service/smithyprototype/lexruntimeservice/types"
+	"github.com/awslabs/smithy-go"
+	"github.com/awslabs/smithy-go/middleware"
+	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 type PutSessionInput struct {
@@ -86,7 +88,7 @@ func (s PutSessionInput) String() string {
 }
 
 // Validate inspects the fields of the type to determine if they are valid.
-func (s *PutSessionInput) Validate() error {
+func validatePutSessionInput(s *PutSessionInput) error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutSessionInput"}
 
 	if s.BotAlias == nil {
@@ -118,67 +120,6 @@ func (s *PutSessionInput) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutSessionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DialogAction != nil {
-		v := s.DialogAction
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "dialogAction", v, metadata)
-	}
-	if s.RecentIntentSummaryView != nil {
-		v := s.RecentIntentSummaryView
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "recentIntentSummaryView", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.SessionAttributes != nil {
-		v := s.SessionAttributes
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "sessionAttributes", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.Accept != nil {
-		v := *s.Accept
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Accept", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BotAlias != nil {
-		v := *s.BotAlias
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botAlias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BotName != nil {
-		v := *s.BotName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -259,68 +200,6 @@ func (s PutSessionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutSessionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ContentType != nil {
-		v := *s.ContentType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.DialogState) > 0 {
-		v := s.DialogState
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-dialog-state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.IntentName != nil {
-		v := *s.IntentName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-intent-name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Message != nil {
-		v := *s.Message
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.MessageFormat) > 0 {
-		v := s.MessageFormat
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-message-format", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.SessionAttributes != nil {
-		v := s.SessionAttributes
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-session-attributes", protocol.JSONValue{V: v, EscapeMode: protocol.Base64Escape}, metadata)
-	}
-	if s.SessionId != nil {
-		v := *s.SessionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-session-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SlotToElicit != nil {
-		v := *s.SlotToElicit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-slot-to-elicit", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Slots != nil {
-		v := s.Slots
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-lex-slots", protocol.JSONValue{V: v, EscapeMode: protocol.Base64Escape}, metadata)
-	}
-	// Skipping AudioStream Output type's body not valid.
-	return nil
-}
-
-const opPutSession = "PutSession"
-
 // PutSessionRequest returns a request value for making API operation for
 // Amazon Lex Runtime Service.
 //
@@ -330,63 +209,26 @@ const opPutSession = "PutSession"
 //
 // For more information, see Managing Sessions (https://docs.aws.amazon.com/lex/latest/dg/how-session-api.html).
 //
-//    // Example sending a request using PutSessionRequest.
-//    req := client.PutSessionRequest(params)
-//    resp, err := req.Send(context.TODO())
-//    if err == nil {
-//        fmt.Println(resp)
-//    }
-//
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PutSession
-func (c *Client) PutSessionRequest(input *PutSessionInput) PutSessionRequest {
-	op := &aws.Operation{
-		Name:       opPutSession,
-		HTTPMethod: "POST",
-		HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/session",
-	}
+func (c *Client) PutSession(ctx context.Context, input *PutSessionInput, opts ...APIOptionFunc) (
+	*PutSessionOutput, error,
+) {
+	stack := middleware.NewStack("lex runtime put session", smithyhttp.NewStackRequest)
 
-	if input == nil {
-		input = &PutSessionInput{}
-	}
+	// TODO add stack (de)serializers, retry, and signer
+	// Items like HTTP method and path are added via operation's serializer
+	//
+	//	  HTTPMethod: "PUT",
+	//	  HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/session",
 
-	req := c.newRequest(op, input, &PutSessionOutput{})
-	return PutSessionRequest{Request: req, Input: input, Copy: c.PutSessionRequest}
-}
-
-// PutSessionRequest is the request type for the
-// PutSession API operation.
-type PutSessionRequest struct {
-	*aws.Request
-	Input *PutSessionInput
-	Copy  func(*PutSessionInput) PutSessionRequest
-}
-
-// Send marshals and sends the PutSession API request.
-func (r PutSessionRequest) Send(ctx context.Context) (*PutSessionResponse, error) {
-	r.Request.SetContext(ctx)
-	err := r.Request.Send()
+	res, _, err := c.invoke(ctx, stack, input, opts...)
 	if err != nil {
-		return nil, err
+		return nil, &smithy.OperationError{
+			ServiceName:   "LexRuntimeService",
+			OperationName: "PutSession",
+			Err:           err,
+		}
 	}
 
-	resp := &PutSessionResponse{
-		PutSessionOutput: r.Request.Data.(*PutSessionOutput),
-		response:         &aws.Response{Request: r.Request},
-	}
-
-	return resp, nil
-}
-
-// PutSessionResponse is the response type for the
-// PutSession API operation.
-type PutSessionResponse struct {
-	*PutSessionOutput
-
-	response *aws.Response
-}
-
-// SDKResponseMetdata returns the response metadata for the
-// PutSession request.
-func (r *PutSessionResponse) SDKResponseMetdata() *aws.Response {
-	return r.response
+	return res.(*PutSessionOutput), nil
 }
