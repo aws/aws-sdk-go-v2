@@ -4,6 +4,7 @@ package lexruntimeservice
 
 import (
 	"context"
+	"errors"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -13,7 +14,11 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-type GetSessionInput struct {
+/*
+***Mock operation for pagination***
+ */
+
+type ListSessionsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The alias in use for the bot that contains the session data.
@@ -38,16 +43,18 @@ type GetSessionInput struct {
 	//
 	// UserId is a required field
 	UserId *string `location:"uri" locationName:"userId" min:"2" type:"string" required:"true"`
+
+	NextToken *string
 }
 
 // String returns the string representation
-func (s GetSessionInput) String() string {
+func (s ListSessionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
 // Validate inspects the fields of the type to determine if they are valid.
-func validateGetSessionInput(s *GetSessionInput) error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSessionInput"}
+func validateListSessionsInput(s *ListSessionsInput) error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListSessionsInput"}
 
 	if s.BotAlias == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotAlias"))
@@ -73,7 +80,7 @@ func validateGetSessionInput(s *GetSessionInput) error {
 	return nil
 }
 
-type GetSessionOutput struct {
+type ListSessionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Describes the current state of the bot.
@@ -98,21 +105,23 @@ type GetSessionOutput struct {
 
 	// Operation result metadata
 	ResultMetadata middleware.Metadata
+
+	NextToken *string
 }
 
 // String returns the string representation
-func (s GetSessionOutput) String() string {
+func (s ListSessionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GetSession invokes the API Amazon Lex Runtime Service, returning the
+// ListSessions invokes the API Amazon Lex Runtime Service, returning the
 // result or error.
 //
 // Returns session information for a specified bot, alias, and user ID.
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/GetSession
-func (c *Client) GetSession(ctx context.Context, input *GetSessionInput, opts ...APIOptionFunc) (
-	*GetSessionOutput, error,
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/ListSessions
+func (c *Client) ListSessions(ctx context.Context, input *ListSessionsInput, opts ...APIOptionFunc) (
+	*ListSessionsOutput, error,
 ) {
 	stack := middleware.NewStack("lex runtime get session", smithyhttp.NewStackRequest)
 
@@ -126,10 +135,48 @@ func (c *Client) GetSession(ctx context.Context, input *GetSessionInput, opts ..
 	if err != nil {
 		return nil, &smithy.OperationError{
 			ServiceName:   "LexRuntimeService",
-			OperationName: "GetSession",
+			OperationName: "ListSessions",
 			Err:           err,
 		}
 	}
 
-	return res.(*GetSessionOutput), nil
+	return res.(*ListSessionsOutput), nil
+}
+
+// Client interface generated for an operation as needed. This includes
+// paginators, waiters, etc.
+
+// ListSessionsClient provides the interface for a client that implements the
+// ListSessions API operation. Implemented by the package's Client type.
+type ListSessionsClient interface {
+	ListSessions(ctx context.Context, input *ListSessionsInput, opts ...APIOptionFunc) (
+		*ListSessionsOutput, error,
+	)
+}
+
+// ListSessionsPaginator provides the paginator for the ListSessions API operation.
+type ListSessionsPaginator struct {
+	client ListSessionsClient
+	input  *ListSessionsInput
+}
+
+// NewListSessionsPaginator returns a ListSessionsPaginator configured for the
+// API operation client, and input parameters.
+func NewListSessionsPaginator(client ListSessionsClient, input *ListSessionsInput, opts ...APIOptionFunc) *ListSessionsPaginator {
+	// TODO implementation
+	return nil
+}
+
+// HasMorePages returns if there may be more pages to retrieve.
+func (p *ListSessionsPaginator) HasMorePages() bool {
+	// TODO implementation
+	return false
+}
+
+// NextPage returns the next page from the API, or error.
+func (p *ListSessionsPaginator) NextPage(ctx context.Context, opts ...APIOptionFunc) (
+	*ListSessionsOutput, error,
+) {
+	// TODO implementation
+	return nil, errors.New("not implemented")
 }

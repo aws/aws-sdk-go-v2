@@ -7,7 +7,9 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/awslabs/smithy-go"
+	"github.com/awslabs/smithy-go/middleware"
+	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 type DeleteSessionInput struct {
@@ -35,7 +37,7 @@ func (s DeleteSessionInput) String() string {
 }
 
 // Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSessionInput) Validate() error {
+func validateDeleteSessionInput(s *DeleteSessionInput) error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSessionInput"}
 
 	if s.BotAlias == nil {
@@ -59,31 +61,6 @@ func (s *DeleteSessionInput) Validate() error {
 	return nil
 }
 
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSessionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BotAlias != nil {
-		v := *s.BotAlias
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botAlias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BotName != nil {
-		v := *s.BotName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
 type DeleteSessionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -98,6 +75,9 @@ type DeleteSessionOutput struct {
 
 	// The ID of the client application user.
 	UserId *string `locationName:"userId" min:"2" type:"string"`
+
+	// Operation result metadata
+	ResultMetadata middleware.Metadata
 }
 
 // String returns the string representation
@@ -105,99 +85,31 @@ func (s DeleteSessionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSessionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BotAlias != nil {
-		v := *s.BotAlias
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botAlias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BotName != nil {
-		v := *s.BotName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SessionId != nil {
-		v := *s.SessionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sessionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-const opDeleteSession = "DeleteSession"
-
-// DeleteSessionRequest returns a request value for making API operation for
-// Amazon Lex Runtime Service.
+// DeleteSession invokes the API Amazon Lex Runtime Service, returning the
+// result or error.
 //
 // Removes session information for a specified bot, alias, and user ID.
 //
-//    // Example sending a request using DeleteSessionRequest.
-//    req := client.DeleteSessionRequest(params)
-//    resp, err := req.Send(context.TODO())
-//    if err == nil {
-//        fmt.Println(resp)
-//    }
-//
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/DeleteSession
-func (c *Client) DeleteSessionRequest(input *DeleteSessionInput) DeleteSessionRequest {
-	op := &aws.Operation{
-		Name:       opDeleteSession,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/session",
-	}
+func (c *Client) DeleteSession(ctx context.Context, input *DeleteSessionInput, opts ...APIOptionFunc) (
+	*DeleteSessionOutput, error,
+) {
+	stack := middleware.NewStack("lex runtime delete session", smithyhttp.NewStackRequest)
 
-	if input == nil {
-		input = &DeleteSessionInput{}
-	}
+	// TODO add stack (de)serializers, retry, and signer
+	//  Items like HTTP method and path are added via operation's serializer
+	//
+	//	  HTTPMethod: "DELETE",
+	//	  HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/session",
 
-	req := c.newRequest(op, input, &DeleteSessionOutput{})
-	return DeleteSessionRequest{Request: req, Input: input, Copy: c.DeleteSessionRequest}
-}
-
-// DeleteSessionRequest is the request type for the
-// DeleteSession API operation.
-type DeleteSessionRequest struct {
-	*aws.Request
-	Input *DeleteSessionInput
-	Copy  func(*DeleteSessionInput) DeleteSessionRequest
-}
-
-// Send marshals and sends the DeleteSession API request.
-func (r DeleteSessionRequest) Send(ctx context.Context) (*DeleteSessionResponse, error) {
-	r.Request.SetContext(ctx)
-	err := r.Request.Send()
+	res, _, err := c.invoke(ctx, stack, input, opts...)
 	if err != nil {
-		return nil, err
+		return nil, &smithy.OperationError{
+			ServiceName:   "LexRuntimeService",
+			OperationName: "DeleteSession",
+			Err:           err,
+		}
 	}
 
-	resp := &DeleteSessionResponse{
-		DeleteSessionOutput: r.Request.Data.(*DeleteSessionOutput),
-		response:            &aws.Response{Request: r.Request},
-	}
-
-	return resp, nil
-}
-
-// DeleteSessionResponse is the response type for the
-// DeleteSession API operation.
-type DeleteSessionResponse struct {
-	*DeleteSessionOutput
-
-	response *aws.Response
-}
-
-// SDKResponseMetdata returns the response metadata for the
-// DeleteSession request.
-func (r *DeleteSessionResponse) SDKResponseMetdata() *aws.Response {
-	return r.response
+	return res.(*DeleteSessionOutput), nil
 }
