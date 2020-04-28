@@ -47,8 +47,9 @@ func unmarshalError(r *request.Request) {
 	// Attempt to parse error from body if it is known
 	resp := &xmlErrorResponse{}
 	err := xml.NewDecoder(r.HTTPResponse.Body).Decode(resp)
-	if r.HTTPResponse.StatusCode >= 200 &&
-		r.HTTPResponse.StatusCode < 300 &&
+
+	// if 200 OK response payload with EOF error
+	if r.HTTPResponse.StatusCode >= 200 && r.HTTPResponse.StatusCode < 300 &&
 		err == io.EOF {
 		errCode = "SerializationError"
 		errMsg = "empty response payload"

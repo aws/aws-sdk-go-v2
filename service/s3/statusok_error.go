@@ -28,7 +28,7 @@ func copyMultipartStatusOKUnmarhsalError(r *request.Request) {
 			r.Error = nil
 			return
 		}
-
+		// if empty payload
 		if strings.Contains(err.Error(), io.EOF.Error()) {
 			r.HTTPResponse.StatusCode = http.StatusInternalServerError
 		} else {
