@@ -41,7 +41,7 @@ type WebIdentityRoleProvider struct {
 // WebIdentityRoleProviderOptions is a structure of configurable options for WebIdentityRoleProvider
 type WebIdentityRoleProviderOptions struct {
 	ExpiryWindow time.Duration
-	PolicyArns   []PolicyDescriptorType
+	PolicyArns   []sts.PolicyDescriptorType
 }
 
 // IdentityTokenRetriever is an interface for retrieving a JWT

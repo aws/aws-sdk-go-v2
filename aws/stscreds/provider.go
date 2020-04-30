@@ -183,7 +183,7 @@ type AssumeRoleProviderOptions struct {
 	// those allowed by the identity-based policy of the role that is being assumed.
 	// For more information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
 	// in the IAM User Guide.
-	PolicyArns []PolicyDescriptorType
+	PolicyArns []sts.PolicyDescriptorType
 
 	// The identification number of the MFA device that is associated with the user
 	// who is making the AssumeRole call. Specify this value if the trust policy
