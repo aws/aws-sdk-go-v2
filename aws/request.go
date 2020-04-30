@@ -38,9 +38,15 @@ func (e *SerializationError) Error() string {
 func (e *SerializationError) Unwrap() error { return e.Err }
 
 // DeserializationError provides a HTTP transport specific
-// request deserialization error
+// response deserialization error
 type DeserializationError struct {
 	Err error //  original error
+
+	// Snapshot stores relevant bytes of the response being
+	// deserialized, when an error occurred.
+	// This field may contain sensitive information from the
+	// response.
+	Snapshot []byte // byte slice storing
 }
 
 // Error returns a formatted error for DeserializationError
