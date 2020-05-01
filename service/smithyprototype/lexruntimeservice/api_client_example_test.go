@@ -6,16 +6,15 @@ import (
 	"log"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	lexruntime "github.com/aws/aws-sdk-go-v2/service/smithyprototype/lexruntimeservice"
 )
 
-func ExampleNewClient() {
-	cfg, err := external.LoadDefaultAWSConfig()
-	if err != nil {
-		log.Fatalf("failed to load config, %v", err)
-	}
-
-	client := lexruntime.NewClient(cfg)
+func ExampleNew() {
+	client := lexruntime.New(lexruntime.Options{
+		RegionID:    "us-west-2",
+		Credentials: customCredProvider,
+	})
 	res, err := client.GetSession(context.TODO(), &lexruntime.GetSessionInput{
 		BotAlias: aws.String("botAlias"),
 		BotName:  aws.String("botName"),
@@ -28,13 +27,13 @@ func ExampleNewClient() {
 	fmt.Println("session:", res.SessionId)
 }
 
-func ExampleNewClient_customOptions() {
+func ExampleNewFromConfig_customOptions() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		log.Fatalf("failed to load config, %v", err)
 	}
 
-	client := lexruntime.NewClient(cfg, func(o *lexruntime.ClientOptions) {
+	client := lexruntime.NewFromConfig(cfg, func(o *lexruntime.Options) {
 		o.RegionID = "us-west-2"
 	})
 	res, err := client.GetSession(context.TODO(), &lexruntime.GetSessionInput{
@@ -57,3 +56,5 @@ type mockExternal struct {
 func (mockExternal) LoadDefaultAWSConfig() (aws.Config, error) {
 	return aws.Config{}, nil
 }
+
+var customCredProvider = unit.Config().Credentials

@@ -9,37 +9,62 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/awslabs/smithy-go/middleware"
 )
 
 // Client provides the client for interacting with the Amazon Lex Runtime Service.
 type Client struct {
-	serviceName string
-	serviceID   string
-	endpointID  string
-	options     ClientOptions
+	options Options
 }
 
-// ClientOptions provides the set of configurations that can be applied to the
+// Options provides the set of configurations that can be applied to the
 // Client. Use functional options to modify this set when creating the client,
 // or when invoking API operations.
-type ClientOptions struct {
+type Options struct {
+	// The AWS regional endpoint the client will make API operation calls to.
+	// Required by the client.
 	RegionID string
 
+	// Behavior to resolve endpoints. Defaults to client's default endpoint
+	// resolution if nil.
 	EndpointResolver aws.EndpointResolver
-	HTTPClient       HTTPClient
 
-	// Signer is the signer for the client.
-	SigningName string
+	// The HTTP client to invoke API calls with. Defaults to client's default
+	// HTTP implementation if nil.
+	HTTPClient HTTPClient
+
+	// Credentials will be used to create the client's default signer if one is
+	// not provided. If signer is provided Credentials are ignored.
+	Credentials aws.CredentialsProvider
+
+	// If nil, will default to client's signer using provided credentials.
+	// Credentials must also be set.
 	Signer      HTTPSigner
+	SigningName string
 
+	// Set of options to modify how an operation is invoked. These apply to all
+	// operations invoked for this client. Use functional option on operation
+	// call to modify this list for per operation behavior.
 	APIOptions []APIOptionFunc
 
 	Retryer  aws.Retryer
 	LogLevel aws.LogLevel
 	Logger   aws.Logger
 }
+
+func (o Options) Copy() Options {
+	to := o
+
+	to.APIOptions = make([]APIOptionFunc, len(o.APIOptions))
+	copy(to.APIOptions, o.APIOptions)
+
+	return to
+}
+
+// APIOptionFunc provides the type for overriding options for API operation
+// calls. Allows modifying the middleware stack, and client options per API
+// operation call.
+type APIOptionFunc func(*middleware.Stack) error
 
 // HTTPSigner provides the interface for implementations to sign HTTP AWS
 // requests.
@@ -53,56 +78,40 @@ type HTTPClient interface {
 	Do(*http.Request) (*http.Response, error)
 }
 
-// NewClient returns an initialized client with the client options used to
-// specify the behavior of the client.
-func NewClient(cfg aws.Config, opts ...func(*ClientOptions)) *Client {
-	client := &Client{
-		serviceName: "Amazon Lex Runtime Service",
-		serviceID:   "LexRuntimeService",
-		endpointID:  "runtime.lex",
-
-		options: ClientOptions{
-			RegionID:         cfg.Region,
-			EndpointResolver: cfg.EndpointResolver,
-			Signer:           v4.NewSigner(cfg.Credentials),
-			HTTPClient:       cfg.HTTPClient,
-		},
+// New returns an initialized client with the client options used to specify
+// the behavior of the client.
+func New(opts Options) *Client {
+	// Fill options with default values.
+	if opts.EndpointResolver == nil {
+		opts.EndpointResolver = newEndpointResolver()
+	}
+	if opts.Signer == nil {
+		opts.Signer = v4.NewSigner(opts.Credentials)
+	}
+	if opts.HTTPClient == nil {
+		opts.HTTPClient = aws.NewBuildableHTTPClient()
 	}
 
-	for _, fn := range opts {
-		fn(&client.options)
+	client := &Client{
+		options: opts,
 	}
 
 	return client
 }
 
+// NewFromConfig returns a Client initialized with the configuration provided
+// in the AWS Config, and functional options provided.
+func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
+	var o Options
+	for _, fn := range optFns {
+		fn(&o)
+	}
+
+	return New(o)
+}
+
 // ServiceID returns the name of the identifier for the service API.
-func (c *Client) ServiceID() string { return c.serviceID }
+func (c *Client) ServiceID() string { return "LexRuntimeService" }
 
 // ServiceName returns the full service name.
-func (c *Client) ServiceName() string { return c.serviceName }
-
-// APIOptionFunc provides the type for overriding options for API operation
-// calls. Allows modifying the middleware stack, and client options per API
-// operation call.
-type APIOptionFunc func(*ClientOptions, *middleware.Stack) error
-
-func (c *Client) invoke(ctx context.Context, stack *middleware.Stack, input interface{}, opts ...APIOptionFunc) (
-	result interface{}, metadata middleware.Metadata, err error,
-) {
-	clientOptions := c.options
-	for _, fn := range c.options.APIOptions {
-		if err := fn(&clientOptions, stack); err != nil {
-			return nil, metadata, err
-		}
-	}
-
-	for _, fn := range opts {
-		if err := fn(&clientOptions, stack); err != nil {
-			return nil, metadata, err
-		}
-	}
-
-	h := middleware.DecorateHandler(awshttp.ClientHandler{Client: clientOptions.HTTPClient}, stack)
-	return h.Handle(ctx, input)
-}
+func (c *Client) ServiceName() string { return "Amazon Lex Runtime Service" }

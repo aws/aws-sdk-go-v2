@@ -7,6 +7,7 @@ import (
 	"errors"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/smithyprototype/lexruntimeservice/types"
 	"github.com/awslabs/smithy-go"
@@ -120,10 +121,16 @@ func (s ListSessionsOutput) String() string {
 // Returns session information for a specified bot, alias, and user ID.
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/ListSessions
-func (c *Client) ListSessions(ctx context.Context, input *ListSessionsInput, opts ...APIOptionFunc) (
+func (c *Client) ListSessions(ctx context.Context, input *ListSessionsInput, optFns ...func(*Options)) (
 	*ListSessionsOutput, error,
 ) {
 	stack := middleware.NewStack("lex runtime get session", smithyhttp.NewStackRequest)
+
+	options := c.options.Copy()
+	// Allow user options to modify client options
+	for _, fn := range optFns {
+		fn(&options)
+	}
 
 	// TODO add stack (de)serializers, retry, and signer
 	// Items like HTTP method and path are added via operation's serializer
@@ -131,7 +138,18 @@ func (c *Client) ListSessions(ctx context.Context, input *ListSessionsInput, opt
 	//	  HTTPMethod: "GET",
 	//	  HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/session",
 
-	res, _, err := c.invoke(ctx, stack, input, opts...)
+	// Iterate through stack modification options.
+	for _, fn := range options.APIOptions {
+		if err := fn(stack); err != nil {
+			return nil, err
+		}
+	}
+
+	h := middleware.DecorateHandler(awshttp.ClientHandler{
+		Client: options.HTTPClient,
+	}, stack)
+
+	res, _, err := h.Handle(ctx, input)
 	if err != nil {
 		return nil, &smithy.OperationError{
 			ServiceName:   "LexRuntimeService",
@@ -149,7 +167,7 @@ func (c *Client) ListSessions(ctx context.Context, input *ListSessionsInput, opt
 // ListSessionsClient provides the interface for a client that implements the
 // ListSessions API operation. Implemented by the package's Client type.
 type ListSessionsClient interface {
-	ListSessions(ctx context.Context, input *ListSessionsInput, opts ...APIOptionFunc) (
+	ListSessions(ctx context.Context, input *ListSessionsInput, opts ...func(*Options)) (
 		*ListSessionsOutput, error,
 	)
 }
@@ -162,7 +180,7 @@ type ListSessionsPaginator struct {
 
 // NewListSessionsPaginator returns a ListSessionsPaginator configured for the
 // API operation client, and input parameters.
-func NewListSessionsPaginator(client ListSessionsClient, input *ListSessionsInput, opts ...APIOptionFunc) *ListSessionsPaginator {
+func NewListSessionsPaginator(client ListSessionsClient, input *ListSessionsInput, optFns ...func(*Options)) *ListSessionsPaginator {
 	// TODO implementation
 	return nil
 }
@@ -174,7 +192,7 @@ func (p *ListSessionsPaginator) HasMorePages() bool {
 }
 
 // NextPage returns the next page from the API, or error.
-func (p *ListSessionsPaginator) NextPage(ctx context.Context, opts ...APIOptionFunc) (
+func (p *ListSessionsPaginator) NextPage(ctx context.Context, opts ...func(*Options)) (
 	*ListSessionsOutput, error,
 ) {
 	// TODO implementation
