@@ -16,7 +16,7 @@ func ExampleClient_ListSessions_pagination() {
 		log.Fatalf("unable to load configuration, %v", err)
 	}
 
-	client := lexruntimeservice.NewClient(cfg)
+	client := lexruntimeservice.NewFromConfig(cfg)
 
 	// Create a paginator with the client and input parameters.
 	p := lexruntime.NewListSessionsPaginator(client, &lexruntime.ListSessionsInput{
