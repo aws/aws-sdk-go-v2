@@ -20,6 +20,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3/internal/s3testing"
 )
 
+const respBody = `<?xml version="1.0" encoding="UTF-8"?>
+<CompleteMultipartUploadOutput>
+   <Location>mockValue</Location>
+   <Bucket>mockValue</Bucket>
+   <Key>mockValue</Key>
+   <ETag>mockValue</ETag>
+</CompleteMultipartUploadOutput>`
+
 type testReader struct {
 	br *bytes.Reader
 	m  sync.Mutex
@@ -81,7 +89,7 @@ func TestUploadByteSlicePool(t *testing.T) {
 
 				r.HTTPResponse = &http.Response{
 					StatusCode: 200,
-					Body:       ioutil.NopCloser(bytes.NewReader([]byte{})),
+					Body:       ioutil.NopCloser(bytes.NewReader([]byte(respBody))),
 				}
 
 				switch data := r.Data.(type) {
@@ -177,7 +185,7 @@ func TestUploadByteSlicePool_Failures(t *testing.T) {
 							r.Error = fmt.Errorf("request error")
 							r.HTTPResponse = &http.Response{
 								StatusCode: 400,
-								Body:       ioutil.NopCloser(bytes.NewReader([]byte{})),
+								Body:       ioutil.NopCloser(bytes.NewReader([]byte(respBody))),
 							}
 							return
 						}
@@ -252,7 +260,7 @@ func TestUploadByteSlicePoolConcurrentMultiPartSize(t *testing.T) {
 
 		r.HTTPResponse = &http.Response{
 			StatusCode: 200,
-			Body:       ioutil.NopCloser(bytes.NewReader([]byte{})),
+			Body:       ioutil.NopCloser(bytes.NewReader([]byte(respBody))),
 		}
 
 		switch data := r.Data.(type) {
@@ -363,7 +371,7 @@ func BenchmarkPools(b *testing.B) {
 
 		r.HTTPResponse = &http.Response{
 			StatusCode: 200,
-			Body:       ioutil.NopCloser(bytes.NewReader([]byte{})),
+			Body:       ioutil.NopCloser(bytes.NewReader([]byte(respBody))),
 		}
 
 		switch data := r.Data.(type) {

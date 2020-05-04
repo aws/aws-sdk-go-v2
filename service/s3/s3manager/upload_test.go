@@ -26,6 +26,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
 )
 
+const respBody = `<?xml version="1.0" encoding="UTF-8"?>
+<CompleteMultipartUploadOutput>
+   <Location>mockValue</Location>
+   <Bucket>mockValue</Bucket>
+   <Key>mockValue</Key>
+   <ETag>mockValue</ETag>
+</CompleteMultipartUploadOutput>`
+
 var emptyList []string
 
 func val(i interface{}, s string) interface{} {
@@ -74,7 +82,7 @@ func loggingSvc(ignoreOps []string) (*s3.Client, *[]string, *[]interface{}) {
 
 		r.HTTPResponse = &http.Response{
 			StatusCode: 200,
-			Body:       ioutil.NopCloser(bytes.NewReader([]byte{})),
+			Body:       ioutil.NopCloser(bytes.NewReader([]byte(respBody))),
 		}
 
 		switch data := r.Data.(type) {
@@ -952,7 +960,7 @@ func TestReaderAt(t *testing.T) {
 		contentLen = r.HTTPRequest.Header.Get("Content-Length")
 		r.HTTPResponse = &http.Response{
 			StatusCode: 200,
-			Body:       ioutil.NopCloser(bytes.NewReader([]byte{})),
+			Body:       ioutil.NopCloser(bytes.NewReader([]byte(respBody))),
 		}
 	})
 
@@ -990,7 +998,7 @@ func TestSSE(t *testing.T) {
 		defer mutex.Unlock()
 		r.HTTPResponse = &http.Response{
 			StatusCode: 200,
-			Body:       ioutil.NopCloser(bytes.NewReader([]byte{})),
+			Body:       ioutil.NopCloser(bytes.NewReader([]byte(respBody))),
 		}
 		switch data := r.Data.(type) {
 		case *s3.CreateMultipartUploadOutput:
@@ -1137,7 +1145,7 @@ func TestUploadBufferStrategy(t *testing.T) {
 
 				r.HTTPResponse = &http.Response{
 					StatusCode: 200,
-					Body:       ioutil.NopCloser(bytes.NewReader([]byte{})),
+					Body:       ioutil.NopCloser(bytes.NewReader([]byte(respBody))),
 				}
 
 				switch data := r.Data.(type) {

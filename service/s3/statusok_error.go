@@ -5,6 +5,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"strings"
 
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
@@ -20,17 +21,18 @@ func copyMultipartStatusOKUnmarhsalError(r *request.Request) {
 	r.HTTPResponse.Body = ioutil.NopCloser(body)
 	defer body.Seek(0, io.SeekStart)
 
-	if body.Len() == 0 {
-		// If there is no body don't attempt to parse the body.
-		return
-	}
-
 	unmarshalError(r)
 	if err, ok := r.Error.(awserr.Error); ok && err != nil {
-		if err.Code() == "SerializationError" {
+		if err.Code() == "SerializationError" &&
+			!strings.Contains(err.Error(), io.EOF.Error()) {
 			r.Error = nil
 			return
 		}
-		r.HTTPResponse.StatusCode = http.StatusServiceUnavailable
+		// if empty payload
+		if strings.Contains(err.Error(), io.EOF.Error()) {
+			r.HTTPResponse.StatusCode = http.StatusInternalServerError
+		} else {
+			r.HTTPResponse.StatusCode = http.StatusServiceUnavailable
+		}
 	}
 }
