@@ -82,6 +82,7 @@ type HTTPClient interface {
 // the behavior of the client.
 func New(opts Options) *Client {
 	// Fill options with default values.
+	// TODO move this to helper function.
 	if opts.EndpointResolver == nil {
 		opts.EndpointResolver = newEndpointResolver()
 	}
@@ -103,6 +104,11 @@ func New(opts Options) *Client {
 // in the AWS Config, and functional options provided.
 func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	var o Options
+
+	// TODO Copy cfg into options into options value
+	o.RegionID = cfg.Region
+	o.EndpointResolver = cfg.EndpointResolver
+
 	for _, fn := range optFns {
 		fn(&o)
 	}
