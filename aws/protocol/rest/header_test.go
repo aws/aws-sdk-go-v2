@@ -7,7 +7,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
@@ -85,14 +84,6 @@ func TestHeaderValue(t *testing.T) {
 			append: true,
 			expected: map[string][]string{
 				expectedKeyName: {"false", "true"},
-			},
-		},
-		"add json": {
-			header: http.Header{expectedKeyName: []string{`eyJzb21lS2V5Ijoic29tZVZhbHVlIn0=`}},
-			args:   []interface{}{aws.JSONValue{"jsonKey": "jsonValue"}},
-			append: true,
-			expected: map[string][]string{
-				expectedKeyName: {"eyJzb21lS2V5Ijoic29tZVZhbHVlIn0=", "eyJqc29uS2V5IjoianNvblZhbHVlIn0="},
 			},
 		},
 		"add time": {

@@ -6,7 +6,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
@@ -46,14 +45,6 @@ func TestURIValue(t *testing.T) {
 			expected: expected{
 				path: "/some/true/{path+}",
 				raw:  "/some/true/{path+}",
-			},
-		},
-		"json": {
-			path: path,
-			args: []interface{}{aws.JSONValue{"jsonKey": "jsonValue"}},
-			expected: expected{
-				path: `/some/{"jsonKey":"jsonValue"}/{path+}`,
-				raw:  "/some/%7B%22jsonKey%22%3A%22jsonValue%22%7D/{path+}",
 			},
 		},
 		"time": {
@@ -103,8 +94,10 @@ func setURI(uv URIValue, args []interface{}) error {
 	switch value.(type) {
 	case string:
 		return reflectCall(reflect.ValueOf(uv.String), args)
-	case float64:
+	case float32:
 		return reflectCall(reflect.ValueOf(uv.Float), args)
+	case float64:
+		return reflectCall(reflect.ValueOf(uv.Double), args)
 	case bool:
 		return reflectCall(reflect.ValueOf(uv.Boolean), args)
 	case time.Time:
