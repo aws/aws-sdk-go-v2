@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
@@ -106,4 +107,15 @@ func (qv QueryValue) UnixTime(v time.Time) {
 func (qv QueryValue) Blob(v []byte) {
 	encodeToString := base64.StdEncoding.EncodeToString(v)
 	qv.updateKey(encodeToString)
+}
+
+// JSONValue encodes the value v using the format name as a query string value
+// deprecated: this will be removed at a later point
+func (qv QueryValue) JSONValue(v aws.JSONValue) error {
+	encodeJSONValue, err := protocol.EncodeJSONValue(v, protocol.NoEscape)
+	if err != nil {
+		return err
+	}
+	qv.updateKey(encodeJSONValue)
+	return nil
 }

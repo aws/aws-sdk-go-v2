@@ -4,6 +4,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
@@ -76,4 +77,15 @@ func (u URIValue) UnixTime(v time.Time) error {
 // Blob encodes the value v as a base64 URI string value
 func (u URIValue) Blob(v []byte) error {
 	return u.modifyURI(string(v))
+}
+
+// JSONValue encodes the value v as a URI string value
+// deprecated: this will be removed at a later point
+func (u URIValue) JSONValue(v aws.JSONValue) error {
+	encodeJSONValue, err := protocol.EncodeJSONValue(v, protocol.NoEscape)
+	if err != nil {
+		return err
+	}
+
+	return u.modifyURI(encodeJSONValue)
 }

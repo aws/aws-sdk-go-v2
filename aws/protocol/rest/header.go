@@ -8,6 +8,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
@@ -123,4 +124,15 @@ func (h HeaderValue) UnixTime(v time.Time) {
 func (h HeaderValue) Blob(v []byte) {
 	encodeToString := base64.StdEncoding.EncodeToString(v)
 	h.modifyHeader(encodeToString)
+}
+
+// JSONValue encodes the value v as a base64 header string value
+// deprecated: this will be removed at a later point
+func (h HeaderValue) JSONValue(v aws.JSONValue) error {
+	encodedValue, err := protocol.EncodeJSONValue(v, protocol.Base64Escape)
+	if err != nil {
+		return err
+	}
+	h.modifyHeader(encodedValue)
+	return nil
 }
