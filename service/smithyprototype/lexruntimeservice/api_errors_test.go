@@ -37,7 +37,6 @@ apply InvalidParametersException @httpResponseTests([
         params: {
 			Code: "InvalidParametersException",
             Message: "invalid input parameters",
-			RetryAfterSeconds: "10",
         }
 	}
 	... Other tests
@@ -90,9 +89,6 @@ func TestInvalidParametersException_deserialize_RestJsonErrorDecode(t *testing.T
 		t.Errorf("expect %v code, got %v", e, a)
 	}
 	if e, a := "invalid message", apiErr.ErrorMessage(); e != a {
-		t.Errorf("expect %v code, got %v", e, a)
-	}
-	if e, a := "10", apiErr.GetsRetryAfterSeconds(); e != a {
 		t.Errorf("expect %v code, got %v", e, a)
 	}
 

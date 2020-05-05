@@ -17,21 +17,17 @@ type InvalidParameterExceptionInterface interface {
 // members beyond the message and fault.
 type InvalidParameterException struct {
 	Message string
-
-	// Modeled members
-	RetryAfterSeconds *string
 }
 
 func (e *InvalidParameterException) isInvalidParameterException() {}
-func (e *InvalidParameterException) HasRetryAfterSeconds() bool   { return e.RetryAfterSeconds != nil }
-func (e *InvalidParameterException) GetsRetryAfterSeconds() (v string) {
-	if e.RetryAfterSeconds == nil {
-		return v
-	}
-	return *e.RetryAfterSeconds
-}
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
-func (e *InvalidParameterException) ErrorMessage() string          { return e.Message }
+
+// ErrorCode returns the code for the API exception.
+func (e *InvalidParameterException) ErrorCode() string { return "InvalidParameterException" }
+
+// ErrorMessage returns the message from the exception.
+func (e *InvalidParameterException) ErrorMessage() string { return e.Message }
+
+// ErrorFault returns the source of the error.
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 func (e *InvalidParameterException) Error() string {
 	return fmt.Sprintf("api error %s: %s", e.ErrorCode(), e.ErrorMessage())
