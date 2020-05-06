@@ -15,6 +15,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 // Interface for matching types which also have a Len method.
@@ -304,6 +305,9 @@ var AttemptClockSkewHandler = aws.NamedHandler{
 		}
 
 		respDate, err := http.ParseTime(respDateHeader)
+		if err != nil {
+			respDate, err = protocol.ParseTime(protocol.RFC822TimeFormatName, respDateHeader)
+		}
 		if err != nil {
 			if r.Config.Logger != nil {
 				r.Config.Logger.Log(fmt.Sprintf("ERROR: unable to determine clock skew for %s/%s API response, invalid Date header value, %v",
