@@ -494,7 +494,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 				},
 			},
 		},
-		"RFC822 time format support": {
+		"RFC822 1digit day time format support": {
 			Req: &aws.Request{
 				HTTPResponse: &http.Response{
 					StatusCode: 200,
