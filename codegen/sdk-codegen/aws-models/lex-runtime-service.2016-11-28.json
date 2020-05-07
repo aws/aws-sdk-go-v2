@@ -1,31 +1,20 @@
-{
-  "smithy": "1.0.0",
+  "smithy": "1",
   "metadata": {
     "suppressions": [
       {
-        "ids": [
-          "HttpMethodSemantics"
-        ]
+        "id": "HttpMethodSemantics"
       },
       {
-        "ids": [
-          "HttpResponseCodeSemantics"
-        ]
+        "id": "HttpResponseCodeSemantics"
       },
       {
-        "ids": [
-          "PaginatedTrait"
-        ]
+        "id": "PaginatedTrait"
       },
       {
-        "ids": [
-          "HttpHeaderTrait"
-        ]
+        "id": "HttpHeaderTrait"
       },
       {
-        "ids": [
-          "HttpUriConflict"
-        ]
+        "ids": "HttpUriConflict"
       }
     ]
   },
