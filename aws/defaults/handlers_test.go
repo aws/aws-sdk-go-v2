@@ -494,6 +494,18 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 				},
 			},
 		},
+		"RFC822 1digit day time format support": {
+			Req: &aws.Request{
+				HTTPResponse: &http.Response{
+					StatusCode: 200,
+					Header: http.Header{
+						"Date": []string{"Thu, 5 Mar 2020 22:25:15 GMT"},
+					},
+				},
+				ResponseAt: time.Date(2020, 3, 5, 22, 25, 17, 0, time.UTC),
+			},
+			Expect: []time.Duration{-2 * time.Second},
+		},
 		"first date response": {
 			Req: &aws.Request{
 				HTTPResponse: &http.Response{

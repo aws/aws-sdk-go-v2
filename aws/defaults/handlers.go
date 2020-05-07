@@ -15,6 +15,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 // Interface for matching types which also have a Len method.
@@ -304,6 +305,12 @@ var AttemptClockSkewHandler = aws.NamedHandler{
 		}
 
 		respDate, err := http.ParseTime(respDateHeader)
+		if err != nil {
+			// Fallback trying the SDK's RFC 822 datetime format parsing which handles 1digit formatted
+			// day of month pattern. RFC 2616 states the RFC 822 datetime muse use 2digit days, but some
+			// APIs may respond with the incorrect format.
+			respDate, err = protocol.ParseTime(protocol.RFC822TimeFormatName, respDateHeader)
+		}
 		if err != nil {
 			if r.Config.Logger != nil {
 				r.Config.Logger.Log(fmt.Sprintf("ERROR: unable to determine clock skew for %s/%s API response, invalid Date header value, %v",
