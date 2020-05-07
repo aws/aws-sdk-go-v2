@@ -3,27 +3,27 @@
   "metadata": {
     "suppressions": [
       {
-        "ids": [
+        "id": [
           "HttpMethodSemantics"
         ]
       },
       {
-        "ids": [
+        "id": [
           "HttpResponseCodeSemantics"
         ]
       },
       {
-        "ids": [
+        "id": [
           "PaginatedTrait"
         ]
       },
       {
-        "ids": [
+        "id": [
           "HttpHeaderTrait"
         ]
       },
       {
-        "ids": [
+        "id": [
           "HttpUriConflict"
         ]
       }
