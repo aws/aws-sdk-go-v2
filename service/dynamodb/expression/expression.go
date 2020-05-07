@@ -488,6 +488,9 @@ func (e Expression) returnExpression(expressionType expressionType) *string {
 	if e.expressionMap == nil {
 		return nil
 	}
+	if _, ok := e.expressionMap[expressionType]; !ok {
+		return nil
+	}
 	return aws.String(e.expressionMap[expressionType])
 }
 
