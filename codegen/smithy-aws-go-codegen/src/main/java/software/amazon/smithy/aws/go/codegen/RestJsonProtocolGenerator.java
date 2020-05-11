@@ -31,6 +31,7 @@ import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.HttpBinding;
 import software.amazon.smithy.model.knowledge.HttpBindingIndex;
+import software.amazon.smithy.model.shapes.MapShape;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.Shape;
@@ -176,6 +177,21 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.write("defer object.Close()");
         writer.write("");
 
+        // If the shape is a map we have special logic for enumerating members
+        if (shape.isMapShape()) {
+            writeMapShapeToJsonObject(model, symbolProvider, writer, shape);
+        } else {
+            writeShapeMembersToJsonObject(model, symbolProvider, writer, shape, filterMemberShapes);
+        }
+    }
+
+    private void writeShapeMembersToJsonObject(
+            Model model,
+            SymbolProvider symbolProvider,
+            GoWriter writer,
+            Shape shape,
+            Function<MemberShape, Boolean> filterMemberShapes
+    ) {
         shape.members().forEach(memberShape -> {
             if (!filterMemberShapes.apply(memberShape)) {
                 return;
@@ -200,6 +216,26 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                         }
                     });
             writer.write("");
+        });
+    }
+
+    private void writeMapShapeToJsonObject(Model model, SymbolProvider symbolProvider, GoWriter writer, Shape shape) {
+        MapShape mapShape = shape.asMapShape().orElseThrow(() -> new CodegenException("expected map shape"));
+
+        Shape targetShape = model.expectShape(mapShape.getValue().getTarget());
+
+        writer.openBlock("for key := range v {", "}", () -> {
+            if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
+                String serFunctionName = ProtocolGenerator
+                        .getDocumentSerializerFunctionName(targetShape,
+                                getProtocolName());
+                writer.openBlock("if err := $L(v[key], object.Key(key)); err != nil {", "}", serFunctionName, () -> {
+                    writer.write("return err");
+                });
+            } else {
+                writer.write("object.Key(key)" + writeSimpleShapeToJsonValue(targetShape,
+                        symbolProvider.toSymbol(targetShape), "v[key]"));
+            }
         });
     }
 
