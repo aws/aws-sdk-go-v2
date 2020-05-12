@@ -6,7 +6,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
@@ -46,14 +45,6 @@ func TestURIValue(t *testing.T) {
 			expected: expected{
 				path: "/some/true/{path+}",
 				raw:  "/some/true/{path+}",
-			},
-		},
-		"json": {
-			path: path,
-			args: []interface{}{aws.JSONValue{"jsonKey": "jsonValue"}},
-			expected: expected{
-				path: `/some/{"jsonKey":"jsonValue"}/{path+}`,
-				raw:  "/some/%7B%22jsonKey%22%3A%22jsonValue%22%7D/{path+}",
 			},
 		},
 		"time": {
@@ -103,16 +94,16 @@ func setURI(uv URIValue, args []interface{}) error {
 	switch value.(type) {
 	case string:
 		return reflectCall(reflect.ValueOf(uv.String), args)
-	case float64:
+	case float32:
 		return reflectCall(reflect.ValueOf(uv.Float), args)
+	case float64:
+		return reflectCall(reflect.ValueOf(uv.Double), args)
 	case bool:
 		return reflectCall(reflect.ValueOf(uv.Boolean), args)
-	case aws.JSONValue:
-		return reflectCall(reflect.ValueOf(uv.JSONValue), args)
 	case time.Time:
-		return reflectCall(reflect.ValueOf(uv.Time), args)
+		return reflectCall(reflect.ValueOf(uv.Timestamp), args)
 	case []byte:
-		return reflectCall(reflect.ValueOf(uv.ByteSlice), args)
+		return reflectCall(reflect.ValueOf(uv.Blob), args)
 	default:
 		return fmt.Errorf("unhandled value type")
 	}

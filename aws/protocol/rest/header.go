@@ -2,6 +2,7 @@ package rest
 
 import (
 	"encoding/base64"
+	"math/big"
 	"net/http"
 	"strconv"
 	"strings"
@@ -55,23 +56,57 @@ func (h HeaderValue) String(v string) {
 	h.modifyHeader(v)
 }
 
+// Byte encodes the value v as a query string value
+func (h HeaderValue) Byte(v int8) {
+	h.Long(int64(v))
+}
+
+// Short encodes the value v as a query string value
+func (h HeaderValue) Short(v int16) {
+	h.Long(int64(v))
+}
+
 // Integer encodes the value v as the header string value
-func (h HeaderValue) Integer(v int64) {
+func (h HeaderValue) Integer(v int32) {
+	h.Long(int64(v))
+}
+
+// Long encodes the value v as the header string value
+func (h HeaderValue) Long(v int64) {
 	h.modifyHeader(strconv.FormatInt(v, 10))
 }
 
-// Boolean encodes the value v as a header string value
+// Boolean encodes the value v as a query string value
 func (h HeaderValue) Boolean(v bool) {
 	h.modifyHeader(strconv.FormatBool(v))
 }
 
-// Float encodes the value v as a header string value
-func (h HeaderValue) Float(v float64) {
-	h.modifyHeader(strconv.FormatFloat(v, 'f', -1, 64))
+// Float encodes the value v as a query string value
+func (h HeaderValue) Float(v float32) {
+	h.float(float64(v), 32)
 }
 
-// Time encodes the value v using the format name as a header string value
-func (h HeaderValue) Time(t time.Time, format string) error {
+// Double encodes the value v as a query string value
+func (h HeaderValue) Double(v float64) {
+	h.float(v, 64)
+}
+
+func (h HeaderValue) float(v float64, bitSize int) {
+	h.modifyHeader(strconv.FormatFloat(v, 'f', -1, bitSize))
+}
+
+// BigInteger encodes the value v as a query string value
+func (h HeaderValue) BigInteger(v *big.Int) {
+	h.modifyHeader(v.String())
+}
+
+// BigDecimal encodes the value v as a query string value
+func (h HeaderValue) BigDecimal(v *big.Float) {
+	h.modifyHeader(v.String())
+}
+
+// Timestamp encodes the value v using the format name as a header string value
+func (h HeaderValue) Timestamp(t time.Time, format string) error {
 	value, err := protocol.FormatTime(format, t)
 	if err != nil {
 		return err
@@ -80,13 +115,19 @@ func (h HeaderValue) Time(t time.Time, format string) error {
 	return nil
 }
 
-// ByteSlice encodes the value v as a base64 header string value
-func (h HeaderValue) ByteSlice(v []byte) {
+// UnixTime encodes the value v using the format name as a query string value
+func (h HeaderValue) UnixTime(v time.Time) {
+	h.Long(v.Unix())
+}
+
+// Blob encodes the value v as a base64 header string value
+func (h HeaderValue) Blob(v []byte) {
 	encodeToString := base64.StdEncoding.EncodeToString(v)
 	h.modifyHeader(encodeToString)
 }
 
 // JSONValue encodes the value v as a base64 header string value
+// deprecated: this will be removed at a later point
 func (h HeaderValue) JSONValue(v aws.JSONValue) error {
 	encodedValue, err := protocol.EncodeJSONValue(v, protocol.Base64Escape)
 	if err != nil {
