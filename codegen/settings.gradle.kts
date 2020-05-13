@@ -16,3 +16,4 @@
 rootProject.name = "codegen"
 include(":sdk-codegen")
 include(":smithy-aws-go-codegen")
+include(":protocol-test-codegen")
