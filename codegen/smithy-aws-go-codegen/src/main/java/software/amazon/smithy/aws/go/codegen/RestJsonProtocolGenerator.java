@@ -18,8 +18,8 @@ package software.amazon.smithy.aws.go.codegen;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import org.commonmark.node.Code;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
@@ -33,14 +33,17 @@ import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.HttpBinding;
 import software.amazon.smithy.model.knowledge.HttpBindingIndex;
+import software.amazon.smithy.model.shapes.CollectionShape;
 import software.amazon.smithy.model.shapes.MapShape;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeType;
+import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.traits.EnumTrait;
 import software.amazon.smithy.model.traits.MediaTypeTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
+import software.amazon.smithy.utils.FunctionalUtils;
 
 /**
  * Handles general components across the AWS JSON protocols that have HTTP bindings.
@@ -64,28 +67,26 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
     @Override
     protected void generateOperationDocumentSerializer(
-            GenerationContext context, OperationShape operation
+            GenerationContext context,
+            OperationShape operation
     ) {
         Model model = context.getModel();
-
         HttpBindingIndex bindingIndex = model.getKnowledge(HttpBindingIndex.class);
-
-        Set<MemberShape> bindingMap = bindingIndex.getRequestBindings(operation).values().stream()
-                .filter(binding -> binding.getLocation() == HttpBinding.Location.DOCUMENT)
+        Set<MemberShape> documentBindings = bindingIndex.getRequestBindings(operation, HttpBinding.Location.DOCUMENT)
+                .stream()
                 .map(HttpBinding::getMember)
                 .collect(Collectors.toSet());
 
-        if (bindingMap.size() == 0) {
+        if (documentBindings.size() == 0) {
             return;
         }
 
         Shape inputShape = model.expectShape(operation.getInput()
-                .orElseThrow(() -> new CodegenException("input shapre missing for operation " + operation.getId())));
-
+                .orElseThrow(() -> new CodegenException("Input shape missing for operation " + operation.getId())));
         GoWriter writer = context.getWriter();
 
         writeJsonShapeSerializerFunction(writer, model, context.getSymbolProvider(), inputShape,
-                bindingMap::contains);
+                documentBindings::contains);
         writer.write("");
     }
 
@@ -94,19 +95,14 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             Model model,
             SymbolProvider symbolProvider,
             Shape inputShape,
-            Function<MemberShape, Boolean> filterMemberShapes
+            Predicate<MemberShape> filterMemberShapes
     ) {
         Symbol jsonEncoder = SymbolUtils.createPointableSymbolBuilder("Value", GoDependency.AWS_JSON_PROTOCOL)
                 .build();
-
         Symbol inputSymbol = symbolProvider.toSymbol(inputShape);
-
         String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(inputShape, getProtocolName());
 
-        writer.addUseImports(SymbolUtils.createValueSymbolBuilder(null, GoDependency.FMT).build());
-        writer.addUseImports(inputSymbol);
-        writer.addUseImports(jsonEncoder);
-
+        writer.addUseImports(GoDependency.FMT);
         writer.openBlock("func $L(v $P, value $T) error {", "}", functionName, inputSymbol,
                 jsonEncoder, () -> {
                     writer.openBlock("if v == nil {", "}", () -> {
@@ -117,18 +113,18 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                     switch (inputShape.getType()) {
                         case MAP:
                         case STRUCTURE:
-                            writeShapeToJsonObject(model, symbolProvider, writer, inputShape,
-                                    filterMemberShapes);
+                            writeShapeToJsonObject(model, symbolProvider, writer, inputShape, filterMemberShapes);
                             break;
                         case LIST:
                         case SET:
-                            writeShapeToJsonArray(model, writer, inputShape);
+                            writeShapeToJsonArray(model, writer, (CollectionShape) inputShape);
                             break;
                         case UNION:
                         case DOCUMENT:
                             writer.write("// TODO: Support " + inputShape.getType().name() + " Serialization");
+                            break;
                         default:
-                            throw new CodegenException("unexpected type");
+                            throw new CodegenException("Unexpected shape serialization to JSON");
                     }
 
                     writer.write("return nil");
@@ -138,13 +134,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     private void writeShapeToJsonArray(
             Model model,
             GoWriter writer,
-            Shape shape
+            CollectionShape shape
     ) {
-        if (shape.members().size() > 1) {
-            throw new CodegenException("not possible to serialize shape with only multiple member shapes"
-                    + " to an array");
-        }
-
         MemberShape memberShape = shape.members().iterator().next();
         Shape targetShape = model.expectShape(memberShape.getTarget());
 
@@ -173,29 +164,34 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             SymbolProvider symbolProvider,
             GoWriter writer,
             Shape shape,
-            Function<MemberShape, Boolean> filterMemberShapes
+            Predicate<MemberShape> filterMemberShapes
     ) {
         writer.write("object := value.Object()");
         writer.write("defer object.Close()");
         writer.write("");
 
-        // If the shape is a map we have special logic for enumerating members
-        if (shape.isMapShape()) {
-            writeMapShapeToJsonObject(model, writer, shape);
-        } else {
-            writeShapeMembersToJsonObject(model, symbolProvider, writer, shape, filterMemberShapes);
+        switch (shape.getType()) {
+            case MAP:
+                writeMapShapeToJsonObject(model, writer, (MapShape) shape);
+                break;
+            case STRUCTURE:
+                writeStructuredShapeToJsonObject(model, symbolProvider, writer, (StructureShape) shape,
+                        filterMemberShapes);
+                break;
+            default:
+                throw new CodegenException("Unexpected shape serialization to JSON Object");
         }
     }
 
-    private void writeShapeMembersToJsonObject(
+    private void writeStructuredShapeToJsonObject(
             Model model,
             SymbolProvider symbolProvider,
             GoWriter writer,
-            Shape shape,
-            Function<MemberShape, Boolean> filterMemberShapes
+            StructureShape shape,
+            Predicate<MemberShape> filterMemberShapes
     ) {
         shape.members().forEach(memberShape -> {
-            if (!filterMemberShapes.apply(memberShape)) {
+            if (!filterMemberShapes.test(memberShape)) {
                 return;
             }
 
@@ -204,9 +200,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writeSafeOperandAccessor(model, symbolProvider, memberShape, "v", writer,
                     (bodyWriter, operand) -> {
                         if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
-                            String serFunctionName = ProtocolGenerator
-                                    .getDocumentSerializerFunctionName(targetShape,
-                                            getProtocolName());
+                            String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(targetShape,
+                                    getProtocolName());
                             operand = CodegenUtils.isShapePassByReference(targetShape) ? "&" + operand : operand;
                             writer.openBlock("if err := $L($L, object.Key($S)); err != nil {", "}", serFunctionName,
                                     operand, memberShape.getMemberName(), () -> {
@@ -221,10 +216,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         });
     }
 
-    private void writeMapShapeToJsonObject(Model model, GoWriter writer, Shape shape) {
-        MapShape mapShape = shape.asMapShape().orElseThrow(() -> new CodegenException("expected map shape"));
-
-        MemberShape memberShape = mapShape.getValue();
+    private void writeMapShapeToJsonObject(Model model, GoWriter writer, MapShape shape) {
+        MemberShape memberShape = shape.getValue();
         Shape targetShape = model.expectShape(memberShape.getTarget());
 
         writer.openBlock("for key := range v {", "}", () -> {
@@ -275,7 +268,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             case BLOB:
                 return ".Blob(" + operand + ")";
             default:
-                throw new CodegenException("unsupported shape type " + targetShape.getType());
+                throw new CodegenException("Unsupported shape type " + targetShape.getType());
         }
     }
 
@@ -287,16 +280,11 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             GoStackStepMiddlewareGenerator generator,
             GoWriter writer
     ) {
-        Boolean hasDocumentBindings = model.getKnowledge(HttpBindingIndex.class).getRequestBindings(operation)
-                .values().stream()
-                .map(binding -> binding.getLocation() == HttpBinding.Location.DOCUMENT)
-                .filter(aBoolean -> aBoolean)
-                .findFirst().orElse(false);
-
-        Optional<HttpBinding> payloadBinding = model.getKnowledge(HttpBindingIndex.class).getRequestBindings(operation)
-                .values().stream()
-                .filter(binding -> binding.getLocation() == HttpBinding.Location.PAYLOAD)
-                .findFirst();
+        HttpBindingIndex httpBindingIndex = model.getKnowledge(HttpBindingIndex.class);
+        boolean hasDocumentBindings = httpBindingIndex.getRequestBindings(operation, HttpBinding.Location.DOCUMENT)
+                .size() > 0;
+        Optional<HttpBinding> payloadBinding = httpBindingIndex.getRequestBindings(operation,
+                HttpBinding.Location.PAYLOAD).stream().findFirst();
 
         if (!(payloadBinding.isPresent() || hasDocumentBindings)) {
             return;
@@ -305,8 +293,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.addUseImports(SymbolUtils.createValueSymbolBuilder(null, GoDependency.AWS_JSON_PROTOCOL).build());
 
         writer.write("var documentPayload []byte");
-
         writer.write("");
+
         if (payloadBinding.isPresent()) {
             MemberShape memberShape = payloadBinding.get().getMember();
             Shape payloadShape = model.expectShape(memberShape.getTarget());
@@ -336,7 +324,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writer.write("");
 
             Shape inputShape = model.expectShape(operation.getInput()
-                    .orElseThrow(() -> new CodegenException("input shape is missing on " + operation.getId())));
+                    .orElseThrow(() -> new CodegenException("Input shape is missing on " + operation.getId())));
             String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(inputShape, getProtocolName());
             writer.write("jsonEncoder := json.NewEncoder()");
             writer.openBlock("if err := $L(input, jsonEncoder.Value); err != nil {", "}", functionName, () -> {
@@ -359,7 +347,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         SymbolProvider symbolProvider = context.getSymbolProvider();
 
         shapes.forEach(shape -> {
-            writeJsonShapeSerializerFunction(writer, model, symbolProvider, shape, memberShape -> true);
+            writeJsonShapeSerializerFunction(writer, model, symbolProvider, shape, FunctionalUtils.alwaysTrue());
             writer.write("");
         });
     }
