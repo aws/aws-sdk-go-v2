@@ -145,16 +145,16 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
         writer.openBlock("for i := range v {", "}", () -> {
             writer.write("av := array.Value()");
+            String operand = "v[i]";
             if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
                 String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(targetShape,
                         getProtocolName());
-                String operand = "v[i]";
                 operand = CodegenUtils.isShapePassByReference(targetShape) ? "&" + operand : operand;
                 writer.openBlock("if err := $L($L, av); err != nil {", "}", serFunctionName, operand, () -> {
                     writer.write("return err");
                 });
             } else {
-                writer.write("av" + writeSimpleShapeToJsonValue(model, memberShape, "v[i]"));
+                writer.write("av" + writeSimpleShapeToJsonValue(model, memberShape, operand));
             }
         });
     }
