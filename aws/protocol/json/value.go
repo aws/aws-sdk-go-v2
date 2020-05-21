@@ -28,15 +28,39 @@ func (jv Value) String(v string) {
 	escapeStringBytes(jv.w, []byte(v))
 }
 
+// Byte encodes v as a JSON number
+func (jv Value) Byte(v int8) {
+	jv.Long(int64(v))
+}
+
+// Short encodes v as a JSON number
+func (jv Value) Short(v int16) {
+	jv.Long(int64(v))
+}
+
 // Integer encodes v as a JSON number
-func (jv Value) Integer(v int64) {
+func (jv Value) Integer(v int32) {
+	jv.Long(int64(v))
+}
+
+// Long encodes v as a JSON number
+func (jv Value) Long(v int64) {
 	*jv.scratch = strconv.AppendInt((*jv.scratch)[:0], v, 10)
 	jv.w.Write(*jv.scratch)
 }
 
 // Float encodes v as a JSON number
-func (jv Value) Float(v float64) {
-	*jv.scratch = encodeFloat((*jv.scratch)[:0], v, 64)
+func (jv Value) Float(v float32) {
+	jv.float(float64(v), 32)
+}
+
+// Double encodes v as a JSON number
+func (jv Value) Double(v float64) {
+	jv.float(v, 64)
+}
+
+func (jv Value) float(v float64, bits int) {
+	*jv.scratch = encodeFloat((*jv.scratch)[:0], v, bits)
 	jv.w.Write(*jv.scratch)
 }
 
@@ -46,8 +70,8 @@ func (jv Value) Boolean(v bool) {
 	jv.w.Write(*jv.scratch)
 }
 
-// ByteSlice encodes v as a base64 value in JSON string
-func (jv Value) ByteSlice(v []byte) {
+// Blob encodes v as a base64 value in JSON string
+func (jv Value) Blob(v []byte) {
 	encodeByteSlice(jv.w, (*jv.scratch)[:0], v)
 }
 
@@ -61,6 +85,11 @@ func (jv Value) Time(v time.Time, format string) error {
 	escapeStringBytes(jv.w, []byte(value))
 
 	return nil
+}
+
+// UnixTime encodes the value v using the format name as a JSON string
+func (jv Value) UnixTime(v time.Time) {
+	jv.Long(v.Unix())
 }
 
 // Array returns a new Array encoder
