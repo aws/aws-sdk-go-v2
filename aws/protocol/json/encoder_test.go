@@ -17,12 +17,12 @@ func TestEncoder(t *testing.T) {
 	object := encoder.Object()
 
 	object.Key("stringKey").String("stringValue")
-	object.Key("integerKey").Integer(1024)
-	object.Key("floatKey").Float(3.14)
+	object.Key("integerKey").Long(1024)
+	object.Key("floatKey").Double(3.14)
 
 	subObj := object.Key("foo").Object()
 
-	subObj.Key("byteSlice").ByteSlice([]byte("foo bar"))
+	subObj.Key("byteSlice").Blob([]byte("foo bar"))
 	subObj.Close()
 
 	object.Close()

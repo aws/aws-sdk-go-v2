@@ -103,7 +103,7 @@ func marshalTestOperationInputAWSJSON(v *testOperationInput, j *json.Value) {
 	}
 
 	if v.IntegerValue != nil {
-		object.Key("integerValue").Integer(*v.IntegerValue)
+		object.Key("integerValue").Long(*v.IntegerValue)
 	}
 
 	if len(v.EnumValue) > 0 {
@@ -111,7 +111,7 @@ func marshalTestOperationInputAWSJSON(v *testOperationInput, j *json.Value) {
 	}
 
 	if v.FloatValue != nil {
-		object.Key("floatValue").Float(*v.FloatValue)
+		object.Key("floatValue").Double(*v.FloatValue)
 	}
 
 	if v.ListValue != nil {
@@ -130,7 +130,7 @@ func marshalTestOperationInputAWSJSON(v *testOperationInput, j *json.Value) {
 	}
 
 	if v.ByteSlice != nil {
-		object.Key("byteSlice").ByteSlice(v.ByteSlice)
+		object.Key("byteSlice").Blob(v.ByteSlice)
 	}
 }
 

@@ -25,19 +25,19 @@ func TestValue(t *testing.T) {
 		},
 		"integer": {
 			setter: func(value Value) {
-				value.Integer(1024)
+				value.Long(1024)
 			},
 			expected: `1024`,
 		},
 		"float": {
 			setter: func(value Value) {
-				value.Float(1e20)
+				value.Double(1e20)
 			},
 			expected: `100000000000000000000`,
 		},
 		"float exponent component": {
 			setter: func(value Value) {
-				value.Float(3e22)
+				value.Double(3e22)
 			},
 			expected: `3e+22`,
 		},
@@ -55,13 +55,13 @@ func TestValue(t *testing.T) {
 		},
 		"byte slice": {
 			setter: func(value Value) {
-				value.ByteSlice([]byte("foo bar"))
+				value.Blob([]byte("foo bar"))
 			},
 			expected: `"Zm9vIGJhcg=="`,
 		},
 		"byte slice nil": {
 			setter: func(value Value) {
-				value.ByteSlice(nil)
+				value.Blob(nil)
 			},
 			expected: `null`,
 		},
