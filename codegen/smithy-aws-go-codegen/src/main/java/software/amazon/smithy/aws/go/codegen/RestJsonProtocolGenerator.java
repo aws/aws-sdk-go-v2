@@ -41,6 +41,7 @@ import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeType;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.traits.EnumTrait;
+import software.amazon.smithy.model.traits.JsonNameTrait;
 import software.amazon.smithy.model.traits.MediaTypeTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.utils.FunctionalUtils;
@@ -209,7 +210,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                                     });
                         } else {
                             writer.write("object.Key($S)" + writeSimpleShapeToJsonValue(model, memberShape, operand),
-                                    memberShape.getMemberName());
+                                    getSerializedMemberName(memberShape));
                         }
                     });
             writer.write("");
@@ -360,5 +361,16 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     public void generateSharedSerializerComponents(GenerationContext context) {
         super.generateSharedSerializerComponents(context);
         // pass
+    }
+
+    /**
+     * Get the serialized name to be used for the member shape.
+     *
+     * @param memberShape the member shape
+     * @return the serialized member name
+     */
+    private String getSerializedMemberName(MemberShape memberShape) {
+        Optional<JsonNameTrait> jsonNameTrait = memberShape.getTrait(JsonNameTrait.class);
+        return jsonNameTrait.isPresent() ? jsonNameTrait.get().getValue() : memberShape.getMemberName();
     }
 }
