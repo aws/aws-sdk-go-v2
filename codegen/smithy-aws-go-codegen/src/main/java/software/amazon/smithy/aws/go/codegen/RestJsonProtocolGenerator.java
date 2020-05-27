@@ -17,7 +17,6 @@ package software.amazon.smithy.aws.go.codegen;
 
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import software.amazon.smithy.codegen.core.CodegenException;
@@ -85,8 +84,9 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         Shape inputShape = model.expectShape(operation.getInput()
                 .orElseThrow(() -> new CodegenException("Input shape missing for operation " + operation.getId())));
         GoWriter writer = context.getWriter();
+        String functionName = ProtocolGenerator.getOperationDocumentSerFunctionName(inputShape, getProtocolName());
 
-        writeJsonShapeSerializerFunction(writer, model, context.getSymbolProvider(), inputShape,
+        writeJsonShapeSerializerFunction(writer, model, context.getSymbolProvider(), functionName, inputShape,
                 documentBindings::contains);
         writer.write("");
     }
@@ -95,13 +95,13 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             GoWriter writer,
             Model model,
             SymbolProvider symbolProvider,
+            String functionName,
             Shape inputShape,
             Predicate<MemberShape> filterMemberShapes
     ) {
         Symbol jsonEncoder = SymbolUtils.createPointableSymbolBuilder("Value", GoDependency.AWS_JSON_PROTOCOL)
                 .build();
         Symbol inputSymbol = symbolProvider.toSymbol(inputShape);
-        String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(inputShape, getProtocolName());
 
         writer.addUseImports(GoDependency.FMT);
         writer.openBlock("func $L(v $P, value $T) error {", "}", functionName, inputSymbol,
@@ -348,7 +348,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         SymbolProvider symbolProvider = context.getSymbolProvider();
 
         shapes.forEach(shape -> {
-            writeJsonShapeSerializerFunction(writer, model, symbolProvider, shape, FunctionalUtils.alwaysTrue());
+            String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(shape, getProtocolName());
+            writeJsonShapeSerializerFunction(writer, model, symbolProvider, functionName, shape, FunctionalUtils.alwaysTrue());
             writer.write("");
         });
     }
