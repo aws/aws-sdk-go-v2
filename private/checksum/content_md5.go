@@ -1,17 +1,24 @@
-package s3
+package checksum
 
 import (
 	"crypto/md5"
 	"encoding/base64"
 	"io"
 
-	request "github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 )
 
-// contentMD5 computes and sets the HTTP Content-MD5 header for requests that
+const contentMD5Header = "Content-Md5"
+
+// AddBodyContentMD5Handler computes and sets the HTTP Content-MD5 header for requests that
 // require it.
-func contentMD5(r *request.Request) {
+func AddBodyContentMD5Handler(r *aws.Request) {
+	// if Content-MD5 header is already present, return
+	if v := r.HTTPRequest.Header.Get(contentMD5Header); len(v) != 0 {
+		return
+	}
+
 	h := md5.New()
 
 	// hash the body.  seek back to the first position after reading to reset

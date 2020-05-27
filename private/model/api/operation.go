@@ -29,8 +29,9 @@ type Operation struct {
 	Endpoint            *EndpointTrait `json:"endpoint"`
 	HasEndpointARN      bool           `json:"-"`
 
-	IsEndpointDiscoveryOp bool               `json:"endpointoperation"`
-	EndpointDiscovery     *EndpointDiscovery `json:"endpointdiscovery"`
+	IsEndpointDiscoveryOp  bool               `json:"endpointoperation"`
+	EndpointDiscovery      *EndpointDiscovery `json:"endpointdiscovery"`
+	IsHttpChecksumRequired bool               `json:"httpChecksumRequired"`
 }
 
 // EndpointTrait provides the structure of the modeled enpdoint trait, and its
@@ -205,6 +206,15 @@ func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoType }}) ({{
 			}
 		{{- end }}
 	{{ end -}}
+
+	{{- if .IsHttpChecksumRequired }}
+		{{- $_ := .API.AddSDKImport "private/checksum" }}
+		req.Handlers.Build.PushBackNamed(aws.NamedHandler{
+			Name: "contentMd5Handler",
+			Fn: checksum.AddBodyContentMD5Handler,
+		})
+	{{- end }}	
+
 	return {{ $reqType }}{Request: req, Input: input, Copy: c.{{ $reqType }} }
 }
 
