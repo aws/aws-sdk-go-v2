@@ -326,7 +326,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
             Shape inputShape = model.expectShape(operation.getInput()
                     .orElseThrow(() -> new CodegenException("Input shape is missing on " + operation.getId())));
-            String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(inputShape, getProtocolName());
+            String functionName = ProtocolGenerator.getOperationDocumentSerFunctionName(inputShape, getProtocolName());
             writer.write("jsonEncoder := json.NewEncoder()");
             writer.openBlock("if err := $L(input, jsonEncoder.Value); err != nil {", "}", functionName, () -> {
                 writer.write("return err");
