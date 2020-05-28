@@ -107,6 +107,7 @@ func (c *Client) ListAlgorithmsRequest(input *ListAlgorithmsInput) ListAlgorithm
 	}
 
 	req := c.newRequest(op, input, &ListAlgorithmsOutput{})
+
 	return ListAlgorithmsRequest{Request: req, Input: input, Copy: c.ListAlgorithmsRequest}
 }
 

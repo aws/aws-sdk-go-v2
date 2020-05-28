@@ -210,6 +210,158 @@ func (c *Client) WaitUntilChannelStopped(ctx context.Context, input *DescribeCha
 	return w.Wait(ctx)
 }
 
+// WaitUntilInputAttached uses the MediaLive API operation
+// DescribeInput to wait for a condition to be met before returning.
+// If the condition is not met within the max attempt window, an error will
+// be returned.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Client) WaitUntilInputAttached(ctx context.Context, input *DescribeInputInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
+		Name:        "WaitUntilInputAttached",
+		MaxAttempts: 20,
+		Delay:       aws.ConstantWaiterDelay(5 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
+			{
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "State",
+				Expected: "ATTACHED",
+			},
+			{
+				State:   aws.RetryWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "State",
+				Expected: "DETACHED",
+			},
+			{
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.StatusWaiterMatch,
+				Expected: 500,
+			},
+		},
+		Logger: c.Config.Logger,
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
+			var inCpy *DescribeInputInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req := c.DescribeInputRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req.Request, nil
+		},
+	}
+	w.ApplyOptions(opts...)
+
+	return w.Wait(ctx)
+}
+
+// WaitUntilInputDeleted uses the MediaLive API operation
+// DescribeInput to wait for a condition to be met before returning.
+// If the condition is not met within the max attempt window, an error will
+// be returned.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Client) WaitUntilInputDeleted(ctx context.Context, input *DescribeInputInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
+		Name:        "WaitUntilInputDeleted",
+		MaxAttempts: 20,
+		Delay:       aws.ConstantWaiterDelay(5 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
+			{
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "State",
+				Expected: "DELETED",
+			},
+			{
+				State:   aws.RetryWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "State",
+				Expected: "DELETING",
+			},
+			{
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.StatusWaiterMatch,
+				Expected: 500,
+			},
+		},
+		Logger: c.Config.Logger,
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
+			var inCpy *DescribeInputInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req := c.DescribeInputRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req.Request, nil
+		},
+	}
+	w.ApplyOptions(opts...)
+
+	return w.Wait(ctx)
+}
+
+// WaitUntilInputDetached uses the MediaLive API operation
+// DescribeInput to wait for a condition to be met before returning.
+// If the condition is not met within the max attempt window, an error will
+// be returned.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Client) WaitUntilInputDetached(ctx context.Context, input *DescribeInputInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
+		Name:        "WaitUntilInputDetached",
+		MaxAttempts: 84,
+		Delay:       aws.ConstantWaiterDelay(5 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
+			{
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "State",
+				Expected: "DETACHED",
+			},
+			{
+				State:   aws.RetryWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "State",
+				Expected: "CREATING",
+			},
+			{
+				State:   aws.RetryWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "State",
+				Expected: "ATTACHED",
+			},
+			{
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.StatusWaiterMatch,
+				Expected: 500,
+			},
+		},
+		Logger: c.Config.Logger,
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
+			var inCpy *DescribeInputInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req := c.DescribeInputRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req.Request, nil
+		},
+	}
+	w.ApplyOptions(opts...)
+
+	return w.Wait(ctx)
+}
+
 // WaitUntilMultiplexCreated uses the MediaLive API operation
 // DescribeMultiplex to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will

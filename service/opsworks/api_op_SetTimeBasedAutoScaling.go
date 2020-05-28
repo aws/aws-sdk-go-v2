@@ -87,6 +87,7 @@ func (c *Client) SetTimeBasedAutoScalingRequest(input *SetTimeBasedAutoScalingIn
 	req := c.newRequest(op, input, &SetTimeBasedAutoScalingOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetTimeBasedAutoScalingRequest{Request: req, Input: input, Copy: c.SetTimeBasedAutoScalingRequest}
 }
 

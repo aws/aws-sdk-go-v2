@@ -93,6 +93,7 @@ func (c *Client) DescribeKeyPairsRequest(input *DescribeKeyPairsInput) DescribeK
 	}
 
 	req := c.newRequest(op, input, &DescribeKeyPairsOutput{})
+
 	return DescribeKeyPairsRequest{Request: req, Input: input, Copy: c.DescribeKeyPairsRequest}
 }
 

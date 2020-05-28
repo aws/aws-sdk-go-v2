@@ -150,7 +150,7 @@ const opCreateIngestion = "CreateIngestion"
 //
 // Any ingestions operating on tagged datasets inherit the same tags automatically
 // for use in access control. For an example, see How do I create an IAM policy
-// to control access to Amazon EC2 resources using tags? (https://aws.example.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/)
+// to control access to Amazon EC2 resources using tags? (https://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/)
 // in the AWS Knowledge Center. Tags are visible on the tagged dataset, but
 // not on the ingestion resource.
 //
@@ -174,6 +174,7 @@ func (c *Client) CreateIngestionRequest(input *CreateIngestionInput) CreateInges
 	}
 
 	req := c.newRequest(op, input, &CreateIngestionOutput{})
+
 	return CreateIngestionRequest{Request: req, Input: input, Copy: c.CreateIngestionRequest}
 }
 

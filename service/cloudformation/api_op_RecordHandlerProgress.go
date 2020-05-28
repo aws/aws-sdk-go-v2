@@ -108,6 +108,7 @@ func (c *Client) RecordHandlerProgressRequest(input *RecordHandlerProgressInput)
 	}
 
 	req := c.newRequest(op, input, &RecordHandlerProgressOutput{})
+
 	return RecordHandlerProgressRequest{Request: req, Input: input, Copy: c.RecordHandlerProgressRequest}
 }
 

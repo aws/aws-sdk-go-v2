@@ -116,6 +116,7 @@ func (c *Client) DeleteLayerVersionRequest(input *DeleteLayerVersionInput) Delet
 	req := c.newRequest(op, input, &DeleteLayerVersionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteLayerVersionRequest{Request: req, Input: input, Copy: c.DeleteLayerVersionRequest}
 }
 

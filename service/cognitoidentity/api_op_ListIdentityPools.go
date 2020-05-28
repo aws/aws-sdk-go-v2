@@ -92,6 +92,7 @@ func (c *Client) ListIdentityPoolsRequest(input *ListIdentityPoolsInput) ListIde
 	}
 
 	req := c.newRequest(op, input, &ListIdentityPoolsOutput{})
+
 	return ListIdentityPoolsRequest{Request: req, Input: input, Copy: c.ListIdentityPoolsRequest}
 }
 

@@ -153,6 +153,7 @@ func (c *Client) GetFaceSearchRequest(input *GetFaceSearchInput) GetFaceSearchRe
 	}
 
 	req := c.newRequest(op, input, &GetFaceSearchOutput{})
+
 	return GetFaceSearchRequest{Request: req, Input: input, Copy: c.GetFaceSearchRequest}
 }
 

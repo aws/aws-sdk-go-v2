@@ -120,6 +120,7 @@ func (c *Client) DescribeMaintenanceStartTimeRequest(input *DescribeMaintenanceS
 	}
 
 	req := c.newRequest(op, input, &DescribeMaintenanceStartTimeOutput{})
+
 	return DescribeMaintenanceStartTimeRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceStartTimeRequest}
 }
 

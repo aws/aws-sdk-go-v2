@@ -99,9 +99,9 @@ const opCompleteLayerUpload = "CompleteLayerUpload"
 // When an image is pushed, the CompleteLayerUpload API is called once per each
 // new image layer to verify that the upload has completed.
 //
-// This operation is used by the Amazon ECR proxy, and it is not intended for
-// general use by customers for pulling and pushing images. In most cases, you
-// should use the docker CLI to pull, tag, and push images.
+// This operation is used by the Amazon ECR proxy and is not generally used
+// by customers for pulling and pushing images. In most cases, you should use
+// the docker CLI to pull, tag, and push images.
 //
 //    // Example sending a request using CompleteLayerUploadRequest.
 //    req := client.CompleteLayerUploadRequest(params)
@@ -123,6 +123,7 @@ func (c *Client) CompleteLayerUploadRequest(input *CompleteLayerUploadInput) Com
 	}
 
 	req := c.newRequest(op, input, &CompleteLayerUploadOutput{})
+
 	return CompleteLayerUploadRequest{Request: req, Input: input, Copy: c.CompleteLayerUploadRequest}
 }
 

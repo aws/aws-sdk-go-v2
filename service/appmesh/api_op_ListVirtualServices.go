@@ -152,6 +152,7 @@ func (c *Client) ListVirtualServicesRequest(input *ListVirtualServicesInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListVirtualServicesOutput{})
+
 	return ListVirtualServicesRequest{Request: req, Input: input, Copy: c.ListVirtualServicesRequest}
 }
 

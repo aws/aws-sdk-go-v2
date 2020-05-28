@@ -105,6 +105,7 @@ func (c *Client) ShutdownGatewayRequest(input *ShutdownGatewayInput) ShutdownGat
 	}
 
 	req := c.newRequest(op, input, &ShutdownGatewayOutput{})
+
 	return ShutdownGatewayRequest{Request: req, Input: input, Copy: c.ShutdownGatewayRequest}
 }
 

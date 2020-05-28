@@ -207,6 +207,7 @@ func (c *Client) AllocatePrivateVirtualInterfaceRequest(input *AllocatePrivateVi
 	}
 
 	req := c.newRequest(op, input, &AllocatePrivateVirtualInterfaceOutput{})
+
 	return AllocatePrivateVirtualInterfaceRequest{Request: req, Input: input, Copy: c.AllocatePrivateVirtualInterfaceRequest}
 }
 

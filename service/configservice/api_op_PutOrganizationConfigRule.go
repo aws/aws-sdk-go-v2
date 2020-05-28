@@ -120,6 +120,7 @@ func (c *Client) PutOrganizationConfigRuleRequest(input *PutOrganizationConfigRu
 	}
 
 	req := c.newRequest(op, input, &PutOrganizationConfigRuleOutput{})
+
 	return PutOrganizationConfigRuleRequest{Request: req, Input: input, Copy: c.PutOrganizationConfigRuleRequest}
 }
 

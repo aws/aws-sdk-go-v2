@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/checksum"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 	"github.com/aws/aws-sdk-go-v2/service/s3/internal/arn"
@@ -138,8 +139,8 @@ const opPutBucketTagging = "PutBucketTagging"
 //    * Error code: InvalidTagError Description: The tag provided was not a
 //    valid tag. This error can occur if the tag did not pass input validation.
 //    For information about tag restrictions, see User-Defined Tag Restrictions
-//    (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2//allocation-tag-restrictions.html)
-//    and AWS-Generated Cost Allocation Tag Restrictions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2//aws-tag-restrictions.html).
+//    (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
+//    and AWS-Generated Cost Allocation Tag Restrictions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html).
 //
 //    * Error code: MalformedXMLError Description: The XML provided does not
 //    match the schema.
@@ -178,6 +179,12 @@ func (c *Client) PutBucketTaggingRequest(input *PutBucketTaggingInput) PutBucket
 	req := c.newRequest(op, input, &PutBucketTaggingOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
+	req.Handlers.Build.PushBackNamed(aws.NamedHandler{
+		Name: "contentMd5Handler",
+		Fn:   checksum.AddBodyContentMD5Handler,
+	})
+
 	return PutBucketTaggingRequest{Request: req, Input: input, Copy: c.PutBucketTaggingRequest}
 }
 

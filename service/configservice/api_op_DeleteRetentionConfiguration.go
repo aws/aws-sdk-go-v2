@@ -80,6 +80,7 @@ func (c *Client) DeleteRetentionConfigurationRequest(input *DeleteRetentionConfi
 	req := c.newRequest(op, input, &DeleteRetentionConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteRetentionConfigurationRequest{Request: req, Input: input, Copy: c.DeleteRetentionConfigurationRequest}
 }
 

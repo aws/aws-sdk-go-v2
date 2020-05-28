@@ -96,6 +96,7 @@ func (c *Client) DeleteVoiceConnectorStreamingConfigurationRequest(input *Delete
 	req := c.newRequest(op, input, &DeleteVoiceConnectorStreamingConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteVoiceConnectorStreamingConfigurationRequest{Request: req, Input: input, Copy: c.DeleteVoiceConnectorStreamingConfigurationRequest}
 }
 

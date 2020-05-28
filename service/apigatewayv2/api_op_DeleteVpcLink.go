@@ -90,6 +90,7 @@ func (c *Client) DeleteVpcLinkRequest(input *DeleteVpcLinkInput) DeleteVpcLinkRe
 	}
 
 	req := c.newRequest(op, input, &DeleteVpcLinkOutput{})
+
 	return DeleteVpcLinkRequest{Request: req, Input: input, Copy: c.DeleteVpcLinkRequest}
 }
 

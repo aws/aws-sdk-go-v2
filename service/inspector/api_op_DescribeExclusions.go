@@ -91,6 +91,7 @@ func (c *Client) DescribeExclusionsRequest(input *DescribeExclusionsInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeExclusionsOutput{})
+
 	return DescribeExclusionsRequest{Request: req, Input: input, Copy: c.DescribeExclusionsRequest}
 }
 

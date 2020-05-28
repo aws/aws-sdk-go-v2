@@ -191,6 +191,7 @@ func (c *Client) DescribeVaultRequest(input *DescribeVaultInput) DescribeVaultRe
 	}
 
 	req := c.newRequest(op, input, &DescribeVaultOutput{})
+
 	return DescribeVaultRequest{Request: req, Input: input, Copy: c.DescribeVaultRequest}
 }
 

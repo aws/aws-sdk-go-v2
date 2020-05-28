@@ -127,6 +127,7 @@ func (c *Client) SetCognitoEventsRequest(input *SetCognitoEventsInput) SetCognit
 	req := c.newRequest(op, input, &SetCognitoEventsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetCognitoEventsRequest{Request: req, Input: input, Copy: c.SetCognitoEventsRequest}
 }
 

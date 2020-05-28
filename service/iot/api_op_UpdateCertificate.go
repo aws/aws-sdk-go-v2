@@ -126,6 +126,7 @@ func (c *Client) UpdateCertificateRequest(input *UpdateCertificateInput) UpdateC
 	req := c.newRequest(op, input, &UpdateCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateCertificateRequest{Request: req, Input: input, Copy: c.UpdateCertificateRequest}
 }
 

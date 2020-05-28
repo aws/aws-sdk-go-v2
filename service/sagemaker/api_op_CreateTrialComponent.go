@@ -158,6 +158,7 @@ func (c *Client) CreateTrialComponentRequest(input *CreateTrialComponentInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateTrialComponentOutput{})
+
 	return CreateTrialComponentRequest{Request: req, Input: input, Copy: c.CreateTrialComponentRequest}
 }
 

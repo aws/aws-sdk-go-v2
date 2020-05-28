@@ -87,6 +87,7 @@ func (c *Client) DeploySystemInstanceRequest(input *DeploySystemInstanceInput) D
 	}
 
 	req := c.newRequest(op, input, &DeploySystemInstanceOutput{})
+
 	return DeploySystemInstanceRequest{Request: req, Input: input, Copy: c.DeploySystemInstanceRequest}
 }
 

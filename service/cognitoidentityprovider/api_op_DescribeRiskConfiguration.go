@@ -87,6 +87,7 @@ func (c *Client) DescribeRiskConfigurationRequest(input *DescribeRiskConfigurati
 	}
 
 	req := c.newRequest(op, input, &DescribeRiskConfigurationOutput{})
+
 	return DescribeRiskConfigurationRequest{Request: req, Input: input, Copy: c.DescribeRiskConfigurationRequest}
 }
 

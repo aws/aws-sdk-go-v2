@@ -131,6 +131,7 @@ func (c *Client) ApplySchemaRequest(input *ApplySchemaInput) ApplySchemaRequest 
 	}
 
 	req := c.newRequest(op, input, &ApplySchemaOutput{})
+
 	return ApplySchemaRequest{Request: req, Input: input, Copy: c.ApplySchemaRequest}
 }
 

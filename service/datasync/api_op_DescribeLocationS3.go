@@ -100,6 +100,7 @@ func (c *Client) DescribeLocationS3Request(input *DescribeLocationS3Input) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeLocationS3Output{})
+
 	return DescribeLocationS3Request{Request: req, Input: input, Copy: c.DescribeLocationS3Request}
 }
 

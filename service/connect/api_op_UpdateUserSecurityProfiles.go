@@ -137,6 +137,7 @@ func (c *Client) UpdateUserSecurityProfilesRequest(input *UpdateUserSecurityProf
 	req := c.newRequest(op, input, &UpdateUserSecurityProfilesOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateUserSecurityProfilesRequest{Request: req, Input: input, Copy: c.UpdateUserSecurityProfilesRequest}
 }
 

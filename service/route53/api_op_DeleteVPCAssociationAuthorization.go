@@ -131,6 +131,7 @@ func (c *Client) DeleteVPCAssociationAuthorizationRequest(input *DeleteVPCAssoci
 	}
 
 	req := c.newRequest(op, input, &DeleteVPCAssociationAuthorizationOutput{})
+
 	return DeleteVPCAssociationAuthorizationRequest{Request: req, Input: input, Copy: c.DeleteVPCAssociationAuthorizationRequest}
 }
 

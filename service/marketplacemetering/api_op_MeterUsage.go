@@ -118,6 +118,7 @@ func (c *Client) MeterUsageRequest(input *MeterUsageInput) MeterUsageRequest {
 	}
 
 	req := c.newRequest(op, input, &MeterUsageOutput{})
+
 	return MeterUsageRequest{Request: req, Input: input, Copy: c.MeterUsageRequest}
 }
 

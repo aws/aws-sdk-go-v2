@@ -172,6 +172,7 @@ func (c *Client) GetObjectLegalHoldRequest(input *GetObjectLegalHoldInput) GetOb
 	}
 
 	req := c.newRequest(op, input, &GetObjectLegalHoldOutput{})
+
 	return GetObjectLegalHoldRequest{Request: req, Input: input, Copy: c.GetObjectLegalHoldRequest}
 }
 

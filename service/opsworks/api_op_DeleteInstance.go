@@ -91,6 +91,7 @@ func (c *Client) DeleteInstanceRequest(input *DeleteInstanceInput) DeleteInstanc
 	req := c.newRequest(op, input, &DeleteInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteInstanceRequest{Request: req, Input: input, Copy: c.DeleteInstanceRequest}
 }
 

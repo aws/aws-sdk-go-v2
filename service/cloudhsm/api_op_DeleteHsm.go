@@ -90,6 +90,7 @@ func (c *Client) DeleteHsmRequest(input *DeleteHsmInput) DeleteHsmRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteHsmOutput{})
+
 	return DeleteHsmRequest{Request: req, Input: input, Copy: c.DeleteHsmRequest}
 }
 

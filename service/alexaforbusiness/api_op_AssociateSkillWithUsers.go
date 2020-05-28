@@ -73,6 +73,7 @@ func (c *Client) AssociateSkillWithUsersRequest(input *AssociateSkillWithUsersIn
 	}
 
 	req := c.newRequest(op, input, &AssociateSkillWithUsersOutput{})
+
 	return AssociateSkillWithUsersRequest{Request: req, Input: input, Copy: c.AssociateSkillWithUsersRequest}
 }
 

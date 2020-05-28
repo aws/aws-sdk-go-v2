@@ -132,6 +132,7 @@ func (c *Client) ModifyDBClusterSnapshotAttributeRequest(input *ModifyDBClusterS
 	}
 
 	req := c.newRequest(op, input, &ModifyDBClusterSnapshotAttributeOutput{})
+
 	return ModifyDBClusterSnapshotAttributeRequest{Request: req, Input: input, Copy: c.ModifyDBClusterSnapshotAttributeRequest}
 }
 

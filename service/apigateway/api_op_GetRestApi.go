@@ -236,6 +236,7 @@ func (c *Client) GetRestApiRequest(input *GetRestApiInput) GetRestApiRequest {
 	}
 
 	req := c.newRequest(op, input, &GetRestApiOutput{})
+
 	return GetRestApiRequest{Request: req, Input: input, Copy: c.GetRestApiRequest}
 }
 

@@ -129,6 +129,7 @@ func (c *Client) UpdateDatastoreRequest(input *UpdateDatastoreInput) UpdateDatas
 	req := c.newRequest(op, input, &UpdateDatastoreOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateDatastoreRequest{Request: req, Input: input, Copy: c.UpdateDatastoreRequest}
 }
 

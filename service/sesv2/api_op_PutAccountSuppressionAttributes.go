@@ -94,6 +94,7 @@ func (c *Client) PutAccountSuppressionAttributesRequest(input *PutAccountSuppres
 	}
 
 	req := c.newRequest(op, input, &PutAccountSuppressionAttributesOutput{})
+
 	return PutAccountSuppressionAttributesRequest{Request: req, Input: input, Copy: c.PutAccountSuppressionAttributesRequest}
 }
 

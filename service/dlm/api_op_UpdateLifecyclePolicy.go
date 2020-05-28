@@ -135,6 +135,7 @@ func (c *Client) UpdateLifecyclePolicyRequest(input *UpdateLifecyclePolicyInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateLifecyclePolicyOutput{})
+
 	return UpdateLifecyclePolicyRequest{Request: req, Input: input, Copy: c.UpdateLifecyclePolicyRequest}
 }
 

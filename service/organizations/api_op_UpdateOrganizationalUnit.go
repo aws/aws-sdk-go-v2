@@ -97,6 +97,7 @@ func (c *Client) UpdateOrganizationalUnitRequest(input *UpdateOrganizationalUnit
 	}
 
 	req := c.newRequest(op, input, &UpdateOrganizationalUnitOutput{})
+
 	return UpdateOrganizationalUnitRequest{Request: req, Input: input, Copy: c.UpdateOrganizationalUnitRequest}
 }
 

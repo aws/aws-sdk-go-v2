@@ -161,6 +161,7 @@ func (c *Client) CreateRemoteAccessSessionRequest(input *CreateRemoteAccessSessi
 	}
 
 	req := c.newRequest(op, input, &CreateRemoteAccessSessionOutput{})
+
 	return CreateRemoteAccessSessionRequest{Request: req, Input: input, Copy: c.CreateRemoteAccessSessionRequest}
 }
 

@@ -222,6 +222,7 @@ func (c *Client) DescribeContactRequest(input *DescribeContactInput) DescribeCon
 	}
 
 	req := c.newRequest(op, input, &DescribeContactOutput{})
+
 	return DescribeContactRequest{Request: req, Input: input, Copy: c.DescribeContactRequest}
 }
 

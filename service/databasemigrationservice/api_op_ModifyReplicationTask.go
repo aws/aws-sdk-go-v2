@@ -148,6 +148,7 @@ func (c *Client) ModifyReplicationTaskRequest(input *ModifyReplicationTaskInput)
 	}
 
 	req := c.newRequest(op, input, &ModifyReplicationTaskOutput{})
+
 	return ModifyReplicationTaskRequest{Request: req, Input: input, Copy: c.ModifyReplicationTaskRequest}
 }
 

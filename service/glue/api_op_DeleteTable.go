@@ -105,6 +105,7 @@ func (c *Client) DeleteTableRequest(input *DeleteTableInput) DeleteTableRequest 
 	}
 
 	req := c.newRequest(op, input, &DeleteTableOutput{})
+
 	return DeleteTableRequest{Request: req, Input: input, Copy: c.DeleteTableRequest}
 }
 

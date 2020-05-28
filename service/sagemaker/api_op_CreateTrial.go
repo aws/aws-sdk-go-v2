@@ -125,6 +125,7 @@ func (c *Client) CreateTrialRequest(input *CreateTrialInput) CreateTrialRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateTrialOutput{})
+
 	return CreateTrialRequest{Request: req, Input: input, Copy: c.CreateTrialRequest}
 }
 

@@ -88,6 +88,7 @@ func (c *Client) UpdateExpirationForHITRequest(input *UpdateExpirationForHITInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateExpirationForHITOutput{})
+
 	return UpdateExpirationForHITRequest{Request: req, Input: input, Copy: c.UpdateExpirationForHITRequest}
 }
 

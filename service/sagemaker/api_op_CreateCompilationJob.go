@@ -186,6 +186,7 @@ func (c *Client) CreateCompilationJobRequest(input *CreateCompilationJobInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateCompilationJobOutput{})
+
 	return CreateCompilationJobRequest{Request: req, Input: input, Copy: c.CreateCompilationJobRequest}
 }
 

@@ -74,6 +74,8 @@ type ClientAPI interface {
 
 	DeleteRegistryRequest(*schemas.DeleteRegistryInput) schemas.DeleteRegistryRequest
 
+	DeleteResourcePolicyRequest(*schemas.DeleteResourcePolicyInput) schemas.DeleteResourcePolicyRequest
+
 	DeleteSchemaRequest(*schemas.DeleteSchemaInput) schemas.DeleteSchemaRequest
 
 	DeleteSchemaVersionRequest(*schemas.DeleteSchemaVersionInput) schemas.DeleteSchemaVersionRequest
@@ -90,6 +92,8 @@ type ClientAPI interface {
 
 	GetDiscoveredSchemaRequest(*schemas.GetDiscoveredSchemaInput) schemas.GetDiscoveredSchemaRequest
 
+	GetResourcePolicyRequest(*schemas.GetResourcePolicyInput) schemas.GetResourcePolicyRequest
+
 	ListDiscoverersRequest(*schemas.ListDiscoverersInput) schemas.ListDiscoverersRequest
 
 	ListRegistriesRequest(*schemas.ListRegistriesInput) schemas.ListRegistriesRequest
@@ -100,9 +104,9 @@ type ClientAPI interface {
 
 	ListTagsForResourceRequest(*schemas.ListTagsForResourceInput) schemas.ListTagsForResourceRequest
 
-	LockServiceLinkedRoleRequest(*schemas.LockServiceLinkedRoleInput) schemas.LockServiceLinkedRoleRequest
-
 	PutCodeBindingRequest(*schemas.PutCodeBindingInput) schemas.PutCodeBindingRequest
+
+	PutResourcePolicyRequest(*schemas.PutResourcePolicyInput) schemas.PutResourcePolicyRequest
 
 	SearchSchemasRequest(*schemas.SearchSchemasInput) schemas.SearchSchemasRequest
 
@@ -111,8 +115,6 @@ type ClientAPI interface {
 	StopDiscovererRequest(*schemas.StopDiscovererInput) schemas.StopDiscovererRequest
 
 	TagResourceRequest(*schemas.TagResourceInput) schemas.TagResourceRequest
-
-	UnlockServiceLinkedRoleRequest(*schemas.UnlockServiceLinkedRoleInput) schemas.UnlockServiceLinkedRoleRequest
 
 	UntagResourceRequest(*schemas.UntagResourceInput) schemas.UntagResourceRequest
 

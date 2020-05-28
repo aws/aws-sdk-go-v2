@@ -371,6 +371,44 @@ func (s BusinessCallingSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The retention settings that determine how long to retain chat conversation
+// messages for an Amazon Chime Enterprise account.
+type ConversationRetentionSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The number of days for which to retain chat conversation messages.
+	RetentionDays *int64 `min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s ConversationRetentionSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ConversationRetentionSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ConversationRetentionSettings"}
+	if s.RetentionDays != nil && *s.RetentionDays < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("RetentionDays", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ConversationRetentionSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.RetentionDays != nil {
+		v := *s.RetentionDays
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RetentionDays", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // The list of errors returned when errors are encountered during the BatchCreateAttendee
 // and CreateAttendee actions. This includes external user IDs, error codes,
 // and error messages.
@@ -1800,6 +1838,61 @@ func (s ProxySession) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The retention settings for an Amazon Chime Enterprise account that determine
+// how long to retain items such as chat room messages and chat conversation
+// messages.
+type RetentionSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The chat conversation retention settings.
+	ConversationRetentionSettings *ConversationRetentionSettings `type:"structure"`
+
+	// The chat room retention settings.
+	RoomRetentionSettings *RoomRetentionSettings `type:"structure"`
+}
+
+// String returns the string representation
+func (s RetentionSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RetentionSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RetentionSettings"}
+	if s.ConversationRetentionSettings != nil {
+		if err := s.ConversationRetentionSettings.Validate(); err != nil {
+			invalidParams.AddNested("ConversationRetentionSettings", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.RoomRetentionSettings != nil {
+		if err := s.RoomRetentionSettings.Validate(); err != nil {
+			invalidParams.AddNested("RoomRetentionSettings", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RetentionSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConversationRetentionSettings != nil {
+		v := s.ConversationRetentionSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ConversationRetentionSettings", v, metadata)
+	}
+	if s.RoomRetentionSettings != nil {
+		v := s.RoomRetentionSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "RoomRetentionSettings", v, metadata)
+	}
+	return nil
+}
+
 // The Amazon Chime chat room details.
 type Room struct {
 	_ struct{} `type:"structure"`
@@ -1932,6 +2025,44 @@ func (s RoomMembership) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The retention settings that determine how long to retain chat room messages
+// for an Amazon Chime Enterprise account.
+type RoomRetentionSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The number of days for which to retain chat room messages.
+	RetentionDays *int64 `min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s RoomRetentionSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RoomRetentionSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RoomRetentionSettings"}
+	if s.RetentionDays != nil && *s.RetentionDays < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("RetentionDays", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RoomRetentionSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.RetentionDays != nil {
+		v := *s.RetentionDays
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RetentionDays", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // An Active Directory (AD) group whose members are granted permission to act
 // as delegates.
 type SigninDelegateGroup struct {
@@ -1970,6 +2101,9 @@ type StreamingConfiguration struct {
 
 	// When true, media streaming to Amazon Kinesis is turned off.
 	Disabled *bool `type:"boolean"`
+
+	// The streaming notification targets.
+	StreamingNotificationTargets []StreamingNotificationTarget `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -1983,6 +2117,16 @@ func (s *StreamingConfiguration) Validate() error {
 
 	if s.DataRetentionInHours == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DataRetentionInHours"))
+	}
+	if s.StreamingNotificationTargets != nil && len(s.StreamingNotificationTargets) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("StreamingNotificationTargets", 1))
+	}
+	if s.StreamingNotificationTargets != nil {
+		for i, v := range s.StreamingNotificationTargets {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "StreamingNotificationTargets", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2004,6 +2148,57 @@ func (s StreamingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Disabled", protocol.BoolValue(v), metadata)
+	}
+	if s.StreamingNotificationTargets != nil {
+		v := s.StreamingNotificationTargets
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "StreamingNotificationTargets", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// The targeted recipient for a streaming configuration notification.
+type StreamingNotificationTarget struct {
+	_ struct{} `type:"structure"`
+
+	// The streaming notification target.
+	//
+	// NotificationTarget is a required field
+	NotificationTarget NotificationTarget `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s StreamingNotificationTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StreamingNotificationTarget) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StreamingNotificationTarget"}
+	if len(s.NotificationTarget) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("NotificationTarget"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StreamingNotificationTarget) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.NotificationTarget) > 0 {
+		v := s.NotificationTarget
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NotificationTarget", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }

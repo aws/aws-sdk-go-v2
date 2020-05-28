@@ -131,6 +131,7 @@ func (c *Client) RegisterRobotRequest(input *RegisterRobotInput) RegisterRobotRe
 	}
 
 	req := c.newRequest(op, input, &RegisterRobotOutput{})
+
 	return RegisterRobotRequest{Request: req, Input: input, Copy: c.RegisterRobotRequest}
 }
 

@@ -116,6 +116,7 @@ func (c *Client) BatchDeleteAttributesRequest(input *BatchDeleteAttributesInput)
 	req := c.newRequest(op, input, &BatchDeleteAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return BatchDeleteAttributesRequest{Request: req, Input: input, Copy: c.BatchDeleteAttributesRequest}
 }
 

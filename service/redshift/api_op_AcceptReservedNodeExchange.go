@@ -90,6 +90,7 @@ func (c *Client) AcceptReservedNodeExchangeRequest(input *AcceptReservedNodeExch
 	}
 
 	req := c.newRequest(op, input, &AcceptReservedNodeExchangeOutput{})
+
 	return AcceptReservedNodeExchangeRequest{Request: req, Input: input, Copy: c.AcceptReservedNodeExchangeRequest}
 }
 

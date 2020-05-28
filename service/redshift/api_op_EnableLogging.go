@@ -122,6 +122,7 @@ func (c *Client) EnableLoggingRequest(input *EnableLoggingInput) EnableLoggingRe
 	}
 
 	req := c.newRequest(op, input, &EnableLoggingOutput{})
+
 	return EnableLoggingRequest{Request: req, Input: input, Copy: c.EnableLoggingRequest}
 }
 

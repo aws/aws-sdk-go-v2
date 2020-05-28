@@ -218,6 +218,7 @@ func (c *Client) CreateNFSFileShareRequest(input *CreateNFSFileShareInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateNFSFileShareOutput{})
+
 	return CreateNFSFileShareRequest{Request: req, Input: input, Copy: c.CreateNFSFileShareRequest}
 }
 

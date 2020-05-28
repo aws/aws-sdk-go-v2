@@ -79,6 +79,7 @@ func (c *Client) StopImageBuilderRequest(input *StopImageBuilderInput) StopImage
 	}
 
 	req := c.newRequest(op, input, &StopImageBuilderOutput{})
+
 	return StopImageBuilderRequest{Request: req, Input: input, Copy: c.StopImageBuilderRequest}
 }
 

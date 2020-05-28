@@ -163,6 +163,7 @@ func (c *Client) CancelJobExecutionRequest(input *CancelJobExecutionInput) Cance
 	req := c.newRequest(op, input, &CancelJobExecutionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CancelJobExecutionRequest{Request: req, Input: input, Copy: c.CancelJobExecutionRequest}
 }
 

@@ -93,6 +93,7 @@ func (c *Client) StopInstanceRequest(input *StopInstanceInput) StopInstanceReque
 	req := c.newRequest(op, input, &StopInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StopInstanceRequest{Request: req, Input: input, Copy: c.StopInstanceRequest}
 }
 

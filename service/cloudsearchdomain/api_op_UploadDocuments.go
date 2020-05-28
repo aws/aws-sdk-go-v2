@@ -174,6 +174,7 @@ func (c *Client) UploadDocumentsRequest(input *UploadDocumentsInput) UploadDocum
 	}
 
 	req := c.newRequest(op, input, &UploadDocumentsOutput{})
+
 	return UploadDocumentsRequest{Request: req, Input: input, Copy: c.UploadDocumentsRequest}
 }
 

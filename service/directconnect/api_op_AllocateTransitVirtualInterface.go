@@ -109,6 +109,7 @@ func (c *Client) AllocateTransitVirtualInterfaceRequest(input *AllocateTransitVi
 	}
 
 	req := c.newRequest(op, input, &AllocateTransitVirtualInterfaceOutput{})
+
 	return AllocateTransitVirtualInterfaceRequest{Request: req, Input: input, Copy: c.AllocateTransitVirtualInterfaceRequest}
 }
 

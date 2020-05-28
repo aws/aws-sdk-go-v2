@@ -122,6 +122,7 @@ func (c *Client) DeleteVaultAccessPolicyRequest(input *DeleteVaultAccessPolicyIn
 	req := c.newRequest(op, input, &DeleteVaultAccessPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteVaultAccessPolicyRequest{Request: req, Input: input, Copy: c.DeleteVaultAccessPolicyRequest}
 }
 

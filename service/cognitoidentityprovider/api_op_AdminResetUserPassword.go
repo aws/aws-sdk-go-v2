@@ -134,6 +134,7 @@ func (c *Client) AdminResetUserPasswordRequest(input *AdminResetUserPasswordInpu
 	}
 
 	req := c.newRequest(op, input, &AdminResetUserPasswordOutput{})
+
 	return AdminResetUserPasswordRequest{Request: req, Input: input, Copy: c.AdminResetUserPasswordRequest}
 }
 

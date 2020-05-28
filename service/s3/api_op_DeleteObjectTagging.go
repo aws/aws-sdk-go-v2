@@ -171,6 +171,7 @@ func (c *Client) DeleteObjectTaggingRequest(input *DeleteObjectTaggingInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteObjectTaggingOutput{})
+
 	return DeleteObjectTaggingRequest{Request: req, Input: input, Copy: c.DeleteObjectTaggingRequest}
 }
 

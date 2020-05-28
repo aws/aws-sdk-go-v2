@@ -101,6 +101,7 @@ func (c *Client) DescribeStackEventsRequest(input *DescribeStackEventsInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeStackEventsOutput{})
+
 	return DescribeStackEventsRequest{Request: req, Input: input, Copy: c.DescribeStackEventsRequest}
 }
 

@@ -167,6 +167,7 @@ func (c *Client) ImportInstallationMediaRequest(input *ImportInstallationMediaIn
 	}
 
 	req := c.newRequest(op, input, &ImportInstallationMediaOutput{})
+
 	return ImportInstallationMediaRequest{Request: req, Input: input, Copy: c.ImportInstallationMediaRequest}
 }
 

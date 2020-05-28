@@ -143,6 +143,7 @@ func (c *Client) GetBucketCorsRequest(input *GetBucketCorsInput) GetBucketCorsRe
 	}
 
 	req := c.newRequest(op, input, &GetBucketCorsOutput{})
+
 	return GetBucketCorsRequest{Request: req, Input: input, Copy: c.GetBucketCorsRequest}
 }
 

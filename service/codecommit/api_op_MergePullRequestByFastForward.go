@@ -96,6 +96,7 @@ func (c *Client) MergePullRequestByFastForwardRequest(input *MergePullRequestByF
 	}
 
 	req := c.newRequest(op, input, &MergePullRequestByFastForwardOutput{})
+
 	return MergePullRequestByFastForwardRequest{Request: req, Input: input, Copy: c.MergePullRequestByFastForwardRequest}
 }
 

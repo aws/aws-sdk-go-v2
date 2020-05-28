@@ -129,6 +129,7 @@ func (c *Client) DescribeDBClustersRequest(input *DescribeDBClustersInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeDBClustersOutput{})
+
 	return DescribeDBClustersRequest{Request: req, Input: input, Copy: c.DescribeDBClustersRequest}
 }
 

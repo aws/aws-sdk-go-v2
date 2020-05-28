@@ -100,6 +100,7 @@ func (c *Client) StopMatchmakingRequest(input *StopMatchmakingInput) StopMatchma
 	}
 
 	req := c.newRequest(op, input, &StopMatchmakingOutput{})
+
 	return StopMatchmakingRequest{Request: req, Input: input, Copy: c.StopMatchmakingRequest}
 }
 

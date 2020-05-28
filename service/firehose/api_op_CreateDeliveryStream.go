@@ -233,6 +233,7 @@ func (c *Client) CreateDeliveryStreamRequest(input *CreateDeliveryStreamInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateDeliveryStreamOutput{})
+
 	return CreateDeliveryStreamRequest{Request: req, Input: input, Copy: c.CreateDeliveryStreamRequest}
 }
 

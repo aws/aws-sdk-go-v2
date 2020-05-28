@@ -95,6 +95,7 @@ func (c *Client) ListDatasetGroupsRequest(input *ListDatasetGroupsInput) ListDat
 	}
 
 	req := c.newRequest(op, input, &ListDatasetGroupsOutput{})
+
 	return ListDatasetGroupsRequest{Request: req, Input: input, Copy: c.ListDatasetGroupsRequest}
 }
 

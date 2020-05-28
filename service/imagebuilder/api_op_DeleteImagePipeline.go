@@ -110,6 +110,7 @@ func (c *Client) DeleteImagePipelineRequest(input *DeleteImagePipelineInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteImagePipelineOutput{})
+
 	return DeleteImagePipelineRequest{Request: req, Input: input, Copy: c.DeleteImagePipelineRequest}
 }
 

@@ -108,6 +108,7 @@ func (c *Client) SubmitTaskStateChangeRequest(input *SubmitTaskStateChangeInput)
 	}
 
 	req := c.newRequest(op, input, &SubmitTaskStateChangeOutput{})
+
 	return SubmitTaskStateChangeRequest{Request: req, Input: input, Copy: c.SubmitTaskStateChangeRequest}
 }
 

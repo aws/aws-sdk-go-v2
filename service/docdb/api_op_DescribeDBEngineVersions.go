@@ -134,6 +134,7 @@ func (c *Client) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersions
 	}
 
 	req := c.newRequest(op, input, &DescribeDBEngineVersionsOutput{})
+
 	return DescribeDBEngineVersionsRequest{Request: req, Input: input, Copy: c.DescribeDBEngineVersionsRequest}
 }
 

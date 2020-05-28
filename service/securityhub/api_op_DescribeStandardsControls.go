@@ -150,6 +150,7 @@ func (c *Client) DescribeStandardsControlsRequest(input *DescribeStandardsContro
 	}
 
 	req := c.newRequest(op, input, &DescribeStandardsControlsOutput{})
+
 	return DescribeStandardsControlsRequest{Request: req, Input: input, Copy: c.DescribeStandardsControlsRequest}
 }
 

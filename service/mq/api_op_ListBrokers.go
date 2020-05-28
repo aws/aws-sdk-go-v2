@@ -118,6 +118,7 @@ func (c *Client) ListBrokersRequest(input *ListBrokersInput) ListBrokersRequest 
 	}
 
 	req := c.newRequest(op, input, &ListBrokersOutput{})
+
 	return ListBrokersRequest{Request: req, Input: input, Copy: c.ListBrokersRequest}
 }
 

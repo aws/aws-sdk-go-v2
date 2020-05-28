@@ -81,6 +81,7 @@ func (c *Client) TerminateSessionRequest(input *TerminateSessionInput) Terminate
 	}
 
 	req := c.newRequest(op, input, &TerminateSessionOutput{})
+
 	return TerminateSessionRequest{Request: req, Input: input, Copy: c.TerminateSessionRequest}
 }
 

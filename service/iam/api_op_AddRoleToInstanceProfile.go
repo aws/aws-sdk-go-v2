@@ -114,6 +114,7 @@ func (c *Client) AddRoleToInstanceProfileRequest(input *AddRoleToInstanceProfile
 	req := c.newRequest(op, input, &AddRoleToInstanceProfileOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AddRoleToInstanceProfileRequest{Request: req, Input: input, Copy: c.AddRoleToInstanceProfileRequest}
 }
 

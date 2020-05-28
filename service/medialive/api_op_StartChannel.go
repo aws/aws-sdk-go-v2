@@ -244,6 +244,7 @@ func (c *Client) StartChannelRequest(input *StartChannelInput) StartChannelReque
 	}
 
 	req := c.newRequest(op, input, &StartChannelOutput{})
+
 	return StartChannelRequest{Request: req, Input: input, Copy: c.StartChannelRequest}
 }
 

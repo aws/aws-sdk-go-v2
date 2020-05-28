@@ -140,6 +140,7 @@ func (c *Client) UntagRequest(input *UntagInput) UntagRequest {
 	}
 
 	req := c.newRequest(op, input, &UntagOutput{})
+
 	return UntagRequest{Request: req, Input: input, Copy: c.UntagRequest}
 }
 

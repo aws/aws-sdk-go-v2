@@ -95,6 +95,7 @@ func (c *Client) DeleteUserDefinedFunctionRequest(input *DeleteUserDefinedFuncti
 	}
 
 	req := c.newRequest(op, input, &DeleteUserDefinedFunctionOutput{})
+
 	return DeleteUserDefinedFunctionRequest{Request: req, Input: input, Copy: c.DeleteUserDefinedFunctionRequest}
 }
 

@@ -76,6 +76,7 @@ func (c *Client) DescribeRefreshSchemasStatusRequest(input *DescribeRefreshSchem
 	}
 
 	req := c.newRequest(op, input, &DescribeRefreshSchemasStatusOutput{})
+
 	return DescribeRefreshSchemasStatusRequest{Request: req, Input: input, Copy: c.DescribeRefreshSchemasStatusRequest}
 }
 

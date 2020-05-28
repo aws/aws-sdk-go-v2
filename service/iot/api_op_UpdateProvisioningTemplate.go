@@ -22,9 +22,15 @@ type UpdateProvisioningTemplateInput struct {
 	// True to enable the fleet provisioning template, otherwise false.
 	Enabled *bool `locationName:"enabled" type:"boolean"`
 
+	// Updates the pre-provisioning hook template.
+	PreProvisioningHook *ProvisioningHook `locationName:"preProvisioningHook" type:"structure"`
+
 	// The ARN of the role associated with the provisioning template. This IoT role
 	// grants permission to provision a device.
 	ProvisioningRoleArn *string `locationName:"provisioningRoleArn" min:"20" type:"string"`
+
+	// Removes pre-provisioning hook template.
+	RemovePreProvisioningHook *bool `locationName:"removePreProvisioningHook" type:"boolean"`
 
 	// The name of the fleet provisioning template.
 	//
@@ -49,6 +55,11 @@ func (s *UpdateProvisioningTemplateInput) Validate() error {
 	}
 	if s.TemplateName != nil && len(*s.TemplateName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TemplateName", 1))
+	}
+	if s.PreProvisioningHook != nil {
+		if err := s.PreProvisioningHook.Validate(); err != nil {
+			invalidParams.AddNested("PreProvisioningHook", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -79,11 +90,23 @@ func (s UpdateProvisioningTemplateInput) MarshalFields(e protocol.FieldEncoder) 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "enabled", protocol.BoolValue(v), metadata)
 	}
+	if s.PreProvisioningHook != nil {
+		v := s.PreProvisioningHook
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "preProvisioningHook", v, metadata)
+	}
 	if s.ProvisioningRoleArn != nil {
 		v := *s.ProvisioningRoleArn
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "provisioningRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RemovePreProvisioningHook != nil {
+		v := *s.RemovePreProvisioningHook
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "removePreProvisioningHook", protocol.BoolValue(v), metadata)
 	}
 	if s.TemplateName != nil {
 		v := *s.TemplateName
@@ -133,6 +156,7 @@ func (c *Client) UpdateProvisioningTemplateRequest(input *UpdateProvisioningTemp
 	}
 
 	req := c.newRequest(op, input, &UpdateProvisioningTemplateOutput{})
+
 	return UpdateProvisioningTemplateRequest{Request: req, Input: input, Copy: c.UpdateProvisioningTemplateRequest}
 }
 

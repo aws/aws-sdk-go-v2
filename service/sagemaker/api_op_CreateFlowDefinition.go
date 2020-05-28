@@ -154,6 +154,7 @@ func (c *Client) CreateFlowDefinitionRequest(input *CreateFlowDefinitionInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateFlowDefinitionOutput{})
+
 	return CreateFlowDefinitionRequest{Request: req, Input: input, Copy: c.CreateFlowDefinitionRequest}
 }
 

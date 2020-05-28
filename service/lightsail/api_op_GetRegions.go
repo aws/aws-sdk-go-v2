@@ -69,6 +69,7 @@ func (c *Client) GetRegionsRequest(input *GetRegionsInput) GetRegionsRequest {
 	}
 
 	req := c.newRequest(op, input, &GetRegionsOutput{})
+
 	return GetRegionsRequest{Request: req, Input: input, Copy: c.GetRegionsRequest}
 }
 

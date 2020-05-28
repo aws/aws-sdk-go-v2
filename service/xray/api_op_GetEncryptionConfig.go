@@ -76,6 +76,7 @@ func (c *Client) GetEncryptionConfigRequest(input *GetEncryptionConfigInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetEncryptionConfigOutput{})
+
 	return GetEncryptionConfigRequest{Request: req, Input: input, Copy: c.GetEncryptionConfigRequest}
 }
 

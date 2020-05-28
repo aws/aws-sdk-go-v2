@@ -144,6 +144,7 @@ func (c *Client) DescribeDBClusterBacktracksRequest(input *DescribeDBClusterBack
 	}
 
 	req := c.newRequest(op, input, &DescribeDBClusterBacktracksOutput{})
+
 	return DescribeDBClusterBacktracksRequest{Request: req, Input: input, Copy: c.DescribeDBClusterBacktracksRequest}
 }
 

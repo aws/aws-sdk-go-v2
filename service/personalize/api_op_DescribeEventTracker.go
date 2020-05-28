@@ -77,6 +77,7 @@ func (c *Client) DescribeEventTrackerRequest(input *DescribeEventTrackerInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeEventTrackerOutput{})
+
 	return DescribeEventTrackerRequest{Request: req, Input: input, Copy: c.DescribeEventTrackerRequest}
 }
 

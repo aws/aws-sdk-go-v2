@@ -105,6 +105,7 @@ func (c *Client) DescribeDevicePolicyConfigurationRequest(input *DescribeDeviceP
 	}
 
 	req := c.newRequest(op, input, &DescribeDevicePolicyConfigurationOutput{})
+
 	return DescribeDevicePolicyConfigurationRequest{Request: req, Input: input, Copy: c.DescribeDevicePolicyConfigurationRequest}
 }
 

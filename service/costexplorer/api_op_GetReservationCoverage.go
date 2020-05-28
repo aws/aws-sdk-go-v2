@@ -213,6 +213,7 @@ func (c *Client) GetReservationCoverageRequest(input *GetReservationCoverageInpu
 	}
 
 	req := c.newRequest(op, input, &GetReservationCoverageOutput{})
+
 	return GetReservationCoverageRequest{Request: req, Input: input, Copy: c.GetReservationCoverageRequest}
 }
 

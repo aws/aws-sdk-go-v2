@@ -124,6 +124,7 @@ func (c *Client) AddApplicationVpcConfigurationRequest(input *AddApplicationVpcC
 	}
 
 	req := c.newRequest(op, input, &AddApplicationVpcConfigurationOutput{})
+
 	return AddApplicationVpcConfigurationRequest{Request: req, Input: input, Copy: c.AddApplicationVpcConfigurationRequest}
 }
 

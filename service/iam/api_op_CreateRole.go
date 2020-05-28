@@ -186,6 +186,7 @@ func (c *Client) CreateRoleRequest(input *CreateRoleInput) CreateRoleRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateRoleOutput{})
+
 	return CreateRoleRequest{Request: req, Input: input, Copy: c.CreateRoleRequest}
 }
 

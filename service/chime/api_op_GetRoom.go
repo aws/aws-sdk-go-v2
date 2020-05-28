@@ -117,6 +117,7 @@ func (c *Client) GetRoomRequest(input *GetRoomInput) GetRoomRequest {
 	}
 
 	req := c.newRequest(op, input, &GetRoomOutput{})
+
 	return GetRoomRequest{Request: req, Input: input, Copy: c.GetRoomRequest}
 }
 

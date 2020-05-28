@@ -83,6 +83,7 @@ func (c *Client) UpdateRulesOfIpGroupRequest(input *UpdateRulesOfIpGroupInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateRulesOfIpGroupOutput{})
+
 	return UpdateRulesOfIpGroupRequest{Request: req, Input: input, Copy: c.UpdateRulesOfIpGroupRequest}
 }
 

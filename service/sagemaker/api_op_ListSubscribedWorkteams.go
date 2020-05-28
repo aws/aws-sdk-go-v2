@@ -99,6 +99,7 @@ func (c *Client) ListSubscribedWorkteamsRequest(input *ListSubscribedWorkteamsIn
 	}
 
 	req := c.newRequest(op, input, &ListSubscribedWorkteamsOutput{})
+
 	return ListSubscribedWorkteamsRequest{Request: req, Input: input, Copy: c.ListSubscribedWorkteamsRequest}
 }
 

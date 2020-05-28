@@ -96,6 +96,7 @@ func (c *Client) InferRxNormRequest(input *InferRxNormInput) InferRxNormRequest 
 	}
 
 	req := c.newRequest(op, input, &InferRxNormOutput{})
+
 	return InferRxNormRequest{Request: req, Input: input, Copy: c.InferRxNormRequest}
 }
 

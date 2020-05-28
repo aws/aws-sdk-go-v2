@@ -116,6 +116,7 @@ func (c *Client) FinalizeDeviceClaimRequest(input *FinalizeDeviceClaimInput) Fin
 	}
 
 	req := c.newRequest(op, input, &FinalizeDeviceClaimOutput{})
+
 	return FinalizeDeviceClaimRequest{Request: req, Input: input, Copy: c.FinalizeDeviceClaimRequest}
 }
 

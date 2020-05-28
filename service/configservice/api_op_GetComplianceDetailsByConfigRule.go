@@ -100,6 +100,7 @@ func (c *Client) GetComplianceDetailsByConfigRuleRequest(input *GetComplianceDet
 	}
 
 	req := c.newRequest(op, input, &GetComplianceDetailsByConfigRuleOutput{})
+
 	return GetComplianceDetailsByConfigRuleRequest{Request: req, Input: input, Copy: c.GetComplianceDetailsByConfigRuleRequest}
 }
 

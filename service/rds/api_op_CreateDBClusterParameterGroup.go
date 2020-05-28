@@ -146,6 +146,7 @@ func (c *Client) CreateDBClusterParameterGroupRequest(input *CreateDBClusterPara
 	}
 
 	req := c.newRequest(op, input, &CreateDBClusterParameterGroupOutput{})
+
 	return CreateDBClusterParameterGroupRequest{Request: req, Input: input, Copy: c.CreateDBClusterParameterGroupRequest}
 }
 

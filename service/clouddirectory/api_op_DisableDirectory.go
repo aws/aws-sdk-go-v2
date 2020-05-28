@@ -105,6 +105,7 @@ func (c *Client) DisableDirectoryRequest(input *DisableDirectoryInput) DisableDi
 	}
 
 	req := c.newRequest(op, input, &DisableDirectoryOutput{})
+
 	return DisableDirectoryRequest{Request: req, Input: input, Copy: c.DisableDirectoryRequest}
 }
 

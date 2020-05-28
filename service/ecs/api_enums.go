@@ -284,6 +284,22 @@ func (enum EFSTransitEncryption) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type EnvironmentFileType string
+
+// Enum values for EnvironmentFileType
+const (
+	EnvironmentFileTypeS3 EnvironmentFileType = "s3"
+)
+
+func (enum EnvironmentFileType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnvironmentFileType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FirelensConfigurationType string
 
 // Enum values for FirelensConfigurationType

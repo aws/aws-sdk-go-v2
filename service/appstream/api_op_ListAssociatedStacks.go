@@ -90,6 +90,7 @@ func (c *Client) ListAssociatedStacksRequest(input *ListAssociatedStacksInput) L
 	}
 
 	req := c.newRequest(op, input, &ListAssociatedStacksOutput{})
+
 	return ListAssociatedStacksRequest{Request: req, Input: input, Copy: c.ListAssociatedStacksRequest}
 }
 

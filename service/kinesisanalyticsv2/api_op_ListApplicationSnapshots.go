@@ -98,6 +98,7 @@ func (c *Client) ListApplicationSnapshotsRequest(input *ListApplicationSnapshots
 	}
 
 	req := c.newRequest(op, input, &ListApplicationSnapshotsOutput{})
+
 	return ListApplicationSnapshotsRequest{Request: req, Input: input, Copy: c.ListApplicationSnapshotsRequest}
 }
 

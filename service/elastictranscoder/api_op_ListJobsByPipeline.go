@@ -148,6 +148,7 @@ func (c *Client) ListJobsByPipelineRequest(input *ListJobsByPipelineInput) ListJ
 	}
 
 	req := c.newRequest(op, input, &ListJobsByPipelineOutput{})
+
 	return ListJobsByPipelineRequest{Request: req, Input: input, Copy: c.ListJobsByPipelineRequest}
 }
 

@@ -130,6 +130,7 @@ func (c *Client) ListRolesRequest(input *ListRolesInput) ListRolesRequest {
 	}
 
 	req := c.newRequest(op, input, &ListRolesOutput{})
+
 	return ListRolesRequest{Request: req, Input: input, Copy: c.ListRolesRequest}
 }
 

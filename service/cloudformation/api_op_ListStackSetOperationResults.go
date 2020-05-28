@@ -109,6 +109,12 @@ func (c *Client) ListStackSetOperationResultsRequest(input *ListStackSetOperatio
 		Name:       opListStackSetOperationResults,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -116,6 +122,7 @@ func (c *Client) ListStackSetOperationResultsRequest(input *ListStackSetOperatio
 	}
 
 	req := c.newRequest(op, input, &ListStackSetOperationResultsOutput{})
+
 	return ListStackSetOperationResultsRequest{Request: req, Input: input, Copy: c.ListStackSetOperationResultsRequest}
 }
 
@@ -141,6 +148,53 @@ func (r ListStackSetOperationResultsRequest) Send(ctx context.Context) (*ListSta
 	}
 
 	return resp, nil
+}
+
+// NewListStackSetOperationResultsRequestPaginator returns a paginator for ListStackSetOperationResults.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListStackSetOperationResultsRequest(input)
+//   p := cloudformation.NewListStackSetOperationResultsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListStackSetOperationResultsPaginator(req ListStackSetOperationResultsRequest) ListStackSetOperationResultsPaginator {
+	return ListStackSetOperationResultsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListStackSetOperationResultsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListStackSetOperationResultsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListStackSetOperationResultsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListStackSetOperationResultsPaginator) CurrentPage() *ListStackSetOperationResultsOutput {
+	return p.Pager.CurrentPage().(*ListStackSetOperationResultsOutput)
 }
 
 // ListStackSetOperationResultsResponse is the response type for the

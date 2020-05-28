@@ -109,6 +109,7 @@ func (c *Client) DeleteFunctionConcurrencyRequest(input *DeleteFunctionConcurren
 	req := c.newRequest(op, input, &DeleteFunctionConcurrencyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteFunctionConcurrencyRequest{Request: req, Input: input, Copy: c.DeleteFunctionConcurrencyRequest}
 }
 

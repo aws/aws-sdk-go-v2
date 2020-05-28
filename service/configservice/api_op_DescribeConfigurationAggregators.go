@@ -74,6 +74,7 @@ func (c *Client) DescribeConfigurationAggregatorsRequest(input *DescribeConfigur
 	}
 
 	req := c.newRequest(op, input, &DescribeConfigurationAggregatorsOutput{})
+
 	return DescribeConfigurationAggregatorsRequest{Request: req, Input: input, Copy: c.DescribeConfigurationAggregatorsRequest}
 }
 

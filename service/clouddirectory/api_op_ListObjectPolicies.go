@@ -170,6 +170,7 @@ func (c *Client) ListObjectPoliciesRequest(input *ListObjectPoliciesInput) ListO
 	}
 
 	req := c.newRequest(op, input, &ListObjectPoliciesOutput{})
+
 	return ListObjectPoliciesRequest{Request: req, Input: input, Copy: c.ListObjectPoliciesRequest}
 }
 

@@ -120,6 +120,7 @@ func (c *Client) DetachPrincipalPolicyRequest(input *DetachPrincipalPolicyInput)
 	req := c.newRequest(op, input, &DetachPrincipalPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DetachPrincipalPolicyRequest{Request: req, Input: input, Copy: c.DetachPrincipalPolicyRequest}
 }
 

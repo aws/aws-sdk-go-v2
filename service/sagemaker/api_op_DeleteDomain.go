@@ -19,7 +19,7 @@ type DeleteDomainInput struct {
 	// DomainId is a required field
 	DomainId *string `type:"string" required:"true"`
 
-	// The retention policy for this domain, which specifies which resources will
+	// The retention policy for this domain, which specifies whether resources will
 	// be retained after the Domain is deleted. By default, all resources are retained
 	// (not automatically deleted).
 	RetentionPolicy *RetentionPolicy `type:"structure"`
@@ -58,9 +58,8 @@ const opDeleteDomain = "DeleteDomain"
 // DeleteDomainRequest returns a request value for making API operation for
 // Amazon SageMaker Service.
 //
-// Used to delete a domain. If you on-boarded with IAM mode, you will need to
-// delete your domain to on-board again using SSO. Use with caution. All of
-// the members of the domain will lose access to their EFS volume, including
+// Used to delete a domain. Use with caution. If RetentionPolicy is set to Delete,
+// all of the members of the domain will lose access to their EFS volume, including
 // data, notebooks, and other artifacts.
 //
 //    // Example sending a request using DeleteDomainRequest.
@@ -85,6 +84,7 @@ func (c *Client) DeleteDomainRequest(input *DeleteDomainInput) DeleteDomainReque
 	req := c.newRequest(op, input, &DeleteDomainOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteDomainRequest{Request: req, Input: input, Copy: c.DeleteDomainRequest}
 }
 

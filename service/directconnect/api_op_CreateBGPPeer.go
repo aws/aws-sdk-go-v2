@@ -77,6 +77,7 @@ func (c *Client) CreateBGPPeerRequest(input *CreateBGPPeerInput) CreateBGPPeerRe
 	}
 
 	req := c.newRequest(op, input, &CreateBGPPeerOutput{})
+
 	return CreateBGPPeerRequest{Request: req, Input: input, Copy: c.CreateBGPPeerRequest}
 }
 

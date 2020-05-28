@@ -156,6 +156,7 @@ func (c *Client) DescribeTemplateAliasRequest(input *DescribeTemplateAliasInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeTemplateAliasOutput{})
+
 	return DescribeTemplateAliasRequest{Request: req, Input: input, Copy: c.DescribeTemplateAliasRequest}
 }
 

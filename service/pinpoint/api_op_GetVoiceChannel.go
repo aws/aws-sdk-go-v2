@@ -103,6 +103,7 @@ func (c *Client) GetVoiceChannelRequest(input *GetVoiceChannelInput) GetVoiceCha
 	}
 
 	req := c.newRequest(op, input, &GetVoiceChannelOutput{})
+
 	return GetVoiceChannelRequest{Request: req, Input: input, Copy: c.GetVoiceChannelRequest}
 }
 

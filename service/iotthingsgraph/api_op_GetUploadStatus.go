@@ -107,6 +107,7 @@ func (c *Client) GetUploadStatusRequest(input *GetUploadStatusInput) GetUploadSt
 	}
 
 	req := c.newRequest(op, input, &GetUploadStatusOutput{})
+
 	return GetUploadStatusRequest{Request: req, Input: input, Copy: c.GetUploadStatusRequest}
 }
 

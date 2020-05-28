@@ -78,6 +78,7 @@ func (c *Client) DescribeElasticIpsRequest(input *DescribeElasticIpsInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeElasticIpsOutput{})
+
 	return DescribeElasticIpsRequest{Request: req, Input: input, Copy: c.DescribeElasticIpsRequest}
 }
 

@@ -19,7 +19,7 @@ type EnableSecurityHubInput struct {
 	// EnableDefaultStandards to false.
 	EnableDefaultStandards *bool `type:"boolean"`
 
-	// The tags to add to the Hub resource when you enable Security Hub.
+	// The tags to add to the hub resource when you enable Security Hub.
 	Tags map[string]string `min:"1" type:"map"`
 }
 
@@ -93,9 +93,17 @@ const opEnableSecurityHub = "EnableSecurityHub"
 // Hub.
 //
 // When you use the EnableSecurityHub operation to enable Security Hub, you
-// also automatically enable the CIS AWS Foundations standard. You do not enable
-// the Payment Card Industry Data Security Standard (PCI DSS) standard. To not
-// enable the CIS AWS Foundations standard, set EnableDefaultStandards to false.
+// also automatically enable the following standards.
+//
+//    * CIS AWS Foundations
+//
+//    * AWS Foundational Security Best Practices
+//
+// You do not enable the Payment Card Industry Data Security Standard (PCI DSS)
+// standard.
+//
+// To not enable the automatically enabled standards, set EnableDefaultStandards
+// to false.
 //
 // After you enable Security Hub, to enable a standard, use the BatchEnableStandards
 // operation. To disable a standard, use the BatchDisableStandards operation.
@@ -123,6 +131,7 @@ func (c *Client) EnableSecurityHubRequest(input *EnableSecurityHubInput) EnableS
 	}
 
 	req := c.newRequest(op, input, &EnableSecurityHubOutput{})
+
 	return EnableSecurityHubRequest{Request: req, Input: input, Copy: c.EnableSecurityHubRequest}
 }
 

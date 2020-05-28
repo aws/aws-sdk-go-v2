@@ -103,6 +103,7 @@ func (c *Client) DeleteSmsChannelRequest(input *DeleteSmsChannelInput) DeleteSms
 	}
 
 	req := c.newRequest(op, input, &DeleteSmsChannelOutput{})
+
 	return DeleteSmsChannelRequest{Request: req, Input: input, Copy: c.DeleteSmsChannelRequest}
 }
 

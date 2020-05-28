@@ -94,6 +94,7 @@ func (c *Client) CreateLunaClientRequest(input *CreateLunaClientInput) CreateLun
 	}
 
 	req := c.newRequest(op, input, &CreateLunaClientOutput{})
+
 	return CreateLunaClientRequest{Request: req, Input: input, Copy: c.CreateLunaClientRequest}
 }
 

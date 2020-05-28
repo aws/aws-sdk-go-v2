@@ -90,6 +90,7 @@ func (c *Client) ListBootstrapActionsRequest(input *ListBootstrapActionsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListBootstrapActionsOutput{})
+
 	return ListBootstrapActionsRequest{Request: req, Input: input, Copy: c.ListBootstrapActionsRequest}
 }
 

@@ -43,8 +43,9 @@ type ListObjectsV2Input struct {
 	// true.
 	FetchOwner *bool `location:"querystring" locationName:"fetch-owner" type:"boolean"`
 
-	// Sets the maximum number of keys returned in the response. The response might
-	// contain fewer keys but will never contain more.
+	// Sets the maximum number of keys returned in the response. By default the
+	// API returns up to 1,000 key names. The response might contain fewer keys
+	// but will never contain more.
 	MaxKeys *int64 `location:"querystring" locationName:"max-keys" type:"integer"`
 
 	// Limits the response to keys that begin with the specified prefix.
@@ -212,8 +213,9 @@ type ListObjectsV2Output struct {
 	// result will include less than equals 50 keys
 	KeyCount *int64 `type:"integer"`
 
-	// Sets the maximum number of keys returned in the response. The response might
-	// contain fewer keys but will never contain more.
+	// Sets the maximum number of keys returned in the response. By default the
+	// API returns up to 1,000 key names. The response might contain fewer keys
+	// but will never contain more.
 	MaxKeys *int64 `type:"integer"`
 
 	// Bucket name.
@@ -393,6 +395,7 @@ func (c *Client) ListObjectsV2Request(input *ListObjectsV2Input) ListObjectsV2Re
 	}
 
 	req := c.newRequest(op, input, &ListObjectsV2Output{})
+
 	return ListObjectsV2Request{Request: req, Input: input, Copy: c.ListObjectsV2Request}
 }
 

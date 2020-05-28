@@ -164,6 +164,7 @@ func (c *Client) UpdateDynamicThingGroupRequest(input *UpdateDynamicThingGroupIn
 	}
 
 	req := c.newRequest(op, input, &UpdateDynamicThingGroupOutput{})
+
 	return UpdateDynamicThingGroupRequest{Request: req, Input: input, Copy: c.UpdateDynamicThingGroupRequest}
 }
 

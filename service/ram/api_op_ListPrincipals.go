@@ -199,6 +199,7 @@ func (c *Client) ListPrincipalsRequest(input *ListPrincipalsInput) ListPrincipal
 	}
 
 	req := c.newRequest(op, input, &ListPrincipalsOutput{})
+
 	return ListPrincipalsRequest{Request: req, Input: input, Copy: c.ListPrincipalsRequest}
 }
 

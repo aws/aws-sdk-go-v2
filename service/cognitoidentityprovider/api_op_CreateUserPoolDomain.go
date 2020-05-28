@@ -108,6 +108,7 @@ func (c *Client) CreateUserPoolDomainRequest(input *CreateUserPoolDomainInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateUserPoolDomainOutput{})
+
 	return CreateUserPoolDomainRequest{Request: req, Input: input, Copy: c.CreateUserPoolDomainRequest}
 }
 

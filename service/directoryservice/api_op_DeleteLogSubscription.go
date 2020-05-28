@@ -73,6 +73,7 @@ func (c *Client) DeleteLogSubscriptionRequest(input *DeleteLogSubscriptionInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteLogSubscriptionOutput{})
+
 	return DeleteLogSubscriptionRequest{Request: req, Input: input, Copy: c.DeleteLogSubscriptionRequest}
 }
 

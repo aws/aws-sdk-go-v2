@@ -63,6 +63,7 @@ func (c *Client) DescribeTerminationPolicyTypesRequest(input *DescribeTerminatio
 	}
 
 	req := c.newRequest(op, input, &DescribeTerminationPolicyTypesOutput{})
+
 	return DescribeTerminationPolicyTypesRequest{Request: req, Input: input, Copy: c.DescribeTerminationPolicyTypesRequest}
 }
 

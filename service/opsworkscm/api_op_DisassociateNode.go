@@ -106,6 +106,7 @@ func (c *Client) DisassociateNodeRequest(input *DisassociateNodeInput) Disassoci
 	}
 
 	req := c.newRequest(op, input, &DisassociateNodeOutput{})
+
 	return DisassociateNodeRequest{Request: req, Input: input, Copy: c.DisassociateNodeRequest}
 }
 

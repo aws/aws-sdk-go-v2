@@ -126,6 +126,7 @@ func (c *Client) ListGroundStationsRequest(input *ListGroundStationsInput) ListG
 	}
 
 	req := c.newRequest(op, input, &ListGroundStationsOutput{})
+
 	return ListGroundStationsRequest{Request: req, Input: input, Copy: c.ListGroundStationsRequest}
 }
 

@@ -138,6 +138,7 @@ func (c *Client) StartImportTaskRequest(input *StartImportTaskInput) StartImport
 	}
 
 	req := c.newRequest(op, input, &StartImportTaskOutput{})
+
 	return StartImportTaskRequest{Request: req, Input: input, Copy: c.StartImportTaskRequest}
 }
 

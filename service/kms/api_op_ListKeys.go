@@ -103,6 +103,7 @@ func (c *Client) ListKeysRequest(input *ListKeysInput) ListKeysRequest {
 	}
 
 	req := c.newRequest(op, input, &ListKeysOutput{})
+
 	return ListKeysRequest{Request: req, Input: input, Copy: c.ListKeysRequest}
 }
 

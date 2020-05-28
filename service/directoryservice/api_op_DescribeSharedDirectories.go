@@ -91,6 +91,7 @@ func (c *Client) DescribeSharedDirectoriesRequest(input *DescribeSharedDirectori
 	}
 
 	req := c.newRequest(op, input, &DescribeSharedDirectoriesOutput{})
+
 	return DescribeSharedDirectoriesRequest{Request: req, Input: input, Copy: c.DescribeSharedDirectoriesRequest}
 }
 

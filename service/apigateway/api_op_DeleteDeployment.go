@@ -110,6 +110,7 @@ func (c *Client) DeleteDeploymentRequest(input *DeleteDeploymentInput) DeleteDep
 	req := c.newRequest(op, input, &DeleteDeploymentOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteDeploymentRequest{Request: req, Input: input, Copy: c.DeleteDeploymentRequest}
 }
 

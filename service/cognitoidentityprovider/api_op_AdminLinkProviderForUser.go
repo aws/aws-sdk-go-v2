@@ -149,6 +149,7 @@ func (c *Client) AdminLinkProviderForUserRequest(input *AdminLinkProviderForUser
 	}
 
 	req := c.newRequest(op, input, &AdminLinkProviderForUserOutput{})
+
 	return AdminLinkProviderForUserRequest{Request: req, Input: input, Copy: c.AdminLinkProviderForUserRequest}
 }
 

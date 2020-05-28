@@ -140,6 +140,7 @@ func (c *Client) GetDataflowEndpointGroupRequest(input *GetDataflowEndpointGroup
 	}
 
 	req := c.newRequest(op, input, &GetDataflowEndpointGroupOutput{})
+
 	return GetDataflowEndpointGroupRequest{Request: req, Input: input, Copy: c.GetDataflowEndpointGroupRequest}
 }
 

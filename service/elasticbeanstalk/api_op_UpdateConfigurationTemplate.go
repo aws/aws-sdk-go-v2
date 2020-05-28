@@ -176,6 +176,7 @@ func (c *Client) UpdateConfigurationTemplateRequest(input *UpdateConfigurationTe
 	}
 
 	req := c.newRequest(op, input, &UpdateConfigurationTemplateOutput{})
+
 	return UpdateConfigurationTemplateRequest{Request: req, Input: input, Copy: c.UpdateConfigurationTemplateRequest}
 }
 

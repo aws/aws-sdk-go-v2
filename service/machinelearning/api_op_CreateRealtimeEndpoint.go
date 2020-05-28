@@ -89,6 +89,7 @@ func (c *Client) CreateRealtimeEndpointRequest(input *CreateRealtimeEndpointInpu
 	}
 
 	req := c.newRequest(op, input, &CreateRealtimeEndpointOutput{})
+
 	return CreateRealtimeEndpointRequest{Request: req, Input: input, Copy: c.CreateRealtimeEndpointRequest}
 }
 

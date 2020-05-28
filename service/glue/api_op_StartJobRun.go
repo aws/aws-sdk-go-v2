@@ -171,6 +171,7 @@ func (c *Client) StartJobRunRequest(input *StartJobRunInput) StartJobRunRequest 
 	}
 
 	req := c.newRequest(op, input, &StartJobRunOutput{})
+
 	return StartJobRunRequest{Request: req, Input: input, Copy: c.StartJobRunRequest}
 }
 

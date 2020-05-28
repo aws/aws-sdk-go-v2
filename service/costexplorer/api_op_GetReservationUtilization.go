@@ -148,6 +148,7 @@ func (c *Client) GetReservationUtilizationRequest(input *GetReservationUtilizati
 	}
 
 	req := c.newRequest(op, input, &GetReservationUtilizationOutput{})
+
 	return GetReservationUtilizationRequest{Request: req, Input: input, Copy: c.GetReservationUtilizationRequest}
 }
 

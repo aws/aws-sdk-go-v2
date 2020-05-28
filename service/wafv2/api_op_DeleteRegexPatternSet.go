@@ -131,6 +131,7 @@ func (c *Client) DeleteRegexPatternSetRequest(input *DeleteRegexPatternSetInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteRegexPatternSetOutput{})
+
 	return DeleteRegexPatternSetRequest{Request: req, Input: input, Copy: c.DeleteRegexPatternSetRequest}
 }
 

@@ -146,6 +146,7 @@ func (c *Client) CreateDetectorRequest(input *CreateDetectorInput) CreateDetecto
 	}
 
 	req := c.newRequest(op, input, &CreateDetectorOutput{})
+
 	return CreateDetectorRequest{Request: req, Input: input, Copy: c.CreateDetectorRequest}
 }
 

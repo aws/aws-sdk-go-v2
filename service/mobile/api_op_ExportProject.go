@@ -129,6 +129,7 @@ func (c *Client) ExportProjectRequest(input *ExportProjectInput) ExportProjectRe
 	}
 
 	req := c.newRequest(op, input, &ExportProjectOutput{})
+
 	return ExportProjectRequest{Request: req, Input: input, Copy: c.ExportProjectRequest}
 }
 

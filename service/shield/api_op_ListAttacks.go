@@ -111,6 +111,7 @@ func (c *Client) ListAttacksRequest(input *ListAttacksInput) ListAttacksRequest 
 	}
 
 	req := c.newRequest(op, input, &ListAttacksOutput{})
+
 	return ListAttacksRequest{Request: req, Input: input, Copy: c.ListAttacksRequest}
 }
 

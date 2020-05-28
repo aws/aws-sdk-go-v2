@@ -99,6 +99,7 @@ func (c *Client) SetInstanceProtectionRequest(input *SetInstanceProtectionInput)
 	}
 
 	req := c.newRequest(op, input, &SetInstanceProtectionOutput{})
+
 	return SetInstanceProtectionRequest{Request: req, Input: input, Copy: c.SetInstanceProtectionRequest}
 }
 

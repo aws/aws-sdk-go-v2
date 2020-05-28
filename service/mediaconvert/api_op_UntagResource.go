@@ -112,6 +112,7 @@ func (c *Client) UntagResourceRequest(input *UntagResourceInput) UntagResourceRe
 	}
 
 	req := c.newRequest(op, input, &UntagResourceOutput{})
+
 	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 

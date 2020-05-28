@@ -151,6 +151,7 @@ func (c *Client) GetEnabledStandardsRequest(input *GetEnabledStandardsInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetEnabledStandardsOutput{})
+
 	return GetEnabledStandardsRequest{Request: req, Input: input, Copy: c.GetEnabledStandardsRequest}
 }
 

@@ -84,6 +84,7 @@ func (c *Client) GetLogRecordRequest(input *GetLogRecordInput) GetLogRecordReque
 	}
 
 	req := c.newRequest(op, input, &GetLogRecordOutput{})
+
 	return GetLogRecordRequest{Request: req, Input: input, Copy: c.GetLogRecordRequest}
 }
 

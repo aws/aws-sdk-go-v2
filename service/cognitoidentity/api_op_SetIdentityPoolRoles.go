@@ -110,6 +110,7 @@ func (c *Client) SetIdentityPoolRolesRequest(input *SetIdentityPoolRolesInput) S
 	req := c.newRequest(op, input, &SetIdentityPoolRolesOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetIdentityPoolRolesRequest{Request: req, Input: input, Copy: c.SetIdentityPoolRolesRequest}
 }
 

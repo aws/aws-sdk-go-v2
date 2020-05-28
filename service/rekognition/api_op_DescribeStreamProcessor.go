@@ -112,6 +112,7 @@ func (c *Client) DescribeStreamProcessorRequest(input *DescribeStreamProcessorIn
 	}
 
 	req := c.newRequest(op, input, &DescribeStreamProcessorOutput{})
+
 	return DescribeStreamProcessorRequest{Request: req, Input: input, Copy: c.DescribeStreamProcessorRequest}
 }
 

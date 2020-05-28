@@ -112,6 +112,7 @@ func (c *Client) CreateSampleFindingsRequest(input *CreateSampleFindingsInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateSampleFindingsOutput{})
+
 	return CreateSampleFindingsRequest{Request: req, Input: input, Copy: c.CreateSampleFindingsRequest}
 }
 

@@ -393,6 +393,7 @@ func (c *Client) GetDASHStreamingSessionURLRequest(input *GetDASHStreamingSessio
 	}
 
 	req := c.newRequest(op, input, &GetDASHStreamingSessionURLOutput{})
+
 	return GetDASHStreamingSessionURLRequest{Request: req, Input: input, Copy: c.GetDASHStreamingSessionURLRequest}
 }
 

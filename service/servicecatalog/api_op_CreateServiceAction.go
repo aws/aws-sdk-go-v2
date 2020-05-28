@@ -147,6 +147,7 @@ func (c *Client) CreateServiceActionRequest(input *CreateServiceActionInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateServiceActionOutput{})
+
 	return CreateServiceActionRequest{Request: req, Input: input, Copy: c.CreateServiceActionRequest}
 }
 

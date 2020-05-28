@@ -86,6 +86,7 @@ func (c *Client) DeleteDBParameterGroupRequest(input *DeleteDBParameterGroupInpu
 	req := c.newRequest(op, input, &DeleteDBParameterGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteDBParameterGroupRequest{Request: req, Input: input, Copy: c.DeleteDBParameterGroupRequest}
 }
 

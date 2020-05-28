@@ -70,11 +70,11 @@ const opTagLogGroup = "TagLogGroup"
 //
 // Adds or updates the specified tags for the specified log group.
 //
-// To list the tags for a log group, use ListTagsLogGroup. To remove tags, use
-// UntagLogGroup.
+// To list the tags for a log group, use ListTagsLogGroup (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsLogGroup.html).
+// To remove tags, use UntagLogGroup (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagLogGroup.html).
 //
 // For more information about tags, see Tag Log Groups in Amazon CloudWatch
-// Logs (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/log-group-tagging.html)
+// Logs (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#log-group-tagging)
 // in the Amazon CloudWatch Logs User Guide.
 //
 //    // Example sending a request using TagLogGroupRequest.
@@ -99,6 +99,7 @@ func (c *Client) TagLogGroupRequest(input *TagLogGroupInput) TagLogGroupRequest 
 	req := c.newRequest(op, input, &TagLogGroupOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return TagLogGroupRequest{Request: req, Input: input, Copy: c.TagLogGroupRequest}
 }
 

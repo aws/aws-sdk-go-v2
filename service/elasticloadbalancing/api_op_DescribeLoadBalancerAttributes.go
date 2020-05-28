@@ -78,6 +78,7 @@ func (c *Client) DescribeLoadBalancerAttributesRequest(input *DescribeLoadBalanc
 	}
 
 	req := c.newRequest(op, input, &DescribeLoadBalancerAttributesOutput{})
+
 	return DescribeLoadBalancerAttributesRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancerAttributesRequest}
 }
 

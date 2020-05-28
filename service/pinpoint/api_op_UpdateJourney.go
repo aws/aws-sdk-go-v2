@@ -135,6 +135,7 @@ func (c *Client) UpdateJourneyRequest(input *UpdateJourneyInput) UpdateJourneyRe
 	}
 
 	req := c.newRequest(op, input, &UpdateJourneyOutput{})
+
 	return UpdateJourneyRequest{Request: req, Input: input, Copy: c.UpdateJourneyRequest}
 }
 

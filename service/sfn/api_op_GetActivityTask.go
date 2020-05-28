@@ -106,6 +106,7 @@ func (c *Client) GetActivityTaskRequest(input *GetActivityTaskInput) GetActivity
 	}
 
 	req := c.newRequest(op, input, &GetActivityTaskOutput{})
+
 	return GetActivityTaskRequest{Request: req, Input: input, Copy: c.GetActivityTaskRequest}
 }
 

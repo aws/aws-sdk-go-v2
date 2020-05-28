@@ -209,6 +209,7 @@ func (c *Client) GetApplicationRequest(input *GetApplicationInput) GetApplicatio
 	}
 
 	req := c.newRequest(op, input, &GetApplicationOutput{})
+
 	return GetApplicationRequest{Request: req, Input: input, Copy: c.GetApplicationRequest}
 }
 

@@ -85,6 +85,7 @@ func (c *Client) DeleteClusterParameterGroupRequest(input *DeleteClusterParamete
 	req := c.newRequest(op, input, &DeleteClusterParameterGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteClusterParameterGroupRequest{Request: req, Input: input, Copy: c.DeleteClusterParameterGroupRequest}
 }
 

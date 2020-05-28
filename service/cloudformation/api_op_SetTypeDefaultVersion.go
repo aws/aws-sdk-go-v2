@@ -92,6 +92,7 @@ func (c *Client) SetTypeDefaultVersionRequest(input *SetTypeDefaultVersionInput)
 	}
 
 	req := c.newRequest(op, input, &SetTypeDefaultVersionOutput{})
+
 	return SetTypeDefaultVersionRequest{Request: req, Input: input, Copy: c.SetTypeDefaultVersionRequest}
 }
 

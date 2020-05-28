@@ -121,6 +121,7 @@ func (c *Client) CreateTopicRequest(input *CreateTopicInput) CreateTopicRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateTopicOutput{})
+
 	return CreateTopicRequest{Request: req, Input: input, Copy: c.CreateTopicRequest}
 }
 

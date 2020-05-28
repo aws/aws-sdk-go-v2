@@ -76,6 +76,7 @@ func (c *Client) GetInstanceStateRequest(input *GetInstanceStateInput) GetInstan
 	}
 
 	req := c.newRequest(op, input, &GetInstanceStateOutput{})
+
 	return GetInstanceStateRequest{Request: req, Input: input, Copy: c.GetInstanceStateRequest}
 }
 

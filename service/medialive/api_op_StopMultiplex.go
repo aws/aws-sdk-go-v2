@@ -191,6 +191,7 @@ func (c *Client) StopMultiplexRequest(input *StopMultiplexInput) StopMultiplexRe
 	}
 
 	req := c.newRequest(op, input, &StopMultiplexOutput{})
+
 	return StopMultiplexRequest{Request: req, Input: input, Copy: c.StopMultiplexRequest}
 }
 

@@ -139,6 +139,7 @@ func (c *Client) UpdateShardCountRequest(input *UpdateShardCountInput) UpdateSha
 	}
 
 	req := c.newRequest(op, input, &UpdateShardCountOutput{})
+
 	return UpdateShardCountRequest{Request: req, Input: input, Copy: c.UpdateShardCountRequest}
 }
 

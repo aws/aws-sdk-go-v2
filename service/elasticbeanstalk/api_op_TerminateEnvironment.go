@@ -199,6 +199,7 @@ func (c *Client) TerminateEnvironmentRequest(input *TerminateEnvironmentInput) T
 	}
 
 	req := c.newRequest(op, input, &TerminateEnvironmentOutput{})
+
 	return TerminateEnvironmentRequest{Request: req, Input: input, Copy: c.TerminateEnvironmentRequest}
 }
 

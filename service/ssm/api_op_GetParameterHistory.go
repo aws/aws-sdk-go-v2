@@ -105,6 +105,7 @@ func (c *Client) GetParameterHistoryRequest(input *GetParameterHistoryInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetParameterHistoryOutput{})
+
 	return GetParameterHistoryRequest{Request: req, Input: input, Copy: c.GetParameterHistoryRequest}
 }
 

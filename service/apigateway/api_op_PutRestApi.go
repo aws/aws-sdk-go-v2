@@ -294,6 +294,7 @@ func (c *Client) PutRestApiRequest(input *PutRestApiInput) PutRestApiRequest {
 	}
 
 	req := c.newRequest(op, input, &PutRestApiOutput{})
+
 	return PutRestApiRequest{Request: req, Input: input, Copy: c.PutRestApiRequest}
 }
 

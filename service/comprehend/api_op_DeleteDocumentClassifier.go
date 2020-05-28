@@ -81,6 +81,7 @@ func (c *Client) DeleteDocumentClassifierRequest(input *DeleteDocumentClassifier
 	}
 
 	req := c.newRequest(op, input, &DeleteDocumentClassifierOutput{})
+
 	return DeleteDocumentClassifierRequest{Request: req, Input: input, Copy: c.DeleteDocumentClassifierRequest}
 }
 

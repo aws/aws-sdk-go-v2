@@ -101,6 +101,7 @@ func (c *Client) AddSourceIdentifierToSubscriptionRequest(input *AddSourceIdenti
 	}
 
 	req := c.newRequest(op, input, &AddSourceIdentifierToSubscriptionOutput{})
+
 	return AddSourceIdentifierToSubscriptionRequest{Request: req, Input: input, Copy: c.AddSourceIdentifierToSubscriptionRequest}
 }
 

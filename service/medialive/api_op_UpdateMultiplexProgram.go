@@ -126,6 +126,7 @@ func (c *Client) UpdateMultiplexProgramRequest(input *UpdateMultiplexProgramInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateMultiplexProgramOutput{})
+
 	return UpdateMultiplexProgramRequest{Request: req, Input: input, Copy: c.UpdateMultiplexProgramRequest}
 }
 

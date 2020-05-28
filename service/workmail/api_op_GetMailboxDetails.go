@@ -92,6 +92,7 @@ func (c *Client) GetMailboxDetailsRequest(input *GetMailboxDetailsInput) GetMail
 	}
 
 	req := c.newRequest(op, input, &GetMailboxDetailsOutput{})
+
 	return GetMailboxDetailsRequest{Request: req, Input: input, Copy: c.GetMailboxDetailsRequest}
 }
 

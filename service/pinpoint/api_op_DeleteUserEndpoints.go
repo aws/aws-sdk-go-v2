@@ -115,6 +115,7 @@ func (c *Client) DeleteUserEndpointsRequest(input *DeleteUserEndpointsInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteUserEndpointsOutput{})
+
 	return DeleteUserEndpointsRequest{Request: req, Input: input, Copy: c.DeleteUserEndpointsRequest}
 }
 

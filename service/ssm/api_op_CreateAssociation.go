@@ -85,7 +85,7 @@ type CreateAssociationInput struct {
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
-	// An Amazon S3 bucket where you want to store the output details of the request.
+	// An S3 bucket where you want to store the output details of the request.
 	OutputLocation *InstanceAssociationOutputLocation `type:"structure"`
 
 	// The parameters for the runtime configuration of the document.
@@ -94,8 +94,25 @@ type CreateAssociationInput struct {
 	// A cron expression when the association will be applied to the target(s).
 	ScheduleExpression *string `min:"1" type:"string"`
 
-	// The targets (either instances or tags) for the association. You must specify
-	// a value for Targets if you don't specify a value for InstanceId.
+	// The mode for generating association compliance. You can specify AUTO or MANUAL.
+	// In AUTO mode, the system uses the status of the association execution to
+	// determine the compliance status. If the association execution runs successfully,
+	// then the association is COMPLIANT. If the association execution doesn't run
+	// successfully, the association is NON-COMPLIANT.
+	//
+	// In MANUAL mode, you must specify the AssociationId as a parameter for the
+	// PutComplianceItems API action. In this case, compliance data is not managed
+	// by State Manager. It is managed by your direct call to the PutComplianceItems
+	// API action.
+	//
+	// By default, all associations use AUTO mode.
+	SyncCompliance AssociationSyncCompliance `type:"string" enum:"true"`
+
+	// The targets for the association. You can target instances by using tags,
+	// AWS Resource Groups, all instances in an AWS account, or individual instance
+	// IDs. For more information about choosing targets for an association, see
+	// Using targets and rate controls with State Manager associations (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html)
+	// in the AWS Systems Manager User Guide.
 	Targets []Target `type:"list"`
 }
 
@@ -162,10 +179,8 @@ const opCreateAssociation = "CreateAssociation"
 // Associates the specified Systems Manager document with the specified instances
 // or targets.
 //
-// When you associate a document with one or more instances using instance IDs
-// or tags, SSM Agent running on the instance processes the document and configures
-// the instance as specified.
-//
+// When you associate a document with one or more instances, SSM Agent running
+// on the instance processes the document and configures the instance as specified.
 // If you associate a document with an instance that already has an associated
 // document, the system returns the AssociationAlreadyExists exception.
 //
@@ -189,6 +204,7 @@ func (c *Client) CreateAssociationRequest(input *CreateAssociationInput) CreateA
 	}
 
 	req := c.newRequest(op, input, &CreateAssociationOutput{})
+
 	return CreateAssociationRequest{Request: req, Input: input, Copy: c.CreateAssociationRequest}
 }
 

@@ -117,6 +117,7 @@ func (c *Client) CreateSolutionVersionRequest(input *CreateSolutionVersionInput)
 	}
 
 	req := c.newRequest(op, input, &CreateSolutionVersionOutput{})
+
 	return CreateSolutionVersionRequest{Request: req, Input: input, Copy: c.CreateSolutionVersionRequest}
 }
 

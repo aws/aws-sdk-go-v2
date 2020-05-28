@@ -145,6 +145,7 @@ func (c *Client) UpdateContainerInstancesStateRequest(input *UpdateContainerInst
 	}
 
 	req := c.newRequest(op, input, &UpdateContainerInstancesStateOutput{})
+
 	return UpdateContainerInstancesStateRequest{Request: req, Input: input, Copy: c.UpdateContainerInstancesStateRequest}
 }
 

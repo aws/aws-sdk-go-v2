@@ -64,6 +64,9 @@ const opDescribeTags = "DescribeTags"
 // a particular tag only if it matches all the filters. If there's no match,
 // no special message is returned.
 //
+// For more information, see Tagging Auto Scaling Groups and Instances (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html)
+// in the Amazon EC2 Auto Scaling User Guide.
+//
 //    // Example sending a request using DescribeTagsRequest.
 //    req := client.DescribeTagsRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -90,6 +93,7 @@ func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsReque
 	}
 
 	req := c.newRequest(op, input, &DescribeTagsOutput{})
+
 	return DescribeTagsRequest{Request: req, Input: input, Copy: c.DescribeTagsRequest}
 }
 

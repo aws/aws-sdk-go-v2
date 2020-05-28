@@ -128,6 +128,7 @@ func (c *Client) UpdateBillingGroupRequest(input *UpdateBillingGroupInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateBillingGroupOutput{})
+
 	return UpdateBillingGroupRequest{Request: req, Input: input, Copy: c.UpdateBillingGroupRequest}
 }
 

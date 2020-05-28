@@ -25,8 +25,8 @@ type EnableMetricsCollectionInput struct {
 	// Granularity is a required field
 	Granularity *string `min:"1" type:"string" required:"true"`
 
-	// One or more of the following metrics. If you omit this parameter, all metrics
-	// are enabled.
+	// Specifies which group-level metrics to start collecting. You can specify
+	// one or more of the following metrics:
 	//
 	//    * GroupMinSize
 	//
@@ -43,6 +43,20 @@ type EnableMetricsCollectionInput struct {
 	//    * GroupTerminatingInstances
 	//
 	//    * GroupTotalInstances
+	//
+	// The instance weighting feature supports the following additional metrics:
+	//
+	//    * GroupInServiceCapacity
+	//
+	//    * GroupPendingCapacity
+	//
+	//    * GroupStandbyCapacity
+	//
+	//    * GroupTerminatingCapacity
+	//
+	//    * GroupTotalCapacity
+	//
+	// If you omit this parameter, all metrics are enabled.
 	Metrics []string `type:"list"`
 }
 
@@ -115,6 +129,7 @@ func (c *Client) EnableMetricsCollectionRequest(input *EnableMetricsCollectionIn
 	req := c.newRequest(op, input, &EnableMetricsCollectionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return EnableMetricsCollectionRequest{Request: req, Input: input, Copy: c.EnableMetricsCollectionRequest}
 }
 

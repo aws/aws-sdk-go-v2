@@ -1461,12 +1461,28 @@ type AuthInfo struct {
 
 	// The resources for which the principal is being authorized to perform the
 	// specified action.
-	Resources []string `locationName:"resources" type:"list"`
+	//
+	// Resources is a required field
+	Resources []string `locationName:"resources" type:"list" required:"true"`
 }
 
 // String returns the string representation
 func (s AuthInfo) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AuthInfo) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AuthInfo"}
+
+	if s.Resources == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Resources"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -2219,6 +2235,9 @@ type Certificate struct {
 	// the certificate ID.)
 	CertificateId *string `locationName:"certificateId" min:"64" type:"string"`
 
+	// The mode of the certificate.
+	CertificateMode CertificateMode `locationName:"certificateMode" type:"string" enum:"true"`
+
 	// The date and time the certificate was created.
 	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 
@@ -2246,6 +2265,12 @@ func (s Certificate) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "certificateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.CertificateMode) > 0 {
+		v := s.CertificateMode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "certificateMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.CreationDate != nil {
 		v := *s.CreationDate
@@ -2275,6 +2300,9 @@ type CertificateDescription struct {
 
 	// The ID of the certificate.
 	CertificateId *string `locationName:"certificateId" min:"64" type:"string"`
+
+	// The mode of the certificate.
+	CertificateMode CertificateMode `locationName:"certificateMode" type:"string" enum:"true"`
 
 	// The certificate data, in PEM format.
 	CertificatePem *string `locationName:"certificatePem" min:"1" type:"string"`
@@ -2331,6 +2359,12 @@ func (s CertificateDescription) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "certificateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.CertificateMode) > 0 {
+		v := s.CertificateMode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "certificateMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.CertificatePem != nil {
 		v := *s.CertificatePem
@@ -5317,8 +5351,8 @@ type MetricDimension struct {
 	DimensionName *string `locationName:"dimensionName" min:"1" type:"string" required:"true"`
 
 	// Defines how the dimensionValues of a dimension are interpreted. For example,
-	// for DimensionType TOPIC_FILTER, with IN operator, a message will be counted
-	// only if its topic matches one of the topic filters. With NOT_IN Operator,
+	// for dimension type TOPIC_FILTER, the IN operator, a message will be counted
+	// only if its topic matches one of the topic filters. With NOT_IN operator,
 	// a message will be counted only if it doesn't match any of the topic filters.
 	// The operator is optional: if it's not provided (is null), it will be interpreted
 	// as IN.
@@ -6397,6 +6431,62 @@ func (s PresignedUrlConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Structure that contains payloadVersion and targetArn.
+type ProvisioningHook struct {
+	_ struct{} `type:"structure"`
+
+	// The payload that was sent to the target function.
+	//
+	// Note: Only Lambda functions are currently supported.
+	PayloadVersion *string `locationName:"payloadVersion" min:"10" type:"string"`
+
+	// The ARN of the target function.
+	//
+	// Note: Only Lambda functions are currently supported.
+	//
+	// TargetArn is a required field
+	TargetArn *string `locationName:"targetArn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ProvisioningHook) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ProvisioningHook) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ProvisioningHook"}
+	if s.PayloadVersion != nil && len(*s.PayloadVersion) < 10 {
+		invalidParams.Add(aws.NewErrParamMinLen("PayloadVersion", 10))
+	}
+
+	if s.TargetArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ProvisioningHook) MarshalFields(e protocol.FieldEncoder) error {
+	if s.PayloadVersion != nil {
+		v := *s.PayloadVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "payloadVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TargetArn != nil {
+		v := *s.TargetArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "targetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -8329,15 +8419,37 @@ type Tag struct {
 	_ struct{} `type:"structure"`
 
 	// The tag's key.
-	Key *string `type:"string"`
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
 
 	// The tag's value.
-	Value *string `type:"string"`
+	Value *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
 func (s Tag) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+	if s.Value != nil && len(*s.Value) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.

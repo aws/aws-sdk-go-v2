@@ -83,6 +83,7 @@ func (c *Client) ListRecordHistoryRequest(input *ListRecordHistoryInput) ListRec
 	}
 
 	req := c.newRequest(op, input, &ListRecordHistoryOutput{})
+
 	return ListRecordHistoryRequest{Request: req, Input: input, Copy: c.ListRecordHistoryRequest}
 }
 

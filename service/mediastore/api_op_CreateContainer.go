@@ -118,6 +118,7 @@ func (c *Client) CreateContainerRequest(input *CreateContainerInput) CreateConta
 	}
 
 	req := c.newRequest(op, input, &CreateContainerOutput{})
+
 	return CreateContainerRequest{Request: req, Input: input, Copy: c.CreateContainerRequest}
 }
 

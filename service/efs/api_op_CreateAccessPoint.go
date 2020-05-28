@@ -285,6 +285,7 @@ func (c *Client) CreateAccessPointRequest(input *CreateAccessPointInput) CreateA
 	}
 
 	req := c.newRequest(op, input, &CreateAccessPointOutput{})
+
 	return CreateAccessPointRequest{Request: req, Input: input, Copy: c.CreateAccessPointRequest}
 }
 

@@ -142,6 +142,7 @@ func (c *Client) DescribeImageScanFindingsRequest(input *DescribeImageScanFindin
 	}
 
 	req := c.newRequest(op, input, &DescribeImageScanFindingsOutput{})
+
 	return DescribeImageScanFindingsRequest{Request: req, Input: input, Copy: c.DescribeImageScanFindingsRequest}
 }
 

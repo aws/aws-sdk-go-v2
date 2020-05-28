@@ -237,6 +237,7 @@ func (c *Client) CreateAssetRequest(input *CreateAssetInput) CreateAssetRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateAssetOutput{})
+
 	return CreateAssetRequest{Request: req, Input: input, Copy: c.CreateAssetRequest}
 }
 

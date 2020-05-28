@@ -107,6 +107,7 @@ func (c *Client) DetachInstancesRequest(input *DetachInstancesInput) DetachInsta
 	}
 
 	req := c.newRequest(op, input, &DetachInstancesOutput{})
+
 	return DetachInstancesRequest{Request: req, Input: input, Copy: c.DetachInstancesRequest}
 }
 

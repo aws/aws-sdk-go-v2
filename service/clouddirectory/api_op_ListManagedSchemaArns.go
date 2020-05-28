@@ -140,6 +140,7 @@ func (c *Client) ListManagedSchemaArnsRequest(input *ListManagedSchemaArnsInput)
 	}
 
 	req := c.newRequest(op, input, &ListManagedSchemaArnsOutput{})
+
 	return ListManagedSchemaArnsRequest{Request: req, Input: input, Copy: c.ListManagedSchemaArnsRequest}
 }
 

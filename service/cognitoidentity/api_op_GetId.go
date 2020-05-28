@@ -108,6 +108,7 @@ func (c *Client) GetIdRequest(input *GetIdInput) GetIdRequest {
 
 	req := c.newRequest(op, input, &GetIdOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return GetIdRequest{Request: req, Input: input, Copy: c.GetIdRequest}
 }
 

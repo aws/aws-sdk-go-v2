@@ -67,6 +67,7 @@ func (c *Client) GetAppLaunchConfigurationRequest(input *GetAppLaunchConfigurati
 	}
 
 	req := c.newRequest(op, input, &GetAppLaunchConfigurationOutput{})
+
 	return GetAppLaunchConfigurationRequest{Request: req, Input: input, Copy: c.GetAppLaunchConfigurationRequest}
 }
 

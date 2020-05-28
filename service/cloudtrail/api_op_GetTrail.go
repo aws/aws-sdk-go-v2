@@ -77,6 +77,7 @@ func (c *Client) GetTrailRequest(input *GetTrailInput) GetTrailRequest {
 	}
 
 	req := c.newRequest(op, input, &GetTrailOutput{})
+
 	return GetTrailRequest{Request: req, Input: input, Copy: c.GetTrailRequest}
 }
 

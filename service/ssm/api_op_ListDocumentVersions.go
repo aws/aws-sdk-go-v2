@@ -92,6 +92,7 @@ func (c *Client) ListDocumentVersionsRequest(input *ListDocumentVersionsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListDocumentVersionsOutput{})
+
 	return ListDocumentVersionsRequest{Request: req, Input: input, Copy: c.ListDocumentVersionsRequest}
 }
 

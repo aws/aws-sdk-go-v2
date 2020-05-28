@@ -94,6 +94,7 @@ func (c *Client) GetServiceQuotaRequest(input *GetServiceQuotaInput) GetServiceQ
 	}
 
 	req := c.newRequest(op, input, &GetServiceQuotaOutput{})
+
 	return GetServiceQuotaRequest{Request: req, Input: input, Copy: c.GetServiceQuotaRequest}
 }
 

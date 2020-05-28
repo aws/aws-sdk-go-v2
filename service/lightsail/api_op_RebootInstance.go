@@ -41,7 +41,7 @@ type RebootInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
+	// of the request, the timestamp of the request, and the resources affected
 	// by the request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
@@ -82,6 +82,7 @@ func (c *Client) RebootInstanceRequest(input *RebootInstanceInput) RebootInstanc
 	}
 
 	req := c.newRequest(op, input, &RebootInstanceOutput{})
+
 	return RebootInstanceRequest{Request: req, Input: input, Copy: c.RebootInstanceRequest}
 }
 

@@ -93,6 +93,7 @@ func (c *Client) ModifyCertificatesRequest(input *ModifyCertificatesInput) Modif
 	}
 
 	req := c.newRequest(op, input, &ModifyCertificatesOutput{})
+
 	return ModifyCertificatesRequest{Request: req, Input: input, Copy: c.ModifyCertificatesRequest}
 }
 

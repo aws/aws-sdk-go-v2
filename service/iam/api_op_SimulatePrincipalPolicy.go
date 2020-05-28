@@ -327,6 +327,7 @@ func (c *Client) SimulatePrincipalPolicyRequest(input *SimulatePrincipalPolicyIn
 	}
 
 	req := c.newRequest(op, input, &SimulatePrincipalPolicyOutput{})
+
 	return SimulatePrincipalPolicyRequest{Request: req, Input: input, Copy: c.SimulatePrincipalPolicyRequest}
 }
 

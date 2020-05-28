@@ -140,6 +140,7 @@ func (c *Client) UpdateResourceShareRequest(input *UpdateResourceShareInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateResourceShareOutput{})
+
 	return UpdateResourceShareRequest{Request: req, Input: input, Copy: c.UpdateResourceShareRequest}
 }
 

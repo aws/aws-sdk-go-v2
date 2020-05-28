@@ -157,6 +157,7 @@ func (c *Client) UpdateRegexPatternSetRequest(input *UpdateRegexPatternSetInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateRegexPatternSetOutput{})
+
 	return UpdateRegexPatternSetRequest{Request: req, Input: input, Copy: c.UpdateRegexPatternSetRequest}
 }
 

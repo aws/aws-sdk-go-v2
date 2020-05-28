@@ -86,6 +86,7 @@ func (c *Client) CreateTestGridProjectRequest(input *CreateTestGridProjectInput)
 	}
 
 	req := c.newRequest(op, input, &CreateTestGridProjectOutput{})
+
 	return CreateTestGridProjectRequest{Request: req, Input: input, Copy: c.CreateTestGridProjectRequest}
 }
 

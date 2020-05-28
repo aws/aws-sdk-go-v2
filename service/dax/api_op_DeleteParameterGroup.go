@@ -78,6 +78,7 @@ func (c *Client) DeleteParameterGroupRequest(input *DeleteParameterGroupInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteParameterGroupOutput{})
+
 	return DeleteParameterGroupRequest{Request: req, Input: input, Copy: c.DeleteParameterGroupRequest}
 }
 

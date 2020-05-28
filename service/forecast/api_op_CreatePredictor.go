@@ -249,6 +249,7 @@ func (c *Client) CreatePredictorRequest(input *CreatePredictorInput) CreatePredi
 	}
 
 	req := c.newRequest(op, input, &CreatePredictorOutput{})
+
 	return CreatePredictorRequest{Request: req, Input: input, Copy: c.CreatePredictorRequest}
 }
 

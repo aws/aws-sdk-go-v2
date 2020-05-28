@@ -178,6 +178,7 @@ func (c *Client) ProvisionProductRequest(input *ProvisionProductInput) Provision
 	}
 
 	req := c.newRequest(op, input, &ProvisionProductOutput{})
+
 	return ProvisionProductRequest{Request: req, Input: input, Copy: c.ProvisionProductRequest}
 }
 

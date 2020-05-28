@@ -226,6 +226,7 @@ func (c *Client) CreateStackSetRequest(input *CreateStackSetInput) CreateStackSe
 	}
 
 	req := c.newRequest(op, input, &CreateStackSetOutput{})
+
 	return CreateStackSetRequest{Request: req, Input: input, Copy: c.CreateStackSetRequest}
 }
 

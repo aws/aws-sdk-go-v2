@@ -145,6 +145,7 @@ func (c *Client) ListAttachedPoliciesRequest(input *ListAttachedPoliciesInput) L
 	}
 
 	req := c.newRequest(op, input, &ListAttachedPoliciesOutput{})
+
 	return ListAttachedPoliciesRequest{Request: req, Input: input, Copy: c.ListAttachedPoliciesRequest}
 }
 

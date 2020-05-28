@@ -88,6 +88,7 @@ func (c *Client) BatchDeleteImportDataRequest(input *BatchDeleteImportDataInput)
 	}
 
 	req := c.newRequest(op, input, &BatchDeleteImportDataOutput{})
+
 	return BatchDeleteImportDataRequest{Request: req, Input: input, Copy: c.BatchDeleteImportDataRequest}
 }
 

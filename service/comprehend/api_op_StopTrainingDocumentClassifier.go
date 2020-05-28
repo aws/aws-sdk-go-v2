@@ -80,6 +80,7 @@ func (c *Client) StopTrainingDocumentClassifierRequest(input *StopTrainingDocume
 	}
 
 	req := c.newRequest(op, input, &StopTrainingDocumentClassifierOutput{})
+
 	return StopTrainingDocumentClassifierRequest{Request: req, Input: input, Copy: c.StopTrainingDocumentClassifierRequest}
 }
 

@@ -101,6 +101,7 @@ func (c *Client) EnablePolicyTypeRequest(input *EnablePolicyTypeInput) EnablePol
 	}
 
 	req := c.newRequest(op, input, &EnablePolicyTypeOutput{})
+
 	return EnablePolicyTypeRequest{Request: req, Input: input, Copy: c.EnablePolicyTypeRequest}
 }
 

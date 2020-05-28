@@ -117,6 +117,7 @@ func (c *Client) StartImportLabelsTaskRunRequest(input *StartImportLabelsTaskRun
 	}
 
 	req := c.newRequest(op, input, &StartImportLabelsTaskRunOutput{})
+
 	return StartImportLabelsTaskRunRequest{Request: req, Input: input, Copy: c.StartImportLabelsTaskRunRequest}
 }
 

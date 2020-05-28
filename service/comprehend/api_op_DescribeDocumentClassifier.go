@@ -77,6 +77,7 @@ func (c *Client) DescribeDocumentClassifierRequest(input *DescribeDocumentClassi
 	}
 
 	req := c.newRequest(op, input, &DescribeDocumentClassifierOutput{})
+
 	return DescribeDocumentClassifierRequest{Request: req, Input: input, Copy: c.DescribeDocumentClassifierRequest}
 }
 

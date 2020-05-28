@@ -107,6 +107,7 @@ func (c *Client) GetDedicatedIpRequest(input *GetDedicatedIpInput) GetDedicatedI
 	}
 
 	req := c.newRequest(op, input, &GetDedicatedIpOutput{})
+
 	return GetDedicatedIpRequest{Request: req, Input: input, Copy: c.GetDedicatedIpRequest}
 }
 

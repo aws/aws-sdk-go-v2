@@ -108,6 +108,7 @@ func (c *Client) DescribeInstanceTypeOfferingsRequest(input *DescribeInstanceTyp
 	}
 
 	req := c.newRequest(op, input, &DescribeInstanceTypeOfferingsOutput{})
+
 	return DescribeInstanceTypeOfferingsRequest{Request: req, Input: input, Copy: c.DescribeInstanceTypeOfferingsRequest}
 }
 

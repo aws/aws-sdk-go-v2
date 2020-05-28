@@ -93,6 +93,7 @@ func (c *Client) DeleteProvisioningTemplateRequest(input *DeleteProvisioningTemp
 	}
 
 	req := c.newRequest(op, input, &DeleteProvisioningTemplateOutput{})
+
 	return DeleteProvisioningTemplateRequest{Request: req, Input: input, Copy: c.DeleteProvisioningTemplateRequest}
 }
 

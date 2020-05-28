@@ -32,7 +32,7 @@ type RunInstancesInput struct {
 	// For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	//
 	// Constraints: Maximum 64 ASCII characters
-	ClientToken *string `locationName:"clientToken" type:"string"`
+	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
 	// The CPU options for the instance. For more information, see Optimizing CPU
 	// Options (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html)
@@ -81,6 +81,8 @@ type RunInstancesInput struct {
 	// An elastic inference accelerator to associate with the instance. Elastic
 	// inference accelerators are a resource you can attach to your Amazon EC2 instances
 	// to accelerate your Deep Learning (DL) inference workloads.
+	//
+	// You cannot specify accelerators from different generations in the same request.
 	ElasticInferenceAccelerators []ElasticInferenceAccelerator `locationName:"ElasticInferenceAccelerator" locationNameList:"item" type:"list"`
 
 	// Indicates whether an instance is enabled for hibernation. For more information,
@@ -405,6 +407,7 @@ func (c *Client) RunInstancesRequest(input *RunInstancesInput) RunInstancesReque
 	}
 
 	req := c.newRequest(op, input, &RunInstancesOutput{})
+
 	return RunInstancesRequest{Request: req, Input: input, Copy: c.RunInstancesRequest}
 }
 

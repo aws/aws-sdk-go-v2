@@ -98,6 +98,7 @@ func (c *Client) DeleteMeetingRequest(input *DeleteMeetingInput) DeleteMeetingRe
 	req := c.newRequest(op, input, &DeleteMeetingOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteMeetingRequest{Request: req, Input: input, Copy: c.DeleteMeetingRequest}
 }
 

@@ -99,6 +99,7 @@ func (c *Client) StopGameSessionPlacementRequest(input *StopGameSessionPlacement
 	}
 
 	req := c.newRequest(op, input, &StopGameSessionPlacementOutput{})
+
 	return StopGameSessionPlacementRequest{Request: req, Input: input, Copy: c.StopGameSessionPlacementRequest}
 }
 

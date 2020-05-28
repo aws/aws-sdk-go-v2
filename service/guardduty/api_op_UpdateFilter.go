@@ -163,6 +163,7 @@ func (c *Client) UpdateFilterRequest(input *UpdateFilterInput) UpdateFilterReque
 	}
 
 	req := c.newRequest(op, input, &UpdateFilterOutput{})
+
 	return UpdateFilterRequest{Request: req, Input: input, Copy: c.UpdateFilterRequest}
 }
 

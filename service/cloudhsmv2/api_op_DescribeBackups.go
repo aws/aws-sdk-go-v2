@@ -115,6 +115,7 @@ func (c *Client) DescribeBackupsRequest(input *DescribeBackupsInput) DescribeBac
 	}
 
 	req := c.newRequest(op, input, &DescribeBackupsOutput{})
+
 	return DescribeBackupsRequest{Request: req, Input: input, Copy: c.DescribeBackupsRequest}
 }
 

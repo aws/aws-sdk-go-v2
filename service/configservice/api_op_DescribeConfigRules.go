@@ -69,6 +69,7 @@ func (c *Client) DescribeConfigRulesRequest(input *DescribeConfigRulesInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeConfigRulesOutput{})
+
 	return DescribeConfigRulesRequest{Request: req, Input: input, Copy: c.DescribeConfigRulesRequest}
 }
 

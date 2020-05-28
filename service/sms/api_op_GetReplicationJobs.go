@@ -78,6 +78,7 @@ func (c *Client) GetReplicationJobsRequest(input *GetReplicationJobsInput) GetRe
 	}
 
 	req := c.newRequest(op, input, &GetReplicationJobsOutput{})
+
 	return GetReplicationJobsRequest{Request: req, Input: input, Copy: c.GetReplicationJobsRequest}
 }
 

@@ -100,6 +100,7 @@ func (c *Client) ListFaqsRequest(input *ListFaqsInput) ListFaqsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListFaqsOutput{})
+
 	return ListFaqsRequest{Request: req, Input: input, Copy: c.ListFaqsRequest}
 }
 

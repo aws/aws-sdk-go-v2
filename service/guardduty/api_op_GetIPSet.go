@@ -77,7 +77,7 @@ type GetIPSetOutput struct {
 	// Format is a required field
 	Format IpSetFormat `locationName:"format" min:"1" type:"string" required:"true" enum:"true"`
 
-	// The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+	// The URI of the file that contains the IPSet.
 	//
 	// Location is a required field
 	Location *string `locationName:"location" min:"1" type:"string" required:"true"`
@@ -169,6 +169,7 @@ func (c *Client) GetIPSetRequest(input *GetIPSetInput) GetIPSetRequest {
 	}
 
 	req := c.newRequest(op, input, &GetIPSetOutput{})
+
 	return GetIPSetRequest{Request: req, Input: input, Copy: c.GetIPSetRequest}
 }
 

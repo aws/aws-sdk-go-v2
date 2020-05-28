@@ -27,7 +27,7 @@ type UpdateIPSetInput struct {
 	// IpSetId is a required field
 	IpSetId *string `location:"uri" locationName:"ipSetId" type:"string" required:"true"`
 
-	// The updated URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+	// The updated URI of the file that contains the IPSet.
 	Location *string `locationName:"location" min:"1" type:"string"`
 
 	// The unique ID that specifies the IPSet that you want to update.
@@ -144,6 +144,7 @@ func (c *Client) UpdateIPSetRequest(input *UpdateIPSetInput) UpdateIPSetRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateIPSetOutput{})
+
 	return UpdateIPSetRequest{Request: req, Input: input, Copy: c.UpdateIPSetRequest}
 }
 

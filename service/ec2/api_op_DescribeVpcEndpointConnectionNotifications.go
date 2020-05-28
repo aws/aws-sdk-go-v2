@@ -100,6 +100,7 @@ func (c *Client) DescribeVpcEndpointConnectionNotificationsRequest(input *Descri
 	}
 
 	req := c.newRequest(op, input, &DescribeVpcEndpointConnectionNotificationsOutput{})
+
 	return DescribeVpcEndpointConnectionNotificationsRequest{Request: req, Input: input, Copy: c.DescribeVpcEndpointConnectionNotificationsRequest}
 }
 

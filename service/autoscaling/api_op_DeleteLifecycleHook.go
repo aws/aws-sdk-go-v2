@@ -91,6 +91,7 @@ func (c *Client) DeleteLifecycleHookRequest(input *DeleteLifecycleHookInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteLifecycleHookOutput{})
+
 	return DeleteLifecycleHookRequest{Request: req, Input: input, Copy: c.DeleteLifecycleHookRequest}
 }
 

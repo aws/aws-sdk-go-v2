@@ -109,6 +109,7 @@ func (c *Client) GetPublicKeyConfigRequest(input *GetPublicKeyConfigInput) GetPu
 	}
 
 	req := c.newRequest(op, input, &GetPublicKeyConfigOutput{})
+
 	return GetPublicKeyConfigRequest{Request: req, Input: input, Copy: c.GetPublicKeyConfigRequest}
 }
 

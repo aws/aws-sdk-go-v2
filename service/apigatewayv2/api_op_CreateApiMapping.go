@@ -173,6 +173,7 @@ func (c *Client) CreateApiMappingRequest(input *CreateApiMappingInput) CreateApi
 	}
 
 	req := c.newRequest(op, input, &CreateApiMappingOutput{})
+
 	return CreateApiMappingRequest{Request: req, Input: input, Copy: c.CreateApiMappingRequest}
 }
 

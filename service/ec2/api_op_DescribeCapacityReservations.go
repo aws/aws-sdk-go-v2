@@ -152,6 +152,7 @@ func (c *Client) DescribeCapacityReservationsRequest(input *DescribeCapacityRese
 	}
 
 	req := c.newRequest(op, input, &DescribeCapacityReservationsOutput{})
+
 	return DescribeCapacityReservationsRequest{Request: req, Input: input, Copy: c.DescribeCapacityReservationsRequest}
 }
 

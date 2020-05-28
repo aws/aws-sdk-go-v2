@@ -97,6 +97,7 @@ func (c *Client) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeLoadBalancersOutput{})
+
 	return DescribeLoadBalancersRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancersRequest}
 }
 

@@ -155,6 +155,7 @@ func (c *Client) CreateCommitRequest(input *CreateCommitInput) CreateCommitReque
 	}
 
 	req := c.newRequest(op, input, &CreateCommitOutput{})
+
 	return CreateCommitRequest{Request: req, Input: input, Copy: c.CreateCommitRequest}
 }
 

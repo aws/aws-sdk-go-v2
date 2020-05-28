@@ -122,6 +122,7 @@ func (c *Client) UpdateMemberRequest(input *UpdateMemberInput) UpdateMemberReque
 	}
 
 	req := c.newRequest(op, input, &UpdateMemberOutput{})
+
 	return UpdateMemberRequest{Request: req, Input: input, Copy: c.UpdateMemberRequest}
 }
 

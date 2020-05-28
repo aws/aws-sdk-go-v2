@@ -165,6 +165,7 @@ func (c *Client) AssociateHostedConnectionRequest(input *AssociateHostedConnecti
 	}
 
 	req := c.newRequest(op, input, &AssociateHostedConnectionOutput{})
+
 	return AssociateHostedConnectionRequest{Request: req, Input: input, Copy: c.AssociateHostedConnectionRequest}
 }
 

@@ -120,6 +120,7 @@ func (c *Client) BatchGetImageRequest(input *BatchGetImageInput) BatchGetImageRe
 	}
 
 	req := c.newRequest(op, input, &BatchGetImageOutput{})
+
 	return BatchGetImageRequest{Request: req, Input: input, Copy: c.BatchGetImageRequest}
 }
 

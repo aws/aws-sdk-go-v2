@@ -88,6 +88,7 @@ func (c *Client) ModifyReplicationSubnetGroupRequest(input *ModifyReplicationSub
 	}
 
 	req := c.newRequest(op, input, &ModifyReplicationSubnetGroupOutput{})
+
 	return ModifyReplicationSubnetGroupRequest{Request: req, Input: input, Copy: c.ModifyReplicationSubnetGroupRequest}
 }
 

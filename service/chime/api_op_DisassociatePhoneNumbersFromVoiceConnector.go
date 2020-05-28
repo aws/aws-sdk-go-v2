@@ -125,6 +125,7 @@ func (c *Client) DisassociatePhoneNumbersFromVoiceConnectorRequest(input *Disass
 	}
 
 	req := c.newRequest(op, input, &DisassociatePhoneNumbersFromVoiceConnectorOutput{})
+
 	return DisassociatePhoneNumbersFromVoiceConnectorRequest{Request: req, Input: input, Copy: c.DisassociatePhoneNumbersFromVoiceConnectorRequest}
 }
 

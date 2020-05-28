@@ -89,6 +89,7 @@ func (c *Client) DisableGatewayRequest(input *DisableGatewayInput) DisableGatewa
 	}
 
 	req := c.newRequest(op, input, &DisableGatewayOutput{})
+
 	return DisableGatewayRequest{Request: req, Input: input, Copy: c.DisableGatewayRequest}
 }
 

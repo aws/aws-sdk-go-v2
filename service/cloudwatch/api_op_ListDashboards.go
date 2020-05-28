@@ -81,6 +81,7 @@ func (c *Client) ListDashboardsRequest(input *ListDashboardsInput) ListDashboard
 	}
 
 	req := c.newRequest(op, input, &ListDashboardsOutput{})
+
 	return ListDashboardsRequest{Request: req, Input: input, Copy: c.ListDashboardsRequest}
 }
 

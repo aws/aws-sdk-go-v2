@@ -160,6 +160,7 @@ func (c *Client) GetMergeConflictsRequest(input *GetMergeConflictsInput) GetMerg
 	}
 
 	req := c.newRequest(op, input, &GetMergeConflictsOutput{})
+
 	return GetMergeConflictsRequest{Request: req, Input: input, Copy: c.GetMergeConflictsRequest}
 }
 

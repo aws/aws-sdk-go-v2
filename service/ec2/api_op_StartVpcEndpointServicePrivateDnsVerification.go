@@ -91,6 +91,7 @@ func (c *Client) StartVpcEndpointServicePrivateDnsVerificationRequest(input *Sta
 	}
 
 	req := c.newRequest(op, input, &StartVpcEndpointServicePrivateDnsVerificationOutput{})
+
 	return StartVpcEndpointServicePrivateDnsVerificationRequest{Request: req, Input: input, Copy: c.StartVpcEndpointServicePrivateDnsVerificationRequest}
 }
 

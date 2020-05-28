@@ -111,6 +111,7 @@ func (c *Client) DescribeResourceRequest(input *DescribeResourceInput) DescribeR
 	}
 
 	req := c.newRequest(op, input, &DescribeResourceOutput{})
+
 	return DescribeResourceRequest{Request: req, Input: input, Copy: c.DescribeResourceRequest}
 }
 

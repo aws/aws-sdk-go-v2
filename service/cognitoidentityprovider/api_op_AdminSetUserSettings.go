@@ -112,6 +112,7 @@ func (c *Client) AdminSetUserSettingsRequest(input *AdminSetUserSettingsInput) A
 	}
 
 	req := c.newRequest(op, input, &AdminSetUserSettingsOutput{})
+
 	return AdminSetUserSettingsRequest{Request: req, Input: input, Copy: c.AdminSetUserSettingsRequest}
 }
 

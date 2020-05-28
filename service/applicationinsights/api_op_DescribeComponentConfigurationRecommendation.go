@@ -98,6 +98,7 @@ func (c *Client) DescribeComponentConfigurationRecommendationRequest(input *Desc
 	}
 
 	req := c.newRequest(op, input, &DescribeComponentConfigurationRecommendationOutput{})
+
 	return DescribeComponentConfigurationRecommendationRequest{Request: req, Input: input, Copy: c.DescribeComponentConfigurationRecommendationRequest}
 }
 

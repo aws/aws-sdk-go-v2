@@ -73,6 +73,7 @@ func (c *Client) DescribeNamespaceRequest(input *DescribeNamespaceInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeNamespaceOutput{})
+
 	return DescribeNamespaceRequest{Request: req, Input: input, Copy: c.DescribeNamespaceRequest}
 }
 

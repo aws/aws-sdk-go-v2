@@ -106,6 +106,7 @@ func (c *Client) DeleteAuthorizerRequest(input *DeleteAuthorizerInput) DeleteAut
 	req := c.newRequest(op, input, &DeleteAuthorizerOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteAuthorizerRequest{Request: req, Input: input, Copy: c.DeleteAuthorizerRequest}
 }
 

@@ -100,6 +100,7 @@ func (c *Client) DescribeReservedNodeOfferingsRequest(input *DescribeReservedNod
 	}
 
 	req := c.newRequest(op, input, &DescribeReservedNodeOfferingsOutput{})
+
 	return DescribeReservedNodeOfferingsRequest{Request: req, Input: input, Copy: c.DescribeReservedNodeOfferingsRequest}
 }
 

@@ -126,6 +126,7 @@ func (c *Client) CreateEventTrackerRequest(input *CreateEventTrackerInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateEventTrackerOutput{})
+
 	return CreateEventTrackerRequest{Request: req, Input: input, Copy: c.CreateEventTrackerRequest}
 }
 

@@ -129,6 +129,7 @@ func (c *Client) AddThingToThingGroupRequest(input *AddThingToThingGroupInput) A
 	}
 
 	req := c.newRequest(op, input, &AddThingToThingGroupOutput{})
+
 	return AddThingToThingGroupRequest{Request: req, Input: input, Copy: c.AddThingToThingGroupRequest}
 }
 

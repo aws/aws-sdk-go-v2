@@ -84,6 +84,7 @@ func (c *Client) DeleteImagePermissionsRequest(input *DeleteImagePermissionsInpu
 	}
 
 	req := c.newRequest(op, input, &DeleteImagePermissionsOutput{})
+
 	return DeleteImagePermissionsRequest{Request: req, Input: input, Copy: c.DeleteImagePermissionsRequest}
 }
 

@@ -165,6 +165,7 @@ func (c *Client) GetImportRequest(input *GetImportInput) GetImportRequest {
 	}
 
 	req := c.newRequest(op, input, &GetImportOutput{})
+
 	return GetImportRequest{Request: req, Input: input, Copy: c.GetImportRequest}
 }
 

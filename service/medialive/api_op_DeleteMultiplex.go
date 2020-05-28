@@ -190,6 +190,7 @@ func (c *Client) DeleteMultiplexRequest(input *DeleteMultiplexInput) DeleteMulti
 	}
 
 	req := c.newRequest(op, input, &DeleteMultiplexOutput{})
+
 	return DeleteMultiplexRequest{Request: req, Input: input, Copy: c.DeleteMultiplexRequest}
 }
 

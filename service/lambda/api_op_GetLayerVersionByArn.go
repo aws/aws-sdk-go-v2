@@ -175,6 +175,7 @@ func (c *Client) GetLayerVersionByArnRequest(input *GetLayerVersionByArnInput) G
 	}
 
 	req := c.newRequest(op, input, &GetLayerVersionByArnOutput{})
+
 	return GetLayerVersionByArnRequest{Request: req, Input: input, Copy: c.GetLayerVersionByArnRequest}
 }
 

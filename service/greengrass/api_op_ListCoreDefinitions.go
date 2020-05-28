@@ -105,6 +105,7 @@ func (c *Client) ListCoreDefinitionsRequest(input *ListCoreDefinitionsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListCoreDefinitionsOutput{})
+
 	return ListCoreDefinitionsRequest{Request: req, Input: input, Copy: c.ListCoreDefinitionsRequest}
 }
 

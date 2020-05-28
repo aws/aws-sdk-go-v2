@@ -113,6 +113,7 @@ func (c *Client) ListResolverRulesRequest(input *ListResolverRulesInput) ListRes
 	}
 
 	req := c.newRequest(op, input, &ListResolverRulesOutput{})
+
 	return ListResolverRulesRequest{Request: req, Input: input, Copy: c.ListResolverRulesRequest}
 }
 

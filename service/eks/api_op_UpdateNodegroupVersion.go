@@ -187,6 +187,7 @@ func (c *Client) UpdateNodegroupVersionRequest(input *UpdateNodegroupVersionInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateNodegroupVersionOutput{})
+
 	return UpdateNodegroupVersionRequest{Request: req, Input: input, Copy: c.UpdateNodegroupVersionRequest}
 }
 

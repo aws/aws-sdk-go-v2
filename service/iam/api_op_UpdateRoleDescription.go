@@ -91,6 +91,7 @@ func (c *Client) UpdateRoleDescriptionRequest(input *UpdateRoleDescriptionInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateRoleDescriptionOutput{})
+
 	return UpdateRoleDescriptionRequest{Request: req, Input: input, Copy: c.UpdateRoleDescriptionRequest}
 }
 

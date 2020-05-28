@@ -132,6 +132,7 @@ func (c *Client) DeleteLabelsRequest(input *DeleteLabelsInput) DeleteLabelsReque
 	}
 
 	req := c.newRequest(op, input, &DeleteLabelsOutput{})
+
 	return DeleteLabelsRequest{Request: req, Input: input, Copy: c.DeleteLabelsRequest}
 }
 

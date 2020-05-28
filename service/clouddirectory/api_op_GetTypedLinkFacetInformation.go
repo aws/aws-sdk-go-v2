@@ -131,6 +131,7 @@ func (c *Client) GetTypedLinkFacetInformationRequest(input *GetTypedLinkFacetInf
 	}
 
 	req := c.newRequest(op, input, &GetTypedLinkFacetInformationOutput{})
+
 	return GetTypedLinkFacetInformationRequest{Request: req, Input: input, Copy: c.GetTypedLinkFacetInformationRequest}
 }
 

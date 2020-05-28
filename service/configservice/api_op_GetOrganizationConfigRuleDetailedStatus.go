@@ -99,6 +99,7 @@ func (c *Client) GetOrganizationConfigRuleDetailedStatusRequest(input *GetOrgani
 	}
 
 	req := c.newRequest(op, input, &GetOrganizationConfigRuleDetailedStatusOutput{})
+
 	return GetOrganizationConfigRuleDetailedStatusRequest{Request: req, Input: input, Copy: c.GetOrganizationConfigRuleDetailedStatusRequest}
 }
 

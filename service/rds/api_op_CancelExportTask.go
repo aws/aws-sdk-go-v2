@@ -141,6 +141,7 @@ func (c *Client) CancelExportTaskRequest(input *CancelExportTaskInput) CancelExp
 	}
 
 	req := c.newRequest(op, input, &CancelExportTaskOutput{})
+
 	return CancelExportTaskRequest{Request: req, Input: input, Copy: c.CancelExportTaskRequest}
 }
 

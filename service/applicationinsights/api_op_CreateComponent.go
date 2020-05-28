@@ -94,6 +94,7 @@ func (c *Client) CreateComponentRequest(input *CreateComponentInput) CreateCompo
 	}
 
 	req := c.newRequest(op, input, &CreateComponentOutput{})
+
 	return CreateComponentRequest{Request: req, Input: input, Copy: c.CreateComponentRequest}
 }
 

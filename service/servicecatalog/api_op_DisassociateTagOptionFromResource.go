@@ -85,6 +85,7 @@ func (c *Client) DisassociateTagOptionFromResourceRequest(input *DisassociateTag
 	}
 
 	req := c.newRequest(op, input, &DisassociateTagOptionFromResourceOutput{})
+
 	return DisassociateTagOptionFromResourceRequest{Request: req, Input: input, Copy: c.DisassociateTagOptionFromResourceRequest}
 }
 

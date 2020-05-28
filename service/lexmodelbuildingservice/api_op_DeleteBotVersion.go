@@ -120,6 +120,7 @@ func (c *Client) DeleteBotVersionRequest(input *DeleteBotVersionInput) DeleteBot
 	req := c.newRequest(op, input, &DeleteBotVersionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteBotVersionRequest{Request: req, Input: input, Copy: c.DeleteBotVersionRequest}
 }
 

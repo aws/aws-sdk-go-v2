@@ -104,6 +104,7 @@ func (c *Client) DeleteAccountRequest(input *DeleteAccountInput) DeleteAccountRe
 	}
 
 	req := c.newRequest(op, input, &DeleteAccountOutput{})
+
 	return DeleteAccountRequest{Request: req, Input: input, Copy: c.DeleteAccountRequest}
 }
 

@@ -174,6 +174,7 @@ func (c *Client) CreateCertificateFromCsrRequest(input *CreateCertificateFromCsr
 	}
 
 	req := c.newRequest(op, input, &CreateCertificateFromCsrOutput{})
+
 	return CreateCertificateFromCsrRequest{Request: req, Input: input, Copy: c.CreateCertificateFromCsrRequest}
 }
 

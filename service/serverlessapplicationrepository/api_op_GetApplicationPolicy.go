@@ -104,6 +104,7 @@ func (c *Client) GetApplicationPolicyRequest(input *GetApplicationPolicyInput) G
 	}
 
 	req := c.newRequest(op, input, &GetApplicationPolicyOutput{})
+
 	return GetApplicationPolicyRequest{Request: req, Input: input, Copy: c.GetApplicationPolicyRequest}
 }
 

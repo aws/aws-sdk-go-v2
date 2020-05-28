@@ -376,6 +376,7 @@ func (c *Client) RestoreDBClusterFromS3Request(input *RestoreDBClusterFromS3Inpu
 	}
 
 	req := c.newRequest(op, input, &RestoreDBClusterFromS3Output{})
+
 	return RestoreDBClusterFromS3Request{Request: req, Input: input, Copy: c.RestoreDBClusterFromS3Request}
 }
 

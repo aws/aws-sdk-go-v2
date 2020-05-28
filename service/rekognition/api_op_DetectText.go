@@ -122,6 +122,7 @@ func (c *Client) DetectTextRequest(input *DetectTextInput) DetectTextRequest {
 	}
 
 	req := c.newRequest(op, input, &DetectTextOutput{})
+
 	return DetectTextRequest{Request: req, Input: input, Copy: c.DetectTextRequest}
 }
 

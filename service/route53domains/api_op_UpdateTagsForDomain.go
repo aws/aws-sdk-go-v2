@@ -81,6 +81,7 @@ func (c *Client) UpdateTagsForDomainRequest(input *UpdateTagsForDomainInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateTagsForDomainOutput{})
+
 	return UpdateTagsForDomainRequest{Request: req, Input: input, Copy: c.UpdateTagsForDomainRequest}
 }
 

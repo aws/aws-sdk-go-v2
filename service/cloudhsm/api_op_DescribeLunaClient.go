@@ -84,6 +84,7 @@ func (c *Client) DescribeLunaClientRequest(input *DescribeLunaClientInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeLunaClientOutput{})
+
 	return DescribeLunaClientRequest{Request: req, Input: input, Copy: c.DescribeLunaClientRequest}
 }
 

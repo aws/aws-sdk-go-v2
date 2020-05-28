@@ -89,6 +89,7 @@ func (c *Client) ListAssociationsForLicenseConfigurationRequest(input *ListAssoc
 	}
 
 	req := c.newRequest(op, input, &ListAssociationsForLicenseConfigurationOutput{})
+
 	return ListAssociationsForLicenseConfigurationRequest{Request: req, Input: input, Copy: c.ListAssociationsForLicenseConfigurationRequest}
 }
 

@@ -175,6 +175,7 @@ func (c *Client) DeleteTemplateAliasRequest(input *DeleteTemplateAliasInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteTemplateAliasOutput{})
+
 	return DeleteTemplateAliasRequest{Request: req, Input: input, Copy: c.DeleteTemplateAliasRequest}
 }
 

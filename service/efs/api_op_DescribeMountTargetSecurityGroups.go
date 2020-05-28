@@ -119,6 +119,7 @@ func (c *Client) DescribeMountTargetSecurityGroupsRequest(input *DescribeMountTa
 	}
 
 	req := c.newRequest(op, input, &DescribeMountTargetSecurityGroupsOutput{})
+
 	return DescribeMountTargetSecurityGroupsRequest{Request: req, Input: input, Copy: c.DescribeMountTargetSecurityGroupsRequest}
 }
 

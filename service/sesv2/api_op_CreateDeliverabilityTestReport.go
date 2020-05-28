@@ -191,6 +191,7 @@ func (c *Client) CreateDeliverabilityTestReportRequest(input *CreateDeliverabili
 	}
 
 	req := c.newRequest(op, input, &CreateDeliverabilityTestReportOutput{})
+
 	return CreateDeliverabilityTestReportRequest{Request: req, Input: input, Copy: c.CreateDeliverabilityTestReportRequest}
 }
 

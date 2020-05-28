@@ -77,6 +77,7 @@ func (c *Client) DeleteClusterSubnetGroupRequest(input *DeleteClusterSubnetGroup
 	req := c.newRequest(op, input, &DeleteClusterSubnetGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteClusterSubnetGroupRequest{Request: req, Input: input, Copy: c.DeleteClusterSubnetGroupRequest}
 }
 

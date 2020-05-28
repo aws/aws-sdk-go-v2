@@ -95,6 +95,7 @@ func (c *Client) UpdateConfigurationSetReputationMetricsEnabledRequest(input *Up
 	req := c.newRequest(op, input, &UpdateConfigurationSetReputationMetricsEnabledOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateConfigurationSetReputationMetricsEnabledRequest{Request: req, Input: input, Copy: c.UpdateConfigurationSetReputationMetricsEnabledRequest}
 }
 

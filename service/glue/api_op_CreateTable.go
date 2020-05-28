@@ -98,6 +98,7 @@ func (c *Client) CreateTableRequest(input *CreateTableInput) CreateTableRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateTableOutput{})
+
 	return CreateTableRequest{Request: req, Input: input, Copy: c.CreateTableRequest}
 }
 

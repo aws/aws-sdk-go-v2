@@ -133,6 +133,7 @@ func (c *Client) ListIdentityPoolUsageRequest(input *ListIdentityPoolUsageInput)
 	}
 
 	req := c.newRequest(op, input, &ListIdentityPoolUsageOutput{})
+
 	return ListIdentityPoolUsageRequest{Request: req, Input: input, Copy: c.ListIdentityPoolUsageRequest}
 }
 

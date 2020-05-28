@@ -64,6 +64,7 @@ func (c *Client) DescribePlatformVersionRequest(input *DescribePlatformVersionIn
 	}
 
 	req := c.newRequest(op, input, &DescribePlatformVersionOutput{})
+
 	return DescribePlatformVersionRequest{Request: req, Input: input, Copy: c.DescribePlatformVersionRequest}
 }
 

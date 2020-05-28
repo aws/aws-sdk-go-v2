@@ -205,6 +205,7 @@ func (c *Client) ListOutgoingTypedLinksRequest(input *ListOutgoingTypedLinksInpu
 	}
 
 	req := c.newRequest(op, input, &ListOutgoingTypedLinksOutput{})
+
 	return ListOutgoingTypedLinksRequest{Request: req, Input: input, Copy: c.ListOutgoingTypedLinksRequest}
 }
 

@@ -153,6 +153,7 @@ func (c *Client) SplitShardRequest(input *SplitShardInput) SplitShardRequest {
 	req := c.newRequest(op, input, &SplitShardOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SplitShardRequest{Request: req, Input: input, Copy: c.SplitShardRequest}
 }
 

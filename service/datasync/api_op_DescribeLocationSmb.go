@@ -100,6 +100,7 @@ func (c *Client) DescribeLocationSmbRequest(input *DescribeLocationSmbInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeLocationSmbOutput{})
+
 	return DescribeLocationSmbRequest{Request: req, Input: input, Copy: c.DescribeLocationSmbRequest}
 }
 

@@ -112,6 +112,7 @@ func (c *Client) DeleteBackupSelectionRequest(input *DeleteBackupSelectionInput)
 	req := c.newRequest(op, input, &DeleteBackupSelectionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteBackupSelectionRequest{Request: req, Input: input, Copy: c.DeleteBackupSelectionRequest}
 }
 

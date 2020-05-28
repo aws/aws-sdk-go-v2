@@ -105,6 +105,7 @@ func (c *Client) DescribeExperimentRequest(input *DescribeExperimentInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeExperimentOutput{})
+
 	return DescribeExperimentRequest{Request: req, Input: input, Copy: c.DescribeExperimentRequest}
 }
 

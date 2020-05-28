@@ -108,6 +108,7 @@ func (c *Client) GetAnalyzerRequest(input *GetAnalyzerInput) GetAnalyzerRequest 
 	}
 
 	req := c.newRequest(op, input, &GetAnalyzerOutput{})
+
 	return GetAnalyzerRequest{Request: req, Input: input, Copy: c.GetAnalyzerRequest}
 }
 

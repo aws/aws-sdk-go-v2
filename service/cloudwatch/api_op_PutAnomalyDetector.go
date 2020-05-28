@@ -125,6 +125,7 @@ func (c *Client) PutAnomalyDetectorRequest(input *PutAnomalyDetectorInput) PutAn
 	}
 
 	req := c.newRequest(op, input, &PutAnomalyDetectorOutput{})
+
 	return PutAnomalyDetectorRequest{Request: req, Input: input, Copy: c.PutAnomalyDetectorRequest}
 }
 

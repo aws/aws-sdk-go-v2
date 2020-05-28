@@ -140,6 +140,7 @@ func (c *Client) ListTopicRulesRequest(input *ListTopicRulesInput) ListTopicRule
 	}
 
 	req := c.newRequest(op, input, &ListTopicRulesOutput{})
+
 	return ListTopicRulesRequest{Request: req, Input: input, Copy: c.ListTopicRulesRequest}
 }
 

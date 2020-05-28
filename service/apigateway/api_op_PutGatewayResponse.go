@@ -327,6 +327,7 @@ func (c *Client) PutGatewayResponseRequest(input *PutGatewayResponseInput) PutGa
 	}
 
 	req := c.newRequest(op, input, &PutGatewayResponseOutput{})
+
 	return PutGatewayResponseRequest{Request: req, Input: input, Copy: c.PutGatewayResponseRequest}
 }
 

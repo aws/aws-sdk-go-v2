@@ -92,6 +92,7 @@ func (c *Client) GetSupportedResourceTypesRequest(input *GetSupportedResourceTyp
 	}
 
 	req := c.newRequest(op, input, &GetSupportedResourceTypesOutput{})
+
 	return GetSupportedResourceTypesRequest{Request: req, Input: input, Copy: c.GetSupportedResourceTypesRequest}
 }
 

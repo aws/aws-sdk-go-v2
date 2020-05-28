@@ -131,6 +131,7 @@ func (c *Client) DescribeVirtualNodeRequest(input *DescribeVirtualNodeInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeVirtualNodeOutput{})
+
 	return DescribeVirtualNodeRequest{Request: req, Input: input, Copy: c.DescribeVirtualNodeRequest}
 }
 

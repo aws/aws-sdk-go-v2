@@ -120,6 +120,7 @@ func (c *Client) GetAccessPointPolicyRequest(input *GetAccessPointPolicyInput) G
 	req := c.newRequest(op, input, &GetAccessPointPolicyOutput{})
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
+
 	return GetAccessPointPolicyRequest{Request: req, Input: input, Copy: c.GetAccessPointPolicyRequest}
 }
 

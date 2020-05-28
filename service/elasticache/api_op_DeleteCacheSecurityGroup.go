@@ -82,6 +82,7 @@ func (c *Client) DeleteCacheSecurityGroupRequest(input *DeleteCacheSecurityGroup
 	req := c.newRequest(op, input, &DeleteCacheSecurityGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteCacheSecurityGroupRequest{Request: req, Input: input, Copy: c.DeleteCacheSecurityGroupRequest}
 }
 

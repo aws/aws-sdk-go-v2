@@ -88,6 +88,7 @@ func (c *Client) CreateSystemTemplateRequest(input *CreateSystemTemplateInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateSystemTemplateOutput{})
+
 	return CreateSystemTemplateRequest{Request: req, Input: input, Copy: c.CreateSystemTemplateRequest}
 }
 

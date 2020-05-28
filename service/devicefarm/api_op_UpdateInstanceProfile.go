@@ -99,6 +99,7 @@ func (c *Client) UpdateInstanceProfileRequest(input *UpdateInstanceProfileInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateInstanceProfileOutput{})
+
 	return UpdateInstanceProfileRequest{Request: req, Input: input, Copy: c.UpdateInstanceProfileRequest}
 }
 

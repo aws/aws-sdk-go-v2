@@ -19,6 +19,18 @@ type DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInput struct
 	DryRun *bool `type:"boolean"`
 
 	// One or more filters.
+	//
+	//    * local-gateway-id - The ID of a local gateway.
+	//
+	//    * local-gateway-route-table-id - The ID of the local gateway route table.
+	//
+	//    * local-gateway-route-table-virtual-interface-group-association-id - The
+	//    ID of the association.
+	//
+	//    * local-gateway-route-table-virtual-interface-group-id - The ID of the
+	//    virtual interface group.
+	//
+	//    * state - The state of the association.
 	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The IDs of the associations.
@@ -100,6 +112,7 @@ func (c *Client) DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations
 	}
 
 	req := c.newRequest(op, input, &DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsOutput{})
+
 	return DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsRequest{Request: req, Input: input, Copy: c.DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsRequest}
 }
 

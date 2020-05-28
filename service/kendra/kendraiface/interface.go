@@ -71,6 +71,8 @@ type ClientAPI interface {
 
 	CreateIndexRequest(*kendra.CreateIndexInput) kendra.CreateIndexRequest
 
+	DeleteDataSourceRequest(*kendra.DeleteDataSourceInput) kendra.DeleteDataSourceRequest
+
 	DeleteFaqRequest(*kendra.DeleteFaqInput) kendra.DeleteFaqRequest
 
 	DeleteIndexRequest(*kendra.DeleteIndexInput) kendra.DeleteIndexRequest
@@ -89,6 +91,8 @@ type ClientAPI interface {
 
 	ListIndicesRequest(*kendra.ListIndicesInput) kendra.ListIndicesRequest
 
+	ListTagsForResourceRequest(*kendra.ListTagsForResourceInput) kendra.ListTagsForResourceRequest
+
 	QueryRequest(*kendra.QueryInput) kendra.QueryRequest
 
 	StartDataSourceSyncJobRequest(*kendra.StartDataSourceSyncJobInput) kendra.StartDataSourceSyncJobRequest
@@ -96,6 +100,10 @@ type ClientAPI interface {
 	StopDataSourceSyncJobRequest(*kendra.StopDataSourceSyncJobInput) kendra.StopDataSourceSyncJobRequest
 
 	SubmitFeedbackRequest(*kendra.SubmitFeedbackInput) kendra.SubmitFeedbackRequest
+
+	TagResourceRequest(*kendra.TagResourceInput) kendra.TagResourceRequest
+
+	UntagResourceRequest(*kendra.UntagResourceInput) kendra.UntagResourceRequest
 
 	UpdateDataSourceRequest(*kendra.UpdateDataSourceInput) kendra.UpdateDataSourceRequest
 

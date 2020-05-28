@@ -133,6 +133,7 @@ func (c *Client) MergePullRequestByThreeWayRequest(input *MergePullRequestByThre
 	}
 
 	req := c.newRequest(op, input, &MergePullRequestByThreeWayOutput{})
+
 	return MergePullRequestByThreeWayRequest{Request: req, Input: input, Copy: c.MergePullRequestByThreeWayRequest}
 }
 

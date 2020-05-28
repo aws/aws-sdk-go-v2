@@ -110,6 +110,7 @@ func (c *Client) DeleteDataSourceRequest(input *DeleteDataSourceInput) DeleteDat
 	}
 
 	req := c.newRequest(op, input, &DeleteDataSourceOutput{})
+
 	return DeleteDataSourceRequest{Request: req, Input: input, Copy: c.DeleteDataSourceRequest}
 }
 

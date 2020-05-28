@@ -132,6 +132,7 @@ func (c *Client) ListOriginEndpointsRequest(input *ListOriginEndpointsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListOriginEndpointsOutput{})
+
 	return ListOriginEndpointsRequest{Request: req, Input: input, Copy: c.ListOriginEndpointsRequest}
 }
 

@@ -76,6 +76,7 @@ func (c *Client) GetExportSnapshotRecordsRequest(input *GetExportSnapshotRecords
 	}
 
 	req := c.newRequest(op, input, &GetExportSnapshotRecordsOutput{})
+
 	return GetExportSnapshotRecordsRequest{Request: req, Input: input, Copy: c.GetExportSnapshotRecordsRequest}
 }
 

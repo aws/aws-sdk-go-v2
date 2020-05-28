@@ -80,6 +80,7 @@ func (c *Client) DeleteDBProxyRequest(input *DeleteDBProxyInput) DeleteDBProxyRe
 	}
 
 	req := c.newRequest(op, input, &DeleteDBProxyOutput{})
+
 	return DeleteDBProxyRequest{Request: req, Input: input, Copy: c.DeleteDBProxyRequest}
 }
 

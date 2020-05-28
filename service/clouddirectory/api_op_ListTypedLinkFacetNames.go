@@ -145,6 +145,7 @@ func (c *Client) ListTypedLinkFacetNamesRequest(input *ListTypedLinkFacetNamesIn
 	}
 
 	req := c.newRequest(op, input, &ListTypedLinkFacetNamesOutput{})
+
 	return ListTypedLinkFacetNamesRequest{Request: req, Input: input, Copy: c.ListTypedLinkFacetNamesRequest}
 }
 

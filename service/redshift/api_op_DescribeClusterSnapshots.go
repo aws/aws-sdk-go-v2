@@ -190,6 +190,7 @@ func (c *Client) DescribeClusterSnapshotsRequest(input *DescribeClusterSnapshots
 	}
 
 	req := c.newRequest(op, input, &DescribeClusterSnapshotsOutput{})
+
 	return DescribeClusterSnapshotsRequest{Request: req, Input: input, Copy: c.DescribeClusterSnapshotsRequest}
 }
 

@@ -90,6 +90,7 @@ func (c *Client) DeleteTopicRuleDestinationRequest(input *DeleteTopicRuleDestina
 	}
 
 	req := c.newRequest(op, input, &DeleteTopicRuleDestinationOutput{})
+
 	return DeleteTopicRuleDestinationRequest{Request: req, Input: input, Copy: c.DeleteTopicRuleDestinationRequest}
 }
 

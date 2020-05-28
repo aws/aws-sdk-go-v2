@@ -388,6 +388,7 @@ func (c *Client) CreateOriginEndpointRequest(input *CreateOriginEndpointInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateOriginEndpointOutput{})
+
 	return CreateOriginEndpointRequest{Request: req, Input: input, Copy: c.CreateOriginEndpointRequest}
 }
 

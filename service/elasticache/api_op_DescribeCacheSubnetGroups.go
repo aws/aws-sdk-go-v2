@@ -89,6 +89,7 @@ func (c *Client) DescribeCacheSubnetGroupsRequest(input *DescribeCacheSubnetGrou
 	}
 
 	req := c.newRequest(op, input, &DescribeCacheSubnetGroupsOutput{})
+
 	return DescribeCacheSubnetGroupsRequest{Request: req, Input: input, Copy: c.DescribeCacheSubnetGroupsRequest}
 }
 

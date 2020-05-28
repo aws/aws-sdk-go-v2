@@ -253,6 +253,7 @@ func (c *Client) SynthesizeSpeechRequest(input *SynthesizeSpeechInput) Synthesiz
 	}
 
 	req := c.newRequest(op, input, &SynthesizeSpeechOutput{})
+
 	return SynthesizeSpeechRequest{Request: req, Input: input, Copy: c.SynthesizeSpeechRequest}
 }
 

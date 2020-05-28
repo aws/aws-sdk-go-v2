@@ -172,8 +172,8 @@ const opCreateBucket = "CreateBucket"
 // can optionally specify a Region in the request body. You might choose a Region
 // to optimize latency, minimize costs, or address regulatory requirements.
 // For example, if you reside in Europe, you will probably find it advantageous
-// to create buckets in the EU (Ireland) Region. For more information, see How
-// to Select a Region for Your Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro).
+// to create buckets in the Europe (Ireland) Region. For more information, see
+// How to Select a Region for Your Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro).
 //
 // If you send your create bucket request to the s3.amazonaws.com endpoint,
 // the request goes to the us-east-1 Region. Accordingly, the signature calculations
@@ -199,12 +199,19 @@ const opCreateBucket = "CreateBucket"
 //    in an ACL. For more information, see Access Control List (ACL) Overview
 //    (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html). You
 //    specify each grantee as a type=value pair, where the type is one of the
-//    following: emailAddress – if the value specified is the email address
-//    of an AWS account id – if the value specified is the canonical user
-//    ID of an AWS account uri – if you are granting permissions to a predefined
-//    group For example, the following x-amz-grant-read header grants the AWS
-//    accounts identified by email addresses permissions to read object data
-//    and its metadata: x-amz-grant-read: emailAddress="xyz@amazon.com", emailAddress="abc@amazon.com"
+//    following: id – if the value specified is the canonical user ID of an
+//    AWS account uri – if you are granting permissions to a predefined group
+//    emailAddress – if the value specified is the email address of an AWS
+//    account Using email addresses to specify a grantee is only supported in
+//    the following AWS Regions: US East (N. Virginia) US West (N. California)
+//    US West (Oregon) Asia Pacific (Singapore) Asia Pacific (Sydney) Asia Pacific
+//    (Tokyo) Europe (Ireland) South America (São Paulo) For a list of all
+//    the Amazon S3 supported Regions and endpoints, see Regions and Endpoints
+//    (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in
+//    the AWS General Reference. For example, the following x-amz-grant-read
+//    header grants the AWS accounts identified by account IDs permissions to
+//    read object data and its metadata: x-amz-grant-read: id="11112222333",
+//    id="444455556666"
 //
 // You can use either a canned ACL or specify access permissions explicitly.
 // You cannot do both.
@@ -235,6 +242,7 @@ func (c *Client) CreateBucketRequest(input *CreateBucketInput) CreateBucketReque
 	}
 
 	req := c.newRequest(op, input, &CreateBucketOutput{})
+
 	return CreateBucketRequest{Request: req, Input: input, Copy: c.CreateBucketRequest}
 }
 

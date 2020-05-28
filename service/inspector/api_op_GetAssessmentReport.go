@@ -106,6 +106,7 @@ func (c *Client) GetAssessmentReportRequest(input *GetAssessmentReportInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetAssessmentReportOutput{})
+
 	return GetAssessmentReportRequest{Request: req, Input: input, Copy: c.GetAssessmentReportRequest}
 }
 

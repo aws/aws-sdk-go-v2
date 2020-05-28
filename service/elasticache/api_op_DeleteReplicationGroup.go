@@ -98,6 +98,7 @@ func (c *Client) DeleteReplicationGroupRequest(input *DeleteReplicationGroupInpu
 	}
 
 	req := c.newRequest(op, input, &DeleteReplicationGroupOutput{})
+
 	return DeleteReplicationGroupRequest{Request: req, Input: input, Copy: c.DeleteReplicationGroupRequest}
 }
 

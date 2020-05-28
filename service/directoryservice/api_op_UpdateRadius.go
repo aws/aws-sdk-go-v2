@@ -90,6 +90,7 @@ func (c *Client) UpdateRadiusRequest(input *UpdateRadiusInput) UpdateRadiusReque
 	}
 
 	req := c.newRequest(op, input, &UpdateRadiusOutput{})
+
 	return UpdateRadiusRequest{Request: req, Input: input, Copy: c.UpdateRadiusRequest}
 }
 

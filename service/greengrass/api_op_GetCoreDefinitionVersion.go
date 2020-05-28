@@ -159,6 +159,7 @@ func (c *Client) GetCoreDefinitionVersionRequest(input *GetCoreDefinitionVersion
 	}
 
 	req := c.newRequest(op, input, &GetCoreDefinitionVersionOutput{})
+
 	return GetCoreDefinitionVersionRequest{Request: req, Input: input, Copy: c.GetCoreDefinitionVersionRequest}
 }
 

@@ -134,6 +134,7 @@ func (c *Client) BatchUpdatePhoneNumberRequest(input *BatchUpdatePhoneNumberInpu
 	}
 
 	req := c.newRequest(op, input, &BatchUpdatePhoneNumberOutput{})
+
 	return BatchUpdatePhoneNumberRequest{Request: req, Input: input, Copy: c.BatchUpdatePhoneNumberRequest}
 }
 

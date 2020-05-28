@@ -130,6 +130,7 @@ func (c *Client) CreateNamedQueryRequest(input *CreateNamedQueryInput) CreateNam
 	}
 
 	req := c.newRequest(op, input, &CreateNamedQueryOutput{})
+
 	return CreateNamedQueryRequest{Request: req, Input: input, Copy: c.CreateNamedQueryRequest}
 }
 

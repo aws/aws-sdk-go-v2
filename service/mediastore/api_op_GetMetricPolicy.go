@@ -81,6 +81,7 @@ func (c *Client) GetMetricPolicyRequest(input *GetMetricPolicyInput) GetMetricPo
 	}
 
 	req := c.newRequest(op, input, &GetMetricPolicyOutput{})
+
 	return GetMetricPolicyRequest{Request: req, Input: input, Copy: c.GetMetricPolicyRequest}
 }
 

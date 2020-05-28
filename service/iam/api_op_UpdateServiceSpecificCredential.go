@@ -107,6 +107,7 @@ func (c *Client) UpdateServiceSpecificCredentialRequest(input *UpdateServiceSpec
 	req := c.newRequest(op, input, &UpdateServiceSpecificCredentialOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateServiceSpecificCredentialRequest{Request: req, Input: input, Copy: c.UpdateServiceSpecificCredentialRequest}
 }
 

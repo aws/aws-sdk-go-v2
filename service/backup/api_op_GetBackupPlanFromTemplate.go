@@ -102,6 +102,7 @@ func (c *Client) GetBackupPlanFromTemplateRequest(input *GetBackupPlanFromTempla
 	}
 
 	req := c.newRequest(op, input, &GetBackupPlanFromTemplateOutput{})
+
 	return GetBackupPlanFromTemplateRequest{Request: req, Input: input, Copy: c.GetBackupPlanFromTemplateRequest}
 }
 

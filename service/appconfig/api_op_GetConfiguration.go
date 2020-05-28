@@ -20,6 +20,21 @@ type GetConfigurationInput struct {
 	Application *string `location:"uri" locationName:"Application" min:"1" type:"string" required:"true"`
 
 	// The configuration version returned in the most recent GetConfiguration response.
+	//
+	// AWS AppConfig uses the value of the ClientConfigurationVersion parameter
+	// to identify the configuration version on your clients. If you don’t send
+	// ClientConfigurationVersion with each call to GetConfiguration, your clients
+	// receive the current configuration. You are charged each time your clients
+	// receive a configuration.
+	//
+	// To avoid excess charges, we recommend that you include the ClientConfigurationVersion
+	// value with every call to GetConfiguration. This value must be saved on your
+	// client. Subsequent calls to GetConfiguration must pass this value by using
+	// the ClientConfigurationVersion parameter.
+	//
+	// For more information about working with configurations, see Retrieving the
+	// Configuration (https://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig-retrieving-the-configuration.html)
+	// in the AWS AppConfig User Guide.
 	ClientConfigurationVersion *string `location:"querystring" locationName:"client_configuration_version" min:"1" type:"string"`
 
 	// A unique ID to identify the client for the configuration. This ID enables
@@ -172,7 +187,18 @@ const opGetConfiguration = "GetConfiguration"
 // GetConfigurationRequest returns a request value for making API operation for
 // Amazon AppConfig.
 //
-// Retrieve information about a configuration.
+// Receive information about a configuration.
+//
+// AWS AppConfig uses the value of the ClientConfigurationVersion parameter
+// to identify the configuration version on your clients. If you don’t send
+// ClientConfigurationVersion with each call to GetConfiguration, your clients
+// receive the current configuration. You are charged each time your clients
+// receive a configuration.
+//
+// To avoid excess charges, we recommend that you include the ClientConfigurationVersion
+// value with every call to GetConfiguration. This value must be saved on your
+// client. Subsequent calls to GetConfiguration must pass this value by using
+// the ClientConfigurationVersion parameter.
 //
 //    // Example sending a request using GetConfigurationRequest.
 //    req := client.GetConfigurationRequest(params)
@@ -194,6 +220,7 @@ func (c *Client) GetConfigurationRequest(input *GetConfigurationInput) GetConfig
 	}
 
 	req := c.newRequest(op, input, &GetConfigurationOutput{})
+
 	return GetConfigurationRequest{Request: req, Input: input, Copy: c.GetConfigurationRequest}
 }
 

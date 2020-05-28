@@ -103,6 +103,7 @@ func (c *Client) ListTestGridSessionArtifactsRequest(input *ListTestGridSessionA
 	}
 
 	req := c.newRequest(op, input, &ListTestGridSessionArtifactsOutput{})
+
 	return ListTestGridSessionArtifactsRequest{Request: req, Input: input, Copy: c.ListTestGridSessionArtifactsRequest}
 }
 

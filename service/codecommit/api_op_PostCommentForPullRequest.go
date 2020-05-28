@@ -152,6 +152,7 @@ func (c *Client) PostCommentForPullRequestRequest(input *PostCommentForPullReque
 	}
 
 	req := c.newRequest(op, input, &PostCommentForPullRequestOutput{})
+
 	return PostCommentForPullRequestRequest{Request: req, Input: input, Copy: c.PostCommentForPullRequestRequest}
 }
 

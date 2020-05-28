@@ -116,6 +116,7 @@ func (c *Client) DescribeNodegroupRequest(input *DescribeNodegroupInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeNodegroupOutput{})
+
 	return DescribeNodegroupRequest{Request: req, Input: input, Copy: c.DescribeNodegroupRequest}
 }
 

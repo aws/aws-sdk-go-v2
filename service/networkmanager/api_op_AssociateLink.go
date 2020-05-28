@@ -133,6 +133,7 @@ func (c *Client) AssociateLinkRequest(input *AssociateLinkInput) AssociateLinkRe
 	}
 
 	req := c.newRequest(op, input, &AssociateLinkOutput{})
+
 	return AssociateLinkRequest{Request: req, Input: input, Copy: c.AssociateLinkRequest}
 }
 

@@ -147,6 +147,7 @@ func (c *Client) DescribeBillingGroupRequest(input *DescribeBillingGroupInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeBillingGroupOutput{})
+
 	return DescribeBillingGroupRequest{Request: req, Input: input, Copy: c.DescribeBillingGroupRequest}
 }
 

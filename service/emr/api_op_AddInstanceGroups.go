@@ -101,6 +101,7 @@ func (c *Client) AddInstanceGroupsRequest(input *AddInstanceGroupsInput) AddInst
 	}
 
 	req := c.newRequest(op, input, &AddInstanceGroupsOutput{})
+
 	return AddInstanceGroupsRequest{Request: req, Input: input, Copy: c.AddInstanceGroupsRequest}
 }
 

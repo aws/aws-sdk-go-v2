@@ -76,6 +76,7 @@ func (c *Client) DeleteSkillAuthorizationRequest(input *DeleteSkillAuthorization
 	}
 
 	req := c.newRequest(op, input, &DeleteSkillAuthorizationOutput{})
+
 	return DeleteSkillAuthorizationRequest{Request: req, Input: input, Copy: c.DeleteSkillAuthorizationRequest}
 }
 

@@ -119,6 +119,7 @@ func (c *Client) GetAnalyzedResourceRequest(input *GetAnalyzedResourceInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetAnalyzedResourceOutput{})
+
 	return GetAnalyzedResourceRequest{Request: req, Input: input, Copy: c.GetAnalyzedResourceRequest}
 }
 

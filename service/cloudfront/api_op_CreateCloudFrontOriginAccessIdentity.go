@@ -136,6 +136,7 @@ func (c *Client) CreateCloudFrontOriginAccessIdentityRequest(input *CreateCloudF
 	}
 
 	req := c.newRequest(op, input, &CreateCloudFrontOriginAccessIdentityOutput{})
+
 	return CreateCloudFrontOriginAccessIdentityRequest{Request: req, Input: input, Copy: c.CreateCloudFrontOriginAccessIdentityRequest}
 }
 

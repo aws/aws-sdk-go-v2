@@ -174,6 +174,7 @@ func (c *Client) CreateEndpointConfigRequest(input *CreateEndpointConfigInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateEndpointConfigOutput{})
+
 	return CreateEndpointConfigRequest{Request: req, Input: input, Copy: c.CreateEndpointConfigRequest}
 }
 

@@ -110,6 +110,7 @@ func (c *Client) DeleteFunctionRequest(input *DeleteFunctionInput) DeleteFunctio
 	}
 
 	req := c.newRequest(op, input, &DeleteFunctionOutput{})
+
 	return DeleteFunctionRequest{Request: req, Input: input, Copy: c.DeleteFunctionRequest}
 }
 

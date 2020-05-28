@@ -88,6 +88,7 @@ func (c *Client) CreateLogSubscriptionRequest(input *CreateLogSubscriptionInput)
 	}
 
 	req := c.newRequest(op, input, &CreateLogSubscriptionOutput{})
+
 	return CreateLogSubscriptionRequest{Request: req, Input: input, Copy: c.CreateLogSubscriptionRequest}
 }
 

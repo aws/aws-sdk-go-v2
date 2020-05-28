@@ -105,6 +105,7 @@ func (c *Client) EnterStandbyRequest(input *EnterStandbyInput) EnterStandbyReque
 	}
 
 	req := c.newRequest(op, input, &EnterStandbyOutput{})
+
 	return EnterStandbyRequest{Request: req, Input: input, Copy: c.EnterStandbyRequest}
 }
 

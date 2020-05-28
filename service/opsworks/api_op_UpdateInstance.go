@@ -177,6 +177,7 @@ func (c *Client) UpdateInstanceRequest(input *UpdateInstanceInput) UpdateInstanc
 	req := c.newRequest(op, input, &UpdateInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateInstanceRequest{Request: req, Input: input, Copy: c.UpdateInstanceRequest}
 }
 

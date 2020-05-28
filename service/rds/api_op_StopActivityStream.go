@@ -93,6 +93,7 @@ func (c *Client) StopActivityStreamRequest(input *StopActivityStreamInput) StopA
 	}
 
 	req := c.newRequest(op, input, &StopActivityStreamOutput{})
+
 	return StopActivityStreamRequest{Request: req, Input: input, Copy: c.StopActivityStreamRequest}
 }
 

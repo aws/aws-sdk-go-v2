@@ -106,6 +106,7 @@ func (c *Client) DescribeEventDetailsForOrganizationRequest(input *DescribeEvent
 	}
 
 	req := c.newRequest(op, input, &DescribeEventDetailsForOrganizationOutput{})
+
 	return DescribeEventDetailsForOrganizationRequest{Request: req, Input: input, Copy: c.DescribeEventDetailsForOrganizationRequest}
 }
 

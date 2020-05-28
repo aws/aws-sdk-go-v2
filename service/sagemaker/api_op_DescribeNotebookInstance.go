@@ -167,6 +167,7 @@ func (c *Client) DescribeNotebookInstanceRequest(input *DescribeNotebookInstance
 	}
 
 	req := c.newRequest(op, input, &DescribeNotebookInstanceOutput{})
+
 	return DescribeNotebookInstanceRequest{Request: req, Input: input, Copy: c.DescribeNotebookInstanceRequest}
 }
 

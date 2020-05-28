@@ -101,6 +101,7 @@ func (c *Client) GetContextKeysForCustomPolicyRequest(input *GetContextKeysForCu
 	}
 
 	req := c.newRequest(op, input, &GetContextKeysForCustomPolicyOutput{})
+
 	return GetContextKeysForCustomPolicyRequest{Request: req, Input: input, Copy: c.GetContextKeysForCustomPolicyRequest}
 }
 

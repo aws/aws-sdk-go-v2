@@ -105,6 +105,7 @@ func (c *Client) GetConformancePackComplianceDetailsRequest(input *GetConformanc
 	}
 
 	req := c.newRequest(op, input, &GetConformancePackComplianceDetailsOutput{})
+
 	return GetConformancePackComplianceDetailsRequest{Request: req, Input: input, Copy: c.GetConformancePackComplianceDetailsRequest}
 }
 

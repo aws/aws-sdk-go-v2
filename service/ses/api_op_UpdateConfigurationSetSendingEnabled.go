@@ -95,6 +95,7 @@ func (c *Client) UpdateConfigurationSetSendingEnabledRequest(input *UpdateConfig
 	req := c.newRequest(op, input, &UpdateConfigurationSetSendingEnabledOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateConfigurationSetSendingEnabledRequest{Request: req, Input: input, Copy: c.UpdateConfigurationSetSendingEnabledRequest}
 }
 

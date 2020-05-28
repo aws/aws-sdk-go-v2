@@ -107,6 +107,7 @@ func (c *Client) DescribeTapeArchivesRequest(input *DescribeTapeArchivesInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeTapeArchivesOutput{})
+
 	return DescribeTapeArchivesRequest{Request: req, Input: input, Copy: c.DescribeTapeArchivesRequest}
 }
 

@@ -124,6 +124,7 @@ func (c *Client) DescribeVTLDevicesRequest(input *DescribeVTLDevicesInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeVTLDevicesOutput{})
+
 	return DescribeVTLDevicesRequest{Request: req, Input: input, Copy: c.DescribeVTLDevicesRequest}
 }
 

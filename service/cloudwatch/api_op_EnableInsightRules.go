@@ -79,6 +79,7 @@ func (c *Client) EnableInsightRulesRequest(input *EnableInsightRulesInput) Enabl
 	}
 
 	req := c.newRequest(op, input, &EnableInsightRulesOutput{})
+
 	return EnableInsightRulesRequest{Request: req, Input: input, Copy: c.EnableInsightRulesRequest}
 }
 

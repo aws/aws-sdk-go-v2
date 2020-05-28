@@ -151,6 +151,7 @@ func (c *Client) PutRolePolicyRequest(input *PutRolePolicyInput) PutRolePolicyRe
 	req := c.newRequest(op, input, &PutRolePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutRolePolicyRequest{Request: req, Input: input, Copy: c.PutRolePolicyRequest}
 }
 

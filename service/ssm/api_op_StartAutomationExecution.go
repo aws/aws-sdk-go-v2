@@ -69,8 +69,8 @@ type StartAutomationExecutionInput struct {
 
 	// A location is a combination of AWS Regions and/or AWS accounts where you
 	// want to run the Automation. Use this action to start an Automation in multiple
-	// Regions and multiple accounts. For more information, see Executing Automations
-	// in Multiple AWS Regions and Accounts (http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html)
+	// Regions and multiple accounts. For more information, see Running Automation
+	// workflows in multiple AWS Regions and accounts (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html)
 	// in the AWS Systems Manager User Guide.
 	TargetLocations []TargetLocation `min:"1" type:"list"`
 
@@ -183,6 +183,7 @@ func (c *Client) StartAutomationExecutionRequest(input *StartAutomationExecution
 	}
 
 	req := c.newRequest(op, input, &StartAutomationExecutionOutput{})
+
 	return StartAutomationExecutionRequest{Request: req, Input: input, Copy: c.StartAutomationExecutionRequest}
 }
 

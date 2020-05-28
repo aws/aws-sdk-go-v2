@@ -100,6 +100,7 @@ func (c *Client) DescribeVolumesModificationsRequest(input *DescribeVolumesModif
 	}
 
 	req := c.newRequest(op, input, &DescribeVolumesModificationsOutput{})
+
 	return DescribeVolumesModificationsRequest{Request: req, Input: input, Copy: c.DescribeVolumesModificationsRequest}
 }
 

@@ -90,6 +90,7 @@ func (c *Client) EnableUserRequest(input *EnableUserInput) EnableUserRequest {
 	}
 
 	req := c.newRequest(op, input, &EnableUserOutput{})
+
 	return EnableUserRequest{Request: req, Input: input, Copy: c.EnableUserRequest}
 }
 

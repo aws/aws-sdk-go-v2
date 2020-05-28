@@ -152,6 +152,7 @@ func (c *Client) ListWebsiteCertificateAuthoritiesRequest(input *ListWebsiteCert
 	}
 
 	req := c.newRequest(op, input, &ListWebsiteCertificateAuthoritiesOutput{})
+
 	return ListWebsiteCertificateAuthoritiesRequest{Request: req, Input: input, Copy: c.ListWebsiteCertificateAuthoritiesRequest}
 }
 

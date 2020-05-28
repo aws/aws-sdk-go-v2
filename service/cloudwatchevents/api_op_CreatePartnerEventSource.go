@@ -119,6 +119,7 @@ func (c *Client) CreatePartnerEventSourceRequest(input *CreatePartnerEventSource
 	}
 
 	req := c.newRequest(op, input, &CreatePartnerEventSourceOutput{})
+
 	return CreatePartnerEventSourceRequest{Request: req, Input: input, Copy: c.CreatePartnerEventSourceRequest}
 }
 

@@ -354,6 +354,7 @@ func (c *Client) CreateTrainingJobRequest(input *CreateTrainingJobInput) CreateT
 	}
 
 	req := c.newRequest(op, input, &CreateTrainingJobOutput{})
+
 	return CreateTrainingJobRequest{Request: req, Input: input, Copy: c.CreateTrainingJobRequest}
 }
 

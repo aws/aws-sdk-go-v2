@@ -173,6 +173,7 @@ func (c *Client) ListObjectChildrenRequest(input *ListObjectChildrenInput) ListO
 	}
 
 	req := c.newRequest(op, input, &ListObjectChildrenOutput{})
+
 	return ListObjectChildrenRequest{Request: req, Input: input, Copy: c.ListObjectChildrenRequest}
 }
 

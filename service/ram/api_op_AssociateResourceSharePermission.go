@@ -147,6 +147,7 @@ func (c *Client) AssociateResourceSharePermissionRequest(input *AssociateResourc
 	}
 
 	req := c.newRequest(op, input, &AssociateResourceSharePermissionOutput{})
+
 	return AssociateResourceSharePermissionRequest{Request: req, Input: input, Copy: c.AssociateResourceSharePermissionRequest}
 }
 

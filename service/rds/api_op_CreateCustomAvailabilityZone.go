@@ -102,6 +102,7 @@ func (c *Client) CreateCustomAvailabilityZoneRequest(input *CreateCustomAvailabi
 	}
 
 	req := c.newRequest(op, input, &CreateCustomAvailabilityZoneOutput{})
+
 	return CreateCustomAvailabilityZoneRequest{Request: req, Input: input, Copy: c.CreateCustomAvailabilityZoneRequest}
 }
 

@@ -167,6 +167,7 @@ func (c *Client) CreateIPSetRequest(input *CreateIPSetInput) CreateIPSetRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateIPSetOutput{})
+
 	return CreateIPSetRequest{Request: req, Input: input, Copy: c.CreateIPSetRequest}
 }
 

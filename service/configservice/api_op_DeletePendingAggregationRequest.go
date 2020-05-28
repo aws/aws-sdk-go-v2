@@ -90,6 +90,7 @@ func (c *Client) DeletePendingAggregationRequestRequest(input *DeletePendingAggr
 	req := c.newRequest(op, input, &DeletePendingAggregationRequestOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeletePendingAggregationRequestRequest{Request: req, Input: input, Copy: c.DeletePendingAggregationRequestRequest}
 }
 

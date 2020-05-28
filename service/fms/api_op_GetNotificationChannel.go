@@ -61,6 +61,7 @@ func (c *Client) GetNotificationChannelRequest(input *GetNotificationChannelInpu
 	}
 
 	req := c.newRequest(op, input, &GetNotificationChannelOutput{})
+
 	return GetNotificationChannelRequest{Request: req, Input: input, Copy: c.GetNotificationChannelRequest}
 }
 

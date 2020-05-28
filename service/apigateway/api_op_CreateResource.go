@@ -230,6 +230,7 @@ func (c *Client) CreateResourceRequest(input *CreateResourceInput) CreateResourc
 	}
 
 	req := c.newRequest(op, input, &CreateResourceOutput{})
+
 	return CreateResourceRequest{Request: req, Input: input, Copy: c.CreateResourceRequest}
 }
 

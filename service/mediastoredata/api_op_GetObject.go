@@ -205,6 +205,7 @@ func (c *Client) GetObjectRequest(input *GetObjectInput) GetObjectRequest {
 	}
 
 	req := c.newRequest(op, input, &GetObjectOutput{})
+
 	return GetObjectRequest{Request: req, Input: input, Copy: c.GetObjectRequest}
 }
 

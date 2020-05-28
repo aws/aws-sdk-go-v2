@@ -92,6 +92,7 @@ func (c *Client) DescribeDBClusterSnapshotAttributesRequest(input *DescribeDBClu
 	}
 
 	req := c.newRequest(op, input, &DescribeDBClusterSnapshotAttributesOutput{})
+
 	return DescribeDBClusterSnapshotAttributesRequest{Request: req, Input: input, Copy: c.DescribeDBClusterSnapshotAttributesRequest}
 }
 

@@ -17,7 +17,7 @@ var _ = awsutil.Prettify
 type ChannelInfo struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the signaling channel.
+	// The Amazon Resource Name (ARN) of the signaling channel.
 	ChannelARN *string `min:"1" type:"string"`
 
 	// The name of the signaling channel.

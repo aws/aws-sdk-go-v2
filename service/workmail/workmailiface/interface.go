@@ -83,6 +83,8 @@ type ClientAPI interface {
 
 	DeleteResourceRequest(*workmail.DeleteResourceInput) workmail.DeleteResourceRequest
 
+	DeleteRetentionPolicyRequest(*workmail.DeleteRetentionPolicyInput) workmail.DeleteRetentionPolicyRequest
+
 	DeleteUserRequest(*workmail.DeleteUserInput) workmail.DeleteUserRequest
 
 	DeregisterFromWorkMailRequest(*workmail.DeregisterFromWorkMailInput) workmail.DeregisterFromWorkMailRequest
@@ -100,6 +102,8 @@ type ClientAPI interface {
 	DisassociateMemberFromGroupRequest(*workmail.DisassociateMemberFromGroupInput) workmail.DisassociateMemberFromGroupRequest
 
 	GetAccessControlEffectRequest(*workmail.GetAccessControlEffectInput) workmail.GetAccessControlEffectRequest
+
+	GetDefaultRetentionPolicyRequest(*workmail.GetDefaultRetentionPolicyInput) workmail.GetDefaultRetentionPolicyRequest
 
 	GetMailboxDetailsRequest(*workmail.GetMailboxDetailsInput) workmail.GetMailboxDetailsRequest
 
@@ -126,6 +130,8 @@ type ClientAPI interface {
 	PutAccessControlRuleRequest(*workmail.PutAccessControlRuleInput) workmail.PutAccessControlRuleRequest
 
 	PutMailboxPermissionsRequest(*workmail.PutMailboxPermissionsInput) workmail.PutMailboxPermissionsRequest
+
+	PutRetentionPolicyRequest(*workmail.PutRetentionPolicyInput) workmail.PutRetentionPolicyRequest
 
 	RegisterToWorkMailRequest(*workmail.RegisterToWorkMailInput) workmail.RegisterToWorkMailRequest
 

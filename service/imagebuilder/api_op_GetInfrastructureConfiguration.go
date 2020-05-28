@@ -113,6 +113,7 @@ func (c *Client) GetInfrastructureConfigurationRequest(input *GetInfrastructureC
 	}
 
 	req := c.newRequest(op, input, &GetInfrastructureConfigurationOutput{})
+
 	return GetInfrastructureConfigurationRequest{Request: req, Input: input, Copy: c.GetInfrastructureConfigurationRequest}
 }
 

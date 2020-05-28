@@ -64,6 +64,7 @@ func (c *Client) PutAppLaunchConfigurationRequest(input *PutAppLaunchConfigurati
 	}
 
 	req := c.newRequest(op, input, &PutAppLaunchConfigurationOutput{})
+
 	return PutAppLaunchConfigurationRequest{Request: req, Input: input, Copy: c.PutAppLaunchConfigurationRequest}
 }
 

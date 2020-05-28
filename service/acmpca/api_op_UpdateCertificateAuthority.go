@@ -97,6 +97,7 @@ func (c *Client) UpdateCertificateAuthorityRequest(input *UpdateCertificateAutho
 	req := c.newRequest(op, input, &UpdateCertificateAuthorityOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateCertificateAuthorityRequest{Request: req, Input: input, Copy: c.UpdateCertificateAuthorityRequest}
 }
 

@@ -169,6 +169,7 @@ func (c *Client) CreateIndexRequest(input *CreateIndexInput) CreateIndexRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateIndexOutput{})
+
 	return CreateIndexRequest{Request: req, Input: input, Copy: c.CreateIndexRequest}
 }
 

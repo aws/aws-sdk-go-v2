@@ -98,6 +98,7 @@ func (c *Client) ListQueryExecutionsRequest(input *ListQueryExecutionsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListQueryExecutionsOutput{})
+
 	return ListQueryExecutionsRequest{Request: req, Input: input, Copy: c.ListQueryExecutionsRequest}
 }
 

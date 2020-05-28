@@ -121,6 +121,7 @@ func (c *Client) StartSchemaCreationRequest(input *StartSchemaCreationInput) Sta
 	}
 
 	req := c.newRequest(op, input, &StartSchemaCreationOutput{})
+
 	return StartSchemaCreationRequest{Request: req, Input: input, Copy: c.StartSchemaCreationRequest}
 }
 

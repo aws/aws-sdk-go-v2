@@ -193,6 +193,7 @@ func (c *Client) RestoreTableToPointInTimeRequest(input *RestoreTableToPointInTi
 			Fn:   de.Handler,
 		})
 	}
+
 	return RestoreTableToPointInTimeRequest{Request: req, Input: input, Copy: c.RestoreTableToPointInTimeRequest}
 }
 

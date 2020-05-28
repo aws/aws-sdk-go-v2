@@ -179,6 +179,7 @@ func (c *Client) UpdateClientCertificateRequest(input *UpdateClientCertificateIn
 	}
 
 	req := c.newRequest(op, input, &UpdateClientCertificateOutput{})
+
 	return UpdateClientCertificateRequest{Request: req, Input: input, Copy: c.UpdateClientCertificateRequest}
 }
 

@@ -75,6 +75,7 @@ func (c *Client) GetConnectorsRequest(input *GetConnectorsInput) GetConnectorsRe
 	}
 
 	req := c.newRequest(op, input, &GetConnectorsOutput{})
+
 	return GetConnectorsRequest{Request: req, Input: input, Copy: c.GetConnectorsRequest}
 }
 

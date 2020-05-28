@@ -130,6 +130,7 @@ func (c *Client) UpdateTemplateActiveVersionRequest(input *UpdateTemplateActiveV
 	}
 
 	req := c.newRequest(op, input, &UpdateTemplateActiveVersionOutput{})
+
 	return UpdateTemplateActiveVersionRequest{Request: req, Input: input, Copy: c.UpdateTemplateActiveVersionRequest}
 }
 

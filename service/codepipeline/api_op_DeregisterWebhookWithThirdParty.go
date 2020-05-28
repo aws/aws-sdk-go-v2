@@ -72,6 +72,7 @@ func (c *Client) DeregisterWebhookWithThirdPartyRequest(input *DeregisterWebhook
 	}
 
 	req := c.newRequest(op, input, &DeregisterWebhookWithThirdPartyOutput{})
+
 	return DeregisterWebhookWithThirdPartyRequest{Request: req, Input: input, Copy: c.DeregisterWebhookWithThirdPartyRequest}
 }
 

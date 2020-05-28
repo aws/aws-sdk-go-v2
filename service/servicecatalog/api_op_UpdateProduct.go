@@ -126,6 +126,7 @@ func (c *Client) UpdateProductRequest(input *UpdateProductInput) UpdateProductRe
 	}
 
 	req := c.newRequest(op, input, &UpdateProductOutput{})
+
 	return UpdateProductRequest{Request: req, Input: input, Copy: c.UpdateProductRequest}
 }
 

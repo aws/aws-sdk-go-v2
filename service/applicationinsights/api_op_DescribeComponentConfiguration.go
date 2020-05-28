@@ -96,6 +96,7 @@ func (c *Client) DescribeComponentConfigurationRequest(input *DescribeComponentC
 	}
 
 	req := c.newRequest(op, input, &DescribeComponentConfigurationOutput{})
+
 	return DescribeComponentConfigurationRequest{Request: req, Input: input, Copy: c.DescribeComponentConfigurationRequest}
 }
 

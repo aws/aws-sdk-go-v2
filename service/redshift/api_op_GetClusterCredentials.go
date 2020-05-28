@@ -200,6 +200,7 @@ func (c *Client) GetClusterCredentialsRequest(input *GetClusterCredentialsInput)
 	}
 
 	req := c.newRequest(op, input, &GetClusterCredentialsOutput{})
+
 	return GetClusterCredentialsRequest{Request: req, Input: input, Copy: c.GetClusterCredentialsRequest}
 }
 

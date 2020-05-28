@@ -107,6 +107,7 @@ func (c *Client) DeleteSshPublicKeyRequest(input *DeleteSshPublicKeyInput) Delet
 	req := c.newRequest(op, input, &DeleteSshPublicKeyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteSshPublicKeyRequest{Request: req, Input: input, Copy: c.DeleteSshPublicKeyRequest}
 }
 

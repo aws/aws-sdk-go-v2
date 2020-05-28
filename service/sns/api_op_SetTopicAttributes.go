@@ -108,6 +108,7 @@ func (c *Client) SetTopicAttributesRequest(input *SetTopicAttributesInput) SetTo
 	req := c.newRequest(op, input, &SetTopicAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetTopicAttributesRequest{Request: req, Input: input, Copy: c.SetTopicAttributesRequest}
 }
 

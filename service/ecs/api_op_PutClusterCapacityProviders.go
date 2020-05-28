@@ -149,6 +149,7 @@ func (c *Client) PutClusterCapacityProvidersRequest(input *PutClusterCapacityPro
 	}
 
 	req := c.newRequest(op, input, &PutClusterCapacityProvidersOutput{})
+
 	return PutClusterCapacityProvidersRequest{Request: req, Input: input, Copy: c.PutClusterCapacityProvidersRequest}
 }
 

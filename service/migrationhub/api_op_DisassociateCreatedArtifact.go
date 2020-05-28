@@ -118,6 +118,7 @@ func (c *Client) DisassociateCreatedArtifactRequest(input *DisassociateCreatedAr
 	}
 
 	req := c.newRequest(op, input, &DisassociateCreatedArtifactOutput{})
+
 	return DisassociateCreatedArtifactRequest{Request: req, Input: input, Copy: c.DisassociateCreatedArtifactRequest}
 }
 

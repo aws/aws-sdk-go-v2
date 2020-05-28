@@ -145,6 +145,7 @@ func (c *Client) RegisterCertificateRequest(input *RegisterCertificateInput) Reg
 	}
 
 	req := c.newRequest(op, input, &RegisterCertificateOutput{})
+
 	return RegisterCertificateRequest{Request: req, Input: input, Copy: c.RegisterCertificateRequest}
 }
 

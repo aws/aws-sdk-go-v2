@@ -198,6 +198,7 @@ func (c *Client) GetSessionRequest(input *GetSessionInput) GetSessionRequest {
 	}
 
 	req := c.newRequest(op, input, &GetSessionOutput{})
+
 	return GetSessionRequest{Request: req, Input: input, Copy: c.GetSessionRequest}
 }
 

@@ -87,6 +87,7 @@ func (c *Client) ModifyWorkspaceStateRequest(input *ModifyWorkspaceStateInput) M
 	}
 
 	req := c.newRequest(op, input, &ModifyWorkspaceStateOutput{})
+
 	return ModifyWorkspaceStateRequest{Request: req, Input: input, Copy: c.ModifyWorkspaceStateRequest}
 }
 

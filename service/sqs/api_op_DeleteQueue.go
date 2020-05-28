@@ -95,6 +95,7 @@ func (c *Client) DeleteQueueRequest(input *DeleteQueueInput) DeleteQueueRequest 
 	req := c.newRequest(op, input, &DeleteQueueOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteQueueRequest{Request: req, Input: input, Copy: c.DeleteQueueRequest}
 }
 

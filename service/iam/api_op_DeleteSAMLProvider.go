@@ -87,6 +87,7 @@ func (c *Client) DeleteSAMLProviderRequest(input *DeleteSAMLProviderInput) Delet
 	req := c.newRequest(op, input, &DeleteSAMLProviderOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteSAMLProviderRequest{Request: req, Input: input, Copy: c.DeleteSAMLProviderRequest}
 }
 

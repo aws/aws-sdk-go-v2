@@ -79,6 +79,7 @@ func (c *Client) DescribeProblemRequest(input *DescribeProblemInput) DescribePro
 	}
 
 	req := c.newRequest(op, input, &DescribeProblemOutput{})
+
 	return DescribeProblemRequest{Request: req, Input: input, Copy: c.DescribeProblemRequest}
 }
 

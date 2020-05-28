@@ -52,7 +52,7 @@ type CreateDomainEntryOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
+	// of the request, the timestamp of the request, and the resources affected
 	// by the request.
 	Operation *Operation `locationName:"operation" type:"structure"`
 }
@@ -95,6 +95,7 @@ func (c *Client) CreateDomainEntryRequest(input *CreateDomainEntryInput) CreateD
 	}
 
 	req := c.newRequest(op, input, &CreateDomainEntryOutput{})
+
 	return CreateDomainEntryRequest{Request: req, Input: input, Copy: c.CreateDomainEntryRequest}
 }
 

@@ -188,6 +188,7 @@ func (c *Client) DescribeFileSystemsRequest(input *DescribeFileSystemsInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeFileSystemsOutput{})
+
 	return DescribeFileSystemsRequest{Request: req, Input: input, Copy: c.DescribeFileSystemsRequest}
 }
 

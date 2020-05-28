@@ -106,6 +106,7 @@ func (c *Client) DeleteFleetRequest(input *DeleteFleetInput) DeleteFleetRequest 
 	req := c.newRequest(op, input, &DeleteFleetOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteFleetRequest{Request: req, Input: input, Copy: c.DeleteFleetRequest}
 }
 

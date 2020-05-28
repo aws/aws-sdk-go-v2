@@ -138,6 +138,7 @@ func (c *Client) BatchUpdateScheduleRequest(input *BatchUpdateScheduleInput) Bat
 	}
 
 	req := c.newRequest(op, input, &BatchUpdateScheduleOutput{})
+
 	return BatchUpdateScheduleRequest{Request: req, Input: input, Copy: c.BatchUpdateScheduleRequest}
 }
 

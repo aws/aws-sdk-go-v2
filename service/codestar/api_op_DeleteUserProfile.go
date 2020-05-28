@@ -84,6 +84,7 @@ func (c *Client) DeleteUserProfileRequest(input *DeleteUserProfileInput) DeleteU
 	}
 
 	req := c.newRequest(op, input, &DeleteUserProfileOutput{})
+
 	return DeleteUserProfileRequest{Request: req, Input: input, Copy: c.DeleteUserProfileRequest}
 }
 

@@ -86,6 +86,7 @@ func (c *Client) DescribeOrganizationConfigRuleStatusesRequest(input *DescribeOr
 	}
 
 	req := c.newRequest(op, input, &DescribeOrganizationConfigRuleStatusesOutput{})
+
 	return DescribeOrganizationConfigRuleStatusesRequest{Request: req, Input: input, Copy: c.DescribeOrganizationConfigRuleStatusesRequest}
 }
 

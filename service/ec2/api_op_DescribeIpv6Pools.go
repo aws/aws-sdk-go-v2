@@ -109,6 +109,7 @@ func (c *Client) DescribeIpv6PoolsRequest(input *DescribeIpv6PoolsInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeIpv6PoolsOutput{})
+
 	return DescribeIpv6PoolsRequest{Request: req, Input: input, Copy: c.DescribeIpv6PoolsRequest}
 }
 

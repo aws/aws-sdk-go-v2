@@ -88,6 +88,7 @@ func (c *Client) ListSchemasRequest(input *ListSchemasInput) ListSchemasRequest 
 	}
 
 	req := c.newRequest(op, input, &ListSchemasOutput{})
+
 	return ListSchemasRequest{Request: req, Input: input, Copy: c.ListSchemasRequest}
 }
 

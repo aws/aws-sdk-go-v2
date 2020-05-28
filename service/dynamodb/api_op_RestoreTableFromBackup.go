@@ -169,6 +169,7 @@ func (c *Client) RestoreTableFromBackupRequest(input *RestoreTableFromBackupInpu
 			Fn:   de.Handler,
 		})
 	}
+
 	return RestoreTableFromBackupRequest{Request: req, Input: input, Copy: c.RestoreTableFromBackupRequest}
 }
 

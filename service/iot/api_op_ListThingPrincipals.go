@@ -112,6 +112,7 @@ func (c *Client) ListThingPrincipalsRequest(input *ListThingPrincipalsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListThingPrincipalsOutput{})
+
 	return ListThingPrincipalsRequest{Request: req, Input: input, Copy: c.ListThingPrincipalsRequest}
 }
 

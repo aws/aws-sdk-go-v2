@@ -82,6 +82,7 @@ func (c *Client) StartWorkspacesRequest(input *StartWorkspacesInput) StartWorksp
 	}
 
 	req := c.newRequest(op, input, &StartWorkspacesOutput{})
+
 	return StartWorkspacesRequest{Request: req, Input: input, Copy: c.StartWorkspacesRequest}
 }
 

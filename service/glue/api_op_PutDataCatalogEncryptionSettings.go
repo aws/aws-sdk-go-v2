@@ -87,6 +87,7 @@ func (c *Client) PutDataCatalogEncryptionSettingsRequest(input *PutDataCatalogEn
 	}
 
 	req := c.newRequest(op, input, &PutDataCatalogEncryptionSettingsOutput{})
+
 	return PutDataCatalogEncryptionSettingsRequest{Request: req, Input: input, Copy: c.PutDataCatalogEncryptionSettingsRequest}
 }
 

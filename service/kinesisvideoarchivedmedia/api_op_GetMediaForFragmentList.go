@@ -187,6 +187,7 @@ func (c *Client) GetMediaForFragmentListRequest(input *GetMediaForFragmentListIn
 	}
 
 	req := c.newRequest(op, input, &GetMediaForFragmentListOutput{})
+
 	return GetMediaForFragmentListRequest{Request: req, Input: input, Copy: c.GetMediaForFragmentListRequest}
 }
 

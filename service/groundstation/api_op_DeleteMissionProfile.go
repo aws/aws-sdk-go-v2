@@ -101,6 +101,7 @@ func (c *Client) DeleteMissionProfileRequest(input *DeleteMissionProfileInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteMissionProfileOutput{})
+
 	return DeleteMissionProfileRequest{Request: req, Input: input, Copy: c.DeleteMissionProfileRequest}
 }
 

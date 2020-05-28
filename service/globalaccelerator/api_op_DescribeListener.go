@@ -77,6 +77,7 @@ func (c *Client) DescribeListenerRequest(input *DescribeListenerInput) DescribeL
 	}
 
 	req := c.newRequest(op, input, &DescribeListenerOutput{})
+
 	return DescribeListenerRequest{Request: req, Input: input, Copy: c.DescribeListenerRequest}
 }
 

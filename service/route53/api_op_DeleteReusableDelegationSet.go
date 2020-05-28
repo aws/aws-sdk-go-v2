@@ -101,6 +101,7 @@ func (c *Client) DeleteReusableDelegationSetRequest(input *DeleteReusableDelegat
 	}
 
 	req := c.newRequest(op, input, &DeleteReusableDelegationSetOutput{})
+
 	return DeleteReusableDelegationSetRequest{Request: req, Input: input, Copy: c.DeleteReusableDelegationSetRequest}
 }
 

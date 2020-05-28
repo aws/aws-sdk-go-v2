@@ -169,6 +169,7 @@ func (c *Client) ListInfrastructureConfigurationsRequest(input *ListInfrastructu
 	}
 
 	req := c.newRequest(op, input, &ListInfrastructureConfigurationsOutput{})
+
 	return ListInfrastructureConfigurationsRequest{Request: req, Input: input, Copy: c.ListInfrastructureConfigurationsRequest}
 }
 

@@ -133,6 +133,7 @@ func (c *Client) CreateDatasetImportJobRequest(input *CreateDatasetImportJobInpu
 	}
 
 	req := c.newRequest(op, input, &CreateDatasetImportJobOutput{})
+
 	return CreateDatasetImportJobRequest{Request: req, Input: input, Copy: c.CreateDatasetImportJobRequest}
 }
 

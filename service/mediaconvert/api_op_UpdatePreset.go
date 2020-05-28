@@ -138,6 +138,7 @@ func (c *Client) UpdatePresetRequest(input *UpdatePresetInput) UpdatePresetReque
 	}
 
 	req := c.newRequest(op, input, &UpdatePresetOutput{})
+
 	return UpdatePresetRequest{Request: req, Input: input, Copy: c.UpdatePresetRequest}
 }
 

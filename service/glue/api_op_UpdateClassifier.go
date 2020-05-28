@@ -97,6 +97,7 @@ func (c *Client) UpdateClassifierRequest(input *UpdateClassifierInput) UpdateCla
 	}
 
 	req := c.newRequest(op, input, &UpdateClassifierOutput{})
+
 	return UpdateClassifierRequest{Request: req, Input: input, Copy: c.UpdateClassifierRequest}
 }
 

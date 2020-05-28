@@ -93,6 +93,7 @@ func (c *Client) ListEventBusesRequest(input *ListEventBusesInput) ListEventBuse
 	}
 
 	req := c.newRequest(op, input, &ListEventBusesOutput{})
+
 	return ListEventBusesRequest{Request: req, Input: input, Copy: c.ListEventBusesRequest}
 }
 

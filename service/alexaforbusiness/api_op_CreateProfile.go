@@ -157,6 +157,7 @@ func (c *Client) CreateProfileRequest(input *CreateProfileInput) CreateProfileRe
 	}
 
 	req := c.newRequest(op, input, &CreateProfileOutput{})
+
 	return CreateProfileRequest{Request: req, Input: input, Copy: c.CreateProfileRequest}
 }
 

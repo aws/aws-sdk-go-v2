@@ -95,6 +95,7 @@ func (c *Client) DeleteSuppressedDestinationRequest(input *DeleteSuppressedDesti
 	}
 
 	req := c.newRequest(op, input, &DeleteSuppressedDestinationOutput{})
+
 	return DeleteSuppressedDestinationRequest{Request: req, Input: input, Copy: c.DeleteSuppressedDestinationRequest}
 }
 

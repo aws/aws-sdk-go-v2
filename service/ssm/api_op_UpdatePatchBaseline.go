@@ -20,8 +20,8 @@ type UpdatePatchBaselineInput struct {
 	// A list of explicitly approved patches for the baseline.
 	//
 	// For information about accepted formats for lists of approved patches and
-	// rejected patches, see Package Name Formats for Approved and Rejected Patch
-	// Lists (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
+	// rejected patches, see About package name formats for approved and rejected
+	// patch lists (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
 	// in the AWS Systems Manager User Guide.
 	ApprovedPatches []string `type:"list"`
 
@@ -50,8 +50,8 @@ type UpdatePatchBaselineInput struct {
 	// A list of explicitly rejected patches for the baseline.
 	//
 	// For information about accepted formats for lists of approved patches and
-	// rejected patches, see Package Name Formats for Approved and Rejected Patch
-	// Lists (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
+	// rejected patches, see About package name formats for approved and rejected
+	// patch lists (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
 	// in the AWS Systems Manager User Guide.
 	RejectedPatches []string `type:"list"`
 
@@ -213,6 +213,7 @@ func (c *Client) UpdatePatchBaselineRequest(input *UpdatePatchBaselineInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdatePatchBaselineOutput{})
+
 	return UpdatePatchBaselineRequest{Request: req, Input: input, Copy: c.UpdatePatchBaselineRequest}
 }
 

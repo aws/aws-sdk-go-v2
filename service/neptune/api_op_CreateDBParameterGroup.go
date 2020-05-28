@@ -133,6 +133,7 @@ func (c *Client) CreateDBParameterGroupRequest(input *CreateDBParameterGroupInpu
 	}
 
 	req := c.newRequest(op, input, &CreateDBParameterGroupOutput{})
+
 	return CreateDBParameterGroupRequest{Request: req, Input: input, Copy: c.CreateDBParameterGroupRequest}
 }
 

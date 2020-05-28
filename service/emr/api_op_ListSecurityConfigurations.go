@@ -74,6 +74,7 @@ func (c *Client) ListSecurityConfigurationsRequest(input *ListSecurityConfigurat
 	}
 
 	req := c.newRequest(op, input, &ListSecurityConfigurationsOutput{})
+
 	return ListSecurityConfigurationsRequest{Request: req, Input: input, Copy: c.ListSecurityConfigurationsRequest}
 }
 

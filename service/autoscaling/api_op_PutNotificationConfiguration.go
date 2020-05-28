@@ -19,8 +19,9 @@ type PutNotificationConfigurationInput struct {
 	// AutoScalingGroupName is a required field
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
-	// The type of event that causes the notification to be sent. For more information
-	// about notification types supported by Amazon EC2 Auto Scaling, see DescribeAutoScalingNotificationTypes.
+	// The type of event that causes the notification to be sent. To query the notification
+	// types supported by Amazon EC2 Auto Scaling, call the DescribeAutoScalingNotificationTypes
+	// API.
 	//
 	// NotificationTypes is a required field
 	NotificationTypes []string `type:"list" required:"true"`
@@ -111,6 +112,7 @@ func (c *Client) PutNotificationConfigurationRequest(input *PutNotificationConfi
 	req := c.newRequest(op, input, &PutNotificationConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutNotificationConfigurationRequest{Request: req, Input: input, Copy: c.PutNotificationConfigurationRequest}
 }
 

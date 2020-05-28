@@ -113,6 +113,7 @@ func (c *Client) DescribeClientVpnRoutesRequest(input *DescribeClientVpnRoutesIn
 	}
 
 	req := c.newRequest(op, input, &DescribeClientVpnRoutesOutput{})
+
 	return DescribeClientVpnRoutesRequest{Request: req, Input: input, Copy: c.DescribeClientVpnRoutesRequest}
 }
 

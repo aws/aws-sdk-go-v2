@@ -106,6 +106,7 @@ func (c *Client) UpdateSamplingRuleRequest(input *UpdateSamplingRuleInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateSamplingRuleOutput{})
+
 	return UpdateSamplingRuleRequest{Request: req, Input: input, Copy: c.UpdateSamplingRuleRequest}
 }
 

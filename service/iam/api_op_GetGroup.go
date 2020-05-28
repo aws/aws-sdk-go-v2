@@ -133,6 +133,7 @@ func (c *Client) GetGroupRequest(input *GetGroupInput) GetGroupRequest {
 	}
 
 	req := c.newRequest(op, input, &GetGroupOutput{})
+
 	return GetGroupRequest{Request: req, Input: input, Copy: c.GetGroupRequest}
 }
 

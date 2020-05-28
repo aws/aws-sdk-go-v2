@@ -81,6 +81,7 @@ func (c *Client) DeleteEntityRecognizerRequest(input *DeleteEntityRecognizerInpu
 	}
 
 	req := c.newRequest(op, input, &DeleteEntityRecognizerOutput{})
+
 	return DeleteEntityRecognizerRequest{Request: req, Input: input, Copy: c.DeleteEntityRecognizerRequest}
 }
 

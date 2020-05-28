@@ -109,6 +109,7 @@ func (c *Client) GetRulesRequest(input *GetRulesInput) GetRulesRequest {
 	}
 
 	req := c.newRequest(op, input, &GetRulesOutput{})
+
 	return GetRulesRequest{Request: req, Input: input, Copy: c.GetRulesRequest}
 }
 

@@ -228,6 +228,7 @@ func (c *Client) UpdateMethodResponseRequest(input *UpdateMethodResponseInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateMethodResponseOutput{})
+
 	return UpdateMethodResponseRequest{Request: req, Input: input, Copy: c.UpdateMethodResponseRequest}
 }
 

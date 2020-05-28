@@ -120,6 +120,7 @@ func (c *Client) DeleteApplicationOutputRequest(input *DeleteApplicationOutputIn
 	}
 
 	req := c.newRequest(op, input, &DeleteApplicationOutputOutput{})
+
 	return DeleteApplicationOutputRequest{Request: req, Input: input, Copy: c.DeleteApplicationOutputRequest}
 }
 

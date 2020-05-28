@@ -63,6 +63,8 @@ type DescribeInputOutput struct {
 	// A standard input has two sources and a single pipeline input only has one.
 	InputClass InputClass `locationName:"inputClass" type:"string" enum:"true"`
 
+	InputDevices []InputDeviceSettings `locationName:"inputDevices" type:"list"`
+
 	// There are two types of input sources, static and dynamic. If an input source
 	// is dynamic you canchange the source url of the input dynamically using an
 	// input switch action. However, the only input typeto support a dynamic url
@@ -134,6 +136,18 @@ func (s DescribeInputOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "inputClass", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.InputDevices != nil {
+		v := s.InputDevices
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "inputDevices", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if len(s.InputSourceType) > 0 {
 		v := s.InputSourceType
@@ -243,6 +257,7 @@ func (c *Client) DescribeInputRequest(input *DescribeInputInput) DescribeInputRe
 	}
 
 	req := c.newRequest(op, input, &DescribeInputOutput{})
+
 	return DescribeInputRequest{Request: req, Input: input, Copy: c.DescribeInputRequest}
 }
 

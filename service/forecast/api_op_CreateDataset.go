@@ -163,6 +163,7 @@ func (c *Client) CreateDatasetRequest(input *CreateDatasetInput) CreateDatasetRe
 	}
 
 	req := c.newRequest(op, input, &CreateDatasetOutput{})
+
 	return CreateDatasetRequest{Request: req, Input: input, Copy: c.CreateDatasetRequest}
 }
 

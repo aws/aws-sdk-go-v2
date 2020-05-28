@@ -100,6 +100,7 @@ func (c *Client) UpdateWebhookRequest(input *UpdateWebhookInput) UpdateWebhookRe
 	}
 
 	req := c.newRequest(op, input, &UpdateWebhookOutput{})
+
 	return UpdateWebhookRequest{Request: req, Input: input, Copy: c.UpdateWebhookRequest}
 }
 

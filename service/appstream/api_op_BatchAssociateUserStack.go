@@ -89,6 +89,7 @@ func (c *Client) BatchAssociateUserStackRequest(input *BatchAssociateUserStackIn
 	}
 
 	req := c.newRequest(op, input, &BatchAssociateUserStackOutput{})
+
 	return BatchAssociateUserStackRequest{Request: req, Input: input, Copy: c.BatchAssociateUserStackRequest}
 }
 

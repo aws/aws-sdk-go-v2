@@ -407,6 +407,10 @@ func (s CanaryRun) MarshalFields(e protocol.FieldEncoder) error {
 type CanaryRunConfigInput struct {
 	_ struct{} `type:"structure"`
 
+	// The maximum amount of memory available to the canary while it is running,
+	// in MB. The value you specify must be a multiple of 64.
+	MemoryInMB *int64 `min:"960" type:"integer"`
+
 	// How long the canary is allowed to run before it must stop. If you omit this
 	// field, the frequency of the canary is used as this value, up to a maximum
 	// of 14 minutes.
@@ -423,6 +427,9 @@ func (s CanaryRunConfigInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CanaryRunConfigInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CanaryRunConfigInput"}
+	if s.MemoryInMB != nil && *s.MemoryInMB < 960 {
+		invalidParams.Add(aws.NewErrParamMinValue("MemoryInMB", 960))
+	}
 
 	if s.TimeoutInSeconds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TimeoutInSeconds"))
@@ -439,6 +446,12 @@ func (s *CanaryRunConfigInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CanaryRunConfigInput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MemoryInMB != nil {
+		v := *s.MemoryInMB
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MemoryInMB", protocol.Int64Value(v), metadata)
+	}
 	if s.TimeoutInSeconds != nil {
 		v := *s.TimeoutInSeconds
 
@@ -452,6 +465,10 @@ func (s CanaryRunConfigInput) MarshalFields(e protocol.FieldEncoder) error {
 type CanaryRunConfigOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The maximum amount of memory available to the canary while it is running,
+	// in MB. The value you must be a multiple of 64.
+	MemoryInMB *int64 `min:"960" type:"integer"`
+
 	// How long the canary is allowed to run before it must stop.
 	TimeoutInSeconds *int64 `min:"60" type:"integer"`
 }
@@ -463,6 +480,12 @@ func (s CanaryRunConfigOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CanaryRunConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MemoryInMB != nil {
+		v := *s.MemoryInMB
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MemoryInMB", protocol.Int64Value(v), metadata)
+	}
 	if s.TimeoutInSeconds != nil {
 		v := *s.TimeoutInSeconds
 

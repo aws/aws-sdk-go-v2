@@ -147,6 +147,7 @@ func (c *Client) DeleteRouteRequest(input *DeleteRouteInput) DeleteRouteRequest 
 	}
 
 	req := c.newRequest(op, input, &DeleteRouteOutput{})
+
 	return DeleteRouteRequest{Request: req, Input: input, Copy: c.DeleteRouteRequest}
 }
 

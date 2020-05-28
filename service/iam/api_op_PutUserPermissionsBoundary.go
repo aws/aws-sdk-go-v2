@@ -104,6 +104,7 @@ func (c *Client) PutUserPermissionsBoundaryRequest(input *PutUserPermissionsBoun
 	req := c.newRequest(op, input, &PutUserPermissionsBoundaryOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutUserPermissionsBoundaryRequest{Request: req, Input: input, Copy: c.PutUserPermissionsBoundaryRequest}
 }
 

@@ -92,6 +92,7 @@ func (c *Client) DescribeDBSnapshotAttributesRequest(input *DescribeDBSnapshotAt
 	}
 
 	req := c.newRequest(op, input, &DescribeDBSnapshotAttributesOutput{})
+
 	return DescribeDBSnapshotAttributesRequest{Request: req, Input: input, Copy: c.DescribeDBSnapshotAttributesRequest}
 }
 

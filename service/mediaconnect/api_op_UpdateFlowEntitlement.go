@@ -164,6 +164,7 @@ func (c *Client) UpdateFlowEntitlementRequest(input *UpdateFlowEntitlementInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateFlowEntitlementOutput{})
+
 	return UpdateFlowEntitlementRequest{Request: req, Input: input, Copy: c.UpdateFlowEntitlementRequest}
 }
 

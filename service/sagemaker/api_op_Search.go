@@ -126,6 +126,7 @@ func (c *Client) SearchRequest(input *SearchInput) SearchRequest {
 	}
 
 	req := c.newRequest(op, input, &SearchOutput{})
+
 	return SearchRequest{Request: req, Input: input, Copy: c.SearchRequest}
 }
 

@@ -133,6 +133,7 @@ func (c *Client) UpdateUserPhoneConfigRequest(input *UpdateUserPhoneConfigInput)
 	req := c.newRequest(op, input, &UpdateUserPhoneConfigOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateUserPhoneConfigRequest{Request: req, Input: input, Copy: c.UpdateUserPhoneConfigRequest}
 }
 

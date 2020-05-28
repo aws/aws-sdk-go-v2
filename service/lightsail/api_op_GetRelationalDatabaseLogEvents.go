@@ -135,6 +135,7 @@ func (c *Client) GetRelationalDatabaseLogEventsRequest(input *GetRelationalDatab
 	}
 
 	req := c.newRequest(op, input, &GetRelationalDatabaseLogEventsOutput{})
+
 	return GetRelationalDatabaseLogEventsRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseLogEventsRequest}
 }
 

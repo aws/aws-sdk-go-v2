@@ -161,6 +161,7 @@ func (c *Client) CreateDeploymentRequest(input *CreateDeploymentInput) CreateDep
 	}
 
 	req := c.newRequest(op, input, &CreateDeploymentOutput{})
+
 	return CreateDeploymentRequest{Request: req, Input: input, Copy: c.CreateDeploymentRequest}
 }
 

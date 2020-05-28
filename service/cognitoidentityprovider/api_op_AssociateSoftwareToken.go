@@ -85,6 +85,7 @@ func (c *Client) AssociateSoftwareTokenRequest(input *AssociateSoftwareTokenInpu
 	}
 
 	req := c.newRequest(op, input, &AssociateSoftwareTokenOutput{})
+
 	return AssociateSoftwareTokenRequest{Request: req, Input: input, Copy: c.AssociateSoftwareTokenRequest}
 }
 

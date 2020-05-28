@@ -77,6 +77,7 @@ func (c *Client) UpdateEmergencyContactSettingsRequest(input *UpdateEmergencyCon
 	}
 
 	req := c.newRequest(op, input, &UpdateEmergencyContactSettingsOutput{})
+
 	return UpdateEmergencyContactSettingsRequest{Request: req, Input: input, Copy: c.UpdateEmergencyContactSettingsRequest}
 }
 

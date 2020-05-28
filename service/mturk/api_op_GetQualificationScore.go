@@ -100,6 +100,7 @@ func (c *Client) GetQualificationScoreRequest(input *GetQualificationScoreInput)
 	}
 
 	req := c.newRequest(op, input, &GetQualificationScoreOutput{})
+
 	return GetQualificationScoreRequest{Request: req, Input: input, Copy: c.GetQualificationScoreRequest}
 }
 

@@ -160,6 +160,7 @@ func (c *Client) UpdateConstraintRequest(input *UpdateConstraintInput) UpdateCon
 	}
 
 	req := c.newRequest(op, input, &UpdateConstraintOutput{})
+
 	return UpdateConstraintRequest{Request: req, Input: input, Copy: c.UpdateConstraintRequest}
 }
 

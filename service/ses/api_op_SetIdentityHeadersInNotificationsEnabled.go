@@ -108,6 +108,7 @@ func (c *Client) SetIdentityHeadersInNotificationsEnabledRequest(input *SetIdent
 	}
 
 	req := c.newRequest(op, input, &SetIdentityHeadersInNotificationsEnabledOutput{})
+
 	return SetIdentityHeadersInNotificationsEnabledRequest{Request: req, Input: input, Copy: c.SetIdentityHeadersInNotificationsEnabledRequest}
 }
 

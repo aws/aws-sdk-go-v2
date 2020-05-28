@@ -161,6 +161,7 @@ func (c *Client) GetOutpostInstanceTypesRequest(input *GetOutpostInstanceTypesIn
 	}
 
 	req := c.newRequest(op, input, &GetOutpostInstanceTypesOutput{})
+
 	return GetOutpostInstanceTypesRequest{Request: req, Input: input, Copy: c.GetOutpostInstanceTypesRequest}
 }
 

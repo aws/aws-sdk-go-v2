@@ -142,6 +142,7 @@ func (c *Client) ListDetectorModelVersionsRequest(input *ListDetectorModelVersio
 	}
 
 	req := c.newRequest(op, input, &ListDetectorModelVersionsOutput{})
+
 	return ListDetectorModelVersionsRequest{Request: req, Input: input, Copy: c.ListDetectorModelVersionsRequest}
 }
 

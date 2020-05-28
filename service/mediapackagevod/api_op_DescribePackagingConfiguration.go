@@ -165,6 +165,7 @@ func (c *Client) DescribePackagingConfigurationRequest(input *DescribePackagingC
 	}
 
 	req := c.newRequest(op, input, &DescribePackagingConfigurationOutput{})
+
 	return DescribePackagingConfigurationRequest{Request: req, Input: input, Copy: c.DescribePackagingConfigurationRequest}
 }
 

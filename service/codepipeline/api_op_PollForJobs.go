@@ -103,6 +103,7 @@ func (c *Client) PollForJobsRequest(input *PollForJobsInput) PollForJobsRequest 
 	}
 
 	req := c.newRequest(op, input, &PollForJobsOutput{})
+
 	return PollForJobsRequest{Request: req, Input: input, Copy: c.PollForJobsRequest}
 }
 

@@ -137,6 +137,7 @@ func (c *Client) CreateHsmConfigurationRequest(input *CreateHsmConfigurationInpu
 	}
 
 	req := c.newRequest(op, input, &CreateHsmConfigurationOutput{})
+
 	return CreateHsmConfigurationRequest{Request: req, Input: input, Copy: c.CreateHsmConfigurationRequest}
 }
 

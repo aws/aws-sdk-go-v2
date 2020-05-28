@@ -94,6 +94,7 @@ func (c *Client) GetEndpointAttributesRequest(input *GetEndpointAttributesInput)
 	}
 
 	req := c.newRequest(op, input, &GetEndpointAttributesOutput{})
+
 	return GetEndpointAttributesRequest{Request: req, Input: input, Copy: c.GetEndpointAttributesRequest}
 }
 

@@ -78,6 +78,7 @@ func (c *Client) OptInPhoneNumberRequest(input *OptInPhoneNumberInput) OptInPhon
 	}
 
 	req := c.newRequest(op, input, &OptInPhoneNumberOutput{})
+
 	return OptInPhoneNumberRequest{Request: req, Input: input, Copy: c.OptInPhoneNumberRequest}
 }
 

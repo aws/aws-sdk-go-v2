@@ -145,6 +145,7 @@ func (c *Client) PutUserPolicyRequest(input *PutUserPolicyInput) PutUserPolicyRe
 	req := c.newRequest(op, input, &PutUserPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutUserPolicyRequest{Request: req, Input: input, Copy: c.PutUserPolicyRequest}
 }
 

@@ -330,6 +330,7 @@ func (c *Client) CreateApplicationRequest(input *CreateApplicationInput) CreateA
 	}
 
 	req := c.newRequest(op, input, &CreateApplicationOutput{})
+
 	return CreateApplicationRequest{Request: req, Input: input, Copy: c.CreateApplicationRequest}
 }
 

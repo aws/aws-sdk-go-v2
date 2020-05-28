@@ -310,6 +310,7 @@ func (c *Client) CreateTableRequest(input *CreateTableInput) CreateTableRequest 
 			Fn:   de.Handler,
 		})
 	}
+
 	return CreateTableRequest{Request: req, Input: input, Copy: c.CreateTableRequest}
 }
 

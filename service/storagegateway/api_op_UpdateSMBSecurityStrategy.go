@@ -107,6 +107,7 @@ func (c *Client) UpdateSMBSecurityStrategyRequest(input *UpdateSMBSecurityStrate
 	}
 
 	req := c.newRequest(op, input, &UpdateSMBSecurityStrategyOutput{})
+
 	return UpdateSMBSecurityStrategyRequest{Request: req, Input: input, Copy: c.UpdateSMBSecurityStrategyRequest}
 }
 

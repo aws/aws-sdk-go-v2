@@ -128,6 +128,7 @@ func (c *Client) ListLoggerDefinitionVersionsRequest(input *ListLoggerDefinition
 	}
 
 	req := c.newRequest(op, input, &ListLoggerDefinitionVersionsOutput{})
+
 	return ListLoggerDefinitionVersionsRequest{Request: req, Input: input, Copy: c.ListLoggerDefinitionVersionsRequest}
 }
 

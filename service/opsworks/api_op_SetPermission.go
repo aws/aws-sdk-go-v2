@@ -115,6 +115,7 @@ func (c *Client) SetPermissionRequest(input *SetPermissionInput) SetPermissionRe
 	req := c.newRequest(op, input, &SetPermissionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetPermissionRequest{Request: req, Input: input, Copy: c.SetPermissionRequest}
 }
 

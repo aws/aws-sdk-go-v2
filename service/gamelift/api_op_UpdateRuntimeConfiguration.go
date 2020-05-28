@@ -132,6 +132,7 @@ func (c *Client) UpdateRuntimeConfigurationRequest(input *UpdateRuntimeConfigura
 	}
 
 	req := c.newRequest(op, input, &UpdateRuntimeConfigurationOutput{})
+
 	return UpdateRuntimeConfigurationRequest{Request: req, Input: input, Copy: c.UpdateRuntimeConfigurationRequest}
 }
 

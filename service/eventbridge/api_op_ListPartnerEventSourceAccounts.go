@@ -100,6 +100,7 @@ func (c *Client) ListPartnerEventSourceAccountsRequest(input *ListPartnerEventSo
 	}
 
 	req := c.newRequest(op, input, &ListPartnerEventSourceAccountsOutput{})
+
 	return ListPartnerEventSourceAccountsRequest{Request: req, Input: input, Copy: c.ListPartnerEventSourceAccountsRequest}
 }
 

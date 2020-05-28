@@ -206,6 +206,7 @@ func (c *Client) CreateSoftwareUpdateJobRequest(input *CreateSoftwareUpdateJobIn
 	}
 
 	req := c.newRequest(op, input, &CreateSoftwareUpdateJobOutput{})
+
 	return CreateSoftwareUpdateJobRequest{Request: req, Input: input, Copy: c.CreateSoftwareUpdateJobRequest}
 }
 

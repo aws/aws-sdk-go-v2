@@ -90,6 +90,7 @@ func (c *Client) DeleteAggregationAuthorizationRequest(input *DeleteAggregationA
 	req := c.newRequest(op, input, &DeleteAggregationAuthorizationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteAggregationAuthorizationRequest{Request: req, Input: input, Copy: c.DeleteAggregationAuthorizationRequest}
 }
 

@@ -148,6 +148,7 @@ func (c *Client) ModifyCurrentDBClusterCapacityRequest(input *ModifyCurrentDBClu
 	}
 
 	req := c.newRequest(op, input, &ModifyCurrentDBClusterCapacityOutput{})
+
 	return ModifyCurrentDBClusterCapacityRequest{Request: req, Input: input, Copy: c.ModifyCurrentDBClusterCapacityRequest}
 }
 

@@ -99,6 +99,7 @@ func (c *Client) AddRoleToDBInstanceRequest(input *AddRoleToDBInstanceInput) Add
 	req := c.newRequest(op, input, &AddRoleToDBInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AddRoleToDBInstanceRequest{Request: req, Input: input, Copy: c.AddRoleToDBInstanceRequest}
 }
 

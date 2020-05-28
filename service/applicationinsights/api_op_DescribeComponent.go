@@ -93,6 +93,7 @@ func (c *Client) DescribeComponentRequest(input *DescribeComponentInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeComponentOutput{})
+
 	return DescribeComponentRequest{Request: req, Input: input, Copy: c.DescribeComponentRequest}
 }
 

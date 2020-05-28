@@ -90,6 +90,7 @@ func (c *Client) DeleteInputSecurityGroupRequest(input *DeleteInputSecurityGroup
 	}
 
 	req := c.newRequest(op, input, &DeleteInputSecurityGroupOutput{})
+
 	return DeleteInputSecurityGroupRequest{Request: req, Input: input, Copy: c.DeleteInputSecurityGroupRequest}
 }
 

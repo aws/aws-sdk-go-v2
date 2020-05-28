@@ -86,6 +86,7 @@ func (c *Client) CreateExclusionsPreviewRequest(input *CreateExclusionsPreviewIn
 	}
 
 	req := c.newRequest(op, input, &CreateExclusionsPreviewOutput{})
+
 	return CreateExclusionsPreviewRequest{Request: req, Input: input, Copy: c.CreateExclusionsPreviewRequest}
 }
 

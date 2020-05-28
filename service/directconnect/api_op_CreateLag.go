@@ -232,6 +232,7 @@ func (c *Client) CreateLagRequest(input *CreateLagInput) CreateLagRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateLagOutput{})
+
 	return CreateLagRequest{Request: req, Input: input, Copy: c.CreateLagRequest}
 }
 

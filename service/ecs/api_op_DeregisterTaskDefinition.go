@@ -91,6 +91,7 @@ func (c *Client) DeregisterTaskDefinitionRequest(input *DeregisterTaskDefinition
 	}
 
 	req := c.newRequest(op, input, &DeregisterTaskDefinitionOutput{})
+
 	return DeregisterTaskDefinitionRequest{Request: req, Input: input, Copy: c.DeregisterTaskDefinitionRequest}
 }
 

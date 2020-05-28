@@ -142,6 +142,7 @@ func (c *Client) TagAttendeeRequest(input *TagAttendeeInput) TagAttendeeRequest 
 	req := c.newRequest(op, input, &TagAttendeeOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return TagAttendeeRequest{Request: req, Input: input, Copy: c.TagAttendeeRequest}
 }
 

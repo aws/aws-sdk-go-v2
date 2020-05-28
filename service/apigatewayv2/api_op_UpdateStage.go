@@ -328,6 +328,7 @@ func (c *Client) UpdateStageRequest(input *UpdateStageInput) UpdateStageRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateStageOutput{})
+
 	return UpdateStageRequest{Request: req, Input: input, Copy: c.UpdateStageRequest}
 }
 

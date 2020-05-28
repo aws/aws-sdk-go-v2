@@ -136,6 +136,7 @@ func (c *Client) DisassociateResourceSharePermissionRequest(input *DisassociateR
 	}
 
 	req := c.newRequest(op, input, &DisassociateResourceSharePermissionOutput{})
+
 	return DisassociateResourceSharePermissionRequest{Request: req, Input: input, Copy: c.DisassociateResourceSharePermissionRequest}
 }
 

@@ -135,6 +135,7 @@ func (c *Client) ModifyReplicationGroupShardConfigurationRequest(input *ModifyRe
 	}
 
 	req := c.newRequest(op, input, &ModifyReplicationGroupShardConfigurationOutput{})
+
 	return ModifyReplicationGroupShardConfigurationRequest{Request: req, Input: input, Copy: c.ModifyReplicationGroupShardConfigurationRequest}
 }
 

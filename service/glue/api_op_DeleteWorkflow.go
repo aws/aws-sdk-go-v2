@@ -79,6 +79,7 @@ func (c *Client) DeleteWorkflowRequest(input *DeleteWorkflowInput) DeleteWorkflo
 	}
 
 	req := c.newRequest(op, input, &DeleteWorkflowOutput{})
+
 	return DeleteWorkflowRequest{Request: req, Input: input, Copy: c.DeleteWorkflowRequest}
 }
 

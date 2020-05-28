@@ -111,6 +111,7 @@ func (c *Client) DescribeCacheRequest(input *DescribeCacheInput) DescribeCacheRe
 	}
 
 	req := c.newRequest(op, input, &DescribeCacheOutput{})
+
 	return DescribeCacheRequest{Request: req, Input: input, Copy: c.DescribeCacheRequest}
 }
 

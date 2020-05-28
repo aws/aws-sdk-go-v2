@@ -103,6 +103,7 @@ func (c *Client) DeleteRemediationExceptionsRequest(input *DeleteRemediationExce
 	}
 
 	req := c.newRequest(op, input, &DeleteRemediationExceptionsOutput{})
+
 	return DeleteRemediationExceptionsRequest{Request: req, Input: input, Copy: c.DeleteRemediationExceptionsRequest}
 }
 

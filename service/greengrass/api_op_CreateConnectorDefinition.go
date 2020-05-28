@@ -181,6 +181,7 @@ func (c *Client) CreateConnectorDefinitionRequest(input *CreateConnectorDefiniti
 	}
 
 	req := c.newRequest(op, input, &CreateConnectorDefinitionOutput{})
+
 	return CreateConnectorDefinitionRequest{Request: req, Input: input, Copy: c.CreateConnectorDefinitionRequest}
 }
 

@@ -180,6 +180,7 @@ func (c *Client) CreateResourceDefinitionRequest(input *CreateResourceDefinition
 	}
 
 	req := c.newRequest(op, input, &CreateResourceDefinitionOutput{})
+
 	return CreateResourceDefinitionRequest{Request: req, Input: input, Copy: c.CreateResourceDefinitionRequest}
 }
 

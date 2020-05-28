@@ -125,6 +125,7 @@ func (c *Client) DescribeDBParametersRequest(input *DescribeDBParametersInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeDBParametersOutput{})
+
 	return DescribeDBParametersRequest{Request: req, Input: input, Copy: c.DescribeDBParametersRequest}
 }
 

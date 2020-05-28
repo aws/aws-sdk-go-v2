@@ -78,6 +78,7 @@ func (c *Client) DescribeRetentionConfigurationsRequest(input *DescribeRetention
 	}
 
 	req := c.newRequest(op, input, &DescribeRetentionConfigurationsOutput{})
+
 	return DescribeRetentionConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeRetentionConfigurationsRequest}
 }
 

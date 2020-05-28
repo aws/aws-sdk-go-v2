@@ -4,6 +4,7 @@ package kendra
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -20,6 +21,12 @@ type CreateIndexInput struct {
 	// A description for the index.
 	Description *string `min:"1" type:"string"`
 
+	// The Amazon Kendra edition to use for the index. Choose DEVELOPER_EDITION
+	// for indexes intended for development, testing, or proof of concept. Use ENTERPRISE_EDITION
+	// for your production databases. Once you set the edition for an index, it
+	// can't be changed.
+	Edition IndexEdition `type:"string" enum:"true"`
+
 	// The name for the new index.
 	//
 	// Name is a required field
@@ -35,6 +42,10 @@ type CreateIndexInput struct {
 	// The identifier of the AWS KMS customer managed key (CMK) to use to encrypt
 	// data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration `type:"structure"`
+
+	// A list of key-value pairs that identify the index. You can use the tags to
+	// identify and organize your resources and to control access to resources.
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -68,6 +79,13 @@ func (s *CreateIndexInput) Validate() error {
 	if s.ServerSideEncryptionConfiguration != nil {
 		if err := s.ServerSideEncryptionConfiguration.Validate(); err != nil {
 			invalidParams.AddNested("ServerSideEncryptionConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -123,6 +141,7 @@ func (c *Client) CreateIndexRequest(input *CreateIndexInput) CreateIndexRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateIndexOutput{})
+
 	return CreateIndexRequest{Request: req, Input: input, Copy: c.CreateIndexRequest}
 }
 

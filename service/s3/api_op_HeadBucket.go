@@ -126,6 +126,7 @@ func (c *Client) HeadBucketRequest(input *HeadBucketInput) HeadBucketRequest {
 	req := c.newRequest(op, input, &HeadBucketOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return HeadBucketRequest{Request: req, Input: input, Copy: c.HeadBucketRequest}
 }
 

@@ -120,6 +120,7 @@ func (c *Client) ListBundlesRequest(input *ListBundlesInput) ListBundlesRequest 
 	}
 
 	req := c.newRequest(op, input, &ListBundlesOutput{})
+
 	return ListBundlesRequest{Request: req, Input: input, Copy: c.ListBundlesRequest}
 }
 

@@ -93,6 +93,7 @@ func (c *Client) ListOperationsRequest(input *ListOperationsInput) ListOperation
 	}
 
 	req := c.newRequest(op, input, &ListOperationsOutput{})
+
 	return ListOperationsRequest{Request: req, Input: input, Copy: c.ListOperationsRequest}
 }
 

@@ -200,6 +200,7 @@ func (c *Client) AllocateConnectionOnInterconnectRequest(input *AllocateConnecti
 	}
 
 	req := c.newRequest(op, input, &AllocateConnectionOnInterconnectOutput{})
+
 	return AllocateConnectionOnInterconnectRequest{Request: req, Input: input, Copy: c.AllocateConnectionOnInterconnectRequest}
 }
 

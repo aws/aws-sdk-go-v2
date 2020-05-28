@@ -103,6 +103,7 @@ func (c *Client) DisablePolicyTypeRequest(input *DisablePolicyTypeInput) Disable
 	}
 
 	req := c.newRequest(op, input, &DisablePolicyTypeOutput{})
+
 	return DisablePolicyTypeRequest{Request: req, Input: input, Copy: c.DisablePolicyTypeRequest}
 }
 

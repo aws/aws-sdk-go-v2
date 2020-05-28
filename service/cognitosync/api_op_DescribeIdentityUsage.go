@@ -130,6 +130,7 @@ func (c *Client) DescribeIdentityUsageRequest(input *DescribeIdentityUsageInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeIdentityUsageOutput{})
+
 	return DescribeIdentityUsageRequest{Request: req, Input: input, Copy: c.DescribeIdentityUsageRequest}
 }
 

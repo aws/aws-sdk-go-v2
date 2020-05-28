@@ -143,8 +143,8 @@ type UploadInput struct {
 	// S3 (for example, AES256, aws:kms).
 	ServerSideEncryption s3.ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string" enum:"true"`
 
-	// If you don't specify, Standard is the default storage class. Amazon S3 supports
-	// other storage classes.
+	// If you don't specify, S3 Standard is the default storage class. Amazon S3
+	// supports other storage classes.
 	StorageClass s3.StorageClass `location:"header" locationName:"x-amz-storage-class" type:"string" enum:"true"`
 
 	// The tag-set for the object. The tag-set must be encoded as URL Query parameters.

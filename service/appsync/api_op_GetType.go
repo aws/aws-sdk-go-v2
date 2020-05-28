@@ -133,6 +133,7 @@ func (c *Client) GetTypeRequest(input *GetTypeInput) GetTypeRequest {
 	}
 
 	req := c.newRequest(op, input, &GetTypeOutput{})
+
 	return GetTypeRequest{Request: req, Input: input, Copy: c.GetTypeRequest}
 }
 

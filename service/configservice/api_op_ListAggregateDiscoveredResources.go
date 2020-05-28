@@ -117,6 +117,7 @@ func (c *Client) ListAggregateDiscoveredResourcesRequest(input *ListAggregateDis
 	}
 
 	req := c.newRequest(op, input, &ListAggregateDiscoveredResourcesOutput{})
+
 	return ListAggregateDiscoveredResourcesRequest{Request: req, Input: input, Copy: c.ListAggregateDiscoveredResourcesRequest}
 }
 

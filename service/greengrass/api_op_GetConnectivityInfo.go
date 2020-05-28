@@ -115,6 +115,7 @@ func (c *Client) GetConnectivityInfoRequest(input *GetConnectivityInfoInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetConnectivityInfoOutput{})
+
 	return GetConnectivityInfoRequest{Request: req, Input: input, Copy: c.GetConnectivityInfoRequest}
 }
 

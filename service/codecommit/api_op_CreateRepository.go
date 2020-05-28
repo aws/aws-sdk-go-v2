@@ -99,6 +99,7 @@ func (c *Client) CreateRepositoryRequest(input *CreateRepositoryInput) CreateRep
 	}
 
 	req := c.newRequest(op, input, &CreateRepositoryOutput{})
+
 	return CreateRepositoryRequest{Request: req, Input: input, Copy: c.CreateRepositoryRequest}
 }
 

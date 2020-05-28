@@ -96,6 +96,7 @@ func (c *Client) DescribeNotebookInstanceLifecycleConfigRequest(input *DescribeN
 	}
 
 	req := c.newRequest(op, input, &DescribeNotebookInstanceLifecycleConfigOutput{})
+
 	return DescribeNotebookInstanceLifecycleConfigRequest{Request: req, Input: input, Copy: c.DescribeNotebookInstanceLifecycleConfigRequest}
 }
 

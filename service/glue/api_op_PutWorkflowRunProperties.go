@@ -99,6 +99,7 @@ func (c *Client) PutWorkflowRunPropertiesRequest(input *PutWorkflowRunProperties
 	}
 
 	req := c.newRequest(op, input, &PutWorkflowRunPropertiesOutput{})
+
 	return PutWorkflowRunPropertiesRequest{Request: req, Input: input, Copy: c.PutWorkflowRunPropertiesRequest}
 }
 

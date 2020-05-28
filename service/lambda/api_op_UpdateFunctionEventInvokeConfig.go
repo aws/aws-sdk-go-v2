@@ -219,6 +219,7 @@ func (c *Client) UpdateFunctionEventInvokeConfigRequest(input *UpdateFunctionEve
 	}
 
 	req := c.newRequest(op, input, &UpdateFunctionEventInvokeConfigOutput{})
+
 	return UpdateFunctionEventInvokeConfigRequest{Request: req, Input: input, Copy: c.UpdateFunctionEventInvokeConfigRequest}
 }
 

@@ -104,6 +104,7 @@ func (c *Client) UpdateServerEngineAttributesRequest(input *UpdateServerEngineAt
 	}
 
 	req := c.newRequest(op, input, &UpdateServerEngineAttributesOutput{})
+
 	return UpdateServerEngineAttributesRequest{Request: req, Input: input, Copy: c.UpdateServerEngineAttributesRequest}
 }
 

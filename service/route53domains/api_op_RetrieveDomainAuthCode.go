@@ -82,6 +82,7 @@ func (c *Client) RetrieveDomainAuthCodeRequest(input *RetrieveDomainAuthCodeInpu
 	}
 
 	req := c.newRequest(op, input, &RetrieveDomainAuthCodeOutput{})
+
 	return RetrieveDomainAuthCodeRequest{Request: req, Input: input, Copy: c.RetrieveDomainAuthCodeRequest}
 }
 

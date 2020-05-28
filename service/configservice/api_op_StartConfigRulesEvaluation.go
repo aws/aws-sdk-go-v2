@@ -100,6 +100,7 @@ func (c *Client) StartConfigRulesEvaluationRequest(input *StartConfigRulesEvalua
 	}
 
 	req := c.newRequest(op, input, &StartConfigRulesEvaluationOutput{})
+
 	return StartConfigRulesEvaluationRequest{Request: req, Input: input, Copy: c.StartConfigRulesEvaluationRequest}
 }
 

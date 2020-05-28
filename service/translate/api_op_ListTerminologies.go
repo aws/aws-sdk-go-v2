@@ -87,6 +87,7 @@ func (c *Client) ListTerminologiesRequest(input *ListTerminologiesInput) ListTer
 	}
 
 	req := c.newRequest(op, input, &ListTerminologiesOutput{})
+
 	return ListTerminologiesRequest{Request: req, Input: input, Copy: c.ListTerminologiesRequest}
 }
 

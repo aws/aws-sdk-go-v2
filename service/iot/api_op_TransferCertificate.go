@@ -143,6 +143,7 @@ func (c *Client) TransferCertificateRequest(input *TransferCertificateInput) Tra
 	}
 
 	req := c.newRequest(op, input, &TransferCertificateOutput{})
+
 	return TransferCertificateRequest{Request: req, Input: input, Copy: c.TransferCertificateRequest}
 }
 

@@ -58,6 +58,7 @@ func (c *Client) DisableAWSOrganizationsAccessRequest(input *DisableAWSOrganizat
 	}
 
 	req := c.newRequest(op, input, &DisableAWSOrganizationsAccessOutput{})
+
 	return DisableAWSOrganizationsAccessRequest{Request: req, Input: input, Copy: c.DisableAWSOrganizationsAccessRequest}
 }
 

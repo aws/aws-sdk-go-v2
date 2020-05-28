@@ -272,6 +272,7 @@ func (c *Client) ListRecordsRequest(input *ListRecordsInput) ListRecordsRequest 
 	}
 
 	req := c.newRequest(op, input, &ListRecordsOutput{})
+
 	return ListRecordsRequest{Request: req, Input: input, Copy: c.ListRecordsRequest}
 }
 

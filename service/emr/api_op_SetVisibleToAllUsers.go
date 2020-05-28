@@ -98,6 +98,7 @@ func (c *Client) SetVisibleToAllUsersRequest(input *SetVisibleToAllUsersInput) S
 	req := c.newRequest(op, input, &SetVisibleToAllUsersOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetVisibleToAllUsersRequest{Request: req, Input: input, Copy: c.SetVisibleToAllUsersRequest}
 }
 

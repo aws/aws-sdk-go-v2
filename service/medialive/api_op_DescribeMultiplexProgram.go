@@ -137,6 +137,7 @@ func (c *Client) DescribeMultiplexProgramRequest(input *DescribeMultiplexProgram
 	}
 
 	req := c.newRequest(op, input, &DescribeMultiplexProgramOutput{})
+
 	return DescribeMultiplexProgramRequest{Request: req, Input: input, Copy: c.DescribeMultiplexProgramRequest}
 }
 

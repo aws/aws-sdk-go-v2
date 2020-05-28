@@ -88,6 +88,7 @@ func (c *Client) DeleteVirtualMFADeviceRequest(input *DeleteVirtualMFADeviceInpu
 	req := c.newRequest(op, input, &DeleteVirtualMFADeviceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteVirtualMFADeviceRequest{Request: req, Input: input, Copy: c.DeleteVirtualMFADeviceRequest}
 }
 

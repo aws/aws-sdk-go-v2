@@ -82,6 +82,7 @@ func (c *Client) GetResolverEndpointRequest(input *GetResolverEndpointInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetResolverEndpointOutput{})
+
 	return GetResolverEndpointRequest{Request: req, Input: input, Copy: c.GetResolverEndpointRequest}
 }
 

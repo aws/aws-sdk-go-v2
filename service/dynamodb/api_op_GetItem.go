@@ -210,6 +210,7 @@ func (c *Client) GetItemRequest(input *GetItemInput) GetItemRequest {
 			Fn:   de.Handler,
 		})
 	}
+
 	return GetItemRequest{Request: req, Input: input, Copy: c.GetItemRequest}
 }
 

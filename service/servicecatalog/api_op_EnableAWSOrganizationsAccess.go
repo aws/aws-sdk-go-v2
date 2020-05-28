@@ -61,6 +61,7 @@ func (c *Client) EnableAWSOrganizationsAccessRequest(input *EnableAWSOrganizatio
 	}
 
 	req := c.newRequest(op, input, &EnableAWSOrganizationsAccessOutput{})
+
 	return EnableAWSOrganizationsAccessRequest{Request: req, Input: input, Copy: c.EnableAWSOrganizationsAccessRequest}
 }
 

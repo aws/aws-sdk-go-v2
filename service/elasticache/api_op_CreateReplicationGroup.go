@@ -165,10 +165,10 @@ type CreateReplicationGroupInput struct {
 	//
 	// If you're creating a Redis (cluster mode disabled) or a Redis (cluster mode
 	// enabled) replication group, you can use this parameter to individually configure
-	// each node group (shard), or you can omit this parameter. However, when seeding
-	// a Redis (cluster mode enabled) cluster from a S3 rdb file, you must configure
-	// each node group (shard) using this parameter because you must specify the
-	// slots for each node group.
+	// each node group (shard), or you can omit this parameter. However, it is required
+	// when seeding a Redis (cluster mode enabled) cluster from a S3 rdb file. You
+	// must configure each node group (shard) using this parameter because you must
+	// specify the slots for each node group.
 	NodeGroupConfiguration []NodeGroupConfiguration `locationNameList:"NodeGroupConfiguration" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service
@@ -177,7 +177,7 @@ type CreateReplicationGroupInput struct {
 	// The Amazon SNS topic owner must be the same as the cluster owner.
 	NotificationTopicArn *string `type:"string"`
 
-	// The number of clusters this replication group initially has.
+	// The number of nodes in the cluster.
 	//
 	// This parameter is not used if there is more than one node group (shard).
 	// You should use ReplicasPerNodeGroup instead.
@@ -434,6 +434,7 @@ func (c *Client) CreateReplicationGroupRequest(input *CreateReplicationGroupInpu
 	}
 
 	req := c.newRequest(op, input, &CreateReplicationGroupOutput{})
+
 	return CreateReplicationGroupRequest{Request: req, Input: input, Copy: c.CreateReplicationGroupRequest}
 }
 

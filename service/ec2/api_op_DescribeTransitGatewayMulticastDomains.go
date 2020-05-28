@@ -107,6 +107,7 @@ func (c *Client) DescribeTransitGatewayMulticastDomainsRequest(input *DescribeTr
 	}
 
 	req := c.newRequest(op, input, &DescribeTransitGatewayMulticastDomainsOutput{})
+
 	return DescribeTransitGatewayMulticastDomainsRequest{Request: req, Input: input, Copy: c.DescribeTransitGatewayMulticastDomainsRequest}
 }
 

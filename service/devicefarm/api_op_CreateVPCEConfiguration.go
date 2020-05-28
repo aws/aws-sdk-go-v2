@@ -101,6 +101,7 @@ func (c *Client) CreateVPCEConfigurationRequest(input *CreateVPCEConfigurationIn
 	}
 
 	req := c.newRequest(op, input, &CreateVPCEConfigurationOutput{})
+
 	return CreateVPCEConfigurationRequest{Request: req, Input: input, Copy: c.CreateVPCEConfigurationRequest}
 }
 

@@ -77,6 +77,8 @@ type ClientAPI interface {
 
 	GetBootstrapBrokersRequest(*kafka.GetBootstrapBrokersInput) kafka.GetBootstrapBrokersRequest
 
+	GetCompatibleKafkaVersionsRequest(*kafka.GetCompatibleKafkaVersionsInput) kafka.GetCompatibleKafkaVersionsRequest
+
 	ListClusterOperationsRequest(*kafka.ListClusterOperationsInput) kafka.ListClusterOperationsRequest
 
 	ListClustersRequest(*kafka.ListClustersInput) kafka.ListClustersRequest
@@ -100,6 +102,8 @@ type ClientAPI interface {
 	UpdateBrokerStorageRequest(*kafka.UpdateBrokerStorageInput) kafka.UpdateBrokerStorageRequest
 
 	UpdateClusterConfigurationRequest(*kafka.UpdateClusterConfigurationInput) kafka.UpdateClusterConfigurationRequest
+
+	UpdateClusterKafkaVersionRequest(*kafka.UpdateClusterKafkaVersionInput) kafka.UpdateClusterKafkaVersionRequest
 
 	UpdateMonitoringRequest(*kafka.UpdateMonitoringInput) kafka.UpdateMonitoringRequest
 }

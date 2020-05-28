@@ -32,7 +32,7 @@ type CreateWebACLInput struct {
 	// after you create the WebACL.
 	//
 	// MetricName is a required field
-	MetricName *string `type:"string" required:"true"`
+	MetricName *string `min:"1" type:"string" required:"true"`
 
 	// A friendly name or description of the WebACL. You can't change Name after
 	// you create the WebACL.
@@ -65,6 +65,9 @@ func (s *CreateWebACLInput) Validate() error {
 
 	if s.MetricName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
+	}
+	if s.MetricName != nil && len(*s.MetricName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MetricName", 1))
 	}
 
 	if s.Name == nil {
@@ -116,6 +119,16 @@ const opCreateWebACL = "CreateWebACL"
 
 // CreateWebACLRequest returns a request value for making API operation for
 // AWS WAF Regional.
+//
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
 //
 // Creates a WebACL, which contains the Rules that identify the CloudFront web
 // requests that you want to allow, block, or count. AWS WAF evaluates Rules
@@ -169,6 +182,7 @@ func (c *Client) CreateWebACLRequest(input *CreateWebACLInput) CreateWebACLReque
 	}
 
 	req := c.newRequest(op, input, &CreateWebACLOutput{})
+
 	return CreateWebACLRequest{Request: req, Input: input, Copy: c.CreateWebACLRequest}
 }
 

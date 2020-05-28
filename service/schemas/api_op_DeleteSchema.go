@@ -106,6 +106,7 @@ func (c *Client) DeleteSchemaRequest(input *DeleteSchemaInput) DeleteSchemaReque
 	req := c.newRequest(op, input, &DeleteSchemaOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteSchemaRequest{Request: req, Input: input, Copy: c.DeleteSchemaRequest}
 }
 

@@ -165,6 +165,7 @@ func (c *Client) StartSentimentDetectionJobRequest(input *StartSentimentDetectio
 	}
 
 	req := c.newRequest(op, input, &StartSentimentDetectionJobOutput{})
+
 	return StartSentimentDetectionJobRequest{Request: req, Input: input, Copy: c.StartSentimentDetectionJobRequest}
 }
 

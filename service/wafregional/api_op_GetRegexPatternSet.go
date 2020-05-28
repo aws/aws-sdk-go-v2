@@ -60,6 +60,16 @@ const opGetRegexPatternSet = "GetRegexPatternSet"
 // GetRegexPatternSetRequest returns a request value for making API operation for
 // AWS WAF Regional.
 //
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Returns the RegexPatternSet specified by RegexPatternSetId.
 //
 //    // Example sending a request using GetRegexPatternSetRequest.
@@ -82,6 +92,7 @@ func (c *Client) GetRegexPatternSetRequest(input *GetRegexPatternSetInput) GetRe
 	}
 
 	req := c.newRequest(op, input, &GetRegexPatternSetOutput{})
+
 	return GetRegexPatternSetRequest{Request: req, Input: input, Copy: c.GetRegexPatternSetRequest}
 }
 

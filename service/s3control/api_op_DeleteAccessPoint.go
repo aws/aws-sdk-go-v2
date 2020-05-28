@@ -114,6 +114,7 @@ func (c *Client) DeleteAccessPointRequest(input *DeleteAccessPointInput) DeleteA
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
+
 	return DeleteAccessPointRequest{Request: req, Input: input, Copy: c.DeleteAccessPointRequest}
 }
 

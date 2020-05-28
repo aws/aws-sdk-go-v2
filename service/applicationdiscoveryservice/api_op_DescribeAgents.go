@@ -108,6 +108,7 @@ func (c *Client) DescribeAgentsRequest(input *DescribeAgentsInput) DescribeAgent
 	}
 
 	req := c.newRequest(op, input, &DescribeAgentsOutput{})
+
 	return DescribeAgentsRequest{Request: req, Input: input, Copy: c.DescribeAgentsRequest}
 }
 

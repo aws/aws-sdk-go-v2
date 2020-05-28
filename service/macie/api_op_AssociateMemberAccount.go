@@ -14,8 +14,8 @@ import (
 type AssociateMemberAccountInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the AWS account that you want to associate with Amazon Macie as
-	// a member account.
+	// The ID of the AWS account that you want to associate with Amazon Macie Classic
+	// as a member account.
 	//
 	// MemberAccountId is a required field
 	MemberAccountId *string `locationName:"memberAccountId" type:"string" required:"true"`
@@ -54,7 +54,8 @@ const opAssociateMemberAccount = "AssociateMemberAccount"
 // AssociateMemberAccountRequest returns a request value for making API operation for
 // Amazon Macie.
 //
-// Associates a specified AWS account with Amazon Macie as a member account.
+// Associates a specified AWS account with Amazon Macie Classic as a member
+// account.
 //
 //    // Example sending a request using AssociateMemberAccountRequest.
 //    req := client.AssociateMemberAccountRequest(params)
@@ -78,6 +79,7 @@ func (c *Client) AssociateMemberAccountRequest(input *AssociateMemberAccountInpu
 	req := c.newRequest(op, input, &AssociateMemberAccountOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AssociateMemberAccountRequest{Request: req, Input: input, Copy: c.AssociateMemberAccountRequest}
 }
 

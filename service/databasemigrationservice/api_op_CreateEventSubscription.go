@@ -133,6 +133,7 @@ func (c *Client) CreateEventSubscriptionRequest(input *CreateEventSubscriptionIn
 	}
 
 	req := c.newRequest(op, input, &CreateEventSubscriptionOutput{})
+
 	return CreateEventSubscriptionRequest{Request: req, Input: input, Copy: c.CreateEventSubscriptionRequest}
 }
 

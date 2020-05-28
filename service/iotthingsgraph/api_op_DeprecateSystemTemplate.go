@@ -77,6 +77,7 @@ func (c *Client) DeprecateSystemTemplateRequest(input *DeprecateSystemTemplateIn
 	}
 
 	req := c.newRequest(op, input, &DeprecateSystemTemplateOutput{})
+
 	return DeprecateSystemTemplateRequest{Request: req, Input: input, Copy: c.DeprecateSystemTemplateRequest}
 }
 

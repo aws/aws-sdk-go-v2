@@ -90,6 +90,7 @@ func (c *Client) UpdateRuleMetadataRequest(input *UpdateRuleMetadataInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateRuleMetadataOutput{})
+
 	return UpdateRuleMetadataRequest{Request: req, Input: input, Copy: c.UpdateRuleMetadataRequest}
 }
 

@@ -101,6 +101,7 @@ func (c *Client) ListStackInstancesForProvisionedProductRequest(input *ListStack
 	}
 
 	req := c.newRequest(op, input, &ListStackInstancesForProvisionedProductOutput{})
+
 	return ListStackInstancesForProvisionedProductRequest{Request: req, Input: input, Copy: c.ListStackInstancesForProvisionedProductRequest}
 }
 

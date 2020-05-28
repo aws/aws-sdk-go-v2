@@ -103,6 +103,7 @@ func (c *Client) ApproveAssignmentRequest(input *ApproveAssignmentInput) Approve
 	}
 
 	req := c.newRequest(op, input, &ApproveAssignmentOutput{})
+
 	return ApproveAssignmentRequest{Request: req, Input: input, Copy: c.ApproveAssignmentRequest}
 }
 

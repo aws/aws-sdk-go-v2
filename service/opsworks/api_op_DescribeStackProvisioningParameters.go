@@ -85,6 +85,7 @@ func (c *Client) DescribeStackProvisioningParametersRequest(input *DescribeStack
 	}
 
 	req := c.newRequest(op, input, &DescribeStackProvisioningParametersOutput{})
+
 	return DescribeStackProvisioningParametersRequest{Request: req, Input: input, Copy: c.DescribeStackProvisioningParametersRequest}
 }
 

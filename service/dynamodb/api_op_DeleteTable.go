@@ -120,6 +120,7 @@ func (c *Client) DeleteTableRequest(input *DeleteTableInput) DeleteTableRequest 
 			Fn:   de.Handler,
 		})
 	}
+
 	return DeleteTableRequest{Request: req, Input: input, Copy: c.DeleteTableRequest}
 }
 

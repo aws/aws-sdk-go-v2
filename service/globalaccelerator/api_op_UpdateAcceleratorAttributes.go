@@ -99,6 +99,7 @@ func (c *Client) UpdateAcceleratorAttributesRequest(input *UpdateAcceleratorAttr
 	}
 
 	req := c.newRequest(op, input, &UpdateAcceleratorAttributesOutput{})
+
 	return UpdateAcceleratorAttributesRequest{Request: req, Input: input, Copy: c.UpdateAcceleratorAttributesRequest}
 }
 

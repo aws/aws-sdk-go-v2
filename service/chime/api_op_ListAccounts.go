@@ -152,6 +152,7 @@ func (c *Client) ListAccountsRequest(input *ListAccountsInput) ListAccountsReque
 	}
 
 	req := c.newRequest(op, input, &ListAccountsOutput{})
+
 	return ListAccountsRequest{Request: req, Input: input, Copy: c.ListAccountsRequest}
 }
 

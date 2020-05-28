@@ -117,6 +117,7 @@ func (c *Client) InviteAccountToOrganizationRequest(input *InviteAccountToOrgani
 	}
 
 	req := c.newRequest(op, input, &InviteAccountToOrganizationOutput{})
+
 	return InviteAccountToOrganizationRequest{Request: req, Input: input, Copy: c.InviteAccountToOrganizationRequest}
 }
 

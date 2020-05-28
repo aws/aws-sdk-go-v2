@@ -96,6 +96,7 @@ func (c *Client) DeleteCACertificateRequest(input *DeleteCACertificateInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteCACertificateOutput{})
+
 	return DeleteCACertificateRequest{Request: req, Input: input, Copy: c.DeleteCACertificateRequest}
 }
 

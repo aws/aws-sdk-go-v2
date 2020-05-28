@@ -122,6 +122,7 @@ func (c *Client) ListServiceQuotasRequest(input *ListServiceQuotasInput) ListSer
 	}
 
 	req := c.newRequest(op, input, &ListServiceQuotasOutput{})
+
 	return ListServiceQuotasRequest{Request: req, Input: input, Copy: c.ListServiceQuotasRequest}
 }
 

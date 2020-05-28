@@ -109,6 +109,7 @@ func (c *Client) UpdateLicenseConfigurationRequest(input *UpdateLicenseConfigura
 	}
 
 	req := c.newRequest(op, input, &UpdateLicenseConfigurationOutput{})
+
 	return UpdateLicenseConfigurationRequest{Request: req, Input: input, Copy: c.UpdateLicenseConfigurationRequest}
 }
 

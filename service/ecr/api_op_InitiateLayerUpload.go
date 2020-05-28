@@ -69,12 +69,12 @@ const opInitiateLayerUpload = "InitiateLayerUpload"
 // Notifies Amazon ECR that you intend to upload an image layer.
 //
 // When an image is pushed, the InitiateLayerUpload API is called once per image
-// layer that has not already been uploaded. Whether an image layer has been
-// uploaded before is determined by the BatchCheckLayerAvailability API action.
+// layer that has not already been uploaded. Whether or not an image layer has
+// been uploaded is determined by the BatchCheckLayerAvailability API action.
 //
-// This operation is used by the Amazon ECR proxy, and it is not intended for
-// general use by customers for pulling and pushing images. In most cases, you
-// should use the docker CLI to pull, tag, and push images.
+// This operation is used by the Amazon ECR proxy and is not generally used
+// by customers for pulling and pushing images. In most cases, you should use
+// the docker CLI to pull, tag, and push images.
 //
 //    // Example sending a request using InitiateLayerUploadRequest.
 //    req := client.InitiateLayerUploadRequest(params)
@@ -96,6 +96,7 @@ func (c *Client) InitiateLayerUploadRequest(input *InitiateLayerUploadInput) Ini
 	}
 
 	req := c.newRequest(op, input, &InitiateLayerUploadOutput{})
+
 	return InitiateLayerUploadRequest{Request: req, Input: input, Copy: c.InitiateLayerUploadRequest}
 }
 

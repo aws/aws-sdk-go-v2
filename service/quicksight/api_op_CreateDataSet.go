@@ -344,6 +344,7 @@ func (c *Client) CreateDataSetRequest(input *CreateDataSetInput) CreateDataSetRe
 	}
 
 	req := c.newRequest(op, input, &CreateDataSetOutput{})
+
 	return CreateDataSetRequest{Request: req, Input: input, Copy: c.CreateDataSetRequest}
 }
 

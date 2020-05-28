@@ -77,6 +77,7 @@ func (c *Client) DeleteStreamProcessorRequest(input *DeleteStreamProcessorInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteStreamProcessorOutput{})
+
 	return DeleteStreamProcessorRequest{Request: req, Input: input, Copy: c.DeleteStreamProcessorRequest}
 }
 

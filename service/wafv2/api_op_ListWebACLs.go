@@ -112,6 +112,7 @@ func (c *Client) ListWebACLsRequest(input *ListWebACLsInput) ListWebACLsRequest 
 	}
 
 	req := c.newRequest(op, input, &ListWebACLsOutput{})
+
 	return ListWebACLsRequest{Request: req, Input: input, Copy: c.ListWebACLsRequest}
 }
 

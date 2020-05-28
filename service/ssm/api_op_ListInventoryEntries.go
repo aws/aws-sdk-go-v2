@@ -130,6 +130,7 @@ func (c *Client) ListInventoryEntriesRequest(input *ListInventoryEntriesInput) L
 	}
 
 	req := c.newRequest(op, input, &ListInventoryEntriesOutput{})
+
 	return ListInventoryEntriesRequest{Request: req, Input: input, Copy: c.ListInventoryEntriesRequest}
 }
 

@@ -99,7 +99,7 @@ const opDeletePublicAccessBlock = "DeletePublicAccessBlock"
 // Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
 //
-// The following operations are related to DeleteBucketMetricsConfiguration:
+// The following operations are related to DeletePublicAccessBlock:
 //
 //    * Using Amazon S3 Block Public Access (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
 //
@@ -131,6 +131,7 @@ func (c *Client) DeletePublicAccessBlockRequest(input *DeletePublicAccessBlockIn
 	req := c.newRequest(op, input, &DeletePublicAccessBlockOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeletePublicAccessBlockRequest{Request: req, Input: input, Copy: c.DeletePublicAccessBlockRequest}
 }
 

@@ -104,6 +104,7 @@ func (c *Client) AssociateServiceRoleToAccountRequest(input *AssociateServiceRol
 	}
 
 	req := c.newRequest(op, input, &AssociateServiceRoleToAccountOutput{})
+
 	return AssociateServiceRoleToAccountRequest{Request: req, Input: input, Copy: c.AssociateServiceRoleToAccountRequest}
 }
 

@@ -100,6 +100,7 @@ func (c *Client) DeleteSigningCertificateRequest(input *DeleteSigningCertificate
 	req := c.newRequest(op, input, &DeleteSigningCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteSigningCertificateRequest{Request: req, Input: input, Copy: c.DeleteSigningCertificateRequest}
 }
 

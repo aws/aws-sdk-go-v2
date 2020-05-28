@@ -114,6 +114,7 @@ func (c *Client) AssociateSigninDelegateGroupsWithAccountRequest(input *Associat
 	}
 
 	req := c.newRequest(op, input, &AssociateSigninDelegateGroupsWithAccountOutput{})
+
 	return AssociateSigninDelegateGroupsWithAccountRequest{Request: req, Input: input, Copy: c.AssociateSigninDelegateGroupsWithAccountRequest}
 }
 

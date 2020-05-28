@@ -85,6 +85,7 @@ func (c *Client) DeleteUserPermissionsBoundaryRequest(input *DeleteUserPermissio
 	req := c.newRequest(op, input, &DeleteUserPermissionsBoundaryOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteUserPermissionsBoundaryRequest{Request: req, Input: input, Copy: c.DeleteUserPermissionsBoundaryRequest}
 }
 

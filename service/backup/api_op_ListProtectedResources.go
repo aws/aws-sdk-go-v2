@@ -138,6 +138,7 @@ func (c *Client) ListProtectedResourcesRequest(input *ListProtectedResourcesInpu
 	}
 
 	req := c.newRequest(op, input, &ListProtectedResourcesOutput{})
+
 	return ListProtectedResourcesRequest{Request: req, Input: input, Copy: c.ListProtectedResourcesRequest}
 }
 

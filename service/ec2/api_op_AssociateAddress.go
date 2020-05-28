@@ -124,6 +124,7 @@ func (c *Client) AssociateAddressRequest(input *AssociateAddressInput) Associate
 	}
 
 	req := c.newRequest(op, input, &AssociateAddressOutput{})
+
 	return AssociateAddressRequest{Request: req, Input: input, Copy: c.AssociateAddressRequest}
 }
 

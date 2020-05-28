@@ -21,7 +21,7 @@ type DescribeOpsItemsInput struct {
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string `type:"string"`
 
-	// One or more filters to limit the reponse.
+	// One or more filters to limit the response.
 	//
 	//    * Key: CreatedTime Operations: GreaterThan, LessThan
 	//
@@ -102,13 +102,13 @@ const opDescribeOpsItems = "DescribeOpsItems"
 //
 // Query a set of OpsItems. You must have permission in AWS Identity and Access
 // Management (IAM) to query a list of OpsItems. For more information, see Getting
-// Started with OpsCenter (http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html)
+// started with OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html)
 // in the AWS Systems Manager User Guide.
 //
 // Operations engineers and IT professionals use OpsCenter to view, investigate,
 // and remediate operational issues impacting the performance and health of
 // their AWS resources. For more information, see AWS Systems Manager OpsCenter
-// (http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html)
+// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html)
 // in the AWS Systems Manager User Guide.
 //
 //    // Example sending a request using DescribeOpsItemsRequest.
@@ -131,6 +131,7 @@ func (c *Client) DescribeOpsItemsRequest(input *DescribeOpsItemsInput) DescribeO
 	}
 
 	req := c.newRequest(op, input, &DescribeOpsItemsOutput{})
+
 	return DescribeOpsItemsRequest{Request: req, Input: input, Copy: c.DescribeOpsItemsRequest}
 }
 

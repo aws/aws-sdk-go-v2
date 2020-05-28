@@ -100,6 +100,7 @@ func (c *Client) UpdateDeviceStateRequest(input *UpdateDeviceStateInput) UpdateD
 	}
 
 	req := c.newRequest(op, input, &UpdateDeviceStateOutput{})
+
 	return UpdateDeviceStateRequest{Request: req, Input: input, Copy: c.UpdateDeviceStateRequest}
 }
 

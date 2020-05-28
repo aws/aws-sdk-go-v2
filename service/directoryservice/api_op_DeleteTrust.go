@@ -83,6 +83,7 @@ func (c *Client) DeleteTrustRequest(input *DeleteTrustInput) DeleteTrustRequest 
 	}
 
 	req := c.newRequest(op, input, &DeleteTrustOutput{})
+
 	return DeleteTrustRequest{Request: req, Input: input, Copy: c.DeleteTrustRequest}
 }
 

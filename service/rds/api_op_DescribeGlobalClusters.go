@@ -124,6 +124,7 @@ func (c *Client) DescribeGlobalClustersRequest(input *DescribeGlobalClustersInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeGlobalClustersOutput{})
+
 	return DescribeGlobalClustersRequest{Request: req, Input: input, Copy: c.DescribeGlobalClustersRequest}
 }
 

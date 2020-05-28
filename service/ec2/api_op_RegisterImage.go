@@ -184,6 +184,7 @@ func (c *Client) RegisterImageRequest(input *RegisterImageInput) RegisterImageRe
 	}
 
 	req := c.newRequest(op, input, &RegisterImageOutput{})
+
 	return RegisterImageRequest{Request: req, Input: input, Copy: c.RegisterImageRequest}
 }
 

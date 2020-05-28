@@ -91,7 +91,8 @@ type DescribeAppOutput struct {
 	// The timestamp of the last user's activity.
 	LastUserActivityTimestamp *time.Time `type:"timestamp"`
 
-	// The instance type and quantity.
+	// The instance type and the Amazon Resource Name (ARN) of the SageMaker image
+	// created on the instance.
 	ResourceSpec *ResourceSpec `type:"structure"`
 
 	// The status.
@@ -133,6 +134,7 @@ func (c *Client) DescribeAppRequest(input *DescribeAppInput) DescribeAppRequest 
 	}
 
 	req := c.newRequest(op, input, &DescribeAppOutput{})
+
 	return DescribeAppRequest{Request: req, Input: input, Copy: c.DescribeAppRequest}
 }
 

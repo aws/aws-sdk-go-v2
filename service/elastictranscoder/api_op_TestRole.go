@@ -182,6 +182,7 @@ func (c *Client) TestRoleRequest(input *TestRoleInput) TestRoleRequest {
 	}
 
 	req := c.newRequest(op, input, &TestRoleOutput{})
+
 	return TestRoleRequest{Request: req, Input: input, Copy: c.TestRoleRequest}
 }
 

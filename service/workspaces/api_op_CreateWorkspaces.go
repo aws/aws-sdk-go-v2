@@ -96,6 +96,7 @@ func (c *Client) CreateWorkspacesRequest(input *CreateWorkspacesInput) CreateWor
 	}
 
 	req := c.newRequest(op, input, &CreateWorkspacesOutput{})
+
 	return CreateWorkspacesRequest{Request: req, Input: input, Copy: c.CreateWorkspacesRequest}
 }
 

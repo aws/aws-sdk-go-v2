@@ -124,6 +124,7 @@ func (c *Client) CreatePhoneNumberOrderRequest(input *CreatePhoneNumberOrderInpu
 	}
 
 	req := c.newRequest(op, input, &CreatePhoneNumberOrderOutput{})
+
 	return CreatePhoneNumberOrderRequest{Request: req, Input: input, Copy: c.CreatePhoneNumberOrderRequest}
 }
 

@@ -91,6 +91,7 @@ func (c *Client) ListAllowedNodeTypeModificationsRequest(input *ListAllowedNodeT
 	}
 
 	req := c.newRequest(op, input, &ListAllowedNodeTypeModificationsOutput{})
+
 	return ListAllowedNodeTypeModificationsRequest{Request: req, Input: input, Copy: c.ListAllowedNodeTypeModificationsRequest}
 }
 

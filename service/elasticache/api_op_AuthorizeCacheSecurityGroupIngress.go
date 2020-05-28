@@ -109,6 +109,7 @@ func (c *Client) AuthorizeCacheSecurityGroupIngressRequest(input *AuthorizeCache
 	}
 
 	req := c.newRequest(op, input, &AuthorizeCacheSecurityGroupIngressOutput{})
+
 	return AuthorizeCacheSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.AuthorizeCacheSecurityGroupIngressRequest}
 }
 

@@ -92,6 +92,7 @@ func (c *Client) DescribeMigrationTaskRequest(input *DescribeMigrationTaskInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeMigrationTaskOutput{})
+
 	return DescribeMigrationTaskRequest{Request: req, Input: input, Copy: c.DescribeMigrationTaskRequest}
 }
 

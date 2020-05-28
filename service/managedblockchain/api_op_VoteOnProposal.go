@@ -147,6 +147,7 @@ func (c *Client) VoteOnProposalRequest(input *VoteOnProposalInput) VoteOnProposa
 	}
 
 	req := c.newRequest(op, input, &VoteOnProposalOutput{})
+
 	return VoteOnProposalRequest{Request: req, Input: input, Copy: c.VoteOnProposalRequest}
 }
 

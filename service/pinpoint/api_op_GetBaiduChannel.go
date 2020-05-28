@@ -103,6 +103,7 @@ func (c *Client) GetBaiduChannelRequest(input *GetBaiduChannelInput) GetBaiduCha
 	}
 
 	req := c.newRequest(op, input, &GetBaiduChannelOutput{})
+
 	return GetBaiduChannelRequest{Request: req, Input: input, Copy: c.GetBaiduChannelRequest}
 }
 

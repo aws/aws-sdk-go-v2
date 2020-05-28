@@ -87,6 +87,7 @@ func (c *Client) GetRepositoryRequest(input *GetRepositoryInput) GetRepositoryRe
 	}
 
 	req := c.newRequest(op, input, &GetRepositoryOutput{})
+
 	return GetRepositoryRequest{Request: req, Input: input, Copy: c.GetRepositoryRequest}
 }
 

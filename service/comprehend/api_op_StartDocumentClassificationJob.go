@@ -169,6 +169,7 @@ func (c *Client) StartDocumentClassificationJobRequest(input *StartDocumentClass
 	}
 
 	req := c.newRequest(op, input, &StartDocumentClassificationJobOutput{})
+
 	return StartDocumentClassificationJobRequest{Request: req, Input: input, Copy: c.StartDocumentClassificationJobRequest}
 }
 

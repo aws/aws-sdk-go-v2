@@ -107,6 +107,7 @@ func (c *Client) PutConfigurationSetTrackingOptionsRequest(input *PutConfigurati
 	}
 
 	req := c.newRequest(op, input, &PutConfigurationSetTrackingOptionsOutput{})
+
 	return PutConfigurationSetTrackingOptionsRequest{Request: req, Input: input, Copy: c.PutConfigurationSetTrackingOptionsRequest}
 }
 

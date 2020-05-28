@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -108,6 +109,13 @@ func (s *CreateJobInput) Validate() error {
 	if s.PresignedUrlConfig != nil {
 		if err := s.PresignedUrlConfig.Validate(); err != nil {
 			invalidParams.AddNested("PresignedUrlConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -268,6 +276,7 @@ func (c *Client) CreateJobRequest(input *CreateJobInput) CreateJobRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateJobOutput{})
+
 	return CreateJobRequest{Request: req, Input: input, Copy: c.CreateJobRequest}
 }
 

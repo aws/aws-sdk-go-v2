@@ -145,6 +145,7 @@ func (c *Client) GetDatasetContentRequest(input *GetDatasetContentInput) GetData
 	}
 
 	req := c.newRequest(op, input, &GetDatasetContentOutput{})
+
 	return GetDatasetContentRequest{Request: req, Input: input, Copy: c.GetDatasetContentRequest}
 }
 

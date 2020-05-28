@@ -98,6 +98,8 @@ type ClientAPI interface {
 
 	DeleteGitHubAccountTokenRequest(*codedeploy.DeleteGitHubAccountTokenInput) codedeploy.DeleteGitHubAccountTokenRequest
 
+	DeleteResourcesByExternalIdRequest(*codedeploy.DeleteResourcesByExternalIdInput) codedeploy.DeleteResourcesByExternalIdRequest
+
 	DeregisterOnPremisesInstanceRequest(*codedeploy.DeregisterOnPremisesInstanceInput) codedeploy.DeregisterOnPremisesInstanceRequest
 
 	GetApplicationRequest(*codedeploy.GetApplicationInput) codedeploy.GetApplicationRequest

@@ -82,7 +82,7 @@ const opRecordLifecycleActionHeartbeat = "RecordLifecycleActionHeartbeat"
 //
 // Records a heartbeat for the lifecycle action associated with the specified
 // token or instance. This extends the timeout by the length of time defined
-// using PutLifecycleHook.
+// using the PutLifecycleHook API call.
 //
 // This step is a part of the procedure for adding a lifecycle hook to an Auto
 // Scaling group:
@@ -126,6 +126,7 @@ func (c *Client) RecordLifecycleActionHeartbeatRequest(input *RecordLifecycleAct
 	}
 
 	req := c.newRequest(op, input, &RecordLifecycleActionHeartbeatOutput{})
+
 	return RecordLifecycleActionHeartbeatRequest{Request: req, Input: input, Copy: c.RecordLifecycleActionHeartbeatRequest}
 }
 

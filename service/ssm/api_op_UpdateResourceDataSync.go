@@ -22,10 +22,7 @@ type UpdateResourceDataSyncInput struct {
 	// SyncSource is a required field
 	SyncSource *ResourceDataSyncSource `type:"structure" required:"true"`
 
-	// The type of resource data sync. If SyncType is SyncToDestination, then the
-	// resource data sync synchronizes data to an Amazon S3 bucket. If the SyncType
-	// is SyncFromSource then the resource data sync synchronizes data from AWS
-	// Organizations or from multiple AWS Regions.
+	// The type of resource data sync. The supported SyncType is SyncFromSource.
 	//
 	// SyncType is a required field
 	SyncType *string `min:"1" type:"string" required:"true"`
@@ -90,6 +87,9 @@ const opUpdateResourceDataSync = "UpdateResourceDataSync"
 // the Include all accounts from my AWS Organizations configuration option.
 // Instead, you must delete the first resource data sync, and create a new one.
 //
+// This API action only supports a resource data sync that was created with
+// a SyncFromSource SyncType.
+//
 //    // Example sending a request using UpdateResourceDataSyncRequest.
 //    req := client.UpdateResourceDataSyncRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -110,6 +110,7 @@ func (c *Client) UpdateResourceDataSyncRequest(input *UpdateResourceDataSyncInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateResourceDataSyncOutput{})
+
 	return UpdateResourceDataSyncRequest{Request: req, Input: input, Copy: c.UpdateResourceDataSyncRequest}
 }
 

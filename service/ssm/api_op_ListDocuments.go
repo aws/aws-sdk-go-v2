@@ -13,10 +13,15 @@ import (
 type ListDocumentsInput struct {
 	_ struct{} `type:"structure"`
 
-	// One or more filters. Use a filter to return a more specific list of results.
+	// This data type is deprecated. Instead, use Filters.
 	DocumentFilterList []DocumentFilter `min:"1" type:"list"`
 
-	// One or more filters. Use a filter to return a more specific list of results.
+	// One or more DocumentKeyValuesFilter objects. Use a filter to return a more
+	// specific list of results. For keys, you can specify one or more key-value
+	// pair tags that have been applied to a document. Other valid keys include
+	// Owner, Name, PlatformTypes, DocumentType, and TargetType. For example, to
+	// return documents you own use Key=Owner,Values=Self. To specify a custom key-value
+	// pair, use the format Key=tag:tagName,Values=valueName.
 	Filters []DocumentKeyValuesFilter `type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
@@ -114,6 +119,7 @@ func (c *Client) ListDocumentsRequest(input *ListDocumentsInput) ListDocumentsRe
 	}
 
 	req := c.newRequest(op, input, &ListDocumentsOutput{})
+
 	return ListDocumentsRequest{Request: req, Input: input, Copy: c.ListDocumentsRequest}
 }
 

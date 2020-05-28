@@ -119,6 +119,7 @@ func (c *Client) DeleteRouteResponseRequest(input *DeleteRouteResponseInput) Del
 	req := c.newRequest(op, input, &DeleteRouteResponseOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteRouteResponseRequest{Request: req, Input: input, Copy: c.DeleteRouteResponseRequest}
 }
 

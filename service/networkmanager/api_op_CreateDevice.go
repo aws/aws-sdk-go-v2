@@ -189,6 +189,7 @@ func (c *Client) CreateDeviceRequest(input *CreateDeviceInput) CreateDeviceReque
 	}
 
 	req := c.newRequest(op, input, &CreateDeviceOutput{})
+
 	return CreateDeviceRequest{Request: req, Input: input, Copy: c.CreateDeviceRequest}
 }
 

@@ -88,6 +88,7 @@ func (c *Client) DeleteRoomSkillParameterRequest(input *DeleteRoomSkillParameter
 	}
 
 	req := c.newRequest(op, input, &DeleteRoomSkillParameterOutput{})
+
 	return DeleteRoomSkillParameterRequest{Request: req, Input: input, Copy: c.DeleteRoomSkillParameterRequest}
 }
 

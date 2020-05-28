@@ -124,6 +124,7 @@ func (c *Client) DescribeManagedRuleGroupRequest(input *DescribeManagedRuleGroup
 	}
 
 	req := c.newRequest(op, input, &DescribeManagedRuleGroupOutput{})
+
 	return DescribeManagedRuleGroupRequest{Request: req, Input: input, Copy: c.DescribeManagedRuleGroupRequest}
 }
 

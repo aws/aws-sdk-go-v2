@@ -83,6 +83,7 @@ func (c *Client) GetTranscriptionJobRequest(input *GetTranscriptionJobInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetTranscriptionJobOutput{})
+
 	return GetTranscriptionJobRequest{Request: req, Input: input, Copy: c.GetTranscriptionJobRequest}
 }
 

@@ -97,6 +97,7 @@ func (c *Client) DescribeQueriesRequest(input *DescribeQueriesInput) DescribeQue
 	}
 
 	req := c.newRequest(op, input, &DescribeQueriesOutput{})
+
 	return DescribeQueriesRequest{Request: req, Input: input, Copy: c.DescribeQueriesRequest}
 }
 

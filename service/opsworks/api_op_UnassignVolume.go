@@ -83,6 +83,7 @@ func (c *Client) UnassignVolumeRequest(input *UnassignVolumeInput) UnassignVolum
 	req := c.newRequest(op, input, &UnassignVolumeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UnassignVolumeRequest{Request: req, Input: input, Copy: c.UnassignVolumeRequest}
 }
 

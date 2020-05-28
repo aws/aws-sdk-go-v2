@@ -164,6 +164,7 @@ func (c *Client) DescribeHarvestJobRequest(input *DescribeHarvestJobInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeHarvestJobOutput{})
+
 	return DescribeHarvestJobRequest{Request: req, Input: input, Copy: c.DescribeHarvestJobRequest}
 }
 

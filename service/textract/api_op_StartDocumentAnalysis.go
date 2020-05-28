@@ -140,6 +140,7 @@ func (c *Client) StartDocumentAnalysisRequest(input *StartDocumentAnalysisInput)
 	}
 
 	req := c.newRequest(op, input, &StartDocumentAnalysisOutput{})
+
 	return StartDocumentAnalysisRequest{Request: req, Input: input, Copy: c.StartDocumentAnalysisRequest}
 }
 

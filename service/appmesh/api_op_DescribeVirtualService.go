@@ -128,6 +128,7 @@ func (c *Client) DescribeVirtualServiceRequest(input *DescribeVirtualServiceInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeVirtualServiceOutput{})
+
 	return DescribeVirtualServiceRequest{Request: req, Input: input, Copy: c.DescribeVirtualServiceRequest}
 }
 

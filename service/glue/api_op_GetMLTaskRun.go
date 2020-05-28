@@ -123,6 +123,7 @@ func (c *Client) GetMLTaskRunRequest(input *GetMLTaskRunInput) GetMLTaskRunReque
 	}
 
 	req := c.newRequest(op, input, &GetMLTaskRunOutput{})
+
 	return GetMLTaskRunRequest{Request: req, Input: input, Copy: c.GetMLTaskRunRequest}
 }
 

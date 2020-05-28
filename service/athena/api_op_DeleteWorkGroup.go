@@ -78,6 +78,7 @@ func (c *Client) DeleteWorkGroupRequest(input *DeleteWorkGroupInput) DeleteWorkG
 	}
 
 	req := c.newRequest(op, input, &DeleteWorkGroupOutput{})
+
 	return DeleteWorkGroupRequest{Request: req, Input: input, Copy: c.DeleteWorkGroupRequest}
 }
 

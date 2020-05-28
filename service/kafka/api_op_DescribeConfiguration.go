@@ -154,6 +154,7 @@ func (c *Client) DescribeConfigurationRequest(input *DescribeConfigurationInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeConfigurationOutput{})
+
 	return DescribeConfigurationRequest{Request: req, Input: input, Copy: c.DescribeConfigurationRequest}
 }
 

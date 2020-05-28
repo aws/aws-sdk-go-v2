@@ -44,7 +44,7 @@ type CreateOpsItemInput struct {
 	// Use the /aws/resources key in OperationalData to specify a related resource
 	// in the request. Use the /aws/automations key in OperationalData to associate
 	// an Automation runbook with the OpsItem. To view AWS CLI example commands
-	// that use these keys, see Creating OpsItems Manually (http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems)
+	// that use these keys, see Creating OpsItems manually (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems)
 	// in the AWS Systems Manager User Guide.
 	OperationalData map[string]OpsItemDataValue `type:"map"`
 
@@ -59,14 +59,16 @@ type CreateOpsItemInput struct {
 	// Specify a severity to assign to an OpsItem.
 	Severity *string `min:"1" type:"string"`
 
-	// The origin of the OpsItem, such as Amazon EC2 or AWS Systems Manager.
+	// The origin of the OpsItem, such as Amazon EC2 or Systems Manager.
+	//
+	// The source name can't contain the following strings: aws, amazon, and amzn.
 	//
 	// Source is a required field
 	Source *string `min:"1" type:"string" required:"true"`
 
 	// Optional metadata that you assign to a resource. You can restrict access
 	// to OpsItems by using an inline IAM policy that specifies tags. For more information,
-	// see Getting Started with OpsCenter (http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions)
+	// see Getting started with OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions)
 	// in the AWS Systems Manager User Guide.
 	//
 	// Tags use a key-value pair. For example:
@@ -161,13 +163,13 @@ const opCreateOpsItem = "CreateOpsItem"
 //
 // Creates a new OpsItem. You must have permission in AWS Identity and Access
 // Management (IAM) to create a new OpsItem. For more information, see Getting
-// Started with OpsCenter (http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html)
+// started with OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html)
 // in the AWS Systems Manager User Guide.
 //
 // Operations engineers and IT professionals use OpsCenter to view, investigate,
 // and remediate operational issues impacting the performance and health of
 // their AWS resources. For more information, see AWS Systems Manager OpsCenter
-// (http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html)
+// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html)
 // in the AWS Systems Manager User Guide.
 //
 //    // Example sending a request using CreateOpsItemRequest.
@@ -190,6 +192,7 @@ func (c *Client) CreateOpsItemRequest(input *CreateOpsItemInput) CreateOpsItemRe
 	}
 
 	req := c.newRequest(op, input, &CreateOpsItemOutput{})
+
 	return CreateOpsItemRequest{Request: req, Input: input, Copy: c.CreateOpsItemRequest}
 }
 

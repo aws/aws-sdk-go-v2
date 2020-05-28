@@ -132,6 +132,7 @@ func (c *Client) DownloadDBLogFilePortionRequest(input *DownloadDBLogFilePortion
 	}
 
 	req := c.newRequest(op, input, &DownloadDBLogFilePortionOutput{})
+
 	return DownloadDBLogFilePortionRequest{Request: req, Input: input, Copy: c.DownloadDBLogFilePortionRequest}
 }
 

@@ -160,6 +160,7 @@ func (c *Client) GetTemplateSummaryRequest(input *GetTemplateSummaryInput) GetTe
 	}
 
 	req := c.newRequest(op, input, &GetTemplateSummaryOutput{})
+
 	return GetTemplateSummaryRequest{Request: req, Input: input, Copy: c.GetTemplateSummaryRequest}
 }
 

@@ -121,6 +121,7 @@ func (c *Client) UpdateMultiplexRequest(input *UpdateMultiplexInput) UpdateMulti
 	}
 
 	req := c.newRequest(op, input, &UpdateMultiplexOutput{})
+
 	return UpdateMultiplexRequest{Request: req, Input: input, Copy: c.UpdateMultiplexRequest}
 }
 

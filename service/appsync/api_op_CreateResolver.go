@@ -230,6 +230,7 @@ func (c *Client) CreateResolverRequest(input *CreateResolverInput) CreateResolve
 	}
 
 	req := c.newRequest(op, input, &CreateResolverOutput{})
+
 	return CreateResolverRequest{Request: req, Input: input, Copy: c.CreateResolverRequest}
 }
 

@@ -240,6 +240,7 @@ func (c *Client) UpdateDeploymentStrategyRequest(input *UpdateDeploymentStrategy
 	}
 
 	req := c.newRequest(op, input, &UpdateDeploymentStrategyOutput{})
+
 	return UpdateDeploymentStrategyRequest{Request: req, Input: input, Copy: c.UpdateDeploymentStrategyRequest}
 }
 

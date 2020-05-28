@@ -76,6 +76,7 @@ func (c *Client) DescribeStackSetRequest(input *DescribeStackSetInput) DescribeS
 	}
 
 	req := c.newRequest(op, input, &DescribeStackSetOutput{})
+
 	return DescribeStackSetRequest{Request: req, Input: input, Copy: c.DescribeStackSetRequest}
 }
 

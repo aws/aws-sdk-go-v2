@@ -97,6 +97,7 @@ func (c *Client) AuthorizeSnapshotAccessRequest(input *AuthorizeSnapshotAccessIn
 	}
 
 	req := c.newRequest(op, input, &AuthorizeSnapshotAccessOutput{})
+
 	return AuthorizeSnapshotAccessRequest{Request: req, Input: input, Copy: c.AuthorizeSnapshotAccessRequest}
 }
 

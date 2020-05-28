@@ -59,6 +59,7 @@ func (c *Client) ListOpenIDConnectProvidersRequest(input *ListOpenIDConnectProvi
 	}
 
 	req := c.newRequest(op, input, &ListOpenIDConnectProvidersOutput{})
+
 	return ListOpenIDConnectProvidersRequest{Request: req, Input: input, Copy: c.ListOpenIDConnectProvidersRequest}
 }
 

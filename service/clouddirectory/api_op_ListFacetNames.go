@@ -143,6 +143,7 @@ func (c *Client) ListFacetNamesRequest(input *ListFacetNamesInput) ListFacetName
 	}
 
 	req := c.newRequest(op, input, &ListFacetNamesOutput{})
+
 	return ListFacetNamesRequest{Request: req, Input: input, Copy: c.ListFacetNamesRequest}
 }
 

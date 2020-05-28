@@ -158,6 +158,7 @@ func (c *Client) DescribeDataSourcePermissionsRequest(input *DescribeDataSourceP
 	}
 
 	req := c.newRequest(op, input, &DescribeDataSourcePermissionsOutput{})
+
 	return DescribeDataSourcePermissionsRequest{Request: req, Input: input, Copy: c.DescribeDataSourcePermissionsRequest}
 }
 

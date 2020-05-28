@@ -108,6 +108,7 @@ func (c *Client) DisableAWSServiceAccessRequest(input *DisableAWSServiceAccessIn
 	req := c.newRequest(op, input, &DisableAWSServiceAccessOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DisableAWSServiceAccessRequest{Request: req, Input: input, Copy: c.DisableAWSServiceAccessRequest}
 }
 

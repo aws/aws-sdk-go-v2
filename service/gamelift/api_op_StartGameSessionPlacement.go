@@ -215,6 +215,7 @@ func (c *Client) StartGameSessionPlacementRequest(input *StartGameSessionPlaceme
 	}
 
 	req := c.newRequest(op, input, &StartGameSessionPlacementOutput{})
+
 	return StartGameSessionPlacementRequest{Request: req, Input: input, Copy: c.StartGameSessionPlacementRequest}
 }
 

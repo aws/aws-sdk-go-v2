@@ -125,6 +125,7 @@ func (c *Client) CreateExportJobRequest(input *CreateExportJobInput) CreateExpor
 	}
 
 	req := c.newRequest(op, input, &CreateExportJobOutput{})
+
 	return CreateExportJobRequest{Request: req, Input: input, Copy: c.CreateExportJobRequest}
 }
 

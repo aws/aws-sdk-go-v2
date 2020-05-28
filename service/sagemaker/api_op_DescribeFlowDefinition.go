@@ -123,6 +123,7 @@ func (c *Client) DescribeFlowDefinitionRequest(input *DescribeFlowDefinitionInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeFlowDefinitionOutput{})
+
 	return DescribeFlowDefinitionRequest{Request: req, Input: input, Copy: c.DescribeFlowDefinitionRequest}
 }
 

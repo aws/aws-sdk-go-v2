@@ -111,6 +111,7 @@ func (c *Client) ListBonusPaymentsRequest(input *ListBonusPaymentsInput) ListBon
 	}
 
 	req := c.newRequest(op, input, &ListBonusPaymentsOutput{})
+
 	return ListBonusPaymentsRequest{Request: req, Input: input, Copy: c.ListBonusPaymentsRequest}
 }
 

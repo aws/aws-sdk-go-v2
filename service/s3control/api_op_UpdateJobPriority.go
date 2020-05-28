@@ -122,7 +122,19 @@ const opUpdateJobPriority = "UpdateJobPriority"
 // UpdateJobPriorityRequest returns a request value for making API operation for
 // AWS S3 Control.
 //
-// Updates an existing job's priority.
+// Updates an existing Amazon S3 Batch Operations job's priority. For more information,
+// see Amazon S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+// Related actions include:
+//
+//    * CreateJob
+//
+//    * ListJobs
+//
+//    * DescribeJob
+//
+//    * UpdateJobStatus
 //
 //    // Example sending a request using UpdateJobPriorityRequest.
 //    req := client.UpdateJobPriorityRequest(params)
@@ -146,6 +158,7 @@ func (c *Client) UpdateJobPriorityRequest(input *UpdateJobPriorityInput) UpdateJ
 	req := c.newRequest(op, input, &UpdateJobPriorityOutput{})
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
+
 	return UpdateJobPriorityRequest{Request: req, Input: input, Copy: c.UpdateJobPriorityRequest}
 }
 

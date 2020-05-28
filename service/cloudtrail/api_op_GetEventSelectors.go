@@ -108,6 +108,7 @@ func (c *Client) GetEventSelectorsRequest(input *GetEventSelectorsInput) GetEven
 	}
 
 	req := c.newRequest(op, input, &GetEventSelectorsOutput{})
+
 	return GetEventSelectorsRequest{Request: req, Input: input, Copy: c.GetEventSelectorsRequest}
 }
 

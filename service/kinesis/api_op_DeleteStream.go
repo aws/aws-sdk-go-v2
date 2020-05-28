@@ -104,6 +104,7 @@ func (c *Client) DeleteStreamRequest(input *DeleteStreamInput) DeleteStreamReque
 	req := c.newRequest(op, input, &DeleteStreamOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteStreamRequest{Request: req, Input: input, Copy: c.DeleteStreamRequest}
 }
 

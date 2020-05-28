@@ -122,6 +122,7 @@ func (c *Client) ListAttendeeTagsRequest(input *ListAttendeeTagsInput) ListAtten
 	}
 
 	req := c.newRequest(op, input, &ListAttendeeTagsOutput{})
+
 	return ListAttendeeTagsRequest{Request: req, Input: input, Copy: c.ListAttendeeTagsRequest}
 }
 

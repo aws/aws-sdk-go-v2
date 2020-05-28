@@ -144,6 +144,7 @@ func (c *Client) CancelRotateSecretRequest(input *CancelRotateSecretInput) Cance
 	}
 
 	req := c.newRequest(op, input, &CancelRotateSecretOutput{})
+
 	return CancelRotateSecretRequest{Request: req, Input: input, Copy: c.CancelRotateSecretRequest}
 }
 

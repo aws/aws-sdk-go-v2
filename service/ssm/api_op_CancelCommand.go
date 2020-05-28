@@ -84,6 +84,7 @@ func (c *Client) CancelCommandRequest(input *CancelCommandInput) CancelCommandRe
 	}
 
 	req := c.newRequest(op, input, &CancelCommandOutput{})
+
 	return CancelCommandRequest{Request: req, Input: input, Copy: c.CancelCommandRequest}
 }
 

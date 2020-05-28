@@ -81,6 +81,7 @@ func (c *Client) UpdateApplicationRequest(input *UpdateApplicationInput) UpdateA
 	req := c.newRequest(op, input, &UpdateApplicationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateApplicationRequest{Request: req, Input: input, Copy: c.UpdateApplicationRequest}
 }
 

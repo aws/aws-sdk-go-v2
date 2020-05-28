@@ -75,6 +75,16 @@ const opCreateSizeConstraintSet = "CreateSizeConstraintSet"
 // CreateSizeConstraintSetRequest returns a request value for making API operation for
 // AWS WAF.
 //
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Creates a SizeConstraintSet. You then use UpdateSizeConstraintSet to identify
 // the part of a web request that you want AWS WAF to check for length, such
 // as the length of the User-Agent header or the length of the query string.
@@ -119,6 +129,7 @@ func (c *Client) CreateSizeConstraintSetRequest(input *CreateSizeConstraintSetIn
 	}
 
 	req := c.newRequest(op, input, &CreateSizeConstraintSetOutput{})
+
 	return CreateSizeConstraintSetRequest{Request: req, Input: input, Copy: c.CreateSizeConstraintSetRequest}
 }
 

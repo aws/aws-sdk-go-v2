@@ -132,6 +132,7 @@ func (c *Client) DescribeIndexRequest(input *DescribeIndexInput) DescribeIndexRe
 	}
 
 	req := c.newRequest(op, input, &DescribeIndexOutput{})
+
 	return DescribeIndexRequest{Request: req, Input: input, Copy: c.DescribeIndexRequest}
 }
 

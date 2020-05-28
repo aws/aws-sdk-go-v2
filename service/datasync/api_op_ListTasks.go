@@ -76,6 +76,7 @@ func (c *Client) ListTasksRequest(input *ListTasksInput) ListTasksRequest {
 	}
 
 	req := c.newRequest(op, input, &ListTasksOutput{})
+
 	return ListTasksRequest{Request: req, Input: input, Copy: c.ListTasksRequest}
 }
 

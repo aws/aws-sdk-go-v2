@@ -105,6 +105,7 @@ func (c *Client) DeleteIdentityPolicyRequest(input *DeleteIdentityPolicyInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteIdentityPolicyOutput{})
+
 	return DeleteIdentityPolicyRequest{Request: req, Input: input, Copy: c.DeleteIdentityPolicyRequest}
 }
 

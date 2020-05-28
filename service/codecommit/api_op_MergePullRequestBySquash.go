@@ -132,6 +132,7 @@ func (c *Client) MergePullRequestBySquashRequest(input *MergePullRequestBySquash
 	}
 
 	req := c.newRequest(op, input, &MergePullRequestBySquashOutput{})
+
 	return MergePullRequestBySquashRequest{Request: req, Input: input, Copy: c.MergePullRequestBySquashRequest}
 }
 

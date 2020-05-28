@@ -234,6 +234,7 @@ func (c *Client) StartImportRequest(input *StartImportInput) StartImportRequest 
 	}
 
 	req := c.newRequest(op, input, &StartImportOutput{})
+
 	return StartImportRequest{Request: req, Input: input, Copy: c.StartImportRequest}
 }
 

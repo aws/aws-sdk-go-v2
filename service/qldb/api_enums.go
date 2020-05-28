@@ -2,6 +2,23 @@
 
 package qldb
 
+type ErrorCause string
+
+// Enum values for ErrorCause
+const (
+	ErrorCauseKinesisStreamNotFound ErrorCause = "KINESIS_STREAM_NOT_FOUND"
+	ErrorCauseIamPermissionRevoked  ErrorCause = "IAM_PERMISSION_REVOKED"
+)
+
+func (enum ErrorCause) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ErrorCause) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ExportStatus string
 
 // Enum values for ExportStatus
@@ -69,6 +86,26 @@ func (enum S3ObjectEncryptionType) MarshalValue() (string, error) {
 }
 
 func (enum S3ObjectEncryptionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type StreamStatus string
+
+// Enum values for StreamStatus
+const (
+	StreamStatusActive    StreamStatus = "ACTIVE"
+	StreamStatusCompleted StreamStatus = "COMPLETED"
+	StreamStatusCanceled  StreamStatus = "CANCELED"
+	StreamStatusFailed    StreamStatus = "FAILED"
+	StreamStatusImpaired  StreamStatus = "IMPAIRED"
+)
+
+func (enum StreamStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StreamStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

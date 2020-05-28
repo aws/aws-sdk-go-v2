@@ -149,6 +149,7 @@ func (c *Client) ListConfigurationProfilesRequest(input *ListConfigurationProfil
 	}
 
 	req := c.newRequest(op, input, &ListConfigurationProfilesOutput{})
+
 	return ListConfigurationProfilesRequest{Request: req, Input: input, Copy: c.ListConfigurationProfilesRequest}
 }
 

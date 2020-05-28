@@ -101,6 +101,7 @@ func (c *Client) EnableAWSServiceAccessRequest(input *EnableAWSServiceAccessInpu
 	req := c.newRequest(op, input, &EnableAWSServiceAccessOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return EnableAWSServiceAccessRequest{Request: req, Input: input, Copy: c.EnableAWSServiceAccessRequest}
 }
 

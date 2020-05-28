@@ -213,6 +213,7 @@ func (c *Client) GetApiKeyRequest(input *GetApiKeyInput) GetApiKeyRequest {
 	}
 
 	req := c.newRequest(op, input, &GetApiKeyOutput{})
+
 	return GetApiKeyRequest{Request: req, Input: input, Copy: c.GetApiKeyRequest}
 }
 

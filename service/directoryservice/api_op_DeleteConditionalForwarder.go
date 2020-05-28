@@ -85,6 +85,7 @@ func (c *Client) DeleteConditionalForwarderRequest(input *DeleteConditionalForwa
 	}
 
 	req := c.newRequest(op, input, &DeleteConditionalForwarderOutput{})
+
 	return DeleteConditionalForwarderRequest{Request: req, Input: input, Copy: c.DeleteConditionalForwarderRequest}
 }
 

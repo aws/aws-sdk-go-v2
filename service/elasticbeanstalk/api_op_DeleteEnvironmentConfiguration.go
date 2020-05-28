@@ -100,6 +100,7 @@ func (c *Client) DeleteEnvironmentConfigurationRequest(input *DeleteEnvironmentC
 	req := c.newRequest(op, input, &DeleteEnvironmentConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteEnvironmentConfigurationRequest{Request: req, Input: input, Copy: c.DeleteEnvironmentConfigurationRequest}
 }
 

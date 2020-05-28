@@ -157,6 +157,7 @@ func (c *Client) GetDeploymentStatusRequest(input *GetDeploymentStatusInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetDeploymentStatusOutput{})
+
 	return GetDeploymentStatusRequest{Request: req, Input: input, Copy: c.GetDeploymentStatusRequest}
 }
 

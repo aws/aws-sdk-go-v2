@@ -183,6 +183,7 @@ func (c *Client) GetScalingPlanResourceForecastDataRequest(input *GetScalingPlan
 	}
 
 	req := c.newRequest(op, input, &GetScalingPlanResourceForecastDataOutput{})
+
 	return GetScalingPlanResourceForecastDataRequest{Request: req, Input: input, Copy: c.GetScalingPlanResourceForecastDataRequest}
 }
 

@@ -152,6 +152,7 @@ func (c *Client) GetUpgradeHistoryRequest(input *GetUpgradeHistoryInput) GetUpgr
 	}
 
 	req := c.newRequest(op, input, &GetUpgradeHistoryOutput{})
+
 	return GetUpgradeHistoryRequest{Request: req, Input: input, Copy: c.GetUpgradeHistoryRequest}
 }
 

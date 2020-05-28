@@ -153,6 +153,7 @@ func (c *Client) ListPlacementsRequest(input *ListPlacementsInput) ListPlacement
 	}
 
 	req := c.newRequest(op, input, &ListPlacementsOutput{})
+
 	return ListPlacementsRequest{Request: req, Input: input, Copy: c.ListPlacementsRequest}
 }
 

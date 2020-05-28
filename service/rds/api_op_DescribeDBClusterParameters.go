@@ -123,6 +123,7 @@ func (c *Client) DescribeDBClusterParametersRequest(input *DescribeDBClusterPara
 	}
 
 	req := c.newRequest(op, input, &DescribeDBClusterParametersOutput{})
+
 	return DescribeDBClusterParametersRequest{Request: req, Input: input, Copy: c.DescribeDBClusterParametersRequest}
 }
 

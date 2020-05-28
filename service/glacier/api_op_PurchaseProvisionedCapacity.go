@@ -103,6 +103,7 @@ func (c *Client) PurchaseProvisionedCapacityRequest(input *PurchaseProvisionedCa
 	}
 
 	req := c.newRequest(op, input, &PurchaseProvisionedCapacityOutput{})
+
 	return PurchaseProvisionedCapacityRequest{Request: req, Input: input, Copy: c.PurchaseProvisionedCapacityRequest}
 }
 

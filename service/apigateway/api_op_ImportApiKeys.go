@@ -148,6 +148,7 @@ func (c *Client) ImportApiKeysRequest(input *ImportApiKeysInput) ImportApiKeysRe
 	}
 
 	req := c.newRequest(op, input, &ImportApiKeysOutput{})
+
 	return ImportApiKeysRequest{Request: req, Input: input, Copy: c.ImportApiKeysRequest}
 }
 

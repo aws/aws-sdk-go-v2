@@ -137,6 +137,7 @@ func (c *Client) DeleteMultiplexProgramRequest(input *DeleteMultiplexProgramInpu
 	}
 
 	req := c.newRequest(op, input, &DeleteMultiplexProgramOutput{})
+
 	return DeleteMultiplexProgramRequest{Request: req, Input: input, Copy: c.DeleteMultiplexProgramRequest}
 }
 

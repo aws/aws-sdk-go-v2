@@ -211,6 +211,7 @@ func (c *Client) UpdateFunctionRequest(input *UpdateFunctionInput) UpdateFunctio
 	}
 
 	req := c.newRequest(op, input, &UpdateFunctionOutput{})
+
 	return UpdateFunctionRequest{Request: req, Input: input, Copy: c.UpdateFunctionRequest}
 }
 

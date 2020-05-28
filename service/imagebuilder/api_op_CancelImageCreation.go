@@ -144,6 +144,7 @@ func (c *Client) CancelImageCreationRequest(input *CancelImageCreationInput) Can
 	}
 
 	req := c.newRequest(op, input, &CancelImageCreationOutput{})
+
 	return CancelImageCreationRequest{Request: req, Input: input, Copy: c.CancelImageCreationRequest}
 }
 

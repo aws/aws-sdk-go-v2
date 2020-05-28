@@ -90,6 +90,7 @@ func (c *Client) DeleteFunctionDefinitionRequest(input *DeleteFunctionDefinition
 	}
 
 	req := c.newRequest(op, input, &DeleteFunctionDefinitionOutput{})
+
 	return DeleteFunctionDefinitionRequest{Request: req, Input: input, Copy: c.DeleteFunctionDefinitionRequest}
 }
 

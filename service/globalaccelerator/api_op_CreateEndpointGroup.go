@@ -143,6 +143,7 @@ func (c *Client) CreateEndpointGroupRequest(input *CreateEndpointGroupInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateEndpointGroupOutput{})
+
 	return CreateEndpointGroupRequest{Request: req, Input: input, Copy: c.CreateEndpointGroupRequest}
 }
 

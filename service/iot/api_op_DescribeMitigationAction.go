@@ -166,6 +166,7 @@ func (c *Client) DescribeMitigationActionRequest(input *DescribeMitigationAction
 	}
 
 	req := c.newRequest(op, input, &DescribeMitigationActionOutput{})
+
 	return DescribeMitigationActionRequest{Request: req, Input: input, Copy: c.DescribeMitigationActionRequest}
 }
 

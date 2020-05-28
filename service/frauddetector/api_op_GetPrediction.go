@@ -111,6 +111,7 @@ func (c *Client) GetPredictionRequest(input *GetPredictionInput) GetPredictionRe
 	}
 
 	req := c.newRequest(op, input, &GetPredictionOutput{})
+
 	return GetPredictionRequest{Request: req, Input: input, Copy: c.GetPredictionRequest}
 }
 

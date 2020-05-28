@@ -94,6 +94,7 @@ func (c *Client) DeletePresetRequest(input *DeletePresetInput) DeletePresetReque
 	}
 
 	req := c.newRequest(op, input, &DeletePresetOutput{})
+
 	return DeletePresetRequest{Request: req, Input: input, Copy: c.DeletePresetRequest}
 }
 

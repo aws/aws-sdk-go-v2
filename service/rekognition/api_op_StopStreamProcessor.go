@@ -74,6 +74,7 @@ func (c *Client) StopStreamProcessorRequest(input *StopStreamProcessorInput) Sto
 	}
 
 	req := c.newRequest(op, input, &StopStreamProcessorOutput{})
+
 	return StopStreamProcessorRequest{Request: req, Input: input, Copy: c.StopStreamProcessorRequest}
 }
 

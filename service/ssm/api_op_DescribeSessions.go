@@ -106,6 +106,7 @@ func (c *Client) DescribeSessionsRequest(input *DescribeSessionsInput) DescribeS
 	}
 
 	req := c.newRequest(op, input, &DescribeSessionsOutput{})
+
 	return DescribeSessionsRequest{Request: req, Input: input, Copy: c.DescribeSessionsRequest}
 }
 

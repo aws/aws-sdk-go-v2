@@ -286,6 +286,7 @@ func (c *Client) UpdateDomainNameRequest(input *UpdateDomainNameInput) UpdateDom
 	}
 
 	req := c.newRequest(op, input, &UpdateDomainNameOutput{})
+
 	return UpdateDomainNameRequest{Request: req, Input: input, Copy: c.UpdateDomainNameRequest}
 }
 

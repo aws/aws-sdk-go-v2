@@ -106,6 +106,7 @@ func (c *Client) PredictRequest(input *PredictInput) PredictRequest {
 	}
 
 	req := c.newRequest(op, input, &PredictOutput{})
+
 	return PredictRequest{Request: req, Input: input, Copy: c.PredictRequest}
 }
 

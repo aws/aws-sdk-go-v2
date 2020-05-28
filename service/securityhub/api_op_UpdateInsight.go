@@ -119,6 +119,7 @@ func (c *Client) UpdateInsightRequest(input *UpdateInsightInput) UpdateInsightRe
 	}
 
 	req := c.newRequest(op, input, &UpdateInsightOutput{})
+
 	return UpdateInsightRequest{Request: req, Input: input, Copy: c.UpdateInsightRequest}
 }
 

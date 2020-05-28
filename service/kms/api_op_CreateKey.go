@@ -288,6 +288,7 @@ func (c *Client) CreateKeyRequest(input *CreateKeyInput) CreateKeyRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateKeyOutput{})
+
 	return CreateKeyRequest{Request: req, Input: input, Copy: c.CreateKeyRequest}
 }
 

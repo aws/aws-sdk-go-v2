@@ -85,6 +85,7 @@ func (c *Client) GetClassifiersRequest(input *GetClassifiersInput) GetClassifier
 	}
 
 	req := c.newRequest(op, input, &GetClassifiersOutput{})
+
 	return GetClassifiersRequest{Request: req, Input: input, Copy: c.GetClassifiersRequest}
 }
 

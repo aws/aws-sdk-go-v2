@@ -125,6 +125,7 @@ func (c *Client) ModifyMountTargetSecurityGroupsRequest(input *ModifyMountTarget
 	req := c.newRequest(op, input, &ModifyMountTargetSecurityGroupsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return ModifyMountTargetSecurityGroupsRequest{Request: req, Input: input, Copy: c.ModifyMountTargetSecurityGroupsRequest}
 }
 

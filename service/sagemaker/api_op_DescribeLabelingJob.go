@@ -200,6 +200,7 @@ func (c *Client) DescribeLabelingJobRequest(input *DescribeLabelingJobInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeLabelingJobOutput{})
+
 	return DescribeLabelingJobRequest{Request: req, Input: input, Copy: c.DescribeLabelingJobRequest}
 }
 

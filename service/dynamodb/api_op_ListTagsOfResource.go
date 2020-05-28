@@ -116,6 +116,7 @@ func (c *Client) ListTagsOfResourceRequest(input *ListTagsOfResourceInput) ListT
 			Fn:   de.Handler,
 		})
 	}
+
 	return ListTagsOfResourceRequest{Request: req, Input: input, Copy: c.ListTagsOfResourceRequest}
 }
 

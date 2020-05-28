@@ -91,6 +91,7 @@ func (c *Client) PurgeQueueRequest(input *PurgeQueueInput) PurgeQueueRequest {
 	req := c.newRequest(op, input, &PurgeQueueOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PurgeQueueRequest{Request: req, Input: input, Copy: c.PurgeQueueRequest}
 }
 

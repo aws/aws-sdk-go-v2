@@ -132,6 +132,7 @@ func (c *Client) UpdateMeshRequest(input *UpdateMeshInput) UpdateMeshRequest {
 	}
 
 	req := c.newRequest(op, input, &UpdateMeshOutput{})
+
 	return UpdateMeshRequest{Request: req, Input: input, Copy: c.UpdateMeshRequest}
 }
 

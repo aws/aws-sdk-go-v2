@@ -426,6 +426,7 @@ func (c *Client) ScanRequest(input *ScanInput) ScanRequest {
 			Fn:   de.Handler,
 		})
 	}
+
 	return ScanRequest{Request: req, Input: input, Copy: c.ScanRequest}
 }
 

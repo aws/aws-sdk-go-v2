@@ -88,6 +88,7 @@ func (c *Client) CancelHandshakeRequest(input *CancelHandshakeInput) CancelHands
 	}
 
 	req := c.newRequest(op, input, &CancelHandshakeOutput{})
+
 	return CancelHandshakeRequest{Request: req, Input: input, Copy: c.CancelHandshakeRequest}
 }
 

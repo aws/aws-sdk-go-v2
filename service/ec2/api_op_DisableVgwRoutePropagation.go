@@ -94,6 +94,7 @@ func (c *Client) DisableVgwRoutePropagationRequest(input *DisableVgwRoutePropaga
 	req := c.newRequest(op, input, &DisableVgwRoutePropagationOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DisableVgwRoutePropagationRequest{Request: req, Input: input, Copy: c.DisableVgwRoutePropagationRequest}
 }
 

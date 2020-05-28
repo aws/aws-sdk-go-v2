@@ -100,6 +100,7 @@ func (c *Client) AddAttributesToFindingsRequest(input *AddAttributesToFindingsIn
 	}
 
 	req := c.newRequest(op, input, &AddAttributesToFindingsOutput{})
+
 	return AddAttributesToFindingsRequest{Request: req, Input: input, Copy: c.AddAttributesToFindingsRequest}
 }
 

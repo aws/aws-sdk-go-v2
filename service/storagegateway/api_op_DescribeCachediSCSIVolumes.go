@@ -85,6 +85,7 @@ func (c *Client) DescribeCachediSCSIVolumesRequest(input *DescribeCachediSCSIVol
 	}
 
 	req := c.newRequest(op, input, &DescribeCachediSCSIVolumesOutput{})
+
 	return DescribeCachediSCSIVolumesRequest{Request: req, Input: input, Copy: c.DescribeCachediSCSIVolumesRequest}
 }
 

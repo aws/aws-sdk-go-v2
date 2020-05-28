@@ -137,6 +137,7 @@ func (c *Client) CreateCrawlerRequest(input *CreateCrawlerInput) CreateCrawlerRe
 	}
 
 	req := c.newRequest(op, input, &CreateCrawlerOutput{})
+
 	return CreateCrawlerRequest{Request: req, Input: input, Copy: c.CreateCrawlerRequest}
 }
 

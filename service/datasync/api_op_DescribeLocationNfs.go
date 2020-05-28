@@ -92,6 +92,7 @@ func (c *Client) DescribeLocationNfsRequest(input *DescribeLocationNfsInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeLocationNfsOutput{})
+
 	return DescribeLocationNfsRequest{Request: req, Input: input, Copy: c.DescribeLocationNfsRequest}
 }
 

@@ -151,6 +151,7 @@ func (c *Client) RunPipelineActivityRequest(input *RunPipelineActivityInput) Run
 	}
 
 	req := c.newRequest(op, input, &RunPipelineActivityOutput{})
+
 	return RunPipelineActivityRequest{Request: req, Input: input, Copy: c.RunPipelineActivityRequest}
 }
 

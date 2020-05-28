@@ -163,6 +163,7 @@ func (c *Client) UpdateDetectorModelRequest(input *UpdateDetectorModelInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateDetectorModelOutput{})
+
 	return UpdateDetectorModelRequest{Request: req, Input: input, Copy: c.UpdateDetectorModelRequest}
 }
 

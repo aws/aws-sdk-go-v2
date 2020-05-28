@@ -102,6 +102,7 @@ func (c *Client) GetMappingRequest(input *GetMappingInput) GetMappingRequest {
 	}
 
 	req := c.newRequest(op, input, &GetMappingOutput{})
+
 	return GetMappingRequest{Request: req, Input: input, Copy: c.GetMappingRequest}
 }
 

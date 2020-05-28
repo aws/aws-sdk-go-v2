@@ -110,6 +110,7 @@ func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest 
 	req := c.newRequest(op, input, &TagResourceOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 

@@ -88,6 +88,7 @@ func (c *Client) PutRetentionConfigurationRequest(input *PutRetentionConfigurati
 	}
 
 	req := c.newRequest(op, input, &PutRetentionConfigurationOutput{})
+
 	return PutRetentionConfigurationRequest{Request: req, Input: input, Copy: c.PutRetentionConfigurationRequest}
 }
 

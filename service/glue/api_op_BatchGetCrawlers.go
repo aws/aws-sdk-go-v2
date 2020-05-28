@@ -83,6 +83,7 @@ func (c *Client) BatchGetCrawlersRequest(input *BatchGetCrawlersInput) BatchGetC
 	}
 
 	req := c.newRequest(op, input, &BatchGetCrawlersOutput{})
+
 	return BatchGetCrawlersRequest{Request: req, Input: input, Copy: c.BatchGetCrawlersRequest}
 }
 

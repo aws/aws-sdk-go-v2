@@ -146,6 +146,7 @@ func (c *Client) StartDeploymentRequest(input *StartDeploymentInput) StartDeploy
 	}
 
 	req := c.newRequest(op, input, &StartDeploymentOutput{})
+
 	return StartDeploymentRequest{Request: req, Input: input, Copy: c.StartDeploymentRequest}
 }
 

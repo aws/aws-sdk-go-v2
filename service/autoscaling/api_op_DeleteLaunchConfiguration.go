@@ -84,6 +84,7 @@ func (c *Client) DeleteLaunchConfigurationRequest(input *DeleteLaunchConfigurati
 	req := c.newRequest(op, input, &DeleteLaunchConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteLaunchConfigurationRequest{Request: req, Input: input, Copy: c.DeleteLaunchConfigurationRequest}
 }
 

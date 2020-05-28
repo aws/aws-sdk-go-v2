@@ -102,6 +102,7 @@ func (c *Client) GetAttributesRequest(input *GetAttributesInput) GetAttributesRe
 	}
 
 	req := c.newRequest(op, input, &GetAttributesOutput{})
+
 	return GetAttributesRequest{Request: req, Input: input, Copy: c.GetAttributesRequest}
 }
 

@@ -111,6 +111,7 @@ func (c *Client) UpdateTaskSetRequest(input *UpdateTaskSetInput) UpdateTaskSetRe
 	}
 
 	req := c.newRequest(op, input, &UpdateTaskSetOutput{})
+
 	return UpdateTaskSetRequest{Request: req, Input: input, Copy: c.UpdateTaskSetRequest}
 }
 

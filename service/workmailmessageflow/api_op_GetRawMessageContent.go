@@ -102,6 +102,7 @@ func (c *Client) GetRawMessageContentRequest(input *GetRawMessageContentInput) G
 	}
 
 	req := c.newRequest(op, input, &GetRawMessageContentOutput{})
+
 	return GetRawMessageContentRequest{Request: req, Input: input, Copy: c.GetRawMessageContentRequest}
 }
 

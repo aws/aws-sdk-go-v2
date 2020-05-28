@@ -69,6 +69,7 @@ func (c *Client) GetSMSAttributesRequest(input *GetSMSAttributesInput) GetSMSAtt
 	}
 
 	req := c.newRequest(op, input, &GetSMSAttributesOutput{})
+
 	return GetSMSAttributesRequest{Request: req, Input: input, Copy: c.GetSMSAttributesRequest}
 }
 

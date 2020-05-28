@@ -80,6 +80,7 @@ func (c *Client) GetQualificationTypeRequest(input *GetQualificationTypeInput) G
 	}
 
 	req := c.newRequest(op, input, &GetQualificationTypeOutput{})
+
 	return GetQualificationTypeRequest{Request: req, Input: input, Copy: c.GetQualificationTypeRequest}
 }
 

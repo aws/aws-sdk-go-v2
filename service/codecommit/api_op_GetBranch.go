@@ -83,6 +83,7 @@ func (c *Client) GetBranchRequest(input *GetBranchInput) GetBranchRequest {
 	}
 
 	req := c.newRequest(op, input, &GetBranchOutput{})
+
 	return GetBranchRequest{Request: req, Input: input, Copy: c.GetBranchRequest}
 }
 

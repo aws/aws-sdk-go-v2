@@ -4,6 +4,7 @@ package codebuild
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -22,6 +23,12 @@ type CreateReportGroupInput struct {
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"2" type:"string" required:"true"`
+
+	// A list of tag key and value pairs associated with this report group.
+	//
+	// These tags are available for use by AWS services that support AWS CodeBuild
+	// report group tags.
+	Tags []Tag `locationName:"tags" type:"list"`
 
 	// The type of report group.
 	//
@@ -54,6 +61,13 @@ func (s *CreateReportGroupInput) Validate() error {
 	if s.ExportConfig != nil {
 		if err := s.ExportConfig.Validate(); err != nil {
 			invalidParams.AddNested("ExportConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -102,6 +116,7 @@ func (c *Client) CreateReportGroupRequest(input *CreateReportGroupInput) CreateR
 	}
 
 	req := c.newRequest(op, input, &CreateReportGroupOutput{})
+
 	return CreateReportGroupRequest{Request: req, Input: input, Copy: c.CreateReportGroupRequest}
 }
 

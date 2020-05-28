@@ -84,6 +84,7 @@ func (c *Client) GetSoftwareUpdatesRequest(input *GetSoftwareUpdatesInput) GetSo
 	}
 
 	req := c.newRequest(op, input, &GetSoftwareUpdatesOutput{})
+
 	return GetSoftwareUpdatesRequest{Request: req, Input: input, Copy: c.GetSoftwareUpdatesRequest}
 }
 

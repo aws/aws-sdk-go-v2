@@ -174,6 +174,7 @@ func (c *Client) GetOrganizationsAccessReportRequest(input *GetOrganizationsAcce
 	}
 
 	req := c.newRequest(op, input, &GetOrganizationsAccessReportOutput{})
+
 	return GetOrganizationsAccessReportRequest{Request: req, Input: input, Copy: c.GetOrganizationsAccessReportRequest}
 }
 

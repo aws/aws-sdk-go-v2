@@ -105,6 +105,7 @@ func (c *Client) CreateClusterSecurityGroupRequest(input *CreateClusterSecurityG
 	}
 
 	req := c.newRequest(op, input, &CreateClusterSecurityGroupOutput{})
+
 	return CreateClusterSecurityGroupRequest{Request: req, Input: input, Copy: c.CreateClusterSecurityGroupRequest}
 }
 

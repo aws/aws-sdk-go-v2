@@ -150,6 +150,7 @@ func (c *Client) DeleteGatewayResponseRequest(input *DeleteGatewayResponseInput)
 	req := c.newRequest(op, input, &DeleteGatewayResponseOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteGatewayResponseRequest{Request: req, Input: input, Copy: c.DeleteGatewayResponseRequest}
 }
 

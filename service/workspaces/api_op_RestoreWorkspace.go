@@ -82,6 +82,7 @@ func (c *Client) RestoreWorkspaceRequest(input *RestoreWorkspaceInput) RestoreWo
 	}
 
 	req := c.newRequest(op, input, &RestoreWorkspaceOutput{})
+
 	return RestoreWorkspaceRequest{Request: req, Input: input, Copy: c.RestoreWorkspaceRequest}
 }
 

@@ -76,6 +76,7 @@ func (c *Client) RejectSkillRequest(input *RejectSkillInput) RejectSkillRequest 
 	}
 
 	req := c.newRequest(op, input, &RejectSkillOutput{})
+
 	return RejectSkillRequest{Request: req, Input: input, Copy: c.RejectSkillRequest}
 }
 

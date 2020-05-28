@@ -169,6 +169,7 @@ func (c *Client) CreateEmailIdentityRequest(input *CreateEmailIdentityInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateEmailIdentityOutput{})
+
 	return CreateEmailIdentityRequest{Request: req, Input: input, Copy: c.CreateEmailIdentityRequest}
 }
 

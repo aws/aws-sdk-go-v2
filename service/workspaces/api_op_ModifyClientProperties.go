@@ -85,6 +85,7 @@ func (c *Client) ModifyClientPropertiesRequest(input *ModifyClientPropertiesInpu
 	}
 
 	req := c.newRequest(op, input, &ModifyClientPropertiesOutput{})
+
 	return ModifyClientPropertiesRequest{Request: req, Input: input, Copy: c.ModifyClientPropertiesRequest}
 }
 

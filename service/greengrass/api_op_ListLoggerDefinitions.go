@@ -105,6 +105,7 @@ func (c *Client) ListLoggerDefinitionsRequest(input *ListLoggerDefinitionsInput)
 	}
 
 	req := c.newRequest(op, input, &ListLoggerDefinitionsOutput{})
+
 	return ListLoggerDefinitionsRequest{Request: req, Input: input, Copy: c.ListLoggerDefinitionsRequest}
 }
 

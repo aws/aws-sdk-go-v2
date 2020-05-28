@@ -144,6 +144,12 @@ func (c *Client) ListQueryLoggingConfigsRequest(input *ListQueryLoggingConfigsIn
 		Name:       opListQueryLoggingConfigs,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/queryloggingconfig",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -151,6 +157,7 @@ func (c *Client) ListQueryLoggingConfigsRequest(input *ListQueryLoggingConfigsIn
 	}
 
 	req := c.newRequest(op, input, &ListQueryLoggingConfigsOutput{})
+
 	return ListQueryLoggingConfigsRequest{Request: req, Input: input, Copy: c.ListQueryLoggingConfigsRequest}
 }
 
@@ -176,6 +183,53 @@ func (r ListQueryLoggingConfigsRequest) Send(ctx context.Context) (*ListQueryLog
 	}
 
 	return resp, nil
+}
+
+// NewListQueryLoggingConfigsRequestPaginator returns a paginator for ListQueryLoggingConfigs.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListQueryLoggingConfigsRequest(input)
+//   p := route53.NewListQueryLoggingConfigsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListQueryLoggingConfigsPaginator(req ListQueryLoggingConfigsRequest) ListQueryLoggingConfigsPaginator {
+	return ListQueryLoggingConfigsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListQueryLoggingConfigsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListQueryLoggingConfigsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListQueryLoggingConfigsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListQueryLoggingConfigsPaginator) CurrentPage() *ListQueryLoggingConfigsOutput {
+	return p.Pager.CurrentPage().(*ListQueryLoggingConfigsOutput)
 }
 
 // ListQueryLoggingConfigsResponse is the response type for the

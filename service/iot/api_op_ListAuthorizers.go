@@ -138,6 +138,7 @@ func (c *Client) ListAuthorizersRequest(input *ListAuthorizersInput) ListAuthori
 	}
 
 	req := c.newRequest(op, input, &ListAuthorizersOutput{})
+
 	return ListAuthorizersRequest{Request: req, Input: input, Copy: c.ListAuthorizersRequest}
 }
 

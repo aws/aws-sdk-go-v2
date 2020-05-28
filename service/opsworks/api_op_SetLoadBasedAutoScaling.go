@@ -112,6 +112,7 @@ func (c *Client) SetLoadBasedAutoScalingRequest(input *SetLoadBasedAutoScalingIn
 	req := c.newRequest(op, input, &SetLoadBasedAutoScalingOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetLoadBasedAutoScalingRequest{Request: req, Input: input, Copy: c.SetLoadBasedAutoScalingRequest}
 }
 

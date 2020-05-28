@@ -99,6 +99,7 @@ func (c *Client) GetOpenIdTokenRequest(input *GetOpenIdTokenInput) GetOpenIdToke
 
 	req := c.newRequest(op, input, &GetOpenIdTokenOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return GetOpenIdTokenRequest{Request: req, Input: input, Copy: c.GetOpenIdTokenRequest}
 }
 

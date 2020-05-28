@@ -183,6 +183,7 @@ func (c *Client) CreateModelRequest(input *CreateModelInput) CreateModelRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateModelOutput{})
+
 	return CreateModelRequest{Request: req, Input: input, Copy: c.CreateModelRequest}
 }
 

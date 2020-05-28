@@ -107,6 +107,7 @@ func (c *Client) DeleteUserPolicyRequest(input *DeleteUserPolicyInput) DeleteUse
 	req := c.newRequest(op, input, &DeleteUserPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteUserPolicyRequest{Request: req, Input: input, Copy: c.DeleteUserPolicyRequest}
 }
 

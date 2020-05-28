@@ -612,6 +612,7 @@ func (c *Client) ModifyDBInstanceRequest(input *ModifyDBInstanceInput) ModifyDBI
 	}
 
 	req := c.newRequest(op, input, &ModifyDBInstanceOutput{})
+
 	return ModifyDBInstanceRequest{Request: req, Input: input, Copy: c.ModifyDBInstanceRequest}
 }
 

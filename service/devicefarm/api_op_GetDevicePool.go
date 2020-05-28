@@ -81,6 +81,7 @@ func (c *Client) GetDevicePoolRequest(input *GetDevicePoolInput) GetDevicePoolRe
 	}
 
 	req := c.newRequest(op, input, &GetDevicePoolOutput{})
+
 	return GetDevicePoolRequest{Request: req, Input: input, Copy: c.GetDevicePoolRequest}
 }
 

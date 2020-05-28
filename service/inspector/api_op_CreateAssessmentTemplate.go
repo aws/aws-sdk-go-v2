@@ -137,6 +137,7 @@ func (c *Client) CreateAssessmentTemplateRequest(input *CreateAssessmentTemplate
 	}
 
 	req := c.newRequest(op, input, &CreateAssessmentTemplateOutput{})
+
 	return CreateAssessmentTemplateRequest{Request: req, Input: input, Copy: c.CreateAssessmentTemplateRequest}
 }
 

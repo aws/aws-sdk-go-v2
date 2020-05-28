@@ -118,6 +118,7 @@ func (c *Client) InvokeDeviceMethodRequest(input *InvokeDeviceMethodInput) Invok
 	}
 
 	req := c.newRequest(op, input, &InvokeDeviceMethodOutput{})
+
 	return InvokeDeviceMethodRequest{Request: req, Input: input, Copy: c.InvokeDeviceMethodRequest}
 }
 

@@ -132,6 +132,7 @@ func (c *Client) GetGroupPolicyRequest(input *GetGroupPolicyInput) GetGroupPolic
 	}
 
 	req := c.newRequest(op, input, &GetGroupPolicyOutput{})
+
 	return GetGroupPolicyRequest{Request: req, Input: input, Copy: c.GetGroupPolicyRequest}
 }
 

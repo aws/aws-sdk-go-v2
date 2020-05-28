@@ -118,6 +118,10 @@ const opListJournalS3Exports = "ListJournalS3Exports"
 // This action returns a maximum of MaxResults items, and is paginated so that
 // you can retrieve all the items by calling ListJournalS3Exports multiple times.
 //
+// This action does not return any expired export jobs. For more information,
+// see Export Job Expiration (https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration)
+// in the Amazon QLDB Developer Guide.
+//
 //    // Example sending a request using ListJournalS3ExportsRequest.
 //    req := client.ListJournalS3ExportsRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -144,6 +148,7 @@ func (c *Client) ListJournalS3ExportsRequest(input *ListJournalS3ExportsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListJournalS3ExportsOutput{})
+
 	return ListJournalS3ExportsRequest{Request: req, Input: input, Copy: c.ListJournalS3ExportsRequest}
 }
 

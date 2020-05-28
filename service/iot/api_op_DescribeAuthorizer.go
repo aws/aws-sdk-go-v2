@@ -102,6 +102,7 @@ func (c *Client) DescribeAuthorizerRequest(input *DescribeAuthorizerInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeAuthorizerOutput{})
+
 	return DescribeAuthorizerRequest{Request: req, Input: input, Copy: c.DescribeAuthorizerRequest}
 }
 

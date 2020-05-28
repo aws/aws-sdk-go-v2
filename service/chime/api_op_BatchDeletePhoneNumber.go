@@ -122,6 +122,7 @@ func (c *Client) BatchDeletePhoneNumberRequest(input *BatchDeletePhoneNumberInpu
 	}
 
 	req := c.newRequest(op, input, &BatchDeletePhoneNumberOutput{})
+
 	return BatchDeletePhoneNumberRequest{Request: req, Input: input, Copy: c.BatchDeletePhoneNumberRequest}
 }
 

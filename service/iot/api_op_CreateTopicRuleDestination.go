@@ -105,6 +105,7 @@ func (c *Client) CreateTopicRuleDestinationRequest(input *CreateTopicRuleDestina
 	}
 
 	req := c.newRequest(op, input, &CreateTopicRuleDestinationOutput{})
+
 	return CreateTopicRuleDestinationRequest{Request: req, Input: input, Copy: c.CreateTopicRuleDestinationRequest}
 }
 

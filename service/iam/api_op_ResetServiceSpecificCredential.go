@@ -102,6 +102,7 @@ func (c *Client) ResetServiceSpecificCredentialRequest(input *ResetServiceSpecif
 	}
 
 	req := c.newRequest(op, input, &ResetServiceSpecificCredentialOutput{})
+
 	return ResetServiceSpecificCredentialRequest{Request: req, Input: input, Copy: c.ResetServiceSpecificCredentialRequest}
 }
 

@@ -105,6 +105,7 @@ func (c *Client) DescribeReplicationInstanceTaskLogsRequest(input *DescribeRepli
 	}
 
 	req := c.newRequest(op, input, &DescribeReplicationInstanceTaskLogsOutput{})
+
 	return DescribeReplicationInstanceTaskLogsRequest{Request: req, Input: input, Copy: c.DescribeReplicationInstanceTaskLogsRequest}
 }
 

@@ -127,6 +127,7 @@ func (c *Client) ListDataSourceSyncJobsRequest(input *ListDataSourceSyncJobsInpu
 	}
 
 	req := c.newRequest(op, input, &ListDataSourceSyncJobsOutput{})
+
 	return ListDataSourceSyncJobsRequest{Request: req, Input: input, Copy: c.ListDataSourceSyncJobsRequest}
 }
 

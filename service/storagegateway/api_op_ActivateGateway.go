@@ -212,6 +212,7 @@ func (c *Client) ActivateGatewayRequest(input *ActivateGatewayInput) ActivateGat
 	}
 
 	req := c.newRequest(op, input, &ActivateGatewayOutput{})
+
 	return ActivateGatewayRequest{Request: req, Input: input, Copy: c.ActivateGatewayRequest}
 }
 

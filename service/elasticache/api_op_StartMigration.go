@@ -86,6 +86,7 @@ func (c *Client) StartMigrationRequest(input *StartMigrationInput) StartMigratio
 	}
 
 	req := c.newRequest(op, input, &StartMigrationOutput{})
+
 	return StartMigrationRequest{Request: req, Input: input, Copy: c.StartMigrationRequest}
 }
 

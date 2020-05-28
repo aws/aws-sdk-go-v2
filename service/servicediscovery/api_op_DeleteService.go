@@ -74,6 +74,7 @@ func (c *Client) DeleteServiceRequest(input *DeleteServiceInput) DeleteServiceRe
 	}
 
 	req := c.newRequest(op, input, &DeleteServiceOutput{})
+
 	return DeleteServiceRequest{Request: req, Input: input, Copy: c.DeleteServiceRequest}
 }
 

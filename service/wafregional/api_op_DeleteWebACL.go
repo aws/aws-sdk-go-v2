@@ -72,6 +72,16 @@ const opDeleteWebACL = "DeleteWebACL"
 // DeleteWebACLRequest returns a request value for making API operation for
 // AWS WAF Regional.
 //
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Permanently deletes a WebACL. You can't delete a WebACL if it still contains
 // any Rules.
 //
@@ -104,6 +114,7 @@ func (c *Client) DeleteWebACLRequest(input *DeleteWebACLInput) DeleteWebACLReque
 	}
 
 	req := c.newRequest(op, input, &DeleteWebACLOutput{})
+
 	return DeleteWebACLRequest{Request: req, Input: input, Copy: c.DeleteWebACLRequest}
 }
 

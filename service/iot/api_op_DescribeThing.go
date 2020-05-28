@@ -65,7 +65,14 @@ type DescribeThingOutput struct {
 	// The name of the billing group the thing belongs to.
 	BillingGroupName *string `locationName:"billingGroupName" min:"1" type:"string"`
 
-	// The default client ID.
+	// The default MQTT client ID. For a typical device, the thing name is also
+	// used as the default MQTT client ID. Although we don’t require a mapping
+	// between a thing's registry name and its use of MQTT client IDs, certificates,
+	// or shadow state, we recommend that you choose a thing name and use it as
+	// the MQTT client ID for the registry and the Device Shadow service.
+	//
+	// This lets you better organize your AWS IoT fleet without removing the flexibility
+	// of the underlying device certificate model or shadows.
 	DefaultClientId *string `locationName:"defaultClientId" type:"string"`
 
 	// The ARN of the thing to describe.
@@ -177,6 +184,7 @@ func (c *Client) DescribeThingRequest(input *DescribeThingInput) DescribeThingRe
 	}
 
 	req := c.newRequest(op, input, &DescribeThingOutput{})
+
 	return DescribeThingRequest{Request: req, Input: input, Copy: c.DescribeThingRequest}
 }
 

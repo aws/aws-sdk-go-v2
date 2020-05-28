@@ -157,6 +157,7 @@ func (c *Client) CreateVpcEndpointRequest(input *CreateVpcEndpointInput) CreateV
 	}
 
 	req := c.newRequest(op, input, &CreateVpcEndpointOutput{})
+
 	return CreateVpcEndpointRequest{Request: req, Input: input, Copy: c.CreateVpcEndpointRequest}
 }
 

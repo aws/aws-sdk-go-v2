@@ -222,6 +222,7 @@ func (c *Client) GetMediaRequest(input *GetMediaInput) GetMediaRequest {
 	}
 
 	req := c.newRequest(op, input, &GetMediaOutput{})
+
 	return GetMediaRequest{Request: req, Input: input, Copy: c.GetMediaRequest}
 }
 

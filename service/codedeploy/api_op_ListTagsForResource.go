@@ -68,8 +68,9 @@ const opListTagsForResource = "ListTagsForResource"
 // ListTagsForResourceRequest returns a request value for making API operation for
 // AWS CodeDeploy.
 //
-// Returns a list of tags for the resource identified by a specified ARN. Tags
-// are used to organize and categorize your CodeDeploy resources.
+// Returns a list of tags for the resource identified by a specified Amazon
+// Resource Name (ARN). Tags are used to organize and categorize your CodeDeploy
+// resources.
 //
 //    // Example sending a request using ListTagsForResourceRequest.
 //    req := client.ListTagsForResourceRequest(params)
@@ -91,6 +92,7 @@ func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+
 	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 

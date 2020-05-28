@@ -85,6 +85,7 @@ func (c *Client) StopTransformJobRequest(input *StopTransformJobInput) StopTrans
 	req := c.newRequest(op, input, &StopTransformJobOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StopTransformJobRequest{Request: req, Input: input, Copy: c.StopTransformJobRequest}
 }
 

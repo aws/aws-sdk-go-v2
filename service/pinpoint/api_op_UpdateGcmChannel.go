@@ -127,6 +127,7 @@ func (c *Client) UpdateGcmChannelRequest(input *UpdateGcmChannelInput) UpdateGcm
 	}
 
 	req := c.newRequest(op, input, &UpdateGcmChannelOutput{})
+
 	return UpdateGcmChannelRequest{Request: req, Input: input, Copy: c.UpdateGcmChannelRequest}
 }
 

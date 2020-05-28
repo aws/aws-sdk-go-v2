@@ -62,6 +62,7 @@ func (c *Client) CreateStorageLocationRequest(input *CreateStorageLocationInput)
 	}
 
 	req := c.newRequest(op, input, &CreateStorageLocationOutput{})
+
 	return CreateStorageLocationRequest{Request: req, Input: input, Copy: c.CreateStorageLocationRequest}
 }
 

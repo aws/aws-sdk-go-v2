@@ -127,6 +127,7 @@ func (c *Client) TagMeetingRequest(input *TagMeetingInput) TagMeetingRequest {
 	req := c.newRequest(op, input, &TagMeetingOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return TagMeetingRequest{Request: req, Input: input, Copy: c.TagMeetingRequest}
 }
 

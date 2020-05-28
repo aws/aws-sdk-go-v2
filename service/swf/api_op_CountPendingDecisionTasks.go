@@ -122,6 +122,7 @@ func (c *Client) CountPendingDecisionTasksRequest(input *CountPendingDecisionTas
 	}
 
 	req := c.newRequest(op, input, &CountPendingDecisionTasksOutput{})
+
 	return CountPendingDecisionTasksRequest{Request: req, Input: input, Copy: c.CountPendingDecisionTasksRequest}
 }
 

@@ -199,6 +199,7 @@ func (c *Client) ListFragmentsRequest(input *ListFragmentsInput) ListFragmentsRe
 	}
 
 	req := c.newRequest(op, input, &ListFragmentsOutput{})
+
 	return ListFragmentsRequest{Request: req, Input: input, Copy: c.ListFragmentsRequest}
 }
 

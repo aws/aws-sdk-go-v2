@@ -77,6 +77,7 @@ func (c *Client) DeleteTemplateRequest(input *DeleteTemplateInput) DeleteTemplat
 	}
 
 	req := c.newRequest(op, input, &DeleteTemplateOutput{})
+
 	return DeleteTemplateRequest{Request: req, Input: input, Copy: c.DeleteTemplateRequest}
 }
 

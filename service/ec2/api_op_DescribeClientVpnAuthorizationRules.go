@@ -114,6 +114,7 @@ func (c *Client) DescribeClientVpnAuthorizationRulesRequest(input *DescribeClien
 	}
 
 	req := c.newRequest(op, input, &DescribeClientVpnAuthorizationRulesOutput{})
+
 	return DescribeClientVpnAuthorizationRulesRequest{Request: req, Input: input, Copy: c.DescribeClientVpnAuthorizationRulesRequest}
 }
 

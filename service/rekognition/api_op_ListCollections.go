@@ -85,6 +85,7 @@ func (c *Client) ListCollectionsRequest(input *ListCollectionsInput) ListCollect
 	}
 
 	req := c.newRequest(op, input, &ListCollectionsOutput{})
+
 	return ListCollectionsRequest{Request: req, Input: input, Copy: c.ListCollectionsRequest}
 }
 

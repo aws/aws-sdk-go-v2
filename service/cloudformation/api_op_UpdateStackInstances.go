@@ -177,6 +177,7 @@ func (c *Client) UpdateStackInstancesRequest(input *UpdateStackInstancesInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateStackInstancesOutput{})
+
 	return UpdateStackInstancesRequest{Request: req, Input: input, Copy: c.UpdateStackInstancesRequest}
 }
 

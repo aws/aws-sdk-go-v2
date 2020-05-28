@@ -165,6 +165,7 @@ func (c *Client) GetPercentilesRequest(input *GetPercentilesInput) GetPercentile
 	}
 
 	req := c.newRequest(op, input, &GetPercentilesOutput{})
+
 	return GetPercentilesRequest{Request: req, Input: input, Copy: c.GetPercentilesRequest}
 }
 

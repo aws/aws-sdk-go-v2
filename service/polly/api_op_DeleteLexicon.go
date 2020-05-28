@@ -96,6 +96,7 @@ func (c *Client) DeleteLexiconRequest(input *DeleteLexiconInput) DeleteLexiconRe
 	}
 
 	req := c.newRequest(op, input, &DeleteLexiconOutput{})
+
 	return DeleteLexiconRequest{Request: req, Input: input, Copy: c.DeleteLexiconRequest}
 }
 

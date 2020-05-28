@@ -84,6 +84,7 @@ func (c *Client) GetRemoteAccessSessionRequest(input *GetRemoteAccessSessionInpu
 	}
 
 	req := c.newRequest(op, input, &GetRemoteAccessSessionOutput{})
+
 	return GetRemoteAccessSessionRequest{Request: req, Input: input, Copy: c.GetRemoteAccessSessionRequest}
 }
 

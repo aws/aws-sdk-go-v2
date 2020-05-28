@@ -634,6 +634,28 @@ func (enum ChannelState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// The status of the action to synchronize the device configuration. If you
+// change the configuration of the input device (for example, the maximum bitrate),
+// MediaLive sends the new data to the device. The device might not update itself
+// immediately. SYNCED means the device has updated its configuration. SYNCING
+// means that it has not updated its configuration.
+type DeviceSettingsSyncState string
+
+// Enum values for DeviceSettingsSyncState
+const (
+	DeviceSettingsSyncStateSynced  DeviceSettingsSyncState = "SYNCED"
+	DeviceSettingsSyncStateSyncing DeviceSettingsSyncState = "SYNCING"
+)
+
+func (enum DeviceSettingsSyncState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeviceSettingsSyncState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Dvb Sdt Output Sdt
 type DvbSdtOutputSdt string
 
@@ -1122,6 +1144,42 @@ func (enum FixedAfd) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Fmp4 Nielsen Id3 Behavior
+type Fmp4NielsenId3Behavior string
+
+// Enum values for Fmp4NielsenId3Behavior
+const (
+	Fmp4NielsenId3BehaviorNoPassthrough Fmp4NielsenId3Behavior = "NO_PASSTHROUGH"
+	Fmp4NielsenId3BehaviorPassthrough   Fmp4NielsenId3Behavior = "PASSTHROUGH"
+)
+
+func (enum Fmp4NielsenId3Behavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Fmp4NielsenId3Behavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Fmp4 Timed Metadata Behavior
+type Fmp4TimedMetadataBehavior string
+
+// Enum values for Fmp4TimedMetadataBehavior
+const (
+	Fmp4TimedMetadataBehaviorNoPassthrough Fmp4TimedMetadataBehavior = "NO_PASSTHROUGH"
+	Fmp4TimedMetadataBehaviorPassthrough   Fmp4TimedMetadataBehavior = "PASSTHROUGH"
+)
+
+func (enum Fmp4TimedMetadataBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Fmp4TimedMetadataBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Follow reference point.
 type FollowPoint string
 
@@ -1466,6 +1524,24 @@ func (enum H264Profile) MarshalValue() (string, error) {
 }
 
 func (enum H264Profile) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// H264 Quality Level
+type H264QualityLevel string
+
+// Enum values for H264QualityLevel
+const (
+	H264QualityLevelEnhancedQuality H264QualityLevel = "ENHANCED_QUALITY"
+	H264QualityLevelStandardQuality H264QualityLevel = "STANDARD_QUALITY"
+)
+
+func (enum H264QualityLevel) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H264QualityLevel) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -2376,6 +2452,134 @@ func (enum InputDenoiseFilter) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// The source at the input device that is currently active.
+type InputDeviceActiveInput string
+
+// Enum values for InputDeviceActiveInput
+const (
+	InputDeviceActiveInputHdmi InputDeviceActiveInput = "HDMI"
+	InputDeviceActiveInputSdi  InputDeviceActiveInput = "SDI"
+)
+
+func (enum InputDeviceActiveInput) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InputDeviceActiveInput) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The source to activate (use) from the input device.
+type InputDeviceConfiguredInput string
+
+// Enum values for InputDeviceConfiguredInput
+const (
+	InputDeviceConfiguredInputAuto InputDeviceConfiguredInput = "AUTO"
+	InputDeviceConfiguredInputHdmi InputDeviceConfiguredInput = "HDMI"
+	InputDeviceConfiguredInputSdi  InputDeviceConfiguredInput = "SDI"
+)
+
+func (enum InputDeviceConfiguredInput) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InputDeviceConfiguredInput) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The state of the connection between the input device and AWS.
+type InputDeviceConnectionState string
+
+// Enum values for InputDeviceConnectionState
+const (
+	InputDeviceConnectionStateDisconnected InputDeviceConnectionState = "DISCONNECTED"
+	InputDeviceConnectionStateConnected    InputDeviceConnectionState = "CONNECTED"
+)
+
+func (enum InputDeviceConnectionState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InputDeviceConnectionState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Specifies whether the input device has been configured (outside of MediaLive)
+// to use a dynamic IP address assignment (DHCP) or a static IP address.
+type InputDeviceIpScheme string
+
+// Enum values for InputDeviceIpScheme
+const (
+	InputDeviceIpSchemeStatic InputDeviceIpScheme = "STATIC"
+	InputDeviceIpSchemeDhcp   InputDeviceIpScheme = "DHCP"
+)
+
+func (enum InputDeviceIpScheme) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InputDeviceIpScheme) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The scan type of the video source.
+type InputDeviceScanType string
+
+// Enum values for InputDeviceScanType
+const (
+	InputDeviceScanTypeInterlaced  InputDeviceScanType = "INTERLACED"
+	InputDeviceScanTypeProgressive InputDeviceScanType = "PROGRESSIVE"
+)
+
+func (enum InputDeviceScanType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InputDeviceScanType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The state of the input device.
+type InputDeviceState string
+
+// Enum values for InputDeviceState
+const (
+	InputDeviceStateIdle      InputDeviceState = "IDLE"
+	InputDeviceStateStreaming InputDeviceState = "STREAMING"
+)
+
+func (enum InputDeviceState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InputDeviceState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The type of the input device. For an AWS Elemental Link device that outputs
+// resolutions up to 1080, choose "HD".
+type InputDeviceType string
+
+// Enum values for InputDeviceType
+const (
+	InputDeviceTypeHd InputDeviceType = "HD"
+)
+
+func (enum InputDeviceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InputDeviceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Input Filter
 type InputFilter string
 
@@ -2660,6 +2864,7 @@ const (
 	InputTypeUrlPull      InputType = "URL_PULL"
 	InputTypeMp4File      InputType = "MP4_FILE"
 	InputTypeMediaconnect InputType = "MEDIACONNECT"
+	InputTypeInputDevice  InputType = "INPUT_DEVICE"
 )
 
 func (enum InputType) MarshalValue() (string, error) {
@@ -3803,8 +4008,9 @@ type SmoothGroupSparseTrackType string
 
 // Enum values for SmoothGroupSparseTrackType
 const (
-	SmoothGroupSparseTrackTypeNone   SmoothGroupSparseTrackType = "NONE"
-	SmoothGroupSparseTrackTypeScte35 SmoothGroupSparseTrackType = "SCTE_35"
+	SmoothGroupSparseTrackTypeNone                      SmoothGroupSparseTrackType = "NONE"
+	SmoothGroupSparseTrackTypeScte35                    SmoothGroupSparseTrackType = "SCTE_35"
+	SmoothGroupSparseTrackTypeScte35WithoutSegmentation SmoothGroupSparseTrackType = "SCTE_35_WITHOUT_SEGMENTATION"
 )
 
 func (enum SmoothGroupSparseTrackType) MarshalValue() (string, error) {
@@ -3848,6 +4054,76 @@ func (enum SmoothGroupTimestampOffsetMode) MarshalValue() (string, error) {
 }
 
 func (enum SmoothGroupTimestampOffsetMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Smpte2038 Data Preference
+type Smpte2038DataPreference string
+
+// Enum values for Smpte2038DataPreference
+const (
+	Smpte2038DataPreferenceIgnore Smpte2038DataPreference = "IGNORE"
+	Smpte2038DataPreferencePrefer Smpte2038DataPreference = "PREFER"
+)
+
+func (enum Smpte2038DataPreference) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Smpte2038DataPreference) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Temporal Filter Post Filter Sharpening
+type TemporalFilterPostFilterSharpening string
+
+// Enum values for TemporalFilterPostFilterSharpening
+const (
+	TemporalFilterPostFilterSharpeningAuto     TemporalFilterPostFilterSharpening = "AUTO"
+	TemporalFilterPostFilterSharpeningDisabled TemporalFilterPostFilterSharpening = "DISABLED"
+	TemporalFilterPostFilterSharpeningEnabled  TemporalFilterPostFilterSharpening = "ENABLED"
+)
+
+func (enum TemporalFilterPostFilterSharpening) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TemporalFilterPostFilterSharpening) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Temporal Filter Strength
+type TemporalFilterStrength string
+
+// Enum values for TemporalFilterStrength
+const (
+	TemporalFilterStrengthAuto       TemporalFilterStrength = "AUTO"
+	TemporalFilterStrengthStrength1  TemporalFilterStrength = "STRENGTH_1"
+	TemporalFilterStrengthStrength2  TemporalFilterStrength = "STRENGTH_2"
+	TemporalFilterStrengthStrength3  TemporalFilterStrength = "STRENGTH_3"
+	TemporalFilterStrengthStrength4  TemporalFilterStrength = "STRENGTH_4"
+	TemporalFilterStrengthStrength5  TemporalFilterStrength = "STRENGTH_5"
+	TemporalFilterStrengthStrength6  TemporalFilterStrength = "STRENGTH_6"
+	TemporalFilterStrengthStrength7  TemporalFilterStrength = "STRENGTH_7"
+	TemporalFilterStrengthStrength8  TemporalFilterStrength = "STRENGTH_8"
+	TemporalFilterStrengthStrength9  TemporalFilterStrength = "STRENGTH_9"
+	TemporalFilterStrengthStrength10 TemporalFilterStrength = "STRENGTH_10"
+	TemporalFilterStrengthStrength11 TemporalFilterStrength = "STRENGTH_11"
+	TemporalFilterStrengthStrength12 TemporalFilterStrength = "STRENGTH_12"
+	TemporalFilterStrengthStrength13 TemporalFilterStrength = "STRENGTH_13"
+	TemporalFilterStrengthStrength14 TemporalFilterStrength = "STRENGTH_14"
+	TemporalFilterStrengthStrength15 TemporalFilterStrength = "STRENGTH_15"
+	TemporalFilterStrengthStrength16 TemporalFilterStrength = "STRENGTH_16"
+)
+
+func (enum TemporalFilterStrength) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TemporalFilterStrength) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

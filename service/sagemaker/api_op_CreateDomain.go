@@ -28,7 +28,8 @@ type CreateDomainInput struct {
 	// DomainName is a required field
 	DomainName *string `type:"string" required:"true"`
 
-	// The AWS Key Management Service encryption key ID.
+	// The AWS Key Management Service (KMS) encryption key ID. Encryption with a
+	// customer master key (CMK) is not supported.
 	HomeEfsFileSystemKmsKeyId *string `type:"string"`
 
 	// Security setting to limit to a set of subnets.
@@ -116,15 +117,15 @@ const opCreateDomain = "CreateDomain"
 // CreateDomainRequest returns a request value for making API operation for
 // Amazon SageMaker Service.
 //
-// Creates a Domain for Amazon SageMaker Amazon SageMaker Studio (Studio), which
-// can be accessed by end-users in a web browser. A Domain has an associated
-// directory, list of authorized users, and a variety of security, application,
-// policies, and Amazon Virtual Private Cloud configurations. An AWS account
-// is limited to one Domain, per region. Users within a domain can share notebook
-// files and other artifacts with each other. When a Domain is created, an Amazon
-// Elastic File System (EFS) is also created for use by all of the users within
-// the Domain. Each user receives a private home directory within the EFS for
-// notebooks, Git repositories, and data files.
+// Creates a Domain for Amazon SageMaker Studio, which can be accessed by end-users
+// in a web browser. A Domain has an associated directory, list of authorized
+// users, and a variety of security, application, policies, and Amazon Virtual
+// Private Cloud configurations. An AWS account is limited to one Domain, per
+// region. Users within a domain can share notebook files and other artifacts
+// with each other. When a Domain is created, an Amazon Elastic File System
+// (EFS) is also created for use by all of the users within the Domain. Each
+// user receives a private home directory within the EFS for notebooks, Git
+// repositories, and data files.
 //
 //    // Example sending a request using CreateDomainRequest.
 //    req := client.CreateDomainRequest(params)
@@ -146,6 +147,7 @@ func (c *Client) CreateDomainRequest(input *CreateDomainInput) CreateDomainReque
 	}
 
 	req := c.newRequest(op, input, &CreateDomainOutput{})
+
 	return CreateDomainRequest{Request: req, Input: input, Copy: c.CreateDomainRequest}
 }
 

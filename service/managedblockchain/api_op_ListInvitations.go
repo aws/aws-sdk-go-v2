@@ -128,6 +128,7 @@ func (c *Client) ListInvitationsRequest(input *ListInvitationsInput) ListInvitat
 	}
 
 	req := c.newRequest(op, input, &ListInvitationsOutput{})
+
 	return ListInvitationsRequest{Request: req, Input: input, Copy: c.ListInvitationsRequest}
 }
 

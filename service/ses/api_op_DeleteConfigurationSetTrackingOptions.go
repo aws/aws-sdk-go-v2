@@ -87,6 +87,7 @@ func (c *Client) DeleteConfigurationSetTrackingOptionsRequest(input *DeleteConfi
 	}
 
 	req := c.newRequest(op, input, &DeleteConfigurationSetTrackingOptionsOutput{})
+
 	return DeleteConfigurationSetTrackingOptionsRequest{Request: req, Input: input, Copy: c.DeleteConfigurationSetTrackingOptionsRequest}
 }
 

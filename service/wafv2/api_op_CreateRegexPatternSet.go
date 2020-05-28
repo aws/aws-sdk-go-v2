@@ -143,6 +143,7 @@ func (c *Client) CreateRegexPatternSetRequest(input *CreateRegexPatternSetInput)
 	}
 
 	req := c.newRequest(op, input, &CreateRegexPatternSetOutput{})
+
 	return CreateRegexPatternSetRequest{Request: req, Input: input, Copy: c.CreateRegexPatternSetRequest}
 }
 

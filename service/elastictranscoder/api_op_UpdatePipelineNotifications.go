@@ -143,6 +143,7 @@ func (c *Client) UpdatePipelineNotificationsRequest(input *UpdatePipelineNotific
 	}
 
 	req := c.newRequest(op, input, &UpdatePipelineNotificationsOutput{})
+
 	return UpdatePipelineNotificationsRequest{Request: req, Input: input, Copy: c.UpdatePipelineNotificationsRequest}
 }
 

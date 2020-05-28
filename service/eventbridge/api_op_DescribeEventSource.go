@@ -101,6 +101,7 @@ func (c *Client) DescribeEventSourceRequest(input *DescribeEventSourceInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeEventSourceOutput{})
+
 	return DescribeEventSourceRequest{Request: req, Input: input, Copy: c.DescribeEventSourceRequest}
 }
 

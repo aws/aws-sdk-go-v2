@@ -124,6 +124,7 @@ func (c *Client) DescribePlacementRequest(input *DescribePlacementInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribePlacementOutput{})
+
 	return DescribePlacementRequest{Request: req, Input: input, Copy: c.DescribePlacementRequest}
 }
 

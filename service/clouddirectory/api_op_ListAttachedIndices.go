@@ -167,6 +167,7 @@ func (c *Client) ListAttachedIndicesRequest(input *ListAttachedIndicesInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListAttachedIndicesOutput{})
+
 	return ListAttachedIndicesRequest{Request: req, Input: input, Copy: c.ListAttachedIndicesRequest}
 }
 

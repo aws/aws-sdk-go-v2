@@ -45,11 +45,12 @@ type ListObjectVersionsInput struct {
 	// Specifies the key to start with when listing objects in a bucket.
 	KeyMarker *string `location:"querystring" locationName:"key-marker" type:"string"`
 
-	// Sets the maximum number of keys returned in the response. The response might
-	// contain fewer keys but will never contain more. If additional keys satisfy
-	// the search criteria, but were not returned because max-keys was exceeded,
-	// the response contains <isTruncated>true</isTruncated>. To return the additional
-	// keys, see key-marker and version-id-marker.
+	// Sets the maximum number of keys returned in the response. By default the
+	// API returns up to 1,000 key names. The response might contain fewer keys
+	// but will never contain more. If additional keys satisfy the search criteria,
+	// but were not returned because max-keys was exceeded, the response contains
+	// <isTruncated>true</isTruncated>. To return the additional keys, see key-marker
+	// and version-id-marker.
 	MaxKeys *int64 `location:"querystring" locationName:"max-keys" type:"integer"`
 
 	// Use this parameter to select only those keys that begin with the specified
@@ -371,6 +372,7 @@ func (c *Client) ListObjectVersionsRequest(input *ListObjectVersionsInput) ListO
 	}
 
 	req := c.newRequest(op, input, &ListObjectVersionsOutput{})
+
 	return ListObjectVersionsRequest{Request: req, Input: input, Copy: c.ListObjectVersionsRequest}
 }
 

@@ -266,6 +266,7 @@ func (c *Client) ReimportApiRequest(input *ReimportApiInput) ReimportApiRequest 
 	}
 
 	req := c.newRequest(op, input, &ReimportApiOutput{})
+
 	return ReimportApiRequest{Request: req, Input: input, Copy: c.ReimportApiRequest}
 }
 

@@ -167,6 +167,7 @@ func (c *Client) LookupPolicyRequest(input *LookupPolicyInput) LookupPolicyReque
 	}
 
 	req := c.newRequest(op, input, &LookupPolicyOutput{})
+
 	return LookupPolicyRequest{Request: req, Input: input, Copy: c.LookupPolicyRequest}
 }
 

@@ -179,6 +179,7 @@ func (c *Client) ReserveContactRequest(input *ReserveContactInput) ReserveContac
 	}
 
 	req := c.newRequest(op, input, &ReserveContactOutput{})
+
 	return ReserveContactRequest{Request: req, Input: input, Copy: c.ReserveContactRequest}
 }
 

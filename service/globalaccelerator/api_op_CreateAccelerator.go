@@ -136,6 +136,7 @@ func (c *Client) CreateAcceleratorRequest(input *CreateAcceleratorInput) CreateA
 	}
 
 	req := c.newRequest(op, input, &CreateAcceleratorOutput{})
+
 	return CreateAcceleratorRequest{Request: req, Input: input, Copy: c.CreateAcceleratorRequest}
 }
 

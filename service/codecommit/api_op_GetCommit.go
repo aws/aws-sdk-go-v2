@@ -93,6 +93,7 @@ func (c *Client) GetCommitRequest(input *GetCommitInput) GetCommitRequest {
 	}
 
 	req := c.newRequest(op, input, &GetCommitOutput{})
+
 	return GetCommitRequest{Request: req, Input: input, Copy: c.GetCommitRequest}
 }
 

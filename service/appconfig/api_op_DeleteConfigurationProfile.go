@@ -111,6 +111,7 @@ func (c *Client) DeleteConfigurationProfileRequest(input *DeleteConfigurationPro
 	req := c.newRequest(op, input, &DeleteConfigurationProfileOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteConfigurationProfileRequest{Request: req, Input: input, Copy: c.DeleteConfigurationProfileRequest}
 }
 

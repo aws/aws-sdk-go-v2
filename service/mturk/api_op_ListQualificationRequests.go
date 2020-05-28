@@ -107,6 +107,7 @@ func (c *Client) ListQualificationRequestsRequest(input *ListQualificationReques
 	}
 
 	req := c.newRequest(op, input, &ListQualificationRequestsOutput{})
+
 	return ListQualificationRequestsRequest{Request: req, Input: input, Copy: c.ListQualificationRequestsRequest}
 }
 

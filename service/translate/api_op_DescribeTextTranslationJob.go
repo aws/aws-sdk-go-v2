@@ -83,6 +83,7 @@ func (c *Client) DescribeTextTranslationJobRequest(input *DescribeTextTranslatio
 	}
 
 	req := c.newRequest(op, input, &DescribeTextTranslationJobOutput{})
+
 	return DescribeTextTranslationJobRequest{Request: req, Input: input, Copy: c.DescribeTextTranslationJobRequest}
 }
 

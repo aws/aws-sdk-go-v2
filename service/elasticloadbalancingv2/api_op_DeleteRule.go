@@ -73,6 +73,7 @@ func (c *Client) DeleteRuleRequest(input *DeleteRuleInput) DeleteRuleRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteRuleOutput{})
+
 	return DeleteRuleRequest{Request: req, Input: input, Copy: c.DeleteRuleRequest}
 }
 

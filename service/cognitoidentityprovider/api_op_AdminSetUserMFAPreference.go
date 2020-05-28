@@ -99,6 +99,7 @@ func (c *Client) AdminSetUserMFAPreferenceRequest(input *AdminSetUserMFAPreferen
 	}
 
 	req := c.newRequest(op, input, &AdminSetUserMFAPreferenceOutput{})
+
 	return AdminSetUserMFAPreferenceRequest{Request: req, Input: input, Copy: c.AdminSetUserMFAPreferenceRequest}
 }
 

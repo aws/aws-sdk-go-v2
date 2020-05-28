@@ -151,6 +151,7 @@ func (c *Client) ForgotPasswordRequest(input *ForgotPasswordInput) ForgotPasswor
 
 	req := c.newRequest(op, input, &ForgotPasswordOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return ForgotPasswordRequest{Request: req, Input: input, Copy: c.ForgotPasswordRequest}
 }
 

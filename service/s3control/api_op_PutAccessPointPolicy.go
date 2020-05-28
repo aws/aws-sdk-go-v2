@@ -139,6 +139,7 @@ func (c *Client) PutAccessPointPolicyRequest(input *PutAccessPointPolicyInput) P
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
+
 	return PutAccessPointPolicyRequest{Request: req, Input: input, Copy: c.PutAccessPointPolicyRequest}
 }
 

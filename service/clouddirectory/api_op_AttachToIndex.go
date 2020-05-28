@@ -132,6 +132,7 @@ func (c *Client) AttachToIndexRequest(input *AttachToIndexInput) AttachToIndexRe
 	}
 
 	req := c.newRequest(op, input, &AttachToIndexOutput{})
+
 	return AttachToIndexRequest{Request: req, Input: input, Copy: c.AttachToIndexRequest}
 }
 

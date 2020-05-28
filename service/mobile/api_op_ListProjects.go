@@ -121,6 +121,7 @@ func (c *Client) ListProjectsRequest(input *ListProjectsInput) ListProjectsReque
 	}
 
 	req := c.newRequest(op, input, &ListProjectsOutput{})
+
 	return ListProjectsRequest{Request: req, Input: input, Copy: c.ListProjectsRequest}
 }
 

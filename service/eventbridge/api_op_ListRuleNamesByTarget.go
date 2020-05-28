@@ -103,6 +103,7 @@ func (c *Client) ListRuleNamesByTargetRequest(input *ListRuleNamesByTargetInput)
 	}
 
 	req := c.newRequest(op, input, &ListRuleNamesByTargetOutput{})
+
 	return ListRuleNamesByTargetRequest{Request: req, Input: input, Copy: c.ListRuleNamesByTargetRequest}
 }
 

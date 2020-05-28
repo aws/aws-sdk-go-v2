@@ -72,6 +72,7 @@ func (c *Client) DescribeDefaultParametersRequest(input *DescribeDefaultParamete
 	}
 
 	req := c.newRequest(op, input, &DescribeDefaultParametersOutput{})
+
 	return DescribeDefaultParametersRequest{Request: req, Input: input, Copy: c.DescribeDefaultParametersRequest}
 }
 

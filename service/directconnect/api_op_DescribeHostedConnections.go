@@ -79,6 +79,7 @@ func (c *Client) DescribeHostedConnectionsRequest(input *DescribeHostedConnectio
 	}
 
 	req := c.newRequest(op, input, &DescribeHostedConnectionsOutput{})
+
 	return DescribeHostedConnectionsRequest{Request: req, Input: input, Copy: c.DescribeHostedConnectionsRequest}
 }
 

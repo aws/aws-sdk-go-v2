@@ -182,6 +182,7 @@ func (c *Client) ImportCertificateRequest(input *ImportCertificateInput) ImportC
 	}
 
 	req := c.newRequest(op, input, &ImportCertificateOutput{})
+
 	return ImportCertificateRequest{Request: req, Input: input, Copy: c.ImportCertificateRequest}
 }
 

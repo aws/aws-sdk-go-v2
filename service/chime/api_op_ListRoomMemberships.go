@@ -159,6 +159,7 @@ func (c *Client) ListRoomMembershipsRequest(input *ListRoomMembershipsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListRoomMembershipsOutput{})
+
 	return ListRoomMembershipsRequest{Request: req, Input: input, Copy: c.ListRoomMembershipsRequest}
 }
 

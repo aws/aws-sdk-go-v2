@@ -77,6 +77,7 @@ func (c *Client) DeleteUsageLimitRequest(input *DeleteUsageLimitInput) DeleteUsa
 	req := c.newRequest(op, input, &DeleteUsageLimitOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteUsageLimitRequest{Request: req, Input: input, Copy: c.DeleteUsageLimitRequest}
 }
 

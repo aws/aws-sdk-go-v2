@@ -197,6 +197,7 @@ func (c *Client) DecryptRequest(input *DecryptInput) DecryptRequest {
 	}
 
 	req := c.newRequest(op, input, &DecryptOutput{})
+
 	return DecryptRequest{Request: req, Input: input, Copy: c.DecryptRequest}
 }
 

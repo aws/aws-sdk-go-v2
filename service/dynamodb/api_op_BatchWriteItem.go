@@ -266,6 +266,7 @@ func (c *Client) BatchWriteItemRequest(input *BatchWriteItemInput) BatchWriteIte
 			Fn:   de.Handler,
 		})
 	}
+
 	return BatchWriteItemRequest{Request: req, Input: input, Copy: c.BatchWriteItemRequest}
 }
 

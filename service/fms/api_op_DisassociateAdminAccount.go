@@ -60,6 +60,7 @@ func (c *Client) DisassociateAdminAccountRequest(input *DisassociateAdminAccount
 	req := c.newRequest(op, input, &DisassociateAdminAccountOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DisassociateAdminAccountRequest{Request: req, Input: input, Copy: c.DisassociateAdminAccountRequest}
 }
 

@@ -78,6 +78,7 @@ func (c *Client) DescribeBatchInferenceJobRequest(input *DescribeBatchInferenceJ
 	}
 
 	req := c.newRequest(op, input, &DescribeBatchInferenceJobOutput{})
+
 	return DescribeBatchInferenceJobRequest{Request: req, Input: input, Copy: c.DescribeBatchInferenceJobRequest}
 }
 

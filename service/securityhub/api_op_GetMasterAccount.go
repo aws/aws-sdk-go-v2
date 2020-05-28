@@ -78,6 +78,7 @@ func (c *Client) GetMasterAccountRequest(input *GetMasterAccountInput) GetMaster
 	}
 
 	req := c.newRequest(op, input, &GetMasterAccountOutput{})
+
 	return GetMasterAccountRequest{Request: req, Input: input, Copy: c.GetMasterAccountRequest}
 }
 

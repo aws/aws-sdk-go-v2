@@ -90,6 +90,7 @@ func (c *Client) DeleteSubscriptionDefinitionRequest(input *DeleteSubscriptionDe
 	}
 
 	req := c.newRequest(op, input, &DeleteSubscriptionDefinitionOutput{})
+
 	return DeleteSubscriptionDefinitionRequest{Request: req, Input: input, Copy: c.DeleteSubscriptionDefinitionRequest}
 }
 

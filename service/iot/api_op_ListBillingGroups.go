@@ -133,6 +133,7 @@ func (c *Client) ListBillingGroupsRequest(input *ListBillingGroupsInput) ListBil
 	}
 
 	req := c.newRequest(op, input, &ListBillingGroupsOutput{})
+
 	return ListBillingGroupsRequest{Request: req, Input: input, Copy: c.ListBillingGroupsRequest}
 }
 

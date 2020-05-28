@@ -101,6 +101,7 @@ func (c *Client) AcceptDomainTransferFromAnotherAwsAccountRequest(input *AcceptD
 	}
 
 	req := c.newRequest(op, input, &AcceptDomainTransferFromAnotherAwsAccountOutput{})
+
 	return AcceptDomainTransferFromAnotherAwsAccountRequest{Request: req, Input: input, Copy: c.AcceptDomainTransferFromAnotherAwsAccountRequest}
 }
 

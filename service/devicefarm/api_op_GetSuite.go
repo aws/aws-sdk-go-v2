@@ -81,6 +81,7 @@ func (c *Client) GetSuiteRequest(input *GetSuiteInput) GetSuiteRequest {
 	}
 
 	req := c.newRequest(op, input, &GetSuiteOutput{})
+
 	return GetSuiteRequest{Request: req, Input: input, Copy: c.GetSuiteRequest}
 }
 

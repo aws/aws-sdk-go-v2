@@ -85,6 +85,7 @@ func (c *Client) DeleteMLTransformRequest(input *DeleteMLTransformInput) DeleteM
 	}
 
 	req := c.newRequest(op, input, &DeleteMLTransformOutput{})
+
 	return DeleteMLTransformRequest{Request: req, Input: input, Copy: c.DeleteMLTransformRequest}
 }
 

@@ -175,6 +175,7 @@ func (c *Client) AssociateConnectionWithLagRequest(input *AssociateConnectionWit
 	}
 
 	req := c.newRequest(op, input, &AssociateConnectionWithLagOutput{})
+
 	return AssociateConnectionWithLagRequest{Request: req, Input: input, Copy: c.AssociateConnectionWithLagRequest}
 }
 

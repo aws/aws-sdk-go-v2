@@ -108,6 +108,7 @@ func (c *Client) DeleteProvisioningTemplateVersionRequest(input *DeleteProvision
 	}
 
 	req := c.newRequest(op, input, &DeleteProvisioningTemplateVersionOutput{})
+
 	return DeleteProvisioningTemplateVersionRequest{Request: req, Input: input, Copy: c.DeleteProvisioningTemplateVersionRequest}
 }
 

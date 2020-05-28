@@ -110,6 +110,7 @@ func (c *Client) DeleteThreatIntelSetRequest(input *DeleteThreatIntelSetInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteThreatIntelSetOutput{})
+
 	return DeleteThreatIntelSetRequest{Request: req, Input: input, Copy: c.DeleteThreatIntelSetRequest}
 }
 

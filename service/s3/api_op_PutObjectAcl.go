@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/checksum"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/service/s3/internal/arn"
 )
@@ -227,7 +228,9 @@ const opPutObjectAcl = "PutObjectAcl"
 // Depending on your application needs, you can choose to set the ACL on an
 // object using either the request body or the headers. For example, if you
 // have an existing application that updates a bucket ACL using the request
-// body, you can continue to use that approach.
+// body, you can continue to use that approach. For more information, see Access
+// Control List (ACL) Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html)
+// in the Amazon S3 Developer Guide.
 //
 // Access Permissions
 //
@@ -249,12 +252,19 @@ const opPutObjectAcl = "PutObjectAcl"
 //    S3 supports in an ACL. For more information, see Access Control List (ACL)
 //    Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html).
 //    You specify each grantee as a type=value pair, where the type is one of
-//    the following: emailAddress – if the value specified is the email address
-//    of an AWS account id – if the value specified is the canonical user
-//    ID of an AWS account uri – if you are granting permissions to a predefined
-//    group For example, the following x-amz-grant-read header grants list objects
-//    permission to the two AWS accounts identified by their email addresses.
-//    x-amz-grant-read: emailAddress="xyz@amazon.com", emailAddress="abc@amazon.com"
+//    the following: id – if the value specified is the canonical user ID
+//    of an AWS account uri – if you are granting permissions to a predefined
+//    group emailAddress – if the value specified is the email address of
+//    an AWS account Using email addresses to specify a grantee is only supported
+//    in the following AWS Regions: US East (N. Virginia) US West (N. California)
+//    US West (Oregon) Asia Pacific (Singapore) Asia Pacific (Sydney) Asia Pacific
+//    (Tokyo) Europe (Ireland) South America (São Paulo) For a list of all
+//    the Amazon S3 supported Regions and endpoints, see Regions and Endpoints
+//    (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in
+//    the AWS General Reference. For example, the following x-amz-grant-read
+//    header grants list objects permission to the two AWS accounts identified
+//    by their email addresses. x-amz-grant-read: emailAddress="xyz@amazon.com",
+//    emailAddress="abc@amazon.com"
 //
 // You can use either a canned ACL or specify access permissions explicitly.
 // You cannot do both.
@@ -264,17 +274,23 @@ const opPutObjectAcl = "PutObjectAcl"
 // You can specify the person (grantee) to whom you're assigning access rights
 // (using request elements) in the following ways:
 //
-//    * By Email address: <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-//    xsi:type="AmazonCustomerByEmail"><EmailAddress><>Grantees@email.com<></EmailAddress>lt;/Grantee>
-//    The grantee is resolved to the CanonicalUser and, in a response to a GET
-//    Object acl request, appears as the CanonicalUser.
-//
 //    * By the person's ID: <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 //    xsi:type="CanonicalUser"><ID><>ID<></ID><DisplayName><>GranteesEmail<></DisplayName>
 //    </Grantee> DisplayName is optional and ignored in the request.
 //
 //    * By URI: <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 //    xsi:type="Group"><URI><>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<></URI></Grantee>
+//
+//    * By Email address: <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+//    xsi:type="AmazonCustomerByEmail"><EmailAddress><>Grantees@email.com<></EmailAddress>lt;/Grantee>
+//    The grantee is resolved to the CanonicalUser and, in a response to a GET
+//    Object acl request, appears as the CanonicalUser. Using email addresses
+//    to specify a grantee is only supported in the following AWS Regions: US
+//    East (N. Virginia) US West (N. California) US West (Oregon) Asia Pacific
+//    (Singapore) Asia Pacific (Sydney) Asia Pacific (Tokyo) Europe (Ireland)
+//    South America (São Paulo) For a list of all the Amazon S3 supported Regions
+//    and endpoints, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
+//    in the AWS General Reference.
 //
 // Versioning
 //
@@ -308,6 +324,12 @@ func (c *Client) PutObjectAclRequest(input *PutObjectAclInput) PutObjectAclReque
 	}
 
 	req := c.newRequest(op, input, &PutObjectAclOutput{})
+
+	req.Handlers.Build.PushBackNamed(aws.NamedHandler{
+		Name: "contentMd5Handler",
+		Fn:   checksum.AddBodyContentMD5Handler,
+	})
+
 	return PutObjectAclRequest{Request: req, Input: input, Copy: c.PutObjectAclRequest}
 }
 

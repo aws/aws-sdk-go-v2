@@ -200,6 +200,7 @@ func (c *Client) UpdateUsagePlanRequest(input *UpdateUsagePlanInput) UpdateUsage
 	}
 
 	req := c.newRequest(op, input, &UpdateUsagePlanOutput{})
+
 	return UpdateUsagePlanRequest{Request: req, Input: input, Copy: c.UpdateUsagePlanRequest}
 }
 

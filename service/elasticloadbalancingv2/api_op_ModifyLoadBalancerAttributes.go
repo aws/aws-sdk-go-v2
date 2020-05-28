@@ -90,6 +90,7 @@ func (c *Client) ModifyLoadBalancerAttributesRequest(input *ModifyLoadBalancerAt
 	}
 
 	req := c.newRequest(op, input, &ModifyLoadBalancerAttributesOutput{})
+
 	return ModifyLoadBalancerAttributesRequest{Request: req, Input: input, Copy: c.ModifyLoadBalancerAttributesRequest}
 }
 

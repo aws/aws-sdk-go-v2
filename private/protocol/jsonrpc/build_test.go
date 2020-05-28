@@ -132,6 +132,7 @@ func (c *InputService1ProtocolTest) InputService1TestCaseOperation1Request(input
 	req := c.newRequest(op, input, &InputService1TestShapeInputService1TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService1TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService1TestCaseOperation1Request}
 }
 
@@ -266,6 +267,7 @@ func (c *InputService2ProtocolTest) InputService2TestCaseOperation1Request(input
 	req := c.newRequest(op, input, &InputService2TestShapeInputService2TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService2TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService2TestCaseOperation1Request}
 }
 
@@ -399,6 +401,7 @@ func (c *InputService3ProtocolTest) InputService3TestCaseOperation1Request(input
 	req := c.newRequest(op, input, &InputService3TestShapeInputService3TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService3TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService3TestCaseOperation1Request}
 }
 
@@ -478,6 +481,7 @@ func (c *InputService3ProtocolTest) InputService3TestCaseOperation2Request(input
 	req := c.newRequest(op, input, &InputService3TestShapeInputService3TestCaseOperation2Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService3TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService3TestCaseOperation2Request}
 }
 
@@ -608,6 +612,7 @@ func (c *InputService4ProtocolTest) InputService4TestCaseOperation1Request(input
 	req := c.newRequest(op, input, &InputService4TestShapeInputService4TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService4TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService4TestCaseOperation1Request}
 }
 
@@ -738,6 +743,7 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation1Request(input
 	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService5TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService5TestCaseOperation1Request}
 }
 
@@ -814,6 +820,7 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation2Request(input
 	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation2Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService5TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService5TestCaseOperation2Request}
 }
 
@@ -890,6 +897,7 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation3Request(input
 	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation3Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService5TestCaseOperation3Request{Request: req, Input: input, Copy: c.InputService5TestCaseOperation3Request}
 }
 
@@ -966,6 +974,7 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation4Request(input
 	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation4Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService5TestCaseOperation4Request{Request: req, Input: input, Copy: c.InputService5TestCaseOperation4Request}
 }
 
@@ -1042,6 +1051,7 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation5Request(input
 	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation5Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService5TestCaseOperation5Request{Request: req, Input: input, Copy: c.InputService5TestCaseOperation5Request}
 }
 
@@ -1118,6 +1128,7 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation6Request(input
 	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation6Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService5TestCaseOperation6Request{Request: req, Input: input, Copy: c.InputService5TestCaseOperation6Request}
 }
 
@@ -1260,6 +1271,7 @@ func (c *InputService6ProtocolTest) InputService6TestCaseOperation1Request(input
 	req := c.newRequest(op, input, &InputService6TestShapeInputService6TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService6TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService6TestCaseOperation1Request}
 }
 
@@ -1388,6 +1400,7 @@ func (c *InputService7ProtocolTest) InputService7TestCaseOperation1Request(input
 	req := c.newRequest(op, input, &InputService7TestShapeInputService7TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService7TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService7TestCaseOperation1Request}
 }
 
@@ -1464,6 +1477,7 @@ func (c *InputService7ProtocolTest) InputService7TestCaseOperation2Request(input
 	req := c.newRequest(op, input, &InputService7TestShapeInputService7TestCaseOperation2Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService7TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService7TestCaseOperation2Request}
 }
 
@@ -1594,6 +1608,7 @@ func (c *InputService8ProtocolTest) InputService8TestCaseOperation1Request(input
 	req := c.newRequest(op, input, &InputService8TestShapeInputService8TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService8TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService8TestCaseOperation1Request}
 }
 
@@ -1672,6 +1687,7 @@ func (c *InputService8ProtocolTest) InputService8TestCaseOperation2Request(input
 	req := c.newRequest(op, input, &InputService8TestShapeInputService8TestCaseOperation2Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService8TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService8TestCaseOperation2Request}
 }
 
@@ -1821,6 +1837,7 @@ func (c *InputService9ProtocolTest) InputService9TestCaseOperation1Request(input
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	req.Handlers.Build.PushBackNamed(protocol.NewHostPrefixHandler("data-", nil))
 	req.Handlers.Build.PushBackNamed(protocol.ValidateEndpointHostHandler)
+
 	return InputService9TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService9TestCaseOperation1Request}
 }
 
@@ -1923,6 +1940,7 @@ func (c *InputService9ProtocolTest) InputService9TestCaseOperation2Request(input
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	req.Handlers.Build.PushBackNamed(protocol.NewHostPrefixHandler("foo-{Name}.", input.hostLabels))
 	req.Handlers.Build.PushBackNamed(protocol.ValidateEndpointHostHandler)
+
 	return InputService9TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService9TestCaseOperation2Request}
 }
 

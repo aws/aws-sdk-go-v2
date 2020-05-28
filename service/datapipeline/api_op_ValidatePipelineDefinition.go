@@ -127,6 +127,7 @@ func (c *Client) ValidatePipelineDefinitionRequest(input *ValidatePipelineDefini
 	}
 
 	req := c.newRequest(op, input, &ValidatePipelineDefinitionOutput{})
+
 	return ValidatePipelineDefinitionRequest{Request: req, Input: input, Copy: c.ValidatePipelineDefinitionRequest}
 }
 

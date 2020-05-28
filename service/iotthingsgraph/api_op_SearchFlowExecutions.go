@@ -106,6 +106,7 @@ func (c *Client) SearchFlowExecutionsRequest(input *SearchFlowExecutionsInput) S
 	}
 
 	req := c.newRequest(op, input, &SearchFlowExecutionsOutput{})
+
 	return SearchFlowExecutionsRequest{Request: req, Input: input, Copy: c.SearchFlowExecutionsRequest}
 }
 

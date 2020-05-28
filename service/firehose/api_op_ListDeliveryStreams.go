@@ -107,6 +107,7 @@ func (c *Client) ListDeliveryStreamsRequest(input *ListDeliveryStreamsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListDeliveryStreamsOutput{})
+
 	return ListDeliveryStreamsRequest{Request: req, Input: input, Copy: c.ListDeliveryStreamsRequest}
 }
 

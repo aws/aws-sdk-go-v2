@@ -178,6 +178,7 @@ func (c *Client) GetFilterRequest(input *GetFilterInput) GetFilterRequest {
 	}
 
 	req := c.newRequest(op, input, &GetFilterOutput{})
+
 	return GetFilterRequest{Request: req, Input: input, Copy: c.GetFilterRequest}
 }
 

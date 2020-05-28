@@ -163,6 +163,7 @@ func (c *Client) GetSnapshotBlockRequest(input *GetSnapshotBlockInput) GetSnapsh
 	}
 
 	req := c.newRequest(op, input, &GetSnapshotBlockOutput{})
+
 	return GetSnapshotBlockRequest{Request: req, Input: input, Copy: c.GetSnapshotBlockRequest}
 }
 

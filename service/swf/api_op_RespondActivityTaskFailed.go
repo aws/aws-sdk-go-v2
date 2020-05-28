@@ -115,6 +115,7 @@ func (c *Client) RespondActivityTaskFailedRequest(input *RespondActivityTaskFail
 	req := c.newRequest(op, input, &RespondActivityTaskFailedOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RespondActivityTaskFailedRequest{Request: req, Input: input, Copy: c.RespondActivityTaskFailedRequest}
 }
 

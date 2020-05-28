@@ -133,6 +133,7 @@ func (c *Client) DescribeWorkflowTypeRequest(input *DescribeWorkflowTypeInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeWorkflowTypeOutput{})
+
 	return DescribeWorkflowTypeRequest{Request: req, Input: input, Copy: c.DescribeWorkflowTypeRequest}
 }
 

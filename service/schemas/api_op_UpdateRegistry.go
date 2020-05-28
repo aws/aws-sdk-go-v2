@@ -137,6 +137,7 @@ func (c *Client) UpdateRegistryRequest(input *UpdateRegistryInput) UpdateRegistr
 	}
 
 	req := c.newRequest(op, input, &UpdateRegistryOutput{})
+
 	return UpdateRegistryRequest{Request: req, Input: input, Copy: c.UpdateRegistryRequest}
 }
 

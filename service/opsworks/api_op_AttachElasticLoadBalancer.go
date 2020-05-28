@@ -99,6 +99,7 @@ func (c *Client) AttachElasticLoadBalancerRequest(input *AttachElasticLoadBalanc
 	req := c.newRequest(op, input, &AttachElasticLoadBalancerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AttachElasticLoadBalancerRequest{Request: req, Input: input, Copy: c.AttachElasticLoadBalancerRequest}
 }
 

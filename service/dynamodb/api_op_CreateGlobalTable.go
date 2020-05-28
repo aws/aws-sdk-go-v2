@@ -70,7 +70,7 @@ const opCreateGlobalTable = "CreateGlobalTable"
 // relationship between two or more DynamoDB tables with the same table name
 // in the provided Regions.
 //
-// This method only applies to Version 2017.11.29 (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html)
+// This operation only applies to Version 2017.11.29 (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html)
 // of global tables.
 //
 // If you want to add a new replica table to a global table, each of the following
@@ -91,6 +91,14 @@ const opCreateGlobalTable = "CreateGlobalTable"
 //    * The global secondary indexes must have the same name.
 //
 //    * The global secondary indexes must have the same hash key and sort key
+//    (if present).
+//
+// If local secondary indexes are specified, then the following conditions must
+// also be met:
+//
+//    * The local secondary indexes must have the same name.
+//
+//    * The local secondary indexes must have the same hash key and sort key
 //    (if present).
 //
 // Write capacity settings should be set consistently across your replica tables
@@ -145,6 +153,7 @@ func (c *Client) CreateGlobalTableRequest(input *CreateGlobalTableInput) CreateG
 			Fn:   de.Handler,
 		})
 	}
+
 	return CreateGlobalTableRequest{Request: req, Input: input, Copy: c.CreateGlobalTableRequest}
 }
 

@@ -125,6 +125,7 @@ func (c *Client) ShareDirectoryRequest(input *ShareDirectoryInput) ShareDirector
 	}
 
 	req := c.newRequest(op, input, &ShareDirectoryOutput{})
+
 	return ShareDirectoryRequest{Request: req, Input: input, Copy: c.ShareDirectoryRequest}
 }
 

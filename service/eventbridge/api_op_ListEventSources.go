@@ -94,6 +94,7 @@ func (c *Client) ListEventSourcesRequest(input *ListEventSourcesInput) ListEvent
 	}
 
 	req := c.newRequest(op, input, &ListEventSourcesOutput{})
+
 	return ListEventSourcesRequest{Request: req, Input: input, Copy: c.ListEventSourcesRequest}
 }
 

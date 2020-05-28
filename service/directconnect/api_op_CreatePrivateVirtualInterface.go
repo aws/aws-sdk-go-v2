@@ -200,6 +200,7 @@ func (c *Client) CreatePrivateVirtualInterfaceRequest(input *CreatePrivateVirtua
 	}
 
 	req := c.newRequest(op, input, &CreatePrivateVirtualInterfaceOutput{})
+
 	return CreatePrivateVirtualInterfaceRequest{Request: req, Input: input, Copy: c.CreatePrivateVirtualInterfaceRequest}
 }
 

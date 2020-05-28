@@ -102,6 +102,7 @@ func (c *Client) DescribeEndpointConfigRequest(input *DescribeEndpointConfigInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeEndpointConfigOutput{})
+
 	return DescribeEndpointConfigRequest{Request: req, Input: input, Copy: c.DescribeEndpointConfigRequest}
 }
 

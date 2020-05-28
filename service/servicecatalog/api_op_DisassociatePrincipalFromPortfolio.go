@@ -97,6 +97,7 @@ func (c *Client) DisassociatePrincipalFromPortfolioRequest(input *DisassociatePr
 	}
 
 	req := c.newRequest(op, input, &DisassociatePrincipalFromPortfolioOutput{})
+
 	return DisassociatePrincipalFromPortfolioRequest{Request: req, Input: input, Copy: c.DisassociatePrincipalFromPortfolioRequest}
 }
 

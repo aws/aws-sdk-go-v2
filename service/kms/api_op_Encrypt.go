@@ -208,6 +208,7 @@ func (c *Client) EncryptRequest(input *EncryptInput) EncryptRequest {
 	}
 
 	req := c.newRequest(op, input, &EncryptOutput{})
+
 	return EncryptRequest{Request: req, Input: input, Copy: c.EncryptRequest}
 }
 

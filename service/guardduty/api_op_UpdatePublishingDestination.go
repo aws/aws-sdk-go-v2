@@ -120,6 +120,7 @@ func (c *Client) UpdatePublishingDestinationRequest(input *UpdatePublishingDesti
 	}
 
 	req := c.newRequest(op, input, &UpdatePublishingDestinationOutput{})
+
 	return UpdatePublishingDestinationRequest{Request: req, Input: input, Copy: c.UpdatePublishingDestinationRequest}
 }
 

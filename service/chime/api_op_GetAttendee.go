@@ -119,6 +119,7 @@ func (c *Client) GetAttendeeRequest(input *GetAttendeeInput) GetAttendeeRequest 
 	}
 
 	req := c.newRequest(op, input, &GetAttendeeOutput{})
+
 	return GetAttendeeRequest{Request: req, Input: input, Copy: c.GetAttendeeRequest}
 }
 

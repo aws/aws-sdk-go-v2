@@ -156,6 +156,7 @@ func (c *Client) CreateOutpostRequest(input *CreateOutpostInput) CreateOutpostRe
 	}
 
 	req := c.newRequest(op, input, &CreateOutpostOutput{})
+
 	return CreateOutpostRequest{Request: req, Input: input, Copy: c.CreateOutpostRequest}
 }
 

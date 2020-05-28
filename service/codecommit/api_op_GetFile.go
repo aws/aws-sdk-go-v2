@@ -132,6 +132,7 @@ func (c *Client) GetFileRequest(input *GetFileInput) GetFileRequest {
 	}
 
 	req := c.newRequest(op, input, &GetFileOutput{})
+
 	return GetFileRequest{Request: req, Input: input, Copy: c.GetFileRequest}
 }
 

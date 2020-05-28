@@ -73,6 +73,7 @@ func (c *Client) DeleteAddressBookRequest(input *DeleteAddressBookInput) DeleteA
 	}
 
 	req := c.newRequest(op, input, &DeleteAddressBookOutput{})
+
 	return DeleteAddressBookRequest{Request: req, Input: input, Copy: c.DeleteAddressBookRequest}
 }
 

@@ -79,6 +79,7 @@ func (c *Client) GetInstanceProfileRequest(input *GetInstanceProfileInput) GetIn
 	}
 
 	req := c.newRequest(op, input, &GetInstanceProfileOutput{})
+
 	return GetInstanceProfileRequest{Request: req, Input: input, Copy: c.GetInstanceProfileRequest}
 }
 

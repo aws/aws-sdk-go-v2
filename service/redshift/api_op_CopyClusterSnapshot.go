@@ -131,6 +131,7 @@ func (c *Client) CopyClusterSnapshotRequest(input *CopyClusterSnapshotInput) Cop
 	}
 
 	req := c.newRequest(op, input, &CopyClusterSnapshotOutput{})
+
 	return CopyClusterSnapshotRequest{Request: req, Input: input, Copy: c.CopyClusterSnapshotRequest}
 }
 

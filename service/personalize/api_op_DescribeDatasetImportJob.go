@@ -87,6 +87,7 @@ func (c *Client) DescribeDatasetImportJobRequest(input *DescribeDatasetImportJob
 	}
 
 	req := c.newRequest(op, input, &DescribeDatasetImportJobOutput{})
+
 	return DescribeDatasetImportJobRequest{Request: req, Input: input, Copy: c.DescribeDatasetImportJobRequest}
 }
 

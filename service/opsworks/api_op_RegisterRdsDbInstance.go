@@ -109,6 +109,7 @@ func (c *Client) RegisterRdsDbInstanceRequest(input *RegisterRdsDbInstanceInput)
 	req := c.newRequest(op, input, &RegisterRdsDbInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RegisterRdsDbInstanceRequest{Request: req, Input: input, Copy: c.RegisterRdsDbInstanceRequest}
 }
 

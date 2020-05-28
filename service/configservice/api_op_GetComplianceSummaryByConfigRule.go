@@ -59,6 +59,7 @@ func (c *Client) GetComplianceSummaryByConfigRuleRequest(input *GetComplianceSum
 	}
 
 	req := c.newRequest(op, input, &GetComplianceSummaryByConfigRuleOutput{})
+
 	return GetComplianceSummaryByConfigRuleRequest{Request: req, Input: input, Copy: c.GetComplianceSummaryByConfigRuleRequest}
 }
 

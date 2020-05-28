@@ -197,6 +197,7 @@ func (c *Client) StartOutboundVoiceContactRequest(input *StartOutboundVoiceConta
 	}
 
 	req := c.newRequest(op, input, &StartOutboundVoiceContactOutput{})
+
 	return StartOutboundVoiceContactRequest{Request: req, Input: input, Copy: c.StartOutboundVoiceContactRequest}
 }
 

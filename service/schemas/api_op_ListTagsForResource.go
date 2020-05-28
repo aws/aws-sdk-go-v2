@@ -53,9 +53,7 @@ type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Key-value pairs associated with a resource.
-	//
-	// Tags is a required field
-	Tags map[string]string `type:"map" required:"true"`
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -69,7 +67,7 @@ func (s ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error 
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
 			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
@@ -107,6 +105,7 @@ func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+
 	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 

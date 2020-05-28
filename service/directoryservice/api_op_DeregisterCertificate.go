@@ -83,6 +83,7 @@ func (c *Client) DeregisterCertificateRequest(input *DeregisterCertificateInput)
 	}
 
 	req := c.newRequest(op, input, &DeregisterCertificateOutput{})
+
 	return DeregisterCertificateRequest{Request: req, Input: input, Copy: c.DeregisterCertificateRequest}
 }
 

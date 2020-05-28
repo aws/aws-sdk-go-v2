@@ -117,6 +117,7 @@ func (c *Client) UpdateNotificationRequest(input *UpdateNotificationInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateNotificationOutput{})
+
 	return UpdateNotificationRequest{Request: req, Input: input, Copy: c.UpdateNotificationRequest}
 }
 

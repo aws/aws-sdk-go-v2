@@ -144,6 +144,7 @@ func (c *Client) CreateResolverEndpointRequest(input *CreateResolverEndpointInpu
 	}
 
 	req := c.newRequest(op, input, &CreateResolverEndpointOutput{})
+
 	return CreateResolverEndpointRequest{Request: req, Input: input, Copy: c.CreateResolverEndpointRequest}
 }
 

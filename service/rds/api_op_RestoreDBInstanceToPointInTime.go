@@ -337,6 +337,7 @@ func (c *Client) RestoreDBInstanceToPointInTimeRequest(input *RestoreDBInstanceT
 	}
 
 	req := c.newRequest(op, input, &RestoreDBInstanceToPointInTimeOutput{})
+
 	return RestoreDBInstanceToPointInTimeRequest{Request: req, Input: input, Copy: c.RestoreDBInstanceToPointInTimeRequest}
 }
 

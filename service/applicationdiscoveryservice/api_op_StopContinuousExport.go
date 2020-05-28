@@ -81,6 +81,7 @@ func (c *Client) StopContinuousExportRequest(input *StopContinuousExportInput) S
 	}
 
 	req := c.newRequest(op, input, &StopContinuousExportOutput{})
+
 	return StopContinuousExportRequest{Request: req, Input: input, Copy: c.StopContinuousExportRequest}
 }
 

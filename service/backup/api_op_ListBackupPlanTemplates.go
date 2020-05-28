@@ -135,6 +135,7 @@ func (c *Client) ListBackupPlanTemplatesRequest(input *ListBackupPlanTemplatesIn
 	}
 
 	req := c.newRequest(op, input, &ListBackupPlanTemplatesOutput{})
+
 	return ListBackupPlanTemplatesRequest{Request: req, Input: input, Copy: c.ListBackupPlanTemplatesRequest}
 }
 

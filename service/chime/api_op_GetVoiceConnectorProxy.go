@@ -105,6 +105,7 @@ func (c *Client) GetVoiceConnectorProxyRequest(input *GetVoiceConnectorProxyInpu
 	}
 
 	req := c.newRequest(op, input, &GetVoiceConnectorProxyOutput{})
+
 	return GetVoiceConnectorProxyRequest{Request: req, Input: input, Copy: c.GetVoiceConnectorProxyRequest}
 }
 

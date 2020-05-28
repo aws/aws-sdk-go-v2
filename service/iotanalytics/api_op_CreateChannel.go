@@ -180,6 +180,7 @@ func (c *Client) CreateChannelRequest(input *CreateChannelInput) CreateChannelRe
 	}
 
 	req := c.newRequest(op, input, &CreateChannelOutput{})
+
 	return CreateChannelRequest{Request: req, Input: input, Copy: c.CreateChannelRequest}
 }
 

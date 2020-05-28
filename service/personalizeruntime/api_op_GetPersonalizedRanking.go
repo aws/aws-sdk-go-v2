@@ -168,6 +168,7 @@ func (c *Client) GetPersonalizedRankingRequest(input *GetPersonalizedRankingInpu
 	}
 
 	req := c.newRequest(op, input, &GetPersonalizedRankingOutput{})
+
 	return GetPersonalizedRankingRequest{Request: req, Input: input, Copy: c.GetPersonalizedRankingRequest}
 }
 

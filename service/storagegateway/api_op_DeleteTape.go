@@ -96,6 +96,7 @@ func (c *Client) DeleteTapeRequest(input *DeleteTapeInput) DeleteTapeRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteTapeOutput{})
+
 	return DeleteTapeRequest{Request: req, Input: input, Copy: c.DeleteTapeRequest}
 }
 

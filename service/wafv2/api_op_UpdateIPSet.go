@@ -172,6 +172,7 @@ func (c *Client) UpdateIPSetRequest(input *UpdateIPSetInput) UpdateIPSetRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateIPSetOutput{})
+
 	return UpdateIPSetRequest{Request: req, Input: input, Copy: c.UpdateIPSetRequest}
 }
 

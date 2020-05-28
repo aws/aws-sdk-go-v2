@@ -267,6 +267,7 @@ func (c *Client) CreateDBClusterRequest(input *CreateDBClusterInput) CreateDBClu
 	}
 
 	req := c.newRequest(op, input, &CreateDBClusterOutput{})
+
 	return CreateDBClusterRequest{Request: req, Input: input, Copy: c.CreateDBClusterRequest}
 }
 

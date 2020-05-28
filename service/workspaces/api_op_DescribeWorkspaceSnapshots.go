@@ -81,6 +81,7 @@ func (c *Client) DescribeWorkspaceSnapshotsRequest(input *DescribeWorkspaceSnaps
 	}
 
 	req := c.newRequest(op, input, &DescribeWorkspaceSnapshotsOutput{})
+
 	return DescribeWorkspaceSnapshotsRequest{Request: req, Input: input, Copy: c.DescribeWorkspaceSnapshotsRequest}
 }
 

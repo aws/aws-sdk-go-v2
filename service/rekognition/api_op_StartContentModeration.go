@@ -131,6 +131,7 @@ func (c *Client) StartContentModerationRequest(input *StartContentModerationInpu
 	}
 
 	req := c.newRequest(op, input, &StartContentModerationOutput{})
+
 	return StartContentModerationRequest{Request: req, Input: input, Copy: c.StartContentModerationRequest}
 }
 

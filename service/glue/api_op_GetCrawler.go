@@ -79,6 +79,7 @@ func (c *Client) GetCrawlerRequest(input *GetCrawlerInput) GetCrawlerRequest {
 	}
 
 	req := c.newRequest(op, input, &GetCrawlerOutput{})
+
 	return GetCrawlerRequest{Request: req, Input: input, Copy: c.GetCrawlerRequest}
 }
 

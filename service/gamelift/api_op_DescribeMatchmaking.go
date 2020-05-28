@@ -108,6 +108,7 @@ func (c *Client) DescribeMatchmakingRequest(input *DescribeMatchmakingInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeMatchmakingOutput{})
+
 	return DescribeMatchmakingRequest{Request: req, Input: input, Copy: c.DescribeMatchmakingRequest}
 }
 

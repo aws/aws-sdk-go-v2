@@ -146,6 +146,7 @@ func (c *Client) GetRecoveryPointRestoreMetadataRequest(input *GetRecoveryPointR
 	}
 
 	req := c.newRequest(op, input, &GetRecoveryPointRestoreMetadataOutput{})
+
 	return GetRecoveryPointRestoreMetadataRequest{Request: req, Input: input, Copy: c.GetRecoveryPointRestoreMetadataRequest}
 }
 

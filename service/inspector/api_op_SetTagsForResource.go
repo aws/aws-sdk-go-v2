@@ -93,6 +93,7 @@ func (c *Client) SetTagsForResourceRequest(input *SetTagsForResourceInput) SetTa
 	req := c.newRequest(op, input, &SetTagsForResourceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetTagsForResourceRequest{Request: req, Input: input, Copy: c.SetTagsForResourceRequest}
 }
 

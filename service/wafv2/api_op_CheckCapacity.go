@@ -117,6 +117,7 @@ func (c *Client) CheckCapacityRequest(input *CheckCapacityInput) CheckCapacityRe
 	}
 
 	req := c.newRequest(op, input, &CheckCapacityOutput{})
+
 	return CheckCapacityRequest{Request: req, Input: input, Copy: c.CheckCapacityRequest}
 }
 

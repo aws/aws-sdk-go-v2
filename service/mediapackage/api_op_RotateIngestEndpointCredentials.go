@@ -152,6 +152,7 @@ func (c *Client) RotateIngestEndpointCredentialsRequest(input *RotateIngestEndpo
 	}
 
 	req := c.newRequest(op, input, &RotateIngestEndpointCredentialsOutput{})
+
 	return RotateIngestEndpointCredentialsRequest{Request: req, Input: input, Copy: c.RotateIngestEndpointCredentialsRequest}
 }
 

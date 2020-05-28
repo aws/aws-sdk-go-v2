@@ -200,6 +200,7 @@ func (c *Client) GetDataSetRequest(input *GetDataSetInput) GetDataSetRequest {
 	}
 
 	req := c.newRequest(op, input, &GetDataSetOutput{})
+
 	return GetDataSetRequest{Request: req, Input: input, Copy: c.GetDataSetRequest}
 }
 

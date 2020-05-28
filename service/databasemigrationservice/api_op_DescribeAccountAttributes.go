@@ -77,6 +77,7 @@ func (c *Client) DescribeAccountAttributesRequest(input *DescribeAccountAttribut
 	}
 
 	req := c.newRequest(op, input, &DescribeAccountAttributesOutput{})
+
 	return DescribeAccountAttributesRequest{Request: req, Input: input, Copy: c.DescribeAccountAttributesRequest}
 }
 

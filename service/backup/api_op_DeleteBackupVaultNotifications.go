@@ -98,6 +98,7 @@ func (c *Client) DeleteBackupVaultNotificationsRequest(input *DeleteBackupVaultN
 	req := c.newRequest(op, input, &DeleteBackupVaultNotificationsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteBackupVaultNotificationsRequest{Request: req, Input: input, Copy: c.DeleteBackupVaultNotificationsRequest}
 }
 

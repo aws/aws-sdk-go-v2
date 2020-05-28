@@ -69,6 +69,7 @@ func (c *Client) DescribeLimitsRequest(input *DescribeLimitsInput) DescribeLimit
 	}
 
 	req := c.newRequest(op, input, &DescribeLimitsOutput{})
+
 	return DescribeLimitsRequest{Request: req, Input: input, Copy: c.DescribeLimitsRequest}
 }
 

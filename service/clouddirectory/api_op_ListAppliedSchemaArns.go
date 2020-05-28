@@ -154,6 +154,7 @@ func (c *Client) ListAppliedSchemaArnsRequest(input *ListAppliedSchemaArnsInput)
 	}
 
 	req := c.newRequest(op, input, &ListAppliedSchemaArnsOutput{})
+
 	return ListAppliedSchemaArnsRequest{Request: req, Input: input, Copy: c.ListAppliedSchemaArnsRequest}
 }
 

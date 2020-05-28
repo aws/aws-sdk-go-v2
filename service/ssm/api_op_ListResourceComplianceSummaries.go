@@ -97,6 +97,7 @@ func (c *Client) ListResourceComplianceSummariesRequest(input *ListResourceCompl
 	}
 
 	req := c.newRequest(op, input, &ListResourceComplianceSummariesOutput{})
+
 	return ListResourceComplianceSummariesRequest{Request: req, Input: input, Copy: c.ListResourceComplianceSummariesRequest}
 }
 

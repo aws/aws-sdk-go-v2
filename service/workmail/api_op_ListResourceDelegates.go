@@ -113,6 +113,7 @@ func (c *Client) ListResourceDelegatesRequest(input *ListResourceDelegatesInput)
 	}
 
 	req := c.newRequest(op, input, &ListResourceDelegatesOutput{})
+
 	return ListResourceDelegatesRequest{Request: req, Input: input, Copy: c.ListResourceDelegatesRequest}
 }
 

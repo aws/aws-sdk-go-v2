@@ -99,6 +99,7 @@ func (c *Client) DeleteDeploymentGroupRequest(input *DeleteDeploymentGroupInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteDeploymentGroupOutput{})
+
 	return DeleteDeploymentGroupRequest{Request: req, Input: input, Copy: c.DeleteDeploymentGroupRequest}
 }
 

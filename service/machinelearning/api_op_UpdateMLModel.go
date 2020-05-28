@@ -95,6 +95,7 @@ func (c *Client) UpdateMLModelRequest(input *UpdateMLModelInput) UpdateMLModelRe
 	}
 
 	req := c.newRequest(op, input, &UpdateMLModelOutput{})
+
 	return UpdateMLModelRequest{Request: req, Input: input, Copy: c.UpdateMLModelRequest}
 }
 

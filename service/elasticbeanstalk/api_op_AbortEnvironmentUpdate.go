@@ -80,6 +80,7 @@ func (c *Client) AbortEnvironmentUpdateRequest(input *AbortEnvironmentUpdateInpu
 	req := c.newRequest(op, input, &AbortEnvironmentUpdateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AbortEnvironmentUpdateRequest{Request: req, Input: input, Copy: c.AbortEnvironmentUpdateRequest}
 }
 

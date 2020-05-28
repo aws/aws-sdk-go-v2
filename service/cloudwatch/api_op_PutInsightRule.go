@@ -125,6 +125,7 @@ func (c *Client) PutInsightRuleRequest(input *PutInsightRuleInput) PutInsightRul
 	}
 
 	req := c.newRequest(op, input, &PutInsightRuleOutput{})
+
 	return PutInsightRuleRequest{Request: req, Input: input, Copy: c.PutInsightRuleRequest}
 }
 

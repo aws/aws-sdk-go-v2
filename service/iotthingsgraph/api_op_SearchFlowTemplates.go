@@ -98,6 +98,7 @@ func (c *Client) SearchFlowTemplatesRequest(input *SearchFlowTemplatesInput) Sea
 	}
 
 	req := c.newRequest(op, input, &SearchFlowTemplatesOutput{})
+
 	return SearchFlowTemplatesRequest{Request: req, Input: input, Copy: c.SearchFlowTemplatesRequest}
 }
 

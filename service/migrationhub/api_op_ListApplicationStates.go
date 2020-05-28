@@ -98,6 +98,7 @@ func (c *Client) ListApplicationStatesRequest(input *ListApplicationStatesInput)
 	}
 
 	req := c.newRequest(op, input, &ListApplicationStatesOutput{})
+
 	return ListApplicationStatesRequest{Request: req, Input: input, Copy: c.ListApplicationStatesRequest}
 }
 

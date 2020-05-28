@@ -101,6 +101,7 @@ func (c *Client) DeleteConfigurationSetRequest(input *DeleteConfigurationSetInpu
 	}
 
 	req := c.newRequest(op, input, &DeleteConfigurationSetOutput{})
+
 	return DeleteConfigurationSetRequest{Request: req, Input: input, Copy: c.DeleteConfigurationSetRequest}
 }
 

@@ -128,6 +128,7 @@ func (c *Client) UpdatePipelineStatusRequest(input *UpdatePipelineStatusInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdatePipelineStatusOutput{})
+
 	return UpdatePipelineStatusRequest{Request: req, Input: input, Copy: c.UpdatePipelineStatusRequest}
 }
 

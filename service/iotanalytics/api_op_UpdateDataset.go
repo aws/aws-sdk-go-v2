@@ -207,6 +207,7 @@ func (c *Client) UpdateDatasetRequest(input *UpdateDatasetInput) UpdateDatasetRe
 	req := c.newRequest(op, input, &UpdateDatasetOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateDatasetRequest{Request: req, Input: input, Copy: c.UpdateDatasetRequest}
 }
 

@@ -97,6 +97,7 @@ func (c *Client) DescribeIamInstanceProfileAssociationsRequest(input *DescribeIa
 	}
 
 	req := c.newRequest(op, input, &DescribeIamInstanceProfileAssociationsOutput{})
+
 	return DescribeIamInstanceProfileAssociationsRequest{Request: req, Input: input, Copy: c.DescribeIamInstanceProfileAssociationsRequest}
 }
 

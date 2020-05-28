@@ -84,6 +84,7 @@ func (c *Client) GetBlueprintsRequest(input *GetBlueprintsInput) GetBlueprintsRe
 	}
 
 	req := c.newRequest(op, input, &GetBlueprintsOutput{})
+
 	return GetBlueprintsRequest{Request: req, Input: input, Copy: c.GetBlueprintsRequest}
 }
 

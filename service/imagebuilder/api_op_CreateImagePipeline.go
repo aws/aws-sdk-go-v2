@@ -266,6 +266,7 @@ func (c *Client) CreateImagePipelineRequest(input *CreateImagePipelineInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateImagePipelineOutput{})
+
 	return CreateImagePipelineRequest{Request: req, Input: input, Copy: c.CreateImagePipelineRequest}
 }
 

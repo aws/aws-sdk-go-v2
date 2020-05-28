@@ -90,6 +90,7 @@ func (c *Client) DeleteAssetRequest(input *DeleteAssetInput) DeleteAssetRequest 
 	}
 
 	req := c.newRequest(op, input, &DeleteAssetOutput{})
+
 	return DeleteAssetRequest{Request: req, Input: input, Copy: c.DeleteAssetRequest}
 }
 

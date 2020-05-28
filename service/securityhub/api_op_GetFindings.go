@@ -159,6 +159,7 @@ func (c *Client) GetFindingsRequest(input *GetFindingsInput) GetFindingsRequest 
 	}
 
 	req := c.newRequest(op, input, &GetFindingsOutput{})
+
 	return GetFindingsRequest{Request: req, Input: input, Copy: c.GetFindingsRequest}
 }
 

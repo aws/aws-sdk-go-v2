@@ -88,6 +88,7 @@ func (c *Client) CreateDirectConnectGatewayRequest(input *CreateDirectConnectGat
 	}
 
 	req := c.newRequest(op, input, &CreateDirectConnectGatewayOutput{})
+
 	return CreateDirectConnectGatewayRequest{Request: req, Input: input, Copy: c.CreateDirectConnectGatewayRequest}
 }
 

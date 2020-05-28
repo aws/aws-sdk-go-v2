@@ -79,6 +79,7 @@ func (c *Client) DeleteIdentityRequest(input *DeleteIdentityInput) DeleteIdentit
 	}
 
 	req := c.newRequest(op, input, &DeleteIdentityOutput{})
+
 	return DeleteIdentityRequest{Request: req, Input: input, Copy: c.DeleteIdentityRequest}
 }
 

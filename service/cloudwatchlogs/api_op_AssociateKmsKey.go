@@ -109,6 +109,7 @@ func (c *Client) AssociateKmsKeyRequest(input *AssociateKmsKeyInput) AssociateKm
 	req := c.newRequest(op, input, &AssociateKmsKeyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AssociateKmsKeyRequest{Request: req, Input: input, Copy: c.AssociateKmsKeyRequest}
 }
 

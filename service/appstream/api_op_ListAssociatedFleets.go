@@ -90,6 +90,7 @@ func (c *Client) ListAssociatedFleetsRequest(input *ListAssociatedFleetsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListAssociatedFleetsOutput{})
+
 	return ListAssociatedFleetsRequest{Request: req, Input: input, Copy: c.ListAssociatedFleetsRequest}
 }
 

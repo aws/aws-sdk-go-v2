@@ -89,6 +89,7 @@ func (c *Client) DeregisterFromWorkMailRequest(input *DeregisterFromWorkMailInpu
 	}
 
 	req := c.newRequest(op, input, &DeregisterFromWorkMailOutput{})
+
 	return DeregisterFromWorkMailRequest{Request: req, Input: input, Copy: c.DeregisterFromWorkMailRequest}
 }
 

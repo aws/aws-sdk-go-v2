@@ -133,6 +133,7 @@ func (c *Client) ListConfigurationSetsRequest(input *ListConfigurationSetsInput)
 	}
 
 	req := c.newRequest(op, input, &ListConfigurationSetsOutput{})
+
 	return ListConfigurationSetsRequest{Request: req, Input: input, Copy: c.ListConfigurationSetsRequest}
 }
 

@@ -262,6 +262,7 @@ func (c *Client) CreateIAMPolicyAssignmentRequest(input *CreateIAMPolicyAssignme
 	}
 
 	req := c.newRequest(op, input, &CreateIAMPolicyAssignmentOutput{})
+
 	return CreateIAMPolicyAssignmentRequest{Request: req, Input: input, Copy: c.CreateIAMPolicyAssignmentRequest}
 }
 

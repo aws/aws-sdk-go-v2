@@ -95,6 +95,7 @@ func (c *Client) DeleteInterconnectRequest(input *DeleteInterconnectInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteInterconnectOutput{})
+
 	return DeleteInterconnectRequest{Request: req, Input: input, Copy: c.DeleteInterconnectRequest}
 }
 

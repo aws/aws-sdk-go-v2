@@ -90,6 +90,7 @@ func (c *Client) ListRecipesRequest(input *ListRecipesInput) ListRecipesRequest 
 	}
 
 	req := c.newRequest(op, input, &ListRecipesOutput{})
+
 	return ListRecipesRequest{Request: req, Input: input, Copy: c.ListRecipesRequest}
 }
 

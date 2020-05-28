@@ -126,6 +126,7 @@ func (c *Client) DeleteBranchRequest(input *DeleteBranchInput) DeleteBranchReque
 	}
 
 	req := c.newRequest(op, input, &DeleteBranchOutput{})
+
 	return DeleteBranchRequest{Request: req, Input: input, Copy: c.DeleteBranchRequest}
 }
 

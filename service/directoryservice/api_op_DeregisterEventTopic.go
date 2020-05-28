@@ -88,6 +88,7 @@ func (c *Client) DeregisterEventTopicRequest(input *DeregisterEventTopicInput) D
 	}
 
 	req := c.newRequest(op, input, &DeregisterEventTopicOutput{})
+
 	return DeregisterEventTopicRequest{Request: req, Input: input, Copy: c.DeregisterEventTopicRequest}
 }
 

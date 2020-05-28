@@ -119,6 +119,7 @@ func (c *Client) UpdateSSHPublicKeyRequest(input *UpdateSSHPublicKeyInput) Updat
 	req := c.newRequest(op, input, &UpdateSSHPublicKeyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateSSHPublicKeyRequest{Request: req, Input: input, Copy: c.UpdateSSHPublicKeyRequest}
 }
 

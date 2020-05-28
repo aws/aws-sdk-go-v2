@@ -28,7 +28,7 @@ type PutLifecycleHookInput struct {
 	//
 	// If the lifecycle hook times out, Amazon EC2 Auto Scaling performs the action
 	// that you specified in the DefaultResult parameter. You can prevent the lifecycle
-	// hook from timing out by calling RecordLifecycleActionHeartbeat.
+	// hook from timing out by calling the RecordLifecycleActionHeartbeat API.
 	HeartbeatTimeout *int64 `type:"integer"`
 
 	// The name of the lifecycle hook.
@@ -145,10 +145,11 @@ const opPutLifecycleHook = "PutLifecycleHook"
 // launch or terminate.
 //
 // If you need more time, record the lifecycle action heartbeat to keep the
-// instance in a pending state using RecordLifecycleActionHeartbeat.
+// instance in a pending state using the RecordLifecycleActionHeartbeat API
+// call.
 //
 // If you finish before the timeout period ends, complete the lifecycle action
-// using CompleteLifecycleAction.
+// using the CompleteLifecycleAction API call.
 //
 // For more information, see Amazon EC2 Auto Scaling Lifecycle Hooks (https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html)
 // in the Amazon EC2 Auto Scaling User Guide.
@@ -156,8 +157,9 @@ const opPutLifecycleHook = "PutLifecycleHook"
 // If you exceed your maximum limit of lifecycle hooks, which by default is
 // 50 per Auto Scaling group, the call fails.
 //
-// You can view the lifecycle hooks for an Auto Scaling group using DescribeLifecycleHooks.
-// If you are no longer using a lifecycle hook, you can delete it using DeleteLifecycleHook.
+// You can view the lifecycle hooks for an Auto Scaling group using the DescribeLifecycleHooks
+// API call. If you are no longer using a lifecycle hook, you can delete it
+// by calling the DeleteLifecycleHook API.
 //
 //    // Example sending a request using PutLifecycleHookRequest.
 //    req := client.PutLifecycleHookRequest(params)
@@ -179,6 +181,7 @@ func (c *Client) PutLifecycleHookRequest(input *PutLifecycleHookInput) PutLifecy
 	}
 
 	req := c.newRequest(op, input, &PutLifecycleHookOutput{})
+
 	return PutLifecycleHookRequest{Request: req, Input: input, Copy: c.PutLifecycleHookRequest}
 }
 

@@ -119,6 +119,7 @@ func (c *Client) ModifySnapshotCopyRetentionPeriodRequest(input *ModifySnapshotC
 	}
 
 	req := c.newRequest(op, input, &ModifySnapshotCopyRetentionPeriodOutput{})
+
 	return ModifySnapshotCopyRetentionPeriodRequest{Request: req, Input: input, Copy: c.ModifySnapshotCopyRetentionPeriodRequest}
 }
 

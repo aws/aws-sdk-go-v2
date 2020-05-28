@@ -92,6 +92,7 @@ func (c *Client) ListBatchInferenceJobsRequest(input *ListBatchInferenceJobsInpu
 	}
 
 	req := c.newRequest(op, input, &ListBatchInferenceJobsOutput{})
+
 	return ListBatchInferenceJobsRequest{Request: req, Input: input, Copy: c.ListBatchInferenceJobsRequest}
 }
 

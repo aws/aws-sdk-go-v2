@@ -107,6 +107,7 @@ func (c *Client) DeleteRolePolicyRequest(input *DeleteRolePolicyInput) DeleteRol
 	req := c.newRequest(op, input, &DeleteRolePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteRolePolicyRequest{Request: req, Input: input, Copy: c.DeleteRolePolicyRequest}
 }
 

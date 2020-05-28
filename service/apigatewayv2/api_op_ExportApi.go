@@ -151,6 +151,7 @@ func (c *Client) ExportApiRequest(input *ExportApiInput) ExportApiRequest {
 	}
 
 	req := c.newRequest(op, input, &ExportApiOutput{})
+
 	return ExportApiRequest{Request: req, Input: input, Copy: c.ExportApiRequest}
 }
 

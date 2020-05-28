@@ -97,6 +97,7 @@ func (c *Client) DisassociateResolverRuleRequest(input *DisassociateResolverRule
 	}
 
 	req := c.newRequest(op, input, &DisassociateResolverRuleOutput{})
+
 	return DisassociateResolverRuleRequest{Request: req, Input: input, Copy: c.DisassociateResolverRuleRequest}
 }
 

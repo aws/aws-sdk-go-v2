@@ -113,6 +113,7 @@ func (c *Client) UpdateGlobalNetworkRequest(input *UpdateGlobalNetworkInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateGlobalNetworkOutput{})
+
 	return UpdateGlobalNetworkRequest{Request: req, Input: input, Copy: c.UpdateGlobalNetworkRequest}
 }
 

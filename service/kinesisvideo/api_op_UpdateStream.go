@@ -165,6 +165,7 @@ func (c *Client) UpdateStreamRequest(input *UpdateStreamInput) UpdateStreamReque
 	}
 
 	req := c.newRequest(op, input, &UpdateStreamOutput{})
+
 	return UpdateStreamRequest{Request: req, Input: input, Copy: c.UpdateStreamRequest}
 }
 

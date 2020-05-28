@@ -104,6 +104,7 @@ func (c *Client) GetOutpostRequest(input *GetOutpostInput) GetOutpostRequest {
 	}
 
 	req := c.newRequest(op, input, &GetOutpostOutput{})
+
 	return GetOutpostRequest{Request: req, Input: input, Copy: c.GetOutpostRequest}
 }
 

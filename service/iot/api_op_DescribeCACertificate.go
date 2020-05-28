@@ -113,6 +113,7 @@ func (c *Client) DescribeCACertificateRequest(input *DescribeCACertificateInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeCACertificateOutput{})
+
 	return DescribeCACertificateRequest{Request: req, Input: input, Copy: c.DescribeCACertificateRequest}
 }
 

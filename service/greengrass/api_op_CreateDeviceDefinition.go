@@ -179,6 +179,7 @@ func (c *Client) CreateDeviceDefinitionRequest(input *CreateDeviceDefinitionInpu
 	}
 
 	req := c.newRequest(op, input, &CreateDeviceDefinitionOutput{})
+
 	return CreateDeviceDefinitionRequest{Request: req, Input: input, Copy: c.CreateDeviceDefinitionRequest}
 }
 

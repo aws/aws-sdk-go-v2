@@ -340,7 +340,9 @@ func (s ICD10CMTrait) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The input properties for an entities detection job.
+// The input properties for an entities detection job. This includes the name
+// of the S3 bucket and the path to the files to be analyzed. See batch-manifest
+// for more information.
 type InputDataConfig struct {
 	_ struct{} `type:"structure"`
 

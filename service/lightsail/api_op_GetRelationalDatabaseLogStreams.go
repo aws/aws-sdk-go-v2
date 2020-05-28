@@ -78,6 +78,7 @@ func (c *Client) GetRelationalDatabaseLogStreamsRequest(input *GetRelationalData
 	}
 
 	req := c.newRequest(op, input, &GetRelationalDatabaseLogStreamsOutput{})
+
 	return GetRelationalDatabaseLogStreamsRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseLogStreamsRequest}
 }
 

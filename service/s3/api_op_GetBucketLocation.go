@@ -78,6 +78,7 @@ type GetBucketLocationOutput struct {
 
 	// Specifies the Region where the bucket resides. For a list of all the Amazon
 	// S3 supported location constraints by Region, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region).
+	// Buckets in Region us-east-1 have a LocationConstraint of null.
 	LocationConstraint BucketLocationConstraint `type:"string" enum:"true"`
 }
 
@@ -134,6 +135,7 @@ func (c *Client) GetBucketLocationRequest(input *GetBucketLocationInput) GetBuck
 	}
 
 	req := c.newRequest(op, input, &GetBucketLocationOutput{})
+
 	return GetBucketLocationRequest{Request: req, Input: input, Copy: c.GetBucketLocationRequest}
 }
 

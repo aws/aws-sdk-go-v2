@@ -50,6 +50,8 @@ type HeadObjectInput struct {
 
 	// Downloads the specified range bytes of an object. For more information about
 	// the HTTP Range header, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.
+	//
+	// Amazon S3 doesn't support retrieving multiple ranges of data per GET request.
 	Range *string `location:"header" locationName:"Range" type:"string"`
 
 	// Confirms that the requester knows that they will be charged for the request.
@@ -361,7 +363,7 @@ type HeadObjectOutput struct {
 	ServerSideEncryption ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string" enum:"true"`
 
 	// Provides storage class information of the object. Amazon S3 returns this
-	// header for all objects except for Standard storage class objects.
+	// header for all objects except for S3 Standard storage class objects.
 	//
 	// For more information, see Storage Classes (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html).
 	StorageClass StorageClass `location:"header" locationName:"x-amz-storage-class" type:"string" enum:"true"`
@@ -650,6 +652,7 @@ func (c *Client) HeadObjectRequest(input *HeadObjectInput) HeadObjectRequest {
 	}
 
 	req := c.newRequest(op, input, &HeadObjectOutput{})
+
 	return HeadObjectRequest{Request: req, Input: input, Copy: c.HeadObjectRequest}
 }
 

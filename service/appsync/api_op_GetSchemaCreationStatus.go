@@ -111,6 +111,7 @@ func (c *Client) GetSchemaCreationStatusRequest(input *GetSchemaCreationStatusIn
 	}
 
 	req := c.newRequest(op, input, &GetSchemaCreationStatusOutput{})
+
 	return GetSchemaCreationStatusRequest{Request: req, Input: input, Copy: c.GetSchemaCreationStatusRequest}
 }
 

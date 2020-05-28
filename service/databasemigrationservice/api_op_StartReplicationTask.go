@@ -124,6 +124,7 @@ func (c *Client) StartReplicationTaskRequest(input *StartReplicationTaskInput) S
 	}
 
 	req := c.newRequest(op, input, &StartReplicationTaskOutput{})
+
 	return StartReplicationTaskRequest{Request: req, Input: input, Copy: c.StartReplicationTaskRequest}
 }
 

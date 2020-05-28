@@ -111,6 +111,7 @@ func (c *Client) DescribeAccountAuditConfigurationRequest(input *DescribeAccount
 	}
 
 	req := c.newRequest(op, input, &DescribeAccountAuditConfigurationOutput{})
+
 	return DescribeAccountAuditConfigurationRequest{Request: req, Input: input, Copy: c.DescribeAccountAuditConfigurationRequest}
 }
 

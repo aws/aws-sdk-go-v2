@@ -147,6 +147,7 @@ func (c *Client) DescribeJobQueuesRequest(input *DescribeJobQueuesInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeJobQueuesOutput{})
+
 	return DescribeJobQueuesRequest{Request: req, Input: input, Copy: c.DescribeJobQueuesRequest}
 }
 

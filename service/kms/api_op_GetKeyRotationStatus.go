@@ -111,6 +111,7 @@ func (c *Client) GetKeyRotationStatusRequest(input *GetKeyRotationStatusInput) G
 	}
 
 	req := c.newRequest(op, input, &GetKeyRotationStatusOutput{})
+
 	return GetKeyRotationStatusRequest{Request: req, Input: input, Copy: c.GetKeyRotationStatusRequest}
 }
 

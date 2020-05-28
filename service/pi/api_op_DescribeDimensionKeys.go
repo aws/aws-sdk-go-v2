@@ -216,6 +216,7 @@ func (c *Client) DescribeDimensionKeysRequest(input *DescribeDimensionKeysInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeDimensionKeysOutput{})
+
 	return DescribeDimensionKeysRequest{Request: req, Input: input, Copy: c.DescribeDimensionKeysRequest}
 }
 

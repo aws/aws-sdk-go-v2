@@ -85,6 +85,7 @@ func (c *Client) DeleteLoadBalancerPolicyRequest(input *DeleteLoadBalancerPolicy
 	}
 
 	req := c.newRequest(op, input, &DeleteLoadBalancerPolicyOutput{})
+
 	return DeleteLoadBalancerPolicyRequest{Request: req, Input: input, Copy: c.DeleteLoadBalancerPolicyRequest}
 }
 

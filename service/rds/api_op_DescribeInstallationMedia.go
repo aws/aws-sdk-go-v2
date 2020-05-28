@@ -112,6 +112,7 @@ func (c *Client) DescribeInstallationMediaRequest(input *DescribeInstallationMed
 	}
 
 	req := c.newRequest(op, input, &DescribeInstallationMediaOutput{})
+
 	return DescribeInstallationMediaRequest{Request: req, Input: input, Copy: c.DescribeInstallationMediaRequest}
 }
 

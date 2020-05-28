@@ -124,6 +124,7 @@ func (c *Client) ListMultiplexesRequest(input *ListMultiplexesInput) ListMultipl
 	}
 
 	req := c.newRequest(op, input, &ListMultiplexesOutput{})
+
 	return ListMultiplexesRequest{Request: req, Input: input, Copy: c.ListMultiplexesRequest}
 }
 

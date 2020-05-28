@@ -196,6 +196,7 @@ func (c *Client) DescribeScalableTargetsRequest(input *DescribeScalableTargetsIn
 	}
 
 	req := c.newRequest(op, input, &DescribeScalableTargetsOutput{})
+
 	return DescribeScalableTargetsRequest{Request: req, Input: input, Copy: c.DescribeScalableTargetsRequest}
 }
 

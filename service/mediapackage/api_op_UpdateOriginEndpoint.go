@@ -360,6 +360,7 @@ func (c *Client) UpdateOriginEndpointRequest(input *UpdateOriginEndpointInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateOriginEndpointOutput{})
+
 	return UpdateOriginEndpointRequest{Request: req, Input: input, Copy: c.UpdateOriginEndpointRequest}
 }
 

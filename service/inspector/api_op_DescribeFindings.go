@@ -91,6 +91,7 @@ func (c *Client) DescribeFindingsRequest(input *DescribeFindingsInput) DescribeF
 	}
 
 	req := c.newRequest(op, input, &DescribeFindingsOutput{})
+
 	return DescribeFindingsRequest{Request: req, Input: input, Copy: c.DescribeFindingsRequest}
 }
 

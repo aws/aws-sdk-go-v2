@@ -97,6 +97,7 @@ func (c *Client) SetLocalConsolePasswordRequest(input *SetLocalConsolePasswordIn
 	}
 
 	req := c.newRequest(op, input, &SetLocalConsolePasswordOutput{})
+
 	return SetLocalConsolePasswordRequest{Request: req, Input: input, Copy: c.SetLocalConsolePasswordRequest}
 }
 

@@ -118,6 +118,7 @@ func (c *Client) DescribeMonitoringScheduleRequest(input *DescribeMonitoringSche
 	}
 
 	req := c.newRequest(op, input, &DescribeMonitoringScheduleOutput{})
+
 	return DescribeMonitoringScheduleRequest{Request: req, Input: input, Copy: c.DescribeMonitoringScheduleRequest}
 }
 

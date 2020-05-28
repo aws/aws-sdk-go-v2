@@ -157,6 +157,7 @@ func (c *Client) SetIdentityPoolConfigurationRequest(input *SetIdentityPoolConfi
 	}
 
 	req := c.newRequest(op, input, &SetIdentityPoolConfigurationOutput{})
+
 	return SetIdentityPoolConfigurationRequest{Request: req, Input: input, Copy: c.SetIdentityPoolConfigurationRequest}
 }
 

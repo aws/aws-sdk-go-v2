@@ -64,6 +64,7 @@ func (c *Client) GenerateChangeSetRequest(input *GenerateChangeSetInput) Generat
 	}
 
 	req := c.newRequest(op, input, &GenerateChangeSetOutput{})
+
 	return GenerateChangeSetRequest{Request: req, Input: input, Copy: c.GenerateChangeSetRequest}
 }
 

@@ -108,6 +108,7 @@ func (c *Client) DisassociatePhoneNumberFromUserRequest(input *DisassociatePhone
 	}
 
 	req := c.newRequest(op, input, &DisassociatePhoneNumberFromUserOutput{})
+
 	return DisassociatePhoneNumberFromUserRequest{Request: req, Input: input, Copy: c.DisassociatePhoneNumberFromUserRequest}
 }
 

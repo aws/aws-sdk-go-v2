@@ -87,6 +87,7 @@ func (c *Client) DescribeTargetHealthRequest(input *DescribeTargetHealthInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeTargetHealthOutput{})
+
 	return DescribeTargetHealthRequest{Request: req, Input: input, Copy: c.DescribeTargetHealthRequest}
 }
 

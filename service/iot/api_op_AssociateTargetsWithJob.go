@@ -162,6 +162,7 @@ func (c *Client) AssociateTargetsWithJobRequest(input *AssociateTargetsWithJobIn
 	}
 
 	req := c.newRequest(op, input, &AssociateTargetsWithJobOutput{})
+
 	return AssociateTargetsWithJobRequest{Request: req, Input: input, Copy: c.AssociateTargetsWithJobRequest}
 }
 

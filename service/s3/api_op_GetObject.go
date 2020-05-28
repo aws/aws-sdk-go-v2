@@ -56,7 +56,10 @@ type GetObjectInput struct {
 	PartNumber *int64 `location:"querystring" locationName:"partNumber" type:"integer"`
 
 	// Downloads the specified range bytes of an object. For more information about
-	// the HTTP Range header, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.
+	// the HTTP Range header, see https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
+	// (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35).
+	//
+	// Amazon S3 doesn't support retrieving multiple ranges of data per GET request.
 	Range *string `location:"header" locationName:"Range" type:"string"`
 
 	// Confirms that the requester knows that they will be charged for the request.
@@ -387,7 +390,7 @@ type GetObjectOutput struct {
 	ServerSideEncryption ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string" enum:"true"`
 
 	// Provides storage class information of the object. Amazon S3 returns this
-	// header for all objects except for Standard storage class objects.
+	// header for all objects except for S3 Standard storage class objects.
 	StorageClass StorageClass `location:"header" locationName:"x-amz-storage-class" type:"string" enum:"true"`
 
 	// The number of tags, if any, on the object.
@@ -751,6 +754,7 @@ func (c *Client) GetObjectRequest(input *GetObjectInput) GetObjectRequest {
 	}
 
 	req := c.newRequest(op, input, &GetObjectOutput{})
+
 	return GetObjectRequest{Request: req, Input: input, Copy: c.GetObjectRequest}
 }
 

@@ -77,6 +77,7 @@ func (c *Client) EnableAlarmActionsRequest(input *EnableAlarmActionsInput) Enabl
 	req := c.newRequest(op, input, &EnableAlarmActionsOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return EnableAlarmActionsRequest{Request: req, Input: input, Copy: c.EnableAlarmActionsRequest}
 }
 

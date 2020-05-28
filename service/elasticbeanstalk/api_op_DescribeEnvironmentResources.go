@@ -86,6 +86,7 @@ func (c *Client) DescribeEnvironmentResourcesRequest(input *DescribeEnvironmentR
 	}
 
 	req := c.newRequest(op, input, &DescribeEnvironmentResourcesOutput{})
+
 	return DescribeEnvironmentResourcesRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentResourcesRequest}
 }
 

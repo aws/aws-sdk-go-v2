@@ -92,6 +92,7 @@ func (c *Client) DeleteGraphqlApiRequest(input *DeleteGraphqlApiInput) DeleteGra
 	}
 
 	req := c.newRequest(op, input, &DeleteGraphqlApiOutput{})
+
 	return DeleteGraphqlApiRequest{Request: req, Input: input, Copy: c.DeleteGraphqlApiRequest}
 }
 

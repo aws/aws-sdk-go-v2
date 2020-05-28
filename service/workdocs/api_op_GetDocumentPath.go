@@ -160,6 +160,7 @@ func (c *Client) GetDocumentPathRequest(input *GetDocumentPathInput) GetDocument
 	}
 
 	req := c.newRequest(op, input, &GetDocumentPathOutput{})
+
 	return GetDocumentPathRequest{Request: req, Input: input, Copy: c.GetDocumentPathRequest}
 }
 

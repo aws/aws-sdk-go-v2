@@ -138,6 +138,7 @@ func (c *Client) GetCostForecastRequest(input *GetCostForecastInput) GetCostFore
 	}
 
 	req := c.newRequest(op, input, &GetCostForecastOutput{})
+
 	return GetCostForecastRequest{Request: req, Input: input, Copy: c.GetCostForecastRequest}
 }
 

@@ -81,6 +81,7 @@ func (c *Client) GetApprovalRuleTemplateRequest(input *GetApprovalRuleTemplateIn
 	}
 
 	req := c.newRequest(op, input, &GetApprovalRuleTemplateOutput{})
+
 	return GetApprovalRuleTemplateRequest{Request: req, Input: input, Copy: c.GetApprovalRuleTemplateRequest}
 }
 

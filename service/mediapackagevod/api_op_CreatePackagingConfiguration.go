@@ -249,6 +249,7 @@ func (c *Client) CreatePackagingConfigurationRequest(input *CreatePackagingConfi
 	}
 
 	req := c.newRequest(op, input, &CreatePackagingConfigurationOutput{})
+
 	return CreatePackagingConfigurationRequest{Request: req, Input: input, Copy: c.CreatePackagingConfigurationRequest}
 }
 

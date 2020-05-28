@@ -158,6 +158,7 @@ func (c *Client) CreateEntityRecognizerRequest(input *CreateEntityRecognizerInpu
 	}
 
 	req := c.newRequest(op, input, &CreateEntityRecognizerOutput{})
+
 	return CreateEntityRecognizerRequest{Request: req, Input: input, Copy: c.CreateEntityRecognizerRequest}
 }
 

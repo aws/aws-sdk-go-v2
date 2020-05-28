@@ -109,6 +109,7 @@ func (c *Client) FlushStageAuthorizersCacheRequest(input *FlushStageAuthorizersC
 	req := c.newRequest(op, input, &FlushStageAuthorizersCacheOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return FlushStageAuthorizersCacheRequest{Request: req, Input: input, Copy: c.FlushStageAuthorizersCacheRequest}
 }
 

@@ -123,6 +123,7 @@ func (c *Client) CreateDedicatedIpPoolRequest(input *CreateDedicatedIpPoolInput)
 	}
 
 	req := c.newRequest(op, input, &CreateDedicatedIpPoolOutput{})
+
 	return CreateDedicatedIpPoolRequest{Request: req, Input: input, Copy: c.CreateDedicatedIpPoolRequest}
 }
 

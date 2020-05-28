@@ -156,6 +156,7 @@ func (c *Client) UnsubscribeFromDatasetRequest(input *UnsubscribeFromDatasetInpu
 	}
 
 	req := c.newRequest(op, input, &UnsubscribeFromDatasetOutput{})
+
 	return UnsubscribeFromDatasetRequest{Request: req, Input: input, Copy: c.UnsubscribeFromDatasetRequest}
 }
 

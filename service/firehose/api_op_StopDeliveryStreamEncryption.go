@@ -99,6 +99,7 @@ func (c *Client) StopDeliveryStreamEncryptionRequest(input *StopDeliveryStreamEn
 	}
 
 	req := c.newRequest(op, input, &StopDeliveryStreamEncryptionOutput{})
+
 	return StopDeliveryStreamEncryptionRequest{Request: req, Input: input, Copy: c.StopDeliveryStreamEncryptionRequest}
 }
 

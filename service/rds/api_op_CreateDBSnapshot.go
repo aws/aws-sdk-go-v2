@@ -107,6 +107,7 @@ func (c *Client) CreateDBSnapshotRequest(input *CreateDBSnapshotInput) CreateDBS
 	}
 
 	req := c.newRequest(op, input, &CreateDBSnapshotOutput{})
+
 	return CreateDBSnapshotRequest{Request: req, Input: input, Copy: c.CreateDBSnapshotRequest}
 }
 

@@ -178,6 +178,7 @@ func (c *Client) ListDashboardVersionsRequest(input *ListDashboardVersionsInput)
 	}
 
 	req := c.newRequest(op, input, &ListDashboardVersionsOutput{})
+
 	return ListDashboardVersionsRequest{Request: req, Input: input, Copy: c.ListDashboardVersionsRequest}
 }
 

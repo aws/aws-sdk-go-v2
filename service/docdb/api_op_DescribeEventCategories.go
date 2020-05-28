@@ -86,6 +86,7 @@ func (c *Client) DescribeEventCategoriesRequest(input *DescribeEventCategoriesIn
 	}
 
 	req := c.newRequest(op, input, &DescribeEventCategoriesOutput{})
+
 	return DescribeEventCategoriesRequest{Request: req, Input: input, Copy: c.DescribeEventCategoriesRequest}
 }
 

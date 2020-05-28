@@ -79,6 +79,7 @@ func (c *Client) DeleteSubnetGroupRequest(input *DeleteSubnetGroupInput) DeleteS
 	}
 
 	req := c.newRequest(op, input, &DeleteSubnetGroupOutput{})
+
 	return DeleteSubnetGroupRequest{Request: req, Input: input, Copy: c.DeleteSubnetGroupRequest}
 }
 

@@ -66,6 +66,7 @@ func (c *Client) GetInvitationConfigurationRequest(input *GetInvitationConfigura
 	}
 
 	req := c.newRequest(op, input, &GetInvitationConfigurationOutput{})
+
 	return GetInvitationConfigurationRequest{Request: req, Input: input, Copy: c.GetInvitationConfigurationRequest}
 }
 

@@ -165,6 +165,7 @@ func (c *Client) ListUpdatesRequest(input *ListUpdatesInput) ListUpdatesRequest 
 	}
 
 	req := c.newRequest(op, input, &ListUpdatesOutput{})
+
 	return ListUpdatesRequest{Request: req, Input: input, Copy: c.ListUpdatesRequest}
 }
 

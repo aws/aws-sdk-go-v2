@@ -128,6 +128,7 @@ func (c *Client) ListGrantsRequest(input *ListGrantsInput) ListGrantsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListGrantsOutput{})
+
 	return ListGrantsRequest{Request: req, Input: input, Copy: c.ListGrantsRequest}
 }
 

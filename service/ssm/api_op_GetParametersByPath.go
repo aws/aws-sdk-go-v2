@@ -133,6 +133,7 @@ func (c *Client) GetParametersByPathRequest(input *GetParametersByPathInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetParametersByPathOutput{})
+
 	return GetParametersByPathRequest{Request: req, Input: input, Copy: c.GetParametersByPathRequest}
 }
 

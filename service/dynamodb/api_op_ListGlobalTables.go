@@ -71,7 +71,7 @@ const opListGlobalTables = "ListGlobalTables"
 //
 // Lists all global tables that have a replica in the specified Region.
 //
-// This method only applies to Version 2017.11.29 (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html)
+// This operation only applies to Version 2017.11.29 (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html)
 // of global tables.
 //
 //    // Example sending a request using ListGlobalTablesRequest.
@@ -116,6 +116,7 @@ func (c *Client) ListGlobalTablesRequest(input *ListGlobalTablesInput) ListGloba
 			Fn:   de.Handler,
 		})
 	}
+
 	return ListGlobalTablesRequest{Request: req, Input: input, Copy: c.ListGlobalTablesRequest}
 }
 

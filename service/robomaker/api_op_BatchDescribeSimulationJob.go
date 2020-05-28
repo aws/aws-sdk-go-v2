@@ -131,6 +131,7 @@ func (c *Client) BatchDescribeSimulationJobRequest(input *BatchDescribeSimulatio
 	}
 
 	req := c.newRequest(op, input, &BatchDescribeSimulationJobOutput{})
+
 	return BatchDescribeSimulationJobRequest{Request: req, Input: input, Copy: c.BatchDescribeSimulationJobRequest}
 }
 

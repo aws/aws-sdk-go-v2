@@ -37,6 +37,26 @@ func (enum EntityState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type FolderName string
+
+// Enum values for FolderName
+const (
+	FolderNameInbox        FolderName = "INBOX"
+	FolderNameDeletedItems FolderName = "DELETED_ITEMS"
+	FolderNameSentItems    FolderName = "SENT_ITEMS"
+	FolderNameDrafts       FolderName = "DRAFTS"
+	FolderNameJunkEmail    FolderName = "JUNK_EMAIL"
+)
+
+func (enum FolderName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FolderName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MemberType string
 
 // Enum values for MemberType
@@ -85,6 +105,24 @@ func (enum ResourceType) MarshalValue() (string, error) {
 }
 
 func (enum ResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RetentionAction string
+
+// Enum values for RetentionAction
+const (
+	RetentionActionNone              RetentionAction = "NONE"
+	RetentionActionDelete            RetentionAction = "DELETE"
+	RetentionActionPermanentlyDelete RetentionAction = "PERMANENTLY_DELETE"
+)
+
+func (enum RetentionAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RetentionAction) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

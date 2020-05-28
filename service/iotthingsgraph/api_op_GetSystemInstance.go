@@ -80,6 +80,7 @@ func (c *Client) GetSystemInstanceRequest(input *GetSystemInstanceInput) GetSyst
 	}
 
 	req := c.newRequest(op, input, &GetSystemInstanceOutput{})
+
 	return GetSystemInstanceRequest{Request: req, Input: input, Copy: c.GetSystemInstanceRequest}
 }
 

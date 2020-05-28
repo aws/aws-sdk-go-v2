@@ -159,6 +159,7 @@ func (c *Client) DescribeCodeBindingRequest(input *DescribeCodeBindingInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeCodeBindingOutput{})
+
 	return DescribeCodeBindingRequest{Request: req, Input: input, Copy: c.DescribeCodeBindingRequest}
 }
 

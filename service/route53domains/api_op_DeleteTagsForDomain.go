@@ -86,6 +86,7 @@ func (c *Client) DeleteTagsForDomainRequest(input *DeleteTagsForDomainInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteTagsForDomainOutput{})
+
 	return DeleteTagsForDomainRequest{Request: req, Input: input, Copy: c.DeleteTagsForDomainRequest}
 }
 

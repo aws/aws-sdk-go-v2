@@ -89,6 +89,7 @@ func (c *Client) RegisterResourceRequest(input *RegisterResourceInput) RegisterR
 	}
 
 	req := c.newRequest(op, input, &RegisterResourceOutput{})
+
 	return RegisterResourceRequest{Request: req, Input: input, Copy: c.RegisterResourceRequest}
 }
 

@@ -116,6 +116,7 @@ func (c *Client) GetJourneyRequest(input *GetJourneyInput) GetJourneyRequest {
 	}
 
 	req := c.newRequest(op, input, &GetJourneyOutput{})
+
 	return GetJourneyRequest{Request: req, Input: input, Copy: c.GetJourneyRequest}
 }
 

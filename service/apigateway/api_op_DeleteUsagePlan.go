@@ -94,6 +94,7 @@ func (c *Client) DeleteUsagePlanRequest(input *DeleteUsagePlanInput) DeleteUsage
 	req := c.newRequest(op, input, &DeleteUsagePlanOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteUsagePlanRequest{Request: req, Input: input, Copy: c.DeleteUsagePlanRequest}
 }
 

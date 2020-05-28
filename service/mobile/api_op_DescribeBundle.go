@@ -103,6 +103,7 @@ func (c *Client) DescribeBundleRequest(input *DescribeBundleInput) DescribeBundl
 	}
 
 	req := c.newRequest(op, input, &DescribeBundleOutput{})
+
 	return DescribeBundleRequest{Request: req, Input: input, Copy: c.DescribeBundleRequest}
 }
 

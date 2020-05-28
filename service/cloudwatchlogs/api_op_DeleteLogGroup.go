@@ -81,6 +81,7 @@ func (c *Client) DeleteLogGroupRequest(input *DeleteLogGroupInput) DeleteLogGrou
 	req := c.newRequest(op, input, &DeleteLogGroupOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteLogGroupRequest{Request: req, Input: input, Copy: c.DeleteLogGroupRequest}
 }
 

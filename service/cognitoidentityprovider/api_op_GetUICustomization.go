@@ -90,6 +90,7 @@ func (c *Client) GetUICustomizationRequest(input *GetUICustomizationInput) GetUI
 	}
 
 	req := c.newRequest(op, input, &GetUICustomizationOutput{})
+
 	return GetUICustomizationRequest{Request: req, Input: input, Copy: c.GetUICustomizationRequest}
 }
 

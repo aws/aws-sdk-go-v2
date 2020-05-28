@@ -66,6 +66,7 @@ func (c *Client) GetAppRequest(input *GetAppInput) GetAppRequest {
 	}
 
 	req := c.newRequest(op, input, &GetAppOutput{})
+
 	return GetAppRequest{Request: req, Input: input, Copy: c.GetAppRequest}
 }
 

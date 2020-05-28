@@ -76,6 +76,7 @@ func (c *Client) DescribeAssociationRequest(input *DescribeAssociationInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeAssociationOutput{})
+
 	return DescribeAssociationRequest{Request: req, Input: input, Copy: c.DescribeAssociationRequest}
 }
 

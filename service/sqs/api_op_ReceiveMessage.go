@@ -244,6 +244,7 @@ func (c *Client) ReceiveMessageRequest(input *ReceiveMessageInput) ReceiveMessag
 	}
 
 	req := c.newRequest(op, input, &ReceiveMessageOutput{})
+
 	return ReceiveMessageRequest{Request: req, Input: input, Copy: c.ReceiveMessageRequest}
 }
 

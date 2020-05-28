@@ -90,6 +90,7 @@ func (c *Client) GetDevEndpointsRequest(input *GetDevEndpointsInput) GetDevEndpo
 	}
 
 	req := c.newRequest(op, input, &GetDevEndpointsOutput{})
+
 	return GetDevEndpointsRequest{Request: req, Input: input, Copy: c.GetDevEndpointsRequest}
 }
 

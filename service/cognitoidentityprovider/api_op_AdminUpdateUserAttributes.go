@@ -151,6 +151,7 @@ func (c *Client) AdminUpdateUserAttributesRequest(input *AdminUpdateUserAttribut
 	}
 
 	req := c.newRequest(op, input, &AdminUpdateUserAttributesOutput{})
+
 	return AdminUpdateUserAttributesRequest{Request: req, Input: input, Copy: c.AdminUpdateUserAttributesRequest}
 }
 

@@ -138,6 +138,7 @@ func (c *Client) SendBounceRequest(input *SendBounceInput) SendBounceRequest {
 	}
 
 	req := c.newRequest(op, input, &SendBounceOutput{})
+
 	return SendBounceRequest{Request: req, Input: input, Copy: c.SendBounceRequest}
 }
 

@@ -103,6 +103,7 @@ func (c *Client) ListDataSourcesRequest(input *ListDataSourcesInput) ListDataSou
 	}
 
 	req := c.newRequest(op, input, &ListDataSourcesOutput{})
+
 	return ListDataSourcesRequest{Request: req, Input: input, Copy: c.ListDataSourcesRequest}
 }
 

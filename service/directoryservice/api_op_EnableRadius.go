@@ -91,6 +91,7 @@ func (c *Client) EnableRadiusRequest(input *EnableRadiusInput) EnableRadiusReque
 	}
 
 	req := c.newRequest(op, input, &EnableRadiusOutput{})
+
 	return EnableRadiusRequest{Request: req, Input: input, Copy: c.EnableRadiusRequest}
 }
 

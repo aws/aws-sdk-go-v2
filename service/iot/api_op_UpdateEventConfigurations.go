@@ -80,6 +80,7 @@ func (c *Client) UpdateEventConfigurationsRequest(input *UpdateEventConfiguratio
 	}
 
 	req := c.newRequest(op, input, &UpdateEventConfigurationsOutput{})
+
 	return UpdateEventConfigurationsRequest{Request: req, Input: input, Copy: c.UpdateEventConfigurationsRequest}
 }
 

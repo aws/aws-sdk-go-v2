@@ -88,6 +88,7 @@ func (c *Client) GetCertificateAuthorityCsrRequest(input *GetCertificateAuthorit
 	}
 
 	req := c.newRequest(op, input, &GetCertificateAuthorityCsrOutput{})
+
 	return GetCertificateAuthorityCsrRequest{Request: req, Input: input, Copy: c.GetCertificateAuthorityCsrRequest}
 }
 

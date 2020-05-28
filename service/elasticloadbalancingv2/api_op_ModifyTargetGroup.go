@@ -145,6 +145,7 @@ func (c *Client) ModifyTargetGroupRequest(input *ModifyTargetGroupInput) ModifyT
 	}
 
 	req := c.newRequest(op, input, &ModifyTargetGroupOutput{})
+
 	return ModifyTargetGroupRequest{Request: req, Input: input, Copy: c.ModifyTargetGroupRequest}
 }
 

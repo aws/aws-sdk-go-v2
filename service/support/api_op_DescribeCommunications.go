@@ -113,6 +113,7 @@ func (c *Client) DescribeCommunicationsRequest(input *DescribeCommunicationsInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeCommunicationsOutput{})
+
 	return DescribeCommunicationsRequest{Request: req, Input: input, Copy: c.DescribeCommunicationsRequest}
 }
 

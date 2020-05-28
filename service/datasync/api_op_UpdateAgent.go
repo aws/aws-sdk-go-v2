@@ -80,6 +80,7 @@ func (c *Client) UpdateAgentRequest(input *UpdateAgentInput) UpdateAgentRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateAgentOutput{})
+
 	return UpdateAgentRequest{Request: req, Input: input, Copy: c.UpdateAgentRequest}
 }
 

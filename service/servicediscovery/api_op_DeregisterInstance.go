@@ -12,7 +12,8 @@ import (
 type DeregisterInstanceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The value that you specified for Id in the RegisterInstance request.
+	// The value that you specified for Id in the RegisterInstance (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
+	// request.
 	//
 	// InstanceId is a required field
 	InstanceId *string `type:"string" required:"true"`
@@ -50,7 +51,7 @@ type DeregisterInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A value that you can use to determine whether the request completed successfully.
-	// For more information, see GetOperation.
+	// For more information, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
 	OperationId *string `type:"string"`
 }
 
@@ -87,6 +88,7 @@ func (c *Client) DeregisterInstanceRequest(input *DeregisterInstanceInput) Dereg
 	}
 
 	req := c.newRequest(op, input, &DeregisterInstanceOutput{})
+
 	return DeregisterInstanceRequest{Request: req, Input: input, Copy: c.DeregisterInstanceRequest}
 }
 

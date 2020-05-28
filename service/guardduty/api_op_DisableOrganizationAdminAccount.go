@@ -13,7 +13,7 @@ import (
 type DisableOrganizationAdminAccountInput struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS Account ID for the Organizations account to be disabled as a GuardDuty
+	// The AWS Account ID for the organizations account to be disabled as a GuardDuty
 	// delegated administrator.
 	//
 	// AdminAccountId is a required field
@@ -71,8 +71,8 @@ const opDisableOrganizationAdminAccount = "DisableOrganizationAdminAccount"
 // DisableOrganizationAdminAccountRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Disables GuardDuty administrator permissions for an AWS account within the
-// Organization.
+// Disables an AWS account within the Organization as the GuardDuty delegated
+// administrator.
 //
 //    // Example sending a request using DisableOrganizationAdminAccountRequest.
 //    req := client.DisableOrganizationAdminAccountRequest(params)
@@ -94,6 +94,7 @@ func (c *Client) DisableOrganizationAdminAccountRequest(input *DisableOrganizati
 	}
 
 	req := c.newRequest(op, input, &DisableOrganizationAdminAccountOutput{})
+
 	return DisableOrganizationAdminAccountRequest{Request: req, Input: input, Copy: c.DisableOrganizationAdminAccountRequest}
 }
 

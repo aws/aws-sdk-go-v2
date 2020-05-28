@@ -220,6 +220,7 @@ func (c *Client) DescribeNotificationRuleRequest(input *DescribeNotificationRule
 	}
 
 	req := c.newRequest(op, input, &DescribeNotificationRuleOutput{})
+
 	return DescribeNotificationRuleRequest{Request: req, Input: input, Copy: c.DescribeNotificationRuleRequest}
 }
 

@@ -81,6 +81,7 @@ func (c *Client) CreateParameterGroupRequest(input *CreateParameterGroupInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateParameterGroupOutput{})
+
 	return CreateParameterGroupRequest{Request: req, Input: input, Copy: c.CreateParameterGroupRequest}
 }
 

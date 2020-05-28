@@ -286,6 +286,7 @@ func (c *Client) ImportRestApiRequest(input *ImportRestApiInput) ImportRestApiRe
 	}
 
 	req := c.newRequest(op, input, &ImportRestApiOutput{})
+
 	return ImportRestApiRequest{Request: req, Input: input, Copy: c.ImportRestApiRequest}
 }
 

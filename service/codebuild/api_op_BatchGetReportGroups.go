@@ -83,6 +83,7 @@ func (c *Client) BatchGetReportGroupsRequest(input *BatchGetReportGroupsInput) B
 	}
 
 	req := c.newRequest(op, input, &BatchGetReportGroupsOutput{})
+
 	return BatchGetReportGroupsRequest{Request: req, Input: input, Copy: c.BatchGetReportGroupsRequest}
 }
 

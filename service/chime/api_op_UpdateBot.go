@@ -126,6 +126,7 @@ func (c *Client) UpdateBotRequest(input *UpdateBotInput) UpdateBotRequest {
 	}
 
 	req := c.newRequest(op, input, &UpdateBotOutput{})
+
 	return UpdateBotRequest{Request: req, Input: input, Copy: c.UpdateBotRequest}
 }
 

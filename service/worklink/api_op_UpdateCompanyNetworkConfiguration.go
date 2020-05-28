@@ -152,6 +152,7 @@ func (c *Client) UpdateCompanyNetworkConfigurationRequest(input *UpdateCompanyNe
 	}
 
 	req := c.newRequest(op, input, &UpdateCompanyNetworkConfigurationOutput{})
+
 	return UpdateCompanyNetworkConfigurationRequest{Request: req, Input: input, Copy: c.UpdateCompanyNetworkConfigurationRequest}
 }
 

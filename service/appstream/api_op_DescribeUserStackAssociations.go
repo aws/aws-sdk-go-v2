@@ -105,6 +105,7 @@ func (c *Client) DescribeUserStackAssociationsRequest(input *DescribeUserStackAs
 	}
 
 	req := c.newRequest(op, input, &DescribeUserStackAssociationsOutput{})
+
 	return DescribeUserStackAssociationsRequest{Request: req, Input: input, Copy: c.DescribeUserStackAssociationsRequest}
 }
 

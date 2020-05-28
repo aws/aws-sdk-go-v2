@@ -114,6 +114,7 @@ func (c *Client) ModifyHsmRequest(input *ModifyHsmInput) ModifyHsmRequest {
 	}
 
 	req := c.newRequest(op, input, &ModifyHsmOutput{})
+
 	return ModifyHsmRequest{Request: req, Input: input, Copy: c.ModifyHsmRequest}
 }
 

@@ -69,6 +69,7 @@ func (c *Client) UpdateDirectConnectGatewayAssociationRequest(input *UpdateDirec
 	}
 
 	req := c.newRequest(op, input, &UpdateDirectConnectGatewayAssociationOutput{})
+
 	return UpdateDirectConnectGatewayAssociationRequest{Request: req, Input: input, Copy: c.UpdateDirectConnectGatewayAssociationRequest}
 }
 

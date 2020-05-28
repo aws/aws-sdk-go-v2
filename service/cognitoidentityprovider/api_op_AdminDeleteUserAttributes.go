@@ -106,6 +106,7 @@ func (c *Client) AdminDeleteUserAttributesRequest(input *AdminDeleteUserAttribut
 	}
 
 	req := c.newRequest(op, input, &AdminDeleteUserAttributesOutput{})
+
 	return AdminDeleteUserAttributesRequest{Request: req, Input: input, Copy: c.AdminDeleteUserAttributesRequest}
 }
 

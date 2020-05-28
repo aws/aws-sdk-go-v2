@@ -17,7 +17,17 @@ type CreateDocumentInput struct {
 	// document.
 	Attachments []AttachmentsSource `type:"list"`
 
-	// A valid JSON or YAML string.
+	// The content for the new SSM document in JSON or YAML format. We recommend
+	// storing the contents for your new document in an external JSON or YAML file
+	// and referencing the file in a command.
+	//
+	// For examples, see the following topics in the AWS Systems Manager User Guide.
+	//
+	//    * Create an SSM document (AWS API) (https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html)
+	//
+	//    * Create an SSM document (AWS CLI) (https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-cli.html)
+	//
+	//    * Create an SSM document (API) (https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html)
 	//
 	// Content is a required field
 	Content *string `min:"1" type:"string" required:"true"`
@@ -31,10 +41,10 @@ type CreateDocumentInput struct {
 
 	// A name for the Systems Manager document.
 	//
-	// Do not use the following to begin the names of documents you create. They
-	// are reserved by AWS for use as document prefixes:
+	// You can't use the following strings as document name prefixes. These are
+	// reserved by AWS for use as document name prefixes:
 	//
-	//    * aws
+	//    * aws-
 	//
 	//    * amazon
 	//
@@ -43,8 +53,13 @@ type CreateDocumentInput struct {
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
-	// A list of SSM documents required by a document. For example, an ApplicationConfiguration
-	// document requires an ApplicationConfigurationSchema document.
+	// A list of SSM documents required by a document. This parameter is used exclusively
+	// by AWS AppConfig. When a user creates an AppConfig configuration in an SSM
+	// document, the user must also specify a required document for validation purposes.
+	// In this case, an ApplicationConfiguration document requires an ApplicationConfigurationSchema
+	// document for validation purposes. For more information, see AWS AppConfig
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig.html)
+	// in the AWS Systems Manager User Guide.
 	Requires []DocumentRequires `min:"1" type:"list"`
 
 	// Optional metadata that you assign to a resource. Tags enable you to categorize
@@ -64,8 +79,8 @@ type CreateDocumentInput struct {
 	// on. For example, to run a document on EC2 instances, specify the following
 	// value: /AWS::EC2::Instance. If you specify a value of '/' the document can
 	// run on all types of resources. If you don't specify a value, the document
-	// can't run on any resources. For a list of valid resource types, see AWS Resource
-	// Types Reference (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+	// can't run on any resources. For a list of valid resource types, see AWS resource
+	// and property types reference (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.
 	TargetType *string `type:"string"`
 
@@ -142,10 +157,11 @@ const opCreateDocument = "CreateDocument"
 // CreateDocumentRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Creates a Systems Manager document.
-//
-// After you create a document, you can use CreateAssociation to associate it
-// with one or more running instances.
+// Creates a Systems Manager (SSM) document. An SSM document defines the actions
+// that Systems Manager performs on your managed instances. For more information
+// about SSM documents, including information about supported schemas, features,
+// and syntax, see AWS Systems Manager Documents (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-ssm-docs.html)
+// in the AWS Systems Manager User Guide.
 //
 //    // Example sending a request using CreateDocumentRequest.
 //    req := client.CreateDocumentRequest(params)
@@ -167,6 +183,7 @@ func (c *Client) CreateDocumentRequest(input *CreateDocumentInput) CreateDocumen
 	}
 
 	req := c.newRequest(op, input, &CreateDocumentOutput{})
+
 	return CreateDocumentRequest{Request: req, Input: input, Copy: c.CreateDocumentRequest}
 }
 

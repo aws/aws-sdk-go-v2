@@ -239,6 +239,7 @@ func (c *Client) AddPermissionRequest(input *AddPermissionInput) AddPermissionRe
 	}
 
 	req := c.newRequest(op, input, &AddPermissionOutput{})
+
 	return AddPermissionRequest{Request: req, Input: input, Copy: c.AddPermissionRequest}
 }
 

@@ -78,6 +78,7 @@ func (c *Client) RejectSharedDirectoryRequest(input *RejectSharedDirectoryInput)
 	}
 
 	req := c.newRequest(op, input, &RejectSharedDirectoryOutput{})
+
 	return RejectSharedDirectoryRequest{Request: req, Input: input, Copy: c.RejectSharedDirectoryRequest}
 }
 

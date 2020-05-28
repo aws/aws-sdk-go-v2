@@ -90,6 +90,7 @@ func (c *Client) ModifyReportDefinitionRequest(input *ModifyReportDefinitionInpu
 	}
 
 	req := c.newRequest(op, input, &ModifyReportDefinitionOutput{})
+
 	return ModifyReportDefinitionRequest{Request: req, Input: input, Copy: c.ModifyReportDefinitionRequest}
 }
 

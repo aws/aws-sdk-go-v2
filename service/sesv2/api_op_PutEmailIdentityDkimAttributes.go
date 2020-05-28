@@ -109,6 +109,7 @@ func (c *Client) PutEmailIdentityDkimAttributesRequest(input *PutEmailIdentityDk
 	}
 
 	req := c.newRequest(op, input, &PutEmailIdentityDkimAttributesOutput{})
+
 	return PutEmailIdentityDkimAttributesRequest{Request: req, Input: input, Copy: c.PutEmailIdentityDkimAttributesRequest}
 }
 

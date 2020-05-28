@@ -104,6 +104,7 @@ func (c *Client) DeleteDirectoryRequest(input *DeleteDirectoryInput) DeleteDirec
 	}
 
 	req := c.newRequest(op, input, &DeleteDirectoryOutput{})
+
 	return DeleteDirectoryRequest{Request: req, Input: input, Copy: c.DeleteDirectoryRequest}
 }
 

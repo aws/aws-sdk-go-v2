@@ -140,6 +140,7 @@ func (c *Client) CreateBatchPredictionRequest(input *CreateBatchPredictionInput)
 	}
 
 	req := c.newRequest(op, input, &CreateBatchPredictionOutput{})
+
 	return CreateBatchPredictionRequest{Request: req, Input: input, Copy: c.CreateBatchPredictionRequest}
 }
 

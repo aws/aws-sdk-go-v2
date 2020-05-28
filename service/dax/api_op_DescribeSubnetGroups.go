@@ -77,6 +77,7 @@ func (c *Client) DescribeSubnetGroupsRequest(input *DescribeSubnetGroupsInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeSubnetGroupsOutput{})
+
 	return DescribeSubnetGroupsRequest{Request: req, Input: input, Copy: c.DescribeSubnetGroupsRequest}
 }
 

@@ -100,6 +100,7 @@ func (c *Client) UpdateServerRequest(input *UpdateServerInput) UpdateServerReque
 	}
 
 	req := c.newRequest(op, input, &UpdateServerOutput{})
+
 	return UpdateServerRequest{Request: req, Input: input, Copy: c.UpdateServerRequest}
 }
 

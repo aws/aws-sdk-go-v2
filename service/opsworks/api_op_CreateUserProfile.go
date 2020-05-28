@@ -95,6 +95,7 @@ func (c *Client) CreateUserProfileRequest(input *CreateUserProfileInput) CreateU
 	}
 
 	req := c.newRequest(op, input, &CreateUserProfileOutput{})
+
 	return CreateUserProfileRequest{Request: req, Input: input, Copy: c.CreateUserProfileRequest}
 }
 

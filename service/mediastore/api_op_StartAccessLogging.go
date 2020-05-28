@@ -78,6 +78,7 @@ func (c *Client) StartAccessLoggingRequest(input *StartAccessLoggingInput) Start
 	}
 
 	req := c.newRequest(op, input, &StartAccessLoggingOutput{})
+
 	return StartAccessLoggingRequest{Request: req, Input: input, Copy: c.StartAccessLoggingRequest}
 }
 

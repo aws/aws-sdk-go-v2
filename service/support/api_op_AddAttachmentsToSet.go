@@ -18,8 +18,13 @@ type AddAttachmentsToSetInput struct {
 	// set, if it exists.
 	AttachmentSetId *string `locationName:"attachmentSetId" type:"string"`
 
-	// One or more attachments to add to the set. The limit is 3 attachments per
-	// set, and the size limit is 5 MB per attachment.
+	// One or more attachments to add to the set. You can add up to three attachments
+	// per set. The size limit is 5 MB per attachment.
+	//
+	// In the Attachment object, use the data parameter to specify the contents
+	// of the attachment file. In the previous request syntax, the value for data
+	// appear as blob, which is represented as a base64-encoded string. The value
+	// for fileName is the name of the attachment, such as troubleshoot-screenshot.png.
 	//
 	// Attachments is a required field
 	Attachments []Attachment `locationName:"attachments" type:"list" required:"true"`
@@ -69,16 +74,11 @@ const opAddAttachmentsToSet = "AddAttachmentsToSet"
 // AddAttachmentsToSetRequest returns a request value for making API operation for
 // AWS Support.
 //
-// Adds one or more attachments to an attachment set. If an attachmentSetId
-// is not specified, a new attachment set is created, and the ID of the set
-// is returned in the response. If an attachmentSetId is specified, the attachments
-// are added to the specified set, if it exists.
+// Adds one or more attachments to an attachment set.
 //
-// An attachment set is a temporary container for attachments that are to be
-// added to a case or case communication. The set is available for one hour
-// after it is created; the expiryTime returned in the response indicates when
-// the set expires. The maximum number of attachments in a set is 3, and the
-// maximum size of any attachment in the set is 5 MB.
+// An attachment set is a temporary container for attachments that you add to
+// a case or case communication. The set is available for 1 hour after it's
+// created. The expiryTime returned in the response is when the set expires.
 //
 //    // Example sending a request using AddAttachmentsToSetRequest.
 //    req := client.AddAttachmentsToSetRequest(params)
@@ -100,6 +100,7 @@ func (c *Client) AddAttachmentsToSetRequest(input *AddAttachmentsToSetInput) Add
 	}
 
 	req := c.newRequest(op, input, &AddAttachmentsToSetOutput{})
+
 	return AddAttachmentsToSetRequest{Request: req, Input: input, Copy: c.AddAttachmentsToSetRequest}
 }
 

@@ -112,6 +112,7 @@ func (c *Client) UpdateBuildRequest(input *UpdateBuildInput) UpdateBuildRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateBuildOutput{})
+
 	return UpdateBuildRequest{Request: req, Input: input, Copy: c.UpdateBuildRequest}
 }
 

@@ -79,6 +79,7 @@ func (c *Client) StopBuildRequest(input *StopBuildInput) StopBuildRequest {
 	}
 
 	req := c.newRequest(op, input, &StopBuildOutput{})
+
 	return StopBuildRequest{Request: req, Input: input, Copy: c.StopBuildRequest}
 }
 

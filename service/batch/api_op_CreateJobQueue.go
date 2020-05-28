@@ -184,6 +184,7 @@ func (c *Client) CreateJobQueueRequest(input *CreateJobQueueInput) CreateJobQueu
 	}
 
 	req := c.newRequest(op, input, &CreateJobQueueOutput{})
+
 	return CreateJobQueueRequest{Request: req, Input: input, Copy: c.CreateJobQueueRequest}
 }
 

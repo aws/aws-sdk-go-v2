@@ -131,6 +131,7 @@ func (c *Client) ListCodeRepositoriesRequest(input *ListCodeRepositoriesInput) L
 	}
 
 	req := c.newRequest(op, input, &ListCodeRepositoriesOutput{})
+
 	return ListCodeRepositoriesRequest{Request: req, Input: input, Copy: c.ListCodeRepositoriesRequest}
 }
 

@@ -159,6 +159,7 @@ func (c *Client) GetBucketLifecycleRequest(input *GetBucketLifecycleInput) GetBu
 	}
 
 	req := c.newRequest(op, input, &GetBucketLifecycleOutput{})
+
 	return GetBucketLifecycleRequest{Request: req, Input: input, Copy: c.GetBucketLifecycleRequest}
 }
 

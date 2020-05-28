@@ -151,6 +151,7 @@ func (c *Client) ListAttachedGroupPoliciesRequest(input *ListAttachedGroupPolici
 	}
 
 	req := c.newRequest(op, input, &ListAttachedGroupPoliciesOutput{})
+
 	return ListAttachedGroupPoliciesRequest{Request: req, Input: input, Copy: c.ListAttachedGroupPoliciesRequest}
 }
 

@@ -101,6 +101,7 @@ func (c *Client) CheckDomainTransferabilityRequest(input *CheckDomainTransferabi
 	}
 
 	req := c.newRequest(op, input, &CheckDomainTransferabilityOutput{})
+
 	return CheckDomainTransferabilityRequest{Request: req, Input: input, Copy: c.CheckDomainTransferabilityRequest}
 }
 

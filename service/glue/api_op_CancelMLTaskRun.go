@@ -100,6 +100,7 @@ func (c *Client) CancelMLTaskRunRequest(input *CancelMLTaskRunInput) CancelMLTas
 	}
 
 	req := c.newRequest(op, input, &CancelMLTaskRunOutput{})
+
 	return CancelMLTaskRunRequest{Request: req, Input: input, Copy: c.CancelMLTaskRunRequest}
 }
 

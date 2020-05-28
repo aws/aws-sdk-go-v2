@@ -138,6 +138,7 @@ func (c *Client) AddApplicationInputProcessingConfigurationRequest(input *AddApp
 	}
 
 	req := c.newRequest(op, input, &AddApplicationInputProcessingConfigurationOutput{})
+
 	return AddApplicationInputProcessingConfigurationRequest{Request: req, Input: input, Copy: c.AddApplicationInputProcessingConfigurationRequest}
 }
 

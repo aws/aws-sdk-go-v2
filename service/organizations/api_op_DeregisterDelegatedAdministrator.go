@@ -105,6 +105,7 @@ func (c *Client) DeregisterDelegatedAdministratorRequest(input *DeregisterDelega
 	req := c.newRequest(op, input, &DeregisterDelegatedAdministratorOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeregisterDelegatedAdministratorRequest{Request: req, Input: input, Copy: c.DeregisterDelegatedAdministratorRequest}
 }
 

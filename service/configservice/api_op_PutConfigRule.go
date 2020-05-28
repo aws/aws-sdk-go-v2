@@ -128,6 +128,7 @@ func (c *Client) PutConfigRuleRequest(input *PutConfigRuleInput) PutConfigRuleRe
 	req := c.newRequest(op, input, &PutConfigRuleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutConfigRuleRequest{Request: req, Input: input, Copy: c.PutConfigRuleRequest}
 }
 

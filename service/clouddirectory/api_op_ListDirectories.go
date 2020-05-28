@@ -141,6 +141,7 @@ func (c *Client) ListDirectoriesRequest(input *ListDirectoriesInput) ListDirecto
 	}
 
 	req := c.newRequest(op, input, &ListDirectoriesOutput{})
+
 	return ListDirectoriesRequest{Request: req, Input: input, Copy: c.ListDirectoriesRequest}
 }
 

@@ -91,6 +91,7 @@ func (c *Client) GetWorkflowRunPropertiesRequest(input *GetWorkflowRunProperties
 	}
 
 	req := c.newRequest(op, input, &GetWorkflowRunPropertiesOutput{})
+
 	return GetWorkflowRunPropertiesRequest{Request: req, Input: input, Copy: c.GetWorkflowRunPropertiesRequest}
 }
 

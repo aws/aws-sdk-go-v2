@@ -10,13 +10,14 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// The classification type that Amazon Macie applies to the associated S3 resources.
+// The classification type that Amazon Macie Classic applies to the associated
+// S3 resources.
 type ClassificationType struct {
 	_ struct{} `type:"structure"`
 
 	// A continuous classification of the objects that are added to a specified
-	// S3 bucket. Amazon Macie begins performing continuous classification after
-	// a bucket is successfully associated with Amazon Macie.
+	// S3 bucket. Amazon Macie Classic begins performing continuous classification
+	// after a bucket is successfully associated with Amazon Macie Classic.
 	//
 	// Continuous is a required field
 	Continuous S3ContinuousClassificationType `locationName:"continuous" type:"string" required:"true" enum:"true"`
@@ -49,15 +50,15 @@ func (s *ClassificationType) Validate() error {
 	return nil
 }
 
-// The classification type that Amazon Macie applies to the associated S3 resources.
-// At least one of the classification types (oneTime or continuous) must be
-// specified.
+// The classification type that Amazon Macie Classic applies to the associated
+// S3 resources. At least one of the classification types (oneTime or continuous)
+// must be specified.
 type ClassificationTypeUpdate struct {
 	_ struct{} `type:"structure"`
 
 	// A continuous classification of the objects that are added to a specified
-	// S3 bucket. Amazon Macie begins performing continuous classification after
-	// a bucket is successfully associated with Amazon Macie.
+	// S3 bucket. Amazon Macie Classic begins performing continuous classification
+	// after a bucket is successfully associated with Amazon Macie Classic.
 	Continuous S3ContinuousClassificationType `locationName:"continuous" type:"string" enum:"true"`
 
 	// A one-time classification of all of the existing objects in a specified S3
@@ -89,11 +90,11 @@ func (s FailedS3Resource) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Contains information about the Amazon Macie member account.
+// Contains information about the Amazon Macie Classic member account.
 type MemberAccount struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS account ID of the Amazon Macie member account.
+	// The AWS account ID of the Amazon Macie Classic member account.
 	AccountId *string `locationName:"accountId" type:"string"`
 }
 
@@ -136,25 +137,26 @@ func (s *S3Resource) Validate() error {
 	return nil
 }
 
-// The S3 resources that you want to associate with Amazon Macie for monitoring
-// and data classification. This data type is used as a request parameter in
-// the AssociateS3Resources action and a response parameter in the ListS3Resources
+// The S3 resources that you want to associate with Amazon Macie Classic for
+// monitoring and data classification. This data type is used as a request parameter
+// in the AssociateS3Resources action and a response parameter in the ListS3Resources
 // action.
 type S3ResourceClassification struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the S3 bucket that you want to associate with Amazon Macie.
+	// The name of the S3 bucket that you want to associate with Amazon Macie Classic.
 	//
 	// BucketName is a required field
 	BucketName *string `locationName:"bucketName" type:"string" required:"true"`
 
 	// The classification type that you want to specify for the resource associated
-	// with Amazon Macie.
+	// with Amazon Macie Classic.
 	//
 	// ClassificationType is a required field
 	ClassificationType *ClassificationType `locationName:"classificationType" type:"structure" required:"true"`
 
-	// The prefix of the S3 bucket that you want to associate with Amazon Macie.
+	// The prefix of the S3 bucket that you want to associate with Amazon Macie
+	// Classic.
 	Prefix *string `locationName:"prefix" type:"string"`
 }
 
@@ -197,7 +199,7 @@ type S3ResourceClassificationUpdate struct {
 	BucketName *string `locationName:"bucketName" type:"string" required:"true"`
 
 	// The classification type that you want to update for the resource associated
-	// with Amazon Macie.
+	// with Amazon Macie Classic.
 	//
 	// ClassificationTypeUpdate is a required field
 	ClassificationTypeUpdate *ClassificationTypeUpdate `locationName:"classificationTypeUpdate" type:"structure" required:"true"`

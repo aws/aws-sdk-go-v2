@@ -74,6 +74,7 @@ func (c *Client) DeleteLocationRequest(input *DeleteLocationInput) DeleteLocatio
 	}
 
 	req := c.newRequest(op, input, &DeleteLocationOutput{})
+
 	return DeleteLocationRequest{Request: req, Input: input, Copy: c.DeleteLocationRequest}
 }
 

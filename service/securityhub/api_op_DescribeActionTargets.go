@@ -150,6 +150,7 @@ func (c *Client) DescribeActionTargetsRequest(input *DescribeActionTargetsInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeActionTargetsOutput{})
+
 	return DescribeActionTargetsRequest{Request: req, Input: input, Copy: c.DescribeActionTargetsRequest}
 }
 

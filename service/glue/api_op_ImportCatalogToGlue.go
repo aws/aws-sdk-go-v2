@@ -71,6 +71,7 @@ func (c *Client) ImportCatalogToGlueRequest(input *ImportCatalogToGlueInput) Imp
 	}
 
 	req := c.newRequest(op, input, &ImportCatalogToGlueOutput{})
+
 	return ImportCatalogToGlueRequest{Request: req, Input: input, Copy: c.ImportCatalogToGlueRequest}
 }
 

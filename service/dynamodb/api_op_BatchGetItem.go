@@ -259,6 +259,7 @@ func (c *Client) BatchGetItemRequest(input *BatchGetItemInput) BatchGetItemReque
 			Fn:   de.Handler,
 		})
 	}
+
 	return BatchGetItemRequest{Request: req, Input: input, Copy: c.BatchGetItemRequest}
 }
 

@@ -110,6 +110,7 @@ func (c *Client) UpdateActionTargetRequest(input *UpdateActionTargetInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateActionTargetOutput{})
+
 	return UpdateActionTargetRequest{Request: req, Input: input, Copy: c.UpdateActionTargetRequest}
 }
 

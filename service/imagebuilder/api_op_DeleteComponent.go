@@ -110,6 +110,7 @@ func (c *Client) DeleteComponentRequest(input *DeleteComponentInput) DeleteCompo
 	}
 
 	req := c.newRequest(op, input, &DeleteComponentOutput{})
+
 	return DeleteComponentRequest{Request: req, Input: input, Copy: c.DeleteComponentRequest}
 }
 

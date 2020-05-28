@@ -109,6 +109,7 @@ func (c *Client) DescribeEngineDefaultParametersRequest(input *DescribeEngineDef
 	}
 
 	req := c.newRequest(op, input, &DescribeEngineDefaultParametersOutput{})
+
 	return DescribeEngineDefaultParametersRequest{Request: req, Input: input, Copy: c.DescribeEngineDefaultParametersRequest}
 }
 

@@ -121,6 +121,7 @@ func (c *Client) DeleteApplicationReferenceDataSourceRequest(input *DeleteApplic
 	}
 
 	req := c.newRequest(op, input, &DeleteApplicationReferenceDataSourceOutput{})
+
 	return DeleteApplicationReferenceDataSourceRequest{Request: req, Input: input, Copy: c.DeleteApplicationReferenceDataSourceRequest}
 }
 

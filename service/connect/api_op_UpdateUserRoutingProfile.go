@@ -128,6 +128,7 @@ func (c *Client) UpdateUserRoutingProfileRequest(input *UpdateUserRoutingProfile
 	req := c.newRequest(op, input, &UpdateUserRoutingProfileOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateUserRoutingProfileRequest{Request: req, Input: input, Copy: c.UpdateUserRoutingProfileRequest}
 }
 

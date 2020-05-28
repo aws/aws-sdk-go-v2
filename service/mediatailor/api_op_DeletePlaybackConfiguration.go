@@ -90,6 +90,7 @@ func (c *Client) DeletePlaybackConfigurationRequest(input *DeletePlaybackConfigu
 	}
 
 	req := c.newRequest(op, input, &DeletePlaybackConfigurationOutput{})
+
 	return DeletePlaybackConfigurationRequest{Request: req, Input: input, Copy: c.DeletePlaybackConfigurationRequest}
 }
 

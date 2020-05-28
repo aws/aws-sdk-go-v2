@@ -83,6 +83,7 @@ func (c *Client) DeleteApprovalRuleTemplateRequest(input *DeleteApprovalRuleTemp
 	}
 
 	req := c.newRequest(op, input, &DeleteApprovalRuleTemplateOutput{})
+
 	return DeleteApprovalRuleTemplateRequest{Request: req, Input: input, Copy: c.DeleteApprovalRuleTemplateRequest}
 }
 

@@ -97,6 +97,7 @@ func (c *Client) DeleteApplicationRequest(input *DeleteApplicationInput) DeleteA
 	}
 
 	req := c.newRequest(op, input, &DeleteApplicationOutput{})
+
 	return DeleteApplicationRequest{Request: req, Input: input, Copy: c.DeleteApplicationRequest}
 }
 

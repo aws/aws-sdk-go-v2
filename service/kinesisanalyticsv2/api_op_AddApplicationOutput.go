@@ -135,6 +135,7 @@ func (c *Client) AddApplicationOutputRequest(input *AddApplicationOutputInput) A
 	}
 
 	req := c.newRequest(op, input, &AddApplicationOutputOutput{})
+
 	return AddApplicationOutputRequest{Request: req, Input: input, Copy: c.AddApplicationOutputRequest}
 }
 

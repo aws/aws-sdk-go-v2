@@ -100,6 +100,7 @@ func (c *Client) GetWorkflowRunsRequest(input *GetWorkflowRunsInput) GetWorkflow
 	}
 
 	req := c.newRequest(op, input, &GetWorkflowRunsOutput{})
+
 	return GetWorkflowRunsRequest{Request: req, Input: input, Copy: c.GetWorkflowRunsRequest}
 }
 

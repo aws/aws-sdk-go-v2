@@ -118,6 +118,7 @@ func (c *Client) GetFindingRequest(input *GetFindingInput) GetFindingRequest {
 	}
 
 	req := c.newRequest(op, input, &GetFindingOutput{})
+
 	return GetFindingRequest{Request: req, Input: input, Copy: c.GetFindingRequest}
 }
 

@@ -202,6 +202,7 @@ func (c *Client) DeleteScalingPolicyRequest(input *DeleteScalingPolicyInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteScalingPolicyOutput{})
+
 	return DeleteScalingPolicyRequest{Request: req, Input: input, Copy: c.DeleteScalingPolicyRequest}
 }
 

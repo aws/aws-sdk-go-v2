@@ -137,6 +137,7 @@ func (c *Client) CreateMicrosoftADRequest(input *CreateMicrosoftADInput) CreateM
 	}
 
 	req := c.newRequest(op, input, &CreateMicrosoftADOutput{})
+
 	return CreateMicrosoftADRequest{Request: req, Input: input, Copy: c.CreateMicrosoftADRequest}
 }
 

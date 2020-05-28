@@ -97,6 +97,7 @@ func (c *Client) DeletePartnerEventSourceRequest(input *DeletePartnerEventSource
 	req := c.newRequest(op, input, &DeletePartnerEventSourceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeletePartnerEventSourceRequest{Request: req, Input: input, Copy: c.DeletePartnerEventSourceRequest}
 }
 

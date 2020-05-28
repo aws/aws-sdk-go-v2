@@ -76,6 +76,7 @@ func (c *Client) DeleteClassifierRequest(input *DeleteClassifierInput) DeleteCla
 	}
 
 	req := c.newRequest(op, input, &DeleteClassifierOutput{})
+
 	return DeleteClassifierRequest{Request: req, Input: input, Copy: c.DeleteClassifierRequest}
 }
 

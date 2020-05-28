@@ -93,6 +93,7 @@ func (c *Client) DeleteApiRequest(input *DeleteApiInput) DeleteApiRequest {
 	req := c.newRequest(op, input, &DeleteApiOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteApiRequest{Request: req, Input: input, Copy: c.DeleteApiRequest}
 }
 

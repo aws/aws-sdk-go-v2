@@ -105,6 +105,7 @@ func (c *Client) DescribeWorkingStorageRequest(input *DescribeWorkingStorageInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeWorkingStorageOutput{})
+
 	return DescribeWorkingStorageRequest{Request: req, Input: input, Copy: c.DescribeWorkingStorageRequest}
 }
 

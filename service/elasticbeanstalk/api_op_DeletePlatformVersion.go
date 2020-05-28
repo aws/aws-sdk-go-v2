@@ -60,6 +60,7 @@ func (c *Client) DeletePlatformVersionRequest(input *DeletePlatformVersionInput)
 	}
 
 	req := c.newRequest(op, input, &DeletePlatformVersionOutput{})
+
 	return DeletePlatformVersionRequest{Request: req, Input: input, Copy: c.DeletePlatformVersionRequest}
 }
 

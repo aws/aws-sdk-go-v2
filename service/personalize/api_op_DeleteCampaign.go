@@ -80,6 +80,7 @@ func (c *Client) DeleteCampaignRequest(input *DeleteCampaignInput) DeleteCampaig
 	req := c.newRequest(op, input, &DeleteCampaignOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteCampaignRequest{Request: req, Input: input, Copy: c.DeleteCampaignRequest}
 }
 

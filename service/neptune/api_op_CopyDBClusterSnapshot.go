@@ -144,6 +144,7 @@ func (c *Client) CopyDBClusterSnapshotRequest(input *CopyDBClusterSnapshotInput)
 	}
 
 	req := c.newRequest(op, input, &CopyDBClusterSnapshotOutput{})
+
 	return CopyDBClusterSnapshotRequest{Request: req, Input: input, Copy: c.CopyDBClusterSnapshotRequest}
 }
 

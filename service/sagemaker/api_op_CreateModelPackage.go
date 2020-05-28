@@ -131,6 +131,7 @@ func (c *Client) CreateModelPackageRequest(input *CreateModelPackageInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateModelPackageOutput{})
+
 	return CreateModelPackageRequest{Request: req, Input: input, Copy: c.CreateModelPackageRequest}
 }
 

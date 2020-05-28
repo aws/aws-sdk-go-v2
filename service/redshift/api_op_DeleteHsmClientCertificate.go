@@ -77,6 +77,7 @@ func (c *Client) DeleteHsmClientCertificateRequest(input *DeleteHsmClientCertifi
 	req := c.newRequest(op, input, &DeleteHsmClientCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteHsmClientCertificateRequest{Request: req, Input: input, Copy: c.DeleteHsmClientCertificateRequest}
 }
 

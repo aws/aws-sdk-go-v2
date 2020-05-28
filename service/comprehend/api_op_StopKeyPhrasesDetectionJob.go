@@ -94,6 +94,7 @@ func (c *Client) StopKeyPhrasesDetectionJobRequest(input *StopKeyPhrasesDetectio
 	}
 
 	req := c.newRequest(op, input, &StopKeyPhrasesDetectionJobOutput{})
+
 	return StopKeyPhrasesDetectionJobRequest{Request: req, Input: input, Copy: c.StopKeyPhrasesDetectionJobRequest}
 }
 

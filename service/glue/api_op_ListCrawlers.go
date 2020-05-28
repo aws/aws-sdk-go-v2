@@ -96,6 +96,7 @@ func (c *Client) ListCrawlersRequest(input *ListCrawlersInput) ListCrawlersReque
 	}
 
 	req := c.newRequest(op, input, &ListCrawlersOutput{})
+
 	return ListCrawlersRequest{Request: req, Input: input, Copy: c.ListCrawlersRequest}
 }
 

@@ -94,6 +94,7 @@ func (c *Client) BatchGrantPermissionsRequest(input *BatchGrantPermissionsInput)
 	}
 
 	req := c.newRequest(op, input, &BatchGrantPermissionsOutput{})
+
 	return BatchGrantPermissionsRequest{Request: req, Input: input, Copy: c.BatchGrantPermissionsRequest}
 }
 

@@ -159,6 +159,7 @@ func (c *Client) ListNetworksRequest(input *ListNetworksInput) ListNetworksReque
 	}
 
 	req := c.newRequest(op, input, &ListNetworksOutput{})
+
 	return ListNetworksRequest{Request: req, Input: input, Copy: c.ListNetworksRequest}
 }
 

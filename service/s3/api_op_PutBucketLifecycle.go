@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/checksum"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 	"github.com/aws/aws-sdk-go-v2/service/s3/internal/arn"
@@ -112,7 +113,7 @@ const opPutBucketLifecycle = "PutBucketLifecycle"
 //
 // Creates a new lifecycle configuration for the bucket or replaces an existing
 // lifecycle configuration. For information about lifecycle configuration, see
-// Object Lifecycle Management (https://docs.aws.amazon.com/AmazonS3/latest/dev//object-lifecycle-mgmt.html)
+// Object Lifecycle Management (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html)
 // in the Amazon Simple Storage Service Developer Guide.
 //
 // By default, all Amazon S3 resources, including buckets, objects, and related
@@ -134,11 +135,11 @@ const opPutBucketLifecycle = "PutBucketLifecycle"
 //    * s3:PutLifecycleConfiguration
 //
 // For more information about permissions, see Managing Access Permissions to
-// your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev//s3-access-control.html)
+// your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)
 // in the Amazon Simple Storage Service Developer Guide.
 //
 // For more examples of transitioning objects to storage classes such as STANDARD_IA
-// or ONEZONE_IA, see Examples of Lifecycle Configuration (https://docs.aws.amazon.com/AmazonS3/latest/dev//intro-lifecycle-rules.html#lifecycle-configuration-examples).
+// or ONEZONE_IA, see Examples of Lifecycle Configuration (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#lifecycle-configuration-examples).
 //
 // Related Resources
 //
@@ -152,8 +153,8 @@ const opPutBucketLifecycle = "PutBucketLifecycle"
 //    the AWS account that created the bucket—can perform any of the operations.
 //    A resource owner can also grant others permission to perform the operation.
 //    For more information, see the following topics in the Amazon Simple Storage
-//    Service Developer Guide: Specifying Permissions in a Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev//using-with-s3-actions.html)
-//    Managing Access Permissions to your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev//s3-access-control.html)
+//    Service Developer Guide: Specifying Permissions in a Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)
+//    Managing Access Permissions to your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)
 //
 //    // Example sending a request using PutBucketLifecycleRequest.
 //    req := client.PutBucketLifecycleRequest(params)
@@ -180,6 +181,12 @@ func (c *Client) PutBucketLifecycleRequest(input *PutBucketLifecycleInput) PutBu
 	req := c.newRequest(op, input, &PutBucketLifecycleOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
+	req.Handlers.Build.PushBackNamed(aws.NamedHandler{
+		Name: "contentMd5Handler",
+		Fn:   checksum.AddBodyContentMD5Handler,
+	})
+
 	return PutBucketLifecycleRequest{Request: req, Input: input, Copy: c.PutBucketLifecycleRequest}
 }
 

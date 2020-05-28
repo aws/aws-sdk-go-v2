@@ -86,6 +86,7 @@ func (c *Client) DescribeGlobalReplicationGroupsRequest(input *DescribeGlobalRep
 	}
 
 	req := c.newRequest(op, input, &DescribeGlobalReplicationGroupsOutput{})
+
 	return DescribeGlobalReplicationGroupsRequest{Request: req, Input: input, Copy: c.DescribeGlobalReplicationGroupsRequest}
 }
 

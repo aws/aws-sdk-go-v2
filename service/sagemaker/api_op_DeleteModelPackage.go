@@ -85,6 +85,7 @@ func (c *Client) DeleteModelPackageRequest(input *DeleteModelPackageInput) Delet
 	req := c.newRequest(op, input, &DeleteModelPackageOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteModelPackageRequest{Request: req, Input: input, Copy: c.DeleteModelPackageRequest}
 }
 

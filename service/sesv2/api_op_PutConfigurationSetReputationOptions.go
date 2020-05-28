@@ -109,6 +109,7 @@ func (c *Client) PutConfigurationSetReputationOptionsRequest(input *PutConfigura
 	}
 
 	req := c.newRequest(op, input, &PutConfigurationSetReputationOptionsOutput{})
+
 	return PutConfigurationSetReputationOptionsRequest{Request: req, Input: input, Copy: c.PutConfigurationSetReputationOptionsRequest}
 }
 

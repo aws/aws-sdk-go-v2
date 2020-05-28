@@ -60,6 +60,8 @@ type DescribeAffectedAccountsForOrganizationOutput struct {
 	// A JSON set of elements of the affected accounts.
 	AffectedAccounts []string `locationName:"affectedAccounts" type:"list"`
 
+	EventScopeCode EventScopeCode `locationName:"eventScopeCode" type:"string" enum:"true"`
+
 	// If the results of a search are large, only a portion of the results are returned,
 	// and a nextToken pagination token is returned in the response. To retrieve
 	// the next batch of results, reissue the search request and include the returned
@@ -111,6 +113,7 @@ func (c *Client) DescribeAffectedAccountsForOrganizationRequest(input *DescribeA
 	}
 
 	req := c.newRequest(op, input, &DescribeAffectedAccountsForOrganizationOutput{})
+
 	return DescribeAffectedAccountsForOrganizationRequest{Request: req, Input: input, Copy: c.DescribeAffectedAccountsForOrganizationRequest}
 }
 

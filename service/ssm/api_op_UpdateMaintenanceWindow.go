@@ -182,6 +182,7 @@ func (c *Client) UpdateMaintenanceWindowRequest(input *UpdateMaintenanceWindowIn
 	}
 
 	req := c.newRequest(op, input, &UpdateMaintenanceWindowOutput{})
+
 	return UpdateMaintenanceWindowRequest{Request: req, Input: input, Copy: c.UpdateMaintenanceWindowRequest}
 }
 

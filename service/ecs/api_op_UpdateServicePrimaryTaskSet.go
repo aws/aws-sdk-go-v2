@@ -104,6 +104,7 @@ func (c *Client) UpdateServicePrimaryTaskSetRequest(input *UpdateServicePrimaryT
 	}
 
 	req := c.newRequest(op, input, &UpdateServicePrimaryTaskSetOutput{})
+
 	return UpdateServicePrimaryTaskSetRequest{Request: req, Input: input, Copy: c.UpdateServicePrimaryTaskSetRequest}
 }
 

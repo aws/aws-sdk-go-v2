@@ -73,6 +73,7 @@ func (c *Client) GetDiskSnapshotsRequest(input *GetDiskSnapshotsInput) GetDiskSn
 	}
 
 	req := c.newRequest(op, input, &GetDiskSnapshotsOutput{})
+
 	return GetDiskSnapshotsRequest{Request: req, Input: input, Copy: c.GetDiskSnapshotsRequest}
 }
 

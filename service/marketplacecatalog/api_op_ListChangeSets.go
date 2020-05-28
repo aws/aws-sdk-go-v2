@@ -31,7 +31,7 @@ type ListChangeSetsInput struct {
 	// results.
 	NextToken *string `min:"1" type:"string"`
 
-	// An object that contains two attributes, sortBy and sortOrder.
+	// An object that contains two attributes, SortBy and SortOrder.
 	Sort *Sort `type:"structure"`
 }
 
@@ -198,6 +198,7 @@ func (c *Client) ListChangeSetsRequest(input *ListChangeSetsInput) ListChangeSet
 	}
 
 	req := c.newRequest(op, input, &ListChangeSetsOutput{})
+
 	return ListChangeSetsRequest{Request: req, Input: input, Copy: c.ListChangeSetsRequest}
 }
 

@@ -103,6 +103,7 @@ func (c *Client) ListMigrationTasksRequest(input *ListMigrationTasksInput) ListM
 	}
 
 	req := c.newRequest(op, input, &ListMigrationTasksOutput{})
+
 	return ListMigrationTasksRequest{Request: req, Input: input, Copy: c.ListMigrationTasksRequest}
 }
 

@@ -94,6 +94,7 @@ func (c *Client) DeleteApiCacheRequest(input *DeleteApiCacheInput) DeleteApiCach
 	}
 
 	req := c.newRequest(op, input, &DeleteApiCacheOutput{})
+
 	return DeleteApiCacheRequest{Request: req, Input: input, Copy: c.DeleteApiCacheRequest}
 }
 

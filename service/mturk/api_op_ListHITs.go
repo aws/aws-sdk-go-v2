@@ -95,6 +95,7 @@ func (c *Client) ListHITsRequest(input *ListHITsInput) ListHITsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListHITsOutput{})
+
 	return ListHITsRequest{Request: req, Input: input, Copy: c.ListHITsRequest}
 }
 

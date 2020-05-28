@@ -43,7 +43,7 @@ type CreateDeploymentGroupInput struct {
 	// group.
 	//
 	// For more information about the predefined deployment configurations in AWS
-	// CodeDeploy, see Working with Deployment Groups in AWS CodeDeploy (https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html)
+	// CodeDeploy, see Working with Deployment Configurations in CodeDeploy (https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html)
 	// in the AWS CodeDeploy User Guide.
 	DeploymentConfigName *string `locationName:"deploymentConfigName" min:"1" type:"string"`
 
@@ -85,8 +85,8 @@ type CreateDeploymentGroupInput struct {
 	// Cannot be used in the same call as onPremisesInstanceTagFilters.
 	OnPremisesTagSet *OnPremisesTagSet `locationName:"onPremisesTagSet" type:"structure"`
 
-	// A service role ARN that allows AWS CodeDeploy to act on the user's behalf
-	// when interacting with AWS services.
+	// A service role Amazon Resource Name (ARN) that allows AWS CodeDeploy to act
+	// on the user's behalf when interacting with AWS services.
 	//
 	// ServiceRoleArn is a required field
 	ServiceRoleArn *string `locationName:"serviceRoleArn" type:"string" required:"true"`
@@ -178,6 +178,7 @@ func (c *Client) CreateDeploymentGroupRequest(input *CreateDeploymentGroupInput)
 	}
 
 	req := c.newRequest(op, input, &CreateDeploymentGroupOutput{})
+
 	return CreateDeploymentGroupRequest{Request: req, Input: input, Copy: c.CreateDeploymentGroupRequest}
 }
 

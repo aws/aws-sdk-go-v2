@@ -81,6 +81,7 @@ func (c *Client) DeleteAssessmentRunRequest(input *DeleteAssessmentRunInput) Del
 	req := c.newRequest(op, input, &DeleteAssessmentRunOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteAssessmentRunRequest{Request: req, Input: input, Copy: c.DeleteAssessmentRunRequest}
 }
 

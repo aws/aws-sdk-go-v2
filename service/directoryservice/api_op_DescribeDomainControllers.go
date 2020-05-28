@@ -98,6 +98,7 @@ func (c *Client) DescribeDomainControllersRequest(input *DescribeDomainControlle
 	}
 
 	req := c.newRequest(op, input, &DescribeDomainControllersOutput{})
+
 	return DescribeDomainControllersRequest{Request: req, Input: input, Copy: c.DescribeDomainControllersRequest}
 }
 

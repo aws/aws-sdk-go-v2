@@ -129,6 +129,7 @@ func (c *Client) UpdatePhoneNumberRequest(input *UpdatePhoneNumberInput) UpdateP
 	}
 
 	req := c.newRequest(op, input, &UpdatePhoneNumberOutput{})
+
 	return UpdatePhoneNumberRequest{Request: req, Input: input, Copy: c.UpdatePhoneNumberRequest}
 }
 

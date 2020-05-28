@@ -86,6 +86,7 @@ func (c *Client) GetGlobalSettingsRequest(input *GetGlobalSettingsInput) GetGlob
 	}
 
 	req := c.newRequest(op, input, &GetGlobalSettingsOutput{})
+
 	return GetGlobalSettingsRequest{Request: req, Input: input, Copy: c.GetGlobalSettingsRequest}
 }
 

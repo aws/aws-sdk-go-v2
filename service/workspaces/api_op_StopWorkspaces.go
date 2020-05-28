@@ -82,6 +82,7 @@ func (c *Client) StopWorkspacesRequest(input *StopWorkspacesInput) StopWorkspace
 	}
 
 	req := c.newRequest(op, input, &StopWorkspacesOutput{})
+
 	return StopWorkspacesRequest{Request: req, Input: input, Copy: c.StopWorkspacesRequest}
 }
 

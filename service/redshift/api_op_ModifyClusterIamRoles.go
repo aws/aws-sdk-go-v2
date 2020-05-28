@@ -89,6 +89,7 @@ func (c *Client) ModifyClusterIamRolesRequest(input *ModifyClusterIamRolesInput)
 	}
 
 	req := c.newRequest(op, input, &ModifyClusterIamRolesOutput{})
+
 	return ModifyClusterIamRolesRequest{Request: req, Input: input, Copy: c.ModifyClusterIamRolesRequest}
 }
 

@@ -122,6 +122,7 @@ func (c *Client) GetFacetRequest(input *GetFacetInput) GetFacetRequest {
 	}
 
 	req := c.newRequest(op, input, &GetFacetOutput{})
+
 	return GetFacetRequest{Request: req, Input: input, Copy: c.GetFacetRequest}
 }
 

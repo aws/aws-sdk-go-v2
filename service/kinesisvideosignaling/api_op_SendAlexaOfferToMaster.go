@@ -145,6 +145,7 @@ func (c *Client) SendAlexaOfferToMasterRequest(input *SendAlexaOfferToMasterInpu
 	}
 
 	req := c.newRequest(op, input, &SendAlexaOfferToMasterOutput{})
+
 	return SendAlexaOfferToMasterRequest{Request: req, Input: input, Copy: c.SendAlexaOfferToMasterRequest}
 }
 

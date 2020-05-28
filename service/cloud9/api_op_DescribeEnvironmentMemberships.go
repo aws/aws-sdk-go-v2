@@ -101,6 +101,7 @@ func (c *Client) DescribeEnvironmentMembershipsRequest(input *DescribeEnvironmen
 	}
 
 	req := c.newRequest(op, input, &DescribeEnvironmentMembershipsOutput{})
+
 	return DescribeEnvironmentMembershipsRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentMembershipsRequest}
 }
 

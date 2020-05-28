@@ -109,6 +109,7 @@ func (c *Client) BatchDeleteTableVersionRequest(input *BatchDeleteTableVersionIn
 	}
 
 	req := c.newRequest(op, input, &BatchDeleteTableVersionOutput{})
+
 	return BatchDeleteTableVersionRequest{Request: req, Input: input, Copy: c.BatchDeleteTableVersionRequest}
 }
 

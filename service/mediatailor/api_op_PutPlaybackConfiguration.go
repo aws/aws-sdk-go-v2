@@ -321,6 +321,7 @@ func (c *Client) PutPlaybackConfigurationRequest(input *PutPlaybackConfiguration
 	}
 
 	req := c.newRequest(op, input, &PutPlaybackConfigurationOutput{})
+
 	return PutPlaybackConfigurationRequest{Request: req, Input: input, Copy: c.PutPlaybackConfigurationRequest}
 }
 

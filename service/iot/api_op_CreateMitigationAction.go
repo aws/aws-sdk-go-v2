@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -59,6 +60,13 @@ func (s *CreateMitigationActionInput) Validate() error {
 	if s.ActionParams != nil {
 		if err := s.ActionParams.Validate(); err != nil {
 			invalidParams.AddNested("ActionParams", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -163,6 +171,7 @@ func (c *Client) CreateMitigationActionRequest(input *CreateMitigationActionInpu
 	}
 
 	req := c.newRequest(op, input, &CreateMitigationActionOutput{})
+
 	return CreateMitigationActionRequest{Request: req, Input: input, Copy: c.CreateMitigationActionRequest}
 }
 

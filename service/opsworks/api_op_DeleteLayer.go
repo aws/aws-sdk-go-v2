@@ -84,6 +84,7 @@ func (c *Client) DeleteLayerRequest(input *DeleteLayerInput) DeleteLayerRequest 
 	req := c.newRequest(op, input, &DeleteLayerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteLayerRequest{Request: req, Input: input, Copy: c.DeleteLayerRequest}
 }
 

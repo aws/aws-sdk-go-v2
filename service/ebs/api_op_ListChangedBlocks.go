@@ -208,6 +208,7 @@ func (c *Client) ListChangedBlocksRequest(input *ListChangedBlocksInput) ListCha
 	}
 
 	req := c.newRequest(op, input, &ListChangedBlocksOutput{})
+
 	return ListChangedBlocksRequest{Request: req, Input: input, Copy: c.ListChangedBlocksRequest}
 }
 

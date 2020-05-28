@@ -311,6 +311,7 @@ func (c *Client) CreateNodegroupRequest(input *CreateNodegroupInput) CreateNodeg
 	}
 
 	req := c.newRequest(op, input, &CreateNodegroupOutput{})
+
 	return CreateNodegroupRequest{Request: req, Input: input, Copy: c.CreateNodegroupRequest}
 }
 

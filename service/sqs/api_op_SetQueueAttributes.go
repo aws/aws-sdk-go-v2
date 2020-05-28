@@ -185,6 +185,7 @@ func (c *Client) SetQueueAttributesRequest(input *SetQueueAttributesInput) SetQu
 	req := c.newRequest(op, input, &SetQueueAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetQueueAttributesRequest{Request: req, Input: input, Copy: c.SetQueueAttributesRequest}
 }
 

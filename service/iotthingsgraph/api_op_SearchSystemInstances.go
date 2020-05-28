@@ -94,6 +94,7 @@ func (c *Client) SearchSystemInstancesRequest(input *SearchSystemInstancesInput)
 	}
 
 	req := c.newRequest(op, input, &SearchSystemInstancesOutput{})
+
 	return SearchSystemInstancesRequest{Request: req, Input: input, Copy: c.SearchSystemInstancesRequest}
 }
 

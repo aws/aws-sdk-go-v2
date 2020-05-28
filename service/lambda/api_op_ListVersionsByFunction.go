@@ -160,6 +160,7 @@ func (c *Client) ListVersionsByFunctionRequest(input *ListVersionsByFunctionInpu
 	}
 
 	req := c.newRequest(op, input, &ListVersionsByFunctionOutput{})
+
 	return ListVersionsByFunctionRequest{Request: req, Input: input, Copy: c.ListVersionsByFunctionRequest}
 }
 

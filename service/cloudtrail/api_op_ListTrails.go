@@ -77,6 +77,7 @@ func (c *Client) ListTrailsRequest(input *ListTrailsInput) ListTrailsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListTrailsOutput{})
+
 	return ListTrailsRequest{Request: req, Input: input, Copy: c.ListTrailsRequest}
 }
 

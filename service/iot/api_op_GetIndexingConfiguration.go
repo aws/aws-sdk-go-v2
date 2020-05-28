@@ -83,6 +83,7 @@ func (c *Client) GetIndexingConfigurationRequest(input *GetIndexingConfiguration
 	}
 
 	req := c.newRequest(op, input, &GetIndexingConfigurationOutput{})
+
 	return GetIndexingConfigurationRequest{Request: req, Input: input, Copy: c.GetIndexingConfigurationRequest}
 }
 

@@ -94,6 +94,7 @@ func (c *Client) DeregisterJobDefinitionRequest(input *DeregisterJobDefinitionIn
 	}
 
 	req := c.newRequest(op, input, &DeregisterJobDefinitionOutput{})
+
 	return DeregisterJobDefinitionRequest{Request: req, Input: input, Copy: c.DeregisterJobDefinitionRequest}
 }
 

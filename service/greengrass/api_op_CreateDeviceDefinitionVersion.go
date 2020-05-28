@@ -152,6 +152,7 @@ func (c *Client) CreateDeviceDefinitionVersionRequest(input *CreateDeviceDefinit
 	}
 
 	req := c.newRequest(op, input, &CreateDeviceDefinitionVersionOutput{})
+
 	return CreateDeviceDefinitionVersionRequest{Request: req, Input: input, Copy: c.CreateDeviceDefinitionVersionRequest}
 }
 

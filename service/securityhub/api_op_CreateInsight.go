@@ -141,6 +141,7 @@ func (c *Client) CreateInsightRequest(input *CreateInsightInput) CreateInsightRe
 	}
 
 	req := c.newRequest(op, input, &CreateInsightOutput{})
+
 	return CreateInsightRequest{Request: req, Input: input, Copy: c.CreateInsightRequest}
 }
 

@@ -176,6 +176,7 @@ func (c *Client) CreateQueueRequest(input *CreateQueueInput) CreateQueueRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateQueueOutput{})
+
 	return CreateQueueRequest{Request: req, Input: input, Copy: c.CreateQueueRequest}
 }
 

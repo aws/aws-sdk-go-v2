@@ -78,6 +78,7 @@ func (c *Client) DescribeInstancesRequest(input *DescribeInstancesInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeInstancesOutput{})
+
 	return DescribeInstancesRequest{Request: req, Input: input, Copy: c.DescribeInstancesRequest}
 }
 

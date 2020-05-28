@@ -76,6 +76,7 @@ func (c *Client) DescribeEntityAggregatesRequest(input *DescribeEntityAggregates
 	}
 
 	req := c.newRequest(op, input, &DescribeEntityAggregatesOutput{})
+
 	return DescribeEntityAggregatesRequest{Request: req, Input: input, Copy: c.DescribeEntityAggregatesRequest}
 }
 

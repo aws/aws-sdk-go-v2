@@ -87,6 +87,7 @@ func (c *Client) DescribeTrustedAdvisorCheckRefreshStatusesRequest(input *Descri
 	}
 
 	req := c.newRequest(op, input, &DescribeTrustedAdvisorCheckRefreshStatusesOutput{})
+
 	return DescribeTrustedAdvisorCheckRefreshStatusesRequest{Request: req, Input: input, Copy: c.DescribeTrustedAdvisorCheckRefreshStatusesRequest}
 }
 

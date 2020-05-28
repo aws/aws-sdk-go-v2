@@ -113,6 +113,7 @@ func (c *Client) ListRuleGroupsRequest(input *ListRuleGroupsInput) ListRuleGroup
 	}
 
 	req := c.newRequest(op, input, &ListRuleGroupsOutput{})
+
 	return ListRuleGroupsRequest{Request: req, Input: input, Copy: c.ListRuleGroupsRequest}
 }
 

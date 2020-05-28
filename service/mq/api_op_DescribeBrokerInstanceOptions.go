@@ -150,6 +150,7 @@ func (c *Client) DescribeBrokerInstanceOptionsRequest(input *DescribeBrokerInsta
 	}
 
 	req := c.newRequest(op, input, &DescribeBrokerInstanceOptionsOutput{})
+
 	return DescribeBrokerInstanceOptionsRequest{Request: req, Input: input, Copy: c.DescribeBrokerInstanceOptionsRequest}
 }
 

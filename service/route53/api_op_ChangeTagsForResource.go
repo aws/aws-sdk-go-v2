@@ -160,6 +160,7 @@ func (c *Client) ChangeTagsForResourceRequest(input *ChangeTagsForResourceInput)
 	}
 
 	req := c.newRequest(op, input, &ChangeTagsForResourceOutput{})
+
 	return ChangeTagsForResourceRequest{Request: req, Input: input, Copy: c.ChangeTagsForResourceRequest}
 }
 

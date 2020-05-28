@@ -96,6 +96,7 @@ func (c *Client) DisassociateQualificationFromWorkerRequest(input *DisassociateQ
 	}
 
 	req := c.newRequest(op, input, &DisassociateQualificationFromWorkerOutput{})
+
 	return DisassociateQualificationFromWorkerRequest{Request: req, Input: input, Copy: c.DisassociateQualificationFromWorkerRequest}
 }
 

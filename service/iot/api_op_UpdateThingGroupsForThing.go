@@ -129,6 +129,7 @@ func (c *Client) UpdateThingGroupsForThingRequest(input *UpdateThingGroupsForThi
 	}
 
 	req := c.newRequest(op, input, &UpdateThingGroupsForThingOutput{})
+
 	return UpdateThingGroupsForThingRequest{Request: req, Input: input, Copy: c.UpdateThingGroupsForThingRequest}
 }
 

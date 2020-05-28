@@ -109,6 +109,7 @@ func (c *Client) AssociateQualificationWithWorkerRequest(input *AssociateQualifi
 	}
 
 	req := c.newRequest(op, input, &AssociateQualificationWithWorkerOutput{})
+
 	return AssociateQualificationWithWorkerRequest{Request: req, Input: input, Copy: c.AssociateQualificationWithWorkerRequest}
 }
 

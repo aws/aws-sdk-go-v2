@@ -104,6 +104,7 @@ func (c *Client) ListScriptsRequest(input *ListScriptsInput) ListScriptsRequest 
 	}
 
 	req := c.newRequest(op, input, &ListScriptsOutput{})
+
 	return ListScriptsRequest{Request: req, Input: input, Copy: c.ListScriptsRequest}
 }
 

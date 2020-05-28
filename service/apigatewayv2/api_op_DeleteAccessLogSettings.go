@@ -107,6 +107,7 @@ func (c *Client) DeleteAccessLogSettingsRequest(input *DeleteAccessLogSettingsIn
 	req := c.newRequest(op, input, &DeleteAccessLogSettingsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteAccessLogSettingsRequest{Request: req, Input: input, Copy: c.DeleteAccessLogSettingsRequest}
 }
 

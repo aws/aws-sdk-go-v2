@@ -88,6 +88,7 @@ func (c *Client) DeleteUserPoolDomainRequest(input *DeleteUserPoolDomainInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteUserPoolDomainOutput{})
+
 	return DeleteUserPoolDomainRequest{Request: req, Input: input, Copy: c.DeleteUserPoolDomainRequest}
 }
 

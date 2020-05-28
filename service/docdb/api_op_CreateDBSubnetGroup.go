@@ -104,6 +104,7 @@ func (c *Client) CreateDBSubnetGroupRequest(input *CreateDBSubnetGroupInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateDBSubnetGroupOutput{})
+
 	return CreateDBSubnetGroupRequest{Request: req, Input: input, Copy: c.CreateDBSubnetGroupRequest}
 }
 

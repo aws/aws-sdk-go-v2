@@ -88,6 +88,7 @@ func (c *Client) DeleteFileShareRequest(input *DeleteFileShareInput) DeleteFileS
 	}
 
 	req := c.newRequest(op, input, &DeleteFileShareOutput{})
+
 	return DeleteFileShareRequest{Request: req, Input: input, Copy: c.DeleteFileShareRequest}
 }
 

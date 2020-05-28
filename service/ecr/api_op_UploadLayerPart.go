@@ -19,12 +19,14 @@ type UploadLayerPartInput struct {
 	// LayerPartBlob is a required field
 	LayerPartBlob []byte `locationName:"layerPartBlob" type:"blob" required:"true"`
 
-	// The integer value of the first byte of the layer part.
+	// The position of the first byte of the layer part witin the overall image
+	// layer.
 	//
 	// PartFirstByte is a required field
 	PartFirstByte *int64 `locationName:"partFirstByte" type:"long" required:"true"`
 
-	// The integer value of the last byte of the layer part.
+	// The position of the last byte of the layer part within the overall image
+	// layer.
 	//
 	// PartLastByte is a required field
 	PartLastByte *int64 `locationName:"partLastByte" type:"long" required:"true"`
@@ -115,9 +117,9 @@ const opUploadLayerPart = "UploadLayerPart"
 // size of each image layer part can be 20971520 bytes (or about 20MB). The
 // UploadLayerPart API is called once per each new image layer part.
 //
-// This operation is used by the Amazon ECR proxy, and it is not intended for
-// general use by customers for pulling and pushing images. In most cases, you
-// should use the docker CLI to pull, tag, and push images.
+// This operation is used by the Amazon ECR proxy and is not generally used
+// by customers for pulling and pushing images. In most cases, you should use
+// the docker CLI to pull, tag, and push images.
 //
 //    // Example sending a request using UploadLayerPartRequest.
 //    req := client.UploadLayerPartRequest(params)
@@ -139,6 +141,7 @@ func (c *Client) UploadLayerPartRequest(input *UploadLayerPartInput) UploadLayer
 	}
 
 	req := c.newRequest(op, input, &UploadLayerPartOutput{})
+
 	return UploadLayerPartRequest{Request: req, Input: input, Copy: c.UploadLayerPartRequest}
 }
 

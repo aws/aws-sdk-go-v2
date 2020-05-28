@@ -77,6 +77,7 @@ func (c *Client) ListSubscriptionsRequest(input *ListSubscriptionsInput) ListSub
 	}
 
 	req := c.newRequest(op, input, &ListSubscriptionsOutput{})
+
 	return ListSubscriptionsRequest{Request: req, Input: input, Copy: c.ListSubscriptionsRequest}
 }
 

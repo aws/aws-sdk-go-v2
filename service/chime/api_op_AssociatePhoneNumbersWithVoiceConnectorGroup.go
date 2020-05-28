@@ -137,6 +137,7 @@ func (c *Client) AssociatePhoneNumbersWithVoiceConnectorGroupRequest(input *Asso
 	}
 
 	req := c.newRequest(op, input, &AssociatePhoneNumbersWithVoiceConnectorGroupOutput{})
+
 	return AssociatePhoneNumbersWithVoiceConnectorGroupRequest{Request: req, Input: input, Copy: c.AssociatePhoneNumbersWithVoiceConnectorGroupRequest}
 }
 

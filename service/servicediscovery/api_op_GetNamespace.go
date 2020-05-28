@@ -76,6 +76,7 @@ func (c *Client) GetNamespaceRequest(input *GetNamespaceInput) GetNamespaceReque
 	}
 
 	req := c.newRequest(op, input, &GetNamespaceOutput{})
+
 	return GetNamespaceRequest{Request: req, Input: input, Copy: c.GetNamespaceRequest}
 }
 

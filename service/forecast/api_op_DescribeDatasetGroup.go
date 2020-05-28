@@ -122,6 +122,7 @@ func (c *Client) DescribeDatasetGroupRequest(input *DescribeDatasetGroupInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeDatasetGroupOutput{})
+
 	return DescribeDatasetGroupRequest{Request: req, Input: input, Copy: c.DescribeDatasetGroupRequest}
 }
 

@@ -123,6 +123,7 @@ func (c *Client) TransferDomainToAnotherAwsAccountRequest(input *TransferDomainT
 	}
 
 	req := c.newRequest(op, input, &TransferDomainToAnotherAwsAccountOutput{})
+
 	return TransferDomainToAnotherAwsAccountRequest{Request: req, Input: input, Copy: c.TransferDomainToAnotherAwsAccountRequest}
 }
 

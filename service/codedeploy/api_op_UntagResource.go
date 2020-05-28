@@ -12,8 +12,8 @@ import (
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN that specifies from which resource to disassociate the tags with
-	// the keys in the TagKeys input paramter.
+	// The Amazon Resource Name (ARN) that specifies from which resource to disassociate
+	// the tags with the keys in the TagKeys input parameter.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `min:"1" type:"string" required:"true"`
@@ -66,7 +66,7 @@ const opUntagResource = "UntagResource"
 // AWS CodeDeploy.
 //
 // Disassociates a resource from a list of tags. The resource is identified
-// by the ResourceArn input parameter. The tags are identfied by the list of
+// by the ResourceArn input parameter. The tags are identified by the list of
 // keys in the TagKeys input parameter.
 //
 //    // Example sending a request using UntagResourceRequest.
@@ -89,6 +89,7 @@ func (c *Client) UntagResourceRequest(input *UntagResourceInput) UntagResourceRe
 	}
 
 	req := c.newRequest(op, input, &UntagResourceOutput{})
+
 	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 

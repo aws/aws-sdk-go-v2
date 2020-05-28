@@ -95,6 +95,7 @@ func (c *Client) DeleteJobTemplateRequest(input *DeleteJobTemplateInput) DeleteJ
 	}
 
 	req := c.newRequest(op, input, &DeleteJobTemplateOutput{})
+
 	return DeleteJobTemplateRequest{Request: req, Input: input, Copy: c.DeleteJobTemplateRequest}
 }
 

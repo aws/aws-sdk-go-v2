@@ -141,6 +141,7 @@ func (c *Client) StartEntitiesDetectionV2JobRequest(input *StartEntitiesDetectio
 	}
 
 	req := c.newRequest(op, input, &StartEntitiesDetectionV2JobOutput{})
+
 	return StartEntitiesDetectionV2JobRequest{Request: req, Input: input, Copy: c.StartEntitiesDetectionV2JobRequest}
 }
 

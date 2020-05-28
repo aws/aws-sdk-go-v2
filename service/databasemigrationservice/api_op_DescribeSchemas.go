@@ -101,6 +101,7 @@ func (c *Client) DescribeSchemasRequest(input *DescribeSchemasInput) DescribeSch
 	}
 
 	req := c.newRequest(op, input, &DescribeSchemasOutput{})
+
 	return DescribeSchemasRequest{Request: req, Input: input, Copy: c.DescribeSchemasRequest}
 }
 

@@ -107,6 +107,7 @@ func (c *Client) TagDeliveryStreamRequest(input *TagDeliveryStreamInput) TagDeli
 	}
 
 	req := c.newRequest(op, input, &TagDeliveryStreamOutput{})
+
 	return TagDeliveryStreamRequest{Request: req, Input: input, Copy: c.TagDeliveryStreamRequest}
 }
 

@@ -95,6 +95,7 @@ func (c *Client) DescribeDirectoriesRequest(input *DescribeDirectoriesInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeDirectoriesOutput{})
+
 	return DescribeDirectoriesRequest{Request: req, Input: input, Copy: c.DescribeDirectoriesRequest}
 }
 

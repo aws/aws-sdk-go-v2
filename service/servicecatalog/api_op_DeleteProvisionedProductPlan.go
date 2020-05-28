@@ -89,6 +89,7 @@ func (c *Client) DeleteProvisionedProductPlanRequest(input *DeleteProvisionedPro
 	}
 
 	req := c.newRequest(op, input, &DeleteProvisionedProductPlanOutput{})
+
 	return DeleteProvisionedProductPlanRequest{Request: req, Input: input, Copy: c.DeleteProvisionedProductPlanRequest}
 }
 

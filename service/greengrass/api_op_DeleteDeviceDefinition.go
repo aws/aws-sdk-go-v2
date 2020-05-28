@@ -90,6 +90,7 @@ func (c *Client) DeleteDeviceDefinitionRequest(input *DeleteDeviceDefinitionInpu
 	}
 
 	req := c.newRequest(op, input, &DeleteDeviceDefinitionOutput{})
+
 	return DeleteDeviceDefinitionRequest{Request: req, Input: input, Copy: c.DeleteDeviceDefinitionRequest}
 }
 

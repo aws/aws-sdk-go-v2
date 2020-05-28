@@ -85,6 +85,7 @@ func (c *Client) GetServiceRoleForAccountRequest(input *GetServiceRoleForAccount
 	}
 
 	req := c.newRequest(op, input, &GetServiceRoleForAccountOutput{})
+
 	return GetServiceRoleForAccountRequest{Request: req, Input: input, Copy: c.GetServiceRoleForAccountRequest}
 }
 

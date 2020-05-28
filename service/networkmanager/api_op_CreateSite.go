@@ -144,6 +144,7 @@ func (c *Client) CreateSiteRequest(input *CreateSiteInput) CreateSiteRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateSiteOutput{})
+
 	return CreateSiteRequest{Request: req, Input: input, Copy: c.CreateSiteRequest}
 }
 

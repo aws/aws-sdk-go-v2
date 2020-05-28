@@ -190,6 +190,7 @@ func (c *Client) GetResourceShareAssociationsRequest(input *GetResourceShareAsso
 	}
 
 	req := c.newRequest(op, input, &GetResourceShareAssociationsOutput{})
+
 	return GetResourceShareAssociationsRequest{Request: req, Input: input, Copy: c.GetResourceShareAssociationsRequest}
 }
 

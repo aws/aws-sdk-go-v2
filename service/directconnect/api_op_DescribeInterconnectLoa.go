@@ -96,6 +96,7 @@ func (c *Client) DescribeInterconnectLoaRequest(input *DescribeInterconnectLoaIn
 	}
 
 	req := c.newRequest(op, input, &DescribeInterconnectLoaOutput{})
+
 	return DescribeInterconnectLoaRequest{Request: req, Input: input, Copy: c.DescribeInterconnectLoaRequest}
 }
 

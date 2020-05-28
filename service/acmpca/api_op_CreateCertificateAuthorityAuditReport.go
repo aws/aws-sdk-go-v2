@@ -103,6 +103,7 @@ func (c *Client) CreateCertificateAuthorityAuditReportRequest(input *CreateCerti
 	}
 
 	req := c.newRequest(op, input, &CreateCertificateAuthorityAuditReportOutput{})
+
 	return CreateCertificateAuthorityAuditReportRequest{Request: req, Input: input, Copy: c.CreateCertificateAuthorityAuditReportRequest}
 }
 

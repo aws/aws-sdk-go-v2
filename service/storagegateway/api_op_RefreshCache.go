@@ -126,6 +126,7 @@ func (c *Client) RefreshCacheRequest(input *RefreshCacheInput) RefreshCacheReque
 	}
 
 	req := c.newRequest(op, input, &RefreshCacheOutput{})
+
 	return RefreshCacheRequest{Request: req, Input: input, Copy: c.RefreshCacheRequest}
 }
 

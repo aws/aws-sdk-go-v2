@@ -86,6 +86,7 @@ func (c *Client) ListAgentsRequest(input *ListAgentsInput) ListAgentsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListAgentsOutput{})
+
 	return ListAgentsRequest{Request: req, Input: input, Copy: c.ListAgentsRequest}
 }
 

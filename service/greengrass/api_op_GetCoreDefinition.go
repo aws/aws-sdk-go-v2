@@ -161,6 +161,7 @@ func (c *Client) GetCoreDefinitionRequest(input *GetCoreDefinitionInput) GetCore
 	}
 
 	req := c.newRequest(op, input, &GetCoreDefinitionOutput{})
+
 	return GetCoreDefinitionRequest{Request: req, Input: input, Copy: c.GetCoreDefinitionRequest}
 }
 

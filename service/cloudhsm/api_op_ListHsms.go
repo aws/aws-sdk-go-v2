@@ -81,6 +81,7 @@ func (c *Client) ListHsmsRequest(input *ListHsmsInput) ListHsmsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListHsmsOutput{})
+
 	return ListHsmsRequest{Request: req, Input: input, Copy: c.ListHsmsRequest}
 }
 

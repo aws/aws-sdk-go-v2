@@ -144,6 +144,7 @@ func (c *Client) PutFunctionConcurrencyRequest(input *PutFunctionConcurrencyInpu
 	}
 
 	req := c.newRequest(op, input, &PutFunctionConcurrencyOutput{})
+
 	return PutFunctionConcurrencyRequest{Request: req, Input: input, Copy: c.PutFunctionConcurrencyRequest}
 }
 

@@ -98,6 +98,7 @@ func (c *Client) DisassociateMembershipRequest(input *DisassociateMembershipInpu
 	req := c.newRequest(op, input, &DisassociateMembershipOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DisassociateMembershipRequest{Request: req, Input: input, Copy: c.DisassociateMembershipRequest}
 }
 

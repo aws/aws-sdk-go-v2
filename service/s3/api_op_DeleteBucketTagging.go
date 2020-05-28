@@ -127,6 +127,7 @@ func (c *Client) DeleteBucketTaggingRequest(input *DeleteBucketTaggingInput) Del
 	req := c.newRequest(op, input, &DeleteBucketTaggingOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteBucketTaggingRequest{Request: req, Input: input, Copy: c.DeleteBucketTaggingRequest}
 }
 

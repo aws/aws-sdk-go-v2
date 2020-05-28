@@ -322,6 +322,7 @@ func (c *Client) BatchUpdateFindingsRequest(input *BatchUpdateFindingsInput) Bat
 	}
 
 	req := c.newRequest(op, input, &BatchUpdateFindingsOutput{})
+
 	return BatchUpdateFindingsRequest{Request: req, Input: input, Copy: c.BatchUpdateFindingsRequest}
 }
 

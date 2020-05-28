@@ -166,6 +166,7 @@ func (c *Client) UpdateApiCacheRequest(input *UpdateApiCacheInput) UpdateApiCach
 	}
 
 	req := c.newRequest(op, input, &UpdateApiCacheOutput{})
+
 	return UpdateApiCacheRequest{Request: req, Input: input, Copy: c.UpdateApiCacheRequest}
 }
 

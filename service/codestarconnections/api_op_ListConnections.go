@@ -14,7 +14,7 @@ type ListConnectionsInput struct {
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `min:"1" type:"integer"`
+	MaxResults *int64 `type:"integer"`
 
 	// The token that was returned from the previous ListConnections call, which
 	// can be used to return the next set of connections in the list.
@@ -33,9 +33,6 @@ func (s ListConnectionsInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListConnectionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListConnectionsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
@@ -97,6 +94,7 @@ func (c *Client) ListConnectionsRequest(input *ListConnectionsInput) ListConnect
 	}
 
 	req := c.newRequest(op, input, &ListConnectionsOutput{})
+
 	return ListConnectionsRequest{Request: req, Input: input, Copy: c.ListConnectionsRequest}
 }
 

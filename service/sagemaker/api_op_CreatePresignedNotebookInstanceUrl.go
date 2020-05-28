@@ -98,6 +98,7 @@ func (c *Client) CreatePresignedNotebookInstanceUrlRequest(input *CreatePresigne
 	}
 
 	req := c.newRequest(op, input, &CreatePresignedNotebookInstanceUrlOutput{})
+
 	return CreatePresignedNotebookInstanceUrlRequest{Request: req, Input: input, Copy: c.CreatePresignedNotebookInstanceUrlRequest}
 }
 

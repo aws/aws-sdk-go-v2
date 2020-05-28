@@ -129,6 +129,7 @@ func (c *Client) DetectStackSetDriftRequest(input *DetectStackSetDriftInput) Det
 	}
 
 	req := c.newRequest(op, input, &DetectStackSetDriftOutput{})
+
 	return DetectStackSetDriftRequest{Request: req, Input: input, Copy: c.DetectStackSetDriftRequest}
 }
 

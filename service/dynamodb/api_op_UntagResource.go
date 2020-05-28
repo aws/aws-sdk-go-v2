@@ -117,6 +117,7 @@ func (c *Client) UntagResourceRequest(input *UntagResourceInput) UntagResourceRe
 			Fn:   de.Handler,
 		})
 	}
+
 	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 

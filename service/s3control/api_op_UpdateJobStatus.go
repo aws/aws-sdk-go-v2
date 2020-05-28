@@ -140,7 +140,19 @@ const opUpdateJobStatus = "UpdateJobStatus"
 // AWS S3 Control.
 //
 // Updates the status for the specified job. Use this operation to confirm that
-// you want to run a job or to cancel an existing job.
+// you want to run a job or to cancel an existing job. For more information,
+// see Amazon S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+// Related actions include:
+//
+//    * CreateJob
+//
+//    * ListJobs
+//
+//    * DescribeJob
+//
+//    * UpdateJobStatus
 //
 //    // Example sending a request using UpdateJobStatusRequest.
 //    req := client.UpdateJobStatusRequest(params)
@@ -164,6 +176,7 @@ func (c *Client) UpdateJobStatusRequest(input *UpdateJobStatusInput) UpdateJobSt
 	req := c.newRequest(op, input, &UpdateJobStatusOutput{})
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
+
 	return UpdateJobStatusRequest{Request: req, Input: input, Copy: c.UpdateJobStatusRequest}
 }
 

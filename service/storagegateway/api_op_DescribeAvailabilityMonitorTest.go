@@ -92,6 +92,7 @@ func (c *Client) DescribeAvailabilityMonitorTestRequest(input *DescribeAvailabil
 	}
 
 	req := c.newRequest(op, input, &DescribeAvailabilityMonitorTestOutput{})
+
 	return DescribeAvailabilityMonitorTestRequest{Request: req, Input: input, Copy: c.DescribeAvailabilityMonitorTestRequest}
 }
 

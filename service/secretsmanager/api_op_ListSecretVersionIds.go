@@ -168,6 +168,7 @@ func (c *Client) ListSecretVersionIdsRequest(input *ListSecretVersionIdsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListSecretVersionIdsOutput{})
+
 	return ListSecretVersionIdsRequest{Request: req, Input: input, Copy: c.ListSecretVersionIdsRequest}
 }
 

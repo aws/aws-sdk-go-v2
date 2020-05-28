@@ -225,6 +225,7 @@ func (c *Client) ListProfileTimesRequest(input *ListProfileTimesInput) ListProfi
 	}
 
 	req := c.newRequest(op, input, &ListProfileTimesOutput{})
+
 	return ListProfileTimesRequest{Request: req, Input: input, Copy: c.ListProfileTimesRequest}
 }
 

@@ -88,6 +88,7 @@ func (c *Client) ListCompatibleImagesRequest(input *ListCompatibleImagesInput) L
 	}
 
 	req := c.newRequest(op, input, &ListCompatibleImagesOutput{})
+
 	return ListCompatibleImagesRequest{Request: req, Input: input, Copy: c.ListCompatibleImagesRequest}
 }
 

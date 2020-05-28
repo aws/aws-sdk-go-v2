@@ -102,6 +102,7 @@ func (c *Client) BatchDisassociateApprovalRuleTemplateFromRepositoriesRequest(in
 	}
 
 	req := c.newRequest(op, input, &BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput{})
+
 	return BatchDisassociateApprovalRuleTemplateFromRepositoriesRequest{Request: req, Input: input, Copy: c.BatchDisassociateApprovalRuleTemplateFromRepositoriesRequest}
 }
 

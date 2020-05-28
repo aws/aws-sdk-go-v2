@@ -160,6 +160,7 @@ func (c *Client) GetTransitGatewayRegistrationsRequest(input *GetTransitGatewayR
 	}
 
 	req := c.newRequest(op, input, &GetTransitGatewayRegistrationsOutput{})
+
 	return GetTransitGatewayRegistrationsRequest{Request: req, Input: input, Copy: c.GetTransitGatewayRegistrationsRequest}
 }
 

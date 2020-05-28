@@ -248,6 +248,7 @@ func (c *Client) UpdateImagePipelineRequest(input *UpdateImagePipelineInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateImagePipelineOutput{})
+
 	return UpdateImagePipelineRequest{Request: req, Input: input, Copy: c.UpdateImagePipelineRequest}
 }
 

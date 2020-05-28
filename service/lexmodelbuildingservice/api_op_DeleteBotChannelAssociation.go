@@ -138,6 +138,7 @@ func (c *Client) DeleteBotChannelAssociationRequest(input *DeleteBotChannelAssoc
 	req := c.newRequest(op, input, &DeleteBotChannelAssociationOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteBotChannelAssociationRequest{Request: req, Input: input, Copy: c.DeleteBotChannelAssociationRequest}
 }
 

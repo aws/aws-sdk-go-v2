@@ -642,6 +642,9 @@ type ClusterOperationInfo struct {
 	// State of the cluster operation.
 	OperationState *string `locationName:"operationState" type:"string"`
 
+	// Steps completed during the operation.
+	OperationSteps []ClusterOperationStep `locationName:"operationSteps" type:"list"`
+
 	// Type of the cluster operation.
 	OperationType *string `locationName:"operationType" type:"string"`
 
@@ -703,6 +706,18 @@ func (s ClusterOperationInfo) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "operationState", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.OperationSteps != nil {
+		v := s.OperationSteps
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "operationSteps", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.OperationType != nil {
 		v := *s.OperationType
 
@@ -720,6 +735,100 @@ func (s ClusterOperationInfo) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "targetClusterInfo", v, metadata)
+	}
+	return nil
+}
+
+// Step taken during a cluster operation.
+type ClusterOperationStep struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the step and its status.
+	StepInfo *ClusterOperationStepInfo `locationName:"stepInfo" type:"structure"`
+
+	// The name of the step.
+	StepName *string `locationName:"stepName" type:"string"`
+}
+
+// String returns the string representation
+func (s ClusterOperationStep) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ClusterOperationStep) MarshalFields(e protocol.FieldEncoder) error {
+	if s.StepInfo != nil {
+		v := s.StepInfo
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "stepInfo", v, metadata)
+	}
+	if s.StepName != nil {
+		v := *s.StepName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stepName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// State information about the operation step.
+type ClusterOperationStepInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The steps current status.
+	StepStatus *string `locationName:"stepStatus" type:"string"`
+}
+
+// String returns the string representation
+func (s ClusterOperationStepInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ClusterOperationStepInfo) MarshalFields(e protocol.FieldEncoder) error {
+	if s.StepStatus != nil {
+		v := *s.StepStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stepStatus", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Contains source Kafka versions and compatible target Kafka versions.
+type CompatibleKafkaVersion struct {
+	_ struct{} `type:"structure"`
+
+	SourceVersion *string `locationName:"sourceVersion" type:"string"`
+
+	TargetVersions []string `locationName:"targetVersions" type:"list"`
+}
+
+// String returns the string representation
+func (s CompatibleKafkaVersion) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CompatibleKafkaVersion) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SourceVersion != nil {
+		v := *s.SourceVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sourceVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TargetVersions != nil {
+		v := s.TargetVersions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "targetVersions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -1337,6 +1446,8 @@ type MutableClusterInfo struct {
 	// CloudWatch for this cluster.
 	EnhancedMonitoring EnhancedMonitoring `locationName:"enhancedMonitoring" type:"string" enum:"true"`
 
+	KafkaVersion *string `locationName:"kafkaVersion" type:"string"`
+
 	// LoggingInfo details.
 	LoggingInfo *LoggingInfo `locationName:"loggingInfo" type:"structure"`
 
@@ -1377,6 +1488,12 @@ func (s MutableClusterInfo) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "enhancedMonitoring", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.KafkaVersion != nil {
+		v := *s.KafkaVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "kafkaVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LoggingInfo != nil {
 		v := s.LoggingInfo

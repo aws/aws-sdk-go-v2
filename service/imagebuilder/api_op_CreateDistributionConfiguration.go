@@ -204,6 +204,7 @@ func (c *Client) CreateDistributionConfigurationRequest(input *CreateDistributio
 	}
 
 	req := c.newRequest(op, input, &CreateDistributionConfigurationOutput{})
+
 	return CreateDistributionConfigurationRequest{Request: req, Input: input, Copy: c.CreateDistributionConfigurationRequest}
 }
 

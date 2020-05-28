@@ -76,9 +76,11 @@ const opGetQueryResults = "GetQueryResults"
 //
 // Only the fields requested in the query are returned, along with a @ptr field
 // which is the identifier for the log record. You can use the value of @ptr
-// in a operation to get the full log record.
+// in a GetLogRecord (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogRecord.html)
+// operation to get the full log record.
 //
-// GetQueryResults does not start a query execution. To run a query, use .
+// GetQueryResults does not start a query execution. To run a query, use StartQuery
+// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html).
 //
 // If the value of the Status field in the output is Running, this operation
 // returns only partial results. If you see a value of Scheduled or Running
@@ -104,6 +106,7 @@ func (c *Client) GetQueryResultsRequest(input *GetQueryResultsInput) GetQueryRes
 	}
 
 	req := c.newRequest(op, input, &GetQueryResultsOutput{})
+
 	return GetQueryResultsRequest{Request: req, Input: input, Copy: c.GetQueryResultsRequest}
 }
 

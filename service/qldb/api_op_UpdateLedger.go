@@ -167,6 +167,7 @@ func (c *Client) UpdateLedgerRequest(input *UpdateLedgerInput) UpdateLedgerReque
 	}
 
 	req := c.newRequest(op, input, &UpdateLedgerOutput{})
+
 	return UpdateLedgerRequest{Request: req, Input: input, Copy: c.UpdateLedgerRequest}
 }
 

@@ -73,6 +73,7 @@ func (c *Client) DescribeActiveReceiptRuleSetRequest(input *DescribeActiveReceip
 	}
 
 	req := c.newRequest(op, input, &DescribeActiveReceiptRuleSetOutput{})
+
 	return DescribeActiveReceiptRuleSetRequest{Request: req, Input: input, Copy: c.DescribeActiveReceiptRuleSetRequest}
 }
 

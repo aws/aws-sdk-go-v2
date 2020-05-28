@@ -99,6 +99,7 @@ func (c *Client) BatchGetApplicationRevisionsRequest(input *BatchGetApplicationR
 	}
 
 	req := c.newRequest(op, input, &BatchGetApplicationRevisionsOutput{})
+
 	return BatchGetApplicationRevisionsRequest{Request: req, Input: input, Copy: c.BatchGetApplicationRevisionsRequest}
 }
 

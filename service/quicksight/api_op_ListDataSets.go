@@ -162,6 +162,7 @@ func (c *Client) ListDataSetsRequest(input *ListDataSetsInput) ListDataSetsReque
 	}
 
 	req := c.newRequest(op, input, &ListDataSetsOutput{})
+
 	return ListDataSetsRequest{Request: req, Input: input, Copy: c.ListDataSetsRequest}
 }
 

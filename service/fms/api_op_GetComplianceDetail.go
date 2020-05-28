@@ -100,6 +100,7 @@ func (c *Client) GetComplianceDetailRequest(input *GetComplianceDetailInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetComplianceDetailOutput{})
+
 	return GetComplianceDetailRequest{Request: req, Input: input, Copy: c.GetComplianceDetailRequest}
 }
 

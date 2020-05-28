@@ -180,6 +180,7 @@ func (c *Client) ListArtifactsRequest(input *ListArtifactsInput) ListArtifactsRe
 	}
 
 	req := c.newRequest(op, input, &ListArtifactsOutput{})
+
 	return ListArtifactsRequest{Request: req, Input: input, Copy: c.ListArtifactsRequest}
 }
 

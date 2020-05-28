@@ -140,6 +140,7 @@ func (c *Client) PutAttributesRequest(input *PutAttributesInput) PutAttributesRe
 	req := c.newRequest(op, input, &PutAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutAttributesRequest{Request: req, Input: input, Copy: c.PutAttributesRequest}
 }
 

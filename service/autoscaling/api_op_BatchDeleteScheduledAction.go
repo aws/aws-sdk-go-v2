@@ -90,6 +90,7 @@ func (c *Client) BatchDeleteScheduledActionRequest(input *BatchDeleteScheduledAc
 	}
 
 	req := c.newRequest(op, input, &BatchDeleteScheduledActionOutput{})
+
 	return BatchDeleteScheduledActionRequest{Request: req, Input: input, Copy: c.BatchDeleteScheduledActionRequest}
 }
 

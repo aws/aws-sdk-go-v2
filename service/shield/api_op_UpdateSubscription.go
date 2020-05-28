@@ -62,6 +62,7 @@ func (c *Client) UpdateSubscriptionRequest(input *UpdateSubscriptionInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateSubscriptionOutput{})
+
 	return UpdateSubscriptionRequest{Request: req, Input: input, Copy: c.UpdateSubscriptionRequest}
 }
 

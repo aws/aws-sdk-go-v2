@@ -377,6 +377,28 @@ func (enum MatchFieldType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type MigrationErrorType string
+
+// Enum values for MigrationErrorType
+const (
+	MigrationErrorTypeEntityNotSupported    MigrationErrorType = "ENTITY_NOT_SUPPORTED"
+	MigrationErrorTypeEntityNotFound        MigrationErrorType = "ENTITY_NOT_FOUND"
+	MigrationErrorTypeS3BucketNoPermission  MigrationErrorType = "S3_BUCKET_NO_PERMISSION"
+	MigrationErrorTypeS3BucketNotAccessible MigrationErrorType = "S3_BUCKET_NOT_ACCESSIBLE"
+	MigrationErrorTypeS3BucketNotFound      MigrationErrorType = "S3_BUCKET_NOT_FOUND"
+	MigrationErrorTypeS3BucketInvalidRegion MigrationErrorType = "S3_BUCKET_INVALID_REGION"
+	MigrationErrorTypeS3InternalError       MigrationErrorType = "S3_INTERNAL_ERROR"
+)
+
+func (enum MigrationErrorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MigrationErrorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ParameterExceptionField string
 
 // Enum values for ParameterExceptionField

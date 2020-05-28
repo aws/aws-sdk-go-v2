@@ -129,6 +129,7 @@ func (c *Client) CreateEvaluationRequest(input *CreateEvaluationInput) CreateEva
 	}
 
 	req := c.newRequest(op, input, &CreateEvaluationOutput{})
+
 	return CreateEvaluationRequest{Request: req, Input: input, Copy: c.CreateEvaluationRequest}
 }
 

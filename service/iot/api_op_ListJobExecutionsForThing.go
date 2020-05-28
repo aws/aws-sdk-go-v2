@@ -149,6 +149,7 @@ func (c *Client) ListJobExecutionsForThingRequest(input *ListJobExecutionsForThi
 	}
 
 	req := c.newRequest(op, input, &ListJobExecutionsForThingOutput{})
+
 	return ListJobExecutionsForThingRequest{Request: req, Input: input, Copy: c.ListJobExecutionsForThingRequest}
 }
 

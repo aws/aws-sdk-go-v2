@@ -138,6 +138,7 @@ func (c *Client) CreateDistributionRequest(input *CreateDistributionInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateDistributionOutput{})
+
 	return CreateDistributionRequest{Request: req, Input: input, Copy: c.CreateDistributionRequest}
 }
 

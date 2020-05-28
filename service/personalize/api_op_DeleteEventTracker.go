@@ -79,6 +79,7 @@ func (c *Client) DeleteEventTrackerRequest(input *DeleteEventTrackerInput) Delet
 	req := c.newRequest(op, input, &DeleteEventTrackerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteEventTrackerRequest{Request: req, Input: input, Copy: c.DeleteEventTrackerRequest}
 }
 

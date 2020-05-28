@@ -110,6 +110,7 @@ func (c *Client) DeleteVoiceTemplateRequest(input *DeleteVoiceTemplateInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteVoiceTemplateOutput{})
+
 	return DeleteVoiceTemplateRequest{Request: req, Input: input, Copy: c.DeleteVoiceTemplateRequest}
 }
 

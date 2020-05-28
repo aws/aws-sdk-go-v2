@@ -94,6 +94,7 @@ func (c *Client) UpdateAcceleratorRequest(input *UpdateAcceleratorInput) UpdateA
 	}
 
 	req := c.newRequest(op, input, &UpdateAcceleratorOutput{})
+
 	return UpdateAcceleratorRequest{Request: req, Input: input, Copy: c.UpdateAcceleratorRequest}
 }
 

@@ -97,6 +97,7 @@ func (c *Client) ResetCacheParameterGroupRequest(input *ResetCacheParameterGroup
 	}
 
 	req := c.newRequest(op, input, &ResetCacheParameterGroupOutput{})
+
 	return ResetCacheParameterGroupRequest{Request: req, Input: input, Copy: c.ResetCacheParameterGroupRequest}
 }
 

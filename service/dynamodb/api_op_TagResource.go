@@ -126,6 +126,7 @@ func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest 
 			Fn:   de.Handler,
 		})
 	}
+
 	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 

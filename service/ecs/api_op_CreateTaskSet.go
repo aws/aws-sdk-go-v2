@@ -213,6 +213,7 @@ func (c *Client) CreateTaskSetRequest(input *CreateTaskSetInput) CreateTaskSetRe
 	}
 
 	req := c.newRequest(op, input, &CreateTaskSetOutput{})
+
 	return CreateTaskSetRequest{Request: req, Input: input, Copy: c.CreateTaskSetRequest}
 }
 

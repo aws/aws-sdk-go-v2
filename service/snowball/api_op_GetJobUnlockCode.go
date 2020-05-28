@@ -93,6 +93,7 @@ func (c *Client) GetJobUnlockCodeRequest(input *GetJobUnlockCodeInput) GetJobUnl
 	}
 
 	req := c.newRequest(op, input, &GetJobUnlockCodeOutput{})
+
 	return GetJobUnlockCodeRequest{Request: req, Input: input, Copy: c.GetJobUnlockCodeRequest}
 }
 

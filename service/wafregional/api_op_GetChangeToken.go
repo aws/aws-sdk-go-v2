@@ -36,6 +36,16 @@ const opGetChangeToken = "GetChangeToken"
 // GetChangeTokenRequest returns a request value for making API operation for
 // AWS WAF Regional.
 //
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // When you want to create, update, or delete AWS WAF objects, get a change
 // token and include the change token in the create, update, or delete request.
 // Change tokens ensure that your application doesn't submit conflicting requests
@@ -72,6 +82,7 @@ func (c *Client) GetChangeTokenRequest(input *GetChangeTokenInput) GetChangeToke
 	}
 
 	req := c.newRequest(op, input, &GetChangeTokenOutput{})
+
 	return GetChangeTokenRequest{Request: req, Input: input, Copy: c.GetChangeTokenRequest}
 }
 

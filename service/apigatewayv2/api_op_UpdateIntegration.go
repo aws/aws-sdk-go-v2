@@ -462,6 +462,7 @@ func (c *Client) UpdateIntegrationRequest(input *UpdateIntegrationInput) UpdateI
 	}
 
 	req := c.newRequest(op, input, &UpdateIntegrationOutput{})
+
 	return UpdateIntegrationRequest{Request: req, Input: input, Copy: c.UpdateIntegrationRequest}
 }
 

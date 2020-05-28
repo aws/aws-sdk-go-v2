@@ -25,6 +25,10 @@ type CreateThingInput struct {
 
 	// The name of the thing to create.
 	//
+	// You can't change a thing's name after you create it. To change a thing's
+	// name, you must create a new thing, give it the new name, and then delete
+	// the old thing.
+	//
 	// ThingName is a required field
 	ThingName *string `location:"uri" locationName:"thingName" min:"1" type:"string" required:"true"`
 
@@ -164,6 +168,7 @@ func (c *Client) CreateThingRequest(input *CreateThingInput) CreateThingRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateThingOutput{})
+
 	return CreateThingRequest{Request: req, Input: input, Copy: c.CreateThingRequest}
 }
 

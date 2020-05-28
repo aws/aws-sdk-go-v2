@@ -159,6 +159,7 @@ func (c *Client) ListThingRegistrationTaskReportsRequest(input *ListThingRegistr
 	}
 
 	req := c.newRequest(op, input, &ListThingRegistrationTaskReportsOutput{})
+
 	return ListThingRegistrationTaskReportsRequest{Request: req, Input: input, Copy: c.ListThingRegistrationTaskReportsRequest}
 }
 

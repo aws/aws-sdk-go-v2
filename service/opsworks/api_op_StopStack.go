@@ -82,6 +82,7 @@ func (c *Client) StopStackRequest(input *StopStackInput) StopStackRequest {
 	req := c.newRequest(op, input, &StopStackOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StopStackRequest{Request: req, Input: input, Copy: c.StopStackRequest}
 }
 

@@ -79,6 +79,7 @@ func (c *Client) DescribeAttackRequest(input *DescribeAttackInput) DescribeAttac
 	}
 
 	req := c.newRequest(op, input, &DescribeAttackOutput{})
+
 	return DescribeAttackRequest{Request: req, Input: input, Copy: c.DescribeAttackRequest}
 }
 

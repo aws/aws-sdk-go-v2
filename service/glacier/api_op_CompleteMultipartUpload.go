@@ -227,6 +227,7 @@ func (c *Client) CompleteMultipartUploadRequest(input *CompleteMultipartUploadIn
 	}
 
 	req := c.newRequest(op, input, &CompleteMultipartUploadOutput{})
+
 	return CompleteMultipartUploadRequest{Request: req, Input: input, Copy: c.CompleteMultipartUploadRequest}
 }
 

@@ -204,6 +204,7 @@ func (c *Client) UpdateDistributionRequest(input *UpdateDistributionInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateDistributionOutput{})
+
 	return UpdateDistributionRequest{Request: req, Input: input, Copy: c.UpdateDistributionRequest}
 }
 

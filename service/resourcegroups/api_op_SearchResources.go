@@ -173,6 +173,7 @@ func (c *Client) SearchResourcesRequest(input *SearchResourcesInput) SearchResou
 	}
 
 	req := c.newRequest(op, input, &SearchResourcesOutput{})
+
 	return SearchResourcesRequest{Request: req, Input: input, Copy: c.SearchResourcesRequest}
 }
 

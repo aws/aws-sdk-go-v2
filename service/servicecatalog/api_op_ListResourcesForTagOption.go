@@ -103,6 +103,7 @@ func (c *Client) ListResourcesForTagOptionRequest(input *ListResourcesForTagOpti
 	}
 
 	req := c.newRequest(op, input, &ListResourcesForTagOptionOutput{})
+
 	return ListResourcesForTagOptionRequest{Request: req, Input: input, Copy: c.ListResourcesForTagOptionRequest}
 }
 

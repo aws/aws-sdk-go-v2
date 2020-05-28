@@ -19,9 +19,7 @@ type CreateConfigurationInput struct {
 	Description *string `locationName:"description" type:"string"`
 
 	// The versions of Apache Kafka with which you can use this MSK configuration.
-	//
-	// KafkaVersions is a required field
-	KafkaVersions []string `locationName:"kafkaVersions" type:"list" required:"true"`
+	KafkaVersions []string `locationName:"kafkaVersions" type:"list"`
 
 	// The name of the configuration. Configuration names are strings that match
 	// the regex "^[0-9A-Za-z-]+$".
@@ -43,10 +41,6 @@ func (s CreateConfigurationInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateConfigurationInput"}
-
-	if s.KafkaVersions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KafkaVersions"))
-	}
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
@@ -179,6 +173,7 @@ func (c *Client) CreateConfigurationRequest(input *CreateConfigurationInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateConfigurationOutput{})
+
 	return CreateConfigurationRequest{Request: req, Input: input, Copy: c.CreateConfigurationRequest}
 }
 

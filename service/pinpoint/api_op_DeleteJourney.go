@@ -115,6 +115,7 @@ func (c *Client) DeleteJourneyRequest(input *DeleteJourneyInput) DeleteJourneyRe
 	}
 
 	req := c.newRequest(op, input, &DeleteJourneyOutput{})
+
 	return DeleteJourneyRequest{Request: req, Input: input, Copy: c.DeleteJourneyRequest}
 }
 

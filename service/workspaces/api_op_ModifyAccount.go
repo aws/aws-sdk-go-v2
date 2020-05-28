@@ -66,6 +66,7 @@ func (c *Client) ModifyAccountRequest(input *ModifyAccountInput) ModifyAccountRe
 	}
 
 	req := c.newRequest(op, input, &ModifyAccountOutput{})
+
 	return ModifyAccountRequest{Request: req, Input: input, Copy: c.ModifyAccountRequest}
 }
 

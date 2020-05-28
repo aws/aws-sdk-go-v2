@@ -99,6 +99,7 @@ func (c *Client) RebootDBInstanceRequest(input *RebootDBInstanceInput) RebootDBI
 	}
 
 	req := c.newRequest(op, input, &RebootDBInstanceOutput{})
+
 	return RebootDBInstanceRequest{Request: req, Input: input, Copy: c.RebootDBInstanceRequest}
 }
 

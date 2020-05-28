@@ -76,6 +76,7 @@ func (c *Client) GetAddressBookRequest(input *GetAddressBookInput) GetAddressBoo
 	}
 
 	req := c.newRequest(op, input, &GetAddressBookOutput{})
+
 	return GetAddressBookRequest{Request: req, Input: input, Copy: c.GetAddressBookRequest}
 }
 

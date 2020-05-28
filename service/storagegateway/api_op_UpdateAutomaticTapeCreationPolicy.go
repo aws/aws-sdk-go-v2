@@ -108,6 +108,7 @@ func (c *Client) UpdateAutomaticTapeCreationPolicyRequest(input *UpdateAutomatic
 	}
 
 	req := c.newRequest(op, input, &UpdateAutomaticTapeCreationPolicyOutput{})
+
 	return UpdateAutomaticTapeCreationPolicyRequest{Request: req, Input: input, Copy: c.UpdateAutomaticTapeCreationPolicyRequest}
 }
 

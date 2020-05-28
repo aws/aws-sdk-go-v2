@@ -92,6 +92,7 @@ func (c *Client) DeleteScheduledActionRequest(input *DeleteScheduledActionInput)
 	req := c.newRequest(op, input, &DeleteScheduledActionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteScheduledActionRequest{Request: req, Input: input, Copy: c.DeleteScheduledActionRequest}
 }
 

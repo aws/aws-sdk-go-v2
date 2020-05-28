@@ -60,6 +60,7 @@ func (c *Client) GetSkillGroupRequest(input *GetSkillGroupInput) GetSkillGroupRe
 	}
 
 	req := c.newRequest(op, input, &GetSkillGroupOutput{})
+
 	return GetSkillGroupRequest{Request: req, Input: input, Copy: c.GetSkillGroupRequest}
 }
 

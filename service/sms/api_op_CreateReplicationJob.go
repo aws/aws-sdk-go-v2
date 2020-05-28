@@ -126,6 +126,7 @@ func (c *Client) CreateReplicationJobRequest(input *CreateReplicationJobInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateReplicationJobOutput{})
+
 	return CreateReplicationJobRequest{Request: req, Input: input, Copy: c.CreateReplicationJobRequest}
 }
 

@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Transcribe Service.
 //    func myFunc(svc transcribeiface.ClientAPI) bool {
-//        // Make svc.CreateVocabulary request
+//        // Make svc.CreateMedicalVocabulary request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        transcribeiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateVocabulary(input *transcribe.CreateVocabularyInput) (*transcribe.CreateVocabularyOutput, error) {
+//    func (m *mockClientClient) CreateMedicalVocabulary(input *transcribe.CreateMedicalVocabularyInput) (*transcribe.CreateMedicalVocabularyOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,11 +61,15 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	CreateMedicalVocabularyRequest(*transcribe.CreateMedicalVocabularyInput) transcribe.CreateMedicalVocabularyRequest
+
 	CreateVocabularyRequest(*transcribe.CreateVocabularyInput) transcribe.CreateVocabularyRequest
 
 	CreateVocabularyFilterRequest(*transcribe.CreateVocabularyFilterInput) transcribe.CreateVocabularyFilterRequest
 
 	DeleteMedicalTranscriptionJobRequest(*transcribe.DeleteMedicalTranscriptionJobInput) transcribe.DeleteMedicalTranscriptionJobRequest
+
+	DeleteMedicalVocabularyRequest(*transcribe.DeleteMedicalVocabularyInput) transcribe.DeleteMedicalVocabularyRequest
 
 	DeleteTranscriptionJobRequest(*transcribe.DeleteTranscriptionJobInput) transcribe.DeleteTranscriptionJobRequest
 
@@ -75,6 +79,8 @@ type ClientAPI interface {
 
 	GetMedicalTranscriptionJobRequest(*transcribe.GetMedicalTranscriptionJobInput) transcribe.GetMedicalTranscriptionJobRequest
 
+	GetMedicalVocabularyRequest(*transcribe.GetMedicalVocabularyInput) transcribe.GetMedicalVocabularyRequest
+
 	GetTranscriptionJobRequest(*transcribe.GetTranscriptionJobInput) transcribe.GetTranscriptionJobRequest
 
 	GetVocabularyRequest(*transcribe.GetVocabularyInput) transcribe.GetVocabularyRequest
@@ -82,6 +88,8 @@ type ClientAPI interface {
 	GetVocabularyFilterRequest(*transcribe.GetVocabularyFilterInput) transcribe.GetVocabularyFilterRequest
 
 	ListMedicalTranscriptionJobsRequest(*transcribe.ListMedicalTranscriptionJobsInput) transcribe.ListMedicalTranscriptionJobsRequest
+
+	ListMedicalVocabulariesRequest(*transcribe.ListMedicalVocabulariesInput) transcribe.ListMedicalVocabulariesRequest
 
 	ListTranscriptionJobsRequest(*transcribe.ListTranscriptionJobsInput) transcribe.ListTranscriptionJobsRequest
 
@@ -92,6 +100,8 @@ type ClientAPI interface {
 	StartMedicalTranscriptionJobRequest(*transcribe.StartMedicalTranscriptionJobInput) transcribe.StartMedicalTranscriptionJobRequest
 
 	StartTranscriptionJobRequest(*transcribe.StartTranscriptionJobInput) transcribe.StartTranscriptionJobRequest
+
+	UpdateMedicalVocabularyRequest(*transcribe.UpdateMedicalVocabularyInput) transcribe.UpdateMedicalVocabularyRequest
 
 	UpdateVocabularyRequest(*transcribe.UpdateVocabularyInput) transcribe.UpdateVocabularyRequest
 

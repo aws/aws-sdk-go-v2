@@ -152,6 +152,7 @@ func (c *Client) DescribeRootFoldersRequest(input *DescribeRootFoldersInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeRootFoldersOutput{})
+
 	return DescribeRootFoldersRequest{Request: req, Input: input, Copy: c.DescribeRootFoldersRequest}
 }
 

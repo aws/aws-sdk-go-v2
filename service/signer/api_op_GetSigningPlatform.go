@@ -165,6 +165,7 @@ func (c *Client) GetSigningPlatformRequest(input *GetSigningPlatformInput) GetSi
 	}
 
 	req := c.newRequest(op, input, &GetSigningPlatformOutput{})
+
 	return GetSigningPlatformRequest{Request: req, Input: input, Copy: c.GetSigningPlatformRequest}
 }
 

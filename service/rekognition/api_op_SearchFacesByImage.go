@@ -174,6 +174,7 @@ func (c *Client) SearchFacesByImageRequest(input *SearchFacesByImageInput) Searc
 	}
 
 	req := c.newRequest(op, input, &SearchFacesByImageOutput{})
+
 	return SearchFacesByImageRequest{Request: req, Input: input, Copy: c.SearchFacesByImageRequest}
 }
 

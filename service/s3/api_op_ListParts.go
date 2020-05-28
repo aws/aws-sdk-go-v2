@@ -384,6 +384,7 @@ func (c *Client) ListPartsRequest(input *ListPartsInput) ListPartsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListPartsOutput{})
+
 	return ListPartsRequest{Request: req, Input: input, Copy: c.ListPartsRequest}
 }
 

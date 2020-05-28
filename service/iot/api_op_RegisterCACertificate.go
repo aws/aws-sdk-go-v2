@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -27,6 +28,15 @@ type RegisterCACertificateInput struct {
 
 	// A boolean value that specifies if the CA certificate is set to active.
 	SetAsActive *bool `location:"querystring" locationName:"setAsActive" type:"boolean"`
+
+	// Metadata which can be used to manage the CA certificate.
+	//
+	// For URI Request parameters use format: ...key1=value1&key2=value2...
+	//
+	// For the CLI command-line parameter use format: &&tags "key1=value1&key2=value2..."
+	//
+	// For the cli-input-json file use format: "tags": "key1=value1&key2=value2..."
+	Tags []Tag `locationName:"tags" type:"list"`
 
 	// The private key verification certificate.
 	//
@@ -61,6 +71,13 @@ func (s *RegisterCACertificateInput) Validate() error {
 			invalidParams.AddNested("RegistrationConfig", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -83,6 +100,18 @@ func (s RegisterCACertificateInput) MarshalFields(e protocol.FieldEncoder) error
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "registrationConfig", v, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.VerificationCertificate != nil {
 		v := *s.VerificationCertificate
@@ -169,6 +198,7 @@ func (c *Client) RegisterCACertificateRequest(input *RegisterCACertificateInput)
 	}
 
 	req := c.newRequest(op, input, &RegisterCACertificateOutput{})
+
 	return RegisterCACertificateRequest{Request: req, Input: input, Copy: c.RegisterCACertificateRequest}
 }
 

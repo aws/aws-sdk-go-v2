@@ -96,6 +96,7 @@ func (c *Client) ListLocalDisksRequest(input *ListLocalDisksInput) ListLocalDisk
 	}
 
 	req := c.newRequest(op, input, &ListLocalDisksOutput{})
+
 	return ListLocalDisksRequest{Request: req, Input: input, Copy: c.ListLocalDisksRequest}
 }
 

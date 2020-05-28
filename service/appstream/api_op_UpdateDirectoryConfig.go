@@ -90,6 +90,7 @@ func (c *Client) UpdateDirectoryConfigRequest(input *UpdateDirectoryConfigInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateDirectoryConfigOutput{})
+
 	return UpdateDirectoryConfigRequest{Request: req, Input: input, Copy: c.UpdateDirectoryConfigRequest}
 }
 

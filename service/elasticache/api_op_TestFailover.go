@@ -122,6 +122,7 @@ func (c *Client) TestFailoverRequest(input *TestFailoverInput) TestFailoverReque
 	}
 
 	req := c.newRequest(op, input, &TestFailoverOutput{})
+
 	return TestFailoverRequest{Request: req, Input: input, Copy: c.TestFailoverRequest}
 }
 

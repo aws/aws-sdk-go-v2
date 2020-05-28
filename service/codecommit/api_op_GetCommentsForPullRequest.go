@@ -109,6 +109,7 @@ func (c *Client) GetCommentsForPullRequestRequest(input *GetCommentsForPullReque
 	}
 
 	req := c.newRequest(op, input, &GetCommentsForPullRequestOutput{})
+
 	return GetCommentsForPullRequestRequest{Request: req, Input: input, Copy: c.GetCommentsForPullRequestRequest}
 }
 

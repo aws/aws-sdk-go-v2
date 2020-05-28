@@ -115,6 +115,7 @@ func (c *Client) ModifyDBParameterGroupRequest(input *ModifyDBParameterGroupInpu
 	}
 
 	req := c.newRequest(op, input, &ModifyDBParameterGroupOutput{})
+
 	return ModifyDBParameterGroupRequest{Request: req, Input: input, Copy: c.ModifyDBParameterGroupRequest}
 }
 

@@ -160,6 +160,7 @@ func (c *Client) ListTypedLinkFacetAttributesRequest(input *ListTypedLinkFacetAt
 	}
 
 	req := c.newRequest(op, input, &ListTypedLinkFacetAttributesOutput{})
+
 	return ListTypedLinkFacetAttributesRequest{Request: req, Input: input, Copy: c.ListTypedLinkFacetAttributesRequest}
 }
 

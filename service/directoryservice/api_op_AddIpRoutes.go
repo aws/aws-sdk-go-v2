@@ -140,6 +140,7 @@ func (c *Client) AddIpRoutesRequest(input *AddIpRoutesInput) AddIpRoutesRequest 
 	}
 
 	req := c.newRequest(op, input, &AddIpRoutesOutput{})
+
 	return AddIpRoutesRequest{Request: req, Input: input, Copy: c.AddIpRoutesRequest}
 }
 

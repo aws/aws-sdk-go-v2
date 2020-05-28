@@ -137,6 +137,7 @@ func (c *Client) DetachObjectRequest(input *DetachObjectInput) DetachObjectReque
 	}
 
 	req := c.newRequest(op, input, &DetachObjectOutput{})
+
 	return DetachObjectRequest{Request: req, Input: input, Copy: c.DetachObjectRequest}
 }
 

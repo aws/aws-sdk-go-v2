@@ -91,6 +91,7 @@ func (c *Client) DescribeEffectivePolicyRequest(input *DescribeEffectivePolicyIn
 	}
 
 	req := c.newRequest(op, input, &DescribeEffectivePolicyOutput{})
+
 	return DescribeEffectivePolicyRequest{Request: req, Input: input, Copy: c.DescribeEffectivePolicyRequest}
 }
 

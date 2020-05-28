@@ -77,6 +77,7 @@ func (c *Client) ListPhoneNumbersOptedOutRequest(input *ListPhoneNumbersOptedOut
 	}
 
 	req := c.newRequest(op, input, &ListPhoneNumbersOptedOutOutput{})
+
 	return ListPhoneNumbersOptedOutRequest{Request: req, Input: input, Copy: c.ListPhoneNumbersOptedOutRequest}
 }
 

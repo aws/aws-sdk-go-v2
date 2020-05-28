@@ -120,6 +120,7 @@ func (c *Client) ListTrainingJobsRequest(input *ListTrainingJobsInput) ListTrain
 	}
 
 	req := c.newRequest(op, input, &ListTrainingJobsOutput{})
+
 	return ListTrainingJobsRequest{Request: req, Input: input, Copy: c.ListTrainingJobsRequest}
 }
 

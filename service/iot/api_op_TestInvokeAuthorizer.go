@@ -31,7 +31,7 @@ type TestInvokeAuthorizerInput struct {
 	Token *string `locationName:"token" min:"1" type:"string"`
 
 	// The signature made with the token and your custom authentication service's
-	// private key.
+	// private key. This value must be Base-64-encoded.
 	TokenSignature *string `locationName:"tokenSignature" min:"1" type:"string"`
 }
 
@@ -213,6 +213,7 @@ func (c *Client) TestInvokeAuthorizerRequest(input *TestInvokeAuthorizerInput) T
 	}
 
 	req := c.newRequest(op, input, &TestInvokeAuthorizerOutput{})
+
 	return TestInvokeAuthorizerRequest{Request: req, Input: input, Copy: c.TestInvokeAuthorizerRequest}
 }
 

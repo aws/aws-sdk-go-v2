@@ -136,6 +136,7 @@ func (c *Client) DeleteWebACLRequest(input *DeleteWebACLInput) DeleteWebACLReque
 	}
 
 	req := c.newRequest(op, input, &DeleteWebACLOutput{})
+
 	return DeleteWebACLRequest{Request: req, Input: input, Copy: c.DeleteWebACLRequest}
 }
 

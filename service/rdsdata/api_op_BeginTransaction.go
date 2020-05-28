@@ -150,6 +150,7 @@ func (c *Client) BeginTransactionRequest(input *BeginTransactionInput) BeginTran
 	}
 
 	req := c.newRequest(op, input, &BeginTransactionOutput{})
+
 	return BeginTransactionRequest{Request: req, Input: input, Copy: c.BeginTransactionRequest}
 }
 

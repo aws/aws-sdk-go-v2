@@ -121,6 +121,7 @@ func (c *Client) ListScheduledAuditsRequest(input *ListScheduledAuditsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListScheduledAuditsOutput{})
+
 	return ListScheduledAuditsRequest{Request: req, Input: input, Copy: c.ListScheduledAuditsRequest}
 }
 

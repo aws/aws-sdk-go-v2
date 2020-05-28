@@ -137,6 +137,7 @@ func (c *Client) ListApplicationVersionsRequest(input *ListApplicationVersionsIn
 	}
 
 	req := c.newRequest(op, input, &ListApplicationVersionsOutput{})
+
 	return ListApplicationVersionsRequest{Request: req, Input: input, Copy: c.ListApplicationVersionsRequest}
 }
 

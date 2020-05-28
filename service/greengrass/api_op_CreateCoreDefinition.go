@@ -180,6 +180,7 @@ func (c *Client) CreateCoreDefinitionRequest(input *CreateCoreDefinitionInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateCoreDefinitionOutput{})
+
 	return CreateCoreDefinitionRequest{Request: req, Input: input, Copy: c.CreateCoreDefinitionRequest}
 }
 

@@ -94,6 +94,7 @@ func (c *Client) AttachLoadBalancerToSubnetsRequest(input *AttachLoadBalancerToS
 	}
 
 	req := c.newRequest(op, input, &AttachLoadBalancerToSubnetsOutput{})
+
 	return AttachLoadBalancerToSubnetsRequest{Request: req, Input: input, Copy: c.AttachLoadBalancerToSubnetsRequest}
 }
 

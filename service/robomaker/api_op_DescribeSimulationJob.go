@@ -375,6 +375,7 @@ func (c *Client) DescribeSimulationJobRequest(input *DescribeSimulationJobInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeSimulationJobOutput{})
+
 	return DescribeSimulationJobRequest{Request: req, Input: input, Copy: c.DescribeSimulationJobRequest}
 }
 

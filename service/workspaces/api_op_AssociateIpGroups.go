@@ -85,6 +85,7 @@ func (c *Client) AssociateIpGroupsRequest(input *AssociateIpGroupsInput) Associa
 	}
 
 	req := c.newRequest(op, input, &AssociateIpGroupsOutput{})
+
 	return AssociateIpGroupsRequest{Request: req, Input: input, Copy: c.AssociateIpGroupsRequest}
 }
 

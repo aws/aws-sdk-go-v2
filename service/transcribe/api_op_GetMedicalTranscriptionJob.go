@@ -82,6 +82,7 @@ func (c *Client) GetMedicalTranscriptionJobRequest(input *GetMedicalTranscriptio
 	}
 
 	req := c.newRequest(op, input, &GetMedicalTranscriptionJobOutput{})
+
 	return GetMedicalTranscriptionJobRequest{Request: req, Input: input, Copy: c.GetMedicalTranscriptionJobRequest}
 }
 

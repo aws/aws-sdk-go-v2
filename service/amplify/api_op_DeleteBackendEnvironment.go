@@ -126,6 +126,7 @@ func (c *Client) DeleteBackendEnvironmentRequest(input *DeleteBackendEnvironment
 	}
 
 	req := c.newRequest(op, input, &DeleteBackendEnvironmentOutput{})
+
 	return DeleteBackendEnvironmentRequest{Request: req, Input: input, Copy: c.DeleteBackendEnvironmentRequest}
 }
 

@@ -101,6 +101,7 @@ func (c *Client) EnableKeyRotationRequest(input *EnableKeyRotationInput) EnableK
 	req := c.newRequest(op, input, &EnableKeyRotationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return EnableKeyRotationRequest{Request: req, Input: input, Copy: c.EnableKeyRotationRequest}
 }
 

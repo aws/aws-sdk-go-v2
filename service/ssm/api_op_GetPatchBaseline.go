@@ -128,6 +128,7 @@ func (c *Client) GetPatchBaselineRequest(input *GetPatchBaselineInput) GetPatchB
 	}
 
 	req := c.newRequest(op, input, &GetPatchBaselineOutput{})
+
 	return GetPatchBaselineRequest{Request: req, Input: input, Copy: c.GetPatchBaselineRequest}
 }
 

@@ -105,6 +105,7 @@ func (c *Client) ListSubscriptionDefinitionsRequest(input *ListSubscriptionDefin
 	}
 
 	req := c.newRequest(op, input, &ListSubscriptionDefinitionsOutput{})
+
 	return ListSubscriptionDefinitionsRequest{Request: req, Input: input, Copy: c.ListSubscriptionDefinitionsRequest}
 }
 

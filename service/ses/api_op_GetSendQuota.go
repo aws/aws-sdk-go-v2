@@ -72,6 +72,7 @@ func (c *Client) GetSendQuotaRequest(input *GetSendQuotaInput) GetSendQuotaReque
 	}
 
 	req := c.newRequest(op, input, &GetSendQuotaOutput{})
+
 	return GetSendQuotaRequest{Request: req, Input: input, Copy: c.GetSendQuotaRequest}
 }
 

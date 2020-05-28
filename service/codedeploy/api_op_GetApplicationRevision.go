@@ -96,6 +96,7 @@ func (c *Client) GetApplicationRevisionRequest(input *GetApplicationRevisionInpu
 	}
 
 	req := c.newRequest(op, input, &GetApplicationRevisionOutput{})
+
 	return GetApplicationRevisionRequest{Request: req, Input: input, Copy: c.GetApplicationRevisionRequest}
 }
 

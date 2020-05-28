@@ -147,6 +147,7 @@ func (c *Client) SearchSchemasRequest(input *SearchSchemasInput) SearchSchemasRe
 	}
 
 	req := c.newRequest(op, input, &SearchSchemasOutput{})
+
 	return SearchSchemasRequest{Request: req, Input: input, Copy: c.SearchSchemasRequest}
 }
 

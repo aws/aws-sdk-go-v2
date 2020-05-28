@@ -123,6 +123,7 @@ func (c *Client) DeleteStreamRequest(input *DeleteStreamInput) DeleteStreamReque
 	}
 
 	req := c.newRequest(op, input, &DeleteStreamOutput{})
+
 	return DeleteStreamRequest{Request: req, Input: input, Copy: c.DeleteStreamRequest}
 }
 

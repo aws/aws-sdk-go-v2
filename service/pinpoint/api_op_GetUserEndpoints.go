@@ -116,6 +116,7 @@ func (c *Client) GetUserEndpointsRequest(input *GetUserEndpointsInput) GetUserEn
 	}
 
 	req := c.newRequest(op, input, &GetUserEndpointsOutput{})
+
 	return GetUserEndpointsRequest{Request: req, Input: input, Copy: c.GetUserEndpointsRequest}
 }
 

@@ -122,6 +122,7 @@ func (c *Client) SearchNetworkProfilesRequest(input *SearchNetworkProfilesInput)
 	}
 
 	req := c.newRequest(op, input, &SearchNetworkProfilesOutput{})
+
 	return SearchNetworkProfilesRequest{Request: req, Input: input, Copy: c.SearchNetworkProfilesRequest}
 }
 

@@ -130,6 +130,7 @@ func (c *Client) DescribeClusterSecurityGroupsRequest(input *DescribeClusterSecu
 	}
 
 	req := c.newRequest(op, input, &DescribeClusterSecurityGroupsOutput{})
+
 	return DescribeClusterSecurityGroupsRequest{Request: req, Input: input, Copy: c.DescribeClusterSecurityGroupsRequest}
 }
 

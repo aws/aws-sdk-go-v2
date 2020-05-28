@@ -74,6 +74,7 @@ func (c *Client) DisassociateSkillFromUsersRequest(input *DisassociateSkillFromU
 	}
 
 	req := c.newRequest(op, input, &DisassociateSkillFromUsersOutput{})
+
 	return DisassociateSkillFromUsersRequest{Request: req, Input: input, Copy: c.DisassociateSkillFromUsersRequest}
 }
 

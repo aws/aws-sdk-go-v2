@@ -96,6 +96,7 @@ func (c *Client) UpdateConditionalForwarderRequest(input *UpdateConditionalForwa
 	}
 
 	req := c.newRequest(op, input, &UpdateConditionalForwarderOutput{})
+
 	return UpdateConditionalForwarderRequest{Request: req, Input: input, Copy: c.UpdateConditionalForwarderRequest}
 }
 

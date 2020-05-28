@@ -121,6 +121,7 @@ func (c *Client) ListHandshakesForAccountRequest(input *ListHandshakesForAccount
 	}
 
 	req := c.newRequest(op, input, &ListHandshakesForAccountOutput{})
+
 	return ListHandshakesForAccountRequest{Request: req, Input: input, Copy: c.ListHandshakesForAccountRequest}
 }
 

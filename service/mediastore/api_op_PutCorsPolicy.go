@@ -109,6 +109,7 @@ func (c *Client) PutCorsPolicyRequest(input *PutCorsPolicyInput) PutCorsPolicyRe
 	}
 
 	req := c.newRequest(op, input, &PutCorsPolicyOutput{})
+
 	return PutCorsPolicyRequest{Request: req, Input: input, Copy: c.PutCorsPolicyRequest}
 }
 

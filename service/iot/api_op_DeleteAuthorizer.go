@@ -93,6 +93,7 @@ func (c *Client) DeleteAuthorizerRequest(input *DeleteAuthorizerInput) DeleteAut
 	}
 
 	req := c.newRequest(op, input, &DeleteAuthorizerOutput{})
+
 	return DeleteAuthorizerRequest{Request: req, Input: input, Copy: c.DeleteAuthorizerRequest}
 }
 

@@ -100,6 +100,7 @@ func (c *Client) ListTestGridSessionActionsRequest(input *ListTestGridSessionAct
 	}
 
 	req := c.newRequest(op, input, &ListTestGridSessionActionsOutput{})
+
 	return ListTestGridSessionActionsRequest{Request: req, Input: input, Copy: c.ListTestGridSessionActionsRequest}
 }
 

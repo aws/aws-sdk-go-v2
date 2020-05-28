@@ -79,6 +79,7 @@ func (c *Client) GetHITRequest(input *GetHITInput) GetHITRequest {
 	}
 
 	req := c.newRequest(op, input, &GetHITOutput{})
+
 	return GetHITRequest{Request: req, Input: input, Copy: c.GetHITRequest}
 }
 

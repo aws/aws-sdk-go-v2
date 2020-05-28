@@ -38,7 +38,8 @@ type QueryInput struct {
 	PageNumber *int64 `type:"integer"`
 
 	// Sets the number of results that are returned in each page of results. The
-	// default page size is 100.
+	// default page size is 10. The maximum number of results returned is 100. If
+	// you ask for more than 100 results, only 100 are returned.
 	PageSize *int64 `type:"integer"`
 
 	// Sets the type of query. Only results for the specified query type are returned.
@@ -167,6 +168,7 @@ func (c *Client) QueryRequest(input *QueryInput) QueryRequest {
 	}
 
 	req := c.newRequest(op, input, &QueryOutput{})
+
 	return QueryRequest{Request: req, Input: input, Copy: c.QueryRequest}
 }
 

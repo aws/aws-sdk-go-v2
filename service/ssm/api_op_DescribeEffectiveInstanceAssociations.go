@@ -92,6 +92,7 @@ func (c *Client) DescribeEffectiveInstanceAssociationsRequest(input *DescribeEff
 	}
 
 	req := c.newRequest(op, input, &DescribeEffectiveInstanceAssociationsOutput{})
+
 	return DescribeEffectiveInstanceAssociationsRequest{Request: req, Input: input, Copy: c.DescribeEffectiveInstanceAssociationsRequest}
 }
 

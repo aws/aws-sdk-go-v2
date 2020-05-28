@@ -82,6 +82,7 @@ func (c *Client) DeleteReceiptFilterRequest(input *DeleteReceiptFilterInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteReceiptFilterOutput{})
+
 	return DeleteReceiptFilterRequest{Request: req, Input: input, Copy: c.DeleteReceiptFilterRequest}
 }
 

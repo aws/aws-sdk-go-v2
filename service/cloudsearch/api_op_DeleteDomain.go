@@ -84,6 +84,7 @@ func (c *Client) DeleteDomainRequest(input *DeleteDomainInput) DeleteDomainReque
 	}
 
 	req := c.newRequest(op, input, &DeleteDomainOutput{})
+
 	return DeleteDomainRequest{Request: req, Input: input, Copy: c.DeleteDomainRequest}
 }
 

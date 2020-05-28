@@ -28,6 +28,9 @@ type BatchGetDeploymentTargetsInput struct {
 	//    * For deployments that use the Amazon ECS compute platform, the target
 	//    IDs are pairs of Amazon ECS clusters and services specified using the
 	//    format <clustername>:<servicename>. Their target type is ecsTarget.
+	//
+	//    * For deployments that are deployed with AWS CloudFormation, the target
+	//    IDs are CloudFormation stack IDs. Their target type is cloudFormationTarget.
 	TargetIds []string `locationName:"targetIds" type:"list"`
 }
 
@@ -49,6 +52,9 @@ type BatchGetDeploymentTargetsOutput struct {
 	//    function.
 	//
 	//    * Amazon ECS: The target object is an Amazon ECS service.
+	//
+	//    * CloudFormation: The target object is an AWS CloudFormation blue/green
+	//    deployment.
 	DeploymentTargets []DeploymentTarget `locationName:"deploymentTargets" type:"list"`
 }
 
@@ -67,13 +73,17 @@ const opBatchGetDeploymentTargets = "BatchGetDeploymentTargets"
 // BatchGetDeploymentInstances. The maximum number of targets that can be returned
 // is 25.
 //
-// The type of targets returned depends on the deployment's compute platform:
+// The type of targets returned depends on the deployment's compute platform
+// or deployment method:
 //
 //    * EC2/On-premises: Information about EC2 instance targets.
 //
 //    * AWS Lambda: Information about Lambda functions targets.
 //
 //    * Amazon ECS: Information about Amazon ECS service targets.
+//
+//    * CloudFormation: Information about targets of blue/green deployments
+//    initiated by a CloudFormation stack update.
 //
 //    // Example sending a request using BatchGetDeploymentTargetsRequest.
 //    req := client.BatchGetDeploymentTargetsRequest(params)
@@ -95,6 +105,7 @@ func (c *Client) BatchGetDeploymentTargetsRequest(input *BatchGetDeploymentTarge
 	}
 
 	req := c.newRequest(op, input, &BatchGetDeploymentTargetsOutput{})
+
 	return BatchGetDeploymentTargetsRequest{Request: req, Input: input, Copy: c.BatchGetDeploymentTargetsRequest}
 }
 

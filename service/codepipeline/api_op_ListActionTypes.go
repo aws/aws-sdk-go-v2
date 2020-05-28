@@ -93,6 +93,7 @@ func (c *Client) ListActionTypesRequest(input *ListActionTypesInput) ListActionT
 	}
 
 	req := c.newRequest(op, input, &ListActionTypesOutput{})
+
 	return ListActionTypesRequest{Request: req, Input: input, Copy: c.ListActionTypesRequest}
 }
 

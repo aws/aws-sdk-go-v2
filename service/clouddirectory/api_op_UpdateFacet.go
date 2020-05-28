@@ -152,6 +152,7 @@ func (c *Client) UpdateFacetRequest(input *UpdateFacetInput) UpdateFacetRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateFacetOutput{})
+
 	return UpdateFacetRequest{Request: req, Input: input, Copy: c.UpdateFacetRequest}
 }
 

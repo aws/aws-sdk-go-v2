@@ -79,6 +79,7 @@ func (c *Client) ListTaskExecutionsRequest(input *ListTaskExecutionsInput) ListT
 	}
 
 	req := c.newRequest(op, input, &ListTaskExecutionsOutput{})
+
 	return ListTaskExecutionsRequest{Request: req, Input: input, Copy: c.ListTaskExecutionsRequest}
 }
 

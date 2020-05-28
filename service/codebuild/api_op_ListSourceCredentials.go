@@ -59,6 +59,7 @@ func (c *Client) ListSourceCredentialsRequest(input *ListSourceCredentialsInput)
 	}
 
 	req := c.newRequest(op, input, &ListSourceCredentialsOutput{})
+
 	return ListSourceCredentialsRequest{Request: req, Input: input, Copy: c.ListSourceCredentialsRequest}
 }
 

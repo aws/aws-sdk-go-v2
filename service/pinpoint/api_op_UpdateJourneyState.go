@@ -130,6 +130,7 @@ func (c *Client) UpdateJourneyStateRequest(input *UpdateJourneyStateInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateJourneyStateOutput{})
+
 	return UpdateJourneyStateRequest{Request: req, Input: input, Copy: c.UpdateJourneyStateRequest}
 }
 

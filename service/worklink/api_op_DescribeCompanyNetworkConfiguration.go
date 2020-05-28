@@ -135,6 +135,7 @@ func (c *Client) DescribeCompanyNetworkConfigurationRequest(input *DescribeCompa
 	}
 
 	req := c.newRequest(op, input, &DescribeCompanyNetworkConfigurationOutput{})
+
 	return DescribeCompanyNetworkConfigurationRequest{Request: req, Input: input, Copy: c.DescribeCompanyNetworkConfigurationRequest}
 }
 

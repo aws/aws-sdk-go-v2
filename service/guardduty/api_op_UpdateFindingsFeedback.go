@@ -139,6 +139,7 @@ func (c *Client) UpdateFindingsFeedbackRequest(input *UpdateFindingsFeedbackInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateFindingsFeedbackOutput{})
+
 	return UpdateFindingsFeedbackRequest{Request: req, Input: input, Copy: c.UpdateFindingsFeedbackRequest}
 }
 

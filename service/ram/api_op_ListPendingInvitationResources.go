@@ -146,6 +146,7 @@ func (c *Client) ListPendingInvitationResourcesRequest(input *ListPendingInvitat
 	}
 
 	req := c.newRequest(op, input, &ListPendingInvitationResourcesOutput{})
+
 	return ListPendingInvitationResourcesRequest{Request: req, Input: input, Copy: c.ListPendingInvitationResourcesRequest}
 }
 

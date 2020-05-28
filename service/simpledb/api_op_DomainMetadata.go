@@ -94,6 +94,7 @@ func (c *Client) DomainMetadataRequest(input *DomainMetadataInput) DomainMetadat
 	}
 
 	req := c.newRequest(op, input, &DomainMetadataOutput{})
+
 	return DomainMetadataRequest{Request: req, Input: input, Copy: c.DomainMetadataRequest}
 }
 

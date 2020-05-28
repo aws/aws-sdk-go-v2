@@ -139,6 +139,7 @@ func (c *Client) GetReusableDelegationSetLimitRequest(input *GetReusableDelegati
 	}
 
 	req := c.newRequest(op, input, &GetReusableDelegationSetLimitOutput{})
+
 	return GetReusableDelegationSetLimitRequest{Request: req, Input: input, Copy: c.GetReusableDelegationSetLimitRequest}
 }
 

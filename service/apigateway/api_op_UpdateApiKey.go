@@ -219,6 +219,7 @@ func (c *Client) UpdateApiKeyRequest(input *UpdateApiKeyInput) UpdateApiKeyReque
 	}
 
 	req := c.newRequest(op, input, &UpdateApiKeyOutput{})
+
 	return UpdateApiKeyRequest{Request: req, Input: input, Copy: c.UpdateApiKeyRequest}
 }
 

@@ -166,6 +166,7 @@ func (c *Client) UpdateMonitoringRequest(input *UpdateMonitoringInput) UpdateMon
 	}
 
 	req := c.newRequest(op, input, &UpdateMonitoringOutput{})
+
 	return UpdateMonitoringRequest{Request: req, Input: input, Copy: c.UpdateMonitoringRequest}
 }
 

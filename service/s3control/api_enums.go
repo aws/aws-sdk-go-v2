@@ -125,6 +125,8 @@ const (
 	OperationNameS3putObjectAcl          OperationName = "S3PutObjectAcl"
 	OperationNameS3putObjectTagging      OperationName = "S3PutObjectTagging"
 	OperationNameS3initiateRestoreObject OperationName = "S3InitiateRestoreObject"
+	OperationNameS3putObjectLegalHold    OperationName = "S3PutObjectLegalHold"
+	OperationNameS3putObjectRetention    OperationName = "S3PutObjectRetention"
 )
 
 func (enum OperationName) MarshalValue() (string, error) {
@@ -257,6 +259,23 @@ func (enum S3ObjectLockMode) MarshalValue() (string, error) {
 }
 
 func (enum S3ObjectLockMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type S3ObjectLockRetentionMode string
+
+// Enum values for S3ObjectLockRetentionMode
+const (
+	S3ObjectLockRetentionModeCompliance S3ObjectLockRetentionMode = "COMPLIANCE"
+	S3ObjectLockRetentionModeGovernance S3ObjectLockRetentionMode = "GOVERNANCE"
+)
+
+func (enum S3ObjectLockRetentionMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum S3ObjectLockRetentionMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

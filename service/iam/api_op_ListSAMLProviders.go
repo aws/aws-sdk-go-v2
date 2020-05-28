@@ -60,6 +60,7 @@ func (c *Client) ListSAMLProvidersRequest(input *ListSAMLProvidersInput) ListSAM
 	}
 
 	req := c.newRequest(op, input, &ListSAMLProvidersOutput{})
+
 	return ListSAMLProvidersRequest{Request: req, Input: input, Copy: c.ListSAMLProvidersRequest}
 }
 

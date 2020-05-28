@@ -84,6 +84,7 @@ func (c *Client) ListTagsForDomainRequest(input *ListTagsForDomainInput) ListTag
 	}
 
 	req := c.newRequest(op, input, &ListTagsForDomainOutput{})
+
 	return ListTagsForDomainRequest{Request: req, Input: input, Copy: c.ListTagsForDomainRequest}
 }
 

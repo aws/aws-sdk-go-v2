@@ -90,6 +90,7 @@ func (c *Client) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 	}
 
 	req := c.newRequest(op, input, &RemoveTagsOutput{})
+
 	return RemoveTagsRequest{Request: req, Input: input, Copy: c.RemoveTagsRequest}
 }
 

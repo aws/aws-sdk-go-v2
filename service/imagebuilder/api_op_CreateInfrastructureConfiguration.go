@@ -286,6 +286,7 @@ func (c *Client) CreateInfrastructureConfigurationRequest(input *CreateInfrastru
 	}
 
 	req := c.newRequest(op, input, &CreateInfrastructureConfigurationOutput{})
+
 	return CreateInfrastructureConfigurationRequest{Request: req, Input: input, Copy: c.CreateInfrastructureConfigurationRequest}
 }
 

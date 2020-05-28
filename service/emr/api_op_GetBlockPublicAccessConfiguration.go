@@ -84,6 +84,7 @@ func (c *Client) GetBlockPublicAccessConfigurationRequest(input *GetBlockPublicA
 	}
 
 	req := c.newRequest(op, input, &GetBlockPublicAccessConfigurationOutput{})
+
 	return GetBlockPublicAccessConfigurationRequest{Request: req, Input: input, Copy: c.GetBlockPublicAccessConfigurationRequest}
 }
 

@@ -104,6 +104,7 @@ func (c *Client) DeletePartitionRequest(input *DeletePartitionInput) DeleteParti
 	}
 
 	req := c.newRequest(op, input, &DeletePartitionOutput{})
+
 	return DeletePartitionRequest{Request: req, Input: input, Copy: c.DeletePartitionRequest}
 }
 

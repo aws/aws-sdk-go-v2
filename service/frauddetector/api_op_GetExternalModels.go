@@ -94,6 +94,7 @@ func (c *Client) GetExternalModelsRequest(input *GetExternalModelsInput) GetExte
 	}
 
 	req := c.newRequest(op, input, &GetExternalModelsOutput{})
+
 	return GetExternalModelsRequest{Request: req, Input: input, Copy: c.GetExternalModelsRequest}
 }
 

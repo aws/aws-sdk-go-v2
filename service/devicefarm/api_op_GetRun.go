@@ -81,6 +81,7 @@ func (c *Client) GetRunRequest(input *GetRunInput) GetRunRequest {
 	}
 
 	req := c.newRequest(op, input, &GetRunOutput{})
+
 	return GetRunRequest{Request: req, Input: input, Copy: c.GetRunRequest}
 }
 

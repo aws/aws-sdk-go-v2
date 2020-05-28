@@ -191,6 +191,7 @@ func (c *Client) GetResourceMetricsRequest(input *GetResourceMetricsInput) GetRe
 	}
 
 	req := c.newRequest(op, input, &GetResourceMetricsOutput{})
+
 	return GetResourceMetricsRequest{Request: req, Input: input, Copy: c.GetResourceMetricsRequest}
 }
 

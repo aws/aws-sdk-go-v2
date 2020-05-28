@@ -144,6 +144,7 @@ func (c *Client) CreateVaultRequest(input *CreateVaultInput) CreateVaultRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateVaultOutput{})
+
 	return CreateVaultRequest{Request: req, Input: input, Copy: c.CreateVaultRequest}
 }
 

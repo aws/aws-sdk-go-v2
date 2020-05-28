@@ -107,6 +107,7 @@ func (c *Client) DeleteDocumentationVersionRequest(input *DeleteDocumentationVer
 	req := c.newRequest(op, input, &DeleteDocumentationVersionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteDocumentationVersionRequest{Request: req, Input: input, Copy: c.DeleteDocumentationVersionRequest}
 }
 

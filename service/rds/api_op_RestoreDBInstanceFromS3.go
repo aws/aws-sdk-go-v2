@@ -415,6 +415,7 @@ func (c *Client) RestoreDBInstanceFromS3Request(input *RestoreDBInstanceFromS3In
 	}
 
 	req := c.newRequest(op, input, &RestoreDBInstanceFromS3Output{})
+
 	return RestoreDBInstanceFromS3Request{Request: req, Input: input, Copy: c.RestoreDBInstanceFromS3Request}
 }
 

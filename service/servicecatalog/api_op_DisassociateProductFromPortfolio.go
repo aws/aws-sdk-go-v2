@@ -97,6 +97,7 @@ func (c *Client) DisassociateProductFromPortfolioRequest(input *DisassociateProd
 	}
 
 	req := c.newRequest(op, input, &DisassociateProductFromPortfolioOutput{})
+
 	return DisassociateProductFromPortfolioRequest{Request: req, Input: input, Copy: c.DisassociateProductFromPortfolioRequest}
 }
 

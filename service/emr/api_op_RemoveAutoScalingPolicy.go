@@ -84,6 +84,7 @@ func (c *Client) RemoveAutoScalingPolicyRequest(input *RemoveAutoScalingPolicyIn
 	}
 
 	req := c.newRequest(op, input, &RemoveAutoScalingPolicyOutput{})
+
 	return RemoveAutoScalingPolicyRequest{Request: req, Input: input, Copy: c.RemoveAutoScalingPolicyRequest}
 }
 

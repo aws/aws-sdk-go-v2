@@ -146,6 +146,7 @@ func (c *Client) CreateSystemInstanceRequest(input *CreateSystemInstanceInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateSystemInstanceOutput{})
+
 	return CreateSystemInstanceRequest{Request: req, Input: input, Copy: c.CreateSystemInstanceRequest}
 }
 

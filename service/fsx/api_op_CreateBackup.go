@@ -130,6 +130,7 @@ func (c *Client) CreateBackupRequest(input *CreateBackupInput) CreateBackupReque
 	}
 
 	req := c.newRequest(op, input, &CreateBackupOutput{})
+
 	return CreateBackupRequest{Request: req, Input: input, Copy: c.CreateBackupRequest}
 }
 

@@ -149,6 +149,7 @@ func (c *Client) DescribeDataSourcesRequest(input *DescribeDataSourcesInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeDataSourcesOutput{})
+
 	return DescribeDataSourcesRequest{Request: req, Input: input, Copy: c.DescribeDataSourcesRequest}
 }
 

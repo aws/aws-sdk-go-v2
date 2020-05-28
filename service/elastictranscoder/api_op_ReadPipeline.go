@@ -121,6 +121,7 @@ func (c *Client) ReadPipelineRequest(input *ReadPipelineInput) ReadPipelineReque
 	}
 
 	req := c.newRequest(op, input, &ReadPipelineOutput{})
+
 	return ReadPipelineRequest{Request: req, Input: input, Copy: c.ReadPipelineRequest}
 }
 

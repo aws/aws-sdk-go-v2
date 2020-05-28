@@ -74,6 +74,7 @@ func (c *Client) GetCatalogImportStatusRequest(input *GetCatalogImportStatusInpu
 	}
 
 	req := c.newRequest(op, input, &GetCatalogImportStatusOutput{})
+
 	return GetCatalogImportStatusRequest{Request: req, Input: input, Copy: c.GetCatalogImportStatusRequest}
 }
 

@@ -86,6 +86,7 @@ func (c *Client) StopLoggingRequest(input *StopLoggingInput) StopLoggingRequest 
 	}
 
 	req := c.newRequest(op, input, &StopLoggingOutput{})
+
 	return StopLoggingRequest{Request: req, Input: input, Copy: c.StopLoggingRequest}
 }
 

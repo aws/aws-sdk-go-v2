@@ -159,6 +159,7 @@ func (c *Client) DescribeTemplatePermissionsRequest(input *DescribeTemplatePermi
 	}
 
 	req := c.newRequest(op, input, &DescribeTemplatePermissionsOutput{})
+
 	return DescribeTemplatePermissionsRequest{Request: req, Input: input, Copy: c.DescribeTemplatePermissionsRequest}
 }
 

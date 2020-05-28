@@ -99,6 +99,7 @@ func (c *Client) AddClientIDToOpenIDConnectProviderRequest(input *AddClientIDToO
 	req := c.newRequest(op, input, &AddClientIDToOpenIDConnectProviderOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AddClientIDToOpenIDConnectProviderRequest{Request: req, Input: input, Copy: c.AddClientIDToOpenIDConnectProviderRequest}
 }
 

@@ -76,9 +76,8 @@ func (s AttachmentDetails) String() string {
 //    the values returned by the call to DescribeSeverityLevels. The possible
 //    values are: low, normal, high, urgent, and critical.
 //
-//    * status. The status of the case in the AWS Support Center. The possible
-//    values are: resolved, pending-customer-action, opened, unassigned, and
-//    work-in-progress.
+//    * status. The status of the case in the AWS Support Center. Valid values:
+//    opened pending-customer-action reopened resolved unassigned work-in-progress
 //
 //    * subject. The subject line of the case.
 //
@@ -119,8 +118,21 @@ type CaseDetails struct {
 	// The code for the severity level returned by the call to DescribeSeverityLevels.
 	SeverityCode *string `locationName:"severityCode" type:"string"`
 
-	// The status of the case. Valid values: resolved | pending-customer-action
-	// | opened | unassigned | work-in-progress.
+	// The status of the case.
+	//
+	// Valid values:
+	//
+	//    * opened
+	//
+	//    * pending-customer-action
+	//
+	//    * reopened
+	//
+	//    * resolved
+	//
+	//    * unassigned
+	//
+	//    * work-in-progress
 	Status *string `locationName:"status" type:"string"`
 
 	// The subject line for the case in the AWS Support Center.
@@ -289,7 +301,7 @@ type TrustedAdvisorCheckDescription struct {
 	Category *string `locationName:"category" type:"string" required:"true"`
 
 	// The description of the Trusted Advisor check, which includes the alert criteria
-	// and recommended actions (contains HTML markup).
+	// and recommended operations (contains HTML markup).
 	//
 	// Description is a required field
 	Description *string `locationName:"description" type:"string" required:"true"`
@@ -442,19 +454,19 @@ func (s TrustedAdvisorCheckSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The estimated cost savings that might be realized if the recommended actions
+// The estimated cost savings that might be realized if the recommended operations
 // are taken.
 type TrustedAdvisorCostOptimizingSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The estimated monthly savings that might be realized if the recommended actions
+	// The estimated monthly savings that might be realized if the recommended operations
 	// are taken.
 	//
 	// EstimatedMonthlySavings is a required field
 	EstimatedMonthlySavings *float64 `locationName:"estimatedMonthlySavings" type:"double" required:"true"`
 
 	// The estimated percentage of savings that might be realized if the recommended
-	// actions are taken.
+	// operations are taken.
 	//
 	// EstimatedPercentMonthlySavings is a required field
 	EstimatedPercentMonthlySavings *float64 `locationName:"estimatedPercentMonthlySavings" type:"double" required:"true"`

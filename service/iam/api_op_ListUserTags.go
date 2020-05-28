@@ -126,6 +126,7 @@ func (c *Client) ListUserTagsRequest(input *ListUserTagsInput) ListUserTagsReque
 	}
 
 	req := c.newRequest(op, input, &ListUserTagsOutput{})
+
 	return ListUserTagsRequest{Request: req, Input: input, Copy: c.ListUserTagsRequest}
 }
 

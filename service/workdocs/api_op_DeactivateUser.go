@@ -112,6 +112,7 @@ func (c *Client) DeactivateUserRequest(input *DeactivateUserInput) DeactivateUse
 	req := c.newRequest(op, input, &DeactivateUserOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeactivateUserRequest{Request: req, Input: input, Copy: c.DeactivateUserRequest}
 }
 

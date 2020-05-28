@@ -246,6 +246,7 @@ func (c *Client) CreateUsagePlanRequest(input *CreateUsagePlanInput) CreateUsage
 	}
 
 	req := c.newRequest(op, input, &CreateUsagePlanOutput{})
+
 	return CreateUsagePlanRequest{Request: req, Input: input, Copy: c.CreateUsagePlanRequest}
 }
 

@@ -119,6 +119,7 @@ func (c *Client) CreateSubscriberRequest(input *CreateSubscriberInput) CreateSub
 	}
 
 	req := c.newRequest(op, input, &CreateSubscriberOutput{})
+
 	return CreateSubscriberRequest{Request: req, Input: input, Copy: c.CreateSubscriberRequest}
 }
 

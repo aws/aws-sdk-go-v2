@@ -121,6 +121,7 @@ func (c *Client) SignalResourceRequest(input *SignalResourceInput) SignalResourc
 	req := c.newRequest(op, input, &SignalResourceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SignalResourceRequest{Request: req, Input: input, Copy: c.SignalResourceRequest}
 }
 

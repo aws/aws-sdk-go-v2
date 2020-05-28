@@ -83,6 +83,7 @@ func (c *Client) VerifyTrustRequest(input *VerifyTrustInput) VerifyTrustRequest 
 	}
 
 	req := c.newRequest(op, input, &VerifyTrustOutput{})
+
 	return VerifyTrustRequest{Request: req, Input: input, Copy: c.VerifyTrustRequest}
 }
 

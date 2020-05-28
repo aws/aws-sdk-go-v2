@@ -244,6 +244,7 @@ func (c *Client) CreateNotificationRuleRequest(input *CreateNotificationRuleInpu
 	}
 
 	req := c.newRequest(op, input, &CreateNotificationRuleOutput{})
+
 	return CreateNotificationRuleRequest{Request: req, Input: input, Copy: c.CreateNotificationRuleRequest}
 }
 

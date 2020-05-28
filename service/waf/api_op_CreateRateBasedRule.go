@@ -27,7 +27,7 @@ type CreateRateBasedRuleInput struct {
 	// change the name of the metric after you create the RateBasedRule.
 	//
 	// MetricName is a required field
-	MetricName *string `type:"string" required:"true"`
+	MetricName *string `min:"1" type:"string" required:"true"`
 
 	// A friendly name or description of the RateBasedRule. You can't change the
 	// name of a RateBasedRule after you create it.
@@ -73,6 +73,9 @@ func (s *CreateRateBasedRuleInput) Validate() error {
 
 	if s.MetricName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
+	}
+	if s.MetricName != nil && len(*s.MetricName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MetricName", 1))
 	}
 
 	if s.Name == nil {
@@ -130,6 +133,16 @@ const opCreateRateBasedRule = "CreateRateBasedRule"
 // CreateRateBasedRuleRequest returns a request value for making API operation for
 // AWS WAF.
 //
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Creates a RateBasedRule. The RateBasedRule contains a RateLimit, which specifies
 // the maximum number of requests that AWS WAF allows from a specified IP address
 // in a five-minute period. The RateBasedRule also contains the IPSet objects,
@@ -137,23 +150,22 @@ const opCreateRateBasedRule = "CreateRateBasedRule"
 // you want to count or block if these requests exceed the RateLimit.
 //
 // If you add more than one predicate to a RateBasedRule, a request not only
-// must exceed the RateLimit, but it also must match all the specifications
-// to be counted or blocked. For example, suppose you add the following to a
-// RateBasedRule:
+// must exceed the RateLimit, but it also must match all the conditions to be
+// counted or blocked. For example, suppose you add the following to a RateBasedRule:
 //
 //    * An IPSet that matches the IP address 192.0.2.44/32
 //
 //    * A ByteMatchSet that matches BadBot in the User-Agent header
 //
-// Further, you specify a RateLimit of 15,000.
+// Further, you specify a RateLimit of 1,000.
 //
 // You then add the RateBasedRule to a WebACL and specify that you want to block
 // requests that meet the conditions in the rule. For a request to be blocked,
 // it must come from the IP address 192.0.2.44 and the User-Agent header in
 // the request must contain the value BadBot. Further, requests that match these
-// two conditions must be received at a rate of more than 15,000 requests every
+// two conditions must be received at a rate of more than 1,000 requests every
 // five minutes. If both conditions are met and the rate is exceeded, AWS WAF
-// blocks the requests. If the rate drops below 15,000 for a five-minute period,
+// blocks the requests. If the rate drops below 1,000 for a five-minute period,
 // AWS WAF no longer blocks the requests.
 //
 // As a second example, suppose you want to limit requests to a particular page
@@ -165,7 +177,7 @@ const opCreateRateBasedRule = "CreateRateBasedRule"
 //
 //    * A TargetString of login
 //
-// Further, you specify a RateLimit of 15,000.
+// Further, you specify a RateLimit of 1,000.
 //
 // By adding this RateBasedRule to a WebACL, you could limit requests to your
 // login page without affecting the rest of your site.
@@ -212,6 +224,7 @@ func (c *Client) CreateRateBasedRuleRequest(input *CreateRateBasedRuleInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateRateBasedRuleOutput{})
+
 	return CreateRateBasedRuleRequest{Request: req, Input: input, Copy: c.CreateRateBasedRuleRequest}
 }
 

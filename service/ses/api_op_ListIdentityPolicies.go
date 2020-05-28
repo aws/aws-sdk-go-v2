@@ -98,6 +98,7 @@ func (c *Client) ListIdentityPoliciesRequest(input *ListIdentityPoliciesInput) L
 	}
 
 	req := c.newRequest(op, input, &ListIdentityPoliciesOutput{})
+
 	return ListIdentityPoliciesRequest{Request: req, Input: input, Copy: c.ListIdentityPoliciesRequest}
 }
 

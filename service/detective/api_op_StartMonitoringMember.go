@@ -122,6 +122,7 @@ func (c *Client) StartMonitoringMemberRequest(input *StartMonitoringMemberInput)
 	req := c.newRequest(op, input, &StartMonitoringMemberOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StartMonitoringMemberRequest{Request: req, Input: input, Copy: c.StartMonitoringMemberRequest}
 }
 

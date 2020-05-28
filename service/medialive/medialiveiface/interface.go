@@ -98,6 +98,8 @@ type ClientAPI interface {
 
 	DescribeInputRequest(*medialive.DescribeInputInput) medialive.DescribeInputRequest
 
+	DescribeInputDeviceRequest(*medialive.DescribeInputDeviceInput) medialive.DescribeInputDeviceRequest
+
 	DescribeInputSecurityGroupRequest(*medialive.DescribeInputSecurityGroupInput) medialive.DescribeInputSecurityGroupRequest
 
 	DescribeMultiplexRequest(*medialive.DescribeMultiplexInput) medialive.DescribeMultiplexRequest
@@ -111,6 +113,8 @@ type ClientAPI interface {
 	DescribeScheduleRequest(*medialive.DescribeScheduleInput) medialive.DescribeScheduleRequest
 
 	ListChannelsRequest(*medialive.ListChannelsInput) medialive.ListChannelsRequest
+
+	ListInputDevicesRequest(*medialive.ListInputDevicesInput) medialive.ListInputDevicesRequest
 
 	ListInputSecurityGroupsRequest(*medialive.ListInputSecurityGroupsInput) medialive.ListInputSecurityGroupsRequest
 
@@ -142,6 +146,8 @@ type ClientAPI interface {
 
 	UpdateInputRequest(*medialive.UpdateInputInput) medialive.UpdateInputRequest
 
+	UpdateInputDeviceRequest(*medialive.UpdateInputDeviceInput) medialive.UpdateInputDeviceRequest
+
 	UpdateInputSecurityGroupRequest(*medialive.UpdateInputSecurityGroupInput) medialive.UpdateInputSecurityGroupRequest
 
 	UpdateMultiplexRequest(*medialive.UpdateMultiplexInput) medialive.UpdateMultiplexRequest
@@ -157,6 +163,12 @@ type ClientAPI interface {
 	WaitUntilChannelRunning(context.Context, *medialive.DescribeChannelInput, ...aws.WaiterOption) error
 
 	WaitUntilChannelStopped(context.Context, *medialive.DescribeChannelInput, ...aws.WaiterOption) error
+
+	WaitUntilInputAttached(context.Context, *medialive.DescribeInputInput, ...aws.WaiterOption) error
+
+	WaitUntilInputDeleted(context.Context, *medialive.DescribeInputInput, ...aws.WaiterOption) error
+
+	WaitUntilInputDetached(context.Context, *medialive.DescribeInputInput, ...aws.WaiterOption) error
 
 	WaitUntilMultiplexCreated(context.Context, *medialive.DescribeMultiplexInput, ...aws.WaiterOption) error
 

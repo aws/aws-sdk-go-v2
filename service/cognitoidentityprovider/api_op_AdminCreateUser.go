@@ -241,6 +241,7 @@ func (c *Client) AdminCreateUserRequest(input *AdminCreateUserInput) AdminCreate
 	}
 
 	req := c.newRequest(op, input, &AdminCreateUserOutput{})
+
 	return AdminCreateUserRequest{Request: req, Input: input, Copy: c.AdminCreateUserRequest}
 }
 

@@ -246,6 +246,7 @@ func (c *Client) GetPlaybackConfigurationRequest(input *GetPlaybackConfiguration
 	}
 
 	req := c.newRequest(op, input, &GetPlaybackConfigurationOutput{})
+
 	return GetPlaybackConfigurationRequest{Request: req, Input: input, Copy: c.GetPlaybackConfigurationRequest}
 }
 

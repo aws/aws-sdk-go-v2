@@ -77,6 +77,7 @@ func (c *Client) DescribeEndpointGroupRequest(input *DescribeEndpointGroupInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeEndpointGroupOutput{})
+
 	return DescribeEndpointGroupRequest{Request: req, Input: input, Copy: c.DescribeEndpointGroupRequest}
 }
 

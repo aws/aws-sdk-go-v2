@@ -70,6 +70,7 @@ func (c *Client) UpdateAccountSendingEnabledRequest(input *UpdateAccountSendingE
 	req := c.newRequest(op, input, &UpdateAccountSendingEnabledOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateAccountSendingEnabledRequest{Request: req, Input: input, Copy: c.UpdateAccountSendingEnabledRequest}
 }
 

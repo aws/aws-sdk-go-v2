@@ -105,6 +105,7 @@ func (c *Client) ListResourceDefinitionsRequest(input *ListResourceDefinitionsIn
 	}
 
 	req := c.newRequest(op, input, &ListResourceDefinitionsOutput{})
+
 	return ListResourceDefinitionsRequest{Request: req, Input: input, Copy: c.ListResourceDefinitionsRequest}
 }
 

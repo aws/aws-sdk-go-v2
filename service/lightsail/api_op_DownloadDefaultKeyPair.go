@@ -60,6 +60,7 @@ func (c *Client) DownloadDefaultKeyPairRequest(input *DownloadDefaultKeyPairInpu
 	}
 
 	req := c.newRequest(op, input, &DownloadDefaultKeyPairOutput{})
+
 	return DownloadDefaultKeyPairRequest{Request: req, Input: input, Copy: c.DownloadDefaultKeyPairRequest}
 }
 

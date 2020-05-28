@@ -101,6 +101,7 @@ func (c *Client) UpdateApprovalRuleTemplateContentRequest(input *UpdateApprovalR
 	}
 
 	req := c.newRequest(op, input, &UpdateApprovalRuleTemplateContentOutput{})
+
 	return UpdateApprovalRuleTemplateContentRequest{Request: req, Input: input, Copy: c.UpdateApprovalRuleTemplateContentRequest}
 }
 

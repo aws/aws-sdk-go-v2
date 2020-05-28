@@ -88,6 +88,7 @@ func (c *Client) PutRemediationConfigurationsRequest(input *PutRemediationConfig
 	}
 
 	req := c.newRequest(op, input, &PutRemediationConfigurationsOutput{})
+
 	return PutRemediationConfigurationsRequest{Request: req, Input: input, Copy: c.PutRemediationConfigurationsRequest}
 }
 

@@ -105,7 +105,7 @@ const opListOrganizationAdminAccounts = "ListOrganizationAdminAccounts"
 // ListOrganizationAdminAccountsRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Lists the accounts configured as AWS Organization delegated administrators.
+// Lists the accounts configured as GuardDuty delegated administrators.
 //
 //    // Example sending a request using ListOrganizationAdminAccountsRequest.
 //    req := client.ListOrganizationAdminAccountsRequest(params)
@@ -133,6 +133,7 @@ func (c *Client) ListOrganizationAdminAccountsRequest(input *ListOrganizationAdm
 	}
 
 	req := c.newRequest(op, input, &ListOrganizationAdminAccountsOutput{})
+
 	return ListOrganizationAdminAccountsRequest{Request: req, Input: input, Copy: c.ListOrganizationAdminAccountsRequest}
 }
 

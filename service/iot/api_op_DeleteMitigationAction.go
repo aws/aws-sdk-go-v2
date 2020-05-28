@@ -90,6 +90,7 @@ func (c *Client) DeleteMitigationActionRequest(input *DeleteMitigationActionInpu
 	}
 
 	req := c.newRequest(op, input, &DeleteMitigationActionOutput{})
+
 	return DeleteMitigationActionRequest{Request: req, Input: input, Copy: c.DeleteMitigationActionRequest}
 }
 

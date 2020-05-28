@@ -86,6 +86,7 @@ func (c *Client) GetCorsPolicyRequest(input *GetCorsPolicyInput) GetCorsPolicyRe
 	}
 
 	req := c.newRequest(op, input, &GetCorsPolicyOutput{})
+
 	return GetCorsPolicyRequest{Request: req, Input: input, Copy: c.GetCorsPolicyRequest}
 }
 

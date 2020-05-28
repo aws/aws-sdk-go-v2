@@ -118,6 +118,7 @@ func (c *Client) SetRiskConfigurationRequest(input *SetRiskConfigurationInput) S
 	}
 
 	req := c.newRequest(op, input, &SetRiskConfigurationOutput{})
+
 	return SetRiskConfigurationRequest{Request: req, Input: input, Copy: c.SetRiskConfigurationRequest}
 }
 

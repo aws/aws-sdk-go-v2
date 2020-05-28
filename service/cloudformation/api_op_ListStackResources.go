@@ -106,6 +106,7 @@ func (c *Client) ListStackResourcesRequest(input *ListStackResourcesInput) ListS
 	}
 
 	req := c.newRequest(op, input, &ListStackResourcesOutput{})
+
 	return ListStackResourcesRequest{Request: req, Input: input, Copy: c.ListStackResourcesRequest}
 }
 

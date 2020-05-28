@@ -126,6 +126,7 @@ func (c *Client) UpdateProfilingGroupRequest(input *UpdateProfilingGroupInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateProfilingGroupOutput{})
+
 	return UpdateProfilingGroupRequest{Request: req, Input: input, Copy: c.UpdateProfilingGroupRequest}
 }
 

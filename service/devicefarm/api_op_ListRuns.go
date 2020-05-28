@@ -100,6 +100,7 @@ func (c *Client) ListRunsRequest(input *ListRunsInput) ListRunsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListRunsOutput{})
+
 	return ListRunsRequest{Request: req, Input: input, Copy: c.ListRunsRequest}
 }
 

@@ -106,6 +106,7 @@ func (c *Client) CancelDataRepositoryTaskRequest(input *CancelDataRepositoryTask
 	}
 
 	req := c.newRequest(op, input, &CancelDataRepositoryTaskOutput{})
+
 	return CancelDataRepositoryTaskRequest{Request: req, Input: input, Copy: c.CancelDataRepositoryTaskRequest}
 }
 

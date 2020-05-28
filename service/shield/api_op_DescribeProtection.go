@@ -83,6 +83,7 @@ func (c *Client) DescribeProtectionRequest(input *DescribeProtectionInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeProtectionOutput{})
+
 	return DescribeProtectionRequest{Request: req, Input: input, Copy: c.DescribeProtectionRequest}
 }
 

@@ -81,6 +81,7 @@ func (c *Client) StartNotebookInstanceRequest(input *StartNotebookInstanceInput)
 	req := c.newRequest(op, input, &StartNotebookInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StartNotebookInstanceRequest{Request: req, Input: input, Copy: c.StartNotebookInstanceRequest}
 }
 

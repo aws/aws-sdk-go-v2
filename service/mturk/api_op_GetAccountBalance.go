@@ -61,6 +61,7 @@ func (c *Client) GetAccountBalanceRequest(input *GetAccountBalanceInput) GetAcco
 	}
 
 	req := c.newRequest(op, input, &GetAccountBalanceOutput{})
+
 	return GetAccountBalanceRequest{Request: req, Input: input, Copy: c.GetAccountBalanceRequest}
 }
 

@@ -209,6 +209,7 @@ func (c *Client) UpdateTableRequest(input *UpdateTableInput) UpdateTableRequest 
 			Fn:   de.Handler,
 		})
 	}
+
 	return UpdateTableRequest{Request: req, Input: input, Copy: c.UpdateTableRequest}
 }
 

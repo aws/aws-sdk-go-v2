@@ -31,8 +31,8 @@ func (s ListMemberAccountsInput) String() string {
 type ListMemberAccountsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of the Amazon Macie member accounts returned by the action. The current
-	// master account is also included in this list.
+	// A list of the Amazon Macie Classic member accounts returned by the action.
+	// The current master account is also included in this list.
 	MemberAccounts []MemberAccount `locationName:"memberAccounts" type:"list"`
 
 	// When a response is generated, if there is more data to be listed, this parameter
@@ -52,8 +52,8 @@ const opListMemberAccounts = "ListMemberAccounts"
 // ListMemberAccountsRequest returns a request value for making API operation for
 // Amazon Macie.
 //
-// Lists all Amazon Macie member accounts for the current Amazon Macie master
-// account.
+// Lists all Amazon Macie Classic member accounts for the current Amazon Macie
+// Classic master account.
 //
 //    // Example sending a request using ListMemberAccountsRequest.
 //    req := client.ListMemberAccountsRequest(params)
@@ -81,6 +81,7 @@ func (c *Client) ListMemberAccountsRequest(input *ListMemberAccountsInput) ListM
 	}
 
 	req := c.newRequest(op, input, &ListMemberAccountsOutput{})
+
 	return ListMemberAccountsRequest{Request: req, Input: input, Copy: c.ListMemberAccountsRequest}
 }
 

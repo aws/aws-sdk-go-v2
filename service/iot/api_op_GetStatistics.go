@@ -139,6 +139,7 @@ func (c *Client) GetStatisticsRequest(input *GetStatisticsInput) GetStatisticsRe
 	}
 
 	req := c.newRequest(op, input, &GetStatisticsOutput{})
+
 	return GetStatisticsRequest{Request: req, Input: input, Copy: c.GetStatisticsRequest}
 }
 

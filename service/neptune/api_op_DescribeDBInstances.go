@@ -127,6 +127,7 @@ func (c *Client) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeDBInstancesOutput{})
+
 	return DescribeDBInstancesRequest{Request: req, Input: input, Copy: c.DescribeDBInstancesRequest}
 }
 

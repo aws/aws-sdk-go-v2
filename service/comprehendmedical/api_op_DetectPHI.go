@@ -99,6 +99,7 @@ func (c *Client) DetectPHIRequest(input *DetectPHIInput) DetectPHIRequest {
 	}
 
 	req := c.newRequest(op, input, &DetectPHIOutput{})
+
 	return DetectPHIRequest{Request: req, Input: input, Copy: c.DetectPHIRequest}
 }
 

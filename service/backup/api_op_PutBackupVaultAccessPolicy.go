@@ -109,6 +109,7 @@ func (c *Client) PutBackupVaultAccessPolicyRequest(input *PutBackupVaultAccessPo
 	req := c.newRequest(op, input, &PutBackupVaultAccessPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutBackupVaultAccessPolicyRequest{Request: req, Input: input, Copy: c.PutBackupVaultAccessPolicyRequest}
 }
 

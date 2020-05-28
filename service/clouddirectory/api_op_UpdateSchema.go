@@ -122,6 +122,7 @@ func (c *Client) UpdateSchemaRequest(input *UpdateSchemaInput) UpdateSchemaReque
 	}
 
 	req := c.newRequest(op, input, &UpdateSchemaOutput{})
+
 	return UpdateSchemaRequest{Request: req, Input: input, Copy: c.UpdateSchemaRequest}
 }
 

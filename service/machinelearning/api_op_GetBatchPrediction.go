@@ -158,6 +158,7 @@ func (c *Client) GetBatchPredictionRequest(input *GetBatchPredictionInput) GetBa
 	}
 
 	req := c.newRequest(op, input, &GetBatchPredictionOutput{})
+
 	return GetBatchPredictionRequest{Request: req, Input: input, Copy: c.GetBatchPredictionRequest}
 }
 

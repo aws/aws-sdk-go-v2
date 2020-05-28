@@ -162,6 +162,7 @@ func (c *Client) DescribeMLModelsRequest(input *DescribeMLModelsInput) DescribeM
 	}
 
 	req := c.newRequest(op, input, &DescribeMLModelsOutput{})
+
 	return DescribeMLModelsRequest{Request: req, Input: input, Copy: c.DescribeMLModelsRequest}
 }
 

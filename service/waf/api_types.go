@@ -13,6 +13,16 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // The ActivatedRule object in an UpdateWebACL request specifies a Rule that
 // you want to insert or delete, the priority of the Rule in the WebACL, and
 // the action that you want AWS WAF to take when a web request matches the Rule
@@ -160,6 +170,16 @@ func (s *ActivatedRule) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // In a GetByteMatchSet request, ByteMatchSet is a complex type that contains
 // the ByteMatchSetId and Name of a ByteMatchSet, and the values that you specified
 // when you updated the ByteMatchSet.
@@ -199,6 +219,16 @@ func (s ByteMatchSet) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Returned by ListByteMatchSets. Each ByteMatchSetSummary object includes the
 // Name and ByteMatchSetId for one ByteMatchSet.
 type ByteMatchSetSummary struct {
@@ -225,6 +255,16 @@ func (s ByteMatchSetSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // In an UpdateByteMatchSet request, ByteMatchSetUpdate specifies whether to
 // insert or delete a ByteMatchTuple and includes the settings for the ByteMatchTuple.
 type ByteMatchSetUpdate struct {
@@ -271,6 +311,16 @@ func (s *ByteMatchSetUpdate) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // The bytes (typically a string that corresponds with ASCII characters) that
 // you want AWS WAF to search for in web requests, the location in requests
 // that you want AWS WAF to search, and other settings.
@@ -393,7 +443,7 @@ type ByteMatchTuple struct {
 
 	// Text transformations eliminate some of the unusual formatting that attackers
 	// use in web requests in an effort to bypass AWS WAF. If you specify a transformation,
-	// AWS WAF performs the transformation on TargetString before inspecting a request
+	// AWS WAF performs the transformation on FieldToMatch before inspecting it
 	// for a match.
 	//
 	// You can only specify a single type of TextTransformation.
@@ -502,6 +552,16 @@ func (s *ByteMatchTuple) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // The rule to exclude from a rule group. This is applicable only when the ActivatedRule
 // refers to a RuleGroup. The rule must belong to the RuleGroup that is specified
 // by the ActivatedRule.
@@ -536,6 +596,16 @@ func (s *ExcludedRule) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Specifies where in a web request to look for TargetString.
 type FieldToMatch struct {
 	_ struct{} `type:"structure"`
@@ -549,7 +619,7 @@ type FieldToMatch struct {
 	// parameter name is not case sensitive.
 	//
 	// If the value of Type is any other value, omit Data.
-	Data *string `type:"string"`
+	Data *string `min:"1" type:"string"`
 
 	// The part of the web request that you want AWS WAF to search for a specified
 	// string. Parts of a request that you can search include the following:
@@ -596,6 +666,9 @@ func (s FieldToMatch) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FieldToMatch) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "FieldToMatch"}
+	if s.Data != nil && len(*s.Data) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Data", 1))
+	}
 	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
@@ -606,6 +679,16 @@ func (s *FieldToMatch) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // The country from which web requests originate that you want AWS WAF to search
 // for.
 type GeoMatchConstraint struct {
@@ -644,6 +727,16 @@ func (s *GeoMatchConstraint) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Contains one or more countries that AWS WAF will search for.
 type GeoMatchSet struct {
 	_ struct{} `type:"structure"`
@@ -674,6 +767,16 @@ func (s GeoMatchSet) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Contains the identifier and the name of the GeoMatchSet.
 type GeoMatchSetSummary struct {
 	_ struct{} `type:"structure"`
@@ -696,6 +799,16 @@ func (s GeoMatchSetSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Specifies the type of update to perform to an GeoMatchSet with UpdateGeoMatchSet.
 type GeoMatchSetUpdate struct {
 	_ struct{} `type:"structure"`
@@ -739,6 +852,16 @@ func (s *GeoMatchSetUpdate) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // The response from a GetSampledRequests request includes an HTTPHeader complex
 // type that appears as Headers in the response syntax. HTTPHeader contains
 // the names and values of all of the headers that appear in one of the web
@@ -758,6 +881,16 @@ func (s HTTPHeader) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // The response from a GetSampledRequests request includes an HTTPRequest complex
 // type that appears as Request in the response syntax. HTTPRequest contains
 // information about one of the web requests that were returned by GetSampledRequests.
@@ -800,6 +933,16 @@ func (s HTTPRequest) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Contains one or more IP addresses or blocks of IP addresses specified in
 // Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports IPv4 address
 // ranges: /8 and any range between /16 through /32. AWS WAF supports IPv6 address
@@ -842,6 +985,16 @@ func (s IPSet) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Specifies the IP address type (IPV4 or IPV6) and the IP address range (in
 // CIDR format) that web requests originate from.
 type IPSetDescriptor struct {
@@ -873,7 +1026,7 @@ type IPSetDescriptor struct {
 	//    specify 1111:0000:0000:0000:0000:0000:0000:0000/64.
 	//
 	// Value is a required field
-	Value *string `type:"string" required:"true"`
+	Value *string `min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -891,6 +1044,9 @@ func (s *IPSetDescriptor) Validate() error {
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
+	if s.Value != nil && len(*s.Value) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -898,6 +1054,16 @@ func (s *IPSetDescriptor) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Contains the identifier and the name of the IPSet.
 type IPSetSummary struct {
 	_ struct{} `type:"structure"`
@@ -920,6 +1086,16 @@ func (s IPSetSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Specifies the type of update to perform to an IPSet with UpdateIPSet.
 type IPSetUpdate struct {
 	_ struct{} `type:"structure"`
@@ -963,6 +1139,16 @@ func (s *IPSetUpdate) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // The Amazon Kinesis Data Firehose, RedactedFields information, and the web
 // ACL Amazon Resource Name (ARN).
 type LoggingConfiguration struct {
@@ -1021,6 +1207,16 @@ func (s *LoggingConfiguration) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Specifies the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, RegexMatchSet,
 // GeoMatchSet, and SizeConstraintSet objects that you want to add to a Rule
 // and, for each object, indicates whether you want to negate the settings,
@@ -1084,6 +1280,16 @@ func (s *Predicate) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // A RateBasedRule is identical to a regular Rule, with one addition: a RateBasedRule
 // counts the number of requests that arrive from a specified IP address every
 // five minutes. For example, based on recent requests that you've seen from
@@ -1094,9 +1300,9 @@ func (s *Predicate) Validate() error {
 //
 //    * They contain the value BadBot in the User-Agent header.
 //
-// In the rule, you also define the rate limit as 15,000.
+// In the rule, you also define the rate limit as 1,000.
 //
-// Requests that meet both of these conditions and exceed 15,000 requests every
+// Requests that meet both of these conditions and exceed 1,000 requests every
 // five minutes trigger the rule's action (block or count), which is defined
 // in the web ACL.
 type RateBasedRule struct {
@@ -1113,7 +1319,7 @@ type RateBasedRule struct {
 	// 128 and minimum length one. It can't contain whitespace or metric names reserved
 	// for AWS WAF, including "All" and "Default_Action." You can't change the name
 	// of the metric after you create the RateBasedRule.
-	MetricName *string `type:"string"`
+	MetricName *string `min:"1" type:"string"`
 
 	// A friendly name or description for a RateBasedRule. You can't change the
 	// name of a RateBasedRule after you create it.
@@ -1151,6 +1357,16 @@ func (s RateBasedRule) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // In a GetRegexMatchSet request, RegexMatchSet is a complex type that contains
 // the RegexMatchSetId and Name of a RegexMatchSet, and the values that you
 // specified when you updated the RegexMatchSet.
@@ -1194,6 +1410,16 @@ func (s RegexMatchSet) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Returned by ListRegexMatchSets. Each RegexMatchSetSummary object includes
 // the Name and RegexMatchSetId for one RegexMatchSet.
 type RegexMatchSetSummary struct {
@@ -1220,6 +1446,16 @@ func (s RegexMatchSetSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // In an UpdateRegexMatchSet request, RegexMatchSetUpdate specifies whether
 // to insert or delete a RegexMatchTuple and includes the settings for the RegexMatchTuple.
 type RegexMatchSetUpdate struct {
@@ -1267,6 +1503,16 @@ func (s *RegexMatchSetUpdate) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // The regular expression pattern that you want AWS WAF to search for in web
 // requests, the location in requests that you want AWS WAF to search, and other
 // settings. Each RegexMatchTuple object contains:
@@ -1409,6 +1655,16 @@ func (s *RegexMatchTuple) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // The RegexPatternSet specifies the regular expression (regex) pattern that
 // you want AWS WAF to search for, such as B[a@]dB[o0]t. You can then configure
 // AWS WAF to reject those requests.
@@ -1440,6 +1696,16 @@ func (s RegexPatternSet) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Returned by ListRegexPatternSets. Each RegexPatternSetSummary object includes
 // the Name and RegexPatternSetId for one RegexPatternSet.
 type RegexPatternSetSummary struct {
@@ -1467,6 +1733,16 @@ func (s RegexPatternSetSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // In an UpdateRegexPatternSet request, RegexPatternSetUpdate specifies whether
 // to insert or delete a RegexPatternString and includes the settings for the
 // RegexPatternString.
@@ -1510,6 +1786,16 @@ func (s *RegexPatternSetUpdate) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // A combination of ByteMatchSet, IPSet, and/or SqlInjectionMatchSet objects
 // that identify the web requests that you want to allow, block, or count. For
 // example, you might create a Rule that includes the following predicates:
@@ -1530,7 +1816,7 @@ type Rule struct {
 	// 128 and minimum length one. It can't contain whitespace or metric names reserved
 	// for AWS WAF, including "All" and "Default_Action." You can't change MetricName
 	// after you create the Rule.
-	MetricName *string `type:"string"`
+	MetricName *string `min:"1" type:"string"`
 
 	// The friendly name or description for the Rule. You can't change the name
 	// of a Rule after you create it.
@@ -1558,6 +1844,16 @@ func (s Rule) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // A collection of predefined rules that you can add to a web ACL.
 //
 // Rule groups are subject to the following limits:
@@ -1576,7 +1872,7 @@ type RuleGroup struct {
 	// 128 and minimum length one. It can't contain whitespace or metric names reserved
 	// for AWS WAF, including "All" and "Default_Action." You can't change the name
 	// of the metric after you create the RuleGroup.
-	MetricName *string `type:"string"`
+	MetricName *string `min:"1" type:"string"`
 
 	// The friendly name or description for the RuleGroup. You can't change the
 	// name of a RuleGroup after you create it.
@@ -1598,6 +1894,16 @@ func (s RuleGroup) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Contains the identifier and the friendly name or description of the RuleGroup.
 type RuleGroupSummary struct {
 	_ struct{} `type:"structure"`
@@ -1624,6 +1930,16 @@ func (s RuleGroupSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Specifies an ActivatedRule and indicates whether you want to add it to a
 // RuleGroup or delete it from a RuleGroup.
 type RuleGroupUpdate struct {
@@ -1670,6 +1986,16 @@ func (s *RuleGroupUpdate) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Contains the identifier and the friendly name or description of the Rule.
 type RuleSummary struct {
 	_ struct{} `type:"structure"`
@@ -1696,6 +2022,16 @@ func (s RuleSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Specifies a Predicate (such as an IPSet) and indicates whether you want to
 // add it to a Rule or delete it from a Rule.
 type RuleUpdate struct {
@@ -1740,6 +2076,16 @@ func (s *RuleUpdate) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // The response from a GetSampledRequests request includes a SampledHTTPRequests
 // complex type that appears as SampledRequests in the response syntax. SampledHTTPRequests
 // contains one SampledHTTPRequest object for each web request that is returned
@@ -1779,6 +2125,16 @@ func (s SampledHTTPRequest) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Specifies a constraint on the size of a part of the web request. AWS WAF
 // uses the Size, ComparisonOperator, and FieldToMatch to build an expression
 // in the form of "Size ComparisonOperator size in bytes of FieldToMatch". If
@@ -1828,7 +2184,7 @@ type SizeConstraint struct {
 
 	// Text transformations eliminate some of the unusual formatting that attackers
 	// use in web requests in an effort to bypass AWS WAF. If you specify a transformation,
-	// AWS WAF performs the transformation on FieldToMatch before inspecting a request
+	// AWS WAF performs the transformation on FieldToMatch before inspecting it
 	// for a match.
 	//
 	// You can only specify a single type of TextTransformation.
@@ -1941,6 +2297,16 @@ func (s *SizeConstraint) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // A complex type that contains SizeConstraint objects, which specify the parts
 // of web requests that you want AWS WAF to inspect the size of. If a SizeConstraintSet
 // contains more than one SizeConstraint object, a request only needs to match
@@ -1973,6 +2339,16 @@ func (s SizeConstraintSet) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // The Id and Name of a SizeConstraintSet.
 type SizeConstraintSetSummary struct {
 	_ struct{} `type:"structure"`
@@ -1999,6 +2375,16 @@ func (s SizeConstraintSetSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Specifies the part of a web request that you want to inspect the size of
 // and indicates whether you want to add the specification to a SizeConstraintSet
 // or delete it from a SizeConstraintSet.
@@ -2047,6 +2433,16 @@ func (s *SizeConstraintSetUpdate) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // A complex type that contains SqlInjectionMatchTuple objects, which specify
 // the parts of web requests that you want AWS WAF to inspect for snippets of
 // malicious SQL code and, if you want AWS WAF to inspect a header, the name
@@ -2082,6 +2478,16 @@ func (s SqlInjectionMatchSet) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // The Id and Name of a SqlInjectionMatchSet.
 type SqlInjectionMatchSetSummary struct {
 	_ struct{} `type:"structure"`
@@ -2108,6 +2514,16 @@ func (s SqlInjectionMatchSetSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Specifies the part of a web request that you want to inspect for snippets
 // of malicious SQL code and indicates whether you want to add the specification
 // to a SqlInjectionMatchSet or delete it from a SqlInjectionMatchSet.
@@ -2155,6 +2571,16 @@ func (s *SqlInjectionMatchSetUpdate) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Specifies the part of a web request that you want AWS WAF to inspect for
 // snippets of malicious SQL code and, if you want AWS WAF to inspect a header,
 // the name of the header.
@@ -2168,7 +2594,7 @@ type SqlInjectionMatchTuple struct {
 
 	// Text transformations eliminate some of the unusual formatting that attackers
 	// use in web requests in an effort to bypass AWS WAF. If you specify a transformation,
-	// AWS WAF performs the transformation on FieldToMatch before inspecting a request
+	// AWS WAF performs the transformation on FieldToMatch before inspecting it
 	// for a match.
 	//
 	// You can only specify a single type of TextTransformation.
@@ -2270,6 +2696,16 @@ func (s *SqlInjectionMatchTuple) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // A summary of the rule groups you are subscribed to.
 type SubscribedRuleGroupSummary struct {
 	_ struct{} `type:"structure"`
@@ -2281,7 +2717,7 @@ type SubscribedRuleGroupSummary struct {
 	// of the metric after you create the RuleGroup.
 	//
 	// MetricName is a required field
-	MetricName *string `type:"string" required:"true"`
+	MetricName *string `min:"1" type:"string" required:"true"`
 
 	// A friendly name or description of the RuleGroup. You can't change the name
 	// of a RuleGroup after you create it.
@@ -2300,12 +2736,33 @@ func (s SubscribedRuleGroupSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
+// A tag associated with an AWS resource. Tags are key:value pairs that you
+// can use to categorize and manage your resources, for purposes like billing.
+// For example, you might set the tag key to "customer" and the value to the
+// customer name or ID. You can specify one or more tags to add to each AWS
+// resource, up to 50 tags for a resource.
+//
+// Tagging is only available through the API, SDKs, and CLI. You can't manage
+// or view tags through the AWS WAF Classic console. You can tag the AWS resources
+// that you manage through AWS WAF Classic: web ACLs, rule groups, and rules.
 type Tag struct {
 	_ struct{} `type:"structure"`
 
-	Key *string `min:"1" type:"string"`
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
 
-	Value *string `type:"string"`
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -2316,8 +2773,16 @@ func (s Tag) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2326,6 +2791,25 @@ func (s *Tag) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
+// Information for a tag associated with an AWS resource. Tags are key:value
+// pairs that you can use to categorize and manage your resources, for purposes
+// like billing. For example, you might set the tag key to "customer" and the
+// value to the customer name or ID. You can specify one or more tags to add
+// to each AWS resource, up to 50 tags for a resource.
+//
+// Tagging is only available through the API, SDKs, and CLI. You can't manage
+// or view tags through the AWS WAF Classic console. You can tag the AWS resources
+// that you manage through AWS WAF Classic: web ACLs, rule groups, and rules.
 type TagInfoForResource struct {
 	_ struct{} `type:"structure"`
 
@@ -2339,8 +2823,21 @@ func (s TagInfoForResource) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // In a GetSampledRequests request, the StartTime and EndTime objects specify
 // the time range for which you want AWS WAF to return a sample of web requests.
+//
+// You must specify the times in Coordinated Universal Time (UTC) format. UTC
+// format includes the special designator, Z. For example, "2016-09-27T14:50Z".
 //
 // In a GetSampledRequests response, the StartTime and EndTime objects specify
 // the time range for which AWS WAF actually returned a sample of web requests.
@@ -2353,17 +2850,19 @@ type TimeWindow struct {
 	_ struct{} `type:"structure"`
 
 	// The end of the time range from which you want GetSampledRequests to return
-	// a sample of the requests that your AWS resource received. Specify the date
-	// and time in the following format: "2016-09-27T14:50Z". You can specify any
-	// time range in the previous three hours.
+	// a sample of the requests that your AWS resource received. You must specify
+	// the date and time in Coordinated Universal Time (UTC) format. UTC format
+	// includes the special designator, Z. For example, "2016-09-27T14:50Z". You
+	// can specify any time range in the previous three hours.
 	//
 	// EndTime is a required field
 	EndTime *time.Time `type:"timestamp" required:"true"`
 
 	// The beginning of the time range from which you want GetSampledRequests to
-	// return a sample of the requests that your AWS resource received. Specify
-	// the date and time in the following format: "2016-09-27T14:50Z". You can specify
-	// any time range in the previous three hours.
+	// return a sample of the requests that your AWS resource received. You must
+	// specify the date and time in Coordinated Universal Time (UTC) format. UTC
+	// format includes the special designator, Z. For example, "2016-09-27T14:50Z".
+	// You can specify any time range in the previous three hours.
 	//
 	// StartTime is a required field
 	StartTime *time.Time `type:"timestamp" required:"true"`
@@ -2392,6 +2891,16 @@ func (s *TimeWindow) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // For the action that is associated with a rule in a WebACL, specifies the
 // action that you want AWS WAF to perform when a web request matches all of
 // the conditions in a rule. For the default action in a WebACL, specifies the
@@ -2434,6 +2943,16 @@ func (s *WafAction) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // The action to take if any rule within the RuleGroup matches a request.
 type WafOverrideAction struct {
 	_ struct{} `type:"structure"`
@@ -2463,6 +2982,16 @@ func (s *WafOverrideAction) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Contains the Rules that identify the requests that you want to allow, block,
 // or count. In a WebACL, you also specify a default action (ALLOW or BLOCK),
 // and the action for each Rule that you add to a WebACL, for example, block
@@ -2485,7 +3014,7 @@ type WebACL struct {
 	// 128 and minimum length one. It can't contain whitespace or metric names reserved
 	// for AWS WAF, including "All" and "Default_Action." You can't change MetricName
 	// after you create the WebACL.
-	MetricName *string `type:"string"`
+	MetricName *string `min:"1" type:"string"`
 
 	// A friendly name or description of the WebACL. You can't change the name of
 	// a WebACL after you create it.
@@ -2515,6 +3044,16 @@ func (s WebACL) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Contains the identifier and the name or description of the WebACL.
 type WebACLSummary struct {
 	_ struct{} `type:"structure"`
@@ -2540,6 +3079,16 @@ func (s WebACLSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Specifies whether to insert a Rule into or delete a Rule from a WebACL.
 type WebACLUpdate struct {
 	_ struct{} `type:"structure"`
@@ -2585,6 +3134,16 @@ func (s *WebACLUpdate) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // A complex type that contains XssMatchTuple objects, which specify the parts
 // of web requests that you want AWS WAF to inspect for cross-site scripting
 // attacks and, if you want AWS WAF to inspect a header, the name of the header.
@@ -2619,6 +3178,16 @@ func (s XssMatchSet) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // The Id and Name of an XssMatchSet.
 type XssMatchSetSummary struct {
 	_ struct{} `type:"structure"`
@@ -2644,6 +3213,16 @@ func (s XssMatchSetSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Specifies the part of a web request that you want to inspect for cross-site
 // scripting attacks and indicates whether you want to add the specification
 // to an XssMatchSet or delete it from an XssMatchSet.
@@ -2691,6 +3270,16 @@ func (s *XssMatchSetUpdate) Validate() error {
 	return nil
 }
 
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Specifies the part of a web request that you want AWS WAF to inspect for
 // cross-site scripting attacks and, if you want AWS WAF to inspect a header,
 // the name of the header.
@@ -2704,7 +3293,7 @@ type XssMatchTuple struct {
 
 	// Text transformations eliminate some of the unusual formatting that attackers
 	// use in web requests in an effort to bypass AWS WAF. If you specify a transformation,
-	// AWS WAF performs the transformation on FieldToMatch before inspecting a request
+	// AWS WAF performs the transformation on FieldToMatch before inspecting it
 	// for a match.
 	//
 	// You can only specify a single type of TextTransformation.

@@ -120,6 +120,7 @@ func (c *Client) DescribeForecastExportJobRequest(input *DescribeForecastExportJ
 	}
 
 	req := c.newRequest(op, input, &DescribeForecastExportJobOutput{})
+
 	return DescribeForecastExportJobRequest{Request: req, Input: input, Copy: c.DescribeForecastExportJobRequest}
 }
 

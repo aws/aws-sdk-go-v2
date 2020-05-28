@@ -106,6 +106,7 @@ func (c *Client) DeactivateMFADeviceRequest(input *DeactivateMFADeviceInput) Dea
 	req := c.newRequest(op, input, &DeactivateMFADeviceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeactivateMFADeviceRequest{Request: req, Input: input, Copy: c.DeactivateMFADeviceRequest}
 }
 

@@ -127,6 +127,7 @@ func (c *Client) CreatePullRequestApprovalRuleRequest(input *CreatePullRequestAp
 	}
 
 	req := c.newRequest(op, input, &CreatePullRequestApprovalRuleOutput{})
+
 	return CreatePullRequestApprovalRuleRequest{Request: req, Input: input, Copy: c.CreatePullRequestApprovalRuleRequest}
 }
 

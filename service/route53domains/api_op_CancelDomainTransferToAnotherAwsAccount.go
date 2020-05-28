@@ -95,6 +95,7 @@ func (c *Client) CancelDomainTransferToAnotherAwsAccountRequest(input *CancelDom
 	}
 
 	req := c.newRequest(op, input, &CancelDomainTransferToAnotherAwsAccountOutput{})
+
 	return CancelDomainTransferToAnotherAwsAccountRequest{Request: req, Input: input, Copy: c.CancelDomainTransferToAnotherAwsAccountRequest}
 }
 

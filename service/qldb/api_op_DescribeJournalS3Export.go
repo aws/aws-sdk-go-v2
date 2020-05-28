@@ -107,6 +107,10 @@ const opDescribeJournalS3Export = "DescribeJournalS3Export"
 // export ID, when it was created, current status, and its start and end time
 // export parameters.
 //
+// This action does not return any expired export jobs. For more information,
+// see Export Job Expiration (https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration)
+// in the Amazon QLDB Developer Guide.
+//
 // If the export job with the given ExportId doesn't exist, then throws ResourceNotFoundException.
 //
 // If the ledger with the given Name doesn't exist, then throws ResourceNotFoundException.
@@ -131,6 +135,7 @@ func (c *Client) DescribeJournalS3ExportRequest(input *DescribeJournalS3ExportIn
 	}
 
 	req := c.newRequest(op, input, &DescribeJournalS3ExportOutput{})
+
 	return DescribeJournalS3ExportRequest{Request: req, Input: input, Copy: c.DescribeJournalS3ExportRequest}
 }
 

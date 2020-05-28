@@ -75,6 +75,7 @@ func (c *Client) ApproveSkillRequest(input *ApproveSkillInput) ApproveSkillReque
 	}
 
 	req := c.newRequest(op, input, &ApproveSkillOutput{})
+
 	return ApproveSkillRequest{Request: req, Input: input, Copy: c.ApproveSkillRequest}
 }
 

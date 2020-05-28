@@ -93,6 +93,7 @@ func (c *Client) DescribeApplicationSnapshotRequest(input *DescribeApplicationSn
 	}
 
 	req := c.newRequest(op, input, &DescribeApplicationSnapshotOutput{})
+
 	return DescribeApplicationSnapshotRequest{Request: req, Input: input, Copy: c.DescribeApplicationSnapshotRequest}
 }
 

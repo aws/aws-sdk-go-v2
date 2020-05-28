@@ -103,6 +103,7 @@ func (c *Client) DeleteVoiceChannelRequest(input *DeleteVoiceChannelInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteVoiceChannelOutput{})
+
 	return DeleteVoiceChannelRequest{Request: req, Input: input, Copy: c.DeleteVoiceChannelRequest}
 }
 

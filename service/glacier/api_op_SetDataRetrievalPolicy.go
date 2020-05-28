@@ -114,6 +114,7 @@ func (c *Client) SetDataRetrievalPolicyRequest(input *SetDataRetrievalPolicyInpu
 	req := c.newRequest(op, input, &SetDataRetrievalPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetDataRetrievalPolicyRequest{Request: req, Input: input, Copy: c.SetDataRetrievalPolicyRequest}
 }
 

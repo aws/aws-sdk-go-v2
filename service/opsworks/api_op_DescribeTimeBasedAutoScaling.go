@@ -85,6 +85,7 @@ func (c *Client) DescribeTimeBasedAutoScalingRequest(input *DescribeTimeBasedAut
 	}
 
 	req := c.newRequest(op, input, &DescribeTimeBasedAutoScalingOutput{})
+
 	return DescribeTimeBasedAutoScalingRequest{Request: req, Input: input, Copy: c.DescribeTimeBasedAutoScalingRequest}
 }
 

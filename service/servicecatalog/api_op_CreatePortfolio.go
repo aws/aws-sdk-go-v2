@@ -131,6 +131,7 @@ func (c *Client) CreatePortfolioRequest(input *CreatePortfolioInput) CreatePortf
 	}
 
 	req := c.newRequest(op, input, &CreatePortfolioOutput{})
+
 	return CreatePortfolioRequest{Request: req, Input: input, Copy: c.CreatePortfolioRequest}
 }
 

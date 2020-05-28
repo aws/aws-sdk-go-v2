@@ -109,6 +109,7 @@ func (c *Client) UpdateUserDefinedFunctionRequest(input *UpdateUserDefinedFuncti
 	}
 
 	req := c.newRequest(op, input, &UpdateUserDefinedFunctionOutput{})
+
 	return UpdateUserDefinedFunctionRequest{Request: req, Input: input, Copy: c.UpdateUserDefinedFunctionRequest}
 }
 

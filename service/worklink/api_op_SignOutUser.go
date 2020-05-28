@@ -114,6 +114,7 @@ func (c *Client) SignOutUserRequest(input *SignOutUserInput) SignOutUserRequest 
 	}
 
 	req := c.newRequest(op, input, &SignOutUserOutput{})
+
 	return SignOutUserRequest{Request: req, Input: input, Copy: c.SignOutUserRequest}
 }
 

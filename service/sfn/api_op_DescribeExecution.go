@@ -134,6 +134,7 @@ func (c *Client) DescribeExecutionRequest(input *DescribeExecutionInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeExecutionOutput{})
+
 	return DescribeExecutionRequest{Request: req, Input: input, Copy: c.DescribeExecutionRequest}
 }
 

@@ -85,6 +85,7 @@ func (c *Client) TestConnectionRequest(input *TestConnectionInput) TestConnectio
 	}
 
 	req := c.newRequest(op, input, &TestConnectionOutput{})
+
 	return TestConnectionRequest{Request: req, Input: input, Copy: c.TestConnectionRequest}
 }
 

@@ -76,6 +76,7 @@ func (c *Client) DeleteStackSetRequest(input *DeleteStackSetInput) DeleteStackSe
 	}
 
 	req := c.newRequest(op, input, &DeleteStackSetOutput{})
+
 	return DeleteStackSetRequest{Request: req, Input: input, Copy: c.DeleteStackSetRequest}
 }
 

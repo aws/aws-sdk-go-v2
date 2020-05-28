@@ -105,6 +105,7 @@ func (c *Client) DeprecateDomainRequest(input *DeprecateDomainInput) DeprecateDo
 	req := c.newRequest(op, input, &DeprecateDomainOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeprecateDomainRequest{Request: req, Input: input, Copy: c.DeprecateDomainRequest}
 }
 

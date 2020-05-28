@@ -102,6 +102,7 @@ func (c *Client) DeleteScriptRequest(input *DeleteScriptInput) DeleteScriptReque
 	req := c.newRequest(op, input, &DeleteScriptOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteScriptRequest{Request: req, Input: input, Copy: c.DeleteScriptRequest}
 }
 

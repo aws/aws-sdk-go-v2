@@ -116,6 +116,7 @@ func (c *Client) ListDiscoveredResourcesRequest(input *ListDiscoveredResourcesIn
 	}
 
 	req := c.newRequest(op, input, &ListDiscoveredResourcesOutput{})
+
 	return ListDiscoveredResourcesRequest{Request: req, Input: input, Copy: c.ListDiscoveredResourcesRequest}
 }
 

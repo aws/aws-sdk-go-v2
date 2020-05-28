@@ -122,6 +122,7 @@ func (c *Client) AddTagsToCertificateRequest(input *AddTagsToCertificateInput) A
 	req := c.newRequest(op, input, &AddTagsToCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AddTagsToCertificateRequest{Request: req, Input: input, Copy: c.AddTagsToCertificateRequest}
 }
 

@@ -121,6 +121,7 @@ func (c *Client) DescribeRemediationExceptionsRequest(input *DescribeRemediation
 	}
 
 	req := c.newRequest(op, input, &DescribeRemediationExceptionsOutput{})
+
 	return DescribeRemediationExceptionsRequest{Request: req, Input: input, Copy: c.DescribeRemediationExceptionsRequest}
 }
 

@@ -78,6 +78,7 @@ func (c *Client) DeregisterOnPremisesInstanceRequest(input *DeregisterOnPremises
 	req := c.newRequest(op, input, &DeregisterOnPremisesInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeregisterOnPremisesInstanceRequest{Request: req, Input: input, Copy: c.DeregisterOnPremisesInstanceRequest}
 }
 

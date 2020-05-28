@@ -83,6 +83,7 @@ func (c *Client) DescribeOrderableReplicationInstancesRequest(input *DescribeOrd
 	}
 
 	req := c.newRequest(op, input, &DescribeOrderableReplicationInstancesOutput{})
+
 	return DescribeOrderableReplicationInstancesRequest{Request: req, Input: input, Copy: c.DescribeOrderableReplicationInstancesRequest}
 }
 

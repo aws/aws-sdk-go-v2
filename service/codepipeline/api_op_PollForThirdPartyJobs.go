@@ -94,6 +94,7 @@ func (c *Client) PollForThirdPartyJobsRequest(input *PollForThirdPartyJobsInput)
 	}
 
 	req := c.newRequest(op, input, &PollForThirdPartyJobsOutput{})
+
 	return PollForThirdPartyJobsRequest{Request: req, Input: input, Copy: c.PollForThirdPartyJobsRequest}
 }
 

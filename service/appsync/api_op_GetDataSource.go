@@ -119,6 +119,7 @@ func (c *Client) GetDataSourceRequest(input *GetDataSourceInput) GetDataSourceRe
 	}
 
 	req := c.newRequest(op, input, &GetDataSourceOutput{})
+
 	return GetDataSourceRequest{Request: req, Input: input, Copy: c.GetDataSourceRequest}
 }
 

@@ -203,6 +203,7 @@ func (c *Client) GetTranscriptRequest(input *GetTranscriptInput) GetTranscriptRe
 	}
 
 	req := c.newRequest(op, input, &GetTranscriptOutput{})
+
 	return GetTranscriptRequest{Request: req, Input: input, Copy: c.GetTranscriptRequest}
 }
 

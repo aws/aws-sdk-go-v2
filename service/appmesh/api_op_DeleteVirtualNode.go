@@ -134,6 +134,7 @@ func (c *Client) DeleteVirtualNodeRequest(input *DeleteVirtualNodeInput) DeleteV
 	}
 
 	req := c.newRequest(op, input, &DeleteVirtualNodeOutput{})
+
 	return DeleteVirtualNodeRequest{Request: req, Input: input, Copy: c.DeleteVirtualNodeRequest}
 }
 

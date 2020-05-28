@@ -106,6 +106,7 @@ func (c *Client) DescribeLogPatternRequest(input *DescribeLogPatternInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeLogPatternOutput{})
+
 	return DescribeLogPatternRequest{Request: req, Input: input, Copy: c.DescribeLogPatternRequest}
 }
 

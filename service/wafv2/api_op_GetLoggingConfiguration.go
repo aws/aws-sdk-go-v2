@@ -85,6 +85,7 @@ func (c *Client) GetLoggingConfigurationRequest(input *GetLoggingConfigurationIn
 	}
 
 	req := c.newRequest(op, input, &GetLoggingConfigurationOutput{})
+
 	return GetLoggingConfigurationRequest{Request: req, Input: input, Copy: c.GetLoggingConfigurationRequest}
 }
 

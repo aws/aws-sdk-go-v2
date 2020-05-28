@@ -135,6 +135,7 @@ func (c *Client) GetDataEndpointRequest(input *GetDataEndpointInput) GetDataEndp
 	}
 
 	req := c.newRequest(op, input, &GetDataEndpointOutput{})
+
 	return GetDataEndpointRequest{Request: req, Input: input, Copy: c.GetDataEndpointRequest}
 }
 

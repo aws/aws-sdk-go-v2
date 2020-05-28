@@ -91,6 +91,7 @@ func (c *Client) UpdateClusterSettingsRequest(input *UpdateClusterSettingsInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateClusterSettingsOutput{})
+
 	return UpdateClusterSettingsRequest{Request: req, Input: input, Copy: c.UpdateClusterSettingsRequest}
 }
 

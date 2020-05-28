@@ -105,6 +105,7 @@ func (c *Client) DeleteVirtualInterfaceRequest(input *DeleteVirtualInterfaceInpu
 	}
 
 	req := c.newRequest(op, input, &DeleteVirtualInterfaceOutput{})
+
 	return DeleteVirtualInterfaceRequest{Request: req, Input: input, Copy: c.DeleteVirtualInterfaceRequest}
 }
 

@@ -124,6 +124,7 @@ func (c *Client) UpdateFleetPortSettingsRequest(input *UpdateFleetPortSettingsIn
 	}
 
 	req := c.newRequest(op, input, &UpdateFleetPortSettingsOutput{})
+
 	return UpdateFleetPortSettingsRequest{Request: req, Input: input, Copy: c.UpdateFleetPortSettingsRequest}
 }
 

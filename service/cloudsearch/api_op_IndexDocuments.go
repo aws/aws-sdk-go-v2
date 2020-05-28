@@ -86,6 +86,7 @@ func (c *Client) IndexDocumentsRequest(input *IndexDocumentsInput) IndexDocument
 	}
 
 	req := c.newRequest(op, input, &IndexDocumentsOutput{})
+
 	return IndexDocumentsRequest{Request: req, Input: input, Copy: c.IndexDocumentsRequest}
 }
 

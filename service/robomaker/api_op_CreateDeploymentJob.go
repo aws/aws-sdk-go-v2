@@ -341,6 +341,7 @@ func (c *Client) CreateDeploymentJobRequest(input *CreateDeploymentJobInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateDeploymentJobOutput{})
+
 	return CreateDeploymentJobRequest{Request: req, Input: input, Copy: c.CreateDeploymentJobRequest}
 }
 

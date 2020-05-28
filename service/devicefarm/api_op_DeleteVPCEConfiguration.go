@@ -77,6 +77,7 @@ func (c *Client) DeleteVPCEConfigurationRequest(input *DeleteVPCEConfigurationIn
 	}
 
 	req := c.newRequest(op, input, &DeleteVPCEConfigurationOutput{})
+
 	return DeleteVPCEConfigurationRequest{Request: req, Input: input, Copy: c.DeleteVPCEConfigurationRequest}
 }
 

@@ -86,6 +86,7 @@ func (c *Client) DeleteOrganizationConformancePackRequest(input *DeleteOrganizat
 	req := c.newRequest(op, input, &DeleteOrganizationConformancePackOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteOrganizationConformancePackRequest{Request: req, Input: input, Copy: c.DeleteOrganizationConformancePackRequest}
 }
 

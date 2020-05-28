@@ -129,6 +129,7 @@ func (c *Client) CreatePlacementRequest(input *CreatePlacementInput) CreatePlace
 	}
 
 	req := c.newRequest(op, input, &CreatePlacementOutput{})
+
 	return CreatePlacementRequest{Request: req, Input: input, Copy: c.CreatePlacementRequest}
 }
 

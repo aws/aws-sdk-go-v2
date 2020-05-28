@@ -94,6 +94,7 @@ func (c *Client) GetRoleRequest(input *GetRoleInput) GetRoleRequest {
 	}
 
 	req := c.newRequest(op, input, &GetRoleOutput{})
+
 	return GetRoleRequest{Request: req, Input: input, Copy: c.GetRoleRequest}
 }
 

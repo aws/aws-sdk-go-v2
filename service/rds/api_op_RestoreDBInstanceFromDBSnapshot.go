@@ -338,6 +338,7 @@ func (c *Client) RestoreDBInstanceFromDBSnapshotRequest(input *RestoreDBInstance
 	}
 
 	req := c.newRequest(op, input, &RestoreDBInstanceFromDBSnapshotOutput{})
+
 	return RestoreDBInstanceFromDBSnapshotRequest{Request: req, Input: input, Copy: c.RestoreDBInstanceFromDBSnapshotRequest}
 }
 

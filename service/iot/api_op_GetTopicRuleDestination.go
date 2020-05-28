@@ -99,6 +99,7 @@ func (c *Client) GetTopicRuleDestinationRequest(input *GetTopicRuleDestinationIn
 	}
 
 	req := c.newRequest(op, input, &GetTopicRuleDestinationOutput{})
+
 	return GetTopicRuleDestinationRequest{Request: req, Input: input, Copy: c.GetTopicRuleDestinationRequest}
 }
 

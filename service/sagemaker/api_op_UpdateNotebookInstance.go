@@ -164,6 +164,7 @@ func (c *Client) UpdateNotebookInstanceRequest(input *UpdateNotebookInstanceInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateNotebookInstanceOutput{})
+
 	return UpdateNotebookInstanceRequest{Request: req, Input: input, Copy: c.UpdateNotebookInstanceRequest}
 }
 

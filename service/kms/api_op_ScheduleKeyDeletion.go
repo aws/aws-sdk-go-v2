@@ -132,6 +132,7 @@ func (c *Client) ScheduleKeyDeletionRequest(input *ScheduleKeyDeletionInput) Sch
 	}
 
 	req := c.newRequest(op, input, &ScheduleKeyDeletionOutput{})
+
 	return ScheduleKeyDeletionRequest{Request: req, Input: input, Copy: c.ScheduleKeyDeletionRequest}
 }
 

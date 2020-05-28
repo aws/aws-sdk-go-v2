@@ -105,6 +105,7 @@ func (c *Client) GetIdentityVerificationAttributesRequest(input *GetIdentityVeri
 	}
 
 	req := c.newRequest(op, input, &GetIdentityVerificationAttributesOutput{})
+
 	return GetIdentityVerificationAttributesRequest{Request: req, Input: input, Copy: c.GetIdentityVerificationAttributesRequest}
 }
 

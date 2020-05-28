@@ -134,6 +134,7 @@ func (c *Client) GetFaceDetectionRequest(input *GetFaceDetectionInput) GetFaceDe
 	}
 
 	req := c.newRequest(op, input, &GetFaceDetectionOutput{})
+
 	return GetFaceDetectionRequest{Request: req, Input: input, Copy: c.GetFaceDetectionRequest}
 }
 

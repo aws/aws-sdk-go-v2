@@ -86,6 +86,7 @@ func (c *Client) CreateOrganizationRequest(input *CreateOrganizationInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateOrganizationOutput{})
+
 	return CreateOrganizationRequest{Request: req, Input: input, Copy: c.CreateOrganizationRequest}
 }
 

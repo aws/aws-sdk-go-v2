@@ -100,6 +100,7 @@ func (c *Client) OverridePullRequestApprovalRulesRequest(input *OverridePullRequ
 	req := c.newRequest(op, input, &OverridePullRequestApprovalRulesOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return OverridePullRequestApprovalRulesRequest{Request: req, Input: input, Copy: c.OverridePullRequestApprovalRulesRequest}
 }
 

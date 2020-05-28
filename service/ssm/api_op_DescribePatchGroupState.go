@@ -113,6 +113,7 @@ func (c *Client) DescribePatchGroupStateRequest(input *DescribePatchGroupStateIn
 	}
 
 	req := c.newRequest(op, input, &DescribePatchGroupStateOutput{})
+
 	return DescribePatchGroupStateRequest{Request: req, Input: input, Copy: c.DescribePatchGroupStateRequest}
 }
 

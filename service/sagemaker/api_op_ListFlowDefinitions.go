@@ -102,6 +102,7 @@ func (c *Client) ListFlowDefinitionsRequest(input *ListFlowDefinitionsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListFlowDefinitionsOutput{})
+
 	return ListFlowDefinitionsRequest{Request: req, Input: input, Copy: c.ListFlowDefinitionsRequest}
 }
 

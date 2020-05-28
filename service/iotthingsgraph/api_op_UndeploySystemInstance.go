@@ -61,6 +61,7 @@ func (c *Client) UndeploySystemInstanceRequest(input *UndeploySystemInstanceInpu
 	}
 
 	req := c.newRequest(op, input, &UndeploySystemInstanceOutput{})
+
 	return UndeploySystemInstanceRequest{Request: req, Input: input, Copy: c.UndeploySystemInstanceRequest}
 }
 

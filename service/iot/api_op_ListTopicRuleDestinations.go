@@ -120,6 +120,7 @@ func (c *Client) ListTopicRuleDestinationsRequest(input *ListTopicRuleDestinatio
 	}
 
 	req := c.newRequest(op, input, &ListTopicRuleDestinationsOutput{})
+
 	return ListTopicRuleDestinationsRequest{Request: req, Input: input, Copy: c.ListTopicRuleDestinationsRequest}
 }
 

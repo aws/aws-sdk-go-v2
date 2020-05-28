@@ -13,7 +13,8 @@ import (
 type UpdateSignalingChannelInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the signaling channel that you want to update.
+	// The Amazon Resource Name (ARN) of the signaling channel that you want to
+	// update.
 	//
 	// ChannelARN is a required field
 	ChannelARN *string `min:"1" type:"string" required:"true"`
@@ -110,8 +111,8 @@ const opUpdateSignalingChannel = "UpdateSignalingChannel"
 // and takes time to complete.
 //
 // If the MessageTtlSeconds value is updated (either increased or reduced),
-// then it only applies to new messages sent via this channel after it's been
-// updated. Existing messages are still expire as per the previous MessageTtlSeconds
+// it only applies to new messages sent via this channel after it's been updated.
+// Existing messages are still expired as per the previous MessageTtlSeconds
 // value.
 //
 //    // Example sending a request using UpdateSignalingChannelRequest.
@@ -134,6 +135,7 @@ func (c *Client) UpdateSignalingChannelRequest(input *UpdateSignalingChannelInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateSignalingChannelOutput{})
+
 	return UpdateSignalingChannelRequest{Request: req, Input: input, Copy: c.UpdateSignalingChannelRequest}
 }
 

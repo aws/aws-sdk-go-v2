@@ -85,6 +85,7 @@ func (c *Client) ListVolumeInitiatorsRequest(input *ListVolumeInitiatorsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListVolumeInitiatorsOutput{})
+
 	return ListVolumeInitiatorsRequest{Request: req, Input: input, Copy: c.ListVolumeInitiatorsRequest}
 }
 

@@ -104,6 +104,7 @@ func (c *Client) ListResourceInventoryRequest(input *ListResourceInventoryInput)
 	}
 
 	req := c.newRequest(op, input, &ListResourceInventoryOutput{})
+
 	return ListResourceInventoryRequest{Request: req, Input: input, Copy: c.ListResourceInventoryRequest}
 }
 

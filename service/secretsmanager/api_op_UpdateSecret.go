@@ -260,6 +260,7 @@ func (c *Client) UpdateSecretRequest(input *UpdateSecretInput) UpdateSecretReque
 	}
 
 	req := c.newRequest(op, input, &UpdateSecretOutput{})
+
 	return UpdateSecretRequest{Request: req, Input: input, Copy: c.UpdateSecretRequest}
 }
 

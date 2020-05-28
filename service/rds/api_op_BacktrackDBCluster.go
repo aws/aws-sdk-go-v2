@@ -158,6 +158,7 @@ func (c *Client) BacktrackDBClusterRequest(input *BacktrackDBClusterInput) Backt
 	}
 
 	req := c.newRequest(op, input, &BacktrackDBClusterOutput{})
+
 	return BacktrackDBClusterRequest{Request: req, Input: input, Copy: c.BacktrackDBClusterRequest}
 }
 

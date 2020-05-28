@@ -108,6 +108,7 @@ func (c *Client) CreateLBCookieStickinessPolicyRequest(input *CreateLBCookieStic
 	}
 
 	req := c.newRequest(op, input, &CreateLBCookieStickinessPolicyOutput{})
+
 	return CreateLBCookieStickinessPolicyRequest{Request: req, Input: input, Copy: c.CreateLBCookieStickinessPolicyRequest}
 }
 

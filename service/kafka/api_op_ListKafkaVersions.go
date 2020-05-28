@@ -127,6 +127,7 @@ func (c *Client) ListKafkaVersionsRequest(input *ListKafkaVersionsInput) ListKaf
 	}
 
 	req := c.newRequest(op, input, &ListKafkaVersionsOutput{})
+
 	return ListKafkaVersionsRequest{Request: req, Input: input, Copy: c.ListKafkaVersionsRequest}
 }
 

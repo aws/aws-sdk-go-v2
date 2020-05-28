@@ -65,6 +65,7 @@ func (c *Client) ClearDefaultAuthorizerRequest(input *ClearDefaultAuthorizerInpu
 	}
 
 	req := c.newRequest(op, input, &ClearDefaultAuthorizerOutput{})
+
 	return ClearDefaultAuthorizerRequest{Request: req, Input: input, Copy: c.ClearDefaultAuthorizerRequest}
 }
 

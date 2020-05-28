@@ -132,6 +132,7 @@ func (c *Client) StartStreamEncryptionRequest(input *StartStreamEncryptionInput)
 	req := c.newRequest(op, input, &StartStreamEncryptionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StartStreamEncryptionRequest{Request: req, Input: input, Copy: c.StartStreamEncryptionRequest}
 }
 

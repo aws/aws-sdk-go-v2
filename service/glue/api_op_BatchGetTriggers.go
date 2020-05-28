@@ -83,6 +83,7 @@ func (c *Client) BatchGetTriggersRequest(input *BatchGetTriggersInput) BatchGetT
 	}
 
 	req := c.newRequest(op, input, &BatchGetTriggersOutput{})
+
 	return BatchGetTriggersRequest{Request: req, Input: input, Copy: c.BatchGetTriggersRequest}
 }
 

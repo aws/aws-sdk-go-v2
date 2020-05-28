@@ -106,6 +106,12 @@ func (c *Client) ListSharedProjectsRequest(input *ListSharedProjectsInput) ListS
 		Name:       opListSharedProjects,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -113,6 +119,7 @@ func (c *Client) ListSharedProjectsRequest(input *ListSharedProjectsInput) ListS
 	}
 
 	req := c.newRequest(op, input, &ListSharedProjectsOutput{})
+
 	return ListSharedProjectsRequest{Request: req, Input: input, Copy: c.ListSharedProjectsRequest}
 }
 
@@ -138,6 +145,53 @@ func (r ListSharedProjectsRequest) Send(ctx context.Context) (*ListSharedProject
 	}
 
 	return resp, nil
+}
+
+// NewListSharedProjectsRequestPaginator returns a paginator for ListSharedProjects.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListSharedProjectsRequest(input)
+//   p := codebuild.NewListSharedProjectsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListSharedProjectsPaginator(req ListSharedProjectsRequest) ListSharedProjectsPaginator {
+	return ListSharedProjectsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListSharedProjectsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListSharedProjectsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListSharedProjectsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListSharedProjectsPaginator) CurrentPage() *ListSharedProjectsOutput {
+	return p.Pager.CurrentPage().(*ListSharedProjectsOutput)
 }
 
 // ListSharedProjectsResponse is the response type for the

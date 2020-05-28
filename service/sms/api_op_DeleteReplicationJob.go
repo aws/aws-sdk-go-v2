@@ -77,6 +77,7 @@ func (c *Client) DeleteReplicationJobRequest(input *DeleteReplicationJobInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteReplicationJobOutput{})
+
 	return DeleteReplicationJobRequest{Request: req, Input: input, Copy: c.DeleteReplicationJobRequest}
 }
 

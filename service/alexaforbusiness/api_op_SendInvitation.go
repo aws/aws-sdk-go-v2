@@ -58,6 +58,7 @@ func (c *Client) SendInvitationRequest(input *SendInvitationInput) SendInvitatio
 	}
 
 	req := c.newRequest(op, input, &SendInvitationOutput{})
+
 	return SendInvitationRequest{Request: req, Input: input, Copy: c.SendInvitationRequest}
 }
 

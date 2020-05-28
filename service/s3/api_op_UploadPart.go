@@ -391,6 +391,7 @@ func (c *Client) UploadPartRequest(input *UploadPartInput) UploadPartRequest {
 	}
 
 	req := c.newRequest(op, input, &UploadPartOutput{})
+
 	return UploadPartRequest{Request: req, Input: input, Copy: c.UploadPartRequest}
 }
 

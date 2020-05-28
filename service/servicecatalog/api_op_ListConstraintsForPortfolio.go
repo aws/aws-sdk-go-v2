@@ -111,6 +111,7 @@ func (c *Client) ListConstraintsForPortfolioRequest(input *ListConstraintsForPor
 	}
 
 	req := c.newRequest(op, input, &ListConstraintsForPortfolioOutput{})
+
 	return ListConstraintsForPortfolioRequest{Request: req, Input: input, Copy: c.ListConstraintsForPortfolioRequest}
 }
 

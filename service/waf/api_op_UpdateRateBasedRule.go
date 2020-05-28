@@ -106,6 +106,16 @@ const opUpdateRateBasedRule = "UpdateRateBasedRule"
 // UpdateRateBasedRuleRequest returns a request value for making API operation for
 // AWS WAF.
 //
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Inserts or deletes Predicate objects in a rule and updates the RateLimit
 // in the rule.
 //
@@ -122,13 +132,13 @@ const opUpdateRateBasedRule = "UpdateRateBasedRule"
 //
 //    * A ByteMatchSet that matches BadBot in the User-Agent header
 //
-// Further, you specify a RateLimit of 15,000.
+// Further, you specify a RateLimit of 1,000.
 //
 // You then add the RateBasedRule to a WebACL and specify that you want to block
 // requests that satisfy the rule. For a request to be blocked, it must come
 // from the IP address 192.0.2.44 and the User-Agent header in the request must
 // contain the value BadBot. Further, requests that match these two conditions
-// much be received at a rate of more than 15,000 every five minutes. If the
+// much be received at a rate of more than 1,000 every five minutes. If the
 // rate drops below this limit, AWS WAF no longer blocks the requests.
 //
 // As a second example, suppose you want to limit requests to a particular page
@@ -140,7 +150,7 @@ const opUpdateRateBasedRule = "UpdateRateBasedRule"
 //
 //    * A TargetString of login
 //
-// Further, you specify a RateLimit of 15,000.
+// Further, you specify a RateLimit of 1,000.
 //
 // By adding this RateBasedRule to a WebACL, you could limit requests to your
 // login page without affecting the rest of your site.
@@ -165,6 +175,7 @@ func (c *Client) UpdateRateBasedRuleRequest(input *UpdateRateBasedRuleInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateRateBasedRuleOutput{})
+
 	return UpdateRateBasedRuleRequest{Request: req, Input: input, Copy: c.UpdateRateBasedRuleRequest}
 }
 

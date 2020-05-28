@@ -61,6 +61,7 @@ func (c *Client) GetHomeRegionRequest(input *GetHomeRegionInput) GetHomeRegionRe
 	}
 
 	req := c.newRequest(op, input, &GetHomeRegionOutput{})
+
 	return GetHomeRegionRequest{Request: req, Input: input, Copy: c.GetHomeRegionRequest}
 }
 

@@ -414,12 +414,15 @@ type EnvironmentVariable struct {
 	// The type of environment variable. Valid values include:
 	//
 	//    * PARAMETER_STORE: An environment variable stored in Amazon EC2 Systems
-	//    Manager Parameter Store.
+	//    Manager Parameter Store. To learn how to specify a parameter store environment
+	//    variable, see parameter store reference-key in the buildspec file (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#parameter-store-build-spec).
 	//
 	//    * PLAINTEXT: An environment variable in plain text format. This is the
 	//    default value.
 	//
 	//    * SECRETS_MANAGER: An environment variable stored in AWS Secrets Manager.
+	//    To learn how to specify a secrets manager environment variable, see secrets
+	//    manager reference-key in the buildspec file (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#secrets-manager-build-spec).
 	Type EnvironmentVariableType `locationName:"type" type:"string" enum:"true"`
 
 	// The value of the environment variable.
@@ -720,7 +723,7 @@ type Project struct {
 	// in the AWS CodeBuild User Guide.
 	SourceVersion *string `locationName:"sourceVersion" type:"string"`
 
-	// The tags for this build project.
+	// A list of tag key and value pairs associated with this build project.
 	//
 	// These tags are available for use by AWS services that support AWS CodeBuild
 	// build project tags.
@@ -1080,16 +1083,16 @@ type ProjectEnvironment struct {
 	//    (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and EU (Frankfurt).
 	//
 	//    * The environment type LINUX_CONTAINER with compute type build.general1.2xlarge
-	//    is available only in regions US East (N. Virginia), US East (N. Virginia),
-	//    US West (Oregon), Canada (Central), EU (Ireland), EU (London), EU (Frankfurt),
+	//    is available only in regions US East (N. Virginia), US East (Ohio), US
+	//    West (Oregon), Canada (Central), EU (Ireland), EU (London), EU (Frankfurt),
 	//    Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore),
 	//    Asia Pacific (Sydney), China (Beijing), and China (Ningxia).
 	//
 	//    * The environment type LINUX_GPU_CONTAINER is available only in regions
-	//    US East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada
-	//    (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo),
-	//    Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney)
-	//    , China (Beijing), and China (Ningxia).
+	//    US East (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central),
+	//    EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia
+	//    Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney) , China
+	//    (Beijing), and China (Ningxia).
 	//
 	// Type is a required field
 	Type EnvironmentType `locationName:"type" type:"string" required:"true" enum:"true"`
@@ -1549,6 +1552,12 @@ type ReportGroup struct {
 	// The name of a ReportGroup.
 	Name *string `locationName:"name" min:"2" type:"string"`
 
+	// A list of tag key and value pairs associated with this report group.
+	//
+	// These tags are available for use by AWS services that support AWS CodeBuild
+	// report group tags.
+	Tags []Tag `locationName:"tags" type:"list"`
+
 	// The type of the ReportGroup. The one valid value is TEST.
 	Type ReportType `locationName:"type" type:"string" enum:"true"`
 }
@@ -1717,7 +1726,7 @@ type Tag struct {
 	Key *string `locationName:"key" min:"1" type:"string"`
 
 	// The tag's value.
-	Value *string `locationName:"value" min:"1" type:"string"`
+	Value *string `locationName:"value" type:"string"`
 }
 
 // String returns the string representation
@@ -1730,9 +1739,6 @@ func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
-	}
-	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1924,10 +1930,10 @@ type WebhookFilter struct {
 	// EVENT
 	//
 	// A webhook event triggers a build when the provided pattern matches one of
-	// four event types: PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED, and PULL_REQUEST_REOPENED.
-	// The EVENT patterns are specified as a comma-separated string. For example,
-	// PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED filters all push, pull request
-	// created, and pull request updated events.
+	// five event types: PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED, PULL_REQUEST_REOPENED,
+	// and PULL_REQUEST_MERGED. The EVENT patterns are specified as a comma-separated
+	// string. For example, PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED filters
+	// all push, pull request created, and pull request updated events.
 	//
 	// The PULL_REQUEST_REOPENED works with GitHub and GitHub Enterprise only.
 	//

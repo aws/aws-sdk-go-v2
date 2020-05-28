@@ -78,6 +78,7 @@ func (c *Client) DeleteAgentRequest(input *DeleteAgentInput) DeleteAgentRequest 
 	}
 
 	req := c.newRequest(op, input, &DeleteAgentOutput{})
+
 	return DeleteAgentRequest{Request: req, Input: input, Copy: c.DeleteAgentRequest}
 }
 

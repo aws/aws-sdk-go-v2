@@ -137,6 +137,7 @@ func (c *Client) GetResolverRequest(input *GetResolverInput) GetResolverRequest 
 	}
 
 	req := c.newRequest(op, input, &GetResolverOutput{})
+
 	return GetResolverRequest{Request: req, Input: input, Copy: c.GetResolverRequest}
 }
 

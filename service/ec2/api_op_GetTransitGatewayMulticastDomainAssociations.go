@@ -111,6 +111,7 @@ func (c *Client) GetTransitGatewayMulticastDomainAssociationsRequest(input *GetT
 	}
 
 	req := c.newRequest(op, input, &GetTransitGatewayMulticastDomainAssociationsOutput{})
+
 	return GetTransitGatewayMulticastDomainAssociationsRequest{Request: req, Input: input, Copy: c.GetTransitGatewayMulticastDomainAssociationsRequest}
 }
 

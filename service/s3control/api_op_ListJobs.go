@@ -137,8 +137,20 @@ const opListJobs = "ListJobs"
 // ListJobsRequest returns a request value for making API operation for
 // AWS S3 Control.
 //
-// Lists current jobs and jobs that have ended within the last 30 days for the
-// AWS account making the request.
+// Lists current Amazon S3 Batch Operations jobs and jobs that have ended within
+// the last 30 days for the AWS account making the request. For more information,
+// see Amazon S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+// Related actions include:
+//
+//    * CreateJob
+//
+//    * DescribeJob
+//
+//    * UpdateJobPriority
+//
+//    * UpdateJobStatus
 //
 //    // Example sending a request using ListJobsRequest.
 //    req := client.ListJobsRequest(params)
@@ -168,6 +180,7 @@ func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	req := c.newRequest(op, input, &ListJobsOutput{})
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
+
 	return ListJobsRequest{Request: req, Input: input, Copy: c.ListJobsRequest}
 }
 

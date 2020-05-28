@@ -110,6 +110,7 @@ func (c *Client) GetImageRequest(input *GetImageInput) GetImageRequest {
 	}
 
 	req := c.newRequest(op, input, &GetImageOutput{})
+
 	return GetImageRequest{Request: req, Input: input, Copy: c.GetImageRequest}
 }
 

@@ -124,6 +124,7 @@ func (c *Client) ListInputSecurityGroupsRequest(input *ListInputSecurityGroupsIn
 	}
 
 	req := c.newRequest(op, input, &ListInputSecurityGroupsOutput{})
+
 	return ListInputSecurityGroupsRequest{Request: req, Input: input, Copy: c.ListInputSecurityGroupsRequest}
 }
 

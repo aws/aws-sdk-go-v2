@@ -105,6 +105,7 @@ func (c *Client) RemoveAccountFromOrganizationRequest(input *RemoveAccountFromOr
 	req := c.newRequest(op, input, &RemoveAccountFromOrganizationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RemoveAccountFromOrganizationRequest{Request: req, Input: input, Copy: c.RemoveAccountFromOrganizationRequest}
 }
 

@@ -119,6 +119,7 @@ func (c *Client) CreateVirtualMFADeviceRequest(input *CreateVirtualMFADeviceInpu
 	}
 
 	req := c.newRequest(op, input, &CreateVirtualMFADeviceOutput{})
+
 	return CreateVirtualMFADeviceRequest{Request: req, Input: input, Copy: c.CreateVirtualMFADeviceRequest}
 }
 

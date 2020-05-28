@@ -111,6 +111,7 @@ func (c *Client) CreatePullRequestRequest(input *CreatePullRequestInput) CreateP
 	}
 
 	req := c.newRequest(op, input, &CreatePullRequestOutput{})
+
 	return CreatePullRequestRequest{Request: req, Input: input, Copy: c.CreatePullRequestRequest}
 }
 

@@ -110,6 +110,7 @@ func (c *Client) GetCurrentUserRequest(input *GetCurrentUserInput) GetCurrentUse
 	}
 
 	req := c.newRequest(op, input, &GetCurrentUserOutput{})
+
 	return GetCurrentUserRequest{Request: req, Input: input, Copy: c.GetCurrentUserRequest}
 }
 

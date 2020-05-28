@@ -98,6 +98,7 @@ func (c *Client) UpdateMailboxQuotaRequest(input *UpdateMailboxQuotaInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateMailboxQuotaOutput{})
+
 	return UpdateMailboxQuotaRequest{Request: req, Input: input, Copy: c.UpdateMailboxQuotaRequest}
 }
 

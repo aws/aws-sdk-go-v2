@@ -61,6 +61,7 @@ func (c *Client) DeleteSystemInstanceRequest(input *DeleteSystemInstanceInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteSystemInstanceOutput{})
+
 	return DeleteSystemInstanceRequest{Request: req, Input: input, Copy: c.DeleteSystemInstanceRequest}
 }
 

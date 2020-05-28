@@ -124,6 +124,7 @@ func (c *Client) PutEncryptionConfigRequest(input *PutEncryptionConfigInput) Put
 	}
 
 	req := c.newRequest(op, input, &PutEncryptionConfigOutput{})
+
 	return PutEncryptionConfigRequest{Request: req, Input: input, Copy: c.PutEncryptionConfigRequest}
 }
 

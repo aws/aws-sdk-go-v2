@@ -286,6 +286,7 @@ func (c *Client) GetCurrentMetricDataRequest(input *GetCurrentMetricDataInput) G
 	}
 
 	req := c.newRequest(op, input, &GetCurrentMetricDataOutput{})
+
 	return GetCurrentMetricDataRequest{Request: req, Input: input, Copy: c.GetCurrentMetricDataRequest}
 }
 

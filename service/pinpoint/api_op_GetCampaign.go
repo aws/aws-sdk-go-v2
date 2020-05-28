@@ -116,6 +116,7 @@ func (c *Client) GetCampaignRequest(input *GetCampaignInput) GetCampaignRequest 
 	}
 
 	req := c.newRequest(op, input, &GetCampaignOutput{})
+
 	return GetCampaignRequest{Request: req, Input: input, Copy: c.GetCampaignRequest}
 }
 

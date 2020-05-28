@@ -107,6 +107,7 @@ func (c *Client) DeleteApiKeyRequest(input *DeleteApiKeyInput) DeleteApiKeyReque
 	}
 
 	req := c.newRequest(op, input, &DeleteApiKeyOutput{})
+
 	return DeleteApiKeyRequest{Request: req, Input: input, Copy: c.DeleteApiKeyRequest}
 }
 

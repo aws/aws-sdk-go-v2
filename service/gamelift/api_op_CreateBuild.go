@@ -178,6 +178,7 @@ func (c *Client) CreateBuildRequest(input *CreateBuildInput) CreateBuildRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateBuildOutput{})
+
 	return CreateBuildRequest{Request: req, Input: input, Copy: c.CreateBuildRequest}
 }
 

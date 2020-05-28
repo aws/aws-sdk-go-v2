@@ -140,6 +140,7 @@ func (c *Client) PutConformancePackRequest(input *PutConformancePackInput) PutCo
 	}
 
 	req := c.newRequest(op, input, &PutConformancePackOutput{})
+
 	return PutConformancePackRequest{Request: req, Input: input, Copy: c.PutConformancePackRequest}
 }
 

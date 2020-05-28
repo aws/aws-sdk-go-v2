@@ -33,7 +33,7 @@ type PutComplianceItemsInput struct {
 
 	// Information about the compliance as defined by the resource type. For example,
 	// for a patch compliance type, Items includes information about the PatchSeverity,
-	// Classification, etc.
+	// Classification, and so on.
 	//
 	// Items is a required field
 	Items []ComplianceItemEntry `type:"list" required:"true"`
@@ -49,6 +49,18 @@ type PutComplianceItemsInput struct {
 	//
 	// ResourceType is a required field
 	ResourceType *string `min:"1" type:"string" required:"true"`
+
+	// The mode for uploading compliance items. You can specify COMPLETE or PARTIAL.
+	// In COMPLETE mode, the system overwrites all existing compliance information
+	// for the resource. You must provide a full list of compliance items each time
+	// you send the request.
+	//
+	// In PARTIAL mode, the system overwrites compliance information for a specific
+	// association. The association must be configured with SyncCompliance set to
+	// MANUAL. By default, all requests use COMPLETE mode.
+	//
+	// This attribute is only valid for association compliance.
+	UploadType ComplianceUploadType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -184,6 +196,7 @@ func (c *Client) PutComplianceItemsRequest(input *PutComplianceItemsInput) PutCo
 	}
 
 	req := c.newRequest(op, input, &PutComplianceItemsOutput{})
+
 	return PutComplianceItemsRequest{Request: req, Input: input, Copy: c.PutComplianceItemsRequest}
 }
 

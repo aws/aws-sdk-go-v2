@@ -99,6 +99,7 @@ func (c *Client) ListEntityRecognizersRequest(input *ListEntityRecognizersInput)
 	}
 
 	req := c.newRequest(op, input, &ListEntityRecognizersOutput{})
+
 	return ListEntityRecognizersRequest{Request: req, Input: input, Copy: c.ListEntityRecognizersRequest}
 }
 

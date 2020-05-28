@@ -270,6 +270,7 @@ func (c *Client) UpdateSimulationApplicationRequest(input *UpdateSimulationAppli
 	}
 
 	req := c.newRequest(op, input, &UpdateSimulationApplicationOutput{})
+
 	return UpdateSimulationApplicationRequest{Request: req, Input: input, Copy: c.UpdateSimulationApplicationRequest}
 }
 

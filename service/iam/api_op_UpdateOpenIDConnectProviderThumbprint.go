@@ -110,6 +110,7 @@ func (c *Client) UpdateOpenIDConnectProviderThumbprintRequest(input *UpdateOpenI
 	req := c.newRequest(op, input, &UpdateOpenIDConnectProviderThumbprintOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateOpenIDConnectProviderThumbprintRequest{Request: req, Input: input, Copy: c.UpdateOpenIDConnectProviderThumbprintRequest}
 }
 

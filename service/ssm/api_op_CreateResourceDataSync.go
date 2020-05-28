@@ -12,7 +12,8 @@ import (
 type CreateResourceDataSyncInput struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon S3 configuration details for the sync.
+	// Amazon S3 configuration details for the sync. This parameter is required
+	// if the SyncType value is SyncToDestination.
 	S3Destination *ResourceDataSyncS3Destination `type:"structure"`
 
 	// A name for the configuration.
@@ -20,13 +21,17 @@ type CreateResourceDataSyncInput struct {
 	// SyncName is a required field
 	SyncName *string `min:"1" type:"string" required:"true"`
 
-	// Specify information about the data sources to synchronize.
+	// Specify information about the data sources to synchronize. This parameter
+	// is required if the SyncType value is SyncFromSource.
 	SyncSource *ResourceDataSyncSource `type:"structure"`
 
 	// Specify SyncToDestination to create a resource data sync that synchronizes
-	// data from multiple AWS Regions to an Amazon S3 bucket. Specify SyncFromSource
-	// to synchronize data from multiple AWS accounts and Regions, as listed in
-	// AWS Organizations.
+	// data to an S3 bucket for Inventory. If you specify SyncToDestination, you
+	// must provide a value for S3Destination. Specify SyncFromSource to synchronize
+	// data from a single account and multiple Regions, or multiple AWS accounts
+	// and Regions, as listed in AWS Organizations for Explorer. If you specify
+	// SyncFromSource, you must provide a value for SyncSource. The default value
+	// is SyncToDestination.
 	SyncType *string `min:"1" type:"string"`
 }
 
@@ -85,16 +90,16 @@ const opCreateResourceDataSync = "CreateResourceDataSync"
 //
 // You can configure Systems Manager Inventory to use the SyncToDestination
 // type to synchronize Inventory data from multiple AWS Regions to a single
-// Amazon S3 bucket. For more information, see Configuring Resource Data Sync
-// for Inventory (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync.html)
+// S3 bucket. For more information, see Configuring Resource Data Sync for Inventory
+// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync.html)
 // in the AWS Systems Manager User Guide.
 //
 // You can configure Systems Manager Explorer to use the SyncFromSource type
 // to synchronize operational work items (OpsItems) and operational data (OpsData)
-// from multiple AWS Regions to a single Amazon S3 bucket. This type can synchronize
+// from multiple AWS Regions to a single S3 bucket. This type can synchronize
 // OpsItems and OpsData from multiple AWS accounts and Regions or EntireOrganization
-// by using AWS Organizations. For more information, see Setting Up Explorer
-// to Display Data from Multiple Accounts and Regions (http://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html)
+// by using AWS Organizations. For more information, see Setting up Systems
+// Manager Explorer to display data from multiple accounts and Regions (https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html)
 // in the AWS Systems Manager User Guide.
 //
 // A resource data sync is an asynchronous operation that returns immediately.
@@ -126,6 +131,7 @@ func (c *Client) CreateResourceDataSyncRequest(input *CreateResourceDataSyncInpu
 	}
 
 	req := c.newRequest(op, input, &CreateResourceDataSyncOutput{})
+
 	return CreateResourceDataSyncRequest{Request: req, Input: input, Copy: c.CreateResourceDataSyncRequest}
 }
 

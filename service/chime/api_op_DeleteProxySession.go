@@ -117,6 +117,7 @@ func (c *Client) DeleteProxySessionRequest(input *DeleteProxySessionInput) Delet
 	req := c.newRequest(op, input, &DeleteProxySessionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteProxySessionRequest{Request: req, Input: input, Copy: c.DeleteProxySessionRequest}
 }
 

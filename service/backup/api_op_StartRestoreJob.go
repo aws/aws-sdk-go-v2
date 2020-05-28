@@ -26,11 +26,11 @@ type StartRestoreJobInput struct {
 	// A set of metadata key-value pairs. Contains information, such as a resource
 	// name, required to restore a recovery point.
 	//
-	// You can get configuration metadata about a resource at the time it was backed-up
-	// by calling GetRecoveryPointRestoreMetadata. However, values in addition to
-	// those provided by GetRecoveryPointRestoreMetadata might be required to restore
-	// a resource. For example, you might need to provide a new resource name if
-	// the original already exists.
+	// You can get configuration metadata about a resource at the time it was backed
+	// up by calling GetRecoveryPointRestoreMetadata. However, values in addition
+	// to those provided by GetRecoveryPointRestoreMetadata might be required to
+	// restore a resource. For example, you might need to provide a new resource
+	// name if the original already exists.
 	//
 	// You need to specify specific metadata to restore an Amazon Elastic File System
 	// (Amazon EFS) instance:
@@ -198,6 +198,7 @@ func (c *Client) StartRestoreJobRequest(input *StartRestoreJobInput) StartRestor
 	}
 
 	req := c.newRequest(op, input, &StartRestoreJobOutput{})
+
 	return StartRestoreJobRequest{Request: req, Input: input, Copy: c.StartRestoreJobRequest}
 }
 

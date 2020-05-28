@@ -170,6 +170,7 @@ func (c *Client) GetDeploymentStrategyRequest(input *GetDeploymentStrategyInput)
 	}
 
 	req := c.newRequest(op, input, &GetDeploymentStrategyOutput{})
+
 	return GetDeploymentStrategyRequest{Request: req, Input: input, Copy: c.GetDeploymentStrategyRequest}
 }
 

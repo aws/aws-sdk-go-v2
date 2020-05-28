@@ -159,6 +159,7 @@ func (c *Client) CancelIngestionRequest(input *CancelIngestionInput) CancelInges
 	}
 
 	req := c.newRequest(op, input, &CancelIngestionOutput{})
+
 	return CancelIngestionRequest{Request: req, Input: input, Copy: c.CancelIngestionRequest}
 }
 

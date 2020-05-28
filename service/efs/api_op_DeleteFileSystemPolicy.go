@@ -101,6 +101,7 @@ func (c *Client) DeleteFileSystemPolicyRequest(input *DeleteFileSystemPolicyInpu
 	req := c.newRequest(op, input, &DeleteFileSystemPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteFileSystemPolicyRequest{Request: req, Input: input, Copy: c.DeleteFileSystemPolicyRequest}
 }
 

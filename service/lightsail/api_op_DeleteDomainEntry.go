@@ -50,7 +50,7 @@ type DeleteDomainEntryOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
+	// of the request, the timestamp of the request, and the resources affected
 	// by the request.
 	Operation *Operation `locationName:"operation" type:"structure"`
 }
@@ -91,6 +91,7 @@ func (c *Client) DeleteDomainEntryRequest(input *DeleteDomainEntryInput) DeleteD
 	}
 
 	req := c.newRequest(op, input, &DeleteDomainEntryOutput{})
+
 	return DeleteDomainEntryRequest{Request: req, Input: input, Copy: c.DeleteDomainEntryRequest}
 }
 

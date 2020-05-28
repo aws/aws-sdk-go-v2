@@ -128,6 +128,7 @@ func (c *Client) ListAssignmentsForHITRequest(input *ListAssignmentsForHITInput)
 	}
 
 	req := c.newRequest(op, input, &ListAssignmentsForHITOutput{})
+
 	return ListAssignmentsForHITRequest{Request: req, Input: input, Copy: c.ListAssignmentsForHITRequest}
 }
 

@@ -88,6 +88,7 @@ func (c *Client) CreateSubnetGroupRequest(input *CreateSubnetGroupInput) CreateS
 	}
 
 	req := c.newRequest(op, input, &CreateSubnetGroupOutput{})
+
 	return CreateSubnetGroupRequest{Request: req, Input: input, Copy: c.CreateSubnetGroupRequest}
 }
 

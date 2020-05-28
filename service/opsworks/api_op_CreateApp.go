@@ -157,6 +157,7 @@ func (c *Client) CreateAppRequest(input *CreateAppInput) CreateAppRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateAppOutput{})
+
 	return CreateAppRequest{Request: req, Input: input, Copy: c.CreateAppRequest}
 }
 

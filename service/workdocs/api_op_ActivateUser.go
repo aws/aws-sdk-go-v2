@@ -117,6 +117,7 @@ func (c *Client) ActivateUserRequest(input *ActivateUserInput) ActivateUserReque
 	}
 
 	req := c.newRequest(op, input, &ActivateUserOutput{})
+
 	return ActivateUserRequest{Request: req, Input: input, Copy: c.ActivateUserRequest}
 }
 

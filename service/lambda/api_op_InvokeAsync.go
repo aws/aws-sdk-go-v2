@@ -133,6 +133,7 @@ func (c *Client) InvokeAsyncRequest(input *InvokeAsyncInput) InvokeAsyncRequest 
 	}
 
 	req := c.newRequest(op, input, &InvokeAsyncOutput{})
+
 	return InvokeAsyncRequest{Request: req, Input: input, Copy: c.InvokeAsyncRequest}
 }
 

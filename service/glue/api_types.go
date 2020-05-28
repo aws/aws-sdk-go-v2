@@ -477,8 +477,9 @@ type Condition struct {
 	// A logical operator.
 	LogicalOperator LogicalOperator `type:"string" enum:"true"`
 
-	// The condition state. Currently, the values supported are SUCCEEDED, STOPPED,
-	// TIMEOUT, and FAILED.
+	// The condition state. Currently, the only job states that a trigger can listen
+	// for are SUCCEEDED, STOPPED, FAILED, and TIMEOUT. The only crawler states
+	// that a trigger can listen for are SUCCEEDED, FAILED, and CANCELLED.
 	State JobRunState `type:"string" enum:"true"`
 }
 
@@ -2246,7 +2247,8 @@ type JobRun struct {
 	// The name of the job definition being used in this run.
 	JobName *string `min:"1" type:"string"`
 
-	// The current state of the job run.
+	// The current state of the job run. For more information about the statuses
+	// of jobs that have terminated abnormally, see AWS Glue Job Run Statuses (https://docs.aws.amazon.com/glue/latest/dg/job-run-statuses.html).
 	JobRunState JobRunState `type:"string" enum:"true"`
 
 	// The last time that this job run was modified.

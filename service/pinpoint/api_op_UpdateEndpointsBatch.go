@@ -126,6 +126,7 @@ func (c *Client) UpdateEndpointsBatchRequest(input *UpdateEndpointsBatchInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateEndpointsBatchOutput{})
+
 	return UpdateEndpointsBatchRequest{Request: req, Input: input, Copy: c.UpdateEndpointsBatchRequest}
 }
 

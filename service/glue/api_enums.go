@@ -112,10 +112,11 @@ type CrawlState string
 
 // Enum values for CrawlState
 const (
-	CrawlStateRunning   CrawlState = "RUNNING"
-	CrawlStateSucceeded CrawlState = "SUCCEEDED"
-	CrawlStateCancelled CrawlState = "CANCELLED"
-	CrawlStateFailed    CrawlState = "FAILED"
+	CrawlStateRunning    CrawlState = "RUNNING"
+	CrawlStateCancelling CrawlState = "CANCELLING"
+	CrawlStateCancelled  CrawlState = "CANCELLED"
+	CrawlStateSucceeded  CrawlState = "SUCCEEDED"
+	CrawlStateFailed     CrawlState = "FAILED"
 )
 
 func (enum CrawlState) MarshalValue() (string, error) {
@@ -650,6 +651,8 @@ type WorkflowRunStatus string
 const (
 	WorkflowRunStatusRunning   WorkflowRunStatus = "RUNNING"
 	WorkflowRunStatusCompleted WorkflowRunStatus = "COMPLETED"
+	WorkflowRunStatusStopping  WorkflowRunStatus = "STOPPING"
+	WorkflowRunStatusStopped   WorkflowRunStatus = "STOPPED"
 )
 
 func (enum WorkflowRunStatus) MarshalValue() (string, error) {

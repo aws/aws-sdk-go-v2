@@ -84,6 +84,7 @@ func (c *Client) DeleteResourceDataSyncRequest(input *DeleteResourceDataSyncInpu
 	}
 
 	req := c.newRequest(op, input, &DeleteResourceDataSyncOutput{})
+
 	return DeleteResourceDataSyncRequest{Request: req, Input: input, Copy: c.DeleteResourceDataSyncRequest}
 }
 

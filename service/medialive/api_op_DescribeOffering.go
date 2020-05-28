@@ -181,6 +181,7 @@ func (c *Client) DescribeOfferingRequest(input *DescribeOfferingInput) DescribeO
 	}
 
 	req := c.newRequest(op, input, &DescribeOfferingOutput{})
+
 	return DescribeOfferingRequest{Request: req, Input: input, Copy: c.DescribeOfferingRequest}
 }
 

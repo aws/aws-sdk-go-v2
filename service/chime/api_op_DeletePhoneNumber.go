@@ -100,6 +100,7 @@ func (c *Client) DeletePhoneNumberRequest(input *DeletePhoneNumberInput) DeleteP
 	req := c.newRequest(op, input, &DeletePhoneNumberOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeletePhoneNumberRequest{Request: req, Input: input, Copy: c.DeletePhoneNumberRequest}
 }
 

@@ -103,6 +103,7 @@ func (c *Client) ConfirmConnectionRequest(input *ConfirmConnectionInput) Confirm
 	}
 
 	req := c.newRequest(op, input, &ConfirmConnectionOutput{})
+
 	return ConfirmConnectionRequest{Request: req, Input: input, Copy: c.ConfirmConnectionRequest}
 }
 

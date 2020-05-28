@@ -83,6 +83,7 @@ func (c *Client) DescribeNotificationConfigurationsRequest(input *DescribeNotifi
 	}
 
 	req := c.newRequest(op, input, &DescribeNotificationConfigurationsOutput{})
+
 	return DescribeNotificationConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeNotificationConfigurationsRequest}
 }
 

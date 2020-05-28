@@ -272,6 +272,7 @@ func (c *Client) GetIntentRequest(input *GetIntentInput) GetIntentRequest {
 	}
 
 	req := c.newRequest(op, input, &GetIntentOutput{})
+
 	return GetIntentRequest{Request: req, Input: input, Copy: c.GetIntentRequest}
 }
 

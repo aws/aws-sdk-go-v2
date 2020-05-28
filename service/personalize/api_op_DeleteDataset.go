@@ -79,6 +79,7 @@ func (c *Client) DeleteDatasetRequest(input *DeleteDatasetInput) DeleteDatasetRe
 	req := c.newRequest(op, input, &DeleteDatasetOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteDatasetRequest{Request: req, Input: input, Copy: c.DeleteDatasetRequest}
 }
 

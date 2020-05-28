@@ -84,6 +84,7 @@ func (c *Client) DescribeWorkspacesConnectionStatusRequest(input *DescribeWorksp
 	}
 
 	req := c.newRequest(op, input, &DescribeWorkspacesConnectionStatusOutput{})
+
 	return DescribeWorkspacesConnectionStatusRequest{Request: req, Input: input, Copy: c.DescribeWorkspacesConnectionStatusRequest}
 }
 

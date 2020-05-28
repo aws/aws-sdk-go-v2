@@ -132,6 +132,7 @@ func (c *Client) RemoveTagsFromVaultRequest(input *RemoveTagsFromVaultInput) Rem
 	req := c.newRequest(op, input, &RemoveTagsFromVaultOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RemoveTagsFromVaultRequest{Request: req, Input: input, Copy: c.RemoveTagsFromVaultRequest}
 }
 

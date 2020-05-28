@@ -115,6 +115,7 @@ func (c *Client) CreateServiceLinkedRoleRequest(input *CreateServiceLinkedRoleIn
 	}
 
 	req := c.newRequest(op, input, &CreateServiceLinkedRoleOutput{})
+
 	return CreateServiceLinkedRoleRequest{Request: req, Input: input, Copy: c.CreateServiceLinkedRoleRequest}
 }
 

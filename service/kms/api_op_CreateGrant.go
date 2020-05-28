@@ -213,6 +213,7 @@ func (c *Client) CreateGrantRequest(input *CreateGrantInput) CreateGrantRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateGrantOutput{})
+
 	return CreateGrantRequest{Request: req, Input: input, Copy: c.CreateGrantRequest}
 }
 

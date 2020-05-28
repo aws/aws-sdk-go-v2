@@ -110,6 +110,7 @@ func (c *Client) DeleteRoomRequest(input *DeleteRoomInput) DeleteRoomRequest {
 	req := c.newRequest(op, input, &DeleteRoomOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteRoomRequest{Request: req, Input: input, Copy: c.DeleteRoomRequest}
 }
 

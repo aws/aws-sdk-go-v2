@@ -88,6 +88,7 @@ func (c *Client) WithdrawByoipCidrRequest(input *WithdrawByoipCidrInput) Withdra
 	}
 
 	req := c.newRequest(op, input, &WithdrawByoipCidrOutput{})
+
 	return WithdrawByoipCidrRequest{Request: req, Input: input, Copy: c.WithdrawByoipCidrRequest}
 }
 

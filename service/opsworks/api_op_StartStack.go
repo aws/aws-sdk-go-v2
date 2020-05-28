@@ -82,6 +82,7 @@ func (c *Client) StartStackRequest(input *StartStackInput) StartStackRequest {
 	req := c.newRequest(op, input, &StartStackOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StartStackRequest{Request: req, Input: input, Copy: c.StartStackRequest}
 }
 

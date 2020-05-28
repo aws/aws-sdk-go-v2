@@ -178,6 +178,7 @@ func (c *Client) CreateClientVpnEndpointRequest(input *CreateClientVpnEndpointIn
 	}
 
 	req := c.newRequest(op, input, &CreateClientVpnEndpointOutput{})
+
 	return CreateClientVpnEndpointRequest{Request: req, Input: input, Copy: c.CreateClientVpnEndpointRequest}
 }
 

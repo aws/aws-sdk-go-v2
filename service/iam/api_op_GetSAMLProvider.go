@@ -95,6 +95,7 @@ func (c *Client) GetSAMLProviderRequest(input *GetSAMLProviderInput) GetSAMLProv
 	}
 
 	req := c.newRequest(op, input, &GetSAMLProviderOutput{})
+
 	return GetSAMLProviderRequest{Request: req, Input: input, Copy: c.GetSAMLProviderRequest}
 }
 

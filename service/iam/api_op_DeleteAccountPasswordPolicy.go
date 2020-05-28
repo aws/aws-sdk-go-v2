@@ -58,6 +58,7 @@ func (c *Client) DeleteAccountPasswordPolicyRequest(input *DeleteAccountPassword
 	req := c.newRequest(op, input, &DeleteAccountPasswordPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteAccountPasswordPolicyRequest{Request: req, Input: input, Copy: c.DeleteAccountPasswordPolicyRequest}
 }
 

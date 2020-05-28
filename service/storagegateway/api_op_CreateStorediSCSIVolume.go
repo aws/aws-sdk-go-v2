@@ -203,6 +203,7 @@ func (c *Client) CreateStorediSCSIVolumeRequest(input *CreateStorediSCSIVolumeIn
 	}
 
 	req := c.newRequest(op, input, &CreateStorediSCSIVolumeOutput{})
+
 	return CreateStorediSCSIVolumeRequest{Request: req, Input: input, Copy: c.CreateStorediSCSIVolumeRequest}
 }
 

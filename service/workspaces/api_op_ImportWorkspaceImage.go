@@ -121,6 +121,7 @@ func (c *Client) ImportWorkspaceImageRequest(input *ImportWorkspaceImageInput) I
 	}
 
 	req := c.newRequest(op, input, &ImportWorkspaceImageOutput{})
+
 	return ImportWorkspaceImageRequest{Request: req, Input: input, Copy: c.ImportWorkspaceImageRequest}
 }
 

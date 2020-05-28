@@ -139,6 +139,7 @@ func (c *Client) CreateVpcPeeringConnectionRequest(input *CreateVpcPeeringConnec
 	}
 
 	req := c.newRequest(op, input, &CreateVpcPeeringConnectionOutput{})
+
 	return CreateVpcPeeringConnectionRequest{Request: req, Input: input, Copy: c.CreateVpcPeeringConnectionRequest}
 }
 

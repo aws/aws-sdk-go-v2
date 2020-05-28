@@ -127,6 +127,7 @@ func (c *Client) CreateClusterParameterGroupRequest(input *CreateClusterParamete
 	}
 
 	req := c.newRequest(op, input, &CreateClusterParameterGroupOutput{})
+
 	return CreateClusterParameterGroupRequest{Request: req, Input: input, Copy: c.CreateClusterParameterGroupRequest}
 }
 

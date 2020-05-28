@@ -240,6 +240,7 @@ func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation1Request(inp
 	}
 
 	req := c.newRequest(op, input, &OutputService1TestShapeOutputService1TestCaseOperation1Output{})
+
 	return OutputService1TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService1TestCaseOperation1Request}
 }
 
@@ -426,6 +427,7 @@ func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation2Request(inp
 	}
 
 	req := c.newRequest(op, input, &OutputService1TestShapeOutputService1TestCaseOperation2Output{})
+
 	return OutputService1TestCaseOperation2Request{Request: req, Input: input, Copy: c.OutputService1TestCaseOperation2Request}
 }
 
@@ -570,6 +572,7 @@ func (c *OutputService2ProtocolTest) OutputService2TestCaseOperation1Request(inp
 	}
 
 	req := c.newRequest(op, input, &OutputService2TestShapeOutputService2TestCaseOperation1Output{})
+
 	return OutputService2TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService2TestCaseOperation1Request}
 }
 
@@ -719,6 +722,7 @@ func (c *OutputService3ProtocolTest) OutputService3TestCaseOperation1Request(inp
 	}
 
 	req := c.newRequest(op, input, &OutputService3TestShapeOutputService3TestCaseOperation1Output{})
+
 	return OutputService3TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService3TestCaseOperation1Request}
 }
 
@@ -868,6 +872,7 @@ func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation1Request(inp
 	}
 
 	req := c.newRequest(op, input, &OutputService4TestShapeOutputService4TestCaseOperation1Output{})
+
 	return OutputService4TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService4TestCaseOperation1Request}
 }
 
@@ -1017,6 +1022,7 @@ func (c *OutputService5ProtocolTest) OutputService5TestCaseOperation1Request(inp
 	}
 
 	req := c.newRequest(op, input, &OutputService5TestShapeOutputService5TestCaseOperation1Output{})
+
 	return OutputService5TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService5TestCaseOperation1Request}
 }
 
@@ -1166,6 +1172,7 @@ func (c *OutputService6ProtocolTest) OutputService6TestCaseOperation1Request(inp
 	}
 
 	req := c.newRequest(op, input, &OutputService6TestShapeOutputService6TestCaseOperation1Output{})
+
 	return OutputService6TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService6TestCaseOperation1Request}
 }
 
@@ -1332,6 +1339,7 @@ func (c *OutputService7ProtocolTest) OutputService7TestCaseOperation1Request(inp
 	}
 
 	req := c.newRequest(op, input, &OutputService7TestShapeOutputService7TestCaseOperation1Output{})
+
 	return OutputService7TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService7TestCaseOperation1Request}
 }
 
@@ -1481,6 +1489,7 @@ func (c *OutputService8ProtocolTest) OutputService8TestCaseOperation1Request(inp
 	}
 
 	req := c.newRequest(op, input, &OutputService8TestShapeOutputService8TestCaseOperation1Output{})
+
 	return OutputService8TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService8TestCaseOperation1Request}
 }
 
@@ -1632,6 +1641,7 @@ func (c *OutputService9ProtocolTest) OutputService9TestCaseOperation1Request(inp
 	}
 
 	req := c.newRequest(op, input, &OutputService9TestShapeOutputService9TestCaseOperation1Output{})
+
 	return OutputService9TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService9TestCaseOperation1Request}
 }
 
@@ -1792,6 +1802,7 @@ func (c *OutputService10ProtocolTest) OutputService10TestCaseOperation1Request(i
 	}
 
 	req := c.newRequest(op, input, &OutputService10TestShapeOutputService10TestCaseOperation1Output{})
+
 	return OutputService10TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService10TestCaseOperation1Request}
 }
 
@@ -2000,6 +2011,7 @@ func (c *OutputService11ProtocolTest) OutputService11TestCaseOperation1Request(i
 	}
 
 	req := c.newRequest(op, input, &OutputService11TestShapeOutputService11TestCaseOperation1Output{})
+
 	return OutputService11TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService11TestCaseOperation1Request}
 }
 
@@ -2143,6 +2155,7 @@ func (c *OutputService12ProtocolTest) OutputService12TestCaseOperation1Request(i
 	}
 
 	req := c.newRequest(op, input, &OutputService12TestShapeOutputService12TestCaseOperation1Output{})
+
 	return OutputService12TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService12TestCaseOperation1Request}
 }
 
@@ -2340,6 +2353,7 @@ func (c *OutputService13ProtocolTest) OutputService13TestCaseOperation1Request(i
 	}
 
 	req := c.newRequest(op, input, &OutputService13TestShapeOutputService13TestCaseOperation1Output{})
+
 	return OutputService13TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService13TestCaseOperation1Request}
 }
 
@@ -2532,6 +2546,7 @@ func (c *OutputService14ProtocolTest) OutputService14TestCaseOperation1Request(i
 	}
 
 	req := c.newRequest(op, input, &OutputService14TestShapeOutputService14TestCaseOperation1Output{})
+
 	return OutputService14TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService14TestCaseOperation1Request}
 }
 
@@ -2647,6 +2662,7 @@ func (c *OutputService14ProtocolTest) OutputService14TestCaseOperation2Request(i
 	req := c.newRequest(op, input, &OutputService14TestShapeOutputService14TestCaseOperation2Output{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return OutputService14TestCaseOperation2Request{Request: req, Input: input, Copy: c.OutputService14TestCaseOperation2Request}
 }
 
@@ -2815,6 +2831,7 @@ func (c *OutputService15ProtocolTest) OutputService15TestCaseOperation1Request(i
 	}
 
 	req := c.newRequest(op, input, &OutputService15TestShapeOutputService15TestCaseOperation1Output{})
+
 	return OutputService15TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService15TestCaseOperation1Request}
 }
 

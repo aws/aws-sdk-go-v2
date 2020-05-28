@@ -115,7 +115,7 @@ type CreateInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
+	// of the request, the timestamp of the request, and the resources affected
 	// by the request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
@@ -155,6 +155,7 @@ func (c *Client) CreateInstancesRequest(input *CreateInstancesInput) CreateInsta
 	}
 
 	req := c.newRequest(op, input, &CreateInstancesOutput{})
+
 	return CreateInstancesRequest{Request: req, Input: input, Copy: c.CreateInstancesRequest}
 }
 

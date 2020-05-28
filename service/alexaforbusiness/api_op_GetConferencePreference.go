@@ -57,6 +57,7 @@ func (c *Client) GetConferencePreferenceRequest(input *GetConferencePreferenceIn
 	}
 
 	req := c.newRequest(op, input, &GetConferencePreferenceOutput{})
+
 	return GetConferencePreferenceRequest{Request: req, Input: input, Copy: c.GetConferencePreferenceRequest}
 }
 

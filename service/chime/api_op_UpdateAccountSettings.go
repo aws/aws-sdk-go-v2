@@ -110,6 +110,7 @@ func (c *Client) UpdateAccountSettingsRequest(input *UpdateAccountSettingsInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateAccountSettingsOutput{})
+
 	return UpdateAccountSettingsRequest{Request: req, Input: input, Copy: c.UpdateAccountSettingsRequest}
 }
 

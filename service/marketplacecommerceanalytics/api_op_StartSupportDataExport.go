@@ -165,6 +165,7 @@ func (c *Client) StartSupportDataExportRequest(input *StartSupportDataExportInpu
 	}
 
 	req := c.newRequest(op, input, &StartSupportDataExportOutput{})
+
 	return StartSupportDataExportRequest{Request: req, Input: input, Copy: c.StartSupportDataExportRequest}
 }
 

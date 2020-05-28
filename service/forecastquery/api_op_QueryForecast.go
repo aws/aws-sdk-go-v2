@@ -125,6 +125,7 @@ func (c *Client) QueryForecastRequest(input *QueryForecastInput) QueryForecastRe
 	}
 
 	req := c.newRequest(op, input, &QueryForecastOutput{})
+
 	return QueryForecastRequest{Request: req, Input: input, Copy: c.QueryForecastRequest}
 }
 

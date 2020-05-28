@@ -106,6 +106,16 @@ const opUpdateWebACL = "UpdateWebACL"
 // UpdateWebACLRequest returns a request value for making API operation for
 // AWS WAF Regional.
 //
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Inserts or deletes ActivatedRule objects in a WebACL. Each Rule identifies
 // web requests that you want to allow, block, or count. When you update a WebACL,
 // you specify the following values:
@@ -148,12 +158,12 @@ const opUpdateWebACL = "UpdateWebACL"
 // with a CloudFront distribution.
 //
 // The ActivatedRule can be a rule group. If you specify a rule group as your
-// ActivatedRule, you can exclude specific rules from that rule group.
+// ActivatedRule , you can exclude specific rules from that rule group.
 //
 // If you already have a rule group associated with a web ACL and want to submit
 // an UpdateWebACL request to exclude certain rules from that rule group, you
 // must first remove the rule group from the web ACL, the re-insert it again,
-// specifying the excluded rules. For details, see ActivatedRule$ExcludedRules.
+// specifying the excluded rules. For details, see ActivatedRule$ExcludedRules .
 //
 // Be aware that if you try to add a RATE_BASED rule to a web ACL without setting
 // the rule type when first creating the rule, the UpdateWebACL request will
@@ -183,6 +193,7 @@ func (c *Client) UpdateWebACLRequest(input *UpdateWebACLInput) UpdateWebACLReque
 	}
 
 	req := c.newRequest(op, input, &UpdateWebACLOutput{})
+
 	return UpdateWebACLRequest{Request: req, Input: input, Copy: c.UpdateWebACLRequest}
 }
 

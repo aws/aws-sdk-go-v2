@@ -134,6 +134,7 @@ func (c *Client) ScheduleRunRequest(input *ScheduleRunInput) ScheduleRunRequest 
 	}
 
 	req := c.newRequest(op, input, &ScheduleRunOutput{})
+
 	return ScheduleRunRequest{Request: req, Input: input, Copy: c.ScheduleRunRequest}
 }
 

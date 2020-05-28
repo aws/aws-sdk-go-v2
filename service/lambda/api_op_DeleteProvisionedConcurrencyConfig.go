@@ -127,6 +127,7 @@ func (c *Client) DeleteProvisionedConcurrencyConfigRequest(input *DeleteProvisio
 	req := c.newRequest(op, input, &DeleteProvisionedConcurrencyConfigOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteProvisionedConcurrencyConfigRequest{Request: req, Input: input, Copy: c.DeleteProvisionedConcurrencyConfigRequest}
 }
 

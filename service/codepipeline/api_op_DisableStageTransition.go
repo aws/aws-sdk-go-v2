@@ -121,6 +121,7 @@ func (c *Client) DisableStageTransitionRequest(input *DisableStageTransitionInpu
 	req := c.newRequest(op, input, &DisableStageTransitionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DisableStageTransitionRequest{Request: req, Input: input, Copy: c.DisableStageTransitionRequest}
 }
 

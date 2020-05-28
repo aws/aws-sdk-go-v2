@@ -77,6 +77,7 @@ func (c *Client) DeleteListenerRequest(input *DeleteListenerInput) DeleteListene
 	req := c.newRequest(op, input, &DeleteListenerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteListenerRequest{Request: req, Input: input, Copy: c.DeleteListenerRequest}
 }
 

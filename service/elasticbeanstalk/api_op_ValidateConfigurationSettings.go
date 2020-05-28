@@ -119,6 +119,7 @@ func (c *Client) ValidateConfigurationSettingsRequest(input *ValidateConfigurati
 	}
 
 	req := c.newRequest(op, input, &ValidateConfigurationSettingsOutput{})
+
 	return ValidateConfigurationSettingsRequest{Request: req, Input: input, Copy: c.ValidateConfigurationSettingsRequest}
 }
 

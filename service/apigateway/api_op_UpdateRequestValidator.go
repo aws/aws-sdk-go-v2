@@ -169,6 +169,7 @@ func (c *Client) UpdateRequestValidatorRequest(input *UpdateRequestValidatorInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateRequestValidatorOutput{})
+
 	return UpdateRequestValidatorRequest{Request: req, Input: input, Copy: c.UpdateRequestValidatorRequest}
 }
 

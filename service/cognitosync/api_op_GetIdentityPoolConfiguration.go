@@ -130,6 +130,7 @@ func (c *Client) GetIdentityPoolConfigurationRequest(input *GetIdentityPoolConfi
 	}
 
 	req := c.newRequest(op, input, &GetIdentityPoolConfigurationOutput{})
+
 	return GetIdentityPoolConfigurationRequest{Request: req, Input: input, Copy: c.GetIdentityPoolConfigurationRequest}
 }
 

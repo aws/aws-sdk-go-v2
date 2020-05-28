@@ -16,8 +16,8 @@ type ListS3ResourcesInput struct {
 	// in the response. The default value is 250.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// The Amazon Macie member account ID whose associated S3 resources you want
-	// to list.
+	// The Amazon Macie Classic member account ID whose associated S3 resources
+	// you want to list.
 	MemberAccountId *string `locationName:"memberAccountId" type:"string"`
 
 	// Use this parameter when paginating results. Set its value to null on your
@@ -55,11 +55,11 @@ const opListS3Resources = "ListS3Resources"
 // ListS3ResourcesRequest returns a request value for making API operation for
 // Amazon Macie.
 //
-// Lists all the S3 resources associated with Amazon Macie. If memberAccountId
+// Lists all the S3 resources associated with Amazon Macie Classic. If memberAccountId
 // isn't specified, the action lists the S3 resources associated with Amazon
-// Macie for the current master account. If memberAccountId is specified, the
-// action lists the S3 resources associated with Amazon Macie for the specified
-// member account.
+// Macie Classic for the current master account. If memberAccountId is specified,
+// the action lists the S3 resources associated with Amazon Macie Classic for
+// the specified member account.
 //
 //    // Example sending a request using ListS3ResourcesRequest.
 //    req := client.ListS3ResourcesRequest(params)
@@ -87,6 +87,7 @@ func (c *Client) ListS3ResourcesRequest(input *ListS3ResourcesInput) ListS3Resou
 	}
 
 	req := c.newRequest(op, input, &ListS3ResourcesOutput{})
+
 	return ListS3ResourcesRequest{Request: req, Input: input, Copy: c.ListS3ResourcesRequest}
 }
 

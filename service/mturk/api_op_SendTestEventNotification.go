@@ -96,6 +96,7 @@ func (c *Client) SendTestEventNotificationRequest(input *SendTestEventNotificati
 	}
 
 	req := c.newRequest(op, input, &SendTestEventNotificationOutput{})
+
 	return SendTestEventNotificationRequest{Request: req, Input: input, Copy: c.SendTestEventNotificationRequest}
 }
 

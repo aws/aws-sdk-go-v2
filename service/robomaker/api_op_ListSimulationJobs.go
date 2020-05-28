@@ -177,6 +177,7 @@ func (c *Client) ListSimulationJobsRequest(input *ListSimulationJobsInput) ListS
 	}
 
 	req := c.newRequest(op, input, &ListSimulationJobsOutput{})
+
 	return ListSimulationJobsRequest{Request: req, Input: input, Copy: c.ListSimulationJobsRequest}
 }
 

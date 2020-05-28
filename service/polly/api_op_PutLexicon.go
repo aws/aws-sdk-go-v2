@@ -114,6 +114,7 @@ func (c *Client) PutLexiconRequest(input *PutLexiconInput) PutLexiconRequest {
 	}
 
 	req := c.newRequest(op, input, &PutLexiconOutput{})
+
 	return PutLexiconRequest{Request: req, Input: input, Copy: c.PutLexiconRequest}
 }
 

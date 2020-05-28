@@ -123,6 +123,7 @@ func (c *Client) UpdateRecommenderConfigurationRequest(input *UpdateRecommenderC
 	}
 
 	req := c.newRequest(op, input, &UpdateRecommenderConfigurationOutput{})
+
 	return UpdateRecommenderConfigurationRequest{Request: req, Input: input, Copy: c.UpdateRecommenderConfigurationRequest}
 }
 

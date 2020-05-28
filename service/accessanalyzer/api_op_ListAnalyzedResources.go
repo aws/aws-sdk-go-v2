@@ -154,6 +154,7 @@ func (c *Client) ListAnalyzedResourcesRequest(input *ListAnalyzedResourcesInput)
 	}
 
 	req := c.newRequest(op, input, &ListAnalyzedResourcesOutput{})
+
 	return ListAnalyzedResourcesRequest{Request: req, Input: input, Copy: c.ListAnalyzedResourcesRequest}
 }
 

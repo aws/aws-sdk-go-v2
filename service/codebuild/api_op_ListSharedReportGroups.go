@@ -103,6 +103,12 @@ func (c *Client) ListSharedReportGroupsRequest(input *ListSharedReportGroupsInpu
 		Name:       opListSharedReportGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -110,6 +116,7 @@ func (c *Client) ListSharedReportGroupsRequest(input *ListSharedReportGroupsInpu
 	}
 
 	req := c.newRequest(op, input, &ListSharedReportGroupsOutput{})
+
 	return ListSharedReportGroupsRequest{Request: req, Input: input, Copy: c.ListSharedReportGroupsRequest}
 }
 
@@ -135,6 +142,53 @@ func (r ListSharedReportGroupsRequest) Send(ctx context.Context) (*ListSharedRep
 	}
 
 	return resp, nil
+}
+
+// NewListSharedReportGroupsRequestPaginator returns a paginator for ListSharedReportGroups.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListSharedReportGroupsRequest(input)
+//   p := codebuild.NewListSharedReportGroupsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListSharedReportGroupsPaginator(req ListSharedReportGroupsRequest) ListSharedReportGroupsPaginator {
+	return ListSharedReportGroupsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListSharedReportGroupsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListSharedReportGroupsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListSharedReportGroupsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListSharedReportGroupsPaginator) CurrentPage() *ListSharedReportGroupsOutput {
+	return p.Pager.CurrentPage().(*ListSharedReportGroupsOutput)
 }
 
 // ListSharedReportGroupsResponse is the response type for the

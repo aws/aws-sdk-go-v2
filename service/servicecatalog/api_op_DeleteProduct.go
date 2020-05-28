@@ -88,6 +88,7 @@ func (c *Client) DeleteProductRequest(input *DeleteProductInput) DeleteProductRe
 	}
 
 	req := c.newRequest(op, input, &DeleteProductOutput{})
+
 	return DeleteProductRequest{Request: req, Input: input, Copy: c.DeleteProductRequest}
 }
 

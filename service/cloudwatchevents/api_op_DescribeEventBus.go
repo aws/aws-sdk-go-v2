@@ -89,6 +89,7 @@ func (c *Client) DescribeEventBusRequest(input *DescribeEventBusInput) DescribeE
 	}
 
 	req := c.newRequest(op, input, &DescribeEventBusOutput{})
+
 	return DescribeEventBusRequest{Request: req, Input: input, Copy: c.DescribeEventBusRequest}
 }
 

@@ -152,6 +152,7 @@ func (c *Client) ListWebsiteAuthorizationProvidersRequest(input *ListWebsiteAuth
 	}
 
 	req := c.newRequest(op, input, &ListWebsiteAuthorizationProvidersOutput{})
+
 	return ListWebsiteAuthorizationProvidersRequest{Request: req, Input: input, Copy: c.ListWebsiteAuthorizationProvidersRequest}
 }
 

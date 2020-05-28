@@ -154,6 +154,7 @@ func (c *Client) ListPrincipalPoliciesRequest(input *ListPrincipalPoliciesInput)
 	}
 
 	req := c.newRequest(op, input, &ListPrincipalPoliciesOutput{})
+
 	return ListPrincipalPoliciesRequest{Request: req, Input: input, Copy: c.ListPrincipalPoliciesRequest}
 }
 

@@ -79,6 +79,7 @@ func (c *Client) DeleteReplicationInstanceRequest(input *DeleteReplicationInstan
 	}
 
 	req := c.newRequest(op, input, &DeleteReplicationInstanceOutput{})
+
 	return DeleteReplicationInstanceRequest{Request: req, Input: input, Copy: c.DeleteReplicationInstanceRequest}
 }
 

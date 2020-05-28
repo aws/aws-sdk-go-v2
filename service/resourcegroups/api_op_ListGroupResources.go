@@ -197,6 +197,7 @@ func (c *Client) ListGroupResourcesRequest(input *ListGroupResourcesInput) ListG
 	}
 
 	req := c.newRequest(op, input, &ListGroupResourcesOutput{})
+
 	return ListGroupResourcesRequest{Request: req, Input: input, Copy: c.ListGroupResourcesRequest}
 }
 

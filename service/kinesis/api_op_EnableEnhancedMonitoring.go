@@ -124,6 +124,7 @@ func (c *Client) EnableEnhancedMonitoringRequest(input *EnableEnhancedMonitoring
 	}
 
 	req := c.newRequest(op, input, &EnableEnhancedMonitoringOutput{})
+
 	return EnableEnhancedMonitoringRequest{Request: req, Input: input, Copy: c.EnableEnhancedMonitoringRequest}
 }
 

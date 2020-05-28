@@ -98,6 +98,7 @@ func (c *Client) ImportMigrationTaskRequest(input *ImportMigrationTaskInput) Imp
 	}
 
 	req := c.newRequest(op, input, &ImportMigrationTaskOutput{})
+
 	return ImportMigrationTaskRequest{Request: req, Input: input, Copy: c.ImportMigrationTaskRequest}
 }
 

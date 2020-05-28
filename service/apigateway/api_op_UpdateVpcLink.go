@@ -198,6 +198,7 @@ func (c *Client) UpdateVpcLinkRequest(input *UpdateVpcLinkInput) UpdateVpcLinkRe
 	}
 
 	req := c.newRequest(op, input, &UpdateVpcLinkOutput{})
+
 	return UpdateVpcLinkRequest{Request: req, Input: input, Copy: c.UpdateVpcLinkRequest}
 }
 

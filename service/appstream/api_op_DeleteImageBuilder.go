@@ -76,6 +76,7 @@ func (c *Client) DeleteImageBuilderRequest(input *DeleteImageBuilderInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteImageBuilderOutput{})
+
 	return DeleteImageBuilderRequest{Request: req, Input: input, Copy: c.DeleteImageBuilderRequest}
 }
 

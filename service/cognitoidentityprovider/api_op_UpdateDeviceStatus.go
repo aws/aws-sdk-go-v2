@@ -90,6 +90,7 @@ func (c *Client) UpdateDeviceStatusRequest(input *UpdateDeviceStatusInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateDeviceStatusOutput{})
+
 	return UpdateDeviceStatusRequest{Request: req, Input: input, Copy: c.UpdateDeviceStatusRequest}
 }
 

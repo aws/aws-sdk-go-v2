@@ -123,6 +123,7 @@ func (c *Client) CreateNetworkProfileRequest(input *CreateNetworkProfileInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateNetworkProfileOutput{})
+
 	return CreateNetworkProfileRequest{Request: req, Input: input, Copy: c.CreateNetworkProfileRequest}
 }
 

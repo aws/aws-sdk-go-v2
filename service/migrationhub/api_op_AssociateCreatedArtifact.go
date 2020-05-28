@@ -120,6 +120,7 @@ func (c *Client) AssociateCreatedArtifactRequest(input *AssociateCreatedArtifact
 	}
 
 	req := c.newRequest(op, input, &AssociateCreatedArtifactOutput{})
+
 	return AssociateCreatedArtifactRequest{Request: req, Input: input, Copy: c.AssociateCreatedArtifactRequest}
 }
 

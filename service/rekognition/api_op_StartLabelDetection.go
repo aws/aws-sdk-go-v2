@@ -136,6 +136,7 @@ func (c *Client) StartLabelDetectionRequest(input *StartLabelDetectionInput) Sta
 	}
 
 	req := c.newRequest(op, input, &StartLabelDetectionOutput{})
+
 	return StartLabelDetectionRequest{Request: req, Input: input, Copy: c.StartLabelDetectionRequest}
 }
 

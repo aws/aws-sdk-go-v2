@@ -82,6 +82,7 @@ func (c *Client) RevokeIpRulesRequest(input *RevokeIpRulesInput) RevokeIpRulesRe
 	}
 
 	req := c.newRequest(op, input, &RevokeIpRulesOutput{})
+
 	return RevokeIpRulesRequest{Request: req, Input: input, Copy: c.RevokeIpRulesRequest}
 }
 

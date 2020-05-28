@@ -85,6 +85,7 @@ func (c *Client) DeleteGroupRequest(input *DeleteGroupInput) DeleteGroupRequest 
 	req := c.newRequest(op, input, &DeleteGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteGroupRequest{Request: req, Input: input, Copy: c.DeleteGroupRequest}
 }
 

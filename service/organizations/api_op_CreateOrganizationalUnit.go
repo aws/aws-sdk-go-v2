@@ -109,6 +109,7 @@ func (c *Client) CreateOrganizationalUnitRequest(input *CreateOrganizationalUnit
 	}
 
 	req := c.newRequest(op, input, &CreateOrganizationalUnitOutput{})
+
 	return CreateOrganizationalUnitRequest{Request: req, Input: input, Copy: c.CreateOrganizationalUnitRequest}
 }
 

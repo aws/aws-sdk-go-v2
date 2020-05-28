@@ -150,6 +150,7 @@ func (c *Client) ClaimGameServerRequest(input *ClaimGameServerInput) ClaimGameSe
 	}
 
 	req := c.newRequest(op, input, &ClaimGameServerOutput{})
+
 	return ClaimGameServerRequest{Request: req, Input: input, Copy: c.ClaimGameServerRequest}
 }
 

@@ -112,6 +112,7 @@ func (c *Client) ListIdentitiesRequest(input *ListIdentitiesInput) ListIdentitie
 	}
 
 	req := c.newRequest(op, input, &ListIdentitiesOutput{})
+
 	return ListIdentitiesRequest{Request: req, Input: input, Copy: c.ListIdentitiesRequest}
 }
 

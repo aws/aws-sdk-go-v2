@@ -227,6 +227,7 @@ func (c *Client) CreateSMBFileShareRequest(input *CreateSMBFileShareInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateSMBFileShareOutput{})
+
 	return CreateSMBFileShareRequest{Request: req, Input: input, Copy: c.CreateSMBFileShareRequest}
 }
 

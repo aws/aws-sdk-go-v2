@@ -82,6 +82,7 @@ func (c *Client) DeleteCacheSubnetGroupRequest(input *DeleteCacheSubnetGroupInpu
 	req := c.newRequest(op, input, &DeleteCacheSubnetGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteCacheSubnetGroupRequest{Request: req, Input: input, Copy: c.DeleteCacheSubnetGroupRequest}
 }
 

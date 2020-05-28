@@ -44,6 +44,12 @@ func (s *DescribeIndexInput) Validate() error {
 type DescribeIndexOutput struct {
 	_ struct{} `type:"structure"`
 
+	// For enterprise edtion indexes, you can choose to use additional capacity
+	// to meet the needs of your application. This contains the capacity units used
+	// for the index. A 0 for the query capacity or the storage capacity indicates
+	// that the index is using the default capacity for the index.
+	CapacityUnits *CapacityUnitsConfiguration `type:"structure"`
+
 	// The Unix datetime that the index was created.
 	CreatedAt *time.Time `type:"timestamp"`
 
@@ -52,6 +58,10 @@ type DescribeIndexOutput struct {
 
 	// Configuration settings for any metadata applied to the documents in the index.
 	DocumentMetadataConfigurations []DocumentMetadataConfiguration `type:"list"`
+
+	// The Amazon Kendra edition used for the index. You decide the edition when
+	// you create the index.
+	Edition IndexEdition `type:"string" enum:"true"`
 
 	// When th eStatus field value is FAILED, the ErrorMessage field contains a
 	// message that explains why.
@@ -116,6 +126,7 @@ func (c *Client) DescribeIndexRequest(input *DescribeIndexInput) DescribeIndexRe
 	}
 
 	req := c.newRequest(op, input, &DescribeIndexOutput{})
+
 	return DescribeIndexRequest{Request: req, Input: input, Copy: c.DescribeIndexRequest}
 }
 

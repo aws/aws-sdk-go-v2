@@ -96,6 +96,7 @@ func (c *Client) ModifyInstanceFleetRequest(input *ModifyInstanceFleetInput) Mod
 	req := c.newRequest(op, input, &ModifyInstanceFleetOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return ModifyInstanceFleetRequest{Request: req, Input: input, Copy: c.ModifyInstanceFleetRequest}
 }
 

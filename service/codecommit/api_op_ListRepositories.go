@@ -83,6 +83,7 @@ func (c *Client) ListRepositoriesRequest(input *ListRepositoriesInput) ListRepos
 	}
 
 	req := c.newRequest(op, input, &ListRepositoriesOutput{})
+
 	return ListRepositoriesRequest{Request: req, Input: input, Copy: c.ListRepositoriesRequest}
 }
 

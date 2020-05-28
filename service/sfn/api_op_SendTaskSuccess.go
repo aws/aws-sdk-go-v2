@@ -88,6 +88,7 @@ func (c *Client) SendTaskSuccessRequest(input *SendTaskSuccessInput) SendTaskSuc
 	}
 
 	req := c.newRequest(op, input, &SendTaskSuccessOutput{})
+
 	return SendTaskSuccessRequest{Request: req, Input: input, Copy: c.SendTaskSuccessRequest}
 }
 

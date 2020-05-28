@@ -96,6 +96,7 @@ func (c *Client) RemoveRoleFromDBClusterRequest(input *RemoveRoleFromDBClusterIn
 	req := c.newRequest(op, input, &RemoveRoleFromDBClusterOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RemoveRoleFromDBClusterRequest{Request: req, Input: input, Copy: c.RemoveRoleFromDBClusterRequest}
 }
 

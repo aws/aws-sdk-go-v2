@@ -109,6 +109,7 @@ func (c *Client) RemoveRoleFromInstanceProfileRequest(input *RemoveRoleFromInsta
 	req := c.newRequest(op, input, &RemoveRoleFromInstanceProfileOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RemoveRoleFromInstanceProfileRequest{Request: req, Input: input, Copy: c.RemoveRoleFromInstanceProfileRequest}
 }
 

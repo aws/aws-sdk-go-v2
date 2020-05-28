@@ -101,6 +101,7 @@ func (c *Client) DeleteAccessPointRequest(input *DeleteAccessPointInput) DeleteA
 	req := c.newRequest(op, input, &DeleteAccessPointOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteAccessPointRequest{Request: req, Input: input, Copy: c.DeleteAccessPointRequest}
 }
 

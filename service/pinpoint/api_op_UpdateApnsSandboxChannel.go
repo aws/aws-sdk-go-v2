@@ -119,6 +119,7 @@ func (c *Client) UpdateApnsSandboxChannelRequest(input *UpdateApnsSandboxChannel
 	}
 
 	req := c.newRequest(op, input, &UpdateApnsSandboxChannelOutput{})
+
 	return UpdateApnsSandboxChannelRequest{Request: req, Input: input, Copy: c.UpdateApnsSandboxChannelRequest}
 }
 

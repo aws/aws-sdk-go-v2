@@ -85,6 +85,7 @@ func (c *Client) GetSecurityConfigurationsRequest(input *GetSecurityConfiguratio
 	}
 
 	req := c.newRequest(op, input, &GetSecurityConfigurationsOutput{})
+
 	return GetSecurityConfigurationsRequest{Request: req, Input: input, Copy: c.GetSecurityConfigurationsRequest}
 }
 

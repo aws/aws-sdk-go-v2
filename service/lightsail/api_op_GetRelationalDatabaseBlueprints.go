@@ -77,6 +77,7 @@ func (c *Client) GetRelationalDatabaseBlueprintsRequest(input *GetRelationalData
 	}
 
 	req := c.newRequest(op, input, &GetRelationalDatabaseBlueprintsOutput{})
+
 	return GetRelationalDatabaseBlueprintsRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseBlueprintsRequest}
 }
 

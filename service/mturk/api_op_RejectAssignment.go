@@ -95,6 +95,7 @@ func (c *Client) RejectAssignmentRequest(input *RejectAssignmentInput) RejectAss
 	}
 
 	req := c.newRequest(op, input, &RejectAssignmentOutput{})
+
 	return RejectAssignmentRequest{Request: req, Input: input, Copy: c.RejectAssignmentRequest}
 }
 

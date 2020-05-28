@@ -135,6 +135,7 @@ func (c *Client) GetCardinalityRequest(input *GetCardinalityInput) GetCardinalit
 	}
 
 	req := c.newRequest(op, input, &GetCardinalityOutput{})
+
 	return GetCardinalityRequest{Request: req, Input: input, Copy: c.GetCardinalityRequest}
 }
 

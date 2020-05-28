@@ -83,6 +83,7 @@ func (c *Client) StartInstanceRequest(input *StartInstanceInput) StartInstanceRe
 	req := c.newRequest(op, input, &StartInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StartInstanceRequest{Request: req, Input: input, Copy: c.StartInstanceRequest}
 }
 

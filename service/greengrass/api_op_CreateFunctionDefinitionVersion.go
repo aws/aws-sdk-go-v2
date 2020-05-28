@@ -162,6 +162,7 @@ func (c *Client) CreateFunctionDefinitionVersionRequest(input *CreateFunctionDef
 	}
 
 	req := c.newRequest(op, input, &CreateFunctionDefinitionVersionOutput{})
+
 	return CreateFunctionDefinitionVersionRequest{Request: req, Input: input, Copy: c.CreateFunctionDefinitionVersionRequest}
 }
 

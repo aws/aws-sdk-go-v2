@@ -107,6 +107,7 @@ func (c *Client) DescribeReplicationInstancesRequest(input *DescribeReplicationI
 	}
 
 	req := c.newRequest(op, input, &DescribeReplicationInstancesOutput{})
+
 	return DescribeReplicationInstancesRequest{Request: req, Input: input, Copy: c.DescribeReplicationInstancesRequest}
 }
 

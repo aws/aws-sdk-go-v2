@@ -112,6 +112,7 @@ func (c *Client) ListActionExecutionsRequest(input *ListActionExecutionsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListActionExecutionsOutput{})
+
 	return ListActionExecutionsRequest{Request: req, Input: input, Copy: c.ListActionExecutionsRequest}
 }
 

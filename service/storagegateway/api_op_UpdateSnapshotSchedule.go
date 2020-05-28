@@ -147,6 +147,7 @@ func (c *Client) UpdateSnapshotScheduleRequest(input *UpdateSnapshotScheduleInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateSnapshotScheduleOutput{})
+
 	return UpdateSnapshotScheduleRequest{Request: req, Input: input, Copy: c.UpdateSnapshotScheduleRequest}
 }
 

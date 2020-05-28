@@ -112,6 +112,7 @@ func (c *Client) DeleteVoiceConnectorTerminationCredentialsRequest(input *Delete
 	req := c.newRequest(op, input, &DeleteVoiceConnectorTerminationCredentialsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteVoiceConnectorTerminationCredentialsRequest{Request: req, Input: input, Copy: c.DeleteVoiceConnectorTerminationCredentialsRequest}
 }
 

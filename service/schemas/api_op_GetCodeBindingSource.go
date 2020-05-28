@@ -132,6 +132,7 @@ func (c *Client) GetCodeBindingSourceRequest(input *GetCodeBindingSourceInput) G
 	}
 
 	req := c.newRequest(op, input, &GetCodeBindingSourceOutput{})
+
 	return GetCodeBindingSourceRequest{Request: req, Input: input, Copy: c.GetCodeBindingSourceRequest}
 }
 

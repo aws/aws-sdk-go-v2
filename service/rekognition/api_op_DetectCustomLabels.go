@@ -159,6 +159,7 @@ func (c *Client) DetectCustomLabelsRequest(input *DetectCustomLabelsInput) Detec
 	}
 
 	req := c.newRequest(op, input, &DetectCustomLabelsOutput{})
+
 	return DetectCustomLabelsRequest{Request: req, Input: input, Copy: c.DetectCustomLabelsRequest}
 }
 

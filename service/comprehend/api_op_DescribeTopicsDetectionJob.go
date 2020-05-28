@@ -80,6 +80,7 @@ func (c *Client) DescribeTopicsDetectionJobRequest(input *DescribeTopicsDetectio
 	}
 
 	req := c.newRequest(op, input, &DescribeTopicsDetectionJobOutput{})
+
 	return DescribeTopicsDetectionJobRequest{Request: req, Input: input, Copy: c.DescribeTopicsDetectionJobRequest}
 }
 

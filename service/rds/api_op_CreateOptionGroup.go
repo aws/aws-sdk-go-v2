@@ -117,6 +117,7 @@ func (c *Client) CreateOptionGroupRequest(input *CreateOptionGroupInput) CreateO
 	}
 
 	req := c.newRequest(op, input, &CreateOptionGroupOutput{})
+
 	return CreateOptionGroupRequest{Request: req, Input: input, Copy: c.CreateOptionGroupRequest}
 }
 

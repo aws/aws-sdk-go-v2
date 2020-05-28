@@ -112,6 +112,7 @@ func (c *Client) DescribeDataRepositoryTasksRequest(input *DescribeDataRepositor
 	}
 
 	req := c.newRequest(op, input, &DescribeDataRepositoryTasksOutput{})
+
 	return DescribeDataRepositoryTasksRequest{Request: req, Input: input, Copy: c.DescribeDataRepositoryTasksRequest}
 }
 

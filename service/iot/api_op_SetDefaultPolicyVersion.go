@@ -115,6 +115,7 @@ func (c *Client) SetDefaultPolicyVersionRequest(input *SetDefaultPolicyVersionIn
 	req := c.newRequest(op, input, &SetDefaultPolicyVersionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetDefaultPolicyVersionRequest{Request: req, Input: input, Copy: c.SetDefaultPolicyVersionRequest}
 }
 

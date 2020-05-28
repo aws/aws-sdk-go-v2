@@ -72,6 +72,7 @@ func (c *Client) ListLogSubscriptionsRequest(input *ListLogSubscriptionsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListLogSubscriptionsOutput{})
+
 	return ListLogSubscriptionsRequest{Request: req, Input: input, Copy: c.ListLogSubscriptionsRequest}
 }
 

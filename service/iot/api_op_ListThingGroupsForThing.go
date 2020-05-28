@@ -139,6 +139,7 @@ func (c *Client) ListThingGroupsForThingRequest(input *ListThingGroupsForThingIn
 	}
 
 	req := c.newRequest(op, input, &ListThingGroupsForThingOutput{})
+
 	return ListThingGroupsForThingRequest{Request: req, Input: input, Copy: c.ListThingGroupsForThingRequest}
 }
 

@@ -192,6 +192,7 @@ func (c *Client) DescribeDocumentVersionsRequest(input *DescribeDocumentVersions
 	}
 
 	req := c.newRequest(op, input, &DescribeDocumentVersionsOutput{})
+
 	return DescribeDocumentVersionsRequest{Request: req, Input: input, Copy: c.DescribeDocumentVersionsRequest}
 }
 

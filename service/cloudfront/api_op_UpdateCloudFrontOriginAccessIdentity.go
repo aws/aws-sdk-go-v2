@@ -141,6 +141,7 @@ func (c *Client) UpdateCloudFrontOriginAccessIdentityRequest(input *UpdateCloudF
 	}
 
 	req := c.newRequest(op, input, &UpdateCloudFrontOriginAccessIdentityOutput{})
+
 	return UpdateCloudFrontOriginAccessIdentityRequest{Request: req, Input: input, Copy: c.UpdateCloudFrontOriginAccessIdentityRequest}
 }
 

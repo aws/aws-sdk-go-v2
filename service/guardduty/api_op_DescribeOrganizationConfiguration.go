@@ -121,6 +121,7 @@ func (c *Client) DescribeOrganizationConfigurationRequest(input *DescribeOrganiz
 	}
 
 	req := c.newRequest(op, input, &DescribeOrganizationConfigurationOutput{})
+
 	return DescribeOrganizationConfigurationRequest{Request: req, Input: input, Copy: c.DescribeOrganizationConfigurationRequest}
 }
 

@@ -96,6 +96,7 @@ func (c *Client) DescribeLoggingStatusRequest(input *DescribeLoggingStatusInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeLoggingStatusOutput{})
+
 	return DescribeLoggingStatusRequest{Request: req, Input: input, Copy: c.DescribeLoggingStatusRequest}
 }
 

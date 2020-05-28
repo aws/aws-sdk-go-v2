@@ -72,6 +72,7 @@ func (c *Client) ResendContactReachabilityEmailRequest(input *ResendContactReach
 	}
 
 	req := c.newRequest(op, input, &ResendContactReachabilityEmailOutput{})
+
 	return ResendContactReachabilityEmailRequest{Request: req, Input: input, Copy: c.ResendContactReachabilityEmailRequest}
 }
 

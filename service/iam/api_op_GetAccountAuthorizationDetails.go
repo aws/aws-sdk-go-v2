@@ -139,6 +139,7 @@ func (c *Client) GetAccountAuthorizationDetailsRequest(input *GetAccountAuthoriz
 	}
 
 	req := c.newRequest(op, input, &GetAccountAuthorizationDetailsOutput{})
+
 	return GetAccountAuthorizationDetailsRequest{Request: req, Input: input, Copy: c.GetAccountAuthorizationDetailsRequest}
 }
 

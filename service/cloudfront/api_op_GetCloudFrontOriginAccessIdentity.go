@@ -112,6 +112,7 @@ func (c *Client) GetCloudFrontOriginAccessIdentityRequest(input *GetCloudFrontOr
 	}
 
 	req := c.newRequest(op, input, &GetCloudFrontOriginAccessIdentityOutput{})
+
 	return GetCloudFrontOriginAccessIdentityRequest{Request: req, Input: input, Copy: c.GetCloudFrontOriginAccessIdentityRequest}
 }
 

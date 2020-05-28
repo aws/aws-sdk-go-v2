@@ -361,6 +361,7 @@ func (c *Client) RegisterTaskDefinitionRequest(input *RegisterTaskDefinitionInpu
 	}
 
 	req := c.newRequest(op, input, &RegisterTaskDefinitionOutput{})
+
 	return RegisterTaskDefinitionRequest{Request: req, Input: input, Copy: c.RegisterTaskDefinitionRequest}
 }
 

@@ -129,6 +129,7 @@ func (c *Client) SendVoiceMessageRequest(input *SendVoiceMessageInput) SendVoice
 	}
 
 	req := c.newRequest(op, input, &SendVoiceMessageOutput{})
+
 	return SendVoiceMessageRequest{Request: req, Input: input, Copy: c.SendVoiceMessageRequest}
 }
 

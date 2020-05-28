@@ -88,6 +88,7 @@ func (c *Client) CreateWorkerBlockRequest(input *CreateWorkerBlockInput) CreateW
 	}
 
 	req := c.newRequest(op, input, &CreateWorkerBlockOutput{})
+
 	return CreateWorkerBlockRequest{Request: req, Input: input, Copy: c.CreateWorkerBlockRequest}
 }
 

@@ -143,6 +143,7 @@ func (c *Client) CreateCertificateAuthorityRequest(input *CreateCertificateAutho
 	}
 
 	req := c.newRequest(op, input, &CreateCertificateAuthorityOutput{})
+
 	return CreateCertificateAuthorityRequest{Request: req, Input: input, Copy: c.CreateCertificateAuthorityRequest}
 }
 

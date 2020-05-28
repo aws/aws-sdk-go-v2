@@ -96,6 +96,7 @@ func (c *Client) DescribePatchGroupsRequest(input *DescribePatchGroupsInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribePatchGroupsOutput{})
+
 	return DescribePatchGroupsRequest{Request: req, Input: input, Copy: c.DescribePatchGroupsRequest}
 }
 

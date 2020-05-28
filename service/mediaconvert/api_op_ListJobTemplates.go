@@ -170,6 +170,7 @@ func (c *Client) ListJobTemplatesRequest(input *ListJobTemplatesInput) ListJobTe
 	}
 
 	req := c.newRequest(op, input, &ListJobTemplatesOutput{})
+
 	return ListJobTemplatesRequest{Request: req, Input: input, Copy: c.ListJobTemplatesRequest}
 }
 

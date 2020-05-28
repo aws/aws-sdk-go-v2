@@ -186,6 +186,7 @@ func (c *Client) PutBucketNotificationConfigurationRequest(input *PutBucketNotif
 	req := c.newRequest(op, input, &PutBucketNotificationConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutBucketNotificationConfigurationRequest{Request: req, Input: input, Copy: c.PutBucketNotificationConfigurationRequest}
 }
 

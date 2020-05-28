@@ -182,6 +182,7 @@ func (c *Client) RegisterClientRequest(input *RegisterClientInput) RegisterClien
 
 	req := c.newRequest(op, input, &RegisterClientOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return RegisterClientRequest{Request: req, Input: input, Copy: c.RegisterClientRequest}
 }
 

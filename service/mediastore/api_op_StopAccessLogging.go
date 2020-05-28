@@ -78,6 +78,7 @@ func (c *Client) StopAccessLoggingRequest(input *StopAccessLoggingInput) StopAcc
 	}
 
 	req := c.newRequest(op, input, &StopAccessLoggingOutput{})
+
 	return StopAccessLoggingRequest{Request: req, Input: input, Copy: c.StopAccessLoggingRequest}
 }
 

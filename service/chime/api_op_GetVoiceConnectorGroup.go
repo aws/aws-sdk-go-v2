@@ -102,6 +102,7 @@ func (c *Client) GetVoiceConnectorGroupRequest(input *GetVoiceConnectorGroupInpu
 	}
 
 	req := c.newRequest(op, input, &GetVoiceConnectorGroupOutput{})
+
 	return GetVoiceConnectorGroupRequest{Request: req, Input: input, Copy: c.GetVoiceConnectorGroupRequest}
 }
 

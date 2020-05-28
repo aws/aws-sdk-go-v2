@@ -82,6 +82,7 @@ func (c *Client) DeleteDBInstanceRequest(input *DeleteDBInstanceInput) DeleteDBI
 	}
 
 	req := c.newRequest(op, input, &DeleteDBInstanceOutput{})
+
 	return DeleteDBInstanceRequest{Request: req, Input: input, Copy: c.DeleteDBInstanceRequest}
 }
 

@@ -103,6 +103,7 @@ func (c *Client) ListMemberAccountsRequest(input *ListMemberAccountsInput) ListM
 	}
 
 	req := c.newRequest(op, input, &ListMemberAccountsOutput{})
+
 	return ListMemberAccountsRequest{Request: req, Input: input, Copy: c.ListMemberAccountsRequest}
 }
 

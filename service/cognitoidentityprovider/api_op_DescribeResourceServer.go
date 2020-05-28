@@ -93,6 +93,7 @@ func (c *Client) DescribeResourceServerRequest(input *DescribeResourceServerInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeResourceServerOutput{})
+
 	return DescribeResourceServerRequest{Request: req, Input: input, Copy: c.DescribeResourceServerRequest}
 }
 

@@ -153,6 +153,7 @@ func (c *Client) AddFacetToObjectRequest(input *AddFacetToObjectInput) AddFacetT
 	}
 
 	req := c.newRequest(op, input, &AddFacetToObjectOutput{})
+
 	return AddFacetToObjectRequest{Request: req, Input: input, Copy: c.AddFacetToObjectRequest}
 }
 

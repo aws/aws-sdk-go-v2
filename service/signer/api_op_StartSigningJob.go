@@ -180,6 +180,7 @@ func (c *Client) StartSigningJobRequest(input *StartSigningJobInput) StartSignin
 	}
 
 	req := c.newRequest(op, input, &StartSigningJobOutput{})
+
 	return StartSigningJobRequest{Request: req, Input: input, Copy: c.StartSigningJobRequest}
 }
 

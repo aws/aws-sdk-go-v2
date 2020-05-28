@@ -107,6 +107,7 @@ func (c *Client) DeleteMeshRequest(input *DeleteMeshInput) DeleteMeshRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteMeshOutput{})
+
 	return DeleteMeshRequest{Request: req, Input: input, Copy: c.DeleteMeshRequest}
 }
 

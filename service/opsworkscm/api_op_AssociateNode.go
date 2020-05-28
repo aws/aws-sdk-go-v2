@@ -131,6 +131,7 @@ func (c *Client) AssociateNodeRequest(input *AssociateNodeInput) AssociateNodeRe
 	}
 
 	req := c.newRequest(op, input, &AssociateNodeOutput{})
+
 	return AssociateNodeRequest{Request: req, Input: input, Copy: c.AssociateNodeRequest}
 }
 

@@ -80,6 +80,7 @@ func (c *Client) DeleteRunRequest(input *DeleteRunInput) DeleteRunRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteRunOutput{})
+
 	return DeleteRunRequest{Request: req, Input: input, Copy: c.DeleteRunRequest}
 }
 

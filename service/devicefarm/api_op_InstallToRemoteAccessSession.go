@@ -98,6 +98,7 @@ func (c *Client) InstallToRemoteAccessSessionRequest(input *InstallToRemoteAcces
 	}
 
 	req := c.newRequest(op, input, &InstallToRemoteAccessSessionOutput{})
+
 	return InstallToRemoteAccessSessionRequest{Request: req, Input: input, Copy: c.InstallToRemoteAccessSessionRequest}
 }
 

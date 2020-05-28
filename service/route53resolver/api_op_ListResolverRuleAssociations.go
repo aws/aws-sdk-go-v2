@@ -115,6 +115,7 @@ func (c *Client) ListResolverRuleAssociationsRequest(input *ListResolverRuleAsso
 	}
 
 	req := c.newRequest(op, input, &ListResolverRuleAssociationsOutput{})
+
 	return ListResolverRuleAssociationsRequest{Request: req, Input: input, Copy: c.ListResolverRuleAssociationsRequest}
 }
 

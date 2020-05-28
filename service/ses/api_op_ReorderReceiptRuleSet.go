@@ -96,6 +96,7 @@ func (c *Client) ReorderReceiptRuleSetRequest(input *ReorderReceiptRuleSetInput)
 	}
 
 	req := c.newRequest(op, input, &ReorderReceiptRuleSetOutput{})
+
 	return ReorderReceiptRuleSetRequest{Request: req, Input: input, Copy: c.ReorderReceiptRuleSetRequest}
 }
 

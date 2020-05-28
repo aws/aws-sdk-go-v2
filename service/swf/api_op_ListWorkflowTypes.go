@@ -149,6 +149,7 @@ func (c *Client) ListWorkflowTypesRequest(input *ListWorkflowTypesInput) ListWor
 	}
 
 	req := c.newRequest(op, input, &ListWorkflowTypesOutput{})
+
 	return ListWorkflowTypesRequest{Request: req, Input: input, Copy: c.ListWorkflowTypesRequest}
 }
 

@@ -199,6 +199,7 @@ func (c *Client) UpdateGraphqlApiRequest(input *UpdateGraphqlApiInput) UpdateGra
 	}
 
 	req := c.newRequest(op, input, &UpdateGraphqlApiOutput{})
+
 	return UpdateGraphqlApiRequest{Request: req, Input: input, Copy: c.UpdateGraphqlApiRequest}
 }
 

@@ -106,6 +106,7 @@ func (c *Client) StopDiscovererRequest(input *StopDiscovererInput) StopDiscovere
 	}
 
 	req := c.newRequest(op, input, &StopDiscovererOutput{})
+
 	return StopDiscovererRequest{Request: req, Input: input, Copy: c.StopDiscovererRequest}
 }
 

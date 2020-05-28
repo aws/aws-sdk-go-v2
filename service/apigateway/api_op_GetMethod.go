@@ -406,6 +406,7 @@ func (c *Client) GetMethodRequest(input *GetMethodInput) GetMethodRequest {
 	}
 
 	req := c.newRequest(op, input, &GetMethodOutput{})
+
 	return GetMethodRequest{Request: req, Input: input, Copy: c.GetMethodRequest}
 }
 

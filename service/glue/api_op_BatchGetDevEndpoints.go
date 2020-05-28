@@ -86,6 +86,7 @@ func (c *Client) BatchGetDevEndpointsRequest(input *BatchGetDevEndpointsInput) B
 	}
 
 	req := c.newRequest(op, input, &BatchGetDevEndpointsOutput{})
+
 	return BatchGetDevEndpointsRequest{Request: req, Input: input, Copy: c.BatchGetDevEndpointsRequest}
 }
 

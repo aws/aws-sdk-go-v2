@@ -93,6 +93,7 @@ func (c *Client) UpdateBatchPredictionRequest(input *UpdateBatchPredictionInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateBatchPredictionOutput{})
+
 	return UpdateBatchPredictionRequest{Request: req, Input: input, Copy: c.UpdateBatchPredictionRequest}
 }
 

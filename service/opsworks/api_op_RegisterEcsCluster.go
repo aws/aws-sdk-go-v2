@@ -93,6 +93,7 @@ func (c *Client) RegisterEcsClusterRequest(input *RegisterEcsClusterInput) Regis
 	}
 
 	req := c.newRequest(op, input, &RegisterEcsClusterOutput{})
+
 	return RegisterEcsClusterRequest{Request: req, Input: input, Copy: c.RegisterEcsClusterRequest}
 }
 

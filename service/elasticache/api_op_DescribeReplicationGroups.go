@@ -94,6 +94,7 @@ func (c *Client) DescribeReplicationGroupsRequest(input *DescribeReplicationGrou
 	}
 
 	req := c.newRequest(op, input, &DescribeReplicationGroupsOutput{})
+
 	return DescribeReplicationGroupsRequest{Request: req, Input: input, Copy: c.DescribeReplicationGroupsRequest}
 }
 

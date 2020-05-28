@@ -106,6 +106,7 @@ func (c *Client) DeleteBandwidthRateLimitRequest(input *DeleteBandwidthRateLimit
 	}
 
 	req := c.newRequest(op, input, &DeleteBandwidthRateLimitOutput{})
+
 	return DeleteBandwidthRateLimitRequest{Request: req, Input: input, Copy: c.DeleteBandwidthRateLimitRequest}
 }
 

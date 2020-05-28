@@ -98,6 +98,7 @@ func (c *Client) DescribeEndpointRequest(input *DescribeEndpointInput) DescribeE
 	}
 
 	req := c.newRequest(op, input, &DescribeEndpointOutput{})
+
 	return DescribeEndpointRequest{Request: req, Input: input, Copy: c.DescribeEndpointRequest}
 }
 

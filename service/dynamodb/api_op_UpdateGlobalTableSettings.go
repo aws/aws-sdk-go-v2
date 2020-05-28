@@ -158,6 +158,7 @@ func (c *Client) UpdateGlobalTableSettingsRequest(input *UpdateGlobalTableSettin
 			Fn:   de.Handler,
 		})
 	}
+
 	return UpdateGlobalTableSettingsRequest{Request: req, Input: input, Copy: c.UpdateGlobalTableSettingsRequest}
 }
 

@@ -126,6 +126,7 @@ func (c *Client) CreateProvisioningArtifactRequest(input *CreateProvisioningArti
 	}
 
 	req := c.newRequest(op, input, &CreateProvisioningArtifactOutput{})
+
 	return CreateProvisioningArtifactRequest{Request: req, Input: input, Copy: c.CreateProvisioningArtifactRequest}
 }
 

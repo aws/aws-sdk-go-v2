@@ -119,6 +119,7 @@ func (c *Client) DescribeObjectsRequest(input *DescribeObjectsInput) DescribeObj
 	}
 
 	req := c.newRequest(op, input, &DescribeObjectsOutput{})
+
 	return DescribeObjectsRequest{Request: req, Input: input, Copy: c.DescribeObjectsRequest}
 }
 

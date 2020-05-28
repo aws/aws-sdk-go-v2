@@ -82,7 +82,7 @@ const opEnableImportFindingsForProduct = "EnableImportFindingsForProduct"
 // Enables the integration of a partner product with Security Hub. Integrated
 // products send findings to Security Hub.
 //
-// When you enable a product integration, a permission policy that grants permission
+// When you enable a product integration, a permissions policy that grants permission
 // for the product to send findings to Security Hub is applied.
 //
 //    // Example sending a request using EnableImportFindingsForProductRequest.
@@ -105,6 +105,7 @@ func (c *Client) EnableImportFindingsForProductRequest(input *EnableImportFindin
 	}
 
 	req := c.newRequest(op, input, &EnableImportFindingsForProductOutput{})
+
 	return EnableImportFindingsForProductRequest{Request: req, Input: input, Copy: c.EnableImportFindingsForProductRequest}
 }
 

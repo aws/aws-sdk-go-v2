@@ -134,6 +134,7 @@ func (c *Client) UpdateVoiceConnectorRequest(input *UpdateVoiceConnectorInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateVoiceConnectorOutput{})
+
 	return UpdateVoiceConnectorRequest{Request: req, Input: input, Copy: c.UpdateVoiceConnectorRequest}
 }
 

@@ -102,6 +102,7 @@ func (c *Client) DeleteProvisioningArtifactRequest(input *DeleteProvisioningArti
 	}
 
 	req := c.newRequest(op, input, &DeleteProvisioningArtifactOutput{})
+
 	return DeleteProvisioningArtifactRequest{Request: req, Input: input, Copy: c.DeleteProvisioningArtifactRequest}
 }
 

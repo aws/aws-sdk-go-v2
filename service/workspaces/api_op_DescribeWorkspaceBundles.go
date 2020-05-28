@@ -101,6 +101,7 @@ func (c *Client) DescribeWorkspaceBundlesRequest(input *DescribeWorkspaceBundles
 	}
 
 	req := c.newRequest(op, input, &DescribeWorkspaceBundlesOutput{})
+
 	return DescribeWorkspaceBundlesRequest{Request: req, Input: input, Copy: c.DescribeWorkspaceBundlesRequest}
 }
 

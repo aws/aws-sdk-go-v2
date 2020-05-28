@@ -13,7 +13,9 @@ import (
 type ResetServiceSettingInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the service setting to reset.
+	// The Amazon Resource Name (ARN) of the service setting to reset. The setting
+	// ID can be /ssm/parameter-store/default-parameter-tier, /ssm/parameter-store/high-throughput-enabled,
+	// or /ssm/managed-instance/activation-tier. For example, arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled.
 	//
 	// SettingId is a required field
 	SettingId *string `min:"1" type:"string" required:"true"`
@@ -97,6 +99,7 @@ func (c *Client) ResetServiceSettingRequest(input *ResetServiceSettingInput) Res
 	}
 
 	req := c.newRequest(op, input, &ResetServiceSettingOutput{})
+
 	return ResetServiceSettingRequest{Request: req, Input: input, Copy: c.ResetServiceSettingRequest}
 }
 

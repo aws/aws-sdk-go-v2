@@ -119,6 +119,7 @@ func (c *Client) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroupRequest 
 	req := c.newRequest(op, input, &UpdateGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateGroupRequest{Request: req, Input: input, Copy: c.UpdateGroupRequest}
 }
 

@@ -192,6 +192,7 @@ func (c *Client) GetObjectTaggingRequest(input *GetObjectTaggingInput) GetObject
 	}
 
 	req := c.newRequest(op, input, &GetObjectTaggingOutput{})
+
 	return GetObjectTaggingRequest{Request: req, Input: input, Copy: c.GetObjectTaggingRequest}
 }
 

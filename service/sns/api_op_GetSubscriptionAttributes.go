@@ -112,6 +112,7 @@ func (c *Client) GetSubscriptionAttributesRequest(input *GetSubscriptionAttribut
 	}
 
 	req := c.newRequest(op, input, &GetSubscriptionAttributesOutput{})
+
 	return GetSubscriptionAttributesRequest{Request: req, Input: input, Copy: c.GetSubscriptionAttributesRequest}
 }
 

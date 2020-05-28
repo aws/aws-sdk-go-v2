@@ -119,6 +119,7 @@ func (c *Client) DescribeUserHierarchyGroupRequest(input *DescribeUserHierarchyG
 	}
 
 	req := c.newRequest(op, input, &DescribeUserHierarchyGroupOutput{})
+
 	return DescribeUserHierarchyGroupRequest{Request: req, Input: input, Copy: c.DescribeUserHierarchyGroupRequest}
 }
 

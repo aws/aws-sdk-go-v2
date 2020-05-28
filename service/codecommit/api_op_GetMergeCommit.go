@@ -124,6 +124,7 @@ func (c *Client) GetMergeCommitRequest(input *GetMergeCommitInput) GetMergeCommi
 	}
 
 	req := c.newRequest(op, input, &GetMergeCommitOutput{})
+
 	return GetMergeCommitRequest{Request: req, Input: input, Copy: c.GetMergeCommitRequest}
 }
 

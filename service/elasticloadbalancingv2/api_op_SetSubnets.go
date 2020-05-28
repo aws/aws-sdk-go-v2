@@ -99,6 +99,7 @@ func (c *Client) SetSubnetsRequest(input *SetSubnetsInput) SetSubnetsRequest {
 	}
 
 	req := c.newRequest(op, input, &SetSubnetsOutput{})
+
 	return SetSubnetsRequest{Request: req, Input: input, Copy: c.SetSubnetsRequest}
 }
 

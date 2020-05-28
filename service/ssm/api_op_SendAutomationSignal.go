@@ -108,6 +108,7 @@ func (c *Client) SendAutomationSignalRequest(input *SendAutomationSignalInput) S
 	}
 
 	req := c.newRequest(op, input, &SendAutomationSignalOutput{})
+
 	return SendAutomationSignalRequest{Request: req, Input: input, Copy: c.SendAutomationSignalRequest}
 }
 

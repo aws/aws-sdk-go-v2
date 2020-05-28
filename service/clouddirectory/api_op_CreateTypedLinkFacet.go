@@ -113,6 +113,7 @@ func (c *Client) CreateTypedLinkFacetRequest(input *CreateTypedLinkFacetInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateTypedLinkFacetOutput{})
+
 	return CreateTypedLinkFacetRequest{Request: req, Input: input, Copy: c.CreateTypedLinkFacetRequest}
 }
 

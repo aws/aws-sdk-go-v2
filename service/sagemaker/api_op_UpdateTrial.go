@@ -86,6 +86,7 @@ func (c *Client) UpdateTrialRequest(input *UpdateTrialInput) UpdateTrialRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateTrialOutput{})
+
 	return UpdateTrialRequest{Request: req, Input: input, Copy: c.UpdateTrialRequest}
 }
 

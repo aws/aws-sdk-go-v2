@@ -119,6 +119,7 @@ func (c *Client) UpdateRuleVersionRequest(input *UpdateRuleVersionInput) UpdateR
 	}
 
 	req := c.newRequest(op, input, &UpdateRuleVersionOutput{})
+
 	return UpdateRuleVersionRequest{Request: req, Input: input, Copy: c.UpdateRuleVersionRequest}
 }
 

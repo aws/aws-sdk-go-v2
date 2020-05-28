@@ -98,6 +98,7 @@ func (c *Client) DescribeScalingPlansRequest(input *DescribeScalingPlansInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeScalingPlansOutput{})
+
 	return DescribeScalingPlansRequest{Request: req, Input: input, Copy: c.DescribeScalingPlansRequest}
 }
 

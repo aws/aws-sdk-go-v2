@@ -41,7 +41,7 @@ type StartRelationalDatabaseOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
+	// of the request, the timestamp of the request, and the resources affected
 	// by the request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
@@ -83,6 +83,7 @@ func (c *Client) StartRelationalDatabaseRequest(input *StartRelationalDatabaseIn
 	}
 
 	req := c.newRequest(op, input, &StartRelationalDatabaseOutput{})
+
 	return StartRelationalDatabaseRequest{Request: req, Input: input, Copy: c.StartRelationalDatabaseRequest}
 }
 

@@ -155,6 +155,7 @@ func (c *Client) AttachObjectRequest(input *AttachObjectInput) AttachObjectReque
 	}
 
 	req := c.newRequest(op, input, &AttachObjectOutput{})
+
 	return AttachObjectRequest{Request: req, Input: input, Copy: c.AttachObjectRequest}
 }
 

@@ -111,6 +111,7 @@ func (c *Client) CreateCostCategoryDefinitionRequest(input *CreateCostCategoryDe
 	}
 
 	req := c.newRequest(op, input, &CreateCostCategoryDefinitionOutput{})
+
 	return CreateCostCategoryDefinitionRequest{Request: req, Input: input, Copy: c.CreateCostCategoryDefinitionRequest}
 }
 

@@ -116,6 +116,7 @@ func (c *Client) GetArtifactUrlRequest(input *GetArtifactUrlInput) GetArtifactUr
 	}
 
 	req := c.newRequest(op, input, &GetArtifactUrlOutput{})
+
 	return GetArtifactUrlRequest{Request: req, Input: input, Copy: c.GetArtifactUrlRequest}
 }
 

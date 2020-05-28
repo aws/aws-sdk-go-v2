@@ -132,6 +132,7 @@ func (c *Client) CreateLocationEfsRequest(input *CreateLocationEfsInput) CreateL
 	}
 
 	req := c.newRequest(op, input, &CreateLocationEfsOutput{})
+
 	return CreateLocationEfsRequest{Request: req, Input: input, Copy: c.CreateLocationEfsRequest}
 }
 

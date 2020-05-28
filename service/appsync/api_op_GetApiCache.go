@@ -103,6 +103,7 @@ func (c *Client) GetApiCacheRequest(input *GetApiCacheInput) GetApiCacheRequest 
 	}
 
 	req := c.newRequest(op, input, &GetApiCacheOutput{})
+
 	return GetApiCacheRequest{Request: req, Input: input, Copy: c.GetApiCacheRequest}
 }
 

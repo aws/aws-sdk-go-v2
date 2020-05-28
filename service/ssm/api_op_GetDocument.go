@@ -26,7 +26,7 @@ type GetDocumentInput struct {
 
 	// An optional field specifying the version of the artifact associated with
 	// the document. For example, "Release 12, Update 6". This value is unique across
-	// all versions of a document, and cannot be changed.
+	// all versions of a document and can't be changed.
 	VersionName *string `type:"string"`
 }
 
@@ -53,7 +53,7 @@ type GetDocumentOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A description of the document attachments, including names, locations, sizes,
-	// etc.
+	// and so on.
 	AttachmentsContent []AttachmentContent `type:"list"`
 
 	// The contents of the Systems Manager document.
@@ -123,6 +123,7 @@ func (c *Client) GetDocumentRequest(input *GetDocumentInput) GetDocumentRequest 
 	}
 
 	req := c.newRequest(op, input, &GetDocumentOutput{})
+
 	return GetDocumentRequest{Request: req, Input: input, Copy: c.GetDocumentRequest}
 }
 

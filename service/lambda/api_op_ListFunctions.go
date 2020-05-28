@@ -156,6 +156,7 @@ func (c *Client) ListFunctionsRequest(input *ListFunctionsInput) ListFunctionsRe
 	}
 
 	req := c.newRequest(op, input, &ListFunctionsOutput{})
+
 	return ListFunctionsRequest{Request: req, Input: input, Copy: c.ListFunctionsRequest}
 }
 

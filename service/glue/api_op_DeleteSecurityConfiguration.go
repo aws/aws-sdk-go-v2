@@ -76,6 +76,7 @@ func (c *Client) DeleteSecurityConfigurationRequest(input *DeleteSecurityConfigu
 	}
 
 	req := c.newRequest(op, input, &DeleteSecurityConfigurationOutput{})
+
 	return DeleteSecurityConfigurationRequest{Request: req, Input: input, Copy: c.DeleteSecurityConfigurationRequest}
 }
 

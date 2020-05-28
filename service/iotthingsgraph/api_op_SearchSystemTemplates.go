@@ -100,6 +100,7 @@ func (c *Client) SearchSystemTemplatesRequest(input *SearchSystemTemplatesInput)
 	}
 
 	req := c.newRequest(op, input, &SearchSystemTemplatesOutput{})
+
 	return SearchSystemTemplatesRequest{Request: req, Input: input, Copy: c.SearchSystemTemplatesRequest}
 }
 

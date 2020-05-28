@@ -129,6 +129,7 @@ func (c *Client) DescribeTrialComponentRequest(input *DescribeTrialComponentInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeTrialComponentOutput{})
+
 	return DescribeTrialComponentRequest{Request: req, Input: input, Copy: c.DescribeTrialComponentRequest}
 }
 

@@ -76,6 +76,7 @@ func (c *Client) DeleteResourcePolicyRequest(input *DeleteResourcePolicyInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteResourcePolicyOutput{})
+
 	return DeleteResourcePolicyRequest{Request: req, Input: input, Copy: c.DeleteResourcePolicyRequest}
 }
 

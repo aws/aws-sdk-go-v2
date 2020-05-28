@@ -270,6 +270,7 @@ func (c *Client) RunTaskRequest(input *RunTaskInput) RunTaskRequest {
 	}
 
 	req := c.newRequest(op, input, &RunTaskOutput{})
+
 	return RunTaskRequest{Request: req, Input: input, Copy: c.RunTaskRequest}
 }
 

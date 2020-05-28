@@ -82,6 +82,7 @@ func (c *Client) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjectRe
 	}
 
 	req := c.newRequest(op, input, &DeleteProjectOutput{})
+
 	return DeleteProjectRequest{Request: req, Input: input, Copy: c.DeleteProjectRequest}
 }
 

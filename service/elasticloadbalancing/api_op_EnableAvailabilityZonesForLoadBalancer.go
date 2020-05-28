@@ -95,6 +95,7 @@ func (c *Client) EnableAvailabilityZonesForLoadBalancerRequest(input *EnableAvai
 	}
 
 	req := c.newRequest(op, input, &EnableAvailabilityZonesForLoadBalancerOutput{})
+
 	return EnableAvailabilityZonesForLoadBalancerRequest{Request: req, Input: input, Copy: c.EnableAvailabilityZonesForLoadBalancerRequest}
 }
 

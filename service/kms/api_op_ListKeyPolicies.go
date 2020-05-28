@@ -129,6 +129,7 @@ func (c *Client) ListKeyPoliciesRequest(input *ListKeyPoliciesInput) ListKeyPoli
 	}
 
 	req := c.newRequest(op, input, &ListKeyPoliciesOutput{})
+
 	return ListKeyPoliciesRequest{Request: req, Input: input, Copy: c.ListKeyPoliciesRequest}
 }
 

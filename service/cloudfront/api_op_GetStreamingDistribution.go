@@ -113,6 +113,7 @@ func (c *Client) GetStreamingDistributionRequest(input *GetStreamingDistribution
 	}
 
 	req := c.newRequest(op, input, &GetStreamingDistributionOutput{})
+
 	return GetStreamingDistributionRequest{Request: req, Input: input, Copy: c.GetStreamingDistributionRequest}
 }
 

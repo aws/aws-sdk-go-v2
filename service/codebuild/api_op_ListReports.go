@@ -98,6 +98,12 @@ func (c *Client) ListReportsRequest(input *ListReportsInput) ListReportsRequest 
 		Name:       opListReports,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -105,6 +111,7 @@ func (c *Client) ListReportsRequest(input *ListReportsInput) ListReportsRequest 
 	}
 
 	req := c.newRequest(op, input, &ListReportsOutput{})
+
 	return ListReportsRequest{Request: req, Input: input, Copy: c.ListReportsRequest}
 }
 
@@ -130,6 +137,53 @@ func (r ListReportsRequest) Send(ctx context.Context) (*ListReportsResponse, err
 	}
 
 	return resp, nil
+}
+
+// NewListReportsRequestPaginator returns a paginator for ListReports.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListReportsRequest(input)
+//   p := codebuild.NewListReportsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListReportsPaginator(req ListReportsRequest) ListReportsPaginator {
+	return ListReportsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListReportsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListReportsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListReportsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListReportsPaginator) CurrentPage() *ListReportsOutput {
+	return p.Pager.CurrentPage().(*ListReportsOutput)
 }
 
 // ListReportsResponse is the response type for the

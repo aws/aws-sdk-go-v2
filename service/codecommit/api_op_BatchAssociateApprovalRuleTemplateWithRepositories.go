@@ -100,6 +100,7 @@ func (c *Client) BatchAssociateApprovalRuleTemplateWithRepositoriesRequest(input
 	}
 
 	req := c.newRequest(op, input, &BatchAssociateApprovalRuleTemplateWithRepositoriesOutput{})
+
 	return BatchAssociateApprovalRuleTemplateWithRepositoriesRequest{Request: req, Input: input, Copy: c.BatchAssociateApprovalRuleTemplateWithRepositoriesRequest}
 }
 

@@ -118,6 +118,7 @@ func (c *Client) StartApplicationRequest(input *StartApplicationInput) StartAppl
 	}
 
 	req := c.newRequest(op, input, &StartApplicationOutput{})
+
 	return StartApplicationRequest{Request: req, Input: input, Copy: c.StartApplicationRequest}
 }
 

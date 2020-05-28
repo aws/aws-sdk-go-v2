@@ -244,6 +244,7 @@ func (c *Client) DescribeReservationRequest(input *DescribeReservationInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeReservationOutput{})
+
 	return DescribeReservationRequest{Request: req, Input: input, Copy: c.DescribeReservationRequest}
 }
 

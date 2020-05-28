@@ -62,7 +62,7 @@ const opListOrganizations = "ListOrganizations"
 // ListOrganizationsRequest returns a request value for making API operation for
 // Amazon WorkMail.
 //
-// Returns summaries of the customer's non-deleted organizations.
+// Returns summaries of the customer's organizations.
 //
 //    // Example sending a request using ListOrganizationsRequest.
 //    req := client.ListOrganizationsRequest(params)
@@ -90,6 +90,7 @@ func (c *Client) ListOrganizationsRequest(input *ListOrganizationsInput) ListOrg
 	}
 
 	req := c.newRequest(op, input, &ListOrganizationsOutput{})
+
 	return ListOrganizationsRequest{Request: req, Input: input, Copy: c.ListOrganizationsRequest}
 }
 

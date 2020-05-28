@@ -83,6 +83,7 @@ func (c *Client) DescribeNFSFileSharesRequest(input *DescribeNFSFileSharesInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeNFSFileSharesOutput{})
+
 	return DescribeNFSFileSharesRequest{Request: req, Input: input, Copy: c.DescribeNFSFileSharesRequest}
 }
 

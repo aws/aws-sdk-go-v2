@@ -107,6 +107,7 @@ func (c *Client) AdminUpdateDeviceStatusRequest(input *AdminUpdateDeviceStatusIn
 	}
 
 	req := c.newRequest(op, input, &AdminUpdateDeviceStatusOutput{})
+
 	return AdminUpdateDeviceStatusRequest{Request: req, Input: input, Copy: c.AdminUpdateDeviceStatusRequest}
 }
 

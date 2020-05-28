@@ -134,6 +134,7 @@ func (c *Client) ListAccessKeysRequest(input *ListAccessKeysInput) ListAccessKey
 	}
 
 	req := c.newRequest(op, input, &ListAccessKeysOutput{})
+
 	return ListAccessKeysRequest{Request: req, Input: input, Copy: c.ListAccessKeysRequest}
 }
 

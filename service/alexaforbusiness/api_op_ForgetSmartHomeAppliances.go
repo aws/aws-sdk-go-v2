@@ -73,6 +73,7 @@ func (c *Client) ForgetSmartHomeAppliancesRequest(input *ForgetSmartHomeApplianc
 	}
 
 	req := c.newRequest(op, input, &ForgetSmartHomeAppliancesOutput{})
+
 	return ForgetSmartHomeAppliancesRequest{Request: req, Input: input, Copy: c.ForgetSmartHomeAppliancesRequest}
 }
 

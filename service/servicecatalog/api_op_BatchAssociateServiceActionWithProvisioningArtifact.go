@@ -98,6 +98,7 @@ func (c *Client) BatchAssociateServiceActionWithProvisioningArtifactRequest(inpu
 	}
 
 	req := c.newRequest(op, input, &BatchAssociateServiceActionWithProvisioningArtifactOutput{})
+
 	return BatchAssociateServiceActionWithProvisioningArtifactRequest{Request: req, Input: input, Copy: c.BatchAssociateServiceActionWithProvisioningArtifactRequest}
 }
 

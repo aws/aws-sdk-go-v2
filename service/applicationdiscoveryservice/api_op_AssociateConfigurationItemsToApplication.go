@@ -82,6 +82,7 @@ func (c *Client) AssociateConfigurationItemsToApplicationRequest(input *Associat
 	}
 
 	req := c.newRequest(op, input, &AssociateConfigurationItemsToApplicationOutput{})
+
 	return AssociateConfigurationItemsToApplicationRequest{Request: req, Input: input, Copy: c.AssociateConfigurationItemsToApplicationRequest}
 }
 

@@ -208,6 +208,7 @@ func (c *Client) CreateRevisionRequest(input *CreateRevisionInput) CreateRevisio
 	}
 
 	req := c.newRequest(op, input, &CreateRevisionOutput{})
+
 	return CreateRevisionRequest{Request: req, Input: input, Copy: c.CreateRevisionRequest}
 }
 

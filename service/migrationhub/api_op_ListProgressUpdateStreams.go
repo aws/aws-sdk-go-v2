@@ -90,6 +90,7 @@ func (c *Client) ListProgressUpdateStreamsRequest(input *ListProgressUpdateStrea
 	}
 
 	req := c.newRequest(op, input, &ListProgressUpdateStreamsOutput{})
+
 	return ListProgressUpdateStreamsRequest{Request: req, Input: input, Copy: c.ListProgressUpdateStreamsRequest}
 }
 

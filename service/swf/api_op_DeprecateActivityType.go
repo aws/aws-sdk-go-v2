@@ -119,6 +119,7 @@ func (c *Client) DeprecateActivityTypeRequest(input *DeprecateActivityTypeInput)
 	req := c.newRequest(op, input, &DeprecateActivityTypeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeprecateActivityTypeRequest{Request: req, Input: input, Copy: c.DeprecateActivityTypeRequest}
 }
 

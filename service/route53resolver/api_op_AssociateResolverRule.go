@@ -101,6 +101,7 @@ func (c *Client) AssociateResolverRuleRequest(input *AssociateResolverRuleInput)
 	}
 
 	req := c.newRequest(op, input, &AssociateResolverRuleOutput{})
+
 	return AssociateResolverRuleRequest{Request: req, Input: input, Copy: c.AssociateResolverRuleRequest}
 }
 

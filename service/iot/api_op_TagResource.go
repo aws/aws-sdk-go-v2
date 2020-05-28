@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -39,6 +40,13 @@ func (s *TagResourceInput) Validate() error {
 
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -112,6 +120,7 @@ func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest 
 	}
 
 	req := c.newRequest(op, input, &TagResourceOutput{})
+
 	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 

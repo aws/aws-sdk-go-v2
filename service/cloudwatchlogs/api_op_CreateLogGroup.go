@@ -117,6 +117,7 @@ func (c *Client) CreateLogGroupRequest(input *CreateLogGroupInput) CreateLogGrou
 	req := c.newRequest(op, input, &CreateLogGroupOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CreateLogGroupRequest{Request: req, Input: input, Copy: c.CreateLogGroupRequest}
 }
 

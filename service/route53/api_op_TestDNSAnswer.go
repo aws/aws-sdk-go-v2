@@ -250,6 +250,7 @@ func (c *Client) TestDNSAnswerRequest(input *TestDNSAnswerInput) TestDNSAnswerRe
 	}
 
 	req := c.newRequest(op, input, &TestDNSAnswerOutput{})
+
 	return TestDNSAnswerRequest{Request: req, Input: input, Copy: c.TestDNSAnswerRequest}
 }
 

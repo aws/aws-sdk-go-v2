@@ -155,6 +155,7 @@ func (c *Client) CreateUnreferencedMergeCommitRequest(input *CreateUnreferencedM
 	}
 
 	req := c.newRequest(op, input, &CreateUnreferencedMergeCommitOutput{})
+
 	return CreateUnreferencedMergeCommitRequest{Request: req, Input: input, Copy: c.CreateUnreferencedMergeCommitRequest}
 }
 

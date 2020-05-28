@@ -137,6 +137,7 @@ func (c *Client) BatchUnsuspendUserRequest(input *BatchUnsuspendUserInput) Batch
 	}
 
 	req := c.newRequest(op, input, &BatchUnsuspendUserOutput{})
+
 	return BatchUnsuspendUserRequest{Request: req, Input: input, Copy: c.BatchUnsuspendUserRequest}
 }
 

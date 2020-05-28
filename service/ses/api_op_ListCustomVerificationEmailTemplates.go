@@ -105,6 +105,7 @@ func (c *Client) ListCustomVerificationEmailTemplatesRequest(input *ListCustomVe
 	}
 
 	req := c.newRequest(op, input, &ListCustomVerificationEmailTemplatesOutput{})
+
 	return ListCustomVerificationEmailTemplatesRequest{Request: req, Input: input, Copy: c.ListCustomVerificationEmailTemplatesRequest}
 }
 

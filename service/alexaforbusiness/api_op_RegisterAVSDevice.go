@@ -121,6 +121,7 @@ func (c *Client) RegisterAVSDeviceRequest(input *RegisterAVSDeviceInput) Registe
 	}
 
 	req := c.newRequest(op, input, &RegisterAVSDeviceOutput{})
+
 	return RegisterAVSDeviceRequest{Request: req, Input: input, Copy: c.RegisterAVSDeviceRequest}
 }
 

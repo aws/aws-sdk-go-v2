@@ -86,6 +86,7 @@ func (c *Client) DescribeAssessmentTemplatesRequest(input *DescribeAssessmentTem
 	}
 
 	req := c.newRequest(op, input, &DescribeAssessmentTemplatesOutput{})
+
 	return DescribeAssessmentTemplatesRequest{Request: req, Input: input, Copy: c.DescribeAssessmentTemplatesRequest}
 }
 

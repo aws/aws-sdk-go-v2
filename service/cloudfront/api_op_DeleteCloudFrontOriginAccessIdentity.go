@@ -105,6 +105,7 @@ func (c *Client) DeleteCloudFrontOriginAccessIdentityRequest(input *DeleteCloudF
 	req := c.newRequest(op, input, &DeleteCloudFrontOriginAccessIdentityOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteCloudFrontOriginAccessIdentityRequest{Request: req, Input: input, Copy: c.DeleteCloudFrontOriginAccessIdentityRequest}
 }
 

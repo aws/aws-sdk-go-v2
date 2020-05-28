@@ -123,6 +123,7 @@ func (c *Client) ListHandshakesForOrganizationRequest(input *ListHandshakesForOr
 	}
 
 	req := c.newRequest(op, input, &ListHandshakesForOrganizationOutput{})
+
 	return ListHandshakesForOrganizationRequest{Request: req, Input: input, Copy: c.ListHandshakesForOrganizationRequest}
 }
 

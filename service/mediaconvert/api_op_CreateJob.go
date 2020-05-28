@@ -293,6 +293,7 @@ func (c *Client) CreateJobRequest(input *CreateJobInput) CreateJobRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateJobOutput{})
+
 	return CreateJobRequest{Request: req, Input: input, Copy: c.CreateJobRequest}
 }
 

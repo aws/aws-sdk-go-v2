@@ -114,6 +114,7 @@ func (c *Client) ListIPSetsRequest(input *ListIPSetsInput) ListIPSetsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListIPSetsOutput{})
+
 	return ListIPSetsRequest{Request: req, Input: input, Copy: c.ListIPSetsRequest}
 }
 

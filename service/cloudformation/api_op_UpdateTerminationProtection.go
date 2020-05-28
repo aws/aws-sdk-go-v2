@@ -97,6 +97,7 @@ func (c *Client) UpdateTerminationProtectionRequest(input *UpdateTerminationProt
 	}
 
 	req := c.newRequest(op, input, &UpdateTerminationProtectionOutput{})
+
 	return UpdateTerminationProtectionRequest{Request: req, Input: input, Copy: c.UpdateTerminationProtectionRequest}
 }
 

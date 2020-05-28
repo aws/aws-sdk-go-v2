@@ -90,6 +90,7 @@ func (c *Client) DeleteOriginEndpointRequest(input *DeleteOriginEndpointInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteOriginEndpointOutput{})
+
 	return DeleteOriginEndpointRequest{Request: req, Input: input, Copy: c.DeleteOriginEndpointRequest}
 }
 

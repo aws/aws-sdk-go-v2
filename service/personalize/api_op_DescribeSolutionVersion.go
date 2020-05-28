@@ -77,6 +77,7 @@ func (c *Client) DescribeSolutionVersionRequest(input *DescribeSolutionVersionIn
 	}
 
 	req := c.newRequest(op, input, &DescribeSolutionVersionOutput{})
+
 	return DescribeSolutionVersionRequest{Request: req, Input: input, Copy: c.DescribeSolutionVersionRequest}
 }
 

@@ -157,6 +157,7 @@ func (c *Client) CopyImageRequest(input *CopyImageInput) CopyImageRequest {
 	}
 
 	req := c.newRequest(op, input, &CopyImageOutput{})
+
 	return CopyImageRequest{Request: req, Input: input, Copy: c.CopyImageRequest}
 }
 

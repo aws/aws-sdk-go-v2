@@ -139,6 +139,7 @@ func (c *Client) CreateStreamRequest(input *CreateStreamInput) CreateStreamReque
 	req := c.newRequest(op, input, &CreateStreamOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CreateStreamRequest{Request: req, Input: input, Copy: c.CreateStreamRequest}
 }
 

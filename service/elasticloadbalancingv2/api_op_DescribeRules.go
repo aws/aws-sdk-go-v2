@@ -88,6 +88,7 @@ func (c *Client) DescribeRulesRequest(input *DescribeRulesInput) DescribeRulesRe
 	}
 
 	req := c.newRequest(op, input, &DescribeRulesOutput{})
+
 	return DescribeRulesRequest{Request: req, Input: input, Copy: c.DescribeRulesRequest}
 }
 

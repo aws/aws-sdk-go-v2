@@ -99,6 +99,7 @@ func (c *Client) BatchPutScheduledUpdateGroupActionRequest(input *BatchPutSchedu
 	}
 
 	req := c.newRequest(op, input, &BatchPutScheduledUpdateGroupActionOutput{})
+
 	return BatchPutScheduledUpdateGroupActionRequest{Request: req, Input: input, Copy: c.BatchPutScheduledUpdateGroupActionRequest}
 }
 

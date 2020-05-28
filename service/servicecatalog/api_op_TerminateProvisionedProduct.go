@@ -114,6 +114,7 @@ func (c *Client) TerminateProvisionedProductRequest(input *TerminateProvisionedP
 	}
 
 	req := c.newRequest(op, input, &TerminateProvisionedProductOutput{})
+
 	return TerminateProvisionedProductRequest{Request: req, Input: input, Copy: c.TerminateProvisionedProductRequest}
 }
 

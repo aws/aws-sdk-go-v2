@@ -17,6 +17,11 @@ type PutImageInput struct {
 	// ImageManifest is a required field
 	ImageManifest *string `locationName:"imageManifest" min:"1" type:"string" required:"true"`
 
+	// The media type of the image manifest. If you push an image manifest that
+	// does not contain the mediaType field, you must specify the imageManifestMediaType
+	// in the request.
+	ImageManifestMediaType *string `locationName:"imageManifestMediaType" type:"string"`
+
 	// The tag to associate with the image. This parameter is required for images
 	// that use the Docker Image Manifest V2 Schema 2 or OCI formats.
 	ImageTag *string `locationName:"imageTag" min:"1" type:"string"`
@@ -84,12 +89,12 @@ const opPutImage = "PutImage"
 // Creates or updates the image manifest and tags associated with an image.
 //
 // When an image is pushed and all new image layers have been uploaded, the
-// PutImage API is called once to create or update the image manifest and tags
-// associated with the image.
+// PutImage API is called once to create or update the image manifest and the
+// tags associated with the image.
 //
-// This operation is used by the Amazon ECR proxy, and it is not intended for
-// general use by customers for pulling and pushing images. In most cases, you
-// should use the docker CLI to pull, tag, and push images.
+// This operation is used by the Amazon ECR proxy and is not generally used
+// by customers for pulling and pushing images. In most cases, you should use
+// the docker CLI to pull, tag, and push images.
 //
 //    // Example sending a request using PutImageRequest.
 //    req := client.PutImageRequest(params)
@@ -111,6 +116,7 @@ func (c *Client) PutImageRequest(input *PutImageInput) PutImageRequest {
 	}
 
 	req := c.newRequest(op, input, &PutImageOutput{})
+
 	return PutImageRequest{Request: req, Input: input, Copy: c.PutImageRequest}
 }
 

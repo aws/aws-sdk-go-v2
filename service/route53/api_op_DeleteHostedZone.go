@@ -150,6 +150,7 @@ func (c *Client) DeleteHostedZoneRequest(input *DeleteHostedZoneInput) DeleteHos
 	}
 
 	req := c.newRequest(op, input, &DeleteHostedZoneOutput{})
+
 	return DeleteHostedZoneRequest{Request: req, Input: input, Copy: c.DeleteHostedZoneRequest}
 }
 

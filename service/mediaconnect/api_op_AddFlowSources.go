@@ -146,6 +146,7 @@ func (c *Client) AddFlowSourcesRequest(input *AddFlowSourcesInput) AddFlowSource
 	}
 
 	req := c.newRequest(op, input, &AddFlowSourcesOutput{})
+
 	return AddFlowSourcesRequest{Request: req, Input: input, Copy: c.AddFlowSourcesRequest}
 }
 

@@ -120,6 +120,7 @@ func (c *Client) DescribeClusterSubnetGroupsRequest(input *DescribeClusterSubnet
 	}
 
 	req := c.newRequest(op, input, &DescribeClusterSubnetGroupsOutput{})
+
 	return DescribeClusterSubnetGroupsRequest{Request: req, Input: input, Copy: c.DescribeClusterSubnetGroupsRequest}
 }
 

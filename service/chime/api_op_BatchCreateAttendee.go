@@ -155,6 +155,7 @@ func (c *Client) BatchCreateAttendeeRequest(input *BatchCreateAttendeeInput) Bat
 	}
 
 	req := c.newRequest(op, input, &BatchCreateAttendeeOutput{})
+
 	return BatchCreateAttendeeRequest{Request: req, Input: input, Copy: c.BatchCreateAttendeeRequest}
 }
 

@@ -15,6 +15,8 @@ type CreateInputInput struct {
 
 	Destinations []InputDestinationRequest `locationName:"destinations" type:"list"`
 
+	InputDevices []InputDeviceSettings `locationName:"inputDevices" type:"list"`
+
 	InputSecurityGroups []string `locationName:"inputSecurityGroups" type:"list"`
 
 	MediaConnectFlows []MediaConnectFlowRequest `locationName:"mediaConnectFlows" type:"list"`
@@ -67,6 +69,18 @@ func (s CreateInputInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		ls0 := e.List(protocol.BodyTarget, "destinations", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.InputDevices != nil {
+		v := s.InputDevices
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "inputDevices", metadata)
 		ls0.Start()
 		for _, v1 := range v {
 			ls0.ListAddFields(v1)
@@ -210,6 +224,7 @@ func (c *Client) CreateInputRequest(input *CreateInputInput) CreateInputRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateInputOutput{})
+
 	return CreateInputRequest{Request: req, Input: input, Copy: c.CreateInputRequest}
 }
 

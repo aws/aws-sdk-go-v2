@@ -81,6 +81,7 @@ func (c *Client) DeleteTrialRequest(input *DeleteTrialInput) DeleteTrialRequest 
 	}
 
 	req := c.newRequest(op, input, &DeleteTrialOutput{})
+
 	return DeleteTrialRequest{Request: req, Input: input, Copy: c.DeleteTrialRequest}
 }
 

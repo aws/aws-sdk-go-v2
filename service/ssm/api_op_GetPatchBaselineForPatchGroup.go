@@ -90,6 +90,7 @@ func (c *Client) GetPatchBaselineForPatchGroupRequest(input *GetPatchBaselineFor
 	}
 
 	req := c.newRequest(op, input, &GetPatchBaselineForPatchGroupOutput{})
+
 	return GetPatchBaselineForPatchGroupRequest{Request: req, Input: input, Copy: c.GetPatchBaselineForPatchGroupRequest}
 }
 

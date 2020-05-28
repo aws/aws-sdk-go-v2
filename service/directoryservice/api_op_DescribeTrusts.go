@@ -92,6 +92,7 @@ func (c *Client) DescribeTrustsRequest(input *DescribeTrustsInput) DescribeTrust
 	}
 
 	req := c.newRequest(op, input, &DescribeTrustsOutput{})
+
 	return DescribeTrustsRequest{Request: req, Input: input, Copy: c.DescribeTrustsRequest}
 }
 

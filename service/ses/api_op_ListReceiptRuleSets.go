@@ -79,6 +79,7 @@ func (c *Client) ListReceiptRuleSetsRequest(input *ListReceiptRuleSetsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListReceiptRuleSetsOutput{})
+
 	return ListReceiptRuleSetsRequest{Request: req, Input: input, Copy: c.ListReceiptRuleSetsRequest}
 }
 

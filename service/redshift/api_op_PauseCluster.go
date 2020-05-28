@@ -76,6 +76,7 @@ func (c *Client) PauseClusterRequest(input *PauseClusterInput) PauseClusterReque
 	}
 
 	req := c.newRequest(op, input, &PauseClusterOutput{})
+
 	return PauseClusterRequest{Request: req, Input: input, Copy: c.PauseClusterRequest}
 }
 

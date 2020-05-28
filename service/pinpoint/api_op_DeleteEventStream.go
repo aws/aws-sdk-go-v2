@@ -102,6 +102,7 @@ func (c *Client) DeleteEventStreamRequest(input *DeleteEventStreamInput) DeleteE
 	}
 
 	req := c.newRequest(op, input, &DeleteEventStreamOutput{})
+
 	return DeleteEventStreamRequest{Request: req, Input: input, Copy: c.DeleteEventStreamRequest}
 }
 

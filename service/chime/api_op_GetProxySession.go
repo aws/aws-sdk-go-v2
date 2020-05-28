@@ -123,6 +123,7 @@ func (c *Client) GetProxySessionRequest(input *GetProxySessionInput) GetProxySes
 	}
 
 	req := c.newRequest(op, input, &GetProxySessionOutput{})
+
 	return GetProxySessionRequest{Request: req, Input: input, Copy: c.GetProxySessionRequest}
 }
 

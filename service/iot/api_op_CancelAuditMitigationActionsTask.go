@@ -94,6 +94,7 @@ func (c *Client) CancelAuditMitigationActionsTaskRequest(input *CancelAuditMitig
 	}
 
 	req := c.newRequest(op, input, &CancelAuditMitigationActionsTaskOutput{})
+
 	return CancelAuditMitigationActionsTaskRequest{Request: req, Input: input, Copy: c.CancelAuditMitigationActionsTaskRequest}
 }
 

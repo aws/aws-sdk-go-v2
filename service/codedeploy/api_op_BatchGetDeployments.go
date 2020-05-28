@@ -80,6 +80,7 @@ func (c *Client) BatchGetDeploymentsRequest(input *BatchGetDeploymentsInput) Bat
 	}
 
 	req := c.newRequest(op, input, &BatchGetDeploymentsOutput{})
+
 	return BatchGetDeploymentsRequest{Request: req, Input: input, Copy: c.BatchGetDeploymentsRequest}
 }
 

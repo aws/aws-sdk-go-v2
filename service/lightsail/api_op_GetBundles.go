@@ -78,6 +78,7 @@ func (c *Client) GetBundlesRequest(input *GetBundlesInput) GetBundlesRequest {
 	}
 
 	req := c.newRequest(op, input, &GetBundlesOutput{})
+
 	return GetBundlesRequest{Request: req, Input: input, Copy: c.GetBundlesRequest}
 }
 

@@ -155,6 +155,7 @@ func (c *Client) StartHumanLoopRequest(input *StartHumanLoopInput) StartHumanLoo
 	}
 
 	req := c.newRequest(op, input, &StartHumanLoopOutput{})
+
 	return StartHumanLoopRequest{Request: req, Input: input, Copy: c.StartHumanLoopRequest}
 }
 

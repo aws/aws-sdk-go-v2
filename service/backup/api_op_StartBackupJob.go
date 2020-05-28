@@ -22,8 +22,8 @@ type StartBackupJobInput struct {
 	// BackupVaultName is a required field
 	BackupVaultName *string `type:"string" required:"true"`
 
-	// The amount of time AWS Backup attempts a backup before canceling the job
-	// and returning an error.
+	// A value in minutes after a backup job is successfully started before it must
+	// be completed or it will be canceled by AWS Backup. This value is optional.
 	CompleteWindowMinutes *int64 `type:"long"`
 
 	// Specifies the IAM role ARN used to create the target recovery point; for
@@ -57,7 +57,8 @@ type StartBackupJobInput struct {
 	// ResourceArn is a required field
 	ResourceArn *string `type:"string" required:"true"`
 
-	// The amount of time in minutes before beginning a backup.
+	// A value in minutes after a backup is scheduled before a job will be canceled
+	// if it doesn't start successfully. This value is optional.
 	StartWindowMinutes *int64 `type:"long"`
 }
 
@@ -221,6 +222,7 @@ func (c *Client) StartBackupJobRequest(input *StartBackupJobInput) StartBackupJo
 	}
 
 	req := c.newRequest(op, input, &StartBackupJobOutput{})
+
 	return StartBackupJobRequest{Request: req, Input: input, Copy: c.StartBackupJobRequest}
 }
 

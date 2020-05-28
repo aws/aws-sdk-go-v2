@@ -206,6 +206,7 @@ func (c *Client) CreateStreamRequest(input *CreateStreamInput) CreateStreamReque
 	}
 
 	req := c.newRequest(op, input, &CreateStreamOutput{})
+
 	return CreateStreamRequest{Request: req, Input: input, Copy: c.CreateStreamRequest}
 }
 

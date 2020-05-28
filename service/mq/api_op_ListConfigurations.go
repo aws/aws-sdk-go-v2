@@ -126,6 +126,7 @@ func (c *Client) ListConfigurationsRequest(input *ListConfigurationsInput) ListC
 	}
 
 	req := c.newRequest(op, input, &ListConfigurationsOutput{})
+
 	return ListConfigurationsRequest{Request: req, Input: input, Copy: c.ListConfigurationsRequest}
 }
 

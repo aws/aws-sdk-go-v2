@@ -142,6 +142,7 @@ func (c *Client) UpdateAccountAuditConfigurationRequest(input *UpdateAccountAudi
 	}
 
 	req := c.newRequest(op, input, &UpdateAccountAuditConfigurationOutput{})
+
 	return UpdateAccountAuditConfigurationRequest{Request: req, Input: input, Copy: c.UpdateAccountAuditConfigurationRequest}
 }
 

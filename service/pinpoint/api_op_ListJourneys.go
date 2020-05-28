@@ -119,6 +119,7 @@ func (c *Client) ListJourneysRequest(input *ListJourneysInput) ListJourneysReque
 	}
 
 	req := c.newRequest(op, input, &ListJourneysOutput{})
+
 	return ListJourneysRequest{Request: req, Input: input, Copy: c.ListJourneysRequest}
 }
 

@@ -78,6 +78,7 @@ func (c *Client) GetQueryExecutionRequest(input *GetQueryExecutionInput) GetQuer
 	}
 
 	req := c.newRequest(op, input, &GetQueryExecutionOutput{})
+
 	return GetQueryExecutionRequest{Request: req, Input: input, Copy: c.GetQueryExecutionRequest}
 }
 

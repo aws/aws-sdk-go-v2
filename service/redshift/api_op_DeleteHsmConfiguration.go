@@ -77,6 +77,7 @@ func (c *Client) DeleteHsmConfigurationRequest(input *DeleteHsmConfigurationInpu
 	req := c.newRequest(op, input, &DeleteHsmConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteHsmConfigurationRequest{Request: req, Input: input, Copy: c.DeleteHsmConfigurationRequest}
 }
 

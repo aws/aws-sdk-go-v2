@@ -88,6 +88,7 @@ func (c *Client) ListTagsForCertificateRequest(input *ListTagsForCertificateInpu
 	}
 
 	req := c.newRequest(op, input, &ListTagsForCertificateOutput{})
+
 	return ListTagsForCertificateRequest{Request: req, Input: input, Copy: c.ListTagsForCertificateRequest}
 }
 

@@ -197,6 +197,7 @@ func (c *Client) ListDomainDeliverabilityCampaignsRequest(input *ListDomainDeliv
 	}
 
 	req := c.newRequest(op, input, &ListDomainDeliverabilityCampaignsOutput{})
+
 	return ListDomainDeliverabilityCampaignsRequest{Request: req, Input: input, Copy: c.ListDomainDeliverabilityCampaignsRequest}
 }
 

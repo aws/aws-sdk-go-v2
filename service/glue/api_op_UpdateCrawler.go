@@ -120,6 +120,7 @@ func (c *Client) UpdateCrawlerRequest(input *UpdateCrawlerInput) UpdateCrawlerRe
 	}
 
 	req := c.newRequest(op, input, &UpdateCrawlerOutput{})
+
 	return UpdateCrawlerRequest{Request: req, Input: input, Copy: c.UpdateCrawlerRequest}
 }
 

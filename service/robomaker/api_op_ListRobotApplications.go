@@ -181,6 +181,7 @@ func (c *Client) ListRobotApplicationsRequest(input *ListRobotApplicationsInput)
 	}
 
 	req := c.newRequest(op, input, &ListRobotApplicationsOutput{})
+
 	return ListRobotApplicationsRequest{Request: req, Input: input, Copy: c.ListRobotApplicationsRequest}
 }
 

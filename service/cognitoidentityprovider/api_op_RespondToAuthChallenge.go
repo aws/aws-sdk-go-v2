@@ -179,6 +179,7 @@ func (c *Client) RespondToAuthChallengeRequest(input *RespondToAuthChallengeInpu
 	}
 
 	req := c.newRequest(op, input, &RespondToAuthChallengeOutput{})
+
 	return RespondToAuthChallengeRequest{Request: req, Input: input, Copy: c.RespondToAuthChallengeRequest}
 }
 

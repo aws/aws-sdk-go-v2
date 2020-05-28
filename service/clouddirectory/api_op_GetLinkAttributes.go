@@ -158,6 +158,7 @@ func (c *Client) GetLinkAttributesRequest(input *GetLinkAttributesInput) GetLink
 	}
 
 	req := c.newRequest(op, input, &GetLinkAttributesOutput{})
+
 	return GetLinkAttributesRequest{Request: req, Input: input, Copy: c.GetLinkAttributesRequest}
 }
 

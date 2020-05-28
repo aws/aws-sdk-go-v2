@@ -422,6 +422,7 @@ func (c *Client) UpdateMethodRequest(input *UpdateMethodInput) UpdateMethodReque
 	}
 
 	req := c.newRequest(op, input, &UpdateMethodOutput{})
+
 	return UpdateMethodRequest{Request: req, Input: input, Copy: c.UpdateMethodRequest}
 }
 

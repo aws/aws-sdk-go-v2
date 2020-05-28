@@ -93,6 +93,7 @@ func (c *Client) DeleteFacesRequest(input *DeleteFacesInput) DeleteFacesRequest 
 	}
 
 	req := c.newRequest(op, input, &DeleteFacesOutput{})
+
 	return DeleteFacesRequest{Request: req, Input: input, Copy: c.DeleteFacesRequest}
 }
 

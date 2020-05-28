@@ -146,6 +146,7 @@ func (c *Client) GetBucketAclRequest(input *GetBucketAclInput) GetBucketAclReque
 	}
 
 	req := c.newRequest(op, input, &GetBucketAclOutput{})
+
 	return GetBucketAclRequest{Request: req, Input: input, Copy: c.GetBucketAclRequest}
 }
 

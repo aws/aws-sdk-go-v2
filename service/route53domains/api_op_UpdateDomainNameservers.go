@@ -114,6 +114,7 @@ func (c *Client) UpdateDomainNameserversRequest(input *UpdateDomainNameserversIn
 	}
 
 	req := c.newRequest(op, input, &UpdateDomainNameserversOutput{})
+
 	return UpdateDomainNameserversRequest{Request: req, Input: input, Copy: c.UpdateDomainNameserversRequest}
 }
 

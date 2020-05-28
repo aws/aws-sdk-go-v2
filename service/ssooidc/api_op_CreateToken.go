@@ -239,6 +239,7 @@ func (c *Client) CreateTokenRequest(input *CreateTokenInput) CreateTokenRequest 
 
 	req := c.newRequest(op, input, &CreateTokenOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return CreateTokenRequest{Request: req, Input: input, Copy: c.CreateTokenRequest}
 }
 

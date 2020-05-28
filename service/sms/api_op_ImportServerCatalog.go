@@ -58,6 +58,7 @@ func (c *Client) ImportServerCatalogRequest(input *ImportServerCatalogInput) Imp
 	}
 
 	req := c.newRequest(op, input, &ImportServerCatalogOutput{})
+
 	return ImportServerCatalogRequest{Request: req, Input: input, Copy: c.ImportServerCatalogRequest}
 }
 

@@ -87,6 +87,7 @@ func (c *Client) DeleteAccountAliasRequest(input *DeleteAccountAliasInput) Delet
 	req := c.newRequest(op, input, &DeleteAccountAliasOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteAccountAliasRequest{Request: req, Input: input, Copy: c.DeleteAccountAliasRequest}
 }
 

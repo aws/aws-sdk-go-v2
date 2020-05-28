@@ -125,6 +125,7 @@ func (c *Client) GetExecutionHistoryRequest(input *GetExecutionHistoryInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetExecutionHistoryOutput{})
+
 	return GetExecutionHistoryRequest{Request: req, Input: input, Copy: c.GetExecutionHistoryRequest}
 }
 

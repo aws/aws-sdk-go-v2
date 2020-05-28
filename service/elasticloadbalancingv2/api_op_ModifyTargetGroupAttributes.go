@@ -85,6 +85,7 @@ func (c *Client) ModifyTargetGroupAttributesRequest(input *ModifyTargetGroupAttr
 	}
 
 	req := c.newRequest(op, input, &ModifyTargetGroupAttributesOutput{})
+
 	return ModifyTargetGroupAttributesRequest{Request: req, Input: input, Copy: c.ModifyTargetGroupAttributesRequest}
 }
 

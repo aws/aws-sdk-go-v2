@@ -103,6 +103,7 @@ func (c *Client) GetChannelsRequest(input *GetChannelsInput) GetChannelsRequest 
 	}
 
 	req := c.newRequest(op, input, &GetChannelsOutput{})
+
 	return GetChannelsRequest{Request: req, Input: input, Copy: c.GetChannelsRequest}
 }
 

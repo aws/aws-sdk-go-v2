@@ -85,6 +85,7 @@ func (c *Client) UntagProjectRequest(input *UntagProjectInput) UntagProjectReque
 	}
 
 	req := c.newRequest(op, input, &UntagProjectOutput{})
+
 	return UntagProjectRequest{Request: req, Input: input, Copy: c.UntagProjectRequest}
 }
 

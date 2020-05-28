@@ -110,6 +110,7 @@ func (c *Client) SetTaskStatusRequest(input *SetTaskStatusInput) SetTaskStatusRe
 	}
 
 	req := c.newRequest(op, input, &SetTaskStatusOutput{})
+
 	return SetTaskStatusRequest{Request: req, Input: input, Copy: c.SetTaskStatusRequest}
 }
 

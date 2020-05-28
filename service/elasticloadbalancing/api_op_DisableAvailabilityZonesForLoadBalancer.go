@@ -99,6 +99,7 @@ func (c *Client) DisableAvailabilityZonesForLoadBalancerRequest(input *DisableAv
 	}
 
 	req := c.newRequest(op, input, &DisableAvailabilityZonesForLoadBalancerOutput{})
+
 	return DisableAvailabilityZonesForLoadBalancerRequest{Request: req, Input: input, Copy: c.DisableAvailabilityZonesForLoadBalancerRequest}
 }
 

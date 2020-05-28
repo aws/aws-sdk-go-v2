@@ -147,6 +147,7 @@ func (c *Client) DescribeRouteRequest(input *DescribeRouteInput) DescribeRouteRe
 	}
 
 	req := c.newRequest(op, input, &DescribeRouteOutput{})
+
 	return DescribeRouteRequest{Request: req, Input: input, Copy: c.DescribeRouteRequest}
 }
 

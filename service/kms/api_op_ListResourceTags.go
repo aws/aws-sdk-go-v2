@@ -125,6 +125,7 @@ func (c *Client) ListResourceTagsRequest(input *ListResourceTagsInput) ListResou
 	}
 
 	req := c.newRequest(op, input, &ListResourceTagsOutput{})
+
 	return ListResourceTagsRequest{Request: req, Input: input, Copy: c.ListResourceTagsRequest}
 }
 

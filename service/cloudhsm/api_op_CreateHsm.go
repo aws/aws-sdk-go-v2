@@ -145,6 +145,7 @@ func (c *Client) CreateHsmRequest(input *CreateHsmInput) CreateHsmRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateHsmOutput{})
+
 	return CreateHsmRequest{Request: req, Input: input, Copy: c.CreateHsmRequest}
 }
 

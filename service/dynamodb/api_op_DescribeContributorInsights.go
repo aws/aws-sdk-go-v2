@@ -117,6 +117,7 @@ func (c *Client) DescribeContributorInsightsRequest(input *DescribeContributorIn
 	}
 
 	req := c.newRequest(op, input, &DescribeContributorInsightsOutput{})
+
 	return DescribeContributorInsightsRequest{Request: req, Input: input, Copy: c.DescribeContributorInsightsRequest}
 }
 

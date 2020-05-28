@@ -99,7 +99,7 @@ const opPutMetricFilter = "PutMetricFilter"
 //
 // Creates or updates a metric filter and associates it with the specified log
 // group. Metric filters allow you to configure rules to extract metric data
-// from log events ingested through PutLogEvents.
+// from log events ingested through PutLogEvents (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html).
 //
 // The maximum number of metric filters that can be associated with a log group
 // is 100.
@@ -126,6 +126,7 @@ func (c *Client) PutMetricFilterRequest(input *PutMetricFilterInput) PutMetricFi
 	req := c.newRequest(op, input, &PutMetricFilterOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutMetricFilterRequest{Request: req, Input: input, Copy: c.PutMetricFilterRequest}
 }
 

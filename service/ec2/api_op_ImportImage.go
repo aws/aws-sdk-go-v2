@@ -190,6 +190,7 @@ func (c *Client) ImportImageRequest(input *ImportImageInput) ImportImageRequest 
 	}
 
 	req := c.newRequest(op, input, &ImportImageOutput{})
+
 	return ImportImageRequest{Request: req, Input: input, Copy: c.ImportImageRequest}
 }
 

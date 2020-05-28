@@ -57,6 +57,7 @@ func (c *Client) DeleteAppLaunchConfigurationRequest(input *DeleteAppLaunchConfi
 	}
 
 	req := c.newRequest(op, input, &DeleteAppLaunchConfigurationOutput{})
+
 	return DeleteAppLaunchConfigurationRequest{Request: req, Input: input, Copy: c.DeleteAppLaunchConfigurationRequest}
 }
 

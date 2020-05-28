@@ -172,6 +172,7 @@ func (c *Client) CreateBackupVaultRequest(input *CreateBackupVaultInput) CreateB
 	}
 
 	req := c.newRequest(op, input, &CreateBackupVaultOutput{})
+
 	return CreateBackupVaultRequest{Request: req, Input: input, Copy: c.CreateBackupVaultRequest}
 }
 

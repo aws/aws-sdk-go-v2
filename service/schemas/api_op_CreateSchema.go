@@ -208,6 +208,8 @@ const opCreateSchema = "CreateSchema"
 //
 // Creates a schema definition.
 //
+// Inactive schemas will be deleted after two years.
+//
 //    // Example sending a request using CreateSchemaRequest.
 //    req := client.CreateSchemaRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -228,6 +230,7 @@ func (c *Client) CreateSchemaRequest(input *CreateSchemaInput) CreateSchemaReque
 	}
 
 	req := c.newRequest(op, input, &CreateSchemaOutput{})
+
 	return CreateSchemaRequest{Request: req, Input: input, Copy: c.CreateSchemaRequest}
 }
 

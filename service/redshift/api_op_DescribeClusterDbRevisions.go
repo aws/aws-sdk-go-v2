@@ -90,6 +90,7 @@ func (c *Client) DescribeClusterDbRevisionsRequest(input *DescribeClusterDbRevis
 	}
 
 	req := c.newRequest(op, input, &DescribeClusterDbRevisionsOutput{})
+
 	return DescribeClusterDbRevisionsRequest{Request: req, Input: input, Copy: c.DescribeClusterDbRevisionsRequest}
 }
 

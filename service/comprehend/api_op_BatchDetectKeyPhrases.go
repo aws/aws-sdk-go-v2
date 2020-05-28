@@ -100,6 +100,7 @@ func (c *Client) BatchDetectKeyPhrasesRequest(input *BatchDetectKeyPhrasesInput)
 	}
 
 	req := c.newRequest(op, input, &BatchDetectKeyPhrasesOutput{})
+
 	return BatchDetectKeyPhrasesRequest{Request: req, Input: input, Copy: c.BatchDetectKeyPhrasesRequest}
 }
 

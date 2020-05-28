@@ -165,6 +165,7 @@ func (c *Client) ListPhoneNumbersRequest(input *ListPhoneNumbersInput) ListPhone
 	}
 
 	req := c.newRequest(op, input, &ListPhoneNumbersOutput{})
+
 	return ListPhoneNumbersRequest{Request: req, Input: input, Copy: c.ListPhoneNumbersRequest}
 }
 

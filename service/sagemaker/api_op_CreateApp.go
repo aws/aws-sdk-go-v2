@@ -28,7 +28,8 @@ type CreateAppInput struct {
 	// DomainId is a required field
 	DomainId *string `type:"string" required:"true"`
 
-	// The instance type and quantity.
+	// The instance type and the Amazon Resource Name (ARN) of the SageMaker image
+	// created on the instance.
 	ResourceSpec *ResourceSpec `type:"structure"`
 
 	// Each tag consists of a key and an optional value. Tag keys must be unique
@@ -95,10 +96,10 @@ const opCreateApp = "CreateApp"
 // CreateAppRequest returns a request value for making API operation for
 // Amazon SageMaker Service.
 //
-// Creates a running App for the specified UserProfile. Supported Apps are JupyterServer
-// and KernelGateway. This operation is automatically invoked by Amazon SageMaker
-// Amazon SageMaker Studio (Studio) upon access to the associated Studio Domain,
-// and when new kernel configurations are selected by the user. A user may have
+// Creates a running App for the specified UserProfile. Supported Apps are JupyterServer,
+// KernelGateway, and TensorBoard. This operation is automatically invoked by
+// Amazon SageMaker Studio upon access to the associated Studio Domain, and
+// when new kernel configurations are selected by the user. A user may have
 // multiple Apps active simultaneously. Apps will automatically terminate and
 // be deleted when stopped from within Studio, or when the DeleteApp API is
 // manually called. UserProfiles are limited to 5 concurrently running Apps
@@ -124,6 +125,7 @@ func (c *Client) CreateAppRequest(input *CreateAppInput) CreateAppRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateAppOutput{})
+
 	return CreateAppRequest{Request: req, Input: input, Copy: c.CreateAppRequest}
 }
 

@@ -177,6 +177,7 @@ func (c *Client) CreateBackupSelectionRequest(input *CreateBackupSelectionInput)
 	}
 
 	req := c.newRequest(op, input, &CreateBackupSelectionOutput{})
+
 	return CreateBackupSelectionRequest{Request: req, Input: input, Copy: c.CreateBackupSelectionRequest}
 }
 

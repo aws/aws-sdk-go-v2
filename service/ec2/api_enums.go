@@ -1794,6 +1794,15 @@ const (
 	InstanceTypeInf12xlarge  InstanceType = "inf1.2xlarge"
 	InstanceTypeInf16xlarge  InstanceType = "inf1.6xlarge"
 	InstanceTypeInf124xlarge InstanceType = "inf1.24xlarge"
+	InstanceTypeM6gMetal     InstanceType = "m6g.metal"
+	InstanceTypeM6gMedium    InstanceType = "m6g.medium"
+	InstanceTypeM6gLarge     InstanceType = "m6g.large"
+	InstanceTypeM6gXlarge    InstanceType = "m6g.xlarge"
+	InstanceTypeM6g2xlarge   InstanceType = "m6g.2xlarge"
+	InstanceTypeM6g4xlarge   InstanceType = "m6g.4xlarge"
+	InstanceTypeM6g8xlarge   InstanceType = "m6g.8xlarge"
+	InstanceTypeM6g12xlarge  InstanceType = "m6g.12xlarge"
+	InstanceTypeM6g16xlarge  InstanceType = "m6g.16xlarge"
 )
 
 func (enum InstanceType) MarshalValue() (string, error) {
@@ -3763,6 +3772,7 @@ type VpnAuthenticationType string
 const (
 	VpnAuthenticationTypeCertificateAuthentication      VpnAuthenticationType = "certificate-authentication"
 	VpnAuthenticationTypeDirectoryServiceAuthentication VpnAuthenticationType = "directory-service-authentication"
+	VpnAuthenticationTypeFederatedAuthentication        VpnAuthenticationType = "federated-authentication"
 )
 
 func (enum VpnAuthenticationType) MarshalValue() (string, error) {

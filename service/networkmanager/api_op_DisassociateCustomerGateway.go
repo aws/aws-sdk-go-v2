@@ -117,6 +117,7 @@ func (c *Client) DisassociateCustomerGatewayRequest(input *DisassociateCustomerG
 	}
 
 	req := c.newRequest(op, input, &DisassociateCustomerGatewayOutput{})
+
 	return DisassociateCustomerGatewayRequest{Request: req, Input: input, Copy: c.DisassociateCustomerGatewayRequest}
 }
 

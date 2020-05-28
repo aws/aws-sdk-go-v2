@@ -214,6 +214,7 @@ func (c *Client) PutTargetsRequest(input *PutTargetsInput) PutTargetsRequest {
 	}
 
 	req := c.newRequest(op, input, &PutTargetsOutput{})
+
 	return PutTargetsRequest{Request: req, Input: input, Copy: c.PutTargetsRequest}
 }
 

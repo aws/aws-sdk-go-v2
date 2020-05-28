@@ -65,6 +65,9 @@ func (s *CreateLoadBalancerInput) Validate() error {
 	if s.InstancePort == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstancePort"))
 	}
+	if s.InstancePort != nil && *s.InstancePort < -1 {
+		invalidParams.Add(aws.NewErrParamMinValue("InstancePort", -1))
+	}
 
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
@@ -80,7 +83,7 @@ type CreateLoadBalancerOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
+	// of the request, the timestamp of the request, and the resources affected
 	// by the request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
@@ -127,6 +130,7 @@ func (c *Client) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateLoadBalancerOutput{})
+
 	return CreateLoadBalancerRequest{Request: req, Input: input, Copy: c.CreateLoadBalancerRequest}
 }
 

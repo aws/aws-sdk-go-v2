@@ -144,6 +144,7 @@ func (c *Client) BatchSuspendUserRequest(input *BatchSuspendUserInput) BatchSusp
 	}
 
 	req := c.newRequest(op, input, &BatchSuspendUserOutput{})
+
 	return BatchSuspendUserRequest{Request: req, Input: input, Copy: c.BatchSuspendUserRequest}
 }
 

@@ -68,6 +68,7 @@ func (c *Client) GetComplianceSummaryByResourceTypeRequest(input *GetComplianceS
 	}
 
 	req := c.newRequest(op, input, &GetComplianceSummaryByResourceTypeOutput{})
+
 	return GetComplianceSummaryByResourceTypeRequest{Request: req, Input: input, Copy: c.GetComplianceSummaryByResourceTypeRequest}
 }
 

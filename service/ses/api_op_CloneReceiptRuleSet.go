@@ -100,6 +100,7 @@ func (c *Client) CloneReceiptRuleSetRequest(input *CloneReceiptRuleSetInput) Clo
 	}
 
 	req := c.newRequest(op, input, &CloneReceiptRuleSetOutput{})
+
 	return CloneReceiptRuleSetRequest{Request: req, Input: input, Copy: c.CloneReceiptRuleSetRequest}
 }
 

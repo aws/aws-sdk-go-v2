@@ -94,6 +94,7 @@ func (c *Client) DisassociateWebACLRequest(input *DisassociateWebACLInput) Disas
 	}
 
 	req := c.newRequest(op, input, &DisassociateWebACLOutput{})
+
 	return DisassociateWebACLRequest{Request: req, Input: input, Copy: c.DisassociateWebACLRequest}
 }
 

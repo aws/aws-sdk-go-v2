@@ -202,6 +202,7 @@ func (c *Client) ModifyEndpointRequest(input *ModifyEndpointInput) ModifyEndpoin
 	}
 
 	req := c.newRequest(op, input, &ModifyEndpointOutput{})
+
 	return ModifyEndpointRequest{Request: req, Input: input, Copy: c.ModifyEndpointRequest}
 }
 

@@ -88,6 +88,7 @@ func (c *Client) DeletePortfolioRequest(input *DeletePortfolioInput) DeletePortf
 	}
 
 	req := c.newRequest(op, input, &DeletePortfolioOutput{})
+
 	return DeletePortfolioRequest{Request: req, Input: input, Copy: c.DeletePortfolioRequest}
 }
 

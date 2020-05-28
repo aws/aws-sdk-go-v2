@@ -113,6 +113,7 @@ func (c *Client) DeleteOTAUpdateRequest(input *DeleteOTAUpdateInput) DeleteOTAUp
 	}
 
 	req := c.newRequest(op, input, &DeleteOTAUpdateOutput{})
+
 	return DeleteOTAUpdateRequest{Request: req, Input: input, Copy: c.DeleteOTAUpdateRequest}
 }
 

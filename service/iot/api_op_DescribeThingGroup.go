@@ -183,6 +183,7 @@ func (c *Client) DescribeThingGroupRequest(input *DescribeThingGroupInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeThingGroupOutput{})
+
 	return DescribeThingGroupRequest{Request: req, Input: input, Copy: c.DescribeThingGroupRequest}
 }
 

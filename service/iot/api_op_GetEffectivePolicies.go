@@ -121,6 +121,7 @@ func (c *Client) GetEffectivePoliciesRequest(input *GetEffectivePoliciesInput) G
 	}
 
 	req := c.newRequest(op, input, &GetEffectivePoliciesOutput{})
+
 	return GetEffectivePoliciesRequest{Request: req, Input: input, Copy: c.GetEffectivePoliciesRequest}
 }
 

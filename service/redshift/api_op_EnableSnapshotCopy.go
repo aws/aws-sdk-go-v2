@@ -112,6 +112,7 @@ func (c *Client) EnableSnapshotCopyRequest(input *EnableSnapshotCopyInput) Enabl
 	}
 
 	req := c.newRequest(op, input, &EnableSnapshotCopyOutput{})
+
 	return EnableSnapshotCopyRequest{Request: req, Input: input, Copy: c.EnableSnapshotCopyRequest}
 }
 

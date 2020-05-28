@@ -253,6 +253,7 @@ func (c *Client) ImportApiRequest(input *ImportApiInput) ImportApiRequest {
 	}
 
 	req := c.newRequest(op, input, &ImportApiOutput{})
+
 	return ImportApiRequest{Request: req, Input: input, Copy: c.ImportApiRequest}
 }
 

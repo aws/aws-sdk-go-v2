@@ -133,6 +133,7 @@ func (c *Client) GetMetricWidgetImageRequest(input *GetMetricWidgetImageInput) G
 	}
 
 	req := c.newRequest(op, input, &GetMetricWidgetImageOutput{})
+
 	return GetMetricWidgetImageRequest{Request: req, Input: input, Copy: c.GetMetricWidgetImageRequest}
 }
 

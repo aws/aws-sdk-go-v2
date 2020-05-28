@@ -102,6 +102,7 @@ func (c *Client) DescribeProductAsAdminRequest(input *DescribeProductAsAdminInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeProductAsAdminOutput{})
+
 	return DescribeProductAsAdminRequest{Request: req, Input: input, Copy: c.DescribeProductAsAdminRequest}
 }
 

@@ -92,6 +92,7 @@ func (c *Client) ModifyClusterSnapshotRequest(input *ModifyClusterSnapshotInput)
 	}
 
 	req := c.newRequest(op, input, &ModifyClusterSnapshotOutput{})
+
 	return ModifyClusterSnapshotRequest{Request: req, Input: input, Copy: c.ModifyClusterSnapshotRequest}
 }
 

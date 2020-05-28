@@ -100,6 +100,7 @@ func (c *Client) ListRulesRequest(input *ListRulesInput) ListRulesRequest {
 	}
 
 	req := c.newRequest(op, input, &ListRulesOutput{})
+
 	return ListRulesRequest{Request: req, Input: input, Copy: c.ListRulesRequest}
 }
 

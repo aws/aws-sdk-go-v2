@@ -98,6 +98,7 @@ func (c *Client) AddCustomAttributesRequest(input *AddCustomAttributesInput) Add
 	}
 
 	req := c.newRequest(op, input, &AddCustomAttributesOutput{})
+
 	return AddCustomAttributesRequest{Request: req, Input: input, Copy: c.AddCustomAttributesRequest}
 }
 

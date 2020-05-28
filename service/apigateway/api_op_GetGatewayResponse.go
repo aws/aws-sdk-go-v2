@@ -284,6 +284,7 @@ func (c *Client) GetGatewayResponseRequest(input *GetGatewayResponseInput) GetGa
 	}
 
 	req := c.newRequest(op, input, &GetGatewayResponseOutput{})
+
 	return GetGatewayResponseRequest{Request: req, Input: input, Copy: c.GetGatewayResponseRequest}
 }
 

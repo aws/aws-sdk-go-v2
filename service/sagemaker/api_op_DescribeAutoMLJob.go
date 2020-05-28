@@ -153,6 +153,7 @@ func (c *Client) DescribeAutoMLJobRequest(input *DescribeAutoMLJobInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeAutoMLJobOutput{})
+
 	return DescribeAutoMLJobRequest{Request: req, Input: input, Copy: c.DescribeAutoMLJobRequest}
 }
 

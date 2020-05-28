@@ -80,6 +80,7 @@ func (c *Client) DeletePlatformApplicationRequest(input *DeletePlatformApplicati
 	req := c.newRequest(op, input, &DeletePlatformApplicationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeletePlatformApplicationRequest{Request: req, Input: input, Copy: c.DeletePlatformApplicationRequest}
 }
 

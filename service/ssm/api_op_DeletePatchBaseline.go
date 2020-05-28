@@ -79,6 +79,7 @@ func (c *Client) DeletePatchBaselineRequest(input *DeletePatchBaselineInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeletePatchBaselineOutput{})
+
 	return DeletePatchBaselineRequest{Request: req, Input: input, Copy: c.DeletePatchBaselineRequest}
 }
 

@@ -133,6 +133,7 @@ func (c *Client) ListFlowsRequest(input *ListFlowsInput) ListFlowsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListFlowsOutput{})
+
 	return ListFlowsRequest{Request: req, Input: input, Copy: c.ListFlowsRequest}
 }
 

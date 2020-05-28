@@ -104,6 +104,7 @@ func (c *Client) DisassociateRepositoryRequest(input *DisassociateRepositoryInpu
 	}
 
 	req := c.newRequest(op, input, &DisassociateRepositoryOutput{})
+
 	return DisassociateRepositoryRequest{Request: req, Input: input, Copy: c.DisassociateRepositoryRequest}
 }
 

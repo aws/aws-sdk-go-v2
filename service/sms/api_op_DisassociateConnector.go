@@ -76,6 +76,7 @@ func (c *Client) DisassociateConnectorRequest(input *DisassociateConnectorInput)
 	}
 
 	req := c.newRequest(op, input, &DisassociateConnectorOutput{})
+
 	return DisassociateConnectorRequest{Request: req, Input: input, Copy: c.DisassociateConnectorRequest}
 }
 

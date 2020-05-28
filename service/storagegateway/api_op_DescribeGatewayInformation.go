@@ -139,6 +139,7 @@ func (c *Client) DescribeGatewayInformationRequest(input *DescribeGatewayInforma
 	}
 
 	req := c.newRequest(op, input, &DescribeGatewayInformationOutput{})
+
 	return DescribeGatewayInformationRequest{Request: req, Input: input, Copy: c.DescribeGatewayInformationRequest}
 }
 

@@ -114,6 +114,7 @@ func (c *Client) UpdateDetectorRequest(input *UpdateDetectorInput) UpdateDetecto
 	}
 
 	req := c.newRequest(op, input, &UpdateDetectorOutput{})
+
 	return UpdateDetectorRequest{Request: req, Input: input, Copy: c.UpdateDetectorRequest}
 }
 

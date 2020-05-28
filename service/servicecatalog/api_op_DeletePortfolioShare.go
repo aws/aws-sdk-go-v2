@@ -97,6 +97,7 @@ func (c *Client) DeletePortfolioShareRequest(input *DeletePortfolioShareInput) D
 	}
 
 	req := c.newRequest(op, input, &DeletePortfolioShareOutput{})
+
 	return DeletePortfolioShareRequest{Request: req, Input: input, Copy: c.DeletePortfolioShareRequest}
 }
 

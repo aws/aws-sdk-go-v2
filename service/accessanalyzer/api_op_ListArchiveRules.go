@@ -147,6 +147,7 @@ func (c *Client) ListArchiveRulesRequest(input *ListArchiveRulesInput) ListArchi
 	}
 
 	req := c.newRequest(op, input, &ListArchiveRulesOutput{})
+
 	return ListArchiveRulesRequest{Request: req, Input: input, Copy: c.ListArchiveRulesRequest}
 }
 

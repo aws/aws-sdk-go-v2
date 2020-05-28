@@ -37,7 +37,7 @@ type GetOperationsOutput struct {
 	NextPageToken *string `locationName:"nextPageToken" type:"string"`
 
 	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
+	// of the request, the timestamp of the request, and the resources affected
 	// by the request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
@@ -78,6 +78,7 @@ func (c *Client) GetOperationsRequest(input *GetOperationsInput) GetOperationsRe
 	}
 
 	req := c.newRequest(op, input, &GetOperationsOutput{})
+
 	return GetOperationsRequest{Request: req, Input: input, Copy: c.GetOperationsRequest}
 }
 

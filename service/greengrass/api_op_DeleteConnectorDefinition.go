@@ -90,6 +90,7 @@ func (c *Client) DeleteConnectorDefinitionRequest(input *DeleteConnectorDefiniti
 	}
 
 	req := c.newRequest(op, input, &DeleteConnectorDefinitionOutput{})
+
 	return DeleteConnectorDefinitionRequest{Request: req, Input: input, Copy: c.DeleteConnectorDefinitionRequest}
 }
 

@@ -146,6 +146,7 @@ func (c *Client) UpdateBrokerCountRequest(input *UpdateBrokerCountInput) UpdateB
 	}
 
 	req := c.newRequest(op, input, &UpdateBrokerCountOutput{})
+
 	return UpdateBrokerCountRequest{Request: req, Input: input, Copy: c.UpdateBrokerCountRequest}
 }
 

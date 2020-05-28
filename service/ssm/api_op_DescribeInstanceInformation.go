@@ -14,17 +14,16 @@ type DescribeInstanceInformationInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more filters. Use a filter to return a more specific list of instances.
-	// You can filter on Amazon EC2 tag. Specify tags by using a key-value mapping.
+	// You can filter based on tags applied to EC2 instances. Use this Filters data
+	// type instead of InstanceInformationFilterList, which is deprecated.
 	Filters []InstanceInformationStringFilter `type:"list"`
 
 	// This is a legacy method. We recommend that you don't use this method. Instead,
-	// use the InstanceInformationFilter action. The InstanceInformationFilter action
-	// enables you to return instance information by using tags that are specified
-	// as a key-value mapping.
+	// use the Filters data type. Filters enables you to return instance information
+	// by filtering based on tags applied to managed instances.
 	//
-	// If you do use this method, then you can't use the InstanceInformationFilter
-	// action. Using this method and the InstanceInformationFilter action causes
-	// an exception error.
+	// Attempting to use InstanceInformationFilterList and Filters leads to an exception
+	// error.
 	InstanceInformationFilterList []InstanceInformationFilter `type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
@@ -90,16 +89,18 @@ const opDescribeInstanceInformation = "DescribeInstanceInformation"
 // DescribeInstanceInformationRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Describes one or more of your instances. You can use this to get information
-// about instances like the operating system platform, the SSM Agent version
-// (Linux), status etc. If you specify one or more instance IDs, it returns
-// information for those instances. If you do not specify instance IDs, it returns
-// information for all your instances. If you specify an instance ID that is
-// not valid or an instance that you do not own, you receive an error.
+// Describes one or more of your instances, including information about the
+// operating system platform, the version of SSM Agent installed on the instance,
+// instance status, and so on.
+//
+// If you specify one or more instance IDs, it returns information for those
+// instances. If you do not specify instance IDs, it returns information for
+// all your instances. If you specify an instance ID that is not valid or an
+// instance that you do not own, you receive an error.
 //
 // The IamRole field for this API action is the Amazon Identity and Access Management
 // (IAM) role assigned to on-premises instances. This call does not return the
-// IAM role for Amazon EC2 instances.
+// IAM role for EC2 instances.
 //
 //    // Example sending a request using DescribeInstanceInformationRequest.
 //    req := client.DescribeInstanceInformationRequest(params)
@@ -127,6 +128,7 @@ func (c *Client) DescribeInstanceInformationRequest(input *DescribeInstanceInfor
 	}
 
 	req := c.newRequest(op, input, &DescribeInstanceInformationOutput{})
+
 	return DescribeInstanceInformationRequest{Request: req, Input: input, Copy: c.DescribeInstanceInformationRequest}
 }
 

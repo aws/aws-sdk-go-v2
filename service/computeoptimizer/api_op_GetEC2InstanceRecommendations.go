@@ -95,6 +95,7 @@ func (c *Client) GetEC2InstanceRecommendationsRequest(input *GetEC2InstanceRecom
 	}
 
 	req := c.newRequest(op, input, &GetEC2InstanceRecommendationsOutput{})
+
 	return GetEC2InstanceRecommendationsRequest{Request: req, Input: input, Copy: c.GetEC2InstanceRecommendationsRequest}
 }
 

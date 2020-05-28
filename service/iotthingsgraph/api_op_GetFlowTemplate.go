@@ -84,6 +84,7 @@ func (c *Client) GetFlowTemplateRequest(input *GetFlowTemplateInput) GetFlowTemp
 	}
 
 	req := c.newRequest(op, input, &GetFlowTemplateOutput{})
+
 	return GetFlowTemplateRequest{Request: req, Input: input, Copy: c.GetFlowTemplateRequest}
 }
 

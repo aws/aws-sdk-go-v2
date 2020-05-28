@@ -105,6 +105,7 @@ func (c *Client) DescribeReplicationSubnetGroupsRequest(input *DescribeReplicati
 	}
 
 	req := c.newRequest(op, input, &DescribeReplicationSubnetGroupsOutput{})
+
 	return DescribeReplicationSubnetGroupsRequest{Request: req, Input: input, Copy: c.DescribeReplicationSubnetGroupsRequest}
 }
 

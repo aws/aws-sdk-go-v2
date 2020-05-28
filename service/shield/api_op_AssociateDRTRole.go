@@ -109,6 +109,7 @@ func (c *Client) AssociateDRTRoleRequest(input *AssociateDRTRoleInput) Associate
 	}
 
 	req := c.newRequest(op, input, &AssociateDRTRoleOutput{})
+
 	return AssociateDRTRoleRequest{Request: req, Input: input, Copy: c.AssociateDRTRoleRequest}
 }
 

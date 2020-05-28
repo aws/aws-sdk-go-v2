@@ -24,9 +24,7 @@ type RenderUiTemplateInput struct {
 	Task *RenderableTask `type:"structure" required:"true"`
 
 	// A Template object containing the worker UI template to render.
-	//
-	// UiTemplate is a required field
-	UiTemplate *UiTemplate `type:"structure" required:"true"`
+	UiTemplate *UiTemplate `type:"structure"`
 }
 
 // String returns the string representation
@@ -47,10 +45,6 @@ func (s *RenderUiTemplateInput) Validate() error {
 
 	if s.Task == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Task"))
-	}
-
-	if s.UiTemplate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UiTemplate"))
 	}
 	if s.Task != nil {
 		if err := s.Task.Validate(); err != nil {
@@ -116,6 +110,7 @@ func (c *Client) RenderUiTemplateRequest(input *RenderUiTemplateInput) RenderUiT
 	}
 
 	req := c.newRequest(op, input, &RenderUiTemplateOutput{})
+
 	return RenderUiTemplateRequest{Request: req, Input: input, Copy: c.RenderUiTemplateRequest}
 }
 

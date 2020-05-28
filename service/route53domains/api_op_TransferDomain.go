@@ -239,6 +239,7 @@ func (c *Client) TransferDomainRequest(input *TransferDomainInput) TransferDomai
 	}
 
 	req := c.newRequest(op, input, &TransferDomainOutput{})
+
 	return TransferDomainRequest{Request: req, Input: input, Copy: c.TransferDomainRequest}
 }
 

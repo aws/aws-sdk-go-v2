@@ -153,6 +153,7 @@ func (c *Client) CreateCoreDefinitionVersionRequest(input *CreateCoreDefinitionV
 	}
 
 	req := c.newRequest(op, input, &CreateCoreDefinitionVersionOutput{})
+
 	return CreateCoreDefinitionVersionRequest{Request: req, Input: input, Copy: c.CreateCoreDefinitionVersionRequest}
 }
 

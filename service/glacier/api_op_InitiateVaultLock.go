@@ -158,6 +158,7 @@ func (c *Client) InitiateVaultLockRequest(input *InitiateVaultLockInput) Initiat
 	}
 
 	req := c.newRequest(op, input, &InitiateVaultLockOutput{})
+
 	return InitiateVaultLockRequest{Request: req, Input: input, Copy: c.InitiateVaultLockRequest}
 }
 

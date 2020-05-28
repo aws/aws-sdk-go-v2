@@ -136,6 +136,7 @@ func (c *Client) DescribeRuntimeVersionsRequest(input *DescribeRuntimeVersionsIn
 	}
 
 	req := c.newRequest(op, input, &DescribeRuntimeVersionsOutput{})
+
 	return DescribeRuntimeVersionsRequest{Request: req, Input: input, Copy: c.DescribeRuntimeVersionsRequest}
 }
 

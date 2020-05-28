@@ -41,7 +41,8 @@ type PutSubscriptionFilterInput struct {
 	// A name for the subscription filter. If you are updating an existing filter,
 	// you must specify the correct name in filterName. Otherwise, the call fails
 	// because you cannot associate a second filter with a log group. To find the
-	// name of the filter currently associated with a log group, use DescribeSubscriptionFilters.
+	// name of the filter currently associated with a log group, use DescribeSubscriptionFilters
+	// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeSubscriptionFilters.html).
 	//
 	// FilterName is a required field
 	FilterName *string `locationName:"filterName" min:"1" type:"string" required:"true"`
@@ -122,8 +123,9 @@ const opPutSubscriptionFilter = "PutSubscriptionFilter"
 //
 // Creates or updates a subscription filter and associates it with the specified
 // log group. Subscription filters allow you to subscribe to a real-time stream
-// of log events ingested through PutLogEvents and have them delivered to a
-// specific destination. Currently, the supported destinations are:
+// of log events ingested through PutLogEvents (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html)
+// and have them delivered to a specific destination. Currently, the supported
+// destinations are:
 //
 //    * An Amazon Kinesis stream belonging to the same account as the subscription
 //    filter, for same-account delivery.
@@ -164,6 +166,7 @@ func (c *Client) PutSubscriptionFilterRequest(input *PutSubscriptionFilterInput)
 	req := c.newRequest(op, input, &PutSubscriptionFilterOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutSubscriptionFilterRequest{Request: req, Input: input, Copy: c.PutSubscriptionFilterRequest}
 }
 
