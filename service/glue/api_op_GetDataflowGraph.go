@@ -63,6 +63,7 @@ func (c *Client) GetDataflowGraphRequest(input *GetDataflowGraphInput) GetDatafl
 	}
 
 	req := c.newRequest(op, input, &GetDataflowGraphOutput{})
+
 	return GetDataflowGraphRequest{Request: req, Input: input, Copy: c.GetDataflowGraphRequest}
 }
 

@@ -123,6 +123,7 @@ func (c *Client) DeleteDomainAssociationRequest(input *DeleteDomainAssociationIn
 	}
 
 	req := c.newRequest(op, input, &DeleteDomainAssociationOutput{})
+
 	return DeleteDomainAssociationRequest{Request: req, Input: input, Copy: c.DeleteDomainAssociationRequest}
 }
 

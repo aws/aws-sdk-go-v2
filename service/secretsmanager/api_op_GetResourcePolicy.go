@@ -124,6 +124,7 @@ func (c *Client) GetResourcePolicyRequest(input *GetResourcePolicyInput) GetReso
 	}
 
 	req := c.newRequest(op, input, &GetResourcePolicyOutput{})
+
 	return GetResourcePolicyRequest{Request: req, Input: input, Copy: c.GetResourcePolicyRequest}
 }
 

@@ -82,6 +82,7 @@ func (c *Client) ListPlatformApplicationsRequest(input *ListPlatformApplications
 	}
 
 	req := c.newRequest(op, input, &ListPlatformApplicationsOutput{})
+
 	return ListPlatformApplicationsRequest{Request: req, Input: input, Copy: c.ListPlatformApplicationsRequest}
 }
 

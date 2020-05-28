@@ -75,6 +75,7 @@ func (c *Client) DeleteIpGroupRequest(input *DeleteIpGroupInput) DeleteIpGroupRe
 	}
 
 	req := c.newRequest(op, input, &DeleteIpGroupOutput{})
+
 	return DeleteIpGroupRequest{Request: req, Input: input, Copy: c.DeleteIpGroupRequest}
 }
 

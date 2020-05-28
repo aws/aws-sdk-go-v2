@@ -245,6 +245,7 @@ func (c *Client) CreateQueryLoggingConfigRequest(input *CreateQueryLoggingConfig
 	}
 
 	req := c.newRequest(op, input, &CreateQueryLoggingConfigOutput{})
+
 	return CreateQueryLoggingConfigRequest{Request: req, Input: input, Copy: c.CreateQueryLoggingConfigRequest}
 }
 

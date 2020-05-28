@@ -73,6 +73,7 @@ func (c *Client) DescribeDirectConnectGatewaysRequest(input *DescribeDirectConne
 	}
 
 	req := c.newRequest(op, input, &DescribeDirectConnectGatewaysOutput{})
+
 	return DescribeDirectConnectGatewaysRequest{Request: req, Input: input, Copy: c.DescribeDirectConnectGatewaysRequest}
 }
 

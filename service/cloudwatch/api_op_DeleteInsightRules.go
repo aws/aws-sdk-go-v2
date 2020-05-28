@@ -82,6 +82,7 @@ func (c *Client) DeleteInsightRulesRequest(input *DeleteInsightRulesInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteInsightRulesOutput{})
+
 	return DeleteInsightRulesRequest{Request: req, Input: input, Copy: c.DeleteInsightRulesRequest}
 }
 

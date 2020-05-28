@@ -123,6 +123,7 @@ func (c *Client) UpdateGroupCertificateConfigurationRequest(input *UpdateGroupCe
 	}
 
 	req := c.newRequest(op, input, &UpdateGroupCertificateConfigurationOutput{})
+
 	return UpdateGroupCertificateConfigurationRequest{Request: req, Input: input, Copy: c.UpdateGroupCertificateConfigurationRequest}
 }
 

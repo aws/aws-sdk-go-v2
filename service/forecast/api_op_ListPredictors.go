@@ -124,6 +124,7 @@ func (c *Client) ListPredictorsRequest(input *ListPredictorsInput) ListPredictor
 	}
 
 	req := c.newRequest(op, input, &ListPredictorsOutput{})
+
 	return ListPredictorsRequest{Request: req, Input: input, Copy: c.ListPredictorsRequest}
 }
 

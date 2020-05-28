@@ -95,6 +95,7 @@ func (c *Client) DeleteDomainConfigurationRequest(input *DeleteDomainConfigurati
 	}
 
 	req := c.newRequest(op, input, &DeleteDomainConfigurationOutput{})
+
 	return DeleteDomainConfigurationRequest{Request: req, Input: input, Copy: c.DeleteDomainConfigurationRequest}
 }
 

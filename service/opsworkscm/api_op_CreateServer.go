@@ -328,6 +328,7 @@ func (c *Client) CreateServerRequest(input *CreateServerInput) CreateServerReque
 	}
 
 	req := c.newRequest(op, input, &CreateServerOutput{})
+
 	return CreateServerRequest{Request: req, Input: input, Copy: c.CreateServerRequest}
 }
 

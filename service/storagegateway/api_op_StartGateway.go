@@ -96,6 +96,7 @@ func (c *Client) StartGatewayRequest(input *StartGatewayInput) StartGatewayReque
 	}
 
 	req := c.newRequest(op, input, &StartGatewayOutput{})
+
 	return StartGatewayRequest{Request: req, Input: input, Copy: c.StartGatewayRequest}
 }
 

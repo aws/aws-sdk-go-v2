@@ -148,6 +148,7 @@ func (c *Client) ListJobExecutionsForJobRequest(input *ListJobExecutionsForJobIn
 	}
 
 	req := c.newRequest(op, input, &ListJobExecutionsForJobOutput{})
+
 	return ListJobExecutionsForJobRequest{Request: req, Input: input, Copy: c.ListJobExecutionsForJobRequest}
 }
 

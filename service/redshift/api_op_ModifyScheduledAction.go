@@ -154,6 +154,7 @@ func (c *Client) ModifyScheduledActionRequest(input *ModifyScheduledActionInput)
 	}
 
 	req := c.newRequest(op, input, &ModifyScheduledActionOutput{})
+
 	return ModifyScheduledActionRequest{Request: req, Input: input, Copy: c.ModifyScheduledActionRequest}
 }
 

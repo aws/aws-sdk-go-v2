@@ -90,6 +90,7 @@ func (c *Client) RebootBrokerRequest(input *RebootBrokerInput) RebootBrokerReque
 	}
 
 	req := c.newRequest(op, input, &RebootBrokerOutput{})
+
 	return RebootBrokerRequest{Request: req, Input: input, Copy: c.RebootBrokerRequest}
 }
 

@@ -105,6 +105,7 @@ func (c *Client) GetEntitiesRequest(input *GetEntitiesInput) GetEntitiesRequest 
 	}
 
 	req := c.newRequest(op, input, &GetEntitiesOutput{})
+
 	return GetEntitiesRequest{Request: req, Input: input, Copy: c.GetEntitiesRequest}
 }
 

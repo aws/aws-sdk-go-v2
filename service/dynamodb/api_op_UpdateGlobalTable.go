@@ -137,6 +137,7 @@ func (c *Client) UpdateGlobalTableRequest(input *UpdateGlobalTableInput) UpdateG
 			Fn:   de.Handler,
 		})
 	}
+
 	return UpdateGlobalTableRequest{Request: req, Input: input, Copy: c.UpdateGlobalTableRequest}
 }
 

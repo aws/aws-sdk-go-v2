@@ -78,7 +78,7 @@ type DeleteInventoryOutput struct {
 	DeletionId *string `type:"string"`
 
 	// A summary of the delete operation. For more information about this summary,
-	// see Understanding the Delete Inventory Summary (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-delete.html#sysman-inventory-delete-summary)
+	// see Deleting custom inventory (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete-summary)
 	// in the AWS Systems Manager User Guide.
 	DeletionSummary *InventoryDeletionSummary `type:"structure"`
 
@@ -120,6 +120,7 @@ func (c *Client) DeleteInventoryRequest(input *DeleteInventoryInput) DeleteInven
 	}
 
 	req := c.newRequest(op, input, &DeleteInventoryOutput{})
+
 	return DeleteInventoryRequest{Request: req, Input: input, Copy: c.DeleteInventoryRequest}
 }
 

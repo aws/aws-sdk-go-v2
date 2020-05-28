@@ -98,6 +98,7 @@ func (c *Client) UpdateDeviceDefinitionRequest(input *UpdateDeviceDefinitionInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateDeviceDefinitionOutput{})
+
 	return UpdateDeviceDefinitionRequest{Request: req, Input: input, Copy: c.UpdateDeviceDefinitionRequest}
 }
 

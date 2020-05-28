@@ -119,6 +119,7 @@ func (c *Client) UpdateHostedZoneCommentRequest(input *UpdateHostedZoneCommentIn
 	}
 
 	req := c.newRequest(op, input, &UpdateHostedZoneCommentOutput{})
+
 	return UpdateHostedZoneCommentRequest{Request: req, Input: input, Copy: c.UpdateHostedZoneCommentRequest}
 }
 

@@ -86,6 +86,7 @@ func (c *Client) DescribeImageBuildersRequest(input *DescribeImageBuildersInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeImageBuildersOutput{})
+
 	return DescribeImageBuildersRequest{Request: req, Input: input, Copy: c.DescribeImageBuildersRequest}
 }
 

@@ -120,6 +120,7 @@ func (c *Client) RegisterTransitGatewayRequest(input *RegisterTransitGatewayInpu
 	}
 
 	req := c.newRequest(op, input, &RegisterTransitGatewayOutput{})
+
 	return RegisterTransitGatewayRequest{Request: req, Input: input, Copy: c.RegisterTransitGatewayRequest}
 }
 

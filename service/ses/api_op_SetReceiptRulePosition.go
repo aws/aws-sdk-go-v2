@@ -94,6 +94,7 @@ func (c *Client) SetReceiptRulePositionRequest(input *SetReceiptRulePositionInpu
 	}
 
 	req := c.newRequest(op, input, &SetReceiptRulePositionOutput{})
+
 	return SetReceiptRulePositionRequest{Request: req, Input: input, Copy: c.SetReceiptRulePositionRequest}
 }
 

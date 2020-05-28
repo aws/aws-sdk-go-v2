@@ -77,6 +77,7 @@ func (c *Client) GetNamedQueryRequest(input *GetNamedQueryInput) GetNamedQueryRe
 	}
 
 	req := c.newRequest(op, input, &GetNamedQueryOutput{})
+
 	return GetNamedQueryRequest{Request: req, Input: input, Copy: c.GetNamedQueryRequest}
 }
 

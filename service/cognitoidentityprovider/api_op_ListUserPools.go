@@ -99,6 +99,7 @@ func (c *Client) ListUserPoolsRequest(input *ListUserPoolsInput) ListUserPoolsRe
 	}
 
 	req := c.newRequest(op, input, &ListUserPoolsOutput{})
+
 	return ListUserPoolsRequest{Request: req, Input: input, Copy: c.ListUserPoolsRequest}
 }
 

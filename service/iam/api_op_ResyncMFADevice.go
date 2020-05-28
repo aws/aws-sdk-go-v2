@@ -133,6 +133,7 @@ func (c *Client) ResyncMFADeviceRequest(input *ResyncMFADeviceInput) ResyncMFADe
 	req := c.newRequest(op, input, &ResyncMFADeviceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return ResyncMFADeviceRequest{Request: req, Input: input, Copy: c.ResyncMFADeviceRequest}
 }
 

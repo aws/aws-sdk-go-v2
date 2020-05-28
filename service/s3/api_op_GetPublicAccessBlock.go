@@ -148,6 +148,7 @@ func (c *Client) GetPublicAccessBlockRequest(input *GetPublicAccessBlockInput) G
 	}
 
 	req := c.newRequest(op, input, &GetPublicAccessBlockOutput{})
+
 	return GetPublicAccessBlockRequest{Request: req, Input: input, Copy: c.GetPublicAccessBlockRequest}
 }
 

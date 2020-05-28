@@ -153,6 +153,7 @@ func (c *Client) ListResolversByFunctionRequest(input *ListResolversByFunctionIn
 	}
 
 	req := c.newRequest(op, input, &ListResolversByFunctionOutput{})
+
 	return ListResolversByFunctionRequest{Request: req, Input: input, Copy: c.ListResolversByFunctionRequest}
 }
 

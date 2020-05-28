@@ -90,6 +90,7 @@ func (c *Client) BatchGetNamedQueryRequest(input *BatchGetNamedQueryInput) Batch
 	}
 
 	req := c.newRequest(op, input, &BatchGetNamedQueryOutput{})
+
 	return BatchGetNamedQueryRequest{Request: req, Input: input, Copy: c.BatchGetNamedQueryRequest}
 }
 

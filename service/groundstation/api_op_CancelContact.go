@@ -101,6 +101,7 @@ func (c *Client) CancelContactRequest(input *CancelContactInput) CancelContactRe
 	}
 
 	req := c.newRequest(op, input, &CancelContactOutput{})
+
 	return CancelContactRequest{Request: req, Input: input, Copy: c.CancelContactRequest}
 }
 

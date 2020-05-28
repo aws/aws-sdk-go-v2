@@ -109,6 +109,7 @@ func (c *Client) ListRequestedServiceQuotaChangeHistoryRequest(input *ListReques
 	}
 
 	req := c.newRequest(op, input, &ListRequestedServiceQuotaChangeHistoryOutput{})
+
 	return ListRequestedServiceQuotaChangeHistoryRequest{Request: req, Input: input, Copy: c.ListRequestedServiceQuotaChangeHistoryRequest}
 }
 

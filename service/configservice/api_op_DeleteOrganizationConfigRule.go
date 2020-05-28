@@ -85,6 +85,7 @@ func (c *Client) DeleteOrganizationConfigRuleRequest(input *DeleteOrganizationCo
 	req := c.newRequest(op, input, &DeleteOrganizationConfigRuleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteOrganizationConfigRuleRequest{Request: req, Input: input, Copy: c.DeleteOrganizationConfigRuleRequest}
 }
 

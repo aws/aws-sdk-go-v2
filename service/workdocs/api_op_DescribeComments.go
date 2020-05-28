@@ -176,6 +176,7 @@ func (c *Client) DescribeCommentsRequest(input *DescribeCommentsInput) DescribeC
 	}
 
 	req := c.newRequest(op, input, &DescribeCommentsOutput{})
+
 	return DescribeCommentsRequest{Request: req, Input: input, Copy: c.DescribeCommentsRequest}
 }
 

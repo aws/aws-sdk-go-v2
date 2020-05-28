@@ -104,6 +104,7 @@ func (c *Client) BatchDetectSyntaxRequest(input *BatchDetectSyntaxInput) BatchDe
 	}
 
 	req := c.newRequest(op, input, &BatchDetectSyntaxOutput{})
+
 	return BatchDetectSyntaxRequest{Request: req, Input: input, Copy: c.BatchDetectSyntaxRequest}
 }
 

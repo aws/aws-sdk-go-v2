@@ -226,6 +226,7 @@ func (c *Client) RegisterDomainRequest(input *RegisterDomainInput) RegisterDomai
 	}
 
 	req := c.newRequest(op, input, &RegisterDomainOutput{})
+
 	return RegisterDomainRequest{Request: req, Input: input, Copy: c.RegisterDomainRequest}
 }
 

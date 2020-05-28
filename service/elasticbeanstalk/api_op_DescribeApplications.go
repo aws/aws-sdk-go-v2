@@ -63,6 +63,7 @@ func (c *Client) DescribeApplicationsRequest(input *DescribeApplicationsInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeApplicationsOutput{})
+
 	return DescribeApplicationsRequest{Request: req, Input: input, Copy: c.DescribeApplicationsRequest}
 }
 

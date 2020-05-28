@@ -272,6 +272,7 @@ func (c *Client) CreateBrokerRequest(input *CreateBrokerInput) CreateBrokerReque
 	}
 
 	req := c.newRequest(op, input, &CreateBrokerOutput{})
+
 	return CreateBrokerRequest{Request: req, Input: input, Copy: c.CreateBrokerRequest}
 }
 

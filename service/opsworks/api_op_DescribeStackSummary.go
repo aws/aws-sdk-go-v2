@@ -83,6 +83,7 @@ func (c *Client) DescribeStackSummaryRequest(input *DescribeStackSummaryInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeStackSummaryOutput{})
+
 	return DescribeStackSummaryRequest{Request: req, Input: input, Copy: c.DescribeStackSummaryRequest}
 }
 

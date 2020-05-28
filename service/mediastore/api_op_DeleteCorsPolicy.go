@@ -81,6 +81,7 @@ func (c *Client) DeleteCorsPolicyRequest(input *DeleteCorsPolicyInput) DeleteCor
 	}
 
 	req := c.newRequest(op, input, &DeleteCorsPolicyOutput{})
+
 	return DeleteCorsPolicyRequest{Request: req, Input: input, Copy: c.DeleteCorsPolicyRequest}
 }
 

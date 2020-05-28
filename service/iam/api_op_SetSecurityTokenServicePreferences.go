@@ -104,6 +104,7 @@ func (c *Client) SetSecurityTokenServicePreferencesRequest(input *SetSecurityTok
 	req := c.newRequest(op, input, &SetSecurityTokenServicePreferencesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetSecurityTokenServicePreferencesRequest{Request: req, Input: input, Copy: c.SetSecurityTokenServicePreferencesRequest}
 }
 

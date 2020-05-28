@@ -99,6 +99,7 @@ func (c *Client) AddInstanceFleetRequest(input *AddInstanceFleetInput) AddInstan
 	}
 
 	req := c.newRequest(op, input, &AddInstanceFleetOutput{})
+
 	return AddInstanceFleetRequest{Request: req, Input: input, Copy: c.AddInstanceFleetRequest}
 }
 

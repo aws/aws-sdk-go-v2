@@ -116,6 +116,7 @@ func (c *Client) CreateScalingPlanRequest(input *CreateScalingPlanInput) CreateS
 	}
 
 	req := c.newRequest(op, input, &CreateScalingPlanOutput{})
+
 	return CreateScalingPlanRequest{Request: req, Input: input, Copy: c.CreateScalingPlanRequest}
 }
 

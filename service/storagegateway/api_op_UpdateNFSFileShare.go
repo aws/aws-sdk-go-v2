@@ -169,6 +169,7 @@ func (c *Client) UpdateNFSFileShareRequest(input *UpdateNFSFileShareInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateNFSFileShareOutput{})
+
 	return UpdateNFSFileShareRequest{Request: req, Input: input, Copy: c.UpdateNFSFileShareRequest}
 }
 

@@ -105,6 +105,7 @@ func (c *Client) DescribeAuditFindingRequest(input *DescribeAuditFindingInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeAuditFindingOutput{})
+
 	return DescribeAuditFindingRequest{Request: req, Input: input, Copy: c.DescribeAuditFindingRequest}
 }
 

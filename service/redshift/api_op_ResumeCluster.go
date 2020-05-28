@@ -76,6 +76,7 @@ func (c *Client) ResumeClusterRequest(input *ResumeClusterInput) ResumeClusterRe
 	}
 
 	req := c.newRequest(op, input, &ResumeClusterOutput{})
+
 	return ResumeClusterRequest{Request: req, Input: input, Copy: c.ResumeClusterRequest}
 }
 

@@ -178,6 +178,7 @@ func (c *Client) GetResourcesRequest(input *GetResourcesInput) GetResourcesReque
 	}
 
 	req := c.newRequest(op, input, &GetResourcesOutput{})
+
 	return GetResourcesRequest{Request: req, Input: input, Copy: c.GetResourcesRequest}
 }
 

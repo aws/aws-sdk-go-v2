@@ -89,6 +89,7 @@ func (c *Client) ListStreamProcessorsRequest(input *ListStreamProcessorsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListStreamProcessorsOutput{})
+
 	return ListStreamProcessorsRequest{Request: req, Input: input, Copy: c.ListStreamProcessorsRequest}
 }
 

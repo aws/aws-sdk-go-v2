@@ -98,6 +98,7 @@ func (c *Client) ListRepositoriesForApprovalRuleTemplateRequest(input *ListRepos
 	}
 
 	req := c.newRequest(op, input, &ListRepositoriesForApprovalRuleTemplateOutput{})
+
 	return ListRepositoriesForApprovalRuleTemplateRequest{Request: req, Input: input, Copy: c.ListRepositoriesForApprovalRuleTemplateRequest}
 }
 

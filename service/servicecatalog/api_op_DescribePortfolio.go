@@ -97,6 +97,7 @@ func (c *Client) DescribePortfolioRequest(input *DescribePortfolioInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribePortfolioOutput{})
+
 	return DescribePortfolioRequest{Request: req, Input: input, Copy: c.DescribePortfolioRequest}
 }
 

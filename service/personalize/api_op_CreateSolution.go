@@ -167,6 +167,7 @@ func (c *Client) CreateSolutionRequest(input *CreateSolutionInput) CreateSolutio
 	}
 
 	req := c.newRequest(op, input, &CreateSolutionOutput{})
+
 	return CreateSolutionRequest{Request: req, Input: input, Copy: c.CreateSolutionRequest}
 }
 

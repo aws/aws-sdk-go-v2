@@ -86,6 +86,7 @@ func (c *Client) ModifyInstanceGroupsRequest(input *ModifyInstanceGroupsInput) M
 	req := c.newRequest(op, input, &ModifyInstanceGroupsOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return ModifyInstanceGroupsRequest{Request: req, Input: input, Copy: c.ModifyInstanceGroupsRequest}
 }
 

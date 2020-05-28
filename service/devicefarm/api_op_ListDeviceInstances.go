@@ -83,6 +83,7 @@ func (c *Client) ListDeviceInstancesRequest(input *ListDeviceInstancesInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListDeviceInstancesOutput{})
+
 	return ListDeviceInstancesRequest{Request: req, Input: input, Copy: c.ListDeviceInstancesRequest}
 }
 

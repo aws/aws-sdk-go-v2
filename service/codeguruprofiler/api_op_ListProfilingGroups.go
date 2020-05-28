@@ -172,6 +172,7 @@ func (c *Client) ListProfilingGroupsRequest(input *ListProfilingGroupsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListProfilingGroupsOutput{})
+
 	return ListProfilingGroupsRequest{Request: req, Input: input, Copy: c.ListProfilingGroupsRequest}
 }
 

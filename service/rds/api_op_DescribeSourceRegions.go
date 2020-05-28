@@ -109,6 +109,7 @@ func (c *Client) DescribeSourceRegionsRequest(input *DescribeSourceRegionsInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeSourceRegionsOutput{})
+
 	return DescribeSourceRegionsRequest{Request: req, Input: input, Copy: c.DescribeSourceRegionsRequest}
 }
 

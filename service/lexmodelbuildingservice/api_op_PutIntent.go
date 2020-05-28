@@ -545,6 +545,7 @@ func (c *Client) PutIntentRequest(input *PutIntentInput) PutIntentRequest {
 	}
 
 	req := c.newRequest(op, input, &PutIntentOutput{})
+
 	return PutIntentRequest{Request: req, Input: input, Copy: c.PutIntentRequest}
 }
 

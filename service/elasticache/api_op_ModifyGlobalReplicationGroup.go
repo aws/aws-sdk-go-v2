@@ -12,12 +12,9 @@ import (
 type ModifyGlobalReplicationGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// If true, this parameter causes the modifications in this request and any
-	// pending modifications to be applied, asynchronously and as soon as possible,
-	// regardless of the PreferredMaintenanceWindow setting for the replication
-	// group. If false, changes to the nodes in the replication group are applied
-	// on the next maintenance reboot, or the next failure reboot, whichever occurs
-	// first.
+	// This parameter causes the modifications in this request and any pending modifications
+	// to be applied, asynchronously and as soon as possible. Modifications to Global
+	// Replication Groups cannot be requested to be applied in PreferredMaintenceWindow.
 	//
 	// ApplyImmediately is a required field
 	ApplyImmediately *bool `type:"boolean" required:"true"`
@@ -73,8 +70,8 @@ type ModifyGlobalReplicationGroupOutput struct {
 	// only reads. The primary cluster automatically replicates updates to the secondary
 	// cluster.
 	//
-	//    * The GlobalReplicationGroupId represents the name of the Global Datastore,
-	//    which is what you use to associate a secondary cluster.
+	//    * The GlobalReplicationGroupIdSuffix represents the name of the Global
+	//    Datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *GlobalReplicationGroup `type:"structure"`
 }
 
@@ -110,6 +107,7 @@ func (c *Client) ModifyGlobalReplicationGroupRequest(input *ModifyGlobalReplicat
 	}
 
 	req := c.newRequest(op, input, &ModifyGlobalReplicationGroupOutput{})
+
 	return ModifyGlobalReplicationGroupRequest{Request: req, Input: input, Copy: c.ModifyGlobalReplicationGroupRequest}
 }
 

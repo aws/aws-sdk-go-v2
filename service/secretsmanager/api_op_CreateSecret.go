@@ -320,6 +320,7 @@ func (c *Client) CreateSecretRequest(input *CreateSecretInput) CreateSecretReque
 	}
 
 	req := c.newRequest(op, input, &CreateSecretOutput{})
+
 	return CreateSecretRequest{Request: req, Input: input, Copy: c.CreateSecretRequest}
 }
 

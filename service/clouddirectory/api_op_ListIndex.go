@@ -192,6 +192,7 @@ func (c *Client) ListIndexRequest(input *ListIndexInput) ListIndexRequest {
 	}
 
 	req := c.newRequest(op, input, &ListIndexOutput{})
+
 	return ListIndexRequest{Request: req, Input: input, Copy: c.ListIndexRequest}
 }
 

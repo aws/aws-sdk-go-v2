@@ -260,6 +260,7 @@ func (c *Client) PutSecretValueRequest(input *PutSecretValueInput) PutSecretValu
 	}
 
 	req := c.newRequest(op, input, &PutSecretValueOutput{})
+
 	return PutSecretValueRequest{Request: req, Input: input, Copy: c.PutSecretValueRequest}
 }
 

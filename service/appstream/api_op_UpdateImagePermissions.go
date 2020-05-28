@@ -92,6 +92,7 @@ func (c *Client) UpdateImagePermissionsRequest(input *UpdateImagePermissionsInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateImagePermissionsOutput{})
+
 	return UpdateImagePermissionsRequest{Request: req, Input: input, Copy: c.UpdateImagePermissionsRequest}
 }
 

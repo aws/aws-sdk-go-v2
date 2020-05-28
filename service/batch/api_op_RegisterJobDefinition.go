@@ -218,6 +218,7 @@ func (c *Client) RegisterJobDefinitionRequest(input *RegisterJobDefinitionInput)
 	}
 
 	req := c.newRequest(op, input, &RegisterJobDefinitionOutput{})
+
 	return RegisterJobDefinitionRequest{Request: req, Input: input, Copy: c.RegisterJobDefinitionRequest}
 }
 

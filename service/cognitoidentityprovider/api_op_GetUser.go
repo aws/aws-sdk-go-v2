@@ -105,6 +105,7 @@ func (c *Client) GetUserRequest(input *GetUserInput) GetUserRequest {
 
 	req := c.newRequest(op, input, &GetUserOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return GetUserRequest{Request: req, Input: input, Copy: c.GetUserRequest}
 }
 

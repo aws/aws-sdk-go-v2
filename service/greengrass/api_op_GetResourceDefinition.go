@@ -162,6 +162,7 @@ func (c *Client) GetResourceDefinitionRequest(input *GetResourceDefinitionInput)
 	}
 
 	req := c.newRequest(op, input, &GetResourceDefinitionOutput{})
+
 	return GetResourceDefinitionRequest{Request: req, Input: input, Copy: c.GetResourceDefinitionRequest}
 }
 

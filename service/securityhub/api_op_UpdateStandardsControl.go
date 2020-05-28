@@ -111,6 +111,7 @@ func (c *Client) UpdateStandardsControlRequest(input *UpdateStandardsControlInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateStandardsControlOutput{})
+
 	return UpdateStandardsControlRequest{Request: req, Input: input, Copy: c.UpdateStandardsControlRequest}
 }
 

@@ -135,6 +135,7 @@ func (c *Client) DescribeLogStreamsRequest(input *DescribeLogStreamsInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeLogStreamsOutput{})
+
 	return DescribeLogStreamsRequest{Request: req, Input: input, Copy: c.DescribeLogStreamsRequest}
 }
 

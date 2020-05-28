@@ -152,6 +152,7 @@ func (c *Client) PutFileSystemPolicyRequest(input *PutFileSystemPolicyInput) Put
 	}
 
 	req := c.newRequest(op, input, &PutFileSystemPolicyOutput{})
+
 	return PutFileSystemPolicyRequest{Request: req, Input: input, Copy: c.PutFileSystemPolicyRequest}
 }
 

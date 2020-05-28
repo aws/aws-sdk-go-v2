@@ -107,6 +107,7 @@ func (c *Client) InitializeClusterRequest(input *InitializeClusterInput) Initial
 	}
 
 	req := c.newRequest(op, input, &InitializeClusterOutput{})
+
 	return InitializeClusterRequest{Request: req, Input: input, Copy: c.InitializeClusterRequest}
 }
 

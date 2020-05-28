@@ -162,6 +162,7 @@ func (c *Client) LookupEventsRequest(input *LookupEventsInput) LookupEventsReque
 	}
 
 	req := c.newRequest(op, input, &LookupEventsOutput{})
+
 	return LookupEventsRequest{Request: req, Input: input, Copy: c.LookupEventsRequest}
 }
 

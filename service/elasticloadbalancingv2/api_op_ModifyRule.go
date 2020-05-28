@@ -118,6 +118,7 @@ func (c *Client) ModifyRuleRequest(input *ModifyRuleInput) ModifyRuleRequest {
 	}
 
 	req := c.newRequest(op, input, &ModifyRuleOutput{})
+
 	return ModifyRuleRequest{Request: req, Input: input, Copy: c.ModifyRuleRequest}
 }
 

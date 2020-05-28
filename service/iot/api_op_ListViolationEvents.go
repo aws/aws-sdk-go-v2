@@ -183,6 +183,7 @@ func (c *Client) ListViolationEventsRequest(input *ListViolationEventsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListViolationEventsOutput{})
+
 	return ListViolationEventsRequest{Request: req, Input: input, Copy: c.ListViolationEventsRequest}
 }
 

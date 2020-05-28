@@ -97,6 +97,7 @@ func (c *Client) UpdateConnectionRequest(input *UpdateConnectionInput) UpdateCon
 	}
 
 	req := c.newRequest(op, input, &UpdateConnectionOutput{})
+
 	return UpdateConnectionRequest{Request: req, Input: input, Copy: c.UpdateConnectionRequest}
 }
 

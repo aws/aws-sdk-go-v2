@@ -93,6 +93,7 @@ func (c *Client) DeleteConnectionRequest(input *DeleteConnectionInput) DeleteCon
 	req := c.newRequest(op, input, &DeleteConnectionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteConnectionRequest{Request: req, Input: input, Copy: c.DeleteConnectionRequest}
 }
 

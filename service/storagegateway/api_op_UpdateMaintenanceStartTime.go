@@ -130,6 +130,7 @@ func (c *Client) UpdateMaintenanceStartTimeRequest(input *UpdateMaintenanceStart
 	}
 
 	req := c.newRequest(op, input, &UpdateMaintenanceStartTimeOutput{})
+
 	return UpdateMaintenanceStartTimeRequest{Request: req, Input: input, Copy: c.UpdateMaintenanceStartTimeRequest}
 }
 

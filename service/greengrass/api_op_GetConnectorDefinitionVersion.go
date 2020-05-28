@@ -171,6 +171,7 @@ func (c *Client) GetConnectorDefinitionVersionRequest(input *GetConnectorDefinit
 	}
 
 	req := c.newRequest(op, input, &GetConnectorDefinitionVersionOutput{})
+
 	return GetConnectorDefinitionVersionRequest{Request: req, Input: input, Copy: c.GetConnectorDefinitionVersionRequest}
 }
 

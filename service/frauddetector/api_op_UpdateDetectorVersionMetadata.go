@@ -101,6 +101,7 @@ func (c *Client) UpdateDetectorVersionMetadataRequest(input *UpdateDetectorVersi
 	}
 
 	req := c.newRequest(op, input, &UpdateDetectorVersionMetadataOutput{})
+
 	return UpdateDetectorVersionMetadataRequest{Request: req, Input: input, Copy: c.UpdateDetectorVersionMetadataRequest}
 }
 

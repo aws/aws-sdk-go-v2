@@ -147,6 +147,7 @@ func (c *Client) GetHostedZoneLimitRequest(input *GetHostedZoneLimitInput) GetHo
 	}
 
 	req := c.newRequest(op, input, &GetHostedZoneLimitOutput{})
+
 	return GetHostedZoneLimitRequest{Request: req, Input: input, Copy: c.GetHostedZoneLimitRequest}
 }
 

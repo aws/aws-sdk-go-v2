@@ -79,6 +79,7 @@ func (c *Client) DescribeUserPoolDomainRequest(input *DescribeUserPoolDomainInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeUserPoolDomainOutput{})
+
 	return DescribeUserPoolDomainRequest{Request: req, Input: input, Copy: c.DescribeUserPoolDomainRequest}
 }
 

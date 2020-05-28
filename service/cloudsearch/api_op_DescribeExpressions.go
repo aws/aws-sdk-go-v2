@@ -99,6 +99,7 @@ func (c *Client) DescribeExpressionsRequest(input *DescribeExpressionsInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeExpressionsOutput{})
+
 	return DescribeExpressionsRequest{Request: req, Input: input, Copy: c.DescribeExpressionsRequest}
 }
 

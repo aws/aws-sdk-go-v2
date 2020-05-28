@@ -102,6 +102,7 @@ func (c *Client) DeleteThingGroupRequest(input *DeleteThingGroupInput) DeleteThi
 	}
 
 	req := c.newRequest(op, input, &DeleteThingGroupOutput{})
+
 	return DeleteThingGroupRequest{Request: req, Input: input, Copy: c.DeleteThingGroupRequest}
 }
 

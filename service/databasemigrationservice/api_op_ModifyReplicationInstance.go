@@ -150,6 +150,7 @@ func (c *Client) ModifyReplicationInstanceRequest(input *ModifyReplicationInstan
 	}
 
 	req := c.newRequest(op, input, &ModifyReplicationInstanceOutput{})
+
 	return ModifyReplicationInstanceRequest{Request: req, Input: input, Copy: c.ModifyReplicationInstanceRequest}
 }
 

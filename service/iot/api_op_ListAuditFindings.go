@@ -182,6 +182,7 @@ func (c *Client) ListAuditFindingsRequest(input *ListAuditFindingsInput) ListAud
 	}
 
 	req := c.newRequest(op, input, &ListAuditFindingsOutput{})
+
 	return ListAuditFindingsRequest{Request: req, Input: input, Copy: c.ListAuditFindingsRequest}
 }
 

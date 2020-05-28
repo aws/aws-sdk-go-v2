@@ -132,6 +132,7 @@ func (c *Client) CreateIdentityProviderRequest(input *CreateIdentityProviderInpu
 	}
 
 	req := c.newRequest(op, input, &CreateIdentityProviderOutput{})
+
 	return CreateIdentityProviderRequest{Request: req, Input: input, Copy: c.CreateIdentityProviderRequest}
 }
 

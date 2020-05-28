@@ -128,6 +128,7 @@ func (c *Client) PutTelemetryRecordsRequest(input *PutTelemetryRecordsInput) Put
 	}
 
 	req := c.newRequest(op, input, &PutTelemetryRecordsOutput{})
+
 	return PutTelemetryRecordsRequest{Request: req, Input: input, Copy: c.PutTelemetryRecordsRequest}
 }
 

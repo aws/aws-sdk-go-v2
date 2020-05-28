@@ -57,6 +57,7 @@ func (c *Client) LaunchAppRequest(input *LaunchAppInput) LaunchAppRequest {
 	}
 
 	req := c.newRequest(op, input, &LaunchAppOutput{})
+
 	return LaunchAppRequest{Request: req, Input: input, Copy: c.LaunchAppRequest}
 }
 

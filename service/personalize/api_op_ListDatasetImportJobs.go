@@ -95,6 +95,7 @@ func (c *Client) ListDatasetImportJobsRequest(input *ListDatasetImportJobsInput)
 	}
 
 	req := c.newRequest(op, input, &ListDatasetImportJobsOutput{})
+
 	return ListDatasetImportJobsRequest{Request: req, Input: input, Copy: c.ListDatasetImportJobsRequest}
 }
 

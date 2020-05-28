@@ -117,6 +117,7 @@ func (c *Client) AddThingToBillingGroupRequest(input *AddThingToBillingGroupInpu
 	}
 
 	req := c.newRequest(op, input, &AddThingToBillingGroupOutput{})
+
 	return AddThingToBillingGroupRequest{Request: req, Input: input, Copy: c.AddThingToBillingGroupRequest}
 }
 

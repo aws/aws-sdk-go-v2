@@ -150,6 +150,7 @@ func (c *Client) CancelResizeRequest(input *CancelResizeInput) CancelResizeReque
 	}
 
 	req := c.newRequest(op, input, &CancelResizeOutput{})
+
 	return CancelResizeRequest{Request: req, Input: input, Copy: c.CancelResizeRequest}
 }
 

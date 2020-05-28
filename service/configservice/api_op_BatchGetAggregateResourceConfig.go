@@ -111,6 +111,7 @@ func (c *Client) BatchGetAggregateResourceConfigRequest(input *BatchGetAggregate
 	}
 
 	req := c.newRequest(op, input, &BatchGetAggregateResourceConfigOutput{})
+
 	return BatchGetAggregateResourceConfigRequest{Request: req, Input: input, Copy: c.BatchGetAggregateResourceConfigRequest}
 }
 

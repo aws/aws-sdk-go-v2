@@ -98,6 +98,7 @@ func (c *Client) AssociateApprovalRuleTemplateWithRepositoryRequest(input *Assoc
 	req := c.newRequest(op, input, &AssociateApprovalRuleTemplateWithRepositoryOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AssociateApprovalRuleTemplateWithRepositoryRequest{Request: req, Input: input, Copy: c.AssociateApprovalRuleTemplateWithRepositoryRequest}
 }
 

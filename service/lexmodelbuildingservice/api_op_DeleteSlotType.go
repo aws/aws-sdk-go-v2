@@ -113,6 +113,7 @@ func (c *Client) DeleteSlotTypeRequest(input *DeleteSlotTypeInput) DeleteSlotTyp
 	req := c.newRequest(op, input, &DeleteSlotTypeOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteSlotTypeRequest{Request: req, Input: input, Copy: c.DeleteSlotTypeRequest}
 }
 

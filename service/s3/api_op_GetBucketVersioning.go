@@ -148,6 +148,7 @@ func (c *Client) GetBucketVersioningRequest(input *GetBucketVersioningInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetBucketVersioningOutput{})
+
 	return GetBucketVersioningRequest{Request: req, Input: input, Copy: c.GetBucketVersioningRequest}
 }
 

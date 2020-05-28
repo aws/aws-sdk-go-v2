@@ -141,6 +141,7 @@ func (c *Client) CreateTriggerRequest(input *CreateTriggerInput) CreateTriggerRe
 	}
 
 	req := c.newRequest(op, input, &CreateTriggerOutput{})
+
 	return CreateTriggerRequest{Request: req, Input: input, Copy: c.CreateTriggerRequest}
 }
 

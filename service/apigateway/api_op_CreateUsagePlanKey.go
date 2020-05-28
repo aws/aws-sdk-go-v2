@@ -166,6 +166,7 @@ func (c *Client) CreateUsagePlanKeyRequest(input *CreateUsagePlanKeyInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateUsagePlanKeyOutput{})
+
 	return CreateUsagePlanKeyRequest{Request: req, Input: input, Copy: c.CreateUsagePlanKeyRequest}
 }
 

@@ -98,6 +98,7 @@ func (c *Client) CancelRetrievalRequest(input *CancelRetrievalInput) CancelRetri
 	}
 
 	req := c.newRequest(op, input, &CancelRetrievalOutput{})
+
 	return CancelRetrievalRequest{Request: req, Input: input, Copy: c.CancelRetrievalRequest}
 }
 

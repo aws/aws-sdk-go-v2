@@ -210,6 +210,7 @@ func (c *Client) GetServiceGraphRequest(input *GetServiceGraphInput) GetServiceG
 	}
 
 	req := c.newRequest(op, input, &GetServiceGraphOutput{})
+
 	return GetServiceGraphRequest{Request: req, Input: input, Copy: c.GetServiceGraphRequest}
 }
 

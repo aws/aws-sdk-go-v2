@@ -121,6 +121,7 @@ func (c *Client) ListOrganizationPortfolioAccessRequest(input *ListOrganizationP
 	}
 
 	req := c.newRequest(op, input, &ListOrganizationPortfolioAccessOutput{})
+
 	return ListOrganizationPortfolioAccessRequest{Request: req, Input: input, Copy: c.ListOrganizationPortfolioAccessRequest}
 }
 

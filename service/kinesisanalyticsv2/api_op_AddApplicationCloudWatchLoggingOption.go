@@ -116,6 +116,7 @@ func (c *Client) AddApplicationCloudWatchLoggingOptionRequest(input *AddApplicat
 	}
 
 	req := c.newRequest(op, input, &AddApplicationCloudWatchLoggingOptionOutput{})
+
 	return AddApplicationCloudWatchLoggingOptionRequest{Request: req, Input: input, Copy: c.AddApplicationCloudWatchLoggingOptionRequest}
 }
 

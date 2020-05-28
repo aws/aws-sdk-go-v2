@@ -145,6 +145,7 @@ func (c *Client) MergeBranchesBySquashRequest(input *MergeBranchesBySquashInput)
 	}
 
 	req := c.newRequest(op, input, &MergeBranchesBySquashOutput{})
+
 	return MergeBranchesBySquashRequest{Request: req, Input: input, Copy: c.MergeBranchesBySquashRequest}
 }
 

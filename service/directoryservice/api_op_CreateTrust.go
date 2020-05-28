@@ -134,6 +134,7 @@ func (c *Client) CreateTrustRequest(input *CreateTrustInput) CreateTrustRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateTrustOutput{})
+
 	return CreateTrustRequest{Request: req, Input: input, Copy: c.CreateTrustRequest}
 }
 

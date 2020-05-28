@@ -122,6 +122,7 @@ func (c *Client) DescribeIdentityPoolRequest(input *DescribeIdentityPoolInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeIdentityPoolOutput{})
+
 	return DescribeIdentityPoolRequest{Request: req, Input: input, Copy: c.DescribeIdentityPoolRequest}
 }
 

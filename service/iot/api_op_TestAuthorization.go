@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -51,6 +52,13 @@ func (s *TestAuthorizationInput) Validate() error {
 	}
 	if s.AuthInfos != nil && len(s.AuthInfos) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthInfos", 1))
+	}
+	if s.AuthInfos != nil {
+		for i, v := range s.AuthInfos {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AuthInfos", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -176,6 +184,7 @@ func (c *Client) TestAuthorizationRequest(input *TestAuthorizationInput) TestAut
 	}
 
 	req := c.newRequest(op, input, &TestAuthorizationOutput{})
+
 	return TestAuthorizationRequest{Request: req, Input: input, Copy: c.TestAuthorizationRequest}
 }
 

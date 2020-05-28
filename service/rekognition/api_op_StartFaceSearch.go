@@ -135,6 +135,7 @@ func (c *Client) StartFaceSearchRequest(input *StartFaceSearchInput) StartFaceSe
 	}
 
 	req := c.newRequest(op, input, &StartFaceSearchOutput{})
+
 	return StartFaceSearchRequest{Request: req, Input: input, Copy: c.StartFaceSearchRequest}
 }
 

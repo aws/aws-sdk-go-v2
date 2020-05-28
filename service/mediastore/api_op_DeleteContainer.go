@@ -78,6 +78,7 @@ func (c *Client) DeleteContainerRequest(input *DeleteContainerInput) DeleteConta
 	}
 
 	req := c.newRequest(op, input, &DeleteContainerOutput{})
+
 	return DeleteContainerRequest{Request: req, Input: input, Copy: c.DeleteContainerRequest}
 }
 

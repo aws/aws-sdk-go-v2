@@ -84,6 +84,7 @@ func (c *Client) StartDataCollectionByAgentIdsRequest(input *StartDataCollection
 	}
 
 	req := c.newRequest(op, input, &StartDataCollectionByAgentIdsOutput{})
+
 	return StartDataCollectionByAgentIdsRequest{Request: req, Input: input, Copy: c.StartDataCollectionByAgentIdsRequest}
 }
 

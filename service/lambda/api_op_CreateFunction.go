@@ -338,7 +338,8 @@ type CreateFunctionOutput struct {
 	// you can't invoke or modify the function.
 	StateReasonCode StateReasonCode `type:"string" enum:"true"`
 
-	// The amount of time that Lambda allows a function to run before stopping it.
+	// The amount of time in seconds that Lambda allows a function to run before
+	// stopping it.
 	Timeout *int64 `min:"1" type:"integer"`
 
 	// The function's AWS X-Ray tracing configuration.
@@ -585,6 +586,7 @@ func (c *Client) CreateFunctionRequest(input *CreateFunctionInput) CreateFunctio
 	}
 
 	req := c.newRequest(op, input, &CreateFunctionOutput{})
+
 	return CreateFunctionRequest{Request: req, Input: input, Copy: c.CreateFunctionRequest}
 }
 

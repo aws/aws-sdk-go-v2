@@ -104,6 +104,7 @@ func (c *Client) EnableDirectoryRequest(input *EnableDirectoryInput) EnableDirec
 	}
 
 	req := c.newRequest(op, input, &EnableDirectoryOutput{})
+
 	return EnableDirectoryRequest{Request: req, Input: input, Copy: c.EnableDirectoryRequest}
 }
 

@@ -77,6 +77,7 @@ func (c *Client) StartReplicationTaskAssessmentRequest(input *StartReplicationTa
 	}
 
 	req := c.newRequest(op, input, &StartReplicationTaskAssessmentOutput{})
+
 	return StartReplicationTaskAssessmentRequest{Request: req, Input: input, Copy: c.StartReplicationTaskAssessmentRequest}
 }
 

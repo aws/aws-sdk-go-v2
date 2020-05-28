@@ -104,6 +104,7 @@ func (c *Client) DeleteFieldLevelEncryptionConfigRequest(input *DeleteFieldLevel
 	req := c.newRequest(op, input, &DeleteFieldLevelEncryptionConfigOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteFieldLevelEncryptionConfigRequest{Request: req, Input: input, Copy: c.DeleteFieldLevelEncryptionConfigRequest}
 }
 

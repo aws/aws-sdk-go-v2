@@ -32,6 +32,9 @@ type UpdateThingInput struct {
 
 	// The name of the thing to update.
 	//
+	// You can't change a thing's name. To change a thing's name, you must create
+	// a new thing, give it the new name, and then delete the old thing.
+	//
 	// ThingName is a required field
 	ThingName *string `location:"uri" locationName:"thingName" min:"1" type:"string" required:"true"`
 
@@ -141,6 +144,7 @@ func (c *Client) UpdateThingRequest(input *UpdateThingInput) UpdateThingRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateThingOutput{})
+
 	return UpdateThingRequest{Request: req, Input: input, Copy: c.UpdateThingRequest}
 }
 

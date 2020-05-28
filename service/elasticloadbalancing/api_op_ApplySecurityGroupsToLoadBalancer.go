@@ -93,6 +93,7 @@ func (c *Client) ApplySecurityGroupsToLoadBalancerRequest(input *ApplySecurityGr
 	}
 
 	req := c.newRequest(op, input, &ApplySecurityGroupsToLoadBalancerOutput{})
+
 	return ApplySecurityGroupsToLoadBalancerRequest{Request: req, Input: input, Copy: c.ApplySecurityGroupsToLoadBalancerRequest}
 }
 

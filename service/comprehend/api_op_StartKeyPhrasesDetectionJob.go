@@ -165,6 +165,7 @@ func (c *Client) StartKeyPhrasesDetectionJobRequest(input *StartKeyPhrasesDetect
 	}
 
 	req := c.newRequest(op, input, &StartKeyPhrasesDetectionJobOutput{})
+
 	return StartKeyPhrasesDetectionJobRequest{Request: req, Input: input, Copy: c.StartKeyPhrasesDetectionJobRequest}
 }
 

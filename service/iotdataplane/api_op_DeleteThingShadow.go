@@ -109,6 +109,7 @@ func (c *Client) DeleteThingShadowRequest(input *DeleteThingShadowInput) DeleteT
 	}
 
 	req := c.newRequest(op, input, &DeleteThingShadowOutput{})
+
 	return DeleteThingShadowRequest{Request: req, Input: input, Copy: c.DeleteThingShadowRequest}
 }
 

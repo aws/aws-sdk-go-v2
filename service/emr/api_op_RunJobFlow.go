@@ -304,6 +304,7 @@ func (c *Client) RunJobFlowRequest(input *RunJobFlowInput) RunJobFlowRequest {
 	}
 
 	req := c.newRequest(op, input, &RunJobFlowOutput{})
+
 	return RunJobFlowRequest{Request: req, Input: input, Copy: c.RunJobFlowRequest}
 }
 

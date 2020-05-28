@@ -101,6 +101,7 @@ func (c *Client) DeleteIndexFieldRequest(input *DeleteIndexFieldInput) DeleteInd
 	}
 
 	req := c.newRequest(op, input, &DeleteIndexFieldOutput{})
+
 	return DeleteIndexFieldRequest{Request: req, Input: input, Copy: c.DeleteIndexFieldRequest}
 }
 

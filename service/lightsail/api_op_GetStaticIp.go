@@ -77,6 +77,7 @@ func (c *Client) GetStaticIpRequest(input *GetStaticIpInput) GetStaticIpRequest 
 	}
 
 	req := c.newRequest(op, input, &GetStaticIpOutput{})
+
 	return GetStaticIpRequest{Request: req, Input: input, Copy: c.GetStaticIpRequest}
 }
 

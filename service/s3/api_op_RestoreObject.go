@@ -182,9 +182,9 @@ const opRestoreObject = "RestoreObject"
 //    * restore an archive - Restore an archived object
 //
 // To use this operation, you must have permissions to perform the s3:RestoreObject
-// and s3:GetObject actions. The bucket owner has this permission by default
-// and can grant this permission to others. For more information about permissions,
-// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// action. The bucket owner has this permission by default and can grant this
+// permission to others. For more information about permissions, see Permissions
+// Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)
 // in the Amazon Simple Storage Service Developer Guide.
 //
@@ -226,8 +226,8 @@ const opRestoreObject = "RestoreObject"
 //    the query.) You cannot mix ordinal positions with header column names.
 //    SELECT s.Id, s.FirstName, s.SSN FROM S3Object s
 //
-// For more information about using SQL with Glacier Select restore, see SQL
-// Reference for Amazon S3 Select and Glacier Select (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html)
+// For more information about using SQL with S3 Glacier Select restore, see
+// SQL Reference for Amazon S3 Select and S3 Glacier Select (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html)
 // in the Amazon Simple Storage Service Developer Guide.
 //
 // When making a select request, you can also do the following:
@@ -280,12 +280,12 @@ const opRestoreObject = "RestoreObject"
 //    retrievals and provisioned capacity are not available for the DEEP_ARCHIVE
 //    storage class.
 //
-//    * Standard - Standard retrievals allow you to access any of your archived
+//    * Standard - S3 Standard retrievals allow you to access any of your archived
 //    objects within several hours. This is the default option for the GLACIER
 //    and DEEP_ARCHIVE retrieval requests that do not specify the retrieval
-//    option. Standard retrievals typically complete within 3-5 hours from the
-//    GLACIER storage class and typically complete within 12 hours from the
-//    DEEP_ARCHIVE storage class.
+//    option. S3 Standard retrievals typically complete within 3-5 hours from
+//    the GLACIER storage class and typically complete within 12 hours from
+//    the DEEP_ARCHIVE storage class.
 //
 //    * Bulk - Bulk retrievals are Amazon S3 Glacier’s lowest-cost retrieval
 //    option, enabling you to retrieve large amounts, even petabytes, of data
@@ -344,10 +344,10 @@ const opRestoreObject = "RestoreObject"
 //    (This error does not apply to SELECT type requests.) HTTP Status Code:
 //    409 Conflict SOAP Fault Code Prefix: Client
 //
-//    * Code: GlacierExpeditedRetrievalNotAvailable Cause: Glacier expedited
+//    * Code: GlacierExpeditedRetrievalNotAvailable Cause: S3 Glacier expedited
 //    retrievals are currently not available. Try again later. (Returned if
 //    there is insufficient capacity to process the Expedited request. This
-//    error applies only to Expedited retrievals and not to Standard or Bulk
+//    error applies only to Expedited retrievals and not to S3 Standard or Bulk
 //    retrievals.) HTTP Status Code: 503 SOAP Fault Code Prefix: N/A
 //
 // Related Resources
@@ -356,7 +356,7 @@ const opRestoreObject = "RestoreObject"
 //
 //    * GetBucketNotificationConfiguration
 //
-//    * SQL Reference for Amazon S3 Select and Glacier Select (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html)
+//    * SQL Reference for Amazon S3 Select and S3 Glacier Select (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html)
 //    in the Amazon Simple Storage Service Developer Guide
 //
 //    // Example sending a request using RestoreObjectRequest.
@@ -379,6 +379,7 @@ func (c *Client) RestoreObjectRequest(input *RestoreObjectInput) RestoreObjectRe
 	}
 
 	req := c.newRequest(op, input, &RestoreObjectOutput{})
+
 	return RestoreObjectRequest{Request: req, Input: input, Copy: c.RestoreObjectRequest}
 }
 

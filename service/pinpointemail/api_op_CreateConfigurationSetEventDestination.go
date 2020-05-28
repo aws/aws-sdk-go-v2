@@ -138,6 +138,7 @@ func (c *Client) CreateConfigurationSetEventDestinationRequest(input *CreateConf
 	}
 
 	req := c.newRequest(op, input, &CreateConfigurationSetEventDestinationOutput{})
+
 	return CreateConfigurationSetEventDestinationRequest{Request: req, Input: input, Copy: c.CreateConfigurationSetEventDestinationRequest}
 }
 

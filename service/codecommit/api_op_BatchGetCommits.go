@@ -97,6 +97,7 @@ func (c *Client) BatchGetCommitsRequest(input *BatchGetCommitsInput) BatchGetCom
 	}
 
 	req := c.newRequest(op, input, &BatchGetCommitsOutput{})
+
 	return BatchGetCommitsRequest{Request: req, Input: input, Copy: c.BatchGetCommitsRequest}
 }
 

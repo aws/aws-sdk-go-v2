@@ -78,6 +78,7 @@ func (c *Client) DescribeContainerRequest(input *DescribeContainerInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeContainerOutput{})
+
 	return DescribeContainerRequest{Request: req, Input: input, Copy: c.DescribeContainerRequest}
 }
 

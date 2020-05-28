@@ -87,6 +87,7 @@ func (c *Client) ModifySelfservicePermissionsRequest(input *ModifySelfservicePer
 	}
 
 	req := c.newRequest(op, input, &ModifySelfservicePermissionsOutput{})
+
 	return ModifySelfservicePermissionsRequest{Request: req, Input: input, Copy: c.ModifySelfservicePermissionsRequest}
 }
 

@@ -76,6 +76,7 @@ func (c *Client) GetDataLakeSettingsRequest(input *GetDataLakeSettingsInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetDataLakeSettingsOutput{})
+
 	return GetDataLakeSettingsRequest{Request: req, Input: input, Copy: c.GetDataLakeSettingsRequest}
 }
 

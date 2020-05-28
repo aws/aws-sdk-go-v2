@@ -127,6 +127,7 @@ func (c *Client) GetBackupVaultAccessPolicyRequest(input *GetBackupVaultAccessPo
 	}
 
 	req := c.newRequest(op, input, &GetBackupVaultAccessPolicyOutput{})
+
 	return GetBackupVaultAccessPolicyRequest{Request: req, Input: input, Copy: c.GetBackupVaultAccessPolicyRequest}
 }
 

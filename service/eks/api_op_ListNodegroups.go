@@ -158,6 +158,7 @@ func (c *Client) ListNodegroupsRequest(input *ListNodegroupsInput) ListNodegroup
 	}
 
 	req := c.newRequest(op, input, &ListNodegroupsOutput{})
+
 	return ListNodegroupsRequest{Request: req, Input: input, Copy: c.ListNodegroupsRequest}
 }
 

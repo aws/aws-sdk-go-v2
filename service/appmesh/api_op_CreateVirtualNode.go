@@ -169,11 +169,13 @@ const opCreateVirtualNode = "CreateVirtualNode"
 //
 // A virtual node acts as a logical pointer to a particular task group, such
 // as an Amazon ECS service or a Kubernetes deployment. When you create a virtual
-// node, you can specify the service discovery information for your task group.
+// node, you can specify the service discovery information for your task group,
+// and whether the proxy running in a task group will communicate with other
+// proxies using Transport Layer Security (TLS).
 //
-// Any inbound traffic that your virtual node expects should be specified as
-// a listener. Any outbound traffic that your virtual node expects to reach
-// should be specified as a backend.
+// You define a listener for any inbound traffic that your virtual node expects.
+// Any virtual service that your virtual node expects to communicate to is specified
+// as a backend.
 //
 // The response metadata for your new virtual node contains the arn that is
 // associated with the virtual node. Set this value (either the full ARN or
@@ -186,7 +188,7 @@ const opCreateVirtualNode = "CreateVirtualNode"
 // override the node.cluster value that is set by APPMESH_VIRTUAL_NODE_NAME
 // with the APPMESH_VIRTUAL_NODE_CLUSTER environment variable.
 //
-// For more information about virtual nodes, see Virtual Nodes (https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html).
+// For more information about virtual nodes, see Virtual nodes (https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html).
 //
 //    // Example sending a request using CreateVirtualNodeRequest.
 //    req := client.CreateVirtualNodeRequest(params)
@@ -208,6 +210,7 @@ func (c *Client) CreateVirtualNodeRequest(input *CreateVirtualNodeInput) CreateV
 	}
 
 	req := c.newRequest(op, input, &CreateVirtualNodeOutput{})
+
 	return CreateVirtualNodeRequest{Request: req, Input: input, Copy: c.CreateVirtualNodeRequest}
 }
 

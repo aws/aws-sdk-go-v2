@@ -15,23 +15,29 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Specifies when to create snapshots of EBS volumes.
+//
+// You must specify either a Cron expression or an interval, interval unit,
+// and start time. You cannot specify both.
 type CreateRule struct {
 	_ struct{} `type:"structure"`
 
+	// The schedule, as a Cron expression. The schedule interval must be between
+	// 1 hour and 1 year. For more information, see Cron expressions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
+	// in the Amazon CloudWatch User Guide.
+	CronExpression *string `min:"17" type:"string"`
+
 	// The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8,
 	// 12, and 24.
-	//
-	// Interval is a required field
-	Interval *int64 `min:"1" type:"integer" required:"true"`
+	Interval *int64 `min:"1" type:"integer"`
 
 	// The interval unit.
-	//
-	// IntervalUnit is a required field
-	IntervalUnit IntervalUnitValues `type:"string" required:"true" enum:"true"`
+	IntervalUnit IntervalUnitValues `type:"string" enum:"true"`
 
 	// The time, in UTC, to start the operation. The supported format is hh:mm.
 	//
 	// The operation occurs within a one-hour window following the specified time.
+	// If you do not specify a time, Amazon DLM selects a time within the next 24
+	// hours.
 	Times []string `type:"list"`
 }
 
@@ -43,15 +49,11 @@ func (s CreateRule) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateRule"}
-
-	if s.Interval == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Interval"))
+	if s.CronExpression != nil && len(*s.CronExpression) < 17 {
+		invalidParams.Add(aws.NewErrParamMinLen("CronExpression", 17))
 	}
 	if s.Interval != nil && *s.Interval < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Interval", 1))
-	}
-	if len(s.IntervalUnit) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("IntervalUnit"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -62,6 +64,12 @@ func (s *CreateRule) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateRule) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CronExpression != nil {
+		v := *s.CronExpression
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CronExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.Interval != nil {
 		v := *s.Interval
 
@@ -521,7 +529,8 @@ type PolicyDetails struct {
 	// is EBS_SNAPSHOT_MANAGEMENT.
 	PolicyType PolicyTypeValues `type:"string" enum:"true"`
 
-	// The resource type.
+	// The resource type. Use VOLUME to create snapshots of individual volumes or
+	// use INSTANCE to create multi-volume snapshots from the volumes for an instance.
 	ResourceTypes []ResourceTypeValues `min:"1" type:"list"`
 
 	// The schedule of policy-defined actions.

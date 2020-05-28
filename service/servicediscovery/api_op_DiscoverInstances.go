@@ -16,9 +16,9 @@ type DiscoverInstancesInput struct {
 	// The health status of the instances that you want to discover.
 	HealthStatus HealthStatusFilter `type:"string" enum:"true"`
 
-	// The maximum number of instances that you want Cloud Map to return in the
-	// response to a DiscoverInstances request. If you don't specify a value for
-	// MaxResults, Cloud Map returns up to 100 instances.
+	// The maximum number of instances that you want AWS Cloud Map to return in
+	// the response to a DiscoverInstances request. If you don't specify a value
+	// for MaxResults, AWS Cloud Map returns up to 100 instances.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// The name of the namespace that you specified when you registered the instance.
@@ -82,7 +82,10 @@ const opDiscoverInstances = "DiscoverInstances"
 // DiscoverInstancesRequest returns a request value for making API operation for
 // AWS Cloud Map.
 //
-// Discovers registered instances for a specified namespace and service.
+// Discovers registered instances for a specified namespace and service. You
+// can use DiscoverInstances to discover instances for any type of namespace.
+// For public and private DNS namespaces, you can also use DNS queries to discover
+// instances.
 //
 //    // Example sending a request using DiscoverInstancesRequest.
 //    req := client.DiscoverInstancesRequest(params)
@@ -106,6 +109,7 @@ func (c *Client) DiscoverInstancesRequest(input *DiscoverInstancesInput) Discove
 	req := c.newRequest(op, input, &DiscoverInstancesOutput{})
 	req.Handlers.Build.PushBackNamed(protocol.NewHostPrefixHandler("data-", nil))
 	req.Handlers.Build.PushBackNamed(protocol.ValidateEndpointHostHandler)
+
 	return DiscoverInstancesRequest{Request: req, Input: input, Copy: c.DiscoverInstancesRequest}
 }
 

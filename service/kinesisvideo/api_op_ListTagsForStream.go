@@ -140,6 +140,7 @@ func (c *Client) ListTagsForStreamRequest(input *ListTagsForStreamInput) ListTag
 	}
 
 	req := c.newRequest(op, input, &ListTagsForStreamOutput{})
+
 	return ListTagsForStreamRequest{Request: req, Input: input, Copy: c.ListTagsForStreamRequest}
 }
 

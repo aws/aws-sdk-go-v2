@@ -107,6 +107,7 @@ func (c *Client) AttachUserPolicyRequest(input *AttachUserPolicyInput) AttachUse
 	req := c.newRequest(op, input, &AttachUserPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AttachUserPolicyRequest{Request: req, Input: input, Copy: c.AttachUserPolicyRequest}
 }
 

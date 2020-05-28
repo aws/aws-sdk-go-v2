@@ -84,6 +84,7 @@ func (c *Client) DeleteCostCategoryDefinitionRequest(input *DeleteCostCategoryDe
 	}
 
 	req := c.newRequest(op, input, &DeleteCostCategoryDefinitionOutput{})
+
 	return DeleteCostCategoryDefinitionRequest{Request: req, Input: input, Copy: c.DeleteCostCategoryDefinitionRequest}
 }
 

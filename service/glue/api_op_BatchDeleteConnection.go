@@ -87,6 +87,7 @@ func (c *Client) BatchDeleteConnectionRequest(input *BatchDeleteConnectionInput)
 	}
 
 	req := c.newRequest(op, input, &BatchDeleteConnectionOutput{})
+
 	return BatchDeleteConnectionRequest{Request: req, Input: input, Copy: c.BatchDeleteConnectionRequest}
 }
 

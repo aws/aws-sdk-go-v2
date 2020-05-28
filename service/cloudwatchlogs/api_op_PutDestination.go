@@ -87,12 +87,13 @@ const opPutDestination = "PutDestination"
 //
 // A destination encapsulates a physical resource (such as an Amazon Kinesis
 // stream) and enables you to subscribe to a real-time stream of log events
-// for a different account, ingested using PutLogEvents.
+// for a different account, ingested using PutLogEvents (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html).
 //
 // Through an access policy, a destination controls what is written to it. By
 // default, PutDestination does not set any access policy with the destination,
-// which means a cross-account user cannot call PutSubscriptionFilter against
-// this destination. To enable this, the destination owner must call PutDestinationPolicy
+// which means a cross-account user cannot call PutSubscriptionFilter (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutSubscriptionFilter.html)
+// against this destination. To enable this, the destination owner must call
+// PutDestinationPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestinationPolicy.html)
 // after PutDestination.
 //
 //    // Example sending a request using PutDestinationRequest.
@@ -115,6 +116,7 @@ func (c *Client) PutDestinationRequest(input *PutDestinationInput) PutDestinatio
 	}
 
 	req := c.newRequest(op, input, &PutDestinationOutput{})
+
 	return PutDestinationRequest{Request: req, Input: input, Copy: c.PutDestinationRequest}
 }
 

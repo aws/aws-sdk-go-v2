@@ -131,6 +131,7 @@ func (c *Client) ListSSHPublicKeysRequest(input *ListSSHPublicKeysInput) ListSSH
 	}
 
 	req := c.newRequest(op, input, &ListSSHPublicKeysOutput{})
+
 	return ListSSHPublicKeysRequest{Request: req, Input: input, Copy: c.ListSSHPublicKeysRequest}
 }
 

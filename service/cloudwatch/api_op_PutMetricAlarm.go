@@ -371,6 +371,7 @@ func (c *Client) PutMetricAlarmRequest(input *PutMetricAlarmInput) PutMetricAlar
 	req := c.newRequest(op, input, &PutMetricAlarmOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutMetricAlarmRequest{Request: req, Input: input, Copy: c.PutMetricAlarmRequest}
 }
 

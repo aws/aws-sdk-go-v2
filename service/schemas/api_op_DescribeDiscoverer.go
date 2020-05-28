@@ -145,6 +145,7 @@ func (c *Client) DescribeDiscovererRequest(input *DescribeDiscovererInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeDiscovererOutput{})
+
 	return DescribeDiscovererRequest{Request: req, Input: input, Copy: c.DescribeDiscovererRequest}
 }
 

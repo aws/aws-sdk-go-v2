@@ -184,6 +184,8 @@ type ClientAPI interface {
 
 	WaitUntilStackImportComplete(context.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
 
+	WaitUntilStackRollbackComplete(context.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
+
 	WaitUntilStackUpdateComplete(context.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
 
 	WaitUntilTypeRegistrationComplete(context.Context, *cloudformation.DescribeTypeRegistrationInput, ...aws.WaiterOption) error

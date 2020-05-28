@@ -100,6 +100,7 @@ func (c *Client) AddCommunicationToCaseRequest(input *AddCommunicationToCaseInpu
 	}
 
 	req := c.newRequest(op, input, &AddCommunicationToCaseOutput{})
+
 	return AddCommunicationToCaseRequest{Request: req, Input: input, Copy: c.AddCommunicationToCaseRequest}
 }
 

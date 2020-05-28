@@ -56,19 +56,17 @@ type PutScalingPolicyInput struct {
 	// Valid only if the policy type is StepScaling.
 	MetricAggregationType *string `min:"1" type:"string"`
 
-	// The minimum number of instances to scale. If the value of AdjustmentType
-	// is PercentChangeInCapacity, the scaling policy changes the DesiredCapacity
-	// of the Auto Scaling group by at least this many instances. Otherwise, the
-	// error is ValidationError.
-	//
-	// This property replaces the MinAdjustmentStep property. For example, suppose
+	// The minimum value to scale by when scaling by percentages. For example, suppose
 	// that you create a step scaling policy to scale out an Auto Scaling group
 	// by 25 percent and you specify a MinAdjustmentMagnitude of 2. If the group
 	// has 4 instances and the scaling policy is performed, 25 percent of 4 is 1.
 	// However, because you specified a MinAdjustmentMagnitude of 2, Amazon EC2
 	// Auto Scaling scales out the group by 2 instances.
 	//
-	// Valid only if the policy type is SimpleScaling or StepScaling.
+	// Valid only if the policy type is StepScaling or SimpleScaling and the adjustment
+	// type is PercentChangeInCapacity. For more information, see Scaling Adjustment
+	// Types (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#as-scaling-adjustment)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	MinAdjustmentMagnitude *int64 `type:"integer"`
 
 	// Available for backward compatibility. Use MinAdjustmentMagnitude instead.
@@ -186,7 +184,8 @@ const opPutScalingPolicy = "PutScalingPolicy"
 // Creates or updates a scaling policy for an Auto Scaling group.
 //
 // For more information about using scaling policies to scale your Auto Scaling
-// group automatically, see Dynamic Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html)
+// group, see Target Tracking Scaling Policies (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html)
+// and Step and Simple Scaling Policies (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 //
 //    // Example sending a request using PutScalingPolicyRequest.
@@ -209,6 +208,7 @@ func (c *Client) PutScalingPolicyRequest(input *PutScalingPolicyInput) PutScalin
 	}
 
 	req := c.newRequest(op, input, &PutScalingPolicyOutput{})
+
 	return PutScalingPolicyRequest{Request: req, Input: input, Copy: c.PutScalingPolicyRequest}
 }
 

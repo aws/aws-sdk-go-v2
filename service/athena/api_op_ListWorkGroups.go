@@ -89,6 +89,7 @@ func (c *Client) ListWorkGroupsRequest(input *ListWorkGroupsInput) ListWorkGroup
 	}
 
 	req := c.newRequest(op, input, &ListWorkGroupsOutput{})
+
 	return ListWorkGroupsRequest{Request: req, Input: input, Copy: c.ListWorkGroupsRequest}
 }
 

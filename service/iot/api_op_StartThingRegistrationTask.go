@@ -155,6 +155,7 @@ func (c *Client) StartThingRegistrationTaskRequest(input *StartThingRegistration
 	}
 
 	req := c.newRequest(op, input, &StartThingRegistrationTaskOutput{})
+
 	return StartThingRegistrationTaskRequest{Request: req, Input: input, Copy: c.StartThingRegistrationTaskRequest}
 }
 

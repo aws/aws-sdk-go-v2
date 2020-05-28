@@ -77,6 +77,7 @@ func (c *Client) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionIn
 	}
 
 	req := c.newRequest(op, input, &DeleteEventSubscriptionOutput{})
+
 	return DeleteEventSubscriptionRequest{Request: req, Input: input, Copy: c.DeleteEventSubscriptionRequest}
 }
 

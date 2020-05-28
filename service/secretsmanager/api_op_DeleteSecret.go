@@ -159,6 +159,7 @@ func (c *Client) DeleteSecretRequest(input *DeleteSecretInput) DeleteSecretReque
 	}
 
 	req := c.newRequest(op, input, &DeleteSecretOutput{})
+
 	return DeleteSecretRequest{Request: req, Input: input, Copy: c.DeleteSecretRequest}
 }
 

@@ -102,6 +102,7 @@ func (c *Client) GetBackupPlanFromJSONRequest(input *GetBackupPlanFromJSONInput)
 	}
 
 	req := c.newRequest(op, input, &GetBackupPlanFromJSONOutput{})
+
 	return GetBackupPlanFromJSONRequest{Request: req, Input: input, Copy: c.GetBackupPlanFromJSONRequest}
 }
 

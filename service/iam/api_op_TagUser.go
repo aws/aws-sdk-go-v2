@@ -134,6 +134,7 @@ func (c *Client) TagUserRequest(input *TagUserInput) TagUserRequest {
 	req := c.newRequest(op, input, &TagUserOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return TagUserRequest{Request: req, Input: input, Copy: c.TagUserRequest}
 }
 

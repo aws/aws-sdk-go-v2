@@ -113,6 +113,7 @@ func (c *Client) UpdateTeamMemberRequest(input *UpdateTeamMemberInput) UpdateTea
 	}
 
 	req := c.newRequest(op, input, &UpdateTeamMemberOutput{})
+
 	return UpdateTeamMemberRequest{Request: req, Input: input, Copy: c.UpdateTeamMemberRequest}
 }
 

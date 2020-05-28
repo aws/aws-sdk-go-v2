@@ -191,6 +191,7 @@ func (c *Client) StartMultiplexRequest(input *StartMultiplexInput) StartMultiple
 	}
 
 	req := c.newRequest(op, input, &StartMultiplexOutput{})
+
 	return StartMultiplexRequest{Request: req, Input: input, Copy: c.StartMultiplexRequest}
 }
 

@@ -116,6 +116,7 @@ func (c *Client) RevokePermissionsRequest(input *RevokePermissionsInput) RevokeP
 	}
 
 	req := c.newRequest(op, input, &RevokePermissionsOutput{})
+
 	return RevokePermissionsRequest{Request: req, Input: input, Copy: c.RevokePermissionsRequest}
 }
 

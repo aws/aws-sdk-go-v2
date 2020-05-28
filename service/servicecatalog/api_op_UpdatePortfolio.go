@@ -122,6 +122,7 @@ func (c *Client) UpdatePortfolioRequest(input *UpdatePortfolioInput) UpdatePortf
 	}
 
 	req := c.newRequest(op, input, &UpdatePortfolioOutput{})
+
 	return UpdatePortfolioRequest{Request: req, Input: input, Copy: c.UpdatePortfolioRequest}
 }
 

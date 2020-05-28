@@ -112,6 +112,7 @@ func (c *Client) AttachPolicyRequest(input *AttachPolicyInput) AttachPolicyReque
 	req := c.newRequest(op, input, &AttachPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AttachPolicyRequest{Request: req, Input: input, Copy: c.AttachPolicyRequest}
 }
 

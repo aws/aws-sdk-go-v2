@@ -202,6 +202,7 @@ func (c *Client) StartExportTaskRequest(input *StartExportTaskInput) StartExport
 	}
 
 	req := c.newRequest(op, input, &StartExportTaskOutput{})
+
 	return StartExportTaskRequest{Request: req, Input: input, Copy: c.StartExportTaskRequest}
 }
 

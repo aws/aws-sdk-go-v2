@@ -154,6 +154,7 @@ func (c *Client) ListResolversRequest(input *ListResolversInput) ListResolversRe
 	}
 
 	req := c.newRequest(op, input, &ListResolversOutput{})
+
 	return ListResolversRequest{Request: req, Input: input, Copy: c.ListResolversRequest}
 }
 

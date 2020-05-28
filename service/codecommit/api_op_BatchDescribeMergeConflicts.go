@@ -160,6 +160,7 @@ func (c *Client) BatchDescribeMergeConflictsRequest(input *BatchDescribeMergeCon
 	}
 
 	req := c.newRequest(op, input, &BatchDescribeMergeConflictsOutput{})
+
 	return BatchDescribeMergeConflictsRequest{Request: req, Input: input, Copy: c.BatchDescribeMergeConflictsRequest}
 }
 

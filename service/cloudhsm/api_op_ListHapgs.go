@@ -81,6 +81,7 @@ func (c *Client) ListHapgsRequest(input *ListHapgsInput) ListHapgsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListHapgsOutput{})
+
 	return ListHapgsRequest{Request: req, Input: input, Copy: c.ListHapgsRequest}
 }
 

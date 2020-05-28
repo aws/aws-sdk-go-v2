@@ -129,6 +129,7 @@ func (c *Client) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrdera
 	}
 
 	req := c.newRequest(op, input, &DescribeOrderableDBInstanceOptionsOutput{})
+
 	return DescribeOrderableDBInstanceOptionsRequest{Request: req, Input: input, Copy: c.DescribeOrderableDBInstanceOptionsRequest}
 }
 

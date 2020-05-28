@@ -174,6 +174,7 @@ func (c *Client) UpdateTemplateAliasRequest(input *UpdateTemplateAliasInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateTemplateAliasOutput{})
+
 	return UpdateTemplateAliasRequest{Request: req, Input: input, Copy: c.UpdateTemplateAliasRequest}
 }
 

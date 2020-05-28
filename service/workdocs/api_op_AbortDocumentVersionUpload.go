@@ -131,6 +131,7 @@ func (c *Client) AbortDocumentVersionUploadRequest(input *AbortDocumentVersionUp
 	req := c.newRequest(op, input, &AbortDocumentVersionUploadOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AbortDocumentVersionUploadRequest{Request: req, Input: input, Copy: c.AbortDocumentVersionUploadRequest}
 }
 

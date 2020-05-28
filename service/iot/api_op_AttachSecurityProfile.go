@@ -110,6 +110,7 @@ func (c *Client) AttachSecurityProfileRequest(input *AttachSecurityProfileInput)
 	}
 
 	req := c.newRequest(op, input, &AttachSecurityProfileOutput{})
+
 	return AttachSecurityProfileRequest{Request: req, Input: input, Copy: c.AttachSecurityProfileRequest}
 }
 

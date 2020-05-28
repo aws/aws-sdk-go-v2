@@ -107,6 +107,7 @@ func (c *Client) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
 	req := c.newRequest(op, input, &CreateTagsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CreateTagsRequest{Request: req, Input: input, Copy: c.CreateTagsRequest}
 }
 

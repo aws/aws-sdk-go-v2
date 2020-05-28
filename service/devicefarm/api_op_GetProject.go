@@ -81,6 +81,7 @@ func (c *Client) GetProjectRequest(input *GetProjectInput) GetProjectRequest {
 	}
 
 	req := c.newRequest(op, input, &GetProjectOutput{})
+
 	return GetProjectRequest{Request: req, Input: input, Copy: c.GetProjectRequest}
 }
 

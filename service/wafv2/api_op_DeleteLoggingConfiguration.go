@@ -82,6 +82,7 @@ func (c *Client) DeleteLoggingConfigurationRequest(input *DeleteLoggingConfigura
 	}
 
 	req := c.newRequest(op, input, &DeleteLoggingConfigurationOutput{})
+
 	return DeleteLoggingConfigurationRequest{Request: req, Input: input, Copy: c.DeleteLoggingConfigurationRequest}
 }
 

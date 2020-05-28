@@ -110,6 +110,7 @@ func (c *Client) DisassociateServiceActionFromProvisioningArtifactRequest(input 
 	}
 
 	req := c.newRequest(op, input, &DisassociateServiceActionFromProvisioningArtifactOutput{})
+
 	return DisassociateServiceActionFromProvisioningArtifactRequest{Request: req, Input: input, Copy: c.DisassociateServiceActionFromProvisioningArtifactRequest}
 }
 

@@ -102,6 +102,7 @@ func (c *Client) PutImageTagMutabilityRequest(input *PutImageTagMutabilityInput)
 	}
 
 	req := c.newRequest(op, input, &PutImageTagMutabilityOutput{})
+
 	return PutImageTagMutabilityRequest{Request: req, Input: input, Copy: c.PutImageTagMutabilityRequest}
 }
 

@@ -124,6 +124,7 @@ func (c *Client) ListPackagingGroupsRequest(input *ListPackagingGroupsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListPackagingGroupsOutput{})
+
 	return ListPackagingGroupsRequest{Request: req, Input: input, Copy: c.ListPackagingGroupsRequest}
 }
 

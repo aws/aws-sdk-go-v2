@@ -93,6 +93,7 @@ func (c *Client) DescribeCapacityProvidersRequest(input *DescribeCapacityProvide
 	}
 
 	req := c.newRequest(op, input, &DescribeCapacityProvidersOutput{})
+
 	return DescribeCapacityProvidersRequest{Request: req, Input: input, Copy: c.DescribeCapacityProvidersRequest}
 }
 

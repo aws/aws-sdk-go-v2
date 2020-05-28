@@ -168,6 +168,7 @@ func (c *Client) ListAuditMitigationActionsExecutionsRequest(input *ListAuditMit
 	}
 
 	req := c.newRequest(op, input, &ListAuditMitigationActionsExecutionsOutput{})
+
 	return ListAuditMitigationActionsExecutionsRequest{Request: req, Input: input, Copy: c.ListAuditMitigationActionsExecutionsRequest}
 }
 

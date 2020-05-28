@@ -105,6 +105,7 @@ func (c *Client) ResetDBClusterParameterGroupRequest(input *ResetDBClusterParame
 	}
 
 	req := c.newRequest(op, input, &ResetDBClusterParameterGroupOutput{})
+
 	return ResetDBClusterParameterGroupRequest{Request: req, Input: input, Copy: c.ResetDBClusterParameterGroupRequest}
 }
 

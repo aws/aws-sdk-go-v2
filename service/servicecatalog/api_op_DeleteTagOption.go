@@ -78,6 +78,7 @@ func (c *Client) DeleteTagOptionRequest(input *DeleteTagOptionInput) DeleteTagOp
 	}
 
 	req := c.newRequest(op, input, &DeleteTagOptionOutput{})
+
 	return DeleteTagOptionRequest{Request: req, Input: input, Copy: c.DeleteTagOptionRequest}
 }
 

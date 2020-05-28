@@ -83,6 +83,7 @@ func (c *Client) DescribeLaunchConfigurationsRequest(input *DescribeLaunchConfig
 	}
 
 	req := c.newRequest(op, input, &DescribeLaunchConfigurationsOutput{})
+
 	return DescribeLaunchConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeLaunchConfigurationsRequest}
 }
 

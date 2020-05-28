@@ -98,6 +98,7 @@ func (c *Client) RevokeClusterSecurityGroupIngressRequest(input *RevokeClusterSe
 	}
 
 	req := c.newRequest(op, input, &RevokeClusterSecurityGroupIngressOutput{})
+
 	return RevokeClusterSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.RevokeClusterSecurityGroupIngressRequest}
 }
 

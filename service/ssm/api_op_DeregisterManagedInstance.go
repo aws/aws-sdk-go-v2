@@ -76,6 +76,7 @@ func (c *Client) DeregisterManagedInstanceRequest(input *DeregisterManagedInstan
 	}
 
 	req := c.newRequest(op, input, &DeregisterManagedInstanceOutput{})
+
 	return DeregisterManagedInstanceRequest{Request: req, Input: input, Copy: c.DeregisterManagedInstanceRequest}
 }
 

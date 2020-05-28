@@ -84,6 +84,7 @@ func (c *Client) RegisterDefaultPatchBaselineRequest(input *RegisterDefaultPatch
 	}
 
 	req := c.newRequest(op, input, &RegisterDefaultPatchBaselineOutput{})
+
 	return RegisterDefaultPatchBaselineRequest{Request: req, Input: input, Copy: c.RegisterDefaultPatchBaselineRequest}
 }
 

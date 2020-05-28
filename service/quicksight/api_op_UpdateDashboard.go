@@ -257,6 +257,7 @@ func (c *Client) UpdateDashboardRequest(input *UpdateDashboardInput) UpdateDashb
 	}
 
 	req := c.newRequest(op, input, &UpdateDashboardOutput{})
+
 	return UpdateDashboardRequest{Request: req, Input: input, Copy: c.UpdateDashboardRequest}
 }
 

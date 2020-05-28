@@ -94,6 +94,7 @@ func (c *Client) ListTagsForProjectRequest(input *ListTagsForProjectInput) ListT
 	}
 
 	req := c.newRequest(op, input, &ListTagsForProjectOutput{})
+
 	return ListTagsForProjectRequest{Request: req, Input: input, Copy: c.ListTagsForProjectRequest}
 }
 

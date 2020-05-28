@@ -170,6 +170,7 @@ func (c *Client) ListEventSourceMappingsRequest(input *ListEventSourceMappingsIn
 	}
 
 	req := c.newRequest(op, input, &ListEventSourceMappingsOutput{})
+
 	return ListEventSourceMappingsRequest{Request: req, Input: input, Copy: c.ListEventSourceMappingsRequest}
 }
 

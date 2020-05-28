@@ -95,6 +95,7 @@ func (c *Client) DecreaseReplicationFactorRequest(input *DecreaseReplicationFact
 	}
 
 	req := c.newRequest(op, input, &DecreaseReplicationFactorOutput{})
+
 	return DecreaseReplicationFactorRequest{Request: req, Input: input, Copy: c.DecreaseReplicationFactorRequest}
 }
 

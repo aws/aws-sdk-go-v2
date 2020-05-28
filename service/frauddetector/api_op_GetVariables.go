@@ -93,6 +93,7 @@ func (c *Client) GetVariablesRequest(input *GetVariablesInput) GetVariablesReque
 	}
 
 	req := c.newRequest(op, input, &GetVariablesOutput{})
+
 	return GetVariablesRequest{Request: req, Input: input, Copy: c.GetVariablesRequest}
 }
 

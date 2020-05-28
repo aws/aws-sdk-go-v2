@@ -90,6 +90,7 @@ func (c *Client) ListOfferingsRequest(input *ListOfferingsInput) ListOfferingsRe
 	}
 
 	req := c.newRequest(op, input, &ListOfferingsOutput{})
+
 	return ListOfferingsRequest{Request: req, Input: input, Copy: c.ListOfferingsRequest}
 }
 

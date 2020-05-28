@@ -99,6 +99,7 @@ func (c *Client) DescribeStacksRequest(input *DescribeStacksInput) DescribeStack
 	}
 
 	req := c.newRequest(op, input, &DescribeStacksOutput{})
+
 	return DescribeStacksRequest{Request: req, Input: input, Copy: c.DescribeStacksRequest}
 }
 

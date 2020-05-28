@@ -95,6 +95,7 @@ func (c *Client) UpdateUserProfileRequest(input *UpdateUserProfileInput) UpdateU
 	req := c.newRequest(op, input, &UpdateUserProfileOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateUserProfileRequest{Request: req, Input: input, Copy: c.UpdateUserProfileRequest}
 }
 

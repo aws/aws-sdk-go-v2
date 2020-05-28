@@ -69,6 +69,7 @@ const (
 	AssociationFilterKeyLastExecutedBefore    AssociationFilterKey = "LastExecutedBefore"
 	AssociationFilterKeyLastExecutedAfter     AssociationFilterKey = "LastExecutedAfter"
 	AssociationFilterKeyAssociationName       AssociationFilterKey = "AssociationName"
+	AssociationFilterKeyResourceGroupName     AssociationFilterKey = "ResourceGroupName"
 )
 
 func (enum AssociationFilterKey) MarshalValue() (string, error) {
@@ -112,6 +113,23 @@ func (enum AssociationStatusName) MarshalValue() (string, error) {
 }
 
 func (enum AssociationStatusName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AssociationSyncCompliance string
+
+// Enum values for AssociationSyncCompliance
+const (
+	AssociationSyncComplianceAuto   AssociationSyncCompliance = "AUTO"
+	AssociationSyncComplianceManual AssociationSyncCompliance = "MANUAL"
+)
+
+func (enum AssociationSyncCompliance) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AssociationSyncCompliance) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -371,6 +389,23 @@ func (enum ComplianceStatus) MarshalValue() (string, error) {
 }
 
 func (enum ComplianceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ComplianceUploadType string
+
+// Enum values for ComplianceUploadType
+const (
+	ComplianceUploadTypeComplete ComplianceUploadType = "COMPLETE"
+	ComplianceUploadTypePartial  ComplianceUploadType = "PARTIAL"
+)
+
+func (enum ComplianceUploadType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComplianceUploadType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -817,6 +852,8 @@ const (
 	OperatingSystemRedhatEnterpriseLinux OperatingSystem = "REDHAT_ENTERPRISE_LINUX"
 	OperatingSystemSuse                  OperatingSystem = "SUSE"
 	OperatingSystemCentos                OperatingSystem = "CENTOS"
+	OperatingSystemOracleLinux           OperatingSystem = "ORACLE_LINUX"
+	OperatingSystemDebian                OperatingSystem = "DEBIAN"
 )
 
 func (enum OperatingSystem) MarshalValue() (string, error) {

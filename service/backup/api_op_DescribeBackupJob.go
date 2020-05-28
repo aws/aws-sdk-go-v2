@@ -113,7 +113,7 @@ type DescribeBackupJobOutput struct {
 	// on the resource type.
 	ResourceArn *string `type:"string"`
 
-	// The type of AWS resource to be backed-up; for example, an Amazon Elastic
+	// The type of AWS resource to be backed up; for example, an Amazon Elastic
 	// Block Store (Amazon EBS) volume or an Amazon Relational Database Service
 	// (Amazon RDS) database.
 	ResourceType *string `type:"string"`
@@ -277,6 +277,7 @@ func (c *Client) DescribeBackupJobRequest(input *DescribeBackupJobInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeBackupJobOutput{})
+
 	return DescribeBackupJobRequest{Request: req, Input: input, Copy: c.DescribeBackupJobRequest}
 }
 

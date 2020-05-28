@@ -83,6 +83,7 @@ func (c *Client) GetTrafficPolicyInstanceCountRequest(input *GetTrafficPolicyIns
 	}
 
 	req := c.newRequest(op, input, &GetTrafficPolicyInstanceCountOutput{})
+
 	return GetTrafficPolicyInstanceCountRequest{Request: req, Input: input, Copy: c.GetTrafficPolicyInstanceCountRequest}
 }
 

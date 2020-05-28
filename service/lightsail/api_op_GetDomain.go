@@ -77,6 +77,7 @@ func (c *Client) GetDomainRequest(input *GetDomainInput) GetDomainRequest {
 	}
 
 	req := c.newRequest(op, input, &GetDomainOutput{})
+
 	return GetDomainRequest{Request: req, Input: input, Copy: c.GetDomainRequest}
 }
 

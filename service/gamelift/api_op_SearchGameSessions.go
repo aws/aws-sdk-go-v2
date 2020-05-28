@@ -226,6 +226,7 @@ func (c *Client) SearchGameSessionsRequest(input *SearchGameSessionsInput) Searc
 	}
 
 	req := c.newRequest(op, input, &SearchGameSessionsOutput{})
+
 	return SearchGameSessionsRequest{Request: req, Input: input, Copy: c.SearchGameSessionsRequest}
 }
 

@@ -113,6 +113,7 @@ func (c *Client) CreateServiceSpecificCredentialRequest(input *CreateServiceSpec
 	}
 
 	req := c.newRequest(op, input, &CreateServiceSpecificCredentialOutput{})
+
 	return CreateServiceSpecificCredentialRequest{Request: req, Input: input, Copy: c.CreateServiceSpecificCredentialRequest}
 }
 

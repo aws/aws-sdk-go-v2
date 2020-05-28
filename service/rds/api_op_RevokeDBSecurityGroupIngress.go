@@ -104,6 +104,7 @@ func (c *Client) RevokeDBSecurityGroupIngressRequest(input *RevokeDBSecurityGrou
 	}
 
 	req := c.newRequest(op, input, &RevokeDBSecurityGroupIngressOutput{})
+
 	return RevokeDBSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.RevokeDBSecurityGroupIngressRequest}
 }
 

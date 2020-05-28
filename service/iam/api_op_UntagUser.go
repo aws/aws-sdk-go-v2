@@ -96,6 +96,7 @@ func (c *Client) UntagUserRequest(input *UntagUserInput) UntagUserRequest {
 	req := c.newRequest(op, input, &UntagUserOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UntagUserRequest{Request: req, Input: input, Copy: c.UntagUserRequest}
 }
 

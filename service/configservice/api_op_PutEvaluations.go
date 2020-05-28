@@ -101,6 +101,7 @@ func (c *Client) PutEvaluationsRequest(input *PutEvaluationsInput) PutEvaluation
 	}
 
 	req := c.newRequest(op, input, &PutEvaluationsOutput{})
+
 	return PutEvaluationsRequest{Request: req, Input: input, Copy: c.PutEvaluationsRequest}
 }
 

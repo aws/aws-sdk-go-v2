@@ -151,6 +151,7 @@ func (c *Client) CreateMultiplexProgramRequest(input *CreateMultiplexProgramInpu
 	}
 
 	req := c.newRequest(op, input, &CreateMultiplexProgramOutput{})
+
 	return CreateMultiplexProgramRequest{Request: req, Input: input, Copy: c.CreateMultiplexProgramRequest}
 }
 

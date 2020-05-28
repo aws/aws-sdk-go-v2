@@ -63,6 +63,7 @@ func (c *Client) GetSendStatisticsRequest(input *GetSendStatisticsInput) GetSend
 	}
 
 	req := c.newRequest(op, input, &GetSendStatisticsOutput{})
+
 	return GetSendStatisticsRequest{Request: req, Input: input, Copy: c.GetSendStatisticsRequest}
 }
 

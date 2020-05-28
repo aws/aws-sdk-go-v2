@@ -182,6 +182,7 @@ func (c *Client) ListSimulationApplicationsRequest(input *ListSimulationApplicat
 	}
 
 	req := c.newRequest(op, input, &ListSimulationApplicationsOutput{})
+
 	return ListSimulationApplicationsRequest{Request: req, Input: input, Copy: c.ListSimulationApplicationsRequest}
 }
 

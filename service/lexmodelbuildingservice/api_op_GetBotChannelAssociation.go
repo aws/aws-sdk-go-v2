@@ -236,6 +236,7 @@ func (c *Client) GetBotChannelAssociationRequest(input *GetBotChannelAssociation
 	}
 
 	req := c.newRequest(op, input, &GetBotChannelAssociationOutput{})
+
 	return GetBotChannelAssociationRequest{Request: req, Input: input, Copy: c.GetBotChannelAssociationRequest}
 }
 

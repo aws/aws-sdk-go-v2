@@ -26,7 +26,9 @@ type UpdateDocumentInput struct {
 	// supports JSON and YAML documents. JSON is the default format.
 	DocumentFormat DocumentFormat `type:"string" enum:"true"`
 
-	// (Required) The version of the document that you want to update.
+	// (Required) The latest version of the document that you want to update. The
+	// latest document version can be specified using the $LATEST variable or by
+	// the version number. Updating a previous version of a document is not supported.
 	DocumentVersion *string `type:"string"`
 
 	// The name of the document that you want to update.
@@ -115,6 +117,7 @@ func (c *Client) UpdateDocumentRequest(input *UpdateDocumentInput) UpdateDocumen
 	}
 
 	req := c.newRequest(op, input, &UpdateDocumentOutput{})
+
 	return UpdateDocumentRequest{Request: req, Input: input, Copy: c.UpdateDocumentRequest}
 }
 

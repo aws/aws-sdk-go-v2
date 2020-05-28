@@ -94,6 +94,7 @@ func (c *Client) CreateInstanceProfileRequest(input *CreateInstanceProfileInput)
 	}
 
 	req := c.newRequest(op, input, &CreateInstanceProfileOutput{})
+
 	return CreateInstanceProfileRequest{Request: req, Input: input, Copy: c.CreateInstanceProfileRequest}
 }
 

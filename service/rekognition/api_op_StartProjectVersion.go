@@ -102,6 +102,7 @@ func (c *Client) StartProjectVersionRequest(input *StartProjectVersionInput) Sta
 	}
 
 	req := c.newRequest(op, input, &StartProjectVersionOutput{})
+
 	return StartProjectVersionRequest{Request: req, Input: input, Copy: c.StartProjectVersionRequest}
 }
 

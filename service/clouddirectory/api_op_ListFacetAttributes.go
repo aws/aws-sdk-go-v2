@@ -161,6 +161,7 @@ func (c *Client) ListFacetAttributesRequest(input *ListFacetAttributesInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListFacetAttributesOutput{})
+
 	return ListFacetAttributesRequest{Request: req, Input: input, Copy: c.ListFacetAttributesRequest}
 }
 

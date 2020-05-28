@@ -95,6 +95,7 @@ func (c *Client) ListWebhooksRequest(input *ListWebhooksInput) ListWebhooksReque
 	}
 
 	req := c.newRequest(op, input, &ListWebhooksOutput{})
+
 	return ListWebhooksRequest{Request: req, Input: input, Copy: c.ListWebhooksRequest}
 }
 

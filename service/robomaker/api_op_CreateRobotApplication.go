@@ -242,6 +242,7 @@ func (c *Client) CreateRobotApplicationRequest(input *CreateRobotApplicationInpu
 	}
 
 	req := c.newRequest(op, input, &CreateRobotApplicationOutput{})
+
 	return CreateRobotApplicationRequest{Request: req, Input: input, Copy: c.CreateRobotApplicationRequest}
 }
 

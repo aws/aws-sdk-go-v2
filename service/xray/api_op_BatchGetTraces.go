@@ -154,6 +154,7 @@ func (c *Client) BatchGetTracesRequest(input *BatchGetTracesInput) BatchGetTrace
 	}
 
 	req := c.newRequest(op, input, &BatchGetTracesOutput{})
+
 	return BatchGetTracesRequest{Request: req, Input: input, Copy: c.BatchGetTracesRequest}
 }
 

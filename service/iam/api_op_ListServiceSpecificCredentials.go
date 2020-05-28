@@ -89,6 +89,7 @@ func (c *Client) ListServiceSpecificCredentialsRequest(input *ListServiceSpecifi
 	}
 
 	req := c.newRequest(op, input, &ListServiceSpecificCredentialsOutput{})
+
 	return ListServiceSpecificCredentialsRequest{Request: req, Input: input, Copy: c.ListServiceSpecificCredentialsRequest}
 }
 

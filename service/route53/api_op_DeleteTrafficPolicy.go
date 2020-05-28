@@ -114,6 +114,7 @@ func (c *Client) DeleteTrafficPolicyRequest(input *DeleteTrafficPolicyInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteTrafficPolicyOutput{})
+
 	return DeleteTrafficPolicyRequest{Request: req, Input: input, Copy: c.DeleteTrafficPolicyRequest}
 }
 

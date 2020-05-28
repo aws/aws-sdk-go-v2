@@ -106,6 +106,7 @@ func (c *Client) DefineAnalysisSchemeRequest(input *DefineAnalysisSchemeInput) D
 	}
 
 	req := c.newRequest(op, input, &DefineAnalysisSchemeOutput{})
+
 	return DefineAnalysisSchemeRequest{Request: req, Input: input, Copy: c.DefineAnalysisSchemeRequest}
 }
 

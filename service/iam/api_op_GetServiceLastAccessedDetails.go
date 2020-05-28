@@ -180,6 +180,7 @@ func (c *Client) GetServiceLastAccessedDetailsRequest(input *GetServiceLastAcces
 	}
 
 	req := c.newRequest(op, input, &GetServiceLastAccessedDetailsOutput{})
+
 	return GetServiceLastAccessedDetailsRequest{Request: req, Input: input, Copy: c.GetServiceLastAccessedDetailsRequest}
 }
 

@@ -160,6 +160,7 @@ func (c *Client) DescribeDashboardPermissionsRequest(input *DescribeDashboardPer
 	}
 
 	req := c.newRequest(op, input, &DescribeDashboardPermissionsOutput{})
+
 	return DescribeDashboardPermissionsRequest{Request: req, Input: input, Copy: c.DescribeDashboardPermissionsRequest}
 }
 

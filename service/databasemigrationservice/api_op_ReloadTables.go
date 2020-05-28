@@ -94,6 +94,7 @@ func (c *Client) ReloadTablesRequest(input *ReloadTablesInput) ReloadTablesReque
 	}
 
 	req := c.newRequest(op, input, &ReloadTablesOutput{})
+
 	return ReloadTablesRequest{Request: req, Input: input, Copy: c.ReloadTablesRequest}
 }
 

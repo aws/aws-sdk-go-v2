@@ -180,6 +180,7 @@ func (c *Client) CreateSubscriptionDefinitionRequest(input *CreateSubscriptionDe
 	}
 
 	req := c.newRequest(op, input, &CreateSubscriptionDefinitionOutput{})
+
 	return CreateSubscriptionDefinitionRequest{Request: req, Input: input, Copy: c.CreateSubscriptionDefinitionRequest}
 }
 

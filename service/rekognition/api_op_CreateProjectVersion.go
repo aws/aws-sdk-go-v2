@@ -147,6 +147,7 @@ func (c *Client) CreateProjectVersionRequest(input *CreateProjectVersionInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateProjectVersionOutput{})
+
 	return CreateProjectVersionRequest{Request: req, Input: input, Copy: c.CreateProjectVersionRequest}
 }
 

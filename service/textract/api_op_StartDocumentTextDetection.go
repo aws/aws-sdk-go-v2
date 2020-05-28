@@ -126,6 +126,7 @@ func (c *Client) StartDocumentTextDetectionRequest(input *StartDocumentTextDetec
 	}
 
 	req := c.newRequest(op, input, &StartDocumentTextDetectionOutput{})
+
 	return StartDocumentTextDetectionRequest{Request: req, Input: input, Copy: c.StartDocumentTextDetectionRequest}
 }
 

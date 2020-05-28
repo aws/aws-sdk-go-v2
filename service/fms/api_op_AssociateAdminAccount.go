@@ -90,6 +90,7 @@ func (c *Client) AssociateAdminAccountRequest(input *AssociateAdminAccountInput)
 	req := c.newRequest(op, input, &AssociateAdminAccountOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AssociateAdminAccountRequest{Request: req, Input: input, Copy: c.AssociateAdminAccountRequest}
 }
 

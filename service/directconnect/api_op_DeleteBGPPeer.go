@@ -72,6 +72,7 @@ func (c *Client) DeleteBGPPeerRequest(input *DeleteBGPPeerInput) DeleteBGPPeerRe
 	}
 
 	req := c.newRequest(op, input, &DeleteBGPPeerOutput{})
+
 	return DeleteBGPPeerRequest{Request: req, Input: input, Copy: c.DeleteBGPPeerRequest}
 }
 

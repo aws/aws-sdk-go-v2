@@ -146,6 +146,7 @@ func (c *Client) UpdateChannelRequest(input *UpdateChannelInput) UpdateChannelRe
 	}
 
 	req := c.newRequest(op, input, &UpdateChannelOutput{})
+
 	return UpdateChannelRequest{Request: req, Input: input, Copy: c.UpdateChannelRequest}
 }
 

@@ -85,6 +85,7 @@ func (c *Client) DescribeCreateAccountStatusRequest(input *DescribeCreateAccount
 	}
 
 	req := c.newRequest(op, input, &DescribeCreateAccountStatusOutput{})
+
 	return DescribeCreateAccountStatusRequest{Request: req, Input: input, Copy: c.DescribeCreateAccountStatusRequest}
 }
 

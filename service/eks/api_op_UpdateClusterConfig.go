@@ -170,6 +170,7 @@ func (c *Client) UpdateClusterConfigRequest(input *UpdateClusterConfigInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateClusterConfigOutput{})
+
 	return UpdateClusterConfigRequest{Request: req, Input: input, Copy: c.UpdateClusterConfigRequest}
 }
 

@@ -111,6 +111,7 @@ func (c *Client) StartRemediationExecutionRequest(input *StartRemediationExecuti
 	}
 
 	req := c.newRequest(op, input, &StartRemediationExecutionOutput{})
+
 	return StartRemediationExecutionRequest{Request: req, Input: input, Copy: c.StartRemediationExecutionRequest}
 }
 

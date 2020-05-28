@@ -216,6 +216,7 @@ func (c *Client) BatchExecuteStatementRequest(input *BatchExecuteStatementInput)
 	}
 
 	req := c.newRequest(op, input, &BatchExecuteStatementOutput{})
+
 	return BatchExecuteStatementRequest{Request: req, Input: input, Copy: c.BatchExecuteStatementRequest}
 }
 

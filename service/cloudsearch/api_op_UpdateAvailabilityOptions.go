@@ -103,6 +103,7 @@ func (c *Client) UpdateAvailabilityOptionsRequest(input *UpdateAvailabilityOptio
 	}
 
 	req := c.newRequest(op, input, &UpdateAvailabilityOptionsOutput{})
+
 	return UpdateAvailabilityOptionsRequest{Request: req, Input: input, Copy: c.UpdateAvailabilityOptionsRequest}
 }
 

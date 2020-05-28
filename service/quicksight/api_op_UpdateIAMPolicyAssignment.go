@@ -255,6 +255,7 @@ func (c *Client) UpdateIAMPolicyAssignmentRequest(input *UpdateIAMPolicyAssignme
 	}
 
 	req := c.newRequest(op, input, &UpdateIAMPolicyAssignmentOutput{})
+
 	return UpdateIAMPolicyAssignmentRequest{Request: req, Input: input, Copy: c.UpdateIAMPolicyAssignmentRequest}
 }
 

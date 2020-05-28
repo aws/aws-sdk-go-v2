@@ -89,6 +89,7 @@ func (c *Client) DeleteOpenIDConnectProviderRequest(input *DeleteOpenIDConnectPr
 	req := c.newRequest(op, input, &DeleteOpenIDConnectProviderOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteOpenIDConnectProviderRequest{Request: req, Input: input, Copy: c.DeleteOpenIDConnectProviderRequest}
 }
 

@@ -57,7 +57,8 @@ const opGetOperation = "GetOperation"
 // Gets information about any operation that returns an operation ID in the
 // response, such as a CreateService request.
 //
-// To get a list of operations that match specified criteria, see ListOperations.
+// To get a list of operations that match specified criteria, see ListOperations
+// (https://docs.aws.amazon.com/cloud-map/latest/api/API_ListOperations.html).
 //
 //    // Example sending a request using GetOperationRequest.
 //    req := client.GetOperationRequest(params)
@@ -79,6 +80,7 @@ func (c *Client) GetOperationRequest(input *GetOperationInput) GetOperationReque
 	}
 
 	req := c.newRequest(op, input, &GetOperationOutput{})
+
 	return GetOperationRequest{Request: req, Input: input, Copy: c.GetOperationRequest}
 }
 

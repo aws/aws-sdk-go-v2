@@ -130,6 +130,7 @@ func (c *Client) UpdateTopicRuleDestinationRequest(input *UpdateTopicRuleDestina
 	}
 
 	req := c.newRequest(op, input, &UpdateTopicRuleDestinationOutput{})
+
 	return UpdateTopicRuleDestinationRequest{Request: req, Input: input, Copy: c.UpdateTopicRuleDestinationRequest}
 }
 

@@ -143,6 +143,7 @@ func (c *Client) RemoveLayerVersionPermissionRequest(input *RemoveLayerVersionPe
 	req := c.newRequest(op, input, &RemoveLayerVersionPermissionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RemoveLayerVersionPermissionRequest{Request: req, Input: input, Copy: c.RemoveLayerVersionPermissionRequest}
 }
 

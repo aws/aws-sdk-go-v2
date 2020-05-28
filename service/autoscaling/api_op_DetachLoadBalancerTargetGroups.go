@@ -86,6 +86,7 @@ func (c *Client) DetachLoadBalancerTargetGroupsRequest(input *DetachLoadBalancer
 	}
 
 	req := c.newRequest(op, input, &DetachLoadBalancerTargetGroupsOutput{})
+
 	return DetachLoadBalancerTargetGroupsRequest{Request: req, Input: input, Copy: c.DetachLoadBalancerTargetGroupsRequest}
 }
 

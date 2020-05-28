@@ -104,6 +104,7 @@ func (c *Client) UpdateApplicationVersionRequest(input *UpdateApplicationVersion
 	}
 
 	req := c.newRequest(op, input, &UpdateApplicationVersionOutput{})
+
 	return UpdateApplicationVersionRequest{Request: req, Input: input, Copy: c.UpdateApplicationVersionRequest}
 }
 

@@ -114,6 +114,7 @@ func (c *Client) DisassociateDomainRequest(input *DisassociateDomainInput) Disas
 	}
 
 	req := c.newRequest(op, input, &DisassociateDomainOutput{})
+
 	return DisassociateDomainRequest{Request: req, Input: input, Copy: c.DisassociateDomainRequest}
 }
 

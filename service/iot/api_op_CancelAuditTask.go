@@ -96,6 +96,7 @@ func (c *Client) CancelAuditTaskRequest(input *CancelAuditTaskInput) CancelAudit
 	}
 
 	req := c.newRequest(op, input, &CancelAuditTaskOutput{})
+
 	return CancelAuditTaskRequest{Request: req, Input: input, Copy: c.CancelAuditTaskRequest}
 }
 

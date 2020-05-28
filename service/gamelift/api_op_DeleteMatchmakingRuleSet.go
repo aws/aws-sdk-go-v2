@@ -104,6 +104,7 @@ func (c *Client) DeleteMatchmakingRuleSetRequest(input *DeleteMatchmakingRuleSet
 	}
 
 	req := c.newRequest(op, input, &DeleteMatchmakingRuleSetOutput{})
+
 	return DeleteMatchmakingRuleSetRequest{Request: req, Input: input, Copy: c.DeleteMatchmakingRuleSetRequest}
 }
 

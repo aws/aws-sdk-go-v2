@@ -149,6 +149,7 @@ func (c *Client) GetSamplingTargetsRequest(input *GetSamplingTargetsInput) GetSa
 	}
 
 	req := c.newRequest(op, input, &GetSamplingTargetsOutput{})
+
 	return GetSamplingTargetsRequest{Request: req, Input: input, Copy: c.GetSamplingTargetsRequest}
 }
 

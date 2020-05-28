@@ -115,6 +115,7 @@ func (c *Client) DescribeRemediationExecutionStatusRequest(input *DescribeRemedi
 	}
 
 	req := c.newRequest(op, input, &DescribeRemediationExecutionStatusOutput{})
+
 	return DescribeRemediationExecutionStatusRequest{Request: req, Input: input, Copy: c.DescribeRemediationExecutionStatusRequest}
 }
 

@@ -115,6 +115,7 @@ func (c *Client) CreateClusterSubnetGroupRequest(input *CreateClusterSubnetGroup
 	}
 
 	req := c.newRequest(op, input, &CreateClusterSubnetGroupOutput{})
+
 	return CreateClusterSubnetGroupRequest{Request: req, Input: input, Copy: c.CreateClusterSubnetGroupRequest}
 }
 

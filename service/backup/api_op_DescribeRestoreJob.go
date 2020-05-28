@@ -207,6 +207,7 @@ func (c *Client) DescribeRestoreJobRequest(input *DescribeRestoreJobInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeRestoreJobOutput{})
+
 	return DescribeRestoreJobRequest{Request: req, Input: input, Copy: c.DescribeRestoreJobRequest}
 }
 

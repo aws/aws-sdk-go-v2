@@ -195,6 +195,7 @@ func (c *Client) AdminRespondToAuthChallengeRequest(input *AdminRespondToAuthCha
 	}
 
 	req := c.newRequest(op, input, &AdminRespondToAuthChallengeOutput{})
+
 	return AdminRespondToAuthChallengeRequest{Request: req, Input: input, Copy: c.AdminRespondToAuthChallengeRequest}
 }
 

@@ -79,6 +79,7 @@ func (c *Client) GetJobRequest(input *GetJobInput) GetJobRequest {
 	}
 
 	req := c.newRequest(op, input, &GetJobOutput{})
+
 	return GetJobRequest{Request: req, Input: input, Copy: c.GetJobRequest}
 }
 

@@ -172,6 +172,7 @@ func (c *Client) GetEnvironmentRequest(input *GetEnvironmentInput) GetEnvironmen
 	}
 
 	req := c.newRequest(op, input, &GetEnvironmentOutput{})
+
 	return GetEnvironmentRequest{Request: req, Input: input, Copy: c.GetEnvironmentRequest}
 }
 

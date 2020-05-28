@@ -85,6 +85,7 @@ func (c *Client) ListLicenseSpecificationsForResourceRequest(input *ListLicenseS
 	}
 
 	req := c.newRequest(op, input, &ListLicenseSpecificationsForResourceOutput{})
+
 	return ListLicenseSpecificationsForResourceRequest{Request: req, Input: input, Copy: c.ListLicenseSpecificationsForResourceRequest}
 }
 

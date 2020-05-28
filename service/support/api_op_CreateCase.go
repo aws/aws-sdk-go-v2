@@ -13,42 +13,54 @@ type CreateCaseInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of a set of one or more attachments for the case. Create the set by
-	// using AddAttachmentsToSet.
+	// using the AddAttachmentsToSet operation.
 	AttachmentSetId *string `locationName:"attachmentSetId" type:"string"`
 
-	// The category of problem for the AWS Support case.
+	// The category of problem for the AWS Support case. You also use the DescribeServices
+	// operation to get the category code for a service. Each AWS service defines
+	// its own set of category codes.
 	CategoryCode *string `locationName:"categoryCode" type:"string"`
 
 	// A list of email addresses that AWS Support copies on case correspondence.
+	// AWS Support identifies the account that creates the case when you specify
+	// your AWS credentials in an HTTP POST method or use the AWS SDKs (http://aws.amazon.com/tools/).
 	CcEmailAddresses []string `locationName:"ccEmailAddresses" type:"list"`
 
-	// The communication body text when you create an AWS Support case by calling
-	// CreateCase.
+	// The communication body text that describes the issue. This text appears in
+	// the Description field on the AWS Support Center Create Case (https://console.aws.amazon.com/support/home#/case/create)
+	// page.
 	//
 	// CommunicationBody is a required field
 	CommunicationBody *string `locationName:"communicationBody" min:"1" type:"string" required:"true"`
 
-	// The type of issue for the case. You can specify either "customer-service"
-	// or "technical." If you do not indicate a value, the default is "technical."
-	//
-	// Service limit increases are not supported by the Support API; you must submit
-	// service limit increase requests in Support Center (https://console.aws.amazon.com/support).
+	// The type of issue for the case. You can specify customer-service or technical.
+	// If you don't specify a value, the default is technical.
 	IssueType *string `locationName:"issueType" type:"string"`
 
-	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
-	// currently supports English ("en") and Japanese ("ja"). Language parameters
-	// must be passed explicitly for operations that take them.
+	// The language in which AWS Support handles the case. You must specify the
+	// ISO 639-1 code for the language parameter if you want support in that language.
+	// Currently, English ("en") and Japanese ("ja") are supported.
 	Language *string `locationName:"language" type:"string"`
 
-	// The code for the AWS service returned by the call to DescribeServices.
+	// The code for the AWS service. You can use the DescribeServices operation
+	// to get the possible serviceCode values.
 	ServiceCode *string `locationName:"serviceCode" type:"string"`
 
-	// The code for the severity level returned by the call to DescribeSeverityLevels.
+	// A value that indicates the urgency of the case. This value determines the
+	// response time according to your service level agreement with AWS Support.
+	// You can use the DescribeSeverityLevels operation to get the possible values
+	// for severityCode.
 	//
-	// The availability of severity levels depends on the support plan for the account.
+	// For more information, see SeverityLevel and Choosing a Severity (https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity)
+	// in the AWS Support User Guide.
+	//
+	// The availability of severity levels depends on the support plan for the AWS
+	// account.
 	SeverityCode *string `locationName:"severityCode" type:"string"`
 
-	// The title of the AWS Support case.
+	// The title of the AWS Support case. The title appears in the Subject field
+	// on the AWS Support Center Create Case (https://console.aws.amazon.com/support/home#/case/create)
+	// page.
 	//
 	// Subject is a required field
 	Subject *string `locationName:"subject" type:"string" required:"true"`
@@ -86,7 +98,7 @@ type CreateCaseOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The AWS Support case ID requested or returned in the call. The case ID is
-	// an alphanumeric string formatted as shown in this example: case-12345678910-2013-c4c1d2bf33c5cf47
+	// an alphanumeric string in the following format: case-12345678910-2013-c4c1d2bf33c5cf47
 	CaseId *string `locationName:"caseId" type:"string"`
 }
 
@@ -100,54 +112,27 @@ const opCreateCase = "CreateCase"
 // CreateCaseRequest returns a request value for making API operation for
 // AWS Support.
 //
-// Creates a new case in the AWS Support Center. This operation is modeled on
-// the behavior of the AWS Support Center Create Case (https://console.aws.amazon.com/support/home#/case/create)
-// page. Its parameters require you to specify the following information:
+// Creates a case in the AWS Support Center. This operation is similar to how
+// you create a case in the AWS Support Center Create Case (https://console.aws.amazon.com/support/home#/case/create)
+// page.
 //
-//    * issueType. The type of issue for the case. You can specify either "customer-service"
-//    or "technical." If you do not indicate a value, the default is "technical."
-//    Service limit increases are not supported by the Support API; you must
-//    submit service limit increase requests in Support Center (https://console.aws.amazon.com/support).
-//    The caseId is not the displayId that appears in Support Center (https://console.aws.amazon.com/support).
-//    You can use the DescribeCases API to get the displayId.
+// The AWS Support API doesn't support requesting service limit increases. You
+// can submit a service limit increase in the following ways:
 //
-//    * serviceCode. The code for an AWS service. You can get the possible serviceCode
-//    values by calling DescribeServices.
-//
-//    * categoryCode. The category for the service defined for the serviceCode
-//    value. You also get the category code for a service by calling DescribeServices.
-//    Each AWS service defines its own set of category codes.
-//
-//    * severityCode. A value that indicates the urgency of the case, which
-//    in turn determines the response time according to your service level agreement
-//    with AWS Support. You can get the possible severityCode values by calling
-//    DescribeSeverityLevels. For more information about the meaning of the
-//    codes, see SeverityLevel and Choosing a Severity (https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity).
-//
-//    * subject. The Subject field on the AWS Support Center Create Case (https://console.aws.amazon.com/support/home#/case/create)
+//    * Submit a request from the AWS Support Center Create Case (https://console.aws.amazon.com/support/home#/case/create)
 //    page.
 //
-//    * communicationBody. The Description field on the AWS Support Center Create
-//    Case (https://console.aws.amazon.com/support/home#/case/create) page.
+//    * Use the Service Quotas RequestServiceQuotaIncrease (https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_RequestServiceQuotaIncrease.html)
+//    operation.
 //
-//    * attachmentSetId. The ID of a set of attachments that has been created
-//    by using AddAttachmentsToSet.
+// A successful CreateCase request returns an AWS Support case number. You can
+// use the DescribeCases operation and specify the case number to get existing
+// AWS Support cases. After you create a case, you can use the AddCommunicationToCase
+// operation to add additional communication or attachments to an existing case.
 //
-//    * language. The human language in which AWS Support handles the case.
-//    English and Japanese are currently supported.
-//
-//    * ccEmailAddresses. The AWS Support Center CC field on the Create Case
-//    (https://console.aws.amazon.com/support/home#/case/create) page. You can
-//    list email addresses to be copied on any correspondence about the case.
-//    The account that opens the case is already identified by passing the AWS
-//    Credentials in the HTTP POST method or in a method or function call from
-//    one of the programming languages supported by an AWS SDK (http://aws.amazon.com/tools/).
-//
-// To add additional communication or attachments to an existing case, use AddCommunicationToCase.
-//
-// A successful CreateCase request returns an AWS Support case number. Case
-// numbers are used by the DescribeCases operation to retrieve existing AWS
-// Support cases.
+//    * The caseId is separate from the displayId that appears in the Support
+//    Center (https://console.aws.amazon.com/support). You can use the DescribeCases
+//    operation to get the displayId.
 //
 //    // Example sending a request using CreateCaseRequest.
 //    req := client.CreateCaseRequest(params)
@@ -169,6 +154,7 @@ func (c *Client) CreateCaseRequest(input *CreateCaseInput) CreateCaseRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateCaseOutput{})
+
 	return CreateCaseRequest{Request: req, Input: input, Copy: c.CreateCaseRequest}
 }
 

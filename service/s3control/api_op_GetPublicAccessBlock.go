@@ -105,6 +105,7 @@ func (c *Client) GetPublicAccessBlockRequest(input *GetPublicAccessBlockInput) G
 	req := c.newRequest(op, input, &GetPublicAccessBlockOutput{})
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
+
 	return GetPublicAccessBlockRequest{Request: req, Input: input, Copy: c.GetPublicAccessBlockRequest}
 }
 

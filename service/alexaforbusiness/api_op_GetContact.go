@@ -76,6 +76,7 @@ func (c *Client) GetContactRequest(input *GetContactInput) GetContactRequest {
 	}
 
 	req := c.newRequest(op, input, &GetContactOutput{})
+
 	return GetContactRequest{Request: req, Input: input, Copy: c.GetContactRequest}
 }
 

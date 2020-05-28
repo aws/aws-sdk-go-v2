@@ -105,6 +105,7 @@ func (c *Client) CreateIpGroupRequest(input *CreateIpGroupInput) CreateIpGroupRe
 	}
 
 	req := c.newRequest(op, input, &CreateIpGroupOutput{})
+
 	return CreateIpGroupRequest{Request: req, Input: input, Copy: c.CreateIpGroupRequest}
 }
 

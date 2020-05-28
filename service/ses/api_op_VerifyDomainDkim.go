@@ -122,6 +122,7 @@ func (c *Client) VerifyDomainDkimRequest(input *VerifyDomainDkimInput) VerifyDom
 	}
 
 	req := c.newRequest(op, input, &VerifyDomainDkimOutput{})
+
 	return VerifyDomainDkimRequest{Request: req, Input: input, Copy: c.VerifyDomainDkimRequest}
 }
 

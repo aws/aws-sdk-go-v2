@@ -91,13 +91,7 @@ type Media struct {
 	// The S3 object location of the input media file. The URI must be in the same
 	// region as the API endpoint that you are calling. The general form is:
 	//
-	// s3://<bucket-name>/<keyprefix>/<objectkey>
-	//
 	// For example:
-	//
-	// s3://examplebucket/example.mp4
-	//
-	// s3://examplebucket/mediadocs/example.mp4
 	//
 	// For more information about S3 object names, see Object Keys (http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
 	// in the Amazon S3 Developer Guide.
@@ -325,6 +319,10 @@ type MedicalTranscriptionSetting struct {
 	// You can't set both ShowSpeakerLabels and ChannelIdentification in the same
 	// request. If you set both, your request returns a BadRequestException.
 	ShowSpeakerLabels *bool `type:"boolean"`
+
+	// The name of the vocabulary to use when processing a medical transcription
+	// job.
+	VocabularyName *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -340,6 +338,9 @@ func (s *MedicalTranscriptionSetting) Validate() error {
 	}
 	if s.MaxSpeakerLabels != nil && *s.MaxSpeakerLabels < 2 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxSpeakerLabels", 2))
+	}
+	if s.VocabularyName != nil && len(*s.VocabularyName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("VocabularyName", 1))
 	}
 
 	if invalidParams.Len() > 0 {

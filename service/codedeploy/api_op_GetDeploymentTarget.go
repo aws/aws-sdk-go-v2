@@ -28,7 +28,7 @@ type GetDeploymentTargetOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A deployment target that contains information about a deployment such as
-	// its status, lifecyle events, and when it was last updated. It also contains
+	// its status, lifecycle events, and when it was last updated. It also contains
 	// metadata about the deployment target. The deployment target metadata depends
 	// on the deployment target's type (instanceTarget, lambdaTarget, or ecsTarget).
 	DeploymentTarget *DeploymentTarget `locationName:"deploymentTarget" type:"structure"`
@@ -66,6 +66,7 @@ func (c *Client) GetDeploymentTargetRequest(input *GetDeploymentTargetInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetDeploymentTargetOutput{})
+
 	return GetDeploymentTargetRequest{Request: req, Input: input, Copy: c.GetDeploymentTargetRequest}
 }
 

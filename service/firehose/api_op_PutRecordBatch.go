@@ -174,6 +174,7 @@ func (c *Client) PutRecordBatchRequest(input *PutRecordBatchInput) PutRecordBatc
 	}
 
 	req := c.newRequest(op, input, &PutRecordBatchOutput{})
+
 	return PutRecordBatchRequest{Request: req, Input: input, Copy: c.PutRecordBatchRequest}
 }
 

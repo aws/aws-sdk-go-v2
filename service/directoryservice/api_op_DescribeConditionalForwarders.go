@@ -86,6 +86,7 @@ func (c *Client) DescribeConditionalForwardersRequest(input *DescribeConditional
 	}
 
 	req := c.newRequest(op, input, &DescribeConditionalForwardersOutput{})
+
 	return DescribeConditionalForwardersRequest{Request: req, Input: input, Copy: c.DescribeConditionalForwardersRequest}
 }
 

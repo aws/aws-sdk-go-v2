@@ -116,6 +116,7 @@ func (c *Client) GetFunctionConcurrencyRequest(input *GetFunctionConcurrencyInpu
 	}
 
 	req := c.newRequest(op, input, &GetFunctionConcurrencyOutput{})
+
 	return GetFunctionConcurrencyRequest{Request: req, Input: input, Copy: c.GetFunctionConcurrencyRequest}
 }
 

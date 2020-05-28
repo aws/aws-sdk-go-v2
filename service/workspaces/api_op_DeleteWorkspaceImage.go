@@ -75,6 +75,7 @@ func (c *Client) DeleteWorkspaceImageRequest(input *DeleteWorkspaceImageInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteWorkspaceImageOutput{})
+
 	return DeleteWorkspaceImageRequest{Request: req, Input: input, Copy: c.DeleteWorkspaceImageRequest}
 }
 

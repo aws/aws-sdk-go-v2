@@ -141,6 +141,7 @@ func (c *Client) LookupDeveloperIdentityRequest(input *LookupDeveloperIdentityIn
 	}
 
 	req := c.newRequest(op, input, &LookupDeveloperIdentityOutput{})
+
 	return LookupDeveloperIdentityRequest{Request: req, Input: input, Copy: c.LookupDeveloperIdentityRequest}
 }
 

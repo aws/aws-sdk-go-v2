@@ -2180,6 +2180,9 @@ type TypeVersionSummary struct {
 	// The description of the type version.
 	Description *string `min:"1" type:"string"`
 
+	// Whether the specified type version is set as the default version.
+	IsDefaultVersion *bool `type:"boolean"`
+
 	// When the version was registered.
 	TimeCreated *time.Time `type:"timestamp"`
 

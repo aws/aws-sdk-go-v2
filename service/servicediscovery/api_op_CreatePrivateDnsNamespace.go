@@ -60,7 +60,7 @@ type CreatePrivateDnsNamespaceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A value that you can use to determine whether the request completed successfully.
-	// To get the status of the operation, see GetOperation.
+	// To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
 	OperationId *string `type:"string"`
 }
 
@@ -79,7 +79,7 @@ const opCreatePrivateDnsNamespace = "CreatePrivateDnsNamespace"
 // For example, if you name your namespace example.com and name your service
 // backend, the resulting DNS name for the service will be backend.example.com.
 // For the current limit on the number of namespaces that you can create using
-// the same AWS account, see AWS Cloud Map Limits (http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// the same AWS account, see AWS Cloud Map Limits (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
 // in the AWS Cloud Map Developer Guide.
 //
 //    // Example sending a request using CreatePrivateDnsNamespaceRequest.
@@ -102,6 +102,7 @@ func (c *Client) CreatePrivateDnsNamespaceRequest(input *CreatePrivateDnsNamespa
 	}
 
 	req := c.newRequest(op, input, &CreatePrivateDnsNamespaceOutput{})
+
 	return CreatePrivateDnsNamespaceRequest{Request: req, Input: input, Copy: c.CreatePrivateDnsNamespaceRequest}
 }
 

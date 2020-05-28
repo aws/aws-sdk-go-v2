@@ -76,6 +76,7 @@ func (c *Client) StopReplicationTaskRequest(input *StopReplicationTaskInput) Sto
 	}
 
 	req := c.newRequest(op, input, &StopReplicationTaskOutput{})
+
 	return StopReplicationTaskRequest{Request: req, Input: input, Copy: c.StopReplicationTaskRequest}
 }
 

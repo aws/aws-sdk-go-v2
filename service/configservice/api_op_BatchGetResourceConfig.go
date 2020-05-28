@@ -103,6 +103,7 @@ func (c *Client) BatchGetResourceConfigRequest(input *BatchGetResourceConfigInpu
 	}
 
 	req := c.newRequest(op, input, &BatchGetResourceConfigOutput{})
+
 	return BatchGetResourceConfigRequest{Request: req, Input: input, Copy: c.BatchGetResourceConfigRequest}
 }
 

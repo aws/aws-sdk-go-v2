@@ -77,6 +77,7 @@ func (c *Client) DisableRadiusRequest(input *DisableRadiusInput) DisableRadiusRe
 	}
 
 	req := c.newRequest(op, input, &DisableRadiusOutput{})
+
 	return DisableRadiusRequest{Request: req, Input: input, Copy: c.DisableRadiusRequest}
 }
 

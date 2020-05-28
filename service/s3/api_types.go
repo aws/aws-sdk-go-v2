@@ -422,8 +422,11 @@ type AnalyticsS3BucketDestination struct {
 	// Bucket is a required field
 	Bucket *string `type:"string" required:"true"`
 
-	// The account ID that owns the destination bucket. If no account ID is provided,
-	// the owner will not be validated prior to exporting data.
+	// The account ID that owns the destination S3 bucket. If no account ID is provided,
+	// the owner is not validated before exporting data.
+	//
+	// Although this value is optional, we strongly recommend that you set it to
+	// help prevent problems if the destination bucket ownership changes.
 	BucketAccountId *string `type:"string"`
 
 	// Specifies the file format used when exporting data to Amazon S3.
@@ -1571,9 +1574,9 @@ type Destination struct {
 	// must be replicated. Must be specified together with a Metrics block.
 	ReplicationTime *ReplicationTime `type:"structure"`
 
-	// The storage class to use when replicating objects, such as standard or reduced
-	// redundancy. By default, Amazon S3 uses the storage class of the source object
-	// to create the object replica.
+	// The storage class to use when replicating objects, such as S3 Standard or
+	// reduced redundancy. By default, Amazon S3 uses the storage class of the source
+	// object to create the object replica.
 	//
 	// For valid values, see the StorageClass element of the PUT Bucket replication
 	// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html)
@@ -2288,11 +2291,11 @@ func (s FilterRule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Container for Glacier job parameters.
+// Container for S3 Glacier job parameters.
 type GlacierJobParameters struct {
 	_ struct{} `type:"structure"`
 
-	// Glacier retrieval tier at which the restore will be processed.
+	// S3 Glacier retrieval tier at which the restore will be processed.
 	//
 	// Tier is a required field
 	Tier Tier `type:"string" required:"true" enum:"true"`
@@ -2389,6 +2392,29 @@ type Grantee struct {
 	DisplayName *string `type:"string"`
 
 	// Email address of the grantee.
+	//
+	// Using email addresses to specify a grantee is only supported in the following
+	// AWS Regions:
+	//
+	//    * US East (N. Virginia)
+	//
+	//    * US West (N. California)
+	//
+	//    * US West (Oregon)
+	//
+	//    * Asia Pacific (Singapore)
+	//
+	//    * Asia Pacific (Sydney)
+	//
+	//    * Asia Pacific (Tokyo)
+	//
+	//    * Europe (Ireland)
+	//
+	//    * South America (São Paulo)
+	//
+	// For a list of all the Amazon S3 supported Regions and endpoints, see Regions
+	// and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
+	// in the AWS General Reference.
 	EmailAddress *string `type:"string"`
 
 	// The canonical user ID of the grantee.
@@ -2867,7 +2893,11 @@ func (s InventoryFilter) MarshalFields(e protocol.FieldEncoder) error {
 type InventoryS3BucketDestination struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the account that owns the destination bucket.
+	// The account ID that owns the destination S3 bucket. If no account ID is provided,
+	// the owner is not validated before exporting data.
+	//
+	// Although this value is optional, we strongly recommend that you set it to
+	// help prevent problems if the destination bucket ownership changes.
 	AccountId *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the bucket where inventory results will
@@ -3025,7 +3055,8 @@ func (s JSONInput) MarshalFields(e protocol.FieldEncoder) error {
 type JSONOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The value used to separate individual records in the output.
+	// The value used to separate individual records in the output. If no value
+	// is specified, Amazon S3 uses a newline character ('\n').
 	RecordDelimiter *string `type:"string"`
 }
 
@@ -5567,7 +5598,7 @@ type RestoreRequest struct {
 	// The optional description for the job.
 	Description *string `type:"string"`
 
-	// Glacier related parameters pertaining to this job. Do not use with restores
+	// S3 Glacier related parameters pertaining to this job. Do not use with restores
 	// that specify OutputLocation.
 	GlacierJobParameters *GlacierJobParameters `type:"structure"`
 
@@ -5577,7 +5608,7 @@ type RestoreRequest struct {
 	// Describes the parameters for Select job types.
 	SelectParameters *SelectParameters `type:"structure"`
 
-	// Glacier retrieval tier at which the restore will be processed.
+	// S3 Glacier retrieval tier at which the restore will be processed.
 	Tier Tier `type:"string" enum:"true"`
 
 	// Type of restore request.
@@ -5716,8 +5747,9 @@ func (s RoutingRule) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies lifecycle rules for an Amazon S3 bucket. For more information,
-// see PUT Bucket lifecycle (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html)
-// in the Amazon Simple Storage Service API Reference.
+// see Put Bucket Lifecycle Configuration (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html)
+// in the Amazon Simple Storage Service API Reference. For examples, see Put
+// Bucket Lifecycle Configuration Examples (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html#API_PutBucketLifecycleConfiguration_Examples)
 type Rule struct {
 	_ struct{} `type:"structure"`
 
@@ -5762,7 +5794,10 @@ type Rule struct {
 	// Status is a required field
 	Status ExpirationStatus `type:"string" required:"true" enum:"true"`
 
-	// Specifies when an object transitions to a specified storage class.
+	// Specifies when an object transitions to a specified storage class. For more
+	// information about Amazon S3 lifecycle configuration rules, see Transitioning
+	// Objects Using Amazon S3 Lifecycle (https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html)
+	// in the Amazon Simple Storage Service Developer Guide.
 	Transition *Transition `type:"structure"`
 }
 
@@ -6162,8 +6197,24 @@ func (s SelectParameters) MarshalFields(e protocol.FieldEncoder) error {
 type ServerSideEncryptionByDefault struct {
 	_ struct{} `type:"structure"`
 
-	// KMS master key ID to use for the default encryption. This parameter is allowed
-	// if and only if SSEAlgorithm is set to aws:kms.
+	// AWS Key Management Service (KMS) customer master key ID to use for the default
+	// encryption. This parameter is allowed if and only if SSEAlgorithm is set
+	// to aws:kms.
+	//
+	// You can specify the key ID or the Amazon Resource Name (ARN) of the CMK.
+	// However, if you are using encryption with cross-account operations, you must
+	// use a fully qualified CMK ARN. For more information, see Using encryption
+	// for cross-account operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy).
+	//
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// Amazon S3 only supports symmetric CMKs and not asymmetric CMKs. For more
+	// information, see Using Symmetric and Asymmetric Keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
+	// in the AWS Key Management Service Developer Guide.
 	KMSMasterKeyID *string `type:"string" sensitive:"true"`
 
 	// Server-side encryption algorithm to use for the default encryption.
@@ -6804,7 +6855,10 @@ func (s TopicConfigurationDeprecated) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Specifies when an object transitions to a specified storage class.
+// Specifies when an object transitions to a specified storage class. For more
+// information about Amazon S3 lifecycle configuration rules, see Transitioning
+// Objects Using Amazon S3 Lifecycle (https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html)
+// in the Amazon Simple Storage Service Developer Guide.
 type Transition struct {
 	_ struct{} `type:"structure"`
 

@@ -127,6 +127,7 @@ func (c *Client) ListRegistriesRequest(input *ListRegistriesInput) ListRegistrie
 	}
 
 	req := c.newRequest(op, input, &ListRegistriesOutput{})
+
 	return ListRegistriesRequest{Request: req, Input: input, Copy: c.ListRegistriesRequest}
 }
 

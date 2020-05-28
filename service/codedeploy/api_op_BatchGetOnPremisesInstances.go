@@ -80,6 +80,7 @@ func (c *Client) BatchGetOnPremisesInstancesRequest(input *BatchGetOnPremisesIns
 	}
 
 	req := c.newRequest(op, input, &BatchGetOnPremisesInstancesOutput{})
+
 	return BatchGetOnPremisesInstancesRequest{Request: req, Input: input, Copy: c.BatchGetOnPremisesInstancesRequest}
 }
 

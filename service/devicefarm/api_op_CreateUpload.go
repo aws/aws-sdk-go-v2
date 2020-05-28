@@ -173,6 +173,7 @@ func (c *Client) CreateUploadRequest(input *CreateUploadInput) CreateUploadReque
 	}
 
 	req := c.newRequest(op, input, &CreateUploadOutput{})
+
 	return CreateUploadRequest{Request: req, Input: input, Copy: c.CreateUploadRequest}
 }
 

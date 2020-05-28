@@ -207,6 +207,7 @@ func (c *Client) GetTimeSeriesServiceStatisticsRequest(input *GetTimeSeriesServi
 	}
 
 	req := c.newRequest(op, input, &GetTimeSeriesServiceStatisticsOutput{})
+
 	return GetTimeSeriesServiceStatisticsRequest{Request: req, Input: input, Copy: c.GetTimeSeriesServiceStatisticsRequest}
 }
 

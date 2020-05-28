@@ -95,6 +95,7 @@ func (c *Client) ListRemoteAccessSessionsRequest(input *ListRemoteAccessSessions
 	}
 
 	req := c.newRequest(op, input, &ListRemoteAccessSessionsOutput{})
+
 	return ListRemoteAccessSessionsRequest{Request: req, Input: input, Copy: c.ListRemoteAccessSessionsRequest}
 }
 

@@ -139,6 +139,7 @@ func (c *Client) DescribeScalingPoliciesRequest(input *DescribeScalingPoliciesIn
 	}
 
 	req := c.newRequest(op, input, &DescribeScalingPoliciesOutput{})
+
 	return DescribeScalingPoliciesRequest{Request: req, Input: input, Copy: c.DescribeScalingPoliciesRequest}
 }
 

@@ -176,6 +176,7 @@ func (c *Client) SearchIndexRequest(input *SearchIndexInput) SearchIndexRequest 
 	}
 
 	req := c.newRequest(op, input, &SearchIndexOutput{})
+
 	return SearchIndexRequest{Request: req, Input: input, Copy: c.SearchIndexRequest}
 }
 

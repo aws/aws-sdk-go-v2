@@ -129,6 +129,7 @@ func (c *Client) ListDistributionsByWebACLIdRequest(input *ListDistributionsByWe
 	}
 
 	req := c.newRequest(op, input, &ListDistributionsByWebACLIdOutput{})
+
 	return ListDistributionsByWebACLIdRequest{Request: req, Input: input, Copy: c.ListDistributionsByWebACLIdRequest}
 }
 

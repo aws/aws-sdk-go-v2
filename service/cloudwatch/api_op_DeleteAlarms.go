@@ -96,6 +96,7 @@ func (c *Client) DeleteAlarmsRequest(input *DeleteAlarmsInput) DeleteAlarmsReque
 	req := c.newRequest(op, input, &DeleteAlarmsOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteAlarmsRequest{Request: req, Input: input, Copy: c.DeleteAlarmsRequest}
 }
 

@@ -124,6 +124,7 @@ func (c *Client) SearchTransitGatewayMulticastGroupsRequest(input *SearchTransit
 	}
 
 	req := c.newRequest(op, input, &SearchTransitGatewayMulticastGroupsOutput{})
+
 	return SearchTransitGatewayMulticastGroupsRequest{Request: req, Input: input, Copy: c.SearchTransitGatewayMulticastGroupsRequest}
 }
 

@@ -60,6 +60,7 @@ func (c *Client) ListVerifiedEmailAddressesRequest(input *ListVerifiedEmailAddre
 	}
 
 	req := c.newRequest(op, input, &ListVerifiedEmailAddressesOutput{})
+
 	return ListVerifiedEmailAddressesRequest{Request: req, Input: input, Copy: c.ListVerifiedEmailAddressesRequest}
 }
 

@@ -77,6 +77,7 @@ func (c *Client) GlobalSignOutRequest(input *GlobalSignOutInput) GlobalSignOutRe
 	}
 
 	req := c.newRequest(op, input, &GlobalSignOutOutput{})
+
 	return GlobalSignOutRequest{Request: req, Input: input, Copy: c.GlobalSignOutRequest}
 }
 

@@ -79,6 +79,7 @@ func (c *Client) DescribeSubscribedWorkteamRequest(input *DescribeSubscribedWork
 	}
 
 	req := c.newRequest(op, input, &DescribeSubscribedWorkteamOutput{})
+
 	return DescribeSubscribedWorkteamRequest{Request: req, Input: input, Copy: c.DescribeSubscribedWorkteamRequest}
 }
 

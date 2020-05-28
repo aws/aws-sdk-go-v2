@@ -105,6 +105,7 @@ func (c *Client) UpdateFlowTemplateRequest(input *UpdateFlowTemplateInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateFlowTemplateOutput{})
+
 	return UpdateFlowTemplateRequest{Request: req, Input: input, Copy: c.UpdateFlowTemplateRequest}
 }
 

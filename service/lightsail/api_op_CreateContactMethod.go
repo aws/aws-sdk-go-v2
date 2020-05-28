@@ -20,7 +20,7 @@ type CreateContactMethodInput struct {
 	// Phone numbers that follow this format can have a maximum of 15 digits, and
 	// they are prefixed with the plus character (+) and the country code. For example,
 	// a U.S. phone number in E.164 format would be specified as +1XXX5550100. For
-	// more information, see E.164 (https://en.wikipedia.org/wiki/E.164) in Wikipedia.
+	// more information, see E.164 (https://en.wikipedia.org/wiki/E.164) on Wikipedia.
 	//
 	// ContactEndpoint is a required field
 	ContactEndpoint *string `locationName:"contactEndpoint" min:"1" type:"string" required:"true"`
@@ -82,7 +82,7 @@ type CreateContactMethodOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
+	// of the request, the timestamp of the request, and the resources affected
 	// by the request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
@@ -125,6 +125,7 @@ func (c *Client) CreateContactMethodRequest(input *CreateContactMethodInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateContactMethodOutput{})
+
 	return CreateContactMethodRequest{Request: req, Input: input, Copy: c.CreateContactMethodRequest}
 }
 

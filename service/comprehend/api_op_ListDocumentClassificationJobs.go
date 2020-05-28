@@ -98,6 +98,7 @@ func (c *Client) ListDocumentClassificationJobsRequest(input *ListDocumentClassi
 	}
 
 	req := c.newRequest(op, input, &ListDocumentClassificationJobsOutput{})
+
 	return ListDocumentClassificationJobsRequest{Request: req, Input: input, Copy: c.ListDocumentClassificationJobsRequest}
 }
 

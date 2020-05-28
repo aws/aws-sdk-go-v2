@@ -117,6 +117,7 @@ func (c *Client) CopyWorkspaceImageRequest(input *CopyWorkspaceImageInput) CopyW
 	}
 
 	req := c.newRequest(op, input, &CopyWorkspaceImageOutput{})
+
 	return CopyWorkspaceImageRequest{Request: req, Input: input, Copy: c.CopyWorkspaceImageRequest}
 }
 

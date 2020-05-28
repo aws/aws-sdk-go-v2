@@ -90,6 +90,7 @@ func (c *Client) GetDeploymentInstanceRequest(input *GetDeploymentInstanceInput)
 	}
 
 	req := c.newRequest(op, input, &GetDeploymentInstanceOutput{})
+
 	return GetDeploymentInstanceRequest{Request: req, Input: input, Copy: c.GetDeploymentInstanceRequest}
 }
 

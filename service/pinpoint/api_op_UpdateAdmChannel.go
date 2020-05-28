@@ -124,6 +124,7 @@ func (c *Client) UpdateAdmChannelRequest(input *UpdateAdmChannelInput) UpdateAdm
 	}
 
 	req := c.newRequest(op, input, &UpdateAdmChannelOutput{})
+
 	return UpdateAdmChannelRequest{Request: req, Input: input, Copy: c.UpdateAdmChannelRequest}
 }
 

@@ -104,6 +104,7 @@ func (c *Client) DeleteSecurityProfileRequest(input *DeleteSecurityProfileInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteSecurityProfileOutput{})
+
 	return DeleteSecurityProfileRequest{Request: req, Input: input, Copy: c.DeleteSecurityProfileRequest}
 }
 

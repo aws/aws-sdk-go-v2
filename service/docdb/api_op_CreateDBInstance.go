@@ -160,6 +160,7 @@ func (c *Client) CreateDBInstanceRequest(input *CreateDBInstanceInput) CreateDBI
 	}
 
 	req := c.newRequest(op, input, &CreateDBInstanceOutput{})
+
 	return CreateDBInstanceRequest{Request: req, Input: input, Copy: c.CreateDBInstanceRequest}
 }
 

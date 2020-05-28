@@ -85,6 +85,7 @@ func (c *Client) SendTaskFailureRequest(input *SendTaskFailureInput) SendTaskFai
 	}
 
 	req := c.newRequest(op, input, &SendTaskFailureOutput{})
+
 	return SendTaskFailureRequest{Request: req, Input: input, Copy: c.SendTaskFailureRequest}
 }
 

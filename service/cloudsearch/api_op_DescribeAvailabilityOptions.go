@@ -92,6 +92,7 @@ func (c *Client) DescribeAvailabilityOptionsRequest(input *DescribeAvailabilityO
 	}
 
 	req := c.newRequest(op, input, &DescribeAvailabilityOptionsOutput{})
+
 	return DescribeAvailabilityOptionsRequest{Request: req, Input: input, Copy: c.DescribeAvailabilityOptionsRequest}
 }
 

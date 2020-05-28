@@ -127,6 +127,8 @@ const opListTags = "ListTags"
 // Returns a list of key-value pairs assigned to a target recovery point, backup
 // plan, or backup vault.
 //
+// ListTags are currently only supported with Amazon EFS backups.
+//
 //    // Example sending a request using ListTagsRequest.
 //    req := client.ListTagsRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -153,6 +155,7 @@ func (c *Client) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListTagsOutput{})
+
 	return ListTagsRequest{Request: req, Input: input, Copy: c.ListTagsRequest}
 }
 

@@ -98,6 +98,7 @@ func (c *Client) UpdateResourceDefinitionRequest(input *UpdateResourceDefinition
 	}
 
 	req := c.newRequest(op, input, &UpdateResourceDefinitionOutput{})
+
 	return UpdateResourceDefinitionRequest{Request: req, Input: input, Copy: c.UpdateResourceDefinitionRequest}
 }
 

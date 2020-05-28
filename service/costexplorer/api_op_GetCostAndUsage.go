@@ -146,6 +146,7 @@ func (c *Client) GetCostAndUsageRequest(input *GetCostAndUsageInput) GetCostAndU
 	}
 
 	req := c.newRequest(op, input, &GetCostAndUsageOutput{})
+
 	return GetCostAndUsageRequest{Request: req, Input: input, Copy: c.GetCostAndUsageRequest}
 }
 

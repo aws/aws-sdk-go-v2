@@ -87,6 +87,7 @@ func (c *Client) GetLoggingOptionsRequest(input *GetLoggingOptionsInput) GetLogg
 	}
 
 	req := c.newRequest(op, input, &GetLoggingOptionsOutput{})
+
 	return GetLoggingOptionsRequest{Request: req, Input: input, Copy: c.GetLoggingOptionsRequest}
 }
 

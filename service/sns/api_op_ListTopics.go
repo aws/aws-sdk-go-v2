@@ -75,6 +75,7 @@ func (c *Client) ListTopicsRequest(input *ListTopicsInput) ListTopicsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListTopicsOutput{})
+
 	return ListTopicsRequest{Request: req, Input: input, Copy: c.ListTopicsRequest}
 }
 

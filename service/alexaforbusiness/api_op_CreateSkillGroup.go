@@ -91,6 +91,7 @@ func (c *Client) CreateSkillGroupRequest(input *CreateSkillGroupInput) CreateSki
 	}
 
 	req := c.newRequest(op, input, &CreateSkillGroupOutput{})
+
 	return CreateSkillGroupRequest{Request: req, Input: input, Copy: c.CreateSkillGroupRequest}
 }
 

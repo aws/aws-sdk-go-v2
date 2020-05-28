@@ -77,6 +77,7 @@ func (c *Client) DescribeRemediationConfigurationsRequest(input *DescribeRemedia
 	}
 
 	req := c.newRequest(op, input, &DescribeRemediationConfigurationsOutput{})
+
 	return DescribeRemediationConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeRemediationConfigurationsRequest}
 }
 

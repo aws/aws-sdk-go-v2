@@ -109,6 +109,7 @@ func (c *Client) RegisterTargetsRequest(input *RegisterTargetsInput) RegisterTar
 	}
 
 	req := c.newRequest(op, input, &RegisterTargetsOutput{})
+
 	return RegisterTargetsRequest{Request: req, Input: input, Copy: c.RegisterTargetsRequest}
 }
 

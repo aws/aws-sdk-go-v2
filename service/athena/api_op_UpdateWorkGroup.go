@@ -88,6 +88,7 @@ func (c *Client) UpdateWorkGroupRequest(input *UpdateWorkGroupInput) UpdateWorkG
 	}
 
 	req := c.newRequest(op, input, &UpdateWorkGroupOutput{})
+
 	return UpdateWorkGroupRequest{Request: req, Input: input, Copy: c.UpdateWorkGroupRequest}
 }
 

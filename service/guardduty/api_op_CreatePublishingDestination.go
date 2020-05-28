@@ -153,6 +153,7 @@ func (c *Client) CreatePublishingDestinationRequest(input *CreatePublishingDesti
 	}
 
 	req := c.newRequest(op, input, &CreatePublishingDestinationOutput{})
+
 	return CreatePublishingDestinationRequest{Request: req, Input: input, Copy: c.CreatePublishingDestinationRequest}
 }
 

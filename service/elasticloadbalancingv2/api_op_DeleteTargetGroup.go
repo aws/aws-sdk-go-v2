@@ -76,6 +76,7 @@ func (c *Client) DeleteTargetGroupRequest(input *DeleteTargetGroupInput) DeleteT
 	}
 
 	req := c.newRequest(op, input, &DeleteTargetGroupOutput{})
+
 	return DeleteTargetGroupRequest{Request: req, Input: input, Copy: c.DeleteTargetGroupRequest}
 }
 

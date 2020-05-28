@@ -156,6 +156,7 @@ func (c *Client) CreateNotificationSubscriptionRequest(input *CreateNotification
 	}
 
 	req := c.newRequest(op, input, &CreateNotificationSubscriptionOutput{})
+
 	return CreateNotificationSubscriptionRequest{Request: req, Input: input, Copy: c.CreateNotificationSubscriptionRequest}
 }
 

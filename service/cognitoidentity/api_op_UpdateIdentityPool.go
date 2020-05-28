@@ -179,6 +179,7 @@ func (c *Client) UpdateIdentityPoolRequest(input *UpdateIdentityPoolInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateIdentityPoolOutput{})
+
 	return UpdateIdentityPoolRequest{Request: req, Input: input, Copy: c.UpdateIdentityPoolRequest}
 }
 

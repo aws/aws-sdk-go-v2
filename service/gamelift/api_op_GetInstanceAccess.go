@@ -120,6 +120,7 @@ func (c *Client) GetInstanceAccessRequest(input *GetInstanceAccessInput) GetInst
 	}
 
 	req := c.newRequest(op, input, &GetInstanceAccessOutput{})
+
 	return GetInstanceAccessRequest{Request: req, Input: input, Copy: c.GetInstanceAccessRequest}
 }
 

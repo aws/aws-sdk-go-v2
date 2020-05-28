@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -39,6 +40,13 @@ func (s *CreateBillingGroupInput) Validate() error {
 	}
 	if s.BillingGroupName != nil && len(*s.BillingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("BillingGroupName", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -144,6 +152,7 @@ func (c *Client) CreateBillingGroupRequest(input *CreateBillingGroupInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateBillingGroupOutput{})
+
 	return CreateBillingGroupRequest{Request: req, Input: input, Copy: c.CreateBillingGroupRequest}
 }
 

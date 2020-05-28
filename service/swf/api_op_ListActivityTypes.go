@@ -150,6 +150,7 @@ func (c *Client) ListActivityTypesRequest(input *ListActivityTypesInput) ListAct
 	}
 
 	req := c.newRequest(op, input, &ListActivityTypesOutput{})
+
 	return ListActivityTypesRequest{Request: req, Input: input, Copy: c.ListActivityTypesRequest}
 }
 

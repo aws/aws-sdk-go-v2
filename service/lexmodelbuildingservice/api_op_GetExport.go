@@ -214,6 +214,7 @@ func (c *Client) GetExportRequest(input *GetExportInput) GetExportRequest {
 	}
 
 	req := c.newRequest(op, input, &GetExportOutput{})
+
 	return GetExportRequest{Request: req, Input: input, Copy: c.GetExportRequest}
 }
 

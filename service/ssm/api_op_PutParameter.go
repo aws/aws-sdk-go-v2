@@ -18,6 +18,22 @@ type PutParameterInput struct {
 	// AllowedPattern=^\d+$
 	AllowedPattern *string `type:"string"`
 
+	// The data type for a String parameter. Supported data types include plain
+	// text and Amazon Machine Image IDs.
+	//
+	// The following data type values are supported.
+	//
+	//    * text
+	//
+	//    * aws:ec2:image
+	//
+	// When you create a String parameter and specify aws:ec2:image, Systems Manager
+	// validates the parameter value is in the required format, such as ami-12345abcdeEXAMPLE,
+	// and that the specified AMI is available in your AWS account. For more information,
+	// see Native parameter support for Amazon Machine Image IDs (http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html)
+	// in the AWS Systems Manager User Guide.
+	DataType *string `type:"string"`
+
 	// Information about the parameter that you want to add to the system. Optional
 	// but recommended.
 	//
@@ -61,8 +77,8 @@ type PutParameterInput struct {
 	//
 	//    * Parameter hierarchies are limited to a maximum depth of fifteen levels.
 	//
-	// For additional information about valid values for parameter names, see Requirements
-	// and Constraints for Parameter Names (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html)
+	// For additional information about valid values for parameter names, see About
+	// requirements and constraints for parameter names (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html)
 	// in the AWS Systems Manager User Guide.
 	//
 	// The maximum length constraint listed below includes capacity for additional
@@ -99,8 +115,8 @@ type PutParameterInput struct {
 	// time, but it has not been changed.
 	//
 	// All existing policies are preserved until you send new policies or an empty
-	// policy. For more information about parameter policies, see Working with Parameter
-	// Policies (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-policies.html).
+	// policy. For more information about parameter policies, see Assigning parameter
+	// policies (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html).
 	Policies *string `min:"1" type:"string"`
 
 	// Optional metadata that you assign to a resource. Tags enable you to categorize
@@ -131,7 +147,7 @@ type PutParameterInput struct {
 	// Advanced parameters have a content size limit of 8 KB and can be configured
 	// to use parameter policies. You can create a maximum of 100,000 advanced parameters
 	// for each Region in an AWS account. Advanced parameters incur a charge. For
-	// more information, see About Advanced Parameters (http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html)
+	// more information, see Standard and advanced parameter tiers (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html)
 	// in the AWS Systems Manager User Guide.
 	//
 	// You can change a standard parameter to an advanced parameter any time. But
@@ -179,7 +195,7 @@ type PutParameterInput struct {
 	//    current Region.
 	//
 	// For more information about configuring the default tier option, see Specifying
-	// a Default Parameter Tier (http://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html)
+	// a default parameter tier (https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html)
 	// in the AWS Systems Manager User Guide.
 	Tier ParameterTier `type:"string" enum:"true"`
 
@@ -191,9 +207,7 @@ type PutParameterInput struct {
 	//
 	// SecureString is not currently supported for AWS CloudFormation templates
 	// or in the China Regions.
-	//
-	// Type is a required field
-	Type ParameterType `type:"string" required:"true" enum:"true"`
+	Type ParameterType `type:"string" enum:"true"`
 
 	// The parameter value that you want to add to the system. Standard parameters
 	// have a value limit of 4 KB. Advanced parameters have a value limit of 8 KB.
@@ -222,9 +236,6 @@ func (s *PutParameterInput) Validate() error {
 	}
 	if s.Policies != nil && len(*s.Policies) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Policies", 1))
-	}
-	if len(s.Type) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if s.Value == nil {
@@ -291,6 +302,7 @@ func (c *Client) PutParameterRequest(input *PutParameterInput) PutParameterReque
 	}
 
 	req := c.newRequest(op, input, &PutParameterOutput{})
+
 	return PutParameterRequest{Request: req, Input: input, Copy: c.PutParameterRequest}
 }
 

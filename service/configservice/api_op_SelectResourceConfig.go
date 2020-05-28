@@ -97,6 +97,7 @@ func (c *Client) SelectResourceConfigRequest(input *SelectResourceConfigInput) S
 	}
 
 	req := c.newRequest(op, input, &SelectResourceConfigOutput{})
+
 	return SelectResourceConfigRequest{Request: req, Input: input, Copy: c.SelectResourceConfigRequest}
 }
 

@@ -51,8 +51,8 @@ type ResumeSessionOutput struct {
 	//
 	// region represents the Region identifier for an AWS Region supported by AWS
 	// Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list
-	// of supported region values, see the Region column in Systems Manager Service
-	// Endpoints (http://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region)
+	// of supported region values, see the Region column in Systems Manager service
+	// endpoints (http://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region)
 	// in the AWS General Reference.
 	//
 	// session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.
@@ -99,6 +99,7 @@ func (c *Client) ResumeSessionRequest(input *ResumeSessionInput) ResumeSessionRe
 	}
 
 	req := c.newRequest(op, input, &ResumeSessionOutput{})
+
 	return ResumeSessionRequest{Request: req, Input: input, Copy: c.ResumeSessionRequest}
 }
 

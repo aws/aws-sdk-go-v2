@@ -90,6 +90,7 @@ func (c *Client) CreateHsmClientCertificateRequest(input *CreateHsmClientCertifi
 	}
 
 	req := c.newRequest(op, input, &CreateHsmClientCertificateOutput{})
+
 	return CreateHsmClientCertificateRequest{Request: req, Input: input, Copy: c.CreateHsmClientCertificateRequest}
 }
 

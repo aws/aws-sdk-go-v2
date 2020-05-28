@@ -114,6 +114,7 @@ func (c *Client) BulkPublishRequest(input *BulkPublishInput) BulkPublishRequest 
 	}
 
 	req := c.newRequest(op, input, &BulkPublishOutput{})
+
 	return BulkPublishRequest{Request: req, Input: input, Copy: c.BulkPublishRequest}
 }
 

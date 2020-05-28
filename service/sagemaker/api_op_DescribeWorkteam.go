@@ -83,6 +83,7 @@ func (c *Client) DescribeWorkteamRequest(input *DescribeWorkteamInput) DescribeW
 	}
 
 	req := c.newRequest(op, input, &DescribeWorkteamOutput{})
+
 	return DescribeWorkteamRequest{Request: req, Input: input, Copy: c.DescribeWorkteamRequest}
 }
 

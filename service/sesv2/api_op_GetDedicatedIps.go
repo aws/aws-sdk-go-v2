@@ -133,6 +133,7 @@ func (c *Client) GetDedicatedIpsRequest(input *GetDedicatedIpsInput) GetDedicate
 	}
 
 	req := c.newRequest(op, input, &GetDedicatedIpsOutput{})
+
 	return GetDedicatedIpsRequest{Request: req, Input: input, Copy: c.GetDedicatedIpsRequest}
 }
 

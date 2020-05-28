@@ -26,7 +26,7 @@ type RegisterInstanceInput struct {
 	// If you want AWS Cloud Map to create an Amazon Route 53 alias record that
 	// routes traffic to an Elastic Load Balancing load balancer, specify the DNS
 	// name that is associated with the load balancer. For information about how
-	// to get the DNS name, see "DNSName" in the topic AliasTarget (http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html)
+	// to get the DNS name, see "DNSName" in the topic AliasTarget (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html)
 	// in the Route 53 API Reference.
 	//
 	// Note the following:
@@ -88,8 +88,8 @@ type RegisterInstanceInput struct {
 	// If the service includes HealthCheckConfig, the port on the endpoint that
 	// you want Route 53 to send requests to.
 	//
-	// This value is required if you specified settings for an SRV record when you
-	// created the service.
+	// This value is required if you specified settings for an SRV record or a Route
+	// 53 health check when you created the service.
 	//
 	// Custom attributes
 	//
@@ -112,7 +112,8 @@ type RegisterInstanceInput struct {
 	//
 	//    * If the service that is specified by ServiceId includes settings for
 	//    an SRV record, the value of InstanceId is automatically included as part
-	//    of the value for the SRV record. For more information, see DnsRecord$Type.
+	//    of the value for the SRV record. For more information, see DnsRecord >
+	//    Type (https://docs.aws.amazon.com/cloud-map/latest/api/API_DnsRecord.html#cloudmap-Type-DnsRecord-Type).
 	//
 	//    * You can use this value to update an existing instance.
 	//
@@ -165,7 +166,7 @@ type RegisterInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A value that you can use to determine whether the request completed successfully.
-	// To get the status of the operation, see GetOperation.
+	// To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
 	OperationId *string `type:"string"`
 }
 
@@ -196,7 +197,7 @@ const opRegisterInstance = "RegisterInstance"
 // One RegisterInstance request must complete before you can submit another
 // request and specify the same service ID and instance ID.
 //
-// For more information, see CreateService.
+// For more information, see CreateService (https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html).
 //
 // When AWS Cloud Map receives a DNS query for the specified DNS name, it returns
 // the applicable value:
@@ -210,7 +211,7 @@ const opRegisterInstance = "RegisterInstance"
 //    records
 //
 // For the current limit on the number of instances that you can register using
-// the same namespace and using the same service, see AWS Cloud Map Limits (http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// the same namespace and using the same service, see AWS Cloud Map Limits (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
 // in the AWS Cloud Map Developer Guide.
 //
 //    // Example sending a request using RegisterInstanceRequest.
@@ -233,6 +234,7 @@ func (c *Client) RegisterInstanceRequest(input *RegisterInstanceInput) RegisterI
 	}
 
 	req := c.newRequest(op, input, &RegisterInstanceOutput{})
+
 	return RegisterInstanceRequest{Request: req, Input: input, Copy: c.RegisterInstanceRequest}
 }
 

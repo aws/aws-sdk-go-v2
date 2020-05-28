@@ -152,6 +152,7 @@ func (c *Client) GetLabelDetectionRequest(input *GetLabelDetectionInput) GetLabe
 	}
 
 	req := c.newRequest(op, input, &GetLabelDetectionOutput{})
+
 	return GetLabelDetectionRequest{Request: req, Input: input, Copy: c.GetLabelDetectionRequest}
 }
 

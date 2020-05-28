@@ -92,6 +92,7 @@ func (c *Client) CreateDirectConnectGatewayAssociationRequest(input *CreateDirec
 	}
 
 	req := c.newRequest(op, input, &CreateDirectConnectGatewayAssociationOutput{})
+
 	return CreateDirectConnectGatewayAssociationRequest{Request: req, Input: input, Copy: c.CreateDirectConnectGatewayAssociationRequest}
 }
 

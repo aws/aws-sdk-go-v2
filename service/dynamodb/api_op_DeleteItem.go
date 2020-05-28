@@ -280,6 +280,7 @@ func (c *Client) DeleteItemRequest(input *DeleteItemInput) DeleteItemRequest {
 			Fn:   de.Handler,
 		})
 	}
+
 	return DeleteItemRequest{Request: req, Input: input, Copy: c.DeleteItemRequest}
 }
 

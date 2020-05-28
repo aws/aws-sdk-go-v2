@@ -206,6 +206,7 @@ func (c *Client) ListBackupJobsRequest(input *ListBackupJobsInput) ListBackupJob
 	}
 
 	req := c.newRequest(op, input, &ListBackupJobsOutput{})
+
 	return ListBackupJobsRequest{Request: req, Input: input, Copy: c.ListBackupJobsRequest}
 }
 

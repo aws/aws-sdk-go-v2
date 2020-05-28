@@ -188,6 +188,7 @@ func (c *Client) ListIAMPolicyAssignmentsForUserRequest(input *ListIAMPolicyAssi
 	}
 
 	req := c.newRequest(op, input, &ListIAMPolicyAssignmentsForUserOutput{})
+
 	return ListIAMPolicyAssignmentsForUserRequest{Request: req, Input: input, Copy: c.ListIAMPolicyAssignmentsForUserRequest}
 }
 

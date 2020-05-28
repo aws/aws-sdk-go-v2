@@ -41,7 +41,7 @@ type DeleteDiskSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
+	// of the request, the timestamp of the request, and the resources affected
 	// by the request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
@@ -89,6 +89,7 @@ func (c *Client) DeleteDiskSnapshotRequest(input *DeleteDiskSnapshotInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteDiskSnapshotOutput{})
+
 	return DeleteDiskSnapshotRequest{Request: req, Input: input, Copy: c.DeleteDiskSnapshotRequest}
 }
 

@@ -120,6 +120,7 @@ func (c *Client) CopyDBParameterGroupRequest(input *CopyDBParameterGroupInput) C
 	}
 
 	req := c.newRequest(op, input, &CopyDBParameterGroupOutput{})
+
 	return CopyDBParameterGroupRequest{Request: req, Input: input, Copy: c.CopyDBParameterGroupRequest}
 }
 

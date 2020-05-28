@@ -137,6 +137,7 @@ func (c *Client) ModifyDBClusterEndpointRequest(input *ModifyDBClusterEndpointIn
 	}
 
 	req := c.newRequest(op, input, &ModifyDBClusterEndpointOutput{})
+
 	return ModifyDBClusterEndpointRequest{Request: req, Input: input, Copy: c.ModifyDBClusterEndpointRequest}
 }
 

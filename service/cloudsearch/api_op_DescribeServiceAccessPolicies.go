@@ -93,6 +93,7 @@ func (c *Client) DescribeServiceAccessPoliciesRequest(input *DescribeServiceAcce
 	}
 
 	req := c.newRequest(op, input, &DescribeServiceAccessPoliciesOutput{})
+
 	return DescribeServiceAccessPoliciesRequest{Request: req, Input: input, Copy: c.DescribeServiceAccessPoliciesRequest}
 }
 

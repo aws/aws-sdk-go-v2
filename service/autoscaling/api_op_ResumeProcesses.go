@@ -104,6 +104,7 @@ func (c *Client) ResumeProcessesRequest(input *ResumeProcessesInput) ResumeProce
 	req := c.newRequest(op, input, &ResumeProcessesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return ResumeProcessesRequest{Request: req, Input: input, Copy: c.ResumeProcessesRequest}
 }
 

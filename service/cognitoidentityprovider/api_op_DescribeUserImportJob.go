@@ -94,6 +94,7 @@ func (c *Client) DescribeUserImportJobRequest(input *DescribeUserImportJobInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeUserImportJobOutput{})
+
 	return DescribeUserImportJobRequest{Request: req, Input: input, Copy: c.DescribeUserImportJobRequest}
 }
 

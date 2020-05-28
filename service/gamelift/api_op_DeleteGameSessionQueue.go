@@ -95,6 +95,7 @@ func (c *Client) DeleteGameSessionQueueRequest(input *DeleteGameSessionQueueInpu
 	}
 
 	req := c.newRequest(op, input, &DeleteGameSessionQueueOutput{})
+
 	return DeleteGameSessionQueueRequest{Request: req, Input: input, Copy: c.DeleteGameSessionQueueRequest}
 }
 

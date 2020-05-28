@@ -133,6 +133,7 @@ func (c *Client) DeleteConfigRequest(input *DeleteConfigInput) DeleteConfigReque
 	}
 
 	req := c.newRequest(op, input, &DeleteConfigOutput{})
+
 	return DeleteConfigRequest{Request: req, Input: input, Copy: c.DeleteConfigRequest}
 }
 

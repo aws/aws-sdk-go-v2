@@ -80,6 +80,7 @@ func (c *Client) DeleteTriggerRequest(input *DeleteTriggerInput) DeleteTriggerRe
 	}
 
 	req := c.newRequest(op, input, &DeleteTriggerOutput{})
+
 	return DeleteTriggerRequest{Request: req, Input: input, Copy: c.DeleteTriggerRequest}
 }
 

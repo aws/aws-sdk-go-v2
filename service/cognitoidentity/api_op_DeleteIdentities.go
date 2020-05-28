@@ -85,6 +85,7 @@ func (c *Client) DeleteIdentitiesRequest(input *DeleteIdentitiesInput) DeleteIde
 	}
 
 	req := c.newRequest(op, input, &DeleteIdentitiesOutput{})
+
 	return DeleteIdentitiesRequest{Request: req, Input: input, Copy: c.DeleteIdentitiesRequest}
 }
 

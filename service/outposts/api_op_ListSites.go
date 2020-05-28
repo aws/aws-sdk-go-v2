@@ -131,6 +131,7 @@ func (c *Client) ListSitesRequest(input *ListSitesInput) ListSitesRequest {
 	}
 
 	req := c.newRequest(op, input, &ListSitesOutput{})
+
 	return ListSitesRequest{Request: req, Input: input, Copy: c.ListSitesRequest}
 }
 

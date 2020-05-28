@@ -179,6 +179,7 @@ func (c *Client) DescribeMountTargetsRequest(input *DescribeMountTargetsInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeMountTargetsOutput{})
+
 	return DescribeMountTargetsRequest{Request: req, Input: input, Copy: c.DescribeMountTargetsRequest}
 }
 

@@ -125,6 +125,7 @@ func (c *Client) RegisterWorkspaceDirectoryRequest(input *RegisterWorkspaceDirec
 	}
 
 	req := c.newRequest(op, input, &RegisterWorkspaceDirectoryOutput{})
+
 	return RegisterWorkspaceDirectoryRequest{Request: req, Input: input, Copy: c.RegisterWorkspaceDirectoryRequest}
 }
 

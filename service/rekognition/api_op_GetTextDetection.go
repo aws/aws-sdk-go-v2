@@ -141,6 +141,7 @@ func (c *Client) GetTextDetectionRequest(input *GetTextDetectionInput) GetTextDe
 	}
 
 	req := c.newRequest(op, input, &GetTextDetectionOutput{})
+
 	return GetTextDetectionRequest{Request: req, Input: input, Copy: c.GetTextDetectionRequest}
 }
 

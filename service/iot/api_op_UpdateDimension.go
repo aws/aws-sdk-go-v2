@@ -187,6 +187,7 @@ func (c *Client) UpdateDimensionRequest(input *UpdateDimensionInput) UpdateDimen
 	}
 
 	req := c.newRequest(op, input, &UpdateDimensionOutput{})
+
 	return UpdateDimensionRequest{Request: req, Input: input, Copy: c.UpdateDimensionRequest}
 }
 

@@ -169,6 +169,7 @@ func (c *Client) ListObjectParentPathsRequest(input *ListObjectParentPathsInput)
 	}
 
 	req := c.newRequest(op, input, &ListObjectParentPathsOutput{})
+
 	return ListObjectParentPathsRequest{Request: req, Input: input, Copy: c.ListObjectParentPathsRequest}
 }
 

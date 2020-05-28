@@ -134,6 +134,7 @@ func (c *InputService1ProtocolTest) InputService1TestCaseOperation1Request(input
 	req := c.newRequest(op, input, &InputService1TestShapeInputService1TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService1TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService1TestCaseOperation1Request}
 }
 
@@ -214,6 +215,7 @@ func (c *InputService1ProtocolTest) InputService1TestCaseOperation2Request(input
 	req := c.newRequest(op, input, &InputService1TestShapeInputService1TestCaseOperation2Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService1TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService1TestCaseOperation2Request}
 }
 
@@ -294,6 +296,7 @@ func (c *InputService1ProtocolTest) InputService1TestCaseOperation3Request(input
 	req := c.newRequest(op, input, &InputService1TestShapeInputService1TestCaseOperation3Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService1TestCaseOperation3Request{Request: req, Input: input, Copy: c.InputService1TestCaseOperation3Request}
 }
 
@@ -422,6 +425,7 @@ func (c *InputService2ProtocolTest) InputService2TestCaseOperation1Request(input
 	req := c.newRequest(op, input, &InputService2TestShapeInputService2TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService2TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService2TestCaseOperation1Request}
 }
 
@@ -556,6 +560,7 @@ func (c *InputService3ProtocolTest) InputService3TestCaseOperation1Request(input
 	req := c.newRequest(op, input, &InputService3TestShapeInputService3TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService3TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService3TestCaseOperation1Request}
 }
 
@@ -632,6 +637,7 @@ func (c *InputService3ProtocolTest) InputService3TestCaseOperation2Request(input
 	req := c.newRequest(op, input, &InputService3TestShapeInputService3TestCaseOperation2Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService3TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService3TestCaseOperation2Request}
 }
 
@@ -764,6 +770,7 @@ func (c *InputService4ProtocolTest) InputService4TestCaseOperation1Request(input
 	req := c.newRequest(op, input, &InputService4TestShapeInputService4TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService4TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService4TestCaseOperation1Request}
 }
 
@@ -844,6 +851,7 @@ func (c *InputService4ProtocolTest) InputService4TestCaseOperation2Request(input
 	req := c.newRequest(op, input, &InputService4TestShapeInputService4TestCaseOperation2Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService4TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService4TestCaseOperation2Request}
 }
 
@@ -972,6 +980,7 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation1Request(input
 	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService5TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService5TestCaseOperation1Request}
 }
 
@@ -1100,6 +1109,7 @@ func (c *InputService6ProtocolTest) InputService6TestCaseOperation1Request(input
 	req := c.newRequest(op, input, &InputService6TestShapeInputService6TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService6TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService6TestCaseOperation1Request}
 }
 
@@ -1230,6 +1240,7 @@ func (c *InputService7ProtocolTest) InputService7TestCaseOperation1Request(input
 	req := c.newRequest(op, input, &InputService7TestShapeInputService7TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService7TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService7TestCaseOperation1Request}
 }
 
@@ -1358,6 +1369,7 @@ func (c *InputService8ProtocolTest) InputService8TestCaseOperation1Request(input
 	req := c.newRequest(op, input, &InputService8TestShapeInputService8TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService8TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService8TestCaseOperation1Request}
 }
 
@@ -1486,6 +1498,7 @@ func (c *InputService9ProtocolTest) InputService9TestCaseOperation1Request(input
 	req := c.newRequest(op, input, &InputService9TestShapeInputService9TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService9TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService9TestCaseOperation1Request}
 }
 
@@ -1615,6 +1628,7 @@ func (c *InputService10ProtocolTest) InputService10TestCaseOperation1Request(inp
 	req := c.newRequest(op, input, &InputService10TestShapeInputService10TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService10TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService10TestCaseOperation1Request}
 }
 
@@ -1743,6 +1757,7 @@ func (c *InputService11ProtocolTest) InputService11TestCaseOperation1Request(inp
 	req := c.newRequest(op, input, &InputService11TestShapeInputService11TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService11TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService11TestCaseOperation1Request}
 }
 
@@ -1875,6 +1890,7 @@ func (c *InputService12ProtocolTest) InputService12TestCaseOperation1Request(inp
 	req := c.newRequest(op, input, &InputService12TestShapeInputService12TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService12TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService12TestCaseOperation1Request}
 }
 
@@ -2003,6 +2019,7 @@ func (c *InputService13ProtocolTest) InputService13TestCaseOperation1Request(inp
 	req := c.newRequest(op, input, &InputService13TestShapeInputService13TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService13TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService13TestCaseOperation1Request}
 }
 
@@ -2079,6 +2096,7 @@ func (c *InputService13ProtocolTest) InputService13TestCaseOperation2Request(inp
 	req := c.newRequest(op, input, &InputService13TestShapeInputService13TestCaseOperation2Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService13TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService13TestCaseOperation2Request}
 }
 
@@ -2155,6 +2173,7 @@ func (c *InputService13ProtocolTest) InputService13TestCaseOperation3Request(inp
 	req := c.newRequest(op, input, &InputService13TestShapeInputService13TestCaseOperation3Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService13TestCaseOperation3Request{Request: req, Input: input, Copy: c.InputService13TestCaseOperation3Request}
 }
 
@@ -2231,6 +2250,7 @@ func (c *InputService13ProtocolTest) InputService13TestCaseOperation4Request(inp
 	req := c.newRequest(op, input, &InputService13TestShapeInputService13TestCaseOperation4Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService13TestCaseOperation4Request{Request: req, Input: input, Copy: c.InputService13TestCaseOperation4Request}
 }
 
@@ -2307,6 +2327,7 @@ func (c *InputService13ProtocolTest) InputService13TestCaseOperation5Request(inp
 	req := c.newRequest(op, input, &InputService13TestShapeInputService13TestCaseOperation5Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService13TestCaseOperation5Request{Request: req, Input: input, Copy: c.InputService13TestCaseOperation5Request}
 }
 
@@ -2383,6 +2404,7 @@ func (c *InputService13ProtocolTest) InputService13TestCaseOperation6Request(inp
 	req := c.newRequest(op, input, &InputService13TestShapeInputService13TestCaseOperation6Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService13TestCaseOperation6Request{Request: req, Input: input, Copy: c.InputService13TestCaseOperation6Request}
 }
 
@@ -2523,6 +2545,7 @@ func (c *InputService14ProtocolTest) InputService14TestCaseOperation1Request(inp
 	req := c.newRequest(op, input, &InputService14TestShapeInputService14TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService14TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService14TestCaseOperation1Request}
 }
 
@@ -2599,6 +2622,7 @@ func (c *InputService14ProtocolTest) InputService14TestCaseOperation2Request(inp
 	req := c.newRequest(op, input, &InputService14TestShapeInputService14TestCaseOperation2Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService14TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService14TestCaseOperation2Request}
 }
 
@@ -2729,6 +2753,7 @@ func (c *InputService15ProtocolTest) InputService15TestCaseOperation1Request(inp
 	req := c.newRequest(op, input, &InputService15TestShapeInputService15TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService15TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService15TestCaseOperation1Request}
 }
 
@@ -2807,6 +2832,7 @@ func (c *InputService15ProtocolTest) InputService15TestCaseOperation2Request(inp
 	req := c.newRequest(op, input, &InputService15TestShapeInputService15TestCaseOperation2Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService15TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService15TestCaseOperation2Request}
 }
 
@@ -2885,6 +2911,7 @@ func (c *InputService15ProtocolTest) InputService15TestCaseOperation3Request(inp
 	req := c.newRequest(op, input, &InputService15TestShapeInputService15TestCaseOperation3Output{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return InputService15TestCaseOperation3Request{Request: req, Input: input, Copy: c.InputService15TestCaseOperation3Request}
 }
 
@@ -3032,6 +3059,7 @@ func (c *InputService16ProtocolTest) InputService16TestCaseOperation1Request(inp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	req.Handlers.Build.PushBackNamed(protocol.NewHostPrefixHandler("data-", nil))
 	req.Handlers.Build.PushBackNamed(protocol.ValidateEndpointHostHandler)
+
 	return InputService16TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService16TestCaseOperation1Request}
 }
 
@@ -3134,6 +3162,7 @@ func (c *InputService16ProtocolTest) InputService16TestCaseOperation2Request(inp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	req.Handlers.Build.PushBackNamed(protocol.NewHostPrefixHandler("foo-{Name}.", input.hostLabels))
 	req.Handlers.Build.PushBackNamed(protocol.ValidateEndpointHostHandler)
+
 	return InputService16TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService16TestCaseOperation2Request}
 }
 

@@ -187,6 +187,7 @@ func (c *Client) GetUtterancesViewRequest(input *GetUtterancesViewInput) GetUtte
 	}
 
 	req := c.newRequest(op, input, &GetUtterancesViewOutput{})
+
 	return GetUtterancesViewRequest{Request: req, Input: input, Copy: c.GetUtterancesViewRequest}
 }
 

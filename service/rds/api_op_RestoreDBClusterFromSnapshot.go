@@ -279,6 +279,7 @@ func (c *Client) RestoreDBClusterFromSnapshotRequest(input *RestoreDBClusterFrom
 	}
 
 	req := c.newRequest(op, input, &RestoreDBClusterFromSnapshotOutput{})
+
 	return RestoreDBClusterFromSnapshotRequest{Request: req, Input: input, Copy: c.RestoreDBClusterFromSnapshotRequest}
 }
 

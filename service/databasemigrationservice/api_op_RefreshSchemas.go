@@ -87,6 +87,7 @@ func (c *Client) RefreshSchemasRequest(input *RefreshSchemasInput) RefreshSchema
 	}
 
 	req := c.newRequest(op, input, &RefreshSchemasOutput{})
+
 	return RefreshSchemasRequest{Request: req, Input: input, Copy: c.RefreshSchemasRequest}
 }
 

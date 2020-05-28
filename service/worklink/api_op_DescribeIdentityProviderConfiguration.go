@@ -122,6 +122,7 @@ func (c *Client) DescribeIdentityProviderConfigurationRequest(input *DescribeIde
 	}
 
 	req := c.newRequest(op, input, &DescribeIdentityProviderConfigurationOutput{})
+
 	return DescribeIdentityProviderConfigurationRequest{Request: req, Input: input, Copy: c.DescribeIdentityProviderConfigurationRequest}
 }
 

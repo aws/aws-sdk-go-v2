@@ -139,6 +139,7 @@ func (c *Client) DescribeAffectedEntitiesForOrganizationRequest(input *DescribeA
 	}
 
 	req := c.newRequest(op, input, &DescribeAffectedEntitiesForOrganizationOutput{})
+
 	return DescribeAffectedEntitiesForOrganizationRequest{Request: req, Input: input, Copy: c.DescribeAffectedEntitiesForOrganizationRequest}
 }
 

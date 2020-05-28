@@ -110,6 +110,7 @@ func (c *Client) StartSchemaExtensionRequest(input *StartSchemaExtensionInput) S
 	}
 
 	req := c.newRequest(op, input, &StartSchemaExtensionOutput{})
+
 	return StartSchemaExtensionRequest{Request: req, Input: input, Copy: c.StartSchemaExtensionRequest}
 }
 

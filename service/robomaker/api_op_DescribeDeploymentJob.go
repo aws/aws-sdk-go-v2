@@ -205,6 +205,7 @@ func (c *Client) DescribeDeploymentJobRequest(input *DescribeDeploymentJobInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeDeploymentJobOutput{})
+
 	return DescribeDeploymentJobRequest{Request: req, Input: input, Copy: c.DescribeDeploymentJobRequest}
 }
 

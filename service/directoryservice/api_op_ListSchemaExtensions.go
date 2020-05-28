@@ -89,6 +89,7 @@ func (c *Client) ListSchemaExtensionsRequest(input *ListSchemaExtensionsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListSchemaExtensionsOutput{})
+
 	return ListSchemaExtensionsRequest{Request: req, Input: input, Copy: c.ListSchemaExtensionsRequest}
 }
 

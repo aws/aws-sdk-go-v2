@@ -152,6 +152,7 @@ func (c *Client) CreateSubscriptionDefinitionVersionRequest(input *CreateSubscri
 	}
 
 	req := c.newRequest(op, input, &CreateSubscriptionDefinitionVersionOutput{})
+
 	return CreateSubscriptionDefinitionVersionRequest{Request: req, Input: input, Copy: c.CreateSubscriptionDefinitionVersionRequest}
 }
 

@@ -205,6 +205,7 @@ func (c *Client) GetInsightRuleReportRequest(input *GetInsightRuleReportInput) G
 	}
 
 	req := c.newRequest(op, input, &GetInsightRuleReportOutput{})
+
 	return GetInsightRuleReportRequest{Request: req, Input: input, Copy: c.GetInsightRuleReportRequest}
 }
 

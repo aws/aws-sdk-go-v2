@@ -114,6 +114,7 @@ func (c *Client) DeleteApplicationCloudWatchLoggingOptionRequest(input *DeleteAp
 	}
 
 	req := c.newRequest(op, input, &DeleteApplicationCloudWatchLoggingOptionOutput{})
+
 	return DeleteApplicationCloudWatchLoggingOptionRequest{Request: req, Input: input, Copy: c.DeleteApplicationCloudWatchLoggingOptionRequest}
 }
 

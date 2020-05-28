@@ -117,6 +117,7 @@ func (c *Client) CreateResourceServerRequest(input *CreateResourceServerInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateResourceServerOutput{})
+
 	return CreateResourceServerRequest{Request: req, Input: input, Copy: c.CreateResourceServerRequest}
 }
 

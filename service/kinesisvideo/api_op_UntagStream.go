@@ -130,6 +130,7 @@ func (c *Client) UntagStreamRequest(input *UntagStreamInput) UntagStreamRequest 
 	}
 
 	req := c.newRequest(op, input, &UntagStreamOutput{})
+
 	return UntagStreamRequest{Request: req, Input: input, Copy: c.UntagStreamRequest}
 }
 

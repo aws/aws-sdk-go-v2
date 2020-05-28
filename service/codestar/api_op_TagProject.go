@@ -88,6 +88,7 @@ func (c *Client) TagProjectRequest(input *TagProjectInput) TagProjectRequest {
 	}
 
 	req := c.newRequest(op, input, &TagProjectOutput{})
+
 	return TagProjectRequest{Request: req, Input: input, Copy: c.TagProjectRequest}
 }
 

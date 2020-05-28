@@ -98,6 +98,7 @@ func (c *Client) DeleteBrokerRequest(input *DeleteBrokerInput) DeleteBrokerReque
 	}
 
 	req := c.newRequest(op, input, &DeleteBrokerOutput{})
+
 	return DeleteBrokerRequest{Request: req, Input: input, Copy: c.DeleteBrokerRequest}
 }
 

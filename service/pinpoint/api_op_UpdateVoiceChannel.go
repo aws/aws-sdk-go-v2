@@ -118,6 +118,7 @@ func (c *Client) UpdateVoiceChannelRequest(input *UpdateVoiceChannelInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateVoiceChannelOutput{})
+
 	return UpdateVoiceChannelRequest{Request: req, Input: input, Copy: c.UpdateVoiceChannelRequest}
 }
 

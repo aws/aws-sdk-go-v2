@@ -59,8 +59,8 @@ type StartSessionOutput struct {
 	//
 	// region represents the Region identifier for an AWS Region supported by AWS
 	// Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list
-	// of supported region values, see the Region column in Systems Manager Service
-	// Endpoints (http://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region)
+	// of supported region values, see the Region column in Systems Manager service
+	// endpoints (http://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region)
 	// in the AWS General Reference.
 	//
 	// session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.
@@ -87,7 +87,7 @@ const opStartSession = "StartSession"
 //
 // AWS CLI usage: start-session is an interactive command that requires the
 // Session Manager plugin to be installed on the client machine making the call.
-// For information, see Install the Session Manager Plugin for the AWS CLI (http://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)
+// For information, see Install the Session Manager plugin for the AWS CLI (https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)
 // in the AWS Systems Manager User Guide.
 //
 // AWS Tools for PowerShell usage: Start-SSMSession is not currently supported
@@ -113,6 +113,7 @@ func (c *Client) StartSessionRequest(input *StartSessionInput) StartSessionReque
 	}
 
 	req := c.newRequest(op, input, &StartSessionOutput{})
+
 	return StartSessionRequest{Request: req, Input: input, Copy: c.StartSessionRequest}
 }
 

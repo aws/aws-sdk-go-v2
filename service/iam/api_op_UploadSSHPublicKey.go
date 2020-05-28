@@ -117,6 +117,7 @@ func (c *Client) UploadSSHPublicKeyRequest(input *UploadSSHPublicKeyInput) Uploa
 	}
 
 	req := c.newRequest(op, input, &UploadSSHPublicKeyOutput{})
+
 	return UploadSSHPublicKeyRequest{Request: req, Input: input, Copy: c.UploadSSHPublicKeyRequest}
 }
 

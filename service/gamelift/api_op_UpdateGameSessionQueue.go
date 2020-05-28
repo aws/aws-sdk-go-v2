@@ -130,6 +130,7 @@ func (c *Client) UpdateGameSessionQueueRequest(input *UpdateGameSessionQueueInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateGameSessionQueueOutput{})
+
 	return UpdateGameSessionQueueRequest{Request: req, Input: input, Copy: c.UpdateGameSessionQueueRequest}
 }
 

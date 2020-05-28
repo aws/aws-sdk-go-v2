@@ -105,6 +105,7 @@ func (c *Client) ListFunctionDefinitionsRequest(input *ListFunctionDefinitionsIn
 	}
 
 	req := c.newRequest(op, input, &ListFunctionDefinitionsOutput{})
+
 	return ListFunctionDefinitionsRequest{Request: req, Input: input, Copy: c.ListFunctionDefinitionsRequest}
 }
 

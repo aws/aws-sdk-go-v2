@@ -63,8 +63,8 @@ type FailoverGlobalReplicationGroupOutput struct {
 	// only reads. The primary cluster automatically replicates updates to the secondary
 	// cluster.
 	//
-	//    * The GlobalReplicationGroupId represents the name of the Global Datastore,
-	//    which is what you use to associate a secondary cluster.
+	//    * The GlobalReplicationGroupIdSuffix represents the name of the Global
+	//    Datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *GlobalReplicationGroup `type:"structure"`
 }
 
@@ -78,7 +78,9 @@ const opFailoverGlobalReplicationGroup = "FailoverGlobalReplicationGroup"
 // FailoverGlobalReplicationGroupRequest returns a request value for making API operation for
 // Amazon ElastiCache.
 //
-// Used to failover the primary region to a selected secondary region.
+// Used to failover the primary region to a selected secondary region. The selected
+// secondary region will be come primary, and all other clusters will become
+// secondary.
 //
 //    // Example sending a request using FailoverGlobalReplicationGroupRequest.
 //    req := client.FailoverGlobalReplicationGroupRequest(params)
@@ -100,6 +102,7 @@ func (c *Client) FailoverGlobalReplicationGroupRequest(input *FailoverGlobalRepl
 	}
 
 	req := c.newRequest(op, input, &FailoverGlobalReplicationGroupOutput{})
+
 	return FailoverGlobalReplicationGroupRequest{Request: req, Input: input, Copy: c.FailoverGlobalReplicationGroupRequest}
 }
 

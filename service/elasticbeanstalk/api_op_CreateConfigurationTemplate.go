@@ -227,6 +227,7 @@ func (c *Client) CreateConfigurationTemplateRequest(input *CreateConfigurationTe
 	}
 
 	req := c.newRequest(op, input, &CreateConfigurationTemplateOutput{})
+
 	return CreateConfigurationTemplateRequest{Request: req, Input: input, Copy: c.CreateConfigurationTemplateRequest}
 }
 

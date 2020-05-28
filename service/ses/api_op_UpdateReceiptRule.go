@@ -96,6 +96,7 @@ func (c *Client) UpdateReceiptRuleRequest(input *UpdateReceiptRuleInput) UpdateR
 	}
 
 	req := c.newRequest(op, input, &UpdateReceiptRuleOutput{})
+
 	return UpdateReceiptRuleRequest{Request: req, Input: input, Copy: c.UpdateReceiptRuleRequest}
 }
 

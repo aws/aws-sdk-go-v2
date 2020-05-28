@@ -148,6 +148,7 @@ func (c *Client) ListRoutingProfilesRequest(input *ListRoutingProfilesInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListRoutingProfilesOutput{})
+
 	return ListRoutingProfilesRequest{Request: req, Input: input, Copy: c.ListRoutingProfilesRequest}
 }
 

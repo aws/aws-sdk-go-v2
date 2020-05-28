@@ -115,6 +115,7 @@ func (c *Client) GetQueryResultsRequest(input *GetQueryResultsInput) GetQueryRes
 	}
 
 	req := c.newRequest(op, input, &GetQueryResultsOutput{})
+
 	return GetQueryResultsRequest{Request: req, Input: input, Copy: c.GetQueryResultsRequest}
 }
 

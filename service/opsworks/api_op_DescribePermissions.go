@@ -80,6 +80,7 @@ func (c *Client) DescribePermissionsRequest(input *DescribePermissionsInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribePermissionsOutput{})
+
 	return DescribePermissionsRequest{Request: req, Input: input, Copy: c.DescribePermissionsRequest}
 }
 

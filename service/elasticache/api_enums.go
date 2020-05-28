@@ -245,6 +245,9 @@ const (
 	UpdateActionStatusStopping       UpdateActionStatus = "stopping"
 	UpdateActionStatusStopped        UpdateActionStatus = "stopped"
 	UpdateActionStatusComplete       UpdateActionStatus = "complete"
+	UpdateActionStatusScheduling     UpdateActionStatus = "scheduling"
+	UpdateActionStatusScheduled      UpdateActionStatus = "scheduled"
+	UpdateActionStatusNotApplicable  UpdateActionStatus = "not-applicable"
 )
 
 func (enum UpdateActionStatus) MarshalValue() (string, error) {

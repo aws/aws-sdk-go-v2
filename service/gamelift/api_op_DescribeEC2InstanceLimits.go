@@ -93,6 +93,7 @@ func (c *Client) DescribeEC2InstanceLimitsRequest(input *DescribeEC2InstanceLimi
 	}
 
 	req := c.newRequest(op, input, &DescribeEC2InstanceLimitsOutput{})
+
 	return DescribeEC2InstanceLimitsRequest{Request: req, Input: input, Copy: c.DescribeEC2InstanceLimitsRequest}
 }
 

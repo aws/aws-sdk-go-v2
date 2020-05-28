@@ -92,6 +92,7 @@ func (c *Client) ResolveRoomRequest(input *ResolveRoomInput) ResolveRoomRequest 
 	}
 
 	req := c.newRequest(op, input, &ResolveRoomOutput{})
+
 	return ResolveRoomRequest{Request: req, Input: input, Copy: c.ResolveRoomRequest}
 }
 

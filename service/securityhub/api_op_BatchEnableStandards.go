@@ -128,6 +128,7 @@ func (c *Client) BatchEnableStandardsRequest(input *BatchEnableStandardsInput) B
 	}
 
 	req := c.newRequest(op, input, &BatchEnableStandardsOutput{})
+
 	return BatchEnableStandardsRequest{Request: req, Input: input, Copy: c.BatchEnableStandardsRequest}
 }
 

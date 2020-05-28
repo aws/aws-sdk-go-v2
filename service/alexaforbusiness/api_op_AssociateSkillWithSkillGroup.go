@@ -76,6 +76,7 @@ func (c *Client) AssociateSkillWithSkillGroupRequest(input *AssociateSkillWithSk
 	}
 
 	req := c.newRequest(op, input, &AssociateSkillWithSkillGroupOutput{})
+
 	return AssociateSkillWithSkillGroupRequest{Request: req, Input: input, Copy: c.AssociateSkillWithSkillGroupRequest}
 }
 

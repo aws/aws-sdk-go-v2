@@ -179,6 +179,7 @@ func (c *Client) CreateObjectRequest(input *CreateObjectInput) CreateObjectReque
 	}
 
 	req := c.newRequest(op, input, &CreateObjectOutput{})
+
 	return CreateObjectRequest{Request: req, Input: input, Copy: c.CreateObjectRequest}
 }
 

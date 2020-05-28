@@ -94,6 +94,7 @@ func (c *Client) GetBlobRequest(input *GetBlobInput) GetBlobRequest {
 	}
 
 	req := c.newRequest(op, input, &GetBlobOutput{})
+
 	return GetBlobRequest{Request: req, Input: input, Copy: c.GetBlobRequest}
 }
 

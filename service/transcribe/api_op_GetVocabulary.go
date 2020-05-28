@@ -97,6 +97,7 @@ func (c *Client) GetVocabularyRequest(input *GetVocabularyInput) GetVocabularyRe
 	}
 
 	req := c.newRequest(op, input, &GetVocabularyOutput{})
+
 	return GetVocabularyRequest{Request: req, Input: input, Copy: c.GetVocabularyRequest}
 }
 

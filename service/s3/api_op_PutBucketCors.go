@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/checksum"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 	"github.com/aws/aws-sdk-go-v2/service/s3/internal/arn"
@@ -23,7 +24,7 @@ type PutBucketCorsInput struct {
 
 	// Describes the cross-origin access configuration for objects in an Amazon
 	// S3 bucket. For more information, see Enabling Cross-Origin Resource Sharing
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev//cors.html) in the Amazon
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the Amazon
 	// Simple Storage Service Developer Guide.
 	//
 	// CORSConfiguration is a required field
@@ -182,6 +183,12 @@ func (c *Client) PutBucketCorsRequest(input *PutBucketCorsInput) PutBucketCorsRe
 	req := c.newRequest(op, input, &PutBucketCorsOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
+	req.Handlers.Build.PushBackNamed(aws.NamedHandler{
+		Name: "contentMd5Handler",
+		Fn:   checksum.AddBodyContentMD5Handler,
+	})
+
 	return PutBucketCorsRequest{Request: req, Input: input, Copy: c.PutBucketCorsRequest}
 }
 

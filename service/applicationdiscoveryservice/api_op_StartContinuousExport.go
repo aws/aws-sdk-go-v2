@@ -73,6 +73,7 @@ func (c *Client) StartContinuousExportRequest(input *StartContinuousExportInput)
 	}
 
 	req := c.newRequest(op, input, &StartContinuousExportOutput{})
+
 	return StartContinuousExportRequest{Request: req, Input: input, Copy: c.StartContinuousExportRequest}
 }
 

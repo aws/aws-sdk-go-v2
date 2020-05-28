@@ -138,6 +138,7 @@ func (c *Client) GetOpenIdTokenForDeveloperIdentityRequest(input *GetOpenIdToken
 	}
 
 	req := c.newRequest(op, input, &GetOpenIdTokenForDeveloperIdentityOutput{})
+
 	return GetOpenIdTokenForDeveloperIdentityRequest{Request: req, Input: input, Copy: c.GetOpenIdTokenForDeveloperIdentityRequest}
 }
 

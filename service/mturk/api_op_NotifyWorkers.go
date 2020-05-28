@@ -100,6 +100,7 @@ func (c *Client) NotifyWorkersRequest(input *NotifyWorkersInput) NotifyWorkersRe
 	}
 
 	req := c.newRequest(op, input, &NotifyWorkersOutput{})
+
 	return NotifyWorkersRequest{Request: req, Input: input, Copy: c.NotifyWorkersRequest}
 }
 

@@ -103,6 +103,7 @@ func (c *Client) AssociateProductWithPortfolioRequest(input *AssociateProductWit
 	}
 
 	req := c.newRequest(op, input, &AssociateProductWithPortfolioOutput{})
+
 	return AssociateProductWithPortfolioRequest{Request: req, Input: input, Copy: c.AssociateProductWithPortfolioRequest}
 }
 

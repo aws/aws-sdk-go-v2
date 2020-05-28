@@ -89,6 +89,7 @@ func (c *Client) CreatePlacementGroupRequest(input *CreatePlacementGroupInput) C
 	}
 
 	req := c.newRequest(op, input, &CreatePlacementGroupOutput{})
+
 	return CreatePlacementGroupRequest{Request: req, Input: input, Copy: c.CreatePlacementGroupRequest}
 }
 

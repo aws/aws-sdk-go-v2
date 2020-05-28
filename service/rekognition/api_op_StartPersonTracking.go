@@ -120,6 +120,7 @@ func (c *Client) StartPersonTrackingRequest(input *StartPersonTrackingInput) Sta
 	}
 
 	req := c.newRequest(op, input, &StartPersonTrackingOutput{})
+
 	return StartPersonTrackingRequest{Request: req, Input: input, Copy: c.StartPersonTrackingRequest}
 }
 

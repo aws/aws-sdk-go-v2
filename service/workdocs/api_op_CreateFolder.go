@@ -129,6 +129,7 @@ func (c *Client) CreateFolderRequest(input *CreateFolderInput) CreateFolderReque
 	}
 
 	req := c.newRequest(op, input, &CreateFolderOutput{})
+
 	return CreateFolderRequest{Request: req, Input: input, Copy: c.CreateFolderRequest}
 }
 

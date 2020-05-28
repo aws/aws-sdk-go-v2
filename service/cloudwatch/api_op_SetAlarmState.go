@@ -123,6 +123,7 @@ func (c *Client) SetAlarmStateRequest(input *SetAlarmStateInput) SetAlarmStateRe
 	req := c.newRequest(op, input, &SetAlarmStateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetAlarmStateRequest{Request: req, Input: input, Copy: c.SetAlarmStateRequest}
 }
 

@@ -104,6 +104,7 @@ func (c *Client) GetMeetingRequest(input *GetMeetingInput) GetMeetingRequest {
 	}
 
 	req := c.newRequest(op, input, &GetMeetingOutput{})
+
 	return GetMeetingRequest{Request: req, Input: input, Copy: c.GetMeetingRequest}
 }
 

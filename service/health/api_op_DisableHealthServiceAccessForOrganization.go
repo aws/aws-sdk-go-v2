@@ -63,6 +63,7 @@ func (c *Client) DisableHealthServiceAccessForOrganizationRequest(input *Disable
 	req := c.newRequest(op, input, &DisableHealthServiceAccessForOrganizationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DisableHealthServiceAccessForOrganizationRequest{Request: req, Input: input, Copy: c.DisableHealthServiceAccessForOrganizationRequest}
 }
 

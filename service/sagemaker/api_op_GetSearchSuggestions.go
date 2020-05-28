@@ -86,6 +86,7 @@ func (c *Client) GetSearchSuggestionsRequest(input *GetSearchSuggestionsInput) G
 	}
 
 	req := c.newRequest(op, input, &GetSearchSuggestionsOutput{})
+
 	return GetSearchSuggestionsRequest{Request: req, Input: input, Copy: c.GetSearchSuggestionsRequest}
 }
 

@@ -86,6 +86,7 @@ func (c *Client) SubmitContainerStateChangeRequest(input *SubmitContainerStateCh
 	}
 
 	req := c.newRequest(op, input, &SubmitContainerStateChangeOutput{})
+
 	return SubmitContainerStateChangeRequest{Request: req, Input: input, Copy: c.SubmitContainerStateChangeRequest}
 }
 

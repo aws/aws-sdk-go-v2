@@ -126,6 +126,7 @@ func (c *Client) DescribeUsageLimitsRequest(input *DescribeUsageLimitsInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeUsageLimitsOutput{})
+
 	return DescribeUsageLimitsRequest{Request: req, Input: input, Copy: c.DescribeUsageLimitsRequest}
 }
 

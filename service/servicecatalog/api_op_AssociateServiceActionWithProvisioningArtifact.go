@@ -109,6 +109,7 @@ func (c *Client) AssociateServiceActionWithProvisioningArtifactRequest(input *As
 	}
 
 	req := c.newRequest(op, input, &AssociateServiceActionWithProvisioningArtifactOutput{})
+
 	return AssociateServiceActionWithProvisioningArtifactRequest{Request: req, Input: input, Copy: c.AssociateServiceActionWithProvisioningArtifactRequest}
 }
 

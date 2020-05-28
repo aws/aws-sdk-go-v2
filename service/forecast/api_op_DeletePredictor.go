@@ -79,6 +79,7 @@ func (c *Client) DeletePredictorRequest(input *DeletePredictorInput) DeletePredi
 	req := c.newRequest(op, input, &DeletePredictorOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeletePredictorRequest{Request: req, Input: input, Copy: c.DeletePredictorRequest}
 }
 

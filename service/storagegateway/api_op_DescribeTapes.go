@@ -122,6 +122,7 @@ func (c *Client) DescribeTapesRequest(input *DescribeTapesInput) DescribeTapesRe
 	}
 
 	req := c.newRequest(op, input, &DescribeTapesOutput{})
+
 	return DescribeTapesRequest{Request: req, Input: input, Copy: c.DescribeTapesRequest}
 }
 

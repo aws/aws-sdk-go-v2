@@ -77,6 +77,7 @@ func (c *Client) DeleteInstanceProfileRequest(input *DeleteInstanceProfileInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteInstanceProfileOutput{})
+
 	return DeleteInstanceProfileRequest{Request: req, Input: input, Copy: c.DeleteInstanceProfileRequest}
 }
 

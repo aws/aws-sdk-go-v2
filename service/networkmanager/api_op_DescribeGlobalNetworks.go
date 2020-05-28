@@ -146,6 +146,7 @@ func (c *Client) DescribeGlobalNetworksRequest(input *DescribeGlobalNetworksInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeGlobalNetworksOutput{})
+
 	return DescribeGlobalNetworksRequest{Request: req, Input: input, Copy: c.DescribeGlobalNetworksRequest}
 }
 

@@ -325,6 +325,7 @@ func (c *Client) UpdateStackSetRequest(input *UpdateStackSetInput) UpdateStackSe
 	}
 
 	req := c.newRequest(op, input, &UpdateStackSetOutput{})
+
 	return UpdateStackSetRequest{Request: req, Input: input, Copy: c.UpdateStackSetRequest}
 }
 

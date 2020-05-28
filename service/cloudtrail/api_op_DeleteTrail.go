@@ -79,6 +79,7 @@ func (c *Client) DeleteTrailRequest(input *DeleteTrailInput) DeleteTrailRequest 
 	}
 
 	req := c.newRequest(op, input, &DeleteTrailOutput{})
+
 	return DeleteTrailRequest{Request: req, Input: input, Copy: c.DeleteTrailRequest}
 }
 

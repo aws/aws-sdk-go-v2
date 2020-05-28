@@ -130,6 +130,7 @@ func (c *Client) UpdatePlacementRequest(input *UpdatePlacementInput) UpdatePlace
 	}
 
 	req := c.newRequest(op, input, &UpdatePlacementOutput{})
+
 	return UpdatePlacementRequest{Request: req, Input: input, Copy: c.UpdatePlacementRequest}
 }
 

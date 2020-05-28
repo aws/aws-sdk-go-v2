@@ -151,6 +151,7 @@ func (c *Client) DescribeLedgerRequest(input *DescribeLedgerInput) DescribeLedge
 	}
 
 	req := c.newRequest(op, input, &DescribeLedgerOutput{})
+
 	return DescribeLedgerRequest{Request: req, Input: input, Copy: c.DescribeLedgerRequest}
 }
 

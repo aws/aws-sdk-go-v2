@@ -190,6 +190,7 @@ func (c *Client) UpdateWebACLRequest(input *UpdateWebACLInput) UpdateWebACLReque
 	}
 
 	req := c.newRequest(op, input, &UpdateWebACLOutput{})
+
 	return UpdateWebACLRequest{Request: req, Input: input, Copy: c.UpdateWebACLRequest}
 }
 

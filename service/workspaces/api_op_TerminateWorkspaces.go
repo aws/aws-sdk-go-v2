@@ -96,6 +96,7 @@ func (c *Client) TerminateWorkspacesRequest(input *TerminateWorkspacesInput) Ter
 	}
 
 	req := c.newRequest(op, input, &TerminateWorkspacesOutput{})
+
 	return TerminateWorkspacesRequest{Request: req, Input: input, Copy: c.TerminateWorkspacesRequest}
 }
 

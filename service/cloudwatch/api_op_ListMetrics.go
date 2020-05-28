@@ -114,6 +114,7 @@ func (c *Client) ListMetricsRequest(input *ListMetricsInput) ListMetricsRequest 
 	}
 
 	req := c.newRequest(op, input, &ListMetricsOutput{})
+
 	return ListMetricsRequest{Request: req, Input: input, Copy: c.ListMetricsRequest}
 }
 

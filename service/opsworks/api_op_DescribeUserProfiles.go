@@ -65,6 +65,7 @@ func (c *Client) DescribeUserProfilesRequest(input *DescribeUserProfilesInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeUserProfilesOutput{})
+
 	return DescribeUserProfilesRequest{Request: req, Input: input, Copy: c.DescribeUserProfilesRequest}
 }
 

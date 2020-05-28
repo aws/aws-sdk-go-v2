@@ -109,6 +109,7 @@ func (c *Client) SelectRequest(input *SelectInput) SelectRequest {
 	}
 
 	req := c.newRequest(op, input, &SelectOutput{})
+
 	return SelectRequest{Request: req, Input: input, Copy: c.SelectRequest}
 }
 

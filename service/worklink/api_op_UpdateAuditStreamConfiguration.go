@@ -104,6 +104,7 @@ func (c *Client) UpdateAuditStreamConfigurationRequest(input *UpdateAuditStreamC
 	}
 
 	req := c.newRequest(op, input, &UpdateAuditStreamConfigurationOutput{})
+
 	return UpdateAuditStreamConfigurationRequest{Request: req, Input: input, Copy: c.UpdateAuditStreamConfigurationRequest}
 }
 

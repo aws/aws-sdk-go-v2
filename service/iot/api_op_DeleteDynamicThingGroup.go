@@ -102,6 +102,7 @@ func (c *Client) DeleteDynamicThingGroupRequest(input *DeleteDynamicThingGroupIn
 	}
 
 	req := c.newRequest(op, input, &DeleteDynamicThingGroupOutput{})
+
 	return DeleteDynamicThingGroupRequest{Request: req, Input: input, Copy: c.DeleteDynamicThingGroupRequest}
 }
 

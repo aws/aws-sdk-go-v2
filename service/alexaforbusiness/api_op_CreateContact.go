@@ -124,6 +124,7 @@ func (c *Client) CreateContactRequest(input *CreateContactInput) CreateContactRe
 	}
 
 	req := c.newRequest(op, input, &CreateContactOutput{})
+
 	return CreateContactRequest{Request: req, Input: input, Copy: c.CreateContactRequest}
 }
 

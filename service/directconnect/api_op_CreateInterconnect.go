@@ -195,6 +195,7 @@ func (c *Client) CreateInterconnectRequest(input *CreateInterconnectInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateInterconnectOutput{})
+
 	return CreateInterconnectRequest{Request: req, Input: input, Copy: c.CreateInterconnectRequest}
 }
 

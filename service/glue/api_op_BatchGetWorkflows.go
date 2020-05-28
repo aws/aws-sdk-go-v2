@@ -90,6 +90,7 @@ func (c *Client) BatchGetWorkflowsRequest(input *BatchGetWorkflowsInput) BatchGe
 	}
 
 	req := c.newRequest(op, input, &BatchGetWorkflowsOutput{})
+
 	return BatchGetWorkflowsRequest{Request: req, Input: input, Copy: c.BatchGetWorkflowsRequest}
 }
 

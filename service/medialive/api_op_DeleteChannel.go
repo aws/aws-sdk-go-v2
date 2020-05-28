@@ -244,6 +244,7 @@ func (c *Client) DeleteChannelRequest(input *DeleteChannelInput) DeleteChannelRe
 	}
 
 	req := c.newRequest(op, input, &DeleteChannelOutput{})
+
 	return DeleteChannelRequest{Request: req, Input: input, Copy: c.DeleteChannelRequest}
 }
 

@@ -631,12 +631,19 @@ const opCreateMultipartUpload = "CreateMultipartUpload"
 //    To grant permissions explicitly, use: x-amz-grant-read x-amz-grant-write
 //    x-amz-grant-read-acp x-amz-grant-write-acp x-amz-grant-full-control You
 //    specify each grantee as a type=value pair, where the type is one of the
-//    following: emailAddress – if the value specified is the email address
-//    of an AWS account id – if the value specified is the canonical user
-//    ID of an AWS account uri – if you are granting permissions to a predefined
-//    group For example, the following x-amz-grant-read header grants the AWS
-//    accounts identified by email addresses permissions to read object data
-//    and its metadata: x-amz-grant-read: emailAddress="xyz@amazon.com", emailAddress="abc@amazon.com"
+//    following: id – if the value specified is the canonical user ID of an
+//    AWS account uri – if you are granting permissions to a predefined group
+//    emailAddress – if the value specified is the email address of an AWS
+//    account Using email addresses to specify a grantee is only supported in
+//    the following AWS Regions: US East (N. Virginia) US West (N. California)
+//    US West (Oregon) Asia Pacific (Singapore) Asia Pacific (Sydney) Asia Pacific
+//    (Tokyo) Europe (Ireland) South America (São Paulo) For a list of all
+//    the Amazon S3 supported Regions and endpoints, see Regions and Endpoints
+//    (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in
+//    the AWS General Reference. For example, the following x-amz-grant-read
+//    header grants the AWS accounts identified by account IDs permissions to
+//    read object data and its metadata: x-amz-grant-read: id="11112222333",
+//    id="444455556666"
 //
 // The following operations are related to CreateMultipartUpload:
 //
@@ -670,6 +677,7 @@ func (c *Client) CreateMultipartUploadRequest(input *CreateMultipartUploadInput)
 	}
 
 	req := c.newRequest(op, input, &CreateMultipartUploadOutput{})
+
 	return CreateMultipartUploadRequest{Request: req, Input: input, Copy: c.CreateMultipartUploadRequest}
 }
 

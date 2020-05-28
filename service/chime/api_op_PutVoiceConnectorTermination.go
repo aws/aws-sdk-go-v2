@@ -121,6 +121,7 @@ func (c *Client) PutVoiceConnectorTerminationRequest(input *PutVoiceConnectorTer
 	}
 
 	req := c.newRequest(op, input, &PutVoiceConnectorTerminationOutput{})
+
 	return PutVoiceConnectorTerminationRequest{Request: req, Input: input, Copy: c.PutVoiceConnectorTerminationRequest}
 }
 

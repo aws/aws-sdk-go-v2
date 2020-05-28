@@ -110,6 +110,7 @@ func (c *Client) GetAggregateConfigRuleComplianceSummaryRequest(input *GetAggreg
 	}
 
 	req := c.newRequest(op, input, &GetAggregateConfigRuleComplianceSummaryOutput{})
+
 	return GetAggregateConfigRuleComplianceSummaryRequest{Request: req, Input: input, Copy: c.GetAggregateConfigRuleComplianceSummaryRequest}
 }
 

@@ -108,6 +108,7 @@ func (c *Client) ListPipelineExecutionsRequest(input *ListPipelineExecutionsInpu
 	}
 
 	req := c.newRequest(op, input, &ListPipelineExecutionsOutput{})
+
 	return ListPipelineExecutionsRequest{Request: req, Input: input, Copy: c.ListPipelineExecutionsRequest}
 }
 

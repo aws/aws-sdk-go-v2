@@ -96,6 +96,7 @@ func (c *Client) EnableKeyRequest(input *EnableKeyInput) EnableKeyRequest {
 	req := c.newRequest(op, input, &EnableKeyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return EnableKeyRequest{Request: req, Input: input, Copy: c.EnableKeyRequest}
 }
 

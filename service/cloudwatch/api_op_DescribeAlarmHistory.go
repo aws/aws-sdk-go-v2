@@ -116,6 +116,7 @@ func (c *Client) DescribeAlarmHistoryRequest(input *DescribeAlarmHistoryInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeAlarmHistoryOutput{})
+
 	return DescribeAlarmHistoryRequest{Request: req, Input: input, Copy: c.DescribeAlarmHistoryRequest}
 }
 

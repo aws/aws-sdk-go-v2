@@ -108,6 +108,7 @@ func (c *Client) ModifyVpcEndpointServiceConfigurationRequest(input *ModifyVpcEn
 	}
 
 	req := c.newRequest(op, input, &ModifyVpcEndpointServiceConfigurationOutput{})
+
 	return ModifyVpcEndpointServiceConfigurationRequest{Request: req, Input: input, Copy: c.ModifyVpcEndpointServiceConfigurationRequest}
 }
 

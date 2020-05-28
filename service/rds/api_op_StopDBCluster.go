@@ -88,6 +88,7 @@ func (c *Client) StopDBClusterRequest(input *StopDBClusterInput) StopDBClusterRe
 	}
 
 	req := c.newRequest(op, input, &StopDBClusterOutput{})
+
 	return StopDBClusterRequest{Request: req, Input: input, Copy: c.StopDBClusterRequest}
 }
 

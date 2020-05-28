@@ -101,6 +101,7 @@ func (c *Client) ListDeploymentGroupsRequest(input *ListDeploymentGroupsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListDeploymentGroupsOutput{})
+
 	return ListDeploymentGroupsRequest{Request: req, Input: input, Copy: c.ListDeploymentGroupsRequest}
 }
 

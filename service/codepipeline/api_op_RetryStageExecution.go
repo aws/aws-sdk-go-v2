@@ -115,6 +115,7 @@ func (c *Client) RetryStageExecutionRequest(input *RetryStageExecutionInput) Ret
 	}
 
 	req := c.newRequest(op, input, &RetryStageExecutionOutput{})
+
 	return RetryStageExecutionRequest{Request: req, Input: input, Copy: c.RetryStageExecutionRequest}
 }
 

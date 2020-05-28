@@ -279,6 +279,7 @@ func (c *Client) IndexFacesRequest(input *IndexFacesInput) IndexFacesRequest {
 	}
 
 	req := c.newRequest(op, input, &IndexFacesOutput{})
+
 	return IndexFacesRequest{Request: req, Input: input, Copy: c.IndexFacesRequest}
 }
 

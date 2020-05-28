@@ -12,6 +12,9 @@ import (
 type BatchDeleteDocumentInput struct {
 	_ struct{} `type:"structure"`
 
+	// Maps a particular data source sync job to a particular data source.
+	DataSourceSyncJobMetricTarget *DataSourceSyncJobMetricTarget `type:"structure"`
+
 	// One or more identifiers for documents to delete from the index.
 	//
 	// DocumentIdList is a required field
@@ -44,6 +47,11 @@ func (s *BatchDeleteDocumentInput) Validate() error {
 	}
 	if s.IndexId != nil && len(*s.IndexId) < 36 {
 		invalidParams.Add(aws.NewErrParamMinLen("IndexId", 36))
+	}
+	if s.DataSourceSyncJobMetricTarget != nil {
+		if err := s.DataSourceSyncJobMetricTarget.Validate(); err != nil {
+			invalidParams.AddNested("DataSourceSyncJobMetricTarget", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -98,6 +106,7 @@ func (c *Client) BatchDeleteDocumentRequest(input *BatchDeleteDocumentInput) Bat
 	}
 
 	req := c.newRequest(op, input, &BatchDeleteDocumentOutput{})
+
 	return BatchDeleteDocumentRequest{Request: req, Input: input, Copy: c.BatchDeleteDocumentRequest}
 }
 

@@ -159,6 +159,7 @@ func (c *Client) ListComponentBuildVersionsRequest(input *ListComponentBuildVers
 	}
 
 	req := c.newRequest(op, input, &ListComponentBuildVersionsOutput{})
+
 	return ListComponentBuildVersionsRequest{Request: req, Input: input, Copy: c.ListComponentBuildVersionsRequest}
 }
 

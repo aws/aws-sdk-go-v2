@@ -84,6 +84,7 @@ func (c *Client) DeregisterInstanceRequest(input *DeregisterInstanceInput) Dereg
 	req := c.newRequest(op, input, &DeregisterInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeregisterInstanceRequest{Request: req, Input: input, Copy: c.DeregisterInstanceRequest}
 }
 

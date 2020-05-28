@@ -104,7 +104,7 @@ type CreateBackupPlanOutput struct {
 	CreationDate *time.Time `type:"timestamp"`
 
 	// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most
-	// 1024 bytes long. They cannot be edited.
+	// 1,024 bytes long. They cannot be edited.
 	VersionId *string `type:"string"`
 }
 
@@ -174,6 +174,7 @@ func (c *Client) CreateBackupPlanRequest(input *CreateBackupPlanInput) CreateBac
 	}
 
 	req := c.newRequest(op, input, &CreateBackupPlanOutput{})
+
 	return CreateBackupPlanRequest{Request: req, Input: input, Copy: c.CreateBackupPlanRequest}
 }
 

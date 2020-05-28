@@ -114,6 +114,7 @@ func (c *Client) GetGroupCertificateConfigurationRequest(input *GetGroupCertific
 	}
 
 	req := c.newRequest(op, input, &GetGroupCertificateConfigurationOutput{})
+
 	return GetGroupCertificateConfigurationRequest{Request: req, Input: input, Copy: c.GetGroupCertificateConfigurationRequest}
 }
 

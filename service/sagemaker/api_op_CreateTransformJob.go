@@ -231,6 +231,7 @@ func (c *Client) CreateTransformJobRequest(input *CreateTransformJobInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateTransformJobOutput{})
+
 	return CreateTransformJobRequest{Request: req, Input: input, Copy: c.CreateTransformJobRequest}
 }
 

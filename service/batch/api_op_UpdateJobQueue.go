@@ -157,6 +157,7 @@ func (c *Client) UpdateJobQueueRequest(input *UpdateJobQueueInput) UpdateJobQueu
 	}
 
 	req := c.newRequest(op, input, &UpdateJobQueueOutput{})
+
 	return UpdateJobQueueRequest{Request: req, Input: input, Copy: c.UpdateJobQueueRequest}
 }
 

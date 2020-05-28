@@ -102,6 +102,7 @@ func (c *Client) ProvisionByoipCidrRequest(input *ProvisionByoipCidrInput) Provi
 	}
 
 	req := c.newRequest(op, input, &ProvisionByoipCidrOutput{})
+
 	return ProvisionByoipCidrRequest{Request: req, Input: input, Copy: c.ProvisionByoipCidrRequest}
 }
 

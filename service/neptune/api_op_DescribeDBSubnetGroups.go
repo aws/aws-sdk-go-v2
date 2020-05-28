@@ -109,6 +109,7 @@ func (c *Client) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeDBSubnetGroupsOutput{})
+
 	return DescribeDBSubnetGroupsRequest{Request: req, Input: input, Copy: c.DescribeDBSubnetGroupsRequest}
 }
 

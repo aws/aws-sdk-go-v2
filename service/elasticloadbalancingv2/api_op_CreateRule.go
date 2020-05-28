@@ -146,6 +146,7 @@ func (c *Client) CreateRuleRequest(input *CreateRuleInput) CreateRuleRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateRuleOutput{})
+
 	return CreateRuleRequest{Request: req, Input: input, Copy: c.CreateRuleRequest}
 }
 

@@ -289,6 +289,7 @@ func (c *Client) CreateDeploymentStrategyRequest(input *CreateDeploymentStrategy
 	}
 
 	req := c.newRequest(op, input, &CreateDeploymentStrategyOutput{})
+
 	return CreateDeploymentStrategyRequest{Request: req, Input: input, Copy: c.CreateDeploymentStrategyRequest}
 }
 

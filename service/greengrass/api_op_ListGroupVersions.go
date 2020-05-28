@@ -128,6 +128,7 @@ func (c *Client) ListGroupVersionsRequest(input *ListGroupVersionsInput) ListGro
 	}
 
 	req := c.newRequest(op, input, &ListGroupVersionsOutput{})
+
 	return ListGroupVersionsRequest{Request: req, Input: input, Copy: c.ListGroupVersionsRequest}
 }
 

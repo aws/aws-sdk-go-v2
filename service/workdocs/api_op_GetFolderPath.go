@@ -160,6 +160,7 @@ func (c *Client) GetFolderPathRequest(input *GetFolderPathInput) GetFolderPathRe
 	}
 
 	req := c.newRequest(op, input, &GetFolderPathOutput{})
+
 	return GetFolderPathRequest{Request: req, Input: input, Copy: c.GetFolderPathRequest}
 }
 

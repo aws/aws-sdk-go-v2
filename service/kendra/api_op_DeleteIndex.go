@@ -82,6 +82,7 @@ func (c *Client) DeleteIndexRequest(input *DeleteIndexInput) DeleteIndexRequest 
 	req := c.newRequest(op, input, &DeleteIndexOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteIndexRequest{Request: req, Input: input, Copy: c.DeleteIndexRequest}
 }
 

@@ -116,6 +116,7 @@ func (c *Client) ModifyUsageLimitRequest(input *ModifyUsageLimitInput) ModifyUsa
 	}
 
 	req := c.newRequest(op, input, &ModifyUsageLimitOutput{})
+
 	return ModifyUsageLimitRequest{Request: req, Input: input, Copy: c.ModifyUsageLimitRequest}
 }
 

@@ -97,6 +97,7 @@ func (c *Client) DisableTopicRuleRequest(input *DisableTopicRuleInput) DisableTo
 	req := c.newRequest(op, input, &DisableTopicRuleOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DisableTopicRuleRequest{Request: req, Input: input, Copy: c.DisableTopicRuleRequest}
 }
 

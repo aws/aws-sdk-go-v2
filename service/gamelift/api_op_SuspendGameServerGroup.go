@@ -130,6 +130,7 @@ func (c *Client) SuspendGameServerGroupRequest(input *SuspendGameServerGroupInpu
 	}
 
 	req := c.newRequest(op, input, &SuspendGameServerGroupOutput{})
+
 	return SuspendGameServerGroupRequest{Request: req, Input: input, Copy: c.SuspendGameServerGroupRequest}
 }
 

@@ -150,6 +150,7 @@ func (c *Client) ListBackupsRequest(input *ListBackupsInput) ListBackupsRequest 
 			Fn:   de.Handler,
 		})
 	}
+
 	return ListBackupsRequest{Request: req, Input: input, Copy: c.ListBackupsRequest}
 }
 

@@ -138,6 +138,7 @@ func (c *Client) GetAggregateComplianceDetailsByConfigRuleRequest(input *GetAggr
 	}
 
 	req := c.newRequest(op, input, &GetAggregateComplianceDetailsByConfigRuleOutput{})
+
 	return GetAggregateComplianceDetailsByConfigRuleRequest{Request: req, Input: input, Copy: c.GetAggregateComplianceDetailsByConfigRuleRequest}
 }
 

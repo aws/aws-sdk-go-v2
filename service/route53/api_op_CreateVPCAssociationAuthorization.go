@@ -152,6 +152,7 @@ func (c *Client) CreateVPCAssociationAuthorizationRequest(input *CreateVPCAssoci
 	}
 
 	req := c.newRequest(op, input, &CreateVPCAssociationAuthorizationOutput{})
+
 	return CreateVPCAssociationAuthorizationRequest{Request: req, Input: input, Copy: c.CreateVPCAssociationAuthorizationRequest}
 }
 

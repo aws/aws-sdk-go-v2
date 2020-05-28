@@ -133,6 +133,7 @@ func (c *Client) GetSegmentImportJobsRequest(input *GetSegmentImportJobsInput) G
 	}
 
 	req := c.newRequest(op, input, &GetSegmentImportJobsOutput{})
+
 	return GetSegmentImportJobsRequest{Request: req, Input: input, Copy: c.GetSegmentImportJobsRequest}
 }
 

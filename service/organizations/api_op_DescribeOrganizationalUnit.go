@@ -85,6 +85,7 @@ func (c *Client) DescribeOrganizationalUnitRequest(input *DescribeOrganizational
 	}
 
 	req := c.newRequest(op, input, &DescribeOrganizationalUnitOutput{})
+
 	return DescribeOrganizationalUnitRequest{Request: req, Input: input, Copy: c.DescribeOrganizationalUnitRequest}
 }
 

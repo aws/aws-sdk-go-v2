@@ -95,13 +95,15 @@ const opCreateUserProfile = "CreateUserProfile"
 // CreateUserProfileRequest returns a request value for making API operation for
 // Amazon SageMaker Service.
 //
-// Creates a new user profile. A user profile represents a single user within
-// a Domain, and is the main way to reference a "person" for the purposes of
-// sharing, reporting and other user-oriented features. This entity is created
-// during on-boarding. If an administrator invites a person by email or imports
-// them from SSO, a new UserProfile is automatically created. This entity is
-// the primary holder of settings for an individual user and has a reference
-// to the user's private Amazon Elastic File System (EFS) home directory.
+// Creates a user profile. A user profile represents a single user within a
+// Domain, and is the main way to reference a "person" for the purposes of sharing,
+// reporting and other user-oriented features. This entity is created during
+// on-boarding to Amazon SageMaker Studio. If an administrator invites a person
+// by email or imports them from SSO, a UserProfile is automatically created.
+//
+// This entity is the primary holder of settings for an individual user and,
+// through the domain, has a reference to the user's private Amazon Elastic
+// File System (EFS) home directory.
 //
 //    // Example sending a request using CreateUserProfileRequest.
 //    req := client.CreateUserProfileRequest(params)
@@ -123,6 +125,7 @@ func (c *Client) CreateUserProfileRequest(input *CreateUserProfileInput) CreateU
 	}
 
 	req := c.newRequest(op, input, &CreateUserProfileOutput{})
+
 	return CreateUserProfileRequest{Request: req, Input: input, Copy: c.CreateUserProfileRequest}
 }
 

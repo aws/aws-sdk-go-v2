@@ -139,6 +139,7 @@ func (c *Client) CreateListenerRequest(input *CreateListenerInput) CreateListene
 	}
 
 	req := c.newRequest(op, input, &CreateListenerOutput{})
+
 	return CreateListenerRequest{Request: req, Input: input, Copy: c.CreateListenerRequest}
 }
 

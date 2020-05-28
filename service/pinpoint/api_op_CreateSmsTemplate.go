@@ -117,6 +117,7 @@ func (c *Client) CreateSmsTemplateRequest(input *CreateSmsTemplateInput) CreateS
 	}
 
 	req := c.newRequest(op, input, &CreateSmsTemplateOutput{})
+
 	return CreateSmsTemplateRequest{Request: req, Input: input, Copy: c.CreateSmsTemplateRequest}
 }
 

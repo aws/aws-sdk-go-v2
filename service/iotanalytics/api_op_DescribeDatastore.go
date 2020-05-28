@@ -125,6 +125,7 @@ func (c *Client) DescribeDatastoreRequest(input *DescribeDatastoreInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeDatastoreOutput{})
+
 	return DescribeDatastoreRequest{Request: req, Input: input, Copy: c.DescribeDatastoreRequest}
 }
 

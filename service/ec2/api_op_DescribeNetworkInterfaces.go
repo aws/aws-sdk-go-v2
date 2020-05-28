@@ -209,6 +209,7 @@ func (c *Client) DescribeNetworkInterfacesRequest(input *DescribeNetworkInterfac
 	}
 
 	req := c.newRequest(op, input, &DescribeNetworkInterfacesOutput{})
+
 	return DescribeNetworkInterfacesRequest{Request: req, Input: input, Copy: c.DescribeNetworkInterfacesRequest}
 }
 

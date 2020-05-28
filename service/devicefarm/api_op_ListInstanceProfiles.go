@@ -82,6 +82,7 @@ func (c *Client) ListInstanceProfilesRequest(input *ListInstanceProfilesInput) L
 	}
 
 	req := c.newRequest(op, input, &ListInstanceProfilesOutput{})
+
 	return ListInstanceProfilesRequest{Request: req, Input: input, Copy: c.ListInstanceProfilesRequest}
 }
 

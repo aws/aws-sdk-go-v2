@@ -89,6 +89,7 @@ func (c *Client) DeleteDetectorVersionRequest(input *DeleteDetectorVersionInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteDetectorVersionOutput{})
+
 	return DeleteDetectorVersionRequest{Request: req, Input: input, Copy: c.DeleteDetectorVersionRequest}
 }
 

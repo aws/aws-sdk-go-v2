@@ -129,6 +129,7 @@ func (c *Client) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest 
 	}
 
 	req := c.newRequest(op, input, &ListStreamsOutput{})
+
 	return ListStreamsRequest{Request: req, Input: input, Copy: c.ListStreamsRequest}
 }
 

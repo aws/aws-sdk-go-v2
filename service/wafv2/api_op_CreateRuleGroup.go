@@ -185,6 +185,7 @@ func (c *Client) CreateRuleGroupRequest(input *CreateRuleGroupInput) CreateRuleG
 	}
 
 	req := c.newRequest(op, input, &CreateRuleGroupOutput{})
+
 	return CreateRuleGroupRequest{Request: req, Input: input, Copy: c.CreateRuleGroupRequest}
 }
 

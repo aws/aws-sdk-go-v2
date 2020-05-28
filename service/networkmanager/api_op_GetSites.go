@@ -158,6 +158,7 @@ func (c *Client) GetSitesRequest(input *GetSitesInput) GetSitesRequest {
 	}
 
 	req := c.newRequest(op, input, &GetSitesOutput{})
+
 	return GetSitesRequest{Request: req, Input: input, Copy: c.GetSitesRequest}
 }
 

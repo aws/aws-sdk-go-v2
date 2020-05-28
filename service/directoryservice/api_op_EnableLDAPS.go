@@ -82,6 +82,7 @@ func (c *Client) EnableLDAPSRequest(input *EnableLDAPSInput) EnableLDAPSRequest 
 	}
 
 	req := c.newRequest(op, input, &EnableLDAPSOutput{})
+
 	return EnableLDAPSRequest{Request: req, Input: input, Copy: c.EnableLDAPSRequest}
 }
 

@@ -92,6 +92,7 @@ func (c *Client) UpdateComponentRequest(input *UpdateComponentInput) UpdateCompo
 	}
 
 	req := c.newRequest(op, input, &UpdateComponentOutput{})
+
 	return UpdateComponentRequest{Request: req, Input: input, Copy: c.UpdateComponentRequest}
 }
 

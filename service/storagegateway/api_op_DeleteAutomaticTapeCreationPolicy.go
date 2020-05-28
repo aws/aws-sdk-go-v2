@@ -83,6 +83,7 @@ func (c *Client) DeleteAutomaticTapeCreationPolicyRequest(input *DeleteAutomatic
 	}
 
 	req := c.newRequest(op, input, &DeleteAutomaticTapeCreationPolicyOutput{})
+
 	return DeleteAutomaticTapeCreationPolicyRequest{Request: req, Input: input, Copy: c.DeleteAutomaticTapeCreationPolicyRequest}
 }
 

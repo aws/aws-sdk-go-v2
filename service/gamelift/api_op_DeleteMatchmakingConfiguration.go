@@ -98,6 +98,7 @@ func (c *Client) DeleteMatchmakingConfigurationRequest(input *DeleteMatchmakingC
 	}
 
 	req := c.newRequest(op, input, &DeleteMatchmakingConfigurationOutput{})
+
 	return DeleteMatchmakingConfigurationRequest{Request: req, Input: input, Copy: c.DeleteMatchmakingConfigurationRequest}
 }
 

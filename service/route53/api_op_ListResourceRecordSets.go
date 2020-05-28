@@ -318,6 +318,7 @@ func (c *Client) ListResourceRecordSetsRequest(input *ListResourceRecordSetsInpu
 	}
 
 	req := c.newRequest(op, input, &ListResourceRecordSetsOutput{})
+
 	return ListResourceRecordSetsRequest{Request: req, Input: input, Copy: c.ListResourceRecordSetsRequest}
 }
 

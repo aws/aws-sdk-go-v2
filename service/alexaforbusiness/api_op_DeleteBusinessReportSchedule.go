@@ -74,6 +74,7 @@ func (c *Client) DeleteBusinessReportScheduleRequest(input *DeleteBusinessReport
 	}
 
 	req := c.newRequest(op, input, &DeleteBusinessReportScheduleOutput{})
+
 	return DeleteBusinessReportScheduleRequest{Request: req, Input: input, Copy: c.DeleteBusinessReportScheduleRequest}
 }
 

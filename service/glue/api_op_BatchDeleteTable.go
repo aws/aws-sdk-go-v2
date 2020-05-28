@@ -105,6 +105,7 @@ func (c *Client) BatchDeleteTableRequest(input *BatchDeleteTableInput) BatchDele
 	}
 
 	req := c.newRequest(op, input, &BatchDeleteTableOutput{})
+
 	return BatchDeleteTableRequest{Request: req, Input: input, Copy: c.BatchDeleteTableRequest}
 }
 

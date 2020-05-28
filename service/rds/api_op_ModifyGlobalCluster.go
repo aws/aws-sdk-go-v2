@@ -90,6 +90,7 @@ func (c *Client) ModifyGlobalClusterRequest(input *ModifyGlobalClusterInput) Mod
 	}
 
 	req := c.newRequest(op, input, &ModifyGlobalClusterOutput{})
+
 	return ModifyGlobalClusterRequest{Request: req, Input: input, Copy: c.ModifyGlobalClusterRequest}
 }
 

@@ -111,6 +111,7 @@ func (c *Client) StartFleetActionsRequest(input *StartFleetActionsInput) StartFl
 	}
 
 	req := c.newRequest(op, input, &StartFleetActionsOutput{})
+
 	return StartFleetActionsRequest{Request: req, Input: input, Copy: c.StartFleetActionsRequest}
 }
 

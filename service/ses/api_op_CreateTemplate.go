@@ -85,6 +85,7 @@ func (c *Client) CreateTemplateRequest(input *CreateTemplateInput) CreateTemplat
 	}
 
 	req := c.newRequest(op, input, &CreateTemplateOutput{})
+
 	return CreateTemplateRequest{Request: req, Input: input, Copy: c.CreateTemplateRequest}
 }
 

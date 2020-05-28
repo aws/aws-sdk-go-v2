@@ -268,6 +268,7 @@ func (c *Client) CreateIntegrationResponseRequest(input *CreateIntegrationRespon
 	}
 
 	req := c.newRequest(op, input, &CreateIntegrationResponseOutput{})
+
 	return CreateIntegrationResponseRequest{Request: req, Input: input, Copy: c.CreateIntegrationResponseRequest}
 }
 

@@ -100,6 +100,7 @@ func (c *Client) DescribeClusterOperationRequest(input *DescribeClusterOperation
 	}
 
 	req := c.newRequest(op, input, &DescribeClusterOperationOutput{})
+
 	return DescribeClusterOperationRequest{Request: req, Input: input, Copy: c.DescribeClusterOperationRequest}
 }
 

@@ -141,6 +141,7 @@ func (c *Client) DeleteJobRequest(input *DeleteJobInput) DeleteJobRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteJobOutput{})
+
 	return DeleteJobRequest{Request: req, Input: input, Copy: c.DeleteJobRequest}
 }
 

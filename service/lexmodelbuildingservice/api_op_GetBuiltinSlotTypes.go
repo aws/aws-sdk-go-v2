@@ -159,6 +159,7 @@ func (c *Client) GetBuiltinSlotTypesRequest(input *GetBuiltinSlotTypesInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetBuiltinSlotTypesOutput{})
+
 	return GetBuiltinSlotTypesRequest{Request: req, Input: input, Copy: c.GetBuiltinSlotTypesRequest}
 }
 

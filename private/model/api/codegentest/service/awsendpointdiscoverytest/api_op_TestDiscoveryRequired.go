@@ -76,6 +76,7 @@ func (c *Client) TestDiscoveryRequiredRequest(input *TestDiscoveryRequiredInput)
 			Fn:   de.Handler,
 		})
 	}
+
 	return TestDiscoveryRequiredRequest{Request: req, Input: input, Copy: c.TestDiscoveryRequiredRequest}
 }
 

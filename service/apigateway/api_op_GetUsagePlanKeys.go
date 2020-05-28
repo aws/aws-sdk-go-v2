@@ -155,6 +155,7 @@ func (c *Client) GetUsagePlanKeysRequest(input *GetUsagePlanKeysInput) GetUsageP
 	}
 
 	req := c.newRequest(op, input, &GetUsagePlanKeysOutput{})
+
 	return GetUsagePlanKeysRequest{Request: req, Input: input, Copy: c.GetUsagePlanKeysRequest}
 }
 

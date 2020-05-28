@@ -126,6 +126,7 @@ func (c *Client) GetIntrospectionSchemaRequest(input *GetIntrospectionSchemaInpu
 	}
 
 	req := c.newRequest(op, input, &GetIntrospectionSchemaOutput{})
+
 	return GetIntrospectionSchemaRequest{Request: req, Input: input, Copy: c.GetIntrospectionSchemaRequest}
 }
 

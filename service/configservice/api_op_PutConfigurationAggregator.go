@@ -117,6 +117,7 @@ func (c *Client) PutConfigurationAggregatorRequest(input *PutConfigurationAggreg
 	}
 
 	req := c.newRequest(op, input, &PutConfigurationAggregatorOutput{})
+
 	return PutConfigurationAggregatorRequest{Request: req, Input: input, Copy: c.PutConfigurationAggregatorRequest}
 }
 

@@ -141,6 +141,7 @@ func (c *Client) GetDocumentRequest(input *GetDocumentInput) GetDocumentRequest 
 	}
 
 	req := c.newRequest(op, input, &GetDocumentOutput{})
+
 	return GetDocumentRequest{Request: req, Input: input, Copy: c.GetDocumentRequest}
 }
 

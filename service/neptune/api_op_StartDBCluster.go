@@ -80,6 +80,7 @@ func (c *Client) StartDBClusterRequest(input *StartDBClusterInput) StartDBCluste
 	}
 
 	req := c.newRequest(op, input, &StartDBClusterOutput{})
+
 	return StartDBClusterRequest{Request: req, Input: input, Copy: c.StartDBClusterRequest}
 }
 

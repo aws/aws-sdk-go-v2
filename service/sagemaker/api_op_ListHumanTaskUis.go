@@ -102,6 +102,7 @@ func (c *Client) ListHumanTaskUisRequest(input *ListHumanTaskUisInput) ListHuman
 	}
 
 	req := c.newRequest(op, input, &ListHumanTaskUisOutput{})
+
 	return ListHumanTaskUisRequest{Request: req, Input: input, Copy: c.ListHumanTaskUisRequest}
 }
 

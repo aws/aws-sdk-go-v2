@@ -110,6 +110,7 @@ func (c *Client) GetCompatibleElasticsearchVersionsRequest(input *GetCompatibleE
 	}
 
 	req := c.newRequest(op, input, &GetCompatibleElasticsearchVersionsOutput{})
+
 	return GetCompatibleElasticsearchVersionsRequest{Request: req, Input: input, Copy: c.GetCompatibleElasticsearchVersionsRequest}
 }
 

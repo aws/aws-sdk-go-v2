@@ -25,12 +25,6 @@ type CreateVocabularyInput struct {
 	// vocabulary. The URI must be in the same region as the API endpoint that you
 	// are calling. The general form is
 	//
-	// https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
-	//
-	// For example:
-	//
-	// https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt
-	//
 	// For more information about S3 object names, see Object Keys (http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
 	// in the Amazon S3 Developer Guide.
 	//
@@ -38,7 +32,8 @@ type CreateVocabularyInput struct {
 	VocabularyFileUri *string `min:"1" type:"string"`
 
 	// The name of the vocabulary. The name must be unique within an AWS account.
-	// The name is case-sensitive.
+	// The name is case-sensitive. If you try to create a vocabulary with the same
+	// name as a previous vocabulary you will receive a ConflictException error.
 	//
 	// VocabularyName is a required field
 	VocabularyName *string `min:"1" type:"string" required:"true"`
@@ -126,6 +121,7 @@ func (c *Client) CreateVocabularyRequest(input *CreateVocabularyInput) CreateVoc
 	}
 
 	req := c.newRequest(op, input, &CreateVocabularyOutput{})
+
 	return CreateVocabularyRequest{Request: req, Input: input, Copy: c.CreateVocabularyRequest}
 }
 

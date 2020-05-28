@@ -131,6 +131,7 @@ func (c *Client) RecordActivityTaskHeartbeatRequest(input *RecordActivityTaskHea
 	}
 
 	req := c.newRequest(op, input, &RecordActivityTaskHeartbeatOutput{})
+
 	return RecordActivityTaskHeartbeatRequest{Request: req, Input: input, Copy: c.RecordActivityTaskHeartbeatRequest}
 }
 

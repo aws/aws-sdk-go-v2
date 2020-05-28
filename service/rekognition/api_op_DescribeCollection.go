@@ -98,6 +98,7 @@ func (c *Client) DescribeCollectionRequest(input *DescribeCollectionInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeCollectionOutput{})
+
 	return DescribeCollectionRequest{Request: req, Input: input, Copy: c.DescribeCollectionRequest}
 }
 

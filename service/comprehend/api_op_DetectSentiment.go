@@ -94,6 +94,7 @@ func (c *Client) DetectSentimentRequest(input *DetectSentimentInput) DetectSenti
 	}
 
 	req := c.newRequest(op, input, &DetectSentimentOutput{})
+
 	return DetectSentimentRequest{Request: req, Input: input, Copy: c.DetectSentimentRequest}
 }
 

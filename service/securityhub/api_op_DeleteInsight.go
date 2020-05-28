@@ -103,6 +103,7 @@ func (c *Client) DeleteInsightRequest(input *DeleteInsightInput) DeleteInsightRe
 	}
 
 	req := c.newRequest(op, input, &DeleteInsightOutput{})
+
 	return DeleteInsightRequest{Request: req, Input: input, Copy: c.DeleteInsightRequest}
 }
 

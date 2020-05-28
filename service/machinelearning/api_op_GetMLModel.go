@@ -225,6 +225,7 @@ func (c *Client) GetMLModelRequest(input *GetMLModelInput) GetMLModelRequest {
 	}
 
 	req := c.newRequest(op, input, &GetMLModelOutput{})
+
 	return GetMLModelRequest{Request: req, Input: input, Copy: c.GetMLModelRequest}
 }
 

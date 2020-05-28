@@ -147,6 +147,7 @@ func (c *Client) BatchReadRequest(input *BatchReadInput) BatchReadRequest {
 	}
 
 	req := c.newRequest(op, input, &BatchReadOutput{})
+
 	return BatchReadRequest{Request: req, Input: input, Copy: c.BatchReadRequest}
 }
 

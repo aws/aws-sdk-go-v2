@@ -95,6 +95,7 @@ func (c *Client) UpdatePullRequestApprovalStateRequest(input *UpdatePullRequestA
 	req := c.newRequest(op, input, &UpdatePullRequestApprovalStateOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdatePullRequestApprovalStateRequest{Request: req, Input: input, Copy: c.UpdatePullRequestApprovalStateRequest}
 }
 

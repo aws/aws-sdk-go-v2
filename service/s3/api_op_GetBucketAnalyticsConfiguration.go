@@ -158,6 +158,7 @@ func (c *Client) GetBucketAnalyticsConfigurationRequest(input *GetBucketAnalytic
 	}
 
 	req := c.newRequest(op, input, &GetBucketAnalyticsConfigurationOutput{})
+
 	return GetBucketAnalyticsConfigurationRequest{Request: req, Input: input, Copy: c.GetBucketAnalyticsConfigurationRequest}
 }
 

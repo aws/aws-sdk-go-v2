@@ -181,6 +181,7 @@ func (c *Client) UpdateRouteRequest(input *UpdateRouteInput) UpdateRouteRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateRouteOutput{})
+
 	return UpdateRouteRequest{Request: req, Input: input, Copy: c.UpdateRouteRequest}
 }
 

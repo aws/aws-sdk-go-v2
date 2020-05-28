@@ -102,6 +102,7 @@ func (c *Client) GetVoiceConnectorTerminationRequest(input *GetVoiceConnectorTer
 	}
 
 	req := c.newRequest(op, input, &GetVoiceConnectorTerminationOutput{})
+
 	return GetVoiceConnectorTerminationRequest{Request: req, Input: input, Copy: c.GetVoiceConnectorTerminationRequest}
 }
 

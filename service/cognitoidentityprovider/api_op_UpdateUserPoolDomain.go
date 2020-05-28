@@ -144,6 +144,7 @@ func (c *Client) UpdateUserPoolDomainRequest(input *UpdateUserPoolDomainInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateUserPoolDomainOutput{})
+
 	return UpdateUserPoolDomainRequest{Request: req, Input: input, Copy: c.UpdateUserPoolDomainRequest}
 }
 

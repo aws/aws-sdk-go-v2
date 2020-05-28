@@ -19,8 +19,7 @@ type DisableMetricsCollectionInput struct {
 	// AutoScalingGroupName is a required field
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
-	// One or more of the following metrics. If you omit this parameter, all metrics
-	// are disabled.
+	// Specifies one or more of the following metrics:
 	//
 	//    * GroupMinSize
 	//
@@ -37,6 +36,18 @@ type DisableMetricsCollectionInput struct {
 	//    * GroupTerminatingInstances
 	//
 	//    * GroupTotalInstances
+	//
+	//    * GroupInServiceCapacity
+	//
+	//    * GroupPendingCapacity
+	//
+	//    * GroupStandbyCapacity
+	//
+	//    * GroupTerminatingCapacity
+	//
+	//    * GroupTotalCapacity
+	//
+	// If you omit this parameter, all metrics are disabled.
 	Metrics []string `type:"list"`
 }
 
@@ -100,6 +111,7 @@ func (c *Client) DisableMetricsCollectionRequest(input *DisableMetricsCollection
 	req := c.newRequest(op, input, &DisableMetricsCollectionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DisableMetricsCollectionRequest{Request: req, Input: input, Copy: c.DisableMetricsCollectionRequest}
 }
 

@@ -113,6 +113,7 @@ func (c *Client) ListDelegatedAdministratorsRequest(input *ListDelegatedAdminist
 	}
 
 	req := c.newRequest(op, input, &ListDelegatedAdministratorsOutput{})
+
 	return ListDelegatedAdministratorsRequest{Request: req, Input: input, Copy: c.ListDelegatedAdministratorsRequest}
 }
 

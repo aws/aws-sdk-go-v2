@@ -182,6 +182,7 @@ func (c *Client) PutRecordRequest(input *PutRecordInput) PutRecordRequest {
 	}
 
 	req := c.newRequest(op, input, &PutRecordOutput{})
+
 	return PutRecordRequest{Request: req, Input: input, Copy: c.PutRecordRequest}
 }
 

@@ -179,6 +179,7 @@ func (c *Client) PutBucketMetricsConfigurationRequest(input *PutBucketMetricsCon
 	req := c.newRequest(op, input, &PutBucketMetricsConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutBucketMetricsConfigurationRequest{Request: req, Input: input, Copy: c.PutBucketMetricsConfigurationRequest}
 }
 

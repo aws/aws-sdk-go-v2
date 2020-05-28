@@ -125,6 +125,7 @@ func (c *Client) DescribeTableStatisticsRequest(input *DescribeTableStatisticsIn
 	}
 
 	req := c.newRequest(op, input, &DescribeTableStatisticsOutput{})
+
 	return DescribeTableStatisticsRequest{Request: req, Input: input, Copy: c.DescribeTableStatisticsRequest}
 }
 

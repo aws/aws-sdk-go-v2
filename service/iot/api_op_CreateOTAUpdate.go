@@ -114,6 +114,13 @@ func (s *CreateOTAUpdateInput) Validate() error {
 			}
 		}
 	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -308,6 +315,7 @@ func (c *Client) CreateOTAUpdateRequest(input *CreateOTAUpdateInput) CreateOTAUp
 	}
 
 	req := c.newRequest(op, input, &CreateOTAUpdateOutput{})
+
 	return CreateOTAUpdateRequest{Request: req, Input: input, Copy: c.CreateOTAUpdateRequest}
 }
 

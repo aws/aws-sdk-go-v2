@@ -87,6 +87,7 @@ func (c *Client) DeleteLunaClientRequest(input *DeleteLunaClientInput) DeleteLun
 	}
 
 	req := c.newRequest(op, input, &DeleteLunaClientOutput{})
+
 	return DeleteLunaClientRequest{Request: req, Input: input, Copy: c.DeleteLunaClientRequest}
 }
 

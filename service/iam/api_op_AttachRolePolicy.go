@@ -111,6 +111,7 @@ func (c *Client) AttachRolePolicyRequest(input *AttachRolePolicyInput) AttachRol
 	req := c.newRequest(op, input, &AttachRolePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AttachRolePolicyRequest{Request: req, Input: input, Copy: c.AttachRolePolicyRequest}
 }
 

@@ -199,6 +199,7 @@ func (c *Client) InitiateDocumentVersionUploadRequest(input *InitiateDocumentVer
 	}
 
 	req := c.newRequest(op, input, &InitiateDocumentVersionUploadOutput{})
+
 	return InitiateDocumentVersionUploadRequest{Request: req, Input: input, Copy: c.InitiateDocumentVersionUploadRequest}
 }
 

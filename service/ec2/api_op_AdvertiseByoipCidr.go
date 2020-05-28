@@ -98,6 +98,7 @@ func (c *Client) AdvertiseByoipCidrRequest(input *AdvertiseByoipCidrInput) Adver
 	}
 
 	req := c.newRequest(op, input, &AdvertiseByoipCidrOutput{})
+
 	return AdvertiseByoipCidrRequest{Request: req, Input: input, Copy: c.AdvertiseByoipCidrRequest}
 }
 

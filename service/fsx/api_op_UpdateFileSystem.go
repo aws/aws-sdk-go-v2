@@ -108,6 +108,7 @@ func (c *Client) UpdateFileSystemRequest(input *UpdateFileSystemInput) UpdateFil
 	}
 
 	req := c.newRequest(op, input, &UpdateFileSystemOutput{})
+
 	return UpdateFileSystemRequest{Request: req, Input: input, Copy: c.UpdateFileSystemRequest}
 }
 

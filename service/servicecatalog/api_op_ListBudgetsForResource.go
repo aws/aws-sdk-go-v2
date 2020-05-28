@@ -105,6 +105,7 @@ func (c *Client) ListBudgetsForResourceRequest(input *ListBudgetsForResourceInpu
 	}
 
 	req := c.newRequest(op, input, &ListBudgetsForResourceOutput{})
+
 	return ListBudgetsForResourceRequest{Request: req, Input: input, Copy: c.ListBudgetsForResourceRequest}
 }
 

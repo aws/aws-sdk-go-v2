@@ -76,6 +76,7 @@ func (c *Client) DeregisterResourceRequest(input *DeregisterResourceInput) Dereg
 	}
 
 	req := c.newRequest(op, input, &DeregisterResourceOutput{})
+
 	return DeregisterResourceRequest{Request: req, Input: input, Copy: c.DeregisterResourceRequest}
 }
 

@@ -3764,8 +3764,8 @@ func (enum HlsTimedMetadataId3Frame) MarshalValueBuf(b []byte) ([]byte, error) {
 
 // Keep this setting enabled to have MediaConvert use the font style and position
 // information from the captions source in the output. This option is available
-// only when your input captions are CFF-TT, IMSC, SMPTE-TT, or TTML. Disable
-// this setting for simplified output captions.
+// only when your input captions are IMSC, SMPTE-TT, or TTML. Disable this setting
+// for simplified output captions.
 type ImscStylePassthrough string
 
 // Enum values for ImscStylePassthrough
@@ -5207,6 +5207,32 @@ func (enum MsSmoothManifestEncoding) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Optional. When you have AFD signaling set up in your output video stream,
+// use this setting to choose whether to also include it in the MXF wrapper.
+// Choose Don't copy (NO_COPY) to exclude AFD signaling from the MXF wrapper.
+// Choose Copy from video stream (COPY_FROM_VIDEO) to copy the AFD values from
+// the video stream for this output to the MXF wrapper. Regardless of which
+// option you choose, the AFD values remain in the video stream. Related settings:
+// To set up your output to include or exclude AFD values, see AfdSignaling,
+// under VideoDescription. On the console, find AFD signaling under the output's
+// video encoding settings.
+type MxfAfdSignaling string
+
+// Enum values for MxfAfdSignaling
+const (
+	MxfAfdSignalingNoCopy        MxfAfdSignaling = "NO_COPY"
+	MxfAfdSignalingCopyFromVideo MxfAfdSignaling = "COPY_FROM_VIDEO"
+)
+
+func (enum MxfAfdSignaling) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MxfAfdSignaling) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Use Noise reducer filter (NoiseReducerFilter) to select one of the following
 // spatial image filtering functions. To use this setting, you must also enable
 // Noise reducer (NoiseReducer). * Bilateral preserves edges while reducing
@@ -5857,7 +5883,7 @@ func (enum TimedMetadata) MarshalValueBuf(b []byte) ([]byte, error) {
 }
 
 // Pass through style and position information from a TTML-like input source
-// (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output.
+// (TTML, SMPTE-TT) to the TTML output.
 type TtmlStylePassthrough string
 
 // Enum values for TtmlStylePassthrough

@@ -81,6 +81,7 @@ func (c *Client) GetAutomationExecutionRequest(input *GetAutomationExecutionInpu
 	}
 
 	req := c.newRequest(op, input, &GetAutomationExecutionOutput{})
+
 	return GetAutomationExecutionRequest{Request: req, Input: input, Copy: c.GetAutomationExecutionRequest}
 }
 

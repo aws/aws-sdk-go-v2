@@ -112,6 +112,7 @@ func (c *Client) ListPortfolioAccessRequest(input *ListPortfolioAccessInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListPortfolioAccessOutput{})
+
 	return ListPortfolioAccessRequest{Request: req, Input: input, Copy: c.ListPortfolioAccessRequest}
 }
 

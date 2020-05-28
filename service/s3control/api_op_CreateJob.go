@@ -54,14 +54,15 @@ type CreateJobInput struct {
 	// Report is a required field
 	Report *JobReport `type:"structure" required:"true"`
 
-	// The Amazon Resource Name (ARN) for the Identity and Access Management (IAM)
-	// Role that batch operations will use to execute this job's operation on each
-	// object in the manifest.
+	// The Amazon Resource Name (ARN) for the AWS Identity and Access Management
+	// (IAM) role that Batch Operations will use to execute this job's operation
+	// on each object in the manifest.
 	//
 	// RoleArn is a required field
 	RoleArn *string `min:"1" type:"string" required:"true"`
 
-	// An optional set of tags to associate with the job when it is created.
+	// A set of tags to associate with the Amazon S3 Batch Operations job. This
+	// is an optional parameter.
 	Tags []S3Tag `type:"list"`
 }
 
@@ -249,7 +250,21 @@ const opCreateJob = "CreateJob"
 // CreateJobRequest returns a request value for making API operation for
 // AWS S3 Control.
 //
-// Creates an Amazon S3 batch operations job.
+// You can use Amazon S3 Batch Operations to perform large-scale Batch Operations
+// on Amazon S3 objects. Amazon S3 Batch Operations can execute a single operation
+// or action on lists of Amazon S3 objects that you specify. For more information,
+// see Amazon S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+// Related actions include:
+//
+//    * DescribeJob
+//
+//    * ListJobs
+//
+//    * UpdateJobPriority
+//
+//    * UpdateJobStatus
 //
 //    // Example sending a request using CreateJobRequest.
 //    req := client.CreateJobRequest(params)
@@ -273,6 +288,7 @@ func (c *Client) CreateJobRequest(input *CreateJobInput) CreateJobRequest {
 	req := c.newRequest(op, input, &CreateJobOutput{})
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
+
 	return CreateJobRequest{Request: req, Input: input, Copy: c.CreateJobRequest}
 }
 

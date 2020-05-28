@@ -113,6 +113,7 @@ func (c *Client) GetEC2RecommendationProjectedMetricsRequest(input *GetEC2Recomm
 	}
 
 	req := c.newRequest(op, input, &GetEC2RecommendationProjectedMetricsOutput{})
+
 	return GetEC2RecommendationProjectedMetricsRequest{Request: req, Input: input, Copy: c.GetEC2RecommendationProjectedMetricsRequest}
 }
 

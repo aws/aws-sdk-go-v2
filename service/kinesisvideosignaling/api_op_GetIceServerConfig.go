@@ -159,6 +159,7 @@ func (c *Client) GetIceServerConfigRequest(input *GetIceServerConfigInput) GetIc
 	}
 
 	req := c.newRequest(op, input, &GetIceServerConfigOutput{})
+
 	return GetIceServerConfigRequest{Request: req, Input: input, Copy: c.GetIceServerConfigRequest}
 }
 

@@ -82,6 +82,7 @@ func (c *Client) RebootClusterRequest(input *RebootClusterInput) RebootClusterRe
 	}
 
 	req := c.newRequest(op, input, &RebootClusterOutput{})
+
 	return RebootClusterRequest{Request: req, Input: input, Copy: c.RebootClusterRequest}
 }
 

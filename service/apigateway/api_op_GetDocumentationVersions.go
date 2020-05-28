@@ -138,6 +138,7 @@ func (c *Client) GetDocumentationVersionsRequest(input *GetDocumentationVersions
 	}
 
 	req := c.newRequest(op, input, &GetDocumentationVersionsOutput{})
+
 	return GetDocumentationVersionsRequest{Request: req, Input: input, Copy: c.GetDocumentationVersionsRequest}
 }
 

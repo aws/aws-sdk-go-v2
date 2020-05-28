@@ -76,6 +76,7 @@ func (c *Client) GetKeyPairRequest(input *GetKeyPairInput) GetKeyPairRequest {
 	}
 
 	req := c.newRequest(op, input, &GetKeyPairOutput{})
+
 	return GetKeyPairRequest{Request: req, Input: input, Copy: c.GetKeyPairRequest}
 }
 

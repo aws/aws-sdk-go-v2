@@ -86,6 +86,7 @@ func (c *Client) CreateAddressRequest(input *CreateAddressInput) CreateAddressRe
 	}
 
 	req := c.newRequest(op, input, &CreateAddressOutput{})
+
 	return CreateAddressRequest{Request: req, Input: input, Copy: c.CreateAddressRequest}
 }
 

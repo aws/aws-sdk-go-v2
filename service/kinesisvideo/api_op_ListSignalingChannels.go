@@ -148,6 +148,7 @@ func (c *Client) ListSignalingChannelsRequest(input *ListSignalingChannelsInput)
 	}
 
 	req := c.newRequest(op, input, &ListSignalingChannelsOutput{})
+
 	return ListSignalingChannelsRequest{Request: req, Input: input, Copy: c.ListSignalingChannelsRequest}
 }
 

@@ -94,6 +94,7 @@ func (c *Client) ListPlatformVersionsRequest(input *ListPlatformVersionsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListPlatformVersionsOutput{})
+
 	return ListPlatformVersionsRequest{Request: req, Input: input, Copy: c.ListPlatformVersionsRequest}
 }
 

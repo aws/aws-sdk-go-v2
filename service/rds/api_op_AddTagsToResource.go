@@ -93,6 +93,7 @@ func (c *Client) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTags
 	req := c.newRequest(op, input, &AddTagsToResourceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AddTagsToResourceRequest{Request: req, Input: input, Copy: c.AddTagsToResourceRequest}
 }
 

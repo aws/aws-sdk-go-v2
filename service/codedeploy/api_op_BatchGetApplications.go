@@ -14,7 +14,7 @@ type BatchGetApplicationsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of application names separated by spaces. The maximum number of application
-	// names you can specify is 25.
+	// names you can specify is 100.
 	//
 	// ApplicationNames is a required field
 	ApplicationNames []string `locationName:"applicationNames" type:"list" required:"true"`
@@ -58,7 +58,7 @@ const opBatchGetApplications = "BatchGetApplications"
 // AWS CodeDeploy.
 //
 // Gets information about one or more applications. The maximum number of applications
-// that can be returned is 25.
+// that can be returned is 100.
 //
 //    // Example sending a request using BatchGetApplicationsRequest.
 //    req := client.BatchGetApplicationsRequest(params)
@@ -80,6 +80,7 @@ func (c *Client) BatchGetApplicationsRequest(input *BatchGetApplicationsInput) B
 	}
 
 	req := c.newRequest(op, input, &BatchGetApplicationsOutput{})
+
 	return BatchGetApplicationsRequest{Request: req, Input: input, Copy: c.BatchGetApplicationsRequest}
 }
 

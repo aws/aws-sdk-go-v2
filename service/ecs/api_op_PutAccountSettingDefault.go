@@ -94,6 +94,7 @@ func (c *Client) PutAccountSettingDefaultRequest(input *PutAccountSettingDefault
 	}
 
 	req := c.newRequest(op, input, &PutAccountSettingDefaultOutput{})
+
 	return PutAccountSettingDefaultRequest{Request: req, Input: input, Copy: c.PutAccountSettingDefaultRequest}
 }
 

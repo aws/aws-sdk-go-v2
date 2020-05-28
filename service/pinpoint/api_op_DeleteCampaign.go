@@ -115,6 +115,7 @@ func (c *Client) DeleteCampaignRequest(input *DeleteCampaignInput) DeleteCampaig
 	}
 
 	req := c.newRequest(op, input, &DeleteCampaignOutput{})
+
 	return DeleteCampaignRequest{Request: req, Input: input, Copy: c.DeleteCampaignRequest}
 }
 

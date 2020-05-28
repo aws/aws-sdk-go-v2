@@ -81,6 +81,7 @@ func (c *Client) GetSigningCertificateRequest(input *GetSigningCertificateInput)
 	}
 
 	req := c.newRequest(op, input, &GetSigningCertificateOutput{})
+
 	return GetSigningCertificateRequest{Request: req, Input: input, Copy: c.GetSigningCertificateRequest}
 }
 

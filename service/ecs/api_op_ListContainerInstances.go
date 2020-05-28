@@ -111,6 +111,7 @@ func (c *Client) ListContainerInstancesRequest(input *ListContainerInstancesInpu
 	}
 
 	req := c.newRequest(op, input, &ListContainerInstancesOutput{})
+
 	return ListContainerInstancesRequest{Request: req, Input: input, Copy: c.ListContainerInstancesRequest}
 }
 

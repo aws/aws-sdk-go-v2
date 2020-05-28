@@ -134,6 +134,7 @@ func (c *Client) DescribeStateMachineRequest(input *DescribeStateMachineInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeStateMachineOutput{})
+
 	return DescribeStateMachineRequest{Request: req, Input: input, Copy: c.DescribeStateMachineRequest}
 }
 

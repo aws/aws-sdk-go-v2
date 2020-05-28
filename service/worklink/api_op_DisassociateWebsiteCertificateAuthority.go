@@ -113,6 +113,7 @@ func (c *Client) DisassociateWebsiteCertificateAuthorityRequest(input *Disassoci
 	}
 
 	req := c.newRequest(op, input, &DisassociateWebsiteCertificateAuthorityOutput{})
+
 	return DisassociateWebsiteCertificateAuthorityRequest{Request: req, Input: input, Copy: c.DisassociateWebsiteCertificateAuthorityRequest}
 }
 

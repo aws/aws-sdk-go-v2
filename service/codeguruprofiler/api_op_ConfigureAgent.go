@@ -113,6 +113,7 @@ func (c *Client) ConfigureAgentRequest(input *ConfigureAgentInput) ConfigureAgen
 	}
 
 	req := c.newRequest(op, input, &ConfigureAgentOutput{})
+
 	return ConfigureAgentRequest{Request: req, Input: input, Copy: c.ConfigureAgentRequest}
 }
 

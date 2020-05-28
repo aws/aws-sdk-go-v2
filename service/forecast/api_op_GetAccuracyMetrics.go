@@ -94,6 +94,7 @@ func (c *Client) GetAccuracyMetricsRequest(input *GetAccuracyMetricsInput) GetAc
 	}
 
 	req := c.newRequest(op, input, &GetAccuracyMetricsOutput{})
+
 	return GetAccuracyMetricsRequest{Request: req, Input: input, Copy: c.GetAccuracyMetricsRequest}
 }
 

@@ -362,6 +362,7 @@ func (c *Client) UpdateEventSourceMappingRequest(input *UpdateEventSourceMapping
 	}
 
 	req := c.newRequest(op, input, &UpdateEventSourceMappingOutput{})
+
 	return UpdateEventSourceMappingRequest{Request: req, Input: input, Copy: c.UpdateEventSourceMappingRequest}
 }
 

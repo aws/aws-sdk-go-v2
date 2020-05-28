@@ -90,6 +90,7 @@ func (c *Client) UpdateUploadRequest(input *UpdateUploadInput) UpdateUploadReque
 	}
 
 	req := c.newRequest(op, input, &UpdateUploadOutput{})
+
 	return UpdateUploadRequest{Request: req, Input: input, Copy: c.UpdateUploadRequest}
 }
 

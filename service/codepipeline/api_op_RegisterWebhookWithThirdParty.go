@@ -72,6 +72,7 @@ func (c *Client) RegisterWebhookWithThirdPartyRequest(input *RegisterWebhookWith
 	}
 
 	req := c.newRequest(op, input, &RegisterWebhookWithThirdPartyOutput{})
+
 	return RegisterWebhookWithThirdPartyRequest{Request: req, Input: input, Copy: c.RegisterWebhookWithThirdPartyRequest}
 }
 

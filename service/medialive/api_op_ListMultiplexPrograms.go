@@ -137,6 +137,7 @@ func (c *Client) ListMultiplexProgramsRequest(input *ListMultiplexProgramsInput)
 	}
 
 	req := c.newRequest(op, input, &ListMultiplexProgramsOutput{})
+
 	return ListMultiplexProgramsRequest{Request: req, Input: input, Copy: c.ListMultiplexProgramsRequest}
 }
 

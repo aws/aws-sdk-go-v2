@@ -122,6 +122,7 @@ func (c *Client) UpdateUserHierarchyRequest(input *UpdateUserHierarchyInput) Upd
 	req := c.newRequest(op, input, &UpdateUserHierarchyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateUserHierarchyRequest{Request: req, Input: input, Copy: c.UpdateUserHierarchyRequest}
 }
 

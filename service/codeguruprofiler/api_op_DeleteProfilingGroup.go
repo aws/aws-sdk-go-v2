@@ -97,6 +97,7 @@ func (c *Client) DeleteProfilingGroupRequest(input *DeleteProfilingGroupInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteProfilingGroupOutput{})
+
 	return DeleteProfilingGroupRequest{Request: req, Input: input, Copy: c.DeleteProfilingGroupRequest}
 }
 

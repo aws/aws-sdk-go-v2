@@ -86,6 +86,7 @@ func (c *Client) GetJobDetailsRequest(input *GetJobDetailsInput) GetJobDetailsRe
 	}
 
 	req := c.newRequest(op, input, &GetJobDetailsOutput{})
+
 	return GetJobDetailsRequest{Request: req, Input: input, Copy: c.GetJobDetailsRequest}
 }
 

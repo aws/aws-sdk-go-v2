@@ -2789,6 +2789,9 @@ type ContainerSettings struct {
 
 	// Settings for MP4 segments in DASH
 	MpdSettings *MpdSettings `locationName:"mpdSettings" type:"structure"`
+
+	// MXF settings
+	MxfSettings *MxfSettings `locationName:"mxfSettings" type:"structure"`
 }
 
 // String returns the string representation
@@ -2865,6 +2868,12 @@ func (s ContainerSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "mpdSettings", v, metadata)
+	}
+	if s.MxfSettings != nil {
+		v := s.MxfSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "mxfSettings", v, metadata)
 	}
 	return nil
 }
@@ -6840,8 +6849,8 @@ type ImscDestinationSettings struct {
 
 	// Keep this setting enabled to have MediaConvert use the font style and position
 	// information from the captions source in the output. This option is available
-	// only when your input captions are CFF-TT, IMSC, SMPTE-TT, or TTML. Disable
-	// this setting for simplified output captions.
+	// only when your input captions are IMSC, SMPTE-TT, or TTML. Disable this setting
+	// for simplified output captions.
 	StylePassthrough ImscStylePassthrough `locationName:"stylePassthrough" type:"string" enum:"true"`
 }
 
@@ -10473,6 +10482,38 @@ func (s MsSmoothGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// MXF settings
+type MxfSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Optional. When you have AFD signaling set up in your output video stream,
+	// use this setting to choose whether to also include it in the MXF wrapper.
+	// Choose Don't copy (NO_COPY) to exclude AFD signaling from the MXF wrapper.
+	// Choose Copy from video stream (COPY_FROM_VIDEO) to copy the AFD values from
+	// the video stream for this output to the MXF wrapper. Regardless of which
+	// option you choose, the AFD values remain in the video stream. Related settings:
+	// To set up your output to include or exclude AFD values, see AfdSignaling,
+	// under VideoDescription. On the console, find AFD signaling under the output's
+	// video encoding settings.
+	AfdSignaling MxfAfdSignaling `locationName:"afdSignaling" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s MxfSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MxfSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AfdSignaling) > 0 {
+		v := s.AfdSignaling
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "afdSignaling", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Settings for your Nielsen configuration. If you don't do Nielsen measurement
 // and analytics, ignore these settings. When you enable Nielsen configuration
 // (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs
@@ -12793,7 +12834,7 @@ type TtmlDestinationSettings struct {
 	_ struct{} `type:"structure"`
 
 	// Pass through style and position information from a TTML-like input source
-	// (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output.
+	// (TTML, SMPTE-TT) to the TTML output.
 	StylePassthrough TtmlStylePassthrough `locationName:"stylePassthrough" type:"string" enum:"true"`
 }
 

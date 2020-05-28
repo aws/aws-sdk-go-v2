@@ -69,6 +69,7 @@ func (c *Client) DescribePendingAggregationRequestsRequest(input *DescribePendin
 	}
 
 	req := c.newRequest(op, input, &DescribePendingAggregationRequestsOutput{})
+
 	return DescribePendingAggregationRequestsRequest{Request: req, Input: input, Copy: c.DescribePendingAggregationRequestsRequest}
 }
 

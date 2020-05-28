@@ -105,6 +105,7 @@ func (c *Client) ListConnectorDefinitionsRequest(input *ListConnectorDefinitions
 	}
 
 	req := c.newRequest(op, input, &ListConnectorDefinitionsOutput{})
+
 	return ListConnectorDefinitionsRequest{Request: req, Input: input, Copy: c.ListConnectorDefinitionsRequest}
 }
 

@@ -65,6 +65,7 @@ func (c *Client) GetSnowballUsageRequest(input *GetSnowballUsageInput) GetSnowba
 	}
 
 	req := c.newRequest(op, input, &GetSnowballUsageOutput{})
+
 	return GetSnowballUsageRequest{Request: req, Input: input, Copy: c.GetSnowballUsageRequest}
 }
 

@@ -96,6 +96,7 @@ func (c *Client) CreateGraphRequest(input *CreateGraphInput) CreateGraphRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateGraphOutput{})
+
 	return CreateGraphRequest{Request: req, Input: input, Copy: c.CreateGraphRequest}
 }
 

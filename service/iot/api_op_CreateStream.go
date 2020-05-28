@@ -73,6 +73,13 @@ func (s *CreateStreamInput) Validate() error {
 			}
 		}
 	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -206,6 +213,7 @@ func (c *Client) CreateStreamRequest(input *CreateStreamInput) CreateStreamReque
 	}
 
 	req := c.newRequest(op, input, &CreateStreamOutput{})
+
 	return CreateStreamRequest{Request: req, Input: input, Copy: c.CreateStreamRequest}
 }
 

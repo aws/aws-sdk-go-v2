@@ -125,6 +125,7 @@ func (c *Client) UpdateGroupQueryRequest(input *UpdateGroupQueryInput) UpdateGro
 	}
 
 	req := c.newRequest(op, input, &UpdateGroupQueryOutput{})
+
 	return UpdateGroupQueryRequest{Request: req, Input: input, Copy: c.UpdateGroupQueryRequest}
 }
 

@@ -85,6 +85,7 @@ func (c *Client) UnassignInstanceRequest(input *UnassignInstanceInput) UnassignI
 	req := c.newRequest(op, input, &UnassignInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UnassignInstanceRequest{Request: req, Input: input, Copy: c.UnassignInstanceRequest}
 }
 

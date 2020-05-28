@@ -60,6 +60,7 @@ func (c *Client) DescribeStorageRequest(input *DescribeStorageInput) DescribeSto
 	}
 
 	req := c.newRequest(op, input, &DescribeStorageOutput{})
+
 	return DescribeStorageRequest{Request: req, Input: input, Copy: c.DescribeStorageRequest}
 }
 

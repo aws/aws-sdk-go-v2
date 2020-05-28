@@ -106,6 +106,7 @@ func (c *Client) DefineExpressionRequest(input *DefineExpressionInput) DefineExp
 	}
 
 	req := c.newRequest(op, input, &DefineExpressionOutput{})
+
 	return DefineExpressionRequest{Request: req, Input: input, Copy: c.DefineExpressionRequest}
 }
 

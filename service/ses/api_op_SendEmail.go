@@ -211,6 +211,7 @@ func (c *Client) SendEmailRequest(input *SendEmailInput) SendEmailRequest {
 	}
 
 	req := c.newRequest(op, input, &SendEmailOutput{})
+
 	return SendEmailRequest{Request: req, Input: input, Copy: c.SendEmailRequest}
 }
 

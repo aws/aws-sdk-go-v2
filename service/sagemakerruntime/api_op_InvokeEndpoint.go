@@ -235,6 +235,7 @@ func (c *Client) InvokeEndpointRequest(input *InvokeEndpointInput) InvokeEndpoin
 	}
 
 	req := c.newRequest(op, input, &InvokeEndpointOutput{})
+
 	return InvokeEndpointRequest{Request: req, Input: input, Copy: c.InvokeEndpointRequest}
 }
 

@@ -98,6 +98,7 @@ func (c *Client) DeleteQueryLoggingConfigRequest(input *DeleteQueryLoggingConfig
 	}
 
 	req := c.newRequest(op, input, &DeleteQueryLoggingConfigOutput{})
+
 	return DeleteQueryLoggingConfigRequest{Request: req, Input: input, Copy: c.DeleteQueryLoggingConfigRequest}
 }
 

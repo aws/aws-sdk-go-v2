@@ -169,6 +169,7 @@ func (c *Client) GetFunctionDefinitionVersionRequest(input *GetFunctionDefinitio
 	}
 
 	req := c.newRequest(op, input, &GetFunctionDefinitionVersionOutput{})
+
 	return GetFunctionDefinitionVersionRequest{Request: req, Input: input, Copy: c.GetFunctionDefinitionVersionRequest}
 }
 

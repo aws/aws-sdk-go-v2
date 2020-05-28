@@ -107,6 +107,7 @@ func (c *Client) TagQueueRequest(input *TagQueueInput) TagQueueRequest {
 	req := c.newRequest(op, input, &TagQueueOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return TagQueueRequest{Request: req, Input: input, Copy: c.TagQueueRequest}
 }
 

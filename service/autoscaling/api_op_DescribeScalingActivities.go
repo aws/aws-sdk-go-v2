@@ -103,6 +103,7 @@ func (c *Client) DescribeScalingActivitiesRequest(input *DescribeScalingActiviti
 	}
 
 	req := c.newRequest(op, input, &DescribeScalingActivitiesOutput{})
+
 	return DescribeScalingActivitiesRequest{Request: req, Input: input, Copy: c.DescribeScalingActivitiesRequest}
 }
 

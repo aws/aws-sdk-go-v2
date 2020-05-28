@@ -59,6 +59,7 @@ func (c *Client) GetSubscriptionStateRequest(input *GetSubscriptionStateInput) G
 	}
 
 	req := c.newRequest(op, input, &GetSubscriptionStateOutput{})
+
 	return GetSubscriptionStateRequest{Request: req, Input: input, Copy: c.GetSubscriptionStateRequest}
 }
 

@@ -94,6 +94,7 @@ func (c *Client) RegisterPatchBaselineForPatchGroupRequest(input *RegisterPatchB
 	}
 
 	req := c.newRequest(op, input, &RegisterPatchBaselineForPatchGroupOutput{})
+
 	return RegisterPatchBaselineForPatchGroupRequest{Request: req, Input: input, Copy: c.RegisterPatchBaselineForPatchGroupRequest}
 }
 

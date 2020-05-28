@@ -140,6 +140,7 @@ func (c *Client) DescribeCanariesRequest(input *DescribeCanariesInput) DescribeC
 	}
 
 	req := c.newRequest(op, input, &DescribeCanariesOutput{})
+
 	return DescribeCanariesRequest{Request: req, Input: input, Copy: c.DescribeCanariesRequest}
 }
 

@@ -161,6 +161,7 @@ func (c *Client) UpdateSecretVersionStageRequest(input *UpdateSecretVersionStage
 	}
 
 	req := c.newRequest(op, input, &UpdateSecretVersionStageOutput{})
+
 	return UpdateSecretVersionStageRequest{Request: req, Input: input, Copy: c.UpdateSecretVersionStageRequest}
 }
 

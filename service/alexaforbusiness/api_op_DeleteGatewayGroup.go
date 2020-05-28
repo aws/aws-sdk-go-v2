@@ -73,6 +73,7 @@ func (c *Client) DeleteGatewayGroupRequest(input *DeleteGatewayGroupInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteGatewayGroupOutput{})
+
 	return DeleteGatewayGroupRequest{Request: req, Input: input, Copy: c.DeleteGatewayGroupRequest}
 }
 

@@ -161,6 +161,7 @@ func (c *Client) UpdateDomainAssociationRequest(input *UpdateDomainAssociationIn
 	}
 
 	req := c.newRequest(op, input, &UpdateDomainAssociationOutput{})
+
 	return UpdateDomainAssociationRequest{Request: req, Input: input, Copy: c.UpdateDomainAssociationRequest}
 }
 

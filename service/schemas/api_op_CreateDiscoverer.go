@@ -171,6 +171,7 @@ func (c *Client) CreateDiscovererRequest(input *CreateDiscovererInput) CreateDis
 	}
 
 	req := c.newRequest(op, input, &CreateDiscovererOutput{})
+
 	return CreateDiscovererRequest{Request: req, Input: input, Copy: c.CreateDiscovererRequest}
 }
 

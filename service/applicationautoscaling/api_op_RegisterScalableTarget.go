@@ -250,6 +250,7 @@ func (c *Client) RegisterScalableTargetRequest(input *RegisterScalableTargetInpu
 	}
 
 	req := c.newRequest(op, input, &RegisterScalableTargetOutput{})
+
 	return RegisterScalableTargetRequest{Request: req, Input: input, Copy: c.RegisterScalableTargetRequest}
 }
 

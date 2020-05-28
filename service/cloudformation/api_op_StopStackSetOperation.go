@@ -86,6 +86,7 @@ func (c *Client) StopStackSetOperationRequest(input *StopStackSetOperationInput)
 	}
 
 	req := c.newRequest(op, input, &StopStackSetOperationOutput{})
+
 	return StopStackSetOperationRequest{Request: req, Input: input, Copy: c.StopStackSetOperationRequest}
 }
 

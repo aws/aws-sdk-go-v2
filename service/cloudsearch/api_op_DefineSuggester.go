@@ -107,6 +107,7 @@ func (c *Client) DefineSuggesterRequest(input *DefineSuggesterInput) DefineSugge
 	}
 
 	req := c.newRequest(op, input, &DefineSuggesterOutput{})
+
 	return DefineSuggesterRequest{Request: req, Input: input, Copy: c.DefineSuggesterRequest}
 }
 

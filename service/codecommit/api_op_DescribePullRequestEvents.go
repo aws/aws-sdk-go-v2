@@ -105,6 +105,7 @@ func (c *Client) DescribePullRequestEventsRequest(input *DescribePullRequestEven
 	}
 
 	req := c.newRequest(op, input, &DescribePullRequestEventsOutput{})
+
 	return DescribePullRequestEventsRequest{Request: req, Input: input, Copy: c.DescribePullRequestEventsRequest}
 }
 

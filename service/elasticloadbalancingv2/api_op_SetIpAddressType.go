@@ -87,6 +87,7 @@ func (c *Client) SetIpAddressTypeRequest(input *SetIpAddressTypeInput) SetIpAddr
 	}
 
 	req := c.newRequest(op, input, &SetIpAddressTypeOutput{})
+
 	return SetIpAddressTypeRequest{Request: req, Input: input, Copy: c.SetIpAddressTypeRequest}
 }
 

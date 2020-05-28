@@ -135,6 +135,7 @@ func (c *Client) CancelChangeSetRequest(input *CancelChangeSetInput) CancelChang
 	}
 
 	req := c.newRequest(op, input, &CancelChangeSetOutput{})
+
 	return CancelChangeSetRequest{Request: req, Input: input, Copy: c.CancelChangeSetRequest}
 }
 

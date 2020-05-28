@@ -156,6 +156,7 @@ func (c *Client) DeleteFileRequest(input *DeleteFileInput) DeleteFileRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteFileOutput{})
+
 	return DeleteFileRequest{Request: req, Input: input, Copy: c.DeleteFileRequest}
 }
 

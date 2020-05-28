@@ -102,6 +102,7 @@ func (c *Client) DisableKeyRotationRequest(input *DisableKeyRotationInput) Disab
 	req := c.newRequest(op, input, &DisableKeyRotationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DisableKeyRotationRequest{Request: req, Input: input, Copy: c.DisableKeyRotationRequest}
 }
 

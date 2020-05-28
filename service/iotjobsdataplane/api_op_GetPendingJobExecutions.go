@@ -125,6 +125,7 @@ func (c *Client) GetPendingJobExecutionsRequest(input *GetPendingJobExecutionsIn
 	}
 
 	req := c.newRequest(op, input, &GetPendingJobExecutionsOutput{})
+
 	return GetPendingJobExecutionsRequest{Request: req, Input: input, Copy: c.GetPendingJobExecutionsRequest}
 }
 

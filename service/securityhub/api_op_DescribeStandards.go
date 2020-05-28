@@ -135,6 +135,7 @@ func (c *Client) DescribeStandardsRequest(input *DescribeStandardsInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeStandardsOutput{})
+
 	return DescribeStandardsRequest{Request: req, Input: input, Copy: c.DescribeStandardsRequest}
 }
 

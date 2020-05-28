@@ -105,6 +105,7 @@ func (c *Client) AssignTapePoolRequest(input *AssignTapePoolInput) AssignTapePoo
 	}
 
 	req := c.newRequest(op, input, &AssignTapePoolOutput{})
+
 	return AssignTapePoolRequest{Request: req, Input: input, Copy: c.AssignTapePoolRequest}
 }
 

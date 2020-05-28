@@ -25,11 +25,7 @@ type UpdateVocabularyInput struct {
 	// vocabulary. The URI must be in the same region as the API endpoint that you
 	// are calling. The general form is
 	//
-	// https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
-	//
 	// For example:
-	//
-	// https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt
 	//
 	// For more information about S3 object names, see Object Keys (http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
 	// in the Amazon S3 Developer Guide.
@@ -37,7 +33,9 @@ type UpdateVocabularyInput struct {
 	// For more information about custom vocabularies, see Custom Vocabularies (http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary).
 	VocabularyFileUri *string `min:"1" type:"string"`
 
-	// The name of the vocabulary to update. The name is case-sensitive.
+	// The name of the vocabulary to update. The name is case-sensitive. If you
+	// try to update a vocabulary with the same name as a previous vocabulary you
+	// will receive a ConflictException error.
 	//
 	// VocabularyName is a required field
 	VocabularyName *string `min:"1" type:"string" required:"true"`
@@ -122,6 +120,7 @@ func (c *Client) UpdateVocabularyRequest(input *UpdateVocabularyInput) UpdateVoc
 	}
 
 	req := c.newRequest(op, input, &UpdateVocabularyOutput{})
+
 	return UpdateVocabularyRequest{Request: req, Input: input, Copy: c.UpdateVocabularyRequest}
 }
 

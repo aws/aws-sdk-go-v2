@@ -125,6 +125,7 @@ func (c *Client) StartTextDetectionRequest(input *StartTextDetectionInput) Start
 	}
 
 	req := c.newRequest(op, input, &StartTextDetectionOutput{})
+
 	return StartTextDetectionRequest{Request: req, Input: input, Copy: c.StartTextDetectionRequest}
 }
 

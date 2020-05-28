@@ -195,6 +195,7 @@ func (c *Client) StartTextTranslationJobRequest(input *StartTextTranslationJobIn
 	}
 
 	req := c.newRequest(op, input, &StartTextTranslationJobOutput{})
+
 	return StartTextTranslationJobRequest{Request: req, Input: input, Copy: c.StartTextTranslationJobRequest}
 }
 

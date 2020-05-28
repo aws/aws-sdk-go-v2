@@ -107,6 +107,7 @@ func (c *Client) DescribeEngineDefaultClusterParametersRequest(input *DescribeEn
 	}
 
 	req := c.newRequest(op, input, &DescribeEngineDefaultClusterParametersOutput{})
+
 	return DescribeEngineDefaultClusterParametersRequest{Request: req, Input: input, Copy: c.DescribeEngineDefaultClusterParametersRequest}
 }
 

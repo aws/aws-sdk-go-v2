@@ -201,6 +201,7 @@ func (c *Client) GenerateDataKeyRequest(input *GenerateDataKeyInput) GenerateDat
 	}
 
 	req := c.newRequest(op, input, &GenerateDataKeyOutput{})
+
 	return GenerateDataKeyRequest{Request: req, Input: input, Copy: c.GenerateDataKeyRequest}
 }
 

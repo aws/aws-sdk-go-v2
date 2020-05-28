@@ -106,6 +106,7 @@ func (c *Client) AdminAddUserToGroupRequest(input *AdminAddUserToGroupInput) Adm
 	req := c.newRequest(op, input, &AdminAddUserToGroupOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AdminAddUserToGroupRequest{Request: req, Input: input, Copy: c.AdminAddUserToGroupRequest}
 }
 

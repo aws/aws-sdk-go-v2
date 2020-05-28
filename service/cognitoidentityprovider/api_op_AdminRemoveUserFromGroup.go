@@ -106,6 +106,7 @@ func (c *Client) AdminRemoveUserFromGroupRequest(input *AdminRemoveUserFromGroup
 	req := c.newRequest(op, input, &AdminRemoveUserFromGroupOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AdminRemoveUserFromGroupRequest{Request: req, Input: input, Copy: c.AdminRemoveUserFromGroupRequest}
 }
 

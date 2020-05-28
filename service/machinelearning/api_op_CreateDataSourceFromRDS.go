@@ -178,6 +178,7 @@ func (c *Client) CreateDataSourceFromRDSRequest(input *CreateDataSourceFromRDSIn
 	}
 
 	req := c.newRequest(op, input, &CreateDataSourceFromRDSOutput{})
+
 	return CreateDataSourceFromRDSRequest{Request: req, Input: input, Copy: c.CreateDataSourceFromRDSRequest}
 }
 

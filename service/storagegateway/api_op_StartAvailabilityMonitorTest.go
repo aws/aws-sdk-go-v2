@@ -87,6 +87,7 @@ func (c *Client) StartAvailabilityMonitorTestRequest(input *StartAvailabilityMon
 	}
 
 	req := c.newRequest(op, input, &StartAvailabilityMonitorTestOutput{})
+
 	return StartAvailabilityMonitorTestRequest{Request: req, Input: input, Copy: c.StartAvailabilityMonitorTestRequest}
 }
 

@@ -173,6 +173,7 @@ func (c *Client) CreateAutoMLJobRequest(input *CreateAutoMLJobInput) CreateAutoM
 	}
 
 	req := c.newRequest(op, input, &CreateAutoMLJobOutput{})
+
 	return CreateAutoMLJobRequest{Request: req, Input: input, Copy: c.CreateAutoMLJobRequest}
 }
 

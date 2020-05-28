@@ -148,6 +148,7 @@ func (c *Client) ListUserHierarchyGroupsRequest(input *ListUserHierarchyGroupsIn
 	}
 
 	req := c.newRequest(op, input, &ListUserHierarchyGroupsOutput{})
+
 	return ListUserHierarchyGroupsRequest{Request: req, Input: input, Copy: c.ListUserHierarchyGroupsRequest}
 }
 

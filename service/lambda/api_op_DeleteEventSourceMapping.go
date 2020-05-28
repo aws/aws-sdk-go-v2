@@ -232,6 +232,7 @@ func (c *Client) DeleteEventSourceMappingRequest(input *DeleteEventSourceMapping
 	}
 
 	req := c.newRequest(op, input, &DeleteEventSourceMappingOutput{})
+
 	return DeleteEventSourceMappingRequest{Request: req, Input: input, Copy: c.DeleteEventSourceMappingRequest}
 }
 

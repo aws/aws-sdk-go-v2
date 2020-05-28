@@ -14,7 +14,8 @@ import (
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the signaling channel to which you want to add tags.
+	// The Amazon Resource Name (ARN) of the signaling channel to which you want
+	// to add tags.
 	//
 	// ResourceARN is a required field
 	ResourceARN *string `min:"1" type:"string" required:"true"`
@@ -133,6 +134,7 @@ func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest 
 	}
 
 	req := c.newRequest(op, input, &TagResourceOutput{})
+
 	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 

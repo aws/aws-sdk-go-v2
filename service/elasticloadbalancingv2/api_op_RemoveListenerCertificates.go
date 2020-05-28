@@ -89,6 +89,7 @@ func (c *Client) RemoveListenerCertificatesRequest(input *RemoveListenerCertific
 	}
 
 	req := c.newRequest(op, input, &RemoveListenerCertificatesOutput{})
+
 	return RemoveListenerCertificatesRequest{Request: req, Input: input, Copy: c.RemoveListenerCertificatesRequest}
 }
 

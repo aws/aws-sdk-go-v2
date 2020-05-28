@@ -98,6 +98,7 @@ func (c *Client) UnclaimDeviceRequest(input *UnclaimDeviceInput) UnclaimDeviceRe
 	}
 
 	req := c.newRequest(op, input, &UnclaimDeviceOutput{})
+
 	return UnclaimDeviceRequest{Request: req, Input: input, Copy: c.UnclaimDeviceRequest}
 }
 

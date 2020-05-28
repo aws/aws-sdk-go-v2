@@ -82,6 +82,7 @@ func (c *Client) UpdateCrawlerScheduleRequest(input *UpdateCrawlerScheduleInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateCrawlerScheduleOutput{})
+
 	return UpdateCrawlerScheduleRequest{Request: req, Input: input, Copy: c.UpdateCrawlerScheduleRequest}
 }
 

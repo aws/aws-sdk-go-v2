@@ -90,6 +90,7 @@ func (c *Client) DeleteCoreDefinitionRequest(input *DeleteCoreDefinitionInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteCoreDefinitionOutput{})
+
 	return DeleteCoreDefinitionRequest{Request: req, Input: input, Copy: c.DeleteCoreDefinitionRequest}
 }
 

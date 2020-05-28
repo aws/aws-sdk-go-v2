@@ -97,6 +97,7 @@ func (c *Client) AssociateHealthCheckRequest(input *AssociateHealthCheckInput) A
 	}
 
 	req := c.newRequest(op, input, &AssociateHealthCheckOutput{})
+
 	return AssociateHealthCheckRequest{Request: req, Input: input, Copy: c.AssociateHealthCheckRequest}
 }
 

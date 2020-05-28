@@ -93,6 +93,7 @@ func (c *Client) CreateGlobalClusterRequest(input *CreateGlobalClusterInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateGlobalClusterOutput{})
+
 	return CreateGlobalClusterRequest{Request: req, Input: input, Copy: c.CreateGlobalClusterRequest}
 }
 

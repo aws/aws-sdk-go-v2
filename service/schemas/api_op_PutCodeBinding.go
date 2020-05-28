@@ -159,6 +159,7 @@ func (c *Client) PutCodeBindingRequest(input *PutCodeBindingInput) PutCodeBindin
 	}
 
 	req := c.newRequest(op, input, &PutCodeBindingOutput{})
+
 	return PutCodeBindingRequest{Request: req, Input: input, Copy: c.PutCodeBindingRequest}
 }
 

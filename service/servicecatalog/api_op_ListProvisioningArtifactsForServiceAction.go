@@ -107,6 +107,7 @@ func (c *Client) ListProvisioningArtifactsForServiceActionRequest(input *ListPro
 	}
 
 	req := c.newRequest(op, input, &ListProvisioningArtifactsForServiceActionOutput{})
+
 	return ListProvisioningArtifactsForServiceActionRequest{Request: req, Input: input, Copy: c.ListProvisioningArtifactsForServiceActionRequest}
 }
 

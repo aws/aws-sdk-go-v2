@@ -119,6 +119,7 @@ func (c *Client) UpdateResourceServerRequest(input *UpdateResourceServerInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateResourceServerOutput{})
+
 	return UpdateResourceServerRequest{Request: req, Input: input, Copy: c.UpdateResourceServerRequest}
 }
 

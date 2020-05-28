@@ -114,6 +114,7 @@ func (c *Client) ListMailboxPermissionsRequest(input *ListMailboxPermissionsInpu
 	}
 
 	req := c.newRequest(op, input, &ListMailboxPermissionsOutput{})
+
 	return ListMailboxPermissionsRequest{Request: req, Input: input, Copy: c.ListMailboxPermissionsRequest}
 }
 

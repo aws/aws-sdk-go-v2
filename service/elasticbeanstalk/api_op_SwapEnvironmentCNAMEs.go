@@ -103,6 +103,7 @@ func (c *Client) SwapEnvironmentCNAMEsRequest(input *SwapEnvironmentCNAMEsInput)
 	req := c.newRequest(op, input, &SwapEnvironmentCNAMEsOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SwapEnvironmentCNAMEsRequest{Request: req, Input: input, Copy: c.SwapEnvironmentCNAMEsRequest}
 }
 

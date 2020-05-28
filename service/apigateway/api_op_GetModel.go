@@ -178,6 +178,7 @@ func (c *Client) GetModelRequest(input *GetModelInput) GetModelRequest {
 	}
 
 	req := c.newRequest(op, input, &GetModelOutput{})
+
 	return GetModelRequest{Request: req, Input: input, Copy: c.GetModelRequest}
 }
 

@@ -82,6 +82,7 @@ func (c *Client) PutAccountDedicatedIpWarmupAttributesRequest(input *PutAccountD
 	}
 
 	req := c.newRequest(op, input, &PutAccountDedicatedIpWarmupAttributesOutput{})
+
 	return PutAccountDedicatedIpWarmupAttributesRequest{Request: req, Input: input, Copy: c.PutAccountDedicatedIpWarmupAttributesRequest}
 }
 

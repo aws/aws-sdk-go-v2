@@ -94,6 +94,7 @@ func (c *Client) DetectSyntaxRequest(input *DetectSyntaxInput) DetectSyntaxReque
 	}
 
 	req := c.newRequest(op, input, &DetectSyntaxOutput{})
+
 	return DetectSyntaxRequest{Request: req, Input: input, Copy: c.DetectSyntaxRequest}
 }
 

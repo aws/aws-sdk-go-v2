@@ -96,6 +96,7 @@ func (c *Client) SetStackPolicyRequest(input *SetStackPolicyInput) SetStackPolic
 	req := c.newRequest(op, input, &SetStackPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetStackPolicyRequest{Request: req, Input: input, Copy: c.SetStackPolicyRequest}
 }
 

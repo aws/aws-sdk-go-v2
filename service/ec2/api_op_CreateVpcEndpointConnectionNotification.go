@@ -112,6 +112,7 @@ func (c *Client) CreateVpcEndpointConnectionNotificationRequest(input *CreateVpc
 	}
 
 	req := c.newRequest(op, input, &CreateVpcEndpointConnectionNotificationOutput{})
+
 	return CreateVpcEndpointConnectionNotificationRequest{Request: req, Input: input, Copy: c.CreateVpcEndpointConnectionNotificationRequest}
 }
 

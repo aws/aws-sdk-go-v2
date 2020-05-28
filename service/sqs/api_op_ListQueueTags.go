@@ -82,6 +82,7 @@ func (c *Client) ListQueueTagsRequest(input *ListQueueTagsInput) ListQueueTagsRe
 	}
 
 	req := c.newRequest(op, input, &ListQueueTagsOutput{})
+
 	return ListQueueTagsRequest{Request: req, Input: input, Copy: c.ListQueueTagsRequest}
 }
 

@@ -95,6 +95,7 @@ func (c *Client) DeleteResourceConfigRequest(input *DeleteResourceConfigInput) D
 	req := c.newRequest(op, input, &DeleteResourceConfigOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteResourceConfigRequest{Request: req, Input: input, Copy: c.DeleteResourceConfigRequest}
 }
 

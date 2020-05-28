@@ -87,6 +87,7 @@ func (c *Client) GetCSVHeaderRequest(input *GetCSVHeaderInput) GetCSVHeaderReque
 	}
 
 	req := c.newRequest(op, input, &GetCSVHeaderOutput{})
+
 	return GetCSVHeaderRequest{Request: req, Input: input, Copy: c.GetCSVHeaderRequest}
 }
 

@@ -88,6 +88,7 @@ func (c *Client) DescribeStackSetOperationRequest(input *DescribeStackSetOperati
 	}
 
 	req := c.newRequest(op, input, &DescribeStackSetOperationOutput{})
+
 	return DescribeStackSetOperationRequest{Request: req, Input: input, Copy: c.DescribeStackSetOperationRequest}
 }
 

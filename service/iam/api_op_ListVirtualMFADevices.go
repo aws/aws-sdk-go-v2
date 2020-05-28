@@ -122,6 +122,7 @@ func (c *Client) ListVirtualMFADevicesRequest(input *ListVirtualMFADevicesInput)
 	}
 
 	req := c.newRequest(op, input, &ListVirtualMFADevicesOutput{})
+
 	return ListVirtualMFADevicesRequest{Request: req, Input: input, Copy: c.ListVirtualMFADevicesRequest}
 }
 

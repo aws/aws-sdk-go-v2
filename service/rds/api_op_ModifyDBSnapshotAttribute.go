@@ -128,6 +128,7 @@ func (c *Client) ModifyDBSnapshotAttributeRequest(input *ModifyDBSnapshotAttribu
 	}
 
 	req := c.newRequest(op, input, &ModifyDBSnapshotAttributeOutput{})
+
 	return ModifyDBSnapshotAttributeRequest{Request: req, Input: input, Copy: c.ModifyDBSnapshotAttributeRequest}
 }
 

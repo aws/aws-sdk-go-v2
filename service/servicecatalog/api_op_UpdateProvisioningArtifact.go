@@ -133,6 +133,7 @@ func (c *Client) UpdateProvisioningArtifactRequest(input *UpdateProvisioningArti
 	}
 
 	req := c.newRequest(op, input, &UpdateProvisioningArtifactOutput{})
+
 	return UpdateProvisioningArtifactRequest{Request: req, Input: input, Copy: c.UpdateProvisioningArtifactRequest}
 }
 

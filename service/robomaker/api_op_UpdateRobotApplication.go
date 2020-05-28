@@ -223,6 +223,7 @@ func (c *Client) UpdateRobotApplicationRequest(input *UpdateRobotApplicationInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateRobotApplicationOutput{})
+
 	return UpdateRobotApplicationRequest{Request: req, Input: input, Copy: c.UpdateRobotApplicationRequest}
 }
 

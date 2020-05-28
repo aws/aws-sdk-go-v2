@@ -128,6 +128,7 @@ func (c *Client) ListVoiceConnectorsRequest(input *ListVoiceConnectorsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListVoiceConnectorsOutput{})
+
 	return ListVoiceConnectorsRequest{Request: req, Input: input, Copy: c.ListVoiceConnectorsRequest}
 }
 

@@ -148,6 +148,7 @@ func (c *Client) ListJobsByStatusRequest(input *ListJobsByStatusInput) ListJobsB
 	}
 
 	req := c.newRequest(op, input, &ListJobsByStatusOutput{})
+
 	return ListJobsByStatusRequest{Request: req, Input: input, Copy: c.ListJobsByStatusRequest}
 }
 

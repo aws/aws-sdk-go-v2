@@ -134,6 +134,7 @@ func (c *Client) UpdateEmailTemplateRequest(input *UpdateEmailTemplateInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateEmailTemplateOutput{})
+
 	return UpdateEmailTemplateRequest{Request: req, Input: input, Copy: c.UpdateEmailTemplateRequest}
 }
 

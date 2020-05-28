@@ -87,6 +87,7 @@ func (c *Client) UpdateEndpointRequest(input *UpdateEndpointInput) UpdateEndpoin
 	}
 
 	req := c.newRequest(op, input, &UpdateEndpointOutput{})
+
 	return UpdateEndpointRequest{Request: req, Input: input, Copy: c.UpdateEndpointRequest}
 }
 

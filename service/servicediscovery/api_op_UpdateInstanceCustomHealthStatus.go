@@ -79,7 +79,7 @@ const opUpdateInstanceCustomHealthStatus = "UpdateInstanceCustomHealthStatus"
 // you create a service. You can't use it to change the status for Route 53
 // health checks, which you define using HealthCheckConfig.
 //
-// For more information, see HealthCheckCustomConfig.
+// For more information, see HealthCheckCustomConfig (https://docs.aws.amazon.com/cloud-map/latest/api/API_HealthCheckCustomConfig.html).
 //
 //    // Example sending a request using UpdateInstanceCustomHealthStatusRequest.
 //    req := client.UpdateInstanceCustomHealthStatusRequest(params)
@@ -103,6 +103,7 @@ func (c *Client) UpdateInstanceCustomHealthStatusRequest(input *UpdateInstanceCu
 	req := c.newRequest(op, input, &UpdateInstanceCustomHealthStatusOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateInstanceCustomHealthStatusRequest{Request: req, Input: input, Copy: c.UpdateInstanceCustomHealthStatusRequest}
 }
 

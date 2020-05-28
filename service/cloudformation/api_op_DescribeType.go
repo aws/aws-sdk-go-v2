@@ -97,6 +97,9 @@ type DescribeTypeOutput struct {
 	// role to provide your resource type with the appropriate credentials.
 	ExecutionRoleArn *string `min:"1" type:"string"`
 
+	// Whether the specified type version is set as the default version.
+	IsDefaultVersion *bool `type:"boolean"`
+
 	// When the specified type version was registered.
 	LastUpdated *time.Time `type:"timestamp"`
 
@@ -187,6 +190,7 @@ func (c *Client) DescribeTypeRequest(input *DescribeTypeInput) DescribeTypeReque
 	}
 
 	req := c.newRequest(op, input, &DescribeTypeOutput{})
+
 	return DescribeTypeRequest{Request: req, Input: input, Copy: c.DescribeTypeRequest}
 }
 

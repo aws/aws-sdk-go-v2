@@ -125,6 +125,7 @@ func (c *Client) DescribeMatchmakingRuleSetsRequest(input *DescribeMatchmakingRu
 	}
 
 	req := c.newRequest(op, input, &DescribeMatchmakingRuleSetsOutput{})
+
 	return DescribeMatchmakingRuleSetsRequest{Request: req, Input: input, Copy: c.DescribeMatchmakingRuleSetsRequest}
 }
 

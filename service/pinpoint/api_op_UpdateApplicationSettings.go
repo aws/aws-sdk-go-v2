@@ -117,6 +117,7 @@ func (c *Client) UpdateApplicationSettingsRequest(input *UpdateApplicationSettin
 	}
 
 	req := c.newRequest(op, input, &UpdateApplicationSettingsOutput{})
+
 	return UpdateApplicationSettingsRequest{Request: req, Input: input, Copy: c.UpdateApplicationSettingsRequest}
 }
 

@@ -122,6 +122,7 @@ func (c *Client) SendUsersMessagesRequest(input *SendUsersMessagesInput) SendUse
 	}
 
 	req := c.newRequest(op, input, &SendUsersMessagesOutput{})
+
 	return SendUsersMessagesRequest{Request: req, Input: input, Copy: c.SendUsersMessagesRequest}
 }
 

@@ -116,6 +116,7 @@ func (c *Client) UpdateDevicePoolRequest(input *UpdateDevicePoolInput) UpdateDev
 	}
 
 	req := c.newRequest(op, input, &UpdateDevicePoolOutput{})
+
 	return UpdateDevicePoolRequest{Request: req, Input: input, Copy: c.UpdateDevicePoolRequest}
 }
 

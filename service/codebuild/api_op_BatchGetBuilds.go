@@ -82,6 +82,7 @@ func (c *Client) BatchGetBuildsRequest(input *BatchGetBuildsInput) BatchGetBuild
 	}
 
 	req := c.newRequest(op, input, &BatchGetBuildsOutput{})
+
 	return BatchGetBuildsRequest{Request: req, Input: input, Copy: c.BatchGetBuildsRequest}
 }
 

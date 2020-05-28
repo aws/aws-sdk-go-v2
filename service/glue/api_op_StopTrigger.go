@@ -79,6 +79,7 @@ func (c *Client) StopTriggerRequest(input *StopTriggerInput) StopTriggerRequest 
 	}
 
 	req := c.newRequest(op, input, &StopTriggerOutput{})
+
 	return StopTriggerRequest{Request: req, Input: input, Copy: c.StopTriggerRequest}
 }
 

@@ -134,6 +134,7 @@ func (c *Client) GenerateServiceLastAccessedDetailsRequest(input *GenerateServic
 	}
 
 	req := c.newRequest(op, input, &GenerateServiceLastAccessedDetailsOutput{})
+
 	return GenerateServiceLastAccessedDetailsRequest{Request: req, Input: input, Copy: c.GenerateServiceLastAccessedDetailsRequest}
 }
 

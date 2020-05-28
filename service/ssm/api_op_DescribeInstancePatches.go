@@ -118,6 +118,7 @@ func (c *Client) DescribeInstancePatchesRequest(input *DescribeInstancePatchesIn
 	}
 
 	req := c.newRequest(op, input, &DescribeInstancePatchesOutput{})
+
 	return DescribeInstancePatchesRequest{Request: req, Input: input, Copy: c.DescribeInstancePatchesRequest}
 }
 

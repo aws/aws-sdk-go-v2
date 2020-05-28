@@ -106,6 +106,7 @@ func (c *Client) DescribeGameServerGroupRequest(input *DescribeGameServerGroupIn
 	}
 
 	req := c.newRequest(op, input, &DescribeGameServerGroupOutput{})
+
 	return DescribeGameServerGroupRequest{Request: req, Input: input, Copy: c.DescribeGameServerGroupRequest}
 }
 

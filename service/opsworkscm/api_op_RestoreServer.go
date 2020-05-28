@@ -111,6 +111,7 @@ func (c *Client) RestoreServerRequest(input *RestoreServerInput) RestoreServerRe
 	}
 
 	req := c.newRequest(op, input, &RestoreServerOutput{})
+
 	return RestoreServerRequest{Request: req, Input: input, Copy: c.RestoreServerRequest}
 }
 

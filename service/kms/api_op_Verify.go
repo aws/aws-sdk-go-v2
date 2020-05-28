@@ -195,6 +195,7 @@ func (c *Client) VerifyRequest(input *VerifyInput) VerifyRequest {
 	}
 
 	req := c.newRequest(op, input, &VerifyOutput{})
+
 	return VerifyRequest{Request: req, Input: input, Copy: c.VerifyRequest}
 }
 

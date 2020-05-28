@@ -101,6 +101,7 @@ func (c *Client) ListStepsRequest(input *ListStepsInput) ListStepsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListStepsOutput{})
+
 	return ListStepsRequest{Request: req, Input: input, Copy: c.ListStepsRequest}
 }
 

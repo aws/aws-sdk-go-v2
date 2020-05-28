@@ -96,6 +96,7 @@ func (c *Client) AssociateEntityToThingRequest(input *AssociateEntityToThingInpu
 	}
 
 	req := c.newRequest(op, input, &AssociateEntityToThingOutput{})
+
 	return AssociateEntityToThingRequest{Request: req, Input: input, Copy: c.AssociateEntityToThingRequest}
 }
 

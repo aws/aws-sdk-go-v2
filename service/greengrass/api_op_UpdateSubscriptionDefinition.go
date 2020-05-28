@@ -98,6 +98,7 @@ func (c *Client) UpdateSubscriptionDefinitionRequest(input *UpdateSubscriptionDe
 	}
 
 	req := c.newRequest(op, input, &UpdateSubscriptionDefinitionOutput{})
+
 	return UpdateSubscriptionDefinitionRequest{Request: req, Input: input, Copy: c.UpdateSubscriptionDefinitionRequest}
 }
 

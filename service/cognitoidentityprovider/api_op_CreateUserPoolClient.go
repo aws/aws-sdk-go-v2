@@ -259,6 +259,7 @@ func (c *Client) CreateUserPoolClientRequest(input *CreateUserPoolClientInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateUserPoolClientOutput{})
+
 	return CreateUserPoolClientRequest{Request: req, Input: input, Copy: c.CreateUserPoolClientRequest}
 }
 

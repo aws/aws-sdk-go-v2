@@ -107,6 +107,7 @@ func (c *Client) DeleteApplicationVpcConfigurationRequest(input *DeleteApplicati
 	}
 
 	req := c.newRequest(op, input, &DeleteApplicationVpcConfigurationOutput{})
+
 	return DeleteApplicationVpcConfigurationRequest{Request: req, Input: input, Copy: c.DeleteApplicationVpcConfigurationRequest}
 }
 

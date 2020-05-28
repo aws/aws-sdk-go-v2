@@ -111,6 +111,7 @@ func (c *Client) AuthorizeDBSecurityGroupIngressRequest(input *AuthorizeDBSecuri
 	}
 
 	req := c.newRequest(op, input, &AuthorizeDBSecurityGroupIngressOutput{})
+
 	return AuthorizeDBSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.AuthorizeDBSecurityGroupIngressRequest}
 }
 

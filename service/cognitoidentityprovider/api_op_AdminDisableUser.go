@@ -93,6 +93,7 @@ func (c *Client) AdminDisableUserRequest(input *AdminDisableUserInput) AdminDisa
 	}
 
 	req := c.newRequest(op, input, &AdminDisableUserOutput{})
+
 	return AdminDisableUserRequest{Request: req, Input: input, Copy: c.AdminDisableUserRequest}
 }
 

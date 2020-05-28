@@ -186,6 +186,7 @@ func (c *Client) DeregisterScalableTargetRequest(input *DeregisterScalableTarget
 	}
 
 	req := c.newRequest(op, input, &DeregisterScalableTargetOutput{})
+
 	return DeregisterScalableTargetRequest{Request: req, Input: input, Copy: c.DeregisterScalableTargetRequest}
 }
 

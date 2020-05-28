@@ -164,6 +164,7 @@ func (c *Client) GetSlotTypeVersionsRequest(input *GetSlotTypeVersionsInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetSlotTypeVersionsOutput{})
+
 	return GetSlotTypeVersionsRequest{Request: req, Input: input, Copy: c.GetSlotTypeVersionsRequest}
 }
 

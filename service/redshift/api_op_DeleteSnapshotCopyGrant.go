@@ -78,6 +78,7 @@ func (c *Client) DeleteSnapshotCopyGrantRequest(input *DeleteSnapshotCopyGrantIn
 	req := c.newRequest(op, input, &DeleteSnapshotCopyGrantOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteSnapshotCopyGrantRequest{Request: req, Input: input, Copy: c.DeleteSnapshotCopyGrantRequest}
 }
 

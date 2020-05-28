@@ -123,6 +123,7 @@ func (c *Client) CreateConferenceProviderRequest(input *CreateConferenceProvider
 	}
 
 	req := c.newRequest(op, input, &CreateConferenceProviderOutput{})
+
 	return CreateConferenceProviderRequest{Request: req, Input: input, Copy: c.CreateConferenceProviderRequest}
 }
 

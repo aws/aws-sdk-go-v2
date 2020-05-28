@@ -112,6 +112,7 @@ func (c *Client) CreatePlatformEndpointRequest(input *CreatePlatformEndpointInpu
 	}
 
 	req := c.newRequest(op, input, &CreatePlatformEndpointOutput{})
+
 	return CreatePlatformEndpointRequest{Request: req, Input: input, Copy: c.CreatePlatformEndpointRequest}
 }
 

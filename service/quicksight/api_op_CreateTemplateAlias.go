@@ -174,6 +174,7 @@ func (c *Client) CreateTemplateAliasRequest(input *CreateTemplateAliasInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateTemplateAliasOutput{})
+
 	return CreateTemplateAliasRequest{Request: req, Input: input, Copy: c.CreateTemplateAliasRequest}
 }
 

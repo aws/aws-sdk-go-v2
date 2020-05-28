@@ -136,6 +136,7 @@ func (c *Client) UpdateFleetAttributesRequest(input *UpdateFleetAttributesInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateFleetAttributesOutput{})
+
 	return UpdateFleetAttributesRequest{Request: req, Input: input, Copy: c.UpdateFleetAttributesRequest}
 }
 

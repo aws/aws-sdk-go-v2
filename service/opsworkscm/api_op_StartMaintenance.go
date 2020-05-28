@@ -99,6 +99,7 @@ func (c *Client) StartMaintenanceRequest(input *StartMaintenanceInput) StartMain
 	}
 
 	req := c.newRequest(op, input, &StartMaintenanceOutput{})
+
 	return StartMaintenanceRequest{Request: req, Input: input, Copy: c.StartMaintenanceRequest}
 }
 

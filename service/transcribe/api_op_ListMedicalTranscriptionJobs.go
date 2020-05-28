@@ -109,6 +109,7 @@ func (c *Client) ListMedicalTranscriptionJobsRequest(input *ListMedicalTranscrip
 	}
 
 	req := c.newRequest(op, input, &ListMedicalTranscriptionJobsOutput{})
+
 	return ListMedicalTranscriptionJobsRequest{Request: req, Input: input, Copy: c.ListMedicalTranscriptionJobsRequest}
 }
 

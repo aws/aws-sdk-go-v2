@@ -115,6 +115,7 @@ func (c *Client) DisassociateWebsiteAuthorizationProviderRequest(input *Disassoc
 	}
 
 	req := c.newRequest(op, input, &DisassociateWebsiteAuthorizationProviderOutput{})
+
 	return DisassociateWebsiteAuthorizationProviderRequest{Request: req, Input: input, Copy: c.DisassociateWebsiteAuthorizationProviderRequest}
 }
 

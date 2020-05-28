@@ -76,6 +76,7 @@ func (c *Client) DeleteContainerPolicyRequest(input *DeleteContainerPolicyInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteContainerPolicyOutput{})
+
 	return DeleteContainerPolicyRequest{Request: req, Input: input, Copy: c.DeleteContainerPolicyRequest}
 }
 

@@ -117,6 +117,7 @@ func (c *Client) ListDataflowEndpointGroupsRequest(input *ListDataflowEndpointGr
 	}
 
 	req := c.newRequest(op, input, &ListDataflowEndpointGroupsOutput{})
+
 	return ListDataflowEndpointGroupsRequest{Request: req, Input: input, Copy: c.ListDataflowEndpointGroupsRequest}
 }
 

@@ -83,6 +83,7 @@ func (c *Client) StartLoggingRequest(input *StartLoggingInput) StartLoggingReque
 	}
 
 	req := c.newRequest(op, input, &StartLoggingOutput{})
+
 	return StartLoggingRequest{Request: req, Input: input, Copy: c.StartLoggingRequest}
 }
 

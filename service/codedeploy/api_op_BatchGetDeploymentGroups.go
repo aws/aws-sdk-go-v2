@@ -94,6 +94,7 @@ func (c *Client) BatchGetDeploymentGroupsRequest(input *BatchGetDeploymentGroups
 	}
 
 	req := c.newRequest(op, input, &BatchGetDeploymentGroupsOutput{})
+
 	return BatchGetDeploymentGroupsRequest{Request: req, Input: input, Copy: c.BatchGetDeploymentGroupsRequest}
 }
 

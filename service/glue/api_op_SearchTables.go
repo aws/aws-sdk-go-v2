@@ -114,6 +114,7 @@ func (c *Client) SearchTablesRequest(input *SearchTablesInput) SearchTablesReque
 	}
 
 	req := c.newRequest(op, input, &SearchTablesOutput{})
+
 	return SearchTablesRequest{Request: req, Input: input, Copy: c.SearchTablesRequest}
 }
 

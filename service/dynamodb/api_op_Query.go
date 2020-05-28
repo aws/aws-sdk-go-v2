@@ -501,6 +501,7 @@ func (c *Client) QueryRequest(input *QueryInput) QueryRequest {
 			Fn:   de.Handler,
 		})
 	}
+
 	return QueryRequest{Request: req, Input: input, Copy: c.QueryRequest}
 }
 

@@ -118,6 +118,7 @@ func (c *Client) GetHealthCheckLastFailureReasonRequest(input *GetHealthCheckLas
 	}
 
 	req := c.newRequest(op, input, &GetHealthCheckLastFailureReasonOutput{})
+
 	return GetHealthCheckLastFailureReasonRequest{Request: req, Input: input, Copy: c.GetHealthCheckLastFailureReasonRequest}
 }
 

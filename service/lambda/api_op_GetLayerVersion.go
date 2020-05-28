@@ -190,6 +190,7 @@ func (c *Client) GetLayerVersionRequest(input *GetLayerVersionInput) GetLayerVer
 	}
 
 	req := c.newRequest(op, input, &GetLayerVersionOutput{})
+
 	return GetLayerVersionRequest{Request: req, Input: input, Copy: c.GetLayerVersionRequest}
 }
 

@@ -92,6 +92,7 @@ func (c *Client) DetachLoadBalancerFromSubnetsRequest(input *DetachLoadBalancerF
 	}
 
 	req := c.newRequest(op, input, &DetachLoadBalancerFromSubnetsOutput{})
+
 	return DetachLoadBalancerFromSubnetsRequest{Request: req, Input: input, Copy: c.DetachLoadBalancerFromSubnetsRequest}
 }
 

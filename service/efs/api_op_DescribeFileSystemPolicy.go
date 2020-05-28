@@ -113,6 +113,7 @@ func (c *Client) DescribeFileSystemPolicyRequest(input *DescribeFileSystemPolicy
 	}
 
 	req := c.newRequest(op, input, &DescribeFileSystemPolicyOutput{})
+
 	return DescribeFileSystemPolicyRequest{Request: req, Input: input, Copy: c.DescribeFileSystemPolicyRequest}
 }
 

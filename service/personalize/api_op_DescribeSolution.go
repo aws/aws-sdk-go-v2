@@ -76,6 +76,7 @@ func (c *Client) DescribeSolutionRequest(input *DescribeSolutionInput) DescribeS
 	}
 
 	req := c.newRequest(op, input, &DescribeSolutionOutput{})
+
 	return DescribeSolutionRequest{Request: req, Input: input, Copy: c.DescribeSolutionRequest}
 }
 

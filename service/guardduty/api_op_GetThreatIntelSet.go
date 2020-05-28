@@ -77,7 +77,7 @@ type GetThreatIntelSetOutput struct {
 	// Format is a required field
 	Format ThreatIntelSetFormat `locationName:"format" min:"1" type:"string" required:"true" enum:"true"`
 
-	// The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+	// The URI of the file that contains the ThreatIntelSet.
 	//
 	// Location is a required field
 	Location *string `locationName:"location" min:"1" type:"string" required:"true"`
@@ -170,6 +170,7 @@ func (c *Client) GetThreatIntelSetRequest(input *GetThreatIntelSetInput) GetThre
 	}
 
 	req := c.newRequest(op, input, &GetThreatIntelSetOutput{})
+
 	return GetThreatIntelSetRequest{Request: req, Input: input, Copy: c.GetThreatIntelSetRequest}
 }
 

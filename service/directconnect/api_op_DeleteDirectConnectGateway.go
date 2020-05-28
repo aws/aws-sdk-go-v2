@@ -78,6 +78,7 @@ func (c *Client) DeleteDirectConnectGatewayRequest(input *DeleteDirectConnectGat
 	}
 
 	req := c.newRequest(op, input, &DeleteDirectConnectGatewayOutput{})
+
 	return DeleteDirectConnectGatewayRequest{Request: req, Input: input, Copy: c.DeleteDirectConnectGatewayRequest}
 }
 

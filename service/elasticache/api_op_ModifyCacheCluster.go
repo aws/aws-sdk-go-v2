@@ -309,6 +309,7 @@ func (c *Client) ModifyCacheClusterRequest(input *ModifyCacheClusterInput) Modif
 	}
 
 	req := c.newRequest(op, input, &ModifyCacheClusterOutput{})
+
 	return ModifyCacheClusterRequest{Request: req, Input: input, Copy: c.ModifyCacheClusterRequest}
 }
 

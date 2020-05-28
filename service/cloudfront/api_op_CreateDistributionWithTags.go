@@ -126,6 +126,7 @@ func (c *Client) CreateDistributionWithTagsRequest(input *CreateDistributionWith
 	}
 
 	req := c.newRequest(op, input, &CreateDistributionWithTagsOutput{})
+
 	return CreateDistributionWithTagsRequest{Request: req, Input: input, Copy: c.CreateDistributionWithTagsRequest}
 }
 

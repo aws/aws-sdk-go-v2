@@ -92,6 +92,7 @@ func (c *Client) GetPipelineExecutionRequest(input *GetPipelineExecutionInput) G
 	}
 
 	req := c.newRequest(op, input, &GetPipelineExecutionOutput{})
+
 	return GetPipelineExecutionRequest{Request: req, Input: input, Copy: c.GetPipelineExecutionRequest}
 }
 

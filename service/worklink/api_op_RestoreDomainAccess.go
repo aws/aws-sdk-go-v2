@@ -113,6 +113,7 @@ func (c *Client) RestoreDomainAccessRequest(input *RestoreDomainAccessInput) Res
 	}
 
 	req := c.newRequest(op, input, &RestoreDomainAccessOutput{})
+
 	return RestoreDomainAccessRequest{Request: req, Input: input, Copy: c.RestoreDomainAccessRequest}
 }
 

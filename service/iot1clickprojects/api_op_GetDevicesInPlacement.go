@@ -130,6 +130,7 @@ func (c *Client) GetDevicesInPlacementRequest(input *GetDevicesInPlacementInput)
 	}
 
 	req := c.newRequest(op, input, &GetDevicesInPlacementOutput{})
+
 	return GetDevicesInPlacementRequest{Request: req, Input: input, Copy: c.GetDevicesInPlacementRequest}
 }
 

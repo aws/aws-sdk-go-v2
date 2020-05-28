@@ -84,6 +84,7 @@ func (c *Client) SetUserMFAPreferenceRequest(input *SetUserMFAPreferenceInput) S
 	}
 
 	req := c.newRequest(op, input, &SetUserMFAPreferenceOutput{})
+
 	return SetUserMFAPreferenceRequest{Request: req, Input: input, Copy: c.SetUserMFAPreferenceRequest}
 }
 

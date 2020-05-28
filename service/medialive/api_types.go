@@ -996,6 +996,9 @@ type AudioSelectorSettings struct {
 
 	// Audio Pid Selection
 	AudioPidSelection *AudioPidSelection `locationName:"audioPidSelection" type:"structure"`
+
+	// Audio Track Selection
+	AudioTrackSelection *AudioTrackSelection `locationName:"audioTrackSelection" type:"structure"`
 }
 
 // String returns the string representation
@@ -1014,6 +1017,11 @@ func (s *AudioSelectorSettings) Validate() error {
 	if s.AudioPidSelection != nil {
 		if err := s.AudioPidSelection.Validate(); err != nil {
 			invalidParams.AddNested("AudioPidSelection", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.AudioTrackSelection != nil {
+		if err := s.AudioTrackSelection.Validate(); err != nil {
+			invalidParams.AddNested("AudioTrackSelection", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -1036,6 +1044,108 @@ func (s AudioSelectorSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "audioPidSelection", v, metadata)
+	}
+	if s.AudioTrackSelection != nil {
+		v := s.AudioTrackSelection
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "audioTrackSelection", v, metadata)
+	}
+	return nil
+}
+
+// Audio Track
+type AudioTrack struct {
+	_ struct{} `type:"structure"`
+
+	// 1-based integer value that maps to a specific audio track
+	//
+	// Track is a required field
+	Track *int64 `locationName:"track" min:"1" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s AudioTrack) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AudioTrack) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AudioTrack"}
+
+	if s.Track == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Track"))
+	}
+	if s.Track != nil && *s.Track < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Track", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AudioTrack) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Track != nil {
+		v := *s.Track
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "track", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Audio Track Selection
+type AudioTrackSelection struct {
+	_ struct{} `type:"structure"`
+
+	// Selects one or more unique audio tracks from within an mp4 source.
+	//
+	// Tracks is a required field
+	Tracks []AudioTrack `locationName:"tracks" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s AudioTrackSelection) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AudioTrackSelection) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AudioTrackSelection"}
+
+	if s.Tracks == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Tracks"))
+	}
+	if s.Tracks != nil {
+		for i, v := range s.Tracks {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tracks", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AudioTrackSelection) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Tracks != nil {
+		v := s.Tracks
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tracks", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -3682,6 +3792,14 @@ type Fmp4HlsSettings struct {
 	// List all the audio groups that are used with the video output stream. Input
 	// all the audio GROUP-IDs that are associated to the video, separate by ','.
 	AudioRenditionSets *string `locationName:"audioRenditionSets" type:"string"`
+
+	// If set to passthrough, Nielsen inaudible tones for media tracking will be
+	// detected in the input audio and an equivalent ID3 tag will be inserted in
+	// the output.
+	NielsenId3Behavior Fmp4NielsenId3Behavior `locationName:"nielsenId3Behavior" type:"string" enum:"true"`
+
+	// When set to passthrough, timed metadata is passed through from input to output.
+	TimedMetadataBehavior Fmp4TimedMetadataBehavior `locationName:"timedMetadataBehavior" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3696,6 +3814,18 @@ func (s Fmp4HlsSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "audioRenditionSets", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.NielsenId3Behavior) > 0 {
+		v := s.NielsenId3Behavior
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nielsenId3Behavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.TimedMetadataBehavior) > 0 {
+		v := s.TimedMetadataBehavior
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timedMetadataBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -3897,8 +4027,8 @@ type GlobalConfiguration struct {
 	// Settings for system actions when input is lost.
 	InputLossBehavior *InputLossBehavior `locationName:"inputLossBehavior" type:"structure"`
 
-	// Indicates how MediaLive pipelines are synchronized.PIPELINELOCKING - MediaLive
-	// will attempt to synchronize the output of each pipeline to the other.EPOCHLOCKING
+	// Indicates how MediaLive pipelines are synchronized.PIPELINE_LOCKING - MediaLive
+	// will attempt to synchronize the output of each pipeline to the other.EPOCH_LOCKING
 	// - MediaLive will attempt to synchronize the output of each pipeline to the
 	// Unix epoch.
 	OutputLockingMode GlobalConfigurationOutputLockingMode `locationName:"outputLockingMode" type:"string" enum:"true"`
@@ -4021,6 +4151,30 @@ func (s H264ColorSpaceSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// H264 Filter Settings
+type H264FilterSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Temporal Filter Settings
+	TemporalFilterSettings *TemporalFilterSettings `locationName:"temporalFilterSettings" type:"structure"`
+}
+
+// String returns the string representation
+func (s H264FilterSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s H264FilterSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.TemporalFilterSettings != nil {
+		v := s.TemporalFilterSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "temporalFilterSettings", v, metadata)
+	}
+	return nil
+}
+
 // H264 Settings
 type H264Settings struct {
 	_ struct{} `type:"structure"`
@@ -4056,6 +4210,9 @@ type H264Settings struct {
 	// Entropy encoding mode. Use cabac (must be in Main or High profile) or cavlc.
 	EntropyEncoding H264EntropyEncoding `locationName:"entropyEncoding" type:"string" enum:"true"`
 
+	// Optional filters that you can apply to an encode.
+	FilterSettings *H264FilterSettings `locationName:"filterSettings" type:"structure"`
+
 	// Four bit AFD value to write on all frames of video in the output stream.
 	// Only valid when afdSignaling is set to 'Fixed'.
 	FixedAfd FixedAfd `locationName:"fixedAfd" type:"string" enum:"true"`
@@ -4065,12 +4222,12 @@ type H264Settings struct {
 	FlickerAq H264FlickerAq `locationName:"flickerAq" type:"string" enum:"true"`
 
 	// This setting applies only when scan type is "interlaced." It controls whether
-	// coding is on a field basis or a frame basis. (When the video is progressive,
-	// the coding is always on a frame basis.)enabled: Always code on a field basis,
-	// so that odd and even sets of fields are coded separately.disabled: Code the
-	// two sets of fields separately (on a field basis) or together (on a frame
-	// basis, using PAFF or MBAFF), depending on what is most appropriate for the
-	// content.
+	// coding is performed on a field basis or on a frame basis. (When the video
+	// is progressive, the coding is always performed on a frame basis.)enabled:
+	// Force MediaLive to code on a field basis, so that odd and even sets of fields
+	// are coded separately.disabled: Code the two sets of fields separately (on
+	// a field basis) or together (on a frame basis using PAFF), depending on what
+	// is most appropriate for the content.
 	ForceFieldPictures H264ForceFieldPictures `locationName:"forceFieldPictures" type:"string" enum:"true"`
 
 	// This field indicates how the output video frame rate is specified. If "specified"
@@ -4148,6 +4305,14 @@ type H264Settings struct {
 
 	// H.264 Profile.
 	Profile H264Profile `locationName:"profile" type:"string" enum:"true"`
+
+	// Leave as STANDARD_QUALITY or choose a different value (which might result
+	// in additional costs to run the channel).- ENHANCED_QUALITY: Produces a slightly
+	// better video quality without an increase in the bitrate. Has an effect only
+	// when the Rate control mode is QVBR or CBR. If this channel is in a MediaLive
+	// multiplex, the value must be ENHANCED_QUALITY.- STANDARD_QUALITY: Valid for
+	// any Rate control mode.
+	QualityLevel H264QualityLevel `locationName:"qualityLevel" type:"string" enum:"true"`
 
 	// Controls the target quality for the video encode. Applies only when the rate
 	// control mode is QVBR. Set values for the QVBR quality level field and Max
@@ -4297,6 +4462,12 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "entropyEncoding", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.FilterSettings != nil {
+		v := s.FilterSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "filterSettings", v, metadata)
+	}
 	if len(s.FixedAfd) > 0 {
 		v := s.FixedAfd
 
@@ -4416,6 +4587,12 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "profile", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.QualityLevel) > 0 {
+		v := s.QualityLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "qualityLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.QvbrQualityLevel != nil {
 		v := *s.QvbrQualityLevel
@@ -5259,9 +5436,10 @@ type HlsGroupSettings struct {
 	// converting it to a "VOD" type manifest on completion of the stream.
 	Mode HlsMode `locationName:"mode" type:"string" enum:"true"`
 
-	// MANIFESTSANDSEGMENTS: Generates manifests (master manifest, if applicable,
-	// and media manifests) for this output group.SEGMENTSONLY: Does not generate
-	// any manifests for this output group.
+	// MANIFESTS_AND_SEGMENTS: Generates manifests (master manifest, if applicable,
+	// and media manifests) for this output group.VARIANT_MANIFESTS_AND_SEGMENTS:
+	// Generates media manifests for this output group, but not a master manifest.SEGMENTS_ONLY:
+	// Does not generate any manifests for this output group.
 	OutputSelection HlsOutputSelection `locationName:"outputSelection" type:"string" enum:"true"`
 
 	// Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files.
@@ -5313,7 +5491,7 @@ type HlsGroupSettings struct {
 	// Provides an extra millisecond delta offset to fine tune the timestamps.
 	TimestampDeltaMilliseconds *int64 `locationName:"timestampDeltaMilliseconds" type:"integer"`
 
-	// SEGMENTEDFILES: Emit the program as segments - multiple .ts media files.SINGLEFILE:
+	// SEGMENTED_FILES: Emit the program as segments - multiple .ts media files.SINGLE_FILE:
 	// Applies only if Mode field is VOD. Emit the program as a single .ts media
 	// file. The media manifest includes #EXT-X-BYTERANGE tags to index segments
 	// for playback. A typical use for this value is when sending the output to
@@ -6032,8 +6210,7 @@ func (s HlsWebdavSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Settings to configure an action so that it occurs immediately. This is only
-// supported for input switch actions currently.
+// Settings to configure an action so that it occurs as soon as possible.
 type ImmediateModeScheduleActionStartSettings struct {
 	_ struct{} `type:"structure"`
 }
@@ -6072,6 +6249,9 @@ type Input struct {
 	// SINGLE_PIPELINE, this value is valid. If the ChannelClass is STANDARD, this
 	// value is not valid because the channel requires two sources in the input.
 	InputClass InputClass `locationName:"inputClass" type:"string" enum:"true"`
+
+	// Settings for the input devices.
+	InputDevices []InputDeviceSettings `locationName:"inputDevices" type:"list"`
 
 	// Certain pull input sources can be dynamic, meaning that they can have their
 	// URL's dynamically changesduring input switch actions. Presently, this functionality
@@ -6150,6 +6330,18 @@ func (s Input) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "inputClass", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.InputDevices != nil {
+		v := s.InputDevices
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "inputDevices", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if len(s.InputSourceType) > 0 {
 		v := s.InputSourceType
@@ -6530,6 +6722,358 @@ func (s InputDestinationVpc) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Configurable settings for the input device.
+type InputDeviceConfigurableSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The input source that you want to use. If the device has a source connected
+	// to only one of its input ports, or if you don't care which source the device
+	// sends, specify Auto. If the device has sources connected to both its input
+	// ports, and you want to use a specific source, specify the source.
+	ConfiguredInput InputDeviceConfiguredInput `locationName:"configuredInput" type:"string" enum:"true"`
+
+	// The maximum bitrate in bits per second. Set a value here to throttle the
+	// bitrate of the source video.
+	MaxBitrate *int64 `locationName:"maxBitrate" type:"integer"`
+}
+
+// String returns the string representation
+func (s InputDeviceConfigurableSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputDeviceConfigurableSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ConfiguredInput) > 0 {
+		v := s.ConfiguredInput
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "configuredInput", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.MaxBitrate != nil {
+		v := *s.MaxBitrate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxBitrate", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Settings that describe the active source from the input device, and the video
+// characteristics of that source.
+type InputDeviceHdSettings struct {
+	_ struct{} `type:"structure"`
+
+	// If you specified Auto as the configured input, specifies which of the sources
+	// is currently active (SDI or HDMI).
+	ActiveInput InputDeviceActiveInput `locationName:"activeInput" type:"string" enum:"true"`
+
+	// The source at the input device that is currently active. You can specify
+	// this source.
+	ConfiguredInput InputDeviceConfiguredInput `locationName:"configuredInput" type:"string" enum:"true"`
+
+	// The state of the input device.
+	DeviceState InputDeviceState `locationName:"deviceState" type:"string" enum:"true"`
+
+	// The frame rate of the video source.
+	Framerate *float64 `locationName:"framerate" type:"double"`
+
+	// The height of the video source, in pixels.
+	Height *int64 `locationName:"height" type:"integer"`
+
+	// The current maximum bitrate for ingesting this source, in bits per second.
+	// You can specify this maximum.
+	MaxBitrate *int64 `locationName:"maxBitrate" type:"integer"`
+
+	// The scan type of the video source.
+	ScanType InputDeviceScanType `locationName:"scanType" type:"string" enum:"true"`
+
+	// The width of the video source, in pixels.
+	Width *int64 `locationName:"width" type:"integer"`
+}
+
+// String returns the string representation
+func (s InputDeviceHdSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputDeviceHdSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ActiveInput) > 0 {
+		v := s.ActiveInput
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "activeInput", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.ConfiguredInput) > 0 {
+		v := s.ConfiguredInput
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "configuredInput", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.DeviceState) > 0 {
+		v := s.DeviceState
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "deviceState", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Framerate != nil {
+		v := *s.Framerate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "framerate", protocol.Float64Value(v), metadata)
+	}
+	if s.Height != nil {
+		v := *s.Height
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "height", protocol.Int64Value(v), metadata)
+	}
+	if s.MaxBitrate != nil {
+		v := *s.MaxBitrate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxBitrate", protocol.Int64Value(v), metadata)
+	}
+	if len(s.ScanType) > 0 {
+		v := s.ScanType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "scanType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Width != nil {
+		v := *s.Width
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "width", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// The network settings for the input device.
+type InputDeviceNetworkSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The DNS addresses of the input device.
+	DnsAddresses []string `locationName:"dnsAddresses" type:"list"`
+
+	// The network gateway IP address.
+	Gateway *string `locationName:"gateway" type:"string"`
+
+	// The IP address of the input device.
+	IpAddress *string `locationName:"ipAddress" type:"string"`
+
+	// Specifies whether the input device has been configured (outside of MediaLive)
+	// to use a dynamic IP address assignment (DHCP) or a static IP address.
+	IpScheme InputDeviceIpScheme `locationName:"ipScheme" type:"string" enum:"true"`
+
+	// The subnet mask of the input device.
+	SubnetMask *string `locationName:"subnetMask" type:"string"`
+}
+
+// String returns the string representation
+func (s InputDeviceNetworkSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputDeviceNetworkSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DnsAddresses != nil {
+		v := s.DnsAddresses
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "dnsAddresses", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Gateway != nil {
+		v := *s.Gateway
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "gateway", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.IpAddress != nil {
+		v := *s.IpAddress
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ipAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.IpScheme) > 0 {
+		v := s.IpScheme
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ipScheme", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.SubnetMask != nil {
+		v := *s.SubnetMask
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "subnetMask", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Settings for an input device.
+type InputDeviceRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID for the device.
+	Id *string `locationName:"id" type:"string"`
+}
+
+// String returns the string representation
+func (s InputDeviceRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputDeviceRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Settings for an input device.
+type InputDeviceSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID for the device.
+	Id *string `locationName:"id" type:"string"`
+}
+
+// String returns the string representation
+func (s InputDeviceSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputDeviceSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Details of the input device.
+type InputDeviceSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ARN of the input device.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The state of the connection between the input device and AWS.
+	ConnectionState InputDeviceConnectionState `locationName:"connectionState" type:"string" enum:"true"`
+
+	// The status of the action to synchronize the device configuration. If you
+	// change the configuration of the input device (for example, the maximum bitrate),
+	// MediaLive sends the new data to the device. The device might not update itself
+	// immediately. SYNCED means the device has updated its configuration. SYNCING
+	// means that it has not updated its configuration.
+	DeviceSettingsSyncState DeviceSettingsSyncState `locationName:"deviceSettingsSyncState" type:"string" enum:"true"`
+
+	// Settings that describe an input device that is type HD.
+	HdDeviceSettings *InputDeviceHdSettings `locationName:"hdDeviceSettings" type:"structure"`
+
+	// The unique ID of the input device.
+	Id *string `locationName:"id" type:"string"`
+
+	// The network MAC address of the input device.
+	MacAddress *string `locationName:"macAddress" type:"string"`
+
+	// A name that you specify for the input device.
+	Name *string `locationName:"name" type:"string"`
+
+	// Network settings for the input device.
+	NetworkSettings *InputDeviceNetworkSettings `locationName:"networkSettings" type:"structure"`
+
+	// The unique serial number of the input device.
+	SerialNumber *string `locationName:"serialNumber" type:"string"`
+
+	// The type of the input device.
+	Type InputDeviceType `locationName:"type" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s InputDeviceSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputDeviceSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ConnectionState) > 0 {
+		v := s.ConnectionState
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "connectionState", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.DeviceSettingsSyncState) > 0 {
+		v := s.DeviceSettingsSyncState
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "deviceSettingsSyncState", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.HdDeviceSettings != nil {
+		v := s.HdDeviceSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hdDeviceSettings", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MacAddress != nil {
+		v := *s.MacAddress
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "macAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.NetworkSettings != nil {
+		v := s.NetworkSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "networkSettings", v, metadata)
+	}
+	if s.SerialNumber != nil {
+		v := *s.SerialNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "serialNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Input Location
 type InputLocation struct {
 	_ struct{} `type:"structure"`
@@ -6795,6 +7339,13 @@ type InputSettings struct {
 	// Input settings.
 	NetworkInputSettings *NetworkInputSettings `locationName:"networkInputSettings" type:"structure"`
 
+	// Specifies whether to extract applicable ancillary data from a SMPTE-2038
+	// source in this input. Applicable data types are captions, timecode, AFD,
+	// and SCTE-104 messages.- PREFER: Extract from SMPTE-2038 if present in this
+	// input, otherwise extract from another source (if any).- IGNORE: Never extract
+	// any ancillary data from SMPTE-2038.
+	Smpte2038DataPreference Smpte2038DataPreference `locationName:"smpte2038DataPreference" type:"string" enum:"true"`
+
 	// Loop input if it is a file. This allows a file input to be streamed indefinitely.
 	SourceEndBehavior InputSourceEndBehavior `locationName:"sourceEndBehavior" type:"string" enum:"true"`
 
@@ -6890,6 +7441,12 @@ func (s InputSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "networkInputSettings", v, metadata)
+	}
+	if len(s.Smpte2038DataPreference) > 0 {
+		v := s.Smpte2038DataPreference
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "smpte2038DataPreference", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.SourceEndBehavior) > 0 {
 		v := s.SourceEndBehavior
@@ -7470,7 +8027,7 @@ type M2tsSettings struct {
 	SegmentationStyle M2tsSegmentationStyle `locationName:"segmentationStyle" type:"string" enum:"true"`
 
 	// The length in seconds of each segment. Required unless markers is set to
-	// None_.
+	// _none_.
 	SegmentationTime *float64 `locationName:"segmentationTime" type:"double"`
 
 	// When set to passthrough, timed metadata will be passed through from input
@@ -8184,8 +8741,8 @@ func (s Mp2Settings) MarshalFields(e protocol.FieldEncoder) error {
 type MsSmoothGroupSettings struct {
 	_ struct{} `type:"structure"`
 
-	// The value of the "Acquisition Point Identity" element used in each message
-	// placed in the sparse track. Only enabled if sparseTrackType is not "none".
+	// The ID to include in each message in the sparse track. Ignored if sparseTrackType
+	// is NONE.
 	AcquisitionPointId *string `locationName:"acquisitionPointId" type:"string"`
 
 	// If set to passthrough for an audio-only MS Smooth output, the fragment absolute
@@ -8248,8 +8805,12 @@ type MsSmoothGroupSettings struct {
 	// Number of milliseconds to delay the output from the second pipeline.
 	SendDelayMs *int64 `locationName:"sendDelayMs" type:"integer"`
 
-	// If set to scte35, use incoming SCTE-35 messages to generate a sparse track
-	// in this group of MS-Smooth outputs.
+	// Identifies the type of data to place in the sparse track:- SCTE35: Insert
+	// SCTE-35 messages from the source content. With each message, insert an IDR
+	// frame to start a new segment.- SCTE35_WITHOUT_SEGMENTATION: Insert SCTE-35
+	// messages from the source content. With each message, insert an IDR frame
+	// but don't start a new segment.- NONE: Don't generate a sparse track for any
+	// outputs in this output group.
 	SparseTrackType SmoothGroupSparseTrackType `locationName:"sparseTrackType" type:"string" enum:"true"`
 
 	// When set to send, send stream manifest so publishing point doesn't start
@@ -12297,6 +12858,43 @@ func (s TeletextSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Temporal Filter Settings
+type TemporalFilterSettings struct {
+	_ struct{} `type:"structure"`
+
+	// If you enable this filter, the results are the following:- If the source
+	// content is noisy (it contains excessive digital artifacts), the filter cleans
+	// up the source.- If the source content is already clean, the filter tends
+	// to decrease the bitrate, especially when the rate control mode is QVBR.
+	PostFilterSharpening TemporalFilterPostFilterSharpening `locationName:"postFilterSharpening" type:"string" enum:"true"`
+
+	// Choose a filter strength. We recommend a strength of 1 or 2. A higher strength
+	// might take out good information, resulting in an image that is overly soft.
+	Strength TemporalFilterStrength `locationName:"strength" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s TemporalFilterSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TemporalFilterSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.PostFilterSharpening) > 0 {
+		v := s.PostFilterSharpening
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "postFilterSharpening", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Strength) > 0 {
+		v := s.Strength
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "strength", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Timecode Config
 type TimecodeConfig struct {
 	_ struct{} `type:"structure"`
@@ -12559,8 +13157,10 @@ func (s UdpOutputSettings) MarshalFields(e protocol.FieldEncoder) error {
 type ValidationError struct {
 	_ struct{} `type:"structure"`
 
+	// Path to the source of the error.
 	ElementPath *string `locationName:"elementPath" type:"string"`
 
+	// The error message.
 	ErrorMessage *string `locationName:"errorMessage" type:"string"`
 }
 
@@ -12675,15 +13275,15 @@ type VideoDescription struct {
 
 	// Indicates how to respond to the AFD values in the input stream. RESPOND causes
 	// input video to be clipped, depending on the AFD value, input display aspect
-	// ratio, and output display aspect ratio, and (except for FRAMECAPTURE codec)
-	// includes the values in the output. PASSTHROUGH (does not apply to FRAMECAPTURE
+	// ratio, and output display aspect ratio, and (except for FRAME_CAPTURE codec)
+	// includes the values in the output. PASSTHROUGH (does not apply to FRAME_CAPTURE
 	// codec) ignores the AFD values and includes the values in the output, so input
 	// video is not clipped. NONE ignores the AFD values and does not include the
 	// values through to the output, so input video is not clipped.
 	RespondToAfd VideoDescriptionRespondToAfd `locationName:"respondToAfd" type:"string" enum:"true"`
 
-	// STRETCHTOOUTPUT configures the output position to stretch the video to the
-	// specified output resolution (height and width). This option will override
+	// STRETCH_TO_OUTPUT configures the output position to stretch the video to
+	// the specified output resolution (height and width). This option will override
 	// any position value. DEFAULT may insert black boxes (pillar boxes or letter
 	// boxes) around the video to provide the specified output resolution.
 	ScalingBehavior VideoDescriptionScalingBehavior `locationName:"scalingBehavior" type:"string" enum:"true"`

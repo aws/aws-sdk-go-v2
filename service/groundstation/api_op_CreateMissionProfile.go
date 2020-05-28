@@ -210,6 +210,7 @@ func (c *Client) CreateMissionProfileRequest(input *CreateMissionProfileInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateMissionProfileOutput{})
+
 	return CreateMissionProfileRequest{Request: req, Input: input, Copy: c.CreateMissionProfileRequest}
 }
 

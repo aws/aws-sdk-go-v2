@@ -642,9 +642,10 @@ type NetworkProtocol string
 
 // Enum values for NetworkProtocol
 const (
-	NetworkProtocolTcp NetworkProtocol = "tcp"
-	NetworkProtocolAll NetworkProtocol = "all"
-	NetworkProtocolUdp NetworkProtocol = "udp"
+	NetworkProtocolTcp  NetworkProtocol = "tcp"
+	NetworkProtocolAll  NetworkProtocol = "all"
+	NetworkProtocolUdp  NetworkProtocol = "udp"
+	NetworkProtocolIcmp NetworkProtocol = "icmp"
 )
 
 func (enum NetworkProtocol) MarshalValue() (string, error) {

@@ -93,6 +93,7 @@ func (c *Client) RegisterEventTopicRequest(input *RegisterEventTopicInput) Regis
 	}
 
 	req := c.newRequest(op, input, &RegisterEventTopicOutput{})
+
 	return RegisterEventTopicRequest{Request: req, Input: input, Copy: c.RegisterEventTopicRequest}
 }
 

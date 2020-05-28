@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/checksum"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 	"github.com/aws/aws-sdk-go-v2/service/s3/internal/arn"
@@ -175,6 +176,11 @@ const opPutBucketWebsite = "PutBucketWebsite"
 //
 //    * HttpRedirectCode
 //
+// Amazon S3 has a limitation of 50 routing rules per website configuration.
+// If you require more than 50 routing rules, you can use object redirect. For
+// more information, see Configuring an Object Redirect (https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html)
+// in the Amazon Simple Storage Service Developer Guide.
+//
 //    // Example sending a request using PutBucketWebsiteRequest.
 //    req := client.PutBucketWebsiteRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -197,6 +203,12 @@ func (c *Client) PutBucketWebsiteRequest(input *PutBucketWebsiteInput) PutBucket
 	req := c.newRequest(op, input, &PutBucketWebsiteOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
+	req.Handlers.Build.PushBackNamed(aws.NamedHandler{
+		Name: "contentMd5Handler",
+		Fn:   checksum.AddBodyContentMD5Handler,
+	})
+
 	return PutBucketWebsiteRequest{Request: req, Input: input, Copy: c.PutBucketWebsiteRequest}
 }
 

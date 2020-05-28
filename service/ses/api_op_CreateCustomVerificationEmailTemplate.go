@@ -135,6 +135,7 @@ func (c *Client) CreateCustomVerificationEmailTemplateRequest(input *CreateCusto
 	req := c.newRequest(op, input, &CreateCustomVerificationEmailTemplateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CreateCustomVerificationEmailTemplateRequest{Request: req, Input: input, Copy: c.CreateCustomVerificationEmailTemplateRequest}
 }
 

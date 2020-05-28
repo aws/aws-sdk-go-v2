@@ -140,6 +140,7 @@ func (c *Client) MergeShardsRequest(input *MergeShardsInput) MergeShardsRequest 
 	req := c.newRequest(op, input, &MergeShardsOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return MergeShardsRequest{Request: req, Input: input, Copy: c.MergeShardsRequest}
 }
 

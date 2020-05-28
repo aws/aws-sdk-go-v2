@@ -90,6 +90,7 @@ func (c *Client) DeletePackagingConfigurationRequest(input *DeletePackagingConfi
 	}
 
 	req := c.newRequest(op, input, &DeletePackagingConfigurationOutput{})
+
 	return DeletePackagingConfigurationRequest{Request: req, Input: input, Copy: c.DeletePackagingConfigurationRequest}
 }
 

@@ -121,6 +121,7 @@ func (c *Client) UpdateUserProfileRequest(input *UpdateUserProfileInput) UpdateU
 	}
 
 	req := c.newRequest(op, input, &UpdateUserProfileOutput{})
+
 	return UpdateUserProfileRequest{Request: req, Input: input, Copy: c.UpdateUserProfileRequest}
 }
 

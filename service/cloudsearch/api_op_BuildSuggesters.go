@@ -86,6 +86,7 @@ func (c *Client) BuildSuggestersRequest(input *BuildSuggestersInput) BuildSugges
 	}
 
 	req := c.newRequest(op, input, &BuildSuggestersOutput{})
+
 	return BuildSuggestersRequest{Request: req, Input: input, Copy: c.BuildSuggestersRequest}
 }
 

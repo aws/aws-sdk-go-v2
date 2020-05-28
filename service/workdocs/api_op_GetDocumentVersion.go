@@ -172,6 +172,7 @@ func (c *Client) GetDocumentVersionRequest(input *GetDocumentVersionInput) GetDo
 	}
 
 	req := c.newRequest(op, input, &GetDocumentVersionOutput{})
+
 	return GetDocumentVersionRequest{Request: req, Input: input, Copy: c.GetDocumentVersionRequest}
 }
 

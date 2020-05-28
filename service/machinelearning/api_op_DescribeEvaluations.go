@@ -154,6 +154,7 @@ func (c *Client) DescribeEvaluationsRequest(input *DescribeEvaluationsInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeEvaluationsOutput{})
+
 	return DescribeEvaluationsRequest{Request: req, Input: input, Copy: c.DescribeEvaluationsRequest}
 }
 

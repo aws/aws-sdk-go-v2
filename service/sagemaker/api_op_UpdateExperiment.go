@@ -90,6 +90,7 @@ func (c *Client) UpdateExperimentRequest(input *UpdateExperimentInput) UpdateExp
 	}
 
 	req := c.newRequest(op, input, &UpdateExperimentOutput{})
+
 	return UpdateExperimentRequest{Request: req, Input: input, Copy: c.UpdateExperimentRequest}
 }
 

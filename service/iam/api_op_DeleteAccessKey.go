@@ -101,6 +101,7 @@ func (c *Client) DeleteAccessKeyRequest(input *DeleteAccessKeyInput) DeleteAcces
 	req := c.newRequest(op, input, &DeleteAccessKeyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteAccessKeyRequest{Request: req, Input: input, Copy: c.DeleteAccessKeyRequest}
 }
 

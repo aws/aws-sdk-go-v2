@@ -12,12 +12,12 @@ import (
 type CloseInstancePublicPortsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the instance on which you're attempting to close the public ports.
+	// The name of the instance for which to close ports.
 	//
 	// InstanceName is a required field
 	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
 
-	// Information about the public port you are trying to close.
+	// An object to describe the ports to close for the specified instance.
 	//
 	// PortInfo is a required field
 	PortInfo *PortInfo `locationName:"portInfo" type:"structure" required:"true"`
@@ -39,6 +39,11 @@ func (s *CloseInstancePublicPortsInput) Validate() error {
 	if s.PortInfo == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortInfo"))
 	}
+	if s.PortInfo != nil {
+		if err := s.PortInfo.Validate(); err != nil {
+			invalidParams.AddNested("PortInfo", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -49,9 +54,9 @@ func (s *CloseInstancePublicPortsInput) Validate() error {
 type CloseInstancePublicPortsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
-	// by the request.
+	// An object that describes the result of the action, such as the status of
+	// the request, the timestamp of the request, and the resources affected by
+	// the request.
 	Operation *Operation `locationName:"operation" type:"structure"`
 }
 
@@ -65,11 +70,11 @@ const opCloseInstancePublicPorts = "CloseInstancePublicPorts"
 // CloseInstancePublicPortsRequest returns a request value for making API operation for
 // Amazon Lightsail.
 //
-// Closes the public ports on a specific Amazon Lightsail instance.
+// Closes ports for a specific Amazon Lightsail instance.
 //
-// The close instance public ports operation supports tag-based access control
-// via resource tags applied to the resource identified by instance name. For
-// more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// The CloseInstancePublicPorts action supports tag-based access control via
+// resource tags applied to the resource identified by instanceName. For more
+// information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using CloseInstancePublicPortsRequest.
 //    req := client.CloseInstancePublicPortsRequest(params)
@@ -91,6 +96,7 @@ func (c *Client) CloseInstancePublicPortsRequest(input *CloseInstancePublicPorts
 	}
 
 	req := c.newRequest(op, input, &CloseInstancePublicPortsOutput{})
+
 	return CloseInstancePublicPortsRequest{Request: req, Input: input, Copy: c.CloseInstancePublicPortsRequest}
 }
 

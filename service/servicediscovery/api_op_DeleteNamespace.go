@@ -41,7 +41,7 @@ type DeleteNamespaceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A value that you can use to determine whether the request completed successfully.
-	// To get the status of the operation, see GetOperation.
+	// To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
 	OperationId *string `type:"string"`
 }
 
@@ -78,6 +78,7 @@ func (c *Client) DeleteNamespaceRequest(input *DeleteNamespaceInput) DeleteNames
 	}
 
 	req := c.newRequest(op, input, &DeleteNamespaceOutput{})
+
 	return DeleteNamespaceRequest{Request: req, Input: input, Copy: c.DeleteNamespaceRequest}
 }
 

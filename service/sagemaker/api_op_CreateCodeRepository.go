@@ -105,6 +105,7 @@ func (c *Client) CreateCodeRepositoryRequest(input *CreateCodeRepositoryInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateCodeRepositoryOutput{})
+
 	return CreateCodeRepositoryRequest{Request: req, Input: input, Copy: c.CreateCodeRepositoryRequest}
 }
 

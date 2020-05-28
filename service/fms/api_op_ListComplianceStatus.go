@@ -115,6 +115,7 @@ func (c *Client) ListComplianceStatusRequest(input *ListComplianceStatusInput) L
 	}
 
 	req := c.newRequest(op, input, &ListComplianceStatusOutput{})
+
 	return ListComplianceStatusRequest{Request: req, Input: input, Copy: c.ListComplianceStatusRequest}
 }
 

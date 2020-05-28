@@ -77,6 +77,7 @@ func (c *Client) DeleteNotebookInstanceLifecycleConfigRequest(input *DeleteNoteb
 	req := c.newRequest(op, input, &DeleteNotebookInstanceLifecycleConfigOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteNotebookInstanceLifecycleConfigRequest{Request: req, Input: input, Copy: c.DeleteNotebookInstanceLifecycleConfigRequest}
 }
 

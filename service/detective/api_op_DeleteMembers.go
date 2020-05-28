@@ -154,6 +154,7 @@ func (c *Client) DeleteMembersRequest(input *DeleteMembersInput) DeleteMembersRe
 	}
 
 	req := c.newRequest(op, input, &DeleteMembersOutput{})
+
 	return DeleteMembersRequest{Request: req, Input: input, Copy: c.DeleteMembersRequest}
 }
 

@@ -91,6 +91,7 @@ func (c *Client) UpdateEnrollmentStatusRequest(input *UpdateEnrollmentStatusInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateEnrollmentStatusOutput{})
+
 	return UpdateEnrollmentStatusRequest{Request: req, Input: input, Copy: c.UpdateEnrollmentStatusRequest}
 }
 

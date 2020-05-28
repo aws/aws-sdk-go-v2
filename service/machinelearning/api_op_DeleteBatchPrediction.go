@@ -87,6 +87,7 @@ func (c *Client) DeleteBatchPredictionRequest(input *DeleteBatchPredictionInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteBatchPredictionOutput{})
+
 	return DeleteBatchPredictionRequest{Request: req, Input: input, Copy: c.DeleteBatchPredictionRequest}
 }
 

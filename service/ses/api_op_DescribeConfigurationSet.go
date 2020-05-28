@@ -103,6 +103,7 @@ func (c *Client) DescribeConfigurationSetRequest(input *DescribeConfigurationSet
 	}
 
 	req := c.newRequest(op, input, &DescribeConfigurationSetOutput{})
+
 	return DescribeConfigurationSetRequest{Request: req, Input: input, Copy: c.DescribeConfigurationSetRequest}
 }
 

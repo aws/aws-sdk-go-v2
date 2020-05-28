@@ -80,6 +80,7 @@ func (c *Client) DeleteTopicRequest(input *DeleteTopicInput) DeleteTopicRequest 
 	req := c.newRequest(op, input, &DeleteTopicOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteTopicRequest{Request: req, Input: input, Copy: c.DeleteTopicRequest}
 }
 

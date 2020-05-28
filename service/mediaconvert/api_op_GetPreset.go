@@ -104,6 +104,7 @@ func (c *Client) GetPresetRequest(input *GetPresetInput) GetPresetRequest {
 	}
 
 	req := c.newRequest(op, input, &GetPresetOutput{})
+
 	return GetPresetRequest{Request: req, Input: input, Copy: c.GetPresetRequest}
 }
 

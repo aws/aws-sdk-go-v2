@@ -109,6 +109,7 @@ func (c *Client) GetTopicAttributesRequest(input *GetTopicAttributesInput) GetTo
 	}
 
 	req := c.newRequest(op, input, &GetTopicAttributesOutput{})
+
 	return GetTopicAttributesRequest{Request: req, Input: input, Copy: c.GetTopicAttributesRequest}
 }
 

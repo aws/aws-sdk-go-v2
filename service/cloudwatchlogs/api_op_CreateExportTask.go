@@ -114,9 +114,10 @@ const opCreateExportTask = "CreateExportTask"
 //
 // This is an asynchronous call. If all the required information is provided,
 // this operation initiates an export task and responds with the ID of the task.
-// After the task has started, you can use DescribeExportTasks to get the status
-// of the export task. Each account can only have one active (RUNNING or PENDING)
-// export task at a time. To cancel an export task, use CancelExportTask.
+// After the task has started, you can use DescribeExportTasks (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeExportTasks.html)
+// to get the status of the export task. Each account can only have one active
+// (RUNNING or PENDING) export task at a time. To cancel an export task, use
+// CancelExportTask (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CancelExportTask.html).
 //
 // You can export logs from multiple log groups or multiple time ranges to the
 // same S3 bucket. To separate out log data for each export task, you can specify
@@ -145,6 +146,7 @@ func (c *Client) CreateExportTaskRequest(input *CreateExportTaskInput) CreateExp
 	}
 
 	req := c.newRequest(op, input, &CreateExportTaskOutput{})
+
 	return CreateExportTaskRequest{Request: req, Input: input, Copy: c.CreateExportTaskRequest}
 }
 

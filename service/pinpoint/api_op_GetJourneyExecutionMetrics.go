@@ -132,6 +132,7 @@ func (c *Client) GetJourneyExecutionMetricsRequest(input *GetJourneyExecutionMet
 	}
 
 	req := c.newRequest(op, input, &GetJourneyExecutionMetricsOutput{})
+
 	return GetJourneyExecutionMetricsRequest{Request: req, Input: input, Copy: c.GetJourneyExecutionMetricsRequest}
 }
 

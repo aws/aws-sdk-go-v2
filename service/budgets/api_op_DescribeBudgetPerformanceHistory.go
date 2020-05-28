@@ -113,6 +113,7 @@ func (c *Client) DescribeBudgetPerformanceHistoryRequest(input *DescribeBudgetPe
 	}
 
 	req := c.newRequest(op, input, &DescribeBudgetPerformanceHistoryOutput{})
+
 	return DescribeBudgetPerformanceHistoryRequest{Request: req, Input: input, Copy: c.DescribeBudgetPerformanceHistoryRequest}
 }
 

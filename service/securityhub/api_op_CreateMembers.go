@@ -88,10 +88,10 @@ const opCreateMembers = "CreateMembers"
 // Security Hub and become member accounts in Security Hub.
 //
 // If the account owner accepts the invitation, the account becomes a member
-// account in Security Hub, and a permission policy is added that permits the
-// master account to view the findings generated in the member account. When
-// Security Hub is enabled in the invited account, findings start to be sent
-// to both the member and master accounts.
+// account in Security Hub. A permissions policy is added that permits the master
+// account to view the findings generated in the member account. When Security
+// Hub is enabled in the invited account, findings start to be sent to both
+// the member and master accounts.
 //
 // To remove the association between the master and member accounts, use the
 // DisassociateFromMasterAccount or DisassociateMembers operation.
@@ -116,6 +116,7 @@ func (c *Client) CreateMembersRequest(input *CreateMembersInput) CreateMembersRe
 	}
 
 	req := c.newRequest(op, input, &CreateMembersOutput{})
+
 	return CreateMembersRequest{Request: req, Input: input, Copy: c.CreateMembersRequest}
 }
 

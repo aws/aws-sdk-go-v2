@@ -135,6 +135,7 @@ func (c *Client) DeleteVaultRequest(input *DeleteVaultInput) DeleteVaultRequest 
 	req := c.newRequest(op, input, &DeleteVaultOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteVaultRequest{Request: req, Input: input, Copy: c.DeleteVaultRequest}
 }
 

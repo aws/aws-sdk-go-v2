@@ -93,6 +93,7 @@ func (c *Client) StartDeviceSyncRequest(input *StartDeviceSyncInput) StartDevice
 	}
 
 	req := c.newRequest(op, input, &StartDeviceSyncOutput{})
+
 	return StartDeviceSyncRequest{Request: req, Input: input, Copy: c.StartDeviceSyncRequest}
 }
 

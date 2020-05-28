@@ -239,6 +239,7 @@ func (c *Client) CreateVolumeRequest(input *CreateVolumeInput) CreateVolumeReque
 	}
 
 	req := c.newRequest(op, input, &CreateVolumeOutput{})
+
 	return CreateVolumeRequest{Request: req, Input: input, Copy: c.CreateVolumeRequest}
 }
 

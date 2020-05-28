@@ -111,6 +111,7 @@ func (c *Client) GetComponentPolicyRequest(input *GetComponentPolicyInput) GetCo
 	}
 
 	req := c.newRequest(op, input, &GetComponentPolicyOutput{})
+
 	return GetComponentPolicyRequest{Request: req, Input: input, Copy: c.GetComponentPolicyRequest}
 }
 

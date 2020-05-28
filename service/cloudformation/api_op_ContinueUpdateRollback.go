@@ -156,6 +156,7 @@ func (c *Client) ContinueUpdateRollbackRequest(input *ContinueUpdateRollbackInpu
 	}
 
 	req := c.newRequest(op, input, &ContinueUpdateRollbackOutput{})
+
 	return ContinueUpdateRollbackRequest{Request: req, Input: input, Copy: c.ContinueUpdateRollbackRequest}
 }
 

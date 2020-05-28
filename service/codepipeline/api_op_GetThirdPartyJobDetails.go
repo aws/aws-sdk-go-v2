@@ -100,6 +100,7 @@ func (c *Client) GetThirdPartyJobDetailsRequest(input *GetThirdPartyJobDetailsIn
 	}
 
 	req := c.newRequest(op, input, &GetThirdPartyJobDetailsOutput{})
+
 	return GetThirdPartyJobDetailsRequest{Request: req, Input: input, Copy: c.GetThirdPartyJobDetailsRequest}
 }
 

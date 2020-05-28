@@ -116,6 +116,7 @@ func (c *Client) ValidateTemplateRequest(input *ValidateTemplateInput) ValidateT
 	}
 
 	req := c.newRequest(op, input, &ValidateTemplateOutput{})
+
 	return ValidateTemplateRequest{Request: req, Input: input, Copy: c.ValidateTemplateRequest}
 }
 

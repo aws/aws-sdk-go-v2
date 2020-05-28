@@ -117,6 +117,7 @@ func (c *Client) DeleteLinkRequest(input *DeleteLinkInput) DeleteLinkRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteLinkOutput{})
+
 	return DeleteLinkRequest{Request: req, Input: input, Copy: c.DeleteLinkRequest}
 }
 

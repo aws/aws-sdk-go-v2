@@ -114,6 +114,7 @@ func (c *Client) PublishRequest(input *PublishInput) PublishRequest {
 	req := c.newRequest(op, input, &PublishOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PublishRequest{Request: req, Input: input, Copy: c.PublishRequest}
 }
 

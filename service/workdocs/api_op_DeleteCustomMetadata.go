@@ -146,6 +146,7 @@ func (c *Client) DeleteCustomMetadataRequest(input *DeleteCustomMetadataInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteCustomMetadataOutput{})
+
 	return DeleteCustomMetadataRequest{Request: req, Input: input, Copy: c.DeleteCustomMetadataRequest}
 }
 

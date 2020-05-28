@@ -110,6 +110,7 @@ func (c *Client) DeleteCustomActionTypeRequest(input *DeleteCustomActionTypeInpu
 	req := c.newRequest(op, input, &DeleteCustomActionTypeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteCustomActionTypeRequest{Request: req, Input: input, Copy: c.DeleteCustomActionTypeRequest}
 }
 

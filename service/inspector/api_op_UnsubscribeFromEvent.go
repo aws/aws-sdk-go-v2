@@ -102,6 +102,7 @@ func (c *Client) UnsubscribeFromEventRequest(input *UnsubscribeFromEventInput) U
 	req := c.newRequest(op, input, &UnsubscribeFromEventOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UnsubscribeFromEventRequest{Request: req, Input: input, Copy: c.UnsubscribeFromEventRequest}
 }
 

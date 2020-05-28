@@ -119,6 +119,7 @@ func (c *Client) UpdateApnsVoipChannelRequest(input *UpdateApnsVoipChannelInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateApnsVoipChannelOutput{})
+
 	return UpdateApnsVoipChannelRequest{Request: req, Input: input, Copy: c.UpdateApnsVoipChannelRequest}
 }
 

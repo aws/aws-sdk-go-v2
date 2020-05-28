@@ -150,6 +150,7 @@ func (c *Client) CheckDomainAvailabilityRequest(input *CheckDomainAvailabilityIn
 	}
 
 	req := c.newRequest(op, input, &CheckDomainAvailabilityOutput{})
+
 	return CheckDomainAvailabilityRequest{Request: req, Input: input, Copy: c.CheckDomainAvailabilityRequest}
 }
 

@@ -96,6 +96,7 @@ func (c *Client) ListDevEndpointsRequest(input *ListDevEndpointsInput) ListDevEn
 	}
 
 	req := c.newRequest(op, input, &ListDevEndpointsOutput{})
+
 	return ListDevEndpointsRequest{Request: req, Input: input, Copy: c.ListDevEndpointsRequest}
 }
 

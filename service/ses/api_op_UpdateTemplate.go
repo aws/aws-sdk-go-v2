@@ -83,6 +83,7 @@ func (c *Client) UpdateTemplateRequest(input *UpdateTemplateInput) UpdateTemplat
 	}
 
 	req := c.newRequest(op, input, &UpdateTemplateOutput{})
+
 	return UpdateTemplateRequest{Request: req, Input: input, Copy: c.UpdateTemplateRequest}
 }
 

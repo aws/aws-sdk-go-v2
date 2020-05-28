@@ -246,6 +246,7 @@ func (c *Client) StartWorkflowExecutionRequest(input *StartWorkflowExecutionInpu
 	}
 
 	req := c.newRequest(op, input, &StartWorkflowExecutionOutput{})
+
 	return StartWorkflowExecutionRequest{Request: req, Input: input, Copy: c.StartWorkflowExecutionRequest}
 }
 

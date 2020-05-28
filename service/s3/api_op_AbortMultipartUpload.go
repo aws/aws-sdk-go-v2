@@ -201,6 +201,7 @@ func (c *Client) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) A
 	}
 
 	req := c.newRequest(op, input, &AbortMultipartUploadOutput{})
+
 	return AbortMultipartUploadRequest{Request: req, Input: input, Copy: c.AbortMultipartUploadRequest}
 }
 

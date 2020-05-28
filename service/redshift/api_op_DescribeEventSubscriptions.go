@@ -119,6 +119,7 @@ func (c *Client) DescribeEventSubscriptionsRequest(input *DescribeEventSubscript
 	}
 
 	req := c.newRequest(op, input, &DescribeEventSubscriptionsOutput{})
+
 	return DescribeEventSubscriptionsRequest{Request: req, Input: input, Copy: c.DescribeEventSubscriptionsRequest}
 }
 

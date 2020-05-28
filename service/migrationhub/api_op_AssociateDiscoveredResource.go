@@ -108,6 +108,7 @@ func (c *Client) AssociateDiscoveredResourceRequest(input *AssociateDiscoveredRe
 	}
 
 	req := c.newRequest(op, input, &AssociateDiscoveredResourceOutput{})
+
 	return AssociateDiscoveredResourceRequest{Request: req, Input: input, Copy: c.AssociateDiscoveredResourceRequest}
 }
 

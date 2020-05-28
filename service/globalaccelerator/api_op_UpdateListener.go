@@ -116,6 +116,7 @@ func (c *Client) UpdateListenerRequest(input *UpdateListenerInput) UpdateListene
 	}
 
 	req := c.newRequest(op, input, &UpdateListenerOutput{})
+
 	return UpdateListenerRequest{Request: req, Input: input, Copy: c.UpdateListenerRequest}
 }
 

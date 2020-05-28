@@ -148,6 +148,7 @@ func (c *Client) UpgradePublishedSchemaRequest(input *UpgradePublishedSchemaInpu
 	}
 
 	req := c.newRequest(op, input, &UpgradePublishedSchemaOutput{})
+
 	return UpgradePublishedSchemaRequest{Request: req, Input: input, Copy: c.UpgradePublishedSchemaRequest}
 }
 

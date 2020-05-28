@@ -120,6 +120,7 @@ func (c *Client) DeleteIntentVersionRequest(input *DeleteIntentVersionInput) Del
 	req := c.newRequest(op, input, &DeleteIntentVersionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteIntentVersionRequest{Request: req, Input: input, Copy: c.DeleteIntentVersionRequest}
 }
 

@@ -160,6 +160,7 @@ func (c *Client) GetResourceShareInvitationsRequest(input *GetResourceShareInvit
 	}
 
 	req := c.newRequest(op, input, &GetResourceShareInvitationsOutput{})
+
 	return GetResourceShareInvitationsRequest{Request: req, Input: input, Copy: c.GetResourceShareInvitationsRequest}
 }
 

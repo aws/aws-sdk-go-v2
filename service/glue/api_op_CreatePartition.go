@@ -108,6 +108,7 @@ func (c *Client) CreatePartitionRequest(input *CreatePartitionInput) CreateParti
 	}
 
 	req := c.newRequest(op, input, &CreatePartitionOutput{})
+
 	return CreatePartitionRequest{Request: req, Input: input, Copy: c.CreatePartitionRequest}
 }
 

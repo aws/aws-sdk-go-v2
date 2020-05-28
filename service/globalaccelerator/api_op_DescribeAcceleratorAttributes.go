@@ -78,6 +78,7 @@ func (c *Client) DescribeAcceleratorAttributesRequest(input *DescribeAccelerator
 	}
 
 	req := c.newRequest(op, input, &DescribeAcceleratorAttributesOutput{})
+
 	return DescribeAcceleratorAttributesRequest{Request: req, Input: input, Copy: c.DescribeAcceleratorAttributesRequest}
 }
 

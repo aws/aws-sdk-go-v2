@@ -325,6 +325,7 @@ func (c *Client) CreateCacheClusterRequest(input *CreateCacheClusterInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateCacheClusterOutput{})
+
 	return CreateCacheClusterRequest{Request: req, Input: input, Copy: c.CreateCacheClusterRequest}
 }
 

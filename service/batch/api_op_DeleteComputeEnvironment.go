@@ -96,6 +96,7 @@ func (c *Client) DeleteComputeEnvironmentRequest(input *DeleteComputeEnvironment
 	}
 
 	req := c.newRequest(op, input, &DeleteComputeEnvironmentOutput{})
+
 	return DeleteComputeEnvironmentRequest{Request: req, Input: input, Copy: c.DeleteComputeEnvironmentRequest}
 }
 

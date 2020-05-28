@@ -161,6 +161,7 @@ func (c *Client) UpdateBrokerStorageRequest(input *UpdateBrokerStorageInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateBrokerStorageOutput{})
+
 	return UpdateBrokerStorageRequest{Request: req, Input: input, Copy: c.UpdateBrokerStorageRequest}
 }
 

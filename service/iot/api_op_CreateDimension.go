@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -74,6 +75,13 @@ func (s *CreateDimensionInput) Validate() error {
 	}
 	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -197,6 +205,7 @@ func (c *Client) CreateDimensionRequest(input *CreateDimensionInput) CreateDimen
 	}
 
 	req := c.newRequest(op, input, &CreateDimensionOutput{})
+
 	return CreateDimensionRequest{Request: req, Input: input, Copy: c.CreateDimensionRequest}
 }
 

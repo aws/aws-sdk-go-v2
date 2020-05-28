@@ -72,6 +72,7 @@ func (c *Client) GetActiveNamesRequest(input *GetActiveNamesInput) GetActiveName
 	}
 
 	req := c.newRequest(op, input, &GetActiveNamesOutput{})
+
 	return GetActiveNamesRequest{Request: req, Input: input, Copy: c.GetActiveNamesRequest}
 }
 

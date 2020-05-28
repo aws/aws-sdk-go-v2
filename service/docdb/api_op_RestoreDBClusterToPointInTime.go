@@ -184,6 +184,7 @@ func (c *Client) RestoreDBClusterToPointInTimeRequest(input *RestoreDBClusterToP
 	}
 
 	req := c.newRequest(op, input, &RestoreDBClusterToPointInTimeOutput{})
+
 	return RestoreDBClusterToPointInTimeRequest{Request: req, Input: input, Copy: c.RestoreDBClusterToPointInTimeRequest}
 }
 

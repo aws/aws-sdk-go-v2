@@ -105,6 +105,7 @@ func (c *Client) ListUserPoolClientsRequest(input *ListUserPoolClientsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListUserPoolClientsOutput{})
+
 	return ListUserPoolClientsRequest{Request: req, Input: input, Copy: c.ListUserPoolClientsRequest}
 }
 

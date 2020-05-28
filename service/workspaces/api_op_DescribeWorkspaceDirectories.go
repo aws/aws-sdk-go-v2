@@ -97,6 +97,7 @@ func (c *Client) DescribeWorkspaceDirectoriesRequest(input *DescribeWorkspaceDir
 	}
 
 	req := c.newRequest(op, input, &DescribeWorkspaceDirectoriesOutput{})
+
 	return DescribeWorkspaceDirectoriesRequest{Request: req, Input: input, Copy: c.DescribeWorkspaceDirectoriesRequest}
 }
 

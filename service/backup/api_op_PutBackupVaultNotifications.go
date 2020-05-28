@@ -136,6 +136,7 @@ func (c *Client) PutBackupVaultNotificationsRequest(input *PutBackupVaultNotific
 	req := c.newRequest(op, input, &PutBackupVaultNotificationsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutBackupVaultNotificationsRequest{Request: req, Input: input, Copy: c.PutBackupVaultNotificationsRequest}
 }
 

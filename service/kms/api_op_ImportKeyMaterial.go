@@ -178,6 +178,7 @@ func (c *Client) ImportKeyMaterialRequest(input *ImportKeyMaterialInput) ImportK
 	}
 
 	req := c.newRequest(op, input, &ImportKeyMaterialOutput{})
+
 	return ImportKeyMaterialRequest{Request: req, Input: input, Copy: c.ImportKeyMaterialRequest}
 }
 

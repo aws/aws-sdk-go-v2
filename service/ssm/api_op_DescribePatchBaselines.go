@@ -96,6 +96,7 @@ func (c *Client) DescribePatchBaselinesRequest(input *DescribePatchBaselinesInpu
 	}
 
 	req := c.newRequest(op, input, &DescribePatchBaselinesOutput{})
+
 	return DescribePatchBaselinesRequest{Request: req, Input: input, Copy: c.DescribePatchBaselinesRequest}
 }
 

@@ -98,6 +98,7 @@ func (c *Client) RemoveTagsFromStreamRequest(input *RemoveTagsFromStreamInput) R
 	req := c.newRequest(op, input, &RemoveTagsFromStreamOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RemoveTagsFromStreamRequest{Request: req, Input: input, Copy: c.RemoveTagsFromStreamRequest}
 }
 

@@ -132,6 +132,7 @@ func (c *Client) PutEmailIdentityFeedbackAttributesRequest(input *PutEmailIdenti
 	}
 
 	req := c.newRequest(op, input, &PutEmailIdentityFeedbackAttributesOutput{})
+
 	return PutEmailIdentityFeedbackAttributesRequest{Request: req, Input: input, Copy: c.PutEmailIdentityFeedbackAttributesRequest}
 }
 

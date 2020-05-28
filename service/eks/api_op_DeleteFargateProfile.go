@@ -127,6 +127,7 @@ func (c *Client) DeleteFargateProfileRequest(input *DeleteFargateProfileInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteFargateProfileOutput{})
+
 	return DeleteFargateProfileRequest{Request: req, Input: input, Copy: c.DeleteFargateProfileRequest}
 }
 

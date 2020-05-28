@@ -76,6 +76,7 @@ func (c *Client) StartFleetRequest(input *StartFleetInput) StartFleetRequest {
 	}
 
 	req := c.newRequest(op, input, &StartFleetOutput{})
+
 	return StartFleetRequest{Request: req, Input: input, Copy: c.StartFleetRequest}
 }
 

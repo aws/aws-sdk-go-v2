@@ -98,6 +98,7 @@ func (c *Client) DescribeListenerCertificatesRequest(input *DescribeListenerCert
 	}
 
 	req := c.newRequest(op, input, &DescribeListenerCertificatesOutput{})
+
 	return DescribeListenerCertificatesRequest{Request: req, Input: input, Copy: c.DescribeListenerCertificatesRequest}
 }
 

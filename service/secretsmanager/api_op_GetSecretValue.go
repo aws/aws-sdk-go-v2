@@ -179,6 +179,7 @@ func (c *Client) GetSecretValueRequest(input *GetSecretValueInput) GetSecretValu
 	}
 
 	req := c.newRequest(op, input, &GetSecretValueOutput{})
+
 	return GetSecretValueRequest{Request: req, Input: input, Copy: c.GetSecretValueRequest}
 }
 

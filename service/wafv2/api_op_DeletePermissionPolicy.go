@@ -81,6 +81,7 @@ func (c *Client) DeletePermissionPolicyRequest(input *DeletePermissionPolicyInpu
 	}
 
 	req := c.newRequest(op, input, &DeletePermissionPolicyOutput{})
+
 	return DeletePermissionPolicyRequest{Request: req, Input: input, Copy: c.DeletePermissionPolicyRequest}
 }
 

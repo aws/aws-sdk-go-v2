@@ -99,6 +99,12 @@ func (c *Client) ListReportGroupsRequest(input *ListReportGroupsInput) ListRepor
 		Name:       opListReportGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -106,6 +112,7 @@ func (c *Client) ListReportGroupsRequest(input *ListReportGroupsInput) ListRepor
 	}
 
 	req := c.newRequest(op, input, &ListReportGroupsOutput{})
+
 	return ListReportGroupsRequest{Request: req, Input: input, Copy: c.ListReportGroupsRequest}
 }
 
@@ -131,6 +138,53 @@ func (r ListReportGroupsRequest) Send(ctx context.Context) (*ListReportGroupsRes
 	}
 
 	return resp, nil
+}
+
+// NewListReportGroupsRequestPaginator returns a paginator for ListReportGroups.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListReportGroupsRequest(input)
+//   p := codebuild.NewListReportGroupsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListReportGroupsPaginator(req ListReportGroupsRequest) ListReportGroupsPaginator {
+	return ListReportGroupsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListReportGroupsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListReportGroupsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListReportGroupsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListReportGroupsPaginator) CurrentPage() *ListReportGroupsOutput {
+	return p.Pager.CurrentPage().(*ListReportGroupsOutput)
 }
 
 // ListReportGroupsResponse is the response type for the

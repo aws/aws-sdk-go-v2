@@ -127,6 +127,7 @@ func (c *Client) ListDiscoverersRequest(input *ListDiscoverersInput) ListDiscove
 	}
 
 	req := c.newRequest(op, input, &ListDiscoverersOutput{})
+
 	return ListDiscoverersRequest{Request: req, Input: input, Copy: c.ListDiscoverersRequest}
 }
 

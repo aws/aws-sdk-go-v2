@@ -88,6 +88,7 @@ func (c *Client) UpdatePullRequestDescriptionRequest(input *UpdatePullRequestDes
 	}
 
 	req := c.newRequest(op, input, &UpdatePullRequestDescriptionOutput{})
+
 	return UpdatePullRequestDescriptionRequest{Request: req, Input: input, Copy: c.UpdatePullRequestDescriptionRequest}
 }
 

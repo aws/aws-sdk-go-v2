@@ -122,6 +122,7 @@ func (c *Client) ListLabelingJobsForWorkteamRequest(input *ListLabelingJobsForWo
 	}
 
 	req := c.newRequest(op, input, &ListLabelingJobsForWorkteamOutput{})
+
 	return ListLabelingJobsForWorkteamRequest{Request: req, Input: input, Copy: c.ListLabelingJobsForWorkteamRequest}
 }
 

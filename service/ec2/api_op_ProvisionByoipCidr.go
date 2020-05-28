@@ -33,6 +33,9 @@ type ProvisionByoipCidrInput struct {
 	// it is UnauthorizedOperation.
 	DryRun *bool `type:"boolean"`
 
+	// The tags to apply to the address pool.
+	PoolTagSpecifications []TagSpecification `locationName:"PoolTagSpecification" locationNameList:"item" type:"list"`
+
 	// (IPv6 only) Indicate whether the address range will be publicly advertised
 	// to the internet.
 	//
@@ -120,6 +123,7 @@ func (c *Client) ProvisionByoipCidrRequest(input *ProvisionByoipCidrInput) Provi
 	}
 
 	req := c.newRequest(op, input, &ProvisionByoipCidrOutput{})
+
 	return ProvisionByoipCidrRequest{Request: req, Input: input, Copy: c.ProvisionByoipCidrRequest}
 }
 

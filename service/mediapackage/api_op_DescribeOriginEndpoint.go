@@ -236,6 +236,7 @@ func (c *Client) DescribeOriginEndpointRequest(input *DescribeOriginEndpointInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeOriginEndpointOutput{})
+
 	return DescribeOriginEndpointRequest{Request: req, Input: input, Copy: c.DescribeOriginEndpointRequest}
 }
 

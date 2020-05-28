@@ -93,6 +93,7 @@ func (c *Client) GetIdentityProviderByIdentifierRequest(input *GetIdentityProvid
 	}
 
 	req := c.newRequest(op, input, &GetIdentityProviderByIdentifierOutput{})
+
 	return GetIdentityProviderByIdentifierRequest{Request: req, Input: input, Copy: c.GetIdentityProviderByIdentifierRequest}
 }
 

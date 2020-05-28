@@ -106,6 +106,7 @@ func (c *Client) ListReviewableHITsRequest(input *ListReviewableHITsInput) ListR
 	}
 
 	req := c.newRequest(op, input, &ListReviewableHITsOutput{})
+
 	return ListReviewableHITsRequest{Request: req, Input: input, Copy: c.ListReviewableHITsRequest}
 }
 

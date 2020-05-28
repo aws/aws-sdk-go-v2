@@ -58,6 +58,7 @@ func (c *Client) DescribeOperatingSystemsRequest(input *DescribeOperatingSystems
 	}
 
 	req := c.newRequest(op, input, &DescribeOperatingSystemsOutput{})
+
 	return DescribeOperatingSystemsRequest{Request: req, Input: input, Copy: c.DescribeOperatingSystemsRequest}
 }
 

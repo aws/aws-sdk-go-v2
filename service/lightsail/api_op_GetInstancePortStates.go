@@ -12,7 +12,7 @@ import (
 type GetInstancePortStatesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the instance.
+	// The name of the instance for which to return firewall port states.
 	//
 	// InstanceName is a required field
 	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
@@ -40,7 +40,8 @@ func (s *GetInstancePortStatesInput) Validate() error {
 type GetInstancePortStatesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Information about the port states resulting from your request.
+	// An array of objects that describe the firewall port states for the specified
+	// instance.
 	PortStates []InstancePortState `locationName:"portStates" type:"list"`
 }
 
@@ -54,7 +55,9 @@ const opGetInstancePortStates = "GetInstancePortStates"
 // GetInstancePortStatesRequest returns a request value for making API operation for
 // Amazon Lightsail.
 //
-// Returns the port states for a specific virtual private server, or instance.
+// Returns the firewall port states for a specific Amazon Lightsail instance,
+// the IP addresses allowed to connect to the instance through the ports, and
+// the protocol.
 //
 //    // Example sending a request using GetInstancePortStatesRequest.
 //    req := client.GetInstancePortStatesRequest(params)
@@ -76,6 +79,7 @@ func (c *Client) GetInstancePortStatesRequest(input *GetInstancePortStatesInput)
 	}
 
 	req := c.newRequest(op, input, &GetInstancePortStatesOutput{})
+
 	return GetInstancePortStatesRequest{Request: req, Input: input, Copy: c.GetInstancePortStatesRequest}
 }
 

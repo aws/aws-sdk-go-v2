@@ -99,6 +99,7 @@ func (c *Client) RejectInvitationRequest(input *RejectInvitationInput) RejectInv
 	req := c.newRequest(op, input, &RejectInvitationOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RejectInvitationRequest{Request: req, Input: input, Copy: c.RejectInvitationRequest}
 }
 

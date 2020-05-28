@@ -155,6 +155,7 @@ func (c *Client) ListProxySessionsRequest(input *ListProxySessionsInput) ListPro
 	}
 
 	req := c.newRequest(op, input, &ListProxySessionsOutput{})
+
 	return ListProxySessionsRequest{Request: req, Input: input, Copy: c.ListProxySessionsRequest}
 }
 

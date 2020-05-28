@@ -115,6 +115,7 @@ func (c *Client) AssociateTeamMemberRequest(input *AssociateTeamMemberInput) Ass
 	}
 
 	req := c.newRequest(op, input, &AssociateTeamMemberOutput{})
+
 	return AssociateTeamMemberRequest{Request: req, Input: input, Copy: c.AssociateTeamMemberRequest}
 }
 

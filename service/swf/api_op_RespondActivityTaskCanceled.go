@@ -118,6 +118,7 @@ func (c *Client) RespondActivityTaskCanceledRequest(input *RespondActivityTaskCa
 	req := c.newRequest(op, input, &RespondActivityTaskCanceledOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RespondActivityTaskCanceledRequest{Request: req, Input: input, Copy: c.RespondActivityTaskCanceledRequest}
 }
 

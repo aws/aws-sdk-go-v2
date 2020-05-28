@@ -158,6 +158,7 @@ func (c *Client) ConfirmSignUpRequest(input *ConfirmSignUpInput) ConfirmSignUpRe
 
 	req := c.newRequest(op, input, &ConfirmSignUpOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return ConfirmSignUpRequest{Request: req, Input: input, Copy: c.ConfirmSignUpRequest}
 }
 

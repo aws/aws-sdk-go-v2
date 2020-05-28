@@ -219,6 +219,7 @@ func (c *Client) CreateApplicationVersionRequest(input *CreateApplicationVersion
 	}
 
 	req := c.newRequest(op, input, &CreateApplicationVersionOutput{})
+
 	return CreateApplicationVersionRequest{Request: req, Input: input, Copy: c.CreateApplicationVersionRequest}
 }
 

@@ -119,6 +119,7 @@ func (c *Client) BatchDisableStandardsRequest(input *BatchDisableStandardsInput)
 	}
 
 	req := c.newRequest(op, input, &BatchDisableStandardsOutput{})
+
 	return BatchDisableStandardsRequest{Request: req, Input: input, Copy: c.BatchDisableStandardsRequest}
 }
 

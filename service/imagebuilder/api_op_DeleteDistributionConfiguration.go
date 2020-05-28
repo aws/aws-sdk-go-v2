@@ -111,6 +111,7 @@ func (c *Client) DeleteDistributionConfigurationRequest(input *DeleteDistributio
 	}
 
 	req := c.newRequest(op, input, &DeleteDistributionConfigurationOutput{})
+
 	return DeleteDistributionConfigurationRequest{Request: req, Input: input, Copy: c.DeleteDistributionConfigurationRequest}
 }
 

@@ -97,6 +97,7 @@ func (c *Client) DescribeBuildRequest(input *DescribeBuildInput) DescribeBuildRe
 	}
 
 	req := c.newRequest(op, input, &DescribeBuildOutput{})
+
 	return DescribeBuildRequest{Request: req, Input: input, Copy: c.DescribeBuildRequest}
 }
 

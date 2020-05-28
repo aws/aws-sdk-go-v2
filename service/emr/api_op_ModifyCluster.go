@@ -81,6 +81,7 @@ func (c *Client) ModifyClusterRequest(input *ModifyClusterInput) ModifyClusterRe
 	}
 
 	req := c.newRequest(op, input, &ModifyClusterOutput{})
+
 	return ModifyClusterRequest{Request: req, Input: input, Copy: c.ModifyClusterRequest}
 }
 

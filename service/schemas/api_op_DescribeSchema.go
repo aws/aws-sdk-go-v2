@@ -193,6 +193,7 @@ func (c *Client) DescribeSchemaRequest(input *DescribeSchemaInput) DescribeSchem
 	}
 
 	req := c.newRequest(op, input, &DescribeSchemaOutput{})
+
 	return DescribeSchemaRequest{Request: req, Input: input, Copy: c.DescribeSchemaRequest}
 }
 

@@ -184,6 +184,7 @@ func (c *Client) CreateProcessingJobRequest(input *CreateProcessingJobInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateProcessingJobOutput{})
+
 	return CreateProcessingJobRequest{Request: req, Input: input, Copy: c.CreateProcessingJobRequest}
 }
 

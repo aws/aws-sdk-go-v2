@@ -104,6 +104,7 @@ func (c *Client) ListTriggersRequest(input *ListTriggersInput) ListTriggersReque
 	}
 
 	req := c.newRequest(op, input, &ListTriggersOutput{})
+
 	return ListTriggersRequest{Request: req, Input: input, Copy: c.ListTriggersRequest}
 }
 

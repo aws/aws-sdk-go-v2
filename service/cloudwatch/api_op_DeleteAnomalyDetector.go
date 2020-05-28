@@ -108,6 +108,7 @@ func (c *Client) DeleteAnomalyDetectorRequest(input *DeleteAnomalyDetectorInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteAnomalyDetectorOutput{})
+
 	return DeleteAnomalyDetectorRequest{Request: req, Input: input, Copy: c.DeleteAnomalyDetectorRequest}
 }
 

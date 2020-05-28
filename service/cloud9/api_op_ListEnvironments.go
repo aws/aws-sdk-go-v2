@@ -80,6 +80,7 @@ func (c *Client) ListEnvironmentsRequest(input *ListEnvironmentsInput) ListEnvir
 	}
 
 	req := c.newRequest(op, input, &ListEnvironmentsOutput{})
+
 	return ListEnvironmentsRequest{Request: req, Input: input, Copy: c.ListEnvironmentsRequest}
 }
 

@@ -66,6 +66,7 @@ func (c *Client) ResolveCaseRequest(input *ResolveCaseInput) ResolveCaseRequest 
 	}
 
 	req := c.newRequest(op, input, &ResolveCaseOutput{})
+
 	return ResolveCaseRequest{Request: req, Input: input, Copy: c.ResolveCaseRequest}
 }
 

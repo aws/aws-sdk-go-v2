@@ -95,6 +95,7 @@ func (c *Client) ListStacksRequest(input *ListStacksInput) ListStacksRequest {
 	}
 
 	req := c.newRequest(op, input, &ListStacksOutput{})
+
 	return ListStacksRequest{Request: req, Input: input, Copy: c.ListStacksRequest}
 }
 

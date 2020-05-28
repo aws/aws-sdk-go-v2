@@ -118,6 +118,7 @@ func (c *Client) DescribeGameServerRequest(input *DescribeGameServerInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeGameServerOutput{})
+
 	return DescribeGameServerRequest{Request: req, Input: input, Copy: c.DescribeGameServerRequest}
 }
 

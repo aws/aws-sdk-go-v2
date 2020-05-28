@@ -105,6 +105,7 @@ func (c *Client) ListCloudFrontOriginAccessIdentitiesRequest(input *ListCloudFro
 	}
 
 	req := c.newRequest(op, input, &ListCloudFrontOriginAccessIdentitiesOutput{})
+
 	return ListCloudFrontOriginAccessIdentitiesRequest{Request: req, Input: input, Copy: c.ListCloudFrontOriginAccessIdentitiesRequest}
 }
 

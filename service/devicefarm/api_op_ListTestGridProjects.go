@@ -89,6 +89,7 @@ func (c *Client) ListTestGridProjectsRequest(input *ListTestGridProjectsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListTestGridProjectsOutput{})
+
 	return ListTestGridProjectsRequest{Request: req, Input: input, Copy: c.ListTestGridProjectsRequest}
 }
 

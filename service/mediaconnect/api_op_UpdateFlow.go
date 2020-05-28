@@ -110,6 +110,7 @@ func (c *Client) UpdateFlowRequest(input *UpdateFlowInput) UpdateFlowRequest {
 	}
 
 	req := c.newRequest(op, input, &UpdateFlowOutput{})
+
 	return UpdateFlowRequest{Request: req, Input: input, Copy: c.UpdateFlowRequest}
 }
 

@@ -81,6 +81,7 @@ func (c *Client) RejectQualificationRequestRequest(input *RejectQualificationReq
 	}
 
 	req := c.newRequest(op, input, &RejectQualificationRequestOutput{})
+
 	return RejectQualificationRequestRequest{Request: req, Input: input, Copy: c.RejectQualificationRequestRequest}
 }
 

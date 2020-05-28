@@ -93,6 +93,7 @@ func (c *Client) DescribeDirectoryConfigsRequest(input *DescribeDirectoryConfigs
 	}
 
 	req := c.newRequest(op, input, &DescribeDirectoryConfigsOutput{})
+
 	return DescribeDirectoryConfigsRequest{Request: req, Input: input, Copy: c.DescribeDirectoryConfigsRequest}
 }
 

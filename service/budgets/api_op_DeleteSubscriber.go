@@ -119,6 +119,7 @@ func (c *Client) DeleteSubscriberRequest(input *DeleteSubscriberInput) DeleteSub
 	}
 
 	req := c.newRequest(op, input, &DeleteSubscriberOutput{})
+
 	return DeleteSubscriberRequest{Request: req, Input: input, Copy: c.DeleteSubscriberRequest}
 }
 

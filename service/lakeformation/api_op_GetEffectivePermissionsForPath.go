@@ -106,6 +106,7 @@ func (c *Client) GetEffectivePermissionsForPathRequest(input *GetEffectivePermis
 	}
 
 	req := c.newRequest(op, input, &GetEffectivePermissionsForPathOutput{})
+
 	return GetEffectivePermissionsForPathRequest{Request: req, Input: input, Copy: c.GetEffectivePermissionsForPathRequest}
 }
 

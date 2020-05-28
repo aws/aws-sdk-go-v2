@@ -102,6 +102,7 @@ func (c *Client) DescribeRoleAliasRequest(input *DescribeRoleAliasInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeRoleAliasOutput{})
+
 	return DescribeRoleAliasRequest{Request: req, Input: input, Copy: c.DescribeRoleAliasRequest}
 }
 

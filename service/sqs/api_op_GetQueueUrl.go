@@ -91,6 +91,7 @@ func (c *Client) GetQueueUrlRequest(input *GetQueueUrlInput) GetQueueUrlRequest 
 	}
 
 	req := c.newRequest(op, input, &GetQueueUrlOutput{})
+
 	return GetQueueUrlRequest{Request: req, Input: input, Copy: c.GetQueueUrlRequest}
 }
 

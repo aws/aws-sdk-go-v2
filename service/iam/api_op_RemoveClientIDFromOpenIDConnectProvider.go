@@ -104,6 +104,7 @@ func (c *Client) RemoveClientIDFromOpenIDConnectProviderRequest(input *RemoveCli
 	req := c.newRequest(op, input, &RemoveClientIDFromOpenIDConnectProviderOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RemoveClientIDFromOpenIDConnectProviderRequest{Request: req, Input: input, Copy: c.RemoveClientIDFromOpenIDConnectProviderRequest}
 }
 

@@ -260,6 +260,7 @@ func (c *Client) UpdateUserPoolClientRequest(input *UpdateUserPoolClientInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateUserPoolClientOutput{})
+
 	return UpdateUserPoolClientRequest{Request: req, Input: input, Copy: c.UpdateUserPoolClientRequest}
 }
 

@@ -85,6 +85,7 @@ func (c *Client) DisassociateIpGroupsRequest(input *DisassociateIpGroupsInput) D
 	}
 
 	req := c.newRequest(op, input, &DisassociateIpGroupsOutput{})
+
 	return DisassociateIpGroupsRequest{Request: req, Input: input, Copy: c.DisassociateIpGroupsRequest}
 }
 

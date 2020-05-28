@@ -79,6 +79,7 @@ func (c *Client) DeleteOptionGroupRequest(input *DeleteOptionGroupInput) DeleteO
 	req := c.newRequest(op, input, &DeleteOptionGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteOptionGroupRequest{Request: req, Input: input, Copy: c.DeleteOptionGroupRequest}
 }
 

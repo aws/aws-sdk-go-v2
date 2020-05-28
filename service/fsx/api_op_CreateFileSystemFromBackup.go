@@ -184,6 +184,7 @@ func (c *Client) CreateFileSystemFromBackupRequest(input *CreateFileSystemFromBa
 	}
 
 	req := c.newRequest(op, input, &CreateFileSystemFromBackupOutput{})
+
 	return CreateFileSystemFromBackupRequest{Request: req, Input: input, Copy: c.CreateFileSystemFromBackupRequest}
 }
 

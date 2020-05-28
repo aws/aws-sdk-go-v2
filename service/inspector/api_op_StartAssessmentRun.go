@@ -91,6 +91,7 @@ func (c *Client) StartAssessmentRunRequest(input *StartAssessmentRunInput) Start
 	}
 
 	req := c.newRequest(op, input, &StartAssessmentRunOutput{})
+
 	return StartAssessmentRunRequest{Request: req, Input: input, Copy: c.StartAssessmentRunRequest}
 }
 

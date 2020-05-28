@@ -165,6 +165,7 @@ func (c *Client) UpdateVirtualRouterRequest(input *UpdateVirtualRouterInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateVirtualRouterOutput{})
+
 	return UpdateVirtualRouterRequest{Request: req, Input: input, Copy: c.UpdateVirtualRouterRequest}
 }
 

@@ -75,6 +75,7 @@ func (c *Client) DeleteDirectoryConfigRequest(input *DeleteDirectoryConfigInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteDirectoryConfigOutput{})
+
 	return DeleteDirectoryConfigRequest{Request: req, Input: input, Copy: c.DeleteDirectoryConfigRequest}
 }
 

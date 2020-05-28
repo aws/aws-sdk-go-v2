@@ -76,10 +76,10 @@ func (s *GetBucketWebsiteInput) hasEndpointARN() bool {
 type GetBucketWebsiteOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the error document for the website.
+	// The object key name of the website error document to use for 4XX class errors.
 	ErrorDocument *ErrorDocument `type:"structure"`
 
-	// The name of the index document for the website.
+	// The name of the index document for the website (for example index.html).
 	IndexDocument *IndexDocument `type:"structure"`
 
 	// Specifies the redirect behavior of all requests to a website endpoint of
@@ -171,6 +171,7 @@ func (c *Client) GetBucketWebsiteRequest(input *GetBucketWebsiteInput) GetBucket
 	}
 
 	req := c.newRequest(op, input, &GetBucketWebsiteOutput{})
+
 	return GetBucketWebsiteRequest{Request: req, Input: input, Copy: c.GetBucketWebsiteRequest}
 }
 

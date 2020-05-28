@@ -81,6 +81,7 @@ func (c *Client) DescribePHIDetectionJobRequest(input *DescribePHIDetectionJobIn
 	}
 
 	req := c.newRequest(op, input, &DescribePHIDetectionJobOutput{})
+
 	return DescribePHIDetectionJobRequest{Request: req, Input: input, Copy: c.DescribePHIDetectionJobRequest}
 }
 

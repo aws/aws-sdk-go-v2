@@ -92,6 +92,7 @@ func (c *Client) EvaluatePullRequestApprovalRulesRequest(input *EvaluatePullRequ
 	}
 
 	req := c.newRequest(op, input, &EvaluatePullRequestApprovalRulesOutput{})
+
 	return EvaluatePullRequestApprovalRulesRequest{Request: req, Input: input, Copy: c.EvaluatePullRequestApprovalRulesRequest}
 }
 

@@ -110,6 +110,7 @@ func (c *Client) ListProvisionedCapacityRequest(input *ListProvisionedCapacityIn
 	}
 
 	req := c.newRequest(op, input, &ListProvisionedCapacityOutput{})
+
 	return ListProvisionedCapacityRequest{Request: req, Input: input, Copy: c.ListProvisionedCapacityRequest}
 }
 

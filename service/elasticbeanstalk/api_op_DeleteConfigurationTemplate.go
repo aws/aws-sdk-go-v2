@@ -97,6 +97,7 @@ func (c *Client) DeleteConfigurationTemplateRequest(input *DeleteConfigurationTe
 	req := c.newRequest(op, input, &DeleteConfigurationTemplateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteConfigurationTemplateRequest{Request: req, Input: input, Copy: c.DeleteConfigurationTemplateRequest}
 }
 

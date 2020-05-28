@@ -126,6 +126,7 @@ func (c *Client) ListCompilationJobsRequest(input *ListCompilationJobsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListCompilationJobsOutput{})
+
 	return ListCompilationJobsRequest{Request: req, Input: input, Copy: c.ListCompilationJobsRequest}
 }
 

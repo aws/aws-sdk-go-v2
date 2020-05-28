@@ -50,7 +50,7 @@ type ImportKeyPairOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
+	// of the request, the timestamp of the request, and the resources affected
 	// by the request.
 	Operation *Operation `locationName:"operation" type:"structure"`
 }
@@ -87,6 +87,7 @@ func (c *Client) ImportKeyPairRequest(input *ImportKeyPairInput) ImportKeyPairRe
 	}
 
 	req := c.newRequest(op, input, &ImportKeyPairOutput{})
+
 	return ImportKeyPairRequest{Request: req, Input: input, Copy: c.ImportKeyPairRequest}
 }
 

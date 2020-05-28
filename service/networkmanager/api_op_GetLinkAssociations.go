@@ -162,6 +162,7 @@ func (c *Client) GetLinkAssociationsRequest(input *GetLinkAssociationsInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetLinkAssociationsOutput{})
+
 	return GetLinkAssociationsRequest{Request: req, Input: input, Copy: c.GetLinkAssociationsRequest}
 }
 

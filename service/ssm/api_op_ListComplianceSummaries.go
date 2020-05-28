@@ -98,6 +98,7 @@ func (c *Client) ListComplianceSummariesRequest(input *ListComplianceSummariesIn
 	}
 
 	req := c.newRequest(op, input, &ListComplianceSummariesOutput{})
+
 	return ListComplianceSummariesRequest{Request: req, Input: input, Copy: c.ListComplianceSummariesRequest}
 }
 

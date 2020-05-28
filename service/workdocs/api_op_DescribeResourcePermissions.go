@@ -170,6 +170,7 @@ func (c *Client) DescribeResourcePermissionsRequest(input *DescribeResourcePermi
 	}
 
 	req := c.newRequest(op, input, &DescribeResourcePermissionsOutput{})
+
 	return DescribeResourcePermissionsRequest{Request: req, Input: input, Copy: c.DescribeResourcePermissionsRequest}
 }
 

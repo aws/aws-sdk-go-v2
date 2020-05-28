@@ -126,6 +126,7 @@ func (c *Client) ListTypeRegistrationsRequest(input *ListTypeRegistrationsInput)
 	}
 
 	req := c.newRequest(op, input, &ListTypeRegistrationsOutput{})
+
 	return ListTypeRegistrationsRequest{Request: req, Input: input, Copy: c.ListTypeRegistrationsRequest}
 }
 

@@ -98,6 +98,7 @@ func (c *Client) DeleteCacheClusterRequest(input *DeleteCacheClusterInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteCacheClusterOutput{})
+
 	return DeleteCacheClusterRequest{Request: req, Input: input, Copy: c.DeleteCacheClusterRequest}
 }
 

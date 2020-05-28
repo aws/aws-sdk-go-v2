@@ -117,6 +117,7 @@ func (c *Client) DisassociateSigninDelegateGroupsFromAccountRequest(input *Disas
 	}
 
 	req := c.newRequest(op, input, &DisassociateSigninDelegateGroupsFromAccountOutput{})
+
 	return DisassociateSigninDelegateGroupsFromAccountRequest{Request: req, Input: input, Copy: c.DisassociateSigninDelegateGroupsFromAccountRequest}
 }
 

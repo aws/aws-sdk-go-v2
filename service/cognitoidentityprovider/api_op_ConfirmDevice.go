@@ -101,6 +101,7 @@ func (c *Client) ConfirmDeviceRequest(input *ConfirmDeviceInput) ConfirmDeviceRe
 	}
 
 	req := c.newRequest(op, input, &ConfirmDeviceOutput{})
+
 	return ConfirmDeviceRequest{Request: req, Input: input, Copy: c.ConfirmDeviceRequest}
 }
 

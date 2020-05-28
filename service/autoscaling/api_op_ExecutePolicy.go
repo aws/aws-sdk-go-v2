@@ -114,6 +114,7 @@ func (c *Client) ExecutePolicyRequest(input *ExecutePolicyInput) ExecutePolicyRe
 	req := c.newRequest(op, input, &ExecutePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return ExecutePolicyRequest{Request: req, Input: input, Copy: c.ExecutePolicyRequest}
 }
 

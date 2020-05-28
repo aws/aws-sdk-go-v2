@@ -82,6 +82,7 @@ func (c *Client) DeleteNotebookInstanceRequest(input *DeleteNotebookInstanceInpu
 	req := c.newRequest(op, input, &DeleteNotebookInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteNotebookInstanceRequest{Request: req, Input: input, Copy: c.DeleteNotebookInstanceRequest}
 }
 

@@ -112,6 +112,7 @@ func (c *Client) OpenTunnelRequest(input *OpenTunnelInput) OpenTunnelRequest {
 	}
 
 	req := c.newRequest(op, input, &OpenTunnelOutput{})
+
 	return OpenTunnelRequest{Request: req, Input: input, Copy: c.OpenTunnelRequest}
 }
 

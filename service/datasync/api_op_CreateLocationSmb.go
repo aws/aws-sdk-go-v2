@@ -160,6 +160,7 @@ func (c *Client) CreateLocationSmbRequest(input *CreateLocationSmbInput) CreateL
 	}
 
 	req := c.newRequest(op, input, &CreateLocationSmbOutput{})
+
 	return CreateLocationSmbRequest{Request: req, Input: input, Copy: c.CreateLocationSmbRequest}
 }
 

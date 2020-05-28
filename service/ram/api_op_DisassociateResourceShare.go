@@ -158,6 +158,7 @@ func (c *Client) DisassociateResourceShareRequest(input *DisassociateResourceSha
 	}
 
 	req := c.newRequest(op, input, &DisassociateResourceShareOutput{})
+
 	return DisassociateResourceShareRequest{Request: req, Input: input, Copy: c.DisassociateResourceShareRequest}
 }
 

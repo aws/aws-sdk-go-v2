@@ -147,6 +147,7 @@ func (c *Client) CreatePackageRequest(input *CreatePackageInput) CreatePackageRe
 	}
 
 	req := c.newRequest(op, input, &CreatePackageOutput{})
+
 	return CreatePackageRequest{Request: req, Input: input, Copy: c.CreatePackageRequest}
 }
 

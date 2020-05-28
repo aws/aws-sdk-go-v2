@@ -403,6 +403,7 @@ func (c *Client) CreateEventSourceMappingRequest(input *CreateEventSourceMapping
 	}
 
 	req := c.newRequest(op, input, &CreateEventSourceMappingOutput{})
+
 	return CreateEventSourceMappingRequest{Request: req, Input: input, Copy: c.CreateEventSourceMappingRequest}
 }
 

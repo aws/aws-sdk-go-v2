@@ -150,6 +150,7 @@ func (c *Client) CreateMatchmakingRuleSetRequest(input *CreateMatchmakingRuleSet
 	}
 
 	req := c.newRequest(op, input, &CreateMatchmakingRuleSetOutput{})
+
 	return CreateMatchmakingRuleSetRequest{Request: req, Input: input, Copy: c.CreateMatchmakingRuleSetRequest}
 }
 

@@ -132,6 +132,7 @@ func (c *Client) DetectFacesRequest(input *DetectFacesInput) DetectFacesRequest 
 	}
 
 	req := c.newRequest(op, input, &DetectFacesOutput{})
+
 	return DetectFacesRequest{Request: req, Input: input, Copy: c.DetectFacesRequest}
 }
 

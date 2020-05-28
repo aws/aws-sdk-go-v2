@@ -136,6 +136,7 @@ func (c *Client) CreateActionTargetRequest(input *CreateActionTargetInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateActionTargetOutput{})
+
 	return CreateActionTargetRequest{Request: req, Input: input, Copy: c.CreateActionTargetRequest}
 }
 

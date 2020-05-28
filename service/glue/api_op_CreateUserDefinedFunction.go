@@ -97,6 +97,7 @@ func (c *Client) CreateUserDefinedFunctionRequest(input *CreateUserDefinedFuncti
 	}
 
 	req := c.newRequest(op, input, &CreateUserDefinedFunctionOutput{})
+
 	return CreateUserDefinedFunctionRequest{Request: req, Input: input, Copy: c.CreateUserDefinedFunctionRequest}
 }
 

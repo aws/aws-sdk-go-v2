@@ -559,6 +559,7 @@ func (c *Client) CreateSimulationJobRequest(input *CreateSimulationJobInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateSimulationJobOutput{})
+
 	return CreateSimulationJobRequest{Request: req, Input: input, Copy: c.CreateSimulationJobRequest}
 }
 

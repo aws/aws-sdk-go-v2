@@ -135,6 +135,7 @@ func (c *Client) GetRolePolicyRequest(input *GetRolePolicyInput) GetRolePolicyRe
 	}
 
 	req := c.newRequest(op, input, &GetRolePolicyOutput{})
+
 	return GetRolePolicyRequest{Request: req, Input: input, Copy: c.GetRolePolicyRequest}
 }
 

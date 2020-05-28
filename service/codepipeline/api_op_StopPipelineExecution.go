@@ -103,6 +103,7 @@ func (c *Client) StopPipelineExecutionRequest(input *StopPipelineExecutionInput)
 	}
 
 	req := c.newRequest(op, input, &StopPipelineExecutionOutput{})
+
 	return StopPipelineExecutionRequest{Request: req, Input: input, Copy: c.StopPipelineExecutionRequest}
 }
 

@@ -76,6 +76,7 @@ func (c *Client) DescribeFeatureTransformationRequest(input *DescribeFeatureTran
 	}
 
 	req := c.newRequest(op, input, &DescribeFeatureTransformationOutput{})
+
 	return DescribeFeatureTransformationRequest{Request: req, Input: input, Copy: c.DescribeFeatureTransformationRequest}
 }
 

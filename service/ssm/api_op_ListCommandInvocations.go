@@ -21,7 +21,7 @@ type ListCommandInvocationsInput struct {
 	Details *bool `type:"boolean"`
 
 	// (Optional) One or more filters. Use a filter to return a more specific list
-	// of results. Note that the DocumentName filter is not supported for ListCommandInvocations.
+	// of results.
 	Filters []CommandFilter `min:"1" type:"list"`
 
 	// (Optional) The command execution details for a specific instance ID.
@@ -121,6 +121,7 @@ func (c *Client) ListCommandInvocationsRequest(input *ListCommandInvocationsInpu
 	}
 
 	req := c.newRequest(op, input, &ListCommandInvocationsOutput{})
+
 	return ListCommandInvocationsRequest{Request: req, Input: input, Copy: c.ListCommandInvocationsRequest}
 }
 

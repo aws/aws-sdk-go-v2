@@ -154,6 +154,7 @@ func (c *Client) CreateCloudFormationTemplateRequest(input *CreateCloudFormation
 	}
 
 	req := c.newRequest(op, input, &CreateCloudFormationTemplateOutput{})
+
 	return CreateCloudFormationTemplateRequest{Request: req, Input: input, Copy: c.CreateCloudFormationTemplateRequest}
 }
 

@@ -111,7 +111,7 @@ type CreateProjectInput struct {
 	// in the AWS CodeBuild User Guide.
 	SourceVersion *string `locationName:"sourceVersion" type:"string"`
 
-	// A set of tags for this build project.
+	// A list of tag key and value pairs associated with this build project.
 	//
 	// These tags are available for use by AWS services that support AWS CodeBuild
 	// build project tags.
@@ -273,6 +273,7 @@ func (c *Client) CreateProjectRequest(input *CreateProjectInput) CreateProjectRe
 	}
 
 	req := c.newRequest(op, input, &CreateProjectOutput{})
+
 	return CreateProjectRequest{Request: req, Input: input, Copy: c.CreateProjectRequest}
 }
 

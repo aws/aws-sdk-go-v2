@@ -105,6 +105,7 @@ func (c *Client) GetJobTemplateRequest(input *GetJobTemplateInput) GetJobTemplat
 	}
 
 	req := c.newRequest(op, input, &GetJobTemplateOutput{})
+
 	return GetJobTemplateRequest{Request: req, Input: input, Copy: c.GetJobTemplateRequest}
 }
 

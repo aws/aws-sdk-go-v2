@@ -87,6 +87,7 @@ func (c *Client) RegisterOnPremisesInstanceRequest(input *RegisterOnPremisesInst
 	req := c.newRequest(op, input, &RegisterOnPremisesInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RegisterOnPremisesInstanceRequest{Request: req, Input: input, Copy: c.RegisterOnPremisesInstanceRequest}
 }
 

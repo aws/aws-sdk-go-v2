@@ -86,6 +86,7 @@ func (c *Client) StartImageBuilderRequest(input *StartImageBuilderInput) StartIm
 	}
 
 	req := c.newRequest(op, input, &StartImageBuilderOutput{})
+
 	return StartImageBuilderRequest{Request: req, Input: input, Copy: c.StartImageBuilderRequest}
 }
 

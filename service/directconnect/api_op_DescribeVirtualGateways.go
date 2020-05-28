@@ -60,6 +60,7 @@ func (c *Client) DescribeVirtualGatewaysRequest(input *DescribeVirtualGatewaysIn
 	}
 
 	req := c.newRequest(op, input, &DescribeVirtualGatewaysOutput{})
+
 	return DescribeVirtualGatewaysRequest{Request: req, Input: input, Copy: c.DescribeVirtualGatewaysRequest}
 }
 

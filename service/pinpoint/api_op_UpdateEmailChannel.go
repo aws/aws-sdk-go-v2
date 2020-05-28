@@ -123,6 +123,7 @@ func (c *Client) UpdateEmailChannelRequest(input *UpdateEmailChannelInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateEmailChannelOutput{})
+
 	return UpdateEmailChannelRequest{Request: req, Input: input, Copy: c.UpdateEmailChannelRequest}
 }
 

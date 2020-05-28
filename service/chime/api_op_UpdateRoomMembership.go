@@ -143,6 +143,7 @@ func (c *Client) UpdateRoomMembershipRequest(input *UpdateRoomMembershipInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateRoomMembershipOutput{})
+
 	return UpdateRoomMembershipRequest{Request: req, Input: input, Copy: c.UpdateRoomMembershipRequest}
 }
 

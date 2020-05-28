@@ -79,6 +79,7 @@ func (c *Client) CancelClusterRequest(input *CancelClusterInput) CancelClusterRe
 	}
 
 	req := c.newRequest(op, input, &CancelClusterOutput{})
+
 	return CancelClusterRequest{Request: req, Input: input, Copy: c.CancelClusterRequest}
 }
 

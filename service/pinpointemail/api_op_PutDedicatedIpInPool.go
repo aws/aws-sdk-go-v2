@@ -119,6 +119,7 @@ func (c *Client) PutDedicatedIpInPoolRequest(input *PutDedicatedIpInPoolInput) P
 	}
 
 	req := c.newRequest(op, input, &PutDedicatedIpInPoolOutput{})
+
 	return PutDedicatedIpInPoolRequest{Request: req, Input: input, Copy: c.PutDedicatedIpInPoolRequest}
 }
 

@@ -99,6 +99,7 @@ func (c *Client) UpdateServiceAccessPoliciesRequest(input *UpdateServiceAccessPo
 	}
 
 	req := c.newRequest(op, input, &UpdateServiceAccessPoliciesOutput{})
+
 	return UpdateServiceAccessPoliciesRequest{Request: req, Input: input, Copy: c.UpdateServiceAccessPoliciesRequest}
 }
 

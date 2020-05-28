@@ -165,6 +165,7 @@ func (c *Client) GetMLTransformRequest(input *GetMLTransformInput) GetMLTransfor
 	}
 
 	req := c.newRequest(op, input, &GetMLTransformOutput{})
+
 	return GetMLTransformRequest{Request: req, Input: input, Copy: c.GetMLTransformRequest}
 }
 

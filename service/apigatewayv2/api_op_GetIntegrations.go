@@ -130,6 +130,7 @@ func (c *Client) GetIntegrationsRequest(input *GetIntegrationsInput) GetIntegrat
 	}
 
 	req := c.newRequest(op, input, &GetIntegrationsOutput{})
+
 	return GetIntegrationsRequest{Request: req, Input: input, Copy: c.GetIntegrationsRequest}
 }
 

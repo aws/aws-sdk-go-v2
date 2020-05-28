@@ -127,6 +127,7 @@ func (c *Client) ListTablesRequest(input *ListTablesInput) ListTablesRequest {
 			Fn:   de.Handler,
 		})
 	}
+
 	return ListTablesRequest{Request: req, Input: input, Copy: c.ListTablesRequest}
 }
 

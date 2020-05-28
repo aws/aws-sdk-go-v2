@@ -81,6 +81,7 @@ func (c *Client) DeleteAssessmentTemplateRequest(input *DeleteAssessmentTemplate
 	req := c.newRequest(op, input, &DeleteAssessmentTemplateOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteAssessmentTemplateRequest{Request: req, Input: input, Copy: c.DeleteAssessmentTemplateRequest}
 }
 

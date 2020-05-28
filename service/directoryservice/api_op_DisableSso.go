@@ -97,6 +97,7 @@ func (c *Client) DisableSsoRequest(input *DisableSsoInput) DisableSsoRequest {
 	}
 
 	req := c.newRequest(op, input, &DisableSsoOutput{})
+
 	return DisableSsoRequest{Request: req, Input: input, Copy: c.DisableSsoRequest}
 }
 

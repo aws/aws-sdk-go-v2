@@ -118,6 +118,7 @@ func (c *Client) UpdateNetworkProfileRequest(input *UpdateNetworkProfileInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateNetworkProfileOutput{})
+
 	return UpdateNetworkProfileRequest{Request: req, Input: input, Copy: c.UpdateNetworkProfileRequest}
 }
 

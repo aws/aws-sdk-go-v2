@@ -186,6 +186,7 @@ func (c *Client) UpdateMissionProfileRequest(input *UpdateMissionProfileInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateMissionProfileOutput{})
+
 	return UpdateMissionProfileRequest{Request: req, Input: input, Copy: c.UpdateMissionProfileRequest}
 }
 

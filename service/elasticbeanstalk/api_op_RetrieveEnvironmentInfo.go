@@ -102,6 +102,7 @@ func (c *Client) RetrieveEnvironmentInfoRequest(input *RetrieveEnvironmentInfoIn
 	}
 
 	req := c.newRequest(op, input, &RetrieveEnvironmentInfoOutput{})
+
 	return RetrieveEnvironmentInfoRequest{Request: req, Input: input, Copy: c.RetrieveEnvironmentInfoRequest}
 }
 

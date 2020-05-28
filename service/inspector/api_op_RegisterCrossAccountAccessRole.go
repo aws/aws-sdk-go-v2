@@ -82,6 +82,7 @@ func (c *Client) RegisterCrossAccountAccessRoleRequest(input *RegisterCrossAccou
 	req := c.newRequest(op, input, &RegisterCrossAccountAccessRoleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RegisterCrossAccountAccessRoleRequest{Request: req, Input: input, Copy: c.RegisterCrossAccountAccessRoleRequest}
 }
 

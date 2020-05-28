@@ -150,6 +150,7 @@ func (c *Client) CreateQualificationTypeRequest(input *CreateQualificationTypeIn
 	}
 
 	req := c.newRequest(op, input, &CreateQualificationTypeOutput{})
+
 	return CreateQualificationTypeRequest{Request: req, Input: input, Copy: c.CreateQualificationTypeRequest}
 }
 

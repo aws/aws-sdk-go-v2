@@ -182,6 +182,7 @@ func (c *Client) CountClosedWorkflowExecutionsRequest(input *CountClosedWorkflow
 	}
 
 	req := c.newRequest(op, input, &CountClosedWorkflowExecutionsOutput{})
+
 	return CountClosedWorkflowExecutionsRequest{Request: req, Input: input, Copy: c.CountClosedWorkflowExecutionsRequest}
 }
 

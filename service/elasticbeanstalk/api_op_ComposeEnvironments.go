@@ -102,6 +102,7 @@ func (c *Client) ComposeEnvironmentsRequest(input *ComposeEnvironmentsInput) Com
 	}
 
 	req := c.newRequest(op, input, &ComposeEnvironmentsOutput{})
+
 	return ComposeEnvironmentsRequest{Request: req, Input: input, Copy: c.ComposeEnvironmentsRequest}
 }
 

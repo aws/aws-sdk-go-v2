@@ -118,6 +118,7 @@ func (c *Client) GetInvalidationRequest(input *GetInvalidationInput) GetInvalida
 	}
 
 	req := c.newRequest(op, input, &GetInvalidationOutput{})
+
 	return GetInvalidationRequest{Request: req, Input: input, Copy: c.GetInvalidationRequest}
 }
 

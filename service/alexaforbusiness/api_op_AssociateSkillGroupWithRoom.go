@@ -61,6 +61,7 @@ func (c *Client) AssociateSkillGroupWithRoomRequest(input *AssociateSkillGroupWi
 	}
 
 	req := c.newRequest(op, input, &AssociateSkillGroupWithRoomOutput{})
+
 	return AssociateSkillGroupWithRoomRequest{Request: req, Input: input, Copy: c.AssociateSkillGroupWithRoomRequest}
 }
 

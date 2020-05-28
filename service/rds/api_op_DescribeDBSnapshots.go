@@ -188,6 +188,7 @@ func (c *Client) DescribeDBSnapshotsRequest(input *DescribeDBSnapshotsInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeDBSnapshotsOutput{})
+
 	return DescribeDBSnapshotsRequest{Request: req, Input: input, Copy: c.DescribeDBSnapshotsRequest}
 }
 

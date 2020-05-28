@@ -98,6 +98,7 @@ func (c *Client) ListTeamMembersRequest(input *ListTeamMembersInput) ListTeamMem
 	}
 
 	req := c.newRequest(op, input, &ListTeamMembersOutput{})
+
 	return ListTeamMembersRequest{Request: req, Input: input, Copy: c.ListTeamMembersRequest}
 }
 

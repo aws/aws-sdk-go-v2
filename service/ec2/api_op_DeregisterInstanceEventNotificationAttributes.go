@@ -67,6 +67,7 @@ func (c *Client) DeregisterInstanceEventNotificationAttributesRequest(input *Der
 	}
 
 	req := c.newRequest(op, input, &DeregisterInstanceEventNotificationAttributesOutput{})
+
 	return DeregisterInstanceEventNotificationAttributesRequest{Request: req, Input: input, Copy: c.DeregisterInstanceEventNotificationAttributesRequest}
 }
 

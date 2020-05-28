@@ -113,6 +113,7 @@ func (c *Client) UpdateReplicationJobRequest(input *UpdateReplicationJobInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateReplicationJobOutput{})
+
 	return UpdateReplicationJobRequest{Request: req, Input: input, Copy: c.UpdateReplicationJobRequest}
 }
 

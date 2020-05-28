@@ -115,6 +115,7 @@ func (c *Client) UpdateAccessKeyRequest(input *UpdateAccessKeyInput) UpdateAcces
 	req := c.newRequest(op, input, &UpdateAccessKeyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateAccessKeyRequest{Request: req, Input: input, Copy: c.UpdateAccessKeyRequest}
 }
 

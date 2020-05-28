@@ -85,6 +85,7 @@ func (c *Client) GetWebACLForResourceRequest(input *GetWebACLForResourceInput) G
 	}
 
 	req := c.newRequest(op, input, &GetWebACLForResourceOutput{})
+
 	return GetWebACLForResourceRequest{Request: req, Input: input, Copy: c.GetWebACLForResourceRequest}
 }
 

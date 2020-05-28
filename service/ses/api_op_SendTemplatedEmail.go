@@ -227,6 +227,7 @@ func (c *Client) SendTemplatedEmailRequest(input *SendTemplatedEmailInput) SendT
 	}
 
 	req := c.newRequest(op, input, &SendTemplatedEmailOutput{})
+
 	return SendTemplatedEmailRequest{Request: req, Input: input, Copy: c.SendTemplatedEmailRequest}
 }
 

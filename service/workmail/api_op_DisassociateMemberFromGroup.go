@@ -97,6 +97,7 @@ func (c *Client) DisassociateMemberFromGroupRequest(input *DisassociateMemberFro
 	}
 
 	req := c.newRequest(op, input, &DisassociateMemberFromGroupOutput{})
+
 	return DisassociateMemberFromGroupRequest{Request: req, Input: input, Copy: c.DisassociateMemberFromGroupRequest}
 }
 

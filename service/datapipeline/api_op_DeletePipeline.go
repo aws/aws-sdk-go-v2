@@ -88,6 +88,7 @@ func (c *Client) DeletePipelineRequest(input *DeletePipelineInput) DeletePipelin
 	req := c.newRequest(op, input, &DeletePipelineOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeletePipelineRequest{Request: req, Input: input, Copy: c.DeletePipelineRequest}
 }
 

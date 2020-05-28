@@ -115,6 +115,7 @@ func (c *Client) DescribeEventTypesRequest(input *DescribeEventTypesInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeEventTypesOutput{})
+
 	return DescribeEventTypesRequest{Request: req, Input: input, Copy: c.DescribeEventTypesRequest}
 }
 

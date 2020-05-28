@@ -109,6 +109,7 @@ func (c *Client) UpdateGatewayInformationRequest(input *UpdateGatewayInformation
 	}
 
 	req := c.newRequest(op, input, &UpdateGatewayInformationOutput{})
+
 	return UpdateGatewayInformationRequest{Request: req, Input: input, Copy: c.UpdateGatewayInformationRequest}
 }
 

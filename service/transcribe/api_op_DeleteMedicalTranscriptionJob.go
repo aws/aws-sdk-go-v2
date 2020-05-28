@@ -82,6 +82,7 @@ func (c *Client) DeleteMedicalTranscriptionJobRequest(input *DeleteMedicalTransc
 	req := c.newRequest(op, input, &DeleteMedicalTranscriptionJobOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteMedicalTranscriptionJobRequest{Request: req, Input: input, Copy: c.DeleteMedicalTranscriptionJobRequest}
 }
 

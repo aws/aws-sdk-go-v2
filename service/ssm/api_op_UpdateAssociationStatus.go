@@ -100,6 +100,7 @@ func (c *Client) UpdateAssociationStatusRequest(input *UpdateAssociationStatusIn
 	}
 
 	req := c.newRequest(op, input, &UpdateAssociationStatusOutput{})
+
 	return UpdateAssociationStatusRequest{Request: req, Input: input, Copy: c.UpdateAssociationStatusRequest}
 }
 

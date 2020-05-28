@@ -124,6 +124,7 @@ func (c *Client) DetectModerationLabelsRequest(input *DetectModerationLabelsInpu
 	}
 
 	req := c.newRequest(op, input, &DetectModerationLabelsOutput{})
+
 	return DetectModerationLabelsRequest{Request: req, Input: input, Copy: c.DetectModerationLabelsRequest}
 }
 

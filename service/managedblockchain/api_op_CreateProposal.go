@@ -186,6 +186,7 @@ func (c *Client) CreateProposalRequest(input *CreateProposalInput) CreateProposa
 	}
 
 	req := c.newRequest(op, input, &CreateProposalOutput{})
+
 	return CreateProposalRequest{Request: req, Input: input, Copy: c.CreateProposalRequest}
 }
 

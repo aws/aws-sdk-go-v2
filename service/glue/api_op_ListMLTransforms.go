@@ -112,6 +112,7 @@ func (c *Client) ListMLTransformsRequest(input *ListMLTransformsInput) ListMLTra
 	}
 
 	req := c.newRequest(op, input, &ListMLTransformsOutput{})
+
 	return ListMLTransformsRequest{Request: req, Input: input, Copy: c.ListMLTransformsRequest}
 }
 

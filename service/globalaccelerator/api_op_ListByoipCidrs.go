@@ -85,6 +85,7 @@ func (c *Client) ListByoipCidrsRequest(input *ListByoipCidrsInput) ListByoipCidr
 	}
 
 	req := c.newRequest(op, input, &ListByoipCidrsOutput{})
+
 	return ListByoipCidrsRequest{Request: req, Input: input, Copy: c.ListByoipCidrsRequest}
 }
 

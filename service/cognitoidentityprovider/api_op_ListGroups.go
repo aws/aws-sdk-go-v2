@@ -101,6 +101,7 @@ func (c *Client) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListGroupsOutput{})
+
 	return ListGroupsRequest{Request: req, Input: input, Copy: c.ListGroupsRequest}
 }
 

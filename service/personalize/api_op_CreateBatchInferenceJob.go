@@ -133,6 +133,7 @@ func (c *Client) CreateBatchInferenceJobRequest(input *CreateBatchInferenceJobIn
 	}
 
 	req := c.newRequest(op, input, &CreateBatchInferenceJobOutput{})
+
 	return CreateBatchInferenceJobRequest{Request: req, Input: input, Copy: c.CreateBatchInferenceJobRequest}
 }
 

@@ -87,6 +87,7 @@ func (c *Client) DisableUserRequest(input *DisableUserInput) DisableUserRequest 
 	}
 
 	req := c.newRequest(op, input, &DisableUserOutput{})
+
 	return DisableUserRequest{Request: req, Input: input, Copy: c.DisableUserRequest}
 }
 

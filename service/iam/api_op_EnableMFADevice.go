@@ -145,6 +145,7 @@ func (c *Client) EnableMFADeviceRequest(input *EnableMFADeviceInput) EnableMFADe
 	req := c.newRequest(op, input, &EnableMFADeviceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return EnableMFADeviceRequest{Request: req, Input: input, Copy: c.EnableMFADeviceRequest}
 }
 

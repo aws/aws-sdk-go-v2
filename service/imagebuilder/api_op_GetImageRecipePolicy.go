@@ -111,6 +111,7 @@ func (c *Client) GetImageRecipePolicyRequest(input *GetImageRecipePolicyInput) G
 	}
 
 	req := c.newRequest(op, input, &GetImageRecipePolicyOutput{})
+
 	return GetImageRecipePolicyRequest{Request: req, Input: input, Copy: c.GetImageRecipePolicyRequest}
 }
 

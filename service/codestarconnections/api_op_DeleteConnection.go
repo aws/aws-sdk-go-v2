@@ -75,6 +75,7 @@ func (c *Client) DeleteConnectionRequest(input *DeleteConnectionInput) DeleteCon
 	}
 
 	req := c.newRequest(op, input, &DeleteConnectionOutput{})
+
 	return DeleteConnectionRequest{Request: req, Input: input, Copy: c.DeleteConnectionRequest}
 }
 

@@ -159,6 +159,7 @@ func (c *Client) DescribeEntityRequest(input *DescribeEntityInput) DescribeEntit
 	}
 
 	req := c.newRequest(op, input, &DescribeEntityOutput{})
+
 	return DescribeEntityRequest{Request: req, Input: input, Copy: c.DescribeEntityRequest}
 }
 

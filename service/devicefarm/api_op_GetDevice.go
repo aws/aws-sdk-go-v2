@@ -81,6 +81,7 @@ func (c *Client) GetDeviceRequest(input *GetDeviceInput) GetDeviceRequest {
 	}
 
 	req := c.newRequest(op, input, &GetDeviceOutput{})
+
 	return GetDeviceRequest{Request: req, Input: input, Copy: c.GetDeviceRequest}
 }
 

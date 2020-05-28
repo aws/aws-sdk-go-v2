@@ -85,6 +85,7 @@ func (c *Client) GetInstanceAccessDetailsRequest(input *GetInstanceAccessDetails
 	}
 
 	req := c.newRequest(op, input, &GetInstanceAccessDetailsOutput{})
+
 	return GetInstanceAccessDetailsRequest{Request: req, Input: input, Copy: c.GetInstanceAccessDetailsRequest}
 }
 

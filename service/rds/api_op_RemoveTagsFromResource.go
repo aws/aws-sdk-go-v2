@@ -93,6 +93,7 @@ func (c *Client) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInpu
 	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RemoveTagsFromResourceRequest{Request: req, Input: input, Copy: c.RemoveTagsFromResourceRequest}
 }
 

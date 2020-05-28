@@ -110,6 +110,7 @@ func (c *Client) ListTaskDefinitionsRequest(input *ListTaskDefinitionsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListTaskDefinitionsOutput{})
+
 	return ListTaskDefinitionsRequest{Request: req, Input: input, Copy: c.ListTaskDefinitionsRequest}
 }
 

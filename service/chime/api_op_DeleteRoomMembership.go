@@ -125,6 +125,7 @@ func (c *Client) DeleteRoomMembershipRequest(input *DeleteRoomMembershipInput) D
 	req := c.newRequest(op, input, &DeleteRoomMembershipOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteRoomMembershipRequest{Request: req, Input: input, Copy: c.DeleteRoomMembershipRequest}
 }
 

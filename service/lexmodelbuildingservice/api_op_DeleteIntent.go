@@ -111,6 +111,7 @@ func (c *Client) DeleteIntentRequest(input *DeleteIntentInput) DeleteIntentReque
 	req := c.newRequest(op, input, &DeleteIntentOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteIntentRequest{Request: req, Input: input, Copy: c.DeleteIntentRequest}
 }
 

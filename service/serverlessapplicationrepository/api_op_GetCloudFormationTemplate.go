@@ -159,6 +159,7 @@ func (c *Client) GetCloudFormationTemplateRequest(input *GetCloudFormationTempla
 	}
 
 	req := c.newRequest(op, input, &GetCloudFormationTemplateOutput{})
+
 	return GetCloudFormationTemplateRequest{Request: req, Input: input, Copy: c.GetCloudFormationTemplateRequest}
 }
 

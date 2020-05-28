@@ -73,6 +73,7 @@ func (c *Client) DeleteConferenceProviderRequest(input *DeleteConferenceProvider
 	}
 
 	req := c.newRequest(op, input, &DeleteConferenceProviderOutput{})
+
 	return DeleteConferenceProviderRequest{Request: req, Input: input, Copy: c.DeleteConferenceProviderRequest}
 }
 

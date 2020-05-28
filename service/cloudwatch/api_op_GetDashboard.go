@@ -88,6 +88,7 @@ func (c *Client) GetDashboardRequest(input *GetDashboardInput) GetDashboardReque
 	}
 
 	req := c.newRequest(op, input, &GetDashboardOutput{})
+
 	return GetDashboardRequest{Request: req, Input: input, Copy: c.GetDashboardRequest}
 }
 

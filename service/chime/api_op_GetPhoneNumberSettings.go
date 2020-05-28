@@ -88,6 +88,7 @@ func (c *Client) GetPhoneNumberSettingsRequest(input *GetPhoneNumberSettingsInpu
 	}
 
 	req := c.newRequest(op, input, &GetPhoneNumberSettingsOutput{})
+
 	return GetPhoneNumberSettingsRequest{Request: req, Input: input, Copy: c.GetPhoneNumberSettingsRequest}
 }
 

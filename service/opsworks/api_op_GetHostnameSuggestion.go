@@ -86,6 +86,7 @@ func (c *Client) GetHostnameSuggestionRequest(input *GetHostnameSuggestionInput)
 	}
 
 	req := c.newRequest(op, input, &GetHostnameSuggestionOutput{})
+
 	return GetHostnameSuggestionRequest{Request: req, Input: input, Copy: c.GetHostnameSuggestionRequest}
 }
 

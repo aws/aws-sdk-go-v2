@@ -24,7 +24,9 @@ type UpdateVocabularyFilterInput struct {
 	// parameter, you can't use the Words parameter.
 	VocabularyFilterFileUri *string `min:"1" type:"string"`
 
-	// The name of the vocabulary filter to update.
+	// The name of the vocabulary filter to update. If you try to update a vocabulary
+	// filter with the same name as a previous vocabulary filter you will receive
+	// a ConflictException error.
 	//
 	// VocabularyFilterName is a required field
 	VocabularyFilterName *string `min:"1" type:"string" required:"true"`
@@ -111,6 +113,7 @@ func (c *Client) UpdateVocabularyFilterRequest(input *UpdateVocabularyFilterInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateVocabularyFilterOutput{})
+
 	return UpdateVocabularyFilterRequest{Request: req, Input: input, Copy: c.UpdateVocabularyFilterRequest}
 }
 

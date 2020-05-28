@@ -127,6 +127,7 @@ func (c *Client) UpdateInputSecurityGroupRequest(input *UpdateInputSecurityGroup
 	}
 
 	req := c.newRequest(op, input, &UpdateInputSecurityGroupOutput{})
+
 	return UpdateInputSecurityGroupRequest{Request: req, Input: input, Copy: c.UpdateInputSecurityGroupRequest}
 }
 

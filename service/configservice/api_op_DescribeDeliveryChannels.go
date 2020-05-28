@@ -66,6 +66,7 @@ func (c *Client) DescribeDeliveryChannelsRequest(input *DescribeDeliveryChannels
 	}
 
 	req := c.newRequest(op, input, &DescribeDeliveryChannelsOutput{})
+
 	return DescribeDeliveryChannelsRequest{Request: req, Input: input, Copy: c.DescribeDeliveryChannelsRequest}
 }
 

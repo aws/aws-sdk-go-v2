@@ -60,6 +60,7 @@ func (c *Client) GetDirectoryLimitsRequest(input *GetDirectoryLimitsInput) GetDi
 	}
 
 	req := c.newRequest(op, input, &GetDirectoryLimitsOutput{})
+
 	return GetDirectoryLimitsRequest{Request: req, Input: input, Copy: c.GetDirectoryLimitsRequest}
 }
 

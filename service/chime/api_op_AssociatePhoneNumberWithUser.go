@@ -122,6 +122,7 @@ func (c *Client) AssociatePhoneNumberWithUserRequest(input *AssociatePhoneNumber
 	}
 
 	req := c.newRequest(op, input, &AssociatePhoneNumberWithUserOutput{})
+
 	return AssociatePhoneNumberWithUserRequest{Request: req, Input: input, Copy: c.AssociatePhoneNumberWithUserRequest}
 }
 

@@ -82,6 +82,7 @@ func (c *Client) GetAssignmentRequest(input *GetAssignmentInput) GetAssignmentRe
 	}
 
 	req := c.newRequest(op, input, &GetAssignmentOutput{})
+
 	return GetAssignmentRequest{Request: req, Input: input, Copy: c.GetAssignmentRequest}
 }
 

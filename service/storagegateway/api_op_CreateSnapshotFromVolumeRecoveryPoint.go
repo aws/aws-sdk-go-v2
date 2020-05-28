@@ -134,6 +134,7 @@ func (c *Client) CreateSnapshotFromVolumeRecoveryPointRequest(input *CreateSnaps
 	}
 
 	req := c.newRequest(op, input, &CreateSnapshotFromVolumeRecoveryPointOutput{})
+
 	return CreateSnapshotFromVolumeRecoveryPointRequest{Request: req, Input: input, Copy: c.CreateSnapshotFromVolumeRecoveryPointRequest}
 }
 

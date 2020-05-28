@@ -91,6 +91,7 @@ func (c *Client) DescribeReplicationTaskAssessmentResultsRequest(input *Describe
 	}
 
 	req := c.newRequest(op, input, &DescribeReplicationTaskAssessmentResultsOutput{})
+
 	return DescribeReplicationTaskAssessmentResultsRequest{Request: req, Input: input, Copy: c.DescribeReplicationTaskAssessmentResultsRequest}
 }
 

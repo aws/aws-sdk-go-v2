@@ -87,6 +87,7 @@ func (c *Client) UpdatePullRequestTitleRequest(input *UpdatePullRequestTitleInpu
 	}
 
 	req := c.newRequest(op, input, &UpdatePullRequestTitleOutput{})
+
 	return UpdatePullRequestTitleRequest{Request: req, Input: input, Copy: c.UpdatePullRequestTitleRequest}
 }
 

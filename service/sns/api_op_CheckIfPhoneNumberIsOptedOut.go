@@ -89,6 +89,7 @@ func (c *Client) CheckIfPhoneNumberIsOptedOutRequest(input *CheckIfPhoneNumberIs
 	}
 
 	req := c.newRequest(op, input, &CheckIfPhoneNumberIsOptedOutOutput{})
+
 	return CheckIfPhoneNumberIsOptedOutRequest{Request: req, Input: input, Copy: c.CheckIfPhoneNumberIsOptedOutRequest}
 }
 

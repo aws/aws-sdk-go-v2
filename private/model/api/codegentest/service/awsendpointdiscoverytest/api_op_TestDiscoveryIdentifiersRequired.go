@@ -90,6 +90,7 @@ func (c *Client) TestDiscoveryIdentifiersRequiredRequest(input *TestDiscoveryIde
 		Name: "crr.endpointdiscovery",
 		Fn:   de.Handler,
 	})
+
 	return TestDiscoveryIdentifiersRequiredRequest{Request: req, Input: input, Copy: c.TestDiscoveryIdentifiersRequiredRequest}
 }
 

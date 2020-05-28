@@ -151,6 +151,7 @@ func (c *Client) GetParametersForImportRequest(input *GetParametersForImportInpu
 	}
 
 	req := c.newRequest(op, input, &GetParametersForImportOutput{})
+
 	return GetParametersForImportRequest{Request: req, Input: input, Copy: c.GetParametersForImportRequest}
 }
 

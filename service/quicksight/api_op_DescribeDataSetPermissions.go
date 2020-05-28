@@ -160,6 +160,7 @@ func (c *Client) DescribeDataSetPermissionsRequest(input *DescribeDataSetPermiss
 	}
 
 	req := c.newRequest(op, input, &DescribeDataSetPermissionsOutput{})
+
 	return DescribeDataSetPermissionsRequest{Request: req, Input: input, Copy: c.DescribeDataSetPermissionsRequest}
 }
 

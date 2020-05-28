@@ -134,6 +134,7 @@ func (c *Client) ListTypeVersionsRequest(input *ListTypeVersionsInput) ListTypeV
 	}
 
 	req := c.newRequest(op, input, &ListTypeVersionsOutput{})
+
 	return ListTypeVersionsRequest{Request: req, Input: input, Copy: c.ListTypeVersionsRequest}
 }
 

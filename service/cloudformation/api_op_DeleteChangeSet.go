@@ -90,6 +90,7 @@ func (c *Client) DeleteChangeSetRequest(input *DeleteChangeSetInput) DeleteChang
 	}
 
 	req := c.newRequest(op, input, &DeleteChangeSetOutput{})
+
 	return DeleteChangeSetRequest{Request: req, Input: input, Copy: c.DeleteChangeSetRequest}
 }
 

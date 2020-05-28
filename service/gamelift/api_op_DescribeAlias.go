@@ -95,6 +95,7 @@ func (c *Client) DescribeAliasRequest(input *DescribeAliasInput) DescribeAliasRe
 	}
 
 	req := c.newRequest(op, input, &DescribeAliasOutput{})
+
 	return DescribeAliasRequest{Request: req, Input: input, Copy: c.DescribeAliasRequest}
 }
 

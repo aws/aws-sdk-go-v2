@@ -76,6 +76,7 @@ func (c *Client) DeleteListenerRequest(input *DeleteListenerInput) DeleteListene
 	}
 
 	req := c.newRequest(op, input, &DeleteListenerOutput{})
+
 	return DeleteListenerRequest{Request: req, Input: input, Copy: c.DeleteListenerRequest}
 }
 

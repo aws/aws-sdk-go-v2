@@ -108,6 +108,7 @@ func (c *Client) DescribeClusterVersionsRequest(input *DescribeClusterVersionsIn
 	}
 
 	req := c.newRequest(op, input, &DescribeClusterVersionsOutput{})
+
 	return DescribeClusterVersionsRequest{Request: req, Input: input, Copy: c.DescribeClusterVersionsRequest}
 }
 

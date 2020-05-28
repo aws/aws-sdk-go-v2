@@ -212,6 +212,7 @@ func (c *Client) GetPartitionsRequest(input *GetPartitionsInput) GetPartitionsRe
 	}
 
 	req := c.newRequest(op, input, &GetPartitionsOutput{})
+
 	return GetPartitionsRequest{Request: req, Input: input, Copy: c.GetPartitionsRequest}
 }
 

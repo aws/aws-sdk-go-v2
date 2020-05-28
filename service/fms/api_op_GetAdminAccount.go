@@ -61,6 +61,7 @@ func (c *Client) GetAdminAccountRequest(input *GetAdminAccountInput) GetAdminAcc
 	}
 
 	req := c.newRequest(op, input, &GetAdminAccountOutput{})
+
 	return GetAdminAccountRequest{Request: req, Input: input, Copy: c.GetAdminAccountRequest}
 }
 

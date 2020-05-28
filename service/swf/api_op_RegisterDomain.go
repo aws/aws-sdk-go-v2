@@ -142,6 +142,7 @@ func (c *Client) RegisterDomainRequest(input *RegisterDomainInput) RegisterDomai
 	req := c.newRequest(op, input, &RegisterDomainOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RegisterDomainRequest{Request: req, Input: input, Copy: c.RegisterDomainRequest}
 }
 

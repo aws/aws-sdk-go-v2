@@ -159,6 +159,7 @@ func (c *Client) CreateDocumentationVersionRequest(input *CreateDocumentationVer
 	}
 
 	req := c.newRequest(op, input, &CreateDocumentationVersionOutput{})
+
 	return CreateDocumentationVersionRequest{Request: req, Input: input, Copy: c.CreateDocumentationVersionRequest}
 }
 

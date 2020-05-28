@@ -131,6 +131,7 @@ func (c *Client) ListV2LoggingLevelsRequest(input *ListV2LoggingLevelsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListV2LoggingLevelsOutput{})
+
 	return ListV2LoggingLevelsRequest{Request: req, Input: input, Copy: c.ListV2LoggingLevelsRequest}
 }
 

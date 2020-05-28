@@ -151,6 +151,7 @@ func (c *Client) UpdateScriptRequest(input *UpdateScriptInput) UpdateScriptReque
 	}
 
 	req := c.newRequest(op, input, &UpdateScriptOutput{})
+
 	return UpdateScriptRequest{Request: req, Input: input, Copy: c.UpdateScriptRequest}
 }
 

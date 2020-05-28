@@ -151,6 +151,7 @@ func (c *Client) DescribeIAMPolicyAssignmentRequest(input *DescribeIAMPolicyAssi
 	}
 
 	req := c.newRequest(op, input, &DescribeIAMPolicyAssignmentOutput{})
+
 	return DescribeIAMPolicyAssignmentRequest{Request: req, Input: input, Copy: c.DescribeIAMPolicyAssignmentRequest}
 }
 

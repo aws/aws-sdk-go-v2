@@ -363,6 +363,7 @@ func (c *Client) PutSlotTypeRequest(input *PutSlotTypeInput) PutSlotTypeRequest 
 	}
 
 	req := c.newRequest(op, input, &PutSlotTypeOutput{})
+
 	return PutSlotTypeRequest{Request: req, Input: input, Copy: c.PutSlotTypeRequest}
 }
 

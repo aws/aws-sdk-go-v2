@@ -210,6 +210,7 @@ func (c *Client) UpdateTemplatePermissionsRequest(input *UpdateTemplatePermissio
 	}
 
 	req := c.newRequest(op, input, &UpdateTemplatePermissionsOutput{})
+
 	return UpdateTemplatePermissionsRequest{Request: req, Input: input, Copy: c.UpdateTemplatePermissionsRequest}
 }
 

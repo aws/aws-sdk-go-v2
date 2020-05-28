@@ -97,6 +97,7 @@ func (c *Client) CancelSimulationJobBatchRequest(input *CancelSimulationJobBatch
 	}
 
 	req := c.newRequest(op, input, &CancelSimulationJobBatchOutput{})
+
 	return CancelSimulationJobBatchRequest{Request: req, Input: input, Copy: c.CancelSimulationJobBatchRequest}
 }
 

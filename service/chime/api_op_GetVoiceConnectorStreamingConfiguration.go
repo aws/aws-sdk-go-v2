@@ -104,6 +104,7 @@ func (c *Client) GetVoiceConnectorStreamingConfigurationRequest(input *GetVoiceC
 	}
 
 	req := c.newRequest(op, input, &GetVoiceConnectorStreamingConfigurationOutput{})
+
 	return GetVoiceConnectorStreamingConfigurationRequest{Request: req, Input: input, Copy: c.GetVoiceConnectorStreamingConfigurationRequest}
 }
 

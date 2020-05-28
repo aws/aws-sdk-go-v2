@@ -4,6 +4,7 @@ package kendra
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -42,6 +43,10 @@ type CreateDataSourceInput struct {
 	// periodically update the index. You can call the StartDataSourceSyncJob operation
 	// to update the index.
 	Schedule *string `type:"string"`
+
+	// A list of key-value pairs that identify the data source. You can use the
+	// tags to identify and organize your resources and to control access to resources.
+	Tags []Tag `type:"list"`
 
 	// The type of repository that contains the data source.
 	//
@@ -91,6 +96,13 @@ func (s *CreateDataSourceInput) Validate() error {
 	if s.Configuration != nil {
 		if err := s.Configuration.Validate(); err != nil {
 			invalidParams.AddNested("Configuration", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -151,6 +163,7 @@ func (c *Client) CreateDataSourceRequest(input *CreateDataSourceInput) CreateDat
 	}
 
 	req := c.newRequest(op, input, &CreateDataSourceOutput{})
+
 	return CreateDataSourceRequest{Request: req, Input: input, Copy: c.CreateDataSourceRequest}
 }
 

@@ -231,6 +231,7 @@ func (c *Client) DescribeSavingsPlansOfferingRatesRequest(input *DescribeSavings
 	}
 
 	req := c.newRequest(op, input, &DescribeSavingsPlansOfferingRatesOutput{})
+
 	return DescribeSavingsPlansOfferingRatesRequest{Request: req, Input: input, Copy: c.DescribeSavingsPlansOfferingRatesRequest}
 }
 

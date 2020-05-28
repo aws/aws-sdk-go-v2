@@ -121,6 +121,7 @@ func (c *Client) GetDigestRequest(input *GetDigestInput) GetDigestRequest {
 	}
 
 	req := c.newRequest(op, input, &GetDigestOutput{})
+
 	return GetDigestRequest{Request: req, Input: input, Copy: c.GetDigestRequest}
 }
 

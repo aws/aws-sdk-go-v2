@@ -109,6 +109,7 @@ func (c *Client) SetIdentityNotificationTopicRequest(input *SetIdentityNotificat
 	}
 
 	req := c.newRequest(op, input, &SetIdentityNotificationTopicOutput{})
+
 	return SetIdentityNotificationTopicRequest{Request: req, Input: input, Copy: c.SetIdentityNotificationTopicRequest}
 }
 

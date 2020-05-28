@@ -219,6 +219,7 @@ func (c *Client) TransactWriteItemsRequest(input *TransactWriteItemsInput) Trans
 			Fn:   de.Handler,
 		})
 	}
+
 	return TransactWriteItemsRequest{Request: req, Input: input, Copy: c.TransactWriteItemsRequest}
 }
 

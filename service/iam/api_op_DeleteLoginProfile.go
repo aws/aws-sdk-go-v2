@@ -90,6 +90,7 @@ func (c *Client) DeleteLoginProfileRequest(input *DeleteLoginProfileInput) Delet
 	req := c.newRequest(op, input, &DeleteLoginProfileOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteLoginProfileRequest{Request: req, Input: input, Copy: c.DeleteLoginProfileRequest}
 }
 

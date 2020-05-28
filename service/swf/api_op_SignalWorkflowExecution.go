@@ -137,6 +137,7 @@ func (c *Client) SignalWorkflowExecutionRequest(input *SignalWorkflowExecutionIn
 	req := c.newRequest(op, input, &SignalWorkflowExecutionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SignalWorkflowExecutionRequest{Request: req, Input: input, Copy: c.SignalWorkflowExecutionRequest}
 }
 

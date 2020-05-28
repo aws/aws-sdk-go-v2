@@ -87,6 +87,7 @@ func (c *Client) UpdateParameterGroupRequest(input *UpdateParameterGroupInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateParameterGroupOutput{})
+
 	return UpdateParameterGroupRequest{Request: req, Input: input, Copy: c.UpdateParameterGroupRequest}
 }
 

@@ -105,6 +105,7 @@ func (c *Client) CreateDatasetContentRequest(input *CreateDatasetContentInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateDatasetContentOutput{})
+
 	return CreateDatasetContentRequest{Request: req, Input: input, Copy: c.CreateDatasetContentRequest}
 }
 

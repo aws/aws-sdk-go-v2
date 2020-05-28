@@ -72,6 +72,16 @@ const opDeleteGeoMatchSet = "DeleteGeoMatchSet"
 // DeleteGeoMatchSetRequest returns a request value for making API operation for
 // AWS WAF.
 //
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Permanently deletes a GeoMatchSet. You can't delete a GeoMatchSet if it's
 // still used in any Rules or if it still includes any countries.
 //
@@ -107,6 +117,7 @@ func (c *Client) DeleteGeoMatchSetRequest(input *DeleteGeoMatchSetInput) DeleteG
 	}
 
 	req := c.newRequest(op, input, &DeleteGeoMatchSetOutput{})
+
 	return DeleteGeoMatchSetRequest{Request: req, Input: input, Copy: c.DeleteGeoMatchSetRequest}
 }
 

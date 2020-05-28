@@ -129,6 +129,7 @@ func (c *Client) ListVoiceConnectorGroupsRequest(input *ListVoiceConnectorGroups
 	}
 
 	req := c.newRequest(op, input, &ListVoiceConnectorGroupsOutput{})
+
 	return ListVoiceConnectorGroupsRequest{Request: req, Input: input, Copy: c.ListVoiceConnectorGroupsRequest}
 }
 

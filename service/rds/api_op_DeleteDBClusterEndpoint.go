@@ -126,6 +126,7 @@ func (c *Client) DeleteDBClusterEndpointRequest(input *DeleteDBClusterEndpointIn
 	}
 
 	req := c.newRequest(op, input, &DeleteDBClusterEndpointOutput{})
+
 	return DeleteDBClusterEndpointRequest{Request: req, Input: input, Copy: c.DeleteDBClusterEndpointRequest}
 }
 

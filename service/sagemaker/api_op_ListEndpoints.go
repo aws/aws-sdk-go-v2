@@ -120,6 +120,7 @@ func (c *Client) ListEndpointsRequest(input *ListEndpointsInput) ListEndpointsRe
 	}
 
 	req := c.newRequest(op, input, &ListEndpointsOutput{})
+
 	return ListEndpointsRequest{Request: req, Input: input, Copy: c.ListEndpointsRequest}
 }
 

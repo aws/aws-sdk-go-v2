@@ -124,6 +124,7 @@ func (c *Client) ListInputsRequest(input *ListInputsInput) ListInputsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListInputsOutput{})
+
 	return ListInputsRequest{Request: req, Input: input, Copy: c.ListInputsRequest}
 }
 

@@ -113,6 +113,7 @@ func (c *Client) AdminListGroupsForUserRequest(input *AdminListGroupsForUserInpu
 	}
 
 	req := c.newRequest(op, input, &AdminListGroupsForUserOutput{})
+
 	return AdminListGroupsForUserRequest{Request: req, Input: input, Copy: c.AdminListGroupsForUserRequest}
 }
 

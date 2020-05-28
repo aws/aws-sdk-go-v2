@@ -144,6 +144,7 @@ func (c *Client) UpdateTimeToLiveRequest(input *UpdateTimeToLiveInput) UpdateTim
 			Fn:   de.Handler,
 		})
 	}
+
 	return UpdateTimeToLiveRequest{Request: req, Input: input, Copy: c.UpdateTimeToLiveRequest}
 }
 

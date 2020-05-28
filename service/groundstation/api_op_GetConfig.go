@@ -176,6 +176,7 @@ func (c *Client) GetConfigRequest(input *GetConfigInput) GetConfigRequest {
 	}
 
 	req := c.newRequest(op, input, &GetConfigOutput{})
+
 	return GetConfigRequest{Request: req, Input: input, Copy: c.GetConfigRequest}
 }
 

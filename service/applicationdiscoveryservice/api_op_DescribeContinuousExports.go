@@ -91,6 +91,7 @@ func (c *Client) DescribeContinuousExportsRequest(input *DescribeContinuousExpor
 	}
 
 	req := c.newRequest(op, input, &DescribeContinuousExportsOutput{})
+
 	return DescribeContinuousExportsRequest{Request: req, Input: input, Copy: c.DescribeContinuousExportsRequest}
 }
 

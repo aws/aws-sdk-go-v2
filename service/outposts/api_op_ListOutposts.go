@@ -131,6 +131,7 @@ func (c *Client) ListOutpostsRequest(input *ListOutpostsInput) ListOutpostsReque
 	}
 
 	req := c.newRequest(op, input, &ListOutpostsOutput{})
+
 	return ListOutpostsRequest{Request: req, Input: input, Copy: c.ListOutpostsRequest}
 }
 

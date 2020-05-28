@@ -123,6 +123,7 @@ func (c *Client) DeleteFileSystemRequest(input *DeleteFileSystemInput) DeleteFil
 	}
 
 	req := c.newRequest(op, input, &DeleteFileSystemOutput{})
+
 	return DeleteFileSystemRequest{Request: req, Input: input, Copy: c.DeleteFileSystemRequest}
 }
 

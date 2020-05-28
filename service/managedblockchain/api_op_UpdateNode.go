@@ -140,6 +140,7 @@ func (c *Client) UpdateNodeRequest(input *UpdateNodeInput) UpdateNodeRequest {
 	}
 
 	req := c.newRequest(op, input, &UpdateNodeOutput{})
+
 	return UpdateNodeRequest{Request: req, Input: input, Copy: c.UpdateNodeRequest}
 }
 

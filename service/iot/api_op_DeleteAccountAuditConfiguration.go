@@ -76,6 +76,7 @@ func (c *Client) DeleteAccountAuditConfigurationRequest(input *DeleteAccountAudi
 	}
 
 	req := c.newRequest(op, input, &DeleteAccountAuditConfigurationOutput{})
+
 	return DeleteAccountAuditConfigurationRequest{Request: req, Input: input, Copy: c.DeleteAccountAuditConfigurationRequest}
 }
 

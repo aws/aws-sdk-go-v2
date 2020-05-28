@@ -102,6 +102,7 @@ func (c *Client) GetJobDocumentRequest(input *GetJobDocumentInput) GetJobDocumen
 	}
 
 	req := c.newRequest(op, input, &GetJobDocumentOutput{})
+
 	return GetJobDocumentRequest{Request: req, Input: input, Copy: c.GetJobDocumentRequest}
 }
 

@@ -79,6 +79,7 @@ func (c *Client) DeleteEndpointConfigRequest(input *DeleteEndpointConfigInput) D
 	req := c.newRequest(op, input, &DeleteEndpointConfigOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteEndpointConfigRequest{Request: req, Input: input, Copy: c.DeleteEndpointConfigRequest}
 }
 

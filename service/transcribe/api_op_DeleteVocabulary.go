@@ -80,6 +80,7 @@ func (c *Client) DeleteVocabularyRequest(input *DeleteVocabularyInput) DeleteVoc
 	req := c.newRequest(op, input, &DeleteVocabularyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteVocabularyRequest{Request: req, Input: input, Copy: c.DeleteVocabularyRequest}
 }
 

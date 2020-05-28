@@ -184,6 +184,7 @@ func (c *Client) UpdateRecoveryPointLifecycleRequest(input *UpdateRecoveryPointL
 	}
 
 	req := c.newRequest(op, input, &UpdateRecoveryPointLifecycleOutput{})
+
 	return UpdateRecoveryPointLifecycleRequest{Request: req, Input: input, Copy: c.UpdateRecoveryPointLifecycleRequest}
 }
 

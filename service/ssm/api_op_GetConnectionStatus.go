@@ -62,7 +62,7 @@ const opGetConnectionStatus = "GetConnectionStatus"
 // Amazon Simple Systems Manager (SSM).
 //
 // Retrieves the Session Manager connection status for an instance to determine
-// whether it is connected and ready to receive Session Manager connections.
+// whether it is running and ready to receive Session Manager connections.
 //
 //    // Example sending a request using GetConnectionStatusRequest.
 //    req := client.GetConnectionStatusRequest(params)
@@ -84,6 +84,7 @@ func (c *Client) GetConnectionStatusRequest(input *GetConnectionStatusInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetConnectionStatusOutput{})
+
 	return GetConnectionStatusRequest{Request: req, Input: input, Copy: c.GetConnectionStatusRequest}
 }
 

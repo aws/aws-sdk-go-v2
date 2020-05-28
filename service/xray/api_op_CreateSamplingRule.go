@@ -112,6 +112,7 @@ func (c *Client) CreateSamplingRuleRequest(input *CreateSamplingRuleInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateSamplingRuleOutput{})
+
 	return CreateSamplingRuleRequest{Request: req, Input: input, Copy: c.CreateSamplingRuleRequest}
 }
 

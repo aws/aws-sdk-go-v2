@@ -84,6 +84,7 @@ func (c *Client) StartOnDemandReplicationRunRequest(input *StartOnDemandReplicat
 	}
 
 	req := c.newRequest(op, input, &StartOnDemandReplicationRunOutput{})
+
 	return StartOnDemandReplicationRunRequest{Request: req, Input: input, Copy: c.StartOnDemandReplicationRunRequest}
 }
 

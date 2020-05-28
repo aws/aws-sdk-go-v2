@@ -143,6 +143,7 @@ func (c *Client) UpdatePipelineRequest(input *UpdatePipelineInput) UpdatePipelin
 	req := c.newRequest(op, input, &UpdatePipelineOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdatePipelineRequest{Request: req, Input: input, Copy: c.UpdatePipelineRequest}
 }
 

@@ -74,6 +74,7 @@ func (c *Client) GetDataCatalogEncryptionSettingsRequest(input *GetDataCatalogEn
 	}
 
 	req := c.newRequest(op, input, &GetDataCatalogEncryptionSettingsOutput{})
+
 	return GetDataCatalogEncryptionSettingsRequest{Request: req, Input: input, Copy: c.GetDataCatalogEncryptionSettingsRequest}
 }
 

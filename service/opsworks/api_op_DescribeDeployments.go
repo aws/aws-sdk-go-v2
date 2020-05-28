@@ -78,6 +78,7 @@ func (c *Client) DescribeDeploymentsRequest(input *DescribeDeploymentsInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeDeploymentsOutput{})
+
 	return DescribeDeploymentsRequest{Request: req, Input: input, Copy: c.DescribeDeploymentsRequest}
 }
 

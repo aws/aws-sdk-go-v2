@@ -208,6 +208,7 @@ func (c *Client) CreateTargetGroupRequest(input *CreateTargetGroupInput) CreateT
 	}
 
 	req := c.newRequest(op, input, &CreateTargetGroupOutput{})
+
 	return CreateTargetGroupRequest{Request: req, Input: input, Copy: c.CreateTargetGroupRequest}
 }
 

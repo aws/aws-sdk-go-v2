@@ -98,6 +98,7 @@ func (c *Client) DescribeDestinationsRequest(input *DescribeDestinationsInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeDestinationsOutput{})
+
 	return DescribeDestinationsRequest{Request: req, Input: input, Copy: c.DescribeDestinationsRequest}
 }
 

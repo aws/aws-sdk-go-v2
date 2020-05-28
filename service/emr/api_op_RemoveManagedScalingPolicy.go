@@ -74,6 +74,7 @@ func (c *Client) RemoveManagedScalingPolicyRequest(input *RemoveManagedScalingPo
 	}
 
 	req := c.newRequest(op, input, &RemoveManagedScalingPolicyOutput{})
+
 	return RemoveManagedScalingPolicyRequest{Request: req, Input: input, Copy: c.RemoveManagedScalingPolicyRequest}
 }
 

@@ -130,6 +130,7 @@ func (c *Client) DescribeProvisioningParametersRequest(input *DescribeProvisioni
 	}
 
 	req := c.newRequest(op, input, &DescribeProvisioningParametersOutput{})
+
 	return DescribeProvisioningParametersRequest{Request: req, Input: input, Copy: c.DescribeProvisioningParametersRequest}
 }
 

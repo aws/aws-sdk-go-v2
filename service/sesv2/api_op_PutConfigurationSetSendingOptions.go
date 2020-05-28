@@ -108,6 +108,7 @@ func (c *Client) PutConfigurationSetSendingOptionsRequest(input *PutConfiguratio
 	}
 
 	req := c.newRequest(op, input, &PutConfigurationSetSendingOptionsOutput{})
+
 	return PutConfigurationSetSendingOptionsRequest{Request: req, Input: input, Copy: c.PutConfigurationSetSendingOptionsRequest}
 }
 

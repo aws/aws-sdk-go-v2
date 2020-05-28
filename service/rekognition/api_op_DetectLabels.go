@@ -182,6 +182,7 @@ func (c *Client) DetectLabelsRequest(input *DetectLabelsInput) DetectLabelsReque
 	}
 
 	req := c.newRequest(op, input, &DetectLabelsOutput{})
+
 	return DetectLabelsRequest{Request: req, Input: input, Copy: c.DetectLabelsRequest}
 }
 

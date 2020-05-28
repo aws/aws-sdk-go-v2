@@ -91,6 +91,7 @@ func (c *Client) DeleteDBSecurityGroupRequest(input *DeleteDBSecurityGroupInput)
 	req := c.newRequest(op, input, &DeleteDBSecurityGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteDBSecurityGroupRequest{Request: req, Input: input, Copy: c.DeleteDBSecurityGroupRequest}
 }
 

@@ -228,6 +228,7 @@ func (c *Client) CreateSlotTypeVersionRequest(input *CreateSlotTypeVersionInput)
 	}
 
 	req := c.newRequest(op, input, &CreateSlotTypeVersionOutput{})
+
 	return CreateSlotTypeVersionRequest{Request: req, Input: input, Copy: c.CreateSlotTypeVersionRequest}
 }
 

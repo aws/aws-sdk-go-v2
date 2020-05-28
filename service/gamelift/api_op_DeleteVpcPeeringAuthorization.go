@@ -108,6 +108,7 @@ func (c *Client) DeleteVpcPeeringAuthorizationRequest(input *DeleteVpcPeeringAut
 	}
 
 	req := c.newRequest(op, input, &DeleteVpcPeeringAuthorizationOutput{})
+
 	return DeleteVpcPeeringAuthorizationRequest{Request: req, Input: input, Copy: c.DeleteVpcPeeringAuthorizationRequest}
 }
 

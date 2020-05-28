@@ -87,6 +87,7 @@ func (c *Client) DescribeCampaignRequest(input *DescribeCampaignInput) DescribeC
 	}
 
 	req := c.newRequest(op, input, &DescribeCampaignOutput{})
+
 	return DescribeCampaignRequest{Request: req, Input: input, Copy: c.DescribeCampaignRequest}
 }
 

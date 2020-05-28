@@ -82,6 +82,7 @@ func (c *Client) PutReportDefinitionRequest(input *PutReportDefinitionInput) Put
 	}
 
 	req := c.newRequest(op, input, &PutReportDefinitionOutput{})
+
 	return PutReportDefinitionRequest{Request: req, Input: input, Copy: c.PutReportDefinitionRequest}
 }
 

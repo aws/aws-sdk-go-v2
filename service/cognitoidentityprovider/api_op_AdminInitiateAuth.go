@@ -281,6 +281,7 @@ func (c *Client) AdminInitiateAuthRequest(input *AdminInitiateAuthInput) AdminIn
 	}
 
 	req := c.newRequest(op, input, &AdminInitiateAuthOutput{})
+
 	return AdminInitiateAuthRequest{Request: req, Input: input, Copy: c.AdminInitiateAuthRequest}
 }
 

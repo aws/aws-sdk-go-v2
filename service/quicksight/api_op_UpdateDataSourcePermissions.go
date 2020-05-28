@@ -194,6 +194,7 @@ func (c *Client) UpdateDataSourcePermissionsRequest(input *UpdateDataSourcePermi
 	}
 
 	req := c.newRequest(op, input, &UpdateDataSourcePermissionsOutput{})
+
 	return UpdateDataSourcePermissionsRequest{Request: req, Input: input, Copy: c.UpdateDataSourcePermissionsRequest}
 }
 

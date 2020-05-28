@@ -92,6 +92,7 @@ func (c *Client) SendTaskHeartbeatRequest(input *SendTaskHeartbeatInput) SendTas
 	}
 
 	req := c.newRequest(op, input, &SendTaskHeartbeatOutput{})
+
 	return SendTaskHeartbeatRequest{Request: req, Input: input, Copy: c.SendTaskHeartbeatRequest}
 }
 

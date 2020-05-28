@@ -101,6 +101,7 @@ func (c *Client) DeregisterStreamConsumerRequest(input *DeregisterStreamConsumer
 	req := c.newRequest(op, input, &DeregisterStreamConsumerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeregisterStreamConsumerRequest{Request: req, Input: input, Copy: c.DeregisterStreamConsumerRequest}
 }
 

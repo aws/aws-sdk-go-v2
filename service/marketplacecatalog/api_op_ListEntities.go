@@ -35,7 +35,7 @@ type ListEntitiesInput struct {
 	// The value of the next token, if it exists. Null if there are no more results.
 	NextToken *string `min:"1" type:"string"`
 
-	// An object that contains two attributes, sortBy and sortOrder.
+	// An object that contains two attributes, SortBy and SortOrder.
 	Sort *Sort `type:"structure"`
 }
 
@@ -209,6 +209,7 @@ func (c *Client) ListEntitiesRequest(input *ListEntitiesInput) ListEntitiesReque
 	}
 
 	req := c.newRequest(op, input, &ListEntitiesOutput{})
+
 	return ListEntitiesRequest{Request: req, Input: input, Copy: c.ListEntitiesRequest}
 }
 

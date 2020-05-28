@@ -105,6 +105,7 @@ func (c *Client) GetWebhookRequest(input *GetWebhookInput) GetWebhookRequest {
 	}
 
 	req := c.newRequest(op, input, &GetWebhookOutput{})
+
 	return GetWebhookRequest{Request: req, Input: input, Copy: c.GetWebhookRequest}
 }
 

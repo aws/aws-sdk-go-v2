@@ -49,7 +49,7 @@ type StopInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
+	// of the request, the timestamp of the request, and the resources affected
 	// by the request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
@@ -95,6 +95,7 @@ func (c *Client) StopInstanceRequest(input *StopInstanceInput) StopInstanceReque
 	}
 
 	req := c.newRequest(op, input, &StopInstanceOutput{})
+
 	return StopInstanceRequest{Request: req, Input: input, Copy: c.StopInstanceRequest}
 }
 

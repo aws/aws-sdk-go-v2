@@ -112,6 +112,7 @@ func (c *Client) ListAWSServiceAccessForOrganizationRequest(input *ListAWSServic
 	}
 
 	req := c.newRequest(op, input, &ListAWSServiceAccessForOrganizationOutput{})
+
 	return ListAWSServiceAccessForOrganizationRequest{Request: req, Input: input, Copy: c.ListAWSServiceAccessForOrganizationRequest}
 }
 

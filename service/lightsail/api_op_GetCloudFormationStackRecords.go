@@ -76,6 +76,7 @@ func (c *Client) GetCloudFormationStackRecordsRequest(input *GetCloudFormationSt
 	}
 
 	req := c.newRequest(op, input, &GetCloudFormationStackRecordsOutput{})
+
 	return GetCloudFormationStackRecordsRequest{Request: req, Input: input, Copy: c.GetCloudFormationStackRecordsRequest}
 }
 

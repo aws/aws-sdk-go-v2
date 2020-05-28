@@ -70,6 +70,7 @@ func (c *Client) SetActiveReceiptRuleSetRequest(input *SetActiveReceiptRuleSetIn
 	}
 
 	req := c.newRequest(op, input, &SetActiveReceiptRuleSetOutput{})
+
 	return SetActiveReceiptRuleSetRequest{Request: req, Input: input, Copy: c.SetActiveReceiptRuleSetRequest}
 }
 

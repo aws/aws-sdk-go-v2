@@ -102,6 +102,7 @@ func (c *Client) CreateReceiptRuleRequest(input *CreateReceiptRuleInput) CreateR
 	}
 
 	req := c.newRequest(op, input, &CreateReceiptRuleOutput{})
+
 	return CreateReceiptRuleRequest{Request: req, Input: input, Copy: c.CreateReceiptRuleRequest}
 }
 

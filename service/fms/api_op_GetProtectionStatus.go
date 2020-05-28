@@ -151,6 +151,7 @@ func (c *Client) GetProtectionStatusRequest(input *GetProtectionStatusInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetProtectionStatusOutput{})
+
 	return GetProtectionStatusRequest{Request: req, Input: input, Copy: c.GetProtectionStatusRequest}
 }
 

@@ -140,6 +140,7 @@ func (c *Client) DeleteStreamingDistributionRequest(input *DeleteStreamingDistri
 	req := c.newRequest(op, input, &DeleteStreamingDistributionOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteStreamingDistributionRequest{Request: req, Input: input, Copy: c.DeleteStreamingDistributionRequest}
 }
 

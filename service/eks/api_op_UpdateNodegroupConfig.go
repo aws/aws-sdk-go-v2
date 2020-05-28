@@ -160,6 +160,7 @@ func (c *Client) UpdateNodegroupConfigRequest(input *UpdateNodegroupConfigInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateNodegroupConfigOutput{})
+
 	return UpdateNodegroupConfigRequest{Request: req, Input: input, Copy: c.UpdateNodegroupConfigRequest}
 }
 

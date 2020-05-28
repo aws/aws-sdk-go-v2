@@ -91,6 +91,7 @@ func (c *Client) CreateOrUpdateTagsRequest(input *CreateOrUpdateTagsInput) Creat
 	req := c.newRequest(op, input, &CreateOrUpdateTagsOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CreateOrUpdateTagsRequest{Request: req, Input: input, Copy: c.CreateOrUpdateTagsRequest}
 }
 

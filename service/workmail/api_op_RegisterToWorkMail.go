@@ -106,6 +106,7 @@ func (c *Client) RegisterToWorkMailRequest(input *RegisterToWorkMailInput) Regis
 	}
 
 	req := c.newRequest(op, input, &RegisterToWorkMailOutput{})
+
 	return RegisterToWorkMailRequest{Request: req, Input: input, Copy: c.RegisterToWorkMailRequest}
 }
 

@@ -100,6 +100,7 @@ func (c *Client) ResetDBParameterGroupRequest(input *ResetDBParameterGroupInput)
 	}
 
 	req := c.newRequest(op, input, &ResetDBParameterGroupOutput{})
+
 	return ResetDBParameterGroupRequest{Request: req, Input: input, Copy: c.ResetDBParameterGroupRequest}
 }
 

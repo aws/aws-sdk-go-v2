@@ -13,13 +13,12 @@ import (
 type GetJobTaggingInput struct {
 	_ struct{} `type:"structure"`
 
-	// The account ID for the Amazon Web Services account associated with the Amazon
-	// S3 batch operations job you want to retrieve tags for.
+	// The AWS account ID associated with the Amazon S3 Batch Operations job.
 	//
 	// AccountId is a required field
 	AccountId *string `location:"header" locationName:"x-amz-account-id" type:"string" required:"true"`
 
-	// The ID for the job whose tags you want to retrieve.
+	// The ID for the Amazon S3 Batch Operations job whose tags you want to retrieve.
 	//
 	// JobId is a required field
 	JobId *string `location:"uri" locationName:"id" min:"5" type:"string" required:"true"`
@@ -72,7 +71,7 @@ func (s GetJobTaggingInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetJobTaggingOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The set of tags associated with the job.
+	// The set of tags associated with the Amazon S3 Batch Operations job.
 	Tags []S3Tag `type:"list"`
 }
 
@@ -103,7 +102,18 @@ const opGetJobTagging = "GetJobTagging"
 // GetJobTaggingRequest returns a request value for making API operation for
 // AWS S3 Control.
 //
-// Retrieve the tags on a Amazon S3 batch operations job.
+// Returns the tags on an Amazon S3 Batch Operations job. To use this operation,
+// you must have permission to perform the s3:GetJobTagging action. For more
+// information, see Using Job Tags (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+// Related actions include:
+//
+//    * CreateJob
+//
+//    * PutJobTagging
+//
+//    * DeleteJobTagging
 //
 //    // Example sending a request using GetJobTaggingRequest.
 //    req := client.GetJobTaggingRequest(params)
@@ -127,6 +137,7 @@ func (c *Client) GetJobTaggingRequest(input *GetJobTaggingInput) GetJobTaggingRe
 	req := c.newRequest(op, input, &GetJobTaggingOutput{})
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
+
 	return GetJobTaggingRequest{Request: req, Input: input, Copy: c.GetJobTaggingRequest}
 }
 

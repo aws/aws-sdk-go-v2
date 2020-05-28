@@ -90,6 +90,7 @@ func (c *Client) GetServiceLinkedRoleDeletionStatusRequest(input *GetServiceLink
 	}
 
 	req := c.newRequest(op, input, &GetServiceLinkedRoleDeletionStatusOutput{})
+
 	return GetServiceLinkedRoleDeletionStatusRequest{Request: req, Input: input, Copy: c.GetServiceLinkedRoleDeletionStatusRequest}
 }
 

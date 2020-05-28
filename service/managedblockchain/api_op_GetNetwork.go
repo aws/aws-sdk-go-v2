@@ -104,6 +104,7 @@ func (c *Client) GetNetworkRequest(input *GetNetworkInput) GetNetworkRequest {
 	}
 
 	req := c.newRequest(op, input, &GetNetworkOutput{})
+
 	return GetNetworkRequest{Request: req, Input: input, Copy: c.GetNetworkRequest}
 }
 

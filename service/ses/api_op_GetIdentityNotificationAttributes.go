@@ -91,6 +91,7 @@ func (c *Client) GetIdentityNotificationAttributesRequest(input *GetIdentityNoti
 	}
 
 	req := c.newRequest(op, input, &GetIdentityNotificationAttributesOutput{})
+
 	return GetIdentityNotificationAttributesRequest{Request: req, Input: input, Copy: c.GetIdentityNotificationAttributesRequest}
 }
 

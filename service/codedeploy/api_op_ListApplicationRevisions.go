@@ -20,7 +20,7 @@ type ListApplicationRevisionsInput struct {
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
 
 	// Whether to list revisions based on whether the revision is the target revision
-	// of an deployment group:
+	// of a deployment group:
 	//
 	//    * include: List revisions that are target revisions of a deployment group.
 	//
@@ -140,6 +140,7 @@ func (c *Client) ListApplicationRevisionsRequest(input *ListApplicationRevisions
 	}
 
 	req := c.newRequest(op, input, &ListApplicationRevisionsOutput{})
+
 	return ListApplicationRevisionsRequest{Request: req, Input: input, Copy: c.ListApplicationRevisionsRequest}
 }
 

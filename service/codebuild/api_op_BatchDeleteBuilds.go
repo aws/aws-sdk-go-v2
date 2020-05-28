@@ -82,6 +82,7 @@ func (c *Client) BatchDeleteBuildsRequest(input *BatchDeleteBuildsInput) BatchDe
 	}
 
 	req := c.newRequest(op, input, &BatchDeleteBuildsOutput{})
+
 	return BatchDeleteBuildsRequest{Request: req, Input: input, Copy: c.BatchDeleteBuildsRequest}
 }
 

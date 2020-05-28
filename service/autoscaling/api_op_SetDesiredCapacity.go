@@ -19,7 +19,8 @@ type SetDesiredCapacityInput struct {
 	// AutoScalingGroupName is a required field
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
-	// The number of EC2 instances that should be running in the Auto Scaling group.
+	// The desired capacity is the initial capacity of the Auto Scaling group after
+	// this operation completes and the capacity it attempts to maintain.
 	//
 	// DesiredCapacity is a required field
 	DesiredCapacity *int64 `type:"integer" required:"true"`
@@ -73,8 +74,11 @@ const opSetDesiredCapacity = "SetDesiredCapacity"
 //
 // Sets the size of the specified Auto Scaling group.
 //
-// For more information about desired capacity, see What Is Amazon EC2 Auto
-// Scaling? (https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html)
+// If a scale-in activity occurs as a result of a new DesiredCapacity value
+// that is lower than the current size of the group, the Auto Scaling group
+// uses its termination policy to determine which instances to terminate.
+//
+// For more information, see Manual Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-manual-scaling.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 //
 //    // Example sending a request using SetDesiredCapacityRequest.
@@ -99,6 +103,7 @@ func (c *Client) SetDesiredCapacityRequest(input *SetDesiredCapacityInput) SetDe
 	req := c.newRequest(op, input, &SetDesiredCapacityOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetDesiredCapacityRequest{Request: req, Input: input, Copy: c.SetDesiredCapacityRequest}
 }
 

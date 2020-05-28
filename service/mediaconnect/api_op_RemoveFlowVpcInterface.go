@@ -142,6 +142,7 @@ func (c *Client) RemoveFlowVpcInterfaceRequest(input *RemoveFlowVpcInterfaceInpu
 	}
 
 	req := c.newRequest(op, input, &RemoveFlowVpcInterfaceOutput{})
+
 	return RemoveFlowVpcInterfaceRequest{Request: req, Input: input, Copy: c.RemoveFlowVpcInterfaceRequest}
 }
 

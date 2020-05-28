@@ -121,6 +121,7 @@ func (c *Client) RejectResourceShareInvitationRequest(input *RejectResourceShare
 	}
 
 	req := c.newRequest(op, input, &RejectResourceShareInvitationOutput{})
+
 	return RejectResourceShareInvitationRequest{Request: req, Input: input, Copy: c.RejectResourceShareInvitationRequest}
 }
 

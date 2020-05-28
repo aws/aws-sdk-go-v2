@@ -116,6 +116,7 @@ func (c *Client) ListCandidatesForAutoMLJobRequest(input *ListCandidatesForAutoM
 	}
 
 	req := c.newRequest(op, input, &ListCandidatesForAutoMLJobOutput{})
+
 	return ListCandidatesForAutoMLJobRequest{Request: req, Input: input, Copy: c.ListCandidatesForAutoMLJobRequest}
 }
 

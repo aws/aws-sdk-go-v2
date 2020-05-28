@@ -89,6 +89,7 @@ func (c *Client) ListContributorInsightsRequest(input *ListContributorInsightsIn
 	}
 
 	req := c.newRequest(op, input, &ListContributorInsightsOutput{})
+
 	return ListContributorInsightsRequest{Request: req, Input: input, Copy: c.ListContributorInsightsRequest}
 }
 

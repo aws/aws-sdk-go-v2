@@ -41,7 +41,7 @@ type UpdateCanaryInput struct {
 	FailureRetentionPeriodInDays *int64 `min:"1" type:"integer"`
 
 	// The name of the canary that you want to update. To find the names of your
-	// canaries, use DescribeCanaries.
+	// canaries, use DescribeCanaries (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html).
 	//
 	// You cannot change the name of a canary that has already been created.
 	//
@@ -222,6 +222,7 @@ func (c *Client) UpdateCanaryRequest(input *UpdateCanaryInput) UpdateCanaryReque
 	}
 
 	req := c.newRequest(op, input, &UpdateCanaryOutput{})
+
 	return UpdateCanaryRequest{Request: req, Input: input, Copy: c.UpdateCanaryRequest}
 }
 

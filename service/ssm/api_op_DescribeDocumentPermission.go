@@ -52,7 +52,7 @@ type DescribeDocumentPermissionOutput struct {
 	// either an AWS account or All.
 	AccountIds []string `type:"list"`
 
-	// A list of of AWS accounts where the current document is shared and the version
+	// A list of AWS accounts where the current document is shared and the version
 	// shared with each account.
 	AccountSharingInfoList []AccountSharingInfo `type:"list"`
 }
@@ -91,6 +91,7 @@ func (c *Client) DescribeDocumentPermissionRequest(input *DescribeDocumentPermis
 	}
 
 	req := c.newRequest(op, input, &DescribeDocumentPermissionOutput{})
+
 	return DescribeDocumentPermissionRequest{Request: req, Input: input, Copy: c.DescribeDocumentPermissionRequest}
 }
 

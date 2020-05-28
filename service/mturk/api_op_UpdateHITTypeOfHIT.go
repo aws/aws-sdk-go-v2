@@ -91,6 +91,7 @@ func (c *Client) UpdateHITTypeOfHITRequest(input *UpdateHITTypeOfHITInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateHITTypeOfHITOutput{})
+
 	return UpdateHITTypeOfHITRequest{Request: req, Input: input, Copy: c.UpdateHITTypeOfHITRequest}
 }
 

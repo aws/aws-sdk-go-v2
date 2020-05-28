@@ -64,6 +64,7 @@ func (c *Client) GenerateTemplateRequest(input *GenerateTemplateInput) GenerateT
 	}
 
 	req := c.newRequest(op, input, &GenerateTemplateOutput{})
+
 	return GenerateTemplateRequest{Request: req, Input: input, Copy: c.GenerateTemplateRequest}
 }
 

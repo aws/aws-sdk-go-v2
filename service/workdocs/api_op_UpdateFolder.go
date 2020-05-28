@@ -146,6 +146,7 @@ func (c *Client) UpdateFolderRequest(input *UpdateFolderInput) UpdateFolderReque
 	req := c.newRequest(op, input, &UpdateFolderOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateFolderRequest{Request: req, Input: input, Copy: c.UpdateFolderRequest}
 }
 

@@ -94,6 +94,7 @@ func (c *Client) ListCampaignsRequest(input *ListCampaignsInput) ListCampaignsRe
 	}
 
 	req := c.newRequest(op, input, &ListCampaignsOutput{})
+
 	return ListCampaignsRequest{Request: req, Input: input, Copy: c.ListCampaignsRequest}
 }
 

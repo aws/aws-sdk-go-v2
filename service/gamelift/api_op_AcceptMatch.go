@@ -132,6 +132,7 @@ func (c *Client) AcceptMatchRequest(input *AcceptMatchInput) AcceptMatchRequest 
 	}
 
 	req := c.newRequest(op, input, &AcceptMatchOutput{})
+
 	return AcceptMatchRequest{Request: req, Input: input, Copy: c.AcceptMatchRequest}
 }
 

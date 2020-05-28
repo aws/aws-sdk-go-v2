@@ -85,6 +85,7 @@ func (c *Client) ListFailuresForLicenseConfigurationOperationsRequest(input *Lis
 	}
 
 	req := c.newRequest(op, input, &ListFailuresForLicenseConfigurationOperationsOutput{})
+
 	return ListFailuresForLicenseConfigurationOperationsRequest{Request: req, Input: input, Copy: c.ListFailuresForLicenseConfigurationOperationsRequest}
 }
 

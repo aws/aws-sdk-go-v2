@@ -87,6 +87,7 @@ func (c *Client) RemoveTagsFromOnPremisesInstancesRequest(input *RemoveTagsFromO
 	req := c.newRequest(op, input, &RemoveTagsFromOnPremisesInstancesOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RemoveTagsFromOnPremisesInstancesRequest{Request: req, Input: input, Copy: c.RemoveTagsFromOnPremisesInstancesRequest}
 }
 

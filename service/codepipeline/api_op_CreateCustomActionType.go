@@ -172,6 +172,7 @@ func (c *Client) CreateCustomActionTypeRequest(input *CreateCustomActionTypeInpu
 	}
 
 	req := c.newRequest(op, input, &CreateCustomActionTypeOutput{})
+
 	return CreateCustomActionTypeRequest{Request: req, Input: input, Copy: c.CreateCustomActionTypeRequest}
 }
 

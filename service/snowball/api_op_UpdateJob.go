@@ -120,6 +120,7 @@ func (c *Client) UpdateJobRequest(input *UpdateJobInput) UpdateJobRequest {
 	}
 
 	req := c.newRequest(op, input, &UpdateJobOutput{})
+
 	return UpdateJobRequest{Request: req, Input: input, Copy: c.UpdateJobRequest}
 }
 

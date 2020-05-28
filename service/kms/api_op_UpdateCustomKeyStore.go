@@ -144,6 +144,7 @@ func (c *Client) UpdateCustomKeyStoreRequest(input *UpdateCustomKeyStoreInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateCustomKeyStoreOutput{})
+
 	return UpdateCustomKeyStoreRequest{Request: req, Input: input, Copy: c.UpdateCustomKeyStoreRequest}
 }
 

@@ -82,6 +82,7 @@ func (c *Client) UpdateVariableRequest(input *UpdateVariableInput) UpdateVariabl
 	}
 
 	req := c.newRequest(op, input, &UpdateVariableOutput{})
+
 	return UpdateVariableRequest{Request: req, Input: input, Copy: c.UpdateVariableRequest}
 }
 

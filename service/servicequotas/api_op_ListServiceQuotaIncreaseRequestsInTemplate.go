@@ -113,6 +113,7 @@ func (c *Client) ListServiceQuotaIncreaseRequestsInTemplateRequest(input *ListSe
 	}
 
 	req := c.newRequest(op, input, &ListServiceQuotaIncreaseRequestsInTemplateOutput{})
+
 	return ListServiceQuotaIncreaseRequestsInTemplateRequest{Request: req, Input: input, Copy: c.ListServiceQuotaIncreaseRequestsInTemplateRequest}
 }
 

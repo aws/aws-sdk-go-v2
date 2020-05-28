@@ -153,6 +153,7 @@ func (c *Client) ListRevisionAssetsRequest(input *ListRevisionAssetsInput) ListR
 	}
 
 	req := c.newRequest(op, input, &ListRevisionAssetsOutput{})
+
 	return ListRevisionAssetsRequest{Request: req, Input: input, Copy: c.ListRevisionAssetsRequest}
 }
 

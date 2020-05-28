@@ -180,6 +180,7 @@ func (c *Client) CreateDocumentationPartRequest(input *CreateDocumentationPartIn
 	}
 
 	req := c.newRequest(op, input, &CreateDocumentationPartOutput{})
+
 	return CreateDocumentationPartRequest{Request: req, Input: input, Copy: c.CreateDocumentationPartRequest}
 }
 

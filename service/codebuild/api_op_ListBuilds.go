@@ -71,6 +71,12 @@ func (c *Client) ListBuildsRequest(input *ListBuildsInput) ListBuildsRequest {
 		Name:       opListBuilds,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -78,6 +84,7 @@ func (c *Client) ListBuildsRequest(input *ListBuildsInput) ListBuildsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListBuildsOutput{})
+
 	return ListBuildsRequest{Request: req, Input: input, Copy: c.ListBuildsRequest}
 }
 
@@ -103,6 +110,53 @@ func (r ListBuildsRequest) Send(ctx context.Context) (*ListBuildsResponse, error
 	}
 
 	return resp, nil
+}
+
+// NewListBuildsRequestPaginator returns a paginator for ListBuilds.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListBuildsRequest(input)
+//   p := codebuild.NewListBuildsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListBuildsPaginator(req ListBuildsRequest) ListBuildsPaginator {
+	return ListBuildsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListBuildsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListBuildsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListBuildsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListBuildsPaginator) CurrentPage() *ListBuildsOutput {
+	return p.Pager.CurrentPage().(*ListBuildsOutput)
 }
 
 // ListBuildsResponse is the response type for the

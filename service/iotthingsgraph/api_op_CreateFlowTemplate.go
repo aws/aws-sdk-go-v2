@@ -90,6 +90,7 @@ func (c *Client) CreateFlowTemplateRequest(input *CreateFlowTemplateInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateFlowTemplateOutput{})
+
 	return CreateFlowTemplateRequest{Request: req, Input: input, Copy: c.CreateFlowTemplateRequest}
 }
 

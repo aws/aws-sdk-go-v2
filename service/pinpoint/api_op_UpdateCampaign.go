@@ -135,6 +135,7 @@ func (c *Client) UpdateCampaignRequest(input *UpdateCampaignInput) UpdateCampaig
 	}
 
 	req := c.newRequest(op, input, &UpdateCampaignOutput{})
+
 	return UpdateCampaignRequest{Request: req, Input: input, Copy: c.UpdateCampaignRequest}
 }
 

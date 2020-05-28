@@ -77,6 +77,7 @@ func (c *Client) DisassociateServiceRoleFromAccountRequest(input *DisassociateSe
 	}
 
 	req := c.newRequest(op, input, &DisassociateServiceRoleFromAccountOutput{})
+
 	return DisassociateServiceRoleFromAccountRequest{Request: req, Input: input, Copy: c.DisassociateServiceRoleFromAccountRequest}
 }
 

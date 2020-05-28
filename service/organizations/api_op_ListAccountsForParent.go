@@ -121,6 +121,7 @@ func (c *Client) ListAccountsForParentRequest(input *ListAccountsForParentInput)
 	}
 
 	req := c.newRequest(op, input, &ListAccountsForParentOutput{})
+
 	return ListAccountsForParentRequest{Request: req, Input: input, Copy: c.ListAccountsForParentRequest}
 }
 

@@ -107,6 +107,7 @@ func (c *Client) UpdateScalingPlanRequest(input *UpdateScalingPlanInput) UpdateS
 	}
 
 	req := c.newRequest(op, input, &UpdateScalingPlanOutput{})
+
 	return UpdateScalingPlanRequest{Request: req, Input: input, Copy: c.UpdateScalingPlanRequest}
 }
 

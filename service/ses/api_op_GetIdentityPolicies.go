@@ -110,6 +110,7 @@ func (c *Client) GetIdentityPoliciesRequest(input *GetIdentityPoliciesInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetIdentityPoliciesOutput{})
+
 	return GetIdentityPoliciesRequest{Request: req, Input: input, Copy: c.GetIdentityPoliciesRequest}
 }
 

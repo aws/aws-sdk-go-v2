@@ -82,6 +82,7 @@ func (c *Client) GetStackPolicyRequest(input *GetStackPolicyInput) GetStackPolic
 	}
 
 	req := c.newRequest(op, input, &GetStackPolicyOutput{})
+
 	return GetStackPolicyRequest{Request: req, Input: input, Copy: c.GetStackPolicyRequest}
 }
 

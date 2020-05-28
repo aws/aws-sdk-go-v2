@@ -244,6 +244,7 @@ func (c *Client) InitiateAuthRequest(input *InitiateAuthInput) InitiateAuthReque
 	}
 
 	req := c.newRequest(op, input, &InitiateAuthOutput{})
+
 	return InitiateAuthRequest{Request: req, Input: input, Copy: c.InitiateAuthRequest}
 }
 

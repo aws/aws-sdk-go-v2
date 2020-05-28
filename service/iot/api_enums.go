@@ -313,6 +313,23 @@ func (enum CannedAccessControlList) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type CertificateMode string
+
+// Enum values for CertificateMode
+const (
+	CertificateModeDefault CertificateMode = "DEFAULT"
+	CertificateModeSniOnly CertificateMode = "SNI_ONLY"
+)
+
+func (enum CertificateMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CertificateMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CertificateStatus string
 
 // Enum values for CertificateStatus

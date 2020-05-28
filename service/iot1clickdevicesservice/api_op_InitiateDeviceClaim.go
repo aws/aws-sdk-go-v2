@@ -102,6 +102,7 @@ func (c *Client) InitiateDeviceClaimRequest(input *InitiateDeviceClaimInput) Ini
 	}
 
 	req := c.newRequest(op, input, &InitiateDeviceClaimOutput{})
+
 	return InitiateDeviceClaimRequest{Request: req, Input: input, Copy: c.InitiateDeviceClaimRequest}
 }
 

@@ -159,6 +159,7 @@ func (c *Client) DescribeResizeRequest(input *DescribeResizeInput) DescribeResiz
 	}
 
 	req := c.newRequest(op, input, &DescribeResizeOutput{})
+
 	return DescribeResizeRequest{Request: req, Input: input, Copy: c.DescribeResizeRequest}
 }
 

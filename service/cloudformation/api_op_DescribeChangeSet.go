@@ -160,6 +160,7 @@ func (c *Client) DescribeChangeSetRequest(input *DescribeChangeSetInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeChangeSetOutput{})
+
 	return DescribeChangeSetRequest{Request: req, Input: input, Copy: c.DescribeChangeSetRequest}
 }
 

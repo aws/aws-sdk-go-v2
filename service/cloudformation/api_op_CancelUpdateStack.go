@@ -91,6 +91,7 @@ func (c *Client) CancelUpdateStackRequest(input *CancelUpdateStackInput) CancelU
 	req := c.newRequest(op, input, &CancelUpdateStackOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CancelUpdateStackRequest{Request: req, Input: input, Copy: c.CancelUpdateStackRequest}
 }
 

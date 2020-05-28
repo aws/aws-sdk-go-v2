@@ -100,6 +100,7 @@ func (c *Client) PutAggregationAuthorizationRequest(input *PutAggregationAuthori
 	}
 
 	req := c.newRequest(op, input, &PutAggregationAuthorizationOutput{})
+
 	return PutAggregationAuthorizationRequest{Request: req, Input: input, Copy: c.PutAggregationAuthorizationRequest}
 }
 

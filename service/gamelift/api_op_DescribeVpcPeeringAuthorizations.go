@@ -72,6 +72,7 @@ func (c *Client) DescribeVpcPeeringAuthorizationsRequest(input *DescribeVpcPeeri
 	}
 
 	req := c.newRequest(op, input, &DescribeVpcPeeringAuthorizationsOutput{})
+
 	return DescribeVpcPeeringAuthorizationsRequest{Request: req, Input: input, Copy: c.DescribeVpcPeeringAuthorizationsRequest}
 }
 

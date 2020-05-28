@@ -134,6 +134,7 @@ func (c *Client) UpdatePushTemplateRequest(input *UpdatePushTemplateInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdatePushTemplateOutput{})
+
 	return UpdatePushTemplateRequest{Request: req, Input: input, Copy: c.UpdatePushTemplateRequest}
 }
 

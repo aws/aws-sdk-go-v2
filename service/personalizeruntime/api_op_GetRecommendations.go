@@ -164,6 +164,7 @@ func (c *Client) GetRecommendationsRequest(input *GetRecommendationsInput) GetRe
 	}
 
 	req := c.newRequest(op, input, &GetRecommendationsOutput{})
+
 	return GetRecommendationsRequest{Request: req, Input: input, Copy: c.GetRecommendationsRequest}
 }
 

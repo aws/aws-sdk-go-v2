@@ -107,6 +107,7 @@ func (c *Client) PostToConnectionRequest(input *PostToConnectionInput) PostToCon
 	req := c.newRequest(op, input, &PostToConnectionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PostToConnectionRequest{Request: req, Input: input, Copy: c.PostToConnectionRequest}
 }
 

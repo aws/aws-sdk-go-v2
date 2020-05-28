@@ -158,6 +158,7 @@ func (c *Client) PutTraceSegmentsRequest(input *PutTraceSegmentsInput) PutTraceS
 	}
 
 	req := c.newRequest(op, input, &PutTraceSegmentsOutput{})
+
 	return PutTraceSegmentsRequest{Request: req, Input: input, Copy: c.PutTraceSegmentsRequest}
 }
 

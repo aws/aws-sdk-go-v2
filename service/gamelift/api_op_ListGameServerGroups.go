@@ -112,6 +112,7 @@ func (c *Client) ListGameServerGroupsRequest(input *ListGameServerGroupsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListGameServerGroupsOutput{})
+
 	return ListGameServerGroupsRequest{Request: req, Input: input, Copy: c.ListGameServerGroupsRequest}
 }
 

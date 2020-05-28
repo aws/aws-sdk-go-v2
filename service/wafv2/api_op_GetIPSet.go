@@ -137,6 +137,7 @@ func (c *Client) GetIPSetRequest(input *GetIPSetInput) GetIPSetRequest {
 	}
 
 	req := c.newRequest(op, input, &GetIPSetOutput{})
+
 	return GetIPSetRequest{Request: req, Input: input, Copy: c.GetIPSetRequest}
 }
 

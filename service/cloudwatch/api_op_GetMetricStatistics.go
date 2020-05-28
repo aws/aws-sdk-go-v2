@@ -268,6 +268,7 @@ func (c *Client) GetMetricStatisticsRequest(input *GetMetricStatisticsInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetMetricStatisticsOutput{})
+
 	return GetMetricStatisticsRequest{Request: req, Input: input, Copy: c.GetMetricStatisticsRequest}
 }
 

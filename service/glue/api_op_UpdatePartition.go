@@ -118,6 +118,7 @@ func (c *Client) UpdatePartitionRequest(input *UpdatePartitionInput) UpdateParti
 	}
 
 	req := c.newRequest(op, input, &UpdatePartitionOutput{})
+
 	return UpdatePartitionRequest{Request: req, Input: input, Copy: c.UpdatePartitionRequest}
 }
 

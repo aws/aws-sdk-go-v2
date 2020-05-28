@@ -92,6 +92,7 @@ func (c *Client) AcceptVpcEndpointConnectionsRequest(input *AcceptVpcEndpointCon
 	}
 
 	req := c.newRequest(op, input, &AcceptVpcEndpointConnectionsOutput{})
+
 	return AcceptVpcEndpointConnectionsRequest{Request: req, Input: input, Copy: c.AcceptVpcEndpointConnectionsRequest}
 }
 

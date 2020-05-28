@@ -121,6 +121,7 @@ func (c *Client) UpdateThingShadowRequest(input *UpdateThingShadowInput) UpdateT
 	}
 
 	req := c.newRequest(op, input, &UpdateThingShadowOutput{})
+
 	return UpdateThingShadowRequest{Request: req, Input: input, Copy: c.UpdateThingShadowRequest}
 }
 

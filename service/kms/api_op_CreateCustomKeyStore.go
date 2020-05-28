@@ -150,6 +150,7 @@ func (c *Client) CreateCustomKeyStoreRequest(input *CreateCustomKeyStoreInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateCustomKeyStoreOutput{})
+
 	return CreateCustomKeyStoreRequest{Request: req, Input: input, Copy: c.CreateCustomKeyStoreRequest}
 }
 

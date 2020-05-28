@@ -131,6 +131,7 @@ func (c *Client) DeregisterRobotRequest(input *DeregisterRobotInput) DeregisterR
 	}
 
 	req := c.newRequest(op, input, &DeregisterRobotOutput{})
+
 	return DeregisterRobotRequest{Request: req, Input: input, Copy: c.DeregisterRobotRequest}
 }
 

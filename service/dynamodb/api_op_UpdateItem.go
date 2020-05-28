@@ -352,6 +352,7 @@ func (c *Client) UpdateItemRequest(input *UpdateItemInput) UpdateItemRequest {
 			Fn:   de.Handler,
 		})
 	}
+
 	return UpdateItemRequest{Request: req, Input: input, Copy: c.UpdateItemRequest}
 }
 

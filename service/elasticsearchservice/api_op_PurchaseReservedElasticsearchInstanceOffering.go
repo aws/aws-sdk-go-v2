@@ -141,6 +141,7 @@ func (c *Client) PurchaseReservedElasticsearchInstanceOfferingRequest(input *Pur
 	}
 
 	req := c.newRequest(op, input, &PurchaseReservedElasticsearchInstanceOfferingOutput{})
+
 	return PurchaseReservedElasticsearchInstanceOfferingRequest{Request: req, Input: input, Copy: c.PurchaseReservedElasticsearchInstanceOfferingRequest}
 }
 

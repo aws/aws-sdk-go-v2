@@ -128,6 +128,7 @@ func (c *Client) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest 
 	}
 
 	req := c.newRequest(op, input, &ListAliasesOutput{})
+
 	return ListAliasesRequest{Request: req, Input: input, Copy: c.ListAliasesRequest}
 }
 

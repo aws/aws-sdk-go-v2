@@ -91,6 +91,7 @@ func (c *Client) ListIndicesRequest(input *ListIndicesInput) ListIndicesRequest 
 	}
 
 	req := c.newRequest(op, input, &ListIndicesOutput{})
+
 	return ListIndicesRequest{Request: req, Input: input, Copy: c.ListIndicesRequest}
 }
 

@@ -95,6 +95,7 @@ func (c *Client) GetInventorySchemaRequest(input *GetInventorySchemaInput) GetIn
 	}
 
 	req := c.newRequest(op, input, &GetInventorySchemaOutput{})
+
 	return GetInventorySchemaRequest{Request: req, Input: input, Copy: c.GetInventorySchemaRequest}
 }
 

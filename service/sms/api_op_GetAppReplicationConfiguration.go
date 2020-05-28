@@ -60,6 +60,7 @@ func (c *Client) GetAppReplicationConfigurationRequest(input *GetAppReplicationC
 	}
 
 	req := c.newRequest(op, input, &GetAppReplicationConfigurationOutput{})
+
 	return GetAppReplicationConfigurationRequest{Request: req, Input: input, Copy: c.GetAppReplicationConfigurationRequest}
 }
 

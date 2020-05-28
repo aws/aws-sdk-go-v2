@@ -137,6 +137,7 @@ func (c *Client) StartNextPendingJobExecutionRequest(input *StartNextPendingJobE
 	}
 
 	req := c.newRequest(op, input, &StartNextPendingJobExecutionOutput{})
+
 	return StartNextPendingJobExecutionRequest{Request: req, Input: input, Copy: c.StartNextPendingJobExecutionRequest}
 }
 

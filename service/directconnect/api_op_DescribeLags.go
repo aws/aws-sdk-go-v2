@@ -60,6 +60,7 @@ func (c *Client) DescribeLagsRequest(input *DescribeLagsInput) DescribeLagsReque
 	}
 
 	req := c.newRequest(op, input, &DescribeLagsOutput{})
+
 	return DescribeLagsRequest{Request: req, Input: input, Copy: c.DescribeLagsRequest}
 }
 

@@ -222,6 +222,7 @@ func (c *Client) UpdateAliasRequest(input *UpdateAliasInput) UpdateAliasRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateAliasOutput{})
+
 	return UpdateAliasRequest{Request: req, Input: input, Copy: c.UpdateAliasRequest}
 }
 

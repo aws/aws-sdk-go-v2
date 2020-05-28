@@ -70,13 +70,13 @@ const opDeleteAutoScalingGroup = "DeleteAutoScalingGroup"
 // alarm actions, and any alarm that no longer has an associated action.
 //
 // To remove instances from the Auto Scaling group before deleting it, call
-// DetachInstances with the list of instances and the option to decrement the
-// desired capacity. This ensures that Amazon EC2 Auto Scaling does not launch
-// replacement instances.
+// the DetachInstances API with the list of instances and the option to decrement
+// the desired capacity. This ensures that Amazon EC2 Auto Scaling does not
+// launch replacement instances.
 //
-// To terminate all instances before deleting the Auto Scaling group, call UpdateAutoScalingGroup
-// and set the minimum size and desired capacity of the Auto Scaling group to
-// zero.
+// To terminate all instances before deleting the Auto Scaling group, call the
+// UpdateAutoScalingGroup API and set the minimum size and desired capacity
+// of the Auto Scaling group to zero.
 //
 //    // Example sending a request using DeleteAutoScalingGroupRequest.
 //    req := client.DeleteAutoScalingGroupRequest(params)
@@ -100,6 +100,7 @@ func (c *Client) DeleteAutoScalingGroupRequest(input *DeleteAutoScalingGroupInpu
 	req := c.newRequest(op, input, &DeleteAutoScalingGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteAutoScalingGroupRequest{Request: req, Input: input, Copy: c.DeleteAutoScalingGroupRequest}
 }
 

@@ -84,6 +84,7 @@ func (c *Client) DeleteIdentityPoolRequest(input *DeleteIdentityPoolInput) Delet
 	req := c.newRequest(op, input, &DeleteIdentityPoolOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteIdentityPoolRequest{Request: req, Input: input, Copy: c.DeleteIdentityPoolRequest}
 }
 

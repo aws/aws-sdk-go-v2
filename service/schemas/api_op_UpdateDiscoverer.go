@@ -153,6 +153,7 @@ func (c *Client) UpdateDiscovererRequest(input *UpdateDiscovererInput) UpdateDis
 	}
 
 	req := c.newRequest(op, input, &UpdateDiscovererOutput{})
+
 	return UpdateDiscovererRequest{Request: req, Input: input, Copy: c.UpdateDiscovererRequest}
 }
 

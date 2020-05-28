@@ -169,6 +169,7 @@ func (c *Client) SendMessageRequest(input *SendMessageInput) SendMessageRequest 
 	}
 
 	req := c.newRequest(op, input, &SendMessageOutput{})
+
 	return SendMessageRequest{Request: req, Input: input, Copy: c.SendMessageRequest}
 }
 

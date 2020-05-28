@@ -130,6 +130,7 @@ func (c *Client) DescribeUpdateRequest(input *DescribeUpdateInput) DescribeUpdat
 	}
 
 	req := c.newRequest(op, input, &DescribeUpdateOutput{})
+
 	return DescribeUpdateRequest{Request: req, Input: input, Copy: c.DescribeUpdateRequest}
 }
 

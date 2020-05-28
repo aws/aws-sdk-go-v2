@@ -63,6 +63,7 @@ func (c *Client) AssociateDeviceWithRoomRequest(input *AssociateDeviceWithRoomIn
 	}
 
 	req := c.newRequest(op, input, &AssociateDeviceWithRoomOutput{})
+
 	return AssociateDeviceWithRoomRequest{Request: req, Input: input, Copy: c.AssociateDeviceWithRoomRequest}
 }
 

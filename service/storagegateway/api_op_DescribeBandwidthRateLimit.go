@@ -98,6 +98,7 @@ func (c *Client) DescribeBandwidthRateLimitRequest(input *DescribeBandwidthRateL
 	}
 
 	req := c.newRequest(op, input, &DescribeBandwidthRateLimitOutput{})
+
 	return DescribeBandwidthRateLimitRequest{Request: req, Input: input, Copy: c.DescribeBandwidthRateLimitRequest}
 }
 

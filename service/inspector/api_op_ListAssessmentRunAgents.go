@@ -120,6 +120,7 @@ func (c *Client) ListAssessmentRunAgentsRequest(input *ListAssessmentRunAgentsIn
 	}
 
 	req := c.newRequest(op, input, &ListAssessmentRunAgentsOutput{})
+
 	return ListAssessmentRunAgentsRequest{Request: req, Input: input, Copy: c.ListAssessmentRunAgentsRequest}
 }
 

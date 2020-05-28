@@ -110,6 +110,7 @@ func (c *Client) DescribeProvisioningArtifactRequest(input *DescribeProvisioning
 	}
 
 	req := c.newRequest(op, input, &DescribeProvisioningArtifactOutput{})
+
 	return DescribeProvisioningArtifactRequest{Request: req, Input: input, Copy: c.DescribeProvisioningArtifactRequest}
 }
 

@@ -63,6 +63,7 @@ func (c *Client) DescribeLifecycleHookTypesRequest(input *DescribeLifecycleHookT
 	}
 
 	req := c.newRequest(op, input, &DescribeLifecycleHookTypesOutput{})
+
 	return DescribeLifecycleHookTypesRequest{Request: req, Input: input, Copy: c.DescribeLifecycleHookTypesRequest}
 }
 

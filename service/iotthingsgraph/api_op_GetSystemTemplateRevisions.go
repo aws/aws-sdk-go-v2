@@ -102,6 +102,7 @@ func (c *Client) GetSystemTemplateRevisionsRequest(input *GetSystemTemplateRevis
 	}
 
 	req := c.newRequest(op, input, &GetSystemTemplateRevisionsOutput{})
+
 	return GetSystemTemplateRevisionsRequest{Request: req, Input: input, Copy: c.GetSystemTemplateRevisionsRequest}
 }
 

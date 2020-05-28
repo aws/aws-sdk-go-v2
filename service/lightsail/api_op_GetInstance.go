@@ -77,6 +77,7 @@ func (c *Client) GetInstanceRequest(input *GetInstanceInput) GetInstanceRequest 
 	}
 
 	req := c.newRequest(op, input, &GetInstanceOutput{})
+
 	return GetInstanceRequest{Request: req, Input: input, Copy: c.GetInstanceRequest}
 }
 

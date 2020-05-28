@@ -128,6 +128,7 @@ func (c *Client) GetContactAttributesRequest(input *GetContactAttributesInput) G
 	}
 
 	req := c.newRequest(op, input, &GetContactAttributesOutput{})
+
 	return GetContactAttributesRequest{Request: req, Input: input, Copy: c.GetContactAttributesRequest}
 }
 

@@ -100,6 +100,7 @@ func (c *Client) DescribeLoaRequest(input *DescribeLoaInput) DescribeLoaRequest 
 	}
 
 	req := c.newRequest(op, input, &DescribeLoaOutput{})
+
 	return DescribeLoaRequest{Request: req, Input: input, Copy: c.DescribeLoaRequest}
 }
 

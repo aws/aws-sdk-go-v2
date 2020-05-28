@@ -175,6 +175,7 @@ func (c *Client) CreateScheduledActionRequest(input *CreateScheduledActionInput)
 	}
 
 	req := c.newRequest(op, input, &CreateScheduledActionOutput{})
+
 	return CreateScheduledActionRequest{Request: req, Input: input, Copy: c.CreateScheduledActionRequest}
 }
 

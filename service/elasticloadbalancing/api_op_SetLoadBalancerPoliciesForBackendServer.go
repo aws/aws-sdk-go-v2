@@ -109,6 +109,7 @@ func (c *Client) SetLoadBalancerPoliciesForBackendServerRequest(input *SetLoadBa
 	}
 
 	req := c.newRequest(op, input, &SetLoadBalancerPoliciesForBackendServerOutput{})
+
 	return SetLoadBalancerPoliciesForBackendServerRequest{Request: req, Input: input, Copy: c.SetLoadBalancerPoliciesForBackendServerRequest}
 }
 

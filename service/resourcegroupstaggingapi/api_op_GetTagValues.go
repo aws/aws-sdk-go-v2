@@ -97,6 +97,7 @@ func (c *Client) GetTagValuesRequest(input *GetTagValuesInput) GetTagValuesReque
 	}
 
 	req := c.newRequest(op, input, &GetTagValuesOutput{})
+
 	return GetTagValuesRequest{Request: req, Input: input, Copy: c.GetTagValuesRequest}
 }
 

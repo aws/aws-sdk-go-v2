@@ -81,6 +81,7 @@ func (c *Client) DeleteExperimentRequest(input *DeleteExperimentInput) DeleteExp
 	}
 
 	req := c.newRequest(op, input, &DeleteExperimentOutput{})
+
 	return DeleteExperimentRequest{Request: req, Input: input, Copy: c.DeleteExperimentRequest}
 }
 

@@ -90,6 +90,7 @@ func (c *Client) PutManagedScalingPolicyRequest(input *PutManagedScalingPolicyIn
 	}
 
 	req := c.newRequest(op, input, &PutManagedScalingPolicyOutput{})
+
 	return PutManagedScalingPolicyRequest{Request: req, Input: input, Copy: c.PutManagedScalingPolicyRequest}
 }
 

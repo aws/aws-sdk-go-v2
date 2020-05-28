@@ -129,6 +129,7 @@ func (c *Client) GetBucketRequestPaymentRequest(input *GetBucketRequestPaymentIn
 	}
 
 	req := c.newRequest(op, input, &GetBucketRequestPaymentOutput{})
+
 	return GetBucketRequestPaymentRequest{Request: req, Input: input, Copy: c.GetBucketRequestPaymentRequest}
 }
 

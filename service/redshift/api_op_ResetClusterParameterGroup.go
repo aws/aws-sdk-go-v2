@@ -96,6 +96,7 @@ func (c *Client) ResetClusterParameterGroupRequest(input *ResetClusterParameterG
 	}
 
 	req := c.newRequest(op, input, &ResetClusterParameterGroupOutput{})
+
 	return ResetClusterParameterGroupRequest{Request: req, Input: input, Copy: c.ResetClusterParameterGroupRequest}
 }
 

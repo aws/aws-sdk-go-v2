@@ -99,6 +99,7 @@ func (c *Client) UpdateNotificationSettingsRequest(input *UpdateNotificationSett
 	}
 
 	req := c.newRequest(op, input, &UpdateNotificationSettingsOutput{})
+
 	return UpdateNotificationSettingsRequest{Request: req, Input: input, Copy: c.UpdateNotificationSettingsRequest}
 }
 

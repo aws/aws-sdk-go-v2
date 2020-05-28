@@ -101,6 +101,7 @@ func (c *Client) DeleteSuggesterRequest(input *DeleteSuggesterInput) DeleteSugge
 	}
 
 	req := c.newRequest(op, input, &DeleteSuggesterOutput{})
+
 	return DeleteSuggesterRequest{Request: req, Input: input, Copy: c.DeleteSuggesterRequest}
 }
 

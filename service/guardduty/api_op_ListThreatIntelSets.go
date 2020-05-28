@@ -155,6 +155,7 @@ func (c *Client) ListThreatIntelSetsRequest(input *ListThreatIntelSetsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListThreatIntelSetsOutput{})
+
 	return ListThreatIntelSetsRequest{Request: req, Input: input, Copy: c.ListThreatIntelSetsRequest}
 }
 

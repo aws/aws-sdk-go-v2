@@ -183,6 +183,7 @@ func (c *Client) CreateTapesRequest(input *CreateTapesInput) CreateTapesRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateTapesOutput{})
+
 	return CreateTapesRequest{Request: req, Input: input, Copy: c.CreateTapesRequest}
 }
 

@@ -159,6 +159,7 @@ func (c *Client) UpdateBasePathMappingRequest(input *UpdateBasePathMappingInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateBasePathMappingOutput{})
+
 	return UpdateBasePathMappingRequest{Request: req, Input: input, Copy: c.UpdateBasePathMappingRequest}
 }
 

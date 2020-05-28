@@ -132,6 +132,7 @@ func (c *Client) AssociateWebsiteAuthorizationProviderRequest(input *AssociateWe
 	}
 
 	req := c.newRequest(op, input, &AssociateWebsiteAuthorizationProviderOutput{})
+
 	return AssociateWebsiteAuthorizationProviderRequest{Request: req, Input: input, Copy: c.AssociateWebsiteAuthorizationProviderRequest}
 }
 

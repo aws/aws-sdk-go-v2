@@ -59,7 +59,7 @@ type DescribeUserProfileOutput struct {
 	// The failure reason.
 	FailureReason *string `type:"string"`
 
-	// The homa Amazon Elastic File System (EFS) Uid.
+	// The home Amazon Elastic File System (EFS) Uid.
 	HomeEfsFileSystemUid *string `type:"string"`
 
 	// The last modified time.
@@ -116,6 +116,7 @@ func (c *Client) DescribeUserProfileRequest(input *DescribeUserProfileInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeUserProfileOutput{})
+
 	return DescribeUserProfileRequest{Request: req, Input: input, Copy: c.DescribeUserProfileRequest}
 }
 

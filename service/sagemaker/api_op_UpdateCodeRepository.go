@@ -94,6 +94,7 @@ func (c *Client) UpdateCodeRepositoryRequest(input *UpdateCodeRepositoryInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateCodeRepositoryOutput{})
+
 	return UpdateCodeRepositoryRequest{Request: req, Input: input, Copy: c.UpdateCodeRepositoryRequest}
 }
 

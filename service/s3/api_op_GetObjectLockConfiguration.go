@@ -126,6 +126,7 @@ func (c *Client) GetObjectLockConfigurationRequest(input *GetObjectLockConfigura
 	}
 
 	req := c.newRequest(op, input, &GetObjectLockConfigurationOutput{})
+
 	return GetObjectLockConfigurationRequest{Request: req, Input: input, Copy: c.GetObjectLockConfigurationRequest}
 }
 

@@ -114,6 +114,7 @@ func (c *Client) ListAvailableManagedRuleGroupsRequest(input *ListAvailableManag
 	}
 
 	req := c.newRequest(op, input, &ListAvailableManagedRuleGroupsOutput{})
+
 	return ListAvailableManagedRuleGroupsRequest{Request: req, Input: input, Copy: c.ListAvailableManagedRuleGroupsRequest}
 }
 

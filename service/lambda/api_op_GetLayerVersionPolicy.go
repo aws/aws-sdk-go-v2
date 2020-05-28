@@ -129,6 +129,7 @@ func (c *Client) GetLayerVersionPolicyRequest(input *GetLayerVersionPolicyInput)
 	}
 
 	req := c.newRequest(op, input, &GetLayerVersionPolicyOutput{})
+
 	return GetLayerVersionPolicyRequest{Request: req, Input: input, Copy: c.GetLayerVersionPolicyRequest}
 }
 

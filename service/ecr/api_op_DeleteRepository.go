@@ -88,6 +88,7 @@ func (c *Client) DeleteRepositoryRequest(input *DeleteRepositoryInput) DeleteRep
 	}
 
 	req := c.newRequest(op, input, &DeleteRepositoryOutput{})
+
 	return DeleteRepositoryRequest{Request: req, Input: input, Copy: c.DeleteRepositoryRequest}
 }
 

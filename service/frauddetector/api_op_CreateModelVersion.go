@@ -102,6 +102,7 @@ func (c *Client) CreateModelVersionRequest(input *CreateModelVersionInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateModelVersionOutput{})
+
 	return CreateModelVersionRequest{Request: req, Input: input, Copy: c.CreateModelVersionRequest}
 }
 

@@ -202,6 +202,7 @@ func (c *Client) CreateProvisionedProductPlanRequest(input *CreateProvisionedPro
 	}
 
 	req := c.newRequest(op, input, &CreateProvisionedProductPlanOutput{})
+
 	return CreateProvisionedProductPlanRequest{Request: req, Input: input, Copy: c.CreateProvisionedProductPlanRequest}
 }
 

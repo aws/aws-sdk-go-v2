@@ -96,6 +96,7 @@ func (c *Client) UpdateDomainEndpointOptionsRequest(input *UpdateDomainEndpointO
 	}
 
 	req := c.newRequest(op, input, &UpdateDomainEndpointOptionsOutput{})
+
 	return UpdateDomainEndpointOptionsRequest{Request: req, Input: input, Copy: c.UpdateDomainEndpointOptionsRequest}
 }
 

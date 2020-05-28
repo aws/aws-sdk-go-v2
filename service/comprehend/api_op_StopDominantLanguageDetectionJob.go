@@ -94,6 +94,7 @@ func (c *Client) StopDominantLanguageDetectionJobRequest(input *StopDominantLang
 	}
 
 	req := c.newRequest(op, input, &StopDominantLanguageDetectionJobOutput{})
+
 	return StopDominantLanguageDetectionJobRequest{Request: req, Input: input, Copy: c.StopDominantLanguageDetectionJobRequest}
 }
 

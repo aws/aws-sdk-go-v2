@@ -147,6 +147,7 @@ func (c *Client) ListSigningProfilesRequest(input *ListSigningProfilesInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListSigningProfilesOutput{})
+
 	return ListSigningProfilesRequest{Request: req, Input: input, Copy: c.ListSigningProfilesRequest}
 }
 

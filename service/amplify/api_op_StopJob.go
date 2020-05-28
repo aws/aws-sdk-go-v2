@@ -141,6 +141,7 @@ func (c *Client) StopJobRequest(input *StopJobInput) StopJobRequest {
 	}
 
 	req := c.newRequest(op, input, &StopJobOutput{})
+
 	return StopJobRequest{Request: req, Input: input, Copy: c.StopJobRequest}
 }
 

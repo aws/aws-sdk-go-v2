@@ -98,6 +98,7 @@ func (c *Client) PutInventoryRequest(input *PutInventoryInput) PutInventoryReque
 	}
 
 	req := c.newRequest(op, input, &PutInventoryOutput{})
+
 	return PutInventoryRequest{Request: req, Input: input, Copy: c.PutInventoryRequest}
 }
 

@@ -111,6 +111,7 @@ func (c *Client) DeleteFolderRequest(input *DeleteFolderInput) DeleteFolderReque
 	req := c.newRequest(op, input, &DeleteFolderOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteFolderRequest{Request: req, Input: input, Copy: c.DeleteFolderRequest}
 }
 

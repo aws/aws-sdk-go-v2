@@ -154,6 +154,7 @@ func (c *Client) ListDetectorsRequest(input *ListDetectorsInput) ListDetectorsRe
 	}
 
 	req := c.newRequest(op, input, &ListDetectorsOutput{})
+
 	return ListDetectorsRequest{Request: req, Input: input, Copy: c.ListDetectorsRequest}
 }
 

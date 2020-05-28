@@ -140,6 +140,7 @@ func (c *Client) UpdatePublicKeyRequest(input *UpdatePublicKeyInput) UpdatePubli
 	}
 
 	req := c.newRequest(op, input, &UpdatePublicKeyOutput{})
+
 	return UpdatePublicKeyRequest{Request: req, Input: input, Copy: c.UpdatePublicKeyRequest}
 }
 

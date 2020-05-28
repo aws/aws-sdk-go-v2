@@ -455,6 +455,7 @@ func (c *Client) CreateServiceRequest(input *CreateServiceInput) CreateServiceRe
 	}
 
 	req := c.newRequest(op, input, &CreateServiceOutput{})
+
 	return CreateServiceRequest{Request: req, Input: input, Copy: c.CreateServiceRequest}
 }
 

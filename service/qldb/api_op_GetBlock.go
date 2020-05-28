@@ -165,6 +165,7 @@ func (c *Client) GetBlockRequest(input *GetBlockInput) GetBlockRequest {
 	}
 
 	req := c.newRequest(op, input, &GetBlockOutput{})
+
 	return GetBlockRequest{Request: req, Input: input, Copy: c.GetBlockRequest}
 }
 

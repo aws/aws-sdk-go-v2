@@ -88,6 +88,7 @@ func (c *Client) DeactivatePipelineRequest(input *DeactivatePipelineInput) Deact
 	}
 
 	req := c.newRequest(op, input, &DeactivatePipelineOutput{})
+
 	return DeactivatePipelineRequest{Request: req, Input: input, Copy: c.DeactivatePipelineRequest}
 }
 

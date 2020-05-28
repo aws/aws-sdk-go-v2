@@ -257,9 +257,8 @@ const opCreateLaunchConfiguration = "CreateLaunchConfiguration"
 // Creates a launch configuration.
 //
 // If you exceed your maximum limit of launch configurations, the call fails.
-// For information about viewing this limit, see DescribeAccountLimits. For
-// information about updating this limit, see Amazon EC2 Auto Scaling Service
-// Quotas (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html)
+// To query this limit, call the DescribeAccountLimits API. For information
+// about updating this limit, see Amazon EC2 Auto Scaling Service Quotas (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 //
 // For more information, see Launch Configurations (https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchConfiguration.html)
@@ -287,6 +286,7 @@ func (c *Client) CreateLaunchConfigurationRequest(input *CreateLaunchConfigurati
 	req := c.newRequest(op, input, &CreateLaunchConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CreateLaunchConfigurationRequest{Request: req, Input: input, Copy: c.CreateLaunchConfigurationRequest}
 }
 

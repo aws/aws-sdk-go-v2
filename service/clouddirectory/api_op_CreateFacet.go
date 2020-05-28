@@ -165,6 +165,7 @@ func (c *Client) CreateFacetRequest(input *CreateFacetInput) CreateFacetRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateFacetOutput{})
+
 	return CreateFacetRequest{Request: req, Input: input, Copy: c.CreateFacetRequest}
 }
 

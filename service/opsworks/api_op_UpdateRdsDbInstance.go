@@ -88,6 +88,7 @@ func (c *Client) UpdateRdsDbInstanceRequest(input *UpdateRdsDbInstanceInput) Upd
 	req := c.newRequest(op, input, &UpdateRdsDbInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateRdsDbInstanceRequest{Request: req, Input: input, Copy: c.UpdateRdsDbInstanceRequest}
 }
 

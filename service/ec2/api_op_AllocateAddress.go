@@ -140,6 +140,7 @@ func (c *Client) AllocateAddressRequest(input *AllocateAddressInput) AllocateAdd
 	}
 
 	req := c.newRequest(op, input, &AllocateAddressOutput{})
+
 	return AllocateAddressRequest{Request: req, Input: input, Copy: c.AllocateAddressRequest}
 }
 

@@ -88,6 +88,7 @@ func (c *Client) AssociateBudgetWithResourceRequest(input *AssociateBudgetWithRe
 	}
 
 	req := c.newRequest(op, input, &AssociateBudgetWithResourceOutput{})
+
 	return AssociateBudgetWithResourceRequest{Request: req, Input: input, Copy: c.AssociateBudgetWithResourceRequest}
 }
 

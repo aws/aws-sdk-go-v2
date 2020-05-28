@@ -107,6 +107,7 @@ func (c *Client) PreviewAgentsRequest(input *PreviewAgentsInput) PreviewAgentsRe
 	}
 
 	req := c.newRequest(op, input, &PreviewAgentsOutput{})
+
 	return PreviewAgentsRequest{Request: req, Input: input, Copy: c.PreviewAgentsRequest}
 }
 

@@ -80,6 +80,7 @@ func (c *Client) DeleteTerminologyRequest(input *DeleteTerminologyInput) DeleteT
 	req := c.newRequest(op, input, &DeleteTerminologyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteTerminologyRequest{Request: req, Input: input, Copy: c.DeleteTerminologyRequest}
 }
 

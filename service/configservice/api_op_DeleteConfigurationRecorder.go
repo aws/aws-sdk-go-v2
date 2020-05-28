@@ -92,6 +92,7 @@ func (c *Client) DeleteConfigurationRecorderRequest(input *DeleteConfigurationRe
 	req := c.newRequest(op, input, &DeleteConfigurationRecorderOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteConfigurationRecorderRequest{Request: req, Input: input, Copy: c.DeleteConfigurationRecorderRequest}
 }
 

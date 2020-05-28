@@ -18,9 +18,9 @@ type ContinueDeploymentInput struct {
 	// traffic to the replacement environment.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 
-	// The status of the deployment's waiting period. READY_WAIT indicates the deployment
-	// is ready to start shifting traffic. TERMINATION_WAIT indicates the traffic
-	// is shifted, but the original target is not terminated.
+	// The status of the deployment's waiting period. READY_WAIT indicates that
+	// the deployment is ready to start shifting traffic. TERMINATION_WAIT indicates
+	// that the traffic is shifted, but the original target is not terminated.
 	DeploymentWaitType DeploymentWaitType `locationName:"deploymentWaitType" type:"string" enum:"true"`
 }
 
@@ -72,6 +72,7 @@ func (c *Client) ContinueDeploymentRequest(input *ContinueDeploymentInput) Conti
 	req := c.newRequest(op, input, &ContinueDeploymentOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return ContinueDeploymentRequest{Request: req, Input: input, Copy: c.ContinueDeploymentRequest}
 }
 

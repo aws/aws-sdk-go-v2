@@ -87,6 +87,7 @@ func (c *Client) BatchGetQueryExecutionRequest(input *BatchGetQueryExecutionInpu
 	}
 
 	req := c.newRequest(op, input, &BatchGetQueryExecutionOutput{})
+
 	return BatchGetQueryExecutionRequest{Request: req, Input: input, Copy: c.BatchGetQueryExecutionRequest}
 }
 

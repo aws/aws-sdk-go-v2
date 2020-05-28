@@ -106,6 +106,7 @@ func (c *Client) DescribeConfigurationAggregatorSourcesStatusRequest(input *Desc
 	}
 
 	req := c.newRequest(op, input, &DescribeConfigurationAggregatorSourcesStatusOutput{})
+
 	return DescribeConfigurationAggregatorSourcesStatusRequest{Request: req, Input: input, Copy: c.DescribeConfigurationAggregatorSourcesStatusRequest}
 }
 

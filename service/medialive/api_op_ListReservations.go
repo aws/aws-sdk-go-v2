@@ -188,6 +188,7 @@ func (c *Client) ListReservationsRequest(input *ListReservationsInput) ListReser
 	}
 
 	req := c.newRequest(op, input, &ListReservationsOutput{})
+
 	return ListReservationsRequest{Request: req, Input: input, Copy: c.ListReservationsRequest}
 }
 

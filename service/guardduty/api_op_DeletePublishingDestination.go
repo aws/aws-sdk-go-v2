@@ -111,6 +111,7 @@ func (c *Client) DeletePublishingDestinationRequest(input *DeletePublishingDesti
 	}
 
 	req := c.newRequest(op, input, &DeletePublishingDestinationOutput{})
+
 	return DeletePublishingDestinationRequest{Request: req, Input: input, Copy: c.DeletePublishingDestinationRequest}
 }
 

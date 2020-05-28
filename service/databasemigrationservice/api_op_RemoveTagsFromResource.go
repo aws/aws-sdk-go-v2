@@ -84,6 +84,7 @@ func (c *Client) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInpu
 	}
 
 	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+
 	return RemoveTagsFromResourceRequest{Request: req, Input: input, Copy: c.RemoveTagsFromResourceRequest}
 }
 

@@ -70,6 +70,7 @@ func (c *Client) DescribeDomainsRequest(input *DescribeDomainsInput) DescribeDom
 	}
 
 	req := c.newRequest(op, input, &DescribeDomainsOutput{})
+
 	return DescribeDomainsRequest{Request: req, Input: input, Copy: c.DescribeDomainsRequest}
 }
 

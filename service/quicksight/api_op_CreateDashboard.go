@@ -321,6 +321,7 @@ func (c *Client) CreateDashboardRequest(input *CreateDashboardInput) CreateDashb
 	}
 
 	req := c.newRequest(op, input, &CreateDashboardOutput{})
+
 	return CreateDashboardRequest{Request: req, Input: input, Copy: c.CreateDashboardRequest}
 }
 

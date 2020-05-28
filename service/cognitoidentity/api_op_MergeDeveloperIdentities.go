@@ -133,6 +133,7 @@ func (c *Client) MergeDeveloperIdentitiesRequest(input *MergeDeveloperIdentities
 	}
 
 	req := c.newRequest(op, input, &MergeDeveloperIdentitiesOutput{})
+
 	return MergeDeveloperIdentitiesRequest{Request: req, Input: input, Copy: c.MergeDeveloperIdentitiesRequest}
 }
 

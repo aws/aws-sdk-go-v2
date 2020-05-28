@@ -116,6 +116,7 @@ func (c *Client) DeletePlacementRequest(input *DeletePlacementInput) DeletePlace
 	}
 
 	req := c.newRequest(op, input, &DeletePlacementOutput{})
+
 	return DeletePlacementRequest{Request: req, Input: input, Copy: c.DeletePlacementRequest}
 }
 

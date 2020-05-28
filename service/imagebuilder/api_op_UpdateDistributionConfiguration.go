@@ -187,6 +187,7 @@ func (c *Client) UpdateDistributionConfigurationRequest(input *UpdateDistributio
 	}
 
 	req := c.newRequest(op, input, &UpdateDistributionConfigurationOutput{})
+
 	return UpdateDistributionConfigurationRequest{Request: req, Input: input, Copy: c.UpdateDistributionConfigurationRequest}
 }
 

@@ -108,6 +108,7 @@ func (c *Client) ListPullRequestsRequest(input *ListPullRequestsInput) ListPullR
 	}
 
 	req := c.newRequest(op, input, &ListPullRequestsOutput{})
+
 	return ListPullRequestsRequest{Request: req, Input: input, Copy: c.ListPullRequestsRequest}
 }
 

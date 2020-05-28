@@ -141,6 +141,7 @@ func (c *Client) UpdateStreamingDistributionRequest(input *UpdateStreamingDistri
 	}
 
 	req := c.newRequest(op, input, &UpdateStreamingDistributionOutput{})
+
 	return UpdateStreamingDistributionRequest{Request: req, Input: input, Copy: c.UpdateStreamingDistributionRequest}
 }
 

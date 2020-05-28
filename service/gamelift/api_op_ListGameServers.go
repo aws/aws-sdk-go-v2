@@ -130,6 +130,7 @@ func (c *Client) ListGameServersRequest(input *ListGameServersInput) ListGameSer
 	}
 
 	req := c.newRequest(op, input, &ListGameServersOutput{})
+
 	return ListGameServersRequest{Request: req, Input: input, Copy: c.ListGameServersRequest}
 }
 

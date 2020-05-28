@@ -118,6 +118,7 @@ func (c *Client) SearchRoomsRequest(input *SearchRoomsInput) SearchRoomsRequest 
 	}
 
 	req := c.newRequest(op, input, &SearchRoomsOutput{})
+
 	return SearchRoomsRequest{Request: req, Input: input, Copy: c.SearchRoomsRequest}
 }
 

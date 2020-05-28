@@ -128,6 +128,7 @@ func (c *Client) DescribeReservedElasticsearchInstancesRequest(input *DescribeRe
 	}
 
 	req := c.newRequest(op, input, &DescribeReservedElasticsearchInstancesOutput{})
+
 	return DescribeReservedElasticsearchInstancesRequest{Request: req, Input: input, Copy: c.DescribeReservedElasticsearchInstancesRequest}
 }
 

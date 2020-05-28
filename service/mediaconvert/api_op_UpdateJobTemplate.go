@@ -217,6 +217,7 @@ func (c *Client) UpdateJobTemplateRequest(input *UpdateJobTemplateInput) UpdateJ
 	}
 
 	req := c.newRequest(op, input, &UpdateJobTemplateOutput{})
+
 	return UpdateJobTemplateRequest{Request: req, Input: input, Copy: c.UpdateJobTemplateRequest}
 }
 

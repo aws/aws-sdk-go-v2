@@ -95,6 +95,7 @@ func (c *Client) AdminUserGlobalSignOutRequest(input *AdminUserGlobalSignOutInpu
 	}
 
 	req := c.newRequest(op, input, &AdminUserGlobalSignOutOutput{})
+
 	return AdminUserGlobalSignOutRequest{Request: req, Input: input, Copy: c.AdminUserGlobalSignOutRequest}
 }
 

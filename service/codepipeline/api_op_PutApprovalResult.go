@@ -133,6 +133,7 @@ func (c *Client) PutApprovalResultRequest(input *PutApprovalResultInput) PutAppr
 	}
 
 	req := c.newRequest(op, input, &PutApprovalResultOutput{})
+
 	return PutApprovalResultRequest{Request: req, Input: input, Copy: c.PutApprovalResultRequest}
 }
 

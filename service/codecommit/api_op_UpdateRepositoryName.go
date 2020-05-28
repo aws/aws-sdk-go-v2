@@ -98,6 +98,7 @@ func (c *Client) UpdateRepositoryNameRequest(input *UpdateRepositoryNameInput) U
 	req := c.newRequest(op, input, &UpdateRepositoryNameOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateRepositoryNameRequest{Request: req, Input: input, Copy: c.UpdateRepositoryNameRequest}
 }
 

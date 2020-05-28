@@ -105,6 +105,7 @@ func (c *Client) SetIdentityMailFromDomainRequest(input *SetIdentityMailFromDoma
 	}
 
 	req := c.newRequest(op, input, &SetIdentityMailFromDomainOutput{})
+
 	return SetIdentityMailFromDomainRequest{Request: req, Input: input, Copy: c.SetIdentityMailFromDomainRequest}
 }
 

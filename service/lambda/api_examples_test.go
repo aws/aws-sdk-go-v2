@@ -265,7 +265,7 @@ func ExampleClient_CreateEventSourceMappingRequest_shared00() {
 	fmt.Println(result)
 }
 
-// To update an asynchronous invocation configuration
+// To create a function
 //
 // The following example creates a function with a deployment package in Amazon S3 and
 // enables X-Ray tracing and environment variable encryption.

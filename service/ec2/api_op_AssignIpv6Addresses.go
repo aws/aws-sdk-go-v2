@@ -98,6 +98,7 @@ func (c *Client) AssignIpv6AddressesRequest(input *AssignIpv6AddressesInput) Ass
 	}
 
 	req := c.newRequest(op, input, &AssignIpv6AddressesOutput{})
+
 	return AssignIpv6AddressesRequest{Request: req, Input: input, Copy: c.AssignIpv6AddressesRequest}
 }
 

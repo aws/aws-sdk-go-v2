@@ -111,6 +111,7 @@ func (c *Client) GetModelVersionRequest(input *GetModelVersionInput) GetModelVer
 	}
 
 	req := c.newRequest(op, input, &GetModelVersionOutput{})
+
 	return GetModelVersionRequest{Request: req, Input: input, Copy: c.GetModelVersionRequest}
 }
 

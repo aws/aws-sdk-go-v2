@@ -88,6 +88,7 @@ func (c *Client) CreateApplicationSnapshotRequest(input *CreateApplicationSnapsh
 	}
 
 	req := c.newRequest(op, input, &CreateApplicationSnapshotOutput{})
+
 	return CreateApplicationSnapshotRequest{Request: req, Input: input, Copy: c.CreateApplicationSnapshotRequest}
 }
 

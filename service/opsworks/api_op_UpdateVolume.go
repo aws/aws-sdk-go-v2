@@ -89,6 +89,7 @@ func (c *Client) UpdateVolumeRequest(input *UpdateVolumeInput) UpdateVolumeReque
 	req := c.newRequest(op, input, &UpdateVolumeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateVolumeRequest{Request: req, Input: input, Copy: c.UpdateVolumeRequest}
 }
 

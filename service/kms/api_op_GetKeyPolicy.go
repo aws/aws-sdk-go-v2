@@ -103,6 +103,7 @@ func (c *Client) GetKeyPolicyRequest(input *GetKeyPolicyInput) GetKeyPolicyReque
 	}
 
 	req := c.newRequest(op, input, &GetKeyPolicyOutput{})
+
 	return GetKeyPolicyRequest{Request: req, Input: input, Copy: c.GetKeyPolicyRequest}
 }
 

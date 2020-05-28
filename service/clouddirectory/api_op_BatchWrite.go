@@ -138,6 +138,7 @@ func (c *Client) BatchWriteRequest(input *BatchWriteInput) BatchWriteRequest {
 	}
 
 	req := c.newRequest(op, input, &BatchWriteOutput{})
+
 	return BatchWriteRequest{Request: req, Input: input, Copy: c.BatchWriteRequest}
 }
 

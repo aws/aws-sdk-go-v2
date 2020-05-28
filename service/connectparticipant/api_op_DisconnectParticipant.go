@@ -112,6 +112,7 @@ func (c *Client) DisconnectParticipantRequest(input *DisconnectParticipantInput)
 	}
 
 	req := c.newRequest(op, input, &DisconnectParticipantOutput{})
+
 	return DisconnectParticipantRequest{Request: req, Input: input, Copy: c.DisconnectParticipantRequest}
 }
 

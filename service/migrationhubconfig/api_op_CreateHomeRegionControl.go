@@ -99,6 +99,7 @@ func (c *Client) CreateHomeRegionControlRequest(input *CreateHomeRegionControlIn
 	}
 
 	req := c.newRequest(op, input, &CreateHomeRegionControlOutput{})
+
 	return CreateHomeRegionControlRequest{Request: req, Input: input, Copy: c.CreateHomeRegionControlRequest}
 }
 

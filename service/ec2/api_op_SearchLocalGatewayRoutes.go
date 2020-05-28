@@ -108,6 +108,7 @@ func (c *Client) SearchLocalGatewayRoutesRequest(input *SearchLocalGatewayRoutes
 	}
 
 	req := c.newRequest(op, input, &SearchLocalGatewayRoutesOutput{})
+
 	return SearchLocalGatewayRoutesRequest{Request: req, Input: input, Copy: c.SearchLocalGatewayRoutesRequest}
 }
 

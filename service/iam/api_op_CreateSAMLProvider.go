@@ -124,6 +124,7 @@ func (c *Client) CreateSAMLProviderRequest(input *CreateSAMLProviderInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateSAMLProviderOutput{})
+
 	return CreateSAMLProviderRequest{Request: req, Input: input, Copy: c.CreateSAMLProviderRequest}
 }
 

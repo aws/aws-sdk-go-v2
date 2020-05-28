@@ -163,6 +163,7 @@ func (c *Client) DescribeFleetMetadataRequest(input *DescribeFleetMetadataInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeFleetMetadataOutput{})
+
 	return DescribeFleetMetadataRequest{Request: req, Input: input, Copy: c.DescribeFleetMetadataRequest}
 }
 

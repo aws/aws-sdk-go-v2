@@ -95,6 +95,7 @@ func (c *Client) DeleteVpcLinkRequest(input *DeleteVpcLinkInput) DeleteVpcLinkRe
 	req := c.newRequest(op, input, &DeleteVpcLinkOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteVpcLinkRequest{Request: req, Input: input, Copy: c.DeleteVpcLinkRequest}
 }
 

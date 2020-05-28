@@ -122,6 +122,7 @@ func (c *Client) CreatePlayerSessionRequest(input *CreatePlayerSessionInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreatePlayerSessionOutput{})
+
 	return CreatePlayerSessionRequest{Request: req, Input: input, Copy: c.CreatePlayerSessionRequest}
 }
 

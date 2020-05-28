@@ -13,7 +13,8 @@ import (
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the signaling channel from which you want to remove tags.
+	// The Amazon Resource Name (ARN) of the signaling channel from which you want
+	// to remove tags.
 	//
 	// ResourceARN is a required field
 	ResourceARN *string `min:"1" type:"string" required:"true"`
@@ -121,6 +122,7 @@ func (c *Client) UntagResourceRequest(input *UntagResourceInput) UntagResourceRe
 	}
 
 	req := c.newRequest(op, input, &UntagResourceOutput{})
+
 	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 

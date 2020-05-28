@@ -269,6 +269,7 @@ func (c *Client) UpdateInfrastructureConfigurationRequest(input *UpdateInfrastru
 	}
 
 	req := c.newRequest(op, input, &UpdateInfrastructureConfigurationOutput{})
+
 	return UpdateInfrastructureConfigurationRequest{Request: req, Input: input, Copy: c.UpdateInfrastructureConfigurationRequest}
 }
 

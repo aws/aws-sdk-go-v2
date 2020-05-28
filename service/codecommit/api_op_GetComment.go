@@ -77,6 +77,7 @@ func (c *Client) GetCommentRequest(input *GetCommentInput) GetCommentRequest {
 	}
 
 	req := c.newRequest(op, input, &GetCommentOutput{})
+
 	return GetCommentRequest{Request: req, Input: input, Copy: c.GetCommentRequest}
 }
 

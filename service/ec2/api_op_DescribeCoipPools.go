@@ -104,6 +104,7 @@ func (c *Client) DescribeCoipPoolsRequest(input *DescribeCoipPoolsInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeCoipPoolsOutput{})
+
 	return DescribeCoipPoolsRequest{Request: req, Input: input, Copy: c.DescribeCoipPoolsRequest}
 }
 

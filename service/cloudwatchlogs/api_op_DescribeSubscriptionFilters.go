@@ -111,6 +111,7 @@ func (c *Client) DescribeSubscriptionFiltersRequest(input *DescribeSubscriptionF
 	}
 
 	req := c.newRequest(op, input, &DescribeSubscriptionFiltersOutput{})
+
 	return DescribeSubscriptionFiltersRequest{Request: req, Input: input, Copy: c.DescribeSubscriptionFiltersRequest}
 }
 

@@ -105,6 +105,7 @@ func (c *Client) UpdateCustomVerificationEmailTemplateRequest(input *UpdateCusto
 	req := c.newRequest(op, input, &UpdateCustomVerificationEmailTemplateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateCustomVerificationEmailTemplateRequest{Request: req, Input: input, Copy: c.UpdateCustomVerificationEmailTemplateRequest}
 }
 

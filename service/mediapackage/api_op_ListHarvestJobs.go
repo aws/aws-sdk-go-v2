@@ -140,6 +140,7 @@ func (c *Client) ListHarvestJobsRequest(input *ListHarvestJobsInput) ListHarvest
 	}
 
 	req := c.newRequest(op, input, &ListHarvestJobsOutput{})
+
 	return ListHarvestJobsRequest{Request: req, Input: input, Copy: c.ListHarvestJobsRequest}
 }
 

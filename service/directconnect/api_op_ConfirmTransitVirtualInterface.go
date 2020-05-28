@@ -117,6 +117,7 @@ func (c *Client) ConfirmTransitVirtualInterfaceRequest(input *ConfirmTransitVirt
 	}
 
 	req := c.newRequest(op, input, &ConfirmTransitVirtualInterfaceOutput{})
+
 	return ConfirmTransitVirtualInterfaceRequest{Request: req, Input: input, Copy: c.ConfirmTransitVirtualInterfaceRequest}
 }
 

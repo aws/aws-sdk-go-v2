@@ -101,6 +101,7 @@ func (c *Client) BatchDetectSentimentRequest(input *BatchDetectSentimentInput) B
 	}
 
 	req := c.newRequest(op, input, &BatchDetectSentimentOutput{})
+
 	return BatchDetectSentimentRequest{Request: req, Input: input, Copy: c.BatchDetectSentimentRequest}
 }
 

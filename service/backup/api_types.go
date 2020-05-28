@@ -76,7 +76,7 @@ type BackupJob struct {
 	// on the resource type.
 	ResourceArn *string `type:"string"`
 
-	// The type of AWS resource to be backed-up; for example, an Amazon Elastic
+	// The type of AWS resource to be backed up; for example, an Amazon Elastic
 	// Block Store (Amazon EBS) volume or an Amazon Relational Database Service
 	// (Amazon RDS) database.
 	ResourceType *string `type:"string"`
@@ -472,7 +472,7 @@ type BackupRule struct {
 	_ struct{} `type:"structure"`
 
 	// A value in minutes after a backup job is successfully started before it must
-	// be completed or it is canceled by AWS Backup. This value is optional.
+	// be completed or it will be canceled by AWS Backup. This value is optional.
 	CompletionWindowMinutes *int64 `type:"long"`
 
 	// An array of CopyAction objects, which contains the details of the copy operation.
@@ -505,8 +505,8 @@ type BackupRule struct {
 	// A CRON expression specifying when AWS Backup initiates a backup job.
 	ScheduleExpression *string `type:"string"`
 
-	// An optional value that specifies a period of time in minutes after a backup
-	// is scheduled before a job is canceled if it doesn't start successfully.
+	// A value in minutes after a backup is scheduled before a job will be canceled
+	// if it doesn't start successfully. This value is optional.
 	StartWindowMinutes *int64 `type:"long"`
 
 	// The name of a logical container where backups are stored. Backup vaults are
@@ -598,8 +598,8 @@ func (s BackupRule) MarshalFields(e protocol.FieldEncoder) error {
 type BackupRuleInput struct {
 	_ struct{} `type:"structure"`
 
-	// The amount of time AWS Backup attempts a backup before canceling the job
-	// and returning an error.
+	// A value in minutes after a backup job is successfully started before it must
+	// be completed or it will be canceled by AWS Backup. This value is optional.
 	CompletionWindowMinutes *int64 `type:"long"`
 
 	// An array of CopyAction objects, which contains the details of the copy operation.
@@ -611,16 +611,16 @@ type BackupRuleInput struct {
 	//
 	// Backups transitioned to cold storage must be stored in cold storage for a
 	// minimum of 90 days. Therefore, the “expire after days” setting must be
-	// 90 days greater than the “transition to cold after days”. The “transition
-	// to cold after days” setting cannot be changed after a backup has been transitioned
-	// to cold.
+	// 90 days greater than the “transition to cold after days” setting. The
+	// “transition to cold after days” setting cannot be changed after a backup
+	// has been transitioned to cold.
 	Lifecycle *Lifecycle `type:"structure"`
 
 	// To help organize your resources, you can assign your own metadata to the
 	// resources that you create. Each tag is a key-value pair.
 	RecoveryPointTags map[string]string `type:"map" sensitive:"true"`
 
-	// >An optional display name for a backup rule.
+	// An optional display name for a backup rule.
 	//
 	// RuleName is a required field
 	RuleName *string `type:"string" required:"true"`
@@ -628,7 +628,8 @@ type BackupRuleInput struct {
 	// A CRON expression specifying when AWS Backup initiates a backup job.
 	ScheduleExpression *string `type:"string"`
 
-	// The amount of time in minutes before beginning a backup.
+	// A value in minutes after a backup is scheduled before a job will be canceled
+	// if it doesn't start successfully. This value is optional.
 	StartWindowMinutes *int64 `type:"long"`
 
 	// The name of a logical container where backups are stored. Backup vaults are
@@ -1169,13 +1170,13 @@ type CopyJob struct {
 	// The size, in bytes, of a copy job.
 	BackupSizeInBytes *int64 `type:"long"`
 
-	// The date and time a job to create a copy job is completed, in Unix format
-	// and Coordinated Universal Time (UTC). The value of CompletionDate is accurate
-	// to milliseconds. For example, the value 1516925490.087 represents Friday,
-	// January 26, 2018 12:11:30.087 AM.
+	// The date and time a copy job is completed, in Unix format and Coordinated
+	// Universal Time (UTC). The value of CompletionDate is accurate to milliseconds.
+	// For example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
 	CompletionDate *time.Time `type:"timestamp"`
 
-	// Uniquely identifies a request to AWS Backup to copy a resource.
+	// Uniquely identifies a copy job.
 	CopyJobId *string `type:"string"`
 
 	// Contains information about the backup plan and rule that AWS Backup used
@@ -1200,9 +1201,9 @@ type CopyJob struct {
 	// arn:aws:iam::123456789012:role/S3Access.
 	IamRoleArn *string `type:"string"`
 
-	// The type of AWS resource to be copied; for example, an Amazon Elastic Block
-	// Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon
-	// RDS) database.
+	// The AWS resource to be copied; for example, an Amazon Elastic Block Store
+	// (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS)
+	// database.
 	ResourceArn *string `type:"string"`
 
 	// The type of AWS resource to be copied; for example, an Amazon Elastic Block
@@ -1217,10 +1218,10 @@ type CopyJob struct {
 	// An ARN that uniquely identifies a source recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
 	SourceRecoveryPointArn *string `type:"string"`
 
-	// The current state of a resource recovery point.
+	// The current state of a copy job.
 	State CopyJobState `type:"string" enum:"true"`
 
-	// A detailed message explaining the status of the job that to copy a resource.
+	// A detailed message explaining the status of the job to copy a resource.
 	StatusMessage *string `type:"string"`
 }
 

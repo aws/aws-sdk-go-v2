@@ -102,6 +102,7 @@ func (c *Client) GetFlowTemplateRevisionsRequest(input *GetFlowTemplateRevisions
 	}
 
 	req := c.newRequest(op, input, &GetFlowTemplateRevisionsOutput{})
+
 	return GetFlowTemplateRevisionsRequest{Request: req, Input: input, Copy: c.GetFlowTemplateRevisionsRequest}
 }
 

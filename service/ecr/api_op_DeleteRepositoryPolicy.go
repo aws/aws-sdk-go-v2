@@ -91,6 +91,7 @@ func (c *Client) DeleteRepositoryPolicyRequest(input *DeleteRepositoryPolicyInpu
 	}
 
 	req := c.newRequest(op, input, &DeleteRepositoryPolicyOutput{})
+
 	return DeleteRepositoryPolicyRequest{Request: req, Input: input, Copy: c.DeleteRepositoryPolicyRequest}
 }
 

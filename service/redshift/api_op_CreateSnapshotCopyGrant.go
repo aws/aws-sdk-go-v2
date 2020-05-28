@@ -109,6 +109,7 @@ func (c *Client) CreateSnapshotCopyGrantRequest(input *CreateSnapshotCopyGrantIn
 	}
 
 	req := c.newRequest(op, input, &CreateSnapshotCopyGrantOutput{})
+
 	return CreateSnapshotCopyGrantRequest{Request: req, Input: input, Copy: c.CreateSnapshotCopyGrantRequest}
 }
 

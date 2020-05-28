@@ -106,6 +106,7 @@ func (c *Client) CreateCacheSubnetGroupRequest(input *CreateCacheSubnetGroupInpu
 	}
 
 	req := c.newRequest(op, input, &CreateCacheSubnetGroupOutput{})
+
 	return CreateCacheSubnetGroupRequest{Request: req, Input: input, Copy: c.CreateCacheSubnetGroupRequest}
 }
 

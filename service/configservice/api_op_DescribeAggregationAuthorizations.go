@@ -71,6 +71,7 @@ func (c *Client) DescribeAggregationAuthorizationsRequest(input *DescribeAggrega
 	}
 
 	req := c.newRequest(op, input, &DescribeAggregationAuthorizationsOutput{})
+
 	return DescribeAggregationAuthorizationsRequest{Request: req, Input: input, Copy: c.DescribeAggregationAuthorizationsRequest}
 }
 

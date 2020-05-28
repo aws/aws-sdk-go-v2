@@ -119,6 +119,7 @@ func (c *Client) UpdateApnsChannelRequest(input *UpdateApnsChannelInput) UpdateA
 	}
 
 	req := c.newRequest(op, input, &UpdateApnsChannelOutput{})
+
 	return UpdateApnsChannelRequest{Request: req, Input: input, Copy: c.UpdateApnsChannelRequest}
 }
 

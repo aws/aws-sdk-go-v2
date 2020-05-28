@@ -103,6 +103,7 @@ func (c *Client) DeleteBaiduChannelRequest(input *DeleteBaiduChannelInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteBaiduChannelOutput{})
+
 	return DeleteBaiduChannelRequest{Request: req, Input: input, Copy: c.DeleteBaiduChannelRequest}
 }
 

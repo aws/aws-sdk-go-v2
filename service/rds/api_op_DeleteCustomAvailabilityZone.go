@@ -86,6 +86,7 @@ func (c *Client) DeleteCustomAvailabilityZoneRequest(input *DeleteCustomAvailabi
 	}
 
 	req := c.newRequest(op, input, &DeleteCustomAvailabilityZoneOutput{})
+
 	return DeleteCustomAvailabilityZoneRequest{Request: req, Input: input, Copy: c.DeleteCustomAvailabilityZoneRequest}
 }
 

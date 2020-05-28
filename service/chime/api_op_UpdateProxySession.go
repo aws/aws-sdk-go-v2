@@ -155,6 +155,7 @@ func (c *Client) UpdateProxySessionRequest(input *UpdateProxySessionInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateProxySessionOutput{})
+
 	return UpdateProxySessionRequest{Request: req, Input: input, Copy: c.UpdateProxySessionRequest}
 }
 

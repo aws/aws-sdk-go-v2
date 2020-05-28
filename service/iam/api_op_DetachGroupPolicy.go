@@ -105,6 +105,7 @@ func (c *Client) DetachGroupPolicyRequest(input *DetachGroupPolicyInput) DetachG
 	req := c.newRequest(op, input, &DetachGroupPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DetachGroupPolicyRequest{Request: req, Input: input, Copy: c.DetachGroupPolicyRequest}
 }
 

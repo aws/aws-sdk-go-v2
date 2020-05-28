@@ -111,6 +111,7 @@ func (c *Client) GetBootstrapBrokersRequest(input *GetBootstrapBrokersInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetBootstrapBrokersOutput{})
+
 	return GetBootstrapBrokersRequest{Request: req, Input: input, Copy: c.GetBootstrapBrokersRequest}
 }
 

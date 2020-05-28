@@ -92,6 +92,7 @@ func (c *Client) DisassociateTeamMemberRequest(input *DisassociateTeamMemberInpu
 	}
 
 	req := c.newRequest(op, input, &DisassociateTeamMemberOutput{})
+
 	return DisassociateTeamMemberRequest{Request: req, Input: input, Copy: c.DisassociateTeamMemberRequest}
 }
 

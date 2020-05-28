@@ -118,6 +118,7 @@ func (c *Client) PutSchemaFromJsonRequest(input *PutSchemaFromJsonInput) PutSche
 	}
 
 	req := c.newRequest(op, input, &PutSchemaFromJsonOutput{})
+
 	return PutSchemaFromJsonRequest{Request: req, Input: input, Copy: c.PutSchemaFromJsonRequest}
 }
 

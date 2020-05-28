@@ -87,6 +87,7 @@ func (c *Client) AssociateElasticIpRequest(input *AssociateElasticIpInput) Assoc
 	req := c.newRequest(op, input, &AssociateElasticIpOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AssociateElasticIpRequest{Request: req, Input: input, Copy: c.AssociateElasticIpRequest}
 }
 

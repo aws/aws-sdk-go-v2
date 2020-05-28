@@ -123,6 +123,7 @@ func (c *Client) AdminConfirmSignUpRequest(input *AdminConfirmSignUpInput) Admin
 	}
 
 	req := c.newRequest(op, input, &AdminConfirmSignUpOutput{})
+
 	return AdminConfirmSignUpRequest{Request: req, Input: input, Copy: c.AdminConfirmSignUpRequest}
 }
 

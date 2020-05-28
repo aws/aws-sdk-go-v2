@@ -116,6 +116,7 @@ func (c *Client) DeleteNodegroupRequest(input *DeleteNodegroupInput) DeleteNodeg
 	}
 
 	req := c.newRequest(op, input, &DeleteNodegroupOutput{})
+
 	return DeleteNodegroupRequest{Request: req, Input: input, Copy: c.DeleteNodegroupRequest}
 }
 

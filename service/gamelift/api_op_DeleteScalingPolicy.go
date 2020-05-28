@@ -108,6 +108,7 @@ func (c *Client) DeleteScalingPolicyRequest(input *DeleteScalingPolicyInput) Del
 	req := c.newRequest(op, input, &DeleteScalingPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteScalingPolicyRequest{Request: req, Input: input, Copy: c.DeleteScalingPolicyRequest}
 }
 

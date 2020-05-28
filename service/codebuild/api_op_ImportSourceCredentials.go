@@ -111,6 +111,7 @@ func (c *Client) ImportSourceCredentialsRequest(input *ImportSourceCredentialsIn
 	}
 
 	req := c.newRequest(op, input, &ImportSourceCredentialsOutput{})
+
 	return ImportSourceCredentialsRequest{Request: req, Input: input, Copy: c.ImportSourceCredentialsRequest}
 }
 

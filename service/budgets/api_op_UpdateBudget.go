@@ -97,6 +97,7 @@ func (c *Client) UpdateBudgetRequest(input *UpdateBudgetInput) UpdateBudgetReque
 	}
 
 	req := c.newRequest(op, input, &UpdateBudgetOutput{})
+
 	return UpdateBudgetRequest{Request: req, Input: input, Copy: c.UpdateBudgetRequest}
 }
 

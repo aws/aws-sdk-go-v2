@@ -134,6 +134,7 @@ func (c *Client) CreateTopicRuleRequest(input *CreateTopicRuleInput) CreateTopic
 	req := c.newRequest(op, input, &CreateTopicRuleOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CreateTopicRuleRequest{Request: req, Input: input, Copy: c.CreateTopicRuleRequest}
 }
 

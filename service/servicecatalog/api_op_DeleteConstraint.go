@@ -85,6 +85,7 @@ func (c *Client) DeleteConstraintRequest(input *DeleteConstraintInput) DeleteCon
 	}
 
 	req := c.newRequest(op, input, &DeleteConstraintOutput{})
+
 	return DeleteConstraintRequest{Request: req, Input: input, Copy: c.DeleteConstraintRequest}
 }
 

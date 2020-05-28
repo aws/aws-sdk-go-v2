@@ -3582,11 +3582,6 @@ func (s *HumanTaskConfig) Validate() error {
 			invalidParams.AddNested("AnnotationConsolidationConfig", err.(aws.ErrInvalidParams))
 		}
 	}
-	if s.UiConfig != nil {
-		if err := s.UiConfig.Validate(); err != nil {
-			invalidParams.AddNested("UiConfig", err.(aws.ErrInvalidParams))
-		}
-	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4579,7 +4574,8 @@ func (s *IntegerParameterRangeSpecification) Validate() error {
 type JupyterServerAppSettings struct {
 	_ struct{} `type:"structure"`
 
-	// The instance type and quantity.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker
+	// image created on the instance.
 	DefaultResourceSpec *ResourceSpec `type:"structure"`
 }
 
@@ -4592,7 +4588,8 @@ func (s JupyterServerAppSettings) String() string {
 type KernelGatewayAppSettings struct {
 	_ struct{} `type:"structure"`
 
-	// The instance type and quantity.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker
+	// image created on the instance.
 	DefaultResourceSpec *ResourceSpec `type:"structure"`
 }
 
@@ -6099,6 +6096,11 @@ func (s *NestedFilters) Validate() error {
 // jobs.
 type NetworkConfig struct {
 	_ struct{} `type:"structure"`
+
+	// Whether to encrypt all communications between distributed processing jobs.
+	// Choose True to encrypt communications. Encryption provides greater security
+	// for distributed processing jobs, but the processing might take longer.
+	EnableInterContainerTrafficEncryption *bool `type:"boolean"`
 
 	// Whether to allow inbound and outbound network calls to and from the containers
 	// used for the processing job.
@@ -7655,16 +7657,16 @@ func (s *ResourceLimits) Validate() error {
 	return nil
 }
 
-// The instance type and the Amazon Resource Name (ARN) of the image created
-// on the instance. The ARN is stored as metadata in Amazon SageMaker Studio
-// notebooks.
+// The instance type and the Amazon Resource Name (ARN) of the SageMaker image
+// created on the instance. The ARN is stored as metadata in Amazon SageMaker
+// Studio notebooks.
 type ResourceSpec struct {
 	_ struct{} `type:"structure"`
 
 	// The instance type.
 	InstanceType AppInstanceType `type:"string" enum:"true"`
 
-	// The Amazon Resource Name (ARN) of the image created on the instance.
+	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
 	SageMakerImageArn *string `type:"string"`
 }
 
@@ -7673,11 +7675,15 @@ func (s ResourceSpec) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The retention policy.
+// The retention policy for data stored on an Amazon Elastic File System (EFS)
+// volume.
 type RetentionPolicy struct {
 	_ struct{} `type:"structure"`
 
-	// The home Amazon Elastic File System (EFS).
+	// The default is Retain, which specifies to keep the data stored on the EFS
+	// volume.
+	//
+	// Specify Delete to delete the data stored on the EFS volume.
 	HomeEfsFileSystem RetentionType `type:"string" enum:"true"`
 }
 
@@ -8387,7 +8393,8 @@ func (s *Tag) Validate() error {
 type TensorBoardAppSettings struct {
 	_ struct{} `type:"structure"`
 
-	// The instance type and quantity.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker
+	// image created on the instance.
 	DefaultResourceSpec *ResourceSpec `type:"structure"`
 }
 
@@ -9796,28 +9803,12 @@ type UiConfig struct {
 	// The Amazon S3 bucket location of the UI template. For more information about
 	// the contents of a UI template, see Creating Your Custom Labeling Task Template
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step2.html).
-	//
-	// UiTemplateS3Uri is a required field
-	UiTemplateS3Uri *string `type:"string" required:"true"`
+	UiTemplateS3Uri *string `type:"string"`
 }
 
 // String returns the string representation
 func (s UiConfig) String() string {
 	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UiConfig) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UiConfig"}
-
-	if s.UiTemplateS3Uri == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UiTemplateS3Uri"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
 }
 
 // The Liquid template for the worker user interface.

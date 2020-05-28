@@ -109,6 +109,7 @@ func (c *Client) ListInstancesRequest(input *ListInstancesInput) ListInstancesRe
 	}
 
 	req := c.newRequest(op, input, &ListInstancesOutput{})
+
 	return ListInstancesRequest{Request: req, Input: input, Copy: c.ListInstancesRequest}
 }
 

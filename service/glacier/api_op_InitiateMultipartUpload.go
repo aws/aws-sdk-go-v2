@@ -190,6 +190,7 @@ func (c *Client) InitiateMultipartUploadRequest(input *InitiateMultipartUploadIn
 	}
 
 	req := c.newRequest(op, input, &InitiateMultipartUploadOutput{})
+
 	return InitiateMultipartUploadRequest{Request: req, Input: input, Copy: c.InitiateMultipartUploadRequest}
 }
 

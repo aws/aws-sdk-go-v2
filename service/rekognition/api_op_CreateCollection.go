@@ -99,6 +99,7 @@ func (c *Client) CreateCollectionRequest(input *CreateCollectionInput) CreateCol
 	}
 
 	req := c.newRequest(op, input, &CreateCollectionOutput{})
+
 	return CreateCollectionRequest{Request: req, Input: input, Copy: c.CreateCollectionRequest}
 }
 

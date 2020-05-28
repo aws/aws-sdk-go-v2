@@ -125,6 +125,7 @@ func (c *Client) ListDedicatedIpPoolsRequest(input *ListDedicatedIpPoolsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListDedicatedIpPoolsOutput{})
+
 	return ListDedicatedIpPoolsRequest{Request: req, Input: input, Copy: c.ListDedicatedIpPoolsRequest}
 }
 

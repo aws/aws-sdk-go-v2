@@ -100,6 +100,7 @@ func (c *Client) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymentIns
 	}
 
 	req := c.newRequest(op, input, &BatchGetDeploymentInstancesOutput{})
+
 	return BatchGetDeploymentInstancesRequest{Request: req, Input: input, Copy: c.BatchGetDeploymentInstancesRequest}
 }
 

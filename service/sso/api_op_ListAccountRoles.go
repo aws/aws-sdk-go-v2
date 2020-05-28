@@ -163,6 +163,7 @@ func (c *Client) ListAccountRolesRequest(input *ListAccountRolesInput) ListAccou
 
 	req := c.newRequest(op, input, &ListAccountRolesOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return ListAccountRolesRequest{Request: req, Input: input, Copy: c.ListAccountRolesRequest}
 }
 

@@ -96,6 +96,7 @@ func (c *Client) SetUserSettingsRequest(input *SetUserSettingsInput) SetUserSett
 
 	req := c.newRequest(op, input, &SetUserSettingsOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return SetUserSettingsRequest{Request: req, Input: input, Copy: c.SetUserSettingsRequest}
 }
 

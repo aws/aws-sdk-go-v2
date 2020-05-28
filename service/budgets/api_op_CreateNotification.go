@@ -126,6 +126,7 @@ func (c *Client) CreateNotificationRequest(input *CreateNotificationInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateNotificationOutput{})
+
 	return CreateNotificationRequest{Request: req, Input: input, Copy: c.CreateNotificationRequest}
 }
 

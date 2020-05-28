@@ -161,6 +161,7 @@ func (c *Client) GetSubscriptionDefinitionRequest(input *GetSubscriptionDefiniti
 	}
 
 	req := c.newRequest(op, input, &GetSubscriptionDefinitionOutput{})
+
 	return GetSubscriptionDefinitionRequest{Request: req, Input: input, Copy: c.GetSubscriptionDefinitionRequest}
 }
 

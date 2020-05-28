@@ -76,6 +76,7 @@ func (c *Client) DisassociateSkillFromSkillGroupRequest(input *DisassociateSkill
 	}
 
 	req := c.newRequest(op, input, &DisassociateSkillFromSkillGroupOutput{})
+
 	return DisassociateSkillFromSkillGroupRequest{Request: req, Input: input, Copy: c.DisassociateSkillFromSkillGroupRequest}
 }
 

@@ -287,6 +287,7 @@ func (c *Client) CreateConfigurationProfileRequest(input *CreateConfigurationPro
 	}
 
 	req := c.newRequest(op, input, &CreateConfigurationProfileOutput{})
+
 	return CreateConfigurationProfileRequest{Request: req, Input: input, Copy: c.CreateConfigurationProfileRequest}
 }
 

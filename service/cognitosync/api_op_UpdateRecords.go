@@ -228,6 +228,7 @@ func (c *Client) UpdateRecordsRequest(input *UpdateRecordsInput) UpdateRecordsRe
 	}
 
 	req := c.newRequest(op, input, &UpdateRecordsOutput{})
+
 	return UpdateRecordsRequest{Request: req, Input: input, Copy: c.UpdateRecordsRequest}
 }
 

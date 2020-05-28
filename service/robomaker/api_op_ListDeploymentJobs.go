@@ -171,6 +171,7 @@ func (c *Client) ListDeploymentJobsRequest(input *ListDeploymentJobsInput) ListD
 	}
 
 	req := c.newRequest(op, input, &ListDeploymentJobsOutput{})
+
 	return ListDeploymentJobsRequest{Request: req, Input: input, Copy: c.ListDeploymentJobsRequest}
 }
 

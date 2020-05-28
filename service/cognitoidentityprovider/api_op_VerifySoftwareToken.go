@@ -98,6 +98,7 @@ func (c *Client) VerifySoftwareTokenRequest(input *VerifySoftwareTokenInput) Ver
 	}
 
 	req := c.newRequest(op, input, &VerifySoftwareTokenOutput{})
+
 	return VerifySoftwareTokenRequest{Request: req, Input: input, Copy: c.VerifySoftwareTokenRequest}
 }
 

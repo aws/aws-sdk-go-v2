@@ -80,9 +80,12 @@ type DeploymentCreator string
 
 // Enum values for DeploymentCreator
 const (
-	DeploymentCreatorUser               DeploymentCreator = "user"
-	DeploymentCreatorAutoscaling        DeploymentCreator = "autoscaling"
-	DeploymentCreatorCodeDeployRollback DeploymentCreator = "codeDeployRollback"
+	DeploymentCreatorUser                   DeploymentCreator = "user"
+	DeploymentCreatorAutoscaling            DeploymentCreator = "autoscaling"
+	DeploymentCreatorCodeDeployRollback     DeploymentCreator = "codeDeployRollback"
+	DeploymentCreatorCodeDeploy             DeploymentCreator = "CodeDeploy"
+	DeploymentCreatorCloudFormation         DeploymentCreator = "CloudFormation"
+	DeploymentCreatorCloudFormationRollback DeploymentCreator = "CloudFormationRollback"
 )
 
 func (enum DeploymentCreator) MarshalValue() (string, error) {
@@ -135,6 +138,7 @@ const (
 	DeploymentStatusCreated    DeploymentStatus = "Created"
 	DeploymentStatusQueued     DeploymentStatus = "Queued"
 	DeploymentStatusInProgress DeploymentStatus = "InProgress"
+	DeploymentStatusBaking     DeploymentStatus = "Baking"
 	DeploymentStatusSucceeded  DeploymentStatus = "Succeeded"
 	DeploymentStatusFailed     DeploymentStatus = "Failed"
 	DeploymentStatusStopped    DeploymentStatus = "Stopped"
@@ -154,9 +158,10 @@ type DeploymentTargetType string
 
 // Enum values for DeploymentTargetType
 const (
-	DeploymentTargetTypeInstanceTarget DeploymentTargetType = "InstanceTarget"
-	DeploymentTargetTypeLambdaTarget   DeploymentTargetType = "LambdaTarget"
-	DeploymentTargetTypeEcstarget      DeploymentTargetType = "ECSTarget"
+	DeploymentTargetTypeInstanceTarget       DeploymentTargetType = "InstanceTarget"
+	DeploymentTargetTypeLambdaTarget         DeploymentTargetType = "LambdaTarget"
+	DeploymentTargetTypeEcstarget            DeploymentTargetType = "ECSTarget"
+	DeploymentTargetTypeCloudFormationTarget DeploymentTargetType = "CloudFormationTarget"
 )
 
 func (enum DeploymentTargetType) MarshalValue() (string, error) {
@@ -257,6 +262,7 @@ const (
 	ErrorCodeRevisionMissing                         ErrorCode = "REVISION_MISSING"
 	ErrorCodeThrottled                               ErrorCode = "THROTTLED"
 	ErrorCodeTimeout                                 ErrorCode = "TIMEOUT"
+	ErrorCodeCloudformationStackFailure              ErrorCode = "CLOUDFORMATION_STACK_FAILURE"
 )
 
 func (enum ErrorCode) MarshalValue() (string, error) {

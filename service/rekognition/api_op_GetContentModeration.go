@@ -154,6 +154,7 @@ func (c *Client) GetContentModerationRequest(input *GetContentModerationInput) G
 	}
 
 	req := c.newRequest(op, input, &GetContentModerationOutput{})
+
 	return GetContentModerationRequest{Request: req, Input: input, Copy: c.GetContentModerationRequest}
 }
 

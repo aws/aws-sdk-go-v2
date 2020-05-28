@@ -136,6 +136,7 @@ func (c *Client) ListUserPoliciesRequest(input *ListUserPoliciesInput) ListUserP
 	}
 
 	req := c.newRequest(op, input, &ListUserPoliciesOutput{})
+
 	return ListUserPoliciesRequest{Request: req, Input: input, Copy: c.ListUserPoliciesRequest}
 }
 

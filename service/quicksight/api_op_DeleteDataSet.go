@@ -143,6 +143,7 @@ func (c *Client) DeleteDataSetRequest(input *DeleteDataSetInput) DeleteDataSetRe
 	}
 
 	req := c.newRequest(op, input, &DeleteDataSetOutput{})
+
 	return DeleteDataSetRequest{Request: req, Input: input, Copy: c.DeleteDataSetRequest}
 }
 

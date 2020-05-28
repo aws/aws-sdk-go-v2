@@ -32,6 +32,24 @@ type DescribeInstanceTypesInput struct {
 	//    * current-generation - Indicates whether this instance type is the latest
 	//    generation instance type of an instance family. (true | false)
 	//
+	//    * ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps - The baseline
+	//    bandwidth performance for an EBS-optimized instance type, in Mbps.
+	//
+	//    * ebs-info.ebs-optimized-info.baseline-throughput-in-mbps - The baseline
+	//    throughput performance for an EBS-optimized instance type, in MBps.
+	//
+	//    * ebs-info.ebs-optimized-info.baseline-iops - The baseline input/output
+	//    storage operations per second for an EBS-optimized instance type.
+	//
+	//    * ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps - The maximum
+	//    bandwidth performance for an EBS-optimized instance type, in Mbps.
+	//
+	//    * ebs-info.ebs-optimized-info.maximum-throughput-in-mbps - The maximum
+	//    throughput performance for an EBS-optimized instance type, in MBps.
+	//
+	//    * ebs-info.ebs-optimized-info.maximum-iops - The maximum input/output
+	//    storage operations per second for an EBS-optimized instance type.
+	//
 	//    * ebs-info.ebs-optimized-support - Indicates whether the instance type
 	//    is EBS-optimized. (supported | unsupported | default)
 	//
@@ -64,6 +82,9 @@ type DescribeInstanceTypesInput struct {
 	//
 	//    * network-info.ena-support - Indicates whether Elastic Network Adapter
 	//    (ENA) is supported or required. (required | supported | unsupported)
+	//
+	//    * network-info.efa-supported - Indicates whether the instance type supports
+	//    Elastic Fabric Adapter (EFA). (true | false)
 	//
 	//    * network-info.ipv4-addresses-per-interface - The maximum number of private
 	//    IPv4 addresses per network interface.
@@ -145,7 +166,7 @@ const opDescribeInstanceTypes = "DescribeInstanceTypes"
 // DescribeInstanceTypesRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Returns a list of all instance types offered in your current AWS Region.
+// Describes the details of the instance types that are offered in a location.
 // The results can be filtered by the attributes of the instance types.
 //
 //    // Example sending a request using DescribeInstanceTypesRequest.
@@ -174,6 +195,7 @@ func (c *Client) DescribeInstanceTypesRequest(input *DescribeInstanceTypesInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeInstanceTypesOutput{})
+
 	return DescribeInstanceTypesRequest{Request: req, Input: input, Copy: c.DescribeInstanceTypesRequest}
 }
 

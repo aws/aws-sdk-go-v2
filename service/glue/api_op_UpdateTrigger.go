@@ -93,6 +93,7 @@ func (c *Client) UpdateTriggerRequest(input *UpdateTriggerInput) UpdateTriggerRe
 	}
 
 	req := c.newRequest(op, input, &UpdateTriggerOutput{})
+
 	return UpdateTriggerRequest{Request: req, Input: input, Copy: c.UpdateTriggerRequest}
 }
 

@@ -100,6 +100,7 @@ func (c *Client) CancelKeyDeletionRequest(input *CancelKeyDeletionInput) CancelK
 	}
 
 	req := c.newRequest(op, input, &CancelKeyDeletionOutput{})
+
 	return CancelKeyDeletionRequest{Request: req, Input: input, Copy: c.CancelKeyDeletionRequest}
 }
 

@@ -158,6 +158,7 @@ func (c *Client) DescribeAlarmsRequest(input *DescribeAlarmsInput) DescribeAlarm
 	}
 
 	req := c.newRequest(op, input, &DescribeAlarmsOutput{})
+
 	return DescribeAlarmsRequest{Request: req, Input: input, Copy: c.DescribeAlarmsRequest}
 }
 

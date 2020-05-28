@@ -109,6 +109,7 @@ func (c *Client) IncreaseReplicaCountRequest(input *IncreaseReplicaCountInput) I
 	}
 
 	req := c.newRequest(op, input, &IncreaseReplicaCountOutput{})
+
 	return IncreaseReplicaCountRequest{Request: req, Input: input, Copy: c.IncreaseReplicaCountRequest}
 }
 

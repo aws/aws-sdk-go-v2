@@ -102,6 +102,7 @@ func (c *Client) SendCustomVerificationEmailRequest(input *SendCustomVerificatio
 	}
 
 	req := c.newRequest(op, input, &SendCustomVerificationEmailOutput{})
+
 	return SendCustomVerificationEmailRequest{Request: req, Input: input, Copy: c.SendCustomVerificationEmailRequest}
 }
 

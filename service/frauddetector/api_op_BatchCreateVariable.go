@@ -79,6 +79,7 @@ func (c *Client) BatchCreateVariableRequest(input *BatchCreateVariableInput) Bat
 	}
 
 	req := c.newRequest(op, input, &BatchCreateVariableOutput{})
+
 	return BatchCreateVariableRequest{Request: req, Input: input, Copy: c.BatchCreateVariableRequest}
 }
 

@@ -198,6 +198,7 @@ func (c *Client) CreateLedgerRequest(input *CreateLedgerInput) CreateLedgerReque
 	}
 
 	req := c.newRequest(op, input, &CreateLedgerOutput{})
+
 	return CreateLedgerRequest{Request: req, Input: input, Copy: c.CreateLedgerRequest}
 }
 

@@ -112,6 +112,7 @@ func (c *Client) CreateKeyPairRequest(input *CreateKeyPairInput) CreateKeyPairRe
 	}
 
 	req := c.newRequest(op, input, &CreateKeyPairOutput{})
+
 	return CreateKeyPairRequest{Request: req, Input: input, Copy: c.CreateKeyPairRequest}
 }
 

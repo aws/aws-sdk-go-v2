@@ -95,6 +95,7 @@ func (c *Client) DescribeConfigurationsRequest(input *DescribeConfigurationsInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeConfigurationsOutput{})
+
 	return DescribeConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeConfigurationsRequest}
 }
 

@@ -126,6 +126,7 @@ func (c *Client) DescribeForecastRequest(input *DescribeForecastInput) DescribeF
 	}
 
 	req := c.newRequest(op, input, &DescribeForecastOutput{})
+
 	return DescribeForecastRequest{Request: req, Input: input, Copy: c.DescribeForecastRequest}
 }
 

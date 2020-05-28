@@ -99,6 +99,7 @@ func (c *Client) EnableSsoRequest(input *EnableSsoInput) EnableSsoRequest {
 	}
 
 	req := c.newRequest(op, input, &EnableSsoOutput{})
+
 	return EnableSsoRequest{Request: req, Input: input, Copy: c.EnableSsoRequest}
 }
 

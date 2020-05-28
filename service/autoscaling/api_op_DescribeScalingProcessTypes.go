@@ -35,7 +35,8 @@ const opDescribeScalingProcessTypes = "DescribeScalingProcessTypes"
 // DescribeScalingProcessTypesRequest returns a request value for making API operation for
 // Auto Scaling.
 //
-// Describes the scaling process types for use with ResumeProcesses and SuspendProcesses.
+// Describes the scaling process types for use with the ResumeProcesses and
+// SuspendProcesses APIs.
 //
 //    // Example sending a request using DescribeScalingProcessTypesRequest.
 //    req := client.DescribeScalingProcessTypesRequest(params)
@@ -57,6 +58,7 @@ func (c *Client) DescribeScalingProcessTypesRequest(input *DescribeScalingProces
 	}
 
 	req := c.newRequest(op, input, &DescribeScalingProcessTypesOutput{})
+
 	return DescribeScalingProcessTypesRequest{Request: req, Input: input, Copy: c.DescribeScalingProcessTypesRequest}
 }
 

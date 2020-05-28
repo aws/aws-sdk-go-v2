@@ -113,6 +113,7 @@ func (c *Client) RemoveTagsFromCertificateRequest(input *RemoveTagsFromCertifica
 	req := c.newRequest(op, input, &RemoveTagsFromCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RemoveTagsFromCertificateRequest{Request: req, Input: input, Copy: c.RemoveTagsFromCertificateRequest}
 }
 

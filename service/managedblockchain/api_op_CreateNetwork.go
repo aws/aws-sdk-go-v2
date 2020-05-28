@@ -237,6 +237,7 @@ func (c *Client) CreateNetworkRequest(input *CreateNetworkInput) CreateNetworkRe
 	}
 
 	req := c.newRequest(op, input, &CreateNetworkOutput{})
+
 	return CreateNetworkRequest{Request: req, Input: input, Copy: c.CreateNetworkRequest}
 }
 

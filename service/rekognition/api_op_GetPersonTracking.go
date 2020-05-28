@@ -152,6 +152,7 @@ func (c *Client) GetPersonTrackingRequest(input *GetPersonTrackingInput) GetPers
 	}
 
 	req := c.newRequest(op, input, &GetPersonTrackingOutput{})
+
 	return GetPersonTrackingRequest{Request: req, Input: input, Copy: c.GetPersonTrackingRequest}
 }
 

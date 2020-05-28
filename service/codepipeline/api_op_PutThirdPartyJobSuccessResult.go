@@ -123,6 +123,7 @@ func (c *Client) PutThirdPartyJobSuccessResultRequest(input *PutThirdPartyJobSuc
 	req := c.newRequest(op, input, &PutThirdPartyJobSuccessResultOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutThirdPartyJobSuccessResultRequest{Request: req, Input: input, Copy: c.PutThirdPartyJobSuccessResultRequest}
 }
 

@@ -148,6 +148,7 @@ func (c *Client) CreateAlgorithmRequest(input *CreateAlgorithmInput) CreateAlgor
 	}
 
 	req := c.newRequest(op, input, &CreateAlgorithmOutput{})
+
 	return CreateAlgorithmRequest{Request: req, Input: input, Copy: c.CreateAlgorithmRequest}
 }
 

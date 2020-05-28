@@ -124,6 +124,7 @@ func (c *Client) ListGraphqlApisRequest(input *ListGraphqlApisInput) ListGraphql
 	}
 
 	req := c.newRequest(op, input, &ListGraphqlApisOutput{})
+
 	return ListGraphqlApisRequest{Request: req, Input: input, Copy: c.ListGraphqlApisRequest}
 }
 

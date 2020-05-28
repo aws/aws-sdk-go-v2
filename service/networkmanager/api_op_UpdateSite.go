@@ -143,6 +143,7 @@ func (c *Client) UpdateSiteRequest(input *UpdateSiteInput) UpdateSiteRequest {
 	}
 
 	req := c.newRequest(op, input, &UpdateSiteOutput{})
+
 	return UpdateSiteRequest{Request: req, Input: input, Copy: c.UpdateSiteRequest}
 }
 

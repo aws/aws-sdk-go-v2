@@ -116,27 +116,30 @@ const opChangeResourceRecordSets = "ChangeResourceRecordSets"
 // routes traffic for test.example.com to a web server that has an IP address
 // of 192.0.2.44.
 //
+// Deleting Resource Record Sets
+//
+// To delete a resource record set, you must specify all the same values that
+// you specified when you created it.
+//
 // Change Batches and Transactional Changes
 //
 // The request body must include a document with a ChangeResourceRecordSetsRequest
 // element. The request body contains a list of change items, known as a change
-// batch. Change batches are considered transactional changes. When using the
-// Amazon Route 53 API to change resource record sets, Route 53 either makes
-// all or none of the changes in a change batch request. This ensures that Route
-// 53 never partially implements the intended changes to the resource record
-// sets in a hosted zone.
+// batch. Change batches are considered transactional changes. Route 53 validates
+// the changes in the request and then either makes all or none of the changes
+// in the change batch request. This ensures that DNS routing isn't adversely
+// affected by partial changes to the resource record sets in a hosted zone.
 //
-// For example, a change batch request that deletes the CNAME record for www.example.com
-// and creates an alias resource record set for www.example.com. Route 53 deletes
-// the first resource record set and creates the second resource record set
-// in a single operation. If either the DELETE or the CREATE action fails, then
-// both changes (plus any other changes in the batch) fail, and the original
-// CNAME record continues to exist.
+// For example, suppose a change batch request contains two changes: it deletes
+// the CNAME resource record set for www.example.com and creates an alias resource
+// record set for www.example.com. If validation for both records succeeds,
+// Route 53 deletes the first resource record set and creates the second resource
+// record set in a single operation. If validation for either the DELETE or
+// the CREATE action fails, then the request is canceled, and the original CNAME
+// record continues to exist.
 //
-// Due to the nature of transactional changes, you can't delete the same resource
-// record set more than once in a single change batch. If you attempt to delete
-// the same change batch more than once, Route 53 returns an InvalidChangeBatch
-// error.
+// If you try to delete the same resource record set more than once in a single
+// change batch, Route 53 returns an InvalidChangeBatch error.
 //
 // Traffic Flow
 //
@@ -210,6 +213,7 @@ func (c *Client) ChangeResourceRecordSetsRequest(input *ChangeResourceRecordSets
 	}
 
 	req := c.newRequest(op, input, &ChangeResourceRecordSetsOutput{})
+
 	return ChangeResourceRecordSetsRequest{Request: req, Input: input, Copy: c.ChangeResourceRecordSetsRequest}
 }
 

@@ -97,6 +97,7 @@ func (c *Client) RevokeSnapshotAccessRequest(input *RevokeSnapshotAccessInput) R
 	}
 
 	req := c.newRequest(op, input, &RevokeSnapshotAccessOutput{})
+
 	return RevokeSnapshotAccessRequest{Request: req, Input: input, Copy: c.RevokeSnapshotAccessRequest}
 }
 

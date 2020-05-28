@@ -140,6 +140,7 @@ func (c *Client) PutEventSelectorsRequest(input *PutEventSelectorsInput) PutEven
 	}
 
 	req := c.newRequest(op, input, &PutEventSelectorsOutput{})
+
 	return PutEventSelectorsRequest{Request: req, Input: input, Copy: c.PutEventSelectorsRequest}
 }
 

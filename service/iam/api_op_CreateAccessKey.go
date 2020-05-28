@@ -97,6 +97,7 @@ func (c *Client) CreateAccessKeyRequest(input *CreateAccessKeyInput) CreateAcces
 	}
 
 	req := c.newRequest(op, input, &CreateAccessKeyOutput{})
+
 	return CreateAccessKeyRequest{Request: req, Input: input, Copy: c.CreateAccessKeyRequest}
 }
 

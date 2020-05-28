@@ -99,6 +99,7 @@ func (c *Client) ListUserProfilesRequest(input *ListUserProfilesInput) ListUserP
 	}
 
 	req := c.newRequest(op, input, &ListUserProfilesOutput{})
+
 	return ListUserProfilesRequest{Request: req, Input: input, Copy: c.ListUserProfilesRequest}
 }
 

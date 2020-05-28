@@ -108,6 +108,7 @@ func (c *Client) UntagCertificateAuthorityRequest(input *UntagCertificateAuthori
 	req := c.newRequest(op, input, &UntagCertificateAuthorityOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UntagCertificateAuthorityRequest{Request: req, Input: input, Copy: c.UntagCertificateAuthorityRequest}
 }
 

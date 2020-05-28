@@ -102,6 +102,7 @@ func (c *Client) GetOTAUpdateRequest(input *GetOTAUpdateInput) GetOTAUpdateReque
 	}
 
 	req := c.newRequest(op, input, &GetOTAUpdateOutput{})
+
 	return GetOTAUpdateRequest{Request: req, Input: input, Copy: c.GetOTAUpdateRequest}
 }
 

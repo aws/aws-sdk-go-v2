@@ -152,6 +152,7 @@ func (c *Client) DescribeComputeEnvironmentsRequest(input *DescribeComputeEnviro
 	}
 
 	req := c.newRequest(op, input, &DescribeComputeEnvironmentsOutput{})
+
 	return DescribeComputeEnvironmentsRequest{Request: req, Input: input, Copy: c.DescribeComputeEnvironmentsRequest}
 }
 

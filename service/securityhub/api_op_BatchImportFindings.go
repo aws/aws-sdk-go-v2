@@ -172,6 +172,7 @@ func (c *Client) BatchImportFindingsRequest(input *BatchImportFindingsInput) Bat
 	}
 
 	req := c.newRequest(op, input, &BatchImportFindingsOutput{})
+
 	return BatchImportFindingsRequest{Request: req, Input: input, Copy: c.BatchImportFindingsRequest}
 }
 

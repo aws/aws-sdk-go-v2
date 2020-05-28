@@ -157,6 +157,7 @@ func (c *Client) CreateAgentRequest(input *CreateAgentInput) CreateAgentRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateAgentOutput{})
+
 	return CreateAgentRequest{Request: req, Input: input, Copy: c.CreateAgentRequest}
 }
 

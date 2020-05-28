@@ -119,6 +119,7 @@ func (c *Client) AttachPrincipalPolicyRequest(input *AttachPrincipalPolicyInput)
 	req := c.newRequest(op, input, &AttachPrincipalPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AttachPrincipalPolicyRequest{Request: req, Input: input, Copy: c.AttachPrincipalPolicyRequest}
 }
 

@@ -125,6 +125,7 @@ func (c *Client) DescribeWorkspacesRequest(input *DescribeWorkspacesInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeWorkspacesOutput{})
+
 	return DescribeWorkspacesRequest{Request: req, Input: input, Copy: c.DescribeWorkspacesRequest}
 }
 

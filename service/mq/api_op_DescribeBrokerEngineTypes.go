@@ -134,6 +134,7 @@ func (c *Client) DescribeBrokerEngineTypesRequest(input *DescribeBrokerEngineTyp
 	}
 
 	req := c.newRequest(op, input, &DescribeBrokerEngineTypesOutput{})
+
 	return DescribeBrokerEngineTypesRequest{Request: req, Input: input, Copy: c.DescribeBrokerEngineTypesRequest}
 }
 

@@ -120,6 +120,7 @@ func (c *Client) DissociatePackageRequest(input *DissociatePackageInput) Dissoci
 	}
 
 	req := c.newRequest(op, input, &DissociatePackageOutput{})
+
 	return DissociatePackageRequest{Request: req, Input: input, Copy: c.DissociatePackageRequest}
 }
 

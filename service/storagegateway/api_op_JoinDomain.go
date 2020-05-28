@@ -161,6 +161,7 @@ func (c *Client) JoinDomainRequest(input *JoinDomainInput) JoinDomainRequest {
 	}
 
 	req := c.newRequest(op, input, &JoinDomainOutput{})
+
 	return JoinDomainRequest{Request: req, Input: input, Copy: c.JoinDomainRequest}
 }
 

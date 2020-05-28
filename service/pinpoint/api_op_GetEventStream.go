@@ -102,6 +102,7 @@ func (c *Client) GetEventStreamRequest(input *GetEventStreamInput) GetEventStrea
 	}
 
 	req := c.newRequest(op, input, &GetEventStreamOutput{})
+
 	return GetEventStreamRequest{Request: req, Input: input, Copy: c.GetEventStreamRequest}
 }
 

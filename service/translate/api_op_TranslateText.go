@@ -134,6 +134,7 @@ func (c *Client) TranslateTextRequest(input *TranslateTextInput) TranslateTextRe
 	}
 
 	req := c.newRequest(op, input, &TranslateTextOutput{})
+
 	return TranslateTextRequest{Request: req, Input: input, Copy: c.TranslateTextRequest}
 }
 

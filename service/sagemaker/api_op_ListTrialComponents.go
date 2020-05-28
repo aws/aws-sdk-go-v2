@@ -128,6 +128,7 @@ func (c *Client) ListTrialComponentsRequest(input *ListTrialComponentsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListTrialComponentsOutput{})
+
 	return ListTrialComponentsRequest{Request: req, Input: input, Copy: c.ListTrialComponentsRequest}
 }
 

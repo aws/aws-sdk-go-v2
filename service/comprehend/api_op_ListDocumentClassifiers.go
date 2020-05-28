@@ -93,6 +93,7 @@ func (c *Client) ListDocumentClassifiersRequest(input *ListDocumentClassifiersIn
 	}
 
 	req := c.newRequest(op, input, &ListDocumentClassifiersOutput{})
+
 	return ListDocumentClassifiersRequest{Request: req, Input: input, Copy: c.ListDocumentClassifiersRequest}
 }
 

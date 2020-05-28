@@ -79,6 +79,7 @@ func (c *Client) DescribeClientPropertiesRequest(input *DescribeClientProperties
 	}
 
 	req := c.newRequest(op, input, &DescribeClientPropertiesOutput{})
+
 	return DescribeClientPropertiesRequest{Request: req, Input: input, Copy: c.DescribeClientPropertiesRequest}
 }
 

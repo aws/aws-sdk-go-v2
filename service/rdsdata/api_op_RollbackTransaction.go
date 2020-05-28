@@ -142,6 +142,7 @@ func (c *Client) RollbackTransactionRequest(input *RollbackTransactionInput) Rol
 	}
 
 	req := c.newRequest(op, input, &RollbackTransactionOutput{})
+
 	return RollbackTransactionRequest{Request: req, Input: input, Copy: c.RollbackTransactionRequest}
 }
 

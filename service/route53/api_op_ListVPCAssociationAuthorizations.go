@@ -166,6 +166,7 @@ func (c *Client) ListVPCAssociationAuthorizationsRequest(input *ListVPCAssociati
 	}
 
 	req := c.newRequest(op, input, &ListVPCAssociationAuthorizationsOutput{})
+
 	return ListVPCAssociationAuthorizationsRequest{Request: req, Input: input, Copy: c.ListVPCAssociationAuthorizationsRequest}
 }
 

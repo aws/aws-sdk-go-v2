@@ -110,6 +110,7 @@ func (c *Client) ClaimDevicesByClaimCodeRequest(input *ClaimDevicesByClaimCodeIn
 	}
 
 	req := c.newRequest(op, input, &ClaimDevicesByClaimCodeOutput{})
+
 	return ClaimDevicesByClaimCodeRequest{Request: req, Input: input, Copy: c.ClaimDevicesByClaimCodeRequest}
 }
 

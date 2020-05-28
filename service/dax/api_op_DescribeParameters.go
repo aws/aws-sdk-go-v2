@@ -96,6 +96,7 @@ func (c *Client) DescribeParametersRequest(input *DescribeParametersInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeParametersOutput{})
+
 	return DescribeParametersRequest{Request: req, Input: input, Copy: c.DescribeParametersRequest}
 }
 

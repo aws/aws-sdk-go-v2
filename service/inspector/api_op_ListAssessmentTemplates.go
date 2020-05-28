@@ -112,6 +112,7 @@ func (c *Client) ListAssessmentTemplatesRequest(input *ListAssessmentTemplatesIn
 	}
 
 	req := c.newRequest(op, input, &ListAssessmentTemplatesOutput{})
+
 	return ListAssessmentTemplatesRequest{Request: req, Input: input, Copy: c.ListAssessmentTemplatesRequest}
 }
 

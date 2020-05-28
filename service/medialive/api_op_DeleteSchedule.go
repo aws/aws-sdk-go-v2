@@ -90,6 +90,7 @@ func (c *Client) DeleteScheduleRequest(input *DeleteScheduleInput) DeleteSchedul
 	}
 
 	req := c.newRequest(op, input, &DeleteScheduleOutput{})
+
 	return DeleteScheduleRequest{Request: req, Input: input, Copy: c.DeleteScheduleRequest}
 }
 

@@ -82,6 +82,7 @@ func (c *Client) DescribeUserPoolRequest(input *DescribeUserPoolInput) DescribeU
 	}
 
 	req := c.newRequest(op, input, &DescribeUserPoolOutput{})
+
 	return DescribeUserPoolRequest{Request: req, Input: input, Copy: c.DescribeUserPoolRequest}
 }
 

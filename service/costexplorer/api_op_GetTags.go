@@ -113,6 +113,7 @@ func (c *Client) GetTagsRequest(input *GetTagsInput) GetTagsRequest {
 	}
 
 	req := c.newRequest(op, input, &GetTagsOutput{})
+
 	return GetTagsRequest{Request: req, Input: input, Copy: c.GetTagsRequest}
 }
 

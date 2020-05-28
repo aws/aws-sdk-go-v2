@@ -99,6 +99,7 @@ func (c *Client) GetFileUploadURLRequest(input *GetFileUploadURLInput) GetFileUp
 	}
 
 	req := c.newRequest(op, input, &GetFileUploadURLOutput{})
+
 	return GetFileUploadURLRequest{Request: req, Input: input, Copy: c.GetFileUploadURLRequest}
 }
 

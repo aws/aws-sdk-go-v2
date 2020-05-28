@@ -114,6 +114,7 @@ func (c *Client) DescribeEnvironmentHealthRequest(input *DescribeEnvironmentHeal
 	}
 
 	req := c.newRequest(op, input, &DescribeEnvironmentHealthOutput{})
+
 	return DescribeEnvironmentHealthRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentHealthRequest}
 }
 

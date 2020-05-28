@@ -134,6 +134,7 @@ func (c *Client) GetSatelliteRequest(input *GetSatelliteInput) GetSatelliteReque
 	}
 
 	req := c.newRequest(op, input, &GetSatelliteOutput{})
+
 	return GetSatelliteRequest{Request: req, Input: input, Copy: c.GetSatelliteRequest}
 }
 

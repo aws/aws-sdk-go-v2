@@ -330,6 +330,7 @@ func (c *Client) StartSimulationJobBatchRequest(input *StartSimulationJobBatchIn
 	}
 
 	req := c.newRequest(op, input, &StartSimulationJobBatchOutput{})
+
 	return StartSimulationJobBatchRequest{Request: req, Input: input, Copy: c.StartSimulationJobBatchRequest}
 }
 

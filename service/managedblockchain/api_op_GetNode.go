@@ -140,6 +140,7 @@ func (c *Client) GetNodeRequest(input *GetNodeInput) GetNodeRequest {
 	}
 
 	req := c.newRequest(op, input, &GetNodeOutput{})
+
 	return GetNodeRequest{Request: req, Input: input, Copy: c.GetNodeRequest}
 }
 

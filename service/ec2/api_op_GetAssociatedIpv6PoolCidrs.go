@@ -103,6 +103,7 @@ func (c *Client) GetAssociatedIpv6PoolCidrsRequest(input *GetAssociatedIpv6PoolC
 	}
 
 	req := c.newRequest(op, input, &GetAssociatedIpv6PoolCidrsOutput{})
+
 	return GetAssociatedIpv6PoolCidrsRequest{Request: req, Input: input, Copy: c.GetAssociatedIpv6PoolCidrsRequest}
 }
 

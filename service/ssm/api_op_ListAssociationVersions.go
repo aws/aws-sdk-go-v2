@@ -92,6 +92,7 @@ func (c *Client) ListAssociationVersionsRequest(input *ListAssociationVersionsIn
 	}
 
 	req := c.newRequest(op, input, &ListAssociationVersionsOutput{})
+
 	return ListAssociationVersionsRequest{Request: req, Input: input, Copy: c.ListAssociationVersionsRequest}
 }
 

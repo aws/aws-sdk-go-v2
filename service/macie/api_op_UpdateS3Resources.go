@@ -13,8 +13,8 @@ import (
 type UpdateS3ResourcesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS ID of the Amazon Macie member account whose S3 resources' classification
-	// types you want to update.
+	// The AWS ID of the Amazon Macie Classic member account whose S3 resources'
+	// classification types you want to update.
 	MemberAccountId *string `locationName:"memberAccountId" type:"string"`
 
 	// The S3 resources whose classification types you want to update.
@@ -69,9 +69,9 @@ const opUpdateS3Resources = "UpdateS3Resources"
 //
 // Updates the classification types for the specified S3 resources. If memberAccountId
 // isn't specified, the action updates the classification types of the S3 resources
-// associated with Amazon Macie for the current master account. If memberAccountId
+// associated with Amazon Macie Classic for the current master account. If memberAccountId
 // is specified, the action updates the classification types of the S3 resources
-// associated with Amazon Macie for the specified member account.
+// associated with Amazon Macie Classic for the specified member account.
 //
 //    // Example sending a request using UpdateS3ResourcesRequest.
 //    req := client.UpdateS3ResourcesRequest(params)
@@ -93,6 +93,7 @@ func (c *Client) UpdateS3ResourcesRequest(input *UpdateS3ResourcesInput) UpdateS
 	}
 
 	req := c.newRequest(op, input, &UpdateS3ResourcesOutput{})
+
 	return UpdateS3ResourcesRequest{Request: req, Input: input, Copy: c.UpdateS3ResourcesRequest}
 }
 

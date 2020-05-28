@@ -100,6 +100,7 @@ func (c *Client) ListFieldLevelEncryptionProfilesRequest(input *ListFieldLevelEn
 	}
 
 	req := c.newRequest(op, input, &ListFieldLevelEncryptionProfilesOutput{})
+
 	return ListFieldLevelEncryptionProfilesRequest{Request: req, Input: input, Copy: c.ListFieldLevelEncryptionProfilesRequest}
 }
 

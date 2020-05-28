@@ -30,6 +30,9 @@ func (s AvailabilityZone) String() string {
 type CacheCluster struct {
 	_ struct{} `type:"structure"`
 
+	// The ARN (Amazon Resource Name) of the cache cluster.
+	ARN *string `type:"string"`
+
 	// A flag that enables encryption at-rest when set to true.
 	//
 	// You cannot modify the value of AtRestEncryptionEnabled after the cluster
@@ -412,6 +415,9 @@ func (s CacheNodeUpdateStatus) String() string {
 type CacheParameterGroup struct {
 	_ struct{} `type:"structure"`
 
+	// The ARN (Amazon Resource Name) of the cache parameter group.
+	ARN *string `type:"string"`
+
 	// The name of the cache parameter group family that this cache parameter group
 	// is compatible with.
 	//
@@ -464,6 +470,9 @@ func (s CacheParameterGroupStatus) String() string {
 type CacheSecurityGroup struct {
 	_ struct{} `type:"structure"`
 
+	// The ARN (Amazon Resource Name) of the cache security group.
+	ARN *string `type:"string"`
+
 	// The name of the cache security group.
 	CacheSecurityGroupName *string `type:"string"`
 
@@ -508,6 +517,9 @@ func (s CacheSecurityGroupMembership) String() string {
 //    * ModifyCacheSubnetGroup
 type CacheSubnetGroup struct {
 	_ struct{} `type:"structure"`
+
+	// The ARN (Amazon Resource Name) of the cache subnet group.
+	ARN *string `type:"string"`
 
 	// The description of the cache subnet group.
 	CacheSubnetGroupDescription *string `type:"string"`
@@ -717,10 +729,13 @@ func (s GlobalNodeGroup) String() string {
 // only reads. The primary cluster automatically replicates updates to the secondary
 // cluster.
 //
-//    * The GlobalReplicationGroupId represents the name of the Global Datastore,
-//    which is what you use to associate a secondary cluster.
+//    * The GlobalReplicationGroupIdSuffix represents the name of the Global
+//    Datastore, which is what you use to associate a secondary cluster.
 type GlobalReplicationGroup struct {
 	_ struct{} `type:"structure"`
+
+	// The ARN (Amazon Resource Name) of the global replication group.
+	ARN *string `type:"string"`
 
 	// A flag that enables encryption at rest when set to true.
 	//
@@ -744,7 +759,7 @@ type GlobalReplicationGroup struct {
 	// A flag that indicates whether the Global Datastore is cluster enabled.
 	ClusterEnabled *bool `type:"boolean"`
 
-	// The Elasticache engine. For preview, it is Redis only.
+	// The Elasticache engine. For Redis only.
 	Engine *string `type:"string"`
 
 	// The Elasticache Redis engine version. For preview, it is Redis version 5.0.5
@@ -1224,6 +1239,9 @@ func (s *RegionalConfiguration) Validate() error {
 type ReplicationGroup struct {
 	_ struct{} `type:"structure"`
 
+	// The ARN (Amazon Resource Name) of the replication group.
+	ARN *string `type:"string"`
+
 	// A flag that enables encryption at-rest when set to true.
 	//
 	// You cannot modify the value of AtRestEncryptionEnabled after the cluster
@@ -1661,6 +1679,9 @@ func (s SlotMigration) String() string {
 // was taken.
 type Snapshot struct {
 	_ struct{} `type:"structure"`
+
+	// The ARN (Amazon Resource Name) of the snapshot.
+	ARN *string `type:"string"`
 
 	// This parameter is currently disabled.
 	AutoMinorVersionUpgrade *bool `type:"boolean"`

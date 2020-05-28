@@ -97,6 +97,7 @@ func (c *Client) AddListenerCertificatesRequest(input *AddListenerCertificatesIn
 	}
 
 	req := c.newRequest(op, input, &AddListenerCertificatesOutput{})
+
 	return AddListenerCertificatesRequest{Request: req, Input: input, Copy: c.AddListenerCertificatesRequest}
 }
 

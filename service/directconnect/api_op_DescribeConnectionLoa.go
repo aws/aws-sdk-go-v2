@@ -96,6 +96,7 @@ func (c *Client) DescribeConnectionLoaRequest(input *DescribeConnectionLoaInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeConnectionLoaOutput{})
+
 	return DescribeConnectionLoaRequest{Request: req, Input: input, Copy: c.DescribeConnectionLoaRequest}
 }
 

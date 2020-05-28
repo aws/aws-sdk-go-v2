@@ -2009,6 +2009,9 @@ func (s EbsBlockDevice) String() string {
 type EbsInfo struct {
 	_ struct{} `type:"structure"`
 
+	// Describes the optimized EBS performance for the instance type.
+	EbsOptimizedInfo *EbsOptimizedInfo `locationName:"ebsOptimizedInfo" type:"structure"`
+
 	// Indicates that the instance type is Amazon EBS-optimized. For more information,
 	// see Amazon EBS-Optimized Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html)
 	// in Amazon EC2 User Guide for Linux Instances.
@@ -2059,6 +2062,40 @@ type EbsInstanceBlockDeviceSpecification struct {
 
 // String returns the string representation
 func (s EbsInstanceBlockDeviceSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes the optimized EBS performance for supported instance types.
+type EbsOptimizedInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The baseline bandwidth performance for an EBS-optimized instance type, in
+	// Mbps.
+	BaselineBandwidthInMbps *int64 `locationName:"baselineBandwidthInMbps" type:"integer"`
+
+	// The baseline input/output storage operations per seconds for an EBS-optimized
+	// instance type.
+	BaselineIops *int64 `locationName:"baselineIops" type:"integer"`
+
+	// The baseline throughput performance for an EBS-optimized instance type, in
+	// MBps.
+	BaselineThroughputInMBps *float64 `locationName:"baselineThroughputInMBps" type:"double"`
+
+	// The maximum bandwidth performance for an EBS-optimized instance type, in
+	// Mbps.
+	MaximumBandwidthInMbps *int64 `locationName:"maximumBandwidthInMbps" type:"integer"`
+
+	// The maximum input/output storage operations per second for an EBS-optimized
+	// instance type.
+	MaximumIops *int64 `locationName:"maximumIops" type:"integer"`
+
+	// The maximum throughput performance for an EBS-optimized instance type, in
+	// MBps.
+	MaximumThroughputInMBps *float64 `locationName:"maximumThroughputInMBps" type:"double"`
+}
+
+// String returns the string representation
+func (s EbsOptimizedInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -2611,6 +2648,32 @@ func (s FailedQueuedPurchaseDeletion) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Describes the IAM SAML identity provider used for federated authentication.
+type FederatedAuthentication struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the IAM SAML identity provider.
+	SamlProviderArn *string `locationName:"samlProviderArn" type:"string"`
+}
+
+// String returns the string representation
+func (s FederatedAuthentication) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The IAM SAML identity provider used for federated authentication.
+type FederatedAuthenticationRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the IAM SAML identity provider.
+	SAMLProviderArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s FederatedAuthenticationRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
 // A filter name and value pair that is used to return a more specific list
 // of results from a describe operation. Filters can be used to match a set
 // of resources by specific criteria, such as tags, attributes, or IDs. The
@@ -2872,19 +2935,30 @@ func (s FleetLaunchTemplateOverridesRequest) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes a launch template.
+// Describes the Amazon EC2 launch template and the launch template version
+// that can be used by a Spot Fleet request to configure Amazon EC2 instances.
+// For information about launch templates, see Launching an instance from a
+// launch template (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html)
+// in the Amazon EC2 User Guide for Linux Instances.
 type FleetLaunchTemplateSpecification struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the launch template. You must specify either a template ID or a
-	// template name.
+	// The ID of the launch template. If you specify the template ID, you can't
+	// specify the template name.
 	LaunchTemplateId *string `locationName:"launchTemplateId" type:"string"`
 
-	// The name of the launch template. You must specify either a template name
-	// or a template ID.
+	// The name of the launch template. If you specify the template name, you can't
+	// specify the template ID.
 	LaunchTemplateName *string `locationName:"launchTemplateName" min:"3" type:"string"`
 
-	// The version number of the launch template. You must specify a version number.
+	// The launch template version number, $Latest, or $Default. You must specify
+	// a value, otherwise the request fails.
+	//
+	// If the value is $Latest, Amazon EC2 uses the latest version of the launch
+	// template.
+	//
+	// If the value is $Default, Amazon EC2 uses the default version of the launch
+	// template.
 	Version *string `locationName:"version" type:"string"`
 }
 
@@ -2906,19 +2980,30 @@ func (s *FleetLaunchTemplateSpecification) Validate() error {
 	return nil
 }
 
-// The launch template to use. You must specify either the launch template ID
-// or launch template name in the request.
+// Describes the Amazon EC2 launch template and the launch template version
+// that can be used by an EC2 Fleet to configure Amazon EC2 instances. For information
+// about launch templates, see Launching an instance from a launch template
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html)
+// in the Amazon Elastic Compute Cloud User Guide.
 type FleetLaunchTemplateSpecificationRequest struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the launch template.
+	// The ID of the launch template. If you specify the template ID, you can't
+	// specify the template name.
 	LaunchTemplateId *string `type:"string"`
 
-	// The name of the launch template.
+	// The name of the launch template. If you specify the template name, you can't
+	// specify the template ID.
 	LaunchTemplateName *string `min:"3" type:"string"`
 
-	// The version number of the launch template. Note: This is a required parameter
-	// and will be updated soon.
+	// The launch template version number, $Latest, or $Default. You must specify
+	// a value, otherwise the request fails.
+	//
+	// If the value is $Latest, Amazon EC2 uses the latest version of the launch
+	// template.
+	//
+	// If the value is $Default, Amazon EC2 uses the default version of the launch
+	// template.
 	Version *string `type:"string"`
 }
 
@@ -5000,6 +5085,9 @@ type InstanceTypeInfo struct {
 	// Indicates whether the instance type is offered for spot or On-Demand.
 	SupportedUsageClasses []UsageClassType `locationName:"supportedUsageClasses" locationNameList:"item" type:"list"`
 
+	// The supported virtualization types.
+	SupportedVirtualizationTypes []VirtualizationType `locationName:"supportedVirtualizationTypes" locationNameList:"item" type:"list"`
+
 	// Describes the vCPU configurations for the instance type.
 	VCpuInfo *VCpuInfo `locationName:"vCpuInfo" type:"structure"`
 }
@@ -7002,6 +7090,9 @@ func (s NetworkAclEntry) String() string {
 type NetworkInfo struct {
 	_ struct{} `type:"structure"`
 
+	// Indicates whether Elastic Fabric Adapter (EFA) is supported.
+	EfaSupported *bool `locationName:"efaSupported" type:"boolean"`
+
 	// Indicates whether Elastic Network Adapter (ENA) is supported.
 	EnaSupport EnaSupport `locationName:"enaSupport" type:"string" enum:"true"`
 
@@ -8007,6 +8098,11 @@ type PublicIpv4Pool struct {
 
 	// A description of the address pool.
 	Description *string `locationName:"description" type:"string"`
+
+	// The name of the location from which the address pool is advertised. A network
+	// border group is a unique set of Availability Zones or Local Zones from where
+	// AWS advertises public IP addresses.
+	NetworkBorderGroup *string `locationName:"networkBorderGroup" type:"string"`
 
 	// The address ranges.
 	PoolAddressRanges []PublicIpv4PoolRange `locationName:"poolAddressRangeSet" locationNameList:"item" type:"list"`
@@ -10849,11 +10945,19 @@ type Subnet struct {
 	// The IPv4 CIDR block assigned to the subnet.
 	CidrBlock *string `locationName:"cidrBlock" type:"string"`
 
+	// The customer-owned IPv4 address pool associated with the subnet.
+	CustomerOwnedIpv4Pool *string `locationName:"customerOwnedIpv4Pool" type:"string"`
+
 	// Indicates whether this is the default subnet for the Availability Zone.
 	DefaultForAz *bool `locationName:"defaultForAz" type:"boolean"`
 
 	// Information about the IPv6 CIDR blocks associated with the subnet.
 	Ipv6CidrBlockAssociationSet []SubnetIpv6CidrBlockAssociation `locationName:"ipv6CidrBlockAssociationSet" locationNameList:"item" type:"list"`
+
+	// Indicates whether a network interface created in this subnet (including a
+	// network interface created by RunInstances) receives a customer-owned IPv4
+	// address.
+	MapCustomerOwnedIpOnLaunch *bool `locationName:"mapCustomerOwnedIpOnLaunch" type:"boolean"`
 
 	// Indicates whether instances launched in this subnet receive a public IPv4
 	// address.
@@ -11014,11 +11118,12 @@ type TagSpecification struct {
 
 	// The type of resource to tag. Currently, the resource types that support tagging
 	// on creation are: capacity-reservation | client-vpn-endpoint | dedicated-host
-	// | fleet | fpga-image | instance | key-pair | launch-template | | natgateway
-	// | spot-fleet-request | placement-group | snapshot | traffic-mirror-filter
-	// | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment
-	// | transit-gateway-route-table | vpc-endpoint (for interface VPC endpoints)|
-	// vpc-endpoint-service (for gateway VPC endpoints) | volume | vpc-flow-log.
+	// | fleet | fpga-image | instance | ipv4pool-ec2 | ipv6pool-ec2 | key-pair
+	// | launch-template | natgateway | spot-fleet-request | placement-group | snapshot
+	// | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target
+	// | transit-gateway | transit-gateway-attachment | transit-gateway-route-table
+	// | vpc-endpoint (for interface VPC endpoints)| vpc-endpoint-service (for gateway
+	// VPC endpoints) | volume | vpc-flow-log.
 	//
 	// To tag a resource after it has been created, see CreateTags (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
 	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
@@ -12343,6 +12448,42 @@ func (s VCpuInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The error code and error message that is returned for a parameter or parameter
+// combination that is not valid when a new launch template or new version of
+// a launch template is created.
+type ValidationError struct {
+	_ struct{} `type:"structure"`
+
+	// The error code that indicates why the parameter or parameter combination
+	// is not valid. For more information about error codes, see Error Codes (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html).
+	Code *string `locationName:"code" type:"string"`
+
+	// The error message that describes why the parameter or parameter combination
+	// is not valid. For more information about error messages, see Error Codes
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html).
+	Message *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation
+func (s ValidationError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The error codes and error messages that are returned for the parameters or
+// parameter combinations that are not valid when a new launch template or new
+// version of a launch template is created.
+type ValidationWarning struct {
+	_ struct{} `type:"structure"`
+
+	// The error codes and error messages.
+	Errors []ValidationError `locationName:"errorSet" locationNameList:"item" type:"list"`
+}
+
+// String returns the string representation
+func (s ValidationWarning) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes telemetry for a VPN tunnel.
 type VgwTelemetry struct {
 	_ struct{} `type:"structure"`
@@ -13010,15 +13151,17 @@ func (s VpcPeeringConnectionVpcInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes the authentication methods used by a Client VPN endpoint. Client
-// VPN supports Active Directory and mutual authentication. For more information,
-// see Authentication (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication)
+// Describes the authentication methods used by a Client VPN endpoint. For more
+// information, see Authentication (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication)
 // in the AWS Client VPN Administrator Guide.
 type VpnAuthentication struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the Active Directory, if applicable.
 	ActiveDirectory *DirectoryServiceAuthentication `locationName:"activeDirectory" type:"structure"`
+
+	// Information about the IAM SAML identity provider, if applicable.
+	FederatedAuthentication *FederatedAuthentication `locationName:"federatedAuthentication" type:"structure"`
 
 	// Information about the authentication certificates, if applicable.
 	MutualAuthentication *CertificateAuthentication `locationName:"mutualAuthentication" type:"structure"`
@@ -13033,8 +13176,7 @@ func (s VpnAuthentication) String() string {
 }
 
 // Describes the authentication method to be used by a Client VPN endpoint.
-// Client VPN supports Active Directory and mutual authentication. For more
-// information, see Authentication (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication)
+// For more information, see Authentication (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication)
 // in the AWS Client VPN Administrator Guide.
 type VpnAuthenticationRequest struct {
 	_ struct{} `type:"structure"`
@@ -13043,13 +13185,15 @@ type VpnAuthenticationRequest struct {
 	// provide this information if Type is directory-service-authentication.
 	ActiveDirectory *DirectoryServiceAuthenticationRequest `type:"structure"`
 
+	// Information about the IAM SAML identity provider to be used, if applicable.
+	// You must provide this information if Type is federated-authentication.
+	FederatedAuthentication *FederatedAuthenticationRequest `type:"structure"`
+
 	// Information about the authentication certificates to be used, if applicable.
 	// You must provide this information if Type is certificate-authentication.
 	MutualAuthentication *CertificateAuthenticationRequest `type:"structure"`
 
-	// The type of client authentication to be used. Specify certificate-authentication
-	// to use certificate-based authentication, or directory-service-authentication
-	// to use Active Directory authentication.
+	// The type of client authentication to be used.
 	Type VpnAuthenticationType `type:"string" enum:"true"`
 }
 

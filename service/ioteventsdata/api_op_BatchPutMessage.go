@@ -130,6 +130,7 @@ func (c *Client) BatchPutMessageRequest(input *BatchPutMessageInput) BatchPutMes
 	}
 
 	req := c.newRequest(op, input, &BatchPutMessageOutput{})
+
 	return BatchPutMessageRequest{Request: req, Input: input, Copy: c.BatchPutMessageRequest}
 }
 

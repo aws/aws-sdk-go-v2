@@ -132,6 +132,7 @@ func (c *Client) ListAssetsRequest(input *ListAssetsInput) ListAssetsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListAssetsOutput{})
+
 	return ListAssetsRequest{Request: req, Input: input, Copy: c.ListAssetsRequest}
 }
 

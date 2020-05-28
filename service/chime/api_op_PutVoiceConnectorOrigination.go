@@ -121,6 +121,7 @@ func (c *Client) PutVoiceConnectorOriginationRequest(input *PutVoiceConnectorOri
 	}
 
 	req := c.newRequest(op, input, &PutVoiceConnectorOriginationOutput{})
+
 	return PutVoiceConnectorOriginationRequest{Request: req, Input: input, Copy: c.PutVoiceConnectorOriginationRequest}
 }
 

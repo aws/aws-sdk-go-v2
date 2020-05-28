@@ -140,6 +140,7 @@ func (c *Client) GetUpgradeStatusRequest(input *GetUpgradeStatusInput) GetUpgrad
 	}
 
 	req := c.newRequest(op, input, &GetUpgradeStatusOutput{})
+
 	return GetUpgradeStatusRequest{Request: req, Input: input, Copy: c.GetUpgradeStatusRequest}
 }
 

@@ -138,6 +138,7 @@ func (c *Client) ListTargetsForPolicyRequest(input *ListTargetsForPolicyInput) L
 	}
 
 	req := c.newRequest(op, input, &ListTargetsForPolicyOutput{})
+
 	return ListTargetsForPolicyRequest{Request: req, Input: input, Copy: c.ListTargetsForPolicyRequest}
 }
 

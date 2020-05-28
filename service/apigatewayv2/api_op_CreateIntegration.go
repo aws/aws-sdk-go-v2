@@ -454,6 +454,7 @@ func (c *Client) CreateIntegrationRequest(input *CreateIntegrationInput) CreateI
 	}
 
 	req := c.newRequest(op, input, &CreateIntegrationOutput{})
+
 	return CreateIntegrationRequest{Request: req, Input: input, Copy: c.CreateIntegrationRequest}
 }
 

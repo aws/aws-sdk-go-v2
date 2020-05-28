@@ -81,6 +81,7 @@ func (c *Client) DisableLDAPSRequest(input *DisableLDAPSInput) DisableLDAPSReque
 	}
 
 	req := c.newRequest(op, input, &DisableLDAPSOutput{})
+
 	return DisableLDAPSRequest{Request: req, Input: input, Copy: c.DisableLDAPSRequest}
 }
 

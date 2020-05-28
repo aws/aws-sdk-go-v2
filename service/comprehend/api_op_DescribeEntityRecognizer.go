@@ -77,6 +77,7 @@ func (c *Client) DescribeEntityRecognizerRequest(input *DescribeEntityRecognizer
 	}
 
 	req := c.newRequest(op, input, &DescribeEntityRecognizerOutput{})
+
 	return DescribeEntityRecognizerRequest{Request: req, Input: input, Copy: c.DescribeEntityRecognizerRequest}
 }
 

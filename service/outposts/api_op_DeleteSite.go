@@ -95,6 +95,7 @@ func (c *Client) DeleteSiteRequest(input *DeleteSiteInput) DeleteSiteRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteSiteOutput{})
+
 	return DeleteSiteRequest{Request: req, Input: input, Copy: c.DeleteSiteRequest}
 }
 

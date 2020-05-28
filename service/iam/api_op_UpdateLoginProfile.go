@@ -114,6 +114,7 @@ func (c *Client) UpdateLoginProfileRequest(input *UpdateLoginProfileInput) Updat
 	req := c.newRequest(op, input, &UpdateLoginProfileOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateLoginProfileRequest{Request: req, Input: input, Copy: c.UpdateLoginProfileRequest}
 }
 

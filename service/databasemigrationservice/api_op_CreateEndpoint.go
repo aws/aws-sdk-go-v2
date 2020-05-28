@@ -227,6 +227,7 @@ func (c *Client) CreateEndpointRequest(input *CreateEndpointInput) CreateEndpoin
 	}
 
 	req := c.newRequest(op, input, &CreateEndpointOutput{})
+
 	return CreateEndpointRequest{Request: req, Input: input, Copy: c.CreateEndpointRequest}
 }
 

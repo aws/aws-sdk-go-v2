@@ -137,6 +137,10 @@ const opListJournalS3ExportsForLedger = "ListJournalS3ExportsForLedger"
 // you can retrieve all the items by calling ListJournalS3ExportsForLedger multiple
 // times.
 //
+// This action does not return any expired export jobs. For more information,
+// see Export Job Expiration (https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration)
+// in the Amazon QLDB Developer Guide.
+//
 //    // Example sending a request using ListJournalS3ExportsForLedgerRequest.
 //    req := client.ListJournalS3ExportsForLedgerRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -163,6 +167,7 @@ func (c *Client) ListJournalS3ExportsForLedgerRequest(input *ListJournalS3Export
 	}
 
 	req := c.newRequest(op, input, &ListJournalS3ExportsForLedgerOutput{})
+
 	return ListJournalS3ExportsForLedgerRequest{Request: req, Input: input, Copy: c.ListJournalS3ExportsForLedgerRequest}
 }
 

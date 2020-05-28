@@ -21,7 +21,9 @@ type UntagResourceInput struct {
 
 	// The keys of the key:value tag pairs that you want to remove from the specified
 	// EFS resource.
-	TagKeys []string `min:"1" type:"list"`
+	//
+	// TagKeys is a required field
+	TagKeys []string `location:"querystring" locationName:"tagKeys" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -35,6 +37,10 @@ func (s *UntagResourceInput) Validate() error {
 
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
+	}
+
+	if s.TagKeys == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 	if s.TagKeys != nil && len(s.TagKeys) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TagKeys", 1))
@@ -50,23 +56,23 @@ func (s *UntagResourceInput) Validate() error {
 func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if s.ResourceId != nil {
+		v := *s.ResourceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ResourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.TagKeys != nil {
 		v := s.TagKeys
 
 		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "TagKeys", metadata)
+		ls0 := e.List(protocol.QueryTarget, "tagKeys", metadata)
 		ls0.Start()
 		for _, v1 := range v {
 			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
-	}
-	if s.ResourceId != nil {
-		v := *s.ResourceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ResourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -118,6 +124,7 @@ func (c *Client) UntagResourceRequest(input *UntagResourceInput) UntagResourceRe
 	req := c.newRequest(op, input, &UntagResourceOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 

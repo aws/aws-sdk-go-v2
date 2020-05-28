@@ -141,6 +141,7 @@ func (c *Client) GetMaintenanceWindowExecutionTaskInvocationRequest(input *GetMa
 	}
 
 	req := c.newRequest(op, input, &GetMaintenanceWindowExecutionTaskInvocationOutput{})
+
 	return GetMaintenanceWindowExecutionTaskInvocationRequest{Request: req, Input: input, Copy: c.GetMaintenanceWindowExecutionTaskInvocationRequest}
 }
 

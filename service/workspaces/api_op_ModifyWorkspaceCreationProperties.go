@@ -90,6 +90,7 @@ func (c *Client) ModifyWorkspaceCreationPropertiesRequest(input *ModifyWorkspace
 	}
 
 	req := c.newRequest(op, input, &ModifyWorkspaceCreationPropertiesOutput{})
+
 	return ModifyWorkspaceCreationPropertiesRequest{Request: req, Input: input, Copy: c.ModifyWorkspaceCreationPropertiesRequest}
 }
 

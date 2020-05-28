@@ -253,6 +253,7 @@ func (c *Client) CreateLabelingJobRequest(input *CreateLabelingJobInput) CreateL
 	}
 
 	req := c.newRequest(op, input, &CreateLabelingJobOutput{})
+
 	return CreateLabelingJobRequest{Request: req, Input: input, Copy: c.CreateLabelingJobRequest}
 }
 

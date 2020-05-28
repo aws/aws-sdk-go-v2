@@ -95,6 +95,7 @@ func (c *Client) DisassociateFromMasterAccountRequest(input *DisassociateFromMas
 	}
 
 	req := c.newRequest(op, input, &DisassociateFromMasterAccountOutput{})
+
 	return DisassociateFromMasterAccountRequest{Request: req, Input: input, Copy: c.DisassociateFromMasterAccountRequest}
 }
 

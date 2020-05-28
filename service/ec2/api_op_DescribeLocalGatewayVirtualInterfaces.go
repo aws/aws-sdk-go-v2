@@ -99,6 +99,7 @@ func (c *Client) DescribeLocalGatewayVirtualInterfacesRequest(input *DescribeLoc
 	}
 
 	req := c.newRequest(op, input, &DescribeLocalGatewayVirtualInterfacesOutput{})
+
 	return DescribeLocalGatewayVirtualInterfacesRequest{Request: req, Input: input, Copy: c.DescribeLocalGatewayVirtualInterfacesRequest}
 }
 

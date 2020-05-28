@@ -96,6 +96,7 @@ func (c *Client) DisableLoggingRequest(input *DisableLoggingInput) DisableLoggin
 	}
 
 	req := c.newRequest(op, input, &DisableLoggingOutput{})
+
 	return DisableLoggingRequest{Request: req, Input: input, Copy: c.DisableLoggingRequest}
 }
 

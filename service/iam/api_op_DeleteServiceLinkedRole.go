@@ -101,6 +101,7 @@ func (c *Client) DeleteServiceLinkedRoleRequest(input *DeleteServiceLinkedRoleIn
 	}
 
 	req := c.newRequest(op, input, &DeleteServiceLinkedRoleOutput{})
+
 	return DeleteServiceLinkedRoleRequest{Request: req, Input: input, Copy: c.DeleteServiceLinkedRoleRequest}
 }
 

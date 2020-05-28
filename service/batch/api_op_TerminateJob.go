@@ -111,6 +111,7 @@ func (c *Client) TerminateJobRequest(input *TerminateJobInput) TerminateJobReque
 	}
 
 	req := c.newRequest(op, input, &TerminateJobOutput{})
+
 	return TerminateJobRequest{Request: req, Input: input, Copy: c.TerminateJobRequest}
 }
 

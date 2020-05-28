@@ -170,6 +170,7 @@ func (c *Client) UpdateNotificationRuleRequest(input *UpdateNotificationRuleInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateNotificationRuleOutput{})
+
 	return UpdateNotificationRuleRequest{Request: req, Input: input, Copy: c.UpdateNotificationRuleRequest}
 }
 

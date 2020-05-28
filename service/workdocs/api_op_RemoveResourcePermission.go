@@ -138,6 +138,7 @@ func (c *Client) RemoveResourcePermissionRequest(input *RemoveResourcePermission
 	req := c.newRequest(op, input, &RemoveResourcePermissionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RemoveResourcePermissionRequest{Request: req, Input: input, Copy: c.RemoveResourcePermissionRequest}
 }
 

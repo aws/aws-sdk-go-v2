@@ -99,6 +99,7 @@ func (c *Client) AssociateResolverEndpointIpAddressRequest(input *AssociateResol
 	}
 
 	req := c.newRequest(op, input, &AssociateResolverEndpointIpAddressOutput{})
+
 	return AssociateResolverEndpointIpAddressRequest{Request: req, Input: input, Copy: c.AssociateResolverEndpointIpAddressRequest}
 }
 

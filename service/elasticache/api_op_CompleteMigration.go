@@ -81,6 +81,7 @@ func (c *Client) CompleteMigrationRequest(input *CompleteMigrationInput) Complet
 	}
 
 	req := c.newRequest(op, input, &CompleteMigrationOutput{})
+
 	return CompleteMigrationRequest{Request: req, Input: input, Copy: c.CompleteMigrationRequest}
 }
 

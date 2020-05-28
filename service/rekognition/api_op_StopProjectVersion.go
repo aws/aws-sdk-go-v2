@@ -81,6 +81,7 @@ func (c *Client) StopProjectVersionRequest(input *StopProjectVersionInput) StopP
 	}
 
 	req := c.newRequest(op, input, &StopProjectVersionOutput{})
+
 	return StopProjectVersionRequest{Request: req, Input: input, Copy: c.StopProjectVersionRequest}
 }
 

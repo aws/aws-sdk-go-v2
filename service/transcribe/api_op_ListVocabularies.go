@@ -63,7 +63,7 @@ type ListVocabulariesOutput struct {
 	NextToken *string `type:"string"`
 
 	// The requested vocabulary state.
-	Status TranscriptionJobStatus `type:"string" enum:"true"`
+	Status VocabularyState `type:"string" enum:"true"`
 
 	// A list of objects that describe the vocabularies that match the search criteria
 	// in the request.
@@ -109,6 +109,7 @@ func (c *Client) ListVocabulariesRequest(input *ListVocabulariesInput) ListVocab
 	}
 
 	req := c.newRequest(op, input, &ListVocabulariesOutput{})
+
 	return ListVocabulariesRequest{Request: req, Input: input, Copy: c.ListVocabulariesRequest}
 }
 

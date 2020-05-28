@@ -162,6 +162,7 @@ func (c *Client) UpdateDashboardPublishedVersionRequest(input *UpdateDashboardPu
 	}
 
 	req := c.newRequest(op, input, &UpdateDashboardPublishedVersionOutput{})
+
 	return UpdateDashboardPublishedVersionRequest{Request: req, Input: input, Copy: c.UpdateDashboardPublishedVersionRequest}
 }
 

@@ -79,6 +79,8 @@ type ClientAPI interface {
 
 	DeleteMetricFilterRequest(*cloudwatchlogs.DeleteMetricFilterInput) cloudwatchlogs.DeleteMetricFilterRequest
 
+	DeleteQueryDefinitionRequest(*cloudwatchlogs.DeleteQueryDefinitionInput) cloudwatchlogs.DeleteQueryDefinitionRequest
+
 	DeleteResourcePolicyRequest(*cloudwatchlogs.DeleteResourcePolicyInput) cloudwatchlogs.DeleteResourcePolicyRequest
 
 	DeleteRetentionPolicyRequest(*cloudwatchlogs.DeleteRetentionPolicyInput) cloudwatchlogs.DeleteRetentionPolicyRequest
@@ -96,6 +98,8 @@ type ClientAPI interface {
 	DescribeMetricFiltersRequest(*cloudwatchlogs.DescribeMetricFiltersInput) cloudwatchlogs.DescribeMetricFiltersRequest
 
 	DescribeQueriesRequest(*cloudwatchlogs.DescribeQueriesInput) cloudwatchlogs.DescribeQueriesRequest
+
+	DescribeQueryDefinitionsRequest(*cloudwatchlogs.DescribeQueryDefinitionsInput) cloudwatchlogs.DescribeQueryDefinitionsRequest
 
 	DescribeResourcePoliciesRequest(*cloudwatchlogs.DescribeResourcePoliciesInput) cloudwatchlogs.DescribeResourcePoliciesRequest
 
@@ -122,6 +126,8 @@ type ClientAPI interface {
 	PutLogEventsRequest(*cloudwatchlogs.PutLogEventsInput) cloudwatchlogs.PutLogEventsRequest
 
 	PutMetricFilterRequest(*cloudwatchlogs.PutMetricFilterInput) cloudwatchlogs.PutMetricFilterRequest
+
+	PutQueryDefinitionRequest(*cloudwatchlogs.PutQueryDefinitionInput) cloudwatchlogs.PutQueryDefinitionRequest
 
 	PutResourcePolicyRequest(*cloudwatchlogs.PutResourcePolicyInput) cloudwatchlogs.PutResourcePolicyRequest
 

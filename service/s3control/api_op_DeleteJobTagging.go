@@ -13,13 +13,12 @@ import (
 type DeleteJobTaggingInput struct {
 	_ struct{} `type:"structure"`
 
-	// The account ID for the Amazon Web Services account associated with the Amazon
-	// S3 batch operations job you want to remove tags from.
+	// The AWS account ID associated with the Amazon S3 Batch Operations job.
 	//
 	// AccountId is a required field
 	AccountId *string `location:"header" locationName:"x-amz-account-id" type:"string" required:"true"`
 
-	// The ID for the job whose tags you want to delete.
+	// The ID for the Amazon S3 Batch Operations job whose tags you want to delete.
 	//
 	// JobId is a required field
 	JobId *string `location:"uri" locationName:"id" min:"5" type:"string" required:"true"`
@@ -88,7 +87,18 @@ const opDeleteJobTagging = "DeleteJobTagging"
 // DeleteJobTaggingRequest returns a request value for making API operation for
 // AWS S3 Control.
 //
-// Delete the tags on a Amazon S3 batch operations job, if any.
+// Removes the entire tag set from the specified Amazon S3 Batch Operations
+// job. To use this operation, you must have permission to perform the s3:DeleteJobTagging
+// action. For more information, see Using Job Tags (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+// Related actions include:
+//
+//    * CreateJob
+//
+//    * GetJobTagging
+//
+//    * PutJobTagging
 //
 //    // Example sending a request using DeleteJobTaggingRequest.
 //    req := client.DeleteJobTaggingRequest(params)
@@ -112,6 +122,7 @@ func (c *Client) DeleteJobTaggingRequest(input *DeleteJobTaggingInput) DeleteJob
 	req := c.newRequest(op, input, &DeleteJobTaggingOutput{})
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
+
 	return DeleteJobTaggingRequest{Request: req, Input: input, Copy: c.DeleteJobTaggingRequest}
 }
 

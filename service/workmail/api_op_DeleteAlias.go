@@ -100,6 +100,7 @@ func (c *Client) DeleteAliasRequest(input *DeleteAliasInput) DeleteAliasRequest 
 	}
 
 	req := c.newRequest(op, input, &DeleteAliasOutput{})
+
 	return DeleteAliasRequest{Request: req, Input: input, Copy: c.DeleteAliasRequest}
 }
 

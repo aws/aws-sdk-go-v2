@@ -139,6 +139,7 @@ func (c *Client) DeleteUserByPrincipalIdRequest(input *DeleteUserByPrincipalIdIn
 	}
 
 	req := c.newRequest(op, input, &DeleteUserByPrincipalIdOutput{})
+
 	return DeleteUserByPrincipalIdRequest{Request: req, Input: input, Copy: c.DeleteUserByPrincipalIdRequest}
 }
 

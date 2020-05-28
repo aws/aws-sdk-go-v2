@@ -131,6 +131,7 @@ func (c *Client) ListInstanceProfilesForRoleRequest(input *ListInstanceProfilesF
 	}
 
 	req := c.newRequest(op, input, &ListInstanceProfilesForRoleOutput{})
+
 	return ListInstanceProfilesForRoleRequest{Request: req, Input: input, Copy: c.ListInstanceProfilesForRoleRequest}
 }
 

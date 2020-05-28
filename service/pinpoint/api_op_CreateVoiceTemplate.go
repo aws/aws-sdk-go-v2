@@ -117,6 +117,7 @@ func (c *Client) CreateVoiceTemplateRequest(input *CreateVoiceTemplateInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateVoiceTemplateOutput{})
+
 	return CreateVoiceTemplateRequest{Request: req, Input: input, Copy: c.CreateVoiceTemplateRequest}
 }
 

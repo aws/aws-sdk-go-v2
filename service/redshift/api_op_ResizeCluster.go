@@ -101,6 +101,7 @@ func (c *Client) ResizeClusterRequest(input *ResizeClusterInput) ResizeClusterRe
 	}
 
 	req := c.newRequest(op, input, &ResizeClusterOutput{})
+
 	return ResizeClusterRequest{Request: req, Input: input, Copy: c.ResizeClusterRequest}
 }
 

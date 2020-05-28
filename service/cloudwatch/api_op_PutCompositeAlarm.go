@@ -223,6 +223,7 @@ func (c *Client) PutCompositeAlarmRequest(input *PutCompositeAlarmInput) PutComp
 	req := c.newRequest(op, input, &PutCompositeAlarmOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutCompositeAlarmRequest{Request: req, Input: input, Copy: c.PutCompositeAlarmRequest}
 }
 

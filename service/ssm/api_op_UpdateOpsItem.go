@@ -46,7 +46,7 @@ type UpdateOpsItemInput struct {
 	// Use the /aws/resources key in OperationalData to specify a related resource
 	// in the request. Use the /aws/automations key in OperationalData to associate
 	// an Automation runbook with the OpsItem. To view AWS CLI example commands
-	// that use these keys, see Creating OpsItems Manually (http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems)
+	// that use these keys, see Creating OpsItems manually (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems)
 	// in the AWS Systems Manager User Guide.
 	OperationalData map[string]OpsItemDataValue `type:"map"`
 
@@ -70,7 +70,7 @@ type UpdateOpsItemInput struct {
 	Severity *string `min:"1" type:"string"`
 
 	// The OpsItem status. Status can be Open, In Progress, or Resolved. For more
-	// information, see Editing OpsItem Details (http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html)
+	// information, see Editing OpsItem details (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems.html#OpsCenter-working-with-OpsItems-editing-details)
 	// in the AWS Systems Manager User Guide.
 	Status OpsItemStatus `type:"string" enum:"true"`
 
@@ -136,13 +136,13 @@ const opUpdateOpsItem = "UpdateOpsItem"
 //
 // Edit or change an OpsItem. You must have permission in AWS Identity and Access
 // Management (IAM) to update an OpsItem. For more information, see Getting
-// Started with OpsCenter (http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html)
+// started with OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html)
 // in the AWS Systems Manager User Guide.
 //
 // Operations engineers and IT professionals use OpsCenter to view, investigate,
 // and remediate operational issues impacting the performance and health of
 // their AWS resources. For more information, see AWS Systems Manager OpsCenter
-// (http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html)
+// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html)
 // in the AWS Systems Manager User Guide.
 //
 //    // Example sending a request using UpdateOpsItemRequest.
@@ -165,6 +165,7 @@ func (c *Client) UpdateOpsItemRequest(input *UpdateOpsItemInput) UpdateOpsItemRe
 	}
 
 	req := c.newRequest(op, input, &UpdateOpsItemOutput{})
+
 	return UpdateOpsItemRequest{Request: req, Input: input, Copy: c.UpdateOpsItemRequest}
 }
 

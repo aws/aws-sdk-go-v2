@@ -98,6 +98,7 @@ func (c *Client) GetRelationalDatabaseParametersRequest(input *GetRelationalData
 	}
 
 	req := c.newRequest(op, input, &GetRelationalDatabaseParametersOutput{})
+
 	return GetRelationalDatabaseParametersRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseParametersRequest}
 }
 

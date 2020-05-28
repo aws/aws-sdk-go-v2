@@ -118,6 +118,7 @@ func (c *Client) DescribeCacheClustersRequest(input *DescribeCacheClustersInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeCacheClustersOutput{})
+
 	return DescribeCacheClustersRequest{Request: req, Input: input, Copy: c.DescribeCacheClustersRequest}
 }
 

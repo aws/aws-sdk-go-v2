@@ -109,6 +109,7 @@ func (c *Client) GetIdentityDkimAttributesRequest(input *GetIdentityDkimAttribut
 	}
 
 	req := c.newRequest(op, input, &GetIdentityDkimAttributesOutput{})
+
 	return GetIdentityDkimAttributesRequest{Request: req, Input: input, Copy: c.GetIdentityDkimAttributesRequest}
 }
 

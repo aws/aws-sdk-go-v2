@@ -95,7 +95,9 @@ type StartTranscriptionJobInput struct {
 	Settings *Settings `type:"structure"`
 
 	// The name of the job. Note that you can't use the strings "." or ".." by themselves
-	// as the job name. The name must also be unique within an AWS account.
+	// as the job name. The name must also be unique within an AWS account. If you
+	// try to create a transcription job with the same name as a previous transcription
+	// job you will receive a ConflictException error.
 	//
 	// TranscriptionJobName is a required field
 	TranscriptionJobName *string `min:"1" type:"string" required:"true"`
@@ -190,6 +192,7 @@ func (c *Client) StartTranscriptionJobRequest(input *StartTranscriptionJobInput)
 	}
 
 	req := c.newRequest(op, input, &StartTranscriptionJobOutput{})
+
 	return StartTranscriptionJobRequest{Request: req, Input: input, Copy: c.StartTranscriptionJobRequest}
 }
 

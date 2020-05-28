@@ -121,6 +121,7 @@ func (c *Client) PutConfigurationSetSuppressionOptionsRequest(input *PutConfigur
 	}
 
 	req := c.newRequest(op, input, &PutConfigurationSetSuppressionOptionsOutput{})
+
 	return PutConfigurationSetSuppressionOptionsRequest{Request: req, Input: input, Copy: c.PutConfigurationSetSuppressionOptionsRequest}
 }
 

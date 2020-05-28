@@ -140,6 +140,7 @@ func (c *Client) StartPHIDetectionJobRequest(input *StartPHIDetectionJobInput) S
 	}
 
 	req := c.newRequest(op, input, &StartPHIDetectionJobOutput{})
+
 	return StartPHIDetectionJobRequest{Request: req, Input: input, Copy: c.StartPHIDetectionJobRequest}
 }
 

@@ -101,6 +101,7 @@ func (c *Client) DescribeTaskSetsRequest(input *DescribeTaskSetsInput) DescribeT
 	}
 
 	req := c.newRequest(op, input, &DescribeTaskSetsOutput{})
+
 	return DescribeTaskSetsRequest{Request: req, Input: input, Copy: c.DescribeTaskSetsRequest}
 }
 

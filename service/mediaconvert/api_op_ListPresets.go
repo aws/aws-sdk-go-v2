@@ -168,6 +168,7 @@ func (c *Client) ListPresetsRequest(input *ListPresetsInput) ListPresetsRequest 
 	}
 
 	req := c.newRequest(op, input, &ListPresetsOutput{})
+
 	return ListPresetsRequest{Request: req, Input: input, Copy: c.ListPresetsRequest}
 }
 

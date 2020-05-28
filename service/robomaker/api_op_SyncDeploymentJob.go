@@ -259,6 +259,7 @@ func (c *Client) SyncDeploymentJobRequest(input *SyncDeploymentJobInput) SyncDep
 	}
 
 	req := c.newRequest(op, input, &SyncDeploymentJobOutput{})
+
 	return SyncDeploymentJobRequest{Request: req, Input: input, Copy: c.SyncDeploymentJobRequest}
 }
 

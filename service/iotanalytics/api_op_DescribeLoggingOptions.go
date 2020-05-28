@@ -76,6 +76,7 @@ func (c *Client) DescribeLoggingOptionsRequest(input *DescribeLoggingOptionsInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeLoggingOptionsOutput{})
+
 	return DescribeLoggingOptionsRequest{Request: req, Input: input, Copy: c.DescribeLoggingOptionsRequest}
 }
 

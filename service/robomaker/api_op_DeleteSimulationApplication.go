@@ -107,6 +107,7 @@ func (c *Client) DeleteSimulationApplicationRequest(input *DeleteSimulationAppli
 	}
 
 	req := c.newRequest(op, input, &DeleteSimulationApplicationOutput{})
+
 	return DeleteSimulationApplicationRequest{Request: req, Input: input, Copy: c.DeleteSimulationApplicationRequest}
 }
 

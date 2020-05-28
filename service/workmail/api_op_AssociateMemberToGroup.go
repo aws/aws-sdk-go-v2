@@ -97,6 +97,7 @@ func (c *Client) AssociateMemberToGroupRequest(input *AssociateMemberToGroupInpu
 	}
 
 	req := c.newRequest(op, input, &AssociateMemberToGroupOutput{})
+
 	return AssociateMemberToGroupRequest{Request: req, Input: input, Copy: c.AssociateMemberToGroupRequest}
 }
 

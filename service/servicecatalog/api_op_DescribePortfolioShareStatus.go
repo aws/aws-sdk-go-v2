@@ -94,6 +94,7 @@ func (c *Client) DescribePortfolioShareStatusRequest(input *DescribePortfolioSha
 	}
 
 	req := c.newRequest(op, input, &DescribePortfolioShareStatusOutput{})
+
 	return DescribePortfolioShareStatusRequest{Request: req, Input: input, Copy: c.DescribePortfolioShareStatusRequest}
 }
 

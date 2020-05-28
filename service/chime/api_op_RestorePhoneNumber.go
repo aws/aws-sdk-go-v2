@@ -101,6 +101,7 @@ func (c *Client) RestorePhoneNumberRequest(input *RestorePhoneNumberInput) Resto
 	}
 
 	req := c.newRequest(op, input, &RestorePhoneNumberOutput{})
+
 	return RestorePhoneNumberRequest{Request: req, Input: input, Copy: c.RestorePhoneNumberRequest}
 }
 

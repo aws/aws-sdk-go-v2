@@ -58,6 +58,7 @@ func (c *Client) DescribeLocationsRequest(input *DescribeLocationsInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeLocationsOutput{})
+
 	return DescribeLocationsRequest{Request: req, Input: input, Copy: c.DescribeLocationsRequest}
 }
 

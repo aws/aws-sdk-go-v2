@@ -140,6 +140,7 @@ func (c *Client) ListTargetsForSecurityProfileRequest(input *ListTargetsForSecur
 	}
 
 	req := c.newRequest(op, input, &ListTargetsForSecurityProfileOutput{})
+
 	return ListTargetsForSecurityProfileRequest{Request: req, Input: input, Copy: c.ListTargetsForSecurityProfileRequest}
 }
 

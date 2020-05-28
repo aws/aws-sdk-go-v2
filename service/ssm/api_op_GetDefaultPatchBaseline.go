@@ -68,6 +68,7 @@ func (c *Client) GetDefaultPatchBaselineRequest(input *GetDefaultPatchBaselineIn
 	}
 
 	req := c.newRequest(op, input, &GetDefaultPatchBaselineOutput{})
+
 	return GetDefaultPatchBaselineRequest{Request: req, Input: input, Copy: c.GetDefaultPatchBaselineRequest}
 }
 

@@ -145,6 +145,7 @@ func (c *Client) UpdateDetectorVersionRequest(input *UpdateDetectorVersionInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateDetectorVersionOutput{})
+
 	return UpdateDetectorVersionRequest{Request: req, Input: input, Copy: c.UpdateDetectorVersionRequest}
 }
 

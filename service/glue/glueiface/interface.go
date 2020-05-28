@@ -279,6 +279,8 @@ type ClientAPI interface {
 
 	StopTriggerRequest(*glue.StopTriggerInput) glue.StopTriggerRequest
 
+	StopWorkflowRunRequest(*glue.StopWorkflowRunInput) glue.StopWorkflowRunRequest
+
 	TagResourceRequest(*glue.TagResourceInput) glue.TagResourceRequest
 
 	UntagResourceRequest(*glue.UntagResourceInput) glue.UntagResourceRequest

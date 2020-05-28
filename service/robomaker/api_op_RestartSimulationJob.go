@@ -95,6 +95,7 @@ func (c *Client) RestartSimulationJobRequest(input *RestartSimulationJobInput) R
 	}
 
 	req := c.newRequest(op, input, &RestartSimulationJobOutput{})
+
 	return RestartSimulationJobRequest{Request: req, Input: input, Copy: c.RestartSimulationJobRequest}
 }
 

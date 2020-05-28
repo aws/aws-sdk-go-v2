@@ -96,6 +96,7 @@ func (c *Client) DescribeReceiptRuleRequest(input *DescribeReceiptRuleInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeReceiptRuleOutput{})
+
 	return DescribeReceiptRuleRequest{Request: req, Input: input, Copy: c.DescribeReceiptRuleRequest}
 }
 

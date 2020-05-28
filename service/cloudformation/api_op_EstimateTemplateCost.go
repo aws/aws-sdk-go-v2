@@ -99,6 +99,7 @@ func (c *Client) EstimateTemplateCostRequest(input *EstimateTemplateCostInput) E
 	}
 
 	req := c.newRequest(op, input, &EstimateTemplateCostOutput{})
+
 	return EstimateTemplateCostRequest{Request: req, Input: input, Copy: c.EstimateTemplateCostRequest}
 }
 

@@ -118,6 +118,7 @@ func (c *Client) CreateKeysAndCertificateRequest(input *CreateKeysAndCertificate
 	}
 
 	req := c.newRequest(op, input, &CreateKeysAndCertificateOutput{})
+
 	return CreateKeysAndCertificateRequest{Request: req, Input: input, Copy: c.CreateKeysAndCertificateRequest}
 }
 

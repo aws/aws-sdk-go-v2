@@ -180,6 +180,7 @@ func (c *Client) CreateRobotApplicationVersionRequest(input *CreateRobotApplicat
 	}
 
 	req := c.newRequest(op, input, &CreateRobotApplicationVersionOutput{})
+
 	return CreateRobotApplicationVersionRequest{Request: req, Input: input, Copy: c.CreateRobotApplicationVersionRequest}
 }
 

@@ -129,6 +129,7 @@ func (c *Client) UpdateTrialComponentRequest(input *UpdateTrialComponentInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateTrialComponentOutput{})
+
 	return UpdateTrialComponentRequest{Request: req, Input: input, Copy: c.UpdateTrialComponentRequest}
 }
 

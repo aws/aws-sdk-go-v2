@@ -110,6 +110,7 @@ func (c *Client) DeleteTypeRequest(input *DeleteTypeInput) DeleteTypeRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteTypeOutput{})
+
 	return DeleteTypeRequest{Request: req, Input: input, Copy: c.DeleteTypeRequest}
 }
 

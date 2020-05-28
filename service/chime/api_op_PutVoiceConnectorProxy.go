@@ -163,6 +163,7 @@ func (c *Client) PutVoiceConnectorProxyRequest(input *PutVoiceConnectorProxyInpu
 	}
 
 	req := c.newRequest(op, input, &PutVoiceConnectorProxyOutput{})
+
 	return PutVoiceConnectorProxyRequest{Request: req, Input: input, Copy: c.PutVoiceConnectorProxyRequest}
 }
 

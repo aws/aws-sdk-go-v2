@@ -104,6 +104,7 @@ func (c *Client) DeleteBillingGroupRequest(input *DeleteBillingGroupInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteBillingGroupOutput{})
+
 	return DeleteBillingGroupRequest{Request: req, Input: input, Copy: c.DeleteBillingGroupRequest}
 }
 

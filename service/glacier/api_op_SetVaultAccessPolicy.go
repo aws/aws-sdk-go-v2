@@ -128,6 +128,7 @@ func (c *Client) SetVaultAccessPolicyRequest(input *SetVaultAccessPolicyInput) S
 	req := c.newRequest(op, input, &SetVaultAccessPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetVaultAccessPolicyRequest{Request: req, Input: input, Copy: c.SetVaultAccessPolicyRequest}
 }
 

@@ -129,6 +129,7 @@ func (c *Client) ListMonitoringExecutionsRequest(input *ListMonitoringExecutions
 	}
 
 	req := c.newRequest(op, input, &ListMonitoringExecutionsOutput{})
+
 	return ListMonitoringExecutionsRequest{Request: req, Input: input, Copy: c.ListMonitoringExecutionsRequest}
 }
 

@@ -90,6 +90,7 @@ func (c *Client) StopThingRegistrationTaskRequest(input *StopThingRegistrationTa
 	}
 
 	req := c.newRequest(op, input, &StopThingRegistrationTaskOutput{})
+
 	return StopThingRegistrationTaskRequest{Request: req, Input: input, Copy: c.StopThingRegistrationTaskRequest}
 }
 

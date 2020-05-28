@@ -96,6 +96,7 @@ func (c *Client) ListSubscriptionsByTopicRequest(input *ListSubscriptionsByTopic
 	}
 
 	req := c.newRequest(op, input, &ListSubscriptionsByTopicOutput{})
+
 	return ListSubscriptionsByTopicRequest{Request: req, Input: input, Copy: c.ListSubscriptionsByTopicRequest}
 }
 

@@ -83,6 +83,7 @@ func (c *Client) StopRemoteAccessSessionRequest(input *StopRemoteAccessSessionIn
 	}
 
 	req := c.newRequest(op, input, &StopRemoteAccessSessionOutput{})
+
 	return StopRemoteAccessSessionRequest{Request: req, Input: input, Copy: c.StopRemoteAccessSessionRequest}
 }
 

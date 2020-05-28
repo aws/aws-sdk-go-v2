@@ -293,6 +293,7 @@ func (c *Client) CreateChangeSetRequest(input *CreateChangeSetInput) CreateChang
 	}
 
 	req := c.newRequest(op, input, &CreateChangeSetOutput{})
+
 	return CreateChangeSetRequest{Request: req, Input: input, Copy: c.CreateChangeSetRequest}
 }
 

@@ -289,6 +289,7 @@ func (c *Client) CreateGameServerGroupRequest(input *CreateGameServerGroupInput)
 	}
 
 	req := c.newRequest(op, input, &CreateGameServerGroupOutput{})
+
 	return CreateGameServerGroupRequest{Request: req, Input: input, Copy: c.CreateGameServerGroupRequest}
 }
 

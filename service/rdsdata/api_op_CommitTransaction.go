@@ -140,6 +140,7 @@ func (c *Client) CommitTransactionRequest(input *CommitTransactionInput) CommitT
 	}
 
 	req := c.newRequest(op, input, &CommitTransactionOutput{})
+
 	return CommitTransactionRequest{Request: req, Input: input, Copy: c.CommitTransactionRequest}
 }
 

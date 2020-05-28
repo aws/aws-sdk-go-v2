@@ -95,6 +95,7 @@ func (c *Client) DeleteOutpostRequest(input *DeleteOutpostInput) DeleteOutpostRe
 	}
 
 	req := c.newRequest(op, input, &DeleteOutpostOutput{})
+
 	return DeleteOutpostRequest{Request: req, Input: input, Copy: c.DeleteOutpostRequest}
 }
 

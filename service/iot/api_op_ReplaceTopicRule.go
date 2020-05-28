@@ -119,6 +119,7 @@ func (c *Client) ReplaceTopicRuleRequest(input *ReplaceTopicRuleInput) ReplaceTo
 	req := c.newRequest(op, input, &ReplaceTopicRuleOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return ReplaceTopicRuleRequest{Request: req, Input: input, Copy: c.ReplaceTopicRuleRequest}
 }
 

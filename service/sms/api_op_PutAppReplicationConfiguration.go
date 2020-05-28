@@ -60,6 +60,7 @@ func (c *Client) PutAppReplicationConfigurationRequest(input *PutAppReplicationC
 	}
 
 	req := c.newRequest(op, input, &PutAppReplicationConfigurationOutput{})
+
 	return PutAppReplicationConfigurationRequest{Request: req, Input: input, Copy: c.PutAppReplicationConfigurationRequest}
 }
 

@@ -97,13 +97,13 @@ type PutAlarmInput struct {
 	//
 	// An alarm has the following possible states:
 	//
-	//    * ALARM — The metric is outside of the defined threshold.
+	//    * ALARM - The metric is outside of the defined threshold.
 	//
-	//    * INSUFFICIENT_DATA — The alarm has just started, the metric is not
-	//    available, or not enough data is available for the metric to determine
-	//    the alarm state.
+	//    * INSUFFICIENT_DATA - The alarm has just started, the metric is not available,
+	//    or not enough data is available for the metric to determine the alarm
+	//    state.
 	//
-	//    * OK — The metric is within the defined threshold.
+	//    * OK - The metric is within the defined threshold.
 	//
 	// When you specify a notification trigger, the ALARM state must be specified.
 	// The INSUFFICIENT_DATA and OK states can be specified in addition to the ALARM
@@ -129,16 +129,16 @@ type PutAlarmInput struct {
 	//
 	// An alarm can treat missing data in the following ways:
 	//
-	//    * breaching — Assume the missing data is not within the threshold. Missing
+	//    * breaching - Assume the missing data is not within the threshold. Missing
 	//    data counts towards the number of times the metric is not within the threshold.
 	//
-	//    * notBreaching — Assume the missing data is within the threshold. Missing
+	//    * notBreaching - Assume the missing data is within the threshold. Missing
 	//    data does not count towards the number of times the metric is not within
 	//    the threshold.
 	//
-	//    * ignore — Ignore the missing data. Maintains the current alarm state.
+	//    * ignore - Ignore the missing data. Maintains the current alarm state.
 	//
-	//    * missing — Missing data is treated as missing.
+	//    * missing - Missing data is treated as missing.
 	//
 	// If treatMissingData is not specified, the default behavior of missing is
 	// used.
@@ -186,7 +186,7 @@ type PutAlarmOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
+	// of the request, the timestamp of the request, and the resources affected
 	// by the request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
@@ -236,6 +236,7 @@ func (c *Client) PutAlarmRequest(input *PutAlarmInput) PutAlarmRequest {
 	}
 
 	req := c.newRequest(op, input, &PutAlarmOutput{})
+
 	return PutAlarmRequest{Request: req, Input: input, Copy: c.PutAlarmRequest}
 }
 

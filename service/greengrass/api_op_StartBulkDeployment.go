@@ -163,6 +163,7 @@ func (c *Client) StartBulkDeploymentRequest(input *StartBulkDeploymentInput) Sta
 	}
 
 	req := c.newRequest(op, input, &StartBulkDeploymentOutput{})
+
 	return StartBulkDeploymentRequest{Request: req, Input: input, Copy: c.StartBulkDeploymentRequest}
 }
 

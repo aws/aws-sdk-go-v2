@@ -101,6 +101,7 @@ func (c *Client) DeleteExpressionRequest(input *DeleteExpressionInput) DeleteExp
 	}
 
 	req := c.newRequest(op, input, &DeleteExpressionOutput{})
+
 	return DeleteExpressionRequest{Request: req, Input: input, Copy: c.DeleteExpressionRequest}
 }
 

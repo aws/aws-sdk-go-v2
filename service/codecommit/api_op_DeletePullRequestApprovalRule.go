@@ -99,6 +99,7 @@ func (c *Client) DeletePullRequestApprovalRuleRequest(input *DeletePullRequestAp
 	}
 
 	req := c.newRequest(op, input, &DeletePullRequestApprovalRuleOutput{})
+
 	return DeletePullRequestApprovalRuleRequest{Request: req, Input: input, Copy: c.DeletePullRequestApprovalRuleRequest}
 }
 

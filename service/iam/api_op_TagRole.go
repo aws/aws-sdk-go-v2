@@ -135,6 +135,7 @@ func (c *Client) TagRoleRequest(input *TagRoleInput) TagRoleRequest {
 	req := c.newRequest(op, input, &TagRoleOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return TagRoleRequest{Request: req, Input: input, Copy: c.TagRoleRequest}
 }
 

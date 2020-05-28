@@ -13,7 +13,8 @@ import (
 type GetServiceSettingInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the service setting to get.
+	// The ID of the service setting to get. The setting ID can be /ssm/parameter-store/default-parameter-tier,
+	// /ssm/parameter-store/high-throughput-enabled, or /ssm/managed-instance/activation-tier.
 	//
 	// SettingId is a required field
 	SettingId *string `min:"1" type:"string" required:"true"`
@@ -95,6 +96,7 @@ func (c *Client) GetServiceSettingRequest(input *GetServiceSettingInput) GetServ
 	}
 
 	req := c.newRequest(op, input, &GetServiceSettingOutput{})
+
 	return GetServiceSettingRequest{Request: req, Input: input, Copy: c.GetServiceSettingRequest}
 }
 

@@ -89,6 +89,7 @@ func (c *Client) ModifyClusterDbRevisionRequest(input *ModifyClusterDbRevisionIn
 	}
 
 	req := c.newRequest(op, input, &ModifyClusterDbRevisionOutput{})
+
 	return ModifyClusterDbRevisionRequest{Request: req, Input: input, Copy: c.ModifyClusterDbRevisionRequest}
 }
 

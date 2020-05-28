@@ -148,6 +148,7 @@ func (c *Client) DescribeHyperParameterTuningJobRequest(input *DescribeHyperPara
 	}
 
 	req := c.newRequest(op, input, &DescribeHyperParameterTuningJobOutput{})
+
 	return DescribeHyperParameterTuningJobRequest{Request: req, Input: input, Copy: c.DescribeHyperParameterTuningJobRequest}
 }
 

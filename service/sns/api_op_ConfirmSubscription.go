@@ -97,6 +97,7 @@ func (c *Client) ConfirmSubscriptionRequest(input *ConfirmSubscriptionInput) Con
 	}
 
 	req := c.newRequest(op, input, &ConfirmSubscriptionOutput{})
+
 	return ConfirmSubscriptionRequest{Request: req, Input: input, Copy: c.ConfirmSubscriptionRequest}
 }
 

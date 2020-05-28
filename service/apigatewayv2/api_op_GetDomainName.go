@@ -140,6 +140,7 @@ func (c *Client) GetDomainNameRequest(input *GetDomainNameInput) GetDomainNameRe
 	}
 
 	req := c.newRequest(op, input, &GetDomainNameOutput{})
+
 	return GetDomainNameRequest{Request: req, Input: input, Copy: c.GetDomainNameRequest}
 }
 

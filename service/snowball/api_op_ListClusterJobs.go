@@ -98,6 +98,7 @@ func (c *Client) ListClusterJobsRequest(input *ListClusterJobsInput) ListCluster
 	}
 
 	req := c.newRequest(op, input, &ListClusterJobsOutput{})
+
 	return ListClusterJobsRequest{Request: req, Input: input, Copy: c.ListClusterJobsRequest}
 }
 

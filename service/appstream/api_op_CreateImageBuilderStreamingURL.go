@@ -87,6 +87,7 @@ func (c *Client) CreateImageBuilderStreamingURLRequest(input *CreateImageBuilder
 	}
 
 	req := c.newRequest(op, input, &CreateImageBuilderStreamingURLOutput{})
+
 	return CreateImageBuilderStreamingURLRequest{Request: req, Input: input, Copy: c.CreateImageBuilderStreamingURLRequest}
 }
 

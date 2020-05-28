@@ -76,6 +76,7 @@ func (c *Client) DeleteProtectionRequest(input *DeleteProtectionInput) DeletePro
 	}
 
 	req := c.newRequest(op, input, &DeleteProtectionOutput{})
+
 	return DeleteProtectionRequest{Request: req, Input: input, Copy: c.DeleteProtectionRequest}
 }
 

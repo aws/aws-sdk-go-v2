@@ -113,6 +113,7 @@ func (c *Client) DeregisterContainerInstanceRequest(input *DeregisterContainerIn
 	}
 
 	req := c.newRequest(op, input, &DeregisterContainerInstanceOutput{})
+
 	return DeregisterContainerInstanceRequest{Request: req, Input: input, Copy: c.DeregisterContainerInstanceRequest}
 }
 

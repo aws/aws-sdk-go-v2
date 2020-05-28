@@ -79,6 +79,7 @@ func (c *Client) ResetJobBookmarkRequest(input *ResetJobBookmarkInput) ResetJobB
 	}
 
 	req := c.newRequest(op, input, &ResetJobBookmarkOutput{})
+
 	return ResetJobBookmarkRequest{Request: req, Input: input, Copy: c.ResetJobBookmarkRequest}
 }
 

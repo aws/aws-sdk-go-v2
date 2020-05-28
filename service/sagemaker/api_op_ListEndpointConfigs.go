@@ -109,6 +109,7 @@ func (c *Client) ListEndpointConfigsRequest(input *ListEndpointConfigsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListEndpointConfigsOutput{})
+
 	return ListEndpointConfigsRequest{Request: req, Input: input, Copy: c.ListEndpointConfigsRequest}
 }
 

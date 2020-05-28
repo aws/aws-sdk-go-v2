@@ -180,6 +180,7 @@ func (c *Client) CreateReplicationTaskRequest(input *CreateReplicationTaskInput)
 	}
 
 	req := c.newRequest(op, input, &CreateReplicationTaskOutput{})
+
 	return CreateReplicationTaskRequest{Request: req, Input: input, Copy: c.CreateReplicationTaskRequest}
 }
 

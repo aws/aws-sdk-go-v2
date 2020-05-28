@@ -122,6 +122,7 @@ func (c *Client) ListDimensionsRequest(input *ListDimensionsInput) ListDimension
 	}
 
 	req := c.newRequest(op, input, &ListDimensionsOutput{})
+
 	return ListDimensionsRequest{Request: req, Input: input, Copy: c.ListDimensionsRequest}
 }
 

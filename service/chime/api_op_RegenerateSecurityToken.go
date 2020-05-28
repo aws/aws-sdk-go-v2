@@ -117,6 +117,7 @@ func (c *Client) RegenerateSecurityTokenRequest(input *RegenerateSecurityTokenIn
 	}
 
 	req := c.newRequest(op, input, &RegenerateSecurityTokenOutput{})
+
 	return RegenerateSecurityTokenRequest{Request: req, Input: input, Copy: c.RegenerateSecurityTokenRequest}
 }
 

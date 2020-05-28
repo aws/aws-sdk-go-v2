@@ -178,6 +178,7 @@ func (c *Client) GetPublicKeyRequest(input *GetPublicKeyInput) GetPublicKeyReque
 	}
 
 	req := c.newRequest(op, input, &GetPublicKeyOutput{})
+
 	return GetPublicKeyRequest{Request: req, Input: input, Copy: c.GetPublicKeyRequest}
 }
 

@@ -197,6 +197,7 @@ func (c *Client) ListBucketAnalyticsConfigurationsRequest(input *ListBucketAnaly
 	}
 
 	req := c.newRequest(op, input, &ListBucketAnalyticsConfigurationsOutput{})
+
 	return ListBucketAnalyticsConfigurationsRequest{Request: req, Input: input, Copy: c.ListBucketAnalyticsConfigurationsRequest}
 }
 

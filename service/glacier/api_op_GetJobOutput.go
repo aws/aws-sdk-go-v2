@@ -283,6 +283,7 @@ func (c *Client) GetJobOutputRequest(input *GetJobOutputInput) GetJobOutputReque
 	}
 
 	req := c.newRequest(op, input, &GetJobOutputOutput{})
+
 	return GetJobOutputRequest{Request: req, Input: input, Copy: c.GetJobOutputRequest}
 }
 

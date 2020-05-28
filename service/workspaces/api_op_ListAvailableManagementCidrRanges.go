@@ -102,6 +102,7 @@ func (c *Client) ListAvailableManagementCidrRangesRequest(input *ListAvailableMa
 	}
 
 	req := c.newRequest(op, input, &ListAvailableManagementCidrRangesOutput{})
+
 	return ListAvailableManagementCidrRangesRequest{Request: req, Input: input, Copy: c.ListAvailableManagementCidrRangesRequest}
 }
 

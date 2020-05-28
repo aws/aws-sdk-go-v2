@@ -135,6 +135,7 @@ func (c *Client) CreateCapacityProviderRequest(input *CreateCapacityProviderInpu
 	}
 
 	req := c.newRequest(op, input, &CreateCapacityProviderOutput{})
+
 	return CreateCapacityProviderRequest{Request: req, Input: input, Copy: c.CreateCapacityProviderRequest}
 }
 

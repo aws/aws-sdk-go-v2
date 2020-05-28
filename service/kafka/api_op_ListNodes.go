@@ -142,6 +142,7 @@ func (c *Client) ListNodesRequest(input *ListNodesInput) ListNodesRequest {
 	}
 
 	req := c.newRequest(op, input, &ListNodesOutput{})
+
 	return ListNodesRequest{Request: req, Input: input, Copy: c.ListNodesRequest}
 }
 

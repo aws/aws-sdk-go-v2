@@ -89,6 +89,7 @@ func (c *Client) DescribeHandshakeRequest(input *DescribeHandshakeInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeHandshakeOutput{})
+
 	return DescribeHandshakeRequest{Request: req, Input: input, Copy: c.DescribeHandshakeRequest}
 }
 

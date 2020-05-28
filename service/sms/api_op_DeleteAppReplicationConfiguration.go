@@ -57,6 +57,7 @@ func (c *Client) DeleteAppReplicationConfigurationRequest(input *DeleteAppReplic
 	}
 
 	req := c.newRequest(op, input, &DeleteAppReplicationConfigurationOutput{})
+
 	return DeleteAppReplicationConfigurationRequest{Request: req, Input: input, Copy: c.DeleteAppReplicationConfigurationRequest}
 }
 

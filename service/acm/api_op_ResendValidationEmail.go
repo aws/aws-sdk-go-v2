@@ -136,6 +136,7 @@ func (c *Client) ResendValidationEmailRequest(input *ResendValidationEmailInput)
 	req := c.newRequest(op, input, &ResendValidationEmailOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return ResendValidationEmailRequest{Request: req, Input: input, Copy: c.ResendValidationEmailRequest}
 }
 

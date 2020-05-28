@@ -137,6 +137,7 @@ func (c *Client) PutRecommendationFeedbackRequest(input *PutRecommendationFeedba
 	}
 
 	req := c.newRequest(op, input, &PutRecommendationFeedbackOutput{})
+
 	return PutRecommendationFeedbackRequest{Request: req, Input: input, Copy: c.PutRecommendationFeedbackRequest}
 }
 

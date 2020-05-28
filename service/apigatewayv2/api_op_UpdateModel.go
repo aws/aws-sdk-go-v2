@@ -184,6 +184,7 @@ func (c *Client) UpdateModelRequest(input *UpdateModelInput) UpdateModelRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateModelOutput{})
+
 	return UpdateModelRequest{Request: req, Input: input, Copy: c.UpdateModelRequest}
 }
 

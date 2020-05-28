@@ -166,6 +166,7 @@ func (c *Client) ListSuppressedDestinationsRequest(input *ListSuppressedDestinat
 	}
 
 	req := c.newRequest(op, input, &ListSuppressedDestinationsOutput{})
+
 	return ListSuppressedDestinationsRequest{Request: req, Input: input, Copy: c.ListSuppressedDestinationsRequest}
 }
 

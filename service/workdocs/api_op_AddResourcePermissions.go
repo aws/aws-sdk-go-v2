@@ -162,6 +162,7 @@ func (c *Client) AddResourcePermissionsRequest(input *AddResourcePermissionsInpu
 	}
 
 	req := c.newRequest(op, input, &AddResourcePermissionsOutput{})
+
 	return AddResourcePermissionsRequest{Request: req, Input: input, Copy: c.AddResourcePermissionsRequest}
 }
 

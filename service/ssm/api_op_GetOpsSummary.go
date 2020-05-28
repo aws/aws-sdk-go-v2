@@ -129,6 +129,7 @@ func (c *Client) GetOpsSummaryRequest(input *GetOpsSummaryInput) GetOpsSummaryRe
 	}
 
 	req := c.newRequest(op, input, &GetOpsSummaryOutput{})
+
 	return GetOpsSummaryRequest{Request: req, Input: input, Copy: c.GetOpsSummaryRequest}
 }
 

@@ -102,6 +102,7 @@ func (c *Client) ListEndpointsByPlatformApplicationRequest(input *ListEndpointsB
 	}
 
 	req := c.newRequest(op, input, &ListEndpointsByPlatformApplicationOutput{})
+
 	return ListEndpointsByPlatformApplicationRequest{Request: req, Input: input, Copy: c.ListEndpointsByPlatformApplicationRequest}
 }
 

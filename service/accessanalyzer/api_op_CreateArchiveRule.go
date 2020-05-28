@@ -162,6 +162,7 @@ func (c *Client) CreateArchiveRuleRequest(input *CreateArchiveRuleInput) CreateA
 	req := c.newRequest(op, input, &CreateArchiveRuleOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CreateArchiveRuleRequest{Request: req, Input: input, Copy: c.CreateArchiveRuleRequest}
 }
 

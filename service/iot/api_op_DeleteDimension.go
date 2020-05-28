@@ -93,6 +93,7 @@ func (c *Client) DeleteDimensionRequest(input *DeleteDimensionInput) DeleteDimen
 	}
 
 	req := c.newRequest(op, input, &DeleteDimensionOutput{})
+
 	return DeleteDimensionRequest{Request: req, Input: input, Copy: c.DeleteDimensionRequest}
 }
 

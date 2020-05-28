@@ -98,6 +98,7 @@ func (c *Client) ModifyDocumentPermissionRequest(input *ModifyDocumentPermission
 	}
 
 	req := c.newRequest(op, input, &ModifyDocumentPermissionOutput{})
+
 	return ModifyDocumentPermissionRequest{Request: req, Input: input, Copy: c.ModifyDocumentPermissionRequest}
 }
 

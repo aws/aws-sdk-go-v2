@@ -117,6 +117,7 @@ func (c *Client) PutPolicyRequest(input *PutPolicyInput) PutPolicyRequest {
 	}
 
 	req := c.newRequest(op, input, &PutPolicyOutput{})
+
 	return PutPolicyRequest{Request: req, Input: input, Copy: c.PutPolicyRequest}
 }
 

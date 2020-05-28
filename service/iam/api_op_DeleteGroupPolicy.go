@@ -107,6 +107,7 @@ func (c *Client) DeleteGroupPolicyRequest(input *DeleteGroupPolicyInput) DeleteG
 	req := c.newRequest(op, input, &DeleteGroupPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteGroupPolicyRequest{Request: req, Input: input, Copy: c.DeleteGroupPolicyRequest}
 }
 

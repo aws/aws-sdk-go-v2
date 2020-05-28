@@ -84,6 +84,7 @@ func (c *Client) CreateDomainRequest(input *CreateDomainInput) CreateDomainReque
 	req := c.newRequest(op, input, &CreateDomainOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CreateDomainRequest{Request: req, Input: input, Copy: c.CreateDomainRequest}
 }
 

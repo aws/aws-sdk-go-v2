@@ -79,6 +79,7 @@ func (c *Client) GetSolutionMetricsRequest(input *GetSolutionMetricsInput) GetSo
 	}
 
 	req := c.newRequest(op, input, &GetSolutionMetricsOutput{})
+
 	return GetSolutionMetricsRequest{Request: req, Input: input, Copy: c.GetSolutionMetricsRequest}
 }
 

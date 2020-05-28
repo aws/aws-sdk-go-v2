@@ -90,6 +90,7 @@ func (c *Client) IncreaseReplicationFactorRequest(input *IncreaseReplicationFact
 	}
 
 	req := c.newRequest(op, input, &IncreaseReplicationFactorOutput{})
+
 	return IncreaseReplicationFactorRequest{Request: req, Input: input, Copy: c.IncreaseReplicationFactorRequest}
 }
 

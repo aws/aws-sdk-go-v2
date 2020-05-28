@@ -112,6 +112,7 @@ func (c *Client) DeleteCertificateAuthorityRequest(input *DeleteCertificateAutho
 	req := c.newRequest(op, input, &DeleteCertificateAuthorityOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteCertificateAuthorityRequest{Request: req, Input: input, Copy: c.DeleteCertificateAuthorityRequest}
 }
 

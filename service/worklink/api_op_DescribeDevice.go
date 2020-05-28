@@ -197,6 +197,7 @@ func (c *Client) DescribeDeviceRequest(input *DescribeDeviceInput) DescribeDevic
 	}
 
 	req := c.newRequest(op, input, &DescribeDeviceOutput{})
+
 	return DescribeDeviceRequest{Request: req, Input: input, Copy: c.DescribeDeviceRequest}
 }
 

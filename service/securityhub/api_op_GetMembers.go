@@ -131,6 +131,7 @@ func (c *Client) GetMembersRequest(input *GetMembersInput) GetMembersRequest {
 	}
 
 	req := c.newRequest(op, input, &GetMembersOutput{})
+
 	return GetMembersRequest{Request: req, Input: input, Copy: c.GetMembersRequest}
 }
 

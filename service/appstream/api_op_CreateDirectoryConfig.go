@@ -102,6 +102,7 @@ func (c *Client) CreateDirectoryConfigRequest(input *CreateDirectoryConfigInput)
 	}
 
 	req := c.newRequest(op, input, &CreateDirectoryConfigOutput{})
+
 	return CreateDirectoryConfigRequest{Request: req, Input: input, Copy: c.CreateDirectoryConfigRequest}
 }
 

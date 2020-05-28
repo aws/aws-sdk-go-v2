@@ -82,6 +82,7 @@ func (c *Client) DescribeEntitiesDetectionJobRequest(input *DescribeEntitiesDete
 	}
 
 	req := c.newRequest(op, input, &DescribeEntitiesDetectionJobOutput{})
+
 	return DescribeEntitiesDetectionJobRequest{Request: req, Input: input, Copy: c.DescribeEntitiesDetectionJobRequest}
 }
 

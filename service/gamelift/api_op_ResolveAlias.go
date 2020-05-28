@@ -95,6 +95,7 @@ func (c *Client) ResolveAliasRequest(input *ResolveAliasInput) ResolveAliasReque
 	}
 
 	req := c.newRequest(op, input, &ResolveAliasOutput{})
+
 	return ResolveAliasRequest{Request: req, Input: input, Copy: c.ResolveAliasRequest}
 }
 

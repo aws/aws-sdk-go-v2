@@ -105,6 +105,7 @@ func (c *Client) DescribeRepositoryAssociationRequest(input *DescribeRepositoryA
 	}
 
 	req := c.newRequest(op, input, &DescribeRepositoryAssociationOutput{})
+
 	return DescribeRepositoryAssociationRequest{Request: req, Input: input, Copy: c.DescribeRepositoryAssociationRequest}
 }
 

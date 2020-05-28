@@ -111,6 +111,7 @@ func (c *Client) DeleteEnvironmentRequest(input *DeleteEnvironmentInput) DeleteE
 	req := c.newRequest(op, input, &DeleteEnvironmentOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteEnvironmentRequest{Request: req, Input: input, Copy: c.DeleteEnvironmentRequest}
 }
 

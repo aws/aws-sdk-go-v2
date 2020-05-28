@@ -123,6 +123,7 @@ func (c *Client) DescribeDBLogFilesRequest(input *DescribeDBLogFilesInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeDBLogFilesOutput{})
+
 	return DescribeDBLogFilesRequest{Request: req, Input: input, Copy: c.DescribeDBLogFilesRequest}
 }
 

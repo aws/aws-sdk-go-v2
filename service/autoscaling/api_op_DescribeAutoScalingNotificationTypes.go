@@ -57,6 +57,7 @@ func (c *Client) DescribeAutoScalingNotificationTypesRequest(input *DescribeAuto
 	}
 
 	req := c.newRequest(op, input, &DescribeAutoScalingNotificationTypesOutput{})
+
 	return DescribeAutoScalingNotificationTypesRequest{Request: req, Input: input, Copy: c.DescribeAutoScalingNotificationTypesRequest}
 }
 

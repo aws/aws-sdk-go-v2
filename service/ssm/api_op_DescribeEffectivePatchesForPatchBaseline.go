@@ -95,6 +95,7 @@ func (c *Client) DescribeEffectivePatchesForPatchBaselineRequest(input *Describe
 	}
 
 	req := c.newRequest(op, input, &DescribeEffectivePatchesForPatchBaselineOutput{})
+
 	return DescribeEffectivePatchesForPatchBaselineRequest{Request: req, Input: input, Copy: c.DescribeEffectivePatchesForPatchBaselineRequest}
 }
 

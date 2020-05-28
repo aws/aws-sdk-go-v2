@@ -105,6 +105,7 @@ func (c *Client) AssociatePrincipalWithPortfolioRequest(input *AssociatePrincipa
 	}
 
 	req := c.newRequest(op, input, &AssociatePrincipalWithPortfolioOutput{})
+
 	return AssociatePrincipalWithPortfolioRequest{Request: req, Input: input, Copy: c.AssociatePrincipalWithPortfolioRequest}
 }
 

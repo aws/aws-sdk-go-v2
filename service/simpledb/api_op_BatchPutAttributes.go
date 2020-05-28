@@ -145,6 +145,7 @@ func (c *Client) BatchPutAttributesRequest(input *BatchPutAttributesInput) Batch
 	req := c.newRequest(op, input, &BatchPutAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return BatchPutAttributesRequest{Request: req, Input: input, Copy: c.BatchPutAttributesRequest}
 }
 

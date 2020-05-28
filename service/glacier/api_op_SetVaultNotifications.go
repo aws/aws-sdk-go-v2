@@ -154,6 +154,7 @@ func (c *Client) SetVaultNotificationsRequest(input *SetVaultNotificationsInput)
 	req := c.newRequest(op, input, &SetVaultNotificationsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetVaultNotificationsRequest{Request: req, Input: input, Copy: c.SetVaultNotificationsRequest}
 }
 

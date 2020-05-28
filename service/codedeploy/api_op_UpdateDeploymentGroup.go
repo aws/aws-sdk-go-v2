@@ -82,7 +82,7 @@ type UpdateDeploymentGroupInput struct {
 	ServiceRoleArn *string `locationName:"serviceRoleArn" type:"string"`
 
 	// Information about triggers to change when the deployment group is updated.
-	// For examples, see Modify Triggers in an AWS CodeDeploy Deployment Group (https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html)
+	// For examples, see Edit a Trigger in a CodeDeploy Deployment Group (https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html)
 	// in the AWS CodeDeploy User Guide.
 	TriggerConfigurations []TriggerConfig `locationName:"triggerConfigurations" type:"list"`
 }
@@ -166,6 +166,7 @@ func (c *Client) UpdateDeploymentGroupRequest(input *UpdateDeploymentGroupInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateDeploymentGroupOutput{})
+
 	return UpdateDeploymentGroupRequest{Request: req, Input: input, Copy: c.UpdateDeploymentGroupRequest}
 }
 

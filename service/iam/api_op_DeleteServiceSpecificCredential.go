@@ -97,6 +97,7 @@ func (c *Client) DeleteServiceSpecificCredentialRequest(input *DeleteServiceSpec
 	req := c.newRequest(op, input, &DeleteServiceSpecificCredentialOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteServiceSpecificCredentialRequest{Request: req, Input: input, Copy: c.DeleteServiceSpecificCredentialRequest}
 }
 

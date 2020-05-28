@@ -98,6 +98,7 @@ func (c *Client) AddCacheRequest(input *AddCacheInput) AddCacheRequest {
 	}
 
 	req := c.newRequest(op, input, &AddCacheOutput{})
+
 	return AddCacheRequest{Request: req, Input: input, Copy: c.AddCacheRequest}
 }
 

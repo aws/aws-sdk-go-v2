@@ -118,6 +118,7 @@ func (c *Client) GetSegmentsRequest(input *GetSegmentsInput) GetSegmentsRequest 
 	}
 
 	req := c.newRequest(op, input, &GetSegmentsOutput{})
+
 	return GetSegmentsRequest{Request: req, Input: input, Copy: c.GetSegmentsRequest}
 }
 

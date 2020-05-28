@@ -110,6 +110,7 @@ func (c *Client) CancelElasticsearchServiceSoftwareUpdateRequest(input *CancelEl
 	}
 
 	req := c.newRequest(op, input, &CancelElasticsearchServiceSoftwareUpdateOutput{})
+
 	return CancelElasticsearchServiceSoftwareUpdateRequest{Request: req, Input: input, Copy: c.CancelElasticsearchServiceSoftwareUpdateRequest}
 }
 

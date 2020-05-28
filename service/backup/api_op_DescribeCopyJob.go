@@ -13,7 +13,7 @@ import (
 type DescribeCopyJobInput struct {
 	_ struct{} `type:"structure"`
 
-	// Uniquely identifies a request to AWS Backup to copy a resource.
+	// Uniquely identifies a copy job.
 	//
 	// CopyJobId is a required field
 	CopyJobId *string `location:"uri" locationName:"copyJobId" type:"string" required:"true"`
@@ -101,6 +101,7 @@ func (c *Client) DescribeCopyJobRequest(input *DescribeCopyJobInput) DescribeCop
 	}
 
 	req := c.newRequest(op, input, &DescribeCopyJobOutput{})
+
 	return DescribeCopyJobRequest{Request: req, Input: input, Copy: c.DescribeCopyJobRequest}
 }
 

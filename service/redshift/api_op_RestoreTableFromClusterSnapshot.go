@@ -136,6 +136,7 @@ func (c *Client) RestoreTableFromClusterSnapshotRequest(input *RestoreTableFromC
 	}
 
 	req := c.newRequest(op, input, &RestoreTableFromClusterSnapshotOutput{})
+
 	return RestoreTableFromClusterSnapshotRequest{Request: req, Input: input, Copy: c.RestoreTableFromClusterSnapshotRequest}
 }
 

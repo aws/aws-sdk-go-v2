@@ -79,6 +79,7 @@ func (c *Client) DescribeAccountModificationsRequest(input *DescribeAccountModif
 	}
 
 	req := c.newRequest(op, input, &DescribeAccountModificationsOutput{})
+
 	return DescribeAccountModificationsRequest{Request: req, Input: input, Copy: c.DescribeAccountModificationsRequest}
 }
 

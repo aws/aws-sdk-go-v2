@@ -87,6 +87,7 @@ func (c *Client) LeaveOrganizationRequest(input *LeaveOrganizationInput) LeaveOr
 	req := c.newRequest(op, input, &LeaveOrganizationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return LeaveOrganizationRequest{Request: req, Input: input, Copy: c.LeaveOrganizationRequest}
 }
 

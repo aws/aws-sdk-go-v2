@@ -89,6 +89,7 @@ func (c *Client) DescribeScalingParametersRequest(input *DescribeScalingParamete
 	}
 
 	req := c.newRequest(op, input, &DescribeScalingParametersOutput{})
+
 	return DescribeScalingParametersRequest{Request: req, Input: input, Copy: c.DescribeScalingParametersRequest}
 }
 

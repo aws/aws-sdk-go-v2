@@ -158,6 +158,7 @@ func (c *Client) GetRecordsRequest(input *GetRecordsInput) GetRecordsRequest {
 	}
 
 	req := c.newRequest(op, input, &GetRecordsOutput{})
+
 	return GetRecordsRequest{Request: req, Input: input, Copy: c.GetRecordsRequest}
 }
 

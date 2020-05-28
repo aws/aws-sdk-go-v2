@@ -161,6 +161,7 @@ func (c *Client) DeleteGroupMembershipRequest(input *DeleteGroupMembershipInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteGroupMembershipOutput{})
+
 	return DeleteGroupMembershipRequest{Request: req, Input: input, Copy: c.DeleteGroupMembershipRequest}
 }
 

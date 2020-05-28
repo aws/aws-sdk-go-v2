@@ -106,6 +106,7 @@ func (c *Client) StartDiscovererRequest(input *StartDiscovererInput) StartDiscov
 	}
 
 	req := c.newRequest(op, input, &StartDiscovererOutput{})
+
 	return StartDiscovererRequest{Request: req, Input: input, Copy: c.StartDiscovererRequest}
 }
 

@@ -182,6 +182,11 @@ type Component struct {
 	// The platform of the component.
 	Platform Platform `locationName:"platform" type:"string" enum:"true"`
 
+	// The operating system (OS) version supported by the component. If the OS information
+	// is available, a prefix match is performed against the parent image OS version
+	// during image recipe creation.
+	SupportedOsVersions []string `locationName:"supportedOsVersions" min:"1" type:"list"`
+
 	// The tags associated with the component.
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 
@@ -259,6 +264,18 @@ func (s Component) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "platform", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.SupportedOsVersions != nil {
+		v := s.SupportedOsVersions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "supportedOsVersions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	if s.Tags != nil {
 		v := s.Tags
@@ -352,6 +369,11 @@ type ComponentSummary struct {
 	// The platform of the component.
 	Platform Platform `locationName:"platform" type:"string" enum:"true"`
 
+	// The operating system (OS) version supported by the component. If the OS information
+	// is available, a prefix match is performed against the parent image OS version
+	// during image recipe creation.
+	SupportedOsVersions []string `locationName:"supportedOsVersions" min:"1" type:"list"`
+
 	// The tags associated with the component.
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 
@@ -412,6 +434,18 @@ func (s ComponentSummary) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "platform", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.SupportedOsVersions != nil {
+		v := s.SupportedOsVersions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "supportedOsVersions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	if s.Tags != nil {
 		v := s.Tags
 
@@ -460,6 +494,11 @@ type ComponentVersion struct {
 
 	// The platform of the component.
 	Platform Platform `locationName:"platform" type:"string" enum:"true"`
+
+	// The operating system (OS) version supported by the component. If the OS information
+	// is available, a prefix match is performed against the parent image OS version
+	// during image recipe creation.
+	SupportedOsVersions []string `locationName:"supportedOsVersions" min:"1" type:"list"`
 
 	// The type of the component denotes whether the component is used to build
 	// the image or only to test it.
@@ -511,6 +550,18 @@ func (s ComponentVersion) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "platform", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.SupportedOsVersions != nil {
+		v := s.SupportedOsVersions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "supportedOsVersions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	if len(s.Type) > 0 {
 		v := s.Type

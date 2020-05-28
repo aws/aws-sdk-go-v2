@@ -168,6 +168,7 @@ func (c *Client) GetConfigurationSetRequest(input *GetConfigurationSetInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetConfigurationSetOutput{})
+
 	return GetConfigurationSetRequest{Request: req, Input: input, Copy: c.GetConfigurationSetRequest}
 }
 

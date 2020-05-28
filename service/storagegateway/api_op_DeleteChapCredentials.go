@@ -103,6 +103,7 @@ func (c *Client) DeleteChapCredentialsRequest(input *DeleteChapCredentialsInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteChapCredentialsOutput{})
+
 	return DeleteChapCredentialsRequest{Request: req, Input: input, Copy: c.DeleteChapCredentialsRequest}
 }
 

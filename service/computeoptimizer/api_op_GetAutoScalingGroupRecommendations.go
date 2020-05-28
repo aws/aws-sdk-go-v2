@@ -100,6 +100,7 @@ func (c *Client) GetAutoScalingGroupRecommendationsRequest(input *GetAutoScaling
 	}
 
 	req := c.newRequest(op, input, &GetAutoScalingGroupRecommendationsOutput{})
+
 	return GetAutoScalingGroupRecommendationsRequest{Request: req, Input: input, Copy: c.GetAutoScalingGroupRecommendationsRequest}
 }
 

@@ -90,6 +90,7 @@ func (c *Client) BatchGetRepositoriesRequest(input *BatchGetRepositoriesInput) B
 	}
 
 	req := c.newRequest(op, input, &BatchGetRepositoriesOutput{})
+
 	return BatchGetRepositoriesRequest{Request: req, Input: input, Copy: c.BatchGetRepositoriesRequest}
 }
 

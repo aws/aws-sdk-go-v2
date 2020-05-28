@@ -88,6 +88,7 @@ func (c *Client) UpdateTagOptionRequest(input *UpdateTagOptionInput) UpdateTagOp
 	}
 
 	req := c.newRequest(op, input, &UpdateTagOptionOutput{})
+
 	return UpdateTagOptionRequest{Request: req, Input: input, Copy: c.UpdateTagOptionRequest}
 }
 

@@ -137,6 +137,7 @@ func (c *Client) DescribeScheduleRequest(input *DescribeScheduleInput) DescribeS
 	}
 
 	req := c.newRequest(op, input, &DescribeScheduleOutput{})
+
 	return DescribeScheduleRequest{Request: req, Input: input, Copy: c.DescribeScheduleRequest}
 }
 

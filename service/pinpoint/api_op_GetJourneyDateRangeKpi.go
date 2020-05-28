@@ -164,6 +164,7 @@ func (c *Client) GetJourneyDateRangeKpiRequest(input *GetJourneyDateRangeKpiInpu
 	}
 
 	req := c.newRequest(op, input, &GetJourneyDateRangeKpiOutput{})
+
 	return GetJourneyDateRangeKpiRequest{Request: req, Input: input, Copy: c.GetJourneyDateRangeKpiRequest}
 }
 

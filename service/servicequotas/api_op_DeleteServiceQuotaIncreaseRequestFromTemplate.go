@@ -100,6 +100,7 @@ func (c *Client) DeleteServiceQuotaIncreaseRequestFromTemplateRequest(input *Del
 	}
 
 	req := c.newRequest(op, input, &DeleteServiceQuotaIncreaseRequestFromTemplateOutput{})
+
 	return DeleteServiceQuotaIncreaseRequestFromTemplateRequest{Request: req, Input: input, Copy: c.DeleteServiceQuotaIncreaseRequestFromTemplateRequest}
 }
 

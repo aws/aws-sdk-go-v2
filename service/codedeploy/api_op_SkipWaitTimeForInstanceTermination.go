@@ -66,6 +66,7 @@ func (c *Client) SkipWaitTimeForInstanceTerminationRequest(input *SkipWaitTimeFo
 	req := c.newRequest(op, input, &SkipWaitTimeForInstanceTerminationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SkipWaitTimeForInstanceTerminationRequest{Request: req, Input: input, Copy: c.SkipWaitTimeForInstanceTerminationRequest}
 }
 

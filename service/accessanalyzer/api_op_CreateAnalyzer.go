@@ -175,6 +175,7 @@ func (c *Client) CreateAnalyzerRequest(input *CreateAnalyzerInput) CreateAnalyze
 	}
 
 	req := c.newRequest(op, input, &CreateAnalyzerOutput{})
+
 	return CreateAnalyzerRequest{Request: req, Input: input, Copy: c.CreateAnalyzerRequest}
 }
 

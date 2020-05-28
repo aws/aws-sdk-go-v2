@@ -99,6 +99,7 @@ func (c *Client) CreateEnvironmentMembershipRequest(input *CreateEnvironmentMemb
 	}
 
 	req := c.newRequest(op, input, &CreateEnvironmentMembershipOutput{})
+
 	return CreateEnvironmentMembershipRequest{Request: req, Input: input, Copy: c.CreateEnvironmentMembershipRequest}
 }
 

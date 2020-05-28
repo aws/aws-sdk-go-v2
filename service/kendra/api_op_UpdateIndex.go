@@ -15,6 +15,14 @@ import (
 type UpdateIndexInput struct {
 	_ struct{} `type:"structure"`
 
+	// Sets the number of addtional storage and query capacity units that should
+	// be used by the index. You can change the capacity of the index up to 5 times
+	// per day.
+	//
+	// If you are using extra storage units, you can't reduce the storage capacity
+	// below that required to meet the storage needs for your index.
+	CapacityUnits *CapacityUnitsConfiguration `type:"structure"`
+
 	// A new description for the index.
 	Description *string `min:"1" type:"string"`
 
@@ -57,6 +65,11 @@ func (s *UpdateIndexInput) Validate() error {
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
+	}
+	if s.CapacityUnits != nil {
+		if err := s.CapacityUnits.Validate(); err != nil {
+			invalidParams.AddNested("CapacityUnits", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.DocumentMetadataConfigurationUpdates != nil {
 		for i, v := range s.DocumentMetadataConfigurationUpdates {
@@ -110,6 +123,7 @@ func (c *Client) UpdateIndexRequest(input *UpdateIndexInput) UpdateIndexRequest 
 	req := c.newRequest(op, input, &UpdateIndexOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateIndexRequest{Request: req, Input: input, Copy: c.UpdateIndexRequest}
 }
 

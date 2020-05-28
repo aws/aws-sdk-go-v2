@@ -197,6 +197,7 @@ func (c *Client) CreateCachediSCSIVolumeRequest(input *CreateCachediSCSIVolumeIn
 	}
 
 	req := c.newRequest(op, input, &CreateCachediSCSIVolumeOutput{})
+
 	return CreateCachediSCSIVolumeRequest{Request: req, Input: input, Copy: c.CreateCachediSCSIVolumeRequest}
 }
 

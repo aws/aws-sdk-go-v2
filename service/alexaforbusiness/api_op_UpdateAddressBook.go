@@ -85,6 +85,7 @@ func (c *Client) UpdateAddressBookRequest(input *UpdateAddressBookInput) UpdateA
 	}
 
 	req := c.newRequest(op, input, &UpdateAddressBookOutput{})
+
 	return UpdateAddressBookRequest{Request: req, Input: input, Copy: c.UpdateAddressBookRequest}
 }
 

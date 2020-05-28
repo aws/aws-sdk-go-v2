@@ -84,6 +84,7 @@ func (c *Client) DisassociateDRTLogBucketRequest(input *DisassociateDRTLogBucket
 	}
 
 	req := c.newRequest(op, input, &DisassociateDRTLogBucketOutput{})
+
 	return DisassociateDRTLogBucketRequest{Request: req, Input: input, Copy: c.DisassociateDRTLogBucketRequest}
 }
 

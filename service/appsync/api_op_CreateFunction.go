@@ -196,6 +196,7 @@ func (c *Client) CreateFunctionRequest(input *CreateFunctionInput) CreateFunctio
 	}
 
 	req := c.newRequest(op, input, &CreateFunctionOutput{})
+
 	return CreateFunctionRequest{Request: req, Input: input, Copy: c.CreateFunctionRequest}
 }
 

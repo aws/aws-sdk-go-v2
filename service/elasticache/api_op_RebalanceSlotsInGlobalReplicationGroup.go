@@ -54,8 +54,8 @@ type RebalanceSlotsInGlobalReplicationGroupOutput struct {
 	// only reads. The primary cluster automatically replicates updates to the secondary
 	// cluster.
 	//
-	//    * The GlobalReplicationGroupId represents the name of the Global Datastore,
-	//    which is what you use to associate a secondary cluster.
+	//    * The GlobalReplicationGroupIdSuffix represents the name of the Global
+	//    Datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *GlobalReplicationGroup `type:"structure"`
 }
 
@@ -69,7 +69,7 @@ const opRebalanceSlotsInGlobalReplicationGroup = "RebalanceSlotsInGlobalReplicat
 // RebalanceSlotsInGlobalReplicationGroupRequest returns a request value for making API operation for
 // Amazon ElastiCache.
 //
-// Redistribute slots to ensure unifirom distribution across existing shards
+// Redistribute slots to ensure uniform distribution across existing shards
 // in the cluster.
 //
 //    // Example sending a request using RebalanceSlotsInGlobalReplicationGroupRequest.
@@ -92,6 +92,7 @@ func (c *Client) RebalanceSlotsInGlobalReplicationGroupRequest(input *RebalanceS
 	}
 
 	req := c.newRequest(op, input, &RebalanceSlotsInGlobalReplicationGroupOutput{})
+
 	return RebalanceSlotsInGlobalReplicationGroupRequest{Request: req, Input: input, Copy: c.RebalanceSlotsInGlobalReplicationGroupRequest}
 }
 

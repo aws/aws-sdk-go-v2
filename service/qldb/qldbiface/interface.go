@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // QLDB.
 //    func myFunc(svc qldbiface.ClientAPI) bool {
-//        // Make svc.CreateLedger request
+//        // Make svc.CancelJournalKinesisStream request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        qldbiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateLedger(input *qldb.CreateLedgerInput) (*qldb.CreateLedgerOutput, error) {
+//    func (m *mockClientClient) CancelJournalKinesisStream(input *qldb.CancelJournalKinesisStreamInput) (*qldb.CancelJournalKinesisStreamOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,9 +61,13 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	CancelJournalKinesisStreamRequest(*qldb.CancelJournalKinesisStreamInput) qldb.CancelJournalKinesisStreamRequest
+
 	CreateLedgerRequest(*qldb.CreateLedgerInput) qldb.CreateLedgerRequest
 
 	DeleteLedgerRequest(*qldb.DeleteLedgerInput) qldb.DeleteLedgerRequest
+
+	DescribeJournalKinesisStreamRequest(*qldb.DescribeJournalKinesisStreamInput) qldb.DescribeJournalKinesisStreamRequest
 
 	DescribeJournalS3ExportRequest(*qldb.DescribeJournalS3ExportInput) qldb.DescribeJournalS3ExportRequest
 
@@ -77,6 +81,8 @@ type ClientAPI interface {
 
 	GetRevisionRequest(*qldb.GetRevisionInput) qldb.GetRevisionRequest
 
+	ListJournalKinesisStreamsForLedgerRequest(*qldb.ListJournalKinesisStreamsForLedgerInput) qldb.ListJournalKinesisStreamsForLedgerRequest
+
 	ListJournalS3ExportsRequest(*qldb.ListJournalS3ExportsInput) qldb.ListJournalS3ExportsRequest
 
 	ListJournalS3ExportsForLedgerRequest(*qldb.ListJournalS3ExportsForLedgerInput) qldb.ListJournalS3ExportsForLedgerRequest
@@ -84,6 +90,8 @@ type ClientAPI interface {
 	ListLedgersRequest(*qldb.ListLedgersInput) qldb.ListLedgersRequest
 
 	ListTagsForResourceRequest(*qldb.ListTagsForResourceInput) qldb.ListTagsForResourceRequest
+
+	StreamJournalToKinesisRequest(*qldb.StreamJournalToKinesisInput) qldb.StreamJournalToKinesisRequest
 
 	TagResourceRequest(*qldb.TagResourceInput) qldb.TagResourceRequest
 

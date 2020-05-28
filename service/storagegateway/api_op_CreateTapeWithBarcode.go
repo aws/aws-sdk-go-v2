@@ -156,6 +156,7 @@ func (c *Client) CreateTapeWithBarcodeRequest(input *CreateTapeWithBarcodeInput)
 	}
 
 	req := c.newRequest(op, input, &CreateTapeWithBarcodeOutput{})
+
 	return CreateTapeWithBarcodeRequest{Request: req, Input: input, Copy: c.CreateTapeWithBarcodeRequest}
 }
 

@@ -180,6 +180,7 @@ func (c *Client) GetAliasRequest(input *GetAliasInput) GetAliasRequest {
 	}
 
 	req := c.newRequest(op, input, &GetAliasOutput{})
+
 	return GetAliasRequest{Request: req, Input: input, Copy: c.GetAliasRequest}
 }
 

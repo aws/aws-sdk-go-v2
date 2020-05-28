@@ -102,6 +102,7 @@ func (c *Client) SetEndpointAttributesRequest(input *SetEndpointAttributesInput)
 	req := c.newRequest(op, input, &SetEndpointAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetEndpointAttributesRequest{Request: req, Input: input, Copy: c.SetEndpointAttributesRequest}
 }
 

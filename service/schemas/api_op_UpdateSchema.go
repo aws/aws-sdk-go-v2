@@ -198,6 +198,8 @@ const opUpdateSchema = "UpdateSchema"
 //
 // Updates the schema definition
 //
+// Inactive schemas will be deleted after two years.
+//
 //    // Example sending a request using UpdateSchemaRequest.
 //    req := client.UpdateSchemaRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -218,6 +220,7 @@ func (c *Client) UpdateSchemaRequest(input *UpdateSchemaInput) UpdateSchemaReque
 	}
 
 	req := c.newRequest(op, input, &UpdateSchemaOutput{})
+
 	return UpdateSchemaRequest{Request: req, Input: input, Copy: c.UpdateSchemaRequest}
 }
 

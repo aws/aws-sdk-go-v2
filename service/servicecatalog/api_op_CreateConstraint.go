@@ -214,6 +214,7 @@ func (c *Client) CreateConstraintRequest(input *CreateConstraintInput) CreateCon
 	}
 
 	req := c.newRequest(op, input, &CreateConstraintOutput{})
+
 	return CreateConstraintRequest{Request: req, Input: input, Copy: c.CreateConstraintRequest}
 }
 

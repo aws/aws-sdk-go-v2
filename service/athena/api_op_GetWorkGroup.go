@@ -76,6 +76,7 @@ func (c *Client) GetWorkGroupRequest(input *GetWorkGroupInput) GetWorkGroupReque
 	}
 
 	req := c.newRequest(op, input, &GetWorkGroupOutput{})
+
 	return GetWorkGroupRequest{Request: req, Input: input, Copy: c.GetWorkGroupRequest}
 }
 

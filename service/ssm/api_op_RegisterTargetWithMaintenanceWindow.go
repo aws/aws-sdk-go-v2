@@ -63,7 +63,7 @@ type RegisterTargetWithMaintenanceWindowInput struct {
 	// Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
 	//
 	// For more information about these examples formats, including the best use
-	// case for each one, see Examples: Register Targets with a Maintenance Window
+	// case for each one, see Examples: Register targets with a maintenance window
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html)
 	// in the AWS Systems Manager User Guide.
 	//
@@ -163,6 +163,7 @@ func (c *Client) RegisterTargetWithMaintenanceWindowRequest(input *RegisterTarge
 	}
 
 	req := c.newRequest(op, input, &RegisterTargetWithMaintenanceWindowOutput{})
+
 	return RegisterTargetWithMaintenanceWindowRequest{Request: req, Input: input, Copy: c.RegisterTargetWithMaintenanceWindowRequest}
 }
 

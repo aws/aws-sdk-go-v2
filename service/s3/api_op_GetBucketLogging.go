@@ -133,6 +133,7 @@ func (c *Client) GetBucketLoggingRequest(input *GetBucketLoggingInput) GetBucket
 	}
 
 	req := c.newRequest(op, input, &GetBucketLoggingOutput{})
+
 	return GetBucketLoggingRequest{Request: req, Input: input, Copy: c.GetBucketLoggingRequest}
 }
 

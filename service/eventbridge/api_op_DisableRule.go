@@ -91,6 +91,7 @@ func (c *Client) DisableRuleRequest(input *DisableRuleInput) DisableRuleRequest 
 	req := c.newRequest(op, input, &DisableRuleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DisableRuleRequest{Request: req, Input: input, Copy: c.DisableRuleRequest}
 }
 

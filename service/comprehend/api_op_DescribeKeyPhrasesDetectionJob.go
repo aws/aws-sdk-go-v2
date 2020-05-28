@@ -82,6 +82,7 @@ func (c *Client) DescribeKeyPhrasesDetectionJobRequest(input *DescribeKeyPhrases
 	}
 
 	req := c.newRequest(op, input, &DescribeKeyPhrasesDetectionJobOutput{})
+
 	return DescribeKeyPhrasesDetectionJobRequest{Request: req, Input: input, Copy: c.DescribeKeyPhrasesDetectionJobRequest}
 }
 

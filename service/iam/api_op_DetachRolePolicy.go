@@ -105,6 +105,7 @@ func (c *Client) DetachRolePolicyRequest(input *DetachRolePolicyInput) DetachRol
 	req := c.newRequest(op, input, &DetachRolePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DetachRolePolicyRequest{Request: req, Input: input, Copy: c.DetachRolePolicyRequest}
 }
 

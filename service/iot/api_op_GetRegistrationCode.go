@@ -76,6 +76,7 @@ func (c *Client) GetRegistrationCodeRequest(input *GetRegistrationCodeInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetRegistrationCodeOutput{})
+
 	return GetRegistrationCodeRequest{Request: req, Input: input, Copy: c.GetRegistrationCodeRequest}
 }
 

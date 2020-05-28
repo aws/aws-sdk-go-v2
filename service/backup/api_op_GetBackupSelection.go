@@ -162,6 +162,7 @@ func (c *Client) GetBackupSelectionRequest(input *GetBackupSelectionInput) GetBa
 	}
 
 	req := c.newRequest(op, input, &GetBackupSelectionOutput{})
+
 	return GetBackupSelectionRequest{Request: req, Input: input, Copy: c.GetBackupSelectionRequest}
 }
 

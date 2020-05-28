@@ -131,6 +131,7 @@ func (c *Client) RecognizeCelebritiesRequest(input *RecognizeCelebritiesInput) R
 	}
 
 	req := c.newRequest(op, input, &RecognizeCelebritiesOutput{})
+
 	return RecognizeCelebritiesRequest{Request: req, Input: input, Copy: c.RecognizeCelebritiesRequest}
 }
 

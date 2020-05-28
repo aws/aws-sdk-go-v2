@@ -180,6 +180,7 @@ func (c *Client) UpdateApiMappingRequest(input *UpdateApiMappingInput) UpdateApi
 	}
 
 	req := c.newRequest(op, input, &UpdateApiMappingOutput{})
+
 	return UpdateApiMappingRequest{Request: req, Input: input, Copy: c.UpdateApiMappingRequest}
 }
 

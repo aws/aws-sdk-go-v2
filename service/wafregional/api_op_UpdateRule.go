@@ -96,6 +96,16 @@ const opUpdateRule = "UpdateRule"
 // UpdateRuleRequest returns a request value for making API operation for
 // AWS WAF Regional.
 //
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Inserts or deletes Predicate objects in a Rule. Each Predicate object identifies
 // a predicate, such as a ByteMatchSet or an IPSet, that specifies the web requests
 // that you want to allow, block, or count. If you add more than one predicate
@@ -151,6 +161,7 @@ func (c *Client) UpdateRuleRequest(input *UpdateRuleInput) UpdateRuleRequest {
 	}
 
 	req := c.newRequest(op, input, &UpdateRuleOutput{})
+
 	return UpdateRuleRequest{Request: req, Input: input, Copy: c.UpdateRuleRequest}
 }
 

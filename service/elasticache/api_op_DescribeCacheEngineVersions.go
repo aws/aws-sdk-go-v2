@@ -109,6 +109,7 @@ func (c *Client) DescribeCacheEngineVersionsRequest(input *DescribeCacheEngineVe
 	}
 
 	req := c.newRequest(op, input, &DescribeCacheEngineVersionsOutput{})
+
 	return DescribeCacheEngineVersionsRequest{Request: req, Input: input, Copy: c.DescribeCacheEngineVersionsRequest}
 }
 

@@ -100,6 +100,7 @@ func (c *Client) UpdatePrimaryEmailAddressRequest(input *UpdatePrimaryEmailAddre
 	}
 
 	req := c.newRequest(op, input, &UpdatePrimaryEmailAddressOutput{})
+
 	return UpdatePrimaryEmailAddressRequest{Request: req, Input: input, Copy: c.UpdatePrimaryEmailAddressRequest}
 }
 

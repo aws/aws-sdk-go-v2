@@ -110,6 +110,7 @@ func (c *Client) GetProductsRequest(input *GetProductsInput) GetProductsRequest 
 	}
 
 	req := c.newRequest(op, input, &GetProductsOutput{})
+
 	return GetProductsRequest{Request: req, Input: input, Copy: c.GetProductsRequest}
 }
 

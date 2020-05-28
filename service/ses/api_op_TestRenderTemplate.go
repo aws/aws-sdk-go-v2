@@ -91,6 +91,7 @@ func (c *Client) TestRenderTemplateRequest(input *TestRenderTemplateInput) TestR
 	}
 
 	req := c.newRequest(op, input, &TestRenderTemplateOutput{})
+
 	return TestRenderTemplateRequest{Request: req, Input: input, Copy: c.TestRenderTemplateRequest}
 }
 

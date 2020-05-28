@@ -173,6 +173,7 @@ func (c *Client) GetObjectTorrentRequest(input *GetObjectTorrentInput) GetObject
 	}
 
 	req := c.newRequest(op, input, &GetObjectTorrentOutput{})
+
 	return GetObjectTorrentRequest{Request: req, Input: input, Copy: c.GetObjectTorrentRequest}
 }
 

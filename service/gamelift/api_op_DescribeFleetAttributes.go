@@ -134,6 +134,7 @@ func (c *Client) DescribeFleetAttributesRequest(input *DescribeFleetAttributesIn
 	}
 
 	req := c.newRequest(op, input, &DescribeFleetAttributesOutput{})
+
 	return DescribeFleetAttributesRequest{Request: req, Input: input, Copy: c.DescribeFleetAttributesRequest}
 }
 

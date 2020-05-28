@@ -145,6 +145,7 @@ func (c *Client) ListApplicationDependenciesRequest(input *ListApplicationDepend
 	}
 
 	req := c.newRequest(op, input, &ListApplicationDependenciesOutput{})
+
 	return ListApplicationDependenciesRequest{Request: req, Input: input, Copy: c.ListApplicationDependenciesRequest}
 }
 

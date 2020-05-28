@@ -130,6 +130,7 @@ func (c *Client) GrantPermissionsRequest(input *GrantPermissionsInput) GrantPerm
 	}
 
 	req := c.newRequest(op, input, &GrantPermissionsOutput{})
+
 	return GrantPermissionsRequest{Request: req, Input: input, Copy: c.GrantPermissionsRequest}
 }
 

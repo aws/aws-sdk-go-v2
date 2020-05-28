@@ -124,6 +124,7 @@ func (c *Client) SearchFacesRequest(input *SearchFacesInput) SearchFacesRequest 
 	}
 
 	req := c.newRequest(op, input, &SearchFacesOutput{})
+
 	return SearchFacesRequest{Request: req, Input: input, Copy: c.SearchFacesRequest}
 }
 

@@ -108,6 +108,7 @@ func (c *Client) DeleteTypedLinkFacetRequest(input *DeleteTypedLinkFacetInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteTypedLinkFacetOutput{})
+
 	return DeleteTypedLinkFacetRequest{Request: req, Input: input, Copy: c.DeleteTypedLinkFacetRequest}
 }
 

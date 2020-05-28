@@ -92,6 +92,7 @@ func (c *Client) StopDBInstanceRequest(input *StopDBInstanceInput) StopDBInstanc
 	}
 
 	req := c.newRequest(op, input, &StopDBInstanceOutput{})
+
 	return StopDBInstanceRequest{Request: req, Input: input, Copy: c.StopDBInstanceRequest}
 }
 

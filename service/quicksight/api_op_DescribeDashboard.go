@@ -160,6 +160,7 @@ func (c *Client) DescribeDashboardRequest(input *DescribeDashboardInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeDashboardOutput{})
+
 	return DescribeDashboardRequest{Request: req, Input: input, Copy: c.DescribeDashboardRequest}
 }
 

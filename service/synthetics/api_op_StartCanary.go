@@ -13,7 +13,8 @@ import (
 type StartCanaryInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the canary that you want to run. To find canary names, use DescribeCanaries.
+	// The name of the canary that you want to run. To find canary names, use DescribeCanaries
+	// (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html).
 	//
 	// Name is a required field
 	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
@@ -97,6 +98,7 @@ func (c *Client) StartCanaryRequest(input *StartCanaryInput) StartCanaryRequest 
 	}
 
 	req := c.newRequest(op, input, &StartCanaryOutput{})
+
 	return StartCanaryRequest{Request: req, Input: input, Copy: c.StartCanaryRequest}
 }
 

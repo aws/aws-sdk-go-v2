@@ -190,6 +190,7 @@ func (c *Client) StartJobRequest(input *StartJobInput) StartJobRequest {
 	}
 
 	req := c.newRequest(op, input, &StartJobOutput{})
+
 	return StartJobRequest{Request: req, Input: input, Copy: c.StartJobRequest}
 }
 

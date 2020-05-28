@@ -81,6 +81,7 @@ func (c *Client) CancelMaintenanceWindowExecutionRequest(input *CancelMaintenanc
 	}
 
 	req := c.newRequest(op, input, &CancelMaintenanceWindowExecutionOutput{})
+
 	return CancelMaintenanceWindowExecutionRequest{Request: req, Input: input, Copy: c.CancelMaintenanceWindowExecutionRequest}
 }
 

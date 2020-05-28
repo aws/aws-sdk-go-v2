@@ -4,6 +4,7 @@ package lightsail
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -12,12 +13,12 @@ import (
 type PutInstancePublicPortsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Lightsail instance name of the public port(s) you are setting.
+	// The name of the instance for which to open ports.
 	//
 	// InstanceName is a required field
 	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
 
-	// Specifies information about the public port(s).
+	// An array of objects to describe the ports to open for the specified instance.
 	//
 	// PortInfos is a required field
 	PortInfos []PortInfo `locationName:"portInfos" type:"list" required:"true"`
@@ -39,6 +40,13 @@ func (s *PutInstancePublicPortsInput) Validate() error {
 	if s.PortInfos == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortInfos"))
 	}
+	if s.PortInfos != nil {
+		for i, v := range s.PortInfos {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PortInfos", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -50,7 +58,7 @@ type PutInstancePublicPortsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
+	// of the request, the timestamp of the request, and the resources affected
 	// by the request.
 	Operation *Operation `locationName:"operation" type:"structure"`
 }
@@ -65,12 +73,16 @@ const opPutInstancePublicPorts = "PutInstancePublicPorts"
 // PutInstancePublicPortsRequest returns a request value for making API operation for
 // Amazon Lightsail.
 //
-// Sets the specified open ports for an Amazon Lightsail instance, and closes
-// all ports for every protocol not included in the current request.
+// Opens ports for a specific Amazon Lightsail instance, and specifies the IP
+// addresses allowed to connect to the instance through the ports, and the protocol.
+// This action also closes all currently open ports that are not included in
+// the request. Include all of the ports and the protocols you want to open
+// in your PutInstancePublicPortsrequest. Or use the OpenInstancePublicPorts
+// action to open ports without closing currently open ports.
 //
-// The put instance public ports operation supports tag-based access control
-// via resource tags applied to the resource identified by instance name. For
-// more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// The PutInstancePublicPorts action supports tag-based access control via resource
+// tags applied to the resource identified by instanceName. For more information,
+// see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using PutInstancePublicPortsRequest.
 //    req := client.PutInstancePublicPortsRequest(params)
@@ -92,6 +104,7 @@ func (c *Client) PutInstancePublicPortsRequest(input *PutInstancePublicPortsInpu
 	}
 
 	req := c.newRequest(op, input, &PutInstancePublicPortsOutput{})
+
 	return PutInstancePublicPortsRequest{Request: req, Input: input, Copy: c.PutInstancePublicPortsRequest}
 }
 

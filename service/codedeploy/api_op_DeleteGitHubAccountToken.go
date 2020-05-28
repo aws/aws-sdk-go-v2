@@ -62,6 +62,7 @@ func (c *Client) DeleteGitHubAccountTokenRequest(input *DeleteGitHubAccountToken
 	}
 
 	req := c.newRequest(op, input, &DeleteGitHubAccountTokenOutput{})
+
 	return DeleteGitHubAccountTokenRequest{Request: req, Input: input, Copy: c.DeleteGitHubAccountTokenRequest}
 }
 

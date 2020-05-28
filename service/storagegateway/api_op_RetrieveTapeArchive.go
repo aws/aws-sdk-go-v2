@@ -108,6 +108,7 @@ func (c *Client) RetrieveTapeArchiveRequest(input *RetrieveTapeArchiveInput) Ret
 	}
 
 	req := c.newRequest(op, input, &RetrieveTapeArchiveOutput{})
+
 	return RetrieveTapeArchiveRequest{Request: req, Input: input, Copy: c.RetrieveTapeArchiveRequest}
 }
 

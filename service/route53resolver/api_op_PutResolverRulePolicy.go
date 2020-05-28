@@ -92,6 +92,7 @@ func (c *Client) PutResolverRulePolicyRequest(input *PutResolverRulePolicyInput)
 	}
 
 	req := c.newRequest(op, input, &PutResolverRulePolicyOutput{})
+
 	return PutResolverRulePolicyRequest{Request: req, Input: input, Copy: c.PutResolverRulePolicyRequest}
 }
 

@@ -82,6 +82,7 @@ func (c *Client) FailoverDBClusterRequest(input *FailoverDBClusterInput) Failove
 	}
 
 	req := c.newRequest(op, input, &FailoverDBClusterOutput{})
+
 	return FailoverDBClusterRequest{Request: req, Input: input, Copy: c.FailoverDBClusterRequest}
 }
 

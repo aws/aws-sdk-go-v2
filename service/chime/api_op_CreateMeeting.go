@@ -190,6 +190,7 @@ func (c *Client) CreateMeetingRequest(input *CreateMeetingInput) CreateMeetingRe
 	}
 
 	req := c.newRequest(op, input, &CreateMeetingOutput{})
+
 	return CreateMeetingRequest{Request: req, Input: input, Copy: c.CreateMeetingRequest}
 }
 

@@ -98,6 +98,7 @@ func (c *Client) DisassociateHealthCheckRequest(input *DisassociateHealthCheckIn
 	}
 
 	req := c.newRequest(op, input, &DisassociateHealthCheckOutput{})
+
 	return DisassociateHealthCheckRequest{Request: req, Input: input, Copy: c.DisassociateHealthCheckRequest}
 }
 

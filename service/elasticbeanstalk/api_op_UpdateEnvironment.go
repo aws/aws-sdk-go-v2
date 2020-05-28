@@ -266,6 +266,7 @@ func (c *Client) UpdateEnvironmentRequest(input *UpdateEnvironmentInput) UpdateE
 	}
 
 	req := c.newRequest(op, input, &UpdateEnvironmentOutput{})
+
 	return UpdateEnvironmentRequest{Request: req, Input: input, Copy: c.UpdateEnvironmentRequest}
 }
 

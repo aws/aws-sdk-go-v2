@@ -174,6 +174,7 @@ func (c *Client) GetObjectAttributesRequest(input *GetObjectAttributesInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetObjectAttributesOutput{})
+
 	return GetObjectAttributesRequest{Request: req, Input: input, Copy: c.GetObjectAttributesRequest}
 }
 

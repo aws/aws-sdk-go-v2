@@ -118,6 +118,7 @@ func (c *Client) UndeprecateWorkflowTypeRequest(input *UndeprecateWorkflowTypeIn
 	req := c.newRequest(op, input, &UndeprecateWorkflowTypeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UndeprecateWorkflowTypeRequest{Request: req, Input: input, Copy: c.UndeprecateWorkflowTypeRequest}
 }
 

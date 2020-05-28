@@ -124,6 +124,7 @@ func (c *Client) ResumeGameServerGroupRequest(input *ResumeGameServerGroupInput)
 	}
 
 	req := c.newRequest(op, input, &ResumeGameServerGroupOutput{})
+
 	return ResumeGameServerGroupRequest{Request: req, Input: input, Copy: c.ResumeGameServerGroupRequest}
 }
 

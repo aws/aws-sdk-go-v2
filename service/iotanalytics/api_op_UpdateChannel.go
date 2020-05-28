@@ -129,6 +129,7 @@ func (c *Client) UpdateChannelRequest(input *UpdateChannelInput) UpdateChannelRe
 	req := c.newRequest(op, input, &UpdateChannelOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateChannelRequest{Request: req, Input: input, Copy: c.UpdateChannelRequest}
 }
 

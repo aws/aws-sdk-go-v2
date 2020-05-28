@@ -86,6 +86,7 @@ func (c *Client) UpdateElasticIpRequest(input *UpdateElasticIpInput) UpdateElast
 	req := c.newRequest(op, input, &UpdateElasticIpOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateElasticIpRequest{Request: req, Input: input, Copy: c.UpdateElasticIpRequest}
 }
 

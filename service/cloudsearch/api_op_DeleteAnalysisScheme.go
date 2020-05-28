@@ -101,6 +101,7 @@ func (c *Client) DeleteAnalysisSchemeRequest(input *DeleteAnalysisSchemeInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteAnalysisSchemeOutput{})
+
 	return DeleteAnalysisSchemeRequest{Request: req, Input: input, Copy: c.DeleteAnalysisSchemeRequest}
 }
 

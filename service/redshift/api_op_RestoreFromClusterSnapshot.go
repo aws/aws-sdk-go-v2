@@ -281,6 +281,7 @@ func (c *Client) RestoreFromClusterSnapshotRequest(input *RestoreFromClusterSnap
 	}
 
 	req := c.newRequest(op, input, &RestoreFromClusterSnapshotOutput{})
+
 	return RestoreFromClusterSnapshotRequest{Request: req, Input: input, Copy: c.RestoreFromClusterSnapshotRequest}
 }
 

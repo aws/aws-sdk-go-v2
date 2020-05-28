@@ -149,6 +149,7 @@ func (c *Client) RemovePermissionRequest(input *RemovePermissionInput) RemovePer
 	}
 
 	req := c.newRequest(op, input, &RemovePermissionOutput{})
+
 	return RemovePermissionRequest{Request: req, Input: input, Copy: c.RemovePermissionRequest}
 }
 

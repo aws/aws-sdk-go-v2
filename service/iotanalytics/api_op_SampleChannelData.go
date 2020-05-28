@@ -146,6 +146,7 @@ func (c *Client) SampleChannelDataRequest(input *SampleChannelDataInput) SampleC
 	}
 
 	req := c.newRequest(op, input, &SampleChannelDataOutput{})
+
 	return SampleChannelDataRequest{Request: req, Input: input, Copy: c.SampleChannelDataRequest}
 }
 

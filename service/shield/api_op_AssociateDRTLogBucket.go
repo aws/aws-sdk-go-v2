@@ -82,6 +82,7 @@ func (c *Client) AssociateDRTLogBucketRequest(input *AssociateDRTLogBucketInput)
 	}
 
 	req := c.newRequest(op, input, &AssociateDRTLogBucketOutput{})
+
 	return AssociateDRTLogBucketRequest{Request: req, Input: input, Copy: c.AssociateDRTLogBucketRequest}
 }
 

@@ -97,6 +97,7 @@ func (c *Client) ListFlowExecutionMessagesRequest(input *ListFlowExecutionMessag
 	}
 
 	req := c.newRequest(op, input, &ListFlowExecutionMessagesOutput{})
+
 	return ListFlowExecutionMessagesRequest{Request: req, Input: input, Copy: c.ListFlowExecutionMessagesRequest}
 }
 

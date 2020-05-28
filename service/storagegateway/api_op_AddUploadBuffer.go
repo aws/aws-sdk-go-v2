@@ -98,6 +98,7 @@ func (c *Client) AddUploadBufferRequest(input *AddUploadBufferInput) AddUploadBu
 	}
 
 	req := c.newRequest(op, input, &AddUploadBufferOutput{})
+
 	return AddUploadBufferRequest{Request: req, Input: input, Copy: c.AddUploadBufferRequest}
 }
 

@@ -96,6 +96,7 @@ func (c *Client) DeleteDeploymentStrategyRequest(input *DeleteDeploymentStrategy
 	req := c.newRequest(op, input, &DeleteDeploymentStrategyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteDeploymentStrategyRequest{Request: req, Input: input, Copy: c.DeleteDeploymentStrategyRequest}
 }
 

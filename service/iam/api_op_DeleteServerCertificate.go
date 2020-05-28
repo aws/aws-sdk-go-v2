@@ -99,6 +99,7 @@ func (c *Client) DeleteServerCertificateRequest(input *DeleteServerCertificateIn
 	req := c.newRequest(op, input, &DeleteServerCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteServerCertificateRequest{Request: req, Input: input, Copy: c.DeleteServerCertificateRequest}
 }
 

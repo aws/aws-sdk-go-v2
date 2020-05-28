@@ -103,6 +103,7 @@ func (c *Client) ListLexiconsRequest(input *ListLexiconsInput) ListLexiconsReque
 	}
 
 	req := c.newRequest(op, input, &ListLexiconsOutput{})
+
 	return ListLexiconsRequest{Request: req, Input: input, Copy: c.ListLexiconsRequest}
 }
 

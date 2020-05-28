@@ -117,6 +117,7 @@ func (c *Client) GetBotRequest(input *GetBotInput) GetBotRequest {
 	}
 
 	req := c.newRequest(op, input, &GetBotOutput{})
+
 	return GetBotRequest{Request: req, Input: input, Copy: c.GetBotRequest}
 }
 

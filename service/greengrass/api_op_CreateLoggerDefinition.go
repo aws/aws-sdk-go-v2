@@ -179,6 +179,7 @@ func (c *Client) CreateLoggerDefinitionRequest(input *CreateLoggerDefinitionInpu
 	}
 
 	req := c.newRequest(op, input, &CreateLoggerDefinitionOutput{})
+
 	return CreateLoggerDefinitionRequest{Request: req, Input: input, Copy: c.CreateLoggerDefinitionRequest}
 }
 

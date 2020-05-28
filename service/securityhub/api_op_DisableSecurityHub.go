@@ -80,6 +80,7 @@ func (c *Client) DisableSecurityHubRequest(input *DisableSecurityHubInput) Disab
 	}
 
 	req := c.newRequest(op, input, &DisableSecurityHubOutput{})
+
 	return DisableSecurityHubRequest{Request: req, Input: input, Copy: c.DisableSecurityHubRequest}
 }
 

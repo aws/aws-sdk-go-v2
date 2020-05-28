@@ -106,6 +106,7 @@ func (c *Client) RequestUploadCredentialsRequest(input *RequestUploadCredentials
 	}
 
 	req := c.newRequest(op, input, &RequestUploadCredentialsOutput{})
+
 	return RequestUploadCredentialsRequest{Request: req, Input: input, Copy: c.RequestUploadCredentialsRequest}
 }
 

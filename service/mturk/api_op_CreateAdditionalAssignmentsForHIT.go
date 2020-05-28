@@ -110,6 +110,7 @@ func (c *Client) CreateAdditionalAssignmentsForHITRequest(input *CreateAdditiona
 	}
 
 	req := c.newRequest(op, input, &CreateAdditionalAssignmentsForHITOutput{})
+
 	return CreateAdditionalAssignmentsForHITRequest{Request: req, Input: input, Copy: c.CreateAdditionalAssignmentsForHITRequest}
 }
 

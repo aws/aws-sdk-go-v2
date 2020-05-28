@@ -112,6 +112,7 @@ func (c *Client) GetDistributionRequest(input *GetDistributionInput) GetDistribu
 	}
 
 	req := c.newRequest(op, input, &GetDistributionOutput{})
+
 	return GetDistributionRequest{Request: req, Input: input, Copy: c.GetDistributionRequest}
 }
 

@@ -13,14 +13,15 @@ import (
 type DeleteSignalingChannelInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the signaling channel that you want to delete.
+	// The Amazon Resource Name (ARN) of the signaling channel that you want to
+	// delete.
 	//
 	// ChannelARN is a required field
 	ChannelARN *string `min:"1" type:"string" required:"true"`
 
 	// The current version of the signaling channel that you want to delete. You
 	// can obtain the current version by invoking the DescribeSignalingChannel or
-	// ListSignalingChannels APIs.
+	// ListSignalingChannels API operations.
 	CurrentVersion *string `min:"1" type:"string"`
 }
 
@@ -111,6 +112,7 @@ func (c *Client) DeleteSignalingChannelRequest(input *DeleteSignalingChannelInpu
 	}
 
 	req := c.newRequest(op, input, &DeleteSignalingChannelOutput{})
+
 	return DeleteSignalingChannelRequest{Request: req, Input: input, Copy: c.DeleteSignalingChannelRequest}
 }
 

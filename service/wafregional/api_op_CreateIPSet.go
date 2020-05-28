@@ -75,6 +75,16 @@ const opCreateIPSet = "CreateIPSet"
 // CreateIPSetRequest returns a request value for making API operation for
 // AWS WAF Regional.
 //
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Creates an IPSet, which you use to specify which web requests that you want
 // to allow or block based on the IP addresses that the requests originate from.
 // For example, if you're receiving a lot of requests from one or more individual
@@ -118,6 +128,7 @@ func (c *Client) CreateIPSetRequest(input *CreateIPSetInput) CreateIPSetRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateIPSetOutput{})
+
 	return CreateIPSetRequest{Request: req, Input: input, Copy: c.CreateIPSetRequest}
 }
 

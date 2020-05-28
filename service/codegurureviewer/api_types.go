@@ -604,6 +604,9 @@ func (s RecommendationSummary) MarshalFields(e protocol.FieldEncoder) error {
 type Repository struct {
 	_ struct{} `type:"structure"`
 
+	// Information about a Bitbucket Cloud repository.
+	Bitbucket *ThirdPartySourceRepository `type:"structure"`
+
 	// Information about an AWS CodeCommit repository.
 	CodeCommit *CodeCommitRepository `type:"structure"`
 }
@@ -616,6 +619,11 @@ func (s Repository) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Repository) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Repository"}
+	if s.Bitbucket != nil {
+		if err := s.Bitbucket.Validate(); err != nil {
+			invalidParams.AddNested("Bitbucket", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.CodeCommit != nil {
 		if err := s.CodeCommit.Validate(); err != nil {
 			invalidParams.AddNested("CodeCommit", err.(aws.ErrInvalidParams))
@@ -630,6 +638,12 @@ func (s *Repository) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Repository) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Bitbucket != nil {
+		v := s.Bitbucket
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Bitbucket", v, metadata)
+	}
 	if s.CodeCommit != nil {
 		v := s.CodeCommit
 
@@ -648,6 +662,9 @@ type RepositoryAssociation struct {
 
 	// The ID of the repository association.
 	AssociationId *string `min:"1" type:"string"`
+
+	// The Amazon Resource Name (ARN) identifying the repository connection.
+	ConnectionArn *string `type:"string"`
 
 	// The time, in milliseconds since the epoch, when the repository association
 	// was created.
@@ -691,6 +708,12 @@ func (s RepositoryAssociation) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "AssociationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ConnectionArn != nil {
+		v := *s.ConnectionArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ConnectionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.CreatedTimeStamp != nil {
 		v := *s.CreatedTimeStamp
@@ -749,6 +772,9 @@ type RepositoryAssociationSummary struct {
 	// The repository association ID.
 	AssociationId *string `min:"1" type:"string"`
 
+	// The Amazon Resource Name (ARN) identifying the repository connection.
+	ConnectionArn *string `type:"string"`
+
 	// The time, in milliseconds since the epoch, since the repository association
 	// was last updated.
 	LastUpdatedTimeStamp *time.Time `type:"timestamp"`
@@ -800,6 +826,12 @@ func (s RepositoryAssociationSummary) MarshalFields(e protocol.FieldEncoder) err
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "AssociationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ConnectionArn != nil {
+		v := *s.ConnectionArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ConnectionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastUpdatedTimeStamp != nil {
 		v := *s.LastUpdatedTimeStamp
@@ -855,6 +887,83 @@ func (s SourceCodeType) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "CommitDiff", v, metadata)
+	}
+	return nil
+}
+
+// Information about a third party source repository connected through CodeStar
+// Connections.
+type ThirdPartySourceRepository struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) identifying the repository connection.
+	//
+	// ConnectionArn is a required field
+	ConnectionArn *string `type:"string" required:"true"`
+
+	// The name of the third party source repository.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The username of the owner of the repository.
+	//
+	// Owner is a required field
+	Owner *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ThirdPartySourceRepository) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ThirdPartySourceRepository) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ThirdPartySourceRepository"}
+
+	if s.ConnectionArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionArn"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if s.Owner == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Owner"))
+	}
+	if s.Owner != nil && len(*s.Owner) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Owner", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ThirdPartySourceRepository) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConnectionArn != nil {
+		v := *s.ConnectionArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ConnectionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Owner != nil {
+		v := *s.Owner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Owner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

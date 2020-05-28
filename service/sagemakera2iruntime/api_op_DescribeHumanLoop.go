@@ -182,6 +182,7 @@ func (c *Client) DescribeHumanLoopRequest(input *DescribeHumanLoopInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeHumanLoopOutput{})
+
 	return DescribeHumanLoopRequest{Request: req, Input: input, Copy: c.DescribeHumanLoopRequest}
 }
 

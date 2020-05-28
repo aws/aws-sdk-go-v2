@@ -104,6 +104,7 @@ func (c *Client) GetGroupQueryRequest(input *GetGroupQueryInput) GetGroupQueryRe
 	}
 
 	req := c.newRequest(op, input, &GetGroupQueryOutput{})
+
 	return GetGroupQueryRequest{Request: req, Input: input, Copy: c.GetGroupQueryRequest}
 }
 

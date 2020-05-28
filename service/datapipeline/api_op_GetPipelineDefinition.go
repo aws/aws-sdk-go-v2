@@ -93,6 +93,7 @@ func (c *Client) GetPipelineDefinitionRequest(input *GetPipelineDefinitionInput)
 	}
 
 	req := c.newRequest(op, input, &GetPipelineDefinitionOutput{})
+
 	return GetPipelineDefinitionRequest{Request: req, Input: input, Copy: c.GetPipelineDefinitionRequest}
 }
 

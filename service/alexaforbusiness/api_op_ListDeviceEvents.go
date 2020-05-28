@@ -109,6 +109,7 @@ func (c *Client) ListDeviceEventsRequest(input *ListDeviceEventsInput) ListDevic
 	}
 
 	req := c.newRequest(op, input, &ListDeviceEventsOutput{})
+
 	return ListDeviceEventsRequest{Request: req, Input: input, Copy: c.ListDeviceEventsRequest}
 }
 

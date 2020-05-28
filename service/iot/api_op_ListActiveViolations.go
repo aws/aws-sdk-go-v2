@@ -146,6 +146,7 @@ func (c *Client) ListActiveViolationsRequest(input *ListActiveViolationsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListActiveViolationsOutput{})
+
 	return ListActiveViolationsRequest{Request: req, Input: input, Copy: c.ListActiveViolationsRequest}
 }
 

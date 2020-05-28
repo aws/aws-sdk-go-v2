@@ -168,6 +168,7 @@ func (c *Client) GetVaultLockRequest(input *GetVaultLockInput) GetVaultLockReque
 	}
 
 	req := c.newRequest(op, input, &GetVaultLockOutput{})
+
 	return GetVaultLockRequest{Request: req, Input: input, Copy: c.GetVaultLockRequest}
 }
 

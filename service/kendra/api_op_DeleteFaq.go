@@ -92,6 +92,7 @@ func (c *Client) DeleteFaqRequest(input *DeleteFaqInput) DeleteFaqRequest {
 	req := c.newRequest(op, input, &DeleteFaqOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteFaqRequest{Request: req, Input: input, Copy: c.DeleteFaqRequest}
 }
 

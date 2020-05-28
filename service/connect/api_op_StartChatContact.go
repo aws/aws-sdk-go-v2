@@ -218,6 +218,7 @@ func (c *Client) StartChatContactRequest(input *StartChatContactInput) StartChat
 	}
 
 	req := c.newRequest(op, input, &StartChatContactOutput{})
+
 	return StartChatContactRequest{Request: req, Input: input, Copy: c.StartChatContactRequest}
 }
 

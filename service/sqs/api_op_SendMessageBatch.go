@@ -136,6 +136,7 @@ func (c *Client) SendMessageBatchRequest(input *SendMessageBatchInput) SendMessa
 	}
 
 	req := c.newRequest(op, input, &SendMessageBatchOutput{})
+
 	return SendMessageBatchRequest{Request: req, Input: input, Copy: c.SendMessageBatchRequest}
 }
 

@@ -77,6 +77,7 @@ func (c *Client) StartCrawlerScheduleRequest(input *StartCrawlerScheduleInput) S
 	}
 
 	req := c.newRequest(op, input, &StartCrawlerScheduleOutput{})
+
 	return StartCrawlerScheduleRequest{Request: req, Input: input, Copy: c.StartCrawlerScheduleRequest}
 }
 

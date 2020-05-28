@@ -114,6 +114,7 @@ func (c *Client) DescribeRecordRequest(input *DescribeRecordInput) DescribeRecor
 	}
 
 	req := c.newRequest(op, input, &DescribeRecordOutput{})
+
 	return DescribeRecordRequest{Request: req, Input: input, Copy: c.DescribeRecordRequest}
 }
 

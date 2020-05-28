@@ -179,6 +179,7 @@ func (c *Client) CreateDatastoreRequest(input *CreateDatastoreInput) CreateDatas
 	}
 
 	req := c.newRequest(op, input, &CreateDatastoreOutput{})
+
 	return CreateDatastoreRequest{Request: req, Input: input, Copy: c.CreateDatastoreRequest}
 }
 

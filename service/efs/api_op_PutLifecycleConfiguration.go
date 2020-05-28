@@ -160,6 +160,7 @@ func (c *Client) PutLifecycleConfigurationRequest(input *PutLifecycleConfigurati
 	}
 
 	req := c.newRequest(op, input, &PutLifecycleConfigurationOutput{})
+
 	return PutLifecycleConfigurationRequest{Request: req, Input: input, Copy: c.PutLifecycleConfigurationRequest}
 }
 

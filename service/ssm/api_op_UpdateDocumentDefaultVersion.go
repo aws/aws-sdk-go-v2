@@ -86,6 +86,7 @@ func (c *Client) UpdateDocumentDefaultVersionRequest(input *UpdateDocumentDefaul
 	}
 
 	req := c.newRequest(op, input, &UpdateDocumentDefaultVersionOutput{})
+
 	return UpdateDocumentDefaultVersionRequest{Request: req, Input: input, Copy: c.UpdateDocumentDefaultVersionRequest}
 }
 

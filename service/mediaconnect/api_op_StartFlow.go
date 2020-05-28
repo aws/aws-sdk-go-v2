@@ -109,6 +109,7 @@ func (c *Client) StartFlowRequest(input *StartFlowInput) StartFlowRequest {
 	}
 
 	req := c.newRequest(op, input, &StartFlowOutput{})
+
 	return StartFlowRequest{Request: req, Input: input, Copy: c.StartFlowRequest}
 }
 

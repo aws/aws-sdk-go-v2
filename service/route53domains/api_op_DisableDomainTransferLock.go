@@ -87,6 +87,7 @@ func (c *Client) DisableDomainTransferLockRequest(input *DisableDomainTransferLo
 	}
 
 	req := c.newRequest(op, input, &DisableDomainTransferLockOutput{})
+
 	return DisableDomainTransferLockRequest{Request: req, Input: input, Copy: c.DisableDomainTransferLockRequest}
 }
 

@@ -111,6 +111,7 @@ func (c *Client) DeleteIPSetRequest(input *DeleteIPSetInput) DeleteIPSetRequest 
 	}
 
 	req := c.newRequest(op, input, &DeleteIPSetOutput{})
+
 	return DeleteIPSetRequest{Request: req, Input: input, Copy: c.DeleteIPSetRequest}
 }
 

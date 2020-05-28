@@ -90,6 +90,7 @@ func (c *Client) RegisterDBProxyTargetsRequest(input *RegisterDBProxyTargetsInpu
 	}
 
 	req := c.newRequest(op, input, &RegisterDBProxyTargetsOutput{})
+
 	return RegisterDBProxyTargetsRequest{Request: req, Input: input, Copy: c.RegisterDBProxyTargetsRequest}
 }
 

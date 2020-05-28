@@ -101,6 +101,7 @@ func (c *Client) ListVocabularyFiltersRequest(input *ListVocabularyFiltersInput)
 	}
 
 	req := c.newRequest(op, input, &ListVocabularyFiltersOutput{})
+
 	return ListVocabularyFiltersRequest{Request: req, Input: input, Copy: c.ListVocabularyFiltersRequest}
 }
 

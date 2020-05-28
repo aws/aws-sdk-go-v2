@@ -93,6 +93,7 @@ func (c *Client) DescribeLDAPSSettingsRequest(input *DescribeLDAPSSettingsInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeLDAPSSettingsOutput{})
+
 	return DescribeLDAPSSettingsRequest{Request: req, Input: input, Copy: c.DescribeLDAPSSettingsRequest}
 }
 

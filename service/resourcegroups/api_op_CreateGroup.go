@@ -181,6 +181,7 @@ func (c *Client) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateGroupOutput{})
+
 	return CreateGroupRequest{Request: req, Input: input, Copy: c.CreateGroupRequest}
 }
 

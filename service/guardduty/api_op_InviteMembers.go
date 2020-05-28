@@ -162,6 +162,7 @@ func (c *Client) InviteMembersRequest(input *InviteMembersInput) InviteMembersRe
 	}
 
 	req := c.newRequest(op, input, &InviteMembersOutput{})
+
 	return InviteMembersRequest{Request: req, Input: input, Copy: c.InviteMembersRequest}
 }
 

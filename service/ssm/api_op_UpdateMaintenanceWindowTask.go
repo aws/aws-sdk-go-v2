@@ -52,10 +52,10 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// For more information, see the following topics in the in the AWS Systems
 	// Manager User Guide:
 	//
-	//    * Service-Linked Role Permissions for Systems Manager (http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions)
+	//    * Using service-linked roles for Systems Manager (https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions)
 	//
-	//    * Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance
-	//    Window Tasks? (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
+	//    * Should I use a service-linked role or a custom service role to run maintenance
+	//    window tasks? (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
 	ServiceRoleArn *string `type:"string"`
 
 	// The targets (either instances or tags) to modify. Instances are specified
@@ -261,6 +261,7 @@ func (c *Client) UpdateMaintenanceWindowTaskRequest(input *UpdateMaintenanceWind
 	}
 
 	req := c.newRequest(op, input, &UpdateMaintenanceWindowTaskOutput{})
+
 	return UpdateMaintenanceWindowTaskRequest{Request: req, Input: input, Copy: c.UpdateMaintenanceWindowTaskRequest}
 }
 

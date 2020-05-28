@@ -63,6 +63,7 @@ func (c *Client) GenerateCredentialReportRequest(input *GenerateCredentialReport
 	}
 
 	req := c.newRequest(op, input, &GenerateCredentialReportOutput{})
+
 	return GenerateCredentialReportRequest{Request: req, Input: input, Copy: c.GenerateCredentialReportRequest}
 }
 

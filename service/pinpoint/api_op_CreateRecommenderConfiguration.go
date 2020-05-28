@@ -110,6 +110,7 @@ func (c *Client) CreateRecommenderConfigurationRequest(input *CreateRecommenderC
 	}
 
 	req := c.newRequest(op, input, &CreateRecommenderConfigurationOutput{})
+
 	return CreateRecommenderConfigurationRequest{Request: req, Input: input, Copy: c.CreateRecommenderConfigurationRequest}
 }
 

@@ -114,6 +114,7 @@ func (c *Client) ModifyEbsDefaultKmsKeyIdRequest(input *ModifyEbsDefaultKmsKeyId
 	}
 
 	req := c.newRequest(op, input, &ModifyEbsDefaultKmsKeyIdOutput{})
+
 	return ModifyEbsDefaultKmsKeyIdRequest{Request: req, Input: input, Copy: c.ModifyEbsDefaultKmsKeyIdRequest}
 }
 

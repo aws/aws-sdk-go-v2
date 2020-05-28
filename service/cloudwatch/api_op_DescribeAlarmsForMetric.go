@@ -121,6 +121,7 @@ func (c *Client) DescribeAlarmsForMetricRequest(input *DescribeAlarmsForMetricIn
 	}
 
 	req := c.newRequest(op, input, &DescribeAlarmsForMetricOutput{})
+
 	return DescribeAlarmsForMetricRequest{Request: req, Input: input, Copy: c.DescribeAlarmsForMetricRequest}
 }
 

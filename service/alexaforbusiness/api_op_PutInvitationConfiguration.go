@@ -88,6 +88,7 @@ func (c *Client) PutInvitationConfigurationRequest(input *PutInvitationConfigura
 	}
 
 	req := c.newRequest(op, input, &PutInvitationConfigurationOutput{})
+
 	return PutInvitationConfigurationRequest{Request: req, Input: input, Copy: c.PutInvitationConfigurationRequest}
 }
 

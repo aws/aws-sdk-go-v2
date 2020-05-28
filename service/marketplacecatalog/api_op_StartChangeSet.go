@@ -148,7 +148,17 @@ const opStartChangeSet = "StartChangeSet"
 // StartChangeSetRequest returns a request value for making API operation for
 // AWS Marketplace Catalog Service.
 //
-// This operation allows you to request changes in your entities.
+// This operation allows you to request changes for your entities. Within a
+// single ChangeSet, you cannot start the same change type against the same
+// entity multiple times. Additionally, when a ChangeSet is running, all the
+// entities targeted by the different changes are locked until the ChangeSet
+// has completed (either succeeded, cancelled, or failed). If you try to start
+// a ChangeSet containing a change against an entity that is already locked,
+// you will receive a ResourceInUseException.
+//
+// For example, you cannot start the ChangeSet described in the example (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples)
+// below because it contains two changes to execute the same change type (AddRevisions)
+// against the same entity (entity-id@1).
 //
 //    // Example sending a request using StartChangeSetRequest.
 //    req := client.StartChangeSetRequest(params)
@@ -170,6 +180,7 @@ func (c *Client) StartChangeSetRequest(input *StartChangeSetInput) StartChangeSe
 	}
 
 	req := c.newRequest(op, input, &StartChangeSetOutput{})
+
 	return StartChangeSetRequest{Request: req, Input: input, Copy: c.StartChangeSetRequest}
 }
 

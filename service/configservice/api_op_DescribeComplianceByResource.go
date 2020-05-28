@@ -126,6 +126,7 @@ func (c *Client) DescribeComplianceByResourceRequest(input *DescribeComplianceBy
 	}
 
 	req := c.newRequest(op, input, &DescribeComplianceByResourceOutput{})
+
 	return DescribeComplianceByResourceRequest{Request: req, Input: input, Copy: c.DescribeComplianceByResourceRequest}
 }
 

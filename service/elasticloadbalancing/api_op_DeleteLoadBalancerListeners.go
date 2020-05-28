@@ -84,6 +84,7 @@ func (c *Client) DeleteLoadBalancerListenersRequest(input *DeleteLoadBalancerLis
 	}
 
 	req := c.newRequest(op, input, &DeleteLoadBalancerListenersOutput{})
+
 	return DeleteLoadBalancerListenersRequest{Request: req, Input: input, Copy: c.DeleteLoadBalancerListenersRequest}
 }
 

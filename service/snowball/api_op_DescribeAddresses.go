@@ -91,6 +91,7 @@ func (c *Client) DescribeAddressesRequest(input *DescribeAddressesInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeAddressesOutput{})
+
 	return DescribeAddressesRequest{Request: req, Input: input, Copy: c.DescribeAddressesRequest}
 }
 

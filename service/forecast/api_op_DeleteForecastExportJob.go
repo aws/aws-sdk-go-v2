@@ -79,6 +79,7 @@ func (c *Client) DeleteForecastExportJobRequest(input *DeleteForecastExportJobIn
 	req := c.newRequest(op, input, &DeleteForecastExportJobOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteForecastExportJobRequest{Request: req, Input: input, Copy: c.DeleteForecastExportJobRequest}
 }
 

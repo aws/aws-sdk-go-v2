@@ -92,6 +92,7 @@ func (c *Client) UntagQueueRequest(input *UntagQueueInput) UntagQueueRequest {
 	req := c.newRequest(op, input, &UntagQueueOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UntagQueueRequest{Request: req, Input: input, Copy: c.UntagQueueRequest}
 }
 

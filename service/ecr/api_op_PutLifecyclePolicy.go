@@ -102,6 +102,7 @@ func (c *Client) PutLifecyclePolicyRequest(input *PutLifecyclePolicyInput) PutLi
 	}
 
 	req := c.newRequest(op, input, &PutLifecyclePolicyOutput{})
+
 	return PutLifecyclePolicyRequest{Request: req, Input: input, Copy: c.PutLifecyclePolicyRequest}
 }
 

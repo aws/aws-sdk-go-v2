@@ -59,7 +59,7 @@ const opDescribeTableReplicaAutoScaling = "DescribeTableReplicaAutoScaling"
 //
 // Describes auto scaling settings across replicas of the global table at once.
 //
-// This method only applies to Version 2019.11.21 (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
+// This operation only applies to Version 2019.11.21 (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
 // of global tables.
 //
 //    // Example sending a request using DescribeTableReplicaAutoScalingRequest.
@@ -82,6 +82,7 @@ func (c *Client) DescribeTableReplicaAutoScalingRequest(input *DescribeTableRepl
 	}
 
 	req := c.newRequest(op, input, &DescribeTableReplicaAutoScalingOutput{})
+
 	return DescribeTableReplicaAutoScalingRequest{Request: req, Input: input, Copy: c.DescribeTableReplicaAutoScalingRequest}
 }
 

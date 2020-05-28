@@ -93,6 +93,7 @@ func (c *Client) PutPartnerEventsRequest(input *PutPartnerEventsInput) PutPartne
 	}
 
 	req := c.newRequest(op, input, &PutPartnerEventsOutput{})
+
 	return PutPartnerEventsRequest{Request: req, Input: input, Copy: c.PutPartnerEventsRequest}
 }
 

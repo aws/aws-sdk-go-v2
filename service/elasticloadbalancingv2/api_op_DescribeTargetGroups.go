@@ -102,6 +102,7 @@ func (c *Client) DescribeTargetGroupsRequest(input *DescribeTargetGroupsInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeTargetGroupsOutput{})
+
 	return DescribeTargetGroupsRequest{Request: req, Input: input, Copy: c.DescribeTargetGroupsRequest}
 }
 

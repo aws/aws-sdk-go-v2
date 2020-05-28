@@ -95,6 +95,7 @@ func (c *Client) AdminDeleteUserRequest(input *AdminDeleteUserInput) AdminDelete
 	req := c.newRequest(op, input, &AdminDeleteUserOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AdminDeleteUserRequest{Request: req, Input: input, Copy: c.AdminDeleteUserRequest}
 }
 

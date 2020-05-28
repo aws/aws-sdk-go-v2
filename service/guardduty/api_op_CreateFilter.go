@@ -107,6 +107,8 @@ type CreateFilterInput struct {
 	//
 	//    * service.action.networkConnectionAction.protocol
 	//
+	//    * service.action.networkConnectionAction.localIpDetails.ipAddressV4
+	//
 	//    * service.action.networkConnectionAction.remoteIpDetails.city.cityName
 	//
 	//    * service.action.networkConnectionAction.remoteIpDetails.country.countryName
@@ -308,6 +310,7 @@ func (c *Client) CreateFilterRequest(input *CreateFilterInput) CreateFilterReque
 	}
 
 	req := c.newRequest(op, input, &CreateFilterOutput{})
+
 	return CreateFilterRequest{Request: req, Input: input, Copy: c.CreateFilterRequest}
 }
 

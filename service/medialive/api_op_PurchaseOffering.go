@@ -159,6 +159,7 @@ func (c *Client) PurchaseOfferingRequest(input *PurchaseOfferingInput) PurchaseO
 	}
 
 	req := c.newRequest(op, input, &PurchaseOfferingOutput{})
+
 	return PurchaseOfferingRequest{Request: req, Input: input, Copy: c.PurchaseOfferingRequest}
 }
 

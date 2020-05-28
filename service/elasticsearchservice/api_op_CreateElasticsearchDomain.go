@@ -265,6 +265,7 @@ func (c *Client) CreateElasticsearchDomainRequest(input *CreateElasticsearchDoma
 	}
 
 	req := c.newRequest(op, input, &CreateElasticsearchDomainOutput{})
+
 	return CreateElasticsearchDomainRequest{Request: req, Input: input, Copy: c.CreateElasticsearchDomainRequest}
 }
 

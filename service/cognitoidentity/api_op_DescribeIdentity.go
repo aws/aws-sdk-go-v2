@@ -94,6 +94,7 @@ func (c *Client) DescribeIdentityRequest(input *DescribeIdentityInput) DescribeI
 	}
 
 	req := c.newRequest(op, input, &DescribeIdentityOutput{})
+
 	return DescribeIdentityRequest{Request: req, Input: input, Copy: c.DescribeIdentityRequest}
 }
 

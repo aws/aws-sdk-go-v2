@@ -162,6 +162,7 @@ func (c *Client) UpdateGameServerRequest(input *UpdateGameServerInput) UpdateGam
 	}
 
 	req := c.newRequest(op, input, &UpdateGameServerOutput{})
+
 	return UpdateGameServerRequest{Request: req, Input: input, Copy: c.UpdateGameServerRequest}
 }
 

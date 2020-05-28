@@ -150,6 +150,7 @@ func (c *Client) ListRecommendationsRequest(input *ListRecommendationsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListRecommendationsOutput{})
+
 	return ListRecommendationsRequest{Request: req, Input: input, Copy: c.ListRecommendationsRequest}
 }
 

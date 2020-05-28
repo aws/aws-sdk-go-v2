@@ -135,6 +135,7 @@ func (c *Client) PutModelRequest(input *PutModelInput) PutModelRequest {
 	}
 
 	req := c.newRequest(op, input, &PutModelOutput{})
+
 	return PutModelRequest{Request: req, Input: input, Copy: c.PutModelRequest}
 }
 

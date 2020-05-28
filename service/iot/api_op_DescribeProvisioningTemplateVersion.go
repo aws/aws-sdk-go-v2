@@ -146,6 +146,7 @@ func (c *Client) DescribeProvisioningTemplateVersionRequest(input *DescribeProvi
 	}
 
 	req := c.newRequest(op, input, &DescribeProvisioningTemplateVersionOutput{})
+
 	return DescribeProvisioningTemplateVersionRequest{Request: req, Input: input, Copy: c.DescribeProvisioningTemplateVersionRequest}
 }
 

@@ -159,6 +159,7 @@ func (c *Client) UpdateLayerRequest(input *UpdateLayerInput) UpdateLayerRequest 
 	req := c.newRequest(op, input, &UpdateLayerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateLayerRequest{Request: req, Input: input, Copy: c.UpdateLayerRequest}
 }
 

@@ -290,6 +290,7 @@ func (c *Client) CreateStackRequest(input *CreateStackInput) CreateStackRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateStackOutput{})
+
 	return CreateStackRequest{Request: req, Input: input, Copy: c.CreateStackRequest}
 }
 

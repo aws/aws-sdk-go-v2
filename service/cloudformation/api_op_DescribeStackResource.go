@@ -101,6 +101,7 @@ func (c *Client) DescribeStackResourceRequest(input *DescribeStackResourceInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeStackResourceOutput{})
+
 	return DescribeStackResourceRequest{Request: req, Input: input, Copy: c.DescribeStackResourceRequest}
 }
 

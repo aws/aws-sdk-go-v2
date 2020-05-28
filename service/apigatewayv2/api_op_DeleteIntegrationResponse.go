@@ -119,6 +119,7 @@ func (c *Client) DeleteIntegrationResponseRequest(input *DeleteIntegrationRespon
 	req := c.newRequest(op, input, &DeleteIntegrationResponseOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteIntegrationResponseRequest{Request: req, Input: input, Copy: c.DeleteIntegrationResponseRequest}
 }
 

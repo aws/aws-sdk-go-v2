@@ -76,8 +76,8 @@ type IncreaseNodeGroupsInGlobalReplicationGroupOutput struct {
 	// only reads. The primary cluster automatically replicates updates to the secondary
 	// cluster.
 	//
-	//    * The GlobalReplicationGroupId represents the name of the Global Datastore,
-	//    which is what you use to associate a secondary cluster.
+	//    * The GlobalReplicationGroupIdSuffix represents the name of the Global
+	//    Datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *GlobalReplicationGroup `type:"structure"`
 }
 
@@ -113,6 +113,7 @@ func (c *Client) IncreaseNodeGroupsInGlobalReplicationGroupRequest(input *Increa
 	}
 
 	req := c.newRequest(op, input, &IncreaseNodeGroupsInGlobalReplicationGroupOutput{})
+
 	return IncreaseNodeGroupsInGlobalReplicationGroupRequest{Request: req, Input: input, Copy: c.IncreaseNodeGroupsInGlobalReplicationGroupRequest}
 }
 

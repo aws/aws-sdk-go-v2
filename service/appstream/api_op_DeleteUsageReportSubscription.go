@@ -54,6 +54,7 @@ func (c *Client) DeleteUsageReportSubscriptionRequest(input *DeleteUsageReportSu
 	}
 
 	req := c.newRequest(op, input, &DeleteUsageReportSubscriptionOutput{})
+
 	return DeleteUsageReportSubscriptionRequest{Request: req, Input: input, Copy: c.DeleteUsageReportSubscriptionRequest}
 }
 

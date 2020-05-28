@@ -151,6 +151,7 @@ func (c *Client) ListBackupPlanVersionsRequest(input *ListBackupPlanVersionsInpu
 	}
 
 	req := c.newRequest(op, input, &ListBackupPlanVersionsOutput{})
+
 	return ListBackupPlanVersionsRequest{Request: req, Input: input, Copy: c.ListBackupPlanVersionsRequest}
 }
 

@@ -104,6 +104,7 @@ func (c *Client) DescribeUserHierarchyStructureRequest(input *DescribeUserHierar
 	}
 
 	req := c.newRequest(op, input, &DescribeUserHierarchyStructureOutput{})
+
 	return DescribeUserHierarchyStructureRequest{Request: req, Input: input, Copy: c.DescribeUserHierarchyStructureRequest}
 }
 

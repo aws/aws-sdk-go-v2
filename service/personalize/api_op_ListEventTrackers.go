@@ -91,6 +91,7 @@ func (c *Client) ListEventTrackersRequest(input *ListEventTrackersInput) ListEve
 	}
 
 	req := c.newRequest(op, input, &ListEventTrackersOutput{})
+
 	return ListEventTrackersRequest{Request: req, Input: input, Copy: c.ListEventTrackersRequest}
 }
 

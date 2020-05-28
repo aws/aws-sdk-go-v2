@@ -224,6 +224,7 @@ func (c *Client) GetUsageRequest(input *GetUsageInput) GetUsageRequest {
 	}
 
 	req := c.newRequest(op, input, &GetUsageOutput{})
+
 	return GetUsageRequest{Request: req, Input: input, Copy: c.GetUsageRequest}
 }
 

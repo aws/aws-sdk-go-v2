@@ -187,6 +187,7 @@ func (c *Client) ListSnapshotBlocksRequest(input *ListSnapshotBlocksInput) ListS
 	}
 
 	req := c.newRequest(op, input, &ListSnapshotBlocksOutput{})
+
 	return ListSnapshotBlocksRequest{Request: req, Input: input, Copy: c.ListSnapshotBlocksRequest}
 }
 

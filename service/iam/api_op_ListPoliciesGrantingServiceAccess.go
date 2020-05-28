@@ -157,6 +157,7 @@ func (c *Client) ListPoliciesGrantingServiceAccessRequest(input *ListPoliciesGra
 	}
 
 	req := c.newRequest(op, input, &ListPoliciesGrantingServiceAccessOutput{})
+
 	return ListPoliciesGrantingServiceAccessRequest{Request: req, Input: input, Copy: c.ListPoliciesGrantingServiceAccessRequest}
 }
 

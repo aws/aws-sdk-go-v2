@@ -80,6 +80,7 @@ func (c *Client) DeleteFlowTemplateRequest(input *DeleteFlowTemplateInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteFlowTemplateOutput{})
+
 	return DeleteFlowTemplateRequest{Request: req, Input: input, Copy: c.DeleteFlowTemplateRequest}
 }
 

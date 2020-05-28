@@ -95,6 +95,7 @@ func (c *Client) ModifyCacheParameterGroupRequest(input *ModifyCacheParameterGro
 	}
 
 	req := c.newRequest(op, input, &ModifyCacheParameterGroupOutput{})
+
 	return ModifyCacheParameterGroupRequest{Request: req, Input: input, Copy: c.ModifyCacheParameterGroupRequest}
 }
 

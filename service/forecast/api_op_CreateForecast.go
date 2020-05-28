@@ -117,6 +117,7 @@ func (c *Client) CreateForecastRequest(input *CreateForecastInput) CreateForecas
 	}
 
 	req := c.newRequest(op, input, &CreateForecastOutput{})
+
 	return CreateForecastRequest{Request: req, Input: input, Copy: c.CreateForecastRequest}
 }
 

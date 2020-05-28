@@ -18,7 +18,8 @@ type ListTagsForResourceInput struct {
 	// request to fetch the next batch of tags.
 	NextToken *string `type:"string"`
 
-	// The ARN of the signaling channel for which you want to list tags.
+	// The Amazon Resource Name (ARN) of the signaling channel for which you want
+	// to list tags.
 	//
 	// ResourceARN is a required field
 	ResourceARN *string `min:"1" type:"string" required:"true"`
@@ -132,6 +133,7 @@ func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+
 	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 

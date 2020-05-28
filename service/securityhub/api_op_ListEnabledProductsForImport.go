@@ -133,6 +133,7 @@ func (c *Client) ListEnabledProductsForImportRequest(input *ListEnabledProductsF
 	}
 
 	req := c.newRequest(op, input, &ListEnabledProductsForImportOutput{})
+
 	return ListEnabledProductsForImportRequest{Request: req, Input: input, Copy: c.ListEnabledProductsForImportRequest}
 }
 

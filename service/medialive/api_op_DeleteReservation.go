@@ -244,6 +244,7 @@ func (c *Client) DeleteReservationRequest(input *DeleteReservationInput) DeleteR
 	}
 
 	req := c.newRequest(op, input, &DeleteReservationOutput{})
+
 	return DeleteReservationRequest{Request: req, Input: input, Copy: c.DeleteReservationRequest}
 }
 

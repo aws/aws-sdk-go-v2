@@ -84,6 +84,7 @@ func (c *Client) DescribeSecurityConfigurationRequest(input *DescribeSecurityCon
 	}
 
 	req := c.newRequest(op, input, &DescribeSecurityConfigurationOutput{})
+
 	return DescribeSecurityConfigurationRequest{Request: req, Input: input, Copy: c.DescribeSecurityConfigurationRequest}
 }
 

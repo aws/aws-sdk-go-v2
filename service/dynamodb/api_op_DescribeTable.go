@@ -111,6 +111,7 @@ func (c *Client) DescribeTableRequest(input *DescribeTableInput) DescribeTableRe
 			Fn:   de.Handler,
 		})
 	}
+
 	return DescribeTableRequest{Request: req, Input: input, Copy: c.DescribeTableRequest}
 }
 

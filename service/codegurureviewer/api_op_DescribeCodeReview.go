@@ -104,6 +104,7 @@ func (c *Client) DescribeCodeReviewRequest(input *DescribeCodeReviewInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeCodeReviewOutput{})
+
 	return DescribeCodeReviewRequest{Request: req, Input: input, Copy: c.DescribeCodeReviewRequest}
 }
 

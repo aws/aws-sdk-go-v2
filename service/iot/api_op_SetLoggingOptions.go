@@ -101,6 +101,7 @@ func (c *Client) SetLoggingOptionsRequest(input *SetLoggingOptionsInput) SetLogg
 	req := c.newRequest(op, input, &SetLoggingOptionsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetLoggingOptionsRequest{Request: req, Input: input, Copy: c.SetLoggingOptionsRequest}
 }
 

@@ -151,6 +151,7 @@ func (c *Client) UpdateFindingsRequest(input *UpdateFindingsInput) UpdateFinding
 	req := c.newRequest(op, input, &UpdateFindingsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateFindingsRequest{Request: req, Input: input, Copy: c.UpdateFindingsRequest}
 }
 

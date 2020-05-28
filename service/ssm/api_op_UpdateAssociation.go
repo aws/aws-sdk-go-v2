@@ -82,7 +82,7 @@ type UpdateAssociationInput struct {
 	// or My-Document.
 	Name *string `type:"string"`
 
-	// An Amazon S3 bucket where you want to store the results of this request.
+	// An S3 bucket where you want to store the results of this request.
 	OutputLocation *InstanceAssociationOutputLocation `type:"structure"`
 
 	// The parameters you want to update for the association. If you create a parameter
@@ -91,6 +91,20 @@ type UpdateAssociationInput struct {
 
 	// The cron expression used to schedule the association that you want to update.
 	ScheduleExpression *string `min:"1" type:"string"`
+
+	// The mode for generating association compliance. You can specify AUTO or MANUAL.
+	// In AUTO mode, the system uses the status of the association execution to
+	// determine the compliance status. If the association execution runs successfully,
+	// then the association is COMPLIANT. If the association execution doesn't run
+	// successfully, the association is NON-COMPLIANT.
+	//
+	// In MANUAL mode, you must specify the AssociationId as a parameter for the
+	// PutComplianceItems API action. In this case, compliance data is not managed
+	// by State Manager. It is managed by your direct call to the PutComplianceItems
+	// API action.
+	//
+	// By default, all associations use AUTO mode.
+	SyncCompliance AssociationSyncCompliance `type:"string" enum:"true"`
 
 	// The targets of the association.
 	Targets []Target `type:"list"`
@@ -189,6 +203,7 @@ func (c *Client) UpdateAssociationRequest(input *UpdateAssociationInput) UpdateA
 	}
 
 	req := c.newRequest(op, input, &UpdateAssociationOutput{})
+
 	return UpdateAssociationRequest{Request: req, Input: input, Copy: c.UpdateAssociationRequest}
 }
 

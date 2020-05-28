@@ -87,6 +87,7 @@ func (c *Client) BatchDisassociateUserStackRequest(input *BatchDisassociateUserS
 	}
 
 	req := c.newRequest(op, input, &BatchDisassociateUserStackOutput{})
+
 	return BatchDisassociateUserStackRequest{Request: req, Input: input, Copy: c.BatchDisassociateUserStackRequest}
 }
 

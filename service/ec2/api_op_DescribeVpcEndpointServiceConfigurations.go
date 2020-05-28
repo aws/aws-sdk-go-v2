@@ -106,6 +106,7 @@ func (c *Client) DescribeVpcEndpointServiceConfigurationsRequest(input *Describe
 	}
 
 	req := c.newRequest(op, input, &DescribeVpcEndpointServiceConfigurationsOutput{})
+
 	return DescribeVpcEndpointServiceConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeVpcEndpointServiceConfigurationsRequest}
 }
 

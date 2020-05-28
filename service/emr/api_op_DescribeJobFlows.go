@@ -94,6 +94,7 @@ func (c *Client) DescribeJobFlowsRequest(input *DescribeJobFlowsInput) DescribeJ
 	}
 
 	req := c.newRequest(op, input, &DescribeJobFlowsOutput{})
+
 	return DescribeJobFlowsRequest{Request: req, Input: input, Copy: c.DescribeJobFlowsRequest}
 }
 

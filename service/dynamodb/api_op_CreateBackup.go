@@ -141,6 +141,7 @@ func (c *Client) CreateBackupRequest(input *CreateBackupInput) CreateBackupReque
 			Fn:   de.Handler,
 		})
 	}
+
 	return CreateBackupRequest{Request: req, Input: input, Copy: c.CreateBackupRequest}
 }
 

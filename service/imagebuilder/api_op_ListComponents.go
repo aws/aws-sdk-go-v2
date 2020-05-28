@@ -181,6 +181,7 @@ func (c *Client) ListComponentsRequest(input *ListComponentsInput) ListComponent
 	}
 
 	req := c.newRequest(op, input, &ListComponentsOutput{})
+
 	return ListComponentsRequest{Request: req, Input: input, Copy: c.ListComponentsRequest}
 }
 

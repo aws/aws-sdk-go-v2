@@ -127,6 +127,7 @@ func (c *Client) StartDeliveryStreamEncryptionRequest(input *StartDeliveryStream
 	}
 
 	req := c.newRequest(op, input, &StartDeliveryStreamEncryptionOutput{})
+
 	return StartDeliveryStreamEncryptionRequest{Request: req, Input: input, Copy: c.StartDeliveryStreamEncryptionRequest}
 }
 

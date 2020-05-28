@@ -91,6 +91,7 @@ func (c *Client) DescribeRulesPackagesRequest(input *DescribeRulesPackagesInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeRulesPackagesOutput{})
+
 	return DescribeRulesPackagesRequest{Request: req, Input: input, Copy: c.DescribeRulesPackagesRequest}
 }
 

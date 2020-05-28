@@ -79,6 +79,7 @@ func (c *Client) StopQueryRequest(input *StopQueryInput) StopQueryRequest {
 	}
 
 	req := c.newRequest(op, input, &StopQueryOutput{})
+
 	return StopQueryRequest{Request: req, Input: input, Copy: c.StopQueryRequest}
 }
 

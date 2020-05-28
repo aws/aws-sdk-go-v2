@@ -123,6 +123,7 @@ func (c *Client) GetDomainAssociationRequest(input *GetDomainAssociationInput) G
 	}
 
 	req := c.newRequest(op, input, &GetDomainAssociationOutput{})
+
 	return GetDomainAssociationRequest{Request: req, Input: input, Copy: c.GetDomainAssociationRequest}
 }
 

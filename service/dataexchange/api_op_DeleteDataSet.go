@@ -93,6 +93,7 @@ func (c *Client) DeleteDataSetRequest(input *DeleteDataSetInput) DeleteDataSetRe
 	req := c.newRequest(op, input, &DeleteDataSetOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteDataSetRequest{Request: req, Input: input, Copy: c.DeleteDataSetRequest}
 }
 

@@ -77,6 +77,7 @@ func (c *Client) DeleteCommentContentRequest(input *DeleteCommentContentInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteCommentContentOutput{})
+
 	return DeleteCommentContentRequest{Request: req, Input: input, Copy: c.DeleteCommentContentRequest}
 }
 

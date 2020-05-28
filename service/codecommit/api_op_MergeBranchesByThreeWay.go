@@ -145,6 +145,7 @@ func (c *Client) MergeBranchesByThreeWayRequest(input *MergeBranchesByThreeWayIn
 	}
 
 	req := c.newRequest(op, input, &MergeBranchesByThreeWayOutput{})
+
 	return MergeBranchesByThreeWayRequest{Request: req, Input: input, Copy: c.MergeBranchesByThreeWayRequest}
 }
 

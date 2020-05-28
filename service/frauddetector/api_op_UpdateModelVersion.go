@@ -121,6 +121,7 @@ func (c *Client) UpdateModelVersionRequest(input *UpdateModelVersionInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateModelVersionOutput{})
+
 	return UpdateModelVersionRequest{Request: req, Input: input, Copy: c.UpdateModelVersionRequest}
 }
 

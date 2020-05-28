@@ -93,6 +93,7 @@ func (c *Client) DescribePlacementGroupsRequest(input *DescribePlacementGroupsIn
 	}
 
 	req := c.newRequest(op, input, &DescribePlacementGroupsOutput{})
+
 	return DescribePlacementGroupsRequest{Request: req, Input: input, Copy: c.DescribePlacementGroupsRequest}
 }
 

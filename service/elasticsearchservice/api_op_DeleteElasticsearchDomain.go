@@ -108,6 +108,7 @@ func (c *Client) DeleteElasticsearchDomainRequest(input *DeleteElasticsearchDoma
 	}
 
 	req := c.newRequest(op, input, &DeleteElasticsearchDomainOutput{})
+
 	return DeleteElasticsearchDomainRequest{Request: req, Input: input, Copy: c.DeleteElasticsearchDomainRequest}
 }
 

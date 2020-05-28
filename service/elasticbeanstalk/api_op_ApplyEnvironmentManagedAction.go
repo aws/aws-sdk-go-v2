@@ -95,6 +95,7 @@ func (c *Client) ApplyEnvironmentManagedActionRequest(input *ApplyEnvironmentMan
 	}
 
 	req := c.newRequest(op, input, &ApplyEnvironmentManagedActionOutput{})
+
 	return ApplyEnvironmentManagedActionRequest{Request: req, Input: input, Copy: c.ApplyEnvironmentManagedActionRequest}
 }
 

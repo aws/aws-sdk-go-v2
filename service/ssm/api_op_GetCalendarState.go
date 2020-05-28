@@ -102,6 +102,7 @@ func (c *Client) GetCalendarStateRequest(input *GetCalendarStateInput) GetCalend
 	}
 
 	req := c.newRequest(op, input, &GetCalendarStateOutput{})
+
 	return GetCalendarStateRequest{Request: req, Input: input, Copy: c.GetCalendarStateRequest}
 }
 

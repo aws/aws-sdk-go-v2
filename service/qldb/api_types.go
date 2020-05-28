@@ -13,6 +13,144 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// The information about an Amazon QLDB journal stream, including the Amazon
+// Resource Name (ARN), stream name, creation time, current status, and the
+// parameters of your original stream creation request.
+type JournalKinesisStreamDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the QLDB journal stream.
+	Arn *string `min:"20" type:"string"`
+
+	// The date and time, in epoch time format, when the QLDB journal stream was
+	// created. (Epoch time format is the number of seconds elapsed since 12:00:00
+	// AM January 1, 1970 UTC.)
+	CreationTime *time.Time `type:"timestamp"`
+
+	// The error message that describes the reason that a stream has a status of
+	// IMPAIRED or FAILED. This is not applicable to streams that have other status
+	// values.
+	ErrorCause ErrorCause `type:"string" enum:"true"`
+
+	// The exclusive date and time that specifies when the stream ends. If this
+	// parameter is blank, the stream runs indefinitely until you cancel it.
+	ExclusiveEndTime *time.Time `type:"timestamp"`
+
+	// The inclusive start date and time from which to start streaming journal data.
+	InclusiveStartTime *time.Time `type:"timestamp"`
+
+	// The configuration settings of the Amazon Kinesis Data Streams destination
+	// for your QLDB journal stream.
+	//
+	// KinesisConfiguration is a required field
+	KinesisConfiguration *KinesisConfiguration `type:"structure" required:"true"`
+
+	// The name of the ledger.
+	//
+	// LedgerName is a required field
+	LedgerName *string `min:"1" type:"string" required:"true"`
+
+	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions
+	// for a journal stream to write data records to a Kinesis Data Streams resource.
+	//
+	// RoleArn is a required field
+	RoleArn *string `min:"20" type:"string" required:"true"`
+
+	// The current state of the QLDB journal stream.
+	//
+	// Status is a required field
+	Status StreamStatus `type:"string" required:"true" enum:"true"`
+
+	// The unique ID that QLDB assigns to each QLDB journal stream.
+	//
+	// StreamId is a required field
+	StreamId *string `min:"22" type:"string" required:"true"`
+
+	// The user-defined name of the QLDB journal stream.
+	//
+	// StreamName is a required field
+	StreamName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s JournalKinesisStreamDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JournalKinesisStreamDescription) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if len(s.ErrorCause) > 0 {
+		v := s.ErrorCause
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ErrorCause", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ExclusiveEndTime != nil {
+		v := *s.ExclusiveEndTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ExclusiveEndTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.InclusiveStartTime != nil {
+		v := *s.InclusiveStartTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InclusiveStartTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.KinesisConfiguration != nil {
+		v := s.KinesisConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "KinesisConfiguration", v, metadata)
+	}
+	if s.LedgerName != nil {
+		v := *s.LedgerName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LedgerName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.StreamId != nil {
+		v := *s.StreamId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamName != nil {
+		v := *s.StreamName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The information about a journal export job, including the ledger name, export
 // ID, when it was created, current status, and its start and end time export
 // parameters.
@@ -132,6 +270,61 @@ func (s JournalS3ExportDescription) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
+// The configuration settings of the Amazon Kinesis Data Streams destination
+// for your Amazon QLDB journal stream.
+type KinesisConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Enables QLDB to publish multiple stream records in a single Kinesis Data
+	// Streams record. To learn more, see KPL Key Concepts (https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html)
+	// in the Amazon Kinesis Data Streams Developer Guide.
+	AggregationEnabled *bool `type:"boolean"`
+
+	// The Amazon Resource Name (ARN) of the Kinesis data stream resource.
+	//
+	// StreamArn is a required field
+	StreamArn *string `min:"20" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s KinesisConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *KinesisConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "KinesisConfiguration"}
+
+	if s.StreamArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StreamArn"))
+	}
+	if s.StreamArn != nil && len(*s.StreamArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("StreamArn", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s KinesisConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AggregationEnabled != nil {
+		v := *s.AggregationEnabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AggregationEnabled", protocol.BoolValue(v), metadata)
+	}
+	if s.StreamArn != nil {
+		v := *s.StreamArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Information about a ledger, including its name, state, and when it was created.
 type LedgerSummary struct {
 	_ struct{} `type:"structure"`
@@ -182,8 +375,9 @@ func (s LedgerSummary) MarshalFields(e protocol.FieldEncoder) error {
 type S3EncryptionConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) for a customer master key (CMK) in AWS Key
-	// Management Service (AWS KMS).
+	// The Amazon Resource Name (ARN) for a symmetric customer master key (CMK)
+	// in AWS Key Management Service (AWS KMS). Amazon QLDB does not support asymmetric
+	// CMKs.
 	//
 	// You must provide a KmsKeyArn if you specify SSE_KMS as the ObjectEncryptionType.
 	//

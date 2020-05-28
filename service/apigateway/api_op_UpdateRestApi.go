@@ -252,6 +252,7 @@ func (c *Client) UpdateRestApiRequest(input *UpdateRestApiInput) UpdateRestApiRe
 	}
 
 	req := c.newRequest(op, input, &UpdateRestApiOutput{})
+
 	return UpdateRestApiRequest{Request: req, Input: input, Copy: c.UpdateRestApiRequest}
 }
 

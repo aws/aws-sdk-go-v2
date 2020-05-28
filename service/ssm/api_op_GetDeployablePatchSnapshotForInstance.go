@@ -100,6 +100,7 @@ func (c *Client) GetDeployablePatchSnapshotForInstanceRequest(input *GetDeployab
 	}
 
 	req := c.newRequest(op, input, &GetDeployablePatchSnapshotForInstanceOutput{})
+
 	return GetDeployablePatchSnapshotForInstanceRequest{Request: req, Input: input, Copy: c.GetDeployablePatchSnapshotForInstanceRequest}
 }
 

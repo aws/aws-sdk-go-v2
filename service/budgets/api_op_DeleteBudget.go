@@ -91,6 +91,7 @@ func (c *Client) DeleteBudgetRequest(input *DeleteBudgetInput) DeleteBudgetReque
 	}
 
 	req := c.newRequest(op, input, &DeleteBudgetOutput{})
+
 	return DeleteBudgetRequest{Request: req, Input: input, Copy: c.DeleteBudgetRequest}
 }
 

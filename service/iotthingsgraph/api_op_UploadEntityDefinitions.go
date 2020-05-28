@@ -107,6 +107,7 @@ func (c *Client) UploadEntityDefinitionsRequest(input *UploadEntityDefinitionsIn
 	}
 
 	req := c.newRequest(op, input, &UploadEntityDefinitionsOutput{})
+
 	return UploadEntityDefinitionsRequest{Request: req, Input: input, Copy: c.UploadEntityDefinitionsRequest}
 }
 

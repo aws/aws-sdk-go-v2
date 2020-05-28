@@ -86,6 +86,7 @@ func (c *Client) DeleteOrganizationalUnitRequest(input *DeleteOrganizationalUnit
 	req := c.newRequest(op, input, &DeleteOrganizationalUnitOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteOrganizationalUnitRequest{Request: req, Input: input, Copy: c.DeleteOrganizationalUnitRequest}
 }
 

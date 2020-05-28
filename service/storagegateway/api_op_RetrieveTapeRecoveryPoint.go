@@ -105,6 +105,7 @@ func (c *Client) RetrieveTapeRecoveryPointRequest(input *RetrieveTapeRecoveryPoi
 	}
 
 	req := c.newRequest(op, input, &RetrieveTapeRecoveryPointOutput{})
+
 	return RetrieveTapeRecoveryPointRequest{Request: req, Input: input, Copy: c.RetrieveTapeRecoveryPointRequest}
 }
 

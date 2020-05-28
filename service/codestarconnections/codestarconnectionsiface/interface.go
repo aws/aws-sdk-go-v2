@@ -68,6 +68,12 @@ type ClientAPI interface {
 	GetConnectionRequest(*codestarconnections.GetConnectionInput) codestarconnections.GetConnectionRequest
 
 	ListConnectionsRequest(*codestarconnections.ListConnectionsInput) codestarconnections.ListConnectionsRequest
+
+	ListTagsForResourceRequest(*codestarconnections.ListTagsForResourceInput) codestarconnections.ListTagsForResourceRequest
+
+	TagResourceRequest(*codestarconnections.TagResourceInput) codestarconnections.TagResourceRequest
+
+	UntagResourceRequest(*codestarconnections.UntagResourceInput) codestarconnections.UntagResourceRequest
 }
 
 var _ ClientAPI = (*codestarconnections.Client)(nil)

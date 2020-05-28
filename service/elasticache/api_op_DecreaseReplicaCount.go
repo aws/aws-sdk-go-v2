@@ -121,6 +121,7 @@ func (c *Client) DecreaseReplicaCountRequest(input *DecreaseReplicaCountInput) D
 	}
 
 	req := c.newRequest(op, input, &DecreaseReplicaCountOutput{})
+
 	return DecreaseReplicaCountRequest{Request: req, Input: input, Copy: c.DecreaseReplicaCountRequest}
 }
 

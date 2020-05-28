@@ -109,6 +109,7 @@ func (c *Client) GetTablesRequest(input *GetTablesInput) GetTablesRequest {
 	}
 
 	req := c.newRequest(op, input, &GetTablesOutput{})
+
 	return GetTablesRequest{Request: req, Input: input, Copy: c.GetTablesRequest}
 }
 

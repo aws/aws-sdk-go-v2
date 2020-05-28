@@ -95,6 +95,7 @@ func (c *Client) GetMaintenanceWindowExecutionRequest(input *GetMaintenanceWindo
 	}
 
 	req := c.newRequest(op, input, &GetMaintenanceWindowExecutionOutput{})
+
 	return GetMaintenanceWindowExecutionRequest{Request: req, Input: input, Copy: c.GetMaintenanceWindowExecutionRequest}
 }
 

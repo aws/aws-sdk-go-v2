@@ -90,6 +90,7 @@ func (c *Client) GetCheckerIpRangesRequest(input *GetCheckerIpRangesInput) GetCh
 	}
 
 	req := c.newRequest(op, input, &GetCheckerIpRangesOutput{})
+
 	return GetCheckerIpRangesRequest{Request: req, Input: input, Copy: c.GetCheckerIpRangesRequest}
 }
 

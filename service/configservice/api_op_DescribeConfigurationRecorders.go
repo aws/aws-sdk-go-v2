@@ -67,6 +67,7 @@ func (c *Client) DescribeConfigurationRecordersRequest(input *DescribeConfigurat
 	}
 
 	req := c.newRequest(op, input, &DescribeConfigurationRecordersOutput{})
+
 	return DescribeConfigurationRecordersRequest{Request: req, Input: input, Copy: c.DescribeConfigurationRecordersRequest}
 }
 

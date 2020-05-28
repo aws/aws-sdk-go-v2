@@ -147,6 +147,7 @@ func (c *Client) GetBucketReplicationRequest(input *GetBucketReplicationInput) G
 	}
 
 	req := c.newRequest(op, input, &GetBucketReplicationOutput{})
+
 	return GetBucketReplicationRequest{Request: req, Input: input, Copy: c.GetBucketReplicationRequest}
 }
 

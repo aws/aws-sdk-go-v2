@@ -115,6 +115,7 @@ func (c *Client) ListAccountAliasesRequest(input *ListAccountAliasesInput) ListA
 	}
 
 	req := c.newRequest(op, input, &ListAccountAliasesOutput{})
+
 	return ListAccountAliasesRequest{Request: req, Input: input, Copy: c.ListAccountAliasesRequest}
 }
 

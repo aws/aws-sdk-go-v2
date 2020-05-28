@@ -129,6 +129,7 @@ func (c *Client) DescribeClusterParametersRequest(input *DescribeClusterParamete
 	}
 
 	req := c.newRequest(op, input, &DescribeClusterParametersOutput{})
+
 	return DescribeClusterParametersRequest{Request: req, Input: input, Copy: c.DescribeClusterParametersRequest}
 }
 

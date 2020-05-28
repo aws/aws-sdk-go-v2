@@ -143,6 +143,7 @@ func (c *Client) PutMetricDataRequest(input *PutMetricDataInput) PutMetricDataRe
 	req := c.newRequest(op, input, &PutMetricDataOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutMetricDataRequest{Request: req, Input: input, Copy: c.PutMetricDataRequest}
 }
 

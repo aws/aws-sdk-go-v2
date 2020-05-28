@@ -118,6 +118,7 @@ func (c *Client) GetImportJobRequest(input *GetImportJobInput) GetImportJobReque
 	}
 
 	req := c.newRequest(op, input, &GetImportJobOutput{})
+
 	return GetImportJobRequest{Request: req, Input: input, Copy: c.GetImportJobRequest}
 }
 

@@ -60,6 +60,7 @@ func (c *Client) DescribeConnectionsRequest(input *DescribeConnectionsInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeConnectionsOutput{})
+
 	return DescribeConnectionsRequest{Request: req, Input: input, Copy: c.DescribeConnectionsRequest}
 }
 

@@ -117,6 +117,7 @@ func (c *Client) DetachThingPrincipalRequest(input *DetachThingPrincipalInput) D
 	}
 
 	req := c.newRequest(op, input, &DetachThingPrincipalOutput{})
+
 	return DetachThingPrincipalRequest{Request: req, Input: input, Copy: c.DetachThingPrincipalRequest}
 }
 

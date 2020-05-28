@@ -144,6 +144,7 @@ func (c *Client) ListApiKeysRequest(input *ListApiKeysInput) ListApiKeysRequest 
 	}
 
 	req := c.newRequest(op, input, &ListApiKeysOutput{})
+
 	return ListApiKeysRequest{Request: req, Input: input, Copy: c.ListApiKeysRequest}
 }
 

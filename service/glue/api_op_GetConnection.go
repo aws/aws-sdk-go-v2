@@ -93,6 +93,7 @@ func (c *Client) GetConnectionRequest(input *GetConnectionInput) GetConnectionRe
 	}
 
 	req := c.newRequest(op, input, &GetConnectionOutput{})
+
 	return GetConnectionRequest{Request: req, Input: input, Copy: c.GetConnectionRequest}
 }
 

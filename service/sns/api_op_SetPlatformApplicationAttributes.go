@@ -124,6 +124,7 @@ func (c *Client) SetPlatformApplicationAttributesRequest(input *SetPlatformAppli
 	req := c.newRequest(op, input, &SetPlatformApplicationAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetPlatformApplicationAttributesRequest{Request: req, Input: input, Copy: c.SetPlatformApplicationAttributesRequest}
 }
 

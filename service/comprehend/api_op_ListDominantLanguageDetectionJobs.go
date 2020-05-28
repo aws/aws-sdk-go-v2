@@ -98,6 +98,7 @@ func (c *Client) ListDominantLanguageDetectionJobsRequest(input *ListDominantLan
 	}
 
 	req := c.newRequest(op, input, &ListDominantLanguageDetectionJobsOutput{})
+
 	return ListDominantLanguageDetectionJobsRequest{Request: req, Input: input, Copy: c.ListDominantLanguageDetectionJobsRequest}
 }
 

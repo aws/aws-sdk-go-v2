@@ -13,12 +13,30 @@ import (
 type UpdateServiceSettingInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the service setting to update.
+	// The Amazon Resource Name (ARN) of the service setting to reset. For example,
+	// arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled.
+	// The setting ID can be one of the following.
+	//
+	//    * /ssm/parameter-store/default-parameter-tier
+	//
+	//    * /ssm/parameter-store/high-throughput-enabled
+	//
+	//    * /ssm/managed-instance/activation-tier
 	//
 	// SettingId is a required field
 	SettingId *string `min:"1" type:"string" required:"true"`
 
-	// The new value to specify for the service setting.
+	// The new value to specify for the service setting. For the /ssm/parameter-store/default-parameter-tier
+	// setting ID, the setting value can be one of the following.
+	//
+	//    * Standard
+	//
+	//    * Advanced
+	//
+	//    * Intelligent-Tiering
+	//
+	// For the /ssm/parameter-store/high-throughput-enabled, and /ssm/managed-instance/activation-tier
+	// setting IDs, the setting value can be true or false.
 	//
 	// SettingValue is a required field
 	SettingValue *string `min:"1" type:"string" required:"true"`
@@ -104,6 +122,7 @@ func (c *Client) UpdateServiceSettingRequest(input *UpdateServiceSettingInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateServiceSettingOutput{})
+
 	return UpdateServiceSettingRequest{Request: req, Input: input, Copy: c.UpdateServiceSettingRequest}
 }
 

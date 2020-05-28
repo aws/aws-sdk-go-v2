@@ -78,6 +78,7 @@ func (c *Client) DescribeServiceErrorsRequest(input *DescribeServiceErrorsInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeServiceErrorsOutput{})
+
 	return DescribeServiceErrorsRequest{Request: req, Input: input, Copy: c.DescribeServiceErrorsRequest}
 }
 

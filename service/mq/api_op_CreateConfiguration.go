@@ -150,6 +150,7 @@ func (c *Client) CreateConfigurationRequest(input *CreateConfigurationInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateConfigurationOutput{})
+
 	return CreateConfigurationRequest{Request: req, Input: input, Copy: c.CreateConfigurationRequest}
 }
 

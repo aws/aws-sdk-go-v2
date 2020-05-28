@@ -188,6 +188,7 @@ func (c *Client) RotateSecretRequest(input *RotateSecretInput) RotateSecretReque
 	}
 
 	req := c.newRequest(op, input, &RotateSecretOutput{})
+
 	return RotateSecretRequest{Request: req, Input: input, Copy: c.RotateSecretRequest}
 }
 

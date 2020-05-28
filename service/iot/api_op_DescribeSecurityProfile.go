@@ -220,6 +220,7 @@ func (c *Client) DescribeSecurityProfileRequest(input *DescribeSecurityProfileIn
 	}
 
 	req := c.newRequest(op, input, &DescribeSecurityProfileOutput{})
+
 	return DescribeSecurityProfileRequest{Request: req, Input: input, Copy: c.DescribeSecurityProfileRequest}
 }
 

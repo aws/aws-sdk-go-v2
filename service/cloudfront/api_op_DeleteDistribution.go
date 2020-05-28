@@ -139,6 +139,7 @@ func (c *Client) DeleteDistributionRequest(input *DeleteDistributionInput) Delet
 	req := c.newRequest(op, input, &DeleteDistributionOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteDistributionRequest{Request: req, Input: input, Copy: c.DeleteDistributionRequest}
 }
 

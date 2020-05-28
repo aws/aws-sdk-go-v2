@@ -161,6 +161,7 @@ func (c *Client) SearchAvailablePhoneNumbersRequest(input *SearchAvailablePhoneN
 	}
 
 	req := c.newRequest(op, input, &SearchAvailablePhoneNumbersOutput{})
+
 	return SearchAvailablePhoneNumbersRequest{Request: req, Input: input, Copy: c.SearchAvailablePhoneNumbersRequest}
 }
 

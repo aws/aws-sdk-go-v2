@@ -133,6 +133,7 @@ func (c *Client) DiscoverInputSchemaRequest(input *DiscoverInputSchemaInput) Dis
 	}
 
 	req := c.newRequest(op, input, &DiscoverInputSchemaOutput{})
+
 	return DiscoverInputSchemaRequest{Request: req, Input: input, Copy: c.DiscoverInputSchemaRequest}
 }
 

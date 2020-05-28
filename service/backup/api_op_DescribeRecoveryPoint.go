@@ -302,6 +302,7 @@ func (c *Client) DescribeRecoveryPointRequest(input *DescribeRecoveryPointInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeRecoveryPointOutput{})
+
 	return DescribeRecoveryPointRequest{Request: req, Input: input, Copy: c.DescribeRecoveryPointRequest}
 }
 

@@ -168,6 +168,7 @@ func (c *Client) ListRoutesRequest(input *ListRoutesInput) ListRoutesRequest {
 	}
 
 	req := c.newRequest(op, input, &ListRoutesOutput{})
+
 	return ListRoutesRequest{Request: req, Input: input, Copy: c.ListRoutesRequest}
 }
 

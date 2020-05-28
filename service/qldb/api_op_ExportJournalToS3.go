@@ -212,6 +212,7 @@ func (c *Client) ExportJournalToS3Request(input *ExportJournalToS3Input) ExportJ
 	}
 
 	req := c.newRequest(op, input, &ExportJournalToS3Output{})
+
 	return ExportJournalToS3Request{Request: req, Input: input, Copy: c.ExportJournalToS3Request}
 }
 

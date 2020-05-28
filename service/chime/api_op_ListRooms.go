@@ -154,6 +154,7 @@ func (c *Client) ListRoomsRequest(input *ListRoomsInput) ListRoomsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListRoomsOutput{})
+
 	return ListRoomsRequest{Request: req, Input: input, Copy: c.ListRoomsRequest}
 }
 

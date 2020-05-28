@@ -80,6 +80,7 @@ func (c *Client) StopProcessingJobRequest(input *StopProcessingJobInput) StopPro
 	req := c.newRequest(op, input, &StopProcessingJobOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StopProcessingJobRequest{Request: req, Input: input, Copy: c.StopProcessingJobRequest}
 }
 

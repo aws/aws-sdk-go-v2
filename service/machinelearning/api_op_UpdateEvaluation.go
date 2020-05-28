@@ -94,6 +94,7 @@ func (c *Client) UpdateEvaluationRequest(input *UpdateEvaluationInput) UpdateEva
 	}
 
 	req := c.newRequest(op, input, &UpdateEvaluationOutput{})
+
 	return UpdateEvaluationRequest{Request: req, Input: input, Copy: c.UpdateEvaluationRequest}
 }
 

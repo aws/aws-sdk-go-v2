@@ -20,17 +20,19 @@ type PutScheduledUpdateGroupActionInput struct {
 	// AutoScalingGroupName is a required field
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
-	// The number of EC2 instances that should be running in the Auto Scaling group.
+	// The desired capacity is the initial capacity of the Auto Scaling group after
+	// the scheduled action runs and the capacity it attempts to maintain. It can
+	// scale beyond this capacity if you add more scaling conditions.
 	DesiredCapacity *int64 `type:"integer"`
 
 	// The date and time for the recurring schedule to end. Amazon EC2 Auto Scaling
 	// does not perform the action after this time.
 	EndTime *time.Time `type:"timestamp"`
 
-	// The maximum number of instances in the Auto Scaling group.
+	// The maximum size of the Auto Scaling group.
 	MaxSize *int64 `type:"integer"`
 
-	// The minimum number of instances in the Auto Scaling group.
+	// The minimum size of the Auto Scaling group.
 	MinSize *int64 `type:"integer"`
 
 	// The recurring schedule for this action, in Unix cron syntax format. This
@@ -138,6 +140,7 @@ func (c *Client) PutScheduledUpdateGroupActionRequest(input *PutScheduledUpdateG
 	req := c.newRequest(op, input, &PutScheduledUpdateGroupActionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutScheduledUpdateGroupActionRequest{Request: req, Input: input, Copy: c.PutScheduledUpdateGroupActionRequest}
 }
 

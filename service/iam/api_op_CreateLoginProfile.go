@@ -114,6 +114,7 @@ func (c *Client) CreateLoginProfileRequest(input *CreateLoginProfileInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateLoginProfileOutput{})
+
 	return CreateLoginProfileRequest{Request: req, Input: input, Copy: c.CreateLoginProfileRequest}
 }
 

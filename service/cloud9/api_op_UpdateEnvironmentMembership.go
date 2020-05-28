@@ -101,6 +101,7 @@ func (c *Client) UpdateEnvironmentMembershipRequest(input *UpdateEnvironmentMemb
 	}
 
 	req := c.newRequest(op, input, &UpdateEnvironmentMembershipOutput{})
+
 	return UpdateEnvironmentMembershipRequest{Request: req, Input: input, Copy: c.UpdateEnvironmentMembershipRequest}
 }
 

@@ -204,6 +204,7 @@ func (c *Client) GetMissionProfileRequest(input *GetMissionProfileInput) GetMiss
 	}
 
 	req := c.newRequest(op, input, &GetMissionProfileOutput{})
+
 	return GetMissionProfileRequest{Request: req, Input: input, Copy: c.GetMissionProfileRequest}
 }
 

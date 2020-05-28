@@ -126,6 +126,7 @@ func (c *Client) GetTrafficPolicyRequest(input *GetTrafficPolicyInput) GetTraffi
 	}
 
 	req := c.newRequest(op, input, &GetTrafficPolicyOutput{})
+
 	return GetTrafficPolicyRequest{Request: req, Input: input, Copy: c.GetTrafficPolicyRequest}
 }
 

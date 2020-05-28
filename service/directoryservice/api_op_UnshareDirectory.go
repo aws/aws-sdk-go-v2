@@ -93,6 +93,7 @@ func (c *Client) UnshareDirectoryRequest(input *UnshareDirectoryInput) UnshareDi
 	}
 
 	req := c.newRequest(op, input, &UnshareDirectoryOutput{})
+
 	return UnshareDirectoryRequest{Request: req, Input: input, Copy: c.UnshareDirectoryRequest}
 }
 

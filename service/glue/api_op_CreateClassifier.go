@@ -98,6 +98,7 @@ func (c *Client) CreateClassifierRequest(input *CreateClassifierInput) CreateCla
 	}
 
 	req := c.newRequest(op, input, &CreateClassifierOutput{})
+
 	return CreateClassifierRequest{Request: req, Input: input, Copy: c.CreateClassifierRequest}
 }
 

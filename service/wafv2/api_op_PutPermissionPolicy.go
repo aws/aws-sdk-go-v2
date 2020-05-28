@@ -117,6 +117,7 @@ func (c *Client) PutPermissionPolicyRequest(input *PutPermissionPolicyInput) Put
 	}
 
 	req := c.newRequest(op, input, &PutPermissionPolicyOutput{})
+
 	return PutPermissionPolicyRequest{Request: req, Input: input, Copy: c.PutPermissionPolicyRequest}
 }
 

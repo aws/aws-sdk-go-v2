@@ -95,6 +95,7 @@ func (c *Client) PutNotificationChannelRequest(input *PutNotificationChannelInpu
 	req := c.newRequest(op, input, &PutNotificationChannelOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutNotificationChannelRequest{Request: req, Input: input, Copy: c.PutNotificationChannelRequest}
 }
 

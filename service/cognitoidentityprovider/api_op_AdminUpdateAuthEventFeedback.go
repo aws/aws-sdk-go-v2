@@ -110,6 +110,7 @@ func (c *Client) AdminUpdateAuthEventFeedbackRequest(input *AdminUpdateAuthEvent
 	}
 
 	req := c.newRequest(op, input, &AdminUpdateAuthEventFeedbackOutput{})
+
 	return AdminUpdateAuthEventFeedbackRequest{Request: req, Input: input, Copy: c.AdminUpdateAuthEventFeedbackRequest}
 }
 

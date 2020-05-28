@@ -151,6 +151,7 @@ func (c *Client) GetInsightsRequest(input *GetInsightsInput) GetInsightsRequest 
 	}
 
 	req := c.newRequest(op, input, &GetInsightsOutput{})
+
 	return GetInsightsRequest{Request: req, Input: input, Copy: c.GetInsightsRequest}
 }
 

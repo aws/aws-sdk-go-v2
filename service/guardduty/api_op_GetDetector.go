@@ -159,6 +159,7 @@ func (c *Client) GetDetectorRequest(input *GetDetectorInput) GetDetectorRequest 
 	}
 
 	req := c.newRequest(op, input, &GetDetectorOutput{})
+
 	return GetDetectorRequest{Request: req, Input: input, Copy: c.GetDetectorRequest}
 }
 

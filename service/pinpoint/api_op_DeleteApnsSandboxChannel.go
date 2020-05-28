@@ -103,6 +103,7 @@ func (c *Client) DeleteApnsSandboxChannelRequest(input *DeleteApnsSandboxChannel
 	}
 
 	req := c.newRequest(op, input, &DeleteApnsSandboxChannelOutput{})
+
 	return DeleteApnsSandboxChannelRequest{Request: req, Input: input, Copy: c.DeleteApnsSandboxChannelRequest}
 }
 

@@ -129,6 +129,7 @@ func (c *Client) AbortVaultLockRequest(input *AbortVaultLockInput) AbortVaultLoc
 	req := c.newRequest(op, input, &AbortVaultLockOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AbortVaultLockRequest{Request: req, Input: input, Copy: c.AbortVaultLockRequest}
 }
 

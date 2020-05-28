@@ -87,6 +87,7 @@ func (c *Client) BatchDeleteClusterSnapshotsRequest(input *BatchDeleteClusterSna
 	}
 
 	req := c.newRequest(op, input, &BatchDeleteClusterSnapshotsOutput{})
+
 	return BatchDeleteClusterSnapshotsRequest{Request: req, Input: input, Copy: c.BatchDeleteClusterSnapshotsRequest}
 }
 

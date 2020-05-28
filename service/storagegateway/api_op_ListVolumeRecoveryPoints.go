@@ -91,6 +91,7 @@ func (c *Client) ListVolumeRecoveryPointsRequest(input *ListVolumeRecoveryPoints
 	}
 
 	req := c.newRequest(op, input, &ListVolumeRecoveryPointsOutput{})
+
 	return ListVolumeRecoveryPointsRequest{Request: req, Input: input, Copy: c.ListVolumeRecoveryPointsRequest}
 }
 

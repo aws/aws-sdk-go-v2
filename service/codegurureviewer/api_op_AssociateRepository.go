@@ -150,6 +150,7 @@ func (c *Client) AssociateRepositoryRequest(input *AssociateRepositoryInput) Ass
 	}
 
 	req := c.newRequest(op, input, &AssociateRepositoryOutput{})
+
 	return AssociateRepositoryRequest{Request: req, Input: input, Copy: c.AssociateRepositoryRequest}
 }
 

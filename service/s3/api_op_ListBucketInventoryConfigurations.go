@@ -199,6 +199,7 @@ func (c *Client) ListBucketInventoryConfigurationsRequest(input *ListBucketInven
 	}
 
 	req := c.newRequest(op, input, &ListBucketInventoryConfigurationsOutput{})
+
 	return ListBucketInventoryConfigurationsRequest{Request: req, Input: input, Copy: c.ListBucketInventoryConfigurationsRequest}
 }
 

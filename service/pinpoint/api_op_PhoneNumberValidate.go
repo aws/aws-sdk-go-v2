@@ -103,6 +103,7 @@ func (c *Client) PhoneNumberValidateRequest(input *PhoneNumberValidateInput) Pho
 	}
 
 	req := c.newRequest(op, input, &PhoneNumberValidateOutput{})
+
 	return PhoneNumberValidateRequest{Request: req, Input: input, Copy: c.PhoneNumberValidateRequest}
 }
 

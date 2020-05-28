@@ -113,6 +113,7 @@ func (c *Client) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRe
 	}
 
 	req := c.newRequest(op, input, &UpdateProjectOutput{})
+
 	return UpdateProjectRequest{Request: req, Input: input, Copy: c.UpdateProjectRequest}
 }
 

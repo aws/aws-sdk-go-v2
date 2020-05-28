@@ -80,6 +80,7 @@ func (c *Client) DeregisterWorkspaceDirectoryRequest(input *DeregisterWorkspaceD
 	}
 
 	req := c.newRequest(op, input, &DeregisterWorkspaceDirectoryOutput{})
+
 	return DeregisterWorkspaceDirectoryRequest{Request: req, Input: input, Copy: c.DeregisterWorkspaceDirectoryRequest}
 }
 

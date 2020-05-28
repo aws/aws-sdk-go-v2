@@ -128,6 +128,7 @@ func (c *Client) ValidateConfigurationRequest(input *ValidateConfigurationInput)
 	req := c.newRequest(op, input, &ValidateConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return ValidateConfigurationRequest{Request: req, Input: input, Copy: c.ValidateConfigurationRequest}
 }
 

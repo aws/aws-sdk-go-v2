@@ -142,6 +142,7 @@ func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListJobsOutput{})
+
 	return ListJobsRequest{Request: req, Input: input, Copy: c.ListJobsRequest}
 }
 

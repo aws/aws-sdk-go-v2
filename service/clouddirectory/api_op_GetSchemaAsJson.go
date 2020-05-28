@@ -111,6 +111,7 @@ func (c *Client) GetSchemaAsJsonRequest(input *GetSchemaAsJsonInput) GetSchemaAs
 	}
 
 	req := c.newRequest(op, input, &GetSchemaAsJsonOutput{})
+
 	return GetSchemaAsJsonRequest{Request: req, Input: input, Copy: c.GetSchemaAsJsonRequest}
 }
 

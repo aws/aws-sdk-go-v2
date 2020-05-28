@@ -85,6 +85,7 @@ func (c *Client) CancelSchemaExtensionRequest(input *CancelSchemaExtensionInput)
 	}
 
 	req := c.newRequest(op, input, &CancelSchemaExtensionOutput{})
+
 	return CancelSchemaExtensionRequest{Request: req, Input: input, Copy: c.CancelSchemaExtensionRequest}
 }
 

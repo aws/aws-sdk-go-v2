@@ -98,6 +98,7 @@ func (c *Client) LogoutRequest(input *LogoutInput) LogoutRequest {
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return LogoutRequest{Request: req, Input: input, Copy: c.LogoutRequest}
 }
 

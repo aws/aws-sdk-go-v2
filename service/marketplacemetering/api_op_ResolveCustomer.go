@@ -91,6 +91,7 @@ func (c *Client) ResolveCustomerRequest(input *ResolveCustomerInput) ResolveCust
 	}
 
 	req := c.newRequest(op, input, &ResolveCustomerOutput{})
+
 	return ResolveCustomerRequest{Request: req, Input: input, Copy: c.ResolveCustomerRequest}
 }
 

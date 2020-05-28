@@ -104,6 +104,7 @@ func (c *Client) SetLoadBalancerPoliciesOfListenerRequest(input *SetLoadBalancer
 	}
 
 	req := c.newRequest(op, input, &SetLoadBalancerPoliciesOfListenerOutput{})
+
 	return SetLoadBalancerPoliciesOfListenerRequest{Request: req, Input: input, Copy: c.SetLoadBalancerPoliciesOfListenerRequest}
 }
 

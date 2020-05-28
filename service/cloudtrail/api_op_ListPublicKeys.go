@@ -91,6 +91,7 @@ func (c *Client) ListPublicKeysRequest(input *ListPublicKeysInput) ListPublicKey
 	}
 
 	req := c.newRequest(op, input, &ListPublicKeysOutput{})
+
 	return ListPublicKeysRequest{Request: req, Input: input, Copy: c.ListPublicKeysRequest}
 }
 

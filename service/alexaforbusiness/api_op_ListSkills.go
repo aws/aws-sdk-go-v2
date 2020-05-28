@@ -101,6 +101,7 @@ func (c *Client) ListSkillsRequest(input *ListSkillsInput) ListSkillsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListSkillsOutput{})
+
 	return ListSkillsRequest{Request: req, Input: input, Copy: c.ListSkillsRequest}
 }
 

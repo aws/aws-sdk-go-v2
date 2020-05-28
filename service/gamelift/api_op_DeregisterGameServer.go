@@ -120,6 +120,7 @@ func (c *Client) DeregisterGameServerRequest(input *DeregisterGameServerInput) D
 	req := c.newRequest(op, input, &DeregisterGameServerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeregisterGameServerRequest{Request: req, Input: input, Copy: c.DeregisterGameServerRequest}
 }
 

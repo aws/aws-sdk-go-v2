@@ -190,6 +190,7 @@ func (c *Client) DescribeMultiplexRequest(input *DescribeMultiplexInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeMultiplexOutput{})
+
 	return DescribeMultiplexRequest{Request: req, Input: input, Copy: c.DescribeMultiplexRequest}
 }
 

@@ -94,6 +94,7 @@ func (c *Client) DeleteRestApiRequest(input *DeleteRestApiInput) DeleteRestApiRe
 	req := c.newRequest(op, input, &DeleteRestApiOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteRestApiRequest{Request: req, Input: input, Copy: c.DeleteRestApiRequest}
 }
 

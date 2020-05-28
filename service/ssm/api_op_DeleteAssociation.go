@@ -68,6 +68,7 @@ func (c *Client) DeleteAssociationRequest(input *DeleteAssociationInput) DeleteA
 	}
 
 	req := c.newRequest(op, input, &DeleteAssociationOutput{})
+
 	return DeleteAssociationRequest{Request: req, Input: input, Copy: c.DeleteAssociationRequest}
 }
 

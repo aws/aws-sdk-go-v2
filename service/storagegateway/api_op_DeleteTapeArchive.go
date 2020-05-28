@@ -84,6 +84,7 @@ func (c *Client) DeleteTapeArchiveRequest(input *DeleteTapeArchiveInput) DeleteT
 	}
 
 	req := c.newRequest(op, input, &DeleteTapeArchiveOutput{})
+
 	return DeleteTapeArchiveRequest{Request: req, Input: input, Copy: c.DeleteTapeArchiveRequest}
 }
 

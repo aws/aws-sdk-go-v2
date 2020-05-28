@@ -182,6 +182,7 @@ func (c *Client) AttachTypedLinkRequest(input *AttachTypedLinkInput) AttachTyped
 	}
 
 	req := c.newRequest(op, input, &AttachTypedLinkOutput{})
+
 	return AttachTypedLinkRequest{Request: req, Input: input, Copy: c.AttachTypedLinkRequest}
 }
 

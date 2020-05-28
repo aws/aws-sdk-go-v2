@@ -80,6 +80,7 @@ func (c *Client) DeleteTestGridProjectRequest(input *DeleteTestGridProjectInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteTestGridProjectOutput{})
+
 	return DeleteTestGridProjectRequest{Request: req, Input: input, Copy: c.DeleteTestGridProjectRequest}
 }
 

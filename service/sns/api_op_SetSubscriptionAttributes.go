@@ -113,6 +113,7 @@ func (c *Client) SetSubscriptionAttributesRequest(input *SetSubscriptionAttribut
 	req := c.newRequest(op, input, &SetSubscriptionAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetSubscriptionAttributesRequest{Request: req, Input: input, Copy: c.SetSubscriptionAttributesRequest}
 }
 

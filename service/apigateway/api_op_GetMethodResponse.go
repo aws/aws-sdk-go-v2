@@ -212,6 +212,7 @@ func (c *Client) GetMethodResponseRequest(input *GetMethodResponseInput) GetMeth
 	}
 
 	req := c.newRequest(op, input, &GetMethodResponseOutput{})
+
 	return GetMethodResponseRequest{Request: req, Input: input, Copy: c.GetMethodResponseRequest}
 }
 

@@ -132,6 +132,7 @@ func (c *Client) ListBulkDeploymentDetailedReportsRequest(input *ListBulkDeploym
 	}
 
 	req := c.newRequest(op, input, &ListBulkDeploymentDetailedReportsOutput{})
+
 	return ListBulkDeploymentDetailedReportsRequest{Request: req, Input: input, Copy: c.ListBulkDeploymentDetailedReportsRequest}
 }
 

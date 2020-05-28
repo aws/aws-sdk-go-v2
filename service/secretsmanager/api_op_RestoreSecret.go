@@ -107,6 +107,7 @@ func (c *Client) RestoreSecretRequest(input *RestoreSecretInput) RestoreSecretRe
 	}
 
 	req := c.newRequest(op, input, &RestoreSecretOutput{})
+
 	return RestoreSecretRequest{Request: req, Input: input, Copy: c.RestoreSecretRequest}
 }
 

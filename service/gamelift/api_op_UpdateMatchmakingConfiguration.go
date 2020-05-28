@@ -195,6 +195,7 @@ func (c *Client) UpdateMatchmakingConfigurationRequest(input *UpdateMatchmakingC
 	}
 
 	req := c.newRequest(op, input, &UpdateMatchmakingConfigurationOutput{})
+
 	return UpdateMatchmakingConfigurationRequest{Request: req, Input: input, Copy: c.UpdateMatchmakingConfigurationRequest}
 }
 

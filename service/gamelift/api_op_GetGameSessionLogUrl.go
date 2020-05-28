@@ -106,6 +106,7 @@ func (c *Client) GetGameSessionLogUrlRequest(input *GetGameSessionLogUrlInput) G
 	}
 
 	req := c.newRequest(op, input, &GetGameSessionLogUrlOutput{})
+
 	return GetGameSessionLogUrlRequest{Request: req, Input: input, Copy: c.GetGameSessionLogUrlRequest}
 }
 

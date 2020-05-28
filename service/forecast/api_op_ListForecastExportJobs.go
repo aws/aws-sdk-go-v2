@@ -126,6 +126,7 @@ func (c *Client) ListForecastExportJobsRequest(input *ListForecastExportJobsInpu
 	}
 
 	req := c.newRequest(op, input, &ListForecastExportJobsOutput{})
+
 	return ListForecastExportJobsRequest{Request: req, Input: input, Copy: c.ListForecastExportJobsRequest}
 }
 

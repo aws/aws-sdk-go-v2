@@ -68,6 +68,7 @@ func (c *Client) ListGitHubAccountTokenNamesRequest(input *ListGitHubAccountToke
 	}
 
 	req := c.newRequest(op, input, &ListGitHubAccountTokenNamesOutput{})
+
 	return ListGitHubAccountTokenNamesRequest{Request: req, Input: input, Copy: c.ListGitHubAccountTokenNamesRequest}
 }
 

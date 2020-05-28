@@ -170,6 +170,7 @@ func (c *Client) ListVaultsRequest(input *ListVaultsInput) ListVaultsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListVaultsOutput{})
+
 	return ListVaultsRequest{Request: req, Input: input, Copy: c.ListVaultsRequest}
 }
 

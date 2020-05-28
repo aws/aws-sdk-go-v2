@@ -63,8 +63,8 @@ type DisassociateGlobalReplicationGroupOutput struct {
 	// only reads. The primary cluster automatically replicates updates to the secondary
 	// cluster.
 	//
-	//    * The GlobalReplicationGroupId represents the name of the Global Datastore,
-	//    which is what you use to associate a secondary cluster.
+	//    * The GlobalReplicationGroupIdSuffix represents the name of the Global
+	//    Datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *GlobalReplicationGroup `type:"structure"`
 }
 
@@ -102,6 +102,7 @@ func (c *Client) DisassociateGlobalReplicationGroupRequest(input *DisassociateGl
 	}
 
 	req := c.newRequest(op, input, &DisassociateGlobalReplicationGroupOutput{})
+
 	return DisassociateGlobalReplicationGroupRequest{Request: req, Input: input, Copy: c.DisassociateGlobalReplicationGroupRequest}
 }
 

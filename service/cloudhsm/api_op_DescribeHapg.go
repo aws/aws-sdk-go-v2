@@ -112,6 +112,7 @@ func (c *Client) DescribeHapgRequest(input *DescribeHapgInput) DescribeHapgReque
 	}
 
 	req := c.newRequest(op, input, &DescribeHapgOutput{})
+
 	return DescribeHapgRequest{Request: req, Input: input, Copy: c.DescribeHapgRequest}
 }
 

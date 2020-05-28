@@ -150,6 +150,7 @@ func (c *Client) GetLifecyclePolicyPreviewRequest(input *GetLifecyclePolicyPrevi
 	}
 
 	req := c.newRequest(op, input, &GetLifecyclePolicyPreviewOutput{})
+
 	return GetLifecyclePolicyPreviewRequest{Request: req, Input: input, Copy: c.GetLifecyclePolicyPreviewRequest}
 }
 

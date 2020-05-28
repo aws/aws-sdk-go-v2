@@ -80,6 +80,7 @@ func (c *Client) DeleteCodeRepositoryRequest(input *DeleteCodeRepositoryInput) D
 	req := c.newRequest(op, input, &DeleteCodeRepositoryOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteCodeRepositoryRequest{Request: req, Input: input, Copy: c.DeleteCodeRepositoryRequest}
 }
 

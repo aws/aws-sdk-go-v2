@@ -98,6 +98,7 @@ func (c *Client) CreateAssessmentTargetRequest(input *CreateAssessmentTargetInpu
 	}
 
 	req := c.newRequest(op, input, &CreateAssessmentTargetOutput{})
+
 	return CreateAssessmentTargetRequest{Request: req, Input: input, Copy: c.CreateAssessmentTargetRequest}
 }
 

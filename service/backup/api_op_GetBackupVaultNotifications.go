@@ -143,6 +143,7 @@ func (c *Client) GetBackupVaultNotificationsRequest(input *GetBackupVaultNotific
 	}
 
 	req := c.newRequest(op, input, &GetBackupVaultNotificationsOutput{})
+
 	return GetBackupVaultNotificationsRequest{Request: req, Input: input, Copy: c.GetBackupVaultNotificationsRequest}
 }
 

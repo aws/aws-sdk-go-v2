@@ -93,6 +93,7 @@ func (c *Client) StopBulkDeploymentRequest(input *StopBulkDeploymentInput) StopB
 	}
 
 	req := c.newRequest(op, input, &StopBulkDeploymentOutput{})
+
 	return StopBulkDeploymentRequest{Request: req, Input: input, Copy: c.StopBulkDeploymentRequest}
 }
 

@@ -169,6 +169,7 @@ func (c *Client) ListDistributionConfigurationsRequest(input *ListDistributionCo
 	}
 
 	req := c.newRequest(op, input, &ListDistributionConfigurationsOutput{})
+
 	return ListDistributionConfigurationsRequest{Request: req, Input: input, Copy: c.ListDistributionConfigurationsRequest}
 }
 

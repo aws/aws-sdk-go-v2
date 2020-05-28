@@ -236,6 +236,7 @@ func (c *Client) CreateVpcLinkRequest(input *CreateVpcLinkInput) CreateVpcLinkRe
 	}
 
 	req := c.newRequest(op, input, &CreateVpcLinkOutput{})
+
 	return CreateVpcLinkRequest{Request: req, Input: input, Copy: c.CreateVpcLinkRequest}
 }
 

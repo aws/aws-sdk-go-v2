@@ -179,6 +179,7 @@ func (c *Client) CreateReusableDelegationSetRequest(input *CreateReusableDelegat
 	}
 
 	req := c.newRequest(op, input, &CreateReusableDelegationSetOutput{})
+
 	return CreateReusableDelegationSetRequest{Request: req, Input: input, Copy: c.CreateReusableDelegationSetRequest}
 }
 

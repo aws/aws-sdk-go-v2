@@ -130,6 +130,7 @@ func (c *Client) PutEmailIdentityMailFromAttributesRequest(input *PutEmailIdenti
 	}
 
 	req := c.newRequest(op, input, &PutEmailIdentityMailFromAttributesOutput{})
+
 	return PutEmailIdentityMailFromAttributesRequest{Request: req, Input: input, Copy: c.PutEmailIdentityMailFromAttributesRequest}
 }
 

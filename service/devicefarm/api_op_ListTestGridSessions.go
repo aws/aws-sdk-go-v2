@@ -116,6 +116,7 @@ func (c *Client) ListTestGridSessionsRequest(input *ListTestGridSessionsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListTestGridSessionsOutput{})
+
 	return ListTestGridSessionsRequest{Request: req, Input: input, Copy: c.ListTestGridSessionsRequest}
 }
 

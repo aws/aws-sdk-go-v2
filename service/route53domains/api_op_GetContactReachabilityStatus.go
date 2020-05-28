@@ -81,6 +81,7 @@ func (c *Client) GetContactReachabilityStatusRequest(input *GetContactReachabili
 	}
 
 	req := c.newRequest(op, input, &GetContactReachabilityStatusOutput{})
+
 	return GetContactReachabilityStatusRequest{Request: req, Input: input, Copy: c.GetContactReachabilityStatusRequest}
 }
 

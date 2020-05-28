@@ -104,6 +104,7 @@ func (c *Client) IncreaseStreamRetentionPeriodRequest(input *IncreaseStreamReten
 	req := c.newRequest(op, input, &IncreaseStreamRetentionPeriodOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return IncreaseStreamRetentionPeriodRequest{Request: req, Input: input, Copy: c.IncreaseStreamRetentionPeriodRequest}
 }
 

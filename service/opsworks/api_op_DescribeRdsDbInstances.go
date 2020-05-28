@@ -88,6 +88,7 @@ func (c *Client) DescribeRdsDbInstancesRequest(input *DescribeRdsDbInstancesInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeRdsDbInstancesOutput{})
+
 	return DescribeRdsDbInstancesRequest{Request: req, Input: input, Copy: c.DescribeRdsDbInstancesRequest}
 }
 

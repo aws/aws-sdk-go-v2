@@ -611,6 +611,7 @@ func (c *Client) PutBotRequest(input *PutBotInput) PutBotRequest {
 	}
 
 	req := c.newRequest(op, input, &PutBotOutput{})
+
 	return PutBotRequest{Request: req, Input: input, Copy: c.PutBotRequest}
 }
 

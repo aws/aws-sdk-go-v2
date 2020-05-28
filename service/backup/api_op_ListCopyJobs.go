@@ -30,8 +30,6 @@ type ListCopyJobsInput struct {
 
 	// Returns only backup jobs for the specified resources:
 	//
-	//    * DynamoDB for Amazon DynamoDB
-	//
 	//    * EBS for Amazon Elastic Block Store
 	//
 	//    * EFS for Amazon Elastic File System
@@ -204,6 +202,7 @@ func (c *Client) ListCopyJobsRequest(input *ListCopyJobsInput) ListCopyJobsReque
 	}
 
 	req := c.newRequest(op, input, &ListCopyJobsOutput{})
+
 	return ListCopyJobsRequest{Request: req, Input: input, Copy: c.ListCopyJobsRequest}
 }
 

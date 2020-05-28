@@ -144,6 +144,7 @@ func (c *Client) ResendConfirmationCodeRequest(input *ResendConfirmationCodeInpu
 
 	req := c.newRequest(op, input, &ResendConfirmationCodeOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return ResendConfirmationCodeRequest{Request: req, Input: input, Copy: c.ResendConfirmationCodeRequest}
 }
 

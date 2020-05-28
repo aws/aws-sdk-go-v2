@@ -170,6 +170,7 @@ func (c *Client) UpdateGameServerGroupRequest(input *UpdateGameServerGroupInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateGameServerGroupOutput{})
+
 	return UpdateGameServerGroupRequest{Request: req, Input: input, Copy: c.UpdateGameServerGroupRequest}
 }
 

@@ -13,7 +13,7 @@ import (
 type RegisterThingInput struct {
 	_ struct{} `type:"structure"`
 
-	// The parameters for provisioning a thing. See Programmatic Provisioning (https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html)
+	// The parameters for provisioning a thing. See Provisioning Templates (https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html)
 	// for more information.
 	Parameters map[string]string `locationName:"parameters" type:"map"`
 
@@ -72,7 +72,7 @@ func (s RegisterThingInput) MarshalFields(e protocol.FieldEncoder) error {
 type RegisterThingOutput struct {
 	_ struct{} `type:"structure"`
 
-	// .
+	// The certificate data, in PEM format.
 	CertificatePem *string `locationName:"certificatePem" min:"1" type:"string"`
 
 	// ARNs for the generated resources.
@@ -136,6 +136,7 @@ func (c *Client) RegisterThingRequest(input *RegisterThingInput) RegisterThingRe
 	}
 
 	req := c.newRequest(op, input, &RegisterThingOutput{})
+
 	return RegisterThingRequest{Request: req, Input: input, Copy: c.RegisterThingRequest}
 }
 

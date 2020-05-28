@@ -78,6 +78,7 @@ func (c *Client) DeleteNamedQueryRequest(input *DeleteNamedQueryInput) DeleteNam
 	}
 
 	req := c.newRequest(op, input, &DeleteNamedQueryOutput{})
+
 	return DeleteNamedQueryRequest{Request: req, Input: input, Copy: c.DeleteNamedQueryRequest}
 }
 

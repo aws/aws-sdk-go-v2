@@ -185,6 +185,7 @@ func (c *Client) GetServiceLastAccessedDetailsWithEntitiesRequest(input *GetServ
 	}
 
 	req := c.newRequest(op, input, &GetServiceLastAccessedDetailsWithEntitiesOutput{})
+
 	return GetServiceLastAccessedDetailsWithEntitiesRequest{Request: req, Input: input, Copy: c.GetServiceLastAccessedDetailsWithEntitiesRequest}
 }
 

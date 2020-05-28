@@ -108,6 +108,7 @@ func (c *Client) MergeBranchesByFastForwardRequest(input *MergeBranchesByFastFor
 	}
 
 	req := c.newRequest(op, input, &MergeBranchesByFastForwardOutput{})
+
 	return MergeBranchesByFastForwardRequest{Request: req, Input: input, Copy: c.MergeBranchesByFastForwardRequest}
 }
 

@@ -57,6 +57,7 @@ func (c *Client) IsVpcPeeredRequest(input *IsVpcPeeredInput) IsVpcPeeredRequest 
 	}
 
 	req := c.newRequest(op, input, &IsVpcPeeredOutput{})
+
 	return IsVpcPeeredRequest{Request: req, Input: input, Copy: c.IsVpcPeeredRequest}
 }
 

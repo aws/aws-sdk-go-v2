@@ -103,6 +103,7 @@ func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsReque
 	}
 
 	req := c.newRequest(op, input, &DescribeTagsOutput{})
+
 	return DescribeTagsRequest{Request: req, Input: input, Copy: c.DescribeTagsRequest}
 }
 

@@ -93,6 +93,7 @@ func (c *Client) ListTagOptionsRequest(input *ListTagOptionsInput) ListTagOption
 	}
 
 	req := c.newRequest(op, input, &ListTagOptionsOutput{})
+
 	return ListTagOptionsRequest{Request: req, Input: input, Copy: c.ListTagOptionsRequest}
 }
 

@@ -80,12 +80,11 @@ const opSuspendProcesses = "SuspendProcesses"
 // the specified Auto Scaling group.
 //
 // If you suspend either the Launch or Terminate process types, it can prevent
-// other process types from functioning properly.
-//
-// To resume processes that have been suspended, use ResumeProcesses.
-//
-// For more information, see Suspending and Resuming Scaling Processes (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html)
+// other process types from functioning properly. For more information, see
+// Suspending and Resuming Scaling Processes (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html)
 // in the Amazon EC2 Auto Scaling User Guide.
+//
+// To resume processes that have been suspended, call the ResumeProcesses API.
 //
 //    // Example sending a request using SuspendProcessesRequest.
 //    req := client.SuspendProcessesRequest(params)
@@ -109,6 +108,7 @@ func (c *Client) SuspendProcessesRequest(input *SuspendProcessesInput) SuspendPr
 	req := c.newRequest(op, input, &SuspendProcessesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SuspendProcessesRequest{Request: req, Input: input, Copy: c.SuspendProcessesRequest}
 }
 

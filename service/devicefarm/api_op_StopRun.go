@@ -85,6 +85,7 @@ func (c *Client) StopRunRequest(input *StopRunInput) StopRunRequest {
 	}
 
 	req := c.newRequest(op, input, &StopRunOutput{})
+
 	return StopRunRequest{Request: req, Input: input, Copy: c.StopRunRequest}
 }
 

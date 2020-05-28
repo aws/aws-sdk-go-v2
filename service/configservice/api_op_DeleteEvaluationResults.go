@@ -82,6 +82,7 @@ func (c *Client) DeleteEvaluationResultsRequest(input *DeleteEvaluationResultsIn
 	}
 
 	req := c.newRequest(op, input, &DeleteEvaluationResultsOutput{})
+
 	return DeleteEvaluationResultsRequest{Request: req, Input: input, Copy: c.DeleteEvaluationResultsRequest}
 }
 

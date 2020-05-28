@@ -176,6 +176,7 @@ func (c *Client) GetLifecyclePoliciesRequest(input *GetLifecyclePoliciesInput) G
 	}
 
 	req := c.newRequest(op, input, &GetLifecyclePoliciesOutput{})
+
 	return GetLifecyclePoliciesRequest{Request: req, Input: input, Copy: c.GetLifecyclePoliciesRequest}
 }
 

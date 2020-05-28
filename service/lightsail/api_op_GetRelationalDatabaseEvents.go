@@ -99,6 +99,7 @@ func (c *Client) GetRelationalDatabaseEventsRequest(input *GetRelationalDatabase
 	}
 
 	req := c.newRequest(op, input, &GetRelationalDatabaseEventsOutput{})
+
 	return GetRelationalDatabaseEventsRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseEventsRequest}
 }
 

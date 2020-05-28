@@ -82,6 +82,7 @@ func (c *Client) DescribeDominantLanguageDetectionJobRequest(input *DescribeDomi
 	}
 
 	req := c.newRequest(op, input, &DescribeDominantLanguageDetectionJobOutput{})
+
 	return DescribeDominantLanguageDetectionJobRequest{Request: req, Input: input, Copy: c.DescribeDominantLanguageDetectionJobRequest}
 }
 

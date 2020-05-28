@@ -115,6 +115,7 @@ func (c *Client) RegisterInstanceRequest(input *RegisterInstanceInput) RegisterI
 	}
 
 	req := c.newRequest(op, input, &RegisterInstanceOutput{})
+
 	return RegisterInstanceRequest{Request: req, Input: input, Copy: c.RegisterInstanceRequest}
 }
 

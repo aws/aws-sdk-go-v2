@@ -107,6 +107,7 @@ func (c *Client) ExecuteChangeSetRequest(input *ExecuteChangeSetInput) ExecuteCh
 	}
 
 	req := c.newRequest(op, input, &ExecuteChangeSetOutput{})
+
 	return ExecuteChangeSetRequest{Request: req, Input: input, Copy: c.ExecuteChangeSetRequest}
 }
 

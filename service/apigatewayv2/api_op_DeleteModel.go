@@ -106,6 +106,7 @@ func (c *Client) DeleteModelRequest(input *DeleteModelInput) DeleteModelRequest 
 	req := c.newRequest(op, input, &DeleteModelOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteModelRequest{Request: req, Input: input, Copy: c.DeleteModelRequest}
 }
 

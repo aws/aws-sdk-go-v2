@@ -76,6 +76,7 @@ func (c *Client) GetRelationalDatabaseRequest(input *GetRelationalDatabaseInput)
 	}
 
 	req := c.newRequest(op, input, &GetRelationalDatabaseOutput{})
+
 	return GetRelationalDatabaseRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseRequest}
 }
 

@@ -158,6 +158,7 @@ func (c *Client) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateLoadBalancerOutput{})
+
 	return CreateLoadBalancerRequest{Request: req, Input: input, Copy: c.CreateLoadBalancerRequest}
 }
 

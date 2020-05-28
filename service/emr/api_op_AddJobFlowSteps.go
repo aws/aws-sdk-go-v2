@@ -118,6 +118,7 @@ func (c *Client) AddJobFlowStepsRequest(input *AddJobFlowStepsInput) AddJobFlowS
 	}
 
 	req := c.newRequest(op, input, &AddJobFlowStepsOutput{})
+
 	return AddJobFlowStepsRequest{Request: req, Input: input, Copy: c.AddJobFlowStepsRequest}
 }
 

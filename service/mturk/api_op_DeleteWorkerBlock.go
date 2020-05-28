@@ -85,6 +85,7 @@ func (c *Client) DeleteWorkerBlockRequest(input *DeleteWorkerBlockInput) DeleteW
 	}
 
 	req := c.newRequest(op, input, &DeleteWorkerBlockOutput{})
+
 	return DeleteWorkerBlockRequest{Request: req, Input: input, Copy: c.DeleteWorkerBlockRequest}
 }
 

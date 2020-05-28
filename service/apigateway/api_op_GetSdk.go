@@ -169,6 +169,7 @@ func (c *Client) GetSdkRequest(input *GetSdkInput) GetSdkRequest {
 	}
 
 	req := c.newRequest(op, input, &GetSdkOutput{})
+
 	return GetSdkRequest{Request: req, Input: input, Copy: c.GetSdkRequest}
 }
 

@@ -94,6 +94,7 @@ func (c *Client) GetJobRunRequest(input *GetJobRunInput) GetJobRunRequest {
 	}
 
 	req := c.newRequest(op, input, &GetJobRunOutput{})
+
 	return GetJobRunRequest{Request: req, Input: input, Copy: c.GetJobRunRequest}
 }
 

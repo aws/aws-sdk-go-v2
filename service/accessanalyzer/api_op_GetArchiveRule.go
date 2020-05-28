@@ -126,6 +126,7 @@ func (c *Client) GetArchiveRuleRequest(input *GetArchiveRuleInput) GetArchiveRul
 	}
 
 	req := c.newRequest(op, input, &GetArchiveRuleOutput{})
+
 	return GetArchiveRuleRequest{Request: req, Input: input, Copy: c.GetArchiveRuleRequest}
 }
 

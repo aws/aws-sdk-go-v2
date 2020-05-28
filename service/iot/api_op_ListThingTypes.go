@@ -135,6 +135,7 @@ func (c *Client) ListThingTypesRequest(input *ListThingTypesInput) ListThingType
 	}
 
 	req := c.newRequest(op, input, &ListThingTypesOutput{})
+
 	return ListThingTypesRequest{Request: req, Input: input, Copy: c.ListThingTypesRequest}
 }
 

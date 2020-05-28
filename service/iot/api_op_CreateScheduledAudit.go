@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -69,6 +70,13 @@ func (s *CreateScheduledAuditInput) Validate() error {
 
 	if s.TargetCheckNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetCheckNames"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -180,6 +188,7 @@ func (c *Client) CreateScheduledAuditRequest(input *CreateScheduledAuditInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateScheduledAuditOutput{})
+
 	return CreateScheduledAuditRequest{Request: req, Input: input, Copy: c.CreateScheduledAuditRequest}
 }
 

@@ -111,6 +111,7 @@ func (c *Client) GetStreamingDistributionConfigRequest(input *GetStreamingDistri
 	}
 
 	req := c.newRequest(op, input, &GetStreamingDistributionConfigOutput{})
+
 	return GetStreamingDistributionConfigRequest{Request: req, Input: input, Copy: c.GetStreamingDistributionConfigRequest}
 }
 

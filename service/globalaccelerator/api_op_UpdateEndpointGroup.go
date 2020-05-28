@@ -122,6 +122,7 @@ func (c *Client) UpdateEndpointGroupRequest(input *UpdateEndpointGroupInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateEndpointGroupOutput{})
+
 	return UpdateEndpointGroupRequest{Request: req, Input: input, Copy: c.UpdateEndpointGroupRequest}
 }
 

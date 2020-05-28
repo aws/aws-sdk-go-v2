@@ -24,10 +24,10 @@ type CreateServiceInput struct {
 	// that you want AWS Cloud Map to create when you register an instance.
 	DnsConfig *DnsConfig `type:"structure"`
 
-	// Public DNS namespaces only. A complex type that contains settings for an
-	// optional Route 53 health check. If you specify settings for a health check,
-	// AWS Cloud Map associates the health check with all the Route 53 DNS records
-	// that you specify in DnsConfig.
+	// Public DNS and HTTP namespaces only. A complex type that contains settings
+	// for an optional Route 53 health check. If you specify settings for a health
+	// check, AWS Cloud Map associates the health check with all the Route 53 DNS
+	// records that you specify in DnsConfig.
 	//
 	// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
 	// or HealthCheckConfig but not both.
@@ -41,9 +41,26 @@ type CreateServiceInput struct {
 	//
 	// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
 	// or HealthCheckConfig but not both.
+	//
+	// You can't add, update, or delete a HealthCheckCustomConfig configuration
+	// from an existing service.
 	HealthCheckCustomConfig *HealthCheckCustomConfig `type:"structure"`
 
 	// The name that you want to assign to the service.
+	//
+	// If you want AWS Cloud Map to create an SRV record when you register an instance,
+	// and if you're using a system that requires a specific SRV format, such as
+	// HAProxy (http://www.haproxy.org/), specify the following for Name:
+	//
+	//    * Start the name with an underscore (_), such as _exampleservice
+	//
+	//    * End the name with ._protocol, such as ._tcp
+	//
+	// When you register an instance, AWS Cloud Map creates an SRV record and assigns
+	// a name to the record by concatenating the service name and the namespace
+	// name, for example:
+	//
+	// _exampleservice._tcp.example.com
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
@@ -110,12 +127,12 @@ const opCreateService = "CreateService"
 //
 //    * Optionally, a health check
 //
-// After you create the service, you can submit a RegisterInstance request,
-// and AWS Cloud Map uses the values in the configuration to create the specified
-// entities.
+// After you create the service, you can submit a RegisterInstance (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
+// request, and AWS Cloud Map uses the values in the configuration to create
+// the specified entities.
 //
 // For the current limit on the number of instances that you can register using
-// the same namespace and using the same service, see AWS Cloud Map Limits (http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// the same namespace and using the same service, see AWS Cloud Map Limits (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
 // in the AWS Cloud Map Developer Guide.
 //
 //    // Example sending a request using CreateServiceRequest.
@@ -138,6 +155,7 @@ func (c *Client) CreateServiceRequest(input *CreateServiceInput) CreateServiceRe
 	}
 
 	req := c.newRequest(op, input, &CreateServiceOutput{})
+
 	return CreateServiceRequest{Request: req, Input: input, Copy: c.CreateServiceRequest}
 }
 

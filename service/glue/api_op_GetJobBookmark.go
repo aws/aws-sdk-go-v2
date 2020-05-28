@@ -79,6 +79,7 @@ func (c *Client) GetJobBookmarkRequest(input *GetJobBookmarkInput) GetJobBookmar
 	}
 
 	req := c.newRequest(op, input, &GetJobBookmarkOutput{})
+
 	return GetJobBookmarkRequest{Request: req, Input: input, Copy: c.GetJobBookmarkRequest}
 }
 

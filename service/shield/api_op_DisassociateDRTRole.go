@@ -61,6 +61,7 @@ func (c *Client) DisassociateDRTRoleRequest(input *DisassociateDRTRoleInput) Dis
 	}
 
 	req := c.newRequest(op, input, &DisassociateDRTRoleOutput{})
+
 	return DisassociateDRTRoleRequest{Request: req, Input: input, Copy: c.DisassociateDRTRoleRequest}
 }
 

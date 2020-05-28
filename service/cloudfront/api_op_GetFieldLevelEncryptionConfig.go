@@ -110,6 +110,7 @@ func (c *Client) GetFieldLevelEncryptionConfigRequest(input *GetFieldLevelEncryp
 	}
 
 	req := c.newRequest(op, input, &GetFieldLevelEncryptionConfigOutput{})
+
 	return GetFieldLevelEncryptionConfigRequest{Request: req, Input: input, Copy: c.GetFieldLevelEncryptionConfigRequest}
 }
 

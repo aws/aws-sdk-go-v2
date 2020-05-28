@@ -249,6 +249,7 @@ func (c *Client) CreateMatchmakingConfigurationRequest(input *CreateMatchmakingC
 	}
 
 	req := c.newRequest(op, input, &CreateMatchmakingConfigurationOutput{})
+
 	return CreateMatchmakingConfigurationRequest{Request: req, Input: input, Copy: c.CreateMatchmakingConfigurationRequest}
 }
 
