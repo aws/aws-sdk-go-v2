@@ -122,6 +122,7 @@ func TestMD5InPutBucketReplication(t *testing.T) {
 					Destination: &s3.Destination{
 						Bucket: aws.String("mock bucket"),
 					},
+					Status: s3.ReplicationRuleStatusDisabled,
 				},
 			},
 		},
