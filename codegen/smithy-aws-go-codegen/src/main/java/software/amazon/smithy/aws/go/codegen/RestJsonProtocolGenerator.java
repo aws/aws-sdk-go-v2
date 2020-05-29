@@ -18,6 +18,7 @@ package software.amazon.smithy.aws.go.codegen;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -104,7 +105,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             Shape inputShape,
             Predicate<MemberShape> filterMemberShapes
     ) {
-        Symbol jsonEncoder = SymbolUtils.createPointableSymbolBuilder("Value", GoDependency.AWS_JSON_PROTOCOL)
+        Symbol jsonEncoder = SymbolUtils.createPointableSymbolBuilder("Value", GoDependency.SMITHY_JSON)
                 .build();
         Symbol inputSymbol = symbolProvider.toSymbol(inputShape);
 
@@ -160,7 +161,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                     writer.write("return err");
                 });
             } else {
-                writer.write("av" + writeSimpleShapeToJsonValue(model, memberShape, operand));
+                generateSimpleShapeToJsonValue(model, writer, memberShape, operand, (w, s) -> w.write("av.$L", s));
             }
         });
     }
@@ -208,14 +209,14 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                         if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
                             String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(targetShape,
                                     getProtocolName());
-                            operand = CodegenUtils.isShapePassByReference(targetShape) ? "&" + operand : operand;
                             writer.openBlock("if err := $L($L, object.Key($S)); err != nil {", "}", serFunctionName,
                                     operand, memberShape.getMemberName(), () -> {
                                         writer.write("return err");
                                     });
                         } else {
-                            writer.write("object.Key($S)" + writeSimpleShapeToJsonValue(model, memberShape, operand),
-                                    getSerializedMemberName(memberShape));
+                            generateSimpleShapeToJsonValue(model, writer, memberShape, operand, (w, s) -> {
+                                        writer.write("object.Key($S).$L", getSerializedMemberName(memberShape), s);
+                                    });
                         }
                     });
             writer.write("");
@@ -231,48 +232,65 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 String serFunctionName = ProtocolGenerator
                         .getDocumentSerializerFunctionName(targetShape,
                                 getProtocolName());
-                String operand = "v[key]";
-                operand = CodegenUtils.isShapePassByReference(targetShape) ? "&" + operand : operand;
-                writer.openBlock("if err := $L($L, object.Key(key)); err != nil {", "}", serFunctionName, operand,
+                writer.openBlock("if err := $L($L, object.Key(key)); err != nil {", "}", serFunctionName, "v[key]",
                         () -> {
                             writer.write("return err");
                         });
             } else {
-                writer.write("object.Key(key)" + writeSimpleShapeToJsonValue(model, memberShape, "v[key]"));
+                generateSimpleShapeToJsonValue(model, writer, memberShape, "v[key]", (w, s) -> {
+                    writer.write("object.Key(key).$L", s);
+                });
             }
         });
     }
 
-    private String writeSimpleShapeToJsonValue(Model model, MemberShape memberShape, String operand) {
+    private void generateSimpleShapeToJsonValue(
+            Model model,
+            GoWriter writer,
+            MemberShape memberShape,
+            String operand,
+            BiConsumer<GoWriter, String> locationEncoder
+    ) {
         Shape targetShape = model.expectShape(memberShape.getTarget());
 
         // JSON encoder helper methods take a value not a reference so we need to determine if we need to dereference.
         operand = CodegenUtils.isShapePassByReference(targetShape)
+                && targetShape.getType() != ShapeType.BIG_INTEGER
+                && targetShape.getType() != ShapeType.BIG_DECIMAL
                 ? "*" + operand : operand;
 
         switch (targetShape.getType()) {
             case BOOLEAN:
-                return ".Boolean(" + operand + ")";
+                locationEncoder.accept(writer, "Boolean(" + operand + ")");
+                break;
             case STRING:
                 operand = targetShape.hasTrait(EnumTrait.class) ? "string(" + operand + ")" : operand;
-                return ".String(" + operand + ")";
+                locationEncoder.accept(writer, "String(" + operand + ")");
+                break;
             case TIMESTAMP:
-                // TODO: This needs to handle formats
-                return ".UnixTime(" + operand + ")";
+                generateDocumentTimestampSerializer(model, writer, memberShape, operand, locationEncoder);
+                break;
             case BYTE:
-                return ".Byte(" + operand + ")";
+                locationEncoder.accept(writer, "Byte(" + operand + ")");
+                break;
             case SHORT:
-                return ".Short(" + operand + ")";
+                locationEncoder.accept(writer, "Short(" + operand + ")");
+                break;
             case INTEGER:
-                return ".Integer(" + operand + ")";
+                locationEncoder.accept(writer, "Integer(" + operand + ")");
+                break;
             case LONG:
-                return ".Long(" + operand + ")";
+                locationEncoder.accept(writer, "Long(" + operand + ")");
+                break;
             case FLOAT:
-                return ".Float(" + operand + ")";
+                locationEncoder.accept(writer, "Float(" + operand + ")");
+                break;
             case DOUBLE:
-                return ".Double(" + operand + ")";
+                locationEncoder.accept(writer, "Double(" + operand + ")");
+                break;
             case BLOB:
-                return ".Blob(" + operand + ")";
+                locationEncoder.accept(writer, "Blob(" + operand + ")");
+                break;
             default:
                 throw new CodegenException("Unsupported shape type " + targetShape.getType());
         }
@@ -296,7 +314,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             return;
         }
 
-        writer.addUseImports(SymbolUtils.createValueSymbolBuilder(null, GoDependency.AWS_JSON_PROTOCOL).build());
+        writer.addUseImports(SymbolUtils.createValueSymbolBuilder(null, GoDependency.SMITHY_JSON).build());
 
         writer.write("var documentPayload []byte");
         writer.write("");
@@ -373,6 +391,42 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     private String getSerializedMemberName(MemberShape memberShape) {
         Optional<JsonNameTrait> jsonNameTrait = memberShape.getTrait(JsonNameTrait.class);
         return jsonNameTrait.isPresent() ? jsonNameTrait.get().getValue() : memberShape.getMemberName();
+    }
+
+    /**
+     * Generate the serializer statement for the document timestamp
+     *
+     * @param model       the model
+     * @param writer      the writer
+     * @param memberShape the timestamp member shape to serialize
+     * @param operand     the go operand
+     */
+    private void generateDocumentTimestampSerializer(
+            Model model,
+            GoWriter writer,
+            MemberShape memberShape,
+            String operand,
+            BiConsumer<GoWriter, String> locationEncoder
+    ) {
+        writer.addUseImports(GoDependency.SMITHY_TIME);
+
+        TimestampFormatTrait.Format format = memberShape.getMemberTrait(model, TimestampFormatTrait.class)
+                .map(TimestampFormatTrait::getFormat)
+                .orElse(TimestampFormatTrait.Format.EPOCH_SECONDS);
+
+        switch (format) {
+            case DATE_TIME:
+                locationEncoder.accept(writer, "String(smithytime.FormatDateTime(" + operand + "))");
+                break;
+            case HTTP_DATE:
+                locationEncoder.accept(writer, "String(smithytime.FormatHTTPDate(" + operand + "))");
+                break;
+            case EPOCH_SECONDS:
+                locationEncoder.accept(writer, "Float(smithytime.FormatEpochSeconds(" + operand + "))");
+                break;
+            case UNKNOWN:
+                throw new CodegenException("Unknown timestamp format");
+        }
     }
 
     @Override
