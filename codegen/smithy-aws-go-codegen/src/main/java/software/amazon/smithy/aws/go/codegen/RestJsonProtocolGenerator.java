@@ -43,6 +43,7 @@ import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.shapes.ShapeType;
 import software.amazon.smithy.model.shapes.StructureShape;
+import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.EnumTrait;
 import software.amazon.smithy.model.traits.HttpErrorTrait;
 import software.amazon.smithy.model.traits.JsonNameTrait;
@@ -118,6 +119,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                     writer.write("");
 
                     switch (inputShape.getType()) {
+                        case UNION:
                         case MAP:
                         case STRUCTURE:
                             writeShapeToJsonObject(model, symbolProvider, writer, inputShape, filterMemberShapes);
@@ -126,7 +128,6 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                         case SET:
                             writeShapeToJsonArray(model, writer, (CollectionShape) inputShape);
                             break;
-                        case UNION:
                         case DOCUMENT:
                             writer.write("// TODO: Support " + inputShape.getType().name() + " Serialization");
                             break;
@@ -156,6 +157,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
                 String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(targetShape,
                         getProtocolName());
+
                 operand = CodegenUtils.isShapePassByReference(targetShape) ? "&" + operand : operand;
                 writer.openBlock("if err := $L($L, av); err != nil {", "}", serFunctionName, operand, () -> {
                     writer.write("return err");
@@ -185,9 +187,50 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 writeStructuredShapeToJsonObject(model, symbolProvider, writer, (StructureShape) shape,
                         filterMemberShapes);
                 break;
+            case UNION:
+                writeUnionShapeToJsonObject(model, symbolProvider, writer, (UnionShape) shape);
             default:
                 throw new CodegenException("Unexpected shape serialization to JSON Object");
         }
+    }
+
+    private void writeUnionShapeToJsonObject(
+            Model model,
+            SymbolProvider symbolProvider,
+            GoWriter writer,
+            UnionShape shape
+    ) {
+        Symbol symbol = symbolProvider.toSymbol(shape);
+
+        writer.addUseImports(GoDependency.FMT);
+
+        writer.openBlock("switch uv := v.(type) {", "}", () -> {
+            for (MemberShape memberShape : shape.getAllMembers().values()) {
+                Shape targetShape = model.expectShape(memberShape.getTarget());
+                Symbol memberSymbol = symbolProvider.toSymbol(memberShape);
+                String exportedMemberName = symbol.getName() + symbolProvider.toMemberName(memberShape);
+
+                writer.openBlock("case $L:", "", exportedMemberName, () -> {
+                    if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
+                        String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(targetShape,
+                                getProtocolName());
+                        writer.write("av := object.key($S)", memberSymbol.getName());
+                        writer.openBlock("if err := $L(uv.Value(), av); err != nil {", "}", serFunctionName, () -> {
+                            writer.write("return err");
+                        });
+                    } else {
+                        generateSimpleShapeToJsonValue(model, writer, memberShape, "uv.Value()", (w, s) -> {
+                            writer.write("object.Key($S).$L", memberShape.getMemberName(), s);
+                        });
+                    }
+                });
+            }
+            writer.openBlock("case $LUnknown:", "", symbol.getName(), () -> writer.write("fallthrough"));
+            writer.openBlock("default:", "", () -> {
+                writer.write("return fmt.Errorf(\"attempted to serialize unknown member type %T"
+                        + " for union %T\", uv, v)");
+            });
+        });
     }
 
     private void writeStructuredShapeToJsonObject(
@@ -215,8 +258,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                                     });
                         } else {
                             generateSimpleShapeToJsonValue(model, writer, memberShape, operand, (w, s) -> {
-                                        writer.write("object.Key($S).$L", getSerializedMemberName(memberShape), s);
-                                    });
+                                writer.write("object.Key($S).$L", getSerializedMemberName(memberShape), s);
+                            });
                         }
                     });
             writer.write("");
