@@ -210,7 +210,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 Symbol memberSymbol = symbolProvider.toSymbol(memberShape);
                 String exportedMemberName = symbol.getName() + symbolProvider.toMemberName(memberShape);
 
-                writer.openBlock("case $L:", "", exportedMemberName, () -> {
+                writer.openBlock("case *$L:", "", exportedMemberName, () -> {
                     if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
                         String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(targetShape,
                                 getProtocolName());
@@ -225,7 +225,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                     }
                 });
             }
-            writer.openBlock("case $LUnknown:", "", symbol.getName(), () -> writer.write("fallthrough"));
+            writer.openBlock("case *$LUnknown:", "", symbol.getName(), () -> writer.write("fallthrough"));
             writer.openBlock("default:", "", () -> {
                 writer.write("return fmt.Errorf(\"attempted to serialize unknown member type %T"
                         + " for union %T\", uv, v)");
