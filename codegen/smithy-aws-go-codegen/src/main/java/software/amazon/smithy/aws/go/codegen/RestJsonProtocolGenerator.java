@@ -830,7 +830,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                         // default case to handle unknown fields
                         writer.openBlock("default : ","", () -> {
                             writer.addUseImports(GoDependency.AWS_JSON_PROTOCOL_ALIAS);
-                            writer.write("jsonprotocol.DiscardUnknownField(decoder)");
+                            writer.write("err := jsonprotocol.DiscardUnknownField(decoder)");
+                            writer.write("if err != nil {return err}");
                             writer.write("break");
                         });
                     });
