@@ -116,6 +116,7 @@ func (c *Client) UnarchiveFindingsRequest(input *UnarchiveFindingsInput) Unarchi
 	}
 
 	req := c.newRequest(op, input, &UnarchiveFindingsOutput{})
+
 	return UnarchiveFindingsRequest{Request: req, Input: input, Copy: c.UnarchiveFindingsRequest}
 }
 

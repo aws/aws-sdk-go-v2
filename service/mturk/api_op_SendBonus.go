@@ -128,6 +128,7 @@ func (c *Client) SendBonusRequest(input *SendBonusInput) SendBonusRequest {
 	}
 
 	req := c.newRequest(op, input, &SendBonusOutput{})
+
 	return SendBonusRequest{Request: req, Input: input, Copy: c.SendBonusRequest}
 }
 

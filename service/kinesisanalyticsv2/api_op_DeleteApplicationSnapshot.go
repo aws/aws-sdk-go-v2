@@ -99,6 +99,7 @@ func (c *Client) DeleteApplicationSnapshotRequest(input *DeleteApplicationSnapsh
 	}
 
 	req := c.newRequest(op, input, &DeleteApplicationSnapshotOutput{})
+
 	return DeleteApplicationSnapshotRequest{Request: req, Input: input, Copy: c.DeleteApplicationSnapshotRequest}
 }
 

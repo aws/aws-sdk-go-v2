@@ -117,6 +117,7 @@ func (c *Client) GetUserSettingsRequest(input *GetUserSettingsInput) GetUserSett
 	}
 
 	req := c.newRequest(op, input, &GetUserSettingsOutput{})
+
 	return GetUserSettingsRequest{Request: req, Input: input, Copy: c.GetUserSettingsRequest}
 }
 

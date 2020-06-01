@@ -109,6 +109,7 @@ func (c *Client) DeleteFlowRequest(input *DeleteFlowInput) DeleteFlowRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteFlowOutput{})
+
 	return DeleteFlowRequest{Request: req, Input: input, Copy: c.DeleteFlowRequest}
 }
 

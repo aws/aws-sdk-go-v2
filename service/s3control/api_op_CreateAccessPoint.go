@@ -38,7 +38,7 @@ type CreateAccessPointInput struct {
 	PublicAccessBlockConfiguration *PublicAccessBlockConfiguration `type:"structure"`
 
 	// If you include this field, Amazon S3 restricts access to this access point
-	// to requests from the specified Virtual Private Cloud (VPC).
+	// to requests from the specified virtual private cloud (VPC).
 	VpcConfiguration *VpcConfiguration `type:"structure"`
 }
 
@@ -164,6 +164,7 @@ func (c *Client) CreateAccessPointRequest(input *CreateAccessPointInput) CreateA
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
+
 	return CreateAccessPointRequest{Request: req, Input: input, Copy: c.CreateAccessPointRequest}
 }
 

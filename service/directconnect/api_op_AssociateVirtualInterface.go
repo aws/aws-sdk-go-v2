@@ -202,6 +202,7 @@ func (c *Client) AssociateVirtualInterfaceRequest(input *AssociateVirtualInterfa
 	}
 
 	req := c.newRequest(op, input, &AssociateVirtualInterfaceOutput{})
+
 	return AssociateVirtualInterfaceRequest{Request: req, Input: input, Copy: c.AssociateVirtualInterfaceRequest}
 }
 

@@ -95,6 +95,7 @@ func (c *Client) GetAppsRequest(input *GetAppsInput) GetAppsRequest {
 	}
 
 	req := c.newRequest(op, input, &GetAppsOutput{})
+
 	return GetAppsRequest{Request: req, Input: input, Copy: c.GetAppsRequest}
 }
 

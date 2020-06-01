@@ -138,6 +138,7 @@ func (c *Client) CreateWorkteamRequest(input *CreateWorkteamInput) CreateWorktea
 	}
 
 	req := c.newRequest(op, input, &CreateWorkteamOutput{})
+
 	return CreateWorkteamRequest{Request: req, Input: input, Copy: c.CreateWorkteamRequest}
 }
 

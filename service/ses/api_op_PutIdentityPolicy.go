@@ -122,6 +122,7 @@ func (c *Client) PutIdentityPolicyRequest(input *PutIdentityPolicyInput) PutIden
 	}
 
 	req := c.newRequest(op, input, &PutIdentityPolicyOutput{})
+
 	return PutIdentityPolicyRequest{Request: req, Input: input, Copy: c.PutIdentityPolicyRequest}
 }
 

@@ -123,6 +123,7 @@ func (c *Client) ImportSshPublicKeyRequest(input *ImportSshPublicKeyInput) Impor
 	}
 
 	req := c.newRequest(op, input, &ImportSshPublicKeyOutput{})
+
 	return ImportSshPublicKeyRequest{Request: req, Input: input, Copy: c.ImportSshPublicKeyRequest}
 }
 

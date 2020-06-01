@@ -87,6 +87,7 @@ func (c *Client) DescribeSSLPoliciesRequest(input *DescribeSSLPoliciesInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeSSLPoliciesOutput{})
+
 	return DescribeSSLPoliciesRequest{Request: req, Input: input, Copy: c.DescribeSSLPoliciesRequest}
 }
 

@@ -139,6 +139,7 @@ func (c *Client) GetBucketPolicyStatusRequest(input *GetBucketPolicyStatusInput)
 	}
 
 	req := c.newRequest(op, input, &GetBucketPolicyStatusOutput{})
+
 	return GetBucketPolicyStatusRequest{Request: req, Input: input, Copy: c.GetBucketPolicyStatusRequest}
 }
 

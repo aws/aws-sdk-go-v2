@@ -73,6 +73,16 @@ const opAssociateWebACL = "AssociateWebACL"
 // AssociateWebACLRequest returns a request value for making API operation for
 // AWS WAF Regional.
 //
+//
+// This is AWS WAF Classic Regional documentation. For more information, see
+// AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Associates a web ACL with a resource, either an application load balancer
 // or Amazon API Gateway stage.
 //
@@ -96,6 +106,7 @@ func (c *Client) AssociateWebACLRequest(input *AssociateWebACLInput) AssociateWe
 	}
 
 	req := c.newRequest(op, input, &AssociateWebACLOutput{})
+
 	return AssociateWebACLRequest{Request: req, Input: input, Copy: c.AssociateWebACLRequest}
 }
 

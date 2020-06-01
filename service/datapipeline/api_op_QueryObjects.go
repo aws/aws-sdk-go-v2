@@ -123,6 +123,7 @@ func (c *Client) QueryObjectsRequest(input *QueryObjectsInput) QueryObjectsReque
 	}
 
 	req := c.newRequest(op, input, &QueryObjectsOutput{})
+
 	return QueryObjectsRequest{Request: req, Input: input, Copy: c.QueryObjectsRequest}
 }
 

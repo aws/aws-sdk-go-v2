@@ -147,6 +147,7 @@ func (c *Client) GetLogEventsRequest(input *GetLogEventsInput) GetLogEventsReque
 	}
 
 	req := c.newRequest(op, input, &GetLogEventsOutput{})
+
 	return GetLogEventsRequest{Request: req, Input: input, Copy: c.GetLogEventsRequest}
 }
 

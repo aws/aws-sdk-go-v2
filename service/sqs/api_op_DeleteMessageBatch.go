@@ -119,6 +119,7 @@ func (c *Client) DeleteMessageBatchRequest(input *DeleteMessageBatchInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteMessageBatchOutput{})
+
 	return DeleteMessageBatchRequest{Request: req, Input: input, Copy: c.DeleteMessageBatchRequest}
 }
 

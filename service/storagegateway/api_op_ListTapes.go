@@ -121,6 +121,7 @@ func (c *Client) ListTapesRequest(input *ListTapesInput) ListTapesRequest {
 	}
 
 	req := c.newRequest(op, input, &ListTapesOutput{})
+
 	return ListTapesRequest{Request: req, Input: input, Copy: c.ListTapesRequest}
 }
 

@@ -4,6 +4,7 @@ package kendra
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -36,6 +37,10 @@ type CreateFaqInput struct {
 	//
 	// S3Path is a required field
 	S3Path *S3Path `type:"structure" required:"true"`
+
+	// A list of key-value pairs that identify the FAQ. You can use the tags to
+	// identify and organize your resources and to control access to resources.
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -77,6 +82,13 @@ func (s *CreateFaqInput) Validate() error {
 	if s.S3Path != nil {
 		if err := s.S3Path.Validate(); err != nil {
 			invalidParams.AddNested("S3Path", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -125,6 +137,7 @@ func (c *Client) CreateFaqRequest(input *CreateFaqInput) CreateFaqRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateFaqOutput{})
+
 	return CreateFaqRequest{Request: req, Input: input, Copy: c.CreateFaqRequest}
 }
 

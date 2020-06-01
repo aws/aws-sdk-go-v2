@@ -94,6 +94,7 @@ func (c *Client) DescribeTrailsRequest(input *DescribeTrailsInput) DescribeTrail
 	}
 
 	req := c.newRequest(op, input, &DescribeTrailsOutput{})
+
 	return DescribeTrailsRequest{Request: req, Input: input, Copy: c.DescribeTrailsRequest}
 }
 

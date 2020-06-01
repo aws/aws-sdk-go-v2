@@ -80,6 +80,7 @@ func (c *Client) GetTestGridProjectRequest(input *GetTestGridProjectInput) GetTe
 	}
 
 	req := c.newRequest(op, input, &GetTestGridProjectOutput{})
+
 	return GetTestGridProjectRequest{Request: req, Input: input, Copy: c.GetTestGridProjectRequest}
 }
 

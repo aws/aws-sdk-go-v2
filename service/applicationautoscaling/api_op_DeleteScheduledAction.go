@@ -197,6 +197,7 @@ func (c *Client) DeleteScheduledActionRequest(input *DeleteScheduledActionInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteScheduledActionOutput{})
+
 	return DeleteScheduledActionRequest{Request: req, Input: input, Copy: c.DeleteScheduledActionRequest}
 }
 

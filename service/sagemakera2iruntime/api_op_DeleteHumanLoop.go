@@ -95,6 +95,7 @@ func (c *Client) DeleteHumanLoopRequest(input *DeleteHumanLoopInput) DeleteHuman
 	}
 
 	req := c.newRequest(op, input, &DeleteHumanLoopOutput{})
+
 	return DeleteHumanLoopRequest{Request: req, Input: input, Copy: c.DeleteHumanLoopRequest}
 }
 

@@ -124,6 +124,7 @@ func (c *Client) UnsubscribeRequest(input *UnsubscribeInput) UnsubscribeRequest 
 	}
 
 	req := c.newRequest(op, input, &UnsubscribeOutput{})
+
 	return UnsubscribeRequest{Request: req, Input: input, Copy: c.UnsubscribeRequest}
 }
 

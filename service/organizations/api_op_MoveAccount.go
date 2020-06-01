@@ -125,6 +125,7 @@ func (c *Client) MoveAccountRequest(input *MoveAccountInput) MoveAccountRequest 
 	req := c.newRequest(op, input, &MoveAccountOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return MoveAccountRequest{Request: req, Input: input, Copy: c.MoveAccountRequest}
 }
 

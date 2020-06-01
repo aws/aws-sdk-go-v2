@@ -193,6 +193,7 @@ func (c *Client) GetBotAliasRequest(input *GetBotAliasInput) GetBotAliasRequest 
 	}
 
 	req := c.newRequest(op, input, &GetBotAliasOutput{})
+
 	return GetBotAliasRequest{Request: req, Input: input, Copy: c.GetBotAliasRequest}
 }
 

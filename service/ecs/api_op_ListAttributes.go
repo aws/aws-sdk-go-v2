@@ -122,6 +122,7 @@ func (c *Client) ListAttributesRequest(input *ListAttributesInput) ListAttribute
 	}
 
 	req := c.newRequest(op, input, &ListAttributesOutput{})
+
 	return ListAttributesRequest{Request: req, Input: input, Copy: c.ListAttributesRequest}
 }
 

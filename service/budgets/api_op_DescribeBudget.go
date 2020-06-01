@@ -96,6 +96,7 @@ func (c *Client) DescribeBudgetRequest(input *DescribeBudgetInput) DescribeBudge
 	}
 
 	req := c.newRequest(op, input, &DescribeBudgetOutput{})
+
 	return DescribeBudgetRequest{Request: req, Input: input, Copy: c.DescribeBudgetRequest}
 }
 

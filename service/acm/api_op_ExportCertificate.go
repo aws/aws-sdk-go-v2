@@ -115,6 +115,7 @@ func (c *Client) ExportCertificateRequest(input *ExportCertificateInput) ExportC
 	}
 
 	req := c.newRequest(op, input, &ExportCertificateOutput{})
+
 	return ExportCertificateRequest{Request: req, Input: input, Copy: c.ExportCertificateRequest}
 }
 

@@ -105,6 +105,7 @@ func (c *Client) SetStatusRequest(input *SetStatusInput) SetStatusRequest {
 	req := c.newRequest(op, input, &SetStatusOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetStatusRequest{Request: req, Input: input, Copy: c.SetStatusRequest}
 }
 

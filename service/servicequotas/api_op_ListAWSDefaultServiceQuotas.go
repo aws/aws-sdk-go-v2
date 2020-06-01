@@ -125,6 +125,7 @@ func (c *Client) ListAWSDefaultServiceQuotasRequest(input *ListAWSDefaultService
 	}
 
 	req := c.newRequest(op, input, &ListAWSDefaultServiceQuotasOutput{})
+
 	return ListAWSDefaultServiceQuotasRequest{Request: req, Input: input, Copy: c.ListAWSDefaultServiceQuotasRequest}
 }
 

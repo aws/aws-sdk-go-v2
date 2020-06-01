@@ -103,6 +103,7 @@ func (c *Client) GetServiceQuotaIncreaseRequestFromTemplateRequest(input *GetSer
 	}
 
 	req := c.newRequest(op, input, &GetServiceQuotaIncreaseRequestFromTemplateOutput{})
+
 	return GetServiceQuotaIncreaseRequestFromTemplateRequest{Request: req, Input: input, Copy: c.GetServiceQuotaIncreaseRequestFromTemplateRequest}
 }
 

@@ -93,6 +93,7 @@ func (c *Client) TestMetricFilterRequest(input *TestMetricFilterInput) TestMetri
 	}
 
 	req := c.newRequest(op, input, &TestMetricFilterOutput{})
+
 	return TestMetricFilterRequest{Request: req, Input: input, Copy: c.TestMetricFilterRequest}
 }
 

@@ -296,7 +296,7 @@ const opCompleteMultipartUpload = "CompleteMultipartUpload"
 //    does not exist. The upload ID might be invalid, or the multipart upload
 //    might have been aborted or completed. 404 Not Found
 //
-// The following operations are related to DeleteBucketMetricsConfiguration:
+// The following operations are related to CompleteMultipartUpload:
 //
 //    * CreateMultipartUpload
 //
@@ -328,6 +328,7 @@ func (c *Client) CompleteMultipartUploadRequest(input *CompleteMultipartUploadIn
 	}
 
 	req := c.newRequest(op, input, &CompleteMultipartUploadOutput{})
+
 	return CompleteMultipartUploadRequest{Request: req, Input: input, Copy: c.CompleteMultipartUploadRequest}
 }
 

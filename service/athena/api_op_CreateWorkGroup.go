@@ -102,6 +102,7 @@ func (c *Client) CreateWorkGroupRequest(input *CreateWorkGroupInput) CreateWorkG
 	}
 
 	req := c.newRequest(op, input, &CreateWorkGroupOutput{})
+
 	return CreateWorkGroupRequest{Request: req, Input: input, Copy: c.CreateWorkGroupRequest}
 }
 

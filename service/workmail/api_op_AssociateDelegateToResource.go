@@ -94,6 +94,7 @@ func (c *Client) AssociateDelegateToResourceRequest(input *AssociateDelegateToRe
 	}
 
 	req := c.newRequest(op, input, &AssociateDelegateToResourceOutput{})
+
 	return AssociateDelegateToResourceRequest{Request: req, Input: input, Copy: c.AssociateDelegateToResourceRequest}
 }
 

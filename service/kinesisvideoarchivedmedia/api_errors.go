@@ -18,6 +18,13 @@ const (
 	// is not valid for this operation.
 	ErrCodeInvalidCodecPrivateDataException = "InvalidCodecPrivateDataException"
 
+	// ErrCodeInvalidMediaFrameException for service response error code
+	// "InvalidMediaFrameException".
+	//
+	// One or more frames in the requested clip could not be parsed based on the
+	// specified codec.
+	ErrCodeInvalidMediaFrameException = "InvalidMediaFrameException"
+
 	// ErrCodeLimitExceededException for service response error code
 	// "LimitExceededException".
 	//

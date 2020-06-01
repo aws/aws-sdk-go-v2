@@ -126,6 +126,7 @@ func (c *Client) ListRoleTagsRequest(input *ListRoleTagsInput) ListRoleTagsReque
 	}
 
 	req := c.newRequest(op, input, &ListRoleTagsOutput{})
+
 	return ListRoleTagsRequest{Request: req, Input: input, Copy: c.ListRoleTagsRequest}
 }
 

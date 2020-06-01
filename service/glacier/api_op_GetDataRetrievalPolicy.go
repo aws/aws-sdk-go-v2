@@ -108,6 +108,7 @@ func (c *Client) GetDataRetrievalPolicyRequest(input *GetDataRetrievalPolicyInpu
 	}
 
 	req := c.newRequest(op, input, &GetDataRetrievalPolicyOutput{})
+
 	return GetDataRetrievalPolicyRequest{Request: req, Input: input, Copy: c.GetDataRetrievalPolicyRequest}
 }
 

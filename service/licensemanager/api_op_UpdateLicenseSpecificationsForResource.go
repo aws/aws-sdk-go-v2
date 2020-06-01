@@ -100,6 +100,7 @@ func (c *Client) UpdateLicenseSpecificationsForResourceRequest(input *UpdateLice
 	}
 
 	req := c.newRequest(op, input, &UpdateLicenseSpecificationsForResourceOutput{})
+
 	return UpdateLicenseSpecificationsForResourceRequest{Request: req, Input: input, Copy: c.UpdateLicenseSpecificationsForResourceRequest}
 }
 

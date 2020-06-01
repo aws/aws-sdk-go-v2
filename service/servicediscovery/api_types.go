@@ -50,7 +50,7 @@ type DnsConfig struct {
 	// all instances are healthy and returns the values for up to eight instances.
 	//
 	// For more information about the multivalue routing policy, see Multivalue
-	// Answer Routing (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-multivalue)
+	// Answer Routing (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-multivalue)
 	// in the Route 53 Developer Guide.
 	//
 	// WEIGHTED
@@ -71,7 +71,7 @@ type DnsConfig struct {
 	// selected instance.
 	//
 	// For more information about the weighted routing policy, see Weighted Routing
-	// (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted)
+	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted)
 	// in the Route 53 Developer Guide.
 	RoutingPolicy RoutingPolicy `type:"string" enum:"true"`
 }
@@ -165,30 +165,34 @@ type DnsRecord struct {
 	//
 	// Alias records don't include a TTL because Route 53 uses the TTL for the AWS
 	// resource that an alias record routes traffic to. If you include the AWS_ALIAS_DNS_NAME
-	// attribute when you submit a RegisterInstance request, the TTL value is ignored.
-	// Always specify a TTL for the service; you can use a service to register instances
-	// that create either alias or non-alias records.
+	// attribute when you submit a RegisterInstance (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
+	// request, the TTL value is ignored. Always specify a TTL for the service;
+	// you can use a service to register instances that create either alias or non-alias
+	// records.
 	//
 	// TTL is a required field
 	TTL *int64 `type:"long" required:"true"`
 
 	// The type of the resource, which indicates the type of value that Route 53
-	// returns in response to DNS queries.
+	// returns in response to DNS queries. You can specify values for Type in the
+	// following combinations:
 	//
-	// Note the following:
+	//    * A
 	//
-	//    * A, AAAA, and SRV records: You can specify settings for a maximum of
-	//    one A, one AAAA, and one SRV record. You can specify them in any combination.
+	//    * AAAA
 	//
-	//    * CNAME records: If you specify CNAME for Type, you can't define any other
-	//    records. This is a limitation of DNS: you can't create a CNAME record
-	//    and any other type of record that has the same name as a CNAME record.
+	//    * A and AAAA
 	//
-	//    * Alias records: If you want AWS Cloud Map to create a Route 53 alias
-	//    record when you register an instance, specify A or AAAA for Type.
+	//    * SRV
 	//
-	//    * All records: You specify settings other than TTL and Type when you register
-	//    an instance.
+	//    * CNAME
+	//
+	// If you want AWS Cloud Map to create a Route 53 alias record when you register
+	// an instance, specify A or AAAA for Type.
+	//
+	// You specify other settings, such as the IP address for A and AAAA records,
+	// when you register an instance. For more information, see RegisterInstance
+	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html).
 	//
 	// The following values are supported:
 	//
@@ -206,7 +210,8 @@ type DnsRecord struct {
 	// Note the following:
 	//
 	//    * You specify the domain name that you want to route traffic to when you
-	//    register an instance. For more information, see RegisterInstanceRequest$Attributes.
+	//    register an instance. For more information, see Attributes (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html#cloudmap-RegisterInstance-request-Attributes)
+	//    in the topic RegisterInstance (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html).
 	//
 	//    * You must specify WEIGHTED for the value of RoutingPolicy.
 	//
@@ -225,7 +230,8 @@ type DnsRecord struct {
 	//    * The values of priority and weight are both set to 1 and can't be changed.
 	//
 	//    * The value of port comes from the value that you specify for the AWS_INSTANCE_PORT
-	//    attribute when you submit a RegisterInstance request.
+	//    attribute when you submit a RegisterInstance (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
+	//    request.
 	//
 	//    * The value of service-hostname is a concatenation of the following values:
 	//    The value that you specify for InstanceId when you register an instance.
@@ -234,10 +240,17 @@ type DnsRecord struct {
 	//    name of the namespace is example.com, the value of service-hostname is:
 	//    test.backend.example.com
 	//
-	// If you specify settings for an SRV record and if you specify values for AWS_INSTANCE_IPV4,
-	// AWS_INSTANCE_IPV6, or both in the RegisterInstance request, AWS Cloud Map
-	// automatically creates A and/or AAAA records that have the same name as the
-	// value of service-hostname in the SRV record. You can ignore these records.
+	// If you specify settings for an SRV record, note the following:
+	//
+	//    * If you specify values for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both
+	//    in the RegisterInstance request, AWS Cloud Map automatically creates A
+	//    and/or AAAA records that have the same name as the value of service-hostname
+	//    in the SRV record. You can ignore these records.
+	//
+	//    * If you're using a system that requires a specific SRV format, such as
+	//    HAProxy, see the Name (https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html#cloudmap-CreateService-request-Name)
+	//    element in the documentation about CreateService for information about
+	//    how to specify the correct name format.
 	//
 	// Type is a required field
 	Type RecordType `type:"string" required:"true" enum:"true"`
@@ -265,9 +278,10 @@ func (s *DnsRecord) Validate() error {
 	return nil
 }
 
-// Public DNS namespaces only. A complex type that contains settings for an
-// optional health check. If you specify settings for a health check, AWS Cloud
-// Map associates the health check with the records that you specify in DnsConfig.
+// Public DNS and HTTP namespaces only. A complex type that contains settings
+// for an optional health check. If you specify settings for a health check,
+// AWS Cloud Map associates the health check with the records that you specify
+// in DnsConfig.
 //
 // If you specify a health check configuration, you can specify either HealthCheckCustomConfig
 // or HealthCheckConfig but not both.
@@ -302,7 +316,7 @@ func (s *DnsRecord) Validate() error {
 // Health checking regions
 //
 // Health checkers perform checks from all Route 53 health-checking regions.
-// For a list of the current regions, see Regions (http://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions).
+// For a list of the current regions, see Regions (https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions).
 //
 // Alias records
 //
@@ -312,7 +326,7 @@ func (s *DnsRecord) Validate() error {
 //    * Route 53 automatically sets EvaluateTargetHealth to true for alias records.
 //    When EvaluateTargetHealth is true, the alias record inherits the health
 //    of the referenced AWS resource. such as an ELB load balancer. For more
-//    information, see EvaluateTargetHealth (http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth).
+//    information, see EvaluateTargetHealth (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth).
 //
 //    * If you include HealthCheckConfig and then use the service to register
 //    an instance that creates an alias record, Route 53 doesn't create the
@@ -329,7 +343,7 @@ type HealthCheckConfig struct {
 	// The number of consecutive health checks that an endpoint must pass or fail
 	// for Route 53 to change the current status of the endpoint from unhealthy
 	// to healthy or vice versa. For more information, see How Route 53 Determines
-	// Whether an Endpoint Is Healthy (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html)
+	// Whether an Endpoint Is Healthy (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html)
 	// in the Route 53 Developer Guide.
 	FailureThreshold *int64 `min:"1" type:"integer"`
 
@@ -362,7 +376,7 @@ type HealthCheckConfig struct {
 	//    for Type, don't specify a value for ResourcePath.
 	//
 	// For more information, see How Route 53 Determines Whether an Endpoint Is
-	// Healthy (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html)
+	// Healthy (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html)
 	// in the Route 53 Developer Guide.
 	//
 	// Type is a required field
@@ -408,8 +422,8 @@ func (s *HealthCheckConfig) Validate() error {
 // or HealthCheckConfig but not both.
 //
 // To change the status of a custom health check, submit an UpdateInstanceCustomHealthStatus
-// request. Cloud Map doesn't monitor the status of the resource, it just keeps
-// a record of the status specified in the most recent UpdateInstanceCustomHealthStatus
+// request. AWS Cloud Map doesn't monitor the status of the resource, it just
+// keeps a record of the status specified in the most recent UpdateInstanceCustomHealthStatus
 // request.
 //
 // Here's how custom health checks work:
@@ -418,6 +432,7 @@ func (s *HealthCheckConfig) Validate() error {
 //
 // The failure threshold indicates the number of 30-second intervals you want
 // AWS Cloud Map to wait between the time that your application sends an UpdateInstanceCustomHealthStatus
+// (https://docs.aws.amazon.com/cloud-map/latest/api/API_UpdateInstanceCustomHealthStatus.html)
 // request and the time that AWS Cloud Map stops routing internet traffic to
 // the corresponding resource.
 //
@@ -438,22 +453,20 @@ func (s *HealthCheckConfig) Validate() error {
 // If another UpdateInstanceCustomHealthStatus request doesn't arrive during
 // that time to change the status back to healthy, AWS Cloud Map stops routing
 // traffic to the resource.
-//
-// Note the following about configuring custom health checks.
 type HealthCheckCustomConfig struct {
 	_ struct{} `type:"structure"`
 
-	// The number of 30-second intervals that you want Cloud Map to wait after receiving
-	// an UpdateInstanceCustomHealthStatus request before it changes the health
-	// status of a service instance. For example, suppose you specify a value of
-	// 2 for FailureTheshold, and then your application sends an UpdateInstanceCustomHealthStatus
-	// request. Cloud Map waits for approximately 60 seconds (2 x 30) before changing
-	// the status of the service instance based on that request.
+	// The number of 30-second intervals that you want AWS Cloud Map to wait after
+	// receiving an UpdateInstanceCustomHealthStatus request before it changes the
+	// health status of a service instance. For example, suppose you specify a value
+	// of 2 for FailureTheshold, and then your application sends an UpdateInstanceCustomHealthStatus
+	// request. AWS Cloud Map waits for approximately 60 seconds (2 x 30) before
+	// changing the status of the service instance based on that request.
 	//
 	// Sending a second or subsequent UpdateInstanceCustomHealthStatus request with
 	// the same value before FailureThreshold x 30 seconds has passed doesn't accelerate
-	// the change. Cloud Map still waits FailureThreshold x 30 seconds after the
-	// first request to make the change.
+	// the change. AWS Cloud Map still waits FailureThreshold x 30 seconds after
+	// the first request to make the change.
 	FailureThreshold *int64 `min:"1" type:"integer"`
 }
 
@@ -475,9 +488,9 @@ func (s *HealthCheckCustomConfig) Validate() error {
 	return nil
 }
 
-// In a response to a DiscoverInstance request, HttpInstanceSummary contains
-// information about one instance that matches the values that you specified
-// in the request.
+// In a response to a DiscoverInstances (https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html)
+// request, HttpInstanceSummary contains information about one instance that
+// matches the values that you specified in the request.
 type HttpInstanceSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -536,7 +549,7 @@ type Instance struct {
 	// If you want AWS Cloud Map to create a Route 53 alias record that routes traffic
 	// to an Elastic Load Balancing load balancer, specify the DNS name that is
 	// associated with the load balancer. For information about how to get the DNS
-	// name, see "DNSName" in the topic AliasTarget (http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html).
+	// name, see "DNSName" in the topic AliasTarget (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html).
 	//
 	// Note the following:
 	//
@@ -590,8 +603,8 @@ type Instance struct {
 	// If the service includes HealthCheckConfig, the port on the endpoint that
 	// you want Route 53 to send requests to.
 	//
-	// This value is required if you specified settings for an SRV record when you
-	// created the service.
+	// This value is required if you specified settings for an SRV record or a Route
+	// 53 health check when you created the service.
 	Attributes map[string]string `type:"map"`
 
 	// A unique string that identifies the request and that allows failed RegisterInstance
@@ -606,7 +619,8 @@ type Instance struct {
 	//
 	//    * If the service that is specified by ServiceId includes settings for
 	//    an SRV record, the value of InstanceId is automatically included as part
-	//    of the value for the SRV record. For more information, see DnsRecord$Type.
+	//    of the value for the SRV record. For more information, see DnsRecord >
+	//    Type (https://docs.aws.amazon.com/cloud-map/latest/api/API_DnsRecord.html#cloudmap-Type-DnsRecord-Type).
 	//
 	//    * You can use this value to update an existing instance.
 	//
@@ -702,7 +716,17 @@ type Namespace struct {
 	// The number of services that are associated with the namespace.
 	ServiceCount *int64 `type:"integer"`
 
-	// The type of the namespace. Valid values are DNS_PUBLIC and DNS_PRIVATE.
+	// The type of the namespace. The methods for discovering instances depends
+	// on the value that you specify:
+	//
+	//    * HTTP: Instances can be discovered only programmatically, using the AWS
+	//    Cloud Map DiscoverInstances API.
+	//
+	//    * DNS_PUBLIC: Instances can be discovered using public DNS queries and
+	//    using the DiscoverInstances API.
+	//
+	//    * DNS_PRIVATE: Instances can be discovered using DNS queries in VPCs and
+	//    using the DiscoverInstances API.
 	Type NamespaceType `type:"string" enum:"true"`
 }
 
@@ -969,7 +993,8 @@ func (s *OperationFilter) Validate() error {
 }
 
 // A complex type that contains information about an operation that matches
-// the criteria that you specified in a ListOperations request.
+// the criteria that you specified in a ListOperations (https://docs.aws.amazon.com/cloud-map/latest/api/API_ListOperations.html)
+// request.
 type OperationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1020,9 +1045,10 @@ type Service struct {
 	// you want AWS Cloud Map to create when you register an instance.
 	DnsConfig *DnsConfig `type:"structure"`
 
-	// Public DNS namespaces only. A complex type that contains settings for an
-	// optional health check. If you specify settings for a health check, AWS Cloud
-	// Map associates the health check with the records that you specify in DnsConfig.
+	// Public DNS and HTTP namespaces only. A complex type that contains settings
+	// for an optional health check. If you specify settings for a health check,
+	// AWS Cloud Map associates the health check with the records that you specify
+	// in DnsConfig.
 	//
 	// For information about the charges for health checks, see Amazon Route 53
 	// Pricing (http://aws.amazon.com/route53/pricing/).
@@ -1040,7 +1066,8 @@ type Service struct {
 
 	// The number of instances that are currently associated with the service. Instances
 	// that were previously associated with the service but that have been deleted
-	// are not included in the count.
+	// are not included in the count. The count might not reflect pending registrations
+	// and deregistrations.
 	InstanceCount *int64 `type:"integer"`
 
 	// The name of the service.
@@ -1068,9 +1095,10 @@ type ServiceChange struct {
 	// DnsConfig is a required field
 	DnsConfig *DnsConfigChange `type:"structure" required:"true"`
 
-	// Public DNS namespaces only. A complex type that contains settings for an
-	// optional health check. If you specify settings for a health check, AWS Cloud
-	// Map associates the health check with the records that you specify in DnsConfig.
+	// Public DNS and HTTP namespaces only. A complex type that contains settings
+	// for an optional health check. If you specify settings for a health check,
+	// AWS Cloud Map associates the health check with the records that you specify
+	// in DnsConfig.
 	//
 	// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
 	// or HealthCheckConfig but not both.
@@ -1105,7 +1133,7 @@ type ServiceChange struct {
 	// Health checking regions
 	//
 	// Health checkers perform checks from all Route 53 health-checking regions.
-	// For a list of the current regions, see Regions (http://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions).
+	// For a list of the current regions, see Regions (https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions).
 	//
 	// Alias records
 	//
@@ -1115,7 +1143,7 @@ type ServiceChange struct {
 	//    * Route 53 automatically sets EvaluateTargetHealth to true for alias records.
 	//    When EvaluateTargetHealth is true, the alias record inherits the health
 	//    of the referenced AWS resource. such as an ELB load balancer. For more
-	//    information, see EvaluateTargetHealth (http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth).
+	//    information, see EvaluateTargetHealth (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth).
 	//
 	//    * If you include HealthCheckConfig and then use the service to register
 	//    an instance that creates an alias record, Route 53 doesn't create the
@@ -1227,9 +1255,10 @@ type ServiceSummary struct {
 	// that you want AWS Cloud Map to create when you register an instance.
 	DnsConfig *DnsConfig `type:"structure"`
 
-	// Public DNS namespaces only. A complex type that contains settings for an
-	// optional health check. If you specify settings for a health check, AWS Cloud
-	// Map associates the health check with the records that you specify in DnsConfig.
+	// Public DNS and HTTP namespaces only. A complex type that contains settings
+	// for an optional health check. If you specify settings for a health check,
+	// AWS Cloud Map associates the health check with the records that you specify
+	// in DnsConfig.
 	//
 	// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
 	// or HealthCheckConfig but not both.
@@ -1264,7 +1293,7 @@ type ServiceSummary struct {
 	// Health checking regions
 	//
 	// Health checkers perform checks from all Route 53 health-checking regions.
-	// For a list of the current regions, see Regions (http://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions).
+	// For a list of the current regions, see Regions (https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions).
 	//
 	// Alias records
 	//
@@ -1274,7 +1303,7 @@ type ServiceSummary struct {
 	//    * Route 53 automatically sets EvaluateTargetHealth to true for alias records.
 	//    When EvaluateTargetHealth is true, the alias record inherits the health
 	//    of the referenced AWS resource. such as an ELB load balancer. For more
-	//    information, see EvaluateTargetHealth (http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth).
+	//    information, see EvaluateTargetHealth (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth).
 	//
 	//    * If you include HealthCheckConfig and then use the service to register
 	//    an instance that creates an alias record, Route 53 doesn't create the
@@ -1305,8 +1334,8 @@ type ServiceSummary struct {
 	// or HealthCheckConfig but not both.
 	//
 	// To change the status of a custom health check, submit an UpdateInstanceCustomHealthStatus
-	// request. Cloud Map doesn't monitor the status of the resource, it just keeps
-	// a record of the status specified in the most recent UpdateInstanceCustomHealthStatus
+	// request. AWS Cloud Map doesn't monitor the status of the resource, it just
+	// keeps a record of the status specified in the most recent UpdateInstanceCustomHealthStatus
 	// request.
 	//
 	// Here's how custom health checks work:
@@ -1315,6 +1344,7 @@ type ServiceSummary struct {
 	//
 	// The failure threshold indicates the number of 30-second intervals you want
 	// AWS Cloud Map to wait between the time that your application sends an UpdateInstanceCustomHealthStatus
+	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_UpdateInstanceCustomHealthStatus.html)
 	// request and the time that AWS Cloud Map stops routing internet traffic to
 	// the corresponding resource.
 	//
@@ -1335,8 +1365,6 @@ type ServiceSummary struct {
 	// If another UpdateInstanceCustomHealthStatus request doesn't arrive during
 	// that time to change the status back to healthy, AWS Cloud Map stops routing
 	// traffic to the resource.
-	//
-	// Note the following about configuring custom health checks.
 	HealthCheckCustomConfig *HealthCheckCustomConfig `type:"structure"`
 
 	// The ID that AWS Cloud Map assigned to the service when you created it.
@@ -1344,7 +1372,8 @@ type ServiceSummary struct {
 
 	// The number of instances that are currently associated with the service. Instances
 	// that were previously associated with the service but that have been deleted
-	// are not included in the count.
+	// are not included in the count. The count might not reflect pending registrations
+	// and deregistrations.
 	InstanceCount *int64 `type:"integer"`
 
 	// The name of the service.

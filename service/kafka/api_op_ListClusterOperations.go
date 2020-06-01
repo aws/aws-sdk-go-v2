@@ -144,6 +144,7 @@ func (c *Client) ListClusterOperationsRequest(input *ListClusterOperationsInput)
 	}
 
 	req := c.newRequest(op, input, &ListClusterOperationsOutput{})
+
 	return ListClusterOperationsRequest{Request: req, Input: input, Copy: c.ListClusterOperationsRequest}
 }
 

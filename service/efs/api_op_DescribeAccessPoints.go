@@ -159,6 +159,7 @@ func (c *Client) DescribeAccessPointsRequest(input *DescribeAccessPointsInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeAccessPointsOutput{})
+
 	return DescribeAccessPointsRequest{Request: req, Input: input, Copy: c.DescribeAccessPointsRequest}
 }
 

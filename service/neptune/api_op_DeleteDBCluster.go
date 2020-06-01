@@ -114,6 +114,7 @@ func (c *Client) DeleteDBClusterRequest(input *DeleteDBClusterInput) DeleteDBClu
 	}
 
 	req := c.newRequest(op, input, &DeleteDBClusterOutput{})
+
 	return DeleteDBClusterRequest{Request: req, Input: input, Copy: c.DeleteDBClusterRequest}
 }
 

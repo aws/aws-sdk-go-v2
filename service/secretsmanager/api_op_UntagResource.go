@@ -130,6 +130,7 @@ func (c *Client) UntagResourceRequest(input *UntagResourceInput) UntagResourceRe
 	req := c.newRequest(op, input, &UntagResourceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 

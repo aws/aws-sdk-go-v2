@@ -160,6 +160,7 @@ func (c *Client) DescribeBackupVaultRequest(input *DescribeBackupVaultInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeBackupVaultOutput{})
+
 	return DescribeBackupVaultRequest{Request: req, Input: input, Copy: c.DescribeBackupVaultRequest}
 }
 

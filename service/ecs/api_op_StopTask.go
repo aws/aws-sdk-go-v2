@@ -99,6 +99,7 @@ func (c *Client) StopTaskRequest(input *StopTaskInput) StopTaskRequest {
 	}
 
 	req := c.newRequest(op, input, &StopTaskOutput{})
+
 	return StopTaskRequest{Request: req, Input: input, Copy: c.StopTaskRequest}
 }
 

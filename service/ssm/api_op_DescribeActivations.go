@@ -93,6 +93,7 @@ func (c *Client) DescribeActivationsRequest(input *DescribeActivationsInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeActivationsOutput{})
+
 	return DescribeActivationsRequest{Request: req, Input: input, Copy: c.DescribeActivationsRequest}
 }
 

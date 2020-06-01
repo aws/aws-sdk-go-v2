@@ -95,6 +95,7 @@ func (c *Client) PutAttributesRequest(input *PutAttributesInput) PutAttributesRe
 	}
 
 	req := c.newRequest(op, input, &PutAttributesOutput{})
+
 	return PutAttributesRequest{Request: req, Input: input, Copy: c.PutAttributesRequest}
 }
 

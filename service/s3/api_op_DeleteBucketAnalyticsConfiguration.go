@@ -114,7 +114,7 @@ const opDeleteBucketAnalyticsConfiguration = "DeleteBucketAnalyticsConfiguration
 // To use this operation, you must have permissions to perform the s3:PutAnalyticsConfiguration
 // action. The bucket owner has this permission by default. The bucket owner
 // can grant this permission to others. For more information about permissions,
-// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev//using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
 //
 // For information about the Amazon S3 analytics feature, see Amazon S3 Analytics
@@ -150,6 +150,7 @@ func (c *Client) DeleteBucketAnalyticsConfigurationRequest(input *DeleteBucketAn
 	req := c.newRequest(op, input, &DeleteBucketAnalyticsConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteBucketAnalyticsConfigurationRequest{Request: req, Input: input, Copy: c.DeleteBucketAnalyticsConfigurationRequest}
 }
 

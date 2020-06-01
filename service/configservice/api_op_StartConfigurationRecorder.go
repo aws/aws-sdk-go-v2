@@ -86,6 +86,7 @@ func (c *Client) StartConfigurationRecorderRequest(input *StartConfigurationReco
 	req := c.newRequest(op, input, &StartConfigurationRecorderOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StartConfigurationRecorderRequest{Request: req, Input: input, Copy: c.StartConfigurationRecorderRequest}
 }
 

@@ -108,6 +108,7 @@ func (c *Client) CreateGroupCertificateAuthorityRequest(input *CreateGroupCertif
 	}
 
 	req := c.newRequest(op, input, &CreateGroupCertificateAuthorityOutput{})
+
 	return CreateGroupCertificateAuthorityRequest{Request: req, Input: input, Copy: c.CreateGroupCertificateAuthorityRequest}
 }
 

@@ -84,6 +84,7 @@ func (c *Client) GetParameterRequest(input *GetParameterInput) GetParameterReque
 	}
 
 	req := c.newRequest(op, input, &GetParameterOutput{})
+
 	return GetParameterRequest{Request: req, Input: input, Copy: c.GetParameterRequest}
 }
 

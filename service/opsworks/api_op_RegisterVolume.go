@@ -88,6 +88,7 @@ func (c *Client) RegisterVolumeRequest(input *RegisterVolumeInput) RegisterVolum
 	}
 
 	req := c.newRequest(op, input, &RegisterVolumeOutput{})
+
 	return RegisterVolumeRequest{Request: req, Input: input, Copy: c.RegisterVolumeRequest}
 }
 

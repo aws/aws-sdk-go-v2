@@ -99,6 +99,49 @@ func (s Delegate) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The configuration applied to an organization's folders by its retention policy.
+type FolderConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The action to take on the folder contents at the end of the folder configuration
+	// period.
+	//
+	// Action is a required field
+	Action RetentionAction `type:"string" required:"true" enum:"true"`
+
+	// The folder name.
+	//
+	// Name is a required field
+	Name FolderName `type:"string" required:"true" enum:"true"`
+
+	// The period of time at which the folder configuration action is applied.
+	Period *int64 `min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s FolderConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FolderConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "FolderConfiguration"}
+	if len(s.Action) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
+	}
+	if len(s.Name) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Period != nil && *s.Period < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Period", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // The representation of an Amazon WorkMail group.
 type Group struct {
 	_ struct{} `type:"structure"`

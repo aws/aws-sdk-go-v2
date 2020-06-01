@@ -110,6 +110,7 @@ func (c *Client) ListWorkersWithQualificationTypeRequest(input *ListWorkersWithQ
 	}
 
 	req := c.newRequest(op, input, &ListWorkersWithQualificationTypeOutput{})
+
 	return ListWorkersWithQualificationTypeRequest{Request: req, Input: input, Copy: c.ListWorkersWithQualificationTypeRequest}
 }
 

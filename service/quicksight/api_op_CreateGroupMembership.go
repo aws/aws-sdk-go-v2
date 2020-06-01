@@ -169,6 +169,7 @@ func (c *Client) CreateGroupMembershipRequest(input *CreateGroupMembershipInput)
 	}
 
 	req := c.newRequest(op, input, &CreateGroupMembershipOutput{})
+
 	return CreateGroupMembershipRequest{Request: req, Input: input, Copy: c.CreateGroupMembershipRequest}
 }
 

@@ -79,6 +79,7 @@ func (c *Client) DeleteSourceCredentialsRequest(input *DeleteSourceCredentialsIn
 	}
 
 	req := c.newRequest(op, input, &DeleteSourceCredentialsOutput{})
+
 	return DeleteSourceCredentialsRequest{Request: req, Input: input, Copy: c.DeleteSourceCredentialsRequest}
 }
 

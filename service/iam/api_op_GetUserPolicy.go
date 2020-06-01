@@ -132,6 +132,7 @@ func (c *Client) GetUserPolicyRequest(input *GetUserPolicyInput) GetUserPolicyRe
 	}
 
 	req := c.newRequest(op, input, &GetUserPolicyOutput{})
+
 	return GetUserPolicyRequest{Request: req, Input: input, Copy: c.GetUserPolicyRequest}
 }
 

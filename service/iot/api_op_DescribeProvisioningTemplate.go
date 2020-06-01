@@ -73,6 +73,9 @@ type DescribeProvisioningTemplateOutput struct {
 	// The date when the fleet provisioning template was last modified.
 	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp"`
 
+	// Gets information about a pre-provisioned hook.
+	PreProvisioningHook *ProvisioningHook `locationName:"preProvisioningHook" type:"structure"`
+
 	// The ARN of the role associated with the provisioning template. This IoT role
 	// grants permission to provision a device.
 	ProvisioningRoleArn *string `locationName:"provisioningRoleArn" min:"20" type:"string"`
@@ -126,6 +129,12 @@ func (s DescribeProvisioningTemplateOutput) MarshalFields(e protocol.FieldEncode
 		e.SetValue(protocol.BodyTarget, "lastModifiedDate",
 			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
+	if s.PreProvisioningHook != nil {
+		v := s.PreProvisioningHook
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "preProvisioningHook", v, metadata)
+	}
 	if s.ProvisioningRoleArn != nil {
 		v := *s.ProvisioningRoleArn
 
@@ -178,6 +187,7 @@ func (c *Client) DescribeProvisioningTemplateRequest(input *DescribeProvisioning
 	}
 
 	req := c.newRequest(op, input, &DescribeProvisioningTemplateOutput{})
+
 	return DescribeProvisioningTemplateRequest{Request: req, Input: input, Copy: c.DescribeProvisioningTemplateRequest}
 }
 

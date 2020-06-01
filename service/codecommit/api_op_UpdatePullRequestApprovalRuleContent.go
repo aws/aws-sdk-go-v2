@@ -130,6 +130,7 @@ func (c *Client) UpdatePullRequestApprovalRuleContentRequest(input *UpdatePullRe
 	}
 
 	req := c.newRequest(op, input, &UpdatePullRequestApprovalRuleContentOutput{})
+
 	return UpdatePullRequestApprovalRuleContentRequest{Request: req, Input: input, Copy: c.UpdatePullRequestApprovalRuleContentRequest}
 }
 

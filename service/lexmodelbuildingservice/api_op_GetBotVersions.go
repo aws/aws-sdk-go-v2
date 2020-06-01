@@ -164,6 +164,7 @@ func (c *Client) GetBotVersionsRequest(input *GetBotVersionsInput) GetBotVersion
 	}
 
 	req := c.newRequest(op, input, &GetBotVersionsOutput{})
+
 	return GetBotVersionsRequest{Request: req, Input: input, Copy: c.GetBotVersionsRequest}
 }
 

@@ -92,6 +92,7 @@ func (c *Client) ListSolutionVersionsRequest(input *ListSolutionVersionsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListSolutionVersionsOutput{})
+
 	return ListSolutionVersionsRequest{Request: req, Input: input, Copy: c.ListSolutionVersionsRequest}
 }
 

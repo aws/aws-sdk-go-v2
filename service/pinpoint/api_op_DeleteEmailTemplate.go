@@ -110,6 +110,7 @@ func (c *Client) DeleteEmailTemplateRequest(input *DeleteEmailTemplateInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteEmailTemplateOutput{})
+
 	return DeleteEmailTemplateRequest{Request: req, Input: input, Copy: c.DeleteEmailTemplateRequest}
 }
 

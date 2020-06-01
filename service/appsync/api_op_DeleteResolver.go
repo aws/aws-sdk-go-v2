@@ -128,6 +128,7 @@ func (c *Client) DeleteResolverRequest(input *DeleteResolverInput) DeleteResolve
 	}
 
 	req := c.newRequest(op, input, &DeleteResolverOutput{})
+
 	return DeleteResolverRequest{Request: req, Input: input, Copy: c.DeleteResolverRequest}
 }
 

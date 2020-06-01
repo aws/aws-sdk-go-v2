@@ -165,6 +165,7 @@ func (c *Client) StartTopicsDetectionJobRequest(input *StartTopicsDetectionJobIn
 	}
 
 	req := c.newRequest(op, input, &StartTopicsDetectionJobOutput{})
+
 	return StartTopicsDetectionJobRequest{Request: req, Input: input, Copy: c.StartTopicsDetectionJobRequest}
 }
 

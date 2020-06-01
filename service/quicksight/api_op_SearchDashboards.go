@@ -192,6 +192,7 @@ func (c *Client) SearchDashboardsRequest(input *SearchDashboardsInput) SearchDas
 	}
 
 	req := c.newRequest(op, input, &SearchDashboardsOutput{})
+
 	return SearchDashboardsRequest{Request: req, Input: input, Copy: c.SearchDashboardsRequest}
 }
 

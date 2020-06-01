@@ -101,6 +101,7 @@ func (c *Client) GetPipelineStateRequest(input *GetPipelineStateInput) GetPipeli
 	}
 
 	req := c.newRequest(op, input, &GetPipelineStateOutput{})
+
 	return GetPipelineStateRequest{Request: req, Input: input, Copy: c.GetPipelineStateRequest}
 }
 

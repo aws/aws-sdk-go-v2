@@ -160,6 +160,7 @@ func (c *Client) ListFunctionEventInvokeConfigsRequest(input *ListFunctionEventI
 	}
 
 	req := c.newRequest(op, input, &ListFunctionEventInvokeConfigsOutput{})
+
 	return ListFunctionEventInvokeConfigsRequest{Request: req, Input: input, Copy: c.ListFunctionEventInvokeConfigsRequest}
 }
 

@@ -92,6 +92,7 @@ func (c *Client) GetIdentityPoolRolesRequest(input *GetIdentityPoolRolesInput) G
 	}
 
 	req := c.newRequest(op, input, &GetIdentityPoolRolesOutput{})
+
 	return GetIdentityPoolRolesRequest{Request: req, Input: input, Copy: c.GetIdentityPoolRolesRequest}
 }
 

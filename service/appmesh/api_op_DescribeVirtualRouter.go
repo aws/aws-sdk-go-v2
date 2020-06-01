@@ -131,6 +131,7 @@ func (c *Client) DescribeVirtualRouterRequest(input *DescribeVirtualRouterInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeVirtualRouterOutput{})
+
 	return DescribeVirtualRouterRequest{Request: req, Input: input, Copy: c.DescribeVirtualRouterRequest}
 }
 

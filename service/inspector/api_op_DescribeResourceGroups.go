@@ -88,6 +88,7 @@ func (c *Client) DescribeResourceGroupsRequest(input *DescribeResourceGroupsInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeResourceGroupsOutput{})
+
 	return DescribeResourceGroupsRequest{Request: req, Input: input, Copy: c.DescribeResourceGroupsRequest}
 }
 

@@ -171,6 +171,7 @@ func (c *Client) CreateMultiplexRequest(input *CreateMultiplexInput) CreateMulti
 	}
 
 	req := c.newRequest(op, input, &CreateMultiplexOutput{})
+
 	return CreateMultiplexRequest{Request: req, Input: input, Copy: c.CreateMultiplexRequest}
 }
 

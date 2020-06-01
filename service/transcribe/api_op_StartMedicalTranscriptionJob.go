@@ -37,7 +37,9 @@ type StartMedicalTranscriptionJobInput struct {
 
 	// The name of the medical transcription job. You can't use the strings "."
 	// or ".." by themselves as the job name. The name must also be unique within
-	// an AWS account.
+	// an AWS account. If you try to create a medical transcription job with the
+	// same name as a previous medical transcription job you will receive a ConflictException
+	// error.
 	//
 	// MedicalTranscriptionJobName is a required field
 	MedicalTranscriptionJobName *string `min:"1" type:"string" required:"true"`
@@ -94,9 +96,9 @@ type StartMedicalTranscriptionJobInput struct {
 	// Specialty is a required field
 	Specialty Specialty `type:"string" required:"true" enum:"true"`
 
-	// The speech of clinician in the input audio. CONVERSATION refers to conversations
-	// clinicians have with patients. DICTATION refers to medical professionals
-	// dictating their notes about a patient encounter.
+	// The type of speech in the input audio. CONVERSATION refers to conversations
+	// between two or more speakers, e.g., a conversations between doctors and patients.
+	// DICTATION refers to single-speaker dictated speech, e.g., for clinical notes.
 	//
 	// Type is a required field
 	Type Type `type:"string" required:"true" enum:"true"`
@@ -196,6 +198,7 @@ func (c *Client) StartMedicalTranscriptionJobRequest(input *StartMedicalTranscri
 	}
 
 	req := c.newRequest(op, input, &StartMedicalTranscriptionJobOutput{})
+
 	return StartMedicalTranscriptionJobRequest{Request: req, Input: input, Copy: c.StartMedicalTranscriptionJobRequest}
 }
 

@@ -90,6 +90,7 @@ func (c *Client) StopExecutionRequest(input *StopExecutionInput) StopExecutionRe
 	}
 
 	req := c.newRequest(op, input, &StopExecutionOutput{})
+
 	return StopExecutionRequest{Request: req, Input: input, Copy: c.StopExecutionRequest}
 }
 

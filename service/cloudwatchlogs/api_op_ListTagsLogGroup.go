@@ -79,6 +79,7 @@ func (c *Client) ListTagsLogGroupRequest(input *ListTagsLogGroupInput) ListTagsL
 	}
 
 	req := c.newRequest(op, input, &ListTagsLogGroupOutput{})
+
 	return ListTagsLogGroupRequest{Request: req, Input: input, Copy: c.ListTagsLogGroupRequest}
 }
 

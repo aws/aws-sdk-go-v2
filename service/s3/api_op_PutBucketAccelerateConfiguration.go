@@ -166,6 +166,7 @@ func (c *Client) PutBucketAccelerateConfigurationRequest(input *PutBucketAcceler
 	req := c.newRequest(op, input, &PutBucketAccelerateConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutBucketAccelerateConfigurationRequest{Request: req, Input: input, Copy: c.PutBucketAccelerateConfigurationRequest}
 }
 

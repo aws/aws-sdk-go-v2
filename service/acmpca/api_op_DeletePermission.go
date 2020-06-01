@@ -102,6 +102,7 @@ func (c *Client) DeletePermissionRequest(input *DeletePermissionInput) DeletePer
 	req := c.newRequest(op, input, &DeletePermissionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeletePermissionRequest{Request: req, Input: input, Copy: c.DeletePermissionRequest}
 }
 

@@ -93,6 +93,7 @@ func (c *Client) ListPHIDetectionJobsRequest(input *ListPHIDetectionJobsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListPHIDetectionJobsOutput{})
+
 	return ListPHIDetectionJobsRequest{Request: req, Input: input, Copy: c.ListPHIDetectionJobsRequest}
 }
 

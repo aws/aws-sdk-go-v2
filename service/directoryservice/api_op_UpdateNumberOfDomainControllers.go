@@ -91,6 +91,7 @@ func (c *Client) UpdateNumberOfDomainControllersRequest(input *UpdateNumberOfDom
 	}
 
 	req := c.newRequest(op, input, &UpdateNumberOfDomainControllersOutput{})
+
 	return UpdateNumberOfDomainControllersRequest{Request: req, Input: input, Copy: c.UpdateNumberOfDomainControllersRequest}
 }
 

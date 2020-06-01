@@ -117,6 +117,7 @@ func (c *Client) ListSatellitesRequest(input *ListSatellitesInput) ListSatellite
 	}
 
 	req := c.newRequest(op, input, &ListSatellitesOutput{})
+
 	return ListSatellitesRequest{Request: req, Input: input, Copy: c.ListSatellitesRequest}
 }
 

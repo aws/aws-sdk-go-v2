@@ -155,6 +155,7 @@ func (c *Client) DeleteDatasetRequest(input *DeleteDatasetInput) DeleteDatasetRe
 	}
 
 	req := c.newRequest(op, input, &DeleteDatasetOutput{})
+
 	return DeleteDatasetRequest{Request: req, Input: input, Copy: c.DeleteDatasetRequest}
 }
 

@@ -134,6 +134,7 @@ func (c *Client) ListServerCertificatesRequest(input *ListServerCertificatesInpu
 	}
 
 	req := c.newRequest(op, input, &ListServerCertificatesOutput{})
+
 	return ListServerCertificatesRequest{Request: req, Input: input, Copy: c.ListServerCertificatesRequest}
 }
 

@@ -79,6 +79,7 @@ func (c *Client) DeleteGlobalClusterRequest(input *DeleteGlobalClusterInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteGlobalClusterOutput{})
+
 	return DeleteGlobalClusterRequest{Request: req, Input: input, Copy: c.DeleteGlobalClusterRequest}
 }
 

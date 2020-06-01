@@ -108,6 +108,7 @@ func (c *Client) LogoutUserRequest(input *LogoutUserInput) LogoutUserRequest {
 	}
 
 	req := c.newRequest(op, input, &LogoutUserOutput{})
+
 	return LogoutUserRequest{Request: req, Input: input, Copy: c.LogoutUserRequest}
 }
 

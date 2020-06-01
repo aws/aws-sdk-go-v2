@@ -157,6 +157,7 @@ func (c *Client) GetBuiltinIntentsRequest(input *GetBuiltinIntentsInput) GetBuil
 	}
 
 	req := c.newRequest(op, input, &GetBuiltinIntentsOutput{})
+
 	return GetBuiltinIntentsRequest{Request: req, Input: input, Copy: c.GetBuiltinIntentsRequest}
 }
 

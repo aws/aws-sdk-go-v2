@@ -134,6 +134,7 @@ func (c *Client) DeleteVirtualRouterRequest(input *DeleteVirtualRouterInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteVirtualRouterOutput{})
+
 	return DeleteVirtualRouterRequest{Request: req, Input: input, Copy: c.DeleteVirtualRouterRequest}
 }
 

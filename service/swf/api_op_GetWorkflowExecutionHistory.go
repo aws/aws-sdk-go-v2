@@ -153,6 +153,7 @@ func (c *Client) GetWorkflowExecutionHistoryRequest(input *GetWorkflowExecutionH
 	}
 
 	req := c.newRequest(op, input, &GetWorkflowExecutionHistoryOutput{})
+
 	return GetWorkflowExecutionHistoryRequest{Request: req, Input: input, Copy: c.GetWorkflowExecutionHistoryRequest}
 }
 

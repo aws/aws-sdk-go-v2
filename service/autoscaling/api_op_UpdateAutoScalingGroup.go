@@ -32,7 +32,9 @@ type UpdateAutoScalingGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	DefaultCooldown *int64 `type:"integer"`
 
-	// The number of EC2 instances that should be running in the Auto Scaling group.
+	// The desired capacity is the initial capacity of the Auto Scaling group after
+	// this operation completes and the capacity it attempts to maintain.
+	//
 	// This number must be greater than or equal to the minimum size of the group
 	// and less than or equal to the maximum size of the group.
 	DesiredCapacity *int64 `type:"integer"`
@@ -66,15 +68,26 @@ type UpdateAutoScalingGroupInput struct {
 	LaunchTemplate *LaunchTemplateSpecification `type:"structure"`
 
 	// The maximum amount of time, in seconds, that an instance can be in service.
+	// The default is null.
+	//
+	// This parameter is optional, but if you specify a value for it, you must specify
+	// a value of at least 604,800 seconds (7 days). To clear a previously set value,
+	// specify a new value of 0.
 	//
 	// For more information, see Replacing Auto Scaling Instances Based on Maximum
 	// Instance Lifetime (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	//
-	// Valid Range: Minimum value of 604800.
+	// Valid Range: Minimum value of 0.
 	MaxInstanceLifetime *int64 `type:"integer"`
 
 	// The maximum size of the Auto Scaling group.
+	//
+	// With a mixed instances policy that uses instance weighting, Amazon EC2 Auto
+	// Scaling may need to go above MaxSize to meet your capacity requirements.
+	// In this event, Amazon EC2 Auto Scaling will never go above MaxSize by more
+	// than your maximum instance weight (weights that define how many capacity
+	// units each instance contributes to the capacity of the group).
 	MaxSize *int64 `type:"integer"`
 
 	// The minimum size of the Auto Scaling group.
@@ -214,7 +227,7 @@ const opUpdateAutoScalingGroup = "UpdateAutoScalingGroup"
 //
 // Note the following about changing DesiredCapacity, MaxSize, or MinSize:
 //
-//    * If a scale-in event occurs as a result of a new DesiredCapacity value
+//    * If a scale-in activity occurs as a result of a new DesiredCapacity value
 //    that is lower than the current size of the group, the Auto Scaling group
 //    uses its termination policy to determine which instances to terminate.
 //
@@ -227,9 +240,10 @@ const opUpdateAutoScalingGroup = "UpdateAutoScalingGroup"
 //    of the group, this sets the group's DesiredCapacity to the new MaxSize
 //    value.
 //
-// To see which parameters have been set, use DescribeAutoScalingGroups. You
-// can also view the scaling policies for an Auto Scaling group using DescribePolicies.
-// If the group has scaling policies, you can update them using PutScalingPolicy.
+// To see which parameters have been set, call the DescribeAutoScalingGroups
+// API. To view the scaling policies for an Auto Scaling group, call the DescribePolicies
+// API. If the group has scaling policies, you can update them by calling the
+// PutScalingPolicy API.
 //
 //    // Example sending a request using UpdateAutoScalingGroupRequest.
 //    req := client.UpdateAutoScalingGroupRequest(params)
@@ -253,6 +267,7 @@ func (c *Client) UpdateAutoScalingGroupRequest(input *UpdateAutoScalingGroupInpu
 	req := c.newRequest(op, input, &UpdateAutoScalingGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateAutoScalingGroupRequest{Request: req, Input: input, Copy: c.UpdateAutoScalingGroupRequest}
 }
 

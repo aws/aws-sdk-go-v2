@@ -131,6 +131,7 @@ func (c *Client) DescribePackagesRequest(input *DescribePackagesInput) DescribeP
 	}
 
 	req := c.newRequest(op, input, &DescribePackagesOutput{})
+
 	return DescribePackagesRequest{Request: req, Input: input, Copy: c.DescribePackagesRequest}
 }
 

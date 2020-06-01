@@ -70,6 +70,7 @@ func (c *Client) DescribeVirtualInterfacesRequest(input *DescribeVirtualInterfac
 	}
 
 	req := c.newRequest(op, input, &DescribeVirtualInterfacesOutput{})
+
 	return DescribeVirtualInterfacesRequest{Request: req, Input: input, Copy: c.DescribeVirtualInterfacesRequest}
 }
 

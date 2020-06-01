@@ -123,6 +123,7 @@ func (c *Client) ImportSnapshotRequest(input *ImportSnapshotInput) ImportSnapsho
 	}
 
 	req := c.newRequest(op, input, &ImportSnapshotOutput{})
+
 	return ImportSnapshotRequest{Request: req, Input: input, Copy: c.ImportSnapshotRequest}
 }
 

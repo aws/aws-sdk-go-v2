@@ -152,6 +152,7 @@ func (c *Client) DescribeVoicesRequest(input *DescribeVoicesInput) DescribeVoice
 	}
 
 	req := c.newRequest(op, input, &DescribeVoicesOutput{})
+
 	return DescribeVoicesRequest{Request: req, Input: input, Copy: c.DescribeVoicesRequest}
 }
 

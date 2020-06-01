@@ -131,6 +131,7 @@ func (c *Client) CreateProvisioningClaimRequest(input *CreateProvisioningClaimIn
 	}
 
 	req := c.newRequest(op, input, &CreateProvisioningClaimOutput{})
+
 	return CreateProvisioningClaimRequest{Request: req, Input: input, Copy: c.CreateProvisioningClaimRequest}
 }
 

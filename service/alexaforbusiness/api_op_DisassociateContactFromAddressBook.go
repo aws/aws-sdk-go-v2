@@ -82,6 +82,7 @@ func (c *Client) DisassociateContactFromAddressBookRequest(input *DisassociateCo
 	}
 
 	req := c.newRequest(op, input, &DisassociateContactFromAddressBookOutput{})
+
 	return DisassociateContactFromAddressBookRequest{Request: req, Input: input, Copy: c.DisassociateContactFromAddressBookRequest}
 }
 

@@ -223,6 +223,7 @@ func (c *Client) UpdateJobExecutionRequest(input *UpdateJobExecutionInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateJobExecutionOutput{})
+
 	return UpdateJobExecutionRequest{Request: req, Input: input, Copy: c.UpdateJobExecutionRequest}
 }
 

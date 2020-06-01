@@ -79,6 +79,7 @@ func (c *Client) StartWorkflowRunRequest(input *StartWorkflowRunInput) StartWork
 	}
 
 	req := c.newRequest(op, input, &StartWorkflowRunOutput{})
+
 	return StartWorkflowRunRequest{Request: req, Input: input, Copy: c.StartWorkflowRunRequest}
 }
 

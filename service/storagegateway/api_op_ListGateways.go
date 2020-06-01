@@ -107,6 +107,7 @@ func (c *Client) ListGatewaysRequest(input *ListGatewaysInput) ListGatewaysReque
 	}
 
 	req := c.newRequest(op, input, &ListGatewaysOutput{})
+
 	return ListGatewaysRequest{Request: req, Input: input, Copy: c.ListGatewaysRequest}
 }
 

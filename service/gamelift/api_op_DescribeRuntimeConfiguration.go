@@ -108,6 +108,7 @@ func (c *Client) DescribeRuntimeConfigurationRequest(input *DescribeRuntimeConfi
 	}
 
 	req := c.newRequest(op, input, &DescribeRuntimeConfigurationOutput{})
+
 	return DescribeRuntimeConfigurationRequest{Request: req, Input: input, Copy: c.DescribeRuntimeConfigurationRequest}
 }
 

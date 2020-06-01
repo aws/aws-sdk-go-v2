@@ -498,6 +498,7 @@ func (c *Client) PostContentRequest(input *PostContentInput) PostContentRequest 
 	req.Handlers.Sign.Remove(v4.SignRequestHandler)
 	handler := v4.BuildNamedHandler("v4.CustomSignerHandler", v4.WithUnsignedPayload)
 	req.Handlers.Sign.PushFrontNamed(handler)
+
 	return PostContentRequest{Request: req, Input: input, Copy: c.PostContentRequest}
 }
 

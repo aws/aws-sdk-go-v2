@@ -83,6 +83,7 @@ func (c *Client) ListPortfoliosRequest(input *ListPortfoliosInput) ListPortfolio
 	}
 
 	req := c.newRequest(op, input, &ListPortfoliosOutput{})
+
 	return ListPortfoliosRequest{Request: req, Input: input, Copy: c.ListPortfoliosRequest}
 }
 

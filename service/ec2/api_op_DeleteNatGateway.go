@@ -84,6 +84,7 @@ func (c *Client) DeleteNatGatewayRequest(input *DeleteNatGatewayInput) DeleteNat
 	}
 
 	req := c.newRequest(op, input, &DeleteNatGatewayOutput{})
+
 	return DeleteNatGatewayRequest{Request: req, Input: input, Copy: c.DeleteNatGatewayRequest}
 }
 

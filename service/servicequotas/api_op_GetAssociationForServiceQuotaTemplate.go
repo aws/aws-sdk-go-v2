@@ -61,6 +61,7 @@ func (c *Client) GetAssociationForServiceQuotaTemplateRequest(input *GetAssociat
 	}
 
 	req := c.newRequest(op, input, &GetAssociationForServiceQuotaTemplateOutput{})
+
 	return GetAssociationForServiceQuotaTemplateRequest{Request: req, Input: input, Copy: c.GetAssociationForServiceQuotaTemplateRequest}
 }
 

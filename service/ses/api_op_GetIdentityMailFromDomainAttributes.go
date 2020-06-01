@@ -86,6 +86,7 @@ func (c *Client) GetIdentityMailFromDomainAttributesRequest(input *GetIdentityMa
 	}
 
 	req := c.newRequest(op, input, &GetIdentityMailFromDomainAttributesOutput{})
+
 	return GetIdentityMailFromDomainAttributesRequest{Request: req, Input: input, Copy: c.GetIdentityMailFromDomainAttributesRequest}
 }
 

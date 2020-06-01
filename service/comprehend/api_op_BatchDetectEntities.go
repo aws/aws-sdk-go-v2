@@ -101,6 +101,7 @@ func (c *Client) BatchDetectEntitiesRequest(input *BatchDetectEntitiesInput) Bat
 	}
 
 	req := c.newRequest(op, input, &BatchDetectEntitiesOutput{})
+
 	return BatchDetectEntitiesRequest{Request: req, Input: input, Copy: c.BatchDetectEntitiesRequest}
 }
 

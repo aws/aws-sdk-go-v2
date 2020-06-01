@@ -134,6 +134,7 @@ func (c *Client) GetUsageForecastRequest(input *GetUsageForecastInput) GetUsageF
 	}
 
 	req := c.newRequest(op, input, &GetUsageForecastOutput{})
+
 	return GetUsageForecastRequest{Request: req, Input: input, Copy: c.GetUsageForecastRequest}
 }
 

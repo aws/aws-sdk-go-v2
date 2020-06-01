@@ -118,6 +118,7 @@ func (c *Client) DescribeNatGatewaysRequest(input *DescribeNatGatewaysInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeNatGatewaysOutput{})
+
 	return DescribeNatGatewaysRequest{Request: req, Input: input, Copy: c.DescribeNatGatewaysRequest}
 }
 

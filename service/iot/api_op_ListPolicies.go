@@ -133,6 +133,7 @@ func (c *Client) ListPoliciesRequest(input *ListPoliciesInput) ListPoliciesReque
 	}
 
 	req := c.newRequest(op, input, &ListPoliciesOutput{})
+
 	return ListPoliciesRequest{Request: req, Input: input, Copy: c.ListPoliciesRequest}
 }
 

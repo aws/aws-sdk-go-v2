@@ -157,6 +157,7 @@ func (c *Client) ListFargateProfilesRequest(input *ListFargateProfilesInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListFargateProfilesOutput{})
+
 	return ListFargateProfilesRequest{Request: req, Input: input, Copy: c.ListFargateProfilesRequest}
 }
 

@@ -85,6 +85,8 @@ type ClientAPI interface {
 
 	CreateWebACLRequest(*wafregional.CreateWebACLInput) wafregional.CreateWebACLRequest
 
+	CreateWebACLMigrationStackRequest(*wafregional.CreateWebACLMigrationStackInput) wafregional.CreateWebACLMigrationStackRequest
+
 	CreateXssMatchSetRequest(*wafregional.CreateXssMatchSetInput) wafregional.CreateXssMatchSetRequest
 
 	DeleteByteMatchSetRequest(*wafregional.DeleteByteMatchSetInput) wafregional.DeleteByteMatchSetRequest

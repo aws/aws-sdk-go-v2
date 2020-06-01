@@ -107,6 +107,7 @@ func (c *Client) GetSuppressedDestinationRequest(input *GetSuppressedDestination
 	}
 
 	req := c.newRequest(op, input, &GetSuppressedDestinationOutput{})
+
 	return GetSuppressedDestinationRequest{Request: req, Input: input, Copy: c.GetSuppressedDestinationRequest}
 }
 

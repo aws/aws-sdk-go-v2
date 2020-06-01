@@ -110,6 +110,7 @@ func (c *Client) PutVoiceConnectorTerminationCredentialsRequest(input *PutVoiceC
 	req := c.newRequest(op, input, &PutVoiceConnectorTerminationCredentialsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutVoiceConnectorTerminationCredentialsRequest{Request: req, Input: input, Copy: c.PutVoiceConnectorTerminationCredentialsRequest}
 }
 

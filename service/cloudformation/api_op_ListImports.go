@@ -100,6 +100,7 @@ func (c *Client) ListImportsRequest(input *ListImportsInput) ListImportsRequest 
 	}
 
 	req := c.newRequest(op, input, &ListImportsOutput{})
+
 	return ListImportsRequest{Request: req, Input: input, Copy: c.ListImportsRequest}
 }
 

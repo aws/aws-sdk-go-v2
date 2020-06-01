@@ -125,6 +125,7 @@ func (c *Client) CreateFleetRequest(input *CreateFleetInput) CreateFleetRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateFleetOutput{})
+
 	return CreateFleetRequest{Request: req, Input: input, Copy: c.CreateFleetRequest}
 }
 

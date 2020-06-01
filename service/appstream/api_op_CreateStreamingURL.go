@@ -127,6 +127,7 @@ func (c *Client) CreateStreamingURLRequest(input *CreateStreamingURLInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateStreamingURLOutput{})
+
 	return CreateStreamingURLRequest{Request: req, Input: input, Copy: c.CreateStreamingURLRequest}
 }
 

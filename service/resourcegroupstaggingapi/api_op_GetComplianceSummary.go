@@ -145,6 +145,7 @@ func (c *Client) GetComplianceSummaryRequest(input *GetComplianceSummaryInput) G
 	}
 
 	req := c.newRequest(op, input, &GetComplianceSummaryOutput{})
+
 	return GetComplianceSummaryRequest{Request: req, Input: input, Copy: c.GetComplianceSummaryRequest}
 }
 

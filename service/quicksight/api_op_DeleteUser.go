@@ -144,6 +144,7 @@ func (c *Client) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteUserOutput{})
+
 	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
 }
 

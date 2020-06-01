@@ -88,6 +88,7 @@ func (c *Client) DescribeCacheSecurityGroupsRequest(input *DescribeCacheSecurity
 	}
 
 	req := c.newRequest(op, input, &DescribeCacheSecurityGroupsOutput{})
+
 	return DescribeCacheSecurityGroupsRequest{Request: req, Input: input, Copy: c.DescribeCacheSecurityGroupsRequest}
 }
 

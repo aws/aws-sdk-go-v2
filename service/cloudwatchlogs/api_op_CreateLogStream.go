@@ -104,6 +104,7 @@ func (c *Client) CreateLogStreamRequest(input *CreateLogStreamInput) CreateLogSt
 	req := c.newRequest(op, input, &CreateLogStreamOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CreateLogStreamRequest{Request: req, Input: input, Copy: c.CreateLogStreamRequest}
 }
 

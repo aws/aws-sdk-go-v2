@@ -162,6 +162,7 @@ func (c *Client) GetFunctionDefinitionRequest(input *GetFunctionDefinitionInput)
 	}
 
 	req := c.newRequest(op, input, &GetFunctionDefinitionOutput{})
+
 	return GetFunctionDefinitionRequest{Request: req, Input: input, Copy: c.GetFunctionDefinitionRequest}
 }
 

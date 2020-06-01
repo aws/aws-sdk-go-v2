@@ -84,6 +84,7 @@ func (c *Client) BatchGetProjectsRequest(input *BatchGetProjectsInput) BatchGetP
 	}
 
 	req := c.newRequest(op, input, &BatchGetProjectsOutput{})
+
 	return BatchGetProjectsRequest{Request: req, Input: input, Copy: c.BatchGetProjectsRequest}
 }
 

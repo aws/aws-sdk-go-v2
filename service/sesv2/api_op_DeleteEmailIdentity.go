@@ -99,6 +99,7 @@ func (c *Client) DeleteEmailIdentityRequest(input *DeleteEmailIdentityInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteEmailIdentityOutput{})
+
 	return DeleteEmailIdentityRequest{Request: req, Input: input, Copy: c.DeleteEmailIdentityRequest}
 }
 

@@ -110,6 +110,7 @@ func (c *Client) GetImagePipelineRequest(input *GetImagePipelineInput) GetImageP
 	}
 
 	req := c.newRequest(op, input, &GetImagePipelineOutput{})
+
 	return GetImagePipelineRequest{Request: req, Input: input, Copy: c.GetImagePipelineRequest}
 }
 

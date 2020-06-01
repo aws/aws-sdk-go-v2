@@ -18,7 +18,7 @@ type GetCommandInvocationInput struct {
 	CommandId *string `min:"36" type:"string" required:"true"`
 
 	// (Required) The ID of the managed instance targeted by the command. A managed
-	// instance can be an Amazon EC2 instance or an instance in your hybrid environment
+	// instance can be an EC2 instance or an instance in your hybrid environment
 	// that is configured for Systems Manager.
 	//
 	// InstanceId is a required field
@@ -99,8 +99,8 @@ type GetCommandInvocationOutput struct {
 	ExecutionStartDateTime *string `type:"string"`
 
 	// The ID of the managed instance targeted by the command. A managed instance
-	// can be an Amazon EC2 instance or an instance in your hybrid environment that
-	// is configured for Systems Manager.
+	// can be an EC2 instance or an instance in your hybrid environment that is
+	// configured for Systems Manager.
 	InstanceId *string `type:"string"`
 
 	// The name of the plugin for which you want detailed results. For example,
@@ -126,7 +126,7 @@ type GetCommandInvocationOutput struct {
 	StandardOutputContent *string `type:"string"`
 
 	// The URL for the complete text written by the plugin to stdout in Amazon S3.
-	// If an Amazon S3 bucket was not specified, then this string is empty.
+	// If an S3 bucket was not specified, then this string is empty.
 	StandardOutputUrl *string `type:"string"`
 
 	// The status of this invocation plugin. This status can be different than StatusDetails.
@@ -136,7 +136,7 @@ type GetCommandInvocationOutput struct {
 	// includes more information than Status because it includes states resulting
 	// from error and concurrency control parameters. StatusDetails can show different
 	// results than Status. For more information about these statuses, see Understanding
-	// Command Statuses (http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html)
+	// command statuses (https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html)
 	// in the AWS Systems Manager User Guide. StatusDetails can be one of the following
 	// values:
 	//
@@ -147,10 +147,10 @@ type GetCommandInvocationOutput struct {
 	//
 	//    * Delayed: The system attempted to send the command to the target, but
 	//    the target was not available. The instance might not be available because
-	//    of network issues, the instance was stopped, etc. The system will try
-	//    to deliver the command again.
+	//    of network issues, because the instance was stopped, or for similar reasons.
+	//    The system will try to send the command again.
 	//
-	//    * Success: The command or plugin was run successfully. This is a terminal
+	//    * Success: The command or plugin ran successfully. This is a terminal
 	//    state.
 	//
 	//    * Delivery Timed Out: The command was not delivered to the instance before
@@ -216,6 +216,7 @@ func (c *Client) GetCommandInvocationRequest(input *GetCommandInvocationInput) G
 	}
 
 	req := c.newRequest(op, input, &GetCommandInvocationOutput{})
+
 	return GetCommandInvocationRequest{Request: req, Input: input, Copy: c.GetCommandInvocationRequest}
 }
 

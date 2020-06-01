@@ -276,6 +276,7 @@ func (c *Client) CreateCloudFormationChangeSetRequest(input *CreateCloudFormatio
 	}
 
 	req := c.newRequest(op, input, &CreateCloudFormationChangeSetOutput{})
+
 	return CreateCloudFormationChangeSetRequest{Request: req, Input: input, Copy: c.CreateCloudFormationChangeSetRequest}
 }
 

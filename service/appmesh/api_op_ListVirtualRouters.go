@@ -152,6 +152,7 @@ func (c *Client) ListVirtualRoutersRequest(input *ListVirtualRoutersInput) ListV
 	}
 
 	req := c.newRequest(op, input, &ListVirtualRoutersOutput{})
+
 	return ListVirtualRoutersRequest{Request: req, Input: input, Copy: c.ListVirtualRoutersRequest}
 }
 

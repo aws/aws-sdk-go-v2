@@ -129,6 +129,7 @@ func (c *Client) GetSegmentVersionRequest(input *GetSegmentVersionInput) GetSegm
 	}
 
 	req := c.newRequest(op, input, &GetSegmentVersionOutput{})
+
 	return GetSegmentVersionRequest{Request: req, Input: input, Copy: c.GetSegmentVersionRequest}
 }
 

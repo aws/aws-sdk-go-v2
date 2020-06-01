@@ -149,6 +149,7 @@ func (c *Client) DisassociateVPCFromHostedZoneRequest(input *DisassociateVPCFrom
 	}
 
 	req := c.newRequest(op, input, &DisassociateVPCFromHostedZoneOutput{})
+
 	return DisassociateVPCFromHostedZoneRequest{Request: req, Input: input, Copy: c.DisassociateVPCFromHostedZoneRequest}
 }
 

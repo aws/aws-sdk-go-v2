@@ -15,6 +15,8 @@ type UpdateInputInput struct {
 
 	Destinations []InputDestinationRequest `locationName:"destinations" type:"list"`
 
+	InputDevices []InputDeviceRequest `locationName:"inputDevices" type:"list"`
+
 	// InputId is a required field
 	InputId *string `location:"uri" locationName:"inputId" type:"string" required:"true"`
 
@@ -57,6 +59,18 @@ func (s UpdateInputInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		ls0 := e.List(protocol.BodyTarget, "destinations", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.InputDevices != nil {
+		v := s.InputDevices
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "inputDevices", metadata)
 		ls0.Start()
 		for _, v1 := range v {
 			ls0.ListAddFields(v1)
@@ -170,6 +184,7 @@ func (c *Client) UpdateInputRequest(input *UpdateInputInput) UpdateInputRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateInputOutput{})
+
 	return UpdateInputRequest{Request: req, Input: input, Copy: c.UpdateInputRequest}
 }
 

@@ -88,6 +88,7 @@ func (c *Client) DescribeServiceActionRequest(input *DescribeServiceActionInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeServiceActionOutput{})
+
 	return DescribeServiceActionRequest{Request: req, Input: input, Copy: c.DescribeServiceActionRequest}
 }
 

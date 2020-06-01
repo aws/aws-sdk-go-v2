@@ -93,6 +93,7 @@ func (c *Client) RemoveAttributesFromFindingsRequest(input *RemoveAttributesFrom
 	}
 
 	req := c.newRequest(op, input, &RemoveAttributesFromFindingsOutput{})
+
 	return RemoveAttributesFromFindingsRequest{Request: req, Input: input, Copy: c.RemoveAttributesFromFindingsRequest}
 }
 

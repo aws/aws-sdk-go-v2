@@ -79,6 +79,7 @@ func (c *Client) DeleteMetricPolicyRequest(input *DeleteMetricPolicyInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteMetricPolicyOutput{})
+
 	return DeleteMetricPolicyRequest{Request: req, Input: input, Copy: c.DeleteMetricPolicyRequest}
 }
 

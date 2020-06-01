@@ -94,6 +94,7 @@ func (c *Client) PutJobFailureResultRequest(input *PutJobFailureResultInput) Put
 	req := c.newRequest(op, input, &PutJobFailureResultOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutJobFailureResultRequest{Request: req, Input: input, Copy: c.PutJobFailureResultRequest}
 }
 

@@ -303,6 +303,7 @@ func (c *Client) CreateBotVersionRequest(input *CreateBotVersionInput) CreateBot
 	}
 
 	req := c.newRequest(op, input, &CreateBotVersionOutput{})
+
 	return CreateBotVersionRequest{Request: req, Input: input, Copy: c.CreateBotVersionRequest}
 }
 

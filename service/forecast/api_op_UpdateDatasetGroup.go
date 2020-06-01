@@ -87,6 +87,7 @@ func (c *Client) UpdateDatasetGroupRequest(input *UpdateDatasetGroupInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateDatasetGroupOutput{})
+
 	return UpdateDatasetGroupRequest{Request: req, Input: input, Copy: c.UpdateDatasetGroupRequest}
 }
 

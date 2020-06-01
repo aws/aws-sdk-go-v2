@@ -96,6 +96,7 @@ func (c *Client) DeleteSamplingRuleRequest(input *DeleteSamplingRuleInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteSamplingRuleOutput{})
+
 	return DeleteSamplingRuleRequest{Request: req, Input: input, Copy: c.DeleteSamplingRuleRequest}
 }
 

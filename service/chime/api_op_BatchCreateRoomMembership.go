@@ -146,6 +146,7 @@ func (c *Client) BatchCreateRoomMembershipRequest(input *BatchCreateRoomMembersh
 	}
 
 	req := c.newRequest(op, input, &BatchCreateRoomMembershipOutput{})
+
 	return BatchCreateRoomMembershipRequest{Request: req, Input: input, Copy: c.BatchCreateRoomMembershipRequest}
 }
 

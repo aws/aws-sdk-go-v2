@@ -93,6 +93,7 @@ func (c *Client) PutResourcePolicyRequest(input *PutResourcePolicyInput) PutReso
 	}
 
 	req := c.newRequest(op, input, &PutResourcePolicyOutput{})
+
 	return PutResourcePolicyRequest{Request: req, Input: input, Copy: c.PutResourcePolicyRequest}
 }
 

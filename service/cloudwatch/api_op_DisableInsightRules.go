@@ -79,6 +79,7 @@ func (c *Client) DisableInsightRulesRequest(input *DisableInsightRulesInput) Dis
 	}
 
 	req := c.newRequest(op, input, &DisableInsightRulesOutput{})
+
 	return DisableInsightRulesRequest{Request: req, Input: input, Copy: c.DisableInsightRulesRequest}
 }
 

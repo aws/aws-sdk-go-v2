@@ -92,6 +92,7 @@ func (c *Client) DeleteMetricFilterRequest(input *DeleteMetricFilterInput) Delet
 	req := c.newRequest(op, input, &DeleteMetricFilterOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteMetricFilterRequest{Request: req, Input: input, Copy: c.DeleteMetricFilterRequest}
 }
 

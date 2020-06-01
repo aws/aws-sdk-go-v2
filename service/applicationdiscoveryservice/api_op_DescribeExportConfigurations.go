@@ -73,6 +73,7 @@ func (c *Client) DescribeExportConfigurationsRequest(input *DescribeExportConfig
 	}
 
 	req := c.newRequest(op, input, &DescribeExportConfigurationsOutput{})
+
 	return DescribeExportConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeExportConfigurationsRequest}
 }
 

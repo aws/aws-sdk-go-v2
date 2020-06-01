@@ -182,6 +182,7 @@ func (c *Client) StartEntitiesDetectionJobRequest(input *StartEntitiesDetectionJ
 	}
 
 	req := c.newRequest(op, input, &StartEntitiesDetectionJobOutput{})
+
 	return StartEntitiesDetectionJobRequest{Request: req, Input: input, Copy: c.StartEntitiesDetectionJobRequest}
 }
 

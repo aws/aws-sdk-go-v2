@@ -153,6 +153,7 @@ func (c *Client) DeleteBucketMetricsConfigurationRequest(input *DeleteBucketMetr
 	req := c.newRequest(op, input, &DeleteBucketMetricsConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteBucketMetricsConfigurationRequest{Request: req, Input: input, Copy: c.DeleteBucketMetricsConfigurationRequest}
 }
 

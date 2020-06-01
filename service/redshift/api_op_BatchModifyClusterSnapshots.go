@@ -94,6 +94,7 @@ func (c *Client) BatchModifyClusterSnapshotsRequest(input *BatchModifyClusterSna
 	}
 
 	req := c.newRequest(op, input, &BatchModifyClusterSnapshotsOutput{})
+
 	return BatchModifyClusterSnapshotsRequest{Request: req, Input: input, Copy: c.BatchModifyClusterSnapshotsRequest}
 }
 

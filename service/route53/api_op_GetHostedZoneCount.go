@@ -82,6 +82,7 @@ func (c *Client) GetHostedZoneCountRequest(input *GetHostedZoneCountInput) GetHo
 	}
 
 	req := c.newRequest(op, input, &GetHostedZoneCountOutput{})
+
 	return GetHostedZoneCountRequest{Request: req, Input: input, Copy: c.GetHostedZoneCountRequest}
 }
 

@@ -105,6 +105,7 @@ func (c *Client) ListServerNeighborsRequest(input *ListServerNeighborsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListServerNeighborsOutput{})
+
 	return ListServerNeighborsRequest{Request: req, Input: input, Copy: c.ListServerNeighborsRequest}
 }
 

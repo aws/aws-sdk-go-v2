@@ -152,6 +152,7 @@ func (c *Client) ListRecoveryPointsByResourceRequest(input *ListRecoveryPointsBy
 	}
 
 	req := c.newRequest(op, input, &ListRecoveryPointsByResourceOutput{})
+
 	return ListRecoveryPointsByResourceRequest{Request: req, Input: input, Copy: c.ListRecoveryPointsByResourceRequest}
 }
 

@@ -186,6 +186,7 @@ func (c *Client) ListObjectAttributesRequest(input *ListObjectAttributesInput) L
 	}
 
 	req := c.newRequest(op, input, &ListObjectAttributesOutput{})
+
 	return ListObjectAttributesRequest{Request: req, Input: input, Copy: c.ListObjectAttributesRequest}
 }
 

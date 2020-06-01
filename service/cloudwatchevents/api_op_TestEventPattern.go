@@ -91,6 +91,7 @@ func (c *Client) TestEventPatternRequest(input *TestEventPatternInput) TestEvent
 	}
 
 	req := c.newRequest(op, input, &TestEventPatternOutput{})
+
 	return TestEventPatternRequest{Request: req, Input: input, Copy: c.TestEventPatternRequest}
 }
 

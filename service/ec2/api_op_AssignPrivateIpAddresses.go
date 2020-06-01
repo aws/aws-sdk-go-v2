@@ -115,6 +115,7 @@ func (c *Client) AssignPrivateIpAddressesRequest(input *AssignPrivateIpAddresses
 	}
 
 	req := c.newRequest(op, input, &AssignPrivateIpAddressesOutput{})
+
 	return AssignPrivateIpAddressesRequest{Request: req, Input: input, Copy: c.AssignPrivateIpAddressesRequest}
 }
 

@@ -76,6 +76,7 @@ func (c *Client) TestDiscoveryOptionalRequest(input *TestDiscoveryOptionalInput)
 			Fn:   de.Handler,
 		})
 	}
+
 	return TestDiscoveryOptionalRequest{Request: req, Input: input, Copy: c.TestDiscoveryOptionalRequest}
 }
 

@@ -114,6 +114,7 @@ func (c *Client) DescribeFlowLogsRequest(input *DescribeFlowLogsInput) DescribeF
 	}
 
 	req := c.newRequest(op, input, &DescribeFlowLogsOutput{})
+
 	return DescribeFlowLogsRequest{Request: req, Input: input, Copy: c.DescribeFlowLogsRequest}
 }
 

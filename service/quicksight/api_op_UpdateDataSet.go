@@ -293,6 +293,7 @@ func (c *Client) UpdateDataSetRequest(input *UpdateDataSetInput) UpdateDataSetRe
 	}
 
 	req := c.newRequest(op, input, &UpdateDataSetOutput{})
+
 	return UpdateDataSetRequest{Request: req, Input: input, Copy: c.UpdateDataSetRequest}
 }
 

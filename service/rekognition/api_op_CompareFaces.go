@@ -215,6 +215,7 @@ func (c *Client) CompareFacesRequest(input *CompareFacesInput) CompareFacesReque
 	}
 
 	req := c.newRequest(op, input, &CompareFacesOutput{})
+
 	return CompareFacesRequest{Request: req, Input: input, Copy: c.CompareFacesRequest}
 }
 

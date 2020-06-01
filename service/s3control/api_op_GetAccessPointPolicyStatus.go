@@ -123,6 +123,7 @@ func (c *Client) GetAccessPointPolicyStatusRequest(input *GetAccessPointPolicySt
 	req := c.newRequest(op, input, &GetAccessPointPolicyStatusOutput{})
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
+
 	return GetAccessPointPolicyStatusRequest{Request: req, Input: input, Copy: c.GetAccessPointPolicyStatusRequest}
 }
 

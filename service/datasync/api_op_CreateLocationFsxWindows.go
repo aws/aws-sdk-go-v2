@@ -132,6 +132,7 @@ func (c *Client) CreateLocationFsxWindowsRequest(input *CreateLocationFsxWindows
 	}
 
 	req := c.newRequest(op, input, &CreateLocationFsxWindowsOutput{})
+
 	return CreateLocationFsxWindowsRequest{Request: req, Input: input, Copy: c.CreateLocationFsxWindowsRequest}
 }
 

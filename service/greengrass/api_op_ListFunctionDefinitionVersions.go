@@ -128,6 +128,7 @@ func (c *Client) ListFunctionDefinitionVersionsRequest(input *ListFunctionDefini
 	}
 
 	req := c.newRequest(op, input, &ListFunctionDefinitionVersionsOutput{})
+
 	return ListFunctionDefinitionVersionsRequest{Request: req, Input: input, Copy: c.ListFunctionDefinitionVersionsRequest}
 }
 

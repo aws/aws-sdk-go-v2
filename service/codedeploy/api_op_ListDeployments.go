@@ -29,6 +29,10 @@ type ListDeploymentsInput struct {
 	// If it is not specified, then applicationName must not be specified.
 	DeploymentGroupName *string `locationName:"deploymentGroupName" min:"1" type:"string"`
 
+	// The unique ID of an external resource for returning deployments linked to
+	// the external resource.
+	ExternalId *string `locationName:"externalId" type:"string"`
+
 	// A subset of deployments to list by status:
 	//
 	//    * Created: Include created deployments in the resulting list.
@@ -122,6 +126,7 @@ func (c *Client) ListDeploymentsRequest(input *ListDeploymentsInput) ListDeploym
 	}
 
 	req := c.newRequest(op, input, &ListDeploymentsOutput{})
+
 	return ListDeploymentsRequest{Request: req, Input: input, Copy: c.ListDeploymentsRequest}
 }
 

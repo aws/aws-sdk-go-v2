@@ -108,6 +108,7 @@ func (c *Client) AssociateClientVpnTargetNetworkRequest(input *AssociateClientVp
 	}
 
 	req := c.newRequest(op, input, &AssociateClientVpnTargetNetworkOutput{})
+
 	return AssociateClientVpnTargetNetworkRequest{Request: req, Input: input, Copy: c.AssociateClientVpnTargetNetworkRequest}
 }
 

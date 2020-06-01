@@ -87,6 +87,7 @@ func (c *Client) DescribeStepRequest(input *DescribeStepInput) DescribeStepReque
 	}
 
 	req := c.newRequest(op, input, &DescribeStepOutput{})
+
 	return DescribeStepRequest{Request: req, Input: input, Copy: c.DescribeStepRequest}
 }
 

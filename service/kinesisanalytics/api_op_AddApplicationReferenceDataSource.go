@@ -130,6 +130,7 @@ func (c *Client) AddApplicationReferenceDataSourceRequest(input *AddApplicationR
 	}
 
 	req := c.newRequest(op, input, &AddApplicationReferenceDataSourceOutput{})
+
 	return AddApplicationReferenceDataSourceRequest{Request: req, Input: input, Copy: c.AddApplicationReferenceDataSourceRequest}
 }
 

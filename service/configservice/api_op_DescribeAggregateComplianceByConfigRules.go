@@ -103,6 +103,7 @@ func (c *Client) DescribeAggregateComplianceByConfigRulesRequest(input *Describe
 	}
 
 	req := c.newRequest(op, input, &DescribeAggregateComplianceByConfigRulesOutput{})
+
 	return DescribeAggregateComplianceByConfigRulesRequest{Request: req, Input: input, Copy: c.DescribeAggregateComplianceByConfigRulesRequest}
 }
 

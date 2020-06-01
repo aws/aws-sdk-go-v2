@@ -137,6 +137,7 @@ func (c *Client) DescribeReservedDBInstancesOfferingsRequest(input *DescribeRese
 	}
 
 	req := c.newRequest(op, input, &DescribeReservedDBInstancesOfferingsOutput{})
+
 	return DescribeReservedDBInstancesOfferingsRequest{Request: req, Input: input, Copy: c.DescribeReservedDBInstancesOfferingsRequest}
 }
 

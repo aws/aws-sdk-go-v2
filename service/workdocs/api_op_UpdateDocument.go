@@ -145,6 +145,7 @@ func (c *Client) UpdateDocumentRequest(input *UpdateDocumentInput) UpdateDocumen
 	req := c.newRequest(op, input, &UpdateDocumentOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateDocumentRequest{Request: req, Input: input, Copy: c.UpdateDocumentRequest}
 }
 

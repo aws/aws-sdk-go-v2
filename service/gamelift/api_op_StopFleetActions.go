@@ -112,6 +112,7 @@ func (c *Client) StopFleetActionsRequest(input *StopFleetActionsInput) StopFleet
 	}
 
 	req := c.newRequest(op, input, &StopFleetActionsOutput{})
+
 	return StopFleetActionsRequest{Request: req, Input: input, Copy: c.StopFleetActionsRequest}
 }
 

@@ -68,6 +68,7 @@ func (c *Client) DescribeEnvironmentManagedActionsRequest(input *DescribeEnviron
 	}
 
 	req := c.newRequest(op, input, &DescribeEnvironmentManagedActionsOutput{})
+
 	return DescribeEnvironmentManagedActionsRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentManagedActionsRequest}
 }
 

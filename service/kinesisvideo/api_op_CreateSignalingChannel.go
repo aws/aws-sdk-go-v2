@@ -15,7 +15,7 @@ type CreateSignalingChannelInput struct {
 	_ struct{} `type:"structure"`
 
 	// A name for the signaling channel that you are creating. It must be unique
-	// for each account and region.
+	// for each AWS account and AWS Region.
 	//
 	// ChannelName is a required field
 	ChannelName *string `min:"1" type:"string" required:"true"`
@@ -27,7 +27,7 @@ type CreateSignalingChannelInput struct {
 	// A structure containing the configuration for the SINGLE_MASTER channel type.
 	SingleMasterConfiguration *SingleMasterConfiguration `type:"structure"`
 
-	// A set of tags (key/value pairs) that you want to associate with this channel.
+	// A set of tags (key-value pairs) that you want to associate with this channel.
 	Tags []Tag `type:"list"`
 }
 
@@ -105,7 +105,7 @@ func (s CreateSignalingChannelInput) MarshalFields(e protocol.FieldEncoder) erro
 type CreateSignalingChannelOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the created channel.
+	// The Amazon Resource Name (ARN) of the created channel.
 	ChannelARN *string `min:"1" type:"string"`
 }
 
@@ -154,6 +154,7 @@ func (c *Client) CreateSignalingChannelRequest(input *CreateSignalingChannelInpu
 	}
 
 	req := c.newRequest(op, input, &CreateSignalingChannelOutput{})
+
 	return CreateSignalingChannelRequest{Request: req, Input: input, Copy: c.CreateSignalingChannelRequest}
 }
 

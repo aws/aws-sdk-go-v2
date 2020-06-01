@@ -95,6 +95,7 @@ func (c *Client) NotifyApplicationStateRequest(input *NotifyApplicationStateInpu
 	}
 
 	req := c.newRequest(op, input, &NotifyApplicationStateOutput{})
+
 	return NotifyApplicationStateRequest{Request: req, Input: input, Copy: c.NotifyApplicationStateRequest}
 }
 

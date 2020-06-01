@@ -163,6 +163,7 @@ func (c *Client) UpdateConfigurationRequest(input *UpdateConfigurationInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateConfigurationOutput{})
+
 	return UpdateConfigurationRequest{Request: req, Input: input, Copy: c.UpdateConfigurationRequest}
 }
 

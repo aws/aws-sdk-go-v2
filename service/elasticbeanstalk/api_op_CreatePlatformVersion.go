@@ -128,6 +128,7 @@ func (c *Client) CreatePlatformVersionRequest(input *CreatePlatformVersionInput)
 	}
 
 	req := c.newRequest(op, input, &CreatePlatformVersionOutput{})
+
 	return CreatePlatformVersionRequest{Request: req, Input: input, Copy: c.CreatePlatformVersionRequest}
 }
 

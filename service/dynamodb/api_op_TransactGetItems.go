@@ -147,6 +147,7 @@ func (c *Client) TransactGetItemsRequest(input *TransactGetItemsInput) TransactG
 			Fn:   de.Handler,
 		})
 	}
+
 	return TransactGetItemsRequest{Request: req, Input: input, Copy: c.TransactGetItemsRequest}
 }
 

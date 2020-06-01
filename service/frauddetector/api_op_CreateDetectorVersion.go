@@ -136,6 +136,7 @@ func (c *Client) CreateDetectorVersionRequest(input *CreateDetectorVersionInput)
 	}
 
 	req := c.newRequest(op, input, &CreateDetectorVersionOutput{})
+
 	return CreateDetectorVersionRequest{Request: req, Input: input, Copy: c.CreateDetectorVersionRequest}
 }
 

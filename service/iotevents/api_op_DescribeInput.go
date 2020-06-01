@@ -104,6 +104,7 @@ func (c *Client) DescribeInputRequest(input *DescribeInputInput) DescribeInputRe
 	}
 
 	req := c.newRequest(op, input, &DescribeInputOutput{})
+
 	return DescribeInputRequest{Request: req, Input: input, Copy: c.DescribeInputRequest}
 }
 

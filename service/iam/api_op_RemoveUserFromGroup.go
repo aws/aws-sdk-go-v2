@@ -100,6 +100,7 @@ func (c *Client) RemoveUserFromGroupRequest(input *RemoveUserFromGroupInput) Rem
 	req := c.newRequest(op, input, &RemoveUserFromGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RemoveUserFromGroupRequest{Request: req, Input: input, Copy: c.RemoveUserFromGroupRequest}
 }
 

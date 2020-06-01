@@ -118,6 +118,7 @@ func (c *Client) BatchMeterUsageRequest(input *BatchMeterUsageInput) BatchMeterU
 	}
 
 	req := c.newRequest(op, input, &BatchMeterUsageOutput{})
+
 	return BatchMeterUsageRequest{Request: req, Input: input, Copy: c.BatchMeterUsageRequest}
 }
 

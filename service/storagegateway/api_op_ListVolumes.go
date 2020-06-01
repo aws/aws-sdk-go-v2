@@ -127,6 +127,7 @@ func (c *Client) ListVolumesRequest(input *ListVolumesInput) ListVolumesRequest 
 	}
 
 	req := c.newRequest(op, input, &ListVolumesOutput{})
+
 	return ListVolumesRequest{Request: req, Input: input, Copy: c.ListVolumesRequest}
 }
 

@@ -113,6 +113,7 @@ func (c *Client) StopContactRequest(input *StopContactInput) StopContactRequest 
 	}
 
 	req := c.newRequest(op, input, &StopContactOutput{})
+
 	return StopContactRequest{Request: req, Input: input, Copy: c.StopContactRequest}
 }
 

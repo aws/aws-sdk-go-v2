@@ -454,6 +454,7 @@ func (c *Client) GetHLSStreamingSessionURLRequest(input *GetHLSStreamingSessionU
 	}
 
 	req := c.newRequest(op, input, &GetHLSStreamingSessionURLOutput{})
+
 	return GetHLSStreamingSessionURLRequest{Request: req, Input: input, Copy: c.GetHLSStreamingSessionURLRequest}
 }
 

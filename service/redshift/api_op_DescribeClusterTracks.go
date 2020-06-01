@@ -76,6 +76,7 @@ func (c *Client) DescribeClusterTracksRequest(input *DescribeClusterTracksInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeClusterTracksOutput{})
+
 	return DescribeClusterTracksRequest{Request: req, Input: input, Copy: c.DescribeClusterTracksRequest}
 }
 

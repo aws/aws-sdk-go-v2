@@ -108,6 +108,7 @@ func (c *Client) ListBulkDeploymentsRequest(input *ListBulkDeploymentsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListBulkDeploymentsOutput{})
+
 	return ListBulkDeploymentsRequest{Request: req, Input: input, Copy: c.ListBulkDeploymentsRequest}
 }
 

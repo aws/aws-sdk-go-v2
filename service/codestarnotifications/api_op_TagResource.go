@@ -129,6 +129,7 @@ func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest 
 	}
 
 	req := c.newRequest(op, input, &TagResourceOutput{})
+
 	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 

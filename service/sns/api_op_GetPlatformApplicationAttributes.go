@@ -93,6 +93,7 @@ func (c *Client) GetPlatformApplicationAttributesRequest(input *GetPlatformAppli
 	}
 
 	req := c.newRequest(op, input, &GetPlatformApplicationAttributesOutput{})
+
 	return GetPlatformApplicationAttributesRequest{Request: req, Input: input, Copy: c.GetPlatformApplicationAttributesRequest}
 }
 

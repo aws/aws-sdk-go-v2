@@ -142,6 +142,7 @@ func (c *Client) GetObjectInformationRequest(input *GetObjectInformationInput) G
 	}
 
 	req := c.newRequest(op, input, &GetObjectInformationOutput{})
+
 	return GetObjectInformationRequest{Request: req, Input: input, Copy: c.GetObjectInformationRequest}
 }
 

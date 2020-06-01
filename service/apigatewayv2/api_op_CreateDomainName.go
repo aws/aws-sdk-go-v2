@@ -172,6 +172,7 @@ func (c *Client) CreateDomainNameRequest(input *CreateDomainNameInput) CreateDom
 	}
 
 	req := c.newRequest(op, input, &CreateDomainNameOutput{})
+
 	return CreateDomainNameRequest{Request: req, Input: input, Copy: c.CreateDomainNameRequest}
 }
 

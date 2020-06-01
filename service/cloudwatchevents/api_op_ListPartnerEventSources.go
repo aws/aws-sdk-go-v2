@@ -100,6 +100,7 @@ func (c *Client) ListPartnerEventSourcesRequest(input *ListPartnerEventSourcesIn
 	}
 
 	req := c.newRequest(op, input, &ListPartnerEventSourcesOutput{})
+
 	return ListPartnerEventSourcesRequest{Request: req, Input: input, Copy: c.ListPartnerEventSourcesRequest}
 }
 

@@ -106,6 +106,7 @@ func (c *Client) DisassociateDiscoveredResourceRequest(input *DisassociateDiscov
 	}
 
 	req := c.newRequest(op, input, &DisassociateDiscoveredResourceOutput{})
+
 	return DisassociateDiscoveredResourceRequest{Request: req, Input: input, Copy: c.DisassociateDiscoveredResourceRequest}
 }
 

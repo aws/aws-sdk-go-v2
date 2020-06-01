@@ -132,6 +132,7 @@ func (c *Client) GetDiscoveredResourceCountsRequest(input *GetDiscoveredResource
 	}
 
 	req := c.newRequest(op, input, &GetDiscoveredResourceCountsOutput{})
+
 	return GetDiscoveredResourceCountsRequest{Request: req, Input: input, Copy: c.GetDiscoveredResourceCountsRequest}
 }
 

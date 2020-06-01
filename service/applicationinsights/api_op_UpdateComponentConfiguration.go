@@ -105,6 +105,7 @@ func (c *Client) UpdateComponentConfigurationRequest(input *UpdateComponentConfi
 	}
 
 	req := c.newRequest(op, input, &UpdateComponentConfigurationOutput{})
+
 	return UpdateComponentConfigurationRequest{Request: req, Input: input, Copy: c.UpdateComponentConfigurationRequest}
 }
 

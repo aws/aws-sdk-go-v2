@@ -174,6 +174,7 @@ func (c *Client) DescribePredictorRequest(input *DescribePredictorInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribePredictorOutput{})
+
 	return DescribePredictorRequest{Request: req, Input: input, Copy: c.DescribePredictorRequest}
 }
 

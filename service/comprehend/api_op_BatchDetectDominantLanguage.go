@@ -93,6 +93,7 @@ func (c *Client) BatchDetectDominantLanguageRequest(input *BatchDetectDominantLa
 	}
 
 	req := c.newRequest(op, input, &BatchDetectDominantLanguageOutput{})
+
 	return BatchDetectDominantLanguageRequest{Request: req, Input: input, Copy: c.BatchDetectDominantLanguageRequest}
 }
 

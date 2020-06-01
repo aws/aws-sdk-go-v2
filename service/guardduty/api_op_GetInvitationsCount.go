@@ -77,6 +77,7 @@ func (c *Client) GetInvitationsCountRequest(input *GetInvitationsCountInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetInvitationsCountOutput{})
+
 	return GetInvitationsCountRequest{Request: req, Input: input, Copy: c.GetInvitationsCountRequest}
 }
 

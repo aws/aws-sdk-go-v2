@@ -96,6 +96,7 @@ func (c *Client) DisconnectCustomKeyStoreRequest(input *DisconnectCustomKeyStore
 	}
 
 	req := c.newRequest(op, input, &DisconnectCustomKeyStoreOutput{})
+
 	return DisconnectCustomKeyStoreRequest{Request: req, Input: input, Copy: c.DisconnectCustomKeyStoreRequest}
 }
 

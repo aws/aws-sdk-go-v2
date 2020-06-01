@@ -110,6 +110,7 @@ func (c *Client) UpdateOrganizationConfigurationRequest(input *UpdateOrganizatio
 	}
 
 	req := c.newRequest(op, input, &UpdateOrganizationConfigurationOutput{})
+
 	return UpdateOrganizationConfigurationRequest{Request: req, Input: input, Copy: c.UpdateOrganizationConfigurationRequest}
 }
 

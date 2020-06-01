@@ -14,18 +14,17 @@ import (
 type PutJobTaggingInput struct {
 	_ struct{} `locationName:"PutJobTaggingRequest" type:"structure" xmlURI:"http://awss3control.amazonaws.com/doc/2018-08-20/"`
 
-	// The account ID for the Amazon Web Services account associated with the Amazon
-	// S3 batch operations job you want to replace tags on.
+	// The AWS account ID associated with the Amazon S3 Batch Operations job.
 	//
 	// AccountId is a required field
 	AccountId *string `location:"header" locationName:"x-amz-account-id" type:"string" required:"true"`
 
-	// The ID for the job whose tags you want to replace.
+	// The ID for the Amazon S3 Batch Operations job whose tags you want to replace.
 	//
 	// JobId is a required field
 	JobId *string `location:"uri" locationName:"id" min:"5" type:"string" required:"true"`
 
-	// The set of tags to associate with the job.
+	// The set of tags to associate with the Amazon S3 Batch Operations job.
 	//
 	// Tags is a required field
 	Tags []S3Tag `type:"list" required:"true"`
@@ -120,7 +119,44 @@ const opPutJobTagging = "PutJobTagging"
 // PutJobTaggingRequest returns a request value for making API operation for
 // AWS S3 Control.
 //
-// Replace the set of tags on a Amazon S3 batch operations job.
+// Set the supplied tag-set on an Amazon S3 Batch Operations job.
+//
+// A tag is a key-value pair. You can associate Amazon S3 Batch Operations tags
+// with any job by sending a PUT request against the tagging subresource that
+// is associated with the job. To modify the existing tag set, you can either
+// replace the existing tag set entirely, or make changes within the existing
+// tag set by retrieving the existing tag set using GetJobTagging, modify that
+// tag set, and use this API action to replace the tag set with the one you
+// have modified.. For more information, see Using Job Tags (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+//    * If you send this request with an empty tag set, Amazon S3 deletes the
+//    existing tag set on the Batch Operations job. If you use this method,
+//    you will be charged for a Tier 1 Request (PUT). For more information,
+//    see Amazon S3 pricing (http://aws.amazon.com/s3/pricing/).
+//
+//    * For deleting existing tags for your batch operations job, DeleteJobTagging
+//    request is preferred because it achieves the same result without incurring
+//    charges.
+//
+//    * A few things to consider about using tags: Amazon S3 limits the maximum
+//    number of tags to 50 tags per job. You can associate up to 50 tags with
+//    a job as long as they have unique tag keys. A tag key can be up to 128
+//    Unicode characters in length, and tag values can be up to 256 Unicode
+//    characters in length. The key and values are case sensitive. For tagging-related
+//    restrictions related to characters and encodings, see User-Defined Tag
+//    Restrictions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html).
+//
+// To use this operation, you must have permission to perform the s3:PutJobTagging
+// action.
+//
+// Related actions include:
+//
+//    * CreateJob
+//
+//    * GetJobTagging
+//
+//    * DeleteJobTagging
 //
 //    // Example sending a request using PutJobTaggingRequest.
 //    req := client.PutJobTaggingRequest(params)
@@ -144,6 +180,7 @@ func (c *Client) PutJobTaggingRequest(input *PutJobTaggingInput) PutJobTaggingRe
 	req := c.newRequest(op, input, &PutJobTaggingOutput{})
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
+
 	return PutJobTaggingRequest{Request: req, Input: input, Copy: c.PutJobTaggingRequest}
 }
 

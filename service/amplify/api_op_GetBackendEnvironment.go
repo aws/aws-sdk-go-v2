@@ -126,6 +126,7 @@ func (c *Client) GetBackendEnvironmentRequest(input *GetBackendEnvironmentInput)
 	}
 
 	req := c.newRequest(op, input, &GetBackendEnvironmentOutput{})
+
 	return GetBackendEnvironmentRequest{Request: req, Input: input, Copy: c.GetBackendEnvironmentRequest}
 }
 

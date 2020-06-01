@@ -150,6 +150,7 @@ func (c *Client) PublishSchemaRequest(input *PublishSchemaInput) PublishSchemaRe
 	}
 
 	req := c.newRequest(op, input, &PublishSchemaOutput{})
+
 	return PublishSchemaRequest{Request: req, Input: input, Copy: c.PublishSchemaRequest}
 }
 

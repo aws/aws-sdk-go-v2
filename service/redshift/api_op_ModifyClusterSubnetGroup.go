@@ -91,6 +91,7 @@ func (c *Client) ModifyClusterSubnetGroupRequest(input *ModifyClusterSubnetGroup
 	}
 
 	req := c.newRequest(op, input, &ModifyClusterSubnetGroupOutput{})
+
 	return ModifyClusterSubnetGroupRequest{Request: req, Input: input, Copy: c.ModifyClusterSubnetGroupRequest}
 }
 

@@ -88,6 +88,7 @@ func (c *Client) DescribeAssessmentTargetsRequest(input *DescribeAssessmentTarge
 	}
 
 	req := c.newRequest(op, input, &DescribeAssessmentTargetsOutput{})
+
 	return DescribeAssessmentTargetsRequest{Request: req, Input: input, Copy: c.DescribeAssessmentTargetsRequest}
 }
 

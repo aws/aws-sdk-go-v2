@@ -107,6 +107,7 @@ func (c *Client) GetApisRequest(input *GetApisInput) GetApisRequest {
 	}
 
 	req := c.newRequest(op, input, &GetApisOutput{})
+
 	return GetApisRequest{Request: req, Input: input, Copy: c.GetApisRequest}
 }
 

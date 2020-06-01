@@ -85,6 +85,7 @@ func (c *Client) DescribePartnerEventSourceRequest(input *DescribePartnerEventSo
 	}
 
 	req := c.newRequest(op, input, &DescribePartnerEventSourceOutput{})
+
 	return DescribePartnerEventSourceRequest{Request: req, Input: input, Copy: c.DescribePartnerEventSourceRequest}
 }
 

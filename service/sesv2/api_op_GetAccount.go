@@ -155,6 +155,7 @@ func (c *Client) GetAccountRequest(input *GetAccountInput) GetAccountRequest {
 	}
 
 	req := c.newRequest(op, input, &GetAccountOutput{})
+
 	return GetAccountRequest{Request: req, Input: input, Copy: c.GetAccountRequest}
 }
 

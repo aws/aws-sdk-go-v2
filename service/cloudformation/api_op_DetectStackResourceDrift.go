@@ -106,6 +106,7 @@ func (c *Client) DetectStackResourceDriftRequest(input *DetectStackResourceDrift
 	}
 
 	req := c.newRequest(op, input, &DetectStackResourceDriftOutput{})
+
 	return DetectStackResourceDriftRequest{Request: req, Input: input, Copy: c.DetectStackResourceDriftRequest}
 }
 

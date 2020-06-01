@@ -196,6 +196,7 @@ func (c *Client) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListMultipartUploadsOutput{})
+
 	return ListMultipartUploadsRequest{Request: req, Input: input, Copy: c.ListMultipartUploadsRequest}
 }
 

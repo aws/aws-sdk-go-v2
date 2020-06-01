@@ -81,6 +81,7 @@ func (c *Client) GetTestRequest(input *GetTestInput) GetTestRequest {
 	}
 
 	req := c.newRequest(op, input, &GetTestOutput{})
+
 	return GetTestRequest{Request: req, Input: input, Copy: c.GetTestRequest}
 }
 

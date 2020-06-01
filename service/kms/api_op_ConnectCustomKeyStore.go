@@ -115,6 +115,7 @@ func (c *Client) ConnectCustomKeyStoreRequest(input *ConnectCustomKeyStoreInput)
 	}
 
 	req := c.newRequest(op, input, &ConnectCustomKeyStoreOutput{})
+
 	return ConnectCustomKeyStoreRequest{Request: req, Input: input, Copy: c.ConnectCustomKeyStoreRequest}
 }
 

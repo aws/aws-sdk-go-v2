@@ -161,6 +161,7 @@ func (c *Client) GetLoggerDefinitionRequest(input *GetLoggerDefinitionInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetLoggerDefinitionOutput{})
+
 	return GetLoggerDefinitionRequest{Request: req, Input: input, Copy: c.GetLoggerDefinitionRequest}
 }
 

@@ -96,6 +96,7 @@ func (c *Client) SearchProductsRequest(input *SearchProductsInput) SearchProduct
 	}
 
 	req := c.newRequest(op, input, &SearchProductsOutput{})
+
 	return SearchProductsRequest{Request: req, Input: input, Copy: c.SearchProductsRequest}
 }
 

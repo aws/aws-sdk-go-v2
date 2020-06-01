@@ -113,6 +113,7 @@ func (c *Client) ImportKeyPairRequest(input *ImportKeyPairInput) ImportKeyPairRe
 	}
 
 	req := c.newRequest(op, input, &ImportKeyPairOutput{})
+
 	return ImportKeyPairRequest{Request: req, Input: input, Copy: c.ImportKeyPairRequest}
 }
 

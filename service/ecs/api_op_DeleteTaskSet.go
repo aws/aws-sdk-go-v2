@@ -106,6 +106,7 @@ func (c *Client) DeleteTaskSetRequest(input *DeleteTaskSetInput) DeleteTaskSetRe
 	}
 
 	req := c.newRequest(op, input, &DeleteTaskSetOutput{})
+
 	return DeleteTaskSetRequest{Request: req, Input: input, Copy: c.DeleteTaskSetRequest}
 }
 

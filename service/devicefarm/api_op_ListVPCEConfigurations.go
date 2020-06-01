@@ -84,6 +84,7 @@ func (c *Client) ListVPCEConfigurationsRequest(input *ListVPCEConfigurationsInpu
 	}
 
 	req := c.newRequest(op, input, &ListVPCEConfigurationsOutput{})
+
 	return ListVPCEConfigurationsRequest{Request: req, Input: input, Copy: c.ListVPCEConfigurationsRequest}
 }
 

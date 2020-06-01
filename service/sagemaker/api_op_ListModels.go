@@ -108,6 +108,7 @@ func (c *Client) ListModelsRequest(input *ListModelsInput) ListModelsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListModelsOutput{})
+
 	return ListModelsRequest{Request: req, Input: input, Copy: c.ListModelsRequest}
 }
 

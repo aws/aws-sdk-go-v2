@@ -145,6 +145,7 @@ func (c *Client) ListAttendeesRequest(input *ListAttendeesInput) ListAttendeesRe
 	}
 
 	req := c.newRequest(op, input, &ListAttendeesOutput{})
+
 	return ListAttendeesRequest{Request: req, Input: input, Copy: c.ListAttendeesRequest}
 }
 

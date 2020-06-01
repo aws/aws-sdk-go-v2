@@ -157,6 +157,7 @@ func (c *Client) CreateDBClusterEndpointRequest(input *CreateDBClusterEndpointIn
 	}
 
 	req := c.newRequest(op, input, &CreateDBClusterEndpointOutput{})
+
 	return CreateDBClusterEndpointRequest{Request: req, Input: input, Copy: c.CreateDBClusterEndpointRequest}
 }
 

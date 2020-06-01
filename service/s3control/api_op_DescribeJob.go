@@ -95,8 +95,19 @@ const opDescribeJob = "DescribeJob"
 // DescribeJobRequest returns a request value for making API operation for
 // AWS S3 Control.
 //
-// Retrieves the configuration parameters and status for a batch operations
-// job.
+// Retrieves the configuration parameters and status for a Batch Operations
+// job. For more information, see Amazon S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+// Related actions include:
+//
+//    * CreateJob
+//
+//    * ListJobs
+//
+//    * UpdateJobPriority
+//
+//    * UpdateJobStatus
 //
 //    // Example sending a request using DescribeJobRequest.
 //    req := client.DescribeJobRequest(params)
@@ -120,6 +131,7 @@ func (c *Client) DescribeJobRequest(input *DescribeJobInput) DescribeJobRequest 
 	req := c.newRequest(op, input, &DescribeJobOutput{})
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
+
 	return DescribeJobRequest{Request: req, Input: input, Copy: c.DescribeJobRequest}
 }
 

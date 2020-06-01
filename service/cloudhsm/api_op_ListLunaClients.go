@@ -81,6 +81,7 @@ func (c *Client) ListLunaClientsRequest(input *ListLunaClientsInput) ListLunaCli
 	}
 
 	req := c.newRequest(op, input, &ListLunaClientsOutput{})
+
 	return ListLunaClientsRequest{Request: req, Input: input, Copy: c.ListLunaClientsRequest}
 }
 

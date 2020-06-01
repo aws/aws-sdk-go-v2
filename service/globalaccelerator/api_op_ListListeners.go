@@ -93,6 +93,7 @@ func (c *Client) ListListenersRequest(input *ListListenersInput) ListListenersRe
 	}
 
 	req := c.newRequest(op, input, &ListListenersOutput{})
+
 	return ListListenersRequest{Request: req, Input: input, Copy: c.ListListenersRequest}
 }
 

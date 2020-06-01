@@ -76,6 +76,7 @@ func (c *Client) ExpireSessionRequest(input *ExpireSessionInput) ExpireSessionRe
 	}
 
 	req := c.newRequest(op, input, &ExpireSessionOutput{})
+
 	return ExpireSessionRequest{Request: req, Input: input, Copy: c.ExpireSessionRequest}
 }
 

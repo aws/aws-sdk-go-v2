@@ -104,6 +104,7 @@ func (c *Client) CreateCacheSecurityGroupRequest(input *CreateCacheSecurityGroup
 	}
 
 	req := c.newRequest(op, input, &CreateCacheSecurityGroupOutput{})
+
 	return CreateCacheSecurityGroupRequest{Request: req, Input: input, Copy: c.CreateCacheSecurityGroupRequest}
 }
 

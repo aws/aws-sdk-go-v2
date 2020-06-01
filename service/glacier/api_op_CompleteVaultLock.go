@@ -143,6 +143,7 @@ func (c *Client) CompleteVaultLockRequest(input *CompleteVaultLockInput) Complet
 	req := c.newRequest(op, input, &CompleteVaultLockOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CompleteVaultLockRequest{Request: req, Input: input, Copy: c.CompleteVaultLockRequest}
 }
 

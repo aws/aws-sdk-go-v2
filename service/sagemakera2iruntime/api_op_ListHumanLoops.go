@@ -180,6 +180,7 @@ func (c *Client) ListHumanLoopsRequest(input *ListHumanLoopsInput) ListHumanLoop
 	}
 
 	req := c.newRequest(op, input, &ListHumanLoopsOutput{})
+
 	return ListHumanLoopsRequest{Request: req, Input: input, Copy: c.ListHumanLoopsRequest}
 }
 

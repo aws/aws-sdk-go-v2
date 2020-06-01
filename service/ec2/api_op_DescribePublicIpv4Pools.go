@@ -103,6 +103,7 @@ func (c *Client) DescribePublicIpv4PoolsRequest(input *DescribePublicIpv4PoolsIn
 	}
 
 	req := c.newRequest(op, input, &DescribePublicIpv4PoolsOutput{})
+
 	return DescribePublicIpv4PoolsRequest{Request: req, Input: input, Copy: c.DescribePublicIpv4PoolsRequest}
 }
 

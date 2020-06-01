@@ -127,6 +127,7 @@ func (c *Client) GetBlacklistReportsRequest(input *GetBlacklistReportsInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetBlacklistReportsOutput{})
+
 	return GetBlacklistReportsRequest{Request: req, Input: input, Copy: c.GetBlacklistReportsRequest}
 }
 

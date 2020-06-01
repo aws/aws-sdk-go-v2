@@ -99,6 +99,7 @@ func (c *Client) ListIdentityProvidersRequest(input *ListIdentityProvidersInput)
 	}
 
 	req := c.newRequest(op, input, &ListIdentityProvidersOutput{})
+
 	return ListIdentityProvidersRequest{Request: req, Input: input, Copy: c.ListIdentityProvidersRequest}
 }
 

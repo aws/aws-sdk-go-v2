@@ -121,6 +121,7 @@ func (c *Client) AddApplicationInputRequest(input *AddApplicationInputInput) Add
 	}
 
 	req := c.newRequest(op, input, &AddApplicationInputOutput{})
+
 	return AddApplicationInputRequest{Request: req, Input: input, Copy: c.AddApplicationInputRequest}
 }
 

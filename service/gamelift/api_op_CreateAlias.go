@@ -144,6 +144,7 @@ func (c *Client) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateAliasOutput{})
+
 	return CreateAliasRequest{Request: req, Input: input, Copy: c.CreateAliasRequest}
 }
 

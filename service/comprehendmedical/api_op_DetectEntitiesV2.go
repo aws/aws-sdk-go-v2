@@ -111,6 +111,7 @@ func (c *Client) DetectEntitiesV2Request(input *DetectEntitiesV2Input) DetectEnt
 	}
 
 	req := c.newRequest(op, input, &DetectEntitiesV2Output{})
+
 	return DetectEntitiesV2Request{Request: req, Input: input, Copy: c.DetectEntitiesV2Request}
 }
 

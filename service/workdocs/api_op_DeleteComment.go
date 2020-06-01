@@ -147,6 +147,7 @@ func (c *Client) DeleteCommentRequest(input *DeleteCommentInput) DeleteCommentRe
 	req := c.newRequest(op, input, &DeleteCommentOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteCommentRequest{Request: req, Input: input, Copy: c.DeleteCommentRequest}
 }
 

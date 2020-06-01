@@ -116,6 +116,7 @@ func (c *Client) DescribeFargateProfileRequest(input *DescribeFargateProfileInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeFargateProfileOutput{})
+
 	return DescribeFargateProfileRequest{Request: req, Input: input, Copy: c.DescribeFargateProfileRequest}
 }
 

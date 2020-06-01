@@ -149,6 +149,7 @@ func (c *Client) GetGroupVersionRequest(input *GetGroupVersionInput) GetGroupVer
 	}
 
 	req := c.newRequest(op, input, &GetGroupVersionOutput{})
+
 	return GetGroupVersionRequest{Request: req, Input: input, Copy: c.GetGroupVersionRequest}
 }
 

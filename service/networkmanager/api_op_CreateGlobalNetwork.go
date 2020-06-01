@@ -102,6 +102,7 @@ func (c *Client) CreateGlobalNetworkRequest(input *CreateGlobalNetworkInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateGlobalNetworkOutput{})
+
 	return CreateGlobalNetworkRequest{Request: req, Input: input, Copy: c.CreateGlobalNetworkRequest}
 }
 

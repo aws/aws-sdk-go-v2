@@ -117,6 +117,7 @@ func (c *Client) GetAccessControlEffectRequest(input *GetAccessControlEffectInpu
 	}
 
 	req := c.newRequest(op, input, &GetAccessControlEffectOutput{})
+
 	return GetAccessControlEffectRequest{Request: req, Input: input, Copy: c.GetAccessControlEffectRequest}
 }
 

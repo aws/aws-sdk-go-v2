@@ -359,6 +359,7 @@ func (c *Client) UpdateSecurityProfileRequest(input *UpdateSecurityProfileInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateSecurityProfileOutput{})
+
 	return UpdateSecurityProfileRequest{Request: req, Input: input, Copy: c.UpdateSecurityProfileRequest}
 }
 

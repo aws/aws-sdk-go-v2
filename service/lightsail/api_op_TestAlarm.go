@@ -21,13 +21,13 @@ type TestAlarmInput struct {
 	//
 	// An alarm has the following possible states that can be tested:
 	//
-	//    * ALARM — The metric is outside of the defined threshold.
+	//    * ALARM - The metric is outside of the defined threshold.
 	//
-	//    * INSUFFICIENT_DATA — The alarm has just started, the metric is not
-	//    available, or not enough data is available for the metric to determine
-	//    the alarm state.
+	//    * INSUFFICIENT_DATA - The alarm has just started, the metric is not available,
+	//    or not enough data is available for the metric to determine the alarm
+	//    state.
 	//
-	//    * OK — The metric is within the defined threshold.
+	//    * OK - The metric is within the defined threshold.
 	//
 	// State is a required field
 	State AlarmState `locationName:"state" type:"string" required:"true" enum:"true"`
@@ -59,7 +59,7 @@ type TestAlarmOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
+	// of the request, the timestamp of the request, and the resources affected
 	// by the request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
@@ -104,6 +104,7 @@ func (c *Client) TestAlarmRequest(input *TestAlarmInput) TestAlarmRequest {
 	}
 
 	req := c.newRequest(op, input, &TestAlarmOutput{})
+
 	return TestAlarmRequest{Request: req, Input: input, Copy: c.TestAlarmRequest}
 }
 

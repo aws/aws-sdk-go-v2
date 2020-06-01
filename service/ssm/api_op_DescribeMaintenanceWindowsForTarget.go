@@ -111,6 +111,7 @@ func (c *Client) DescribeMaintenanceWindowsForTargetRequest(input *DescribeMaint
 	}
 
 	req := c.newRequest(op, input, &DescribeMaintenanceWindowsForTargetOutput{})
+
 	return DescribeMaintenanceWindowsForTargetRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceWindowsForTargetRequest}
 }
 

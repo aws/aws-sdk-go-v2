@@ -90,7 +90,8 @@ const opDescribeSignalingChannel = "DescribeSignalingChannel"
 // Amazon Kinesis Video Streams.
 //
 // Returns the most current information about the signaling channel. You must
-// specify either the name or the ARN of the channel that you want to describe.
+// specify either the name or the Amazon Resource Name (ARN) of the channel
+// that you want to describe.
 //
 //    // Example sending a request using DescribeSignalingChannelRequest.
 //    req := client.DescribeSignalingChannelRequest(params)
@@ -112,6 +113,7 @@ func (c *Client) DescribeSignalingChannelRequest(input *DescribeSignalingChannel
 	}
 
 	req := c.newRequest(op, input, &DescribeSignalingChannelOutput{})
+
 	return DescribeSignalingChannelRequest{Request: req, Input: input, Copy: c.DescribeSignalingChannelRequest}
 }
 

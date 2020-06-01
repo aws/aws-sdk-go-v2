@@ -101,6 +101,7 @@ func (c *Client) DeleteNotificationRuleRequest(input *DeleteNotificationRuleInpu
 	}
 
 	req := c.newRequest(op, input, &DeleteNotificationRuleOutput{})
+
 	return DeleteNotificationRuleRequest{Request: req, Input: input, Copy: c.DeleteNotificationRuleRequest}
 }
 

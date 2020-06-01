@@ -137,6 +137,7 @@ func (c *Client) GetFindingsStatisticsRequest(input *GetFindingsStatisticsInput)
 	}
 
 	req := c.newRequest(op, input, &GetFindingsStatisticsOutput{})
+
 	return GetFindingsStatisticsRequest{Request: req, Input: input, Copy: c.GetFindingsStatisticsRequest}
 }
 

@@ -162,6 +162,7 @@ func (c *Client) PutEventsRequest(input *PutEventsInput) PutEventsRequest {
 	req := c.newRequest(op, input, &PutEventsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutEventsRequest{Request: req, Input: input, Copy: c.PutEventsRequest}
 }
 

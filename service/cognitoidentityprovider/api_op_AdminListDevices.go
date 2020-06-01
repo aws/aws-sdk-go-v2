@@ -107,6 +107,7 @@ func (c *Client) AdminListDevicesRequest(input *AdminListDevicesInput) AdminList
 	}
 
 	req := c.newRequest(op, input, &AdminListDevicesOutput{})
+
 	return AdminListDevicesRequest{Request: req, Input: input, Copy: c.AdminListDevicesRequest}
 }
 

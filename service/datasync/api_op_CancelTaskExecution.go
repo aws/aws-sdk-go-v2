@@ -83,6 +83,7 @@ func (c *Client) CancelTaskExecutionRequest(input *CancelTaskExecutionInput) Can
 	}
 
 	req := c.newRequest(op, input, &CancelTaskExecutionOutput{})
+
 	return CancelTaskExecutionRequest{Request: req, Input: input, Copy: c.CancelTaskExecutionRequest}
 }
 

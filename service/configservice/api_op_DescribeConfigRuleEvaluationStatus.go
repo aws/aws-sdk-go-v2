@@ -83,6 +83,7 @@ func (c *Client) DescribeConfigRuleEvaluationStatusRequest(input *DescribeConfig
 	}
 
 	req := c.newRequest(op, input, &DescribeConfigRuleEvaluationStatusOutput{})
+
 	return DescribeConfigRuleEvaluationStatusRequest{Request: req, Input: input, Copy: c.DescribeConfigRuleEvaluationStatusRequest}
 }
 

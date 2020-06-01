@@ -170,6 +170,7 @@ func (c *Client) CreateNodeRequest(input *CreateNodeInput) CreateNodeRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateNodeOutput{})
+
 	return CreateNodeRequest{Request: req, Input: input, Copy: c.CreateNodeRequest}
 }
 

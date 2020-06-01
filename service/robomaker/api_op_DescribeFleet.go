@@ -182,6 +182,7 @@ func (c *Client) DescribeFleetRequest(input *DescribeFleetInput) DescribeFleetRe
 	}
 
 	req := c.newRequest(op, input, &DescribeFleetOutput{})
+
 	return DescribeFleetRequest{Request: req, Input: input, Copy: c.DescribeFleetRequest}
 }
 

@@ -83,6 +83,7 @@ func (c *Client) DescribeSMBFileSharesRequest(input *DescribeSMBFileSharesInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeSMBFileSharesOutput{})
+
 	return DescribeSMBFileSharesRequest{Request: req, Input: input, Copy: c.DescribeSMBFileSharesRequest}
 }
 

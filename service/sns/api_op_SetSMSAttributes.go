@@ -154,6 +154,7 @@ func (c *Client) SetSMSAttributesRequest(input *SetSMSAttributesInput) SetSMSAtt
 	}
 
 	req := c.newRequest(op, input, &SetSMSAttributesOutput{})
+
 	return SetSMSAttributesRequest{Request: req, Input: input, Copy: c.SetSMSAttributesRequest}
 }
 

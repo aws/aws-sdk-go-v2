@@ -187,6 +187,7 @@ func (c *Client) ListGroupMembershipsRequest(input *ListGroupMembershipsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListGroupMembershipsOutput{})
+
 	return ListGroupMembershipsRequest{Request: req, Input: input, Copy: c.ListGroupMembershipsRequest}
 }
 

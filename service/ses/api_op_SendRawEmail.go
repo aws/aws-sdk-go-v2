@@ -268,6 +268,7 @@ func (c *Client) SendRawEmailRequest(input *SendRawEmailInput) SendRawEmailReque
 	}
 
 	req := c.newRequest(op, input, &SendRawEmailOutput{})
+
 	return SendRawEmailRequest{Request: req, Input: input, Copy: c.SendRawEmailRequest}
 }
 

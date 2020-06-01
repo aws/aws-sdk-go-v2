@@ -92,6 +92,7 @@ func (c *Client) DescribeAvailablePatchesRequest(input *DescribeAvailablePatches
 	}
 
 	req := c.newRequest(op, input, &DescribeAvailablePatchesOutput{})
+
 	return DescribeAvailablePatchesRequest{Request: req, Input: input, Copy: c.DescribeAvailablePatchesRequest}
 }
 

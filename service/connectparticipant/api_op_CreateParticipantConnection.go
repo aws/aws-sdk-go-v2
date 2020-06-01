@@ -156,6 +156,7 @@ func (c *Client) CreateParticipantConnectionRequest(input *CreateParticipantConn
 	}
 
 	req := c.newRequest(op, input, &CreateParticipantConnectionOutput{})
+
 	return CreateParticipantConnectionRequest{Request: req, Input: input, Copy: c.CreateParticipantConnectionRequest}
 }
 

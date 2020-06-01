@@ -134,6 +134,7 @@ func (c *Client) UntagAttendeeRequest(input *UntagAttendeeInput) UntagAttendeeRe
 	req := c.newRequest(op, input, &UntagAttendeeOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UntagAttendeeRequest{Request: req, Input: input, Copy: c.UntagAttendeeRequest}
 }
 

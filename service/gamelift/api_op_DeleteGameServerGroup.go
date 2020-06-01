@@ -135,6 +135,7 @@ func (c *Client) DeleteGameServerGroupRequest(input *DeleteGameServerGroupInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteGameServerGroupOutput{})
+
 	return DeleteGameServerGroupRequest{Request: req, Input: input, Copy: c.DeleteGameServerGroupRequest}
 }
 

@@ -82,6 +82,7 @@ func (c *Client) PutDetectorRequest(input *PutDetectorInput) PutDetectorRequest 
 	}
 
 	req := c.newRequest(op, input, &PutDetectorOutput{})
+
 	return PutDetectorRequest{Request: req, Input: input, Copy: c.PutDetectorRequest}
 }
 

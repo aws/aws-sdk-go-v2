@@ -148,6 +148,7 @@ func (c *Client) CreateAttendeeRequest(input *CreateAttendeeInput) CreateAttende
 	}
 
 	req := c.newRequest(op, input, &CreateAttendeeOutput{})
+
 	return CreateAttendeeRequest{Request: req, Input: input, Copy: c.CreateAttendeeRequest}
 }
 

@@ -174,6 +174,7 @@ func (c *Client) DescribeDomainConfigurationRequest(input *DescribeDomainConfigu
 	}
 
 	req := c.newRequest(op, input, &DescribeDomainConfigurationOutput{})
+
 	return DescribeDomainConfigurationRequest{Request: req, Input: input, Copy: c.DescribeDomainConfigurationRequest}
 }
 

@@ -93,6 +93,7 @@ func (c *Client) ListProvisioningArtifactsRequest(input *ListProvisioningArtifac
 	}
 
 	req := c.newRequest(op, input, &ListProvisioningArtifactsOutput{})
+
 	return ListProvisioningArtifactsRequest{Request: req, Input: input, Copy: c.ListProvisioningArtifactsRequest}
 }
 

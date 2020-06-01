@@ -78,7 +78,7 @@ func (s ListDashboardsInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListDashboardsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A structure that contains all of the dashboards shared with the user. This
+	// A structure that contains all of the dashboards in your AWS account. This
 	// structure provides basic information about the dashboards.
 	DashboardSummaryList []DashboardSummary `type:"list"`
 
@@ -160,6 +160,7 @@ func (c *Client) ListDashboardsRequest(input *ListDashboardsInput) ListDashboard
 	}
 
 	req := c.newRequest(op, input, &ListDashboardsOutput{})
+
 	return ListDashboardsRequest{Request: req, Input: input, Copy: c.ListDashboardsRequest}
 }
 

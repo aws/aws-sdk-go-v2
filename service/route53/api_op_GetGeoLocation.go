@@ -166,6 +166,7 @@ func (c *Client) GetGeoLocationRequest(input *GetGeoLocationInput) GetGeoLocatio
 	}
 
 	req := c.newRequest(op, input, &GetGeoLocationOutput{})
+
 	return GetGeoLocationRequest{Request: req, Input: input, Copy: c.GetGeoLocationRequest}
 }
 

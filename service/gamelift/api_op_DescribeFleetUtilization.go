@@ -136,6 +136,7 @@ func (c *Client) DescribeFleetUtilizationRequest(input *DescribeFleetUtilization
 	}
 
 	req := c.newRequest(op, input, &DescribeFleetUtilizationOutput{})
+
 	return DescribeFleetUtilizationRequest{Request: req, Input: input, Copy: c.DescribeFleetUtilizationRequest}
 }
 

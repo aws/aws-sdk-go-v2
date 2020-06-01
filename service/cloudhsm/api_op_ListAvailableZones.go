@@ -67,6 +67,7 @@ func (c *Client) ListAvailableZonesRequest(input *ListAvailableZonesInput) ListA
 	}
 
 	req := c.newRequest(op, input, &ListAvailableZonesOutput{})
+
 	return ListAvailableZonesRequest{Request: req, Input: input, Copy: c.ListAvailableZonesRequest}
 }
 

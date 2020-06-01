@@ -133,6 +133,7 @@ func (c *Client) ListReviewPolicyResultsForHITRequest(input *ListReviewPolicyRes
 	}
 
 	req := c.newRequest(op, input, &ListReviewPolicyResultsForHITOutput{})
+
 	return ListReviewPolicyResultsForHITRequest{Request: req, Input: input, Copy: c.ListReviewPolicyResultsForHITRequest}
 }
 

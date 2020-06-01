@@ -87,6 +87,7 @@ func (c *Client) DeleteMLModelRequest(input *DeleteMLModelInput) DeleteMLModelRe
 	}
 
 	req := c.newRequest(op, input, &DeleteMLModelOutput{})
+
 	return DeleteMLModelRequest{Request: req, Input: input, Copy: c.DeleteMLModelRequest}
 }
 

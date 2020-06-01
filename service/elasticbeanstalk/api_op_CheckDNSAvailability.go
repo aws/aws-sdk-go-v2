@@ -89,6 +89,7 @@ func (c *Client) CheckDNSAvailabilityRequest(input *CheckDNSAvailabilityInput) C
 	}
 
 	req := c.newRequest(op, input, &CheckDNSAvailabilityOutput{})
+
 	return CheckDNSAvailabilityRequest{Request: req, Input: input, Copy: c.CheckDNSAvailabilityRequest}
 }
 

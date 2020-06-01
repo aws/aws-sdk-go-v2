@@ -126,6 +126,7 @@ func (c *Client) UpdateConnectivityInfoRequest(input *UpdateConnectivityInfoInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateConnectivityInfoOutput{})
+
 	return UpdateConnectivityInfoRequest{Request: req, Input: input, Copy: c.UpdateConnectivityInfoRequest}
 }
 

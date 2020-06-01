@@ -115,6 +115,7 @@ func (c *Client) UpdateLogPatternRequest(input *UpdateLogPatternInput) UpdateLog
 	}
 
 	req := c.newRequest(op, input, &UpdateLogPatternOutput{})
+
 	return UpdateLogPatternRequest{Request: req, Input: input, Copy: c.UpdateLogPatternRequest}
 }
 

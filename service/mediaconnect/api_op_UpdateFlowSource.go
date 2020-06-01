@@ -221,6 +221,7 @@ func (c *Client) UpdateFlowSourceRequest(input *UpdateFlowSourceInput) UpdateFlo
 	}
 
 	req := c.newRequest(op, input, &UpdateFlowSourceOutput{})
+
 	return UpdateFlowSourceRequest{Request: req, Input: input, Copy: c.UpdateFlowSourceRequest}
 }
 

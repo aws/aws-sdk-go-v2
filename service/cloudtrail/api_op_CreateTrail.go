@@ -227,6 +227,7 @@ func (c *Client) CreateTrailRequest(input *CreateTrailInput) CreateTrailRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateTrailOutput{})
+
 	return CreateTrailRequest{Request: req, Input: input, Copy: c.CreateTrailRequest}
 }
 

@@ -207,6 +207,7 @@ func (c *Client) DescribeScheduledActionsRequest(input *DescribeScheduledActions
 	}
 
 	req := c.newRequest(op, input, &DescribeScheduledActionsOutput{})
+
 	return DescribeScheduledActionsRequest{Request: req, Input: input, Copy: c.DescribeScheduledActionsRequest}
 }
 

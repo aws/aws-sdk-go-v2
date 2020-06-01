@@ -156,6 +156,7 @@ func (c *Client) ListEventTypesRequest(input *ListEventTypesInput) ListEventType
 	}
 
 	req := c.newRequest(op, input, &ListEventTypesOutput{})
+
 	return ListEventTypesRequest{Request: req, Input: input, Copy: c.ListEventTypesRequest}
 }
 

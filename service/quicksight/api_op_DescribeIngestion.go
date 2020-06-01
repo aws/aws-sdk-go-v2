@@ -150,6 +150,7 @@ func (c *Client) DescribeIngestionRequest(input *DescribeIngestionInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeIngestionOutput{})
+
 	return DescribeIngestionRequest{Request: req, Input: input, Copy: c.DescribeIngestionRequest}
 }
 

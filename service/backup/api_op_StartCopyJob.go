@@ -49,7 +49,7 @@ type StartCopyJobInput struct {
 	// The name of a logical source container where backups are stored. Backup vaults
 	// are identified by names that are unique to the account used to create them
 	// and the AWS Region where they are created. They consist of lowercase letters,
-	// numbers, and hyphens. >
+	// numbers, and hyphens.
 	//
 	// SourceBackupVaultName is a required field
 	SourceBackupVaultName *string `type:"string" required:"true"`
@@ -132,13 +132,13 @@ func (s StartCopyJobInput) MarshalFields(e protocol.FieldEncoder) error {
 type StartCopyJobOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Uniquely identifies a request to AWS Backup to copy a resource.
+	// Uniquely identifies a copy job.
 	CopyJobId *string `type:"string"`
 
-	// The date and time that a backup job is started, in Unix format and Coordinated
+	// The date and time that a copy job is started, in Unix format and Coordinated
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
-	// 12:11:30.087 AM. >
+	// 12:11:30.087 AM.
 	CreationDate *time.Time `type:"timestamp"`
 }
 
@@ -192,6 +192,7 @@ func (c *Client) StartCopyJobRequest(input *StartCopyJobInput) StartCopyJobReque
 	}
 
 	req := c.newRequest(op, input, &StartCopyJobOutput{})
+
 	return StartCopyJobRequest{Request: req, Input: input, Copy: c.StartCopyJobRequest}
 }
 

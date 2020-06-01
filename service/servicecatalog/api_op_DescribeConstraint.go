@@ -94,6 +94,7 @@ func (c *Client) DescribeConstraintRequest(input *DescribeConstraintInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeConstraintOutput{})
+
 	return DescribeConstraintRequest{Request: req, Input: input, Copy: c.DescribeConstraintRequest}
 }
 

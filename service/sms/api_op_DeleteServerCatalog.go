@@ -54,6 +54,7 @@ func (c *Client) DeleteServerCatalogRequest(input *DeleteServerCatalogInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteServerCatalogOutput{})
+
 	return DeleteServerCatalogRequest{Request: req, Input: input, Copy: c.DeleteServerCatalogRequest}
 }
 

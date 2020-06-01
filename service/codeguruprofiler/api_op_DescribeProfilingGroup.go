@@ -108,6 +108,7 @@ func (c *Client) DescribeProfilingGroupRequest(input *DescribeProfilingGroupInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeProfilingGroupOutput{})
+
 	return DescribeProfilingGroupRequest{Request: req, Input: input, Copy: c.DescribeProfilingGroupRequest}
 }
 

@@ -98,6 +98,7 @@ func (c *Client) UpdateConnectorDefinitionRequest(input *UpdateConnectorDefiniti
 	}
 
 	req := c.newRequest(op, input, &UpdateConnectorDefinitionOutput{})
+
 	return UpdateConnectorDefinitionRequest{Request: req, Input: input, Copy: c.UpdateConnectorDefinitionRequest}
 }
 

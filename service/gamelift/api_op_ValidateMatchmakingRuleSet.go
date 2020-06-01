@@ -106,6 +106,7 @@ func (c *Client) ValidateMatchmakingRuleSetRequest(input *ValidateMatchmakingRul
 	}
 
 	req := c.newRequest(op, input, &ValidateMatchmakingRuleSetOutput{})
+
 	return ValidateMatchmakingRuleSetRequest{Request: req, Input: input, Copy: c.ValidateMatchmakingRuleSetRequest}
 }
 

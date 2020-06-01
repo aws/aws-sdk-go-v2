@@ -91,6 +91,7 @@ func (c *Client) DeleteReceiptRuleRequest(input *DeleteReceiptRuleInput) DeleteR
 	}
 
 	req := c.newRequest(op, input, &DeleteReceiptRuleOutput{})
+
 	return DeleteReceiptRuleRequest{Request: req, Input: input, Copy: c.DeleteReceiptRuleRequest}
 }
 

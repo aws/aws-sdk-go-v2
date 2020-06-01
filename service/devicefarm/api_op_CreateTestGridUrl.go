@@ -98,6 +98,7 @@ func (c *Client) CreateTestGridUrlRequest(input *CreateTestGridUrlInput) CreateT
 	}
 
 	req := c.newRequest(op, input, &CreateTestGridUrlOutput{})
+
 	return CreateTestGridUrlRequest{Request: req, Input: input, Copy: c.CreateTestGridUrlRequest}
 }
 

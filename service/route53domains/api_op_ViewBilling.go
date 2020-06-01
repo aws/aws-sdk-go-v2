@@ -92,6 +92,7 @@ func (c *Client) ViewBillingRequest(input *ViewBillingInput) ViewBillingRequest 
 	}
 
 	req := c.newRequest(op, input, &ViewBillingOutput{})
+
 	return ViewBillingRequest{Request: req, Input: input, Copy: c.ViewBillingRequest}
 }
 

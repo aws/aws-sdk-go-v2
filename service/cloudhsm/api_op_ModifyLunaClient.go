@@ -100,6 +100,7 @@ func (c *Client) ModifyLunaClientRequest(input *ModifyLunaClientInput) ModifyLun
 	}
 
 	req := c.newRequest(op, input, &ModifyLunaClientOutput{})
+
 	return ModifyLunaClientRequest{Request: req, Input: input, Copy: c.ModifyLunaClientRequest}
 }
 

@@ -81,6 +81,7 @@ func (c *Client) GetVPCEConfigurationRequest(input *GetVPCEConfigurationInput) G
 	}
 
 	req := c.newRequest(op, input, &GetVPCEConfigurationOutput{})
+
 	return GetVPCEConfigurationRequest{Request: req, Input: input, Copy: c.GetVPCEConfigurationRequest}
 }
 

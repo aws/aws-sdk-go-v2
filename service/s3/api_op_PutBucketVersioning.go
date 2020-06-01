@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/checksum"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 	"github.com/aws/aws-sdk-go-v2/service/s3/internal/arn"
@@ -175,6 +176,12 @@ func (c *Client) PutBucketVersioningRequest(input *PutBucketVersioningInput) Put
 	req := c.newRequest(op, input, &PutBucketVersioningOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
+	req.Handlers.Build.PushBackNamed(aws.NamedHandler{
+		Name: "contentMd5Handler",
+		Fn:   checksum.AddBodyContentMD5Handler,
+	})
+
 	return PutBucketVersioningRequest{Request: req, Input: input, Copy: c.PutBucketVersioningRequest}
 }
 

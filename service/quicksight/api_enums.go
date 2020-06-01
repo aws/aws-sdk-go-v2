@@ -60,6 +60,8 @@ type DashboardErrorType string
 
 // Enum values for DashboardErrorType
 const (
+	DashboardErrorTypeAccessDenied                 DashboardErrorType = "ACCESS_DENIED"
+	DashboardErrorTypeSourceNotFound               DashboardErrorType = "SOURCE_NOT_FOUND"
 	DashboardErrorTypeDataSetNotFound              DashboardErrorType = "DATA_SET_NOT_FOUND"
 	DashboardErrorTypeInternalFailure              DashboardErrorType = "INTERNAL_FAILURE"
 	DashboardErrorTypeParameterValueIncompatible   DashboardErrorType = "PARAMETER_VALUE_INCOMPATIBLE"
@@ -497,6 +499,7 @@ type TemplateErrorType string
 
 // Enum values for TemplateErrorType
 const (
+	TemplateErrorTypeSourceNotFound  TemplateErrorType = "SOURCE_NOT_FOUND"
 	TemplateErrorTypeDataSetNotFound TemplateErrorType = "DATA_SET_NOT_FOUND"
 	TemplateErrorTypeInternalFailure TemplateErrorType = "INTERNAL_FAILURE"
 )

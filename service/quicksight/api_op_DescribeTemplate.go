@@ -154,6 +154,7 @@ func (c *Client) DescribeTemplateRequest(input *DescribeTemplateInput) DescribeT
 	}
 
 	req := c.newRequest(op, input, &DescribeTemplateOutput{})
+
 	return DescribeTemplateRequest{Request: req, Input: input, Copy: c.DescribeTemplateRequest}
 }
 

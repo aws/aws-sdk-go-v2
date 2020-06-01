@@ -239,6 +239,7 @@ func (c *Client) PublishLayerVersionRequest(input *PublishLayerVersionInput) Pub
 	}
 
 	req := c.newRequest(op, input, &PublishLayerVersionOutput{})
+
 	return PublishLayerVersionRequest{Request: req, Input: input, Copy: c.PublishLayerVersionRequest}
 }
 

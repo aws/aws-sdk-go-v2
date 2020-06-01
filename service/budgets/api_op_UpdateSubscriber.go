@@ -131,6 +131,7 @@ func (c *Client) UpdateSubscriberRequest(input *UpdateSubscriberInput) UpdateSub
 	}
 
 	req := c.newRequest(op, input, &UpdateSubscriberOutput{})
+
 	return UpdateSubscriberRequest{Request: req, Input: input, Copy: c.UpdateSubscriberRequest}
 }
 

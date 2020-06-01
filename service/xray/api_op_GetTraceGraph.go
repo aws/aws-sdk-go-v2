@@ -137,6 +137,7 @@ func (c *Client) GetTraceGraphRequest(input *GetTraceGraphInput) GetTraceGraphRe
 	}
 
 	req := c.newRequest(op, input, &GetTraceGraphOutput{})
+
 	return GetTraceGraphRequest{Request: req, Input: input, Copy: c.GetTraceGraphRequest}
 }
 

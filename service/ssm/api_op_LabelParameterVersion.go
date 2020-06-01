@@ -61,7 +61,7 @@ type LabelParameterVersionOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The label does not meet the requirements. For information about parameter
-	// label requirements, see Labeling Parameters (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html)
+	// label requirements, see Labeling parameters (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html)
 	// in the AWS Systems Manager User Guide.
 	InvalidLabels []string `min:"1" type:"list"`
 
@@ -129,6 +129,7 @@ func (c *Client) LabelParameterVersionRequest(input *LabelParameterVersionInput)
 	}
 
 	req := c.newRequest(op, input, &LabelParameterVersionOutput{})
+
 	return LabelParameterVersionRequest{Request: req, Input: input, Copy: c.LabelParameterVersionRequest}
 }
 

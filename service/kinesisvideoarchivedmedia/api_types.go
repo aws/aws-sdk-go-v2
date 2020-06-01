@@ -13,6 +13,145 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Describes the timestamp range and timestamp origin of a range of fragments.
+//
+// Fragments that have duplicate producer timestamps are deduplicated. This
+// means that if producers are producing a stream of fragments with producer
+// timestamps that are approximately equal to the true clock time, the clip
+// will contain all of the fragments within the requested timestamp range. If
+// some fragments are ingested within the same time range and very different
+// points in time, only the oldest ingested collection of fragments are returned.
+type ClipFragmentSelector struct {
+	_ struct{} `type:"structure"`
+
+	// The origin of the timestamps to use (Server or Producer).
+	//
+	// FragmentSelectorType is a required field
+	FragmentSelectorType ClipFragmentSelectorType `type:"string" required:"true" enum:"true"`
+
+	// The range of timestamps to return.
+	//
+	// TimestampRange is a required field
+	TimestampRange *ClipTimestampRange `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s ClipFragmentSelector) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ClipFragmentSelector) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ClipFragmentSelector"}
+	if len(s.FragmentSelectorType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("FragmentSelectorType"))
+	}
+
+	if s.TimestampRange == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TimestampRange"))
+	}
+	if s.TimestampRange != nil {
+		if err := s.TimestampRange.Validate(); err != nil {
+			invalidParams.AddNested("TimestampRange", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ClipFragmentSelector) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.FragmentSelectorType) > 0 {
+		v := s.FragmentSelectorType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FragmentSelectorType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.TimestampRange != nil {
+		v := s.TimestampRange
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TimestampRange", v, metadata)
+	}
+	return nil
+}
+
+// The range of timestamps for which to return fragments.
+//
+// The values in the ClipTimestampRange are inclusive. Fragments that begin
+// before the start time but continue past it, or fragments that begin before
+// the end time but continue past it, are included in the session.
+type ClipTimestampRange struct {
+	_ struct{} `type:"structure"`
+
+	// The end of the timestamp range for the requested media.
+	//
+	// This value must be within 3 hours of the specified StartTimestamp, and it
+	// must be later than the StartTimestamp value. If FragmentSelectorType for
+	// the request is SERVER_TIMESTAMP, this value must be in the past.
+	//
+	// This value is inclusive. The EndTimestamp is compared to the (starting) timestamp
+	// of the fragment. Fragments that start before the EndTimestamp value and continue
+	// past it are included in the session.
+	//
+	// EndTimestamp is a required field
+	EndTimestamp *time.Time `type:"timestamp" required:"true"`
+
+	// The starting timestamp in the range of timestamps for which to return fragments.
+	//
+	// This value is inclusive. Fragments that start before the StartTimestamp and
+	// continue past it are included in the session. If FragmentSelectorType is
+	// SERVER_TIMESTAMP, the StartTimestamp must be later than the stream head.
+	//
+	// StartTimestamp is a required field
+	StartTimestamp *time.Time `type:"timestamp" required:"true"`
+}
+
+// String returns the string representation
+func (s ClipTimestampRange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ClipTimestampRange) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ClipTimestampRange"}
+
+	if s.EndTimestamp == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EndTimestamp"))
+	}
+
+	if s.StartTimestamp == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StartTimestamp"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ClipTimestampRange) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EndTimestamp != nil {
+		v := *s.EndTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EndTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.StartTimestamp != nil {
+		v := *s.StartTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	return nil
+}
+
 // Contains the range of timestamps for the requested media, and the source
 // of the timestamps.
 type DASHFragmentSelector struct {

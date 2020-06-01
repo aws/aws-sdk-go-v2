@@ -86,6 +86,7 @@ func (c *Client) StartDBInstanceRequest(input *StartDBInstanceInput) StartDBInst
 	}
 
 	req := c.newRequest(op, input, &StartDBInstanceOutput{})
+
 	return StartDBInstanceRequest{Request: req, Input: input, Copy: c.StartDBInstanceRequest}
 }
 

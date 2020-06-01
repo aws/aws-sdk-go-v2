@@ -120,6 +120,7 @@ func (c *Client) PutConfigurationSetDeliveryOptionsRequest(input *PutConfigurati
 	}
 
 	req := c.newRequest(op, input, &PutConfigurationSetDeliveryOptionsOutput{})
+
 	return PutConfigurationSetDeliveryOptionsRequest{Request: req, Input: input, Copy: c.PutConfigurationSetDeliveryOptionsRequest}
 }
 

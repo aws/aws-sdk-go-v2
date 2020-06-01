@@ -95,6 +95,7 @@ func (c *Client) DeleteDedicatedIpPoolRequest(input *DeleteDedicatedIpPoolInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteDedicatedIpPoolOutput{})
+
 	return DeleteDedicatedIpPoolRequest{Request: req, Input: input, Copy: c.DeleteDedicatedIpPoolRequest}
 }
 

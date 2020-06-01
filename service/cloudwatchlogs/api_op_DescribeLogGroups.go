@@ -98,6 +98,7 @@ func (c *Client) DescribeLogGroupsRequest(input *DescribeLogGroupsInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeLogGroupsOutput{})
+
 	return DescribeLogGroupsRequest{Request: req, Input: input, Copy: c.DescribeLogGroupsRequest}
 }
 

@@ -107,6 +107,7 @@ func (c *Client) DeleteHealthCheckRequest(input *DeleteHealthCheckInput) DeleteH
 	}
 
 	req := c.newRequest(op, input, &DeleteHealthCheckOutput{})
+
 	return DeleteHealthCheckRequest{Request: req, Input: input, Copy: c.DeleteHealthCheckRequest}
 }
 

@@ -313,6 +313,7 @@ func (c *Client) CloneStackRequest(input *CloneStackInput) CloneStackRequest {
 	}
 
 	req := c.newRequest(op, input, &CloneStackOutput{})
+
 	return CloneStackRequest{Request: req, Input: input, Copy: c.CloneStackRequest}
 }
 

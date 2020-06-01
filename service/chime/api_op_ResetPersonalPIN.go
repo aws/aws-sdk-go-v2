@@ -117,6 +117,7 @@ func (c *Client) ResetPersonalPINRequest(input *ResetPersonalPINInput) ResetPers
 	}
 
 	req := c.newRequest(op, input, &ResetPersonalPINOutput{})
+
 	return ResetPersonalPINRequest{Request: req, Input: input, Copy: c.ResetPersonalPINRequest}
 }
 

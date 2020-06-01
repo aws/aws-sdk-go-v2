@@ -80,6 +80,7 @@ func (c *Client) DescribeTargetGroupAttributesRequest(input *DescribeTargetGroup
 	}
 
 	req := c.newRequest(op, input, &DescribeTargetGroupAttributesOutput{})
+
 	return DescribeTargetGroupAttributesRequest{Request: req, Input: input, Copy: c.DescribeTargetGroupAttributesRequest}
 }
 

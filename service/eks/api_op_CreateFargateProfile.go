@@ -239,6 +239,7 @@ func (c *Client) CreateFargateProfileRequest(input *CreateFargateProfileInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateFargateProfileOutput{})
+
 	return CreateFargateProfileRequest{Request: req, Input: input, Copy: c.CreateFargateProfileRequest}
 }
 

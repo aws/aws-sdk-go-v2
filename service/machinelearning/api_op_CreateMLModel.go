@@ -177,6 +177,7 @@ func (c *Client) CreateMLModelRequest(input *CreateMLModelInput) CreateMLModelRe
 	}
 
 	req := c.newRequest(op, input, &CreateMLModelOutput{})
+
 	return CreateMLModelRequest{Request: req, Input: input, Copy: c.CreateMLModelRequest}
 }
 

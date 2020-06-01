@@ -105,6 +105,7 @@ func (c *Client) DeleteGcmChannelRequest(input *DeleteGcmChannelInput) DeleteGcm
 	}
 
 	req := c.newRequest(op, input, &DeleteGcmChannelOutput{})
+
 	return DeleteGcmChannelRequest{Request: req, Input: input, Copy: c.DeleteGcmChannelRequest}
 }
 

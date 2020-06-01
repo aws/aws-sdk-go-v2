@@ -58,6 +58,7 @@ func (c *Client) ListCuratedEnvironmentImagesRequest(input *ListCuratedEnvironme
 	}
 
 	req := c.newRequest(op, input, &ListCuratedEnvironmentImagesOutput{})
+
 	return ListCuratedEnvironmentImagesRequest{Request: req, Input: input, Copy: c.ListCuratedEnvironmentImagesRequest}
 }
 

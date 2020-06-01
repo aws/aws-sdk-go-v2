@@ -126,6 +126,7 @@ func (c *Client) CreateExperimentRequest(input *CreateExperimentInput) CreateExp
 	}
 
 	req := c.newRequest(op, input, &CreateExperimentOutput{})
+
 	return CreateExperimentRequest{Request: req, Input: input, Copy: c.CreateExperimentRequest}
 }
 

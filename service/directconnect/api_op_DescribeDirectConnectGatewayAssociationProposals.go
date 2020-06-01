@@ -80,6 +80,7 @@ func (c *Client) DescribeDirectConnectGatewayAssociationProposalsRequest(input *
 	}
 
 	req := c.newRequest(op, input, &DescribeDirectConnectGatewayAssociationProposalsOutput{})
+
 	return DescribeDirectConnectGatewayAssociationProposalsRequest{Request: req, Input: input, Copy: c.DescribeDirectConnectGatewayAssociationProposalsRequest}
 }
 

@@ -91,6 +91,7 @@ func (c *Client) DescribeWorkspaceImagesRequest(input *DescribeWorkspaceImagesIn
 	}
 
 	req := c.newRequest(op, input, &DescribeWorkspaceImagesOutput{})
+
 	return DescribeWorkspaceImagesRequest{Request: req, Input: input, Copy: c.DescribeWorkspaceImagesRequest}
 }
 

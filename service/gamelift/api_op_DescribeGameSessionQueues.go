@@ -112,6 +112,7 @@ func (c *Client) DescribeGameSessionQueuesRequest(input *DescribeGameSessionQueu
 	}
 
 	req := c.newRequest(op, input, &DescribeGameSessionQueuesOutput{})
+
 	return DescribeGameSessionQueuesRequest{Request: req, Input: input, Copy: c.DescribeGameSessionQueuesRequest}
 }
 

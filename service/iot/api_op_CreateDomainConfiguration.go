@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -30,7 +31,18 @@ type CreateDomainConfigurationInput struct {
 	ServerCertificateArns []string `locationName:"serverCertificateArns" type:"list"`
 
 	// The type of service delivered by the endpoint.
+	//
+	// AWS IoT Core currently supports only the DATA service type.
 	ServiceType ServiceType `locationName:"serviceType" type:"string" enum:"true"`
+
+	// Metadata which can be used to manage the domain configuration.
+	//
+	// For URI Request parameters use format: ...key1=value1&key2=value2...
+	//
+	// For the CLI command-line parameter use format: &&tags "key1=value1&key2=value2..."
+	//
+	// For the cli-input-json file use format: "tags": "key1=value1&key2=value2..."
+	Tags []Tag `locationName:"tags" type:"list"`
 
 	// The certificate used to validate the server certificate and prove domain
 	// name ownership. This certificate must be signed by a public certificate authority.
@@ -62,6 +74,13 @@ func (s *CreateDomainConfigurationInput) Validate() error {
 	if s.AuthorizerConfig != nil {
 		if err := s.AuthorizerConfig.Validate(); err != nil {
 			invalidParams.AddNested("AuthorizerConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -104,6 +123,18 @@ func (s CreateDomainConfigurationInput) MarshalFields(e protocol.FieldEncoder) e
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "serviceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.ValidationCertificateArn != nil {
 		v := *s.ValidationCertificateArn
@@ -179,6 +210,7 @@ func (c *Client) CreateDomainConfigurationRequest(input *CreateDomainConfigurati
 	}
 
 	req := c.newRequest(op, input, &CreateDomainConfigurationOutput{})
+
 	return CreateDomainConfigurationRequest{Request: req, Input: input, Copy: c.CreateDomainConfigurationRequest}
 }
 

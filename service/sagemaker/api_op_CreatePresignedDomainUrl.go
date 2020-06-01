@@ -71,9 +71,9 @@ const opCreatePresignedDomainUrl = "CreatePresignedDomainUrl"
 //
 // Creates a URL for a specified UserProfile in a Domain. When accessed in a
 // web browser, the user will be automatically signed in to Amazon SageMaker
-// Amazon SageMaker Studio (Studio), and granted access to all of the Apps and
-// files associated with that Amazon Elastic File System (EFS). This operation
-// can only be called when AuthMode equals IAM.
+// Studio, and granted access to all of the Apps and files associated with that
+// Amazon Elastic File System (EFS). This operation can only be called when
+// AuthMode equals IAM.
 //
 //    // Example sending a request using CreatePresignedDomainUrlRequest.
 //    req := client.CreatePresignedDomainUrlRequest(params)
@@ -95,6 +95,7 @@ func (c *Client) CreatePresignedDomainUrlRequest(input *CreatePresignedDomainUrl
 	}
 
 	req := c.newRequest(op, input, &CreatePresignedDomainUrlOutput{})
+
 	return CreatePresignedDomainUrlRequest{Request: req, Input: input, Copy: c.CreatePresignedDomainUrlRequest}
 }
 

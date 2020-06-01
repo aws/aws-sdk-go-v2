@@ -96,6 +96,7 @@ func (c *Client) GetRecommenderConfigurationsRequest(input *GetRecommenderConfig
 	}
 
 	req := c.newRequest(op, input, &GetRecommenderConfigurationsOutput{})
+
 	return GetRecommenderConfigurationsRequest{Request: req, Input: input, Copy: c.GetRecommenderConfigurationsRequest}
 }
 

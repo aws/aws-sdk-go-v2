@@ -125,6 +125,7 @@ func (c *Client) PutEventStreamRequest(input *PutEventStreamInput) PutEventStrea
 	}
 
 	req := c.newRequest(op, input, &PutEventStreamOutput{})
+
 	return PutEventStreamRequest{Request: req, Input: input, Copy: c.PutEventStreamRequest}
 }
 

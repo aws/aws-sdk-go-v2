@@ -185,6 +185,7 @@ func (c *Client) ListImagePipelineImagesRequest(input *ListImagePipelineImagesIn
 	}
 
 	req := c.newRequest(op, input, &ListImagePipelineImagesOutput{})
+
 	return ListImagePipelineImagesRequest{Request: req, Input: input, Copy: c.ListImagePipelineImagesRequest}
 }
 

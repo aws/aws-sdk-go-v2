@@ -160,6 +160,7 @@ func (c *Client) DescribeScheduledAuditRequest(input *DescribeScheduledAuditInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeScheduledAuditOutput{})
+
 	return DescribeScheduledAuditRequest{Request: req, Input: input, Copy: c.DescribeScheduledAuditRequest}
 }
 

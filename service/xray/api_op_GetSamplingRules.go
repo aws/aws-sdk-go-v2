@@ -106,6 +106,7 @@ func (c *Client) GetSamplingRulesRequest(input *GetSamplingRulesInput) GetSampli
 	}
 
 	req := c.newRequest(op, input, &GetSamplingRulesOutput{})
+
 	return GetSamplingRulesRequest{Request: req, Input: input, Copy: c.GetSamplingRulesRequest}
 }
 

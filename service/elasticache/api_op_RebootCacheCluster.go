@@ -103,6 +103,7 @@ func (c *Client) RebootCacheClusterRequest(input *RebootCacheClusterInput) Reboo
 	}
 
 	req := c.newRequest(op, input, &RebootCacheClusterOutput{})
+
 	return RebootCacheClusterRequest{Request: req, Input: input, Copy: c.RebootCacheClusterRequest}
 }
 

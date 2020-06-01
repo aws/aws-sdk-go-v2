@@ -109,6 +109,7 @@ func (c *Client) DescribeEgressOnlyInternetGatewaysRequest(input *DescribeEgress
 	}
 
 	req := c.newRequest(op, input, &DescribeEgressOnlyInternetGatewaysOutput{})
+
 	return DescribeEgressOnlyInternetGatewaysRequest{Request: req, Input: input, Copy: c.DescribeEgressOnlyInternetGatewaysRequest}
 }
 

@@ -138,6 +138,7 @@ func (c *Client) UpdateSegmentRequest(input *UpdateSegmentInput) UpdateSegmentRe
 	}
 
 	req := c.newRequest(op, input, &UpdateSegmentOutput{})
+
 	return UpdateSegmentRequest{Request: req, Input: input, Copy: c.UpdateSegmentRequest}
 }
 

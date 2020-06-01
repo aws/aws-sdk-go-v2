@@ -174,6 +174,7 @@ func (c *Client) CreateGameSessionQueueRequest(input *CreateGameSessionQueueInpu
 	}
 
 	req := c.newRequest(op, input, &CreateGameSessionQueueOutput{})
+
 	return CreateGameSessionQueueRequest{Request: req, Input: input, Copy: c.CreateGameSessionQueueRequest}
 }
 

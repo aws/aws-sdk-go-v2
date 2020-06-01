@@ -129,6 +129,7 @@ func (c *Client) DescribePackagingGroupRequest(input *DescribePackagingGroupInpu
 	}
 
 	req := c.newRequest(op, input, &DescribePackagingGroupOutput{})
+
 	return DescribePackagingGroupRequest{Request: req, Input: input, Copy: c.DescribePackagingGroupRequest}
 }
 

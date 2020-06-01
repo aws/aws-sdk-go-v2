@@ -159,6 +159,7 @@ func (c *Client) UpdateProvisionedProductRequest(input *UpdateProvisionedProduct
 	}
 
 	req := c.newRequest(op, input, &UpdateProvisionedProductOutput{})
+
 	return UpdateProvisionedProductRequest{Request: req, Input: input, Copy: c.UpdateProvisionedProductRequest}
 }
 

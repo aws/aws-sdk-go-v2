@@ -98,6 +98,7 @@ func (c *Client) AssociateCertificateRequest(input *AssociateCertificateInput) A
 	}
 
 	req := c.newRequest(op, input, &AssociateCertificateOutput{})
+
 	return AssociateCertificateRequest{Request: req, Input: input, Copy: c.AssociateCertificateRequest}
 }
 

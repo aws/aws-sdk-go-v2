@@ -181,6 +181,7 @@ func (c *Client) CreateFunctionDefinitionRequest(input *CreateFunctionDefinition
 	}
 
 	req := c.newRequest(op, input, &CreateFunctionDefinitionOutput{})
+
 	return CreateFunctionDefinitionRequest{Request: req, Input: input, Copy: c.CreateFunctionDefinitionRequest}
 }
 

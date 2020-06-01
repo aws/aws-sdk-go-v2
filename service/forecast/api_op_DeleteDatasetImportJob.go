@@ -79,6 +79,7 @@ func (c *Client) DeleteDatasetImportJobRequest(input *DeleteDatasetImportJobInpu
 	req := c.newRequest(op, input, &DeleteDatasetImportJobOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteDatasetImportJobRequest{Request: req, Input: input, Copy: c.DeleteDatasetImportJobRequest}
 }
 

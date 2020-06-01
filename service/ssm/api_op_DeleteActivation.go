@@ -76,6 +76,7 @@ func (c *Client) DeleteActivationRequest(input *DeleteActivationInput) DeleteAct
 	}
 
 	req := c.newRequest(op, input, &DeleteActivationOutput{})
+
 	return DeleteActivationRequest{Request: req, Input: input, Copy: c.DeleteActivationRequest}
 }
 

@@ -106,6 +106,7 @@ func (c *Client) GetTableVersionRequest(input *GetTableVersionInput) GetTableVer
 	}
 
 	req := c.newRequest(op, input, &GetTableVersionOutput{})
+
 	return GetTableVersionRequest{Request: req, Input: input, Copy: c.GetTableVersionRequest}
 }
 

@@ -94,6 +94,7 @@ func (c *Client) CreateResourceGroupRequest(input *CreateResourceGroupInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateResourceGroupOutput{})
+
 	return CreateResourceGroupRequest{Request: req, Input: input, Copy: c.CreateResourceGroupRequest}
 }
 

@@ -82,6 +82,7 @@ func (c *Client) EnableDomainAutoRenewRequest(input *EnableDomainAutoRenewInput)
 	}
 
 	req := c.newRequest(op, input, &EnableDomainAutoRenewOutput{})
+
 	return EnableDomainAutoRenewRequest{Request: req, Input: input, Copy: c.EnableDomainAutoRenewRequest}
 }
 

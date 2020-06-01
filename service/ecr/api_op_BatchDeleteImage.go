@@ -117,6 +117,7 @@ func (c *Client) BatchDeleteImageRequest(input *BatchDeleteImageInput) BatchDele
 	}
 
 	req := c.newRequest(op, input, &BatchDeleteImageOutput{})
+
 	return BatchDeleteImageRequest{Request: req, Input: input, Copy: c.BatchDeleteImageRequest}
 }
 

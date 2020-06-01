@@ -192,6 +192,7 @@ func (c *Client) PublishRequest(input *PublishInput) PublishRequest {
 	}
 
 	req := c.newRequest(op, input, &PublishOutput{})
+
 	return PublishRequest{Request: req, Input: input, Copy: c.PublishRequest}
 }
 

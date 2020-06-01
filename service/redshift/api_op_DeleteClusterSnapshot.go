@@ -93,6 +93,7 @@ func (c *Client) DeleteClusterSnapshotRequest(input *DeleteClusterSnapshotInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteClusterSnapshotOutput{})
+
 	return DeleteClusterSnapshotRequest{Request: req, Input: input, Copy: c.DeleteClusterSnapshotRequest}
 }
 

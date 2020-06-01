@@ -119,6 +119,7 @@ func (c *Client) DeleteMountTargetRequest(input *DeleteMountTargetInput) DeleteM
 	req := c.newRequest(op, input, &DeleteMountTargetOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteMountTargetRequest{Request: req, Input: input, Copy: c.DeleteMountTargetRequest}
 }
 

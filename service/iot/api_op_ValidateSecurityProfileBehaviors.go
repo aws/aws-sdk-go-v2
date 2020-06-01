@@ -129,6 +129,7 @@ func (c *Client) ValidateSecurityProfileBehaviorsRequest(input *ValidateSecurity
 	}
 
 	req := c.newRequest(op, input, &ValidateSecurityProfileBehaviorsOutput{})
+
 	return ValidateSecurityProfileBehaviorsRequest{Request: req, Input: input, Copy: c.ValidateSecurityProfileBehaviorsRequest}
 }
 

@@ -248,6 +248,7 @@ func (c *Client) InvokeRequest(input *InvokeInput) InvokeRequest {
 	}
 
 	req := c.newRequest(op, input, &InvokeOutput{})
+
 	return InvokeRequest{Request: req, Input: input, Copy: c.InvokeRequest}
 }
 

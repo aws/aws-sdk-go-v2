@@ -98,6 +98,7 @@ func (c *Client) ListSentimentDetectionJobsRequest(input *ListSentimentDetection
 	}
 
 	req := c.newRequest(op, input, &ListSentimentDetectionJobsOutput{})
+
 	return ListSentimentDetectionJobsRequest{Request: req, Input: input, Copy: c.ListSentimentDetectionJobsRequest}
 }
 

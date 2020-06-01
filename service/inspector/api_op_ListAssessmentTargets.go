@@ -110,6 +110,7 @@ func (c *Client) ListAssessmentTargetsRequest(input *ListAssessmentTargetsInput)
 	}
 
 	req := c.newRequest(op, input, &ListAssessmentTargetsOutput{})
+
 	return ListAssessmentTargetsRequest{Request: req, Input: input, Copy: c.ListAssessmentTargetsRequest}
 }
 

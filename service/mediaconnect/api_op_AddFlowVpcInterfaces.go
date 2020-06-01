@@ -146,6 +146,7 @@ func (c *Client) AddFlowVpcInterfacesRequest(input *AddFlowVpcInterfacesInput) A
 	}
 
 	req := c.newRequest(op, input, &AddFlowVpcInterfacesOutput{})
+
 	return AddFlowVpcInterfacesRequest{Request: req, Input: input, Copy: c.AddFlowVpcInterfacesRequest}
 }
 

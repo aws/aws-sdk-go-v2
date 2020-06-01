@@ -92,6 +92,7 @@ func (c *Client) ListEndpointGroupsRequest(input *ListEndpointGroupsInput) ListE
 	}
 
 	req := c.newRequest(op, input, &ListEndpointGroupsOutput{})
+
 	return ListEndpointGroupsRequest{Request: req, Input: input, Copy: c.ListEndpointGroupsRequest}
 }
 

@@ -123,6 +123,7 @@ func (c *Client) ListHyperParameterTuningJobsRequest(input *ListHyperParameterTu
 	}
 
 	req := c.newRequest(op, input, &ListHyperParameterTuningJobsOutput{})
+
 	return ListHyperParameterTuningJobsRequest{Request: req, Input: input, Copy: c.ListHyperParameterTuningJobsRequest}
 }
 

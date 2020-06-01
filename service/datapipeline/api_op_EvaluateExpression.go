@@ -106,6 +106,7 @@ func (c *Client) EvaluateExpressionRequest(input *EvaluateExpressionInput) Evalu
 	}
 
 	req := c.newRequest(op, input, &EvaluateExpressionOutput{})
+
 	return EvaluateExpressionRequest{Request: req, Input: input, Copy: c.EvaluateExpressionRequest}
 }
 

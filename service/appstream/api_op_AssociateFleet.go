@@ -88,6 +88,7 @@ func (c *Client) AssociateFleetRequest(input *AssociateFleetInput) AssociateFlee
 	}
 
 	req := c.newRequest(op, input, &AssociateFleetOutput{})
+
 	return AssociateFleetRequest{Request: req, Input: input, Copy: c.AssociateFleetRequest}
 }
 

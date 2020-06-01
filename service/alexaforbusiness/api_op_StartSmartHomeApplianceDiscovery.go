@@ -74,6 +74,7 @@ func (c *Client) StartSmartHomeApplianceDiscoveryRequest(input *StartSmartHomeAp
 	}
 
 	req := c.newRequest(op, input, &StartSmartHomeApplianceDiscoveryOutput{})
+
 	return StartSmartHomeApplianceDiscoveryRequest{Request: req, Input: input, Copy: c.StartSmartHomeApplianceDiscoveryRequest}
 }
 

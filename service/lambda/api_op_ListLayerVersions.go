@@ -158,6 +158,7 @@ func (c *Client) ListLayerVersionsRequest(input *ListLayerVersionsInput) ListLay
 	}
 
 	req := c.newRequest(op, input, &ListLayerVersionsOutput{})
+
 	return ListLayerVersionsRequest{Request: req, Input: input, Copy: c.ListLayerVersionsRequest}
 }
 

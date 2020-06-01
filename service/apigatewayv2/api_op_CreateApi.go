@@ -363,6 +363,7 @@ func (c *Client) CreateApiRequest(input *CreateApiInput) CreateApiRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateApiOutput{})
+
 	return CreateApiRequest{Request: req, Input: input, Copy: c.CreateApiRequest}
 }
 

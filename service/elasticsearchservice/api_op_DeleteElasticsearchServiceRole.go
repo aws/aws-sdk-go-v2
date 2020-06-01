@@ -72,6 +72,7 @@ func (c *Client) DeleteElasticsearchServiceRoleRequest(input *DeleteElasticsearc
 	req := c.newRequest(op, input, &DeleteElasticsearchServiceRoleOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteElasticsearchServiceRoleRequest{Request: req, Input: input, Copy: c.DeleteElasticsearchServiceRoleRequest}
 }
 

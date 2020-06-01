@@ -83,6 +83,7 @@ func (c *Client) PutAccountSendingAttributesRequest(input *PutAccountSendingAttr
 	}
 
 	req := c.newRequest(op, input, &PutAccountSendingAttributesOutput{})
+
 	return PutAccountSendingAttributesRequest{Request: req, Input: input, Copy: c.PutAccountSendingAttributesRequest}
 }
 

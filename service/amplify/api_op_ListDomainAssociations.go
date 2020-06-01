@@ -147,6 +147,7 @@ func (c *Client) ListDomainAssociationsRequest(input *ListDomainAssociationsInpu
 	}
 
 	req := c.newRequest(op, input, &ListDomainAssociationsOutput{})
+
 	return ListDomainAssociationsRequest{Request: req, Input: input, Copy: c.ListDomainAssociationsRequest}
 }
 

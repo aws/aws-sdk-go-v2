@@ -80,6 +80,7 @@ func (c *Client) DescribeValidDBInstanceModificationsRequest(input *DescribeVali
 	}
 
 	req := c.newRequest(op, input, &DescribeValidDBInstanceModificationsOutput{})
+
 	return DescribeValidDBInstanceModificationsRequest{Request: req, Input: input, Copy: c.DescribeValidDBInstanceModificationsRequest}
 }
 

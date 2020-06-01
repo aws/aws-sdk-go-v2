@@ -154,6 +154,7 @@ func (c *Client) GetIntentsRequest(input *GetIntentsInput) GetIntentsRequest {
 	}
 
 	req := c.newRequest(op, input, &GetIntentsOutput{})
+
 	return GetIntentsRequest{Request: req, Input: input, Copy: c.GetIntentsRequest}
 }
 

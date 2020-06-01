@@ -99,6 +99,7 @@ func (c *Client) DescribeListenersRequest(input *DescribeListenersInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeListenersOutput{})
+
 	return DescribeListenersRequest{Request: req, Input: input, Copy: c.DescribeListenersRequest}
 }
 

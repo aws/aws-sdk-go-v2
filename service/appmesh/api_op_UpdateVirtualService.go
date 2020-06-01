@@ -162,6 +162,7 @@ func (c *Client) UpdateVirtualServiceRequest(input *UpdateVirtualServiceInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateVirtualServiceOutput{})
+
 	return UpdateVirtualServiceRequest{Request: req, Input: input, Copy: c.UpdateVirtualServiceRequest}
 }
 

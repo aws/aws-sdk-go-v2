@@ -124,6 +124,7 @@ func (c *Client) CreateFieldLevelEncryptionProfileRequest(input *CreateFieldLeve
 	}
 
 	req := c.newRequest(op, input, &CreateFieldLevelEncryptionProfileOutput{})
+
 	return CreateFieldLevelEncryptionProfileRequest{Request: req, Input: input, Copy: c.CreateFieldLevelEncryptionProfileRequest}
 }
 

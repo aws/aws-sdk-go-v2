@@ -121,6 +121,7 @@ func (c *Client) GetLicenseConfigurationRequest(input *GetLicenseConfigurationIn
 	}
 
 	req := c.newRequest(op, input, &GetLicenseConfigurationOutput{})
+
 	return GetLicenseConfigurationRequest{Request: req, Input: input, Copy: c.GetLicenseConfigurationRequest}
 }
 

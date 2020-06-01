@@ -116,6 +116,7 @@ func (c *Client) DeleteNotificationSubscriptionRequest(input *DeleteNotification
 	req := c.newRequest(op, input, &DeleteNotificationSubscriptionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteNotificationSubscriptionRequest{Request: req, Input: input, Copy: c.DeleteNotificationSubscriptionRequest}
 }
 

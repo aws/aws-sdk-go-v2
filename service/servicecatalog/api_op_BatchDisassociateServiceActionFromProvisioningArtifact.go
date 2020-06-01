@@ -99,6 +99,7 @@ func (c *Client) BatchDisassociateServiceActionFromProvisioningArtifactRequest(i
 	}
 
 	req := c.newRequest(op, input, &BatchDisassociateServiceActionFromProvisioningArtifactOutput{})
+
 	return BatchDisassociateServiceActionFromProvisioningArtifactRequest{Request: req, Input: input, Copy: c.BatchDisassociateServiceActionFromProvisioningArtifactRequest}
 }
 

@@ -207,6 +207,7 @@ func (c *Client) UploadMultipartPartRequest(input *UploadMultipartPartInput) Upl
 	}
 
 	req := c.newRequest(op, input, &UploadMultipartPartOutput{})
+
 	return UploadMultipartPartRequest{Request: req, Input: input, Copy: c.UploadMultipartPartRequest}
 }
 

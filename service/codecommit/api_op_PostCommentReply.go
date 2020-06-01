@@ -93,6 +93,7 @@ func (c *Client) PostCommentReplyRequest(input *PostCommentReplyInput) PostComme
 	}
 
 	req := c.newRequest(op, input, &PostCommentReplyOutput{})
+
 	return PostCommentReplyRequest{Request: req, Input: input, Copy: c.PostCommentReplyRequest}
 }
 

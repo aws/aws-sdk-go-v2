@@ -102,6 +102,7 @@ func (c *Client) GetApplicationSettingsRequest(input *GetApplicationSettingsInpu
 	}
 
 	req := c.newRequest(op, input, &GetApplicationSettingsOutput{})
+
 	return GetApplicationSettingsRequest{Request: req, Input: input, Copy: c.GetApplicationSettingsRequest}
 }
 

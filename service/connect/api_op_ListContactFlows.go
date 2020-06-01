@@ -163,6 +163,7 @@ func (c *Client) ListContactFlowsRequest(input *ListContactFlowsInput) ListConta
 	}
 
 	req := c.newRequest(op, input, &ListContactFlowsOutput{})
+
 	return ListContactFlowsRequest{Request: req, Input: input, Copy: c.ListContactFlowsRequest}
 }
 

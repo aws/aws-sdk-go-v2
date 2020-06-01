@@ -174,6 +174,7 @@ func (c *Client) UpdateDestinationRequest(input *UpdateDestinationInput) UpdateD
 	}
 
 	req := c.newRequest(op, input, &UpdateDestinationOutput{})
+
 	return UpdateDestinationRequest{Request: req, Input: input, Copy: c.UpdateDestinationRequest}
 }
 

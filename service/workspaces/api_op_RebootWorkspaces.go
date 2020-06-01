@@ -91,6 +91,7 @@ func (c *Client) RebootWorkspacesRequest(input *RebootWorkspacesInput) RebootWor
 	}
 
 	req := c.newRequest(op, input, &RebootWorkspacesOutput{})
+
 	return RebootWorkspacesRequest{Request: req, Input: input, Copy: c.RebootWorkspacesRequest}
 }
 

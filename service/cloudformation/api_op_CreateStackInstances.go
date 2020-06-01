@@ -156,6 +156,7 @@ func (c *Client) CreateStackInstancesRequest(input *CreateStackInstancesInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateStackInstancesOutput{})
+
 	return CreateStackInstancesRequest{Request: req, Input: input, Copy: c.CreateStackInstancesRequest}
 }
 

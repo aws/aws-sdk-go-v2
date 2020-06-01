@@ -96,6 +96,7 @@ func (c *Client) RebuildWorkspacesRequest(input *RebuildWorkspacesInput) Rebuild
 	}
 
 	req := c.newRequest(op, input, &RebuildWorkspacesOutput{})
+
 	return RebuildWorkspacesRequest{Request: req, Input: input, Copy: c.RebuildWorkspacesRequest}
 }
 

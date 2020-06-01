@@ -112,6 +112,7 @@ func (c *Client) DeleteFacetRequest(input *DeleteFacetInput) DeleteFacetRequest 
 	}
 
 	req := c.newRequest(op, input, &DeleteFacetOutput{})
+
 	return DeleteFacetRequest{Request: req, Input: input, Copy: c.DeleteFacetRequest}
 }
 

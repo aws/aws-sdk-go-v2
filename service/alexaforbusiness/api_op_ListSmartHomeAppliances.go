@@ -97,6 +97,7 @@ func (c *Client) ListSmartHomeAppliancesRequest(input *ListSmartHomeAppliancesIn
 	}
 
 	req := c.newRequest(op, input, &ListSmartHomeAppliancesOutput{})
+
 	return ListSmartHomeAppliancesRequest{Request: req, Input: input, Copy: c.ListSmartHomeAppliancesRequest}
 }
 

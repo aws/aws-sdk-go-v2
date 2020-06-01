@@ -86,6 +86,7 @@ func (c *Client) DetectDominantLanguageRequest(input *DetectDominantLanguageInpu
 	}
 
 	req := c.newRequest(op, input, &DetectDominantLanguageOutput{})
+
 	return DetectDominantLanguageRequest{Request: req, Input: input, Copy: c.DetectDominantLanguageRequest}
 }
 

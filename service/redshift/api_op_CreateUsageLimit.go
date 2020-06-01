@@ -149,6 +149,7 @@ func (c *Client) CreateUsageLimitRequest(input *CreateUsageLimitInput) CreateUsa
 	}
 
 	req := c.newRequest(op, input, &CreateUsageLimitOutput{})
+
 	return CreateUsageLimitRequest{Request: req, Input: input, Copy: c.CreateUsageLimitRequest}
 }
 

@@ -72,6 +72,7 @@ func (c *Client) DeleteDirectConnectGatewayAssociationRequest(input *DeleteDirec
 	}
 
 	req := c.newRequest(op, input, &DeleteDirectConnectGatewayAssociationOutput{})
+
 	return DeleteDirectConnectGatewayAssociationRequest{Request: req, Input: input, Copy: c.DeleteDirectConnectGatewayAssociationRequest}
 }
 

@@ -119,6 +119,7 @@ func (c *Client) DeleteAssetRequest(input *DeleteAssetInput) DeleteAssetRequest 
 	req := c.newRequest(op, input, &DeleteAssetOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteAssetRequest{Request: req, Input: input, Copy: c.DeleteAssetRequest}
 }
 

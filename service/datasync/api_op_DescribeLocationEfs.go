@@ -91,6 +91,7 @@ func (c *Client) DescribeLocationEfsRequest(input *DescribeLocationEfsInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeLocationEfsOutput{})
+
 	return DescribeLocationEfsRequest{Request: req, Input: input, Copy: c.DescribeLocationEfsRequest}
 }
 

@@ -111,6 +111,7 @@ func (c *Client) CreateHumanTaskUiRequest(input *CreateHumanTaskUiInput) CreateH
 	}
 
 	req := c.newRequest(op, input, &CreateHumanTaskUiOutput{})
+
 	return CreateHumanTaskUiRequest{Request: req, Input: input, Copy: c.CreateHumanTaskUiRequest}
 }
 

@@ -112,6 +112,7 @@ func (c *Client) SetV2LoggingLevelRequest(input *SetV2LoggingLevelInput) SetV2Lo
 	req := c.newRequest(op, input, &SetV2LoggingLevelOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetV2LoggingLevelRequest{Request: req, Input: input, Copy: c.SetV2LoggingLevelRequest}
 }
 

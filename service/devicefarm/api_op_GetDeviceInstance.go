@@ -81,6 +81,7 @@ func (c *Client) GetDeviceInstanceRequest(input *GetDeviceInstanceInput) GetDevi
 	}
 
 	req := c.newRequest(op, input, &GetDeviceInstanceOutput{})
+
 	return GetDeviceInstanceRequest{Request: req, Input: input, Copy: c.GetDeviceInstanceRequest}
 }
 

@@ -139,6 +139,7 @@ func (c *Client) DeleteMethodResponseRequest(input *DeleteMethodResponseInput) D
 	req := c.newRequest(op, input, &DeleteMethodResponseOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteMethodResponseRequest{Request: req, Input: input, Copy: c.DeleteMethodResponseRequest}
 }
 

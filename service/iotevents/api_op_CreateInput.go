@@ -156,6 +156,7 @@ func (c *Client) CreateInputRequest(input *CreateInputInput) CreateInputRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateInputOutput{})
+
 	return CreateInputRequest{Request: req, Input: input, Copy: c.CreateInputRequest}
 }
 

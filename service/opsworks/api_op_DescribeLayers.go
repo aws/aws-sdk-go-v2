@@ -73,6 +73,7 @@ func (c *Client) DescribeLayersRequest(input *DescribeLayersInput) DescribeLayer
 	}
 
 	req := c.newRequest(op, input, &DescribeLayersOutput{})
+
 	return DescribeLayersRequest{Request: req, Input: input, Copy: c.DescribeLayersRequest}
 }
 

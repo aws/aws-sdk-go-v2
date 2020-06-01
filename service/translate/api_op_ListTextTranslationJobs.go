@@ -97,6 +97,7 @@ func (c *Client) ListTextTranslationJobsRequest(input *ListTextTranslationJobsIn
 	}
 
 	req := c.newRequest(op, input, &ListTextTranslationJobsOutput{})
+
 	return ListTextTranslationJobsRequest{Request: req, Input: input, Copy: c.ListTextTranslationJobsRequest}
 }
 

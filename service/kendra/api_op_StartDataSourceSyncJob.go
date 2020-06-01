@@ -92,6 +92,7 @@ func (c *Client) StartDataSourceSyncJobRequest(input *StartDataSourceSyncJobInpu
 	}
 
 	req := c.newRequest(op, input, &StartDataSourceSyncJobOutput{})
+
 	return StartDataSourceSyncJobRequest{Request: req, Input: input, Copy: c.StartDataSourceSyncJobRequest}
 }
 

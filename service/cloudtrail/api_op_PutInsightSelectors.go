@@ -95,6 +95,7 @@ func (c *Client) PutInsightSelectorsRequest(input *PutInsightSelectorsInput) Put
 	}
 
 	req := c.newRequest(op, input, &PutInsightSelectorsOutput{})
+
 	return PutInsightSelectorsRequest{Request: req, Input: input, Copy: c.PutInsightSelectorsRequest}
 }
 

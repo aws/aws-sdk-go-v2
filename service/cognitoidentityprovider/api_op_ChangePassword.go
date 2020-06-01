@@ -100,6 +100,7 @@ func (c *Client) ChangePasswordRequest(input *ChangePasswordInput) ChangePasswor
 
 	req := c.newRequest(op, input, &ChangePasswordOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return ChangePasswordRequest{Request: req, Input: input, Copy: c.ChangePasswordRequest}
 }
 

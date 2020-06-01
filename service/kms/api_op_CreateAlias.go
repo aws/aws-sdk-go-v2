@@ -160,6 +160,7 @@ func (c *Client) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest 
 	req := c.newRequest(op, input, &CreateAliasOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CreateAliasRequest{Request: req, Input: input, Copy: c.CreateAliasRequest}
 }
 

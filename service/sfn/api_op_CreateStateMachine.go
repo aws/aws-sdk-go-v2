@@ -178,6 +178,7 @@ func (c *Client) CreateStateMachineRequest(input *CreateStateMachineInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateStateMachineOutput{})
+
 	return CreateStateMachineRequest{Request: req, Input: input, Copy: c.CreateStateMachineRequest}
 }
 

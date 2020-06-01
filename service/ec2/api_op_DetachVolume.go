@@ -128,6 +128,7 @@ func (c *Client) DetachVolumeRequest(input *DetachVolumeInput) DetachVolumeReque
 	}
 
 	req := c.newRequest(op, input, &DetachVolumeOutput{})
+
 	return DetachVolumeRequest{Request: req, Input: input, Copy: c.DetachVolumeRequest}
 }
 

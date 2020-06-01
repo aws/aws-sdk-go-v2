@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/checksum"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/service/s3/internal/arn"
 )
@@ -155,7 +156,7 @@ const opPutObjectTagging = "PutObjectTagging"
 // PutObjectTaggingRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Sets the supplied tag-set to an object that already exists in a bucket
+// Sets the supplied tag-set to an object that already exists in a bucket.
 //
 // A tag is a key-value pair. You can associate tags with an object by sending
 // a PUT request against the tagging subresource that is associated with the
@@ -214,6 +215,12 @@ func (c *Client) PutObjectTaggingRequest(input *PutObjectTaggingInput) PutObject
 	}
 
 	req := c.newRequest(op, input, &PutObjectTaggingOutput{})
+
+	req.Handlers.Build.PushBackNamed(aws.NamedHandler{
+		Name: "contentMd5Handler",
+		Fn:   checksum.AddBodyContentMD5Handler,
+	})
+
 	return PutObjectTaggingRequest{Request: req, Input: input, Copy: c.PutObjectTaggingRequest}
 }
 

@@ -112,6 +112,7 @@ func (c *Client) SearchProductsAsAdminRequest(input *SearchProductsAsAdminInput)
 	}
 
 	req := c.newRequest(op, input, &SearchProductsAsAdminOutput{})
+
 	return SearchProductsAsAdminRequest{Request: req, Input: input, Copy: c.SearchProductsAsAdminRequest}
 }
 

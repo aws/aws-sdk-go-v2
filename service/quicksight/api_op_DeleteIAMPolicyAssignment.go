@@ -150,6 +150,7 @@ func (c *Client) DeleteIAMPolicyAssignmentRequest(input *DeleteIAMPolicyAssignme
 	}
 
 	req := c.newRequest(op, input, &DeleteIAMPolicyAssignmentOutput{})
+
 	return DeleteIAMPolicyAssignmentRequest{Request: req, Input: input, Copy: c.DeleteIAMPolicyAssignmentRequest}
 }
 

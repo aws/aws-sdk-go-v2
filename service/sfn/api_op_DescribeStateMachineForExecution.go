@@ -114,6 +114,7 @@ func (c *Client) DescribeStateMachineForExecutionRequest(input *DescribeStateMac
 	}
 
 	req := c.newRequest(op, input, &DescribeStateMachineForExecutionOutput{})
+
 	return DescribeStateMachineForExecutionRequest{Request: req, Input: input, Copy: c.DescribeStateMachineForExecutionRequest}
 }
 

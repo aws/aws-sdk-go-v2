@@ -97,6 +97,7 @@ func (c *Client) ListNamedQueriesRequest(input *ListNamedQueriesInput) ListNamed
 	}
 
 	req := c.newRequest(op, input, &ListNamedQueriesOutput{})
+
 	return ListNamedQueriesRequest{Request: req, Input: input, Copy: c.ListNamedQueriesRequest}
 }
 

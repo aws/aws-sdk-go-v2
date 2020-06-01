@@ -156,6 +156,7 @@ func (c *Client) ListShardsRequest(input *ListShardsInput) ListShardsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListShardsOutput{})
+
 	return ListShardsRequest{Request: req, Input: input, Copy: c.ListShardsRequest}
 }
 

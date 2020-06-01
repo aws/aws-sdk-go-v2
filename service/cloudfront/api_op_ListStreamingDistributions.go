@@ -101,6 +101,7 @@ func (c *Client) ListStreamingDistributionsRequest(input *ListStreamingDistribut
 	}
 
 	req := c.newRequest(op, input, &ListStreamingDistributionsOutput{})
+
 	return ListStreamingDistributionsRequest{Request: req, Input: input, Copy: c.ListStreamingDistributionsRequest}
 }
 

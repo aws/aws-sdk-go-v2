@@ -142,6 +142,7 @@ func (c *Client) DescribeWebsiteCertificateAuthorityRequest(input *DescribeWebsi
 	}
 
 	req := c.newRequest(op, input, &DescribeWebsiteCertificateAuthorityOutput{})
+
 	return DescribeWebsiteCertificateAuthorityRequest{Request: req, Input: input, Copy: c.DescribeWebsiteCertificateAuthorityRequest}
 }
 

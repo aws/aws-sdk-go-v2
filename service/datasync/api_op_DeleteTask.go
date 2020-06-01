@@ -74,6 +74,7 @@ func (c *Client) DeleteTaskRequest(input *DeleteTaskInput) DeleteTaskRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteTaskOutput{})
+
 	return DeleteTaskRequest{Request: req, Input: input, Copy: c.DeleteTaskRequest}
 }
 

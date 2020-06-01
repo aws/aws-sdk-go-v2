@@ -170,6 +170,7 @@ func (c *Client) DescribeMergeConflictsRequest(input *DescribeMergeConflictsInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeMergeConflictsOutput{})
+
 	return DescribeMergeConflictsRequest{Request: req, Input: input, Copy: c.DescribeMergeConflictsRequest}
 }
 

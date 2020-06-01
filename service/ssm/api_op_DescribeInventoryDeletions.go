@@ -86,6 +86,7 @@ func (c *Client) DescribeInventoryDeletionsRequest(input *DescribeInventoryDelet
 	}
 
 	req := c.newRequest(op, input, &DescribeInventoryDeletionsOutput{})
+
 	return DescribeInventoryDeletionsRequest{Request: req, Input: input, Copy: c.DescribeInventoryDeletionsRequest}
 }
 

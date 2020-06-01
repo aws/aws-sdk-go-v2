@@ -117,6 +117,7 @@ func (c *Client) UpdateTaskRequest(input *UpdateTaskInput) UpdateTaskRequest {
 	}
 
 	req := c.newRequest(op, input, &UpdateTaskOutput{})
+
 	return UpdateTaskRequest{Request: req, Input: input, Copy: c.UpdateTaskRequest}
 }
 

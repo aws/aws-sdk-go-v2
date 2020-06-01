@@ -282,6 +282,7 @@ func (c *Client) CreateBranchRequest(input *CreateBranchInput) CreateBranchReque
 	}
 
 	req := c.newRequest(op, input, &CreateBranchOutput{})
+
 	return CreateBranchRequest{Request: req, Input: input, Copy: c.CreateBranchRequest}
 }
 

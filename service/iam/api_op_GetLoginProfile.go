@@ -88,6 +88,7 @@ func (c *Client) GetLoginProfileRequest(input *GetLoginProfileInput) GetLoginPro
 	}
 
 	req := c.newRequest(op, input, &GetLoginProfileOutput{})
+
 	return GetLoginProfileRequest{Request: req, Input: input, Copy: c.GetLoginProfileRequest}
 }
 

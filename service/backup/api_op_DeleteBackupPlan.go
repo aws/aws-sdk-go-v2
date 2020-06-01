@@ -138,6 +138,7 @@ func (c *Client) DeleteBackupPlanRequest(input *DeleteBackupPlanInput) DeleteBac
 	}
 
 	req := c.newRequest(op, input, &DeleteBackupPlanOutput{})
+
 	return DeleteBackupPlanRequest{Request: req, Input: input, Copy: c.DeleteBackupPlanRequest}
 }
 

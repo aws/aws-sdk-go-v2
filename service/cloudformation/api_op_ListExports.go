@@ -89,6 +89,7 @@ func (c *Client) ListExportsRequest(input *ListExportsInput) ListExportsRequest 
 	}
 
 	req := c.newRequest(op, input, &ListExportsOutput{})
+
 	return ListExportsRequest{Request: req, Input: input, Copy: c.ListExportsRequest}
 }
 

@@ -97,6 +97,7 @@ func (c *Client) ListAssociatedApprovalRuleTemplatesForRepositoryRequest(input *
 	}
 
 	req := c.newRequest(op, input, &ListAssociatedApprovalRuleTemplatesForRepositoryOutput{})
+
 	return ListAssociatedApprovalRuleTemplatesForRepositoryRequest{Request: req, Input: input, Copy: c.ListAssociatedApprovalRuleTemplatesForRepositoryRequest}
 }
 

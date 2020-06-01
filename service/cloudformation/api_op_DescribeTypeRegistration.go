@@ -106,6 +106,7 @@ func (c *Client) DescribeTypeRegistrationRequest(input *DescribeTypeRegistration
 	}
 
 	req := c.newRequest(op, input, &DescribeTypeRegistrationOutput{})
+
 	return DescribeTypeRegistrationRequest{Request: req, Input: input, Copy: c.DescribeTypeRegistrationRequest}
 }
 

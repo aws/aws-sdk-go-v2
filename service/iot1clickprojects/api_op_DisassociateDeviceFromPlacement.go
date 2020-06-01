@@ -131,6 +131,7 @@ func (c *Client) DisassociateDeviceFromPlacementRequest(input *DisassociateDevic
 	}
 
 	req := c.newRequest(op, input, &DisassociateDeviceFromPlacementOutput{})
+
 	return DisassociateDeviceFromPlacementRequest{Request: req, Input: input, Copy: c.DisassociateDeviceFromPlacementRequest}
 }
 

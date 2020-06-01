@@ -103,6 +103,7 @@ func (c *Client) GetAdmChannelRequest(input *GetAdmChannelInput) GetAdmChannelRe
 	}
 
 	req := c.newRequest(op, input, &GetAdmChannelOutput{})
+
 	return GetAdmChannelRequest{Request: req, Input: input, Copy: c.GetAdmChannelRequest}
 }
 

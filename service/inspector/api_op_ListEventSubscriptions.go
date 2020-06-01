@@ -103,6 +103,7 @@ func (c *Client) ListEventSubscriptionsRequest(input *ListEventSubscriptionsInpu
 	}
 
 	req := c.newRequest(op, input, &ListEventSubscriptionsOutput{})
+
 	return ListEventSubscriptionsRequest{Request: req, Input: input, Copy: c.ListEventSubscriptionsRequest}
 }
 

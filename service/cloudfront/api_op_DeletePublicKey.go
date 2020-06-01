@@ -104,6 +104,7 @@ func (c *Client) DeletePublicKeyRequest(input *DeletePublicKeyInput) DeletePubli
 	req := c.newRequest(op, input, &DeletePublicKeyOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeletePublicKeyRequest{Request: req, Input: input, Copy: c.DeletePublicKeyRequest}
 }
 

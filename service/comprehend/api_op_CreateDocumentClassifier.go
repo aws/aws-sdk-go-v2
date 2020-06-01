@@ -171,6 +171,7 @@ func (c *Client) CreateDocumentClassifierRequest(input *CreateDocumentClassifier
 	}
 
 	req := c.newRequest(op, input, &CreateDocumentClassifierOutput{})
+
 	return CreateDocumentClassifierRequest{Request: req, Input: input, Copy: c.CreateDocumentClassifierRequest}
 }
 

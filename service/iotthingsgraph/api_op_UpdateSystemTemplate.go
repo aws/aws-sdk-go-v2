@@ -102,6 +102,7 @@ func (c *Client) UpdateSystemTemplateRequest(input *UpdateSystemTemplateInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateSystemTemplateOutput{})
+
 	return UpdateSystemTemplateRequest{Request: req, Input: input, Copy: c.UpdateSystemTemplateRequest}
 }
 

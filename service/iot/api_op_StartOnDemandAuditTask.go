@@ -108,6 +108,7 @@ func (c *Client) StartOnDemandAuditTaskRequest(input *StartOnDemandAuditTaskInpu
 	}
 
 	req := c.newRequest(op, input, &StartOnDemandAuditTaskOutput{})
+
 	return StartOnDemandAuditTaskRequest{Request: req, Input: input, Copy: c.StartOnDemandAuditTaskRequest}
 }
 

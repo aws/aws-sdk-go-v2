@@ -102,6 +102,7 @@ func (c *Client) DeletePackageRequest(input *DeletePackageInput) DeletePackageRe
 	}
 
 	req := c.newRequest(op, input, &DeletePackageOutput{})
+
 	return DeletePackageRequest{Request: req, Input: input, Copy: c.DeletePackageRequest}
 }
 

@@ -103,6 +103,7 @@ func (c *Client) GetSmsChannelRequest(input *GetSmsChannelInput) GetSmsChannelRe
 	}
 
 	req := c.newRequest(op, input, &GetSmsChannelOutput{})
+
 	return GetSmsChannelRequest{Request: req, Input: input, Copy: c.GetSmsChannelRequest}
 }
 

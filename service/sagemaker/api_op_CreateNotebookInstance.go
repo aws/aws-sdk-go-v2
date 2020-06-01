@@ -227,6 +227,7 @@ func (c *Client) CreateNotebookInstanceRequest(input *CreateNotebookInstanceInpu
 	}
 
 	req := c.newRequest(op, input, &CreateNotebookInstanceOutput{})
+
 	return CreateNotebookInstanceRequest{Request: req, Input: input, Copy: c.CreateNotebookInstanceRequest}
 }
 

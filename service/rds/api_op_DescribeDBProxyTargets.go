@@ -123,6 +123,7 @@ func (c *Client) DescribeDBProxyTargetsRequest(input *DescribeDBProxyTargetsInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeDBProxyTargetsOutput{})
+
 	return DescribeDBProxyTargetsRequest{Request: req, Input: input, Copy: c.DescribeDBProxyTargetsRequest}
 }
 

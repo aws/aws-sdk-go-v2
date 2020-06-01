@@ -117,6 +117,7 @@ func (c *Client) ListProcessingJobsRequest(input *ListProcessingJobsInput) ListP
 	}
 
 	req := c.newRequest(op, input, &ListProcessingJobsOutput{})
+
 	return ListProcessingJobsRequest{Request: req, Input: input, Copy: c.ListProcessingJobsRequest}
 }
 

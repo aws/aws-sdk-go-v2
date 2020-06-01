@@ -99,6 +99,7 @@ func (c *Client) DescribeChapCredentialsRequest(input *DescribeChapCredentialsIn
 	}
 
 	req := c.newRequest(op, input, &DescribeChapCredentialsOutput{})
+
 	return DescribeChapCredentialsRequest{Request: req, Input: input, Copy: c.DescribeChapCredentialsRequest}
 }
 

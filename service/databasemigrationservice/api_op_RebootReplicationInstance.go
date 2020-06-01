@@ -81,6 +81,7 @@ func (c *Client) RebootReplicationInstanceRequest(input *RebootReplicationInstan
 	}
 
 	req := c.newRequest(op, input, &RebootReplicationInstanceOutput{})
+
 	return RebootReplicationInstanceRequest{Request: req, Input: input, Copy: c.RebootReplicationInstanceRequest}
 }
 

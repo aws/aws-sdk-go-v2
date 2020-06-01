@@ -98,6 +98,7 @@ func (c *Client) UpdateLoggerDefinitionRequest(input *UpdateLoggerDefinitionInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateLoggerDefinitionOutput{})
+
 	return UpdateLoggerDefinitionRequest{Request: req, Input: input, Copy: c.UpdateLoggerDefinitionRequest}
 }
 

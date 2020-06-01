@@ -255,6 +255,7 @@ func (c *Client) CreateDevEndpointRequest(input *CreateDevEndpointInput) CreateD
 	}
 
 	req := c.newRequest(op, input, &CreateDevEndpointOutput{})
+
 	return CreateDevEndpointRequest{Request: req, Input: input, Copy: c.CreateDevEndpointRequest}
 }
 

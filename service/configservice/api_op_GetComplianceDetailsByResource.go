@@ -106,6 +106,7 @@ func (c *Client) GetComplianceDetailsByResourceRequest(input *GetComplianceDetai
 	}
 
 	req := c.newRequest(op, input, &GetComplianceDetailsByResourceOutput{})
+
 	return GetComplianceDetailsByResourceRequest{Request: req, Input: input, Copy: c.GetComplianceDetailsByResourceRequest}
 }
 

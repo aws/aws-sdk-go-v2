@@ -223,6 +223,7 @@ func (c *Client) ListTrafficPolicyInstancesRequest(input *ListTrafficPolicyInsta
 	}
 
 	req := c.newRequest(op, input, &ListTrafficPolicyInstancesOutput{})
+
 	return ListTrafficPolicyInstancesRequest{Request: req, Input: input, Copy: c.ListTrafficPolicyInstancesRequest}
 }
 

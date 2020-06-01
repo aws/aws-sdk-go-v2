@@ -13,7 +13,7 @@ import (
 type EnableOrganizationAdminAccountInput struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS Account ID for the Organizations account to be enabled as a GuardDuty
+	// The AWS Account ID for the organization account to be enabled as a GuardDuty
 	// delegated administrator.
 	//
 	// AdminAccountId is a required field
@@ -71,8 +71,8 @@ const opEnableOrganizationAdminAccount = "EnableOrganizationAdminAccount"
 // EnableOrganizationAdminAccountRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Enables GuardDuty administrator permissions for an AWS account within the
-// organization.
+// Enables an AWS account within the organization as the GuardDuty delegated
+// administrator.
 //
 //    // Example sending a request using EnableOrganizationAdminAccountRequest.
 //    req := client.EnableOrganizationAdminAccountRequest(params)
@@ -94,6 +94,7 @@ func (c *Client) EnableOrganizationAdminAccountRequest(input *EnableOrganization
 	}
 
 	req := c.newRequest(op, input, &EnableOrganizationAdminAccountOutput{})
+
 	return EnableOrganizationAdminAccountRequest{Request: req, Input: input, Copy: c.EnableOrganizationAdminAccountRequest}
 }
 

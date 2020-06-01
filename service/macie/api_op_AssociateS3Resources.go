@@ -13,12 +13,12 @@ import (
 type AssociateS3ResourcesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Amazon Macie member account whose resources you want to associate
-	// with Macie.
+	// The ID of the Amazon Macie Classic member account whose resources you want
+	// to associate with Macie Classic.
 	MemberAccountId *string `locationName:"memberAccountId" type:"string"`
 
-	// The S3 resources that you want to associate with Amazon Macie for monitoring
-	// and data classification.
+	// The S3 resources that you want to associate with Amazon Macie Classic for
+	// monitoring and data classification.
 	//
 	// S3Resources is a required field
 	S3Resources []S3ResourceClassification `locationName:"s3Resources" type:"list" required:"true"`
@@ -53,8 +53,8 @@ func (s *AssociateS3ResourcesInput) Validate() error {
 type AssociateS3ResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// S3 resources that couldn't be associated with Amazon Macie. An error code
-	// and an error message are provided for each failed item.
+	// S3 resources that couldn't be associated with Amazon Macie Classic. An error
+	// code and an error message are provided for each failed item.
 	FailedS3Resources []FailedS3Resource `locationName:"failedS3Resources" type:"list"`
 }
 
@@ -68,11 +68,11 @@ const opAssociateS3Resources = "AssociateS3Resources"
 // AssociateS3ResourcesRequest returns a request value for making API operation for
 // Amazon Macie.
 //
-// Associates specified S3 resources with Amazon Macie for monitoring and data
-// classification. If memberAccountId isn't specified, the action associates
-// specified S3 resources with Macie for the current master account. If memberAccountId
-// is specified, the action associates specified S3 resources with Macie for
-// the specified member account.
+// Associates specified S3 resources with Amazon Macie Classic for monitoring
+// and data classification. If memberAccountId isn't specified, the action associates
+// specified S3 resources with Macie Classic for the current master account.
+// If memberAccountId is specified, the action associates specified S3 resources
+// with Macie Classic for the specified member account.
 //
 //    // Example sending a request using AssociateS3ResourcesRequest.
 //    req := client.AssociateS3ResourcesRequest(params)
@@ -94,6 +94,7 @@ func (c *Client) AssociateS3ResourcesRequest(input *AssociateS3ResourcesInput) A
 	}
 
 	req := c.newRequest(op, input, &AssociateS3ResourcesOutput{})
+
 	return AssociateS3ResourcesRequest{Request: req, Input: input, Copy: c.AssociateS3ResourcesRequest}
 }
 

@@ -75,6 +75,7 @@ func (c *Client) ListDeploymentConfigsRequest(input *ListDeploymentConfigsInput)
 	}
 
 	req := c.newRequest(op, input, &ListDeploymentConfigsOutput{})
+
 	return ListDeploymentConfigsRequest{Request: req, Input: input, Copy: c.ListDeploymentConfigsRequest}
 }
 

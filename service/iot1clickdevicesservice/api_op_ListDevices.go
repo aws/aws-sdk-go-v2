@@ -128,6 +128,7 @@ func (c *Client) ListDevicesRequest(input *ListDevicesInput) ListDevicesRequest 
 	}
 
 	req := c.newRequest(op, input, &ListDevicesOutput{})
+
 	return ListDevicesRequest{Request: req, Input: input, Copy: c.ListDevicesRequest}
 }
 

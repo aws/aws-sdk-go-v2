@@ -78,6 +78,7 @@ func (c *Client) DeleteUploadRequest(input *DeleteUploadInput) DeleteUploadReque
 	}
 
 	req := c.newRequest(op, input, &DeleteUploadOutput{})
+
 	return DeleteUploadRequest{Request: req, Input: input, Copy: c.DeleteUploadRequest}
 }
 

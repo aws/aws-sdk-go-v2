@@ -134,6 +134,7 @@ func (c *Client) ListEmailIdentitiesRequest(input *ListEmailIdentitiesInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListEmailIdentitiesOutput{})
+
 	return ListEmailIdentitiesRequest{Request: req, Input: input, Copy: c.ListEmailIdentitiesRequest}
 }
 

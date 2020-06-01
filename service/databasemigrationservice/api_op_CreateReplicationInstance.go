@@ -173,6 +173,7 @@ func (c *Client) CreateReplicationInstanceRequest(input *CreateReplicationInstan
 	}
 
 	req := c.newRequest(op, input, &CreateReplicationInstanceOutput{})
+
 	return CreateReplicationInstanceRequest{Request: req, Input: input, Copy: c.CreateReplicationInstanceRequest}
 }
 

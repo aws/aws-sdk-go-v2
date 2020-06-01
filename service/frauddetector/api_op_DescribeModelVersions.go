@@ -102,6 +102,7 @@ func (c *Client) DescribeModelVersionsRequest(input *DescribeModelVersionsInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeModelVersionsOutput{})
+
 	return DescribeModelVersionsRequest{Request: req, Input: input, Copy: c.DescribeModelVersionsRequest}
 }
 

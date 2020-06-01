@@ -88,6 +88,7 @@ func (c *Client) CreateHapgRequest(input *CreateHapgInput) CreateHapgRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateHapgOutput{})
+
 	return CreateHapgRequest{Request: req, Input: input, Copy: c.CreateHapgRequest}
 }
 

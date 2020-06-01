@@ -78,6 +78,7 @@ func (c *Client) StopApplicationRequest(input *StopApplicationInput) StopApplica
 	}
 
 	req := c.newRequest(op, input, &StopApplicationOutput{})
+
 	return StopApplicationRequest{Request: req, Input: input, Copy: c.StopApplicationRequest}
 }
 

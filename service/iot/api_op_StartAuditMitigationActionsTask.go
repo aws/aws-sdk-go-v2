@@ -180,6 +180,7 @@ func (c *Client) StartAuditMitigationActionsTaskRequest(input *StartAuditMitigat
 	}
 
 	req := c.newRequest(op, input, &StartAuditMitigationActionsTaskOutput{})
+
 	return StartAuditMitigationActionsTaskRequest{Request: req, Input: input, Copy: c.StartAuditMitigationActionsTaskRequest}
 }
 

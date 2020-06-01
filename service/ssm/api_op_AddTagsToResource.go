@@ -113,10 +113,11 @@ const opAddTagsToResource = "AddTagsToResource"
 // We recommend that you devise a set of tag keys that meets your needs for
 // each resource type. Using a consistent set of tag keys makes it easier for
 // you to manage your resources. You can search and filter the resources based
-// on the tags you add. Tags don't have any semantic meaning to Amazon EC2 and
-// are interpreted strictly as a string of characters.
+// on the tags you add. Tags don't have any semantic meaning to and are interpreted
+// strictly as a string of characters.
 //
-// For more information about tags, see Tagging Your Amazon EC2 Resources (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html)
+// For more information about using tags with EC2 instances, see Tagging your
+// Amazon EC2 resources (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html)
 // in the Amazon EC2 User Guide.
 //
 //    // Example sending a request using AddTagsToResourceRequest.
@@ -139,6 +140,7 @@ func (c *Client) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTags
 	}
 
 	req := c.newRequest(op, input, &AddTagsToResourceOutput{})
+
 	return AddTagsToResourceRequest{Request: req, Input: input, Copy: c.AddTagsToResourceRequest}
 }
 

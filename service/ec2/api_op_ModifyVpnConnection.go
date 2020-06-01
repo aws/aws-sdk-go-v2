@@ -69,8 +69,9 @@ const opModifyVpnConnection = "ModifyVpnConnection"
 // ModifyVpnConnectionRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Modifies the target gateway of an AWS Site-to-Site VPN connection. The following
-// migration options are available:
+// Modifies the customer gateway or the target gateway of an AWS Site-to-Site
+// VPN connection. To modify the target gateway, the following migration options
+// are available:
 //
 //    * An existing virtual private gateway to a new virtual private gateway
 //
@@ -130,6 +131,7 @@ func (c *Client) ModifyVpnConnectionRequest(input *ModifyVpnConnectionInput) Mod
 	}
 
 	req := c.newRequest(op, input, &ModifyVpnConnectionOutput{})
+
 	return ModifyVpnConnectionRequest{Request: req, Input: input, Copy: c.ModifyVpnConnectionRequest}
 }
 

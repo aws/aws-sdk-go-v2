@@ -133,6 +133,7 @@ func (c *Client) UpdateInputRequest(input *UpdateInputInput) UpdateInputRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateInputOutput{})
+
 	return UpdateInputRequest{Request: req, Input: input, Copy: c.UpdateInputRequest}
 }
 

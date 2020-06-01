@@ -320,6 +320,7 @@ func (c *Client) StartBuildRequest(input *StartBuildInput) StartBuildRequest {
 	}
 
 	req := c.newRequest(op, input, &StartBuildOutput{})
+
 	return StartBuildRequest{Request: req, Input: input, Copy: c.StartBuildRequest}
 }
 

@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -29,6 +30,15 @@ type CreateAuthorizerInput struct {
 
 	// The status of the create authorizer request.
 	Status AuthorizerStatus `locationName:"status" type:"string" enum:"true"`
+
+	// Metadata which can be used to manage the custom authorizer.
+	//
+	// For URI Request parameters use format: ...key1=value1&key2=value2...
+	//
+	// For the CLI command-line parameter use format: &&tags "key1=value1&key2=value2..."
+	//
+	// For the cli-input-json file use format: "tags": "key1=value1&key2=value2..."
+	Tags []Tag `locationName:"tags" type:"list"`
 
 	// The name of the token key used to extract the token from the HTTP headers.
 	TokenKeyName *string `locationName:"tokenKeyName" min:"1" type:"string"`
@@ -60,6 +70,13 @@ func (s *CreateAuthorizerInput) Validate() error {
 	if s.TokenKeyName != nil && len(*s.TokenKeyName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TokenKeyName", 1))
 	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -88,6 +105,18 @@ func (s CreateAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.TokenKeyName != nil {
 		v := *s.TokenKeyName
@@ -173,6 +202,7 @@ func (c *Client) CreateAuthorizerRequest(input *CreateAuthorizerInput) CreateAut
 	}
 
 	req := c.newRequest(op, input, &CreateAuthorizerOutput{})
+
 	return CreateAuthorizerRequest{Request: req, Input: input, Copy: c.CreateAuthorizerRequest}
 }
 

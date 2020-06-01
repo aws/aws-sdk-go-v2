@@ -129,6 +129,7 @@ func (c *Client) DescribeRegistryRequest(input *DescribeRegistryInput) DescribeR
 	}
 
 	req := c.newRequest(op, input, &DescribeRegistryOutput{})
+
 	return DescribeRegistryRequest{Request: req, Input: input, Copy: c.DescribeRegistryRequest}
 }
 

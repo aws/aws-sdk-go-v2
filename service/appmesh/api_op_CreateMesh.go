@@ -132,12 +132,14 @@ const opCreateMesh = "CreateMesh"
 // CreateMeshRequest returns a request value for making API operation for
 // AWS App Mesh.
 //
-// Creates a service mesh. A service mesh is a logical boundary for network
-// traffic between the services that reside within it.
+// Creates a service mesh.
 //
-// After you create your service mesh, you can create virtual services, virtual
-// nodes, virtual routers, and routes to distribute traffic between the applications
-// in your mesh.
+// A service mesh is a logical boundary for network traffic between services
+// that are represented by resources within the mesh. After you create your
+// service mesh, you can create virtual services, virtual nodes, virtual routers,
+// and routes to distribute traffic between the applications in your mesh.
+//
+// For more information about service meshes, see Service meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/meshes.html).
 //
 //    // Example sending a request using CreateMeshRequest.
 //    req := client.CreateMeshRequest(params)
@@ -159,6 +161,7 @@ func (c *Client) CreateMeshRequest(input *CreateMeshInput) CreateMeshRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateMeshOutput{})
+
 	return CreateMeshRequest{Request: req, Input: input, Copy: c.CreateMeshRequest}
 }
 

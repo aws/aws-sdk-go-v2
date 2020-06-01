@@ -97,6 +97,7 @@ func (c *Client) RejectInvitationRequest(input *RejectInvitationInput) RejectInv
 	}
 
 	req := c.newRequest(op, input, &RejectInvitationOutput{})
+
 	return RejectInvitationRequest{Request: req, Input: input, Copy: c.RejectInvitationRequest}
 }
 

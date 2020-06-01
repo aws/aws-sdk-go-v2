@@ -82,6 +82,7 @@ func (c *Client) StartMonitoringScheduleRequest(input *StartMonitoringScheduleIn
 	req := c.newRequest(op, input, &StartMonitoringScheduleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StartMonitoringScheduleRequest{Request: req, Input: input, Copy: c.StartMonitoringScheduleRequest}
 }
 

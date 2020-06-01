@@ -107,6 +107,7 @@ func (c *Client) ListLoggingConfigurationsRequest(input *ListLoggingConfiguratio
 	}
 
 	req := c.newRequest(op, input, &ListLoggingConfigurationsOutput{})
+
 	return ListLoggingConfigurationsRequest{Request: req, Input: input, Copy: c.ListLoggingConfigurationsRequest}
 }
 

@@ -140,6 +140,7 @@ func (c *Client) ListLayersRequest(input *ListLayersInput) ListLayersRequest {
 	}
 
 	req := c.newRequest(op, input, &ListLayersOutput{})
+
 	return ListLayersRequest{Request: req, Input: input, Copy: c.ListLayersRequest}
 }
 

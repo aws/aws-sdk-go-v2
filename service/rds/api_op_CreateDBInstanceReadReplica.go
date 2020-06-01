@@ -413,6 +413,7 @@ func (c *Client) CreateDBInstanceReadReplicaRequest(input *CreateDBInstanceReadR
 	}
 
 	req := c.newRequest(op, input, &CreateDBInstanceReadReplicaOutput{})
+
 	return CreateDBInstanceReadReplicaRequest{Request: req, Input: input, Copy: c.CreateDBInstanceReadReplicaRequest}
 }
 

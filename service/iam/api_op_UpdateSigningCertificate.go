@@ -112,6 +112,7 @@ func (c *Client) UpdateSigningCertificateRequest(input *UpdateSigningCertificate
 	req := c.newRequest(op, input, &UpdateSigningCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateSigningCertificateRequest{Request: req, Input: input, Copy: c.UpdateSigningCertificateRequest}
 }
 

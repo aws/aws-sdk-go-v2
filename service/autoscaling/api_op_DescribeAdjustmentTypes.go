@@ -35,7 +35,17 @@ const opDescribeAdjustmentTypes = "DescribeAdjustmentTypes"
 // DescribeAdjustmentTypesRequest returns a request value for making API operation for
 // Auto Scaling.
 //
-// Describes the policy adjustment types for use with PutScalingPolicy.
+// Describes the available adjustment types for Amazon EC2 Auto Scaling scaling
+// policies. These settings apply to step scaling policies and simple scaling
+// policies; they do not apply to target tracking scaling policies.
+//
+// The following adjustment types are supported:
+//
+//    * ChangeInCapacity
+//
+//    * ExactCapacity
+//
+//    * PercentChangeInCapacity
 //
 //    // Example sending a request using DescribeAdjustmentTypesRequest.
 //    req := client.DescribeAdjustmentTypesRequest(params)
@@ -57,6 +67,7 @@ func (c *Client) DescribeAdjustmentTypesRequest(input *DescribeAdjustmentTypesIn
 	}
 
 	req := c.newRequest(op, input, &DescribeAdjustmentTypesOutput{})
+
 	return DescribeAdjustmentTypesRequest{Request: req, Input: input, Copy: c.DescribeAdjustmentTypesRequest}
 }
 

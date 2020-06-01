@@ -132,6 +132,7 @@ func (c *Client) GetMergeOptionsRequest(input *GetMergeOptionsInput) GetMergeOpt
 	}
 
 	req := c.newRequest(op, input, &GetMergeOptionsOutput{})
+
 	return GetMergeOptionsRequest{Request: req, Input: input, Copy: c.GetMergeOptionsRequest}
 }
 

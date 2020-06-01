@@ -162,6 +162,7 @@ func (c *Client) CreateProductRequest(input *CreateProductInput) CreateProductRe
 	}
 
 	req := c.newRequest(op, input, &CreateProductOutput{})
+
 	return CreateProductRequest{Request: req, Input: input, Copy: c.CreateProductRequest}
 }
 

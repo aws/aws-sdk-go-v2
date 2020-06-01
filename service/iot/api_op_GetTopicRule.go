@@ -113,6 +113,7 @@ func (c *Client) GetTopicRuleRequest(input *GetTopicRuleInput) GetTopicRuleReque
 	}
 
 	req := c.newRequest(op, input, &GetTopicRuleOutput{})
+
 	return GetTopicRuleRequest{Request: req, Input: input, Copy: c.GetTopicRuleRequest}
 }
 

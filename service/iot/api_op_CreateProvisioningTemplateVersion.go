@@ -154,6 +154,7 @@ func (c *Client) CreateProvisioningTemplateVersionRequest(input *CreateProvision
 	}
 
 	req := c.newRequest(op, input, &CreateProvisioningTemplateVersionOutput{})
+
 	return CreateProvisioningTemplateVersionRequest{Request: req, Input: input, Copy: c.CreateProvisioningTemplateVersionRequest}
 }
 

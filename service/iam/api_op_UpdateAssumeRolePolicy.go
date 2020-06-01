@@ -116,6 +116,7 @@ func (c *Client) UpdateAssumeRolePolicyRequest(input *UpdateAssumeRolePolicyInpu
 	req := c.newRequest(op, input, &UpdateAssumeRolePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateAssumeRolePolicyRequest{Request: req, Input: input, Copy: c.UpdateAssumeRolePolicyRequest}
 }
 

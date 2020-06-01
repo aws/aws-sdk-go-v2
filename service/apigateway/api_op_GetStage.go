@@ -291,6 +291,7 @@ func (c *Client) GetStageRequest(input *GetStageInput) GetStageRequest {
 	}
 
 	req := c.newRequest(op, input, &GetStageOutput{})
+
 	return GetStageRequest{Request: req, Input: input, Copy: c.GetStageRequest}
 }
 

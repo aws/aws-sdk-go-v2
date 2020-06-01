@@ -192,6 +192,24 @@ func (enum MemberType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type NotificationTarget string
+
+// Enum values for NotificationTarget
+const (
+	NotificationTargetEventBridge NotificationTarget = "EventBridge"
+	NotificationTargetSns         NotificationTarget = "SNS"
+	NotificationTargetSqs         NotificationTarget = "SQS"
+)
+
+func (enum NotificationTarget) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NotificationTarget) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NumberSelectionBehavior string
 
 // Enum values for NumberSelectionBehavior

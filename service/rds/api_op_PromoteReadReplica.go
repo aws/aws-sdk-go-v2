@@ -127,6 +127,7 @@ func (c *Client) PromoteReadReplicaRequest(input *PromoteReadReplicaInput) Promo
 	}
 
 	req := c.newRequest(op, input, &PromoteReadReplicaOutput{})
+
 	return PromoteReadReplicaRequest{Request: req, Input: input, Copy: c.PromoteReadReplicaRequest}
 }
 

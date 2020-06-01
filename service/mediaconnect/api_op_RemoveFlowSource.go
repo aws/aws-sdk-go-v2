@@ -124,6 +124,7 @@ func (c *Client) RemoveFlowSourceRequest(input *RemoveFlowSourceInput) RemoveFlo
 	}
 
 	req := c.newRequest(op, input, &RemoveFlowSourceOutput{})
+
 	return RemoveFlowSourceRequest{Request: req, Input: input, Copy: c.RemoveFlowSourceRequest}
 }
 

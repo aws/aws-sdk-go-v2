@@ -711,6 +711,27 @@ type ContainerDefinition struct {
 	// such as credential data.
 	Environment []KeyValuePair `locationName:"environment" type:"list"`
 
+	// A list of files containing the environment variables to pass to a container.
+	// This parameter maps to the --env-file option to docker run (https://docs.docker.com/engine/reference/run/).
+	//
+	// You can specify up to ten environment files. The file must have a .env file
+	// extension. Each line in an environment file should contain an environment
+	// variable in VARIABLE=VALUE format. Lines beginning with # are treated as
+	// comments and are ignored. For more information on the environment variable
+	// file syntax, see Declare default environment variables in file (https://docs.docker.com/compose/env-file/).
+	//
+	// If there are environment variables specified using the environment parameter
+	// in a container definition, they take precedence over the variables contained
+	// within an environment file. If multiple environment files are specified that
+	// contain the same variable, they are processed from the top down. It is recommended
+	// to use unique variable names. For more information, see Specifying Environment
+	// Variables (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	//
+	// This field is not valid for containers in tasks using the Fargate launch
+	// type.
+	EnvironmentFiles []EnvironmentFile `locationName:"environmentFiles" type:"list"`
+
 	// If the essential parameter of a container is marked as true, and that container
 	// fails or stops for any reason, all other containers that are part of the
 	// task are stopped. If the essential parameter of a container is marked as
@@ -1115,6 +1136,13 @@ func (s *ContainerDefinition) Validate() error {
 			}
 		}
 	}
+	if s.EnvironmentFiles != nil {
+		for i, v := range s.EnvironmentFiles {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EnvironmentFiles", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 	if s.ExtraHosts != nil {
 		for i, v := range s.ExtraHosts {
 			if err := v.Validate(); err != nil {
@@ -1399,6 +1427,10 @@ type ContainerOverride struct {
 	// You must also specify a container name.
 	Environment []KeyValuePair `locationName:"environment" type:"list"`
 
+	// A list of files containing the environment variables to pass to a container,
+	// instead of the value from the container definition.
+	EnvironmentFiles []EnvironmentFile `locationName:"environmentFiles" type:"list"`
+
 	// The hard limit (in MiB) of memory to present to the container, instead of
 	// the default value from the task definition. If your container attempts to
 	// exceed the memory specified here, the container is killed. You must also
@@ -1428,6 +1460,13 @@ func (s ContainerOverride) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ContainerOverride) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ContainerOverride"}
+	if s.EnvironmentFiles != nil {
+		for i, v := range s.EnvironmentFiles {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EnvironmentFiles", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 	if s.ResourceRequirements != nil {
 		for i, v := range s.ResourceRequirements {
 			if err := v.Validate(); err != nil {
@@ -1817,6 +1856,60 @@ func (s *EFSVolumeConfiguration) Validate() error {
 	return nil
 }
 
+// A list of files containing the environment variables to pass to a container.
+// You can specify up to ten environment files. The file must have a .env file
+// extension. Each line in an environment file should contain an environment
+// variable in VARIABLE=VALUE format. Lines beginning with # are treated as
+// comments and are ignored. For more information on the environment variable
+// file syntax, see Declare default environment variables in file (https://docs.docker.com/compose/env-file/).
+//
+// If there are environment variables specified using the environment parameter
+// in a container definition, they take precedence over the variables contained
+// within an environment file. If multiple environment files are specified that
+// contain the same variable, they are processed from the top down. It is recommended
+// to use unique variable names. For more information, see Specifying Environment
+// Variables (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html)
+// in the Amazon Elastic Container Service Developer Guide.
+//
+// This field is not valid for containers in tasks using the Fargate launch
+// type.
+type EnvironmentFile struct {
+	_ struct{} `type:"structure"`
+
+	// The file type to use. The only supported value is s3.
+	//
+	// Type is a required field
+	Type EnvironmentFileType `locationName:"type" type:"string" required:"true" enum:"true"`
+
+	// The Amazon Resource Name (ARN) of the Amazon S3 object containing the environment
+	// variable file.
+	//
+	// Value is a required field
+	Value *string `locationName:"value" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s EnvironmentFile) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EnvironmentFile) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "EnvironmentFile"}
+	if len(s.Type) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // A failed resource.
 type Failure struct {
 	_ struct{} `type:"structure"`
@@ -2124,8 +2217,9 @@ type KernelCapabilities struct {
 	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
 	// and the --cap-add option to docker run (https://docs.docker.com/engine/reference/run/).
 	//
-	// If you are using tasks that use the Fargate launch type, the add parameter
-	// is not supported.
+	// The SYS_PTRACE capability is supported for tasks that use the Fargate launch
+	// type if they are also using platform version 1.4.0. The other capabilities
+	// are not supported for any platform versions.
 	//
 	// Valid values: "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" |
 	// "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK"
@@ -2184,8 +2278,9 @@ type LinuxParameters struct {
 	// The Linux capabilities for the container that are added to or dropped from
 	// the default configuration provided by Docker.
 	//
-	// If you are using tasks that use the Fargate launch type, capabilities is
-	// supported but the add parameter is not supported.
+	// For tasks that use the Fargate launch type, capabilities is supported for
+	// all platform versions but the add parameter is only supported if using platform
+	// version 1.4.0 or later.
 	Capabilities *KernelCapabilities `locationName:"capabilities" type:"structure"`
 
 	// Any host devices to expose to the container. This parameter maps to Devices

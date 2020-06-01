@@ -106,6 +106,7 @@ func (c *Client) TestRepositoryTriggersRequest(input *TestRepositoryTriggersInpu
 	}
 
 	req := c.newRequest(op, input, &TestRepositoryTriggersOutput{})
+
 	return TestRepositoryTriggersRequest{Request: req, Input: input, Copy: c.TestRepositoryTriggersRequest}
 }
 

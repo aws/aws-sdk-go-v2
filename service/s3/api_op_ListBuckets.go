@@ -90,6 +90,7 @@ func (c *Client) ListBucketsRequest(input *ListBucketsInput) ListBucketsRequest 
 	}
 
 	req := c.newRequest(op, input, &ListBucketsOutput{})
+
 	return ListBucketsRequest{Request: req, Input: input, Copy: c.ListBucketsRequest}
 }
 

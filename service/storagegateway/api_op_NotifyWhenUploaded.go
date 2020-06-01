@@ -96,6 +96,7 @@ func (c *Client) NotifyWhenUploadedRequest(input *NotifyWhenUploadedInput) Notif
 	}
 
 	req := c.newRequest(op, input, &NotifyWhenUploadedOutput{})
+
 	return NotifyWhenUploadedRequest{Request: req, Input: input, Copy: c.NotifyWhenUploadedRequest}
 }
 

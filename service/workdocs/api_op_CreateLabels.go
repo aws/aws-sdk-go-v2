@@ -129,6 +129,7 @@ func (c *Client) CreateLabelsRequest(input *CreateLabelsInput) CreateLabelsReque
 	}
 
 	req := c.newRequest(op, input, &CreateLabelsOutput{})
+
 	return CreateLabelsRequest{Request: req, Input: input, Copy: c.CreateLabelsRequest}
 }
 

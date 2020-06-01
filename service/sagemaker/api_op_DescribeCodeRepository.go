@@ -103,6 +103,7 @@ func (c *Client) DescribeCodeRepositoryRequest(input *DescribeCodeRepositoryInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeCodeRepositoryOutput{})
+
 	return DescribeCodeRepositoryRequest{Request: req, Input: input, Copy: c.DescribeCodeRepositoryRequest}
 }
 

@@ -92,6 +92,7 @@ func (c *Client) GetV2LoggingOptionsRequest(input *GetV2LoggingOptionsInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetV2LoggingOptionsOutput{})
+
 	return GetV2LoggingOptionsRequest{Request: req, Input: input, Copy: c.GetV2LoggingOptionsRequest}
 }
 

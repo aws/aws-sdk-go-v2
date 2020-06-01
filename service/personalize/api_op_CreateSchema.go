@@ -101,6 +101,7 @@ func (c *Client) CreateSchemaRequest(input *CreateSchemaInput) CreateSchemaReque
 	}
 
 	req := c.newRequest(op, input, &CreateSchemaOutput{})
+
 	return CreateSchemaRequest{Request: req, Input: input, Copy: c.CreateSchemaRequest}
 }
 

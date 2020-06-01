@@ -103,6 +103,7 @@ func (c *Client) DeleteBackupRequest(input *DeleteBackupInput) DeleteBackupReque
 			Fn:   de.Handler,
 		})
 	}
+
 	return DeleteBackupRequest{Request: req, Input: input, Copy: c.DeleteBackupRequest}
 }
 

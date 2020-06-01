@@ -137,6 +137,7 @@ func (c *Client) NotifyMigrationTaskStateRequest(input *NotifyMigrationTaskState
 	}
 
 	req := c.newRequest(op, input, &NotifyMigrationTaskStateOutput{})
+
 	return NotifyMigrationTaskStateRequest{Request: req, Input: input, Copy: c.NotifyMigrationTaskStateRequest}
 }
 

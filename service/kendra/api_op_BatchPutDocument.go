@@ -15,8 +15,16 @@ type BatchPutDocumentInput struct {
 
 	// One or more documents to add to the index.
 	//
-	// Each document is limited to 5 Mb, the total size of the list is limited to
-	// 50 Mb.
+	// Documents have the following file size limits.
+	//
+	//    * 5 MB total size for inline documents
+	//
+	//    * 50 MB total size for files from an S3 bucket
+	//
+	//    * 5 MB extracted text for any file
+	//
+	// For more information about file size and transaction per second quotas, see
+	// Quotas (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
 	//
 	// Documents is a required field
 	Documents []Document `min:"1" type:"list" required:"true"`
@@ -79,7 +87,8 @@ type BatchPutDocumentOutput struct {
 	// why the document couldn't be added to the index.
 	//
 	// If there was an error adding a document to an index the error is reported
-	// in your AWS CloudWatch log.
+	// in your AWS CloudWatch log. For more information, see Monitoring Amazon Kendra
+	// with Amazon CloudWatch Logs (https://docs.aws.amazon.com/kendra/latest/dg/cloudwatch-logs.html)
 	FailedDocuments []BatchPutDocumentResponseFailedDocument `type:"list"`
 }
 
@@ -125,6 +134,7 @@ func (c *Client) BatchPutDocumentRequest(input *BatchPutDocumentInput) BatchPutD
 	}
 
 	req := c.newRequest(op, input, &BatchPutDocumentOutput{})
+
 	return BatchPutDocumentRequest{Request: req, Input: input, Copy: c.BatchPutDocumentRequest}
 }
 

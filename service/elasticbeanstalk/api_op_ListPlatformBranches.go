@@ -119,6 +119,7 @@ func (c *Client) ListPlatformBranchesRequest(input *ListPlatformBranchesInput) L
 	}
 
 	req := c.newRequest(op, input, &ListPlatformBranchesOutput{})
+
 	return ListPlatformBranchesRequest{Request: req, Input: input, Copy: c.ListPlatformBranchesRequest}
 }
 

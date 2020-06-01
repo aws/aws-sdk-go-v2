@@ -181,6 +181,7 @@ func (c *Client) GetProvisionedConcurrencyConfigRequest(input *GetProvisionedCon
 	}
 
 	req := c.newRequest(op, input, &GetProvisionedConcurrencyConfigOutput{})
+
 	return GetProvisionedConcurrencyConfigRequest{Request: req, Input: input, Copy: c.GetProvisionedConcurrencyConfigRequest}
 }
 

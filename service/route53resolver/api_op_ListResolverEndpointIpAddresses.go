@@ -111,6 +111,7 @@ func (c *Client) ListResolverEndpointIpAddressesRequest(input *ListResolverEndpo
 	}
 
 	req := c.newRequest(op, input, &ListResolverEndpointIpAddressesOutput{})
+
 	return ListResolverEndpointIpAddressesRequest{Request: req, Input: input, Copy: c.ListResolverEndpointIpAddressesRequest}
 }
 

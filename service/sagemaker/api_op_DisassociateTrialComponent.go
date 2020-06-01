@@ -102,6 +102,7 @@ func (c *Client) DisassociateTrialComponentRequest(input *DisassociateTrialCompo
 	}
 
 	req := c.newRequest(op, input, &DisassociateTrialComponentOutput{})
+
 	return DisassociateTrialComponentRequest{Request: req, Input: input, Copy: c.DisassociateTrialComponentRequest}
 }
 

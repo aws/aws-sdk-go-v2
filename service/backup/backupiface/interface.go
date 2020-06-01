@@ -89,6 +89,8 @@ type ClientAPI interface {
 
 	DescribeRecoveryPointRequest(*backup.DescribeRecoveryPointInput) backup.DescribeRecoveryPointRequest
 
+	DescribeRegionSettingsRequest(*backup.DescribeRegionSettingsInput) backup.DescribeRegionSettingsRequest
+
 	DescribeRestoreJobRequest(*backup.DescribeRestoreJobInput) backup.DescribeRestoreJobRequest
 
 	ExportBackupPlanTemplateRequest(*backup.ExportBackupPlanTemplateInput) backup.ExportBackupPlanTemplateRequest
@@ -152,6 +154,8 @@ type ClientAPI interface {
 	UpdateBackupPlanRequest(*backup.UpdateBackupPlanInput) backup.UpdateBackupPlanRequest
 
 	UpdateRecoveryPointLifecycleRequest(*backup.UpdateRecoveryPointLifecycleInput) backup.UpdateRecoveryPointLifecycleRequest
+
+	UpdateRegionSettingsRequest(*backup.UpdateRegionSettingsInput) backup.UpdateRegionSettingsRequest
 }
 
 var _ ClientAPI = (*backup.Client)(nil)

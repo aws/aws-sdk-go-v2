@@ -106,6 +106,7 @@ func (c *Client) GetCanaryRequest(input *GetCanaryInput) GetCanaryRequest {
 	}
 
 	req := c.newRequest(op, input, &GetCanaryOutput{})
+
 	return GetCanaryRequest{Request: req, Input: input, Copy: c.GetCanaryRequest}
 }
 

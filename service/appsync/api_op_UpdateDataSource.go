@@ -216,6 +216,7 @@ func (c *Client) UpdateDataSourceRequest(input *UpdateDataSourceInput) UpdateDat
 	}
 
 	req := c.newRequest(op, input, &UpdateDataSourceOutput{})
+
 	return UpdateDataSourceRequest{Request: req, Input: input, Copy: c.UpdateDataSourceRequest}
 }
 

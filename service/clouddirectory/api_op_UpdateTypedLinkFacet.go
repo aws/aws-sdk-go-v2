@@ -165,6 +165,7 @@ func (c *Client) UpdateTypedLinkFacetRequest(input *UpdateTypedLinkFacetInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateTypedLinkFacetOutput{})
+
 	return UpdateTypedLinkFacetRequest{Request: req, Input: input, Copy: c.UpdateTypedLinkFacetRequest}
 }
 

@@ -86,6 +86,7 @@ func (c *Client) DescribeAutoScalingGroupsRequest(input *DescribeAutoScalingGrou
 	}
 
 	req := c.newRequest(op, input, &DescribeAutoScalingGroupsOutput{})
+
 	return DescribeAutoScalingGroupsRequest{Request: req, Input: input, Copy: c.DescribeAutoScalingGroupsRequest}
 }
 

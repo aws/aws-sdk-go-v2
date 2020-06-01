@@ -157,7 +157,7 @@ type AutoScalingGroup struct {
 
 	// The maximum amount of time, in seconds, that an instance can be in service.
 	//
-	// Valid Range: Minimum value of 604800.
+	// Valid Range: Minimum value of 0.
 	MaxInstanceLifetime *int64 `type:"integer"`
 
 	// The maximum size of the group.
@@ -184,7 +184,8 @@ type AutoScalingGroup struct {
 	// group uses to call other AWS services on your behalf.
 	ServiceLinkedRoleARN *string `min:"1" type:"string"`
 
-	// The current state of the group when DeleteAutoScalingGroup is in progress.
+	// The current state of the group when the DeleteAutoScalingGroup operation
+	// is in progress.
 	Status *string `min:"1" type:"string"`
 
 	// The suspended processes associated with the group.
@@ -279,17 +280,23 @@ type BlockDeviceMapping struct {
 	// DeviceName is a required field
 	DeviceName *string `min:"1" type:"string" required:"true"`
 
-	// The information about the Amazon EBS volume.
+	// Parameters used to automatically set up EBS volumes when an instance is launched.
+	//
+	// You can specify either VirtualName or Ebs, but not both.
 	Ebs *Ebs `type:"structure"`
 
-	// Suppresses a device mapping.
+	// Setting this value to true suppresses the specified device included in the
+	// block device mapping of the AMI.
 	//
-	// If this parameter is true for the root device, the instance might fail the
-	// EC2 health check. In that case, Amazon EC2 Auto Scaling launches a replacement
-	// instance.
+	// If NoDevice is true for the root device, instances might fail the EC2 health
+	// check. In that case, Amazon EC2 Auto Scaling launches replacement instances.
+	//
+	// If you specify NoDevice, you cannot specify Ebs.
 	NoDevice *bool `type:"boolean"`
 
 	// The name of the virtual device (for example, ephemeral0).
+	//
+	// You can specify either VirtualName or Ebs, but not both.
 	VirtualName *string `min:"1" type:"string"`
 }
 
@@ -401,7 +408,8 @@ func (s *CustomizedMetricSpecification) Validate() error {
 	return nil
 }
 
-// Describes an Amazon EBS volume. Used in combination with BlockDeviceMapping.
+// Describes information used to set up an Amazon EBS volume specified in a
+// block device mapping.
 type Ebs struct {
 	_ struct{} `type:"structure"`
 
@@ -522,6 +530,16 @@ type EnabledMetric struct {
 	//    * GroupTerminatingInstances
 	//
 	//    * GroupTotalInstances
+	//
+	//    * GroupInServiceCapacity
+	//
+	//    * GroupPendingCapacity
+	//
+	//    * GroupStandbyCapacity
+	//
+	//    * GroupTerminatingCapacity
+	//
+	//    * GroupTotalCapacity
 	Metric *string `min:"1" type:"string"`
 }
 
@@ -551,15 +569,19 @@ func (s FailedScheduledUpdateGroupActionRequest) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes a filter.
+// Describes a filter that is used to return a more specific list of results
+// when describing tags.
+//
+// For more information, see Tagging Auto Scaling Groups and Instances (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html)
+// in the Amazon EC2 Auto Scaling User Guide.
 type Filter struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the filter. The valid values are: "auto-scaling-group", "key",
-	// "value", and "propagate-at-launch".
+	// The name of the filter. The valid values are: auto-scaling-group, key, value,
+	// and propagate-at-launch.
 	Name *string `type:"string"`
 
-	// The value of the filter.
+	// One or more filter values. Filter values are case-sensitive.
 	Values []string `type:"list"`
 }
 
@@ -882,9 +904,12 @@ type LaunchTemplate struct {
 	// or launch template name in the request.
 	LaunchTemplateSpecification *LaunchTemplateSpecification `type:"structure"`
 
-	// An optional setting. Any parameters that you specify override the same parameters
-	// in the launch template. Currently, the only supported override is instance
-	// type. You can specify between 1 and 20 instance types.
+	// Any parameters that you specify override the same parameters in the launch
+	// template. Currently, the only supported override is instance type. You can
+	// specify between 1 and 20 instance types.
+	//
+	// If not provided, Amazon EC2 Auto Scaling will use the instance type specified
+	// in the launch template to launch instances.
 	Overrides []LaunchTemplateOverrides `type:"list"`
 }
 
@@ -915,11 +940,16 @@ func (s *LaunchTemplate) Validate() error {
 	return nil
 }
 
-// Describes an override for a launch template.
+// Describes an override for a launch template. Currently, the only supported
+// override is instance type.
+//
+// The maximum number of instance type overrides that can be associated with
+// an Auto Scaling group is 20.
 type LaunchTemplateOverrides struct {
 	_ struct{} `type:"structure"`
 
-	// The instance type.
+	// The instance type. You must use an instance type that is supported in your
+	// requested Region and Availability Zones.
 	//
 	// For information about available instance types, see Available Instance Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes)
@@ -961,7 +991,8 @@ func (s *LaunchTemplateOverrides) Validate() error {
 	return nil
 }
 
-// Describes a launch template and the launch template version.
+// Describes the Amazon EC2 launch template and the launch template version
+// that can be used by an Auto Scaling group to configure Amazon EC2 instances.
 //
 // The launch template that is specified must be configured for use with an
 // Auto Scaling group. For more information, see Creating a Launch Template
@@ -970,19 +1001,34 @@ func (s *LaunchTemplateOverrides) Validate() error {
 type LaunchTemplateSpecification struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the launch template. You must specify either a template ID or a
-	// template name.
+	// The ID of the launch template. To get the template ID, use the Amazon EC2
+	// DescribeLaunchTemplates (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeLaunchTemplates.html)
+	// API operation. New launch templates can be created using the Amazon EC2 CreateLaunchTemplate
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html)
+	// API.
+	//
+	// You must specify either a template ID or a template name.
 	LaunchTemplateId *string `min:"1" type:"string"`
 
-	// The name of the launch template. You must specify either a template name
-	// or a template ID.
+	// The name of the launch template. To get the template name, use the Amazon
+	// EC2 DescribeLaunchTemplates (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeLaunchTemplates.html)
+	// API operation. New launch templates can be created using the Amazon EC2 CreateLaunchTemplate
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html)
+	// API.
+	//
+	// You must specify either a template ID or a template name.
 	LaunchTemplateName *string `min:"3" type:"string"`
 
-	// The version number, $Latest, or $Default. If the value is $Latest, Amazon
-	// EC2 Auto Scaling selects the latest version of the launch template when launching
-	// instances. If the value is $Default, Amazon EC2 Auto Scaling selects the
-	// default version of the launch template when launching instances. The default
-	// value is $Default.
+	// The version number, $Latest, or $Default. To get the version number, use
+	// the Amazon EC2 DescribeLaunchTemplateVersions (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeLaunchTemplateVersions.html)
+	// API operation. New launch template versions can be created using the Amazon
+	// EC2 CreateLaunchTemplateVersion (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplateVersion.html)
+	// API.
+	//
+	// If the value is $Latest, Amazon EC2 Auto Scaling selects the latest version
+	// of the launch template when launching instances. If the value is $Default,
+	// Amazon EC2 Auto Scaling selects the default version of the launch template
+	// when launching instances. The default value is $Default.
 	Version *string `min:"1" type:"string"`
 }
 
@@ -1012,7 +1058,6 @@ func (s *LaunchTemplateSpecification) Validate() error {
 
 // Describes a lifecycle hook, which tells Amazon EC2 Auto Scaling that you
 // want to perform an action whenever it launches instances or terminates instances.
-// Used in response to DescribeLifecycleHooks.
 type LifecycleHook struct {
 	_ struct{} `type:"structure"`
 
@@ -1064,7 +1109,8 @@ func (s LifecycleHook) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes a lifecycle hook. Used in combination with CreateAutoScalingGroup.
+// Describes information used to specify a lifecycle hook for an Auto Scaling
+// group.
 //
 // A lifecycle hook tells Amazon EC2 Auto Scaling to perform an action on an
 // instance when the instance launches (before it is put into service) or as
@@ -1085,18 +1131,12 @@ func (s LifecycleHook) String() string {
 // launch or terminate.
 //
 // If you need more time, record the lifecycle action heartbeat to keep the
-// instance in a pending state using RecordLifecycleActionHeartbeat.
+// instance in a pending state.
 //
-// If you finish before the timeout period ends, complete the lifecycle action
-// using CompleteLifecycleAction.
+// If you finish before the timeout period ends, complete the lifecycle action.
 //
 // For more information, see Amazon EC2 Auto Scaling Lifecycle Hooks (https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html)
 // in the Amazon EC2 Auto Scaling User Guide.
-//
-// You can view the lifecycle hooks for an Auto Scaling group using DescribeLifecycleHooks.
-// You can modify an existing lifecycle hook or create new lifecycle hooks using
-// PutLifecycleHook. If you are no longer using a lifecycle hook, you can delete
-// it using DeleteLifecycleHook.
 type LifecycleHookSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -1568,24 +1608,25 @@ func (s ScalingPolicy) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes a scheduled scaling action. Used in response to DescribeScheduledActions.
+// Describes a scheduled scaling action.
 type ScheduledUpdateGroupAction struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the Auto Scaling group.
 	AutoScalingGroupName *string `min:"1" type:"string"`
 
-	// The number of instances you prefer to maintain in the group.
+	// The desired capacity is the initial capacity of the Auto Scaling group after
+	// the scheduled action runs and the capacity it attempts to maintain.
 	DesiredCapacity *int64 `type:"integer"`
 
 	// The date and time in UTC for the recurring schedule to end. For example,
 	// "2019-06-01T00:00:00Z".
 	EndTime *time.Time `type:"timestamp"`
 
-	// The maximum number of instances in the Auto Scaling group.
+	// The maximum size of the Auto Scaling group.
 	MaxSize *int64 `type:"integer"`
 
-	// The minimum number of instances in the Auto Scaling group.
+	// The minimum size of the Auto Scaling group.
 	MinSize *int64 `type:"integer"`
 
 	// The recurring schedule for the action, in Unix cron syntax format.
@@ -1612,25 +1653,26 @@ func (s ScheduledUpdateGroupAction) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes one or more scheduled scaling action updates for a specified Auto
-// Scaling group. Used in combination with BatchPutScheduledUpdateGroupAction.
+// Describes information used for one or more scheduled scaling action updates
+// in a BatchPutScheduledUpdateGroupAction operation.
 //
 // When updating a scheduled scaling action, all optional parameters are left
 // unchanged if not specified.
 type ScheduledUpdateGroupActionRequest struct {
 	_ struct{} `type:"structure"`
 
-	// The number of EC2 instances that should be running in the group.
+	// The desired capacity is the initial capacity of the Auto Scaling group after
+	// the scheduled action runs and the capacity it attempts to maintain.
 	DesiredCapacity *int64 `type:"integer"`
 
 	// The date and time for the recurring schedule to end. Amazon EC2 Auto Scaling
 	// does not perform the action after this time.
 	EndTime *time.Time `type:"timestamp"`
 
-	// The maximum number of instances in the Auto Scaling group.
+	// The maximum size of the Auto Scaling group.
 	MaxSize *int64 `type:"integer"`
 
-	// The minimum number of instances in the Auto Scaling group.
+	// The minimum size of the Auto Scaling group.
 	MinSize *int64 `type:"integer"`
 
 	// The recurring schedule for the action, in Unix cron syntax format. This format
@@ -1684,9 +1726,8 @@ func (s *ScheduledUpdateGroupActionRequest) Validate() error {
 	return nil
 }
 
-// Describes an adjustment based on the difference between the value of the
-// aggregated CloudWatch metric and the breach threshold that you've defined
-// for the alarm. Used in combination with PutScalingPolicy.
+// Describes information used to create a step adjustment for a step scaling
+// policy.
 //
 // For the following examples, suppose that you have an alarm with a breach
 // threshold of 50:
@@ -1712,6 +1753,9 @@ func (s *ScheduledUpdateGroupActionRequest) Validate() error {
 //    with a null upper bound.
 //
 //    * The upper and lower bound can't be null in the same step adjustment.
+//
+// For more information, see Step Adjustments (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#as-scaling-steps)
+// in the Amazon EC2 Auto Scaling User Guide.
 type StepAdjustment struct {
 	_ struct{} `type:"structure"`
 
@@ -1759,8 +1803,10 @@ func (s *StepAdjustment) Validate() error {
 	return nil
 }
 
-// Describes an automatic scaling process that has been suspended. For more
-// information, see ProcessType.
+// Describes an automatic scaling process that has been suspended.
+//
+// For more information, see Scaling Processes (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html#process-types)
+// in the Amazon EC2 Auto Scaling User Guide.
 type SuspendedProcess struct {
 	_ struct{} `type:"structure"`
 

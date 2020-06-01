@@ -189,6 +189,7 @@ func (c *Client) SignUpRequest(input *SignUpInput) SignUpRequest {
 
 	req := c.newRequest(op, input, &SignUpOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return SignUpRequest{Request: req, Input: input, Copy: c.SignUpRequest}
 }
 

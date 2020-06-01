@@ -134,6 +134,7 @@ func (c *Client) DescribeDBInstanceAutomatedBackupsRequest(input *DescribeDBInst
 	}
 
 	req := c.newRequest(op, input, &DescribeDBInstanceAutomatedBackupsOutput{})
+
 	return DescribeDBInstanceAutomatedBackupsRequest{Request: req, Input: input, Copy: c.DescribeDBInstanceAutomatedBackupsRequest}
 }
 

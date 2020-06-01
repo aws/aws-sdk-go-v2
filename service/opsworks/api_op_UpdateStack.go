@@ -254,6 +254,7 @@ func (c *Client) UpdateStackRequest(input *UpdateStackInput) UpdateStackRequest 
 	req := c.newRequest(op, input, &UpdateStackOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateStackRequest{Request: req, Input: input, Copy: c.UpdateStackRequest}
 }
 

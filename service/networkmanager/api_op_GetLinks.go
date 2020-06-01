@@ -188,6 +188,7 @@ func (c *Client) GetLinksRequest(input *GetLinksInput) GetLinksRequest {
 	}
 
 	req := c.newRequest(op, input, &GetLinksOutput{})
+
 	return GetLinksRequest{Request: req, Input: input, Copy: c.GetLinksRequest}
 }
 

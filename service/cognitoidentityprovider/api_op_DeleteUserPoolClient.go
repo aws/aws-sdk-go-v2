@@ -93,6 +93,7 @@ func (c *Client) DeleteUserPoolClientRequest(input *DeleteUserPoolClientInput) D
 	req := c.newRequest(op, input, &DeleteUserPoolClientOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteUserPoolClientRequest{Request: req, Input: input, Copy: c.DeleteUserPoolClientRequest}
 }
 

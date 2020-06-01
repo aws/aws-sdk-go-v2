@@ -144,6 +144,7 @@ func (c *Client) CreatePackagingGroupRequest(input *CreatePackagingGroupInput) C
 	}
 
 	req := c.newRequest(op, input, &CreatePackagingGroupOutput{})
+
 	return CreatePackagingGroupRequest{Request: req, Input: input, Copy: c.CreatePackagingGroupRequest}
 }
 

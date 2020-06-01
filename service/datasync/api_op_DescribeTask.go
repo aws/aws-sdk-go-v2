@@ -142,6 +142,7 @@ func (c *Client) DescribeTaskRequest(input *DescribeTaskInput) DescribeTaskReque
 	}
 
 	req := c.newRequest(op, input, &DescribeTaskOutput{})
+
 	return DescribeTaskRequest{Request: req, Input: input, Copy: c.DescribeTaskRequest}
 }
 

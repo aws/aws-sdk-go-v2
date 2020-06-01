@@ -64,7 +64,7 @@ const (
 	// "DeploymentConfigAlreadyExistsException".
 	//
 	// A deployment configuration with the specified name with the IAM user or AWS
-	// account already exists .
+	// account already exists.
 	ErrCodeDeploymentConfigAlreadyExistsException = "DeploymentConfigAlreadyExistsException"
 
 	// ErrCodeDeploymentConfigDoesNotExistException for service response error code
@@ -314,7 +314,8 @@ const (
 	// ErrCodeInvalidComputePlatformException for service response error code
 	// "InvalidComputePlatformException".
 	//
-	// The computePlatform is invalid. The computePlatform should be Lambda or Server.
+	// The computePlatform is invalid. The computePlatform should be Lambda, Server,
+	// or ECS.
 	ErrCodeInvalidComputePlatformException = "InvalidComputePlatformException"
 
 	// ErrCodeInvalidDeployedStateFilterException for service response error code
@@ -392,6 +393,12 @@ const (
 	//
 	// The Amazon ECS service identifier is not valid.
 	ErrCodeInvalidECSServiceException = "InvalidECSServiceException"
+
+	// ErrCodeInvalidExternalIdException for service response error code
+	// "InvalidExternalIdException".
+	//
+	// The external ID was specified in an invalid format.
+	ErrCodeInvalidExternalIdException = "InvalidExternalIdException"
 
 	// ErrCodeInvalidFileExistsBehaviorException for service response error code
 	// "InvalidFileExistsBehaviorException".

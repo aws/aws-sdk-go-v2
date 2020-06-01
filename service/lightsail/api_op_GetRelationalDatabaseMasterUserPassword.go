@@ -95,6 +95,7 @@ func (c *Client) GetRelationalDatabaseMasterUserPasswordRequest(input *GetRelati
 	}
 
 	req := c.newRequest(op, input, &GetRelationalDatabaseMasterUserPasswordOutput{})
+
 	return GetRelationalDatabaseMasterUserPasswordRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseMasterUserPasswordRequest}
 }
 

@@ -156,6 +156,7 @@ func (c *Client) StartDominantLanguageDetectionJobRequest(input *StartDominantLa
 	}
 
 	req := c.newRequest(op, input, &StartDominantLanguageDetectionJobOutput{})
+
 	return StartDominantLanguageDetectionJobRequest{Request: req, Input: input, Copy: c.StartDominantLanguageDetectionJobRequest}
 }
 

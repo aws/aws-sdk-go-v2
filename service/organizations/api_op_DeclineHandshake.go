@@ -90,6 +90,7 @@ func (c *Client) DeclineHandshakeRequest(input *DeclineHandshakeInput) DeclineHa
 	}
 
 	req := c.newRequest(op, input, &DeclineHandshakeOutput{})
+
 	return DeclineHandshakeRequest{Request: req, Input: input, Copy: c.DeclineHandshakeRequest}
 }
 

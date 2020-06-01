@@ -118,6 +118,7 @@ func (c *Client) GetDomainSuggestionsRequest(input *GetDomainSuggestionsInput) G
 	}
 
 	req := c.newRequest(op, input, &GetDomainSuggestionsOutput{})
+
 	return GetDomainSuggestionsRequest{Request: req, Input: input, Copy: c.GetDomainSuggestionsRequest}
 }
 

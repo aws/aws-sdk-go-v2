@@ -60,8 +60,10 @@ const opUpdateManagedInstanceRole = "UpdateManagedInstanceRole"
 // UpdateManagedInstanceRoleRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Assigns or changes an Amazon Identity and Access Management (IAM) role for
-// the managed instance.
+// Changes the Amazon Identity and Access Management (IAM) role that is assigned
+// to the on-premises instance or virtual machines (VM). IAM roles are first
+// assigned to these hybrid instances during the activation process. For more
+// information, see CreateActivation.
 //
 //    // Example sending a request using UpdateManagedInstanceRoleRequest.
 //    req := client.UpdateManagedInstanceRoleRequest(params)
@@ -83,6 +85,7 @@ func (c *Client) UpdateManagedInstanceRoleRequest(input *UpdateManagedInstanceRo
 	}
 
 	req := c.newRequest(op, input, &UpdateManagedInstanceRoleOutput{})
+
 	return UpdateManagedInstanceRoleRequest{Request: req, Input: input, Copy: c.UpdateManagedInstanceRoleRequest}
 }
 

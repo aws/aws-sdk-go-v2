@@ -140,6 +140,7 @@ func (c *Client) ListPublishedSchemaArnsRequest(input *ListPublishedSchemaArnsIn
 	}
 
 	req := c.newRequest(op, input, &ListPublishedSchemaArnsOutput{})
+
 	return ListPublishedSchemaArnsRequest{Request: req, Input: input, Copy: c.ListPublishedSchemaArnsRequest}
 }
 

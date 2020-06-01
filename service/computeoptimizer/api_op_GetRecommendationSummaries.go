@@ -82,6 +82,7 @@ func (c *Client) GetRecommendationSummariesRequest(input *GetRecommendationSumma
 	}
 
 	req := c.newRequest(op, input, &GetRecommendationSummariesOutput{})
+
 	return GetRecommendationSummariesRequest{Request: req, Input: input, Copy: c.GetRecommendationSummariesRequest}
 }
 

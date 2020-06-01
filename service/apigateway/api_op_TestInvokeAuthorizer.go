@@ -282,6 +282,7 @@ func (c *Client) TestInvokeAuthorizerRequest(input *TestInvokeAuthorizerInput) T
 	}
 
 	req := c.newRequest(op, input, &TestInvokeAuthorizerOutput{})
+
 	return TestInvokeAuthorizerRequest{Request: req, Input: input, Copy: c.TestInvokeAuthorizerRequest}
 }
 

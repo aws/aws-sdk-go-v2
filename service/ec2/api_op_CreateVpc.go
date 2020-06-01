@@ -133,6 +133,7 @@ func (c *Client) CreateVpcRequest(input *CreateVpcInput) CreateVpcRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateVpcOutput{})
+
 	return CreateVpcRequest{Request: req, Input: input, Copy: c.CreateVpcRequest}
 }
 

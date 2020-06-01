@@ -114,6 +114,7 @@ func (c *Client) DeleteRecoveryPointRequest(input *DeleteRecoveryPointInput) Del
 	req := c.newRequest(op, input, &DeleteRecoveryPointOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteRecoveryPointRequest{Request: req, Input: input, Copy: c.DeleteRecoveryPointRequest}
 }
 

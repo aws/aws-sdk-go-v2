@@ -76,6 +76,7 @@ func (c *Client) DeleteFlowDefinitionRequest(input *DeleteFlowDefinitionInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteFlowDefinitionOutput{})
+
 	return DeleteFlowDefinitionRequest{Request: req, Input: input, Copy: c.DeleteFlowDefinitionRequest}
 }
 

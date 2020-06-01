@@ -107,6 +107,7 @@ func (c *Client) AddWorkingStorageRequest(input *AddWorkingStorageInput) AddWork
 	}
 
 	req := c.newRequest(op, input, &AddWorkingStorageOutput{})
+
 	return AddWorkingStorageRequest{Request: req, Input: input, Copy: c.AddWorkingStorageRequest}
 }
 

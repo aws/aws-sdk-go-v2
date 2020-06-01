@@ -83,6 +83,7 @@ func (c *Client) DescribeConnectionsOnInterconnectRequest(input *DescribeConnect
 	}
 
 	req := c.newRequest(op, input, &DescribeConnectionsOnInterconnectOutput{})
+
 	return DescribeConnectionsOnInterconnectRequest{Request: req, Input: input, Copy: c.DescribeConnectionsOnInterconnectRequest}
 }
 

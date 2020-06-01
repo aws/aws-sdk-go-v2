@@ -196,6 +196,7 @@ func (c *Client) SignRequest(input *SignInput) SignRequest {
 	}
 
 	req := c.newRequest(op, input, &SignOutput{})
+
 	return SignRequest{Request: req, Input: input, Copy: c.SignRequest}
 }
 

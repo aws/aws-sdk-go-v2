@@ -99,6 +99,7 @@ func (c *Client) DescribeAnalysisSchemesRequest(input *DescribeAnalysisSchemesIn
 	}
 
 	req := c.newRequest(op, input, &DescribeAnalysisSchemesOutput{})
+
 	return DescribeAnalysisSchemesRequest{Request: req, Input: input, Copy: c.DescribeAnalysisSchemesRequest}
 }
 

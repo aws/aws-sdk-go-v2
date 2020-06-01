@@ -198,6 +198,7 @@ func (c *Client) ListRecommendationFeedbackRequest(input *ListRecommendationFeed
 	}
 
 	req := c.newRequest(op, input, &ListRecommendationFeedbackOutput{})
+
 	return ListRecommendationFeedbackRequest{Request: req, Input: input, Copy: c.ListRecommendationFeedbackRequest}
 }
 

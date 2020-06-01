@@ -2,6 +2,23 @@
 
 package kinesisvideoarchivedmedia
 
+type ClipFragmentSelectorType string
+
+// Enum values for ClipFragmentSelectorType
+const (
+	ClipFragmentSelectorTypeProducerTimestamp ClipFragmentSelectorType = "PRODUCER_TIMESTAMP"
+	ClipFragmentSelectorTypeServerTimestamp   ClipFragmentSelectorType = "SERVER_TIMESTAMP"
+)
+
+func (enum ClipFragmentSelectorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ClipFragmentSelectorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ContainerFormat string
 
 // Enum values for ContainerFormat

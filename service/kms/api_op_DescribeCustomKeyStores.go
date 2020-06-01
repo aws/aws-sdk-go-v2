@@ -143,6 +143,7 @@ func (c *Client) DescribeCustomKeyStoresRequest(input *DescribeCustomKeyStoresIn
 	}
 
 	req := c.newRequest(op, input, &DescribeCustomKeyStoresOutput{})
+
 	return DescribeCustomKeyStoresRequest{Request: req, Input: input, Copy: c.DescribeCustomKeyStoresRequest}
 }
 

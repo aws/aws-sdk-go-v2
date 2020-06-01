@@ -159,6 +159,7 @@ func (c *Client) UpdateContactAttributesRequest(input *UpdateContactAttributesIn
 	}
 
 	req := c.newRequest(op, input, &UpdateContactAttributesOutput{})
+
 	return UpdateContactAttributesRequest{Request: req, Input: input, Copy: c.UpdateContactAttributesRequest}
 }
 

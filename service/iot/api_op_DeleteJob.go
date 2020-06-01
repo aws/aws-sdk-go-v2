@@ -125,6 +125,7 @@ func (c *Client) DeleteJobRequest(input *DeleteJobInput) DeleteJobRequest {
 	req := c.newRequest(op, input, &DeleteJobOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteJobRequest{Request: req, Input: input, Copy: c.DeleteJobRequest}
 }
 

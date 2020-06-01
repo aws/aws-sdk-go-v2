@@ -76,6 +76,7 @@ func (c *Client) GetRelationalDatabaseBundlesRequest(input *GetRelationalDatabas
 	}
 
 	req := c.newRequest(op, input, &GetRelationalDatabaseBundlesOutput{})
+
 	return GetRelationalDatabaseBundlesRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseBundlesRequest}
 }
 

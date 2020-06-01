@@ -125,6 +125,7 @@ func (c *Client) ListFleetsRequest(input *ListFleetsInput) ListFleetsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListFleetsOutput{})
+
 	return ListFleetsRequest{Request: req, Input: input, Copy: c.ListFleetsRequest}
 }
 

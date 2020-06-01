@@ -91,6 +91,7 @@ func (c *Client) DeleteScalingPlanRequest(input *DeleteScalingPlanInput) DeleteS
 	}
 
 	req := c.newRequest(op, input, &DeleteScalingPlanOutput{})
+
 	return DeleteScalingPlanRequest{Request: req, Input: input, Copy: c.DeleteScalingPlanRequest}
 }
 

@@ -93,6 +93,7 @@ func (c *Client) PurchaseReservedDBInstancesOfferingRequest(input *PurchaseReser
 	}
 
 	req := c.newRequest(op, input, &PurchaseReservedDBInstancesOfferingOutput{})
+
 	return PurchaseReservedDBInstancesOfferingRequest{Request: req, Input: input, Copy: c.PurchaseReservedDBInstancesOfferingRequest}
 }
 

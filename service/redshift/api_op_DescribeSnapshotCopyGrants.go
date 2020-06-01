@@ -114,6 +114,7 @@ func (c *Client) DescribeSnapshotCopyGrantsRequest(input *DescribeSnapshotCopyGr
 	}
 
 	req := c.newRequest(op, input, &DescribeSnapshotCopyGrantsOutput{})
+
 	return DescribeSnapshotCopyGrantsRequest{Request: req, Input: input, Copy: c.DescribeSnapshotCopyGrantsRequest}
 }
 

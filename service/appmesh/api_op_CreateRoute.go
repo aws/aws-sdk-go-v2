@@ -183,13 +183,8 @@ const opCreateRoute = "CreateRoute"
 //
 // Creates a route that is associated with a virtual router.
 //
-// You can use the prefix parameter in your route specification for path-based
-// routing of requests. For example, if your virtual service name is my-service.local
-// and you want the route to match requests to my-service.local/metrics, your
-// prefix should be /metrics.
-//
-// If your route matches a request, you can distribute traffic to one or more
-// target virtual nodes with relative weighting.
+// You can route several different protocols and define a retry policy for a
+// route. Traffic can be routed to one or more virtual nodes.
 //
 // For more information about routes, see Routes (https://docs.aws.amazon.com/app-mesh/latest/userguide/routes.html).
 //
@@ -213,6 +208,7 @@ func (c *Client) CreateRouteRequest(input *CreateRouteInput) CreateRouteRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateRouteOutput{})
+
 	return CreateRouteRequest{Request: req, Input: input, Copy: c.CreateRouteRequest}
 }
 

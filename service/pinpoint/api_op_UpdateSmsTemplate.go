@@ -134,6 +134,7 @@ func (c *Client) UpdateSmsTemplateRequest(input *UpdateSmsTemplateInput) UpdateS
 	}
 
 	req := c.newRequest(op, input, &UpdateSmsTemplateOutput{})
+
 	return UpdateSmsTemplateRequest{Request: req, Input: input, Copy: c.UpdateSmsTemplateRequest}
 }
 

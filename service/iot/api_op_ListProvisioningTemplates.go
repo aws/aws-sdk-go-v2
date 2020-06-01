@@ -120,6 +120,7 @@ func (c *Client) ListProvisioningTemplatesRequest(input *ListProvisioningTemplat
 	}
 
 	req := c.newRequest(op, input, &ListProvisioningTemplatesOutput{})
+
 	return ListProvisioningTemplatesRequest{Request: req, Input: input, Copy: c.ListProvisioningTemplatesRequest}
 }
 

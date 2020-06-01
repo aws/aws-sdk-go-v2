@@ -102,6 +102,7 @@ func (c *Client) UpdateSAMLProviderRequest(input *UpdateSAMLProviderInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateSAMLProviderOutput{})
+
 	return UpdateSAMLProviderRequest{Request: req, Input: input, Copy: c.UpdateSAMLProviderRequest}
 }
 

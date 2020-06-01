@@ -190,6 +190,7 @@ func (c *Client) StartMatchmakingRequest(input *StartMatchmakingInput) StartMatc
 	}
 
 	req := c.newRequest(op, input, &StartMatchmakingOutput{})
+
 	return StartMatchmakingRequest{Request: req, Input: input, Copy: c.StartMatchmakingRequest}
 }
 

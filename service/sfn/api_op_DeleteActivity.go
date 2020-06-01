@@ -76,6 +76,7 @@ func (c *Client) DeleteActivityRequest(input *DeleteActivityInput) DeleteActivit
 	}
 
 	req := c.newRequest(op, input, &DeleteActivityOutput{})
+
 	return DeleteActivityRequest{Request: req, Input: input, Copy: c.DeleteActivityRequest}
 }
 

@@ -81,6 +81,7 @@ func (c *Client) DeleteStateMachineRequest(input *DeleteStateMachineInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteStateMachineOutput{})
+
 	return DeleteStateMachineRequest{Request: req, Input: input, Copy: c.DeleteStateMachineRequest}
 }
 

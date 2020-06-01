@@ -118,6 +118,7 @@ func (c *Client) GetDomainDeliverabilityCampaignRequest(input *GetDomainDelivera
 	}
 
 	req := c.newRequest(op, input, &GetDomainDeliverabilityCampaignOutput{})
+
 	return GetDomainDeliverabilityCampaignRequest{Request: req, Input: input, Copy: c.GetDomainDeliverabilityCampaignRequest}
 }
 

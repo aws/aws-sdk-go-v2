@@ -244,6 +244,7 @@ func (c *Client) DescribeChannelRequest(input *DescribeChannelInput) DescribeCha
 	}
 
 	req := c.newRequest(op, input, &DescribeChannelOutput{})
+
 	return DescribeChannelRequest{Request: req, Input: input, Copy: c.DescribeChannelRequest}
 }
 

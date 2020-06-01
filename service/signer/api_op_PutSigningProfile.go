@@ -188,6 +188,7 @@ func (c *Client) PutSigningProfileRequest(input *PutSigningProfileInput) PutSign
 	}
 
 	req := c.newRequest(op, input, &PutSigningProfileOutput{})
+
 	return PutSigningProfileRequest{Request: req, Input: input, Copy: c.PutSigningProfileRequest}
 }
 

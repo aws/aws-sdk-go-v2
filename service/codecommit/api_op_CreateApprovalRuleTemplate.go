@@ -129,6 +129,7 @@ func (c *Client) CreateApprovalRuleTemplateRequest(input *CreateApprovalRuleTemp
 	}
 
 	req := c.newRequest(op, input, &CreateApprovalRuleTemplateOutput{})
+
 	return CreateApprovalRuleTemplateRequest{Request: req, Input: input, Copy: c.CreateApprovalRuleTemplateRequest}
 }
 

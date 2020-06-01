@@ -72,6 +72,7 @@ func (c *Client) GetServiceSettingsRequest(input *GetServiceSettingsInput) GetSe
 	}
 
 	req := c.newRequest(op, input, &GetServiceSettingsOutput{})
+
 	return GetServiceSettingsRequest{Request: req, Input: input, Copy: c.GetServiceSettingsRequest}
 }
 

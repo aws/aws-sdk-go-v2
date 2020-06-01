@@ -103,6 +103,7 @@ func (c *Client) AcceptHandshakeRequest(input *AcceptHandshakeInput) AcceptHands
 	}
 
 	req := c.newRequest(op, input, &AcceptHandshakeOutput{})
+
 	return AcceptHandshakeRequest{Request: req, Input: input, Copy: c.AcceptHandshakeRequest}
 }
 

@@ -106,6 +106,7 @@ func (c *Client) PutMetricPolicyRequest(input *PutMetricPolicyInput) PutMetricPo
 	}
 
 	req := c.newRequest(op, input, &PutMetricPolicyOutput{})
+
 	return PutMetricPolicyRequest{Request: req, Input: input, Copy: c.PutMetricPolicyRequest}
 }
 

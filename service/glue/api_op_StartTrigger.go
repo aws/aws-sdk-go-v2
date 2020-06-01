@@ -80,6 +80,7 @@ func (c *Client) StartTriggerRequest(input *StartTriggerInput) StartTriggerReque
 	}
 
 	req := c.newRequest(op, input, &StartTriggerOutput{})
+
 	return StartTriggerRequest{Request: req, Input: input, Copy: c.StartTriggerRequest}
 }
 

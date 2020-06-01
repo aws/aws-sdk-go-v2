@@ -107,6 +107,7 @@ func (c *Client) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionIn
 	}
 
 	req := c.newRequest(op, input, &ModifyEventSubscriptionOutput{})
+
 	return ModifyEventSubscriptionRequest{Request: req, Input: input, Copy: c.ModifyEventSubscriptionRequest}
 }
 

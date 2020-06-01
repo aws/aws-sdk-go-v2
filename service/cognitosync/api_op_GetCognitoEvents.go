@@ -116,6 +116,7 @@ func (c *Client) GetCognitoEventsRequest(input *GetCognitoEventsInput) GetCognit
 	}
 
 	req := c.newRequest(op, input, &GetCognitoEventsOutput{})
+
 	return GetCognitoEventsRequest{Request: req, Input: input, Copy: c.GetCognitoEventsRequest}
 }
 

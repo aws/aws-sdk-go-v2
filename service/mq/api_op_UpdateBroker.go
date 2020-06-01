@@ -210,6 +210,7 @@ func (c *Client) UpdateBrokerRequest(input *UpdateBrokerInput) UpdateBrokerReque
 	}
 
 	req := c.newRequest(op, input, &UpdateBrokerOutput{})
+
 	return UpdateBrokerRequest{Request: req, Input: input, Copy: c.UpdateBrokerRequest}
 }
 

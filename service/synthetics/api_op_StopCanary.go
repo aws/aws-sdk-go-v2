@@ -14,7 +14,7 @@ type StopCanaryInput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the canary that you want to stop. To find the names of your canaries,
-	// use DescribeCanaries.
+	// use DescribeCanaries (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html).
 	//
 	// Name is a required field
 	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
@@ -102,6 +102,7 @@ func (c *Client) StopCanaryRequest(input *StopCanaryInput) StopCanaryRequest {
 	}
 
 	req := c.newRequest(op, input, &StopCanaryOutput{})
+
 	return StopCanaryRequest{Request: req, Input: input, Copy: c.StopCanaryRequest}
 }
 

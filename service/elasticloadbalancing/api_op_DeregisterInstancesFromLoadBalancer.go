@@ -95,6 +95,7 @@ func (c *Client) DeregisterInstancesFromLoadBalancerRequest(input *DeregisterIns
 	}
 
 	req := c.newRequest(op, input, &DeregisterInstancesFromLoadBalancerOutput{})
+
 	return DeregisterInstancesFromLoadBalancerRequest{Request: req, Input: input, Copy: c.DeregisterInstancesFromLoadBalancerRequest}
 }
 

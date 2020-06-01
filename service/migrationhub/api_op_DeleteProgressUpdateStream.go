@@ -103,6 +103,7 @@ func (c *Client) DeleteProgressUpdateStreamRequest(input *DeleteProgressUpdateSt
 	}
 
 	req := c.newRequest(op, input, &DeleteProgressUpdateStreamOutput{})
+
 	return DeleteProgressUpdateStreamRequest{Request: req, Input: input, Copy: c.DeleteProgressUpdateStreamRequest}
 }
 

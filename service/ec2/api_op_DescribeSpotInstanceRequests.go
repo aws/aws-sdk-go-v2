@@ -211,6 +211,7 @@ func (c *Client) DescribeSpotInstanceRequestsRequest(input *DescribeSpotInstance
 	}
 
 	req := c.newRequest(op, input, &DescribeSpotInstanceRequestsOutput{})
+
 	return DescribeSpotInstanceRequestsRequest{Request: req, Input: input, Copy: c.DescribeSpotInstanceRequestsRequest}
 }
 

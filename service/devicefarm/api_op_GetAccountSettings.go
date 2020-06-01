@@ -61,6 +61,7 @@ func (c *Client) GetAccountSettingsRequest(input *GetAccountSettingsInput) GetAc
 	}
 
 	req := c.newRequest(op, input, &GetAccountSettingsOutput{})
+
 	return GetAccountSettingsRequest{Request: req, Input: input, Copy: c.GetAccountSettingsRequest}
 }
 

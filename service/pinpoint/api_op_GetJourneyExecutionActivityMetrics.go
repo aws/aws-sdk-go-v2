@@ -146,6 +146,7 @@ func (c *Client) GetJourneyExecutionActivityMetricsRequest(input *GetJourneyExec
 	}
 
 	req := c.newRequest(op, input, &GetJourneyExecutionActivityMetricsOutput{})
+
 	return GetJourneyExecutionActivityMetricsRequest{Request: req, Input: input, Copy: c.GetJourneyExecutionActivityMetricsRequest}
 }
 

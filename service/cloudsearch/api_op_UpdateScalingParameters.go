@@ -103,6 +103,7 @@ func (c *Client) UpdateScalingParametersRequest(input *UpdateScalingParametersIn
 	}
 
 	req := c.newRequest(op, input, &UpdateScalingParametersOutput{})
+
 	return UpdateScalingParametersRequest{Request: req, Input: input, Copy: c.UpdateScalingParametersRequest}
 }
 

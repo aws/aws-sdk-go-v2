@@ -96,6 +96,7 @@ func (c *Client) AssociateTrialComponentRequest(input *AssociateTrialComponentIn
 	}
 
 	req := c.newRequest(op, input, &AssociateTrialComponentOutput{})
+
 	return AssociateTrialComponentRequest{Request: req, Input: input, Copy: c.AssociateTrialComponentRequest}
 }
 

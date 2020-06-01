@@ -175,6 +175,7 @@ func (c *Client) DescribeAssetRequest(input *DescribeAssetInput) DescribeAssetRe
 	}
 
 	req := c.newRequest(op, input, &DescribeAssetOutput{})
+
 	return DescribeAssetRequest{Request: req, Input: input, Copy: c.DescribeAssetRequest}
 }
 

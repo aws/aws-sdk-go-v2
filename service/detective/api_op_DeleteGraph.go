@@ -98,6 +98,7 @@ func (c *Client) DeleteGraphRequest(input *DeleteGraphInput) DeleteGraphRequest 
 	req := c.newRequest(op, input, &DeleteGraphOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteGraphRequest{Request: req, Input: input, Copy: c.DeleteGraphRequest}
 }
 

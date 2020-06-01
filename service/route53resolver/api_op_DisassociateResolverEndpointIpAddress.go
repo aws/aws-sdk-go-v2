@@ -98,6 +98,7 @@ func (c *Client) DisassociateResolverEndpointIpAddressRequest(input *Disassociat
 	}
 
 	req := c.newRequest(op, input, &DisassociateResolverEndpointIpAddressOutput{})
+
 	return DisassociateResolverEndpointIpAddressRequest{Request: req, Input: input, Copy: c.DisassociateResolverEndpointIpAddressRequest}
 }
 

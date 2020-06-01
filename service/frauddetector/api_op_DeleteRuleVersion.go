@@ -101,6 +101,7 @@ func (c *Client) DeleteRuleVersionRequest(input *DeleteRuleVersionInput) DeleteR
 	}
 
 	req := c.newRequest(op, input, &DeleteRuleVersionOutput{})
+
 	return DeleteRuleVersionRequest{Request: req, Input: input, Copy: c.DeleteRuleVersionRequest}
 }
 

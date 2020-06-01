@@ -107,6 +107,7 @@ func (c *Client) DeleteV2LoggingLevelRequest(input *DeleteV2LoggingLevelInput) D
 	req := c.newRequest(op, input, &DeleteV2LoggingLevelOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteV2LoggingLevelRequest{Request: req, Input: input, Copy: c.DeleteV2LoggingLevelRequest}
 }
 

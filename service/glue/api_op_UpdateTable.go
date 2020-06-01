@@ -103,6 +103,7 @@ func (c *Client) UpdateTableRequest(input *UpdateTableInput) UpdateTableRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateTableOutput{})
+
 	return UpdateTableRequest{Request: req, Input: input, Copy: c.UpdateTableRequest}
 }
 

@@ -81,6 +81,7 @@ func (c *Client) GetUploadRequest(input *GetUploadInput) GetUploadRequest {
 	}
 
 	req := c.newRequest(op, input, &GetUploadOutput{})
+
 	return GetUploadRequest{Request: req, Input: input, Copy: c.GetUploadRequest}
 }
 

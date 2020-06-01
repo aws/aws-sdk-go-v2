@@ -133,6 +133,7 @@ func (c *Client) CreateEnvironmentEC2Request(input *CreateEnvironmentEC2Input) C
 	}
 
 	req := c.newRequest(op, input, &CreateEnvironmentEC2Output{})
+
 	return CreateEnvironmentEC2Request{Request: req, Input: input, Copy: c.CreateEnvironmentEC2Request}
 }
 

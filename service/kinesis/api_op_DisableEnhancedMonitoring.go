@@ -124,6 +124,7 @@ func (c *Client) DisableEnhancedMonitoringRequest(input *DisableEnhancedMonitori
 	}
 
 	req := c.newRequest(op, input, &DisableEnhancedMonitoringOutput{})
+
 	return DisableEnhancedMonitoringRequest{Request: req, Input: input, Copy: c.DisableEnhancedMonitoringRequest}
 }
 

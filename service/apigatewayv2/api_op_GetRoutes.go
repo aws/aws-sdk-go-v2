@@ -130,6 +130,7 @@ func (c *Client) GetRoutesRequest(input *GetRoutesInput) GetRoutesRequest {
 	}
 
 	req := c.newRequest(op, input, &GetRoutesOutput{})
+
 	return GetRoutesRequest{Request: req, Input: input, Copy: c.GetRoutesRequest}
 }
 

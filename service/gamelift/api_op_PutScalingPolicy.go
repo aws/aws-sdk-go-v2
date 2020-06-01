@@ -267,6 +267,7 @@ func (c *Client) PutScalingPolicyRequest(input *PutScalingPolicyInput) PutScalin
 	}
 
 	req := c.newRequest(op, input, &PutScalingPolicyOutput{})
+
 	return PutScalingPolicyRequest{Request: req, Input: input, Copy: c.PutScalingPolicyRequest}
 }
 

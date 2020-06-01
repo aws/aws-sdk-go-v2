@@ -79,6 +79,7 @@ func (c *Client) DescribeTagOptionRequest(input *DescribeTagOptionInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeTagOptionOutput{})
+
 	return DescribeTagOptionRequest{Request: req, Input: input, Copy: c.DescribeTagOptionRequest}
 }
 

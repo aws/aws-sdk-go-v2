@@ -86,6 +86,7 @@ func (c *Client) StopHyperParameterTuningJobRequest(input *StopHyperParameterTun
 	req := c.newRequest(op, input, &StopHyperParameterTuningJobOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StopHyperParameterTuningJobRequest{Request: req, Input: input, Copy: c.StopHyperParameterTuningJobRequest}
 }
 

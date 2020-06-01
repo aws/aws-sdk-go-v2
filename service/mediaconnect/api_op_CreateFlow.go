@@ -226,6 +226,7 @@ func (c *Client) CreateFlowRequest(input *CreateFlowInput) CreateFlowRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateFlowOutput{})
+
 	return CreateFlowRequest{Request: req, Input: input, Copy: c.CreateFlowRequest}
 }
 

@@ -191,6 +191,7 @@ func (c *Client) UpdateVirtualInterfaceAttributesRequest(input *UpdateVirtualInt
 	}
 
 	req := c.newRequest(op, input, &UpdateVirtualInterfaceAttributesOutput{})
+
 	return UpdateVirtualInterfaceAttributesRequest{Request: req, Input: input, Copy: c.UpdateVirtualInterfaceAttributesRequest}
 }
 

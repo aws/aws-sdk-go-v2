@@ -526,6 +526,7 @@ const (
 	WebhookFilterTypeHeadRef        WebhookFilterType = "HEAD_REF"
 	WebhookFilterTypeActorAccountId WebhookFilterType = "ACTOR_ACCOUNT_ID"
 	WebhookFilterTypeFilePath       WebhookFilterType = "FILE_PATH"
+	WebhookFilterTypeCommitMessage  WebhookFilterType = "COMMIT_MESSAGE"
 )
 
 func (enum WebhookFilterType) MarshalValue() (string, error) {

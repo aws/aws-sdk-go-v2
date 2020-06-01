@@ -81,6 +81,7 @@ func (c *Client) ActivateEventSourceRequest(input *ActivateEventSourceInput) Act
 	req := c.newRequest(op, input, &ActivateEventSourceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return ActivateEventSourceRequest{Request: req, Input: input, Copy: c.ActivateEventSourceRequest}
 }
 

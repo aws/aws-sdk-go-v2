@@ -126,6 +126,7 @@ func (c *Client) ExportTransitGatewayRoutesRequest(input *ExportTransitGatewayRo
 	}
 
 	req := c.newRequest(op, input, &ExportTransitGatewayRoutesOutput{})
+
 	return ExportTransitGatewayRoutesRequest{Request: req, Input: input, Copy: c.ExportTransitGatewayRoutesRequest}
 }
 

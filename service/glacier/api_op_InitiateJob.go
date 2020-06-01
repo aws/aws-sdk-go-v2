@@ -155,6 +155,7 @@ func (c *Client) InitiateJobRequest(input *InitiateJobInput) InitiateJobRequest 
 	}
 
 	req := c.newRequest(op, input, &InitiateJobOutput{})
+
 	return InitiateJobRequest{Request: req, Input: input, Copy: c.InitiateJobRequest}
 }
 

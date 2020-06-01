@@ -74,8 +74,8 @@ const opDescribeLoadBalancers = "DescribeLoadBalancers"
 // Describes the load balancers for the specified Auto Scaling group.
 //
 // This operation describes only Classic Load Balancers. If you have Application
-// Load Balancers or Network Load Balancers, use DescribeLoadBalancerTargetGroups
-// instead.
+// Load Balancers or Network Load Balancers, use the DescribeLoadBalancerTargetGroups
+// API instead.
 //
 //    // Example sending a request using DescribeLoadBalancersRequest.
 //    req := client.DescribeLoadBalancersRequest(params)
@@ -97,6 +97,7 @@ func (c *Client) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeLoadBalancersOutput{})
+
 	return DescribeLoadBalancersRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancersRequest}
 }
 

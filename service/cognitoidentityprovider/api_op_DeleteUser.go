@@ -79,6 +79,7 @@ func (c *Client) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
 }
 

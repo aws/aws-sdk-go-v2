@@ -100,6 +100,7 @@ func (c *Client) ListResourceDataSyncRequest(input *ListResourceDataSyncInput) L
 	}
 
 	req := c.newRequest(op, input, &ListResourceDataSyncOutput{})
+
 	return ListResourceDataSyncRequest{Request: req, Input: input, Copy: c.ListResourceDataSyncRequest}
 }
 

@@ -35,11 +35,13 @@ type CreateAutoScalingGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	DefaultCooldown *int64 `type:"integer"`
 
-	// The number of Amazon EC2 instances that the Auto Scaling group attempts to
-	// maintain. This number must be greater than or equal to the minimum size of
-	// the group and less than or equal to the maximum size of the group. If you
-	// do not specify a desired capacity, the default is the minimum size of the
-	// group.
+	// The desired capacity is the initial capacity of the Auto Scaling group at
+	// the time of its creation and the capacity it attempts to maintain. It can
+	// scale beyond this capacity if you configure automatic scaling.
+	//
+	// This number must be greater than or equal to the minimum size of the group
+	// and less than or equal to the maximum size of the group. If you do not specify
+	// a desired capacity, the default is the minimum size of the group.
 	DesiredCapacity *int64 `type:"integer"`
 
 	// The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before
@@ -63,33 +65,38 @@ type CreateAutoScalingGroupInput struct {
 	HealthCheckType *string `min:"1" type:"string"`
 
 	// The ID of the instance used to create a launch configuration for the group.
+	// To get the instance ID, use the Amazon EC2 DescribeInstances (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html)
+	// API operation.
 	//
 	// When you specify an ID of an instance, Amazon EC2 Auto Scaling creates a
 	// new launch configuration and associates it with the group. This launch configuration
 	// derives its attributes from the specified instance, except for the block
 	// device mapping.
 	//
-	// For more information, see Create an Auto Scaling Group Using an EC2 Instance
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html)
-	// in the Amazon EC2 Auto Scaling User Guide.
-	//
 	// You must specify one of the following parameters in your request: LaunchConfigurationName,
 	// LaunchTemplate, InstanceId, or MixedInstancesPolicy.
 	InstanceId *string `min:"1" type:"string"`
 
-	// The name of the launch configuration.
+	// The name of the launch configuration to use when an instance is launched.
+	// To get the launch configuration name, use the DescribeLaunchConfigurations
+	// API operation. New launch configurations can be created with the CreateLaunchConfiguration
+	// API.
 	//
-	// If you do not specify LaunchConfigurationName, you must specify one of the
-	// following parameters: InstanceId, LaunchTemplate, or MixedInstancesPolicy.
+	// You must specify one of the following parameters in your request: LaunchConfigurationName,
+	// LaunchTemplate, InstanceId, or MixedInstancesPolicy.
 	LaunchConfigurationName *string `min:"1" type:"string"`
 
-	// The launch template to use to launch instances.
+	// Parameters used to specify the launch template and version to use when an
+	// instance is launched.
 	//
 	// For more information, see LaunchTemplateSpecification (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html)
 	// in the Amazon EC2 Auto Scaling API Reference.
 	//
-	// If you do not specify LaunchTemplate, you must specify one of the following
-	// parameters: InstanceId, LaunchConfigurationName, or MixedInstancesPolicy.
+	// You can alternatively associate a launch template to the Auto Scaling group
+	// by using the MixedInstancesPolicy parameter.
+	//
+	// You must specify one of the following parameters in your request: LaunchConfigurationName,
+	// LaunchTemplate, InstanceId, or MixedInstancesPolicy.
 	LaunchTemplate *LaunchTemplateSpecification `type:"structure"`
 
 	// One or more lifecycle hooks.
@@ -105,15 +112,26 @@ type CreateAutoScalingGroupInput struct {
 	LoadBalancerNames []string `type:"list"`
 
 	// The maximum amount of time, in seconds, that an instance can be in service.
+	// The default is null.
+	//
+	// This parameter is optional, but if you specify a value for it, you must specify
+	// a value of at least 604,800 seconds (7 days). To clear a previously set value,
+	// specify a new value of 0.
 	//
 	// For more information, see Replacing Auto Scaling Instances Based on Maximum
 	// Instance Lifetime (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	//
-	// Valid Range: Minimum value of 604800.
+	// Valid Range: Minimum value of 0.
 	MaxInstanceLifetime *int64 `type:"integer"`
 
 	// The maximum size of the group.
+	//
+	// With a mixed instances policy that uses instance weighting, Amazon EC2 Auto
+	// Scaling may need to go above MaxSize to meet your capacity requirements.
+	// In this event, Amazon EC2 Auto Scaling will never go above MaxSize by more
+	// than your maximum instance weight (weights that define how many capacity
+	// units each instance contributes to the capacity of the group).
 	//
 	// MaxSize is a required field
 	MaxSize *int64 `type:"integer" required:"true"`
@@ -165,7 +183,14 @@ type CreateAutoScalingGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	ServiceLinkedRoleARN *string `min:"1" type:"string"`
 
-	// One or more tags.
+	// One or more tags. You can tag your Auto Scaling group and propagate the tags
+	// to the Amazon EC2 instances it launches.
+	//
+	// Tags are not propagated to Amazon EBS volumes. To add tags to Amazon EBS
+	// volumes, specify the tags in a launch template but use caution. If the launch
+	// template specifies an instance tag with a key that is also specified for
+	// the Auto Scaling group, Amazon EC2 Auto Scaling overrides the value of that
+	// instance tag with the value specified by the Auto Scaling group.
 	//
 	// For more information, see Tagging Auto Scaling Groups and Instances (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
@@ -290,9 +315,15 @@ const opCreateAutoScalingGroup = "CreateAutoScalingGroup"
 // Creates an Auto Scaling group with the specified name and attributes.
 //
 // If you exceed your maximum limit of Auto Scaling groups, the call fails.
-// For information about viewing this limit, see DescribeAccountLimits. For
-// information about updating this limit, see Amazon EC2 Auto Scaling Service
-// Quotas (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html)
+// To query this limit, call the DescribeAccountLimits API. For information
+// about updating this limit, see Amazon EC2 Auto Scaling Service Quotas (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html)
+// in the Amazon EC2 Auto Scaling User Guide.
+//
+// For introductory exercises for creating an Auto Scaling group, see Getting
+// Started with Amazon EC2 Auto Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/GettingStartedTutorial.html)
+// and Tutorial: Set Up a Scaled and Load-Balanced Application (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-register-lbs-with-asg.html)
+// in the Amazon EC2 Auto Scaling User Guide. For more information, see Auto
+// Scaling Groups (https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 //
 //    // Example sending a request using CreateAutoScalingGroupRequest.
@@ -317,6 +348,7 @@ func (c *Client) CreateAutoScalingGroupRequest(input *CreateAutoScalingGroupInpu
 	req := c.newRequest(op, input, &CreateAutoScalingGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CreateAutoScalingGroupRequest{Request: req, Input: input, Copy: c.CreateAutoScalingGroupRequest}
 }
 

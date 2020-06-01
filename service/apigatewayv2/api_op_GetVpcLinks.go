@@ -107,6 +107,7 @@ func (c *Client) GetVpcLinksRequest(input *GetVpcLinksInput) GetVpcLinksRequest 
 	}
 
 	req := c.newRequest(op, input, &GetVpcLinksOutput{})
+
 	return GetVpcLinksRequest{Request: req, Input: input, Copy: c.GetVpcLinksRequest}
 }
 

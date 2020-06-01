@@ -48,7 +48,7 @@ type RegisterUserInput struct {
 	// scenarios, for example when you are registering an IAM user or an Amazon
 	// QuickSight user. You can register multiple users using the same IAM role
 	// if each user has a different session name. For more information on assuming
-	// IAM roles, see assume-role (https://docs.aws.example.com/cli/latest/reference/sts/assume-role.html)
+	// IAM roles, see assume-role (https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role.html)
 	// in the AWS CLI Reference.
 	SessionName *string `min:"2" type:"string"`
 
@@ -247,6 +247,7 @@ func (c *Client) RegisterUserRequest(input *RegisterUserInput) RegisterUserReque
 	}
 
 	req := c.newRequest(op, input, &RegisterUserOutput{})
+
 	return RegisterUserRequest{Request: req, Input: input, Copy: c.RegisterUserRequest}
 }
 

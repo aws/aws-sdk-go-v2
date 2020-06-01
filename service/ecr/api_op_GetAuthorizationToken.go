@@ -85,6 +85,7 @@ func (c *Client) GetAuthorizationTokenRequest(input *GetAuthorizationTokenInput)
 	}
 
 	req := c.newRequest(op, input, &GetAuthorizationTokenOutput{})
+
 	return GetAuthorizationTokenRequest{Request: req, Input: input, Copy: c.GetAuthorizationTokenRequest}
 }
 

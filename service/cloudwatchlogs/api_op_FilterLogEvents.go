@@ -161,6 +161,7 @@ func (c *Client) FilterLogEventsRequest(input *FilterLogEventsInput) FilterLogEv
 	}
 
 	req := c.newRequest(op, input, &FilterLogEventsOutput{})
+
 	return FilterLogEventsRequest{Request: req, Input: input, Copy: c.FilterLogEventsRequest}
 }
 

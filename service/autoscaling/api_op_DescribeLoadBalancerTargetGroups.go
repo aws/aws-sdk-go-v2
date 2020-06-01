@@ -93,6 +93,7 @@ func (c *Client) DescribeLoadBalancerTargetGroupsRequest(input *DescribeLoadBala
 	}
 
 	req := c.newRequest(op, input, &DescribeLoadBalancerTargetGroupsOutput{})
+
 	return DescribeLoadBalancerTargetGroupsRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancerTargetGroupsRequest}
 }
 

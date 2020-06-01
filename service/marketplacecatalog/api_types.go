@@ -193,6 +193,10 @@ type ChangeSummary struct {
 	// The type of the change.
 	ChangeType *string `min:"1" type:"string"`
 
+	// This object contains details specific to the change type of the requested
+	// change.
+	Details *string `min:"2" type:"string"`
+
 	// The entity to be changed.
 	Entity *Entity `type:"structure"`
 
@@ -212,6 +216,12 @@ func (s ChangeSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ChangeType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Details != nil {
+		v := *s.Details
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Details", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Entity != nil {
 		v := s.Entity
@@ -308,13 +318,13 @@ type EntitySummary struct {
 	// The last time the entity was published, using ISO 8601 format (2018-02-27T13:45:22Z).
 	LastModifiedDate *string `type:"string"`
 
-	// The name for the entity. This value is not unique. It is defined by the provider.
+	// The name for the entity. This value is not unique. It is defined by the seller.
 	Name *string `type:"string"`
 
-	// The visibility status of the entity to subscribers. This value can be Public
-	// (everyone can view the entity), Limited (the entity is visible to limited
-	// accounts only), or Restricted (the entity was published and then unpublished
-	// and only existing subscribers can view it).
+	// The visibility status of the entity to buyers. This value can be Public (everyone
+	// can view the entity), Limited (the entity is visible to limited accounts
+	// only), or Restricted (the entity was published and then unpublished and only
+	// existing buyers can view it).
 	Visibility *string `type:"string"`
 }
 
@@ -478,7 +488,7 @@ func (s Filter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// An object that contains two attributes, sortBy and sortOrder.
+// An object that contains two attributes, SortBy and SortOrder.
 type Sort struct {
 	_ struct{} `type:"structure"`
 

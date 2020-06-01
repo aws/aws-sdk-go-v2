@@ -83,6 +83,7 @@ func (c *Client) DeleteResourceRequest(input *DeleteResourceInput) DeleteResourc
 	}
 
 	req := c.newRequest(op, input, &DeleteResourceOutput{})
+
 	return DeleteResourceRequest{Request: req, Input: input, Copy: c.DeleteResourceRequest}
 }
 

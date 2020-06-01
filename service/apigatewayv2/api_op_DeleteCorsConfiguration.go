@@ -93,6 +93,7 @@ func (c *Client) DeleteCorsConfigurationRequest(input *DeleteCorsConfigurationIn
 	req := c.newRequest(op, input, &DeleteCorsConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteCorsConfigurationRequest{Request: req, Input: input, Copy: c.DeleteCorsConfigurationRequest}
 }
 

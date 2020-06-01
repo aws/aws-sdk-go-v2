@@ -104,6 +104,7 @@ func (c *Client) GetFederationTokenRequest(input *GetFederationTokenInput) GetFe
 	}
 
 	req := c.newRequest(op, input, &GetFederationTokenOutput{})
+
 	return GetFederationTokenRequest{Request: req, Input: input, Copy: c.GetFederationTokenRequest}
 }
 

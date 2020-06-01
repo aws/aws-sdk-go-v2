@@ -152,6 +152,7 @@ func (c *Client) CreateResourceDefinitionVersionRequest(input *CreateResourceDef
 	}
 
 	req := c.newRequest(op, input, &CreateResourceDefinitionVersionOutput{})
+
 	return CreateResourceDefinitionVersionRequest{Request: req, Input: input, Copy: c.CreateResourceDefinitionVersionRequest}
 }
 

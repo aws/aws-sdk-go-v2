@@ -82,6 +82,7 @@ func (c *Client) AssociateContactWithAddressBookRequest(input *AssociateContactW
 	}
 
 	req := c.newRequest(op, input, &AssociateContactWithAddressBookOutput{})
+
 	return AssociateContactWithAddressBookRequest{Request: req, Input: input, Copy: c.AssociateContactWithAddressBookRequest}
 }
 

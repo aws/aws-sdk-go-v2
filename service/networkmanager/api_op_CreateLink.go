@@ -183,6 +183,7 @@ func (c *Client) CreateLinkRequest(input *CreateLinkInput) CreateLinkRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateLinkOutput{})
+
 	return CreateLinkRequest{Request: req, Input: input, Copy: c.CreateLinkRequest}
 }
 

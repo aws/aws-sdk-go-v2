@@ -105,6 +105,7 @@ func (c *Client) GetGcmChannelRequest(input *GetGcmChannelInput) GetGcmChannelRe
 	}
 
 	req := c.newRequest(op, input, &GetGcmChannelOutput{})
+
 	return GetGcmChannelRequest{Request: req, Input: input, Copy: c.GetGcmChannelRequest}
 }
 

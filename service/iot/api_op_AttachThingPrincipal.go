@@ -113,6 +113,7 @@ func (c *Client) AttachThingPrincipalRequest(input *AttachThingPrincipalInput) A
 	}
 
 	req := c.newRequest(op, input, &AttachThingPrincipalOutput{})
+
 	return AttachThingPrincipalRequest{Request: req, Input: input, Copy: c.AttachThingPrincipalRequest}
 }
 

@@ -113,6 +113,7 @@ func (c *Client) RequestSpotFleetRequest(input *RequestSpotFleetInput) RequestSp
 	}
 
 	req := c.newRequest(op, input, &RequestSpotFleetOutput{})
+
 	return RequestSpotFleetRequest{Request: req, Input: input, Copy: c.RequestSpotFleetRequest}
 }
 

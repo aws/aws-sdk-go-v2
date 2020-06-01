@@ -98,6 +98,7 @@ func (c *Client) DeleteChannelRequest(input *DeleteChannelInput) DeleteChannelRe
 	req := c.newRequest(op, input, &DeleteChannelOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteChannelRequest{Request: req, Input: input, Copy: c.DeleteChannelRequest}
 }
 

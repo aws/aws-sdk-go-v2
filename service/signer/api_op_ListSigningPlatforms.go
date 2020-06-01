@@ -163,6 +163,7 @@ func (c *Client) ListSigningPlatformsRequest(input *ListSigningPlatformsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListSigningPlatformsOutput{})
+
 	return ListSigningPlatformsRequest{Request: req, Input: input, Copy: c.ListSigningPlatformsRequest}
 }
 

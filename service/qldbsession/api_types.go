@@ -46,7 +46,7 @@ type CommitTransactionRequest struct {
 	// CommitDigest is a required field
 	CommitDigest []byte `type:"blob" required:"true"`
 
-	// Specifies the transaction id of the transaction to commit.
+	// Specifies the transaction ID of the transaction to commit.
 	//
 	// TransactionId is a required field
 	TransactionId *string `min:"22" type:"string" required:"true"`
@@ -87,7 +87,7 @@ type CommitTransactionResult struct {
 	// CommitDigest is automatically base64 encoded/decoded by the SDK.
 	CommitDigest []byte `type:"blob"`
 
-	// The transaction id of the committed transaction.
+	// The transaction ID of the committed transaction.
 	TransactionId *string `min:"22" type:"string"`
 }
 
@@ -128,7 +128,7 @@ type ExecuteStatementRequest struct {
 	// Statement is a required field
 	Statement *string `min:"1" type:"string" required:"true"`
 
-	// Specifies the transaction id of the request.
+	// Specifies the transaction ID of the request.
 	//
 	// TransactionId is a required field
 	TransactionId *string `min:"22" type:"string" required:"true"`
@@ -192,7 +192,7 @@ type FetchPageRequest struct {
 	// NextPageToken is a required field
 	NextPageToken *string `min:"4" type:"string" required:"true"`
 
-	// Specifies the transaction id of the page to be fetched.
+	// Specifies the transaction ID of the page to be fetched.
 	//
 	// TransactionId is a required field
 	TransactionId *string `min:"22" type:"string" required:"true"`
@@ -256,7 +256,7 @@ func (s Page) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Specifies a request to start a a new session.
+// Specifies a request to start a new session.
 type StartSessionRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -316,7 +316,7 @@ func (s StartTransactionRequest) String() string {
 type StartTransactionResult struct {
 	_ struct{} `type:"structure"`
 
-	// The transaction id of the started transaction.
+	// The transaction ID of the started transaction.
 	TransactionId *string `min:"22" type:"string"`
 }
 
@@ -325,7 +325,7 @@ func (s StartTransactionResult) String() string {
 	return awsutil.Prettify(s)
 }
 
-// A structure that can contains values in multiple encoding formats.
+// A structure that can contain an Amazon Ion value in multiple encoding formats.
 type ValueHolder struct {
 	_ struct{} `type:"structure"`
 

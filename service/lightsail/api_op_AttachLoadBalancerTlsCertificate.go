@@ -51,7 +51,7 @@ type AttachLoadBalancerTlsCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
+	// of the request, the timestamp of the request, and the resources affected
 	// by the request.
 	//
 	// These SSL/TLS certificates are only usable by Lightsail load balancers. You
@@ -102,6 +102,7 @@ func (c *Client) AttachLoadBalancerTlsCertificateRequest(input *AttachLoadBalanc
 	}
 
 	req := c.newRequest(op, input, &AttachLoadBalancerTlsCertificateOutput{})
+
 	return AttachLoadBalancerTlsCertificateRequest{Request: req, Input: input, Copy: c.AttachLoadBalancerTlsCertificateRequest}
 }
 

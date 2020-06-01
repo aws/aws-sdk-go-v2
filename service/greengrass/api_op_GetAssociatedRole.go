@@ -108,6 +108,7 @@ func (c *Client) GetAssociatedRoleRequest(input *GetAssociatedRoleInput) GetAsso
 	}
 
 	req := c.newRequest(op, input, &GetAssociatedRoleOutput{})
+
 	return GetAssociatedRoleRequest{Request: req, Input: input, Copy: c.GetAssociatedRoleRequest}
 }
 

@@ -140,6 +140,7 @@ func (c *Client) UpdateFieldLevelEncryptionConfigRequest(input *UpdateFieldLevel
 	}
 
 	req := c.newRequest(op, input, &UpdateFieldLevelEncryptionConfigOutput{})
+
 	return UpdateFieldLevelEncryptionConfigRequest{Request: req, Input: input, Copy: c.UpdateFieldLevelEncryptionConfigRequest}
 }
 

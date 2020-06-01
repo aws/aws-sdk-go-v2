@@ -79,6 +79,7 @@ func (c *Client) StopEntitiesDetectionV2JobRequest(input *StopEntitiesDetectionV
 	}
 
 	req := c.newRequest(op, input, &StopEntitiesDetectionV2JobOutput{})
+
 	return StopEntitiesDetectionV2JobRequest{Request: req, Input: input, Copy: c.StopEntitiesDetectionV2JobRequest}
 }
 

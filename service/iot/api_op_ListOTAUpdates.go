@@ -129,6 +129,7 @@ func (c *Client) ListOTAUpdatesRequest(input *ListOTAUpdatesInput) ListOTAUpdate
 	}
 
 	req := c.newRequest(op, input, &ListOTAUpdatesOutput{})
+
 	return ListOTAUpdatesRequest{Request: req, Input: input, Copy: c.ListOTAUpdatesRequest}
 }
 

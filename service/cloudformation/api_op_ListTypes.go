@@ -140,6 +140,7 @@ func (c *Client) ListTypesRequest(input *ListTypesInput) ListTypesRequest {
 	}
 
 	req := c.newRequest(op, input, &ListTypesOutput{})
+
 	return ListTypesRequest{Request: req, Input: input, Copy: c.ListTypesRequest}
 }
 

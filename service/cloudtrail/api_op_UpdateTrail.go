@@ -226,6 +226,7 @@ func (c *Client) UpdateTrailRequest(input *UpdateTrailInput) UpdateTrailRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateTrailOutput{})
+
 	return UpdateTrailRequest{Request: req, Input: input, Copy: c.UpdateTrailRequest}
 }
 

@@ -125,6 +125,7 @@ func (c *Client) CopyDBClusterParameterGroupRequest(input *CopyDBClusterParamete
 	}
 
 	req := c.newRequest(op, input, &CopyDBClusterParameterGroupOutput{})
+
 	return CopyDBClusterParameterGroupRequest{Request: req, Input: input, Copy: c.CopyDBClusterParameterGroupRequest}
 }
 

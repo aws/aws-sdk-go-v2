@@ -98,6 +98,7 @@ func (c *Client) CancelArchivalRequest(input *CancelArchivalInput) CancelArchiva
 	}
 
 	req := c.newRequest(op, input, &CancelArchivalOutput{})
+
 	return CancelArchivalRequest{Request: req, Input: input, Copy: c.CancelArchivalRequest}
 }
 

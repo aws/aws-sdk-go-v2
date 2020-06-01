@@ -97,6 +97,7 @@ func (c *Client) UpdateMonitoringScheduleRequest(input *UpdateMonitoringSchedule
 	}
 
 	req := c.newRequest(op, input, &UpdateMonitoringScheduleOutput{})
+
 	return UpdateMonitoringScheduleRequest{Request: req, Input: input, Copy: c.UpdateMonitoringScheduleRequest}
 }
 

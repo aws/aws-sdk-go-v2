@@ -110,6 +110,7 @@ func (c *Client) UpdateStateMachineRequest(input *UpdateStateMachineInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateStateMachineOutput{})
+
 	return UpdateStateMachineRequest{Request: req, Input: input, Copy: c.UpdateStateMachineRequest}
 }
 

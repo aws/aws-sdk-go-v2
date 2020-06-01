@@ -86,6 +86,7 @@ func (c *Client) RebuildEnvironmentRequest(input *RebuildEnvironmentInput) Rebui
 	req := c.newRequest(op, input, &RebuildEnvironmentOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RebuildEnvironmentRequest{Request: req, Input: input, Copy: c.RebuildEnvironmentRequest}
 }
 

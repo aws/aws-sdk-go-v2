@@ -220,6 +220,7 @@ func (c *Client) DescribeSigningJobRequest(input *DescribeSigningJobInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeSigningJobOutput{})
+
 	return DescribeSigningJobRequest{Request: req, Input: input, Copy: c.DescribeSigningJobRequest}
 }
 

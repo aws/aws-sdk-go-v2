@@ -101,6 +101,7 @@ func (c *Client) DescribeUpdateActionsRequest(input *DescribeUpdateActionsInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeUpdateActionsOutput{})
+
 	return DescribeUpdateActionsRequest{Request: req, Input: input, Copy: c.DescribeUpdateActionsRequest}
 }
 

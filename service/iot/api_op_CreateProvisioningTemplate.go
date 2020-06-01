@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -18,6 +19,9 @@ type CreateProvisioningTemplateInput struct {
 
 	// True to enable the fleet provisioning template, otherwise false.
 	Enabled *bool `locationName:"enabled" type:"boolean"`
+
+	// Creates a pre-provisioning hook template.
+	PreProvisioningHook *ProvisioningHook `locationName:"preProvisioningHook" type:"structure"`
 
 	// The role ARN for the role associated with the fleet provisioning template.
 	// This IoT role grants permission to provision a device.
@@ -71,6 +75,18 @@ func (s *CreateProvisioningTemplateInput) Validate() error {
 	if s.TemplateName != nil && len(*s.TemplateName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TemplateName", 1))
 	}
+	if s.PreProvisioningHook != nil {
+		if err := s.PreProvisioningHook.Validate(); err != nil {
+			invalidParams.AddNested("PreProvisioningHook", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -93,6 +109,12 @@ func (s CreateProvisioningTemplateInput) MarshalFields(e protocol.FieldEncoder) 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "enabled", protocol.BoolValue(v), metadata)
+	}
+	if s.PreProvisioningHook != nil {
+		v := s.PreProvisioningHook
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "preProvisioningHook", v, metadata)
 	}
 	if s.ProvisioningRoleArn != nil {
 		v := *s.ProvisioningRoleArn
@@ -193,6 +215,7 @@ func (c *Client) CreateProvisioningTemplateRequest(input *CreateProvisioningTemp
 	}
 
 	req := c.newRequest(op, input, &CreateProvisioningTemplateOutput{})
+
 	return CreateProvisioningTemplateRequest{Request: req, Input: input, Copy: c.CreateProvisioningTemplateRequest}
 }
 

@@ -127,6 +127,7 @@ func (c *Client) ExportBundleRequest(input *ExportBundleInput) ExportBundleReque
 	}
 
 	req := c.newRequest(op, input, &ExportBundleOutput{})
+
 	return ExportBundleRequest{Request: req, Input: input, Copy: c.ExportBundleRequest}
 }
 

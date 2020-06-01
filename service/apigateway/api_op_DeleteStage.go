@@ -109,6 +109,7 @@ func (c *Client) DeleteStageRequest(input *DeleteStageInput) DeleteStageRequest 
 	req := c.newRequest(op, input, &DeleteStageOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteStageRequest{Request: req, Input: input, Copy: c.DeleteStageRequest}
 }
 

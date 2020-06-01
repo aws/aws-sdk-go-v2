@@ -152,6 +152,7 @@ func (c *Client) UpdateComputeEnvironmentRequest(input *UpdateComputeEnvironment
 	}
 
 	req := c.newRequest(op, input, &UpdateComputeEnvironmentOutput{})
+
 	return UpdateComputeEnvironmentRequest{Request: req, Input: input, Copy: c.UpdateComputeEnvironmentRequest}
 }
 

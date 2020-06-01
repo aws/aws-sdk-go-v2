@@ -33,7 +33,7 @@ type CreateDeploymentConfigInput struct {
 	//    * FLEET_PERCENT: The value parameter represents the minimum number of
 	//    healthy instances as a percentage of the total number of instances in
 	//    the deployment. If you specify FLEET_PERCENT, at the start of the deployment,
-	//    AWS CodeDeploy converts the percentage to the equivalent number of instance
+	//    AWS CodeDeploy converts the percentage to the equivalent number of instances
 	//    and rounds up fractional instances.
 	//
 	// The value parameter takes an integer.
@@ -108,6 +108,7 @@ func (c *Client) CreateDeploymentConfigRequest(input *CreateDeploymentConfigInpu
 	}
 
 	req := c.newRequest(op, input, &CreateDeploymentConfigOutput{})
+
 	return CreateDeploymentConfigRequest{Request: req, Input: input, Copy: c.CreateDeploymentConfigRequest}
 }
 

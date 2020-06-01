@@ -91,6 +91,7 @@ func (c *Client) DeleteAliasRequest(input *DeleteAliasInput) DeleteAliasRequest 
 	req := c.newRequest(op, input, &DeleteAliasOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteAliasRequest{Request: req, Input: input, Copy: c.DeleteAliasRequest}
 }
 

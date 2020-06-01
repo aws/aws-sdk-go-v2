@@ -30,9 +30,9 @@ type PutLogEventsInput struct {
 
 	// The sequence token obtained from the response of the previous PutLogEvents
 	// call. An upload in a newly created log stream does not require a sequence
-	// token. You can also get the sequence token using DescribeLogStreams. If you
-	// call PutLogEvents twice within a narrow time period using the same value
-	// for sequenceToken, both calls may be successful, or one may be rejected.
+	// token. You can also get the sequence token using DescribeLogStreams (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogStreams.html).
+	// If you call PutLogEvents twice within a narrow time period using the same
+	// value for sequenceToken, both calls may be successful, or one may be rejected.
 	SequenceToken *string `locationName:"sequenceToken" min:"1" type:"string"`
 }
 
@@ -160,6 +160,7 @@ func (c *Client) PutLogEventsRequest(input *PutLogEventsInput) PutLogEventsReque
 	}
 
 	req := c.newRequest(op, input, &PutLogEventsOutput{})
+
 	return PutLogEventsRequest{Request: req, Input: input, Copy: c.PutLogEventsRequest}
 }
 

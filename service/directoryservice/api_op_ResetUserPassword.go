@@ -113,6 +113,7 @@ func (c *Client) ResetUserPasswordRequest(input *ResetUserPasswordInput) ResetUs
 	}
 
 	req := c.newRequest(op, input, &ResetUserPasswordOutput{})
+
 	return ResetUserPasswordRequest{Request: req, Input: input, Copy: c.ResetUserPasswordRequest}
 }
 

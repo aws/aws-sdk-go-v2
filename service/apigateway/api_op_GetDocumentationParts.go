@@ -174,6 +174,7 @@ func (c *Client) GetDocumentationPartsRequest(input *GetDocumentationPartsInput)
 	}
 
 	req := c.newRequest(op, input, &GetDocumentationPartsOutput{})
+
 	return GetDocumentationPartsRequest{Request: req, Input: input, Copy: c.GetDocumentationPartsRequest}
 }
 

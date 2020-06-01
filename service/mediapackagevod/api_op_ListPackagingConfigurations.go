@@ -132,6 +132,7 @@ func (c *Client) ListPackagingConfigurationsRequest(input *ListPackagingConfigur
 	}
 
 	req := c.newRequest(op, input, &ListPackagingConfigurationsOutput{})
+
 	return ListPackagingConfigurationsRequest{Request: req, Input: input, Copy: c.ListPackagingConfigurationsRequest}
 }
 

@@ -135,6 +135,7 @@ func (c *Client) PutComponentPolicyRequest(input *PutComponentPolicyInput) PutCo
 	}
 
 	req := c.newRequest(op, input, &PutComponentPolicyOutput{})
+
 	return PutComponentPolicyRequest{Request: req, Input: input, Copy: c.PutComponentPolicyRequest}
 }
 

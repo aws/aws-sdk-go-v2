@@ -82,6 +82,7 @@ func (c *Client) StopLabelingJobRequest(input *StopLabelingJobInput) StopLabelin
 	req := c.newRequest(op, input, &StopLabelingJobOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StopLabelingJobRequest{Request: req, Input: input, Copy: c.StopLabelingJobRequest}
 }
 

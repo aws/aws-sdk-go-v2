@@ -152,6 +152,7 @@ func (c *Client) AssociateCustomerGatewayRequest(input *AssociateCustomerGateway
 	}
 
 	req := c.newRequest(op, input, &AssociateCustomerGatewayOutput{})
+
 	return AssociateCustomerGatewayRequest{Request: req, Input: input, Copy: c.AssociateCustomerGatewayRequest}
 }
 

@@ -97,6 +97,7 @@ func (c *Client) UpdateConfigurationSetTrackingOptionsRequest(input *UpdateConfi
 	}
 
 	req := c.newRequest(op, input, &UpdateConfigurationSetTrackingOptionsOutput{})
+
 	return UpdateConfigurationSetTrackingOptionsRequest{Request: req, Input: input, Copy: c.UpdateConfigurationSetTrackingOptionsRequest}
 }
 

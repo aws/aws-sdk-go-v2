@@ -78,6 +78,7 @@ func (c *Client) DescribeCommandsRequest(input *DescribeCommandsInput) DescribeC
 	}
 
 	req := c.newRequest(op, input, &DescribeCommandsOutput{})
+
 	return DescribeCommandsRequest{Request: req, Input: input, Copy: c.DescribeCommandsRequest}
 }
 

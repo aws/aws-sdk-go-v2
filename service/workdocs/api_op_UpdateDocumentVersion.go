@@ -142,6 +142,7 @@ func (c *Client) UpdateDocumentVersionRequest(input *UpdateDocumentVersionInput)
 	req := c.newRequest(op, input, &UpdateDocumentVersionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateDocumentVersionRequest{Request: req, Input: input, Copy: c.UpdateDocumentVersionRequest}
 }
 

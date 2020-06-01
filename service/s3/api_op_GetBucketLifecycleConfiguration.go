@@ -131,7 +131,7 @@ const opGetBucketLifecycleConfiguration = "GetBucketLifecycleConfiguration"
 //    configuration does not exist. HTTP Status Code: 404 Not Found SOAP Fault
 //    Code Prefix: Client
 //
-// The following operations are related to DeleteBucketMetricsConfiguration:
+// The following operations are related to GetBucketLifecycleConfiguration:
 //
 //    * GetBucketLifecycle
 //
@@ -159,6 +159,7 @@ func (c *Client) GetBucketLifecycleConfigurationRequest(input *GetBucketLifecycl
 	}
 
 	req := c.newRequest(op, input, &GetBucketLifecycleConfigurationOutput{})
+
 	return GetBucketLifecycleConfigurationRequest{Request: req, Input: input, Copy: c.GetBucketLifecycleConfigurationRequest}
 }
 

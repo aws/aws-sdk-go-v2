@@ -128,6 +128,7 @@ func (c *Client) ListCoreDefinitionVersionsRequest(input *ListCoreDefinitionVers
 	}
 
 	req := c.newRequest(op, input, &ListCoreDefinitionVersionsOutput{})
+
 	return ListCoreDefinitionVersionsRequest{Request: req, Input: input, Copy: c.ListCoreDefinitionVersionsRequest}
 }
 

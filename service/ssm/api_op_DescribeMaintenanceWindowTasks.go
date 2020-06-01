@@ -107,6 +107,7 @@ func (c *Client) DescribeMaintenanceWindowTasksRequest(input *DescribeMaintenanc
 	}
 
 	req := c.newRequest(op, input, &DescribeMaintenanceWindowTasksOutput{})
+
 	return DescribeMaintenanceWindowTasksRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceWindowTasksRequest}
 }
 

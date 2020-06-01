@@ -97,6 +97,7 @@ func (c *Client) DeleteTopicRuleRequest(input *DeleteTopicRuleInput) DeleteTopic
 	req := c.newRequest(op, input, &DeleteTopicRuleOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteTopicRuleRequest{Request: req, Input: input, Copy: c.DeleteTopicRuleRequest}
 }
 

@@ -146,6 +146,7 @@ func (c *Client) ListLedgersRequest(input *ListLedgersInput) ListLedgersRequest 
 	}
 
 	req := c.newRequest(op, input, &ListLedgersOutput{})
+
 	return ListLedgersRequest{Request: req, Input: input, Copy: c.ListLedgersRequest}
 }
 

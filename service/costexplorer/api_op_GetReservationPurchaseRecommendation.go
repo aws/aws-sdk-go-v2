@@ -131,6 +131,7 @@ func (c *Client) GetReservationPurchaseRecommendationRequest(input *GetReservati
 	}
 
 	req := c.newRequest(op, input, &GetReservationPurchaseRecommendationOutput{})
+
 	return GetReservationPurchaseRecommendationRequest{Request: req, Input: input, Copy: c.GetReservationPurchaseRecommendationRequest}
 }
 

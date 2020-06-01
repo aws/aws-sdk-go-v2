@@ -109,6 +109,7 @@ func (c *Client) ListModelPackagesRequest(input *ListModelPackagesInput) ListMod
 	}
 
 	req := c.newRequest(op, input, &ListModelPackagesOutput{})
+
 	return ListModelPackagesRequest{Request: req, Input: input, Copy: c.ListModelPackagesRequest}
 }
 

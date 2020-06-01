@@ -419,6 +419,7 @@ func (c *Client) GetMetricDataRequest(input *GetMetricDataInput) GetMetricDataRe
 	}
 
 	req := c.newRequest(op, input, &GetMetricDataOutput{})
+
 	return GetMetricDataRequest{Request: req, Input: input, Copy: c.GetMetricDataRequest}
 }
 

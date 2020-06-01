@@ -111,6 +111,7 @@ func (c *Client) GetVoiceTemplateRequest(input *GetVoiceTemplateInput) GetVoiceT
 	}
 
 	req := c.newRequest(op, input, &GetVoiceTemplateOutput{})
+
 	return GetVoiceTemplateRequest{Request: req, Input: input, Copy: c.GetVoiceTemplateRequest}
 }
 

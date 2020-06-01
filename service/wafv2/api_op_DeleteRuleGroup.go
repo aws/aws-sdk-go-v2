@@ -133,6 +133,7 @@ func (c *Client) DeleteRuleGroupRequest(input *DeleteRuleGroupInput) DeleteRuleG
 	}
 
 	req := c.newRequest(op, input, &DeleteRuleGroupOutput{})
+
 	return DeleteRuleGroupRequest{Request: req, Input: input, Copy: c.DeleteRuleGroupRequest}
 }
 

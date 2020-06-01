@@ -161,6 +161,7 @@ func (c *Client) AssociateVPCWithHostedZoneRequest(input *AssociateVPCWithHosted
 	}
 
 	req := c.newRequest(op, input, &AssociateVPCWithHostedZoneOutput{})
+
 	return AssociateVPCWithHostedZoneRequest{Request: req, Input: input, Copy: c.AssociateVPCWithHostedZoneRequest}
 }
 

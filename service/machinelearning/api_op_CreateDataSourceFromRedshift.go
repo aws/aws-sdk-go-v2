@@ -181,6 +181,7 @@ func (c *Client) CreateDataSourceFromRedshiftRequest(input *CreateDataSourceFrom
 	}
 
 	req := c.newRequest(op, input, &CreateDataSourceFromRedshiftOutput{})
+
 	return CreateDataSourceFromRedshiftRequest{Request: req, Input: input, Copy: c.CreateDataSourceFromRedshiftRequest}
 }
 

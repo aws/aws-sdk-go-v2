@@ -107,6 +107,7 @@ func (c *Client) ListLaunchPathsRequest(input *ListLaunchPathsInput) ListLaunchP
 	}
 
 	req := c.newRequest(op, input, &ListLaunchPathsOutput{})
+
 	return ListLaunchPathsRequest{Request: req, Input: input, Copy: c.ListLaunchPathsRequest}
 }
 

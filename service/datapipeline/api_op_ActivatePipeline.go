@@ -101,6 +101,7 @@ func (c *Client) ActivatePipelineRequest(input *ActivatePipelineInput) ActivateP
 	}
 
 	req := c.newRequest(op, input, &ActivatePipelineOutput{})
+
 	return ActivatePipelineRequest{Request: req, Input: input, Copy: c.ActivatePipelineRequest}
 }
 

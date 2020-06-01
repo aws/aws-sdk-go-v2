@@ -103,6 +103,7 @@ func (c *Client) CreateReplicationSubnetGroupRequest(input *CreateReplicationSub
 	}
 
 	req := c.newRequest(op, input, &CreateReplicationSubnetGroupOutput{})
+
 	return CreateReplicationSubnetGroupRequest{Request: req, Input: input, Copy: c.CreateReplicationSubnetGroupRequest}
 }
 

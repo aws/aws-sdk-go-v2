@@ -97,6 +97,7 @@ func (c *Client) AttachInstancesRequest(input *AttachInstancesInput) AttachInsta
 	req := c.newRequest(op, input, &AttachInstancesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AttachInstancesRequest{Request: req, Input: input, Copy: c.AttachInstancesRequest}
 }
 

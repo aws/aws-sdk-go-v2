@@ -86,6 +86,7 @@ func (c *Client) GetCrawlersRequest(input *GetCrawlersInput) GetCrawlersRequest 
 	}
 
 	req := c.newRequest(op, input, &GetCrawlersOutput{})
+
 	return GetCrawlersRequest{Request: req, Input: input, Copy: c.GetCrawlersRequest}
 }
 

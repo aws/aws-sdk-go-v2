@@ -93,6 +93,7 @@ func (c *Client) GenerateRandomRequest(input *GenerateRandomInput) GenerateRando
 	}
 
 	req := c.newRequest(op, input, &GenerateRandomOutput{})
+
 	return GenerateRandomRequest{Request: req, Input: input, Copy: c.GenerateRandomRequest}
 }
 

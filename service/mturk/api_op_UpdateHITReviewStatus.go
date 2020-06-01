@@ -86,6 +86,7 @@ func (c *Client) UpdateHITReviewStatusRequest(input *UpdateHITReviewStatusInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateHITReviewStatusOutput{})
+
 	return UpdateHITReviewStatusRequest{Request: req, Input: input, Copy: c.UpdateHITReviewStatusRequest}
 }
 

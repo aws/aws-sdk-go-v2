@@ -97,6 +97,7 @@ func (c *Client) DescribeUploadBufferRequest(input *DescribeUploadBufferInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeUploadBufferOutput{})
+
 	return DescribeUploadBufferRequest{Request: req, Input: input, Copy: c.DescribeUploadBufferRequest}
 }
 

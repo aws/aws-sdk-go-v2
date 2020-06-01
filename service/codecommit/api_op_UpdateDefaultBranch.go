@@ -97,6 +97,7 @@ func (c *Client) UpdateDefaultBranchRequest(input *UpdateDefaultBranchInput) Upd
 	req := c.newRequest(op, input, &UpdateDefaultBranchOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateDefaultBranchRequest{Request: req, Input: input, Copy: c.UpdateDefaultBranchRequest}
 }
 

@@ -76,6 +76,7 @@ func (c *Client) DescribeAlgorithmRequest(input *DescribeAlgorithmInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeAlgorithmOutput{})
+
 	return DescribeAlgorithmRequest{Request: req, Input: input, Copy: c.DescribeAlgorithmRequest}
 }
 

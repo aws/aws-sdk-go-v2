@@ -177,6 +177,7 @@ func (c *Client) ListFindingsRequest(input *ListFindingsInput) ListFindingsReque
 	}
 
 	req := c.newRequest(op, input, &ListFindingsOutput{})
+
 	return ListFindingsRequest{Request: req, Input: input, Copy: c.ListFindingsRequest}
 }
 

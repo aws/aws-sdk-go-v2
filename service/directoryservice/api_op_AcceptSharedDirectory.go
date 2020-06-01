@@ -78,6 +78,7 @@ func (c *Client) AcceptSharedDirectoryRequest(input *AcceptSharedDirectoryInput)
 	}
 
 	req := c.newRequest(op, input, &AcceptSharedDirectoryOutput{})
+
 	return AcceptSharedDirectoryRequest{Request: req, Input: input, Copy: c.AcceptSharedDirectoryRequest}
 }
 

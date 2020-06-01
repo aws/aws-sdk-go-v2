@@ -93,6 +93,7 @@ func (c *Client) DeregisterTargetsRequest(input *DeregisterTargetsInput) Deregis
 	}
 
 	req := c.newRequest(op, input, &DeregisterTargetsOutput{})
+
 	return DeregisterTargetsRequest{Request: req, Input: input, Copy: c.DeregisterTargetsRequest}
 }
 

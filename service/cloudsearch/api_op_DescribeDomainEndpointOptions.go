@@ -89,6 +89,7 @@ func (c *Client) DescribeDomainEndpointOptionsRequest(input *DescribeDomainEndpo
 	}
 
 	req := c.newRequest(op, input, &DescribeDomainEndpointOptionsOutput{})
+
 	return DescribeDomainEndpointOptionsRequest{Request: req, Input: input, Copy: c.DescribeDomainEndpointOptionsRequest}
 }
 

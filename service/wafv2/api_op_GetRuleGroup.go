@@ -136,6 +136,7 @@ func (c *Client) GetRuleGroupRequest(input *GetRuleGroupInput) GetRuleGroupReque
 	}
 
 	req := c.newRequest(op, input, &GetRuleGroupOutput{})
+
 	return GetRuleGroupRequest{Request: req, Input: input, Copy: c.GetRuleGroupRequest}
 }
 

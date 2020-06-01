@@ -139,6 +139,7 @@ func (c *Client) UpdateConfigurationSetEventDestinationRequest(input *UpdateConf
 	}
 
 	req := c.newRequest(op, input, &UpdateConfigurationSetEventDestinationOutput{})
+
 	return UpdateConfigurationSetEventDestinationRequest{Request: req, Input: input, Copy: c.UpdateConfigurationSetEventDestinationRequest}
 }
 

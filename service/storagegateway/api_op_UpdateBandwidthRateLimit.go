@@ -110,6 +110,7 @@ func (c *Client) UpdateBandwidthRateLimitRequest(input *UpdateBandwidthRateLimit
 	}
 
 	req := c.newRequest(op, input, &UpdateBandwidthRateLimitOutput{})
+
 	return UpdateBandwidthRateLimitRequest{Request: req, Input: input, Copy: c.UpdateBandwidthRateLimitRequest}
 }
 

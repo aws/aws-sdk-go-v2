@@ -155,6 +155,7 @@ func (c *Client) UpgradeElasticsearchDomainRequest(input *UpgradeElasticsearchDo
 	}
 
 	req := c.newRequest(op, input, &UpgradeElasticsearchDomainOutput{})
+
 	return UpgradeElasticsearchDomainRequest{Request: req, Input: input, Copy: c.UpgradeElasticsearchDomainRequest}
 }
 

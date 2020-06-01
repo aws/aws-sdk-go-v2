@@ -82,6 +82,7 @@ func (c *Client) DescribeDocumentClassificationJobRequest(input *DescribeDocumen
 	}
 
 	req := c.newRequest(op, input, &DescribeDocumentClassificationJobOutput{})
+
 	return DescribeDocumentClassificationJobRequest{Request: req, Input: input, Copy: c.DescribeDocumentClassificationJobRequest}
 }
 

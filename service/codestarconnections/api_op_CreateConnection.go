@@ -4,6 +4,7 @@ package codestarconnections
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -23,6 +24,9 @@ type CreateConnectionInput struct {
 	//
 	// ProviderType is a required field
 	ProviderType ProviderType `type:"string" required:"true" enum:"true"`
+
+	// The key-value pair to use when tagging the resource.
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -43,6 +47,13 @@ func (s *CreateConnectionInput) Validate() error {
 	if len(s.ProviderType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ProviderType"))
 	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -61,6 +72,9 @@ type CreateConnectionOutput struct {
 	//
 	// ConnectionArn is a required field
 	ConnectionArn *string `type:"string" required:"true"`
+
+	// Specifies the tags applied to the resource.
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -98,6 +112,7 @@ func (c *Client) CreateConnectionRequest(input *CreateConnectionInput) CreateCon
 	}
 
 	req := c.newRequest(op, input, &CreateConnectionOutput{})
+
 	return CreateConnectionRequest{Request: req, Input: input, Copy: c.CreateConnectionRequest}
 }
 

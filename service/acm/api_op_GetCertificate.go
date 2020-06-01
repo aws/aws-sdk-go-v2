@@ -93,6 +93,7 @@ func (c *Client) GetCertificateRequest(input *GetCertificateInput) GetCertificat
 	}
 
 	req := c.newRequest(op, input, &GetCertificateOutput{})
+
 	return GetCertificateRequest{Request: req, Input: input, Copy: c.GetCertificateRequest}
 }
 

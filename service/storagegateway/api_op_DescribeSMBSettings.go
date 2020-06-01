@@ -127,6 +127,7 @@ func (c *Client) DescribeSMBSettingsRequest(input *DescribeSMBSettingsInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeSMBSettingsOutput{})
+
 	return DescribeSMBSettingsRequest{Request: req, Input: input, Copy: c.DescribeSMBSettingsRequest}
 }
 

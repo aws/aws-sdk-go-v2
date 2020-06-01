@@ -98,6 +98,7 @@ func (c *Client) UpdateCoreDefinitionRequest(input *UpdateCoreDefinitionInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateCoreDefinitionOutput{})
+
 	return UpdateCoreDefinitionRequest{Request: req, Input: input, Copy: c.UpdateCoreDefinitionRequest}
 }
 

@@ -120,6 +120,7 @@ func (c *Client) PutLoggingConfigurationRequest(input *PutLoggingConfigurationIn
 	}
 
 	req := c.newRequest(op, input, &PutLoggingConfigurationOutput{})
+
 	return PutLoggingConfigurationRequest{Request: req, Input: input, Copy: c.PutLoggingConfigurationRequest}
 }
 

@@ -201,6 +201,42 @@ func (s BlueInstanceTerminationOption) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Information about the target to be updated by an AWS CloudFormation blue/green
+// deployment. This target type is used for all deployments initiated by a CloudFormation
+// stack update.
+type CloudFormationTarget struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of an AWS CloudFormation blue/green deployment.
+	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// The date and time when the target application was updated by an AWS CloudFormation
+	// blue/green deployment.
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
+
+	// The lifecycle events of the AWS CloudFormation blue/green deployment to this
+	// target application.
+	LifecycleEvents []LifecycleEvent `locationName:"lifecycleEvents" type:"list"`
+
+	// The resource type for the AWS CloudFormation blue/green deployment.
+	ResourceType *string `locationName:"resourceType" type:"string"`
+
+	// The status of an AWS CloudFormation blue/green deployment's target application.
+	Status TargetStatus `locationName:"status" type:"string" enum:"true"`
+
+	// The unique ID of a deployment target that has a type of CloudFormationTarget.
+	TargetId *string `locationName:"targetId" type:"string"`
+
+	// The percentage of production traffic that the target version of an AWS CloudFormation
+	// blue/green deployment receives.
+	TargetVersionWeight *float64 `locationName:"targetVersionWeight" type:"double"`
+}
+
+// String returns the string representation
+func (s CloudFormationTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Information about a deployment configuration.
 type DeploymentConfigInfo struct {
 	_ struct{} `type:"structure"`
@@ -220,8 +256,8 @@ type DeploymentConfigInfo struct {
 	// Information about the number or percentage of minimum healthy instance.
 	MinimumHealthyHosts *MinimumHealthyHosts `locationName:"minimumHealthyHosts" type:"structure"`
 
-	// The configuration that specifies how the deployment traffic is routed. Only
-	// deployments with a Lambda compute platform can specify this.
+	// The configuration that specifies how the deployment traffic is routed. Used
+	// for deployments with a Lambda or ECS compute platform only.
 	TrafficRoutingConfig *TrafficRoutingConfig `locationName:"trafficRoutingConfig" type:"structure"`
 }
 
@@ -381,6 +417,10 @@ type DeploymentInfo struct {
 	// Information about any error associated with this deployment.
 	ErrorInformation *ErrorInformation `locationName:"errorInformation" type:"structure"`
 
+	// The unique ID for an external resource (for example, a CloudFormation stack
+	// ID) that is linked to this deployment.
+	ExternalId *string `locationName:"externalId" type:"string"`
+
 	// Information about how AWS CodeDeploy handles files that already exist in
 	// a deployment target location but weren't part of the previous successful
 	// deployment.
@@ -515,7 +555,7 @@ type DeploymentReadyOption struct {
 
 	// The number of minutes to wait before the status of a blue/green deployment
 	// is changed to Stopped if rerouting is not started manually. Applies only
-	// to the STOP_DEPLOYMENT option for actionOnTimeout
+	// to the STOP_DEPLOYMENT option for actionOnTimeout.
 	WaitTimeInMinutes *int64 `locationName:"waitTimeInMinutes" type:"integer"`
 }
 
@@ -545,7 +585,13 @@ func (s DeploymentStyle) String() string {
 type DeploymentTarget struct {
 	_ struct{} `type:"structure"`
 
-	// The deployment type that is specific to the deployment's compute platform.
+	// Information about the target to be updated by an AWS CloudFormation blue/green
+	// deployment. This target type is used for all deployments initiated by a CloudFormation
+	// stack update.
+	CloudFormationTarget *CloudFormationTarget `locationName:"cloudFormationTarget" type:"structure"`
+
+	// The deployment type that is specific to the deployment's compute platform
+	// or deployments initiated by a CloudFormation stack update.
 	DeploymentTargetType DeploymentTargetType `locationName:"deploymentTargetType" type:"string" enum:"true"`
 
 	// Information about the target for a deployment that uses the Amazon ECS compute
@@ -679,7 +725,7 @@ type ECSTarget struct {
 	// The status an Amazon ECS deployment's target ECS application.
 	Status TargetStatus `locationName:"status" type:"string" enum:"true"`
 
-	// The ARN of the target.
+	// The Amazon Resource Name (ARN) of the target.
 	TargetArn *string `locationName:"targetArn" type:"string"`
 
 	// The unique ID of a deployment target that has a type of ecsTarget.
@@ -938,7 +984,7 @@ type InstanceSummary struct {
 	//    * GREEN: The instance is part of the replacement environment.
 	InstanceType InstanceType `locationName:"instanceType" type:"string" enum:"true"`
 
-	// A timestamp that indicaties when the instance information was last updated.
+	// A timestamp that indicates when the instance information was last updated.
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
 
 	// A list of lifecycle events for this instance.
@@ -986,7 +1032,7 @@ type InstanceTarget struct {
 	// The status an EC2/On-premises deployment's target instance.
 	Status TargetStatus `locationName:"status" type:"string" enum:"true"`
 
-	// The ARN of the target.
+	// The Amazon Resource Name (ARN) of the target.
 	TargetArn *string `locationName:"targetArn" type:"string"`
 
 	// The unique ID of a deployment target that has a type of instanceTarget.
@@ -1005,8 +1051,9 @@ type LambdaFunctionInfo struct {
 	// The version of a Lambda function that production traffic points to.
 	CurrentVersion *string `locationName:"currentVersion" type:"string"`
 
-	// The alias of a Lambda function. For more information, see Introduction to
-	// AWS Lambda Aliases (https://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html).
+	// The alias of a Lambda function. For more information, see AWS Lambda Function
+	// Aliases (https://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html)
+	// in the AWS Lambda Developer Guide.
 	FunctionAlias *string `locationName:"functionAlias" type:"string"`
 
 	// The name of a Lambda function.
@@ -1045,7 +1092,7 @@ type LambdaTarget struct {
 	// The status an AWS Lambda deployment's target Lambda function.
 	Status TargetStatus `locationName:"status" type:"string" enum:"true"`
 
-	// The ARN of the target.
+	// The Amazon Resource Name (ARN) of the target.
 	TargetArn *string `locationName:"targetArn" type:"string"`
 
 	// The unique ID of a deployment target that has a type of lambdaTarget.
@@ -1155,16 +1202,16 @@ type MinimumHealthyHosts struct {
 
 	// The minimum healthy instance type:
 	//
-	//    * HOST_COUNT: The minimum number of healthy instance as an absolute value.
+	//    * HOST_COUNT: The minimum number of healthy instances as an absolute value.
 	//
-	//    * FLEET_PERCENT: The minimum number of healthy instance as a percentage
-	//    of the total number of instance in the deployment.
+	//    * FLEET_PERCENT: The minimum number of healthy instances as a percentage
+	//    of the total number of instances in the deployment.
 	//
-	// In an example of nine instance, if a HOST_COUNT of six is specified, deploy
+	// In an example of nine instances, if a HOST_COUNT of six is specified, deploy
 	// to up to three instances at a time. The deployment is successful if six or
 	// more instances are deployed to successfully. Otherwise, the deployment fails.
-	// If a FLEET_PERCENT of 40 is specified, deploy to up to five instance at a
-	// time. The deployment is successful if four or more instance are deployed
+	// If a FLEET_PERCENT of 40 is specified, deploy to up to five instances at
+	// a time. The deployment is successful if four or more instances are deployed
 	// to successfully. Otherwise, the deployment fails.
 	//
 	// In a call to the GetDeploymentConfig, CodeDeployDefault.OneAtATime returns
@@ -1262,6 +1309,10 @@ type RevisionLocation struct {
 	//
 	//    * String: A YAML-formatted or JSON-formatted string (AWS Lambda deployments
 	//    only).
+	//
+	//    * AppSpecContent: An AppSpecContent object that contains the contents
+	//    of an AppSpec file for an AWS Lambda or Amazon ECS deployment. The content
+	//    is formatted as JSON or YAML stored as a RawString.
 	RevisionType RevisionLocationType `locationName:"revisionType" type:"string" enum:"true"`
 
 	// Information about the location of a revision stored in Amazon S3.
@@ -1451,8 +1502,9 @@ func (s TargetInstances) String() string {
 }
 
 // A configuration that shifts traffic from one version of a Lambda function
-// to another in two increments. The original and target Lambda function versions
-// are specified in the deployment's AppSpec file.
+// or ECS task set to another in two increments. The original and target Lambda
+// function versions or ECS task sets are specified in the deployment's AppSpec
+// file.
 type TimeBasedCanary struct {
 	_ struct{} `type:"structure"`
 
@@ -1471,9 +1523,9 @@ func (s TimeBasedCanary) String() string {
 }
 
 // A configuration that shifts traffic from one version of a Lambda function
-// to another in equal increments, with an equal number of minutes between each
-// increment. The original and target Lambda function versions are specified
-// in the deployment's AppSpec file.
+// or ECS task set to another in equal increments, with an equal number of minutes
+// between each increment. The original and target Lambda function versions
+// or ECS task sets are specified in the deployment's AppSpec file.
 type TimeBasedLinear struct {
 	_ struct{} `type:"structure"`
 
@@ -1516,9 +1568,9 @@ func (s TimeRange) String() string {
 type TrafficRoute struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of one listener. The listener identifies the route between a target
-	// group and a load balancer. This is an array of strings with a maximum size
-	// of one.
+	// The Amazon Resource Name (ARN) of one listener. The listener identifies the
+	// route between a target group and a load balancer. This is an array of strings
+	// with a maximum size of one.
 	ListenerArns []string `locationName:"listenerArns" type:"list"`
 }
 
@@ -1528,23 +1580,25 @@ func (s TrafficRoute) String() string {
 }
 
 // The configuration that specifies how traffic is shifted from one version
-// of a Lambda function to another version during an AWS Lambda deployment.
+// of a Lambda function to another version during an AWS Lambda deployment,
+// or from one Amazon ECS task set to another during an Amazon ECS deployment.
 type TrafficRoutingConfig struct {
 	_ struct{} `type:"structure"`
 
 	// A configuration that shifts traffic from one version of a Lambda function
-	// to another in two increments. The original and target Lambda function versions
-	// are specified in the deployment's AppSpec file.
+	// or ECS task set to another in two increments. The original and target Lambda
+	// function versions or ECS task sets are specified in the deployment's AppSpec
+	// file.
 	TimeBasedCanary *TimeBasedCanary `locationName:"timeBasedCanary" type:"structure"`
 
 	// A configuration that shifts traffic from one version of a Lambda function
-	// to another in equal increments, with an equal number of minutes between each
-	// increment. The original and target Lambda function versions are specified
-	// in the deployment's AppSpec file.
+	// or ECS task set to another in equal increments, with an equal number of minutes
+	// between each increment. The original and target Lambda function versions
+	// or ECS task sets are specified in the deployment's AppSpec file.
 	TimeBasedLinear *TimeBasedLinear `locationName:"timeBasedLinear" type:"structure"`
 
 	// The type of traffic shifting (TimeBasedCanary or TimeBasedLinear) used by
-	// a deployment configuration .
+	// a deployment configuration.
 	Type TrafficRoutingType `locationName:"type" type:"string" enum:"true"`
 }
 
@@ -1563,8 +1617,9 @@ type TriggerConfig struct {
 	// The name of the notification trigger.
 	TriggerName *string `locationName:"triggerName" type:"string"`
 
-	// The ARN of the Amazon Simple Notification Service topic through which notifications
-	// about deployment or instance events are sent.
+	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service
+	// topic through which notifications about deployment or instance events are
+	// sent.
 	TriggerTargetArn *string `locationName:"triggerTargetArn" type:"string"`
 }
 

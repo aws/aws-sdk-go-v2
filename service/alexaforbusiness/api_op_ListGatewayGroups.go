@@ -89,6 +89,7 @@ func (c *Client) ListGatewayGroupsRequest(input *ListGatewayGroupsInput) ListGat
 	}
 
 	req := c.newRequest(op, input, &ListGatewayGroupsOutput{})
+
 	return ListGatewayGroupsRequest{Request: req, Input: input, Copy: c.ListGatewayGroupsRequest}
 }
 

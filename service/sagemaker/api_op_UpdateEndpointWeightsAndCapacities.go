@@ -102,6 +102,7 @@ func (c *Client) UpdateEndpointWeightsAndCapacitiesRequest(input *UpdateEndpoint
 	}
 
 	req := c.newRequest(op, input, &UpdateEndpointWeightsAndCapacitiesOutput{})
+
 	return UpdateEndpointWeightsAndCapacitiesRequest{Request: req, Input: input, Copy: c.UpdateEndpointWeightsAndCapacitiesRequest}
 }
 

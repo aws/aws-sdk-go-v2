@@ -177,6 +177,7 @@ func (c *Client) ListAuditTasksRequest(input *ListAuditTasksInput) ListAuditTask
 	}
 
 	req := c.newRequest(op, input, &ListAuditTasksOutput{})
+
 	return ListAuditTasksRequest{Request: req, Input: input, Copy: c.ListAuditTasksRequest}
 }
 

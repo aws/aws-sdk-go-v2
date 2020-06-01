@@ -86,6 +86,7 @@ func (c *Client) BatchApplyUpdateActionRequest(input *BatchApplyUpdateActionInpu
 	}
 
 	req := c.newRequest(op, input, &BatchApplyUpdateActionOutput{})
+
 	return BatchApplyUpdateActionRequest{Request: req, Input: input, Copy: c.BatchApplyUpdateActionRequest}
 }
 

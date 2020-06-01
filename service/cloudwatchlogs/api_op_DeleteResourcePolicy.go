@@ -62,6 +62,7 @@ func (c *Client) DeleteResourcePolicyRequest(input *DeleteResourcePolicyInput) D
 	req := c.newRequest(op, input, &DeleteResourcePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteResourcePolicyRequest{Request: req, Input: input, Copy: c.DeleteResourcePolicyRequest}
 }
 

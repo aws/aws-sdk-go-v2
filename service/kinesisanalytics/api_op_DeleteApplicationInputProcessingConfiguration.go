@@ -110,6 +110,7 @@ func (c *Client) DeleteApplicationInputProcessingConfigurationRequest(input *Del
 	}
 
 	req := c.newRequest(op, input, &DeleteApplicationInputProcessingConfigurationOutput{})
+
 	return DeleteApplicationInputProcessingConfigurationRequest{Request: req, Input: input, Copy: c.DeleteApplicationInputProcessingConfigurationRequest}
 }
 

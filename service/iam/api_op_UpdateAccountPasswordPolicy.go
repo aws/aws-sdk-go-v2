@@ -160,6 +160,7 @@ func (c *Client) UpdateAccountPasswordPolicyRequest(input *UpdateAccountPassword
 	req := c.newRequest(op, input, &UpdateAccountPasswordPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateAccountPasswordPolicyRequest{Request: req, Input: input, Copy: c.UpdateAccountPasswordPolicyRequest}
 }
 

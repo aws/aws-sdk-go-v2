@@ -157,6 +157,7 @@ func (c *Client) DescribeDimensionRequest(input *DescribeDimensionInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeDimensionOutput{})
+
 	return DescribeDimensionRequest{Request: req, Input: input, Copy: c.DescribeDimensionRequest}
 }
 

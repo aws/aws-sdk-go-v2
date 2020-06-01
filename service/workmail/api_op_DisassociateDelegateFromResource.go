@@ -95,6 +95,7 @@ func (c *Client) DisassociateDelegateFromResourceRequest(input *DisassociateDele
 	}
 
 	req := c.newRequest(op, input, &DisassociateDelegateFromResourceOutput{})
+
 	return DisassociateDelegateFromResourceRequest{Request: req, Input: input, Copy: c.DisassociateDelegateFromResourceRequest}
 }
 

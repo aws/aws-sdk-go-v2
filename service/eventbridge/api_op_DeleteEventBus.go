@@ -82,6 +82,7 @@ func (c *Client) DeleteEventBusRequest(input *DeleteEventBusInput) DeleteEventBu
 	req := c.newRequest(op, input, &DeleteEventBusOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteEventBusRequest{Request: req, Input: input, Copy: c.DeleteEventBusRequest}
 }
 

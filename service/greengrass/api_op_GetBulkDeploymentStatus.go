@@ -157,6 +157,7 @@ func (c *Client) GetBulkDeploymentStatusRequest(input *GetBulkDeploymentStatusIn
 	}
 
 	req := c.newRequest(op, input, &GetBulkDeploymentStatusOutput{})
+
 	return GetBulkDeploymentStatusRequest{Request: req, Input: input, Copy: c.GetBulkDeploymentStatusRequest}
 }
 

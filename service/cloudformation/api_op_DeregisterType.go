@@ -102,6 +102,7 @@ func (c *Client) DeregisterTypeRequest(input *DeregisterTypeInput) DeregisterTyp
 	}
 
 	req := c.newRequest(op, input, &DeregisterTypeOutput{})
+
 	return DeregisterTypeRequest{Request: req, Input: input, Copy: c.DeregisterTypeRequest}
 }
 

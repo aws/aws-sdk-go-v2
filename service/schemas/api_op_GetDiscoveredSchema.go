@@ -119,6 +119,7 @@ func (c *Client) GetDiscoveredSchemaRequest(input *GetDiscoveredSchemaInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetDiscoveredSchemaOutput{})
+
 	return GetDiscoveredSchemaRequest{Request: req, Input: input, Copy: c.GetDiscoveredSchemaRequest}
 }
 

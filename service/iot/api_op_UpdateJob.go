@@ -159,6 +159,7 @@ func (c *Client) UpdateJobRequest(input *UpdateJobInput) UpdateJobRequest {
 	req := c.newRequest(op, input, &UpdateJobOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateJobRequest{Request: req, Input: input, Copy: c.UpdateJobRequest}
 }
 

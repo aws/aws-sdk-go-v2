@@ -76,6 +76,7 @@ func (c *Client) DeleteNetworkProfileRequest(input *DeleteNetworkProfileInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteNetworkProfileOutput{})
+
 	return DeleteNetworkProfileRequest{Request: req, Input: input, Copy: c.DeleteNetworkProfileRequest}
 }
 

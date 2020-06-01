@@ -128,6 +128,7 @@ func (c *Client) GetWebACLRequest(input *GetWebACLInput) GetWebACLRequest {
 	}
 
 	req := c.newRequest(op, input, &GetWebACLOutput{})
+
 	return GetWebACLRequest{Request: req, Input: input, Copy: c.GetWebACLRequest}
 }
 

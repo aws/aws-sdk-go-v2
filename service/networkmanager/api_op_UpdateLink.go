@@ -159,6 +159,7 @@ func (c *Client) UpdateLinkRequest(input *UpdateLinkInput) UpdateLinkRequest {
 	}
 
 	req := c.newRequest(op, input, &UpdateLinkOutput{})
+
 	return UpdateLinkRequest{Request: req, Input: input, Copy: c.UpdateLinkRequest}
 }
 

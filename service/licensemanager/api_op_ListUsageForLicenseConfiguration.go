@@ -100,6 +100,7 @@ func (c *Client) ListUsageForLicenseConfigurationRequest(input *ListUsageForLice
 	}
 
 	req := c.newRequest(op, input, &ListUsageForLicenseConfigurationOutput{})
+
 	return ListUsageForLicenseConfigurationRequest{Request: req, Input: input, Copy: c.ListUsageForLicenseConfigurationRequest}
 }
 

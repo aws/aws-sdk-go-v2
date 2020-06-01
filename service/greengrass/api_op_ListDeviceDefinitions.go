@@ -105,6 +105,7 @@ func (c *Client) ListDeviceDefinitionsRequest(input *ListDeviceDefinitionsInput)
 	}
 
 	req := c.newRequest(op, input, &ListDeviceDefinitionsOutput{})
+
 	return ListDeviceDefinitionsRequest{Request: req, Input: input, Copy: c.ListDeviceDefinitionsRequest}
 }
 

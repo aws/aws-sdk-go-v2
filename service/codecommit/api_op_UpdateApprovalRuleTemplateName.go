@@ -93,6 +93,7 @@ func (c *Client) UpdateApprovalRuleTemplateNameRequest(input *UpdateApprovalRule
 	}
 
 	req := c.newRequest(op, input, &UpdateApprovalRuleTemplateNameOutput{})
+
 	return UpdateApprovalRuleTemplateNameRequest{Request: req, Input: input, Copy: c.UpdateApprovalRuleTemplateNameRequest}
 }
 

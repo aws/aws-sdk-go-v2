@@ -107,6 +107,7 @@ func (c *Client) GetThingShadowRequest(input *GetThingShadowInput) GetThingShado
 	}
 
 	req := c.newRequest(op, input, &GetThingShadowOutput{})
+
 	return GetThingShadowRequest{Request: req, Input: input, Copy: c.GetThingShadowRequest}
 }
 

@@ -104,6 +104,7 @@ func (c *Client) SetIdentityDkimEnabledRequest(input *SetIdentityDkimEnabledInpu
 	}
 
 	req := c.newRequest(op, input, &SetIdentityDkimEnabledOutput{})
+
 	return SetIdentityDkimEnabledRequest{Request: req, Input: input, Copy: c.SetIdentityDkimEnabledRequest}
 }
 

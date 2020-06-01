@@ -330,6 +330,7 @@ func (c *Client) DescribeBrokerRequest(input *DescribeBrokerInput) DescribeBroke
 	}
 
 	req := c.newRequest(op, input, &DescribeBrokerOutput{})
+
 	return DescribeBrokerRequest{Request: req, Input: input, Copy: c.DescribeBrokerRequest}
 }
 

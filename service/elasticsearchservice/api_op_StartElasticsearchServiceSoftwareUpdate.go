@@ -107,6 +107,7 @@ func (c *Client) StartElasticsearchServiceSoftwareUpdateRequest(input *StartElas
 	}
 
 	req := c.newRequest(op, input, &StartElasticsearchServiceSoftwareUpdateOutput{})
+
 	return StartElasticsearchServiceSoftwareUpdateRequest{Request: req, Input: input, Copy: c.StartElasticsearchServiceSoftwareUpdateRequest}
 }
 

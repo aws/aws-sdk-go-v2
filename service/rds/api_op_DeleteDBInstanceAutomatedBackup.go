@@ -81,6 +81,7 @@ func (c *Client) DeleteDBInstanceAutomatedBackupRequest(input *DeleteDBInstanceA
 	}
 
 	req := c.newRequest(op, input, &DeleteDBInstanceAutomatedBackupOutput{})
+
 	return DeleteDBInstanceAutomatedBackupRequest{Request: req, Input: input, Copy: c.DeleteDBInstanceAutomatedBackupRequest}
 }
 

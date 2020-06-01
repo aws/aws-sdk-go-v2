@@ -68,7 +68,9 @@ const opTerminateInstanceInAutoScalingGroup = "TerminateInstanceInAutoScalingGro
 // Auto Scaling.
 //
 // Terminates the specified instance and optionally adjusts the desired group
-// size. This call simply makes a termination request. The instance is not terminated
+// size.
+//
+// This call simply makes a termination request. The instance is not terminated
 // immediately. When an instance is terminated, the instance status changes
 // to terminated. You can't connect to or start an instance after you've terminated
 // it.
@@ -103,6 +105,7 @@ func (c *Client) TerminateInstanceInAutoScalingGroupRequest(input *TerminateInst
 	}
 
 	req := c.newRequest(op, input, &TerminateInstanceInAutoScalingGroupOutput{})
+
 	return TerminateInstanceInAutoScalingGroupRequest{Request: req, Input: input, Copy: c.TerminateInstanceInAutoScalingGroupRequest}
 }
 

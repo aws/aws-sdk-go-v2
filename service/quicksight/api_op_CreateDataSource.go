@@ -293,6 +293,7 @@ func (c *Client) CreateDataSourceRequest(input *CreateDataSourceInput) CreateDat
 	}
 
 	req := c.newRequest(op, input, &CreateDataSourceOutput{})
+
 	return CreateDataSourceRequest{Request: req, Input: input, Copy: c.CreateDataSourceRequest}
 }
 

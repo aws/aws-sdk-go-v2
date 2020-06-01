@@ -118,6 +118,7 @@ func (c *Client) PutDashboardRequest(input *PutDashboardInput) PutDashboardReque
 	}
 
 	req := c.newRequest(op, input, &PutDashboardOutput{})
+
 	return PutDashboardRequest{Request: req, Input: input, Copy: c.PutDashboardRequest}
 }
 

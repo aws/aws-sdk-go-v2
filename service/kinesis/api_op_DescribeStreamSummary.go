@@ -86,6 +86,7 @@ func (c *Client) DescribeStreamSummaryRequest(input *DescribeStreamSummaryInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeStreamSummaryOutput{})
+
 	return DescribeStreamSummaryRequest{Request: req, Input: input, Copy: c.DescribeStreamSummaryRequest}
 }
 

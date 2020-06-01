@@ -101,6 +101,7 @@ func (c *Client) RefreshTrustedAdvisorCheckRequest(input *RefreshTrustedAdvisorC
 	}
 
 	req := c.newRequest(op, input, &RefreshTrustedAdvisorCheckOutput{})
+
 	return RefreshTrustedAdvisorCheckRequest{Request: req, Input: input, Copy: c.RefreshTrustedAdvisorCheckRequest}
 }
 

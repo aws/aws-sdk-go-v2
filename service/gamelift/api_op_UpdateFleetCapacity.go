@@ -124,6 +124,7 @@ func (c *Client) UpdateFleetCapacityRequest(input *UpdateFleetCapacityInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateFleetCapacityOutput{})
+
 	return UpdateFleetCapacityRequest{Request: req, Input: input, Copy: c.UpdateFleetCapacityRequest}
 }
 

@@ -97,6 +97,7 @@ func (c *Client) ListProvisionedProductPlansRequest(input *ListProvisionedProduc
 	}
 
 	req := c.newRequest(op, input, &ListProvisionedProductPlansOutput{})
+
 	return ListProvisionedProductPlansRequest{Request: req, Input: input, Copy: c.ListProvisionedProductPlansRequest}
 }
 

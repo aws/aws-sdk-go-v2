@@ -107,6 +107,7 @@ func (c *Client) ListExclusionsRequest(input *ListExclusionsInput) ListExclusion
 	}
 
 	req := c.newRequest(op, input, &ListExclusionsOutput{})
+
 	return ListExclusionsRequest{Request: req, Input: input, Copy: c.ListExclusionsRequest}
 }
 

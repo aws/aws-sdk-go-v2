@@ -166,6 +166,7 @@ func (c *Client) UpdateLagRequest(input *UpdateLagInput) UpdateLagRequest {
 	}
 
 	req := c.newRequest(op, input, &UpdateLagOutput{})
+
 	return UpdateLagRequest{Request: req, Input: input, Copy: c.UpdateLagRequest}
 }
 

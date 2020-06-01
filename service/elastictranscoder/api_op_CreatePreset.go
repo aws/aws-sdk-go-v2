@@ -190,6 +190,7 @@ func (c *Client) CreatePresetRequest(input *CreatePresetInput) CreatePresetReque
 	}
 
 	req := c.newRequest(op, input, &CreatePresetOutput{})
+
 	return CreatePresetRequest{Request: req, Input: input, Copy: c.CreatePresetRequest}
 }
 

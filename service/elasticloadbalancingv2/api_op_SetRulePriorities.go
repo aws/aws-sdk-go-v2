@@ -88,6 +88,7 @@ func (c *Client) SetRulePrioritiesRequest(input *SetRulePrioritiesInput) SetRule
 	}
 
 	req := c.newRequest(op, input, &SetRulePrioritiesOutput{})
+
 	return SetRulePrioritiesRequest{Request: req, Input: input, Copy: c.SetRulePrioritiesRequest}
 }
 

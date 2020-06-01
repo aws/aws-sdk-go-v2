@@ -205,6 +205,7 @@ func (c *Client) GetAuthorizerRequest(input *GetAuthorizerInput) GetAuthorizerRe
 	}
 
 	req := c.newRequest(op, input, &GetAuthorizerOutput{})
+
 	return GetAuthorizerRequest{Request: req, Input: input, Copy: c.GetAuthorizerRequest}
 }
 

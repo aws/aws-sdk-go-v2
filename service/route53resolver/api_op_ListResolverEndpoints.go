@@ -114,6 +114,7 @@ func (c *Client) ListResolverEndpointsRequest(input *ListResolverEndpointsInput)
 	}
 
 	req := c.newRequest(op, input, &ListResolverEndpointsOutput{})
+
 	return ListResolverEndpointsRequest{Request: req, Input: input, Copy: c.ListResolverEndpointsRequest}
 }
 

@@ -101,6 +101,7 @@ func (c *Client) ModifyClusterParameterGroupRequest(input *ModifyClusterParamete
 	}
 
 	req := c.newRequest(op, input, &ModifyClusterParameterGroupOutput{})
+
 	return ModifyClusterParameterGroupRequest{Request: req, Input: input, Copy: c.ModifyClusterParameterGroupRequest}
 }
 

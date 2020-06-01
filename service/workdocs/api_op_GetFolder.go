@@ -141,6 +141,7 @@ func (c *Client) GetFolderRequest(input *GetFolderInput) GetFolderRequest {
 	}
 
 	req := c.newRequest(op, input, &GetFolderOutput{})
+
 	return GetFolderRequest{Request: req, Input: input, Copy: c.GetFolderRequest}
 }
 

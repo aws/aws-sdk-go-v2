@@ -204,6 +204,7 @@ func (c *Client) UploadArchiveRequest(input *UploadArchiveInput) UploadArchiveRe
 	}
 
 	req := c.newRequest(op, input, &UploadArchiveOutput{})
+
 	return UploadArchiveRequest{Request: req, Input: input, Copy: c.UploadArchiveRequest}
 }
 

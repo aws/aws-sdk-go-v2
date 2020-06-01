@@ -89,6 +89,7 @@ func (c *Client) DisassociateBudgetFromResourceRequest(input *DisassociateBudget
 	}
 
 	req := c.newRequest(op, input, &DisassociateBudgetFromResourceOutput{})
+
 	return DisassociateBudgetFromResourceRequest{Request: req, Input: input, Copy: c.DisassociateBudgetFromResourceRequest}
 }
 

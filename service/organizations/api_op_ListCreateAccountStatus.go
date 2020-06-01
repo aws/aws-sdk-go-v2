@@ -114,6 +114,7 @@ func (c *Client) ListCreateAccountStatusRequest(input *ListCreateAccountStatusIn
 	}
 
 	req := c.newRequest(op, input, &ListCreateAccountStatusOutput{})
+
 	return ListCreateAccountStatusRequest{Request: req, Input: input, Copy: c.ListCreateAccountStatusRequest}
 }
 

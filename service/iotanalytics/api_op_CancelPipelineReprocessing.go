@@ -110,6 +110,7 @@ func (c *Client) CancelPipelineReprocessingRequest(input *CancelPipelineReproces
 	}
 
 	req := c.newRequest(op, input, &CancelPipelineReprocessingOutput{})
+
 	return CancelPipelineReprocessingRequest{Request: req, Input: input, Copy: c.CancelPipelineReprocessingRequest}
 }
 

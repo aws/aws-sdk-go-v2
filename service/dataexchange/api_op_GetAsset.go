@@ -211,6 +211,7 @@ func (c *Client) GetAssetRequest(input *GetAssetInput) GetAssetRequest {
 	}
 
 	req := c.newRequest(op, input, &GetAssetOutput{})
+
 	return GetAssetRequest{Request: req, Input: input, Copy: c.GetAssetRequest}
 }
 

@@ -165,6 +165,8 @@ type ClientAPI interface {
 
 	GetProxySessionRequest(*chime.GetProxySessionInput) chime.GetProxySessionRequest
 
+	GetRetentionSettingsRequest(*chime.GetRetentionSettingsInput) chime.GetRetentionSettingsRequest
+
 	GetRoomRequest(*chime.GetRoomInput) chime.GetRoomRequest
 
 	GetUserRequest(*chime.GetUserInput) chime.GetUserRequest
@@ -225,6 +227,8 @@ type ClientAPI interface {
 
 	PutEventsConfigurationRequest(*chime.PutEventsConfigurationInput) chime.PutEventsConfigurationRequest
 
+	PutRetentionSettingsRequest(*chime.PutRetentionSettingsInput) chime.PutRetentionSettingsRequest
+
 	PutVoiceConnectorLoggingConfigurationRequest(*chime.PutVoiceConnectorLoggingConfigurationInput) chime.PutVoiceConnectorLoggingConfigurationRequest
 
 	PutVoiceConnectorOriginationRequest(*chime.PutVoiceConnectorOriginationInput) chime.PutVoiceConnectorOriginationRequest
@@ -236,6 +240,10 @@ type ClientAPI interface {
 	PutVoiceConnectorTerminationRequest(*chime.PutVoiceConnectorTerminationInput) chime.PutVoiceConnectorTerminationRequest
 
 	PutVoiceConnectorTerminationCredentialsRequest(*chime.PutVoiceConnectorTerminationCredentialsInput) chime.PutVoiceConnectorTerminationCredentialsRequest
+
+	RedactConversationMessageRequest(*chime.RedactConversationMessageInput) chime.RedactConversationMessageRequest
+
+	RedactRoomMessageRequest(*chime.RedactRoomMessageInput) chime.RedactRoomMessageRequest
 
 	RegenerateSecurityTokenRequest(*chime.RegenerateSecurityTokenInput) chime.RegenerateSecurityTokenRequest
 

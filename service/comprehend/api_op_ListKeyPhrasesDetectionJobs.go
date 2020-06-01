@@ -98,6 +98,7 @@ func (c *Client) ListKeyPhrasesDetectionJobsRequest(input *ListKeyPhrasesDetecti
 	}
 
 	req := c.newRequest(op, input, &ListKeyPhrasesDetectionJobsOutput{})
+
 	return ListKeyPhrasesDetectionJobsRequest{Request: req, Input: input, Copy: c.ListKeyPhrasesDetectionJobsRequest}
 }
 

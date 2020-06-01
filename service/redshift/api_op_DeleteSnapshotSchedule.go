@@ -77,6 +77,7 @@ func (c *Client) DeleteSnapshotScheduleRequest(input *DeleteSnapshotScheduleInpu
 	req := c.newRequest(op, input, &DeleteSnapshotScheduleOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteSnapshotScheduleRequest{Request: req, Input: input, Copy: c.DeleteSnapshotScheduleRequest}
 }
 

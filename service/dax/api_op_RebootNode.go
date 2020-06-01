@@ -89,6 +89,7 @@ func (c *Client) RebootNodeRequest(input *RebootNodeInput) RebootNodeRequest {
 	}
 
 	req := c.newRequest(op, input, &RebootNodeOutput{})
+
 	return RebootNodeRequest{Request: req, Input: input, Copy: c.RebootNodeRequest}
 }
 

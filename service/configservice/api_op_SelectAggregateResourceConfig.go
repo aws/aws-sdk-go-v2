@@ -119,6 +119,7 @@ func (c *Client) SelectAggregateResourceConfigRequest(input *SelectAggregateReso
 	}
 
 	req := c.newRequest(op, input, &SelectAggregateResourceConfigOutput{})
+
 	return SelectAggregateResourceConfigRequest{Request: req, Input: input, Copy: c.SelectAggregateResourceConfigRequest}
 }
 

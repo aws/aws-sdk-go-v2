@@ -97,6 +97,7 @@ func (c *Client) DescribeExportTasksRequest(input *DescribeExportTasksInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeExportTasksOutput{})
+
 	return DescribeExportTasksRequest{Request: req, Input: input, Copy: c.DescribeExportTasksRequest}
 }
 

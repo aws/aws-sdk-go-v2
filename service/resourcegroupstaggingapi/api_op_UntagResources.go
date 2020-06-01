@@ -13,9 +13,8 @@ type UntagResourcesInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource.
-	// You can specify a minimum of 1 and a maximum of 20 ARNs (resources) to untag.
-	// An ARN can be set to a maximum of 1600 characters. For more information,
-	// see Amazon Resource Names (ARNs) and AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference.
 	//
 	// ResourceARNList is a required field
@@ -106,6 +105,7 @@ func (c *Client) UntagResourcesRequest(input *UntagResourcesInput) UntagResource
 	}
 
 	req := c.newRequest(op, input, &UntagResourcesOutput{})
+
 	return UntagResourcesRequest{Request: req, Input: input, Copy: c.UntagResourcesRequest}
 }
 

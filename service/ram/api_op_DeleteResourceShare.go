@@ -121,6 +121,7 @@ func (c *Client) DeleteResourceShareRequest(input *DeleteResourceShareInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteResourceShareOutput{})
+
 	return DeleteResourceShareRequest{Request: req, Input: input, Copy: c.DeleteResourceShareRequest}
 }
 

@@ -205,6 +205,7 @@ func (c *Client) CreateProxySessionRequest(input *CreateProxySessionInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateProxySessionOutput{})
+
 	return CreateProxySessionRequest{Request: req, Input: input, Copy: c.CreateProxySessionRequest}
 }
 

@@ -129,6 +129,7 @@ func (c *Client) StartQueryRequest(input *StartQueryInput) StartQueryRequest {
 	}
 
 	req := c.newRequest(op, input, &StartQueryOutput{})
+
 	return StartQueryRequest{Request: req, Input: input, Copy: c.StartQueryRequest}
 }
 

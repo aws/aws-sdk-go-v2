@@ -132,6 +132,7 @@ func (c *Client) DeleteArchiveRuleRequest(input *DeleteArchiveRuleInput) DeleteA
 	req := c.newRequest(op, input, &DeleteArchiveRuleOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteArchiveRuleRequest{Request: req, Input: input, Copy: c.DeleteArchiveRuleRequest}
 }
 

@@ -98,6 +98,7 @@ func (c *Client) CancelStepsRequest(input *CancelStepsInput) CancelStepsRequest 
 	}
 
 	req := c.newRequest(op, input, &CancelStepsOutput{})
+
 	return CancelStepsRequest{Request: req, Input: input, Copy: c.CancelStepsRequest}
 }
 

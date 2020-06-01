@@ -181,6 +181,7 @@ func (c *Client) ListImagesRequest(input *ListImagesInput) ListImagesRequest {
 	}
 
 	req := c.newRequest(op, input, &ListImagesOutput{})
+
 	return ListImagesRequest{Request: req, Input: input, Copy: c.ListImagesRequest}
 }
 

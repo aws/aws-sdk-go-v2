@@ -52,15 +52,15 @@ type SendCommandInput struct {
 	// The instance IDs where the command should run. You can specify a maximum
 	// of 50 IDs. If you prefer not to list individual instance IDs, you can instead
 	// send commands to a fleet of instances using the Targets parameter, which
-	// accepts EC2 tags. For more information about how to use targets, see Sending
-	// Commands to a Fleet (http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
+	// accepts EC2 tags. For more information about how to use targets, see Using
+	// targets and rate controls to send commands to a fleet (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
 	// in the AWS Systems Manager User Guide.
 	InstanceIds []string `type:"list"`
 
 	// (Optional) The maximum number of instances that are allowed to run the command
 	// at the same time. You can specify a number such as 10 or a percentage such
 	// as 10%. The default value is 50. For more information about how to use MaxConcurrency,
-	// see Using Concurrency Controls (http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-velocity)
+	// see Using concurrency controls (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-velocity)
 	// in the AWS Systems Manager User Guide.
 	MaxConcurrency *string `min:"1" type:"string"`
 
@@ -68,7 +68,7 @@ type SendCommandInput struct {
 	// command fails one more time beyond the value of MaxErrors, the systems stops
 	// sending the command to additional targets. You can specify a number like
 	// 10 or a percentage like 10%. The default value is 0. For more information
-	// about how to use MaxErrors, see Using Error Controls (http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors)
+	// about how to use MaxErrors, see Using error controls (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors)
 	// in the AWS Systems Manager User Guide.
 	MaxErrors *string `min:"1" type:"string"`
 
@@ -83,8 +83,8 @@ type SendCommandInput struct {
 	OutputS3KeyPrefix *string `type:"string"`
 
 	// (Deprecated) You can no longer specify this parameter. The system ignores
-	// it. Instead, Systems Manager automatically determines the Amazon S3 bucket
-	// region.
+	// it. Instead, Systems Manager automatically determines the Region of the S3
+	// bucket.
 	OutputS3Region *string `min:"3" type:"string"`
 
 	// The required and optional parameters specified in the document being run.
@@ -97,7 +97,7 @@ type SendCommandInput struct {
 	// (Optional) An array of search criteria that targets instances using a Key,Value
 	// combination that you specify. Targets is required if you don't provide one
 	// or more instance IDs in the call. For more information about how to use targets,
-	// see Sending Commands to a Fleet (http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
+	// see Sending commands to a fleet (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
 	// in the AWS Systems Manager User Guide.
 	Targets []Target `type:"list"`
 
@@ -192,6 +192,7 @@ func (c *Client) SendCommandRequest(input *SendCommandInput) SendCommandRequest 
 	}
 
 	req := c.newRequest(op, input, &SendCommandOutput{})
+
 	return SendCommandRequest{Request: req, Input: input, Copy: c.SendCommandRequest}
 }
 

@@ -69,6 +69,7 @@ func (c *Client) RegisterInstanceEventNotificationAttributesRequest(input *Regis
 	}
 
 	req := c.newRequest(op, input, &RegisterInstanceEventNotificationAttributesOutput{})
+
 	return RegisterInstanceEventNotificationAttributesRequest{Request: req, Input: input, Copy: c.RegisterInstanceEventNotificationAttributesRequest}
 }
 

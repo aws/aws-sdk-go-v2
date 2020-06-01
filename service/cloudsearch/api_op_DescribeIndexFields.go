@@ -99,6 +99,7 @@ func (c *Client) DescribeIndexFieldsRequest(input *DescribeIndexFieldsInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeIndexFieldsOutput{})
+
 	return DescribeIndexFieldsRequest{Request: req, Input: input, Copy: c.DescribeIndexFieldsRequest}
 }
 

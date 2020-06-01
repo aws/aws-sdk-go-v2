@@ -63,6 +63,7 @@ func (c *Client) DescribeDRTAccessRequest(input *DescribeDRTAccessInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeDRTAccessOutput{})
+
 	return DescribeDRTAccessRequest{Request: req, Input: input, Copy: c.DescribeDRTAccessRequest}
 }
 

@@ -94,6 +94,7 @@ func (c *Client) DescribeClustersRequest(input *DescribeClustersInput) DescribeC
 	}
 
 	req := c.newRequest(op, input, &DescribeClustersOutput{})
+
 	return DescribeClustersRequest{Request: req, Input: input, Copy: c.DescribeClustersRequest}
 }
 

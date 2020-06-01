@@ -172,6 +172,7 @@ func (c *Client) CreateClusterRequest(input *CreateClusterInput) CreateClusterRe
 	}
 
 	req := c.newRequest(op, input, &CreateClusterOutput{})
+
 	return CreateClusterRequest{Request: req, Input: input, Copy: c.CreateClusterRequest}
 }
 

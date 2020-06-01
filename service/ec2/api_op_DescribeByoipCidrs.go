@@ -102,6 +102,7 @@ func (c *Client) DescribeByoipCidrsRequest(input *DescribeByoipCidrsInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeByoipCidrsOutput{})
+
 	return DescribeByoipCidrsRequest{Request: req, Input: input, Copy: c.DescribeByoipCidrsRequest}
 }
 

@@ -226,6 +226,7 @@ func (c *Client) GenerateDataSetRequest(input *GenerateDataSetInput) GenerateDat
 	}
 
 	req := c.newRequest(op, input, &GenerateDataSetOutput{})
+
 	return GenerateDataSetRequest{Request: req, Input: input, Copy: c.GenerateDataSetRequest}
 }
 

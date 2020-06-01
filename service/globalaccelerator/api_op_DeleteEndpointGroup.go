@@ -77,6 +77,7 @@ func (c *Client) DeleteEndpointGroupRequest(input *DeleteEndpointGroupInput) Del
 	req := c.newRequest(op, input, &DeleteEndpointGroupOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteEndpointGroupRequest{Request: req, Input: input, Copy: c.DeleteEndpointGroupRequest}
 }
 

@@ -196,6 +196,7 @@ func (c *Client) PutBucketAnalyticsConfigurationRequest(input *PutBucketAnalytic
 	req := c.newRequest(op, input, &PutBucketAnalyticsConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutBucketAnalyticsConfigurationRequest{Request: req, Input: input, Copy: c.PutBucketAnalyticsConfigurationRequest}
 }
 

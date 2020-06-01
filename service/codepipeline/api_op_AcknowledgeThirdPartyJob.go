@@ -109,6 +109,7 @@ func (c *Client) AcknowledgeThirdPartyJobRequest(input *AcknowledgeThirdPartyJob
 	}
 
 	req := c.newRequest(op, input, &AcknowledgeThirdPartyJobOutput{})
+
 	return AcknowledgeThirdPartyJobRequest{Request: req, Input: input, Copy: c.AcknowledgeThirdPartyJobRequest}
 }
 

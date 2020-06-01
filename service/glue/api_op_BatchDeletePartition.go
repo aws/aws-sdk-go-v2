@@ -115,6 +115,7 @@ func (c *Client) BatchDeletePartitionRequest(input *BatchDeletePartitionInput) B
 	}
 
 	req := c.newRequest(op, input, &BatchDeletePartitionOutput{})
+
 	return BatchDeletePartitionRequest{Request: req, Input: input, Copy: c.BatchDeletePartitionRequest}
 }
 

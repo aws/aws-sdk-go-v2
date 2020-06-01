@@ -86,6 +86,7 @@ func (c *Client) DissociateEntityFromThingRequest(input *DissociateEntityFromThi
 	}
 
 	req := c.newRequest(op, input, &DissociateEntityFromThingOutput{})
+
 	return DissociateEntityFromThingRequest{Request: req, Input: input, Copy: c.DissociateEntityFromThingRequest}
 }
 

@@ -195,6 +195,7 @@ func (c *Client) CreateResourceShareRequest(input *CreateResourceShareInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateResourceShareOutput{})
+
 	return CreateResourceShareRequest{Request: req, Input: input, Copy: c.CreateResourceShareRequest}
 }
 

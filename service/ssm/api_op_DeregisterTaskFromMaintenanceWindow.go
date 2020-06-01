@@ -94,6 +94,7 @@ func (c *Client) DeregisterTaskFromMaintenanceWindowRequest(input *DeregisterTas
 	}
 
 	req := c.newRequest(op, input, &DeregisterTaskFromMaintenanceWindowOutput{})
+
 	return DeregisterTaskFromMaintenanceWindowRequest{Request: req, Input: input, Copy: c.DeregisterTaskFromMaintenanceWindowRequest}
 }
 

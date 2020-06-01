@@ -105,6 +105,7 @@ func (c *Client) ListDistributionsRequest(input *ListDistributionsInput) ListDis
 	}
 
 	req := c.newRequest(op, input, &ListDistributionsOutput{})
+
 	return ListDistributionsRequest{Request: req, Input: input, Copy: c.ListDistributionsRequest}
 }
 

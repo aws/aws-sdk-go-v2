@@ -76,6 +76,7 @@ func (c *Client) ListAccessControlRulesRequest(input *ListAccessControlRulesInpu
 	}
 
 	req := c.newRequest(op, input, &ListAccessControlRulesOutput{})
+
 	return ListAccessControlRulesRequest{Request: req, Input: input, Copy: c.ListAccessControlRulesRequest}
 }
 

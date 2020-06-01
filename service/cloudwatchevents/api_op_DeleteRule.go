@@ -105,6 +105,7 @@ func (c *Client) DeleteRuleRequest(input *DeleteRuleInput) DeleteRuleRequest {
 	req := c.newRequest(op, input, &DeleteRuleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteRuleRequest{Request: req, Input: input, Copy: c.DeleteRuleRequest}
 }
 

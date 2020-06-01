@@ -109,6 +109,7 @@ func (c *Client) DeleteTableVersionRequest(input *DeleteTableVersionInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteTableVersionOutput{})
+
 	return DeleteTableVersionRequest{Request: req, Input: input, Copy: c.DeleteTableVersionRequest}
 }
 

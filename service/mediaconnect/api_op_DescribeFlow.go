@@ -111,6 +111,7 @@ func (c *Client) DescribeFlowRequest(input *DescribeFlowInput) DescribeFlowReque
 	}
 
 	req := c.newRequest(op, input, &DescribeFlowOutput{})
+
 	return DescribeFlowRequest{Request: req, Input: input, Copy: c.DescribeFlowRequest}
 }
 

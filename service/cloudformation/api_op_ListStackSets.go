@@ -90,6 +90,12 @@ func (c *Client) ListStackSetsRequest(input *ListStackSetsInput) ListStackSetsRe
 		Name:       opListStackSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -97,6 +103,7 @@ func (c *Client) ListStackSetsRequest(input *ListStackSetsInput) ListStackSetsRe
 	}
 
 	req := c.newRequest(op, input, &ListStackSetsOutput{})
+
 	return ListStackSetsRequest{Request: req, Input: input, Copy: c.ListStackSetsRequest}
 }
 
@@ -122,6 +129,53 @@ func (r ListStackSetsRequest) Send(ctx context.Context) (*ListStackSetsResponse,
 	}
 
 	return resp, nil
+}
+
+// NewListStackSetsRequestPaginator returns a paginator for ListStackSets.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListStackSetsRequest(input)
+//   p := cloudformation.NewListStackSetsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListStackSetsPaginator(req ListStackSetsRequest) ListStackSetsPaginator {
+	return ListStackSetsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListStackSetsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListStackSetsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListStackSetsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListStackSetsPaginator) CurrentPage() *ListStackSetsOutput {
+	return p.Pager.CurrentPage().(*ListStackSetsOutput)
 }
 
 // ListStackSetsResponse is the response type for the

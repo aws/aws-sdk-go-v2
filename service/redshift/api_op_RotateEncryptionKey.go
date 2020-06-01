@@ -79,6 +79,7 @@ func (c *Client) RotateEncryptionKeyRequest(input *RotateEncryptionKeyInput) Rot
 	}
 
 	req := c.newRequest(op, input, &RotateEncryptionKeyOutput{})
+
 	return RotateEncryptionKeyRequest{Request: req, Input: input, Copy: c.RotateEncryptionKeyRequest}
 }
 

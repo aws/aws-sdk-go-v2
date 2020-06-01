@@ -77,6 +77,7 @@ func (c *Client) DescribeReportCreationRequest(input *DescribeReportCreationInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeReportCreationOutput{})
+
 	return DescribeReportCreationRequest{Request: req, Input: input, Copy: c.DescribeReportCreationRequest}
 }
 

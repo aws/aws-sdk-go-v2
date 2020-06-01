@@ -164,6 +164,7 @@ func (c *Client) GetCampaignDateRangeKpiRequest(input *GetCampaignDateRangeKpiIn
 	}
 
 	req := c.newRequest(op, input, &GetCampaignDateRangeKpiOutput{})
+
 	return GetCampaignDateRangeKpiRequest{Request: req, Input: input, Copy: c.GetCampaignDateRangeKpiRequest}
 }
 

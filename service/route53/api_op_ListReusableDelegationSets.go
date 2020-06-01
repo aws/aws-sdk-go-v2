@@ -166,6 +166,7 @@ func (c *Client) ListReusableDelegationSetsRequest(input *ListReusableDelegation
 	}
 
 	req := c.newRequest(op, input, &ListReusableDelegationSetsOutput{})
+
 	return ListReusableDelegationSetsRequest{Request: req, Input: input, Copy: c.ListReusableDelegationSetsRequest}
 }
 

@@ -111,6 +111,7 @@ func (c *Client) DescribeHomeRegionControlsRequest(input *DescribeHomeRegionCont
 	}
 
 	req := c.newRequest(op, input, &DescribeHomeRegionControlsOutput{})
+
 	return DescribeHomeRegionControlsRequest{Request: req, Input: input, Copy: c.DescribeHomeRegionControlsRequest}
 }
 

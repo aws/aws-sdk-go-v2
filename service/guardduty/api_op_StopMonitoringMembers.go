@@ -140,6 +140,7 @@ func (c *Client) StopMonitoringMembersRequest(input *StopMonitoringMembersInput)
 	}
 
 	req := c.newRequest(op, input, &StopMonitoringMembersOutput{})
+
 	return StopMonitoringMembersRequest{Request: req, Input: input, Copy: c.StopMonitoringMembersRequest}
 }
 

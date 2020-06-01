@@ -167,6 +167,7 @@ func (c *Client) GetDeviceDefinitionVersionRequest(input *GetDeviceDefinitionVer
 	}
 
 	req := c.newRequest(op, input, &GetDeviceDefinitionVersionOutput{})
+
 	return GetDeviceDefinitionVersionRequest{Request: req, Input: input, Copy: c.GetDeviceDefinitionVersionRequest}
 }
 

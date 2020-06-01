@@ -145,6 +145,7 @@ func (c *Client) GrantFlowEntitlementsRequest(input *GrantFlowEntitlementsInput)
 	}
 
 	req := c.newRequest(op, input, &GrantFlowEntitlementsOutput{})
+
 	return GrantFlowEntitlementsRequest{Request: req, Input: input, Copy: c.GrantFlowEntitlementsRequest}
 }
 

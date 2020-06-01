@@ -109,6 +109,7 @@ func (c *Client) DeleteSmsTemplateRequest(input *DeleteSmsTemplateInput) DeleteS
 	}
 
 	req := c.newRequest(op, input, &DeleteSmsTemplateOutput{})
+
 	return DeleteSmsTemplateRequest{Request: req, Input: input, Copy: c.DeleteSmsTemplateRequest}
 }
 

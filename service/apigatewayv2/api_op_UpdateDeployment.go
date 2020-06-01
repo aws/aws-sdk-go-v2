@@ -165,6 +165,7 @@ func (c *Client) UpdateDeploymentRequest(input *UpdateDeploymentInput) UpdateDep
 	}
 
 	req := c.newRequest(op, input, &UpdateDeploymentOutput{})
+
 	return UpdateDeploymentRequest{Request: req, Input: input, Copy: c.UpdateDeploymentRequest}
 }
 

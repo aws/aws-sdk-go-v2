@@ -114,6 +114,7 @@ func (c *Client) PutPublicAccessBlockRequest(input *PutPublicAccessBlockInput) P
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
+
 	return PutPublicAccessBlockRequest{Request: req, Input: input, Copy: c.PutPublicAccessBlockRequest}
 }
 

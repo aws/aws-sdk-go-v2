@@ -96,6 +96,7 @@ func (c *Client) UpdateVPCEConfigurationRequest(input *UpdateVPCEConfigurationIn
 	}
 
 	req := c.newRequest(op, input, &UpdateVPCEConfigurationOutput{})
+
 	return UpdateVPCEConfigurationRequest{Request: req, Input: input, Copy: c.UpdateVPCEConfigurationRequest}
 }
 

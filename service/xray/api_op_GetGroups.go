@@ -119,6 +119,7 @@ func (c *Client) GetGroupsRequest(input *GetGroupsInput) GetGroupsRequest {
 	}
 
 	req := c.newRequest(op, input, &GetGroupsOutput{})
+
 	return GetGroupsRequest{Request: req, Input: input, Copy: c.GetGroupsRequest}
 }
 

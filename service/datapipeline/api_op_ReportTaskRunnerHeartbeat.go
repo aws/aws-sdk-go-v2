@@ -104,6 +104,7 @@ func (c *Client) ReportTaskRunnerHeartbeatRequest(input *ReportTaskRunnerHeartbe
 	}
 
 	req := c.newRequest(op, input, &ReportTaskRunnerHeartbeatOutput{})
+
 	return ReportTaskRunnerHeartbeatRequest{Request: req, Input: input, Copy: c.ReportTaskRunnerHeartbeatRequest}
 }
 

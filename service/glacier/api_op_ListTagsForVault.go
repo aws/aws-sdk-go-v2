@@ -128,6 +128,7 @@ func (c *Client) ListTagsForVaultRequest(input *ListTagsForVaultInput) ListTagsF
 	}
 
 	req := c.newRequest(op, input, &ListTagsForVaultOutput{})
+
 	return ListTagsForVaultRequest{Request: req, Input: input, Copy: c.ListTagsForVaultRequest}
 }
 

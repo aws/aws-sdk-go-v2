@@ -94,6 +94,7 @@ func (c *Client) DeleteHITRequest(input *DeleteHITInput) DeleteHITRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteHITOutput{})
+
 	return DeleteHITRequest{Request: req, Input: input, Copy: c.DeleteHITRequest}
 }
 

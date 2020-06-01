@@ -80,6 +80,7 @@ func (c *Client) DeleteReportGroupRequest(input *DeleteReportGroupInput) DeleteR
 	}
 
 	req := c.newRequest(op, input, &DeleteReportGroupOutput{})
+
 	return DeleteReportGroupRequest{Request: req, Input: input, Copy: c.DeleteReportGroupRequest}
 }
 

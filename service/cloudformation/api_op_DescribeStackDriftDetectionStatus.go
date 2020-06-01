@@ -154,6 +154,7 @@ func (c *Client) DescribeStackDriftDetectionStatusRequest(input *DescribeStackDr
 	}
 
 	req := c.newRequest(op, input, &DescribeStackDriftDetectionStatusOutput{})
+
 	return DescribeStackDriftDetectionStatusRequest{Request: req, Input: input, Copy: c.DescribeStackDriftDetectionStatusRequest}
 }
 

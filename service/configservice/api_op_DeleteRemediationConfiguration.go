@@ -80,6 +80,7 @@ func (c *Client) DeleteRemediationConfigurationRequest(input *DeleteRemediationC
 	}
 
 	req := c.newRequest(op, input, &DeleteRemediationConfigurationOutput{})
+
 	return DeleteRemediationConfigurationRequest{Request: req, Input: input, Copy: c.DeleteRemediationConfigurationRequest}
 }
 

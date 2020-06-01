@@ -95,6 +95,7 @@ func (c *Client) ListProtectionsRequest(input *ListProtectionsInput) ListProtect
 	}
 
 	req := c.newRequest(op, input, &ListProtectionsOutput{})
+
 	return ListProtectionsRequest{Request: req, Input: input, Copy: c.ListProtectionsRequest}
 }
 

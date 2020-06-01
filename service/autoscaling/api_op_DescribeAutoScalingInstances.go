@@ -82,6 +82,7 @@ func (c *Client) DescribeAutoScalingInstancesRequest(input *DescribeAutoScalingI
 	}
 
 	req := c.newRequest(op, input, &DescribeAutoScalingInstancesOutput{})
+
 	return DescribeAutoScalingInstancesRequest{Request: req, Input: input, Copy: c.DescribeAutoScalingInstancesRequest}
 }
 

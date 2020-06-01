@@ -151,6 +151,7 @@ func (c *Client) GetApplicationDateRangeKpiRequest(input *GetApplicationDateRang
 	}
 
 	req := c.newRequest(op, input, &GetApplicationDateRangeKpiOutput{})
+
 	return GetApplicationDateRangeKpiRequest{Request: req, Input: input, Copy: c.GetApplicationDateRangeKpiRequest}
 }
 

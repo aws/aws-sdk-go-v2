@@ -150,6 +150,7 @@ func (c *Client) PutOrganizationConformancePackRequest(input *PutOrganizationCon
 	}
 
 	req := c.newRequest(op, input, &PutOrganizationConformancePackOutput{})
+
 	return PutOrganizationConformancePackRequest{Request: req, Input: input, Copy: c.PutOrganizationConformancePackRequest}
 }
 

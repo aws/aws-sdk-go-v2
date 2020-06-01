@@ -36,6 +36,24 @@ func (enum EventAggregateField) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type EventScopeCode string
+
+// Enum values for EventScopeCode
+const (
+	EventScopeCodePublic          EventScopeCode = "PUBLIC"
+	EventScopeCodeAccountSpecific EventScopeCode = "ACCOUNT_SPECIFIC"
+	EventScopeCodeNone            EventScopeCode = "NONE"
+)
+
+func (enum EventScopeCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventScopeCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EventStatusCode string
 
 // Enum values for EventStatusCode

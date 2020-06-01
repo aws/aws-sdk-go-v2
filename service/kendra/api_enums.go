@@ -62,12 +62,13 @@ type DataSourceSyncJobStatus string
 
 // Enum values for DataSourceSyncJobStatus
 const (
-	DataSourceSyncJobStatusFailed     DataSourceSyncJobStatus = "FAILED"
-	DataSourceSyncJobStatusSucceeded  DataSourceSyncJobStatus = "SUCCEEDED"
-	DataSourceSyncJobStatusSyncing    DataSourceSyncJobStatus = "SYNCING"
-	DataSourceSyncJobStatusIncomplete DataSourceSyncJobStatus = "INCOMPLETE"
-	DataSourceSyncJobStatusStopping   DataSourceSyncJobStatus = "STOPPING"
-	DataSourceSyncJobStatusAborted    DataSourceSyncJobStatus = "ABORTED"
+	DataSourceSyncJobStatusFailed          DataSourceSyncJobStatus = "FAILED"
+	DataSourceSyncJobStatusSucceeded       DataSourceSyncJobStatus = "SUCCEEDED"
+	DataSourceSyncJobStatusSyncing         DataSourceSyncJobStatus = "SYNCING"
+	DataSourceSyncJobStatusIncomplete      DataSourceSyncJobStatus = "INCOMPLETE"
+	DataSourceSyncJobStatusStopping        DataSourceSyncJobStatus = "STOPPING"
+	DataSourceSyncJobStatusAborted         DataSourceSyncJobStatus = "ABORTED"
+	DataSourceSyncJobStatusSyncingIndexing DataSourceSyncJobStatus = "SYNCING_INDEXING"
 )
 
 func (enum DataSourceSyncJobStatus) MarshalValue() (string, error) {
@@ -86,6 +87,9 @@ const (
 	DataSourceTypeS3         DataSourceType = "S3"
 	DataSourceTypeSharepoint DataSourceType = "SHAREPOINT"
 	DataSourceTypeDatabase   DataSourceType = "DATABASE"
+	DataSourceTypeSalesforce DataSourceType = "SALESFORCE"
+	DataSourceTypeOnedrive   DataSourceType = "ONEDRIVE"
+	DataSourceTypeServicenow DataSourceType = "SERVICENOW"
 )
 
 func (enum DataSourceType) MarshalValue() (string, error) {
@@ -172,6 +176,23 @@ func (enum FaqStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type IndexEdition string
+
+// Enum values for IndexEdition
+const (
+	IndexEditionDeveloperEdition  IndexEdition = "DEVELOPER_EDITION"
+	IndexEditionEnterpriseEdition IndexEdition = "ENTERPRISE_EDITION"
+)
+
+func (enum IndexEdition) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IndexEdition) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type IndexStatus string
 
 // Enum values for IndexStatus
@@ -180,6 +201,7 @@ const (
 	IndexStatusActive         IndexStatus = "ACTIVE"
 	IndexStatusDeleting       IndexStatus = "DELETING"
 	IndexStatusFailed         IndexStatus = "FAILED"
+	IndexStatusUpdating       IndexStatus = "UPDATING"
 	IndexStatusSystemUpdating IndexStatus = "SYSTEM_UPDATING"
 )
 
@@ -274,6 +296,90 @@ func (enum RelevanceType) MarshalValue() (string, error) {
 }
 
 func (enum RelevanceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SalesforceChatterFeedIncludeFilterType string
+
+// Enum values for SalesforceChatterFeedIncludeFilterType
+const (
+	SalesforceChatterFeedIncludeFilterTypeActiveUser   SalesforceChatterFeedIncludeFilterType = "ACTIVE_USER"
+	SalesforceChatterFeedIncludeFilterTypeStandardUser SalesforceChatterFeedIncludeFilterType = "STANDARD_USER"
+)
+
+func (enum SalesforceChatterFeedIncludeFilterType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SalesforceChatterFeedIncludeFilterType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SalesforceKnowledgeArticleState string
+
+// Enum values for SalesforceKnowledgeArticleState
+const (
+	SalesforceKnowledgeArticleStateDraft     SalesforceKnowledgeArticleState = "DRAFT"
+	SalesforceKnowledgeArticleStatePublished SalesforceKnowledgeArticleState = "PUBLISHED"
+	SalesforceKnowledgeArticleStateArchived  SalesforceKnowledgeArticleState = "ARCHIVED"
+)
+
+func (enum SalesforceKnowledgeArticleState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SalesforceKnowledgeArticleState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SalesforceStandardObjectName string
+
+// Enum values for SalesforceStandardObjectName
+const (
+	SalesforceStandardObjectNameAccount     SalesforceStandardObjectName = "ACCOUNT"
+	SalesforceStandardObjectNameCampaign    SalesforceStandardObjectName = "CAMPAIGN"
+	SalesforceStandardObjectNameCase        SalesforceStandardObjectName = "CASE"
+	SalesforceStandardObjectNameContact     SalesforceStandardObjectName = "CONTACT"
+	SalesforceStandardObjectNameContract    SalesforceStandardObjectName = "CONTRACT"
+	SalesforceStandardObjectNameDocument    SalesforceStandardObjectName = "DOCUMENT"
+	SalesforceStandardObjectNameGroup       SalesforceStandardObjectName = "GROUP"
+	SalesforceStandardObjectNameIdea        SalesforceStandardObjectName = "IDEA"
+	SalesforceStandardObjectNameLead        SalesforceStandardObjectName = "LEAD"
+	SalesforceStandardObjectNameOpportunity SalesforceStandardObjectName = "OPPORTUNITY"
+	SalesforceStandardObjectNamePartner     SalesforceStandardObjectName = "PARTNER"
+	SalesforceStandardObjectNamePricebook   SalesforceStandardObjectName = "PRICEBOOK"
+	SalesforceStandardObjectNameProduct     SalesforceStandardObjectName = "PRODUCT"
+	SalesforceStandardObjectNameProfile     SalesforceStandardObjectName = "PROFILE"
+	SalesforceStandardObjectNameSolution    SalesforceStandardObjectName = "SOLUTION"
+	SalesforceStandardObjectNameTask        SalesforceStandardObjectName = "TASK"
+	SalesforceStandardObjectNameUser        SalesforceStandardObjectName = "USER"
+)
+
+func (enum SalesforceStandardObjectName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SalesforceStandardObjectName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ServiceNowBuildVersionType string
+
+// Enum values for ServiceNowBuildVersionType
+const (
+	ServiceNowBuildVersionTypeLondon ServiceNowBuildVersionType = "LONDON"
+	ServiceNowBuildVersionTypeOthers ServiceNowBuildVersionType = "OTHERS"
+)
+
+func (enum ServiceNowBuildVersionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ServiceNowBuildVersionType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

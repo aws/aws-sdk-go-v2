@@ -49,7 +49,7 @@ type CreateHttpNamespaceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A value that you can use to determine whether the request completed successfully.
-	// To get the status of the operation, see GetOperation.
+	// To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
 	OperationId *string `type:"string"`
 }
 
@@ -68,7 +68,7 @@ const opCreateHttpNamespace = "CreateHttpNamespace"
 // discovered using DNS.
 //
 // For the current limit on the number of namespaces that you can create using
-// the same AWS account, see AWS Cloud Map Limits (http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// the same AWS account, see AWS Cloud Map Limits (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
 // in the AWS Cloud Map Developer Guide.
 //
 //    // Example sending a request using CreateHttpNamespaceRequest.
@@ -91,6 +91,7 @@ func (c *Client) CreateHttpNamespaceRequest(input *CreateHttpNamespaceInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateHttpNamespaceOutput{})
+
 	return CreateHttpNamespaceRequest{Request: req, Input: input, Copy: c.CreateHttpNamespaceRequest}
 }
 

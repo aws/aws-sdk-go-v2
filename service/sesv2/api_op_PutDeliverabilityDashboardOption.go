@@ -127,6 +127,7 @@ func (c *Client) PutDeliverabilityDashboardOptionRequest(input *PutDeliverabilit
 	}
 
 	req := c.newRequest(op, input, &PutDeliverabilityDashboardOptionOutput{})
+
 	return PutDeliverabilityDashboardOptionRequest{Request: req, Input: input, Copy: c.PutDeliverabilityDashboardOptionRequest}
 }
 

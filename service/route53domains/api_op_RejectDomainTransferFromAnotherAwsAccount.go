@@ -93,6 +93,7 @@ func (c *Client) RejectDomainTransferFromAnotherAwsAccountRequest(input *RejectD
 	}
 
 	req := c.newRequest(op, input, &RejectDomainTransferFromAnotherAwsAccountOutput{})
+
 	return RejectDomainTransferFromAnotherAwsAccountRequest{Request: req, Input: input, Copy: c.RejectDomainTransferFromAnotherAwsAccountRequest}
 }
 

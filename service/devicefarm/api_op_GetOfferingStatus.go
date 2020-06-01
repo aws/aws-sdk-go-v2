@@ -95,6 +95,7 @@ func (c *Client) GetOfferingStatusRequest(input *GetOfferingStatusInput) GetOffe
 	}
 
 	req := c.newRequest(op, input, &GetOfferingStatusOutput{})
+
 	return GetOfferingStatusRequest{Request: req, Input: input, Copy: c.GetOfferingStatusRequest}
 }
 

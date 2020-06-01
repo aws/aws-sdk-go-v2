@@ -90,6 +90,7 @@ func (c *Client) AddTagsToOnPremisesInstancesRequest(input *AddTagsToOnPremisesI
 	req := c.newRequest(op, input, &AddTagsToOnPremisesInstancesOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AddTagsToOnPremisesInstancesRequest{Request: req, Input: input, Copy: c.AddTagsToOnPremisesInstancesRequest}
 }
 

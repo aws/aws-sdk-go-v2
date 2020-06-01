@@ -95,6 +95,7 @@ func (c *Client) DescribeHubRequest(input *DescribeHubInput) DescribeHubRequest 
 	}
 
 	req := c.newRequest(op, input, &DescribeHubOutput{})
+
 	return DescribeHubRequest{Request: req, Input: input, Copy: c.DescribeHubRequest}
 }
 

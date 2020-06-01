@@ -162,6 +162,7 @@ func (c *Client) GetDeliverabilityTestReportRequest(input *GetDeliverabilityTest
 	}
 
 	req := c.newRequest(op, input, &GetDeliverabilityTestReportOutput{})
+
 	return GetDeliverabilityTestReportRequest{Request: req, Input: input, Copy: c.GetDeliverabilityTestReportRequest}
 }
 

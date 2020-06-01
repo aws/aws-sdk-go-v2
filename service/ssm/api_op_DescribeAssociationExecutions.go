@@ -111,6 +111,7 @@ func (c *Client) DescribeAssociationExecutionsRequest(input *DescribeAssociation
 	}
 
 	req := c.newRequest(op, input, &DescribeAssociationExecutionsOutput{})
+
 	return DescribeAssociationExecutionsRequest{Request: req, Input: input, Copy: c.DescribeAssociationExecutionsRequest}
 }
 

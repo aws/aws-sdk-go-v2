@@ -76,6 +76,7 @@ func (c *Client) GetConferenceProviderRequest(input *GetConferenceProviderInput)
 	}
 
 	req := c.newRequest(op, input, &GetConferenceProviderOutput{})
+
 	return GetConferenceProviderRequest{Request: req, Input: input, Copy: c.GetConferenceProviderRequest}
 }
 

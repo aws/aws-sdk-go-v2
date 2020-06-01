@@ -110,6 +110,7 @@ func (c *Client) DeleteFilterRequest(input *DeleteFilterInput) DeleteFilterReque
 	}
 
 	req := c.newRequest(op, input, &DeleteFilterOutput{})
+
 	return DeleteFilterRequest{Request: req, Input: input, Copy: c.DeleteFilterRequest}
 }
 

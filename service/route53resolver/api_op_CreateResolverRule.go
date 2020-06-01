@@ -136,6 +136,7 @@ func (c *Client) CreateResolverRuleRequest(input *CreateResolverRuleInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateResolverRuleOutput{})
+
 	return CreateResolverRuleRequest{Request: req, Input: input, Copy: c.CreateResolverRuleRequest}
 }
 

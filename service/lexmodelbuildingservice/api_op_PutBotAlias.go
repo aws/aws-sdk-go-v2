@@ -292,6 +292,7 @@ func (c *Client) PutBotAliasRequest(input *PutBotAliasInput) PutBotAliasRequest 
 	}
 
 	req := c.newRequest(op, input, &PutBotAliasOutput{})
+
 	return PutBotAliasRequest{Request: req, Input: input, Copy: c.PutBotAliasRequest}
 }
 

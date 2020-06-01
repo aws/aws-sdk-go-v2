@@ -72,6 +72,7 @@ func (c *Client) DescribeCrossAccountAccessRoleRequest(input *DescribeCrossAccou
 	}
 
 	req := c.newRequest(op, input, &DescribeCrossAccountAccessRoleOutput{})
+
 	return DescribeCrossAccountAccessRoleRequest{Request: req, Input: input, Copy: c.DescribeCrossAccountAccessRoleRequest}
 }
 

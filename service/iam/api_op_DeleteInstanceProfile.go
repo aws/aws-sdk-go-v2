@@ -93,6 +93,7 @@ func (c *Client) DeleteInstanceProfileRequest(input *DeleteInstanceProfileInput)
 	req := c.newRequest(op, input, &DeleteInstanceProfileOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteInstanceProfileRequest{Request: req, Input: input, Copy: c.DeleteInstanceProfileRequest}
 }
 

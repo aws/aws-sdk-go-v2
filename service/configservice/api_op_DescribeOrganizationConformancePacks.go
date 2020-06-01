@@ -80,6 +80,7 @@ func (c *Client) DescribeOrganizationConformancePacksRequest(input *DescribeOrga
 	}
 
 	req := c.newRequest(op, input, &DescribeOrganizationConformancePacksOutput{})
+
 	return DescribeOrganizationConformancePacksRequest{Request: req, Input: input, Copy: c.DescribeOrganizationConformancePacksRequest}
 }
 

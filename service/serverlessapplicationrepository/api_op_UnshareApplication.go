@@ -108,6 +108,7 @@ func (c *Client) UnshareApplicationRequest(input *UnshareApplicationInput) Unsha
 	req := c.newRequest(op, input, &UnshareApplicationOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UnshareApplicationRequest{Request: req, Input: input, Copy: c.UnshareApplicationRequest}
 }
 

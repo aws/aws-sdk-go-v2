@@ -168,6 +168,7 @@ func (c *Client) SendEventRequest(input *SendEventInput) SendEventRequest {
 	}
 
 	req := c.newRequest(op, input, &SendEventOutput{})
+
 	return SendEventRequest{Request: req, Input: input, Copy: c.SendEventRequest}
 }
 

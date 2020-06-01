@@ -97,6 +97,7 @@ func (c *Client) PutDeliveryChannelRequest(input *PutDeliveryChannelInput) PutDe
 	req := c.newRequest(op, input, &PutDeliveryChannelOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutDeliveryChannelRequest{Request: req, Input: input, Copy: c.PutDeliveryChannelRequest}
 }
 

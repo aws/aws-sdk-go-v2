@@ -203,6 +203,7 @@ func (c *Client) GenerateOrganizationsAccessReportRequest(input *GenerateOrganiz
 	}
 
 	req := c.newRequest(op, input, &GenerateOrganizationsAccessReportOutput{})
+
 	return GenerateOrganizationsAccessReportRequest{Request: req, Input: input, Copy: c.GenerateOrganizationsAccessReportRequest}
 }
 

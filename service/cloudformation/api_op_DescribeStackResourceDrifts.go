@@ -145,6 +145,7 @@ func (c *Client) DescribeStackResourceDriftsRequest(input *DescribeStackResource
 	}
 
 	req := c.newRequest(op, input, &DescribeStackResourceDriftsOutput{})
+
 	return DescribeStackResourceDriftsRequest{Request: req, Input: input, Copy: c.DescribeStackResourceDriftsRequest}
 }
 

@@ -118,6 +118,7 @@ func (c *Client) AssociateVpcCidrBlockRequest(input *AssociateVpcCidrBlockInput)
 	}
 
 	req := c.newRequest(op, input, &AssociateVpcCidrBlockOutput{})
+
 	return AssociateVpcCidrBlockRequest{Request: req, Input: input, Copy: c.AssociateVpcCidrBlockRequest}
 }
 

@@ -153,6 +153,7 @@ func (c *Client) RegisterContainerInstanceRequest(input *RegisterContainerInstan
 	}
 
 	req := c.newRequest(op, input, &RegisterContainerInstanceOutput{})
+
 	return RegisterContainerInstanceRequest{Request: req, Input: input, Copy: c.RegisterContainerInstanceRequest}
 }
 

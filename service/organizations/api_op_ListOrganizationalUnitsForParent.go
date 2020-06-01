@@ -128,6 +128,7 @@ func (c *Client) ListOrganizationalUnitsForParentRequest(input *ListOrganization
 	}
 
 	req := c.newRequest(op, input, &ListOrganizationalUnitsForParentOutput{})
+
 	return ListOrganizationalUnitsForParentRequest{Request: req, Input: input, Copy: c.ListOrganizationalUnitsForParentRequest}
 }
 

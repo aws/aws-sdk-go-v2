@@ -89,6 +89,7 @@ func (c *Client) PutSkillAuthorizationRequest(input *PutSkillAuthorizationInput)
 	}
 
 	req := c.newRequest(op, input, &PutSkillAuthorizationOutput{})
+
 	return PutSkillAuthorizationRequest{Request: req, Input: input, Copy: c.PutSkillAuthorizationRequest}
 }
 

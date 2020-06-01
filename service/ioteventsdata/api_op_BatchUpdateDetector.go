@@ -126,6 +126,7 @@ func (c *Client) BatchUpdateDetectorRequest(input *BatchUpdateDetectorInput) Bat
 	}
 
 	req := c.newRequest(op, input, &BatchUpdateDetectorOutput{})
+
 	return BatchUpdateDetectorRequest{Request: req, Input: input, Copy: c.BatchUpdateDetectorRequest}
 }
 

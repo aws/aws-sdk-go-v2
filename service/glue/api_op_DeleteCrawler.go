@@ -77,6 +77,7 @@ func (c *Client) DeleteCrawlerRequest(input *DeleteCrawlerInput) DeleteCrawlerRe
 	}
 
 	req := c.newRequest(op, input, &DeleteCrawlerOutput{})
+
 	return DeleteCrawlerRequest{Request: req, Input: input, Copy: c.DeleteCrawlerRequest}
 }
 

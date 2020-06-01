@@ -87,6 +87,7 @@ func (c *Client) ListDeadLetterSourceQueuesRequest(input *ListDeadLetterSourceQu
 	}
 
 	req := c.newRequest(op, input, &ListDeadLetterSourceQueuesOutput{})
+
 	return ListDeadLetterSourceQueuesRequest{Request: req, Input: input, Copy: c.ListDeadLetterSourceQueuesRequest}
 }
 

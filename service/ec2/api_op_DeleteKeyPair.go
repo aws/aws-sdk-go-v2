@@ -70,6 +70,7 @@ func (c *Client) DeleteKeyPairRequest(input *DeleteKeyPairInput) DeleteKeyPairRe
 	req := c.newRequest(op, input, &DeleteKeyPairOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteKeyPairRequest{Request: req, Input: input, Copy: c.DeleteKeyPairRequest}
 }
 

@@ -98,6 +98,7 @@ func (c *Client) UpdateDetectorVersionStatusRequest(input *UpdateDetectorVersion
 	}
 
 	req := c.newRequest(op, input, &UpdateDetectorVersionStatusOutput{})
+
 	return UpdateDetectorVersionStatusRequest{Request: req, Input: input, Copy: c.UpdateDetectorVersionStatusRequest}
 }
 

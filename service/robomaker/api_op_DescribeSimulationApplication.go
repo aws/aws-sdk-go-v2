@@ -212,6 +212,7 @@ func (c *Client) DescribeSimulationApplicationRequest(input *DescribeSimulationA
 	}
 
 	req := c.newRequest(op, input, &DescribeSimulationApplicationOutput{})
+
 	return DescribeSimulationApplicationRequest{Request: req, Input: input, Copy: c.DescribeSimulationApplicationRequest}
 }
 

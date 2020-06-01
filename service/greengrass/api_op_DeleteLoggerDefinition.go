@@ -90,6 +90,7 @@ func (c *Client) DeleteLoggerDefinitionRequest(input *DeleteLoggerDefinitionInpu
 	}
 
 	req := c.newRequest(op, input, &DeleteLoggerDefinitionOutput{})
+
 	return DeleteLoggerDefinitionRequest{Request: req, Input: input, Copy: c.DeleteLoggerDefinitionRequest}
 }
 

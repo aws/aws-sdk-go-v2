@@ -72,6 +72,16 @@ const opDeleteRateBasedRule = "DeleteRateBasedRule"
 // DeleteRateBasedRuleRequest returns a request value for making API operation for
 // AWS WAF.
 //
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Permanently deletes a RateBasedRule. You can't delete a rule if it's still
 // used in any WebACL objects or if it still includes any predicates, such as
 // ByteMatchSet objects.
@@ -109,6 +119,7 @@ func (c *Client) DeleteRateBasedRuleRequest(input *DeleteRateBasedRuleInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteRateBasedRuleOutput{})
+
 	return DeleteRateBasedRuleRequest{Request: req, Input: input, Copy: c.DeleteRateBasedRuleRequest}
 }
 

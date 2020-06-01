@@ -98,6 +98,7 @@ func (c *Client) RemoveRoleFromDBInstanceRequest(input *RemoveRoleFromDBInstance
 	req := c.newRequest(op, input, &RemoveRoleFromDBInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RemoveRoleFromDBInstanceRequest{Request: req, Input: input, Copy: c.RemoveRoleFromDBInstanceRequest}
 }
 

@@ -88,6 +88,7 @@ func (c *Client) RemoveSourceIdentifierFromSubscriptionRequest(input *RemoveSour
 	}
 
 	req := c.newRequest(op, input, &RemoveSourceIdentifierFromSubscriptionOutput{})
+
 	return RemoveSourceIdentifierFromSubscriptionRequest{Request: req, Input: input, Copy: c.RemoveSourceIdentifierFromSubscriptionRequest}
 }
 

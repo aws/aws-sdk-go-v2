@@ -106,6 +106,7 @@ func (c *Client) ListTagsForDeliveryStreamRequest(input *ListTagsForDeliveryStre
 	}
 
 	req := c.newRequest(op, input, &ListTagsForDeliveryStreamOutput{})
+
 	return ListTagsForDeliveryStreamRequest{Request: req, Input: input, Copy: c.ListTagsForDeliveryStreamRequest}
 }
 

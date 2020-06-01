@@ -140,6 +140,7 @@ func (c *Client) ListGraphsRequest(input *ListGraphsInput) ListGraphsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListGraphsOutput{})
+
 	return ListGraphsRequest{Request: req, Input: input, Copy: c.ListGraphsRequest}
 }
 

@@ -83,6 +83,7 @@ func (c *Client) UpdateGatewayGroupRequest(input *UpdateGatewayGroupInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateGatewayGroupOutput{})
+
 	return UpdateGatewayGroupRequest{Request: req, Input: input, Copy: c.UpdateGatewayGroupRequest}
 }
 

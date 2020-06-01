@@ -99,6 +99,7 @@ func (c *Client) SetLoadBalancerListenerSSLCertificateRequest(input *SetLoadBala
 	}
 
 	req := c.newRequest(op, input, &SetLoadBalancerListenerSSLCertificateOutput{})
+
 	return SetLoadBalancerListenerSSLCertificateRequest{Request: req, Input: input, Copy: c.SetLoadBalancerListenerSSLCertificateRequest}
 }
 

@@ -113,6 +113,7 @@ func (c *Client) UpdateCostCategoryDefinitionRequest(input *UpdateCostCategoryDe
 	}
 
 	req := c.newRequest(op, input, &UpdateCostCategoryDefinitionOutput{})
+
 	return UpdateCostCategoryDefinitionRequest{Request: req, Input: input, Copy: c.UpdateCostCategoryDefinitionRequest}
 }
 

@@ -123,6 +123,7 @@ func (c *Client) ExecuteProvisionedProductServiceActionRequest(input *ExecutePro
 	}
 
 	req := c.newRequest(op, input, &ExecuteProvisionedProductServiceActionOutput{})
+
 	return ExecuteProvisionedProductServiceActionRequest{Request: req, Input: input, Copy: c.ExecuteProvisionedProductServiceActionRequest}
 }
 

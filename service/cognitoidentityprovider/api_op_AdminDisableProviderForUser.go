@@ -115,6 +115,7 @@ func (c *Client) AdminDisableProviderForUserRequest(input *AdminDisableProviderF
 	}
 
 	req := c.newRequest(op, input, &AdminDisableProviderForUserOutput{})
+
 	return AdminDisableProviderForUserRequest{Request: req, Input: input, Copy: c.AdminDisableProviderForUserRequest}
 }
 

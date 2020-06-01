@@ -111,6 +111,7 @@ func (c *Client) GetPushTemplateRequest(input *GetPushTemplateInput) GetPushTemp
 	}
 
 	req := c.newRequest(op, input, &GetPushTemplateOutput{})
+
 	return GetPushTemplateRequest{Request: req, Input: input, Copy: c.GetPushTemplateRequest}
 }
 

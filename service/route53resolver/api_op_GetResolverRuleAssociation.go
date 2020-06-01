@@ -82,6 +82,7 @@ func (c *Client) GetResolverRuleAssociationRequest(input *GetResolverRuleAssocia
 	}
 
 	req := c.newRequest(op, input, &GetResolverRuleAssociationOutput{})
+
 	return GetResolverRuleAssociationRequest{Request: req, Input: input, Copy: c.GetResolverRuleAssociationRequest}
 }
 

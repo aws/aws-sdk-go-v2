@@ -102,6 +102,7 @@ func (c *Client) GetPhoneNumberRequest(input *GetPhoneNumberInput) GetPhoneNumbe
 	}
 
 	req := c.newRequest(op, input, &GetPhoneNumberOutput{})
+
 	return GetPhoneNumberRequest{Request: req, Input: input, Copy: c.GetPhoneNumberRequest}
 }
 

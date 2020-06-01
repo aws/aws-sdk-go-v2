@@ -199,6 +199,7 @@ func (c *Client) UploadServerCertificateRequest(input *UploadServerCertificateIn
 	}
 
 	req := c.newRequest(op, input, &UploadServerCertificateOutput{})
+
 	return UploadServerCertificateRequest{Request: req, Input: input, Copy: c.UploadServerCertificateRequest}
 }
 

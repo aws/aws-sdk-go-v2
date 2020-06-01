@@ -121,6 +121,7 @@ func (c *Client) SendAnnouncementRequest(input *SendAnnouncementInput) SendAnnou
 	}
 
 	req := c.newRequest(op, input, &SendAnnouncementOutput{})
+
 	return SendAnnouncementRequest{Request: req, Input: input, Copy: c.SendAnnouncementRequest}
 }
 

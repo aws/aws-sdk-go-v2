@@ -136,35 +136,35 @@ type Alarm struct {
 	//
 	// An alarm has the following possible states:
 	//
-	//    * ALARM — The metric is outside of the defined threshold.
+	//    * ALARM - The metric is outside of the defined threshold.
 	//
-	//    * INSUFFICIENT_DATA — The alarm has just started, the metric is not
-	//    available, or not enough data is available for the metric to determine
-	//    the alarm state.
+	//    * INSUFFICIENT_DATA - The alarm has just started, the metric is not available,
+	//    or not enough data is available for the metric to determine the alarm
+	//    state.
 	//
-	//    * OK — The metric is within the defined threshold.
+	//    * OK - The metric is within the defined threshold.
 	State AlarmState `locationName:"state" type:"string" enum:"true"`
 
 	// The statistic for the metric associated with the alarm.
 	//
 	// The following statistics are available:
 	//
-	//    * Minimum — The lowest value observed during the specified period. Use
+	//    * Minimum - The lowest value observed during the specified period. Use
 	//    this value to determine low volumes of activity for your application.
 	//
-	//    * Maximum — The highest value observed during the specified period.
-	//    Use this value to determine high volumes of activity for your application.
+	//    * Maximum - The highest value observed during the specified period. Use
+	//    this value to determine high volumes of activity for your application.
 	//
-	//    * Sum — All values submitted for the matching metric added together.
-	//    You can use this statistic to determine the total volume of a metric.
+	//    * Sum - All values submitted for the matching metric added together. You
+	//    can use this statistic to determine the total volume of a metric.
 	//
-	//    * Average — The value of Sum / SampleCount during the specified period.
+	//    * Average - The value of Sum / SampleCount during the specified period.
 	//    By comparing this statistic with the Minimum and Maximum values, you can
 	//    determine the full scope of a metric and how close the average use is
 	//    to the Minimum and Maximum values. This comparison helps you to know when
 	//    to increase or decrease your resources.
 	//
-	//    * SampleCount — The count, or number, of data points used for the statistical
+	//    * SampleCount - The count, or number, of data points used for the statistical
 	//    calculation.
 	Statistic MetricStatistic `locationName:"statistic" type:"string" enum:"true"`
 
@@ -180,16 +180,16 @@ type Alarm struct {
 	//
 	// An alarm can treat missing data in the following ways:
 	//
-	//    * breaching — Assume the missing data is not within the threshold. Missing
+	//    * breaching - Assume the missing data is not within the threshold. Missing
 	//    data counts towards the number of times the metric is not within the threshold.
 	//
-	//    * notBreaching — Assume the missing data is within the threshold. Missing
+	//    * notBreaching - Assume the missing data is within the threshold. Missing
 	//    data does not count towards the number of times the metric is not within
 	//    the threshold.
 	//
-	//    * ignore — Ignore the missing data. Maintains the current alarm state.
+	//    * ignore - Ignore the missing data. Maintains the current alarm state.
 	//
-	//    * missing — Missing data is treated as missing.
+	//    * missing - Missing data is treated as missing.
 	TreatMissingData TreatMissingData `locationName:"treatMissingData" type:"string" enum:"true"`
 
 	// The unit of the metric associated with the alarm.
@@ -509,12 +509,12 @@ type ContactMethod struct {
 	//
 	// A contact method has the following possible status:
 	//
-	//    * PendingVerification — The contact method has not yet been verified,
+	//    * PendingVerification - The contact method has not yet been verified,
 	//    and the verification has not yet expired.
 	//
-	//    * Valid — The contact method has been verified.
+	//    * Valid - The contact method has been verified.
 	//
-	//    * InValid — An attempt was made to verify the contact method, but the
+	//    * InValid - An attempt was made to verify the contact method, but the
 	//    verification has expired.
 	Status ContactMethodStatus `locationName:"status" type:"string" enum:"true"`
 
@@ -1090,13 +1090,20 @@ type InstanceEntry struct {
 	//
 	// The following configuration options are available:
 	//
-	//    * DEFAULT — Use the default firewall settings from the image.
+	//    * DEFAULT - Use the default firewall settings from the Lightsail instance
+	//    blueprint.
 	//
-	//    * INSTANCE — Use the firewall settings from the source Lightsail instance.
+	//    * INSTANCE - Use the configured firewall settings from the source Lightsail
+	//    instance.
 	//
-	//    * NONE — Default to Amazon EC2.
+	//    * NONE - Use the default Amazon EC2 security group.
 	//
-	//    * CLOSED — All ports closed.
+	//    * CLOSED - All ports closed.
+	//
+	// If you configured lightsail-connect as a cidrListAliases on your instance,
+	// or if you chose to allow the Lightsail browser-based SSH or RDP clients to
+	// connect to your instance, that configuration is not carried over to your
+	// new Amazon EC2 instance.
 	//
 	// PortInfoSource is a required field
 	PortInfoSource PortInfoSourceType `locationName:"portInfoSource" type:"string" required:"true" enum:"true"`
@@ -1251,26 +1258,55 @@ func (s InstanceNetworking) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes information about the instance ports.
+// Describes information about ports for an Amazon Lightsail instance.
 type InstancePortInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The access direction (inbound or outbound).
+	//
+	// Lightsail currently supports only inbound access direction.
 	AccessDirection AccessDirection `locationName:"accessDirection" type:"string" enum:"true"`
 
-	// The location from which access is allowed (e.g., Anywhere (0.0.0.0/0)).
+	// The location from which access is allowed. For example, Anywhere (0.0.0.0/0),
+	// or Custom if a specific IP address or range of IP addresses is allowed.
 	AccessFrom *string `locationName:"accessFrom" type:"string"`
 
 	// The type of access (Public or Private).
 	AccessType PortAccessType `locationName:"accessType" type:"string" enum:"true"`
 
-	// The common name.
+	// An alias that defines access for a preconfigured range of IP addresses.
+	//
+	// The only alias currently supported is lightsail-connect, which allows IP
+	// addresses of the browser-based RDP/SSH client in the Lightsail console to
+	// connect to your instance.
+	CidrListAliases []string `locationName:"cidrListAliases" type:"list"`
+
+	// The IP address, or range of IP addresses in CIDR notation, that are allowed
+	// to connect to an instance through the ports, and the protocol. Lightsail
+	// supports IPv4 addresses.
+	//
+	// For more information about CIDR block notation, see Classless Inter-Domain
+	// Routing (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation)
+	// on Wikipedia.
+	Cidrs []string `locationName:"cidrs" type:"list"`
+
+	// The common name of the port information.
 	CommonName *string `locationName:"commonName" type:"string"`
 
-	// The first port in the range.
+	// The first port in a range of open ports on an instance.
+	//
+	// Allowed ports:
+	//
+	//    * TCP and UDP - 0 to 65535
+	//
+	//    * ICMP - 8 (to configure Ping) Ping is the only communication supported
+	//    through the ICMP protocol in Lightsail. To configure ping, specify the
+	//    fromPort parameter as 8, and the toPort parameter as -1.
 	FromPort *int64 `locationName:"fromPort" type:"integer"`
 
-	// The protocol being used. Can be one of the following.
+	// The IP protocol name.
+	//
+	// The name can be one of the following:
 	//
 	//    * tcp - Transmission Control Protocol (TCP) provides reliable, ordered,
 	//    and error-checked delivery of streamed data between applications running
@@ -1288,9 +1324,24 @@ type InstancePortInfo struct {
 	//    can use UDP, which provides a connectionless datagram service that emphasizes
 	//    reduced latency over reliability. If you do require reliable data stream
 	//    service, use TCP instead.
+	//
+	//    * icmp - Internet Control Message Protocol (ICMP) is used to send error
+	//    messages and operational information indicating success or failure when
+	//    communicating with an instance. For example, an error is indicated when
+	//    an instance could not be reached. Ping is the only communication supported
+	//    through the ICMP protocol in Lightsail. To configure ping, specify the
+	//    fromPort parameter as 8, and the toPort parameter as -1.
 	Protocol NetworkProtocol `locationName:"protocol" type:"string" enum:"true"`
 
-	// The last port in the range.
+	// The last port in a range of open ports on an instance.
+	//
+	// Allowed ports:
+	//
+	//    * TCP and UDP - 0 to 65535
+	//
+	//    * ICMP - -1 (to configure Ping) Ping is the only communication supported
+	//    through the ICMP protocol in Lightsail. To configure ping, specify the
+	//    fromPort parameter as 8, and the toPort parameter as -1.
 	ToPort *int64 `locationName:"toPort" type:"integer"`
 }
 
@@ -1299,14 +1350,41 @@ func (s InstancePortInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes the port state.
+// Describes open ports on an instance, the IP addresses allowed to connect
+// to the instance through the ports, and the protocol.
 type InstancePortState struct {
 	_ struct{} `type:"structure"`
 
-	// The first port in the range.
+	// An alias that defines access for a preconfigured range of IP addresses.
+	//
+	// The only alias currently supported is lightsail-connect, which allows IP
+	// addresses of the browser-based RDP/SSH client in the Lightsail console to
+	// connect to your instance.
+	CidrListAliases []string `locationName:"cidrListAliases" type:"list"`
+
+	// The IP address, or range of IP addresses in CIDR notation, that are allowed
+	// to connect to an instance through the ports, and the protocol. Lightsail
+	// supports IPv4 addresses.
+	//
+	// For more information about CIDR block notation, see Classless Inter-Domain
+	// Routing (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation)
+	// on Wikipedia.
+	Cidrs []string `locationName:"cidrs" type:"list"`
+
+	// The first port in a range of open ports on an instance.
+	//
+	// Allowed ports:
+	//
+	//    * TCP and UDP - 0 to 65535
+	//
+	//    * ICMP - 8 (to configure Ping) Ping is the only communication supported
+	//    through the ICMP protocol in Lightsail. To configure ping, specify the
+	//    fromPort parameter as 8, and the toPort parameter as -1.
 	FromPort *int64 `locationName:"fromPort" type:"integer"`
 
-	// The protocol being used. Can be one of the following.
+	// The IP protocol name.
+	//
+	// The name can be one of the following:
 	//
 	//    * tcp - Transmission Control Protocol (TCP) provides reliable, ordered,
 	//    and error-checked delivery of streamed data between applications running
@@ -1324,12 +1402,29 @@ type InstancePortState struct {
 	//    can use UDP, which provides a connectionless datagram service that emphasizes
 	//    reduced latency over reliability. If you do require reliable data stream
 	//    service, use TCP instead.
+	//
+	//    * icmp - Internet Control Message Protocol (ICMP) is used to send error
+	//    messages and operational information indicating success or failure when
+	//    communicating with an instance. For example, an error is indicated when
+	//    an instance could not be reached. Ping is the only communication supported
+	//    through the ICMP protocol in Lightsail. To configure ping, specify the
+	//    fromPort parameter as 8, and the toPort parameter as -1.
 	Protocol NetworkProtocol `locationName:"protocol" type:"string" enum:"true"`
 
 	// Specifies whether the instance port is open or closed.
+	//
+	// The port state for Lightsail instances is always open.
 	State PortState `locationName:"state" type:"string" enum:"true"`
 
-	// The last port in the range.
+	// The last port in a range of open ports on an instance.
+	//
+	// Allowed ports:
+	//
+	//    * TCP and UDP - 0 to 65535
+	//
+	//    * ICMP - -1 (to configure Ping) Ping is the only communication supported
+	//    through the ICMP protocol in Lightsail. To configure ping, specify the
+	//    fromPort parameter as 8, and the toPort parameter as -1.
 	ToPort *int64 `locationName:"toPort" type:"integer"`
 }
 
@@ -1949,24 +2044,104 @@ func (s PendingModifiedRelationalDatabaseValues) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes information about the ports on your virtual private server (or
-// instance).
+// Describes ports to open on an instance, the IP addresses allowed to connect
+// to the instance through the ports, and the protocol.
 type PortInfo struct {
 	_ struct{} `type:"structure"`
 
-	// The first port in the range.
+	// An alias that defines access for a preconfigured range of IP addresses.
+	//
+	// The only alias currently supported is lightsail-connect, which allows IP
+	// addresses of the browser-based RDP/SSH client in the Lightsail console to
+	// connect to your instance.
+	CidrListAliases []string `locationName:"cidrListAliases" type:"list"`
+
+	// The IP address, or range of IP addresses in CIDR notation, that are allowed
+	// to connect to an instance through the ports, and the protocol. Lightsail
+	// supports IPv4 addresses.
+	//
+	// Examples:
+	//
+	//    * To allow the IP address 192.0.2.44, specify 192.0.2.44 or 192.0.2.44/32.
+	//
+	//    * To allow the IP addresses 192.0.2.0 to 192.0.2.255, specify 192.0.2.0/24.
+	//
+	// For more information about CIDR block notation, see Classless Inter-Domain
+	// Routing (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation)
+	// on Wikipedia.
+	Cidrs []string `locationName:"cidrs" type:"list"`
+
+	// The first port in a range of open ports on an instance.
+	//
+	// Allowed ports:
+	//
+	//    * TCP and UDP - 0 to 65535
+	//
+	//    * ICMP - 8 (to configure Ping) Ping is the only communication supported
+	//    through the ICMP protocol in Lightsail. To configure ping, specify the
+	//    fromPort parameter as 8, and the toPort parameter as -1.
 	FromPort *int64 `locationName:"fromPort" type:"integer"`
 
-	// The protocol.
+	// The IP protocol name.
+	//
+	// The name can be one of the following:
+	//
+	//    * tcp - Transmission Control Protocol (TCP) provides reliable, ordered,
+	//    and error-checked delivery of streamed data between applications running
+	//    on hosts communicating by an IP network. If you have an application that
+	//    doesn't require reliable data stream service, use UDP instead.
+	//
+	//    * all - All transport layer protocol types. For more general information,
+	//    see Transport layer (https://en.wikipedia.org/wiki/Transport_layer) on
+	//    Wikipedia.
+	//
+	//    * udp - With User Datagram Protocol (UDP), computer applications can send
+	//    messages (or datagrams) to other hosts on an Internet Protocol (IP) network.
+	//    Prior communications are not required to set up transmission channels
+	//    or data paths. Applications that don't require reliable data stream service
+	//    can use UDP, which provides a connectionless datagram service that emphasizes
+	//    reduced latency over reliability. If you do require reliable data stream
+	//    service, use TCP instead.
+	//
+	//    * icmp - Internet Control Message Protocol (ICMP) is used to send error
+	//    messages and operational information indicating success or failure when
+	//    communicating with an instance. For example, an error is indicated when
+	//    an instance could not be reached. Ping is the only communication supported
+	//    through the ICMP protocol in Lightsail. To configure ping, specify the
+	//    fromPort parameter as 8, and the toPort parameter as -1.
 	Protocol NetworkProtocol `locationName:"protocol" type:"string" enum:"true"`
 
-	// The last port in the range.
+	// The last port in a range of open ports on an instance.
+	//
+	// Allowed ports:
+	//
+	//    * TCP and UDP - 0 to 65535
+	//
+	//    * ICMP - -1 (to configure Ping) Ping is the only communication supported
+	//    through the ICMP protocol in Lightsail. To configure ping, specify the
+	//    fromPort parameter as 8, and the toPort parameter as -1.
 	ToPort *int64 `locationName:"toPort" type:"integer"`
 }
 
 // String returns the string representation
 func (s PortInfo) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PortInfo) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PortInfo"}
+	if s.FromPort != nil && *s.FromPort < -1 {
+		invalidParams.Add(aws.NewErrParamMinValue("FromPort", -1))
+	}
+	if s.ToPort != nil && *s.ToPort < -1 {
+		invalidParams.Add(aws.NewErrParamMinValue("ToPort", -1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Describes the AWS Region.

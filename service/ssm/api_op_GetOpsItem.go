@@ -56,13 +56,13 @@ const opGetOpsItem = "GetOpsItem"
 //
 // Get information about an OpsItem by using the ID. You must have permission
 // in AWS Identity and Access Management (IAM) to view information about an
-// OpsItem. For more information, see Getting Started with OpsCenter (http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html)
+// OpsItem. For more information, see Getting started with OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html)
 // in the AWS Systems Manager User Guide.
 //
 // Operations engineers and IT professionals use OpsCenter to view, investigate,
 // and remediate operational issues impacting the performance and health of
 // their AWS resources. For more information, see AWS Systems Manager OpsCenter
-// (http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html)
+// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html)
 // in the AWS Systems Manager User Guide.
 //
 //    // Example sending a request using GetOpsItemRequest.
@@ -85,6 +85,7 @@ func (c *Client) GetOpsItemRequest(input *GetOpsItemInput) GetOpsItemRequest {
 	}
 
 	req := c.newRequest(op, input, &GetOpsItemOutput{})
+
 	return GetOpsItemRequest{Request: req, Input: input, Copy: c.GetOpsItemRequest}
 }
 

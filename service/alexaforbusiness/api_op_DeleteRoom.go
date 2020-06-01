@@ -57,6 +57,7 @@ func (c *Client) DeleteRoomRequest(input *DeleteRoomInput) DeleteRoomRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteRoomOutput{})
+
 	return DeleteRoomRequest{Request: req, Input: input, Copy: c.DeleteRoomRequest}
 }
 

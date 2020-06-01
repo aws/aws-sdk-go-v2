@@ -92,8 +92,6 @@ type ClientAPI interface {
 	UpdateDetectorModelRequest(*iotevents.UpdateDetectorModelInput) iotevents.UpdateDetectorModelRequest
 
 	UpdateInputRequest(*iotevents.UpdateInputInput) iotevents.UpdateInputRequest
-
-	VerifyResourcesExistForTagrisRequest(*iotevents.VerifyResourcesExistForTagrisInput) iotevents.VerifyResourcesExistForTagrisRequest
 }
 
 var _ ClientAPI = (*iotevents.Client)(nil)

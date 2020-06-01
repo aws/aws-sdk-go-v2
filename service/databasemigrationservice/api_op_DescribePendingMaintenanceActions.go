@@ -105,6 +105,7 @@ func (c *Client) DescribePendingMaintenanceActionsRequest(input *DescribePending
 	}
 
 	req := c.newRequest(op, input, &DescribePendingMaintenanceActionsOutput{})
+
 	return DescribePendingMaintenanceActionsRequest{Request: req, Input: input, Copy: c.DescribePendingMaintenanceActionsRequest}
 }
 

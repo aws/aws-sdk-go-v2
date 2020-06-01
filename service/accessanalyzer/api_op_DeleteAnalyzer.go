@@ -116,6 +116,7 @@ func (c *Client) DeleteAnalyzerRequest(input *DeleteAnalyzerInput) DeleteAnalyze
 	req := c.newRequest(op, input, &DeleteAnalyzerOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteAnalyzerRequest{Request: req, Input: input, Copy: c.DeleteAnalyzerRequest}
 }
 

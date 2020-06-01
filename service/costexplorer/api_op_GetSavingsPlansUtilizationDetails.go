@@ -147,6 +147,7 @@ func (c *Client) GetSavingsPlansUtilizationDetailsRequest(input *GetSavingsPlans
 	}
 
 	req := c.newRequest(op, input, &GetSavingsPlansUtilizationDetailsOutput{})
+
 	return GetSavingsPlansUtilizationDetailsRequest{Request: req, Input: input, Copy: c.GetSavingsPlansUtilizationDetailsRequest}
 }
 

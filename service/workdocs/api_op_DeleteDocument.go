@@ -111,6 +111,7 @@ func (c *Client) DeleteDocumentRequest(input *DeleteDocumentInput) DeleteDocumen
 	req := c.newRequest(op, input, &DeleteDocumentOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteDocumentRequest{Request: req, Input: input, Copy: c.DeleteDocumentRequest}
 }
 

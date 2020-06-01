@@ -81,6 +81,7 @@ func (c *Client) DeleteCacheParameterGroupRequest(input *DeleteCacheParameterGro
 	req := c.newRequest(op, input, &DeleteCacheParameterGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteCacheParameterGroupRequest{Request: req, Input: input, Copy: c.DeleteCacheParameterGroupRequest}
 }
 

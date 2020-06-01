@@ -117,6 +117,7 @@ func (c *Client) GetHealthCheckStatusRequest(input *GetHealthCheckStatusInput) G
 	}
 
 	req := c.newRequest(op, input, &GetHealthCheckStatusOutput{})
+
 	return GetHealthCheckStatusRequest{Request: req, Input: input, Copy: c.GetHealthCheckStatusRequest}
 }
 

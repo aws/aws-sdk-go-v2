@@ -99,6 +99,7 @@ func (c *Client) DeleteBackupRequest(input *DeleteBackupInput) DeleteBackupReque
 	}
 
 	req := c.newRequest(op, input, &DeleteBackupOutput{})
+
 	return DeleteBackupRequest{Request: req, Input: input, Copy: c.DeleteBackupRequest}
 }
 

@@ -109,6 +109,7 @@ func (c *Client) CreateAppCookieStickinessPolicyRequest(input *CreateAppCookieSt
 	}
 
 	req := c.newRequest(op, input, &CreateAppCookieStickinessPolicyOutput{})
+
 	return CreateAppCookieStickinessPolicyRequest{Request: req, Input: input, Copy: c.CreateAppCookieStickinessPolicyRequest}
 }
 

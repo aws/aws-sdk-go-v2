@@ -120,6 +120,7 @@ func (c *Client) ListUniqueProblemsRequest(input *ListUniqueProblemsInput) ListU
 	}
 
 	req := c.newRequest(op, input, &ListUniqueProblemsOutput{})
+
 	return ListUniqueProblemsRequest{Request: req, Input: input, Copy: c.ListUniqueProblemsRequest}
 }
 

@@ -154,6 +154,7 @@ func (c *Client) PutKeyPolicyRequest(input *PutKeyPolicyInput) PutKeyPolicyReque
 	req := c.newRequest(op, input, &PutKeyPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutKeyPolicyRequest{Request: req, Input: input, Copy: c.PutKeyPolicyRequest}
 }
 

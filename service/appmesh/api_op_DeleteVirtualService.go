@@ -128,6 +128,7 @@ func (c *Client) DeleteVirtualServiceRequest(input *DeleteVirtualServiceInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteVirtualServiceOutput{})
+
 	return DeleteVirtualServiceRequest{Request: req, Input: input, Copy: c.DeleteVirtualServiceRequest}
 }
 

@@ -108,6 +108,7 @@ func (c *Client) StartTaskExecutionRequest(input *StartTaskExecutionInput) Start
 	}
 
 	req := c.newRequest(op, input, &StartTaskExecutionOutput{})
+
 	return StartTaskExecutionRequest{Request: req, Input: input, Copy: c.StartTaskExecutionRequest}
 }
 

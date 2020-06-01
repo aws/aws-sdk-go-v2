@@ -109,6 +109,7 @@ func (c *Client) RegisterInstancesWithLoadBalancerRequest(input *RegisterInstanc
 	}
 
 	req := c.newRequest(op, input, &RegisterInstancesWithLoadBalancerOutput{})
+
 	return RegisterInstancesWithLoadBalancerRequest{Request: req, Input: input, Copy: c.RegisterInstancesWithLoadBalancerRequest}
 }
 

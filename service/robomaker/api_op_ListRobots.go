@@ -171,6 +171,7 @@ func (c *Client) ListRobotsRequest(input *ListRobotsInput) ListRobotsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListRobotsOutput{})
+
 	return ListRobotsRequest{Request: req, Input: input, Copy: c.ListRobotsRequest}
 }
 

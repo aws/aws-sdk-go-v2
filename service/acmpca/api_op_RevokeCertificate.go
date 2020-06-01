@@ -119,6 +119,7 @@ func (c *Client) RevokeCertificateRequest(input *RevokeCertificateInput) RevokeC
 	req := c.newRequest(op, input, &RevokeCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RevokeCertificateRequest{Request: req, Input: input, Copy: c.RevokeCertificateRequest}
 }
 

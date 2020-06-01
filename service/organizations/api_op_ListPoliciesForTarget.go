@@ -140,6 +140,7 @@ func (c *Client) ListPoliciesForTargetRequest(input *ListPoliciesForTargetInput)
 	}
 
 	req := c.newRequest(op, input, &ListPoliciesForTargetOutput{})
+
 	return ListPoliciesForTargetRequest{Request: req, Input: input, Copy: c.ListPoliciesForTargetRequest}
 }
 

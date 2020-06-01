@@ -114,6 +114,7 @@ func (c *Client) UpdateFleetMetadataRequest(input *UpdateFleetMetadataInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateFleetMetadataOutput{})
+
 	return UpdateFleetMetadataRequest{Request: req, Input: input, Copy: c.UpdateFleetMetadataRequest}
 }
 

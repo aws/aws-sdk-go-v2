@@ -114,6 +114,7 @@ func (c *Client) GetChangeRequest(input *GetChangeInput) GetChangeRequest {
 	}
 
 	req := c.newRequest(op, input, &GetChangeOutput{})
+
 	return GetChangeRequest{Request: req, Input: input, Copy: c.GetChangeRequest}
 }
 

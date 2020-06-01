@@ -151,6 +151,7 @@ func (c *Client) CreateOpenIDConnectProviderRequest(input *CreateOpenIDConnectPr
 	}
 
 	req := c.newRequest(op, input, &CreateOpenIDConnectProviderOutput{})
+
 	return CreateOpenIDConnectProviderRequest{Request: req, Input: input, Copy: c.CreateOpenIDConnectProviderRequest}
 }
 

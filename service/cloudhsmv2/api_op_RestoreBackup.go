@@ -78,6 +78,7 @@ func (c *Client) RestoreBackupRequest(input *RestoreBackupInput) RestoreBackupRe
 	}
 
 	req := c.newRequest(op, input, &RestoreBackupOutput{})
+
 	return RestoreBackupRequest{Request: req, Input: input, Copy: c.RestoreBackupRequest}
 }
 

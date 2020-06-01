@@ -84,6 +84,7 @@ func (c *Client) ListServiceActionsRequest(input *ListServiceActionsInput) ListS
 	}
 
 	req := c.newRequest(op, input, &ListServiceActionsOutput{})
+
 	return ListServiceActionsRequest{Request: req, Input: input, Copy: c.ListServiceActionsRequest}
 }
 

@@ -99,6 +99,7 @@ func (c *Client) UpdateDatabaseRequest(input *UpdateDatabaseInput) UpdateDatabas
 	}
 
 	req := c.newRequest(op, input, &UpdateDatabaseOutput{})
+
 	return UpdateDatabaseRequest{Request: req, Input: input, Copy: c.UpdateDatabaseRequest}
 }
 

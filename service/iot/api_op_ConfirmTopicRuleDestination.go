@@ -97,6 +97,7 @@ func (c *Client) ConfirmTopicRuleDestinationRequest(input *ConfirmTopicRuleDesti
 	}
 
 	req := c.newRequest(op, input, &ConfirmTopicRuleDestinationOutput{})
+
 	return ConfirmTopicRuleDestinationRequest{Request: req, Input: input, Copy: c.ConfirmTopicRuleDestinationRequest}
 }
 

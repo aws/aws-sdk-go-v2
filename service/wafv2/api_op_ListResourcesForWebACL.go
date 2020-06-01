@@ -90,6 +90,7 @@ func (c *Client) ListResourcesForWebACLRequest(input *ListResourcesForWebACLInpu
 	}
 
 	req := c.newRequest(op, input, &ListResourcesForWebACLOutput{})
+
 	return ListResourcesForWebACLRequest{Request: req, Input: input, Copy: c.ListResourcesForWebACLRequest}
 }
 

@@ -76,6 +76,7 @@ func (c *Client) GetDiskRequest(input *GetDiskInput) GetDiskRequest {
 	}
 
 	req := c.newRequest(op, input, &GetDiskOutput{})
+
 	return GetDiskRequest{Request: req, Input: input, Copy: c.GetDiskRequest}
 }
 

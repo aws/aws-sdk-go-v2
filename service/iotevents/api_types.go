@@ -48,7 +48,7 @@ type Action struct {
 	IotEvents *IotEventsAction `locationName:"iotEvents" type:"structure"`
 
 	// Sends information about the detector model instance and the event that triggered
-	// the action to an AWS IoT SiteWise asset property.
+	// the action to an asset property in AWS IoT SiteWise .
 	IotSiteWise *IotSiteWiseAction `locationName:"iotSiteWise" type:"structure"`
 
 	// Publishes an MQTT message with the given topic to the AWS IoT message broker.
@@ -2657,68 +2657,6 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type TagrisSweepListItem struct {
-	_ struct{} `type:"structure"`
-
-	TagrisAccountId *string `min:"12" type:"string"`
-
-	TagrisAmazonResourceName *string `min:"1" type:"string"`
-
-	TagrisInternalId *string `type:"string"`
-
-	TagrisVersion *int64 `type:"long"`
-}
-
-// String returns the string representation
-func (s TagrisSweepListItem) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TagrisSweepListItem) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TagrisSweepListItem"}
-	if s.TagrisAccountId != nil && len(*s.TagrisAccountId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("TagrisAccountId", 12))
-	}
-	if s.TagrisAmazonResourceName != nil && len(*s.TagrisAmazonResourceName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TagrisAmazonResourceName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s TagrisSweepListItem) MarshalFields(e protocol.FieldEncoder) error {
-	if s.TagrisAccountId != nil {
-		v := *s.TagrisAccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TagrisAccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TagrisAmazonResourceName != nil {
-		v := *s.TagrisAmazonResourceName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TagrisAmazonResourceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TagrisInternalId != nil {
-		v := *s.TagrisInternalId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TagrisInternalId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TagrisVersion != nil {
-		v := *s.TagrisVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TagrisVersion", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }

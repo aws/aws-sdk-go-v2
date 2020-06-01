@@ -123,6 +123,7 @@ func (c *Client) GetRandomPasswordRequest(input *GetRandomPasswordInput) GetRand
 	}
 
 	req := c.newRequest(op, input, &GetRandomPasswordOutput{})
+
 	return GetRandomPasswordRequest{Request: req, Input: input, Copy: c.GetRandomPasswordRequest}
 }
 

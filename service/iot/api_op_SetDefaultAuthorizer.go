@@ -112,6 +112,7 @@ func (c *Client) SetDefaultAuthorizerRequest(input *SetDefaultAuthorizerInput) S
 	}
 
 	req := c.newRequest(op, input, &SetDefaultAuthorizerOutput{})
+
 	return SetDefaultAuthorizerRequest{Request: req, Input: input, Copy: c.SetDefaultAuthorizerRequest}
 }
 

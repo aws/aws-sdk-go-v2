@@ -126,6 +126,7 @@ func (c *Client) CreateStreamingDistributionWithTagsRequest(input *CreateStreami
 	}
 
 	req := c.newRequest(op, input, &CreateStreamingDistributionWithTagsOutput{})
+
 	return CreateStreamingDistributionWithTagsRequest{Request: req, Input: input, Copy: c.CreateStreamingDistributionWithTagsRequest}
 }
 

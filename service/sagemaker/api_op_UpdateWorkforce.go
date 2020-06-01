@@ -109,6 +109,7 @@ func (c *Client) UpdateWorkforceRequest(input *UpdateWorkforceInput) UpdateWorkf
 	}
 
 	req := c.newRequest(op, input, &UpdateWorkforceOutput{})
+
 	return UpdateWorkforceRequest{Request: req, Input: input, Copy: c.UpdateWorkforceRequest}
 }
 

@@ -264,6 +264,7 @@ func (c *Client) SubmitJobRequest(input *SubmitJobInput) SubmitJobRequest {
 	}
 
 	req := c.newRequest(op, input, &SubmitJobOutput{})
+
 	return SubmitJobRequest{Request: req, Input: input, Copy: c.SubmitJobRequest}
 }
 

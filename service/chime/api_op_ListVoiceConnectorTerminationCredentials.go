@@ -107,6 +107,7 @@ func (c *Client) ListVoiceConnectorTerminationCredentialsRequest(input *ListVoic
 	}
 
 	req := c.newRequest(op, input, &ListVoiceConnectorTerminationCredentialsOutput{})
+
 	return ListVoiceConnectorTerminationCredentialsRequest{Request: req, Input: input, Copy: c.ListVoiceConnectorTerminationCredentialsRequest}
 }
 

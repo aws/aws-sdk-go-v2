@@ -89,6 +89,7 @@ func (c *Client) StopCompilationJobRequest(input *StopCompilationJobInput) StopC
 	req := c.newRequest(op, input, &StopCompilationJobOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StopCompilationJobRequest{Request: req, Input: input, Copy: c.StopCompilationJobRequest}
 }
 

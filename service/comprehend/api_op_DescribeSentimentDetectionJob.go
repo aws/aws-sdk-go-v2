@@ -82,6 +82,7 @@ func (c *Client) DescribeSentimentDetectionJobRequest(input *DescribeSentimentDe
 	}
 
 	req := c.newRequest(op, input, &DescribeSentimentDetectionJobOutput{})
+
 	return DescribeSentimentDetectionJobRequest{Request: req, Input: input, Copy: c.DescribeSentimentDetectionJobRequest}
 }
 

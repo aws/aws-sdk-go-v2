@@ -103,6 +103,7 @@ func (c *Client) SetIdentityFeedbackForwardingEnabledRequest(input *SetIdentityF
 	}
 
 	req := c.newRequest(op, input, &SetIdentityFeedbackForwardingEnabledOutput{})
+
 	return SetIdentityFeedbackForwardingEnabledRequest{Request: req, Input: input, Copy: c.SetIdentityFeedbackForwardingEnabledRequest}
 }
 

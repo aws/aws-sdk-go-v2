@@ -124,6 +124,7 @@ func (c *Client) UpdateBaiduChannelRequest(input *UpdateBaiduChannelInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateBaiduChannelOutput{})
+
 	return UpdateBaiduChannelRequest{Request: req, Input: input, Copy: c.UpdateBaiduChannelRequest}
 }
 

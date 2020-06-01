@@ -62,6 +62,7 @@ func (c *Client) DeleteNamespaceRequest(input *DeleteNamespaceInput) DeleteNames
 	}
 
 	req := c.newRequest(op, input, &DeleteNamespaceOutput{})
+
 	return DeleteNamespaceRequest{Request: req, Input: input, Copy: c.DeleteNamespaceRequest}
 }
 

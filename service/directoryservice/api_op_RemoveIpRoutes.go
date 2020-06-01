@@ -82,6 +82,7 @@ func (c *Client) RemoveIpRoutesRequest(input *RemoveIpRoutesInput) RemoveIpRoute
 	}
 
 	req := c.newRequest(op, input, &RemoveIpRoutesOutput{})
+
 	return RemoveIpRoutesRequest{Request: req, Input: input, Copy: c.RemoveIpRoutesRequest}
 }
 

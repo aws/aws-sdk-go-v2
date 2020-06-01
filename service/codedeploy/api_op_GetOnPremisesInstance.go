@@ -78,6 +78,7 @@ func (c *Client) GetOnPremisesInstanceRequest(input *GetOnPremisesInstanceInput)
 	}
 
 	req := c.newRequest(op, input, &GetOnPremisesInstanceOutput{})
+
 	return GetOnPremisesInstanceRequest{Request: req, Input: input, Copy: c.GetOnPremisesInstanceRequest}
 }
 

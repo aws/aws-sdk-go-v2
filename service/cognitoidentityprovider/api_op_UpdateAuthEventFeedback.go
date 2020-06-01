@@ -119,6 +119,7 @@ func (c *Client) UpdateAuthEventFeedbackRequest(input *UpdateAuthEventFeedbackIn
 	}
 
 	req := c.newRequest(op, input, &UpdateAuthEventFeedbackOutput{})
+
 	return UpdateAuthEventFeedbackRequest{Request: req, Input: input, Copy: c.UpdateAuthEventFeedbackRequest}
 }
 

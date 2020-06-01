@@ -55,7 +55,7 @@ type UpdateServiceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A value that you can use to determine whether the request completed successfully.
-	// To get the status of the operation, see GetOperation.
+	// To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
 	OperationId *string `type:"string"`
 }
 
@@ -71,20 +71,23 @@ const opUpdateService = "UpdateService"
 //
 // Submits a request to perform the following operations:
 //
-//    * Add or delete DnsRecords configurations
-//
 //    * Update the TTL setting for existing DnsRecords configurations
 //
-//    * Add, update, or delete HealthCheckConfig for a specified service
+//    * Add, update, or delete HealthCheckConfig for a specified service You
+//    can't add, update, or delete a HealthCheckCustomConfig configuration.
 //
-// For public and private DNS namespaces, you must specify all DnsRecords configurations
-// (and, optionally, HealthCheckConfig) that you want to appear in the updated
-// service. Any current configurations that don't appear in an UpdateService
-// request are deleted.
+// For public and private DNS namespaces, note the following:
 //
-// When you update the TTL setting for a service, AWS Cloud Map also updates
-// the corresponding settings in all the records and health checks that were
-// created by using the specified service.
+//    * If you omit any existing DnsRecords or HealthCheckConfig configurations
+//    from an UpdateService request, the configurations are deleted from the
+//    service.
+//
+//    * If you omit an existing HealthCheckCustomConfig configuration from an
+//    UpdateService request, the configuration is not deleted from the service.
+//
+// When you update settings for a service, AWS Cloud Map also updates the corresponding
+// settings in all the records and health checks that were created by using
+// the specified service.
 //
 //    // Example sending a request using UpdateServiceRequest.
 //    req := client.UpdateServiceRequest(params)
@@ -106,6 +109,7 @@ func (c *Client) UpdateServiceRequest(input *UpdateServiceInput) UpdateServiceRe
 	}
 
 	req := c.newRequest(op, input, &UpdateServiceOutput{})
+
 	return UpdateServiceRequest{Request: req, Input: input, Copy: c.UpdateServiceRequest}
 }
 

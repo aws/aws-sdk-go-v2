@@ -104,6 +104,7 @@ func (c *Client) UpdateWorkteamRequest(input *UpdateWorkteamInput) UpdateWorktea
 	}
 
 	req := c.newRequest(op, input, &UpdateWorkteamOutput{})
+
 	return UpdateWorkteamRequest{Request: req, Input: input, Copy: c.UpdateWorkteamRequest}
 }
 

@@ -125,6 +125,7 @@ func (c *Client) StartPipelineReprocessingRequest(input *StartPipelineReprocessi
 	}
 
 	req := c.newRequest(op, input, &StartPipelineReprocessingOutput{})
+
 	return StartPipelineReprocessingRequest{Request: req, Input: input, Copy: c.StartPipelineReprocessingRequest}
 }
 

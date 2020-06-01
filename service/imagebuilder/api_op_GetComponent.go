@@ -111,6 +111,7 @@ func (c *Client) GetComponentRequest(input *GetComponentInput) GetComponentReque
 	}
 
 	req := c.newRequest(op, input, &GetComponentOutput{})
+
 	return GetComponentRequest{Request: req, Input: input, Copy: c.GetComponentRequest}
 }
 

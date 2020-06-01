@@ -142,6 +142,7 @@ func (c *Client) ListNotebookInstancesRequest(input *ListNotebookInstancesInput)
 	}
 
 	req := c.newRequest(op, input, &ListNotebookInstancesOutput{})
+
 	return ListNotebookInstancesRequest{Request: req, Input: input, Copy: c.ListNotebookInstancesRequest}
 }
 

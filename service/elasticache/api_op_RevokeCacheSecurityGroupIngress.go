@@ -104,6 +104,7 @@ func (c *Client) RevokeCacheSecurityGroupIngressRequest(input *RevokeCacheSecuri
 	}
 
 	req := c.newRequest(op, input, &RevokeCacheSecurityGroupIngressOutput{})
+
 	return RevokeCacheSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.RevokeCacheSecurityGroupIngressRequest}
 }
 

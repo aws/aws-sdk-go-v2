@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/checksum"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/service/s3/internal/arn"
 )
@@ -260,6 +261,12 @@ func (c *Client) DeleteObjectsRequest(input *DeleteObjectsInput) DeleteObjectsRe
 	}
 
 	req := c.newRequest(op, input, &DeleteObjectsOutput{})
+
+	req.Handlers.Build.PushBackNamed(aws.NamedHandler{
+		Name: "contentMd5Handler",
+		Fn:   checksum.AddBodyContentMD5Handler,
+	})
+
 	return DeleteObjectsRequest{Request: req, Input: input, Copy: c.DeleteObjectsRequest}
 }
 

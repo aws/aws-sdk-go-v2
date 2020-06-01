@@ -152,6 +152,7 @@ func (c *Client) CreateRegistryRequest(input *CreateRegistryInput) CreateRegistr
 	}
 
 	req := c.newRequest(op, input, &CreateRegistryOutput{})
+
 	return CreateRegistryRequest{Request: req, Input: input, Copy: c.CreateRegistryRequest}
 }
 

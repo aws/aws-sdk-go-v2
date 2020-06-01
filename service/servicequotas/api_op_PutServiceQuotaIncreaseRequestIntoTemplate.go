@@ -115,6 +115,7 @@ func (c *Client) PutServiceQuotaIncreaseRequestIntoTemplateRequest(input *PutSer
 	}
 
 	req := c.newRequest(op, input, &PutServiceQuotaIncreaseRequestIntoTemplateOutput{})
+
 	return PutServiceQuotaIncreaseRequestIntoTemplateRequest{Request: req, Input: input, Copy: c.PutServiceQuotaIncreaseRequestIntoTemplateRequest}
 }
 

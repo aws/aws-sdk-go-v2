@@ -68,6 +68,7 @@ func (c *Client) DescribeAgentVersionsRequest(input *DescribeAgentVersionsInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeAgentVersionsOutput{})
+
 	return DescribeAgentVersionsRequest{Request: req, Input: input, Copy: c.DescribeAgentVersionsRequest}
 }
 

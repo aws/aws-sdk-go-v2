@@ -123,6 +123,7 @@ func (c *Client) DetachPolicyRequest(input *DetachPolicyInput) DetachPolicyReque
 	}
 
 	req := c.newRequest(op, input, &DetachPolicyOutput{})
+
 	return DetachPolicyRequest{Request: req, Input: input, Copy: c.DetachPolicyRequest}
 }
 

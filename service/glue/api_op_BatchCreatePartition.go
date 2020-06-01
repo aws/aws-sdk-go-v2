@@ -115,6 +115,7 @@ func (c *Client) BatchCreatePartitionRequest(input *BatchCreatePartitionInput) B
 	}
 
 	req := c.newRequest(op, input, &BatchCreatePartitionOutput{})
+
 	return BatchCreatePartitionRequest{Request: req, Input: input, Copy: c.BatchCreatePartitionRequest}
 }
 

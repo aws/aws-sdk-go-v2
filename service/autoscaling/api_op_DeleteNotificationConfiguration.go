@@ -93,6 +93,7 @@ func (c *Client) DeleteNotificationConfigurationRequest(input *DeleteNotificatio
 	req := c.newRequest(op, input, &DeleteNotificationConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteNotificationConfigurationRequest{Request: req, Input: input, Copy: c.DeleteNotificationConfigurationRequest}
 }
 

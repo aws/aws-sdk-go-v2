@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -45,6 +46,13 @@ func (s *CreateThingGroupInput) Validate() error {
 	}
 	if s.ThingGroupName != nil && len(*s.ThingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ThingGroupName", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -159,6 +167,7 @@ func (c *Client) CreateThingGroupRequest(input *CreateThingGroupInput) CreateThi
 	}
 
 	req := c.newRequest(op, input, &CreateThingGroupOutput{})
+
 	return CreateThingGroupRequest{Request: req, Input: input, Copy: c.CreateThingGroupRequest}
 }
 

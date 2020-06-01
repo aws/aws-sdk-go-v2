@@ -298,6 +298,7 @@ func (c *Client) UpdateAuthorizerRequest(input *UpdateAuthorizerInput) UpdateAut
 	}
 
 	req := c.newRequest(op, input, &UpdateAuthorizerOutput{})
+
 	return UpdateAuthorizerRequest{Request: req, Input: input, Copy: c.UpdateAuthorizerRequest}
 }
 

@@ -82,6 +82,7 @@ func (c *Client) AssociateDeviceWithNetworkProfileRequest(input *AssociateDevice
 	}
 
 	req := c.newRequest(op, input, &AssociateDeviceWithNetworkProfileOutput{})
+
 	return AssociateDeviceWithNetworkProfileRequest{Request: req, Input: input, Copy: c.AssociateDeviceWithNetworkProfileRequest}
 }
 

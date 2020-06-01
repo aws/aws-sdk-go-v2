@@ -133,6 +133,7 @@ func (c *Client) ListDomainConfigurationsRequest(input *ListDomainConfigurations
 	}
 
 	req := c.newRequest(op, input, &ListDomainConfigurationsOutput{})
+
 	return ListDomainConfigurationsRequest{Request: req, Input: input, Copy: c.ListDomainConfigurationsRequest}
 }
 

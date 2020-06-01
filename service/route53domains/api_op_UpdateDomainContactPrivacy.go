@@ -123,6 +123,7 @@ func (c *Client) UpdateDomainContactPrivacyRequest(input *UpdateDomainContactPri
 	}
 
 	req := c.newRequest(op, input, &UpdateDomainContactPrivacyOutput{})
+
 	return UpdateDomainContactPrivacyRequest{Request: req, Input: input, Copy: c.UpdateDomainContactPrivacyRequest}
 }
 

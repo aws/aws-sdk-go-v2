@@ -113,6 +113,7 @@ func (c *Client) ModifyDBSnapshotRequest(input *ModifyDBSnapshotInput) ModifyDBS
 	}
 
 	req := c.newRequest(op, input, &ModifyDBSnapshotOutput{})
+
 	return ModifyDBSnapshotRequest{Request: req, Input: input, Copy: c.ModifyDBSnapshotRequest}
 }
 

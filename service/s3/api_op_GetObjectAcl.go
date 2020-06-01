@@ -209,6 +209,7 @@ func (c *Client) GetObjectAclRequest(input *GetObjectAclInput) GetObjectAclReque
 	}
 
 	req := c.newRequest(op, input, &GetObjectAclOutput{})
+
 	return GetObjectAclRequest{Request: req, Input: input, Copy: c.GetObjectAclRequest}
 }
 

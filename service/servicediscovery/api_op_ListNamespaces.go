@@ -120,6 +120,7 @@ func (c *Client) ListNamespacesRequest(input *ListNamespacesInput) ListNamespace
 	}
 
 	req := c.newRequest(op, input, &ListNamespacesOutput{})
+
 	return ListNamespacesRequest{Request: req, Input: input, Copy: c.ListNamespacesRequest}
 }
 

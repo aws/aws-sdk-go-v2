@@ -63,6 +63,7 @@ func (c *Client) DescribeHealthServiceStatusForOrganizationRequest(input *Descri
 	}
 
 	req := c.newRequest(op, input, &DescribeHealthServiceStatusForOrganizationOutput{})
+
 	return DescribeHealthServiceStatusForOrganizationRequest{Request: req, Input: input, Copy: c.DescribeHealthServiceStatusForOrganizationRequest}
 }
 

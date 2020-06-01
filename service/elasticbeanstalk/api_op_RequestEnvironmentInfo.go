@@ -115,6 +115,7 @@ func (c *Client) RequestEnvironmentInfoRequest(input *RequestEnvironmentInfoInpu
 	req := c.newRequest(op, input, &RequestEnvironmentInfoOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RequestEnvironmentInfoRequest{Request: req, Input: input, Copy: c.RequestEnvironmentInfoRequest}
 }
 

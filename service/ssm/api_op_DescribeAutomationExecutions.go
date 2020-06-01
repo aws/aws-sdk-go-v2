@@ -98,6 +98,7 @@ func (c *Client) DescribeAutomationExecutionsRequest(input *DescribeAutomationEx
 	}
 
 	req := c.newRequest(op, input, &DescribeAutomationExecutionsOutput{})
+
 	return DescribeAutomationExecutionsRequest{Request: req, Input: input, Copy: c.DescribeAutomationExecutionsRequest}
 }
 

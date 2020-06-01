@@ -96,6 +96,7 @@ func (c *Client) GetOutcomesRequest(input *GetOutcomesInput) GetOutcomesRequest 
 	}
 
 	req := c.newRequest(op, input, &GetOutcomesOutput{})
+
 	return GetOutcomesRequest{Request: req, Input: input, Copy: c.GetOutcomesRequest}
 }
 

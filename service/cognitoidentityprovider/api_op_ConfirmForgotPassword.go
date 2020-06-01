@@ -165,6 +165,7 @@ func (c *Client) ConfirmForgotPasswordRequest(input *ConfirmForgotPasswordInput)
 
 	req := c.newRequest(op, input, &ConfirmForgotPasswordOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return ConfirmForgotPasswordRequest{Request: req, Input: input, Copy: c.ConfirmForgotPasswordRequest}
 }
 

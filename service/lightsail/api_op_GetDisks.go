@@ -73,6 +73,7 @@ func (c *Client) GetDisksRequest(input *GetDisksInput) GetDisksRequest {
 	}
 
 	req := c.newRequest(op, input, &GetDisksOutput{})
+
 	return GetDisksRequest{Request: req, Input: input, Copy: c.GetDisksRequest}
 }
 

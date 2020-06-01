@@ -113,6 +113,7 @@ func (c *Client) GetLexiconRequest(input *GetLexiconInput) GetLexiconRequest {
 	}
 
 	req := c.newRequest(op, input, &GetLexiconOutput{})
+
 	return GetLexiconRequest{Request: req, Input: input, Copy: c.GetLexiconRequest}
 }
 

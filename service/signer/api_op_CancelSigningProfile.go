@@ -100,6 +100,7 @@ func (c *Client) CancelSigningProfileRequest(input *CancelSigningProfileInput) C
 	req := c.newRequest(op, input, &CancelSigningProfileOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CancelSigningProfileRequest{Request: req, Input: input, Copy: c.CancelSigningProfileRequest}
 }
 

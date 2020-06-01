@@ -76,6 +76,7 @@ func (c *Client) GetServiceRequest(input *GetServiceInput) GetServiceRequest {
 	}
 
 	req := c.newRequest(op, input, &GetServiceOutput{})
+
 	return GetServiceRequest{Request: req, Input: input, Copy: c.GetServiceRequest}
 }
 

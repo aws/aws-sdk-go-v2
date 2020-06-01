@@ -99,6 +99,7 @@ func (c *Client) DeregisterTargetFromMaintenanceWindowRequest(input *DeregisterT
 	}
 
 	req := c.newRequest(op, input, &DeregisterTargetFromMaintenanceWindowOutput{})
+
 	return DeregisterTargetFromMaintenanceWindowRequest{Request: req, Input: input, Copy: c.DeregisterTargetFromMaintenanceWindowRequest}
 }
 

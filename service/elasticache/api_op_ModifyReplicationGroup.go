@@ -217,10 +217,6 @@ const opModifyReplicationGroup = "ModifyReplicationGroup"
 //
 // Modifies the settings for a replication group.
 //
-// For Redis (cluster mode enabled) clusters, this operation cannot be used
-// to change a cluster's node type or engine version. For more information,
-// see:
-//
 //    * Scaling for Amazon ElastiCache for Redis (cluster mode enabled) (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html)
 //    in the ElastiCache User Guide
 //
@@ -249,6 +245,7 @@ func (c *Client) ModifyReplicationGroupRequest(input *ModifyReplicationGroupInpu
 	}
 
 	req := c.newRequest(op, input, &ModifyReplicationGroupOutput{})
+
 	return ModifyReplicationGroupRequest{Request: req, Input: input, Copy: c.ModifyReplicationGroupRequest}
 }
 

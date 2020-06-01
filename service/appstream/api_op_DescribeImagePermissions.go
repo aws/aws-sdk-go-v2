@@ -108,6 +108,7 @@ func (c *Client) DescribeImagePermissionsRequest(input *DescribeImagePermissions
 	}
 
 	req := c.newRequest(op, input, &DescribeImagePermissionsOutput{})
+
 	return DescribeImagePermissionsRequest{Request: req, Input: input, Copy: c.DescribeImagePermissionsRequest}
 }
 

@@ -217,6 +217,7 @@ func (c *Client) CreateUserRequest(input *CreateUserInput) CreateUserRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateUserOutput{})
+
 	return CreateUserRequest{Request: req, Input: input, Copy: c.CreateUserRequest}
 }
 

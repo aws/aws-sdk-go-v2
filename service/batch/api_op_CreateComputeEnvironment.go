@@ -220,6 +220,7 @@ func (c *Client) CreateComputeEnvironmentRequest(input *CreateComputeEnvironment
 	}
 
 	req := c.newRequest(op, input, &CreateComputeEnvironmentOutput{})
+
 	return CreateComputeEnvironmentRequest{Request: req, Input: input, Copy: c.CreateComputeEnvironmentRequest}
 }
 

@@ -85,6 +85,7 @@ func (c *Client) AssociateTagOptionWithResourceRequest(input *AssociateTagOption
 	}
 
 	req := c.newRequest(op, input, &AssociateTagOptionWithResourceOutput{})
+
 	return AssociateTagOptionWithResourceRequest{Request: req, Input: input, Copy: c.AssociateTagOptionWithResourceRequest}
 }
 

@@ -211,6 +211,7 @@ func (c *Client) GetDashboardEmbedUrlRequest(input *GetDashboardEmbedUrlInput) G
 	}
 
 	req := c.newRequest(op, input, &GetDashboardEmbedUrlOutput{})
+
 	return GetDashboardEmbedUrlRequest{Request: req, Input: input, Copy: c.GetDashboardEmbedUrlRequest}
 }
 

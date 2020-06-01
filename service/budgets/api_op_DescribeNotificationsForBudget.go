@@ -107,6 +107,7 @@ func (c *Client) DescribeNotificationsForBudgetRequest(input *DescribeNotificati
 	}
 
 	req := c.newRequest(op, input, &DescribeNotificationsForBudgetOutput{})
+
 	return DescribeNotificationsForBudgetRequest{Request: req, Input: input, Copy: c.DescribeNotificationsForBudgetRequest}
 }
 

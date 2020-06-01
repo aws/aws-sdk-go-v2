@@ -79,6 +79,7 @@ func (c *Client) GetSnapshotLimitsRequest(input *GetSnapshotLimitsInput) GetSnap
 	}
 
 	req := c.newRequest(op, input, &GetSnapshotLimitsOutput{})
+
 	return GetSnapshotLimitsRequest{Request: req, Input: input, Copy: c.GetSnapshotLimitsRequest}
 }
 

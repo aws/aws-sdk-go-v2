@@ -117,6 +117,7 @@ func (c *Client) StartActivityStreamRequest(input *StartActivityStreamInput) Sta
 	}
 
 	req := c.newRequest(op, input, &StartActivityStreamOutput{})
+
 	return StartActivityStreamRequest{Request: req, Input: input, Copy: c.StartActivityStreamRequest}
 }
 

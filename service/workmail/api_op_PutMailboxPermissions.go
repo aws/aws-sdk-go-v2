@@ -114,6 +114,7 @@ func (c *Client) PutMailboxPermissionsRequest(input *PutMailboxPermissionsInput)
 	}
 
 	req := c.newRequest(op, input, &PutMailboxPermissionsOutput{})
+
 	return PutMailboxPermissionsRequest{Request: req, Input: input, Copy: c.PutMailboxPermissionsRequest}
 }
 

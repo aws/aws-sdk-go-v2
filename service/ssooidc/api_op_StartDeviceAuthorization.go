@@ -190,6 +190,7 @@ func (c *Client) StartDeviceAuthorizationRequest(input *StartDeviceAuthorization
 
 	req := c.newRequest(op, input, &StartDeviceAuthorizationOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return StartDeviceAuthorizationRequest{Request: req, Input: input, Copy: c.StartDeviceAuthorizationRequest}
 }
 

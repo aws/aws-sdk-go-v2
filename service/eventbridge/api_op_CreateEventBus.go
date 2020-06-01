@@ -107,6 +107,7 @@ func (c *Client) CreateEventBusRequest(input *CreateEventBusInput) CreateEventBu
 	}
 
 	req := c.newRequest(op, input, &CreateEventBusOutput{})
+
 	return CreateEventBusRequest{Request: req, Input: input, Copy: c.CreateEventBusRequest}
 }
 

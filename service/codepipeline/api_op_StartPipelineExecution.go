@@ -88,6 +88,7 @@ func (c *Client) StartPipelineExecutionRequest(input *StartPipelineExecutionInpu
 	}
 
 	req := c.newRequest(op, input, &StartPipelineExecutionOutput{})
+
 	return StartPipelineExecutionRequest{Request: req, Input: input, Copy: c.StartPipelineExecutionRequest}
 }
 

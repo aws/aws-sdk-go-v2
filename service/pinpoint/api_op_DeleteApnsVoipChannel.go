@@ -103,6 +103,7 @@ func (c *Client) DeleteApnsVoipChannelRequest(input *DeleteApnsVoipChannelInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteApnsVoipChannelOutput{})
+
 	return DeleteApnsVoipChannelRequest{Request: req, Input: input, Copy: c.DeleteApnsVoipChannelRequest}
 }
 

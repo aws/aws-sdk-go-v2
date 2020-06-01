@@ -98,6 +98,7 @@ func (c *Client) ListEntitiesDetectionJobsRequest(input *ListEntitiesDetectionJo
 	}
 
 	req := c.newRequest(op, input, &ListEntitiesDetectionJobsOutput{})
+
 	return ListEntitiesDetectionJobsRequest{Request: req, Input: input, Copy: c.ListEntitiesDetectionJobsRequest}
 }
 

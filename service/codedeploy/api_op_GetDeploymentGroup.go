@@ -94,6 +94,7 @@ func (c *Client) GetDeploymentGroupRequest(input *GetDeploymentGroupInput) GetDe
 	}
 
 	req := c.newRequest(op, input, &GetDeploymentGroupOutput{})
+
 	return GetDeploymentGroupRequest{Request: req, Input: input, Copy: c.GetDeploymentGroupRequest}
 }
 

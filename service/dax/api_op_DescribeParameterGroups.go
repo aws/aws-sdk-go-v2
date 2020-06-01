@@ -77,6 +77,7 @@ func (c *Client) DescribeParameterGroupsRequest(input *DescribeParameterGroupsIn
 	}
 
 	req := c.newRequest(op, input, &DescribeParameterGroupsOutput{})
+
 	return DescribeParameterGroupsRequest{Request: req, Input: input, Copy: c.DescribeParameterGroupsRequest}
 }
 

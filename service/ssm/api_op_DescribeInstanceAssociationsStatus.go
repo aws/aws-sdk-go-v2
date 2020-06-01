@@ -92,6 +92,7 @@ func (c *Client) DescribeInstanceAssociationsStatusRequest(input *DescribeInstan
 	}
 
 	req := c.newRequest(op, input, &DescribeInstanceAssociationsStatusOutput{})
+
 	return DescribeInstanceAssociationsStatusRequest{Request: req, Input: input, Copy: c.DescribeInstanceAssociationsStatusRequest}
 }
 

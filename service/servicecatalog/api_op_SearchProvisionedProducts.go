@@ -105,6 +105,7 @@ func (c *Client) SearchProvisionedProductsRequest(input *SearchProvisionedProduc
 	}
 
 	req := c.newRequest(op, input, &SearchProvisionedProductsOutput{})
+
 	return SearchProvisionedProductsRequest{Request: req, Input: input, Copy: c.SearchProvisionedProductsRequest}
 }
 

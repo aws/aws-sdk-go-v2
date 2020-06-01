@@ -115,6 +115,7 @@ func (c *Client) DetectStackDriftRequest(input *DetectStackDriftInput) DetectSta
 	}
 
 	req := c.newRequest(op, input, &DetectStackDriftOutput{})
+
 	return DetectStackDriftRequest{Request: req, Input: input, Copy: c.DetectStackDriftRequest}
 }
 

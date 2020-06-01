@@ -167,6 +167,7 @@ func (c *Client) GetDevicesRequest(input *GetDevicesInput) GetDevicesRequest {
 	}
 
 	req := c.newRequest(op, input, &GetDevicesOutput{})
+
 	return GetDevicesRequest{Request: req, Input: input, Copy: c.GetDevicesRequest}
 }
 

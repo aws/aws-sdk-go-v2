@@ -118,6 +118,7 @@ func (c *Client) SearchContactsRequest(input *SearchContactsInput) SearchContact
 	}
 
 	req := c.newRequest(op, input, &SearchContactsOutput{})
+
 	return SearchContactsRequest{Request: req, Input: input, Copy: c.SearchContactsRequest}
 }
 

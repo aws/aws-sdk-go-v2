@@ -111,6 +111,7 @@ func (c *Client) GetCommentsForComparedCommitRequest(input *GetCommentsForCompar
 	}
 
 	req := c.newRequest(op, input, &GetCommentsForComparedCommitOutput{})
+
 	return GetCommentsForComparedCommitRequest{Request: req, Input: input, Copy: c.GetCommentsForComparedCommitRequest}
 }
 

@@ -232,6 +232,7 @@ func (c *Client) PutFunctionEventInvokeConfigRequest(input *PutFunctionEventInvo
 	}
 
 	req := c.newRequest(op, input, &PutFunctionEventInvokeConfigOutput{})
+
 	return PutFunctionEventInvokeConfigRequest{Request: req, Input: input, Copy: c.PutFunctionEventInvokeConfigRequest}
 }
 

@@ -229,6 +229,7 @@ func (c *Client) UpdateElasticsearchDomainConfigRequest(input *UpdateElasticsear
 	}
 
 	req := c.newRequest(op, input, &UpdateElasticsearchDomainConfigOutput{})
+
 	return UpdateElasticsearchDomainConfigRequest{Request: req, Input: input, Copy: c.UpdateElasticsearchDomainConfigRequest}
 }
 

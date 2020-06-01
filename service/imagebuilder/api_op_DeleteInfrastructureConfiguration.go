@@ -111,6 +111,7 @@ func (c *Client) DeleteInfrastructureConfigurationRequest(input *DeleteInfrastru
 	}
 
 	req := c.newRequest(op, input, &DeleteInfrastructureConfigurationOutput{})
+
 	return DeleteInfrastructureConfigurationRequest{Request: req, Input: input, Copy: c.DeleteInfrastructureConfigurationRequest}
 }
 

@@ -176,6 +176,7 @@ func (c *Client) GetQueueAttributesRequest(input *GetQueueAttributesInput) GetQu
 	}
 
 	req := c.newRequest(op, input, &GetQueueAttributesOutput{})
+
 	return GetQueueAttributesRequest{Request: req, Input: input, Copy: c.GetQueueAttributesRequest}
 }
 

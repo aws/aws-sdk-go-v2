@@ -170,6 +170,7 @@ func (c *Client) DescribeTransformJobRequest(input *DescribeTransformJobInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeTransformJobOutput{})
+
 	return DescribeTransformJobRequest{Request: req, Input: input, Copy: c.DescribeTransformJobRequest}
 }
 

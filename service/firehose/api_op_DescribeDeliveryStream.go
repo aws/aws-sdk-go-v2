@@ -104,6 +104,7 @@ func (c *Client) DescribeDeliveryStreamRequest(input *DescribeDeliveryStreamInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeDeliveryStreamOutput{})
+
 	return DescribeDeliveryStreamRequest{Request: req, Input: input, Copy: c.DescribeDeliveryStreamRequest}
 }
 

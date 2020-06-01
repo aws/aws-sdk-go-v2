@@ -131,6 +131,7 @@ func (c *Client) RegisterUsageRequest(input *RegisterUsageInput) RegisterUsageRe
 	}
 
 	req := c.newRequest(op, input, &RegisterUsageOutput{})
+
 	return RegisterUsageRequest{Request: req, Input: input, Copy: c.RegisterUsageRequest}
 }
 

@@ -140,6 +140,7 @@ func (c *Client) ListDataSetRevisionsRequest(input *ListDataSetRevisionsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListDataSetRevisionsOutput{})
+
 	return ListDataSetRevisionsRequest{Request: req, Input: input, Copy: c.ListDataSetRevisionsRequest}
 }
 

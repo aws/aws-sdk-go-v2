@@ -128,6 +128,7 @@ func (c *Client) ListPhoneNumberOrdersRequest(input *ListPhoneNumberOrdersInput)
 	}
 
 	req := c.newRequest(op, input, &ListPhoneNumberOrdersOutput{})
+
 	return ListPhoneNumberOrdersRequest{Request: req, Input: input, Copy: c.ListPhoneNumberOrdersRequest}
 }
 

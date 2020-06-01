@@ -78,6 +78,7 @@ func (c *Client) DeleteWebhookRequest(input *DeleteWebhookInput) DeleteWebhookRe
 	}
 
 	req := c.newRequest(op, input, &DeleteWebhookOutput{})
+
 	return DeleteWebhookRequest{Request: req, Input: input, Copy: c.DeleteWebhookRequest}
 }
 

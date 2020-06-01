@@ -88,6 +88,7 @@ func (c *Client) AddRoleToDBClusterRequest(input *AddRoleToDBClusterInput) AddRo
 	req := c.newRequest(op, input, &AddRoleToDBClusterOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AddRoleToDBClusterRequest{Request: req, Input: input, Copy: c.AddRoleToDBClusterRequest}
 }
 

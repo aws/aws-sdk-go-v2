@@ -92,6 +92,7 @@ func (c *Client) SubmitAttachmentStateChangesRequest(input *SubmitAttachmentStat
 	}
 
 	req := c.newRequest(op, input, &SubmitAttachmentStateChangesOutput{})
+
 	return SubmitAttachmentStateChangesRequest{Request: req, Input: input, Copy: c.SubmitAttachmentStateChangesRequest}
 }
 

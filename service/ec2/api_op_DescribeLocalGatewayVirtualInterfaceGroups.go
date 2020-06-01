@@ -19,6 +19,13 @@ type DescribeLocalGatewayVirtualInterfaceGroupsInput struct {
 	DryRun *bool `type:"boolean"`
 
 	// One or more filters.
+	//
+	//    * local-gateway-id - The ID of a local gateway.
+	//
+	//    * local-gateway-virtual-interface-id - The ID of the virtual interface.
+	//
+	//    * local-gateway-virtual-interface-group-id - The ID of the virtual interface
+	//    group.
 	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The IDs of the virtual interface groups.
@@ -99,6 +106,7 @@ func (c *Client) DescribeLocalGatewayVirtualInterfaceGroupsRequest(input *Descri
 	}
 
 	req := c.newRequest(op, input, &DescribeLocalGatewayVirtualInterfaceGroupsOutput{})
+
 	return DescribeLocalGatewayVirtualInterfaceGroupsRequest{Request: req, Input: input, Copy: c.DescribeLocalGatewayVirtualInterfaceGroupsRequest}
 }
 

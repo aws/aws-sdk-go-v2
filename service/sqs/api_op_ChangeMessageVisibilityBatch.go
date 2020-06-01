@@ -121,6 +121,7 @@ func (c *Client) ChangeMessageVisibilityBatchRequest(input *ChangeMessageVisibil
 	}
 
 	req := c.newRequest(op, input, &ChangeMessageVisibilityBatchOutput{})
+
 	return ChangeMessageVisibilityBatchRequest{Request: req, Input: input, Copy: c.ChangeMessageVisibilityBatchRequest}
 }
 

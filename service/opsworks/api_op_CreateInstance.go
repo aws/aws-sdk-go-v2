@@ -223,6 +223,7 @@ func (c *Client) CreateInstanceRequest(input *CreateInstanceInput) CreateInstanc
 	}
 
 	req := c.newRequest(op, input, &CreateInstanceOutput{})
+
 	return CreateInstanceRequest{Request: req, Input: input, Copy: c.CreateInstanceRequest}
 }
 

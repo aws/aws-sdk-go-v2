@@ -146,6 +146,7 @@ func (c *Client) AdminGetUserRequest(input *AdminGetUserInput) AdminGetUserReque
 	}
 
 	req := c.newRequest(op, input, &AdminGetUserOutput{})
+
 	return AdminGetUserRequest{Request: req, Input: input, Copy: c.AdminGetUserRequest}
 }
 

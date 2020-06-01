@@ -99,6 +99,7 @@ func (c *Client) ListSamplesRequest(input *ListSamplesInput) ListSamplesRequest 
 	}
 
 	req := c.newRequest(op, input, &ListSamplesOutput{})
+
 	return ListSamplesRequest{Request: req, Input: input, Copy: c.ListSamplesRequest}
 }
 

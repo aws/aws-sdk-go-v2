@@ -74,6 +74,7 @@ func (c *Client) DisableDomainAutoRenewRequest(input *DisableDomainAutoRenewInpu
 	}
 
 	req := c.newRequest(op, input, &DisableDomainAutoRenewOutput{})
+
 	return DisableDomainAutoRenewRequest{Request: req, Input: input, Copy: c.DisableDomainAutoRenewRequest}
 }
 

@@ -178,6 +178,7 @@ func (c *Client) UpdateRuleGroupRequest(input *UpdateRuleGroupInput) UpdateRuleG
 	}
 
 	req := c.newRequest(op, input, &UpdateRuleGroupOutput{})
+
 	return UpdateRuleGroupRequest{Request: req, Input: input, Copy: c.UpdateRuleGroupRequest}
 }
 

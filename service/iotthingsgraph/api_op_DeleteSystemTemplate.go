@@ -79,6 +79,7 @@ func (c *Client) DeleteSystemTemplateRequest(input *DeleteSystemTemplateInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteSystemTemplateOutput{})
+
 	return DeleteSystemTemplateRequest{Request: req, Input: input, Copy: c.DeleteSystemTemplateRequest}
 }
 

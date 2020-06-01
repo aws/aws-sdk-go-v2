@@ -91,6 +91,7 @@ func (c *Client) PutRoomSkillParameterRequest(input *PutRoomSkillParameterInput)
 	}
 
 	req := c.newRequest(op, input, &PutRoomSkillParameterOutput{})
+
 	return PutRoomSkillParameterRequest{Request: req, Input: input, Copy: c.PutRoomSkillParameterRequest}
 }
 

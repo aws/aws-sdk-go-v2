@@ -112,6 +112,7 @@ func (c *Client) UpdateDomainContactRequest(input *UpdateDomainContactInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateDomainContactOutput{})
+
 	return UpdateDomainContactRequest{Request: req, Input: input, Copy: c.UpdateDomainContactRequest}
 }
 

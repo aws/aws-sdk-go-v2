@@ -158,6 +158,7 @@ func (c *Client) AssociateResourceShareRequest(input *AssociateResourceShareInpu
 	}
 
 	req := c.newRequest(op, input, &AssociateResourceShareOutput{})
+
 	return AssociateResourceShareRequest{Request: req, Input: input, Copy: c.AssociateResourceShareRequest}
 }
 

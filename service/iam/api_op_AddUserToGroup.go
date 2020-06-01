@@ -100,6 +100,7 @@ func (c *Client) AddUserToGroupRequest(input *AddUserToGroupInput) AddUserToGrou
 	req := c.newRequest(op, input, &AddUserToGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AddUserToGroupRequest{Request: req, Input: input, Copy: c.AddUserToGroupRequest}
 }
 

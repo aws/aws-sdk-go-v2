@@ -164,6 +164,7 @@ func (c *Client) GetIntentVersionsRequest(input *GetIntentVersionsInput) GetInte
 	}
 
 	req := c.newRequest(op, input, &GetIntentVersionsOutput{})
+
 	return GetIntentVersionsRequest{Request: req, Input: input, Copy: c.GetIntentVersionsRequest}
 }
 

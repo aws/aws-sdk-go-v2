@@ -153,6 +153,7 @@ func (c *Client) GetRequestValidatorRequest(input *GetRequestValidatorInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetRequestValidatorOutput{})
+
 	return GetRequestValidatorRequest{Request: req, Input: input, Copy: c.GetRequestValidatorRequest}
 }
 

@@ -120,6 +120,7 @@ func (c *Client) AssociatePackageRequest(input *AssociatePackageInput) Associate
 	}
 
 	req := c.newRequest(op, input, &AssociatePackageOutput{})
+
 	return AssociatePackageRequest{Request: req, Input: input, Copy: c.AssociatePackageRequest}
 }
 

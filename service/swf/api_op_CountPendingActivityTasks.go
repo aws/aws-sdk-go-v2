@@ -122,6 +122,7 @@ func (c *Client) CountPendingActivityTasksRequest(input *CountPendingActivityTas
 	}
 
 	req := c.newRequest(op, input, &CountPendingActivityTasksOutput{})
+
 	return CountPendingActivityTasksRequest{Request: req, Input: input, Copy: c.CountPendingActivityTasksRequest}
 }
 

@@ -103,6 +103,7 @@ func (c *Client) ExecuteProvisionedProductPlanRequest(input *ExecuteProvisionedP
 	}
 
 	req := c.newRequest(op, input, &ExecuteProvisionedProductPlanOutput{})
+
 	return ExecuteProvisionedProductPlanRequest{Request: req, Input: input, Copy: c.ExecuteProvisionedProductPlanRequest}
 }
 

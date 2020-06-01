@@ -113,6 +113,7 @@ func (c *Client) DeleteBotRequest(input *DeleteBotInput) DeleteBotRequest {
 	req := c.newRequest(op, input, &DeleteBotOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteBotRequest{Request: req, Input: input, Copy: c.DeleteBotRequest}
 }
 

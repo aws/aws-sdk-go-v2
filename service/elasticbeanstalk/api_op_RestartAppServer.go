@@ -86,6 +86,7 @@ func (c *Client) RestartAppServerRequest(input *RestartAppServerInput) RestartAp
 	req := c.newRequest(op, input, &RestartAppServerOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RestartAppServerRequest{Request: req, Input: input, Copy: c.RestartAppServerRequest}
 }
 

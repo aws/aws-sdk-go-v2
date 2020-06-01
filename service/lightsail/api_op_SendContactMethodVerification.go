@@ -40,7 +40,7 @@ type SendContactMethodVerificationOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
+	// of the request, the timestamp of the request, and the resources affected
 	// by the request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
@@ -55,8 +55,8 @@ const opSendContactMethodVerification = "SendContactMethodVerification"
 // SendContactMethodVerificationRequest returns a request value for making API operation for
 // Amazon Lightsail.
 //
-// Sends a verification request to an email contact method to ensure it’s
-// owned by the requester. SMS contact methods don’t need to be verified.
+// Sends a verification request to an email contact method to ensure it's owned
+// by the requester. SMS contact methods don't need to be verified.
 //
 // A contact method is used to send you notifications about your Amazon Lightsail
 // resources. You can add one email address and one mobile phone number contact
@@ -91,6 +91,7 @@ func (c *Client) SendContactMethodVerificationRequest(input *SendContactMethodVe
 	}
 
 	req := c.newRequest(op, input, &SendContactMethodVerificationOutput{})
+
 	return SendContactMethodVerificationRequest{Request: req, Input: input, Copy: c.SendContactMethodVerificationRequest}
 }
 

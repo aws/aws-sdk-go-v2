@@ -204,6 +204,7 @@ func (c *Client) AddLayerVersionPermissionRequest(input *AddLayerVersionPermissi
 	}
 
 	req := c.newRequest(op, input, &AddLayerVersionPermissionOutput{})
+
 	return AddLayerVersionPermissionRequest{Request: req, Input: input, Copy: c.AddLayerVersionPermissionRequest}
 }
 

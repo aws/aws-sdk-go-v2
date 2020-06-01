@@ -101,6 +101,7 @@ func (c *Client) ReadJobRequest(input *ReadJobInput) ReadJobRequest {
 	}
 
 	req := c.newRequest(op, input, &ReadJobOutput{})
+
 	return ReadJobRequest{Request: req, Input: input, Copy: c.ReadJobRequest}
 }
 

@@ -276,6 +276,7 @@ func (c *Client) CreateIntentVersionRequest(input *CreateIntentVersionInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateIntentVersionOutput{})
+
 	return CreateIntentVersionRequest{Request: req, Input: input, Copy: c.CreateIntentVersionRequest}
 }
 

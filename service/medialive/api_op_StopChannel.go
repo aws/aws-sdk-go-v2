@@ -244,6 +244,7 @@ func (c *Client) StopChannelRequest(input *StopChannelInput) StopChannelRequest 
 	}
 
 	req := c.newRequest(op, input, &StopChannelOutput{})
+
 	return StopChannelRequest{Request: req, Input: input, Copy: c.StopChannelRequest}
 }
 

@@ -198,6 +198,7 @@ func (c *Client) CreateSimulationApplicationVersionRequest(input *CreateSimulati
 	}
 
 	req := c.newRequest(op, input, &CreateSimulationApplicationVersionOutput{})
+
 	return CreateSimulationApplicationVersionRequest{Request: req, Input: input, Copy: c.CreateSimulationApplicationVersionRequest}
 }
 

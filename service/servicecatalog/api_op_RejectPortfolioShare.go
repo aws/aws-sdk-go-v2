@@ -99,6 +99,7 @@ func (c *Client) RejectPortfolioShareRequest(input *RejectPortfolioShareInput) R
 	}
 
 	req := c.newRequest(op, input, &RejectPortfolioShareOutput{})
+
 	return RejectPortfolioShareRequest{Request: req, Input: input, Copy: c.RejectPortfolioShareRequest}
 }
 

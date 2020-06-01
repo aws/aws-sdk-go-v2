@@ -85,6 +85,7 @@ func (c *Client) ListWorkflowsRequest(input *ListWorkflowsInput) ListWorkflowsRe
 	}
 
 	req := c.newRequest(op, input, &ListWorkflowsOutput{})
+
 	return ListWorkflowsRequest{Request: req, Input: input, Copy: c.ListWorkflowsRequest}
 }
 

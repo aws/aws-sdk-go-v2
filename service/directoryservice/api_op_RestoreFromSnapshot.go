@@ -83,6 +83,7 @@ func (c *Client) RestoreFromSnapshotRequest(input *RestoreFromSnapshotInput) Res
 	}
 
 	req := c.newRequest(op, input, &RestoreFromSnapshotOutput{})
+
 	return RestoreFromSnapshotRequest{Request: req, Input: input, Copy: c.RestoreFromSnapshotRequest}
 }
 

@@ -112,6 +112,7 @@ func (c *Client) CreateCacheParameterGroupRequest(input *CreateCacheParameterGro
 	}
 
 	req := c.newRequest(op, input, &CreateCacheParameterGroupOutput{})
+
 	return CreateCacheParameterGroupRequest{Request: req, Input: input, Copy: c.CreateCacheParameterGroupRequest}
 }
 

@@ -82,6 +82,7 @@ func (c *Client) PutOutcomeRequest(input *PutOutcomeInput) PutOutcomeRequest {
 	}
 
 	req := c.newRequest(op, input, &PutOutcomeOutput{})
+
 	return PutOutcomeRequest{Request: req, Input: input, Copy: c.PutOutcomeRequest}
 }
 

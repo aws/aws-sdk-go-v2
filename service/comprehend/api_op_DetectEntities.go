@@ -93,6 +93,7 @@ func (c *Client) DetectEntitiesRequest(input *DetectEntitiesInput) DetectEntitie
 	}
 
 	req := c.newRequest(op, input, &DetectEntitiesOutput{})
+
 	return DetectEntitiesRequest{Request: req, Input: input, Copy: c.DetectEntitiesRequest}
 }
 

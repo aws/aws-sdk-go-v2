@@ -67,6 +67,7 @@ func (c *Client) OtherOperationRequest(input *OtherOperationInput) OtherOperatio
 	req := c.newRequest(op, input, &OtherOperationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return OtherOperationRequest{Request: req, Input: input, Copy: c.OtherOperationRequest}
 }
 

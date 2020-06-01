@@ -13,6 +13,23 @@ import (
 type CreateListenerInput struct {
 	_ struct{} `type:"structure"`
 
+	// [TLS listeners] The name of the Application-Layer Protocol Negotiation (ALPN)
+	// policy. You can specify one policy name. The following are the possible values:
+	//
+	//    * HTTP1Only
+	//
+	//    * HTTP2Only
+	//
+	//    * HTTP2Optional
+	//
+	//    * HTTP2Preferred
+	//
+	//    * None
+	//
+	// For more information, see ALPN Policies (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies)
+	// in the Network Load Balancers Guide.
+	AlpnPolicy []string `type:"list"`
+
 	// [HTTPS and TLS listeners] The default certificate for the listener. You must
 	// provide exactly one certificate. Set CertificateArn to the certificate ARN
 	// but do not set IsDefault.
@@ -180,6 +197,7 @@ func (c *Client) CreateListenerRequest(input *CreateListenerInput) CreateListene
 	}
 
 	req := c.newRequest(op, input, &CreateListenerOutput{})
+
 	return CreateListenerRequest{Request: req, Input: input, Copy: c.CreateListenerRequest}
 }
 

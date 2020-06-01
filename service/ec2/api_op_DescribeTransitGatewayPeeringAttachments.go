@@ -112,6 +112,7 @@ func (c *Client) DescribeTransitGatewayPeeringAttachmentsRequest(input *Describe
 	}
 
 	req := c.newRequest(op, input, &DescribeTransitGatewayPeeringAttachmentsOutput{})
+
 	return DescribeTransitGatewayPeeringAttachmentsRequest{Request: req, Input: input, Copy: c.DescribeTransitGatewayPeeringAttachmentsRequest}
 }
 

@@ -137,6 +137,7 @@ func (c *Client) AssociateDomainRequest(input *AssociateDomainInput) AssociateDo
 	}
 
 	req := c.newRequest(op, input, &AssociateDomainOutput{})
+
 	return AssociateDomainRequest{Request: req, Input: input, Copy: c.AssociateDomainRequest}
 }
 

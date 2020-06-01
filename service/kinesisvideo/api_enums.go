@@ -12,6 +12,7 @@ const (
 	APINameGetMediaForFragmentList    APIName = "GET_MEDIA_FOR_FRAGMENT_LIST"
 	APINameGetHlsStreamingSessionUrl  APIName = "GET_HLS_STREAMING_SESSION_URL"
 	APINameGetDashStreamingSessionUrl APIName = "GET_DASH_STREAMING_SESSION_URL"
+	APINameGetClip                    APIName = "GET_CLIP"
 )
 
 func (enum APIName) MarshalValue() (string, error) {

@@ -98,6 +98,7 @@ func (c *Client) CreateAssociationBatchRequest(input *CreateAssociationBatchInpu
 	}
 
 	req := c.newRequest(op, input, &CreateAssociationBatchOutput{})
+
 	return CreateAssociationBatchRequest{Request: req, Input: input, Copy: c.CreateAssociationBatchRequest}
 }
 

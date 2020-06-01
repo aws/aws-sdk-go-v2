@@ -146,6 +146,7 @@ func (c *Client) UpdateObjectAttributesRequest(input *UpdateObjectAttributesInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateObjectAttributesOutput{})
+
 	return UpdateObjectAttributesRequest{Request: req, Input: input, Copy: c.UpdateObjectAttributesRequest}
 }
 

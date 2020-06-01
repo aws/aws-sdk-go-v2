@@ -111,6 +111,7 @@ func (c *Client) ListDelegatedServicesForAccountRequest(input *ListDelegatedServ
 	}
 
 	req := c.newRequest(op, input, &ListDelegatedServicesForAccountOutput{})
+
 	return ListDelegatedServicesForAccountRequest{Request: req, Input: input, Copy: c.ListDelegatedServicesForAccountRequest}
 }
 

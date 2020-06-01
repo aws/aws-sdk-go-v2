@@ -139,6 +139,7 @@ func (c *Client) CreateActivityRequest(input *CreateActivityInput) CreateActivit
 	}
 
 	req := c.newRequest(op, input, &CreateActivityOutput{})
+
 	return CreateActivityRequest{Request: req, Input: input, Copy: c.CreateActivityRequest}
 }
 

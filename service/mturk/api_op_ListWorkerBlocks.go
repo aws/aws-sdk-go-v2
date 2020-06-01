@@ -95,6 +95,7 @@ func (c *Client) ListWorkerBlocksRequest(input *ListWorkerBlocksInput) ListWorke
 	}
 
 	req := c.newRequest(op, input, &ListWorkerBlocksOutput{})
+
 	return ListWorkerBlocksRequest{Request: req, Input: input, Copy: c.ListWorkerBlocksRequest}
 }
 

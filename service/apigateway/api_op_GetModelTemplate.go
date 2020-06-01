@@ -73,7 +73,7 @@ func (s GetModelTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetModelTemplateOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The Apache Velocity Template Language (VTL) (https://velocity.apache.org/engine/devel/vtl-reference-guide.html)
+	// The Apache Velocity Template Language (VTL) (https://velocity.apache.org/engine/devel/vtl-reference.html)
 	// template content used for the template resource.
 	Value *string `locationName:"value" type:"string"`
 }
@@ -120,6 +120,7 @@ func (c *Client) GetModelTemplateRequest(input *GetModelTemplateInput) GetModelT
 	}
 
 	req := c.newRequest(op, input, &GetModelTemplateOutput{})
+
 	return GetModelTemplateRequest{Request: req, Input: input, Copy: c.GetModelTemplateRequest}
 }
 

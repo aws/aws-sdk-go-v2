@@ -98,6 +98,7 @@ func (c *Client) PutRepositoryTriggersRequest(input *PutRepositoryTriggersInput)
 	}
 
 	req := c.newRequest(op, input, &PutRepositoryTriggersOutput{})
+
 	return PutRepositoryTriggersRequest{Request: req, Input: input, Copy: c.PutRepositoryTriggersRequest}
 }
 

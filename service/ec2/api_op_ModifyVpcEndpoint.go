@@ -118,6 +118,7 @@ func (c *Client) ModifyVpcEndpointRequest(input *ModifyVpcEndpointInput) ModifyV
 	}
 
 	req := c.newRequest(op, input, &ModifyVpcEndpointOutput{})
+
 	return ModifyVpcEndpointRequest{Request: req, Input: input, Copy: c.ModifyVpcEndpointRequest}
 }
 

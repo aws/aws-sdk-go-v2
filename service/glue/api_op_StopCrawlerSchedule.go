@@ -77,6 +77,7 @@ func (c *Client) StopCrawlerScheduleRequest(input *StopCrawlerScheduleInput) Sto
 	}
 
 	req := c.newRequest(op, input, &StopCrawlerScheduleOutput{})
+
 	return StopCrawlerScheduleRequest{Request: req, Input: input, Copy: c.StopCrawlerScheduleRequest}
 }
 

@@ -160,6 +160,7 @@ func (c *Client) ListElasticsearchInstanceTypesRequest(input *ListElasticsearchI
 	}
 
 	req := c.newRequest(op, input, &ListElasticsearchInstanceTypesOutput{})
+
 	return ListElasticsearchInstanceTypesRequest{Request: req, Input: input, Copy: c.ListElasticsearchInstanceTypesRequest}
 }
 

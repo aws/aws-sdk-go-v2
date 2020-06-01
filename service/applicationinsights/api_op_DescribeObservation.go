@@ -79,6 +79,7 @@ func (c *Client) DescribeObservationRequest(input *DescribeObservationInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeObservationOutput{})
+
 	return DescribeObservationRequest{Request: req, Input: input, Copy: c.DescribeObservationRequest}
 }
 

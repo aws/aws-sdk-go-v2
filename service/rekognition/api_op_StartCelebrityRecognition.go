@@ -122,6 +122,7 @@ func (c *Client) StartCelebrityRecognitionRequest(input *StartCelebrityRecogniti
 	}
 
 	req := c.newRequest(op, input, &StartCelebrityRecognitionOutput{})
+
 	return StartCelebrityRecognitionRequest{Request: req, Input: input, Copy: c.StartCelebrityRecognitionRequest}
 }
 

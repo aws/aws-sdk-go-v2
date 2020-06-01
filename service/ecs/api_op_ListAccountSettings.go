@@ -105,6 +105,7 @@ func (c *Client) ListAccountSettingsRequest(input *ListAccountSettingsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListAccountSettingsOutput{})
+
 	return ListAccountSettingsRequest{Request: req, Input: input, Copy: c.ListAccountSettingsRequest}
 }
 

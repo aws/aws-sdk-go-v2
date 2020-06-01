@@ -101,6 +101,7 @@ func (c *Client) DescribeImportTasksRequest(input *DescribeImportTasksInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeImportTasksOutput{})
+
 	return DescribeImportTasksRequest{Request: req, Input: input, Copy: c.DescribeImportTasksRequest}
 }
 

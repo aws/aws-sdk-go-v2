@@ -121,6 +121,7 @@ func (c *Client) GetAggregateDiscoveredResourceCountsRequest(input *GetAggregate
 	}
 
 	req := c.newRequest(op, input, &GetAggregateDiscoveredResourceCountsOutput{})
+
 	return GetAggregateDiscoveredResourceCountsRequest{Request: req, Input: input, Copy: c.GetAggregateDiscoveredResourceCountsRequest}
 }
 

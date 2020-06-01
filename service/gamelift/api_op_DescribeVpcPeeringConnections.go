@@ -81,6 +81,7 @@ func (c *Client) DescribeVpcPeeringConnectionsRequest(input *DescribeVpcPeeringC
 	}
 
 	req := c.newRequest(op, input, &DescribeVpcPeeringConnectionsOutput{})
+
 	return DescribeVpcPeeringConnectionsRequest{Request: req, Input: input, Copy: c.DescribeVpcPeeringConnectionsRequest}
 }
 

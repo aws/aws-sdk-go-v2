@@ -129,6 +129,7 @@ func (c *Client) DescribeCasesRequest(input *DescribeCasesInput) DescribeCasesRe
 	}
 
 	req := c.newRequest(op, input, &DescribeCasesOutput{})
+
 	return DescribeCasesRequest{Request: req, Input: input, Copy: c.DescribeCasesRequest}
 }
 

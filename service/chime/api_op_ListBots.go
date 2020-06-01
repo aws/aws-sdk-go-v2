@@ -145,6 +145,7 @@ func (c *Client) ListBotsRequest(input *ListBotsInput) ListBotsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListBotsOutput{})
+
 	return ListBotsRequest{Request: req, Input: input, Copy: c.ListBotsRequest}
 }
 

@@ -148,6 +148,7 @@ func (c *Client) ListHoursOfOperationsRequest(input *ListHoursOfOperationsInput)
 	}
 
 	req := c.newRequest(op, input, &ListHoursOfOperationsOutput{})
+
 	return ListHoursOfOperationsRequest{Request: req, Input: input, Copy: c.ListHoursOfOperationsRequest}
 }
 

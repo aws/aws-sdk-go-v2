@@ -131,6 +131,7 @@ func (c *Client) UpdateUserAttributesRequest(input *UpdateUserAttributesInput) U
 
 	req := c.newRequest(op, input, &UpdateUserAttributesOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return UpdateUserAttributesRequest{Request: req, Input: input, Copy: c.UpdateUserAttributesRequest}
 }
 

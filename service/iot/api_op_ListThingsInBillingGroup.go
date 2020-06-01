@@ -139,6 +139,7 @@ func (c *Client) ListThingsInBillingGroupRequest(input *ListThingsInBillingGroup
 	}
 
 	req := c.newRequest(op, input, &ListThingsInBillingGroupOutput{})
+
 	return ListThingsInBillingGroupRequest{Request: req, Input: input, Copy: c.ListThingsInBillingGroupRequest}
 }
 

@@ -117,6 +117,7 @@ func (c *Client) ListTrainingJobsForHyperParameterTuningJobRequest(input *ListTr
 	}
 
 	req := c.newRequest(op, input, &ListTrainingJobsForHyperParameterTuningJobOutput{})
+
 	return ListTrainingJobsForHyperParameterTuningJobRequest{Request: req, Input: input, Copy: c.ListTrainingJobsForHyperParameterTuningJobRequest}
 }
 

@@ -284,6 +284,7 @@ func (c *Client) ImportComponentRequest(input *ImportComponentInput) ImportCompo
 	}
 
 	req := c.newRequest(op, input, &ImportComponentOutput{})
+
 	return ImportComponentRequest{Request: req, Input: input, Copy: c.ImportComponentRequest}
 }
 

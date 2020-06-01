@@ -92,6 +92,7 @@ func (c *Client) ModifyHapgRequest(input *ModifyHapgInput) ModifyHapgRequest {
 	}
 
 	req := c.newRequest(op, input, &ModifyHapgOutput{})
+
 	return ModifyHapgRequest{Request: req, Input: input, Copy: c.ModifyHapgRequest}
 }
 

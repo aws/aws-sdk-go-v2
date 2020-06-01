@@ -96,6 +96,7 @@ func (c *Client) GetOperationDetailRequest(input *GetOperationDetailInput) GetOp
 	}
 
 	req := c.newRequest(op, input, &GetOperationDetailOutput{})
+
 	return GetOperationDetailRequest{Request: req, Input: input, Copy: c.GetOperationDetailRequest}
 }
 

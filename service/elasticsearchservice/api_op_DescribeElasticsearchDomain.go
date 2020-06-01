@@ -108,6 +108,7 @@ func (c *Client) DescribeElasticsearchDomainRequest(input *DescribeElasticsearch
 	}
 
 	req := c.newRequest(op, input, &DescribeElasticsearchDomainOutput{})
+
 	return DescribeElasticsearchDomainRequest{Request: req, Input: input, Copy: c.DescribeElasticsearchDomainRequest}
 }
 

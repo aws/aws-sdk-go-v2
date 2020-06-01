@@ -99,6 +99,7 @@ func (c *Client) ListSuitesRequest(input *ListSuitesInput) ListSuitesRequest {
 	}
 
 	req := c.newRequest(op, input, &ListSuitesOutput{})
+
 	return ListSuitesRequest{Request: req, Input: input, Copy: c.ListSuitesRequest}
 }
 

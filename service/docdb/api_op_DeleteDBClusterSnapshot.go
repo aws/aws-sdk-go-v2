@@ -83,6 +83,7 @@ func (c *Client) DeleteDBClusterSnapshotRequest(input *DeleteDBClusterSnapshotIn
 	}
 
 	req := c.newRequest(op, input, &DeleteDBClusterSnapshotOutput{})
+
 	return DeleteDBClusterSnapshotRequest{Request: req, Input: input, Copy: c.DeleteDBClusterSnapshotRequest}
 }
 

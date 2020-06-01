@@ -78,6 +78,7 @@ func (c *Client) CloseTunnelRequest(input *CloseTunnelInput) CloseTunnelRequest 
 	}
 
 	req := c.newRequest(op, input, &CloseTunnelOutput{})
+
 	return CloseTunnelRequest{Request: req, Input: input, Copy: c.CloseTunnelRequest}
 }
 

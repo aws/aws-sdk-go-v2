@@ -92,6 +92,7 @@ func (c *Client) GetAccessKeyLastUsedRequest(input *GetAccessKeyLastUsedInput) G
 	}
 
 	req := c.newRequest(op, input, &GetAccessKeyLastUsedOutput{})
+
 	return GetAccessKeyLastUsedRequest{Request: req, Input: input, Copy: c.GetAccessKeyLastUsedRequest}
 }
 

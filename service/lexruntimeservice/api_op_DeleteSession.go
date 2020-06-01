@@ -161,6 +161,7 @@ func (c *Client) DeleteSessionRequest(input *DeleteSessionInput) DeleteSessionRe
 	}
 
 	req := c.newRequest(op, input, &DeleteSessionOutput{})
+
 	return DeleteSessionRequest{Request: req, Input: input, Copy: c.DeleteSessionRequest}
 }
 

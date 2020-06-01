@@ -211,6 +211,7 @@ func (c *Client) ListContactsRequest(input *ListContactsInput) ListContactsReque
 	}
 
 	req := c.newRequest(op, input, &ListContactsOutput{})
+
 	return ListContactsRequest{Request: req, Input: input, Copy: c.ListContactsRequest}
 }
 

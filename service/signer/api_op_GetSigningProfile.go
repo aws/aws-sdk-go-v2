@@ -180,6 +180,7 @@ func (c *Client) GetSigningProfileRequest(input *GetSigningProfileInput) GetSign
 	}
 
 	req := c.newRequest(op, input, &GetSigningProfileOutput{})
+
 	return GetSigningProfileRequest{Request: req, Input: input, Copy: c.GetSigningProfileRequest}
 }
 

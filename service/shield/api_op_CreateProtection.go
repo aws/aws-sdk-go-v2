@@ -114,6 +114,7 @@ func (c *Client) CreateProtectionRequest(input *CreateProtectionInput) CreatePro
 	}
 
 	req := c.newRequest(op, input, &CreateProtectionOutput{})
+
 	return CreateProtectionRequest{Request: req, Input: input, Copy: c.CreateProtectionRequest}
 }
 

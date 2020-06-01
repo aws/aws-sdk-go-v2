@@ -156,6 +156,7 @@ func (c *Client) DescribeAuditTaskRequest(input *DescribeAuditTaskInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeAuditTaskOutput{})
+
 	return DescribeAuditTaskRequest{Request: req, Input: input, Copy: c.DescribeAuditTaskRequest}
 }
 

@@ -94,6 +94,7 @@ func (c *Client) DisableImportFindingsForProductRequest(input *DisableImportFind
 	}
 
 	req := c.newRequest(op, input, &DisableImportFindingsForProductOutput{})
+
 	return DisableImportFindingsForProductRequest{Request: req, Input: input, Copy: c.DisableImportFindingsForProductRequest}
 }
 

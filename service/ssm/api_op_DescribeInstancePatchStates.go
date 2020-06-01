@@ -90,6 +90,7 @@ func (c *Client) DescribeInstancePatchStatesRequest(input *DescribeInstancePatch
 	}
 
 	req := c.newRequest(op, input, &DescribeInstancePatchStatesOutput{})
+
 	return DescribeInstancePatchStatesRequest{Request: req, Input: input, Copy: c.DescribeInstancePatchStatesRequest}
 }
 

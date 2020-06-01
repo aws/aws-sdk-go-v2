@@ -164,6 +164,7 @@ func (c *Client) GetFunctionRequest(input *GetFunctionInput) GetFunctionRequest 
 	}
 
 	req := c.newRequest(op, input, &GetFunctionOutput{})
+
 	return GetFunctionRequest{Request: req, Input: input, Copy: c.GetFunctionRequest}
 }
 

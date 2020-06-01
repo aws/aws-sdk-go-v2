@@ -78,6 +78,7 @@ func (c *Client) ListDeploymentTargetsRequest(input *ListDeploymentTargetsInput)
 	}
 
 	req := c.newRequest(op, input, &ListDeploymentTargetsOutput{})
+
 	return ListDeploymentTargetsRequest{Request: req, Input: input, Copy: c.ListDeploymentTargetsRequest}
 }
 

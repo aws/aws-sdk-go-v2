@@ -186,6 +186,7 @@ func (c *Client) CreateHITWithHITTypeRequest(input *CreateHITWithHITTypeInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateHITWithHITTypeOutput{})
+
 	return CreateHITWithHITTypeRequest{Request: req, Input: input, Copy: c.CreateHITWithHITTypeRequest}
 }
 

@@ -77,6 +77,7 @@ func (c *Client) DescribeRaidArraysRequest(input *DescribeRaidArraysInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeRaidArraysOutput{})
+
 	return DescribeRaidArraysRequest{Request: req, Input: input, Copy: c.DescribeRaidArraysRequest}
 }
 

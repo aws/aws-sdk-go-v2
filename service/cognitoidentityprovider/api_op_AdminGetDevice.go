@@ -109,6 +109,7 @@ func (c *Client) AdminGetDeviceRequest(input *AdminGetDeviceInput) AdminGetDevic
 	}
 
 	req := c.newRequest(op, input, &AdminGetDeviceOutput{})
+
 	return AdminGetDeviceRequest{Request: req, Input: input, Copy: c.AdminGetDeviceRequest}
 }
 

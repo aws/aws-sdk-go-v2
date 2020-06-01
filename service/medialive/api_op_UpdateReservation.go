@@ -107,6 +107,7 @@ func (c *Client) UpdateReservationRequest(input *UpdateReservationInput) UpdateR
 	}
 
 	req := c.newRequest(op, input, &UpdateReservationOutput{})
+
 	return UpdateReservationRequest{Request: req, Input: input, Copy: c.UpdateReservationRequest}
 }
 

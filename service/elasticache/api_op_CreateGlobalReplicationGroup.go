@@ -15,8 +15,8 @@ type CreateGlobalReplicationGroupInput struct {
 	// Provides details of the Global Datastore
 	GlobalReplicationGroupDescription *string `type:"string"`
 
-	// The suffix for name of a Global Datastore. The suffix guarantees uniqueness
-	// of the Global Datastore name across multiple regions.
+	// The suffix name of a Global Datastore. The suffix guarantees uniqueness of
+	// the Global Datastore name across multiple regions.
 	//
 	// GlobalReplicationGroupIdSuffix is a required field
 	GlobalReplicationGroupIdSuffix *string `type:"string" required:"true"`
@@ -59,8 +59,8 @@ type CreateGlobalReplicationGroupOutput struct {
 	// only reads. The primary cluster automatically replicates updates to the secondary
 	// cluster.
 	//
-	//    * The GlobalReplicationGroupId represents the name of the Global Datastore,
-	//    which is what you use to associate a secondary cluster.
+	//    * The GlobalReplicationGroupIdSuffix represents the name of the Global
+	//    Datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *GlobalReplicationGroup `type:"structure"`
 }
 
@@ -80,7 +80,7 @@ const opCreateGlobalReplicationGroup = "CreateGlobalReplicationGroup"
 // reads and disaster recovery across regions. For more information, see Replication
 // Across Regions Using Global Datastore (/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters.html).
 //
-//    * The GlobalReplicationGroupId is the name of the Global Datastore.
+//    * The GlobalReplicationGroupIdSuffix is the name of the Global Datastore.
 //
 //    * The PrimaryReplicationGroupId represents the name of the primary cluster
 //    that accepts writes and will replicate updates to the secondary cluster.
@@ -105,6 +105,7 @@ func (c *Client) CreateGlobalReplicationGroupRequest(input *CreateGlobalReplicat
 	}
 
 	req := c.newRequest(op, input, &CreateGlobalReplicationGroupOutput{})
+
 	return CreateGlobalReplicationGroupRequest{Request: req, Input: input, Copy: c.CreateGlobalReplicationGroupRequest}
 }
 

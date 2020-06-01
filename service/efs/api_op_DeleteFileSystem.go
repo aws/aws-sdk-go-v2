@@ -110,6 +110,7 @@ func (c *Client) DeleteFileSystemRequest(input *DeleteFileSystemInput) DeleteFil
 	req := c.newRequest(op, input, &DeleteFileSystemOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteFileSystemRequest{Request: req, Input: input, Copy: c.DeleteFileSystemRequest}
 }
 

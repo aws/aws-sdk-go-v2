@@ -92,6 +92,7 @@ func (c *Client) GetUserPoolMfaConfigRequest(input *GetUserPoolMfaConfigInput) G
 	}
 
 	req := c.newRequest(op, input, &GetUserPoolMfaConfigOutput{})
+
 	return GetUserPoolMfaConfigRequest{Request: req, Input: input, Copy: c.GetUserPoolMfaConfigRequest}
 }
 

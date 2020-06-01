@@ -83,6 +83,13 @@ func (s *CreateSecurityProfileInput) Validate() error {
 			}
 		}
 	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -226,6 +233,7 @@ func (c *Client) CreateSecurityProfileRequest(input *CreateSecurityProfileInput)
 	}
 
 	req := c.newRequest(op, input, &CreateSecurityProfileOutput{})
+
 	return CreateSecurityProfileRequest{Request: req, Input: input, Copy: c.CreateSecurityProfileRequest}
 }
 

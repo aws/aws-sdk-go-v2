@@ -82,6 +82,7 @@ func (c *Client) GetDeploymentConfigRequest(input *GetDeploymentConfigInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetDeploymentConfigOutput{})
+
 	return GetDeploymentConfigRequest{Request: req, Input: input, Copy: c.GetDeploymentConfigRequest}
 }
 

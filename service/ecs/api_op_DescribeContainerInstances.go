@@ -93,6 +93,7 @@ func (c *Client) DescribeContainerInstancesRequest(input *DescribeContainerInsta
 	}
 
 	req := c.newRequest(op, input, &DescribeContainerInstancesOutput{})
+
 	return DescribeContainerInstancesRequest{Request: req, Input: input, Copy: c.DescribeContainerInstancesRequest}
 }
 

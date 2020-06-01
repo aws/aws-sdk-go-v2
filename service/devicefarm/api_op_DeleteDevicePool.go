@@ -80,6 +80,7 @@ func (c *Client) DeleteDevicePoolRequest(input *DeleteDevicePoolInput) DeleteDev
 	}
 
 	req := c.newRequest(op, input, &DeleteDevicePoolOutput{})
+
 	return DeleteDevicePoolRequest{Request: req, Input: input, Copy: c.DeleteDevicePoolRequest}
 }
 

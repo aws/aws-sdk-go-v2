@@ -106,6 +106,7 @@ func (c *Client) GetSamplingStatisticSummariesRequest(input *GetSamplingStatisti
 	}
 
 	req := c.newRequest(op, input, &GetSamplingStatisticSummariesOutput{})
+
 	return GetSamplingStatisticSummariesRequest{Request: req, Input: input, Copy: c.GetSamplingStatisticSummariesRequest}
 }
 

@@ -60,6 +60,7 @@ func (c *Client) RevokeInvitationRequest(input *RevokeInvitationInput) RevokeInv
 	}
 
 	req := c.newRequest(op, input, &RevokeInvitationOutput{})
+
 	return RevokeInvitationRequest{Request: req, Input: input, Copy: c.RevokeInvitationRequest}
 }
 

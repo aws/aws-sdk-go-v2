@@ -156,6 +156,7 @@ func (c *Client) ListQueuesRequest(input *ListQueuesInput) ListQueuesRequest {
 	}
 
 	req := c.newRequest(op, input, &ListQueuesOutput{})
+
 	return ListQueuesRequest{Request: req, Input: input, Copy: c.ListQueuesRequest}
 }
 

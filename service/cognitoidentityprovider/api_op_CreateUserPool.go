@@ -240,6 +240,7 @@ func (c *Client) CreateUserPoolRequest(input *CreateUserPoolInput) CreateUserPoo
 	}
 
 	req := c.newRequest(op, input, &CreateUserPoolOutput{})
+
 	return CreateUserPoolRequest{Request: req, Input: input, Copy: c.CreateUserPoolRequest}
 }
 

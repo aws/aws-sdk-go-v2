@@ -389,6 +389,8 @@ type ClientAPI interface {
 
 	RegisterCertificateRequest(*iot.RegisterCertificateInput) iot.RegisterCertificateRequest
 
+	RegisterCertificateWithoutCARequest(*iot.RegisterCertificateWithoutCAInput) iot.RegisterCertificateWithoutCARequest
+
 	RegisterThingRequest(*iot.RegisterThingInput) iot.RegisterThingRequest
 
 	RejectCertificateTransferRequest(*iot.RejectCertificateTransferInput) iot.RejectCertificateTransferRequest

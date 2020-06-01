@@ -146,6 +146,7 @@ func (c *Client) DeleteLagRequest(input *DeleteLagInput) DeleteLagRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteLagOutput{})
+
 	return DeleteLagRequest{Request: req, Input: input, Copy: c.DeleteLagRequest}
 }
 

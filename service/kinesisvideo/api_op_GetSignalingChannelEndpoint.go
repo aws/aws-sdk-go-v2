@@ -13,7 +13,8 @@ import (
 type GetSignalingChannelEndpointInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the signalling channel for which you want to get an endpoint.
+	// The Amazon Resource Name (ARN) of the signalling channel for which you want
+	// to get an endpoint.
 	//
 	// ChannelARN is a required field
 	ChannelARN *string `min:"1" type:"string" required:"true"`
@@ -108,9 +109,9 @@ const opGetSignalingChannelEndpoint = "GetSignalingChannelEndpoint"
 // parameter, which consists of the Protocols and Role properties.
 //
 // Protocols is used to determine the communication mechanism. For example,
-// specifying WSS as the protocol, results in this API producing a secure websocket
-// endpoint, and specifying HTTPS as the protocol, results in this API generating
-// an HTTPS endpoint.
+// if you specify WSS as the protocol, this API produces a secure websocket
+// endpoint. If you specify HTTPS as the protocol, this API generates an HTTPS
+// endpoint.
 //
 // Role determines the messaging permissions. A MASTER role results in this
 // API generating an endpoint that a client can use to communicate with any
@@ -137,6 +138,7 @@ func (c *Client) GetSignalingChannelEndpointRequest(input *GetSignalingChannelEn
 	}
 
 	req := c.newRequest(op, input, &GetSignalingChannelEndpointOutput{})
+
 	return GetSignalingChannelEndpointRequest{Request: req, Input: input, Copy: c.GetSignalingChannelEndpointRequest}
 }
 

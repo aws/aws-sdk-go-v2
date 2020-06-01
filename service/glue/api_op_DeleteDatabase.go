@@ -95,6 +95,7 @@ func (c *Client) DeleteDatabaseRequest(input *DeleteDatabaseInput) DeleteDatabas
 	}
 
 	req := c.newRequest(op, input, &DeleteDatabaseOutput{})
+
 	return DeleteDatabaseRequest{Request: req, Input: input, Copy: c.DeleteDatabaseRequest}
 }
 

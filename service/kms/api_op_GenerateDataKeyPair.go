@@ -184,6 +184,7 @@ func (c *Client) GenerateDataKeyPairRequest(input *GenerateDataKeyPairInput) Gen
 	}
 
 	req := c.newRequest(op, input, &GenerateDataKeyPairOutput{})
+
 	return GenerateDataKeyPairRequest{Request: req, Input: input, Copy: c.GenerateDataKeyPairRequest}
 }
 

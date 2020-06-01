@@ -108,6 +108,7 @@ func (c *Client) AuthorizeClusterSecurityGroupIngressRequest(input *AuthorizeClu
 	}
 
 	req := c.newRequest(op, input, &AuthorizeClusterSecurityGroupIngressOutput{})
+
 	return AuthorizeClusterSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.AuthorizeClusterSecurityGroupIngressRequest}
 }
 

@@ -133,6 +133,7 @@ func (c *Client) PutExternalModelRequest(input *PutExternalModelInput) PutExtern
 	}
 
 	req := c.newRequest(op, input, &PutExternalModelOutput{})
+
 	return PutExternalModelRequest{Request: req, Input: input, Copy: c.PutExternalModelRequest}
 }
 

@@ -224,6 +224,7 @@ func (c *Client) GetSlotTypeRequest(input *GetSlotTypeInput) GetSlotTypeRequest 
 	}
 
 	req := c.newRequest(op, input, &GetSlotTypeOutput{})
+
 	return GetSlotTypeRequest{Request: req, Input: input, Copy: c.GetSlotTypeRequest}
 }
 

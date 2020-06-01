@@ -144,6 +144,7 @@ func (c *Client) StartImagePipelineExecutionRequest(input *StartImagePipelineExe
 	}
 
 	req := c.newRequest(op, input, &StartImagePipelineExecutionOutput{})
+
 	return StartImagePipelineExecutionRequest{Request: req, Input: input, Copy: c.StartImagePipelineExecutionRequest}
 }
 

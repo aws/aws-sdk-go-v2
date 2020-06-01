@@ -142,6 +142,7 @@ func (c *Client) StopInstancesRequest(input *StopInstancesInput) StopInstancesRe
 	}
 
 	req := c.newRequest(op, input, &StopInstancesOutput{})
+
 	return StopInstancesRequest{Request: req, Input: input, Copy: c.StopInstancesRequest}
 }
 

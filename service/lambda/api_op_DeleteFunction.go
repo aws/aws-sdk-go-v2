@@ -128,6 +128,7 @@ func (c *Client) DeleteFunctionRequest(input *DeleteFunctionInput) DeleteFunctio
 	req := c.newRequest(op, input, &DeleteFunctionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteFunctionRequest{Request: req, Input: input, Copy: c.DeleteFunctionRequest}
 }
 

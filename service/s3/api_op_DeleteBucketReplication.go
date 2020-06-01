@@ -135,6 +135,7 @@ func (c *Client) DeleteBucketReplicationRequest(input *DeleteBucketReplicationIn
 	req := c.newRequest(op, input, &DeleteBucketReplicationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteBucketReplicationRequest{Request: req, Input: input, Copy: c.DeleteBucketReplicationRequest}
 }
 

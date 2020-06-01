@@ -125,6 +125,7 @@ func (c *Client) ListMonitoringSchedulesRequest(input *ListMonitoringSchedulesIn
 	}
 
 	req := c.newRequest(op, input, &ListMonitoringSchedulesOutput{})
+
 	return ListMonitoringSchedulesRequest{Request: req, Input: input, Copy: c.ListMonitoringSchedulesRequest}
 }
 

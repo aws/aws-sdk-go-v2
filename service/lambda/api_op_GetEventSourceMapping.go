@@ -229,6 +229,7 @@ func (c *Client) GetEventSourceMappingRequest(input *GetEventSourceMappingInput)
 	}
 
 	req := c.newRequest(op, input, &GetEventSourceMappingOutput{})
+
 	return GetEventSourceMappingRequest{Request: req, Input: input, Copy: c.GetEventSourceMappingRequest}
 }
 

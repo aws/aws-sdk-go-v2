@@ -123,6 +123,7 @@ func (c *Client) PutActionRevisionRequest(input *PutActionRevisionInput) PutActi
 	}
 
 	req := c.newRequest(op, input, &PutActionRevisionOutput{})
+
 	return PutActionRevisionRequest{Request: req, Input: input, Copy: c.PutActionRevisionRequest}
 }
 

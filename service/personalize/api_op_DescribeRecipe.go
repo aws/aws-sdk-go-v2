@@ -92,6 +92,7 @@ func (c *Client) DescribeRecipeRequest(input *DescribeRecipeInput) DescribeRecip
 	}
 
 	req := c.newRequest(op, input, &DescribeRecipeOutput{})
+
 	return DescribeRecipeRequest{Request: req, Input: input, Copy: c.DescribeRecipeRequest}
 }
 

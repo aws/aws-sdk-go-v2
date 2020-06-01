@@ -910,7 +910,7 @@ type Dashboard struct {
 	// The last time that this dataset was updated.
 	LastUpdatedTime *time.Time `type:"timestamp"`
 
-	// A display name for the dataset.
+	// A display name for the dashboard.
 	Name *string `min:"1" type:"string"`
 
 	// Version.
@@ -1308,6 +1308,10 @@ type DashboardVersion struct {
 	// The time that this dashboard version was created.
 	CreatedTime *time.Time `type:"timestamp"`
 
+	// The Amazon Resource Numbers (ARNs) for the datasets that are associated with
+	// a version of the dashboard.
+	DataSetArns []string `type:"list"`
+
 	// Description.
 	Description *string `min:"1" type:"string"`
 
@@ -1343,6 +1347,18 @@ func (s DashboardVersion) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "CreatedTime",
 			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.DataSetArns != nil {
+		v := s.DataSetArns
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "DataSetArns", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -5580,7 +5596,7 @@ func (s TemplateVersion) MarshalFields(e protocol.FieldEncoder) error {
 type TemplateVersionSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the template version.
+	// The Amazon Resource Name (ARN) of the template version.
 	Arn *string `type:"string"`
 
 	// The time that this template version was created.

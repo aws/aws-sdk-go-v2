@@ -143,6 +143,7 @@ func (c *Client) CreateDataRepositoryTaskRequest(input *CreateDataRepositoryTask
 	}
 
 	req := c.newRequest(op, input, &CreateDataRepositoryTaskOutput{})
+
 	return CreateDataRepositoryTaskRequest{Request: req, Input: input, Copy: c.CreateDataRepositoryTaskRequest}
 }
 

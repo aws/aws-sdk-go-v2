@@ -63,6 +63,7 @@ func (c *Client) DeleteReportDefinitionRequest(input *DeleteReportDefinitionInpu
 	}
 
 	req := c.newRequest(op, input, &DeleteReportDefinitionOutput{})
+
 	return DeleteReportDefinitionRequest{Request: req, Input: input, Copy: c.DeleteReportDefinitionRequest}
 }
 

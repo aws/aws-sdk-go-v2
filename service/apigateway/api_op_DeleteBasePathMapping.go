@@ -111,6 +111,7 @@ func (c *Client) DeleteBasePathMappingRequest(input *DeleteBasePathMappingInput)
 	req := c.newRequest(op, input, &DeleteBasePathMappingOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteBasePathMappingRequest{Request: req, Input: input, Copy: c.DeleteBasePathMappingRequest}
 }
 

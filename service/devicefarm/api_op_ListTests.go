@@ -99,6 +99,7 @@ func (c *Client) ListTestsRequest(input *ListTestsInput) ListTestsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListTestsOutput{})
+
 	return ListTestsRequest{Request: req, Input: input, Copy: c.ListTestsRequest}
 }
 

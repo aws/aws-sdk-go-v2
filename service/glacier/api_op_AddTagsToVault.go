@@ -134,6 +134,7 @@ func (c *Client) AddTagsToVaultRequest(input *AddTagsToVaultInput) AddTagsToVaul
 	req := c.newRequest(op, input, &AddTagsToVaultOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AddTagsToVaultRequest{Request: req, Input: input, Copy: c.AddTagsToVaultRequest}
 }
 

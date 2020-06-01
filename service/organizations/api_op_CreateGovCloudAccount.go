@@ -232,6 +232,7 @@ func (c *Client) CreateGovCloudAccountRequest(input *CreateGovCloudAccountInput)
 	}
 
 	req := c.newRequest(op, input, &CreateGovCloudAccountOutput{})
+
 	return CreateGovCloudAccountRequest{Request: req, Input: input, Copy: c.CreateGovCloudAccountRequest}
 }
 

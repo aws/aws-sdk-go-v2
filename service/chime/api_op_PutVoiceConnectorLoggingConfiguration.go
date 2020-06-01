@@ -118,6 +118,7 @@ func (c *Client) PutVoiceConnectorLoggingConfigurationRequest(input *PutVoiceCon
 	}
 
 	req := c.newRequest(op, input, &PutVoiceConnectorLoggingConfigurationOutput{})
+
 	return PutVoiceConnectorLoggingConfigurationRequest{Request: req, Input: input, Copy: c.PutVoiceConnectorLoggingConfigurationRequest}
 }
 

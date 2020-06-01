@@ -109,8 +109,8 @@ const opGetBucketAccelerateConfiguration = "GetBucketAccelerateConfiguration"
 // To use this operation, you must have permission to perform the s3:GetAccelerateConfiguration
 // action. The bucket owner has this permission by default. The bucket owner
 // can grant this permission to others. For more information about permissions,
-// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev//using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
-// and Managing Access Permissions to your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev//s3-access-control.html)
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)
 // in the Amazon Simple Storage Service Developer Guide.
 //
 // You set the Transfer Acceleration state of an existing bucket to Enabled
@@ -121,7 +121,7 @@ const opGetBucketAccelerateConfiguration = "GetBucketAccelerateConfiguration"
 // state if a state has never been set on the bucket.
 //
 // For more information about transfer acceleration, see Transfer Acceleration
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev//transfer-acceleration.html)
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html)
 // in the Amazon Simple Storage Service Developer Guide.
 //
 // Related Resources
@@ -148,6 +148,7 @@ func (c *Client) GetBucketAccelerateConfigurationRequest(input *GetBucketAcceler
 	}
 
 	req := c.newRequest(op, input, &GetBucketAccelerateConfigurationOutput{})
+
 	return GetBucketAccelerateConfigurationRequest{Request: req, Input: input, Copy: c.GetBucketAccelerateConfigurationRequest}
 }
 

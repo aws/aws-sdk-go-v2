@@ -85,6 +85,7 @@ func (c *Client) DescribeResourcePoliciesRequest(input *DescribeResourcePolicies
 	}
 
 	req := c.newRequest(op, input, &DescribeResourcePoliciesOutput{})
+
 	return DescribeResourcePoliciesRequest{Request: req, Input: input, Copy: c.DescribeResourcePoliciesRequest}
 }
 

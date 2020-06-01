@@ -93,6 +93,7 @@ func (c *Client) DeleteRoleAliasRequest(input *DeleteRoleAliasInput) DeleteRoleA
 	}
 
 	req := c.newRequest(op, input, &DeleteRoleAliasOutput{})
+
 	return DeleteRoleAliasRequest{Request: req, Input: input, Copy: c.DeleteRoleAliasRequest}
 }
 

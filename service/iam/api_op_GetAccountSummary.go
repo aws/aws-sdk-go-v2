@@ -63,6 +63,7 @@ func (c *Client) GetAccountSummaryRequest(input *GetAccountSummaryInput) GetAcco
 	}
 
 	req := c.newRequest(op, input, &GetAccountSummaryOutput{})
+
 	return GetAccountSummaryRequest{Request: req, Input: input, Copy: c.GetAccountSummaryRequest}
 }
 

@@ -96,6 +96,7 @@ func (c *Client) DescribeScriptRequest(input *DescribeScriptInput) DescribeScrip
 	}
 
 	req := c.newRequest(op, input, &DescribeScriptOutput{})
+
 	return DescribeScriptRequest{Request: req, Input: input, Copy: c.DescribeScriptRequest}
 }
 

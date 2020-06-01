@@ -98,6 +98,7 @@ func (c *Client) UpdateVTLDeviceTypeRequest(input *UpdateVTLDeviceTypeInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateVTLDeviceTypeOutput{})
+
 	return UpdateVTLDeviceTypeRequest{Request: req, Input: input, Copy: c.UpdateVTLDeviceTypeRequest}
 }
 

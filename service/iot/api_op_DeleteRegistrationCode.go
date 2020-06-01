@@ -67,6 +67,7 @@ func (c *Client) DeleteRegistrationCodeRequest(input *DeleteRegistrationCodeInpu
 	}
 
 	req := c.newRequest(op, input, &DeleteRegistrationCodeOutput{})
+
 	return DeleteRegistrationCodeRequest{Request: req, Input: input, Copy: c.DeleteRegistrationCodeRequest}
 }
 

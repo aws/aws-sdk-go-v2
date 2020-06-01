@@ -82,6 +82,7 @@ func (c *Client) UpdateSubnetGroupRequest(input *UpdateSubnetGroupInput) UpdateS
 	}
 
 	req := c.newRequest(op, input, &UpdateSubnetGroupOutput{})
+
 	return UpdateSubnetGroupRequest{Request: req, Input: input, Copy: c.UpdateSubnetGroupRequest}
 }
 

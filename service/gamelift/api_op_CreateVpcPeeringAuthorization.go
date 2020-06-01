@@ -138,6 +138,7 @@ func (c *Client) CreateVpcPeeringAuthorizationRequest(input *CreateVpcPeeringAut
 	}
 
 	req := c.newRequest(op, input, &CreateVpcPeeringAuthorizationOutput{})
+
 	return CreateVpcPeeringAuthorizationRequest{Request: req, Input: input, Copy: c.CreateVpcPeeringAuthorizationRequest}
 }
 

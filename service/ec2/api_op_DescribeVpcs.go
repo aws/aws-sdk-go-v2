@@ -147,6 +147,7 @@ func (c *Client) DescribeVpcsRequest(input *DescribeVpcsInput) DescribeVpcsReque
 	}
 
 	req := c.newRequest(op, input, &DescribeVpcsOutput{})
+
 	return DescribeVpcsRequest{Request: req, Input: input, Copy: c.DescribeVpcsRequest}
 }
 

@@ -95,6 +95,7 @@ func (c *Client) PutEventsRequest(input *PutEventsInput) PutEventsRequest {
 	}
 
 	req := c.newRequest(op, input, &PutEventsOutput{})
+
 	return PutEventsRequest{Request: req, Input: input, Copy: c.PutEventsRequest}
 }
 

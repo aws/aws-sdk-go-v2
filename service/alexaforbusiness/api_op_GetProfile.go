@@ -60,6 +60,7 @@ func (c *Client) GetProfileRequest(input *GetProfileInput) GetProfileRequest {
 	}
 
 	req := c.newRequest(op, input, &GetProfileOutput{})
+
 	return GetProfileRequest{Request: req, Input: input, Copy: c.GetProfileRequest}
 }
 

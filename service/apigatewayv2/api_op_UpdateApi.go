@@ -341,6 +341,7 @@ func (c *Client) UpdateApiRequest(input *UpdateApiInput) UpdateApiRequest {
 	}
 
 	req := c.newRequest(op, input, &UpdateApiOutput{})
+
 	return UpdateApiRequest{Request: req, Input: input, Copy: c.UpdateApiRequest}
 }
 

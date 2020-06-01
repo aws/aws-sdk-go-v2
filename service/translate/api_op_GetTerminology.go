@@ -92,6 +92,7 @@ func (c *Client) GetTerminologyRequest(input *GetTerminologyInput) GetTerminolog
 	}
 
 	req := c.newRequest(op, input, &GetTerminologyOutput{})
+
 	return GetTerminologyRequest{Request: req, Input: input, Copy: c.GetTerminologyRequest}
 }
 

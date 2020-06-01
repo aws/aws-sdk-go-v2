@@ -99,6 +99,7 @@ func (c *Client) DeleteMailboxPermissionsRequest(input *DeleteMailboxPermissions
 	}
 
 	req := c.newRequest(op, input, &DeleteMailboxPermissionsOutput{})
+
 	return DeleteMailboxPermissionsRequest{Request: req, Input: input, Copy: c.DeleteMailboxPermissionsRequest}
 }
 

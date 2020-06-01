@@ -421,6 +421,7 @@ func (c *Client) PostTextRequest(input *PostTextInput) PostTextRequest {
 	}
 
 	req := c.newRequest(op, input, &PostTextOutput{})
+
 	return PostTextRequest{Request: req, Input: input, Copy: c.PostTextRequest}
 }
 

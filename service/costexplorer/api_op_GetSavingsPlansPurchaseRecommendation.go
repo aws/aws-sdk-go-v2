@@ -141,6 +141,7 @@ func (c *Client) GetSavingsPlansPurchaseRecommendationRequest(input *GetSavingsP
 	}
 
 	req := c.newRequest(op, input, &GetSavingsPlansPurchaseRecommendationOutput{})
+
 	return GetSavingsPlansPurchaseRecommendationRequest{Request: req, Input: input, Copy: c.GetSavingsPlansPurchaseRecommendationRequest}
 }
 

@@ -134,6 +134,7 @@ func (c *Client) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) ListP
 	}
 
 	req := c.newRequest(op, input, &ListPolicyVersionsOutput{})
+
 	return ListPolicyVersionsRequest{Request: req, Input: input, Copy: c.ListPolicyVersionsRequest}
 }
 

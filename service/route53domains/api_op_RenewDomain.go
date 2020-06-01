@@ -109,6 +109,7 @@ func (c *Client) RenewDomainRequest(input *RenewDomainInput) RenewDomainRequest 
 	}
 
 	req := c.newRequest(op, input, &RenewDomainOutput{})
+
 	return RenewDomainRequest{Request: req, Input: input, Copy: c.RenewDomainRequest}
 }
 

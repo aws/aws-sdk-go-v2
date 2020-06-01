@@ -155,6 +155,7 @@ func (c *Client) ListPublishingDestinationsRequest(input *ListPublishingDestinat
 	}
 
 	req := c.newRequest(op, input, &ListPublishingDestinationsOutput{})
+
 	return ListPublishingDestinationsRequest{Request: req, Input: input, Copy: c.ListPublishingDestinationsRequest}
 }
 

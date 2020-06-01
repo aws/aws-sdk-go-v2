@@ -99,6 +99,7 @@ func (c *Client) ModifyOptionGroupRequest(input *ModifyOptionGroupInput) ModifyO
 	}
 
 	req := c.newRequest(op, input, &ModifyOptionGroupOutput{})
+
 	return ModifyOptionGroupRequest{Request: req, Input: input, Copy: c.ModifyOptionGroupRequest}
 }
 

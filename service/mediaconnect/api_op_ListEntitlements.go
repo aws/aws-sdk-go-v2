@@ -134,6 +134,7 @@ func (c *Client) ListEntitlementsRequest(input *ListEntitlementsInput) ListEntit
 	}
 
 	req := c.newRequest(op, input, &ListEntitlementsOutput{})
+
 	return ListEntitlementsRequest{Request: req, Input: input, Copy: c.ListEntitlementsRequest}
 }
 

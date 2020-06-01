@@ -128,6 +128,7 @@ func (c *Client) DescribeClusterParameterGroupsRequest(input *DescribeClusterPar
 	}
 
 	req := c.newRequest(op, input, &DescribeClusterParameterGroupsOutput{})
+
 	return DescribeClusterParameterGroupsRequest{Request: req, Input: input, Copy: c.DescribeClusterParameterGroupsRequest}
 }
 

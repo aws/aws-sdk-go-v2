@@ -87,6 +87,7 @@ func (c *Client) ListPipelinesRequest(input *ListPipelinesInput) ListPipelinesRe
 	}
 
 	req := c.newRequest(op, input, &ListPipelinesOutput{})
+
 	return ListPipelinesRequest{Request: req, Input: input, Copy: c.ListPipelinesRequest}
 }
 

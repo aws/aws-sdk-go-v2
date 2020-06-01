@@ -109,6 +109,7 @@ func (c *Client) CreateDBClusterSnapshotRequest(input *CreateDBClusterSnapshotIn
 	}
 
 	req := c.newRequest(op, input, &CreateDBClusterSnapshotOutput{})
+
 	return CreateDBClusterSnapshotRequest{Request: req, Input: input, Copy: c.CreateDBClusterSnapshotRequest}
 }
 

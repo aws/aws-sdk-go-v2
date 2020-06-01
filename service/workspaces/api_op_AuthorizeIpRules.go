@@ -85,6 +85,7 @@ func (c *Client) AuthorizeIpRulesRequest(input *AuthorizeIpRulesInput) Authorize
 	}
 
 	req := c.newRequest(op, input, &AuthorizeIpRulesOutput{})
+
 	return AuthorizeIpRulesRequest{Request: req, Input: input, Copy: c.AuthorizeIpRulesRequest}
 }
 

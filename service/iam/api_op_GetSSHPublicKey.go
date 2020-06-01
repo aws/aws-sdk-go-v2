@@ -116,6 +116,7 @@ func (c *Client) GetSSHPublicKeyRequest(input *GetSSHPublicKeyInput) GetSSHPubli
 	}
 
 	req := c.newRequest(op, input, &GetSSHPublicKeyOutput{})
+
 	return GetSSHPublicKeyRequest{Request: req, Input: input, Copy: c.GetSSHPublicKeyRequest}
 }
 

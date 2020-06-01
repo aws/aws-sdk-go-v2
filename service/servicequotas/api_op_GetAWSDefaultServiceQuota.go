@@ -92,6 +92,7 @@ func (c *Client) GetAWSDefaultServiceQuotaRequest(input *GetAWSDefaultServiceQuo
 	}
 
 	req := c.newRequest(op, input, &GetAWSDefaultServiceQuotaOutput{})
+
 	return GetAWSDefaultServiceQuotaRequest{Request: req, Input: input, Copy: c.GetAWSDefaultServiceQuotaRequest}
 }
 

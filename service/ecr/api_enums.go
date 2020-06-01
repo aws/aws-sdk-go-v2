@@ -43,11 +43,12 @@ type ImageFailureCode string
 
 // Enum values for ImageFailureCode
 const (
-	ImageFailureCodeInvalidImageDigest         ImageFailureCode = "InvalidImageDigest"
-	ImageFailureCodeInvalidImageTag            ImageFailureCode = "InvalidImageTag"
-	ImageFailureCodeImageTagDoesNotMatchDigest ImageFailureCode = "ImageTagDoesNotMatchDigest"
-	ImageFailureCodeImageNotFound              ImageFailureCode = "ImageNotFound"
-	ImageFailureCodeMissingDigestAndTag        ImageFailureCode = "MissingDigestAndTag"
+	ImageFailureCodeInvalidImageDigest            ImageFailureCode = "InvalidImageDigest"
+	ImageFailureCodeInvalidImageTag               ImageFailureCode = "InvalidImageTag"
+	ImageFailureCodeImageTagDoesNotMatchDigest    ImageFailureCode = "ImageTagDoesNotMatchDigest"
+	ImageFailureCodeImageNotFound                 ImageFailureCode = "ImageNotFound"
+	ImageFailureCodeMissingDigestAndTag           ImageFailureCode = "MissingDigestAndTag"
+	ImageFailureCodeImageReferencedByManifestList ImageFailureCode = "ImageReferencedByManifestList"
 )
 
 func (enum ImageFailureCode) MarshalValue() (string, error) {

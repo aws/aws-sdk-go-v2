@@ -128,6 +128,7 @@ func (c *Client) ListResourceDefinitionVersionsRequest(input *ListResourceDefini
 	}
 
 	req := c.newRequest(op, input, &ListResourceDefinitionVersionsOutput{})
+
 	return ListResourceDefinitionVersionsRequest{Request: req, Input: input, Copy: c.ListResourceDefinitionVersionsRequest}
 }
 

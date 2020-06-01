@@ -184,6 +184,7 @@ func (c *Client) GetUsagePlanRequest(input *GetUsagePlanInput) GetUsagePlanReque
 	}
 
 	req := c.newRequest(op, input, &GetUsagePlanOutput{})
+
 	return GetUsagePlanRequest{Request: req, Input: input, Copy: c.GetUsagePlanRequest}
 }
 

@@ -76,6 +76,7 @@ func (c *Client) ListTemplatesRequest(input *ListTemplatesInput) ListTemplatesRe
 	}
 
 	req := c.newRequest(op, input, &ListTemplatesOutput{})
+
 	return ListTemplatesRequest{Request: req, Input: input, Copy: c.ListTemplatesRequest}
 }
 

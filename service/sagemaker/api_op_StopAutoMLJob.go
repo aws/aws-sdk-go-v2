@@ -80,6 +80,7 @@ func (c *Client) StopAutoMLJobRequest(input *StopAutoMLJobInput) StopAutoMLJobRe
 	req := c.newRequest(op, input, &StopAutoMLJobOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StopAutoMLJobRequest{Request: req, Input: input, Copy: c.StopAutoMLJobRequest}
 }
 

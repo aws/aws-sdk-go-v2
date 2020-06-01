@@ -146,6 +146,7 @@ func (c *Client) GetBucketTaggingRequest(input *GetBucketTaggingInput) GetBucket
 	}
 
 	req := c.newRequest(op, input, &GetBucketTaggingOutput{})
+
 	return GetBucketTaggingRequest{Request: req, Input: input, Copy: c.GetBucketTaggingRequest}
 }
 

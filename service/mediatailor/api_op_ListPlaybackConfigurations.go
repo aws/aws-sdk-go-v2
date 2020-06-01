@@ -127,6 +127,7 @@ func (c *Client) ListPlaybackConfigurationsRequest(input *ListPlaybackConfigurat
 	}
 
 	req := c.newRequest(op, input, &ListPlaybackConfigurationsOutput{})
+
 	return ListPlaybackConfigurationsRequest{Request: req, Input: input, Copy: c.ListPlaybackConfigurationsRequest}
 }
 

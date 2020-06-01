@@ -207,6 +207,7 @@ func (c *Client) CreateGraphqlApiRequest(input *CreateGraphqlApiInput) CreateGra
 	}
 
 	req := c.newRequest(op, input, &CreateGraphqlApiOutput{})
+
 	return CreateGraphqlApiRequest{Request: req, Input: input, Copy: c.CreateGraphqlApiRequest}
 }
 

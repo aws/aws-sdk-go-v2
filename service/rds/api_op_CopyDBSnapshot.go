@@ -218,6 +218,7 @@ func (c *Client) CopyDBSnapshotRequest(input *CopyDBSnapshotInput) CopyDBSnapsho
 	}
 
 	req := c.newRequest(op, input, &CopyDBSnapshotOutput{})
+
 	return CopyDBSnapshotRequest{Request: req, Input: input, Copy: c.CopyDBSnapshotRequest}
 }
 

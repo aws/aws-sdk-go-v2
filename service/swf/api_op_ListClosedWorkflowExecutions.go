@@ -216,6 +216,7 @@ func (c *Client) ListClosedWorkflowExecutionsRequest(input *ListClosedWorkflowEx
 	}
 
 	req := c.newRequest(op, input, &ListClosedWorkflowExecutionsOutput{})
+
 	return ListClosedWorkflowExecutionsRequest{Request: req, Input: input, Copy: c.ListClosedWorkflowExecutionsRequest}
 }
 

@@ -75,6 +75,7 @@ func (c *Client) GetDiscoverySummaryRequest(input *GetDiscoverySummaryInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetDiscoverySummaryOutput{})
+
 	return GetDiscoverySummaryRequest{Request: req, Input: input, Copy: c.GetDiscoverySummaryRequest}
 }
 

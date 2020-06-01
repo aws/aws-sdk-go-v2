@@ -79,6 +79,7 @@ func (c *Client) StopPHIDetectionJobRequest(input *StopPHIDetectionJobInput) Sto
 	}
 
 	req := c.newRequest(op, input, &StopPHIDetectionJobOutput{})
+
 	return StopPHIDetectionJobRequest{Request: req, Input: input, Copy: c.StopPHIDetectionJobRequest}
 }
 

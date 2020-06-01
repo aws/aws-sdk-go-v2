@@ -190,6 +190,7 @@ func (c *Client) ListHostedZonesRequest(input *ListHostedZonesInput) ListHostedZ
 	}
 
 	req := c.newRequest(op, input, &ListHostedZonesOutput{})
+
 	return ListHostedZonesRequest{Request: req, Input: input, Copy: c.ListHostedZonesRequest}
 }
 

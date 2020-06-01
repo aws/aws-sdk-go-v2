@@ -143,6 +143,7 @@ func (c *Client) ListSpeechSynthesisTasksRequest(input *ListSpeechSynthesisTasks
 	}
 
 	req := c.newRequest(op, input, &ListSpeechSynthesisTasksOutput{})
+
 	return ListSpeechSynthesisTasksRequest{Request: req, Input: input, Copy: c.ListSpeechSynthesisTasksRequest}
 }
 

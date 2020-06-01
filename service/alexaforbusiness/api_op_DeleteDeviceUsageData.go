@@ -84,6 +84,7 @@ func (c *Client) DeleteDeviceUsageDataRequest(input *DeleteDeviceUsageDataInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteDeviceUsageDataOutput{})
+
 	return DeleteDeviceUsageDataRequest{Request: req, Input: input, Copy: c.DeleteDeviceUsageDataRequest}
 }
 

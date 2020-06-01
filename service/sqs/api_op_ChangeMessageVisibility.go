@@ -150,6 +150,7 @@ func (c *Client) ChangeMessageVisibilityRequest(input *ChangeMessageVisibilityIn
 	req := c.newRequest(op, input, &ChangeMessageVisibilityOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return ChangeMessageVisibilityRequest{Request: req, Input: input, Copy: c.ChangeMessageVisibilityRequest}
 }
 

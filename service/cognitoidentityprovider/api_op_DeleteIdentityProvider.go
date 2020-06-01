@@ -92,6 +92,7 @@ func (c *Client) DeleteIdentityProviderRequest(input *DeleteIdentityProviderInpu
 	req := c.newRequest(op, input, &DeleteIdentityProviderOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteIdentityProviderRequest{Request: req, Input: input, Copy: c.DeleteIdentityProviderRequest}
 }
 

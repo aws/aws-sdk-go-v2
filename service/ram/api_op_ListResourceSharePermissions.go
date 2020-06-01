@@ -139,6 +139,7 @@ func (c *Client) ListResourceSharePermissionsRequest(input *ListResourceSharePer
 	}
 
 	req := c.newRequest(op, input, &ListResourceSharePermissionsOutput{})
+
 	return ListResourceSharePermissionsRequest{Request: req, Input: input, Copy: c.ListResourceSharePermissionsRequest}
 }
 

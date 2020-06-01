@@ -85,6 +85,7 @@ func (c *Client) ModifyClusterSnapshotScheduleRequest(input *ModifyClusterSnapsh
 	req := c.newRequest(op, input, &ModifyClusterSnapshotScheduleOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return ModifyClusterSnapshotScheduleRequest{Request: req, Input: input, Copy: c.ModifyClusterSnapshotScheduleRequest}
 }
 

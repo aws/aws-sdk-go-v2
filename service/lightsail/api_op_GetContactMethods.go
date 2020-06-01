@@ -70,6 +70,7 @@ func (c *Client) GetContactMethodsRequest(input *GetContactMethodsInput) GetCont
 	}
 
 	req := c.newRequest(op, input, &GetContactMethodsOutput{})
+
 	return GetContactMethodsRequest{Request: req, Input: input, Copy: c.GetContactMethodsRequest}
 }
 

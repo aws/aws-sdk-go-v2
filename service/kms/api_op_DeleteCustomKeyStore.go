@@ -105,6 +105,7 @@ func (c *Client) DeleteCustomKeyStoreRequest(input *DeleteCustomKeyStoreInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteCustomKeyStoreOutput{})
+
 	return DeleteCustomKeyStoreRequest{Request: req, Input: input, Copy: c.DeleteCustomKeyStoreRequest}
 }
 

@@ -125,6 +125,7 @@ func (c *Client) RevokeFlowEntitlementRequest(input *RevokeFlowEntitlementInput)
 	}
 
 	req := c.newRequest(op, input, &RevokeFlowEntitlementOutput{})
+
 	return RevokeFlowEntitlementRequest{Request: req, Input: input, Copy: c.RevokeFlowEntitlementRequest}
 }
 

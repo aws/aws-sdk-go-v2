@@ -82,6 +82,7 @@ func (c *Client) DeleteWorkteamRequest(input *DeleteWorkteamInput) DeleteWorktea
 	}
 
 	req := c.newRequest(op, input, &DeleteWorkteamOutput{})
+
 	return DeleteWorkteamRequest{Request: req, Input: input, Copy: c.DeleteWorkteamRequest}
 }
 

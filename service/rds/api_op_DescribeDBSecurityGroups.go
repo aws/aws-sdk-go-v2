@@ -110,6 +110,7 @@ func (c *Client) DescribeDBSecurityGroupsRequest(input *DescribeDBSecurityGroups
 	}
 
 	req := c.newRequest(op, input, &DescribeDBSecurityGroupsOutput{})
+
 	return DescribeDBSecurityGroupsRequest{Request: req, Input: input, Copy: c.DescribeDBSecurityGroupsRequest}
 }
 

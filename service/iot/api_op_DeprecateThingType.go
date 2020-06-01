@@ -106,6 +106,7 @@ func (c *Client) DeprecateThingTypeRequest(input *DeprecateThingTypeInput) Depre
 	}
 
 	req := c.newRequest(op, input, &DeprecateThingTypeOutput{})
+
 	return DeprecateThingTypeRequest{Request: req, Input: input, Copy: c.DeprecateThingTypeRequest}
 }
 

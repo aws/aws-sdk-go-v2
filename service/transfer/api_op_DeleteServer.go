@@ -83,6 +83,7 @@ func (c *Client) DeleteServerRequest(input *DeleteServerInput) DeleteServerReque
 	req := c.newRequest(op, input, &DeleteServerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteServerRequest{Request: req, Input: input, Copy: c.DeleteServerRequest}
 }
 

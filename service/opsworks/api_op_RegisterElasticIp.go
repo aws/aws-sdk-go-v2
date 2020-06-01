@@ -94,6 +94,7 @@ func (c *Client) RegisterElasticIpRequest(input *RegisterElasticIpInput) Registe
 	}
 
 	req := c.newRequest(op, input, &RegisterElasticIpOutput{})
+
 	return RegisterElasticIpRequest{Request: req, Input: input, Copy: c.RegisterElasticIpRequest}
 }
 

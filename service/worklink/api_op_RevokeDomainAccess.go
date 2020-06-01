@@ -113,6 +113,7 @@ func (c *Client) RevokeDomainAccessRequest(input *RevokeDomainAccessInput) Revok
 	}
 
 	req := c.newRequest(op, input, &RevokeDomainAccessOutput{})
+
 	return RevokeDomainAccessRequest{Request: req, Input: input, Copy: c.RevokeDomainAccessRequest}
 }
 

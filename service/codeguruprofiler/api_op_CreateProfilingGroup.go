@@ -150,6 +150,7 @@ func (c *Client) CreateProfilingGroupRequest(input *CreateProfilingGroupInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateProfilingGroupOutput{})
+
 	return CreateProfilingGroupRequest{Request: req, Input: input, Copy: c.CreateProfilingGroupRequest}
 }
 

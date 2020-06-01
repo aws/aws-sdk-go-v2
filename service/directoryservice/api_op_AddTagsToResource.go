@@ -92,6 +92,7 @@ func (c *Client) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTags
 	}
 
 	req := c.newRequest(op, input, &AddTagsToResourceOutput{})
+
 	return AddTagsToResourceRequest{Request: req, Input: input, Copy: c.AddTagsToResourceRequest}
 }
 

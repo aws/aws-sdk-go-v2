@@ -94,6 +94,7 @@ func (c *Client) GetPullRequestOverrideStateRequest(input *GetPullRequestOverrid
 	}
 
 	req := c.newRequest(op, input, &GetPullRequestOverrideStateOutput{})
+
 	return GetPullRequestOverrideStateRequest{Request: req, Input: input, Copy: c.GetPullRequestOverrideStateRequest}
 }
 

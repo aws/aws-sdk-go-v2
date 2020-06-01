@@ -125,6 +125,7 @@ func (c *Client) UpdateGameSessionRequest(input *UpdateGameSessionInput) UpdateG
 	}
 
 	req := c.newRequest(op, input, &UpdateGameSessionOutput{})
+
 	return UpdateGameSessionRequest{Request: req, Input: input, Copy: c.UpdateGameSessionRequest}
 }
 

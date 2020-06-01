@@ -88,6 +88,7 @@ func (c *Client) DeleteQualificationTypeRequest(input *DeleteQualificationTypeIn
 	}
 
 	req := c.newRequest(op, input, &DeleteQualificationTypeOutput{})
+
 	return DeleteQualificationTypeRequest{Request: req, Input: input, Copy: c.DeleteQualificationTypeRequest}
 }
 

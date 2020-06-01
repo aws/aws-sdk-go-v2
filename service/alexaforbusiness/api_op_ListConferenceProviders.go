@@ -89,6 +89,7 @@ func (c *Client) ListConferenceProvidersRequest(input *ListConferenceProvidersIn
 	}
 
 	req := c.newRequest(op, input, &ListConferenceProvidersOutput{})
+
 	return ListConferenceProvidersRequest{Request: req, Input: input, Copy: c.ListConferenceProvidersRequest}
 }
 

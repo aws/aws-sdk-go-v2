@@ -141,9 +141,9 @@ const opListAccessPoints = "ListAccessPoints"
 //
 // Returns a list of the access points currently associated with the specified
 // bucket. You can retrieve up to 1000 access points per call. If the specified
-// bucket has more than 1000 access points (or the number specified in maxResults,
-// whichever is less), then the response will include a continuation token that
-// you can use to list the additional access points.
+// bucket has more than 1,000 access points (or the number specified in maxResults,
+// whichever is less), the response will include a continuation token that you
+// can use to list the additional access points.
 //
 //    // Example sending a request using ListAccessPointsRequest.
 //    req := client.ListAccessPointsRequest(params)
@@ -173,6 +173,7 @@ func (c *Client) ListAccessPointsRequest(input *ListAccessPointsInput) ListAcces
 	req := c.newRequest(op, input, &ListAccessPointsOutput{})
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
+
 	return ListAccessPointsRequest{Request: req, Input: input, Copy: c.ListAccessPointsRequest}
 }
 

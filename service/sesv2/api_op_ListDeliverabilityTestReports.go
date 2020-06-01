@@ -134,6 +134,7 @@ func (c *Client) ListDeliverabilityTestReportsRequest(input *ListDeliverabilityT
 	}
 
 	req := c.newRequest(op, input, &ListDeliverabilityTestReportsOutput{})
+
 	return ListDeliverabilityTestReportsRequest{Request: req, Input: input, Copy: c.ListDeliverabilityTestReportsRequest}
 }
 

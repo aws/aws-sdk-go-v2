@@ -132,6 +132,7 @@ func (c *Client) CreateInvalidationRequest(input *CreateInvalidationInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateInvalidationOutput{})
+
 	return CreateInvalidationRequest{Request: req, Input: input, Copy: c.CreateInvalidationRequest}
 }
 

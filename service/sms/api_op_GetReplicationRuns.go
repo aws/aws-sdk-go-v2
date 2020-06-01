@@ -97,6 +97,7 @@ func (c *Client) GetReplicationRunsRequest(input *GetReplicationRunsInput) GetRe
 	}
 
 	req := c.newRequest(op, input, &GetReplicationRunsOutput{})
+
 	return GetReplicationRunsRequest{Request: req, Input: input, Copy: c.GetReplicationRunsRequest}
 }
 

@@ -97,6 +97,7 @@ func (c *Client) DescribeHumanTaskUiRequest(input *DescribeHumanTaskUiInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeHumanTaskUiOutput{})
+
 	return DescribeHumanTaskUiRequest{Request: req, Input: input, Copy: c.DescribeHumanTaskUiRequest}
 }
 

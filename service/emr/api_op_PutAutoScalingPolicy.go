@@ -114,6 +114,7 @@ func (c *Client) PutAutoScalingPolicyRequest(input *PutAutoScalingPolicyInput) P
 	}
 
 	req := c.newRequest(op, input, &PutAutoScalingPolicyOutput{})
+
 	return PutAutoScalingPolicyRequest{Request: req, Input: input, Copy: c.PutAutoScalingPolicyRequest}
 }
 

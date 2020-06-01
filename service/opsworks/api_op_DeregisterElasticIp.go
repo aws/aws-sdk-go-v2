@@ -83,6 +83,7 @@ func (c *Client) DeregisterElasticIpRequest(input *DeregisterElasticIpInput) Der
 	req := c.newRequest(op, input, &DeregisterElasticIpOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeregisterElasticIpRequest{Request: req, Input: input, Copy: c.DeregisterElasticIpRequest}
 }
 

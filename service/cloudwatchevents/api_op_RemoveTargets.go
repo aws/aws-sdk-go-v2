@@ -117,6 +117,7 @@ func (c *Client) RemoveTargetsRequest(input *RemoveTargetsInput) RemoveTargetsRe
 	}
 
 	req := c.newRequest(op, input, &RemoveTargetsOutput{})
+
 	return RemoveTargetsRequest{Request: req, Input: input, Copy: c.RemoveTargetsRequest}
 }
 

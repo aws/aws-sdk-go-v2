@@ -153,6 +153,7 @@ func (c *Client) RemovePermissionRequest(input *RemovePermissionInput) RemovePer
 	req := c.newRequest(op, input, &RemovePermissionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RemovePermissionRequest{Request: req, Input: input, Copy: c.RemovePermissionRequest}
 }
 

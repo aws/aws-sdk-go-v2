@@ -152,6 +152,7 @@ func (c *Client) AssociateDeviceWithPlacementRequest(input *AssociateDeviceWithP
 	}
 
 	req := c.newRequest(op, input, &AssociateDeviceWithPlacementOutput{})
+
 	return AssociateDeviceWithPlacementRequest{Request: req, Input: input, Copy: c.AssociateDeviceWithPlacementRequest}
 }
 

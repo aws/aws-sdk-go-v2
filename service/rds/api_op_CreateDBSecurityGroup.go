@@ -107,6 +107,7 @@ func (c *Client) CreateDBSecurityGroupRequest(input *CreateDBSecurityGroupInput)
 	}
 
 	req := c.newRequest(op, input, &CreateDBSecurityGroupOutput{})
+
 	return CreateDBSecurityGroupRequest{Request: req, Input: input, Copy: c.CreateDBSecurityGroupRequest}
 }
 

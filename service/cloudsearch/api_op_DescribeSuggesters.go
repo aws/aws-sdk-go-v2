@@ -98,6 +98,7 @@ func (c *Client) DescribeSuggestersRequest(input *DescribeSuggestersInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeSuggestersOutput{})
+
 	return DescribeSuggestersRequest{Request: req, Input: input, Copy: c.DescribeSuggestersRequest}
 }
 

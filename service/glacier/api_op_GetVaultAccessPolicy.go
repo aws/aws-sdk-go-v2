@@ -125,6 +125,7 @@ func (c *Client) GetVaultAccessPolicyRequest(input *GetVaultAccessPolicyInput) G
 	}
 
 	req := c.newRequest(op, input, &GetVaultAccessPolicyOutput{})
+
 	return GetVaultAccessPolicyRequest{Request: req, Input: input, Copy: c.GetVaultAccessPolicyRequest}
 }
 

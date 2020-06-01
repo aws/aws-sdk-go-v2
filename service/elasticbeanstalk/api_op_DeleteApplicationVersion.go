@@ -101,6 +101,7 @@ func (c *Client) DeleteApplicationVersionRequest(input *DeleteApplicationVersion
 	req := c.newRequest(op, input, &DeleteApplicationVersionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteApplicationVersionRequest{Request: req, Input: input, Copy: c.DeleteApplicationVersionRequest}
 }
 

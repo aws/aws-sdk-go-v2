@@ -94,6 +94,7 @@ func (c *Client) BatchRevokePermissionsRequest(input *BatchRevokePermissionsInpu
 	}
 
 	req := c.newRequest(op, input, &BatchRevokePermissionsOutput{})
+
 	return BatchRevokePermissionsRequest{Request: req, Input: input, Copy: c.BatchRevokePermissionsRequest}
 }
 

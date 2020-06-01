@@ -81,6 +81,7 @@ func (c *Client) DeleteCollectionRequest(input *DeleteCollectionInput) DeleteCol
 	}
 
 	req := c.newRequest(op, input, &DeleteCollectionOutput{})
+
 	return DeleteCollectionRequest{Request: req, Input: input, Copy: c.DeleteCollectionRequest}
 }
 

@@ -158,6 +158,7 @@ func (c *Client) GetBucketMetricsConfigurationRequest(input *GetBucketMetricsCon
 	}
 
 	req := c.newRequest(op, input, &GetBucketMetricsConfigurationOutput{})
+
 	return GetBucketMetricsConfigurationRequest{Request: req, Input: input, Copy: c.GetBucketMetricsConfigurationRequest}
 }
 

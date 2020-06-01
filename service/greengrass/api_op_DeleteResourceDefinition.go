@@ -90,6 +90,7 @@ func (c *Client) DeleteResourceDefinitionRequest(input *DeleteResourceDefinition
 	}
 
 	req := c.newRequest(op, input, &DeleteResourceDefinitionOutput{})
+
 	return DeleteResourceDefinitionRequest{Request: req, Input: input, Copy: c.DeleteResourceDefinitionRequest}
 }
 

@@ -107,6 +107,7 @@ func (c *Client) DescribeFleetPortSettingsRequest(input *DescribeFleetPortSettin
 	}
 
 	req := c.newRequest(op, input, &DescribeFleetPortSettingsOutput{})
+
 	return DescribeFleetPortSettingsRequest{Request: req, Input: input, Copy: c.DescribeFleetPortSettingsRequest}
 }
 

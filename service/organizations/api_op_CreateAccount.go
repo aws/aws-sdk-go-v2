@@ -203,6 +203,7 @@ func (c *Client) CreateAccountRequest(input *CreateAccountInput) CreateAccountRe
 	}
 
 	req := c.newRequest(op, input, &CreateAccountOutput{})
+
 	return CreateAccountRequest{Request: req, Input: input, Copy: c.CreateAccountRequest}
 }
 

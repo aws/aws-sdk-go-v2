@@ -117,6 +117,7 @@ func (c *Client) ListTrialsRequest(input *ListTrialsInput) ListTrialsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListTrialsOutput{})
+
 	return ListTrialsRequest{Request: req, Input: input, Copy: c.ListTrialsRequest}
 }
 

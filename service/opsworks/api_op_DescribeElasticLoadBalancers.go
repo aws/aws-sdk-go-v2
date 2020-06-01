@@ -73,6 +73,7 @@ func (c *Client) DescribeElasticLoadBalancersRequest(input *DescribeElasticLoadB
 	}
 
 	req := c.newRequest(op, input, &DescribeElasticLoadBalancersOutput{})
+
 	return DescribeElasticLoadBalancersRequest{Request: req, Input: input, Copy: c.DescribeElasticLoadBalancersRequest}
 }
 

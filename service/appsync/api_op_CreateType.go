@@ -132,6 +132,7 @@ func (c *Client) CreateTypeRequest(input *CreateTypeInput) CreateTypeRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateTypeOutput{})
+
 	return CreateTypeRequest{Request: req, Input: input, Copy: c.CreateTypeRequest}
 }
 

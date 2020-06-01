@@ -90,6 +90,7 @@ func (c *Client) PurchaseReservedNodeOfferingRequest(input *PurchaseReservedNode
 	}
 
 	req := c.newRequest(op, input, &PurchaseReservedNodeOfferingOutput{})
+
 	return PurchaseReservedNodeOfferingRequest{Request: req, Input: input, Copy: c.PurchaseReservedNodeOfferingRequest}
 }
 

@@ -75,6 +75,7 @@ func (c *Client) DeleteLicenseConfigurationRequest(input *DeleteLicenseConfigura
 	}
 
 	req := c.newRequest(op, input, &DeleteLicenseConfigurationOutput{})
+
 	return DeleteLicenseConfigurationRequest{Request: req, Input: input, Copy: c.DeleteLicenseConfigurationRequest}
 }
 

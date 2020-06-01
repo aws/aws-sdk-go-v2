@@ -136,6 +136,7 @@ func (c *Client) DescribeRecommendationFeedbackRequest(input *DescribeRecommenda
 	}
 
 	req := c.newRequest(op, input, &DescribeRecommendationFeedbackOutput{})
+
 	return DescribeRecommendationFeedbackRequest{Request: req, Input: input, Copy: c.DescribeRecommendationFeedbackRequest}
 }
 

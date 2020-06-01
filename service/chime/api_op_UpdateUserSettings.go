@@ -130,6 +130,7 @@ func (c *Client) UpdateUserSettingsRequest(input *UpdateUserSettingsInput) Updat
 	req := c.newRequest(op, input, &UpdateUserSettingsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateUserSettingsRequest{Request: req, Input: input, Copy: c.UpdateUserSettingsRequest}
 }
 

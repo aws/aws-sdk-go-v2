@@ -163,6 +163,7 @@ func (c *Client) CreateTaskRequest(input *CreateTaskInput) CreateTaskRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateTaskOutput{})
+
 	return CreateTaskRequest{Request: req, Input: input, Copy: c.CreateTaskRequest}
 }
 

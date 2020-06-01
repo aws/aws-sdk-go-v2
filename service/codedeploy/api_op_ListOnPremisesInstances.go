@@ -85,6 +85,7 @@ func (c *Client) ListOnPremisesInstancesRequest(input *ListOnPremisesInstancesIn
 	}
 
 	req := c.newRequest(op, input, &ListOnPremisesInstancesOutput{})
+
 	return ListOnPremisesInstancesRequest{Request: req, Input: input, Copy: c.ListOnPremisesInstancesRequest}
 }
 

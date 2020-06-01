@@ -83,6 +83,7 @@ func (c *Client) GetContainerPolicyRequest(input *GetContainerPolicyInput) GetCo
 	}
 
 	req := c.newRequest(op, input, &GetContainerPolicyOutput{})
+
 	return GetContainerPolicyRequest{Request: req, Input: input, Copy: c.GetContainerPolicyRequest}
 }
 

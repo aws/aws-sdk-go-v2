@@ -109,6 +109,7 @@ func (c *Client) DetachSecurityProfileRequest(input *DetachSecurityProfileInput)
 	}
 
 	req := c.newRequest(op, input, &DetachSecurityProfileOutput{})
+
 	return DetachSecurityProfileRequest{Request: req, Input: input, Copy: c.DetachSecurityProfileRequest}
 }
 

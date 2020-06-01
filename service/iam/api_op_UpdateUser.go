@@ -121,6 +121,7 @@ func (c *Client) UpdateUserRequest(input *UpdateUserInput) UpdateUserRequest {
 	req := c.newRequest(op, input, &UpdateUserOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateUserRequest{Request: req, Input: input, Copy: c.UpdateUserRequest}
 }
 

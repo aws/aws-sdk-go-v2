@@ -174,6 +174,7 @@ func (c *Client) ListIngestionsRequest(input *ListIngestionsInput) ListIngestion
 	}
 
 	req := c.newRequest(op, input, &ListIngestionsOutput{})
+
 	return ListIngestionsRequest{Request: req, Input: input, Copy: c.ListIngestionsRequest}
 }
 

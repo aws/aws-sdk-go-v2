@@ -117,6 +117,7 @@ func (c *Client) CreateNotebookInstanceLifecycleConfigRequest(input *CreateNoteb
 	}
 
 	req := c.newRequest(op, input, &CreateNotebookInstanceLifecycleConfigOutput{})
+
 	return CreateNotebookInstanceLifecycleConfigRequest{Request: req, Input: input, Copy: c.CreateNotebookInstanceLifecycleConfigRequest}
 }
 

@@ -132,6 +132,7 @@ func (c *Client) DetachFromIndexRequest(input *DetachFromIndexInput) DetachFromI
 	}
 
 	req := c.newRequest(op, input, &DetachFromIndexOutput{})
+
 	return DetachFromIndexRequest{Request: req, Input: input, Copy: c.DetachFromIndexRequest}
 }
 

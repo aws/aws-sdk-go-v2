@@ -87,6 +87,7 @@ func (c *Client) GetServersRequest(input *GetServersInput) GetServersRequest {
 	}
 
 	req := c.newRequest(op, input, &GetServersOutput{})
+
 	return GetServersRequest{Request: req, Input: input, Copy: c.GetServersRequest}
 }
 

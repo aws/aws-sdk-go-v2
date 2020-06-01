@@ -100,6 +100,7 @@ func (c *Client) DisableKeyRequest(input *DisableKeyInput) DisableKeyRequest {
 	req := c.newRequest(op, input, &DisableKeyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DisableKeyRequest{Request: req, Input: input, Copy: c.DisableKeyRequest}
 }
 

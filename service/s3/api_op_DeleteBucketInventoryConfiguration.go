@@ -150,6 +150,7 @@ func (c *Client) DeleteBucketInventoryConfigurationRequest(input *DeleteBucketIn
 	req := c.newRequest(op, input, &DeleteBucketInventoryConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteBucketInventoryConfigurationRequest{Request: req, Input: input, Copy: c.DeleteBucketInventoryConfigurationRequest}
 }
 

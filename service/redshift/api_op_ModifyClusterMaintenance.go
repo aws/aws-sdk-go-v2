@@ -95,6 +95,7 @@ func (c *Client) ModifyClusterMaintenanceRequest(input *ModifyClusterMaintenance
 	}
 
 	req := c.newRequest(op, input, &ModifyClusterMaintenanceOutput{})
+
 	return ModifyClusterMaintenanceRequest{Request: req, Input: input, Copy: c.ModifyClusterMaintenanceRequest}
 }
 

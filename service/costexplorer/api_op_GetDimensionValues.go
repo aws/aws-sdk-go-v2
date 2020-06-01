@@ -311,6 +311,7 @@ func (c *Client) GetDimensionValuesRequest(input *GetDimensionValuesInput) GetDi
 	}
 
 	req := c.newRequest(op, input, &GetDimensionValuesOutput{})
+
 	return GetDimensionValuesRequest{Request: req, Input: input, Copy: c.GetDimensionValuesRequest}
 }
 

@@ -80,6 +80,7 @@ func (c *Client) VerifyEmailAddressRequest(input *VerifyEmailAddressInput) Verif
 	req := c.newRequest(op, input, &VerifyEmailAddressOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return VerifyEmailAddressRequest{Request: req, Input: input, Copy: c.VerifyEmailAddressRequest}
 }
 

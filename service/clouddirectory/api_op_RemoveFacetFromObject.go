@@ -127,6 +127,7 @@ func (c *Client) RemoveFacetFromObjectRequest(input *RemoveFacetFromObjectInput)
 	}
 
 	req := c.newRequest(op, input, &RemoveFacetFromObjectOutput{})
+
 	return RemoveFacetFromObjectRequest{Request: req, Input: input, Copy: c.RemoveFacetFromObjectRequest}
 }
 

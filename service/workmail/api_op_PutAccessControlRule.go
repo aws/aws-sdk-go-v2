@@ -125,6 +125,7 @@ func (c *Client) PutAccessControlRuleRequest(input *PutAccessControlRuleInput) P
 	}
 
 	req := c.newRequest(op, input, &PutAccessControlRuleOutput{})
+
 	return PutAccessControlRuleRequest{Request: req, Input: input, Copy: c.PutAccessControlRuleRequest}
 }
 

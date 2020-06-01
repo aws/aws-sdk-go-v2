@@ -179,6 +179,7 @@ func (c *Client) GetFunctionEventInvokeConfigRequest(input *GetFunctionEventInvo
 	}
 
 	req := c.newRequest(op, input, &GetFunctionEventInvokeConfigOutput{})
+
 	return GetFunctionEventInvokeConfigRequest{Request: req, Input: input, Copy: c.GetFunctionEventInvokeConfigRequest}
 }
 

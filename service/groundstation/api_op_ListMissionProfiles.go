@@ -117,6 +117,7 @@ func (c *Client) ListMissionProfilesRequest(input *ListMissionProfilesInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListMissionProfilesOutput{})
+
 	return ListMissionProfilesRequest{Request: req, Input: input, Copy: c.ListMissionProfilesRequest}
 }
 

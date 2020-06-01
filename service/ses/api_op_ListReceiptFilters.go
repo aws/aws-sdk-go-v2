@@ -68,6 +68,7 @@ func (c *Client) ListReceiptFiltersRequest(input *ListReceiptFiltersInput) ListR
 	}
 
 	req := c.newRequest(op, input, &ListReceiptFiltersOutput{})
+
 	return ListReceiptFiltersRequest{Request: req, Input: input, Copy: c.ListReceiptFiltersRequest}
 }
 

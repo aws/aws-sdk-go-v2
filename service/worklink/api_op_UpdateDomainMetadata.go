@@ -122,6 +122,7 @@ func (c *Client) UpdateDomainMetadataRequest(input *UpdateDomainMetadataInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateDomainMetadataOutput{})
+
 	return UpdateDomainMetadataRequest{Request: req, Input: input, Copy: c.UpdateDomainMetadataRequest}
 }
 

@@ -83,6 +83,7 @@ func (c *Client) UpdateServiceSettingsRequest(input *UpdateServiceSettingsInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateServiceSettingsOutput{})
+
 	return UpdateServiceSettingsRequest{Request: req, Input: input, Copy: c.UpdateServiceSettingsRequest}
 }
 

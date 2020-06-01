@@ -93,6 +93,7 @@ func (c *Client) DeleteApplicationRequest(input *DeleteApplicationInput) DeleteA
 	req := c.newRequest(op, input, &DeleteApplicationOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteApplicationRequest{Request: req, Input: input, Copy: c.DeleteApplicationRequest}
 }
 

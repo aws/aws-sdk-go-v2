@@ -72,6 +72,16 @@ const opDeleteByteMatchSet = "DeleteByteMatchSet"
 // DeleteByteMatchSetRequest returns a request value for making API operation for
 // AWS WAF.
 //
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Permanently deletes a ByteMatchSet. You can't delete a ByteMatchSet if it's
 // still used in any Rules or if it still includes any ByteMatchTuple objects
 // (any filters).
@@ -108,6 +118,7 @@ func (c *Client) DeleteByteMatchSetRequest(input *DeleteByteMatchSetInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteByteMatchSetOutput{})
+
 	return DeleteByteMatchSetRequest{Request: req, Input: input, Copy: c.DeleteByteMatchSetRequest}
 }
 

@@ -95,6 +95,7 @@ func (c *Client) DeleteDetectorRequest(input *DeleteDetectorInput) DeleteDetecto
 	}
 
 	req := c.newRequest(op, input, &DeleteDetectorOutput{})
+
 	return DeleteDetectorRequest{Request: req, Input: input, Copy: c.DeleteDetectorRequest}
 }
 

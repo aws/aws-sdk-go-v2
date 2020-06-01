@@ -143,6 +143,7 @@ func (c *Client) CreateLocationNfsRequest(input *CreateLocationNfsInput) CreateL
 	}
 
 	req := c.newRequest(op, input, &CreateLocationNfsOutput{})
+
 	return CreateLocationNfsRequest{Request: req, Input: input, Copy: c.CreateLocationNfsRequest}
 }
 

@@ -104,6 +104,7 @@ func (c *Client) DeleteConfigurationSetEventDestinationRequest(input *DeleteConf
 	}
 
 	req := c.newRequest(op, input, &DeleteConfigurationSetEventDestinationOutput{})
+
 	return DeleteConfigurationSetEventDestinationRequest{Request: req, Input: input, Copy: c.DeleteConfigurationSetEventDestinationRequest}
 }
 

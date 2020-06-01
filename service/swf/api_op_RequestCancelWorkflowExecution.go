@@ -123,6 +123,7 @@ func (c *Client) RequestCancelWorkflowExecutionRequest(input *RequestCancelWorkf
 	req := c.newRequest(op, input, &RequestCancelWorkflowExecutionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RequestCancelWorkflowExecutionRequest{Request: req, Input: input, Copy: c.RequestCancelWorkflowExecutionRequest}
 }
 

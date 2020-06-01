@@ -81,6 +81,7 @@ func (c *Client) VerifyEmailIdentityRequest(input *VerifyEmailIdentityInput) Ver
 	}
 
 	req := c.newRequest(op, input, &VerifyEmailIdentityOutput{})
+
 	return VerifyEmailIdentityRequest{Request: req, Input: input, Copy: c.VerifyEmailIdentityRequest}
 }
 

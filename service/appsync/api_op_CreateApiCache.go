@@ -185,6 +185,7 @@ func (c *Client) CreateApiCacheRequest(input *CreateApiCacheInput) CreateApiCach
 	}
 
 	req := c.newRequest(op, input, &CreateApiCacheOutput{})
+
 	return CreateApiCacheRequest{Request: req, Input: input, Copy: c.CreateApiCacheRequest}
 }
 

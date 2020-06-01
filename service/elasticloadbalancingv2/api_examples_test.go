@@ -127,6 +127,8 @@ func ExampleClient_CreateListenerRequest_shared00() {
 				fmt.Println(elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException, aerr.Error())
 			case elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException:
 				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException, aerr.Error())
+			case elasticloadbalancingv2.ErrCodeALPNPolicyNotSupportedException:
+				fmt.Println(elasticloadbalancingv2.ErrCodeALPNPolicyNotSupportedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -211,6 +213,8 @@ func ExampleClient_CreateListenerRequest_shared01() {
 				fmt.Println(elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException, aerr.Error())
 			case elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException:
 				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException, aerr.Error())
+			case elasticloadbalancingv2.ErrCodeALPNPolicyNotSupportedException:
+				fmt.Println(elasticloadbalancingv2.ErrCodeALPNPolicyNotSupportedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1113,6 +1117,8 @@ func ExampleClient_ModifyListenerRequest_shared00() {
 				fmt.Println(elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException, aerr.Error())
 			case elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException:
 				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException, aerr.Error())
+			case elasticloadbalancingv2.ErrCodeALPNPolicyNotSupportedException:
+				fmt.Println(elasticloadbalancingv2.ErrCodeALPNPolicyNotSupportedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1183,6 +1189,8 @@ func ExampleClient_ModifyListenerRequest_shared01() {
 				fmt.Println(elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException, aerr.Error())
 			case elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException:
 				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException, aerr.Error())
+			case elasticloadbalancingv2.ErrCodeALPNPolicyNotSupportedException:
+				fmt.Println(elasticloadbalancingv2.ErrCodeALPNPolicyNotSupportedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

@@ -81,6 +81,7 @@ func (c *Client) DeleteDomainRequest(input *DeleteDomainInput) DeleteDomainReque
 	req := c.newRequest(op, input, &DeleteDomainOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteDomainRequest{Request: req, Input: input, Copy: c.DeleteDomainRequest}
 }
 

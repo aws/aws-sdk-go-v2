@@ -85,6 +85,7 @@ func (c *Client) DescribeDocumentRequest(input *DescribeDocumentInput) DescribeD
 	}
 
 	req := c.newRequest(op, input, &DescribeDocumentOutput{})
+
 	return DescribeDocumentRequest{Request: req, Input: input, Copy: c.DescribeDocumentRequest}
 }
 

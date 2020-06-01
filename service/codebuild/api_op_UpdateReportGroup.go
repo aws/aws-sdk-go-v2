@@ -4,6 +4,7 @@ package codebuild
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -23,6 +24,12 @@ type UpdateReportGroupInput struct {
 	//
 	//    * NO_EXPORT: The report results are not exported.
 	ExportConfig *ReportExportConfig `locationName:"exportConfig" type:"structure"`
+
+	// An updated list of tag key and value pairs associated with this report group.
+	//
+	// These tags are available for use by AWS services that support AWS CodeBuild
+	// report group tags.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -43,6 +50,13 @@ func (s *UpdateReportGroupInput) Validate() error {
 	if s.ExportConfig != nil {
 		if err := s.ExportConfig.Validate(); err != nil {
 			invalidParams.AddNested("ExportConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -91,6 +105,7 @@ func (c *Client) UpdateReportGroupRequest(input *UpdateReportGroupInput) UpdateR
 	}
 
 	req := c.newRequest(op, input, &UpdateReportGroupOutput{})
+
 	return UpdateReportGroupRequest{Request: req, Input: input, Copy: c.UpdateReportGroupRequest}
 }
 

@@ -87,6 +87,7 @@ func (c *Client) GetCelebrityInfoRequest(input *GetCelebrityInfoInput) GetCelebr
 	}
 
 	req := c.newRequest(op, input, &GetCelebrityInfoOutput{})
+
 	return GetCelebrityInfoRequest{Request: req, Input: input, Copy: c.GetCelebrityInfoRequest}
 }
 

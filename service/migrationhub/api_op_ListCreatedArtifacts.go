@@ -122,6 +122,7 @@ func (c *Client) ListCreatedArtifactsRequest(input *ListCreatedArtifactsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListCreatedArtifactsOutput{})
+
 	return ListCreatedArtifactsRequest{Request: req, Input: input, Copy: c.ListCreatedArtifactsRequest}
 }
 

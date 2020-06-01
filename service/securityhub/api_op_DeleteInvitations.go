@@ -114,6 +114,7 @@ func (c *Client) DeleteInvitationsRequest(input *DeleteInvitationsInput) DeleteI
 	}
 
 	req := c.newRequest(op, input, &DeleteInvitationsOutput{})
+
 	return DeleteInvitationsRequest{Request: req, Input: input, Copy: c.DeleteInvitationsRequest}
 }
 

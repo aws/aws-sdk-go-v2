@@ -162,6 +162,8 @@ type Event struct {
 	// The date and time that the event ended.
 	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
 
+	EventScopeCode EventScopeCode `locationName:"eventScopeCode" type:"string" enum:"true"`
+
 	// The category of the event. Possible values are issue, scheduledChange, and
 	// accountNotification.
 	EventTypeCategory EventTypeCategory `locationName:"eventTypeCategory" min:"3" type:"string" enum:"true"`
@@ -198,9 +200,7 @@ type EventAccountFilter struct {
 	_ struct{} `type:"structure"`
 
 	// The 12-digit AWS account numbers that contains the affected entities.
-	//
-	// AwsAccountId is a required field
-	AwsAccountId *string `locationName:"awsAccountId" type:"string" required:"true"`
+	AwsAccountId *string `locationName:"awsAccountId" type:"string"`
 
 	// The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
 	// . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
@@ -217,10 +217,6 @@ func (s EventAccountFilter) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EventAccountFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EventAccountFilter"}
-
-	if s.AwsAccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AwsAccountId"))
-	}
 
 	if s.EventArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EventArn"))
@@ -496,6 +492,8 @@ type OrganizationEvent struct {
 
 	// The date and time that the event ended.
 	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
+
+	EventScopeCode EventScopeCode `locationName:"eventScopeCode" type:"string" enum:"true"`
 
 	// The category of the event type.
 	EventTypeCategory EventTypeCategory `locationName:"eventTypeCategory" min:"3" type:"string" enum:"true"`

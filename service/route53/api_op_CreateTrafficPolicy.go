@@ -147,6 +147,7 @@ func (c *Client) CreateTrafficPolicyRequest(input *CreateTrafficPolicyInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateTrafficPolicyOutput{})
+
 	return CreateTrafficPolicyRequest{Request: req, Input: input, Copy: c.CreateTrafficPolicyRequest}
 }
 

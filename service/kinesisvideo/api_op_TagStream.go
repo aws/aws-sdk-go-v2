@@ -138,6 +138,7 @@ func (c *Client) TagStreamRequest(input *TagStreamInput) TagStreamRequest {
 	}
 
 	req := c.newRequest(op, input, &TagStreamOutput{})
+
 	return TagStreamRequest{Request: req, Input: input, Copy: c.TagStreamRequest}
 }
 

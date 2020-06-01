@@ -84,6 +84,7 @@ func (c *Client) DeleteCustomVerificationEmailTemplateRequest(input *DeleteCusto
 	req := c.newRequest(op, input, &DeleteCustomVerificationEmailTemplateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteCustomVerificationEmailTemplateRequest{Request: req, Input: input, Copy: c.DeleteCustomVerificationEmailTemplateRequest}
 }
 

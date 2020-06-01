@@ -132,6 +132,7 @@ func (c *Client) DeleteNodeRequest(input *DeleteNodeInput) DeleteNodeRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteNodeOutput{})
+
 	return DeleteNodeRequest{Request: req, Input: input, Copy: c.DeleteNodeRequest}
 }
 

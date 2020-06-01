@@ -224,6 +224,7 @@ func (c *Client) DescribeFolderContentsRequest(input *DescribeFolderContentsInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeFolderContentsOutput{})
+
 	return DescribeFolderContentsRequest{Request: req, Input: input, Copy: c.DescribeFolderContentsRequest}
 }
 

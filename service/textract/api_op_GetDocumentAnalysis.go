@@ -157,6 +157,7 @@ func (c *Client) GetDocumentAnalysisRequest(input *GetDocumentAnalysisInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetDocumentAnalysisOutput{})
+
 	return GetDocumentAnalysisRequest{Request: req, Input: input, Copy: c.GetDocumentAnalysisRequest}
 }
 

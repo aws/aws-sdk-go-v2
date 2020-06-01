@@ -104,6 +104,7 @@ func (c *Client) CreateVariableRequest(input *CreateVariableInput) CreateVariabl
 	}
 
 	req := c.newRequest(op, input, &CreateVariableOutput{})
+
 	return CreateVariableRequest{Request: req, Input: input, Copy: c.CreateVariableRequest}
 }
 

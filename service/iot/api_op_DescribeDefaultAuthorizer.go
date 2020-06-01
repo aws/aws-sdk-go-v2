@@ -74,6 +74,7 @@ func (c *Client) DescribeDefaultAuthorizerRequest(input *DescribeDefaultAuthoriz
 	}
 
 	req := c.newRequest(op, input, &DescribeDefaultAuthorizerOutput{})
+
 	return DescribeDefaultAuthorizerRequest{Request: req, Input: input, Copy: c.DescribeDefaultAuthorizerRequest}
 }
 

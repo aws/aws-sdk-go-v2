@@ -82,6 +82,7 @@ func (c *Client) GetResolverRulePolicyRequest(input *GetResolverRulePolicyInput)
 	}
 
 	req := c.newRequest(op, input, &GetResolverRulePolicyOutput{})
+
 	return GetResolverRulePolicyRequest{Request: req, Input: input, Copy: c.GetResolverRulePolicyRequest}
 }
 

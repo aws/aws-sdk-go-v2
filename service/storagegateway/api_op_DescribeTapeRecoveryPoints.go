@@ -120,6 +120,7 @@ func (c *Client) DescribeTapeRecoveryPointsRequest(input *DescribeTapeRecoveryPo
 	}
 
 	req := c.newRequest(op, input, &DescribeTapeRecoveryPointsOutput{})
+
 	return DescribeTapeRecoveryPointsRequest{Request: req, Input: input, Copy: c.DescribeTapeRecoveryPointsRequest}
 }
 

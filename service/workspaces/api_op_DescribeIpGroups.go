@@ -87,6 +87,7 @@ func (c *Client) DescribeIpGroupsRequest(input *DescribeIpGroupsInput) DescribeI
 	}
 
 	req := c.newRequest(op, input, &DescribeIpGroupsOutput{})
+
 	return DescribeIpGroupsRequest{Request: req, Input: input, Copy: c.DescribeIpGroupsRequest}
 }
 

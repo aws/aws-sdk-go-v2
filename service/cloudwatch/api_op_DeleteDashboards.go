@@ -74,6 +74,7 @@ func (c *Client) DeleteDashboardsRequest(input *DeleteDashboardsInput) DeleteDas
 	}
 
 	req := c.newRequest(op, input, &DeleteDashboardsOutput{})
+
 	return DeleteDashboardsRequest{Request: req, Input: input, Copy: c.DeleteDashboardsRequest}
 }
 

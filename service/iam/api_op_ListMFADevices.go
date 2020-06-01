@@ -126,6 +126,7 @@ func (c *Client) ListMFADevicesRequest(input *ListMFADevicesInput) ListMFADevice
 	}
 
 	req := c.newRequest(op, input, &ListMFADevicesOutput{})
+
 	return ListMFADevicesRequest{Request: req, Input: input, Copy: c.ListMFADevicesRequest}
 }
 

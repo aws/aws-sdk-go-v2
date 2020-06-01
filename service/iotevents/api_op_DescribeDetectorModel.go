@@ -117,6 +117,7 @@ func (c *Client) DescribeDetectorModelRequest(input *DescribeDetectorModelInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeDetectorModelOutput{})
+
 	return DescribeDetectorModelRequest{Request: req, Input: input, Copy: c.DescribeDetectorModelRequest}
 }
 

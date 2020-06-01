@@ -102,6 +102,7 @@ func (c *Client) StartMLLabelingSetGenerationTaskRunRequest(input *StartMLLabeli
 	}
 
 	req := c.newRequest(op, input, &StartMLLabelingSetGenerationTaskRunOutput{})
+
 	return StartMLLabelingSetGenerationTaskRunRequest{Request: req, Input: input, Copy: c.StartMLLabelingSetGenerationTaskRunRequest}
 }
 

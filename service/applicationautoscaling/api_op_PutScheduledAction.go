@@ -251,6 +251,7 @@ func (c *Client) PutScheduledActionRequest(input *PutScheduledActionInput) PutSc
 	}
 
 	req := c.newRequest(op, input, &PutScheduledActionOutput{})
+
 	return PutScheduledActionRequest{Request: req, Input: input, Copy: c.PutScheduledActionRequest}
 }
 

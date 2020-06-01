@@ -100,6 +100,7 @@ func (c *Client) GetTableRequest(input *GetTableInput) GetTableRequest {
 	}
 
 	req := c.newRequest(op, input, &GetTableOutput{})
+
 	return GetTableRequest{Request: req, Input: input, Copy: c.GetTableRequest}
 }
 

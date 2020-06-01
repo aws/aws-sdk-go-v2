@@ -194,6 +194,7 @@ func (c *Client) DescribeRobotApplicationRequest(input *DescribeRobotApplication
 	}
 
 	req := c.newRequest(op, input, &DescribeRobotApplicationOutput{})
+
 	return DescribeRobotApplicationRequest{Request: req, Input: input, Copy: c.DescribeRobotApplicationRequest}
 }
 

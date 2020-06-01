@@ -109,6 +109,7 @@ func (c *Client) DeleteFirewallManagerRuleGroupsRequest(input *DeleteFirewallMan
 	}
 
 	req := c.newRequest(op, input, &DeleteFirewallManagerRuleGroupsOutput{})
+
 	return DeleteFirewallManagerRuleGroupsRequest{Request: req, Input: input, Copy: c.DeleteFirewallManagerRuleGroupsRequest}
 }
 

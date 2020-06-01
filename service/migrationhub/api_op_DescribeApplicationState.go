@@ -84,6 +84,7 @@ func (c *Client) DescribeApplicationStateRequest(input *DescribeApplicationState
 	}
 
 	req := c.newRequest(op, input, &DescribeApplicationStateOutput{})
+
 	return DescribeApplicationStateRequest{Request: req, Input: input, Copy: c.DescribeApplicationStateRequest}
 }
 

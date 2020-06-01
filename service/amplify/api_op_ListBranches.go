@@ -147,6 +147,7 @@ func (c *Client) ListBranchesRequest(input *ListBranchesInput) ListBranchesReque
 	}
 
 	req := c.newRequest(op, input, &ListBranchesOutput{})
+
 	return ListBranchesRequest{Request: req, Input: input, Copy: c.ListBranchesRequest}
 }
 

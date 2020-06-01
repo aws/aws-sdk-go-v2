@@ -109,6 +109,7 @@ func (c *Client) DeleteResourceRequest(input *DeleteResourceInput) DeleteResourc
 	req := c.newRequest(op, input, &DeleteResourceOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteResourceRequest{Request: req, Input: input, Copy: c.DeleteResourceRequest}
 }
 

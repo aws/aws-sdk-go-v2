@@ -34,7 +34,7 @@ type CreateActivationInput struct {
 	// The Amazon Identity and Access Management (IAM) role that you want to assign
 	// to the managed instance. This IAM role must provide AssumeRole permissions
 	// for the Systems Manager service principal ssm.amazonaws.com. For more information,
-	// see Create an IAM Service Role for a Hybrid Environment (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html)
+	// see Create an IAM service role for a hybrid environment (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html)
 	// in the AWS Systems Manager User Guide.
 	//
 	// IamRole is a required field
@@ -126,12 +126,11 @@ const opCreateActivation = "CreateActivation"
 // Systems Manager capabilities. You use the activation code and ID when installing
 // SSM Agent on machines in your hybrid environment. For more information about
 // requirements for managing on-premises instances and VMs using Systems Manager,
-// see Setting Up AWS Systems Manager for Hybrid Environments (http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html)
+// see Setting up AWS Systems Manager for hybrid environments (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html)
 // in the AWS Systems Manager User Guide.
 //
-// On-premises servers or VMs that are registered with Systems Manager and Amazon
-// EC2 instances that you manage with Systems Manager are all called managed
-// instances.
+// On-premises servers or VMs that are registered with Systems Manager and EC2
+// instances that you manage with Systems Manager are all called managed instances.
 //
 //    // Example sending a request using CreateActivationRequest.
 //    req := client.CreateActivationRequest(params)
@@ -153,6 +152,7 @@ func (c *Client) CreateActivationRequest(input *CreateActivationInput) CreateAct
 	}
 
 	req := c.newRequest(op, input, &CreateActivationOutput{})
+
 	return CreateActivationRequest{Request: req, Input: input, Copy: c.CreateActivationRequest}
 }
 

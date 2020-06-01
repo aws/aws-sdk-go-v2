@@ -83,6 +83,7 @@ func (c *Client) RebootInstanceRequest(input *RebootInstanceInput) RebootInstanc
 	req := c.newRequest(op, input, &RebootInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RebootInstanceRequest{Request: req, Input: input, Copy: c.RebootInstanceRequest}
 }
 

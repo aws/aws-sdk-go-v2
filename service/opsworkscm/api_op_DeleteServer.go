@@ -86,6 +86,7 @@ func (c *Client) DeleteServerRequest(input *DeleteServerInput) DeleteServerReque
 	}
 
 	req := c.newRequest(op, input, &DeleteServerOutput{})
+
 	return DeleteServerRequest{Request: req, Input: input, Copy: c.DeleteServerRequest}
 }
 

@@ -136,6 +136,7 @@ func (c *Client) DeleteBucketWebsiteRequest(input *DeleteBucketWebsiteInput) Del
 	req := c.newRequest(op, input, &DeleteBucketWebsiteOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteBucketWebsiteRequest{Request: req, Input: input, Copy: c.DeleteBucketWebsiteRequest}
 }
 

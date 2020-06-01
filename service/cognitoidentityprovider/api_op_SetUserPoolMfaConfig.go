@@ -113,6 +113,7 @@ func (c *Client) SetUserPoolMfaConfigRequest(input *SetUserPoolMfaConfigInput) S
 	}
 
 	req := c.newRequest(op, input, &SetUserPoolMfaConfigOutput{})
+
 	return SetUserPoolMfaConfigRequest{Request: req, Input: input, Copy: c.SetUserPoolMfaConfigRequest}
 }
 

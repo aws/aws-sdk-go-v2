@@ -105,6 +105,7 @@ func (c *Client) ListGroupCertificateAuthoritiesRequest(input *ListGroupCertific
 	}
 
 	req := c.newRequest(op, input, &ListGroupCertificateAuthoritiesOutput{})
+
 	return ListGroupCertificateAuthoritiesRequest{Request: req, Input: input, Copy: c.ListGroupCertificateAuthoritiesRequest}
 }
 

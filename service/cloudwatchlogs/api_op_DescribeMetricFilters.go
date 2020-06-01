@@ -115,6 +115,7 @@ func (c *Client) DescribeMetricFiltersRequest(input *DescribeMetricFiltersInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeMetricFiltersOutput{})
+
 	return DescribeMetricFiltersRequest{Request: req, Input: input, Copy: c.DescribeMetricFiltersRequest}
 }
 

@@ -120,6 +120,7 @@ func (c *Client) GetExportJobsRequest(input *GetExportJobsInput) GetExportJobsRe
 	}
 
 	req := c.newRequest(op, input, &GetExportJobsOutput{})
+
 	return GetExportJobsRequest{Request: req, Input: input, Copy: c.GetExportJobsRequest}
 }
 

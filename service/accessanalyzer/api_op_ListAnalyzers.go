@@ -128,6 +128,7 @@ func (c *Client) ListAnalyzersRequest(input *ListAnalyzersInput) ListAnalyzersRe
 	}
 
 	req := c.newRequest(op, input, &ListAnalyzersOutput{})
+
 	return ListAnalyzersRequest{Request: req, Input: input, Copy: c.ListAnalyzersRequest}
 }
 

@@ -19,6 +19,14 @@ type DescribeLocalGatewayRouteTablesInput struct {
 	DryRun *bool `type:"boolean"`
 
 	// One or more filters.
+	//
+	//    * local-gateway-id - The ID of a local gateway.
+	//
+	//    * local-gateway-route-table-id - The ID of a local gateway route table.
+	//
+	//    * outpost-arn - The Amazon Resource Name (ARN) of the Outpost.
+	//
+	//    * state - The state of the local gateway route table.
 	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The IDs of the local gateway route tables.
@@ -100,6 +108,7 @@ func (c *Client) DescribeLocalGatewayRouteTablesRequest(input *DescribeLocalGate
 	}
 
 	req := c.newRequest(op, input, &DescribeLocalGatewayRouteTablesOutput{})
+
 	return DescribeLocalGatewayRouteTablesRequest{Request: req, Input: input, Copy: c.DescribeLocalGatewayRouteTablesRequest}
 }
 

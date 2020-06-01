@@ -83,6 +83,7 @@ func (c *Client) DeleteEnvironmentMembershipRequest(input *DeleteEnvironmentMemb
 	}
 
 	req := c.newRequest(op, input, &DeleteEnvironmentMembershipOutput{})
+
 	return DeleteEnvironmentMembershipRequest{Request: req, Input: input, Copy: c.DeleteEnvironmentMembershipRequest}
 }
 

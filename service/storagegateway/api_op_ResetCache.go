@@ -92,6 +92,7 @@ func (c *Client) ResetCacheRequest(input *ResetCacheInput) ResetCacheRequest {
 	}
 
 	req := c.newRequest(op, input, &ResetCacheOutput{})
+
 	return ResetCacheRequest{Request: req, Input: input, Copy: c.ResetCacheRequest}
 }
 

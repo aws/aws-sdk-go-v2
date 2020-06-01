@@ -140,6 +140,7 @@ func (c *Client) UpdateProvisionedProductPropertiesRequest(input *UpdateProvisio
 	}
 
 	req := c.newRequest(op, input, &UpdateProvisionedProductPropertiesOutput{})
+
 	return UpdateProvisionedProductPropertiesRequest{Request: req, Input: input, Copy: c.UpdateProvisionedProductPropertiesRequest}
 }
 

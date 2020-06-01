@@ -161,6 +161,7 @@ func (c *Client) UpdateSMBFileShareRequest(input *UpdateSMBFileShareInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateSMBFileShareOutput{})
+
 	return UpdateSMBFileShareRequest{Request: req, Input: input, Copy: c.UpdateSMBFileShareRequest}
 }
 

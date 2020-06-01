@@ -105,6 +105,7 @@ func (c *Client) ListPrincipalsForPortfolioRequest(input *ListPrincipalsForPortf
 	}
 
 	req := c.newRequest(op, input, &ListPrincipalsForPortfolioOutput{})
+
 	return ListPrincipalsForPortfolioRequest{Request: req, Input: input, Copy: c.ListPrincipalsForPortfolioRequest}
 }
 

@@ -193,6 +193,7 @@ func (c *Client) GetResourceSharesRequest(input *GetResourceSharesInput) GetReso
 	}
 
 	req := c.newRequest(op, input, &GetResourceSharesOutput{})
+
 	return GetResourceSharesRequest{Request: req, Input: input, Copy: c.GetResourceSharesRequest}
 }
 

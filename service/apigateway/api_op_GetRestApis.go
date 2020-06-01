@@ -118,6 +118,7 @@ func (c *Client) GetRestApisRequest(input *GetRestApisInput) GetRestApisRequest 
 	}
 
 	req := c.newRequest(op, input, &GetRestApisOutput{})
+
 	return GetRestApisRequest{Request: req, Input: input, Copy: c.GetRestApisRequest}
 }
 

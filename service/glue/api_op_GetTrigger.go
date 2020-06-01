@@ -79,6 +79,7 @@ func (c *Client) GetTriggerRequest(input *GetTriggerInput) GetTriggerRequest {
 	}
 
 	req := c.newRequest(op, input, &GetTriggerOutput{})
+
 	return GetTriggerRequest{Request: req, Input: input, Copy: c.GetTriggerRequest}
 }
 

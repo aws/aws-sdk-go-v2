@@ -161,6 +161,7 @@ func (c *Client) GetEvaluationRequest(input *GetEvaluationInput) GetEvaluationRe
 	}
 
 	req := c.newRequest(op, input, &GetEvaluationOutput{})
+
 	return GetEvaluationRequest{Request: req, Input: input, Copy: c.GetEvaluationRequest}
 }
 

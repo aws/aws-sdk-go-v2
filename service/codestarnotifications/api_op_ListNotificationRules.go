@@ -159,6 +159,7 @@ func (c *Client) ListNotificationRulesRequest(input *ListNotificationRulesInput)
 	}
 
 	req := c.newRequest(op, input, &ListNotificationRulesOutput{})
+
 	return ListNotificationRulesRequest{Request: req, Input: input, Copy: c.ListNotificationRulesRequest}
 }
 

@@ -170,6 +170,7 @@ func (c *Client) GetSampledRequestsRequest(input *GetSampledRequestsInput) GetSa
 	}
 
 	req := c.newRequest(op, input, &GetSampledRequestsOutput{})
+
 	return GetSampledRequestsRequest{Request: req, Input: input, Copy: c.GetSampledRequestsRequest}
 }
 

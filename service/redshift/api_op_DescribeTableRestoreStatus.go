@@ -83,6 +83,7 @@ func (c *Client) DescribeTableRestoreStatusRequest(input *DescribeTableRestoreSt
 	}
 
 	req := c.newRequest(op, input, &DescribeTableRestoreStatusOutput{})
+
 	return DescribeTableRestoreStatusRequest{Request: req, Input: input, Copy: c.DescribeTableRestoreStatusRequest}
 }
 

@@ -135,6 +135,7 @@ func (c *Client) ConnectDirectoryRequest(input *ConnectDirectoryInput) ConnectDi
 	}
 
 	req := c.newRequest(op, input, &ConnectDirectoryOutput{})
+
 	return ConnectDirectoryRequest{Request: req, Input: input, Copy: c.ConnectDirectoryRequest}
 }
 

@@ -90,6 +90,7 @@ func (c *Client) StopDeploymentRequest(input *StopDeploymentInput) StopDeploymen
 	}
 
 	req := c.newRequest(op, input, &StopDeploymentOutput{})
+
 	return StopDeploymentRequest{Request: req, Input: input, Copy: c.StopDeploymentRequest}
 }
 

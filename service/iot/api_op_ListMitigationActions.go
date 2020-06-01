@@ -130,6 +130,7 @@ func (c *Client) ListMitigationActionsRequest(input *ListMitigationActionsInput)
 	}
 
 	req := c.newRequest(op, input, &ListMitigationActionsOutput{})
+
 	return ListMitigationActionsRequest{Request: req, Input: input, Copy: c.ListMitigationActionsRequest}
 }
 

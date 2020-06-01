@@ -110,6 +110,7 @@ func (c *Client) DescribeOrderableClusterOptionsRequest(input *DescribeOrderable
 	}
 
 	req := c.newRequest(op, input, &DescribeOrderableClusterOptionsOutput{})
+
 	return DescribeOrderableClusterOptionsRequest{Request: req, Input: input, Copy: c.DescribeOrderableClusterOptionsRequest}
 }
 

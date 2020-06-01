@@ -128,6 +128,7 @@ func (c *Client) DeleteVaultNotificationsRequest(input *DeleteVaultNotifications
 	req := c.newRequest(op, input, &DeleteVaultNotificationsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteVaultNotificationsRequest{Request: req, Input: input, Copy: c.DeleteVaultNotificationsRequest}
 }
 

@@ -95,6 +95,7 @@ func (c *Client) DescribeComplianceByConfigRuleRequest(input *DescribeCompliance
 	}
 
 	req := c.newRequest(op, input, &DescribeComplianceByConfigRuleOutput{})
+
 	return DescribeComplianceByConfigRuleRequest{Request: req, Input: input, Copy: c.DescribeComplianceByConfigRuleRequest}
 }
 

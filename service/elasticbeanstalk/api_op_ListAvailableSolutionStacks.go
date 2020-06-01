@@ -62,6 +62,7 @@ func (c *Client) ListAvailableSolutionStacksRequest(input *ListAvailableSolution
 	}
 
 	req := c.newRequest(op, input, &ListAvailableSolutionStacksOutput{})
+
 	return ListAvailableSolutionStacksRequest{Request: req, Input: input, Copy: c.ListAvailableSolutionStacksRequest}
 }
 

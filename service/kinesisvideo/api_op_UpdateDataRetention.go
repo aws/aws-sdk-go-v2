@@ -174,6 +174,7 @@ func (c *Client) UpdateDataRetentionRequest(input *UpdateDataRetentionInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateDataRetentionOutput{})
+
 	return UpdateDataRetentionRequest{Request: req, Input: input, Copy: c.UpdateDataRetentionRequest}
 }
 

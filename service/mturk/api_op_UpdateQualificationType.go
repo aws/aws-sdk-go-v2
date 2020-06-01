@@ -154,6 +154,7 @@ func (c *Client) UpdateQualificationTypeRequest(input *UpdateQualificationTypeIn
 	}
 
 	req := c.newRequest(op, input, &UpdateQualificationTypeOutput{})
+
 	return UpdateQualificationTypeRequest{Request: req, Input: input, Copy: c.UpdateQualificationTypeRequest}
 }
 

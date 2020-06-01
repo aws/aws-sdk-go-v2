@@ -1629,7 +1629,7 @@ type ListenerTlsCertificate struct {
 
 	// An object that represents a local file certificate. The certificate must
 	// meet specific requirements and you must have proxy authorization enabled.
-	// For more information, see Transport Layer Security (TLS) (https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites).
+	// For more information, see Transport Layer Security (TLS) (https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites).
 	File *ListenerTlsFileCertificate `locationName:"file" type:"structure"`
 }
 
@@ -1677,7 +1677,7 @@ func (s ListenerTlsCertificate) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object that represents a local file certificate. The certificate must
 // meet specific requirements and you must have proxy authorization enabled.
-// For more information, see Transport Layer Security (TLS) (https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites).
+// For more information, see Transport Layer Security (TLS) (https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites).
 type ListenerTlsFileCertificate struct {
 	_ struct{} `type:"structure"`
 
@@ -1891,6 +1891,12 @@ type MeshRef struct {
 	// Arn is a required field
 	Arn *string `locationName:"arn" type:"string" required:"true"`
 
+	// CreatedAt is a required field
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" required:"true"`
+
+	// LastUpdatedAt is a required field
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" required:"true"`
+
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
@@ -1899,6 +1905,9 @@ type MeshRef struct {
 
 	// ResourceOwner is a required field
 	ResourceOwner *string `locationName:"resourceOwner" min:"12" type:"string" required:"true"`
+
+	// Version is a required field
+	Version *int64 `locationName:"version" type:"long" required:"true"`
 }
 
 // String returns the string representation
@@ -1913,6 +1922,20 @@ func (s MeshRef) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.LastUpdatedAt != nil {
+		v := *s.LastUpdatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.MeshName != nil {
 		v := *s.MeshName
@@ -1931,6 +1954,12 @@ func (s MeshRef) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "resourceOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -2318,6 +2347,12 @@ type RouteRef struct {
 	// Arn is a required field
 	Arn *string `locationName:"arn" type:"string" required:"true"`
 
+	// CreatedAt is a required field
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" required:"true"`
+
+	// LastUpdatedAt is a required field
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" required:"true"`
+
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
@@ -2329,6 +2364,9 @@ type RouteRef struct {
 
 	// RouteName is a required field
 	RouteName *string `locationName:"routeName" min:"1" type:"string" required:"true"`
+
+	// Version is a required field
+	Version *int64 `locationName:"version" type:"long" required:"true"`
 
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
@@ -2346,6 +2384,20 @@ func (s RouteRef) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.LastUpdatedAt != nil {
+		v := *s.LastUpdatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.MeshName != nil {
 		v := *s.MeshName
@@ -2370,6 +2422,12 @@ func (s RouteRef) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "routeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.Int64Value(v), metadata)
 	}
 	if s.VirtualRouterName != nil {
 		v := *s.VirtualRouterName
@@ -2965,6 +3023,12 @@ type VirtualNodeRef struct {
 	// Arn is a required field
 	Arn *string `locationName:"arn" type:"string" required:"true"`
 
+	// CreatedAt is a required field
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" required:"true"`
+
+	// LastUpdatedAt is a required field
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" required:"true"`
+
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
@@ -2973,6 +3037,9 @@ type VirtualNodeRef struct {
 
 	// ResourceOwner is a required field
 	ResourceOwner *string `locationName:"resourceOwner" min:"12" type:"string" required:"true"`
+
+	// Version is a required field
+	Version *int64 `locationName:"version" type:"long" required:"true"`
 
 	// VirtualNodeName is a required field
 	VirtualNodeName *string `locationName:"virtualNodeName" min:"1" type:"string" required:"true"`
@@ -2991,6 +3058,20 @@ func (s VirtualNodeRef) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.LastUpdatedAt != nil {
+		v := *s.LastUpdatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
 	if s.MeshName != nil {
 		v := *s.MeshName
 
@@ -3008,6 +3089,12 @@ func (s VirtualNodeRef) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "resourceOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.Int64Value(v), metadata)
 	}
 	if s.VirtualNodeName != nil {
 		v := *s.VirtualNodeName
@@ -3311,6 +3398,12 @@ type VirtualRouterRef struct {
 	// Arn is a required field
 	Arn *string `locationName:"arn" type:"string" required:"true"`
 
+	// CreatedAt is a required field
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" required:"true"`
+
+	// LastUpdatedAt is a required field
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" required:"true"`
+
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
@@ -3319,6 +3412,9 @@ type VirtualRouterRef struct {
 
 	// ResourceOwner is a required field
 	ResourceOwner *string `locationName:"resourceOwner" min:"12" type:"string" required:"true"`
+
+	// Version is a required field
+	Version *int64 `locationName:"version" type:"long" required:"true"`
 
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
@@ -3337,6 +3433,20 @@ func (s VirtualRouterRef) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.LastUpdatedAt != nil {
+		v := *s.LastUpdatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
 	if s.MeshName != nil {
 		v := *s.MeshName
 
@@ -3354,6 +3464,12 @@ func (s VirtualRouterRef) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "resourceOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.Int64Value(v), metadata)
 	}
 	if s.VirtualRouterName != nil {
 		v := *s.VirtualRouterName
@@ -3656,6 +3772,12 @@ type VirtualServiceRef struct {
 	// Arn is a required field
 	Arn *string `locationName:"arn" type:"string" required:"true"`
 
+	// CreatedAt is a required field
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" required:"true"`
+
+	// LastUpdatedAt is a required field
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" required:"true"`
+
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
@@ -3664,6 +3786,9 @@ type VirtualServiceRef struct {
 
 	// ResourceOwner is a required field
 	ResourceOwner *string `locationName:"resourceOwner" min:"12" type:"string" required:"true"`
+
+	// Version is a required field
+	Version *int64 `locationName:"version" type:"long" required:"true"`
 
 	// VirtualServiceName is a required field
 	VirtualServiceName *string `locationName:"virtualServiceName" type:"string" required:"true"`
@@ -3682,6 +3807,20 @@ func (s VirtualServiceRef) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.LastUpdatedAt != nil {
+		v := *s.LastUpdatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
 	if s.MeshName != nil {
 		v := *s.MeshName
 
@@ -3699,6 +3838,12 @@ func (s VirtualServiceRef) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "resourceOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.Int64Value(v), metadata)
 	}
 	if s.VirtualServiceName != nil {
 		v := *s.VirtualServiceName

@@ -138,6 +138,7 @@ func (c *Client) SubscribeRequest(input *SubscribeInput) SubscribeRequest {
 	}
 
 	req := c.newRequest(op, input, &SubscribeOutput{})
+
 	return SubscribeRequest{Request: req, Input: input, Copy: c.SubscribeRequest}
 }
 

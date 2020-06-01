@@ -130,6 +130,7 @@ func (c *Client) GetApiMappingsRequest(input *GetApiMappingsInput) GetApiMapping
 	}
 
 	req := c.newRequest(op, input, &GetApiMappingsOutput{})
+
 	return GetApiMappingsRequest{Request: req, Input: input, Copy: c.GetApiMappingsRequest}
 }
 

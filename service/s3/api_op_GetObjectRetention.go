@@ -172,6 +172,7 @@ func (c *Client) GetObjectRetentionRequest(input *GetObjectRetentionInput) GetOb
 	}
 
 	req := c.newRequest(op, input, &GetObjectRetentionOutput{})
+
 	return GetObjectRetentionRequest{Request: req, Input: input, Copy: c.GetObjectRetentionRequest}
 }
 

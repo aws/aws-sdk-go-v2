@@ -76,6 +76,7 @@ func (c *Client) GetRelationalDatabaseSnapshotRequest(input *GetRelationalDataba
 	}
 
 	req := c.newRequest(op, input, &GetRelationalDatabaseSnapshotOutput{})
+
 	return GetRelationalDatabaseSnapshotRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseSnapshotRequest}
 }
 

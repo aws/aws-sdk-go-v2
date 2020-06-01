@@ -114,6 +114,7 @@ func (c *Client) DescribeDBParameterGroupsRequest(input *DescribeDBParameterGrou
 	}
 
 	req := c.newRequest(op, input, &DescribeDBParameterGroupsOutput{})
+
 	return DescribeDBParameterGroupsRequest{Request: req, Input: input, Copy: c.DescribeDBParameterGroupsRequest}
 }
 

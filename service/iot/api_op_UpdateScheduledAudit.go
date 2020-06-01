@@ -155,6 +155,7 @@ func (c *Client) UpdateScheduledAuditRequest(input *UpdateScheduledAuditInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateScheduledAuditOutput{})
+
 	return UpdateScheduledAuditRequest{Request: req, Input: input, Copy: c.UpdateScheduledAuditRequest}
 }
 

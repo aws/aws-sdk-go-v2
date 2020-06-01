@@ -96,6 +96,7 @@ func (c *Client) PutDestinationPolicyRequest(input *PutDestinationPolicyInput) P
 	req := c.newRequest(op, input, &PutDestinationPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutDestinationPolicyRequest{Request: req, Input: input, Copy: c.PutDestinationPolicyRequest}
 }
 

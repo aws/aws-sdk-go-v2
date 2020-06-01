@@ -88,6 +88,7 @@ func (c *Client) CreateReceiptFilterRequest(input *CreateReceiptFilterInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateReceiptFilterOutput{})
+
 	return CreateReceiptFilterRequest{Request: req, Input: input, Copy: c.CreateReceiptFilterRequest}
 }
 

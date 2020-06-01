@@ -126,6 +126,7 @@ func (c *Client) ListElasticsearchVersionsRequest(input *ListElasticsearchVersio
 	}
 
 	req := c.newRequest(op, input, &ListElasticsearchVersionsOutput{})
+
 	return ListElasticsearchVersionsRequest{Request: req, Input: input, Copy: c.ListElasticsearchVersionsRequest}
 }
 

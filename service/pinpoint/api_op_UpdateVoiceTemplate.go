@@ -134,6 +134,7 @@ func (c *Client) UpdateVoiceTemplateRequest(input *UpdateVoiceTemplateInput) Upd
 	}
 
 	req := c.newRequest(op, input, &UpdateVoiceTemplateOutput{})
+
 	return UpdateVoiceTemplateRequest{Request: req, Input: input, Copy: c.UpdateVoiceTemplateRequest}
 }
 

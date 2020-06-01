@@ -95,6 +95,7 @@ func (c *Client) ListNetworkProfilesRequest(input *ListNetworkProfilesInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListNetworkProfilesOutput{})
+
 	return ListNetworkProfilesRequest{Request: req, Input: input, Copy: c.ListNetworkProfilesRequest}
 }
 

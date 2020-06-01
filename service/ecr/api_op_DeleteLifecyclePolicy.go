@@ -93,6 +93,7 @@ func (c *Client) DeleteLifecyclePolicyRequest(input *DeleteLifecyclePolicyInput)
 	}
 
 	req := c.newRequest(op, input, &DeleteLifecyclePolicyOutput{})
+
 	return DeleteLifecyclePolicyRequest{Request: req, Input: input, Copy: c.DeleteLifecyclePolicyRequest}
 }
 

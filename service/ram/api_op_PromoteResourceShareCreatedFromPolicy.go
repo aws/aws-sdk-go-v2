@@ -110,6 +110,7 @@ func (c *Client) PromoteResourceShareCreatedFromPolicyRequest(input *PromoteReso
 	}
 
 	req := c.newRequest(op, input, &PromoteResourceShareCreatedFromPolicyOutput{})
+
 	return PromoteResourceShareCreatedFromPolicyRequest{Request: req, Input: input, Copy: c.PromoteResourceShareCreatedFromPolicyRequest}
 }
 

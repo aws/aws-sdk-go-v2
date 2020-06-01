@@ -379,6 +379,7 @@ func (c *Client) CreateRouteRequest(input *CreateRouteInput) CreateRouteRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateRouteOutput{})
+
 	return CreateRouteRequest{Request: req, Input: input, Copy: c.CreateRouteRequest}
 }
 

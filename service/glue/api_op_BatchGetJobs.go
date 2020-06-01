@@ -83,6 +83,7 @@ func (c *Client) BatchGetJobsRequest(input *BatchGetJobsInput) BatchGetJobsReque
 	}
 
 	req := c.newRequest(op, input, &BatchGetJobsOutput{})
+
 	return BatchGetJobsRequest{Request: req, Input: input, Copy: c.BatchGetJobsRequest}
 }
 

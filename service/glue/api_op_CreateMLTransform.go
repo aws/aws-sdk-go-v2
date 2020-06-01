@@ -231,6 +231,7 @@ func (c *Client) CreateMLTransformRequest(input *CreateMLTransformInput) CreateM
 	}
 
 	req := c.newRequest(op, input, &CreateMLTransformOutput{})
+
 	return CreateMLTransformRequest{Request: req, Input: input, Copy: c.CreateMLTransformRequest}
 }
 

@@ -142,6 +142,7 @@ func (c *Client) CreateRoomMembershipRequest(input *CreateRoomMembershipInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateRoomMembershipOutput{})
+
 	return CreateRoomMembershipRequest{Request: req, Input: input, Copy: c.CreateRoomMembershipRequest}
 }
 

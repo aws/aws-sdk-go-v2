@@ -94,6 +94,7 @@ func (c *Client) FlushApiCacheRequest(input *FlushApiCacheInput) FlushApiCacheRe
 	}
 
 	req := c.newRequest(op, input, &FlushApiCacheOutput{})
+
 	return FlushApiCacheRequest{Request: req, Input: input, Copy: c.FlushApiCacheRequest}
 }
 

@@ -184,6 +184,7 @@ func (c *Client) CreatePipelineRequest(input *CreatePipelineInput) CreatePipelin
 	}
 
 	req := c.newRequest(op, input, &CreatePipelineOutput{})
+
 	return CreatePipelineRequest{Request: req, Input: input, Copy: c.CreatePipelineRequest}
 }
 

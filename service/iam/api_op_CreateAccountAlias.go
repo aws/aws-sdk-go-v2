@@ -87,6 +87,7 @@ func (c *Client) CreateAccountAliasRequest(input *CreateAccountAliasInput) Creat
 	req := c.newRequest(op, input, &CreateAccountAliasOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CreateAccountAliasRequest{Request: req, Input: input, Copy: c.CreateAccountAliasRequest}
 }
 

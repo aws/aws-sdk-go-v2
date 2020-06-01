@@ -133,6 +133,7 @@ func (c *Client) ListInvalidationsRequest(input *ListInvalidationsInput) ListInv
 	}
 
 	req := c.newRequest(op, input, &ListInvalidationsOutput{})
+
 	return ListInvalidationsRequest{Request: req, Input: input, Copy: c.ListInvalidationsRequest}
 }
 

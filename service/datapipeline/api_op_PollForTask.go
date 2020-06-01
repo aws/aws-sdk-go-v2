@@ -112,6 +112,7 @@ func (c *Client) PollForTaskRequest(input *PollForTaskInput) PollForTaskRequest 
 	}
 
 	req := c.newRequest(op, input, &PollForTaskOutput{})
+
 	return PollForTaskRequest{Request: req, Input: input, Copy: c.PollForTaskRequest}
 }
 

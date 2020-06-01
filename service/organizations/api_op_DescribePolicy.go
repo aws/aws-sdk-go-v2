@@ -84,6 +84,7 @@ func (c *Client) DescribePolicyRequest(input *DescribePolicyInput) DescribePolic
 	}
 
 	req := c.newRequest(op, input, &DescribePolicyOutput{})
+
 	return DescribePolicyRequest{Request: req, Input: input, Copy: c.DescribePolicyRequest}
 }
 

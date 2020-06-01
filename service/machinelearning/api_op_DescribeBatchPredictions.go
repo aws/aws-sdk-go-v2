@@ -160,6 +160,7 @@ func (c *Client) DescribeBatchPredictionsRequest(input *DescribeBatchPredictions
 	}
 
 	req := c.newRequest(op, input, &DescribeBatchPredictionsOutput{})
+
 	return DescribeBatchPredictionsRequest{Request: req, Input: input, Copy: c.DescribeBatchPredictionsRequest}
 }
 

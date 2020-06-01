@@ -135,6 +135,7 @@ func (c *Client) GetRateBasedStatementManagedKeysRequest(input *GetRateBasedStat
 	}
 
 	req := c.newRequest(op, input, &GetRateBasedStatementManagedKeysOutput{})
+
 	return GetRateBasedStatementManagedKeysRequest{Request: req, Input: input, Copy: c.GetRateBasedStatementManagedKeysRequest}
 }
 

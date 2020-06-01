@@ -226,6 +226,7 @@ func (c *Client) CreateEnvironmentRequest(input *CreateEnvironmentInput) CreateE
 	}
 
 	req := c.newRequest(op, input, &CreateEnvironmentOutput{})
+
 	return CreateEnvironmentRequest{Request: req, Input: input, Copy: c.CreateEnvironmentRequest}
 }
 

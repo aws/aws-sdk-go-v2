@@ -99,6 +99,7 @@ func (c *Client) DescribeApplicationVersionsRequest(input *DescribeApplicationVe
 	}
 
 	req := c.newRequest(op, input, &DescribeApplicationVersionsOutput{})
+
 	return DescribeApplicationVersionsRequest{Request: req, Input: input, Copy: c.DescribeApplicationVersionsRequest}
 }
 

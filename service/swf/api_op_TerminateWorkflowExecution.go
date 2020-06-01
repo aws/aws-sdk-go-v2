@@ -154,6 +154,7 @@ func (c *Client) TerminateWorkflowExecutionRequest(input *TerminateWorkflowExecu
 	req := c.newRequest(op, input, &TerminateWorkflowExecutionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return TerminateWorkflowExecutionRequest{Request: req, Input: input, Copy: c.TerminateWorkflowExecutionRequest}
 }
 

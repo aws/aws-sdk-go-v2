@@ -95,6 +95,7 @@ func (c *Client) StopHumanLoopRequest(input *StopHumanLoopInput) StopHumanLoopRe
 	}
 
 	req := c.newRequest(op, input, &StopHumanLoopOutput{})
+
 	return StopHumanLoopRequest{Request: req, Input: input, Copy: c.StopHumanLoopRequest}
 }
 

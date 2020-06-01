@@ -106,6 +106,7 @@ func (c *Client) SetUICustomizationRequest(input *SetUICustomizationInput) SetUI
 	}
 
 	req := c.newRequest(op, input, &SetUICustomizationOutput{})
+
 	return SetUICustomizationRequest{Request: req, Input: input, Copy: c.SetUICustomizationRequest}
 }
 

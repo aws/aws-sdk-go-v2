@@ -524,6 +524,7 @@ func (c *Client) PutMethodRequest(input *PutMethodInput) PutMethodRequest {
 	}
 
 	req := c.newRequest(op, input, &PutMethodOutput{})
+
 	return PutMethodRequest{Request: req, Input: input, Copy: c.PutMethodRequest}
 }
 

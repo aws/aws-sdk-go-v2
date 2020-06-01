@@ -94,6 +94,7 @@ func (c *Client) StopSentimentDetectionJobRequest(input *StopSentimentDetectionJ
 	}
 
 	req := c.newRequest(op, input, &StopSentimentDetectionJobOutput{})
+
 	return StopSentimentDetectionJobRequest{Request: req, Input: input, Copy: c.StopSentimentDetectionJobRequest}
 }
 

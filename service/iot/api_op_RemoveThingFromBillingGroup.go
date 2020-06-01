@@ -117,6 +117,7 @@ func (c *Client) RemoveThingFromBillingGroupRequest(input *RemoveThingFromBillin
 	}
 
 	req := c.newRequest(op, input, &RemoveThingFromBillingGroupOutput{})
+
 	return RemoveThingFromBillingGroupRequest{Request: req, Input: input, Copy: c.RemoveThingFromBillingGroupRequest}
 }
 

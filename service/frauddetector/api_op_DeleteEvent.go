@@ -73,6 +73,7 @@ func (c *Client) DeleteEventRequest(input *DeleteEventInput) DeleteEventRequest 
 	}
 
 	req := c.newRequest(op, input, &DeleteEventOutput{})
+
 	return DeleteEventRequest{Request: req, Input: input, Copy: c.DeleteEventRequest}
 }
 

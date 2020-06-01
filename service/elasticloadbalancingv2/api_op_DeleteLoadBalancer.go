@@ -82,6 +82,7 @@ func (c *Client) DeleteLoadBalancerRequest(input *DeleteLoadBalancerInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteLoadBalancerOutput{})
+
 	return DeleteLoadBalancerRequest{Request: req, Input: input, Copy: c.DeleteLoadBalancerRequest}
 }
 

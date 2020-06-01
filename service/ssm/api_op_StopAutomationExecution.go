@@ -80,6 +80,7 @@ func (c *Client) StopAutomationExecutionRequest(input *StopAutomationExecutionIn
 	}
 
 	req := c.newRequest(op, input, &StopAutomationExecutionOutput{})
+
 	return StopAutomationExecutionRequest{Request: req, Input: input, Copy: c.StopAutomationExecutionRequest}
 }
 

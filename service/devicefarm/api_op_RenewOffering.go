@@ -82,6 +82,7 @@ func (c *Client) RenewOfferingRequest(input *RenewOfferingInput) RenewOfferingRe
 	}
 
 	req := c.newRequest(op, input, &RenewOfferingOutput{})
+
 	return RenewOfferingRequest{Request: req, Input: input, Copy: c.RenewOfferingRequest}
 }
 

@@ -80,6 +80,7 @@ func (c *Client) DeleteRemoteAccessSessionRequest(input *DeleteRemoteAccessSessi
 	}
 
 	req := c.newRequest(op, input, &DeleteRemoteAccessSessionOutput{})
+
 	return DeleteRemoteAccessSessionRequest{Request: req, Input: input, Copy: c.DeleteRemoteAccessSessionRequest}
 }
 

@@ -126,6 +126,7 @@ func (c *Client) UpdateContinuousBackupsRequest(input *UpdateContinuousBackupsIn
 			Fn:   de.Handler,
 		})
 	}
+
 	return UpdateContinuousBackupsRequest{Request: req, Input: input, Copy: c.UpdateContinuousBackupsRequest}
 }
 

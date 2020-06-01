@@ -121,6 +121,7 @@ func (c *Client) DescribeFaqRequest(input *DescribeFaqInput) DescribeFaqRequest 
 	}
 
 	req := c.newRequest(op, input, &DescribeFaqOutput{})
+
 	return DescribeFaqRequest{Request: req, Input: input, Copy: c.DescribeFaqRequest}
 }
 

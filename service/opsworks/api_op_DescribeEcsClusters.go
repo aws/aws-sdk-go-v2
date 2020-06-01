@@ -101,6 +101,7 @@ func (c *Client) DescribeEcsClustersRequest(input *DescribeEcsClustersInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeEcsClustersOutput{})
+
 	return DescribeEcsClustersRequest{Request: req, Input: input, Copy: c.DescribeEcsClustersRequest}
 }
 

@@ -14,7 +14,7 @@ import (
 type DisassociateMemberAccountInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the member account that you want to remove from Amazon Macie.
+	// The ID of the member account that you want to remove from Amazon Macie Classic.
 	//
 	// MemberAccountId is a required field
 	MemberAccountId *string `locationName:"memberAccountId" type:"string" required:"true"`
@@ -53,7 +53,7 @@ const opDisassociateMemberAccount = "DisassociateMemberAccount"
 // DisassociateMemberAccountRequest returns a request value for making API operation for
 // Amazon Macie.
 //
-// Removes the specified member account from Amazon Macie.
+// Removes the specified member account from Amazon Macie Classic.
 //
 //    // Example sending a request using DisassociateMemberAccountRequest.
 //    req := client.DisassociateMemberAccountRequest(params)
@@ -77,6 +77,7 @@ func (c *Client) DisassociateMemberAccountRequest(input *DisassociateMemberAccou
 	req := c.newRequest(op, input, &DisassociateMemberAccountOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DisassociateMemberAccountRequest{Request: req, Input: input, Copy: c.DisassociateMemberAccountRequest}
 }
 

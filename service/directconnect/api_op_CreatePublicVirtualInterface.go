@@ -200,6 +200,7 @@ func (c *Client) CreatePublicVirtualInterfaceRequest(input *CreatePublicVirtualI
 	}
 
 	req := c.newRequest(op, input, &CreatePublicVirtualInterfaceOutput{})
+
 	return CreatePublicVirtualInterfaceRequest{Request: req, Input: input, Copy: c.CreatePublicVirtualInterfaceRequest}
 }
 

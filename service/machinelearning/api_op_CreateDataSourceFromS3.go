@@ -143,6 +143,7 @@ func (c *Client) CreateDataSourceFromS3Request(input *CreateDataSourceFromS3Inpu
 	}
 
 	req := c.newRequest(op, input, &CreateDataSourceFromS3Output{})
+
 	return CreateDataSourceFromS3Request{Request: req, Input: input, Copy: c.CreateDataSourceFromS3Request}
 }
 

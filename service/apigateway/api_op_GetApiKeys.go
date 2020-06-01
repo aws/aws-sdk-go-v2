@@ -162,6 +162,7 @@ func (c *Client) GetApiKeysRequest(input *GetApiKeysInput) GetApiKeysRequest {
 	}
 
 	req := c.newRequest(op, input, &GetApiKeysOutput{})
+
 	return GetApiKeysRequest{Request: req, Input: input, Copy: c.GetApiKeysRequest}
 }
 

@@ -90,6 +90,7 @@ func (c *Client) DescribeReservedNodesRequest(input *DescribeReservedNodesInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeReservedNodesOutput{})
+
 	return DescribeReservedNodesRequest{Request: req, Input: input, Copy: c.DescribeReservedNodesRequest}
 }
 

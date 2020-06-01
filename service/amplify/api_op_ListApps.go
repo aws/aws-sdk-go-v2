@@ -129,6 +129,7 @@ func (c *Client) ListAppsRequest(input *ListAppsInput) ListAppsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListAppsOutput{})
+
 	return ListAppsRequest{Request: req, Input: input, Copy: c.ListAppsRequest}
 }
 

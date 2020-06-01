@@ -97,7 +97,7 @@ const opUpdateTableReplicaAutoScaling = "UpdateTableReplicaAutoScaling"
 //
 // Updates auto scaling settings on your global tables at once.
 //
-// This method only applies to Version 2019.11.21 (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
+// This operation only applies to Version 2019.11.21 (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
 // of global tables.
 //
 //    // Example sending a request using UpdateTableReplicaAutoScalingRequest.
@@ -120,6 +120,7 @@ func (c *Client) UpdateTableReplicaAutoScalingRequest(input *UpdateTableReplicaA
 	}
 
 	req := c.newRequest(op, input, &UpdateTableReplicaAutoScalingOutput{})
+
 	return UpdateTableReplicaAutoScalingRequest{Request: req, Input: input, Copy: c.UpdateTableReplicaAutoScalingRequest}
 }
 

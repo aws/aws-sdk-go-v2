@@ -102,6 +102,7 @@ func (c *Client) DeleteRecommenderConfigurationRequest(input *DeleteRecommenderC
 	}
 
 	req := c.newRequest(op, input, &DeleteRecommenderConfigurationOutput{})
+
 	return DeleteRecommenderConfigurationRequest{Request: req, Input: input, Copy: c.DeleteRecommenderConfigurationRequest}
 }
 

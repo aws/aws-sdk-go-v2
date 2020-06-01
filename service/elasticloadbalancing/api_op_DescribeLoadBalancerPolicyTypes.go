@@ -74,6 +74,7 @@ func (c *Client) DescribeLoadBalancerPolicyTypesRequest(input *DescribeLoadBalan
 	}
 
 	req := c.newRequest(op, input, &DescribeLoadBalancerPolicyTypesOutput{})
+
 	return DescribeLoadBalancerPolicyTypesRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancerPolicyTypesRequest}
 }
 

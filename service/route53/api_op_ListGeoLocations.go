@@ -230,6 +230,7 @@ func (c *Client) ListGeoLocationsRequest(input *ListGeoLocationsInput) ListGeoLo
 	}
 
 	req := c.newRequest(op, input, &ListGeoLocationsOutput{})
+
 	return ListGeoLocationsRequest{Request: req, Input: input, Copy: c.ListGeoLocationsRequest}
 }
 

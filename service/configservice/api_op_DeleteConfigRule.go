@@ -86,6 +86,7 @@ func (c *Client) DeleteConfigRuleRequest(input *DeleteConfigRuleInput) DeleteCon
 	req := c.newRequest(op, input, &DeleteConfigRuleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteConfigRuleRequest{Request: req, Input: input, Copy: c.DeleteConfigRuleRequest}
 }
 

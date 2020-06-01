@@ -108,6 +108,7 @@ func (c *Client) ListFileSharesRequest(input *ListFileSharesInput) ListFileShare
 	}
 
 	req := c.newRequest(op, input, &ListFileSharesOutput{})
+
 	return ListFileSharesRequest{Request: req, Input: input, Copy: c.ListFileSharesRequest}
 }
 

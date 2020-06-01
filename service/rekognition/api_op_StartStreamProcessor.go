@@ -76,6 +76,7 @@ func (c *Client) StartStreamProcessorRequest(input *StartStreamProcessorInput) S
 	}
 
 	req := c.newRequest(op, input, &StartStreamProcessorOutput{})
+
 	return StartStreamProcessorRequest{Request: req, Input: input, Copy: c.StartStreamProcessorRequest}
 }
 

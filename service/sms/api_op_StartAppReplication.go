@@ -57,6 +57,7 @@ func (c *Client) StartAppReplicationRequest(input *StartAppReplicationInput) Sta
 	}
 
 	req := c.newRequest(op, input, &StartAppReplicationOutput{})
+
 	return StartAppReplicationRequest{Request: req, Input: input, Copy: c.StartAppReplicationRequest}
 }
 

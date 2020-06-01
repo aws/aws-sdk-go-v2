@@ -119,6 +119,7 @@ func (c *Client) ListRetirableGrantsRequest(input *ListRetirableGrantsInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListRetirableGrantsOutput{})
+
 	return ListRetirableGrantsRequest{Request: req, Input: input, Copy: c.ListRetirableGrantsRequest}
 }
 

@@ -17,8 +17,7 @@ type DeleteGlobalReplicationGroupInput struct {
 	// GlobalReplicationGroupId is a required field
 	GlobalReplicationGroupId *string `type:"string" required:"true"`
 
-	// If set to true, the primary replication is retained as a standalone replication
-	// group.
+	// The primary replication group is retained as a standalone replication group.
 	//
 	// RetainPrimaryReplicationGroup is a required field
 	RetainPrimaryReplicationGroup *bool `type:"boolean" required:"true"`
@@ -55,8 +54,8 @@ type DeleteGlobalReplicationGroupOutput struct {
 	// only reads. The primary cluster automatically replicates updates to the secondary
 	// cluster.
 	//
-	//    * The GlobalReplicationGroupId represents the name of the Global Datastore,
-	//    which is what you use to associate a secondary cluster.
+	//    * The GlobalReplicationGroupIdSuffix represents the name of the Global
+	//    Datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *GlobalReplicationGroup `type:"structure"`
 }
 
@@ -86,8 +85,6 @@ const opDeleteGlobalReplicationGroup = "DeleteGlobalReplicationGroup"
 // immediately begins deleting the selected resources; you cannot cancel or
 // revert this operation.
 //
-// This operation is valid for Redis only.
-//
 //    // Example sending a request using DeleteGlobalReplicationGroupRequest.
 //    req := client.DeleteGlobalReplicationGroupRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -108,6 +105,7 @@ func (c *Client) DeleteGlobalReplicationGroupRequest(input *DeleteGlobalReplicat
 	}
 
 	req := c.newRequest(op, input, &DeleteGlobalReplicationGroupOutput{})
+
 	return DeleteGlobalReplicationGroupRequest{Request: req, Input: input, Copy: c.DeleteGlobalReplicationGroupRequest}
 }
 

@@ -122,6 +122,7 @@ func (c *Client) GetProposalRequest(input *GetProposalInput) GetProposalRequest 
 	}
 
 	req := c.newRequest(op, input, &GetProposalOutput{})
+
 	return GetProposalRequest{Request: req, Input: input, Copy: c.GetProposalRequest}
 }
 

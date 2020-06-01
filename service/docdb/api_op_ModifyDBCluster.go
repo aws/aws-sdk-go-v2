@@ -191,6 +191,7 @@ func (c *Client) ModifyDBClusterRequest(input *ModifyDBClusterInput) ModifyDBClu
 	}
 
 	req := c.newRequest(op, input, &ModifyDBClusterOutput{})
+
 	return ModifyDBClusterRequest{Request: req, Input: input, Copy: c.ModifyDBClusterRequest}
 }
 

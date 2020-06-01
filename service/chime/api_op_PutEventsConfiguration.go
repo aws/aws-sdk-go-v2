@@ -137,6 +137,7 @@ func (c *Client) PutEventsConfigurationRequest(input *PutEventsConfigurationInpu
 	}
 
 	req := c.newRequest(op, input, &PutEventsConfigurationOutput{})
+
 	return PutEventsConfigurationRequest{Request: req, Input: input, Copy: c.PutEventsConfigurationRequest}
 }
 

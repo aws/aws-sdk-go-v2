@@ -82,6 +82,7 @@ func (c *Client) DisassociateMembersRequest(input *DisassociateMembersInput) Dis
 	}
 
 	req := c.newRequest(op, input, &DisassociateMembersOutput{})
+
 	return DisassociateMembersRequest{Request: req, Input: input, Copy: c.DisassociateMembersRequest}
 }
 

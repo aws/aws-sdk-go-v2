@@ -218,6 +218,7 @@ func (c *Client) RegisterWorkflowTypeRequest(input *RegisterWorkflowTypeInput) R
 	req := c.newRequest(op, input, &RegisterWorkflowTypeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RegisterWorkflowTypeRequest{Request: req, Input: input, Copy: c.RegisterWorkflowTypeRequest}
 }
 

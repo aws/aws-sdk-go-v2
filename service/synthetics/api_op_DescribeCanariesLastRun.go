@@ -135,6 +135,7 @@ func (c *Client) DescribeCanariesLastRunRequest(input *DescribeCanariesLastRunIn
 	}
 
 	req := c.newRequest(op, input, &DescribeCanariesLastRunOutput{})
+
 	return DescribeCanariesLastRunRequest{Request: req, Input: input, Copy: c.DescribeCanariesLastRunRequest}
 }
 

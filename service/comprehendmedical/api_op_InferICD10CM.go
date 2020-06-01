@@ -96,6 +96,7 @@ func (c *Client) InferICD10CMRequest(input *InferICD10CMInput) InferICD10CMReque
 	}
 
 	req := c.newRequest(op, input, &InferICD10CMOutput{})
+
 	return InferICD10CMRequest{Request: req, Input: input, Copy: c.InferICD10CMRequest}
 }
 

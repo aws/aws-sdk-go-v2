@@ -81,6 +81,7 @@ func (c *Client) DescribeOrganizationConfigRulesRequest(input *DescribeOrganizat
 	}
 
 	req := c.newRequest(op, input, &DescribeOrganizationConfigRulesOutput{})
+
 	return DescribeOrganizationConfigRulesRequest{Request: req, Input: input, Copy: c.DescribeOrganizationConfigRulesRequest}
 }
 

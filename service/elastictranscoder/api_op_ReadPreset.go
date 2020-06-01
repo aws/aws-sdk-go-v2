@@ -101,6 +101,7 @@ func (c *Client) ReadPresetRequest(input *ReadPresetInput) ReadPresetRequest {
 	}
 
 	req := c.newRequest(op, input, &ReadPresetOutput{})
+
 	return ReadPresetRequest{Request: req, Input: input, Copy: c.ReadPresetRequest}
 }
 

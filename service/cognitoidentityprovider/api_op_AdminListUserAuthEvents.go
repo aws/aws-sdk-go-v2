@@ -111,6 +111,7 @@ func (c *Client) AdminListUserAuthEventsRequest(input *AdminListUserAuthEventsIn
 	}
 
 	req := c.newRequest(op, input, &AdminListUserAuthEventsOutput{})
+
 	return AdminListUserAuthEventsRequest{Request: req, Input: input, Copy: c.AdminListUserAuthEventsRequest}
 }
 

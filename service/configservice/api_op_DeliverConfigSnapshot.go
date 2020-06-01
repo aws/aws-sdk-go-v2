@@ -91,6 +91,7 @@ func (c *Client) DeliverConfigSnapshotRequest(input *DeliverConfigSnapshotInput)
 	}
 
 	req := c.newRequest(op, input, &DeliverConfigSnapshotOutput{})
+
 	return DeliverConfigSnapshotRequest{Request: req, Input: input, Copy: c.DeliverConfigSnapshotRequest}
 }
 

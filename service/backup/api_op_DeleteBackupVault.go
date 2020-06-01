@@ -16,7 +16,7 @@ type DeleteBackupVaultInput struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and
-	// theAWS Region where they are created. They consist of lowercase letters,
+	// the AWS Region where they are created. They consist of lowercase letters,
 	// numbers, and hyphens.
 	//
 	// BackupVaultName is a required field
@@ -99,6 +99,7 @@ func (c *Client) DeleteBackupVaultRequest(input *DeleteBackupVaultInput) DeleteB
 	req := c.newRequest(op, input, &DeleteBackupVaultOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteBackupVaultRequest{Request: req, Input: input, Copy: c.DeleteBackupVaultRequest}
 }
 

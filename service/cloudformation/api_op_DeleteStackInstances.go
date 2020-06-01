@@ -135,6 +135,7 @@ func (c *Client) DeleteStackInstancesRequest(input *DeleteStackInstancesInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteStackInstancesOutput{})
+
 	return DeleteStackInstancesRequest{Request: req, Input: input, Copy: c.DeleteStackInstancesRequest}
 }
 

@@ -106,7 +106,7 @@ const opDescribeProtectedResource = "DescribeProtectedResource"
 // AWS Backup.
 //
 // Returns information about a saved resource, including the last time it was
-// backed-up, its Amazon Resource Name (ARN), and the AWS service type of the
+// backed up, its Amazon Resource Name (ARN), and the AWS service type of the
 // saved resource.
 //
 //    // Example sending a request using DescribeProtectedResourceRequest.
@@ -129,6 +129,7 @@ func (c *Client) DescribeProtectedResourceRequest(input *DescribeProtectedResour
 	}
 
 	req := c.newRequest(op, input, &DescribeProtectedResourceOutput{})
+
 	return DescribeProtectedResourceRequest{Request: req, Input: input, Copy: c.DescribeProtectedResourceRequest}
 }
 

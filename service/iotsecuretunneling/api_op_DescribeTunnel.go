@@ -76,6 +76,7 @@ func (c *Client) DescribeTunnelRequest(input *DescribeTunnelInput) DescribeTunne
 	}
 
 	req := c.newRequest(op, input, &DescribeTunnelOutput{})
+
 	return DescribeTunnelRequest{Request: req, Input: input, Copy: c.DescribeTunnelRequest}
 }
 

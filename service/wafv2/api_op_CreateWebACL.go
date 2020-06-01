@@ -171,6 +171,7 @@ func (c *Client) CreateWebACLRequest(input *CreateWebACLInput) CreateWebACLReque
 	}
 
 	req := c.newRequest(op, input, &CreateWebACLOutput{})
+
 	return CreateWebACLRequest{Request: req, Input: input, Copy: c.CreateWebACLRequest}
 }
 

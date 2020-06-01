@@ -14,13 +14,13 @@ type DisassociateS3ResourcesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The S3 resources (buckets or prefixes) that you want to remove from being
-	// monitored and classified by Amazon Macie.
+	// monitored and classified by Amazon Macie Classic.
 	//
 	// AssociatedS3Resources is a required field
 	AssociatedS3Resources []S3Resource `locationName:"associatedS3Resources" type:"list" required:"true"`
 
-	// The ID of the Amazon Macie member account whose resources you want to remove
-	// from being monitored by Amazon Macie.
+	// The ID of the Amazon Macie Classic member account whose resources you want
+	// to remove from being monitored by Amazon Macie Classic.
 	MemberAccountId *string `locationName:"memberAccountId" type:"string"`
 }
 
@@ -54,8 +54,8 @@ type DisassociateS3ResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// S3 resources that couldn't be removed from being monitored and classified
-	// by Amazon Macie. An error code and an error message are provided for each
-	// failed item.
+	// by Amazon Macie Classic. An error code and an error message are provided
+	// for each failed item.
 	FailedS3Resources []FailedS3Resource `locationName:"failedS3Resources" type:"list"`
 }
 
@@ -69,10 +69,11 @@ const opDisassociateS3Resources = "DisassociateS3Resources"
 // DisassociateS3ResourcesRequest returns a request value for making API operation for
 // Amazon Macie.
 //
-// Removes specified S3 resources from being monitored by Amazon Macie. If memberAccountId
-// isn't specified, the action removes specified S3 resources from Macie for
-// the current master account. If memberAccountId is specified, the action removes
-// specified S3 resources from Macie for the specified member account.
+// Removes specified S3 resources from being monitored by Amazon Macie Classic.
+// If memberAccountId isn't specified, the action removes specified S3 resources
+// from Macie Classic for the current master account. If memberAccountId is
+// specified, the action removes specified S3 resources from Macie Classic for
+// the specified member account.
 //
 //    // Example sending a request using DisassociateS3ResourcesRequest.
 //    req := client.DisassociateS3ResourcesRequest(params)
@@ -94,6 +95,7 @@ func (c *Client) DisassociateS3ResourcesRequest(input *DisassociateS3ResourcesIn
 	}
 
 	req := c.newRequest(op, input, &DisassociateS3ResourcesOutput{})
+
 	return DisassociateS3ResourcesRequest{Request: req, Input: input, Copy: c.DisassociateS3ResourcesRequest}
 }
 

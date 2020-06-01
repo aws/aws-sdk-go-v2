@@ -61,6 +61,7 @@ func (c *Client) GetAccountPasswordPolicyRequest(input *GetAccountPasswordPolicy
 	}
 
 	req := c.newRequest(op, input, &GetAccountPasswordPolicyOutput{})
+
 	return GetAccountPasswordPolicyRequest{Request: req, Input: input, Copy: c.GetAccountPasswordPolicyRequest}
 }
 

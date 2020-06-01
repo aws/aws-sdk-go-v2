@@ -144,6 +144,7 @@ func (c *Client) UpdateClusterVersionRequest(input *UpdateClusterVersionInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateClusterVersionOutput{})
+
 	return UpdateClusterVersionRequest{Request: req, Input: input, Copy: c.UpdateClusterVersionRequest}
 }
 

@@ -25,6 +25,7 @@ type DiscovererSummary struct {
 	// The ARN of the event bus.
 	SourceArn *string `type:"string"`
 
+	// The state of the discoverer.
 	State DiscovererState `type:"string" enum:"true"`
 
 	// Tags associated with the resource.
@@ -291,6 +292,7 @@ func (s SearchSchemaSummary) MarshalFields(e protocol.FieldEncoder) error {
 type SearchSchemaVersionSummary struct {
 	_ struct{} `type:"structure"`
 
+	// The date the schema version was created.
 	CreatedDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The version number of the schema

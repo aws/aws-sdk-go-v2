@@ -82,6 +82,7 @@ func (c *Client) ScanProvisionedProductsRequest(input *ScanProvisionedProductsIn
 	}
 
 	req := c.newRequest(op, input, &ScanProvisionedProductsOutput{})
+
 	return ScanProvisionedProductsRequest{Request: req, Input: input, Copy: c.ScanProvisionedProductsRequest}
 }
 

@@ -60,6 +60,7 @@ func (c *Client) DeleteNotificationChannelRequest(input *DeleteNotificationChann
 	req := c.newRequest(op, input, &DeleteNotificationChannelOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteNotificationChannelRequest{Request: req, Input: input, Copy: c.DeleteNotificationChannelRequest}
 }
 

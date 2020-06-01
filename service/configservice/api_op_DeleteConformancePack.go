@@ -84,6 +84,7 @@ func (c *Client) DeleteConformancePackRequest(input *DeleteConformancePackInput)
 	req := c.newRequest(op, input, &DeleteConformancePackOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteConformancePackRequest{Request: req, Input: input, Copy: c.DeleteConformancePackRequest}
 }
 

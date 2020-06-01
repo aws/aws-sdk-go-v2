@@ -93,6 +93,7 @@ func (c *Client) GetTestGridSessionRequest(input *GetTestGridSessionInput) GetTe
 	}
 
 	req := c.newRequest(op, input, &GetTestGridSessionOutput{})
+
 	return GetTestGridSessionRequest{Request: req, Input: input, Copy: c.GetTestGridSessionRequest}
 }
 

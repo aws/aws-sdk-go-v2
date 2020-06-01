@@ -152,6 +152,7 @@ func (c *Client) ListVirtualNodesRequest(input *ListVirtualNodesInput) ListVirtu
 	}
 
 	req := c.newRequest(op, input, &ListVirtualNodesOutput{})
+
 	return ListVirtualNodesRequest{Request: req, Input: input, Copy: c.ListVirtualNodesRequest}
 }
 

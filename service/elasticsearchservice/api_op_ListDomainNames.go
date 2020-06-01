@@ -83,6 +83,7 @@ func (c *Client) ListDomainNamesRequest(input *ListDomainNamesInput) ListDomainN
 	}
 
 	req := c.newRequest(op, input, &ListDomainNamesOutput{})
+
 	return ListDomainNamesRequest{Request: req, Input: input, Copy: c.ListDomainNamesRequest}
 }
 

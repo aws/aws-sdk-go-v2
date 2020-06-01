@@ -142,6 +142,7 @@ func (c *Client) GenerateAccessLogsRequest(input *GenerateAccessLogsInput) Gener
 	}
 
 	req := c.newRequest(op, input, &GenerateAccessLogsOutput{})
+
 	return GenerateAccessLogsRequest{Request: req, Input: input, Copy: c.GenerateAccessLogsRequest}
 }
 

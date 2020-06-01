@@ -114,6 +114,7 @@ func (c *Client) ModifyDBProxyRequest(input *ModifyDBProxyInput) ModifyDBProxyRe
 	}
 
 	req := c.newRequest(op, input, &ModifyDBProxyOutput{})
+
 	return ModifyDBProxyRequest{Request: req, Input: input, Copy: c.ModifyDBProxyRequest}
 }
 

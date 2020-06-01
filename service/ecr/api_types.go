@@ -78,6 +78,9 @@ type Image struct {
 	// The image manifest associated with the image.
 	ImageManifest *string `locationName:"imageManifest" min:"1" type:"string"`
 
+	// The media type associated with the image manifest.
+	ImageManifestMediaType *string `locationName:"imageManifestMediaType" type:"string"`
+
 	// The AWS account ID associated with the registry containing the image.
 	RegistryId *string `locationName:"registryId" type:"string"`
 
@@ -108,6 +111,9 @@ type ImageDetail struct {
 	ImageScanStatus *ImageScanStatus `locationName:"imageScanStatus" type:"structure"`
 
 	// The size, in bytes, of the image in the repository.
+	//
+	// If the image is a manifest list, this will be the max size of all manifests
+	// in the list.
 	//
 	// Beginning with Docker version 1.9, the Docker client compresses image layers
 	// before pushing them to a V2 Docker registry. The output of the docker images

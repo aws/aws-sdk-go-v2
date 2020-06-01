@@ -138,6 +138,7 @@ func (c *Client) CreateStreamProcessorRequest(input *CreateStreamProcessorInput)
 	}
 
 	req := c.newRequest(op, input, &CreateStreamProcessorOutput{})
+
 	return CreateStreamProcessorRequest{Request: req, Input: input, Copy: c.CreateStreamProcessorRequest}
 }
 

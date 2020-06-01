@@ -223,6 +223,7 @@ func (c *Client) UpdateResolverRequest(input *UpdateResolverInput) UpdateResolve
 	}
 
 	req := c.newRequest(op, input, &UpdateResolverOutput{})
+
 	return UpdateResolverRequest{Request: req, Input: input, Copy: c.UpdateResolverRequest}
 }
 

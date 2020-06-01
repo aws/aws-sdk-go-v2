@@ -144,6 +144,7 @@ func (c *Client) UpdateLinkAttributesRequest(input *UpdateLinkAttributesInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateLinkAttributesOutput{})
+
 	return UpdateLinkAttributesRequest{Request: req, Input: input, Copy: c.UpdateLinkAttributesRequest}
 }
 

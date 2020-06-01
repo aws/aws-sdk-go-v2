@@ -176,6 +176,7 @@ func (c *Client) ExecuteSqlRequest(input *ExecuteSqlInput) ExecuteSqlRequest {
 	}
 
 	req := c.newRequest(op, input, &ExecuteSqlOutput{})
+
 	return ExecuteSqlRequest{Request: req, Input: input, Copy: c.ExecuteSqlRequest}
 }
 

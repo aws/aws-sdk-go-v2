@@ -115,6 +115,7 @@ func (c *Client) DescribeContinuousBackupsRequest(input *DescribeContinuousBacku
 			Fn:   de.Handler,
 		})
 	}
+
 	return DescribeContinuousBackupsRequest{Request: req, Input: input, Copy: c.DescribeContinuousBackupsRequest}
 }
 

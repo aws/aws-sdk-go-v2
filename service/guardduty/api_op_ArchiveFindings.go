@@ -120,6 +120,7 @@ func (c *Client) ArchiveFindingsRequest(input *ArchiveFindingsInput) ArchiveFind
 	}
 
 	req := c.newRequest(op, input, &ArchiveFindingsOutput{})
+
 	return ArchiveFindingsRequest{Request: req, Input: input, Copy: c.ArchiveFindingsRequest}
 }
 

@@ -316,6 +316,7 @@ func (c *Client) CreateMountTargetRequest(input *CreateMountTargetInput) CreateM
 	}
 
 	req := c.newRequest(op, input, &CreateMountTargetOutput{})
+
 	return CreateMountTargetRequest{Request: req, Input: input, Copy: c.CreateMountTargetRequest}
 }
 

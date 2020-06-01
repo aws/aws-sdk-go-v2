@@ -123,6 +123,7 @@ func (c *Client) DescribeHsmClientCertificatesRequest(input *DescribeHsmClientCe
 	}
 
 	req := c.newRequest(op, input, &DescribeHsmClientCertificatesOutput{})
+
 	return DescribeHsmClientCertificatesRequest{Request: req, Input: input, Copy: c.DescribeHsmClientCertificatesRequest}
 }
 

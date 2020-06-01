@@ -124,6 +124,7 @@ func (c *Client) AttachPolicyRequest(input *AttachPolicyInput) AttachPolicyReque
 	}
 
 	req := c.newRequest(op, input, &AttachPolicyOutput{})
+
 	return AttachPolicyRequest{Request: req, Input: input, Copy: c.AttachPolicyRequest}
 }
 

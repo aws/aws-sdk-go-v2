@@ -106,6 +106,7 @@ func (c *Client) UpdateKeyDescriptionRequest(input *UpdateKeyDescriptionInput) U
 	req := c.newRequest(op, input, &UpdateKeyDescriptionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateKeyDescriptionRequest{Request: req, Input: input, Copy: c.UpdateKeyDescriptionRequest}
 }
 

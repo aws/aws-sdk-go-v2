@@ -57,6 +57,7 @@ func (c *Client) TerminateAppRequest(input *TerminateAppInput) TerminateAppReque
 	}
 
 	req := c.newRequest(op, input, &TerminateAppOutput{})
+
 	return TerminateAppRequest{Request: req, Input: input, Copy: c.TerminateAppRequest}
 }
 

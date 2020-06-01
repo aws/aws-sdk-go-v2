@@ -93,6 +93,7 @@ func (c *Client) DeleteRegistryRequest(input *DeleteRegistryInput) DeleteRegistr
 	req := c.newRequest(op, input, &DeleteRegistryOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteRegistryRequest{Request: req, Input: input, Copy: c.DeleteRegistryRequest}
 }
 

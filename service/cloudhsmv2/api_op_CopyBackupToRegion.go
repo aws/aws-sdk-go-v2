@@ -105,6 +105,7 @@ func (c *Client) CopyBackupToRegionRequest(input *CopyBackupToRegionInput) CopyB
 	}
 
 	req := c.newRequest(op, input, &CopyBackupToRegionOutput{})
+
 	return CopyBackupToRegionRequest{Request: req, Input: input, Copy: c.CopyBackupToRegionRequest}
 }
 

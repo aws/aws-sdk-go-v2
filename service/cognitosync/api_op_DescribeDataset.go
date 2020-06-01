@@ -156,6 +156,7 @@ func (c *Client) DescribeDatasetRequest(input *DescribeDatasetInput) DescribeDat
 	}
 
 	req := c.newRequest(op, input, &DescribeDatasetOutput{})
+
 	return DescribeDatasetRequest{Request: req, Input: input, Copy: c.DescribeDatasetRequest}
 }
 

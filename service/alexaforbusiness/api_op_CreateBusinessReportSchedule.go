@@ -106,6 +106,7 @@ func (c *Client) CreateBusinessReportScheduleRequest(input *CreateBusinessReport
 	}
 
 	req := c.newRequest(op, input, &CreateBusinessReportScheduleOutput{})
+
 	return CreateBusinessReportScheduleRequest{Request: req, Input: input, Copy: c.CreateBusinessReportScheduleRequest}
 }
 

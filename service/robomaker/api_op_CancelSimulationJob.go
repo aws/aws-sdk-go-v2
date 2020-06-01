@@ -95,6 +95,7 @@ func (c *Client) CancelSimulationJobRequest(input *CancelSimulationJobInput) Can
 	}
 
 	req := c.newRequest(op, input, &CancelSimulationJobOutput{})
+
 	return CancelSimulationJobRequest{Request: req, Input: input, Copy: c.CancelSimulationJobRequest}
 }
 

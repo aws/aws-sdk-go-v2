@@ -95,6 +95,7 @@ func (c *Client) PutBlockPublicAccessConfigurationRequest(input *PutBlockPublicA
 	}
 
 	req := c.newRequest(op, input, &PutBlockPublicAccessConfigurationOutput{})
+
 	return PutBlockPublicAccessConfigurationRequest{Request: req, Input: input, Copy: c.PutBlockPublicAccessConfigurationRequest}
 }
 

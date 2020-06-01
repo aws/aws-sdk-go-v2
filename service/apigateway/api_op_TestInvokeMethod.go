@@ -278,6 +278,7 @@ func (c *Client) TestInvokeMethodRequest(input *TestInvokeMethodInput) TestInvok
 	}
 
 	req := c.newRequest(op, input, &TestInvokeMethodOutput{})
+
 	return TestInvokeMethodRequest{Request: req, Input: input, Copy: c.TestInvokeMethodRequest}
 }
 

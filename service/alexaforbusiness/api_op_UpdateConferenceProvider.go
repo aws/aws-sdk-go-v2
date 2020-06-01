@@ -111,6 +111,7 @@ func (c *Client) UpdateConferenceProviderRequest(input *UpdateConferenceProvider
 	}
 
 	req := c.newRequest(op, input, &UpdateConferenceProviderOutput{})
+
 	return UpdateConferenceProviderRequest{Request: req, Input: input, Copy: c.UpdateConferenceProviderRequest}
 }
 

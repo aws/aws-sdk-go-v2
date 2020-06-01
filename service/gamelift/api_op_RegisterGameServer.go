@@ -184,6 +184,7 @@ func (c *Client) RegisterGameServerRequest(input *RegisterGameServerInput) Regis
 	}
 
 	req := c.newRequest(op, input, &RegisterGameServerOutput{})
+
 	return RegisterGameServerRequest{Request: req, Input: input, Copy: c.RegisterGameServerRequest}
 }
 

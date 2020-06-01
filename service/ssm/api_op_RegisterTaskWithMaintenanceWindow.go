@@ -19,7 +19,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// An optional description for the task.
 	Description *string `min:"1" type:"string" sensitive:"true"`
 
-	// A structure containing information about an Amazon S3 bucket to write instance-level
+	// A structure containing information about an S3 bucket to write instance-level
 	// logs to.
 	//
 	// LoggingInfo has been deprecated. To specify an S3 bucket to contain logs,
@@ -54,10 +54,10 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// For more information, see the following topics in the in the AWS Systems
 	// Manager User Guide:
 	//
-	//    * Service-Linked Role Permissions for Systems Manager (http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions)
+	//    * Using service-linked roles for Systems Manager (https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions)
 	//
-	//    * Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance
-	//    Window Tasks? (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
+	//    * Should I use a service-linked role or a custom service role to run maintenance
+	//    window tasks? (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
 	ServiceRoleArn *string `type:"string"`
 
 	// The targets (either instances or maintenance window targets).
@@ -216,6 +216,7 @@ func (c *Client) RegisterTaskWithMaintenanceWindowRequest(input *RegisterTaskWit
 	}
 
 	req := c.newRequest(op, input, &RegisterTaskWithMaintenanceWindowOutput{})
+
 	return RegisterTaskWithMaintenanceWindowRequest{Request: req, Input: input, Copy: c.RegisterTaskWithMaintenanceWindowRequest}
 }
 

@@ -123,6 +123,7 @@ func (c *Client) ExportServerEngineAttributeRequest(input *ExportServerEngineAtt
 	}
 
 	req := c.newRequest(op, input, &ExportServerEngineAttributeOutput{})
+
 	return ExportServerEngineAttributeRequest{Request: req, Input: input, Copy: c.ExportServerEngineAttributeRequest}
 }
 

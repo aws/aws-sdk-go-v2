@@ -153,6 +153,7 @@ func (c *Client) GetRightsizingRecommendationRequest(input *GetRightsizingRecomm
 	}
 
 	req := c.newRequest(op, input, &GetRightsizingRecommendationOutput{})
+
 	return GetRightsizingRecommendationRequest{Request: req, Input: input, Copy: c.GetRightsizingRecommendationRequest}
 }
 

@@ -100,6 +100,7 @@ func (c *Client) DeleteLogPatternRequest(input *DeleteLogPatternInput) DeleteLog
 	}
 
 	req := c.newRequest(op, input, &DeleteLogPatternOutput{})
+
 	return DeleteLogPatternRequest{Request: req, Input: input, Copy: c.DeleteLogPatternRequest}
 }
 

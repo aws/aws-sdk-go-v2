@@ -178,6 +178,7 @@ func (c *Client) ListTemplateAliasesRequest(input *ListTemplateAliasesInput) Lis
 	}
 
 	req := c.newRequest(op, input, &ListTemplateAliasesOutput{})
+
 	return ListTemplateAliasesRequest{Request: req, Input: input, Copy: c.ListTemplateAliasesRequest}
 }
 

@@ -87,6 +87,7 @@ func (c *Client) EnableAllFeaturesRequest(input *EnableAllFeaturesInput) EnableA
 	}
 
 	req := c.newRequest(op, input, &EnableAllFeaturesOutput{})
+
 	return EnableAllFeaturesRequest{Request: req, Input: input, Copy: c.EnableAllFeaturesRequest}
 }
 

@@ -98,6 +98,7 @@ func (c *Client) CreateLoadBalancerListenersRequest(input *CreateLoadBalancerLis
 	}
 
 	req := c.newRequest(op, input, &CreateLoadBalancerListenersOutput{})
+
 	return CreateLoadBalancerListenersRequest{Request: req, Input: input, Copy: c.CreateLoadBalancerListenersRequest}
 }
 

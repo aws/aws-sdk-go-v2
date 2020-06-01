@@ -105,6 +105,7 @@ func (c *Client) ListAssociationsRequest(input *ListAssociationsInput) ListAssoc
 	}
 
 	req := c.newRequest(op, input, &ListAssociationsOutput{})
+
 	return ListAssociationsRequest{Request: req, Input: input, Copy: c.ListAssociationsRequest}
 }
 

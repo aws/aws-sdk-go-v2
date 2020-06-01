@@ -114,6 +114,7 @@ func (c *Client) DeleteAttendeeRequest(input *DeleteAttendeeInput) DeleteAttende
 	req := c.newRequest(op, input, &DeleteAttendeeOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteAttendeeRequest{Request: req, Input: input, Copy: c.DeleteAttendeeRequest}
 }
 

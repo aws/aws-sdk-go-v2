@@ -129,6 +129,7 @@ func (c *Client) ListRoleAliasesRequest(input *ListRoleAliasesInput) ListRoleAli
 	}
 
 	req := c.newRequest(op, input, &ListRoleAliasesOutput{})
+
 	return ListRoleAliasesRequest{Request: req, Input: input, Copy: c.ListRoleAliasesRequest}
 }
 

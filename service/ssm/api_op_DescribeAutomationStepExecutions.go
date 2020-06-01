@@ -115,6 +115,7 @@ func (c *Client) DescribeAutomationStepExecutionsRequest(input *DescribeAutomati
 	}
 
 	req := c.newRequest(op, input, &DescribeAutomationStepExecutionsOutput{})
+
 	return DescribeAutomationStepExecutionsRequest{Request: req, Input: input, Copy: c.DescribeAutomationStepExecutionsRequest}
 }
 

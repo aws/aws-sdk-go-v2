@@ -274,6 +274,7 @@ func (c *Client) ReEncryptRequest(input *ReEncryptInput) ReEncryptRequest {
 	}
 
 	req := c.newRequest(op, input, &ReEncryptOutput{})
+
 	return ReEncryptRequest{Request: req, Input: input, Copy: c.ReEncryptRequest}
 }
 

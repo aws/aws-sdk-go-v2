@@ -113,6 +113,7 @@ func (c *Client) ListRootsRequest(input *ListRootsInput) ListRootsRequest {
 	}
 
 	req := c.newRequest(op, input, &ListRootsOutput{})
+
 	return ListRootsRequest{Request: req, Input: input, Copy: c.ListRootsRequest}
 }
 

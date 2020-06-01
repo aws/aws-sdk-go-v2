@@ -95,6 +95,7 @@ func (c *Client) ModifyAvailabilityZoneGroupRequest(input *ModifyAvailabilityZon
 	}
 
 	req := c.newRequest(op, input, &ModifyAvailabilityZoneGroupOutput{})
+
 	return ModifyAvailabilityZoneGroupRequest{Request: req, Input: input, Copy: c.ModifyAvailabilityZoneGroupRequest}
 }
 

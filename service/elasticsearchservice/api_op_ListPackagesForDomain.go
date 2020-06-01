@@ -145,6 +145,7 @@ func (c *Client) ListPackagesForDomainRequest(input *ListPackagesForDomainInput)
 	}
 
 	req := c.newRequest(op, input, &ListPackagesForDomainOutput{})
+
 	return ListPackagesForDomainRequest{Request: req, Input: input, Copy: c.ListPackagesForDomainRequest}
 }
 

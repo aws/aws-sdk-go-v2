@@ -102,6 +102,7 @@ func (c *Client) PutImageScanningConfigurationRequest(input *PutImageScanningCon
 	}
 
 	req := c.newRequest(op, input, &PutImageScanningConfigurationOutput{})
+
 	return PutImageScanningConfigurationRequest{Request: req, Input: input, Copy: c.PutImageScanningConfigurationRequest}
 }
 

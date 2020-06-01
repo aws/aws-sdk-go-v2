@@ -88,6 +88,7 @@ func (c *Client) PromoteReadReplicaDBClusterRequest(input *PromoteReadReplicaDBC
 	}
 
 	req := c.newRequest(op, input, &PromoteReadReplicaDBClusterOutput{})
+
 	return PromoteReadReplicaDBClusterRequest{Request: req, Input: input, Copy: c.PromoteReadReplicaDBClusterRequest}
 }
 

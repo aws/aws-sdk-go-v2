@@ -176,6 +176,7 @@ func (c *Client) RegisterTypeRequest(input *RegisterTypeInput) RegisterTypeReque
 	}
 
 	req := c.newRequest(op, input, &RegisterTypeOutput{})
+
 	return RegisterTypeRequest{Request: req, Input: input, Copy: c.RegisterTypeRequest}
 }
 

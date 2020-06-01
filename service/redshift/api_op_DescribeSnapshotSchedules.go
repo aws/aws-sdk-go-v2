@@ -90,6 +90,7 @@ func (c *Client) DescribeSnapshotSchedulesRequest(input *DescribeSnapshotSchedul
 	}
 
 	req := c.newRequest(op, input, &DescribeSnapshotSchedulesOutput{})
+
 	return DescribeSnapshotSchedulesRequest{Request: req, Input: input, Copy: c.DescribeSnapshotSchedulesRequest}
 }
 

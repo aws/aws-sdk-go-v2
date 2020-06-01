@@ -113,6 +113,7 @@ func (c *Client) DescribeDBProxiesRequest(input *DescribeDBProxiesInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribeDBProxiesOutput{})
+
 	return DescribeDBProxiesRequest{Request: req, Input: input, Copy: c.DescribeDBProxiesRequest}
 }
 

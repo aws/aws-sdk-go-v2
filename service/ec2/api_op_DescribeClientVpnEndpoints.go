@@ -104,6 +104,7 @@ func (c *Client) DescribeClientVpnEndpointsRequest(input *DescribeClientVpnEndpo
 	}
 
 	req := c.newRequest(op, input, &DescribeClientVpnEndpointsOutput{})
+
 	return DescribeClientVpnEndpointsRequest{Request: req, Input: input, Copy: c.DescribeClientVpnEndpointsRequest}
 }
 

@@ -142,6 +142,7 @@ func (c *Client) RotateChannelCredentialsRequest(input *RotateChannelCredentials
 	}
 
 	req := c.newRequest(op, input, &RotateChannelCredentialsOutput{})
+
 	return RotateChannelCredentialsRequest{Request: req, Input: input, Copy: c.RotateChannelCredentialsRequest}
 }
 

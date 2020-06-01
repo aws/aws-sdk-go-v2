@@ -102,6 +102,7 @@ func (c *Client) DeleteGlobalNetworkRequest(input *DeleteGlobalNetworkInput) Del
 	}
 
 	req := c.newRequest(op, input, &DeleteGlobalNetworkOutput{})
+
 	return DeleteGlobalNetworkRequest{Request: req, Input: input, Copy: c.DeleteGlobalNetworkRequest}
 }
 

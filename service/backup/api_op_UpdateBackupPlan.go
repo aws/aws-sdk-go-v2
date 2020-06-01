@@ -158,6 +158,7 @@ func (c *Client) UpdateBackupPlanRequest(input *UpdateBackupPlanInput) UpdateBac
 	}
 
 	req := c.newRequest(op, input, &UpdateBackupPlanOutput{})
+
 	return UpdateBackupPlanRequest{Request: req, Input: input, Copy: c.UpdateBackupPlanRequest}
 }
 

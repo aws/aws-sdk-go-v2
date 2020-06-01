@@ -110,6 +110,7 @@ func (c *Client) DeletePushTemplateRequest(input *DeletePushTemplateInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeletePushTemplateOutput{})
+
 	return DeletePushTemplateRequest{Request: req, Input: input, Copy: c.DeletePushTemplateRequest}
 }
 

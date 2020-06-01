@@ -104,6 +104,7 @@ func (c *Client) DeleteSchemaRequest(input *DeleteSchemaInput) DeleteSchemaReque
 	}
 
 	req := c.newRequest(op, input, &DeleteSchemaOutput{})
+
 	return DeleteSchemaRequest{Request: req, Input: input, Copy: c.DeleteSchemaRequest}
 }
 

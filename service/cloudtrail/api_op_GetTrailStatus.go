@@ -161,6 +161,7 @@ func (c *Client) GetTrailStatusRequest(input *GetTrailStatusInput) GetTrailStatu
 	}
 
 	req := c.newRequest(op, input, &GetTrailStatusOutput{})
+
 	return GetTrailStatusRequest{Request: req, Input: input, Copy: c.GetTrailStatusRequest}
 }
 

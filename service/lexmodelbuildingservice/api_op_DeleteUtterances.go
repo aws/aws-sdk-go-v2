@@ -132,6 +132,7 @@ func (c *Client) DeleteUtterancesRequest(input *DeleteUtterancesInput) DeleteUtt
 	req := c.newRequest(op, input, &DeleteUtterancesOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteUtterancesRequest{Request: req, Input: input, Copy: c.DeleteUtterancesRequest}
 }
 

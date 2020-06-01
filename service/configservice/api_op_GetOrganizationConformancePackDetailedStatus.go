@@ -99,6 +99,7 @@ func (c *Client) GetOrganizationConformancePackDetailedStatusRequest(input *GetO
 	}
 
 	req := c.newRequest(op, input, &GetOrganizationConformancePackDetailedStatusOutput{})
+
 	return GetOrganizationConformancePackDetailedStatusRequest{Request: req, Input: input, Copy: c.GetOrganizationConformancePackDetailedStatusRequest}
 }
 

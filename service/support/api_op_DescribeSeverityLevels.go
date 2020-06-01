@@ -66,6 +66,7 @@ func (c *Client) DescribeSeverityLevelsRequest(input *DescribeSeverityLevelsInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeSeverityLevelsOutput{})
+
 	return DescribeSeverityLevelsRequest{Request: req, Input: input, Copy: c.DescribeSeverityLevelsRequest}
 }
 

@@ -99,6 +99,7 @@ func (c *Client) CreateConditionalForwarderRequest(input *CreateConditionalForwa
 	}
 
 	req := c.newRequest(op, input, &CreateConditionalForwarderOutput{})
+
 	return CreateConditionalForwarderRequest{Request: req, Input: input, Copy: c.CreateConditionalForwarderRequest}
 }
 

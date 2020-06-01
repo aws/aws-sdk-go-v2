@@ -57,6 +57,7 @@ func (c *Client) DeleteSkillGroupRequest(input *DeleteSkillGroupInput) DeleteSki
 	}
 
 	req := c.newRequest(op, input, &DeleteSkillGroupOutput{})
+
 	return DeleteSkillGroupRequest{Request: req, Input: input, Copy: c.DeleteSkillGroupRequest}
 }
 

@@ -164,6 +164,7 @@ func (c *Client) CreateBasePathMappingRequest(input *CreateBasePathMappingInput)
 	}
 
 	req := c.newRequest(op, input, &CreateBasePathMappingOutput{})
+
 	return CreateBasePathMappingRequest{Request: req, Input: input, Copy: c.CreateBasePathMappingRequest}
 }
 

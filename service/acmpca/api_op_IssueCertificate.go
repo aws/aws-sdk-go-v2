@@ -176,6 +176,7 @@ func (c *Client) IssueCertificateRequest(input *IssueCertificateInput) IssueCert
 	}
 
 	req := c.newRequest(op, input, &IssueCertificateOutput{})
+
 	return IssueCertificateRequest{Request: req, Input: input, Copy: c.IssueCertificateRequest}
 }
 

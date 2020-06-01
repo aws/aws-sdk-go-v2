@@ -153,6 +153,7 @@ func (c *Client) PutFileRequest(input *PutFileInput) PutFileRequest {
 	}
 
 	req := c.newRequest(op, input, &PutFileOutput{})
+
 	return PutFileRequest{Request: req, Input: input, Copy: c.PutFileRequest}
 }
 

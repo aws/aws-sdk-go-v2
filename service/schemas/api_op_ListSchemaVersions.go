@@ -147,6 +147,7 @@ func (c *Client) ListSchemaVersionsRequest(input *ListSchemaVersionsInput) ListS
 	}
 
 	req := c.newRequest(op, input, &ListSchemaVersionsOutput{})
+
 	return ListSchemaVersionsRequest{Request: req, Input: input, Copy: c.ListSchemaVersionsRequest}
 }
 

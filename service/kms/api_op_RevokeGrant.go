@@ -107,6 +107,7 @@ func (c *Client) RevokeGrantRequest(input *RevokeGrantInput) RevokeGrantRequest 
 	req := c.newRequest(op, input, &RevokeGrantOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RevokeGrantRequest{Request: req, Input: input, Copy: c.RevokeGrantRequest}
 }
 

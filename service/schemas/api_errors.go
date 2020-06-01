@@ -28,6 +28,10 @@ const (
 	// "NotFoundException".
 	ErrCodeNotFoundException = "NotFoundException"
 
+	// ErrCodePreconditionFailedException for service response error code
+	// "PreconditionFailedException".
+	ErrCodePreconditionFailedException = "PreconditionFailedException"
+
 	// ErrCodeServiceUnavailableException for service response error code
 	// "ServiceUnavailableException".
 	ErrCodeServiceUnavailableException = "ServiceUnavailableException"

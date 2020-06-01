@@ -108,6 +108,7 @@ func (c *Client) UpdateDevEndpointRequest(input *UpdateDevEndpointInput) UpdateD
 	}
 
 	req := c.newRequest(op, input, &UpdateDevEndpointOutput{})
+
 	return UpdateDevEndpointRequest{Request: req, Input: input, Copy: c.UpdateDevEndpointRequest}
 }
 

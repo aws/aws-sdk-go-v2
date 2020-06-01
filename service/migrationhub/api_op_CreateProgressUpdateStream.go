@@ -85,6 +85,7 @@ func (c *Client) CreateProgressUpdateStreamRequest(input *CreateProgressUpdateSt
 	}
 
 	req := c.newRequest(op, input, &CreateProgressUpdateStreamOutput{})
+
 	return CreateProgressUpdateStreamRequest{Request: req, Input: input, Copy: c.CreateProgressUpdateStreamRequest}
 }
 

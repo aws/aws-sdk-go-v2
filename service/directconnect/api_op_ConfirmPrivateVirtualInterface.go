@@ -115,6 +115,7 @@ func (c *Client) ConfirmPrivateVirtualInterfaceRequest(input *ConfirmPrivateVirt
 	}
 
 	req := c.newRequest(op, input, &ConfirmPrivateVirtualInterfaceOutput{})
+
 	return ConfirmPrivateVirtualInterfaceRequest{Request: req, Input: input, Copy: c.ConfirmPrivateVirtualInterfaceRequest}
 }
 

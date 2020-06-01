@@ -81,6 +81,7 @@ func (c *Client) DeleteConfigurationAggregatorRequest(input *DeleteConfiguration
 	req := c.newRequest(op, input, &DeleteConfigurationAggregatorOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteConfigurationAggregatorRequest{Request: req, Input: input, Copy: c.DeleteConfigurationAggregatorRequest}
 }
 

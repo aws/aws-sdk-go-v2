@@ -90,6 +90,7 @@ func (c *Client) GetVocabularyFilterRequest(input *GetVocabularyFilterInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetVocabularyFilterOutput{})
+
 	return GetVocabularyFilterRequest{Request: req, Input: input, Copy: c.GetVocabularyFilterRequest}
 }
 

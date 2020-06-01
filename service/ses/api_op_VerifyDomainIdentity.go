@@ -97,6 +97,7 @@ func (c *Client) VerifyDomainIdentityRequest(input *VerifyDomainIdentityInput) V
 	}
 
 	req := c.newRequest(op, input, &VerifyDomainIdentityOutput{})
+
 	return VerifyDomainIdentityRequest{Request: req, Input: input, Copy: c.VerifyDomainIdentityRequest}
 }
 

@@ -349,6 +349,7 @@ func (c *Client) PutSessionRequest(input *PutSessionInput) PutSessionRequest {
 	}
 
 	req := c.newRequest(op, input, &PutSessionOutput{})
+
 	return PutSessionRequest{Request: req, Input: input, Copy: c.PutSessionRequest}
 }
 

@@ -94,6 +94,7 @@ func (c *Client) DeregisterPatchBaselineForPatchGroupRequest(input *DeregisterPa
 	}
 
 	req := c.newRequest(op, input, &DeregisterPatchBaselineForPatchGroupOutput{})
+
 	return DeregisterPatchBaselineForPatchGroupRequest{Request: req, Input: input, Copy: c.DeregisterPatchBaselineForPatchGroupRequest}
 }
 

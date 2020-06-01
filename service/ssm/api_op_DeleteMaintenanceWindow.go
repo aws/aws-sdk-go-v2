@@ -79,6 +79,7 @@ func (c *Client) DeleteMaintenanceWindowRequest(input *DeleteMaintenanceWindowIn
 	}
 
 	req := c.newRequest(op, input, &DeleteMaintenanceWindowOutput{})
+
 	return DeleteMaintenanceWindowRequest{Request: req, Input: input, Copy: c.DeleteMaintenanceWindowRequest}
 }
 

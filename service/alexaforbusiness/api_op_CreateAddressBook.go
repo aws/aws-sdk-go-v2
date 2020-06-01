@@ -91,6 +91,7 @@ func (c *Client) CreateAddressBookRequest(input *CreateAddressBookInput) CreateA
 	}
 
 	req := c.newRequest(op, input, &CreateAddressBookOutput{})
+
 	return CreateAddressBookRequest{Request: req, Input: input, Copy: c.CreateAddressBookRequest}
 }
 

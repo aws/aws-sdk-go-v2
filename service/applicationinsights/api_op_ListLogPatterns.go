@@ -108,6 +108,7 @@ func (c *Client) ListLogPatternsRequest(input *ListLogPatternsInput) ListLogPatt
 	}
 
 	req := c.newRequest(op, input, &ListLogPatternsOutput{})
+
 	return ListLogPatternsRequest{Request: req, Input: input, Copy: c.ListLogPatternsRequest}
 }
 

@@ -155,6 +155,7 @@ func (c *Client) UpdateMLTransformRequest(input *UpdateMLTransformInput) UpdateM
 	}
 
 	req := c.newRequest(op, input, &UpdateMLTransformOutput{})
+
 	return UpdateMLTransformRequest{Request: req, Input: input, Copy: c.UpdateMLTransformRequest}
 }
 

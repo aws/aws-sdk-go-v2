@@ -113,6 +113,7 @@ func (c *Client) ListUsersInGroupRequest(input *ListUsersInGroupInput) ListUsers
 	}
 
 	req := c.newRequest(op, input, &ListUsersInGroupOutput{})
+
 	return ListUsersInGroupRequest{Request: req, Input: input, Copy: c.ListUsersInGroupRequest}
 }
 

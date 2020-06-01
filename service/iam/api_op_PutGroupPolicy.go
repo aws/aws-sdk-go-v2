@@ -145,6 +145,7 @@ func (c *Client) PutGroupPolicyRequest(input *PutGroupPolicyInput) PutGroupPolic
 	req := c.newRequest(op, input, &PutGroupPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutGroupPolicyRequest{Request: req, Input: input, Copy: c.PutGroupPolicyRequest}
 }
 

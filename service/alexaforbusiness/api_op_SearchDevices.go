@@ -121,6 +121,7 @@ func (c *Client) SearchDevicesRequest(input *SearchDevicesInput) SearchDevicesRe
 	}
 
 	req := c.newRequest(op, input, &SearchDevicesOutput{})
+
 	return SearchDevicesRequest{Request: req, Input: input, Copy: c.SearchDevicesRequest}
 }
 

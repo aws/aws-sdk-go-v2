@@ -90,6 +90,7 @@ func (c *Client) GrantAccessRequest(input *GrantAccessInput) GrantAccessRequest 
 	}
 
 	req := c.newRequest(op, input, &GrantAccessOutput{})
+
 	return GrantAccessRequest{Request: req, Input: input, Copy: c.GrantAccessRequest}
 }
 

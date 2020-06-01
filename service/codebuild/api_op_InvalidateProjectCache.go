@@ -76,6 +76,7 @@ func (c *Client) InvalidateProjectCacheRequest(input *InvalidateProjectCacheInpu
 	}
 
 	req := c.newRequest(op, input, &InvalidateProjectCacheOutput{})
+
 	return InvalidateProjectCacheRequest{Request: req, Input: input, Copy: c.InvalidateProjectCacheRequest}
 }
 

@@ -84,6 +84,7 @@ func (c *Client) DeleteClusterSecurityGroupRequest(input *DeleteClusterSecurityG
 	req := c.newRequest(op, input, &DeleteClusterSecurityGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteClusterSecurityGroupRequest{Request: req, Input: input, Copy: c.DeleteClusterSecurityGroupRequest}
 }
 

@@ -111,6 +111,7 @@ func (c *Client) GetEmailTemplateRequest(input *GetEmailTemplateInput) GetEmailT
 	}
 
 	req := c.newRequest(op, input, &GetEmailTemplateOutput{})
+
 	return GetEmailTemplateRequest{Request: req, Input: input, Copy: c.GetEmailTemplateRequest}
 }
 

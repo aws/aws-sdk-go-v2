@@ -105,6 +105,7 @@ func (c *Client) ListFacesRequest(input *ListFacesInput) ListFacesRequest {
 	}
 
 	req := c.newRequest(op, input, &ListFacesOutput{})
+
 	return ListFacesRequest{Request: req, Input: input, Copy: c.ListFacesRequest}
 }
 

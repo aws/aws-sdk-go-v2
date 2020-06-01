@@ -215,6 +215,7 @@ func (c *Client) PollForDecisionTaskRequest(input *PollForDecisionTaskInput) Pol
 	}
 
 	req := c.newRequest(op, input, &PollForDecisionTaskOutput{})
+
 	return PollForDecisionTaskRequest{Request: req, Input: input, Copy: c.PollForDecisionTaskRequest}
 }
 

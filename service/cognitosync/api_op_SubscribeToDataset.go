@@ -156,6 +156,7 @@ func (c *Client) SubscribeToDatasetRequest(input *SubscribeToDatasetInput) Subsc
 	}
 
 	req := c.newRequest(op, input, &SubscribeToDatasetOutput{})
+
 	return SubscribeToDatasetRequest{Request: req, Input: input, Copy: c.SubscribeToDatasetRequest}
 }
 

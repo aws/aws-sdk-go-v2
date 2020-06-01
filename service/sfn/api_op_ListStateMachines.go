@@ -107,6 +107,7 @@ func (c *Client) ListStateMachinesRequest(input *ListStateMachinesInput) ListSta
 	}
 
 	req := c.newRequest(op, input, &ListStateMachinesOutput{})
+
 	return ListStateMachinesRequest{Request: req, Input: input, Copy: c.ListStateMachinesRequest}
 }
 

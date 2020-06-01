@@ -58,6 +58,7 @@ func (c *Client) GetAWSOrganizationsAccessStatusRequest(input *GetAWSOrganizatio
 	}
 
 	req := c.newRequest(op, input, &GetAWSOrganizationsAccessStatusOutput{})
+
 	return GetAWSOrganizationsAccessStatusRequest{Request: req, Input: input, Copy: c.GetAWSOrganizationsAccessStatusRequest}
 }
 

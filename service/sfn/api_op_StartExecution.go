@@ -125,6 +125,7 @@ func (c *Client) StartExecutionRequest(input *StartExecutionInput) StartExecutio
 	}
 
 	req := c.newRequest(op, input, &StartExecutionOutput{})
+
 	return StartExecutionRequest{Request: req, Input: input, Copy: c.StartExecutionRequest}
 }
 

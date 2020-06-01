@@ -156,6 +156,7 @@ func (c *Client) GetBucketInventoryConfigurationRequest(input *GetBucketInventor
 	}
 
 	req := c.newRequest(op, input, &GetBucketInventoryConfigurationOutput{})
+
 	return GetBucketInventoryConfigurationRequest{Request: req, Input: input, Copy: c.GetBucketInventoryConfigurationRequest}
 }
 

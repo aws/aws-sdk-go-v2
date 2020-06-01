@@ -123,6 +123,7 @@ func (c *Client) ImportTerminologyRequest(input *ImportTerminologyInput) ImportT
 	}
 
 	req := c.newRequest(op, input, &ImportTerminologyOutput{})
+
 	return ImportTerminologyRequest{Request: req, Input: input, Copy: c.ImportTerminologyRequest}
 }
 

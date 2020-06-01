@@ -214,6 +214,7 @@ func (c *Client) CreateFileSystemRequest(input *CreateFileSystemInput) CreateFil
 	}
 
 	req := c.newRequest(op, input, &CreateFileSystemOutput{})
+
 	return CreateFileSystemRequest{Request: req, Input: input, Copy: c.CreateFileSystemRequest}
 }
 

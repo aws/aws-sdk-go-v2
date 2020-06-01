@@ -101,6 +101,7 @@ func (c *Client) DeleteDataflowEndpointGroupRequest(input *DeleteDataflowEndpoin
 	}
 
 	req := c.newRequest(op, input, &DeleteDataflowEndpointGroupOutput{})
+
 	return DeleteDataflowEndpointGroupRequest{Request: req, Input: input, Copy: c.DeleteDataflowEndpointGroupRequest}
 }
 

@@ -88,6 +88,7 @@ func (c *Client) ExitStandbyRequest(input *ExitStandbyInput) ExitStandbyRequest 
 	}
 
 	req := c.newRequest(op, input, &ExitStandbyOutput{})
+
 	return ExitStandbyRequest{Request: req, Input: input, Copy: c.ExitStandbyRequest}
 }
 

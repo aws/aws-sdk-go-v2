@@ -135,6 +135,7 @@ func (c *Client) UpdateRoleAliasRequest(input *UpdateRoleAliasInput) UpdateRoleA
 	}
 
 	req := c.newRequest(op, input, &UpdateRoleAliasOutput{})
+
 	return UpdateRoleAliasRequest{Request: req, Input: input, Copy: c.UpdateRoleAliasRequest}
 }
 

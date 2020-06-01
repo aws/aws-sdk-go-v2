@@ -207,6 +207,7 @@ func (c *Client) PutEmailIdentityDkimSigningAttributesRequest(input *PutEmailIde
 	}
 
 	req := c.newRequest(op, input, &PutEmailIdentityDkimSigningAttributesOutput{})
+
 	return PutEmailIdentityDkimSigningAttributesRequest{Request: req, Input: input, Copy: c.PutEmailIdentityDkimSigningAttributesRequest}
 }
 

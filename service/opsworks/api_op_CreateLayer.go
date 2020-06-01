@@ -194,6 +194,7 @@ func (c *Client) CreateLayerRequest(input *CreateLayerInput) CreateLayerRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateLayerOutput{})
+
 	return CreateLayerRequest{Request: req, Input: input, Copy: c.CreateLayerRequest}
 }
 

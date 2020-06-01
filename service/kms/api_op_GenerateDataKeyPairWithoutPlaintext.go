@@ -190,6 +190,7 @@ func (c *Client) GenerateDataKeyPairWithoutPlaintextRequest(input *GenerateDataK
 	}
 
 	req := c.newRequest(op, input, &GenerateDataKeyPairWithoutPlaintextOutput{})
+
 	return GenerateDataKeyPairWithoutPlaintextRequest{Request: req, Input: input, Copy: c.GenerateDataKeyPairWithoutPlaintextRequest}
 }
 

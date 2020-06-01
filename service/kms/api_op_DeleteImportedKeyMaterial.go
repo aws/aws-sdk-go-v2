@@ -105,6 +105,7 @@ func (c *Client) DeleteImportedKeyMaterialRequest(input *DeleteImportedKeyMateri
 	req := c.newRequest(op, input, &DeleteImportedKeyMaterialOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteImportedKeyMaterialRequest{Request: req, Input: input, Copy: c.DeleteImportedKeyMaterialRequest}
 }
 

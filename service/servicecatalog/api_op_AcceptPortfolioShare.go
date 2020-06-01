@@ -99,6 +99,7 @@ func (c *Client) AcceptPortfolioShareRequest(input *AcceptPortfolioShareInput) A
 	}
 
 	req := c.newRequest(op, input, &AcceptPortfolioShareOutput{})
+
 	return AcceptPortfolioShareRequest{Request: req, Input: input, Copy: c.AcceptPortfolioShareRequest}
 }
 

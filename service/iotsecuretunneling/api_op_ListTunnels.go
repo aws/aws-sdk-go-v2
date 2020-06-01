@@ -92,6 +92,7 @@ func (c *Client) ListTunnelsRequest(input *ListTunnelsInput) ListTunnelsRequest 
 	}
 
 	req := c.newRequest(op, input, &ListTunnelsOutput{})
+
 	return ListTunnelsRequest{Request: req, Input: input, Copy: c.ListTunnelsRequest}
 }
 

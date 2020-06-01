@@ -172,6 +172,7 @@ func (c *Client) ListHealthChecksRequest(input *ListHealthChecksInput) ListHealt
 	}
 
 	req := c.newRequest(op, input, &ListHealthChecksOutput{})
+
 	return ListHealthChecksRequest{Request: req, Input: input, Copy: c.ListHealthChecksRequest}
 }
 

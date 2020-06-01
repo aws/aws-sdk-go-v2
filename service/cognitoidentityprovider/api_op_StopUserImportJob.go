@@ -94,6 +94,7 @@ func (c *Client) StopUserImportJobRequest(input *StopUserImportJobInput) StopUse
 	}
 
 	req := c.newRequest(op, input, &StopUserImportJobOutput{})
+
 	return StopUserImportJobRequest{Request: req, Input: input, Copy: c.StopUserImportJobRequest}
 }
 

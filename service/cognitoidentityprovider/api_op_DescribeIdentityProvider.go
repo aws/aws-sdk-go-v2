@@ -93,6 +93,7 @@ func (c *Client) DescribeIdentityProviderRequest(input *DescribeIdentityProvider
 	}
 
 	req := c.newRequest(op, input, &DescribeIdentityProviderOutput{})
+
 	return DescribeIdentityProviderRequest{Request: req, Input: input, Copy: c.DescribeIdentityProviderRequest}
 }
 

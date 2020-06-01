@@ -109,6 +109,7 @@ func (c *Client) SearchEntitiesRequest(input *SearchEntitiesInput) SearchEntitie
 	}
 
 	req := c.newRequest(op, input, &SearchEntitiesOutput{})
+
 	return SearchEntitiesRequest{Request: req, Input: input, Copy: c.SearchEntitiesRequest}
 }
 

@@ -105,6 +105,7 @@ func (c *Client) GetEntitlementsRequest(input *GetEntitlementsInput) GetEntitlem
 	}
 
 	req := c.newRequest(op, input, &GetEntitlementsOutput{})
+
 	return GetEntitlementsRequest{Request: req, Input: input, Copy: c.GetEntitlementsRequest}
 }
 

@@ -101,6 +101,7 @@ func (c *Client) GetOpenIDConnectProviderRequest(input *GetOpenIDConnectProvider
 	}
 
 	req := c.newRequest(op, input, &GetOpenIDConnectProviderOutput{})
+
 	return GetOpenIDConnectProviderRequest{Request: req, Input: input, Copy: c.GetOpenIDConnectProviderRequest}
 }
 

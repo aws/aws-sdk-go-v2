@@ -119,6 +119,7 @@ func (c *Client) DeleteSchemaVersionRequest(input *DeleteSchemaVersionInput) Del
 	req := c.newRequest(op, input, &DeleteSchemaVersionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteSchemaVersionRequest{Request: req, Input: input, Copy: c.DeleteSchemaVersionRequest}
 }
 

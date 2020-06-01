@@ -41,7 +41,7 @@ const opDescribeMetricCollectionTypes = "DescribeMetricCollectionTypes"
 // Describes the available CloudWatch metrics for Amazon EC2 Auto Scaling.
 //
 // The GroupStandbyInstances metric is not returned by default. You must explicitly
-// request this metric when calling EnableMetricsCollection.
+// request this metric when calling the EnableMetricsCollection API.
 //
 //    // Example sending a request using DescribeMetricCollectionTypesRequest.
 //    req := client.DescribeMetricCollectionTypesRequest(params)
@@ -63,6 +63,7 @@ func (c *Client) DescribeMetricCollectionTypesRequest(input *DescribeMetricColle
 	}
 
 	req := c.newRequest(op, input, &DescribeMetricCollectionTypesOutput{})
+
 	return DescribeMetricCollectionTypesRequest{Request: req, Input: input, Copy: c.DescribeMetricCollectionTypesRequest}
 }
 

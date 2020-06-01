@@ -92,6 +92,7 @@ func (c *Client) DescribeCostCategoryDefinitionRequest(input *DescribeCostCatego
 	}
 
 	req := c.newRequest(op, input, &DescribeCostCategoryDefinitionOutput{})
+
 	return DescribeCostCategoryDefinitionRequest{Request: req, Input: input, Copy: c.DescribeCostCategoryDefinitionRequest}
 }
 

@@ -224,6 +224,7 @@ func (c *Client) SendBulkTemplatedEmailRequest(input *SendBulkTemplatedEmailInpu
 	}
 
 	req := c.newRequest(op, input, &SendBulkTemplatedEmailOutput{})
+
 	return SendBulkTemplatedEmailRequest{Request: req, Input: input, Copy: c.SendBulkTemplatedEmailRequest}
 }
 

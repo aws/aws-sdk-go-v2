@@ -158,6 +158,7 @@ func (c *Client) RegisterDeviceRequest(input *RegisterDeviceInput) RegisterDevic
 	}
 
 	req := c.newRequest(op, input, &RegisterDeviceOutput{})
+
 	return RegisterDeviceRequest{Request: req, Input: input, Copy: c.RegisterDeviceRequest}
 }
 

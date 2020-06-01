@@ -97,6 +97,7 @@ func (c *Client) DeleteJobQueueRequest(input *DeleteJobQueueInput) DeleteJobQueu
 	}
 
 	req := c.newRequest(op, input, &DeleteJobQueueOutput{})
+
 	return DeleteJobQueueRequest{Request: req, Input: input, Copy: c.DeleteJobQueueRequest}
 }
 

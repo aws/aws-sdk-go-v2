@@ -85,6 +85,7 @@ func (c *Client) UpdateRoomRequest(input *UpdateRoomInput) UpdateRoomRequest {
 	}
 
 	req := c.newRequest(op, input, &UpdateRoomOutput{})
+
 	return UpdateRoomRequest{Request: req, Input: input, Copy: c.UpdateRoomRequest}
 }
 

@@ -109,6 +109,7 @@ func (c *Client) ListDevicePoolsRequest(input *ListDevicePoolsInput) ListDeviceP
 	}
 
 	req := c.newRequest(op, input, &ListDevicePoolsOutput{})
+
 	return ListDevicePoolsRequest{Request: req, Input: input, Copy: c.ListDevicePoolsRequest}
 }
 

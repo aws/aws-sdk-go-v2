@@ -115,6 +115,7 @@ func (c *Client) DeclineInvitationsRequest(input *DeclineInvitationsInput) Decli
 	}
 
 	req := c.newRequest(op, input, &DeclineInvitationsOutput{})
+
 	return DeclineInvitationsRequest{Request: req, Input: input, Copy: c.DeclineInvitationsRequest}
 }
 

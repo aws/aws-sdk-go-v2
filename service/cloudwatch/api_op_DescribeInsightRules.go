@@ -90,6 +90,7 @@ func (c *Client) DescribeInsightRulesRequest(input *DescribeInsightRulesInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeInsightRulesOutput{})
+
 	return DescribeInsightRulesRequest{Request: req, Input: input, Copy: c.DescribeInsightRulesRequest}
 }
 

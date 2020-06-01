@@ -87,6 +87,7 @@ func (c *Client) StopTrainingJobRequest(input *StopTrainingJobInput) StopTrainin
 	req := c.newRequest(op, input, &StopTrainingJobOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StopTrainingJobRequest{Request: req, Input: input, Copy: c.StopTrainingJobRequest}
 }
 

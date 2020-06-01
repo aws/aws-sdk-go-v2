@@ -57,6 +57,7 @@ func (c *Client) DescribeSubscriptionRequest(input *DescribeSubscriptionInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeSubscriptionOutput{})
+
 	return DescribeSubscriptionRequest{Request: req, Input: input, Copy: c.DescribeSubscriptionRequest}
 }
 

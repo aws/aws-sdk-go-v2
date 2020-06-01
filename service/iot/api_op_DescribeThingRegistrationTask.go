@@ -201,6 +201,7 @@ func (c *Client) DescribeThingRegistrationTaskRequest(input *DescribeThingRegist
 	}
 
 	req := c.newRequest(op, input, &DescribeThingRegistrationTaskOutput{})
+
 	return DescribeThingRegistrationTaskRequest{Request: req, Input: input, Copy: c.DescribeThingRegistrationTaskRequest}
 }
 

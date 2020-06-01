@@ -129,6 +129,7 @@ func (c *Client) PutAccountSettingRequest(input *PutAccountSettingInput) PutAcco
 	}
 
 	req := c.newRequest(op, input, &PutAccountSettingOutput{})
+
 	return PutAccountSettingRequest{Request: req, Input: input, Copy: c.PutAccountSettingRequest}
 }
 

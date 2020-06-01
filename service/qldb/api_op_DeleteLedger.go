@@ -104,6 +104,7 @@ func (c *Client) DeleteLedgerRequest(input *DeleteLedgerInput) DeleteLedgerReque
 	req := c.newRequest(op, input, &DeleteLedgerOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteLedgerRequest{Request: req, Input: input, Copy: c.DeleteLedgerRequest}
 }
 

@@ -77,6 +77,7 @@ func (c *Client) StartCrawlerRequest(input *StartCrawlerInput) StartCrawlerReque
 	}
 
 	req := c.newRequest(op, input, &StartCrawlerOutput{})
+
 	return StartCrawlerRequest{Request: req, Input: input, Copy: c.StartCrawlerRequest}
 }
 

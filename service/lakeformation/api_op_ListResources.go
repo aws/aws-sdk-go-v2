@@ -92,6 +92,7 @@ func (c *Client) ListResourcesRequest(input *ListResourcesInput) ListResourcesRe
 	}
 
 	req := c.newRequest(op, input, &ListResourcesOutput{})
+
 	return ListResourcesRequest{Request: req, Input: input, Copy: c.ListResourcesRequest}
 }
 

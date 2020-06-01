@@ -25,7 +25,7 @@ type CreateRuleInput struct {
 	// of the metric after you create the Rule.
 	//
 	// MetricName is a required field
-	MetricName *string `type:"string" required:"true"`
+	MetricName *string `min:"1" type:"string" required:"true"`
 
 	// A friendly name or description of the Rule. You can't change the name of
 	// a Rule after you create it.
@@ -54,6 +54,9 @@ func (s *CreateRuleInput) Validate() error {
 
 	if s.MetricName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
+	}
+	if s.MetricName != nil && len(*s.MetricName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MetricName", 1))
 	}
 
 	if s.Name == nil {
@@ -100,6 +103,16 @@ const opCreateRule = "CreateRule"
 
 // CreateRuleRequest returns a request value for making API operation for
 // AWS WAF.
+//
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
 //
 // Creates a Rule, which contains the IPSet objects, ByteMatchSet objects, and
 // other predicates that identify the requests that you want to block. If you
@@ -158,6 +171,7 @@ func (c *Client) CreateRuleRequest(input *CreateRuleInput) CreateRuleRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateRuleOutput{})
+
 	return CreateRuleRequest{Request: req, Input: input, Copy: c.CreateRuleRequest}
 }
 

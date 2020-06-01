@@ -76,6 +76,7 @@ func (c *Client) DeleteParameterRequest(input *DeleteParameterInput) DeleteParam
 	}
 
 	req := c.newRequest(op, input, &DeleteParameterOutput{})
+
 	return DeleteParameterRequest{Request: req, Input: input, Copy: c.DeleteParameterRequest}
 }
 

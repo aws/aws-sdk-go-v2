@@ -118,6 +118,7 @@ func (c *Client) AssociateRoleToGroupRequest(input *AssociateRoleToGroupInput) A
 	}
 
 	req := c.newRequest(op, input, &AssociateRoleToGroupOutput{})
+
 	return AssociateRoleToGroupRequest{Request: req, Input: input, Copy: c.AssociateRoleToGroupRequest}
 }
 

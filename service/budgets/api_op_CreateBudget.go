@@ -110,6 +110,7 @@ func (c *Client) CreateBudgetRequest(input *CreateBudgetInput) CreateBudgetReque
 	}
 
 	req := c.newRequest(op, input, &CreateBudgetOutput{})
+
 	return CreateBudgetRequest{Request: req, Input: input, Copy: c.CreateBudgetRequest}
 }
 

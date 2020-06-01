@@ -41,7 +41,7 @@ type GetOperationOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that describe the result of the action, such as the status
-	// of the request, the time stamp of the request, and the resources affected
+	// of the request, the timestamp of the request, and the resources affected
 	// by the request.
 	Operation *Operation `locationName:"operation" type:"structure"`
 }
@@ -80,6 +80,7 @@ func (c *Client) GetOperationRequest(input *GetOperationInput) GetOperationReque
 	}
 
 	req := c.newRequest(op, input, &GetOperationOutput{})
+
 	return GetOperationRequest{Request: req, Input: input, Copy: c.GetOperationRequest}
 }
 

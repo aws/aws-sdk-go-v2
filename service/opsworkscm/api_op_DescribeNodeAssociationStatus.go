@@ -104,6 +104,7 @@ func (c *Client) DescribeNodeAssociationStatusRequest(input *DescribeNodeAssocia
 	}
 
 	req := c.newRequest(op, input, &DescribeNodeAssociationStatusOutput{})
+
 	return DescribeNodeAssociationStatusRequest{Request: req, Input: input, Copy: c.DescribeNodeAssociationStatusRequest}
 }
 

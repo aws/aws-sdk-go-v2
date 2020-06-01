@@ -98,6 +98,7 @@ func (c *Client) DeleteVolumeRequest(input *DeleteVolumeInput) DeleteVolumeReque
 	}
 
 	req := c.newRequest(op, input, &DeleteVolumeOutput{})
+
 	return DeleteVolumeRequest{Request: req, Input: input, Copy: c.DeleteVolumeRequest}
 }
 

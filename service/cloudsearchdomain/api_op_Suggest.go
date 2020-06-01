@@ -151,6 +151,7 @@ func (c *Client) SuggestRequest(input *SuggestInput) SuggestRequest {
 	}
 
 	req := c.newRequest(op, input, &SuggestOutput{})
+
 	return SuggestRequest{Request: req, Input: input, Copy: c.SuggestRequest}
 }
 

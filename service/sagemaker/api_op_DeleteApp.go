@@ -103,6 +103,7 @@ func (c *Client) DeleteAppRequest(input *DeleteAppInput) DeleteAppRequest {
 	req := c.newRequest(op, input, &DeleteAppOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteAppRequest{Request: req, Input: input, Copy: c.DeleteAppRequest}
 }
 

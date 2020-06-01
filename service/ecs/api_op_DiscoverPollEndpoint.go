@@ -74,6 +74,7 @@ func (c *Client) DiscoverPollEndpointRequest(input *DiscoverPollEndpointInput) D
 	}
 
 	req := c.newRequest(op, input, &DiscoverPollEndpointOutput{})
+
 	return DiscoverPollEndpointRequest{Request: req, Input: input, Copy: c.DiscoverPollEndpointRequest}
 }
 

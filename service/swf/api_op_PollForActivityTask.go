@@ -160,6 +160,7 @@ func (c *Client) PollForActivityTaskRequest(input *PollForActivityTaskInput) Pol
 	}
 
 	req := c.newRequest(op, input, &PollForActivityTaskOutput{})
+
 	return PollForActivityTaskRequest{Request: req, Input: input, Copy: c.PollForActivityTaskRequest}
 }
 

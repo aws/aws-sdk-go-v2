@@ -99,6 +99,7 @@ func (c *Client) DescribeStackInstanceRequest(input *DescribeStackInstanceInput)
 	}
 
 	req := c.newRequest(op, input, &DescribeStackInstanceOutput{})
+
 	return DescribeStackInstanceRequest{Request: req, Input: input, Copy: c.DescribeStackInstanceRequest}
 }
 

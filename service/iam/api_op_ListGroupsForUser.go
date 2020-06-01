@@ -129,6 +129,7 @@ func (c *Client) ListGroupsForUserRequest(input *ListGroupsForUserInput) ListGro
 	}
 
 	req := c.newRequest(op, input, &ListGroupsForUserOutput{})
+
 	return ListGroupsForUserRequest{Request: req, Input: input, Copy: c.ListGroupsForUserRequest}
 }
 

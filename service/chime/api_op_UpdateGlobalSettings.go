@@ -111,6 +111,7 @@ func (c *Client) UpdateGlobalSettingsRequest(input *UpdateGlobalSettingsInput) U
 	req := c.newRequest(op, input, &UpdateGlobalSettingsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UpdateGlobalSettingsRequest{Request: req, Input: input, Copy: c.UpdateGlobalSettingsRequest}
 }
 

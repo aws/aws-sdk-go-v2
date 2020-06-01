@@ -82,6 +82,12 @@ const (
 	CloudWatchRegionSaEast1      CloudWatchRegion = "sa-east-1"
 	CloudWatchRegionCnNorthwest1 CloudWatchRegion = "cn-northwest-1"
 	CloudWatchRegionCnNorth1     CloudWatchRegion = "cn-north-1"
+	CloudWatchRegionAfSouth1     CloudWatchRegion = "af-south-1"
+	CloudWatchRegionEuSouth1     CloudWatchRegion = "eu-south-1"
+	CloudWatchRegionUsGovWest1   CloudWatchRegion = "us-gov-west-1"
+	CloudWatchRegionUsGovEast1   CloudWatchRegion = "us-gov-east-1"
+	CloudWatchRegionUsIsoEast1   CloudWatchRegion = "us-iso-east-1"
+	CloudWatchRegionUsIsobEast1  CloudWatchRegion = "us-isob-east-1"
 )
 
 func (enum CloudWatchRegion) MarshalValue() (string, error) {
@@ -280,6 +286,8 @@ const (
 	ResourceRecordSetRegionApEast1      ResourceRecordSetRegion = "ap-east-1"
 	ResourceRecordSetRegionMeSouth1     ResourceRecordSetRegion = "me-south-1"
 	ResourceRecordSetRegionApSouth1     ResourceRecordSetRegion = "ap-south-1"
+	ResourceRecordSetRegionAfSouth1     ResourceRecordSetRegion = "af-south-1"
+	ResourceRecordSetRegionEuSouth1     ResourceRecordSetRegion = "eu-south-1"
 )
 
 func (enum ResourceRecordSetRegion) MarshalValue() (string, error) {
@@ -358,6 +366,10 @@ const (
 	VPCRegionEuCentral1   VPCRegion = "eu-central-1"
 	VPCRegionApEast1      VPCRegion = "ap-east-1"
 	VPCRegionMeSouth1     VPCRegion = "me-south-1"
+	VPCRegionUsGovWest1   VPCRegion = "us-gov-west-1"
+	VPCRegionUsGovEast1   VPCRegion = "us-gov-east-1"
+	VPCRegionUsIsoEast1   VPCRegion = "us-iso-east-1"
+	VPCRegionUsIsobEast1  VPCRegion = "us-isob-east-1"
 	VPCRegionApSoutheast1 VPCRegion = "ap-southeast-1"
 	VPCRegionApSoutheast2 VPCRegion = "ap-southeast-2"
 	VPCRegionApSouth1     VPCRegion = "ap-south-1"
@@ -368,6 +380,8 @@ const (
 	VPCRegionSaEast1      VPCRegion = "sa-east-1"
 	VPCRegionCaCentral1   VPCRegion = "ca-central-1"
 	VPCRegionCnNorth1     VPCRegion = "cn-north-1"
+	VPCRegionAfSouth1     VPCRegion = "af-south-1"
+	VPCRegionEuSouth1     VPCRegion = "eu-south-1"
 )
 
 func (enum VPCRegion) MarshalValue() (string, error) {

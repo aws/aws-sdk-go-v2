@@ -146,6 +146,7 @@ func (c *Client) CreateCustomMetadataRequest(input *CreateCustomMetadataInput) C
 	}
 
 	req := c.newRequest(op, input, &CreateCustomMetadataOutput{})
+
 	return CreateCustomMetadataRequest{Request: req, Input: input, Copy: c.CreateCustomMetadataRequest}
 }
 

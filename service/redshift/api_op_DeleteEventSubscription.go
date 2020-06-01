@@ -77,6 +77,7 @@ func (c *Client) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionIn
 	req := c.newRequest(op, input, &DeleteEventSubscriptionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteEventSubscriptionRequest{Request: req, Input: input, Copy: c.DeleteEventSubscriptionRequest}
 }
 

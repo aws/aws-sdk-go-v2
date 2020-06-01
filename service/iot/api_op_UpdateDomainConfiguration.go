@@ -146,6 +146,7 @@ func (c *Client) UpdateDomainConfigurationRequest(input *UpdateDomainConfigurati
 	}
 
 	req := c.newRequest(op, input, &UpdateDomainConfigurationOutput{})
+
 	return UpdateDomainConfigurationRequest{Request: req, Input: input, Copy: c.UpdateDomainConfigurationRequest}
 }
 

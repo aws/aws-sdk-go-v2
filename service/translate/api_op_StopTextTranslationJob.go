@@ -92,6 +92,7 @@ func (c *Client) StopTextTranslationJobRequest(input *StopTextTranslationJobInpu
 	}
 
 	req := c.newRequest(op, input, &StopTextTranslationJobOutput{})
+
 	return StopTextTranslationJobRequest{Request: req, Input: input, Copy: c.StopTextTranslationJobRequest}
 }
 

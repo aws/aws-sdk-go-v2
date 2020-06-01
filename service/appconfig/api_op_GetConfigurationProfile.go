@@ -178,6 +178,7 @@ func (c *Client) GetConfigurationProfileRequest(input *GetConfigurationProfileIn
 	}
 
 	req := c.newRequest(op, input, &GetConfigurationProfileOutput{})
+
 	return GetConfigurationProfileRequest{Request: req, Input: input, Copy: c.GetConfigurationProfileRequest}
 }
 

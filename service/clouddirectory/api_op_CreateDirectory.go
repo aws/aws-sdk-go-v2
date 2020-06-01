@@ -163,6 +163,7 @@ func (c *Client) CreateDirectoryRequest(input *CreateDirectoryInput) CreateDirec
 	}
 
 	req := c.newRequest(op, input, &CreateDirectoryOutput{})
+
 	return CreateDirectoryRequest{Request: req, Input: input, Copy: c.CreateDirectoryRequest}
 }
 

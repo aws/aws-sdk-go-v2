@@ -59,6 +59,7 @@ func (c *Client) AssociateServiceQuotaTemplateRequest(input *AssociateServiceQuo
 	}
 
 	req := c.newRequest(op, input, &AssociateServiceQuotaTemplateOutput{})
+
 	return AssociateServiceQuotaTemplateRequest{Request: req, Input: input, Copy: c.AssociateServiceQuotaTemplateRequest}
 }
 

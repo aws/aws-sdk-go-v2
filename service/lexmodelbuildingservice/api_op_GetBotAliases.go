@@ -168,6 +168,7 @@ func (c *Client) GetBotAliasesRequest(input *GetBotAliasesInput) GetBotAliasesRe
 	}
 
 	req := c.newRequest(op, input, &GetBotAliasesOutput{})
+
 	return GetBotAliasesRequest{Request: req, Input: input, Copy: c.GetBotAliasesRequest}
 }
 

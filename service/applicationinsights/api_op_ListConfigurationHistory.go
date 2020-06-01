@@ -122,6 +122,7 @@ func (c *Client) ListConfigurationHistoryRequest(input *ListConfigurationHistory
 	}
 
 	req := c.newRequest(op, input, &ListConfigurationHistoryOutput{})
+
 	return ListConfigurationHistoryRequest{Request: req, Input: input, Copy: c.ListConfigurationHistoryRequest}
 }
 

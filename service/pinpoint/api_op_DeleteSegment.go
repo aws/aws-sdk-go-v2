@@ -115,6 +115,7 @@ func (c *Client) DeleteSegmentRequest(input *DeleteSegmentInput) DeleteSegmentRe
 	}
 
 	req := c.newRequest(op, input, &DeleteSegmentOutput{})
+
 	return DeleteSegmentRequest{Request: req, Input: input, Copy: c.DeleteSegmentRequest}
 }
 

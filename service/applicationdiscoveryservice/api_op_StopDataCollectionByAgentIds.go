@@ -78,6 +78,7 @@ func (c *Client) StopDataCollectionByAgentIdsRequest(input *StopDataCollectionBy
 	}
 
 	req := c.newRequest(op, input, &StopDataCollectionByAgentIdsOutput{})
+
 	return StopDataCollectionByAgentIdsRequest{Request: req, Input: input, Copy: c.StopDataCollectionByAgentIdsRequest}
 }
 

@@ -92,6 +92,7 @@ func (c *Client) GetReservedNodeExchangeOfferingsRequest(input *GetReservedNodeE
 	}
 
 	req := c.newRequest(op, input, &GetReservedNodeExchangeOfferingsOutput{})
+
 	return GetReservedNodeExchangeOfferingsRequest{Request: req, Input: input, Copy: c.GetReservedNodeExchangeOfferingsRequest}
 }
 

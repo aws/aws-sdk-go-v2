@@ -95,6 +95,7 @@ func (c *Client) UpdateResolverRuleRequest(input *UpdateResolverRuleInput) Updat
 	}
 
 	req := c.newRequest(op, input, &UpdateResolverRuleOutput{})
+
 	return UpdateResolverRuleRequest{Request: req, Input: input, Copy: c.UpdateResolverRuleRequest}
 }
 

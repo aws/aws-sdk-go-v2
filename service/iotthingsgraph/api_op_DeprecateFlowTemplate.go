@@ -79,6 +79,7 @@ func (c *Client) DeprecateFlowTemplateRequest(input *DeprecateFlowTemplateInput)
 	}
 
 	req := c.newRequest(op, input, &DeprecateFlowTemplateOutput{})
+
 	return DeprecateFlowTemplateRequest{Request: req, Input: input, Copy: c.DeprecateFlowTemplateRequest}
 }
 

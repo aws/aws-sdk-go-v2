@@ -111,6 +111,7 @@ func (c *Client) GetDistributionConfigurationRequest(input *GetDistributionConfi
 	}
 
 	req := c.newRequest(op, input, &GetDistributionConfigurationOutput{})
+
 	return GetDistributionConfigurationRequest{Request: req, Input: input, Copy: c.GetDistributionConfigurationRequest}
 }
 

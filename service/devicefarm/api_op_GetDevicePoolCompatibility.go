@@ -148,6 +148,7 @@ func (c *Client) GetDevicePoolCompatibilityRequest(input *GetDevicePoolCompatibi
 	}
 
 	req := c.newRequest(op, input, &GetDevicePoolCompatibilityOutput{})
+
 	return GetDevicePoolCompatibilityRequest{Request: req, Input: input, Copy: c.GetDevicePoolCompatibilityRequest}
 }
 

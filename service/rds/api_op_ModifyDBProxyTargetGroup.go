@@ -98,6 +98,7 @@ func (c *Client) ModifyDBProxyTargetGroupRequest(input *ModifyDBProxyTargetGroup
 	}
 
 	req := c.newRequest(op, input, &ModifyDBProxyTargetGroupOutput{})
+
 	return ModifyDBProxyTargetGroupRequest{Request: req, Input: input, Copy: c.ModifyDBProxyTargetGroupRequest}
 }
 

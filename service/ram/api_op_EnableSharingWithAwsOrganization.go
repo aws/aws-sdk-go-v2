@@ -78,6 +78,7 @@ func (c *Client) EnableSharingWithAwsOrganizationRequest(input *EnableSharingWit
 	}
 
 	req := c.newRequest(op, input, &EnableSharingWithAwsOrganizationOutput{})
+
 	return EnableSharingWithAwsOrganizationRequest{Request: req, Input: input, Copy: c.EnableSharingWithAwsOrganizationRequest}
 }
 

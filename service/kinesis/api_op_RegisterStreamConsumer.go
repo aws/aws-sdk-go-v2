@@ -106,6 +106,7 @@ func (c *Client) RegisterStreamConsumerRequest(input *RegisterStreamConsumerInpu
 	}
 
 	req := c.newRequest(op, input, &RegisterStreamConsumerOutput{})
+
 	return RegisterStreamConsumerRequest{Request: req, Input: input, Copy: c.RegisterStreamConsumerRequest}
 }
 

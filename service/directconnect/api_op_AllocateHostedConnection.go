@@ -212,6 +212,7 @@ func (c *Client) AllocateHostedConnectionRequest(input *AllocateHostedConnection
 	}
 
 	req := c.newRequest(op, input, &AllocateHostedConnectionOutput{})
+
 	return AllocateHostedConnectionRequest{Request: req, Input: input, Copy: c.AllocateHostedConnectionRequest}
 }
 

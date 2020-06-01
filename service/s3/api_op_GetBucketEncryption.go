@@ -138,6 +138,7 @@ func (c *Client) GetBucketEncryptionRequest(input *GetBucketEncryptionInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetBucketEncryptionOutput{})
+
 	return GetBucketEncryptionRequest{Request: req, Input: input, Copy: c.GetBucketEncryptionRequest}
 }
 

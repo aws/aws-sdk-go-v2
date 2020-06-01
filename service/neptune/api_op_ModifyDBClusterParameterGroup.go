@@ -112,6 +112,7 @@ func (c *Client) ModifyDBClusterParameterGroupRequest(input *ModifyDBClusterPara
 	}
 
 	req := c.newRequest(op, input, &ModifyDBClusterParameterGroupOutput{})
+
 	return ModifyDBClusterParameterGroupRequest{Request: req, Input: input, Copy: c.ModifyDBClusterParameterGroupRequest}
 }
 

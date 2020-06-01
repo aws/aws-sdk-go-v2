@@ -107,6 +107,7 @@ func (c *Client) DeleteMessageRequest(input *DeleteMessageInput) DeleteMessageRe
 	req := c.newRequest(op, input, &DeleteMessageOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteMessageRequest{Request: req, Input: input, Copy: c.DeleteMessageRequest}
 }
 

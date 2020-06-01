@@ -153,6 +153,7 @@ func (c *Client) GetCostAndUsageWithResourcesRequest(input *GetCostAndUsageWithR
 	}
 
 	req := c.newRequest(op, input, &GetCostAndUsageWithResourcesOutput{})
+
 	return GetCostAndUsageWithResourcesRequest{Request: req, Input: input, Copy: c.GetCostAndUsageWithResourcesRequest}
 }
 

@@ -103,6 +103,7 @@ func (c *Client) GetApnsSandboxChannelRequest(input *GetApnsSandboxChannelInput)
 	}
 
 	req := c.newRequest(op, input, &GetApnsSandboxChannelOutput{})
+
 	return GetApnsSandboxChannelRequest{Request: req, Input: input, Copy: c.GetApnsSandboxChannelRequest}
 }
 

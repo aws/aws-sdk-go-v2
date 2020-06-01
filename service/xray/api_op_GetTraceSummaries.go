@@ -228,6 +228,7 @@ func (c *Client) GetTraceSummariesRequest(input *GetTraceSummariesInput) GetTrac
 	}
 
 	req := c.newRequest(op, input, &GetTraceSummariesOutput{})
+
 	return GetTraceSummariesRequest{Request: req, Input: input, Copy: c.GetTraceSummariesRequest}
 }
 

@@ -164,6 +164,7 @@ func (c *Client) GetDomainStatisticsReportRequest(input *GetDomainStatisticsRepo
 	}
 
 	req := c.newRequest(op, input, &GetDomainStatisticsReportOutput{})
+
 	return GetDomainStatisticsReportRequest{Request: req, Input: input, Copy: c.GetDomainStatisticsReportRequest}
 }
 

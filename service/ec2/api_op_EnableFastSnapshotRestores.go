@@ -105,6 +105,7 @@ func (c *Client) EnableFastSnapshotRestoresRequest(input *EnableFastSnapshotRest
 	}
 
 	req := c.newRequest(op, input, &EnableFastSnapshotRestoresOutput{})
+
 	return EnableFastSnapshotRestoresRequest{Request: req, Input: input, Copy: c.EnableFastSnapshotRestoresRequest}
 }
 

@@ -120,6 +120,7 @@ func (c *Client) SearchSkillGroupsRequest(input *SearchSkillGroupsInput) SearchS
 	}
 
 	req := c.newRequest(op, input, &SearchSkillGroupsOutput{})
+
 	return SearchSkillGroupsRequest{Request: req, Input: input, Copy: c.SearchSkillGroupsRequest}
 }
 

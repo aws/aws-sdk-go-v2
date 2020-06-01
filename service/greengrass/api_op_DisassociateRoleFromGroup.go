@@ -100,6 +100,7 @@ func (c *Client) DisassociateRoleFromGroupRequest(input *DisassociateRoleFromGro
 	}
 
 	req := c.newRequest(op, input, &DisassociateRoleFromGroupOutput{})
+
 	return DisassociateRoleFromGroupRequest{Request: req, Input: input, Copy: c.DisassociateRoleFromGroupRequest}
 }
 

@@ -109,6 +109,7 @@ func (c *Client) StopFlowRequest(input *StopFlowInput) StopFlowRequest {
 	}
 
 	req := c.newRequest(op, input, &StopFlowOutput{})
+
 	return StopFlowRequest{Request: req, Input: input, Copy: c.StopFlowRequest}
 }
 

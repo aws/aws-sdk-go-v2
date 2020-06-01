@@ -89,6 +89,7 @@ func (c *Client) ListIpRoutesRequest(input *ListIpRoutesInput) ListIpRoutesReque
 	}
 
 	req := c.newRequest(op, input, &ListIpRoutesOutput{})
+
 	return ListIpRoutesRequest{Request: req, Input: input, Copy: c.ListIpRoutesRequest}
 }
 

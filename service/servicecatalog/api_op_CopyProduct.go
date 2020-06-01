@@ -126,6 +126,7 @@ func (c *Client) CopyProductRequest(input *CopyProductInput) CopyProductRequest 
 	}
 
 	req := c.newRequest(op, input, &CopyProductOutput{})
+
 	return CopyProductRequest{Request: req, Input: input, Copy: c.CopyProductRequest}
 }
 

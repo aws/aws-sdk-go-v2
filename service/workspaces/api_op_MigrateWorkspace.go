@@ -101,6 +101,7 @@ func (c *Client) MigrateWorkspaceRequest(input *MigrateWorkspaceInput) MigrateWo
 	}
 
 	req := c.newRequest(op, input, &MigrateWorkspaceOutput{})
+
 	return MigrateWorkspaceRequest{Request: req, Input: input, Copy: c.MigrateWorkspaceRequest}
 }
 

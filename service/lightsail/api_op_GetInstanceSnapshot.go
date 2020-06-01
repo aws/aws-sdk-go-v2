@@ -77,6 +77,7 @@ func (c *Client) GetInstanceSnapshotRequest(input *GetInstanceSnapshotInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetInstanceSnapshotOutput{})
+
 	return GetInstanceSnapshotRequest{Request: req, Input: input, Copy: c.GetInstanceSnapshotRequest}
 }
 

@@ -166,6 +166,7 @@ func (c *Client) DescribeJobDefinitionsRequest(input *DescribeJobDefinitionsInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeJobDefinitionsOutput{})
+
 	return DescribeJobDefinitionsRequest{Request: req, Input: input, Copy: c.DescribeJobDefinitionsRequest}
 }
 

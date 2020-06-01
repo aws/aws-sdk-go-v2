@@ -135,6 +135,7 @@ func (c *Client) PostAgentProfileRequest(input *PostAgentProfileInput) PostAgent
 	}
 
 	req := c.newRequest(op, input, &PostAgentProfileOutput{})
+
 	return PostAgentProfileRequest{Request: req, Input: input, Copy: c.PostAgentProfileRequest}
 }
 

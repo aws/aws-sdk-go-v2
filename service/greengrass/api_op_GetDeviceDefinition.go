@@ -161,6 +161,7 @@ func (c *Client) GetDeviceDefinitionRequest(input *GetDeviceDefinitionInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetDeviceDefinitionOutput{})
+
 	return GetDeviceDefinitionRequest{Request: req, Input: input, Copy: c.GetDeviceDefinitionRequest}
 }
 

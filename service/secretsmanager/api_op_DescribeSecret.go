@@ -174,6 +174,7 @@ func (c *Client) DescribeSecretRequest(input *DescribeSecretInput) DescribeSecre
 	}
 
 	req := c.newRequest(op, input, &DescribeSecretOutput{})
+
 	return DescribeSecretRequest{Request: req, Input: input, Copy: c.DescribeSecretRequest}
 }
 

@@ -208,6 +208,7 @@ func (c *Client) ListCodeReviewsRequest(input *ListCodeReviewsInput) ListCodeRev
 	}
 
 	req := c.newRequest(op, input, &ListCodeReviewsOutput{})
+
 	return ListCodeReviewsRequest{Request: req, Input: input, Copy: c.ListCodeReviewsRequest}
 }
 

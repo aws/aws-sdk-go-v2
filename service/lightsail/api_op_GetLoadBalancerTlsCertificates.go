@@ -82,6 +82,7 @@ func (c *Client) GetLoadBalancerTlsCertificatesRequest(input *GetLoadBalancerTls
 	}
 
 	req := c.newRequest(op, input, &GetLoadBalancerTlsCertificatesOutput{})
+
 	return GetLoadBalancerTlsCertificatesRequest{Request: req, Input: input, Copy: c.GetLoadBalancerTlsCertificatesRequest}
 }
 

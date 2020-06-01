@@ -83,6 +83,7 @@ func (c *Client) UpdateTrustRequest(input *UpdateTrustInput) UpdateTrustRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateTrustOutput{})
+
 	return UpdateTrustRequest{Request: req, Input: input, Copy: c.UpdateTrustRequest}
 }
 

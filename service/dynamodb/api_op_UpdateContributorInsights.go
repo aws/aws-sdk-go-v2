@@ -99,6 +99,7 @@ func (c *Client) UpdateContributorInsightsRequest(input *UpdateContributorInsigh
 	}
 
 	req := c.newRequest(op, input, &UpdateContributorInsightsOutput{})
+
 	return UpdateContributorInsightsRequest{Request: req, Input: input, Copy: c.UpdateContributorInsightsRequest}
 }
 

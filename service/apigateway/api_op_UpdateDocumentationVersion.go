@@ -157,6 +157,7 @@ func (c *Client) UpdateDocumentationVersionRequest(input *UpdateDocumentationVer
 	}
 
 	req := c.newRequest(op, input, &UpdateDocumentationVersionOutput{})
+
 	return UpdateDocumentationVersionRequest{Request: req, Input: input, Copy: c.UpdateDocumentationVersionRequest}
 }
 

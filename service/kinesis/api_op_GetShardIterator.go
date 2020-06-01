@@ -173,6 +173,7 @@ func (c *Client) GetShardIteratorRequest(input *GetShardIteratorInput) GetShardI
 	}
 
 	req := c.newRequest(op, input, &GetShardIteratorOutput{})
+
 	return GetShardIteratorRequest{Request: req, Input: input, Copy: c.GetShardIteratorRequest}
 }
 

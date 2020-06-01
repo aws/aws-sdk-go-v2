@@ -203,6 +203,7 @@ func (c *Client) ListRecoveryPointsByBackupVaultRequest(input *ListRecoveryPoint
 	}
 
 	req := c.newRequest(op, input, &ListRecoveryPointsByBackupVaultOutput{})
+
 	return ListRecoveryPointsByBackupVaultRequest{Request: req, Input: input, Copy: c.ListRecoveryPointsByBackupVaultRequest}
 }
 

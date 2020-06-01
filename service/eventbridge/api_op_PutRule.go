@@ -169,6 +169,7 @@ func (c *Client) PutRuleRequest(input *PutRuleInput) PutRuleRequest {
 	}
 
 	req := c.newRequest(op, input, &PutRuleOutput{})
+
 	return PutRuleRequest{Request: req, Input: input, Copy: c.PutRuleRequest}
 }
 

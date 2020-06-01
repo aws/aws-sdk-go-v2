@@ -157,6 +157,7 @@ func (c *Client) DescribeCompilationJobRequest(input *DescribeCompilationJobInpu
 	}
 
 	req := c.newRequest(op, input, &DescribeCompilationJobOutput{})
+
 	return DescribeCompilationJobRequest{Request: req, Input: input, Copy: c.DescribeCompilationJobRequest}
 }
 

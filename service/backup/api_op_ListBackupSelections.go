@@ -151,6 +151,7 @@ func (c *Client) ListBackupSelectionsRequest(input *ListBackupSelectionsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListBackupSelectionsOutput{})
+
 	return ListBackupSelectionsRequest{Request: req, Input: input, Copy: c.ListBackupSelectionsRequest}
 }
 

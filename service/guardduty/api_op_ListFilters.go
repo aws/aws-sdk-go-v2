@@ -153,6 +153,7 @@ func (c *Client) ListFiltersRequest(input *ListFiltersInput) ListFiltersRequest 
 	}
 
 	req := c.newRequest(op, input, &ListFiltersOutput{})
+
 	return ListFiltersRequest{Request: req, Input: input, Copy: c.ListFiltersRequest}
 }
 

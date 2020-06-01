@@ -135,6 +135,7 @@ func (c *Client) GetRoleCredentialsRequest(input *GetRoleCredentialsInput) GetRo
 
 	req := c.newRequest(op, input, &GetRoleCredentialsOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return GetRoleCredentialsRequest{Request: req, Input: input, Copy: c.GetRoleCredentialsRequest}
 }
 

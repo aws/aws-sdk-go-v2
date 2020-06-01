@@ -103,6 +103,7 @@ func (c *Client) DeleteAdmChannelRequest(input *DeleteAdmChannelInput) DeleteAdm
 	}
 
 	req := c.newRequest(op, input, &DeleteAdmChannelOutput{})
+
 	return DeleteAdmChannelRequest{Request: req, Input: input, Copy: c.DeleteAdmChannelRequest}
 }
 

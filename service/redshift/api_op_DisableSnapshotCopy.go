@@ -85,6 +85,7 @@ func (c *Client) DisableSnapshotCopyRequest(input *DisableSnapshotCopyInput) Dis
 	}
 
 	req := c.newRequest(op, input, &DisableSnapshotCopyOutput{})
+
 	return DisableSnapshotCopyRequest{Request: req, Input: input, Copy: c.DisableSnapshotCopyRequest}
 }
 

@@ -25,7 +25,7 @@ type PutScalingPolicyInput struct {
 	// TargetTrackingScaling—Not supported for Amazon EMR
 	//
 	// StepScaling—Not supported for DynamoDB, Amazon Comprehend, Lambda, or Amazon
-	// Keyspaces for Apache Cassandra.
+	// Keyspaces (for Apache Cassandra).
 	//
 	// For more information, see Target Tracking Scaling Policies (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)
 	// and Step Scaling Policies (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)
@@ -236,6 +236,14 @@ const opPutScalingPolicy = "PutScalingPolicy"
 // uses the policy with the highest calculated capacity (200% of 10 = 20) and
 // scales out to 30.
 //
+// We recommend caution, however, when using target tracking scaling policies
+// with step scaling policies because conflicts between these policies can cause
+// undesirable behavior. For example, if the step scaling policy initiates a
+// scale-in activity before the target tracking policy is ready to scale in,
+// the scale-in activity will not be blocked. After the scale-in activity completes,
+// the target tracking policy could instruct the scalable target to scale out
+// again.
+//
 // For more information, see Target Tracking Scaling Policies (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)
 // and Step Scaling Policies (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)
 // in the Application Auto Scaling User Guide.
@@ -264,6 +272,7 @@ func (c *Client) PutScalingPolicyRequest(input *PutScalingPolicyInput) PutScalin
 	}
 
 	req := c.newRequest(op, input, &PutScalingPolicyOutput{})
+
 	return PutScalingPolicyRequest{Request: req, Input: input, Copy: c.PutScalingPolicyRequest}
 }
 

@@ -110,6 +110,7 @@ func (c *Client) StartImageScanRequest(input *StartImageScanInput) StartImageSca
 	}
 
 	req := c.newRequest(op, input, &StartImageScanOutput{})
+
 	return StartImageScanRequest{Request: req, Input: input, Copy: c.StartImageScanRequest}
 }
 

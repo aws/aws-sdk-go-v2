@@ -87,6 +87,7 @@ func (c *Client) GetPullRequestApprovalStatesRequest(input *GetPullRequestApprov
 	}
 
 	req := c.newRequest(op, input, &GetPullRequestApprovalStatesOutput{})
+
 	return GetPullRequestApprovalStatesRequest{Request: req, Input: input, Copy: c.GetPullRequestApprovalStatesRequest}
 }
 

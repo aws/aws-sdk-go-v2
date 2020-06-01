@@ -85,6 +85,7 @@ func (c *Client) CreateDatabaseRequest(input *CreateDatabaseInput) CreateDatabas
 	}
 
 	req := c.newRequest(op, input, &CreateDatabaseOutput{})
+
 	return CreateDatabaseRequest{Request: req, Input: input, Copy: c.CreateDatabaseRequest}
 }
 

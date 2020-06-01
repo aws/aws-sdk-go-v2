@@ -122,6 +122,7 @@ func (c *Client) UnlinkDeveloperIdentityRequest(input *UnlinkDeveloperIdentityIn
 	req := c.newRequest(op, input, &UnlinkDeveloperIdentityOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UnlinkDeveloperIdentityRequest{Request: req, Input: input, Copy: c.UnlinkDeveloperIdentityRequest}
 }
 

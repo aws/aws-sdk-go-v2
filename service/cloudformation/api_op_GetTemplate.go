@@ -114,6 +114,7 @@ func (c *Client) GetTemplateRequest(input *GetTemplateInput) GetTemplateRequest 
 	}
 
 	req := c.newRequest(op, input, &GetTemplateOutput{})
+
 	return GetTemplateRequest{Request: req, Input: input, Copy: c.GetTemplateRequest}
 }
 

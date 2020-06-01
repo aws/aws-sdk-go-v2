@@ -108,6 +108,7 @@ func (c *Client) AssociateWebACLRequest(input *AssociateWebACLInput) AssociateWe
 	}
 
 	req := c.newRequest(op, input, &AssociateWebACLOutput{})
+
 	return AssociateWebACLRequest{Request: req, Input: input, Copy: c.AssociateWebACLRequest}
 }
 

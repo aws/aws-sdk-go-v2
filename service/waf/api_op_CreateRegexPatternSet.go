@@ -75,6 +75,16 @@ const opCreateRegexPatternSet = "CreateRegexPatternSet"
 // CreateRegexPatternSetRequest returns a request value for making API operation for
 // AWS WAF.
 //
+//
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// in the developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use.
+//
 // Creates a RegexPatternSet. You then use UpdateRegexPatternSet to specify
 // the regular expression (regex) pattern that you want AWS WAF to search for,
 // such as B[a@]dB[o0]t. You can then configure AWS WAF to reject those requests.
@@ -115,6 +125,7 @@ func (c *Client) CreateRegexPatternSetRequest(input *CreateRegexPatternSetInput)
 	}
 
 	req := c.newRequest(op, input, &CreateRegexPatternSetOutput{})
+
 	return CreateRegexPatternSetRequest{Request: req, Input: input, Copy: c.CreateRegexPatternSetRequest}
 }
 

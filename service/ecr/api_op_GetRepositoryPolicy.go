@@ -89,6 +89,7 @@ func (c *Client) GetRepositoryPolicyRequest(input *GetRepositoryPolicyInput) Get
 	}
 
 	req := c.newRequest(op, input, &GetRepositoryPolicyOutput{})
+
 	return GetRepositoryPolicyRequest{Request: req, Input: input, Copy: c.GetRepositoryPolicyRequest}
 }
 

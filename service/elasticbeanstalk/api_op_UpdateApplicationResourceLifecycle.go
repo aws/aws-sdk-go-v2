@@ -96,6 +96,7 @@ func (c *Client) UpdateApplicationResourceLifecycleRequest(input *UpdateApplicat
 	}
 
 	req := c.newRequest(op, input, &UpdateApplicationResourceLifecycleOutput{})
+
 	return UpdateApplicationResourceLifecycleRequest{Request: req, Input: input, Copy: c.UpdateApplicationResourceLifecycleRequest}
 }
 

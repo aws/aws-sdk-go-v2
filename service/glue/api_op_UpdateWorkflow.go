@@ -85,6 +85,7 @@ func (c *Client) UpdateWorkflowRequest(input *UpdateWorkflowInput) UpdateWorkflo
 	}
 
 	req := c.newRequest(op, input, &UpdateWorkflowOutput{})
+
 	return UpdateWorkflowRequest{Request: req, Input: input, Copy: c.UpdateWorkflowRequest}
 }
 

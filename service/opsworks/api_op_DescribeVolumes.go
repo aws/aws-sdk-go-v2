@@ -81,6 +81,7 @@ func (c *Client) DescribeVolumesRequest(input *DescribeVolumesInput) DescribeVol
 	}
 
 	req := c.newRequest(op, input, &DescribeVolumesOutput{})
+
 	return DescribeVolumesRequest{Request: req, Input: input, Copy: c.DescribeVolumesRequest}
 }
 

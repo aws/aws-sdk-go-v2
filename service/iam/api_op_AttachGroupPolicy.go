@@ -107,6 +107,7 @@ func (c *Client) AttachGroupPolicyRequest(input *AttachGroupPolicyInput) AttachG
 	req := c.newRequest(op, input, &AttachGroupPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AttachGroupPolicyRequest{Request: req, Input: input, Copy: c.AttachGroupPolicyRequest}
 }
 

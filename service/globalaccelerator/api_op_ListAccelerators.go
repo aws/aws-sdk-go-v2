@@ -83,6 +83,7 @@ func (c *Client) ListAcceleratorsRequest(input *ListAcceleratorsInput) ListAccel
 	}
 
 	req := c.newRequest(op, input, &ListAcceleratorsOutput{})
+
 	return ListAcceleratorsRequest{Request: req, Input: input, Copy: c.ListAcceleratorsRequest}
 }
 

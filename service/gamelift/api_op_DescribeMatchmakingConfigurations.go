@@ -132,6 +132,7 @@ func (c *Client) DescribeMatchmakingConfigurationsRequest(input *DescribeMatchma
 	}
 
 	req := c.newRequest(op, input, &DescribeMatchmakingConfigurationsOutput{})
+
 	return DescribeMatchmakingConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeMatchmakingConfigurationsRequest}
 }
 

@@ -103,6 +103,7 @@ func (c *Client) DescribeBackupRequest(input *DescribeBackupInput) DescribeBacku
 			Fn:   de.Handler,
 		})
 	}
+
 	return DescribeBackupRequest{Request: req, Input: input, Copy: c.DescribeBackupRequest}
 }
 

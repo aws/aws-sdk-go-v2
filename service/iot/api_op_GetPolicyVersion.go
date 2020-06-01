@@ -185,6 +185,7 @@ func (c *Client) GetPolicyVersionRequest(input *GetPolicyVersionInput) GetPolicy
 	}
 
 	req := c.newRequest(op, input, &GetPolicyVersionOutput{})
+
 	return GetPolicyVersionRequest{Request: req, Input: input, Copy: c.GetPolicyVersionRequest}
 }
 

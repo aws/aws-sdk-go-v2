@@ -77,6 +77,7 @@ func (c *Client) StartAssociationsOnceRequest(input *StartAssociationsOnceInput)
 	}
 
 	req := c.newRequest(op, input, &StartAssociationsOnceOutput{})
+
 	return StartAssociationsOnceRequest{Request: req, Input: input, Copy: c.StartAssociationsOnceRequest}
 }
 

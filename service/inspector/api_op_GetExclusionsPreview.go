@@ -125,6 +125,7 @@ func (c *Client) GetExclusionsPreviewRequest(input *GetExclusionsPreviewInput) G
 	}
 
 	req := c.newRequest(op, input, &GetExclusionsPreviewOutput{})
+
 	return GetExclusionsPreviewRequest{Request: req, Input: input, Copy: c.GetExclusionsPreviewRequest}
 }
 

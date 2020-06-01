@@ -80,6 +80,7 @@ func (c *Client) DeleteVerifiedEmailAddressRequest(input *DeleteVerifiedEmailAdd
 	req := c.newRequest(op, input, &DeleteVerifiedEmailAddressOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteVerifiedEmailAddressRequest{Request: req, Input: input, Copy: c.DeleteVerifiedEmailAddressRequest}
 }
 

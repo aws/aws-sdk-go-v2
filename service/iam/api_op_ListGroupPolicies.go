@@ -142,6 +142,7 @@ func (c *Client) ListGroupPoliciesRequest(input *ListGroupPoliciesInput) ListGro
 	}
 
 	req := c.newRequest(op, input, &ListGroupPoliciesOutput{})
+
 	return ListGroupPoliciesRequest{Request: req, Input: input, Copy: c.ListGroupPoliciesRequest}
 }
 

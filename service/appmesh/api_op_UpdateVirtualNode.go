@@ -165,6 +165,7 @@ func (c *Client) UpdateVirtualNodeRequest(input *UpdateVirtualNodeInput) UpdateV
 	}
 
 	req := c.newRequest(op, input, &UpdateVirtualNodeOutput{})
+
 	return UpdateVirtualNodeRequest{Request: req, Input: input, Copy: c.UpdateVirtualNodeRequest}
 }
 

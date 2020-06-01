@@ -285,7 +285,8 @@ const opCreateCanary = "CreateCanary"
 // data, screenshots of the UI, logs, and metrics. You can set up a canary to
 // run continuously or just once.
 //
-// Do not use CreateCanary to modify an existing canary. Use UpdateCanary instead.
+// Do not use CreateCanary to modify an existing canary. Use UpdateCanary (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_UpdateCanary.html)
+// instead.
 //
 // To create canaries, you must have the CloudWatchSyntheticsFullAccess policy.
 // If you are creating a new IAM role for the canary, you also need the the
@@ -317,6 +318,7 @@ func (c *Client) CreateCanaryRequest(input *CreateCanaryInput) CreateCanaryReque
 	}
 
 	req := c.newRequest(op, input, &CreateCanaryOutput{})
+
 	return CreateCanaryRequest{Request: req, Input: input, Copy: c.CreateCanaryRequest}
 }
 

@@ -90,6 +90,7 @@ func (c *Client) StartReportCreationRequest(input *StartReportCreationInput) Sta
 	}
 
 	req := c.newRequest(op, input, &StartReportCreationOutput{})
+
 	return StartReportCreationRequest{Request: req, Input: input, Copy: c.StartReportCreationRequest}
 }
 

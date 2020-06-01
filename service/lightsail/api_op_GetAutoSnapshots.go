@@ -85,6 +85,7 @@ func (c *Client) GetAutoSnapshotsRequest(input *GetAutoSnapshotsInput) GetAutoSn
 	}
 
 	req := c.newRequest(op, input, &GetAutoSnapshotsOutput{})
+
 	return GetAutoSnapshotsRequest{Request: req, Input: input, Copy: c.GetAutoSnapshotsRequest}
 }
 

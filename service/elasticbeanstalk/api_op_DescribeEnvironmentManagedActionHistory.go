@@ -88,6 +88,7 @@ func (c *Client) DescribeEnvironmentManagedActionHistoryRequest(input *DescribeE
 	}
 
 	req := c.newRequest(op, input, &DescribeEnvironmentManagedActionHistoryOutput{})
+
 	return DescribeEnvironmentManagedActionHistoryRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentManagedActionHistoryRequest}
 }
 

@@ -119,6 +119,7 @@ func (c *Client) ListServiceActionsForProvisioningArtifactRequest(input *ListSer
 	}
 
 	req := c.newRequest(op, input, &ListServiceActionsForProvisioningArtifactOutput{})
+
 	return ListServiceActionsForProvisioningArtifactRequest{Request: req, Input: input, Copy: c.ListServiceActionsForProvisioningArtifactRequest}
 }
 

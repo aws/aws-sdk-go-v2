@@ -134,6 +134,7 @@ func (c *Client) ListCACertificatesRequest(input *ListCACertificatesInput) ListC
 	}
 
 	req := c.newRequest(op, input, &ListCACertificatesOutput{})
+
 	return ListCACertificatesRequest{Request: req, Input: input, Copy: c.ListCACertificatesRequest}
 }
 

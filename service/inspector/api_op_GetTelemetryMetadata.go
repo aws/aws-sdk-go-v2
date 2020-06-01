@@ -83,6 +83,7 @@ func (c *Client) GetTelemetryMetadataRequest(input *GetTelemetryMetadataInput) G
 	}
 
 	req := c.newRequest(op, input, &GetTelemetryMetadataOutput{})
+
 	return GetTelemetryMetadataRequest{Request: req, Input: input, Copy: c.GetTelemetryMetadataRequest}
 }
 

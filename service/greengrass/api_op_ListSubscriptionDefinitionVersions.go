@@ -128,6 +128,7 @@ func (c *Client) ListSubscriptionDefinitionVersionsRequest(input *ListSubscripti
 	}
 
 	req := c.newRequest(op, input, &ListSubscriptionDefinitionVersionsOutput{})
+
 	return ListSubscriptionDefinitionVersionsRequest{Request: req, Input: input, Copy: c.ListSubscriptionDefinitionVersionsRequest}
 }
 

@@ -110,6 +110,7 @@ func (c *Client) DeleteImageRequest(input *DeleteImageInput) DeleteImageRequest 
 	}
 
 	req := c.newRequest(op, input, &DeleteImageOutput{})
+
 	return DeleteImageRequest{Request: req, Input: input, Copy: c.DeleteImageRequest}
 }
 

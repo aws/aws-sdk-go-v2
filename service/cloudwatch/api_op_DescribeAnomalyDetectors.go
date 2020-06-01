@@ -116,6 +116,7 @@ func (c *Client) DescribeAnomalyDetectorsRequest(input *DescribeAnomalyDetectors
 	}
 
 	req := c.newRequest(op, input, &DescribeAnomalyDetectorsOutput{})
+
 	return DescribeAnomalyDetectorsRequest{Request: req, Input: input, Copy: c.DescribeAnomalyDetectorsRequest}
 }
 

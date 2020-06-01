@@ -139,6 +139,7 @@ func (c *Client) PutPipelineDefinitionRequest(input *PutPipelineDefinitionInput)
 	}
 
 	req := c.newRequest(op, input, &PutPipelineDefinitionOutput{})
+
 	return PutPipelineDefinitionRequest{Request: req, Input: input, Copy: c.PutPipelineDefinitionRequest}
 }
 

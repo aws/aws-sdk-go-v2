@@ -345,6 +345,7 @@ func (c *Client) CreateStageRequest(input *CreateStageInput) CreateStageRequest 
 	}
 
 	req := c.newRequest(op, input, &CreateStageOutput{})
+
 	return CreateStageRequest{Request: req, Input: input, Copy: c.CreateStageRequest}
 }
 

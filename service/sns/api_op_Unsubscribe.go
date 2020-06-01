@@ -85,6 +85,7 @@ func (c *Client) UnsubscribeRequest(input *UnsubscribeInput) UnsubscribeRequest 
 	req := c.newRequest(op, input, &UnsubscribeOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UnsubscribeRequest{Request: req, Input: input, Copy: c.UnsubscribeRequest}
 }
 

@@ -103,6 +103,7 @@ func (c *Client) GetEmailChannelRequest(input *GetEmailChannelInput) GetEmailCha
 	}
 
 	req := c.newRequest(op, input, &GetEmailChannelOutput{})
+
 	return GetEmailChannelRequest{Request: req, Input: input, Copy: c.GetEmailChannelRequest}
 }
 

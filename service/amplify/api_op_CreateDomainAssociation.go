@@ -161,6 +161,7 @@ func (c *Client) CreateDomainAssociationRequest(input *CreateDomainAssociationIn
 	}
 
 	req := c.newRequest(op, input, &CreateDomainAssociationOutput{})
+
 	return CreateDomainAssociationRequest{Request: req, Input: input, Copy: c.CreateDomainAssociationRequest}
 }
 

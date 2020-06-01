@@ -92,6 +92,7 @@ func (c *Client) DetectKeyPhrasesRequest(input *DetectKeyPhrasesInput) DetectKey
 	}
 
 	req := c.newRequest(op, input, &DetectKeyPhrasesOutput{})
+
 	return DetectKeyPhrasesRequest{Request: req, Input: input, Copy: c.DetectKeyPhrasesRequest}
 }
 

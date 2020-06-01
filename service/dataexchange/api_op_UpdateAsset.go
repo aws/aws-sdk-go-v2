@@ -229,6 +229,7 @@ func (c *Client) UpdateAssetRequest(input *UpdateAssetInput) UpdateAssetRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateAssetOutput{})
+
 	return UpdateAssetRequest{Request: req, Input: input, Copy: c.UpdateAssetRequest}
 }
 

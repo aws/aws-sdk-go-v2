@@ -136,6 +136,7 @@ func (c *Client) UpdateMitigationActionRequest(input *UpdateMitigationActionInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateMitigationActionOutput{})
+
 	return UpdateMitigationActionRequest{Request: req, Input: input, Copy: c.UpdateMitigationActionRequest}
 }
 

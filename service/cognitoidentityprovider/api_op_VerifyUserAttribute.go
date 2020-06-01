@@ -101,6 +101,7 @@ func (c *Client) VerifyUserAttributeRequest(input *VerifyUserAttributeInput) Ver
 
 	req := c.newRequest(op, input, &VerifyUserAttributeOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return VerifyUserAttributeRequest{Request: req, Input: input, Copy: c.VerifyUserAttributeRequest}
 }
 

@@ -279,6 +279,7 @@ func (c *Client) UpdateServiceRequest(input *UpdateServiceInput) UpdateServiceRe
 	}
 
 	req := c.newRequest(op, input, &UpdateServiceOutput{})
+
 	return UpdateServiceRequest{Request: req, Input: input, Copy: c.UpdateServiceRequest}
 }
 

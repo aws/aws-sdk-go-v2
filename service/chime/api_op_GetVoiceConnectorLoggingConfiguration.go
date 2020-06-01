@@ -103,6 +103,7 @@ func (c *Client) GetVoiceConnectorLoggingConfigurationRequest(input *GetVoiceCon
 	}
 
 	req := c.newRequest(op, input, &GetVoiceConnectorLoggingConfigurationOutput{})
+
 	return GetVoiceConnectorLoggingConfigurationRequest{Request: req, Input: input, Copy: c.GetVoiceConnectorLoggingConfigurationRequest}
 }
 

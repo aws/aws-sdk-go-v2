@@ -145,6 +145,7 @@ func (c *Client) DescribeNotificationSubscriptionsRequest(input *DescribeNotific
 	}
 
 	req := c.newRequest(op, input, &DescribeNotificationSubscriptionsOutput{})
+
 	return DescribeNotificationSubscriptionsRequest{Request: req, Input: input, Copy: c.DescribeNotificationSubscriptionsRequest}
 }
 

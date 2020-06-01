@@ -101,6 +101,7 @@ func (c *Client) DescribeTimeToLiveRequest(input *DescribeTimeToLiveInput) Descr
 			Fn:   de.Handler,
 		})
 	}
+
 	return DescribeTimeToLiveRequest{Request: req, Input: input, Copy: c.DescribeTimeToLiveRequest}
 }
 

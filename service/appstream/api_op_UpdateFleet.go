@@ -219,6 +219,7 @@ func (c *Client) UpdateFleetRequest(input *UpdateFleetInput) UpdateFleetRequest 
 	}
 
 	req := c.newRequest(op, input, &UpdateFleetOutput{})
+
 	return UpdateFleetRequest{Request: req, Input: input, Copy: c.UpdateFleetRequest}
 }
 

@@ -85,6 +85,7 @@ func (c *Client) AcceptQualificationRequestRequest(input *AcceptQualificationReq
 	}
 
 	req := c.newRequest(op, input, &AcceptQualificationRequestOutput{})
+
 	return AcceptQualificationRequestRequest{Request: req, Input: input, Copy: c.AcceptQualificationRequestRequest}
 }
 

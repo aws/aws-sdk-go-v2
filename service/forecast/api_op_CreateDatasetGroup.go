@@ -110,6 +110,7 @@ func (c *Client) CreateDatasetGroupRequest(input *CreateDatasetGroupInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateDatasetGroupOutput{})
+
 	return CreateDatasetGroupRequest{Request: req, Input: input, Copy: c.CreateDatasetGroupRequest}
 }
 

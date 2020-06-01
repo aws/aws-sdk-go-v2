@@ -283,6 +283,7 @@ func (c *Client) ExecuteStatementRequest(input *ExecuteStatementInput) ExecuteSt
 	}
 
 	req := c.newRequest(op, input, &ExecuteStatementOutput{})
+
 	return ExecuteStatementRequest{Request: req, Input: input, Copy: c.ExecuteStatementRequest}
 }
 

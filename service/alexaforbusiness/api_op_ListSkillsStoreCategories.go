@@ -88,6 +88,7 @@ func (c *Client) ListSkillsStoreCategoriesRequest(input *ListSkillsStoreCategori
 	}
 
 	req := c.newRequest(op, input, &ListSkillsStoreCategoriesOutput{})
+
 	return ListSkillsStoreCategoriesRequest{Request: req, Input: input, Copy: c.ListSkillsStoreCategoriesRequest}
 }
 

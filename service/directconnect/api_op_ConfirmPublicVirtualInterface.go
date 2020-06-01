@@ -108,6 +108,7 @@ func (c *Client) ConfirmPublicVirtualInterfaceRequest(input *ConfirmPublicVirtua
 	}
 
 	req := c.newRequest(op, input, &ConfirmPublicVirtualInterfaceOutput{})
+
 	return ConfirmPublicVirtualInterfaceRequest{Request: req, Input: input, Copy: c.ConfirmPublicVirtualInterfaceRequest}
 }
 

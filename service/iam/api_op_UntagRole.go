@@ -96,6 +96,7 @@ func (c *Client) UntagRoleRequest(input *UntagRoleInput) UntagRoleRequest {
 	req := c.newRequest(op, input, &UntagRoleOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return UntagRoleRequest{Request: req, Input: input, Copy: c.UntagRoleRequest}
 }
 

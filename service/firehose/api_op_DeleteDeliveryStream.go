@@ -99,6 +99,7 @@ func (c *Client) DeleteDeliveryStreamRequest(input *DeleteDeliveryStreamInput) D
 	}
 
 	req := c.newRequest(op, input, &DeleteDeliveryStreamOutput{})
+
 	return DeleteDeliveryStreamRequest{Request: req, Input: input, Copy: c.DeleteDeliveryStreamRequest}
 }
 

@@ -110,6 +110,7 @@ func (c *Client) DescribeActivityRequest(input *DescribeActivityInput) DescribeA
 	}
 
 	req := c.newRequest(op, input, &DescribeActivityOutput{})
+
 	return DescribeActivityRequest{Request: req, Input: input, Copy: c.DescribeActivityRequest}
 }
 

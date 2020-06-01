@@ -114,6 +114,7 @@ func (c *Client) RespondDecisionTaskCompletedRequest(input *RespondDecisionTaskC
 	req := c.newRequest(op, input, &RespondDecisionTaskCompletedOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return RespondDecisionTaskCompletedRequest{Request: req, Input: input, Copy: c.RespondDecisionTaskCompletedRequest}
 }
 

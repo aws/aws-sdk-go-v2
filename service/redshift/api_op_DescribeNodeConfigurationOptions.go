@@ -124,6 +124,7 @@ func (c *Client) DescribeNodeConfigurationOptionsRequest(input *DescribeNodeConf
 	}
 
 	req := c.newRequest(op, input, &DescribeNodeConfigurationOptionsOutput{})
+
 	return DescribeNodeConfigurationOptionsRequest{Request: req, Input: input, Copy: c.DescribeNodeConfigurationOptionsRequest}
 }
 

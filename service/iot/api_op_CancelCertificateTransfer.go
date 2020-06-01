@@ -107,6 +107,7 @@ func (c *Client) CancelCertificateTransferRequest(input *CancelCertificateTransf
 	req := c.newRequest(op, input, &CancelCertificateTransferOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return CancelCertificateTransferRequest{Request: req, Input: input, Copy: c.CancelCertificateTransferRequest}
 }
 

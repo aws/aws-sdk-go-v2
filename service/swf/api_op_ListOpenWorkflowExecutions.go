@@ -190,6 +190,7 @@ func (c *Client) ListOpenWorkflowExecutionsRequest(input *ListOpenWorkflowExecut
 	}
 
 	req := c.newRequest(op, input, &ListOpenWorkflowExecutionsOutput{})
+
 	return ListOpenWorkflowExecutionsRequest{Request: req, Input: input, Copy: c.ListOpenWorkflowExecutionsRequest}
 }
 

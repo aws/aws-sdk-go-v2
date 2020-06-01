@@ -15,7 +15,7 @@ import (
 type GetBucketNotificationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Name of the bucket for which to get the notification configuration
+	// Name of the bucket for which to get the notification configuration.
 	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
@@ -148,6 +148,7 @@ func (c *Client) GetBucketNotificationRequest(input *GetBucketNotificationInput)
 	}
 
 	req := c.newRequest(op, input, &GetBucketNotificationOutput{})
+
 	return GetBucketNotificationRequest{Request: req, Input: input, Copy: c.GetBucketNotificationRequest}
 }
 

@@ -108,6 +108,7 @@ func (c *Client) ReportTaskProgressRequest(input *ReportTaskProgressInput) Repor
 	}
 
 	req := c.newRequest(op, input, &ReportTaskProgressOutput{})
+
 	return ReportTaskProgressRequest{Request: req, Input: input, Copy: c.ReportTaskProgressRequest}
 }
 

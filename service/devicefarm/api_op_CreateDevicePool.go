@@ -111,6 +111,7 @@ func (c *Client) CreateDevicePoolRequest(input *CreateDevicePoolInput) CreateDev
 	}
 
 	req := c.newRequest(op, input, &CreateDevicePoolOutput{})
+
 	return CreateDevicePoolRequest{Request: req, Input: input, Copy: c.CreateDevicePoolRequest}
 }
 

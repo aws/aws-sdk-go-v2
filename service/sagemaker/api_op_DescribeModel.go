@@ -111,6 +111,7 @@ func (c *Client) DescribeModelRequest(input *DescribeModelInput) DescribeModelRe
 	}
 
 	req := c.newRequest(op, input, &DescribeModelOutput{})
+
 	return DescribeModelRequest{Request: req, Input: input, Copy: c.DescribeModelRequest}
 }
 

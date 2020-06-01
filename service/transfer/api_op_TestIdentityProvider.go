@@ -125,6 +125,7 @@ func (c *Client) TestIdentityProviderRequest(input *TestIdentityProviderInput) T
 	}
 
 	req := c.newRequest(op, input, &TestIdentityProviderOutput{})
+
 	return TestIdentityProviderRequest{Request: req, Input: input, Copy: c.TestIdentityProviderRequest}
 }
 

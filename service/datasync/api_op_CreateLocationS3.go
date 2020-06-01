@@ -130,6 +130,7 @@ func (c *Client) CreateLocationS3Request(input *CreateLocationS3Input) CreateLoc
 	}
 
 	req := c.newRequest(op, input, &CreateLocationS3Output{})
+
 	return CreateLocationS3Request{Request: req, Input: input, Copy: c.CreateLocationS3Request}
 }
 

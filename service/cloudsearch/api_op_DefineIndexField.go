@@ -107,6 +107,7 @@ func (c *Client) DefineIndexFieldRequest(input *DefineIndexFieldInput) DefineInd
 	}
 
 	req := c.newRequest(op, input, &DefineIndexFieldOutput{})
+
 	return DefineIndexFieldRequest{Request: req, Input: input, Copy: c.DefineIndexFieldRequest}
 }
 

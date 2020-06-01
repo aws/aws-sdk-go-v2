@@ -201,6 +201,7 @@ func (c *Client) ListBucketMetricsConfigurationsRequest(input *ListBucketMetrics
 	}
 
 	req := c.newRequest(op, input, &ListBucketMetricsConfigurationsOutput{})
+
 	return ListBucketMetricsConfigurationsRequest{Request: req, Input: input, Copy: c.ListBucketMetricsConfigurationsRequest}
 }
 

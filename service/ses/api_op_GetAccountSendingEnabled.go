@@ -63,6 +63,7 @@ func (c *Client) GetAccountSendingEnabledRequest(input *GetAccountSendingEnabled
 	}
 
 	req := c.newRequest(op, input, &GetAccountSendingEnabledOutput{})
+
 	return GetAccountSendingEnabledRequest{Request: req, Input: input, Copy: c.GetAccountSendingEnabledRequest}
 }
 

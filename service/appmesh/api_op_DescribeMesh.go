@@ -115,6 +115,7 @@ func (c *Client) DescribeMeshRequest(input *DescribeMeshInput) DescribeMeshReque
 	}
 
 	req := c.newRequest(op, input, &DescribeMeshOutput{})
+
 	return DescribeMeshRequest{Request: req, Input: input, Copy: c.DescribeMeshRequest}
 }
 

@@ -226,6 +226,7 @@ func (c *Client) CreateRouteResponseRequest(input *CreateRouteResponseInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateRouteResponseOutput{})
+
 	return CreateRouteResponseRequest{Request: req, Input: input, Copy: c.CreateRouteResponseRequest}
 }
 

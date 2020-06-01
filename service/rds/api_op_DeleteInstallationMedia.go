@@ -101,6 +101,7 @@ func (c *Client) DeleteInstallationMediaRequest(input *DeleteInstallationMediaIn
 	}
 
 	req := c.newRequest(op, input, &DeleteInstallationMediaOutput{})
+
 	return DeleteInstallationMediaRequest{Request: req, Input: input, Copy: c.DeleteInstallationMediaRequest}
 }
 

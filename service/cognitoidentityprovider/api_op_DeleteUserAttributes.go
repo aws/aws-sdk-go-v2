@@ -88,6 +88,7 @@ func (c *Client) DeleteUserAttributesRequest(input *DeleteUserAttributesInput) D
 
 	req := c.newRequest(op, input, &DeleteUserAttributesOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
+
 	return DeleteUserAttributesRequest{Request: req, Input: input, Copy: c.DeleteUserAttributesRequest}
 }
 

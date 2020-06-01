@@ -173,6 +173,7 @@ func (c *Client) StartMatchBackfillRequest(input *StartMatchBackfillInput) Start
 	}
 
 	req := c.newRequest(op, input, &StartMatchBackfillOutput{})
+
 	return StartMatchBackfillRequest{Request: req, Input: input, Copy: c.StartMatchBackfillRequest}
 }
 

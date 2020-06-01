@@ -105,6 +105,7 @@ func (c *Client) DescribeCertificateAuthorityRequest(input *DescribeCertificateA
 	}
 
 	req := c.newRequest(op, input, &DescribeCertificateAuthorityOutput{})
+
 	return DescribeCertificateAuthorityRequest{Request: req, Input: input, Copy: c.DescribeCertificateAuthorityRequest}
 }
 

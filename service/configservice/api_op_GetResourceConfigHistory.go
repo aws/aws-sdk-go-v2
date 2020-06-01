@@ -135,6 +135,7 @@ func (c *Client) GetResourceConfigHistoryRequest(input *GetResourceConfigHistory
 	}
 
 	req := c.newRequest(op, input, &GetResourceConfigHistoryOutput{})
+
 	return GetResourceConfigHistoryRequest{Request: req, Input: input, Copy: c.GetResourceConfigHistoryRequest}
 }
 

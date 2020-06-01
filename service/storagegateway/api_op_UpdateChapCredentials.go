@@ -139,6 +139,7 @@ func (c *Client) UpdateChapCredentialsRequest(input *UpdateChapCredentialsInput)
 	}
 
 	req := c.newRequest(op, input, &UpdateChapCredentialsOutput{})
+
 	return UpdateChapCredentialsRequest{Request: req, Input: input, Copy: c.UpdateChapCredentialsRequest}
 }
 

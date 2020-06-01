@@ -91,6 +91,7 @@ func (c *Client) DescribeProductViewRequest(input *DescribeProductViewInput) Des
 	}
 
 	req := c.newRequest(op, input, &DescribeProductViewOutput{})
+
 	return DescribeProductViewRequest{Request: req, Input: input, Copy: c.DescribeProductViewRequest}
 }
 

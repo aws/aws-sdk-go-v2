@@ -161,6 +161,7 @@ func (c *Client) GetBulkPublishDetailsRequest(input *GetBulkPublishDetailsInput)
 	}
 
 	req := c.newRequest(op, input, &GetBulkPublishDetailsOutput{})
+
 	return GetBulkPublishDetailsRequest{Request: req, Input: input, Copy: c.GetBulkPublishDetailsRequest}
 }
 

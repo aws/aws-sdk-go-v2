@@ -31,7 +31,9 @@ type SetInstanceHealthInput struct {
 	// Set this to False, to have the call not respect the grace period associated
 	// with the group.
 	//
-	// For more information about the health check grace period, see CreateAutoScalingGroup.
+	// For more information about the health check grace period, see CreateAutoScalingGroup
+	// (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html)
+	// in the Amazon EC2 Auto Scaling API Reference.
 	ShouldRespectGracePeriod *bool `type:"boolean"`
 }
 
@@ -105,6 +107,7 @@ func (c *Client) SetInstanceHealthRequest(input *SetInstanceHealthInput) SetInst
 	req := c.newRequest(op, input, &SetInstanceHealthOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetInstanceHealthRequest{Request: req, Input: input, Copy: c.SetInstanceHealthRequest}
 }
 

@@ -118,6 +118,7 @@ func (c *Client) DescribeProjectVersionsRequest(input *DescribeProjectVersionsIn
 	}
 
 	req := c.newRequest(op, input, &DescribeProjectVersionsOutput{})
+
 	return DescribeProjectVersionsRequest{Request: req, Input: input, Copy: c.DescribeProjectVersionsRequest}
 }
 

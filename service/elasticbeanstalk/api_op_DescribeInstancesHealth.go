@@ -101,6 +101,7 @@ func (c *Client) DescribeInstancesHealthRequest(input *DescribeInstancesHealthIn
 	}
 
 	req := c.newRequest(op, input, &DescribeInstancesHealthOutput{})
+
 	return DescribeInstancesHealthRequest{Request: req, Input: input, Copy: c.DescribeInstancesHealthRequest}
 }
 

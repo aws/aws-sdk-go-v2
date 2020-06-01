@@ -123,6 +123,7 @@ func (c *Client) CreateComputerRequest(input *CreateComputerInput) CreateCompute
 	}
 
 	req := c.newRequest(op, input, &CreateComputerOutput{})
+
 	return CreateComputerRequest{Request: req, Input: input, Copy: c.CreateComputerRequest}
 }
 

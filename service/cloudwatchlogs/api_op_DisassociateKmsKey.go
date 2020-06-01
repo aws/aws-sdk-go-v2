@@ -88,6 +88,7 @@ func (c *Client) DisassociateKmsKeyRequest(input *DisassociateKmsKeyInput) Disas
 	req := c.newRequest(op, input, &DisassociateKmsKeyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DisassociateKmsKeyRequest{Request: req, Input: input, Copy: c.DisassociateKmsKeyRequest}
 }
 

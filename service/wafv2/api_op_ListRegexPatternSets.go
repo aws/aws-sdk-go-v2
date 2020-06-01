@@ -113,6 +113,7 @@ func (c *Client) ListRegexPatternSetsRequest(input *ListRegexPatternSetsInput) L
 	}
 
 	req := c.newRequest(op, input, &ListRegexPatternSetsOutput{})
+
 	return ListRegexPatternSetsRequest{Request: req, Input: input, Copy: c.ListRegexPatternSetsRequest}
 }
 

@@ -111,6 +111,7 @@ func (c *Client) DescribeVpcEndpointServicePermissionsRequest(input *DescribeVpc
 	}
 
 	req := c.newRequest(op, input, &DescribeVpcEndpointServicePermissionsOutput{})
+
 	return DescribeVpcEndpointServicePermissionsRequest{Request: req, Input: input, Copy: c.DescribeVpcEndpointServicePermissionsRequest}
 }
 

@@ -95,6 +95,7 @@ func (c *Client) CancelDeploymentJobRequest(input *CancelDeploymentJobInput) Can
 	}
 
 	req := c.newRequest(op, input, &CancelDeploymentJobOutput{})
+
 	return CancelDeploymentJobRequest{Request: req, Input: input, Copy: c.CancelDeploymentJobRequest}
 }
 

@@ -98,6 +98,7 @@ func (c *Client) ModifyDBSubnetGroupRequest(input *ModifyDBSubnetGroupInput) Mod
 	}
 
 	req := c.newRequest(op, input, &ModifyDBSubnetGroupOutput{})
+
 	return ModifyDBSubnetGroupRequest{Request: req, Input: input, Copy: c.ModifyDBSubnetGroupRequest}
 }
 

@@ -87,6 +87,7 @@ func (c *Client) StopAssessmentRunRequest(input *StopAssessmentRunInput) StopAss
 	req := c.newRequest(op, input, &StopAssessmentRunOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StopAssessmentRunRequest{Request: req, Input: input, Copy: c.StopAssessmentRunRequest}
 }
 

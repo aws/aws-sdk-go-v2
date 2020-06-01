@@ -79,6 +79,7 @@ func (c *Client) UpdateSkillGroupRequest(input *UpdateSkillGroupInput) UpdateSki
 	}
 
 	req := c.newRequest(op, input, &UpdateSkillGroupOutput{})
+
 	return UpdateSkillGroupRequest{Request: req, Input: input, Copy: c.UpdateSkillGroupRequest}
 }
 

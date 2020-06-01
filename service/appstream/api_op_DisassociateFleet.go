@@ -88,6 +88,7 @@ func (c *Client) DisassociateFleetRequest(input *DisassociateFleetInput) Disasso
 	}
 
 	req := c.newRequest(op, input, &DisassociateFleetOutput{})
+
 	return DisassociateFleetRequest{Request: req, Input: input, Copy: c.DisassociateFleetRequest}
 }
 

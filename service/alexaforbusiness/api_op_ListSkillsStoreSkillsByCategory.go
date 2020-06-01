@@ -100,6 +100,7 @@ func (c *Client) ListSkillsStoreSkillsByCategoryRequest(input *ListSkillsStoreSk
 	}
 
 	req := c.newRequest(op, input, &ListSkillsStoreSkillsByCategoryOutput{})
+
 	return ListSkillsStoreSkillsByCategoryRequest{Request: req, Input: input, Copy: c.ListSkillsStoreSkillsByCategoryRequest}
 }
 

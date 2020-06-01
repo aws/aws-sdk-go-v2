@@ -99,6 +99,7 @@ func (c *Client) CreateTransitVirtualInterfaceRequest(input *CreateTransitVirtua
 	}
 
 	req := c.newRequest(op, input, &CreateTransitVirtualInterfaceOutput{})
+
 	return CreateTransitVirtualInterfaceRequest{Request: req, Input: input, Copy: c.CreateTransitVirtualInterfaceRequest}
 }
 

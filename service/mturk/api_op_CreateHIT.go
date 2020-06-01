@@ -253,6 +253,7 @@ func (c *Client) CreateHITRequest(input *CreateHITInput) CreateHITRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateHITOutput{})
+
 	return CreateHITRequest{Request: req, Input: input, Copy: c.CreateHITRequest}
 }
 

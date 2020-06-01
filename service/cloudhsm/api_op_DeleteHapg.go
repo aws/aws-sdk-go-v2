@@ -89,6 +89,7 @@ func (c *Client) DeleteHapgRequest(input *DeleteHapgInput) DeleteHapgRequest {
 	}
 
 	req := c.newRequest(op, input, &DeleteHapgOutput{})
+
 	return DeleteHapgRequest{Request: req, Input: input, Copy: c.DeleteHapgRequest}
 }
 

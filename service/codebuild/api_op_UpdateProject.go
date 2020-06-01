@@ -107,7 +107,7 @@ type UpdateProjectInput struct {
 	// in the AWS CodeBuild User Guide.
 	SourceVersion *string `locationName:"sourceVersion" type:"string"`
 
-	// The replacement set of tags for this build project.
+	// An updated list of tag key and value pairs associated with this build project.
 	//
 	// These tags are available for use by AWS services that support AWS CodeBuild
 	// build project tags.
@@ -252,6 +252,7 @@ func (c *Client) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRe
 	}
 
 	req := c.newRequest(op, input, &UpdateProjectOutput{})
+
 	return UpdateProjectRequest{Request: req, Input: input, Copy: c.UpdateProjectRequest}
 }
 

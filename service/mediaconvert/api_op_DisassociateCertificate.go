@@ -98,6 +98,7 @@ func (c *Client) DisassociateCertificateRequest(input *DisassociateCertificateIn
 	}
 
 	req := c.newRequest(op, input, &DisassociateCertificateOutput{})
+
 	return DisassociateCertificateRequest{Request: req, Input: input, Copy: c.DisassociateCertificateRequest}
 }
 

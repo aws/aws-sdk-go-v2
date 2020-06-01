@@ -89,6 +89,7 @@ func (c *Client) DescribePipelinesRequest(input *DescribePipelinesInput) Describ
 	}
 
 	req := c.newRequest(op, input, &DescribePipelinesOutput{})
+
 	return DescribePipelinesRequest{Request: req, Input: input, Copy: c.DescribePipelinesRequest}
 }
 

@@ -108,6 +108,7 @@ func (c *Client) ModifySnapshotScheduleRequest(input *ModifySnapshotScheduleInpu
 	}
 
 	req := c.newRequest(op, input, &ModifySnapshotScheduleOutput{})
+
 	return ModifySnapshotScheduleRequest{Request: req, Input: input, Copy: c.ModifySnapshotScheduleRequest}
 }
 

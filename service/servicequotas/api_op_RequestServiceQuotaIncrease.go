@@ -101,6 +101,7 @@ func (c *Client) RequestServiceQuotaIncreaseRequest(input *RequestServiceQuotaIn
 	}
 
 	req := c.newRequest(op, input, &RequestServiceQuotaIncreaseOutput{})
+
 	return RequestServiceQuotaIncreaseRequest{Request: req, Input: input, Copy: c.RequestServiceQuotaIncreaseRequest}
 }
 

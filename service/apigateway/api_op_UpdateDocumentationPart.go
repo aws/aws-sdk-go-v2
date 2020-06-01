@@ -173,6 +173,7 @@ func (c *Client) UpdateDocumentationPartRequest(input *UpdateDocumentationPartIn
 	}
 
 	req := c.newRequest(op, input, &UpdateDocumentationPartOutput{})
+
 	return UpdateDocumentationPartRequest{Request: req, Input: input, Copy: c.UpdateDocumentationPartRequest}
 }
 

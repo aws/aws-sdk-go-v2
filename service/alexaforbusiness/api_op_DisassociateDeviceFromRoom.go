@@ -59,6 +59,7 @@ func (c *Client) DisassociateDeviceFromRoomRequest(input *DisassociateDeviceFrom
 	}
 
 	req := c.newRequest(op, input, &DisassociateDeviceFromRoomOutput{})
+
 	return DisassociateDeviceFromRoomRequest{Request: req, Input: input, Copy: c.DisassociateDeviceFromRoomRequest}
 }
 

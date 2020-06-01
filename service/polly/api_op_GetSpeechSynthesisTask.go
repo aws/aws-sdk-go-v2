@@ -105,6 +105,7 @@ func (c *Client) GetSpeechSynthesisTaskRequest(input *GetSpeechSynthesisTaskInpu
 	}
 
 	req := c.newRequest(op, input, &GetSpeechSynthesisTaskOutput{})
+
 	return GetSpeechSynthesisTaskRequest{Request: req, Input: input, Copy: c.GetSpeechSynthesisTaskRequest}
 }
 

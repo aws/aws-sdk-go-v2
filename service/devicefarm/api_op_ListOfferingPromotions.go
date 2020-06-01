@@ -82,6 +82,7 @@ func (c *Client) ListOfferingPromotionsRequest(input *ListOfferingPromotionsInpu
 	}
 
 	req := c.newRequest(op, input, &ListOfferingPromotionsOutput{})
+
 	return ListOfferingPromotionsRequest{Request: req, Input: input, Copy: c.ListOfferingPromotionsRequest}
 }
 

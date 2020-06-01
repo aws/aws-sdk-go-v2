@@ -134,6 +134,7 @@ func (c *Client) ListDomainsRequest(input *ListDomainsInput) ListDomainsRequest 
 	}
 
 	req := c.newRequest(op, input, &ListDomainsOutput{})
+
 	return ListDomainsRequest{Request: req, Input: input, Copy: c.ListDomainsRequest}
 }
 

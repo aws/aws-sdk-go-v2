@@ -96,6 +96,7 @@ func (c *Client) DeletePipelineRequest(input *DeletePipelineInput) DeletePipelin
 	}
 
 	req := c.newRequest(op, input, &DeletePipelineOutput{})
+
 	return DeletePipelineRequest{Request: req, Input: input, Copy: c.DeletePipelineRequest}
 }
 

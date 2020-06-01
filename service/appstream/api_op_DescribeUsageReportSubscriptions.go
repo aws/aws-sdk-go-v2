@@ -81,6 +81,7 @@ func (c *Client) DescribeUsageReportSubscriptionsRequest(input *DescribeUsageRep
 	}
 
 	req := c.newRequest(op, input, &DescribeUsageReportSubscriptionsOutput{})
+
 	return DescribeUsageReportSubscriptionsRequest{Request: req, Input: input, Copy: c.DescribeUsageReportSubscriptionsRequest}
 }
 

@@ -126,6 +126,7 @@ func (c *Client) ResetDeploymentsRequest(input *ResetDeploymentsInput) ResetDepl
 	}
 
 	req := c.newRequest(op, input, &ResetDeploymentsOutput{})
+
 	return ResetDeploymentsRequest{Request: req, Input: input, Copy: c.ResetDeploymentsRequest}
 }
 

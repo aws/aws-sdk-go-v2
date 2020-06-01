@@ -76,6 +76,7 @@ func (c *Client) GetNetworkProfileRequest(input *GetNetworkProfileInput) GetNetw
 	}
 
 	req := c.newRequest(op, input, &GetNetworkProfileOutput{})
+
 	return GetNetworkProfileRequest{Request: req, Input: input, Copy: c.GetNetworkProfileRequest}
 }
 

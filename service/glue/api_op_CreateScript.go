@@ -94,6 +94,7 @@ func (c *Client) CreateScriptRequest(input *CreateScriptInput) CreateScriptReque
 	}
 
 	req := c.newRequest(op, input, &CreateScriptOutput{})
+
 	return CreateScriptRequest{Request: req, Input: input, Copy: c.CreateScriptRequest}
 }
 

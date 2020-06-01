@@ -116,6 +116,7 @@ func (c *Client) DescribeLifecycleConfigurationRequest(input *DescribeLifecycleC
 	}
 
 	req := c.newRequest(op, input, &DescribeLifecycleConfigurationOutput{})
+
 	return DescribeLifecycleConfigurationRequest{Request: req, Input: input, Copy: c.DescribeLifecycleConfigurationRequest}
 }
 

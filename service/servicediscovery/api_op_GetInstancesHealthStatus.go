@@ -19,7 +19,8 @@ type GetInstancesHealthStatusInput struct {
 	// instances that are associated with the specified service.
 	//
 	// To get the IDs for the instances that you've registered by using a specified
-	// service, submit a ListInstances request.
+	// service, submit a ListInstances (https://docs.aws.amazon.com/cloud-map/latest/api/API_ListInstances.html)
+	// request.
 	Instances []string `min:"1" type:"list"`
 
 	// The maximum number of instances that you want AWS Cloud Map to return in
@@ -120,6 +121,7 @@ func (c *Client) GetInstancesHealthStatusRequest(input *GetInstancesHealthStatus
 	}
 
 	req := c.newRequest(op, input, &GetInstancesHealthStatusOutput{})
+
 	return GetInstancesHealthStatusRequest{Request: req, Input: input, Copy: c.GetInstancesHealthStatusRequest}
 }
 

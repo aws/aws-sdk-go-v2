@@ -102,6 +102,7 @@ func (c *Client) UpdateIdentityProviderRequest(input *UpdateIdentityProviderInpu
 	}
 
 	req := c.newRequest(op, input, &UpdateIdentityProviderOutput{})
+
 	return UpdateIdentityProviderRequest{Request: req, Input: input, Copy: c.UpdateIdentityProviderRequest}
 }
 

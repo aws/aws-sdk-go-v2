@@ -115,6 +115,7 @@ func (c *Client) PutRemediationExceptionsRequest(input *PutRemediationExceptions
 	}
 
 	req := c.newRequest(op, input, &PutRemediationExceptionsOutput{})
+
 	return PutRemediationExceptionsRequest{Request: req, Input: input, Copy: c.PutRemediationExceptionsRequest}
 }
 

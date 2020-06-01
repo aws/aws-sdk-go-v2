@@ -89,6 +89,7 @@ func (c *Client) SetSecurityGroupsRequest(input *SetSecurityGroupsInput) SetSecu
 	}
 
 	req := c.newRequest(op, input, &SetSecurityGroupsOutput{})
+
 	return SetSecurityGroupsRequest{Request: req, Input: input, Copy: c.SetSecurityGroupsRequest}
 }
 

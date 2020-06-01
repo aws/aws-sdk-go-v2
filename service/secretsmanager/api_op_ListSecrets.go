@@ -124,6 +124,7 @@ func (c *Client) ListSecretsRequest(input *ListSecretsInput) ListSecretsRequest 
 	}
 
 	req := c.newRequest(op, input, &ListSecretsOutput{})
+
 	return ListSecretsRequest{Request: req, Input: input, Copy: c.ListSecretsRequest}
 }
 

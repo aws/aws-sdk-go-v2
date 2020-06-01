@@ -95,6 +95,7 @@ func (c *Client) SetSMBGuestPasswordRequest(input *SetSMBGuestPasswordInput) Set
 	}
 
 	req := c.newRequest(op, input, &SetSMBGuestPasswordOutput{})
+
 	return SetSMBGuestPasswordRequest{Request: req, Input: input, Copy: c.SetSMBGuestPasswordRequest}
 }
 

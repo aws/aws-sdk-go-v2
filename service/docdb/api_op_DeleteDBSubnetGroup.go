@@ -88,6 +88,7 @@ func (c *Client) DeleteDBSubnetGroupRequest(input *DeleteDBSubnetGroupInput) Del
 	req := c.newRequest(op, input, &DeleteDBSubnetGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteDBSubnetGroupRequest{Request: req, Input: input, Copy: c.DeleteDBSubnetGroupRequest}
 }
 

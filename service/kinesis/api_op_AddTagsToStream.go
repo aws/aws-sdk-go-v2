@@ -101,6 +101,7 @@ func (c *Client) AddTagsToStreamRequest(input *AddTagsToStreamInput) AddTagsToSt
 	req := c.newRequest(op, input, &AddTagsToStreamOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return AddTagsToStreamRequest{Request: req, Input: input, Copy: c.AddTagsToStreamRequest}
 }
 

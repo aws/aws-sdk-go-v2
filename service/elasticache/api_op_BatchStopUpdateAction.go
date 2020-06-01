@@ -86,6 +86,7 @@ func (c *Client) BatchStopUpdateActionRequest(input *BatchStopUpdateActionInput)
 	}
 
 	req := c.newRequest(op, input, &BatchStopUpdateActionOutput{})
+
 	return BatchStopUpdateActionRequest{Request: req, Input: input, Copy: c.BatchStopUpdateActionRequest}
 }
 

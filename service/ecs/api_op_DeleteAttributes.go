@@ -92,6 +92,7 @@ func (c *Client) DeleteAttributesRequest(input *DeleteAttributesInput) DeleteAtt
 	}
 
 	req := c.newRequest(op, input, &DeleteAttributesOutput{})
+
 	return DeleteAttributesRequest{Request: req, Input: input, Copy: c.DeleteAttributesRequest}
 }
 

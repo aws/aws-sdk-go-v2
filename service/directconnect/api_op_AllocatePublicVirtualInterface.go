@@ -215,6 +215,7 @@ func (c *Client) AllocatePublicVirtualInterfaceRequest(input *AllocatePublicVirt
 	}
 
 	req := c.newRequest(op, input, &AllocatePublicVirtualInterfaceOutput{})
+
 	return AllocatePublicVirtualInterfaceRequest{Request: req, Input: input, Copy: c.AllocatePublicVirtualInterfaceRequest}
 }
 

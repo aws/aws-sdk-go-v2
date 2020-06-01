@@ -115,6 +115,7 @@ func (c *Client) DeletePolicyVersionRequest(input *DeletePolicyVersionInput) Del
 	req := c.newRequest(op, input, &DeletePolicyVersionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeletePolicyVersionRequest{Request: req, Input: input, Copy: c.DeletePolicyVersionRequest}
 }
 

@@ -122,6 +122,7 @@ func (c *Client) CopyOptionGroupRequest(input *CopyOptionGroupInput) CopyOptionG
 	}
 
 	req := c.newRequest(op, input, &CopyOptionGroupOutput{})
+
 	return CopyOptionGroupRequest{Request: req, Input: input, Copy: c.CopyOptionGroupRequest}
 }
 

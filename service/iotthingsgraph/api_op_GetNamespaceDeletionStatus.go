@@ -69,6 +69,7 @@ func (c *Client) GetNamespaceDeletionStatusRequest(input *GetNamespaceDeletionSt
 	}
 
 	req := c.newRequest(op, input, &GetNamespaceDeletionStatusOutput{})
+
 	return GetNamespaceDeletionStatusRequest{Request: req, Input: input, Copy: c.GetNamespaceDeletionStatusRequest}
 }
 

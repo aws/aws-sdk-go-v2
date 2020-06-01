@@ -94,6 +94,7 @@ func (c *Client) ListRulesPackagesRequest(input *ListRulesPackagesInput) ListRul
 	}
 
 	req := c.newRequest(op, input, &ListRulesPackagesOutput{})
+
 	return ListRulesPackagesRequest{Request: req, Input: input, Copy: c.ListRulesPackagesRequest}
 }
 

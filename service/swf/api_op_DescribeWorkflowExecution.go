@@ -140,6 +140,7 @@ func (c *Client) DescribeWorkflowExecutionRequest(input *DescribeWorkflowExecuti
 	}
 
 	req := c.newRequest(op, input, &DescribeWorkflowExecutionOutput{})
+
 	return DescribeWorkflowExecutionRequest{Request: req, Input: input, Copy: c.DescribeWorkflowExecutionRequest}
 }
 

@@ -117,6 +117,7 @@ func (c *Client) CreateEmailTemplateRequest(input *CreateEmailTemplateInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateEmailTemplateOutput{})
+
 	return CreateEmailTemplateRequest{Request: req, Input: input, Copy: c.CreateEmailTemplateRequest}
 }
 

@@ -222,6 +222,7 @@ func (c *Client) ListRepositoryAssociationsRequest(input *ListRepositoryAssociat
 	}
 
 	req := c.newRequest(op, input, &ListRepositoryAssociationsOutput{})
+
 	return ListRepositoryAssociationsRequest{Request: req, Input: input, Copy: c.ListRepositoryAssociationsRequest}
 }
 

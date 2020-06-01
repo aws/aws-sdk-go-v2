@@ -95,6 +95,7 @@ func (c *Client) BatchStopJobRunRequest(input *BatchStopJobRunInput) BatchStopJo
 	}
 
 	req := c.newRequest(op, input, &BatchStopJobRunOutput{})
+
 	return BatchStopJobRunRequest{Request: req, Input: input, Copy: c.BatchStopJobRunRequest}
 }
 

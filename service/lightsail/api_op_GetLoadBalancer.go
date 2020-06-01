@@ -76,6 +76,7 @@ func (c *Client) GetLoadBalancerRequest(input *GetLoadBalancerInput) GetLoadBala
 	}
 
 	req := c.newRequest(op, input, &GetLoadBalancerOutput{})
+
 	return GetLoadBalancerRequest{Request: req, Input: input, Copy: c.GetLoadBalancerRequest}
 }
 

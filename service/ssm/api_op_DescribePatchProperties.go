@@ -138,6 +138,7 @@ func (c *Client) DescribePatchPropertiesRequest(input *DescribePatchPropertiesIn
 	}
 
 	req := c.newRequest(op, input, &DescribePatchPropertiesOutput{})
+
 	return DescribePatchPropertiesRequest{Request: req, Input: input, Copy: c.DescribePatchPropertiesRequest}
 }
 

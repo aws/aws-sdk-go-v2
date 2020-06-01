@@ -138,6 +138,7 @@ func (c *Client) PutResourceConfigRequest(input *PutResourceConfigInput) PutReso
 	req := c.newRequest(op, input, &PutResourceConfigOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return PutResourceConfigRequest{Request: req, Input: input, Copy: c.PutResourceConfigRequest}
 }
 

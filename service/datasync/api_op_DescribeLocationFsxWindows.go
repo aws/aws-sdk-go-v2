@@ -95,6 +95,7 @@ func (c *Client) DescribeLocationFsxWindowsRequest(input *DescribeLocationFsxWin
 	}
 
 	req := c.newRequest(op, input, &DescribeLocationFsxWindowsOutput{})
+
 	return DescribeLocationFsxWindowsRequest{Request: req, Input: input, Copy: c.DescribeLocationFsxWindowsRequest}
 }
 

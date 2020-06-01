@@ -82,6 +82,7 @@ func (c *Client) DisassociateConfigurationItemsFromApplicationRequest(input *Dis
 	}
 
 	req := c.newRequest(op, input, &DisassociateConfigurationItemsFromApplicationOutput{})
+
 	return DisassociateConfigurationItemsFromApplicationRequest{Request: req, Input: input, Copy: c.DisassociateConfigurationItemsFromApplicationRequest}
 }
 

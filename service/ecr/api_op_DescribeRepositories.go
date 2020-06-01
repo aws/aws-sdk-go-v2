@@ -115,6 +115,7 @@ func (c *Client) DescribeRepositoriesRequest(input *DescribeRepositoriesInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeRepositoriesOutput{})
+
 	return DescribeRepositoriesRequest{Request: req, Input: input, Copy: c.DescribeRepositoriesRequest}
 }
 

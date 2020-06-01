@@ -114,6 +114,7 @@ func (c *Client) DescribeEventAggregatesRequest(input *DescribeEventAggregatesIn
 	}
 
 	req := c.newRequest(op, input, &DescribeEventAggregatesOutput{})
+
 	return DescribeEventAggregatesRequest{Request: req, Input: input, Copy: c.DescribeEventAggregatesRequest}
 }
 

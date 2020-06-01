@@ -116,6 +116,7 @@ func (c *Client) CreatePlatformApplicationRequest(input *CreatePlatformApplicati
 	}
 
 	req := c.newRequest(op, input, &CreatePlatformApplicationOutput{})
+
 	return CreatePlatformApplicationRequest{Request: req, Input: input, Copy: c.CreatePlatformApplicationRequest}
 }
 

@@ -159,6 +159,7 @@ func (c *Client) ListBackendEnvironmentsRequest(input *ListBackendEnvironmentsIn
 	}
 
 	req := c.newRequest(op, input, &ListBackendEnvironmentsOutput{})
+
 	return ListBackendEnvironmentsRequest{Request: req, Input: input, Copy: c.ListBackendEnvironmentsRequest}
 }
 

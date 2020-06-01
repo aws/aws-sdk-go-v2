@@ -92,6 +92,7 @@ func (c *Client) UpdateContainerAgentRequest(input *UpdateContainerAgentInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateContainerAgentOutput{})
+
 	return UpdateContainerAgentRequest{Request: req, Input: input, Copy: c.UpdateContainerAgentRequest}
 }
 

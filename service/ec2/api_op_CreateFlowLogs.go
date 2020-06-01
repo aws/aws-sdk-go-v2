@@ -65,8 +65,6 @@ type CreateFlowLogsInput struct {
 	//
 	// Specify the fields using the ${field-id} format, separated by spaces. For
 	// the AWS CLI, use single quotation marks (' ') to surround the parameter value.
-	//
-	// Only applicable to flow logs that are published to an Amazon S3 bucket.
 	LogFormat *string `type:"string"`
 
 	// The name of a new or existing CloudWatch Logs log group where Amazon EC2
@@ -197,6 +195,7 @@ func (c *Client) CreateFlowLogsRequest(input *CreateFlowLogsInput) CreateFlowLog
 	}
 
 	req := c.newRequest(op, input, &CreateFlowLogsOutput{})
+
 	return CreateFlowLogsRequest{Request: req, Input: input, Copy: c.CreateFlowLogsRequest}
 }
 

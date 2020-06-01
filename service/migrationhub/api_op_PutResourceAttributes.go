@@ -147,6 +147,7 @@ func (c *Client) PutResourceAttributesRequest(input *PutResourceAttributesInput)
 	}
 
 	req := c.newRequest(op, input, &PutResourceAttributesOutput{})
+
 	return PutResourceAttributesRequest{Request: req, Input: input, Copy: c.PutResourceAttributesRequest}
 }
 

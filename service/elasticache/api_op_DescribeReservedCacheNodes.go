@@ -147,6 +147,7 @@ func (c *Client) DescribeReservedCacheNodesRequest(input *DescribeReservedCacheN
 	}
 
 	req := c.newRequest(op, input, &DescribeReservedCacheNodesOutput{})
+
 	return DescribeReservedCacheNodesRequest{Request: req, Input: input, Copy: c.DescribeReservedCacheNodesRequest}
 }
 

@@ -98,6 +98,7 @@ func (c *Client) GetJobManifestRequest(input *GetJobManifestInput) GetJobManifes
 	}
 
 	req := c.newRequest(op, input, &GetJobManifestOutput{})
+
 	return GetJobManifestRequest{Request: req, Input: input, Copy: c.GetJobManifestRequest}
 }
 

@@ -154,6 +154,7 @@ func (c *Client) GetMinuteUsageRequest(input *GetMinuteUsageInput) GetMinuteUsag
 	}
 
 	req := c.newRequest(op, input, &GetMinuteUsageOutput{})
+
 	return GetMinuteUsageRequest{Request: req, Input: input, Copy: c.GetMinuteUsageRequest}
 }
 

@@ -107,6 +107,7 @@ func (c *Client) GetQueueRequest(input *GetQueueInput) GetQueueRequest {
 	}
 
 	req := c.newRequest(op, input, &GetQueueOutput{})
+
 	return GetQueueRequest{Request: req, Input: input, Copy: c.GetQueueRequest}
 }
 

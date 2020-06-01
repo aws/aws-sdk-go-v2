@@ -83,6 +83,7 @@ func (c *Client) DeleteEndpointRequest(input *DeleteEndpointInput) DeleteEndpoin
 	req := c.newRequest(op, input, &DeleteEndpointOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteEndpointRequest{Request: req, Input: input, Copy: c.DeleteEndpointRequest}
 }
 

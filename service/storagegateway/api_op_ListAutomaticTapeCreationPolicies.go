@@ -79,6 +79,7 @@ func (c *Client) ListAutomaticTapeCreationPoliciesRequest(input *ListAutomaticTa
 	}
 
 	req := c.newRequest(op, input, &ListAutomaticTapeCreationPoliciesOutput{})
+
 	return ListAutomaticTapeCreationPoliciesRequest{Request: req, Input: input, Copy: c.ListAutomaticTapeCreationPoliciesRequest}
 }
 

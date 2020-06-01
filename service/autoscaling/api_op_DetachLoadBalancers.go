@@ -67,13 +67,13 @@ const opDetachLoadBalancers = "DetachLoadBalancers"
 // group.
 //
 // This operation detaches only Classic Load Balancers. If you have Application
-// Load Balancers or Network Load Balancers, use DetachLoadBalancerTargetGroups
-// instead.
+// Load Balancers or Network Load Balancers, use the DetachLoadBalancerTargetGroups
+// API instead.
 //
 // When you detach a load balancer, it enters the Removing state while deregistering
 // the instances in the group. When all instances are deregistered, then you
-// can no longer describe the load balancer using DescribeLoadBalancers. The
-// instances remain running.
+// can no longer describe the load balancer using the DescribeLoadBalancers
+// API call. The instances remain running.
 //
 //    // Example sending a request using DetachLoadBalancersRequest.
 //    req := client.DetachLoadBalancersRequest(params)
@@ -95,6 +95,7 @@ func (c *Client) DetachLoadBalancersRequest(input *DetachLoadBalancersInput) Det
 	}
 
 	req := c.newRequest(op, input, &DetachLoadBalancersOutput{})
+
 	return DetachLoadBalancersRequest{Request: req, Input: input, Copy: c.DetachLoadBalancersRequest}
 }
 

@@ -80,6 +80,7 @@ func (c *Client) GetRequestedServiceQuotaChangeRequest(input *GetRequestedServic
 	}
 
 	req := c.newRequest(op, input, &GetRequestedServiceQuotaChangeOutput{})
+
 	return GetRequestedServiceQuotaChangeRequest{Request: req, Input: input, Copy: c.GetRequestedServiceQuotaChangeRequest}
 }
 

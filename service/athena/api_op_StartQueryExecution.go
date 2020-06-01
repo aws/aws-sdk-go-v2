@@ -120,6 +120,7 @@ func (c *Client) StartQueryExecutionRequest(input *StartQueryExecutionInput) Sta
 	}
 
 	req := c.newRequest(op, input, &StartQueryExecutionOutput{})
+
 	return StartQueryExecutionRequest{Request: req, Input: input, Copy: c.StartQueryExecutionRequest}
 }
 

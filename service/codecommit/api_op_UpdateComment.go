@@ -86,6 +86,7 @@ func (c *Client) UpdateCommentRequest(input *UpdateCommentInput) UpdateCommentRe
 	}
 
 	req := c.newRequest(op, input, &UpdateCommentOutput{})
+
 	return UpdateCommentRequest{Request: req, Input: input, Copy: c.UpdateCommentRequest}
 }
 

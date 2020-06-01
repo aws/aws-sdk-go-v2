@@ -273,6 +273,7 @@ func (c *Client) ListTrafficPolicyInstancesByPolicyRequest(input *ListTrafficPol
 	}
 
 	req := c.newRequest(op, input, &ListTrafficPolicyInstancesByPolicyOutput{})
+
 	return ListTrafficPolicyInstancesByPolicyRequest{Request: req, Input: input, Copy: c.ListTrafficPolicyInstancesByPolicyRequest}
 }
 

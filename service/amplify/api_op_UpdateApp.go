@@ -297,6 +297,7 @@ func (c *Client) UpdateAppRequest(input *UpdateAppInput) UpdateAppRequest {
 	}
 
 	req := c.newRequest(op, input, &UpdateAppOutput{})
+
 	return UpdateAppRequest{Request: req, Input: input, Copy: c.UpdateAppRequest}
 }
 

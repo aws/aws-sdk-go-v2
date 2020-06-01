@@ -97,6 +97,7 @@ func (c *Client) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
 	}
 
 	req := c.newRequest(op, input, &CreateTagsOutput{})
+
 	return CreateTagsRequest{Request: req, Input: input, Copy: c.CreateTagsRequest}
 }
 

@@ -100,6 +100,7 @@ func (c *Client) ClassifyDocumentRequest(input *ClassifyDocumentInput) ClassifyD
 	}
 
 	req := c.newRequest(op, input, &ClassifyDocumentOutput{})
+
 	return ClassifyDocumentRequest{Request: req, Input: input, Copy: c.ClassifyDocumentRequest}
 }
 

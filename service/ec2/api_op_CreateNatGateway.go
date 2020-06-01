@@ -112,6 +112,7 @@ func (c *Client) CreateNatGatewayRequest(input *CreateNatGatewayInput) CreateNat
 	}
 
 	req := c.newRequest(op, input, &CreateNatGatewayOutput{})
+
 	return CreateNatGatewayRequest{Request: req, Input: input, Copy: c.CreateNatGatewayRequest}
 }
 

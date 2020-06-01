@@ -95,6 +95,7 @@ func (c *Client) SetV2LoggingOptionsRequest(input *SetV2LoggingOptionsInput) Set
 	req := c.newRequest(op, input, &SetV2LoggingOptionsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return SetV2LoggingOptionsRequest{Request: req, Input: input, Copy: c.SetV2LoggingOptionsRequest}
 }
 

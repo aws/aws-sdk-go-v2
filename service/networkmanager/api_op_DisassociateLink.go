@@ -132,6 +132,7 @@ func (c *Client) DisassociateLinkRequest(input *DisassociateLinkInput) Disassoci
 	}
 
 	req := c.newRequest(op, input, &DisassociateLinkOutput{})
+
 	return DisassociateLinkRequest{Request: req, Input: input, Copy: c.DisassociateLinkRequest}
 }
 

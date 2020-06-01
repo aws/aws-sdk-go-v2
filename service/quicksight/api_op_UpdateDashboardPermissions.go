@@ -211,6 +211,7 @@ func (c *Client) UpdateDashboardPermissionsRequest(input *UpdateDashboardPermiss
 	}
 
 	req := c.newRequest(op, input, &UpdateDashboardPermissionsOutput{})
+
 	return UpdateDashboardPermissionsRequest{Request: req, Input: input, Copy: c.UpdateDashboardPermissionsRequest}
 }
 

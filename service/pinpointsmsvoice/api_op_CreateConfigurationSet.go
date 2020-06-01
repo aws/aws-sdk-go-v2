@@ -80,6 +80,7 @@ func (c *Client) CreateConfigurationSetRequest(input *CreateConfigurationSetInpu
 	}
 
 	req := c.newRequest(op, input, &CreateConfigurationSetOutput{})
+
 	return CreateConfigurationSetRequest{Request: req, Input: input, Copy: c.CreateConfigurationSetRequest}
 }
 

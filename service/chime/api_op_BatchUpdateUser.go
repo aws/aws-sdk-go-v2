@@ -140,6 +140,7 @@ func (c *Client) BatchUpdateUserRequest(input *BatchUpdateUserInput) BatchUpdate
 	}
 
 	req := c.newRequest(op, input, &BatchUpdateUserOutput{})
+
 	return BatchUpdateUserRequest{Request: req, Input: input, Copy: c.BatchUpdateUserRequest}
 }
 

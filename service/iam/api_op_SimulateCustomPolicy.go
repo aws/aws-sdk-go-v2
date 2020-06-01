@@ -304,6 +304,7 @@ func (c *Client) SimulateCustomPolicyRequest(input *SimulateCustomPolicyInput) S
 	}
 
 	req := c.newRequest(op, input, &SimulateCustomPolicyOutput{})
+
 	return SimulateCustomPolicyRequest{Request: req, Input: input, Copy: c.SimulateCustomPolicyRequest}
 }
 

@@ -32,7 +32,8 @@ type CreateVocabularyFilterInput struct {
 	VocabularyFilterFileUri *string `min:"1" type:"string"`
 
 	// The vocabulary filter name. The name must be unique within the account that
-	// contains it.
+	// contains it.If you try to create a vocabulary filter with the same name as
+	// a previous vocabulary filter you will receive a ConflictException error.
 	//
 	// VocabularyFilterName is a required field
 	VocabularyFilterName *string `min:"1" type:"string" required:"true"`
@@ -123,6 +124,7 @@ func (c *Client) CreateVocabularyFilterRequest(input *CreateVocabularyFilterInpu
 	}
 
 	req := c.newRequest(op, input, &CreateVocabularyFilterOutput{})
+
 	return CreateVocabularyFilterRequest{Request: req, Input: input, Copy: c.CreateVocabularyFilterRequest}
 }
 

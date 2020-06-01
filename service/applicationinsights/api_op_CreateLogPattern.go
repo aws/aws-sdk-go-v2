@@ -127,6 +127,7 @@ func (c *Client) CreateLogPatternRequest(input *CreateLogPatternInput) CreateLog
 	}
 
 	req := c.newRequest(op, input, &CreateLogPatternOutput{})
+
 	return CreateLogPatternRequest{Request: req, Input: input, Copy: c.CreateLogPatternRequest}
 }
 

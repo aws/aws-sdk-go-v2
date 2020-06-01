@@ -84,6 +84,7 @@ func (c *Client) DeleteRealtimeEndpointRequest(input *DeleteRealtimeEndpointInpu
 	}
 
 	req := c.newRequest(op, input, &DeleteRealtimeEndpointOutput{})
+
 	return DeleteRealtimeEndpointRequest{Request: req, Input: input, Copy: c.DeleteRealtimeEndpointRequest}
 }
 

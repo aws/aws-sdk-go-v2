@@ -135,6 +135,7 @@ func (c *Client) CompleteLifecycleActionRequest(input *CompleteLifecycleActionIn
 	}
 
 	req := c.newRequest(op, input, &CompleteLifecycleActionOutput{})
+
 	return CompleteLifecycleActionRequest{Request: req, Input: input, Copy: c.CompleteLifecycleActionRequest}
 }
 

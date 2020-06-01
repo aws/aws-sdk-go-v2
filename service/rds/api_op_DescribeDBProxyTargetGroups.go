@@ -124,6 +124,7 @@ func (c *Client) DescribeDBProxyTargetGroupsRequest(input *DescribeDBProxyTarget
 	}
 
 	req := c.newRequest(op, input, &DescribeDBProxyTargetGroupsOutput{})
+
 	return DescribeDBProxyTargetGroupsRequest{Request: req, Input: input, Copy: c.DescribeDBProxyTargetGroupsRequest}
 }
 

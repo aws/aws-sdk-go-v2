@@ -103,6 +103,7 @@ func (c *Client) DescribePoliciesRequest(input *DescribePoliciesInput) DescribeP
 	}
 
 	req := c.newRequest(op, input, &DescribePoliciesOutput{})
+
 	return DescribePoliciesRequest{Request: req, Input: input, Copy: c.DescribePoliciesRequest}
 }
 

@@ -87,6 +87,7 @@ func (c *Client) DeregisterDBProxyTargetsRequest(input *DeregisterDBProxyTargets
 	}
 
 	req := c.newRequest(op, input, &DeregisterDBProxyTargetsOutput{})
+
 	return DeregisterDBProxyTargetsRequest{Request: req, Input: input, Copy: c.DeregisterDBProxyTargetsRequest}
 }
 

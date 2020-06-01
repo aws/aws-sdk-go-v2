@@ -201,6 +201,7 @@ func (c *Client) CreateDetectorModelRequest(input *CreateDetectorModelInput) Cre
 	}
 
 	req := c.newRequest(op, input, &CreateDetectorModelOutput{})
+
 	return CreateDetectorModelRequest{Request: req, Input: input, Copy: c.CreateDetectorModelRequest}
 }
 

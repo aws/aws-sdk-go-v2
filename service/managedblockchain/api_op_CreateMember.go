@@ -171,6 +171,7 @@ func (c *Client) CreateMemberRequest(input *CreateMemberInput) CreateMemberReque
 	}
 
 	req := c.newRequest(op, input, &CreateMemberOutput{})
+
 	return CreateMemberRequest{Request: req, Input: input, Copy: c.CreateMemberRequest}
 }
 

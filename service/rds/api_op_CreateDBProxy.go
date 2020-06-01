@@ -148,6 +148,7 @@ func (c *Client) CreateDBProxyRequest(input *CreateDBProxyInput) CreateDBProxyRe
 	}
 
 	req := c.newRequest(op, input, &CreateDBProxyOutput{})
+
 	return CreateDBProxyRequest{Request: req, Input: input, Copy: c.CreateDBProxyRequest}
 }
 

@@ -142,6 +142,7 @@ func (c *Client) UpdateTypeRequest(input *UpdateTypeInput) UpdateTypeRequest {
 	}
 
 	req := c.newRequest(op, input, &UpdateTypeOutput{})
+
 	return UpdateTypeRequest{Request: req, Input: input, Copy: c.UpdateTypeRequest}
 }
 

@@ -88,6 +88,7 @@ func (c *Client) UpdateDeviceInstanceRequest(input *UpdateDeviceInstanceInput) U
 	}
 
 	req := c.newRequest(op, input, &UpdateDeviceInstanceOutput{})
+
 	return UpdateDeviceInstanceRequest{Request: req, Input: input, Copy: c.UpdateDeviceInstanceRequest}
 }
 

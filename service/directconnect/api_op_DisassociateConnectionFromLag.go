@@ -169,6 +169,7 @@ func (c *Client) DisassociateConnectionFromLagRequest(input *DisassociateConnect
 	}
 
 	req := c.newRequest(op, input, &DisassociateConnectionFromLagOutput{})
+
 	return DisassociateConnectionFromLagRequest{Request: req, Input: input, Copy: c.DisassociateConnectionFromLagRequest}
 }
 

@@ -127,6 +127,7 @@ func (c *Client) GetDifferencesRequest(input *GetDifferencesInput) GetDifference
 	}
 
 	req := c.newRequest(op, input, &GetDifferencesOutput{})
+
 	return GetDifferencesRequest{Request: req, Input: input, Copy: c.GetDifferencesRequest}
 }
 

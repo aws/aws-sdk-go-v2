@@ -117,6 +117,7 @@ func (c *Client) ListTransformJobsRequest(input *ListTransformJobsInput) ListTra
 	}
 
 	req := c.newRequest(op, input, &ListTransformJobsOutput{})
+
 	return ListTransformJobsRequest{Request: req, Input: input, Copy: c.ListTransformJobsRequest}
 }
 

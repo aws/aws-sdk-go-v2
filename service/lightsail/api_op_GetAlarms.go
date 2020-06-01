@@ -90,6 +90,7 @@ func (c *Client) GetAlarmsRequest(input *GetAlarmsInput) GetAlarmsRequest {
 	}
 
 	req := c.newRequest(op, input, &GetAlarmsOutput{})
+
 	return GetAlarmsRequest{Request: req, Input: input, Copy: c.GetAlarmsRequest}
 }
 

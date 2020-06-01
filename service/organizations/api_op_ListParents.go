@@ -131,6 +131,7 @@ func (c *Client) ListParentsRequest(input *ListParentsInput) ListParentsRequest 
 	}
 
 	req := c.newRequest(op, input, &ListParentsOutput{})
+
 	return ListParentsRequest{Request: req, Input: input, Copy: c.ListParentsRequest}
 }
 

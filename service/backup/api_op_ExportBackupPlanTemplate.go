@@ -104,6 +104,7 @@ func (c *Client) ExportBackupPlanTemplateRequest(input *ExportBackupPlanTemplate
 	}
 
 	req := c.newRequest(op, input, &ExportBackupPlanTemplateOutput{})
+
 	return ExportBackupPlanTemplateRequest{Request: req, Input: input, Copy: c.ExportBackupPlanTemplateRequest}
 }
 

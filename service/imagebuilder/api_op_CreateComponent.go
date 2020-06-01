@@ -50,6 +50,11 @@ type CreateComponentInput struct {
 	// SemanticVersion is a required field
 	SemanticVersion *string `locationName:"semanticVersion" type:"string" required:"true"`
 
+	// The operating system (OS) version supported by the component. If the OS information
+	// is available, a prefix match is performed against the parent image OS version
+	// during image recipe creation.
+	SupportedOsVersions []string `locationName:"supportedOsVersions" min:"1" type:"list"`
+
 	// The tags of the component.
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 
@@ -97,6 +102,9 @@ func (s *CreateComponentInput) Validate() error {
 
 	if s.SemanticVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SemanticVersion"))
+	}
+	if s.SupportedOsVersions != nil && len(s.SupportedOsVersions) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SupportedOsVersions", 1))
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
@@ -165,6 +173,18 @@ func (s CreateComponentInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "semanticVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SupportedOsVersions != nil {
+		v := s.SupportedOsVersions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "supportedOsVersions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	if s.Tags != nil {
 		v := s.Tags
@@ -257,6 +277,7 @@ func (c *Client) CreateComponentRequest(input *CreateComponentInput) CreateCompo
 	}
 
 	req := c.newRequest(op, input, &CreateComponentOutput{})
+
 	return CreateComponentRequest{Request: req, Input: input, Copy: c.CreateComponentRequest}
 }
 

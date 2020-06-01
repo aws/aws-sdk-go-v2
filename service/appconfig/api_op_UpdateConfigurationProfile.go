@@ -234,6 +234,7 @@ func (c *Client) UpdateConfigurationProfileRequest(input *UpdateConfigurationPro
 	}
 
 	req := c.newRequest(op, input, &UpdateConfigurationProfileOutput{})
+
 	return UpdateConfigurationProfileRequest{Request: req, Input: input, Copy: c.UpdateConfigurationProfileRequest}
 }
 

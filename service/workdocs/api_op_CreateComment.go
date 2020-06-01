@@ -198,6 +198,7 @@ func (c *Client) CreateCommentRequest(input *CreateCommentInput) CreateCommentRe
 	}
 
 	req := c.newRequest(op, input, &CreateCommentOutput{})
+
 	return CreateCommentRequest{Request: req, Input: input, Copy: c.CreateCommentRequest}
 }
 

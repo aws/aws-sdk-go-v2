@@ -85,6 +85,7 @@ func (c *Client) DeleteDeploymentConfigRequest(input *DeleteDeploymentConfigInpu
 	req := c.newRequest(op, input, &DeleteDeploymentConfigOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return DeleteDeploymentConfigRequest{Request: req, Input: input, Copy: c.DeleteDeploymentConfigRequest}
 }
 

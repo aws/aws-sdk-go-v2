@@ -106,6 +106,7 @@ func (c *Client) DeleteNotificationRequest(input *DeleteNotificationInput) Delet
 	}
 
 	req := c.newRequest(op, input, &DeleteNotificationOutput{})
+
 	return DeleteNotificationRequest{Request: req, Input: input, Copy: c.DeleteNotificationRequest}
 }
 

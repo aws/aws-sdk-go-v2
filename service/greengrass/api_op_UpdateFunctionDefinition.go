@@ -98,6 +98,7 @@ func (c *Client) UpdateFunctionDefinitionRequest(input *UpdateFunctionDefinition
 	}
 
 	req := c.newRequest(op, input, &UpdateFunctionDefinitionOutput{})
+
 	return UpdateFunctionDefinitionRequest{Request: req, Input: input, Copy: c.UpdateFunctionDefinitionRequest}
 }
 

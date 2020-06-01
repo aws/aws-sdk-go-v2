@@ -28,16 +28,16 @@ type AccessPoint struct {
 	// Name is a required field
 	Name *string `min:"3" type:"string" required:"true"`
 
-	// Indicates whether this access point allows access from the public Internet.
+	// Indicates whether this access point allows access from the public internet.
 	// If VpcConfiguration is specified for this access point, then NetworkOrigin
-	// is VPC, and the access point doesn't allow access from the public Internet.
+	// is VPC, and the access point doesn't allow access from the public internet.
 	// Otherwise, NetworkOrigin is Internet, and the access point allows access
-	// from the public Internet, subject to the access point and bucket access policies.
+	// from the public internet, subject to the access point and bucket access policies.
 	//
 	// NetworkOrigin is a required field
 	NetworkOrigin NetworkOrigin `type:"string" required:"true" enum:"true"`
 
-	// The Virtual Private Cloud (VPC) configuration for this access point, if one
+	// The virtual private cloud (VPC) configuration for this access point, if one
 	// exists.
 	VpcConfiguration *VpcConfiguration `type:"structure"`
 }
@@ -121,8 +121,8 @@ type JobDescriptor struct {
 	// requested one in the Create Job request.
 	Report *JobReport `type:"structure"`
 
-	// The Amazon Resource Name (ARN) for the Identity and Access Management (IAM)
-	// Role assigned to execute the tasks for this job.
+	// The Amazon Resource Name (ARN) for the AWS Identity and Access Management
+	// (IAM) role assigned to execute the tasks for this job.
 	RoleArn *string `min:"1" type:"string"`
 
 	// The current status of the specified job.
@@ -610,6 +610,18 @@ type JobOperation struct {
 	// in the manifest.
 	S3PutObjectCopy *S3CopyObjectOperation `type:"structure"`
 
+	// Contains the configuration parameters for a Set Object Legal Hold operation.
+	// Amazon S3 Batch Operations passes each value through to the underlying PUT
+	// Object Legal Hold API. For more information about the parameters for this
+	// operation, see PUT Object Legal Hold (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.htmll#object-lock-legal-holds).
+	S3PutObjectLegalHold *S3SetObjectLegalHoldOperation `type:"structure"`
+
+	// Contains the configuration parameters for a Set Object Retention operation.
+	// Amazon S3 Batch Operations passes each value through to the underlying PUT
+	// Object Retention API. For more information about the parameters for this
+	// operation, see PUT Object Retention (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html#object-lock-retention-modes).
+	S3PutObjectRetention *S3SetObjectRetentionOperation `type:"structure"`
+
 	// Directs the specified job to execute a PUT Object tagging call on each object
 	// in the manifest.
 	S3PutObjectTagging *S3SetObjectTaggingOperation `type:"structure"`
@@ -636,6 +648,16 @@ func (s *JobOperation) Validate() error {
 	if s.S3PutObjectCopy != nil {
 		if err := s.S3PutObjectCopy.Validate(); err != nil {
 			invalidParams.AddNested("S3PutObjectCopy", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.S3PutObjectLegalHold != nil {
+		if err := s.S3PutObjectLegalHold.Validate(); err != nil {
+			invalidParams.AddNested("S3PutObjectLegalHold", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.S3PutObjectRetention != nil {
+		if err := s.S3PutObjectRetention.Validate(); err != nil {
+			invalidParams.AddNested("S3PutObjectRetention", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3PutObjectTagging != nil {
@@ -675,6 +697,18 @@ func (s JobOperation) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "S3PutObjectCopy", v, metadata)
+	}
+	if s.S3PutObjectLegalHold != nil {
+		v := s.S3PutObjectLegalHold
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "S3PutObjectLegalHold", v, metadata)
+	}
+	if s.S3PutObjectRetention != nil {
+		v := s.S3PutObjectRetention
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "S3PutObjectRetention", v, metadata)
 	}
 	if s.S3PutObjectTagging != nil {
 		v := s.S3PutObjectTagging
@@ -1066,7 +1100,7 @@ func (s S3AccessControlPolicy) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains the configuration parameters for a PUT Copy object operation. Amazon
-// S3 batch operations passes each value through to the underlying PUT Copy
+// S3 Batch Operations passes each value through to the underlying PUT Copy
 // object API. For more information about the parameters for this operation,
 // see PUT Object - Copy (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html).
 type S3CopyObjectOperation struct {
@@ -1084,10 +1118,15 @@ type S3CopyObjectOperation struct {
 
 	NewObjectTagging []S3Tag `type:"list"`
 
+	// The Legal Hold status to be applied to all objects in the Batch Operations
+	// job.
 	ObjectLockLegalHoldStatus S3ObjectLockLegalHoldStatus `type:"string" enum:"true"`
 
+	// The Retention mode to be applied to all objects in the Batch Operations job.
 	ObjectLockMode S3ObjectLockMode `type:"string" enum:"true"`
 
+	// The date when the applied Object Retention configuration will expire on all
+	// objects in the Batch Operations job.
 	ObjectLockRetainUntilDate *time.Time `type:"timestamp"`
 
 	RedirectLocation *string `min:"1" type:"string"`
@@ -1367,7 +1406,7 @@ func (s S3Grantee) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains the configuration parameters for an Initiate Glacier Restore job.
-// Amazon S3 batch operations passes each value through to the underlying POST
+// Amazon S3 Batch Operations passes each value through to the underlying POST
 // Object restore API. For more information about the parameters for this operation,
 // see Restoring Archives (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html#RESTObjectPOSTrestore-restore-request).
 type S3InitiateRestoreObjectOperation struct {
@@ -1396,6 +1435,45 @@ func (s S3InitiateRestoreObjectOperation) MarshalFields(e protocol.FieldEncoder)
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "GlacierJobTier", v, metadata)
+	}
+	return nil
+}
+
+type S3ObjectLockLegalHold struct {
+	_ struct{} `type:"structure"`
+
+	// The Legal Hold status to be applied to all objects in the Batch Operations
+	// job.
+	//
+	// Status is a required field
+	Status S3ObjectLockLegalHoldStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s S3ObjectLockLegalHold) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3ObjectLockLegalHold) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "S3ObjectLockLegalHold"}
+	if len(s.Status) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s S3ObjectLockLegalHold) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", v, metadata)
 	}
 	return nil
 }
@@ -1583,8 +1661,42 @@ func (s S3ObjectOwner) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+type S3Retention struct {
+	_ struct{} `type:"structure"`
+
+	// The Retention mode to be applied to all objects in the Batch Operations job.
+	Mode S3ObjectLockRetentionMode `type:"string" enum:"true"`
+
+	// The date when the applied Object Retention will expire on all objects in
+	// the Batch Operations job.
+	RetainUntilDate *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation
+func (s S3Retention) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s S3Retention) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Mode) > 0 {
+		v := s.Mode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Mode", v, metadata)
+	}
+	if s.RetainUntilDate != nil {
+		v := *s.RetainUntilDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RetainUntilDate",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
+	}
+	return nil
+}
+
 // Contains the configuration parameters for a Set Object ACL operation. Amazon
-// S3 batch operations passes each value through to the underlying PUT Object
+// S3 Batch Operations passes each value through to the underlying PUT Object
 // acl API. For more information about the parameters for this operation, see
 // PUT Object acl (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html).
 type S3SetObjectAclOperation struct {
@@ -1624,8 +1736,111 @@ func (s S3SetObjectAclOperation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains the configuration parameters for a Set Object Legal Hold operation.
+// Amazon S3 Batch Operations passes each value through to the underlying PUT
+// Object Legal Hold API. For more information about the parameters for this
+// operation, see PUT Object Legal Hold (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.htmll#object-lock-legal-holds).
+type S3SetObjectLegalHoldOperation struct {
+	_ struct{} `type:"structure"`
+
+	// The Legal Hold contains the status to be applied to all objects in the Batch
+	// Operations job.
+	//
+	// LegalHold is a required field
+	LegalHold *S3ObjectLockLegalHold `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s S3SetObjectLegalHoldOperation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3SetObjectLegalHoldOperation) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "S3SetObjectLegalHoldOperation"}
+
+	if s.LegalHold == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LegalHold"))
+	}
+	if s.LegalHold != nil {
+		if err := s.LegalHold.Validate(); err != nil {
+			invalidParams.AddNested("LegalHold", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s S3SetObjectLegalHoldOperation) MarshalFields(e protocol.FieldEncoder) error {
+	if s.LegalHold != nil {
+		v := s.LegalHold
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LegalHold", v, metadata)
+	}
+	return nil
+}
+
+// Contains the configuration parameters for a Set Object Retention operation.
+// Amazon S3 Batch Operations passes each value through to the underlying PUT
+// Object Retention API. For more information about the parameters for this
+// operation, see PUT Object Retention (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html#object-lock-retention-modes).
+type S3SetObjectRetentionOperation struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates if the operation should be applied to objects in the Batch Operations
+	// job even if they have Governance-type Object Lock in place.
+	BypassGovernanceRetention *bool `type:"boolean"`
+
+	// Amazon S3 object lock Retention contains the retention mode to be applied
+	// to all objects in the Batch Operations job.
+	//
+	// Retention is a required field
+	Retention *S3Retention `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s S3SetObjectRetentionOperation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3SetObjectRetentionOperation) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "S3SetObjectRetentionOperation"}
+
+	if s.Retention == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Retention"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s S3SetObjectRetentionOperation) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BypassGovernanceRetention != nil {
+		v := *s.BypassGovernanceRetention
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BypassGovernanceRetention", protocol.BoolValue(v), metadata)
+	}
+	if s.Retention != nil {
+		v := s.Retention
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Retention", v, metadata)
+	}
+	return nil
+}
+
 // Contains the configuration parameters for a Set Object Tagging operation.
-// Amazon S3 batch operations passes each value through to the underlying PUT
+// Amazon S3 Batch Operations passes each value through to the underlying PUT
 // Object tagging API. For more information about the parameters for this operation,
 // see PUT Object tagging (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html).
 type S3SetObjectTaggingOperation struct {
@@ -1726,7 +1941,7 @@ func (s S3Tag) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The Virtual Private Cloud (VPC) configuration for an access point.
+// The virtual private cloud (VPC) configuration for an access point.
 type VpcConfiguration struct {
 	_ struct{} `type:"structure"`
 

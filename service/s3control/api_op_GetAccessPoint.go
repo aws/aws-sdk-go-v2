@@ -82,11 +82,11 @@ type GetAccessPointOutput struct {
 	// The name of the specified access point.
 	Name *string `min:"3" type:"string"`
 
-	// Indicates whether this access point allows access from the public Internet.
+	// Indicates whether this access point allows access from the public internet.
 	// If VpcConfiguration is specified for this access point, then NetworkOrigin
-	// is VPC, and the access point doesn't allow access from the public Internet.
+	// is VPC, and the access point doesn't allow access from the public internet.
 	// Otherwise, NetworkOrigin is Internet, and the access point allows access
-	// from the public Internet, subject to the access point and bucket access policies.
+	// from the public internet, subject to the access point and bucket access policies.
 	NetworkOrigin NetworkOrigin `type:"string" enum:"true"`
 
 	// The PublicAccessBlock configuration that you want to apply to this Amazon
@@ -96,7 +96,7 @@ type GetAccessPointOutput struct {
 	// in the Amazon Simple Storage Service Developer Guide.
 	PublicAccessBlockConfiguration *PublicAccessBlockConfiguration `type:"structure"`
 
-	// Contains the Virtual Private Cloud (VPC) configuration for the specified
+	// Contains the virtual private cloud (VPC) configuration for the specified
 	// access point.
 	VpcConfiguration *VpcConfiguration `type:"structure"`
 }
@@ -177,6 +177,7 @@ func (c *Client) GetAccessPointRequest(input *GetAccessPointInput) GetAccessPoin
 	req := c.newRequest(op, input, &GetAccessPointOutput{})
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
+
 	return GetAccessPointRequest{Request: req, Input: input, Copy: c.GetAccessPointRequest}
 }
 

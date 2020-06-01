@@ -185,6 +185,7 @@ func (c *Client) ListImageBuildVersionsRequest(input *ListImageBuildVersionsInpu
 	}
 
 	req := c.newRequest(op, input, &ListImageBuildVersionsOutput{})
+
 	return ListImageBuildVersionsRequest{Request: req, Input: input, Copy: c.ListImageBuildVersionsRequest}
 }
 

@@ -84,6 +84,7 @@ func (c *Client) DeleteDBSnapshotRequest(input *DeleteDBSnapshotInput) DeleteDBS
 	}
 
 	req := c.newRequest(op, input, &DeleteDBSnapshotOutput{})
+
 	return DeleteDBSnapshotRequest{Request: req, Input: input, Copy: c.DeleteDBSnapshotRequest}
 }
 

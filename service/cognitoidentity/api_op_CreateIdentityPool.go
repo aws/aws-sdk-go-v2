@@ -185,6 +185,7 @@ func (c *Client) CreateIdentityPoolRequest(input *CreateIdentityPoolInput) Creat
 	}
 
 	req := c.newRequest(op, input, &CreateIdentityPoolOutput{})
+
 	return CreateIdentityPoolRequest{Request: req, Input: input, Copy: c.CreateIdentityPoolRequest}
 }
 

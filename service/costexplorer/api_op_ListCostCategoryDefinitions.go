@@ -102,6 +102,7 @@ func (c *Client) ListCostCategoryDefinitionsRequest(input *ListCostCategoryDefin
 	}
 
 	req := c.newRequest(op, input, &ListCostCategoryDefinitionsOutput{})
+
 	return ListCostCategoryDefinitionsRequest{Request: req, Input: input, Copy: c.ListCostCategoryDefinitionsRequest}
 }
 

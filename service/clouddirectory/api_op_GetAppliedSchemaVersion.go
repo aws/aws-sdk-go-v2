@@ -103,6 +103,7 @@ func (c *Client) GetAppliedSchemaVersionRequest(input *GetAppliedSchemaVersionIn
 	}
 
 	req := c.newRequest(op, input, &GetAppliedSchemaVersionOutput{})
+
 	return GetAppliedSchemaVersionRequest{Request: req, Input: input, Copy: c.GetAppliedSchemaVersionRequest}
 }
 

@@ -107,6 +107,7 @@ func (c *Client) ChangePasswordRequest(input *ChangePasswordInput) ChangePasswor
 	req := c.newRequest(op, input, &ChangePasswordOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return ChangePasswordRequest{Request: req, Input: input, Copy: c.ChangePasswordRequest}
 }
 

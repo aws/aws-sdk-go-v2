@@ -225,6 +225,7 @@ func (c *Client) DescribeActivitiesRequest(input *DescribeActivitiesInput) Descr
 	}
 
 	req := c.newRequest(op, input, &DescribeActivitiesOutput{})
+
 	return DescribeActivitiesRequest{Request: req, Input: input, Copy: c.DescribeActivitiesRequest}
 }
 

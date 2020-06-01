@@ -85,6 +85,7 @@ func (c *Client) DescribeLoadBasedAutoScalingRequest(input *DescribeLoadBasedAut
 	}
 
 	req := c.newRequest(op, input, &DescribeLoadBasedAutoScalingOutput{})
+
 	return DescribeLoadBasedAutoScalingRequest{Request: req, Input: input, Copy: c.DescribeLoadBasedAutoScalingRequest}
 }
 

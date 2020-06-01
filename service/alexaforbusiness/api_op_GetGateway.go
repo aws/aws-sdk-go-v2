@@ -76,6 +76,7 @@ func (c *Client) GetGatewayRequest(input *GetGatewayInput) GetGatewayRequest {
 	}
 
 	req := c.newRequest(op, input, &GetGatewayOutput{})
+
 	return GetGatewayRequest{Request: req, Input: input, Copy: c.GetGatewayRequest}
 }
 

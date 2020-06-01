@@ -80,6 +80,7 @@ func (c *Client) StopTrainingEntityRecognizerRequest(input *StopTrainingEntityRe
 	}
 
 	req := c.newRequest(op, input, &StopTrainingEntityRecognizerOutput{})
+
 	return StopTrainingEntityRecognizerRequest{Request: req, Input: input, Copy: c.StopTrainingEntityRecognizerRequest}
 }
 

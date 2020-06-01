@@ -264,6 +264,7 @@ func (c *Client) UpdateBranchRequest(input *UpdateBranchInput) UpdateBranchReque
 	}
 
 	req := c.newRequest(op, input, &UpdateBranchOutput{})
+
 	return UpdateBranchRequest{Request: req, Input: input, Copy: c.UpdateBranchRequest}
 }
 

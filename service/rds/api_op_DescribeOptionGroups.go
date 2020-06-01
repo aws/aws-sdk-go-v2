@@ -117,6 +117,7 @@ func (c *Client) DescribeOptionGroupsRequest(input *DescribeOptionGroupsInput) D
 	}
 
 	req := c.newRequest(op, input, &DescribeOptionGroupsOutput{})
+
 	return DescribeOptionGroupsRequest{Request: req, Input: input, Copy: c.DescribeOptionGroupsRequest}
 }
 

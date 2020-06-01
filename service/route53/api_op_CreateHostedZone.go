@@ -266,6 +266,7 @@ func (c *Client) CreateHostedZoneRequest(input *CreateHostedZoneInput) CreateHos
 	}
 
 	req := c.newRequest(op, input, &CreateHostedZoneOutput{})
+
 	return CreateHostedZoneRequest{Request: req, Input: input, Copy: c.CreateHostedZoneRequest}
 }
 

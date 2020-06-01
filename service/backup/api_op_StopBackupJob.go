@@ -95,6 +95,7 @@ func (c *Client) StopBackupJobRequest(input *StopBackupJobInput) StopBackupJobRe
 	req := c.newRequest(op, input, &StopBackupJobOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+
 	return StopBackupJobRequest{Request: req, Input: input, Copy: c.StopBackupJobRequest}
 }
 

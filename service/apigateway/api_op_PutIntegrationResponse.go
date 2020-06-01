@@ -295,6 +295,7 @@ func (c *Client) PutIntegrationResponseRequest(input *PutIntegrationResponseInpu
 	}
 
 	req := c.newRequest(op, input, &PutIntegrationResponseOutput{})
+
 	return PutIntegrationResponseRequest{Request: req, Input: input, Copy: c.PutIntegrationResponseRequest}
 }
 

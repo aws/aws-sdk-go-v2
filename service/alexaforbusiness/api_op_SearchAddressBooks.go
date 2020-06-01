@@ -120,6 +120,7 @@ func (c *Client) SearchAddressBooksRequest(input *SearchAddressBooksInput) Searc
 	}
 
 	req := c.newRequest(op, input, &SearchAddressBooksOutput{})
+
 	return SearchAddressBooksRequest{Request: req, Input: input, Copy: c.SearchAddressBooksRequest}
 }
 
