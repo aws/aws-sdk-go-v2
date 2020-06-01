@@ -189,6 +189,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 break;
             case UNION:
                 writeUnionShapeToJsonObject(model, symbolProvider, writer, (UnionShape) shape);
+                break;
             default:
                 throw new CodegenException("Unexpected shape serialization to JSON Object");
         }
