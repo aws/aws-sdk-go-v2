@@ -209,6 +209,15 @@ func TestCondition(t *testing.T) {
 			expected: aws.String("#0 = :0"),
 		},
 		{
+			name: "builder with non-condition expression set",
+			input: Builder{
+				expressionMap: map[expressionType]treeBuilder{
+					filter: Name("foo").Equal(Value(5)),
+				},
+			},
+			expected: nil,
+		},
+		{
 			name:  "unset builder",
 			input: Builder{},
 			err:   unsetBuilder,
@@ -255,6 +264,15 @@ func TestFilter(t *testing.T) {
 			expected: aws.String("#0 = :0"),
 		},
 		{
+			name: "builder with non-filter expression set",
+			input: Builder{
+				expressionMap: map[expressionType]treeBuilder{
+					condition: Name("foo").Equal(Value(5)),
+				},
+			},
+			expected: nil,
+		},
+		{
 			name:  "unset builder",
 			input: Builder{},
 			err:   unsetBuilder,
@@ -299,6 +317,15 @@ func TestProjection(t *testing.T) {
 				},
 			},
 			expected: aws.String("#0, #1, #2"),
+		},
+		{
+			name: "builder with non-projection expression set",
+			input: Builder{
+				expressionMap: map[expressionType]treeBuilder{
+					condition: Name("foo").Equal(Value(5)),
+				},
+			},
+			expected: nil,
 		},
 		{
 			name:  "unset builder",
@@ -355,6 +382,15 @@ func TestKeyCondition(t *testing.T) {
 				},
 			},
 			expected: aws.String("#0 = :0"),
+		},
+		{
+			name: "builder with non-keyCondition expression set",
+			input: Builder{
+				expressionMap: map[expressionType]treeBuilder{
+					filter: Name("foo").Equal(Value(5)),
+				},
+			},
+			expected: nil,
 		},
 		{
 			name:  "empty builder",
@@ -456,6 +492,15 @@ func TestUpdate(t *testing.T) {
 				},
 			},
 			expected: aws.String("SET #0 = :0, #1 = :1, #2 = :2\n"),
+		},
+		{
+			name: "builder with non-update expression set",
+			input: Builder{
+				expressionMap: map[expressionType]treeBuilder{
+					filter: Name("foo").Equal(Value(5)),
+				},
+			},
+			expected: nil,
 		},
 		{
 			name:  "unset builder",
