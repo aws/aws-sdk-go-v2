@@ -18,6 +18,7 @@ package software.amazon.smithy.aws.go.codegen;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -42,6 +43,7 @@ import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.shapes.ShapeType;
 import software.amazon.smithy.model.shapes.StructureShape;
+import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.EnumTrait;
 import software.amazon.smithy.model.traits.HttpErrorTrait;
 import software.amazon.smithy.model.traits.JsonNameTrait;
@@ -104,7 +106,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             Shape inputShape,
             Predicate<MemberShape> filterMemberShapes
     ) {
-        Symbol jsonEncoder = SymbolUtils.createPointableSymbolBuilder("Value", GoDependency.AWS_JSON_PROTOCOL)
+        Symbol jsonEncoder = SymbolUtils.createPointableSymbolBuilder("Value", GoDependency.SMITHY_JSON)
                 .build();
         Symbol inputSymbol = symbolProvider.toSymbol(inputShape);
 
@@ -117,6 +119,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                     writer.write("");
 
                     switch (inputShape.getType()) {
+                        case UNION:
                         case MAP:
                         case STRUCTURE:
                             writeShapeToJsonObject(model, symbolProvider, writer, inputShape, filterMemberShapes);
@@ -125,7 +128,6 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                         case SET:
                             writeShapeToJsonArray(model, writer, (CollectionShape) inputShape);
                             break;
-                        case UNION:
                         case DOCUMENT:
                             writer.write("// TODO: Support " + inputShape.getType().name() + " Serialization");
                             break;
@@ -155,12 +157,13 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
                 String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(targetShape,
                         getProtocolName());
+
                 operand = CodegenUtils.isShapePassByReference(targetShape) ? "&" + operand : operand;
                 writer.openBlock("if err := $L($L, av); err != nil {", "}", serFunctionName, operand, () -> {
                     writer.write("return err");
                 });
             } else {
-                writer.write("av" + writeSimpleShapeToJsonValue(model, memberShape, operand));
+                generateSimpleShapeToJsonValue(model, writer, memberShape, operand, (w, s) -> w.write("av.$L", s));
             }
         });
     }
@@ -184,9 +187,51 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 writeStructuredShapeToJsonObject(model, symbolProvider, writer, (StructureShape) shape,
                         filterMemberShapes);
                 break;
+            case UNION:
+                writeUnionShapeToJsonObject(model, symbolProvider, writer, (UnionShape) shape);
+                break;
             default:
                 throw new CodegenException("Unexpected shape serialization to JSON Object");
         }
+    }
+
+    private void writeUnionShapeToJsonObject(
+            Model model,
+            SymbolProvider symbolProvider,
+            GoWriter writer,
+            UnionShape shape
+    ) {
+        Symbol symbol = symbolProvider.toSymbol(shape);
+
+        writer.addUseImports(GoDependency.FMT);
+
+        writer.openBlock("switch uv := v.(type) {", "}", () -> {
+            for (MemberShape memberShape : shape.getAllMembers().values()) {
+                Shape targetShape = model.expectShape(memberShape.getTarget());
+                Symbol memberSymbol = symbolProvider.toSymbol(memberShape);
+                String exportedMemberName = symbol.getName() + symbolProvider.toMemberName(memberShape);
+
+                writer.openBlock("case *$L:", "", exportedMemberName, () -> {
+                    if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
+                        String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(targetShape,
+                                getProtocolName());
+                        writer.write("av := object.key($S)", memberSymbol.getName());
+                        writer.openBlock("if err := $L(uv.Value(), av); err != nil {", "}", serFunctionName, () -> {
+                            writer.write("return err");
+                        });
+                    } else {
+                        generateSimpleShapeToJsonValue(model, writer, memberShape, "uv.Value()", (w, s) -> {
+                            writer.write("object.Key($S).$L", memberShape.getMemberName(), s);
+                        });
+                    }
+                });
+            }
+            writer.openBlock("case *$LUnknown:", "", symbol.getName(), () -> writer.write("fallthrough"));
+            writer.openBlock("default:", "", () -> {
+                writer.write("return fmt.Errorf(\"attempted to serialize unknown member type %T"
+                        + " for union %T\", uv, v)");
+            });
+        });
     }
 
     private void writeStructuredShapeToJsonObject(
@@ -208,14 +253,14 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                         if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
                             String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(targetShape,
                                     getProtocolName());
-                            operand = CodegenUtils.isShapePassByReference(targetShape) ? "&" + operand : operand;
                             writer.openBlock("if err := $L($L, object.Key($S)); err != nil {", "}", serFunctionName,
                                     operand, memberShape.getMemberName(), () -> {
                                         writer.write("return err");
                                     });
                         } else {
-                            writer.write("object.Key($S)" + writeSimpleShapeToJsonValue(model, memberShape, operand),
-                                    getSerializedMemberName(memberShape));
+                            generateSimpleShapeToJsonValue(model, writer, memberShape, operand, (w, s) -> {
+                                writer.write("object.Key($S).$L", getSerializedMemberName(memberShape), s);
+                            });
                         }
                     });
             writer.write("");
@@ -231,48 +276,65 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 String serFunctionName = ProtocolGenerator
                         .getDocumentSerializerFunctionName(targetShape,
                                 getProtocolName());
-                String operand = "v[key]";
-                operand = CodegenUtils.isShapePassByReference(targetShape) ? "&" + operand : operand;
-                writer.openBlock("if err := $L($L, object.Key(key)); err != nil {", "}", serFunctionName, operand,
+                writer.openBlock("if err := $L($L, object.Key(key)); err != nil {", "}", serFunctionName, "v[key]",
                         () -> {
                             writer.write("return err");
                         });
             } else {
-                writer.write("object.Key(key)" + writeSimpleShapeToJsonValue(model, memberShape, "v[key]"));
+                generateSimpleShapeToJsonValue(model, writer, memberShape, "v[key]", (w, s) -> {
+                    writer.write("object.Key(key).$L", s);
+                });
             }
         });
     }
 
-    private String writeSimpleShapeToJsonValue(Model model, MemberShape memberShape, String operand) {
+    private void generateSimpleShapeToJsonValue(
+            Model model,
+            GoWriter writer,
+            MemberShape memberShape,
+            String operand,
+            BiConsumer<GoWriter, String> locationEncoder
+    ) {
         Shape targetShape = model.expectShape(memberShape.getTarget());
 
         // JSON encoder helper methods take a value not a reference so we need to determine if we need to dereference.
         operand = CodegenUtils.isShapePassByReference(targetShape)
+                && targetShape.getType() != ShapeType.BIG_INTEGER
+                && targetShape.getType() != ShapeType.BIG_DECIMAL
                 ? "*" + operand : operand;
 
         switch (targetShape.getType()) {
             case BOOLEAN:
-                return ".Boolean(" + operand + ")";
+                locationEncoder.accept(writer, "Boolean(" + operand + ")");
+                break;
             case STRING:
                 operand = targetShape.hasTrait(EnumTrait.class) ? "string(" + operand + ")" : operand;
-                return ".String(" + operand + ")";
+                locationEncoder.accept(writer, "String(" + operand + ")");
+                break;
             case TIMESTAMP:
-                // TODO: This needs to handle formats
-                return ".UnixTime(" + operand + ")";
+                generateDocumentTimestampSerializer(model, writer, memberShape, operand, locationEncoder);
+                break;
             case BYTE:
-                return ".Byte(" + operand + ")";
+                locationEncoder.accept(writer, "Byte(" + operand + ")");
+                break;
             case SHORT:
-                return ".Short(" + operand + ")";
+                locationEncoder.accept(writer, "Short(" + operand + ")");
+                break;
             case INTEGER:
-                return ".Integer(" + operand + ")";
+                locationEncoder.accept(writer, "Integer(" + operand + ")");
+                break;
             case LONG:
-                return ".Long(" + operand + ")";
+                locationEncoder.accept(writer, "Long(" + operand + ")");
+                break;
             case FLOAT:
-                return ".Float(" + operand + ")";
+                locationEncoder.accept(writer, "Float(" + operand + ")");
+                break;
             case DOUBLE:
-                return ".Double(" + operand + ")";
+                locationEncoder.accept(writer, "Double(" + operand + ")");
+                break;
             case BLOB:
-                return ".Blob(" + operand + ")";
+                locationEncoder.accept(writer, "Blob(" + operand + ")");
+                break;
             default:
                 throw new CodegenException("Unsupported shape type " + targetShape.getType());
         }
@@ -296,7 +358,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             return;
         }
 
-        writer.addUseImports(SymbolUtils.createValueSymbolBuilder(null, GoDependency.AWS_JSON_PROTOCOL).build());
+        writer.addUseImports(GoDependency.SMITHY);
+        writer.addUseImports(GoDependency.SMITHY_JSON);
 
         writer.write("var documentPayload []byte");
         writer.write("");
@@ -341,7 +404,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
         writer.openBlock("if request, err = request.SetStream(bytes.NewReader(documentPayload)); err != nil {", "}",
                 () -> {
-                    writer.write("return out, metadata, &aws.SerializationError{Err: err}");
+                    writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
                 });
     }
 
@@ -373,6 +436,42 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     private String getSerializedMemberName(MemberShape memberShape) {
         Optional<JsonNameTrait> jsonNameTrait = memberShape.getTrait(JsonNameTrait.class);
         return jsonNameTrait.isPresent() ? jsonNameTrait.get().getValue() : memberShape.getMemberName();
+    }
+
+    /**
+     * Generate the serializer statement for the document timestamp
+     *
+     * @param model       the model
+     * @param writer      the writer
+     * @param memberShape the timestamp member shape to serialize
+     * @param operand     the go operand
+     */
+    private void generateDocumentTimestampSerializer(
+            Model model,
+            GoWriter writer,
+            MemberShape memberShape,
+            String operand,
+            BiConsumer<GoWriter, String> locationEncoder
+    ) {
+        writer.addUseImports(GoDependency.SMITHY_TIME);
+
+        TimestampFormatTrait.Format format = memberShape.getMemberTrait(model, TimestampFormatTrait.class)
+                .map(TimestampFormatTrait::getFormat)
+                .orElse(TimestampFormatTrait.Format.EPOCH_SECONDS);
+
+        switch (format) {
+            case DATE_TIME:
+                locationEncoder.accept(writer, "String(smithytime.FormatDateTime(" + operand + "))");
+                break;
+            case HTTP_DATE:
+                locationEncoder.accept(writer, "String(smithytime.FormatHTTPDate(" + operand + "))");
+                break;
+            case EPOCH_SECONDS:
+                locationEncoder.accept(writer, "Float(smithytime.FormatEpochSeconds(" + operand + "))");
+                break;
+            case UNKNOWN:
+                throw new CodegenException("Unknown timestamp format");
+        }
     }
 
     @Override
@@ -483,8 +582,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 writer.write("defer response.Body.Close()");
                 writer.write("");
 
-                writer.addUseImports(GoDependency.AWS_JSON_PROTOCOL_ALIAS);
-                writer.write("genericError, err := jsonprotocol.GetSmithyGenericAPIError(decoder, errorType)");
+                writer.addUseImports(GoDependency.AWS_REST_JSON_PROTOCOL);
+                writer.write("genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)");
                 writer.write("if err != nil { return out, metadata, &aws.DeserializationError{ Err: err}}");
                 writer.write("return out, metadata, genericError");
                 return;
@@ -514,12 +613,12 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writer.write("");
 
             writer.write("var errorMessage string");
-            writer.addUseImports(GoDependency.AWS_JSON_PROTOCOL_ALIAS);
+            writer.addUseImports(GoDependency.AWS_REST_JSON_PROTOCOL);
 
             // If errorType is empty, look for error type in a body field with the name `code`,
             // or a body field named `__type`.
             writer.openBlock("if len(errorType) == 0 {", "}", () -> {
-                writer.write("errorType, errorMessage, err = jsonprotocol.GetErrorInfo(decoder)");
+                writer.write("errorType, errorMessage, err = restjson.GetErrorInfo(decoder)");
                 writer.openBlock("if err != nil {", "}", () -> {
                     writer.write("var snapshot bytes.Buffer");
                     writer.write("io.Copy(&snapshot, ringBuffer)");
@@ -547,8 +646,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             });
 
             writer.write("");
-            writer.addUseImports(GoDependency.AWS_JSON_PROTOCOL_ALIAS);
-            writer.write("genericError, err := jsonprotocol.GetSmithyGenericAPIError(decoder, errorType)");
+            writer.addUseImports(GoDependency.AWS_REST_JSON_PROTOCOL);
+            writer.write("genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)");
             writer.write("if err != nil { return out, metadata, &aws.DeserializationError{ Err: err }}");
             writer.write("");
             writer.write("return out, metadata, genericError");
@@ -833,8 +932,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
                         // default case to handle unknown fields
                         writer.openBlock("default : ","", () -> {
-                            writer.addUseImports(GoDependency.AWS_JSON_PROTOCOL_ALIAS);
-                            writer.write("err := jsonprotocol.DiscardUnknownField(decoder)");
+                            writer.addUseImports(GoDependency.AWS_REST_JSON_PROTOCOL);
+                            writer.write("err := restjson.DiscardUnknownField(decoder)");
                             writer.write("if err != nil {return err}");
                         });
                     });
