@@ -1,11 +1,12 @@
-package json
+package restjson
 
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/awslabs/smithy-go"
 	"io"
 	"strings"
+
+	"github.com/awslabs/smithy-go"
 )
 
 // GetErrorInfo util looks for code, __type, and message members in the
