@@ -469,6 +469,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
         // checks if response has an error and retrieve the error code from the response
         writer.openBlock("if response.StatusCode < 200 || response.StatusCode >= 300 {", "}", () -> {
+            // Retrieve error shape name from response. For REST JSON protocol, the error shape name can be found either
+            // at Header `X-Amzn-Errortype` or a body field with the name `code`, or a body field named `__type`.
             writer.write("errorType := response.Headers.Get($S)","X-Amzn-Errortype" );
             writer.write("errorType = jsonprotocol.SanitizeErrorCode(errorType)");
             writer.write("");
@@ -506,8 +508,6 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writer.write("defer response.Body.Close()");
             writer.write("");
 
-            // Retrieve error shape name from response. For REST JSON protocol, the error shape name can be found either
-            // at Header `X-Amzn-Errortype` or a body field with the name `code`, or a body field named `__type`.
             writer.addUseImports(GoDependency.JSON);
             writer.write("decoder := json.NewDecoder(body)");
             writer.write("decoder.UseNumber()");
@@ -515,6 +515,9 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
             writer.write("var errorMessage string");
             writer.addUseImports(GoDependency.AWS_JSON_PROTOCOL_ALIAS);
+
+            // If errorType is empty, look for error type in a body field with the name `code`,
+            // or a body field named `__type`.
             writer.openBlock("if len(errorType) == 0 {", "}", () -> {
                 writer.write("errorType, errorMessage, err = jsonprotocol.GetErrorInfo(decoder)");
                 writer.openBlock("if err != nil {", "}", () -> {
@@ -525,7 +528,6 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                         writer.write("Snapshot: snapshot.Bytes(),");
                     });
                 });
-                writer.write("errorType = jsonprotocol.SanitizeErrorCode(errorType)");
             });
 
             writer.write("");

@@ -34,6 +34,7 @@ func GetErrorInfo(decoder *json.Decoder) (errorType string, message string, err 
 
 		switch st := t.(string); {
 		case strings.EqualFold(st, "code"):
+			fallthrough
 		case strings.EqualFold(st, "__type"):
 			target = &errorType
 		case strings.EqualFold(st, "message"):
@@ -58,6 +59,9 @@ func GetErrorInfo(decoder *json.Decoder) (errorType string, message string, err 
 	if t, ok := endToken.(json.Delim); !ok || t.String() != "}" {
 		return "", "", fmt.Errorf("expected end token to be }")
 	}
+
+	// sanitize error
+	errorType = SanitizeErrorCode(errorType)
 	return errorType, message, nil
 }
 
@@ -111,17 +115,17 @@ func DiscardUnknownField(decoder *json.Decoder) error {
 // Takes in json decoder, and error Code string as args. The function retrieves error message
 // and error code from the decoder body. If errorCode of length greater than 0 is passed in as
 // an argument, it is used instead.
-func GetSmithyGenericAPIError(decoder *json.Decoder, errorCode string) (smithy.GenericAPIError, error) {
+func GetSmithyGenericAPIError(decoder *json.Decoder, errorCode string) (*smithy.GenericAPIError, error) {
 	errorType, message, err := GetErrorInfo(decoder)
 	if err != nil {
-		return smithy.GenericAPIError{}, err
+		return nil, err
 	}
 
 	if len(errorCode) == 0 {
-		errorCode = SanitizeErrorCode(errorType)
+		errorCode = errorType
 	}
 
-	return smithy.GenericAPIError{
+	return &smithy.GenericAPIError{
 		Code:    errorCode,
 		Message: message,
 	}, nil
