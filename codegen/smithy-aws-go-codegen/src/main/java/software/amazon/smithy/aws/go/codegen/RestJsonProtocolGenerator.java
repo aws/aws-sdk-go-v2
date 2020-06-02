@@ -582,8 +582,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 writer.write("defer response.Body.Close()");
                 writer.write("");
 
-                writer.addUseImports(GoDependency.AWS_JSON_PROTOCOL_ALIAS);
-                writer.write("genericError, err := jsonprotocol.GetSmithyGenericAPIError(decoder, errorType)");
+                writer.addUseImports(GoDependency.AWS_REST_JSON_PROTOCOL);
+                writer.write("genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)");
                 writer.write("if err != nil { return out, metadata, &aws.DeserializationError{ Err: err}}");
                 writer.write("return out, metadata, genericError");
                 return;
@@ -613,12 +613,12 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writer.write("");
 
             writer.write("var errorMessage string");
-            writer.addUseImports(GoDependency.AWS_JSON_PROTOCOL_ALIAS);
+            writer.addUseImports(GoDependency.AWS_REST_JSON_PROTOCOL);
 
             // If errorType is empty, look for error type in a body field with the name `code`,
             // or a body field named `__type`.
             writer.openBlock("if len(errorType) == 0 {", "}", () -> {
-                writer.write("errorType, errorMessage, err = jsonprotocol.GetErrorInfo(decoder)");
+                writer.write("errorType, errorMessage, err = restjson.GetErrorInfo(decoder)");
                 writer.openBlock("if err != nil {", "}", () -> {
                     writer.write("var snapshot bytes.Buffer");
                     writer.write("io.Copy(&snapshot, ringBuffer)");
@@ -646,8 +646,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             });
 
             writer.write("");
-            writer.addUseImports(GoDependency.AWS_JSON_PROTOCOL_ALIAS);
-            writer.write("genericError, err := jsonprotocol.GetSmithyGenericAPIError(decoder, errorType)");
+            writer.addUseImports(GoDependency.AWS_REST_JSON_PROTOCOL);
+            writer.write("genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)");
             writer.write("if err != nil { return out, metadata, &aws.DeserializationError{ Err: err }}");
             writer.write("");
             writer.write("return out, metadata, genericError");
@@ -932,8 +932,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
                         // default case to handle unknown fields
                         writer.openBlock("default : ","", () -> {
-                            writer.addUseImports(GoDependency.AWS_JSON_PROTOCOL_ALIAS);
-                            writer.write("err := jsonprotocol.DiscardUnknownField(decoder)");
+                            writer.addUseImports(GoDependency.AWS_REST_JSON_PROTOCOL);
+                            writer.write("err := restjson.DiscardUnknownField(decoder)");
                             writer.write("if err != nil {return err}");
                         });
                     });
