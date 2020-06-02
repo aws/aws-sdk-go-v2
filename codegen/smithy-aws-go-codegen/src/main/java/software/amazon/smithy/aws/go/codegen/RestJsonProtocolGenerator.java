@@ -358,7 +358,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             return;
         }
 
-        writer.addUseImports(SymbolUtils.createValueSymbolBuilder(null, GoDependency.SMITHY_JSON).build());
+        writer.addUseImports(GoDependency.SMITHY);
+        writer.addUseImports(GoDependency.SMITHY_JSON);
 
         writer.write("var documentPayload []byte");
         writer.write("");
@@ -403,7 +404,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
         writer.openBlock("if request, err = request.SetStream(bytes.NewReader(documentPayload)); err != nil {", "}",
                 () -> {
-                    writer.write("return out, metadata, &aws.SerializationError{Err: err}");
+                    writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
                 });
     }
 
