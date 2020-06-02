@@ -9,7 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/smithyprototype/lexruntimeservice/types"
 	"github.com/awslabs/smithy-go/httpbinding"
-	restjson "github.com/awslabs/smithy-go/json"
+	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
 )
@@ -151,7 +151,7 @@ func (p awsRestJson1_serializeOpPostText) HandleSerialize(ctx context.Context, i
 		return out, metadata, &aws.SerializationError{Err: err}
 	}
 
-	jsonEncoder := restjson.NewEncoder()
+	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsRestJson1_serializeJsonPostTextInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &aws.SerializationError{Err: err}
 	}
@@ -192,7 +192,7 @@ func (p *awsRestJson1_serializeOpPutSession) HandleSerialize(ctx context.Context
 		return out, metadata, &aws.SerializationError{Err: err}
 	}
 
-	jsonEncoder := restjson.NewEncoder()
+	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsRestJson1_serializeJsonPutSessionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &aws.SerializationError{Err: err}
 	}
@@ -205,7 +205,7 @@ func (p *awsRestJson1_serializeOpPutSession) HandleSerialize(ctx context.Context
 	return next.HandleSerialize(ctx, in)
 }
 
-func awsRestJson1_serializeJsonPutSessionInput(v *PutSessionInput, encoder restjson.Value) error {
+func awsRestJson1_serializeJsonPutSessionInput(v *PutSessionInput, encoder smithyjson.Value) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -375,7 +375,7 @@ func awsRestJson1_serializeRestDeleteSessionInput(v *DeleteSessionInput, encoder
 	return nil
 }
 
-func awsRestJson1_serializeJsonPostTextInput(v *PostTextInput, value restjson.Value) error {
+func awsRestJson1_serializeJsonPostTextInput(v *PostTextInput, value smithyjson.Value) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -430,7 +430,7 @@ func awsRestJson1_serializeRestPostTextInput(v *PostTextInput, encoder *httpbind
 	return nil
 }
 
-func awsRestJson1_serializeJsonIntentSummaryList(v []types.IntentSummary, value restjson.Value) error {
+func awsRestJson1_serializeJsonIntentSummaryList(v []types.IntentSummary, value smithyjson.Value) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -447,7 +447,7 @@ func awsRestJson1_serializeJsonIntentSummaryList(v []types.IntentSummary, value 
 	return nil
 }
 
-func awsRestJson1_serializeIntentSummary(v *types.IntentSummary, value restjson.Value) error {
+func awsRestJson1_serializeIntentSummary(v *types.IntentSummary, value smithyjson.Value) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -489,7 +489,7 @@ func awsRestJson1_serializeIntentSummary(v *types.IntentSummary, value restjson.
 	return nil
 }
 
-func awsRestJson1_serializeJsonDialogAction(v *types.DialogAction, value restjson.Value) error {
+func awsRestJson1_serializeJsonDialogAction(v *types.DialogAction, value smithyjson.Value) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -531,7 +531,7 @@ func awsRestJson1_serializeJsonDialogAction(v *types.DialogAction, value restjso
 	return nil
 }
 
-func awsRestJson1_serializeJsonStringMap(v map[string]string, value restjson.Value) error {
+func awsRestJson1_serializeJsonStringMap(v map[string]string, value smithyjson.Value) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
