@@ -469,6 +469,9 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
         // checks if response has an error and retrieve the error code from the response
         writer.openBlock("if response.StatusCode < 200 || response.StatusCode >= 300 {", "}", () -> {
+            writer.write("errorType := response.Headers.Get($S)","X-Amzn-Errortype" );
+            writer.write("errorType = jsonprotocol.SanitizeErrorCode(errorType)");
+            writer.write("");
 
             // if no modeled exceptions for the operation shape, return the response body as is
             if (ErrorShapeIds.size() == 0) {
@@ -479,18 +482,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 writer.write("");
 
                 writer.addUseImports(GoDependency.AWS_JSON_PROTOCOL_ALIAS);
-                writer.write("errorType, message, err := jsonprotocol.GetErrorInfo(decoder)");
-                writer.openBlock( "if len(errortype) == 0 {", "}", () -> {
-                        writer.write("errorType = response.Headers.Get($S)","X-Amzn-Errortype" );
-                });
-                writer.write("errorType = jsonprotocol.SanitizeErrorCode(errorType)");
-
-                writer.openBlock("genericError := $P{","}",
-                        genericAPIErrorSymbol, () ->{
-                    writer.write("Code : errorType,");
-                    writer.write("Message : message,");
-                });
-
+                writer.write("genericError, err := jsonprotocol.GetSmithyGenericAPIError(decoder, errorType)");
+                writer.write("if err != nil { return out, metadata, &aws.DeserializationError{ Err: err}}");
                 writer.write("return out, metadata, genericError");
                 return;
             }
@@ -502,11 +495,13 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writer.write("var errorBody bytes.Buffer");
 
             writer.addUseImports(GoDependency.IO);
-            writer.write("_, err := io.Copy(errorBody, response.Body)");
+            writer.write("_, err := io.Copy(&errorBody, response.Body)");
             writer.openBlock("if err != nil {", "}", () -> {
                 writer.write(String.format("return out, metadata, &aws.DeserializationError{Err: %s}",
                         "fmt.Errorf(\"failed to copy error response body, %w\", err)"));
             });
+
+            writer.write("");
             writer.write("body := io.TeeReader(response.Body, ringBuffer)");
             writer.write("defer response.Body.Close()");
             writer.write("");
@@ -518,33 +513,41 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writer.write("decoder.UseNumber()");
             writer.write("");
 
+            writer.write("var errorMessage string");
             writer.addUseImports(GoDependency.AWS_JSON_PROTOCOL_ALIAS);
-            writer.write("errorType, message, err := jsonprotocol.GetErrorInfo(decoder)");
-            writer.openBlock("if err != nil {", "}", () -> {
-                writer.write("var snapshot bytes.Buffer");
-                writer.write("io.Copy(&snapshot, ringBuffer)");
-                writer.openBlock("return out, metadata, &aws.DeserializationError {", "}", () -> {
-                    writer.write("Err: fmt.Errorf(\"failed to decode response error with invalid JSON, %w\", err),");
-                    writer.write("Snapshot: snapshot.Bytes(),");
-                });
-            });
-
             writer.openBlock("if len(errorType) == 0 {", "}", () -> {
-                writer.write("errorType = response.Headers.Get($S)", "X-Amzn-Errortype");
+                writer.write("errorType, errorMessage, err = jsonprotocol.GetErrorInfo(decoder)");
+                writer.openBlock("if err != nil {", "}", () -> {
+                    writer.write("var snapshot bytes.Buffer");
+                    writer.write("io.Copy(&snapshot, ringBuffer)");
+                    writer.openBlock("return out, metadata, &aws.DeserializationError {", "}", () -> {
+                        writer.write("Err: fmt.Errorf(\"failed to decode response error with invalid JSON, %w\", err),");
+                        writer.write("Snapshot: snapshot.Bytes(),");
+                    });
+                });
+                writer.write("errorType = jsonprotocol.SanitizeErrorCode(errorType)");
             });
 
-            writer.write("errorType = jsonprotocol.SanitizeErrorCode(errorType)");
             writer.write("");
 
             // generate middleware for modeled error shapes
             writeErrorShapeDeserializerDelegator(writer, model, symbolProvider, ErrorShapeIds);
             writer.write("");
 
-            writer.openBlock("genericError := $P{","}",
-                    genericAPIErrorSymbol, () -> {
-                writer.write("Code : errorType,");
-                writer.write("Message : message,");
+            writer.openBlock("if len(errorMessage) != 0 {", "}", () -> {
+                writer.openBlock("genericError := $P{","}",
+                        genericAPIErrorSymbol, () -> {
+                            writer.write("Code : errorType,");
+                            writer.write("Message : errorMessage,");
+                        });
+                writer.write("");
+                writer.write("return out, metadata, genericError");
             });
+
+            writer.write("");
+            writer.addUseImports(GoDependency.AWS_JSON_PROTOCOL_ALIAS);
+            writer.write("genericError, err := jsonprotocol.GetSmithyGenericAPIError(decoder, errorType)");
+            writer.write("if err != nil { return out, metadata, &aws.DeserializationError{ Err: err }}");
             writer.write("");
             writer.write("return out, metadata, genericError");
         });
@@ -823,7 +826,6 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                             writer.openBlock("case $S :", "", memberShape.getMemberName(), () -> {
                                         String operand = generateDocumentBindingMemberShapeDeserializer(writer, model, symbolProvider, memberShape);
                                         writer.write(String.format("v.%s = %s", memberName, operand));
-                                        writer.write("break");
                                     });
                         }
 
@@ -832,7 +834,6 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                             writer.addUseImports(GoDependency.AWS_JSON_PROTOCOL_ALIAS);
                             writer.write("err := jsonprotocol.DiscardUnknownField(decoder)");
                             writer.write("if err != nil {return err}");
-                            writer.write("break");
                         });
                     });
                 });
@@ -909,11 +910,12 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             case SHORT:
             case INTEGER:
             case LONG:
-            case BIG_INTEGER:
                 return generateDocumentBindingIntegerMemberDeserializer(writer, memberShape);
+            case BIG_INTEGER:
+            case BIG_DECIMAL:
+                return generateDocumentBindingBigMemberDeserializer(writer, memberShape);
             case FLOAT:
             case DOUBLE:
-            case BIG_DECIMAL:
                 return generateDocumentBindingFloatMemberDeserializer(writer, memberShape);
             case SET:
             case LIST:
@@ -976,7 +978,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         return CodegenUtils.generatePointerReferenceIfPointable(memberShape, "b");
     }
 
-    // Generates deserializer for Byte, Short, Integer, Long, Big Integer member shape.
+    // Generates deserializer for Byte, Short, Integer, Long member shape.
     private String generateDocumentBindingIntegerMemberDeserializer(
             GoWriter writer,
             MemberShape memberShape
@@ -987,7 +989,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.write("if err != nil { return err }");
         switch (memberShape.getType()) {
             case BYTE:
-                writer.write("st := byte(nt)");
+                writer.write("st := int8(nt)");
                 break;
             case SHORT:
                 writer.write("st := int16(nt)");
@@ -997,16 +999,41 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             case LONG:
                 writer.write("st := nt");
                 break;
-            case BIG_INTEGER:
-                writer.addUseImports(GoDependency.BIG);
-                writer.write("st := big.NewInt(nt)");
+            default:
                 break;
         }
 
         return CodegenUtils.generatePointerReferenceIfPointable(memberShape, "st");
     }
 
-    // Generates deserializer for Float, Double, Big Decimal member shape.
+    // Generates deserializer for Big Integer, Big Decimal member shape.
+    private String generateDocumentBindingBigMemberDeserializer(
+            GoWriter writer,
+            MemberShape memberShape
+    ) {
+        writer.write("val, err := decoder.Token()");
+        writer.write("if err != nil { return err }");
+        switch (memberShape.getType()) {
+            case BIG_INTEGER:
+                writer.addUseImports(GoDependency.BIG);
+                writer.addUseImports(GoDependency.FMT);
+                writer.write("st, ok := new(big.Int).SetString(val.(string), 10)");
+                writer.write("if !ok { return fmt.Errorf(\"error deserializing big integer type\")}");
+                break;
+            case BIG_DECIMAL:
+                writer.addUseImports(GoDependency.BIG);
+                writer.addUseImports(GoDependency.FMT);
+                writer.write("st, ok := big.ParseFloat(val.(string), 10, 200, big.ToNearestAway)");
+                writer.write("if !ok { return fmt.Errorf(\"error deserializing big decimal type\")}");
+                break;
+            default:
+                break;
+        }
+
+        return CodegenUtils.generatePointerReferenceIfPointable(memberShape, "st");
+    }
+
+    // Generates deserializer for Float, Double member shape.
     private String generateDocumentBindingFloatMemberDeserializer(
             GoWriter writer,
             MemberShape memberShape
@@ -1023,9 +1050,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             case DOUBLE:
                 writer.write("st := nt");
                 break;
-            case BIG_DECIMAL:
-                writer.addUseImports(GoDependency.BIG);
-                writer.write("st := big.NewFloat(nt)");
+            default:
                 break;
         }
 
@@ -1039,11 +1064,11 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     ) {
         writer.write("val, err := decoder.Token()");
         writer.write("if err != nil { return err }");
-        writer.write("nt, err := val.(json.Number).Int64()");
+        writer.write("ft, err := val.(json.Number).Float64()");
         writer.write("if err != nil { return err }");
 
-        writer.addUseImports(GoDependency.TIME);
-        writer.write("ts := time.Unix(nt, 0).UTC()");
+        writer.addUseImports(GoDependency.SMITHY_TIME);
+        writer.write("ts := smithytime.ParseEpochSeconds(ft)");
 
         return CodegenUtils.generatePointerReferenceIfPointable(memberShape, "ts");
     }
