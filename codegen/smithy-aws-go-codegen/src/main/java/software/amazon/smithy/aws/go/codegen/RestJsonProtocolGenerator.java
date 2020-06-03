@@ -506,8 +506,9 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             }
         }
 
+        writer.addUseImports(GoDependency.SMITHY_IO);
         writer.write("buff := make([]byte, 1024)");
-        writer.write("ringBuffer := sdkio.NewRingBuffer(buff)");
+        writer.write("ringBuffer := smithyio.NewRingBuffer(buff)");
         writer.write("");
 
         writer.addUseImports(GoDependency.IO);
@@ -531,7 +532,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 ProtocolGenerator.getDocumentOutputDeserializerFunctionName(shape, getProtocolName());
         writer.write("err = $L(output, response.Body)", deserFuncName);
         writer.openBlock("if err != nil {", "}", () -> {
-            writer.write(String.format("return out, metadata, &aws.DeserializationError{Err:%s}",
+            writer.addUseImports(GoDependency.SMITHY);
+            writer.write(String.format("return out, metadata, &smithy.DeserializationError{Err:%s}",
                     "fmt.Errorf(\"failed to deserialize response payload, %w\", err)"));
         });
     }
@@ -545,9 +547,11 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 ProtocolGenerator.getDocumentOutputDeserializerFunctionName(shape, getProtocolName());
         writer.write("err = $L(output, decoder)", deserFuncName);
         writer.openBlock("if err != nil {", "}", () -> {
+            writer.addUseImports(GoDependency.BYTES);
+            writer.addUseImports(GoDependency.SMITHY);
             writer.write("var snapshot bytes.Buffer");
             writer.write("io.Copy(&snapshot, ringBuffer)");
-            writer.openBlock("return out, metadata, &aws.DeserializationError {", "}", () -> {
+            writer.openBlock("return out, metadata, &smithy.DeserializationError {", "}", () -> {
                 writer.write("Err: fmt.Errorf(\"failed to decode response body with invalid JSON, %w\", err),");
                 writer.write("Snapshot: snapshot.Bytes(),");
             });
@@ -570,8 +574,10 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.openBlock("if response.StatusCode < 200 || response.StatusCode >= 300 {", "}", () -> {
             // Retrieve error shape name from response. For REST JSON protocol, the error shape name can be found either
             // at Header `X-Amzn-Errortype` or a body field with the name `code`, or a body field named `__type`.
-            writer.write("errorType := response.Headers.Get($S)","X-Amzn-Errortype" );
-            writer.write("errorType = jsonprotocol.SanitizeErrorCode(errorType)");
+            writer.write("errorType := response.Header.Get($S)","X-Amzn-Errortype" );
+
+            writer.addUseImports(GoDependency.AWS_REST_JSON_PROTOCOL);
+            writer.write("errorType = restjson.SanitizeErrorCode(errorType)");
             writer.write("");
 
             // if no modeled exceptions for the operation shape, return the response body as is
@@ -583,22 +589,25 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 writer.write("");
 
                 writer.addUseImports(GoDependency.AWS_REST_JSON_PROTOCOL);
+                writer.addUseImports(GoDependency.SMITHY);
                 writer.write("genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)");
-                writer.write("if err != nil { return out, metadata, &aws.DeserializationError{ Err: err}}");
+                writer.write("if err != nil { return out, metadata, &smithy.DeserializationError{ Err: err}}");
                 writer.write("return out, metadata, genericError");
                 return;
             }
 
+            writer.addUseImports(GoDependency.SMITHY_IO);
             writer.write("buff := make([]byte, 1024)");
-            writer.write("ringBuffer := sdkio.NewRingBuffer(buff)");
+            writer.write("ringBuffer := smithyio.NewRingBuffer(buff)");
             writer.write("");
 
             writer.write("var errorBody bytes.Buffer");
 
+            writer.addUseImports(GoDependency.SMITHY);
             writer.addUseImports(GoDependency.IO);
             writer.write("_, err := io.Copy(&errorBody, response.Body)");
             writer.openBlock("if err != nil {", "}", () -> {
-                writer.write(String.format("return out, metadata, &aws.DeserializationError{Err: %s}",
+                writer.write(String.format("return out, metadata, &smithy.DeserializationError{Err: %s}",
                         "fmt.Errorf(\"failed to copy error response body, %w\", err)"));
             });
 
@@ -620,9 +629,11 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writer.openBlock("if len(errorType) == 0 {", "}", () -> {
                 writer.write("errorType, errorMessage, err = restjson.GetErrorInfo(decoder)");
                 writer.openBlock("if err != nil {", "}", () -> {
+                    writer.addUseImports(GoDependency.BYTES);
+                    writer.addUseImports(GoDependency.SMITHY);
                     writer.write("var snapshot bytes.Buffer");
                     writer.write("io.Copy(&snapshot, ringBuffer)");
-                    writer.openBlock("return out, metadata, &aws.DeserializationError {", "}", () -> {
+                    writer.openBlock("return out, metadata, &smithy.DeserializationError {", "}", () -> {
                         writer.write("Err: fmt.Errorf(\"failed to decode response error with invalid JSON, %w\", err),");
                         writer.write("Snapshot: snapshot.Bytes(),");
                     });
@@ -647,8 +658,9 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
             writer.write("");
             writer.addUseImports(GoDependency.AWS_REST_JSON_PROTOCOL);
+            writer.addUseImports(GoDependency.SMITHY);
             writer.write("genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)");
-            writer.write("if err != nil { return out, metadata, &aws.DeserializationError{ Err: err }}");
+            writer.write("if err != nil { return out, metadata, &smithy.DeserializationError{ Err: err }}");
             writer.write("");
             writer.write("return out, metadata, genericError");
         });
@@ -674,7 +686,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 writer.write("errorResult := &$T{}", errorSymbol);
                 writer.write("output, ok := errorResult.($P)", errorSymbol);
                 writer.openBlock("if !ok {", "}", () -> {
-                    writer.write(String.format("return out, metadata, &aws.DeserializationError{Err: %s}",
+                    writer.addUseImports(GoDependency.SMITHY);
+                    writer.write(String.format("return out, metadata, &smithy.DeserializationError{Err: %s}",
                             "fmt.Errorf(\"unknown error result type %T\", out.Result)"));
                 });
                 writer.write("");
@@ -694,7 +707,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
                     writer.write("err= $L(output, response)", deserFuncName);
                     writer.openBlock("if err != nil {", "}", () -> {
-                        writer.write(String.format("return out, metadata, &aws.DeserializationError{Err: %s}",
+                        writer.addUseImports(GoDependency.SMITHY);
+                        writer.write(String.format("return out, metadata, &smithy.DeserializationError{Err: %s}",
                                 "fmt.Errorf(\"failed to decode response error with invalid Http bindings, %w\", err)"));
                     });
                     writer.write("");
