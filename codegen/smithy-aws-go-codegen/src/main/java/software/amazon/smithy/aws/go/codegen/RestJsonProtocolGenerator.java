@@ -1222,8 +1222,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         Symbol targetSymbol = symbolProvider.toSymbol(targetShape);
         String deserFunctionName = ProtocolGenerator
                 .getDocumentDeserializerFunctionName(targetShape, getProtocolName());
-        writer.write("var val $T", targetSymbol);
-        writer.write("if err := $L(&val, decoder); err != nil { return err }",
+        writer.write("val := $P{}", targetSymbol);
+        writer.write("if err := $L(val, decoder); err != nil { return err }",
                 deserFunctionName);
 
         return CodegenUtils.generatePointerValueIfPointable(writer, targetShape, "val");
@@ -1241,7 +1241,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
         String deserializerFuncName = ProtocolGenerator
                 .getDocumentDeserializerFunctionName(targetShape, getProtocolName());
-        writer.write("var col $P", targetSymbol);
+        writer.write("col := $P{}", targetSymbol);
         writer.write("if col, err := $L(col, decoder); err != nil { return err }", deserializerFuncName);
         return "col";
     }
