@@ -685,6 +685,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writer.openBlock("if errorType == $S {", "}", errorShapeId.getName(), () -> {
                 writer.write("errResult := &$T{}", errorSymbol);
                 writer.write("output := errResult");
+                writer.write("_ = output");
                 writer.write("");
 
                 // If error has an HttpError trait modeled on it, assign the value to the response status code
