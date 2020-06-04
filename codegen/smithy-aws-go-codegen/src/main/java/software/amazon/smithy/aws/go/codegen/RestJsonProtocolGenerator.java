@@ -380,7 +380,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             } else {
                 String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(payloadShape,
                         getProtocolName());
-                writer.write("jsonEncoder := json.NewEncoder()");
+                writer.addUseImports(GoDependency.SMITHY_JSON);
+                writer.write("jsonEncoder := smithyjson.NewEncoder()");
                 writer.openBlock("if err := $L(input.$L, jsonEncoder.Value); err != nil {", "}", functionName,
                         memberName, () -> {
                             writer.write("return err");
@@ -394,7 +395,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             Shape inputShape = model.expectShape(operation.getInput()
                     .orElseThrow(() -> new CodegenException("Input shape is missing on " + operation.getId())));
             String functionName = ProtocolGenerator.getOperationDocumentSerFunctionName(inputShape, getProtocolName());
-            writer.write("jsonEncoder := json.NewEncoder()");
+            writer.addUseImports(GoDependency.SMITHY_JSON);
+            writer.write("jsonEncoder := smithyjson.NewEncoder()");
             writer.openBlock("if err := $L(input, jsonEncoder.Value); err != nil {", "}", functionName, () -> {
                 writer.write("return err");
             });
@@ -402,6 +404,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         }
         writer.write("");
 
+        writer.addUseImports(GoDependency.BYTES);
         writer.openBlock("if request, err = request.SetStream(bytes.NewReader(documentPayload)); err != nil {", "}",
                 () -> {
                     writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
