@@ -158,7 +158,6 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(targetShape,
                         getProtocolName());
 
-                operand = CodegenUtils.isShapePassByReference(targetShape) ? "&" + operand : operand;
                 writer.openBlock("if err := $L($L, av); err != nil {", "}", serFunctionName, operand, () -> {
                     writer.write("return err");
                 });
@@ -333,7 +332,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 locationEncoder.accept(writer, "Double(" + operand + ")");
                 break;
             case BLOB:
-                locationEncoder.accept(writer, "Blob(" + operand + ")");
+                locationEncoder.accept(writer, "Write(" + operand + ")");
                 break;
             default:
                 throw new CodegenException("Unsupported shape type " + targetShape.getType());
@@ -380,10 +379,11 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             } else {
                 String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(payloadShape,
                         getProtocolName());
-                writer.write("jsonEncoder := json.NewEncoder()");
+                writer.addUseImports(GoDependency.SMITHY_JSON);
+                writer.write("jsonEncoder := smithyjson.NewEncoder()");
                 writer.openBlock("if err := $L(input.$L, jsonEncoder.Value); err != nil {", "}", functionName,
                         memberName, () -> {
-                            writer.write("return err");
+                            writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
                         });
                 writer.write("documentPayload = jsonEncoder.Bytes()");
             }
@@ -394,14 +394,16 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             Shape inputShape = model.expectShape(operation.getInput()
                     .orElseThrow(() -> new CodegenException("Input shape is missing on " + operation.getId())));
             String functionName = ProtocolGenerator.getOperationDocumentSerFunctionName(inputShape, getProtocolName());
-            writer.write("jsonEncoder := json.NewEncoder()");
+            writer.addUseImports(GoDependency.SMITHY_JSON);
+            writer.write("jsonEncoder := smithyjson.NewEncoder()");
             writer.openBlock("if err := $L(input, jsonEncoder.Value); err != nil {", "}", functionName, () -> {
-                writer.write("return err");
+                writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
             });
             writer.write("documentPayload = jsonEncoder.Bytes()");
         }
         writer.write("");
 
+        writer.addUseImports(GoDependency.BYTES);
         writer.openBlock("if request, err = request.SetStream(bytes.NewReader(documentPayload)); err != nil {", "}",
                 () -> {
                     writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
@@ -467,7 +469,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 locationEncoder.accept(writer, "String(smithytime.FormatHTTPDate(" + operand + "))");
                 break;
             case EPOCH_SECONDS:
-                locationEncoder.accept(writer, "Float(smithytime.FormatEpochSeconds(" + operand + "))");
+                locationEncoder.accept(writer, "Double(smithytime.FormatEpochSeconds(" + operand + "))");
                 break;
             case UNKNOWN:
                 throw new CodegenException("Unknown timestamp format");
@@ -683,6 +685,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writer.openBlock("if errorType == $S {", "}", errorShapeId.getName(), () -> {
                 writer.write("errResult := &$T{}", errorSymbol);
                 writer.write("output := errResult");
+                writer.write("_ = output");
                 writer.write("");
 
                 // If error has an HttpError trait modeled on it, assign the value to the response status code
@@ -983,8 +986,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     ) {
         writeJsonTokenizerStartStub(writer, shape);
         writer.openBlock("for decoder.More() {", "}", () -> {
-            MemberShape memberShape = shape.members().iterator().next();
-            String memberName = symbolProvider.toMemberName(memberShape);
+            MemberShape memberShape = shape.asMapShape().get().getValue();
+
             writer.write("token, err := decoder.Token()");
             writer.write("if err != nil { return err}");
             writer.write("");
