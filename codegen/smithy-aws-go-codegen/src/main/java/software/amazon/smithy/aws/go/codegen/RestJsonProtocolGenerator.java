@@ -881,8 +881,9 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 break;
             case SET:
             case LIST:
-                writer.openBlock("func $L(v $P, decoder $P) ($P, error) {", "}", functionName, shapeSymbol,
-                        jsonDecoder, shapeSymbol, () -> {
+                writer.openBlock("func $L(vp *$P, decoder $P) error {", "}", functionName, shapeSymbol, jsonDecoder,
+                        () -> {
+                            writer.write("v := $P{}", shapeSymbol);
                             writer.openBlock("if v == nil {", "}", () -> {
                                 writer.write("return fmt.Errorf(\"unsupported deserialization of nil %T\", v)");
                             });
@@ -890,12 +891,14 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                             generateDocumentBindingCollectionShapeDeserializer(writer, model, symbolProvider, shape,
                                     filterMemberShapes);
                             writer.write("");
-                            writer.write("return v, nil");
+                            writer.write("*vp = v");
+                            writer.write("return nil");
                         });
                 break;
             case MAP:
-                writer.openBlock("func $L(v $P, decoder $P) ($P, error) {", "}", functionName, shapeSymbol,
-                        jsonDecoder, shapeSymbol, () -> {
+                writer.openBlock("func $L(vp *$P, decoder $P) error {", "}", functionName, shapeSymbol, jsonDecoder,
+                        () -> {
+                            writer.write("v := $P{}", shapeSymbol);
                             writer.openBlock("if v == nil {", "}", () -> {
                                 writer.write("return fmt.Errorf(\"unsupported deserialization of nil %T\", v)");
                             });
@@ -903,7 +906,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                             generateDocumentBindingMapShapeDeserializer(writer, model, symbolProvider, shape,
                                     filterMemberShapes);
                             writer.write("");
-                            writer.write("return v, nil");
+                            writer.write("*vp = v");
+                            writer.write("return nil");
                         });
                 break;
             default:
@@ -985,7 +989,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writer.write("if err != nil { return err}");
             writer.write("");
             writer.write("key, ok := token.(string)");
-            writer.write("if !ok { return fmt.Errof(\"expected map-key of type string, found type %T\", t)}");
+            writer.write("if !ok { return fmt.Errorf(\"expected map-key of type string, found type %T\", token)}");
             writer.write("");
 
             String operand = generateDocumentBindingMemberShapeDeserializer(writer, model, symbolProvider, memberShape);
@@ -1242,7 +1246,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         String deserializerFuncName = ProtocolGenerator
                 .getDocumentDeserializerFunctionName(targetShape, getProtocolName());
         writer.write("col := $P{}", targetSymbol);
-        writer.write("if col, err := $L(col, decoder); err != nil { return err }", deserializerFuncName);
+        writer.write("if err := $L(&col, decoder); err != nil { return err }", deserializerFuncName);
         return "col";
     }
 
