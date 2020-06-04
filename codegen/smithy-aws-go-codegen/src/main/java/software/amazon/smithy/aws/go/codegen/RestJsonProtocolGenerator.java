@@ -642,6 +642,20 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
             writer.write("");
 
+            writer.openBlock("if len(errorType) == 0 {", "}", () -> {
+                writer.openBlock("switch response.StatusCode {", "}", () -> {
+                    for (ShapeId errorShapeId : ErrorShapeIds) {
+                        Shape errorShape = model.expectShape(errorShapeId);
+                        if (errorShape.hasTrait(HttpErrorTrait.class)) {
+                            int statusCode = errorShape.getTrait(HttpErrorTrait.class).get().getCode();
+                            writer.write("case $L: errorType = $S", statusCode, errorShapeId.getName());
+                        }
+                    }
+                });
+            });
+
+            writer.write("");
+
             // generate middleware for modeled error shapes
             writeErrorShapeDeserializerDelegator(writer, model, symbolProvider, ErrorShapeIds);
             writer.write("");
@@ -688,14 +702,6 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 writer.write("_ = output");
                 writer.write("");
 
-                // If error has an HttpError trait modeled on it, assign the value to the response status code
-                if (errorShape.hasTrait(HttpErrorTrait.class)) {
-                    int errorStatusCode =  errorShape.getTrait(HttpErrorTrait.class).get().getCode();
-                    writer.addUseImports(GoDependency.NET_HTTP);
-                    writer.write("response.StatusCode = $L", errorStatusCode);
-                    writer.write("response.Status = http.StatusText($L)", errorStatusCode);
-                    writer.write("");
-                }
 
                 if (isShapeWithRestResponseBindings(model, errorShape)) {
                     String deserFuncName = ProtocolGenerator.getOperationHttpBindingsDeserFunctionName(
