@@ -379,7 +379,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
         } else if (payloadShape.isStringShape()) {
             writer.addUseImports(GoDependency.STRINGS);
-            writer.write("documentPayload = strings.NewReader(input.$L)", memberName);
+            writer.write("payload = strings.NewReader(input.$L)", memberName);
 
         } else {
             String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(payloadShape,
