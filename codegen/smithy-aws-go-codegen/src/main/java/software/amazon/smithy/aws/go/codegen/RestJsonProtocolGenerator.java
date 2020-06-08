@@ -352,6 +352,54 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     }
 
     @Override
+    protected void writeMiddlewarePayloadSerializerDelegator(
+            Model model,
+            SymbolProvider symbolProvider,
+            OperationShape operation,
+            MemberShape memberShape,
+            GoStackStepMiddlewareGenerator generator,
+            GoWriter writer
+    ) {
+        Shape payloadShape = model.expectShape(memberShape.getTarget());
+        String memberName = symbolProvider.toMemberName(memberShape);
+
+        Optional<MediaTypeTrait> mediaTypeTrait = payloadShape.getTrait(MediaTypeTrait.class);
+        mediaTypeTrait.ifPresent(typeTrait -> writer.write("restEncoder.SetHeader(\"Content-Type\").String($S)",
+                typeTrait.getValue()));
+
+        writer.addUseImports(SmithyGoDependency.IO);
+        writer.write("var payload io.Reader");
+
+        if (payloadShape.hasTrait(StreamingTrait.class)) {
+            writer.write("payload = input.$L", memberName);
+
+        } else if (payloadShape.isBlobShape()) {
+            writer.addUseImports(GoDependency.BYTES);
+            writer.write("payload = bytes.NewReader(input.$L)", memberName);
+
+        } else if (payloadShape.isStringShape()) {
+            writer.addUseImports(GoDependency.STRINGS);
+            writer.write("documentPayload = strings.NewReader(input.$L)", memberName);
+
+        } else {
+            String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(payloadShape,
+                    getProtocolName());
+            writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
+            writer.write("jsonEncoder := smithyjson.NewEncoder()");
+            writer.openBlock("if err := $L(input.$L, jsonEncoder.Value); err != nil {", "}", functionName,
+                    memberName, () -> {
+                        writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
+                    });
+            writer.write("payload = bytes.NewReader(jsonEncoder.Bytes())");
+        }
+
+        writer.openBlock("if request, err = request.SetStream(payload); err != nil {", "}",
+                () -> {
+                    writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
+                });
+    }
+
+    @Override
     protected void writeMiddlewareDocumentSerializerDelegator(
             Model model,
             SymbolProvider symbolProvider,
@@ -359,64 +407,26 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             GoStackStepMiddlewareGenerator generator,
             GoWriter writer
     ) {
-        HttpBindingIndex httpBindingIndex = model.getKnowledge(HttpBindingIndex.class);
-        boolean hasDocumentBindings = httpBindingIndex.getRequestBindings(operation, HttpBinding.Location.DOCUMENT)
-                .size() > 0;
-        Optional<HttpBinding> payloadBinding = httpBindingIndex.getRequestBindings(operation,
-                HttpBinding.Location.PAYLOAD).stream().findFirst();
 
-        if (!(payloadBinding.isPresent() || hasDocumentBindings)) {
-            return;
-        }
+        writer.addUseImports(GoDependency.SMITHY);
+        writer.addUseImports(GoDependency.SMITHY_JSON);
 
-        writer.addUseImports(SmithyGoDependency.SMITHY);
-        writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
-
-        writer.write("var documentPayload []byte");
+        writer.write("restEncoder.SetHeader(\"Content-Type\").String($S)", getDocumentContentType());
         writer.write("");
 
-        if (payloadBinding.isPresent()) {
-            MemberShape memberShape = payloadBinding.get().getMember();
-            Shape payloadShape = model.expectShape(memberShape.getTarget());
-            String memberName = symbolProvider.toMemberName(memberShape);
+        Shape inputShape = model.expectShape(operation.getInput()
+                .orElseThrow(() -> new CodegenException("Input shape is missing on " + operation.getId())));
 
-            Optional<MediaTypeTrait> mediaTypeTrait = payloadShape.getTrait(MediaTypeTrait.class);
-            mediaTypeTrait.ifPresent(typeTrait -> writer.write("restEncoder.SetHeader(\"Content-Type\").String($S)",
-                    typeTrait.getValue()));
-
-            if (payloadShape.isBlobShape()) {
-                writer.write("documentPayload = input.$L", memberName);
-            } else if (payloadShape.isStringShape()) {
-                writer.write("documentPayload = []byte(input.$L)", memberName);
-            } else {
-                String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(payloadShape,
-                        getProtocolName());
-                writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
-                writer.write("jsonEncoder := smithyjson.NewEncoder()");
-                writer.openBlock("if err := $L(input.$L, jsonEncoder.Value); err != nil {", "}", functionName,
-                        memberName, () -> {
-                            writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
-                        });
-                writer.write("documentPayload = jsonEncoder.Bytes()");
-            }
-        } else {
-            writer.write("restEncoder.SetHeader(\"Content-Type\").String($S)", getDocumentContentType());
-            writer.write("");
-
-            Shape inputShape = model.expectShape(operation.getInput()
-                    .orElseThrow(() -> new CodegenException("Input shape is missing on " + operation.getId())));
-            String functionName = ProtocolGenerator.getOperationDocumentSerFunctionName(inputShape, getProtocolName());
-            writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
-            writer.write("jsonEncoder := smithyjson.NewEncoder()");
-            writer.openBlock("if err := $L(input, jsonEncoder.Value); err != nil {", "}", functionName, () -> {
-                writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
-            });
-            writer.write("documentPayload = jsonEncoder.Bytes()");
-        }
+        String functionName = ProtocolGenerator.getOperationDocumentSerFunctionName(inputShape, getProtocolName());
+        writer.addUseImports(GoDependency.SMITHY_JSON);
+        writer.write("jsonEncoder := smithyjson.NewEncoder()");
+        writer.openBlock("if err := $L(input, jsonEncoder.Value); err != nil {", "}", functionName, () -> {
+            writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
+        });
         writer.write("");
 
         writer.addUseImports(SmithyGoDependency.BYTES);
-        writer.openBlock("if request, err = request.SetStream(bytes.NewReader(documentPayload)); err != nil {", "}",
+        writer.openBlock("if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {", "}",
                 () -> {
                     writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
                 });
@@ -430,7 +440,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
         shapes.forEach(shape -> {
             String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(shape, getProtocolName());
-            writeJsonShapeSerializerFunction(writer, model, symbolProvider, functionName, shape, FunctionalUtils.alwaysTrue());
+            writeJsonShapeSerializerFunction(writer, model, symbolProvider, functionName, shape,
+                    FunctionalUtils.alwaysTrue());
             writer.write("");
         });
     }
@@ -650,7 +661,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                     writer.write("var snapshot bytes.Buffer");
                     writer.write("io.Copy(&snapshot, ringBuffer)");
                     writer.openBlock("return out, metadata, &smithy.DeserializationError {", "}", () -> {
-                        writer.write("Err: fmt.Errorf(\"failed to decode response error with invalid JSON, %w\", err),");
+                        writer.write(
+                                "Err: fmt.Errorf(\"failed to decode response error with invalid JSON, %w\", err),");
                         writer.write("Snapshot: snapshot.Bytes(),");
                     });
                 });
@@ -1147,7 +1159,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 writer.write("st := nt");
                 break;
             default:
-                throw new CodegenException("unexpected integer number type " + targetShape.getType() + ", " + memberShape.getId());
+                throw new CodegenException(
+                        "unexpected integer number type " + targetShape.getType() + ", " + memberShape.getId());
         }
 
         return CodegenUtils.generatePointerValueIfPointable(writer, targetShape, "st");
@@ -1177,7 +1190,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 writer.write("if !ok { return fmt.Errorf(\"error deserializing big decimal type\")}");
                 break;
             default:
-                throw new CodegenException("unexpected big number type " + targetShape.getType() + ", " + memberShape.getId());
+                throw new CodegenException(
+                        "unexpected big number type " + targetShape.getType() + ", " + memberShape.getId());
         }
 
         return CodegenUtils.generatePointerValueIfPointable(writer, targetShape, "st");
@@ -1203,7 +1217,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 writer.write("st := nt");
                 break;
             default:
-                throw new CodegenException("unexpected decimal number type " + targetShape.getType() + ", " + memberShape.getId());
+                throw new CodegenException(
+                        "unexpected decimal number type " + targetShape.getType() + ", " + memberShape.getId());
         }
 
         return CodegenUtils.generatePointerValueIfPointable(writer, targetShape, "st");
