@@ -11,6 +11,8 @@ import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.OperationShape;
+import software.amazon.smithy.model.shapes.ServiceShape;
+import software.amazon.smithy.model.traits.AuthTrait;
 
 public class AssembleMiddlewareStack implements GoIntegration {
     @Override
@@ -19,6 +21,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
             Model model,
             SymbolProvider symbolProvider,
             GoWriter writer,
+            ServiceShape serviceShape,
             OperationShape operationShape
     ){
         // build middleware
@@ -47,7 +50,9 @@ public class AssembleMiddlewareStack implements GoIntegration {
             Symbol unsignedPayloadSignerMiddleware = SymbolUtils.createValueSymbolBuilder(
                     "UnsignedPayloadMiddleware", GoDependency.AWS_V4SIGNER_MIDDLEWARE).build();
             writer.write("stack.Finalize.Add(&$T{}, middleware.After)", unsignedPayloadSignerMiddleware);
-        } else if (operationShape.hasTrait(SigV4Trait.class)) {
+        } else if (serviceShape.hasTrait(SigV4Trait.class) &&
+                (operationShape.hasTrait(SigV4Trait.class) || !operationShape.hasTrait(AuthTrait.class))
+        ) {
             // sigV4 signer middleware
             Symbol computePayloadSHA256Middleware = SymbolUtils.createValueSymbolBuilder(
                     "ComputePayloadSHA256Middleware", GoDependency.AWS_V4SIGNER_MIDDLEWARE).build();
@@ -58,8 +63,8 @@ public class AssembleMiddlewareStack implements GoIntegration {
             writer.write("stack.Finalize.Add(&$T(options.Signer), middleware.After)",
                     newSignHTTPRequestMiddleware);
         } else {
-            // v2 signer middleware
-            writer.write("// TODO: Which middleware to add in case it's not a sigV4 supported service?");
+            // v2 signer middleware or other auth trait type middleware
+            writer.write("// TODO: middleware to add if it's not a sigV4 supported service");
         }
     }
 }
