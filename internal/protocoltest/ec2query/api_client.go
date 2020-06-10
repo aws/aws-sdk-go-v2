@@ -117,3 +117,8 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	}
 	return New(opts)
 }
+
+// IdempotencyTokenProvider interface for providing idempotency token
+type IdempotencyTokenProvider interface {
+	GetToken() (string, error)
+}

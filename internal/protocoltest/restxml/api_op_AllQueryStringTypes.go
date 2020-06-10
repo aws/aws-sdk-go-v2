@@ -4,7 +4,7 @@ package restxml
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -19,18 +19,11 @@ func (c *Client) AllQueryStringTypes(ctx context.Context, params *AllQueryString
 	for _, fn := range optFns {
 		fn(&options)
 	}
-	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
-		Region:         options.Region,
-		ServiceName:    "Rest Xml Protocol",
-		ServiceID:      "restxmlprotocol",
-		EndpointPrefix: "restxmlprotocol",
-		OperationName:  "AllQueryStringTypes",
-	}, middleware.Before)
-	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)
-	stack.Finalize.Add(retry.NewAttemptMiddleware(options.Retryer, smithyhttp.RequestCloner), middleware.After)
-	stack.Finalize.Add(retry.MetricsHeaderMiddleware{}, middleware.After)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	awsstack.AddRetryMiddlewares(stack, options)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opAllQueryStringTypes(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -52,27 +45,37 @@ func (c *Client) AllQueryStringTypes(ctx context.Context, params *AllQueryString
 }
 
 type AllQueryStringTypesInput struct {
-	QueryString        *string
-	QueryStringList    []*string
-	QueryStringSet     []*string
+	QueryBoolean       *bool
+	QueryBooleanList   []*bool
 	QueryByte          *int8
-	QueryShort         *int16
+	QueryDouble        *float64
+	QueryDoubleList    []*float64
+	QueryEnum          types.FooEnum
+	QueryEnumList      []types.FooEnum
+	QueryFloat         *float32
 	QueryInteger       *int32
 	QueryIntegerList   []*int32
 	QueryIntegerSet    []*int32
 	QueryLong          *int64
-	QueryFloat         *float32
-	QueryDouble        *float64
-	QueryDoubleList    []*float64
-	QueryBoolean       *bool
-	QueryBooleanList   []*bool
+	QueryShort         *int16
+	QueryString        *string
+	QueryStringList    []*string
+	QueryStringSet     []*string
 	QueryTimestamp     *time.Time
 	QueryTimestampList []*time.Time
-	QueryEnum          types.FooEnum
-	QueryEnumList      []types.FooEnum
 }
 
 type AllQueryStringTypesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func newServiceMetadataMiddleware_opAllQueryStringTypes(region string) awsmiddleware.RegisterServiceMetadata {
+	return awsmiddleware.RegisterServiceMetadata{
+		Region:         region,
+		ServiceName:    "Rest Xml Protocol",
+		ServiceID:      "restxmlprotocol",
+		EndpointPrefix: "restxmlprotocol",
+		OperationName:  "AllQueryStringTypes",
+	}
 }

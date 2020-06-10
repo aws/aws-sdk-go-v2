@@ -4,7 +4,7 @@ package ec2query
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -16,18 +16,11 @@ func (c *Client) SimpleScalarXmlProperties(ctx context.Context, params *SimpleSc
 	for _, fn := range optFns {
 		fn(&options)
 	}
-	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
-		Region:         options.Region,
-		ServiceName:    "EC2 Protocol",
-		ServiceID:      "ec2protocol",
-		EndpointPrefix: "ec2protocol",
-		OperationName:  "SimpleScalarXmlProperties",
-	}, middleware.Before)
-	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)
-	stack.Finalize.Add(retry.NewAttemptMiddleware(options.Retryer, smithyhttp.RequestCloner), middleware.After)
-	stack.Finalize.Add(retry.MetricsHeaderMiddleware{}, middleware.After)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	awsstack.AddRetryMiddlewares(stack, options)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opSimpleScalarXmlProperties(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -52,17 +45,27 @@ type SimpleScalarXmlPropertiesInput struct {
 }
 
 type SimpleScalarXmlPropertiesOutput struct {
-	StringValue       *string
-	EmptyStringValue  *string
-	TrueBooleanValue  *bool
-	FalseBooleanValue *bool
 	ByteValue         *int8
-	ShortValue        *int16
+	DoubleValue       *float64
+	EmptyStringValue  *string
+	FalseBooleanValue *bool
+	FloatValue        *float32
 	IntegerValue      *int32
 	LongValue         *int64
-	FloatValue        *float32
-	DoubleValue       *float64
+	ShortValue        *int16
+	StringValue       *string
+	TrueBooleanValue  *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func newServiceMetadataMiddleware_opSimpleScalarXmlProperties(region string) awsmiddleware.RegisterServiceMetadata {
+	return awsmiddleware.RegisterServiceMetadata{
+		Region:         region,
+		ServiceName:    "EC2 Protocol",
+		ServiceID:      "ec2protocol",
+		EndpointPrefix: "ec2protocol",
+		OperationName:  "SimpleScalarXmlProperties",
+	}
 }

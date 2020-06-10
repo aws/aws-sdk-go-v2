@@ -173,3 +173,29 @@ func getRetryMetadata(ctx context.Context) (metadata retryMetadata, ok bool) {
 func setRetryMetadata(ctx context.Context, metadata retryMetadata) context.Context {
 	return context.WithValue(ctx, retryMetadataKey{}, metadata)
 }
+
+// AwsRetryMiddlewareConfig interface for retry middleware config
+type AwsRetryMiddlewareConfig interface {
+	GetRetryer() Retryer
+}
+
+// AwsRetryMiddlewares represents the Aws middleware's for Retry
+type AwsRetryMiddlewares struct {
+	attemptMiddleware       *AttemptMiddleware
+	metricsHeaderMiddleware *MetricsHeaderMiddleware
+}
+
+// AddRetryMiddlewares adds retry middleware to operation middleware stack
+func AddRetryMiddlewares(stack *smithymiddle.Stack, cfg AwsRetryMiddlewareConfig, optsFn ...func(*AwsRetryMiddlewares)) {
+	attemptMiddleware := NewAttemptMiddleware(cfg.GetRetryer(), http.RequestCloner)
+	metricsHeaderMiddleware := MetricsHeaderMiddleware{}
+	for _, fn := range optsFn {
+		fn(&AwsRetryMiddlewares{
+			attemptMiddleware:       &attemptMiddleware,
+			metricsHeaderMiddleware: &metricsHeaderMiddleware,
+		})
+	}
+
+	stack.Finalize.Add(attemptMiddleware, smithymiddle.After)
+	stack.Finalize.Add(metricsHeaderMiddleware, smithymiddle.After)
+}

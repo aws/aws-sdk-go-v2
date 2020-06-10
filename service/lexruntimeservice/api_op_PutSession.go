@@ -4,8 +4,7 @@ package lexruntimeservice
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -23,23 +22,13 @@ func (c *Client) PutSession(ctx context.Context, params *PutSessionInput, optFns
 	for _, fn := range optFns {
 		fn(&options)
 	}
-	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
-		Region:         options.Region,
-		ServiceName:    "Lex Runtime Service",
-		ServiceID:      "lexruntimeservice",
-		EndpointPrefix: "lexruntimeservice",
-		SigningName:    "lex",
-		OperationName:  "PutSession",
-	}, middleware.Before)
-	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	stack.Serialize.Add(&awsRestjson1_serializeOpPutSession{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpPutSession{}, middleware.After)
-	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)
-	stack.Finalize.Add(retry.NewAttemptMiddleware(options.Retryer, smithyhttp.RequestCloner), middleware.After)
-	stack.Finalize.Add(retry.MetricsHeaderMiddleware{}, middleware.After)
-	stack.Finalize.Add(&v4.ComputePayloadSHA256Middleware{}, middleware.Before)
-	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(options.HTTPSigner), middleware.After)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	awsstack.AddRetryMiddlewares(stack, options)
+	awsstack.AddHTTPSignerMiddlewares(stack, options)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opPutSession(options.Region), middleware.Before)
+	addawsRestjson1_serdeOpPutSessionMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -191,4 +180,20 @@ type PutSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestjson1_serdeOpPutSessionMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add("&awsRestjson1_serializeOpPutSession{}", middleware.After)
+	stack.Deserialize.Add("&awsRestjson1_deserializeOpPutSession{}", middleware.After)
+}
+
+func newServiceMetadataMiddleware_opPutSession(region string) awsmiddleware.RegisterServiceMetadata {
+	return awsmiddleware.RegisterServiceMetadata{
+		Region:         region,
+		ServiceName:    "Lex Runtime Service",
+		ServiceID:      "lexruntimeservice",
+		EndpointPrefix: "lexruntimeservice",
+		SigningName:    "lex",
+		OperationName:  "PutSession",
+	}
 }

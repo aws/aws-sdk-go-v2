@@ -4,8 +4,7 @@ package jsonrpc
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -17,21 +16,12 @@ func (c *Client) OperationWithOptionalInputOutput(ctx context.Context, params *O
 	for _, fn := range optFns {
 		fn(&options)
 	}
-	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
-		Region:         options.Region,
-		ServiceName:    "Json Protocol",
-		ServiceID:      "jsonprotocol",
-		EndpointPrefix: "jsonprotocol",
-		SigningName:    "foo",
-		OperationName:  "OperationWithOptionalInputOutput",
-	}, middleware.Before)
-	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)
-	stack.Finalize.Add(retry.NewAttemptMiddleware(options.Retryer, smithyhttp.RequestCloner), middleware.After)
-	stack.Finalize.Add(retry.MetricsHeaderMiddleware{}, middleware.After)
-	stack.Finalize.Add(&v4.ComputePayloadSHA256Middleware{}, middleware.Before)
-	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(options.HTTPSigner), middleware.After)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	awsstack.AddRetryMiddlewares(stack, options)
+	awsstack.AddHTTPSignerMiddlewares(stack, options)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opOperationWithOptionalInputOutput(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -61,4 +51,15 @@ type OperationWithOptionalInputOutputOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func newServiceMetadataMiddleware_opOperationWithOptionalInputOutput(region string) awsmiddleware.RegisterServiceMetadata {
+	return awsmiddleware.RegisterServiceMetadata{
+		Region:         region,
+		ServiceName:    "Json Protocol",
+		ServiceID:      "jsonprotocol",
+		EndpointPrefix: "jsonprotocol",
+		SigningName:    "foo",
+		OperationName:  "OperationWithOptionalInputOutput",
+	}
 }

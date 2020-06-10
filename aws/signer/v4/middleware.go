@@ -144,3 +144,35 @@ func SetPayloadHash(ctx context.Context, hash string) context.Context {
 	ctx = context.WithValue(ctx, payloadHashKey{}, hash)
 	return ctx
 }
+
+// AddUnsignedPayloadMiddlewares adds UnsignedPayloadMiddleware to the operation middleware stack
+func AddUnsignedPayloadMiddlewares(stack *middleware.Stack) {
+	unsignedPayloadMiddleware := UnsignedPayloadMiddleware{}
+	stack.Finalize.Add(&unsignedPayloadMiddleware, middleware.After)
+}
+
+// HTTPSignerMiddlewareConfig interface for HTTP signer middleware config
+type HTTPSignerMiddlewareConfig interface {
+	GetSigner() HTTPSigner
+}
+
+// HTTPSignerMiddlewares represent the middleware's for HTTPSigner
+type HTTPSignerMiddlewares struct {
+	computePayloadSHA256Middleware *ComputePayloadSHA256Middleware
+	signHTTPRequestMiddleware      *SignHTTPRequestMiddleware
+}
+
+// AddHTTPSignerMiddlewares adds HTTP signer middleware's to operation stack
+func AddHTTPSignerMiddlewares(stack *middleware.Stack, cfg HTTPSignerMiddlewareConfig, optFns ...func(*HTTPSignerMiddlewares)) {
+	computePayloadSHA256Middleware := ComputePayloadSHA256Middleware{}
+	signHTTPRequestMiddleware := NewSignHTTPRequestMiddleware(cfg.GetSigner())
+	for _, fn := range optFns {
+		fn(&HTTPSignerMiddlewares{
+			computePayloadSHA256Middleware: &computePayloadSHA256Middleware,
+			signHTTPRequestMiddleware:      signHTTPRequestMiddleware,
+		})
+	}
+
+	stack.Finalize.Add(&computePayloadSHA256Middleware, middleware.Before)
+	stack.Finalize.Add(signHTTPRequestMiddleware, middleware.After)
+}

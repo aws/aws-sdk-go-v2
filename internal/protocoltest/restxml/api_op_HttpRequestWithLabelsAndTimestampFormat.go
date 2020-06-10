@@ -4,7 +4,7 @@ package restxml
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -19,18 +19,11 @@ func (c *Client) HttpRequestWithLabelsAndTimestampFormat(ctx context.Context, pa
 	for _, fn := range optFns {
 		fn(&options)
 	}
-	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
-		Region:         options.Region,
-		ServiceName:    "Rest Xml Protocol",
-		ServiceID:      "restxmlprotocol",
-		EndpointPrefix: "restxmlprotocol",
-		OperationName:  "HttpRequestWithLabelsAndTimestampFormat",
-	}, middleware.Before)
-	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)
-	stack.Finalize.Add(retry.NewAttemptMiddleware(options.Retryer, smithyhttp.RequestCloner), middleware.After)
-	stack.Finalize.Add(retry.MetricsHeaderMiddleware{}, middleware.After)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	awsstack.AddRetryMiddlewares(stack, options)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithLabelsAndTimestampFormat(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -52,16 +45,26 @@ func (c *Client) HttpRequestWithLabelsAndTimestampFormat(ctx context.Context, pa
 }
 
 type HttpRequestWithLabelsAndTimestampFormatInput struct {
+	DefaultFormat      *time.Time
+	MemberDateTime     *time.Time
 	MemberEpochSeconds *time.Time
 	MemberHttpDate     *time.Time
-	MemberDateTime     *time.Time
-	DefaultFormat      *time.Time
+	TargetDateTime     *time.Time
 	TargetEpochSeconds *time.Time
 	TargetHttpDate     *time.Time
-	TargetDateTime     *time.Time
 }
 
 type HttpRequestWithLabelsAndTimestampFormatOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func newServiceMetadataMiddleware_opHttpRequestWithLabelsAndTimestampFormat(region string) awsmiddleware.RegisterServiceMetadata {
+	return awsmiddleware.RegisterServiceMetadata{
+		Region:         region,
+		ServiceName:    "Rest Xml Protocol",
+		ServiceID:      "restxmlprotocol",
+		EndpointPrefix: "restxmlprotocol",
+		OperationName:  "HttpRequestWithLabelsAndTimestampFormat",
+	}
 }

@@ -4,7 +4,7 @@ package restxml
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -20,18 +20,11 @@ func (c *Client) InputAndOutputWithHeaders(ctx context.Context, params *InputAnd
 	for _, fn := range optFns {
 		fn(&options)
 	}
-	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
-		Region:         options.Region,
-		ServiceName:    "Rest Xml Protocol",
-		ServiceID:      "restxmlprotocol",
-		EndpointPrefix: "restxmlprotocol",
-		OperationName:  "InputAndOutputWithHeaders",
-	}, middleware.Before)
-	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)
-	stack.Finalize.Add(retry.NewAttemptMiddleware(options.Retryer, smithyhttp.RequestCloner), middleware.After)
-	stack.Finalize.Add(retry.MetricsHeaderMiddleware{}, middleware.After)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	awsstack.AddRetryMiddlewares(stack, options)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opInputAndOutputWithHeaders(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -53,42 +46,52 @@ func (c *Client) InputAndOutputWithHeaders(ctx context.Context, params *InputAnd
 }
 
 type InputAndOutputWithHeadersInput struct {
-	HeaderString        *string
-	HeaderByte          *int8
-	HeaderShort         *int16
-	HeaderInteger       *int32
-	HeaderLong          *int64
-	HeaderFloat         *float32
-	HeaderDouble        *float64
-	HeaderTrueBool      *bool
-	HeaderFalseBool     *bool
-	HeaderStringList    []*string
-	HeaderStringSet     []*string
-	HeaderIntegerList   []*int32
 	HeaderBooleanList   []*bool
-	HeaderTimestampList []*time.Time
+	HeaderByte          *int8
+	HeaderDouble        *float64
 	HeaderEnum          types.FooEnum
 	HeaderEnumList      []types.FooEnum
+	HeaderFalseBool     *bool
+	HeaderFloat         *float32
+	HeaderInteger       *int32
+	HeaderIntegerList   []*int32
+	HeaderLong          *int64
+	HeaderShort         *int16
+	HeaderString        *string
+	HeaderStringList    []*string
+	HeaderStringSet     []*string
+	HeaderTimestampList []*time.Time
+	HeaderTrueBool      *bool
 }
 
 type InputAndOutputWithHeadersOutput struct {
-	HeaderString        *string
-	HeaderByte          *int8
-	HeaderShort         *int16
-	HeaderInteger       *int32
-	HeaderLong          *int64
-	HeaderFloat         *float32
-	HeaderDouble        *float64
-	HeaderTrueBool      *bool
-	HeaderFalseBool     *bool
-	HeaderStringList    []*string
-	HeaderStringSet     []*string
-	HeaderIntegerList   []*int32
 	HeaderBooleanList   []*bool
-	HeaderTimestampList []*time.Time
+	HeaderByte          *int8
+	HeaderDouble        *float64
 	HeaderEnum          types.FooEnum
 	HeaderEnumList      []types.FooEnum
+	HeaderFalseBool     *bool
+	HeaderFloat         *float32
+	HeaderInteger       *int32
+	HeaderIntegerList   []*int32
+	HeaderLong          *int64
+	HeaderShort         *int16
+	HeaderString        *string
+	HeaderStringList    []*string
+	HeaderStringSet     []*string
+	HeaderTimestampList []*time.Time
+	HeaderTrueBool      *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func newServiceMetadataMiddleware_opInputAndOutputWithHeaders(region string) awsmiddleware.RegisterServiceMetadata {
+	return awsmiddleware.RegisterServiceMetadata{
+		Region:         region,
+		ServiceName:    "Rest Xml Protocol",
+		ServiceID:      "restxmlprotocol",
+		EndpointPrefix: "restxmlprotocol",
+		OperationName:  "InputAndOutputWithHeaders",
+	}
 }

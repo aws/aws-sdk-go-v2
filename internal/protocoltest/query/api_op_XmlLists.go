@@ -4,7 +4,7 @@ package query
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -36,18 +36,11 @@ func (c *Client) XmlLists(ctx context.Context, params *XmlListsInput, optFns ...
 	for _, fn := range optFns {
 		fn(&options)
 	}
-	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
-		Region:         options.Region,
-		ServiceName:    "Query Protocol",
-		ServiceID:      "queryprotocol",
-		EndpointPrefix: "queryprotocol",
-		OperationName:  "XmlLists",
-	}, middleware.Before)
-	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)
-	stack.Finalize.Add(retry.NewAttemptMiddleware(options.Retryer, smithyhttp.RequestCloner), middleware.After)
-	stack.Finalize.Add(retry.MetricsHeaderMiddleware{}, middleware.After)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	awsstack.AddRetryMiddlewares(stack, options)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlLists(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -72,19 +65,29 @@ type XmlListsInput struct {
 }
 
 type XmlListsOutput struct {
-	StringList    []*string
-	StringSet     []*string
-	IntegerList   []*int32
-	BooleanList   []*bool
-	TimestampList []*time.Time
-	EnumList      []types.FooEnum
+	BooleanList    []*bool
+	EnumList       []types.FooEnum
+	FlattenedList  []*string
+	FlattenedList2 []*string
+	IntegerList    []*int32
 	// A list of lists of strings.
 	NestedStringList   [][]*string
 	RenamedListMembers []*string
-	FlattenedList      []*string
-	FlattenedList2     []*string
+	StringList         []*string
+	StringSet          []*string
 	StructureList      []*types.StructureListMember
+	TimestampList      []*time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func newServiceMetadataMiddleware_opXmlLists(region string) awsmiddleware.RegisterServiceMetadata {
+	return awsmiddleware.RegisterServiceMetadata{
+		Region:         region,
+		ServiceName:    "Query Protocol",
+		ServiceID:      "queryprotocol",
+		EndpointPrefix: "queryprotocol",
+		OperationName:  "XmlLists",
+	}
 }

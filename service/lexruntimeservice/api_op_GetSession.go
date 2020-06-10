@@ -4,8 +4,7 @@ package lexruntimeservice
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -19,23 +18,13 @@ func (c *Client) GetSession(ctx context.Context, params *GetSessionInput, optFns
 	for _, fn := range optFns {
 		fn(&options)
 	}
-	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
-		Region:         options.Region,
-		ServiceName:    "Lex Runtime Service",
-		ServiceID:      "lexruntimeservice",
-		EndpointPrefix: "lexruntimeservice",
-		SigningName:    "lex",
-		OperationName:  "GetSession",
-	}, middleware.Before)
-	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	stack.Serialize.Add(&awsRestjson1_serializeOpGetSession{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSession{}, middleware.After)
-	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)
-	stack.Finalize.Add(retry.NewAttemptMiddleware(options.Retryer, smithyhttp.RequestCloner), middleware.After)
-	stack.Finalize.Add(retry.MetricsHeaderMiddleware{}, middleware.After)
-	stack.Finalize.Add(&v4.ComputePayloadSHA256Middleware{}, middleware.Before)
-	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(options.HTTPSigner), middleware.After)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	awsstack.AddRetryMiddlewares(stack, options)
+	awsstack.AddHTTPSignerMiddlewares(stack, options)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSession(options.Region), middleware.Before)
+	addawsRestjson1_serdeOpGetSessionMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -88,4 +77,20 @@ type GetSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestjson1_serdeOpGetSessionMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add("&awsRestjson1_serializeOpGetSession{}", middleware.After)
+	stack.Deserialize.Add("&awsRestjson1_deserializeOpGetSession{}", middleware.After)
+}
+
+func newServiceMetadataMiddleware_opGetSession(region string) awsmiddleware.RegisterServiceMetadata {
+	return awsmiddleware.RegisterServiceMetadata{
+		Region:         region,
+		ServiceName:    "Lex Runtime Service",
+		ServiceID:      "lexruntimeservice",
+		EndpointPrefix: "lexruntimeservice",
+		SigningName:    "lex",
+		OperationName:  "GetSession",
+	}
 }
