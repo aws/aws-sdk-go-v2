@@ -18,7 +18,7 @@ package software.amazon.smithy.aws.go.codegen;
 import software.amazon.smithy.go.codegen.GoDependency;
 
 /**
- * An enum of all the built-in dependencies used by this package.
+ * A class of constants for dependencies used by this package.
  */
 public final class AwsGoDependency {
     public static final GoDependency AWS_REST_JSON_PROTOCOL = aws("aws/protocol/restjson");
