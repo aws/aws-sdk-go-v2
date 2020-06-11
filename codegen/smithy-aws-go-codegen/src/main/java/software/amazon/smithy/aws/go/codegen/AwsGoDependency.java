@@ -25,10 +25,7 @@ public final class AwsGoDependency {
 
     public static final String AWS_SOURCE_PATH = "github.com/aws/aws-sdk-go-v2";
 
-    private final GoDependency dependency;
-
-    AwsGoDependency(GoDependency dependency) {
-        this.dependency = dependency;
+    private AwsGoDependency() {
     }
 
     private static GoDependency aws(String relativePath) {
