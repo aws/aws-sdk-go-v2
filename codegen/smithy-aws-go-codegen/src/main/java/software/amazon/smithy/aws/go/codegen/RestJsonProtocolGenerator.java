@@ -106,12 +106,10 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             Shape inputShape,
             Predicate<MemberShape> filterMemberShapes
     ) {
-        Symbol jsonEncoder = SymbolUtils.createPointableSymbolBuilder("Value",
-                SmithyGoDependency.SMITHY_JSON.getDependency())
-                .build();
+        Symbol jsonEncoder = SymbolUtils.createPointableSymbolBuilder("Value", SmithyGoDependency.SMITHY_JSON).build();
         Symbol inputSymbol = symbolProvider.toSymbol(inputShape);
 
-        writer.addUseImports(SmithyGoDependency.FMT.getDependency());
+        writer.addUseImports(SmithyGoDependency.FMT);
         writer.openBlock("func $L(v $P, value $T) error {", "}", functionName, inputSymbol,
                 jsonEncoder, () -> {
                     writer.openBlock("if v == nil {", "}", () -> {
@@ -209,7 +207,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     ) {
         Symbol symbol = symbolProvider.toSymbol(shape);
 
-        writer.addUseImports(SmithyGoDependency.FMT.getDependency());
+        writer.addUseImports(SmithyGoDependency.FMT);
 
         writer.openBlock("switch uv := v.(type) {", "}", () -> {
             for (MemberShape memberShape : shape.getAllMembers().values()) {
@@ -371,8 +369,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             return;
         }
 
-        writer.addUseImports(SmithyGoDependency.SMITHY.getDependency());
-        writer.addUseImports(SmithyGoDependency.SMITHY_JSON.getDependency());
+        writer.addUseImports(SmithyGoDependency.SMITHY);
+        writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
 
         writer.write("var documentPayload []byte");
         writer.write("");
@@ -393,7 +391,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             } else {
                 String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(payloadShape,
                         getProtocolName());
-                writer.addUseImports(SmithyGoDependency.SMITHY_JSON.getDependency());
+                writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
                 writer.write("jsonEncoder := smithyjson.NewEncoder()");
                 writer.openBlock("if err := $L(input.$L, jsonEncoder.Value); err != nil {", "}", functionName,
                         memberName, () -> {
@@ -408,7 +406,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             Shape inputShape = model.expectShape(operation.getInput()
                     .orElseThrow(() -> new CodegenException("Input shape is missing on " + operation.getId())));
             String functionName = ProtocolGenerator.getOperationDocumentSerFunctionName(inputShape, getProtocolName());
-            writer.addUseImports(SmithyGoDependency.SMITHY_JSON.getDependency());
+            writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
             writer.write("jsonEncoder := smithyjson.NewEncoder()");
             writer.openBlock("if err := $L(input, jsonEncoder.Value); err != nil {", "}", functionName, () -> {
                 writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
@@ -417,7 +415,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         }
         writer.write("");
 
-        writer.addUseImports(SmithyGoDependency.BYTES.getDependency());
+        writer.addUseImports(SmithyGoDependency.BYTES);
         writer.openBlock("if request, err = request.SetStream(bytes.NewReader(documentPayload)); err != nil {", "}",
                 () -> {
                     writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
@@ -469,7 +467,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             String operand,
             BiConsumer<GoWriter, String> locationEncoder
     ) {
-        writer.addUseImports(SmithyGoDependency.SMITHY_TIME.getDependency());
+        writer.addUseImports(SmithyGoDependency.SMITHY_TIME);
 
         TimestampFormatTrait.Format format = memberShape.getMemberTrait(model, TimestampFormatTrait.class)
                 .map(TimestampFormatTrait::getFormat)
@@ -522,17 +520,17 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             }
         }
 
-        writer.addUseImports(SmithyGoDependency.SMITHY_IO.getDependency());
+        writer.addUseImports(SmithyGoDependency.SMITHY_IO);
         writer.write("buff := make([]byte, 1024)");
         writer.write("ringBuffer := smithyio.NewRingBuffer(buff)");
         writer.write("");
 
-        writer.addUseImports(SmithyGoDependency.IO.getDependency());
+        writer.addUseImports(SmithyGoDependency.IO);
         writer.write("body := io.TeeReader(response.Body, ringBuffer)");
         writer.write("defer response.Body.Close()");
         writer.write("");
 
-        writer.addUseImports(SmithyGoDependency.JSON.getDependency());
+        writer.addUseImports(SmithyGoDependency.JSON);
         writer.write("decoder := json.NewDecoder(body)");
         writer.write("decoder.UseNumber()");
         writer.write("");
@@ -550,7 +548,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 ProtocolGenerator.getDocumentOutputDeserializerFunctionName(shape, getProtocolName());
         writer.write("err = $L(output, response.Body)", deserFuncName);
         writer.openBlock("if err != nil {", "}", () -> {
-            writer.addUseImports(SmithyGoDependency.SMITHY.getDependency());
+            writer.addUseImports(SmithyGoDependency.SMITHY);
             writer.write(String.format("return out, metadata, &smithy.DeserializationError{Err:%s}",
                     "fmt.Errorf(\"failed to deserialize response payload, %w\", err)"));
         });
@@ -567,8 +565,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 ProtocolGenerator.getDocumentOutputDeserializerFunctionName(shape, getProtocolName());
         writer.write("err = $L(output, decoder)", deserFuncName);
         writer.openBlock("if err != nil {", "}", () -> {
-            writer.addUseImports(SmithyGoDependency.BYTES.getDependency());
-            writer.addUseImports(SmithyGoDependency.SMITHY.getDependency());
+            writer.addUseImports(SmithyGoDependency.BYTES);
+            writer.addUseImports(SmithyGoDependency.SMITHY);
             writer.write("var snapshot bytes.Buffer");
             writer.write("io.Copy(&snapshot, ringBuffer)");
             writer.openBlock("return out, metadata, &smithy.DeserializationError {", "}", () -> {
@@ -594,35 +592,35 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             // at Header `X-Amzn-Errortype` or a body field with the name `code`, or a body field named `__type`.
             writer.write("errorType := response.Header.Get($S)", "X-Amzn-Errortype");
 
-            writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL.getDependency());
+            writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL);
             writer.write("errorType = restjson.SanitizeErrorCode(errorType)");
             writer.write("");
 
             // if no modeled exceptions for the operation shape, return the response body as is
             if (ErrorShapeIds.size() == 0) {
-                writer.addUseImports(SmithyGoDependency.JSON.getDependency());
+                writer.addUseImports(SmithyGoDependency.JSON);
                 writer.write("decoder := json.NewDecoder(response.Body)");
                 writer.write("decoder.UseNumber()");
                 writer.write("defer response.Body.Close()");
                 writer.write("");
 
-                writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL.getDependency());
-                writer.addUseImports(SmithyGoDependency.SMITHY.getDependency());
+                writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL);
+                writer.addUseImports(SmithyGoDependency.SMITHY);
                 writer.write("genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)");
                 writer.write("if err != nil { return out, metadata, &smithy.DeserializationError{ Err: err}}");
                 writer.write("return out, metadata, genericError");
                 return;
             }
 
-            writer.addUseImports(SmithyGoDependency.SMITHY_IO.getDependency());
+            writer.addUseImports(SmithyGoDependency.SMITHY_IO);
             writer.write("buff := make([]byte, 1024)");
             writer.write("ringBuffer := smithyio.NewRingBuffer(buff)");
             writer.write("");
 
             writer.write("var errorBody bytes.Buffer");
 
-            writer.addUseImports(SmithyGoDependency.SMITHY.getDependency());
-            writer.addUseImports(SmithyGoDependency.IO.getDependency());
+            writer.addUseImports(SmithyGoDependency.SMITHY);
+            writer.addUseImports(SmithyGoDependency.IO);
             writer.write("_, err := io.Copy(&errorBody, response.Body)");
             writer.openBlock("if err != nil {", "}", () -> {
                 writer.write(String.format("return out, metadata, &smithy.DeserializationError{Err: %s}",
@@ -634,21 +632,21 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writer.write("defer response.Body.Close()");
             writer.write("");
 
-            writer.addUseImports(SmithyGoDependency.JSON.getDependency());
+            writer.addUseImports(SmithyGoDependency.JSON);
             writer.write("decoder := json.NewDecoder(body)");
             writer.write("decoder.UseNumber()");
             writer.write("");
 
             writer.write("var errorMessage string");
-            writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL.getDependency());
+            writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL);
 
             // If errorType is empty, look for error type in a body field with the name `code`,
             // or a body field named `__type`.
             writer.openBlock("if len(errorType) == 0 {", "}", () -> {
                 writer.write("errorType, errorMessage, err = restjson.GetErrorInfo(decoder)");
                 writer.openBlock("if err != nil {", "}", () -> {
-                    writer.addUseImports(SmithyGoDependency.BYTES.getDependency());
-                    writer.addUseImports(SmithyGoDependency.SMITHY.getDependency());
+                    writer.addUseImports(SmithyGoDependency.BYTES);
+                    writer.addUseImports(SmithyGoDependency.SMITHY);
                     writer.write("var snapshot bytes.Buffer");
                     writer.write("io.Copy(&snapshot, ringBuffer)");
                     writer.openBlock("return out, metadata, &smithy.DeserializationError {", "}", () -> {
@@ -679,7 +677,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writer.write("");
 
             writer.openBlock("if len(errorMessage) != 0 {", "}", () -> {
-                writer.addUseImports(SmithyGoDependency.SMITHY.getDependency());
+                writer.addUseImports(SmithyGoDependency.SMITHY);
                 writer.openBlock("genericError := &smithy.GenericAPIError{", "}", () -> {
                     writer.write("Code : errorType,");
                     writer.write("Message : errorMessage,");
@@ -689,8 +687,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             });
 
             writer.write("");
-            writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL.getDependency());
-            writer.addUseImports(SmithyGoDependency.SMITHY.getDependency());
+            writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL);
+            writer.addUseImports(SmithyGoDependency.SMITHY);
             writer.write("genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)");
             writer.write("if err != nil { return out, metadata, &smithy.DeserializationError{ Err: err }}");
             writer.write("");
@@ -729,7 +727,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
                     writer.write("err= $L(output, response)", deserFuncName);
                     writer.openBlock("if err != nil {", "}", () -> {
-                        writer.addUseImports(SmithyGoDependency.SMITHY.getDependency());
+                        writer.addUseImports(SmithyGoDependency.SMITHY);
                         writer.write(String.format("return out, metadata, &smithy.DeserializationError{Err: %s}",
                                 "fmt.Errorf(\"failed to decode response error with invalid Http bindings, %w\", err)"));
                     });
@@ -860,7 +858,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                             writer.write("");
 
                             if (!targetShape.hasTrait(StreamingTrait.class) && targetShape.isBlobShape()) {
-                                writer.addUseImports(SmithyGoDependency.IOUTIL.getDependency());
+                                writer.addUseImports(SmithyGoDependency.IOUTIL);
                                 writer.write("bs, err := ioutil.ReadAll(body)");
                                 writer.write("if err != nil { return err }");
                                 writer.write("v.$L = bs", memberName);
@@ -887,14 +885,13 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             Predicate<MemberShape> filterMemberShapes,
             Boolean isOutputShape
     ) {
-        Symbol jsonDecoder = SymbolUtils.createPointableSymbolBuilder("Decoder",
-                SmithyGoDependency.JSON.getDependency()).build();
+        Symbol jsonDecoder = SymbolUtils.createPointableSymbolBuilder("Decoder", SmithyGoDependency.JSON).build();
         Symbol shapeSymbol = symbolProvider.toSymbol(shape);
         String functionName = isOutputShape ?
                 ProtocolGenerator.getDocumentOutputDeserializerFunctionName(shape, getProtocolName()) :
                 ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
 
-        writer.addUseImports(SmithyGoDependency.FMT.getDependency());
+        writer.addUseImports(SmithyGoDependency.FMT);
         switch (shape.getType()) {
             case STRUCTURE:
                 writer.openBlock("func $L(v $P, decoder $P) error {", "}", functionName, shapeSymbol,
@@ -974,7 +971,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
                         // default case to handle unknown fields
                         writer.openBlock("default : ", "", () -> {
-                            writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL.getDependency());
+                            writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL);
                             writer.write("err := restjson.DiscardUnknownField(decoder)");
                             writer.write("if err != nil {return err}");
                         });
@@ -1168,14 +1165,14 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         Shape targetShape = model.expectShape(memberShape.getTarget());
         switch (targetShape.getType()) {
             case BIG_INTEGER:
-                writer.addUseImports(SmithyGoDependency.BIG.getDependency());
-                writer.addUseImports(SmithyGoDependency.FMT.getDependency());
+                writer.addUseImports(SmithyGoDependency.BIG);
+                writer.addUseImports(SmithyGoDependency.FMT);
                 writer.write("st, ok := new(big.Int).SetString(val.(string), 10)");
                 writer.write("if !ok { return fmt.Errorf(\"error deserializing big integer type\")}");
                 break;
             case BIG_DECIMAL:
-                writer.addUseImports(SmithyGoDependency.BIG.getDependency());
-                writer.addUseImports(SmithyGoDependency.FMT.getDependency());
+                writer.addUseImports(SmithyGoDependency.BIG);
+                writer.addUseImports(SmithyGoDependency.FMT);
                 writer.write("st, ok := big.ParseFloat(val.(string), 10, 200, big.ToNearestAway)");
                 writer.write("if !ok { return fmt.Errorf(\"error deserializing big decimal type\")}");
                 break;
@@ -1307,7 +1304,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.write("if err != nil { return err }");
         writer.openBlock("if t, ok := startToken.(json.Delim); !ok || t.String() != $S {",
                 "}", startToken, () -> {
-                    writer.addUseImports(SmithyGoDependency.FMT.getDependency());
+                    writer.addUseImports(SmithyGoDependency.FMT);
                     writer.write("return fmt.Errorf($S)",
                             String.format("expect `%s` as start token", startToken));
                 });

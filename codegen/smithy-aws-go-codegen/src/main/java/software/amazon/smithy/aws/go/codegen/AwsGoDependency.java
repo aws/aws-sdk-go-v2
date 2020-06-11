@@ -20,8 +20,8 @@ import software.amazon.smithy.go.codegen.GoDependency;
 /**
  * An enum of all the built-in dependencies used by this package.
  */
-public enum AwsGoDependency {
-    AWS_REST_JSON_PROTOCOL(aws("aws/protocol/restjson"));
+public final class AwsGoDependency {
+    public static final GoDependency AWS_REST_JSON_PROTOCOL = aws("aws/protocol/restjson");
 
     public static final String AWS_SOURCE_PATH = "github.com/aws/aws-sdk-go-v2";
 
@@ -31,9 +31,6 @@ public enum AwsGoDependency {
         this.dependency = dependency;
     }
 
-    public GoDependency getDependency() {
-        return dependency;
-    }
     private static GoDependency aws(String relativePath) {
         return aws(relativePath, null);
     }
