@@ -1196,13 +1196,31 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             Model model,
             MemberShape memberShape
     ) {
+        TimestampFormatTrait.Format format = memberShape.getMemberTrait(model, TimestampFormatTrait.class)
+                .map(TimestampFormatTrait::getFormat)
+                .orElse(TimestampFormatTrait.Format.EPOCH_SECONDS);
+
         writer.write("val, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
-        writer.write("ft, err := val.(json.Number).Float64()");
         writer.write("if err != nil { return err }");
 
         writer.addUseImports(GoDependency.SMITHY_TIME);
-        writer.write("ts := smithytime.ParseEpochSeconds(ft)");
+        switch (format) {
+            case DATE_TIME:
+                writer.write("ts, err := smithytime.ParseDateTimeFormat(val.(string))");
+                writer.write("if err != nil { return err }");
+                break;
+            case HTTP_DATE:
+                writer.write("ts, err := smithytime.ParseHTTPDate(val.(string))");
+                writer.write("if err != nil { return err }");
+                break;
+            case EPOCH_SECONDS:
+                writer.write("ft, err := val.(json.Number).Float64()");
+                writer.write("if err != nil { return err }");
+                writer.write("ts := smithytime.ParseEpochSeconds(ft)");
+                break;
+            case UNKNOWN:
+                throw new CodegenException("Unknown timestamp format");
+        }
 
         Shape targetShape = model.expectShape(memberShape.getTarget());
         return CodegenUtils.generatePointerValueIfPointable(writer, targetShape, "ts");
