@@ -374,11 +374,11 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writer.write("payload = input.$L", memberName);
 
         } else if (payloadShape.isBlobShape()) {
-            writer.addUseImports(GoDependency.BYTES);
+            writer.addUseImports(SmithyGoDependency.BYTES);
             writer.write("payload = bytes.NewReader(input.$L)", memberName);
 
         } else if (payloadShape.isStringShape()) {
-            writer.addUseImports(GoDependency.STRINGS);
+            writer.addUseImports(SmithyGoDependency.STRINGS);
             writer.write("payload = strings.NewReader(input.$L)", memberName);
 
         } else {
@@ -408,8 +408,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             GoWriter writer
     ) {
 
-        writer.addUseImports(GoDependency.SMITHY);
-        writer.addUseImports(GoDependency.SMITHY_JSON);
+        writer.addUseImports(SmithyGoDependency.SMITHY);
+        writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
 
         writer.write("restEncoder.SetHeader(\"Content-Type\").String($S)", getDocumentContentType());
         writer.write("");
@@ -418,7 +418,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 .orElseThrow(() -> new CodegenException("Input shape is missing on " + operation.getId())));
 
         String functionName = ProtocolGenerator.getOperationDocumentSerFunctionName(inputShape, getProtocolName());
-        writer.addUseImports(GoDependency.SMITHY_JSON);
+        writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
         writer.write("jsonEncoder := smithyjson.NewEncoder()");
         writer.openBlock("if err := $L(input, jsonEncoder.Value); err != nil {", "}", functionName, () -> {
             writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
