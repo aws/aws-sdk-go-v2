@@ -9,6 +9,7 @@ import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
+import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
@@ -22,8 +23,20 @@ public class AssembleMiddlewareStack implements GoIntegration {
             SymbolProvider symbolProvider,
             GoWriter writer,
             ServiceShape serviceShape,
-            OperationShape operationShape
+            OperationShape operationShape,
+            ProtocolGenerator protocolGenerator
     ){
+        if (protocolGenerator != null) {
+            String serializerMiddlewareName = ProtocolGenerator.getSerializeMiddlewareName(operationShape.getId(),
+                    protocolGenerator.getProtocolName());
+            writer.write("stack.Serialize.Add(&$L{}, middleware.After)", serializerMiddlewareName);
+
+            // add deserializer middleware
+            String deserializerMiddlewareName = ProtocolGenerator.getDeserializeMiddlewareName(operationShape.getId(),
+                    protocolGenerator.getProtocolName());
+            writer.write("stack.Deserialize.Add(&$L{}, middleware.After)", deserializerMiddlewareName);
+        }
+
         // build middleware
         Symbol requestInvocationIDMiddleware = SymbolUtils.createValueSymbolBuilder(
              "RequestInvocationIDMiddleware", GoDependency.AWS_MIDDLEWARE).build();
