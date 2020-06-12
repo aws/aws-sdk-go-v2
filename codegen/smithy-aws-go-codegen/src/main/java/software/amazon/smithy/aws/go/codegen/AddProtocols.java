@@ -20,6 +20,6 @@ public class AddProtocols implements GoIntegration {
 
     @Override
     public List<ProtocolGenerator> getProtocolGenerators() {
-        return ListUtils.of(new AwsRestJson1(), new AwsRestXml());
+        return ListUtils.of(new AwsRestJson1(), new AwsJsonRpc1_0(), new AwsJsonRpc1_1(), new AwsRestXml());
     }
 }
