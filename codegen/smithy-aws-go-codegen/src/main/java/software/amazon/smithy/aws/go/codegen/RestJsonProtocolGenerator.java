@@ -153,6 +153,12 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
         writer.openBlock("for i := range v {", "}", () -> {
             writer.write("av := array.Value()");
+            if (!targetShape.hasTrait(EnumTrait.class)) {
+                writer.openBlock("if vv := v[i]; vv == nil {", "}", () -> {
+                    writer.write("av.Null()");
+                    writer.write("continue");
+                });
+            }
             String operand = "v[i]";
             if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
                 String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(targetShape,
@@ -271,17 +277,24 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         Shape targetShape = model.expectShape(memberShape.getTarget());
 
         writer.openBlock("for key := range v {", "}", () -> {
+            writer.write("om := object.Key(key)");
+            if (!targetShape.hasTrait(EnumTrait.class)) {
+                writer.openBlock("if vv := v[key]; vv == nil {", "}", () -> {
+                    writer.write("om.Null()");
+                    writer.write("continue");
+                });
+            }
             if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
                 String serFunctionName = ProtocolGenerator
                         .getDocumentSerializerFunctionName(targetShape,
                                 getProtocolName());
-                writer.openBlock("if err := $L($L, object.Key(key)); err != nil {", "}", serFunctionName, "v[key]",
+                writer.openBlock("if err := $L($L, om); err != nil {", "}", serFunctionName, "v[key]",
                         () -> {
                             writer.write("return err");
                         });
             } else {
                 generateSimpleShapeToJsonValue(model, writer, memberShape, "v[key]", (w, s) -> {
-                    writer.write("object.Key(key).$L", s);
+                    writer.write("om.$L", s);
                 });
             }
         });
