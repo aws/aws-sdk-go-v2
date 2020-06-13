@@ -1240,7 +1240,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.addUseImports(SmithyGoDependency.SMITHY_TIME);
         switch (format) {
             case DATE_TIME:
-                writer.write("ts, err := smithytime.ParseDateTimeFormat(val.(string))");
+                writer.write("ts, err := smithytime.ParseDateTime(val.(string))");
                 writer.write("if err != nil { return err }");
                 break;
             case HTTP_DATE:
