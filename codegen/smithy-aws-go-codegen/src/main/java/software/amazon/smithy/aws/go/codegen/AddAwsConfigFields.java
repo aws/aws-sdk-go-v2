@@ -44,7 +44,6 @@ public class AddAwsConfigFields implements GoIntegration {
     private static final String LOGGER_CONFIG_NAME = "Logger";
     private static final String LOG_LEVEL_CONFIG_NAME = "LogLevel";
     private static final String RETRYER_CONFIG_NAME = "Retryer";
-
     private static final Set<ConfigField> UNIVERSAL_FIELDS = new TreeSet<>(SetUtils.of(
             ConfigField.builder(REGION_CONFIG_NAME, getUniversalSymbol("string"))
                     .documentation("The region to send requests to. (Required)")
