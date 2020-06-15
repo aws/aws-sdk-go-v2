@@ -1,83 +1,145 @@
 package software.amazon.smithy.aws.go.codegen;
 
+import java.util.List;
 import software.amazon.smithy.aws.traits.auth.SigV4Trait;
 import software.amazon.smithy.aws.traits.auth.UnsignedPayloadTrait;
 import software.amazon.smithy.codegen.core.Symbol;
-import software.amazon.smithy.codegen.core.SymbolProvider;
-import software.amazon.smithy.go.codegen.GoDependency;
-import software.amazon.smithy.go.codegen.GoSettings;
-import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
-import software.amazon.smithy.model.Model;
-import software.amazon.smithy.model.shapes.OperationShape;
-import software.amazon.smithy.model.shapes.ServiceShape;
+import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.traits.AuthTrait;
+import software.amazon.smithy.utils.ListUtils;
 
-public class AssembleMiddlewareStack implements GoIntegration {
+public class AssembleMiddlewareStack implements GoIntegration{
     @Override
-    public void assembleMiddlewareStack(
-            GoSettings settings,
-            Model model,
-            SymbolProvider symbolProvider,
-            GoWriter writer,
-            ServiceShape serviceShape,
-            OperationShape operationShape,
-            ProtocolGenerator protocolGenerator
-    ){
-        if (protocolGenerator != null) {
-            String serializerMiddlewareName = ProtocolGenerator.getSerializeMiddlewareName(operationShape.getId(),
-                    protocolGenerator.getProtocolName());
-            writer.write("stack.Serialize.Add(&$L{}, middleware.After)", serializerMiddlewareName);
+    public List<RuntimeClientPlugin> getClientPlugins() {
+        Symbol middlewareStepAfter = SymbolUtils.createValueSymbolBuilder(
+                "After", SmithyGoDependency.SMITHY_MIDDLEWARE
+        ).build();
 
-            // add deserializer middleware
-            String deserializerMiddlewareName = ProtocolGenerator.getDeserializeMiddlewareName(operationShape.getId(),
-                    protocolGenerator.getProtocolName());
-            writer.write("stack.Deserialize.Add(&$L{}, middleware.After)", deserializerMiddlewareName);
-        }
+        Symbol middlewareStepBefore = SymbolUtils.createValueSymbolBuilder(
+                "Before", SmithyGoDependency.SMITHY_MIDDLEWARE
+        ).build();
 
-        // build middleware
-        Symbol requestInvocationIDMiddleware = SymbolUtils.createValueSymbolBuilder(
-             "RequestInvocationIDMiddleware", GoDependency.AWS_MIDDLEWARE).build();
-        writer.write("stack.Build.Add($T{}, middleware.After)", requestInvocationIDMiddleware);
+        Symbol RequestInvocationIDMiddleware = SymbolUtils.createValueSymbolBuilder(
+                "RequestInvocationIDMiddleware", AwsGoDependency.AWS_MIDDLEWARE
+        ).build();
 
-        // deserialize middleware
         Symbol attemptClockSkewMiddleware = SymbolUtils.createValueSymbolBuilder(
-                "AttemptClockSkewMiddleware", GoDependency.AWS_MIDDLEWARE).build();
-        writer.write("stack.Deserialize.Add($T{}, middleware.After)", attemptClockSkewMiddleware);
+                "AttemptClockSkewMiddleware", AwsGoDependency.AWS_MIDDLEWARE
+        ).build();
 
-        // retry middleware
         Symbol newAttemptMiddleware = SymbolUtils.createValueSymbolBuilder(
-                "NewAttemptMiddleware", GoDependency.AWS_RETRY_MIDDLEWARE).build();
-        writer.write("stack.Finalize.Add($T(options.Retryer), middleware.After)", newAttemptMiddleware);
+                "NewAttemptMiddleware", AwsGoDependency.AWS_RETRY_MIDDLEWARE
+        ).build();
 
-        // retry metric middleware
-        Symbol metricsHeaderMiddleware = SymbolUtils.createValueSymbolBuilder(
-                "MetricsHeaderMiddleware", GoDependency.AWS_RETRY_MIDDLEWARE).build();
-        writer.write("stack.Finalize.Add($T{}, middleware.After)", metricsHeaderMiddleware);
+        Symbol metricHeaderMiddleware = SymbolUtils.createValueSymbolBuilder(
+                "MetricsHeaderMiddleware", AwsGoDependency.AWS_RETRY_MIDDLEWARE
+        ).build();
 
-        // signer middleware
-        if (operationShape.hasTrait(UnsignedPayloadTrait.class)) {
-            // unsigned payload middleware
-            Symbol unsignedPayloadSignerMiddleware = SymbolUtils.createValueSymbolBuilder(
-                    "UnsignedPayloadMiddleware", GoDependency.AWS_V4SIGNER_MIDDLEWARE).build();
-            writer.write("stack.Finalize.Add(&$T{}, middleware.After)", unsignedPayloadSignerMiddleware);
-        } else if (serviceShape.hasTrait(SigV4Trait.class) &&
-                (operationShape.hasTrait(SigV4Trait.class) || !operationShape.hasTrait(AuthTrait.class))
-        ) {
-            // sigV4 signer middleware
-            Symbol computePayloadSHA256Middleware = SymbolUtils.createValueSymbolBuilder(
-                    "ComputePayloadSHA256Middleware", GoDependency.AWS_V4SIGNER_MIDDLEWARE).build();
-            writer.write("stack.Finalize.Add(&$T{}, middleware.Before)", computePayloadSHA256Middleware);
+        Symbol unsignedPayloadSignerMiddleware = SymbolUtils.createValueSymbolBuilder(
+                "UnsignedPayloadMiddleware", AwsGoDependency.AWS_V4SIGNER_MIDDLEWARE
+        ).build();
 
-            Symbol newSignHTTPRequestMiddleware = SymbolUtils.createValueSymbolBuilder(
-                    "NewSignHTTPRequestMiddleware", GoDependency.AWS_V4SIGNER_MIDDLEWARE).build();
-            writer.write("stack.Finalize.Add(&$T(options.Signer), middleware.After)",
-                    newSignHTTPRequestMiddleware);
-        } else {
-            // v2 signer middleware or other auth trait type middleware
-            writer.write("// TODO: middleware to add if it's not a sigV4 supported service");
-        }
+        Symbol computePayloadSHA256Middleware = SymbolUtils.createValueSymbolBuilder(
+                "ComputePayloadSHA256Middleware", AwsGoDependency.AWS_V4SIGNER_MIDDLEWARE
+        ).build();
+
+        Symbol newSignHTTPRequestMiddleware = SymbolUtils.createValueSymbolBuilder(
+                "NewSignHTTPRequestMiddleware", AwsGoDependency.AWS_V4SIGNER_MIDDLEWARE
+        ).build();
+
+        return ListUtils.of(
+                // Add RequestInvocationIDMiddleware to operation stack
+                RuntimeClientPlugin.builder()
+                    .buildMiddlewareStack((writer, service, operation, protocolGenerator, stackOperand) -> {
+                        writer.write("$L.Initialize.Add($T{}, $T)", stackOperand,
+                                RequestInvocationIDMiddleware, middlewareStepAfter);
+                    }).build(),
+
+                // Add serializer middleware to operation stack
+                RuntimeClientPlugin.builder()
+                        .buildMiddlewareStack((writer, service, operation, protocolGenerator, stackOperand) -> {
+                            if (protocolGenerator == null){
+                                return;
+                            }
+                            String serializerMiddlewareName = ProtocolGenerator.getSerializeMiddlewareName(operation.getId(),
+                                    protocolGenerator.getProtocolName());
+                            writer.write("$L.Serialize.Add(&$L{}, $T)",
+                                    stackOperand, serializerMiddlewareName, middlewareStepAfter);
+                        })
+                        .build(),
+
+                // Add deserializer middleware to operation stack
+                RuntimeClientPlugin.builder()
+                        .buildMiddlewareStack((writer, service, operation, protocolGenerator, stackOperand) -> {
+                            if (protocolGenerator == null) {
+                                return;
+                            }
+                            String deserializerMiddlewareName = ProtocolGenerator.getDeserializeMiddlewareName(operation.getId(),
+                                    protocolGenerator.getProtocolName());
+                            writer.write("$L.Deserialize.Add(&$L{}, $T)",
+                                    stackOperand, deserializerMiddlewareName, middlewareStepAfter);
+                        })
+                        .build(),
+
+                // Add attemptClockSkew middleware to operation stack
+                RuntimeClientPlugin.builder()
+                        .buildMiddlewareStack((writer, service, operation, protocolGenerator, stackOperand) -> {
+                            writer.write("$L.Deserialize.Add($T{}, $T)", stackOperand,
+                                    attemptClockSkewMiddleware, middlewareStepAfter);
+                        })
+                        .build(),
+
+                // Add newAttempt middleware to operation stack
+                RuntimeClientPlugin.builder()
+                        .buildMiddlewareStack((writer, service, operation, protocolGenerator, stackOperand) -> {
+                            writer.write("$L.Finalize.Add($T(options.Retryer), $T)", stackOperand,
+                                    newAttemptMiddleware, middlewareStepAfter);
+                        })
+                        .build(),
+
+                // Add retry middleware to operation stack
+                RuntimeClientPlugin.builder()
+                        .buildMiddlewareStack((writer, service, operation, protocolGenerator, stackOperand) -> {
+                            writer.write("$L.Finalize.Add($T{}, $T)", stackOperand,
+                                    metricHeaderMiddleware, middlewareStepAfter);
+                        })
+                        .build(),
+
+                // Add unsigned payload middleware to operation stack
+                RuntimeClientPlugin.builder()
+                        .operationPredicate((model, service, operation) -> {
+                            if (operation.hasTrait(UnsignedPayloadTrait.class)) {
+                                return true;
+                            }
+                            return false;
+                        })
+                        .buildMiddlewareStack((writer, service, operation, protocolGenerator, stackOperand) -> {
+                            writer.write("$L.Finalize.Add($T{}, $T)", stackOperand,
+                                    unsignedPayloadSignerMiddleware, middlewareStepAfter);
+                        })
+                        .build(),
+
+                // Add SigV4 middleware to operation stack
+                RuntimeClientPlugin.builder()
+                        .operationPredicate((model, service, operation) -> {
+                            if (service.hasTrait(SigV4Trait.class) && (!operation.hasTrait(UnsignedPayloadTrait.class))
+                                   && (operation.hasTrait(SigV4Trait.class) || !operation.hasTrait(AuthTrait.class))
+                            ){
+                                return true;
+                            }
+                            return false;
+                        })
+                        .buildMiddlewareStack((writer, service, operation, protocolGenerator, stackOperand) -> {
+                            writer.write("$L.Finalize.Add($T{}, $T)", stackOperand,
+                                    computePayloadSHA256Middleware, middlewareStepBefore);
+                            writer.write("stack.Finalize.Add(&$T(options.Signer), middleware.After)",
+                                    newSignHTTPRequestMiddleware);
+                        })
+                        .build()
+        );
     }
 }

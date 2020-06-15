@@ -22,6 +22,9 @@ import software.amazon.smithy.go.codegen.GoDependency;
  */
 public final class AwsGoDependency {
     public static final GoDependency AWS_REST_JSON_PROTOCOL = aws("aws/protocol/restjson");
+    public static final GoDependency AWS_MIDDLEWARE = aws("aws/middleware");
+    public static final GoDependency AWS_RETRY_MIDDLEWARE = aws("aws/retry");
+    public static final GoDependency AWS_V4SIGNER_MIDDLEWARE = aws("aws/signer/v4");
 
     public static final String AWS_SOURCE_PATH = "github.com/aws/aws-sdk-go-v2";
 
