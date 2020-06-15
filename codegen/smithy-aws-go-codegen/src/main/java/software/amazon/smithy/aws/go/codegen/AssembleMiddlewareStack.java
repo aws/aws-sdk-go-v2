@@ -4,6 +4,7 @@ import java.util.List;
 import software.amazon.smithy.aws.traits.auth.SigV4Trait;
 import software.amazon.smithy.aws.traits.auth.UnsignedPayloadTrait;
 import software.amazon.smithy.codegen.core.Symbol;
+import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
@@ -13,50 +14,86 @@ import software.amazon.smithy.model.traits.AuthTrait;
 import software.amazon.smithy.utils.ListUtils;
 
 public class AssembleMiddlewareStack implements GoIntegration{
+
+    private static final String INITIALIZE_MIDDLEWARE = "Initialize";
+    private static final String SERIALIZE_MIDDLEWARE = "Serialize";
+    private static final String BUILD_MIDDLEWARE = "Build";
+    private static final String FINALIZE_MIDDLEWARE = "Finalize";
+    private static final String DESERIALIZE_MIDDLEWARE = "Deserialize";
+
+    /**
+     * Generates code to add middleware at the end in operation stack step.
+     * @param writer writer used to write Go code.
+     * @param stackstep stack step where the middleware is to be added.
+     * @param middlewareSymbol middleware symbol corresponding to middleware to be added.
+     * @param content Gowriter content used for generation.
+     * @param stackOperand stack operand to which middleware is to be added.
+     */
+    private void writeAddMiddlewareAfter(
+        GoWriter writer,
+        String stackstep,
+        Symbol middlewareSymbol,
+        String content,
+        String stackOperand
+    ) {
+        String st = String.format("%s.%s.Add(%s, middleware.After)", stackOperand, stackstep, content);
+        writer.write(st, middlewareSymbol);
+        writer.addUseImports(AwsGoDependency.AWS_MIDDLEWARE);
+    }
+
+    /**
+     * Generates code to add middleware at the end in operation stack step.
+     * @param writer writer used to write Go code.
+     * @param stackstep stack step where the middleware is to be added.
+     * @param middlewareName middleware name corresponding to middleware to be added.
+     * @param content Gowriter content used for generation.
+     * @param stackOperand stack operand to which middleware is to be added.
+     */
+    private void writeAddMiddlewareAfter(
+            GoWriter writer,
+            String stackstep,
+            String middlewareName,
+            String content,
+            String stackOperand
+    ) {
+        String st = String.format("%s.%s.Add(%s, middleware.After)", stackOperand, stackstep, content);
+        writer.write(st, middlewareName);
+        writer.addUseImports(AwsGoDependency.AWS_MIDDLEWARE);
+    }
+
+    /**
+     * Generates code to add middleware at the beginning in operation stack step.
+     * @param writer writer used to write Go code.
+     * @param stackstep stack step where the middleware is to be added.
+     * @param middlewareSymbol middleware symbol corresponding to middleware to be added.
+     * @param content Gowriter content used for generation.
+     * @param stackOperand stack operand to which middleware is to be added.
+     */
+    private void writeAddMiddlewareBefore(
+            GoWriter writer,
+            String stackstep,
+            Symbol middlewareSymbol,
+            String content,
+            String stackOperand
+    ) {
+        String st = String.format("%s.%s.Add(%s, middleware.Before)", stackOperand, stackstep, content);
+        writer.write(st, middlewareSymbol);
+        writer.addUseImports(AwsGoDependency.AWS_MIDDLEWARE);
+    }
+
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
-        Symbol middlewareStepAfter = SymbolUtils.createValueSymbolBuilder(
-                "After", SmithyGoDependency.SMITHY_MIDDLEWARE
-        ).build();
-
-        Symbol middlewareStepBefore = SymbolUtils.createValueSymbolBuilder(
-                "Before", SmithyGoDependency.SMITHY_MIDDLEWARE
-        ).build();
-
-        Symbol RequestInvocationIDMiddleware = SymbolUtils.createValueSymbolBuilder(
-                "RequestInvocationIDMiddleware", AwsGoDependency.AWS_MIDDLEWARE
-        ).build();
-
-        Symbol attemptClockSkewMiddleware = SymbolUtils.createValueSymbolBuilder(
-                "AttemptClockSkewMiddleware", AwsGoDependency.AWS_MIDDLEWARE
-        ).build();
-
-        Symbol newAttemptMiddleware = SymbolUtils.createValueSymbolBuilder(
-                "NewAttemptMiddleware", AwsGoDependency.AWS_RETRY_MIDDLEWARE
-        ).build();
-
-        Symbol metricHeaderMiddleware = SymbolUtils.createValueSymbolBuilder(
-                "MetricsHeaderMiddleware", AwsGoDependency.AWS_RETRY_MIDDLEWARE
-        ).build();
-
-        Symbol unsignedPayloadSignerMiddleware = SymbolUtils.createValueSymbolBuilder(
-                "UnsignedPayloadMiddleware", AwsGoDependency.AWS_V4SIGNER_MIDDLEWARE
-        ).build();
-
-        Symbol computePayloadSHA256Middleware = SymbolUtils.createValueSymbolBuilder(
-                "ComputePayloadSHA256Middleware", AwsGoDependency.AWS_V4SIGNER_MIDDLEWARE
-        ).build();
-
-        Symbol newSignHTTPRequestMiddleware = SymbolUtils.createValueSymbolBuilder(
-                "NewSignHTTPRequestMiddleware", AwsGoDependency.AWS_V4SIGNER_MIDDLEWARE
-        ).build();
-
         return ListUtils.of(
                 // Add RequestInvocationIDMiddleware to operation stack
                 RuntimeClientPlugin.builder()
                     .buildMiddlewareStack((writer, service, operation, protocolGenerator, stackOperand) -> {
-                        writer.write("$L.Initialize.Add($T{}, $T)", stackOperand,
-                                RequestInvocationIDMiddleware, middlewareStepAfter);
+                        // RequestInvocationIDMiddleware
+                        Symbol RequestInvocationIDMiddleware = SymbolUtils.createValueSymbolBuilder(
+                                "RequestInvocationIDMiddleware", AwsGoDependency.AWS_MIDDLEWARE
+                        ).build();
+
+                        writeAddMiddlewareAfter(writer, INITIALIZE_MIDDLEWARE,
+                                RequestInvocationIDMiddleware, "$T{}", stackOperand);
                     }).build(),
 
                 // Add serializer middleware to operation stack
@@ -67,10 +104,9 @@ public class AssembleMiddlewareStack implements GoIntegration{
                             }
                             String serializerMiddlewareName = ProtocolGenerator.getSerializeMiddlewareName(operation.getId(),
                                     protocolGenerator.getProtocolName());
-                            writer.write("$L.Serialize.Add(&$L{}, $T)",
-                                    stackOperand, serializerMiddlewareName, middlewareStepAfter);
-                        })
-                        .build(),
+                            writeAddMiddlewareAfter(writer, SERIALIZE_MIDDLEWARE,
+                                    serializerMiddlewareName, "&$L{}", stackOperand);
+                        }).build(),
 
                 // Add deserializer middleware to operation stack
                 RuntimeClientPlugin.builder()
@@ -80,34 +116,45 @@ public class AssembleMiddlewareStack implements GoIntegration{
                             }
                             String deserializerMiddlewareName = ProtocolGenerator.getDeserializeMiddlewareName(operation.getId(),
                                     protocolGenerator.getProtocolName());
-                            writer.write("$L.Deserialize.Add(&$L{}, $T)",
-                                    stackOperand, deserializerMiddlewareName, middlewareStepAfter);
-                        })
-                        .build(),
+                            writeAddMiddlewareAfter(writer, DESERIALIZE_MIDDLEWARE,
+                                    deserializerMiddlewareName, "&$L{}", stackOperand);
+                        }).build(),
 
                 // Add attemptClockSkew middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .buildMiddlewareStack((writer, service, operation, protocolGenerator, stackOperand) -> {
-                            writer.write("$L.Deserialize.Add($T{}, $T)", stackOperand,
-                                    attemptClockSkewMiddleware, middlewareStepAfter);
-                        })
-                        .build(),
+                            // attemptClockSkewMiddleware
+                            Symbol attemptClockSkewMiddleware = SymbolUtils.createValueSymbolBuilder(
+                                    "AttemptClockSkewMiddleware", AwsGoDependency.AWS_MIDDLEWARE
+                            ).build();
+
+                            writeAddMiddlewareAfter(writer, DESERIALIZE_MIDDLEWARE,
+                                    attemptClockSkewMiddleware, "$T{}", stackOperand);
+                        }).build(),
 
                 // Add newAttempt middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .buildMiddlewareStack((writer, service, operation, protocolGenerator, stackOperand) -> {
-                            writer.write("$L.Finalize.Add($T(options.Retryer), $T)", stackOperand,
-                                    newAttemptMiddleware, middlewareStepAfter);
-                        })
-                        .build(),
+                            // newAttemptMiddleware
+                            Symbol newAttemptMiddleware = SymbolUtils.createValueSymbolBuilder(
+                                    "NewAttemptMiddleware", AwsGoDependency.AWS_RETRY_MIDDLEWARE
+                            ).build();
+
+                            writeAddMiddlewareAfter(writer, FINALIZE_MIDDLEWARE,
+                                    newAttemptMiddleware, "$T(options.Retryer)", stackOperand);
+                        }).build(),
 
                 // Add retry middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .buildMiddlewareStack((writer, service, operation, protocolGenerator, stackOperand) -> {
-                            writer.write("$L.Finalize.Add($T{}, $T)", stackOperand,
-                                    metricHeaderMiddleware, middlewareStepAfter);
-                        })
-                        .build(),
+                            // metricHeaderMiddleware
+                            Symbol metricHeaderMiddleware = SymbolUtils.createValueSymbolBuilder(
+                                    "MetricsHeaderMiddleware", AwsGoDependency.AWS_RETRY_MIDDLEWARE
+                            ).build();
+
+                            writeAddMiddlewareAfter(writer, FINALIZE_MIDDLEWARE,
+                                    metricHeaderMiddleware, "$T{}", stackOperand);
+                        }).build(),
 
                 // Add unsigned payload middleware to operation stack
                 RuntimeClientPlugin.builder()
@@ -118,10 +165,14 @@ public class AssembleMiddlewareStack implements GoIntegration{
                             return false;
                         })
                         .buildMiddlewareStack((writer, service, operation, protocolGenerator, stackOperand) -> {
-                            writer.write("$L.Finalize.Add($T{}, $T)", stackOperand,
-                                    unsignedPayloadSignerMiddleware, middlewareStepAfter);
-                        })
-                        .build(),
+                            // unsignedPayloadSignerMiddleware
+                            Symbol unsignedPayloadSignerMiddleware = SymbolUtils.createValueSymbolBuilder(
+                                    "UnsignedPayloadMiddleware", AwsGoDependency.AWS_V4SIGNER_MIDDLEWARE
+                            ).build();
+
+                            writeAddMiddlewareAfter(writer, FINALIZE_MIDDLEWARE,
+                                    unsignedPayloadSignerMiddleware, "$T{}", stackOperand);
+                        }).build(),
 
                 // Add SigV4 middleware to operation stack
                 RuntimeClientPlugin.builder()
@@ -134,12 +185,22 @@ public class AssembleMiddlewareStack implements GoIntegration{
                             return false;
                         })
                         .buildMiddlewareStack((writer, service, operation, protocolGenerator, stackOperand) -> {
-                            writer.write("$L.Finalize.Add($T{}, $T)", stackOperand,
-                                    computePayloadSHA256Middleware, middlewareStepBefore);
-                            writer.write("stack.Finalize.Add(&$T(options.Signer), middleware.After)",
-                                    newSignHTTPRequestMiddleware);
-                        })
-                        .build()
+                            // computePayloadSHA256Middleware
+                            Symbol computePayloadSHA256Middleware = SymbolUtils.createValueSymbolBuilder(
+                                    "ComputePayloadSHA256Middleware", AwsGoDependency.AWS_V4SIGNER_MIDDLEWARE
+                            ).build();
+
+                            writeAddMiddlewareBefore(writer, FINALIZE_MIDDLEWARE,
+                                    computePayloadSHA256Middleware, "$T{}", stackOperand);
+
+                            // newSignHttpRequestMiddleware
+                            Symbol newSignHTTPRequestMiddleware = SymbolUtils.createValueSymbolBuilder(
+                                    "NewSignHTTPRequestMiddleware", AwsGoDependency.AWS_V4SIGNER_MIDDLEWARE
+                            ).build();
+
+                            writeAddMiddlewareAfter(writer, FINALIZE_MIDDLEWARE,
+                                    newSignHTTPRequestMiddleware, "&$T(options.Signer)", stackOperand);
+                        }).build()
         );
     }
 }
