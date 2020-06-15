@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Consumer;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
@@ -28,6 +30,7 @@ import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.TriConsumer;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.utils.SetUtils;
 import software.amazon.smithy.utils.SmithyBuilder;
 
 /**
@@ -42,33 +45,30 @@ public class AddAwsConfigFields implements GoIntegration {
     private static final String LOG_LEVEL_CONFIG_NAME = "LogLevel";
     private static final String RETRYER_CONFIG_NAME = "Retryer";
 
-    private static final List<ConfigField> UNIVERSAL_FIELDS = new ArrayList<>();
-
-    static {
-        UNIVERSAL_FIELDS.add(ConfigField.builder(REGION_CONFIG_NAME, getUniversalSymbol("string"))
-                .documentation("The region to send requests to. (Required)")
-                .build());
-        UNIVERSAL_FIELDS.add(ConfigField.builder(CREDENTIALS_CONFIG_NAME, getAwsCoreSymbol("CredentialsProvider"))
-                .documentation("The credentials object to use when signing requests.")
-                .build());
-        UNIVERSAL_FIELDS.add(ConfigField.builder(ENDPOINT_RESOLVER_CONFIG_NAME, getAwsCoreSymbol("EndpointResolver"))
-                .documentation("The resolver to use for looking up endpoints for the service.")
-                .build());
-        UNIVERSAL_FIELDS.add(ConfigField.builder(HTTP_CLIENT_CONFIG_NAME, getAwsCoreSymbol("HTTPClient"), false)
-                .build());
-        UNIVERSAL_FIELDS.add(ConfigField.builder(RETRYER_CONFIG_NAME, getAwsCoreSymbol("Retryer"))
-                .documentation("Retryer guides how HTTP requests should be retried in case of\n"
-                        + "recoverable failures. When nil the API client will use a default\n"
-                        + "retryer.")
-                .build());
-        UNIVERSAL_FIELDS.add(ConfigField.builder(LOG_LEVEL_CONFIG_NAME, getAwsCoreSymbol("LogLevel"))
-                .documentation("An integer value representing the logging level.")
-                .build());
-        UNIVERSAL_FIELDS.add(ConfigField.builder(LOGGER_CONFIG_NAME, getAwsCoreSymbol("Logger"))
-                .documentation("The logger writer interface to write logging messages to.")
-                .build());
-        UNIVERSAL_FIELDS.sort(Comparator.comparing(ConfigField::getClientConfigField));
-    }
+    private static final Set<ConfigField> UNIVERSAL_FIELDS = new TreeSet<>(SetUtils.of(
+            ConfigField.builder(REGION_CONFIG_NAME, getUniversalSymbol("string"))
+                    .documentation("The region to send requests to. (Required)")
+                    .build(),
+            ConfigField.builder(CREDENTIALS_CONFIG_NAME, getAwsCoreSymbol("CredentialsProvider"))
+                    .documentation("The credentials object to use when signing requests.")
+                    .build(),
+            ConfigField.builder(ENDPOINT_RESOLVER_CONFIG_NAME, getAwsCoreSymbol("EndpointResolver"))
+                    .documentation("The resolver to use for looking up endpoints for the service.")
+                    .build(),
+            ConfigField.builder(HTTP_CLIENT_CONFIG_NAME, getAwsCoreSymbol("HTTPClient"), false)
+                    .build(),
+            ConfigField.builder(RETRYER_CONFIG_NAME, getAwsCoreSymbol("Retryer"))
+                    .documentation("Retryer guides how HTTP requests should be retried in case of\n"
+                            + "recoverable failures. When nil the API client will use a default\n"
+                            + "retryer.")
+                    .build(),
+            ConfigField.builder(LOG_LEVEL_CONFIG_NAME, getAwsCoreSymbol("LogLevel"))
+                    .documentation("An integer value representing the logging level.")
+                    .build(),
+            ConfigField.builder(LOGGER_CONFIG_NAME, getAwsCoreSymbol("Logger"))
+                    .documentation("The logger writer interface to write logging messages to.")
+                    .build()
+    ));
 
     private static Symbol getAwsCoreSymbol(String symbolName) {
         return SymbolUtils.createPointableSymbolBuilder(symbolName,
@@ -92,18 +92,20 @@ public class AddAwsConfigFields implements GoIntegration {
 
     private void writeAwsConfigConstructor(GoWriter writer) {
         writer.writeDocs("NewFromConfig returns a new client from the provided config.");
-        writer.openBlock("func NewFromConfig(cfg $T, options ... func(*Options)) *Client {", "}", getAwsCoreSymbol("Config"), () -> {
-            writer.openBlock("opts := Options{", "}", () -> {
-                UNIVERSAL_FIELDS.forEach(configField -> {
-                    writer.write("$L: cfg.$L,", configField.getClientConfigField(), configField.getAwsConfigField());
+        writer.openBlock("func NewFromConfig(cfg $T, optFns ... func(*Options)) *Client {", "}",
+                getAwsCoreSymbol("Config"), () -> {
+                    writer.openBlock("opts := Options{", "}", () -> {
+                        UNIVERSAL_FIELDS.forEach(configField -> {
+                            writer.write("$L: cfg.$L,", configField.getClientConfigField(),
+                                    configField.getAwsConfigField());
+                        });
+                    });
+                    writer.write("");
+                    writer.openBlock("for _, fn := range optFns {", "}", () -> {
+                        writer.write("fn(&opts)");
+                    });
+                    writer.write("return New(opts)");
                 });
-            });
-            writer.write("");
-            writer.openBlock("for _, o := range options {", "}", () -> {
-                writer.write("o(&opts)");
-            });
-            writer.write("return New(opts)");
-        });
         writer.write("");
     }
 
@@ -131,7 +133,7 @@ public class AddAwsConfigFields implements GoIntegration {
     /**
      * Represents a 1-1 config field relationship on the AWS SDK Config type and the service client options.
      */
-    public static final class ConfigField {
+    public static final class ConfigField implements Comparable<ConfigField> {
         private final String awsConfigField;
         private final String clientConfigField;
         private final String documentation;
@@ -204,7 +206,7 @@ public class AddAwsConfigFields implements GoIntegration {
          * Returns a builder for a {@link ConfigField} using the provided name and type symbol.
          * By default the builder will configure the field to be generated on the client options.
          *
-         * @param fieldName the field name for the aws config and client config
+         * @param fieldName  the field name for the aws config and client config
          * @param typeSymbol the type symbol
          * @return the builder
          */
@@ -216,8 +218,8 @@ public class AddAwsConfigFields implements GoIntegration {
          * Returns a builder for a {@link ConfigField} using the provided name and type symbol
          * By default the builder will configure the field to be generated on the client options.
          *
-         * @param fieldName the field name for the aws config and client config
-         * @param typeSymbol the type symbol
+         * @param fieldName        the field name for the aws config and client config
+         * @param typeSymbol       the type symbol
          * @param generateOnClient whether the field should be generated on the client options
          * @return the builder
          */
@@ -236,6 +238,11 @@ public class AddAwsConfigFields implements GoIntegration {
                     .clientConfigField(clientConfigField)
                     .typeSymbol(typeSymbol)
                     .generateOnClient(generateOnClient);
+        }
+
+        @Override
+        public int compareTo(ConfigField o) {
+            return this.getClientConfigField().compareTo(o.getClientConfigField());
         }
 
         private static class Builder implements SmithyBuilder<ConfigField> {
