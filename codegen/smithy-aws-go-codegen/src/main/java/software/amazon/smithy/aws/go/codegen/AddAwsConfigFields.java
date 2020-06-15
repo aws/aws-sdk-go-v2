@@ -92,12 +92,17 @@ public class AddAwsConfigFields implements GoIntegration {
 
     private void writeAwsConfigConstructor(GoWriter writer) {
         writer.writeDocs("NewFromConfig returns a new client from the provided config.");
-        writer.openBlock("func NewFromConfig(cfg $T) *Client {", "}", getAwsCoreSymbol("Config"), () -> {
-            writer.openBlock("return New(Options{", "})", () -> {
+        writer.openBlock("func NewFromConfig(cfg $T, options ... func(*Options)) *Client {", "}", getAwsCoreSymbol("Config"), () -> {
+            writer.openBlock("opts := Options{", "}", () -> {
                 UNIVERSAL_FIELDS.forEach(configField -> {
                     writer.write("$L: cfg.$L,", configField.getClientConfigField(), configField.getAwsConfigField());
                 });
             });
+            writer.write("");
+            writer.openBlock("for _, o := range options {", "}", () -> {
+                writer.write("o(&opts)");
+            });
+            writer.write("return New(opts)");
         });
         writer.write("");
     }
