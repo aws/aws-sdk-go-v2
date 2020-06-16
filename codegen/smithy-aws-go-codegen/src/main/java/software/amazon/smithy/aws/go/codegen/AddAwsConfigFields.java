@@ -19,6 +19,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoSettings;
@@ -83,6 +84,9 @@ public class AddAwsConfigFields implements GoIntegration {
             SymbolProvider symbolProvider,
             TriConsumer<String, String, Consumer<GoWriter>> writerFactory
     ) {
+        Set<ConfigField> fields = new TreeSet<>(UNIVERSAL_FIELDS);
+
+
         writerFactory.accept("api_client.go", settings.getModuleName(), this::writeAwsConfigConstructor);
     }
 
