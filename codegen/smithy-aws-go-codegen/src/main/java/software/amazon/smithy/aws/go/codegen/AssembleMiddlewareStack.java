@@ -38,7 +38,7 @@ public class AssembleMiddlewareStack implements GoIntegration{
     ) {
         String st = String.format("%s.%s.Add(%s, middleware.After)", stackOperand, stackstep, content);
         writer.write(st, middlewareSymbol);
-        writer.addUseImports(AwsGoDependency.AWS_MIDDLEWARE);
+        writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
     }
 
     /**
@@ -58,7 +58,7 @@ public class AssembleMiddlewareStack implements GoIntegration{
     ) {
         String st = String.format("%s.%s.Add(%s, middleware.After)", stackOperand, stackstep, content);
         writer.write(st, middlewareName);
-        writer.addUseImports(AwsGoDependency.AWS_MIDDLEWARE);
+        writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
     }
 
     /**
@@ -78,7 +78,7 @@ public class AssembleMiddlewareStack implements GoIntegration{
     ) {
         String st = String.format("%s.%s.Add(%s, middleware.Before)", stackOperand, stackstep, content);
         writer.write(st, middlewareSymbol);
-        writer.addUseImports(AwsGoDependency.AWS_MIDDLEWARE);
+        writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class AssembleMiddlewareStack implements GoIntegration{
                                 "RequestInvocationIDMiddleware", AwsGoDependency.AWS_MIDDLEWARE
                         ).build();
 
-                        writeAddMiddlewareAfter(writer, INITIALIZE_MIDDLEWARE,
+                        writeAddMiddlewareAfter(writer, BUILD_MIDDLEWARE,
                                 RequestInvocationIDMiddleware, "$T{}", stackOperand);
                     }).build(),
 
@@ -141,7 +141,7 @@ public class AssembleMiddlewareStack implements GoIntegration{
                             ).build();
 
                             writeAddMiddlewareAfter(writer, FINALIZE_MIDDLEWARE,
-                                    newAttemptMiddleware, "$T(options.Retryer)", stackOperand);
+                                    newAttemptMiddleware, "$T(options.Retryer, smithyhttp.RequestCloner)", stackOperand);
                         }).build(),
 
                 // Add retry middleware to operation stack
