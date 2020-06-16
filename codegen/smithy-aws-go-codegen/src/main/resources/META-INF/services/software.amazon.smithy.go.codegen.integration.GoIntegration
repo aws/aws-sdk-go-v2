@@ -1,1 +1,2 @@
 software.amazon.smithy.aws.go.codegen.AddProtocols
+software.amazon.smithy.aws.go.codegen.AssembleMiddlewareStack
