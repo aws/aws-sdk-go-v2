@@ -65,7 +65,7 @@ func main() {
 	}
 
 	// Set the AWS Region that the service clients should use
-	cfg.Region = endpoints.UsWest2RegionID
+	cfg.Region = "us-west-2"
 
 	// Using the Config value, create the DynamoDB client
 	svc := dynamodb.New(cfg)
