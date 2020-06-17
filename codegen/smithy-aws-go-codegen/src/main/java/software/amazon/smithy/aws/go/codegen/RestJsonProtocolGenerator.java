@@ -32,6 +32,10 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.HttpBindingProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
+import software.amazon.smithy.go.codegen.integration.HttpProtocolTestGenerator;
+import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestRequestGenerator;
+import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestResponseErrorGenerator;
+import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestResponseGenerator;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.HttpBinding;
 import software.amazon.smithy.model.knowledge.HttpBindingIndex;
@@ -170,7 +174,17 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 generateSimpleShapeToJsonValue(model, writer, memberShape, operand, (w, s) -> w.write("av.$L", s));
             }
         });
+	}
+
+    @Override
+    public void generateProtocolTests(GenerationContext context) {
+        new HttpProtocolTestGenerator(context,
+                new HttpProtocolUnitTestRequestGenerator.Builder(),
+                new HttpProtocolUnitTestResponseGenerator.Builder(),
+                new HttpProtocolUnitTestResponseErrorGenerator.Builder()
+        ).generateProtocolTests();
     }
+
 
     private void writeShapeToJsonObject(
             Model model,
