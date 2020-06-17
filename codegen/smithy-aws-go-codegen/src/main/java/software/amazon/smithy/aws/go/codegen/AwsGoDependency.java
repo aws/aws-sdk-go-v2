@@ -22,6 +22,7 @@ import software.amazon.smithy.go.codegen.GoDependency;
  */
 public final class AwsGoDependency {
     public static final GoDependency AWS_REST_JSON_PROTOCOL = aws("aws/protocol/restjson");
+    public static final GoDependency AWS_CORE = aws("aws");
     public static final GoDependency AWS_MIDDLEWARE = aws("aws/middleware", "awsmiddleware");
     public static final GoDependency AWS_RETRY_MIDDLEWARE = aws("aws/retry");
     public static final GoDependency AWS_V4SIGNER_MIDDLEWARE = aws("aws/signer/v4");
