@@ -70,9 +70,8 @@ public class AddAwsConfigFields implements GoIntegration {
             ConfigField.builder()
                     .name(HTTP_SIGNER_CONFIG_NAME)
                     .type(getAwsSignerV4Symbol("HTTPSigner"))
-                    .documentation("Retryer guides how HTTP requests should be retried in case of\n"
-                            + "recoverable failures. When nil the API client will use a default\n"
-                            + "retryer.")
+                    .documentation("HTTPSigner provides AWS request signing for HTTP requests made\n"
+                            + "from the client. When nil the API client will use a default signer.")
                     .build(),
             ConfigField.builder()
                     .name(LOG_LEVEL_CONFIG_NAME)
