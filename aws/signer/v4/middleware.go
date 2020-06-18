@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	v4Internal "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/awslabs/smithy-go/middleware"
@@ -116,40 +117,18 @@ func (s *SignHTTPRequestMiddleware) HandleFinalize(ctx context.Context, in middl
 		return out, metadata, &SigningError{Err: fmt.Errorf("unexpected request middleware type %T", in.Request)}
 	}
 
-	signingMetadata := GetSigningMetadata(ctx)
+	signingName, signingRegion := awsmiddleware.GetSigningName(ctx), awsmiddleware.GetSigningRegion(ctx)
 	payloadHash := GetPayloadHash(ctx)
 	if len(payloadHash) == 0 {
 		return out, metadata, &SigningError{Err: fmt.Errorf("computed payload hash missing from context")}
 	}
 
-	err = s.signer.SignHTTP(ctx, req.Request, payloadHash, signingMetadata.SigningName, signingMetadata.SigningRegion, sdk.NowTime())
+	err = s.signer.SignHTTP(ctx, req.Request, payloadHash, signingName, signingRegion, sdk.NowTime())
 	if err != nil {
 		return out, metadata, &SigningError{Err: fmt.Errorf("failed to sign http request, %w", err)}
 	}
 
 	return next.HandleFinalize(ctx, in)
-}
-
-// SigningMetadata contains the signing name and signing region to be used when signing
-// with SigV4 authentication scheme.
-type SigningMetadata struct {
-	SigningName   string
-	SigningRegion string
-}
-
-type signingMetadataKey struct{}
-
-// GetSigningMetadata retrieves the SigningMetadata from context. If there is no SigningMetadata attached to the context
-// an zero-value SigningMetadata will be returned.
-func GetSigningMetadata(ctx context.Context) (v SigningMetadata) {
-	v, _ = ctx.Value(signingMetadataKey{}).(SigningMetadata)
-	return v
-}
-
-// SetSigningMetadata adds the provided metadata to the context
-func SetSigningMetadata(ctx context.Context, metadata SigningMetadata) context.Context {
-	ctx = context.WithValue(ctx, signingMetadataKey{}, metadata)
-	return ctx
 }
 
 type payloadHashKey struct{}
