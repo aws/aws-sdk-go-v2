@@ -30,7 +30,7 @@ func (r ResolveServiceEndpoint) HandleSerialize(
 	}
 
 	var endpoint aws.Endpoint
-	endpoint, err = r.Resolver.ResolveEndpoint(GetServiceName(ctx), GetEndpointID(ctx))
+	endpoint, err = r.Resolver.ResolveEndpoint(GetEndpointID(ctx), GetRegion(ctx))
 	if err != nil {
 		return out, metadata, fmt.Errorf("failed to resolve service endpoint ")
 	}
