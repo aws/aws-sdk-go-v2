@@ -17,8 +17,6 @@ package software.amazon.smithy.aws.go.codegen;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 import software.amazon.smithy.aws.traits.auth.SigV4Trait;
@@ -50,6 +48,7 @@ public class AddAwsConfigFields implements GoIntegration {
     private static final String LOGGER_CONFIG_NAME = "Logger";
     private static final String LOG_LEVEL_CONFIG_NAME = "LogLevel";
     private static final String RETRYER_CONFIG_NAME = "Retryer";
+    private static final String HTTP_SIGNER_CONFIG_NAME = "HTTPSigner";
     private static final List<ConfigField> UNIVERSAL_FIELDS = new ArrayList<>(SetUtils.of(
             ConfigField.builder()
                     .name(REGION_CONFIG_NAME)
@@ -69,6 +68,13 @@ public class AddAwsConfigFields implements GoIntegration {
                             + "retryer.")
                     .build(),
             ConfigField.builder()
+                    .name(HTTP_SIGNER_CONFIG_NAME)
+                    .type(getAwsSignerV4Symbol("HTTPSigner"))
+                    .documentation("Retryer guides how HTTP requests should be retried in case of\n"
+                            + "recoverable failures. When nil the API client will use a default\n"
+                            + "retryer.")
+                    .build(),
+            ConfigField.builder()
                     .name(LOG_LEVEL_CONFIG_NAME)
                     .type(getAwsCoreSymbol("LogLevel"))
                     .documentation("An integer value representing the logging level.")
@@ -83,6 +89,11 @@ public class AddAwsConfigFields implements GoIntegration {
     private static Symbol getAwsCoreSymbol(String symbolName) {
         return SymbolUtils.createValueSymbolBuilder(symbolName,
                 AwsGoDependency.AWS_CORE).build();
+    }
+
+    private static Symbol getAwsSignerV4Symbol(String symbolName) {
+        return SymbolUtils.createValueSymbolBuilder(symbolName,
+                AwsGoDependency.AWS_SIGNER_V4).build();
     }
 
     private static Symbol getUniversalSymbol(String symbolName) {
@@ -133,6 +144,10 @@ public class AddAwsConfigFields implements GoIntegration {
                                 continue;
                             }
                             plugin.getConfigFields().forEach(configField -> {
+                                if (configField.getName().equals(HTTP_SIGNER_CONFIG_NAME)) {
+                                    // TODO signer does not exist in config.
+                                    return;
+                                }
                                 writer.write("$L: cfg.$L,", configField.getName(), configField.getName());
                             });
                         }

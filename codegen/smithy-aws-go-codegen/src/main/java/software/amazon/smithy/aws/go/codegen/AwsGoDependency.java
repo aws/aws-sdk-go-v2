@@ -25,7 +25,7 @@ public final class AwsGoDependency {
     public static final GoDependency AWS_CORE = aws("aws");
     public static final GoDependency AWS_MIDDLEWARE = aws("aws/middleware", "awsmiddleware");
     public static final GoDependency AWS_RETRY_MIDDLEWARE = aws("aws/retry");
-    public static final GoDependency AWS_V4SIGNER_MIDDLEWARE = aws("aws/signer/v4");
+    public static final GoDependency AWS_SIGNER_V4 = aws("aws/signer/v4");
 
     public static final String AWS_SOURCE_PATH = "github.com/aws/aws-sdk-go-v2";
 
