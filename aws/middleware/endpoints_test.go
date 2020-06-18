@@ -22,10 +22,10 @@ func (m mockSerializeHandler) HandleSerialize(
 }
 
 func TestResolveServiceEndpoint(t *testing.T) {
-	initContext := func(serviceName, endpointID string, metadata OperationMetadata) context.Context {
+	initContext := func(endpointID, region string, metadata OperationMetadata) context.Context {
 		ctx := context.Background()
-		ctx = setServiceName(ctx, serviceName)
 		ctx = setEndpointID(ctx, endpointID)
+		ctx = setRegion(ctx, region)
 		ctx = setOperationMetadata(ctx, metadata)
 		return ctx
 	}
@@ -44,7 +44,7 @@ func TestResolveServiceEndpoint(t *testing.T) {
 					if e, a := "fooService", service; e != a {
 						t.Errorf("expected %v, got %v", e, a)
 					}
-					if e, a := "barEndpoint", region; e != a {
+					if e, a := "barRegion", region; e != a {
 						t.Errorf("expected %v, got %v", e, a)
 					}
 					return aws.Endpoint{
@@ -53,7 +53,7 @@ func TestResolveServiceEndpoint(t *testing.T) {
 					}, nil
 				})
 			},
-			Context: initContext("fooService", "barEndpoint", OperationMetadata{HTTPPath: "/foo"}),
+			Context: initContext("fooService", "barRegion", OperationMetadata{HTTPPath: "/foo"}),
 			Input:   middleware.SerializeInput{Request: &smithyhttp.Request{Request: &http.Request{}}},
 			Handler: func(t *testing.T) mockSerializeHandler {
 				return func(ctx context.Context, in middleware.SerializeInput) (out middleware.SerializeOutput, metadata middleware.Metadata, err error) {
