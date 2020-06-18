@@ -145,7 +145,7 @@ public class AddAwsConfigFields implements GoIntegration {
                             }
                             plugin.getConfigFields().forEach(configField -> {
                                 if (configField.getName().equals(HTTP_SIGNER_CONFIG_NAME)) {
-                                    // TODO signer does not exist in config.
+                                    // TODO signer does not exist in the aws.Config.
                                     return;
                                 }
                                 writer.write("$L: cfg.$L,", configField.getName(), configField.getName());
