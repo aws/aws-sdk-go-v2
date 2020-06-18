@@ -167,11 +167,11 @@ public class AssembleMiddlewareStack implements GoIntegration{
                         .buildMiddlewareStack((writer, service, operation, protocolGenerator, stackOperand) -> {
                             // unsignedPayloadSignerMiddleware
                             Symbol unsignedPayloadSignerMiddleware = SymbolUtils.createValueSymbolBuilder(
-                                    "UnsignedPayloadMiddleware", AwsGoDependency.AWS_V4SIGNER_MIDDLEWARE
+                                    "UnsignedPayloadMiddleware", AwsGoDependency.AWS_SIGNER_V4
                             ).build();
 
                             writeAddMiddlewareAfter(writer, FINALIZE_MIDDLEWARE,
-                                    unsignedPayloadSignerMiddleware, "$T{}", stackOperand);
+                                    unsignedPayloadSignerMiddleware, "&$T{}", stackOperand);
                         }).build(),
 
                 // Add SigV4 middleware to operation stack
@@ -187,19 +187,19 @@ public class AssembleMiddlewareStack implements GoIntegration{
                         .buildMiddlewareStack((writer, service, operation, protocolGenerator, stackOperand) -> {
                             // computePayloadSHA256Middleware
                             Symbol computePayloadSHA256Middleware = SymbolUtils.createValueSymbolBuilder(
-                                    "ComputePayloadSHA256Middleware", AwsGoDependency.AWS_V4SIGNER_MIDDLEWARE
+                                    "ComputePayloadSHA256Middleware", AwsGoDependency.AWS_SIGNER_V4
                             ).build();
 
                             writeAddMiddlewareBefore(writer, FINALIZE_MIDDLEWARE,
-                                    computePayloadSHA256Middleware, "$T{}", stackOperand);
+                                    computePayloadSHA256Middleware, "&$T{}", stackOperand);
 
                             // newSignHttpRequestMiddleware
                             Symbol newSignHTTPRequestMiddleware = SymbolUtils.createValueSymbolBuilder(
-                                    "NewSignHTTPRequestMiddleware", AwsGoDependency.AWS_V4SIGNER_MIDDLEWARE
+                                    "NewSignHTTPRequestMiddleware", AwsGoDependency.AWS_SIGNER_V4
                             ).build();
 
                             writeAddMiddlewareAfter(writer, FINALIZE_MIDDLEWARE,
-                                    newSignHTTPRequestMiddleware, "&$T(options.Signer)", stackOperand);
+                                    newSignHTTPRequestMiddleware, "$T(options.HTTPSigner)", stackOperand);
                         }).build()
         );
     }
