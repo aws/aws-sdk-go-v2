@@ -66,7 +66,7 @@ cleanup-models:
 build:
 	go build -o /dev/null -tags ${ALL_TAGS} ${SDK_ALL_PKGS}
 
-unit: verify build
+unit: verify build test-protocols test-services
 	@echo "go test SDK and vendor packages"
 	@go test -tags ${UNIT_TEST_TAGS} ${SDK_ALL_PKGS}
 
@@ -74,7 +74,7 @@ unit-with-race-cover: verify build
 	@echo "go test SDK and vendor packages"
 	@go test -tags ${UNIT_TEST_TAGS} -race -cpu=1,2,4 ${SDK_ALL_PKGS}
 
-ci-test: generate unit-with-race-cover ci-test-generate-validate
+ci-test: generate unit-with-race-cover ci-test-generate-validate test-protocols test-services
 
 ci-test-generate-validate:
 	@echo "CI test validate no generated code changes"
@@ -84,6 +84,12 @@ ci-test-generate-validate:
 	git update-index --no-assume-unchanged go.mod go.sum
 	echo "$$gitstatus"; \
 	if [ "$$gitstatus" != "" ]; then echo "$$gitstatus"; exit 1; fi
+
+test-protocols:
+	./test_submodules.sh ~+/internal/protocoltest "go test -run NONE ./..."
+
+test-services:
+	./test_submodules.sh ~+/service "go test -run NONE ./..."
 
 #######################
 # Integration Testing #
