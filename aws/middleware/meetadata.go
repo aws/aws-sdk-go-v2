@@ -9,18 +9,12 @@ import (
 // RegisterServiceMetadata registers metadata about the service and operation into the middleware context
 // so that it is available at runtime for other middleware to introspect.
 type RegisterServiceMetadata struct {
-	ServiceName string
-	ServiceID   string
-	EndpointsID string
-	SigningName string
-	Region      string
-	Operation   OperationMetadata
-}
-
-// OperationMetadata metadata about the service operation.
-type OperationMetadata struct {
-	Name     string
-	HTTPPath string
+	ServiceName   string
+	ServiceID     string
+	EndpointID    string
+	SigningName   string
+	Region        string
+	OperationName string
 }
 
 // ID returns the middleware identifier.
@@ -38,8 +32,8 @@ func (s RegisterServiceMetadata) HandleInitialize(
 	if len(s.ServiceID) > 0 {
 		ctx = setServiceID(ctx, s.ServiceID)
 	}
-	if len(s.EndpointsID) > 0 {
-		ctx = setEndpointID(ctx, s.EndpointsID)
+	if len(s.EndpointID) > 0 {
+		ctx = setEndpointID(ctx, s.EndpointID)
 	}
 	if len(s.SigningName) > 0 {
 		ctx = SetSigningName(ctx, s.SigningName)
@@ -47,21 +41,22 @@ func (s RegisterServiceMetadata) HandleInitialize(
 	if len(s.Region) > 0 {
 		ctx = setRegion(ctx, s.Region)
 	}
-	if s.Operation != (OperationMetadata{}) {
-		ctx = setOperationMetadata(ctx, s.Operation)
+	if len(s.OperationName) > 0 {
+		ctx = setOperationName(ctx, s.OperationName)
 	}
 	return next.HandleInitialize(ctx, in)
 }
 
 // service metadata keys for storing and lookup of runtime stack information.
 type (
-	serviceNameKey       struct{}
-	serviceIDKey         struct{}
-	endpointIDKey        struct{}
-	signingNameKey       struct{}
-	signingRegionKey     struct{}
-	regionKey            struct{}
-	operationMetadataKey struct{}
+	serviceNameKey     struct{}
+	serviceIDKey       struct{}
+	endpointIDKey      struct{}
+	signingNameKey     struct{}
+	signingRegionKey   struct{}
+	regionKey          struct{}
+	operationNameKey   struct{}
+	serviceEndpointKey struct{}
 )
 
 // GetServiceName retrieves the service name from the context.
@@ -100,34 +95,30 @@ func GetRegion(ctx context.Context) (v string) {
 	return v
 }
 
-// GetOperationMetadata retrieves the service operation metadata from the context.
-func GetOperationMetadata(ctx context.Context) (v OperationMetadata) {
-	v, _ = ctx.Value(operationMetadataKey{}).(OperationMetadata)
+// GetOperationName retrieves the service operation metadata from the context.
+func GetOperationName(ctx context.Context) (v string) {
+	v, _ = ctx.Value(operationNameKey{}).(string)
 	return v
 }
 
 // SetSigningName set or modifies the signing name on the context.
 func SetSigningName(ctx context.Context, value string) context.Context {
-	ctx = context.WithValue(ctx, signingNameKey{}, value)
-	return ctx
+	return context.WithValue(ctx, signingNameKey{}, value)
 }
 
 // SetSigningRegion sets or modifies the region on the context.
 func SetSigningRegion(ctx context.Context, value string) context.Context {
-	ctx = context.WithValue(ctx, signingRegionKey{}, value)
-	return ctx
+	return context.WithValue(ctx, signingRegionKey{}, value)
 }
 
 // setServiceName sets the service name on the context.
 func setServiceName(ctx context.Context, value string) context.Context {
-	ctx = context.WithValue(ctx, serviceNameKey{}, value)
-	return ctx
+	return context.WithValue(ctx, serviceNameKey{}, value)
 }
 
 // setServiceID sets the service id on the context.
 func setServiceID(ctx context.Context, value string) context.Context {
-	ctx = context.WithValue(ctx, serviceIDKey{}, value)
-	return ctx
+	return context.WithValue(ctx, serviceIDKey{}, value)
 }
 
 // setEndpointID sets the service endpoint id on the context.
@@ -140,7 +131,7 @@ func setRegion(ctx context.Context, value string) context.Context {
 	return context.WithValue(ctx, regionKey{}, value)
 }
 
-// setOperationMetadata sets the service operation on the context.
-func setOperationMetadata(ctx context.Context, value OperationMetadata) context.Context {
-	return context.WithValue(ctx, operationMetadataKey{}, value)
+// setOperationName sets the service operation on the context.
+func setOperationName(ctx context.Context, value string) context.Context {
+	return context.WithValue(ctx, operationNameKey{}, value)
 }
