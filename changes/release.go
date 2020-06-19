@@ -16,4 +16,3 @@ type Release struct {
 func (r *Release) SetSchemaVersion(version string) {
 	r.SchemaVersion = version
 }
-

@@ -107,7 +107,6 @@ func modifyCmd(metadata *changes.Metadata, id string) {
 		os.Exit(1)
 	}
 
-
 	filledTemplate, err := editTemplate(changes.ChangeToTemplate(change))
 	if err != nil {
 		fmt.Printf("failed to modify change: %v\n", err)

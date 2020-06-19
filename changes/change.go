@@ -25,9 +25,9 @@ type Change struct {
 
 func NewChange(modules []string, changeType, description string) *Change {
 	return &Change{
-		Id: generateId(modules[0], changeType),
-		Modules: modules,
-		Type: changeType,
+		Id:          generateId(modules[0], changeType),
+		Modules:     modules,
+		Type:        changeType,
 		Description: description,
 	}
 }

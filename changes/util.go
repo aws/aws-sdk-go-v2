@@ -16,7 +16,7 @@ type VersionedSchema interface {
 func writeFile(data VersionedSchema, root, dir, name string) error {
 	data.SetSchemaVersion(SchemaVersion)
 
-	filePath := filepath.Join(root, dir, name + ".json")
+	filePath := filepath.Join(root, dir, name+".json")
 	changeBytes, err := json.MarshalIndent(data, "", " ")
 	if err != nil {
 		return err
@@ -32,7 +32,7 @@ func fileExists(path string, dir bool) (bool, error) {
 		}
 
 		return true, nil
-	} else if os.IsNotExist(err){
+	} else if os.IsNotExist(err) {
 		return false, nil
 	} else {
 		return false, err
