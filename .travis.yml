@@ -1,13 +1,12 @@
 language: go
-
-sudo: required
+sudo: true
+dist: bionic
 
 os:
     - linux
-    - osx
 go:
-    - 1.11.x
-    - 1.12.x
+    - 1.13.x
+    - 1.14.x
     - tip
 
 matrix:
@@ -17,6 +16,28 @@ matrix:
 script:
     make ci-test;
 
-branches:
-  only:
-    - master
+# Unable to enable Smithy SDK build automation because smithy-go is not published.
+matrix:
+  include:
+    - language: java
+      jdk: openjdk8
+      before_script:
+          - rm -rf /tmp/smithy-go
+          - git clone https://github.com/awslabs/smithy-go /tmp/smithy-go
+          - pushd /tmp/smithy-go/codegen
+          - ./gradlew clean publishToMavenLocal -Plog-tests
+          - popd
+      script:
+          - make smithy-generate # generation is not stable ci-test-generate-validate
+
+    - language: java
+      jdk: openjdk11
+      before_script:
+          - rm -rf /tmp/smithy-go
+          - git clone https://github.com/awslabs/smithy-go /tmp/smithy-go
+          - pushd /tmp/smithy-go/codegen
+          - ./gradlew clean publishToMavenLocal -Plog-tests
+          - popd
+      script:
+          - make smithy-generate # generation is not stable ci-test-generate-validate
+

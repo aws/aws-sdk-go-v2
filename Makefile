@@ -30,6 +30,9 @@ all: generate unit
 ###################
 generate: cleanup-models gen-test gen-endpoints gen-services gen-external-asserts
 
+smithy-generate:
+	cd codegen && ./gradlew clean build -Plog-tests
+
 gen-test: gen-protocol-test gen-codegen-test
 
 #gen-codegen-test:
@@ -81,9 +84,10 @@ ci-test-generate-validate:
 	git update-index --assume-unchanged go.mod go.sum
 	git add . -A
 	gitstatus=`git diff --cached --ignore-space-change`; \
-	git update-index --no-assume-unchanged go.mod go.sum
 	echo "$$gitstatus"; \
-	if [ "$$gitstatus" != "" ]; then echo "$$gitstatus"; exit 1; fi
+	if [ "$$gitstatus" != "" ] && [ "$$gitstatus" != "skipping validation" ]; then echo "$$gitstatus"; exit 1; fi
+	git update-index --no-assume-unchanged go.mod go.sum
+
 
 test-protocols:
 	./test_submodules.sh ~+/internal/protocoltest "go test -run NONE ./..."
