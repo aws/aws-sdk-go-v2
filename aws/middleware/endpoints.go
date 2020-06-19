@@ -35,26 +35,29 @@ func (r ResolveServiceEndpoint) HandleSerialize(
 		return out, metadata, fmt.Errorf("failed to resolve service endpoint ")
 	}
 
-	operationMetadata := GetOperationMetadata(ctx)
-	req.URL, err = url.Parse(endpoint.URL + operationMetadata.HTTPPath)
+	req.URL, err = url.Parse(endpoint.URL)
 	if err != nil {
 		return out, metadata, fmt.Errorf("failed to parse endpoint URL: %w", err)
 	}
 
+	if len(endpoint.SigningName) > 0 && (len(GetSigningName(ctx)) == 0 || !endpoint.SigningNameDerived) {
+		ctx = SetSigningName(ctx, endpoint.SigningName)
+	}
 	ctx = SetSigningRegion(ctx, endpoint.SigningRegion)
+
 	return next.HandleSerialize(ctx, in)
 }
 
 // ResolveServiceEndpointOptions is an interface for retrieving options to configure a ResolveServiceEndpoint middleware.
 type ResolveServiceEndpointOptions interface {
-	GetResolver() aws.EndpointResolver
+	GetEndpointResolver() aws.EndpointResolver
 }
 
 // AddResolveServiceEndpointMiddleware creates a ResolveServiceEndpoint middleware with the provided options
 // and registers it on the provided stack.
 func AddResolveServiceEndpointMiddleware(stack *middleware.Stack, options ResolveServiceEndpointOptions) error {
 	m := ResolveServiceEndpoint{
-		Resolver: options.GetResolver(),
+		Resolver: options.GetEndpointResolver(),
 	}
 	return stack.Serialize.Add(m, middleware.Before)
 }

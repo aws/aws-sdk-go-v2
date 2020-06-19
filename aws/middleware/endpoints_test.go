@@ -22,11 +22,11 @@ func (m mockSerializeHandler) HandleSerialize(
 }
 
 func TestResolveServiceEndpoint(t *testing.T) {
-	initContext := func(endpointID, region string, metadata OperationMetadata) context.Context {
+	initContext := func(signingName, endpointID, region string) context.Context {
 		ctx := context.Background()
+		ctx = SetSigningName(ctx, signingName)
 		ctx = setEndpointID(ctx, endpointID)
 		ctx = setRegion(ctx, region)
-		ctx = setOperationMetadata(ctx, metadata)
 		return ctx
 	}
 
@@ -53,7 +53,7 @@ func TestResolveServiceEndpoint(t *testing.T) {
 					}, nil
 				})
 			},
-			Context: initContext("fooService", "barRegion", OperationMetadata{HTTPPath: "/foo"}),
+			Context: initContext("foo", "fooService", "barRegion"),
 			Input:   middleware.SerializeInput{Request: &smithyhttp.Request{Request: &http.Request{}}},
 			Handler: func(t *testing.T) mockSerializeHandler {
 				return func(ctx context.Context, in middleware.SerializeInput) (out middleware.SerializeOutput, metadata middleware.Metadata, err error) {
@@ -61,8 +61,10 @@ func TestResolveServiceEndpoint(t *testing.T) {
 					if e, a := "us-west-2", GetSigningRegion(ctx); e != a {
 						t.Errorf("expected %v, got %v", e, a)
 					}
-					req := in.Request.(*smithyhttp.Request)
-					if e, a := "https://foo.us-west-2.amazonaws.com/foo", req.URL.String(); e != a {
+					if e, a := "foo", GetSigningName(ctx); e != a {
+						t.Errorf("expected %v, got %v", e, a)
+					}
+					if e, a := "https://foo.us-west-2.amazonaws.com", in.Request.(*smithyhttp.Request).URL.String(); e != a {
 						t.Errorf("expected %v, got %v", e, a)
 					}
 					return out, metadata, err
@@ -71,14 +73,82 @@ func TestResolveServiceEndpoint(t *testing.T) {
 		},
 		{
 			Resolver: func(t *testing.T) aws.EndpointResolver {
-				return nil
+				return aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
+					return aws.Endpoint{
+						URL: "://invalid",
+					}, nil
+				})
 			},
-			Context: context.Background(),
-			Input:   middleware.SerializeInput{Request: struct{}{}},
+			Context: initContext("foo", "fooService", "barRegion"),
+			Input:   middleware.SerializeInput{Request: &smithyhttp.Request{Request: &http.Request{}}},
 			Handler: func(t *testing.T) mockSerializeHandler {
 				return nil
 			},
-			ExpectedError: "unknown transport type",
+			ExpectedError: "failed to parse endpoint URL",
+		},
+		{
+			Resolver: func(t *testing.T) aws.EndpointResolver {
+				return aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
+					return aws.Endpoint{
+						URL:         "https://foo.us-west-2.amazonaws.com",
+						SigningName: "bar",
+					}, nil
+				})
+			},
+			Context: initContext("foo", "", ""),
+			Input:   middleware.SerializeInput{Request: &smithyhttp.Request{Request: &http.Request{}}},
+			Handler: func(t *testing.T) mockSerializeHandler {
+				return func(ctx context.Context, in middleware.SerializeInput) (out middleware.SerializeOutput, metadata middleware.Metadata, err error) {
+					t.Helper()
+					if e, a := "bar", GetSigningName(ctx); e != a {
+						t.Errorf("expected %v, got %v", e, a)
+					}
+					return out, metadata, err
+				}
+			},
+		},
+		{
+			Resolver: func(t *testing.T) aws.EndpointResolver {
+				return aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
+					return aws.Endpoint{
+						URL:         "https://foo.us-west-2.amazonaws.com",
+						SigningName: "bar",
+					}, nil
+				})
+			},
+			Context: initContext("", "", ""),
+			Input:   middleware.SerializeInput{Request: &smithyhttp.Request{Request: &http.Request{}}},
+			Handler: func(t *testing.T) mockSerializeHandler {
+				return func(ctx context.Context, in middleware.SerializeInput) (out middleware.SerializeOutput, metadata middleware.Metadata, err error) {
+					t.Helper()
+					if e, a := "bar", GetSigningName(ctx); e != a {
+						t.Errorf("expected %v, got %v", e, a)
+					}
+					return out, metadata, err
+				}
+			},
+		},
+		{
+			Resolver: func(t *testing.T) aws.EndpointResolver {
+				return aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
+					return aws.Endpoint{
+						URL:                "https://foo.us-west-2.amazonaws.com",
+						SigningName:        "bar",
+						SigningNameDerived: true,
+					}, nil
+				})
+			},
+			Context: initContext("foo", "bar", ""),
+			Input:   middleware.SerializeInput{Request: &smithyhttp.Request{Request: &http.Request{}}},
+			Handler: func(t *testing.T) mockSerializeHandler {
+				return func(ctx context.Context, in middleware.SerializeInput) (out middleware.SerializeOutput, metadata middleware.Metadata, err error) {
+					t.Helper()
+					if e, a := "foo", GetSigningName(ctx); e != a {
+						t.Errorf("expected %v, got %v", e, a)
+					}
+					return out, metadata, err
+				}
+			},
 		},
 		{
 			Resolver: func(t *testing.T) aws.EndpointResolver {
@@ -96,17 +166,14 @@ func TestResolveServiceEndpoint(t *testing.T) {
 		},
 		{
 			Resolver: func(t *testing.T) aws.EndpointResolver {
-				return aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
-					t.Helper()
-					return aws.Endpoint{URL: "://malformed/foo"}, nil
-				})
+				return nil
 			},
 			Context: context.Background(),
-			Input:   middleware.SerializeInput{Request: &smithyhttp.Request{Request: &http.Request{}}},
+			Input:   middleware.SerializeInput{Request: struct{}{}},
 			Handler: func(t *testing.T) mockSerializeHandler {
 				return nil
 			},
-			ExpectedError: "failed to parse endpoint URL",
+			ExpectedError: "unknown transport type",
 		},
 	}
 

@@ -105,22 +105,17 @@ public class AssembleMiddlewareStack implements GoIntegration {
                             builder.append("Region: options.Region,\n");
                             if (serviceTrait.isPresent()) {
                                 ServiceTrait trait = serviceTrait.get();
-                                String sdkAsSymbol = trait.getSdkId().toLowerCase().replaceAll("\\s+", "");
+                                String sdkIdAsSymbol = trait.getSdkId().toLowerCase().replaceAll("\\s+", "");
                                 builder.append(String.format("ServiceName: \"%s\",\n", trait.getSdkId()));
-                                builder.append(String.format("ServiceID: \"%s\",\n", sdkAsSymbol));
+                                builder.append(String.format("ServiceID: \"%s\",\n", sdkIdAsSymbol));
                                 // TODO: EndpointID can be different but is not modeled in Smithy.
-                                builder.append(String.format("EndpointID: \"%s\",\n", sdkAsSymbol));
+                                builder.append(String.format("EndpointID: \"%s\",\n", sdkIdAsSymbol));
                             }
                             if (sigV4Trait.isPresent()) {
                                 SigV4Trait trait = sigV4Trait.get();
                                 builder.append(String.format("SigningName: \"%s\",\n", trait.getName()));
                             }
-                            builder.append("Operation: awsmiddleware.OperationMetadata{\n"
-                                    + String.format("Name: \"%s\",\n", operation.getId().getName())
-                                    + String.format("HTTPPath: \"%s\",\n", operation.getTrait(HttpTrait.class)
-                                    .map(httpTrait -> httpTrait.getUri().toString())
-                                    .orElse("/"))
-                                    + "},\n");
+                            builder.append(String.format("OperationName: \"%s\",\n", operation.getId().getName()));
                             builder.append("}");
 
                             writeAddMiddlewareBefore(writer, INITIALIZE_MIDDLEWARE, ServiceMetadataProvider,
