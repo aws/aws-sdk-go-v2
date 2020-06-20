@@ -9,15 +9,13 @@ go:
     - 1.14.x
     - tip
 
-matrix:
-    allow_failures:
-        - go: tip
-
 script:
     make ci-test;
 
-# Unable to enable Smithy SDK build automation because smithy-go is not published.
 matrix:
+  allow_failures:
+      - go: tip
+
   include:
     - language: java
       jdk: openjdk8
