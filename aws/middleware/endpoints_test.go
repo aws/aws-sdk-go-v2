@@ -174,6 +174,17 @@ func TestResolveServiceEndpoint(t *testing.T) {
 			},
 			ExpectedError: "unknown transport type",
 		},
+		"errors on nil resolver": {
+			Resolver: func(t *testing.T) aws.EndpointResolver {
+				return nil
+			},
+			Context: context.Background(),
+			Input:   middleware.SerializeInput{Request: &smithyhttp.Request{Request: &http.Request{}}},
+			Handler: func(t *testing.T) mockSerializeHandler {
+				return nil
+			},
+			ExpectedError: "expected endpoint resolver to not be nil",
+		},
 	}
 
 	for name, tt := range cases {
