@@ -84,13 +84,13 @@ func (r AttemptMiddleware) HandleFinalize(ctx context.Context, in smithymiddle.F
 
 		retryable := r.retryer.IsErrorRetryable(reqErr)
 		if !retryable {
-			return out, metadata, err
+			return out, metadata, reqErr
 		}
 
 		if maxAttempts > 0 && attemptNum >= maxAttempts {
 			err = &aws.MaxAttemptsError{
 				Attempt: attemptNum,
-				Err:     err,
+				Err:     reqErr,
 			}
 			return out, metadata, err
 		}

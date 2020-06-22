@@ -76,13 +76,15 @@ func (m *ComputePayloadSHA256Middleware) HandleFinalize(ctx context.Context, in 
 	}
 
 	hash := sha256.New()
-	_, err = io.Copy(hash, req.GetStream())
-	if err != nil {
-		return out, metadata, &HashComputationError{Err: fmt.Errorf("failed to compute payload hash, %w", err)}
-	}
+	if stream := req.GetStream(); stream != nil {
+		_, err = io.Copy(hash, stream)
+		if err != nil {
+			return out, metadata, &HashComputationError{Err: fmt.Errorf("failed to compute payload hash, %w", err)}
+		}
 
-	if err := req.RewindStream(); err != nil {
-		return out, metadata, &HashComputationError{Err: fmt.Errorf("failed to seek body to start, %w", err)}
+		if err := req.RewindStream(); err != nil {
+			return out, metadata, &HashComputationError{Err: fmt.Errorf("failed to seek body to start, %w", err)}
+		}
 	}
 
 	ctx = SetPayloadHash(ctx, hex.EncodeToString(hash.Sum(nil)))
