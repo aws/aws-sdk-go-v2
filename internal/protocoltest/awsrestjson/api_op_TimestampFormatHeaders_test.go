@@ -4,6 +4,7 @@ package awsrestjson
 import (
 	"bytes"
 	"context"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytesting "github.com/awslabs/smithy-go/testing"
@@ -64,13 +65,6 @@ func TestClient_TimestampFormatHeaders_awsRestjson1Serialize(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			var actualReq *http.Request
 			client := New(Options{
-				APIOptions: []APIOptionFunc{
-					func(s *middleware.Stack) error {
-						s.Build.Clear()
-						s.Finalize.Clear()
-						return nil
-					},
-				},
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
 					actualReq = r
 					return &http.Response{
@@ -79,7 +73,19 @@ func TestClient_TimestampFormatHeaders_awsRestjson1Serialize(t *testing.T) {
 						Body:       ioutil.NopCloser(strings.NewReader("")),
 					}, nil
 				}),
-			})
+				APIOptions: []APIOptionFunc{
+					func(s *middleware.Stack) error {
+						s.Build.Clear()
+						s.Finalize.Clear()
+						return nil
+					},
+				},
+				EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (e aws.Endpoint, err error) {
+					e.URL = "https://127.0.0.1"
+					e.SigningRegion = "us-west-2"
+					return e, err
+				}),
+				Region: "us-west-2"})
 			result, err := client.TimestampFormatHeaders(context.Background(), c.Params)
 			if err != nil {
 				t.Fatalf("expect nil err, got %v", err)
@@ -147,13 +153,6 @@ func TestClient_TimestampFormatHeaders_awsRestjson1Deserialize(t *testing.T) {
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
 			client := New(Options{
-				APIOptions: []APIOptionFunc{
-					func(s *middleware.Stack) error {
-						s.Build.Clear()
-						s.Finalize.Clear()
-						return nil
-					},
-				},
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
 					return &http.Response{
 						StatusCode: c.StatusCode,
@@ -161,7 +160,19 @@ func TestClient_TimestampFormatHeaders_awsRestjson1Deserialize(t *testing.T) {
 						Body:       ioutil.NopCloser(bytes.NewReader(c.Body)),
 					}, nil
 				}),
-			})
+				APIOptions: []APIOptionFunc{
+					func(s *middleware.Stack) error {
+						s.Build.Clear()
+						s.Finalize.Clear()
+						return nil
+					},
+				},
+				EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (e aws.Endpoint, err error) {
+					e.URL = "https://127.0.0.1"
+					e.SigningRegion = "us-west-2"
+					return e, err
+				}),
+				Region: "us-west-2"})
 			var params TimestampFormatHeadersInput
 			result, err := client.TimestampFormatHeaders(context.Background(), &params)
 			if err != nil {
