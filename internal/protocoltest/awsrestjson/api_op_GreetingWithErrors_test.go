@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"context"
 	"errors"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
 	"github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/ptr"
@@ -44,13 +45,6 @@ func TestClient_GreetingWithErrors_awsRestjson1Deserialize(t *testing.T) {
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
 			client := New(Options{
-				APIOptions: []APIOptionFunc{
-					func(s *middleware.Stack) error {
-						s.Build.Clear()
-						s.Finalize.Clear()
-						return nil
-					},
-				},
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
 					return &http.Response{
 						StatusCode: c.StatusCode,
@@ -58,7 +52,19 @@ func TestClient_GreetingWithErrors_awsRestjson1Deserialize(t *testing.T) {
 						Body:       ioutil.NopCloser(bytes.NewReader(c.Body)),
 					}, nil
 				}),
-			})
+				APIOptions: []APIOptionFunc{
+					func(s *middleware.Stack) error {
+						s.Build.Clear()
+						s.Finalize.Clear()
+						return nil
+					},
+				},
+				EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (e aws.Endpoint, err error) {
+					e.URL = "https://127.0.0.1"
+					e.SigningRegion = "us-west-2"
+					return e, err
+				}),
+				Region: "us-west-2"})
 			var params GreetingWithErrorsInput
 			result, err := client.GreetingWithErrors(context.Background(), &params)
 			if err != nil {
@@ -200,13 +206,6 @@ func TestClient_GreetingWithErrors_FooError_awsRestjson1Deserialize(t *testing.T
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
 			client := New(Options{
-				APIOptions: []APIOptionFunc{
-					func(s *middleware.Stack) error {
-						s.Build.Clear()
-						s.Finalize.Clear()
-						return nil
-					},
-				},
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
 					return &http.Response{
 						StatusCode: c.StatusCode,
@@ -214,7 +213,19 @@ func TestClient_GreetingWithErrors_FooError_awsRestjson1Deserialize(t *testing.T
 						Body:       ioutil.NopCloser(bytes.NewReader(c.Body)),
 					}, nil
 				}),
-			})
+				APIOptions: []APIOptionFunc{
+					func(s *middleware.Stack) error {
+						s.Build.Clear()
+						s.Finalize.Clear()
+						return nil
+					},
+				},
+				EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (e aws.Endpoint, err error) {
+					e.URL = "https://127.0.0.1"
+					e.SigningRegion = "us-west-2"
+					return e, err
+				}),
+				Region: "us-west-2"})
 			var params GreetingWithErrorsInput
 			result, err := client.GreetingWithErrors(context.Background(), &params)
 			if err == nil {
@@ -292,13 +303,6 @@ func TestClient_GreetingWithErrors_ComplexError_awsRestjson1Deserialize(t *testi
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
 			client := New(Options{
-				APIOptions: []APIOptionFunc{
-					func(s *middleware.Stack) error {
-						s.Build.Clear()
-						s.Finalize.Clear()
-						return nil
-					},
-				},
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
 					return &http.Response{
 						StatusCode: c.StatusCode,
@@ -306,7 +310,19 @@ func TestClient_GreetingWithErrors_ComplexError_awsRestjson1Deserialize(t *testi
 						Body:       ioutil.NopCloser(bytes.NewReader(c.Body)),
 					}, nil
 				}),
-			})
+				APIOptions: []APIOptionFunc{
+					func(s *middleware.Stack) error {
+						s.Build.Clear()
+						s.Finalize.Clear()
+						return nil
+					},
+				},
+				EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (e aws.Endpoint, err error) {
+					e.URL = "https://127.0.0.1"
+					e.SigningRegion = "us-west-2"
+					return e, err
+				}),
+				Region: "us-west-2"})
 			var params GreetingWithErrorsInput
 			result, err := client.GreetingWithErrors(context.Background(), &params)
 			if err == nil {
@@ -366,13 +382,6 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsRestjson1Deserialize(t *te
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
 			client := New(Options{
-				APIOptions: []APIOptionFunc{
-					func(s *middleware.Stack) error {
-						s.Build.Clear()
-						s.Finalize.Clear()
-						return nil
-					},
-				},
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
 					return &http.Response{
 						StatusCode: c.StatusCode,
@@ -380,7 +389,19 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsRestjson1Deserialize(t *te
 						Body:       ioutil.NopCloser(bytes.NewReader(c.Body)),
 					}, nil
 				}),
-			})
+				APIOptions: []APIOptionFunc{
+					func(s *middleware.Stack) error {
+						s.Build.Clear()
+						s.Finalize.Clear()
+						return nil
+					},
+				},
+				EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (e aws.Endpoint, err error) {
+					e.URL = "https://127.0.0.1"
+					e.SigningRegion = "us-west-2"
+					return e, err
+				}),
+				Region: "us-west-2"})
 			var params GreetingWithErrorsInput
 			result, err := client.GreetingWithErrors(context.Background(), &params)
 			if err == nil {

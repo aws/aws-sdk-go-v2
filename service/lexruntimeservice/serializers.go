@@ -35,8 +35,15 @@ func (m *awsRestjson1_serializeOpGetSession) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	request.Request.URL.Path = "/bot/{botName}/alias/{botAlias}/user/{userId}/session"
-	request.Request.Method = "GET"
+	opPath, opQuery := httpbinding.SplitURI("/bot/{botName}/alias/{botAlias}/user/{userId}/session")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
 	restEncoder := httpbinding.NewEncoder(request.Request)
 
 	if err := awsRestjson1_serializeHttpBindingsGetSessionInput(input, restEncoder); err != nil {
@@ -79,67 +86,6 @@ func awsRestjson1_serializeHttpBindingsGetSessionInput(v *GetSessionInput, encod
 	return nil
 }
 
-type awsRestjson1_serializeOpDeleteSession struct {
-}
-
-func (*awsRestjson1_serializeOpDeleteSession) ID() string {
-	return "awsRestjson1_serializeOpDeleteSession"
-}
-
-func (m *awsRestjson1_serializeOpDeleteSession) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*DeleteSessionInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	request.Request.URL.Path = "/bot/{botName}/alias/{botAlias}/user/{userId}/session"
-	request.Request.Method = "DELETE"
-	restEncoder := httpbinding.NewEncoder(request.Request)
-
-	if err := awsRestjson1_serializeHttpBindingsDeleteSessionInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if err := restEncoder.Encode(); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeHttpBindingsDeleteSessionInput(v *DeleteSessionInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.BotAlias != nil {
-		if err := encoder.SetURI("botAlias").String(*v.BotAlias); err != nil {
-			return err
-		}
-	}
-
-	if v.BotName != nil {
-		if err := encoder.SetURI("botName").String(*v.BotName); err != nil {
-			return err
-		}
-	}
-
-	if v.UserId != nil {
-		if err := encoder.SetURI("userId").String(*v.UserId); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpPutSession struct {
 }
 
@@ -161,8 +107,15 @@ func (m *awsRestjson1_serializeOpPutSession) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	request.Request.URL.Path = "/bot/{botName}/alias/{botAlias}/user/{userId}/session"
-	request.Request.Method = "POST"
+	opPath, opQuery := httpbinding.SplitURI("/bot/{botName}/alias/{botAlias}/user/{userId}/session")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
 	restEncoder := httpbinding.NewEncoder(request.Request)
 
 	if err := awsRestjson1_serializeHttpBindingsPutSessionInput(input, restEncoder); err != nil {
@@ -245,6 +198,74 @@ func awsRestjson1_serializeOpDocumentPutSessionInput(v *PutSessionInput, value s
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteSession struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteSession) ID() string {
+	return "awsRestjson1_serializeOpDeleteSession"
+}
+
+func (m *awsRestjson1_serializeOpDeleteSession) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteSessionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/bot/{botName}/alias/{botAlias}/user/{userId}/session")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "DELETE"
+	restEncoder := httpbinding.NewEncoder(request.Request)
+
+	if err := awsRestjson1_serializeHttpBindingsDeleteSessionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := restEncoder.Encode(); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsDeleteSessionInput(v *DeleteSessionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BotAlias != nil {
+		if err := encoder.SetURI("botAlias").String(*v.BotAlias); err != nil {
+			return err
+		}
+	}
+
+	if v.BotName != nil {
+		if err := encoder.SetURI("botName").String(*v.BotName); err != nil {
+			return err
+		}
+	}
+
+	if v.UserId != nil {
+		if err := encoder.SetURI("userId").String(*v.UserId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpPostText struct {
 }
 
@@ -266,8 +287,15 @@ func (m *awsRestjson1_serializeOpPostText) HandleSerialize(ctx context.Context, 
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	request.Request.URL.Path = "/bot/{botName}/alias/{botAlias}/user/{userId}/text"
-	request.Request.Method = "POST"
+	opPath, opQuery := httpbinding.SplitURI("/bot/{botName}/alias/{botAlias}/user/{userId}/text")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
 	restEncoder := httpbinding.NewEncoder(request.Request)
 
 	if err := awsRestjson1_serializeHttpBindingsPostTextInput(input, restEncoder); err != nil {
@@ -365,8 +393,15 @@ func (m *awsRestjson1_serializeOpPostContent) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	request.Request.URL.Path = "/bot/{botName}/alias/{botAlias}/user/{userId}/content"
-	request.Request.Method = "POST"
+	opPath, opQuery := httpbinding.SplitURI("/bot/{botName}/alias/{botAlias}/user/{userId}/content")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
 	restEncoder := httpbinding.NewEncoder(request.Request)
 
 	if err := awsRestjson1_serializeHttpBindingsPostContentInput(input, restEncoder); err != nil {
