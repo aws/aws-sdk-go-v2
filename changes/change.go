@@ -32,7 +32,8 @@ func NewChange(modules []string, changeType, description string) *Change {
 	}
 }
 
-// AffectsModule returns whether the Change
+// AffectsModule returns whether the Change contains the given module in its Modules. AffectsModule does not resolve
+// wildcards.
 func (c *Change) AffectsModule(module string) bool {
 	for _, m := range c.Modules {
 		if m == module {

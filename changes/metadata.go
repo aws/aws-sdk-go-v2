@@ -6,6 +6,8 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"sort"
+	"strings"
 )
 
 // SchemaVersion defines the current JSON schema version for persistent data types (Change, Release, ...)
@@ -157,6 +159,10 @@ func loadChanges(changesDir string) ([]*Change, error) {
 			changes = append(changes, change)
 		}
 	}
+
+	sort.Slice(changes, func(i, j int) bool {
+		return strings.Compare(changes[i].Id, changes[j].Id) < 0
+	})
 
 	return changes, nil
 }

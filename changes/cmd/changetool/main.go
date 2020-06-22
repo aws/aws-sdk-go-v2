@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/aggagen/changes"
 	"os"
+	"strconv"
 )
 
 func usage() {
@@ -88,12 +89,12 @@ func addCmd(metadata *changes.Metadata, module string) {
 }
 
 func lsCmd(metadata *changes.Metadata, module string) {
-	for _, c := range metadata.Changes {
+	for i, c := range metadata.ListChanges() {
 		if module != "" && !c.AffectsModule(module) {
 			continue
 		}
 
-		fmt.Println(c.Id)
+		fmt.Printf("[%d] %s\n", i, c.Id)
 		fmt.Println("\t", c.Type)
 		fmt.Println("\t", c.Description)
 		fmt.Println()
@@ -101,15 +102,31 @@ func lsCmd(metadata *changes.Metadata, module string) {
 }
 
 func modifyCmd(metadata *changes.Metadata, id string) {
-	change, err := metadata.GetChangeById(id)
+	var change *changes.Change
+	index, err := strconv.Atoi(id)
+	if err == nil {
+		if index < 0 || index >= len(metadata.ListChanges()) {
+			fmt.Printf("failed to modify change with index %d: index out of range\n", index)
+			os.Exit(1)
+		}
+		change = metadata.ListChanges()[index]
+	} else {
+		change, err = metadata.GetChangeById(id)
+		if err != nil {
+			fmt.Printf("failed to modify change: %v\n", err)
+			os.Exit(1)
+		}
+	}
+
+	template := changes.ChangeToTemplate(change)
+	filledTemplate, err := editTemplate(template)
 	if err != nil {
 		fmt.Printf("failed to modify change: %v\n", err)
 		os.Exit(1)
 	}
 
-	filledTemplate, err := editTemplate(changes.ChangeToTemplate(change))
-	if err != nil {
-		fmt.Printf("failed to modify change: %v\n", err)
+	if template == filledTemplate {
+		fmt.Println("no change was made to " + change.Id)
 		os.Exit(1)
 	}
 
@@ -125,7 +142,7 @@ func modifyCmd(metadata *changes.Metadata, id string) {
 		os.Exit(1)
 	}
 
-	fmt.Println("successfully modified " + id)
+	fmt.Println("successfully modified " + change.Id)
 }
 
 func rmCmd(metadata *changes.Metadata, id string) {
