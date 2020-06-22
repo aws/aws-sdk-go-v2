@@ -125,11 +125,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 				return out, metadata, err
 			})
 
-			ctx := func() context.Context {
-				ctx := awsmiddleware.SetSigningName(context.Background(), signingName)
-				ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
-				return ctx
-			}()
+			ctx := awsmiddleware.SetSigningRegion(awsmiddleware.SetSigningName(context.Background(), signingName), signingRegion)
 
 			if len(tt.hash) != 0 {
 				ctx = context.WithValue(ctx, payloadHashKey{}, tt.hash)

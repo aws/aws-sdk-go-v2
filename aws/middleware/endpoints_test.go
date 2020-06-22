@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"strconv"
 	"strings"
 	"testing"
 
@@ -30,14 +29,14 @@ func TestResolveServiceEndpoint(t *testing.T) {
 		return ctx
 	}
 
-	cases := []struct {
+	cases := map[string]struct {
 		Resolver      func(*testing.T) aws.EndpointResolver
 		Input         middleware.SerializeInput
 		Context       context.Context
 		Handler       func(*testing.T) mockSerializeHandler
 		ExpectedError string
 	}{
-		{
+		"resolves endpoint and sets signing region": {
 			Resolver: func(t *testing.T) aws.EndpointResolver {
 				return aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
 					t.Helper()
@@ -71,7 +70,7 @@ func TestResolveServiceEndpoint(t *testing.T) {
 				}
 			},
 		},
-		{
+		"error on invalid url parse": {
 			Resolver: func(t *testing.T) aws.EndpointResolver {
 				return aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
 					return aws.Endpoint{
@@ -86,7 +85,7 @@ func TestResolveServiceEndpoint(t *testing.T) {
 			},
 			ExpectedError: "failed to parse endpoint URL",
 		},
-		{
+		"prefers endpoint signing name if available": {
 			Resolver: func(t *testing.T) aws.EndpointResolver {
 				return aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
 					return aws.Endpoint{
@@ -107,7 +106,7 @@ func TestResolveServiceEndpoint(t *testing.T) {
 				}
 			},
 		},
-		{
+		"prefers endpoint signing name if previously unknown": {
 			Resolver: func(t *testing.T) aws.EndpointResolver {
 				return aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
 					return aws.Endpoint{
@@ -128,7 +127,7 @@ func TestResolveServiceEndpoint(t *testing.T) {
 				}
 			},
 		},
-		{
+		"prefers known signing name over derived value": {
 			Resolver: func(t *testing.T) aws.EndpointResolver {
 				return aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
 					return aws.Endpoint{
@@ -150,7 +149,7 @@ func TestResolveServiceEndpoint(t *testing.T) {
 				}
 			},
 		},
-		{
+		"errors on endpoint resolver failures": {
 			Resolver: func(t *testing.T) aws.EndpointResolver {
 				return aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
 					t.Helper()
@@ -164,7 +163,7 @@ func TestResolveServiceEndpoint(t *testing.T) {
 			},
 			ExpectedError: "failed to resolve service endpoint",
 		},
-		{
+		"errors on unknown transport types": {
 			Resolver: func(t *testing.T) aws.EndpointResolver {
 				return nil
 			},
@@ -177,8 +176,8 @@ func TestResolveServiceEndpoint(t *testing.T) {
 		},
 	}
 
-	for i, tt := range cases {
-		t.Run(strconv.Itoa(i), func(t *testing.T) {
+	for name, tt := range cases {
+		t.Run(name, func(t *testing.T) {
 			m := ResolveServiceEndpoint{Resolver: tt.Resolver(t)}
 			_, _, err := m.HandleSerialize(tt.Context, tt.Input, tt.Handler(t))
 			if err != nil && len(tt.ExpectedError) == 0 {
