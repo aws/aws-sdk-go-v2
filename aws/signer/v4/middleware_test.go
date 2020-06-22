@@ -11,6 +11,7 @@ import (
 	"testing"
 	"time"
 
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
 )
@@ -124,10 +125,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 				return out, metadata, err
 			})
 
-			ctx := SetSigningMetadata(context.Background(), SigningMetadata{
-				SigningName:   signingName,
-				SigningRegion: signingRegion,
-			})
+			ctx := awsmiddleware.SetSigningRegion(awsmiddleware.SetSigningName(context.Background(), signingName), signingRegion)
 
 			if len(tt.hash) != 0 {
 				ctx = context.WithValue(ctx, payloadHashKey{}, tt.hash)
