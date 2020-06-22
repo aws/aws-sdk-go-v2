@@ -41,14 +41,15 @@ import software.amazon.smithy.utils.SetUtils;
 public class AddAwsConfigFields implements GoIntegration {
     private static final Logger LOGGER = Logger.getLogger(AddAwsConfigFields.class.getName());
 
-    private static final String REGION_CONFIG_NAME = "Region";
-    private static final String CREDENTIALS_CONFIG_NAME = "Credentials";
-    private static final String ENDPOINT_RESOLVER_CONFIG_NAME = "EndpointResolver";
-    private static final String HTTP_CLIENT_CONFIG_NAME = "HTTPClient";
-    private static final String LOGGER_CONFIG_NAME = "Logger";
-    private static final String LOG_LEVEL_CONFIG_NAME = "LogLevel";
-    private static final String RETRYER_CONFIG_NAME = "Retryer";
-    private static final String HTTP_SIGNER_CONFIG_NAME = "HTTPSigner";
+    public static final String REGION_CONFIG_NAME = "Region";
+    public static final String CREDENTIALS_CONFIG_NAME = "Credentials";
+    public static final String ENDPOINT_RESOLVER_CONFIG_NAME = "EndpointResolver";
+    public static final String HTTP_CLIENT_CONFIG_NAME = "HTTPClient";
+    public static final String LOGGER_CONFIG_NAME = "Logger";
+    public static final String LOG_LEVEL_CONFIG_NAME = "LogLevel";
+    public static final String RETRYER_CONFIG_NAME = "Retryer";
+    public static final String HTTP_SIGNER_CONFIG_NAME = "HTTPSigner";
+
     private static final List<ConfigField> UNIVERSAL_FIELDS = new ArrayList<>(SetUtils.of(
             ConfigField.builder()
                     .name(REGION_CONFIG_NAME)
