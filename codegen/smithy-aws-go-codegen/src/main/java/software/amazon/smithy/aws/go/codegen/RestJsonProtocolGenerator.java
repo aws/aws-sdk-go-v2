@@ -31,11 +31,12 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.HttpBindingProtocolGenerator;
+import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestGenerator;
+import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestResponseGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolTestGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestRequestGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestResponseErrorGenerator;
-import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestResponseGenerator;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.HttpBinding;
 import software.amazon.smithy.model.knowledge.HttpBindingIndex;
@@ -55,6 +56,7 @@ import software.amazon.smithy.model.traits.MediaTypeTrait;
 import software.amazon.smithy.model.traits.StreamingTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.utils.FunctionalUtils;
+import software.amazon.smithy.utils.SetUtils;
 
 /**
  * Handles general components across the AWS JSON protocols that have HTTP bindings.
@@ -174,14 +176,53 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 generateSimpleShapeToJsonValue(model, writer, memberShape, operand, (w, s) -> w.write("av.$L", s));
             }
         });
-	}
+    }
 
     @Override
     public void generateProtocolTests(GenerationContext context) {
+        Set<HttpProtocolUnitTestGenerator.ConfigValue> configValues = new TreeSet<>();
+        configValues.addAll(SetUtils.of(
+                HttpProtocolUnitTestGenerator.ConfigValue.builder()
+                        .name(AddAwsConfigFields.REGION_CONFIG_NAME)
+                        .value(writer -> {
+                            writer.writeInline("$S", "us-west-2");
+                        })
+                        .build(),
+                HttpProtocolUnitTestGenerator.ConfigValue.builder()
+                        .name(AddAwsConfigFields.ENDPOINT_RESOLVER_CONFIG_NAME)
+                        .value(writer -> {
+                            writer.addUseImports(AwsGoDependency.AWS_CORE);
+                            writer.openBlock("aws.EndpointResolverFunc("
+                                            + "func(service, region string) (e aws.Endpoint, err error) {",
+                                    "}),", () -> {
+                                        writer.write("e.URL = \"https://127.0.0.1\"");
+                                        writer.write("e.SigningRegion = \"us-west-2\"");
+                                        writer.write("return e, err");
+                                    });
+                        })
+                        .build(),
+                HttpProtocolUnitTestGenerator.ConfigValue.builder()
+                        .name("APIOptions")
+                        .value(writer -> {
+                            writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
+                            writer.openBlock("[]APIOptionFunc{", "},", () -> {
+                                writer.openBlock("func(s *middleware.Stack) error {", "},", () -> {
+                                    writer.write("s.Build.Clear()");
+                                    writer.write("s.Finalize.Clear()");
+                                    writer.write("return nil");
+                                });
+                            });
+                        })
+                        .build()
+        ));
+
         new HttpProtocolTestGenerator(context,
-                new HttpProtocolUnitTestRequestGenerator.Builder(),
-                new HttpProtocolUnitTestResponseGenerator.Builder(),
-                new HttpProtocolUnitTestResponseErrorGenerator.Builder()
+                (HttpProtocolUnitTestRequestGenerator.Builder) new HttpProtocolUnitTestRequestGenerator.Builder()
+                        .addClientConfigValues(configValues),
+                (HttpProtocolUnitTestResponseGenerator.Builder) new HttpProtocolUnitTestResponseGenerator.Builder()
+                        .addClientConfigValues(configValues),
+                (HttpProtocolUnitTestResponseErrorGenerator.Builder) new HttpProtocolUnitTestResponseErrorGenerator
+                        .Builder().addClientConfigValues(configValues)
         ).generateProtocolTests();
     }
 
