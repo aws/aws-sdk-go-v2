@@ -109,7 +109,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                 builder.append(String.format("ServiceName: \"%s\",\n", trait.getSdkId()));
                                 builder.append(String.format("ServiceID: \"%s\",\n", sdkIdAsSymbol));
                                 // TODO: EndpointID can be different but is not modeled in Smithy.
-                                builder.append(String.format("EndpointID: \"%s\",\n", sdkIdAsSymbol));
+                                builder.append(String.format("EndpointPrefix: \"%s\",\n", sdkIdAsSymbol));
                             }
                             if (sigV4Trait.isPresent()) {
                                 SigV4Trait trait = sigV4Trait.get();
