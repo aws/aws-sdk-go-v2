@@ -217,12 +217,15 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         ));
 
         new HttpProtocolTestGenerator(context,
-                (HttpProtocolUnitTestRequestGenerator.Builder) new HttpProtocolUnitTestRequestGenerator.Builder()
+                (HttpProtocolUnitTestRequestGenerator.Builder) new HttpProtocolUnitTestRequestGenerator
+                        .Builder()
                         .addClientConfigValues(configValues),
-                (HttpProtocolUnitTestResponseGenerator.Builder) new HttpProtocolUnitTestResponseGenerator.Builder()
+                (HttpProtocolUnitTestResponseGenerator.Builder) new HttpProtocolUnitTestResponseGenerator
+                        .Builder()
                         .addClientConfigValues(configValues),
                 (HttpProtocolUnitTestResponseErrorGenerator.Builder) new HttpProtocolUnitTestResponseErrorGenerator
-                        .Builder().addClientConfigValues(configValues)
+                        .Builder()
+                        .addClientConfigValues(configValues)
         ).generateProtocolTests();
     }
 
