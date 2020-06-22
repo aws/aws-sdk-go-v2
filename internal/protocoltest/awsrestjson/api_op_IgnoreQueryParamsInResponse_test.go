@@ -4,6 +4,7 @@ package awsrestjson
 import (
 	"bytes"
 	"context"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"github.com/google/go-cmp/cmp"
@@ -35,13 +36,6 @@ func TestClient_IgnoreQueryParamsInResponse_awsRestjson1Deserialize(t *testing.T
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
 			client := New(Options{
-				APIOptions: []APIOptionFunc{
-					func(s *middleware.Stack) error {
-						s.Build.Clear()
-						s.Finalize.Clear()
-						return nil
-					},
-				},
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
 					return &http.Response{
 						StatusCode: c.StatusCode,
@@ -49,7 +43,19 @@ func TestClient_IgnoreQueryParamsInResponse_awsRestjson1Deserialize(t *testing.T
 						Body:       ioutil.NopCloser(bytes.NewReader(c.Body)),
 					}, nil
 				}),
-			})
+				APIOptions: []APIOptionFunc{
+					func(s *middleware.Stack) error {
+						s.Build.Clear()
+						s.Finalize.Clear()
+						return nil
+					},
+				},
+				EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (e aws.Endpoint, err error) {
+					e.URL = "https://127.0.0.1"
+					e.SigningRegion = "us-west-2"
+					return e, err
+				}),
+				Region: "us-west-2"})
 			var params IgnoreQueryParamsInResponseInput
 			result, err := client.IgnoreQueryParamsInResponse(context.Background(), &params)
 			if err != nil {
