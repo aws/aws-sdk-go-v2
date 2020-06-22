@@ -13,6 +13,12 @@ const ChangeTemplate = `modules: %s
 change type: %s
 description: %s`
 
+// changeTypes maps valid Change Types to the header they are grouped under in CHANGELOGs.
+var changeHeaders = map[string]string{
+	"feature": "New Features",
+	"bugfix":  "Bug Fixes",
+}
+
 // Change represents a change to one or more Go modules.
 type Change struct {
 	Id            string

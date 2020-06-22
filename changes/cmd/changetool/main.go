@@ -52,7 +52,12 @@ func main() {
 
 		rmCmd(metadata, os.Args[2])
 	case "release":
-		fmt.Println(metadata.CreateRelease("2020-06-19", []changes.VersionBump{}))
+		fmt.Println(metadata.CreateRelease("2020-06-19", map[string]changes.VersionBump{
+			"changes": {
+				From: "v1.0.0",
+				To:   "v1.0.1",
+			},
+		}))
 	}
 }
 

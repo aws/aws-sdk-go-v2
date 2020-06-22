@@ -109,7 +109,7 @@ func (m *Metadata) ClearChanges() error {
 
 // CreateRelease consolidates the Metadata's pending Changes into a Release. This operation will remove all Changes from
 // the Metadata and delete change files in .changes/next-release. A release file will also be created in .changes/releases.
-func (m *Metadata) CreateRelease(id string, bumps []VersionBump) error {
+func (m *Metadata) CreateRelease(id string, bumps map[string]VersionBump) error {
 	release := &Release{
 		Id:           id,
 		VersionBumps: bumps,
@@ -120,7 +120,9 @@ func (m *Metadata) CreateRelease(id string, bumps []VersionBump) error {
 		return err
 	}
 
-	return m.ClearChanges()
+	fmt.Println(release.RenderChangelogForModule("changes", ""))
+	return nil
+	//return m.ClearChanges()
 }
 
 // deleteChangeFile deletes the file .changes/next-release/{id}.json.
