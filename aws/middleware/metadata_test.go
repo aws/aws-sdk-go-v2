@@ -18,12 +18,12 @@ func (m mockInitalizeHandler) HandleInitialize(
 
 func TestServiceMetadataProvider(t *testing.T) {
 	m := RegisterServiceMetadata{
-		ServiceName:   "Foo",
-		ServiceID:     "Bar",
-		EndpointID:    "Baz",
-		SigningName:   "Jaz",
-		Region:        "Fuz",
-		OperationName: "FooOp",
+		ServiceName:    "Foo",
+		ServiceID:      "Bar",
+		EndpointPrefix: "Baz",
+		SigningName:    "Jaz",
+		Region:         "Fuz",
+		OperationName:  "FooOp",
 	}
 
 	_, _, err := m.HandleInitialize(context.Background(), middleware.InitializeInput{}, mockInitalizeHandler(func(
@@ -36,7 +36,7 @@ func TestServiceMetadataProvider(t *testing.T) {
 		if e, a := "Bar", GetServiceID(ctx); e != a {
 			t.Errorf("expected %v, got %v", e, a)
 		}
-		if e, a := "Baz", GetEndpointID(ctx); e != a {
+		if e, a := "Baz", GetEndpointPrefix(ctx); e != a {
 			t.Errorf("expected %v, got %v", e, a)
 		}
 		if e, a := "Jaz", GetSigningName(ctx); e != a {

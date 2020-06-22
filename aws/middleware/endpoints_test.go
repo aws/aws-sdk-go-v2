@@ -25,7 +25,7 @@ func TestResolveServiceEndpoint(t *testing.T) {
 	initContext := func(signingName, endpointID, region string) context.Context {
 		ctx := context.Background()
 		ctx = SetSigningName(ctx, signingName)
-		ctx = setEndpointID(ctx, endpointID)
+		ctx = setEndpointPrefix(ctx, endpointID)
 		ctx = setRegion(ctx, region)
 		return ctx
 	}
