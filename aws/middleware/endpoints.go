@@ -29,6 +29,10 @@ func (r ResolveServiceEndpoint) HandleSerialize(
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
+	if r.Resolver == nil {
+		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
+	}
+
 	var endpoint aws.Endpoint
 	endpoint, err = r.Resolver.ResolveEndpoint(GetEndpointPrefix(ctx), GetRegion(ctx))
 	if err != nil {
