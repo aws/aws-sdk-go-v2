@@ -334,13 +334,13 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         Shape targetShape = model.expectShape(memberShape.getTarget());
 
         writer.openBlock("for key := range v {", "}", () -> {
-            writer.write("om := object.Key(key)");
+            // Nil map member values are skipped
             if (!targetShape.hasTrait(EnumTrait.class)) {
                 writer.openBlock("if vv := v[key]; vv == nil {", "}", () -> {
-                    writer.write("om.Null()");
                     writer.write("continue");
                 });
             }
+            writer.write("om := object.Key(key)");
             if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
                 String serFunctionName = ProtocolGenerator
                         .getDocumentSerializerFunctionName(targetShape,
