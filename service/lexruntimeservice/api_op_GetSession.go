@@ -19,7 +19,16 @@ func (c *Client) GetSession(ctx context.Context, params *GetSessionInput, optFns
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
+		Region:         options.Region,
+		ServiceName:    "Lex Runtime Service",
+		ServiceID:      "lexruntimeservice",
+		EndpointPrefix: "lexruntimeservice",
+		SigningName:    "lex",
+		OperationName:  "GetSession",
+	}, middleware.Before)
 	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	stack.Serialize.Add(&awsRestjson1_serializeOpGetSession{}, middleware.After)
 	stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSession{}, middleware.After)
 	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)

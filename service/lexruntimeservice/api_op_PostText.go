@@ -61,7 +61,16 @@ func (c *Client) PostText(ctx context.Context, params *PostTextInput, optFns ...
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
+		Region:         options.Region,
+		ServiceName:    "Lex Runtime Service",
+		ServiceID:      "lexruntimeservice",
+		EndpointPrefix: "lexruntimeservice",
+		SigningName:    "lex",
+		OperationName:  "PostText",
+	}, middleware.Before)
 	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	stack.Serialize.Add(&awsRestjson1_serializeOpPostText{}, middleware.After)
 	stack.Deserialize.Add(&awsRestjson1_deserializeOpPostText{}, middleware.After)
 	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)

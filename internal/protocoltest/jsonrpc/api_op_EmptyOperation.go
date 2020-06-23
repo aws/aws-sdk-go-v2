@@ -17,7 +17,16 @@ func (c *Client) EmptyOperation(ctx context.Context, params *EmptyOperationInput
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
+		Region:         options.Region,
+		ServiceName:    "Json Protocol",
+		ServiceID:      "jsonprotocol",
+		EndpointPrefix: "jsonprotocol",
+		SigningName:    "foo",
+		OperationName:  "EmptyOperation",
+	}, middleware.Before)
 	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)
 	stack.Finalize.Add(retry.NewAttemptMiddleware(options.Retryer, smithyhttp.RequestCloner), middleware.After)
 	stack.Finalize.Add(retry.MetricsHeaderMiddleware{}, middleware.After)

@@ -19,7 +19,15 @@ func (c *Client) HttpPayloadWithStructure(ctx context.Context, params *HttpPaylo
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
+		Region:         options.Region,
+		ServiceName:    "Rest Json Protocol",
+		ServiceID:      "restjsonprotocol",
+		EndpointPrefix: "restjsonprotocol",
+		OperationName:  "HttpPayloadWithStructure",
+	}, middleware.Before)
 	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	stack.Serialize.Add(&awsRestjson1_serializeOpHttpPayloadWithStructure{}, middleware.After)
 	stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpPayloadWithStructure{}, middleware.After)
 	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)

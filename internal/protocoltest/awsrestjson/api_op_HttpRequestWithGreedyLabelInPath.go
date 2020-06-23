@@ -16,7 +16,15 @@ func (c *Client) HttpRequestWithGreedyLabelInPath(ctx context.Context, params *H
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
+		Region:         options.Region,
+		ServiceName:    "Rest Json Protocol",
+		ServiceID:      "restjsonprotocol",
+		EndpointPrefix: "restjsonprotocol",
+		OperationName:  "HttpRequestWithGreedyLabelInPath",
+	}, middleware.Before)
 	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	stack.Serialize.Add(&awsRestjson1_serializeOpHttpRequestWithGreedyLabelInPath{}, middleware.After)
 	stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpRequestWithGreedyLabelInPath{}, middleware.After)
 	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)

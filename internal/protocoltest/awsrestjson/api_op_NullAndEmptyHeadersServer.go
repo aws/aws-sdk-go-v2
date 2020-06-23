@@ -17,7 +17,15 @@ func (c *Client) NullAndEmptyHeadersServer(ctx context.Context, params *NullAndE
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
+		Region:         options.Region,
+		ServiceName:    "Rest Json Protocol",
+		ServiceID:      "restjsonprotocol",
+		EndpointPrefix: "restjsonprotocol",
+		OperationName:  "NullAndEmptyHeadersServer",
+	}, middleware.Before)
 	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	stack.Serialize.Add(&awsRestjson1_serializeOpNullAndEmptyHeadersServer{}, middleware.After)
 	stack.Deserialize.Add(&awsRestjson1_deserializeOpNullAndEmptyHeadersServer{}, middleware.After)
 	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)
