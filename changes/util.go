@@ -9,13 +9,7 @@ import (
 	"strings"
 )
 
-type VersionedSchema interface {
-	SetSchemaVersion(string)
-}
-
-func writeFile(data VersionedSchema, root, dir, name string) error {
-	data.SetSchemaVersion(SchemaVersion)
-
+func writeFile(data interface{}, root, dir, name string) error {
 	filePath := filepath.Join(root, dir, name+".json")
 	changeBytes, err := json.MarshalIndent(data, "", " ")
 	if err != nil {

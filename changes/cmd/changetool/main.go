@@ -63,43 +63,44 @@ func main() {
 
 func addCmd(metadata *changes.Metadata, module string) {
 	if module == "" {
-		if currentModule, err := changes.GetCurrentModule(); err == nil {
-			module = currentModule
+		currentModule, err := changes.GetCurrentModule()
+		if err != nil {
+			fmt.Printf("failed to create change: the module flag was not provided and the tool could not detect a module")
 		}
+
+		module = currentModule
 	}
 
-	filledTemplate, err := editTemplate(changes.ChangeToTemplate(&changes.Change{
-		Modules: []string{module},
-	}))
+	filledTemplate, err := editTemplate(changes.ChangeToTemplate(&changes.Change{Module: module}))
 	if err != nil {
 		fmt.Printf("failed to create change: %v\n", err)
 		os.Exit(1)
 	}
 
-	change := &changes.Change{}
-
-	err = changes.TemplateToChange(filledTemplate, change)
+	newChanges, err := changes.TemplateToChanges(filledTemplate)
 	if err != nil {
 		fmt.Printf("failed to create change: %v\n", err)
 		os.Exit(1)
 	}
 
-	err = metadata.AddChange(change)
+	err = metadata.AddChanges(newChanges)
 	if err != nil {
 		fmt.Printf("failed to create change: %v\n", err)
 		os.Exit(1)
 	}
 
-	fmt.Println("added change with id " + change.Id)
+	for _, c := range newChanges {
+		fmt.Println("added change with id " + c.ID)
+	}
 }
 
 func lsCmd(metadata *changes.Metadata, module string) {
 	for i, c := range metadata.ListChanges() {
-		if module != "" && !c.AffectsModule(module) {
+		if module != "" && module != c.Module {
 			continue
 		}
 
-		fmt.Printf("[%d] %s\n", i, c.Id)
+		fmt.Printf("[%d] %s\n", i, c.ID)
 		fmt.Println("\t", c.Type)
 		fmt.Println("\t", c.Description)
 		fmt.Println()
@@ -131,23 +132,32 @@ func modifyCmd(metadata *changes.Metadata, id string) {
 	}
 
 	if template == filledTemplate {
-		fmt.Println("no change was made to " + change.Id)
+		fmt.Println("no change was made to " + change.ID)
 		os.Exit(1)
 	}
 
-	err = changes.TemplateToChange(filledTemplate, change)
+	newChanges, err := changes.TemplateToChanges(filledTemplate)
+	if err != nil {
+		fmt.Printf("failed to modify change: %v\n", err)
+		os.Exit(1)
+	} else if len(newChanges) != 1 {
+		fmt.Printf("failed to modify change: modules cannot be added to a change during modification")
+		os.Exit(1)
+	}
+
+	err = metadata.SaveChange(newChanges[0])
 	if err != nil {
 		fmt.Printf("failed to modify change: %v\n", err)
 		os.Exit(1)
 	}
 
-	err = metadata.SaveChange(change)
+	err = metadata.RemoveChangeById(change.ID)
 	if err != nil {
-		fmt.Printf("failed to modify change: %v\n", err)
+		fmt.Printf("failed to remove old change with id %s: %v\n", change.ID, err)
 		os.Exit(1)
 	}
 
-	fmt.Println("successfully modified " + change.Id)
+	fmt.Printf("successfully modified %s, new id is %s\n", change.ID, newChanges[0].ID)
 }
 
 func rmCmd(metadata *changes.Metadata, id string) {

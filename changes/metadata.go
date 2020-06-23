@@ -50,6 +50,17 @@ func (m *Metadata) AddChange(c *Change) error {
 	return nil
 }
 
+func (m *Metadata) AddChanges(changes []*Change) error {
+	for _, c := range changes {
+		err := m.AddChange(c)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 // GetChangeById returns the pending Change with the given id.
 func (m *Metadata) GetChangeById(id string) (*Change, error) {
 	_, c, err := m.getChange(id)
@@ -58,7 +69,7 @@ func (m *Metadata) GetChangeById(id string) (*Change, error) {
 
 func (m *Metadata) getChange(id string) (int, *Change, error) {
 	for i, c := range m.Changes {
-		if c.Id == id {
+		if c.ID == id {
 			return i, c, nil
 		}
 	}
@@ -73,7 +84,8 @@ func (m *Metadata) ListChanges() []*Change {
 
 // SaveChange saves the given change to the .changes/next-release directory.
 func (m *Metadata) SaveChange(c *Change) error {
-	return writeFile(c, m.ChangePath, "next-release", c.Id)
+	c.SchemaVersion = SchemaVersion
+	return writeFile(c, m.ChangePath, "next-release", c.ID)
 }
 
 // RemoveChangeById removes the Change with the specified id from the Metadata's Changes and also removes the Change
@@ -97,7 +109,7 @@ func (m *Metadata) RemoveChangeById(id string) error {
 // .changes/next-release directory.
 func (m *Metadata) ClearChanges() error {
 	for _, c := range m.Changes {
-		err := m.RemoveChangeById(c.Id)
+		err := m.RemoveChangeById(c.ID)
 		if err != nil {
 			return err
 		}
@@ -111,9 +123,10 @@ func (m *Metadata) ClearChanges() error {
 // the Metadata and delete change files in .changes/next-release. A release file will also be created in .changes/releases.
 func (m *Metadata) CreateRelease(id string, bumps map[string]VersionBump) error {
 	release := &Release{
-		Id:           id,
-		VersionBumps: bumps,
-		Changes:      m.Changes,
+		ID:            id,
+		SchemaVersion: SchemaVersion,
+		VersionBumps:  bumps,
+		Changes:       m.Changes,
 	}
 
 	if err := writeFile(release, m.ChangePath, "releases", id); err != nil {
@@ -163,7 +176,7 @@ func loadChanges(changesDir string) ([]*Change, error) {
 	}
 
 	sort.Slice(changes, func(i, j int) bool {
-		return strings.Compare(changes[i].Id, changes[j].Id) < 0
+		return strings.Compare(changes[i].ID, changes[j].ID) < 0
 	})
 
 	return changes, nil

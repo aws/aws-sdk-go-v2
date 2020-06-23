@@ -4,13 +4,15 @@ import (
 	"fmt"
 )
 
+// VersionBump describes a version increment to a module.
 type VersionBump struct {
 	From string
 	To   string
 }
 
+// Release represents a single SDK release, which contains all change metadata and their resulting version bumps.
 type Release struct {
-	Id            string
+	ID            string
 	SchemaVersion string
 	VersionBumps  map[string]VersionBump
 	Changes       []*Change
@@ -21,7 +23,7 @@ func (r *Release) RenderChangelogForModule(module, headerPrefix string) string {
 	sections := map[string]string{}
 
 	for _, c := range r.Changes {
-		if c.AffectsModule(module) {
+		if c.Module == module {
 			sections[c.Type] += fmt.Sprintf("* %s\n", c.Description)
 		}
 	}
@@ -33,8 +35,4 @@ func (r *Release) RenderChangelogForModule(module, headerPrefix string) string {
 	}
 
 	return entry
-}
-
-func (r *Release) SetSchemaVersion(version string) {
-	r.SchemaVersion = version
 }
