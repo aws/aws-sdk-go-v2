@@ -7,7 +7,7 @@ SDK_PREFIX=$3
 for MOD_PATH in $(find ${CODGEN_ROOT} -type f -name "go.mod" | xargs -I {} dirname {})
 do
 	cd ${MOD_PATH}
-	MOD=$(go list -m)
+	MOD=$(grep -e "^module" go.mod | sed -e 's/^module *//')
 
 	DST=${SDK_ROOT}/${MOD#"$SDK_PREFIX"}
 
