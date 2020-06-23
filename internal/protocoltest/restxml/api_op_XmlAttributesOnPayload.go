@@ -18,7 +18,15 @@ func (c *Client) XmlAttributesOnPayload(ctx context.Context, params *XmlAttribut
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
+		Region:         options.Region,
+		ServiceName:    "Rest Xml Protocol",
+		ServiceID:      "restxmlprotocol",
+		EndpointPrefix: "restxmlprotocol",
+		OperationName:  "XmlAttributesOnPayload",
+	}, middleware.Before)
 	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)
 	stack.Finalize.Add(retry.NewAttemptMiddleware(options.Retryer, smithyhttp.RequestCloner), middleware.After)
 	stack.Finalize.Add(retry.MetricsHeaderMiddleware{}, middleware.After)

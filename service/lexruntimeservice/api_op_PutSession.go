@@ -23,7 +23,16 @@ func (c *Client) PutSession(ctx context.Context, params *PutSessionInput, optFns
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
+		Region:         options.Region,
+		ServiceName:    "Lex Runtime Service",
+		ServiceID:      "lexruntimeservice",
+		EndpointPrefix: "lexruntimeservice",
+		SigningName:    "lex",
+		OperationName:  "PutSession",
+	}, middleware.Before)
 	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	stack.Serialize.Add(&awsRestjson1_serializeOpPutSession{}, middleware.After)
 	stack.Deserialize.Add(&awsRestjson1_deserializeOpPutSession{}, middleware.After)
 	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)
