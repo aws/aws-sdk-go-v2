@@ -53,13 +53,13 @@ func (c *Client) HttpPayloadTraitsWithMediaType(ctx context.Context, params *Htt
 }
 
 type HttpPayloadTraitsWithMediaTypeInput struct {
-	Foo  *string
 	Blob []byte
+	Foo  *string
 }
 
 type HttpPayloadTraitsWithMediaTypeOutput struct {
-	Foo  *string
 	Blob []byte
+	Foo  *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
