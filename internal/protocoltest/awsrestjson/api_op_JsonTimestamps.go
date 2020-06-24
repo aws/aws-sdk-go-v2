@@ -54,17 +54,17 @@ func (c *Client) JsonTimestamps(ctx context.Context, params *JsonTimestampsInput
 }
 
 type JsonTimestampsInput struct {
+	Normal       *time.Time
 	DateTime     *time.Time
 	EpochSeconds *time.Time
 	HttpDate     *time.Time
-	Normal       *time.Time
 }
 
 type JsonTimestampsOutput struct {
+	Normal       *time.Time
 	DateTime     *time.Time
 	EpochSeconds *time.Time
 	HttpDate     *time.Time
-	Normal       *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

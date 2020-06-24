@@ -86,6 +86,17 @@ public class AddAwsConfigFields implements GoIntegration {
                     .build()
     ));
 
+    /**
+     * Gets the sort order of the customization from -128 to 127, with lowest
+     * executed first.
+     *
+     * @return Returns the sort order, defaults to -50.
+     */
+    @Override
+    public byte getOrder() {
+        return -50;
+    }
+
     private static Symbol getAwsCoreSymbol(String symbolName) {
         return SymbolUtils.createValueSymbolBuilder(symbolName,
                 AwsGoDependency.AWS_CORE).build();

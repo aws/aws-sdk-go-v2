@@ -51,13 +51,13 @@ func (c *Client) SimpleInputParams(ctx context.Context, params *SimpleInputParam
 }
 
 type SimpleInputParamsInput struct {
-	Bam     *int32
+	Foo     *string
 	Bar     *string
 	Baz     *bool
+	Bam     *int32
 	Boo     *float64
-	Foo     *string
-	FooEnum types.FooEnum
 	Qux     []byte
+	FooEnum types.FooEnum
 }
 
 type SimpleInputParamsOutput struct {
