@@ -60,9 +60,9 @@ func (c *Client) QueryTimestamps(ctx context.Context, params *QueryTimestampsInp
 }
 
 type QueryTimestampsInput struct {
-	NormalFormat *time.Time
 	EpochMember  *time.Time
 	EpochTarget  *time.Time
+	NormalFormat *time.Time
 }
 
 type QueryTimestampsOutput struct {

@@ -51,10 +51,10 @@ func (c *Client) QueryLists(ctx context.Context, params *QueryListsInput, optFns
 }
 
 type QueryListsInput struct {
-	ListArg                  []*string
 	ComplexListArg           []*types.GreetingStruct
-	ListArgWithXmlNameMember []*string
+	ListArg                  []*string
 	ListArgWithXmlName       []*string
+	ListArgWithXmlNameMember []*string
 }
 
 type QueryListsOutput struct {

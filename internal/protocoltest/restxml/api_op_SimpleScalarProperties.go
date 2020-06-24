@@ -49,29 +49,29 @@ func (c *Client) SimpleScalarProperties(ctx context.Context, params *SimpleScala
 }
 
 type SimpleScalarPropertiesInput struct {
-	Foo               *string
-	StringValue       *string
-	TrueBooleanValue  *bool
-	FalseBooleanValue *bool
 	ByteValue         *int8
-	ShortValue        *int16
+	DoubleValue       *float64
+	FalseBooleanValue *bool
+	FloatValue        *float32
+	Foo               *string
 	IntegerValue      *int32
 	LongValue         *int64
-	FloatValue        *float32
-	DoubleValue       *float64
+	ShortValue        *int16
+	StringValue       *string
+	TrueBooleanValue  *bool
 }
 
 type SimpleScalarPropertiesOutput struct {
-	Foo               *string
-	StringValue       *string
-	TrueBooleanValue  *bool
-	FalseBooleanValue *bool
 	ByteValue         *int8
-	ShortValue        *int16
+	DoubleValue       *float64
+	FalseBooleanValue *bool
+	FloatValue        *float32
+	Foo               *string
 	IntegerValue      *int32
 	LongValue         *int64
-	FloatValue        *float32
-	DoubleValue       *float64
+	ShortValue        *int16
+	StringValue       *string
+	TrueBooleanValue  *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -72,18 +72,18 @@ type XmlListsInput struct {
 }
 
 type XmlListsOutput struct {
-	StringList    []*string
-	StringSet     []*string
-	IntegerList   []*int32
-	BooleanList   []*bool
-	TimestampList []*time.Time
-	EnumList      []types.FooEnum
+	BooleanList    []*bool
+	EnumList       []types.FooEnum
+	FlattenedList  []*string
+	FlattenedList2 []*string
+	IntegerList    []*int32
 	// A list of lists of strings.
 	NestedStringList   [][]*string
 	RenamedListMembers []*string
-	FlattenedList      []*string
-	FlattenedList2     []*string
+	StringList         []*string
+	StringSet          []*string
 	StructureList      []*types.StructureListMember
+	TimestampList      []*time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

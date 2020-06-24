@@ -51,13 +51,13 @@ func (c *Client) QueryMaps(ctx context.Context, params *QueryMapsInput, optFns .
 }
 
 type QueryMapsInput struct {
-	MapArg                  map[string]*string
-	RenamedMapArg           map[string]*string
 	ComplexMapArg           map[string]*types.GreetingStruct
-	MapWithXmlMemberName    map[string]*string
 	FlattenedMap            map[string]*string
 	FlattenedMapWithXmlName map[string]*string
+	MapArg                  map[string]*string
 	MapOfLists              map[string][]*string
+	MapWithXmlMemberName    map[string]*string
+	RenamedMapArg           map[string]*string
 }
 
 type QueryMapsOutput struct {
