@@ -12,8 +12,8 @@ type ComplexError struct {
 	Message *string
 
 	Header   *string
-	TopLevel *string
 	Nested   *ComplexNestedErrorData
+	TopLevel *string
 }
 
 func (e *ComplexError) Error() string {
@@ -33,17 +33,17 @@ func (e *ComplexError) GetHeader() string {
 func (e *ComplexError) HasHeader() bool {
 	return e.Header != nil
 }
-func (e *ComplexError) GetTopLevel() string {
-	return ptr.ToString(e.TopLevel)
-}
-func (e *ComplexError) HasTopLevel() bool {
-	return e.TopLevel != nil
-}
 func (e *ComplexError) GetNested() *ComplexNestedErrorData {
 	return e.Nested
 }
 func (e *ComplexError) HasNested() bool {
 	return e.Nested != nil
+}
+func (e *ComplexError) GetTopLevel() string {
+	return ptr.ToString(e.TopLevel)
+}
+func (e *ComplexError) HasTopLevel() bool {
+	return e.TopLevel != nil
 }
 
 // This error is thrown when an invalid greeting value is provided.
