@@ -9,14 +9,34 @@ import (
 	"strings"
 )
 
-func writeFile(data interface{}, root, dir, name string) error {
+func writeJSON(data interface{}, root, dir, name string) error {
 	filePath := filepath.Join(root, dir, name+".json")
 	changeBytes, err := json.MarshalIndent(data, "", " ")
 	if err != nil {
 		return err
 	}
 
-	return ioutil.WriteFile(filePath, changeBytes, 0644)
+	return writeFile(changeBytes, filePath, false)
+}
+
+func writeFile(data []byte, path string, appendTo bool) error {
+	if appendTo {
+		exists, err := fileExists(path, false)
+		if err != nil {
+			return err
+		}
+
+		if exists {
+			existingData, err := ioutil.ReadFile(path)
+			if err != nil {
+				return err
+			}
+
+			data = append(data, existingData...)
+		}
+	}
+
+	return ioutil.WriteFile(path, data, 0644)
 }
 
 func fileExists(path string, dir bool) (bool, error) {

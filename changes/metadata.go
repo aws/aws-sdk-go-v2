@@ -20,14 +20,8 @@ type Metadata struct {
 	Releases   []*Release // Releases contains all releases in the .changes/releases directory
 }
 
-// LoadMetadata searches from the current directory upwards until it finds a .changes directory, which will be loaded
-// into a new Metadata and returned.
-func LoadMetadata() (*Metadata, error) {
-	path, err := GetChangesPath()
-	if err != nil {
-		return nil, err
-	}
-
+// LoadMetadata loads the .changes directory at the given path.
+func LoadMetadata(path string) (*Metadata, error) {
 	changes, err := loadChanges(filepath.Join(path, "next-release"))
 	if err != nil {
 		return nil, err
@@ -85,7 +79,7 @@ func (m *Metadata) ListChanges() []*Change {
 // SaveChange saves the given change to the .changes/next-release directory.
 func (m *Metadata) SaveChange(c *Change) error {
 	c.SchemaVersion = SchemaVersion
-	return writeFile(c, m.ChangePath, "next-release", c.ID)
+	return writeJSON(c, m.ChangePath, "next-release", c.ID)
 }
 
 // RemoveChangeById removes the Change with the specified id from the Metadata's Changes and also removes the Change
@@ -120,8 +114,9 @@ func (m *Metadata) ClearChanges() error {
 }
 
 // CreateRelease consolidates the Metadata's pending Changes into a Release. This operation will remove all Changes from
-// the Metadata and delete change files in .changes/next-release. A release file will also be created in .changes/releases.
-func (m *Metadata) CreateRelease(id string, bumps map[string]VersionBump) error {
+// the Metadata and delete change files in .changes/next-release. A release file will also be created in
+// .changes/releases. If temp is true, CreateRelease will return a Release, but not modify change or release files.
+func (m *Metadata) CreateRelease(id string, bumps map[string]VersionBump, temp bool) (*Release, error) {
 	release := &Release{
 		ID:            id,
 		SchemaVersion: SchemaVersion,
@@ -129,13 +124,15 @@ func (m *Metadata) CreateRelease(id string, bumps map[string]VersionBump) error 
 		Changes:       m.Changes,
 	}
 
-	if err := writeFile(release, m.ChangePath, "releases", id); err != nil {
-		return err
+	if !temp {
+		if err := writeJSON(release, m.ChangePath, "releases", id); err != nil {
+			return nil, err
+		}
+
+		return release, m.ClearChanges()
 	}
 
-	fmt.Println(release.RenderChangelogForModule("changes", ""))
-	return nil
-	//return m.ClearChanges()
+	return release, nil
 }
 
 // deleteChangeFile deletes the file .changes/next-release/{id}.json.

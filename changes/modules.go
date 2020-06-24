@@ -6,6 +6,8 @@ import (
 	"strings"
 )
 
+// GetCurrentModule returns a shortened module path (from the root of the repository to the module, not a full import
+// path) for the Go module containing the current directory.
 func GetCurrentModule() (string, error) {
 	path, err := findFile("go.mod", false)
 	if err != nil {

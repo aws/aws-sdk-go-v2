@@ -28,7 +28,8 @@ type Change struct {
 	Description   string // Description is a human readable description of this Change meant to be included in a CHANGELOG.
 }
 
-// NewChanges
+// NewChanges returns a Change slice containing a Change with the given type and description for each of the specified
+// modules.
 func NewChanges(modules []string, changeType, description string) ([]*Change, error) {
 	if len(modules) == 0 || changeType == "" || description == "" {
 		return nil, errors.New("missing module, type, or description")
@@ -68,6 +69,9 @@ func TemplateToChanges(filledTemplate string) ([]*Change, error) {
 			case "modules":
 				trimmedMods := strings.Trim(parts[1], "[] ")
 				modules = strings.Split(trimmedMods, ",")
+				for i := range modules {
+					modules[i] = strings.Trim(modules[i], " \t")
+				}
 			case "change type":
 				parts[1] = strings.ToLower(parts[1])
 				if changeHeaders[parts[1]] == "" {
