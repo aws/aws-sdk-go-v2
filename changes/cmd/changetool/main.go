@@ -5,9 +5,16 @@ import (
 	"os"
 )
 
+const usageText = `USAGE:
+  tool change add [-module=<module>]
+  tool change ls [-module=<module>]
+  tool change modify <change_id>
+  tool change rm <change_id>
+  tool release update-pending`
+
 func usage() {
-	fmt.Printf("USAGE:\n  tool change add [-module=<module>]\n  tool change ls [-module=<module>]\n  " +
-		"tool change modify <change_id>\n  tool change rm <change_id>\n  tool release update-pending\n")
+	fmt.Println(usageText)
+	os.Exit(1)
 }
 
 func main() {

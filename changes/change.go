@@ -14,8 +14,12 @@ var changeHeaders = map[string]string{
 	"bugfix":  "Bug Fixes",
 }
 
+const changeTemplateSuffix = `
+# type may be one of "feature" or "bugfix".
+# multiple modules may be listed. A change metadata file will be created for each module.`
+
 type changeTemplate struct {
-	Modules     []string `yaml:",flow"`
+	Modules     []string
 	Type        string
 	Description string
 }
@@ -79,7 +83,7 @@ func ChangeToTemplate(change *Change) (string, error) {
 		return "", err
 	}
 
-	return string(templateBytes), nil
+	return string(templateBytes) + changeTemplateSuffix, nil
 }
 
 func generateId(module, changeType string) string {

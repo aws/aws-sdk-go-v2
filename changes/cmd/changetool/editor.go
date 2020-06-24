@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -34,6 +35,10 @@ func editTemplate(template string) (string, error) {
 	filledTemplate, err := ioutil.ReadFile(f.Name())
 	if err != nil {
 		return "", err
+	}
+
+	if string(filledTemplate) == template {
+		return "", errors.New("template was not modified")
 	}
 
 	return string(filledTemplate), nil

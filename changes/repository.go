@@ -44,3 +44,12 @@ func (r *Repository) UpdateChangelog(release *Release, pending bool) error {
 
 	return writeFile([]byte(entry), filepath.Join(r.RootPath, fileName), !pending)
 }
+
+func (r *Repository) UpdatePendingChangelog() error {
+	release, err := r.Metadata.CreateRelease("pending", map[string]VersionBump{}, true)
+	if err != nil {
+		return fmt.Errorf("couldn't update pending changelog: %v", err)
+	}
+
+	return r.UpdateChangelog(release, true)
+}

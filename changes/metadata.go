@@ -44,6 +44,18 @@ func (m *Metadata) AddChange(c *Change) error {
 	return nil
 }
 
+// AddChangesFromTemplate parses the given YAML template, adding the resulting Changes to Metadata's Changes and saving
+// the Changes to the next-release directory. AddChangesFromTemplate returns the created Changes.
+func (m *Metadata) AddChangesFromTemplate(template string) ([]*Change, error) {
+	changes, err := TemplateToChanges(template)
+	if err != nil {
+		return nil, err
+	}
+
+	return changes, m.AddChanges(changes)
+}
+
+// AddChanges adds the given Changes to Metadata's Changes and saves the Changes to the next-release directory.
 func (m *Metadata) AddChanges(changes []*Change) error {
 	for _, c := range changes {
 		err := m.AddChange(c)
@@ -71,15 +83,48 @@ func (m *Metadata) getChange(id string) (int, *Change, error) {
 	return 0, nil, fmt.Errorf("couldn't find change with id %s", id)
 }
 
-// ListChanges returns all pending Changes.
-func (m *Metadata) ListChanges() []*Change {
-	return m.Changes
+// ListChanges returns all pending Changes with a module matching the given module. If module is empty, returns all Changes.
+func (m *Metadata) GetChanges(module string) []*Change {
+	if module == "" {
+		return m.Changes
+	}
+
+	var changes []*Change
+
+	for _, c := range m.Changes {
+		if module == c.Module {
+			changes = append(changes, c)
+		}
+	}
+	return changes
 }
 
 // SaveChange saves the given change to the .changes/next-release directory.
 func (m *Metadata) SaveChange(c *Change) error {
 	c.SchemaVersion = SchemaVersion
 	return writeJSON(c, m.ChangePath, "next-release", c.ID)
+}
+
+// UpdateChangeFromTemplate removes oldChange and creates a new Change from the given template.
+func (m *Metadata) UpdateChangeFromTemplate(oldChange *Change, template string) (*Change, error) {
+	newChanges, err := TemplateToChanges(template)
+	if err != nil {
+		return nil, fmt.Errorf("failed to modify change: %v\n", err)
+	} else if len(newChanges) != 1 {
+		return nil, fmt.Errorf("failed to modify change: modules cannot be added to a change during modification")
+	}
+
+	err = m.SaveChange(newChanges[0])
+	if err != nil {
+		return nil, fmt.Errorf("failed to modify change: %v\n", err)
+	}
+
+	err = m.RemoveChangeById(oldChange.ID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to remove old change with id %s: %v\n", oldChange.ID, err)
+	}
+
+	return newChanges[0], nil
 }
 
 // RemoveChangeById removes the Change with the specified id from the Metadata's Changes and also removes the Change
