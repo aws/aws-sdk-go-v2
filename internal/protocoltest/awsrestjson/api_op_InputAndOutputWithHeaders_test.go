@@ -69,8 +69,8 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Serialize(t *testing.T) {
 				HeaderShort:   ptr.Int16(123),
 				HeaderInteger: ptr.Int32(123),
 				HeaderLong:    ptr.Int64(123),
-				HeaderFloat:   ptr.Float32(1.0),
-				HeaderDouble:  ptr.Float64(1.0),
+				HeaderFloat:   ptr.Float32(1.1),
+				HeaderDouble:  ptr.Float64(1.1),
 				HeaderIntegerList: []*int32{
 					ptr.Int32(1),
 					ptr.Int32(2),
@@ -82,8 +82,8 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Serialize(t *testing.T) {
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"X-Byte":        []string{"1"},
-				"X-Double":      []string{"1.0"},
-				"X-Float":       []string{"1.0"},
+				"X-Double":      []string{"1.1"},
+				"X-Float":       []string{"1.1"},
 				"X-Integer":     []string{"123"},
 				"X-IntegerList": []string{"1, 2, 3"},
 				"X-Long":        []string{"123"},
@@ -191,7 +191,7 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Serialize(t *testing.T) {
 			if e, a := c.ExpectMethod, actualReq.Method; e != a {
 				t.Errorf("expect %v method, got %v", e, a)
 			}
-			if e, a := c.ExpectURIPath, actualReq.URL.Path; e != a {
+			if e, a := c.ExpectURIPath, actualReq.URL.RawPath; e != a {
 				t.Errorf("expect %v path, got %v", e, a)
 			}
 			queryItems := smithytesting.ParseRawQuery(actualReq.URL.RawQuery)
@@ -249,8 +249,8 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Deserialize(t *testing.T) 
 			StatusCode: 200,
 			Header: http.Header{
 				"X-Byte":        []string{"1"},
-				"X-Double":      []string{"1.0"},
-				"X-Float":       []string{"1.0"},
+				"X-Double":      []string{"1.1"},
+				"X-Float":       []string{"1.1"},
 				"X-Integer":     []string{"123"},
 				"X-IntegerList": []string{"1, 2, 3"},
 				"X-Long":        []string{"123"},
@@ -262,8 +262,8 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Deserialize(t *testing.T) 
 				HeaderShort:   ptr.Int16(123),
 				HeaderInteger: ptr.Int32(123),
 				HeaderLong:    ptr.Int64(123),
-				HeaderFloat:   ptr.Float32(1.0),
-				HeaderDouble:  ptr.Float64(1.0),
+				HeaderFloat:   ptr.Float32(1.1),
+				HeaderDouble:  ptr.Float64(1.1),
 				HeaderIntegerList: []*int32{
 					ptr.Int32(1),
 					ptr.Int32(2),

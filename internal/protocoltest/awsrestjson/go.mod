@@ -4,6 +4,6 @@ go 1.14
 
 require (
 	github.com/aws/aws-sdk-go-v2 v0.0.0-20200622232612-3b8c27eea891
-	github.com/awslabs/smithy-go v0.0.0-20200621224423-542121c5d59c
+	github.com/awslabs/smithy-go v0.0.0-20200623232658-13872e2cd522
 	github.com/google/go-cmp v0.4.1
 )
