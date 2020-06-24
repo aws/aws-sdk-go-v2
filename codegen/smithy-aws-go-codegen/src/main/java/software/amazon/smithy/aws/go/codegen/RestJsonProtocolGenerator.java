@@ -956,11 +956,22 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                             });
                             writer.write("");
 
-                            if (!targetShape.hasTrait(StreamingTrait.class) && targetShape.isBlobShape()) {
+                            if (!targetShape.hasTrait(StreamingTrait.class)) {
                                 writer.addUseImports(SmithyGoDependency.IOUTIL);
                                 writer.write("bs, err := ioutil.ReadAll(body)");
                                 writer.write("if err != nil { return err }");
-                                writer.write("v.$L = bs", memberName);
+                                writer.openBlock("if len(bs) > 0 {", "}", () -> {
+                                    if (targetShape.isBlobShape()) {
+                                        writer.write("v.$L = bs", memberName);
+                                    } else { // string
+                                        writer.addUseImports(SmithyGoDependency.SMITHY_PTR);
+                                        if (targetShape.hasTrait(EnumTrait.class)) {
+                                            writer.write("v.$L = string(bs)", memberName);
+                                        } else {
+                                            writer.write("v.$L = ptr.String(string(bs))", memberName);
+                                        }
+                                    }
+                                });
                             } else {
                                 writer.write("v.$L = body", memberName);
                             }
