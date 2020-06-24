@@ -6,13 +6,9 @@ import (
 	"os"
 )
 
-func releaseUsage() {
-	fmt.Printf("USAGE: todo")
-}
-
-func releaseCmd(args []string) {
+func releaseSubcmd(args []string) {
 	if len(args) < 2 {
-		releaseUsage()
+		usage()
 		os.Exit(1)
 	}
 
