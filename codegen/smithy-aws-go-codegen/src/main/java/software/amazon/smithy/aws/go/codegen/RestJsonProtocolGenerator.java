@@ -428,23 +428,20 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         Shape payloadShape = model.expectShape(memberShape.getTarget());
         String memberName = symbolProvider.toMemberName(memberShape);
 
-        Optional<MediaTypeTrait> mediaTypeTrait = payloadShape.getTrait(MediaTypeTrait.class);
-        mediaTypeTrait.ifPresent(typeTrait -> writer.write("restEncoder.SetHeader(\"Content-Type\").String($S)",
-                typeTrait.getValue()));
-
-        writer.addUseImports(SmithyGoDependency.IO);
-        writer.write("var payload io.Reader");
+        writer.write("restEncoder.SetHeader(\"Content-Type\").String($S)", getPayloadShapeMediaType(payloadShape));
+        writer.write("");
 
         if (payloadShape.hasTrait(StreamingTrait.class)) {
-            writer.write("payload = input.$L", memberName);
+            writer.write("payload := input.$L", memberName);
 
         } else if (payloadShape.isBlobShape()) {
             writer.addUseImports(SmithyGoDependency.BYTES);
-            writer.write("payload = bytes.NewReader(input.$L)", memberName);
+            writer.write("payload := bytes.NewReader(input.$L)", memberName);
 
         } else if (payloadShape.isStringShape()) {
             writer.addUseImports(SmithyGoDependency.STRINGS);
-            writer.write("payload = strings.NewReader(input.$L)", memberName);
+            writer.addUseImports(SmithyGoDependency.SMITHY_PTR);
+            writer.write("payload := strings.NewReader(ptr.ToString(input.$L))", memberName);
 
         } else {
             String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(payloadShape,
@@ -455,7 +452,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                     memberName, () -> {
                         writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
                     });
-            writer.write("payload = bytes.NewReader(jsonEncoder.Bytes())");
+            writer.write("payload := bytes.NewReader(jsonEncoder.Bytes())");
         }
 
         writer.openBlock("if request, err = request.SetStream(payload); err != nil {", "}",
@@ -463,6 +460,31 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                     writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
                 });
     }
+
+    /**
+     * Retruns the MediaType for the payload shape derived from the MediaTypeTrait, shape type, or document content type.
+     *
+     * @param payloadShape shape bound to the payload.
+     * @return string for media type.
+     */
+    private String getPayloadShapeMediaType(Shape payloadShape) {
+        Optional<MediaTypeTrait> mediaTypeTrait = payloadShape.getTrait(MediaTypeTrait.class);
+
+        if (mediaTypeTrait.isPresent()) {
+           return mediaTypeTrait.get().getValue();
+        }
+
+        if (payloadShape.isBlobShape()) {
+            return "application/octet-stream";
+        }
+
+        if (payloadShape.isStringShape()) {
+            return "test/plain";
+        }
+
+        return getDocumentContentType();
+    }
+
 
     @Override
     protected void writeMiddlewareDocumentSerializerDelegator(
