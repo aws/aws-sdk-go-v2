@@ -185,7 +185,14 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 HttpProtocolUnitTestGenerator.ConfigValue.builder()
                         .name(AddAwsConfigFields.REGION_CONFIG_NAME)
                         .value(writer -> {
-                            writer.writeInline("$S", "us-west-2");
+                            writer.write("$S,", "us-west-2");
+                        })
+                        .build(),
+                HttpProtocolUnitTestGenerator.ConfigValue.builder()
+                        .name(AddAwsConfigFields.HTTP_CLIENT_CONFIG_NAME)
+                        .value(writer -> {
+                            writer.addUseImports(AwsGoDependency.AWS_CORE);
+                            writer.write("aws.NewBuildableHTTPClient(),");
                         })
                         .build(),
                 HttpProtocolUnitTestGenerator.ConfigValue.builder()
@@ -195,7 +202,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                             writer.openBlock("aws.EndpointResolverFunc("
                                             + "func(service, region string) (e aws.Endpoint, err error) {",
                                     "}),", () -> {
-                                        writer.write("e.URL = \"https://127.0.0.1\"");
+                                        writer.write("e.URL = server.URL");
                                         writer.write("e.SigningRegion = \"us-west-2\"");
                                         writer.write("return e, err");
                                     });
