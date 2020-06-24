@@ -1411,7 +1411,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
     // generates Json decoder tokenizer start stub wrt to the shape
     private void writeJsonTokenizerStartStub(GoWriter writer, Shape shape) {
-        String startToken = shape.isListShape() ? "[" : "{";
+        String startToken = shape.isListShape() || shape.isSetShape() ? "[" : "{";
         writer.write("startToken, err := decoder.Token()");
         writer.write("if err == io.EOF { return nil }");
         writer.write("if err != nil { return err }");
@@ -1426,7 +1426,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
     // generates Json decoder tokenizer end stub wrt to the shape
     private void writeJsonTokenizerEndStub(GoWriter writer, Shape shape) {
-        String endToken = shape.isListShape() ? "]" : "}";
+        String endToken = shape.isListShape() || shape.isSetShape()  ? "]" : "}";
         writer.write("");
         writer.write("endToken, err := decoder.Token()");
         writer.write("if err != nil { return err }");
