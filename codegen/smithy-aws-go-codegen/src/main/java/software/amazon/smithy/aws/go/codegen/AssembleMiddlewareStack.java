@@ -27,6 +27,17 @@ public class AssembleMiddlewareStack implements GoIntegration {
     private static final String DESERIALIZE_MIDDLEWARE = "Deserialize";
 
     /**
+ 	 * Gets the sort order of the customization from -128 to 127, with lowest
+	 * executed first.
+     *
+     * @return Returns the sort order, defaults to -40.
+     */
+    @Override
+    public byte getOrder() {
+        return -40;
+    }
+
+    /**
      * Generates code to add middleware at the end in operation stack step.
      *
      * @param writer           writer used to write Go code.
