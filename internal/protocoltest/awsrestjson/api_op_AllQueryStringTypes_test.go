@@ -60,12 +60,12 @@ func TestClient_AllQueryStringTypes_awsRestjson1Serialize(t *testing.T) {
 					ptr.Int32(3),
 				},
 				QueryLong:   ptr.Int64(4),
-				QueryFloat:  ptr.Float32(1),
-				QueryDouble: ptr.Float64(1),
+				QueryFloat:  ptr.Float32(1.1),
+				QueryDouble: ptr.Float64(1.1),
 				QueryDoubleList: []*float64{
-					ptr.Float64(1.0),
-					ptr.Float64(2.0),
-					ptr.Float64(3.0),
+					ptr.Float64(1.1),
+					ptr.Float64(2.1),
+					ptr.Float64(3.1),
 				},
 				QueryBoolean: ptr.Bool(true),
 				QueryBooleanList: []*bool{
@@ -106,16 +106,16 @@ func TestClient_AllQueryStringTypes_awsRestjson1Serialize(t *testing.T) {
 				{Key: "IntegerSet", Value: "2"},
 				{Key: "IntegerSet", Value: "3"},
 				{Key: "Long", Value: "4"},
-				{Key: "Float", Value: "1"},
-				{Key: "Double", Value: "1"},
-				{Key: "DoubleList", Value: "1.0"},
-				{Key: "DoubleList", Value: "2.0"},
-				{Key: "DoubleList", Value: "3.0"},
+				{Key: "Float", Value: "1.1"},
+				{Key: "Double", Value: "1.1"},
+				{Key: "DoubleList", Value: "1.1"},
+				{Key: "DoubleList", Value: "2.1"},
+				{Key: "DoubleList", Value: "3.1"},
 				{Key: "Boolean", Value: "true"},
 				{Key: "BooleanList", Value: "true"},
 				{Key: "BooleanList", Value: "false"},
 				{Key: "BooleanList", Value: "true"},
-				{Key: "Timestamp", Value: "1"},
+				{Key: "Timestamp", Value: "1970-01-01T00%3A00%3A01Z"},
 				{Key: "TimestampList", Value: "1970-01-01T00%3A00%3A01Z"},
 				{Key: "TimestampList", Value: "1970-01-01T00%3A00%3A02Z"},
 				{Key: "TimestampList", Value: "1970-01-01T00%3A00%3A03Z"},
@@ -164,7 +164,7 @@ func TestClient_AllQueryStringTypes_awsRestjson1Serialize(t *testing.T) {
 			if e, a := c.ExpectMethod, actualReq.Method; e != a {
 				t.Errorf("expect %v method, got %v", e, a)
 			}
-			if e, a := c.ExpectURIPath, actualReq.URL.Path; e != a {
+			if e, a := c.ExpectURIPath, actualReq.URL.RawPath; e != a {
 				t.Errorf("expect %v path, got %v", e, a)
 			}
 			queryItems := smithytesting.ParseRawQuery(actualReq.URL.RawQuery)

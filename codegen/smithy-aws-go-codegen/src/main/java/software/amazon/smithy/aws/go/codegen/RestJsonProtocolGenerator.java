@@ -1032,7 +1032,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                             }
 
                             String memberName = symbolProvider.toMemberName(memberShape);
-                            writer.openBlock("case $S :", "", memberShape.getMemberName(), () -> {
+                            writer.openBlock("case $S:", "", getSerializedMemberName(memberShape), () -> {
                                 String operand = generateDocumentBindingMemberShapeDeserializer(writer, model,
                                         symbolProvider, memberShape);
                                 writer.write(String.format("v.%s = %s", memberName, operand));

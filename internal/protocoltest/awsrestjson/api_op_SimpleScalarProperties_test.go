@@ -104,7 +104,7 @@ func TestClient_SimpleScalarProperties_awsRestjson1Serialize(t *testing.T) {
 			if e, a := c.ExpectMethod, actualReq.Method; e != a {
 				t.Errorf("expect %v method, got %v", e, a)
 			}
-			if e, a := c.ExpectURIPath, actualReq.URL.Path; e != a {
+			if e, a := c.ExpectURIPath, actualReq.URL.RawPath; e != a {
 				t.Errorf("expect %v path, got %v", e, a)
 			}
 			queryItems := smithytesting.ParseRawQuery(actualReq.URL.RawQuery)

@@ -37,13 +37,13 @@ func TestClient_HttpRequestWithLabels_awsRestjson1Serialize(t *testing.T) {
 				Short:     ptr.Int16(1),
 				Integer:   ptr.Int32(2),
 				Long:      ptr.Int64(3),
-				Float:     ptr.Float32(4.0),
-				Double:    ptr.Float64(5.0),
+				Float:     ptr.Float32(4.1),
+				Double:    ptr.Float64(5.1),
 				Boolean:   ptr.Bool(true),
 				Timestamp: ptr.Time(smithytime.ParseEpochSeconds(1576540098)),
 			},
 			ExpectMethod:  "GET",
-			ExpectURIPath: "/HttpRequestWithLabels/string/1/2/3/4.0/5.0/true/2019-12-16T23%3A48%3A18Z",
+			ExpectURIPath: "/HttpRequestWithLabels/string/1/2/3/4.1/5.1/true/2019-12-16T23%3A48%3A18Z",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderEmpty(actual)
@@ -85,7 +85,7 @@ func TestClient_HttpRequestWithLabels_awsRestjson1Serialize(t *testing.T) {
 			if e, a := c.ExpectMethod, actualReq.Method; e != a {
 				t.Errorf("expect %v method, got %v", e, a)
 			}
-			if e, a := c.ExpectURIPath, actualReq.URL.Path; e != a {
+			if e, a := c.ExpectURIPath, actualReq.URL.RawPath; e != a {
 				t.Errorf("expect %v path, got %v", e, a)
 			}
 			queryItems := smithytesting.ParseRawQuery(actualReq.URL.RawQuery)
