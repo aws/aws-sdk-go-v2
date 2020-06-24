@@ -9,11 +9,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
 	"github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/ptr"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"io/ioutil"
+	"io"
 	"net/http"
+	"net/http/httptest"
+	"strconv"
 	"testing"
 )
 
@@ -44,14 +45,27 @@ func TestClient_GreetingWithErrors_awsRestjson1Deserialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				for k, vs := range c.Header {
+					for _, v := range vs {
+						w.Header().Add(k, v)
+					}
+				}
+				if len(c.BodyMediaType) != 0 && len(w.Header().Values("Content-Type")) == 0 {
+					w.Header().Set("Content-Type", c.BodyMediaType)
+				}
+				if len(c.Body) != 0 {
+					w.Header().Set("Content-Length", strconv.Itoa(len(c.Body)))
+				}
+				w.WriteHeader(c.StatusCode)
+				if len(c.Body) != 0 {
+					if _, err := io.Copy(w, bytes.NewReader(c.Body)); err != nil {
+						t.Errorf("failed to write response body, %v", err)
+					}
+				}
+			}))
+			defer server.Close()
 			client := New(Options{
-				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
-					return &http.Response{
-						StatusCode: c.StatusCode,
-						Header:     c.Header.Clone(),
-						Body:       ioutil.NopCloser(bytes.NewReader(c.Body)),
-					}, nil
-				}),
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
 						s.Build.Clear()
@@ -60,11 +74,13 @@ func TestClient_GreetingWithErrors_awsRestjson1Deserialize(t *testing.T) {
 					},
 				},
 				EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (e aws.Endpoint, err error) {
-					e.URL = "https://127.0.0.1"
+					e.URL = server.URL
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
-				Region: "us-west-2"})
+				HTTPClient: aws.NewBuildableHTTPClient(),
+				Region:     "us-west-2",
+			})
 			var params GreetingWithErrorsInput
 			result, err := client.GreetingWithErrors(context.Background(), &params)
 			if err != nil {
@@ -205,14 +221,27 @@ func TestClient_GreetingWithErrors_FooError_awsRestjson1Deserialize(t *testing.T
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				for k, vs := range c.Header {
+					for _, v := range vs {
+						w.Header().Add(k, v)
+					}
+				}
+				if len(c.BodyMediaType) != 0 && len(w.Header().Values("Content-Type")) == 0 {
+					w.Header().Set("Content-Type", c.BodyMediaType)
+				}
+				if len(c.Body) != 0 {
+					w.Header().Set("Content-Length", strconv.Itoa(len(c.Body)))
+				}
+				w.WriteHeader(c.StatusCode)
+				if len(c.Body) != 0 {
+					if _, err := io.Copy(w, bytes.NewReader(c.Body)); err != nil {
+						t.Errorf("failed to write response body, %v", err)
+					}
+				}
+			}))
+			defer server.Close()
 			client := New(Options{
-				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
-					return &http.Response{
-						StatusCode: c.StatusCode,
-						Header:     c.Header.Clone(),
-						Body:       ioutil.NopCloser(bytes.NewReader(c.Body)),
-					}, nil
-				}),
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
 						s.Build.Clear()
@@ -221,11 +250,13 @@ func TestClient_GreetingWithErrors_FooError_awsRestjson1Deserialize(t *testing.T
 					},
 				},
 				EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (e aws.Endpoint, err error) {
-					e.URL = "https://127.0.0.1"
+					e.URL = server.URL
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
-				Region: "us-west-2"})
+				HTTPClient: aws.NewBuildableHTTPClient(),
+				Region:     "us-west-2",
+			})
 			var params GreetingWithErrorsInput
 			result, err := client.GreetingWithErrors(context.Background(), &params)
 			if err == nil {
@@ -302,14 +333,27 @@ func TestClient_GreetingWithErrors_ComplexError_awsRestjson1Deserialize(t *testi
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				for k, vs := range c.Header {
+					for _, v := range vs {
+						w.Header().Add(k, v)
+					}
+				}
+				if len(c.BodyMediaType) != 0 && len(w.Header().Values("Content-Type")) == 0 {
+					w.Header().Set("Content-Type", c.BodyMediaType)
+				}
+				if len(c.Body) != 0 {
+					w.Header().Set("Content-Length", strconv.Itoa(len(c.Body)))
+				}
+				w.WriteHeader(c.StatusCode)
+				if len(c.Body) != 0 {
+					if _, err := io.Copy(w, bytes.NewReader(c.Body)); err != nil {
+						t.Errorf("failed to write response body, %v", err)
+					}
+				}
+			}))
+			defer server.Close()
 			client := New(Options{
-				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
-					return &http.Response{
-						StatusCode: c.StatusCode,
-						Header:     c.Header.Clone(),
-						Body:       ioutil.NopCloser(bytes.NewReader(c.Body)),
-					}, nil
-				}),
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
 						s.Build.Clear()
@@ -318,11 +362,13 @@ func TestClient_GreetingWithErrors_ComplexError_awsRestjson1Deserialize(t *testi
 					},
 				},
 				EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (e aws.Endpoint, err error) {
-					e.URL = "https://127.0.0.1"
+					e.URL = server.URL
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
-				Region: "us-west-2"})
+				HTTPClient: aws.NewBuildableHTTPClient(),
+				Region:     "us-west-2",
+			})
 			var params GreetingWithErrorsInput
 			result, err := client.GreetingWithErrors(context.Background(), &params)
 			if err == nil {
@@ -381,14 +427,27 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsRestjson1Deserialize(t *te
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				for k, vs := range c.Header {
+					for _, v := range vs {
+						w.Header().Add(k, v)
+					}
+				}
+				if len(c.BodyMediaType) != 0 && len(w.Header().Values("Content-Type")) == 0 {
+					w.Header().Set("Content-Type", c.BodyMediaType)
+				}
+				if len(c.Body) != 0 {
+					w.Header().Set("Content-Length", strconv.Itoa(len(c.Body)))
+				}
+				w.WriteHeader(c.StatusCode)
+				if len(c.Body) != 0 {
+					if _, err := io.Copy(w, bytes.NewReader(c.Body)); err != nil {
+						t.Errorf("failed to write response body, %v", err)
+					}
+				}
+			}))
+			defer server.Close()
 			client := New(Options{
-				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
-					return &http.Response{
-						StatusCode: c.StatusCode,
-						Header:     c.Header.Clone(),
-						Body:       ioutil.NopCloser(bytes.NewReader(c.Body)),
-					}, nil
-				}),
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
 						s.Build.Clear()
@@ -397,11 +456,13 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsRestjson1Deserialize(t *te
 					},
 				},
 				EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (e aws.Endpoint, err error) {
-					e.URL = "https://127.0.0.1"
+					e.URL = server.URL
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
-				Region: "us-west-2"})
+				HTTPClient: aws.NewBuildableHTTPClient(),
+				Region:     "us-west-2",
+			})
 			var params GreetingWithErrorsInput
 			result, err := client.GreetingWithErrors(context.Background(), &params)
 			if err == nil {
