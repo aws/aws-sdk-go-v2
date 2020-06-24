@@ -75,7 +75,15 @@ func addCmd(metadata *changes.Metadata, module string) {
 		module = currentModule
 	}
 
-	filledTemplate, err := editTemplate(changes.ChangeToTemplate(&changes.Change{Module: module}))
+	template, err := changes.ChangeToTemplate(&changes.Change{
+		Module: module,
+	})
+	if err != nil {
+		fmt.Printf("failed to create change: %v\n", err)
+		os.Exit(1)
+	}
+
+	filledTemplate, err := editTemplate(template)
 	if err != nil {
 		fmt.Printf("failed to create change: %v\n", err)
 		os.Exit(1)
@@ -128,7 +136,12 @@ func modifyCmd(metadata *changes.Metadata, id string) {
 		}
 	}
 
-	template := changes.ChangeToTemplate(change)
+	template, err := changes.ChangeToTemplate(change)
+	if err != nil {
+		fmt.Printf("failed to modify change: %v\n", err)
+		os.Exit(1)
+	}
+
 	filledTemplate, err := editTemplate(template)
 	if err != nil {
 		fmt.Printf("failed to modify change: %v\n", err)

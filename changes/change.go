@@ -3,20 +3,21 @@ package changes
 import (
 	"errors"
 	"fmt"
+	"gopkg.in/yaml.v2"
 	"strings"
 	"time"
 )
-
-// ChangeTemplate is an editor friendly template for creating or modifying a Change.
-const ChangeTemplate = `modules: %s
-# change type is one of: feature, bugfix
-change type: %s
-description: %s`
 
 // changeTypes maps valid Change Types to the header they are grouped under in CHANGELOGs.
 var changeHeaders = map[string]string{
 	"feature": "New Features",
 	"bugfix":  "Bug Fixes",
+}
+
+type changeTemplate struct {
+	Modules     []string `yaml:",flow"`
+	Type        string
+	Description string
 }
 
 // Change represents a change to a single Go module.
@@ -33,6 +34,11 @@ type Change struct {
 func NewChanges(modules []string, changeType, description string) ([]*Change, error) {
 	if len(modules) == 0 || changeType == "" || description == "" {
 		return nil, errors.New("missing module, type, or description")
+	}
+
+	changeType = strings.ToLower(changeType)
+	if _, ok := changeHeaders[changeType]; !ok {
+		return nil, fmt.Errorf("change type %s is not valid", changeType)
 	}
 
 	changes := make([]*Change, 0, len(modules))
@@ -52,47 +58,28 @@ func NewChanges(modules []string, changeType, description string) ([]*Change, er
 // TemplateToChanges parses the provided filledTemplate into the provided Change. If Change has no ID, TemplateToChange
 // will set the ID.
 func TemplateToChanges(filledTemplate string) ([]*Change, error) {
-	lines := strings.Split(filledTemplate, "\n")
+	var template changeTemplate
 
-	var modules []string
-	var changeType string
-	var description string
-
-	for _, l := range lines {
-		if l != "" && !strings.HasPrefix(l, "#") {
-			parts := strings.Split(l, ": ")
-			if len(parts) != 2 {
-				return nil, fmt.Errorf("template is incorrectly formatted at line: %s", l)
-			}
-
-			switch parts[0] {
-			case "modules":
-				trimmedMods := strings.Trim(parts[1], "[] ")
-				modules = strings.Split(trimmedMods, ",")
-				for i := range modules {
-					modules[i] = strings.Trim(modules[i], " \t")
-				}
-			case "change type":
-				parts[1] = strings.ToLower(parts[1])
-				if changeHeaders[parts[1]] == "" {
-					return nil, fmt.Errorf("%s is not a valid change type", parts[1])
-				}
-
-				changeType = parts[1]
-			case "description":
-				description = parts[1]
-			default:
-				return nil, fmt.Errorf("unknown template field: %s", parts[0])
-			}
-		}
+	err := yaml.Unmarshal([]byte(filledTemplate), &template)
+	if err != nil {
+		return nil, err
 	}
 
-	return NewChanges(modules, changeType, description)
+	return NewChanges(template.Modules, template.Type, template.Description)
 }
 
 // ChangeToTemplate returns a Change template populated with the given Change's data.
-func ChangeToTemplate(change *Change) string {
-	return fmt.Sprintf(ChangeTemplate, change.Module, change.Type, change.Description)
+func ChangeToTemplate(change *Change) (string, error) {
+	templateBytes, err := yaml.Marshal(changeTemplate{
+		Modules:     []string{change.Module},
+		Type:        change.Type,
+		Description: change.Description,
+	})
+	if err != nil {
+		return "", err
+	}
+
+	return string(templateBytes), nil
 }
 
 func generateId(module, changeType string) string {
