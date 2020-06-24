@@ -185,6 +185,9 @@ func TestClient_JsonLists_awsRestjson1Serialize(t *testing.T) {
 			var actualReq *http.Request
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				actualReq = r.Clone(r.Context())
+				if len(actualReq.URL.RawPath) == 0 {
+					actualReq.URL.RawPath = actualReq.URL.Path
+				}
 				var buf bytes.Buffer
 				if _, err := io.Copy(&buf, r.Body); err != nil {
 					t.Errorf("failed to read request body, %v", err)
