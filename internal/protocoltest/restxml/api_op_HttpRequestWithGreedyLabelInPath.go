@@ -49,8 +49,8 @@ func (c *Client) HttpRequestWithGreedyLabelInPath(ctx context.Context, params *H
 }
 
 type HttpRequestWithGreedyLabelInPathInput struct {
-	Baz *string
 	Foo *string
+	Baz *string
 }
 
 type HttpRequestWithGreedyLabelInPathOutput struct {

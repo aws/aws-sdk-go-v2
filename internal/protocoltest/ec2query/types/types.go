@@ -16,9 +16,9 @@ type RecursiveXmlShapesOutputNested2 struct {
 }
 
 type StructArg struct {
+	StringArg    *string
 	OtherArg     *bool
 	RecursiveArg *StructArg
-	StringArg    *string
 }
 
 type StructureListMember struct {

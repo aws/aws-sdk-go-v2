@@ -51,23 +51,23 @@ func (c *Client) TimestampFormatHeaders(ctx context.Context, params *TimestampFo
 }
 
 type TimestampFormatHeadersInput struct {
-	DefaultFormat      *time.Time
-	MemberDateTime     *time.Time
 	MemberEpochSeconds *time.Time
 	MemberHttpDate     *time.Time
-	TargetDateTime     *time.Time
+	MemberDateTime     *time.Time
+	DefaultFormat      *time.Time
 	TargetEpochSeconds *time.Time
 	TargetHttpDate     *time.Time
+	TargetDateTime     *time.Time
 }
 
 type TimestampFormatHeadersOutput struct {
-	DefaultFormat      *time.Time
-	MemberDateTime     *time.Time
 	MemberEpochSeconds *time.Time
 	MemberHttpDate     *time.Time
-	TargetDateTime     *time.Time
+	MemberDateTime     *time.Time
+	DefaultFormat      *time.Time
 	TargetEpochSeconds *time.Time
 	TargetHttpDate     *time.Time
+	TargetDateTime     *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
