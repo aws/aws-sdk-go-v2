@@ -50,8 +50,8 @@ func (c *Client) OmitsNullSerializesEmptyString(ctx context.Context, params *Omi
 }
 
 type OmitsNullSerializesEmptyStringInput struct {
-	EmptyString *string
 	NullValue   *string
+	EmptyString *string
 }
 
 type OmitsNullSerializesEmptyStringOutput struct {

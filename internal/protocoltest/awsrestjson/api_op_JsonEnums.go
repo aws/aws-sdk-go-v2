@@ -57,8 +57,8 @@ type JsonEnumsInput struct {
 	FooEnum2    types.FooEnum
 	FooEnum3    types.FooEnum
 	FooEnumList []types.FooEnum
-	FooEnumMap  map[string]types.FooEnum
 	FooEnumSet  []types.FooEnum
+	FooEnumMap  map[string]types.FooEnum
 }
 
 type JsonEnumsOutput struct {
@@ -66,8 +66,8 @@ type JsonEnumsOutput struct {
 	FooEnum2    types.FooEnum
 	FooEnum3    types.FooEnum
 	FooEnumList []types.FooEnum
-	FooEnumMap  map[string]types.FooEnum
 	FooEnumSet  []types.FooEnum
+	FooEnumMap  map[string]types.FooEnum
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
