@@ -108,11 +108,11 @@ func validateOpHttpRequestWithGreedyLabelInPathInput(v *HttpRequestWithGreedyLab
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HttpRequestWithGreedyLabelInPathInput"}
-	if v.Baz == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Baz"))
-	}
 	if v.Foo == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Foo"))
+	}
+	if v.Baz == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Baz"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -126,26 +126,26 @@ func validateOpHttpRequestWithLabelsAndTimestampFormatInput(v *HttpRequestWithLa
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HttpRequestWithLabelsAndTimestampFormatInput"}
-	if v.DefaultFormat == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DefaultFormat"))
-	}
-	if v.MemberDateTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemberDateTime"))
-	}
 	if v.MemberEpochSeconds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemberEpochSeconds"))
 	}
 	if v.MemberHttpDate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemberHttpDate"))
 	}
-	if v.TargetDateTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetDateTime"))
+	if v.MemberDateTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberDateTime"))
+	}
+	if v.DefaultFormat == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultFormat"))
 	}
 	if v.TargetEpochSeconds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetEpochSeconds"))
 	}
 	if v.TargetHttpDate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetHttpDate"))
+	}
+	if v.TargetDateTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetDateTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -159,14 +159,11 @@ func validateOpHttpRequestWithLabelsInput(v *HttpRequestWithLabelsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HttpRequestWithLabelsInput"}
-	if v.Boolean == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Boolean"))
+	if v.String_ == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("String_"))
 	}
-	if v.Double == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Double"))
-	}
-	if v.Float == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Float"))
+	if v.Short == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Short"))
 	}
 	if v.Integer == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Integer"))
@@ -174,11 +171,14 @@ func validateOpHttpRequestWithLabelsInput(v *HttpRequestWithLabelsInput) error {
 	if v.Long == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Long"))
 	}
-	if v.Short == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Short"))
+	if v.Float == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Float"))
 	}
-	if v.String_ == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("String_"))
+	if v.Double == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Double"))
+	}
+	if v.Boolean == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Boolean"))
 	}
 	if v.Timestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))

@@ -11,8 +11,8 @@ import (
 type ComplexError struct {
 	Message *string
 
-	Nested   *ComplexNestedErrorData
 	TopLevel *string
+	Nested   *ComplexNestedErrorData
 }
 
 func (e *ComplexError) Error() string {
@@ -26,17 +26,17 @@ func (e *ComplexError) ErrorMessage() string {
 }
 func (e *ComplexError) ErrorCode() string             { return "ComplexError" }
 func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ComplexError) GetNested() *ComplexNestedErrorData {
-	return e.Nested
-}
-func (e *ComplexError) HasNested() bool {
-	return e.Nested != nil
-}
 func (e *ComplexError) GetTopLevel() string {
 	return ptr.ToString(e.TopLevel)
 }
 func (e *ComplexError) HasTopLevel() bool {
 	return e.TopLevel != nil
+}
+func (e *ComplexError) GetNested() *ComplexNestedErrorData {
+	return e.Nested
+}
+func (e *ComplexError) HasNested() bool {
+	return e.Nested != nil
 }
 
 // This error is thrown when an invalid greeting value is provided.

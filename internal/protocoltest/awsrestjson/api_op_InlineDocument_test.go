@@ -6,6 +6,7 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithytesting "github.com/awslabs/smithy-go/testing"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
@@ -17,9 +18,9 @@ import (
 	"testing"
 )
 
-func TestClient_EmptyInputAndEmptyOutput_awsRestjson1Serialize(t *testing.T) {
+func TestClient_InlineDocument_awsRestjson1Serialize(t *testing.T) {
 	cases := map[string]struct {
-		Params        *EmptyInputAndEmptyOutputInput
+		Params        *InlineDocumentInput
 		ExpectMethod  string
 		ExpectURIPath string
 		ExpectQuery   []smithytesting.QueryItem
@@ -31,15 +32,27 @@ func TestClient_EmptyInputAndEmptyOutput_awsRestjson1Serialize(t *testing.T) {
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// Empty input serializes no payload
-		"RestJsonEmptyInputAndEmptyOutput": {
-			Params:        &EmptyInputAndEmptyOutputInput{},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/EmptyInputAndEmptyOutput",
+		// Serializes inline documents as part of the JSON request payload with no
+		// escaping.
+		"InlineDocumentInput": {
+			Params: &InlineDocumentInput{
+				StringValue:   ptr.String("string"),
+				DocumentValue: nil,
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/InlineDocument",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{}`))
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "stringValue": "string",
+			    "documentValue": {
+			        "foo": "bar"
+			    }
+			}`))
 			},
 		},
 	}
@@ -76,7 +89,7 @@ func TestClient_EmptyInputAndEmptyOutput_awsRestjson1Serialize(t *testing.T) {
 				HTTPClient: aws.NewBuildableHTTPClient(),
 				Region:     "us-west-2",
 			})
-			result, err := client.EmptyInputAndEmptyOutput(context.Background(), c.Params)
+			result, err := client.InlineDocument(context.Background(), c.Params)
 			if err != nil {
 				t.Fatalf("expect nil err, got %v", err)
 			}
@@ -108,20 +121,32 @@ func TestClient_EmptyInputAndEmptyOutput_awsRestjson1Serialize(t *testing.T) {
 	}
 }
 
-func TestClient_EmptyInputAndEmptyOutput_awsRestjson1Deserialize(t *testing.T) {
+func TestClient_InlineDocument_awsRestjson1Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
 		BodyMediaType string
 		Body          []byte
-		ExpectResult  *EmptyInputAndEmptyOutputOutput
+		ExpectResult  *InlineDocumentOutput
 	}{
-		// Empty output serializes no payload
-		"RestJsonEmptyInputAndEmptyOutput": {
-			StatusCode:    200,
+		// Serializes inline documents as part of the JSON response payload with no
+		// escaping.
+		"InlineDocumentOutput": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
 			BodyMediaType: "application/json",
-			Body:          []byte(``),
-			ExpectResult:  &EmptyInputAndEmptyOutputOutput{},
+			Body: []byte(`{
+			    "stringValue": "string",
+			    "documentValue": {
+			        "foo": "bar"
+			    }
+			}`),
+			ExpectResult: &InlineDocumentOutput{
+				StringValue:   ptr.String("string"),
+				DocumentValue: nil,
+			},
 		},
 	}
 	for name, c := range cases {
@@ -162,8 +187,8 @@ func TestClient_EmptyInputAndEmptyOutput_awsRestjson1Deserialize(t *testing.T) {
 				HTTPClient: aws.NewBuildableHTTPClient(),
 				Region:     "us-west-2",
 			})
-			var params EmptyInputAndEmptyOutputInput
-			result, err := client.EmptyInputAndEmptyOutput(context.Background(), &params)
+			var params InlineDocumentInput
+			result, err := client.InlineDocument(context.Background(), &params)
 			if err != nil {
 				t.Fatalf("expect nil err, got %v", err)
 			}
