@@ -2,6 +2,8 @@ github.com/awslabs/smithy-go v0.0.0-20200617230012-dcb49a2a302d h1:kLefSezMjHYpy
 github.com/awslabs/smithy-go v0.0.0-20200617230012-dcb49a2a302d/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/awslabs/smithy-go v0.0.0-20200625204536-9749f335749f h1:exFiNX12QoMjLwwtH70VxP1rrz+TxWD9jhDg3I6RoMY=
 github.com/awslabs/smithy-go v0.0.0-20200625204536-9749f335749f/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
+github.com/awslabs/smithy-go v0.0.0-20200625213230-2fdcb4039b95 h1:ZR+/HH9/nLsBpr1Kz7wh2CeTIiBCBbWBefkFGs7YUjY=
+github.com/awslabs/smithy-go v0.0.0-20200625213230-2fdcb4039b95/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/go-sql-driver/mysql v1.5.0 h1:ozyZYNQW3x3HtqT1jira07DN2PArx2v7/mN66gGcHOs=
