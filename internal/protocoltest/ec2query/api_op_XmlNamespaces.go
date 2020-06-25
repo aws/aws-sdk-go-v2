@@ -17,18 +17,11 @@ func (c *Client) XmlNamespaces(ctx context.Context, params *XmlNamespacesInput, 
 	for _, fn := range optFns {
 		fn(&options)
 	}
-	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
-		Region:         options.Region,
-		ServiceName:    "EC2 Protocol",
-		ServiceID:      "ec2protocol",
-		EndpointPrefix: "ec2protocol",
-		OperationName:  "XmlNamespaces",
-	}, middleware.Before)
-	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)
-	stack.Finalize.Add(retry.NewAttemptMiddleware(options.Retryer, smithyhttp.RequestCloner), middleware.After)
-	stack.Finalize.Add(retry.MetricsHeaderMiddleware{}, middleware.After)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	retry.AddRetryMiddlewares(stack, options)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlNamespaces(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -57,4 +50,14 @@ type XmlNamespacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func newServiceMetadataMiddleware_opXmlNamespaces(region string) awsmiddleware.RegisterServiceMetadata {
+	return awsmiddleware.RegisterServiceMetadata{
+		Region:         region,
+		ServiceName:    "EC2 Protocol",
+		ServiceID:      "ec2protocol",
+		EndpointPrefix: "ec2protocol",
+		OperationName:  "XmlNamespaces",
+	}
 }

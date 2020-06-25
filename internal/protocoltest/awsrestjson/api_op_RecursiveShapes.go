@@ -18,20 +18,12 @@ func (c *Client) RecursiveShapes(ctx context.Context, params *RecursiveShapesInp
 	for _, fn := range optFns {
 		fn(&options)
 	}
-	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
-		Region:         options.Region,
-		ServiceName:    "Rest Json Protocol",
-		ServiceID:      "restjsonprotocol",
-		EndpointPrefix: "restjsonprotocol",
-		OperationName:  "RecursiveShapes",
-	}, middleware.Before)
-	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	stack.Serialize.Add(&awsRestjson1_serializeOpRecursiveShapes{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpRecursiveShapes{}, middleware.After)
-	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)
-	stack.Finalize.Add(retry.NewAttemptMiddleware(options.Retryer, smithyhttp.RequestCloner), middleware.After)
-	stack.Finalize.Add(retry.MetricsHeaderMiddleware{}, middleware.After)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	retry.AddRetryMiddlewares(stack, options)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opRecursiveShapes(options.Region), middleware.Before)
+	addawsRestjson1_serdeOpRecursiveShapesMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -61,4 +53,19 @@ type RecursiveShapesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestjson1_serdeOpRecursiveShapesMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add("&awsRestjson1_serializeOpRecursiveShapes{}", middleware.After)
+	stack.Deserialize.Add("&awsRestjson1_deserializeOpRecursiveShapes{}", middleware.After)
+}
+
+func newServiceMetadataMiddleware_opRecursiveShapes(region string) awsmiddleware.RegisterServiceMetadata {
+	return awsmiddleware.RegisterServiceMetadata{
+		Region:         region,
+		ServiceName:    "Rest Json Protocol",
+		ServiceID:      "restjsonprotocol",
+		EndpointPrefix: "restjsonprotocol",
+		OperationName:  "RecursiveShapes",
+	}
 }

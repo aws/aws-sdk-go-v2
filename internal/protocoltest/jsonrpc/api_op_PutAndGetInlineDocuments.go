@@ -18,21 +18,12 @@ func (c *Client) PutAndGetInlineDocuments(ctx context.Context, params *PutAndGet
 	for _, fn := range optFns {
 		fn(&options)
 	}
-	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
-		Region:         options.Region,
-		ServiceName:    "Json Protocol",
-		ServiceID:      "jsonprotocol",
-		EndpointPrefix: "jsonprotocol",
-		SigningName:    "foo",
-		OperationName:  "PutAndGetInlineDocuments",
-	}, middleware.Before)
-	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)
-	stack.Finalize.Add(retry.NewAttemptMiddleware(options.Retryer, smithyhttp.RequestCloner), middleware.After)
-	stack.Finalize.Add(retry.MetricsHeaderMiddleware{}, middleware.After)
-	stack.Finalize.Add(&v4.ComputePayloadSHA256Middleware{}, middleware.Before)
-	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(options.HTTPSigner), middleware.After)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	retry.AddRetryMiddlewares(stack, options)
+	v4.AddHTTPSignerMiddlewares(stack, options)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opPutAndGetInlineDocuments(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -62,4 +53,15 @@ type PutAndGetInlineDocumentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func newServiceMetadataMiddleware_opPutAndGetInlineDocuments(region string) awsmiddleware.RegisterServiceMetadata {
+	return awsmiddleware.RegisterServiceMetadata{
+		Region:         region,
+		ServiceName:    "Json Protocol",
+		ServiceID:      "jsonprotocol",
+		EndpointPrefix: "jsonprotocol",
+		SigningName:    "foo",
+		OperationName:  "PutAndGetInlineDocuments",
+	}
 }
