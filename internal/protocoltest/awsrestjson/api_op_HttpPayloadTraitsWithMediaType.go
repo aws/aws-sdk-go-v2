@@ -58,8 +58,8 @@ type HttpPayloadTraitsWithMediaTypeOutput struct {
 }
 
 func addawsRestjson1_serdeOpHttpPayloadTraitsWithMediaTypeMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpHttpPayloadTraitsWithMediaType{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpHttpPayloadTraitsWithMediaType{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpHttpPayloadTraitsWithMediaType{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpPayloadTraitsWithMediaType{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opHttpPayloadTraitsWithMediaType(region string) awsmiddleware.RegisterServiceMetadata {

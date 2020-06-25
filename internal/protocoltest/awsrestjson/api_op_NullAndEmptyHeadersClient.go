@@ -59,8 +59,8 @@ type NullAndEmptyHeadersClientOutput struct {
 }
 
 func addawsRestjson1_serdeOpNullAndEmptyHeadersClientMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpNullAndEmptyHeadersClient{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpNullAndEmptyHeadersClient{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpNullAndEmptyHeadersClient{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpNullAndEmptyHeadersClient{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opNullAndEmptyHeadersClient(region string) awsmiddleware.RegisterServiceMetadata {

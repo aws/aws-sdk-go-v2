@@ -184,8 +184,8 @@ type PutSessionOutput struct {
 }
 
 func addawsRestjson1_serdeOpPutSessionMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpPutSession{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpPutSession{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpPutSession{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpPutSession{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opPutSession(region string) awsmiddleware.RegisterServiceMetadata {

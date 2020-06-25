@@ -69,8 +69,8 @@ type DeleteSessionOutput struct {
 }
 
 func addawsRestjson1_serdeOpDeleteSessionMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpDeleteSession{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpDeleteSession{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSession{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSession{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opDeleteSession(region string) awsmiddleware.RegisterServiceMetadata {

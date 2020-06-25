@@ -55,8 +55,8 @@ type JsonBlobsOutput struct {
 }
 
 func addawsRestjson1_serdeOpJsonBlobsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpJsonBlobs{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpJsonBlobs{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpJsonBlobs{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpJsonBlobs{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opJsonBlobs(region string) awsmiddleware.RegisterServiceMetadata {

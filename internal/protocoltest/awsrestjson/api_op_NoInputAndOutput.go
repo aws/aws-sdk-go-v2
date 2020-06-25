@@ -54,8 +54,8 @@ type NoInputAndOutputOutput struct {
 }
 
 func addawsRestjson1_serdeOpNoInputAndOutputMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpNoInputAndOutput{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpNoInputAndOutput{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpNoInputAndOutput{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpNoInputAndOutput{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opNoInputAndOutput(region string) awsmiddleware.RegisterServiceMetadata {

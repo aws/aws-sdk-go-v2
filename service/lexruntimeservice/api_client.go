@@ -3,6 +3,7 @@ package lexruntimeservice
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
 	"net/http"
@@ -69,7 +70,7 @@ type Options struct {
 
 	// Retryer guides how HTTP requests should be retried in case of recoverable
 	// failures. When nil the API client will use a default retryer.
-	Retryer aws.Retryer
+	Retryer retry.Retryer
 
 	// The HTTP client to invoke API calls with. Defaults to client's default HTTP
 	// implementation if nil.
@@ -100,7 +101,7 @@ func (o Options) GetRegion() string {
 	return o.Region
 }
 
-func (o Options) GetRetryer() aws.Retryer {
+func (o Options) GetRetryer() retry.Retryer {
 	return o.Retryer
 }
 
@@ -124,8 +125,8 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:       cfg.HTTPClient,
 		Logger:           cfg.Logger,
 		EndpointResolver: cfg.EndpointResolver,
-		LogLevel:         cfg.LogLevel,
 		Retryer:          cfg.Retryer,
+		LogLevel:         cfg.LogLevel,
 		Region:           cfg.Region,
 		Credentials:      cfg.Credentials,
 	}

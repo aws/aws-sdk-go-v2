@@ -63,8 +63,8 @@ type JsonTimestampsOutput struct {
 }
 
 func addawsRestjson1_serdeOpJsonTimestampsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpJsonTimestamps{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpJsonTimestamps{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpJsonTimestamps{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpJsonTimestamps{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opJsonTimestamps(region string) awsmiddleware.RegisterServiceMetadata {

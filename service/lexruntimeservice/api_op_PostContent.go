@@ -80,7 +80,7 @@ func (c *Client) PostContent(ctx context.Context, params *PostContentInput, optF
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	v4.AddUnsignedPayloadMiddleware(stack, options)
+	v4.AddUnsignedPayloadMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPostContent(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpPostContentMiddlewares(stack)
 
@@ -328,8 +328,8 @@ type PostContentOutput struct {
 }
 
 func addawsRestjson1_serdeOpPostContentMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpPostContent{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpPostContent{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpPostContent{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpPostContent{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opPostContent(region string) awsmiddleware.RegisterServiceMetadata {

@@ -61,8 +61,8 @@ type HttpRequestWithLabelsAndTimestampFormatOutput struct {
 }
 
 func addawsRestjson1_serdeOpHttpRequestWithLabelsAndTimestampFormatMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpHttpRequestWithLabelsAndTimestampFormat{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpHttpRequestWithLabelsAndTimestampFormat{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpHttpRequestWithLabelsAndTimestampFormat{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpRequestWithLabelsAndTimestampFormat{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opHttpRequestWithLabelsAndTimestampFormat(region string) awsmiddleware.RegisterServiceMetadata {

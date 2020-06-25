@@ -81,8 +81,8 @@ type GetSessionOutput struct {
 }
 
 func addawsRestjson1_serdeOpGetSessionMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpGetSession{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpGetSession{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpGetSession{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSession{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opGetSession(region string) awsmiddleware.RegisterServiceMetadata {

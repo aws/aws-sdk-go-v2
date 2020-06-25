@@ -68,8 +68,8 @@ type GreetingWithErrorsOutput struct {
 }
 
 func addawsRestjson1_serdeOpGreetingWithErrorsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpGreetingWithErrors{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpGreetingWithErrors{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpGreetingWithErrors{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpGreetingWithErrors{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opGreetingWithErrors(region string) awsmiddleware.RegisterServiceMetadata {
