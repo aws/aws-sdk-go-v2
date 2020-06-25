@@ -101,3 +101,15 @@ func GetResponseMetadata(metadata middleware.Metadata) (v ResponseMetadata) {
 func setResponseMetadata(metadata *middleware.Metadata, responseMetadata ResponseMetadata) {
 	metadata.Set(responseMetadataKey{}, responseMetadata)
 }
+
+// AddRequestInvocationIDMiddleware adds RequestInvocationIDMiddleware to the middleware stack
+func AddRequestInvocationIDMiddleware(stack *middleware.Stack) {
+	requestInvocationIDMiddleware := RequestInvocationIDMiddleware{}
+	stack.Build.Add(requestInvocationIDMiddleware, middleware.After)
+}
+
+// AddAttemptClockSkewMiddleware adds AttemptClockSkewMiddleware to the middleware stack
+func AddAttemptClockSkewMiddleware(stack *middleware.Stack) {
+	attemptClockSkeyMiddleware := AttemptClockSkewMiddleware{}
+	stack.Deserialize.Add(attemptClockSkeyMiddleware, middleware.After)
+}
