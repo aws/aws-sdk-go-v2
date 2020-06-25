@@ -17,20 +17,12 @@ func (c *Client) JsonBlobs(ctx context.Context, params *JsonBlobsInput, optFns .
 	for _, fn := range optFns {
 		fn(&options)
 	}
-	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
-		Region:         options.Region,
-		ServiceName:    "Rest Json Protocol",
-		ServiceID:      "restjsonprotocol",
-		EndpointPrefix: "restjsonprotocol",
-		OperationName:  "JsonBlobs",
-	}, middleware.Before)
-	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	stack.Serialize.Add(&awsRestjson1_serializeOpJsonBlobs{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpJsonBlobs{}, middleware.After)
-	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)
-	stack.Finalize.Add(retry.NewAttemptMiddleware(options.Retryer, smithyhttp.RequestCloner), middleware.After)
-	stack.Finalize.Add(retry.MetricsHeaderMiddleware{}, middleware.After)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	retry.AddRetryMiddlewares(stack, options)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonBlobs(options.Region), middleware.Before)
+	addawsRestjson1_serdeOpJsonBlobsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -60,4 +52,19 @@ type JsonBlobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestjson1_serdeOpJsonBlobsMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add("&awsRestjson1_serializeOpJsonBlobs{}", middleware.After)
+	stack.Deserialize.Add("&awsRestjson1_deserializeOpJsonBlobs{}", middleware.After)
+}
+
+func newServiceMetadataMiddleware_opJsonBlobs(region string) awsmiddleware.RegisterServiceMetadata {
+	return awsmiddleware.RegisterServiceMetadata{
+		Region:         region,
+		ServiceName:    "Rest Json Protocol",
+		ServiceID:      "restjsonprotocol",
+		EndpointPrefix: "restjsonprotocol",
+		OperationName:  "JsonBlobs",
+	}
 }

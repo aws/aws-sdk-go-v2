@@ -17,20 +17,12 @@ func (c *Client) OmitsNullSerializesEmptyString(ctx context.Context, params *Omi
 	for _, fn := range optFns {
 		fn(&options)
 	}
-	stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
-		Region:         options.Region,
-		ServiceName:    "Rest Json Protocol",
-		ServiceID:      "restjsonprotocol",
-		EndpointPrefix: "restjsonprotocol",
-		OperationName:  "OmitsNullSerializesEmptyString",
-	}, middleware.Before)
-	stack.Build.Add(awsmiddleware.RequestInvocationIDMiddleware{}, middleware.After)
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	stack.Serialize.Add(&awsRestjson1_serializeOpOmitsNullSerializesEmptyString{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpOmitsNullSerializesEmptyString{}, middleware.After)
-	stack.Deserialize.Add(awsmiddleware.AttemptClockSkewMiddleware{}, middleware.After)
-	stack.Finalize.Add(retry.NewAttemptMiddleware(options.Retryer, smithyhttp.RequestCloner), middleware.After)
-	stack.Finalize.Add(retry.MetricsHeaderMiddleware{}, middleware.After)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	retry.AddRetryMiddlewares(stack, options)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opOmitsNullSerializesEmptyString(options.Region), middleware.Before)
+	addawsRestjson1_serdeOpOmitsNullSerializesEmptyStringMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -59,4 +51,19 @@ type OmitsNullSerializesEmptyStringInput struct {
 type OmitsNullSerializesEmptyStringOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestjson1_serdeOpOmitsNullSerializesEmptyStringMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add("&awsRestjson1_serializeOpOmitsNullSerializesEmptyString{}", middleware.After)
+	stack.Deserialize.Add("&awsRestjson1_deserializeOpOmitsNullSerializesEmptyString{}", middleware.After)
+}
+
+func newServiceMetadataMiddleware_opOmitsNullSerializesEmptyString(region string) awsmiddleware.RegisterServiceMetadata {
+	return awsmiddleware.RegisterServiceMetadata{
+		Region:         region,
+		ServiceName:    "Rest Json Protocol",
+		ServiceID:      "restjsonprotocol",
+		EndpointPrefix: "restjsonprotocol",
+		OperationName:  "OmitsNullSerializesEmptyString",
+	}
 }

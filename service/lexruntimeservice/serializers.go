@@ -604,10 +604,11 @@ func awsRestjson1_serializeDocumentStringMap(v map[string]*string, value smithyj
 	defer object.Close()
 
 	for key := range v {
+		om := object.Key(key)
 		if vv := v[key]; vv == nil {
+			om.Null()
 			continue
 		}
-		om := object.Key(key)
 		om.String(*v[key])
 	}
 	return nil
