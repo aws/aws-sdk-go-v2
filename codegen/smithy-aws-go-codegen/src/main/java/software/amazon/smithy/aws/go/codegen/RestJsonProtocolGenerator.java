@@ -1176,11 +1176,10 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             case UNION:
             case DOCUMENT:
                 writer.write("// TODO: Support " + targetShape.getType() + " Deserialization");
-                break;
+                return "nil";
             default:
                 throw new CodegenException("Unexpected shape deserialization to JSON");
         }
-        return "";
     }
 
 
