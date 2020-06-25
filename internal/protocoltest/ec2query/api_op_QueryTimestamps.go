@@ -4,7 +4,7 @@ package ec2query
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -30,7 +30,7 @@ func (c *Client) QueryTimestamps(ctx context.Context, params *QueryTimestampsInp
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	awsstack.AddRetryMiddlewares(stack, options)
+	retry.AddRetryMiddlewares(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opQueryTimestamps(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
@@ -53,9 +53,9 @@ func (c *Client) QueryTimestamps(ctx context.Context, params *QueryTimestampsInp
 }
 
 type QueryTimestampsInput struct {
+	NormalFormat *time.Time
 	EpochMember  *time.Time
 	EpochTarget  *time.Time
-	NormalFormat *time.Time
 }
 
 type QueryTimestampsOutput struct {

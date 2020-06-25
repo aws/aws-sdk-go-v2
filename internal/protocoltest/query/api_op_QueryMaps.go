@@ -4,7 +4,7 @@ package query
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -21,7 +21,7 @@ func (c *Client) QueryMaps(ctx context.Context, params *QueryMapsInput, optFns .
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	awsstack.AddRetryMiddlewares(stack, options)
+	retry.AddRetryMiddlewares(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opQueryMaps(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
@@ -44,13 +44,13 @@ func (c *Client) QueryMaps(ctx context.Context, params *QueryMapsInput, optFns .
 }
 
 type QueryMapsInput struct {
+	MapArg                  map[string]*string
+	RenamedMapArg           map[string]*string
 	ComplexMapArg           map[string]*types.GreetingStruct
+	MapWithXmlMemberName    map[string]*string
 	FlattenedMap            map[string]*string
 	FlattenedMapWithXmlName map[string]*string
-	MapArg                  map[string]*string
 	MapOfLists              map[string][]*string
-	MapWithXmlMemberName    map[string]*string
-	RenamedMapArg           map[string]*string
 }
 
 type QueryMapsOutput struct {

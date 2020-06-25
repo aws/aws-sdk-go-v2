@@ -4,7 +4,7 @@ package restxml
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -19,7 +19,7 @@ func (c *Client) SimpleScalarProperties(ctx context.Context, params *SimpleScala
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	awsstack.AddRetryMiddlewares(stack, options)
+	retry.AddRetryMiddlewares(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSimpleScalarProperties(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
@@ -42,29 +42,29 @@ func (c *Client) SimpleScalarProperties(ctx context.Context, params *SimpleScala
 }
 
 type SimpleScalarPropertiesInput struct {
-	ByteValue         *int8
-	DoubleValue       *float64
-	FalseBooleanValue *bool
-	FloatValue        *float32
 	Foo               *string
-	IntegerValue      *int32
-	LongValue         *int64
-	ShortValue        *int16
 	StringValue       *string
 	TrueBooleanValue  *bool
+	FalseBooleanValue *bool
+	ByteValue         *int8
+	ShortValue        *int16
+	IntegerValue      *int32
+	LongValue         *int64
+	FloatValue        *float32
+	DoubleValue       *float64
 }
 
 type SimpleScalarPropertiesOutput struct {
-	ByteValue         *int8
-	DoubleValue       *float64
-	FalseBooleanValue *bool
-	FloatValue        *float32
 	Foo               *string
-	IntegerValue      *int32
-	LongValue         *int64
-	ShortValue        *int16
 	StringValue       *string
 	TrueBooleanValue  *bool
+	FalseBooleanValue *bool
+	ByteValue         *int8
+	ShortValue        *int16
+	IntegerValue      *int32
+	LongValue         *int64
+	FloatValue        *float32
+	DoubleValue       *float64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

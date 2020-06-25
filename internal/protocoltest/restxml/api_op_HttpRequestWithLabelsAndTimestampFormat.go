@@ -4,7 +4,7 @@ package restxml
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -22,7 +22,7 @@ func (c *Client) HttpRequestWithLabelsAndTimestampFormat(ctx context.Context, pa
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	awsstack.AddRetryMiddlewares(stack, options)
+	retry.AddRetryMiddlewares(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithLabelsAndTimestampFormat(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
@@ -45,13 +45,13 @@ func (c *Client) HttpRequestWithLabelsAndTimestampFormat(ctx context.Context, pa
 }
 
 type HttpRequestWithLabelsAndTimestampFormatInput struct {
-	DefaultFormat      *time.Time
-	MemberDateTime     *time.Time
 	MemberEpochSeconds *time.Time
 	MemberHttpDate     *time.Time
-	TargetDateTime     *time.Time
+	MemberDateTime     *time.Time
+	DefaultFormat      *time.Time
 	TargetEpochSeconds *time.Time
 	TargetHttpDate     *time.Time
+	TargetDateTime     *time.Time
 }
 
 type HttpRequestWithLabelsAndTimestampFormatOutput struct {

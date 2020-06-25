@@ -4,7 +4,7 @@ package ec2query
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -21,7 +21,7 @@ func (c *Client) SimpleInputParams(ctx context.Context, params *SimpleInputParam
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	awsstack.AddRetryMiddlewares(stack, options)
+	retry.AddRetryMiddlewares(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSimpleInputParams(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
@@ -44,15 +44,15 @@ func (c *Client) SimpleInputParams(ctx context.Context, params *SimpleInputParam
 }
 
 type SimpleInputParamsInput struct {
-	Bam                *int32
+	Foo                *string
 	Bar                *string
 	Baz                *bool
+	Bam                *int32
 	Boo                *float64
-	Foo                *string
-	FooEnum            types.FooEnum
-	HasQueryAndXmlName *string
-	HasQueryName       *string
 	Qux                []byte
+	FooEnum            types.FooEnum
+	HasQueryName       *string
+	HasQueryAndXmlName *string
 	UsesXmlName        *string
 }
 

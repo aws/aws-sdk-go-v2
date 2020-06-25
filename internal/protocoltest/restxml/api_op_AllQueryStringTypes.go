@@ -4,7 +4,7 @@ package restxml
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -22,7 +22,7 @@ func (c *Client) AllQueryStringTypes(ctx context.Context, params *AllQueryString
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	awsstack.AddRetryMiddlewares(stack, options)
+	retry.AddRetryMiddlewares(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAllQueryStringTypes(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
@@ -45,24 +45,24 @@ func (c *Client) AllQueryStringTypes(ctx context.Context, params *AllQueryString
 }
 
 type AllQueryStringTypesInput struct {
-	QueryBoolean       *bool
-	QueryBooleanList   []*bool
+	QueryString        *string
+	QueryStringList    []*string
+	QueryStringSet     []*string
 	QueryByte          *int8
-	QueryDouble        *float64
-	QueryDoubleList    []*float64
-	QueryEnum          types.FooEnum
-	QueryEnumList      []types.FooEnum
-	QueryFloat         *float32
+	QueryShort         *int16
 	QueryInteger       *int32
 	QueryIntegerList   []*int32
 	QueryIntegerSet    []*int32
 	QueryLong          *int64
-	QueryShort         *int16
-	QueryString        *string
-	QueryStringList    []*string
-	QueryStringSet     []*string
+	QueryFloat         *float32
+	QueryDouble        *float64
+	QueryDoubleList    []*float64
+	QueryBoolean       *bool
+	QueryBooleanList   []*bool
 	QueryTimestamp     *time.Time
 	QueryTimestampList []*time.Time
+	QueryEnum          types.FooEnum
+	QueryEnumList      []types.FooEnum
 }
 
 type AllQueryStringTypesOutput struct {

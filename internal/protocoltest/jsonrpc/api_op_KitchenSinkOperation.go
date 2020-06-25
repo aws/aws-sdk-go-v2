@@ -4,7 +4,8 @@ package jsonrpc
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -21,8 +22,8 @@ func (c *Client) KitchenSinkOperation(ctx context.Context, params *KitchenSinkOp
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	awsstack.AddRetryMiddlewares(stack, options)
-	awsstack.AddHTTPSignerMiddlewares(stack, options)
+	retry.AddRetryMiddlewares(stack, options)
+	v4.AddHTTPSignerMiddlewares(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opKitchenSinkOperation(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {

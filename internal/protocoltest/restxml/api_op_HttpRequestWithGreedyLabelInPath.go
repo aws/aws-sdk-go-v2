@@ -4,7 +4,7 @@ package restxml
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -19,7 +19,7 @@ func (c *Client) HttpRequestWithGreedyLabelInPath(ctx context.Context, params *H
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	awsstack.AddRetryMiddlewares(stack, options)
+	retry.AddRetryMiddlewares(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithGreedyLabelInPath(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
@@ -42,8 +42,8 @@ func (c *Client) HttpRequestWithGreedyLabelInPath(ctx context.Context, params *H
 }
 
 type HttpRequestWithGreedyLabelInPathInput struct {
-	Baz *string
 	Foo *string
+	Baz *string
 }
 
 type HttpRequestWithGreedyLabelInPathOutput struct {

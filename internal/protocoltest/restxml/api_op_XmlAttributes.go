@@ -4,7 +4,7 @@ package restxml
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -20,7 +20,7 @@ func (c *Client) XmlAttributes(ctx context.Context, params *XmlAttributesInput, 
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	awsstack.AddRetryMiddlewares(stack, options)
+	retry.AddRetryMiddlewares(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlAttributes(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
@@ -43,13 +43,13 @@ func (c *Client) XmlAttributes(ctx context.Context, params *XmlAttributesInput, 
 }
 
 type XmlAttributesInput struct {
-	Attr *string
 	Foo  *string
+	Attr *string
 }
 
 type XmlAttributesOutput struct {
-	Attr *string
 	Foo  *string
+	Attr *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

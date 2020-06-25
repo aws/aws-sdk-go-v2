@@ -4,7 +4,7 @@ package query
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -21,7 +21,7 @@ func (c *Client) QueryLists(ctx context.Context, params *QueryListsInput, optFns
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	awsstack.AddRetryMiddlewares(stack, options)
+	retry.AddRetryMiddlewares(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opQueryLists(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
@@ -44,11 +44,11 @@ func (c *Client) QueryLists(ctx context.Context, params *QueryListsInput, optFns
 }
 
 type QueryListsInput struct {
+	ListArg                     []*string
 	ComplexListArg              []*types.GreetingStruct
 	FlattenedListArg            []*string
-	FlattenedListArgWithXmlName []*string
-	ListArg                     []*string
 	ListArgWithXmlNameMember    []*string
+	FlattenedListArgWithXmlName []*string
 }
 
 type QueryListsOutput struct {

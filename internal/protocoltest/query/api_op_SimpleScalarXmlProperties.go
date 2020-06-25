@@ -4,7 +4,7 @@ package query
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -19,7 +19,7 @@ func (c *Client) SimpleScalarXmlProperties(ctx context.Context, params *SimpleSc
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	awsstack.AddRetryMiddlewares(stack, options)
+	retry.AddRetryMiddlewares(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSimpleScalarXmlProperties(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
@@ -45,16 +45,16 @@ type SimpleScalarXmlPropertiesInput struct {
 }
 
 type SimpleScalarXmlPropertiesOutput struct {
-	ByteValue         *int8
-	DoubleValue       *float64
+	StringValue       *string
 	EmptyStringValue  *string
+	TrueBooleanValue  *bool
 	FalseBooleanValue *bool
-	FloatValue        *float32
+	ByteValue         *int8
+	ShortValue        *int16
 	IntegerValue      *int32
 	LongValue         *int64
-	ShortValue        *int16
-	StringValue       *string
-	TrueBooleanValue  *bool
+	FloatValue        *float32
+	DoubleValue       *float64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -4,7 +4,8 @@ package jsonrpc
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -19,8 +20,8 @@ func (c *Client) EmptyOperation(ctx context.Context, params *EmptyOperationInput
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	awsstack.AddRetryMiddlewares(stack, options)
-	awsstack.AddHTTPSignerMiddlewares(stack, options)
+	retry.AddRetryMiddlewares(stack, options)
+	v4.AddHTTPSignerMiddlewares(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEmptyOperation(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {

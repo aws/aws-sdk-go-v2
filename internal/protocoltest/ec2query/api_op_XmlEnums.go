@@ -4,7 +4,7 @@ package ec2query
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -21,7 +21,7 @@ func (c *Client) XmlEnums(ctx context.Context, params *XmlEnumsInput, optFns ...
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	awsstack.AddRetryMiddlewares(stack, options)
+	retry.AddRetryMiddlewares(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlEnums(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
@@ -51,8 +51,8 @@ type XmlEnumsOutput struct {
 	FooEnum2    types.FooEnum
 	FooEnum3    types.FooEnum
 	FooEnumList []types.FooEnum
-	FooEnumMap  map[string]types.FooEnum
 	FooEnumSet  []types.FooEnum
+	FooEnumMap  map[string]types.FooEnum
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

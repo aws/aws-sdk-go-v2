@@ -4,7 +4,8 @@ package lexruntimeservice
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -78,8 +79,8 @@ func (c *Client) PostContent(ctx context.Context, params *PostContentInput, optF
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	awsstack.AddRetryMiddlewares(stack, options)
-	awsstack.AddUnsignedPayloadMiddlewares(stack, options)
+	retry.AddRetryMiddlewares(stack, options)
+	v4.AddUnsignedPayloadMiddlewares(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPostContent(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpPostContentMiddlewares(stack)
 

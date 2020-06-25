@@ -4,7 +4,7 @@ package restxml
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -22,7 +22,7 @@ func (c *Client) HttpRequestWithLabels(ctx context.Context, params *HttpRequestW
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	awsstack.AddRetryMiddlewares(stack, options)
+	retry.AddRetryMiddlewares(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithLabels(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
@@ -45,14 +45,14 @@ func (c *Client) HttpRequestWithLabels(ctx context.Context, params *HttpRequestW
 }
 
 type HttpRequestWithLabelsInput struct {
-	// Serialized in the path as true or false.
-	Boolean *bool
-	Double  *float64
-	Float   *float32
+	String_ *string
+	Short   *int16
 	Integer *int32
 	Long    *int64
-	Short   *int16
-	String_ *string
+	Float   *float32
+	Double  *float64
+	// Serialized in the path as true or false.
+	Boolean *bool
 	// Note that this member has no format, so it's serialized as an RFC 3399
 	// date-time.
 	Timestamp *time.Time

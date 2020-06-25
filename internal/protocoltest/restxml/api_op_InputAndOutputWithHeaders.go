@@ -4,7 +4,7 @@ package restxml
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -23,7 +23,7 @@ func (c *Client) InputAndOutputWithHeaders(ctx context.Context, params *InputAnd
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	awsstack.AddRetryMiddlewares(stack, options)
+	retry.AddRetryMiddlewares(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInputAndOutputWithHeaders(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
@@ -46,41 +46,41 @@ func (c *Client) InputAndOutputWithHeaders(ctx context.Context, params *InputAnd
 }
 
 type InputAndOutputWithHeadersInput struct {
-	HeaderBooleanList   []*bool
-	HeaderByte          *int8
-	HeaderDouble        *float64
-	HeaderEnum          types.FooEnum
-	HeaderEnumList      []types.FooEnum
-	HeaderFalseBool     *bool
-	HeaderFloat         *float32
-	HeaderInteger       *int32
-	HeaderIntegerList   []*int32
-	HeaderLong          *int64
-	HeaderShort         *int16
 	HeaderString        *string
+	HeaderByte          *int8
+	HeaderShort         *int16
+	HeaderInteger       *int32
+	HeaderLong          *int64
+	HeaderFloat         *float32
+	HeaderDouble        *float64
+	HeaderTrueBool      *bool
+	HeaderFalseBool     *bool
 	HeaderStringList    []*string
 	HeaderStringSet     []*string
+	HeaderIntegerList   []*int32
+	HeaderBooleanList   []*bool
 	HeaderTimestampList []*time.Time
-	HeaderTrueBool      *bool
+	HeaderEnum          types.FooEnum
+	HeaderEnumList      []types.FooEnum
 }
 
 type InputAndOutputWithHeadersOutput struct {
-	HeaderBooleanList   []*bool
-	HeaderByte          *int8
-	HeaderDouble        *float64
-	HeaderEnum          types.FooEnum
-	HeaderEnumList      []types.FooEnum
-	HeaderFalseBool     *bool
-	HeaderFloat         *float32
-	HeaderInteger       *int32
-	HeaderIntegerList   []*int32
-	HeaderLong          *int64
-	HeaderShort         *int16
 	HeaderString        *string
+	HeaderByte          *int8
+	HeaderShort         *int16
+	HeaderInteger       *int32
+	HeaderLong          *int64
+	HeaderFloat         *float32
+	HeaderDouble        *float64
+	HeaderTrueBool      *bool
+	HeaderFalseBool     *bool
 	HeaderStringList    []*string
 	HeaderStringSet     []*string
+	HeaderIntegerList   []*int32
+	HeaderBooleanList   []*bool
 	HeaderTimestampList []*time.Time
-	HeaderTrueBool      *bool
+	HeaderEnum          types.FooEnum
+	HeaderEnumList      []types.FooEnum
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

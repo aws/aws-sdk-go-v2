@@ -4,7 +4,8 @@ package lexruntimeservice
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awsstack "github.com/aws/aws-sdk-go-v2/aws/stack"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -21,8 +22,8 @@ func (c *Client) GetSession(ctx context.Context, params *GetSessionInput, optFns
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	awsstack.AddRetryMiddlewares(stack, options)
-	awsstack.AddHTTPSignerMiddlewares(stack, options)
+	retry.AddRetryMiddlewares(stack, options)
+	v4.AddHTTPSignerMiddlewares(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSession(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpGetSessionMiddlewares(stack)
 
