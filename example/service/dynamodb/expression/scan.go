@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/external"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb/expression"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws/external"
+	"github.com/jviney/aws-sdk-go-v2/service/dynamodb"
+	"github.com/jviney/aws-sdk-go-v2/service/dynamodb/expression"
 )
 
 func exitErrorf(msg string, args ...interface{}) {

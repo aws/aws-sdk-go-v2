@@ -7,10 +7,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/ec2metadata"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws/ec2metadata"
+	"github.com/jviney/aws-sdk-go-v2/internal/awstesting"
+	"github.com/jviney/aws-sdk-go-v2/internal/awstesting/unit"
 )
 
 func TestClientDisableIMDS(t *testing.T) {

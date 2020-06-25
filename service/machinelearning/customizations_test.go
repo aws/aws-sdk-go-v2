@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
-	"github.com/aws/aws-sdk-go-v2/service/machinelearning"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	request "github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/jviney/aws-sdk-go-v2/service/machinelearning"
 )
 
 func TestPredictEndpoint(t *testing.T) {

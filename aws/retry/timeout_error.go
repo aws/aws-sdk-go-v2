@@ -3,7 +3,7 @@ package retry
 import (
 	"errors"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws"
 )
 
 // IsErrorTimeout provides the interface of an implementation to determine if

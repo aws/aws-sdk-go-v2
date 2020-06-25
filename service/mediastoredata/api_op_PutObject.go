@@ -6,10 +6,10 @@ import (
 	"context"
 	"io"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/jviney/aws-sdk-go-v2/internal/awsutil"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol"
 )
 
 type PutObjectInput struct {

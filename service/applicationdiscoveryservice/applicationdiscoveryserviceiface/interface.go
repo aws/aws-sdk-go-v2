@@ -9,7 +9,7 @@
 package applicationdiscoveryserviceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice"
+	"github.com/jviney/aws-sdk-go-v2/service/applicationdiscoveryservice"
 )
 
 // ClientAPI provides an interface to enable mocking the

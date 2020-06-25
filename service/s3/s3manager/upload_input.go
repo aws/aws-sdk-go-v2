@@ -6,7 +6,7 @@ import (
 	"io"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/jviney/aws-sdk-go-v2/service/s3"
 )
 
 // UploadInput provides the input parameters for uploading a stream or buffer

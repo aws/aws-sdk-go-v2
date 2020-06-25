@@ -9,7 +9,7 @@
 package workmailiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/workmail"
+	"github.com/jviney/aws-sdk-go-v2/service/workmail"
 )
 
 // ClientAPI provides an interface to enable mocking the

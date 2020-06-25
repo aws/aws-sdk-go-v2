@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws"
 )
 
 // Retryer defines an interface for extension utilities to extend the built in

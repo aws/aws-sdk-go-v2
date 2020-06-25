@@ -9,7 +9,7 @@
 package groundstationiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/groundstation"
+	"github.com/jviney/aws-sdk-go-v2/service/groundstation"
 )
 
 // ClientAPI provides an interface to enable mocking the

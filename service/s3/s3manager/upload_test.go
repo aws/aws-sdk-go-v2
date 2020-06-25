@@ -16,14 +16,14 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/aws/aws-sdk-go-v2/service/s3/internal/s3testing"
-	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws/awserr"
+	"github.com/jviney/aws-sdk-go-v2/internal/awstesting"
+	"github.com/jviney/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/jviney/aws-sdk-go-v2/internal/awsutil"
+	"github.com/jviney/aws-sdk-go-v2/service/s3"
+	"github.com/jviney/aws-sdk-go-v2/service/s3/internal/s3testing"
+	"github.com/jviney/aws-sdk-go-v2/service/s3/s3manager"
 )
 
 const respBody = `<?xml version="1.0" encoding="UTF-8"?>

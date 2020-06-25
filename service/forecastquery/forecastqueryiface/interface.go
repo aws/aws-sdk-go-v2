@@ -9,7 +9,7 @@
 package forecastqueryiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/forecastquery"
+	"github.com/jviney/aws-sdk-go-v2/service/forecastquery"
 )
 
 // ClientAPI provides an interface to enable mocking the

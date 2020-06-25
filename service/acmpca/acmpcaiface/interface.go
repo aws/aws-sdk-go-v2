@@ -11,8 +11,8 @@ package acmpcaiface
 import (
 	"context"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/acmpca"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/service/acmpca"
 )
 
 // ClientAPI provides an interface to enable mocking the

@@ -9,7 +9,7 @@
 package kinesisvideoiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo"
+	"github.com/jviney/aws-sdk-go-v2/service/kinesisvideo"
 )
 
 // ClientAPI provides an interface to enable mocking the

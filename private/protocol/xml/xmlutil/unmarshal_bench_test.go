@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/xml/xmlutil"
-	"github.com/aws/aws-sdk-go-v2/service/ec2"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/xml/xmlutil"
+	"github.com/jviney/aws-sdk-go-v2/service/ec2"
 )
 
 type DataOutput struct {

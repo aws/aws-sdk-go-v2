@@ -14,13 +14,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/defaults"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws/defaults"
+	"github.com/jviney/aws-sdk-go-v2/aws/retry"
+	"github.com/jviney/aws-sdk-go-v2/internal/awstesting"
+	"github.com/jviney/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/jviney/aws-sdk-go-v2/internal/sdk"
+	"github.com/jviney/aws-sdk-go-v2/service/s3"
 )
 
 func TestValidateEndpointHandler(t *testing.T) {

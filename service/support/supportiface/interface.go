@@ -9,7 +9,7 @@
 package supportiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/support"
+	"github.com/jviney/aws-sdk-go-v2/service/support"
 )
 
 // ClientAPI provides an interface to enable mocking the

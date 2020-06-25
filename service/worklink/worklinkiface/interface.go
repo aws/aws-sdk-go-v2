@@ -9,7 +9,7 @@
 package worklinkiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/worklink"
+	"github.com/jviney/aws-sdk-go-v2/service/worklink"
 )
 
 // ClientAPI provides an interface to enable mocking the

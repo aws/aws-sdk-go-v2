@@ -9,7 +9,7 @@
 package pinpointiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/pinpoint"
+	"github.com/jviney/aws-sdk-go-v2/service/pinpoint"
 )
 
 // ClientAPI provides an interface to enable mocking the

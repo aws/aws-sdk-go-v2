@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws/arn"
+	"github.com/jviney/aws-sdk-go-v2/aws/arn"
 )
 
 func TestParseResource(t *testing.T) {

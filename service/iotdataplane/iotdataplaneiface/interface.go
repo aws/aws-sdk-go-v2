@@ -9,7 +9,7 @@
 package iotdataplaneiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/iotdataplane"
+	"github.com/jviney/aws-sdk-go-v2/service/iotdataplane"
 )
 
 // ClientAPI provides an interface to enable mocking the

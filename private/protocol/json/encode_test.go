@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/internal/awstesting"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol"
 )
 
 func TestEncodeNestedShape(t *testing.T) {

@@ -6,9 +6,9 @@ import (
 	"context"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/internal/awsutil"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol"
 )
 
 // Specifies an account that's associated with S3 buckets to retrieve aggregated

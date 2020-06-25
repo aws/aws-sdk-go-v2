@@ -9,7 +9,7 @@
 package applicationautoscalingiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling"
+	"github.com/jviney/aws-sdk-go-v2/service/applicationautoscaling"
 )
 
 // ClientAPI provides an interface to enable mocking the

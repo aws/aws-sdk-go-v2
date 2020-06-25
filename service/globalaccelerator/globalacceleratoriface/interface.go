@@ -9,7 +9,7 @@
 package globalacceleratoriface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator"
+	"github.com/jviney/aws-sdk-go-v2/service/globalaccelerator"
 )
 
 // ClientAPI provides an interface to enable mocking the

@@ -9,7 +9,7 @@
 package translateiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/translate"
+	"github.com/jviney/aws-sdk-go-v2/service/translate"
 )
 
 // ClientAPI provides an interface to enable mocking the

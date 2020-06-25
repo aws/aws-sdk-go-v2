@@ -9,7 +9,7 @@
 package daxiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/dax"
+	"github.com/jviney/aws-sdk-go-v2/service/dax"
 )
 
 // ClientAPI provides an interface to enable mocking the

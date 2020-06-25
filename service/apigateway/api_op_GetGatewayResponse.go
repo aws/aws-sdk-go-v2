@@ -5,9 +5,9 @@ package apigateway
 import (
 	"context"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/internal/awsutil"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol"
 )
 
 // Gets a GatewayResponse of a specified response type on the given RestApi.

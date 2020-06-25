@@ -9,7 +9,7 @@
 package sqsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/sqs"
+	"github.com/jviney/aws-sdk-go-v2/service/sqs"
 )
 
 // ClientAPI provides an interface to enable mocking the

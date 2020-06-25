@@ -9,7 +9,7 @@
 package batchiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/batch"
+	"github.com/jviney/aws-sdk-go-v2/service/batch"
 )
 
 // ClientAPI provides an interface to enable mocking the

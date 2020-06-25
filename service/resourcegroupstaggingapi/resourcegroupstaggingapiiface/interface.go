@@ -9,7 +9,7 @@
 package resourcegroupstaggingapiiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi"
+	"github.com/jviney/aws-sdk-go-v2/service/resourcegroupstaggingapi"
 )
 
 // ClientAPI provides an interface to enable mocking the

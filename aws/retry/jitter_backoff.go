@@ -4,8 +4,8 @@ import (
 	"math"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/internal/rand"
-	"github.com/aws/aws-sdk-go-v2/internal/timeconv"
+	"github.com/jviney/aws-sdk-go-v2/internal/rand"
+	"github.com/jviney/aws-sdk-go-v2/internal/timeconv"
 )
 
 // ExponentialJitterBackoff provides backoff delays with jitter based on the

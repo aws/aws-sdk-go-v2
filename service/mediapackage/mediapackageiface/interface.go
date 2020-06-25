@@ -9,7 +9,7 @@
 package mediapackageiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/mediapackage"
+	"github.com/jviney/aws-sdk-go-v2/service/mediapackage"
 )
 
 // ClientAPI provides an interface to enable mocking the

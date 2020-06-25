@@ -9,11 +9,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/defaults"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
-	"github.com/aws/aws-sdk-go-v2/service/route53domains"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws/awserr"
+	"github.com/jviney/aws-sdk-go-v2/aws/defaults"
+	"github.com/jviney/aws-sdk-go-v2/internal/awstesting/integration"
+	"github.com/jviney/aws-sdk-go-v2/service/route53domains"
 )
 
 var _ aws.Config

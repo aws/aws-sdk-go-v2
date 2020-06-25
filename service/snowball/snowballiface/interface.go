@@ -9,7 +9,7 @@
 package snowballiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/snowball"
+	"github.com/jviney/aws-sdk-go-v2/service/snowball"
 )
 
 // ClientAPI provides an interface to enable mocking the

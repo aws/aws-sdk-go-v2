@@ -9,7 +9,7 @@
 package firehoseiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/firehose"
+	"github.com/jviney/aws-sdk-go-v2/service/firehose"
 )
 
 // ClientAPI provides an interface to enable mocking the

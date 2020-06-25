@@ -9,7 +9,7 @@
 package managedblockchainiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/managedblockchain"
+	"github.com/jviney/aws-sdk-go-v2/service/managedblockchain"
 )
 
 // ClientAPI provides an interface to enable mocking the

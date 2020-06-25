@@ -9,7 +9,7 @@
 package comprehendmedicaliface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical"
+	"github.com/jviney/aws-sdk-go-v2/service/comprehendmedical"
 )
 
 // ClientAPI provides an interface to enable mocking the

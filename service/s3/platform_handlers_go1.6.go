@@ -3,7 +3,7 @@
 package s3
 
 import (
-	request "github.com/aws/aws-sdk-go-v2/aws"
+	request "github.com/jviney/aws-sdk-go-v2/aws"
 )
 
 func platformRequestHandlers(c *Client, r *request.Request) {

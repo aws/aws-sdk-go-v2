@@ -5,8 +5,8 @@ package cognitoidentityprovider
 import (
 	"context"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/internal/awsutil"
 )
 
 // The request to sign out of all devices, as an administrator.

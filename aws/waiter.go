@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
+	"github.com/jviney/aws-sdk-go-v2/aws/awserr"
+	"github.com/jviney/aws-sdk-go-v2/internal/awsutil"
+	"github.com/jviney/aws-sdk-go-v2/internal/sdk"
 )
 
 // WaiterResourceNotReadyErrorCode is the error code returned by a waiter when

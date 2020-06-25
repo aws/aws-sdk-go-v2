@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/json"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
-	v1Encoder "github.com/aws/aws-sdk-go-v2/private/protocol/json"
-	reflectEncoder "github.com/aws/aws-sdk-go-v2/private/protocol/json/jsonutil"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws/protocol/json"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol"
+	v1Encoder "github.com/jviney/aws-sdk-go-v2/private/protocol/json"
+	reflectEncoder "github.com/jviney/aws-sdk-go-v2/private/protocol/json/jsonutil"
 )
 
 type testEnum string

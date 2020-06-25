@@ -9,7 +9,7 @@
 package ioteventsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/iotevents"
+	"github.com/jviney/aws-sdk-go-v2/service/iotevents"
 )
 
 // ClientAPI provides an interface to enable mocking the

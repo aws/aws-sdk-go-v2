@@ -1,7 +1,7 @@
 package defaults
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws"
 )
 
 // ValidateParametersHandler is a request handler to validate the input parameters.

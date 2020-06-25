@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol"
 )
 
 func TestCanSetIdempotencyToken(t *testing.T) {

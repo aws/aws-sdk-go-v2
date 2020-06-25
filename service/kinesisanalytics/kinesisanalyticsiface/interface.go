@@ -9,7 +9,7 @@
 package kinesisanalyticsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics"
+	"github.com/jviney/aws-sdk-go-v2/service/kinesisanalytics"
 )
 
 // ClientAPI provides an interface to enable mocking the

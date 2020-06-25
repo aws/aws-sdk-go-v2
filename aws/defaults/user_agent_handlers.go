@@ -4,7 +4,7 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws"
 )
 
 // SDKVersionUserAgentHandler is a request handler for adding the SDK Version

@@ -5,8 +5,8 @@ package directoryservice
 import (
 	"context"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/internal/awsutil"
 )
 
 // AWS Directory Service for Microsoft Active Directory allows you to configure

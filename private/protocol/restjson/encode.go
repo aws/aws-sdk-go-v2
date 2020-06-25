@@ -5,9 +5,9 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/json"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/rest"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/json"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/rest"
 )
 
 // An Encoder provides encoding of the AWS RESTJSON protocol. This encoder combindes

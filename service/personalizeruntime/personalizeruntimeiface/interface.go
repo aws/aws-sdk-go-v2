@@ -9,7 +9,7 @@
 package personalizeruntimeiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/personalizeruntime"
+	"github.com/jviney/aws-sdk-go-v2/service/personalizeruntime"
 )
 
 // ClientAPI provides an interface to enable mocking the

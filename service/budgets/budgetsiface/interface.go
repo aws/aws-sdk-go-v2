@@ -9,7 +9,7 @@
 package budgetsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/budgets"
+	"github.com/jviney/aws-sdk-go-v2/service/budgets"
 )
 
 // ClientAPI provides an interface to enable mocking the

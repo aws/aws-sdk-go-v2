@@ -9,7 +9,7 @@
 package iot1clickprojectsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/iot1clickprojects"
+	"github.com/jviney/aws-sdk-go-v2/service/iot1clickprojects"
 )
 
 // ClientAPI provides an interface to enable mocking the

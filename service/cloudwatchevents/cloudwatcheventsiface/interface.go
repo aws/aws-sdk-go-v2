@@ -9,7 +9,7 @@
 package cloudwatcheventsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents"
+	"github.com/jviney/aws-sdk-go-v2/service/cloudwatchevents"
 )
 
 // ClientAPI provides an interface to enable mocking the

@@ -7,13 +7,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/defaults"
-	"github.com/aws/aws-sdk-go-v2/aws/stscreds"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
-	"github.com/aws/aws-sdk-go-v2/service/sts"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws/awserr"
+	"github.com/jviney/aws-sdk-go-v2/aws/defaults"
+	"github.com/jviney/aws-sdk-go-v2/aws/stscreds"
+	"github.com/jviney/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/jviney/aws-sdk-go-v2/internal/sdk"
+	"github.com/jviney/aws-sdk-go-v2/service/sts"
 )
 
 func TestWebIdentityProviderRetrieve(t *testing.T) {

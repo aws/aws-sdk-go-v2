@@ -9,7 +9,7 @@
 package swfiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/swf"
+	"github.com/jviney/aws-sdk-go-v2/service/swf"
 )
 
 // ClientAPI provides an interface to enable mocking the

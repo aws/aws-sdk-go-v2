@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
+	"github.com/jviney/aws-sdk-go-v2/internal/sdk"
 )
 
 type stubProvider struct {

@@ -9,7 +9,7 @@
 package qldbsessioniface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/qldbsession"
+	"github.com/jviney/aws-sdk-go-v2/service/qldbsession"
 )
 
 // ClientAPI provides an interface to enable mocking the

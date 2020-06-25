@@ -9,7 +9,7 @@
 package efsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/efs"
+	"github.com/jviney/aws-sdk-go-v2/service/efs"
 )
 
 // ClientAPI provides an interface to enable mocking the

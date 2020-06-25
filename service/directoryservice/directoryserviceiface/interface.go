@@ -9,7 +9,7 @@
 package directoryserviceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/directoryservice"
+	"github.com/jviney/aws-sdk-go-v2/service/directoryservice"
 )
 
 // ClientAPI provides an interface to enable mocking the

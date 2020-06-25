@@ -5,15 +5,15 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/rest"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/internal/awstesting"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/query"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/rest"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/restxml"
 )
 
 func xmlData(set bool, b []byte, size, delta int) {

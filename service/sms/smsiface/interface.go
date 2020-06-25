@@ -9,7 +9,7 @@
 package smsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/sms"
+	"github.com/jviney/aws-sdk-go-v2/service/sms"
 )
 
 // ClientAPI provides an interface to enable mocking the

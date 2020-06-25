@@ -4,7 +4,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/jviney/aws-sdk-go-v2/aws/awserr"
 )
 
 // OpenFile takes a path to a given file, and will open  and parse

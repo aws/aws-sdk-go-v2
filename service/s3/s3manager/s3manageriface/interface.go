@@ -5,8 +5,8 @@ import (
 	"context"
 	"io"
 
-	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
+	"github.com/jviney/aws-sdk-go-v2/service/s3"
+	"github.com/jviney/aws-sdk-go-v2/service/s3/s3manager"
 )
 
 // DownloaderAPI is the interface type for s3manager.Downloader.

@@ -9,7 +9,7 @@
 package personalizeeventsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/personalizeevents"
+	"github.com/jviney/aws-sdk-go-v2/service/personalizeevents"
 )
 
 // ClientAPI provides an interface to enable mocking the

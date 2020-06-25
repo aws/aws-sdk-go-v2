@@ -6,11 +6,11 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
-	"github.com/aws/aws-sdk-go-v2/service/s3control"
-	"github.com/aws/aws-sdk-go-v2/service/s3control/s3controliface"
+	"github.com/jviney/aws-sdk-go-v2/internal/awstesting/integration"
+	"github.com/jviney/aws-sdk-go-v2/service/s3"
+	"github.com/jviney/aws-sdk-go-v2/service/s3/s3iface"
+	"github.com/jviney/aws-sdk-go-v2/service/s3control"
+	"github.com/jviney/aws-sdk-go-v2/service/s3control/s3controliface"
 )
 
 // BucketPrefix is the root prefix of integration test buckets.

@@ -9,7 +9,7 @@
 package pinpointsmsvoiceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice"
+	"github.com/jviney/aws-sdk-go-v2/service/pinpointsmsvoice"
 )
 
 // ClientAPI provides an interface to enable mocking the

@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/sqs"
-	"github.com/aws/aws-sdk-go-v2/service/sqs/sqsiface"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/service/sqs"
+	"github.com/jviney/aws-sdk-go-v2/service/sqs/sqsiface"
 )
 
 type mockedReceiveMsgs struct {

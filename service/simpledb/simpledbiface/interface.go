@@ -9,7 +9,7 @@
 package simpledbiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/simpledb"
+	"github.com/jviney/aws-sdk-go-v2/service/simpledb"
 )
 
 // ClientAPI provides an interface to enable mocking the

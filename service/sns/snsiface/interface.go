@@ -9,7 +9,7 @@
 package snsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/sns"
+	"github.com/jviney/aws-sdk-go-v2/service/sns"
 )
 
 // ClientAPI provides an interface to enable mocking the

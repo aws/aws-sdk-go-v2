@@ -9,7 +9,7 @@
 package mediaconnectiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/mediaconnect"
+	"github.com/jviney/aws-sdk-go-v2/service/mediaconnect"
 )
 
 // ClientAPI provides an interface to enable mocking the

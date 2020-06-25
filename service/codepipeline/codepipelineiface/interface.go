@@ -9,7 +9,7 @@
 package codepipelineiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/codepipeline"
+	"github.com/jviney/aws-sdk-go-v2/service/codepipeline"
 )
 
 // ClientAPI provides an interface to enable mocking the

@@ -9,7 +9,7 @@
 package awsendpointdiscoverytestiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/private/model/api/codegentest/service/awsendpointdiscoverytest"
+	"github.com/jviney/aws-sdk-go-v2/private/model/api/codegentest/service/awsendpointdiscoverytest"
 )
 
 // ClientAPI provides an interface to enable mocking the

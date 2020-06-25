@@ -9,7 +9,7 @@
 package glueiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/glue"
+	"github.com/jviney/aws-sdk-go-v2/service/glue"
 )
 
 // ClientAPI provides an interface to enable mocking the

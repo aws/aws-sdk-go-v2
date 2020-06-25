@@ -11,8 +11,8 @@ package iamiface
 import (
 	"context"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/iam"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/service/iam"
 )
 
 // ClientAPI provides an interface to enable mocking the

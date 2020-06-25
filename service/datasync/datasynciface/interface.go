@@ -9,7 +9,7 @@
 package datasynciface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/datasync"
+	"github.com/jviney/aws-sdk-go-v2/service/datasync"
 )
 
 // ClientAPI provides an interface to enable mocking the

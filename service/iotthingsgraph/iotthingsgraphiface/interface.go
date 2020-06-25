@@ -9,7 +9,7 @@
 package iotthingsgraphiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph"
+	"github.com/jviney/aws-sdk-go-v2/service/iotthingsgraph"
 )
 
 // ClientAPI provides an interface to enable mocking the

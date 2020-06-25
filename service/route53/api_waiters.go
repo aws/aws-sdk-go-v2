@@ -6,7 +6,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws"
 )
 
 // WaitUntilResourceRecordSetsChanged uses the Route 53 API operation

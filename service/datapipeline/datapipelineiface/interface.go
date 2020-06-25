@@ -9,7 +9,7 @@
 package datapipelineiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/datapipeline"
+	"github.com/jviney/aws-sdk-go-v2/service/datapipeline"
 )
 
 // ClientAPI provides an interface to enable mocking the

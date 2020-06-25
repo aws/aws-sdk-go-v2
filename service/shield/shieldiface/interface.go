@@ -9,7 +9,7 @@
 package shieldiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/shield"
+	"github.com/jviney/aws-sdk-go-v2/service/shield"
 )
 
 // ClientAPI provides an interface to enable mocking the

@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
+	"github.com/jviney/aws-sdk-go-v2/service/s3/s3manager"
 )
 
 type Config struct {

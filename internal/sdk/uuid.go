@@ -3,7 +3,7 @@ package sdk
 import (
 	"fmt"
 
-	"github.com/aws/aws-sdk-go-v2/internal/rand"
+	"github.com/jviney/aws-sdk-go-v2/internal/rand"
 )
 
 // UUIDVersion4 returns a Version 4 random UUID from the byte slice provided

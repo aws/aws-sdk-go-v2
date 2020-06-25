@@ -6,10 +6,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/external"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
-	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws/external"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/jviney/aws-sdk-go-v2/service/elastictranscoder"
 )
 
 var (

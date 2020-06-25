@@ -5,10 +5,10 @@ package sns
 import (
 	"context"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/internal/awsutil"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/query"
 )
 
 // Input for DeleteEndpoint action.

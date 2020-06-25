@@ -9,7 +9,7 @@
 package ec2instanceconnectiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect"
+	"github.com/jviney/aws-sdk-go-v2/service/ec2instanceconnect"
 )
 
 // ClientAPI provides an interface to enable mocking the

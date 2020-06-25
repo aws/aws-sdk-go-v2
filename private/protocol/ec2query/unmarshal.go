@@ -6,9 +6,9 @@ import (
 	"encoding/xml"
 	"io"
 
-	request "github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/xml/xmlutil"
+	request "github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws/awserr"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/xml/xmlutil"
 )
 
 // UnmarshalHandler is a named request handler for unmarshaling ec2query protocol requests

@@ -9,7 +9,7 @@
 package outpostsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/outposts"
+	"github.com/jviney/aws-sdk-go-v2/service/outposts"
 )
 
 // ClientAPI provides an interface to enable mocking the

@@ -14,10 +14,10 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/aws/aws-sdk-go-v2/aws/external"
-	"github.com/aws/aws-sdk-go-v2/aws/stscreds"
-	"github.com/aws/aws-sdk-go-v2/service/rds/rdsutils"
-	"github.com/aws/aws-sdk-go-v2/service/sts"
+	"github.com/jviney/aws-sdk-go-v2/aws/external"
+	"github.com/jviney/aws-sdk-go-v2/aws/stscreds"
+	"github.com/jviney/aws-sdk-go-v2/service/rds/rdsutils"
+	"github.com/jviney/aws-sdk-go-v2/service/sts"
 	"github.com/go-sql-driver/mysql"
 )
 

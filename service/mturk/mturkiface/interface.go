@@ -9,7 +9,7 @@
 package mturkiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/mturk"
+	"github.com/jviney/aws-sdk-go-v2/service/mturk"
 )
 
 // ClientAPI provides an interface to enable mocking the

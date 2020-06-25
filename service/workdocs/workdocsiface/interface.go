@@ -9,7 +9,7 @@
 package workdocsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/workdocs"
+	"github.com/jviney/aws-sdk-go-v2/service/workdocs"
 )
 
 // ClientAPI provides an interface to enable mocking the

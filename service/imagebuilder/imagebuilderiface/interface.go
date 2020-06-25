@@ -9,7 +9,7 @@
 package imagebuilderiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/imagebuilder"
+	"github.com/jviney/aws-sdk-go-v2/service/imagebuilder"
 )
 
 // ClientAPI provides an interface to enable mocking the

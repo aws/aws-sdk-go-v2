@@ -3,7 +3,7 @@
 package s3
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/s3/internal/external"
+	"github.com/jviney/aws-sdk-go-v2/service/s3/internal/external"
 )
 
 func resolveClientConfig(svc *Client, configs []interface{}) error {

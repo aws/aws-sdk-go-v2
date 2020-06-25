@@ -3,11 +3,11 @@
 package dynamodb
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/crr"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws/crr"
+	"github.com/jviney/aws-sdk-go-v2/aws/retry"
+	"github.com/jviney/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 // Client provides the API operation methods for making requests to

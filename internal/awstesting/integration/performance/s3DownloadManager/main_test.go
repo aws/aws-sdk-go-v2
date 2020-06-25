@@ -10,10 +10,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
-	"github.com/aws/aws-sdk-go-v2/internal/sdkio"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
+	"github.com/jviney/aws-sdk-go-v2/internal/awstesting/integration"
+	"github.com/jviney/aws-sdk-go-v2/internal/sdkio"
+	"github.com/jviney/aws-sdk-go-v2/service/s3"
+	"github.com/jviney/aws-sdk-go-v2/service/s3/s3manager"
 )
 
 var benchConfig BenchmarkConfig

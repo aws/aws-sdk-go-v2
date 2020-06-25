@@ -9,7 +9,7 @@
 package sagemakera2iruntimeiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime"
+	"github.com/jviney/aws-sdk-go-v2/service/sagemakera2iruntime"
 )
 
 // ClientAPI provides an interface to enable mocking the

@@ -9,7 +9,7 @@
 package quicksightiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/quicksight"
+	"github.com/jviney/aws-sdk-go-v2/service/quicksight"
 )
 
 // ClientAPI provides an interface to enable mocking the

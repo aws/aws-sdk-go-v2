@@ -9,7 +9,7 @@
 package cloudwatchlogsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs"
+	"github.com/jviney/aws-sdk-go-v2/service/cloudwatchlogs"
 )
 
 // ClientAPI provides an interface to enable mocking the

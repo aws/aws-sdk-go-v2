@@ -11,8 +11,8 @@ package elastictranscoderiface
 import (
 	"context"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/service/elastictranscoder"
 )
 
 // ClientAPI provides an interface to enable mocking the

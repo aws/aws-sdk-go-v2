@@ -3,8 +3,8 @@
 package external_test
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws/external"
-	svcExternal "github.com/aws/aws-sdk-go-v2/service/s3/internal/external"
+	"github.com/jviney/aws-sdk-go-v2/aws/external"
+	svcExternal "github.com/jviney/aws-sdk-go-v2/service/s3/internal/external"
 )
 
 // UseARNRegionProvider Assertions

@@ -9,7 +9,7 @@
 package fmsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/fms"
+	"github.com/jviney/aws-sdk-go-v2/service/fms"
 )
 
 // ClientAPI provides an interface to enable mocking the

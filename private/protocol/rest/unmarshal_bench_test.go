@@ -2,7 +2,7 @@ package rest
 
 import (
 	"bytes"
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws"
 	"io/ioutil"
 	"net/http"
 	"testing"

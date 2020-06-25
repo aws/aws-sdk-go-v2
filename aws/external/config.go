@@ -1,7 +1,7 @@
 package external
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws"
 )
 
 // DefaultConfigLoaders are a slice of functions that will read external configuration

@@ -9,7 +9,7 @@
 package lexmodelbuildingserviceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice"
+	"github.com/jviney/aws-sdk-go-v2/service/lexmodelbuildingservice"
 )
 
 // ClientAPI provides an interface to enable mocking the

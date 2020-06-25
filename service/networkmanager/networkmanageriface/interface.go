@@ -9,7 +9,7 @@
 package networkmanageriface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/networkmanager"
+	"github.com/jviney/aws-sdk-go-v2/service/networkmanager"
 )
 
 // ClientAPI provides an interface to enable mocking the

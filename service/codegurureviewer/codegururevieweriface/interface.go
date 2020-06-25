@@ -9,7 +9,7 @@
 package codegururevieweriface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer"
+	"github.com/jviney/aws-sdk-go-v2/service/codegurureviewer"
 )
 
 // ClientAPI provides an interface to enable mocking the

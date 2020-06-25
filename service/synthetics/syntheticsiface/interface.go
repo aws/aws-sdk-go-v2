@@ -9,7 +9,7 @@
 package syntheticsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/synthetics"
+	"github.com/jviney/aws-sdk-go-v2/service/synthetics"
 )
 
 // ClientAPI provides an interface to enable mocking the

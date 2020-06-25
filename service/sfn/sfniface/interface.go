@@ -9,7 +9,7 @@
 package sfniface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/sfn"
+	"github.com/jviney/aws-sdk-go-v2/service/sfn"
 )
 
 // ClientAPI provides an interface to enable mocking the

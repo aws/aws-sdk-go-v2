@@ -9,7 +9,7 @@
 package workspacesiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/workspaces"
+	"github.com/jviney/aws-sdk-go-v2/service/workspaces"
 )
 
 // ClientAPI provides an interface to enable mocking the

@@ -4,12 +4,12 @@ import (
 	"context"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/ec2metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/ec2rolecreds"
-	"github.com/aws/aws-sdk-go-v2/aws/endpointcreds"
-	"github.com/aws/aws-sdk-go-v2/aws/processcreds"
-	"github.com/aws/aws-sdk-go-v2/aws/stscreds"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws/ec2metadata"
+	"github.com/jviney/aws-sdk-go-v2/aws/ec2rolecreds"
+	"github.com/jviney/aws-sdk-go-v2/aws/endpointcreds"
+	"github.com/jviney/aws-sdk-go-v2/aws/processcreds"
+	"github.com/jviney/aws-sdk-go-v2/aws/stscreds"
 )
 
 // SharedConfigProfileProvider provides access to the shared config profile

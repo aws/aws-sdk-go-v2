@@ -9,7 +9,7 @@
 package route53domainsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/route53domains"
+	"github.com/jviney/aws-sdk-go-v2/service/route53domains"
 )
 
 // ClientAPI provides an interface to enable mocking the

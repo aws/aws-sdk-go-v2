@@ -14,10 +14,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/external"
-	"github.com/aws/aws-sdk-go-v2/aws/processcreds"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
+	"github.com/jviney/aws-sdk-go-v2/aws/awserr"
+	"github.com/jviney/aws-sdk-go-v2/aws/external"
+	"github.com/jviney/aws-sdk-go-v2/aws/processcreds"
+	"github.com/jviney/aws-sdk-go-v2/internal/awstesting"
 )
 
 func TestProcessProviderFromSessionCfg(t *testing.T) {

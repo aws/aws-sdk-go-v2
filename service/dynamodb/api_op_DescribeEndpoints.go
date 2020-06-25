@@ -7,9 +7,9 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/crr"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws/crr"
+	"github.com/jviney/aws-sdk-go-v2/internal/awsutil"
 )
 
 type DescribeEndpointsInput struct {

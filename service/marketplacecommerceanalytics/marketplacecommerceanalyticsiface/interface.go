@@ -9,7 +9,7 @@
 package marketplacecommerceanalyticsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics"
+	"github.com/jviney/aws-sdk-go-v2/service/marketplacecommerceanalytics"
 )
 
 // ClientAPI provides an interface to enable mocking the

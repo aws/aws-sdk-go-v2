@@ -9,7 +9,7 @@
 package lexruntimeserviceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice"
+	"github.com/jviney/aws-sdk-go-v2/service/lexruntimeservice"
 )
 
 // ClientAPI provides an interface to enable mocking the

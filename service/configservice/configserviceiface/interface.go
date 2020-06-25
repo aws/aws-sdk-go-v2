@@ -9,7 +9,7 @@
 package configserviceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/configservice"
+	"github.com/jviney/aws-sdk-go-v2/service/configservice"
 )
 
 // ClientAPI provides an interface to enable mocking the

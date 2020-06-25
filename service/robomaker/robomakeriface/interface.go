@@ -9,7 +9,7 @@
 package robomakeriface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/robomaker"
+	"github.com/jviney/aws-sdk-go-v2/service/robomaker"
 )
 
 // ClientAPI provides an interface to enable mocking the

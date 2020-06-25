@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws"
 )
 
 func TestHostPrefixBuilder(t *testing.T) {

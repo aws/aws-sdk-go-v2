@@ -9,7 +9,7 @@
 package backupiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/backup"
+	"github.com/jviney/aws-sdk-go-v2/service/backup"
 )
 
 // ClientAPI provides an interface to enable mocking the

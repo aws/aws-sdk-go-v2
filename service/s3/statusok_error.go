@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"strings"
 
-	request "github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	request "github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws/awserr"
 )
 
 func copyMultipartStatusOKUnmarhsalError(r *request.Request) {

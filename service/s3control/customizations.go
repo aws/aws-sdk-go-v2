@@ -1,9 +1,9 @@
 package s3control
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/s3err"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/internal/s3err"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol"
 )
 
 type accountIDGetter interface {

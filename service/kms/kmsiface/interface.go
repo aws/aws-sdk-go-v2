@@ -9,7 +9,7 @@
 package kmsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/kms"
+	"github.com/jviney/aws-sdk-go-v2/service/kms"
 )
 
 // ClientAPI provides an interface to enable mocking the

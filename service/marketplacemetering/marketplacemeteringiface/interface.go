@@ -9,7 +9,7 @@
 package marketplacemeteringiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering"
+	"github.com/jviney/aws-sdk-go-v2/service/marketplacemetering"
 )
 
 // ClientAPI provides an interface to enable mocking the

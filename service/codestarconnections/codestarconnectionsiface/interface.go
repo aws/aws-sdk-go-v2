@@ -9,7 +9,7 @@
 package codestarconnectionsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/codestarconnections"
+	"github.com/jviney/aws-sdk-go-v2/service/codestarconnections"
 )
 
 // ClientAPI provides an interface to enable mocking the

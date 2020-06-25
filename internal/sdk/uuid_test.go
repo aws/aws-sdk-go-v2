@@ -6,7 +6,7 @@ import (
 	"testing"
 	"testing/iotest"
 
-	"github.com/aws/aws-sdk-go-v2/internal/rand"
+	"github.com/jviney/aws-sdk-go-v2/internal/rand"
 )
 
 type byteReader byte

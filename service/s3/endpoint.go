@@ -4,10 +4,10 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	awsarn "github.com/aws/aws-sdk-go-v2/aws/arn"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
-	"github.com/aws/aws-sdk-go-v2/service/s3/internal/arn"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	awsarn "github.com/jviney/aws-sdk-go-v2/aws/arn"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol"
+	"github.com/jviney/aws-sdk-go-v2/service/s3/internal/arn"
 )
 
 // Used by shapes with members decorated as endpoint ARN.

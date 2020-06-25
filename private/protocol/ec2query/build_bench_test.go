@@ -5,11 +5,11 @@ package ec2query_test
 import (
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
-	"github.com/aws/aws-sdk-go-v2/service/ec2"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	request "github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/internal/awstesting"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/jviney/aws-sdk-go-v2/service/ec2"
 )
 
 func BenchmarkEC2QueryBuild_Complex_ec2AuthorizeSecurityGroupEgress(b *testing.B) {

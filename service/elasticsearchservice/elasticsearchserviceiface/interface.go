@@ -9,7 +9,7 @@
 package elasticsearchserviceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice"
+	"github.com/jviney/aws-sdk-go-v2/service/elasticsearchservice"
 )
 
 // ClientAPI provides an interface to enable mocking the

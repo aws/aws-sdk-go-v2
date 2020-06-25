@@ -9,7 +9,7 @@
 package ebsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/ebs"
+	"github.com/jviney/aws-sdk-go-v2/service/ebs"
 )
 
 // ClientAPI provides an interface to enable mocking the

@@ -6,9 +6,9 @@ import (
 	"io/ioutil"
 	"testing"
 
-	v2Encoder "github.com/aws/aws-sdk-go-v2/aws/protocol/json"
-	v1Encoder "github.com/aws/aws-sdk-go-v2/private/protocol/json"
-	reflectEncoder "github.com/aws/aws-sdk-go-v2/private/protocol/json/jsonutil"
+	v2Encoder "github.com/jviney/aws-sdk-go-v2/aws/protocol/json"
+	v1Encoder "github.com/jviney/aws-sdk-go-v2/private/protocol/json"
+	reflectEncoder "github.com/jviney/aws-sdk-go-v2/private/protocol/json/jsonutil"
 )
 
 func TestEncoder(t *testing.T) {

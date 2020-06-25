@@ -70,10 +70,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	v4Internal "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/rest"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	v4Internal "github.com/jviney/aws-sdk-go-v2/aws/signer/internal/v4"
+	"github.com/jviney/aws-sdk-go-v2/internal/sdk"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/rest"
 )
 
 const (

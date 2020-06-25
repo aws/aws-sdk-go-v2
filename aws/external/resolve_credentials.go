@@ -5,14 +5,14 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/ec2metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/ec2rolecreds"
-	"github.com/aws/aws-sdk-go-v2/aws/endpointcreds"
-	"github.com/aws/aws-sdk-go-v2/aws/processcreds"
-	"github.com/aws/aws-sdk-go-v2/aws/stscreds"
-	"github.com/aws/aws-sdk-go-v2/service/sts"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws/awserr"
+	"github.com/jviney/aws-sdk-go-v2/aws/ec2metadata"
+	"github.com/jviney/aws-sdk-go-v2/aws/ec2rolecreds"
+	"github.com/jviney/aws-sdk-go-v2/aws/endpointcreds"
+	"github.com/jviney/aws-sdk-go-v2/aws/processcreds"
+	"github.com/jviney/aws-sdk-go-v2/aws/stscreds"
+	"github.com/jviney/aws-sdk-go-v2/service/sts"
 )
 
 const (

@@ -9,7 +9,7 @@
 package kafkaiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/kafka"
+	"github.com/jviney/aws-sdk-go-v2/service/kafka"
 )
 
 // ClientAPI provides an interface to enable mocking the

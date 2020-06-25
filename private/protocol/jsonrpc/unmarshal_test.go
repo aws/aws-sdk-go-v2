@@ -14,15 +14,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/xml/xmlutil"
-	"github.com/aws/aws-sdk-go-v2/private/util"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws/retry"
+	"github.com/jviney/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/jviney/aws-sdk-go-v2/internal/awstesting"
+	"github.com/jviney/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/xml/xmlutil"
+	"github.com/jviney/aws-sdk-go-v2/private/util"
 )
 
 var _ bytes.Buffer // always import bytes

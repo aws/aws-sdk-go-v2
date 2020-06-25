@@ -9,7 +9,7 @@
 package alexaforbusinessiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness"
+	"github.com/jviney/aws-sdk-go-v2/service/alexaforbusiness"
 )
 
 // ClientAPI provides an interface to enable mocking the

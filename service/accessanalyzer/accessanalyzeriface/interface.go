@@ -9,7 +9,7 @@
 package accessanalyzeriface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer"
+	"github.com/jviney/aws-sdk-go-v2/service/accessanalyzer"
 )
 
 // ClientAPI provides an interface to enable mocking the

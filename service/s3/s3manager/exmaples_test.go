@@ -4,10 +4,10 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/aws/aws-sdk-go-v2/aws/external"
+	"github.com/jviney/aws-sdk-go-v2/aws/external"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/service/s3/s3manager"
 )
 
 // ExampleNewUploader_overrideReadSeekerProvider gives an example

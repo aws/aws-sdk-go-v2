@@ -9,7 +9,7 @@
 package mqiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/mq"
+	"github.com/jviney/aws-sdk-go-v2/service/mq"
 )
 
 // ClientAPI provides an interface to enable mocking the

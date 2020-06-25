@@ -11,7 +11,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/aws/aws-sdk-go-v2/private/util"
+	"github.com/jviney/aws-sdk-go-v2/private/util"
 )
 
 // ExamplesGoCode will return a code representation of the entry within the

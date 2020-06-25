@@ -9,7 +9,7 @@
 package codecommitiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/codecommit"
+	"github.com/jviney/aws-sdk-go-v2/service/codecommit"
 )
 
 // ClientAPI provides an interface to enable mocking the

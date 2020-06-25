@@ -9,7 +9,7 @@
 package securityhubiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/securityhub"
+	"github.com/jviney/aws-sdk-go-v2/service/securityhub"
 )
 
 // ClientAPI provides an interface to enable mocking the

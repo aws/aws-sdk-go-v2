@@ -9,7 +9,7 @@
 package elasticinferenceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/elasticinference"
+	"github.com/jviney/aws-sdk-go-v2/service/elasticinference"
 )
 
 // ClientAPI provides an interface to enable mocking the

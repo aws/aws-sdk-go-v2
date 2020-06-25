@@ -9,7 +9,7 @@
 package mediastoredataiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/mediastoredata"
+	"github.com/jviney/aws-sdk-go-v2/service/mediastoredata"
 )
 
 // ClientAPI provides an interface to enable mocking the

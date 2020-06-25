@@ -9,7 +9,7 @@
 package storagegatewayiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/storagegateway"
+	"github.com/jviney/aws-sdk-go-v2/service/storagegateway"
 )
 
 // ClientAPI provides an interface to enable mocking the

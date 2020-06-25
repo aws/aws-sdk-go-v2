@@ -9,7 +9,7 @@
 package cognitoidentityprovideriface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
+	"github.com/jviney/aws-sdk-go-v2/service/cognitoidentityprovider"
 )
 
 // ClientAPI provides an interface to enable mocking the

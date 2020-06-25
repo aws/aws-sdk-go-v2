@@ -9,7 +9,7 @@
 package personalizeiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/personalize"
+	"github.com/jviney/aws-sdk-go-v2/service/personalize"
 )
 
 // ClientAPI provides an interface to enable mocking the

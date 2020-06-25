@@ -9,7 +9,7 @@
 package wafregionaliface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/wafregional"
+	"github.com/jviney/aws-sdk-go-v2/service/wafregional"
 )
 
 // ClientAPI provides an interface to enable mocking the

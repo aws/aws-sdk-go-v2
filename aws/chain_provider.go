@@ -2,7 +2,7 @@ package aws
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/jviney/aws-sdk-go-v2/aws/awserr"
 )
 
 // A ChainProvider will search for a provider which returns credentials

@@ -9,7 +9,7 @@
 package mediaconvertiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/mediaconvert"
+	"github.com/jviney/aws-sdk-go-v2/service/mediaconvert"
 )
 
 // ClientAPI provides an interface to enable mocking the

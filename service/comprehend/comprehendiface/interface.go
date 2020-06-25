@@ -9,7 +9,7 @@
 package comprehendiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/comprehend"
+	"github.com/jviney/aws-sdk-go-v2/service/comprehend"
 )
 
 // ClientAPI provides an interface to enable mocking the

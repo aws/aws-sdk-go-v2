@@ -9,7 +9,7 @@
 package servicequotasiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/servicequotas"
+	"github.com/jviney/aws-sdk-go-v2/service/servicequotas"
 )
 
 // ClientAPI provides an interface to enable mocking the

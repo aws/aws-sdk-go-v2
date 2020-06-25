@@ -9,7 +9,7 @@
 package inspectoriface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/inspector"
+	"github.com/jviney/aws-sdk-go-v2/service/inspector"
 )
 
 // ClientAPI provides an interface to enable mocking the

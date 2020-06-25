@@ -9,7 +9,7 @@
 package restjsonserviceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/private/model/api/codegentest/service/restjsonservice"
+	"github.com/jviney/aws-sdk-go-v2/private/model/api/codegentest/service/restjsonservice"
 )
 
 // ClientAPI provides an interface to enable mocking the

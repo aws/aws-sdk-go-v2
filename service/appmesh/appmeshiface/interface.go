@@ -9,7 +9,7 @@
 package appmeshiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/appmesh"
+	"github.com/jviney/aws-sdk-go-v2/service/appmesh"
 )
 
 // ClientAPI provides an interface to enable mocking the

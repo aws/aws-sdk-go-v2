@@ -9,7 +9,7 @@
 package migrationhubiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/migrationhub"
+	"github.com/jviney/aws-sdk-go-v2/service/migrationhub"
 )
 
 // ClientAPI provides an interface to enable mocking the

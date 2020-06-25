@@ -6,7 +6,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/aws"
 )
 
 // WaitUntilBundleTaskComplete uses the Amazon EC2 API operation

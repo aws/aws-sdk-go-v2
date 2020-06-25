@@ -9,7 +9,7 @@
 package iot1clickdevicesserviceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice"
+	"github.com/jviney/aws-sdk-go-v2/service/iot1clickdevicesservice"
 )
 
 // ClientAPI provides an interface to enable mocking the

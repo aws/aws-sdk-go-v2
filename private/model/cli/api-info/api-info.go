@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"sort"
 
-	"github.com/aws/aws-sdk-go-v2/private/model/api"
+	"github.com/jviney/aws-sdk-go-v2/private/model/api"
 )
 
 func main() {

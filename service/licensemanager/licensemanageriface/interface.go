@@ -9,7 +9,7 @@
 package licensemanageriface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/licensemanager"
+	"github.com/jviney/aws-sdk-go-v2/service/licensemanager"
 )
 
 // ClientAPI provides an interface to enable mocking the

@@ -8,11 +8,11 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/aws/aws-sdk-go-v2/aws/external"
-	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/aws/stscreds"
-	"github.com/aws/aws-sdk-go-v2/service/rds/rdsutils"
-	"github.com/aws/aws-sdk-go-v2/service/sts"
+	"github.com/jviney/aws-sdk-go-v2/aws/external"
+	v4 "github.com/jviney/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/jviney/aws-sdk-go-v2/aws/stscreds"
+	"github.com/jviney/aws-sdk-go-v2/service/rds/rdsutils"
+	"github.com/jviney/aws-sdk-go-v2/service/sts"
 	"github.com/go-sql-driver/mysql"
 )
 

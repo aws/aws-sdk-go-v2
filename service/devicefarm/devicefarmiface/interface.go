@@ -9,7 +9,7 @@
 package devicefarmiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/devicefarm"
+	"github.com/jviney/aws-sdk-go-v2/service/devicefarm"
 )
 
 // ClientAPI provides an interface to enable mocking the

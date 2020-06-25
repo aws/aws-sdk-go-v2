@@ -6,9 +6,9 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/rest"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/xml"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/rest"
+	"github.com/jviney/aws-sdk-go-v2/private/protocol/xml"
 )
 
 // An Encoder provides encoding of the AWS RESTXML protocol. This encoder combindes

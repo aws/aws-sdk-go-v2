@@ -9,7 +9,7 @@
 package s3controliface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/s3control"
+	"github.com/jviney/aws-sdk-go-v2/service/s3control"
 )
 
 // ClientAPI provides an interface to enable mocking the

@@ -6,9 +6,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
-	"github.com/aws/aws-sdk-go-v2/internal/sync/singleflight"
+	"github.com/jviney/aws-sdk-go-v2/aws/awserr"
+	"github.com/jviney/aws-sdk-go-v2/internal/sdk"
+	"github.com/jviney/aws-sdk-go-v2/internal/sync/singleflight"
 )
 
 // NeverExpire is the time identifier used when a credential provider's

@@ -9,7 +9,7 @@
 package computeoptimizeriface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer"
+	"github.com/jviney/aws-sdk-go-v2/service/computeoptimizer"
 )
 
 // ClientAPI provides an interface to enable mocking the

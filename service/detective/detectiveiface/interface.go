@@ -9,7 +9,7 @@
 package detectiveiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/detective"
+	"github.com/jviney/aws-sdk-go-v2/service/detective"
 )
 
 // ClientAPI provides an interface to enable mocking the

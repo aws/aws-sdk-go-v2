@@ -9,7 +9,7 @@
 package greengrassiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/greengrass"
+	"github.com/jviney/aws-sdk-go-v2/service/greengrass"
 )
 
 // ClientAPI provides an interface to enable mocking the

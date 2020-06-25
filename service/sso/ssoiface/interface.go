@@ -9,7 +9,7 @@
 package ssoiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/sso"
+	"github.com/jviney/aws-sdk-go-v2/service/sso"
 )
 
 // ClientAPI provides an interface to enable mocking the

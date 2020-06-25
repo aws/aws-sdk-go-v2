@@ -9,7 +9,7 @@
 package fsxiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/fsx"
+	"github.com/jviney/aws-sdk-go-v2/service/fsx"
 )
 
 // ClientAPI provides an interface to enable mocking the

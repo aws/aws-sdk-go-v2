@@ -10,9 +10,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/mediastore"
-	"github.com/aws/aws-sdk-go-v2/service/mediastoredata"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	"github.com/jviney/aws-sdk-go-v2/service/mediastore"
+	"github.com/jviney/aws-sdk-go-v2/service/mediastoredata"
 )
 
 func main() {

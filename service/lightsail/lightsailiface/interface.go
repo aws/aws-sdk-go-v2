@@ -9,7 +9,7 @@
 package lightsailiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/lightsail"
+	"github.com/jviney/aws-sdk-go-v2/service/lightsail"
 )
 
 // ClientAPI provides an interface to enable mocking the

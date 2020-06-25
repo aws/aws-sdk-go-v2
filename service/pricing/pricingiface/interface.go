@@ -9,7 +9,7 @@
 package pricingiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/pricing"
+	"github.com/jviney/aws-sdk-go-v2/service/pricing"
 )
 
 // ClientAPI provides an interface to enable mocking the

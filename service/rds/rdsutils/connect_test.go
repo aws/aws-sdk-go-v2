@@ -5,9 +5,9 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/rds/rdsutils"
+	"github.com/jviney/aws-sdk-go-v2/aws"
+	v4 "github.com/jviney/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/jviney/aws-sdk-go-v2/service/rds/rdsutils"
 )
 
 func TestBuildAuthToken(t *testing.T) {

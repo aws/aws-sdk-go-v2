@@ -9,7 +9,7 @@
 package appconfigiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/appconfig"
+	"github.com/jviney/aws-sdk-go-v2/service/appconfig"
 )
 
 // ClientAPI provides an interface to enable mocking the

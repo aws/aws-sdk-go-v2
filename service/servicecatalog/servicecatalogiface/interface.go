@@ -9,7 +9,7 @@
 package servicecatalogiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog"
+	"github.com/jviney/aws-sdk-go-v2/service/servicecatalog"
 )
 
 // ClientAPI provides an interface to enable mocking the

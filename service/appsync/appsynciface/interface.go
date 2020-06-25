@@ -9,7 +9,7 @@
 package appsynciface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/appsync"
+	"github.com/jviney/aws-sdk-go-v2/service/appsync"
 )
 
 // ClientAPI provides an interface to enable mocking the

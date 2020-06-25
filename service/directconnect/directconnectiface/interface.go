@@ -9,7 +9,7 @@
 package directconnectiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/directconnect"
+	"github.com/jviney/aws-sdk-go-v2/service/directconnect"
 )
 
 // ClientAPI provides an interface to enable mocking the

@@ -9,7 +9,7 @@
 package servicediscoveryiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/servicediscovery"
+	"github.com/jviney/aws-sdk-go-v2/service/servicediscovery"
 )
 
 // ClientAPI provides an interface to enable mocking the

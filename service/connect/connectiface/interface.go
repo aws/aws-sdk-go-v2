@@ -9,7 +9,7 @@
 package connectiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/connect"
+	"github.com/jviney/aws-sdk-go-v2/service/connect"
 )
 
 // ClientAPI provides an interface to enable mocking the

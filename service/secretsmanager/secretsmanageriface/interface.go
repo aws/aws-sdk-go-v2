@@ -9,7 +9,7 @@
 package secretsmanageriface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
+	"github.com/jviney/aws-sdk-go-v2/service/secretsmanager"
 )
 
 // ClientAPI provides an interface to enable mocking the

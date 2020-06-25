@@ -9,7 +9,7 @@
 package eventbridgeiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
+	"github.com/jviney/aws-sdk-go-v2/service/eventbridge"
 )
 
 // ClientAPI provides an interface to enable mocking the

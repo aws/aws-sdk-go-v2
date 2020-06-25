@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/internal/timeconv"
+	"github.com/jviney/aws-sdk-go-v2/internal/timeconv"
 )
 
 func TestExponentialJitterBackoff_AttemptDelay(t *testing.T) {

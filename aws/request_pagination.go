@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync/atomic"
 
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/jviney/aws-sdk-go-v2/internal/awsutil"
 )
 
 // A Pager provides paginating of SDK API operations which are paginatable.

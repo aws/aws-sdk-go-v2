@@ -9,7 +9,7 @@
 package mobileanalyticsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/mobileanalytics"
+	"github.com/jviney/aws-sdk-go-v2/service/mobileanalytics"
 )
 
 // ClientAPI provides an interface to enable mocking the

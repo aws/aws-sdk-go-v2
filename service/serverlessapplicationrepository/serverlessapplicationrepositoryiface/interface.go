@@ -9,7 +9,7 @@
 package serverlessapplicationrepositoryiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository"
+	"github.com/jviney/aws-sdk-go-v2/service/serverlessapplicationrepository"
 )
 
 // ClientAPI provides an interface to enable mocking the

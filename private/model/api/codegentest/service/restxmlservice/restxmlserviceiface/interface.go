@@ -9,7 +9,7 @@
 package restxmlserviceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/private/model/api/codegentest/service/restxmlservice"
+	"github.com/jviney/aws-sdk-go-v2/private/model/api/codegentest/service/restxmlservice"
 )
 
 // ClientAPI provides an interface to enable mocking the

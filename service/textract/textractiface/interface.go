@@ -9,7 +9,7 @@
 package textractiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/textract"
+	"github.com/jviney/aws-sdk-go-v2/service/textract"
 )
 
 // ClientAPI provides an interface to enable mocking the
