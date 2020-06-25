@@ -181,21 +181,21 @@ type AwsRetryMiddlewareConfig interface {
 
 // AwsRetryMiddlewares represents the Aws middleware's for Retry
 type AwsRetryMiddlewares struct {
-	attemptMiddleware       *AttemptMiddleware
-	metricsHeaderMiddleware *MetricsHeaderMiddleware
+	AttemptMiddleware       *AttemptMiddleware
+	MetricsHeaderMiddleware *MetricsHeaderMiddleware
 }
 
 // AddRetryMiddlewares adds retry middleware to operation middleware stack
 func AddRetryMiddlewares(stack *smithymiddle.Stack, cfg AwsRetryMiddlewareConfig, optsFn ...func(*AwsRetryMiddlewares)) {
 	attemptMiddleware := NewAttemptMiddleware(cfg.GetRetryer(), http.RequestCloner)
-	metricsHeaderMiddleware := MetricsHeaderMiddleware{}
+	m := AwsRetryMiddlewares{
+		AttemptMiddleware:       &attemptMiddleware,
+		MetricsHeaderMiddleware: &MetricsHeaderMiddleware{},
+	}
 	for _, fn := range optsFn {
-		fn(&AwsRetryMiddlewares{
-			attemptMiddleware:       &attemptMiddleware,
-			metricsHeaderMiddleware: &metricsHeaderMiddleware,
-		})
+		fn(&m)
 	}
 
-	stack.Finalize.Add(attemptMiddleware, smithymiddle.After)
-	stack.Finalize.Add(metricsHeaderMiddleware, smithymiddle.After)
+	stack.Finalize.Add(m.AttemptMiddleware, smithymiddle.After)
+	stack.Finalize.Add(m.MetricsHeaderMiddleware, smithymiddle.After)
 }

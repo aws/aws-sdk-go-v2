@@ -75,7 +75,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                         })
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        "AddUnsignedPayloadMiddlewares", AwsGoDependency.AWS_SIGNER_V4)
+                                        "AddUnsignedPayloadMiddleware", AwsGoDependency.AWS_SIGNER_V4)
                                         .build())
                                 .useClientOptions()
                                 .build())
