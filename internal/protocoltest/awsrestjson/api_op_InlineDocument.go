@@ -57,8 +57,8 @@ type InlineDocumentOutput struct {
 }
 
 func addawsRestjson1_serdeOpInlineDocumentMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpInlineDocument{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpInlineDocument{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpInlineDocument{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpInlineDocument{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opInlineDocument(region string) awsmiddleware.RegisterServiceMetadata {

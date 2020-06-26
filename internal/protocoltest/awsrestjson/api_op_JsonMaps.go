@@ -56,8 +56,8 @@ type JsonMapsOutput struct {
 }
 
 func addawsRestjson1_serdeOpJsonMapsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpJsonMaps{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpJsonMaps{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpJsonMaps{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpJsonMaps{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opJsonMaps(region string) awsmiddleware.RegisterServiceMetadata {

@@ -66,8 +66,8 @@ type JsonEnumsOutput struct {
 }
 
 func addawsRestjson1_serdeOpJsonEnumsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpJsonEnums{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpJsonEnums{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpJsonEnums{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpJsonEnums{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opJsonEnums(region string) awsmiddleware.RegisterServiceMetadata {

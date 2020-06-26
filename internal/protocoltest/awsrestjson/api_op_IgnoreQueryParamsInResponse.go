@@ -56,8 +56,8 @@ type IgnoreQueryParamsInResponseOutput struct {
 }
 
 func addawsRestjson1_serdeOpIgnoreQueryParamsInResponseMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpIgnoreQueryParamsInResponse{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpIgnoreQueryParamsInResponse{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpIgnoreQueryParamsInResponse{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpIgnoreQueryParamsInResponse{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opIgnoreQueryParamsInResponse(region string) awsmiddleware.RegisterServiceMetadata {

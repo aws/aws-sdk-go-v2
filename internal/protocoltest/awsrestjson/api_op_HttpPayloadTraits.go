@@ -58,8 +58,8 @@ type HttpPayloadTraitsOutput struct {
 }
 
 func addawsRestjson1_serdeOpHttpPayloadTraitsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpHttpPayloadTraits{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpHttpPayloadTraits{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpHttpPayloadTraits{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpPayloadTraits{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opHttpPayloadTraits(region string) awsmiddleware.RegisterServiceMetadata {

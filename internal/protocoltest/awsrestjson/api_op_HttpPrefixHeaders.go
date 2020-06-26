@@ -57,8 +57,8 @@ type HttpPrefixHeadersOutput struct {
 }
 
 func addawsRestjson1_serdeOpHttpPrefixHeadersMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpHttpPrefixHeaders{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpHttpPrefixHeaders{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpHttpPrefixHeaders{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpPrefixHeaders{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opHttpPrefixHeaders(region string) awsmiddleware.RegisterServiceMetadata {

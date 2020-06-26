@@ -53,8 +53,8 @@ type HttpRequestWithGreedyLabelInPathOutput struct {
 }
 
 func addawsRestjson1_serdeOpHttpRequestWithGreedyLabelInPathMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpHttpRequestWithGreedyLabelInPath{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpHttpRequestWithGreedyLabelInPath{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpHttpRequestWithGreedyLabelInPath{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpRequestWithGreedyLabelInPath{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opHttpRequestWithGreedyLabelInPath(region string) awsmiddleware.RegisterServiceMetadata {
