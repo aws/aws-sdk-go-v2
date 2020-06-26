@@ -441,7 +441,6 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
             } else if (payloadShape.isStringShape()) {
                 w.addUseImports(SmithyGoDependency.STRINGS);
-                w.addUseImports(SmithyGoDependency.SMITHY_PTR);
                 w.write("payload := strings.NewReader(*$L)", s);
 
             } else {
@@ -1233,6 +1232,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             MemberShape memberShape
     ) {
         String shapeName = symbolProvider.toMemberName(memberShape);
+        writer.addUseImports(SmithyGoDependency.FMT);
         writer.write("val, err := decoder.Token()");
         writer.write("if err != nil { return false, err }");
         writer.write("var b *bool");
