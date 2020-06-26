@@ -429,8 +429,10 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         Shape payloadShape = model.expectShape(memberShape.getTarget());
 
         writeSafeOperandAccessor(model, symbolProvider, memberShape, "input", writer, (w, s) -> {
-            w.write("restEncoder.SetHeader(\"Content-Type\").String($S)", getPayloadShapeMediaType(payloadShape));
-            w.write("");
+			writer.openBlock("if !restEncoder.HasHeader(\"Content-Type\") {", "}", () -> {
+				writer.write("restEncoder.SetHeader(\"Content-Type\").String($S)", getPayloadShapeMediaType(payloadShape));
+			});
+			writer.write("");
 
             if (payloadShape.hasTrait(StreamingTrait.class)) {
                 w.write("payload := $L", s);
