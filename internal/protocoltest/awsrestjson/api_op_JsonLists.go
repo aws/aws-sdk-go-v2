@@ -83,8 +83,8 @@ type JsonListsOutput struct {
 }
 
 func addawsRestjson1_serdeOpJsonListsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpJsonLists{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpJsonLists{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpJsonLists{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpJsonLists{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opJsonLists(region string) awsmiddleware.RegisterServiceMetadata {

@@ -65,8 +65,8 @@ type HttpRequestWithLabelsOutput struct {
 }
 
 func addawsRestjson1_serdeOpHttpRequestWithLabelsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpHttpRequestWithLabels{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpHttpRequestWithLabels{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpHttpRequestWithLabels{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpRequestWithLabels{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opHttpRequestWithLabels(region string) awsmiddleware.RegisterServiceMetadata {

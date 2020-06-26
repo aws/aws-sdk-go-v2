@@ -16,10 +16,6 @@ import (
 )
 
 func TestClient_QueryIdempotencyTokenAutoFill_awsRestjson1Serialize(t *testing.T) {
-	origRandReader := randReader
-	defer func() { randReader = origRandReader }()
-	randReader = &smithytesting.ByteLoop{}
-
 	cases := map[string]struct {
 		Params        *QueryIdempotencyTokenAutoFillInput
 		ExpectMethod  string

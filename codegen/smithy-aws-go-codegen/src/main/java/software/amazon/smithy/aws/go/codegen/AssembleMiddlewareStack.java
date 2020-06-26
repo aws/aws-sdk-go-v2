@@ -59,7 +59,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction( SymbolUtils.createValueSymbolBuilder(
-                                        "AddRetryMiddlewares", AwsGoDependency.AWS_RETRY_MIDDLEWARE)
+                                        "AddRetryMiddlewares", AwsGoDependency.AWS_RETRY)
                                         .build())
                                 .useClientOptions()
                                 .build())
@@ -77,7 +77,6 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
                                         "AddUnsignedPayloadMiddleware", AwsGoDependency.AWS_SIGNER_V4)
                                         .build())
-                                .useClientOptions()
                                 .build())
                         .build(),
 

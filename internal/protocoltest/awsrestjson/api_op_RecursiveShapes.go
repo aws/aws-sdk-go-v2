@@ -56,8 +56,8 @@ type RecursiveShapesOutput struct {
 }
 
 func addawsRestjson1_serdeOpRecursiveShapesMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpRecursiveShapes{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpRecursiveShapes{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpRecursiveShapes{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpRecursiveShapes{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opRecursiveShapes(region string) awsmiddleware.RegisterServiceMetadata {

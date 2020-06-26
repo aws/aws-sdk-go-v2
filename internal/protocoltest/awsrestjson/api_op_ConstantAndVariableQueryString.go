@@ -56,8 +56,8 @@ type ConstantAndVariableQueryStringOutput struct {
 }
 
 func addawsRestjson1_serdeOpConstantAndVariableQueryStringMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpConstantAndVariableQueryString{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpConstantAndVariableQueryString{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpConstantAndVariableQueryString{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpConstantAndVariableQueryString{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opConstantAndVariableQueryString(region string) awsmiddleware.RegisterServiceMetadata {

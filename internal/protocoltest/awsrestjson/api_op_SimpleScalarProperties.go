@@ -72,8 +72,8 @@ type SimpleScalarPropertiesOutput struct {
 }
 
 func addawsRestjson1_serdeOpSimpleScalarPropertiesMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpSimpleScalarProperties{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpSimpleScalarProperties{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpSimpleScalarProperties{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpSimpleScalarProperties{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opSimpleScalarProperties(region string) awsmiddleware.RegisterServiceMetadata {

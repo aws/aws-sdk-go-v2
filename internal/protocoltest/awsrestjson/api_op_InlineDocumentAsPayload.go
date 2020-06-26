@@ -55,8 +55,8 @@ type InlineDocumentAsPayloadOutput struct {
 }
 
 func addawsRestjson1_serdeOpInlineDocumentAsPayloadMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpInlineDocumentAsPayload{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpInlineDocumentAsPayload{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpInlineDocumentAsPayload{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpInlineDocumentAsPayload{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opInlineDocumentAsPayload(region string) awsmiddleware.RegisterServiceMetadata {

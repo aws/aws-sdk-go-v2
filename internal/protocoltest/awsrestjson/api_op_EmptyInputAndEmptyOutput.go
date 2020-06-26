@@ -55,8 +55,8 @@ type EmptyInputAndEmptyOutputOutput struct {
 }
 
 func addawsRestjson1_serdeOpEmptyInputAndEmptyOutputMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpEmptyInputAndEmptyOutput{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpEmptyInputAndEmptyOutput{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpEmptyInputAndEmptyOutput{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpEmptyInputAndEmptyOutput{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opEmptyInputAndEmptyOutput(region string) awsmiddleware.RegisterServiceMetadata {
