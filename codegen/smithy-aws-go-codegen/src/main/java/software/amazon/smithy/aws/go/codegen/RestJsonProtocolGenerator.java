@@ -15,11 +15,13 @@
 
 package software.amazon.smithy.aws.go.codegen;
 
+import java.io.Writer;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import software.amazon.smithy.codegen.core.CodegenException;
@@ -277,20 +279,19 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.openBlock("switch uv := v.(type) {", "}", () -> {
             for (MemberShape memberShape : shape.getAllMembers().values()) {
                 Shape targetShape = model.expectShape(memberShape.getTarget());
-                Symbol memberSymbol = symbolProvider.toSymbol(memberShape);
                 String exportedMemberName = symbol.getName() + symbolProvider.toMemberName(memberShape);
 
                 writer.openBlock("case *$L:", "", exportedMemberName, () -> {
                     if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
                         String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(targetShape,
                                 getProtocolName());
-                        writer.write("av := object.key($S)", memberSymbol.getName());
+                        writer.write("av := object.key($S)", getSerializedMemberName(memberShape));
                         writer.openBlock("if err := $L(uv.Value(), av); err != nil {", "}", serFunctionName, () -> {
                             writer.write("return err");
                         });
                     } else {
                         generateSimpleShapeToJsonValue(model, writer, memberShape, "uv.Value()", (w, s) -> {
-                            writer.write("object.Key($S).$L", memberShape.getMemberName(), s);
+                            writer.write("object.Key($S).$L", getSerializedMemberName(memberShape), s);
                         });
                     }
                 });
@@ -323,7 +324,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                             String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(targetShape,
                                     getProtocolName());
                             writer.openBlock("if err := $L($L, object.Key($S)); err != nil {", "}", serFunctionName,
-                                    operand, memberShape.getMemberName(), () -> {
+                                    operand, getSerializedMemberName(memberShape), () -> {
                                         writer.write("return err");
                                     });
                         } else {
@@ -409,7 +410,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 locationEncoder.accept(writer, "Double(" + operand + ")");
                 break;
             case BLOB:
-                locationEncoder.accept(writer, "Write(" + operand + ")");
+                locationEncoder.accept(writer, "Base64EncodeBytes(" + operand + ")");
                 break;
             default:
                 throw new CodegenException("Unsupported shape type " + targetShape.getType());
@@ -426,39 +427,39 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             GoWriter writer
     ) {
         Shape payloadShape = model.expectShape(memberShape.getTarget());
-        String memberName = symbolProvider.toMemberName(memberShape);
 
-        writer.write("restEncoder.SetHeader(\"Content-Type\").String($S)", getPayloadShapeMediaType(payloadShape));
-        writer.write("");
+        writeSafeOperandAccessor(model, symbolProvider, memberShape, "input", writer, (w, s) -> {
+            w.write("restEncoder.SetHeader(\"Content-Type\").String($S)", getPayloadShapeMediaType(payloadShape));
+            w.write("");
 
-        if (payloadShape.hasTrait(StreamingTrait.class)) {
-            writer.write("payload := input.$L", memberName);
+            if (payloadShape.hasTrait(StreamingTrait.class)) {
+                w.write("payload := $L", s);
 
-        } else if (payloadShape.isBlobShape()) {
-            writer.addUseImports(SmithyGoDependency.BYTES);
-            writer.write("payload := bytes.NewReader(input.$L)", memberName);
+            } else if (payloadShape.isBlobShape()) {
+                w.addUseImports(SmithyGoDependency.BYTES);
+                w.write("payload := bytes.NewReader($L)", s);
 
-        } else if (payloadShape.isStringShape()) {
-            writer.addUseImports(SmithyGoDependency.STRINGS);
-            writer.addUseImports(SmithyGoDependency.SMITHY_PTR);
-            writer.write("payload := strings.NewReader(ptr.ToString(input.$L))", memberName);
+            } else if (payloadShape.isStringShape()) {
+                w.addUseImports(SmithyGoDependency.STRINGS);
+                w.write("payload := strings.NewReader(*$L)", s);
 
-        } else {
-            String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(payloadShape,
-                    getProtocolName());
-            writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
-            writer.write("jsonEncoder := smithyjson.NewEncoder()");
-            writer.openBlock("if err := $L(input.$L, jsonEncoder.Value); err != nil {", "}", functionName,
-                    memberName, () -> {
-                        writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
+            } else {
+                String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(payloadShape,
+                        getProtocolName());
+                w.addUseImports(SmithyGoDependency.SMITHY_JSON);
+                w.write("jsonEncoder := smithyjson.NewEncoder()");
+                w.openBlock("if err := $L($L, jsonEncoder.Value); err != nil {", "}", functionName,
+                        s, () -> {
+                            w.write("return out, metadata, &smithy.SerializationError{Err: err}");
+                        });
+                w.write("payload := bytes.NewReader(jsonEncoder.Bytes())");
+            }
+
+            w.openBlock("if request, err = request.SetStream(payload); err != nil {", "}",
+                    () -> {
+                        w.write("return out, metadata, &smithy.SerializationError{Err: err}");
                     });
-            writer.write("payload := bytes.NewReader(jsonEncoder.Bytes())");
-        }
-
-        writer.openBlock("if request, err = request.SetStream(payload); err != nil {", "}",
-                () -> {
-                    writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
-                });
+        });
     }
 
     /**
@@ -471,7 +472,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         Optional<MediaTypeTrait> mediaTypeTrait = payloadShape.getTrait(MediaTypeTrait.class);
 
         if (mediaTypeTrait.isPresent()) {
-           return mediaTypeTrait.get().getValue();
+            return mediaTypeTrait.get().getValue();
         }
 
         if (payloadShape.isBlobShape()) {
@@ -661,7 +662,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         String deserFuncName = isErrorShape ?
                 ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName()) :
                 ProtocolGenerator.getDocumentOutputDeserializerFunctionName(shape, getProtocolName());
-        writer.write("err = $L(output, decoder)", deserFuncName);
+        writer.write("_, err = $L(output, decoder)", deserFuncName);
         writer.openBlock("if err != nil {", "}", () -> {
             writer.addUseImports(SmithyGoDependency.BYTES);
             writer.addUseImports(SmithyGoDependency.SMITHY);
@@ -824,7 +825,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                     String deserFuncName = ProtocolGenerator.getOperationHttpBindingsDeserFunctionName(
                             errorShape, getProtocolName());
 
-                    writer.write("err= $L(output, response)", deserFuncName);
+                    writer.write("err = $L(output, response)", deserFuncName);
                     writer.openBlock("if err != nil {", "}", () -> {
                         writer.addUseImports(SmithyGoDependency.SMITHY);
                         writer.write(String.format("return out, metadata, &smithy.DeserializationError{Err: %s}",
@@ -1004,47 +1005,47 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.addUseImports(SmithyGoDependency.FMT);
         switch (shape.getType()) {
             case STRUCTURE:
-                writer.openBlock("func $L(v $P, decoder $P) error {", "}", functionName, shapeSymbol,
+                writer.openBlock("func $L(v $P, decoder $P) (bool, error) {", "}", functionName, shapeSymbol,
                         jsonDecoder, () -> {
                             writer.openBlock("if v == nil {", "}", () -> {
-                                writer.write("return fmt.Errorf(\"unsupported deserialization of nil %T\", v)");
+                                writer.write("return false, fmt.Errorf(\"unsupported deserialization of nil %T\", v)");
                             });
                             writer.write("");
                             generateDocumentBindingStructureShapeDeserializer(writer, model, symbolProvider, shape,
                                     filterMemberShapes);
                             writer.write("");
-                            writer.write("return nil");
+                            writer.write("return true, nil");
                         });
                 break;
             case SET:
             case LIST:
-                writer.openBlock("func $L(vp *$P, decoder $P) error {", "}", functionName, shapeSymbol, jsonDecoder,
-                        () -> {
+                writer.openBlock("func $L(vp *$P, decoder $P) (bool, error) {", "}", functionName, shapeSymbol,
+                        jsonDecoder, () -> {
                             writer.write("v := $P{}", shapeSymbol);
                             writer.openBlock("if v == nil {", "}", () -> {
-                                writer.write("return fmt.Errorf(\"unsupported deserialization of nil %T\", v)");
+                                writer.write("return false, fmt.Errorf(\"unsupported deserialization of nil %T\", v)");
                             });
                             writer.write("");
                             generateDocumentBindingCollectionShapeDeserializer(writer, model, symbolProvider, shape,
                                     filterMemberShapes);
                             writer.write("");
                             writer.write("*vp = v");
-                            writer.write("return nil");
+                            writer.write("return true, nil");
                         });
                 break;
             case MAP:
-                writer.openBlock("func $L(vp *$P, decoder $P) error {", "}", functionName, shapeSymbol, jsonDecoder,
-                        () -> {
+                writer.openBlock("func $L(vp *$P, decoder $P) (bool, error) {", "}", functionName, shapeSymbol,
+                        jsonDecoder, () -> {
                             writer.write("v := $P{}", shapeSymbol);
                             writer.openBlock("if v == nil {", "}", () -> {
-                                writer.write("return fmt.Errorf(\"unsupported deserialization of nil %T\", v)");
+                                writer.write("return false, fmt.Errorf(\"unsupported deserialization of nil %T\", v)");
                             });
                             writer.write("");
                             generateDocumentBindingMapShapeDeserializer(writer, model, symbolProvider, shape,
                                     filterMemberShapes);
                             writer.write("");
                             writer.write("*vp = v");
-                            writer.write("return nil");
+                            writer.write("return true, nil");
                         });
                 break;
             default:
@@ -1064,7 +1065,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.openBlock("for decoder.More() {", "}",
                 () -> {
                     writer.write("t, err := decoder.Token()");
-                    writer.write("if err != nil { return err }");
+                    writer.write("if err != nil { return false, err }");
                     writer.openBlock("switch t {", "}", () -> {
                         for (MemberShape memberShape : shape.members()) {
                             if (!filterMemberShapes.test(memberShape)) {
@@ -1083,7 +1084,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                         writer.openBlock("default : ", "", () -> {
                             writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL);
                             writer.write("err := restjson.DiscardUnknownField(decoder)");
-                            writer.write("if err != nil {return err}");
+                            writer.write("if err != nil {return false, err}");
                         });
                     });
                 });
@@ -1102,7 +1103,6 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writeJsonTokenizerStartStub(writer, shape);
         writer.openBlock("for decoder.More() {", "}", () -> {
             MemberShape memberShape = shape.members().iterator().next();
-            String memberName = symbolProvider.toMemberName(memberShape);
             String operand = generateDocumentBindingMemberShapeDeserializer(writer, model, symbolProvider, memberShape);
 
             writer.write(String.format("v = append(v, %s)", operand));
@@ -1124,10 +1124,11 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             MemberShape memberShape = shape.asMapShape().get().getValue();
 
             writer.write("token, err := decoder.Token()");
-            writer.write("if err != nil { return err}");
+            writer.write("if err != nil { return false, err }");
             writer.write("");
             writer.write("key, ok := token.(string)");
-            writer.write("if !ok { return fmt.Errorf(\"expected map-key of type string, found type %T\", token)}");
+            writer.write("if !ok { return false, fmt.Errorf(\"expected map-key of type string, "
+                    + "found type %T\", token)}");
             writer.write("");
 
             String operand = generateDocumentBindingMemberShapeDeserializer(writer, model, symbolProvider, memberShape);
@@ -1153,14 +1154,14 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             case BOOLEAN:
                 return generateDocumentBindingBooleanMemberDeserializer(writer, model, symbolProvider, memberShape);
             case TIMESTAMP:
-                return generateDocumentBindingTimestampMemberDeserializer(writer, model, memberShape);
+                return generateDocumentBindingTimestampMemberDeserializer(writer, model, symbolProvider, memberShape);
             case BLOB:
                 return generateDocumentBindingBlobMemberDeserializer(writer, model, symbolProvider, memberShape);
             case BYTE:
             case SHORT:
             case INTEGER:
             case LONG:
-                return generateDocumentBindingIntegerMemberDeserializer(writer, model, memberShape);
+                return generateDocumentBindingIntegerMemberDeserializer(writer, model, symbolProvider, memberShape);
             case BIG_INTEGER:
             case BIG_DECIMAL:
                 return generateDocumentBindingBigMemberDeserializer(writer, model, memberShape);
@@ -1193,19 +1194,34 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         String memberName = symbolProvider.toMemberName(memberShape);
         Shape targetShape = model.expectShape(memberShape.getTarget());
         Symbol targetSymbol = symbolProvider.toSymbol(targetShape);
+        writer.addUseImports(SmithyGoDependency.FMT);
         writer.write("val, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
-        writer.write("st, ok := val.(string)");
-        writer.openBlock("if !ok {", "}", () -> {
-            writer.write("return fmt.Errorf(\"expected $L to be of type $P, got %T instead\", val)"
-                    , memberName, targetSymbol);
-        });
+        writer.write("if err != nil { return false, err }");
+
+        BiConsumer<GoWriter, Consumer<GoWriter>> handleJsonString = (w, c) -> {
+            w.openBlock("if val != nil {", "}", () -> {
+                w.write("jtv, ok := val.(string)");
+                w.openBlock("if !ok {", "}", () -> {
+                    w.write("return false, fmt.Errorf(\"expected $L to be of type string, got %T instead\", val)",
+                            memberName);
+                });
+                c.accept(w);
+            });
+        };
 
         if (targetShape.hasTrait(EnumTrait.class)) {
-            return String.format("types.%s(st)", targetSymbol.getName());
+            writer.write("var ev $P", targetSymbol);
+            handleJsonString.accept(writer, w -> {
+                w.write("ev = $P(jtv)", targetSymbol);
+            });
+            return "ev";
         }
 
-        return CodegenUtils.generatePointerValueIfPointable(writer, targetShape, "st");
+        writer.write("var st *string");
+        handleJsonString.accept(writer, w -> {
+            w.write("st = &jtv");
+        });
+        return "st";
     }
 
     // Generates deserializer for Boolean member shape.
@@ -1216,51 +1232,77 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             MemberShape memberShape
     ) {
         String shapeName = symbolProvider.toMemberName(memberShape);
-        Symbol shapeSymbol = symbolProvider.toSymbol(memberShape);
+        writer.addUseImports(SmithyGoDependency.FMT);
         writer.write("val, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
-        writer.write("b, ok := val.(bool)");
-        writer.openBlock("if !ok {", "}", () -> {
-            writer.write("return fmt.Errorf(\"expected $L to be of type $L, got %T instead\", val)"
-                    , shapeName, shapeSymbol.getName());
+        writer.write("if err != nil { return false, err }");
+        writer.write("var b *bool");
+        writer.openBlock("if val != nil {", "}", () -> {
+            writer.write("jtv, ok := val.(bool)");
+            writer.openBlock("if !ok {", "}", () -> {
+                writer.write("return false, fmt.Errorf(\"expected $L to be of type *bool, got %T instead\", val)",
+                        shapeName);
+            });
+            writer.write("b = &jtv");
         });
-
-        Shape targetShape = model.expectShape(memberShape.getTarget());
-        return CodegenUtils.generatePointerValueIfPointable(writer, targetShape, "b");
+        return "b";
     }
 
     // Generates deserializer for Byte, Short, Integer, Long member shape.
     private String generateDocumentBindingIntegerMemberDeserializer(
             GoWriter writer,
             Model model,
+            SymbolProvider symbolProvider,
             MemberShape memberShape
     ) {
+        writer.addUseImports(SmithyGoDependency.FMT);
         writer.write("val, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
-        writer.write("nt, err := val.(json.Number).Int64()");
-        writer.write("if err != nil { return err }");
+        writer.write("if err != nil { return false, err }");
+
+        BiConsumer<GoWriter, Consumer<GoWriter>> handleJsonNumber = (w, c) -> {
+            w.openBlock("if val != nil {", "}", () -> {
+                w.write("jtv, ok := val.(json.Number)");
+                w.openBlock("if !ok {", "}", () -> {
+                    w.write("return false, fmt.Errorf(\"expected $L to be json.Number, got %T instead\", val)",
+                            symbolProvider.toMemberName(memberShape));
+                });
+                w.write("i64, err := jtv.Int64()");
+                w.write("if err != nil { return false, err }");
+                c.accept(w);
+            });
+        };
 
         Shape targetShape = model.expectShape(memberShape.getTarget());
-
         switch (targetShape.getType()) {
             case BYTE:
-                writer.write("st := int8(nt)");
+                writer.write("var st *int8");
+                handleJsonNumber.accept(writer, w -> {
+                    w.write("st = " + CodegenUtils.generatePointerValueIfPointable(w, targetShape, "int8(i64)"));
+                });
                 break;
             case SHORT:
-                writer.write("st := int16(nt)");
+                writer.write("var st *int16");
+                handleJsonNumber.accept(writer, w -> {
+                    w.write("st = " + CodegenUtils.generatePointerValueIfPointable(w, targetShape, "int16(i64)"));
+                });
                 break;
             case INTEGER:
-                writer.write("st := int32(nt)");
+                writer.write("var st *int32");
+                handleJsonNumber.accept(writer, w -> {
+                    w.write("st = " + CodegenUtils.generatePointerValueIfPointable(w, targetShape, "int32(i64)"));
+                });
                 break;
             case LONG:
-                writer.write("st := nt");
+                writer.write("var st *int64");
+                handleJsonNumber.accept(writer, w -> {
+                    w.write("st = &i64");
+                });
                 break;
             default:
                 throw new CodegenException(
                         "unexpected integer number type " + targetShape.getType() + ", " + memberShape.getId());
         }
 
-        return CodegenUtils.generatePointerValueIfPointable(writer, targetShape, "st");
+        return "st";
     }
 
     // Generates deserializer for Big Integer, Big Decimal member shape.
@@ -1269,29 +1311,46 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             Model model,
             MemberShape memberShape
     ) {
-        writer.write("val, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
+        writer.addUseImports(SmithyGoDependency.FMT);
 
+        writer.write("val, err := decoder.Token()");
+        writer.write("if err != nil { return false, err }");
+
+        BiConsumer<GoWriter, Consumer<GoWriter>> handleJsonString = (w, c) -> {
+            w.openBlock("if val != nil {", "}", () -> {
+                w.write("jtv, ok := val.(string)");
+                w.openBlock("if !ok {", "}", () -> {
+                    w.write("return false, fmt.Errorf(\"expected $L to be of type string, got %T instead\", val)",
+                            memberShape.getMemberName());
+                });
+                c.accept(w);
+            });
+        };
+
+
+        writer.addUseImports(SmithyGoDependency.BIG);
         Shape targetShape = model.expectShape(memberShape.getTarget());
         switch (targetShape.getType()) {
             case BIG_INTEGER:
-                writer.addUseImports(SmithyGoDependency.BIG);
-                writer.addUseImports(SmithyGoDependency.FMT);
-                writer.write("st, ok := new(big.Int).SetString(val.(string), 10)");
-                writer.write("if !ok { return fmt.Errorf(\"error deserializing big integer type\")}");
+                writer.write("var bv *big.Int");
+                handleJsonString.accept(writer, w -> {
+                    w.write("bv, ok = new(big.Int).SetString(jtv, 10)");
+                    w.write("if !ok { return false, fmt.Errorf(\"error deserializing big integer type\")}");
+                });
                 break;
             case BIG_DECIMAL:
-                writer.addUseImports(SmithyGoDependency.BIG);
-                writer.addUseImports(SmithyGoDependency.FMT);
-                writer.write("st, ok := big.ParseFloat(val.(string), 10, 200, big.ToNearestAway)");
-                writer.write("if !ok { return fmt.Errorf(\"error deserializing big decimal type\")}");
+                writer.write("var bv *big.Float");
+                handleJsonString.accept(writer, w -> {
+                    w.write("bv, _, err = new(big.Float).Parse(jtv, 10)");
+                    w.write("if !ok { return false, fmt.Errorf(\"error deserializing big decimal type\")}");
+                });
                 break;
             default:
                 throw new CodegenException(
                         "unexpected big number type " + targetShape.getType() + ", " + memberShape.getId());
         }
 
-        return CodegenUtils.generatePointerValueIfPointable(writer, targetShape, "st");
+        return "bv";
     }
 
     // Generates deserializer for Float, Double member shape.
@@ -1300,61 +1359,111 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             Model model,
             MemberShape memberShape
     ) {
+        writer.addUseImports(SmithyGoDependency.FMT);
+
         writer.write("val, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
-        writer.write("nt, err := val.(json.Number).Float64()");
-        writer.write("if err != nil { return err }");
+        writer.write("if err != nil { return false, err }");
+
+        BiConsumer<GoWriter, Consumer<GoWriter>> handleJsonFloat = (w, c) -> {
+            w.openBlock("if val != nil {", "}", () -> {
+                w.write("jtv, ok := val.(json.Number)");
+                w.openBlock("if !ok {", "}", () -> {
+                    w.write("return false, fmt.Errorf(\"expected $L to be of type json.Number, got %T instead\", val)",
+                            memberShape.getMemberName());
+                });
+                w.write("f64, err := jtv.Float64()");
+                w.write("if err != nil { return false, err }");
+                c.accept(w);
+            });
+        };
 
         Shape targetShape = model.expectShape(memberShape.getTarget());
         switch (targetShape.getType()) {
             case FLOAT:
-                writer.write("st := float32(nt)");
+                writer.write("var st *float32");
+                handleJsonFloat.accept(writer, w -> {
+                    w.write("st = " + CodegenUtils.generatePointerValueIfPointable(w, targetShape, "float32(f64)"));
+                });
                 break;
             case DOUBLE:
-                writer.write("st := nt");
+                writer.write("var st *float64");
+                handleJsonFloat.accept(writer, w -> {
+                    w.write("st = &f64");
+                });
                 break;
             default:
                 throw new CodegenException(
                         "unexpected decimal number type " + targetShape.getType() + ", " + memberShape.getId());
         }
 
-        return CodegenUtils.generatePointerValueIfPointable(writer, targetShape, "st");
+        return "st";
     }
 
     // Generates deserializer for Timestamp member shape.
     private String generateDocumentBindingTimestampMemberDeserializer(
             GoWriter writer,
             Model model,
+            SymbolProvider symbolProvider,
             MemberShape memberShape
     ) {
         TimestampFormatTrait.Format format = memberShape.getMemberTrait(model, TimestampFormatTrait.class)
                 .map(TimestampFormatTrait::getFormat)
                 .orElse(TimestampFormatTrait.Format.EPOCH_SECONDS);
 
-        writer.write("val, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
-
         writer.addUseImports(SmithyGoDependency.SMITHY_TIME);
+        writer.addUseImports(SmithyGoDependency.FMT);
+        writer.write("val, err := decoder.Token()");
+        writer.write("if err != nil { return false, err }");
+
+        BiConsumer<GoWriter, Consumer<GoWriter>> handleAsJsonString = (w, c) -> {
+            w.openBlock("if val != nil {", "}", () -> {
+                w.write("jtv, ok := val.(string)");
+                w.openBlock("if !ok {", "}", () -> {
+                    w.write("return false, fmt.Errorf(\"expected $L to be of type string, got %T instead\", val)",
+                            symbolProvider.toMemberName(memberShape));
+                });
+                c.accept(w);
+            });
+        };
+        BiConsumer<GoWriter, Consumer<GoWriter>> handleAsJsonNumber = (w, c) -> {
+            w.openBlock("if val != nil {", "}", () -> {
+                w.write("jtv, ok := val.(json.Number)");
+                w.openBlock("if !ok {", "}", () -> {
+                    w.write("return false, fmt.Errorf(\"expected $L to be of type json.Number, got %T instead\", val)",
+                            memberShape.getMemberName());
+                });
+                c.accept(w);
+            });
+        };
+
+        writer.write("var ts *time.Time");
         switch (format) {
             case DATE_TIME:
-                writer.write("ts, err := smithytime.ParseDateTime(val.(string))");
-                writer.write("if err != nil { return err }");
+                handleAsJsonString.accept(writer, w -> {
+                    w.write("t, err := smithytime.ParseDateTime(jtv)");
+                    w.write("if err != nil { return false, err }");
+                    w.write("ts = &t");
+                });
                 break;
             case HTTP_DATE:
-                writer.write("ts, err := smithytime.ParseHTTPDate(val.(string))");
-                writer.write("if err != nil { return err }");
+                handleAsJsonString.accept(writer, w -> {
+                    w.write("t, err := smithytime.ParseHTTPDate(jtv)");
+                    w.write("if err != nil { return false, err }");
+                    w.write("ts = &t");
+                });
                 break;
             case EPOCH_SECONDS:
-                writer.write("ft, err := val.(json.Number).Float64()");
-                writer.write("if err != nil { return err }");
-                writer.write("ts := smithytime.ParseEpochSeconds(ft)");
+                handleAsJsonNumber.accept(writer, w -> {
+                    w.write("f64, err := jtv.Float64()");
+                    w.write("if err != nil { return false, err }");
+                    w.write("t := smithytime.ParseEpochSeconds(f64)");
+                    w.write("ts = &t");
+                });
                 break;
             case UNKNOWN:
                 throw new CodegenException("Unknown timestamp format");
         }
-
-        Shape targetShape = model.expectShape(memberShape.getTarget());
-        return CodegenUtils.generatePointerValueIfPointable(writer, targetShape, "ts");
+        return "ts";
     }
 
     // Generates deserializer for blob member shape.
@@ -1369,7 +1478,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
         writer.write("var bs $T", targetSymbol);
         writer.write("err := decoder.Decode(&bs)");
-        writer.write("if err != nil { return err }");
+        writer.write("if err != nil { return false, err }");
         return "bs";
     }
 
@@ -1384,11 +1493,15 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         Symbol targetSymbol = symbolProvider.toSymbol(targetShape);
         String deserFunctionName = ProtocolGenerator
                 .getDocumentDeserializerFunctionName(targetShape, getProtocolName());
-        writer.write("val := $T{}", targetSymbol);
-        writer.write("if err := $L(&val, decoder); err != nil { return err }",
-                deserFunctionName);
+        writer.write("val := &$T{}", targetSymbol);
+        writer.openBlock("if present, err := $L(val, decoder); err != nil {", "", deserFunctionName, () -> {
+            writer.write("return false, err");
+            writer.openBlock("} else if !present {", "}", () -> {
+                writer.write("val = nil");
+            });
+        });
 
-        return CodegenUtils.generatePointerValueIfPointable(writer, targetShape, "val");
+        return "val";
     }
 
     // Generates deserializer for delegator for collection member shape and map member shapes.
@@ -1404,7 +1517,12 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         String deserializerFuncName = ProtocolGenerator
                 .getDocumentDeserializerFunctionName(targetShape, getProtocolName());
         writer.write("col := $P{}", targetSymbol);
-        writer.write("if err := $L(&col, decoder); err != nil { return err }", deserializerFuncName);
+        writer.openBlock("if present, err := $L(&col, decoder); err != nil {", "", deserializerFuncName, () -> {
+            writer.write("return false, err");
+            writer.openBlock("} else if !present {", "}", () -> {
+                writer.write("col = nil");
+            });
+        });
         return "col";
     }
 
@@ -1412,12 +1530,13 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     private void writeJsonTokenizerStartStub(GoWriter writer, Shape shape) {
         String startToken = shape.isListShape() || shape.isSetShape() ? "[" : "{";
         writer.write("startToken, err := decoder.Token()");
-        writer.write("if err == io.EOF { return nil }");
-        writer.write("if err != nil { return err }");
+        writer.write("if err == io.EOF { return false, nil }");
+        writer.write("if err != nil { return false, err }");
+        writer.write("if startToken == nil { return false, nil }");
         writer.openBlock("if t, ok := startToken.(json.Delim); !ok || t.String() != $S {",
                 "}", startToken, () -> {
                     writer.addUseImports(SmithyGoDependency.FMT);
-                    writer.write("return fmt.Errorf($S)",
+                    writer.write("return false, fmt.Errorf($S)",
                             String.format("expect `%s` as start token", startToken));
                 });
         writer.write("");
@@ -1425,13 +1544,13 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
     // generates Json decoder tokenizer end stub wrt to the shape
     private void writeJsonTokenizerEndStub(GoWriter writer, Shape shape) {
-        String endToken = shape.isListShape() || shape.isSetShape()  ? "]" : "}";
+        String endToken = shape.isListShape() || shape.isSetShape() ? "]" : "}";
         writer.write("");
         writer.write("endToken, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
+        writer.write("if err != nil { return false, err }");
         writer.openBlock("if t, ok := endToken.(json.Delim); !ok || t.String() != $S {",
                 "}", endToken, () -> {
-                    writer.write("return fmt.Errorf($S)",
+                    writer.write("return false, fmt.Errorf($S)",
                             String.format("expect `%s` as end token", endToken));
                 });
     }
