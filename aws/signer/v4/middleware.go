@@ -153,7 +153,7 @@ func AddUnsignedPayloadMiddleware(stack *middleware.Stack) {
 
 // HTTPSignerMiddlewareConfig interface for HTTP signer middleware config
 type HTTPSignerMiddlewareConfig interface {
-	GetSigner() HTTPSigner
+	GetHTTPSigner() HTTPSigner
 }
 
 // HTTPSignerMiddlewares represent the middleware's for HTTPSigner
@@ -166,7 +166,7 @@ type HTTPSignerMiddlewares struct {
 func AddHTTPSignerMiddlewares(stack *middleware.Stack, cfg HTTPSignerMiddlewareConfig, optFns ...func(*HTTPSignerMiddlewares)) {
 	m := HTTPSignerMiddlewares {
 		ComputePayloadSHA256Middleware: &ComputePayloadSHA256Middleware{},
-		SignHTTPRequestMiddleware:      NewSignHTTPRequestMiddleware(cfg.GetSigner()),
+		SignHTTPRequestMiddleware:      NewSignHTTPRequestMiddleware(cfg.GetHTTPSigner()),
 	}
 	for _, fn := range optFns {
 		fn(&m)

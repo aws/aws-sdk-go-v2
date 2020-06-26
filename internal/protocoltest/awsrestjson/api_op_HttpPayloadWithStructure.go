@@ -57,8 +57,8 @@ type HttpPayloadWithStructureOutput struct {
 }
 
 func addawsRestjson1_serdeOpHttpPayloadWithStructureMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpHttpPayloadWithStructure{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpHttpPayloadWithStructure{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpHttpPayloadWithStructure{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpPayloadWithStructure{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opHttpPayloadWithStructure(region string) awsmiddleware.RegisterServiceMetadata {

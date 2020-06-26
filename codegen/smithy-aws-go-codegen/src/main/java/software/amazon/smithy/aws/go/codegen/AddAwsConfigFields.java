@@ -63,7 +63,7 @@ public class AddAwsConfigFields implements GoIntegration {
                     .build(),
             ConfigField.builder()
                     .name(RETRYER_CONFIG_NAME)
-                    .type(getAwsCoreSymbol("Retryer"))
+                    .type(getAwsRetrySymbol("Retryer"))
                     .documentation("Retryer guides how HTTP requests should be retried in case of\n"
                             + "recoverable failures. When nil the API client will use a default\n"
                             + "retryer.")
@@ -111,6 +111,12 @@ public class AddAwsConfigFields implements GoIntegration {
         return SymbolUtils.createValueSymbolBuilder(symbolName)
                 .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true).build();
     }
+
+    private static Symbol getAwsRetrySymbol(String symbolName) {
+        return SymbolUtils.createValueSymbolBuilder(symbolName,
+                AwsGoDependency.AWS_RETRY).build();
+    }
+
 
     @Override
     public void writeAdditionalFiles(

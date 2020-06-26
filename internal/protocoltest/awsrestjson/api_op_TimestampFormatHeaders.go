@@ -68,8 +68,8 @@ type TimestampFormatHeadersOutput struct {
 }
 
 func addawsRestjson1_serdeOpTimestampFormatHeadersMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpTimestampFormatHeaders{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpTimestampFormatHeaders{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpTimestampFormatHeaders{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpTimestampFormatHeaders{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opTimestampFormatHeaders(region string) awsmiddleware.RegisterServiceMetadata {

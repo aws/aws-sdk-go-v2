@@ -54,8 +54,8 @@ type OmitsNullSerializesEmptyStringOutput struct {
 }
 
 func addawsRestjson1_serdeOpOmitsNullSerializesEmptyStringMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpOmitsNullSerializesEmptyString{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpOmitsNullSerializesEmptyString{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpOmitsNullSerializesEmptyString{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpOmitsNullSerializesEmptyString{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opOmitsNullSerializesEmptyString(region string) awsmiddleware.RegisterServiceMetadata {

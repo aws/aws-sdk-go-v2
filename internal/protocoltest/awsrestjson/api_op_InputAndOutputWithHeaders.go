@@ -88,8 +88,8 @@ type InputAndOutputWithHeadersOutput struct {
 }
 
 func addawsRestjson1_serdeOpInputAndOutputWithHeadersMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpInputAndOutputWithHeaders{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpInputAndOutputWithHeaders{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpInputAndOutputWithHeaders{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpInputAndOutputWithHeaders{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opInputAndOutputWithHeaders(region string) awsmiddleware.RegisterServiceMetadata {

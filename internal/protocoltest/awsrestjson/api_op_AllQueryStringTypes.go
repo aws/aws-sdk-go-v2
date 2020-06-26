@@ -72,8 +72,8 @@ type AllQueryStringTypesOutput struct {
 }
 
 func addawsRestjson1_serdeOpAllQueryStringTypesMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpAllQueryStringTypes{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpAllQueryStringTypes{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpAllQueryStringTypes{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpAllQueryStringTypes{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opAllQueryStringTypes(region string) awsmiddleware.RegisterServiceMetadata {

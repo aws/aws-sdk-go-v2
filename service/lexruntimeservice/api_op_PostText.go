@@ -228,8 +228,8 @@ type PostTextOutput struct {
 }
 
 func addawsRestjson1_serdeOpPostTextMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add("&awsRestjson1_serializeOpPostText{}", middleware.After)
-	stack.Deserialize.Add("&awsRestjson1_deserializeOpPostText{}", middleware.After)
+	stack.Serialize.Add(&awsRestjson1_serializeOpPostText{}, middleware.After)
+	stack.Deserialize.Add(&awsRestjson1_deserializeOpPostText{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opPostText(region string) awsmiddleware.RegisterServiceMetadata {

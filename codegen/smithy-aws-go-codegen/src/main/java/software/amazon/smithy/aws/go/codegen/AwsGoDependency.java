@@ -24,7 +24,7 @@ public final class AwsGoDependency {
     public static final GoDependency AWS_REST_JSON_PROTOCOL = aws("aws/protocol/restjson");
     public static final GoDependency AWS_CORE = aws("aws");
     public static final GoDependency AWS_MIDDLEWARE = aws("aws/middleware", "awsmiddleware");
-    public static final GoDependency AWS_RETRY_MIDDLEWARE = aws("aws/retry");
+    public static final GoDependency AWS_RETRY = aws("aws/retry");
     public static final GoDependency AWS_SIGNER_V4 = aws("aws/signer/v4");
 
     public static final String AWS_SOURCE_PATH = "github.com/aws/aws-sdk-go-v2";
@@ -45,6 +45,6 @@ public final class AwsGoDependency {
     }
 
     private static final class Versions {
-    private static final String AWS_SDK = "v0.0.0-20200622232612-3b8c27eea891";
+    private static final String AWS_SDK = "v0.21.1-0.20200625214507-5c2843205502";
     }
 }
