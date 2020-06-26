@@ -21,14 +21,14 @@ import (
 	"time"
 )
 
-type awsRestjson1_deserializeOpHttpRequestWithLabelsAndTimestampFormat struct {
+type awsRestjson1_deserializeOpSimpleScalarProperties struct {
 }
 
-func (*awsRestjson1_deserializeOpHttpRequestWithLabelsAndTimestampFormat) ID() string {
-	return "awsRestjson1_deserializeOpHttpRequestWithLabelsAndTimestampFormat"
+func (*awsRestjson1_deserializeOpSimpleScalarProperties) ID() string {
+	return "awsRestjson1_deserializeOpSimpleScalarProperties"
 }
 
-func (m *awsRestjson1_deserializeOpHttpRequestWithLabelsAndTimestampFormat) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestjson1_deserializeOpSimpleScalarProperties) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -56,10 +56,1028 @@ func (m *awsRestjson1_deserializeOpHttpRequestWithLabelsAndTimestampFormat) Hand
 		return out, metadata, genericError
 	}
 
-	output := &HttpRequestWithLabelsAndTimestampFormatOutput{}
+	output := &SimpleScalarPropertiesOutput{}
+	out.Result = output
+
+	err = awsRestjson1_deserializeHttpBindingsSimpleScalarPropertiesOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	defer response.Body.Close()
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+
+	err = awsRestjson1_deserializeOpDocumentSimpleScalarPropertiesOutput(output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeHttpBindingsSimpleScalarPropertiesOutput(v *SimpleScalarPropertiesOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if val := response.Header.Get("X-Foo"); val != "" {
+		v.Foo = ptr.String(val)
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpDocumentSimpleScalarPropertiesOutput(v *SimpleScalarPropertiesOutput, decoder *json.Decoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization of nil %T", v)
+	}
+
+	startToken, err := decoder.Token()
+	if err == io.EOF {
+		return nil
+	}
+	if err != nil {
+		return err
+	}
+	if t, ok := startToken.(json.Delim); !ok || t.String() != "{" {
+		return fmt.Errorf("expect `{` as start token")
+	}
+
+	for decoder.More() {
+		t, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		switch t {
+		case "stringValue":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			st, ok := val.(string)
+			if !ok {
+				return fmt.Errorf("expected StringValue to be of type *string, got %T instead", val)
+			}
+			v.StringValue = ptr.String(st)
+
+		case "trueBooleanValue":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			b, ok := val.(bool)
+			if !ok {
+				return fmt.Errorf("expected TrueBooleanValue to be of type bool, got %T instead", val)
+			}
+			v.TrueBooleanValue = ptr.Bool(b)
+
+		case "falseBooleanValue":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			b, ok := val.(bool)
+			if !ok {
+				return fmt.Errorf("expected FalseBooleanValue to be of type bool, got %T instead", val)
+			}
+			v.FalseBooleanValue = ptr.Bool(b)
+
+		case "byteValue":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			nt, err := val.(json.Number).Int64()
+			if err != nil {
+				return err
+			}
+			st := int8(nt)
+			v.ByteValue = ptr.Int8(st)
+
+		case "shortValue":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			nt, err := val.(json.Number).Int64()
+			if err != nil {
+				return err
+			}
+			st := int16(nt)
+			v.ShortValue = ptr.Int16(st)
+
+		case "integerValue":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			nt, err := val.(json.Number).Int64()
+			if err != nil {
+				return err
+			}
+			st := int32(nt)
+			v.IntegerValue = ptr.Int32(st)
+
+		case "longValue":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			nt, err := val.(json.Number).Int64()
+			if err != nil {
+				return err
+			}
+			st := nt
+			v.LongValue = ptr.Int64(st)
+
+		case "floatValue":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			nt, err := val.(json.Number).Float64()
+			if err != nil {
+				return err
+			}
+			st := float32(nt)
+			v.FloatValue = ptr.Float32(st)
+
+		case "DoubleDribble":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			nt, err := val.(json.Number).Float64()
+			if err != nil {
+				return err
+			}
+			st := nt
+			v.DoubleValue = ptr.Float64(st)
+
+		default:
+			err := restjson.DiscardUnknownField(decoder)
+			if err != nil {
+				return err
+			}
+
+		}
+	}
+
+	endToken, err := decoder.Token()
+	if err != nil {
+		return err
+	}
+	if t, ok := endToken.(json.Delim); !ok || t.String() != "}" {
+		return fmt.Errorf("expect `}` as end token")
+	}
+
+	return nil
+}
+
+type awsRestjson1_deserializeOpInlineDocumentAsPayload struct {
+}
+
+func (*awsRestjson1_deserializeOpInlineDocumentAsPayload) ID() string {
+	return "awsRestjson1_deserializeOpInlineDocumentAsPayload"
+}
+
+func (m *awsRestjson1_deserializeOpInlineDocumentAsPayload) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &InlineDocumentAsPayloadOutput{}
+	out.Result = output
+
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	defer response.Body.Close()
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+
+	err = awsRestjson1_deserializeOpDocumentInlineDocumentAsPayloadOutput(output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpDocumentInlineDocumentAsPayloadOutput(v *InlineDocumentAsPayloadOutput, decoder *json.Decoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization of nil %T", v)
+	}
+
+	startToken, err := decoder.Token()
+	if err == io.EOF {
+		return nil
+	}
+	if err != nil {
+		return err
+	}
+	if t, ok := startToken.(json.Delim); !ok || t.String() != "{" {
+		return fmt.Errorf("expect `{` as start token")
+	}
+
+	for decoder.More() {
+		t, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		switch t {
+		case "documentValue":
+			// TODO: Support document Deserialization
+			v.DocumentValue = nil
+
+		default:
+			err := restjson.DiscardUnknownField(decoder)
+			if err != nil {
+				return err
+			}
+
+		}
+	}
+
+	endToken, err := decoder.Token()
+	if err != nil {
+		return err
+	}
+	if t, ok := endToken.(json.Delim); !ok || t.String() != "}" {
+		return fmt.Errorf("expect `}` as end token")
+	}
+
+	return nil
+}
+
+type awsRestjson1_deserializeOpConstantAndVariableQueryString struct {
+}
+
+func (*awsRestjson1_deserializeOpConstantAndVariableQueryString) ID() string {
+	return "awsRestjson1_deserializeOpConstantAndVariableQueryString"
+}
+
+func (m *awsRestjson1_deserializeOpConstantAndVariableQueryString) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &ConstantAndVariableQueryStringOutput{}
 	out.Result = output
 
 	return out, metadata, err
+}
+
+type awsRestjson1_deserializeOpHttpPayloadTraitsWithMediaType struct {
+}
+
+func (*awsRestjson1_deserializeOpHttpPayloadTraitsWithMediaType) ID() string {
+	return "awsRestjson1_deserializeOpHttpPayloadTraitsWithMediaType"
+}
+
+func (m *awsRestjson1_deserializeOpHttpPayloadTraitsWithMediaType) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &HttpPayloadTraitsWithMediaTypeOutput{}
+	out.Result = output
+
+	err = awsRestjson1_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	err = awsRestjson1_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(output, response.Body)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if val := response.Header.Get("X-Foo"); val != "" {
+		v.Foo = ptr.String(val)
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, body io.ReadCloser) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization of nil %T", v)
+	}
+
+	bs, err := ioutil.ReadAll(body)
+	if err != nil {
+		return err
+	}
+	if len(bs) > 0 {
+		v.Blob = bs
+	}
+	return nil
+}
+
+type awsRestjson1_deserializeOpHttpRequestWithGreedyLabelInPath struct {
+}
+
+func (*awsRestjson1_deserializeOpHttpRequestWithGreedyLabelInPath) ID() string {
+	return "awsRestjson1_deserializeOpHttpRequestWithGreedyLabelInPath"
+}
+
+func (m *awsRestjson1_deserializeOpHttpRequestWithGreedyLabelInPath) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &HttpRequestWithGreedyLabelInPathOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestjson1_deserializeOpInputAndOutputWithHeaders struct {
+}
+
+func (*awsRestjson1_deserializeOpInputAndOutputWithHeaders) ID() string {
+	return "awsRestjson1_deserializeOpInputAndOutputWithHeaders"
+}
+
+func (m *awsRestjson1_deserializeOpInputAndOutputWithHeaders) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &InputAndOutputWithHeadersOutput{}
+	out.Result = output
+
+	err = awsRestjson1_deserializeHttpBindingsInputAndOutputWithHeadersOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeHttpBindingsInputAndOutputWithHeadersOutput(v *InputAndOutputWithHeadersOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if val := response.Header.Get("X-BooleanList"); val != "" {
+		list := make([]*bool, 0, 0)
+		for _, i := range strings.Split(val[1:len(val)-1], ",") {
+			vv, err := strconv.ParseBool(i)
+			if err != nil {
+				return err
+			}
+			list = append(list, ptr.Bool(vv))
+		}
+		v.HeaderBooleanList = list
+	}
+
+	if val := response.Header.Get("X-Byte"); val != "" {
+		vv, err := strconv.ParseInt(val, 0, 8)
+		if err != nil {
+			return err
+		}
+		v.HeaderByte = ptr.Int8(int8(vv))
+	}
+
+	if val := response.Header.Get("X-Double"); val != "" {
+		vv, err := strconv.ParseFloat(val, 64)
+		if err != nil {
+			return err
+		}
+		v.HeaderDouble = ptr.Float64(vv)
+	}
+
+	if val := response.Header.Get("X-Enum"); val != "" {
+		v.HeaderEnum = types.FooEnum(val)
+	}
+
+	if val := response.Header.Get("X-EnumList"); val != "" {
+		list := make([]types.FooEnum, 0, 0)
+		for _, i := range strings.Split(val[1:len(val)-1], ",") {
+			list = append(list, types.FooEnum(i))
+		}
+		v.HeaderEnumList = list
+	}
+
+	if val := response.Header.Get("X-Boolean2"); val != "" {
+		vv, err := strconv.ParseBool(val)
+		if err != nil {
+			return err
+		}
+		v.HeaderFalseBool = ptr.Bool(vv)
+	}
+
+	if val := response.Header.Get("X-Float"); val != "" {
+		vv, err := strconv.ParseFloat(val, 32)
+		if err != nil {
+			return err
+		}
+		v.HeaderFloat = ptr.Float32(float32(vv))
+	}
+
+	if val := response.Header.Get("X-Integer"); val != "" {
+		vv, err := strconv.ParseInt(val, 0, 32)
+		if err != nil {
+			return err
+		}
+		v.HeaderInteger = ptr.Int32(int32(vv))
+	}
+
+	if val := response.Header.Get("X-IntegerList"); val != "" {
+		list := make([]*int32, 0, 0)
+		for _, i := range strings.Split(val[1:len(val)-1], ",") {
+			vv, err := strconv.ParseInt(i, 0, 32)
+			if err != nil {
+				return err
+			}
+			list = append(list, ptr.Int32(int32(vv)))
+		}
+		v.HeaderIntegerList = list
+	}
+
+	if val := response.Header.Get("X-Long"); val != "" {
+		vv, err := strconv.ParseInt(val, 0, 64)
+		if err != nil {
+			return err
+		}
+		v.HeaderLong = ptr.Int64(vv)
+	}
+
+	if val := response.Header.Get("X-Short"); val != "" {
+		vv, err := strconv.ParseInt(val, 0, 16)
+		if err != nil {
+			return err
+		}
+		v.HeaderShort = ptr.Int16(int16(vv))
+	}
+
+	if val := response.Header.Get("X-String"); val != "" {
+		v.HeaderString = ptr.String(val)
+	}
+
+	if val := response.Header.Get("X-StringList"); val != "" {
+		list := make([]*string, 0, 0)
+		for _, i := range strings.Split(val[1:len(val)-1], ",") {
+			list = append(list, ptr.String(i))
+		}
+		v.HeaderStringList = list
+	}
+
+	if val := response.Header.Get("X-StringSet"); val != "" {
+		list := make([]*string, 0, 0)
+		for _, i := range strings.Split(val[1:len(val)-1], ",") {
+			list = append(list, ptr.String(i))
+		}
+		v.HeaderStringSet = list
+	}
+
+	if val := response.Header.Get("X-TimestampList"); val != "" {
+		list := make([]*time.Time, 0, 0)
+		for _, i := range strings.Split(val[1:len(val)-1], ",") {
+			t, err := smithytime.ParseHTTPDate(i)
+			if err != nil {
+				return err
+			}
+			list = append(list, ptr.Time(t))
+		}
+		v.HeaderTimestampList = list
+	}
+
+	if val := response.Header.Get("X-Boolean1"); val != "" {
+		vv, err := strconv.ParseBool(val)
+		if err != nil {
+			return err
+		}
+		v.HeaderTrueBool = ptr.Bool(vv)
+	}
+
+	return nil
+}
+
+type awsRestjson1_deserializeOpHttpRequestWithLabels struct {
+}
+
+func (*awsRestjson1_deserializeOpHttpRequestWithLabels) ID() string {
+	return "awsRestjson1_deserializeOpHttpRequestWithLabels"
+}
+
+func (m *awsRestjson1_deserializeOpHttpRequestWithLabels) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &HttpRequestWithLabelsOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestjson1_deserializeOpInlineDocument struct {
+}
+
+func (*awsRestjson1_deserializeOpInlineDocument) ID() string {
+	return "awsRestjson1_deserializeOpInlineDocument"
+}
+
+func (m *awsRestjson1_deserializeOpInlineDocument) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &InlineDocumentOutput{}
+	out.Result = output
+
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	defer response.Body.Close()
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+
+	err = awsRestjson1_deserializeOpDocumentInlineDocumentOutput(output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpDocumentInlineDocumentOutput(v *InlineDocumentOutput, decoder *json.Decoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization of nil %T", v)
+	}
+
+	startToken, err := decoder.Token()
+	if err == io.EOF {
+		return nil
+	}
+	if err != nil {
+		return err
+	}
+	if t, ok := startToken.(json.Delim); !ok || t.String() != "{" {
+		return fmt.Errorf("expect `{` as start token")
+	}
+
+	for decoder.More() {
+		t, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		switch t {
+		case "stringValue":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			st, ok := val.(string)
+			if !ok {
+				return fmt.Errorf("expected StringValue to be of type *string, got %T instead", val)
+			}
+			v.StringValue = ptr.String(st)
+
+		case "documentValue":
+			// TODO: Support document Deserialization
+			v.DocumentValue = nil
+
+		default:
+			err := restjson.DiscardUnknownField(decoder)
+			if err != nil {
+				return err
+			}
+
+		}
+	}
+
+	endToken, err := decoder.Token()
+	if err != nil {
+		return err
+	}
+	if t, ok := endToken.(json.Delim); !ok || t.String() != "}" {
+		return fmt.Errorf("expect `}` as end token")
+	}
+
+	return nil
+}
+
+type awsRestjson1_deserializeOpQueryIdempotencyTokenAutoFill struct {
+}
+
+func (*awsRestjson1_deserializeOpQueryIdempotencyTokenAutoFill) ID() string {
+	return "awsRestjson1_deserializeOpQueryIdempotencyTokenAutoFill"
+}
+
+func (m *awsRestjson1_deserializeOpQueryIdempotencyTokenAutoFill) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &QueryIdempotencyTokenAutoFillOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestjson1_deserializeOpHttpPayloadWithStructure struct {
+}
+
+func (*awsRestjson1_deserializeOpHttpPayloadWithStructure) ID() string {
+	return "awsRestjson1_deserializeOpHttpPayloadWithStructure"
+}
+
+func (m *awsRestjson1_deserializeOpHttpPayloadWithStructure) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &HttpPayloadWithStructureOutput{}
+	out.Result = output
+
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	defer response.Body.Close()
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+
+	err = awsRestjson1_deserializeOpDocumentHttpPayloadWithStructureOutput(output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpDocumentHttpPayloadWithStructureOutput(v *HttpPayloadWithStructureOutput, decoder *json.Decoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization of nil %T", v)
+	}
+
+	startToken, err := decoder.Token()
+	if err == io.EOF {
+		return nil
+	}
+	if err != nil {
+		return err
+	}
+	if t, ok := startToken.(json.Delim); !ok || t.String() != "{" {
+		return fmt.Errorf("expect `{` as start token")
+	}
+
+	for decoder.More() {
+		t, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		switch t {
+		case "nested":
+			val := types.NestedPayload{}
+			if err := awsRestjson1_deserializeDocumentNestedPayload(&val, decoder); err != nil {
+				return err
+			}
+			v.Nested = &val
+
+		default:
+			err := restjson.DiscardUnknownField(decoder)
+			if err != nil {
+				return err
+			}
+
+		}
+	}
+
+	endToken, err := decoder.Token()
+	if err != nil {
+		return err
+	}
+	if t, ok := endToken.(json.Delim); !ok || t.String() != "}" {
+		return fmt.Errorf("expect `}` as end token")
+	}
+
+	return nil
+}
+
+type awsRestjson1_deserializeOpHttpPayloadTraits struct {
+}
+
+func (*awsRestjson1_deserializeOpHttpPayloadTraits) ID() string {
+	return "awsRestjson1_deserializeOpHttpPayloadTraits"
+}
+
+func (m *awsRestjson1_deserializeOpHttpPayloadTraits) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &HttpPayloadTraitsOutput{}
+	out.Result = output
+
+	err = awsRestjson1_deserializeHttpBindingsHttpPayloadTraitsOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	err = awsRestjson1_deserializeOpDocumentHttpPayloadTraitsOutput(output, response.Body)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeHttpBindingsHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if val := response.Header.Get("X-Foo"); val != "" {
+		v.Foo = ptr.String(val)
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpDocumentHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, body io.ReadCloser) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization of nil %T", v)
+	}
+
+	bs, err := ioutil.ReadAll(body)
+	if err != nil {
+		return err
+	}
+	if len(bs) > 0 {
+		v.Blob = bs
+	}
+	return nil
 }
 
 type awsRestjson1_deserializeOpHttpPrefixHeaders struct {
@@ -464,6 +1482,383 @@ func awsRestjson1_deserializeOpDocumentJsonListsOutput(v *JsonListsOutput, decod
 	return nil
 }
 
+type awsRestjson1_deserializeOpJsonEnums struct {
+}
+
+func (*awsRestjson1_deserializeOpJsonEnums) ID() string {
+	return "awsRestjson1_deserializeOpJsonEnums"
+}
+
+func (m *awsRestjson1_deserializeOpJsonEnums) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &JsonEnumsOutput{}
+	out.Result = output
+
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	defer response.Body.Close()
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+
+	err = awsRestjson1_deserializeOpDocumentJsonEnumsOutput(output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpDocumentJsonEnumsOutput(v *JsonEnumsOutput, decoder *json.Decoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization of nil %T", v)
+	}
+
+	startToken, err := decoder.Token()
+	if err == io.EOF {
+		return nil
+	}
+	if err != nil {
+		return err
+	}
+	if t, ok := startToken.(json.Delim); !ok || t.String() != "{" {
+		return fmt.Errorf("expect `{` as start token")
+	}
+
+	for decoder.More() {
+		t, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		switch t {
+		case "fooEnum1":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			st, ok := val.(string)
+			if !ok {
+				return fmt.Errorf("expected FooEnum1 to be of type types.FooEnum, got %T instead", val)
+			}
+			v.FooEnum1 = types.FooEnum(st)
+
+		case "fooEnum2":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			st, ok := val.(string)
+			if !ok {
+				return fmt.Errorf("expected FooEnum2 to be of type types.FooEnum, got %T instead", val)
+			}
+			v.FooEnum2 = types.FooEnum(st)
+
+		case "fooEnum3":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			st, ok := val.(string)
+			if !ok {
+				return fmt.Errorf("expected FooEnum3 to be of type types.FooEnum, got %T instead", val)
+			}
+			v.FooEnum3 = types.FooEnum(st)
+
+		case "fooEnumList":
+			col := []types.FooEnum{}
+			if err := awsRestjson1_deserializeDocumentFooEnumList(&col, decoder); err != nil {
+				return err
+			}
+			v.FooEnumList = col
+
+		case "fooEnumSet":
+			col := []types.FooEnum{}
+			if err := awsRestjson1_deserializeDocumentFooEnumSet(&col, decoder); err != nil {
+				return err
+			}
+			v.FooEnumSet = col
+
+		case "fooEnumMap":
+			col := map[string]types.FooEnum{}
+			if err := awsRestjson1_deserializeDocumentFooEnumMap(&col, decoder); err != nil {
+				return err
+			}
+			v.FooEnumMap = col
+
+		default:
+			err := restjson.DiscardUnknownField(decoder)
+			if err != nil {
+				return err
+			}
+
+		}
+	}
+
+	endToken, err := decoder.Token()
+	if err != nil {
+		return err
+	}
+	if t, ok := endToken.(json.Delim); !ok || t.String() != "}" {
+		return fmt.Errorf("expect `}` as end token")
+	}
+
+	return nil
+}
+
+type awsRestjson1_deserializeOpTimestampFormatHeaders struct {
+}
+
+func (*awsRestjson1_deserializeOpTimestampFormatHeaders) ID() string {
+	return "awsRestjson1_deserializeOpTimestampFormatHeaders"
+}
+
+func (m *awsRestjson1_deserializeOpTimestampFormatHeaders) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &TimestampFormatHeadersOutput{}
+	out.Result = output
+
+	err = awsRestjson1_deserializeHttpBindingsTimestampFormatHeadersOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeHttpBindingsTimestampFormatHeadersOutput(v *TimestampFormatHeadersOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if val := response.Header.Get("X-defaultFormat"); val != "" {
+		t, err := smithytime.ParseHTTPDate(val)
+		if err != nil {
+			return err
+		}
+		v.DefaultFormat = ptr.Time(t)
+	}
+
+	if val := response.Header.Get("X-memberDateTime"); val != "" {
+		t, err := smithytime.ParseHTTPDate(val)
+		if err != nil {
+			return err
+		}
+		v.MemberDateTime = ptr.Time(t)
+	}
+
+	if val := response.Header.Get("X-memberEpochSeconds"); val != "" {
+		t, err := smithytime.ParseHTTPDate(val)
+		if err != nil {
+			return err
+		}
+		v.MemberEpochSeconds = ptr.Time(t)
+	}
+
+	if val := response.Header.Get("X-memberHttpDate"); val != "" {
+		t, err := smithytime.ParseHTTPDate(val)
+		if err != nil {
+			return err
+		}
+		v.MemberHttpDate = ptr.Time(t)
+	}
+
+	if val := response.Header.Get("X-targetDateTime"); val != "" {
+		t, err := smithytime.ParseDateTime(val)
+		if err != nil {
+			return err
+		}
+		v.TargetDateTime = ptr.Time(t)
+	}
+
+	if val := response.Header.Get("X-targetEpochSeconds"); val != "" {
+		f, err := strconv.ParseFloat(val, 64)
+		if err != nil {
+			return err
+		}
+		t := smithytime.ParseEpochSeconds(f)
+		v.TargetEpochSeconds = ptr.Time(t)
+	}
+
+	if val := response.Header.Get("X-targetHttpDate"); val != "" {
+		t, err := smithytime.ParseHTTPDate(val)
+		if err != nil {
+			return err
+		}
+		v.TargetHttpDate = ptr.Time(t)
+	}
+
+	return nil
+}
+
+type awsRestjson1_deserializeOpJsonBlobs struct {
+}
+
+func (*awsRestjson1_deserializeOpJsonBlobs) ID() string {
+	return "awsRestjson1_deserializeOpJsonBlobs"
+}
+
+func (m *awsRestjson1_deserializeOpJsonBlobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &JsonBlobsOutput{}
+	out.Result = output
+
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	defer response.Body.Close()
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+
+	err = awsRestjson1_deserializeOpDocumentJsonBlobsOutput(output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpDocumentJsonBlobsOutput(v *JsonBlobsOutput, decoder *json.Decoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization of nil %T", v)
+	}
+
+	startToken, err := decoder.Token()
+	if err == io.EOF {
+		return nil
+	}
+	if err != nil {
+		return err
+	}
+	if t, ok := startToken.(json.Delim); !ok || t.String() != "{" {
+		return fmt.Errorf("expect `{` as start token")
+	}
+
+	for decoder.More() {
+		t, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		switch t {
+		case "data":
+			var bs []byte
+			err := decoder.Decode(&bs)
+			if err != nil {
+				return err
+			}
+			v.Data = bs
+
+		default:
+			err := restjson.DiscardUnknownField(decoder)
+			if err != nil {
+				return err
+			}
+
+		}
+	}
+
+	endToken, err := decoder.Token()
+	if err != nil {
+		return err
+	}
+	if t, ok := endToken.(json.Delim); !ok || t.String() != "}" {
+		return fmt.Errorf("expect `}` as end token")
+	}
+
+	return nil
+}
+
 type awsRestjson1_deserializeOpIgnoreQueryParamsInResponse struct {
 }
 
@@ -577,14 +1972,14 @@ func awsRestjson1_deserializeOpDocumentIgnoreQueryParamsInResponseOutput(v *Igno
 	return nil
 }
 
-type awsRestjson1_deserializeOpHttpRequestWithLabels struct {
+type awsRestjson1_deserializeOpNoInputAndOutput struct {
 }
 
-func (*awsRestjson1_deserializeOpHttpRequestWithLabels) ID() string {
-	return "awsRestjson1_deserializeOpHttpRequestWithLabels"
+func (*awsRestjson1_deserializeOpNoInputAndOutput) ID() string {
+	return "awsRestjson1_deserializeOpNoInputAndOutput"
 }
 
-func (m *awsRestjson1_deserializeOpHttpRequestWithLabels) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestjson1_deserializeOpNoInputAndOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -612,7 +2007,48 @@ func (m *awsRestjson1_deserializeOpHttpRequestWithLabels) HandleDeserialize(ctx 
 		return out, metadata, genericError
 	}
 
-	output := &HttpRequestWithLabelsOutput{}
+	output := &NoInputAndOutputOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestjson1_deserializeOpOmitsNullSerializesEmptyString struct {
+}
+
+func (*awsRestjson1_deserializeOpOmitsNullSerializesEmptyString) ID() string {
+	return "awsRestjson1_deserializeOpOmitsNullSerializesEmptyString"
+}
+
+func (m *awsRestjson1_deserializeOpOmitsNullSerializesEmptyString) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &OmitsNullSerializesEmptyStringOutput{}
 	out.Result = output
 
 	return out, metadata, err
@@ -772,6 +2208,158 @@ func awsRestjson1_deserializeHttpBindingsGreetingWithErrorsOutput(v *GreetingWit
 	return nil
 }
 
+type awsRestjson1_deserializeOpHttpRequestWithLabelsAndTimestampFormat struct {
+}
+
+func (*awsRestjson1_deserializeOpHttpRequestWithLabelsAndTimestampFormat) ID() string {
+	return "awsRestjson1_deserializeOpHttpRequestWithLabelsAndTimestampFormat"
+}
+
+func (m *awsRestjson1_deserializeOpHttpRequestWithLabelsAndTimestampFormat) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &HttpRequestWithLabelsAndTimestampFormatOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestjson1_deserializeOpNullAndEmptyHeadersClient struct {
+}
+
+func (*awsRestjson1_deserializeOpNullAndEmptyHeadersClient) ID() string {
+	return "awsRestjson1_deserializeOpNullAndEmptyHeadersClient"
+}
+
+func (m *awsRestjson1_deserializeOpNullAndEmptyHeadersClient) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &NullAndEmptyHeadersClientOutput{}
+	out.Result = output
+
+	err = awsRestjson1_deserializeHttpBindingsNullAndEmptyHeadersClientOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeHttpBindingsNullAndEmptyHeadersClientOutput(v *NullAndEmptyHeadersClientOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if val := response.Header.Get("X-A"); val != "" {
+		v.A = ptr.String(val)
+	}
+
+	if val := response.Header.Get("X-B"); val != "" {
+		v.B = ptr.String(val)
+	}
+
+	if val := response.Header.Get("X-C"); val != "" {
+		list := make([]*string, 0, 0)
+		for _, i := range strings.Split(val[1:len(val)-1], ",") {
+			list = append(list, ptr.String(i))
+		}
+		v.C = list
+	}
+
+	return nil
+}
+
+type awsRestjson1_deserializeOpEmptyInputAndEmptyOutput struct {
+}
+
+func (*awsRestjson1_deserializeOpEmptyInputAndEmptyOutput) ID() string {
+	return "awsRestjson1_deserializeOpEmptyInputAndEmptyOutput"
+}
+
+func (m *awsRestjson1_deserializeOpEmptyInputAndEmptyOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &EmptyInputAndEmptyOutputOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
 type awsRestjson1_deserializeOpJsonMaps struct {
 }
 
@@ -879,1606 +2467,6 @@ func awsRestjson1_deserializeOpDocumentJsonMapsOutput(v *JsonMapsOutput, decoder
 	}
 
 	return nil
-}
-
-type awsRestjson1_deserializeOpJsonEnums struct {
-}
-
-func (*awsRestjson1_deserializeOpJsonEnums) ID() string {
-	return "awsRestjson1_deserializeOpJsonEnums"
-}
-
-func (m *awsRestjson1_deserializeOpJsonEnums) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &JsonEnumsOutput{}
-	out.Result = output
-
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
-
-	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
-
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-
-	err = awsRestjson1_deserializeOpDocumentJsonEnumsOutput(output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestjson1_deserializeOpDocumentJsonEnumsOutput(v *JsonEnumsOutput, decoder *json.Decoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization of nil %T", v)
-	}
-
-	startToken, err := decoder.Token()
-	if err == io.EOF {
-		return nil
-	}
-	if err != nil {
-		return err
-	}
-	if t, ok := startToken.(json.Delim); !ok || t.String() != "{" {
-		return fmt.Errorf("expect `{` as start token")
-	}
-
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
-		case "fooEnum1":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			st, ok := val.(string)
-			if !ok {
-				return fmt.Errorf("expected FooEnum1 to be of type types.FooEnum, got %T instead", val)
-			}
-			v.FooEnum1 = types.FooEnum(st)
-
-		case "fooEnum2":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			st, ok := val.(string)
-			if !ok {
-				return fmt.Errorf("expected FooEnum2 to be of type types.FooEnum, got %T instead", val)
-			}
-			v.FooEnum2 = types.FooEnum(st)
-
-		case "fooEnum3":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			st, ok := val.(string)
-			if !ok {
-				return fmt.Errorf("expected FooEnum3 to be of type types.FooEnum, got %T instead", val)
-			}
-			v.FooEnum3 = types.FooEnum(st)
-
-		case "fooEnumList":
-			col := []types.FooEnum{}
-			if err := awsRestjson1_deserializeDocumentFooEnumList(&col, decoder); err != nil {
-				return err
-			}
-			v.FooEnumList = col
-
-		case "fooEnumSet":
-			col := []types.FooEnum{}
-			if err := awsRestjson1_deserializeDocumentFooEnumSet(&col, decoder); err != nil {
-				return err
-			}
-			v.FooEnumSet = col
-
-		case "fooEnumMap":
-			col := map[string]types.FooEnum{}
-			if err := awsRestjson1_deserializeDocumentFooEnumMap(&col, decoder); err != nil {
-				return err
-			}
-			v.FooEnumMap = col
-
-		default:
-			err := restjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
-
-		}
-	}
-
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t.String() != "}" {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
-	return nil
-}
-
-type awsRestjson1_deserializeOpHttpPayloadWithStructure struct {
-}
-
-func (*awsRestjson1_deserializeOpHttpPayloadWithStructure) ID() string {
-	return "awsRestjson1_deserializeOpHttpPayloadWithStructure"
-}
-
-func (m *awsRestjson1_deserializeOpHttpPayloadWithStructure) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &HttpPayloadWithStructureOutput{}
-	out.Result = output
-
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
-
-	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
-
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-
-	err = awsRestjson1_deserializeOpDocumentHttpPayloadWithStructureOutput(output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestjson1_deserializeOpDocumentHttpPayloadWithStructureOutput(v *HttpPayloadWithStructureOutput, decoder *json.Decoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization of nil %T", v)
-	}
-
-	startToken, err := decoder.Token()
-	if err == io.EOF {
-		return nil
-	}
-	if err != nil {
-		return err
-	}
-	if t, ok := startToken.(json.Delim); !ok || t.String() != "{" {
-		return fmt.Errorf("expect `{` as start token")
-	}
-
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
-		case "nested":
-			val := types.NestedPayload{}
-			if err := awsRestjson1_deserializeDocumentNestedPayload(&val, decoder); err != nil {
-				return err
-			}
-			v.Nested = &val
-
-		default:
-			err := restjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
-
-		}
-	}
-
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t.String() != "}" {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
-	return nil
-}
-
-type awsRestjson1_deserializeOpJsonBlobs struct {
-}
-
-func (*awsRestjson1_deserializeOpJsonBlobs) ID() string {
-	return "awsRestjson1_deserializeOpJsonBlobs"
-}
-
-func (m *awsRestjson1_deserializeOpJsonBlobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &JsonBlobsOutput{}
-	out.Result = output
-
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
-
-	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
-
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-
-	err = awsRestjson1_deserializeOpDocumentJsonBlobsOutput(output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestjson1_deserializeOpDocumentJsonBlobsOutput(v *JsonBlobsOutput, decoder *json.Decoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization of nil %T", v)
-	}
-
-	startToken, err := decoder.Token()
-	if err == io.EOF {
-		return nil
-	}
-	if err != nil {
-		return err
-	}
-	if t, ok := startToken.(json.Delim); !ok || t.String() != "{" {
-		return fmt.Errorf("expect `{` as start token")
-	}
-
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
-		case "data":
-			var bs []byte
-			err := decoder.Decode(&bs)
-			if err != nil {
-				return err
-			}
-			v.Data = bs
-
-		default:
-			err := restjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
-
-		}
-	}
-
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t.String() != "}" {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
-	return nil
-}
-
-type awsRestjson1_deserializeOpHttpPayloadTraitsWithMediaType struct {
-}
-
-func (*awsRestjson1_deserializeOpHttpPayloadTraitsWithMediaType) ID() string {
-	return "awsRestjson1_deserializeOpHttpPayloadTraitsWithMediaType"
-}
-
-func (m *awsRestjson1_deserializeOpHttpPayloadTraitsWithMediaType) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &HttpPayloadTraitsWithMediaTypeOutput{}
-	out.Result = output
-
-	err = awsRestjson1_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(output, response)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
-	}
-
-	err = awsRestjson1_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(output, response.Body)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestjson1_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, response *smithyhttp.Response) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization for nil %T", v)
-	}
-
-	if val := response.Header.Get("X-Foo"); val != "" {
-		v.Foo = ptr.String(val)
-	}
-
-	return nil
-}
-func awsRestjson1_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, body io.ReadCloser) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization of nil %T", v)
-	}
-
-	bs, err := ioutil.ReadAll(body)
-	if err != nil {
-		return err
-	}
-	if len(bs) > 0 {
-		v.Blob = bs
-	}
-	return nil
-}
-
-type awsRestjson1_deserializeOpInlineDocument struct {
-}
-
-func (*awsRestjson1_deserializeOpInlineDocument) ID() string {
-	return "awsRestjson1_deserializeOpInlineDocument"
-}
-
-func (m *awsRestjson1_deserializeOpInlineDocument) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &InlineDocumentOutput{}
-	out.Result = output
-
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
-
-	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
-
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-
-	err = awsRestjson1_deserializeOpDocumentInlineDocumentOutput(output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestjson1_deserializeOpDocumentInlineDocumentOutput(v *InlineDocumentOutput, decoder *json.Decoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization of nil %T", v)
-	}
-
-	startToken, err := decoder.Token()
-	if err == io.EOF {
-		return nil
-	}
-	if err != nil {
-		return err
-	}
-	if t, ok := startToken.(json.Delim); !ok || t.String() != "{" {
-		return fmt.Errorf("expect `{` as start token")
-	}
-
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
-		case "stringValue":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			st, ok := val.(string)
-			if !ok {
-				return fmt.Errorf("expected StringValue to be of type *string, got %T instead", val)
-			}
-			v.StringValue = ptr.String(st)
-
-		case "documentValue":
-			// TODO: Support document Deserialization
-			v.DocumentValue = nil
-
-		default:
-			err := restjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
-
-		}
-	}
-
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t.String() != "}" {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
-	return nil
-}
-
-type awsRestjson1_deserializeOpTimestampFormatHeaders struct {
-}
-
-func (*awsRestjson1_deserializeOpTimestampFormatHeaders) ID() string {
-	return "awsRestjson1_deserializeOpTimestampFormatHeaders"
-}
-
-func (m *awsRestjson1_deserializeOpTimestampFormatHeaders) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &TimestampFormatHeadersOutput{}
-	out.Result = output
-
-	err = awsRestjson1_deserializeHttpBindingsTimestampFormatHeadersOutput(output, response)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestjson1_deserializeHttpBindingsTimestampFormatHeadersOutput(v *TimestampFormatHeadersOutput, response *smithyhttp.Response) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization for nil %T", v)
-	}
-
-	if val := response.Header.Get("X-defaultFormat"); val != "" {
-		t, err := smithytime.ParseHTTPDate(val)
-		if err != nil {
-			return err
-		}
-		v.DefaultFormat = ptr.Time(t)
-	}
-
-	if val := response.Header.Get("X-memberDateTime"); val != "" {
-		t, err := smithytime.ParseHTTPDate(val)
-		if err != nil {
-			return err
-		}
-		v.MemberDateTime = ptr.Time(t)
-	}
-
-	if val := response.Header.Get("X-memberEpochSeconds"); val != "" {
-		t, err := smithytime.ParseHTTPDate(val)
-		if err != nil {
-			return err
-		}
-		v.MemberEpochSeconds = ptr.Time(t)
-	}
-
-	if val := response.Header.Get("X-memberHttpDate"); val != "" {
-		t, err := smithytime.ParseHTTPDate(val)
-		if err != nil {
-			return err
-		}
-		v.MemberHttpDate = ptr.Time(t)
-	}
-
-	if val := response.Header.Get("X-targetDateTime"); val != "" {
-		t, err := smithytime.ParseDateTime(val)
-		if err != nil {
-			return err
-		}
-		v.TargetDateTime = ptr.Time(t)
-	}
-
-	if val := response.Header.Get("X-targetEpochSeconds"); val != "" {
-		f, err := strconv.ParseFloat(val, 64)
-		if err != nil {
-			return err
-		}
-		t := smithytime.ParseEpochSeconds(f)
-		v.TargetEpochSeconds = ptr.Time(t)
-	}
-
-	if val := response.Header.Get("X-targetHttpDate"); val != "" {
-		t, err := smithytime.ParseHTTPDate(val)
-		if err != nil {
-			return err
-		}
-		v.TargetHttpDate = ptr.Time(t)
-	}
-
-	return nil
-}
-
-type awsRestjson1_deserializeOpQueryIdempotencyTokenAutoFill struct {
-}
-
-func (*awsRestjson1_deserializeOpQueryIdempotencyTokenAutoFill) ID() string {
-	return "awsRestjson1_deserializeOpQueryIdempotencyTokenAutoFill"
-}
-
-func (m *awsRestjson1_deserializeOpQueryIdempotencyTokenAutoFill) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &QueryIdempotencyTokenAutoFillOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestjson1_deserializeOpHttpPayloadTraits struct {
-}
-
-func (*awsRestjson1_deserializeOpHttpPayloadTraits) ID() string {
-	return "awsRestjson1_deserializeOpHttpPayloadTraits"
-}
-
-func (m *awsRestjson1_deserializeOpHttpPayloadTraits) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &HttpPayloadTraitsOutput{}
-	out.Result = output
-
-	err = awsRestjson1_deserializeHttpBindingsHttpPayloadTraitsOutput(output, response)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
-	}
-
-	err = awsRestjson1_deserializeOpDocumentHttpPayloadTraitsOutput(output, response.Body)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestjson1_deserializeHttpBindingsHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, response *smithyhttp.Response) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization for nil %T", v)
-	}
-
-	if val := response.Header.Get("X-Foo"); val != "" {
-		v.Foo = ptr.String(val)
-	}
-
-	return nil
-}
-func awsRestjson1_deserializeOpDocumentHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, body io.ReadCloser) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization of nil %T", v)
-	}
-
-	bs, err := ioutil.ReadAll(body)
-	if err != nil {
-		return err
-	}
-	if len(bs) > 0 {
-		v.Blob = bs
-	}
-	return nil
-}
-
-type awsRestjson1_deserializeOpInputAndOutputWithHeaders struct {
-}
-
-func (*awsRestjson1_deserializeOpInputAndOutputWithHeaders) ID() string {
-	return "awsRestjson1_deserializeOpInputAndOutputWithHeaders"
-}
-
-func (m *awsRestjson1_deserializeOpInputAndOutputWithHeaders) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &InputAndOutputWithHeadersOutput{}
-	out.Result = output
-
-	err = awsRestjson1_deserializeHttpBindingsInputAndOutputWithHeadersOutput(output, response)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestjson1_deserializeHttpBindingsInputAndOutputWithHeadersOutput(v *InputAndOutputWithHeadersOutput, response *smithyhttp.Response) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization for nil %T", v)
-	}
-
-	if val := response.Header.Get("X-BooleanList"); val != "" {
-		list := make([]*bool, 0, 0)
-		for _, i := range strings.Split(val[1:len(val)-1], ",") {
-			vv, err := strconv.ParseBool(i)
-			if err != nil {
-				return err
-			}
-			list = append(list, ptr.Bool(vv))
-		}
-		v.HeaderBooleanList = list
-	}
-
-	if val := response.Header.Get("X-Byte"); val != "" {
-		vv, err := strconv.ParseInt(val, 0, 8)
-		if err != nil {
-			return err
-		}
-		v.HeaderByte = ptr.Int8(int8(vv))
-	}
-
-	if val := response.Header.Get("X-Double"); val != "" {
-		vv, err := strconv.ParseFloat(val, 64)
-		if err != nil {
-			return err
-		}
-		v.HeaderDouble = ptr.Float64(vv)
-	}
-
-	if val := response.Header.Get("X-Enum"); val != "" {
-		v.HeaderEnum = types.FooEnum(val)
-	}
-
-	if val := response.Header.Get("X-EnumList"); val != "" {
-		list := make([]types.FooEnum, 0, 0)
-		for _, i := range strings.Split(val[1:len(val)-1], ",") {
-			list = append(list, types.FooEnum(i))
-		}
-		v.HeaderEnumList = list
-	}
-
-	if val := response.Header.Get("X-Boolean2"); val != "" {
-		vv, err := strconv.ParseBool(val)
-		if err != nil {
-			return err
-		}
-		v.HeaderFalseBool = ptr.Bool(vv)
-	}
-
-	if val := response.Header.Get("X-Float"); val != "" {
-		vv, err := strconv.ParseFloat(val, 32)
-		if err != nil {
-			return err
-		}
-		v.HeaderFloat = ptr.Float32(float32(vv))
-	}
-
-	if val := response.Header.Get("X-Integer"); val != "" {
-		vv, err := strconv.ParseInt(val, 0, 32)
-		if err != nil {
-			return err
-		}
-		v.HeaderInteger = ptr.Int32(int32(vv))
-	}
-
-	if val := response.Header.Get("X-IntegerList"); val != "" {
-		list := make([]*int32, 0, 0)
-		for _, i := range strings.Split(val[1:len(val)-1], ",") {
-			vv, err := strconv.ParseInt(i, 0, 32)
-			if err != nil {
-				return err
-			}
-			list = append(list, ptr.Int32(int32(vv)))
-		}
-		v.HeaderIntegerList = list
-	}
-
-	if val := response.Header.Get("X-Long"); val != "" {
-		vv, err := strconv.ParseInt(val, 0, 64)
-		if err != nil {
-			return err
-		}
-		v.HeaderLong = ptr.Int64(vv)
-	}
-
-	if val := response.Header.Get("X-Short"); val != "" {
-		vv, err := strconv.ParseInt(val, 0, 16)
-		if err != nil {
-			return err
-		}
-		v.HeaderShort = ptr.Int16(int16(vv))
-	}
-
-	if val := response.Header.Get("X-String"); val != "" {
-		v.HeaderString = ptr.String(val)
-	}
-
-	if val := response.Header.Get("X-StringList"); val != "" {
-		list := make([]*string, 0, 0)
-		for _, i := range strings.Split(val[1:len(val)-1], ",") {
-			list = append(list, ptr.String(i))
-		}
-		v.HeaderStringList = list
-	}
-
-	if val := response.Header.Get("X-StringSet"); val != "" {
-		list := make([]*string, 0, 0)
-		for _, i := range strings.Split(val[1:len(val)-1], ",") {
-			list = append(list, ptr.String(i))
-		}
-		v.HeaderStringSet = list
-	}
-
-	if val := response.Header.Get("X-TimestampList"); val != "" {
-		list := make([]*time.Time, 0, 0)
-		for _, i := range strings.Split(val[1:len(val)-1], ",") {
-			t, err := smithytime.ParseHTTPDate(i)
-			if err != nil {
-				return err
-			}
-			list = append(list, ptr.Time(t))
-		}
-		v.HeaderTimestampList = list
-	}
-
-	if val := response.Header.Get("X-Boolean1"); val != "" {
-		vv, err := strconv.ParseBool(val)
-		if err != nil {
-			return err
-		}
-		v.HeaderTrueBool = ptr.Bool(vv)
-	}
-
-	return nil
-}
-
-type awsRestjson1_deserializeOpHttpRequestWithGreedyLabelInPath struct {
-}
-
-func (*awsRestjson1_deserializeOpHttpRequestWithGreedyLabelInPath) ID() string {
-	return "awsRestjson1_deserializeOpHttpRequestWithGreedyLabelInPath"
-}
-
-func (m *awsRestjson1_deserializeOpHttpRequestWithGreedyLabelInPath) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &HttpRequestWithGreedyLabelInPathOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestjson1_deserializeOpSimpleScalarProperties struct {
-}
-
-func (*awsRestjson1_deserializeOpSimpleScalarProperties) ID() string {
-	return "awsRestjson1_deserializeOpSimpleScalarProperties"
-}
-
-func (m *awsRestjson1_deserializeOpSimpleScalarProperties) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &SimpleScalarPropertiesOutput{}
-	out.Result = output
-
-	err = awsRestjson1_deserializeHttpBindingsSimpleScalarPropertiesOutput(output, response)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
-	}
-
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
-
-	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
-
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-
-	err = awsRestjson1_deserializeOpDocumentSimpleScalarPropertiesOutput(output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestjson1_deserializeHttpBindingsSimpleScalarPropertiesOutput(v *SimpleScalarPropertiesOutput, response *smithyhttp.Response) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization for nil %T", v)
-	}
-
-	if val := response.Header.Get("X-Foo"); val != "" {
-		v.Foo = ptr.String(val)
-	}
-
-	return nil
-}
-func awsRestjson1_deserializeOpDocumentSimpleScalarPropertiesOutput(v *SimpleScalarPropertiesOutput, decoder *json.Decoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization of nil %T", v)
-	}
-
-	startToken, err := decoder.Token()
-	if err == io.EOF {
-		return nil
-	}
-	if err != nil {
-		return err
-	}
-	if t, ok := startToken.(json.Delim); !ok || t.String() != "{" {
-		return fmt.Errorf("expect `{` as start token")
-	}
-
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
-		case "stringValue":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			st, ok := val.(string)
-			if !ok {
-				return fmt.Errorf("expected StringValue to be of type *string, got %T instead", val)
-			}
-			v.StringValue = ptr.String(st)
-
-		case "trueBooleanValue":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			b, ok := val.(bool)
-			if !ok {
-				return fmt.Errorf("expected TrueBooleanValue to be of type bool, got %T instead", val)
-			}
-			v.TrueBooleanValue = ptr.Bool(b)
-
-		case "falseBooleanValue":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			b, ok := val.(bool)
-			if !ok {
-				return fmt.Errorf("expected FalseBooleanValue to be of type bool, got %T instead", val)
-			}
-			v.FalseBooleanValue = ptr.Bool(b)
-
-		case "byteValue":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			nt, err := val.(json.Number).Int64()
-			if err != nil {
-				return err
-			}
-			st := int8(nt)
-			v.ByteValue = ptr.Int8(st)
-
-		case "shortValue":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			nt, err := val.(json.Number).Int64()
-			if err != nil {
-				return err
-			}
-			st := int16(nt)
-			v.ShortValue = ptr.Int16(st)
-
-		case "integerValue":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			nt, err := val.(json.Number).Int64()
-			if err != nil {
-				return err
-			}
-			st := int32(nt)
-			v.IntegerValue = ptr.Int32(st)
-
-		case "longValue":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			nt, err := val.(json.Number).Int64()
-			if err != nil {
-				return err
-			}
-			st := nt
-			v.LongValue = ptr.Int64(st)
-
-		case "floatValue":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			nt, err := val.(json.Number).Float64()
-			if err != nil {
-				return err
-			}
-			st := float32(nt)
-			v.FloatValue = ptr.Float32(st)
-
-		case "DoubleDribble":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			nt, err := val.(json.Number).Float64()
-			if err != nil {
-				return err
-			}
-			st := nt
-			v.DoubleValue = ptr.Float64(st)
-
-		default:
-			err := restjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
-
-		}
-	}
-
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t.String() != "}" {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
-	return nil
-}
-
-type awsRestjson1_deserializeOpNoInputAndNoOutput struct {
-}
-
-func (*awsRestjson1_deserializeOpNoInputAndNoOutput) ID() string {
-	return "awsRestjson1_deserializeOpNoInputAndNoOutput"
-}
-
-func (m *awsRestjson1_deserializeOpNoInputAndNoOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &NoInputAndNoOutputOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestjson1_deserializeOpAllQueryStringTypes struct {
-}
-
-func (*awsRestjson1_deserializeOpAllQueryStringTypes) ID() string {
-	return "awsRestjson1_deserializeOpAllQueryStringTypes"
-}
-
-func (m *awsRestjson1_deserializeOpAllQueryStringTypes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &AllQueryStringTypesOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestjson1_deserializeOpConstantQueryString struct {
-}
-
-func (*awsRestjson1_deserializeOpConstantQueryString) ID() string {
-	return "awsRestjson1_deserializeOpConstantQueryString"
-}
-
-func (m *awsRestjson1_deserializeOpConstantQueryString) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &ConstantQueryStringOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestjson1_deserializeOpNoInputAndOutput struct {
-}
-
-func (*awsRestjson1_deserializeOpNoInputAndOutput) ID() string {
-	return "awsRestjson1_deserializeOpNoInputAndOutput"
-}
-
-func (m *awsRestjson1_deserializeOpNoInputAndOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &NoInputAndOutputOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestjson1_deserializeOpOmitsNullSerializesEmptyString struct {
-}
-
-func (*awsRestjson1_deserializeOpOmitsNullSerializesEmptyString) ID() string {
-	return "awsRestjson1_deserializeOpOmitsNullSerializesEmptyString"
-}
-
-func (m *awsRestjson1_deserializeOpOmitsNullSerializesEmptyString) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &OmitsNullSerializesEmptyStringOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestjson1_deserializeOpInlineDocumentAsPayload struct {
-}
-
-func (*awsRestjson1_deserializeOpInlineDocumentAsPayload) ID() string {
-	return "awsRestjson1_deserializeOpInlineDocumentAsPayload"
-}
-
-func (m *awsRestjson1_deserializeOpInlineDocumentAsPayload) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &InlineDocumentAsPayloadOutput{}
-	out.Result = output
-
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
-
-	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
-
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-
-	err = awsRestjson1_deserializeOpDocumentInlineDocumentAsPayloadOutput(output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestjson1_deserializeOpDocumentInlineDocumentAsPayloadOutput(v *InlineDocumentAsPayloadOutput, decoder *json.Decoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization of nil %T", v)
-	}
-
-	startToken, err := decoder.Token()
-	if err == io.EOF {
-		return nil
-	}
-	if err != nil {
-		return err
-	}
-	if t, ok := startToken.(json.Delim); !ok || t.String() != "{" {
-		return fmt.Errorf("expect `{` as start token")
-	}
-
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
-		case "documentValue":
-			// TODO: Support document Deserialization
-			v.DocumentValue = nil
-
-		default:
-			err := restjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
-
-		}
-	}
-
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t.String() != "}" {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
-	return nil
-}
-
-type awsRestjson1_deserializeOpEmptyInputAndEmptyOutput struct {
-}
-
-func (*awsRestjson1_deserializeOpEmptyInputAndEmptyOutput) ID() string {
-	return "awsRestjson1_deserializeOpEmptyInputAndEmptyOutput"
-}
-
-func (m *awsRestjson1_deserializeOpEmptyInputAndEmptyOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		errorType := response.Header.Get("X-Amzn-Errortype")
-		errorType = restjson.SanitizeErrorCode(errorType)
-
-		decoder := json.NewDecoder(response.Body)
-		decoder.UseNumber()
-		defer response.Body.Close()
-
-		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
-		if err != nil {
-			return out, metadata, &smithy.DeserializationError{Err: err}
-		}
-		return out, metadata, genericError
-	}
-
-	output := &EmptyInputAndEmptyOutputOutput{}
-	out.Result = output
-
-	return out, metadata, err
 }
 
 type awsRestjson1_deserializeOpJsonTimestamps struct {
@@ -2629,14 +2617,14 @@ func awsRestjson1_deserializeOpDocumentJsonTimestampsOutput(v *JsonTimestampsOut
 	return nil
 }
 
-type awsRestjson1_deserializeOpConstantAndVariableQueryString struct {
+type awsRestjson1_deserializeOpNoInputAndNoOutput struct {
 }
 
-func (*awsRestjson1_deserializeOpConstantAndVariableQueryString) ID() string {
-	return "awsRestjson1_deserializeOpConstantAndVariableQueryString"
+func (*awsRestjson1_deserializeOpNoInputAndNoOutput) ID() string {
+	return "awsRestjson1_deserializeOpNoInputAndNoOutput"
 }
 
-func (m *awsRestjson1_deserializeOpConstantAndVariableQueryString) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestjson1_deserializeOpNoInputAndNoOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -2664,20 +2652,20 @@ func (m *awsRestjson1_deserializeOpConstantAndVariableQueryString) HandleDeseria
 		return out, metadata, genericError
 	}
 
-	output := &ConstantAndVariableQueryStringOutput{}
+	output := &NoInputAndNoOutputOutput{}
 	out.Result = output
 
 	return out, metadata, err
 }
 
-type awsRestjson1_deserializeOpNullAndEmptyHeadersClient struct {
+type awsRestjson1_deserializeOpAllQueryStringTypes struct {
 }
 
-func (*awsRestjson1_deserializeOpNullAndEmptyHeadersClient) ID() string {
-	return "awsRestjson1_deserializeOpNullAndEmptyHeadersClient"
+func (*awsRestjson1_deserializeOpAllQueryStringTypes) ID() string {
+	return "awsRestjson1_deserializeOpAllQueryStringTypes"
 }
 
-func (m *awsRestjson1_deserializeOpNullAndEmptyHeadersClient) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestjson1_deserializeOpAllQueryStringTypes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -2705,40 +2693,53 @@ func (m *awsRestjson1_deserializeOpNullAndEmptyHeadersClient) HandleDeserialize(
 		return out, metadata, genericError
 	}
 
-	output := &NullAndEmptyHeadersClientOutput{}
+	output := &AllQueryStringTypesOutput{}
 	out.Result = output
-
-	err = awsRestjson1_deserializeHttpBindingsNullAndEmptyHeadersClientOutput(output, response)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
-	}
 
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeHttpBindingsNullAndEmptyHeadersClientOutput(v *NullAndEmptyHeadersClientOutput, response *smithyhttp.Response) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization for nil %T", v)
-	}
-
-	if val := response.Header.Get("X-A"); val != "" {
-		v.A = ptr.String(val)
-	}
-
-	if val := response.Header.Get("X-B"); val != "" {
-		v.B = ptr.String(val)
-	}
-
-	if val := response.Header.Get("X-C"); val != "" {
-		list := make([]*string, 0, 0)
-		for _, i := range strings.Split(val[1:len(val)-1], ",") {
-			list = append(list, ptr.String(i))
-		}
-		v.C = list
-	}
-
-	return nil
+type awsRestjson1_deserializeOpConstantQueryString struct {
 }
+
+func (*awsRestjson1_deserializeOpConstantQueryString) ID() string {
+	return "awsRestjson1_deserializeOpConstantQueryString"
+}
+
+func (m *awsRestjson1_deserializeOpConstantQueryString) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		errorType := response.Header.Get("X-Amzn-Errortype")
+		errorType = restjson.SanitizeErrorCode(errorType)
+
+		decoder := json.NewDecoder(response.Body)
+		decoder.UseNumber()
+		defer response.Body.Close()
+
+		genericError, err := restjson.GetSmithyGenericAPIError(decoder, errorType)
+		if err != nil {
+			return out, metadata, &smithy.DeserializationError{Err: err}
+		}
+		return out, metadata, genericError
+	}
+
+	output := &ConstantQueryStringOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
 func awsRestjson1_deserializeHttpBindingsComplexError(v *types.ComplexError, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
