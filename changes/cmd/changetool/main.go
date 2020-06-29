@@ -23,13 +23,19 @@ func main() {
 		os.Exit(1)
 	}
 
+	var err error
+
 	switch os.Args[1] {
 	case "change":
-		changeSubcmd(os.Args[2:])
+		err = changeSubcmd(os.Args[2:])
 	case "release":
-		releaseSubcmd(os.Args[2:])
+		err = releaseSubcmd(os.Args[2:])
 	default:
 		usage()
 		os.Exit(1)
+	}
+
+	if err != nil {
+		fmt.Println(err)
 	}
 }

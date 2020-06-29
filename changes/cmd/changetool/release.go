@@ -3,22 +3,21 @@ package main
 import (
 	"fmt"
 	"github.com/aggagen/changes"
-	"log"
 )
 
-func releaseSubcmd(args []string) {
+func releaseSubcmd(args []string) error {
 	if len(args) < 2 {
 		usage()
 	}
 
 	repo, err := changes.NewRepository(args[0])
 	if err != nil {
-		log.Fatalf("couldn't load repository: %v", err)
+		return fmt.Errorf("couldn't load repository: %v", err)
 	}
 
 	switch args[1] {
 	case "update-pending":
-		updatePendingCmd(repo)
+		return updatePendingCmd(repo)
 	case "demo-release":
 		release, err := repo.Metadata.CreateRelease("2020-06-26", map[string]changes.VersionBump{
 			"changes": {
@@ -34,15 +33,20 @@ func releaseSubcmd(args []string) {
 			panic(err)
 		}
 
-		repo.UpdateChangelog(release, false)
+		return repo.UpdateChangelog(release, false)
+	default:
+		usage()
 	}
+
+	return nil
 }
 
-func updatePendingCmd(repo *changes.Repository) {
+func updatePendingCmd(repo *changes.Repository) error {
 	err := repo.UpdatePendingChangelog()
 	if err != nil {
-		log.Fatalf("failed to update CHANGELOG_PENDING: %v", err)
+		return fmt.Errorf("failed to update CHANGELOG_PENDING: %v", err)
 	}
 
 	fmt.Println("successfully updated CHANGELOG_PENDING")
+	return nil
 }

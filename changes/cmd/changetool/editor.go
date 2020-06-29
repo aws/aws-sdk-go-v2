@@ -20,7 +20,7 @@ func editTemplate(template []byte) ([]byte, error) {
 	}
 	defer os.Remove(f.Name())
 
-	_, err = f.Write([]byte(template))
+	_, err = f.Write(template)
 	if err != nil {
 		return nil, err
 	}

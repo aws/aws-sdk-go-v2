@@ -4,7 +4,6 @@ import (
 	"flag"
 	"fmt"
 	"github.com/aggagen/changes"
-	"log"
 	"strconv"
 )
 
@@ -24,48 +23,52 @@ func init() {
 	lsFlags.StringVar(&changeParams.module, "module", "", "filters changes by module")
 }
 
-func changeSubcmd(args []string) {
+func changeSubcmd(args []string) error {
 	if len(args) == 0 {
 		usage()
 	}
 
 	changesPath, err := changes.GetChangesPath()
 	if err != nil {
-		log.Fatalf("Failed to load .changes directory: %v", err)
+		return fmt.Errorf("failed to load .changes directory: %v", err)
 	}
 
 	metadata, err := changes.LoadMetadata(changesPath)
 	if err != nil {
-		log.Fatalf("Failed to load .changes directory: %v", err)
+		return fmt.Errorf("failed to load .changes directory: %v", err)
 	}
 
 	switch args[0] {
 	case "add", "new":
 		addFlags.Parse(args[1:])
-		addCmd(metadata, changeParams.module)
+		return addCmd(metadata, changeParams.module)
 	case "ls", "list":
 		lsFlags.Parse(args[1:])
-		lsCmd(metadata, changeParams.module)
+		return lsCmd(metadata, changeParams.module)
 	case "modify", "edit":
 		if len(args) < 2 {
 			usage()
 		}
 
-		modifyCmd(metadata, args[1])
+		return modifyCmd(metadata, args[1])
 	case "rm", "delete":
 		if len(args) < 2 {
 			usage()
 		}
 
-		rmCmd(metadata, args[1])
+		return rmCmd(metadata, args[1])
+	default:
+		usage()
 	}
+
+	return nil
 }
 
-func addCmd(metadata *changes.Metadata, module string) {
+func addCmd(metadata *changes.Metadata, module string) error {
 	if module == "" {
 		currentModule, err := changes.GetCurrentModule()
 		if err != nil {
-			fmt.Printf("failed to create change: the module flag was not provided and the tool could not detect a module")
+			return fmt.Errorf("failed to create change: the module flag was not provided and the tool could not detect a module")
 		}
 
 		module = currentModule
@@ -75,25 +78,27 @@ func addCmd(metadata *changes.Metadata, module string) {
 		Module: module,
 	})
 	if err != nil {
-		log.Fatalf("failed to create change: %v", err)
+		return fmt.Errorf("failed to create change: %v", err)
 	}
 
 	filledTemplate, err := editTemplate(template)
 	if err != nil {
-		log.Fatalf("failed to create change: %v", err)
+		return fmt.Errorf("failed to create change: %v", err)
 	}
 
 	newChanges, err := metadata.AddChangesFromTemplate(filledTemplate)
 	if err != nil {
-		log.Fatalf("failed to create change: %v", err)
+		return fmt.Errorf("failed to create change: %v", err)
 	}
 
 	for _, c := range newChanges {
 		fmt.Println("added change with id " + c.ID)
 	}
+
+	return nil
 }
 
-func lsCmd(metadata *changes.Metadata, module string) {
+func lsCmd(metadata *changes.Metadata, module string) error {
 	for i, c := range metadata.Changes {
 		if c.Module == module || module == "" {
 			fmt.Printf("[%d] %s\n", i, c.ID)
@@ -102,44 +107,48 @@ func lsCmd(metadata *changes.Metadata, module string) {
 			fmt.Println()
 		}
 	}
+
+	return nil
 }
 
-func modifyCmd(metadata *changes.Metadata, id string) {
+func modifyCmd(metadata *changes.Metadata, id string) error {
 	change, err := selectChange(metadata, id)
 	if err != nil {
-		log.Fatalf("failed to modify change: %v", err)
+		return fmt.Errorf("failed to modify change: %v", err)
 	}
 
 	template, err := changes.ChangeToTemplate(change)
 	if err != nil {
-		log.Fatalf("failed to modify change: %v", err)
+		return fmt.Errorf("failed to modify change: %v", err)
 	}
 
 	filledTemplate, err := editTemplate(template)
 	if err != nil {
-		log.Fatalf("failed to modify change: %v", err)
+		return fmt.Errorf("failed to modify change: %v", err)
 	}
 
 	newChange, err := metadata.UpdateChangeFromTemplate(change, filledTemplate)
 	if err != nil {
-		log.Fatalf("couldn't modify change: %v", err)
+		return fmt.Errorf("couldn't modify change: %v", err)
 	}
 
 	fmt.Printf("successfully modified %s, new id is %s\n", change.ID, newChange.ID)
+	return nil
 }
 
-func rmCmd(metadata *changes.Metadata, id string) {
+func rmCmd(metadata *changes.Metadata, id string) error {
 	change, err := selectChange(metadata, id)
 	if err != nil {
-		log.Fatalf("failed to remove change: %v", err)
+		return fmt.Errorf("failed to remove change: %v", err)
 	}
 
 	err = metadata.RemoveChangeById(change.ID)
 	if err != nil {
-		log.Fatalf("failed to remove change: %v", err)
+		return fmt.Errorf("failed to remove change: %v", err)
 	}
 
 	fmt.Println("successfully removed " + change.ID)
+	return nil
 }
 
 // selectChange will return the change identified by the given id, which can be either the index of one of metadata's
