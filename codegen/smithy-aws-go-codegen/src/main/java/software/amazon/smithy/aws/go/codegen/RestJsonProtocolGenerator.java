@@ -58,6 +58,7 @@ import software.amazon.smithy.model.traits.MediaTypeTrait;
 import software.amazon.smithy.model.traits.StreamingTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.utils.FunctionalUtils;
+import software.amazon.smithy.utils.ListUtils;
 import software.amazon.smithy.utils.SetUtils;
 
 /**
@@ -429,10 +430,10 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         Shape payloadShape = model.expectShape(memberShape.getTarget());
 
         writeSafeOperandAccessor(model, symbolProvider, memberShape, "input", writer, (w, s) -> {
-			writer.openBlock("if !restEncoder.HasHeader(\"Content-Type\") {", "}", () -> {
-				writer.write("restEncoder.SetHeader(\"Content-Type\").String($S)", getPayloadShapeMediaType(payloadShape));
-			});
-			writer.write("");
+            writer.openBlock("if !restEncoder.HasHeader(\"Content-Type\") {", "}", () -> {
+                writer.write("restEncoder.SetHeader(\"Content-Type\").String($S)", getPayloadShapeMediaType(payloadShape));
+            });
+            writer.write("");
 
             if (payloadShape.hasTrait(StreamingTrait.class)) {
                 w.write("payload := $L", s);
@@ -597,28 +598,30 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             OperationShape operation,
             GoStackStepMiddlewareGenerator generator
     ) {
-        Shape outputShape = model.expectShape(operation.getOutput().get());
+        Shape targetShape = model.expectShape(operation.getOutput().get());
+        String operand = "output";
+
         boolean isShapeWithPayloadBinding = isShapeWithResponseBindings(model, operation, HttpBinding.Location.PAYLOAD);
-
         if (isShapeWithPayloadBinding) {
-            Set<MemberShape> memberShapesWithPayloadBinding = new TreeSet<>();
-            model.getKnowledge(HttpBindingIndex.class)
-                    .getResponseBindings(operation).values().stream()
-                    .filter(binding -> binding.getLocation().equals(HttpBinding.Location.PAYLOAD))
-                    .forEach(binding -> {
-                        memberShapesWithPayloadBinding.add(binding.getMember());
-                    });
-
-
             // since payload trait can only be applied to a single member in a output shape
-            MemberShape memberShape = memberShapesWithPayloadBinding.iterator().next();
-            Shape targetShape = model.expectShape(memberShape.getTarget());
+            MemberShape memberShape = model.getKnowledge(HttpBindingIndex.class)
+                    .getResponseBindings(operation, HttpBinding.Location.PAYLOAD).stream()
+                    .findFirst()
+                    .orElseThrow(() -> {
+                        throw new CodegenException("Expected payload binding member");
+                    })
+                    .getMember();
+
+            Shape payloadShape = model.expectShape(memberShape.getTarget());
 
             // if target shape is of type String or type Blob, then delegate deserializers for explicit payload shapes
-            if (targetShape.isStringShape() || targetShape.isBlobShape()) {
-                writeMiddlewarePayloadBindingDeserializerDelegator(writer, outputShape, false);
+            if (payloadShape.isStringShape() || payloadShape.isBlobShape()) {
+                writeMiddlewarePayloadBindingDeserializerDelegator(writer, targetShape, true);
                 return;
             }
+            // for other payload target types we should deserialize using the appropriate document deserializer
+            targetShape = payloadShape;
+            operand += "." + symbolProvider.toMemberName(memberShape);
         }
 
         writer.addUseImports(SmithyGoDependency.SMITHY_IO);
@@ -636,17 +639,18 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.write("decoder.UseNumber()");
         writer.write("");
 
-        writeMiddlewareDocumentBindingDeserializerDelegator(writer, outputShape, false);
+        writeMiddlewareDocumentBindingDeserializerDelegator(writer, targetShape, operand, !isShapeWithPayloadBinding);
     }
 
     // Writes middleware that delegates to deserializers for shapes that have explicit payload.
     private void writeMiddlewarePayloadBindingDeserializerDelegator(
-            GoWriter writer, Shape shape,
-            Boolean isErrorShape
+            GoWriter writer,
+            Shape shape,
+            Boolean isOperationShape
     ) {
-        String deserFuncName = isErrorShape ?
-                ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName()) :
-                ProtocolGenerator.getDocumentOutputDeserializerFunctionName(shape, getProtocolName());
+        String deserFuncName = isOperationShape ?
+                ProtocolGenerator.getDocumentOutputDeserializerFunctionName(shape, getProtocolName()) :
+                ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
         writer.write("err = $L(output, response.Body)", deserFuncName);
         writer.openBlock("if err != nil {", "}", () -> {
             writer.addUseImports(SmithyGoDependency.SMITHY);
@@ -658,13 +662,15 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
     // Write middleware that delegates to deserializers for shapes that have implicit payload and deserializer
     private void writeMiddlewareDocumentBindingDeserializerDelegator(
-            GoWriter writer, Shape shape,
-            Boolean isErrorShape
+            GoWriter writer,
+            Shape shape,
+            String operand,
+            Boolean isOperationShape
     ) {
-        String deserFuncName = isErrorShape ?
-                ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName()) :
-                ProtocolGenerator.getDocumentOutputDeserializerFunctionName(shape, getProtocolName());
-        writer.write("_, err = $L(output, decoder)", deserFuncName);
+        String deserFuncName = isOperationShape ?
+                ProtocolGenerator.getDocumentOutputDeserializerFunctionName(shape, getProtocolName()) :
+                ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
+        writer.write("_, err = $L($L, decoder)", deserFuncName, operand);
         writer.openBlock("if err != nil {", "}", () -> {
             writer.addUseImports(SmithyGoDependency.BYTES);
             writer.addUseImports(SmithyGoDependency.SMITHY);
@@ -838,7 +844,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
                 if (isShapeWithResponseBindings(model, errorShape, HttpBinding.Location.DOCUMENT)
                         || isShapeWithResponseBindings(model, errorShape, HttpBinding.Location.PAYLOAD)) {
-                    writeMiddlewareDocumentBindingDeserializerDelegator(writer, errorShape, true);
+                    writeMiddlewareDocumentBindingDeserializerDelegator(writer, errorShape, "output", false);
                 }
 
                 // TODO: fix variable scoping and shadowing
@@ -1048,6 +1054,22 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                             writer.write("");
                             writer.write("*vp = v");
                             writer.write("return true, nil");
+                        });
+                break;
+            case DOCUMENT:
+                writer.openBlock("func $L(v $P, decoder $P) (bool, error) {", "}", functionName, shapeSymbol,
+                        jsonDecoder, () -> {
+                            // TODO: Requires Implementation
+                            writer.addUseImports(SmithyGoDependency.FMT);
+                            writer.write("return false, fmt.Errorf(\"document types not implemented\")");
+                        });
+                break;
+            case UNION:
+                writer.openBlock("func $L(v $P, decoder $P) (bool, error) {", "}", functionName, shapeSymbol,
+                        jsonDecoder, () -> {
+                            // TODO: Requires Implementation
+                            writer.addUseImports(SmithyGoDependency.FMT);
+                            writer.write("return false, fmt.Errorf(\"union types not implemented\")");
                         });
                 break;
             default:
