@@ -6,7 +6,7 @@ import (
 )
 
 const usageText = `USAGE:
-  tool change add [-module=<module>]
+  tool change add [-module=<module>] [-type=<type>] [-description=<description>]
   tool change ls [-module=<module>]
   tool change modify <change_id>
   tool change rm <change_id>

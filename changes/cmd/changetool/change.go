@@ -8,8 +8,10 @@ import (
 )
 
 var changeParams = struct {
-	module  string
-	similar bool
+	module      string
+	changeType  string
+	description string
+	similar     bool
 }{}
 
 var addFlags *flag.FlagSet
@@ -18,6 +20,8 @@ var lsFlags *flag.FlagSet
 func init() {
 	addFlags = flag.NewFlagSet("add", flag.ExitOnError)
 	addFlags.StringVar(&changeParams.module, "module", "", "creates a change for the specified module")
+	addFlags.StringVar(&changeParams.changeType, "type", "", "sets the change's type")
+	addFlags.StringVar(&changeParams.description, "description", "", "sets the change's description")
 
 	lsFlags = flag.NewFlagSet("ls", flag.ExitOnError)
 	lsFlags.StringVar(&changeParams.module, "module", "", "filters changes by module")
@@ -41,7 +45,7 @@ func changeSubcmd(args []string) error {
 	switch args[0] {
 	case "add", "new":
 		addFlags.Parse(args[1:])
-		return addCmd(metadata, changeParams.module)
+		return addCmd(metadata, changeParams.module, changeParams.changeType, changeParams.description)
 	case "ls", "list":
 		lsFlags.Parse(args[1:])
 		return lsCmd(metadata, changeParams.module)
@@ -64,7 +68,7 @@ func changeSubcmd(args []string) error {
 	return nil
 }
 
-func addCmd(metadata *changes.Metadata, module string) error {
+func addCmd(metadata *changes.Metadata, module, changeType, description string) error {
 	if module == "" {
 		currentModule, err := changes.GetCurrentModule()
 		if err != nil {
@@ -74,21 +78,36 @@ func addCmd(metadata *changes.Metadata, module string) error {
 		module = currentModule
 	}
 
-	template, err := changes.ChangeToTemplate(&changes.Change{
-		Module: module,
-	})
-	if err != nil {
-		return fmt.Errorf("failed to create change: %v", err)
-	}
+	var newChanges []*changes.Change
+	var err error
 
-	filledTemplate, err := editTemplate(template)
-	if err != nil {
-		return fmt.Errorf("failed to create change: %v", err)
-	}
+	if changeType != "" && description != "" {
+		newChanges, err = changes.NewChanges([]string{module}, changeType, description)
+		if err != nil {
+			return fmt.Errorf("failed to create change: %v", err)
+		}
 
-	newChanges, err := metadata.AddChangesFromTemplate(filledTemplate)
-	if err != nil {
-		return fmt.Errorf("failed to create change: %v", err)
+		err = metadata.AddChanges(newChanges)
+		if err != nil {
+			return fmt.Errorf("failed to create change: %v", err)
+		}
+	} else {
+		template, err := changes.ChangeToTemplate(&changes.Change{
+			Module: module,
+		})
+		if err != nil {
+			return fmt.Errorf("failed to create change: %v", err)
+		}
+
+		filledTemplate, err := editTemplate(template)
+		if err != nil {
+			return fmt.Errorf("failed to create change: %v", err)
+		}
+
+		newChanges, err = metadata.AddChangesFromTemplate(filledTemplate)
+		if err != nil {
+			return fmt.Errorf("failed to create change: %v", err)
+		}
 	}
 
 	for _, c := range newChanges {
