@@ -349,7 +349,7 @@ func getMockChanges(t *testing.T) []*Change {
 }
 
 type templateCase struct {
-	template string
+	template []byte
 	changes  []*Change
 }
 
@@ -370,7 +370,7 @@ func getTestTemplateCases(t *testing.T) map[string]templateCase {
 		}
 
 		templates[strings.TrimSuffix(f.Name(), ".yaml")] = templateCase{
-			template: string(template),
+			template: template,
 		}
 	}
 

@@ -46,7 +46,7 @@ func (m *Metadata) AddChange(c *Change) error {
 
 // AddChangesFromTemplate parses the given YAML template, adding the resulting Changes to Metadata's Changes and saving
 // the Changes to the next-release directory. AddChangesFromTemplate returns the created Changes.
-func (m *Metadata) AddChangesFromTemplate(template string) ([]*Change, error) {
+func (m *Metadata) AddChangesFromTemplate(template []byte) ([]*Change, error) {
 	changes, err := TemplateToChanges(template)
 	if err != nil {
 		return nil, err
@@ -106,7 +106,7 @@ func (m *Metadata) SaveChange(c *Change) error {
 }
 
 // UpdateChangeFromTemplate removes oldChange and creates a new Change from the given template.
-func (m *Metadata) UpdateChangeFromTemplate(oldChange *Change, template string) (*Change, error) {
+func (m *Metadata) UpdateChangeFromTemplate(oldChange *Change, template []byte) (*Change, error) {
 	newChanges, err := TemplateToChanges(template)
 	if err != nil {
 		return nil, fmt.Errorf("failed to modify change: %v\n", err)

@@ -1,13 +1,14 @@
 package main
 
 import (
+	"bytes"
 	"errors"
 	"io/ioutil"
 	"os"
 	"os/exec"
 )
 
-func editTemplate(template string) (string, error) {
+func editTemplate(template []byte) ([]byte, error) {
 	editor := os.Getenv("VISUAL")
 	if editor == "" {
 		editor = "vim"
@@ -15,13 +16,13 @@ func editTemplate(template string) (string, error) {
 
 	f, err := ioutil.TempFile(".", "tmp-template-entry")
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 	defer os.Remove(f.Name())
 
 	_, err = f.Write([]byte(template))
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	cmd := exec.Command(editor, f.Name())
@@ -29,17 +30,17 @@ func editTemplate(template string) (string, error) {
 	cmd.Stdout = os.Stdout
 	err = cmd.Run()
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	filledTemplate, err := ioutil.ReadFile(f.Name())
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
-	if string(filledTemplate) == template {
-		return "", errors.New("template was not modified")
+	if bytes.Compare(filledTemplate, template) == 0 {
+		return nil, errors.New("template was not modified")
 	}
 
-	return string(filledTemplate), nil
+	return filledTemplate, nil
 }

@@ -1,6 +1,7 @@
 package changes
 
 import (
+	"bytes"
 	"strconv"
 	"testing"
 )
@@ -66,8 +67,8 @@ description: test description
 		t.Fatalf("expected nil err, got %v", err)
 	}
 
-	if template != wantTemplate {
-		t.Errorf("expected template \"%s\", got \"%s\"", wantTemplate, template)
+	if bytes.Compare(template, []byte(wantTemplate)) != 0 {
+		t.Errorf("expected template \"%s\", got \"%s\"", string(wantTemplate), string(template))
 	}
 }
 
@@ -80,7 +81,7 @@ description: test description
 # type may be one of "feature" or "bugfix".
 # multiple modules may be listed. A change metadata file will be created for each module.`
 
-	changes, err := TemplateToChanges(template)
+	changes, err := TemplateToChanges([]byte(template))
 	if err != nil {
 		t.Fatalf("expected nil err, got %v", err)
 	}

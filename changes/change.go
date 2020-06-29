@@ -64,10 +64,10 @@ func NewChanges(modules []string, changeType, description string) ([]*Change, er
 
 // TemplateToChanges parses the provided filledTemplate into the provided Change. If Change has no ID, TemplateToChange
 // will set the ID.
-func TemplateToChanges(filledTemplate string) ([]*Change, error) {
+func TemplateToChanges(filledTemplate []byte) ([]*Change, error) {
 	var template changeTemplate
 
-	err := yaml.Unmarshal([]byte(filledTemplate), &template)
+	err := yaml.Unmarshal(filledTemplate, &template)
 	if err != nil {
 		return nil, err
 	}
@@ -76,17 +76,17 @@ func TemplateToChanges(filledTemplate string) ([]*Change, error) {
 }
 
 // ChangeToTemplate returns a Change template populated with the given Change's data.
-func ChangeToTemplate(change *Change) (string, error) {
+func ChangeToTemplate(change *Change) ([]byte, error) {
 	templateBytes, err := yaml.Marshal(changeTemplate{
 		Modules:     []string{change.Module},
 		Type:        change.Type,
 		Description: change.Description,
 	})
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
-	return string(templateBytes) + changeTemplateSuffix, nil
+	return append(templateBytes, []byte(changeTemplateSuffix)...), nil
 }
 
 func generateId(module, changeType string) string {
