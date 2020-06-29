@@ -22,9 +22,14 @@ type Release struct {
 // RenderChangelogForModule returns a new markdown section of a module's CHANGELOG based on the Changes in the Release.
 func (r *Release) RenderChangelogForModule(module, headerPrefix string) string {
 	sections := map[string]string{}
+	var sectionsList []string
 
 	for _, c := range r.Changes {
 		if c.Module == module {
+			if _, ok := sections[c.Type]; !ok {
+				sectionsList = append(sectionsList, c.Type)
+			}
+
 			sections[c.Type] += fmt.Sprintf("* %s\n", c.Description)
 		}
 	}
@@ -36,9 +41,11 @@ func (r *Release) RenderChangelogForModule(module, headerPrefix string) string {
 		entry += "\n"
 	}
 
-	for section, content := range sections {
+	sort.Strings(sectionsList)
+
+	for _, section := range sectionsList {
 		entry += headerPrefix + "## " + changeHeaders[section] + "\n"
-		entry += content + "\n"
+		entry += sections[section] + "\n"
 	}
 
 	return entry

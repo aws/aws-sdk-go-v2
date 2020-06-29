@@ -147,8 +147,13 @@ func (m *Metadata) RemoveChangeById(id string) error {
 // ClearChanges removes all Changes from the Metadata's Changes and deletes the Change files in the
 // .changes/next-release directory.
 func (m *Metadata) ClearChanges() error {
+	var ids []string
 	for _, c := range m.Changes {
-		err := m.RemoveChangeById(c.ID)
+		ids = append(ids, c.ID)
+	}
+
+	for _, id := range ids {
+		err := m.RemoveChangeById(id)
 		if err != nil {
 			return err
 		}

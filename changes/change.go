@@ -8,10 +8,13 @@ import (
 	"time"
 )
 
+const FeatureType = "feature" // FeatureType is a constant change type for a new feature.
+const BugFixType = "bugfix"   // BugFixType is a constant change type for a bug fix.
+
 // changeTypes maps valid Change Types to the header they are grouped under in CHANGELOGs.
 var changeHeaders = map[string]string{
-	"feature": "New Features",
-	"bugfix":  "Bug Fixes",
+	FeatureType: "New Features",
+	BugFixType:  "Bug Fixes",
 }
 
 const changeTemplateSuffix = `

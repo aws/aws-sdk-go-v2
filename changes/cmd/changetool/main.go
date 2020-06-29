@@ -10,7 +10,7 @@ const usageText = `USAGE:
   tool change ls [-module=<module>]
   tool change modify <change_id>
   tool change rm <change_id>
-  tool release update-pending`
+  tool release <repo path> update-pending`
 
 func usage() {
 	fmt.Println(usageText)

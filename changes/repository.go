@@ -45,6 +45,8 @@ func (r *Repository) UpdateChangelog(release *Release, pending bool) error {
 	return writeFile([]byte(entry), filepath.Join(r.RootPath, fileName), !pending)
 }
 
+// UpdatePendingChangelog updates the repository's top level CHANGELOG_PENDING.md with the Repository's Metadata's
+// pending Changes.
 func (r *Repository) UpdatePendingChangelog() error {
 	release, err := r.Metadata.CreateRelease("pending", map[string]VersionBump{}, true)
 	if err != nil {

@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"github.com/aggagen/changes"
 	"log"
-	"os"
 	"strconv"
 )
 
 var changeParams = struct {
-	module string
+	module  string
+	similar bool
 }{}
 
 var addFlags *flag.FlagSet
@@ -57,7 +57,7 @@ func changeSubcmd(args []string) {
 			usage()
 		}
 
-		rmCmd(metadata, os.Args[1])
+		rmCmd(metadata, args[1])
 	}
 }
 
