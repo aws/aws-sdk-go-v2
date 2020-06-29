@@ -165,8 +165,8 @@ func (m *Metadata) ClearChanges() error {
 
 // CreateRelease consolidates the Metadata's pending Changes into a Release. This operation will remove all Changes from
 // the Metadata and delete change files in .changes/next-release. A release file will also be created in
-// .changes/releases. If temp is true, CreateRelease will return a Release, but not modify change or release files.
-func (m *Metadata) CreateRelease(id string, bumps map[string]VersionBump, temp bool) (*Release, error) {
+// .changes/releases. If dryRun is true, CreateRelease will return a Release, but not modify change or release files.
+func (m *Metadata) CreateRelease(id string, bumps map[string]VersionBump, dryRun bool) (*Release, error) {
 	release := &Release{
 		ID:            id,
 		SchemaVersion: SchemaVersion,
@@ -174,7 +174,7 @@ func (m *Metadata) CreateRelease(id string, bumps map[string]VersionBump, temp b
 		Changes:       m.Changes,
 	}
 
-	if !temp {
+	if !dryRun {
 		if err := writeJSON(release, m.ChangePath, "releases", id); err != nil {
 			return nil, err
 		}
@@ -216,6 +216,11 @@ func loadChanges(changesDir string) ([]*Change, error) {
 			err = json.Unmarshal(changeData, change)
 			if err != nil {
 				return nil, err
+			}
+
+			if change.SchemaVersion != SchemaVersion {
+				return nil, fmt.Errorf("change with id %s has Schema Version %s, but verison %s was expeced",
+					change.ID, change.SchemaVersion, SchemaVersion)
 			}
 
 			changes = append(changes, change)
