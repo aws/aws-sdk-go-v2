@@ -13,8 +13,8 @@ import software.amazon.smithy.utils.ListUtils;
 public class AssembleMiddlewareStack implements GoIntegration {
 
     /**
- 	 * Gets the sort order of the customization from -128 to 127, with lowest
-	 * executed first.
+     * Gets the sort order of the customization from -128 to 127, with lowest
+     * executed first.
      *
      * @return Returns the sort order, defaults to -40.
      */
@@ -41,25 +41,6 @@ public class AssembleMiddlewareStack implements GoIntegration {
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
                                         "AddResolveServiceEndpointMiddleware", AwsGoDependency.AWS_MIDDLEWARE)
-                                .build())
-                                .useClientOptions()
-                                .build())
-                        .build(),
-
-                // Add attemptClockSkew middleware to operation stack
-                RuntimeClientPlugin.builder()
-                        .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        "AddAttemptClockSkewMiddleware", AwsGoDependency.AWS_MIDDLEWARE)
-                                        .build())
-                                .build())
-                        .build(),
-
-                // Add newAttempt middleware to operation stack
-                RuntimeClientPlugin.builder()
-                        .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction( SymbolUtils.createValueSymbolBuilder(
-                                        "AddRetryMiddlewares", AwsGoDependency.AWS_RETRY)
                                         .build())
                                 .useClientOptions()
                                 .build())
@@ -68,7 +49,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 // Add unsigned payload middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .operationPredicate((model, service, operation) -> {
-                            if (operation.hasTrait(UnsignedPayloadTrait.class)) {
+                            if (service.hasTrait(SigV4Trait.class) && operation.hasTrait(UnsignedPayloadTrait.class)) {
                                 return true;
                             }
                             return false;
@@ -80,21 +61,70 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                 .build())
                         .build(),
 
-                // Add HTTPSigner middleware to operation stack
+                // Add signed payload middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .operationPredicate((model, service, operation) -> {
-                            if (service.hasTrait(SigV4Trait.class) && (!operation.hasTrait(UnsignedPayloadTrait.class))
-                                    && (operation.hasTrait(SigV4Trait.class) || !operation.hasTrait(AuthTrait.class))
-                            ){
+                            if (service.hasTrait(SigV4Trait.class) && !operation.hasTrait(UnsignedPayloadTrait.class)) {
                                 return true;
                             }
                             return false;
                         })
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        "AddHTTPSignerMiddlewares", AwsGoDependency.AWS_SIGNER_V4)
+                                        "AddComputePayloadSHA256Middleware", AwsGoDependency.AWS_SIGNER_V4)
+                                        .build())
+                                .build())
+                        .build(),
+
+                // Add content-sha256 payload header middleware to operation stack
+                RuntimeClientPlugin.builder()
+                        .operationPredicate((model, service, operation) -> {
+                            if (service.hasTrait(SigV4Trait.class) && operation.hasTrait(UnsignedPayloadTrait.class)) {
+                                return true;
+                            }
+                            return false;
+                        })
+                        .registerMiddleware(MiddlewareRegistrar.builder()
+                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
+                                        "AddContentSHA256HeaderMiddleware", AwsGoDependency.AWS_SIGNER_V4)
+                                        .build())
+                                .build())
+                        .build(),
+
+                // Add newAttempt middleware to operation stack
+                RuntimeClientPlugin.builder()
+                        .registerMiddleware(MiddlewareRegistrar.builder()
+                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
+                                        "AddRetryMiddlewares", AwsGoDependency.AWS_RETRY)
                                         .build())
                                 .useClientOptions()
+                                .build())
+                        .build(),
+
+                // Add HTTPSigner middleware to operation stack
+                RuntimeClientPlugin.builder()
+                        .operationPredicate((model, service, operation) -> {
+                            if (service.hasTrait(SigV4Trait.class)
+                                    && (operation.hasTrait(SigV4Trait.class) || !operation.hasTrait(AuthTrait.class))
+                            ) {
+                                return true;
+                            }
+                            return false;
+                        })
+                        .registerMiddleware(MiddlewareRegistrar.builder()
+                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
+                                        "AddHTTPSignerMiddleware", AwsGoDependency.AWS_SIGNER_V4)
+                                        .build())
+                                .useClientOptions()
+                                .build())
+                        .build(),
+
+                // Add attemptClockSkew middleware to operation stack
+                RuntimeClientPlugin.builder()
+                        .registerMiddleware(MiddlewareRegistrar.builder()
+                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
+                                        "AddAttemptClockSkewMiddleware", AwsGoDependency.AWS_MIDDLEWARE)
+                                        .build())
                                 .build())
                         .build()
         );
