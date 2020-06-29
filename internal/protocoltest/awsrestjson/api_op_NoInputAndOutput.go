@@ -21,8 +21,8 @@ func (c *Client) NoInputAndOutput(ctx context.Context, params *NoInputAndOutputI
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opNoInputAndOutput(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpNoInputAndOutputMiddlewares(stack)
 

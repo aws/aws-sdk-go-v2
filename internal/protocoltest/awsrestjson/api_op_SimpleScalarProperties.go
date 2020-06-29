@@ -18,8 +18,8 @@ func (c *Client) SimpleScalarProperties(ctx context.Context, params *SimpleScala
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSimpleScalarProperties(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpSimpleScalarPropertiesMiddlewares(stack)
 

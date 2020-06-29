@@ -22,8 +22,8 @@ func (c *Client) InputAndOutputWithHeaders(ctx context.Context, params *InputAnd
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInputAndOutputWithHeaders(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpInputAndOutputWithHeadersMiddlewares(stack)
 

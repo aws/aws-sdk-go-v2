@@ -21,8 +21,8 @@ func (c *Client) HttpPayloadWithStructure(ctx context.Context, params *HttpPaylo
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadWithStructure(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpHttpPayloadWithStructureMiddlewares(stack)
 

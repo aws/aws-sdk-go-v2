@@ -22,8 +22,8 @@ func (c *Client) ConstantQueryString(ctx context.Context, params *ConstantQueryS
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opConstantQueryString(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpConstantQueryStringMiddlewares(stack)
 
