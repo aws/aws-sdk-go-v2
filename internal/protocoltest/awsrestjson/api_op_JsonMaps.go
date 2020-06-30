@@ -20,8 +20,8 @@ func (c *Client) JsonMaps(ctx context.Context, params *JsonMapsInput, optFns ...
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonMaps(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpJsonMapsMiddlewares(stack)
 

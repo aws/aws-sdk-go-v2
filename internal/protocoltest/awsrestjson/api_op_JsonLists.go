@@ -31,8 +31,8 @@ func (c *Client) JsonLists(ctx context.Context, params *JsonListsInput, optFns .
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonLists(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpJsonListsMiddlewares(stack)
 

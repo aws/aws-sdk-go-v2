@@ -650,7 +650,7 @@ func (s *httpSigner) buildSignature(strToSign string) string {
 }
 
 func buildBodyDigest(r *http.Request, body io.ReadSeeker, service string, unsigned, presigned bool) (string, error) {
-	hash := r.Header.Get("X-Amz-Content-Sha256")
+	hash := r.Header.Get(v4Internal.ContentSHAKey)
 	if hash == "" {
 		includeSHA256Header := unsigned ||
 			service == "s3" ||
@@ -675,7 +675,7 @@ func buildBodyDigest(r *http.Request, body io.ReadSeeker, service string, unsign
 		}
 
 		if includeSHA256Header {
-			r.Header.Set("X-Amz-Content-Sha256", hash)
+			r.Header.Set(v4Internal.ContentSHAKey, hash)
 		}
 	}
 	return hash, nil
