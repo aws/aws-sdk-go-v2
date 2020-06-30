@@ -19,8 +19,8 @@ func (c *Client) OmitsNullSerializesEmptyString(ctx context.Context, params *Omi
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opOmitsNullSerializesEmptyString(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {

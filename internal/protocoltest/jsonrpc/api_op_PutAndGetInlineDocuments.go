@@ -20,9 +20,10 @@ func (c *Client) PutAndGetInlineDocuments(ctx context.Context, params *PutAndGet
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	v4.AddHTTPSignerMiddlewares(stack, options)
+	v4.AddHTTPSignerMiddleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutAndGetInlineDocuments(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {

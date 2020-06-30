@@ -63,9 +63,10 @@ func (c *Client) PostText(ctx context.Context, params *PostTextInput, optFns ...
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	v4.AddHTTPSignerMiddlewares(stack, options)
+	v4.AddHTTPSignerMiddleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPostText(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpPostTextMiddlewares(stack)
 

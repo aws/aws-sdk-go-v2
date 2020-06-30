@@ -20,8 +20,8 @@ func (c *Client) HttpPayloadTraitsWithMediaType(ctx context.Context, params *Htt
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadTraitsWithMediaType(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpHttpPayloadTraitsWithMediaTypeMiddlewares(stack)
 

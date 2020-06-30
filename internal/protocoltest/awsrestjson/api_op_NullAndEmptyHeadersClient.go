@@ -19,8 +19,8 @@ func (c *Client) NullAndEmptyHeadersClient(ctx context.Context, params *NullAndE
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opNullAndEmptyHeadersClient(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpNullAndEmptyHeadersClientMiddlewares(stack)
 

@@ -13,6 +13,7 @@ import (
 	"testing"
 	"time"
 
+	v4Internal "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
@@ -186,7 +187,7 @@ func TestSignUnsignedPayloadUnseekableBody(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	hash := req.Header.Get("X-Amz-Content-Sha256")
+	hash := req.Header.Get(v4Internal.ContentSHAKey)
 	if e, a := "UNSIGNED-PAYLOAD", hash; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
@@ -197,13 +198,13 @@ func TestSignPreComputedHashUnseekableBody(t *testing.T) {
 
 	signer := buildSigner()
 
-	req.Header.Set("X-Amz-Content-Sha256", "some-content-sha256")
+	req.Header.Set(v4Internal.ContentSHAKey, "some-content-sha256")
 	_, err := signer.Sign(context.Background(), req, body, "mock-service", "mock-region", time.Now())
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	hash := req.Header.Get("X-Amz-Content-Sha256")
+	hash := req.Header.Get(v4Internal.ContentSHAKey)
 	if e, a := "some-content-sha256", hash; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
@@ -213,7 +214,7 @@ func TestSignBodyS3(t *testing.T) {
 	req, body := buildRequest("s3", "us-east-1", "hello")
 	signer := buildSigner()
 	signer.Sign(context.Background(), req, body, "s3", "us-east-1", time.Now())
-	hash := req.Header.Get("X-Amz-Content-Sha256")
+	hash := req.Header.Get(v4Internal.ContentSHAKey)
 	if e, a := "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824", hash; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
@@ -223,7 +224,7 @@ func TestSignBodyGlacier(t *testing.T) {
 	req, body := buildRequest("glacier", "us-east-1", "hello")
 	signer := buildSigner()
 	signer.Sign(context.Background(), req, body, "glacier", "us-east-1", time.Now())
-	hash := req.Header.Get("X-Amz-Content-Sha256")
+	hash := req.Header.Get(v4Internal.ContentSHAKey)
 	if e, a := "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824", hash; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
@@ -233,7 +234,7 @@ func TestPresign_SignedPayload(t *testing.T) {
 	req, body := buildRequest("glacier", "us-east-1", "hello")
 	signer := buildSigner()
 	signer.Presign(context.Background(), req, body, "glacier", "us-east-1", 5*time.Minute, time.Now())
-	hash := req.Header.Get("X-Amz-Content-Sha256")
+	hash := req.Header.Get(v4Internal.ContentSHAKey)
 	if e, a := "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824", hash; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
@@ -244,7 +245,7 @@ func TestPresign_UnsignedPayload(t *testing.T) {
 	signer := buildSigner()
 	signer.UnsignedPayload = true
 	signer.Presign(context.Background(), req, body, "service-name", "us-east-1", 5*time.Minute, time.Now())
-	hash := req.Header.Get("X-Amz-Content-Sha256")
+	hash := req.Header.Get(v4Internal.ContentSHAKey)
 	if e, a := "UNSIGNED-PAYLOAD", hash; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
@@ -254,17 +255,17 @@ func TestPresign_UnsignedPayload_S3(t *testing.T) {
 	req, body := buildRequest("s3", "us-east-1", "hello")
 	signer := buildSigner()
 	signer.Presign(context.Background(), req, body, "s3", "us-east-1", 5*time.Minute, time.Now())
-	if a := req.Header.Get("X-Amz-Content-Sha256"); len(a) != 0 {
+	if a := req.Header.Get(v4Internal.ContentSHAKey); len(a) != 0 {
 		t.Errorf("expect no content sha256 got %v", a)
 	}
 }
 
 func TestSignPrecomputedBodyChecksum(t *testing.T) {
 	req, body := buildRequest("dynamodb", "us-east-1", "hello")
-	req.Header.Set("X-Amz-Content-Sha256", "PRECOMPUTED")
+	req.Header.Set(v4Internal.ContentSHAKey, "PRECOMPUTED")
 	signer := buildSigner()
 	signer.Sign(context.Background(), req, body, "dynamodb", "us-east-1", time.Now())
-	hash := req.Header.Get("X-Amz-Content-Sha256")
+	hash := req.Header.Get(v4Internal.ContentSHAKey)
 	if e, a := "PRECOMPUTED", hash; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}

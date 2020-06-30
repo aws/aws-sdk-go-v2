@@ -19,8 +19,8 @@ func (c *Client) InlineDocumentAsPayload(ctx context.Context, params *InlineDocu
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInlineDocumentAsPayload(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpInlineDocumentAsPayloadMiddlewares(stack)
 

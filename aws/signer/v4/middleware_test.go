@@ -45,9 +45,9 @@ func TestComputePayloadHashMiddleware(t *testing.T) {
 
 	for i, tt := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			c := &ComputePayloadSHA256Middleware{}
+			c := &computePayloadSHA256Middleware{}
 
-			next := finalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
+			next := buildHandlerFunc(func(ctx context.Context, in middleware.BuildInput) (out middleware.BuildOutput, metadata middleware.Metadata, err error) {
 				value, ok := ctx.Value(payloadHashKey{}).(string)
 				if !ok {
 					t.Fatalf("expected payload hash value to be on context")
@@ -64,7 +64,7 @@ func TestComputePayloadHashMiddleware(t *testing.T) {
 				t.Fatalf("expected no error, got %v", err)
 			}
 
-			_, _, err = c.HandleFinalize(context.Background(), middleware.FinalizeInput{Request: stream}, next)
+			_, _, err = c.HandleBuild(context.Background(), middleware.BuildInput{Request: stream}, next)
 			if err != nil && tt.expectedErr == nil {
 				t.Errorf("expected no error, got %v", err)
 			} else if err != nil && tt.expectedErr != nil {
@@ -168,6 +168,12 @@ func (*semiSeekable) Read(p []byte) (n int, err error) {
 	return 0, io.EOF
 }
 
+type buildHandlerFunc func(ctx context.Context, in middleware.BuildInput) (middleware.BuildOutput, middleware.Metadata, error)
+
+func (f buildHandlerFunc) HandleBuild(ctx context.Context, in middleware.BuildInput) (middleware.BuildOutput, middleware.Metadata, error) {
+	return f(ctx, in)
+}
+
 type finalizeHandlerFunc func(ctx context.Context, in middleware.FinalizeInput) (middleware.FinalizeOutput, middleware.Metadata, error)
 
 func (f finalizeHandlerFunc) HandleFinalize(ctx context.Context, in middleware.FinalizeInput) (middleware.FinalizeOutput, middleware.Metadata, error) {
@@ -175,6 +181,8 @@ func (f finalizeHandlerFunc) HandleFinalize(ctx context.Context, in middleware.F
 }
 
 var (
-	_ middleware.FinalizeMiddleware = &ComputePayloadSHA256Middleware{}
+	_ middleware.BuildMiddleware    = &unsignedPayloadMiddleware{}
+	_ middleware.BuildMiddleware    = &computePayloadSHA256Middleware{}
+	_ middleware.BuildMiddleware    = &contentSHA256HeaderMiddleware{}
 	_ middleware.FinalizeMiddleware = &SignHTTPRequestMiddleware{}
 )

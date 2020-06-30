@@ -21,8 +21,8 @@ func (c *Client) JsonTimestamps(ctx context.Context, params *JsonTimestampsInput
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonTimestamps(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpJsonTimestampsMiddlewares(stack)
 

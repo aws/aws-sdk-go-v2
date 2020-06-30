@@ -43,54 +43,139 @@ func (e *SigningError) Unwrap() error {
 	return e.Err
 }
 
-// UnsignedPayloadMiddleware sets the SigV4 request payload hash to unsigned
-type UnsignedPayloadMiddleware struct{}
+// unsignedPayloadMiddleware sets the SigV4 request payload hash to unsigned.
+//
+// Will not set the Unsigned Payload magic SHA value, if a SHA has already been
+// stored in the context. (e.g. application pre-computed SHA256 before making
+// API call).
+//
+// This middleware does not check the X-Amz-Content-Sha256 header, if that
+// header is serialized a middleware must translate it into the context.
+type unsignedPayloadMiddleware struct{}
 
-// ID returns the UnsignedPayloadMiddleware identifier
-func (m *UnsignedPayloadMiddleware) ID() string {
+// AddUnsignedPayloadMiddleware adds unsignedPayloadMiddleware to the operation
+// middleware stack
+func AddUnsignedPayloadMiddleware(stack *middleware.Stack) {
+	stack.Build.Add(&unsignedPayloadMiddleware{}, middleware.After)
+}
+
+// ID returns the unsignedPayloadMiddleware identifier
+func (m *unsignedPayloadMiddleware) ID() string {
 	return "SigV4UnsignedPayloadMiddleware"
 }
 
-// HandleFinalize sets the payload hash to be an unsigned payload
-func (m *UnsignedPayloadMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+// HandleBuild sets the payload hash to be an unsigned payload
+func (m *unsignedPayloadMiddleware) HandleBuild(
+	ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler,
+) (
+	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
-	ctx = SetPayloadHash(ctx, v4Internal.UnsignedPayload)
-	return next.HandleFinalize(ctx, in)
+	// This should not compute the content SHA256 if the value is already
+	// known. (e.g. application pre-computed SHA256 before making API call).
+	// Does not have any tight coupling to the X-Amz-Content-Sha256 header, if
+	// that header is provided a middleware must translate it into the context.
+	contentSHA := GetPayloadHash(ctx)
+	if len(contentSHA) == 0 {
+		contentSHA = v4Internal.UnsignedPayload
+	}
+
+	ctx = SetPayloadHash(ctx, contentSHA)
+	return next.HandleBuild(ctx, in)
 }
 
-// ComputePayloadSHA256Middleware computes sha256 payload hash to sign
-type ComputePayloadSHA256Middleware struct{}
+// computePayloadSHA256Middleware computes SHA256 payload hash to sign.
+//
+// Will not set the Unsigned Payload magic SHA value, if a SHA has already been
+// stored in the context. (e.g. application pre-computed SHA256 before making
+// API call).
+//
+// This middleware does not check the X-Amz-Content-Sha256 header, if that
+// header is serialized a middleware must translate it into the context.
+type computePayloadSHA256Middleware struct{}
+
+// AddComputePayloadSHA256Middleware adds computePayloadSHA256Middleware to the
+// operation middleware stack
+func AddComputePayloadSHA256Middleware(stack *middleware.Stack) {
+	stack.Build.Add(&computePayloadSHA256Middleware{}, middleware.After)
+}
 
 // ID is the middleware name
-func (m *ComputePayloadSHA256Middleware) ID() string {
+func (m *computePayloadSHA256Middleware) ID() string {
 	return "ComputePayloadSHA256Middleware"
 }
 
-// HandleFinalize compute the payload hash for the request payload
-func (m *ComputePayloadSHA256Middleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+// HandleBuild compute the payload hash for the request payload
+func (m *computePayloadSHA256Middleware) HandleBuild(
+	ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler,
+) (
+	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
 	req, ok := in.Request.(*smithyHTTP.Request)
 	if !ok {
-		return out, metadata, &HashComputationError{Err: fmt.Errorf("unexpected request middleware type %T", in.Request)}
+		return out, metadata, &HashComputationError{
+			Err: fmt.Errorf("unexpected request middleware type %T", in.Request),
+		}
+	}
+
+	// This should not compute the content SHA256 if the value is already
+	// known. (e.g. application pre-computed SHA256 before making API call)
+	// Does not have any tight coupling to the X-Amz-Content-Sha256 header, if
+	// that header is provided a middleware must translate it into the context.
+	if contentSHA := GetPayloadHash(ctx); len(contentSHA) != 0 {
+		return next.HandleBuild(ctx, in)
 	}
 
 	hash := sha256.New()
 	if stream := req.GetStream(); stream != nil {
 		_, err = io.Copy(hash, stream)
 		if err != nil {
-			return out, metadata, &HashComputationError{Err: fmt.Errorf("failed to compute payload hash, %w", err)}
+			return out, metadata, &HashComputationError{
+				Err: fmt.Errorf("failed to compute payload hash, %w", err),
+			}
 		}
 
 		if err := req.RewindStream(); err != nil {
-			return out, metadata, &HashComputationError{Err: fmt.Errorf("failed to seek body to start, %w", err)}
+			return out, metadata, &HashComputationError{
+				Err: fmt.Errorf("failed to seek body to start, %w", err),
+			}
 		}
 	}
 
 	ctx = SetPayloadHash(ctx, hex.EncodeToString(hash.Sum(nil)))
 
-	return next.HandleFinalize(ctx, in)
+	return next.HandleBuild(ctx, in)
+}
+
+// contentSHA256HeaderMiddleware sets the X-Amz-Content-Sha256 header value to
+// the Payload hash stored in the context.
+type contentSHA256HeaderMiddleware struct{}
+
+// AddContentSHA256HeaderMiddleware adds ContentSHA256HeaderMiddleware to the
+// operation middleware stack
+func AddContentSHA256HeaderMiddleware(stack *middleware.Stack) {
+	stack.Build.Add(&contentSHA256HeaderMiddleware{}, middleware.After)
+}
+
+// ID returns the ContentSHA256HeaderMiddleware identifier
+func (m *contentSHA256HeaderMiddleware) ID() string {
+	return "SigV4ContentSHA256HeaderMiddleware"
+}
+
+// HandleBuild sets the X-Amz-Content-Sha256 header value to the Payload hash
+// stored in the context.
+func (m *contentSHA256HeaderMiddleware) HandleBuild(
+	ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler,
+) (
+	out middleware.BuildOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyHTTP.Request)
+	if !ok {
+		return out, metadata, &HashComputationError{Err: fmt.Errorf("unexpected request middleware type %T", in.Request)}
+	}
+
+	req.Header.Set(v4Internal.ContentSHAKey, GetPayloadHash(ctx))
+
+	return next.HandleBuild(ctx, in)
 }
 
 // SignHTTPRequestMiddleware is a `FinalizeMiddleware` implementation for SigV4 HTTP Signing
@@ -145,33 +230,24 @@ func SetPayloadHash(ctx context.Context, hash string) context.Context {
 	return ctx
 }
 
-// AddUnsignedPayloadMiddleware adds UnsignedPayloadMiddleware to the operation middleware stack
-func AddUnsignedPayloadMiddleware(stack *middleware.Stack) {
-	unsignedPayloadMiddleware := UnsignedPayloadMiddleware{}
-	stack.Finalize.Add(&unsignedPayloadMiddleware, middleware.After)
-}
-
 // HTTPSignerMiddlewareConfig interface for HTTP signer middleware config
 type HTTPSignerMiddlewareConfig interface {
 	GetHTTPSigner() HTTPSigner
 }
 
-// HTTPSignerMiddlewares represent the middleware's for HTTPSigner
-type HTTPSignerMiddlewares struct {
-	ComputePayloadSHA256Middleware *ComputePayloadSHA256Middleware
-	SignHTTPRequestMiddleware      *SignHTTPRequestMiddleware
+// HTTPSignerMiddleware represent the middleware's for HTTPSigner
+type HTTPSignerMiddleware struct {
+	SignHTTPRequestMiddleware *SignHTTPRequestMiddleware
 }
 
-// AddHTTPSignerMiddlewares adds HTTP signer middleware's to operation stack
-func AddHTTPSignerMiddlewares(stack *middleware.Stack, cfg HTTPSignerMiddlewareConfig, optFns ...func(*HTTPSignerMiddlewares)) {
-	m := HTTPSignerMiddlewares {
-		ComputePayloadSHA256Middleware: &ComputePayloadSHA256Middleware{},
-		SignHTTPRequestMiddleware:      NewSignHTTPRequestMiddleware(cfg.GetHTTPSigner()),
+// AddHTTPSignerMiddleware adds HTTP signer middleware's to operation stack
+func AddHTTPSignerMiddleware(stack *middleware.Stack, cfg HTTPSignerMiddlewareConfig, optFns ...func(*HTTPSignerMiddleware)) {
+	m := HTTPSignerMiddleware{
+		SignHTTPRequestMiddleware: NewSignHTTPRequestMiddleware(cfg.GetHTTPSigner()),
 	}
 	for _, fn := range optFns {
 		fn(&m)
 	}
 
-	stack.Finalize.Add(m.ComputePayloadSHA256Middleware, middleware.Before)
 	stack.Finalize.Add(m.SignHTTPRequestMiddleware, middleware.After)
 }

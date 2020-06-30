@@ -21,8 +21,8 @@ func (c *Client) HttpRequestWithLabels(ctx context.Context, params *HttpRequestW
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithLabels(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpHttpRequestWithLabelsMiddlewares(stack)
 

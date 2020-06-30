@@ -119,21 +119,14 @@ cleanup-integ-buckets:
 ###################
 # Sandbox Testing #
 ###################
-sandbox-tests: sandbox-test-go1.12 sandbox-test-go1.13 sandbox-test-gotip
+sandbox-tests: sandbox-test-go1.14 sandbox-test-gotip
 
-sandbox-build-go1.13:
-	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.13 -t "aws-sdk-go-v2-1.13" .
-sandbox-go1.13: sandbox-build-go1.13
-	docker run -i -t aws-sdk-go-v2-1.13 bash
-sandbox-test-go1.13: sandbox-build-go1.13
-	docker run -t aws-sdk-go-v2-1.13
-
-sandbox-build-go1.12:
-	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.12 -t "aws-sdk-go-v2-1.12" .
-sandbox-go1.12: sandbox-build-go1.12
-	docker run -i -t aws-sdk-go-v2-1.12 bash
-sandbox-test-go1.12: sandbox-build-go1.12
-	docker run -t aws-sdk-go-v2-1.12
+sandbox-build-go1.14:
+	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.14 -t "aws-sdk-go-v2-1.14" .
+sandbox-go1.14: sandbox-build-go1.14
+	docker run -i -t aws-sdk-go-v2-1.14 bash
+sandbox-test-go1.14: sandbox-build-go1.14
+	docker run -t aws-sdk-go-v2-1.14
 
 sandbox-build-gotip:
 	@echo "Run make update-aws-golang-tip, if this test fails because missing aws-golang:tip container"
