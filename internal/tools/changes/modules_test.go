@@ -8,8 +8,7 @@ func TestGetCurrentModule(t *testing.T) {
 		t.Errorf("expected nil err, got %v", err)
 	}
 
-	// TODO: update to reflect path in SDK repo.
-	if mod != "changes" {
-		t.Errorf("expected mod to be \"changes\", got %s", mod)
+	if mod != "internal/tools/changes" {
+		t.Errorf("expected mod to be \"internal/tools/changes\", got %s", mod)
 	}
 }

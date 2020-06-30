@@ -32,5 +32,5 @@ func getModFile(path string) (*modfile.File, error) {
 }
 
 func shortenModPath(modulePath string) string {
-	return strings.TrimPrefix(modulePath, "github.com/aggagen/")
+	return strings.TrimPrefix(modulePath, "github.com/aws/aws-sdk-go-v2/")
 }

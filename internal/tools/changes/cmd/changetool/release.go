@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/aggagen/changes"
+	"github.com/aws/aws-sdk-go-v2/internal/tools/changes"
 )
 
 func releaseSubcmd(args []string) error {

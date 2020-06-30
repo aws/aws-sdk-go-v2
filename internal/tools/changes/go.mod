@@ -1,4 +1,4 @@
-module github.com/aggagen/changes
+module github.com/aws/aws-sdk-go-v2/internal/tools/changes
 
 go 1.14
 

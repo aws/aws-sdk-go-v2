@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/aggagen/changes"
+	"github.com/aws/aws-sdk-go-v2/internal/tools/changes"
 	"strconv"
 )
 
