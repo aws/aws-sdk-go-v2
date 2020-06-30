@@ -20,7 +20,6 @@ func usage() {
 func main() {
 	if len(os.Args) < 2 {
 		usage()
-		os.Exit(1)
 	}
 
 	var err error
@@ -32,10 +31,10 @@ func main() {
 		err = releaseSubcmd(os.Args[2:])
 	default:
 		usage()
-		os.Exit(1)
 	}
 
 	if err != nil {
 		fmt.Println(err)
+		os.Exit(1)
 	}
 }

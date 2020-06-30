@@ -8,22 +8,31 @@ import (
 	"testing"
 )
 
+var tmpDir string
+
 func TestMain(m *testing.M) {
-	// testdata already has .changes-static, but make another .changes directory so that we can easily cleanup after
+	var err error
+
+	// testdata already has .changes, but make a temporary .changes directory so that we can easily cleanup after
 	// tests have run.
-	err := os.MkdirAll("testdata/.changes/next-release", 0777)
+	tmpDir, err = ioutil.TempDir("", "changes-test")
 	if err != nil {
 		panic(err)
 	}
 
-	err = os.Mkdir("testdata/.changes/releases", 0777)
+	err = os.MkdirAll(filepath.Join(tmpDir, ".changes", "next-release"), 0755)
+	if err != nil {
+		panic(err)
+	}
+
+	err = os.Mkdir(filepath.Join(tmpDir, ".changes", "releases"), 0755)
 	if err != nil {
 		panic(err)
 	}
 
 	code := m.Run()
 
-	err = os.RemoveAll("testdata/.changes")
+	err = os.RemoveAll(tmpDir)
 	if err != nil {
 		panic(err)
 	}
@@ -32,7 +41,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestLoadMetadata(t *testing.T) {
-	m, err := LoadMetadata("testdata/.changes-static")
+	m, err := LoadMetadata("testdata/.changes")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -280,7 +289,7 @@ func TestMetadata_ClearChanges(t *testing.T) {
 		t.Error(err)
 	}
 
-	files, err := ioutil.ReadDir("testdata/.changes/next-release")
+	files, err := ioutil.ReadDir(filepath.Join(tmpDir, ".changes", "next-release"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -315,11 +324,13 @@ func TestGetChangesPath(t *testing.T) {
 func getMetadata(t *testing.T) *Metadata {
 	t.Helper()
 
-	m, _ := LoadMetadata("testdata/.changes")
+	m, _ := LoadMetadata(filepath.Join(tmpDir, ".changes"))
 	return m
 }
 
 func getMockChanges(t *testing.T) []*Change {
+	t.Helper()
+
 	return []*Change{
 		&Change{
 			ID:          "test-feature-1",

@@ -29,7 +29,7 @@ type changeTemplate struct {
 
 // Change represents a change to a single Go module.
 type Change struct {
-	ID            string // ID is a unique identifier for this Change
+	ID            string // ID is a unique identifier for this Change.
 	SchemaVersion string // SchemaVersion is the version of the library's types used to create this Change.
 	Module        string // Module is a shortened Go module path for the module affected by this Change. Module is the path from the root of the repository to the module.
 	Type          string // Type indicates what category of Change was made. Type may be either "feature" or "bugfix".
