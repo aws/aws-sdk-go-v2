@@ -646,7 +646,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     private void writeMiddlewarePayloadBindingDeserializerDelegator(
             GoWriter writer,
             Shape shape,
-            Boolean isOperationShape
+            boolean isOperationShape
     ) {
         String deserFuncName = isOperationShape ?
                 ProtocolGenerator.getDocumentOutputDeserializerFunctionName(shape, getProtocolName()) :
@@ -665,7 +665,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             GoWriter writer,
             Shape shape,
             String operand,
-            Boolean isOperationShape
+            boolean isOperationShape
     ) {
         String deserFuncName = isOperationShape ?
                 ProtocolGenerator.getDocumentOutputDeserializerFunctionName(shape, getProtocolName()) :
