@@ -607,9 +607,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             MemberShape memberShape = model.getKnowledge(HttpBindingIndex.class)
                     .getResponseBindings(operation, HttpBinding.Location.PAYLOAD).stream()
                     .findFirst()
-                    .orElseThrow(() -> {
-                        throw new CodegenException("Expected payload binding member");
-                    })
+                    .orElseThrow(() -> new CodegenException("Expected payload binding member"))
                     .getMember();
 
             Shape payloadShape = model.expectShape(memberShape.getTarget());
