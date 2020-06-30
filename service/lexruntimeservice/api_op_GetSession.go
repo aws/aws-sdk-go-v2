@@ -21,9 +21,10 @@ func (c *Client) GetSession(ctx context.Context, params *GetSessionInput, optFns
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	v4.AddHTTPSignerMiddlewares(stack, options)
+	v4.AddHTTPSignerMiddleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSession(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpGetSessionMiddlewares(stack)
 

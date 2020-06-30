@@ -21,8 +21,8 @@ func (c *Client) IgnoreQueryParamsInResponse(ctx context.Context, params *Ignore
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opIgnoreQueryParamsInResponse(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpIgnoreQueryParamsInResponseMiddlewares(stack)
 

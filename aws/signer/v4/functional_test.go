@@ -12,7 +12,8 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	v4Internal "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4"
+	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
@@ -77,7 +78,7 @@ func TestPresignHandler(t *testing.T) {
 	if e, a := "300", urlQ.Get("X-Amz-Expires"); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if a := urlQ.Get("X-Amz-Content-Sha256"); len(a) != 0 {
+	if a := urlQ.Get(v4Internal.ContentSHAKey); len(a) != 0 {
 		t.Errorf("expect no content sha256 got %v", a)
 	}
 
@@ -137,7 +138,7 @@ func TestPresignRequest(t *testing.T) {
 	if e, a := "300", urlQ.Get("X-Amz-Expires"); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if a := urlQ.Get("X-Amz-Content-Sha256"); len(a) != 0 {
+	if a := urlQ.Get(v4Internal.ContentSHAKey); len(a) != 0 {
 		t.Errorf("expect no content sha256 got %v", a)
 	}
 
