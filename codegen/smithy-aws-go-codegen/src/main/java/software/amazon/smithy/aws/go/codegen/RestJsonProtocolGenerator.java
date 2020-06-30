@@ -1081,9 +1081,14 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             Shape shape,
             Predicate<MemberShape> filterMemberShapes
     ) {
+        Symbol symbol = symbolProvider.toSymbol(shape);
         writeJsonTokenizerStartStub(writer, shape);
-        writer.openBlock("if *v == nil {", "}", () -> {
-            writer.write("*v = &$T{}", symbolProvider.toSymbol(shape));
+        writer.write("var sv $P", symbol);
+        writer.openBlock("if *v == nil {", "", () -> {
+            writer.write("sv = &$T{}", symbol);
+            writer.openBlock("} else {", "}", () -> {
+                writer.write("sv = *v");
+            });
         });
         writer.openBlock("for decoder.More() {", "}",
                 () -> {
@@ -1099,7 +1104,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                             writer.openBlock("case $S:", "", getSerializedMemberName(memberShape), () -> {
                                 String operand = generateDocumentBindingMemberShapeDeserializer(writer, model,
                                         symbolProvider, memberShape);
-                                writer.write(String.format("(*v).%s = %s", memberName, operand));
+                                writer.write(String.format("sv.%s = %s", memberName, operand));
                             });
                         }
 
@@ -1112,6 +1117,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                     });
                 });
         writeJsonTokenizerEndStub(writer, shape);
+        writer.write("*v = sv");
     }
 
 
@@ -1123,18 +1129,24 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             Shape shape,
             Predicate<MemberShape> filterMemberShapes
     ) {
+        Symbol symbol = symbolProvider.toSymbol(shape);
         writeJsonTokenizerStartStub(writer, shape);
-        writer.openBlock("if *vp == nil {", "}", () -> {
-            writer.write("*vp = $P{}", symbolProvider.toSymbol(shape));
+        writer.write("var cv $P", symbol);
+        writer.openBlock("if *vp == nil {", "", () -> {
+            writer.write("cv = $P{}", symbol);
+            writer.openBlock("} else {", "}", () -> {
+                writer.write("cv = *vp");
+            });
         });
         writer.openBlock("for decoder.More() {", "}", () -> {
             MemberShape memberShape = shape.members().iterator().next();
             String operand = generateDocumentBindingMemberShapeDeserializer(writer, model, symbolProvider, memberShape);
 
-            writer.write(String.format("*vp = append(*vp, %s)", operand));
+            writer.write(String.format("cv = append(cv, %s)", operand));
             writer.write("");
         });
         writeJsonTokenizerEndStub(writer, shape);
+        writer.write("*vp = cv");
     }
 
     // Generates deserializers for map shapes.
@@ -1146,8 +1158,13 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             Predicate<MemberShape> filterMemberShapes
     ) {
         writeJsonTokenizerStartStub(writer, shape);
-        writer.openBlock("if *vp == nil {", "}", () -> {
-            writer.write("*vp = $P{}", symbolProvider.toSymbol(shape));
+        Symbol symbol = symbolProvider.toSymbol(shape);
+        writer.write("var mv $P", symbol);
+        writer.openBlock("if *vp == nil {", "", () -> {
+            writer.write("mv = $P{}", symbol);
+            writer.openBlock("} else {", "}", () -> {
+                writer.write("mv = *vp");
+            });
         });
         writer.openBlock("for decoder.More() {", "}", () -> {
             MemberShape memberShape = shape.asMapShape().get().getValue();
@@ -1160,11 +1177,12 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writer.write("");
 
             String operand = generateDocumentBindingMemberShapeDeserializer(writer, model, symbolProvider, memberShape);
-            writer.write(String.format("(*vp)[key] = %s", operand));
+            writer.write(String.format("mv[key] = %s", operand));
             writer.write("");
         });
 
         writeJsonTokenizerEndStub(writer, shape);
+        writer.write("*vp = mv");
     }
 
     // generateDocumentBindingMemberShapeDeserializer delegates to the appropriate
