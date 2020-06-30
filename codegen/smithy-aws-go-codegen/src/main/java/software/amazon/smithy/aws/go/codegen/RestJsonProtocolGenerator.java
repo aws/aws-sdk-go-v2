@@ -1572,10 +1572,11 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.write("if err == io.EOF { return nil }");
         writer.write("if err != nil { return err }");
         writer.write("if startToken == nil { return nil }");
-        writer.openBlock("if t, ok := startToken.(json.Delim); !ok || t.String() != $S {", "}", startToken, () -> {
-            writer.addUseImports(SmithyGoDependency.FMT);
-            writer.write("return fmt.Errorf($S)", String.format("expect `%s` as start token", startToken));
-        });
+        writer.openBlock("if t, ok := startToken.(json.Delim); !ok || t != $L {", "}",
+                String.format("'%s'", startToken), () -> {
+                    writer.addUseImports(SmithyGoDependency.FMT);
+                    writer.write("return fmt.Errorf($S)", String.format("expect `%s` as start token", startToken));
+                });
         writer.write("");
     }
 
@@ -1585,9 +1586,10 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.write("");
         writer.write("endToken, err := decoder.Token()");
         writer.write("if err != nil { return err }");
-        writer.openBlock("if t, ok := endToken.(json.Delim); !ok || t.String() != $S {", "}", endToken, () -> {
-            writer.write("return fmt.Errorf($S)", String.format("expect `%s` as end token", endToken));
-        });
+        writer.openBlock("if t, ok := endToken.(json.Delim); !ok || t != $L {", "}", String.format("'%s'", endToken),
+                () -> {
+                    writer.write("return fmt.Errorf($S)", String.format("expect `%s` as end token", endToken));
+                });
     }
 
 
