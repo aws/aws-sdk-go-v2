@@ -1,13 +1,20 @@
 package software.amazon.smithy.aws.go.codegen;
 
 import java.util.List;
+import java.util.Map;
 import software.amazon.smithy.aws.traits.auth.SigV4Trait;
 import software.amazon.smithy.aws.traits.auth.UnsignedPayloadTrait;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.knowledge.ServiceIndex;
+import software.amazon.smithy.model.shapes.OperationShape;
+import software.amazon.smithy.model.shapes.ServiceShape;
+import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.traits.AuthTrait;
+import software.amazon.smithy.model.traits.Trait;
 import software.amazon.smithy.utils.ListUtils;
 
 public class AssembleMiddlewareStack implements GoIntegration {
@@ -49,10 +56,9 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 // Add unsigned payload middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .operationPredicate((model, service, operation) -> {
-                            if (service.hasTrait(SigV4Trait.class) && operation.hasTrait(UnsignedPayloadTrait.class)) {
-                                return true;
-                            }
-                            return false;
+                            boolean hasSigV4Auth = hasSigV4AuthScheme(model, service, operation);
+
+                            return hasSigV4Auth && operation.hasTrait(UnsignedPayloadTrait.class);
                         })
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
@@ -64,10 +70,9 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 // Add signed payload middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .operationPredicate((model, service, operation) -> {
-                            if (service.hasTrait(SigV4Trait.class) && !operation.hasTrait(UnsignedPayloadTrait.class)) {
-                                return true;
-                            }
-                            return false;
+                            boolean hasSigV4Auth = hasSigV4AuthScheme(model, service, operation);
+
+                            return hasSigV4Auth && !operation.hasTrait(UnsignedPayloadTrait.class);
                         })
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
@@ -79,10 +84,9 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 // Add content-sha256 payload header middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .operationPredicate((model, service, operation) -> {
-                            if (service.hasTrait(SigV4Trait.class) && operation.hasTrait(UnsignedPayloadTrait.class)) {
-                                return true;
-                            }
-                            return false;
+                            boolean hasSigV4Auth = hasSigV4AuthScheme(model, service, operation);
+
+                            return hasSigV4Auth && operation.hasTrait(UnsignedPayloadTrait.class);
                         })
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
@@ -103,14 +107,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
 
                 // Add HTTPSigner middleware to operation stack
                 RuntimeClientPlugin.builder()
-                        .operationPredicate((model, service, operation) -> {
-                            if (service.hasTrait(SigV4Trait.class)
-                                    && (operation.hasTrait(SigV4Trait.class) || !operation.hasTrait(AuthTrait.class))
-                            ) {
-                                return true;
-                            }
-                            return false;
-                        })
+                        .operationPredicate(this::hasSigV4AuthScheme)
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
                                         "AddHTTPSignerMiddleware", AwsGoDependency.AWS_SIGNER_V4)
@@ -128,5 +125,23 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                 .build())
                         .build()
         );
+    }
+
+    /**
+     * Returns if the SigV4Trait is a auth scheme for the service and operation.
+     *
+     * @param model model definition
+     * @param service service shape for the API
+     * @param operation operation shape
+     * @return if SigV4Trait is an auth scheme for the operation and service.
+     */
+    private boolean hasSigV4AuthScheme(Model model, ServiceShape service, OperationShape operation) {
+        ServiceIndex serviceIndex = model.getKnowledge(ServiceIndex.class);
+        Map<ShapeId, Trait> auth = serviceIndex.getEffectiveAuthSchemes(
+                service.getId(),
+                operation.getId()
+        );
+
+        return auth.containsKey(SigV4Trait.ID);
     }
 }
