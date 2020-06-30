@@ -120,7 +120,7 @@ func TestClient_EmptyInputAndEmptyOutput_awsRestjson1Deserialize(t *testing.T) {
 		"RestJsonEmptyInputAndEmptyOutput": {
 			StatusCode:    200,
 			BodyMediaType: "application/json",
-			Body:          []byte(``),
+			Body:          []byte(`{}`),
 			ExpectResult:  &EmptyInputAndEmptyOutputOutput{},
 		},
 	}
