@@ -24,6 +24,7 @@ func (c *Client) DeleteSession(ctx context.Context, params *DeleteSessionInput, 
 	retry.AddRetryMiddlewares(stack, options)
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addOpDeleteSessionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSession(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpDeleteSessionMiddlewares(stack)
 
