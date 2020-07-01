@@ -35,6 +35,7 @@ import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.HttpBindingProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestResponseGenerator;
+import software.amazon.smithy.go.codegen.integration.IdempotencyTokenMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolTestGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestRequestGenerator;
@@ -225,6 +226,20 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                         })
                         .build()
         ));
+
+        // TODO can this check be replaced with a lookup into the runtime plugins?
+        if (IdempotencyTokenMiddlewareGenerator.hasOperationsWithIdempotencyToken(context.getModel(), context.getService())) {
+            configValues.add(
+                    HttpProtocolUnitTestGenerator.ConfigValue.builder()
+                            .name(IdempotencyTokenMiddlewareGenerator.IDEMPOTENCY_CONFIG_NAME)
+                            .value(writer -> {
+                                writer.addUseImports(SmithyGoDependency.SMITHY_RAND);
+                                writer.addUseImports(SmithyGoDependency.SMITHY_TESTING);
+                                writer.write("smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),");
+                            })
+                    .build()
+            );
+        }
 
         new HttpProtocolTestGenerator(context,
                 (HttpProtocolUnitTestRequestGenerator.Builder) new HttpProtocolUnitTestRequestGenerator

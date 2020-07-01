@@ -6,6 +6,7 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyrand "github.com/awslabs/smithy-go/rand"
 	smithytesting "github.com/awslabs/smithy-go/testing"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
@@ -73,8 +74,9 @@ func TestClient_EmptyInputAndEmptyOutput_awsRestjson1Serialize(t *testing.T) {
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
-				HTTPClient: aws.NewBuildableHTTPClient(),
-				Region:     "us-west-2",
+				HTTPClient:               aws.NewBuildableHTTPClient(),
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+				Region:                   "us-west-2",
 			})
 			result, err := client.EmptyInputAndEmptyOutput(context.Background(), c.Params)
 			if err != nil {
@@ -159,8 +161,9 @@ func TestClient_EmptyInputAndEmptyOutput_awsRestjson1Deserialize(t *testing.T) {
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
-				HTTPClient: aws.NewBuildableHTTPClient(),
-				Region:     "us-west-2",
+				HTTPClient:               aws.NewBuildableHTTPClient(),
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+				Region:                   "us-west-2",
 			})
 			var params EmptyInputAndEmptyOutputInput
 			result, err := client.EmptyInputAndEmptyOutput(context.Background(), &params)

@@ -46,6 +46,10 @@ type Options struct {
 	// When nil the API client will use a default signer.
 	HTTPSigner v4.HTTPSigner
 
+	// Provides idempotency tokens values that will be automatically populated into
+	// idempotent API operations.
+	IdempotencyTokenProvider IdempotencyTokenProvider
+
 	// An integer value representing the logging level.
 	LogLevel aws.LogLevel
 
@@ -70,6 +74,10 @@ func (o Options) GetEndpointResolver() aws.EndpointResolver {
 
 func (o Options) GetHTTPSigner() v4.HTTPSigner {
 	return o.HTTPSigner
+}
+
+func (o Options) GetIdempotencyTokenProvider() IdempotencyTokenProvider {
+	return o.IdempotencyTokenProvider
 }
 
 func (o Options) GetLogLevel() aws.LogLevel {
@@ -117,4 +125,9 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		fn(&opts)
 	}
 	return New(opts)
+}
+
+// IdempotencyTokenProvider interface for providing idempotency token
+type IdempotencyTokenProvider interface {
+	GetIdempotencyToken() (string, error)
 }
