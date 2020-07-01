@@ -7,6 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/ptr"
+	smithyrand "github.com/awslabs/smithy-go/rand"
 	smithytesting "github.com/awslabs/smithy-go/testing"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
@@ -80,8 +81,9 @@ func TestClient_HttpPayloadTraitsWithMediaType_awsRestjson1Serialize(t *testing.
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
-				HTTPClient: aws.NewBuildableHTTPClient(),
-				Region:     "us-west-2",
+				HTTPClient:               aws.NewBuildableHTTPClient(),
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+				Region:                   "us-west-2",
 			})
 			result, err := client.HttpPayloadTraitsWithMediaType(context.Background(), c.Params)
 			if err != nil {
@@ -172,8 +174,9 @@ func TestClient_HttpPayloadTraitsWithMediaType_awsRestjson1Deserialize(t *testin
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
-				HTTPClient: aws.NewBuildableHTTPClient(),
-				Region:     "us-west-2",
+				HTTPClient:               aws.NewBuildableHTTPClient(),
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+				Region:                   "us-west-2",
 			})
 			var params HttpPayloadTraitsWithMediaTypeInput
 			result, err := client.HttpPayloadTraitsWithMediaType(context.Background(), &params)
