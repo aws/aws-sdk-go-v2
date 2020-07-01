@@ -356,7 +356,7 @@ type uploader struct {
 // multipart upload.
 func (u *uploader) upload() (*UploadOutput, error) {
 	if err := u.init(); err != nil {
-		return nil, awserr.New("ReadRequestBody", "unable to initillize upload", err)
+		return nil, awserr.New("ReadRequestBody", "unable to initialize upload", err)
 	}
 	defer u.cfg.partPool.Close()
 
