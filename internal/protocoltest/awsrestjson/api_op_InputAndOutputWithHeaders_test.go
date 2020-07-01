@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
 	"github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/ptr"
+	smithyrand "github.com/awslabs/smithy-go/rand"
 	smithytesting "github.com/awslabs/smithy-go/testing"
 	smithytime "github.com/awslabs/smithy-go/time"
 	"github.com/google/go-cmp/cmp"
@@ -186,8 +187,9 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Serialize(t *testing.T) {
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
-				HTTPClient: aws.NewBuildableHTTPClient(),
-				Region:     "us-west-2",
+				HTTPClient:               aws.NewBuildableHTTPClient(),
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+				Region:                   "us-west-2",
 			})
 			result, err := client.InputAndOutputWithHeaders(context.Background(), c.Params)
 			if err != nil {
@@ -365,8 +367,9 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Deserialize(t *testing.T) 
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
-				HTTPClient: aws.NewBuildableHTTPClient(),
-				Region:     "us-west-2",
+				HTTPClient:               aws.NewBuildableHTTPClient(),
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+				Region:                   "us-west-2",
 			})
 			var params InputAndOutputWithHeadersInput
 			result, err := client.InputAndOutputWithHeaders(context.Background(), &params)

@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson
 go 1.14
 
 require (
-	github.com/aws/aws-sdk-go-v2 v0.0.0-20200629185603-8a40db2118b1
-	github.com/awslabs/smithy-go v0.0.0-20200626165009-2c11297eadd1
+	github.com/aws/aws-sdk-go-v2 v0.0.0-20200630225515-ddc322369f03
+	github.com/awslabs/smithy-go v0.0.0-20200701175914-fb79af9e65a9
 	github.com/google/go-cmp v0.4.1
 )
