@@ -252,7 +252,8 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
                 });
                 break;
             case EPOCH_SECONDS:
-                handleFloat(shape, "&smithytime.ParseEpochSeconds(f64)");
+                writer.addUseImports(SmithyGoDependency.SMITHY_PTR);
+                handleFloat(shape, "ptr.Time(smithytime.ParseEpochSeconds(f64))");
                 break;
             default:
                 throw new CodegenException(String.format("Unknown timestamp format %s", timestampFormat));
