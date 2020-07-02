@@ -737,23 +737,23 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writer.write("ringBuffer := smithyio.NewRingBuffer(buff)");
             writer.write("");
 
-            writer.write("var errorBody bytes.Buffer");
+            writer.addUseImports(SmithyGoDependency.BYTES);
+            writer.write("var errorBuffer bytes.Buffer");
 
             writer.addUseImports(SmithyGoDependency.SMITHY);
             writer.addUseImports(SmithyGoDependency.IO);
-            writer.write("_, err := io.Copy(&errorBody, response.Body)");
+            writer.write("defer response.Body.Close()");
+            writer.write("_, err := io.Copy(&errorBuffer, response.Body)");
             writer.openBlock("if err != nil {", "}", () -> {
                 writer.write(String.format("return out, metadata, &smithy.DeserializationError{Err: %s}",
                         "fmt.Errorf(\"failed to copy error response body, %w\", err)"));
             });
+            writer.write("");
 
-            writer.write("");
-            writer.write("body := io.TeeReader(response.Body, ringBuffer)");
-            writer.write("defer response.Body.Close()");
-            writer.write("");
+            writer.write("errorBody := bytes.NewReader(errorBuffer.Bytes())");
 
             writer.addUseImports(SmithyGoDependency.JSON);
-            writer.write("decoder := json.NewDecoder(body)");
+            writer.write("decoder := json.NewDecoder(io.TeeReader(errorBody, ringBuffer))");
             writer.write("decoder.UseNumber()");
             writer.write("");
 
@@ -765,7 +765,6 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writer.openBlock("if len(errorType) == 0 {", "}", () -> {
                 writer.write("errorType, errorMessage, err = restjson.GetErrorInfo(decoder)");
                 writer.openBlock("if err != nil {", "}", () -> {
-                    writer.addUseImports(SmithyGoDependency.BYTES);
                     writer.addUseImports(SmithyGoDependency.SMITHY);
                     writer.write("var snapshot bytes.Buffer");
                     writer.write("io.Copy(&snapshot, ringBuffer)");
@@ -791,6 +790,13 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 });
             });
 
+            writer.write("");
+            writer.write("// reset the ring buffer");
+            writer.write("ringBuffer.Reset()");
+
+            writer.addUseImports(SmithyGoDependency.IO);
+            writer.write("// seek start of error body");
+            writer.write("errorBody.Seek(0, io.SeekStart)");
             writer.write("");
 
             // generate middleware for modeled error shapes
@@ -825,9 +831,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             GoWriter writer, Model model, SymbolProvider symbolProvider,
             Collection<ShapeId> ErrorShapeIds
     ) {
-
-        writer.write("body = io.TeeReader(&errorBody, ringBuffer)");
-        writer.write("decoder = json.NewDecoder(&errorBody)");
+        writer.write("decoder = json.NewDecoder(io.TeeReader(errorBody, ringBuffer))");
         writer.write("decoder.UseNumber()");
         writer.write("");
 
