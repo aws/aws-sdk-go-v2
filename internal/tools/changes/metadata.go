@@ -11,7 +11,7 @@ import (
 )
 
 // SchemaVersion defines the current JSON schema version for persistent data types (Change, Release, ...)
-const SchemaVersion = "1.0"
+const SchemaVersion = 1
 
 // Metadata is a representation of the change metadata stored in a .changes directory.
 type Metadata struct {
@@ -219,7 +219,7 @@ func loadChanges(changesDir string) ([]*Change, error) {
 			}
 
 			if change.SchemaVersion != SchemaVersion {
-				return nil, fmt.Errorf("change with id %s has Schema Version %s, but verison %s was expeced",
+				return nil, fmt.Errorf("change with id %s has Schema Version %d, but verison %d was expeced",
 					change.ID, change.SchemaVersion, SchemaVersion)
 			}
 

@@ -3,22 +3,56 @@ package changes
 import (
 	"bytes"
 	"strconv"
+	"strings"
 	"testing"
 )
+
+func TestParseChangeType(t *testing.T) {
+	var testCases = map[string]struct {
+		input    string
+		wantType ChangeType
+		wantErr  string
+	}{
+		"feature":       {"feature", FeatureChangeType, ""},
+		"feature-case":  {"FEATURE", FeatureChangeType, ""},
+		"bugfix":        {"bugfix", BugFixChangeType, ""},
+		"bugfix-case":   {"BugFix", BugFixChangeType, ""},
+		"invalid":       {"not-a-type", "", "unknown change type: not-a-type"},
+		"invalid-empty": {"", "", "unknown change type:"},
+	}
+
+	for name, tt := range testCases {
+		t.Run(name, func(t *testing.T) {
+			c, err := ParseChangeType(tt.input)
+			if tt.wantErr != "" {
+				if err == nil {
+					t.Fatal("expected non-nil err, got nil")
+				}
+
+				if !strings.Contains(err.Error(), tt.wantErr) {
+					t.Errorf("expected err to contain %s, got %s", tt.wantErr, err.Error())
+				}
+			} else {
+				if c != tt.wantType {
+					t.Errorf("expected type %s, got %s", tt.wantType, c)
+				}
+			}
+		})
+	}
+}
 
 func TestNewChanges(t *testing.T) {
 	var changeTests = []struct {
 		modules     []string
-		changeType  string
+		changeType  ChangeType
 		description string
 		wantErr     bool
 	}{
-		{[]string{"a"}, FeatureType, "this is a description", false},
-		{[]string{"a", "b"}, FeatureType, "this is a description", false},
-		{[]string{"a", "b"}, BugFixType, "this is a description", false},
-		{[]string{"a"}, "invalid-type", "this is a description", true},
-		{[]string{"a", "b"}, BugFixType, "", true},
-		{[]string{}, FeatureType, "this is a description", true},
+		{[]string{"a"}, FeatureChangeType, "this is a description", false},
+		{[]string{"a", "b"}, FeatureChangeType, "this is a description", false},
+		{[]string{"a", "b"}, BugFixChangeType, "this is a description", false},
+		{[]string{"a", "b"}, BugFixChangeType, "", true},
+		{[]string{}, FeatureChangeType, "this is a description", true},
 	}
 
 	for i, tt := range changeTests {
@@ -60,7 +94,7 @@ description: test description
 	template, err := ChangeToTemplate(&Change{
 		ID:          "test-feature-1",
 		Module:      "test",
-		Type:        FeatureType,
+		Type:        FeatureChangeType,
 		Description: "test description",
 	})
 	if err != nil {
@@ -94,7 +128,7 @@ description: test description
 
 	assertChangeEqual(t, &Change{
 		Module:      "test",
-		Type:        FeatureType,
+		Type:        FeatureChangeType,
 		Description: "test description",
 	}, change)
 }

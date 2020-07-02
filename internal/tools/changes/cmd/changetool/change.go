@@ -9,7 +9,7 @@ import (
 
 var changeParams = struct {
 	module      string
-	changeType  string
+	changeType  changes.ChangeType
 	description string
 	similar     bool
 }{}
@@ -20,7 +20,7 @@ var lsFlags *flag.FlagSet
 func init() {
 	addFlags = flag.NewFlagSet("add", flag.ExitOnError)
 	addFlags.StringVar(&changeParams.module, "module", "", "creates a change for the specified module")
-	addFlags.StringVar(&changeParams.changeType, "type", "", "sets the change's type")
+	addFlags.Var(&changeParams.changeType, "type", "sets the change's type")
 	addFlags.StringVar(&changeParams.description, "description", "", "sets the change's description")
 
 	lsFlags = flag.NewFlagSet("ls", flag.ExitOnError)
@@ -68,7 +68,7 @@ func changeSubcmd(args []string) error {
 	return nil
 }
 
-func addCmd(metadata *changes.Metadata, module, changeType, description string) error {
+func addCmd(metadata *changes.Metadata, module string, changeType changes.ChangeType, description string) error {
 	if module == "" {
 		currentModule, err := changes.GetCurrentModule()
 		if err != nil {

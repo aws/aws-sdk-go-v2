@@ -1,6 +1,6 @@
 {
   "ID": "test-feature-2",
-  "SchemaVersion": "1.0",
+  "SchemaVersion": 1,
   "Module": "other",
   "Type": "bugfix",
   "Description": "test description"

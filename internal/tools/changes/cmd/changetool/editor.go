@@ -11,10 +11,14 @@ import (
 func editTemplate(template []byte) ([]byte, error) {
 	editor := os.Getenv("VISUAL")
 	if editor == "" {
-		editor = "vim"
+		editor = os.Getenv("EDITOR")
+
+		if editor == "" {
+			editor = "vim"
+		}
 	}
 
-	f, err := ioutil.TempFile(".", "tmp-template-entry")
+	f, err := ioutil.TempFile("", "change-*.yml")
 	if err != nil {
 		return nil, err
 	}

@@ -63,7 +63,7 @@ func TestMetadata_AddChange(t *testing.T) {
 	newChange := &Change{
 		ID:          changeID,
 		Module:      "test/module",
-		Type:        FeatureType,
+		Type:        FeatureChangeType,
 		Description: "test description",
 	}
 
@@ -94,7 +94,7 @@ func TestMetadata_AddChange(t *testing.T) {
 	assertChangeEqual(t, newChange, c)
 
 	if c.SchemaVersion != SchemaVersion {
-		t.Errorf("Expected SchemaVersion %s, got %s", SchemaVersion, c.SchemaVersion)
+		t.Errorf("Expected SchemaVersion %d, got %d", SchemaVersion, c.SchemaVersion)
 	}
 
 	err = m.RemoveChangeById("test-change-123456")
@@ -152,7 +152,7 @@ func TestMetadata_CreateRelease(t *testing.T) {
 	}
 
 	if release.SchemaVersion != SchemaVersion {
-		t.Errorf("Expected SchmeVersion to be %s, got %s", SchemaVersion, release.SchemaVersion)
+		t.Errorf("Expected SchmeVersion to be %d, got %d", SchemaVersion, release.SchemaVersion)
 	}
 
 	if len(release.Changes) != len(m.Changes) {
@@ -232,9 +232,9 @@ func TestMetadata_UpdateChangeFromTemplate(t *testing.T) {
 			// add a test change to update
 			change := &Change{
 				ID:            "test-change-1",
-				SchemaVersion: "1.0",
+				SchemaVersion: 1,
 				Module:        "test/module",
-				Type:          FeatureType,
+				Type:          FeatureChangeType,
 				Description:   "test change",
 			}
 
@@ -335,25 +335,25 @@ func getMockChanges(t *testing.T) []*Change {
 		&Change{
 			ID:          "test-feature-1",
 			Module:      "test",
-			Type:        FeatureType,
+			Type:        FeatureChangeType,
 			Description: "test description",
 		},
 		&Change{
 			ID:          "test-bugfix-2",
 			Module:      "test",
-			Type:        BugFixType,
+			Type:        BugFixChangeType,
 			Description: "test description",
 		},
 		&Change{
 			ID:          "test-feature-3",
 			Module:      "test",
-			Type:        FeatureType,
+			Type:        FeatureChangeType,
 			Description: "test description",
 		},
 		&Change{
 			ID:          "other-feature-4",
 			Module:      "other",
-			Type:        FeatureType,
+			Type:        FeatureChangeType,
 			Description: "test description",
 		},
 	}
