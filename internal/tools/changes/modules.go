@@ -6,6 +6,8 @@ import (
 	"strings"
 )
 
+const sdkRepoPath = "github.com/aws/aws-sdk-go-v2/"
+
 // GetCurrentModule returns a shortened module path (from the root of the repository to the module, not a full import
 // path) for the Go module containing the current directory.
 func GetCurrentModule() (string, error) {
@@ -32,5 +34,5 @@ func getModFile(path string) (*modfile.File, error) {
 }
 
 func shortenModPath(modulePath string) string {
-	return strings.TrimPrefix(modulePath, "github.com/aws/aws-sdk-go-v2/")
+	return strings.TrimPrefix(modulePath, sdkRepoPath)
 }

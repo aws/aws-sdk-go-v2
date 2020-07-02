@@ -1,6 +1,7 @@
 package changes
 
 import (
+	"github.com/google/go-cmp/cmp"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -20,12 +21,12 @@ func TestMain(m *testing.M) {
 		panic(err)
 	}
 
-	err = os.MkdirAll(filepath.Join(tmpDir, ".changes", "next-release"), 0755)
+	err = os.MkdirAll(filepath.Join(tmpDir, metadataDir, pendingDir), 0755)
 	if err != nil {
 		panic(err)
 	}
 
-	err = os.Mkdir(filepath.Join(tmpDir, ".changes", "releases"), 0755)
+	err = os.Mkdir(filepath.Join(tmpDir, metadataDir, releaseDir), 0755)
 	if err != nil {
 		panic(err)
 	}
@@ -41,7 +42,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestLoadMetadata(t *testing.T) {
-	m, err := LoadMetadata("testdata/.changes")
+	m, err := LoadMetadata(filepath.Join("testdata", metadataDir))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -50,7 +51,7 @@ func TestLoadMetadata(t *testing.T) {
 		t.Errorf("expected Metadata to have 1 change, got %d", len(m.Changes))
 	}
 
-	_, err = LoadMetadata("testdata/.changes-invalid")
+	_, err = LoadMetadata(filepath.Join("testdata", ".changes-invalid"))
 	if err == nil {
 		t.Fatalf("expected non-nil err, got 'nil'")
 	}
@@ -60,11 +61,12 @@ func TestMetadata_AddChange(t *testing.T) {
 	const changeID = "test-change-123456"
 	m := getMetadata(t)
 
-	newChange := &Change{
-		ID:          changeID,
-		Module:      "test/module",
-		Type:        FeatureChangeType,
-		Description: "test description",
+	newChange := Change{
+		ID:            changeID,
+		SchemaVersion: SchemaVersion,
+		Module:        "test/module",
+		Type:          FeatureChangeType,
+		Description:   "test description",
 	}
 
 	err := m.AddChange(newChange)
@@ -91,7 +93,9 @@ func TestMetadata_AddChange(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	assertChangeEqual(t, newChange, c)
+	if diff := cmp.Diff(c, newChange); diff != "" {
+		t.Errorf("expect changes to match:\n%v", diff)
+	}
 
 	if c.SchemaVersion != SchemaVersion {
 		t.Errorf("Expected SchemaVersion %d, got %d", SchemaVersion, c.SchemaVersion)
@@ -106,11 +110,11 @@ func TestMetadata_AddChange(t *testing.T) {
 func TestMetadata_AddChanges(t *testing.T) {
 	m := getMetadata(t)
 
-	changes := []*Change{
-		&Change{
+	changes := []Change{
+		{
 			ID: "test-change-1",
 		},
-		&Change{
+		{
 			ID: "test-change-2",
 		},
 	}
@@ -188,7 +192,9 @@ func TestMetadata_GetChanges(t *testing.T) {
 		t.Fatalf("expected 1 Change, got %d", len(changes))
 	}
 
-	assertChangeEqual(t, m.Changes[3], changes[0])
+	if diff := cmp.Diff(m.Changes[3], changes[0]); diff != "" {
+		t.Errorf("expect changes to match:\n%v", diff)
+	}
 }
 
 func TestMetadata_AddChangesFromTemplate(t *testing.T) {
@@ -198,7 +204,7 @@ func TestMetadata_AddChangesFromTemplate(t *testing.T) {
 	for id, tt := range testCases {
 		t.Run(id, func(t *testing.T) {
 			changes, err := m.AddChangesFromTemplate(tt.template)
-			if len(changes) == 0 {
+			if !tt.expectChanges {
 				if err == nil {
 					t.Errorf("expected non-nil err, got nil")
 				}
@@ -210,8 +216,8 @@ func TestMetadata_AddChangesFromTemplate(t *testing.T) {
 				}
 
 				for _, c := range tt.changes {
-					assertChangesHas(t, changes, c)
-					assertChangesHas(t, m2.Changes, c)
+					assertHasChangeLike(t, changes, c)
+					assertHasChangeLike(t, m2.Changes, c)
 				}
 
 				err = m.ClearChanges()
@@ -230,7 +236,7 @@ func TestMetadata_UpdateChangeFromTemplate(t *testing.T) {
 		t.Run(id, func(t *testing.T) {
 			m := getMetadata(t)
 			// add a test change to update
-			change := &Change{
+			change := Change{
 				ID:            "test-change-1",
 				SchemaVersion: 1,
 				Module:        "test/module",
@@ -243,29 +249,26 @@ func TestMetadata_UpdateChangeFromTemplate(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			newChange, err := m.UpdateChangeFromTemplate(change, tt.template)
-			if len(tt.changes) != 1 {
-				// this is an invalid template
+			newChanges, err := m.UpdateChangeFromTemplate(change, tt.template)
+			if !tt.expectChanges {
 				if err == nil {
 					t.Errorf("expected non-nil err, got nil")
 				}
 			} else {
 				m2 := getMetadata(t)
 
-				// this is a valid template
 				if err != nil {
 					t.Errorf("expected nil err, got %v", err)
 				}
 
-				if _, err := m.GetChangeById("test-change-1"); err == nil {
-					t.Errorf("old change was not removed")
+				if len(m2.Changes) != len(tt.changes) {
+					t.Errorf("expected %d changes, got %d", len(tt.changes), len(m2.Changes))
 				}
 
-				if _, err := m2.GetChangeById("test-change-1"); err == nil {
-					t.Errorf("old change was not removed")
+				for _, c := range tt.changes {
+					assertHasChangeLike(t, newChanges, c)
+					assertHasChangeLike(t, m2.Changes, c)
 				}
-
-				assertChangeEqual(t, tt.changes[0], newChange)
 			}
 
 			err = m.ClearChanges()
@@ -289,7 +292,7 @@ func TestMetadata_ClearChanges(t *testing.T) {
 		t.Error(err)
 	}
 
-	files, err := ioutil.ReadDir(filepath.Join(tmpDir, ".changes", "next-release"))
+	files, err := ioutil.ReadDir(filepath.Join(tmpDir, metadataDir, pendingDir))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -305,7 +308,7 @@ func TestGetChangesPath(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	err = os.Chdir("testdata/.changes/next-release")
+	err = os.Chdir(filepath.Join("testdata", metadataDir, pendingDir))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -316,41 +319,41 @@ func TestGetChangesPath(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if !strings.HasSuffix(path, "testdata/.changes") {
-		t.Errorf("expected suffix of path to be testdata/.changes, but path is %s", path)
+	if !strings.HasSuffix(path, filepath.Join("testdata", metadataDir)) {
+		t.Errorf("expected suffix of path to be %s, but path is %s", filepath.Join("testdata", metadataDir), path)
 	}
 }
 
 func getMetadata(t *testing.T) *Metadata {
 	t.Helper()
 
-	m, _ := LoadMetadata(filepath.Join(tmpDir, ".changes"))
+	m, _ := LoadMetadata(filepath.Join(tmpDir, metadataDir))
 	return m
 }
 
-func getMockChanges(t *testing.T) []*Change {
+func getMockChanges(t *testing.T) []Change {
 	t.Helper()
 
-	return []*Change{
-		&Change{
+	return []Change{
+		{
 			ID:          "test-feature-1",
 			Module:      "test",
 			Type:        FeatureChangeType,
 			Description: "test description",
 		},
-		&Change{
+		{
 			ID:          "test-bugfix-2",
 			Module:      "test",
 			Type:        BugFixChangeType,
 			Description: "test description",
 		},
-		&Change{
+		{
 			ID:          "test-feature-3",
 			Module:      "test",
 			Type:        FeatureChangeType,
 			Description: "test description",
 		},
-		&Change{
+		{
 			ID:          "other-feature-4",
 			Module:      "other",
 			Type:        FeatureChangeType,
@@ -360,22 +363,25 @@ func getMockChanges(t *testing.T) []*Change {
 }
 
 type templateCase struct {
-	template []byte
-	changes  []*Change
+	template      []byte
+	changes       []Change
+	expectChanges bool
 }
 
 func getTestTemplateCases(t *testing.T) map[string]templateCase {
 	t.Helper()
+	const templateDir = "templates"
+	const changesDir = "changes"
 
 	templates := map[string]templateCase{}
 
-	files, err := ioutil.ReadDir("testdata/templates")
+	files, err := ioutil.ReadDir(filepath.Join("testdata", templateDir))
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	for _, f := range files {
-		template, err := ioutil.ReadFile(filepath.Join("testdata", "templates", f.Name()))
+		template, err := ioutil.ReadFile(filepath.Join("testdata", templateDir, f.Name()))
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -385,16 +391,17 @@ func getTestTemplateCases(t *testing.T) map[string]templateCase {
 		}
 	}
 
-	changes, err := loadChanges("testdata/changes")
+	changes, err := loadChanges(filepath.Join("testdata", changesDir))
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	for _, c := range changes {
 		if tempCase, ok := templates[c.ID]; ok {
+			id := c.ID
 			tempCase.changes = append(tempCase.changes, c)
-			templates[c.ID] = tempCase
-			c.ID = "" // we don't want to compare newly created IDs to this ID since they'll definitely differ
+			tempCase.expectChanges = true
+			templates[id] = tempCase
 		}
 	}
 

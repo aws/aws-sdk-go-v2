@@ -13,16 +13,20 @@ import (
 // SchemaVersion defines the current JSON schema version for persistent data types (Change, Release, ...)
 const SchemaVersion = 1
 
+const metadataDir = ".changes"
+const pendingDir = "next-release"
+const releaseDir = "releases"
+
 // Metadata is a representation of the change metadata stored in a .changes directory.
 type Metadata struct {
 	ChangePath string     // ChangePath is the relative path from the current directory to .changes
-	Changes    []*Change  // Changes holds all pending change metadata in the .changes/next-release directory
+	Changes    []Change   // Changes holds all pending change metadata in the .changes/next-release directory
 	Releases   []*Release // Releases contains all releases in the .changes/releases directory
 }
 
 // LoadMetadata loads the .changes directory at the given path.
 func LoadMetadata(path string) (*Metadata, error) {
-	changes, err := loadChanges(filepath.Join(path, "next-release"))
+	changes, err := loadChanges(filepath.Join(path, pendingDir))
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +38,7 @@ func LoadMetadata(path string) (*Metadata, error) {
 }
 
 // AddChange adds the given Change to the Metadata's Changes and saves the Change to the next-release directory.
-func (m *Metadata) AddChange(c *Change) error {
+func (m *Metadata) AddChange(c Change) error {
 	err := m.SaveChange(c)
 	if err != nil {
 		return err
@@ -46,7 +50,7 @@ func (m *Metadata) AddChange(c *Change) error {
 
 // AddChangesFromTemplate parses the given YAML template, adding the resulting Changes to Metadata's Changes and saving
 // the Changes to the next-release directory. AddChangesFromTemplate returns the created Changes.
-func (m *Metadata) AddChangesFromTemplate(template []byte) ([]*Change, error) {
+func (m *Metadata) AddChangesFromTemplate(template []byte) ([]Change, error) {
 	changes, err := TemplateToChanges(template)
 	if err != nil {
 		return nil, err
@@ -56,7 +60,7 @@ func (m *Metadata) AddChangesFromTemplate(template []byte) ([]*Change, error) {
 }
 
 // AddChanges adds the given Changes to Metadata's Changes and saves the Changes to the next-release directory.
-func (m *Metadata) AddChanges(changes []*Change) error {
+func (m *Metadata) AddChanges(changes []Change) error {
 	for _, c := range changes {
 		err := m.AddChange(c)
 		if err != nil {
@@ -68,28 +72,28 @@ func (m *Metadata) AddChanges(changes []*Change) error {
 }
 
 // GetChangeById returns the pending Change with the given id.
-func (m *Metadata) GetChangeById(id string) (*Change, error) {
+func (m *Metadata) GetChangeById(id string) (Change, error) {
 	_, c, err := m.getChange(id)
 	return c, err
 }
 
-func (m *Metadata) getChange(id string) (int, *Change, error) {
+func (m *Metadata) getChange(id string) (int, Change, error) {
 	for i, c := range m.Changes {
 		if c.ID == id {
 			return i, c, nil
 		}
 	}
 
-	return 0, nil, fmt.Errorf("couldn't find change with id %s", id)
+	return 0, Change{}, fmt.Errorf("couldn't find change with id %s", id)
 }
 
 // ListChanges returns all pending Changes with a module matching the given module. If module is empty, returns all Changes.
-func (m *Metadata) GetChanges(module string) []*Change {
+func (m *Metadata) GetChanges(module string) []Change {
 	if module == "" {
 		return m.Changes
 	}
 
-	var changes []*Change
+	var changes []Change
 
 	for _, c := range m.Changes {
 		if module == c.Module {
@@ -100,21 +104,19 @@ func (m *Metadata) GetChanges(module string) []*Change {
 }
 
 // SaveChange saves the given change to the .changes/next-release directory.
-func (m *Metadata) SaveChange(c *Change) error {
+func (m *Metadata) SaveChange(c Change) error {
 	c.SchemaVersion = SchemaVersion
-	return writeJSON(c, m.ChangePath, "next-release", c.ID)
+	return writeJSON(c, m.ChangePath, pendingDir, c.ID)
 }
 
 // UpdateChangeFromTemplate removes oldChange and creates a new Change from the given template.
-func (m *Metadata) UpdateChangeFromTemplate(oldChange *Change, template []byte) (*Change, error) {
+func (m *Metadata) UpdateChangeFromTemplate(oldChange Change, template []byte) ([]Change, error) {
 	newChanges, err := TemplateToChanges(template)
 	if err != nil {
 		return nil, fmt.Errorf("failed to modify change: %v\n", err)
-	} else if len(newChanges) != 1 {
-		return nil, fmt.Errorf("failed to modify change: modules cannot be added to a change during modification")
 	}
 
-	err = m.SaveChange(newChanges[0])
+	err = m.AddChanges(newChanges)
 	if err != nil {
 		return nil, fmt.Errorf("failed to modify change: %v\n", err)
 	}
@@ -124,7 +126,7 @@ func (m *Metadata) UpdateChangeFromTemplate(oldChange *Change, template []byte) 
 		return nil, fmt.Errorf("failed to remove old change with id %s: %v\n", oldChange.ID, err)
 	}
 
-	return newChanges[0], nil
+	return newChanges, nil
 }
 
 // RemoveChangeById removes the Change with the specified id from the Metadata's Changes and also removes the Change
@@ -159,7 +161,7 @@ func (m *Metadata) ClearChanges() error {
 		}
 	}
 
-	m.Changes = []*Change{}
+	m.Changes = []Change{}
 	return nil
 }
 
@@ -175,7 +177,7 @@ func (m *Metadata) CreateRelease(id string, bumps map[string]VersionBump, dryRun
 	}
 
 	if !dryRun {
-		if err := writeJSON(release, m.ChangePath, "releases", id); err != nil {
+		if err := writeJSON(release, m.ChangePath, releaseDir, id); err != nil {
 			return nil, err
 		}
 
@@ -187,23 +189,23 @@ func (m *Metadata) CreateRelease(id string, bumps map[string]VersionBump, dryRun
 
 // deleteChangeFile deletes the file .changes/next-release/{id}.json.
 func (m *Metadata) deleteChangeFile(id string) error {
-	return os.Remove(filepath.Join(m.ChangePath, "next-release", id+".json"))
+	return os.Remove(filepath.Join(m.ChangePath, pendingDir, id+".json"))
 }
 
 // GetChangesPath searches upward from the current directory for a .changes directory, returning a relative path from
 // the current directory to the .changes directory.
 func GetChangesPath() (string, error) {
-	return findFile(".changes", true)
+	return findFile(metadataDir, true)
 }
 
 // loadChanges unmarshals and returns all Changes in the given directory.
-func loadChanges(changesDir string) ([]*Change, error) {
+func loadChanges(changesDir string) ([]Change, error) {
 	files, err := ioutil.ReadDir(changesDir)
 	if err != nil {
 		return nil, err
 	}
 
-	var changes []*Change
+	var changes []Change
 
 	for _, f := range files {
 		if !f.IsDir() {
@@ -212,8 +214,8 @@ func loadChanges(changesDir string) ([]*Change, error) {
 				return nil, err
 			}
 
-			change := &Change{}
-			err = json.Unmarshal(changeData, change)
+			change := Change{}
+			err = json.Unmarshal(changeData, &change)
 			if err != nil {
 				return nil, err
 			}

@@ -7,34 +7,34 @@ import (
 
 func TestRelease_AffectedModules(t *testing.T) {
 	var testCases = []struct {
-		releaseChanges  []*Change
+		releaseChanges  []Change
 		expectedModules []string
 	}{
 		{
-			[]*Change{
-				&Change{
+			[]Change{
+				{
 					Module: "test",
 				},
 			},
 			[]string{"test"},
 		},
 		{
-			[]*Change{
-				&Change{
+			[]Change{
+				{
 					Module: "test",
 				},
-				&Change{
+				{
 					Module: "test",
 				},
 			},
 			[]string{"test"},
 		},
 		{
-			[]*Change{
-				&Change{
+			[]Change{
+				{
 					Module: "test",
 				},
-				&Change{
+				{
 					Module: "other",
 				},
 			},

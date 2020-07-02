@@ -13,7 +13,7 @@ type Repository struct {
 
 // NewRepository loads the repository at the given path.
 func NewRepository(path string) (*Repository, error) {
-	metadata, err := LoadMetadata(filepath.Join(path, ".changes"))
+	metadata, err := LoadMetadata(filepath.Join(path, metadataDir))
 	if err != nil {
 		return nil, err
 	}

@@ -78,7 +78,7 @@ func addCmd(metadata *changes.Metadata, module string, changeType changes.Change
 		module = currentModule
 	}
 
-	var newChanges []*changes.Change
+	var newChanges []changes.Change
 	var err error
 
 	if changeType != "" && description != "" {
@@ -92,7 +92,7 @@ func addCmd(metadata *changes.Metadata, module string, changeType changes.Change
 			return fmt.Errorf("failed to create change: %v", err)
 		}
 	} else {
-		template, err := changes.ChangeToTemplate(&changes.Change{
+		template, err := changes.ChangeToTemplate(changes.Change{
 			Module: module,
 		})
 		if err != nil {
@@ -146,12 +146,15 @@ func modifyCmd(metadata *changes.Metadata, id string) error {
 		return fmt.Errorf("failed to modify change: %v", err)
 	}
 
-	newChange, err := metadata.UpdateChangeFromTemplate(change, filledTemplate)
+	newChanges, err := metadata.UpdateChangeFromTemplate(change, filledTemplate)
 	if err != nil {
 		return fmt.Errorf("couldn't modify change: %v", err)
 	}
 
-	fmt.Printf("successfully modified %s, new id is %s\n", change.ID, newChange.ID)
+	fmt.Printf("successfully modified %s, new change(s):\n", change.ID)
+	for _, c := range newChanges {
+		fmt.Printf("\t%s\n", c.ID)
+	}
 	return nil
 }
 
@@ -172,12 +175,12 @@ func rmCmd(metadata *changes.Metadata, id string) error {
 
 // selectChange will return the change identified by the given id, which can be either the index of one of metadata's
 // Changes or the Change's ID.
-func selectChange(metadata *changes.Metadata, id string) (*changes.Change, error) {
+func selectChange(metadata *changes.Metadata, id string) (changes.Change, error) {
 	// try selecting by index first
 	index, err := strconv.Atoi(id)
 	if err == nil {
 		if index < 0 || index >= len(metadata.Changes) {
-			return nil, fmt.Errorf("failed to get change with index %d: index out of range\n", index)
+			return changes.Change{}, fmt.Errorf("failed to get change with index %d: index out of range\n", index)
 		}
 		return metadata.Changes[index], nil
 	}

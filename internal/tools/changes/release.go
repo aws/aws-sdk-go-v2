@@ -17,7 +17,7 @@ type Release struct {
 	ID            string
 	SchemaVersion int
 	VersionBumps  map[string]VersionBump
-	Changes       []*Change
+	Changes       []Change
 }
 
 // RenderChangelogForModule returns a new markdown section of a module's CHANGELOG based on the Changes in the Release.

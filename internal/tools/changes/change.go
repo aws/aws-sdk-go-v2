@@ -105,19 +105,20 @@ type Change struct {
 
 // NewChanges returns a Change slice containing a Change with the given type and description for each of the specified
 // modules.
-func NewChanges(modules []string, changeType ChangeType, description string) ([]*Change, error) {
+func NewChanges(modules []string, changeType ChangeType, description string) ([]Change, error) {
 	if len(modules) == 0 || changeType == "" || description == "" {
 		return nil, errors.New("missing module, type, or description")
 	}
 
-	changes := make([]*Change, 0, len(modules))
+	changes := make([]Change, 0, len(modules))
 
 	for _, module := range modules {
-		changes = append(changes, &Change{
-			ID:          generateId(module, changeType),
-			Module:      module,
-			Type:        changeType,
-			Description: description,
+		changes = append(changes, Change{
+			ID:            generateId(module, changeType),
+			SchemaVersion: SchemaVersion,
+			Module:        module,
+			Type:          changeType,
+			Description:   description,
 		})
 	}
 
@@ -126,7 +127,7 @@ func NewChanges(modules []string, changeType ChangeType, description string) ([]
 
 // TemplateToChanges parses the provided filledTemplate into the provided Change. If Change has no ID, TemplateToChange
 // will set the ID.
-func TemplateToChanges(filledTemplate []byte) ([]*Change, error) {
+func TemplateToChanges(filledTemplate []byte) ([]Change, error) {
 	var template changeTemplate
 
 	err := yaml.UnmarshalStrict(filledTemplate, &template)
@@ -138,7 +139,7 @@ func TemplateToChanges(filledTemplate []byte) ([]*Change, error) {
 }
 
 // ChangeToTemplate returns a Change template populated with the given Change's data.
-func ChangeToTemplate(change *Change) ([]byte, error) {
+func ChangeToTemplate(change Change) ([]byte, error) {
 	templateBytes, err := yaml.Marshal(changeTemplate{
 		Modules:     []string{change.Module},
 		Type:        change.Type,
