@@ -58,11 +58,9 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
     }
 
     @Override
-    protected void serializeInputDocument(
-            Model model, SymbolProvider symbolProvider, OperationShape operation,
-            GoStackStepMiddlewareGenerator generator, GoWriter writer
-    ) {
-        StructureShape input = ProtocolUtils.expectInput(model, operation);
+    protected void serializeInputDocument(GenerationContext context, OperationShape operation) {
+        GoWriter writer = context.getWriter();
+        StructureShape input = ProtocolUtils.expectInput(context.getModel(), operation);
         String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(input, getProtocolName());
 
         writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
