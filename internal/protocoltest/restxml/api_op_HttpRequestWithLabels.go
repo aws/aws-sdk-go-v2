@@ -23,6 +23,7 @@ func (c *Client) HttpRequestWithLabels(ctx context.Context, params *HttpRequestW
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addOpHttpRequestWithLabelsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithLabels(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {

@@ -20,6 +20,7 @@ func (c *Client) HttpRequestWithGreedyLabelInPath(ctx context.Context, params *H
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addOpHttpRequestWithGreedyLabelInPathValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithGreedyLabelInPath(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {

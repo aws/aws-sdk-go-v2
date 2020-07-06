@@ -88,6 +88,22 @@ func (m *validateOpHttpRequestWithLabels) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpConstantQueryStringValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpConstantQueryString{}, middleware.After)
+}
+
+func addOpHttpRequestWithGreedyLabelInPathValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpHttpRequestWithGreedyLabelInPath{}, middleware.After)
+}
+
+func addOpHttpRequestWithLabelsAndTimestampFormatValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpHttpRequestWithLabelsAndTimestampFormat{}, middleware.After)
+}
+
+func addOpHttpRequestWithLabelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpHttpRequestWithLabels{}, middleware.After)
+}
+
 func validateOpConstantQueryStringInput(v *ConstantQueryStringInput) error {
 	if v == nil {
 		return nil

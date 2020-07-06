@@ -23,6 +23,7 @@ func (c *Client) HttpRequestWithLabelsAndTimestampFormat(ctx context.Context, pa
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addOpHttpRequestWithLabelsAndTimestampFormatValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithLabelsAndTimestampFormat(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpHttpRequestWithLabelsAndTimestampFormatMiddlewares(stack)
 

@@ -24,6 +24,7 @@ func (c *Client) ConstantQueryString(ctx context.Context, params *ConstantQueryS
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addOpConstantQueryStringValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opConstantQueryString(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {

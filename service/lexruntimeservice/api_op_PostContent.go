@@ -83,6 +83,7 @@ func (c *Client) PostContent(ctx context.Context, params *PostContentInput, optF
 	retry.AddRetryMiddlewares(stack, options)
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addOpPostContentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPostContent(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpPostContentMiddlewares(stack)
 

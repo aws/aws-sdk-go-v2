@@ -29,6 +29,7 @@ func (c *Client) PutSession(ctx context.Context, params *PutSessionInput, optFns
 	retry.AddRetryMiddlewares(stack, options)
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addOpPutSessionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutSession(options.Region), middleware.Before)
 	addawsRestjson1_serdeOpPutSessionMiddlewares(stack)
 
