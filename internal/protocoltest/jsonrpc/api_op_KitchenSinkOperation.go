@@ -26,6 +26,7 @@ func (c *Client) KitchenSinkOperation(ctx context.Context, params *KitchenSinkOp
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opKitchenSinkOperation(options.Region), middleware.Before)
+	addawsAwsjson11_serdeOpKitchenSinkOperationMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -105,6 +106,11 @@ type KitchenSinkOperationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsAwsjson11_serdeOpKitchenSinkOperationMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsAwsjson11_serializeOpKitchenSinkOperation{}, middleware.After)
+	stack.Deserialize.Add(&awsAwsjson11_deserializeOpKitchenSinkOperation{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opKitchenSinkOperation(region string) awsmiddleware.RegisterServiceMetadata {
