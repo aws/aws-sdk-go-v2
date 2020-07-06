@@ -22,6 +22,7 @@ func (c *Client) XmlNamespaces(ctx context.Context, params *XmlNamespacesInput, 
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlNamespaces(options.Region), middleware.Before)
+	addawsRestxml_serdeOpXmlNamespacesMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -51,6 +52,11 @@ type XmlNamespacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpXmlNamespacesMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpXmlNamespaces{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpXmlNamespaces{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opXmlNamespaces(region string) awsmiddleware.RegisterServiceMetadata {

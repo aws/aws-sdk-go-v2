@@ -24,6 +24,7 @@ func (c *Client) ConstantAndVariableQueryString(ctx context.Context, params *Con
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opConstantAndVariableQueryString(options.Region), middleware.Before)
+	addawsRestxml_serdeOpConstantAndVariableQueryStringMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -52,6 +53,11 @@ type ConstantAndVariableQueryStringInput struct {
 type ConstantAndVariableQueryStringOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpConstantAndVariableQueryStringMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpConstantAndVariableQueryString{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpConstantAndVariableQueryString{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opConstantAndVariableQueryString(region string) awsmiddleware.RegisterServiceMetadata {

@@ -22,6 +22,7 @@ func (c *Client) XmlBlobs(ctx context.Context, params *XmlBlobsInput, optFns ...
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlBlobs(options.Region), middleware.Before)
+	addawsRestxml_serdeOpXmlBlobsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -51,6 +52,11 @@ type XmlBlobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpXmlBlobsMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpXmlBlobs{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpXmlBlobs{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opXmlBlobs(region string) awsmiddleware.RegisterServiceMetadata {

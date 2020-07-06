@@ -23,6 +23,7 @@ func (c *Client) HttpPayloadWithXmlNamespace(ctx context.Context, params *HttpPa
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadWithXmlNamespace(options.Region), middleware.Before)
+	addawsRestxml_serdeOpHttpPayloadWithXmlNamespaceMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -52,6 +53,11 @@ type HttpPayloadWithXmlNamespaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpHttpPayloadWithXmlNamespaceMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpHttpPayloadWithXmlNamespace{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpHttpPayloadWithXmlNamespace{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opHttpPayloadWithXmlNamespace(region string) awsmiddleware.RegisterServiceMetadata {

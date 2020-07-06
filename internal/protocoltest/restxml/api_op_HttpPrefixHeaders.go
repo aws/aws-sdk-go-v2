@@ -22,6 +22,7 @@ func (c *Client) HttpPrefixHeaders(ctx context.Context, params *HttpPrefixHeader
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPrefixHeaders(options.Region), middleware.Before)
+	addawsRestxml_serdeOpHttpPrefixHeadersMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -53,6 +54,11 @@ type HttpPrefixHeadersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpHttpPrefixHeadersMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpHttpPrefixHeaders{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpHttpPrefixHeaders{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opHttpPrefixHeaders(region string) awsmiddleware.RegisterServiceMetadata {

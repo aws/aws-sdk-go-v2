@@ -25,6 +25,7 @@ func (c *Client) HttpRequestWithLabels(ctx context.Context, params *HttpRequestW
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpHttpRequestWithLabelsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithLabels(options.Region), middleware.Before)
+	addawsRestxml_serdeOpHttpRequestWithLabelsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -62,6 +63,11 @@ type HttpRequestWithLabelsInput struct {
 type HttpRequestWithLabelsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpHttpRequestWithLabelsMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpHttpRequestWithLabels{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpHttpRequestWithLabels{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opHttpRequestWithLabels(region string) awsmiddleware.RegisterServiceMetadata {
