@@ -25,6 +25,7 @@ import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestGenerat
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestRequestGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestResponseErrorGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestResponseGenerator;
+import software.amazon.smithy.go.codegen.integration.IdempotencyTokenMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.MemberShape;
@@ -49,13 +50,6 @@ final class AwsProtocolUtils {
                         .name(AddAwsConfigFields.REGION_CONFIG_NAME)
                         .value(writer -> writer.write("$S,", "us-west-2"))
                         .build(),
-                HttpProtocolUnitTestGenerator.ConfigValue.builder()
-                        .name(AddAwsConfigFields.IDEMPOTENCY_TOKEN_PROVIDER)
-                        .value(writer -> {
-                            writer.addUseImports(SmithyGoDependency.SMITHY_RAND);
-                            writer.addUseImports(SmithyGoDependency.SMITHY_TESTING);
-                            writer.write("smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),");
-                        }).build(),
                 HttpProtocolUnitTestGenerator.ConfigValue.builder()
                         .name(AddAwsConfigFields.HTTP_CLIENT_CONFIG_NAME)
                         .value(writer -> {
@@ -90,6 +84,20 @@ final class AwsProtocolUtils {
                         })
                         .build()
         ));
+
+        // TODO can this check be replaced with a lookup into the runtime plugins?
+        if (IdempotencyTokenMiddlewareGenerator.hasOperationsWithIdempotencyToken(context.getModel(), context.getService())) {
+            configValues.add(
+                    HttpProtocolUnitTestGenerator.ConfigValue.builder()
+                            .name(IdempotencyTokenMiddlewareGenerator.IDEMPOTENCY_CONFIG_NAME)
+                            .value(writer -> {
+                                writer.addUseImports(SmithyGoDependency.SMITHY_RAND);
+                                writer.addUseImports(SmithyGoDependency.SMITHY_TESTING);
+                                writer.write("smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),");
+                            })
+                            .build()
+            );
+        }
 
         new HttpProtocolTestGenerator(context,
                 (HttpProtocolUnitTestRequestGenerator.Builder) new HttpProtocolUnitTestRequestGenerator
