@@ -21,6 +21,11 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     }
 
     @Override
+    public void generateProtocolTests(GenerationContext context) {
+        AwsProtocolUtils.generateHttpProtocolTests(context);
+    }
+
+    @Override
     protected TimestampFormatTrait.Format getDocumentTimestampFormat() {
         return null;
     }
@@ -43,6 +48,20 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
             GoStackStepMiddlewareGenerator generator, GoWriter writer
     ) {
 
+    }
+
+    @Override
+    protected void writeMiddlewareErrorDeserializer(
+            GoWriter writer,
+            Model model,
+            SymbolProvider symbolProvider,
+            OperationShape operationShape,
+            GoStackStepMiddlewareGenerator generator
+    ) {
+        writer.openBlock("if response.StatusCode < 200 || response.StatusCode >= 300 {", "}", () -> {
+            writer.write("return out, metadata, " +
+                    "&smithy.DeserializationError{Err: fmt.Errorf(\"TODO: Implement error deserializer delegators\")}");
+        });
     }
 
     @Override
