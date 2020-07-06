@@ -25,6 +25,7 @@ func (c *Client) InputAndOutputWithHeaders(ctx context.Context, params *InputAnd
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInputAndOutputWithHeaders(options.Region), middleware.Before)
+	addawsRestxml_serdeOpInputAndOutputWithHeadersMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -84,6 +85,11 @@ type InputAndOutputWithHeadersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpInputAndOutputWithHeadersMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpInputAndOutputWithHeaders{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpInputAndOutputWithHeaders{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opInputAndOutputWithHeaders(region string) awsmiddleware.RegisterServiceMetadata {

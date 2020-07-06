@@ -22,6 +22,7 @@ func (c *Client) FlattenedXmlMapWithXmlName(ctx context.Context, params *Flatten
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opFlattenedXmlMapWithXmlName(options.Region), middleware.Before)
+	addawsRestxml_serdeOpFlattenedXmlMapWithXmlNameMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -51,6 +52,11 @@ type FlattenedXmlMapWithXmlNameOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpFlattenedXmlMapWithXmlNameMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpFlattenedXmlMapWithXmlName{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpFlattenedXmlMapWithXmlName{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opFlattenedXmlMapWithXmlName(region string) awsmiddleware.RegisterServiceMetadata {

@@ -23,6 +23,7 @@ func (c *Client) XmlAttributesOnPayload(ctx context.Context, params *XmlAttribut
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlAttributesOnPayload(options.Region), middleware.Before)
+	addawsRestxml_serdeOpXmlAttributesOnPayloadMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -52,6 +53,11 @@ type XmlAttributesOnPayloadOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpXmlAttributesOnPayloadMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpXmlAttributesOnPayload{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpXmlAttributesOnPayload{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opXmlAttributesOnPayload(region string) awsmiddleware.RegisterServiceMetadata {

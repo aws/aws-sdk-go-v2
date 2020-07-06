@@ -25,6 +25,7 @@ func (c *Client) EmptyInputAndEmptyOutput(ctx context.Context, params *EmptyInpu
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEmptyInputAndEmptyOutput(options.Region), middleware.Before)
+	addawsRestxml_serdeOpEmptyInputAndEmptyOutputMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -51,6 +52,11 @@ type EmptyInputAndEmptyOutputInput struct {
 type EmptyInputAndEmptyOutputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpEmptyInputAndEmptyOutputMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpEmptyInputAndEmptyOutput{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpEmptyInputAndEmptyOutput{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opEmptyInputAndEmptyOutput(region string) awsmiddleware.RegisterServiceMetadata {

@@ -23,6 +23,7 @@ func (c *Client) XmlMaps(ctx context.Context, params *XmlMapsInput, optFns ...fu
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlMaps(options.Region), middleware.Before)
+	addawsRestxml_serdeOpXmlMapsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -52,6 +53,11 @@ type XmlMapsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpXmlMapsMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpXmlMaps{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpXmlMaps{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opXmlMaps(region string) awsmiddleware.RegisterServiceMetadata {

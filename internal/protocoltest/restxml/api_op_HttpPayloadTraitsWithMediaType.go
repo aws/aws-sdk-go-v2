@@ -23,6 +23,7 @@ func (c *Client) HttpPayloadTraitsWithMediaType(ctx context.Context, params *Htt
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadTraitsWithMediaType(options.Region), middleware.Before)
+	addawsRestxml_serdeOpHttpPayloadTraitsWithMediaTypeMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -54,6 +55,11 @@ type HttpPayloadTraitsWithMediaTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpHttpPayloadTraitsWithMediaTypeMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpHttpPayloadTraitsWithMediaType{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpHttpPayloadTraitsWithMediaType{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opHttpPayloadTraitsWithMediaType(region string) awsmiddleware.RegisterServiceMetadata {

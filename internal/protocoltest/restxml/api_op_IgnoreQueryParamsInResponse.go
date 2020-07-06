@@ -24,6 +24,7 @@ func (c *Client) IgnoreQueryParamsInResponse(ctx context.Context, params *Ignore
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opIgnoreQueryParamsInResponse(options.Region), middleware.Before)
+	addawsRestxml_serdeOpIgnoreQueryParamsInResponseMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -52,6 +53,11 @@ type IgnoreQueryParamsInResponseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpIgnoreQueryParamsInResponseMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpIgnoreQueryParamsInResponse{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpIgnoreQueryParamsInResponse{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opIgnoreQueryParamsInResponse(region string) awsmiddleware.RegisterServiceMetadata {

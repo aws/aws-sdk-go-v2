@@ -24,6 +24,7 @@ func (c *Client) AllQueryStringTypes(ctx context.Context, params *AllQueryString
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAllQueryStringTypes(options.Region), middleware.Before)
+	addawsRestxml_serdeOpAllQueryStringTypesMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -68,6 +69,11 @@ type AllQueryStringTypesInput struct {
 type AllQueryStringTypesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpAllQueryStringTypesMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpAllQueryStringTypes{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpAllQueryStringTypes{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opAllQueryStringTypes(region string) awsmiddleware.RegisterServiceMetadata {

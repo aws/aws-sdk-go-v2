@@ -24,6 +24,7 @@ func (c *Client) QueryIdempotencyTokenAutoFill(ctx context.Context, params *Quer
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addIdempotencyToken_opQueryIdempotencyTokenAutoFillMiddleware(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opQueryIdempotencyTokenAutoFill(options.Region), middleware.Before)
+	addawsRestxml_serdeOpQueryIdempotencyTokenAutoFillMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -51,6 +52,11 @@ type QueryIdempotencyTokenAutoFillInput struct {
 type QueryIdempotencyTokenAutoFillOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpQueryIdempotencyTokenAutoFillMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpQueryIdempotencyTokenAutoFill{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpQueryIdempotencyTokenAutoFill{}, middleware.After)
 }
 
 type idempotencyToken_initializeOpQueryIdempotencyTokenAutoFill struct {

@@ -34,6 +34,7 @@ func (c *Client) GreetingWithErrors(ctx context.Context, params *GreetingWithErr
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGreetingWithErrors(options.Region), middleware.Before)
+	addawsRestxml_serdeOpGreetingWithErrorsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -62,6 +63,11 @@ type GreetingWithErrorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpGreetingWithErrorsMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpGreetingWithErrors{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpGreetingWithErrors{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opGreetingWithErrors(region string) awsmiddleware.RegisterServiceMetadata {

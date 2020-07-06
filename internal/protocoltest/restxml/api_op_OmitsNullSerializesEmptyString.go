@@ -22,6 +22,7 @@ func (c *Client) OmitsNullSerializesEmptyString(ctx context.Context, params *Omi
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opOmitsNullSerializesEmptyString(options.Region), middleware.Before)
+	addawsRestxml_serdeOpOmitsNullSerializesEmptyStringMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -50,6 +51,11 @@ type OmitsNullSerializesEmptyStringInput struct {
 type OmitsNullSerializesEmptyStringOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpOmitsNullSerializesEmptyStringMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpOmitsNullSerializesEmptyString{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpOmitsNullSerializesEmptyString{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opOmitsNullSerializesEmptyString(region string) awsmiddleware.RegisterServiceMetadata {
