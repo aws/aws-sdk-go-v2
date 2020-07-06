@@ -24,6 +24,7 @@ func (c *Client) EmptyOperation(ctx context.Context, params *EmptyOperationInput
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEmptyOperation(options.Region), middleware.Before)
+	addawsAwsjson11_serdeOpEmptyOperationMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -50,6 +51,11 @@ type EmptyOperationInput struct {
 type EmptyOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsAwsjson11_serdeOpEmptyOperationMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsAwsjson11_serializeOpEmptyOperation{}, middleware.After)
+	stack.Deserialize.Add(&awsAwsjson11_deserializeOpEmptyOperation{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opEmptyOperation(region string) awsmiddleware.RegisterServiceMetadata {
