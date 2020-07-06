@@ -26,6 +26,7 @@ func (c *Client) ConstantQueryString(ctx context.Context, params *ConstantQueryS
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpConstantQueryStringValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opConstantQueryString(options.Region), middleware.Before)
+	addawsRestxml_serdeOpConstantQueryStringMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -53,6 +54,11 @@ type ConstantQueryStringInput struct {
 type ConstantQueryStringOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpConstantQueryStringMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpConstantQueryString{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpConstantQueryString{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opConstantQueryString(region string) awsmiddleware.RegisterServiceMetadata {

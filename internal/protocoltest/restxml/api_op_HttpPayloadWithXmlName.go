@@ -24,6 +24,7 @@ func (c *Client) HttpPayloadWithXmlName(ctx context.Context, params *HttpPayload
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadWithXmlName(options.Region), middleware.Before)
+	addawsRestxml_serdeOpHttpPayloadWithXmlNameMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -53,6 +54,11 @@ type HttpPayloadWithXmlNameOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpHttpPayloadWithXmlNameMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpHttpPayloadWithXmlName{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpHttpPayloadWithXmlName{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opHttpPayloadWithXmlName(region string) awsmiddleware.RegisterServiceMetadata {

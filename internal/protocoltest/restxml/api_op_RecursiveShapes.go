@@ -23,6 +23,7 @@ func (c *Client) RecursiveShapes(ctx context.Context, params *RecursiveShapesInp
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRecursiveShapes(options.Region), middleware.Before)
+	addawsRestxml_serdeOpRecursiveShapesMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -52,6 +53,11 @@ type RecursiveShapesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpRecursiveShapesMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpRecursiveShapes{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpRecursiveShapes{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opRecursiveShapes(region string) awsmiddleware.RegisterServiceMetadata {

@@ -22,6 +22,7 @@ func (c *Client) NullAndEmptyHeadersServer(ctx context.Context, params *NullAndE
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opNullAndEmptyHeadersServer(options.Region), middleware.Before)
+	addawsRestxml_serdeOpNullAndEmptyHeadersServerMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -55,6 +56,11 @@ type NullAndEmptyHeadersServerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpNullAndEmptyHeadersServerMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpNullAndEmptyHeadersServer{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpNullAndEmptyHeadersServer{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opNullAndEmptyHeadersServer(region string) awsmiddleware.RegisterServiceMetadata {

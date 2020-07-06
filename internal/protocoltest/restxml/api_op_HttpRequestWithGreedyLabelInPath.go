@@ -22,6 +22,7 @@ func (c *Client) HttpRequestWithGreedyLabelInPath(ctx context.Context, params *H
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpHttpRequestWithGreedyLabelInPathValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithGreedyLabelInPath(options.Region), middleware.Before)
+	addawsRestxml_serdeOpHttpRequestWithGreedyLabelInPathMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -50,6 +51,11 @@ type HttpRequestWithGreedyLabelInPathInput struct {
 type HttpRequestWithGreedyLabelInPathOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpHttpRequestWithGreedyLabelInPathMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpHttpRequestWithGreedyLabelInPath{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpHttpRequestWithGreedyLabelInPath{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opHttpRequestWithGreedyLabelInPath(region string) awsmiddleware.RegisterServiceMetadata {
