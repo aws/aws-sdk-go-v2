@@ -21,6 +21,7 @@ func (c *Client) SimpleScalarProperties(ctx context.Context, params *SimpleScala
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSimpleScalarProperties(options.Region), middleware.Before)
+	addawsRestxml_serdeOpSimpleScalarPropertiesMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -68,6 +69,11 @@ type SimpleScalarPropertiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpSimpleScalarPropertiesMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpSimpleScalarProperties{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpSimpleScalarProperties{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opSimpleScalarProperties(region string) awsmiddleware.RegisterServiceMetadata {

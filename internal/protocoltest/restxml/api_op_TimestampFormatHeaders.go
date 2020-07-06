@@ -23,6 +23,7 @@ func (c *Client) TimestampFormatHeaders(ctx context.Context, params *TimestampFo
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTimestampFormatHeaders(options.Region), middleware.Before)
+	addawsRestxml_serdeOpTimestampFormatHeadersMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -64,6 +65,11 @@ type TimestampFormatHeadersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpTimestampFormatHeadersMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpTimestampFormatHeaders{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpTimestampFormatHeaders{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opTimestampFormatHeaders(region string) awsmiddleware.RegisterServiceMetadata {

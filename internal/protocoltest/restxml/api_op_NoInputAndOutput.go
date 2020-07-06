@@ -24,6 +24,7 @@ func (c *Client) NoInputAndOutput(ctx context.Context, params *NoInputAndOutputI
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opNoInputAndOutput(options.Region), middleware.Before)
+	addawsRestxml_serdeOpNoInputAndOutputMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -50,6 +51,11 @@ type NoInputAndOutputInput struct {
 type NoInputAndOutputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpNoInputAndOutputMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpNoInputAndOutput{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpNoInputAndOutput{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opNoInputAndOutput(region string) awsmiddleware.RegisterServiceMetadata {

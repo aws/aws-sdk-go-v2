@@ -25,6 +25,7 @@ func (c *Client) HttpRequestWithLabelsAndTimestampFormat(ctx context.Context, pa
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpHttpRequestWithLabelsAndTimestampFormatValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithLabelsAndTimestampFormat(options.Region), middleware.Before)
+	addawsRestxml_serdeOpHttpRequestWithLabelsAndTimestampFormatMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -58,6 +59,11 @@ type HttpRequestWithLabelsAndTimestampFormatInput struct {
 type HttpRequestWithLabelsAndTimestampFormatOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsRestxml_serdeOpHttpRequestWithLabelsAndTimestampFormatMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsRestxml_serializeOpHttpRequestWithLabelsAndTimestampFormat{}, middleware.After)
+	stack.Deserialize.Add(&awsRestxml_deserializeOpHttpRequestWithLabelsAndTimestampFormat{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opHttpRequestWithLabelsAndTimestampFormat(region string) awsmiddleware.RegisterServiceMetadata {
