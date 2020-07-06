@@ -1,5 +1,5 @@
-github.com/awslabs/smithy-go v0.0.0-20200626165807-d2e64072bf43 h1:UNbzZEa8aoCAIwve5rF5TgQ1Xcgb49TKdjyIn/ki6SY=
-github.com/awslabs/smithy-go v0.0.0-20200626165807-d2e64072bf43/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
+github.com/awslabs/smithy-go v0.0.0-20200702221640-b1c2d4088d13 h1:YfjQNH1IJhR1SLM1Mme/7G5i1hHMNsJFBjY9nPsbAcg=
+github.com/awslabs/smithy-go v0.0.0-20200702221640-b1c2d4088d13/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/go-sql-driver/mysql v1.5.0 h1:ozyZYNQW3x3HtqT1jira07DN2PArx2v7/mN66gGcHOs=
