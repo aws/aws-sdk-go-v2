@@ -2,6 +2,7 @@ package changes
 
 import (
 	"encoding/json"
+	"github.com/google/go-cmp/cmp"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -43,8 +44,8 @@ func TestRepository_UpdateChangelog(t *testing.T) {
 					t.Fatal(err)
 				}
 
-				if string(changelog) != tt.changelog {
-					t.Errorf("expected changelog \"%s\", got \"%s\"", tt.changelog, string(changelog))
+				if diff := cmp.Diff(string(changelog), tt.changelog); diff != "" {
+					t.Errorf("expect changelogs to match:\n%v", diff)
 				}
 
 				err = os.Remove(fileName)

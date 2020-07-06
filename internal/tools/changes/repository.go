@@ -39,7 +39,12 @@ func (r *Repository) UpdateChangelog(release *Release, pending bool) error {
 	entry := fmt.Sprintf("# Release %s\n", id)
 
 	for _, module := range release.AffectedModules() {
-		entry += release.RenderChangelogForModule(module, "#")
+		moduleEntry, err := release.RenderChangelogForModule(module, "#")
+		if err != nil {
+			return fmt.Errorf("couldn't update changelog: %v", err)
+		}
+
+		entry += moduleEntry
 	}
 
 	return writeFile([]byte(entry), filepath.Join(r.RootPath, fileName), !pending)

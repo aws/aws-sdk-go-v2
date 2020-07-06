@@ -2,6 +2,7 @@ package changes
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -53,30 +54,30 @@ func fileExists(path string, dir bool) (bool, error) {
 	}
 }
 
+// findFile recursively searches upwards from the current directory to the filesystem root for the specified file.
 func findFile(fileName string, dir bool) (string, error) {
-	path, err := os.Getwd()
+	currPath, err := os.Getwd()
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("failed to find file: %v", err)
 	}
 
-	pathParts := strings.Split(path, string(os.PathSeparator))
-	prefix := ""
-	if strings.HasPrefix(path, string(os.PathSeparator)) {
-		prefix = string(os.PathSeparator)
-	}
+	for {
+		if currPath == string(os.PathSeparator) || filepath.VolumeName(currPath) == currPath {
+			return "", errors.New("failed to find file: reached filesystem root")
+		}
 
-	for i := len(pathParts); i > 0; i-- {
-		path = prefix + filepath.Join(append(pathParts[:i], fileName)...)
-
-		found, err := fileExists(path, dir)
+		targetFilepath := filepath.Join(currPath, fileName)
+		found, err := fileExists(targetFilepath, dir)
 		if err != nil {
-			return "", err
+			return "", fmt.Errorf("failed to find file: %v", err)
 		}
 
 		if found {
-			return path, nil
+			return targetFilepath, nil
 		}
-	}
 
-	return "", fmt.Errorf("couldn't find %s in current or parent directories", fileName)
+		// trimming trailing '/' causes filepath.Split to trim the last directory in currPath
+		currPath = strings.TrimSuffix(currPath, string(os.PathSeparator))
+		currPath, _ = filepath.Split(currPath)
+	}
 }

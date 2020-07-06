@@ -1,0 +1,9 @@
+modules:
+- test
+type: feature
+description: >-
+  testing multiline *rich change* entry
+  with _two lines_ of text.
+
+# type may be one of "feature" or "bugfix".
+# multiple modules may be listed. A change metadata file will be created for each module.
