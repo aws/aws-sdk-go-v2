@@ -85,14 +85,9 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
     }
 
     @Override
-    protected void deserializeOutputDocument(
-            Model model,
-            SymbolProvider symbolProvider,
-            OperationShape operation,
-            GoStackStepMiddlewareGenerator generator,
-            GoWriter writer
-    ) {
-        StructureShape output = ProtocolUtils.expectOutput(model, operation);
+    protected void deserializeOutputDocument(GenerationContext context, OperationShape operation) {
+        GoWriter writer = context.getWriter();
+        StructureShape output = ProtocolUtils.expectOutput(context.getModel(), operation);
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(output, getProtocolName());
         initializeJsonDecoder(writer, "response.Body");
         writer.write("err = $L(&output, decoder)", functionName);
