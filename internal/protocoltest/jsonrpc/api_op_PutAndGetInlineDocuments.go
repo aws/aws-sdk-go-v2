@@ -25,6 +25,7 @@ func (c *Client) PutAndGetInlineDocuments(ctx context.Context, params *PutAndGet
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutAndGetInlineDocuments(options.Region), middleware.Before)
+	addawsAwsjson11_serdeOpPutAndGetInlineDocumentsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -54,6 +55,11 @@ type PutAndGetInlineDocumentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsAwsjson11_serdeOpPutAndGetInlineDocumentsMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsAwsjson11_serializeOpPutAndGetInlineDocuments{}, middleware.After)
+	stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutAndGetInlineDocuments{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opPutAndGetInlineDocuments(region string) awsmiddleware.RegisterServiceMetadata {
