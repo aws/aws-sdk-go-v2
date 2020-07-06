@@ -17,14 +17,11 @@ package software.amazon.smithy.aws.go.codegen;
 
 import java.util.Set;
 import software.amazon.smithy.codegen.core.Symbol;
-import software.amazon.smithy.codegen.core.SymbolProvider;
-import software.amazon.smithy.go.codegen.GoStackStepMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.HttpRpcProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
-import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.StructureShape;
@@ -137,6 +134,7 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
         GoWriter writer = context.getWriter();
         // The error code could be in the headers, even though for this protocol it should be in the body.
         writer.write("code := response.Header.Get(\"X-Amzn-ErrorType\")");
+        writer.write("if len(code) != 0 { errorCode = restjson.SanitizeErrorCode(code) }");
         writer.write("");
 
         initializeJsonDecoder(writer, "errorBody");
