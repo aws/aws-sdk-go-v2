@@ -1,9 +1,11 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/internal/tools/changes"
+	"os"
 	"strconv"
 )
 
@@ -16,21 +18,54 @@ var changeParams = struct {
 
 var addFlags *flag.FlagSet
 var lsFlags *flag.FlagSet
+var modifyFlags *flag.FlagSet
+var rmFlags *flag.FlagSet
+
+func changeUsage() {
+	sets := []*flag.FlagSet{addFlags, lsFlags, modifyFlags, rmFlags}
+
+	for _, f := range sets {
+		f.Usage()
+	}
+}
 
 func init() {
 	addFlags = flag.NewFlagSet("add", flag.ExitOnError)
-	addFlags.StringVar(&changeParams.module, "module", "", "creates a change for the specified module")
+	addFlags.StringVar(&changeParams.module, "module", "", "sets the change's module")
 	addFlags.Var(&changeParams.changeType, "type", "sets the change's type")
 	addFlags.StringVar(&changeParams.description, "description", "", "sets the change's description")
+	addFlags.Usage = func() {
+		fmt.Printf("%s change add [-module=<module>] [-type=<type>] [-description=<description>]\n", os.Args[0])
+		addFlags.PrintDefaults()
+	}
 
 	lsFlags = flag.NewFlagSet("ls", flag.ExitOnError)
 	lsFlags.StringVar(&changeParams.module, "module", "", "filters changes by module")
+	lsFlags.Usage = func() {
+		fmt.Printf("%s change ls [-module=<module>]\n", os.Args[0])
+		lsFlags.PrintDefaults()
+	}
+
+	modifyFlags = flag.NewFlagSet("modify", flag.ExitOnError)
+	modifyFlags.Usage = func() {
+		fmt.Printf("%s change modify <change id>\n  <change id>: the index (as found in the ls subcommand) or the ID of the change to modify\n", os.Args[0])
+		modifyFlags.PrintDefaults()
+	}
+
+	rmFlags = flag.NewFlagSet("rm", flag.ExitOnError)
+	rmFlags.Usage = func() {
+		fmt.Printf("%s change rm <change id>\n  <change id>: the index (as found in the ls subcommand) or the ID of the change to remove\n", os.Args[0])
+		rmFlags.PrintDefaults()
+	}
 }
 
 func changeSubcmd(args []string) error {
 	if len(args) == 0 {
-		usage()
+		changeUsage()
+		return errors.New("invalid usage")
 	}
+
+	subCommand := args[0]
 
 	changesPath, err := changes.GetChangesPath()
 	if err != nil {
@@ -42,30 +77,53 @@ func changeSubcmd(args []string) error {
 		return fmt.Errorf("failed to load .changes directory: %v", err)
 	}
 
-	switch args[0] {
+	switch subCommand {
 	case "add", "new":
-		addFlags.Parse(args[1:])
+		err = addFlags.Parse(args[1:])
+		if err != nil {
+			return err
+		}
+
 		return addCmd(metadata, changeParams.module, changeParams.changeType, changeParams.description)
 	case "ls", "list":
-		lsFlags.Parse(args[1:])
+		err = lsFlags.Parse(args[1:])
+		if err != nil {
+			return err
+		}
+
 		return lsCmd(metadata, changeParams.module)
 	case "modify", "edit":
-		if len(args) < 2 {
-			usage()
+		err = modifyFlags.Parse(args[1:])
+		if err != nil {
+			return err
 		}
 
-		return modifyCmd(metadata, args[1])
+		if len(args) < 2 {
+			changeUsage()
+			return errors.New("invalid usage")
+		}
+
+		id := args[1]
+
+		return modifyCmd(metadata, id)
 	case "rm", "delete":
-		if len(args) < 2 {
-			usage()
+		err = rmFlags.Parse(args[1:])
+		if err != nil {
+			return err
 		}
 
-		return rmCmd(metadata, args[1])
-	default:
-		usage()
-	}
+		if len(args) < 2 {
+			changeUsage()
+			return errors.New("invalid usage")
+		}
 
-	return nil
+		id := args[1]
+
+		return rmCmd(metadata, id)
+	default:
+		changeUsage()
+		return errors.New("invalid usage")
+	}
 }
 
 func addCmd(metadata *changes.Metadata, module string, changeType changes.ChangeType, description string) error {

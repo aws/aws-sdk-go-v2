@@ -1,44 +1,57 @@
 package main
 
 import (
+	"errors"
+	"flag"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/internal/tools/changes"
+	"os"
 )
+
+var updatePendingFlags *flag.FlagSet
+
+func releaseUsage() {
+	var sets = []*flag.FlagSet{updatePendingFlags}
+
+	for _, f := range sets {
+		f.Usage()
+	}
+}
+
+func init() {
+	updatePendingFlags = flag.NewFlagSet("update-pending", flag.ExitOnError)
+	updatePendingFlags.Usage = func() {
+		fmt.Printf("%s release update-pending <repo>\n  <repo>: path to git repository\n", os.Args[0])
+		updatePendingFlags.PrintDefaults()
+	}
+}
 
 func releaseSubcmd(args []string) error {
 	if len(args) < 2 {
-		usage()
+		releaseUsage()
+		return errors.New("invalid usage")
 	}
 
-	repo, err := changes.NewRepository(args[0])
+	subCmd := args[0]
+	repoPath := args[1]
+
+	repo, err := changes.NewRepository(repoPath)
 	if err != nil {
 		return fmt.Errorf("couldn't load repository: %v", err)
 	}
 
-	switch args[1] {
+	switch subCmd {
 	case "update-pending":
-		return updatePendingCmd(repo)
-	case "demo-release":
-		release, err := repo.Metadata.CreateRelease("2020-06-26", map[string]changes.VersionBump{
-			"changes": {
-				From: "v1.0.0",
-				To:   "v1.0.1",
-			},
-			"test": {
-				From: "v1.2.3",
-				To:   "v1.3.0",
-			},
-		}, false)
+		err = updatePendingFlags.Parse(args[1:])
 		if err != nil {
-			panic(err)
+			return err
 		}
 
-		return repo.UpdateChangelog(release, false)
+		return updatePendingCmd(repo)
 	default:
-		usage()
+		releaseUsage()
+		return errors.New("invalid usage")
 	}
-
-	return nil
 }
 
 func updatePendingCmd(repo *changes.Repository) error {

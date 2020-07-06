@@ -13,7 +13,9 @@ const usageText = `USAGE:
   tool release <repo path> update-pending`
 
 func usage() {
-	fmt.Println(usageText)
+	changeUsage()
+	fmt.Println()
+	releaseUsage()
 	os.Exit(1)
 }
 
