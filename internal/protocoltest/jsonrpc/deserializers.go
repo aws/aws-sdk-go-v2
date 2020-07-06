@@ -77,6 +77,9 @@ func awsAwsjson11_deserializeOpErrorEmptyOperation(response *smithyhttp.Response
 	errorMessage := errorCode
 
 	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
 
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
@@ -174,6 +177,9 @@ func awsAwsjson11_deserializeOpErrorGreetingWithErrors(response *smithyhttp.Resp
 	errorMessage := errorCode
 
 	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
 
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
@@ -203,6 +209,9 @@ func awsAwsjson11_deserializeOpErrorGreetingWithErrors(response *smithyhttp.Resp
 	switch errorCode {
 	case "ComplexError":
 		return awsAwsjson11_deserializeErrorComplexError(response, errorBody)
+
+	case "FooError":
+		return awsAwsjson11_deserializeErrorFooError(response, errorBody)
 
 	case "InvalidGreeting":
 		return awsAwsjson11_deserializeErrorInvalidGreeting(response, errorBody)
@@ -277,6 +286,9 @@ func awsAwsjson11_deserializeOpErrorJsonEnums(response *smithyhttp.Response) err
 	errorMessage := errorCode
 
 	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
 
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
@@ -374,6 +386,9 @@ func awsAwsjson11_deserializeOpErrorKitchenSinkOperation(response *smithyhttp.Re
 	errorMessage := errorCode
 
 	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
 
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
@@ -477,6 +492,9 @@ func awsAwsjson11_deserializeOpErrorNullOperation(response *smithyhttp.Response)
 	errorMessage := errorCode
 
 	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
 
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
@@ -574,6 +592,9 @@ func awsAwsjson11_deserializeOpErrorOperationWithOptionalInputOutput(response *s
 	errorMessage := errorCode
 
 	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
 
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
@@ -671,6 +692,9 @@ func awsAwsjson11_deserializeOpErrorPutAndGetInlineDocuments(response *smithyhtt
 	errorMessage := errorCode
 
 	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
 
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
@@ -766,6 +790,30 @@ func awsAwsjson11_deserializeErrorErrorWithoutMembers(response *smithyhttp.Respo
 
 	output := &types.ErrorWithoutMembers{}
 	err := awsAwsjson11_deserializeDocumentErrorWithoutMembers(&output, decoder)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorFooError(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+
+	output := &types.FooError{}
+	err := awsAwsjson11_deserializeDocumentFooError(&output, decoder)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -1139,6 +1187,57 @@ func awsAwsjson11_deserializeDocumentErrorWithoutMembers(v **types.ErrorWithoutM
 	var sv *types.ErrorWithoutMembers
 	if *v == nil {
 		sv = &types.ErrorWithoutMembers{}
+	} else {
+		sv = *v
+	}
+
+	for decoder.More() {
+		t, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		switch t {
+		default:
+			err := restjson.DiscardUnknownField(decoder)
+			if err != nil {
+				return err
+			}
+
+		}
+	}
+	endToken, err := decoder.Token()
+	if err != nil {
+		return err
+	}
+	if t, ok := endToken.(json.Delim); !ok || t != '}' {
+		return fmt.Errorf("expect `}` as end token")
+	}
+
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFooError(v **types.FooError, decoder *json.Decoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	startToken, err := decoder.Token()
+	if err == io.EOF {
+		return nil
+	}
+	if err != nil {
+		return err
+	}
+	if startToken == nil {
+		return nil
+	}
+	if t, ok := startToken.(json.Delim); !ok || t != '{' {
+		return fmt.Errorf("expect `{` as start token")
+	}
+
+	var sv *types.FooError
+	if *v == nil {
+		sv = &types.FooError{}
 	} else {
 		sv = *v
 	}
