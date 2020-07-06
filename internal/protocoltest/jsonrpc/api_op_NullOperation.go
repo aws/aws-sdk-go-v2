@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-func (c *Client) OperationWithOptionalInputOutput(ctx context.Context, params *OperationWithOptionalInputOutputInput, optFns ...func(*Options)) (*OperationWithOptionalInputOutputOutput, error) {
-	stack := middleware.NewStack("OperationWithOptionalInputOutput", smithyhttp.NewStackRequest)
+func (c *Client) NullOperation(ctx context.Context, params *NullOperationInput, optFns ...func(*Options)) (*NullOperationOutput, error) {
+	stack := middleware.NewStack("NullOperation", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
 	for _, fn := range optFns {
 		fn(&options)
@@ -23,8 +23,8 @@ func (c *Client) OperationWithOptionalInputOutput(ctx context.Context, params *O
 	retry.AddRetryMiddlewares(stack, options)
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opOperationWithOptionalInputOutput(options.Region), middleware.Before)
-	addawsAwsjson11_serdeOpOperationWithOptionalInputOutputMiddlewares(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opNullOperation(options.Region), middleware.Before)
+	addawsAwsjson11_serdeOpNullOperationMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -36,38 +36,42 @@ func (c *Client) OperationWithOptionalInputOutput(ctx context.Context, params *O
 	if err != nil {
 		return nil, &smithy.OperationError{
 			ServiceID:     c.ServiceID(),
-			OperationName: "OperationWithOptionalInputOutput",
+			OperationName: "NullOperation",
 			Err:           err,
 		}
 	}
-	out := result.(*OperationWithOptionalInputOutputOutput)
+	out := result.(*NullOperationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type OperationWithOptionalInputOutputInput struct {
-	Value *string
+type NullOperationInput struct {
+	String_    *string
+	StringList []*string
+	StringMap  map[string]*string
 }
 
-type OperationWithOptionalInputOutputOutput struct {
-	Value *string
+type NullOperationOutput struct {
+	String_    *string
+	StringList []*string
+	StringMap  map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpOperationWithOptionalInputOutputMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpOperationWithOptionalInputOutput{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpOperationWithOptionalInputOutput{}, middleware.After)
+func addawsAwsjson11_serdeOpNullOperationMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsAwsjson11_serializeOpNullOperation{}, middleware.After)
+	stack.Deserialize.Add(&awsAwsjson11_deserializeOpNullOperation{}, middleware.After)
 }
 
-func newServiceMetadataMiddleware_opOperationWithOptionalInputOutput(region string) awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opNullOperation(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:         region,
 		ServiceName:    "Json Protocol",
 		ServiceID:      "jsonprotocol",
 		EndpointPrefix: "jsonprotocol",
 		SigningName:    "foo",
-		OperationName:  "OperationWithOptionalInputOutput",
+		OperationName:  "NullOperation",
 	}
 }

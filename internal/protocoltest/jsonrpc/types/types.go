@@ -5,6 +5,10 @@ import (
 	"time"
 )
 
+type ComplexNestedErrorData struct {
+	Foo *string
+}
+
 type EmptyStruct struct {
 }
 

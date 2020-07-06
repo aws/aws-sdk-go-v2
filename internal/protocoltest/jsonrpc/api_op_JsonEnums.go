@@ -6,13 +6,15 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-func (c *Client) OperationWithOptionalInputOutput(ctx context.Context, params *OperationWithOptionalInputOutputInput, optFns ...func(*Options)) (*OperationWithOptionalInputOutputOutput, error) {
-	stack := middleware.NewStack("OperationWithOptionalInputOutput", smithyhttp.NewStackRequest)
+// This example serializes enums as top level properties, in lists, sets, and maps.
+func (c *Client) JsonEnums(ctx context.Context, params *JsonEnumsInput, optFns ...func(*Options)) (*JsonEnumsOutput, error) {
+	stack := middleware.NewStack("JsonEnums", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
 	for _, fn := range optFns {
 		fn(&options)
@@ -23,8 +25,8 @@ func (c *Client) OperationWithOptionalInputOutput(ctx context.Context, params *O
 	retry.AddRetryMiddlewares(stack, options)
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opOperationWithOptionalInputOutput(options.Region), middleware.Before)
-	addawsAwsjson11_serdeOpOperationWithOptionalInputOutputMiddlewares(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonEnums(options.Region), middleware.Before)
+	addawsAwsjson11_serdeOpJsonEnumsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -36,38 +38,48 @@ func (c *Client) OperationWithOptionalInputOutput(ctx context.Context, params *O
 	if err != nil {
 		return nil, &smithy.OperationError{
 			ServiceID:     c.ServiceID(),
-			OperationName: "OperationWithOptionalInputOutput",
+			OperationName: "JsonEnums",
 			Err:           err,
 		}
 	}
-	out := result.(*OperationWithOptionalInputOutputOutput)
+	out := result.(*JsonEnumsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type OperationWithOptionalInputOutputInput struct {
-	Value *string
+type JsonEnumsInput struct {
+	FooEnum1    types.FooEnum
+	FooEnum2    types.FooEnum
+	FooEnum3    types.FooEnum
+	FooEnumList []types.FooEnum
+	FooEnumSet  []types.FooEnum
+	FooEnumMap  map[string]types.FooEnum
 }
 
-type OperationWithOptionalInputOutputOutput struct {
-	Value *string
+type JsonEnumsOutput struct {
+	FooEnum1    types.FooEnum
+	FooEnum2    types.FooEnum
+	FooEnum3    types.FooEnum
+	FooEnumList []types.FooEnum
+	FooEnumSet  []types.FooEnum
+	FooEnumMap  map[string]types.FooEnum
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpOperationWithOptionalInputOutputMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpOperationWithOptionalInputOutput{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpOperationWithOptionalInputOutput{}, middleware.After)
+func addawsAwsjson11_serdeOpJsonEnumsMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsAwsjson11_serializeOpJsonEnums{}, middleware.After)
+	stack.Deserialize.Add(&awsAwsjson11_deserializeOpJsonEnums{}, middleware.After)
 }
 
-func newServiceMetadataMiddleware_opOperationWithOptionalInputOutput(region string) awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opJsonEnums(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:         region,
 		ServiceName:    "Json Protocol",
 		ServiceID:      "jsonprotocol",
 		EndpointPrefix: "jsonprotocol",
 		SigningName:    "foo",
-		OperationName:  "OperationWithOptionalInputOutput",
+		OperationName:  "JsonEnums",
 	}
 }
