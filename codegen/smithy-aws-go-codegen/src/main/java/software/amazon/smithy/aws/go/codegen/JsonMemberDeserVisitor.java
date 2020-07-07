@@ -100,6 +100,7 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
     @Override
     public Void byteShape(ByteShape shape) {
         GoWriter writer = context.getWriter();
+        // Smithy's byte shape represents a signed 8-bit int, which doesn't line up with Go's unsigned byte
         handleInteger(shape, CodegenUtils.generatePointerValueIfPointable(writer, shape, "int8(i64)"));
         return null;
     }

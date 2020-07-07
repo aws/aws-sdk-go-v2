@@ -49,7 +49,6 @@ public class AddAwsConfigFields implements GoIntegration {
     public static final String LOG_LEVEL_CONFIG_NAME = "LogLevel";
     public static final String RETRYER_CONFIG_NAME = "Retryer";
     public static final String HTTP_SIGNER_CONFIG_NAME = "HTTPSigner";
-    public static final String IDEMPOTENCY_TOKEN_PROVIDER = "IdempotencyTokenProvider";
 
 
     private static final List<ConfigField> UNIVERSAL_FIELDS = new ArrayList<>(SetUtils.of(
