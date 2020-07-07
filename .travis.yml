@@ -10,7 +10,7 @@ go:
     - tip
 
 script:
-    make ci-test;
+    make ci-test-no-generate;
 
 matrix:
   allow_failures:
