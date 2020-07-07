@@ -79,6 +79,8 @@ unit-with-race-cover: verify build
 
 ci-test: generate unit-with-race-cover ci-test-generate-validate test-protocols test-services
 
+ci-test-no-generate: unit-with-race-cover test-protocols test-services
+
 ci-test-generate-validate:
 	@echo "CI test validate no generated code changes"
 	git update-index --assume-unchanged go.mod go.sum
