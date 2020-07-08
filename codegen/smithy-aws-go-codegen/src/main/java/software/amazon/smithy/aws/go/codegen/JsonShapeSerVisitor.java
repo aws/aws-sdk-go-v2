@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
@@ -40,6 +41,7 @@ import software.amazon.smithy.model.traits.EnumTrait;
 import software.amazon.smithy.model.traits.JsonNameTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait.Format;
+import software.amazon.smithy.utils.FunctionalUtils;
 
 /**
  * Visitor to generate serialization functions for shapes in AWS JSON protocol
@@ -54,8 +56,15 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
     private static final Format DEFAULT_TIMESTAMP_FORMAT = Format.EPOCH_SECONDS;
     private static final Logger LOGGER = Logger.getLogger(JsonShapeSerVisitor.class.getName());
 
+    private final Predicate<MemberShape> memberFilter;
+
     public JsonShapeSerVisitor(GenerationContext context) {
+        this(context, FunctionalUtils.alwaysTrue());
+    }
+
+    public JsonShapeSerVisitor(GenerationContext context, Predicate<MemberShape> memberFilter) {
         super(context);
+        this.memberFilter = memberFilter;
     }
 
     private JsonMemberSerVisitor getMemberSerVisitor(MemberShape member, String source, String dest) {
@@ -143,6 +152,9 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
         // Use a TreeSet to sort the members.
         Set<MemberShape> members = new TreeSet<>(shape.getAllMembers().values());
         for (MemberShape member : members) {
+            if (!memberFilter.test(member)) {
+                continue;
+            }
             Shape target = context.getModel().expectShape(member.getTarget());
             String serializedMemberName = getSerializedMemberName(member);
             writeSafeMemberAccessor(context, member, "v", (operand) -> {
