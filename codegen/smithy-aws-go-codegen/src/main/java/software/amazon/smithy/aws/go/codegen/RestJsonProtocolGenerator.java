@@ -32,6 +32,7 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.HttpBindingProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
+import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.HttpBinding;
 import software.amazon.smithy.model.knowledge.HttpBindingIndex;
@@ -88,8 +89,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             return;
         }
 
-        Shape inputShape = model.expectShape(operation.getInput()
-                .orElseThrow(() -> new CodegenException("Input shape missing for operation " + operation.getId())));
+        Shape inputShape = ProtocolUtils.expectInput(model, operation);
         GoWriter writer = context.getWriter();
         String functionName = ProtocolGenerator.getOperationDocumentSerFunctionName(inputShape, getProtocolName());
 
@@ -437,10 +437,9 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.write("restEncoder.SetHeader(\"Content-Type\").String($S)", getDocumentContentType());
         writer.write("");
 
-        Shape inputShape = model.expectShape(operation.getInput()
-                .orElseThrow(() -> new CodegenException("Input shape is missing on " + operation.getId())));
-
+        Shape inputShape = ProtocolUtils.expectInput(model, operation);
         String functionName = ProtocolGenerator.getOperationDocumentSerFunctionName(inputShape, getProtocolName());
+
         writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
         writer.write("jsonEncoder := smithyjson.NewEncoder()");
         writer.openBlock("if err := $L(input, jsonEncoder.Value); err != nil {", "}", functionName, () -> {
@@ -530,7 +529,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             OperationShape operation,
             GoStackStepMiddlewareGenerator generator
     ) {
-        Shape targetShape = model.expectShape(operation.getOutput().get());
+        Shape targetShape = ProtocolUtils.expectOutput(model, operation);
         String operand = "output";
 
         boolean isShapeWithPayloadBinding = isShapeWithResponseBindings(model, operation, HttpBinding.Location.PAYLOAD);
@@ -800,8 +799,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 .map(HttpBinding::getMember)
                 .collect(Collectors.toSet());
 
-        Shape outputShape = model.expectShape(operation.getOutput()
-                .orElseThrow(() -> new CodegenException("Output shape missing for operation " + operation.getId())));
+        Shape outputShape = ProtocolUtils.expectOutput(model, operation);
         GoWriter writer = context.getWriter();
 
         if (documentBindings.size() != 0) {
