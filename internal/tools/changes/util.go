@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strings"
 )
@@ -80,4 +81,19 @@ func findFile(fileName string, dir bool) (string, error) {
 		currPath = strings.TrimSuffix(currPath, string(os.PathSeparator))
 		currPath, _ = filepath.Split(currPath)
 	}
+}
+
+func execAt(cmd *exec.Cmd, path string) (out []byte, err error) {
+	originalWd, err := os.Getwd()
+	if err != nil {
+		return nil, fmt.Errorf("couldn't run cmd: %v", err)
+	}
+
+	err = os.Chdir(path)
+	if err != nil {
+		return nil, fmt.Errorf("couldn't run cmd: %v", err)
+	}
+	defer func() { err = os.Chdir(originalWd) }()
+
+	return cmd.Output()
 }

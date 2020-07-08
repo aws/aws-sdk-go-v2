@@ -60,3 +60,90 @@ func (r *Repository) UpdatePendingChangelog() error {
 
 	return r.UpdateChangelog(release, true)
 }
+
+// InitializeVersions creates an initial versions.json enclosure in the Repository's .changes directory. The VersionEnclosure
+// created by InitializeVersions will include all modules that have a tagged version in git and their corresponding versions.
+func (r *Repository) InitializeVersions() error {
+	enc, err := r.DiscoverVersions(TaggedVersionSelector)
+	if err != nil {
+		return fmt.Errorf("failed to initialize versions: %v", err)
+	}
+
+	return r.Metadata.SaveEnclosure(enc)
+}
+
+// VersionSelector is a function that decides what version of a Go module should be passed to code generation.
+type VersionSelector func(r *Repository, module string) (string, error)
+
+// DiscoverVersions creates a VersionEnclosure containing all Go modules in the Repository. The version of each module
+// is determined by the provided VersionSelector.
+func (r *Repository) DiscoverVersions(selector VersionSelector) (VersionEnclosure, error) {
+	enclosure := VersionEnclosure{
+		SchemaVersion:  SchemaVersion,
+		ModuleVersions: map[string]Version{},
+	}
+
+	modules, packages, err := discoverModules(r.RootPath)
+	if err != nil {
+		return VersionEnclosure{}, err
+	}
+
+	enclosure.Packages = packages
+
+	for _, m := range modules {
+		v, err := selector(r, m)
+		if err != nil {
+			return VersionEnclosure{}, err
+		}
+
+		if v != "" {
+			enclosure.ModuleVersions[m] = Version{
+				Module:  m,
+				Version: v,
+			}
+		}
+	}
+
+	return enclosure, nil
+}
+
+// ReleaseVersionSelector returns a version for the given module suitable for use during the release process.
+// A version will be returned based upon what type of version bump the Change metadata for the given module requires.
+// ReleaseVersionSelector will properly version modules that are not present in the versions.json file by checking git
+// tags for an existing version, or by providing a default version suitable for the module's major version.
+func ReleaseVersionSelector(r *Repository, module string) (string, error) {
+	changes := r.Metadata.GetChanges(module)
+
+	maxBump := NoBump
+	for _, c := range changes {
+		bump := changeBumps[c.Type]
+		if bump > maxBump {
+			maxBump = bump
+		}
+	}
+
+	currentVersion := r.Metadata.CurrentVersions.ModuleVersions[module].Version
+	if currentVersion != "" {
+		return nextVersion(currentVersion, maxBump)
+	}
+
+	v, err := taggedVersion(r.RootPath, module)
+	if err != nil {
+		return "", fmt.Errorf("couldn't find current version of %s: %v", module, err)
+	}
+	if v == "" {
+		// there aren't version git tags for this module
+		return defaultVersion(module)
+	}
+
+	// the module isn't in versions.json, but does have git tags
+	return nextVersion(v, maxBump)
+}
+
+func TaggedVersionSelector(r *Repository, module string) (string, error) {
+	return taggedVersion(r.RootPath, module)
+}
+
+func DevelopmentVersionSelector(r *Repository, module string) (string, error) {
+	return "", nil
+}
