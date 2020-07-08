@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
@@ -37,6 +38,7 @@ import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.JsonNameTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait.Format;
+import software.amazon.smithy.utils.FunctionalUtils;
 
 /**
  * Visitor to generate deserialization functions for shapes in AWS JSON protocol
@@ -51,8 +53,15 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
     private static final Format DEFAULT_TIMESTAMP_FORMAT = Format.EPOCH_SECONDS;
     private static final Logger LOGGER = Logger.getLogger(JsonShapeDeserVisitor.class.getName());
 
+    private final Predicate<MemberShape> memberFilter;
+
     public JsonShapeDeserVisitor(GenerationContext context) {
+        this(context, FunctionalUtils.alwaysTrue());
+    }
+
+    public JsonShapeDeserVisitor(GenerationContext context, Predicate<MemberShape> memberFilter) {
         super(context);
+        this.memberFilter = memberFilter;
     }
 
     private JsonMemberDeserVisitor getMemberDeserVisitor(MemberShape member, String dataDest) {

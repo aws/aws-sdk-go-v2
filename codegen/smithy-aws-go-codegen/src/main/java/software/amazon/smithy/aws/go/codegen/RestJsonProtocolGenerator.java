@@ -19,17 +19,14 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
-import software.amazon.smithy.go.codegen.CodegenUtils;
 import software.amazon.smithy.go.codegen.GoStackStepMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.HttpBindingProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
@@ -45,7 +42,6 @@ import software.amazon.smithy.model.traits.HttpErrorTrait;
 import software.amazon.smithy.model.traits.MediaTypeTrait;
 import software.amazon.smithy.model.traits.StreamingTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
-import software.amazon.smithy.utils.FunctionalUtils;
 
 /**
  * Handles general components across the AWS JSON protocols that have HTTP bindings.
@@ -221,7 +217,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
             // if target shape is of type String or type Blob, then delegate deserializers for explicit payload shapes
             if (payloadShape.isStringShape() || payloadShape.isBlobShape()) {
-                writeMiddlewarePayloadBindingDeserializerDelegator(writer, targetShape, true);
+                writeMiddlewarePayloadBindingDeserializerDelegator(writer, targetShape);
                 return;
             }
             // for other payload target types we should deserialize using the appropriate document deserializer
@@ -244,18 +240,12 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.write("decoder.UseNumber()");
         writer.write("");
 
-        writeMiddlewareDocumentBindingDeserializerDelegator(writer, targetShape, operand, !isShapeWithPayloadBinding);
+        writeMiddlewareDocumentBindingDeserializerDelegator(writer, targetShape, operand);
     }
 
     // Writes middleware that delegates to deserializers for shapes that have explicit payload.
-    private void writeMiddlewarePayloadBindingDeserializerDelegator(
-            GoWriter writer,
-            Shape shape,
-            boolean isOperationShape
-    ) {
-        String deserFuncName = isOperationShape ?
-                ProtocolGenerator.getDocumentOutputDeserializerFunctionName(shape, getProtocolName()) :
-                ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
+    private void writeMiddlewarePayloadBindingDeserializerDelegator(GoWriter writer, Shape shape) {
+        String deserFuncName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
         writer.write("err = $L(output, response.Body)", deserFuncName);
         writer.openBlock("if err != nil {", "}", () -> {
             writer.addUseImports(SmithyGoDependency.SMITHY);
@@ -269,12 +259,9 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     private void writeMiddlewareDocumentBindingDeserializerDelegator(
             GoWriter writer,
             Shape shape,
-            String operand,
-            boolean isOperationShape
+            String operand
     ) {
-        String deserFuncName = isOperationShape ?
-                ProtocolGenerator.getDocumentOutputDeserializerFunctionName(shape, getProtocolName()) :
-                ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
+        String deserFuncName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
         writer.write("err = $L(&$L, decoder)", deserFuncName, operand);
         writer.openBlock("if err != nil {", "}", () -> {
             writer.addUseImports(SmithyGoDependency.BYTES);
@@ -453,7 +440,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
                 if (isShapeWithResponseBindings(model, errorShape, HttpBinding.Location.DOCUMENT)
                         || isShapeWithResponseBindings(model, errorShape, HttpBinding.Location.PAYLOAD)) {
-                    writeMiddlewareDocumentBindingDeserializerDelegator(writer, errorShape, "output", false);
+                    writeMiddlewareDocumentBindingDeserializerDelegator(writer, errorShape, "output");
                 }
 
                 // TODO: fix variable scoping and shadowing
@@ -479,9 +466,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         GoWriter writer = context.getWriter();
 
         if (documentBindings.size() != 0) {
-            writeDocumentBindingDeserializer(writer, model, context.getSymbolProvider(), outputShape,
-                    documentBindings::contains, true);
-            writer.write("");
+            outputShape.accept(new JsonShapeDeserVisitor(context, documentBindings::contains));
         }
 
         Set<MemberShape> payloadBindings = bindingIndex.getResponseBindings(operation, HttpBinding.Location.PAYLOAD)
@@ -493,8 +478,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             return;
         }
 
-        writePayloadBindingDeserializer(writer, model, context.getSymbolProvider(), outputShape,
-                payloadBindings::contains, true);
+        writePayloadBindingDeserializer(context, outputShape, payloadBindings::contains);
         writer.write("");
     }
 
@@ -511,9 +495,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 .collect(Collectors.toSet());
 
         if (errorDocumentBinding.size() != 0) {
-            writeDocumentBindingDeserializer(writer, model, context.getSymbolProvider(), shape,
-                    errorDocumentBinding::contains, false);
-            writer.write("");
+            shape.accept(new JsonShapeDeserVisitor(context, errorDocumentBinding::contains));
         }
 
         Set<MemberShape> errorPayloadBinding = bindingIndex.getResponseBindings(shapeId, HttpBinding.Location.PAYLOAD)
@@ -526,37 +508,28 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             return;
         }
 
-        writePayloadBindingDeserializer(writer, model, context.getSymbolProvider(), shape,
-                errorPayloadBinding::contains, false);
+        writePayloadBindingDeserializer(context, shape, errorPayloadBinding::contains);
         writer.write("");
     }
 
 
     @Override
     protected void generateDocumentBodyShapeDeserializers(GenerationContext context, Set<Shape> shapes) {
-        GoWriter writer = context.getWriter();
-        Model model = context.getModel();
-        SymbolProvider symbolProvider = context.getSymbolProvider();
-
-        shapes.forEach(shape -> {
-            writeDocumentBindingDeserializer(writer, model, symbolProvider, shape, FunctionalUtils.alwaysTrue(), false);
-            writer.write("");
-        });
+        JsonShapeDeserVisitor visitor = new JsonShapeDeserVisitor(context);
+        shapes.forEach(shape -> shape.accept(visitor));
     }
 
 
     // Generate deserializers for shapes with payload binding
     private void writePayloadBindingDeserializer(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
+            GenerationContext context,
             Shape shape,
-            Predicate<MemberShape> filterMemberShapes,
-            Boolean isOutputShape
+            Predicate<MemberShape> filterMemberShapes
     ) {
+        GoWriter writer = context.getWriter();
+        SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol shapeSymbol = symbolProvider.toSymbol(shape);
-        String funcName = isOutputShape ? ProtocolGenerator.getDocumentOutputDeserializerFunctionName(shape,
-                getProtocolName()) : ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
+        String funcName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
 
         for (MemberShape memberShape : shape.members()) {
             if (!filterMemberShapes.test(memberShape)) {
@@ -564,7 +537,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             }
 
             String memberName = symbolProvider.toMemberName(memberShape);
-            Shape targetShape = model.expectShape(memberShape.getTarget());
+            Shape targetShape = context.getModel().expectShape(memberShape.getTarget());
             if (targetShape.isStringShape() || targetShape.isBlobShape()) {
                 writer.openBlock("func $L(v $P, body io.ReadCloser) error {", "}",
                         funcName, shapeSymbol, () -> {
@@ -596,608 +569,9 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                             writer.write("return nil");
                         });
             } else {
-                // delegate to Json Document Binding Deserializer
-                writeDocumentBindingDeserializer(writer, model, symbolProvider, shape, filterMemberShapes,
-                        isOutputShape);
+                shape.accept(new JsonShapeDeserVisitor(context, filterMemberShapes));
             }
         }
-    }
-
-    // Generate deserializers for shape with document binding
-    private void writeDocumentBindingDeserializer(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
-            Shape shape,
-            Predicate<MemberShape> filterMemberShapes,
-            Boolean isOutputShape
-    ) {
-        Symbol jsonDecoder = SymbolUtils.createPointableSymbolBuilder("Decoder", SmithyGoDependency.JSON).build();
-        Symbol shapeSymbol = symbolProvider.toSymbol(shape);
-        String functionName = isOutputShape ?
-                ProtocolGenerator.getDocumentOutputDeserializerFunctionName(shape, getProtocolName()) :
-                ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
-
-        writer.addUseImports(SmithyGoDependency.FMT);
-        switch (shape.getType()) {
-            case STRUCTURE:
-                writer.openBlock("func $L(v *$P, decoder $P) error {", "}", functionName, shapeSymbol,
-                        jsonDecoder, () -> {
-                            writer.openBlock("if v == nil {", "}", () -> {
-                                writer.write("return fmt.Errorf(\"unexpected nil of type %T\", v)");
-                            });
-                            writer.write("");
-                            generateDocumentBindingStructureShapeDeserializer(writer, model, symbolProvider, shape,
-                                    filterMemberShapes);
-                            writer.write("");
-                            writer.write("return nil");
-                        });
-                break;
-            case SET:
-            case LIST:
-                writer.openBlock("func $L(vp *$P, decoder $P) error {", "}", functionName, shapeSymbol,
-                        jsonDecoder, () -> {
-                            writer.openBlock("if vp == nil {", "}", () -> {
-                                writer.write("return fmt.Errorf(\"unexpected nil of type %T\", vp)");
-                            });
-                            writer.write("");
-                            generateDocumentBindingCollectionShapeDeserializer(writer, model, symbolProvider, shape,
-                                    filterMemberShapes);
-                            writer.write("");
-                            writer.write("return nil");
-                        });
-                break;
-            case MAP:
-                writer.openBlock("func $L(vp *$P, decoder $P) error {", "}", functionName, shapeSymbol,
-                        jsonDecoder, () -> {
-                            writer.openBlock("if vp == nil {", "}", () -> {
-                                writer.write("return fmt.Errorf(\"unexpected nil of type %T\", vp)");
-                            });
-                            writer.write("");
-                            generateDocumentBindingMapShapeDeserializer(writer, model, symbolProvider, shape,
-                                    filterMemberShapes);
-                            writer.write("");
-                            writer.write("return nil");
-                        });
-                break;
-            case DOCUMENT:
-                writer.openBlock("func $L(v *$P, decoder $P) error {", "}", functionName, shapeSymbol,
-                        jsonDecoder, () -> {
-                            // TODO: Requires Document Implementation
-                            writer.addUseImports(SmithyGoDependency.FMT);
-                            writer.write("return fmt.Errorf(\"document types not implemented\")");
-                        });
-                break;
-            case UNION:
-                writer.openBlock("func $L(v *$P, decoder $P) error {", "}", functionName, shapeSymbol,
-                        jsonDecoder, () -> {
-                            // TODO: Requires Union Implementation
-                            writer.addUseImports(SmithyGoDependency.FMT);
-                            writer.write("return fmt.Errorf(\"union types not implemented\")");
-                        });
-                break;
-            default:
-                break;
-        }
-    }
-
-    // Generates deserializers for structure Shapes
-    private void generateDocumentBindingStructureShapeDeserializer(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
-            Shape shape,
-            Predicate<MemberShape> filterMemberShapes
-    ) {
-        Symbol symbol = symbolProvider.toSymbol(shape);
-        writeJsonTokenizerStartStub(writer, shape);
-        writer.write("var sv $P", symbol);
-        writer.openBlock("if *v == nil {", "", () -> {
-            writer.write("sv = &$T{}", symbol);
-            writer.openBlock("} else {", "}", () -> {
-                writer.write("sv = *v");
-            });
-        });
-        writer.openBlock("for decoder.More() {", "}",
-                () -> {
-                    writer.write("t, err := decoder.Token()");
-                    writer.write("if err != nil { return err }");
-                    writer.openBlock("switch t {", "}", () -> {
-                        for (MemberShape memberShape : shape.members()) {
-                            if (!filterMemberShapes.test(memberShape)) {
-                                continue;
-                            }
-
-                            String memberName = symbolProvider.toMemberName(memberShape);
-                            writer.openBlock("case $S:", "", getSerializedMemberName(memberShape), () -> {
-                                String operand = generateDocumentBindingMemberShapeDeserializer(writer, model,
-                                        symbolProvider, memberShape);
-                                writer.write(String.format("sv.%s = %s", memberName, operand));
-                            });
-                        }
-
-                        // default case to handle unknown fields
-                        writer.openBlock("default : ", "", () -> {
-                            writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL);
-                            writer.write("err := restjson.DiscardUnknownField(decoder)");
-                            writer.write("if err != nil {return err}");
-                        });
-                    });
-                });
-        writeJsonTokenizerEndStub(writer, shape);
-        writer.write("*v = sv");
-    }
-
-
-    // Generates deserializers for collection shapes.
-    private void generateDocumentBindingCollectionShapeDeserializer(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
-            Shape shape,
-            Predicate<MemberShape> filterMemberShapes
-    ) {
-        Symbol symbol = symbolProvider.toSymbol(shape);
-        writeJsonTokenizerStartStub(writer, shape);
-        writer.write("var cv $P", symbol);
-        writer.openBlock("if *vp == nil {", "", () -> {
-            writer.write("cv = $P{}", symbol);
-            writer.openBlock("} else {", "}", () -> {
-                writer.write("cv = *vp");
-            });
-        });
-        writer.openBlock("for decoder.More() {", "}", () -> {
-            MemberShape memberShape = shape.members().iterator().next();
-            String operand = generateDocumentBindingMemberShapeDeserializer(writer, model, symbolProvider, memberShape);
-
-            writer.write(String.format("cv = append(cv, %s)", operand));
-            writer.write("");
-        });
-        writeJsonTokenizerEndStub(writer, shape);
-        writer.write("*vp = cv");
-    }
-
-    // Generates deserializers for map shapes.
-    private void generateDocumentBindingMapShapeDeserializer(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
-            Shape shape,
-            Predicate<MemberShape> filterMemberShapes
-    ) {
-        writeJsonTokenizerStartStub(writer, shape);
-        Symbol symbol = symbolProvider.toSymbol(shape);
-        writer.write("var mv $P", symbol);
-        writer.openBlock("if *vp == nil {", "", () -> {
-            writer.write("mv = $P{}", symbol);
-            writer.openBlock("} else {", "}", () -> {
-                writer.write("mv = *vp");
-            });
-        });
-        writer.openBlock("for decoder.More() {", "}", () -> {
-            MemberShape memberShape = shape.asMapShape().get().getValue();
-
-            writer.write("token, err := decoder.Token()");
-            writer.write("if err != nil { return err }");
-            writer.write("");
-            writer.write("key, ok := token.(string)");
-            writer.write("if !ok { return fmt.Errorf(\"expected map-key of type string, found type %T\", token)}");
-            writer.write("");
-
-            String operand = generateDocumentBindingMemberShapeDeserializer(writer, model, symbolProvider, memberShape);
-            writer.write(String.format("mv[key] = %s", operand));
-            writer.write("");
-        });
-
-        writeJsonTokenizerEndStub(writer, shape);
-        writer.write("*vp = mv");
-    }
-
-    // generateDocumentBindingMemberShapeDeserializer delegates to the appropriate
-    // deserializer generator function for the member shapes.
-    private String generateDocumentBindingMemberShapeDeserializer(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
-            MemberShape memberShape
-    ) {
-        Shape targetShape = model.expectShape(memberShape.getTarget());
-        switch (targetShape.getType()) {
-            case STRING:
-                return generateDocumentBindingStringMemberDeserializer(writer, model, symbolProvider, memberShape);
-            case BOOLEAN:
-                return generateDocumentBindingBooleanMemberDeserializer(writer, model, symbolProvider, memberShape);
-            case TIMESTAMP:
-                return generateDocumentBindingTimestampMemberDeserializer(writer, model, symbolProvider, memberShape);
-            case BLOB:
-                return generateDocumentBindingBlobMemberDeserializer(writer, model, symbolProvider, memberShape);
-            case BYTE:
-            case SHORT:
-            case INTEGER:
-            case LONG:
-                return generateDocumentBindingIntegerMemberDeserializer(writer, model, symbolProvider, memberShape);
-            case BIG_INTEGER:
-            case BIG_DECIMAL:
-                return generateDocumentBindingBigMemberDeserializer(writer, model, memberShape);
-            case FLOAT:
-            case DOUBLE:
-                return generateDocumentBindingFloatMemberDeserializer(writer, model, memberShape);
-            case SET:
-            case LIST:
-            case MAP:
-                return generateDocumentBindingCollectionMemberDeserializer(writer, model, symbolProvider, memberShape);
-            case STRUCTURE:
-                return generateDocumentBindingStructureMemberDeserializer(writer, model, symbolProvider, memberShape);
-            case UNION:
-            case DOCUMENT:
-                writer.write("// TODO: Support " + targetShape.getType() + " Deserialization");
-                return "nil";
-            default:
-                throw new CodegenException("Unexpected shape deserialization to JSON");
-        }
-    }
-
-
-    // Generates deserializer for String member shape.
-    private String generateDocumentBindingStringMemberDeserializer(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
-            MemberShape memberShape
-    ) {
-        String memberName = symbolProvider.toMemberName(memberShape);
-        Shape targetShape = model.expectShape(memberShape.getTarget());
-        Symbol targetSymbol = symbolProvider.toSymbol(targetShape);
-        writer.addUseImports(SmithyGoDependency.FMT);
-        writer.write("val, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
-
-        BiConsumer<GoWriter, Consumer<GoWriter>> handleJsonString = (w, c) -> {
-            w.openBlock("if val != nil {", "}", () -> {
-                w.write("jtv, ok := val.(string)");
-                w.openBlock("if !ok {", "}", () -> {
-                    w.write("return fmt.Errorf(\"expected $L to be of type string, got %T instead\", val)",
-                            memberName);
-                });
-                c.accept(w);
-            });
-        };
-
-        if (targetShape.hasTrait(EnumTrait.class)) {
-            writer.write("var ev $P", targetSymbol);
-            handleJsonString.accept(writer, w -> {
-                w.write("ev = $P(jtv)", targetSymbol);
-            });
-            return "ev";
-        }
-
-        writer.write("var st *string");
-        handleJsonString.accept(writer, w -> {
-            w.write("st = &jtv");
-        });
-        return "st";
-    }
-
-    // Generates deserializer for Boolean member shape.
-    private String generateDocumentBindingBooleanMemberDeserializer(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
-            MemberShape memberShape
-    ) {
-        String shapeName = symbolProvider.toMemberName(memberShape);
-        writer.addUseImports(SmithyGoDependency.FMT);
-        writer.write("val, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
-        writer.write("var b *bool");
-        writer.openBlock("if val != nil {", "}", () -> {
-            writer.write("jtv, ok := val.(bool)");
-            writer.openBlock("if !ok {", "}", () -> {
-                writer.write("return fmt.Errorf(\"expected $L to be of type *bool, got %T instead\", val)",
-                        shapeName);
-            });
-            writer.write("b = &jtv");
-        });
-        return "b";
-    }
-
-    // Generates deserializer for Byte, Short, Integer, Long member shape.
-    private String generateDocumentBindingIntegerMemberDeserializer(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
-            MemberShape memberShape
-    ) {
-        writer.addUseImports(SmithyGoDependency.FMT);
-        writer.write("val, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
-
-        BiConsumer<GoWriter, Consumer<GoWriter>> handleJsonNumber = (w, c) -> {
-            w.openBlock("if val != nil {", "}", () -> {
-                w.write("jtv, ok := val.(json.Number)");
-                w.openBlock("if !ok {", "}", () -> {
-                    w.write("return fmt.Errorf(\"expected $L to be json.Number, got %T instead\", val)",
-                            symbolProvider.toMemberName(memberShape));
-                });
-                w.write("i64, err := jtv.Int64()");
-                w.write("if err != nil { return err }");
-                c.accept(w);
-            });
-        };
-
-        Shape targetShape = model.expectShape(memberShape.getTarget());
-        switch (targetShape.getType()) {
-            case BYTE:
-                writer.write("var st *int8");
-                handleJsonNumber.accept(writer, w -> {
-                    w.write("st = " + CodegenUtils.generatePointerValueIfPointable(w, targetShape, "int8(i64)"));
-                });
-                break;
-            case SHORT:
-                writer.write("var st *int16");
-                handleJsonNumber.accept(writer, w -> {
-                    w.write("st = " + CodegenUtils.generatePointerValueIfPointable(w, targetShape, "int16(i64)"));
-                });
-                break;
-            case INTEGER:
-                writer.write("var st *int32");
-                handleJsonNumber.accept(writer, w -> {
-                    w.write("st = " + CodegenUtils.generatePointerValueIfPointable(w, targetShape, "int32(i64)"));
-                });
-                break;
-            case LONG:
-                writer.write("var st *int64");
-                handleJsonNumber.accept(writer, w -> {
-                    w.write("st = &i64");
-                });
-                break;
-            default:
-                throw new CodegenException(
-                        "unexpected integer number type " + targetShape.getType() + ", " + memberShape.getId());
-        }
-
-        return "st";
-    }
-
-    // Generates deserializer for Big Integer, Big Decimal member shape.
-    private String generateDocumentBindingBigMemberDeserializer(
-            GoWriter writer,
-            Model model,
-            MemberShape memberShape
-    ) {
-        writer.addUseImports(SmithyGoDependency.FMT);
-
-        writer.write("val, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
-
-        BiConsumer<GoWriter, Consumer<GoWriter>> handleJsonString = (w, c) -> {
-            w.openBlock("if val != nil {", "}", () -> {
-                w.write("jtv, ok := val.(string)");
-                w.openBlock("if !ok {", "}", () -> {
-                    w.write("return fmt.Errorf(\"expected $L to be of type string, got %T instead\", val)",
-                            memberShape.getMemberName());
-                });
-                c.accept(w);
-            });
-        };
-
-
-        writer.addUseImports(SmithyGoDependency.BIG);
-        Shape targetShape = model.expectShape(memberShape.getTarget());
-        switch (targetShape.getType()) {
-            case BIG_INTEGER:
-                writer.write("var bv *big.Int");
-                handleJsonString.accept(writer, w -> {
-                    w.write("bv, ok = new(big.Int).SetString(jtv, 10)");
-                    w.write("if !ok { return fmt.Errorf(\"error deserializing big integer type\")}");
-                });
-                break;
-            case BIG_DECIMAL:
-                writer.write("var bv *big.Float");
-                handleJsonString.accept(writer, w -> {
-                    w.write("bv, _, err = new(big.Float).Parse(jtv, 10)");
-                    w.write("if !ok { return fmt.Errorf(\"error deserializing big decimal type\")}");
-                });
-                break;
-            default:
-                throw new CodegenException(
-                        "unexpected big number type " + targetShape.getType() + ", " + memberShape.getId());
-        }
-
-        return "bv";
-    }
-
-    // Generates deserializer for Float, Double member shape.
-    private String generateDocumentBindingFloatMemberDeserializer(
-            GoWriter writer,
-            Model model,
-            MemberShape memberShape
-    ) {
-        writer.addUseImports(SmithyGoDependency.FMT);
-
-        writer.write("val, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
-
-        BiConsumer<GoWriter, Consumer<GoWriter>> handleJsonFloat = (w, c) -> {
-            w.openBlock("if val != nil {", "}", () -> {
-                w.write("jtv, ok := val.(json.Number)");
-                w.openBlock("if !ok {", "}", () -> {
-                    w.write("return fmt.Errorf(\"expected $L to be of type json.Number, got %T instead\", val)",
-                            memberShape.getMemberName());
-                });
-                w.write("f64, err := jtv.Float64()");
-                w.write("if err != nil { return err }");
-                c.accept(w);
-            });
-        };
-
-        Shape targetShape = model.expectShape(memberShape.getTarget());
-        switch (targetShape.getType()) {
-            case FLOAT:
-                writer.write("var st *float32");
-                handleJsonFloat.accept(writer, w -> {
-                    w.write("st = " + CodegenUtils.generatePointerValueIfPointable(w, targetShape, "float32(f64)"));
-                });
-                break;
-            case DOUBLE:
-                writer.write("var st *float64");
-                handleJsonFloat.accept(writer, w -> {
-                    w.write("st = &f64");
-                });
-                break;
-            default:
-                throw new CodegenException(
-                        "unexpected decimal number type " + targetShape.getType() + ", " + memberShape.getId());
-        }
-
-        return "st";
-    }
-
-    // Generates deserializer for Timestamp member shape.
-    private String generateDocumentBindingTimestampMemberDeserializer(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
-            MemberShape memberShape
-    ) {
-        TimestampFormatTrait.Format format = memberShape.getMemberTrait(model, TimestampFormatTrait.class)
-                .map(TimestampFormatTrait::getFormat)
-                .orElse(TimestampFormatTrait.Format.EPOCH_SECONDS);
-
-        writer.addUseImports(SmithyGoDependency.SMITHY_TIME);
-        writer.addUseImports(SmithyGoDependency.FMT);
-        writer.write("val, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
-
-        BiConsumer<GoWriter, Consumer<GoWriter>> handleAsJsonString = (w, c) -> {
-            w.openBlock("if val != nil {", "}", () -> {
-                w.write("jtv, ok := val.(string)");
-                w.openBlock("if !ok {", "}", () -> {
-                    w.write("return fmt.Errorf(\"expected $L to be of type string, got %T instead\", val)",
-                            symbolProvider.toMemberName(memberShape));
-                });
-                c.accept(w);
-            });
-        };
-        BiConsumer<GoWriter, Consumer<GoWriter>> handleAsJsonNumber = (w, c) -> {
-            w.openBlock("if val != nil {", "}", () -> {
-                w.write("jtv, ok := val.(json.Number)");
-                w.openBlock("if !ok {", "}", () -> {
-                    w.write("return fmt.Errorf(\"expected $L to be of type json.Number, got %T instead\", val)",
-                            memberShape.getMemberName());
-                });
-                c.accept(w);
-            });
-        };
-
-        writer.write("var ts *time.Time");
-        switch (format) {
-            case DATE_TIME:
-                handleAsJsonString.accept(writer, w -> {
-                    w.write("t, err := smithytime.ParseDateTime(jtv)");
-                    w.write("if err != nil { return err }");
-                    w.write("ts = &t");
-                });
-                break;
-            case HTTP_DATE:
-                handleAsJsonString.accept(writer, w -> {
-                    w.write("t, err := smithytime.ParseHTTPDate(jtv)");
-                    w.write("if err != nil { return err }");
-                    w.write("ts = &t");
-                });
-                break;
-            case EPOCH_SECONDS:
-                handleAsJsonNumber.accept(writer, w -> {
-                    w.write("f64, err := jtv.Float64()");
-                    w.write("if err != nil { return err }");
-                    w.write("t := smithytime.ParseEpochSeconds(f64)");
-                    w.write("ts = &t");
-                });
-                break;
-            case UNKNOWN:
-                throw new CodegenException("Unknown timestamp format");
-        }
-        return "ts";
-    }
-
-    // Generates deserializer for blob member shape.
-    private String generateDocumentBindingBlobMemberDeserializer(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
-            MemberShape memberShape
-    ) {
-        Shape targetShape = model.expectShape(memberShape.getTarget());
-        Symbol targetSymbol = symbolProvider.toSymbol(targetShape);
-
-        writer.write("var bs $T", targetSymbol);
-        writer.write("err := decoder.Decode(&bs)");
-        writer.write("if err != nil { return err }");
-        return "bs";
-    }
-
-    // Generates deserializer for delegator for structure member shape.
-    private String generateDocumentBindingStructureMemberDeserializer(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
-            MemberShape memberShape
-    ) {
-        Shape targetShape = model.expectShape(memberShape.getTarget());
-        Symbol targetSymbol = symbolProvider.toSymbol(targetShape);
-        String deserFunctionName = ProtocolGenerator
-                .getDocumentDeserializerFunctionName(targetShape, getProtocolName());
-        writer.write("var val $P", targetSymbol);
-        writer.openBlock("if err := $L(&val, decoder); err != nil {", "}", deserFunctionName, () -> {
-            writer.write("return err");
-        });
-        return "val";
-    }
-
-    // Generates deserializer for delegator for collection member shape and map member shapes.
-    private String generateDocumentBindingCollectionMemberDeserializer(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
-            MemberShape memberShape
-    ) {
-        Shape targetShape = model.expectShape(memberShape.getTarget());
-        Symbol targetSymbol = symbolProvider.toSymbol(targetShape);
-
-        String deserializerFuncName = ProtocolGenerator
-                .getDocumentDeserializerFunctionName(targetShape, getProtocolName());
-        writer.write("var col $P", targetSymbol);
-        writer.openBlock("if err := $L(&col, decoder); err != nil {", "}", deserializerFuncName, () -> {
-            writer.write("return err");
-        });
-        return "col";
-    }
-
-    // generates Json decoder tokenizer start stub wrt to the shape
-    private void writeJsonTokenizerStartStub(GoWriter writer, Shape shape) {
-        String startToken = shape.isListShape() || shape.isSetShape() ? "[" : "{";
-        writer.write("startToken, err := decoder.Token()");
-        writer.write("if err == io.EOF { return nil }");
-        writer.write("if err != nil { return err }");
-        writer.write("if startToken == nil { return nil }");
-        writer.openBlock("if t, ok := startToken.(json.Delim); !ok || t != $L {", "}",
-                String.format("'%s'", startToken), () -> {
-                    writer.addUseImports(SmithyGoDependency.FMT);
-                    writer.write("return fmt.Errorf($S)", String.format("expect `%s` as start token", startToken));
-                });
-        writer.write("");
-    }
-
-    // generates Json decoder tokenizer end stub wrt to the shape
-    private void writeJsonTokenizerEndStub(GoWriter writer, Shape shape) {
-        String endToken = shape.isListShape() || shape.isSetShape() ? "]" : "}";
-        writer.write("");
-        writer.write("endToken, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
-        writer.openBlock("if t, ok := endToken.(json.Delim); !ok || t != $L {", "}", String.format("'%s'", endToken),
-                () -> {
-                    writer.write("return fmt.Errorf($S)", String.format("expect `%s` as end token", endToken));
-                });
     }
 
     @Override
