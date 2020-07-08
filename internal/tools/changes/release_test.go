@@ -1,16 +1,15 @@
 package changes
 
 import (
-	"strconv"
 	"testing"
 )
 
 func TestRelease_AffectedModules(t *testing.T) {
-	var testCases = []struct {
+	var testCases = map[string]struct {
 		releaseChanges  []Change
 		expectedModules []string
 	}{
-		{
+		"single module": {
 			[]Change{
 				{
 					Module: "test",
@@ -18,7 +17,7 @@ func TestRelease_AffectedModules(t *testing.T) {
 			},
 			[]string{"test"},
 		},
-		{
+		"two changes": {
 			[]Change{
 				{
 					Module: "test",
@@ -29,7 +28,7 @@ func TestRelease_AffectedModules(t *testing.T) {
 			},
 			[]string{"test"},
 		},
-		{
+		"two modules": {
 			[]Change{
 				{
 					Module: "test",
@@ -42,8 +41,8 @@ func TestRelease_AffectedModules(t *testing.T) {
 		},
 	}
 
-	for i, tt := range testCases {
-		t.Run(strconv.Itoa(i), func(t *testing.T) {
+	for id, tt := range testCases {
+		t.Run(id, func(t *testing.T) {
 			r := &Release{
 				Changes: tt.releaseChanges,
 			}

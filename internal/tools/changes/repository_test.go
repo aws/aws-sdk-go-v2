@@ -25,7 +25,7 @@ func TestRepository_UpdateChangelog(t *testing.T) {
 
 	for _, changelogType := range []string{"pending", "regular"} {
 		cases := getTestChangelogCases(t, changelogType)
-		for _, tt := range cases {
+		for id, tt := range cases {
 			pending := false
 			fileName := filepath.Join("testdata", "CHANGELOG.md")
 			if changelogType == "pending" {
@@ -33,7 +33,7 @@ func TestRepository_UpdateChangelog(t *testing.T) {
 				fileName = filepath.Join("testdata", "CHANGELOG_PENDING.md")
 			}
 
-			t.Run(tt.release.ID+"_"+changelogType, func(t *testing.T) {
+			t.Run(id+changelogType, func(t *testing.T) {
 				err := repo.UpdateChangelog(tt.release, pending)
 				if err != nil {
 					t.Fatal(err)
@@ -69,12 +69,12 @@ type changelogCase struct {
 	changelog string
 }
 
-func getTestChangelogCases(t *testing.T, changelogType string) []changelogCase {
+func getTestChangelogCases(t *testing.T, changelogType string) map[string]changelogCase {
 	t.Helper()
 	const releasesTestDir = "releases"
 	const changelogsTestDir = "changelogs"
 
-	var cases []changelogCase
+	cases := map[string]changelogCase{}
 
 	files, err := ioutil.ReadDir(filepath.Join("testdata", releasesTestDir))
 	if err != nil {
@@ -98,7 +98,7 @@ func getTestChangelogCases(t *testing.T, changelogType string) []changelogCase {
 			t.Fatal(err)
 		}
 
-		cases = append(cases, changelogCase{&release, string(changelog)})
+		cases[release.ID] = changelogCase{&release, string(changelog)}
 	}
 
 	return cases
