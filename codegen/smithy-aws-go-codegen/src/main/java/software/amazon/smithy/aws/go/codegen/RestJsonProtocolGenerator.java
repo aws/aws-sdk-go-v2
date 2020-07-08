@@ -148,7 +148,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         }
 
         if (payloadShape.isStringShape()) {
-            return "test/plain";
+            return "text/plain";
         }
 
         return getDocumentContentType();
