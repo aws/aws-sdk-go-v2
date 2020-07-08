@@ -35,20 +35,20 @@ func TestClient_JsonEnums_awsAwsjson11Serialize(t *testing.T) {
 		// Serializes simple scalar properties
 		"AwsJson11Enums": {
 			Params: &JsonEnumsInput{
-				FooEnum1: "Foo",
-				FooEnum2: "0",
-				FooEnum3: "1",
+				FooEnum1: types.FooEnum("Foo"),
+				FooEnum2: types.FooEnum("0"),
+				FooEnum3: types.FooEnum("1"),
 				FooEnumList: []types.FooEnum{
-					"Foo",
-					"0",
+					types.FooEnum("Foo"),
+					types.FooEnum("0"),
 				},
 				FooEnumSet: []types.FooEnum{
-					"Foo",
-					"0",
+					types.FooEnum("Foo"),
+					types.FooEnum("0"),
 				},
 				FooEnumMap: map[string]types.FooEnum{
-					"hi":   "Foo",
-					"zero": "0",
+					"hi":   types.FooEnum("Foo"),
+					"zero": types.FooEnum("0"),
 				},
 			},
 			ExpectMethod:  "POST",
@@ -171,20 +171,20 @@ func TestClient_JsonEnums_awsAwsjson11Deserialize(t *testing.T) {
 			    }
 			}`),
 			ExpectResult: &JsonEnumsOutput{
-				FooEnum1: "Foo",
-				FooEnum2: "0",
-				FooEnum3: "1",
+				FooEnum1: types.FooEnum("Foo"),
+				FooEnum2: types.FooEnum("0"),
+				FooEnum3: types.FooEnum("1"),
 				FooEnumList: []types.FooEnum{
-					"Foo",
-					"0",
+					types.FooEnum("Foo"),
+					types.FooEnum("0"),
 				},
 				FooEnumSet: []types.FooEnum{
-					"Foo",
-					"0",
+					types.FooEnum("Foo"),
+					types.FooEnum("0"),
 				},
 				FooEnumMap: map[string]types.FooEnum{
-					"hi":   "Foo",
-					"zero": "0",
+					"hi":   types.FooEnum("Foo"),
+					"zero": types.FooEnum("0"),
 				},
 			},
 		},
