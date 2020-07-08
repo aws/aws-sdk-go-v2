@@ -36,18 +36,12 @@ import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.HttpBinding;
 import software.amazon.smithy.model.knowledge.HttpBindingIndex;
-import software.amazon.smithy.model.shapes.CollectionShape;
-import software.amazon.smithy.model.shapes.MapShape;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
-import software.amazon.smithy.model.shapes.ShapeType;
-import software.amazon.smithy.model.shapes.StructureShape;
-import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.EnumTrait;
 import software.amazon.smithy.model.traits.HttpErrorTrait;
-import software.amazon.smithy.model.traits.JsonNameTrait;
 import software.amazon.smithy.model.traits.MediaTypeTrait;
 import software.amazon.smithy.model.traits.StreamingTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
@@ -90,264 +84,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         }
 
         Shape inputShape = ProtocolUtils.expectInput(model, operation);
-        GoWriter writer = context.getWriter();
-        String functionName = ProtocolGenerator.getOperationDocumentSerFunctionName(inputShape, getProtocolName());
-
-        writeJsonShapeSerializerFunction(writer, model, context.getSymbolProvider(), functionName, inputShape,
-                documentBindings::contains);
-        writer.write("");
-    }
-
-    private void writeJsonShapeSerializerFunction(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
-            String functionName,
-            Shape inputShape,
-            Predicate<MemberShape> filterMemberShapes
-    ) {
-        Symbol jsonEncoder = SymbolUtils.createPointableSymbolBuilder("Value", SmithyGoDependency.SMITHY_JSON).build();
-        Symbol inputSymbol = symbolProvider.toSymbol(inputShape);
-
-        writer.addUseImports(SmithyGoDependency.FMT);
-        writer.openBlock("func $L(v $P, value $T) error {", "}", functionName, inputSymbol,
-                jsonEncoder, () -> {
-                    writer.openBlock("if v == nil {", "}", () -> {
-                        writer.write("return fmt.Errorf(\"unsupported serialization of nil %T\", v)");
-                    });
-                    writer.write("");
-
-                    switch (inputShape.getType()) {
-                        case UNION:
-                        case MAP:
-                        case STRUCTURE:
-                            writeShapeToJsonObject(model, symbolProvider, writer, inputShape, filterMemberShapes);
-                            break;
-                        case LIST:
-                        case SET:
-                            writeShapeToJsonArray(model, writer, (CollectionShape) inputShape);
-                            break;
-                        case DOCUMENT:
-                            writer.write("// TODO: Support " + inputShape.getType().name() + " Serialization");
-                            break;
-                        default:
-                            throw new CodegenException("Unexpected shape serialization to JSON");
-                    }
-
-                    writer.write("return nil");
-                });
-    }
-
-    private void writeShapeToJsonArray(
-            Model model,
-            GoWriter writer,
-            CollectionShape shape
-    ) {
-        MemberShape memberShape = shape.members().iterator().next();
-        Shape targetShape = model.expectShape(memberShape.getTarget());
-
-        writer.write("array := value.Array()");
-        writer.write("defer array.Close()");
-        writer.write("");
-
-        writer.openBlock("for i := range v {", "}", () -> {
-            writer.write("av := array.Value()");
-            if (!targetShape.hasTrait(EnumTrait.class)) {
-                writer.openBlock("if vv := v[i]; vv == nil {", "}", () -> {
-                    writer.write("av.Null()");
-                    writer.write("continue");
-                });
-            }
-            String operand = "v[i]";
-            if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
-                String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(targetShape,
-                        getProtocolName());
-
-                writer.openBlock("if err := $L($L, av); err != nil {", "}", serFunctionName, operand, () -> {
-                    writer.write("return err");
-                });
-            } else {
-                generateSimpleShapeToJsonValue(model, writer, memberShape, operand, (w, s) -> w.write("av.$L", s));
-            }
-        });
-    }
-
-    private void writeShapeToJsonObject(
-            Model model,
-            SymbolProvider symbolProvider,
-            GoWriter writer,
-            Shape shape,
-            Predicate<MemberShape> filterMemberShapes
-    ) {
-        writer.write("object := value.Object()");
-        writer.write("defer object.Close()");
-        writer.write("");
-
-        switch (shape.getType()) {
-            case MAP:
-                writeMapShapeToJsonObject(model, writer, (MapShape) shape);
-                break;
-            case STRUCTURE:
-                writeStructuredShapeToJsonObject(model, symbolProvider, writer, (StructureShape) shape,
-                        filterMemberShapes);
-                break;
-            case UNION:
-                writeUnionShapeToJsonObject(model, symbolProvider, writer, (UnionShape) shape);
-                break;
-            default:
-                throw new CodegenException("Unexpected shape serialization to JSON Object");
-        }
-    }
-
-    private void writeUnionShapeToJsonObject(
-            Model model,
-            SymbolProvider symbolProvider,
-            GoWriter writer,
-            UnionShape shape
-    ) {
-        Symbol symbol = symbolProvider.toSymbol(shape);
-
-        writer.addUseImports(SmithyGoDependency.FMT);
-
-        writer.openBlock("switch uv := v.(type) {", "}", () -> {
-            for (MemberShape memberShape : shape.getAllMembers().values()) {
-                Shape targetShape = model.expectShape(memberShape.getTarget());
-                String exportedMemberName = symbol.getName() + symbolProvider.toMemberName(memberShape);
-
-                writer.openBlock("case *$L:", "", exportedMemberName, () -> {
-                    if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
-                        String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(targetShape,
-                                getProtocolName());
-                        writer.write("av := object.key($S)", getSerializedMemberName(memberShape));
-                        writer.openBlock("if err := $L(uv.Value(), av); err != nil {", "}", serFunctionName, () -> {
-                            writer.write("return err");
-                        });
-                    } else {
-                        generateSimpleShapeToJsonValue(model, writer, memberShape, "uv.Value()", (w, s) -> {
-                            writer.write("object.Key($S).$L", getSerializedMemberName(memberShape), s);
-                        });
-                    }
-                });
-            }
-            writer.openBlock("case *$LUnknown:", "", symbol.getName(), () -> writer.write("fallthrough"));
-            writer.openBlock("default:", "", () -> {
-                writer.write("return fmt.Errorf(\"attempted to serialize unknown member type %T"
-                        + " for union %T\", uv, v)");
-            });
-        });
-    }
-
-    private void writeStructuredShapeToJsonObject(
-            Model model,
-            SymbolProvider symbolProvider,
-            GoWriter writer,
-            StructureShape shape,
-            Predicate<MemberShape> filterMemberShapes
-    ) {
-        shape.members().forEach(memberShape -> {
-            if (!filterMemberShapes.test(memberShape)) {
-                return;
-            }
-
-            Shape targetShape = model.expectShape(memberShape.getTarget());
-
-            writeSafeOperandAccessor(model, symbolProvider, memberShape, "v", writer,
-                    (bodyWriter, operand) -> {
-                        if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
-                            String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(targetShape,
-                                    getProtocolName());
-                            writer.openBlock("if err := $L($L, object.Key($S)); err != nil {", "}", serFunctionName,
-                                    operand, getSerializedMemberName(memberShape), () -> {
-                                        writer.write("return err");
-                                    });
-                        } else {
-                            generateSimpleShapeToJsonValue(model, writer, memberShape, operand, (w, s) -> {
-                                writer.write("object.Key($S).$L", getSerializedMemberName(memberShape), s);
-                            });
-                        }
-                    });
-            writer.write("");
-        });
-    }
-
-    private void writeMapShapeToJsonObject(Model model, GoWriter writer, MapShape shape) {
-        MemberShape memberShape = shape.getValue();
-        Shape targetShape = model.expectShape(memberShape.getTarget());
-
-        writer.openBlock("for key := range v {", "}", () -> {
-            writer.write("om := object.Key(key)");
-            if (!targetShape.hasTrait(EnumTrait.class)) {
-                writer.openBlock("if vv := v[key]; vv == nil {", "}", () -> {
-                    writer.write("om.Null()");
-                    writer.write("continue");
-                });
-            }
-            if (isShapeTypeDocumentSerializerRequired(targetShape.getType())) {
-                String serFunctionName = ProtocolGenerator
-                        .getDocumentSerializerFunctionName(targetShape,
-                                getProtocolName());
-                writer.openBlock("if err := $L($L, om); err != nil {", "}", serFunctionName, "v[key]",
-                        () -> {
-                            writer.write("return err");
-                        });
-            } else {
-                generateSimpleShapeToJsonValue(model, writer, memberShape, "v[key]", (w, s) -> {
-                    writer.write("om.$L", s);
-                });
-            }
-        });
-    }
-
-    private void generateSimpleShapeToJsonValue(
-            Model model,
-            GoWriter writer,
-            MemberShape memberShape,
-            String operand,
-            BiConsumer<GoWriter, String> locationEncoder
-    ) {
-        Shape targetShape = model.expectShape(memberShape.getTarget());
-
-        // JSON encoder helper methods take a value not a reference so we need to determine if we need to dereference.
-        operand = CodegenUtils.isShapePassByReference(targetShape)
-                && targetShape.getType() != ShapeType.BIG_INTEGER
-                && targetShape.getType() != ShapeType.BIG_DECIMAL
-                ? "*" + operand : operand;
-
-        switch (targetShape.getType()) {
-            case BOOLEAN:
-                locationEncoder.accept(writer, "Boolean(" + operand + ")");
-                break;
-            case STRING:
-                operand = targetShape.hasTrait(EnumTrait.class) ? "string(" + operand + ")" : operand;
-                locationEncoder.accept(writer, "String(" + operand + ")");
-                break;
-            case TIMESTAMP:
-                generateDocumentTimestampSerializer(model, writer, memberShape, operand, locationEncoder);
-                break;
-            case BYTE:
-                locationEncoder.accept(writer, "Byte(" + operand + ")");
-                break;
-            case SHORT:
-                locationEncoder.accept(writer, "Short(" + operand + ")");
-                break;
-            case INTEGER:
-                locationEncoder.accept(writer, "Integer(" + operand + ")");
-                break;
-            case LONG:
-                locationEncoder.accept(writer, "Long(" + operand + ")");
-                break;
-            case FLOAT:
-                locationEncoder.accept(writer, "Float(" + operand + ")");
-                break;
-            case DOUBLE:
-                locationEncoder.accept(writer, "Double(" + operand + ")");
-                break;
-            case BLOB:
-                locationEncoder.accept(writer, "Base64EncodeBytes(" + operand + ")");
-                break;
-            default:
-                throw new CodegenException("Unsupported shape type " + targetShape.getType());
-        }
+        inputShape.accept(new JsonShapeSerVisitor(context, documentBindings::contains));
     }
 
     @Override
@@ -438,7 +175,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.write("");
 
         Shape inputShape = ProtocolUtils.expectInput(model, operation);
-        String functionName = ProtocolGenerator.getOperationDocumentSerFunctionName(inputShape, getProtocolName());
+        String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(inputShape, getProtocolName());
 
         writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
         writer.write("jsonEncoder := smithyjson.NewEncoder()");
@@ -456,69 +193,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
     @Override
     protected void generateDocumentBodyShapeSerializers(GenerationContext context, Set<Shape> shapes) {
-        GoWriter writer = context.getWriter();
-        Model model = context.getModel();
-        SymbolProvider symbolProvider = context.getSymbolProvider();
-
-        shapes.forEach(shape -> {
-            String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(shape, getProtocolName());
-            writeJsonShapeSerializerFunction(writer, model, symbolProvider, functionName, shape,
-                    FunctionalUtils.alwaysTrue());
-            writer.write("");
-        });
-    }
-
-    @Override
-    public void generateSharedSerializerComponents(GenerationContext context) {
-        super.generateSharedSerializerComponents(context);
-        // pass
-    }
-
-    /**
-     * Get the serialized name to be used for the member shape.
-     *
-     * @param memberShape the member shape
-     * @return the serialized member name
-     */
-    private String getSerializedMemberName(MemberShape memberShape) {
-        Optional<JsonNameTrait> jsonNameTrait = memberShape.getTrait(JsonNameTrait.class);
-        return jsonNameTrait.isPresent() ? jsonNameTrait.get().getValue() : memberShape.getMemberName();
-    }
-
-    /**
-     * Generate the serializer statement for the document timestamp
-     *
-     * @param model       the model
-     * @param writer      the writer
-     * @param memberShape the timestamp member shape to serialize
-     * @param operand     the go operand
-     */
-    private void generateDocumentTimestampSerializer(
-            Model model,
-            GoWriter writer,
-            MemberShape memberShape,
-            String operand,
-            BiConsumer<GoWriter, String> locationEncoder
-    ) {
-        writer.addUseImports(SmithyGoDependency.SMITHY_TIME);
-
-        TimestampFormatTrait.Format format = memberShape.getMemberTrait(model, TimestampFormatTrait.class)
-                .map(TimestampFormatTrait::getFormat)
-                .orElse(TimestampFormatTrait.Format.EPOCH_SECONDS);
-
-        switch (format) {
-            case DATE_TIME:
-                locationEncoder.accept(writer, "String(smithytime.FormatDateTime(" + operand + "))");
-                break;
-            case HTTP_DATE:
-                locationEncoder.accept(writer, "String(smithytime.FormatHTTPDate(" + operand + "))");
-                break;
-            case EPOCH_SECONDS:
-                locationEncoder.accept(writer, "Double(smithytime.FormatEpochSeconds(" + operand + "))");
-                break;
-            case UNKNOWN:
-                throw new CodegenException("Unknown timestamp format");
-        }
+        JsonShapeSerVisitor visitor = new JsonShapeSerVisitor(context);
+        shapes.forEach(shape -> shape.accept(visitor));
     }
 
     @Override
