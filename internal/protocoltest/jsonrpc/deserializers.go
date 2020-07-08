@@ -21,7 +21,7 @@ type awsAwsjson11_deserializeOpEmptyOperation struct {
 }
 
 func (*awsAwsjson11_deserializeOpEmptyOperation) ID() string {
-	return "awsAwsjson11_deserializeOpEmptyOperation"
+	return "OperationDeserializer"
 }
 
 func (m *awsAwsjson11_deserializeOpEmptyOperation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -120,7 +120,7 @@ type awsAwsjson11_deserializeOpGreetingWithErrors struct {
 }
 
 func (*awsAwsjson11_deserializeOpGreetingWithErrors) ID() string {
-	return "awsAwsjson11_deserializeOpGreetingWithErrors"
+	return "OperationDeserializer"
 }
 
 func (m *awsAwsjson11_deserializeOpGreetingWithErrors) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -228,7 +228,7 @@ type awsAwsjson11_deserializeOpJsonEnums struct {
 }
 
 func (*awsAwsjson11_deserializeOpJsonEnums) ID() string {
-	return "awsAwsjson11_deserializeOpJsonEnums"
+	return "OperationDeserializer"
 }
 
 func (m *awsAwsjson11_deserializeOpJsonEnums) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -327,7 +327,7 @@ type awsAwsjson11_deserializeOpKitchenSinkOperation struct {
 }
 
 func (*awsAwsjson11_deserializeOpKitchenSinkOperation) ID() string {
-	return "awsAwsjson11_deserializeOpKitchenSinkOperation"
+	return "OperationDeserializer"
 }
 
 func (m *awsAwsjson11_deserializeOpKitchenSinkOperation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -432,7 +432,7 @@ type awsAwsjson11_deserializeOpNullOperation struct {
 }
 
 func (*awsAwsjson11_deserializeOpNullOperation) ID() string {
-	return "awsAwsjson11_deserializeOpNullOperation"
+	return "OperationDeserializer"
 }
 
 func (m *awsAwsjson11_deserializeOpNullOperation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -531,7 +531,7 @@ type awsAwsjson11_deserializeOpOperationWithOptionalInputOutput struct {
 }
 
 func (*awsAwsjson11_deserializeOpOperationWithOptionalInputOutput) ID() string {
-	return "awsAwsjson11_deserializeOpOperationWithOptionalInputOutput"
+	return "OperationDeserializer"
 }
 
 func (m *awsAwsjson11_deserializeOpOperationWithOptionalInputOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -630,7 +630,7 @@ type awsAwsjson11_deserializeOpPutAndGetInlineDocuments struct {
 }
 
 func (*awsAwsjson11_deserializeOpPutAndGetInlineDocuments) ID() string {
-	return "awsAwsjson11_deserializeOpPutAndGetInlineDocuments"
+	return "OperationDeserializer"
 }
 
 func (m *awsAwsjson11_deserializeOpPutAndGetInlineDocuments) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
