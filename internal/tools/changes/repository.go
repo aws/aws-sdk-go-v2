@@ -75,6 +75,26 @@ func (r *Repository) InitializeVersions() error {
 // VersionSelector is a function that decides what version of a Go module should be passed to code generation.
 type VersionSelector func(r *Repository, module string) (string, error)
 
+// Set parses the input s and correspondingly sets the appropriate VersionSelector.
+func (v *VersionSelector) Set(s string) error {
+	switch s {
+	case "release":
+		*v = ReleaseVersionSelector
+	case "development":
+		*v = DevelopmentVersionSelector
+	case "tags":
+		*v = TaggedVersionSelector
+	default:
+		return fmt.Errorf("unknown version selector: %s", s)
+	}
+
+	return nil
+}
+
+func (v *VersionSelector) String() string {
+	return ""
+}
+
 func (r *Repository) discoverVersions(modules []string, selector VersionSelector) (VersionEnclosure, error) {
 	enclosure := VersionEnclosure{
 		SchemaVersion:  SchemaVersion,
