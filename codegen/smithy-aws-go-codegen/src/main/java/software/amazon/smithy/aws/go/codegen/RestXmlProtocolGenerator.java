@@ -36,28 +36,26 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     }
 
     @Override
-    protected void generateOperationDocumentSerializer(
-            GenerationContext context, OperationShape operation
-    ) {
+    protected void generateOperationDocumentSerializer(GenerationContext context, OperationShape operation) {
 
     }
 
     @Override
     protected void writeMiddlewareDocumentSerializerDelegator(
-            Model model, SymbolProvider symbolProvider, OperationShape operation,
-            GoStackStepMiddlewareGenerator generator, GoWriter writer
+            GenerationContext context,
+            OperationShape operation,
+            GoStackStepMiddlewareGenerator generator
     ) {
 
     }
 
     @Override
     protected void writeMiddlewareErrorDeserializer(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
+            GenerationContext context,
             OperationShape operationShape,
             GoStackStepMiddlewareGenerator generator
     ) {
+        GoWriter writer = context.getWriter();
         writer.openBlock("if response.StatusCode < 200 || response.StatusCode >= 300 {", "}", () -> {
             writer.write("return out, metadata, " +
                     "&smithy.DeserializationError{Err: fmt.Errorf(\"TODO: Implement error deserializer delegators\")}");
@@ -66,7 +64,8 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
     @Override
     protected void writeMiddlewareDocumentDeserializerDelegator(
-            GoWriter writer, Model model, SymbolProvider symbolProvider, OperationShape operation,
+            GenerationContext context,
+            OperationShape operation,
             GoStackStepMiddlewareGenerator generator
     ) {
 
@@ -74,8 +73,10 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
     @Override
     protected void writeMiddlewarePayloadSerializerDelegator(
-            Model model, SymbolProvider symbolProvider, OperationShape operation, MemberShape memberShape,
-            GoStackStepMiddlewareGenerator generator, GoWriter writer
+            GenerationContext context,
+            OperationShape operation,
+            MemberShape memberShape,
+            GoStackStepMiddlewareGenerator generator
     ) {
 
     }
