@@ -85,16 +85,16 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
     @Override
     protected void writeMiddlewarePayloadSerializerDelegator(
-            Model model,
-            SymbolProvider symbolProvider,
+            GenerationContext context,
             OperationShape operation,
             MemberShape memberShape,
-            GoStackStepMiddlewareGenerator generator,
-            GoWriter writer
+            GoStackStepMiddlewareGenerator generator
     ) {
+        GoWriter writer = context.getWriter();
+        Model model = context.getModel();
         Shape payloadShape = model.expectShape(memberShape.getTarget());
 
-        writeSafeOperandAccessor(model, symbolProvider, memberShape, "input", writer, (w, s) -> {
+        writeSafeOperandAccessor(model, context.getSymbolProvider(), memberShape, "input", writer, (w, s) -> {
             writer.openBlock("if !restEncoder.HasHeader(\"Content-Type\") {", "}", () -> {
                 writer.write("restEncoder.SetHeader(\"Content-Type\").String($S)", getPayloadShapeMediaType(payloadShape));
             });
@@ -157,20 +157,18 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
     @Override
     protected void writeMiddlewareDocumentSerializerDelegator(
-            Model model,
-            SymbolProvider symbolProvider,
+            GenerationContext context,
             OperationShape operation,
-            GoStackStepMiddlewareGenerator generator,
-            GoWriter writer
+            GoStackStepMiddlewareGenerator generator
     ) {
-
+        GoWriter writer = context.getWriter();
         writer.addUseImports(SmithyGoDependency.SMITHY);
         writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
 
         writer.write("restEncoder.SetHeader(\"Content-Type\").String($S)", getDocumentContentType());
         writer.write("");
 
-        Shape inputShape = ProtocolUtils.expectInput(model, operation);
+        Shape inputShape = ProtocolUtils.expectInput(context.getModel(), operation);
         String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(inputShape, getProtocolName());
 
         writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
@@ -195,12 +193,12 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
     @Override
     protected void writeMiddlewareDocumentDeserializerDelegator(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
+            GenerationContext context,
             OperationShape operation,
             GoStackStepMiddlewareGenerator generator
     ) {
+        Model model = context.getModel();
+        GoWriter writer = context.getWriter();
         Shape targetShape = ProtocolUtils.expectOutput(model, operation);
         String operand = "output";
 
@@ -222,7 +220,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             }
             // for other payload target types we should deserialize using the appropriate document deserializer
             targetShape = payloadShape;
-            operand += "." + symbolProvider.toMemberName(memberShape);
+            operand += "." + context.getSymbolProvider().toMemberName(memberShape);
         }
 
         writer.addUseImports(SmithyGoDependency.SMITHY_IO);
@@ -277,12 +275,12 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
     @Override
     protected void writeMiddlewareErrorDeserializer(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
+            GenerationContext context,
             OperationShape operationShape,
             GoStackStepMiddlewareGenerator generator
     ) {
+        GoWriter writer = context.getWriter();
+        Model model = context.getModel();
         Collection<ShapeId> ErrorShapeIds = operationShape.getErrors();
 
         // checks if response has an error and retrieve the error code from the response
@@ -379,7 +377,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             writer.write("");
 
             // generate middleware for modeled error shapes
-            writeErrorShapeDeserializerDelegator(writer, model, symbolProvider, ErrorShapeIds);
+            writeErrorShapeDeserializerDelegator(writer, model, context.getSymbolProvider(), ErrorShapeIds);
             writer.write("");
 
             writer.openBlock("if len(errorMessage) != 0 {", "}", () -> {
