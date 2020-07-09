@@ -152,12 +152,12 @@ func DevelopmentVersionSelector(r *Repository, module string) (string, error) {
 	incr := versionIncrement(r.Metadata.GetChanges(module))
 
 	if incr != NoBump {
-		return PseudoVersion(r.RootPath, module)
+		return pseudoVersion(r.RootPath, module)
 	}
 
 	if v, ok := r.Metadata.CurrentVersions.ModuleVersions[module]; ok {
 		return v.Version, nil
 	}
 
-	return "", fmt.Errorf("couldn't select version for module %s: module has no changes and versions.json version", module)
+	return "", fmt.Errorf("couldn't select version for module %s: module has no changes and no versions.json version", module)
 }

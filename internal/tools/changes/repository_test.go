@@ -191,6 +191,15 @@ func TestRepository_DiscoverVersions(t *testing.T) {
 	})
 }
 
+func TestDevelopmentVersionSelector(t *testing.T) {
+	repo := getRepository(t)
+
+	_, err := DevelopmentVersionSelector(repo, "internal/tools/changes/testdata/modules/a")
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func getRepository(t *testing.T) *Repository {
 	t.Helper()
 

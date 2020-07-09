@@ -202,6 +202,7 @@ func (m *Metadata) deleteChangeFile(id string) error {
 	return os.Remove(filepath.Join(m.ChangePath, "next-release", id+".json"))
 }
 
+// SaveEnclosure updates the Metadata's enclosure and updates the versions.json file.
 func (m *Metadata) SaveEnclosure(enc VersionEnclosure) error {
 	err := writeJSON(enc, m.ChangePath, "", "versions")
 	if err != nil {

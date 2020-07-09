@@ -82,3 +82,68 @@ func TestDefaultVersion(t *testing.T) {
 		})
 	}
 }
+
+func TestPseudoVersion(t *testing.T) {
+	_, err := pseudoVersion(".", "internal/tools/changes")
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestFormatPseudoVersion(t *testing.T) {
+	var cases = map[string]struct {
+		hash        string
+		tagVersion  string
+		wantVersion string
+	}{
+		"no tag": {
+			hash:        "20200709182313-123456789012",
+			tagVersion:  "",
+			wantVersion: "v0.0.0-20200709182313-123456789012",
+		},
+		"v0.0.0 tag": {
+			hash:        "20200709182313-123456789012",
+			tagVersion:  "v0.0.0",
+			wantVersion: "v0.0.1-0.20200709182313-123456789012",
+		},
+		"v1.2.3 tag": {
+			hash:        "20200709182313-123456789012",
+			tagVersion:  "v1.2.3",
+			wantVersion: "v1.2.4-0.20200709182313-123456789012",
+		},
+		"invalid tag": {
+			hash:        "20200709182313-123456789012",
+			tagVersion:  "v0.0.0-pre",
+			wantVersion: "",
+		},
+	}
+
+	for id, tt := range cases {
+		t.Run(id, func(t *testing.T) {
+			pseudoV, err := formatPseudoVersion(tt.hash, tt.tagVersion)
+			if tt.wantVersion == "" {
+				if err == nil {
+					t.Error("expected non-nil err, got nil")
+				}
+			} else if pseudoV != tt.wantVersion {
+				t.Errorf("expected pseudo-version to be %s, got %s", tt.wantVersion, pseudoV)
+			}
+		})
+	}
+}
+
+func TestCommitHash(t *testing.T) {
+	commitHash, err := commitHash(".")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	parts := strings.Split(commitHash, "-")
+	if len(parts) != 2 {
+		t.Errorf("expected commit hash to have 2 parts separated by '-', got %s", commitHash)
+	}
+
+	if len(parts[1]) != 12 {
+		t.Errorf("expected commit hash length to be 12, got %d", len(parts[1]))
+	}
+}

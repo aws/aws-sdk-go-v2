@@ -13,15 +13,83 @@ const (
 	BugFixType = "bugfix"   // BugFixType is a constant change type for a bug fix.
 )
 
-// changeTypes maps valid Change Types to the header they are grouped under in CHANGELOGs.
-var changeHeaders = map[string]string{
-	FeatureType: "New Features",
-	BugFixType:  "Bug Fixes",
+// ParseChangeType attempts to parse the given string v into a ChangeType, returning an error if the string is invalid.
+func ParseChangeType(v string) (ChangeType, error) {
+	switch strings.ToLower(v) {
+	case string(FeatureChangeType):
+		return FeatureChangeType, nil
+	case string(BugFixChangeType):
+		return BugFixChangeType, nil
+	default:
+		return "", fmt.Errorf("unknown change type: %s", v)
+	}
 }
 
-var changeBumps = map[string]VersionIncrement{
-	BugFixType:  PatchBump,
-	FeatureType: MinorBump,
+// HeaderTitle returns the CHANGELOG header the ChangeType should be grouped under.
+func (c ChangeType) HeaderTitle() string {
+	switch c {
+	case FeatureChangeType:
+		return "New Features"
+	case BugFixChangeType:
+		return "Bug Fixes"
+	default:
+		panic("unknown change type: " + string(c))
+	}
+}
+
+// VersionIncrement returns the VersionIncrement corresponding to the given ChangeType.
+func (c ChangeType) VersionIncrement() VersionIncrement {
+	switch c {
+	case FeatureChangeType:
+		return MinorBump
+	case BugFixChangeType:
+		return PatchBump
+	default:
+		panic("unknown change type: " + string(c))
+	}
+}
+
+// String returns a string representation of the ChangeType
+func (c ChangeType) String() string {
+	return string(c)
+}
+
+// Set parses the given string and correspondingly sets the ChangeType, returning an error if the string could not be parsed.
+func (c *ChangeType) Set(s string) error {
+	p, err := ParseChangeType(s)
+	if err != nil {
+		return err
+	}
+
+	*c = p
+	return nil
+}
+
+// UnmarshalJSON implements the encoding/json package's Unmarshaler interface, additionally providing change type
+// validation.
+func (c *ChangeType) UnmarshalJSON(data []byte) error {
+	var s string
+
+	err := json.Unmarshal(data, &s)
+	if err != nil {
+		return err
+	}
+
+	*c, err = ParseChangeType(s)
+	return err
+}
+
+// UnmarshalYAML implements yaml.v2's Unmarshaler interface, additionally providing change type validation.
+func (c *ChangeType) UnmarshalYAML(unmarshal func(interface{}) error) error {
+	var s string
+
+	err := unmarshal(&s)
+	if err != nil {
+		return err
+	}
+
+	*c, err = ParseChangeType(s)
+	return err
 }
 
 const changeTemplateSuffix = `

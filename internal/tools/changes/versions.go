@@ -50,7 +50,7 @@ func (v VersionEnclosure) isValid() error {
 func versionIncrement(changes []Change) VersionIncrement {
 	maxBump := NoBump
 	for _, c := range changes {
-		bump := changeBumps[c.Type]
+		bump := c.Type.VersionIncrement()
 		if bump > maxBump {
 			maxBump = bump
 		}
@@ -95,6 +95,7 @@ func nextVersion(version string, bumpType VersionIncrement) (string, error) {
 	return fmt.Sprintf("%s.%d.%d", parts[0], minor, patch), nil
 }
 
+// taggedVersion returns the latest tagged version of the given module in the specified repository.
 func taggedVersion(repoPath, mod string) (string, error) {
 	path, major, ok := module.SplitPathVersion(mod)
 	if !ok {
@@ -133,6 +134,7 @@ func taggedVersion(repoPath, mod string) (string, error) {
 	return versions[0], nil
 }
 
+// versionTags gets all semantic version git tags for the given module major version, ignoring prerelease versions.
 func versionTags(repoPath, mod, major string) ([]string, error) {
 	if mod == RootModule {
 		mod = ""

@@ -1,9 +1,12 @@
 package changes
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"golang.org/x/mod/modfile"
 	"golang.org/x/mod/module"
+	"io"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -44,6 +47,7 @@ func shortenModPath(modulePath string) string {
 		return RootModule
 	}
 
+	modulePath = strings.TrimLeft(modulePath, "/")
 	return strings.TrimPrefix(modulePath, sdkRepo+"/")
 }
 
@@ -89,16 +93,34 @@ func discoverModules(root string) ([]string, map[string]string, error) {
 // listPackages returns a slice of packages that are part of the module whose go.mod file is in the directory specified
 // by path.
 func listPackages(path string) ([]string, error) {
-	cmd := exec.Command("go", "list", "./...")
+	cmd := exec.Command("go", "list", "-json", "./...")
 	out, err := execAt(cmd, path)
 	if err != nil {
 		return nil, err
 	}
 
-	packages := strings.Split(string(out), "\n")
+	return parseGoList(out)
+}
 
-	if len(packages) > 0 && packages[len(packages)-1] == "" {
-		packages = packages[:len(packages)-1] // remove the empty package caused by the last newline from go list
+// goPackage is a package as output by the `go list` command.
+type goPackage struct {
+	ImportPath string // ImportPath is the package's import path.
+}
+
+func parseGoList(output []byte) ([]string, error) {
+	var packages []string
+	dec := json.NewDecoder(bytes.NewReader(output))
+
+	for {
+		var p goPackage
+		if err := dec.Decode(&p); err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+
+		packages = append(packages, p.ImportPath)
 	}
 
 	return packages, nil
@@ -120,35 +142,48 @@ func defaultVersion(mod string) (string, error) {
 	return fmt.Sprintf("%s.0.0", major), nil
 }
 
-func PseudoVersion(repoPath, mod string) (string, error) {
+func pseudoVersion(repoPath, mod string) (string, error) {
+	commitHash, err := commitHash(repoPath)
+	if err != nil {
+		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
+	}
+
+	tagVer, err := taggedVersion(repoPath, mod)
+	if err != nil {
+		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
+	}
+
+	return formatPseudoVersion(commitHash, tagVer)
+}
+
+func formatPseudoVersion(commitHash, taggedVersion string) (string, error) {
 	// https://golang.org/cmd/go/#hdr-Pseudo_versions
-	cmd := exec.Command("git", "show", "--quiet", "--abbrev=12", "--date=format-local:%Y%m%d%H%M%S", "--format='%cd-%h'")
-	cmd.Env = os.Environ()
-	cmd.Env = append(cmd.Env, "TZ=UTC")
-
-	output, err := cmd.Output()
-	if err != nil {
-		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
-	}
-
-	tagV, err := taggedVersion(repoPath, mod)
-	if err != nil {
-		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
-	}
-
-	commitHash := string(output)
-	commitHash = strings.Trim(commitHash, "'\n")
-
-	if tagV == "" {
+	if taggedVersion == "" {
 		return fmt.Sprintf("v0.0.0-%s", commitHash), nil
 	}
 
 	// TODO: Handle prereleases psuedo-version
 
-	tagV, err = nextVersion(tagV, PatchBump)
+	taggedVersion, err := nextVersion(taggedVersion, PatchBump)
 	if err != nil {
 		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
 	}
 
-	return fmt.Sprintf("%s-0.%s", tagV, commitHash), nil
+	return fmt.Sprintf("%s-0.%s", taggedVersion, commitHash), nil
+}
+
+func commitHash(repoPath string) (string, error) {
+	cmd := exec.Command("git", "show", "--quiet", "--abbrev=12", "--date=format-local:%Y%m%d%H%M%S", "--format=%cd-%h")
+	cmd.Env = os.Environ()
+	cmd.Env = append(cmd.Env, "TZ=UTC")
+
+	output, err := execAt(cmd, repoPath)
+	if err != nil {
+		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
+	}
+
+	commitHash := string(output)
+	commitHash = strings.Trim(commitHash, "\n") // clean up git show output
+
+	return commitHash, nil
 }
