@@ -83,6 +83,7 @@ func findFile(fileName string, dir bool) (string, error) {
 	}
 }
 
+// execAt runs the given Cmd with is working directory set to path.
 func execAt(cmd *exec.Cmd, path string) (out []byte, err error) {
 	originalWd, err := os.Getwd()
 	if err != nil {

@@ -12,33 +12,52 @@ import (
 var tmpDir string
 
 func TestMain(m *testing.M) {
-	var err error
-
-	// testdata already has .changes, but make a temporary .changes directory so that we can easily cleanup after
-	// tests have run.
-	tmpDir, err = ioutil.TempDir("", "changes-test")
-	if err != nil {
-		panic(err)
-	}
-
-	err = os.MkdirAll(filepath.Join(tmpDir, metadataDir, pendingDir), 0755)
-	if err != nil {
-		panic(err)
-	}
-
-	err = os.Mkdir(filepath.Join(tmpDir, metadataDir, releaseDir), 0755)
+	cleanup, err := setupTmpChanges()
 	if err != nil {
 		panic(err)
 	}
 
 	code := m.Run()
 
-	err = os.RemoveAll(tmpDir)
+	err = cleanup()
 	if err != nil {
 		panic(err)
 	}
 
 	os.Exit(code)
+}
+
+func setupTmpChanges() (cleanup func() error, err error) {
+	// testdata already has .changes, but make a temporary .changes directory so that we can easily cleanup after
+	// tests have run.
+	tmpDir, err = ioutil.TempDir("", "changes-test")
+	if err != nil {
+		return nil, err
+	}
+
+	err = os.MkdirAll(filepath.Join(tmpDir, metadataDir, pendingDir), 0755)
+	if err != nil {
+		return nil, err
+	}
+
+	err = os.Mkdir(filepath.Join(tmpDir, metadataDir, releaseDir), 0755)
+	if err != nil {
+		return nil, err
+	}
+
+	// create empty versions.json
+	err = writeJSON(VersionEnclosure{
+		SchemaVersion:  SchemaVersion,
+		ModuleVersions: map[string]Version{},
+		Packages:       map[string]string{},
+	}, tmpDir, metadataDir, "versions")
+	if err != nil {
+		return nil, err
+	}
+
+	return func() error {
+		return os.RemoveAll(tmpDir)
+	}, nil
 }
 
 func TestLoadMetadata(t *testing.T) {
@@ -327,7 +346,11 @@ func TestGetChangesPath(t *testing.T) {
 func getMetadata(t *testing.T) *Metadata {
 	t.Helper()
 
-	m, _ := LoadMetadata(filepath.Join(tmpDir, metadataDir))
+	m, err := LoadMetadata(filepath.Join(tmpDir, metadataDir))
+	if err != nil {
+		panic(err)
+	}
+
 	return m
 }
 

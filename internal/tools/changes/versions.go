@@ -47,6 +47,18 @@ func (v VersionEnclosure) isValid() error {
 	return nil
 }
 
+func versionIncrement(changes []Change) VersionIncrement {
+	maxBump := NoBump
+	for _, c := range changes {
+		bump := changeBumps[c.Type]
+		if bump > maxBump {
+			maxBump = bump
+		}
+	}
+
+	return maxBump
+}
+
 func nextVersion(version string, bumpType VersionIncrement) (string, error) {
 	if !semver.IsValid(version) {
 		return "", fmt.Errorf("version %s is not valid", version)
@@ -83,7 +95,7 @@ func nextVersion(version string, bumpType VersionIncrement) (string, error) {
 	return fmt.Sprintf("%s.%d.%d", parts[0], minor, patch), nil
 }
 
-func taggedVersion(root, mod string) (string, error) {
+func taggedVersion(repoPath, mod string) (string, error) {
 	path, major, ok := module.SplitPathVersion(mod)
 	if !ok {
 		return "", fmt.Errorf("couldn't split module path: %s", mod)
@@ -96,19 +108,19 @@ func taggedVersion(root, mod string) (string, error) {
 
 	if major == "" {
 		// if there is no major version suffix, then the latest version could be v1 or v0.
-		versions, err = versionTags(root, path, "v1")
+		versions, err = versionTags(repoPath, path, "v1")
 		if err != nil {
 			return "", err
 		}
 
 		if len(versions) == 0 {
-			versions, err = versionTags(root, path, "v0")
+			versions, err = versionTags(repoPath, path, "v0")
 			if err != nil {
 				return "", err
 			}
 		}
 	} else {
-		versions, err = versionTags(root, path, major)
+		versions, err = versionTags(repoPath, path, major)
 		if err != nil {
 			return "", err
 		}
@@ -121,7 +133,7 @@ func taggedVersion(root, mod string) (string, error) {
 	return versions[0], nil
 }
 
-func versionTags(root, mod, major string) ([]string, error) {
+func versionTags(repoPath, mod, major string) ([]string, error) {
 	if mod == RootModule {
 		mod = ""
 	} else {
@@ -130,7 +142,7 @@ func versionTags(root, mod, major string) ([]string, error) {
 
 	// --sort=-v:refnam flag sorts the tags by descending version
 	cmd := exec.Command("git", "tag", "--sort=-v:refname", "-l", mod+major+"*")
-	output, err := execAt(cmd, root)
+	output, err := execAt(cmd, repoPath)
 	if err != nil {
 		return nil, err
 	}
@@ -138,6 +150,8 @@ func versionTags(root, mod, major string) ([]string, error) {
 	var versions []string
 
 	for _, v := range strings.Split(string(output), "\n") {
+		v = strings.TrimPrefix(v, mod)
+
 		if semver.IsValid(v) && semver.Prerelease(v) == "" && semver.Build(v) == "" {
 			versions = append(versions, strings.TrimPrefix(v, mod))
 		}

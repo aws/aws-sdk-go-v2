@@ -86,6 +86,8 @@ func discoverModules(root string) ([]string, map[string]string, error) {
 	return modules, packages, nil
 }
 
+// listPackages returns a slice of packages that are part of the module whose go.mod file is in the directory specified
+// by path.
 func listPackages(path string) ([]string, error) {
 	cmd := exec.Command("go", "list", "./...")
 	out, err := execAt(cmd, path)
@@ -102,6 +104,8 @@ func listPackages(path string) ([]string, error) {
 	return packages, nil
 }
 
+// defaultVersion returns a default version for the given module based on its import path. If a version suffix /vX is
+// present in the import path, the default version will be vX.0.0. Otherwise, the version will be v0.0.0.
 func defaultVersion(mod string) (string, error) {
 	_, major, ok := module.SplitPathVersion(mod)
 	if !ok {
@@ -116,19 +120,35 @@ func defaultVersion(mod string) (string, error) {
 	return fmt.Sprintf("%s.0.0", major), nil
 }
 
-func PseudoVersion() (string, error) {
-	cmd := exec.Command("git", "show", "--quiet", "--abbrev=12", "--date='format-local:%Y%m%d%H%M%S'", "--format='%cd-%h'")
-	//cmd := exec.Command("git", "--no-pager", "show", "--quiet", "--abbrev=12",
-	//	"--date='format-local:%Y%m%d%H%M%S'", `--format="%cd-%h"`)
+func PseudoVersion(repoPath, mod string) (string, error) {
+	// https://golang.org/cmd/go/#hdr-Pseudo_versions
+	cmd := exec.Command("git", "show", "--quiet", "--abbrev=12", "--date=format-local:%Y%m%d%H%M%S", "--format='%cd-%h'")
 	cmd.Env = os.Environ()
 	cmd.Env = append(cmd.Env, "TZ=UTC")
 
-	fmt.Println(cmd.String())
 	output, err := cmd.Output()
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
 	}
 
-	fmt.Println(string(output))
-	return "", nil
+	tagV, err := taggedVersion(repoPath, mod)
+	if err != nil {
+		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
+	}
+
+	commitHash := string(output)
+	commitHash = strings.Trim(commitHash, "'\n")
+
+	if tagV == "" {
+		return fmt.Sprintf("v0.0.0-%s", commitHash), nil
+	}
+
+	// TODO: Handle prereleases psuedo-version
+
+	tagV, err = nextVersion(tagV, PatchBump)
+	if err != nil {
+		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
+	}
+
+	return fmt.Sprintf("%s-0.%s", tagV, commitHash), nil
 }
