@@ -39,7 +39,7 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
      * Creates an AWS JSON RPC protocol generator
      */
     public JsonRpcProtocolGenerator() {
-        super(true);
+        super();
     }
 
     @Override
