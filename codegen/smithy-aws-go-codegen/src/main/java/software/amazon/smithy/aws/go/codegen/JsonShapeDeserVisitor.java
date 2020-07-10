@@ -103,7 +103,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
     protected void deserializeDocument(GenerationContext context, DocumentShape shape) {
         GoWriter writer = context.getWriter();
         // TODO: implement document deserialization
-        LOGGER.warning("Document type is currently unsupported for JSON serialization.");
+        LOGGER.warning("Document type is currently unsupported for JSON deserialization.");
         context.getWriter().writeDocs("TODO: implement document serialization.");
         writer.write("return nil");
     }
@@ -182,7 +182,6 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
                 }
 
                 writer.openBlock("default:", "", () -> {
-                    // TODO: do I need to import from restjson here?
                     writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL);
                     writer.write("err := restjson.DiscardUnknownField(decoder)");
                     writer.write("if err != nil {return err}");
@@ -198,6 +197,10 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
     @Override
     protected void deserializeUnion(GenerationContext context, UnionShape shape) {
         GoWriter writer = context.getWriter();
+        // TODO: implement union deserialization
+        // The tricky part is going to be accumulating bytes for unknown members.
+        LOGGER.warning("Union type is currently unsupported for JSON deserialization.");
+        context.getWriter().writeDocs("TODO: implement union serialization.");
         writer.write("return nil");
     }
 
