@@ -27,7 +27,7 @@ func TestDiscoverModules(t *testing.T) {
 		"nested/c/d",
 		"nested/c",
 	}
-	for i, _ := range wantMods {
+	for i := range wantMods {
 		wantMods[i] = prefix + wantMods[i]
 	}
 

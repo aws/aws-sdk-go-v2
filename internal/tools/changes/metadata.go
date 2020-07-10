@@ -269,7 +269,5 @@ func loadVersions(path string) (VersionEnclosure, error) {
 		return VersionEnclosure{}, fmt.Errorf("couldn't load version enclosure at %s: %v", path, err)
 	}
 
-	// TODO: perform check against git tags, error if inconsistent
-
 	return enclosure, nil
 }
