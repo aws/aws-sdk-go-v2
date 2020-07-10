@@ -2,6 +2,7 @@ package changes
 
 import (
 	"github.com/google/go-cmp/cmp"
+	"io/ioutil"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -38,7 +39,6 @@ func TestDiscoverModules(t *testing.T) {
 	if diff := cmp.Diff(wantMods, mods); diff != "" {
 		t.Errorf("expect modules to match:\n%v", diff)
 	}
-
 }
 
 func TestDefaultVersion(t *testing.T) {
@@ -80,6 +80,27 @@ func TestDefaultVersion(t *testing.T) {
 				t.Errorf("expected version to be %s, got %s", tt.wantVersion, v)
 			}
 		})
+	}
+}
+
+func TestParseGoList(t *testing.T) {
+	out, err := ioutil.ReadFile(filepath.Join("testdata", "golist.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	packages, err := parseGoList(out)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	wantPackages := []string{
+		"github.com/aws/aws-sdk-go-v2/internal/tools/changes",
+		"github.com/aws/aws-sdk-go-v2/internal/tools/changes/cmd/changetool",
+	}
+
+	if diff := cmp.Diff(wantPackages, packages); diff != "" {
+		t.Errorf("expect packages to match:\n%v", diff)
 	}
 }
 

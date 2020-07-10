@@ -32,10 +32,11 @@ type VersionEnclosure struct {
 	Packages       map[string]string  // Packages maps each package in the repo to the shortened module path that provides the package.
 }
 
-// isValid checks whether the ModuleVersions contained in the VersionEnclosure v accurately reflect the latest tagged versions.
-func (v VersionEnclosure) isValid() error {
+// isValid returns nil if the ModuleVersions contained in the VersionEnclosure v accurately reflect the latest tagged versions.
+// Otherwise, isValid returns an error.
+func (v VersionEnclosure) isValid(repoPath string) error {
 	for m, encVer := range v.ModuleVersions {
-		gitVer, err := taggedVersion("", m)
+		gitVer, err := taggedVersion(repoPath, m)
 		if err != nil {
 			return err
 		}

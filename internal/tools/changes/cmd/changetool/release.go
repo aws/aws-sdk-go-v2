@@ -69,7 +69,7 @@ func releaseSubcmd(args []string) error {
 			return err
 		}
 
-		return staticVersionsCmd()
+		return staticVersionsCmd(releaseParams.repo, releaseParams.selector)
 	default:
 		releaseUsage()
 		return errors.New("invalid usage")
@@ -86,13 +86,13 @@ func updatePendingCmd(repo *changes.Repository) error {
 	return nil
 }
 
-func staticVersionsCmd() error {
-	repo, err := changes.NewRepository(releaseParams.repo)
+func staticVersionsCmd(repoPath string, selector changes.VersionSelector) error {
+	repo, err := changes.NewRepository(repoPath)
 	if err != nil {
 		return fmt.Errorf("couldn't load repository: %v", err)
 	}
 
-	enclosure, err := repo.DiscoverVersions(releaseParams.selector)
+	enclosure, err := repo.DiscoverVersions(selector)
 	if err != nil {
 		return err
 	}
