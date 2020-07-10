@@ -58,11 +58,6 @@ public class AddAwsConfigFields implements GoIntegration {
                     .documentation("The region to send requests to. (Required)")
                     .build(),
             ConfigField.builder()
-                    .name(ENDPOINT_RESOLVER_CONFIG_NAME)
-                    .type(getAwsCoreSymbol("EndpointResolver"))
-                    .documentation("The resolver to use for looking up endpoints for the service.")
-                    .build(),
-            ConfigField.builder()
                     .name(RETRYER_CONFIG_NAME)
                     .type(getAwsRetrySymbol("Retryer"))
                     .documentation("Retryer guides how HTTP requests should be retried in case of\n"
