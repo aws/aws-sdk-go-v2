@@ -49,7 +49,32 @@ type Endpoint struct {
 	// passed in, but was not explicitly modeled.
 	SigningNameDerived bool
 
-	// The signing method that should be used for signign the requests to the
+	// The signing method that should be used for signing the requests to the
 	// endpoint.
 	SigningMethod string
+
+	Metadata EndpointMetadata
+}
+
+type EndpointMetadata struct {
+	values map[interface{}]interface{}
+}
+
+func (m EndpointMetadata) Get(key interface{}) interface{} {
+	return m.values[key]
+}
+
+func (m *EndpointMetadata) Set(key, value interface{}) {
+	if m.values == nil {
+		m.values = map[interface{}]interface{}{}
+	}
+	m.values[key] = value
+}
+
+func (m EndpointMetadata) Has(key interface{}) bool {
+	if m.values == nil {
+		return false
+	}
+	_, ok := m.values[key]
+	return ok
 }
