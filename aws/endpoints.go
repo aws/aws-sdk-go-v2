@@ -49,7 +49,7 @@ type Endpoint struct {
 	// passed in, but was not explicitly modeled.
 	SigningNameDerived bool
 
-	// The signing method that should be used for signign the requests to the
+	// The signing method that should be used for signing the requests to the
 	// endpoint.
 	SigningMethod string
 }
