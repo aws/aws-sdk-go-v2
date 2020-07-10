@@ -57,7 +57,7 @@ func SignSDKRequest(req *aws.Request) {
 		return
 	}
 
-	if req.HTTPRequest.Method != "POST" && req.HTTPRequest.Method != "GET" {
+	if req.HTTPRequest.Method != http.MethodPost && req.HTTPRequest.Method != http.MethodGet {
 		// The V2 signer only supports GET and POST
 		req.Error = errInvalidMethod
 		return
