@@ -16,6 +16,7 @@
 package software.amazon.smithy.aws.go.codegen;
 
 import software.amazon.smithy.go.codegen.GoDependency;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 
 /**
  * A class of constants for dependencies used by this package.
@@ -26,6 +27,9 @@ public final class AwsGoDependency {
     public static final GoDependency AWS_MIDDLEWARE = aws("aws/middleware", "awsmiddleware");
     public static final GoDependency AWS_RETRY = aws("aws/retry");
     public static final GoDependency AWS_SIGNER_V4 = aws("aws/signer/v4");
+    public static final GoDependency AWS_ENDPOINTS = aws("aws/endpoints/v2", "endpoints");
+
+    public static final GoDependency REGEXP = SmithyGoDependency.stdlib("regexp");
 
     public static final String AWS_SOURCE_PATH = "github.com/aws/aws-sdk-go-v2";
 
