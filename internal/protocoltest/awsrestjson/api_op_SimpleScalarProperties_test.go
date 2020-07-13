@@ -69,6 +69,21 @@ func TestClient_SimpleScalarProperties_awsRestjson1Serialize(t *testing.T) {
 			}`))
 			},
 		},
+		// Rest Json should not serialize null structure values
+		"RestJsonDoesntSerializeNullStructureValues": {
+			Params: &SimpleScalarPropertiesInput{
+				StringValue: nil,
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderBytes(actual, []byte(`{}`))
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
@@ -175,6 +190,17 @@ func TestClient_SimpleScalarProperties_awsRestjson1Deserialize(t *testing.T) {
 				FloatValue:        ptr.Float32(5.5),
 				DoubleValue:       ptr.Float64(6.5),
 			},
+		},
+		// Rest Json should not deserialize null structure values
+		"RestJsonDoesntDeserializeNullStructureValues": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			Body: []byte(`{
+			    "stringValue": null
+			}`),
+			ExpectResult: &SimpleScalarPropertiesOutput{},
 		},
 	}
 	for name, c := range cases {

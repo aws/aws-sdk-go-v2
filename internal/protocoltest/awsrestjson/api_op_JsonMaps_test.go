@@ -66,6 +66,28 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 			}`))
 			},
 		},
+		// Serializes null JSON map values
+		"RestJsonSerializesNullMapValues": {
+			Params: &JsonMapsInput{
+				MyMap: map[string]*types.GreetingStruct{
+					"foo": nil,
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/JsonMaps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "myMap": {
+			        "foo": null
+			    }
+			}`))
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
@@ -141,7 +163,7 @@ func TestClient_JsonMaps_awsRestjson1Deserialize(t *testing.T) {
 		Body          []byte
 		ExpectResult  *JsonMapsOutput
 	}{
-		// Serializes JSON maps
+		// Deserializes JSON maps
 		"RestJsonJsonMaps": {
 			StatusCode: 200,
 			Header: http.Header{
@@ -166,6 +188,24 @@ func TestClient_JsonMaps_awsRestjson1Deserialize(t *testing.T) {
 					"baz": {
 						Hi: ptr.String("bye"),
 					},
+				},
+			},
+		},
+		// Deserializes null JSON map values
+		"RestJsonDeserializesNullMapValues": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "myMap": {
+			        "foo": null
+			    }
+			}`),
+			ExpectResult: &JsonMapsOutput{
+				MyMap: map[string]*types.GreetingStruct{
+					"foo": nil,
 				},
 			},
 		},
