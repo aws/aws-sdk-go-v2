@@ -150,7 +150,7 @@ func ReleaseVersionSelector(r *Repository, module string) (string, error) {
 		return nextVersion(currentVersion, incr)
 	}
 
-	v, err := taggedVersion(r.RootPath, module)
+	v, err := taggedVersion(r.RootPath, module, false)
 	if err != nil {
 		return "", fmt.Errorf("couldn't find current version of %s: %v", module, err)
 	}
@@ -165,7 +165,7 @@ func ReleaseVersionSelector(r *Repository, module string) (string, error) {
 
 // TaggedVersionSelector returns the greatest version of module tagged in the git repository.
 func TaggedVersionSelector(r *Repository, module string) (string, error) {
-	return taggedVersion(r.RootPath, module)
+	return taggedVersion(r.RootPath, module, false)
 }
 
 // DevelopmentVersionSelector returns a commit hash based version if the module has associated pending Changes, otherwise

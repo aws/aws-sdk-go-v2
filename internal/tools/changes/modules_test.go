@@ -132,9 +132,19 @@ func TestFormatPseudoVersion(t *testing.T) {
 			tagVersion:  "v1.2.3",
 			wantVersion: "v1.2.4-0.20200709182313-123456789012",
 		},
-		"invalid tag": {
+		"v1.2.3 pre tag": {
 			hash:        "20200709182313-123456789012",
-			tagVersion:  "v0.0.0-pre",
+			tagVersion:  "v1.2.3-pre",
+			wantVersion: "v1.2.3-pre.0.20200709182313-123456789012",
+		},
+		"v2.0.0 beta tag": {
+			hash:        "20200709182313-123456789012",
+			tagVersion:  "v2.0.0-beta",
+			wantVersion: "v2.0.0-beta.0.20200709182313-123456789012",
+		},
+		"invalid": {
+			hash:        "20200709182313-123456789012",
+			tagVersion:  "v2.0.0-beta+build.tag",
 			wantVersion: "",
 		},
 	}

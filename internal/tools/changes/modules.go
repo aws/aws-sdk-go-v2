@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"golang.org/x/mod/modfile"
 	"golang.org/x/mod/module"
+	"golang.org/x/mod/semver"
 	"io"
 	"io/ioutil"
 	"os"
@@ -15,7 +16,7 @@ import (
 )
 
 const sdkRepo = "github.com/aws/aws-sdk-go-v2"
-const RootModule = "/"
+const rootModule = "/"
 
 // GetCurrentModule returns a shortened module path (from the root of the repository to the module, not a full import
 // path) for the Go module containing the current directory.
@@ -44,7 +45,7 @@ func getModFile(path string) (*modfile.File, error) {
 
 func shortenModPath(modulePath string) string {
 	if modulePath == sdkRepo {
-		return RootModule
+		return rootModule
 	}
 
 	modulePath = strings.TrimLeft(modulePath, "/")
@@ -52,7 +53,7 @@ func shortenModPath(modulePath string) string {
 }
 
 func lengthenModPath(modulePath string) string {
-	if modulePath == RootModule {
+	if modulePath == rootModule {
 		return sdkRepo
 	}
 
@@ -159,7 +160,7 @@ func pseudoVersion(repoPath, mod string) (string, error) {
 		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
 	}
 
-	tagVer, err := taggedVersion(repoPath, mod)
+	tagVer, err := taggedVersion(repoPath, mod, true)
 	if err != nil {
 		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
 	}
@@ -167,13 +168,23 @@ func pseudoVersion(repoPath, mod string) (string, error) {
 	return formatPseudoVersion(commitHash, tagVer)
 }
 
+// formatPseudoVersion returns a Go module pseudo version as described in https://golang.org/cmd/go/#hdr-Pseudo_versions.
+// taggedVersion is the latest semantic version tag, which may include a prerelease component.
 func formatPseudoVersion(commitHash, taggedVersion string) (string, error) {
-	// https://golang.org/cmd/go/#hdr-Pseudo_versions
+	if b := semver.Build(taggedVersion); b != "" {
+		return "", fmt.Errorf("expected version to not have build tag, got: %s", b)
+	}
+
 	if taggedVersion == "" {
 		return fmt.Sprintf("v0.0.0-%s", commitHash), nil
 	}
 
-	// TODO: Handle prereleases psuedo-version
+	pre := semver.Prerelease(taggedVersion) // pre includes '-'
+	if pre != "" {
+		taggedVersion = strings.TrimSuffix(taggedVersion, pre)
+
+		return fmt.Sprintf("%s%s.0.%s", taggedVersion, pre, commitHash), nil
+	}
 
 	taggedVersion, err := nextVersion(taggedVersion, PatchBump)
 	if err != nil {
@@ -183,6 +194,8 @@ func formatPseudoVersion(commitHash, taggedVersion string) (string, error) {
 	return fmt.Sprintf("%s-0.%s", taggedVersion, commitHash), nil
 }
 
+// commitHash returns a timestamp and commit hash for the HEAD commit of the given repository, formatted in the way
+// expected for a go.mod file pseudo-version.
 func commitHash(repoPath string) (string, error) {
 	cmd := exec.Command("git", "show", "--quiet", "--abbrev=12", "--date=format-local:%Y%m%d%H%M%S", "--format=%cd-%h")
 	cmd.Env = os.Environ()

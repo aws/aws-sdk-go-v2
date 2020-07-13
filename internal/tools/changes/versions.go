@@ -5,6 +5,7 @@ import (
 	"golang.org/x/mod/module"
 	"golang.org/x/mod/semver"
 	"os/exec"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -36,7 +37,7 @@ type VersionEnclosure struct {
 // Otherwise, isValid returns an error.
 func (v VersionEnclosure) isValid(repoPath string) error {
 	for m, encVer := range v.ModuleVersions {
-		gitVer, err := taggedVersion(repoPath, m)
+		gitVer, err := taggedVersion(repoPath, m, false)
 		if err != nil {
 			return err
 		}
@@ -98,7 +99,7 @@ func nextVersion(version string, bumpType VersionIncrement) (string, error) {
 }
 
 // taggedVersion returns the latest tagged version of the given module in the specified repository.
-func taggedVersion(repoPath, mod string) (string, error) {
+func taggedVersion(repoPath, mod string, includePrereleases bool) (string, error) {
 	path, major, ok := module.SplitPathVersion(mod)
 	if !ok {
 		return "", fmt.Errorf("couldn't split module path: %s", mod)
@@ -111,19 +112,19 @@ func taggedVersion(repoPath, mod string) (string, error) {
 
 	if major == "" {
 		// if there is no major version suffix, then the latest version could be v1 or v0.
-		versions, err = versionTags(repoPath, path, "v1")
+		versions, err = versionTags(repoPath, path, "v1", includePrereleases)
 		if err != nil {
 			return "", err
 		}
 
 		if len(versions) == 0 {
-			versions, err = versionTags(repoPath, path, "v0")
+			versions, err = versionTags(repoPath, path, "v0", includePrereleases)
 			if err != nil {
 				return "", err
 			}
 		}
 	} else {
-		versions, err = versionTags(repoPath, path, major)
+		versions, err = versionTags(repoPath, path, major, includePrereleases)
 		if err != nil {
 			return "", err
 		}
@@ -137,14 +138,13 @@ func taggedVersion(repoPath, mod string) (string, error) {
 }
 
 // versionTags gets all semantic version git tags for the given module major version, ignoring prerelease versions.
-func versionTags(repoPath, mod, major string) ([]string, error) {
-	if mod == RootModule {
+func versionTags(repoPath, mod, major string, includePrereleases bool) ([]string, error) {
+	if mod == rootModule {
 		mod = ""
 	} else {
 		mod += "/"
 	}
 
-	// --sort=-v:refnam flag sorts the tags by descending version
 	cmd := exec.Command("git", "tag", "--sort=-v:refname", "-l", mod+major+"*")
 	output, err := execAt(cmd, repoPath)
 	if err != nil {
@@ -155,11 +155,16 @@ func versionTags(repoPath, mod, major string) ([]string, error) {
 
 	for _, v := range strings.Split(string(output), "\n") {
 		v = strings.TrimPrefix(v, mod)
+		prerelease := semver.Prerelease(v) != ""
 
-		if semver.IsValid(v) && semver.Prerelease(v) == "" && semver.Build(v) == "" {
+		if (semver.IsValid(v) && semver.Build(v) == "") && (!prerelease || includePrereleases) {
 			versions = append(versions, strings.TrimPrefix(v, mod))
 		}
 	}
+
+	sort.Slice(versions, func(i, j int) bool {
+		return semver.Compare(versions[i], versions[j]) > 0
+	})
 
 	return versions, nil
 }
