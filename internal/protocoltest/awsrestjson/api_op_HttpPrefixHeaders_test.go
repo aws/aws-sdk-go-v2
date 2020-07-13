@@ -162,18 +162,6 @@ func TestClient_HttpPrefixHeaders_awsRestjson1Deserialize(t *testing.T) {
 				},
 			},
 		},
-		// No prefix headers are serialized because the value is empty
-		"RestJsonHttpPrefixHeadersAreNotPresent": {
-			StatusCode: 200,
-			Header: http.Header{
-				"X-Foo": []string{"Foo"},
-			},
-			Body: []byte(``),
-			ExpectResult: &HttpPrefixHeadersOutput{
-				Foo:    ptr.String("Foo"),
-				FooMap: map[string]*string{},
-			},
-		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
