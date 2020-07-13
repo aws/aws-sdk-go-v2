@@ -182,6 +182,9 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
             writer.openBlock("switch t {", "}", () -> {
                 Set<MemberShape> members = new TreeSet<>(shape.members());
                 for (MemberShape member : members) {
+                    if (!memberFilter.test(member)) {
+                        continue;
+                    }
                     String memberName = symbolProvider.toMemberName(member);
                     String serializedMemberName = getSerializedMemberName(member);
                     writer.openBlock("case $S:", "", serializedMemberName, () -> {
