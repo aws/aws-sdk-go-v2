@@ -15,10 +15,11 @@
 
 package software.amazon.smithy.aws.go.codegen;
 
+import static software.amazon.smithy.go.codegen.integration.ProtocolUtils.writeSafeMemberAccessor;
+
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import software.amazon.smithy.codegen.core.CodegenException;
@@ -94,38 +95,38 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         Model model = context.getModel();
         Shape payloadShape = model.expectShape(memberShape.getTarget());
 
-        writeSafeOperandAccessor(model, context.getSymbolProvider(), memberShape, "input", writer, (w, s) -> {
+        writeSafeMemberAccessor(context, memberShape, "input", s -> {
             writer.openBlock("if !restEncoder.HasHeader(\"Content-Type\") {", "}", () -> {
                 writer.write("restEncoder.SetHeader(\"Content-Type\").String($S)", getPayloadShapeMediaType(payloadShape));
             });
             writer.write("");
 
             if (payloadShape.hasTrait(StreamingTrait.class)) {
-                w.write("payload := $L", s);
+                writer.write("payload := $L", s);
 
             } else if (payloadShape.isBlobShape()) {
-                w.addUseImports(SmithyGoDependency.BYTES);
-                w.write("payload := bytes.NewReader($L)", s);
+                writer.addUseImports(SmithyGoDependency.BYTES);
+                writer.write("payload := bytes.NewReader($L)", s);
 
             } else if (payloadShape.isStringShape()) {
-                w.addUseImports(SmithyGoDependency.STRINGS);
-                w.write("payload := strings.NewReader(*$L)", s);
+                writer.addUseImports(SmithyGoDependency.STRINGS);
+                writer.write("payload := strings.NewReader(*$L)", s);
 
             } else {
                 String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(payloadShape,
                         getProtocolName());
-                w.addUseImports(SmithyGoDependency.SMITHY_JSON);
-                w.write("jsonEncoder := smithyjson.NewEncoder()");
-                w.openBlock("if err := $L($L, jsonEncoder.Value); err != nil {", "}", functionName,
+                writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
+                writer.write("jsonEncoder := smithyjson.NewEncoder()");
+                writer.openBlock("if err := $L($L, jsonEncoder.Value); err != nil {", "}", functionName,
                         s, () -> {
-                            w.write("return out, metadata, &smithy.SerializationError{Err: err}");
+                            writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
                         });
-                w.write("payload := bytes.NewReader(jsonEncoder.Bytes())");
+                writer.write("payload := bytes.NewReader(jsonEncoder.Bytes())");
             }
 
-            w.openBlock("if request, err = request.SetStream(payload); err != nil {", "}",
+            writer.openBlock("if request, err = request.SetStream(payload); err != nil {", "}",
                     () -> {
-                        w.write("return out, metadata, &smithy.SerializationError{Err: err}");
+                        writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
                     });
         });
     }
