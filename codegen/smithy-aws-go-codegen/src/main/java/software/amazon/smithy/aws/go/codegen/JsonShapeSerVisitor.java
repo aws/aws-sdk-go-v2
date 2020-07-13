@@ -15,7 +15,7 @@
 
 package software.amazon.smithy.aws.go.codegen;
 
-import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.writeSafeMemberAccessor;
+import static software.amazon.smithy.go.codegen.integration.ProtocolUtils.writeSafeMemberAccessor;
 
 import java.util.Collections;
 import java.util.Map;
