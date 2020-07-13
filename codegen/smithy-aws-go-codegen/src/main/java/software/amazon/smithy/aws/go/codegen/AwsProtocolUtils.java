@@ -76,7 +76,6 @@ final class AwsProtocolUtils {
                             writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
                             writer.openBlock("[]APIOptionFunc{", "},", () -> {
                                 writer.openBlock("func(s *middleware.Stack) error {", "},", () -> {
-                                    writer.write("s.Build.Clear()");
                                     writer.write("s.Finalize.Clear()");
                                     writer.write("return nil");
                                 });
