@@ -60,8 +60,8 @@ func TestClient_JsonLists_awsRestjson1Serialize(t *testing.T) {
 					ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
 				},
 				EnumList: []types.FooEnum{
-					"Foo",
-					"0",
+					types.FooEnum("Foo"),
+					types.FooEnum("0"),
 				},
 				NestedStringList: [][]*string{
 					{
@@ -330,8 +330,8 @@ func TestClient_JsonLists_awsRestjson1Deserialize(t *testing.T) {
 					ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
 				},
 				EnumList: []types.FooEnum{
-					"Foo",
-					"0",
+					types.FooEnum("Foo"),
+					types.FooEnum("0"),
 				},
 				NestedStringList: [][]*string{
 					{
