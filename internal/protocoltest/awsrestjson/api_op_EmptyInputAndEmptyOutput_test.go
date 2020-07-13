@@ -40,7 +40,7 @@ func TestClient_EmptyInputAndEmptyOutput_awsRestjson1Serialize(t *testing.T) {
 			ExpectQuery:   []smithytesting.QueryItem{},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{}`))
+				return smithytesting.CompareReaderEmpty(actual)
 			},
 		},
 	}
@@ -123,6 +123,13 @@ func TestClient_EmptyInputAndEmptyOutput_awsRestjson1Deserialize(t *testing.T) {
 			StatusCode:    200,
 			BodyMediaType: "application/json",
 			Body:          []byte(``),
+			ExpectResult:  &EmptyInputAndEmptyOutputOutput{},
+		},
+		// Empty output serializes no payload
+		"RestJsonEmptyInputAndEmptyJsonObjectOutput": {
+			StatusCode:    200,
+			BodyMediaType: "application/json",
+			Body:          []byte(`{}`),
 			ExpectResult:  &EmptyInputAndEmptyOutputOutput{},
 		},
 	}
