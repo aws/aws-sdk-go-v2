@@ -12,7 +12,7 @@ type validateOpConstantQueryString struct {
 }
 
 func (*validateOpConstantQueryString) ID() string {
-	return "validateOpConstantQueryString"
+	return "OperationInputValidation"
 }
 
 func (m *validateOpConstantQueryString) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -32,7 +32,7 @@ type validateOpHttpRequestWithGreedyLabelInPath struct {
 }
 
 func (*validateOpHttpRequestWithGreedyLabelInPath) ID() string {
-	return "validateOpHttpRequestWithGreedyLabelInPath"
+	return "OperationInputValidation"
 }
 
 func (m *validateOpHttpRequestWithGreedyLabelInPath) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -52,7 +52,7 @@ type validateOpHttpRequestWithLabelsAndTimestampFormat struct {
 }
 
 func (*validateOpHttpRequestWithLabelsAndTimestampFormat) ID() string {
-	return "validateOpHttpRequestWithLabelsAndTimestampFormat"
+	return "OperationInputValidation"
 }
 
 func (m *validateOpHttpRequestWithLabelsAndTimestampFormat) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -72,7 +72,7 @@ type validateOpHttpRequestWithLabels struct {
 }
 
 func (*validateOpHttpRequestWithLabels) ID() string {
-	return "validateOpHttpRequestWithLabels"
+	return "OperationInputValidation"
 }
 
 func (m *validateOpHttpRequestWithLabels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

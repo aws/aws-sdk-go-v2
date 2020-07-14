@@ -13,7 +13,7 @@ type validateOpDeleteSession struct {
 }
 
 func (*validateOpDeleteSession) ID() string {
-	return "validateOpDeleteSession"
+	return "OperationInputValidation"
 }
 
 func (m *validateOpDeleteSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -33,7 +33,7 @@ type validateOpGetSession struct {
 }
 
 func (*validateOpGetSession) ID() string {
-	return "validateOpGetSession"
+	return "OperationInputValidation"
 }
 
 func (m *validateOpGetSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -53,7 +53,7 @@ type validateOpPostContent struct {
 }
 
 func (*validateOpPostContent) ID() string {
-	return "validateOpPostContent"
+	return "OperationInputValidation"
 }
 
 func (m *validateOpPostContent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -73,7 +73,7 @@ type validateOpPostText struct {
 }
 
 func (*validateOpPostText) ID() string {
-	return "validateOpPostText"
+	return "OperationInputValidation"
 }
 
 func (m *validateOpPostText) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -93,7 +93,7 @@ type validateOpPutSession struct {
 }
 
 func (*validateOpPutSession) ID() string {
-	return "validateOpPutSession"
+	return "OperationInputValidation"
 }
 
 func (m *validateOpPutSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
