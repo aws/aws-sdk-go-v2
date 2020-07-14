@@ -261,7 +261,7 @@ func TestClient_GreetingWithErrors_FooError_awsAwsjson11Deserialize(t *testing.T
 		"AwsJson11FooErrorUsingCode": {
 			StatusCode: 500,
 			Header: http.Header{
-				"Content-Type": []string{"application/json"},
+				"Content-Type": []string{"application/x-amz-json-1.1"},
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
@@ -274,7 +274,7 @@ func TestClient_GreetingWithErrors_FooError_awsAwsjson11Deserialize(t *testing.T
 		"AwsJson11FooErrorUsingCodeAndNamespace": {
 			StatusCode: 500,
 			Header: http.Header{
-				"Content-Type": []string{"application/json"},
+				"Content-Type": []string{"application/x-amz-json-1.1"},
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
@@ -289,7 +289,7 @@ func TestClient_GreetingWithErrors_FooError_awsAwsjson11Deserialize(t *testing.T
 		"AwsJson11FooErrorUsingCodeUriAndNamespace": {
 			StatusCode: 500,
 			Header: http.Header{
-				"Content-Type": []string{"application/json"},
+				"Content-Type": []string{"application/x-amz-json-1.1"},
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
@@ -301,7 +301,7 @@ func TestClient_GreetingWithErrors_FooError_awsAwsjson11Deserialize(t *testing.T
 		"AwsJson11FooErrorWithDunderType": {
 			StatusCode: 500,
 			Header: http.Header{
-				"Content-Type": []string{"application/json"},
+				"Content-Type": []string{"application/x-amz-json-1.1"},
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
@@ -314,7 +314,7 @@ func TestClient_GreetingWithErrors_FooError_awsAwsjson11Deserialize(t *testing.T
 		"AwsJson11FooErrorWithDunderTypeAndNamespace": {
 			StatusCode: 500,
 			Header: http.Header{
-				"Content-Type": []string{"application/json"},
+				"Content-Type": []string{"application/x-amz-json-1.1"},
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
@@ -329,7 +329,7 @@ func TestClient_GreetingWithErrors_FooError_awsAwsjson11Deserialize(t *testing.T
 		"AwsJson11FooErrorWithDunderTypeUriAndNamespace": {
 			StatusCode: 500,
 			Header: http.Header{
-				"Content-Type": []string{"application/json"},
+				"Content-Type": []string{"application/x-amz-json-1.1"},
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
