@@ -64,7 +64,7 @@ type idempotencyToken_initializeOpQueryIdempotencyTokenAutoFill struct {
 }
 
 func (*idempotencyToken_initializeOpQueryIdempotencyTokenAutoFill) ID() string {
-	return "idempotencyToken_initializeOpQueryIdempotencyTokenAutoFill"
+	return "OperationIdempotencyTokenAutoFill"
 }
 
 func (m *idempotencyToken_initializeOpQueryIdempotencyTokenAutoFill) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

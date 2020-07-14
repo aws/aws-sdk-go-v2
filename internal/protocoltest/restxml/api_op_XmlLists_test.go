@@ -60,8 +60,8 @@ func TestClient_XmlLists_awsRestxmlSerialize(t *testing.T) {
 					ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
 				},
 				EnumList: []types.FooEnum{
-					"Foo",
-					"0",
+					types.FooEnum("Foo"),
+					types.FooEnum("0"),
 				},
 				NestedStringList: [][]*string{
 					{
@@ -320,8 +320,8 @@ func TestClient_XmlLists_awsRestxmlDeserialize(t *testing.T) {
 					ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
 				},
 				EnumList: []types.FooEnum{
-					"Foo",
-					"0",
+					types.FooEnum("Foo"),
+					types.FooEnum("0"),
 				},
 				NestedStringList: [][]*string{
 					{

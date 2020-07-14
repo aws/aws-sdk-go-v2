@@ -43,14 +43,7 @@ func (m *awsAwsjson11_serializeOpEmptyOperation) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonProtocol.EmptyOperation")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentEmptyOperationInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
+	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -89,14 +82,7 @@ func (m *awsAwsjson11_serializeOpGreetingWithErrors) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonProtocol.GreetingWithErrors")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGreetingWithErrorsInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
+	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}

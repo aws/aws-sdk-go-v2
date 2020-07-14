@@ -37,8 +37,8 @@ func TestClient_FlattenedXmlMap_awsRestxmlSerialize(t *testing.T) {
 		"FlattenedXmlMap": {
 			Params: &FlattenedXmlMapInput{
 				MyMap: map[string]types.FooEnum{
-					"foo": "Foo",
-					"baz": "Baz",
+					"foo": types.FooEnum("Foo"),
+					"baz": types.FooEnum("Baz"),
 				},
 			},
 			ExpectMethod:  "POST",
@@ -155,8 +155,8 @@ func TestClient_FlattenedXmlMap_awsRestxmlDeserialize(t *testing.T) {
 			</FlattenedXmlMapInputOutput>`),
 			ExpectResult: &FlattenedXmlMapOutput{
 				MyMap: map[string]types.FooEnum{
-					"foo": "Foo",
-					"baz": "Baz",
+					"foo": types.FooEnum("Foo"),
+					"baz": types.FooEnum("Baz"),
 				},
 			},
 		},
