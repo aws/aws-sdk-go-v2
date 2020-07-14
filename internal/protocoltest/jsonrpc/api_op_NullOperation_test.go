@@ -39,6 +39,9 @@ func TestClient_NullOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{}`))
@@ -54,6 +57,9 @@ func TestClient_NullOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
@@ -73,6 +79,9 @@ func TestClient_NullOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
@@ -91,6 +100,9 @@ func TestClient_NullOperation_awsAwsjson11Serialize(t *testing.T) {
 				if len(actualReq.URL.RawPath) == 0 {
 					actualReq.URL.RawPath = actualReq.URL.Path
 				}
+				if v := actualReq.ContentLength; v != 0 {
+					actualReq.Header.Set("Content-Length", strconv.FormatInt(v, 10))
+				}
 				var buf bytes.Buffer
 				if _, err := io.Copy(&buf, r.Body); err != nil {
 					t.Errorf("failed to read request body, %v", err)
@@ -103,7 +115,6 @@ func TestClient_NullOperation_awsAwsjson11Serialize(t *testing.T) {
 			client := New(Options{
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
-						s.Build.Clear()
 						s.Finalize.Clear()
 						return nil
 					},
@@ -158,7 +169,10 @@ func TestClient_NullOperation_awsAwsjson11Deserialize(t *testing.T) {
 	}{
 		// Null structure values are dropped
 		"AwsJson11StructuresDontDeserializeNullValues": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
 			    "string": null
@@ -167,7 +181,10 @@ func TestClient_NullOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Deserializes null values in maps
 		"AwsJson11MapsDeserializeNullValues": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
 			    "stringMap": {
@@ -182,7 +199,10 @@ func TestClient_NullOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Deserializes null values in lists
 		"AwsJson11ListsDeserializeNull": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
 			    "stringList": [
@@ -221,7 +241,6 @@ func TestClient_NullOperation_awsAwsjson11Deserialize(t *testing.T) {
 			client := New(Options{
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
-						s.Build.Clear()
 						s.Finalize.Clear()
 						return nil
 					},

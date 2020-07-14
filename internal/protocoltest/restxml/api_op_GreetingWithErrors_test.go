@@ -66,7 +66,6 @@ func TestClient_GreetingWithErrors_awsRestxmlDeserialize(t *testing.T) {
 			client := New(Options{
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
-						s.Build.Clear()
 						s.Finalize.Clear()
 						return nil
 					},
@@ -150,7 +149,6 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsRestxmlDeserialize(t *test
 			client := New(Options{
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
-						s.Build.Clear()
 						s.Finalize.Clear()
 						return nil
 					},
@@ -258,7 +256,6 @@ func TestClient_GreetingWithErrors_ComplexError_awsRestxmlDeserialize(t *testing
 			client := New(Options{
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
-						s.Build.Clear()
 						s.Finalize.Clear()
 						return nil
 					},
