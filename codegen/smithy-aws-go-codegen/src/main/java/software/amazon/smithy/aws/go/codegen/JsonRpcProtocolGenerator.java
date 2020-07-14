@@ -59,8 +59,15 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
         GoWriter writer = context.getWriter();
         StructureShape input = ProtocolUtils.expectInput(context.getModel(), operation);
         String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(input, getProtocolName());
-
         writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
+
+        // If there are no members then there's nothing to serialize
+        if (input.members().size() == 0) {
+            // Prevent warnings caused by input not being used
+            writer.write("_ = input");
+            return;
+        }
+
         writer.write("jsonEncoder := smithyjson.NewEncoder()");
         writer.openBlock("if err := $L(input, jsonEncoder.Value); err != nil {", "}", functionName, () -> {
             writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
