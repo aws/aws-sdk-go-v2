@@ -15,129 +15,6 @@ import (
 	"time"
 )
 
-type awsRestjson1_serializeOpJsonBlobs struct {
-}
-
-func (*awsRestjson1_serializeOpJsonBlobs) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpJsonBlobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*JsonBlobsInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/JsonBlobs")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
-	request.Method = "POST"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentJsonBlobsInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeHttpBindingsJsonBlobsInput(v *JsonBlobsInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeDocumentJsonBlobsInput(v *JsonBlobsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Data != nil {
-		ok := object.Key("data")
-		ok.Base64EncodeBytes(v.Data)
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpNoInputAndOutput struct {
-}
-
-func (*awsRestjson1_serializeOpNoInputAndOutput) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpNoInputAndOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*NoInputAndOutputInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/NoInputAndOutputOutput")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
-	request.Method = "POST"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeHttpBindingsNoInputAndOutputInput(v *NoInputAndOutputInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpJsonEnums struct {
 }
 
@@ -242,6 +119,261 @@ func awsRestjson1_serializeDocumentJsonEnumsInput(v *JsonEnumsInput, value smith
 	return nil
 }
 
+type awsRestjson1_serializeOpJsonBlobs struct {
+}
+
+func (*awsRestjson1_serializeOpJsonBlobs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpJsonBlobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*JsonBlobsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/JsonBlobs")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeDocumentJsonBlobsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsJsonBlobsInput(v *JsonBlobsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJsonBlobsInput(v *JsonBlobsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Data != nil {
+		ok := object.Key("data")
+		ok.Base64EncodeBytes(v.Data)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpTimestampFormatHeaders struct {
+}
+
+func (*awsRestjson1_serializeOpTimestampFormatHeaders) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpTimestampFormatHeaders) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*TimestampFormatHeadersInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/TimestampFormatHeaders")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeHttpBindingsTimestampFormatHeadersInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsTimestampFormatHeadersInput(v *TimestampFormatHeadersInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DefaultFormat != nil {
+		encoder.SetHeader("X-defaultFormat").String(smithytime.FormatHTTPDate(*v.DefaultFormat))
+	}
+
+	if v.MemberDateTime != nil {
+		encoder.SetHeader("X-memberDateTime").String(smithytime.FormatDateTime(*v.MemberDateTime))
+	}
+
+	if v.MemberEpochSeconds != nil {
+		encoder.SetHeader("X-memberEpochSeconds").Double(smithytime.FormatEpochSeconds(*v.MemberEpochSeconds))
+	}
+
+	if v.MemberHttpDate != nil {
+		encoder.SetHeader("X-memberHttpDate").String(smithytime.FormatHTTPDate(*v.MemberHttpDate))
+	}
+
+	if v.TargetDateTime != nil {
+		encoder.SetHeader("X-targetDateTime").String(smithytime.FormatDateTime(*v.TargetDateTime))
+	}
+
+	if v.TargetEpochSeconds != nil {
+		encoder.SetHeader("X-targetEpochSeconds").Double(smithytime.FormatEpochSeconds(*v.TargetEpochSeconds))
+	}
+
+	if v.TargetHttpDate != nil {
+		encoder.SetHeader("X-targetHttpDate").String(smithytime.FormatHTTPDate(*v.TargetHttpDate))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpNoInputAndOutput struct {
+}
+
+func (*awsRestjson1_serializeOpNoInputAndOutput) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpNoInputAndOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*NoInputAndOutputInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/NoInputAndOutputOutput")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsNoInputAndOutputInput(v *NoInputAndOutputInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpNoInputAndNoOutput struct {
+}
+
+func (*awsRestjson1_serializeOpNoInputAndNoOutput) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpNoInputAndNoOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*NoInputAndNoOutputInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/NoInputAndNoOutput")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsNoInputAndNoOutputInput(v *NoInputAndNoOutputInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGreetingWithErrors struct {
 }
 
@@ -287,6 +419,218 @@ func (m *awsRestjson1_serializeOpGreetingWithErrors) HandleSerialize(ctx context
 func awsRestjson1_serializeHttpBindingsGreetingWithErrorsInput(v *GreetingWithErrorsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpOmitsNullSerializesEmptyString struct {
+}
+
+func (*awsRestjson1_serializeOpOmitsNullSerializesEmptyString) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpOmitsNullSerializesEmptyString) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*OmitsNullSerializesEmptyStringInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/OmitsNullSerializesEmptyString")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeHttpBindingsOmitsNullSerializesEmptyStringInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsOmitsNullSerializesEmptyStringInput(v *OmitsNullSerializesEmptyStringInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.EmptyString != nil {
+		encoder.SetQuery("Empty").String(*v.EmptyString)
+	}
+
+	if v.NullValue != nil {
+		encoder.SetQuery("Null").String(*v.NullValue)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpJsonMaps struct {
+}
+
+func (*awsRestjson1_serializeOpJsonMaps) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpJsonMaps) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*JsonMapsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/JsonMaps")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeDocumentJsonMapsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsJsonMapsInput(v *JsonMapsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJsonMapsInput(v *JsonMapsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MyMap != nil {
+		ok := object.Key("myMap")
+		if err := awsRestjson1_serializeDocumentJsonMapsInputOutputMap(v.MyMap, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpRecursiveShapes struct {
+}
+
+func (*awsRestjson1_serializeOpRecursiveShapes) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpRecursiveShapes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RecursiveShapesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/RecursiveShapes")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeDocumentRecursiveShapesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsRecursiveShapesInput(v *RecursiveShapesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRecursiveShapesInput(v *RecursiveShapesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Nested != nil {
+		ok := object.Key("nested")
+		if err := awsRestjson1_serializeDocumentRecursiveShapesInputOutputNested1(v.Nested, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -388,14 +732,14 @@ func awsRestjson1_serializeHttpBindingsHttpRequestWithLabelsAndTimestampFormatIn
 	return nil
 }
 
-type awsRestjson1_serializeOpJsonMaps struct {
+type awsRestjson1_serializeOpInputAndOutputWithHeaders struct {
 }
 
-func (*awsRestjson1_serializeOpJsonMaps) ID() string {
+func (*awsRestjson1_serializeOpInputAndOutputWithHeaders) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestjson1_serializeOpJsonMaps) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestjson1_serializeOpInputAndOutputWithHeaders) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -403,13 +747,13 @@ func (m *awsRestjson1_serializeOpJsonMaps) HandleSerialize(ctx context.Context, 
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*JsonMapsInput)
+	input, ok := in.Parameters.(*InputAndOutputWithHeadersInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/JsonMaps")
+	opPath, opQuery := httpbinding.SplitURI("/InputAndOutputWithHeaders")
 	request.URL.Path = opPath
 	if len(request.URL.RawQuery) > 0 {
 		request.URL.RawQuery = "&" + opQuery
@@ -423,14 +767,7 @@ func (m *awsRestjson1_serializeOpJsonMaps) HandleSerialize(ctx context.Context, 
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentJsonMapsInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+	if err := awsRestjson1_serializeHttpBindingsInputAndOutputWithHeadersInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -441,73 +778,99 @@ func (m *awsRestjson1_serializeOpJsonMaps) HandleSerialize(ctx context.Context, 
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsJsonMapsInput(v *JsonMapsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeHttpBindingsInputAndOutputWithHeadersInput(v *InputAndOutputWithHeadersInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	return nil
-}
-
-func awsRestjson1_serializeDocumentJsonMapsInput(v *JsonMapsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.MyMap != nil {
-		ok := object.Key("myMap")
-		if err := awsRestjson1_serializeDocumentJsonMapsInputOutputMap(v.MyMap, ok); err != nil {
-			return err
+	if v.HeaderBooleanList != nil {
+		for i := range v.HeaderBooleanList {
+			if v.HeaderBooleanList[i] != nil {
+				encoder.AddHeader("X-BooleanList").Boolean(*v.HeaderBooleanList[i])
+			}
 		}
 	}
 
-	return nil
-}
-
-type awsRestjson1_serializeOpNoInputAndNoOutput struct {
-}
-
-func (*awsRestjson1_serializeOpNoInputAndNoOutput) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpNoInputAndNoOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	if v.HeaderByte != nil {
+		encoder.SetHeader("X-Byte").Byte(*v.HeaderByte)
 	}
 
-	input, ok := in.Parameters.(*NoInputAndNoOutputInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	if v.HeaderDouble != nil {
+		encoder.SetHeader("X-Double").Double(*v.HeaderDouble)
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/NoInputAndNoOutput")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
+	if len(v.HeaderEnum) > 0 {
+		encoder.SetHeader("X-Enum").String(string(v.HeaderEnum))
 	}
 
-	request.Method = "POST"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
+	if v.HeaderEnumList != nil {
+		for i := range v.HeaderEnumList {
+			if len(v.HeaderEnumList[i]) > 0 {
+				encoder.AddHeader("X-EnumList").String(string(v.HeaderEnumList[i]))
+			}
+		}
 	}
 
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
+	if v.HeaderFalseBool != nil {
+		encoder.SetHeader("X-Boolean2").Boolean(*v.HeaderFalseBool)
 	}
-	in.Request = request
 
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeHttpBindingsNoInputAndNoOutputInput(v *NoInputAndNoOutputInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
+	if v.HeaderFloat != nil {
+		encoder.SetHeader("X-Float").Float(*v.HeaderFloat)
+	}
+
+	if v.HeaderInteger != nil {
+		encoder.SetHeader("X-Integer").Integer(*v.HeaderInteger)
+	}
+
+	if v.HeaderIntegerList != nil {
+		for i := range v.HeaderIntegerList {
+			if v.HeaderIntegerList[i] != nil {
+				encoder.AddHeader("X-IntegerList").Integer(*v.HeaderIntegerList[i])
+			}
+		}
+	}
+
+	if v.HeaderLong != nil {
+		encoder.SetHeader("X-Long").Long(*v.HeaderLong)
+	}
+
+	if v.HeaderShort != nil {
+		encoder.SetHeader("X-Short").Short(*v.HeaderShort)
+	}
+
+	if v.HeaderString != nil {
+		if len(*v.HeaderString) > 0 {
+			encoder.SetHeader("X-String").String(*v.HeaderString)
+		}
+	}
+
+	if v.HeaderStringList != nil {
+		for i := range v.HeaderStringList {
+			if v.HeaderStringList[i] != nil && len(*v.HeaderStringList[i]) > 0 {
+				encoder.AddHeader("X-StringList").String(*v.HeaderStringList[i])
+			}
+		}
+	}
+
+	if v.HeaderStringSet != nil {
+		for i := range v.HeaderStringSet {
+			if v.HeaderStringSet[i] != nil && len(*v.HeaderStringSet[i]) > 0 {
+				encoder.AddHeader("X-StringSet").String(*v.HeaderStringSet[i])
+			}
+		}
+	}
+
+	if v.HeaderTimestampList != nil {
+		for i := range v.HeaderTimestampList {
+			if v.HeaderTimestampList[i] != nil {
+				encoder.AddHeader("X-TimestampList").String(smithytime.FormatHTTPDate(*v.HeaderTimestampList[i]))
+			}
+		}
+	}
+
+	if v.HeaderTrueBool != nil {
+		encoder.SetHeader("X-Boolean1").Boolean(*v.HeaderTrueBool)
 	}
 
 	return nil
@@ -563,14 +926,14 @@ func awsRestjson1_serializeHttpBindingsIgnoreQueryParamsInResponseInput(v *Ignor
 	return nil
 }
 
-type awsRestjson1_serializeOpOmitsNullSerializesEmptyString struct {
+type awsRestjson1_serializeOpAllQueryStringTypes struct {
 }
 
-func (*awsRestjson1_serializeOpOmitsNullSerializesEmptyString) ID() string {
+func (*awsRestjson1_serializeOpAllQueryStringTypes) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestjson1_serializeOpOmitsNullSerializesEmptyString) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestjson1_serializeOpAllQueryStringTypes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -578,13 +941,13 @@ func (m *awsRestjson1_serializeOpOmitsNullSerializesEmptyString) HandleSerialize
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*OmitsNullSerializesEmptyStringInput)
+	input, ok := in.Parameters.(*AllQueryStringTypesInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/OmitsNullSerializesEmptyString")
+	opPath, opQuery := httpbinding.SplitURI("/AllQueryStringTypesInput")
 	request.URL.Path = opPath
 	if len(request.URL.RawQuery) > 0 {
 		request.URL.RawQuery = "&" + opQuery
@@ -598,7 +961,7 @@ func (m *awsRestjson1_serializeOpOmitsNullSerializesEmptyString) HandleSerialize
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsOmitsNullSerializesEmptyStringInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeHttpBindingsAllQueryStringTypesInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -609,30 +972,131 @@ func (m *awsRestjson1_serializeOpOmitsNullSerializesEmptyString) HandleSerialize
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsOmitsNullSerializesEmptyStringInput(v *OmitsNullSerializesEmptyStringInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeHttpBindingsAllQueryStringTypesInput(v *AllQueryStringTypesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.EmptyString != nil {
-		encoder.SetQuery("Empty").String(*v.EmptyString)
+	if v.QueryBoolean != nil {
+		encoder.SetQuery("Boolean").Boolean(*v.QueryBoolean)
 	}
 
-	if v.NullValue != nil {
-		encoder.SetQuery("Null").String(*v.NullValue)
+	if v.QueryBooleanList != nil {
+		for i := range v.QueryBooleanList {
+			if v.QueryBooleanList[i] == nil {
+				continue
+			}
+			encoder.AddQuery("BooleanList").Boolean(*v.QueryBooleanList[i])
+		}
+	}
+
+	if v.QueryByte != nil {
+		encoder.SetQuery("Byte").Byte(*v.QueryByte)
+	}
+
+	if v.QueryDouble != nil {
+		encoder.SetQuery("Double").Double(*v.QueryDouble)
+	}
+
+	if v.QueryDoubleList != nil {
+		for i := range v.QueryDoubleList {
+			if v.QueryDoubleList[i] == nil {
+				continue
+			}
+			encoder.AddQuery("DoubleList").Double(*v.QueryDoubleList[i])
+		}
+	}
+
+	if len(v.QueryEnum) > 0 {
+		encoder.SetQuery("Enum").String(string(v.QueryEnum))
+	}
+
+	if v.QueryEnumList != nil {
+		for i := range v.QueryEnumList {
+			encoder.AddQuery("EnumList").String(string(v.QueryEnumList[i]))
+		}
+	}
+
+	if v.QueryFloat != nil {
+		encoder.SetQuery("Float").Float(*v.QueryFloat)
+	}
+
+	if v.QueryInteger != nil {
+		encoder.SetQuery("Integer").Integer(*v.QueryInteger)
+	}
+
+	if v.QueryIntegerList != nil {
+		for i := range v.QueryIntegerList {
+			if v.QueryIntegerList[i] == nil {
+				continue
+			}
+			encoder.AddQuery("IntegerList").Integer(*v.QueryIntegerList[i])
+		}
+	}
+
+	if v.QueryIntegerSet != nil {
+		for i := range v.QueryIntegerSet {
+			if v.QueryIntegerSet[i] == nil {
+				continue
+			}
+			encoder.AddQuery("IntegerSet").Integer(*v.QueryIntegerSet[i])
+		}
+	}
+
+	if v.QueryLong != nil {
+		encoder.SetQuery("Long").Long(*v.QueryLong)
+	}
+
+	if v.QueryShort != nil {
+		encoder.SetQuery("Short").Short(*v.QueryShort)
+	}
+
+	if v.QueryString != nil {
+		encoder.SetQuery("String").String(*v.QueryString)
+	}
+
+	if v.QueryStringList != nil {
+		for i := range v.QueryStringList {
+			if v.QueryStringList[i] == nil {
+				continue
+			}
+			encoder.AddQuery("StringList").String(*v.QueryStringList[i])
+		}
+	}
+
+	if v.QueryStringSet != nil {
+		for i := range v.QueryStringSet {
+			if v.QueryStringSet[i] == nil {
+				continue
+			}
+			encoder.AddQuery("StringSet").String(*v.QueryStringSet[i])
+		}
+	}
+
+	if v.QueryTimestamp != nil {
+		encoder.SetQuery("Timestamp").String(smithytime.FormatDateTime(*v.QueryTimestamp))
+	}
+
+	if v.QueryTimestampList != nil {
+		for i := range v.QueryTimestampList {
+			if v.QueryTimestampList[i] == nil {
+				continue
+			}
+			encoder.AddQuery("TimestampList").String(smithytime.FormatDateTime(*v.QueryTimestampList[i]))
+		}
 	}
 
 	return nil
 }
 
-type awsRestjson1_serializeOpRecursiveShapes struct {
+type awsRestjson1_serializeOpJsonTimestamps struct {
 }
 
-func (*awsRestjson1_serializeOpRecursiveShapes) ID() string {
+func (*awsRestjson1_serializeOpJsonTimestamps) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestjson1_serializeOpRecursiveShapes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestjson1_serializeOpJsonTimestamps) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -640,13 +1104,175 @@ func (m *awsRestjson1_serializeOpRecursiveShapes) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*RecursiveShapesInput)
+	input, ok := in.Parameters.(*JsonTimestampsInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/RecursiveShapes")
+	opPath, opQuery := httpbinding.SplitURI("/JsonTimestamps")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeDocumentJsonTimestampsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsJsonTimestampsInput(v *JsonTimestampsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJsonTimestampsInput(v *JsonTimestampsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DateTime != nil {
+		ok := object.Key("dateTime")
+		ok.String(smithytime.FormatDateTime(*v.DateTime))
+	}
+
+	if v.EpochSeconds != nil {
+		ok := object.Key("epochSeconds")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EpochSeconds))
+	}
+
+	if v.HttpDate != nil {
+		ok := object.Key("httpDate")
+		ok.String(smithytime.FormatHTTPDate(*v.HttpDate))
+	}
+
+	if v.Normal != nil {
+		ok := object.Key("normal")
+		ok.Double(smithytime.FormatEpochSeconds(*v.Normal))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpNullAndEmptyHeadersClient struct {
+}
+
+func (*awsRestjson1_serializeOpNullAndEmptyHeadersClient) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpNullAndEmptyHeadersClient) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*NullAndEmptyHeadersClientInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/NullAndEmptyHeadersClient")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeHttpBindingsNullAndEmptyHeadersClientInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsNullAndEmptyHeadersClientInput(v *NullAndEmptyHeadersClientInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.A != nil {
+		if len(*v.A) > 0 {
+			encoder.SetHeader("X-A").String(*v.A)
+		}
+	}
+
+	if v.B != nil {
+		if len(*v.B) > 0 {
+			encoder.SetHeader("X-B").String(*v.B)
+		}
+	}
+
+	if v.C != nil {
+		for i := range v.C {
+			if v.C[i] != nil && len(*v.C[i]) > 0 {
+				encoder.AddHeader("X-C").String(*v.C[i])
+			}
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpJsonLists struct {
+}
+
+func (*awsRestjson1_serializeOpJsonLists) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpJsonLists) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*JsonListsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/JsonLists")
 	request.URL.Path = opPath
 	if len(request.URL.RawQuery) > 0 {
 		request.URL.RawQuery = "&" + opQuery
@@ -663,7 +1289,7 @@ func (m *awsRestjson1_serializeOpRecursiveShapes) HandleSerialize(ctx context.Co
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentRecursiveShapesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeDocumentJsonListsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -678,7 +1304,7 @@ func (m *awsRestjson1_serializeOpRecursiveShapes) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsRecursiveShapesInput(v *RecursiveShapesInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeHttpBindingsJsonListsInput(v *JsonListsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -686,13 +1312,62 @@ func awsRestjson1_serializeHttpBindingsRecursiveShapesInput(v *RecursiveShapesIn
 	return nil
 }
 
-func awsRestjson1_serializeDocumentRecursiveShapesInput(v *RecursiveShapesInput, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentJsonListsInput(v *JsonListsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	if v.Nested != nil {
-		ok := object.Key("nested")
-		if err := awsRestjson1_serializeDocumentRecursiveShapesInputOutputNested1(v.Nested, ok); err != nil {
+	if v.BooleanList != nil {
+		ok := object.Key("booleanList")
+		if err := awsRestjson1_serializeDocumentBooleanList(v.BooleanList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EnumList != nil {
+		ok := object.Key("enumList")
+		if err := awsRestjson1_serializeDocumentFooEnumList(v.EnumList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IntegerList != nil {
+		ok := object.Key("integerList")
+		if err := awsRestjson1_serializeDocumentIntegerList(v.IntegerList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NestedStringList != nil {
+		ok := object.Key("nestedStringList")
+		if err := awsRestjson1_serializeDocumentNestedStringList(v.NestedStringList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StringList != nil {
+		ok := object.Key("stringList")
+		if err := awsRestjson1_serializeDocumentStringList(v.StringList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StringSet != nil {
+		ok := object.Key("stringSet")
+		if err := awsRestjson1_serializeDocumentStringSet(v.StringSet, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StructureList != nil {
+		ok := object.Key("myStructureList")
+		if err := awsRestjson1_serializeDocumentStructureList(v.StructureList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimestampList != nil {
+		ok := object.Key("timestampList")
+		if err := awsRestjson1_serializeDocumentTimestampList(v.TimestampList, ok); err != nil {
 			return err
 		}
 	}
@@ -700,14 +1375,14 @@ func awsRestjson1_serializeDocumentRecursiveShapesInput(v *RecursiveShapesInput,
 	return nil
 }
 
-type awsRestjson1_serializeOpInlineDocument struct {
+type awsRestjson1_serializeOpInlineDocumentAsPayload struct {
 }
 
-func (*awsRestjson1_serializeOpInlineDocument) ID() string {
+func (*awsRestjson1_serializeOpInlineDocumentAsPayload) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestjson1_serializeOpInlineDocument) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestjson1_serializeOpInlineDocumentAsPayload) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -715,13 +1390,13 @@ func (m *awsRestjson1_serializeOpInlineDocument) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*InlineDocumentInput)
+	input, ok := in.Parameters.(*InlineDocumentAsPayloadInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/InlineDocument")
+	opPath, opQuery := httpbinding.SplitURI("/InlineDocumentAsPayload")
 	request.URL.Path = opPath
 	if len(request.URL.RawQuery) > 0 {
 		request.URL.RawQuery = "&" + opQuery
@@ -735,10 +1410,322 @@ func (m *awsRestjson1_serializeOpInlineDocument) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	if input.DocumentValue != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			restEncoder.SetHeader("Content-Type").String("application/json")
+		}
+
+		jsonEncoder := smithyjson.NewEncoder()
+		if err := awsRestjson1_serializeDocumentDocument(input.DocumentValue, jsonEncoder.Value); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsInlineDocumentAsPayloadInput(v *InlineDocumentAsPayloadInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpEmptyInputAndEmptyOutput struct {
+}
+
+func (*awsRestjson1_serializeOpEmptyInputAndEmptyOutput) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpEmptyInputAndEmptyOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*EmptyInputAndEmptyOutputInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/EmptyInputAndEmptyOutput")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsEmptyInputAndEmptyOutputInput(v *EmptyInputAndEmptyOutputInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpConstantAndVariableQueryString struct {
+}
+
+func (*awsRestjson1_serializeOpConstantAndVariableQueryString) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpConstantAndVariableQueryString) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ConstantAndVariableQueryStringInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/ConstantAndVariableQueryString?foo=bar")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeHttpBindingsConstantAndVariableQueryStringInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsConstantAndVariableQueryStringInput(v *ConstantAndVariableQueryStringInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Baz != nil {
+		encoder.SetQuery("baz").String(*v.Baz)
+	}
+
+	if v.MaybeSet != nil {
+		encoder.SetQuery("maybeSet").String(*v.MaybeSet)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpHttpPayloadTraitsWithMediaType struct {
+}
+
+func (*awsRestjson1_serializeOpHttpPayloadTraitsWithMediaType) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpHttpPayloadTraitsWithMediaType) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*HttpPayloadTraitsWithMediaTypeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/HttpPayloadTraitsWithMediaType")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeHttpBindingsHttpPayloadTraitsWithMediaTypeInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if input.Blob != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			restEncoder.SetHeader("Content-Type").String("text/plain")
+		}
+
+		payload := bytes.NewReader(input.Blob)
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsHttpPayloadTraitsWithMediaTypeInput(v *HttpPayloadTraitsWithMediaTypeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Foo != nil {
+		if len(*v.Foo) > 0 {
+			encoder.SetHeader("X-Foo").String(*v.Foo)
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpConstantQueryString struct {
+}
+
+func (*awsRestjson1_serializeOpConstantQueryString) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpConstantQueryString) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ConstantQueryStringInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/ConstantQueryString/{hello}?foo=bar&hello")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeHttpBindingsConstantQueryStringInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsConstantQueryStringInput(v *ConstantQueryStringInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Hello != nil {
+		if err := encoder.SetURI("hello").String(*v.Hello); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpSimpleScalarProperties struct {
+}
+
+func (*awsRestjson1_serializeOpSimpleScalarProperties) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSimpleScalarProperties) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SimpleScalarPropertiesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/SimpleScalarProperties")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeHttpBindingsSimpleScalarPropertiesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentInlineDocumentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeDocumentSimpleScalarPropertiesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -753,28 +1740,67 @@ func (m *awsRestjson1_serializeOpInlineDocument) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsInlineDocumentInput(v *InlineDocumentInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeHttpBindingsSimpleScalarPropertiesInput(v *SimpleScalarPropertiesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Foo != nil {
+		if len(*v.Foo) > 0 {
+			encoder.SetHeader("X-Foo").String(*v.Foo)
+		}
 	}
 
 	return nil
 }
 
-func awsRestjson1_serializeDocumentInlineDocumentInput(v *InlineDocumentInput, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSimpleScalarPropertiesInput(v *SimpleScalarPropertiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	if v.DocumentValue != nil {
-		ok := object.Key("documentValue")
-		if err := awsRestjson1_serializeDocumentDocument(v.DocumentValue, ok); err != nil {
-			return err
-		}
+	if v.ByteValue != nil {
+		ok := object.Key("byteValue")
+		ok.Byte(*v.ByteValue)
+	}
+
+	if v.DoubleValue != nil {
+		ok := object.Key("DoubleDribble")
+		ok.Double(*v.DoubleValue)
+	}
+
+	if v.FalseBooleanValue != nil {
+		ok := object.Key("falseBooleanValue")
+		ok.Boolean(*v.FalseBooleanValue)
+	}
+
+	if v.FloatValue != nil {
+		ok := object.Key("floatValue")
+		ok.Float(*v.FloatValue)
+	}
+
+	if v.IntegerValue != nil {
+		ok := object.Key("integerValue")
+		ok.Integer(*v.IntegerValue)
+	}
+
+	if v.LongValue != nil {
+		ok := object.Key("longValue")
+		ok.Long(*v.LongValue)
+	}
+
+	if v.ShortValue != nil {
+		ok := object.Key("shortValue")
+		ok.Short(*v.ShortValue)
 	}
 
 	if v.StringValue != nil {
 		ok := object.Key("stringValue")
 		ok.String(*v.StringValue)
+	}
+
+	if v.TrueBooleanValue != nil {
+		ok := object.Key("trueBooleanValue")
+		ok.Boolean(*v.TrueBooleanValue)
 	}
 
 	return nil
@@ -1011,6 +2037,86 @@ func awsRestjson1_serializeHttpBindingsHttpPayloadTraitsInput(v *HttpPayloadTrai
 	return nil
 }
 
+type awsRestjson1_serializeOpInlineDocument struct {
+}
+
+func (*awsRestjson1_serializeOpInlineDocument) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpInlineDocument) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*InlineDocumentInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/InlineDocument")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeDocumentInlineDocumentInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsInlineDocumentInput(v *InlineDocumentInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInlineDocumentInput(v *InlineDocumentInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DocumentValue != nil {
+		ok := object.Key("documentValue")
+		if err := awsRestjson1_serializeDocumentDocument(v.DocumentValue, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StringValue != nil {
+		ok := object.Key("stringValue")
+		ok.String(*v.StringValue)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpHttpRequestWithGreedyLabelInPath struct {
 }
 
@@ -1072,88 +2178,6 @@ func awsRestjson1_serializeHttpBindingsHttpRequestWithGreedyLabelInPathInput(v *
 		if err := encoder.SetURI("foo").String(*v.Foo); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpTimestampFormatHeaders struct {
-}
-
-func (*awsRestjson1_serializeOpTimestampFormatHeaders) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpTimestampFormatHeaders) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*TimestampFormatHeadersInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/TimestampFormatHeaders")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
-	request.Method = "POST"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if err := awsRestjson1_serializeHttpBindingsTimestampFormatHeadersInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeHttpBindingsTimestampFormatHeadersInput(v *TimestampFormatHeadersInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.DefaultFormat != nil {
-		encoder.SetHeader("X-defaultFormat").String(smithytime.FormatHTTPDate(*v.DefaultFormat))
-	}
-
-	if v.MemberDateTime != nil {
-		encoder.SetHeader("X-memberDateTime").String(smithytime.FormatDateTime(*v.MemberDateTime))
-	}
-
-	if v.MemberEpochSeconds != nil {
-		encoder.SetHeader("X-memberEpochSeconds").Double(smithytime.FormatEpochSeconds(*v.MemberEpochSeconds))
-	}
-
-	if v.MemberHttpDate != nil {
-		encoder.SetHeader("X-memberHttpDate").String(smithytime.FormatHTTPDate(*v.MemberHttpDate))
-	}
-
-	if v.TargetDateTime != nil {
-		encoder.SetHeader("X-targetDateTime").String(smithytime.FormatDateTime(*v.TargetDateTime))
-	}
-
-	if v.TargetEpochSeconds != nil {
-		encoder.SetHeader("X-targetEpochSeconds").Double(smithytime.FormatEpochSeconds(*v.TargetEpochSeconds))
-	}
-
-	if v.TargetHttpDate != nil {
-		encoder.SetHeader("X-targetHttpDate").String(smithytime.FormatHTTPDate(*v.TargetHttpDate))
 	}
 
 	return nil
@@ -1360,1030 +2384,6 @@ func (m *awsRestjson1_serializeOpHttpPayloadWithStructure) HandleSerialize(ctx c
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeHttpBindingsHttpPayloadWithStructureInput(v *HttpPayloadWithStructureInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpInlineDocumentAsPayload struct {
-}
-
-func (*awsRestjson1_serializeOpInlineDocumentAsPayload) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpInlineDocumentAsPayload) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*InlineDocumentAsPayloadInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/InlineDocumentAsPayload")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
-	request.Method = "PUT"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if input.DocumentValue != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
-
-		jsonEncoder := smithyjson.NewEncoder()
-		if err := awsRestjson1_serializeDocumentDocument(input.DocumentValue, jsonEncoder.Value); err != nil {
-			return out, metadata, &smithy.SerializationError{Err: err}
-		}
-		payload := bytes.NewReader(jsonEncoder.Bytes())
-		if request, err = request.SetStream(payload); err != nil {
-			return out, metadata, &smithy.SerializationError{Err: err}
-		}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeHttpBindingsInlineDocumentAsPayloadInput(v *InlineDocumentAsPayloadInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpConstantAndVariableQueryString struct {
-}
-
-func (*awsRestjson1_serializeOpConstantAndVariableQueryString) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpConstantAndVariableQueryString) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*ConstantAndVariableQueryStringInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/ConstantAndVariableQueryString?foo=bar")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
-	request.Method = "GET"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if err := awsRestjson1_serializeHttpBindingsConstantAndVariableQueryStringInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeHttpBindingsConstantAndVariableQueryStringInput(v *ConstantAndVariableQueryStringInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Baz != nil {
-		encoder.SetQuery("baz").String(*v.Baz)
-	}
-
-	if v.MaybeSet != nil {
-		encoder.SetQuery("maybeSet").String(*v.MaybeSet)
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpSimpleScalarProperties struct {
-}
-
-func (*awsRestjson1_serializeOpSimpleScalarProperties) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpSimpleScalarProperties) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*SimpleScalarPropertiesInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/SimpleScalarProperties")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
-	request.Method = "PUT"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if err := awsRestjson1_serializeHttpBindingsSimpleScalarPropertiesInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentSimpleScalarPropertiesInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeHttpBindingsSimpleScalarPropertiesInput(v *SimpleScalarPropertiesInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Foo != nil {
-		if len(*v.Foo) > 0 {
-			encoder.SetHeader("X-Foo").String(*v.Foo)
-		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeDocumentSimpleScalarPropertiesInput(v *SimpleScalarPropertiesInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.ByteValue != nil {
-		ok := object.Key("byteValue")
-		ok.Byte(*v.ByteValue)
-	}
-
-	if v.DoubleValue != nil {
-		ok := object.Key("DoubleDribble")
-		ok.Double(*v.DoubleValue)
-	}
-
-	if v.FalseBooleanValue != nil {
-		ok := object.Key("falseBooleanValue")
-		ok.Boolean(*v.FalseBooleanValue)
-	}
-
-	if v.FloatValue != nil {
-		ok := object.Key("floatValue")
-		ok.Float(*v.FloatValue)
-	}
-
-	if v.IntegerValue != nil {
-		ok := object.Key("integerValue")
-		ok.Integer(*v.IntegerValue)
-	}
-
-	if v.LongValue != nil {
-		ok := object.Key("longValue")
-		ok.Long(*v.LongValue)
-	}
-
-	if v.ShortValue != nil {
-		ok := object.Key("shortValue")
-		ok.Short(*v.ShortValue)
-	}
-
-	if v.StringValue != nil {
-		ok := object.Key("stringValue")
-		ok.String(*v.StringValue)
-	}
-
-	if v.TrueBooleanValue != nil {
-		ok := object.Key("trueBooleanValue")
-		ok.Boolean(*v.TrueBooleanValue)
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpConstantQueryString struct {
-}
-
-func (*awsRestjson1_serializeOpConstantQueryString) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpConstantQueryString) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*ConstantQueryStringInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/ConstantQueryString/{hello}?foo=bar&hello")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
-	request.Method = "GET"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if err := awsRestjson1_serializeHttpBindingsConstantQueryStringInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeHttpBindingsConstantQueryStringInput(v *ConstantQueryStringInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Hello != nil {
-		if err := encoder.SetURI("hello").String(*v.Hello); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpInputAndOutputWithHeaders struct {
-}
-
-func (*awsRestjson1_serializeOpInputAndOutputWithHeaders) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpInputAndOutputWithHeaders) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*InputAndOutputWithHeadersInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/InputAndOutputWithHeaders")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
-	request.Method = "POST"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if err := awsRestjson1_serializeHttpBindingsInputAndOutputWithHeadersInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeHttpBindingsInputAndOutputWithHeadersInput(v *InputAndOutputWithHeadersInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.HeaderBooleanList != nil {
-		for i := range v.HeaderBooleanList {
-			if v.HeaderBooleanList[i] != nil {
-				encoder.AddHeader("X-BooleanList").Boolean(*v.HeaderBooleanList[i])
-			}
-		}
-	}
-
-	if v.HeaderByte != nil {
-		encoder.SetHeader("X-Byte").Byte(*v.HeaderByte)
-	}
-
-	if v.HeaderDouble != nil {
-		encoder.SetHeader("X-Double").Double(*v.HeaderDouble)
-	}
-
-	if len(v.HeaderEnum) > 0 {
-		encoder.SetHeader("X-Enum").String(string(v.HeaderEnum))
-	}
-
-	if v.HeaderEnumList != nil {
-		for i := range v.HeaderEnumList {
-			if len(v.HeaderEnumList[i]) > 0 {
-				encoder.AddHeader("X-EnumList").String(string(v.HeaderEnumList[i]))
-			}
-		}
-	}
-
-	if v.HeaderFalseBool != nil {
-		encoder.SetHeader("X-Boolean2").Boolean(*v.HeaderFalseBool)
-	}
-
-	if v.HeaderFloat != nil {
-		encoder.SetHeader("X-Float").Float(*v.HeaderFloat)
-	}
-
-	if v.HeaderInteger != nil {
-		encoder.SetHeader("X-Integer").Integer(*v.HeaderInteger)
-	}
-
-	if v.HeaderIntegerList != nil {
-		for i := range v.HeaderIntegerList {
-			if v.HeaderIntegerList[i] != nil {
-				encoder.AddHeader("X-IntegerList").Integer(*v.HeaderIntegerList[i])
-			}
-		}
-	}
-
-	if v.HeaderLong != nil {
-		encoder.SetHeader("X-Long").Long(*v.HeaderLong)
-	}
-
-	if v.HeaderShort != nil {
-		encoder.SetHeader("X-Short").Short(*v.HeaderShort)
-	}
-
-	if v.HeaderString != nil {
-		if len(*v.HeaderString) > 0 {
-			encoder.SetHeader("X-String").String(*v.HeaderString)
-		}
-	}
-
-	if v.HeaderStringList != nil {
-		for i := range v.HeaderStringList {
-			if v.HeaderStringList[i] != nil && len(*v.HeaderStringList[i]) > 0 {
-				encoder.AddHeader("X-StringList").String(*v.HeaderStringList[i])
-			}
-		}
-	}
-
-	if v.HeaderStringSet != nil {
-		for i := range v.HeaderStringSet {
-			if v.HeaderStringSet[i] != nil && len(*v.HeaderStringSet[i]) > 0 {
-				encoder.AddHeader("X-StringSet").String(*v.HeaderStringSet[i])
-			}
-		}
-	}
-
-	if v.HeaderTimestampList != nil {
-		for i := range v.HeaderTimestampList {
-			if v.HeaderTimestampList[i] != nil {
-				encoder.AddHeader("X-TimestampList").String(smithytime.FormatHTTPDate(*v.HeaderTimestampList[i]))
-			}
-		}
-	}
-
-	if v.HeaderTrueBool != nil {
-		encoder.SetHeader("X-Boolean1").Boolean(*v.HeaderTrueBool)
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpHttpPayloadTraitsWithMediaType struct {
-}
-
-func (*awsRestjson1_serializeOpHttpPayloadTraitsWithMediaType) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpHttpPayloadTraitsWithMediaType) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*HttpPayloadTraitsWithMediaTypeInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/HttpPayloadTraitsWithMediaType")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
-	request.Method = "POST"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if err := awsRestjson1_serializeHttpBindingsHttpPayloadTraitsWithMediaTypeInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if input.Blob != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("text/plain")
-		}
-
-		payload := bytes.NewReader(input.Blob)
-		if request, err = request.SetStream(payload); err != nil {
-			return out, metadata, &smithy.SerializationError{Err: err}
-		}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeHttpBindingsHttpPayloadTraitsWithMediaTypeInput(v *HttpPayloadTraitsWithMediaTypeInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Foo != nil {
-		if len(*v.Foo) > 0 {
-			encoder.SetHeader("X-Foo").String(*v.Foo)
-		}
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpNullAndEmptyHeadersClient struct {
-}
-
-func (*awsRestjson1_serializeOpNullAndEmptyHeadersClient) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpNullAndEmptyHeadersClient) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*NullAndEmptyHeadersClientInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/NullAndEmptyHeadersClient")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
-	request.Method = "GET"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if err := awsRestjson1_serializeHttpBindingsNullAndEmptyHeadersClientInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeHttpBindingsNullAndEmptyHeadersClientInput(v *NullAndEmptyHeadersClientInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.A != nil {
-		if len(*v.A) > 0 {
-			encoder.SetHeader("X-A").String(*v.A)
-		}
-	}
-
-	if v.B != nil {
-		if len(*v.B) > 0 {
-			encoder.SetHeader("X-B").String(*v.B)
-		}
-	}
-
-	if v.C != nil {
-		for i := range v.C {
-			if v.C[i] != nil && len(*v.C[i]) > 0 {
-				encoder.AddHeader("X-C").String(*v.C[i])
-			}
-		}
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpAllQueryStringTypes struct {
-}
-
-func (*awsRestjson1_serializeOpAllQueryStringTypes) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpAllQueryStringTypes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*AllQueryStringTypesInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/AllQueryStringTypesInput")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
-	request.Method = "GET"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if err := awsRestjson1_serializeHttpBindingsAllQueryStringTypesInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeHttpBindingsAllQueryStringTypesInput(v *AllQueryStringTypesInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.QueryBoolean != nil {
-		encoder.SetQuery("Boolean").Boolean(*v.QueryBoolean)
-	}
-
-	if v.QueryBooleanList != nil {
-		for i := range v.QueryBooleanList {
-			if v.QueryBooleanList[i] == nil {
-				continue
-			}
-			encoder.AddQuery("BooleanList").Boolean(*v.QueryBooleanList[i])
-		}
-	}
-
-	if v.QueryByte != nil {
-		encoder.SetQuery("Byte").Byte(*v.QueryByte)
-	}
-
-	if v.QueryDouble != nil {
-		encoder.SetQuery("Double").Double(*v.QueryDouble)
-	}
-
-	if v.QueryDoubleList != nil {
-		for i := range v.QueryDoubleList {
-			if v.QueryDoubleList[i] == nil {
-				continue
-			}
-			encoder.AddQuery("DoubleList").Double(*v.QueryDoubleList[i])
-		}
-	}
-
-	if len(v.QueryEnum) > 0 {
-		encoder.SetQuery("Enum").String(string(v.QueryEnum))
-	}
-
-	if v.QueryEnumList != nil {
-		for i := range v.QueryEnumList {
-			encoder.AddQuery("EnumList").String(string(v.QueryEnumList[i]))
-		}
-	}
-
-	if v.QueryFloat != nil {
-		encoder.SetQuery("Float").Float(*v.QueryFloat)
-	}
-
-	if v.QueryInteger != nil {
-		encoder.SetQuery("Integer").Integer(*v.QueryInteger)
-	}
-
-	if v.QueryIntegerList != nil {
-		for i := range v.QueryIntegerList {
-			if v.QueryIntegerList[i] == nil {
-				continue
-			}
-			encoder.AddQuery("IntegerList").Integer(*v.QueryIntegerList[i])
-		}
-	}
-
-	if v.QueryIntegerSet != nil {
-		for i := range v.QueryIntegerSet {
-			if v.QueryIntegerSet[i] == nil {
-				continue
-			}
-			encoder.AddQuery("IntegerSet").Integer(*v.QueryIntegerSet[i])
-		}
-	}
-
-	if v.QueryLong != nil {
-		encoder.SetQuery("Long").Long(*v.QueryLong)
-	}
-
-	if v.QueryShort != nil {
-		encoder.SetQuery("Short").Short(*v.QueryShort)
-	}
-
-	if v.QueryString != nil {
-		encoder.SetQuery("String").String(*v.QueryString)
-	}
-
-	if v.QueryStringList != nil {
-		for i := range v.QueryStringList {
-			if v.QueryStringList[i] == nil {
-				continue
-			}
-			encoder.AddQuery("StringList").String(*v.QueryStringList[i])
-		}
-	}
-
-	if v.QueryStringSet != nil {
-		for i := range v.QueryStringSet {
-			if v.QueryStringSet[i] == nil {
-				continue
-			}
-			encoder.AddQuery("StringSet").String(*v.QueryStringSet[i])
-		}
-	}
-
-	if v.QueryTimestamp != nil {
-		encoder.SetQuery("Timestamp").String(smithytime.FormatDateTime(*v.QueryTimestamp))
-	}
-
-	if v.QueryTimestampList != nil {
-		for i := range v.QueryTimestampList {
-			if v.QueryTimestampList[i] == nil {
-				continue
-			}
-			encoder.AddQuery("TimestampList").String(smithytime.FormatDateTime(*v.QueryTimestampList[i]))
-		}
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpJsonLists struct {
-}
-
-func (*awsRestjson1_serializeOpJsonLists) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpJsonLists) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*JsonListsInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/JsonLists")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
-	request.Method = "PUT"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentJsonListsInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeHttpBindingsJsonListsInput(v *JsonListsInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeDocumentJsonListsInput(v *JsonListsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.BooleanList != nil {
-		ok := object.Key("booleanList")
-		if err := awsRestjson1_serializeDocumentBooleanList(v.BooleanList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.EnumList != nil {
-		ok := object.Key("enumList")
-		if err := awsRestjson1_serializeDocumentFooEnumList(v.EnumList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.IntegerList != nil {
-		ok := object.Key("integerList")
-		if err := awsRestjson1_serializeDocumentIntegerList(v.IntegerList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.NestedStringList != nil {
-		ok := object.Key("nestedStringList")
-		if err := awsRestjson1_serializeDocumentNestedStringList(v.NestedStringList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.StringList != nil {
-		ok := object.Key("stringList")
-		if err := awsRestjson1_serializeDocumentStringList(v.StringList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.StringSet != nil {
-		ok := object.Key("stringSet")
-		if err := awsRestjson1_serializeDocumentStringSet(v.StringSet, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.StructureList != nil {
-		ok := object.Key("myStructureList")
-		if err := awsRestjson1_serializeDocumentStructureList(v.StructureList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.TimestampList != nil {
-		ok := object.Key("timestampList")
-		if err := awsRestjson1_serializeDocumentTimestampList(v.TimestampList, ok); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpJsonTimestamps struct {
-}
-
-func (*awsRestjson1_serializeOpJsonTimestamps) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpJsonTimestamps) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*JsonTimestampsInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/JsonTimestamps")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
-	request.Method = "POST"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentJsonTimestampsInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeHttpBindingsJsonTimestampsInput(v *JsonTimestampsInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeDocumentJsonTimestampsInput(v *JsonTimestampsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.DateTime != nil {
-		ok := object.Key("dateTime")
-		ok.String(smithytime.FormatDateTime(*v.DateTime))
-	}
-
-	if v.EpochSeconds != nil {
-		ok := object.Key("epochSeconds")
-		ok.Double(smithytime.FormatEpochSeconds(*v.EpochSeconds))
-	}
-
-	if v.HttpDate != nil {
-		ok := object.Key("httpDate")
-		ok.String(smithytime.FormatHTTPDate(*v.HttpDate))
-	}
-
-	if v.Normal != nil {
-		ok := object.Key("normal")
-		ok.Double(smithytime.FormatEpochSeconds(*v.Normal))
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpEmptyInputAndEmptyOutput struct {
-}
-
-func (*awsRestjson1_serializeOpEmptyInputAndEmptyOutput) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpEmptyInputAndEmptyOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*EmptyInputAndEmptyOutputInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/EmptyInputAndEmptyOutput")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
-	request.Method = "POST"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeHttpBindingsEmptyInputAndEmptyOutputInput(v *EmptyInputAndEmptyOutputInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}

@@ -138,11 +138,11 @@ func TestClient_InputAndOutputWithHeaders_awsRestxmlSerialize(t *testing.T) {
 		// Tests requests with enum header bindings
 		"InputAndOutputWithEnumHeaders": {
 			Params: &InputAndOutputWithHeadersInput{
-				HeaderEnum: "Foo",
+				HeaderEnum: types.FooEnum("Foo"),
 				HeaderEnumList: []types.FooEnum{
-					"Foo",
-					"Bar",
-					"Baz",
+					types.FooEnum("Foo"),
+					types.FooEnum("Bar"),
+					types.FooEnum("Baz"),
 				},
 			},
 			ExpectMethod:  "POST",
@@ -323,11 +323,11 @@ func TestClient_InputAndOutputWithHeaders_awsRestxmlDeserialize(t *testing.T) {
 			},
 			Body: []byte(``),
 			ExpectResult: &InputAndOutputWithHeadersOutput{
-				HeaderEnum: "Foo",
+				HeaderEnum: types.FooEnum("Foo"),
 				HeaderEnumList: []types.FooEnum{
-					"Foo",
-					"Bar",
-					"Baz",
+					types.FooEnum("Foo"),
+					types.FooEnum("Bar"),
+					types.FooEnum("Baz"),
 				},
 			},
 		},
