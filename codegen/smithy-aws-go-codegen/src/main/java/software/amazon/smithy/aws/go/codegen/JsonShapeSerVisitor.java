@@ -58,10 +58,18 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
 
     private final Predicate<MemberShape> memberFilter;
 
+    /**
+     * @param context The generation context.
+     */
     public JsonShapeSerVisitor(GenerationContext context) {
         this(context, FunctionalUtils.alwaysTrue());
     }
 
+    /**
+     * @param context The generation context.
+     * @param memberFilter A filter that is applied to structure members. This is useful for
+     *     members that won't be in the body.
+     */
     public JsonShapeSerVisitor(GenerationContext context, Predicate<MemberShape> memberFilter) {
         super(context);
         this.memberFilter = memberFilter;
