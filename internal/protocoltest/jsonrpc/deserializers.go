@@ -729,7 +729,7 @@ func awsAwsjson11_deserializeErrorComplexError(response *smithyhttp.Response, er
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
-	body := io.TeeReader(response.Body, ringBuffer)
+	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
@@ -753,7 +753,7 @@ func awsAwsjson11_deserializeErrorErrorWithMembers(response *smithyhttp.Response
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
-	body := io.TeeReader(response.Body, ringBuffer)
+	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
@@ -777,7 +777,7 @@ func awsAwsjson11_deserializeErrorErrorWithoutMembers(response *smithyhttp.Respo
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
-	body := io.TeeReader(response.Body, ringBuffer)
+	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
@@ -801,7 +801,7 @@ func awsAwsjson11_deserializeErrorFooError(response *smithyhttp.Response, errorB
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
-	body := io.TeeReader(response.Body, ringBuffer)
+	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
@@ -825,7 +825,7 @@ func awsAwsjson11_deserializeErrorInvalidGreeting(response *smithyhttp.Response,
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
-	body := io.TeeReader(response.Body, ringBuffer)
+	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
