@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/types"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"io"
@@ -36,7 +37,9 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsAwsjson11Deserialize(t *te
 			    "__type": "InvalidGreeting",
 			    "Message": "Hi"
 			}`),
-			ExpectError: &types.InvalidGreeting{},
+			ExpectError: &types.InvalidGreeting{
+				Message: ptr.String("Hi"),
+			},
 		},
 	}
 	for name, c := range cases {
@@ -130,7 +133,12 @@ func TestClient_GreetingWithErrors_ComplexError_awsAwsjson11Deserialize(t *testi
 			        "Fooooo": "bar"
 			    }
 			}`),
-			ExpectError: &types.ComplexError{},
+			ExpectError: &types.ComplexError{
+				TopLevel: ptr.String("Top level"),
+				Nested: &types.ComplexNestedErrorData{
+					Foo: ptr.String("bar"),
+				},
+			},
 		},
 		"AwsJson11EmptyComplexError": {
 			StatusCode: 400,
