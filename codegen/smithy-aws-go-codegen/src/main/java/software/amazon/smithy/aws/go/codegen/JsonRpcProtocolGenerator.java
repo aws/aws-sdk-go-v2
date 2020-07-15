@@ -15,6 +15,10 @@
 
 package software.amazon.smithy.aws.go.codegen;
 
+import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.handleDecodeError;
+import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.initializeJsonDecoder;
+import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.writeJsonErrorMessageCodeDeserializer;
+
 import java.util.Set;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoWriter;
@@ -96,39 +100,6 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
         handleDecodeError(writer, "out, metadata, ");
     }
 
-    // TODO: this could probably be a generic utility
-    private void initializeJsonDecoder(GoWriter writer, String bodyLocation) {
-        // Use a ring buffer and tee reader to help in pinpointing any deserialization errors.
-        writer.addUseImports(SmithyGoDependency.SMITHY_IO);
-        writer.write("buff := make([]byte, 1024)");
-        writer.write("ringBuffer := smithyio.NewRingBuffer(buff)");
-        writer.write("");
-
-        writer.addUseImports(SmithyGoDependency.IO);
-        writer.addUseImports(SmithyGoDependency.JSON);
-        writer.write("body := io.TeeReader($L, ringBuffer)", bodyLocation);
-        writer.write("decoder := json.NewDecoder(body)");
-        writer.write("decoder.UseNumber()");
-        writer.write("");
-    }
-
-    // TODO: this could probably be a generic utility
-    private void handleDecodeError(GoWriter writer, String returnExtras) {
-        writer.openBlock("if err != nil {", "}", () -> {
-            writer.addUseImports(SmithyGoDependency.BYTES);
-            writer.addUseImports(SmithyGoDependency.SMITHY);
-            writer.write("var snapshot bytes.Buffer");
-            writer.write("io.Copy(&snapshot, ringBuffer)");
-            writer.openBlock("return $L&smithy.DeserializationError {", "}", returnExtras, () -> {
-                writer.write("Err: fmt.Errorf(\"failed to decode response body with invalid JSON, %w\", err),");
-                writer.write("Snapshot: snapshot.Bytes(),");
-            });
-        }).write("");
-    }
-
-    private void handleDecodeError(GoWriter writer) {
-        handleDecodeError(writer, "");
-    }
 
     @Override
     protected void generateDocumentBodyShapeDeserializers(GenerationContext context, Set<Shape> shapes) {
@@ -138,26 +109,7 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
 
     @Override
     protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
-        GoWriter writer = context.getWriter();
-        // The error code could be in the headers, even though for this protocol it should be in the body.
-        writer.write("code := response.Header.Get(\"X-Amzn-ErrorType\")");
-        writer.write("if len(code) != 0 { errorCode = restjson.SanitizeErrorCode(code) }");
-        writer.write("");
-
-        initializeJsonDecoder(writer, "errorBody");
-        writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL);
-        // This will check various body locations for the error code and error message
-        writer.write("code, message, err := restjson.GetErrorInfo(decoder)");
-        handleDecodeError(writer);
-
-        writer.addUseImports(SmithyGoDependency.IO);
-        // Reset the body in case it needs to be used for anything else.
-        writer.write("errorBody.Seek(0, io.SeekStart)");
-
-        // Only set the values if something was found so that we keep the default values.
-        writer.write("if len(code) != 0 { errorCode = restjson.SanitizeErrorCode(code) }");
-        writer.write("if len(message) != 0 { errorMessage = message }");
-        writer.write("");
+        writeJsonErrorMessageCodeDeserializer(context);
     }
 
     @Override
@@ -166,7 +118,7 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
         Symbol symbol = context.getSymbolProvider().toSymbol(shape);
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
 
-        initializeJsonDecoder(writer, "response.Body");
+        initializeJsonDecoder(writer, "errorBody");
         writer.write("output := &$T{}", symbol);
         writer.write("err := $L(&output, decoder)", functionName);
         writer.write("");
