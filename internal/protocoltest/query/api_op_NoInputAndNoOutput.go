@@ -20,6 +20,7 @@ func (c *Client) NoInputAndNoOutput(ctx context.Context, params *NoInputAndNoOut
 		fn(&options)
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)

@@ -19,6 +19,7 @@ func (c *Client) HttpPayloadWithXmlNamespaceAndPrefix(ctx context.Context, param
 		fn(&options)
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)

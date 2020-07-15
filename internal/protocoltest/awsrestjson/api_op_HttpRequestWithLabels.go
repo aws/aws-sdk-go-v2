@@ -20,6 +20,7 @@ func (c *Client) HttpRequestWithLabels(ctx context.Context, params *HttpRequestW
 		fn(&options)
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)

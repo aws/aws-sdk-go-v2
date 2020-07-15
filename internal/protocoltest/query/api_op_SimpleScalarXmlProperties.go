@@ -17,6 +17,7 @@ func (c *Client) SimpleScalarXmlProperties(ctx context.Context, params *SimpleSc
 		fn(&options)
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)

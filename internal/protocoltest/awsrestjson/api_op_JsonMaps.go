@@ -19,6 +19,7 @@ func (c *Client) JsonMaps(ctx context.Context, params *JsonMapsInput, optFns ...
 		fn(&options)
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)

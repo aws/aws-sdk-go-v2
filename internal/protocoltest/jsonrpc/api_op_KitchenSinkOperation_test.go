@@ -42,6 +42,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"String":"abc xyz"}`))
@@ -55,6 +61,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"JsonValue":"{\"string\":\"value\",\"number\":1234.5,\"boolTrue\":true,\"boolFalse\":false,\"array\":[1,2,3,4],\"object\":{\"key\":\"value\"},\"null\":null}"}`))
@@ -68,6 +80,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"Integer":1234}`))
@@ -81,6 +99,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"Long":999999999999}`))
@@ -94,6 +118,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"Float":1234.5}`))
@@ -107,6 +137,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"Double":1234.5}`))
@@ -120,6 +156,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"Blob":"YmluYXJ5LXZhbHVl"}`))
@@ -133,6 +175,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"Boolean":true}`))
@@ -146,6 +194,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"Boolean":false}`))
@@ -159,6 +213,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"Timestamp":946845296}`))
@@ -172,6 +232,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"Iso8601Timestamp":"2000-01-02T20:34:56Z"}`))
@@ -185,6 +251,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"HttpdateTimestamp":"Sun, 02 Jan 2000 20:34:56 GMT"}`))
@@ -198,6 +270,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"UnixTimestamp":946845296}`))
@@ -215,6 +293,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"ListOfStrings":["abc","mno","xyz"]}`))
@@ -228,6 +312,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"ListOfStrings":[]}`))
@@ -251,6 +341,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"ListOfMapsOfStrings":[{"foo":"bar"},{"abc":"xyz"},{"red":"blue"}]}`))
@@ -274,6 +370,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"ListOfStructs":[{"Value":"abc"},{"Value":"mno"},{"Value":"xyz"}]}`))
@@ -299,6 +401,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"RecursiveList":[{"RecursiveList":[{"RecursiveList":[{"Integer":123}]}]}]}`))
@@ -315,6 +423,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"MapOfStrings":{"abc":"xyz","mno":"hjk"}}`))
@@ -328,6 +442,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"MapOfStrings":{}}`))
@@ -350,6 +470,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"MapOfListsOfStrings":{"abc":["abc","xyz"],"mno":["xyz","abc"]}}`))
@@ -370,6 +496,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"MapOfStructs":{"key1":{"Value":"value-1"},"key2":{"Value":"value-2"}}}`))
@@ -395,6 +527,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"RecursiveMap":{"key1":{"RecursiveMap":{"key2":{"RecursiveMap":{"key3":{"Boolean":false}}}}}}}`))
@@ -410,6 +548,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"SimpleStruct":{"Value":"abc"}}`))
@@ -425,6 +569,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"StructWithLocationName":{"RenamedMember":"some-value"}}`))
@@ -438,6 +588,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"SimpleStruct":{}}`))
@@ -451,6 +607,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"EmptyStruct":{}}`))
@@ -482,6 +644,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"String":"top-value","Boolean":false,"RecursiveStruct":{"String":"nested-value","Boolean":true,"RecursiveList":[{"String":"string-only"},{"RecursiveStruct":{"MapOfStrings":{"color":"red","size":"large"}}}]}}`))
@@ -496,6 +664,9 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 				if len(actualReq.URL.RawPath) == 0 {
 					actualReq.URL.RawPath = actualReq.URL.Path
 				}
+				if v := actualReq.ContentLength; v != 0 {
+					actualReq.Header.Set("Content-Length", strconv.FormatInt(v, 10))
+				}
 				var buf bytes.Buffer
 				if _, err := io.Copy(&buf, r.Body); err != nil {
 					t.Errorf("failed to read request body, %v", err)
@@ -508,7 +679,6 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			client := New(Options{
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
-						s.Build.Clear()
 						s.Finalize.Clear()
 						return nil
 					},
@@ -563,14 +733,20 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 	}{
 		// Parses operations with empty JSON bodies
 		"parses_operations_with_empty_json_bodies": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{}`),
 			ExpectResult:  &KitchenSinkOperationOutput{},
 		},
 		// Parses string shapes
 		"parses_string_shapes": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"String":"string-value"}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -579,7 +755,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses integer shapes
 		"parses_integer_shapes": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"Integer":1234}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -588,7 +767,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses long shapes
 		"parses_long_shapes": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"Long":1234567890123456789}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -597,7 +779,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses float shapes
 		"parses_float_shapes": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"Float":1234.5}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -606,7 +791,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses double shapes
 		"parses_double_shapes": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"Double":123456789.12345679}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -615,7 +803,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses boolean shapes (true)
 		"parses_boolean_shapes_true": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"Boolean":true}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -624,7 +815,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses boolean (false)
 		"parses_boolean_false": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"Boolean":false}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -633,7 +827,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses blob shapes
 		"parses_blob_shapes": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"Blob":"YmluYXJ5LXZhbHVl"}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -642,7 +839,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses timestamp shapes
 		"parses_timestamp_shapes": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"Timestamp":946845296}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -651,7 +851,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses iso8601 timestamps
 		"parses_iso8601_timestamps": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"Iso8601Timestamp":"2000-01-02T20:34:56.000Z"}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -660,7 +863,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses httpdate timestamps
 		"parses_httpdate_timestamps": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"HttpdateTimestamp":"Sun, 02 Jan 2000 20:34:56.000 GMT"}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -669,7 +875,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses list shapes
 		"parses_list_shapes": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"ListOfStrings":["abc","mno","xyz"]}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -682,7 +891,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses list of map shapes
 		"parses_list_of_map_shapes": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"ListOfMapsOfStrings":[{"size":"large"},{"color":"red"}]}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -698,7 +910,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses list of list shapes
 		"parses_list_of_list_shapes": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"ListOfLists":[["abc","mno","xyz"],["hjk","qrs","tuv"]]}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -718,7 +933,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses list of structure shapes
 		"parses_list_of_structure_shapes": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"ListOfStructs":[{"Value":"value-1"},{"Value":"value-2"}]}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -734,7 +952,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses list of recursive structure shapes
 		"parses_list_of_recursive_structure_shapes": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"RecursiveList":[{"RecursiveList":[{"RecursiveList":[{"String":"value"}]}]}]}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -755,7 +976,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses map shapes
 		"parses_map_shapes": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"MapOfStrings":{"size":"large","color":"red"}}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -767,7 +991,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses map of list shapes
 		"parses_map_of_list_shapes": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"MapOfListsOfStrings":{"sizes":["large","small"],"colors":["red","green"]}}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -785,7 +1012,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses map of map shapes
 		"parses_map_of_map_shapes": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"MapOfMaps":{"sizes":{"large":"L","medium":"M"},"colors":{"red":"R","blue":"B"}}}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -803,7 +1033,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses map of structure shapes
 		"parses_map_of_structure_shapes": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"MapOfStructs":{"size":{"Value":"small"},"color":{"Value":"red"}}}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -819,7 +1052,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		},
 		// Parses map of recursive structure shapes
 		"parses_map_of_recursive_structure_shapes": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"RecursiveMap":{"key-1":{"RecursiveMap":{"key-2":{"RecursiveMap":{"key-3":{"String":"value"}}}}}}}`),
 			ExpectResult: &KitchenSinkOperationOutput{
@@ -842,6 +1078,7 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 		"parses_the_request_id_from_the_response": {
 			StatusCode: 200,
 			Header: http.Header{
+				"Content-Type":     []string{"application/x-amz-json-1.1"},
 				"X-Amzn-Requestid": []string{"amazon-uniq-request-id"},
 			},
 			BodyMediaType: "application/json",
@@ -874,7 +1111,6 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 			client := New(Options{
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
-						s.Build.Clear()
 						s.Finalize.Clear()
 						return nil
 					},

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import software.amazon.smithy.aws.traits.auth.SigV4Trait;
 import software.amazon.smithy.aws.traits.auth.UnsignedPayloadTrait;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
@@ -38,6 +39,16 @@ public class AssembleMiddlewareStack implements GoIntegration {
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
                                         "AddRequestInvocationIDMiddleware", AwsGoDependency.AWS_MIDDLEWARE)
+                                        .build())
+                                .build()
+                        )
+                        .build(),
+
+                // Add ContentLengthMiddleware to operation stack
+                RuntimeClientPlugin.builder()
+                        .registerMiddleware(MiddlewareRegistrar.builder()
+                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
+                                        "AddContentLengthMiddleware", SmithyGoDependency.SMITHY_HTTP_TRANSPORT)
                                         .build())
                                 .build()
                         )
