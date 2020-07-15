@@ -47,6 +47,9 @@ func TestClient_HttpPayloadWithXmlNamespaceAndPrefix_awsRestxmlSerialize(t *test
 			ExpectHeader: http.Header{
 				"Content-Type": []string{"application/xml"},
 			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<PayloadWithXmlNamespaceAndPrefix xmlns:baz="http://foo.com">
@@ -63,6 +66,9 @@ func TestClient_HttpPayloadWithXmlNamespaceAndPrefix_awsRestxmlSerialize(t *test
 				if len(actualReq.URL.RawPath) == 0 {
 					actualReq.URL.RawPath = actualReq.URL.Path
 				}
+				if v := actualReq.ContentLength; v != 0 {
+					actualReq.Header.Set("Content-Length", strconv.FormatInt(v, 10))
+				}
 				var buf bytes.Buffer
 				if _, err := io.Copy(&buf, r.Body); err != nil {
 					t.Errorf("failed to read request body, %v", err)
@@ -75,7 +81,6 @@ func TestClient_HttpPayloadWithXmlNamespaceAndPrefix_awsRestxmlSerialize(t *test
 			client := New(Options{
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
-						s.Build.Clear()
 						s.Finalize.Clear()
 						return nil
 					},
@@ -171,7 +176,6 @@ func TestClient_HttpPayloadWithXmlNamespaceAndPrefix_awsRestxmlDeserialize(t *te
 			client := New(Options{
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
-						s.Build.Clear()
 						s.Finalize.Clear()
 						return nil
 					},

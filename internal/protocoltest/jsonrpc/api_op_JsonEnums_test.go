@@ -54,6 +54,9 @@ func TestClient_JsonEnums_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
@@ -84,6 +87,9 @@ func TestClient_JsonEnums_awsAwsjson11Serialize(t *testing.T) {
 				if len(actualReq.URL.RawPath) == 0 {
 					actualReq.URL.RawPath = actualReq.URL.Path
 				}
+				if v := actualReq.ContentLength; v != 0 {
+					actualReq.Header.Set("Content-Length", strconv.FormatInt(v, 10))
+				}
 				var buf bytes.Buffer
 				if _, err := io.Copy(&buf, r.Body); err != nil {
 					t.Errorf("failed to read request body, %v", err)
@@ -96,7 +102,6 @@ func TestClient_JsonEnums_awsAwsjson11Serialize(t *testing.T) {
 			client := New(Options{
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
-						s.Build.Clear()
 						s.Finalize.Clear()
 						return nil
 					},
@@ -151,7 +156,10 @@ func TestClient_JsonEnums_awsAwsjson11Deserialize(t *testing.T) {
 	}{
 		// Serializes simple scalar properties
 		"AwsJson11Enums": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
 			    "fooEnum1": "Foo",
@@ -214,7 +222,6 @@ func TestClient_JsonEnums_awsAwsjson11Deserialize(t *testing.T) {
 			client := New(Options{
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
-						s.Build.Clear()
 						s.Finalize.Clear()
 						return nil
 					},

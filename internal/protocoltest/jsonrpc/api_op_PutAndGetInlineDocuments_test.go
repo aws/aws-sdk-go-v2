@@ -40,7 +40,10 @@ func TestClient_PutAndGetInlineDocuments_awsAwsjson11Serialize(t *testing.T) {
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
-				"Content-Type": []string{"application/json"},
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
 			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
@@ -58,6 +61,9 @@ func TestClient_PutAndGetInlineDocuments_awsAwsjson11Serialize(t *testing.T) {
 				if len(actualReq.URL.RawPath) == 0 {
 					actualReq.URL.RawPath = actualReq.URL.Path
 				}
+				if v := actualReq.ContentLength; v != 0 {
+					actualReq.Header.Set("Content-Length", strconv.FormatInt(v, 10))
+				}
 				var buf bytes.Buffer
 				if _, err := io.Copy(&buf, r.Body); err != nil {
 					t.Errorf("failed to read request body, %v", err)
@@ -70,7 +76,6 @@ func TestClient_PutAndGetInlineDocuments_awsAwsjson11Serialize(t *testing.T) {
 			client := New(Options{
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
-						s.Build.Clear()
 						s.Finalize.Clear()
 						return nil
 					},
@@ -127,7 +132,7 @@ func TestClient_PutAndGetInlineDocuments_awsAwsjson11Deserialize(t *testing.T) {
 		"PutAndGetInlineDocumentsInput": {
 			StatusCode: 200,
 			Header: http.Header{
-				"Content-Type": []string{"application/json"},
+				"Content-Type": []string{"application/x-amz-json-1.1"},
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
@@ -163,7 +168,6 @@ func TestClient_PutAndGetInlineDocuments_awsAwsjson11Deserialize(t *testing.T) {
 			client := New(Options{
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
-						s.Build.Clear()
 						s.Finalize.Clear()
 						return nil
 					},

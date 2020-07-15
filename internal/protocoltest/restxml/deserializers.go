@@ -15,14 +15,14 @@ import (
 	"time"
 )
 
-type awsRestxml_deserializeOpHttpRequestWithLabels struct {
+type awsRestxml_deserializeOpSimpleScalarProperties struct {
 }
 
-func (*awsRestxml_deserializeOpHttpRequestWithLabels) ID() string {
+func (*awsRestxml_deserializeOpSimpleScalarProperties) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpHttpRequestWithLabels) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpSimpleScalarProperties) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -38,329 +38,10 @@ func (m *awsRestxml_deserializeOpHttpRequestWithLabels) HandleDeserialize(ctx co
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
 	}
-	output := &HttpRequestWithLabelsOutput{}
+	output := &SimpleScalarPropertiesOutput{}
 	out.Result = output
 
-	return out, metadata, err
-}
-
-type awsRestxml_deserializeOpHttpPayloadWithXmlNamespaceAndPrefix struct {
-}
-
-func (*awsRestxml_deserializeOpHttpPayloadWithXmlNamespaceAndPrefix) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpHttpPayloadWithXmlNamespaceAndPrefix) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &HttpPayloadWithXmlNamespaceAndPrefixOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestxml_deserializeOpHttpPayloadWithXmlNamespace struct {
-}
-
-func (*awsRestxml_deserializeOpHttpPayloadWithXmlNamespace) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpHttpPayloadWithXmlNamespace) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &HttpPayloadWithXmlNamespaceOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestxml_deserializeOpXmlAttributes struct {
-}
-
-func (*awsRestxml_deserializeOpXmlAttributes) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpXmlAttributes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &XmlAttributesOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestxml_deserializeOpXmlNamespaces struct {
-}
-
-func (*awsRestxml_deserializeOpXmlNamespaces) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpXmlNamespaces) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &XmlNamespacesOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestxml_deserializeOpRecursiveShapes struct {
-}
-
-func (*awsRestxml_deserializeOpRecursiveShapes) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpRecursiveShapes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &RecursiveShapesOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestxml_deserializeOpNoInputAndOutput struct {
-}
-
-func (*awsRestxml_deserializeOpNoInputAndOutput) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpNoInputAndOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &NoInputAndOutputOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestxml_deserializeOpHttpRequestWithLabelsAndTimestampFormat struct {
-}
-
-func (*awsRestxml_deserializeOpHttpRequestWithLabelsAndTimestampFormat) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpHttpRequestWithLabelsAndTimestampFormat) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &HttpRequestWithLabelsAndTimestampFormatOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestxml_deserializeOpIgnoreQueryParamsInResponse struct {
-}
-
-func (*awsRestxml_deserializeOpIgnoreQueryParamsInResponse) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpIgnoreQueryParamsInResponse) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &IgnoreQueryParamsInResponseOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestxml_deserializeOpXmlEnums struct {
-}
-
-func (*awsRestxml_deserializeOpXmlEnums) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpXmlEnums) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &XmlEnumsOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestxml_deserializeOpHttpPayloadWithXmlName struct {
-}
-
-func (*awsRestxml_deserializeOpHttpPayloadWithXmlName) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpHttpPayloadWithXmlName) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &HttpPayloadWithXmlNameOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestxml_deserializeOpHttpPayloadTraitsWithMediaType struct {
-}
-
-func (*awsRestxml_deserializeOpHttpPayloadTraitsWithMediaType) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpHttpPayloadTraitsWithMediaType) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &HttpPayloadTraitsWithMediaTypeOutput{}
-	out.Result = output
-
-	err = awsRestxml_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(output, response)
+	err = awsRestxml_deserializeHttpBindingsSimpleScalarPropertiesOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -368,7 +49,7 @@ func (m *awsRestxml_deserializeOpHttpPayloadTraitsWithMediaType) HandleDeseriali
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, response *smithyhttp.Response) error {
+func awsRestxml_deserializeHttpBindingsSimpleScalarPropertiesOutput(v *SimpleScalarPropertiesOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -379,180 +60,6 @@ func awsRestxml_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(v *H
 	}
 
 	return nil
-}
-
-type awsRestxml_deserializeOpNoInputAndNoOutput struct {
-}
-
-func (*awsRestxml_deserializeOpNoInputAndNoOutput) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpNoInputAndNoOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &NoInputAndNoOutputOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestxml_deserializeOpConstantAndVariableQueryString struct {
-}
-
-func (*awsRestxml_deserializeOpConstantAndVariableQueryString) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpConstantAndVariableQueryString) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &ConstantAndVariableQueryStringOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestxml_deserializeOpEmptyInputAndEmptyOutput struct {
-}
-
-func (*awsRestxml_deserializeOpEmptyInputAndEmptyOutput) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpEmptyInputAndEmptyOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &EmptyInputAndEmptyOutputOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestxml_deserializeOpXmlAttributesOnPayload struct {
-}
-
-func (*awsRestxml_deserializeOpXmlAttributesOnPayload) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpXmlAttributesOnPayload) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &XmlAttributesOnPayloadOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestxml_deserializeOpConstantQueryString struct {
-}
-
-func (*awsRestxml_deserializeOpConstantQueryString) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpConstantQueryString) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &ConstantQueryStringOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-type awsRestxml_deserializeOpAllQueryStringTypes struct {
-}
-
-func (*awsRestxml_deserializeOpAllQueryStringTypes) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpAllQueryStringTypes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &AllQueryStringTypesOutput{}
-	out.Result = output
-
-	return out, metadata, err
 }
 
 type awsRestxml_deserializeOpFlattenedXmlMap struct {
@@ -613,14 +120,14 @@ func (m *awsRestxml_deserializeOpHttpRequestWithGreedyLabelInPath) HandleDeseria
 	return out, metadata, err
 }
 
-type awsRestxml_deserializeOpQueryIdempotencyTokenAutoFill struct {
+type awsRestxml_deserializeOpXmlLists struct {
 }
 
-func (*awsRestxml_deserializeOpQueryIdempotencyTokenAutoFill) ID() string {
+func (*awsRestxml_deserializeOpXmlLists) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpQueryIdempotencyTokenAutoFill) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpXmlLists) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -636,7 +143,286 @@ func (m *awsRestxml_deserializeOpQueryIdempotencyTokenAutoFill) HandleDeserializ
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
 	}
-	output := &QueryIdempotencyTokenAutoFillOutput{}
+	output := &XmlListsOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestxml_deserializeOpConstantAndVariableQueryString struct {
+}
+
+func (*awsRestxml_deserializeOpConstantAndVariableQueryString) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpConstantAndVariableQueryString) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &ConstantAndVariableQueryStringOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestxml_deserializeOpXmlMapsXmlName struct {
+}
+
+func (*awsRestxml_deserializeOpXmlMapsXmlName) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpXmlMapsXmlName) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &XmlMapsXmlNameOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestxml_deserializeOpHttpPayloadWithStructure struct {
+}
+
+func (*awsRestxml_deserializeOpHttpPayloadWithStructure) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpHttpPayloadWithStructure) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &HttpPayloadWithStructureOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestxml_deserializeOpConstantQueryString struct {
+}
+
+func (*awsRestxml_deserializeOpConstantQueryString) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpConstantQueryString) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &ConstantQueryStringOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestxml_deserializeOpHttpPayloadTraits struct {
+}
+
+func (*awsRestxml_deserializeOpHttpPayloadTraits) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpHttpPayloadTraits) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &HttpPayloadTraitsOutput{}
+	out.Result = output
+
+	err = awsRestxml_deserializeHttpBindingsHttpPayloadTraitsOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeHttpBindingsHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("X-Foo"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.Foo = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+
+type awsRestxml_deserializeOpXmlTimestamps struct {
+}
+
+func (*awsRestxml_deserializeOpXmlTimestamps) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpXmlTimestamps) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &XmlTimestampsOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestxml_deserializeOpXmlAttributesOnPayload struct {
+}
+
+func (*awsRestxml_deserializeOpXmlAttributesOnPayload) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpXmlAttributesOnPayload) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &XmlAttributesOnPayloadOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestxml_deserializeOpEmptyInputAndEmptyOutput struct {
+}
+
+func (*awsRestxml_deserializeOpEmptyInputAndEmptyOutput) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpEmptyInputAndEmptyOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &EmptyInputAndEmptyOutputOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestxml_deserializeOpHttpRequestWithLabels struct {
+}
+
+func (*awsRestxml_deserializeOpHttpRequestWithLabels) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpHttpRequestWithLabels) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &HttpRequestWithLabelsOutput{}
 	out.Result = output
 
 	return out, metadata, err
@@ -705,14 +491,14 @@ func awsRestxml_deserializeHttpBindingsNullAndEmptyHeadersClientOutput(v *NullAn
 	return nil
 }
 
-type awsRestxml_deserializeOpXmlLists struct {
+type awsRestxml_deserializeOpXmlBlobs struct {
 }
 
-func (*awsRestxml_deserializeOpXmlLists) ID() string {
+func (*awsRestxml_deserializeOpXmlBlobs) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpXmlLists) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpXmlBlobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -728,20 +514,20 @@ func (m *awsRestxml_deserializeOpXmlLists) HandleDeserialize(ctx context.Context
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
 	}
-	output := &XmlListsOutput{}
+	output := &XmlBlobsOutput{}
 	out.Result = output
 
 	return out, metadata, err
 }
 
-type awsRestxml_deserializeOpSimpleScalarProperties struct {
+type awsRestxml_deserializeOpHttpPayloadWithXmlNamespaceAndPrefix struct {
 }
 
-func (*awsRestxml_deserializeOpSimpleScalarProperties) ID() string {
+func (*awsRestxml_deserializeOpHttpPayloadWithXmlNamespaceAndPrefix) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpSimpleScalarProperties) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpHttpPayloadWithXmlNamespaceAndPrefix) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -757,28 +543,39 @@ func (m *awsRestxml_deserializeOpSimpleScalarProperties) HandleDeserialize(ctx c
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
 	}
-	output := &SimpleScalarPropertiesOutput{}
+	output := &HttpPayloadWithXmlNamespaceAndPrefixOutput{}
 	out.Result = output
-
-	err = awsRestxml_deserializeHttpBindingsSimpleScalarPropertiesOutput(output, response)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
-	}
 
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeHttpBindingsSimpleScalarPropertiesOutput(v *SimpleScalarPropertiesOutput, response *smithyhttp.Response) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization for nil %T", v)
+type awsRestxml_deserializeOpHttpRequestWithLabelsAndTimestampFormat struct {
+}
+
+func (*awsRestxml_deserializeOpHttpRequestWithLabelsAndTimestampFormat) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpHttpRequestWithLabelsAndTimestampFormat) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
 	}
 
-	if headerValues := response.Header.Values("X-Foo"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		v.Foo = ptr.String(headerValues[0])
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
-	return nil
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &HttpRequestWithLabelsAndTimestampFormatOutput{}
+	out.Result = output
+
+	return out, metadata, err
 }
 
 type awsRestxml_deserializeOpInputAndOutputWithHeaders struct {
@@ -983,14 +780,14 @@ func awsRestxml_deserializeHttpBindingsInputAndOutputWithHeadersOutput(v *InputA
 	return nil
 }
 
-type awsRestxml_deserializeOpGreetingWithErrors struct {
+type awsRestxml_deserializeOpNoInputAndOutput struct {
 }
 
-func (*awsRestxml_deserializeOpGreetingWithErrors) ID() string {
+func (*awsRestxml_deserializeOpNoInputAndOutput) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpGreetingWithErrors) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpNoInputAndOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -1006,28 +803,68 @@ func (m *awsRestxml_deserializeOpGreetingWithErrors) HandleDeserialize(ctx conte
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
 	}
-	output := &GreetingWithErrorsOutput{}
+	output := &NoInputAndOutputOutput{}
 	out.Result = output
-
-	err = awsRestxml_deserializeHttpBindingsGreetingWithErrorsOutput(output, response)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
-	}
 
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeHttpBindingsGreetingWithErrorsOutput(v *GreetingWithErrorsOutput, response *smithyhttp.Response) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization for nil %T", v)
+type awsRestxml_deserializeOpIgnoreQueryParamsInResponse struct {
+}
+
+func (*awsRestxml_deserializeOpIgnoreQueryParamsInResponse) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpIgnoreQueryParamsInResponse) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
 	}
 
-	if headerValues := response.Header.Values("X-Greeting"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		v.Greeting = ptr.String(headerValues[0])
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
-	return nil
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &IgnoreQueryParamsInResponseOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestxml_deserializeOpXmlEnums struct {
+}
+
+func (*awsRestxml_deserializeOpXmlEnums) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpXmlEnums) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &XmlEnumsOutput{}
+	out.Result = output
+
+	return out, metadata, err
 }
 
 type awsRestxml_deserializeOpOmitsNullSerializesEmptyString struct {
@@ -1059,14 +896,14 @@ func (m *awsRestxml_deserializeOpOmitsNullSerializesEmptyString) HandleDeseriali
 	return out, metadata, err
 }
 
-type awsRestxml_deserializeOpTimestampFormatHeaders struct {
+type awsRestxml_deserializeOpXmlNamespaces struct {
 }
 
-func (*awsRestxml_deserializeOpTimestampFormatHeaders) ID() string {
+func (*awsRestxml_deserializeOpXmlNamespaces) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpTimestampFormatHeaders) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpXmlNamespaces) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -1082,126 +919,20 @@ func (m *awsRestxml_deserializeOpTimestampFormatHeaders) HandleDeserialize(ctx c
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
 	}
-	output := &TimestampFormatHeadersOutput{}
-	out.Result = output
-
-	err = awsRestxml_deserializeHttpBindingsTimestampFormatHeadersOutput(output, response)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeHttpBindingsTimestampFormatHeadersOutput(v *TimestampFormatHeadersOutput, response *smithyhttp.Response) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization for nil %T", v)
-	}
-
-	if headerValues := response.Header.Values("X-defaultFormat"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		t, err := smithytime.ParseHTTPDate(headerValues[0])
-		if err != nil {
-			return err
-		}
-		v.DefaultFormat = ptr.Time(t)
-	}
-
-	if headerValues := response.Header.Values("X-memberDateTime"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		t, err := smithytime.ParseHTTPDate(headerValues[0])
-		if err != nil {
-			return err
-		}
-		v.MemberDateTime = ptr.Time(t)
-	}
-
-	if headerValues := response.Header.Values("X-memberEpochSeconds"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		t, err := smithytime.ParseHTTPDate(headerValues[0])
-		if err != nil {
-			return err
-		}
-		v.MemberEpochSeconds = ptr.Time(t)
-	}
-
-	if headerValues := response.Header.Values("X-memberHttpDate"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		t, err := smithytime.ParseHTTPDate(headerValues[0])
-		if err != nil {
-			return err
-		}
-		v.MemberHttpDate = ptr.Time(t)
-	}
-
-	if headerValues := response.Header.Values("X-targetDateTime"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		t, err := smithytime.ParseDateTime(headerValues[0])
-		if err != nil {
-			return err
-		}
-		v.TargetDateTime = ptr.Time(t)
-	}
-
-	if headerValues := response.Header.Values("X-targetEpochSeconds"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		f, err := strconv.ParseFloat(headerValues[0], 64)
-		if err != nil {
-			return err
-		}
-		t := smithytime.ParseEpochSeconds(f)
-		v.TargetEpochSeconds = ptr.Time(t)
-	}
-
-	if headerValues := response.Header.Values("X-targetHttpDate"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		t, err := smithytime.ParseHTTPDate(headerValues[0])
-		if err != nil {
-			return err
-		}
-		v.TargetHttpDate = ptr.Time(t)
-	}
-
-	return nil
-}
-
-type awsRestxml_deserializeOpXmlBlobs struct {
-}
-
-func (*awsRestxml_deserializeOpXmlBlobs) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpXmlBlobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &XmlBlobsOutput{}
+	output := &XmlNamespacesOutput{}
 	out.Result = output
 
 	return out, metadata, err
 }
 
-type awsRestxml_deserializeOpHttpPayloadWithStructure struct {
+type awsRestxml_deserializeOpRecursiveShapes struct {
 }
 
-func (*awsRestxml_deserializeOpHttpPayloadWithStructure) ID() string {
+func (*awsRestxml_deserializeOpRecursiveShapes) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpHttpPayloadWithStructure) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpRecursiveShapes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -1217,20 +948,20 @@ func (m *awsRestxml_deserializeOpHttpPayloadWithStructure) HandleDeserialize(ctx
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
 	}
-	output := &HttpPayloadWithStructureOutput{}
+	output := &RecursiveShapesOutput{}
 	out.Result = output
 
 	return out, metadata, err
 }
 
-type awsRestxml_deserializeOpFlattenedXmlMapWithXmlName struct {
+type awsRestxml_deserializeOpXmlAttributes struct {
 }
 
-func (*awsRestxml_deserializeOpFlattenedXmlMapWithXmlName) ID() string {
+func (*awsRestxml_deserializeOpXmlAttributes) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpFlattenedXmlMapWithXmlName) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpXmlAttributes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -1246,7 +977,36 @@ func (m *awsRestxml_deserializeOpFlattenedXmlMapWithXmlName) HandleDeserialize(c
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
 	}
-	output := &FlattenedXmlMapWithXmlNameOutput{}
+	output := &XmlAttributesOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestxml_deserializeOpHttpPayloadWithXmlNamespace struct {
+}
+
+func (*awsRestxml_deserializeOpHttpPayloadWithXmlNamespace) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpHttpPayloadWithXmlNamespace) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &HttpPayloadWithXmlNamespaceOutput{}
 	out.Result = output
 
 	return out, metadata, err
@@ -1372,53 +1132,6 @@ func awsRestxml_deserializeHttpBindingsNullAndEmptyHeadersServerOutput(v *NullAn
 	return nil
 }
 
-type awsRestxml_deserializeOpHttpPayloadTraits struct {
-}
-
-func (*awsRestxml_deserializeOpHttpPayloadTraits) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpHttpPayloadTraits) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
-	}
-	output := &HttpPayloadTraitsOutput{}
-	out.Result = output
-
-	err = awsRestxml_deserializeHttpBindingsHttpPayloadTraitsOutput(output, response)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeHttpBindingsHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, response *smithyhttp.Response) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization for nil %T", v)
-	}
-
-	if headerValues := response.Header.Values("X-Foo"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		v.Foo = ptr.String(headerValues[0])
-	}
-
-	return nil
-}
-
 type awsRestxml_deserializeOpXmlMaps struct {
 }
 
@@ -1448,14 +1161,14 @@ func (m *awsRestxml_deserializeOpXmlMaps) HandleDeserialize(ctx context.Context,
 	return out, metadata, err
 }
 
-type awsRestxml_deserializeOpXmlTimestamps struct {
+type awsRestxml_deserializeOpAllQueryStringTypes struct {
 }
 
-func (*awsRestxml_deserializeOpXmlTimestamps) ID() string {
+func (*awsRestxml_deserializeOpAllQueryStringTypes) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpXmlTimestamps) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpAllQueryStringTypes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -1471,20 +1184,20 @@ func (m *awsRestxml_deserializeOpXmlTimestamps) HandleDeserialize(ctx context.Co
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
 	}
-	output := &XmlTimestampsOutput{}
+	output := &AllQueryStringTypesOutput{}
 	out.Result = output
 
 	return out, metadata, err
 }
 
-type awsRestxml_deserializeOpXmlMapsXmlName struct {
+type awsRestxml_deserializeOpFlattenedXmlMapWithXmlName struct {
 }
 
-func (*awsRestxml_deserializeOpXmlMapsXmlName) ID() string {
+func (*awsRestxml_deserializeOpFlattenedXmlMapWithXmlName) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpXmlMapsXmlName) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpFlattenedXmlMapWithXmlName) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -1500,12 +1213,298 @@ func (m *awsRestxml_deserializeOpXmlMapsXmlName) HandleDeserialize(ctx context.C
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
 	}
-	output := &XmlMapsXmlNameOutput{}
+	output := &FlattenedXmlMapWithXmlNameOutput{}
 	out.Result = output
 
 	return out, metadata, err
 }
 
+type awsRestxml_deserializeOpNoInputAndNoOutput struct {
+}
+
+func (*awsRestxml_deserializeOpNoInputAndNoOutput) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpNoInputAndNoOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &NoInputAndNoOutputOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestxml_deserializeOpQueryIdempotencyTokenAutoFill struct {
+}
+
+func (*awsRestxml_deserializeOpQueryIdempotencyTokenAutoFill) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpQueryIdempotencyTokenAutoFill) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &QueryIdempotencyTokenAutoFillOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestxml_deserializeOpTimestampFormatHeaders struct {
+}
+
+func (*awsRestxml_deserializeOpTimestampFormatHeaders) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpTimestampFormatHeaders) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &TimestampFormatHeadersOutput{}
+	out.Result = output
+
+	err = awsRestxml_deserializeHttpBindingsTimestampFormatHeadersOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeHttpBindingsTimestampFormatHeadersOutput(v *TimestampFormatHeadersOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("X-defaultFormat"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		t, err := smithytime.ParseHTTPDate(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.DefaultFormat = ptr.Time(t)
+	}
+
+	if headerValues := response.Header.Values("X-memberDateTime"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		t, err := smithytime.ParseHTTPDate(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.MemberDateTime = ptr.Time(t)
+	}
+
+	if headerValues := response.Header.Values("X-memberEpochSeconds"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		t, err := smithytime.ParseHTTPDate(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.MemberEpochSeconds = ptr.Time(t)
+	}
+
+	if headerValues := response.Header.Values("X-memberHttpDate"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		t, err := smithytime.ParseHTTPDate(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.MemberHttpDate = ptr.Time(t)
+	}
+
+	if headerValues := response.Header.Values("X-targetDateTime"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		t, err := smithytime.ParseDateTime(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.TargetDateTime = ptr.Time(t)
+	}
+
+	if headerValues := response.Header.Values("X-targetEpochSeconds"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		f, err := strconv.ParseFloat(headerValues[0], 64)
+		if err != nil {
+			return err
+		}
+		t := smithytime.ParseEpochSeconds(f)
+		v.TargetEpochSeconds = ptr.Time(t)
+	}
+
+	if headerValues := response.Header.Values("X-targetHttpDate"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		t, err := smithytime.ParseHTTPDate(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.TargetHttpDate = ptr.Time(t)
+	}
+
+	return nil
+}
+
+type awsRestxml_deserializeOpGreetingWithErrors struct {
+}
+
+func (*awsRestxml_deserializeOpGreetingWithErrors) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpGreetingWithErrors) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &GreetingWithErrorsOutput{}
+	out.Result = output
+
+	err = awsRestxml_deserializeHttpBindingsGreetingWithErrorsOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeHttpBindingsGreetingWithErrorsOutput(v *GreetingWithErrorsOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("X-Greeting"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.Greeting = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+
+type awsRestxml_deserializeOpHttpPayloadWithXmlName struct {
+}
+
+func (*awsRestxml_deserializeOpHttpPayloadWithXmlName) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpHttpPayloadWithXmlName) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &HttpPayloadWithXmlNameOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+type awsRestxml_deserializeOpHttpPayloadTraitsWithMediaType struct {
+}
+
+func (*awsRestxml_deserializeOpHttpPayloadTraitsWithMediaType) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpHttpPayloadTraitsWithMediaType) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	}
+	output := &HttpPayloadTraitsWithMediaTypeOutput{}
+	out.Result = output
+
+	err = awsRestxml_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("X-Foo"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.Foo = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
 func awsRestxml_deserializeHttpBindingsComplexError(v *types.ComplexError, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
