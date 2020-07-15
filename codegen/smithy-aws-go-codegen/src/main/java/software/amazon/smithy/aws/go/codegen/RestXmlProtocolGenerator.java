@@ -10,6 +10,7 @@ import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
+import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 
 abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
@@ -50,16 +51,14 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     }
 
     @Override
-    protected void writeMiddlewareErrorDeserializer(
-            GenerationContext context,
-            OperationShape operationShape,
-            GoStackStepMiddlewareGenerator generator
-    ) {
-        GoWriter writer = context.getWriter();
-        writer.openBlock("if response.StatusCode < 200 || response.StatusCode >= 300 {", "}", () -> {
-            writer.write("return out, metadata, " +
-                    "&smithy.DeserializationError{Err: fmt.Errorf(\"TODO: Implement error deserializer delegators\")}");
-        });
+    protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
+        context.getWriter().writeDocs("TODO: implement error message / code deser");
+    }
+
+    @Override
+    protected void deserializeError(GenerationContext context, StructureShape shape) {
+        context.getWriter().write("return &smithy.DeserializationError{"
+                + "Err: fmt.Errorf(\"TODO: Implement error deserializer delegators\")}");
     }
 
     @Override
@@ -98,13 +97,6 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     @Override
     protected void generateDocumentBodyShapeDeserializers(
             GenerationContext context, Set<Shape> shapes
-    ) {
-
-    }
-
-    @Override
-    protected void generateErrorDocumentBindingDeserializer(
-            GenerationContext context, ShapeId shapeId
     ) {
 
     }
