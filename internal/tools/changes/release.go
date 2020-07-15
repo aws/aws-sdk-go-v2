@@ -3,7 +3,6 @@ package changes
 import (
 	"bytes"
 	"fmt"
-	"sort"
 	"text/template"
 )
 
@@ -78,16 +77,5 @@ func (r *Release) RenderChangelogForModule(module, headerPrefix string) (string,
 // AffectedModules returns a sorted list of all modules affected by this Release. A module is considered affected if
 // it is the Module of one or more Changes in the Release.
 func (r *Release) AffectedModules() []string {
-	var modules []string
-	seen := make(map[string]struct{})
-
-	for _, c := range r.Changes {
-		if _, ok := seen[c.Module]; !ok {
-			seen[c.Module] = struct{}{}
-			modules = append(modules, c.Module)
-		}
-	}
-
-	sort.Strings(modules)
-	return modules
+	return AffectedModules(r.Changes)
 }

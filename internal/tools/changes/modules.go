@@ -102,6 +102,67 @@ func discoverModules(root string) ([]string, map[string]string, error) {
 	return modules, packages, nil
 }
 
+func UpdateDependencies(repoPath, mod, dependency, version string) error {
+	goModPath := filepath.Join(repoPath, mod, "go.mod")
+
+	modFile, err := getModFile(goModPath)
+	if err != nil {
+		return fmt.Errorf("couldn't update %s's dependency on %s: %v", mod, dependency, err)
+	}
+
+	err = modFile.AddRequire(lengthenModPath(dependency), version)
+	if err != nil {
+		return fmt.Errorf("couldn't update %s's dependency on %s: %v", mod, dependency, err)
+	}
+
+	out, err := modFile.Format()
+	if err != nil {
+		return fmt.Errorf("couldn't update %s's dependency on %s: %v", mod, dependency, err)
+	}
+
+	return writeFile(out, goModPath, false)
+}
+
+func listDependencies(path string) ([]string, error) {
+	cmd := exec.Command("go", "list", "-json", "-m", "all")
+	cmd.Env = os.Environ()
+	cmd.Env = append(cmd.Env, "GOSUMDB=off")
+
+	out, err := execAt(cmd, path)
+	if err != nil {
+		return nil, err
+	}
+
+	return parseGoModuleList(out)
+}
+
+// goModule is a package as output by the `go list` command.
+type goModule struct {
+	Path string // Path is the module's import path.
+	Main bool   // Main indicates whether the module is the main module.
+}
+
+func parseGoModuleList(output []byte) ([]string, error) {
+	var modules []string
+	dec := json.NewDecoder(bytes.NewReader(output))
+
+	for {
+		var p goModule
+		if err := dec.Decode(&p); err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+
+		if !p.Main && strings.HasPrefix(p.Path, sdkRepo) {
+			modules = append(modules, shortenModPath(p.Path))
+		}
+	}
+
+	return modules, nil
+}
+
 // listPackages returns a slice of packages that are part of the module whose go.mod file is in the directory specified
 // by path.
 func listPackages(path string) ([]string, error) {

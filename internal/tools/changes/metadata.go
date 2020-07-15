@@ -179,11 +179,14 @@ func (m *Metadata) ClearChanges() error {
 // the Metadata and delete change files in .changes/next-release. A release file will also be created in
 // .changes/releases. If dryRun is true, CreateRelease will return a Release, but not modify change or release files.
 func (m *Metadata) CreateRelease(id string, bumps map[string]VersionBump, dryRun bool) (*Release, error) {
+	changes := make([]Change, len(m.Changes))
+	copy(changes, m.Changes)
+
 	release := &Release{
 		ID:            id,
 		SchemaVersion: SchemaVersion,
 		VersionBumps:  bumps,
-		Changes:       m.Changes,
+		Changes:       changes,
 	}
 
 	if !dryRun {

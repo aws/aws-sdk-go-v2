@@ -98,6 +98,57 @@ func nextVersion(version string, bumpType VersionIncrement) (string, error) {
 	return fmt.Sprintf("%s.%d.%d", parts[0], minor, patch), nil
 }
 
+func tagRepo(repoPath, mod, version string) error {
+	if mod == rootModule {
+		mod = ""
+	} else {
+		mod += "/"
+	}
+
+	tag := mod + version
+
+	fmt.Println("tagging", tag)
+	cmd := exec.Command("git", "tag", tag)
+	_, err := execAt(cmd, repoPath)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func commit(repoPath string, unstagedPaths []string) error {
+	if repoPath == "" {
+		repoPath = "."
+	}
+
+	for _, p := range unstagedPaths {
+		cmd := exec.Command("git", "add", p)
+		_, err := execAt(cmd, repoPath)
+		if err != nil {
+			return err
+		}
+	}
+
+	cmd := exec.Command("git", "commit", "-m", "'release commit'")
+	_, err := execAt(cmd, repoPath)
+
+	return err
+}
+
+func push(repoPath string) error {
+	cmd := exec.Command("git", "push", "--tags")
+	_, err := execAt(cmd, repoPath)
+	if err != nil {
+		return err
+	}
+
+	cmd = exec.Command("git", "push") // TODO does git push --tags already do this?
+	_, err = execAt(cmd, repoPath)
+
+	return err
+}
+
 // taggedVersion returns the latest tagged version of the given module in the specified repository.
 func taggedVersion(repoPath, mod string, includePrereleases bool) (string, error) {
 	path, major, ok := module.SplitPathVersion(mod)
