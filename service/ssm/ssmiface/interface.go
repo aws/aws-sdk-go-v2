@@ -41,7 +41,7 @@ import (
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
 //    type mockClientClient struct {
-//        ssmiface.ClientPI
+//        ssmiface.ClientAPI
 //    }
 //    func (m *mockClientClient) AddTagsToResource(input *ssm.AddTagsToResourceInput) (*ssm.AddTagsToResourceOutput, error) {
 //        // mock response/functionality
