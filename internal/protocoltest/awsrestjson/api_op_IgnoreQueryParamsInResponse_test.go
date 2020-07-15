@@ -61,7 +61,6 @@ func TestClient_IgnoreQueryParamsInResponse_awsRestjson1Deserialize(t *testing.T
 			client := New(Options{
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
-						s.Build.Clear()
 						s.Finalize.Clear()
 						return nil
 					},

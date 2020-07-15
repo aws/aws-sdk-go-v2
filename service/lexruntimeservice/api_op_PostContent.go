@@ -77,6 +77,7 @@ func (c *Client) PostContent(ctx context.Context, params *PostContentInput, optF
 		fn(&options)
 	}
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
 	awsmiddleware.AddResolveServiceEndpointMiddleware(stack, options)
 	v4.AddUnsignedPayloadMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
