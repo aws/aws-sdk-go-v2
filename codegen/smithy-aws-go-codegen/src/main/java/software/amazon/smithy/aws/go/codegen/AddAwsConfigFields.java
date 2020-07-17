@@ -13,6 +13,21 @@
  * permissions and limitations under the License.
  */
 
+/*
+ * Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://aws.amazon.com/apache2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
 package software.amazon.smithy.aws.go.codegen;
 
 import java.util.ArrayList;
@@ -60,7 +75,6 @@ public class AddAwsConfigFields implements GoIntegration {
                     .name(REGION_CONFIG_NAME)
                     .type(getUniversalSymbol("string"))
                     .documentation("The region to send requests to. (Required)")
-                    .generatedOnClient(true)
                     .build(),
             AwsConfigField.builder()
                     .name(RETRYER_CONFIG_NAME)
@@ -68,26 +82,22 @@ public class AddAwsConfigFields implements GoIntegration {
                     .documentation("Retryer guides how HTTP requests should be retried in case of\n"
                             + "recoverable failures. When nil the API client will use a default\n"
                             + "retryer.")
-                    .generatedOnClient(true)
                     .build(),
             AwsConfigField.builder()
                     .name(HTTP_SIGNER_CONFIG_NAME)
                     .type(getAwsSignerV4Symbol("HTTPSigner"))
                     .documentation("HTTPSigner provides AWS request signing for HTTP requests made\n"
                             + "from the client. When nil the API client will use a default signer.")
-                    .generatedOnClient(true)
                     .build(),
             AwsConfigField.builder()
                     .name(LOG_LEVEL_CONFIG_NAME)
                     .type(getAwsCoreSymbol("LogLevel"))
                     .documentation("An integer value representing the logging level.")
-                    .generatedOnClient(true)
                     .build(),
             AwsConfigField.builder()
                     .name(LOGGER_CONFIG_NAME)
                     .type(getAwsCoreSymbol("Logger"))
                     .documentation("The logger writer interface to write logging messages to.")
-                    .generatedOnClient(true)
                     .build(),
             AwsConfigField.builder()
                     .name(HTTP_CLIENT_CONFIG_NAME)
@@ -98,7 +108,6 @@ public class AddAwsConfigFields implements GoIntegration {
                     .name(CREDENTIALS_CONFIG_NAME)
                     .type(getAwsCoreSymbol("CredentialsProvider"))
                     .documentation("The credentials object to use when signing requests.")
-                    .generatedOnClient(true)
                     .servicePredicate((model, serviceShape) -> model.getKnowledge(ServiceIndex.class)
                             .getAuthSchemes(serviceShape).values().stream().anyMatch(trait -> trait.getClass()
                                     .equals(SigV4Trait.class)))
@@ -153,12 +162,13 @@ public class AddAwsConfigFields implements GoIntegration {
     public List<RuntimeClientPlugin> getClientPlugins() {
         List<RuntimeClientPlugin> plugins = new ArrayList<>();
 
+        // Collect fields that have no service predicate into a single runtime client plugin
         List<ConfigField> allClients = AWS_CONFIG_FIELDS.stream().filter(AwsConfigField::isGeneratedOnClient)
                 .filter(field -> !field.getServicePredicate().isPresent())
                 .collect(Collectors.toList());
-
         plugins.add(RuntimeClientPlugin.builder().configFields(allClients).build());
 
+        // For each service predicate construct runtime client plugins for the field
         AWS_CONFIG_FIELDS.stream().filter(AwsConfigField::isGeneratedOnClient)
                 .filter(field -> field.getServicePredicate().isPresent())
                 .forEach(field -> {
@@ -224,7 +234,7 @@ public class AddAwsConfigFields implements GoIntegration {
         }
 
         private static class Builder extends ConfigField.Builder {
-            private boolean generatedOnClient;
+            private boolean generatedOnClient = true;
             private BiPredicate<Model, ServiceShape> servicePredicate = null;
             private Symbol resolveFunction = null;
 
