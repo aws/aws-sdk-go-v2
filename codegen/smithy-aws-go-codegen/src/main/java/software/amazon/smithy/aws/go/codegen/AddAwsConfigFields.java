@@ -190,12 +190,7 @@ public class AddAwsConfigFields implements GoIntegration {
                             writer.write("$L: cfg.$L,", field.getName(), field.getName());
                         }
                     });
-
-                    writer.write("");
-                    writer.openBlock("for _, fn := range optFns {", "}", () -> {
-                        writer.write("fn(&opts)");
-                    });
-                    writer.write("return New(opts)");
+                    writer.write("return New(opts, optFns...)");
                 });
         writer.write("");
     }
