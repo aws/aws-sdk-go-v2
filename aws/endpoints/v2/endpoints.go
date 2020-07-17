@@ -18,14 +18,15 @@ var (
 	signerPriority   = []string{"v4"}
 )
 
-type ResolveOptions struct {
+// Options provide configuration needed to direct how endpoints are resolved.
+type Options struct {
 	// Disable usage of HTTPS (TLS / SSL)
 	DisableHTTPS bool
 }
 
 type Partitions []Partition
 
-func (ps Partitions) EndpointFor(region string, opts ResolveOptions) (aws.Endpoint, error) {
+func (ps Partitions) ResolveEndpoint(region string, opts Options) (aws.Endpoint, error) {
 	if len(ps) == 0 {
 		return aws.Endpoint{}, fmt.Errorf("no partitions found")
 	}
@@ -35,11 +36,11 @@ func (ps Partitions) EndpointFor(region string, opts ResolveOptions) (aws.Endpoi
 			continue
 		}
 
-		return ps[i].EndpointFor(region, opts)
+		return ps[i].ResolveEndpoint(region, opts)
 	}
 
 	// fallback to first partition format to use when resolving the endpoint.
-	return ps[0].EndpointFor(region, opts)
+	return ps[0].ResolveEndpoint(region, opts)
 }
 
 type Partition struct {
@@ -56,7 +57,7 @@ func (p Partition) canResolveEndpoint(region string) bool {
 	return ok || p.RegionRegex.MatchString(region)
 }
 
-func (p Partition) EndpointFor(region string, options ResolveOptions) (resolved aws.Endpoint, err error) {
+func (p Partition) ResolveEndpoint(region string, options Options) (resolved aws.Endpoint, err error) {
 	if len(region) == 0 && len(p.PartitionEndpoint) != 0 {
 		region = p.PartitionEndpoint
 	}
@@ -99,7 +100,7 @@ type Endpoint struct {
 	SignatureVersions []string `json:"signatureVersions"`
 }
 
-func (e Endpoint) resolve(partition, region string, def Endpoint, options ResolveOptions) aws.Endpoint {
+func (e Endpoint) resolve(partition, region string, def Endpoint, options Options) aws.Endpoint {
 	var merged Endpoint
 	merged.mergeIn(def)
 	merged.mergeIn(e)
