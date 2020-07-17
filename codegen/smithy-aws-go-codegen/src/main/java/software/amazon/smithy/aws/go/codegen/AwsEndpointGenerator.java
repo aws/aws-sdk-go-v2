@@ -50,10 +50,17 @@ public final class AwsEndpointGenerator implements GoIntegration {
                 .configFields(SetUtils.of(
                         ConfigField.builder()
                                 .name("EndpointResolver")
-                                .type(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.getResolverInterfaceName())
+                                .type(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.RESOLVER_INTERFACE_NAME)
+                                        .build())
+                                .build(),
+                        ConfigField.builder()
+                                .name("EndpointOptions")
+                                .type(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.RESOLVER_OPTIONS)
                                         .build())
                                 .build()
                 ))
+                .resolveFunction(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.CLIENT_CONFIG_RESOLVER)
+                        .build())
                 .build());
     }
 }

@@ -23,7 +23,7 @@ func TestEndpointResolve(t *testing.T) {
 		},
 	}
 
-	resolved := e.resolve("aws", "us-west-2", defs, ResolveOptions{})
+	resolved := e.resolve("aws", "us-west-2", defs, Options{})
 
 	if e, a := "https://service.us-west-2.amazonaws.com", resolved.URL; e != a {
 		t.Errorf("expect %v, got %v", e, a)
@@ -140,7 +140,7 @@ var testPartitions = Partitions{
 func TestResolveEndpoint(t *testing.T) {
 	var cases = map[string]struct {
 		Region   string
-		Options  ResolveOptions
+		Options  Options
 		Expected aws.Endpoint
 	}{
 		"modeled region with no endpoint overrides": {
@@ -154,7 +154,7 @@ func TestResolveEndpoint(t *testing.T) {
 		},
 		"modeled region with no endpoint overrides and https disabled": {
 			Region:  "us-west-1",
-			Options: ResolveOptions{DisableHTTPS: true},
+			Options: Options{DisableHTTPS: true},
 			Expected: aws.Endpoint{
 				PartitionID:   "part-id-1",
 				URL:           "http://service.us-west-1.amazonaws.com",
@@ -195,7 +195,7 @@ func TestResolveEndpoint(t *testing.T) {
 	}
 	for name, tt := range cases {
 		t.Run(name, func(t *testing.T) {
-			endpoint, err := testPartitions.EndpointFor(tt.Region, tt.Options)
+			endpoint, err := testPartitions.ResolveEndpoint(tt.Region, tt.Options)
 			if err != nil {
 				t.Errorf("expected no error, got %v", err)
 			}

@@ -58,7 +58,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        EndpointGenerator.getAddMiddlewareHelperName()).build())
+                                        EndpointGenerator.ADD_MIDDLEWARE_HELPER_NAME).build())
                                 .useClientOptions()
                                 .build())
                         .build(),
