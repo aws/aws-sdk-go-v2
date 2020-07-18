@@ -8,7 +8,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/awslabs/smithy-go/middleware"
 	smithytesting "github.com/awslabs/smithy-go/testing"
-	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"io"
 	"io/ioutil"
@@ -189,8 +188,8 @@ func TestClient_PutAndGetInlineDocuments_awsAwsjson11Deserialize(t *testing.T) {
 			if result == nil {
 				t.Fatalf("expect not nil result")
 			}
-			if diff := cmp.Diff(c.ExpectResult, result, cmpopts.IgnoreUnexported(middleware.Metadata{})); len(diff) != 0 {
-				t.Errorf("expect c.ExpectResult value match:\n%s", diff)
+			if err := smithytesting.CompareValues(c.ExpectResult, result, cmpopts.IgnoreUnexported(middleware.Metadata{})); err != nil {
+				t.Errorf("expect c.ExpectResult value match:\n%v", err)
 			}
 		})
 	}

@@ -12,7 +12,6 @@ import (
 	"github.com/awslabs/smithy-go/ptr"
 	smithyrand "github.com/awslabs/smithy-go/rand"
 	smithytesting "github.com/awslabs/smithy-go/testing"
-	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"io"
 	"net/http"
@@ -92,8 +91,8 @@ func TestClient_GreetingWithErrors_awsRestjson1Deserialize(t *testing.T) {
 			if result == nil {
 				t.Fatalf("expect not nil result")
 			}
-			if diff := cmp.Diff(c.ExpectResult, result, cmpopts.IgnoreUnexported(middleware.Metadata{})); len(diff) != 0 {
-				t.Errorf("expect c.ExpectResult value match:\n%s", diff)
+			if err := smithytesting.CompareValues(c.ExpectResult, result, cmpopts.IgnoreUnexported(middleware.Metadata{})); err != nil {
+				t.Errorf("expect c.ExpectResult value match:\n%v", err)
 			}
 		})
 	}
@@ -285,8 +284,8 @@ func TestClient_GreetingWithErrors_FooError_awsRestjson1Deserialize(t *testing.T
 			if !errors.As(err, &actualErr) {
 				t.Fatalf("expect *types.FooError result error, got %T", err)
 			}
-			if diff := cmp.Diff(c.ExpectError, actualErr, cmpopts.IgnoreUnexported(middleware.Metadata{})); len(diff) != 0 {
-				t.Errorf("expect c.ExpectError value match:\n%s", diff)
+			if err := smithytesting.CompareValues(c.ExpectError, actualErr, cmpopts.IgnoreUnexported(middleware.Metadata{})); err != nil {
+				t.Errorf("expect c.ExpectError value match:\n%v", err)
 			}
 		})
 	}
@@ -397,8 +396,8 @@ func TestClient_GreetingWithErrors_ComplexError_awsRestjson1Deserialize(t *testi
 			if !errors.As(err, &actualErr) {
 				t.Fatalf("expect *types.ComplexError result error, got %T", err)
 			}
-			if diff := cmp.Diff(c.ExpectError, actualErr, cmpopts.IgnoreUnexported(middleware.Metadata{})); len(diff) != 0 {
-				t.Errorf("expect c.ExpectError value match:\n%s", diff)
+			if err := smithytesting.CompareValues(c.ExpectError, actualErr, cmpopts.IgnoreUnexported(middleware.Metadata{})); err != nil {
+				t.Errorf("expect c.ExpectError value match:\n%v", err)
 			}
 		})
 	}
@@ -491,8 +490,8 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsRestjson1Deserialize(t *te
 			if !errors.As(err, &actualErr) {
 				t.Fatalf("expect *types.InvalidGreeting result error, got %T", err)
 			}
-			if diff := cmp.Diff(c.ExpectError, actualErr, cmpopts.IgnoreUnexported(middleware.Metadata{})); len(diff) != 0 {
-				t.Errorf("expect c.ExpectError value match:\n%s", diff)
+			if err := smithytesting.CompareValues(c.ExpectError, actualErr, cmpopts.IgnoreUnexported(middleware.Metadata{})); err != nil {
+				t.Errorf("expect c.ExpectError value match:\n%v", err)
 			}
 		})
 	}
