@@ -54,7 +54,7 @@ final class EndpointGenerator implements Runnable {
     private static final String INTERNAL_ENDPOINT_PACKAGE = "internal/endpoints";
     private static final String INTERNAL_RESOLVER_NAME = "Resolver";
     private static final String INTERNAL_RESOLVER_OPTIONS_NAME = "Options";
-    private static final String INTERNAL_ENDPOINTS_DATA_NAME = "DefaultPartitions";
+    private static final String INTERNAL_ENDPOINTS_DATA_NAME = "defaultPartitions";
     private static final List<ResolveConfigField> resolveConfigFields = ListUtils.of(
             ResolveConfigField.builder()
                     .name("DisableHTTPS")
