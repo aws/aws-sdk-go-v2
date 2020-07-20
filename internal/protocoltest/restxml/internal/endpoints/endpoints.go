@@ -29,11 +29,11 @@ func (r *Resolver) ResolveEndpoint(region string, options Options) (aws.Endpoint
 // New returns a new Resolver
 func New() *Resolver {
 	return &Resolver{
-		partitions: DefaultPartitions,
+		partitions: defaultPartitions,
 	}
 }
 
-var DefaultPartitions = endpoints.Partitions{
+var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws",
 		Defaults: endpoints.Endpoint{
