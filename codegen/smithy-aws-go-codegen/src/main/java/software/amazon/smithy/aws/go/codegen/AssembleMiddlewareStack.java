@@ -58,8 +58,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        "AddResolveServiceEndpointMiddleware", AwsGoDependency.AWS_MIDDLEWARE)
-                                        .build())
+                                        EndpointGenerator.ADD_MIDDLEWARE_HELPER_NAME).build())
                                 .useClientOptions()
                                 .build())
                         .build(),
