@@ -124,7 +124,7 @@ final class EndpointGenerator implements Runnable {
             generateMiddleware(writer);
         });
         writerFactory.accept(INTERNAL_ENDPOINT_PACKAGE + "/endpoints_test.go",
-                getInternalEndpointImportPath() + "_test", (writer) -> {
+                getInternalEndpointImportPath(), (writer) -> {
                     writer.addUseImports(SmithyGoDependency.TESTING);
                     writer.openBlock("func TestRegexCompile(t *testing.T) {", "}", () -> {
                         writer.write("_ = $T", getInternalEndpointsSymbol(INTERNAL_ENDPOINTS_DATA_NAME, false).build());
